@@ -2,9 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public readonly struct AsmTokens
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static memory;
+
+    [ApiHost]
+    public static partial class XSym
     {
 
     }

@@ -73,6 +73,9 @@ namespace Z0
         protected ShowLog ShowLog(FS.FileExt ext, [Caller] string name = null)
             => new ShowLog(Wf, Db.ShowLog(name, ext));
 
+        protected ShowLog ShowLog(FS.FileName file)
+            => new ShowLog(Wf, Db.ShowLog(file));
+
         protected ShowLog ShowLog([Caller] string name = null, FS.FileExt? ext = null)
             => new ShowLog(Wf, Db.ShowLog(name, ext ?? FS.Extensions.Csv));
 
@@ -85,6 +88,23 @@ namespace Z0
             f(log);
         }
 
+        protected void Show<T>(ReadOnlySpan<T> src, FS.FileName file, Func<T,string> render, string title = EmptyString)
+        {
+            var count = src.Length;
+            if( count != 0)
+            {
+                using var log = ShowLog(file);
+
+                if(text.nonempty(title))
+                    log.Show(title);
+
+                for(var i=0; i<count; i++)
+                    log.Show(render(memory.skip(src,i)));
+            }
+        }
+
+        protected void Show<T>(ReadOnlySpan<T> src, FS.FileName file, string title = EmptyString)
+            => Show(src, file, item => text.format("{0}", item), title);
 
         protected void Show<T>(T data, StreamWriter dst)
         {

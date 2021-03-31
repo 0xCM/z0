@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public struct SymbolicLiteral<E> : IComparableRecord<SymbolicLiteral<E>>
+    public struct SymLiteral<E> : IComparableRecord<SymLiteral<E>>
     {
         /// <summary>
         /// The component that defines the literal
@@ -59,7 +59,7 @@ namespace Z0
         public TextBlock Description;
 
         [MethodImpl(Inline)]
-        public int CompareTo(SymbolicLiteral<E> src)
+        public int CompareTo(SymLiteral<E> src)
             => Identity.CompareTo(src.Identity);
     }
 }

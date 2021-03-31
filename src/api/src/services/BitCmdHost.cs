@@ -71,7 +71,7 @@ namespace Z0
         [Action(K.ShowBitSequences)]
         void ShowBitSequences()
         {
-            using var log = ShowLog("bitseq", FS.Extensions.Log);
+            using var log = ShowLog("bitseq", FS.Log);
             ShowBitSeq(w1, log);
             ShowBitSeq(w2, log);
             ShowBitSeq(w3, log);
@@ -79,7 +79,6 @@ namespace Z0
             ShowBitSeq(w5, log);
             ShowBitSeq(w6, log);
         }
-
 
         [MethodImpl(Inline), Op]
         static Span<char> render(byte src, Span<char> dst)
@@ -94,7 +93,7 @@ namespace Z0
         void GenBitSequences()
         {
             Span<char> buffer = stackalloc char[8];
-            var dst = Db.Doc("bitseq", FS.Extensions.Cs);
+            var dst = Db.Doc("bitseq", FS.Cs);
             using var writer = dst.Writer();
             writer.WriteLine("    public readonly struct GeneratedBits");
             writer.WriteLine("    {");
@@ -110,10 +109,9 @@ namespace Z0
         }
     }
 
-    partial class XTend
+    public static partial class XTend
     {
         public static BitCmdHost BitCmd(this IWfShell wf)
             => BitCmdHost.create(wf);
     }
 }
-

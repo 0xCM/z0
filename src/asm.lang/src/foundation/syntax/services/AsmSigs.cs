@@ -21,24 +21,22 @@ namespace Z0.Asm
     {
         const char DigitQualifier = FSlash;
 
-
-
         public static AsmSigSymbolCache create()
         {
             var dst = new AsmSigSymbolCache();
-            dst.SigOpSymbols = SymbolStores.table<AsmSigToken>();
-            dst.Composites = SymbolStores.table<CompositeSigToken>();
-            dst.Mnemonics = SymbolStores.table<AsmMnemonicCode>();
+            dst.SigOpSymbols = Symbols.table<AsmSigToken>();
+            dst.Composites = Symbols.table<CompositeSigToken>();
+            dst.Mnemonics = Symbols.table<AsmMnemonicCode>();
             dst.RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             dst.RegDigitRule = Rules.adjacent(DigitQualifier, oneof(dst.RegDigits));
             return dst;
         }
 
-        public SymbolTable<AsmMnemonicCode> Mnemonics;
+        public SymTable<AsmMnemonicCode> Mnemonics;
 
-        public SymbolTable<AsmSigToken> SigOpSymbols;
+        public SymTable<AsmSigToken> SigOpSymbols;
 
-        public SymbolTable<CompositeSigToken> Composites;
+        public SymTable<CompositeSigToken> Composites;
 
         public Index<char> RegDigits;
 
@@ -65,7 +63,7 @@ namespace Z0.Asm
 
         static AsmSigs()
         {
-            _Mnemonics = Symbols.index<AsmMnemonicCode>();
+            _Mnemonics = Symbols.load<AsmMnemonicCode>();
 
         }
 
@@ -81,18 +79,18 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public SymbolTable<CompositeSigToken> CompositeTokens()
+        public SymTable<CompositeSigToken> CompositeTokens()
             => Cache.Composites;
 
         [MethodImpl(Inline), Op]
-        public SymbolTable<AsmSigToken> SigTokens()
+        public SymTable<AsmSigToken> SigTokens()
             => Cache.SigOpSymbols;
 
         [MethodImpl(Inline), Op]
         public Symbols<AsmMnemonicCode> Mnemonics()
             => MnemonicSyms;
 
-        void ShowSymbols<T>(SymbolTable<T> src, ShowLog dst)
+        void ShowSymbols<T>(SymTable<T> src, ShowLog dst)
             where T : unmanaged
         {
             var count = src.TokenCount;

@@ -43,28 +43,5 @@ namespace Z0
         public static ReadOnlySpan<Symbol<Hex5Seq,byte,N5>> hexseq(N5 n)
             => Bytes.cells<Symbol<Hex5Seq,byte,N5>>(n32);
 
-        /// <summary>
-        /// Creates a store covering each <see cref='Hex6Seq'/> member
-        /// </summary>
-        /// <param name="n">The sequence length selector</param>
-        [MethodImpl(Inline), Op]
-        public static SymbolStore<Hex6Seq,byte,N6> hexseq(N6 n)
-            => SymbolStores.create<Hex6Seq,byte,N6>();
-
-        /// <summary>
-        /// Creates a store covering each <see cref='Hex7Seq'/> member
-        /// </summary>
-        /// <param name="n">The sequence length selector</param>
-        [MethodImpl(Inline), Op]
-        public static SymbolStore<Hex7Seq,byte,N7> hexseq(N7 n)
-            => SymbolStores.create<Hex7Seq,byte,N7>();
-
-        /// <summary>
-        /// Creates a store covering each <see cref='Hex8Seq'/> member
-        /// </summary>
-        /// <param name="n">The sequence length selector</param>
-        [MethodImpl(Inline), Op]
-        public static SymbolStore<Hex8Seq,byte,N8> hex(N8 n)
-            => SymbolStores.create<Hex8Seq,byte,N8>();
     }
 }

@@ -63,6 +63,21 @@ namespace Z0
         /// </summary>
         public static FileExt Ps1 => ext(ps1);
 
+        /// <summary>
+        /// Defines the <see cref='cs'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Cs => ext(cs);
+
+        /// <summary>
+        /// Defines the <see cref='csproj'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt CsProj => ext(csproj);
+
+        /// <summary>
+        /// Defines the <see cref='txt'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Txt => ext(txt);
+
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions
         {

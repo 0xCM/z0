@@ -10,7 +10,7 @@ namespace Z0
     partial class XTend
     {
         [Op]
-        public static Index<SymbolicLiteral> ApiClasses(this Assembly src)
-            => Symbols.symbolic(src.Enums().Tagged<ApiClassAttribute>());
+        public static Index<SymLiteral> ApiClasses(this Assembly src)
+            => SymbolicLiterals.symbolic(src.Enums().Tagged<ApiClassAttribute>());
     }
 }

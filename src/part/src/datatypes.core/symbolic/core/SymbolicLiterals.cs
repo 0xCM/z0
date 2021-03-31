@@ -11,22 +11,14 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct Symbols
+    [ApiHost]
+    public readonly struct SymbolicLiterals
     {
-        public static Symbols<E> index<E>()
-            where E : unmanaged, Enum
-        {
-            var literals = symbolic<E>();
-            var view = literals.View;
-            var count = view.Length;
-            var buffer = alloc<Sym<E>>(count);
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = new Sym<E>(i, skip(view,i));
-            return buffer;
-        }
+        [Op]
+        public static SymIdentity identity(FieldInfo field, ushort index)
+            => text.format(RP.SlotDot4, field.DeclaringType.Assembly.GetSimpleName(), field.DeclaringType.Name, index, field.Name);
 
-        public static Index<SymbolicLiteral<E>> symbolic<E>()
+        public static Index<SymLiteral<E>> load<E>()
             where E : unmanaged, Enum
         {
             var src = typeof(E);
@@ -34,7 +26,7 @@ namespace Z0
             var fields = @readonly(src.LiteralFields());
             var count = fields.Length;
 
-            var buffer = alloc<SymbolicLiteral<E>>(fields.Length);
+            var buffer = alloc<SymLiteral<E>>(fields.Length);
             var dst = span(buffer);
             var kind = ClrPrimitives.kind(src);
             for(var i=0u; i<count; i++)
@@ -61,18 +53,18 @@ namespace Z0
         }
 
         [Op]
-        public static Index<SymbolicLiteral> symbolic(Type src)
+        public static Index<SymLiteral> symbolic(Type src)
         {
             var fields = @readonly(src.LiteralFields());
-            var dst = alloc<SymbolicLiteral>(fields.Length);
+            var dst = alloc<SymLiteral>(fields.Length);
             fill(src, ClrPrimitives.kind(src), fields, dst);
             return dst;
         }
 
         [Op]
-        public static Index<SymbolicLiteral> symbolic(Index<Type> src)
+        public static Index<SymLiteral> symbolic(Index<Type> src)
         {
-            var dst = root.list<SymbolicLiteral>();
+            var dst = root.list<SymLiteral>();
             var kTypes = src.Count;
             for(var i=0; i<kTypes; i++)
                 dst.AddRange(symbolic(src[i]));
@@ -81,11 +73,11 @@ namespace Z0
         }
 
         [Op]
-        public static Index<SymbolicLiteral> symbolic(params Assembly[] src)
+        public static Index<SymLiteral> symbolic(params Assembly[] src)
         {
             var kvTypes = ClrEnums.types(src);
             var partCount = kvTypes.Length;
-            var dst = root.list<SymbolicLiteral>();
+            var dst = root.list<SymLiteral>();
             for(var i=0; i<partCount; i++)
             {
                 var types = kvTypes[i];
@@ -104,7 +96,7 @@ namespace Z0
         }
 
         [Op]
-        static void fill(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymbolicLiteral> dst)
+        static void fill(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymLiteral> dst)
         {
             var count = fields.Length;
             var typeAddress = type.TypeHandle.Value;

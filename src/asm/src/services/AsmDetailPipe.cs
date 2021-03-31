@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public void Process()
         {
-            var table = SymbolStores.table<AsmMnemonicCode>();
+            var table = Symbols.table<AsmMnemonicCode>();
             var counter = 0u;
             var mnemonics = root.hashset<AsmMnemonicCode>();
             var failures = root.hashset<string>();

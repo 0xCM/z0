@@ -214,25 +214,25 @@ namespace Z0.Asm
 
         public void EmitSumbolSummary()
         {
-            var dst = Db.AsmCatalogFile(FS.file("xed-symbols", FS.Csv));
-            var flow = Wf.EmittingFile(dst);
-            using var writer = dst.Writer();
-            root.iter(Symbols.symbols<XedModels.CpuidBit>(w16), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.IsaKind>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.AddressWidth>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.AttributeKind>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.Category>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.ChipCode>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.Extension>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.Flag>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.IClass>(w16), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.IForm>(w16), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.MachineMode>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.Nonterminal>(w16), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.RegClass>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.RegRole>(w8), symbol => writer.WriteLine(symbol));
-            root.iter(Symbols.symbols<XedModels.RegId>(w16), symbol => writer.WriteLine(symbol));
-            Wf.EmittedFile(flow,1);
+            // var dst = Db.AsmCatalogFile(FS.file("xed-symbols", FS.Csv));
+            // var flow = Wf.EmittingFile(dst);
+            // using var writer = dst.Writer();
+            // root.iter(Symbols.symbols<XedModels.CpuidBit>(w16), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.IsaKind>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.AddressWidth>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.AttributeKind>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.Category>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.ChipCode>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.Extension>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.Flag>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.IClass>(w16), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.IForm>(w16), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.MachineMode>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.Nonterminal>(w16), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.RegClass>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.RegRole>(w8), symbol => writer.WriteLine(symbol));
+            // root.iter(Symbols.symbols<XedModels.RegId>(w16), symbol => writer.WriteLine(symbol));
+            // Wf.EmittedFile(flow,1);
         }
     }
 }

@@ -103,11 +103,11 @@ namespace Z0
         [MethodImpl(Inline)]
         static LegalIdentityOptions CreateCodeOptions()
             => new LegalIdentityOptions(
-            TypeArgsOpen: SymNot.Lt,
-            TypeArgsClose: SymNot.Gt,
-            ArgsOpen: SymNot.Circle,
-            ArgsClose: SymNot.Circle,
-            ArgSep: SymNot.Dot,
+            TypeArgsOpen: SymNotKind.Lt.ToChar(),
+            TypeArgsClose: SymNotKind.Gt.ToChar(),
+            ArgsOpen: SymNotKind.Circle.ToChar(),
+            ArgsClose: SymNotKind.Circle.ToChar(),
+            ArgSep: SymNotKind.Dot.ToChar(),
             ModSep: (char)SymNotKind.Plus
             );
     }

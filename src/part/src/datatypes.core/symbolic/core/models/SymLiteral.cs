@@ -13,7 +13,7 @@ namespace Z0
     /// Defines a symbolized literal
     /// </summary>
     [Record(TableId)]
-    public struct SymbolicLiteral : IComparableRecord<SymbolicLiteral>
+    public struct SymLiteral : IComparableRecord<SymLiteral>
     {
         public const string TableId = "symbolic.literals";
 
@@ -63,7 +63,7 @@ namespace Z0
         public TextBlock Description;
 
         [MethodImpl(Inline)]
-        public int CompareTo(SymbolicLiteral src)
+        public int CompareTo(SymLiteral src)
             => UniqueName.Content.CompareTo(src.UniqueName);
     }
 }

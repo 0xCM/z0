@@ -80,42 +80,42 @@ namespace Z0
         public void EmitApiClasses()
         {
             var dst = Db.IndexTable("api.classes");
-            var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
+            var flow = Wf.EmittingTable<SymLiteral>(dst);
             var service = classes(Wf);
-            var formatter = Tables.formatter<SymbolicLiteral>();
+            var formatter = Tables.formatter<SymLiteral>();
             var classifiers = service.Classifiers();
             var literals = classifiers.SelectMany(x => x.Literals);
             var count = Tables.emit(literals, dst);
             Wf.EmittedTable(flow, count);
         }
 
-        public Index<SymbolicLiteral> EmitSymbolicLiterals()
+        public Index<SymLiteral> EmitSymbolicLiterals()
         {
-            var target = Db.IndexTable(SymbolicLiteral.TableId);
+            var target = Db.IndexTable(SymLiteral.TableId);
             var components = Wf.Components;
             return EmitSymbolicLiterals(Wf.Components, target);
         }
 
-        public Index<SymbolicLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst)
+        public Index<SymLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst)
         {
-            var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
-            var rows = Symbols.symbolic(src).Sort();
+            var flow = Wf.EmittingTable<SymLiteral>(dst);
+            var rows = SymbolicLiterals.symbolic(src).Sort();
             var kRows = rows.Length;
             using var writer = dst.Writer();
-            var formatter = Tables.formatter<SymbolicLiteral>(16);
+            var formatter = Tables.formatter<SymLiteral>(16);
             writer.WriteLine(formatter.FormatHeader());
 
             for(var i=0; i<kRows; i++)
                 writer.WriteLine(formatter.Format(rows[i]));
 
-            Wf.EmittedTable<SymbolicLiteral>(flow, rows.Length);
+            Wf.EmittedTable<SymLiteral>(flow, rows.Length);
             return rows;
         }
 
-        public Index<SymbolicLiteral> LoadSymbolicLiterals(TextDoc src)
+        public Index<SymLiteral> LoadSymbolicLiterals(TextDoc src)
         {
             var rc = src.RowCount;
-            var dst = alloc<SymbolicLiteral>(rc);
+            var dst = alloc<SymLiteral>(rc);
             var parser = HexByteParser.Service;
             for(var i=0; i<rc; i++)
             {

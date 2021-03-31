@@ -26,6 +26,23 @@ namespace Z0
         public bool Match(SymExpr src, out Sym<K> dst)
             => api.match(this, src, out dst);
 
+        public string DataHeader
+        {
+            [MethodImpl(Inline)]
+            get => api.header();
+        }
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
+
         public Sym<K>[] Storage
         {
             [MethodImpl(Inline)]

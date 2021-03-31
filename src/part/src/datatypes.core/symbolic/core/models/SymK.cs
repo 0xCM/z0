@@ -14,7 +14,9 @@ namespace Z0
     public readonly struct Sym<K> : ISym<K>
         where K : unmanaged
     {
-        public SymKey Key {get;}
+        public SymIdentity Identity {get;}
+
+        public SymKey Index {get;}
 
         public Identifier Name {get;}
 
@@ -23,18 +25,31 @@ namespace Z0
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        internal Sym(uint index, SymbolicLiteral<K> literal)
+        internal Sym(uint index, SymLiteral<K> literal)
         {
-            Key = index;
+            Identity = literal.Identity;
+            Index = index;
             Value = literal.DirectValue;
             Name = literal.Name;
             Expression = literal.Symbol;
+
         }
 
         [MethodImpl(Inline)]
         internal Sym(uint index, string name, K value, SymExpr symbol)
         {
-            Key = index;
+            Index = index;
+            Name = name;
+            Value = value;
+            Expression = symbol;
+            Identity = default;
+        }
+
+        [MethodImpl(Inline)]
+        internal Sym(SymIdentity id, SymKey index, Identifier name, K value, SymExpr symbol)
+        {
+            Identity = id;
+            Index = index;
             Name = name;
             Value = value;
             Expression = symbol;
@@ -52,7 +67,7 @@ namespace Z0
         public static Sym<K> Empty
         {
             [MethodImpl(Inline)]
-            get => new Sym<K>(default, EmptyString, default, SymExpr.Empty);
+            get => new Sym<K>(SymIdentity.Empty, default, EmptyString, default, SymExpr.Empty);
         }
     }
 }

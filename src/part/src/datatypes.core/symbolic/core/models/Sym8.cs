@@ -13,19 +13,23 @@ namespace Z0
 
     public readonly struct Sym8 : ISym<W8,byte>
     {
-        public SymKey<byte> Key {get;}
+        public SymIdentity Identity {get;}
+
+        public SymKey<byte> Index {get;}
 
         public Identifier Kind {get;}
 
         public Identifier Name {get;}
+
         public byte Value {get;}
 
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        public Sym8(SymKey<byte> key, Identifier kind, Identifier name, byte value, SymExpr expr)
+        public Sym8(SymIdentity id, SymKey<byte> key, Identifier kind, Identifier name, byte value, SymExpr expr)
         {
-            Key = key;
+            Identity = id;
+            Index = key;
             Kind = kind;
             Name = name;
             Value = value;
@@ -40,13 +44,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<byte>(Sym8 src)
-            => new Sym<byte>(src.Key.Value, src.Name, src.Value, src.Expression);
+            => new Sym<byte>(src.Index.Value, src.Name, src.Value, src.Expression);
     }
 
     public readonly struct Sym8<T> : ISym<W8,T>
         where T : unmanaged
     {
-        public SymKey<byte> Key {get;}
+        public SymIdentity Identity {get;}
+
+        public SymKey<byte> Index {get;}
 
         public Identifier Name {get;}
 
@@ -58,9 +64,10 @@ namespace Z0
             => typeof(T).Name;
 
         [MethodImpl(Inline)]
-        public Sym8(SymKey<byte> key, Identifier name, T value, SymExpr expr)
+        public Sym8(SymIdentity id, SymKey<byte> key, Identifier name, T value, SymExpr expr)
         {
-            Key = key;
+            Identity = id;
+            Index = key;
             Name = name;
             Value = value;
             Expression = expr;
@@ -74,10 +81,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym8(Sym8<T> src)
-            => new Sym8(src.Key, src.Kind, src.Name, memory.bw8(src.Value), src.Expression);
+            => new Sym8(src.Identity, src.Index, src.Kind, src.Name, memory.bw8(src.Value), src.Expression);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym8<T> src)
-            => new Sym<T>(src.Key.Value, src.Name, src.Value, src.Expression);
+            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Value, src.Expression);
     }
 }

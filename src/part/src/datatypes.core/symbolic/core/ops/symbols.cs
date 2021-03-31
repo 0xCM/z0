@@ -22,7 +22,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var entry = ref skip(entries,i);
-                seek(dst,i) = new Sym8<E>((byte)entry.Key, entry.Name, entry.Value, entry.Expression);
+                seek(dst,i) = symbol(w8, entry.Identity, (byte)entry.Index, entry.Name, entry.Value, entry.Expression);
             }
             return buffer;
         }
@@ -37,7 +37,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var entry = ref skip(entries,i);
-                seek(dst,i) = new Sym16<E>((ushort)entry.Key, entry.Name, entry.Value, entry.Expression);
+                seek(dst,i) = symbol(w16, entry.Identity, (ushort)entry.Index, entry.Name, entry.Value, entry.Expression);
             }
             return buffer;
         }

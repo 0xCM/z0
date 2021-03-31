@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public struct SymbolTable<T>
+    public struct SymTable<T>
         where T : unmanaged
     {
         readonly Index<Token<T>> _Tokens;
@@ -21,7 +21,7 @@ namespace Z0
 
         readonly Index<Sym<T>> _Entries;
 
-        internal SymbolTable(Index<Token<T>> src, Dictionary<string,Token<T>> identifiers, Dictionary<string,Token<T>> symbols)
+        internal SymTable(Index<Token<T>> src, Dictionary<string,Token<T>> identifiers, Dictionary<string,Token<T>> symbols)
         {
             var count = src.Count;
             _Tokens = src;

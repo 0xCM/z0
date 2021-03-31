@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
-
     partial struct Symbols
     {
         [Op]

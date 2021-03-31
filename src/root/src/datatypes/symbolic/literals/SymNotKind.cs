@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     /// <summary>
     /// Defines symbols that aren't symbols
     /// </summary>
@@ -13,7 +13,7 @@ namespace Z0
         /// ᙿ
         /// </summary>
         Eq = 'ᙿ',
-                
+
         /// <summary>
         /// Eq
         /// </summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// Ʌ
         /// </summary>
         SmallAnd = 'Ʌ',
-        
+
         /// <summary>
         /// SmallAnd
         /// </summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// V
         /// </summary>
         Or = 'V',
-        
+
         /// <summary>
         /// Or
         /// </summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// ᐯ
         /// </summary>
         OrAlt = 'ᐯ',
-            
+
         /// <summary>
         /// OrAlt
         /// </summary>
@@ -123,7 +123,7 @@ namespace Z0
         /// ヽ
         /// </summary>
         LeftTick = 'ヽ',
-        
+
         /// <summary>
         /// LeftTick
         /// </summary>
@@ -148,7 +148,7 @@ namespace Z0
         /// HalfDash
         /// </summary>
         ｰ = HalfDash,
-        
+
         /// <summary>
         /// ᐨ
         /// </summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// UpperDash
         /// </summary>
         ᐨ = UpperDash,
-        
+
         /// <summary>
         /// ㆍ
         /// </summary>
@@ -173,7 +173,7 @@ namespace Z0
         /// ᐧ
         /// </summary>
         TinyDot = 'ᐧ',
-        
+
         /// <summary>
         /// TinyDot
         /// </summary>
@@ -217,7 +217,7 @@ namespace Z0
         /// <summary>
         /// HashExp
         /// </summary>
-        ᙾ = HashExp,        
+        ᙾ = HashExp,
 
         /// <summary>
         /// ᐃ
@@ -233,7 +233,7 @@ namespace Z0
         /// ᐁ
         /// </summary>
         Down = 'ᐁ',
-        
+
         /// <summary>
         /// DeltaNot
         /// </summary>
@@ -253,7 +253,7 @@ namespace Z0
         /// ᐅ
         /// </summary>
         Right = 'ᐅ',
-                
+
         /// <summary>
         /// Right
         /// </summary>
@@ -318,7 +318,7 @@ namespace Z0
         /// Q
         /// </summary>
         ॽ = Q,
-        
+
         /// <summary>
         /// ᛜ
         /// </summary>
@@ -328,12 +328,12 @@ namespace Z0
         /// Diamond
         /// </summary>
         ᛜ = 'ᛜ' ,
-        
+
         /// <summary>
         /// ᒿ
         /// </summary>
         Two = 'ᒿ',
-        
+
         /// <summary>
         /// Tow
         /// </summary>
@@ -384,7 +384,7 @@ namespace Z0
         /// <summary>
         /// ForSome
         /// </summary>
-        ヨ = ForSome,        
+        ヨ = ForSome,
 
         /// <summary>
         /// ロ
@@ -395,7 +395,7 @@ namespace Z0
         /// Box
         /// </summary>
         ロ = Box,
-        
+
         /// <summary>
         /// ᑕ
         /// </summary>
@@ -420,7 +420,7 @@ namespace Z0
         /// UpperSuperset
         /// </summary>
         UpperSuperset = 'ᐣ',
-        
+
         /// <summary>
         /// UpperSuperset
         /// </summary>
@@ -429,13 +429,13 @@ namespace Z0
         /// <summary>
         /// є
         /// </summary>
-        RightIn = 'є',        
-    
+        RightIn = 'є',
+
         /// <summary>
         /// RightIn
         /// </summary>
         є = RightIn,
-    
+
         /// <summary>
         /// э
         /// </summary>
@@ -465,7 +465,7 @@ namespace Z0
         /// CapGreek
         /// </summary>
         Π = CapGreek,
-        
+
         /// <summary>
         /// α
         /// </summary>
@@ -484,7 +484,7 @@ namespace Z0
         /// <summary>
         /// beta
         /// </summary>
-        β = Beta,  
+        β = Beta,
 
         /// <summary>
         /// γ
@@ -612,7 +612,7 @@ namespace Z0
         /// Psi
         /// </summary>
         ψ = Psi,
-        
+
         /// <summary>
         /// ρ
         /// </summary>
@@ -662,7 +662,7 @@ namespace Z0
         /// Chi
         /// </summary>
         χ = Chi,
-    
+
         /// <summary>
         /// ι
         /// </summary>
@@ -702,7 +702,7 @@ namespace Z0
         /// Natural
         /// </summary>
         ℕ = Natural,
-                
+
         /// <summary>
         /// ℤ
         /// </summary>
@@ -789,7 +789,7 @@ namespace Z0
         /// DSmall
         /// </summary>
         ⅆ = DSmall,
-            
+
         /// <summary>
         /// ESmall
         /// </summary>
@@ -804,7 +804,7 @@ namespace Z0
         /// IThick
         /// </summary>
         ℹ,
-        
+
         /// <summary>
         /// ⅉ
         /// </summary>
@@ -843,7 +843,7 @@ namespace Z0
         /// <summary>
         /// USmall
         /// </summary>
-        υ = USmall,                                        
+        υ = USmall,
 
         /// <summary>
         /// ᐞ
@@ -859,7 +859,7 @@ namespace Z0
         /// ᐜ
         /// </summary>
         ExpW = 'ᐜ',
-        
+
         /// <summary>
         /// ExpW
         /// </summary>
@@ -869,7 +869,7 @@ namespace Z0
         /// ᐩ
         /// </summary>
         ExpPlus = 'ᐩ',
-        
+
         /// <summary>
         /// ExpPlus
         /// </summary>
@@ -879,7 +879,7 @@ namespace Z0
         /// ᐪ
         /// </summary>
         ExpT = 'ᐪ',
-        
+
         /// <summary>
         /// ExpT
         /// </summary>
@@ -889,7 +889,7 @@ namespace Z0
         /// ᑌ
         /// </summary>
         Cup = 'ᑌ',
-        
+
         /// <summary>
         /// Cup
         /// </summary>
@@ -899,7 +899,7 @@ namespace Z0
         /// ᑎ
         /// </summary>
         Cap = 'ᑎ',
-        
+
         /// <summary>
         /// Cap
         /// </summary>
@@ -909,32 +909,32 @@ namespace Z0
         /// ᐡ
         /// </summary>
         ExpCup = 'ᐡ',
-        
+
         /// <summary>
         /// ExpCup
         /// </summary>
         ᐡ = ExpCup,
 
         ExpCap = 'ᐢ',
-        
+
         /// <summary>
         /// ExpCap
         /// </summary>
         ᐢ = ExpCap,
 
         ExpH = 'ᑋ',
-        
+
         ᑋ = ExpH,
-        
+
         /// <summary>
         /// ᒾ
         /// </summary>
         Exp2 = 'ᒾ',
-        
+
         ᒾ = Exp2,
-        
+
         ExpX = 'ᕽ',
-        
+
         ᕽ = ExpX,
 
         /// <summary>
@@ -948,17 +948,17 @@ namespace Z0
         /// ᙚ
         /// </summary>
         ExpS = 'ᙚ',
-        
+
         ᙚ = ExpS,
 
         ExpV = 'ᘁ',
-        
+
         ᘁ = ExpV,
 
         ExpL = 'ᒻ',
-        
+
         ᒻ = ExpL,
-        
+
         ᗅ,
 
         ᗷ,
@@ -972,7 +972,7 @@ namespace Z0
         ᗴ,
 
         ᗱ,
-        
+
         ᖴ,
 
         ᖷ,
@@ -980,7 +980,7 @@ namespace Z0
         ᖵ,
 
         ᖶ,
-        
+
         ᕼ,
 
         ᖆ,
@@ -1032,7 +1032,7 @@ namespace Z0
         ᙅ,
 
         ᙎ,
-        
+
         ᙏ,
 
         ᙐ,
@@ -1043,7 +1043,7 @@ namespace Z0
 
         ᙙ,
 
-        ᗒ,       
+        ᗒ,
 
         ᗕ,
 
@@ -1054,20 +1054,5 @@ namespace Z0
         ᘄ,
 
         ᘇ,
-
     }
-
-    /// <summary>
-    /// Defines an arbitrary collection of legal identifies that look like symbols
-    /// </summary>
-    public static class SymNot
-    {
-        public const char Gt = 'ᐳ';
-        
-        public const char Lt = 'ᐸ';
-
-        public const char Circle = 'ᐤ';
-
-        public const char Dot = 'ㆍ';   
-    }    
 }

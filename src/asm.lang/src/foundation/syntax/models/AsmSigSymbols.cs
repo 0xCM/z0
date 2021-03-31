@@ -10,38 +10,38 @@ namespace Z0.Asm
         public static AsmSigSymbols load()
             => new AsmSigSymbols();
 
-        readonly SymbolTable<Mode> _Modes;
+        readonly SymTable<Mode> _Modes;
 
-        readonly SymbolTable<EFlag> _EFlags;
+        readonly SymTable<EFlag> _EFlags;
 
-        readonly SymbolTable<AsmMnemonicCode> _Mnemonics;
+        readonly SymTable<AsmMnemonicCode> _Mnemonics;
 
-        readonly SymbolTable<AsmSigToken> _SigOps;
+        readonly SymTable<AsmSigToken> _SigOps;
 
-        readonly SymbolTable<CompositeSigToken> _Composites;
+        readonly SymTable<CompositeSigToken> _Composites;
 
         internal AsmSigSymbols()
         {
-            _EFlags = SymbolStores.table<EFlag>();
-            _Modes = SymbolStores.table<Mode>();
-            _Mnemonics = SymbolStores.table<AsmMnemonicCode>();
-            _SigOps = SymbolStores.table<AsmSigToken>();
-            _Composites = SymbolStores.table<CompositeSigToken>();
+            _EFlags = Symbols.table<EFlag>();
+            _Modes = Symbols.table<Mode>();
+            _Mnemonics = Symbols.table<AsmMnemonicCode>();
+            _SigOps = Symbols.table<AsmSigToken>();
+            _Composites = Symbols.table<CompositeSigToken>();
         }
 
-        public SymbolTable<Mode> Modes
+        public SymTable<Mode> Modes
             => _Modes;
 
-        public SymbolTable<EFlag> Flags
+        public SymTable<EFlag> Flags
             => _EFlags;
 
-        public SymbolTable<AsmSigToken> SigOps
+        public SymTable<AsmSigToken> SigOps
             => _SigOps;
 
-        public SymbolTable<AsmMnemonicCode> Mnemonics
+        public SymTable<AsmMnemonicCode> Mnemonics
             => _Mnemonics;
 
-        public SymbolTable<CompositeSigToken> Composites
+        public SymTable<CompositeSigToken> Composites
             => _Composites;
 
         public enum Mode : byte

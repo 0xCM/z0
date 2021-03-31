@@ -70,6 +70,12 @@ namespace Z0
         public string Format()
             => Format(TupleFormatKind.Coordinate);
 
+        public string Format(char delimiter)
+            => string.Format("({0}{1}{2})", Left, delimiter, Right);
+
+        public string Format(string delimiter)
+            => string.Format("({0}{1}{2})", Left, delimiter, Right);
+
         public override int GetHashCode()
             => HashCode.Combine(Left,Right);
 

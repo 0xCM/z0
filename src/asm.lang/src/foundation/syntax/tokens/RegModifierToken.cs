@@ -41,7 +41,6 @@ namespace Z0.Asm
         /// </summary>
         [Symbol("+ro",OCD.ᕀrq)]
         rq = OCT.rq,
-
     }
 }
 

@@ -104,6 +104,9 @@ namespace Z0
         FS.FilePath ShowLog([Caller]string name = null, FS.FileExt? ext = null)
             => ShowLogs() + FS.file(name, ext ?? X.Log);
 
+        FS.FilePath ShowLog(FS.FileName file)
+            => ShowLogs() + file;
+
         FS.FilePath ProcDumpPath(Name process)
             => ProcDumpRoot() + FS.file(process.Format(), X.Dmp);
 

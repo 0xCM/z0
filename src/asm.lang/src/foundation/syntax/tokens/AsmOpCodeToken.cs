@@ -65,12 +65,6 @@ namespace Z0.Asm
         [Symbol("/7", OCD.r7)]
         r7,
 
-        [Symbol("VEX")]
-        Vex,
-
-        [Symbol("REX.W")]
-        RexW,
-
         /// <summary>
         /// <see cref='OCD.cb'/>
         /// </summary>

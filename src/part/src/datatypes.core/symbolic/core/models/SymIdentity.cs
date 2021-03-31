@@ -9,9 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Symbols;
-
-
     public readonly struct SymIdentity : IDataTypeComparable<SymIdentity>
     {
         /// <summary>

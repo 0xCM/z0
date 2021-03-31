@@ -12,16 +12,14 @@ namespace Z0
     /// <summary>
     /// Defines a kinded token
     /// </summary>
-    public readonly struct Token : IToken
+    public readonly struct Token<K> : IToken<K>
+        where K : unmanaged
     {
-        public SymbolicLiteral Literal {get;}
-
-        public Type TokenType {get;}
+        public SymLiteral<K> Literal {get;}
 
         [MethodImpl(Inline)]
-        public Token(Type type, SymbolicLiteral src)
+        public Token(SymLiteral<K> src)
         {
-            TokenType = type;
             Literal = src;
         }
 
@@ -43,34 +41,34 @@ namespace Z0
             get => Literal.DataType;
         }
 
-        public Identifier UniqueName
+        public SymIdentity Identity
         {
             [MethodImpl(Inline)]
-            get => Literal.UniqueName;
+            get => Literal.Identity;
         }
 
-        public SymbolName SymbolName
+        public SymbolName<K> SymbolName
         {
             [MethodImpl(Inline)]
-            get => new SymbolName(this);
+            get => new SymbolName<K>(this);
         }
 
-        public ulong Value
+        public Type TokenType
         {
             [MethodImpl(Inline)]
-            get => Literal.EncodedValue;
+            get => typeof(K);
+        }
+
+        public K Kind
+        {
+            [MethodImpl(Inline)]
+            get => Literal.DirectValue;
         }
 
         public TextBlock SymbolText
         {
             [MethodImpl(Inline)]
             get => Literal.Symbol;
-        }
-
-        public TextBlock Description
-        {
-            [MethodImpl(Inline)]
-            get => Literal.Description;
         }
 
         public bool IsEmpty
@@ -85,21 +83,12 @@ namespace Z0
             get => Index != 0;
         }
 
-        const string FormatPattern = "{0,-24} | {1,-8} | {2,-12} | {3}";
-
-        public static string HeaderFormat
-            => string.Format(FormatPattern, nameof(LiteralType), nameof(Index), nameof(Identifier), nameof(SymbolText));
-
         public string Format()
-            => Description.IsEmpty
-            ? string.Format("{0,-24} | {1,-8} | {2,-12} | {3}",
-                Literal.Type, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol))
-            : string.Format("{0,-24} | {1,-8} | {2,-12} | {3} | {4}",
-                Literal.Type, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol), Description);
+            => string.Format("{0,-24} | {1,-8} | {2,-12} | {3}", typeof(K).Name, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol));
 
         public override string ToString()
             => Format();
 
-        public static Token Empty => default;
+        public static Token<K> Empty => default;
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public class SymbolTable
+    public class SymTable
     {
         readonly Index<Token> Data;
 
@@ -18,7 +18,7 @@ namespace Z0
 
         readonly Dictionary<string,Token> Symbols;
 
-        internal SymbolTable(Index<Token> src, Dictionary<string,Token> identifiers, Dictionary<string,Token> symbols)
+        internal SymTable(Index<Token> src, Dictionary<string,Token> identifiers, Dictionary<string,Token> symbols)
         {
             Data = src;
             Identifiers = identifiers;

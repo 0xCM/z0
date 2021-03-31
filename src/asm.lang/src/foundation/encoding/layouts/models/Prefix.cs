@@ -15,6 +15,7 @@ namespace Z0.Asm
         {
             public Cell8 Value {get;}
 
+            [MethodImpl(Inline)]
             public Prefix(Cell8 value)
             {
                 Value = value;
@@ -28,7 +29,6 @@ namespace Z0.Asm
 
             public override string ToString()
                 => Format();
-
         }
     }
 }

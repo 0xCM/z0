@@ -10,8 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using api = SymbolStores;
-
     /// <summary>
     /// Defines an S-symbol value, of bit-width N, covered by a T-storage cell
     /// </summary>
@@ -85,7 +83,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T,N> src)
-            => api.render(src);
+            => SymbolSets.render(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S,T,N> src)

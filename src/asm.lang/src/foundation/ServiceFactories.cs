@@ -38,5 +38,8 @@ namespace Z0
 
         public static AsmGen AsmCodeGenerator(this IWfShell wf)
             => AsmGen.create(wf);
+
+        public static AsmTokens AsmTokens(this IWfShell wf)
+            => Z0.Asm.AsmTokens.create(wf);
     }
 }

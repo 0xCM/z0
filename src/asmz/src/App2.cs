@@ -369,7 +369,7 @@ namespace Z0.Asm
             using var log = OpenShowLog("symbols", FS.Extensions.Csv);
             foreach(var source in sources)
             {
-                var symbols = SymbolStores.table(source);
+                var symbols = Symbols.table(source);
                 foreach(var token in symbols.Tokens)
                 {
                     Show(token.Format(), log);
@@ -513,15 +513,15 @@ namespace Z0.Asm
             root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
         }
 
-        public static void show(IWfShell wf, CmdLine cmd)
+        public void Display(CmdLine cmd)
         {
-            wf.Status(cmd.Format());
+            Wf.Status(cmd.Format());
         }
 
-        static void ShowConfig(IWfShell wf)
+        public void DisplayConfig()
         {
-            wf.Status(wf.Settings.FormatList());
-            wf.Status(wf.Db().Root);
+            Wf.Status(Wf.Settings.FormatList());
+            Wf.Status(Db.Root);
         }
 
         static void RunInterpreter(IWfShell wf)
@@ -864,15 +864,15 @@ namespace Z0.Asm
             }
         }
 
-        void CheckXedSymbols()
-        {
-            var symbols = Symbols.symbols<XedModels.Extension>(w8);
-            var literals = ClrEnums.literals<XedModels.Extension>();
-            foreach(var l in literals)
-            {
-                Wf.Row(string.Format("{0}={1}", l, symbols[l].Expression));
-            }
-        }
+        // void CheckXedSymbols()
+        // {
+        //     var symbols = Symbols.symbols<XedModels.Extension>(w8);
+        //     var literals = ClrEnums.literals<XedModels.Extension>();
+        //     foreach(var l in literals)
+        //     {
+        //         Wf.Row(string.Format("{0}={1}", l, symbols[l].Expression));
+        //     }
+        // }
 
         void ShowXedForms()
         {
@@ -888,18 +888,18 @@ namespace Z0.Asm
             Wf.ImageDataEmitter().EmitApiImageContent();
         }
 
-        void Show(RegKind src, ShowLog dst)
+        void ShowRegKinds(RegKind src, ShowLog dst)
         {
             if(src.IsNonZero())
                 dst.Show(src);
         }
 
-        public void ShowRegisterKinds()
+        public void ShowRegKinds()
         {
             var converter = RegKindConverter.create();
             using var log = ShowLog("registers", FS.Csv);
             log.Show("Register");
-            root.iter(converter.Kinds, k => Show(k,log));
+            root.iter(converter.Kinds, k => ShowRegKinds(k,log));
         }
 
         static Index<ApiHostUri> NestedHosts(Type src)
@@ -955,10 +955,30 @@ namespace Z0.Asm
 
         }
 
+        void CheckFenceParser()
+        {
+            var input = FenceExprCases.CaseA;
+            var parser = FenceExprPaser.create((Chars.LParen, Chars.RParen));
+            var output = parser.Parse(input);
+            var delimiter = string.Format(" {0} ", SymNotKind.Right.ToChar());
+            for(var i=0; i<output.Length; i++)
+            {
+                ref readonly var x = ref skip(output,i);
+                //if(text.nonempty(x.Right))
+                Wf.Row(x.Format(delimiter));
+            }
+
+        }
+
         public void Run()
         {
-            CaptureSelectedRoutines();
-            ShowSigSymbols();
+            //CaptureSelectedRoutines();
+
+            var tokens = Wf.AsmTokens().Prefixes();
+            Show(tokens.View, FS.file("asmtokens", FS.Log));
+
+            //Show("asm.tokens.prefixes", FS.Log, show);
+            //root.iter(Wf.AsmTokens().Prefixes(), p => ;
 
             //00000015 EBX:756E6547 ECX:6C65746E EDX:49656E69
             //EmitBitstrings();
@@ -987,6 +1007,7 @@ namespace Z0.Asm
             }
         }
     }
+
 
     public static partial class XTend
     {

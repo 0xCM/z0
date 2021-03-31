@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = SymbolStores;
-
     /// <summary>
     /// Defines a symbol, characterized by its value, that defines an atomic element in some vocabulary/grammar
     /// </summary>
@@ -51,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S> src)
-            => api.render(src);
+            => SymbolSets.render(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S> src)

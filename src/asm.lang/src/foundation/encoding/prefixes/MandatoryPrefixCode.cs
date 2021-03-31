@@ -15,8 +15,8 @@ namespace Z0.Asm
 
         x66 = H.x66,
 
-        xf2 = H.xf2,
+        F2 = H.xf2,
 
-        xf3 = H.xf3,
+        F3 = H.xf3,
     }
 }
