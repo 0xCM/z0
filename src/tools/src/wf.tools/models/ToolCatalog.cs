@@ -13,7 +13,6 @@ namespace Z0
 
     public class ToolCatalog : WfService<ToolCatalog>
     {
-
         FS.FolderPath Root;
 
         protected override void OnInit()
@@ -48,10 +47,6 @@ namespace Z0
 
         public FS.Files HelpFiles()
             => HelpDir.Files(FS.ext("help"), true);
-
-        [MethodImpl(Inline), Op]
-        Toolset Toolset(ToolId id, FS.FolderPath location)
-            => new Toolset(id, location);
 
         public FS.FilePath HelpFile(ToolId tool)
         {

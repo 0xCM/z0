@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-    public struct EmitToolScriptsCmd : ICmd<EmitToolScriptsCmd>
+    class App
     {
-        public ToolId Tool;
+        public static void Main(params string[] args)
+        {
 
-        public ToolCmdArgs Args {get;}
+        }
     }
 }

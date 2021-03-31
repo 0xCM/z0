@@ -7,16 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(VSvc)" />
-    <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Logix)" />
-    <ProjectReference Include="$(Gen)" />
-    <ProjectReference Include="$(CmdExec)" />
-    <ProjectReference Include="$(Lang)" />
-    <ProjectReference Include="$(Circuits)" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="$(Universe)" />
   </ItemGroup>
 
 </Project>

@@ -2,15 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+[assembly: PartId(PartId.Gather)]
+
+namespace Z0.Parts
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    partial struct WfEvents
+    public sealed class Gather : Part<Gather>
     {
-
     }
 }

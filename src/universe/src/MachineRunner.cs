@@ -8,7 +8,6 @@ namespace Z0
 
     public class MachineRunner : WfService<MachineRunner>
     {
-
         public void Run(MachineOptions options)
         {
             using var flow = Wf.Running();

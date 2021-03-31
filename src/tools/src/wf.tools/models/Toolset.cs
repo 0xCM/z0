@@ -9,17 +9,17 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Toolset
-    {
-        public ToolId Id {get;}
+    // public readonly struct Toolset
+    // {
+    //     public ToolId Id {get;}
 
-        public FS.FolderPath Location {get;}
+    //     public FS.FolderPath Location {get;}
 
-        [MethodImpl(Inline)]
-        public Toolset(ToolId id, FS.FolderPath root)
-        {
-            Id = id;
-            Location = root;
-        }
-    }
+    //     [MethodImpl(Inline)]
+    //     public Toolset(ToolId id, FS.FolderPath root)
+    //     {
+    //         Id = id;
+    //         Location = root;
+    //     }
+    // }
 }

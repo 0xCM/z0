@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(Apps)" />
+
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(BitSvc)" />
+    <ProjectReference Include="$(Blocked)" />
+
+    <ProjectReference Include="$(Circuits)" />
+    <ProjectReference Include="$(Canonical)" />
+    <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(Check)" />
+
+    <ProjectReference Include="$(Dynamic)" />
+
+    <ProjectReference Include="$(Evaluate)" />
+    <ProjectReference Include="$(External)" />
+
+    <ProjectReference Include="$(Fsm)"/>
+    <ProjectReference Include="$(Files)"/>
+
+    <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(GVec)" />
+    <ProjectReference Include="$(Gen)" />
+
+    <ProjectReference Include="$(Konst)" />
+
+    <ProjectReference Include="$(Lang)" />
+    <ProjectReference Include="$(Logix)" />
+
+    <ProjectReference Include="$(Math)" />
+    <ProjectReference Include="$(MathSvc)" />
+
+    <ProjectReference Include="$(Nats)" />
+
+    <ProjectReference Include="$(Pipes)" />
+    <ProjectReference Include="$(Polyrand)" />
+
+    <ProjectReference Include="$(Sys)" />
+    <ProjectReference Include="$(SFuncs)" />
+
+    <ProjectReference Include="$(Tables)" />
+    <ProjectReference Include="$(Term)" />
+
+    <ProjectReference Include="$(Validity)" />
+
+    <ProjectReference Include="$(VSvc)" />
+
+    <ProjectReference Include="$(Xed)" />
+
+  </ItemGroup>
+
+</Project>

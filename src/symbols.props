@@ -92,6 +92,8 @@
     <Term>$(Src)term/z0.term.csproj</Term>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
 
+    <Universe>$(Src)universe/z0.universe.csproj</Universe>
+
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
     <Xed>$(Src)xed/z0.xed.csproj</Xed>

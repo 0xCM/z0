@@ -6,16 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(GVec)" />
-    <ProjectReference Include="$(Blocked)" />
-    <ProjectReference Include="$(VSvc)" />
-    <ProjectReference Include="$(BitSvc)" />
     <ProjectReference Include="$(CmdExec)" />
-    <ProjectReference Include="$(Fsm)"/>
+    <ProjectReference Include="$(Universe)"/>
   </ItemGroup>
 
 </Project>

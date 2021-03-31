@@ -80,6 +80,8 @@ public enum PartId : ulong
 
     Tables = 65,
 
+    Gather = 66 | Shell,
+
     BitVectors = 100,
 
     BitSpans = 102,
@@ -172,6 +174,8 @@ public enum PartId : ulong
     GenApp = 203,
 
     AsmZ = 204,
+
+    Universe = 255,
 
     // ~ Test
     // ~ -------------------------------------------------------------------------------
