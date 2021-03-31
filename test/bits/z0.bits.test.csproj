@@ -6,14 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitGrids)" />
-    <ProjectReference Include="$(BitMatrix)" />
-    <ProjectReference Include="$(BitSpans)" />
-    <ProjectReference Include="$(BitStrings)" />
-    <ProjectReference Include="$(BitSvc)" />
-    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(Universe)" />
   </ItemGroup>
 
 </Project>

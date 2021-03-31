@@ -6,9 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Universe)" />
   </ItemGroup>
 
 </Project>

@@ -11,8 +11,12 @@
     <ProjectReference Include="$(Apps)" />
 
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(BitGrids)" />
+    <ProjectReference Include="$(BitMatrix)" />
+    <ProjectReference Include="$(BitSpans)" />
+    <ProjectReference Include="$(BitStrings)" />
     <ProjectReference Include="$(BitSvc)" />
+    <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Blocked)" />
 
     <ProjectReference Include="$(Circuits)" />

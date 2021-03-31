@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_uint3 : t_uint<t_uint3>
+    public class t_uint3 : t_bitnumbers<t_uint3>
     {
         public static ComparisonResult<ComparisonKind,T,R> eq<T,R>(T lhs, T rhs, R outcome)
         {

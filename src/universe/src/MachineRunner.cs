@@ -109,6 +109,5 @@ namespace Z0
 
         void Emitted<T>(Index<T> src)
             => Emitted(src.View);
-
     }
 }

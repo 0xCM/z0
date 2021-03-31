@@ -2,15 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.UIntTest)]
-
-namespace Z0.Parts
+namespace Z0
 {
-    public sealed class UIntTest : ExecutablePart<UIntTest>
+    using System;
+
+    public abstract class t_bitnumbers<X> : UnitTest<X,NumericClaims,ICheckNumeric>
+        where X : t_bitnumbers<X>, new()
     {
-         public override void Execute(params string[] args)
-         {
-            UIntTestApp.Run(args);
-         }
+
+        public const int PointCount = 500;
+
     }
 }

@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Logix)" />
+    <ProjectReference Include="$(Universe)" />
   </ItemGroup>
 
 </Project>
