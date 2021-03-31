@@ -9,8 +9,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static memory;
-
     public interface IApiCatalogQueries
     {
         Option<IApiHost> FindHost(ApiHostUri uri);

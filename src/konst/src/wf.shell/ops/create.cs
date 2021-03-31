@@ -12,7 +12,7 @@ namespace Z0
     {
         [Op]
         public static IWfShell create(string[] args, bool verbose = true)
-            => create(WfShell.parts(controller(), args), args, verbose);
+            => create(WfShell.parts(root.controller(), args), args, verbose);
 
         [Op]
         public static IWfShell create(IApiParts parts, string[] args, bool verbose = true)
@@ -24,7 +24,7 @@ namespace Z0
                 term.inform(AppMsg.status("Creating shell"));
 
             var clock = Time.counter(true);
-            var control = controller();
+            var control = root.controller();
             var controlId = control.Id();
             var dbRoot = Env.create().Db.Value;
 

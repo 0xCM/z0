@@ -77,7 +77,7 @@ namespace Z0
         {
             var dst = Db.IndexTable("api.classes");
             var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
-            var service = ApiCatalogs.classes(Wf);
+            var service = WfShell.classes(Wf);
             var formatter = Tables.formatter<SymbolicLiteral>();
             var classifiers = service.Classifiers();
             var literals = classifiers.SelectMany(x => x.Literals);

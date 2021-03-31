@@ -7,12 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
 
     partial class WfShell
     {
+        public static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)
+        {
+            var index = new Dictionary<string, MethodInfo>();
+            root.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).IdentityText, m));
+            return index;
+        }
+
+        [Op]
+        public static IApiClassCatalog classes(IWfShell wf)
+            => ApiClassCatalog.create(wf);
+
+
         [Op]
         public static IApiParts parts()
-            => parts(WfShell.controller(), Environment.GetCommandLineArgs());
+            => parts(root.controller(), Environment.GetCommandLineArgs());
 
         [Op]
         public static IApiParts parts(FS.FolderPath src)
@@ -40,7 +53,7 @@ namespace Z0
         /// <param name="identifiers">The desired parts to include, or empty to include all known parts</param>
         [Op]
         public static IApiParts parts(Index<PartId> identifiers)
-            => parts(controller(), identifiers);
+            => parts(root.controller(), identifiers);
 
         [Op]
         public static IApiParts parts(Assembly control, string[] args)

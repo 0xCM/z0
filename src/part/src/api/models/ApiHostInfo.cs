@@ -16,6 +16,7 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHostInfo : IApiHost
     {
+
         public ApiHostUri Uri {get;}
 
         public PartId PartId {get;}

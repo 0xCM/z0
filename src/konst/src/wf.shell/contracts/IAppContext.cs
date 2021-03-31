@@ -15,7 +15,7 @@ namespace Z0
         IAppMsgQueue MessageQueue {get;}
 
         WfController IWfContext.Controller
-            => WfShell.controller();
+            => root.controller();
 
         string[] IWfContext.Args
             => Environment.GetCommandLineArgs();

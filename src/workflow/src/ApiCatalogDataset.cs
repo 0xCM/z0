@@ -98,16 +98,15 @@ namespace Z0
         MethodInfo[] IApiCatalogDataset.Operations
             => _Operations;
 
-        public static ApiCatalogDataset create(IPart[] parts)
+
+        public ApiCatalogDataset(Index<IPart> parts, Index<Assembly> components, ApiPartCatalogs catalogs, Index<IApiHost> hosts, Index<PartId> partIds, Index<MethodInfo> ops)
         {
-            var dst = new ApiCatalogDataset();
-            dst._Parts = parts;
-            dst._PartComponents = parts.Select(p => p.Owner);
-            dst._Catalogs = parts.Select(x => ApiCatalogs.PartCatalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);
-            dst._ApiHosts = dst._Catalogs.Storage.SelectMany(c => c.ApiHosts.Storage);
-            dst._PartIdentities = parts.Select(p => p.Id);
-            dst._Operations = dst._Catalogs.Storage.SelectMany(x => x.Operations.Storage);
-            return dst;
+            _Parts = parts;
+            _PartComponents = components;
+            _Catalogs = catalogs;
+            _ApiHosts = hosts;
+            _PartIdentities = partIds;
+            _Operations = ops;
         }
 
         Index<IApiHost> IApiCatalogQueries.FindHosts(ReadOnlySpan<ApiHostUri> src)

@@ -15,6 +15,19 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiCatalogs
     {
+        public static ApiCatalogDataset dataset(IPart[] parts)
+        {
+            var catalogs = parts.Select(x => PartCatalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);
+            var dst = new ApiCatalogDataset(parts,
+                parts.Select(p => p.Owner),
+                catalogs,
+                catalogs.SelectMany(c => c.ApiHosts.Storage),
+                parts.Select(p => p.Id),
+                catalogs.SelectMany(x => x.Operations)
+                );
+            return dst;
+        }
+
         [Op]
         public static ApiHostInfo hostinfo(Type t)
         {
@@ -35,10 +48,6 @@ namespace Z0
             root.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).IdentityText, m));
             return index;
         }
-
-        [Op]
-        public static IApiClassCatalog classes(IWfShell wf)
-            => ApiClassCatalog.create(wf);
 
         /// <summary>
         /// Describes an api host
@@ -161,7 +170,7 @@ namespace Z0
         /// </summary>
         [Op]
         static Option<IPart> part(FS.FilePath src)
-                => from c in WfShell.component(src)
+                => from c in ApiParts.component(src)
                 from t in resolve(c)
                 from p in resolve(t)
                 from part in resolve(p)

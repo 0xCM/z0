@@ -1,5 +1,3 @@
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -8,16 +6,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
-    partial class WfShell
+    partial struct root
     {
         [MethodImpl(Inline), Op]
         public static Assembly controller()
             => Assembly.GetEntryAssembly();
-
-        [MethodImpl(Inline)]
-        public static Assembly controller<A>()
-            => typeof(A).Assembly;
     }
 }

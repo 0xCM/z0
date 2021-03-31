@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public GlobalApiCatalog(params IPart[] parts)
         {
-            Data = ApiCatalogDataset.create(parts);
+            Data = ApiCatalogs.dataset(parts);
             // Parts = parts;
             // PartComponents = parts.Select(p => p.Owner);
             // Catalogs = parts.Select(x => ApiCatalogs.PartCatalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);
@@ -30,6 +30,7 @@ namespace Z0
             // PartIdentities = parts.Select(p => p.Id);
             // Operations = Catalogs.Storage.SelectMany(x => x.Operations.Storage);
         }
+
 
         /// <summary>
         /// The members of the compostion
