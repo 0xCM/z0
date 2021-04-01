@@ -53,7 +53,7 @@ namespace Z0
             Host = new WfSelfHost(typeof(H));
             Wf = wf.WithHost(Host);
             Db = new WfDb(wf, wf.Env.Db.Value);
-            Events = EventCache.init(wf);
+            Events = EventCache.create();
             OnInit();
             Initialized();
             wf.Created(flow);

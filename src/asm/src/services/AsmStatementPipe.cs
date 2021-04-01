@@ -16,11 +16,11 @@ namespace Z0.Asm
     {
         IAsmDecoder Decoder;
 
-        AsmDataStore DataStore;
+        ApiCodeStore DataStore;
 
         protected override void OnInit()
         {
-            DataStore = Wf.AsmDataStore();
+            DataStore = Wf.ApiCodeStore();
             Decoder = Wf.AsmDecoder();
         }
 
@@ -207,7 +207,6 @@ namespace Z0.Asm
                 return AsmInstructionBlock.Empty;
             }
         }
-
 
         public void EmitBitstrings()
         {

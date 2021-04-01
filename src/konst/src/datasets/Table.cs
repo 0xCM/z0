@@ -11,10 +11,4 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
     }
-
-    // [ApiHost]
-    // public readonly struct Tables
-    // {
-    //     const NumericKind Closure = UnsignedInts;
-    // }
 }

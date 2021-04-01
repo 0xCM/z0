@@ -38,7 +38,6 @@ namespace Z0
         Emitted = 2
     }
 
-
     struct EmissonLogger : IEmissionLogger
     {
         readonly FileStream Emissions;

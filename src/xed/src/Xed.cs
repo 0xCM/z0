@@ -62,21 +62,21 @@ namespace Z0
         //     return ref dst;
         // }
 
-        [MethodImpl(Inline), Op]
-        static ref readonly DatasetFieldFormatter<XedSummaryField> render(in XedSummaryRow src, in DatasetFieldFormatter<XedSummaryField> dst)
-        {
-            dst.Delimit(F.Class, src.Class);
-            dst.Delimit(F.Category, src.Category);
-            dst.Delimit(F.Extension, src.Extension);
-            dst.Delimit(F.IsaSet, src.IsaSet);
-            dst.Delimit(F.IForm, src.IForm);
-            dst.Delimit(F.BaseCode, src.BaseCode);
-            dst.Delimit(F.Mod, src.Mod);
-            dst.Delimit(F.Reg, src.Reg);
-            dst.Delimit(F.Pattern, src.Pattern);
-            dst.Delimit(F.Operands, src.Operands);
-            return ref dst;
-        }
+        // [MethodImpl(Inline), Op]
+        // static ref readonly DatasetFieldFormatter<XedSummaryField> render(in XedSummaryRow src, in DatasetFieldFormatter<XedSummaryField> dst)
+        // {
+        //     dst.Delimit(F.Class, src.Class);
+        //     dst.Delimit(F.Category, src.Category);
+        //     dst.Delimit(F.Extension, src.Extension);
+        //     dst.Delimit(F.IsaSet, src.IsaSet);
+        //     dst.Delimit(F.IForm, src.IForm);
+        //     dst.Delimit(F.BaseCode, src.BaseCode);
+        //     dst.Delimit(F.Mod, src.Mod);
+        //     dst.Delimit(F.Reg, src.Reg);
+        //     dst.Delimit(F.Pattern, src.Pattern);
+        //     dst.Delimit(F.Operands, src.Operands);
+        //     return ref dst;
+        // }
 
         [Op]
         static bool load(in TextRow src, ref XedSummaryRow dst)

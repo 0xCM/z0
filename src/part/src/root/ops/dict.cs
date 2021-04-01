@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="V">The vale type</typeparam>
         [MethodImpl(Inline)]
         public static Dictionary<K,V> dict<K,V>()
-            => new();
+            => new Dictionary<K,V>();
 
         /// <summary>
         /// Initializes an empty dictionary with a specified capacity

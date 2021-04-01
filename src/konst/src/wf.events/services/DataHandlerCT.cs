@@ -21,6 +21,7 @@ namespace Z0
         public void Handle(C context, T data)
             => Receiver(context, data);
 
-        public static DataHandler<C,T> Empty => new DataHandler<C,T>((c,t) => {});
+        public static DataHandler<C,T> Empty
+            => new DataHandler<C,T>((c,t) => {});
     }
 }

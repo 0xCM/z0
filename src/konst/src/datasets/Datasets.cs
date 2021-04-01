@@ -12,6 +12,11 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Datasets
     {
+        [MethodImpl(Inline)]
+        public static DatasetFormatter<F> formatter<F>(char delimiter)
+            where F : unmanaged, Enum
+                => new DatasetFormatter<F>(text.build(), delimiter);
+
         /// <summary>
         /// Defines a mask that, when applied, reveals the field position
         /// </summary>

@@ -11,22 +11,27 @@ namespace Z0
 
     partial class ImageDataEmitter
     {
-        public void EmitUserStrings()
+        public Index<CliUserStringInfo> EmitUserStrings()
         {
-            EmitUserStrings(Wf.Components);
+            return EmitUserStrings(Wf.Components);
         }
 
-        public void EmitUserStrings(ReadOnlySpan<Assembly> src)
+        public Index<CliUserStringInfo> EmitUserStrings(ReadOnlySpan<Assembly> src)
         {
+            var buffer = RecordList.create<CliUserStringInfo>();
             var count = src.Length;
             for(var i=0; i<count; i++)
-                EmitUserStrings(skip(src,i));
+                EmitUserStrings(skip(src,i), buffer);
+            return buffer.Emit();
         }
 
-        public void EmitUserStrings(Assembly src)
+
+        public void EmitUserStrings(Assembly src, RecordList<CliUserStringInfo> buffer)
         {
             using var reader = PeTableReader.open(FS.path(src.Location));
-            Wf.Db().EmitTable<CliUserStringInfo>(reader.UserStrings(), src.GetSimpleName());
+            var records = reader.UserStrings();
+            buffer.Add(records);
+            Db.EmitTable<CliUserStringInfo>(records, src.GetSimpleName());
         }
     }
 }

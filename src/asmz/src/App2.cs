@@ -945,7 +945,7 @@ namespace Z0.Asm
         Index<AsmMemberRoutine> CaptureSelectedRoutines()
         {
             var options = CaptureWorkflowOptions.EmitImm;
-            var parts = root.array(PartId.AsmLang, PartId.AsmZ, PartId.AsmCore);
+            var parts = root.array(PartId.AsmLang, PartId.AsmZ, PartId.Asm);
             var routines = Capture.run(Wf, parts, options);
             return routines;
         }
@@ -998,7 +998,12 @@ namespace Z0.Asm
             //Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
 
 
-            GenerateInstructionModels();
+            CaptureSelectedRoutines();
+            // var store = Wf.AsmRowStore();
+            // var rows = store.LoadAsmRows();
+            // var calls = store.LoadCallRows();
+
+
             //Show("asm.tokens.prefixes", FS.Log, show);
             //root.iter(Wf.AsmTokens().Prefixes(), p => ;
 

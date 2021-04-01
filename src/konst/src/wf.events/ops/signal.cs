@@ -12,7 +12,7 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op]
-        internal static WfSignal signal(IWfShell wf)
-            => WfSignal.create(wf);
+        internal static EventSignal signal(IWfShell wf)
+            => EventSignal.create(wf);
     }
 }

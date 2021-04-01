@@ -16,15 +16,6 @@ namespace Z0
 
     partial struct Formatters
     {
-        /// <summary>
-        /// Creates a delegator that formats T-cells via a <see cref='IFormatProvider'/>
-        /// </summary>
-        /// <param name="provider">The source provider</param>
-        /// <param name="t">A cell representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ProvidedFormatter<T> provided<T>(IFormatProvider provider)
-            where T : IFormattable
-                => new ProvidedFormatter<T>(provider);
+
     }
 }

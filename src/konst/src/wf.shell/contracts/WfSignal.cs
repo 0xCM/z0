@@ -10,16 +10,16 @@ namespace Z0
     using static WfEvents;
     using static Part;
 
-    readonly struct WfSignal
+    readonly struct EventSignal
     {
         [MethodImpl(Inline)]
-        public static WfSignal create(IWfShell wf)
-            => new WfSignal(wf);
+        public static EventSignal create(IWfShell wf)
+            => new EventSignal(wf);
 
         readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        WfSignal(IWfShell wf)
+        EventSignal(IWfShell wf)
             => Wf = wf;
 
         CorrelationToken Ct
@@ -46,7 +46,6 @@ namespace Z0
 
         public void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));
-
 
         public void Running()
             => Raise(running(Host, Ct));

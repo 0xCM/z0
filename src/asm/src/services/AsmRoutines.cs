@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-
     [ApiHost]
     public sealed class AsmRoutines : AsmWfService<AsmRoutines>
     {

@@ -68,11 +68,11 @@ namespace Z0
 
         [Op]
         public static bool eq(bit a, bit b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => a == b ? true : @throw<bit>(Failed(ClaimKind.Eq, NotEqual(a, b, caller, file, line)));
+            => a == b ? true : @throw<bool>(Failed(ClaimKind.Eq, NotEqual(a, b, caller, file, line)));
 
         [Op]
         public static bool neq(bit a, bit b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => a != b ? true : @throw<bit>(Failed(ClaimKind.Eq, Equal(a, b, caller, file, line)));
+            => a != b ? true : @throw<bool>(Failed(ClaimKind.Eq, Equal(a, b, caller, file, line)));
 
         [Op]
         public static bool neq(char a, char b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

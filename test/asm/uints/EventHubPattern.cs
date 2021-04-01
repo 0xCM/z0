@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct HubClientExample : IHubClientExample
     {
         [MethodImpl(Inline), Op]
-        public static WfEventHub create(IDataEventSink sink)
+        public static EventHub create(IDataEventSink sink)
         {
             var hub = WfBrokers.hub();
             var client = new HubClientExample(hub, sink);
@@ -24,7 +24,7 @@ namespace Z0
         public static Action connector(IWfHubClient client)
             => client.Connect;
 
-        public IWfEventHub Hub {get;}
+        public IEventHub Hub {get;}
 
         public IDataEventSink Sink {get;}
 
@@ -36,7 +36,7 @@ namespace Z0
                 => Sink.Deposit(e);
 
         [MethodImpl(Inline)]
-        public HubClientExample(IWfEventHub hub, IDataEventSink sink)
+        public HubClientExample(IEventHub hub, IDataEventSink sink)
         {
             Hub = hub;
             Sink = sink;

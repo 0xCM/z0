@@ -24,31 +24,7 @@ namespace Z0
         }
 
         public void Run(CmdLine src)
-        {
-            var process = ToolCmd.run(src).Wait();
-            var output = process.Output;
-            Wf.Status(output);
-        }
-
-        void CmdShell(FS.FilePath target, string args)
-        {
-            var cmd = new CmdLine($"cmd /c {target.Format(PathSeparator.BS)} {args}");
-            var process = ToolCmd.run(cmd);
-            var output = process.Output;
-            Wf.Status(output);
-        }
-
-        void VsCode(string arg)
-        {
-            var dir = FS.dir(Environment.CurrentDirectory) + FS.folder(arg);
-            var app = FS.file("code", FS.Extensions.Exe);
-            var path = dir.Format(PathSeparator.BS);
-            var cmd = new CmdLine(string.Format("{0} \"{1}\"", app.Format(), path));
-            Wf.Status(string.Format("Launching {0} for {1}", app, path));
-            Wf.Status(string.Format("CmdLine: {0}", cmd.Format()));
-            var process = ToolCmd.run(cmd);
-            Wf.Status(string.Format("Launched process {0}", process.ProcessId));
-        }
+            => Tools.create(Wf).Run(src);
 
         public void Dispatch(CmdLine cmd)
         {
@@ -119,12 +95,6 @@ namespace Z0
         public void ShowSupported()
             => root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
 
-
-        // void Run(in EmitImageMapsCmd cmd)
-        // {
-        //     cmd.Dispatch(Wf).Wait();
-        // }
-
         void EmitProcessDump()
         {
             Wf.Status("Emitting dump");
@@ -132,7 +102,6 @@ namespace Z0
             dst.Delete();
             DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
         }
-
 
         void Run(in BuildProjectCmd cmd)
         {

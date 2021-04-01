@@ -18,14 +18,6 @@ namespace Z0
         public static IRuntimeArchive runtime(IWfShell wf)
             => RuntimeArchive.create(wf.Controller.ImageDir);
 
-        /// <summary>
-        /// Creates an archive over both managed and unmanaged modules
-        /// </summary>
-        /// <param name="root">The archive root</param>
-        [MethodImpl(Inline), Op]
-        public static IModuleArchive modules(FS.FolderPath root)
-            => new ModuleArchive(root);
-
         [Op]
         public static FS.Files match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
         {

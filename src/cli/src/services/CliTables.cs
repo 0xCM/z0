@@ -34,7 +34,6 @@ namespace Z0
             }
         }
 
-
         public void DumpApiMetadata()
         {
             var dir = Db.TableDir("api.metadata");

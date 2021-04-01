@@ -29,7 +29,7 @@ namespace Z0
 
         public string Render(char delimiter = FieldDelimiter)
         {
-            var service = Formatters.dataset<F>(delimiter);
+            var service = Datasets.formatter<F>(delimiter);
             var cols = Fields;
             var labels = Labels;
             for(var i=0; i<cols.Length; i++)

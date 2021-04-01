@@ -25,7 +25,7 @@ namespace Z0
             string root = null, string name = null, string arg = null, ArgPrefix? prefix = null, string type = null)
         {
             data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
-            data.CmdArgName = arg == null ? data.CmdArgName : arg;
+            data.CmdArgName = arg == null ? data.CmdArgName : (Name)arg;
             data.ArgPrefix = prefix != null ? prefix.Value: data.ArgPrefix;
             data.ScriptType = type == null ? data.ScriptType : FS.ext(type);
             rule(paths, ref data);

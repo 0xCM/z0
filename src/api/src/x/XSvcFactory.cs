@@ -39,5 +39,8 @@ namespace Z0
 
         public static ApiAssets ApiAssets(this IWfShell wf)
             => Z0.ApiAssets.create(wf);
+
+        public static SymLiterals SymLiterals(this IWfShell wf)
+            => Z0.SymLiterals.create(wf);
     }
 }

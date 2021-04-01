@@ -11,9 +11,9 @@ namespace Z0
 
     partial struct Cil
     {
-        public static void EmitResourceProperties(EmitCilCmd cmd)
+        public static void EmitResourceProperties(FS.FilePath dst)
         {
-            var summary = cmd.SummaryTarget.Writer();
+            var summary = dst.Writer();
             var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
             summary.WriteLine(header);
 
@@ -29,10 +29,6 @@ namespace Z0
                 var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHex());
                 summary.WriteLine(line);
             }
-
-            // var decoded = Cil.methods(mod, props.Select(x => x.GetGetMethod())).ToArray();
-            // var writer = new FunctionWriter(cmd.CilTarget);
-            // writer.Write(decoded);
         }
     }
 }

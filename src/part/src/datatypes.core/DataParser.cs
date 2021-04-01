@@ -68,6 +68,13 @@ namespace Z0
         public static Outcome parse(string src, out ByteSize dst)
             => ByteSize.parse(src, out dst);
 
+        [Op]
+        public static Outcome parse(string src, out string dst)
+        {
+            dst = src;
+            return true;
+        }
+
         public static Outcome eparse<T>(string src, out T dst)
             where T : unmanaged, Enum
                 => Enums.parse(src, out dst);

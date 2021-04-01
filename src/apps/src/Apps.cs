@@ -12,6 +12,6 @@ namespace Z0
             => JsonSettings.Load(src);
 
         public static IAppContext context(IWfShell wf)
-            => new AppContext(wf.Paths, wf.Api, Rng.@default(), json(wf.Paths.AppConfigPath), MsgExchange.Create(wf));
+            => new AppContext(wf.Paths, wf.Api, Rng.@default(), json(wf.Paths.AppConfigPath), MsgExchange.Create());
     }
 }

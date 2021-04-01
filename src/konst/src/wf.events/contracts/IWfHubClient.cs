@@ -10,7 +10,7 @@ namespace Z0
     [Free]
     public interface IWfHubClient : IDataEventSink
     {
-        IWfEventHub Hub {get;}
+        IEventHub Hub {get;}
 
         void Connect();
     }

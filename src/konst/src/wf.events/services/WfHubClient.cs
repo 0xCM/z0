@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct WfHubClient : IWfHubClient
     {
-        public IWfEventHub Hub {get;}
+        public IEventHub Hub {get;}
 
         readonly IDataEventSink Sink;
 
@@ -20,7 +20,7 @@ namespace Z0
         readonly Action Executor;
 
         [MethodImpl(Inline)]
-        public WfHubClient(IWfEventHub hub, IDataEventSink sink, Action connect, Action exec)
+        public WfHubClient(IEventHub hub, IDataEventSink sink, Action connect, Action exec)
         {
             Hub = hub;
             Sink = sink;

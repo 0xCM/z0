@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWfCmdHost : IWfService, ICmdRunner
+    public interface IWfCmdHost : ICmdRunner
     {
 
     }

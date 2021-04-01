@@ -40,6 +40,14 @@ namespace Z0
             MessageCode = memory.u8(Ok);
         }
 
+        public Outcome(bool ok, string message)
+        {
+            Ok = ok;
+            Data = default;
+            Message = message;
+            MessageCode = 0;
+        }
+
         [MethodImpl(Inline)]
         public Outcome(bool ok, T data, string message)
         {
@@ -136,10 +144,6 @@ namespace Z0
             => new Outcome<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Outcome<T>((bool ok, T data) src)
-            => new Outcome<T>(src.ok, src.data);
-
-        [MethodImpl(Inline)]
         public static implicit operator Outcome<T>(bool ok)
             => new Outcome<T>(ok, default(T));
 
@@ -154,6 +158,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T(Outcome<T> src)
             => src.Ok ? src.Data : default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome<T>((bool ok, T data) src)
+            => new Outcome<T>(src.ok, src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome<T>((bool success, string msg) src)
+            => new Outcome<T>(src.success, src.msg);
 
         public static Outcome<T> Empty
         {

@@ -37,6 +37,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(EventId, Cmd);
+            => text.format(EventId, Cmd);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         const byte StatementFieldCount = AsmApiStatement.FieldCount;
 
-        public void Traverse(Action<AsmApiStatement> receiver)
+        public void Traverse(params Action<AsmApiStatement>[] receivers)
         {
             var dir = Db.TableDir<AsmApiStatement>();
             var files = dir.EnumerateFiles(FS.Csv, true).Array();
@@ -31,7 +31,7 @@ namespace Z0.Asm
                             ref readonly var row = ref skip(rows,i);
                             var result = AsmParser.parse(row, out var statement);
                             if(result)
-                                receiver(statement);
+                                root.iter(receivers, r => r(statement));
                             else
                                 Wf.Error(Msg.CouldNotParseStatementRow.Format(row,result.Message));
                         }
@@ -44,6 +44,5 @@ namespace Z0.Asm
                     Wf.Error(Msg.CouldNotParseDocument.Format(file));
             }
         }
-
     }
 }

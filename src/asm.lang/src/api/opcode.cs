@@ -13,5 +13,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmOpCodeExpr opcode(string src)
             => new AsmOpCodeExpr(src);
+
+        [MethodImpl(Inline), Op]
+        public static AsmMnemonic mnemonic(string src)
+            => new AsmMnemonic(src);
     }
 }

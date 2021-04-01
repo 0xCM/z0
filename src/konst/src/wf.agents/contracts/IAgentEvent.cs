@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Bears witness to an occurrence of something of identifiable interest
     /// at a unique point in spacetime. The (Location,Timestamp,EventKind) triplet

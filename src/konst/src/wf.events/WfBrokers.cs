@@ -15,11 +15,11 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static WfEventHub hub(int capacity = 128)
-            => new WfEventHub(capacity);
+        public static EventHub hub(int capacity = 128)
+            => new EventHub(capacity);
 
         [MethodImpl(Inline), Op]
-        public static WfHubClient client(IWfEventHub hub, IDataEventSink sink, Action connect, Action exec)
+        public static WfHubClient client(IEventHub hub, IDataEventSink sink, Action connect, Action exec)
             => new WfHubClient(hub, sink, connect, exec);
 
         /// <summary>
@@ -29,8 +29,8 @@ namespace Z0
         /// <param name="f">The process function</param>
         /// <typeparam name="T">The data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static WfSink<T> sink<T>(IWfShell wf, Receiver<T> f)
-            => new WfSink<T>(wf, f);
+        public static SpanSink<T> sink<T>(Receiver<T> f)
+            => new SpanSink<T>(f);
 
         [MethodImpl(Inline)]
         public static HubRelay relay(EventReceiver receiver)
@@ -42,7 +42,7 @@ namespace Z0
                 => new HubRelay<E>(receiver);
 
         [MethodImpl(Inline)]
-        public static ref readonly E broadcast<E>(WfEventHub hub, in E e)
+        public static ref readonly E broadcast<E>(EventHub hub, in E e)
             where E : struct, IDataEvent
         {
             if(hub.Index.TryGetValue(e.GetType(), out var sink))
@@ -51,16 +51,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool subscribe<E>(WfEventHub hub, EventReceiver receiver, E model = default)
+        public static bool subscribe<E>(EventHub hub, EventReceiver receiver, E model = default)
             where E : struct, IDataEvent
                 => subscribe(hub, new HubRelay(receiver), model);
 
         [MethodImpl(Inline), Op]
-        public static bool subscribe(WfEventHub hub, EventReceiver receiver, IDataEvent model)
+        public static bool subscribe(EventHub hub, EventReceiver receiver, IDataEvent model)
             => hub.Index.TryAdd(model.GetType(), new HubRelay(receiver));
 
         [MethodImpl(Inline)]
-        public static bool subscribe<S,E>(WfEventHub hub, S sink, E model)
+        public static bool subscribe<S,E>(EventHub hub, S sink, E model)
             where E : struct, IDataEvent
             where S : IDataEventSink
                 => hub.Index.TryAdd(typeof(E), sink);

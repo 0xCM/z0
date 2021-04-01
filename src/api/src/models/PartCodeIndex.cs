@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static memory;
 
     using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCode>;
 

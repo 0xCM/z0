@@ -14,6 +14,18 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmParser
     {
+        public static Outcome parse(string src, out AsmMnemonic dst)
+        {
+            dst = asm.mnemonic(src);
+            return true;
+        }
+
+        public static Outcome parse(string src, out AsmOpCodeExpr dst)
+        {
+            dst = asm.opcode(src);
+            return true;
+        }
+
         [MethodImpl(Inline), Op]
         public static AsmStatementExpr statement(string src)
             => new AsmStatementExpr(src.Trim());

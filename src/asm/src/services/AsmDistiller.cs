@@ -57,7 +57,7 @@ namespace Z0.Asm
             RowStore = Wf.AsmRowStore();
             CurrentRow = 0;
             Blocks = src;
-            Rows = RowStore.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
+            Rows = RowStore.StoreAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
             LastRow = Rows.Count - 1;
             CurrentBlock = Rows[CurrentRow].BlockAddress;
 

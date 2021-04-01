@@ -16,10 +16,11 @@ namespace Z0
             {
                 var api = Wf.ApiServices();
                 var images = Wf.ImageDataEmitter();
-                var store = Wf.AsmDataStore();
+                var store = Wf.ApiCodeStore();
                 var assets = Wf.ApiAssets();
                 var blocks = store.CodeBlocks();
-                var asmrows = Wf.AsmRowStore().EmitAsmRows(blocks);
+                var asmrows = Wf.AsmRowStore().StoreAsmRows(blocks);
+                var statements = Wf.AsmStatementPipe();
 
                 if(options.CorrelateMembers)
                     api.Correlate();
@@ -40,7 +41,7 @@ namespace Z0
                     Emitted(Wf.IntelCpuIntrinsics().Emit());
 
                 if(options.EmitSymbolicLiterals)
-                    Emitted(api.EmitSymbolicLiterals());
+                    Emitted(Wf.SymLiterals().Emit());
 
                 if(options.EmitApiBitMasks)
                     Emitted(Wf.ApiBitMasks().Emit());
@@ -52,13 +53,13 @@ namespace Z0
                     Wf.ApiComments().Collect();
 
                 if(options.EmitAssetIndex)
-                    assets.EmitAssetIndex();
+                    Emitted(assets.EmitAssetIndex());
 
                 if(options.EmitAssetContent)
                     Emitted(assets.EmitAssetContent());
 
                 if(options.EmitApiMetadata)
-                    Wf.CliCmd().Run(CliWfCmdKind.DumpApiMetadata);
+                    Wf.CliTables().DumpApiMetadata();
 
                 if(options.EmitSectionHeaders)
                     images.EmitRuntimeHeaders();
@@ -68,7 +69,7 @@ namespace Z0
 
                 if(options.EmitCliStrings)
                 {
-                    images.EmitUserStrings();
+                    Emitted(images.EmitUserStrings());
                     Emitted(images.EmitSystemStrings());
                 }
 
@@ -85,13 +86,13 @@ namespace Z0
                     store.EmitAnalyses(blocks);
 
                 if(options.EmitResBytes)
-                    store.EmitResBytes(blocks);
+                    Emitted(store.EmitResBytes(blocks));
 
                 if(options.EmitStatements)
-                    Wf.AsmStatementPipe().EmitStatements();
+                    Emitted(statements.EmitStatements(blocks));
 
                 if(options.EmitAsmBitstrings)
-                    Wf.AsmStatementPipe().EmitBitstrings();
+                    statements.EmitBitstrings();
 
             }
             catch(Exception e)

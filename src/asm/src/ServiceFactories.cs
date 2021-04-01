@@ -25,8 +25,8 @@ namespace Z0
         public static AsmSemanticRender AsmSemanticRender(this IWfShell wf)
             => Services.AsmSemanticRender.create(wf);
 
-        public static AsmDataStore AsmDataStore(this IWfShell wf)
-            => Services.AsmDataStore.create(wf);
+        public static ApiCodeStore ApiCodeStore(this IWfShell wf)
+            => Services.ApiCodeStore.create(wf);
 
         public static AsmRowStore AsmRowStore(this IWfShell wf)
             => Services.AsmRowStore.create(wf);

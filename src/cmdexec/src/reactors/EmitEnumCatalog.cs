@@ -9,7 +9,7 @@ namespace Z0
         protected override CmdResult Run(EmitEnumCatalogCmd cmd)
         {
             var services = Wf.ApiServices();
-            services.EmitSymbolicLiterals(Wf.Components, cmd.Target);
+            Wf.SymLiterals().Emit(Wf.Components, cmd.Target);
             return Cmd.ok(cmd);
         }
     }

@@ -97,7 +97,7 @@ namespace Z0
 
             public FS.Files Files(FileExt[] ext, bool recurse)
                 => Exists
-                ? EnumerateFiles(recurse).Array()
+                ? new FS.Files(EnumerateFiles(recurse).Array())
                 : FS.Files.Empty;
 
             public FS.Files Files(bool recurse)

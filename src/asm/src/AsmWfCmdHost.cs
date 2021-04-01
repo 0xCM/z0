@@ -17,9 +17,9 @@ namespace Z0.Asm
 
         AsmCatalogEtl Catalog;
 
-        Lazy<AsmDataStore> _AsmData;
+        Lazy<ApiCodeStore> _AsmData;
 
-        AsmDataStore AsmData
+        ApiCodeStore AsmData
         {
             get => _AsmData.Value;
         }
@@ -28,7 +28,7 @@ namespace Z0.Asm
         {
             Catalog = Wf.AsmCatalogEtl();
             ApiServices = Wf.ApiServices();
-            _AsmData = root.lazy(Wf.AsmDataStore);
+            _AsmData = root.lazy(Wf.ApiCodeStore);
         }
 
         [Action(K.EmitResBytes)]
@@ -37,11 +37,11 @@ namespace Z0.Asm
 
         [Action(K.EmitApiClasses)]
         void EmitApiClasses()
-            => ApiServices.EmitApiClasses();
+            => Wf.SymLiterals().EmitApiClasses();
 
         [Action(K.EmitSymbolicLiterals)]
         void EmitSymbolicLiterals()
-            => ApiServices.EmitSymbolicLiterals();
+            => Wf.SymLiterals().Emit();
 
         [Action(K.ShowFormCatalog)]
         void ShowFormCatalog()
@@ -71,7 +71,7 @@ namespace Z0.Asm
 
         [Action(K.EmitAsmRows)]
         void EmitAsmRows()
-            => Wf.AsmRowStore().EmitAsmRows(AsmData.CodeBlocks());
+            => Wf.AsmRowStore().StoreAsmRows(AsmData.CodeBlocks());
 
         [Action(K.CheckDigitParser)]
         void CheckDigitParser()

@@ -6,6 +6,11 @@ namespace Z0
 {
     using System;
 
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public delegate void WfStepLauncher(IWfShell wf);
+
     public interface IWfHost : IWfStep, ITextual
     {
         Type Type {get;}

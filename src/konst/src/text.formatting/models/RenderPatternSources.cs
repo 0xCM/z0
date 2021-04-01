@@ -8,9 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public readonly struct RenderPatternSources
     {
+        [Op]
+        public static RenderPatternSources from(Type src)
+        {
+            var values = src.LiteralFieldValues<string>(out var fields);
+            var count = values.Length;
+            var buffer = sys.alloc<RenderPatternSource>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = new RenderPatternSource(skip(fields,i), skip(values,i));
+            return buffer;
+        }
+
         readonly Index<RenderPatternSource> Data;
 
         [MethodImpl(Inline)]

@@ -78,7 +78,7 @@ namespace Z0
                 => new CpuWorker<S,T>(settings, emitter, projector, receiver);
 
         [Op]
-        public static CpuWorker<ulong> example(IWfShell wf, uint core = 3, ulong length = DefaultCycleLength,  ulong cycles = DefaultCycleCount)
+        public static CpuWorker<ulong> example(uint core = 3, ulong length = DefaultCycleLength,  ulong cycles = DefaultCycleCount)
         {
             static ulong xor(ulong max)
             {
@@ -88,14 +88,14 @@ namespace Z0
                 return result;
             }
 
-            return create(wf, core, xor, cycles, new TimeSpan(0,0,0,0,10));
+            return create(core, xor, cycles, new TimeSpan(0,0,0,0,10));
         }
 
         [MethodImpl(Inline)]
-        public static CpuWorker<T> create<T>(IWfShell wf, uint core, Func<T,T> fx, T state, TimeSpan frequency, ulong length = DefaultCycleLength, ulong cycles = DefaultCycleCount)
+        public static CpuWorker<T> create<T>(uint core, Func<T,T> fx, T state, TimeSpan frequency, ulong length = DefaultCycleLength, ulong cycles = DefaultCycleCount)
         {
             var id = (uint)advance();
-            return create(wf, core, id, fx, state, frequency, name(core, id), length, cycles);
+            return create(core, id, fx, state, frequency, name(core, id), length, cycles);
         }
 
         /// <summary>
@@ -109,9 +109,9 @@ namespace Z0
         /// <param name="cycles">The maximum number of cycles the worker will be allowed to execute before forceful termination</param>
         /// <typeparam name="T">The subject type</typeparam>
         [Op, Closures(Closure)]
-        public static CpuWorker<T> create<T>(IWfShell wf, uint core, uint id, Func<T,T> fx, T state, TimeSpan frequency, string name, ulong length = DefaultCycleLength, ulong cycles = DefaultCycleCount)
+        public static CpuWorker<T> create<T>(uint core, uint id, Func<T,T> fx, T state, TimeSpan frequency, string name, ulong length = DefaultCycleLength, ulong cycles = DefaultCycleCount)
         {
-            var worker = new CpuWorker<T>(wf, core, id, fx, state, frequency, length, cycles);
+            var worker = new CpuWorker<T>(core, id, fx, state, frequency, length, cycles);
             var control = new Thread(new ThreadStart(worker.Execute))
             {
                 IsBackground = true,

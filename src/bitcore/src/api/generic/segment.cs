@@ -59,7 +59,7 @@ namespace Z0
                 return Numeric.maxval<T>();
 
             var sameSeg = i0.CellIndex == i1.CellIndex;
-            var firstCount = ScalarCast.uint8(sameSeg ? bitcount : width<T>() - i0.BitOffset);
+            var firstCount = ScalarCast.uint8(sameSeg ? bitcount : (uint)(width<T>() - i0.BitOffset));
             var part1 = gbits.extract(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
 
             if(sameSeg)

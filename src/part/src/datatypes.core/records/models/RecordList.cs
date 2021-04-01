@@ -33,6 +33,12 @@ namespace Z0
             Storage = new List<T>((int)capacity);
         }
 
+        public RecordList(T[] src)
+        {
+            Storage = new List<T>(src.Length);
+            Storage.AddRange(src);
+        }
+
         [MethodImpl(Inline)]
         public void Add(T src)
         {
@@ -83,6 +89,15 @@ namespace Z0
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
             => ((IEnumerable<T>)Storage).GetEnumerator();
 
-    }
 
+        [MethodImpl(Inline)]
+        public static implicit operator RecordList<T>(T[] src)
+            => new RecordList<T>(src);
+
+        public static RecordList<T> Empty
+        {
+            [MethodImpl(Inline)]
+            get => sys.empty<T>();
+        }
+    }
 }

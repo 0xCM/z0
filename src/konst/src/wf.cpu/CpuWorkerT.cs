@@ -34,8 +34,6 @@ namespace Z0
 
         readonly Func<T,T> WorkerFunc;
 
-        readonly IWfShell Wf;
-
         internal Thread ManagedWorkerThread;
 
         ulong CycleCounter;
@@ -47,9 +45,8 @@ namespace Z0
         T State;
 
         [MethodImpl(Inline)]
-        internal CpuWorker(IWfShell wf, uint core, uint id, Func<T,T> fx, T data, TimeSpan freq, ulong length, ulong cycles)
+        internal CpuWorker(uint core, uint id, Func<T,T> fx, T data, TimeSpan freq, ulong length, ulong cycles)
         {
-            Wf = wf;
             Core = core;
             NativeWorkerThread = null;
             WorkerId = id;
