@@ -10,27 +10,27 @@ namespace Z0
     using static Part;
 
     [Event(Kind)]
-    public readonly struct EmittingFileEvent : IWfEvent<EmittingFileEvent>
+    public readonly struct StatusEvent<T> : IWfEvent<StatusEvent<T>,T>
     {
-        public const string EventName = GlobalEvents.EmittingFile;
+        public const string EventName = GlobalEvents.Status;
 
-        public const EventKind Kind = EventKind.EmittingFile;
+        public const EventKind Kind = EventKind.Status;
 
         public WfEventId EventId {get;}
 
-        public FS.FilePath Target {get;}
+        public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair => FlairKind.Running;
+        public FlairKind Flair => FlairKind.Status;
 
         [MethodImpl(Inline)]
-        public EmittingFileEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
+        public StatusEvent(WfStepId step, T data, CorrelationToken ct = default)
         {
             EventId = WfEventId.define(EventName, step);
-            Target = target;
+            Payload = data;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(EventId, Msg.EmittingFile.Capture(Target));
+            => text.format(EventId, Payload);
     }
 }

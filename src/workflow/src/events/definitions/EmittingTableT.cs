@@ -4,36 +4,38 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
+    using System;
 
     using static Part;
 
     [Event(Kind)]
-    public readonly struct ProcessingFileEvent<T> : IWfEvent<ProcessingFileEvent<T>>
+    public readonly struct EmittingTableEvent<T> : IWfEvent<EmittingTableEvent<T>>
     {
-        public const string EventName = GlobalEvents.ProcessingFile;
+        public const string EventName = GlobalEvents.EmittingTable;
 
-        public const EventKind Kind = EventKind.ProcessingFile;
+        public const EventKind Kind = EventKind.EmittingTable;
 
         public WfEventId EventId {get;}
 
-        public T FileKind {get;}
+        public TableId TableId => typeof(T);
 
-        public FS.FilePath SourcePath {get;}
+        public FS.FilePath Target {get;}
 
         public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
-        public ProcessingFileEvent(WfStepId step, T kind, FS.FilePath src, CorrelationToken ct)
+        public EmittingTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
         {
             EventId = WfEventId.define(EventName, step);
-            SourcePath = src;
-            FileKind = kind;
+            Target = target;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(EventId, SourcePath.ToUri());
+            => text.format(EventId, Msg.EmittingTable.Capture(TableId, Target));
+
+        public override string ToString()
+            => Format();
     }
 }

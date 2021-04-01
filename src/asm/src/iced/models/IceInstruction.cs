@@ -202,6 +202,8 @@ namespace Z0.Asm
         // Summary:
         //     Gets the mnemonic
         public IceMnemonic Mnemonic {get; set;}
+
+        public AsmMnemonic AsmMnemonic => Mnemonic.ToString().ToUpper();
         //
         // Summary:
         //     Gets the memory operand's base register or Iced.Intel.Register.None if none.

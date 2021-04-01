@@ -10,27 +10,30 @@ namespace Z0
     using static Part;
 
     [Event(Kind)]
-    public readonly struct ProcessedEvent<T> : IWfEvent<ProcessedEvent<T>,T>
+    public readonly struct TraceEvent<T> : IWfEvent<TraceEvent<T>,T>
     {
-        public const string EventName = GlobalEvents.Processed;
+        public const string EventName = GlobalEvents.Trace;
 
-        public const EventKind Kind = EventKind.Processed;
+        public const EventKind Kind = EventKind.Trace;
 
         public WfEventId EventId {get;}
 
+        public WfStepId StepId {get;}
+
         public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair => FlairKind.Processed;
+        public FlairKind Flair => FlairKind.Trace;
 
-        [MethodImpl (Inline)]
-        public ProcessedEvent(WfStepId step, T payload, CorrelationToken ct)
+        [MethodImpl(Inline)]
+        public TraceEvent(WfStepId step, T content, CorrelationToken ct)
         {
             EventId = WfEventId.define(EventName, step);
-            Payload = payload;
+            StepId = step;
+            Payload = content;
         }
 
-        [MethodImpl (Inline)]
+        [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(EventId, Payload);
+            => text.format(EventId, Payload);
     }
 }

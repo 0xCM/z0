@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Event(Kind)]
-    public readonly struct ProcessedFileEvent<T> : IWfEvent<ProcessedFileEvent<T>>
+    public readonly struct ProcessedFileEvent : IWfEvent<ProcessedFileEvent>
     {
         public const EventKind Kind = EventKind.ProcessedFile;
 
@@ -20,20 +20,17 @@ namespace Z0
 
         public FS.FilePath SourcePath {get;}
 
-        public T Data {get;}
-
         public FlairKind Flair => FlairKind.Processed;
 
         [MethodImpl(Inline)]
-        public ProcessedFileEvent(WfStepId step, FS.FilePath src, T data, CorrelationToken ct)
+        public ProcessedFileEvent(WfStepId step, FS.FilePath src, CorrelationToken ct)
         {
             EventId = (Kind, step, ct);
             SourcePath = src;
-            Data = data;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(RP.PSx3, EventId, Data, SourcePath.ToUri());
+            => text.format(RP.PSx2, EventId, SourcePath.ToUri());
     }
 }

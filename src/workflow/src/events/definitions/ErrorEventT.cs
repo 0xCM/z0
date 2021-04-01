@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     [Event(Kind)]
     public readonly struct ErrorEvent<T> : IWfEvent<ErrorEvent<T>,T>, IWfErrorEvent
@@ -70,6 +69,6 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format(RP.PSx3, EventId, Source, Summary);
+            => text.format(RP.PSx3, EventId, Source, Summary);
     }
 }

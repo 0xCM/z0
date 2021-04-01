@@ -30,9 +30,9 @@ namespace Z0
 
         IWfContext Context {get;}
 
-        IWfEventSink WfSink {get;}
+        IWfEventSink EventSink {get;}
 
-        IWfBroker Broker {get;}
+        IWfEventBroker EventBroker {get;}
 
         ICmdRouter Router {get;}
 
@@ -93,7 +93,7 @@ namespace Z0
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
         {
-            WfSink.Deposit(e);
+            EventSink.Deposit(e);
             return e.EventId;
         }
 

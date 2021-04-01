@@ -10,27 +10,30 @@ namespace Z0
     using static Part;
 
     [Event(Kind)]
-    public readonly struct ProcessingFileEvent : IWfEvent<ProcessingFileEvent>
+    public readonly struct ProcessedFileEvent<T> : IWfEvent<ProcessedFileEvent<T>>
     {
-        public const string EventName = GlobalEvents.ProcessingFile;
+        public const EventKind Kind = EventKind.ProcessedFile;
 
-        public const EventKind Kind = EventKind.ProcessingFile;
+        public const string EventName = GlobalEvents.ProcessedFile;
 
         public WfEventId EventId {get;}
 
         public FS.FilePath SourcePath {get;}
 
-        public FlairKind Flair => FlairKind.Running;
+        public T Data {get;}
+
+        public FlairKind Flair => FlairKind.Processed;
 
         [MethodImpl(Inline)]
-        public ProcessingFileEvent(WfStepId step, FS.FilePath src, CorrelationToken ct)
+        public ProcessedFileEvent(WfStepId step, FS.FilePath src, T data, CorrelationToken ct)
         {
-            EventId = WfEventId.define(EventName, step);
+            EventId = (Kind, step, ct);
             SourcePath = src;
+            Data = data;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(EventId, SourcePath.ToUri());
+            => text.format(RP.PSx3, EventId, Data, SourcePath.ToUri());
     }
 }

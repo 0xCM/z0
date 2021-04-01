@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System.Runtime.CompilerServices;
-    using System;
 
     using static Part;
 
     [Event(Kind)]
-    public readonly struct EmittedTableEvent<T> : IWfEvent<EmittedTableEvent<T>>
+    public readonly struct EmittedTableEvent : IWfEvent<EmittedTableEvent>
     {
         public const string EventName = GlobalEvents.EmittedTable;
 
@@ -18,7 +17,7 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public TableId TableId => typeof(T);
+        public TableId TableId {get;}
 
         public Count RowCount {get;}
 
@@ -27,24 +26,25 @@ namespace Z0
         public FlairKind Flair => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public EmittedTableEvent(WfStepId step, Count count, FS.FilePath target, CorrelationToken ct)
+        public EmittedTableEvent(WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)
         {
             EventId = WfEventId.define(EventName, step);
+            TableId = dataset;
             RowCount = count;
             Target = target;
         }
 
         [MethodImpl(Inline)]
-        public EmittedTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
+        public EmittedTableEvent(WfStepId step, TableId dataset, FS.FilePath target, CorrelationToken ct)
         {
             EventId = WfEventId.define(EventName, step);
+            TableId = dataset;
             RowCount = 0;
             Target = target;
         }
 
         public string Format()
-            => TextFormatter.format(EventId, Msg.EmittedTable.Capture(TableId, RowCount, Target));
-
+            => text.format(EventId, Msg.EmittedTable.Capture(TableId, RowCount, Target));
 
         public override string ToString()
             => Format();

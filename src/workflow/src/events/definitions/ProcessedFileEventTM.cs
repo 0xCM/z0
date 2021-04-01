@@ -37,6 +37,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(RP.PSx4, EventId, FileKind, Metric, SourcePath.ToUri());
+            => text.format(RP.PSx4, EventId, FileKind, Metric, SourcePath.ToUri());
     }
 }

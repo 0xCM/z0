@@ -68,10 +68,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static DataHandler<T> handler<T>(DataReceiver<T> receiver)
             => new DataHandler<T>(receiver);
-
-        [MethodImpl(Inline)]
-        public static DataBroker<K,C,T> broker<K,C,T>(IWfShell wf, int capacity, WfDelegates.Indexer<K> xf)
-            where K : unmanaged, Enum
-                => new DataBroker<K,C,T>(wf, capacity, xf);
     }
 }

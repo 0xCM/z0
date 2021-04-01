@@ -25,6 +25,6 @@ namespace Z0
 
         [Op]
         public static ErrorEvent<string> missing(CmdId cmd, EventOrigin source)
-            => new ErrorEvent<string>(cmd, string.Format(HandlerNotFound, cmd), source);
+            => new ErrorEvent<string>(cmd, string.Format(HandlerNotFound, cmd.GetType().Name), source);
     }
 }

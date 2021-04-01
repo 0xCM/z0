@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmOpCodeExpr : IComparable<AsmOpCodeExpr>
+    public readonly struct AsmOpCodeExpr : IComparable<AsmOpCodeExpr>, ITextual
     {
         readonly TextBlock _Data;
 

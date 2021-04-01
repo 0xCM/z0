@@ -28,6 +28,9 @@ namespace Z0
         public static AsmDataStore AsmDataStore(this IWfShell wf)
             => Services.AsmDataStore.create(wf);
 
+        public static AsmRowStore AsmRowStore(this IWfShell wf)
+            => Services.AsmRowStore.create(wf);
+
         [Op]
         public static ApiHostAsmEmitter AsmHostEmitter(this IWfShell wf, IAsmContext asm)
             => new ApiHostAsmEmitter(wf, asm);

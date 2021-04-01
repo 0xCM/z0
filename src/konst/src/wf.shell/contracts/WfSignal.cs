@@ -31,7 +31,7 @@ namespace Z0
         public WfEventId Raise<E>(in E e)
             where E : IWfEvent
         {
-            Wf.WfSink.Deposit(e);
+            Wf.EventSink.Deposit(e);
             return e.EventId;
         }
 

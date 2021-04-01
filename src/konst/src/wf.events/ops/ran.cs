@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct WfEvents
     {
-
         [MethodImpl(Inline)]
         public static RanEvent<T> ran<H,T>(H host, T data, CorrelationToken ct)
             where H : IWfHost<H>, new()

@@ -20,9 +20,9 @@ namespace Z0
 
         public IApiParts ApiParts {get;}
 
-        public IWfEventSink WfSink {get;}
+        public IWfEventSink EventSink {get;}
 
-        public IWfBroker Broker {get;}
+        public IWfEventBroker EventBroker {get;}
 
         public ICmdRouter Router {get;}
 
@@ -61,8 +61,8 @@ namespace Z0
             Context = config.Shell;
             Id = config.ControlId;
             Ct = root.correlate(config.ControlId);
-            WfSink = Loggers.events(config.LogConfig);
-            Broker = new WfBroker(WfSink, Ct);
+            EventSink = Loggers.events(config.LogConfig);
+            EventBroker = new WfBroker(EventSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             PolyStream = default;
             Verbosity = LogLevel.Status;
@@ -77,7 +77,7 @@ namespace Z0
             Services = new WfServices(this, Env, Api.PartComponents);
         }
 
-        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolySource random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
+        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfEventBroker broker, WfHost host, IPolySource random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
         {
             Tokens = TokenDispenser.acquire();
             Env = Z0.Env.create();
@@ -92,8 +92,8 @@ namespace Z0
             Controller = config.Control;
             AppName = config.Shell.AppName;
             Ct = ct;
-            WfSink = sink;
-            Broker = broker;
+            EventSink = sink;
+            EventBroker = broker;
             Host = host;
             PolyStream = random;
             Verbosity = verbosity;
@@ -128,8 +128,8 @@ namespace Z0
 
         public void Dispose()
         {
-            Broker.Dispose();
-            WfSink.Dispose();
+            EventBroker.Dispose();
+            EventSink.Dispose();
             Services.Dispose();
         }
 

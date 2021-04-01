@@ -207,7 +207,7 @@ namespace Z0.Asm
             dst.IP = src.IP;
             dst.GlobalOffset = src.GlobalOffset;
             dst.LocalOffset = src.LocalOffset;
-            dst.OpCode = asm.opcode(src.OpCode.Value);
+            dst.OpCode = src.OpCode;
             AsmSyntax.sig(src.Instruction, out dst.Sig);
             dst.Expression = asm.statement(src.Statement);
             dst.Encoded = src.Encoded;

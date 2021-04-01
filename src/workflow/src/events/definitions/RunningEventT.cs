@@ -47,6 +47,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Operation.IsEmpty ? TextFormatter.format(EventId, Payload) : TextFormatter.format(EventId, Operation, Payload);
+            => Operation.IsEmpty ? text.format(EventId, Payload) : text.format(EventId, Operation, Payload);
     }
 }

@@ -23,6 +23,7 @@
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(CmdExec)" />
 
     <ProjectReference Include="$(Dynamic)" />
 

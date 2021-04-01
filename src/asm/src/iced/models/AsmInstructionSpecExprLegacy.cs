@@ -14,14 +14,14 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmInstructionSpecExprLegacy : ITextual
     {
-        public AsmOpCodeExprLegacy OpCode {get;}
+        public AsmOpCodeExpr OpCode {get;}
 
-        public string Sig {get;}
+        public Name Sig {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionSpecExprLegacy(in AsmOpCodeExprLegacy opcode, string sig)
+        public AsmInstructionSpecExprLegacy(in string opcode, string sig)
         {
-            OpCode = opcode;
+            OpCode = asm.opcode(opcode);
             Sig = sig;
         }
 
@@ -30,7 +30,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(Sig, OpCode);
+            => text.format(Sig, OpCode);
 
         public override string ToString()
             => Format();

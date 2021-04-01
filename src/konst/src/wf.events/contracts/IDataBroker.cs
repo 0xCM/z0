@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWfDataBroker<K,T>
+    public interface IDataBroker<K,T>
         where K : unmanaged
     {
         ref readonly DataHandler<T> Get(K key);
@@ -14,7 +14,7 @@ namespace Z0
         ref DataHandler<T> this[K key] {get;}
     }
 
-    public interface IWfDataBroker<K,C,T>
+    public interface IDataBroker<K,C,T>
         where K : unmanaged
     {
         ref readonly DataHandler<C,T> Get(K key);

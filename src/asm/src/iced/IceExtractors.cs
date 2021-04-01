@@ -34,7 +34,7 @@ namespace Z0.Asm
         public static AsmInstructionSpecExprLegacy specifier(Iced.Instruction src)
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.cleanse(iceOpCode.ToOpCodeString()), iceOpCode.ToInstructionString());
+            return new AsmInstructionSpecExprLegacy(AsmOpCodes.conform(iceOpCode.ToOpCodeString()), iceOpCode.ToInstructionString());
         }
 
         [MethodImpl(Inline), Op]
@@ -239,7 +239,7 @@ namespace Z0.Asm
                 OpCode = src.OpCode,
                 OperandSize = src.OperandSize,
                 OpCount = src.OpCount,
-                OpCodeString = AsmOpCodeExprLegacy.conform(src.ToOpCodeString()),
+                OpCodeString = AsmOpCodes.conform(src.ToOpCodeString()),
                 InstructionString = src.ToInstructionString(),
                 Op0Kind = Deicer.Thaw(src.Op0Kind),
                 Op1Kind = Deicer.Thaw(src.Op1Kind),

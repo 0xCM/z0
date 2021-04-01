@@ -16,8 +16,10 @@ namespace Z0
             {
                 var api = Wf.ApiServices();
                 var images = Wf.ImageDataEmitter();
-                var asm = Wf.AsmDataStore();
+                var store = Wf.AsmDataStore();
                 var assets = Wf.ApiAssets();
+                var blocks = store.CodeBlocks();
+                var asmrows = Wf.AsmRowStore().EmitAsmRows(blocks);
 
                 if(options.CorrelateMembers)
                     api.Correlate();
@@ -79,14 +81,11 @@ namespace Z0
                 if(options.EmitImageContent)
                     images.EmitApiImageContent();
 
-                if(options.EmitAsmRows)
-                    asm.EmitAsmRows();
-
                 if(options.EmitAsmAnalysis)
-                    asm.EmitAnalyses();
+                    store.EmitAnalyses(blocks);
 
                 if(options.EmitResBytes)
-                    asm.EmitResBytes();
+                    store.EmitResBytes(blocks);
 
                 if(options.EmitStatements)
                     Wf.AsmStatementPipe().EmitStatements();

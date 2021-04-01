@@ -78,9 +78,9 @@ namespace Z0.Asm
 
         public Address16 LocalOffset;
 
-		public text<N16> Mnemonic;
+		public AsmMnemonic Mnemonic;
 
-		public AsmOpCodeExprLegacy OpCode;
+		public AsmOpCodeExpr OpCode;
 
         public string Instruction;
 
@@ -90,7 +90,7 @@ namespace Z0.Asm
 
 		public asci16 CpuId;
 
-        public IceOpCodeId OpCodeId;
+        public string OpCodeId;
 
         [MethodImpl(Inline)]
         public int CompareTo(AsmRow src)

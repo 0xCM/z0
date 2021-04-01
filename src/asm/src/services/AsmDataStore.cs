@@ -12,6 +12,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+
     public sealed class AsmDataStore : AsmWfService<AsmDataStore>
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
@@ -37,9 +38,16 @@ namespace Z0.Asm
             return _CodeBlocks;
         }
 
-        public void EmitAnalyses()
+        // public void EmitAnalyses()
+        // {
+        //     var routines = Wf.ApiIndexDecoder().Decode(CodeBlocks()).Routines;
+        //     EmitCallRows(routines);
+        //     EmitJmpRows(routines);
+        // }
+
+        public void EmitAnalyses(ApiCodeBlocks src)
         {
-            var routines = Wf.ApiIndexDecoder().Decode(CodeBlocks()).Routines;
+            var routines = Wf.ApiIndexDecoder().Decode(src).Routines;
             EmitCallRows(routines);
             EmitJmpRows(routines);
         }
@@ -140,9 +148,14 @@ namespace Z0.Asm
             return rows;
         }
 
-        public Index<ApiHostRes> EmitResBytes()
+        // public Index<ApiHostRes> EmitResBytes()
+        // {
+        //     return Wf.ResBytesEmitter().Emit(CodeBlocks());
+        // }
+
+        public Index<ApiHostRes> EmitResBytes(ApiCodeBlocks src)
         {
-            return Wf.ResBytesEmitter().Emit(CodeBlocks());
+            return Wf.ResBytesEmitter().Emit(src);
         }
 
         public Index<AsmJmpRow> EmitJumpRows(ApiPartRoutines src)
@@ -251,23 +264,22 @@ namespace Z0.Asm
 
         void FillAsmRow(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src, ref AsmRow record)
         {
-            var mnemonic = src.Mnemonic;
             record.Sequence = (uint)NextSequence;
             record.BlockAddress = code.BaseAddress;
             record.IP = src.IP;
             record.LocalOffset = offset;
             record.GlobalOffset = NextOffset;
-            record.Mnemonic = mnemonic.ToString().ToUpper();
-            record.OpCode = src.Specifier.OpCode;
+            record.Mnemonic = src.AsmMnemonic;
+            record.OpCode = asm.opcode(AsmOpCodes.conform(src.Specifier.OpCode.ToString()));
             record.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
             record.Statement = src.FormattedInstruction;
             record.Instruction = src.Specifier.Sig;
             record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
-            record.OpCodeId = (IceOpCodeId)src.Code;
-            if(Index.TryGetValue(mnemonic, out var builder))
+            record.OpCodeId = src.Code.ToString();
+            if(Index.TryGetValue(src.Mnemonic, out var builder))
                 builder.Include(record);
             else
-                Index.Add(mnemonic, ArrayBuilder.build(record));
+                Index.Add(src.Mnemonic, ArrayBuilder.build(record));
         }
 
         int NextSequence

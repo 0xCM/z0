@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public class WfBroker : IWfBroker
+    public class WfBroker : IWfEventBroker
     {
         readonly Dictionary<Type,ISink> Subscriptions;
 

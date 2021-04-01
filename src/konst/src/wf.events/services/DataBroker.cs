@@ -10,10 +10,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct DataBroker<K,C,T> : IWfDataBroker<K,C,T>
+    public readonly struct DataBroker<K,C,T> : IDataBroker<K,C,T>
         where K : unmanaged, Enum
     {
-        public IWfShell Wf {get;}
 
         readonly DataHandler<C,T>[] handlers;
 
@@ -26,9 +25,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DataBroker(IWfShell wf, int capacity, WfDelegates.Indexer<K> xf)
+        public DataBroker(int capacity, WfDelegates.Indexer<K> xf)
         {
-            Wf = wf;
             handlers = new DataHandler<C,T>[capacity];
             IndexFx = xf;
         }

@@ -20,15 +20,15 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source record</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeExprLegacy identity(in AsmOpCodeRowLegacy src)
-            => AsmOpCodeExprLegacy.create(src.OpCode);
+        public static AsmOpCodeExpr opcode(in AsmOpCodeRowLegacy src)
+            => asm.opcode(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        public static void identify(ReadOnlySpan<AsmOpCodeRowLegacy> src, Span<AsmOpCodeExprLegacy> dst)
+        public static void identify(ReadOnlySpan<AsmOpCodeRowLegacy> src, Span<AsmOpCodeExpr> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                dst[i] = identity(skip(src,i));
+                dst[i] = opcode(skip(src,i));
         }
 
         [Op]
@@ -38,7 +38,7 @@ namespace Z0.Asm
             var count = resource.RowCount;
             var records = sys.alloc<AsmOpCodeRowLegacy>(count);
             parse(resource, records);
-            var identifers = sys.alloc<AsmOpCodeExprLegacy>(count);
+            var identifers = sys.alloc<AsmOpCodeExpr>(count);
             identify(records, identifers);
             return new AsmOpCodeDatasetLegacy(records,identifers);
         }

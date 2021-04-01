@@ -16,6 +16,9 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmOpCodes
     {
+        public static string conform(string src)
+            => src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +");
+
         public static AsmOpCode create()
             => new AsmOpCode();
 
