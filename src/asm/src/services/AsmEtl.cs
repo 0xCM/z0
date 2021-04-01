@@ -32,15 +32,17 @@ namespace Z0.Asm
                 where i.Mnemonic == mnemonic
                 select a;
 
-        [MethodImpl(Inline), Op]
-        public Index<AsmRow> Resequence(Index<AsmRow> src)
-        {
-            var count = src.Length;
-            ref var row = ref src.First;
-            for(var i=0u; i<count;i++)
-                seek(row,i).Sequence = i;
-            return src;
-        }
+        /// <summary>
+        /// Filters a set of instructions predicated on s specified mnemonic
+        /// </summary>
+        /// <param name="src">The data sourde</param>
+        /// <param name="mnemonic">The mnemonic of interest</param>
+        [Op]
+        static Index<ApiInstruction> filter(Index<ApiInstruction> src, AsmMnemonic mnemonic)
+            => from a in src.Storage
+                let i = a.Instruction
+                where i.AsmMnemonic == mnemonic
+                select a;
 
         [Op]
         public Index<AsmCallRow> Calls(Index<ApiInstruction> src)
@@ -66,49 +68,7 @@ namespace Z0.Asm
             return buffer;
         }
 
-        [Op]
-        public ApiInstructionLookup CreateLookup(ApiInstruction[] src, out ApiInstructionDuplication stats)
-        {
-            var count = (uint)src.Length;
-            var lookup = new ApiInstructionLookup((int)count);
-            var success = 0u;
-            var fail = 0u;
-            var source = sys.span(src);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var located = ref skip(source,i);
-                if(lookup.TryAdd(located.IP, located))
-                    success++;
-                else
-                    fail++;
-            }
-
-            stats = new ApiInstructionDuplication(success, fail);
-            return lookup;
-        }
-
         public uint Emit(AsmRowSet<IceMnemonic> src)
-        {
-            var count = src.Count;
-            if(count != 0)
-            {
-                var dst = Db.Table(AsmRow.TableId, src.Key.ToString());
-                var flow = Wf.EmittingTable<AsmRow>(dst);
-                var records = span(src.Sequenced);
-                var formatter = Tables.formatter<AsmRow>(32);
-                using var writer = dst.Writer();
-                writer.WriteLine(formatter.FormatHeader());
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var record = ref skip(records,i);
-                    writer.WriteLine(formatter.Format(record));
-                }
-                Wf.EmittedTable(flow, count);
-            }
-            return count;
-        }
-
-        public uint Emit(AsmRowSet<AsmMnemonic> src)
         {
             var count = src.Count;
             if(count != 0)

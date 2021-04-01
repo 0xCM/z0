@@ -4,18 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using static Part;
-
-    public class UriIndex<T> : Dictionary<OpUri,T>
-    {
-        public bool Include(OpUri key, T value)
-            => TryAdd(key, value);
-    }
-
     public sealed class ApiAsmDataset
     {
         public ApiCodeBlocks Blocks {get;}

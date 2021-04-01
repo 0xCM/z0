@@ -14,6 +14,18 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct ApiInstruction
     {
+        /// <summary>
+        /// Filters a set of instructions predicated on s specified mnemonic
+        /// </summary>
+        /// <param name="src">The data sourde</param>
+        /// <param name="mnemonic">The mnemonic of interest</param>
+        [Op]
+        public static Index<ApiInstruction> filter(Index<ApiInstruction> src, AsmMnemonicCode mnemonic)
+            => from a in src.Storage
+                let i = a.Instruction
+                where i.AsmMnemonic == mnemonic.ToString()
+                select a;
+
         public MemoryAddress BaseAddress {get;}
 
         public ApiCodeBlock Encoded {get;}

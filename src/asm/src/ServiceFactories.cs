@@ -86,9 +86,6 @@ namespace Z0
         public static IApiIndexDecoder ApiIndexDecoder(this IWfShell wf)
             => Services.ApiIndexDecoder.create(wf);
 
-       public static AsmRowProcessor AsmRowProcessor(this IWfShell wf)
-            => Services.AsmRowProcessor.create(wf);
-
         public static AsmDistiller AsmDistiller(this IWfShell wf)
             => Z0.Asm.AsmDistiller.create(wf);
 

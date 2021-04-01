@@ -22,7 +22,6 @@ namespace Z0.Asm
             return layout;
         }
 
-
         public static void render(in AsmLayout src, ITextBuffer dst)
         {
 

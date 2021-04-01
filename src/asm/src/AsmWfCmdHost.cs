@@ -17,18 +17,18 @@ namespace Z0.Asm
 
         AsmCatalogEtl Catalog;
 
-        Lazy<AsmDataStore> _DataEmitter;
+        Lazy<AsmDataStore> _AsmData;
 
-        AsmDataStore DataEmitter
+        AsmDataStore AsmData
         {
-            get => _DataEmitter.Value;
+            get => _AsmData.Value;
         }
 
         protected override void OnInit()
         {
             Catalog = Wf.AsmCatalogEtl();
             ApiServices = Wf.ApiServices();
-            _DataEmitter = root.lazy(Wf.AsmDataStore);
+            _AsmData = root.lazy(Wf.AsmDataStore);
         }
 
         [Action(K.EmitResBytes)]
@@ -71,7 +71,7 @@ namespace Z0.Asm
 
         [Action(K.EmitAsmRows)]
         void EmitAsmRows()
-            => DataEmitter.EmitAsmRows();
+            => Wf.AsmRowStore().EmitAsmRows(AsmData.CodeBlocks());
 
         [Action(K.CheckDigitParser)]
         void CheckDigitParser()

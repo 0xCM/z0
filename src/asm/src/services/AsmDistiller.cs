@@ -17,7 +17,7 @@ namespace Z0.Asm
     {
         uint MaxLineCount;
 
-        AsmRowProcessor RowProcessor;
+        AsmRowStore RowStore;
 
         Index<AsmRow> Rows;
 
@@ -54,10 +54,10 @@ namespace Z0.Asm
             var flow = Wf.Running();
             Db.ClearTables<Target>();
 
-            RowProcessor = Wf.AsmRowProcessor();
+            RowStore = Wf.AsmRowStore();
             CurrentRow = 0;
             Blocks = src;
-            Rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
+            Rows = RowStore.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
             LastRow = Rows.Count - 1;
             CurrentBlock = Rows[CurrentRow].BlockAddress;
 
