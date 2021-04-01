@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Generated   :  2021-03-31.15.21.10.9587
+// Generated   :  2021-03-31.15.58.57.8073
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -8,6 +8,8 @@ namespace Z0.Asm
     public interface ITypedInstruction
     {
         AsmMnemonicCode Mnemonic {get;}
+
+        AsmHexCode Encoded {get;}
     }
 
     public interface ITypedInstruction<T> : ITypedInstruction

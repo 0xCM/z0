@@ -10,27 +10,37 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using api = AsmBytes;
-
-    public struct AsmInstruction<T> : IAsmInstruction<AsmInstruction<T>,T>
-        where T : unmanaged
+    public readonly struct AsmInstruction<T> : IAsmInstruction<T>
+        where T : unmanaged, ITypedInstruction<T>
     {
-        public T Encoded {get; set;}
+        public T Instruction {get;}
 
         [MethodImpl(Inline)]
         public AsmInstruction(T encoded)
-            => Encoded = encoded;
+            => Instruction = encoded;
+
+        public AsmHexCode Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Instruction.Encoded;
+        }
 
         public ReadOnlySpan<byte> Data
         {
             [MethodImpl(Inline)]
-            get => bytes(Encoded);
+            get => bytes(Instruction);
         }
 
         public ReadOnlySpan<AsmByte> Bytes
         {
             [MethodImpl(Inline)]
             get => recover<AsmByte>(Data);
+        }
+
+        public AsmMnemonicCode Mnemonic
+        {
+            [MethodImpl(Inline)]
+            get => Instruction.Mnemonic;
         }
 
         public uint4 Size
@@ -42,8 +52,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator AsmInstruction<T>(T src)
             => new AsmInstruction<T>(src);
-
-        public static implicit operator AsmInstruction(AsmInstruction<T> src)
-            => api.untype(src);
     }
 }

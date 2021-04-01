@@ -13,9 +13,9 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline)]
-        public static AsmInstruction generalize<T>(T src)
+        public static AsmInstruction<T> generalize<T>(T src)
             where T : unmanaged, ITypedInstruction<T>
-                => new AsmInstruction(AsmBytes.hexcode(src));
+                => new AsmInstruction<T>(src);
 
         /// <summary>
         /// Creates an immediate operand

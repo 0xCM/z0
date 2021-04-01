@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct PartName : ITextual
+    public readonly struct PartName : ILexical<PartName>
     {
         [MethodImpl(Inline)]
         public static PartName from(Assembly src)

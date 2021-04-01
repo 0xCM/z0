@@ -39,11 +39,6 @@ namespace Z0.Asm
                 => first(recover<T>(hexbytes(src)));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static AsmInstruction untype<T>(AsmInstruction<T> src)
-            where T : unmanaged
-                => new AsmInstruction(hexcode(src.Data));
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static AsmHexCode hexcode<T>(T src)
             where T : unmanaged
                 => hexcode(bytes(src));

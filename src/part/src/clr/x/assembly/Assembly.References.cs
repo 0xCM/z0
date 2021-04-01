@@ -19,5 +19,9 @@ namespace Z0
         [Op]
         public static Assembly[] References(this Assembly src)
             => src.ReferenceNames().Select(a => Assembly.Load(a));
+
+        [MethodImpl(Inline), Op]
+        public static AssemblyName[] PartReferenceNames(this Assembly src)
+            => src.ReferenceNames().Where(n => n.IsPart());
     }
 }

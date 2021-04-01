@@ -31,4 +31,6 @@ public readonly partial struct EnvVarNames
     public const string DefaultSymbolCache = "DefaultSymbolCache";
 
     public const string CdbLogPath = "_NT_DEBUG_LOG_FILE_APPEND";
+
+    public const string Libs = "ZLibs";
 }

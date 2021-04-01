@@ -6,12 +6,12 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-
-    using api = AsmBytes;
+    using static memory;
 
     public interface IAsmInstruction
     {
+        AsmMnemonicCode Mnemonic {get;}
+
         AsmHexCode Encoded {get;}
 
         ReadOnlySpan<byte> Data {get;}
@@ -21,20 +21,21 @@ namespace Z0.Asm
         uint4 Size {get;}
     }
 
-
     public interface IAsmInstruction<T> : IAsmInstruction
-        where T : unmanaged
+        where T : unmanaged, ITypedInstruction<T>
     {
-        new T Encoded {get;}
+        T Instruction {get;}
 
         AsmHexCode IAsmInstruction.Encoded
-            => api.hexcode(Encoded);
-    }
+            => Instruction.Encoded;
 
-    public interface IAsmInstruction<H,T> : IAsmInstruction<T>
-        where H : unmanaged, IAsmInstruction<H,T>
-        where T : unmanaged
-    {
+        ReadOnlySpan<byte> IAsmInstruction.Data
+            => bytes(Instruction);
 
+        ReadOnlySpan<AsmByte> IAsmInstruction.Bytes
+            => recover<AsmByte>(Data);
+
+        AsmMnemonicCode IAsmInstruction.Mnemonic
+            => Instruction.Mnemonic;
     }
 }

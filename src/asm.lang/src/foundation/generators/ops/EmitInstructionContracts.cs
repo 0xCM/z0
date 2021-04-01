@@ -31,6 +31,8 @@ namespace Z0.Asm
     public interface {TargetName}
     {
         AsmMnemonicCode Mnemonic {get;}
+
+        AsmHexCode Encoded {get;}
     }
 
     public interface {TargetName}<T> : {TargetName}

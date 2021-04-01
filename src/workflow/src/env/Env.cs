@@ -34,6 +34,7 @@ namespace Z0
             dst.DefaultSymbolCache = dir(N.DefaultSymbolCache);
             dst.SymCacheRoot = dir(N.SymCacheRoot);
             dst.CacheRoot = dir(N.CacheRoot);
+            dst.Libs = dir(N.Libs);
         }
 
         public EnvDirVar ZDev;
@@ -63,6 +64,8 @@ namespace Z0
         public EnvDirVar DefaultSymbolCache;
 
         public EnvDirVar CacheRoot;
+
+        public EnvDirVar Libs;
 
         public string Format()
         {

@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tooling
 {
-    using System;
-
-    public interface IMemoryRange<F> : IEquatable<F>, IComparable<F>, ITextual
-        where F : unmanaged, IMemoryRange<F>
+    partial struct DotNet
     {
-
+        public readonly struct TargetFrameworks
+        {
+            public const string NetCoreApp31 = "netcoreapp3.1";
+        }
     }
 }

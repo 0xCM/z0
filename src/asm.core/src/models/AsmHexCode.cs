@@ -37,6 +37,10 @@ namespace Z0.Asm
             => ref first(Bytes);
 
         [MethodImpl(Inline)]
+        public byte ToUInt8()
+            => (byte)Data.Lo;
+
+        [MethodImpl(Inline)]
         public ushort ToUInt16()
             => (ushort)Data.Lo;
 

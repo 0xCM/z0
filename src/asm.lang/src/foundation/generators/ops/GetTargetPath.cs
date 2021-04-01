@@ -11,9 +11,7 @@ namespace Z0.Asm
         FS.FilePath GetTargetPath(AsmGenTarget kind)
             => Db.SourceFile(PartId.AsmLangG, FS.file(TargetIdentifier(kind).Format(), FS.Cs));
 
-
         FS.FilePath GetTargetPath(AsmGenTarget kind, FS.FolderPath dst)
             => dst + FS.file(TargetIdentifier(kind).Format(), FS.Cs);
-
     }
 }
