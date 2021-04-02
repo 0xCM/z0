@@ -2,17 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial class WfShell
+    partial struct asm
     {
         [MethodImpl(Inline), Op]
-        internal static IWfShell clone(IWfShell src, WfHost host, IPolySource random, LogLevel verbosity)
-            => new WfShell(src.Init, src.Ct, src.EventSink, src.EventBroker, host, random, verbosity, src.Router, src.Services);
+        public static AsmDisplacement dispacement(ulong value, AsmDisplacementSize size)
+            => new AsmDisplacement(value, (AsmDisplacementSize)size);
     }
 }

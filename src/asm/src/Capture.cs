@@ -47,7 +47,7 @@ namespace Z0
         [Op]
         public static Index<AsmMemberRoutine> run(string[] args)
         {
-            using var wf = configure(WfShell.create(args));
+            using var wf = WfShell.create(args);
             using var runner = wf.CaptureRunner();
 
             if(args.Length != 0)
@@ -63,16 +63,5 @@ namespace Z0
         [Op]
         public static CaptureExchange exchange(IAsmContext context)
             => new CaptureExchange(new byte[context.DefaultBufferLength]);
-
-        static IWfShell describe(IWfShell wf)
-        {
-            root.iter(wf.Settings, s => wf.Status(string.Format("{0}:{1}", s.Name, s.Value )));
-            return wf;
-        }
-
-        static IWfShell configure(IWfShell wf)
-            => describe(wf.WithRandom(Rng.@default())
-                 .WithHost(WfShell.host(typeof(ApiCaptureRunner)))
-                 .WithVerbosity(LogLevel.Babble));
     }
 }

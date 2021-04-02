@@ -13,9 +13,8 @@ namespace Z0.Asm
 
     partial struct RegConversionData
     {
-
         [FixedAddressValueType]
-        internal static Index<R> Kinds = new R[]{
+        internal static Index<RegKind> Kinds = new RegKind[]{
             0,
             AL, // 1,
             CL, // 2,

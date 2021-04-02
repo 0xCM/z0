@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec)
             where T : unmanaged
-                => Fsm.machine(identify(spec), wf, spec.StartState, spec.EndState, transition(wf.PolyStream, spec), spec.ReceiptLimit);
+                => Fsm.machine(identify(spec), wf, spec.StartState, spec.EndState, transition(wf.Polysource, spec), spec.ReceiptLimit);
 
         /// <summary>
         /// Executes one or more primal state machines

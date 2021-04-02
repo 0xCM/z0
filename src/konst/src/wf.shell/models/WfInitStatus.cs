@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct WfInitStatus
+
+    public struct WfInitStatus : IRecord<WfInitStatus>
     {
         public Timestamp StartTS;
 

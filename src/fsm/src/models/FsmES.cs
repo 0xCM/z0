@@ -100,7 +100,7 @@ namespace Z0
             Id = id;
             Wf = wf;
             CurrentState = ground;
-            Random = Wf.PolyStream;
+            Random = Wf.Polysource;
             EndState = end;
             Error = root.none<Exception>();
             Transition = transition;

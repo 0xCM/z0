@@ -10,22 +10,24 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct HashCode<S,T>
+    public struct PerfectHash<T>
     {
-        public S Input {get;}
+        public T Subject {get;}
 
-        public T Output {get;}
+        public uint Hash {get;}
+
+        public uint Index {get;}
 
         [MethodImpl(Inline)]
-        public HashCode(S input, T output)
+        public PerfectHash(T src, uint hash, uint index)
         {
-            Input = input;
-            Output = output;
+            Subject = src;
+            Hash = hash;
+            Index = index;
         }
     }
 
     public readonly struct HashedIndex<T>
-        where T : ITextual
     {
         readonly Index<T> _Data;
 
@@ -49,14 +51,33 @@ namespace Z0
             }
         }
 
+        [MethodImpl(Inline)]
+        public ref readonly HashCode<T> Code(uint index)
+            => ref _Codes[index];
+
+        [MethodImpl(Inline)]
+        public ref readonly T Item(uint index)
+            => ref _Data[index];
+
+        [MethodImpl(Inline)]
+        public uint? Index(in T src)
+        {
+            var h = HashFunction(src);
+            if(h < _Codes.Length)
+                return h % _Data.Count;
+            else
+                return null;
+        }
+
+        [MethodImpl(Inline)]
+        public bool Contains(in T src)
+            => HashFunction(src) < _Codes.Length;
+
         public ReadOnlySpan<HashCode<T>> Codes
         {
             [MethodImpl(Inline)]
             get => _Codes.View;
         }
-
-        public bool Contains(in T src)
-            => HashFunction(src) < _Codes.Length;
     }
 
     public readonly struct HashCode<S> : ITextual
@@ -129,6 +150,26 @@ namespace Z0
         public static HashedIndex<T> perfect<T>(Span<T> src)
             where T : ITextual
                 => perfect(src.ReadOnly());
+
+        public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src, Func<T,string> rep)
+        {
+            var count = src.Length;
+            var buffer = alloc<HashCode<T>>(count);
+            ref var dst = ref first(buffer);
+            var accumulator = root.hashset<uint>();
+            var algorithm = strings();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var input = ref skip(src,i);
+                var computed = algorithm.Compute(rep(input));
+                seek(dst,i) = (input,computed);
+                accumulator.Add(computed);
+            }
+            var collisions = count - (uint)accumulator.Count;
+            if(collisions != 0)
+                root.@throw("Imperfect");
+            return new HashedIndex<T>(buffer, t => algorithm.Compute(rep(t)));
+        }
     }
 
     public delegate T HashFunction<T>(ReadOnlySpan<byte> src)

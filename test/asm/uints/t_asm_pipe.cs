@@ -37,7 +37,7 @@ namespace Z0.Asm
 
         void write(IEnumerable<ApiCodeBlock> src, StreamWriter dst)
         {
-            root.iter(src, block => dst.WriteLine(string.Format(LinePattern,  string.Format(NamePattern, block.Uri.Host, block.OpId), block.Address, block.Code)));
+            root.iter(src, block => dst.WriteLine(string.Format(LinePattern,  string.Format(NamePattern, block.Uri.Host, block.OpId), block.BaseAddress, block.Code)));
 
         }
 

@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an operand that specifies a 64-bit gp register
         /// </summary>
-        public struct r64 : IRegister<r64,W,T>, IRegOp64<T>
+        public struct r64 : IReg<r64,W,T>, IRegOp64<T>
         {
             public T Content {get;}
 
@@ -39,7 +39,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct R64<R> : IRegister<R64<R>,W64,ulong>, IRegOp64<ulong>
+        public struct R64<R> : IReg<R64<R>,W64,ulong>, IRegOp64<ulong>
             where R : unmanaged, IRegOp64
         {
             public ulong Content {get;}
@@ -71,7 +71,7 @@ namespace Z0.Asm
         /// <remarks>
         /// | 000  | rax    | eax    | ax     | al    |
         /// </remarks>
-        public struct rax : IRegister<rax,W,T>, IRegOp64<T>
+        public struct rax : IReg<rax,W,T>, IRegOp64<T>
         {
             public T Content {get;}
 
@@ -107,7 +107,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register C Extended: 0001  [rcx    | ecx    | cx     | cl    ]
         /// </summary>
-        public struct rcx : IRegister<rcx,W,T>, IRegOp64<T>
+        public struct rcx : IReg<rcx,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -155,7 +155,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register D Extended: | 0010  | rdx    | edx    | dx     | dl    |
         /// </summary>
-        public struct rdx : IRegister<rdx,W,T>, IRegOp64<T>
+        public struct rdx : IReg<rdx,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -179,7 +179,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register B Extended
         /// </summary>
-        public struct rbx : IRegister<rbx,W,T>, IRegOp64<T>
+        public struct rbx : IReg<rbx,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -203,7 +203,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register Source Index: Specifies the source for data copies
         /// </summary>
-        public struct rsi : IRegister<rsi,W,T>, IRegOp64<T>
+        public struct rsi : IReg<rsi,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -228,7 +228,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register Destination Index: Specifies the target for data copies
         /// </summary>
-        public struct rdi : IRegister<rdi,W,T>, IRegOp64<T>
+        public struct rdi : IReg<rdi,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -258,7 +258,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register Stack Pointer: Specifies the current location in stack and grows downwards
         /// </summary>
-        public struct rsp : IRegister<rsp,W,T>, IRegOp64<T>
+        public struct rsp : IReg<rsp,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -282,7 +282,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register Base Pointer: Specifies the top of the stack
         /// </summary>
-        public struct rbp : IRegister<rbp,W,T>, IRegOp64<T>
+        public struct rbp : IReg<rbp,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -303,7 +303,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r8q : IRegister<r8q,W,T>, IRegOp64<T>
+        public struct r8q : IReg<r8q,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -324,7 +324,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r9q : IRegister<r9q,W,T>, IRegOp64<T>
+        public struct r9q : IReg<r9q,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -346,7 +346,7 @@ namespace Z0.Asm
 
         }
 
-        public struct r10q : IRegister<r10q,W,T>, IRegOp64<T>
+        public struct r10q : IReg<r10q,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -368,7 +368,7 @@ namespace Z0.Asm
 
         }
 
-        public struct r11q : IRegister<r11q,W,T>, IRegOp64<T>
+        public struct r11q : IReg<r11q,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -389,7 +389,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r12q : IRegister<r12q,W,T>, IRegOp64<T>
+        public struct r12q : IReg<r12q,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -411,7 +411,7 @@ namespace Z0.Asm
 
         }
 
-        public struct r13q : IRegister<r13q,W,T>, IRegOp64<T>
+        public struct r13q : IReg<r13q,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -432,7 +432,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r14q : IRegister<r14q,W,T>, IRegOp64<T>
+        public struct r14q : IReg<r14q,W,T>, IRegOp64<T>
         {
             public T Data;
 
@@ -453,7 +453,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r15q : IRegister<r15q,W,T>, IRegOp64<T>
+        public struct r15q : IReg<r15q,W,T>, IRegOp64<T>
         {
             public T Content {get;}
 

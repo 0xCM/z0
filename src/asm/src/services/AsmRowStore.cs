@@ -113,61 +113,19 @@ namespace Z0.Asm
             return true;
         }
 
-        // public Index<AsmRow> StoreAsmRows(Index<ApiCodeBlock> src)
-        // {
-        //     var count = src.Count;
-        //     var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(src.Count));
-        //     ref readonly var block = ref src.First;
-        //     var buffer = root.list<AsmRow>();
-        //     for(var i=0u; i<count; i++)
-        //         buffer.AddRange(CreateAsmRows(skip(block,i)));
-        //     Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(buffer.Count));
-        //     return buffer.ToArray();
-        // }
-
-        public Index<AsmRow> StoreAsmRows(ApiCodeBlocks src)
+        public Index<AsmRow> EmitAsmRows(ApiCodeBlocks src)
         {
             var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(src.BlockCount));
             var addresses = src.Addresses.View;
             var count = addresses.Length;
             var rows = root.list<AsmRow>();
             for(var i=0u; i<count; i++)
-                rows.AddRange(CreateAsmRows(src[skip(addresses, i)]));
+                rows.AddRange(BuildAsmRows(src[skip(addresses, i)]));
             Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
             return rows.ToArray();
         }
 
-        // public AsmRowSets<AsmMnemonic> StoreRowsets(ApiCodeBlocks src)
-        // {
-        //     using var flow = Wf.Running();
-        //     var rows = StoreAsmRows(src);
-        //     var rowsets = CreateRowsets();
-        //     Wf.Ran(flow);
-        //     return rowsets;
-        // }
-
-        // public uint StoreRows(AsmRowSet<AsmMnemonic> src)
-        // {
-        //     var count = src.Count;
-        //     if(count != 0)
-        //     {
-        //         var dst = Db.Table(AsmRow.TableId, src.Key.ToString());
-        //         var flow = Wf.EmittingTable<AsmRow>(dst);
-        //         var records = span(src.Sequenced);
-        //         var formatter = Tables.formatter<AsmRow>(32);
-        //         using var writer = dst.Writer();
-        //         writer.WriteLine(formatter.FormatHeader());
-        //         for(var i=0; i<count; i++)
-        //         {
-        //             ref readonly var record = ref skip(records,i);
-        //             writer.WriteLine(formatter.Format(record));
-        //         }
-        //         Wf.EmittedTable(flow, count);
-        //     }
-        //     return count;
-        // }
-
-        public Index<AsmCallRow> StoreCallRows(ApiPartRoutines src)
+        public Index<AsmCallRow> EmitCallRows(ApiPartRoutines src)
         {
             var dst = Db.Table(AsmCallRow.TableId, src.Part);
             var flow = Wf.EmittingTable<AsmCallRow>(dst);
@@ -208,27 +166,34 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public Index<AsmCallRow> StoreCallRows(Index<ApiPartRoutines> routines)
+        public void EmitAnalyses(ApiCodeBlocks src)
+        {
+            var routines = Wf.ApiIndexDecoder().Decode(src).Routines;
+            EmitCallRows(routines);
+            EmitJmpRows(routines);
+        }
+
+        public Index<AsmCallRow> EmitCallRows(Index<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmCallRow>();
             var count = routines.Length;
             for(var i=0; i<count; i++)
-                dst.AddRange(StoreCallRows(routines[i]));
+                dst.AddRange(EmitCallRows(routines[i]));
             var rows = dst.ToArray();
             return rows;
         }
 
-        public Index<AsmJmpRow> StoreJmpRows(Index<ApiPartRoutines> routines)
+        public Index<AsmJmpRow> EmitJmpRows(Index<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmJmpRow>();
             var count = routines.Length;
             for(var i=0; i<count; i++)
-                dst.AddRange(StoreJmpRows(routines[i]));
+                dst.AddRange(EmitJmpRows(routines[i]));
             var rows = dst.ToArray();
             return rows;
         }
 
-        public Index<AsmJmpRow> StoreJmpRows(ApiPartRoutines src)
+        public Index<AsmJmpRow> EmitJmpRows(ApiPartRoutines src)
         {
             var collector = Wf.AsmJmpCollector();
             var rows = collector.Collect(src);
@@ -289,24 +254,11 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
-        // AsmRowSets<AsmMnemonic> CreateRowsets()
-        // {
-        //     var keys = Index.Keys.ToArray();
-        //     var count = keys.Length;
-        //     var sets = new AsmRowSet<AsmMnemonic>[count];
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         var key = keys[i];
-        //         sets[i] = AsmEtl.rowset(key, Index[key].Emit());
-        //     }
-        //     return AsmEtl.rowsets(sets);
-        // }
-
-        Index<AsmRow> CreateAsmRows(in ApiCodeBlock src)
+        Index<AsmRow> BuildAsmRows(in ApiCodeBlock src)
         {
             var decoded = Asm.RoutineDecoder.Decode(src);
             if(decoded)
-                return CreateAsmRows(src.Code, decoded.Value);
+                return BuildAsmRows(src.Code, decoded.Value);
             else
             {
                 Wf.Error($"Error decoding {src.OpUri}");
@@ -314,7 +266,7 @@ namespace Z0.Asm
             }
         }
 
-        Index<AsmRow> CreateAsmRows(in CodeBlock code, IceInstruction[] src)
+        Index<AsmRow> BuildAsmRows(in CodeBlock code, IceInstruction[] src)
         {
             var bytes = span(code.Storage);
             var offset = z16;

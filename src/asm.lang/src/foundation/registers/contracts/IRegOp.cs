@@ -15,7 +15,6 @@ namespace Z0.Asm
     public interface IRegOp : IAsmOp, ITextual
     {
         RegKind RegKind => default;
-
     }
 
     [Free]
@@ -30,92 +29,5 @@ namespace Z0.Asm
 
         string ITextual.Format()
             => api.format(this);
-
-    }
-
-    [Free]
-    public interface IRegOp8 : IRegOp
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp8<T> : IRegOp8, IRegOp<T>
-        where T : unmanaged
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp16 : IRegOp
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp16<T> : IRegOp16, IRegOp<T>
-        where T : unmanaged
-    {
-    }
-
-    [Free]
-    public interface IRegOp32 : IRegOp
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp32<T> : IRegOp32, IRegOp<T>
-        where T : unmanaged
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp64 : IRegOp
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp64<T> : IRegOp64, IRegOp<T>
-        where T : unmanaged
-    {
-    }
-
-    [Free]
-    public interface IRegOp128 : IRegOp
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp128<T> : IRegOp128, IRegOp<T>
-        where T : unmanaged
-    {
-    }
-
-    [Free]
-    public interface IRegOp256 : IRegOp
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp256<T> : IRegOp256, IRegOp<T>
-        where T : unmanaged
-    {
-    }
-
-    [Free]
-    public interface IRegOp512 : IRegOp
-    {
-
-    }
-
-    [Free]
-    public interface IRegOp512<T> : IRegOp512, IRegOp<T>
-        where T : unmanaged
-    {
     }
 }

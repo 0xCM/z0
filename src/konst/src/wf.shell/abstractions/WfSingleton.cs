@@ -10,8 +10,8 @@ namespace Z0
     using static Part;
 
     [WfService]
-    public abstract class WfSingleton<H,C,S> : IWfService<H,C>
-        where H : WfSingleton<H,C,S>, new()
+    public abstract class WfSingleton<H,S> : IWfService<H>
+        where H : WfSingleton<H,S>, new()
     {
         static H Service;
 

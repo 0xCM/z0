@@ -15,7 +15,7 @@ namespace Z0.Asm
 
     partial struct AsmRegs
     {
-        public struct xmm : IRegister<xmm,W,T>, IRegOp128<T>
+        public struct xmm : IReg<xmm,W,T>, IRegOp128<T>
         {
             public T Content {get;}
 
@@ -36,7 +36,7 @@ namespace Z0.Asm
 
         }
 
-        public struct Xmm<R> : IRegister<Xmm<R>,W128,Cell128>, IRegOp128<Cell128>
+        public struct Xmm<R> : IReg<Xmm<R>,W128,Cell128>, IRegOp128<Cell128>
             where R : unmanaged, IRegister
         {
             public Cell128 Content {get;}
@@ -53,7 +53,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm0 : IRegister<xmm0,W,T>, IRegOp128<T>
+        public struct xmm0 : IReg<xmm0,W,T>, IRegOp128<T>
         {
             public const byte Index = 0;
 
@@ -76,7 +76,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm1 : IRegister<xmm1,W,T>, IRegOp128<T>
+        public struct xmm1 : IReg<xmm1,W,T>, IRegOp128<T>
         {
             public const byte Index = 1;
 
@@ -99,7 +99,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm2 : IRegister<xmm2,W,T>, IRegOp128<T>
+        public struct xmm2 : IReg<xmm2,W,T>, IRegOp128<T>
         {
             public const byte Index = 2;
 
@@ -122,7 +122,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm3 : IRegister<xmm3,W,T>, IRegOp128<T>
+        public struct xmm3 : IReg<xmm3,W,T>, IRegOp128<T>
         {
             public const byte Index = 3;
 
@@ -145,7 +145,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm4 : IRegister<xmm4,W,T>, IRegOp128<T>
+        public struct xmm4 : IReg<xmm4,W,T>, IRegOp128<T>
         {
             public const byte Index = 4;
 
@@ -168,7 +168,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm5 : IRegister<xmm5,W,T>, IRegOp128<T>
+        public struct xmm5 : IReg<xmm5,W,T>, IRegOp128<T>
         {
             public const byte Index = 5;
 
@@ -191,7 +191,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm6 : IRegister<xmm6,W,T>, IRegOp128<T>
+        public struct xmm6 : IReg<xmm6,W,T>, IRegOp128<T>
         {
             public const byte Index = 6;
 
@@ -214,7 +214,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm7 : IRegister<xmm7,W,T>, IRegOp128<T>
+        public struct xmm7 : IReg<xmm7,W,T>, IRegOp128<T>
         {
             public const byte Index = 7;
 
@@ -237,7 +237,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm8 : IRegister<xmm8,W,T>, IRegOp128<T>
+        public struct xmm8 : IReg<xmm8,W,T>, IRegOp128<T>
         {
             public const byte Index = 8;
 
@@ -261,7 +261,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm9 : IRegister<xmm9,W,T>, IRegOp128<T>
+        public struct xmm9 : IReg<xmm9,W,T>, IRegOp128<T>
         {
             public const byte Index = 9;
 
@@ -284,7 +284,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm10 : IRegister<xmm10,W,T>, IRegOp128<T>
+        public struct xmm10 : IReg<xmm10,W,T>, IRegOp128<T>
         {
             public const byte Index = 10;
 
@@ -308,7 +308,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm11 : IRegister<xmm11,W,T>, IRegOp128<T>
+        public struct xmm11 : IReg<xmm11,W,T>, IRegOp128<T>
         {
             public const byte Index = 11;
 
@@ -332,7 +332,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm12 : IRegister<xmm12,W,T>, IRegOp128<T>
+        public struct xmm12 : IReg<xmm12,W,T>, IRegOp128<T>
         {
             public const byte Index = 12;
 

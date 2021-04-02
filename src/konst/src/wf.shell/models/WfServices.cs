@@ -13,7 +13,7 @@ namespace Z0
     {
         IWfShell Wf {get;}
 
-        ConcurrentDictionary<Type,IWfService> Lookup {get;}
+        ConcurrentDictionary<Type,IService> Lookup {get;}
 
         public IEmissionLogger EmissionLog {get;}
 
@@ -23,9 +23,10 @@ namespace Z0
         {
             Wf = wf;
             Env = env;
-            Lookup = new ConcurrentDictionary<Type, IWfService>();
+            Lookup = new ConcurrentDictionary<Type, IService>();
             EmissionLog = new EmissonLogger(target(env));
         }
+
 
         public void Dispose()
         {

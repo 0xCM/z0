@@ -119,11 +119,10 @@ namespace Z0.Asm
         {
             var kind = IceExtractors.opkind(src, i);
             var desc = EmptyString;
-
             if(IceOpTest.isRegister(kind))
-                desc = format(register(src,i));
+                desc = format(IceExtractors.register(src,i));
             else if(IceOpTest.isMem(kind))
-                desc = format(meminfo(src, i));
+                desc = format(IceExtractors.meminfo(src, i));
             else if (IceOpTest.isBranch(kind))
                 desc = format(IceExtractors.branch(@base, src, i));
             else if(IceOpTest.isImm(kind))
@@ -276,23 +275,12 @@ namespace Z0.Asm
         }
 
         [Op]
-        static string FormatSegKind(string symbol)
-            => text.blank(symbol) ? EmptyString : text.concat("seg:", Chars.LBracket, symbol, Chars.RBracket);
+        static string FormatSegKind(Name name)
+            => name.IsEmpty ? EmptyString : text.concat("seg:", Chars.LBracket, name, Chars.RBracket);
 
         [Op]
         static string FormatSegKind(IceOpKind src)
-            => FormatSegKind(src switch {
-                MemorySegDI => "di",
-                MemorySegEDI => "edi",
-                MemorySegESI => "esi",
-                MemorySegRDI => "rdi",
-                MemorySegRSI => "rsi",
-                MemorySegSI => "si",
-                MemoryESDI => "esdi",
-                MemoryESEDI => "esedi",
-                MemoryESRDI => "esrdi",
-            _ => ""
-            });
+            => FormatSegKind(IceExtractors.segname(src));
 
         [Op]
         static string FormatAddress(IceInstruction src, int pad = 16)
@@ -321,36 +309,6 @@ namespace Z0.Asm
         static string format(IceMemorySize src)
             => IceExtractors.identify(src).Format();
 
-        [MethodImpl(Inline), Op]
-        static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
-            => new AsmDisplacement(value, (AsmDisplacementSize)size);
-
-        [MethodImpl(Inline), Op]
-        static IceMemDirect memDirect(in IceInstruction src)
-            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
-
-        [Op]
-        static IceMemoryInfo meminfo(IceInstruction src, byte index)
-        {
-            var k = IceExtractors.opkind(src, (byte)index);
-
-            if(IceOpTest.isMem(k))
-            {
-                var direct = IceOpTest.isMemDirect(k);
-                var segBase = IceOpTest.isSegBase(k);
-                var mem64 = IceOpTest.isMem64(k);
-                var info = new IceMemoryInfo();
-                var sz = src.MemorySize;
-                var memdirect = direct ? memDirect(src) : IceMemDirect.Empty;
-                var prefix = (direct || segBase) ? src.SegmentPrefix : Z0.Asm.IceRegister.None;
-                var sReg = (direct || segBase) ? src.MemorySegment : Z0.Asm.IceRegister.None;
-                var address = mem64 ? src.MemoryAddress64 : 0;
-                return new IceMemoryInfo(sReg, prefix, memdirect, address, sz);
-            }
-
-            return default;
-        }
-
         static StringBuilder Render(IceMemoryInfo src, StringBuilder builder)
         {
             var nonempty = false;
@@ -378,24 +336,6 @@ namespace Z0.Asm
             return builder;
         }
 
-        /// <summary>
-        /// Extracts register information, should it exist, from an index-identified register operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="index">The operand index</param>
-        [Op]
-		static IceRegister register(in IceInstruction src, byte index)
-        {
-			switch (index)
-            {
-                case 0: return src.Op0Register;
-                case 1: return src.Op1Register;
-                case 2: return src.Op2Register;
-                case 3: return src.Op3Register;
-                case 4: return src.Op4Register;
-			}
-            return 0;
-		}
 
         [Op]
         static string format(IceMemoryInfo src)

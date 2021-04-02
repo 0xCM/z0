@@ -70,7 +70,7 @@ namespace Z0.Asm
         public int MemoryDisplSize {get; set;}
 
         public AsmDisplacement MemDx
-            => IceExtractors.dx(MemoryDisplacement, (AsmDisplacementSize)MemoryDisplSize);
+            => asm.dispacement(MemoryDisplacement, (AsmDisplacementSize)MemoryDisplSize);
 
         //
         // Summary:

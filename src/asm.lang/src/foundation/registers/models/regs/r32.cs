@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an operand that specifies a 32-bit gp register
         /// </summary>
-        public struct r32 : IRegister<r32,W,T>, IRegOp32<T>
+        public struct r32 : IReg<r32,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -39,7 +39,7 @@ namespace Z0.Asm
             }
         }
 
-        public readonly struct R32<R> : IRegister<R32<R>,W32,T>, IRegOp32<T>
+        public readonly struct R32<R> : IReg<R32<R>,W32,T>, IRegOp32<T>
             where R : unmanaged, IRegOp32
         {
             public T Content {get;}
@@ -65,7 +65,7 @@ namespace Z0.Asm
                 => new r32(src.Content, src.RegKind);
         }
 
-        public struct eax : IRegister<eax,W,T>, IRegOp32<T>
+        public struct eax : IReg<eax,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -95,7 +95,7 @@ namespace Z0.Asm
 
         }
 
-        public struct ecx : IRegister<ecx,W,T>, IRegOp32<T>
+        public struct ecx : IReg<ecx,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -126,7 +126,7 @@ namespace Z0.Asm
 
         }
 
-        public struct edx : IRegister<edx,W,T>, IRegOp32<T>
+        public struct edx : IReg<edx,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -157,7 +157,7 @@ namespace Z0.Asm
 
         }
 
-        public struct ebx : IRegister<ebx,W,T>, IRegOp32<T>
+        public struct ebx : IReg<ebx,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -187,7 +187,7 @@ namespace Z0.Asm
 
         }
 
-        public struct esi : IRegister<esi,W,T>, IRegOp32<T>
+        public struct esi : IReg<esi,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -208,7 +208,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct edi : IRegister<edi,W,T>, IRegOp32<T>
+        public struct edi : IReg<edi,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -229,7 +229,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct esp : IRegister<esp,W,T>, IRegOp32<T>
+        public struct esp : IReg<esp,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -250,7 +250,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct ebp : IRegister<ebp,W,T>, IRegOp32<T>
+        public struct ebp : IReg<ebp,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -273,7 +273,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r8d : IRegister<r8d,W,T>, IRegOp32<T>
+        public struct r8d : IReg<r8d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -290,7 +290,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r9d : IRegister<r9d,W,T>, IRegOp32<T>
+        public struct r9d : IReg<r9d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -309,7 +309,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r10d : IRegister<r10d,W,T>, IRegOp32<T>
+        public struct r10d : IReg<r10d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -326,7 +326,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r11d : IRegister<r11d,W,T>, IRegOp32<T>
+        public struct r11d : IReg<r11d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -343,7 +343,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r12d : IRegister<r12d,W,T>, IRegOp32<T>
+        public struct r12d : IReg<r12d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -360,7 +360,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r13d : IRegister<r13d,W,T>, IRegOp32<T>
+        public struct r13d : IReg<r13d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -379,7 +379,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r14d : IRegister<r14d,W,T>, IRegOp32<T>
+        public struct r14d : IReg<r14d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -397,7 +397,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r15d : IRegister<r15d,W,T>, IRegOp32<T>
+        public struct r15d : IReg<r15d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 

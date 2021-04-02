@@ -14,13 +14,12 @@ namespace Z0.Asm
     using T = System.UInt16;
     using G = AsmRegs.r16;
 
-
     partial struct AsmRegs
     {
         /// <summary>
         /// Defines an operand that specifies a 16-bit gp register
         /// </summary>
-        public struct r16 : IRegister<r16,W,T>, IRegOp16<T>
+        public struct r16 : IReg<r16,W,T>, IRegOp16<T>
         {
             public T Content {get;}
 
@@ -38,10 +37,9 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => index(RegKind);
             }
-
         }
 
-        public readonly struct R16<R> : IRegister<R16<R>,W16,ushort>, IRegOp16<ushort>
+        public readonly struct R16<R> : IReg<R16<R>,W16,ushort>, IRegOp16<ushort>
             where R : unmanaged, IRegOp16
         {
             public ushort Content {get;}
@@ -67,7 +65,7 @@ namespace Z0.Asm
                 => new r16(src.Content, src.RegKind);
         }
 
-        public struct ax : IRegister<ax,W,T>, IRegOp16<T>
+        public struct ax : IReg<ax,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -90,7 +88,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct cx : IRegister<cx,W,T>, IRegOp16<T>
+        public struct cx : IReg<cx,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -113,7 +111,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct dx : IRegister<dx,W,T>, IRegOp16<T>
+        public struct dx : IReg<dx,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -136,7 +134,7 @@ namespace Z0.Asm
                 => src.Generalized;
         }
 
-        public struct bx : IRegister<bx,W,T>, IRegOp16<T>
+        public struct bx : IReg<bx,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -159,7 +157,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct si : IRegister<si,W,T>, IRegOp16<T>
+        public struct si : IReg<si,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -183,7 +181,7 @@ namespace Z0.Asm
 
         }
 
-        public struct di : IRegister<di,W,T>, IRegOp16<T>
+        public struct di : IReg<di,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -206,7 +204,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct sp : IRegister<sp,W,T>, IRegOp16<T>
+        public struct sp : IReg<sp,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -229,7 +227,7 @@ namespace Z0.Asm
                 => src.Generalized;
         }
 
-        public struct bp : IRegister<bp,W,T>, IRegOp16<T>
+        public struct bp : IReg<bp,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -252,7 +250,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r8w : IRegister<r8w,W,T>, IRegOp16<T>
+        public struct r8w : IReg<r8w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -276,7 +274,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r9w : IRegister<r9w,W,T>, IRegOp16<T>
+        public struct r9w : IReg<r9w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -299,7 +297,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r10w : IRegister<r10w,W,T>, IRegOp16<T>
+        public struct r10w : IReg<r10w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -322,7 +320,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r11w : IRegister<r11w,W,T>, IRegOp16<T>
+        public struct r11w : IReg<r11w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -345,7 +343,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r12w : IRegister<r12w,W,T>, IRegOp16<T>
+        public struct r12w : IReg<r12w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -368,7 +366,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r13w : IRegister<r13w,W,T>, IRegOp16<T>
+        public struct r13w : IReg<r13w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -391,7 +389,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r14w : IRegister<r14w,W,T>, IRegOp16<T>
+        public struct r14w : IReg<r14w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -414,7 +412,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r15w : IRegister<r15w,W,T>, IRegOp16<T>
+        public struct r15w : IReg<r15w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 

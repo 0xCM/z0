@@ -22,5 +22,20 @@ namespace Z0
                 seek(dst,i) = new Sym<E>(i, skip(view,i));
             return buffer;
         }
+
+        public static Index<E,Sym16<E>> load<E>(W16 w)
+            where E : unmanaged, Enum
+        {
+            var symbols = SymCache<E>.get().Entries.View;
+            var count = symbols.Length;
+            var buffer = alloc<Sym16<E>>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var entry = ref skip(symbols,i);
+                seek(dst,i) = symbol(w, entry);
+            }
+            return buffer;
+        }
     }
 }

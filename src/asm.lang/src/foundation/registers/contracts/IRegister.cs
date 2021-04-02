@@ -16,10 +16,9 @@ namespace Z0.Asm
 
         RegIndex Index
             => (RegIndex)((byte)RegKind);
-
     }
 
-    public interface IRegister<T> : IRegister, IContented<T>
+    public interface IReg<T> : IRegister, IContented<T>
         where T : unmanaged
     {
 
@@ -30,7 +29,7 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="W">The register width</typeparam>
-    public interface IRegister<W,T> : IRegister<T>
+    public interface IReg<W,T> : IReg<T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
@@ -42,16 +41,16 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="W">The register width</typeparam>
-    public interface IRegister<F,W,T> : IRegister<W,T>
-        where F : struct, IRegister<F,W,T>
+    public interface IReg<F,W,T> : IReg<W,T>
+        where F : struct, IReg<F,W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
 
     }
 
-    public interface IRegister<F,W,T,N> : IRegister<F,W,T>
-        where F : struct, IRegister<F,W,T>
+    public interface IReg<F,W,T,N> : IReg<F,W,T>
+        where F : struct, IReg<F,W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
         where N : unmanaged, ITypeNat

@@ -12,7 +12,29 @@ namespace Z0.Asm
     partial struct IceExtractors
     {
         [MethodImpl(Inline), Op]
-        public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
-            => new AsmDisplacement(value, (AsmDisplacementSize)size);
+        public static IceMemDirect memDirect(in IceInstruction src)
+            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dispacement(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
+
+        [Op]
+        public static IceMemoryInfo meminfo(IceInstruction src, byte index)
+        {
+            var k = opkind(src, (byte)index);
+
+            if(IceOpTest.isMem(k))
+            {
+                var direct = IceOpTest.isMemDirect(k);
+                var segBase = IceOpTest.isSegBase(k);
+                var mem64 = IceOpTest.isMem64(k);
+                var info = new IceMemoryInfo();
+                var sz = src.MemorySize;
+                var memdirect = direct ? memDirect(src) : IceMemDirect.Empty;
+                var prefix = (direct || segBase) ? src.SegmentPrefix : Z0.Asm.IceRegister.None;
+                var sReg = (direct || segBase) ? src.MemorySegment : Z0.Asm.IceRegister.None;
+                var address = mem64 ? src.MemoryAddress64 : 0;
+                return new IceMemoryInfo(sReg, prefix, memdirect, address, sz);
+            }
+
+            return default;
+        }
    }
 }

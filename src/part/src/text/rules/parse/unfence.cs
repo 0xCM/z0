@@ -46,7 +46,7 @@ namespace Z0
                 {
                     var start = i0 + fence.Left.Length;
                     var length = i1 - start;
-                    return slice(src, start, length);
+                    return text.slice(src, start, length);
                 }
 
                 return EmptyString;

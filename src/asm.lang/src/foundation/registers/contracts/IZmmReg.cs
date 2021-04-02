@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IZmmReg : IRegister<W512,Cell512>
+    public interface IZmmReg : IReg<W512,Cell512>
     {
     }
 

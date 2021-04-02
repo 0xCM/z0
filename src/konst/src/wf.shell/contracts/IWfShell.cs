@@ -36,9 +36,7 @@ namespace Z0
 
         ICmdRouter Router {get;}
 
-        IWfInit Init {get;}
-
-        IPolySource PolyStream {get;}
+        IPolySource Polysource {get;}
 
         WfHost Host {get;}
 
@@ -47,6 +45,8 @@ namespace Z0
         WfExecToken NextExecToken();
 
         WfServices Services {get;}
+
+        IWfShell WithSource(IPolySource source);
 
         Env Env {get;}
 
@@ -73,13 +73,7 @@ namespace Z0
             => Router.Dispatch(cmd);
 
         IWfShell WithHost(WfHost host)
-            => WfShell.clone(this, host, PolyStream, Verbosity);
-
-        IWfShell WithRandom(IPolySource random)
-            => WfShell.clone(this, Host, random, Verbosity);
-
-        IWfShell WithVerbosity(LogLevel level)
-            => WfShell.clone(this, Host, PolyStream, level);
+            => this;
 
         Assembly[] Components
             => Context.ApiParts.Components;

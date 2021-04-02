@@ -18,9 +18,25 @@ namespace Z0
                 var images = Wf.ImageDataEmitter();
                 var store = Wf.ApiCodeStore();
                 var assets = Wf.ApiAssets();
-                var blocks = store.CodeBlocks();
-                var asmrows = Wf.AsmRowStore().StoreAsmRows(blocks);
+                var rowstore = Wf.AsmRowStore();
                 var statements = Wf.AsmStatementPipe();
+
+                var blocks = store.CodeBlocks();
+
+                if(options.EmitAsmRows)
+                    Emitted(rowstore.EmitAsmRows(blocks));
+
+                if(options.EmitAsmAnalysis)
+                    rowstore.EmitAnalyses(blocks);
+
+                if(options.EmitResBytes)
+                    Emitted(Wf.ResBytesEmitter().Emit(blocks));
+
+                if(options.EmitStatements)
+                    Emitted(statements.EmitStatements(blocks));
+
+                if(options.EmitAsmBitstrings)
+                    statements.EmitBitstrings();
 
                 if(options.CorrelateMembers)
                     api.Correlate();
@@ -82,17 +98,6 @@ namespace Z0
                 if(options.EmitImageContent)
                     images.EmitApiImageContent();
 
-                if(options.EmitAsmAnalysis)
-                    store.EmitAnalyses(blocks);
-
-                if(options.EmitResBytes)
-                    Emitted(store.EmitResBytes(blocks));
-
-                if(options.EmitStatements)
-                    Emitted(statements.EmitStatements(blocks));
-
-                if(options.EmitAsmBitstrings)
-                    statements.EmitBitstrings();
 
             }
             catch(Exception e)

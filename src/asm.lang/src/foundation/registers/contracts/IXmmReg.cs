@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IXmmReg : IRegister<W128,Cell128>
+    public interface IXmmReg : IReg<W128,Cell128>
     {
 
     }
@@ -14,7 +14,7 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="N">The index type</typeparam>
-    public interface IXmmReg<F,R> : IXmmReg, IRegister<W128,Cell128>
+    public interface IXmmReg<F,R> : IXmmReg, IReg<W128,Cell128>
         where F : struct, IXmmReg<F,R>
         where R : unmanaged
     {

@@ -28,7 +28,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct Zmm<R> : IRegister<Zmm<R>,W512,Cell512>, IRegOp512<Cell512>
+        public struct Zmm<R> : IReg<Zmm<R>,W512,Cell512>, IRegOp512<Cell512>
             where R : unmanaged, IRegister
         {
             public Cell512 Content {get;}

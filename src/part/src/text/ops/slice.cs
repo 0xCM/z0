@@ -13,20 +13,43 @@ namespace Z0
 
     partial class text
     {
-        [MethodImpl(Inline)]
-        public static string slice(string src, int offset)
-            => Parse.slice(src, offset);
+            /// <summary>
+            /// Extracts a substring
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="offset">The index of the first character</param>
+            [MethodImpl(Inline), Op]
+            public static string slice(string src, int offset)
+                => sys.substring(src, offset);
 
-        [MethodImpl(Inline)]
-        public static string slice(string src, int offset, int length)
-            => Parse.slice(src, offset, length);
+            /// <summary>
+            /// Extracts a substring
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="offset">The index of the first character</param>
+            /// <param name="length">The substring length</param>
+            [MethodImpl(Inline), Op]
+            public static string slice(string src, int offset, int length)
+                => sys.substring(src, offset, length);
 
-        [MethodImpl(Inline)]
-        public static string slice(string src, uint offset)
-            => Parse.slice(src, offset);
+            /// <summary>
+            /// Extracts a substring beginning at a specified offset
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="offset">The index of the first character</param>
+            /// <param name="length">The substring length</param>
+            [MethodImpl(Inline), Op]
+            public static string slice(string src, uint offset)
+                => sys.substring(src, (int)offset);
 
-        [MethodImpl(Inline)]
-        public static string slice(string src, uint offset, uint length)
-            => Parse.slice(src, offset, length);
+            /// <summary>
+            /// Extracts a substring of specified length beginning at a specified offset
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="offset">The index of the first character</param>
+            /// <param name="length">The substring length</param>
+            [MethodImpl(Inline), Op]
+            public static string slice(string src, uint offset, uint length)
+                => sys.substring(src,(int)offset, (int)length);
     }
 }

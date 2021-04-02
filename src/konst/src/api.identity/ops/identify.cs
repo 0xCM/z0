@@ -46,6 +46,8 @@ namespace Z0
         {
             if(src.IsOpenGeneric())
                 return generic(src).Generalize();
+            else if(src.IsConversionOperator())
+                return conversion(src);
             else if(src.IsConstructedGenericMethod)
                 return constructed(src);
             else

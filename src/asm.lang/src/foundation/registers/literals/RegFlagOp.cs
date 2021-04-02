@@ -10,7 +10,7 @@ namespace Z0.Asm
     /// Specifies an instruction's impact on eflags
     /// </summary>
     [Flags]
-    public enum SideEffectKind : byte
+    public enum RegFlagOp : byte
     {
         /// <summary>
         /// Flags neither read nor molested

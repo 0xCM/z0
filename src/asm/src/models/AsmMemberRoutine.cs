@@ -39,7 +39,7 @@ namespace Z0.Asm
         public MemoryAddress Base
         {
             [MethodImpl(Inline)]
-            get => CodeBlock.Address;
+            get => CodeBlock.BaseAddress;
         }
 
         public ByteSize Size

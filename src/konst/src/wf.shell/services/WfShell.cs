@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Concurrent;
 
     using static Part;
 
@@ -15,8 +16,6 @@ namespace Z0
         public IWfContext Context {get;}
 
         public PartId Id {get;}
-
-        public IWfInit Init {get;}
 
         public IApiParts ApiParts {get;}
 
@@ -40,7 +39,7 @@ namespace Z0
 
         public WfController Controller {get;}
 
-        public IPolySource PolyStream {get; private set;}
+        public IPolySource Polysource {get; private set;}
 
         public WfHost Host {get; private set;}
 
@@ -50,13 +49,13 @@ namespace Z0
 
         public Env Env {get;}
 
+
         TokenDispenser Tokens;
 
         [MethodImpl(Inline)]
         public WfShell(IWfInit config)
         {
             Tokens = TokenDispenser.acquire();
-            Init = config;
             Env = Z0.Env.create();
             Context = config.Shell;
             Id = config.ControlId;
@@ -64,7 +63,7 @@ namespace Z0
             EventSink = Loggers.events(config.LogConfig);
             EventBroker = new WfBroker(EventSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
-            PolyStream = default;
+            Polysource = default;
             Verbosity = LogLevel.Status;
             Paths = config.Shell.Paths;
             Args = config.Shell.Args;
@@ -77,28 +76,10 @@ namespace Z0
             Services = new WfServices(this, Env, Api.PartComponents);
         }
 
-        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfEventBroker broker, WfHost host, IPolySource random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
+        public IWfShell WithSource(IPolySource random)
         {
-            Tokens = TokenDispenser.acquire();
-            Env = Z0.Env.create();
-            Init = config;
-            Context = config.Shell;
-            Id = config.ControlId;
-            Args = config.Shell.Args;
-            Paths = config.Shell.Paths;
-            Settings = config.Shell.Settings;
-            ApiParts = config.ApiParts;
-            Api = config.ApiParts.ApiCatalog;
-            Controller = config.Control;
-            AppName = config.Shell.AppName;
-            Ct = ct;
-            EventSink = sink;
-            EventBroker = broker;
-            Host = host;
-            PolyStream = random;
-            Verbosity = verbosity;
-            Router = router;
-            Services = wfservices;
+            Polysource = random;
+            return this;
         }
 
         public WfExecToken Ran(WfExecFlow src)
@@ -132,7 +113,6 @@ namespace Z0
             EventSink.Dispose();
             Services.Dispose();
         }
-
         string ITextual.Format()
             => AppName;
     }

@@ -23,7 +23,7 @@ namespace Z0
             => new WfHubClient(hub, sink, connect, exec);
 
         /// <summary>
-        /// Creates a T-parametric sink predicated on a <see cref='ValueReceiver{T}'/> process function
+        /// Creates a T-parametric sink predicated on a <see cref='Receiver{T}'/> process function
         /// </summary>
         /// <param name="wf">The workflow context</param>
         /// <param name="f">The process function</param>

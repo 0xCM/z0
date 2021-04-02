@@ -47,7 +47,7 @@ namespace Z0
             stats.PartCount = Parts.Count;
             stats.HostCount = Hosts.Count;
             stats.AddressCount = Addresses.Count;
-            stats.FunctionCount = Blocks.Count;
+            stats.BlockCount = Blocks.Count;
             stats.IdentityCount = Identities.Count;
             stats.ByteCount = Blocks.Storage.Sum(x => x.Length);
             return stats;

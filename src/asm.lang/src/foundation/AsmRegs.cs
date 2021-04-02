@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static AsmRegBits;
+    using static RegFacets;
 
     [ApiHost]
     public readonly partial struct AsmRegs
@@ -231,7 +231,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bool hi(Register r)
-            => ((uint)r.Kind & AsmRegBits.Hi) != 0;
+            => ((uint)r.Kind & RegFacets.Hi) != 0;
 
         [Op]
         public static Index<Register> list()

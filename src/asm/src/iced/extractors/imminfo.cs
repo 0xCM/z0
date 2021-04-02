@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Asm.IceOpKind;
 
-
     using W = NumericWidth;
 
     partial struct IceExtractors

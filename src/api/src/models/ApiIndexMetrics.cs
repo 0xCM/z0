@@ -18,13 +18,13 @@ namespace Z0
 
         public uint AddressCount;
 
-        public uint FunctionCount;
+        public uint BlockCount;
 
         public uint IdentityCount;
 
         public ByteSize ByteCount;
         public string Format()
-            => text.format("{0}", new {PartCount, HostCount, AddressCount, FunctionCount, IdentityCount, ByteCount});
+            => text.format("{0}", new {PartCount, HostCount, AddressCount, BlockCount, IdentityCount, ByteCount});
 
         public override string ToString()
             => Format();

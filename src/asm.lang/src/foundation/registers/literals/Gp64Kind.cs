@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmRegBits;
+    using static RegFacets;
     using static RegIndex;
     using static RegClass;
     using static RegWidth;

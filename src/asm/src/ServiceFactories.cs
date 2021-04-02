@@ -94,5 +94,8 @@ namespace Z0
 
         public static AsmStatementPipe AsmStatementPipe(this IWfShell wf)
             => Asm.AsmStatementPipe.create(wf);
+
+        public static ApiCodeBlockTraverser ApiiCodeBlockTraverser(this IWfShell src)
+            => Asm.ApiCodeBlockTraverser.create(src);
     }
 }

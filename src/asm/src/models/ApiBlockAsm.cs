@@ -40,7 +40,7 @@ namespace Z0.Asm
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Encoded.Address;
+            get => Encoded.BaseAddress;
         }
 
         /// <summary>

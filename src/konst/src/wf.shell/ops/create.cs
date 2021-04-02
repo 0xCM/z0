@@ -18,22 +18,30 @@ namespace Z0
         public static IWfShell create(IApiParts parts, string[] args, bool verbose = true)
         {
             var status = new WfInitStatus();
+            status.Args = args;
             status.StartTS = root.now();
+
+            var control = root.controller();
+            var controlId = control.Id();
+            status.Controller = controlId;
+
 
             if(verbose)
                 term.inform(AppMsg.status("Creating shell"));
 
             var clock = Time.counter(true);
-            var control = root.controller();
-            var controlId = control.Id();
             var dbRoot = Env.create().Db.Value;
-
-            var jsonConfigPath = dbRoot + FS.folder("settings") + FS.file(controlId.Format(), FS.Extensions.JsonConfig);
 
             if(verbose)
                 term.inform(AppMsg.status(text.prop("DbRoot", dbRoot)));
 
+            var jsonConfigPath = dbRoot + FS.folder("settings") + FS.file(controlId.Format(), FS.Extensions.JsonConfig);
+            status.AppConfigPath = jsonConfigPath;
+
+
             var partIdList = parts.ApiCatalog.PartIdentities;
+            status.Parts = partIdList;
+
             if(verbose)
             {
                 var fence = text.fence(Chars.LBrace, Chars.RBrace);
@@ -65,7 +73,8 @@ namespace Z0
             if(verbose)
                 term.inform(AppMsg.status("Created context"));
 
-            var init = new WfInit(dbRoot, ctx, Loggers.configure(controlId, dbRoot), partIdList);
+            var loggers = Loggers.configure(controlId, dbRoot);
+            var init = new WfInit(ctx, loggers, partIdList);
 
             if(verbose)
                 term.inform(AppMsg.status("Creating shell"));
@@ -84,10 +93,6 @@ namespace Z0
 
             status.ShellCreateTime = clock.Elapsed;
             status.FinishTS = root.now();
-            status.Args = args;
-            status.Controller = controlId;
-            status.Parts = partIdList;
-            status.AppConfigPath = jsonConfigPath;
 
             return wf;
         }

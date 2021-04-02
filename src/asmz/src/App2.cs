@@ -565,7 +565,7 @@ namespace Z0.Asm
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
-            using var wf = WfShell.create(args).WithRandom(Rng.@default());
+            using var wf = WfShell.create(args).WithSource(Rng.@default());
             var process = ToolCmd.run(cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
@@ -667,7 +667,7 @@ namespace Z0.Asm
         public void RunPipes()
         {
             using var flow = Wf.Running();
-            var data = Wf.PolyStream.Span<ushort>(2400);
+            var data = Wf.Polysource.Span<ushort>(2400);
 
             var input = Pipes.pipe<ushort>();
             var incount = Pipes.flow(data, input);
@@ -987,43 +987,31 @@ namespace Z0.Asm
 
         }
 
+        uint ICount;
+
+
         public void Run()
         {
-            //CaptureSelectedRoutines();
-
-            // var tokens = Wf.AsmTokens().Prefixes();
-            // Show(tokens.View, FS.file("asmtokens", FS.Log));
-
-            //ShowOpCodeTokens();
-            //Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
-
-
             CaptureSelectedRoutines();
-            // var store = Wf.AsmRowStore();
-            // var rows = store.LoadAsmRows();
-            // var calls = store.LoadCallRows();
+            var store = Wf.ApiCodeStore();
+            var blocks = store.CodeBlocks();
+            var metrics = blocks.CalcMetrics();
+            Wf.Status(metrics);
 
-
-            //Show("asm.tokens.prefixes", FS.Log, show);
-            //root.iter(Wf.AsmTokens().Prefixes(), p => ;
-
-            //00000015 EBX:756E6547 ECX:6C65746E EDX:49656E69
-            //EmitBitstrings();
-
-            //var tool = Tools.nasm(Wf);
-            //var entries = tool.RunCase("vptestmb");
-
-            // productions.Produce();
-
-            //Wf.CodeGenerators().GenerateAsmModels();
-
+            var clock = Time.counter(true);
+            var traverser = Wf.ApiiCodeBlockTraverser();
+            var receiver  = new Receiver59(Wf,750000);
+            traverser.Traverse(blocks,receiver);
+            var duration = clock.Elapsed.Ms;
+            var productions = receiver.Productions;
+            Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
         public static void Main(params string[] args)
         {
             try
             {
-                using var wf = WfShell.create(ApiCatalogs.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
+                using var wf = WfShell.create(ApiCatalogs.parts(Index<PartId>.Empty), args).WithSource(Rng.@default());
                 var app = App.create(wf);
                 app.Run();
 

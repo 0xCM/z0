@@ -95,6 +95,5 @@ namespace Z0.Asm
         /// </summary>
         [Symbol("mmx")]
         MMX = 14,
-
     }
 }

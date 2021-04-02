@@ -12,8 +12,6 @@ namespace Z0
     [Free]
     public interface IWfInit
     {
-        FS.FolderPath DbRoot {get;}
-
         /// <summary>
         /// The context root
         /// </summary>

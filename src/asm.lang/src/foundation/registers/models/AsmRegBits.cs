@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [LiteralProvider]
-    public readonly struct AsmRegBits
+    public readonly struct RegFacets
     {
         /// <summary>
         /// The RegisterCode segment position

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -22,7 +21,6 @@ namespace Z0
         Type[] ContractArgs => new Type[]{};
 
         uint Discriminator => 0;
-
     }
 
     /// <summary>

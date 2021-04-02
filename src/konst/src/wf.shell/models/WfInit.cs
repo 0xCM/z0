@@ -47,12 +47,9 @@ namespace Z0
 
         public IApiCatalogDataset ApiGlobal {get;}
 
-        public FS.FolderPath DbRoot {get;}
-
         [MethodImpl(Inline)]
-        public WfInit(FS.FolderPath dbRoot, IWfContext ctx, WfLogConfig logConfig, PartId[] parts)
+        public WfInit(IWfContext ctx, WfLogConfig logConfig, PartId[] parts)
         {
-            DbRoot = dbRoot;
             Context = ctx;
             ApiParts = ctx.ApiParts;
             Control = ctx.Controller;

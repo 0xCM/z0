@@ -23,24 +23,24 @@ namespace Z0.Asm
 
         RegKindConverter(void* pIce, void* pKind)
         {
-            this.pIce = pIce;
-            this.pKind = pKind;
+            IceSource = pIce;
+            KindSource = pKind;
         }
 
-        readonly void* pIce;
+        readonly void* IceSource;
 
-        readonly void* pKind;
+        readonly void* KindSource;
 
         ReadOnlySpan<IceRegister> Ice
         {
             [MethodImpl(Inline)]
-            get => @ref<Index<IceRegister>>(pIce).View;
+            get => @ref<Index<IceRegister>>(IceSource).View;
         }
 
         public ReadOnlySpan<RegKind> Kinds
         {
             [MethodImpl(Inline)]
-            get => @ref<Index<RegKind>>(pKind).View;
+            get => @ref<Index<RegKind>>(KindSource).View;
         }
 
         [MethodImpl(Inline), Op]

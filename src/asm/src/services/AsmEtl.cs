@@ -99,7 +99,7 @@ namespace Z0.Asm
         [Op]
         public static Index<ApiInstruction> ToApiInstructions(ApiCodeBlock code, IceInstruction[] src)
         {
-            var @base = code.Address;
+            var @base = code.BaseAddress;
             var offseq = AsmOffsetSequence.Zero;
             var count = src.Length;
             var dst = new ApiInstruction[count];
