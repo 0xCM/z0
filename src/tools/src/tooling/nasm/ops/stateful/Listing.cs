@@ -12,14 +12,18 @@ namespace Z0.Tooling
 
     partial class Nasm
     {
+        [Op]
         public NasmListing Listing(FS.FilePath src)
         {
+            var flow = Wf.Running(string.Format("Loading list lines from {0}", src.ToUri()));
             var dst = root.list<NasmListLine>();
             using var reader = src.Reader();
             var i = 1u;
             while(!reader.EndOfStream)
                 dst.Add(new NasmListLine(new TextLine(i++, reader.ReadLine())));
-            return new NasmListing(src, dst.ToArray());
+            var lines = dst.ToArray();
+            Wf.Ran(flow, string.Format("Loaded {0} list lines from {1}", lines.Length, src.ToUri()));
+            return new NasmListing(src, lines);
         }
     }
 }

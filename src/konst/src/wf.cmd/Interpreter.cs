@@ -31,7 +31,6 @@ namespace Z0
             Name = typeof(H).Name;
             TermLog = Loggers.term(Name);
             Frequency = new TimeSpan(0, 0, 0, 0, 50);
-            Host = WfShell.host(typeof(H));
             CommandQueue = new ConcurrentQueue<string>();
             ExecLog = new ConcurrentDictionary<ulong,WfExecToken>();
             DispatchKeys = new ConcurrentBag<Guid>();
@@ -41,8 +40,6 @@ namespace Z0
         }
 
         public Name Name {get;}
-
-        WfHost Host;
 
         IWfEventSink TermLog;
 
@@ -89,8 +86,6 @@ namespace Z0
 
         protected abstract FS.FilePath ExePath {get;}
 
-
-
         public void Run()
         {
             if(!Initialized)
@@ -107,7 +102,7 @@ namespace Z0
         {
             try
             {
-                Wf = wf.WithHost(Host);
+                Wf = wf;
                 WorkerLog = Loggers.worker(Loggers.configure(wf.Controller.Id, wf.Db().Root, "processes"));
                 Worker = new Process();
 
@@ -147,7 +142,7 @@ namespace Z0
             if(e != null && e.Data != null)
             {
                 WorkerLog?.LogStatus(e.Data);
-                TermLog.Deposit(WfEvents.status(Host, e.Data));
+                TermLog.Deposit(WfEvents.status(GetType(), e.Data));
             }
         }
 
@@ -156,7 +151,7 @@ namespace Z0
             if(e != null && e.Data != null)
             {
                 WorkerLog?.LogError(e.Data);
-                TermLog.Deposit(WfEvents.error(Host, e.Data, WfEvents.originate("InterpreterError")));
+                TermLog.Deposit(WfEvents.error(GetType(), e.Data, WfEvents.originate("InterpreterError")));
             }
         }
 

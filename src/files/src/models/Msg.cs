@@ -16,6 +16,8 @@ namespace Z0
             public static MsgPattern<FS.FileUri> ParsingFile => "Parsing {0}";
 
             public static MsgPattern<FS.FileUri> ParsedFile => "Parsed {0}";
+
+            public static MsgPattern<FS.FileUri> DoesNotExist => "The file {0} has gone missing";
         }
     }
 }

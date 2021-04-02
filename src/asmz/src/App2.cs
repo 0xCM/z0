@@ -1038,12 +1038,44 @@ namespace Z0.Asm
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
+
+        static ReadOnlySpan<byte> mul_ᐤ8uㆍ8uᐤ
+            => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x0f,0xaf,0xc2,0x0f,0xb6,0xc0,0xc3};
+
+        public void t_digit_parser()
+        {
+            ReadOnlySpan<char> input = "0123456789ABCDEF";
+            var count = input.Length;
+            var dst = EmptyString;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(input,i);
+                DigitParser.digit(@base16, c, out var d);
+                var s = Digital.symbol(UpperCase, d);
+
+                dst += (char)s;
+
+            }
+
+            Wf.Row(dst);
+        }
+
+
         public void Run()
         {
+
+            NasmRunner.create(Wf).Run();
+            // var f = BinaryOpFactory.create<byte>("mul_8u_8u_8u", mul_ᐤ8uㆍ8uᐤ);
+            // var c = f(4,8);
+            // Wf.Row(c);
+
             //CaptureSelectedRoutines();
 
-            var a = Hex.chars((byte)0xAB);
-            Wf.Row(a.ToString());
+            //var a = Hex.chars((byte)0xAB);
+
+            // var digits = Hex.digits((byte)0xCF, LowerCase);
+            // root.iter(digits, d => Wf.Row(d));
+
             //LoadCurrentCatalog();
 
             //EmitCilBlocks(Db.AppLogDir() + FS.folder("cil"));

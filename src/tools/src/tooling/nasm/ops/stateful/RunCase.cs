@@ -46,6 +46,5 @@ namespace Z0.Tooling
             }
             return entries.ToArray();
         }
-
     }
 }

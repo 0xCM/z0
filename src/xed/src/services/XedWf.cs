@@ -24,16 +24,13 @@ namespace Z0
 
         readonly ITableArchive Target;
 
-        readonly WfHost Host;
-
         const string Subject = "xed";
 
         readonly FS.FolderPath Root;
 
         public XedWf(IWfShell wf, XedWfConfig config)
         {
-            Host = WfShell.host(typeof(XedWf));
-            Wf = wf.WithHost(Host);
+            Wf = wf;
             Config = config;
             Source = Xed.sources(Config.Source);
             var db = Wf.Db();

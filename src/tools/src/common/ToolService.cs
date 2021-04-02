@@ -28,5 +28,12 @@ namespace Z0.Tooling
 
         public FS.Files Outputs()
             => Paths.ToolOutDir(Id).AllFiles;
+
+        public FS.FilePath Input(FS.FileName name)
+            => InDir + name;
+
+        public FS.FilePath Output(FS.FileName name)
+            => OutDir + name;
+
     }
 }

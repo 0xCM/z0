@@ -47,6 +47,8 @@ namespace Z0
         protected WfCmdBuilder CmdBuilder
             => Wf.CmdBuilder();
 
+        public Identifier HostName {get;}
+
         public void Init(IWfShell wf)
         {
             var flow = wf.Creating(typeof(H).Name);
@@ -61,30 +63,35 @@ namespace Z0
 
         protected WfService()
         {
-
+            HostName = GetType().Name;
         }
 
         protected WfService(IWfShell wf)
+            : this()
         {
-            Host = new WfSelfHost(typeof(H));
-            Wf = wf.WithHost(Host);
+            Host = new WfSelfHost(HostName);
+            Wf = wf;
+            //Wf = wf.WithHost(Host);
         }
 
-        protected ShowLog ShowLog(FS.FileExt ext, [Caller] string name = null)
-            => new ShowLog(Wf, Db.ShowLog(name, ext));
+        FS.FileName NameShowLog(string src, FS.FileExt ext)
+            => FS.file(root.controller().Id().PartName() + "." + HostName + "." + src, ext);
 
-        protected ShowLog ShowLog(FS.FileName file)
+        ShowLog ShowLog(FS.FileName file)
             => new ShowLog(Wf, Db.ShowLog(file));
 
+        protected ShowLog ShowLog(FS.FileExt ext, [Caller] string name = null)
+            => ShowLog(NameShowLog(name,ext));
+
         protected ShowLog ShowLog([Caller] string name = null, FS.FileExt? ext = null)
-            => new ShowLog(Wf, Db.ShowLog(name, ext ?? FS.Extensions.Csv));
+            => ShowLog(NameShowLog(name,ext ?? FS.Extensions.Csv));
 
         protected StreamWriter OpenShowLog(string name, FS.FileExt? ext = null)
-            => Db.ShowLog(name, ext ?? FS.Extensions.Csv).Writer();
+            => Db.ShowLog(NameShowLog(name, ext ?? FS.Extensions.Csv)).Writer();
 
         protected void Show(string name, FS.FileExt ext, Action<ShowLog> f)
         {
-            using var log = ShowLog(name,ext);
+            using var log = ShowLog(NameShowLog(name,ext));
             f(log);
         }
 

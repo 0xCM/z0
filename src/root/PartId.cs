@@ -126,6 +126,8 @@ public enum PartId : ulong
 
     Dynamic = 122,
 
+    DynamicShell = Dynamic | Shell,
+
     Asm = 123,
 
     AsmLang = 124,

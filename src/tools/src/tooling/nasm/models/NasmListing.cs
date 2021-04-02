@@ -9,7 +9,6 @@ namespace Z0.Tooling
 
     using static Part;
     using static memory;
-    using static TextRules;
 
     public readonly struct NasmListing : IRenderCapable<NasmListing>
     {
@@ -35,6 +34,11 @@ namespace Z0.Tooling
             }
         }
 
+        public uint LineCount
+        {
+            [MethodImpl(Inline)]
+            get => Lines.Count;
+        }
 
         [MethodImpl(Inline)]
         public ref readonly NasmListLine Line(uint number)

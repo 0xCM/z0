@@ -13,11 +13,11 @@ namespace Z0
     partial class Hex
     {
         [Op, Closures(Closure)]
-        public static ReadOnlySpan<HexCodeLo> digits<T>(in T src, LowerCased @case)
+        public static Index<HexCodeLo> digits<T>(in T src, LowerCased @case)
             where T : struct
         {
             var count = size<T>();
-            var dst = span<HexCodeLo>(count*2);
+            var dst = alloc<HexCodeLo>(count*2);
             digits(src,dst);
             return dst;
         }
