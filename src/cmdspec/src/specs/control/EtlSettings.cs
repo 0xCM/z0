@@ -48,6 +48,8 @@ namespace Z0
 
         public Setting<bool> EmitApiBitMasks;
 
+        public Setting<bool> EmitHexIndex;
+
         public static MachineOptions @default()
         {
             var dst = new MachineOptions();
@@ -72,6 +74,7 @@ namespace Z0
             dst.EmitAssetContent = true;
             dst.EmitSymbolicLiterals = true;
             dst.EmitApiBitMasks = true;
+            dst.EmitHexIndex = true;
             return dst;
         }
 

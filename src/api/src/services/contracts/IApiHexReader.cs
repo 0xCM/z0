@@ -6,6 +6,6 @@ namespace Z0
 {
     public interface IApiHexReader
     {
-        Index<ApiCodeBlock> Read(FS.FilePath src);
+        Index<ApiCodeBlock> ReadHexBlocks(FS.FilePath src);
     }
 }

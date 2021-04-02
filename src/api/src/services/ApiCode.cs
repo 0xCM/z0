@@ -50,11 +50,12 @@ namespace Z0
             var count = files.Length;
             var flow = wf.Running(Msg.ProcessingApiHexFiles.Format(count));
             var dst = root.list<ApiCodeDescriptor>();
+            var hex = wf.ApiHex();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var file = ref skip(files,i);
                 var inner = wf.Running(file, "apihex");
-                var rows = ApiHex.rows(file).View;
+                var rows = hex.Rows(file).View;
                 var blocks = rows.Length;
                 if(blocks == 0)
                     wf.Warn($"No content found in {file.ToUri()}");

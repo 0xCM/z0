@@ -23,7 +23,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShell.create(ApiCatalogs.parts(Index<PartId>.Empty), args);
+                using var wf = WfShell.create(ApiCatalogs.parts(root.controller(), args), args);
                 Generator.create(wf).Generate(args);
             }
             catch(Exception e)

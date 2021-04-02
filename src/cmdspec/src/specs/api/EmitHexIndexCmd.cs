@@ -9,16 +9,4 @@ namespace Z0
     {
         public const string CmdName = "emit-hex-index";
     }
-
-    partial class XCmd
-    {
-        [Op]
-        public static EmitHexIndexCmd EmitHexIndex(this WfCmdBuilder builder)
-        {
-            var dst = new EmitHexIndexCmd();
-
-            return dst;
-        }
-
-    }
 }

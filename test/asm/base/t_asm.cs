@@ -49,7 +49,8 @@ namespace Z0.Asm
         protected Index<ApiCodeBlock> ReadHostBits(ApiHostUri host)
         {
             var capture = ApiArchives.capture(Wf.Db().CaptureRoot());
-            var rows = ApiHex.rows(capture.HexPath(host));
+            var hex = Wf.ApiHex();
+            var rows = hex.Rows(capture.HexPath(host));
             var code = rows.Map(row => new ApiCodeBlock(row.Uri, new CodeBlock(row.Address, row.Data)));
             return code;
         }

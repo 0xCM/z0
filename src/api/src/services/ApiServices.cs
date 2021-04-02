@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -121,7 +119,7 @@ namespace Z0
                     var hexpath = Db.ApiHexFile(host.Uri);
                     if(hexpath.Exists)
                     {
-                        var blocks = reader.Read(hexpath);
+                        var blocks = reader.ReadHexBlocks(hexpath);
                         var catalog = HostCatalog(Wf.Api.FindHost(host.Uri).Require());
                         Correlate(catalog, blocks, dst, records);
                     }

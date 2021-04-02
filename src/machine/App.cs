@@ -15,7 +15,7 @@ namespace Z0
             => new Machine(wf);
 
         static IWfShell shell(string[] args)
-            => WfShell.create(args).WithSource(Rng.@default());
+            => WfShell.create(ApiCatalogs.parts(root.controller(), args), args).WithSource(Rng.@default());
 
         IWfShell Wf;
 

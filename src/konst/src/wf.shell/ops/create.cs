@@ -4,16 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static TextRules;
 
     partial class WfShell
     {
-        [Op]
-        public static IWfShell create(string[] args, bool verbose = true)
-            => create(ApiCatalogs.parts(root.controller(), args), args, verbose);
-
         [Op]
         public static IWfShell create(IApiParts parts, string[] args, bool verbose = true)
         {
@@ -24,7 +18,6 @@ namespace Z0
             var control = root.controller();
             var controlId = control.Id();
             status.Controller = controlId;
-
 
             if(verbose)
                 term.inform(AppMsg.status("Creating shell"));

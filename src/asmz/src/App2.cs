@@ -465,12 +465,38 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,1);
         }
 
+
+        public static Index<OpMsil> msil(MethodInfo[] src)
+        {
+            var count = src.Length;
+            var buffer = alloc<OpMsil>(count);
+            var methods = @readonly(src);
+            var target = span(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var method = ref skip(methods,i);
+                var address = ApiJit.jit(method);
+                var located = new LocatedMethod(method.Identify(), method, address);
+                var uri = ApiUri.located(method.DeclaringType.HostUri(), method.Name, method.Identify());
+                var body = method.GetMethodBody();
+                var sig = method.ResolveSignature();
+                if(body != null)
+                {
+                    var ilbytes = body.GetILAsByteArray() ?? Array.Empty<byte>();
+                    var length = ilbytes.Length;
+                    seek(target,i) = new OpMsil(method.MetadataToken, address, uri, sig, ilbytes, method.MethodImplementationFlags);
+                }
+            }
+
+            return buffer;
+        }
+
         void EmitMsil()
         {
             var pipe = Wf.IlPipe();
             var members = Wf.Api.ApiHosts.Where(h => h.HostType == typeof(math)).Single().Methods;
             var buffer = text.buffer();
-            var methods = MsilServices.methods(members);
+            var methods = msil(members);
             root.iter(methods, m => pipe.Render(m,buffer));
             using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Extensions.Il)).Writer();
             writer.Write(buffer.Emit());
@@ -565,7 +591,7 @@ namespace Z0.Asm
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
-            using var wf = WfShell.create(args).WithSource(Rng.@default());
+            using var wf = WfShell.create(ApiCatalogs.parts(root.controller(), args), args).WithSource(Rng.@default());
             var process = ToolCmd.run(cmd2).Wait();
             var output = process.Output;
             wf.Status(output);

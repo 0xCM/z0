@@ -17,7 +17,7 @@ namespace Z0
         MachinesTestApp(AgentContext context, string[] args)
         {
             AgentContext = context;
-            Wf = WfShell.create(args);
+            Wf = WfShell.create(ApiCatalogs.parts(root.controller(), args),args);
             Control = Agents.control(Wf.Context);
         }
 

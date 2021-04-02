@@ -47,7 +47,7 @@ namespace Z0
         [Op]
         public static Index<AsmMemberRoutine> run(string[] args)
         {
-            using var wf = WfShell.create(args);
+            using var wf = WfShell.create(ApiCatalogs.parts(root.controller(), args), args);
             using var runner = wf.CaptureRunner();
 
             if(args.Length != 0)

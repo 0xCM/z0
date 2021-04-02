@@ -37,12 +37,13 @@ namespace Z0
             var src = Db.ParsedExtractFiles().View;
             var count = src.Length;
             var flow = Wf.Running(Msg.IndexingPartFiles.Format(count));
+            var hex = Wf.ApiHex();
 
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);
                 var inner = Wf.Running(Msg.IndexingCodeBlocks.Format(path));
-                var result = ApiHex.rows(path);
+                var result = hex.Rows(path);
                 if(result.Count != 0)
                 {
                     var blocks = result.View;

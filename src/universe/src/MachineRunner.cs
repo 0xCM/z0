@@ -8,10 +8,12 @@ namespace Z0
 
     public class MachineRunner : WfService<MachineRunner>
     {
+        static MsgPattern<Count, DelimitedIndex<PartId>> RunningMachine => "Executing machine workflow for {0} parts: {1}";
+
         public void Run(MachineOptions options)
         {
-            using var flow = Wf.Running();
-            Wf.Status(Seq.delimit(Chars.Comma, 0, Wf.Api.PartIdentities));
+            var parts = Wf.Api.PartIdentities;
+            using var flow = Wf.Running(RunningMachine.Format(parts.Length, Seq.delimit(Chars.Comma, 0, Wf.Api.PartIdentities)));
             try
             {
                 var api = Wf.ApiServices();
@@ -22,6 +24,9 @@ namespace Z0
                 var statements = Wf.AsmStatementPipe();
 
                 var blocks = store.CodeBlocks();
+
+                if(options.EmitHexIndex)
+                    Wf.ApiHex().EmitHexIndex(blocks);
 
                 if(options.EmitAsmRows)
                     Emitted(rowstore.EmitAsmRows(blocks));
@@ -97,8 +102,6 @@ namespace Z0
 
                 if(options.EmitImageContent)
                     images.EmitApiImageContent();
-
-
             }
             catch(Exception e)
             {

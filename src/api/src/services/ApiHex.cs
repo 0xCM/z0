@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct ApiHex
+    public class ApiHex : WfService<ApiHex>
     {
         [Op]
         public static IApiHexReader reader(IWfShell wf)
@@ -51,36 +51,37 @@ namespace Z0
         public static ApiCodeBlock block(ApiHexRow src)
             => new ApiCodeBlock(src.Address, src.Uri, src.Data);
 
-        [Op]
-        public static Index<ApiHexRow> rows(FS.FilePath src)
+        public Index<ApiHexRow> Rows(FS.FilePath src)
         {
             var data = @readonly(src.ReadLines().Storage.Skip(1));
             var count = data.Length;
             var buffer = root.list<ApiHexRow>(count);
             for(var i=0; i<count; i++)
             {
-                if(parse(skip(data,i), out var dst))
+                var input = skip(data,i);
+                if(Parse(input, out var dst))
                     buffer.Add(dst);
+                else
+                    Wf.Error(string.Format("Parse failure for source text {0}", input));
             }
             return buffer.ToArray();
         }
 
-        [Op]
-        public static bool parse(string src, out ApiHexRow dst)
+        public bool Parse(string src, out ApiHexRow dst)
         {
             dst = new ApiHexRow();
             try
             {
                 if(text.empty(src))
                 {
-                    term.error("No text!");
+                    Wf.Error("No text!");
                     return false;
                 }
 
                 var fields = text.slice(src,1).SplitClean(FieldDelimiter);
                 if(fields.Length !=  (uint)ApiHexRowSpec.FieldCount)
                 {
-                    term.error($"Found {fields.Length} but {ApiHexRowSpec.FieldCount} are required");
+                    Wf.Error($"Found {fields.Length} but {ApiHexRowSpec.FieldCount} are required");
                     return false;
                 }
 
@@ -96,34 +97,23 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.error(e);
+                Wf.Error(e);
                 return false;
             }
         }
 
-        [Op]
-        public static Outcome<FS.FilePath> index(IWfShell wf)
+        public FS.FilePath EmitHexIndex(in ApiCodeBlocks src)
         {
-            try
-            {
-                var dst = wf.Db().IndexFile(ApiHexIndexRow.TableId);
-                var flow = wf.EmittingFile(dst);
-                var svc = ApiHexIndexer.create(wf);
-                index(wf, svc.IndexApiBlocks(), dst);
-                wf.EmittedFile(flow,1);
-                return dst;
-            }
-            catch(Exception e)
-            {
-                wf.Error(e);
-                return e;
-            }
+            var dst = Db.IndexFile(ApiHexIndexRow.TableId);
+            var flow = Wf.EmittingFile(dst);
+            EmitHexIndex(src, dst);
+            Wf.EmittedFile(flow,1);
+            return dst;
         }
 
         [Op]
-        static Outcome index(IWfShell wf, ApiCodeBlocks src, FS.FilePath dst)
+        Outcome EmitHexIndex(in ApiCodeBlocks src, FS.FilePath dst)
         {
-            var svc = ApiHexIndexer.create(wf);
             Array.Sort(src.Blocks.Storage);
             var blocks = src.Blocks.View;
             var count = blocks.Length;

@@ -49,17 +49,19 @@ namespace Z0.Asm
             var parsed = Wf.Db().ParsedExtractFiles();
             Claim.nonzero(parsed.Count);
 
+            var hex = Wf.ApiHex();
+
             using var writer = CaseWriter(FS.ext("csv"));
             writer.WriteLine(root.timestamp().Format());
             root.iter(parsed, f => writer.WriteLine(f));
 
             var mHex = Db.ApiHexFile(typeof(math).HostUri());
-            var mHexRows = ApiHex.rows(mHex);
+            var mHexRows = hex.Rows(mHex);
             writer.WriteLine(RP.PageBreak120);
             root.iter(mHexRows, r => writer.WriteLine(r.Uri));
 
             var gHex = Db.ApiHexFile(typeof(gmath).HostUri());
-            var gHexRows = ApiHex.rows(gHex);
+            var gHexRows = hex.Rows(gHex);
             writer.WriteLine(RP.PageBreak120);
             root.iter(gHexRows, r => writer.WriteLine(r.Uri));
 

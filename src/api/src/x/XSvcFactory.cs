@@ -42,5 +42,8 @@ namespace Z0
 
         public static SymLiterals SymLiterals(this IWfShell wf)
             => Z0.SymLiterals.create(wf);
+
+        public static ApiHex ApiHex(this IWfShell wf)
+            => Z0.ApiHex.create(wf);
     }
 }

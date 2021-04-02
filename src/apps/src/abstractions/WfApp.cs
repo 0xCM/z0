@@ -21,5 +21,4 @@ namespace Z0
 
         protected abstract void Run();
     }
-
 }

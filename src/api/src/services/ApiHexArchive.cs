@@ -60,7 +60,7 @@ namespace Z0
         }
 
         public Index<ApiCodeBlock> Read(FS.FilePath src)
-            => ApiHex.reader(Wf).Read(src).Where(x => x.IsNonEmpty);
+            => ApiHex.reader(Wf).ReadHexBlocks(src).Where(x => x.IsNonEmpty);
 
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part

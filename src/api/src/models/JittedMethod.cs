@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    readonly struct JittedMethod : IComparable<JittedMethod>
+    public readonly struct JittedMethod : IComparable<JittedMethod>
     {
         public ApiHostUri Host {get;}
 

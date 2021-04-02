@@ -11,7 +11,7 @@ namespace Z0
         public static void Run(params string[] args)
         {
             var app = new A();
-            app.InjectShell(WfShell.create(args));
+            app.InjectShell(WfShell.create(ApiCatalogs.parts(root.controller(), args), args));
             app.SetMode(InDiagnosticMode);
             app.RunTests();
         }
