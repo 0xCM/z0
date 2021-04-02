@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XTend
+    partial class XApi
     {
         [Op]
         public static Index<SymLiteral> ApiClasses(this Assembly src)

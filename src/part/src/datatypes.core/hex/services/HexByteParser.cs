@@ -14,8 +14,6 @@ namespace Z0
     using static root;
     using static memory;
 
-    using P = TextRules.Parse;
-
     [ApiHost]
     public readonly struct HexByteParser : IHexParser<byte>
     {
@@ -59,7 +57,7 @@ namespace Z0
                     s0 = text.slice(s0, len - PreSpec.Length);
                 else if(HexFormat.HasPostSpec(s0))
                     s0 = text.slice(s0, 0, len - PostSpec.Length);
-                var blocks = P.split(s0, Chars.Space);
+                var blocks = text.split(s0, Chars.Space);
                 dst = blocks.Select(x => byte.Parse(x, NumberStyles.HexNumber));
                 return true;
             }

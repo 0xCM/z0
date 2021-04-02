@@ -1,0 +1,33 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static memory;
+    using static TextRules;
+
+    partial class text
+    {
+        [MethodImpl(Inline), Op]
+        public static string right(string src, int desired)
+        {
+            var count = Query.length(src);
+            if (count == 0)
+                return EmptyString;
+
+            var data = span(src);
+            var actual = count < desired ? count : desired;
+
+            Span<char> dst = stackalloc char[actual];
+            for (var i=0u; i<count; i++)
+                seek(dst,i) = skip(data, count - actual + i);
+
+            return new string(dst);
+        }
+    }
+}

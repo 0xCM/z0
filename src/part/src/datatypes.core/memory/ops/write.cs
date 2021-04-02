@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    using O = ApiOpaqueClass;
-
-    partial struct proxy
+    partial struct memory
     {
-        [MethodImpl(Options), Opaque(O.Write), Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void write<T>(in T src, ref byte dst)
             => WriteUnaligned(ref dst, src);
     }

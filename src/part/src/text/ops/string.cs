@@ -9,11 +9,10 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static TextRules;
 
     partial class text
     {
-       [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op]
         public static string @string(ReadOnlySpan<char> src)
             => sys.@string(src);
 

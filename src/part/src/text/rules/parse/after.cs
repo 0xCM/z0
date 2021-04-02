@@ -33,14 +33,14 @@ namespace Z0
                     }
                 }
 
-                return found != -1 ?  substring(src, found + 1) : src;
+                return found != -1 ?  text.substring(src, found + 1) : src;
             }
 
             [Op]
             public static string after(string src, string match)
             {
                 var found = src.IndexOf(match);
-                return found != -1 ? substring(src,found + match.Length) : src;
+                return found != -1 ? text.substring(src,found + match.Length) : src;
             }
 
             [Op]
@@ -54,7 +54,7 @@ namespace Z0
                 }
                 else
                 {
-                    result = substring(src,found + match.Length);
+                    result = text.substring(src,found + match.Length);
                     return true;
                 }
             }

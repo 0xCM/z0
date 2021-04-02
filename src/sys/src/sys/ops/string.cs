@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
+
     partial struct sys
     {
         /// <summary>
@@ -21,9 +21,9 @@ namespace Z0
         [MethodImpl(Options), Op]
         public static unsafe string @string(char* pSrc)
             => proxy.@string(pSrc);
-        
+
         [MethodImpl(Options), Op]
         public static string @string(ReadOnlySpan<char> src)
-            => proxy.format(src);
+            => proxy.@string(src);
     }
 }

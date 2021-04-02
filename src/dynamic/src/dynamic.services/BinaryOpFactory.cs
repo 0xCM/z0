@@ -44,7 +44,7 @@ namespace Z0
             where T : unmanaged
         {
             var operand = MultiDiviner.Service.Identify(typeof(T));
-            return ApiIdentityBuilder.build(k.Id, NumericKinds.from<T>(),generic);
+            return ApiIdentityBuilder.build(k.Id, Numeric.kind<T>(),generic);
         }
 
         static OpIdentity identify<T>(string name)

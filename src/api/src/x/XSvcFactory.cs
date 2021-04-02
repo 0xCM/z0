@@ -51,5 +51,8 @@ namespace Z0
 
         public static ApiJit ApiJit(this IWfShell wf)
             => Z0.ApiJit.create(wf);
+
+        public static ApiClassCatalog ApiClassCatalog(this IWfShell wf)
+            => Z0.ApiClassCatalog.create(wf);
     }
 }

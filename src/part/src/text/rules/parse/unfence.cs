@@ -26,7 +26,7 @@ namespace Z0
                 dst = EmptyString;
                 if(!Query.blank(src) && Query.fenced(src, fence, out var location))
                 {
-                    dst = segment(src, location.Left + 1,  location.Right - 1);
+                    dst = text.segment(src, location.Left + 1,  location.Right - 1);
                     return true;
                 }
                 return false;

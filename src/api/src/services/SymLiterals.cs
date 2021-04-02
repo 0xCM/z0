@@ -19,15 +19,11 @@ namespace Z0
             return Emit(Wf.Components, target);
         }
 
-        [Op]
-        static IApiClassCatalog classes(IWfShell wf)
-            => ApiClassCatalog.create(wf);
-
         public void EmitApiClasses()
         {
             var dst = Db.IndexTable("api.classes");
             var flow = Wf.EmittingTable<SymLiteral>(dst);
-            var service = classes(Wf);
+            var service = Wf.ApiClassCatalog();
             var formatter = Tables.formatter<SymLiteral>();
             var classifiers = service.Classifiers();
             var literals = classifiers.SelectMany(x => x.Literals);

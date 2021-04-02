@@ -6,15 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    partial struct sys
+
+    using static Part;
+    using static TextRules;
+
+    partial class text
     {
         /// <summary>
-        /// Formats a character span as a string
+        /// Returns the substring [0,chars-1]
         /// </summary>
-        /// <param name="src">The source characters</param>
-        [MethodImpl(Options), Op]
-        public static string format(ReadOnlySpan<char> src)
-            => proxy.format(src);
+        [Op]
+        public static string left(string src, int chars)
+            => Query.blank(src) ? src : text.substring(src, 0, src.Length < chars ? src.Length : chars);
     }
 }

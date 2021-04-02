@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.StringSplitOptions;
     using static Part;
-    using static TextRules;
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        [Op]
         public static Index<string> split(string src, char sep, bool clean = true)
-            => Parse.split(src, sep, clean);
+            => src.Split(sep,  clean ? RemoveEmptyEntries : None);
 
-        [MethodImpl(Inline)]
+        [Op]
         public static Index<string> split(string src, string sep, bool clean = true)
-            => Parse.split(src, sep, clean);
+            => src.Split(sep, clean ? RemoveEmptyEntries : None);
     }
 }

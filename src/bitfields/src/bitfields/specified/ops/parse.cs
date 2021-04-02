@@ -4,14 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Part;
-    using static Rules;
     using static TextRules;
-    using static memory;
 
     partial struct BitFieldSpecs
     {
@@ -28,7 +21,7 @@ namespace Z0
             dst = default;
             if(Parse.unfence(src, SegmentFence, out var fenced))
             {
-                var parts = Parse.split(fenced, SegmentDelimiter);
+                var parts = text.split(fenced, SegmentDelimiter);
                 if(parts.Count == 2)
                 {
                     if(Numeric.parse(parts[0], out T max)

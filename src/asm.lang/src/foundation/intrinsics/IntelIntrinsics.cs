@@ -144,7 +144,7 @@ namespace Z0.Asm
         static void read(XmlReader reader, ref Operation dst)
         {
             var content = reader.ReadInnerXml().Replace(XmlEntities.gt, ">").Replace(XmlEntities.lt, "<");
-            var lines = TextRules.Parse.lines(content).View;
+            var lines = text.lines(content).View;
             var count = lines.Length;
             if(count != 0)
             {

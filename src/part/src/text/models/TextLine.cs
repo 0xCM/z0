@@ -53,7 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TextBlock Segment(uint i0, uint i1)
-            => Parse.segment(Content, i0, i1);
+            => text.segment(Content, i0, i1);
 
         [MethodImpl(Inline)]
         public TextBlock Slice(uint offset, uint length)

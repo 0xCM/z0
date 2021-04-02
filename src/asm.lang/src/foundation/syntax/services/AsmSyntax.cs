@@ -131,7 +131,7 @@ namespace Z0.Asm
                 var i = text.index(sig, MnemonicTerminator);
                 if(i > 0)
                 {
-                    dst = Parse.segment(sig, 0, i - 1).ToUpper();
+                    dst = text.segment(sig, 0, i - 1).ToUpper();
                     return true;
                 }
                 else

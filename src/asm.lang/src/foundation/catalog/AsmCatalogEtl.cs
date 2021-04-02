@@ -191,7 +191,7 @@ namespace Z0.Asm
             Wf.Status($"Loaded source catalog data of size {sz} bytes");
 
             var foundheader = false;
-            var lines = Parse.lines(content).View;
+            var lines = text.lines(content).View;
 
             Wf.Status($"Parsing {lines.Length} source catalog lines");
 
@@ -275,7 +275,7 @@ namespace Z0.Asm
 
         bool parse(ushort seq, in TextLine src, ref StokeAsmImportRow dst)
         {
-            if(Parse.row(src, SourceFormat, out var row))
+            if(TextDocs.row(src, SourceFormat, out var row))
             {
                 if(row.CellCount == 15)
                 {

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     public sealed class ScriptRunner
     {
@@ -44,7 +43,7 @@ namespace Z0
             try
             {
                 var process = ToolCmd.run(cmd).Wait();
-                var lines =  Parse.lines(process.Output);
+                var lines =  text.lines(process.Output);
                 root.iter(lines, line => writer.WriteLine(line));
 
                 return lines;

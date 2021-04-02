@@ -5,15 +5,51 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.IO;
 
     using static Part;
     using static memory;
-    using static TextRules;
 
     [ApiHost]
     public readonly struct TextDocs
     {
+        [MethodImpl(Inline), Op]
+        static bool skipline(TextLine src, in TextDocFormat spec)
+            => src.IsEmpty || src.StartsWith(spec.CommentPrefix) || src.StartsWith(spec.RowBlockSep);
+
+        /// <summary>
+        /// Parses a row from a line of text
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="spec">The text format spec</param>
+        [Op]
+        public static bool row(TextLine src, in TextDocFormat spec, out TextRow dst)
+        {
+            if(skipline(src, spec))
+            {
+                dst = TextRow.Empty;
+                return false;
+            }
+            else
+            {
+                if(spec.HasHeader)
+                {
+                    var parts = src.Split(spec);
+                    var count = parts.Length;
+                    var buffer = memory.alloc<TextBlock>(count);
+                    ref var target= ref first(buffer);
+                    for(var i=0u; i<count; i++)
+                        seek(target, i) = new TextBlock(parts[i].Trim());
+                    dst= new TextRow(buffer);
+                }
+                else
+                    dst = new TextRow(new TextBlock(src.Content));
+
+                return true;
+            }
+        }
+
         public static ParseResult<T> parse<T>(string data, Func<TextDoc,ParseResult<T>> pfx)
         {
             using var stream = Streams.memory(data);
@@ -62,6 +98,39 @@ namespace Z0
         }
 
         /// <summary>
+        /// Parses a header row from a line of text
+        /// </summary>
+        /// <param name="src">The source line</param>
+        /// <param name="spec">The text format</param>
+        [Op]
+        public static bool header(TextLine src, in TextDocFormat spec, out TextDocHeader dst)
+        {
+            var parts = src.Split(spec);
+            var count = parts.Length;
+            var buffer = root.list<string>();
+
+            if(parts.Length != 0)
+            {
+                for(var i=0; i<count; i++)
+                {
+                    var part = parts[i].Trim();
+                    if(text.nonempty(part))
+                        buffer.Add(part);
+                }
+            }
+
+            if(buffer.Count != 0)
+            {
+                dst = new TextDocHeader(buffer.ToArray());
+                return true;
+            }
+
+            dst = TextDocHeader.Empty;
+            return false;
+        }
+
+
+        /// <summary>
         /// Attempts to parse a text document and returns the result if successful
         /// </summary>
         /// <param name="src">The source document path</param>
@@ -100,12 +169,12 @@ namespace Z0
 
                     if(fmt.HasHeader && docheader.IsNone() && rows.Count == 0)
                     {
-                        if(Parse.header(line, fmt, out var _docheader))
+                        if(header(line, fmt, out var _docheader))
                             docheader = _docheader;
                     }
                     else
                     {
-                        if(Parse.row(line,fmt, out var _row))
+                        if(row(line,fmt, out var _row))
                             rows.Add(_row);
                     }
                 }

@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     partial struct TextRules
     {
         partial struct Parse
@@ -32,7 +27,7 @@ namespace Z0
                         break;
                     }
                 }
-                return found != -1 ? substring(src, 0, found) : src;
+                return found != -1 ? text.substring(src, 0, found) : src;
             }
         }
     }
