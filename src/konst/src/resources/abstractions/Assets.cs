@@ -16,7 +16,7 @@ namespace Z0
         public Assembly DataSource
             => typeof(T).Assembly;
 
-        public ResDescriptor Asset(ContentName id)
+        public ResDescriptor Asset(ResourceName id)
         {
             if(Resources.descriptor(DataSource, id, out ResDescriptor res))
                 return res;

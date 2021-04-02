@@ -13,6 +13,6 @@ namespace Z0
 
         ResDescriptors All();
 
-        ResDescriptor Asset(ContentName id);
+        ResDescriptor Asset(ResourceName id);
     }
 }

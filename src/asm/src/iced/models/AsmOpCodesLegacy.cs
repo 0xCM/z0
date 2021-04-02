@@ -34,13 +34,14 @@ namespace Z0.Asm
         [Op]
         public static AsmOpCodeDatasetLegacy dataset()
         {
-            var resource = ResExtractor.Service(typeof(Parts.Res).Assembly).MatchDocument(ContentNames.OpCodeSpecs);
-            var count = resource.RowCount;
-            var records = sys.alloc<AsmOpCodeRowLegacy>(count);
-            parse(resource, records);
-            var identifers = sys.alloc<AsmOpCodeExpr>(count);
-            identify(records, identifers);
-            return new AsmOpCodeDatasetLegacy(records,identifers);
+            // var resource = ResExtractor.Service(typeof(Parts.Res).Assembly).MatchDocument(ContentNames.OpCodeSpecs);
+            // var count = resource.RowCount;
+            // var records = sys.alloc<AsmOpCodeRowLegacy>(count);
+            // parse(resource, records);
+            // var identifers = sys.alloc<AsmOpCodeExpr>(count);
+            // identify(records, identifers);
+            // return new AsmOpCodeDatasetLegacy(records,identifers);
+            return default;
         }
 
         [Op]

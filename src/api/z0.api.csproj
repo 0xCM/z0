@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Res)" />
+
   </ItemGroup>
 
 </Project>

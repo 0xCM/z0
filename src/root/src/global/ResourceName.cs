@@ -8,12 +8,12 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ContentName : ITextual
+    public readonly struct ResourceName : ITextual
     {
         readonly string Value;
 
         [MethodImpl(Inline)]
-        internal ContentName(string src)
+        public ResourceName(string src)
             => Value = src;
 
         [MethodImpl(Inline)]
@@ -24,11 +24,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ContentName(string src)
-            => new ContentName(src);
+        public static implicit operator ResourceName(string src)
+            => new ResourceName(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(ContentName src)
+        public static implicit operator string(ResourceName src)
             => src.Value ?? EmptyString;
     }
 }

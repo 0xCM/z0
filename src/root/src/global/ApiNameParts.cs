@@ -10,13 +10,11 @@ public readonly struct ApiNameParts
 
     public const string @fixed = Fixed;
 
-
     public const string @enum = Enum;
 
     public const string @struct = Struct;
 
     public const string @case = Case;
-
 
     public const string api = nameof(api);
 
