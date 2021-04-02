@@ -15,6 +15,7 @@ namespace Z0.Lang
 
         public Value Content {get;}
 
+        [MethodImpl(Inline)]
         public VarValue(Var var, Value value)
         {
             Var = var;
