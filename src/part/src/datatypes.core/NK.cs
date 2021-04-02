@@ -11,12 +11,6 @@ namespace Z0
 
     using NK = NumericKind;
 
-    public readonly struct NK<F,T> : INumericKind<NK<F,T>,T>
-        where T : unmanaged
-        where F : unmanaged, INumericKind<T>
-    {
-
-    }
 
     /// <summary>
     /// Represents the parametrically-identified numeric kind
