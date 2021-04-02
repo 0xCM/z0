@@ -56,5 +56,11 @@ namespace Z0
 
         public static MsgPattern<Count,FS.FileUri> ProcessedStatements
             => "Processed {0} statements from {1}";
+
+        public static MsgPattern<Count> CreatingStatements => "Creating statements for {0} routines";
+
+        public static MsgPattern<Count,ApiHostUri> CreatingHostStatements => "Creating {0} {1} routine productions";
+
+
     }
 }

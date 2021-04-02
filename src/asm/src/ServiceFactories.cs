@@ -97,5 +97,8 @@ namespace Z0
 
         public static ApiCodeBlockTraverser ApiiCodeBlockTraverser(this IWfShell src)
             => Asm.ApiCodeBlockTraverser.create(src);
+
+        public static AsmStatementProducer AsmStatementProducer(this IWfShell wf)
+            => Asm.AsmStatementProducer.create(wf);
     }
 }

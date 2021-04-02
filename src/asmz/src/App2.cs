@@ -961,9 +961,10 @@ namespace Z0.Asm
 
         void Produce()
         {
-            var productions = ApiProductions.create(Wf);
+
+            var producer = Wf.AsmStatementProducer();
             var hosts = NestedHosts(typeof(Prototypes));
-            var count = productions.Produce(Toolsets.nasm, hosts);
+            var count = producer.Produce(Toolsets.nasm, hosts);
         }
 
         Index<AsmMemberRoutine> CaptureSelectedRoutines()
@@ -1064,7 +1065,10 @@ namespace Z0.Asm
         public void Run()
         {
 
-            NasmRunner.create(Wf).Run();
+            //NasmRunner.create(Wf).Run();
+
+            Produce();
+
             // var f = BinaryOpFactory.create<byte>("mul_8u_8u_8u", mul_ᐤ8uㆍ8uᐤ);
             // var c = f(4,8);
             // Wf.Row(c);
