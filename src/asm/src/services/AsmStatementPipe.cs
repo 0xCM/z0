@@ -24,7 +24,7 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
         }
 
-        public Index<AsmApiStatement> BuildStatements(ApiCodeBlocks src)
+        public Index<AsmApiStatement> BuildStatements(ApiBlockIndex src)
         {
             var hosts = src.Hosts.View;
             var count = hosts.Length;
@@ -45,9 +45,9 @@ namespace Z0.Asm
         }
 
         public Index<AsmApiStatement> EmitStatements()
-            => EmitStatements(DataStore.CodeBlocks());
+            => EmitStatements(DataStore.IndexedBlocks());
 
-        public Index<AsmApiStatement> EmitStatements(ApiCodeBlocks src)
+        public Index<AsmApiStatement> EmitStatements(ApiBlockIndex src)
         {
             var statements = BuildStatements(src);
             EmitStatements(statements);

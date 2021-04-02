@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static mem<T> mem<T>(T src)
-            where T : unmanaged, IMemOp
+            where T : unmanaged
                 => new mem<T>(src);
 
         [MethodImpl(Inline), Op]

@@ -4,15 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
+    public interface IReg32<T> : IReg<W32,T>
+        where T : unmanaged
+    {
 
-    /// <summary>
-    /// Defines a 32-bit operand
-    /// </summary>
-    public readonly struct AsmOp32
+    }
+
+    public interface IReg32<H,T> : IReg32<T>
+        where H : struct, IReg32<H,T>
+        where T : unmanaged
     {
 
     }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public class ApiCodeBlocks
+    public class ApiBlockIndex
     {
         PartCodeAddresses CodeAddresses;
 
@@ -21,7 +21,7 @@ namespace Z0
         UriCode UriCode;
 
         [MethodImpl(Inline)]
-        public ApiCodeBlocks(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex parts, UriCode code)
+        public ApiBlockIndex(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex parts, UriCode code)
         {
             CodeAddresses = memories;
             UriLocations = memuri;
@@ -167,10 +167,10 @@ namespace Z0
             get => PartCodeBlocks(id);
         }
 
-        public static ApiCodeBlocks Empty
+        public static ApiBlockIndex Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiCodeBlocks(PartCodeAddresses.Empty, PartUriAddresses.Empty, PartCodeIndex.Empty, UriCode.Empty);
+            get => new ApiBlockIndex(PartCodeAddresses.Empty, PartUriAddresses.Empty, PartCodeIndex.Empty, UriCode.Empty);
         }
     }
 }

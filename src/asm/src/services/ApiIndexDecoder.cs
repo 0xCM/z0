@@ -4,14 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static memory;
 
     public sealed class ApiIndexDecoder : AsmWfService<ApiIndexDecoder>, IApiIndexDecoder
     {
-        public ApiAsmDataset Decode(ApiCodeBlocks src)
+        public ApiAsmDataset Decode(ApiBlockIndex src)
         {
             var decoder = Asm.RoutineDecoder;
             var parts = src.Parts;

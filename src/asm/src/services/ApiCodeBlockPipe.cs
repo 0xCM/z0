@@ -17,7 +17,7 @@ namespace Z0.Asm
     public class ApiCodeBlockPipe : WfService<ApiCodeBlockPipe>
     {
         [Op]
-        public uint Run(ApiCodeBlocks src, Action<ApiCodeBlock> receiver)
+        public uint Run(ApiBlockIndex src, Action<ApiCodeBlock> receiver)
         {
             var hosts = src.Hosts.View;
             var count = hosts.Length;
@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public uint Run(ApiCodeBlocks src, Action<ApiHostCode> receiver)
+        public uint Run(ApiBlockIndex src, Action<ApiHostCode> receiver)
         {
             var hosts = src.Hosts.View;
             var count = hosts.Length;

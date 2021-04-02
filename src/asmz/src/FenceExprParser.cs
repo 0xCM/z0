@@ -11,7 +11,6 @@ namespace Z0
     using static memory;
     using static Rules;
 
-
     [ApiHost]
     public ref struct FenceExprPaser
     {

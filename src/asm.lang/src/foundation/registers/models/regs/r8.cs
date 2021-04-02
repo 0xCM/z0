@@ -16,7 +16,7 @@ namespace Z0.Asm
 
     partial struct AsmRegs
     {
-        public struct R8<R> : IReg<R8<R>,W8,byte>, IRegOp8<byte>
+        public struct R8<R> : IReg8<R8<R>,T>
             where R : unmanaged, IRegOp8
         {
             public byte Data;
@@ -51,7 +51,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an operand that specifies an 8-bit gp register
         /// </summary>
-        public struct r8 : IReg<r8,W,T>, IRegOp8<T>
+        public struct r8 : IReg8<r8,T>
         {
             public T Content {get;}
 
@@ -71,7 +71,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct al : IReg<al,W,T,N0>, IRegOp8<T>
+        public struct al : IReg8<al,T>
         {
             public T Content {get;}
 
@@ -86,7 +86,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct cl : IReg<cl,W,T,N1>, IRegOp8<T>
+        public struct cl : IReg8<cl,T>
         {
             public T Content {get;}
 
@@ -102,7 +102,7 @@ namespace Z0.Asm
 
         }
 
-        public struct dl : IReg<dl,W,T,N2>, IRegOp8<T>
+        public struct dl : IReg8<dl,T>
         {
             public T Content {get;}
 
@@ -118,7 +118,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct bl : IReg<bl,W,T,N3>, IRegOp8<T>
+        public struct bl : IReg8<bl,T>
         {
             public T Content {get;}
 
@@ -133,7 +133,7 @@ namespace Z0.Asm
             public K RegKind => K.BL;
         }
 
-        public struct sil : IReg<sil,W,T>, IRegOp8<T>
+        public struct sil : IReg8<sil,T>
         {
             public T Content {get;}
 
@@ -148,7 +148,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct dil : IReg<dil,W,T>, IRegOp8<T>
+        public struct dil : IReg8<dil,T>
         {
             public T Content {get;}
 
@@ -163,7 +163,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct spl : IReg<spl,W,T>, IRegOp8<T>
+        public struct spl : IReg8<spl,T>
         {
             public T Content {get;}
 
@@ -179,7 +179,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct bpl : IReg<bpl,W,T>, IRegOp8<T>
+        public struct bpl : IReg8<bpl,T>
         {
             public T Content {get;}
 
@@ -194,7 +194,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r8b : IReg<r8b,W,T>, IRegOp8<T>
+        public struct r8b : IReg8<r8b,T>
         {
             public T Content {get;}
 
@@ -211,7 +211,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r9b : IReg<r9b,W,T>, IRegOp8<T>
+        public struct r9b : IReg8<r9b,T>
         {
             public T Content {get;}
 
@@ -226,7 +226,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r10b : IReg<r10b,W,T>, IRegOp8<T>
+        public struct r10b : IReg8<r10b,T>
         {
             public T Content {get;}
 
@@ -241,7 +241,7 @@ namespace Z0.Asm
                 => new G(src.Content, src.RegKind);
         }
 
-        public struct r11b : IReg<r11b,W,T>, IRegOp8<T>
+        public struct r11b : IReg8<r11b,T>
         {
             public T Content {get;}
 
@@ -259,7 +259,7 @@ namespace Z0.Asm
 
         }
 
-        public struct r12b : IReg<r12b,W,T>, IRegOp8<T>
+        public struct r12b : IReg8<r12b,T>
         {
             public T Content {get;}
 
@@ -277,7 +277,7 @@ namespace Z0.Asm
 
         }
 
-        public struct r13b : IReg<r13b,W,T>, IRegOp8<T>
+        public struct r13b : IReg8<r13b,T>
         {
             public T Content {get;}
 
@@ -296,7 +296,7 @@ namespace Z0.Asm
 
         }
 
-        public struct r14b : IReg<r14b,W,T>, IRegOp8<T>
+        public struct r14b : IReg8<r14b,T>
         {
             public T Content {get;}
 
@@ -314,7 +314,7 @@ namespace Z0.Asm
 
         }
 
-        public struct r15b : IReg<r15b,W,T>, IRegOp8<T>
+        public struct r15b : IReg8<r15b,T>
         {
             public T Content {get;}
 

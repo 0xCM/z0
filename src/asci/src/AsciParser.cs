@@ -9,7 +9,6 @@ namespace Z0
 
     using static memory;
     using static Part;
-    using static AsciCharData;
 
     [ApiHost]
     public readonly struct AsciParser

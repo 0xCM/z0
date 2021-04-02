@@ -5,7 +5,7 @@
 namespace Z0
 {
     /// <summary>
-    /// Collects statistics of encoded data known to a <see cref='ApiCodeBlocks'/>
+    /// Collects statistics of encoded data known to a <see cref='ApiBlockIndex'/>
     /// </summary>
     [Record]
     public struct ApiIndexMetrics : ITextual, IRecord<ApiIndexMetrics>

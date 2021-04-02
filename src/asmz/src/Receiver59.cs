@@ -18,7 +18,6 @@ namespace Z0.Asm
         public Register Register;
     }
 
-
     [ApiHost]
     public class Receiver59 : IReceiver<ApiCodeBlock,AsmInstructionBlock>
     {

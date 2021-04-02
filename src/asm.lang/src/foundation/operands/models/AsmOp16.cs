@@ -12,17 +12,8 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 16-bit operand
     /// </summary>
-    public readonly struct AsmOp16 : IAsmOp<AsmOp16,W16,ushort>
+    public readonly struct AsmOp16
     {
-        public ushort Content {get;}
 
-        public AsmOpKind OpKind {get;}
-
-        [MethodImpl(Inline)]
-        public AsmOp16(ushort value, AsmOpKind kind)
-        {
-            Content = value;
-            OpKind = kind;
-        }
     }
 }

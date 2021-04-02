@@ -10,17 +10,11 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public readonly struct AsmMnemonicCase
+
+    [ApiHost]
+    public readonly struct AsmMemOps
     {
-        public AsmMnemonicCode Mnemonic {get;}
 
-        public Index<AsmOps> Operands {get;}
 
-        [MethodImpl(Inline)]
-        public AsmMnemonicCase(AsmMnemonicCode code, Index<AsmOps> ops)
-        {
-            Mnemonic = code;
-            Operands = ops;
-        }
     }
 }

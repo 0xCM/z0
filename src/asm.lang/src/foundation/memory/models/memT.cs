@@ -11,8 +11,8 @@ namespace Z0.Asm
 
     partial struct AsmMem
     {
-        public readonly struct mem<T> : IMemOp<T>
-            where T : unmanaged, IMemOp
+        public readonly struct mem<T> : IMem<T>
+            where T : unmanaged
         {
             public T Content {get;}
 

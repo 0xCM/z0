@@ -11,10 +11,10 @@ namespace Z0
 
     using static memory;
 
-    [Service(typeof(IApiHexIndexer))]
-    public class ApiHexIndexer : WfService<ApiHexIndexer>, IApiHexIndexer
+    [Service(typeof(IApiIndexBuilder))]
+    public class ApiIndexBuilder : WfService<ApiIndexBuilder>, IApiIndexBuilder
     {
-        public ApiCodeBlocks Product;
+        public ApiBlockIndex Product;
 
         public ApiIndexStatus IndexStatus;
 
@@ -24,15 +24,18 @@ namespace Z0
 
         UriCode UriCode;
 
-        public ApiHexIndexer()
+        public ApiIndexBuilder()
         {
             CodeAddress = root.dict<MemoryAddress,ApiCodeBlock>();
             AddressUri = root.dict<MemoryAddress,OpUri>();
             UriCode = new UriCode();
-            Product = ApiCodeBlocks.Empty;
+            Product = ApiBlockIndex.Empty;
         }
 
-        public ApiCodeBlocks IndexApiBlocks()
+        public ApiMemberIndex CreateMemberIndex(ApiHostCatalog src)
+            => ApiIndex.create(src);
+
+        public ApiBlockIndex IndexApiBlocks()
         {
             var src = Db.ParsedExtractFiles().View;
             var count = src.Length;
@@ -100,7 +103,7 @@ namespace Z0
             return dst;
         }
 
-        ApiCodeBlocks Freeze()
+        ApiBlockIndex Freeze()
         {
             var memories = CodeAddress.ToKVPairs();
             var parts = UriCode.Keys.Select(x => x.Host.Part).Distinct().Array();
@@ -109,7 +112,7 @@ namespace Z0
                 .GroupBy(g => g.Host)
                 .Select(x => (new ApiHostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
-            return new ApiCodeBlocks(
+            return new ApiBlockIndex(
                    new PartCodeAddresses(parts, memories),
                    new PartUriAddresses(parts, AddressUri),
                    new PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()),

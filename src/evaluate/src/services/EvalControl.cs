@@ -39,7 +39,8 @@ namespace Z0
             if(catalog.IsEmpty)
                 return;
 
-            var members = ApiIndex.create(catalog);
+
+            var members = Wf.ApiIndexBuilder().CreateMemberIndex(catalog);
             Wf.Status($"Indexed {members.EntryCount} {host} members");
 
             var blocks = ApiHex.reader(Wf).ReadHexBlocks(src);

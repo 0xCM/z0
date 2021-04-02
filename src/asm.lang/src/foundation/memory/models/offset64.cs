@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static AsmRegs;
 
-    using api = AsmMem;
-
     partial struct AsmMem
     {
         /// <summary>
@@ -64,9 +62,8 @@ namespace Z0.Asm
             public MemoryAddress EffectiveAddress
             {
                 [MethodImpl(Inline)]
-                get =>  api.effective(this);
+                get =>  Base.Content + (Index.Content * (byte)Scale) + memory.u32(Dx);
             }
-
         }
 
         /// <summary>

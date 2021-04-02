@@ -7,7 +7,7 @@ namespace Z0.Asm
     [Singleton]
     public sealed class ApiCodeStore : WfService<ApiCodeStore>
     {
-        ApiCodeBlocks _CodeBlocks;
+        ApiBlockIndex ApiBlocks;
 
         int Sequence;
 
@@ -17,14 +17,14 @@ namespace Z0.Asm
         {
             Sequence = 0;
             Offset = 0;
-            _CodeBlocks = ApiCodeBlocks.Empty;
+            ApiBlocks = ApiBlockIndex.Empty;
         }
 
-        public ApiCodeBlocks CodeBlocks()
+        public ApiBlockIndex IndexedBlocks()
         {
-            if(_CodeBlocks.IsEmpty)
-                _CodeBlocks = Wf.ApiHexIndexer().IndexApiBlocks();
-            return _CodeBlocks;
+            if(ApiBlocks.IsEmpty)
+                ApiBlocks = Wf.ApiIndexBuilder().IndexApiBlocks();
+            return ApiBlocks;
         }
    }
 }

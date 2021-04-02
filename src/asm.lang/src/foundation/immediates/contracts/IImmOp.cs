@@ -9,15 +9,13 @@ namespace Z0.Asm
     [Free]
     public interface IImmOp : IAsmOp
     {
-        RegKind RegKind => default;
+        AsmOpClass Class => AsmOpClass.Imm;
     }
 
     [Free]
-    public interface IImmOp<T> : IImmOp, IAsmOp<T>
+    public interface IImmOp<T> : IImmOp, IContented<T>
         where T : unmanaged
     {
-        AsmOpKind IAsmOp.OpKind
-            => AsmOpKind.Imm | (AsmOpKind)memory.size<T>();
         BitWidth ISized.Width
             => memory.size<T>();
     }

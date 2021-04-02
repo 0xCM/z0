@@ -19,9 +19,6 @@ namespace Z0.Asm
             public imm8(byte value)
                 => Content = value;
 
-            public AsmOpKind OpKind
-                => AsmOpKind.Imm | AsmOpKind.W8;
-
             [MethodImpl(Inline)]
             public static implicit operator Imm8(imm8 src)
                 => src.Content;

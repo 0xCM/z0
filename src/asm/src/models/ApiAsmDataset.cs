@@ -6,17 +6,17 @@ namespace Z0.Asm
 {
     public sealed class ApiAsmDataset
     {
-        public ApiCodeBlocks Blocks {get;}
+        public ApiBlockIndex Blocks {get;}
 
         public Index<ApiPartRoutines> Routines {get;}
 
         ApiAsmDataset()
         {
-            Blocks = ApiCodeBlocks.Empty;
+            Blocks = ApiBlockIndex.Empty;
             Routines = Index<ApiPartRoutines>.Empty;
         }
 
-        internal ApiAsmDataset(ApiCodeBlocks blocks, Index<ApiPartRoutines> routines)
+        internal ApiAsmDataset(ApiBlockIndex blocks, Index<ApiPartRoutines> routines)
         {
             Blocks = blocks;
             Routines = routines;

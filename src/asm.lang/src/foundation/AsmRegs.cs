@@ -19,21 +19,21 @@ namespace Z0.Asm
             where T : unmanaged, IBitNumber<T>
                 => new RegCode<T>(src);
 
+
         [Op, Closures(UnsignedInts)]
-        public static string format<T>(IRegOp<T> src)
+        public static string format<T>(IReg<T> src)
             where T : unmanaged
         {
-            ushort w = src.Width;
-            switch(w)
+            switch(src.Width)
             {
                 case 8:
-                    return format(src as IRegOp8<T>);
+                    return format(src as IReg8<T>);
                 case 16:
-                    return format(src as IRegOp16<T>);
+                    return format(src as IReg16<T>);
                 case 32:
-                    return format(src as IRegOp32<T>);
+                    return format(src as IReg32<T>);
                 case 64:
-                    return format(src as IRegOp64<T>);
+                    return format(src as IReg64<T>);
                 default:
                     var data = bytes(src.Content);
                     var formatter = Hex.formatter<byte>();
@@ -42,7 +42,7 @@ namespace Z0.Asm
         }
 
         [Op, Closures(UInt8k)]
-        public static string format<T>(IRegOp8<T> src)
+        public static string format<T>(IReg8<T> src)
             where T : unmanaged
         {
             var data = bw8(src.Content);
@@ -50,7 +50,7 @@ namespace Z0.Asm
         }
 
         [Op, Closures(UInt16k)]
-        public static string format<T>(IRegOp16<T> src)
+        public static string format<T>(IReg16<T> src)
             where T : unmanaged
         {
             var data = bw16(src.Content);
@@ -58,7 +58,7 @@ namespace Z0.Asm
         }
 
         [Op, Closures(UInt32k)]
-        public static string format<T>(IRegOp32<T> src)
+        public static string format<T>(IReg32<T> src)
             where T : unmanaged
         {
             var data = bw32(src.Content);
@@ -66,7 +66,7 @@ namespace Z0.Asm
         }
 
         [Op, Closures(UInt64k)]
-        public static string format<T>(IRegOp64<T> src)
+        public static string format<T>(IReg64<T> src)
             where T : unmanaged
         {
             var data = bw64(src.Content);

@@ -8,6 +8,6 @@ namespace Z0
 
     public interface IResBytesEmitter : IWfService
     {
-        Index<ApiHostRes> Emit(ApiCodeBlocks index, FS.FolderPath dst);
+        Index<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst);
     }
 }

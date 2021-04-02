@@ -18,7 +18,7 @@ namespace Z0.Asm
     }
 
     [Free]
-    public interface IRegOp<T> : IRegOp, IAsmOp<T>
+    public interface IRegOp<T> : IRegOp
         where T : unmanaged
     {
         AsmOpKind IAsmOp.OpKind
@@ -28,6 +28,6 @@ namespace Z0.Asm
             => width<T>();
 
         string ITextual.Format()
-            => api.format(this);
+            => ToString();
     }
 }

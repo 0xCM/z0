@@ -2,10 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    public interface IApiHexIndexer : IWfService
+
+    public interface IReg64<T> : IReg<W64,T>
+        where T : unmanaged
     {
-        ApiCodeBlocks IndexApiBlocks();
+
     }
+
+    public interface IReg64<H,T> : IReg64<T>
+        where H : struct, IReg64<H,T>
+        where T : unmanaged
+    {
+
+    }
+
 }

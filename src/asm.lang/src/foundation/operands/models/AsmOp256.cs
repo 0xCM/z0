@@ -12,17 +12,8 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 256-bit operand
     /// </summary>
-    public readonly struct AsmOp256: IAsmOp<AsmOp256,W256,Cell256>
+    public readonly struct AsmOp256
     {
-        public Cell256 Content {get;}
 
-        public AsmOpKind OpKind {get;}
-
-        [MethodImpl(Inline)]
-        public AsmOp256(Cell256 value, AsmOpKind kind)
-        {
-            Content = value;
-            OpKind = kind;
-        }
     }
 }

@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         MemoryAddress CurrentBlock;
 
-        ApiCodeBlocks Blocks;
+        ApiBlockIndex Blocks;
 
         MemorySymbols Symbols;
 
@@ -37,7 +37,7 @@ namespace Z0.Asm
             CurrentRow = 0;
             LastRow = 0;
             CurrentBlock = 0;
-            Blocks = ApiCodeBlocks.Empty;
+            Blocks = ApiBlockIndex.Empty;
             Symbols = MemorySymbols.alloc(50000);
         }
 
@@ -46,10 +46,10 @@ namespace Z0.Asm
 
         public void DistillStatements()
         {
-            DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks());
+            DistillStatements(Wf.ApiIndexBuilder().IndexApiBlocks());
         }
 
-        public void DistillStatements(ApiCodeBlocks src)
+        public void DistillStatements(ApiBlockIndex src)
         {
             var flow = Wf.Running();
             Db.ClearTables<Target>();

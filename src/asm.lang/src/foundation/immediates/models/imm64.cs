@@ -18,9 +18,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public imm64(ulong value)
                 => Content = value;
-
-            public AsmOpKind OpKind
-                => AsmOpKind.Imm | AsmOpKind.W64;
         }
     }
 }

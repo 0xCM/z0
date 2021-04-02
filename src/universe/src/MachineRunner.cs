@@ -20,17 +20,12 @@ namespace Z0
             var flow = Wf.Running(RunningMachine.Format(partCount, partList));
             try
             {
-                var api = Wf.ApiServices();
-                var images = Wf.ImageDataEmitter();
                 var store = Wf.ApiCodeStore();
-                var assets = Wf.ApiAssets();
                 var rowstore = Wf.AsmRowStore();
-                var statements = Wf.AsmStatementPipe();
-
-                var blocks = store.CodeBlocks();
+                var blocks = store.IndexedBlocks();
 
                 if(options.EmitHexIndex)
-                    Wf.ApiHex().EmitHexIndex(blocks);
+                    Emitted(Wf.ApiHex().EmitHexIndex(blocks));
 
                 if(options.EmitAsmRows)
                     Emitted(rowstore.EmitAsmRows(blocks));
@@ -41,6 +36,7 @@ namespace Z0
                 if(options.EmitResBytes)
                     Emitted(Wf.ResBytesEmitter().Emit(blocks));
 
+                var statements = Wf.AsmStatementPipe();
                 if(options.EmitStatements)
                     Emitted(statements.EmitStatements(blocks));
 
@@ -48,7 +44,7 @@ namespace Z0
                     statements.EmitBitstrings();
 
                 if(options.CorrelateMembers)
-                    api.Correlate();
+                    Wf.ApiServices().Correlate();
 
                 if(options.EmitAsmCatalogs)
                 {
@@ -77,6 +73,8 @@ namespace Z0
                 if(options.CollectApiDocs)
                     Wf.ApiComments().Collect();
 
+                var assets = Wf.ApiAssets();
+
                 if(options.EmitAssetIndex)
                     Emitted(assets.EmitAssetIndex());
 
@@ -85,6 +83,8 @@ namespace Z0
 
                 if(options.EmitApiMetadata)
                     Wf.CliTables().DumpApiMetadata();
+
+                var images = Wf.ImageDataEmitter();
 
                 if(options.EmitSectionHeaders)
                     images.EmitRuntimeHeaders();

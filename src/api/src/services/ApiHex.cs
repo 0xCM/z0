@@ -102,17 +102,17 @@ namespace Z0
             }
         }
 
-        public FS.FilePath EmitHexIndex(in ApiCodeBlocks src)
+        public Index<ApiHexIndexRow> EmitHexIndex(in ApiBlockIndex src)
         {
             var dst = Db.IndexFile(ApiHexIndexRow.TableId);
             var flow = Wf.EmittingFile(dst);
-            EmitHexIndex(src, dst);
+            var emitted = EmitHexIndex(src, dst);
             Wf.EmittedFile(flow,1);
-            return dst;
+            return emitted;
         }
 
         [Op]
-        Outcome EmitHexIndex(in ApiCodeBlocks src, FS.FilePath dst)
+        Index<ApiHexIndexRow> EmitHexIndex(in ApiBlockIndex src, FS.FilePath dst)
         {
             Array.Sort(src.Blocks.Storage);
             var blocks = src.Blocks.View;
@@ -133,7 +133,7 @@ namespace Z0
                 record.Uri = block.Uri;
                 emitter.Emit(record);
             }
-            return true;
+            return buffer;
         }
 
         [Op]

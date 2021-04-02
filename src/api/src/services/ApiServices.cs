@@ -43,8 +43,8 @@ namespace Z0
             return new BasedApiMemberCatalog(dst, src, records);
         }
 
-        public IApiHexIndexer HexIndexer()
-            => ApiHexIndexer.create(Wf);
+        public IApiIndexBuilder HexIndexer()
+            => ApiIndexBuilder.create(Wf);
 
         public ApiMemberBlocks Correlate()
             => Correlate(Wf.Api.PartCatalogs());

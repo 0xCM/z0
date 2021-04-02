@@ -13,7 +13,7 @@ namespace Z0.Asm
     public class ApiCodeBlockTraverser : AsmWfService<ApiCodeBlockTraverser>
     {
         [Op]
-        public void Traverse(ApiCodeBlocks src, IReceiver<ApiCodeBlock,AsmInstructionBlock> dst)
+        public void Traverse(ApiBlockIndex src, IReceiver<ApiCodeBlock,AsmInstructionBlock> dst)
         {
             var addresses = src.Addresses.View;
             var count = addresses.Length;

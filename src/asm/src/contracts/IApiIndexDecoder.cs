@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IApiIndexDecoder : IWfService
+    public interface IApiIndexDecoder
     {
-        ApiAsmDataset Decode(ApiCodeBlocks src);
+        ApiAsmDataset Decode(ApiBlockIndex src);
 
         ApiHostRoutines Decode(ApiHostCode src);
     }

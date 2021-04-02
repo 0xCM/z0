@@ -12,18 +12,9 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an asm operand
     /// </summary>
-    public readonly struct AsmOp<T> : IAsmOp<T>
+    public readonly struct AsmOp<T>
         where T : struct
     {
-        public T Content {get;}
 
-        public AsmOpKind OpKind {get;}
-
-        [MethodImpl(Inline)]
-        public AsmOp(AsmOpKind kind, T value)
-        {
-            OpKind = kind;
-            Content = value;
-        }
     }
 }

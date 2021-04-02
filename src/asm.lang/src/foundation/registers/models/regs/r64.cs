@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an operand that specifies a 64-bit gp register
         /// </summary>
-        public struct r64 : IReg<r64,W,T>
+        public struct r64 : IReg64<r64,T>
         {
             public T Content {get;}
 
@@ -39,13 +39,13 @@ namespace Z0.Asm
             }
         }
 
-        public struct R64<R> : IReg<R64<R>,W64,ulong>
+        public struct R64<R> : IReg64<R64<R>,T>
             where R : unmanaged, IRegOp64
         {
-            public ulong Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public R64(ulong src)
+            public R64(T src)
                 => Content= src;
 
             public RegKind RegKind
@@ -71,7 +71,7 @@ namespace Z0.Asm
         /// <remarks>
         /// | 000  | rax    | eax    | ax     | al    |
         /// </remarks>
-        public struct rax : IReg<rax,W,T>
+        public struct rax : IReg64<rax,T>
         {
             public T Content {get;}
 
@@ -107,7 +107,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register C Extended: 0001  [rcx    | ecx    | cx     | cl    ]
         /// </summary>
-        public struct rcx : IReg<rcx,W,T>
+        public struct rcx : IReg64<rcx,T>
         {
             public T Data;
 
@@ -155,7 +155,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register D Extended: | 0010  | rdx    | edx    | dx     | dl    |
         /// </summary>
-        public struct rdx : IReg<rdx,W,T>
+        public struct rdx : IReg64<rdx,T>
         {
             public T Data;
 
@@ -179,7 +179,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register B Extended
         /// </summary>
-        public struct rbx : IReg<rbx,W,T>
+        public struct rbx : IReg64<rbx,T>
         {
             public T Data;
 
@@ -203,7 +203,7 @@ namespace Z0.Asm
         /// <summary>
         /// Register Source Index: Specifies the source for data copies
         /// </summary>
-        public struct rsi : IReg<rsi,W,T>
+        public struct rsi : IReg64<rsi,T>
         {
             public T Data;
 

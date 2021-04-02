@@ -12,17 +12,8 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 128-bit operand
     /// </summary>
-    public readonly struct AsmOp128: IAsmOp<AsmOp128,W128,Cell128>
+    public readonly struct AsmOp128
     {
-        public Cell128 Content {get;}
 
-        public AsmOpKind OpKind {get;}
-
-        [MethodImpl(Inline)]
-        public AsmOp128(Cell128 value, AsmOpKind kind)
-        {
-            Content = value;
-            OpKind = kind;
-        }
     }
 }

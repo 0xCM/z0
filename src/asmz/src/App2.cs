@@ -23,24 +23,12 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            var flow = Wf.Creating(nameof(Catalog));
             Catalog = AsmCatalogEtl.create(Wf);
-            Wf.Created(flow);
 
-            flow = Wf.Creating(nameof(Asm));
             Asm = Wf.AsmContext();
-            Wf.Created(flow);
-
-            flow = Wf.Creating(nameof(ApiServices));
             ApiServices = Wf.ApiServices();
-            Wf.Created(flow);
-
-            flow = Wf.Creating(nameof(AsmServices));
             AsmServices = Wf.AsmServices();
-            Wf.Created(flow);
-
             Forms = root.hashset<AsmFormExpr>();
-
             Sigs = Wf.AsmSigs();
 
         }
@@ -883,6 +871,20 @@ namespace Z0.Asm
             emitter.DumpImages(src,dst);
         }
 
+        void DumpImages(byte major, byte minor, byte revision)
+        {
+            var emitter = MemoryEmitter.create(Wf);
+            var src = Db.DotNetSymbolDir(major,minor,revision);
+            if(!src.Exists)
+            {
+                Wf.Error($"The specified source directory does not exist: {src}");
+                return;
+            }
+            var dst = Db.DotNetImageDumpDir(major,minor,revision);
+            dst.Clear();
+            emitter.DumpImages(src,dst);
+        }
+
         void EmitImageMaps()
         {
             var src = ImageMaps.current();
@@ -1023,7 +1025,7 @@ namespace Z0.Asm
         void ProcessInstructions()
         {
             var store = Wf.ApiCodeStore();
-            var blocks = store.CodeBlocks();
+            var blocks = store.IndexedBlocks();
             var metrics = blocks.CalcMetrics();
             Wf.Status(metrics);
 
@@ -1040,12 +1042,15 @@ namespace Z0.Asm
         {
             //CaptureSelectedRoutines();
 
+            var a = Hex.chars((byte)0xAB);
+            Wf.Row(a.ToString());
             //LoadCurrentCatalog();
 
             //EmitCilBlocks(Db.AppLogDir() + FS.folder("cil"));
 
             //var rows = LoadCilRows();
-            Wf.MsilPipe().LoadCapturedCil();
+            //Wf.MsilPipe().LoadCapturedCil();
+
 
         }
 

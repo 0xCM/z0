@@ -47,10 +47,8 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(paths,i);
-                var result = LoadAsmRows(path,records);
-                if(!result)
-                    Wf.Error(result.Message);
-                else
+                var result = LoadAsmRows(path, records);
+                if(result)
                     counter += result.Data;
             }
 
@@ -58,9 +56,8 @@ namespace Z0.Asm
             return records.Emit();
         }
 
-        Outcome<Count> LoadAsmRows(FS.FilePath path, RecordList<AsmRow> buffer)
+        Outcome<Count> LoadAsmRows(FS.FilePath path, RecordList<AsmRow> dst)
         {
-            var records = RecordList.create<AsmRow>(Pow2.T08);
             var rowtype = path.FileName.WithoutExtension.Format().RightOfLast(Chars.Dot);
             var flow = Wf.Running(string.Format("Loading {0} rows from {1}", rowtype, path.ToUri()));
             var result = TextDocs.parse(path, out var doc);
@@ -78,10 +75,14 @@ namespace Z0.Asm
                     ref readonly var src = ref skip(rows,j);
                     if(src.CellCount != AsmRow.FieldCount)
                         return (false, string.Format("Found {0} fields in {1} while {2} were expected", kCells, src, AsmRow.FieldCount));
-                    var loaded = LoadAsmRow(src, out var dst);
+                    var loaded = LoadAsmRow(src, out var row);
                     if(!loaded)
-                        return loaded;
-                    records.Add(dst);
+                    {
+                        Wf.Error(loaded.Message);
+                        return false;
+                    }
+
+                    dst.Add(row);
                 }
 
                 Wf.Ran(flow, string.Format("Loaded {0} {1} rows from {2}", kRows, rowtype, path.ToUri()));
@@ -106,14 +107,14 @@ namespace Z0.Asm
             AsmParser.parse(skip(input, i++), out dst.Mnemonic);
             AsmParser.parse(skip(input, i++), out dst.OpCode);
             DataParser.parse(skip(input, i++), out dst.Encoded);
-            AsciParser.parse(skip(input, i++), out dst.Statement);
+            DataParser.parse(skip(input, i++), out dst.Statement);
             DataParser.parse(skip(input, i++), out dst.Instruction);
-            AsciParser.parse(skip(input, i++), out dst.CpuId);
+            DataParser.parse(skip(input, i++), out dst.CpuId);
             DataParser.parse(skip(input, i++), out dst.OpCodeId);
             return true;
         }
 
-        public Index<AsmRow> EmitAsmRows(ApiCodeBlocks src)
+        public Index<AsmRow> EmitAsmRows(ApiBlockIndex src)
         {
             var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(src.BlockCount));
             var addresses = src.Addresses.View;
@@ -166,7 +167,7 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public void EmitAnalyses(ApiCodeBlocks src)
+        public void EmitAnalyses(ApiBlockIndex src)
         {
             var routines = Wf.ApiIndexDecoder().Decode(src).Routines;
             EmitCallRows(routines);

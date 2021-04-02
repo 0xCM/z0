@@ -71,7 +71,7 @@ namespace Z0.Asm
 
         [Action(K.EmitAsmRows)]
         void EmitAsmRows()
-            => Wf.AsmRowStore().EmitAsmRows(AsmData.CodeBlocks());
+            => Wf.AsmRowStore().EmitAsmRows(AsmData.IndexedBlocks());
 
         [Action(K.CheckDigitParser)]
         void CheckDigitParser()

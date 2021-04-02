@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines a 16-bit memory operand
         /// </summary>
-        public struct m16 : IMemOp<m16,W16,ushort>, IMemOp16<ushort>
+        public struct m16 : IMem16<m16,ushort>
         {
             public ushort Content {get;}
 

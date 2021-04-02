@@ -23,11 +23,11 @@ namespace Z0
 
         public Index<ApiHostRes> Emit()
         {
-            var blocks = Wf.ApiHexIndexer().IndexApiBlocks();
+            var blocks = Wf.ApiIndexBuilder().IndexApiBlocks();
             return Emit(blocks);
         }
 
-        public Index<ApiHostRes> Emit(ApiCodeBlocks src)
+        public Index<ApiHostRes> Emit(ApiBlockIndex src)
         {
             var apires = Emit(src, RespackDir);
             var runner = ScriptRunner.create(Db);
@@ -40,7 +40,7 @@ namespace Z0
             return apires;
         }
 
-        Index<ApiHostRes> Emit(ApiCodeBlocks index, FS.FolderPath dst)
+        Index<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst)
         {
             var emissions = root.list<ApiHostRes>();
             var flow = Wf.Running();

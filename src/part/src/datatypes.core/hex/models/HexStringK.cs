@@ -20,12 +20,9 @@ namespace Z0
 
         public ByteSize Size {get;}
 
-
         [MethodImpl(Inline)]
         public HexString(string src)
         {
-            // BaseAddress = memory.pchar(src);
-            // Size = src.Length*2;
             var _src = src ?? EmptyString;
             BaseAddress = pchar(_src);
             Size = _src.Length * 2;

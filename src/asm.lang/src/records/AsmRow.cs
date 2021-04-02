@@ -32,11 +32,11 @@ namespace Z0.Asm
 
         public string Instruction;
 
-        public asci64 Statement;
+        public string Statement;
 
         public BinaryCode Encoded;
 
-		public asci16 CpuId;
+		public string CpuId;
 
         public string OpCodeId;
 

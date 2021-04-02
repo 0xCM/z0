@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiIndex
     {
-        public static ApiMemberIndex create(ApiHostCatalog src)
+        internal static ApiMemberIndex create(ApiHostCatalog src)
         {
             var ix = create(src.Members.Storage.Select(h => (h.Id, h)));
             return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
@@ -50,9 +50,6 @@ namespace Z0
         /// <param name="src">The source bits</param>
         public static ApiOpIndex<ApiCodeBlock> create(ApiCodeBlock[] src)
             => distill(src.Select(x => (x.OpUri.OpId, x)));
-
-        public static ApiOpIndex<ApiCodeBlock> create(ApiCodeBlocks src)
-            => distill(src.Blocks.Storage.Select(x => (x.OpUri.OpId, x)));
 
         [Op, Closures(UInt64k)]
         public static ApiOpIndex<T> create<T>(IEnumerable<(OpIdentity,T)> src)

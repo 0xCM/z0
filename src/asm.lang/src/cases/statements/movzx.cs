@@ -15,91 +15,91 @@ namespace Z0.Asm
     {
         partial struct Statements
         {
-            /// <summary>
-            /// | 0F B6 / r | MOVZX r16, r8 | Move byte to word with zero-extension.
-            /// </summary>
-            /// <param name="dst">The target register</param>
-            /// <param name="src">The source register</param>
-            /// <typeparam name="T">The target register type</typeparam>
-            /// <typeparam name="S">The source register type</typeparam>
-            public AsmStatement<R16<T>,R8<S>> movzx<T,S>(R16<T> dst, R8<S> src)
-                where T : unmanaged, IRegOp16
-                where S : unmanaged, IRegOp8
-                    => asm.statement(Builder.movzx(), dst, src);
+            // /// <summary>
+            // /// | 0F B6 / r | MOVZX r16, r8 | Move byte to word with zero-extension.
+            // /// </summary>
+            // /// <param name="dst">The target register</param>
+            // /// <param name="src">The source register</param>
+            // /// <typeparam name="T">The target register type</typeparam>
+            // /// <typeparam name="S">The source register type</typeparam>
+            // public AsmStatement<R16<T>,R8<S>> movzx<T,S>(R16<T> dst, R8<S> src)
+            //     where T : unmanaged, IRegOp16
+            //     where S : unmanaged, IRegOp8
+            //         => asm.statement(Builder.movzx(), dst, src);
 
-            /// <summary>
-            /// | 0F B6 / r | MOVZX r16, r8 | Move byte to word with zero-extension.
-            /// </summary>
-            /// <param name="dst">The target register</param>
-            /// <param name="src">The source register</param>
-            /// <typeparam name="T">The target register type</typeparam>
-            /// <typeparam name="S">The source register type</typeparam>
-            [MethodImpl(Inline), Op]
-            public AsmStatement<r16,r8> movzx(r16 dst, r8 src)
-                => asm.statement(Builder.movzx(), dst, src);
+            // /// <summary>
+            // /// | 0F B6 / r | MOVZX r16, r8 | Move byte to word with zero-extension.
+            // /// </summary>
+            // /// <param name="dst">The target register</param>
+            // /// <param name="src">The source register</param>
+            // /// <typeparam name="T">The target register type</typeparam>
+            // /// <typeparam name="S">The source register type</typeparam>
+            // [MethodImpl(Inline), Op]
+            // public AsmStatement<r16,r8> movzx(r16 dst, r8 src)
+            //     => asm.statement(Builder.movzx(), dst, src);
 
-            /// <summary>
-            /// | 0F B6 / r | MOVZX r16, m8 | Move byte to word with zero-extension.
-            /// </summary>
-            /// <param name="dst">The target register</param>
-            /// <param name="src">The memory source</param>
-            /// <typeparam name="T">The target register type</typeparam>
-            public AsmStatement<R16<T>,m8> movzx<T>(R16<T> dst, m8 src)
-                where T : unmanaged, IRegOp16
-                    => asm.statement(Builder.movzx(), dst, src);
+            // /// <summary>
+            // /// | 0F B6 / r | MOVZX r16, m8 | Move byte to word with zero-extension.
+            // /// </summary>
+            // /// <param name="dst">The target register</param>
+            // /// <param name="src">The memory source</param>
+            // /// <typeparam name="T">The target register type</typeparam>
+            // public AsmStatement<R16<T>,m8> movzx<T>(R16<T> dst, m8 src)
+            //     where T : unmanaged, IRegOp16
+            //         => asm.statement(Builder.movzx(), dst, src);
 
-            /// <summary>
-            /// | 0F B6 / r | MOVZX r16, m8 | Move byte to word with zero-extension.
-            /// </summary>
-            /// <param name="dst">The target register</param>
-            /// <param name="src">The memory source</param>
-            /// <typeparam name="T">The target register type</typeparam>
-            [MethodImpl(Inline), Op]
-            public AsmStatement<r16,m8> movzx(r16 dst, m8 src)
-                => asm.statement(Builder.movzx(), dst, src);
+            // /// <summary>
+            // /// | 0F B6 / r | MOVZX r16, m8 | Move byte to word with zero-extension.
+            // /// </summary>
+            // /// <param name="dst">The target register</param>
+            // /// <param name="src">The memory source</param>
+            // /// <typeparam name="T">The target register type</typeparam>
+            // [MethodImpl(Inline), Op]
+            // public AsmStatement<r16,m8> movzx(r16 dst, m8 src)
+            //     => asm.statement(Builder.movzx(), dst, src);
 
-            /// <summary>
-            /// 0F B6 / r | MOVZX r32, r8 | Move byte to doubleword, zero-extension.
-            /// </summary>
-            /// <param name="dst">The target register</param>
-            /// <param name="src">The source register</param>
-            /// <typeparam name="T">The target register type</typeparam>
-            /// <typeparam name="S">The source register type</typeparam>
-            public AsmStatement<R32<T>,R8<S>> movzx<T,S>(R32<T> dst, R8<S> src)
-                where T : unmanaged, IRegOp32
-                where S : unmanaged, IRegOp8
-                    => asm.statement(Builder.movzx(), dst, src);
+            // /// <summary>
+            // /// 0F B6 / r | MOVZX r32, r8 | Move byte to doubleword, zero-extension.
+            // /// </summary>
+            // /// <param name="dst">The target register</param>
+            // /// <param name="src">The source register</param>
+            // /// <typeparam name="T">The target register type</typeparam>
+            // /// <typeparam name="S">The source register type</typeparam>
+            // public AsmStatement<R32<T>,R8<S>> movzx<T,S>(R32<T> dst, R8<S> src)
+            //     where T : unmanaged, IRegOp32
+            //     where S : unmanaged, IRegOp8
+            //         => asm.statement(Builder.movzx(), dst, src);
 
-            /// <summary>
-            /// 0F B6 / r | MOVZX r32, r8 | Move byte to doubleword, zero-extension.
-            /// </summary>
-            /// <param name="dst">The target register</param>
-            /// <param name="src">The source register</param>
-            /// <typeparam name="T">The target register type</typeparam>
-            /// <typeparam name="S">The source register type</typeparam>
-            [MethodImpl(Inline), Op]
-            public AsmStatement<r32,r8> movzx(r32 dst, r8 src)
-                => asm.statement(Builder.movzx(), dst, src);
+            // /// <summary>
+            // /// 0F B6 / r | MOVZX r32, r8 | Move byte to doubleword, zero-extension.
+            // /// </summary>
+            // /// <param name="dst">The target register</param>
+            // /// <param name="src">The source register</param>
+            // /// <typeparam name="T">The target register type</typeparam>
+            // /// <typeparam name="S">The source register type</typeparam>
+            // [MethodImpl(Inline), Op]
+            // public AsmStatement<r32,r8> movzx(r32 dst, r8 src)
+            //     => asm.statement(Builder.movzx(), dst, src);
 
-            /// <summary>
-            /// 0F B6 / r | MOVZX r32, m8 | Move byte to doubleword, zero-extension.
-            /// </summary>
-            /// <param name="dst">The target register</param>
-            /// <param name="src">The source register</param>
-            /// <typeparam name="T">The target register type</typeparam>
-            public AsmStatement<R32<T>,m8> movzx<T>(R32<T> dst, m8 src)
-                where T : unmanaged, IRegOp32
-                    => asm.statement(Builder.movzx(), dst, src);
+            // /// <summary>
+            // /// 0F B6 / r | MOVZX r32, m8 | Move byte to doubleword, zero-extension.
+            // /// </summary>
+            // /// <param name="dst">The target register</param>
+            // /// <param name="src">The source register</param>
+            // /// <typeparam name="T">The target register type</typeparam>
+            // public AsmStatement<R32<T>,m8> movzx<T>(R32<T> dst, m8 src)
+            //     where T : unmanaged, IRegOp32
+            //         => asm.statement(Builder.movzx(), dst, src);
 
-            /// <summary>
-            /// 0F B6 / r | MOVZX r32, m8 | Move byte to doubleword, zero-extension.
-            /// </summary>
-            /// <param name="dst">The target register</param>
-            /// <param name="src">The source register</param>
-            /// <typeparam name="T">The target register type</typeparam>
-            [MethodImpl(Inline), Op]
-            public AsmStatement<r32,m8> movzx(r32 dst, m8 src)
-                => asm.statement(Builder.movzx(), dst, src);
+            // /// <summary>
+            // /// 0F B6 / r | MOVZX r32, m8 | Move byte to doubleword, zero-extension.
+            // /// </summary>
+            // /// <param name="dst">The target register</param>
+            // /// <param name="src">The source register</param>
+            // /// <typeparam name="T">The target register type</typeparam>
+            // [MethodImpl(Inline), Op]
+            // public AsmStatement<r32,m8> movzx(r32 dst, m8 src)
+            //     => asm.statement(Builder.movzx(), dst, src);
 
             // /// <summary>
             // /// REX.W + 0F B6 / r | MOVZX r64, r8 | Move byte to quadword, zero-extension.

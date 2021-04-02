@@ -12,17 +12,8 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an 8-bit operand
     /// </summary>
-    public readonly struct AsmOp8 : IAsmOp<AsmOp8,W8,byte>
+    public readonly struct AsmOp8
     {
-        public byte Content {get;}
 
-        public AsmOpKind OpKind {get;}
-
-        [MethodImpl(Inline)]
-        public AsmOp8(byte value, AsmOpKind kind)
-        {
-            Content = value;
-            OpKind = kind;
-        }
     }
 }
