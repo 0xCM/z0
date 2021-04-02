@@ -26,13 +26,5 @@ namespace Z0.Asm
                 _CodeBlocks = Wf.ApiHexIndexer().IndexApiBlocks();
             return _CodeBlocks;
         }
-
-        public void EmitAnalyses(ApiCodeBlocks src)
-        {
-            var routines = Wf.ApiIndexDecoder().Decode(src).Routines;
-            var rowstore = Wf.AsmRowStore();
-            rowstore.EmitCallRows(routines);
-            rowstore.EmitJmpRows(routines);
-        }
    }
 }

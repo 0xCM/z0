@@ -10,17 +10,11 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static TextRules;
 
     partial struct Tables
     {
         public static Index<string> fields(string src, char delimiter)
-        {
-            var input = text.trim(src);
-            var ix = Query.index(input, delimiter);
-            var normalized = ix != 0 ? text.slice(input, ix + 1) : input;
-            return text.split(normalized, delimiter);
-        }
+            => text.split(text.trim(src), delimiter);
 
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a parametrically-identified record type

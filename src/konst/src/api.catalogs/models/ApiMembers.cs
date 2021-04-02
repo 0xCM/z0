@@ -16,9 +16,26 @@ namespace Z0
     {
         readonly Index<ApiMember> Data;
 
+        public MemoryAddress BaseAddress {get;}
+
         [MethodImpl(Inline)]
         public ApiMembers(ApiMember[] src)
-            => Data = src;
+        {
+            Data = src;
+            BaseAddress = default;
+        }
+
+        [MethodImpl(Inline)]
+        public ApiMembers(MemoryAddress @base, ApiMember[] src)
+        {
+            Data = src;
+            BaseAddress = @base;
+        }
+
+        public bool IsBased
+        {
+            get => BaseAddress != 0;
+        }
 
         public Count Count
         {
@@ -68,6 +85,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ApiMembers(ApiMember[] src)
             => new ApiMembers(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMembers((MemoryAddress @base, ApiMember[] members) src)
+            => new ApiMembers(src.@base, src.members);
 
         [MethodImpl(Inline)]
         public static implicit operator ApiMember[](ApiMembers src)

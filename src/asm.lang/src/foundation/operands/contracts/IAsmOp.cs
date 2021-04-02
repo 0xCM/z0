@@ -9,24 +9,20 @@ namespace Z0.Asm
     [Free]
     public interface IOperand
     {
-        dynamic Content {get;}
+
     }
 
     [Free]
     public interface IOperand<T> : IOperand
     {
-        new T Content {get;}
+        T Content {get;}
 
-        dynamic IOperand.Content
-            => Content;
     }
 
     public interface IAsmOp : ISized, IOperand
     {
         AsmOpKind OpKind {get;}
 
-        AsmOpClass OpClass
-            => (AsmOpClass)OpKind;
     }
 
     public interface IAsmOp<T> : IAsmOp, IOperand<T>
@@ -34,7 +30,6 @@ namespace Z0.Asm
     {
         BitWidth ISized.Width
             => memory.width<T>();
-
     }
 
     public interface IAsmOp<F,W,T> : IAsmOp<T>

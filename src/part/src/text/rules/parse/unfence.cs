@@ -41,7 +41,7 @@ namespace Z0
             [Op]
             public static string unfence(string src, Fence<string> fence)
             {
-                (var i0, var i1) = Query.indices(src, fence);
+                (var i0, var i1) = text.indices(src, fence);
                 if(i0 != NotFound && i1 != NotFound &&(i0 < i1))
                 {
                     var start = i0 + fence.Left.Length;

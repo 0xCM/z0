@@ -52,7 +52,7 @@ namespace Z0.Asm
             {
                 if(AsmSyntax.mnemonic(src, out var monic))
                 {
-                    var i = Query.index(src, MnemonicTerminator);
+                    var i = text.index(src, MnemonicTerminator);
                     var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(sigop) : sys.empty<AsmSigOperandExpr>();
                     dst = new AsmSigExpr(monic, operands, format(monic, operands));
                     return true;
@@ -128,7 +128,7 @@ namespace Z0.Asm
             }
             else
             {
-                var i = Query.index(sig, MnemonicTerminator);
+                var i = text.index(sig, MnemonicTerminator);
                 if(i > 0)
                 {
                     dst = Parse.segment(sig, 0, i - 1).ToUpper();

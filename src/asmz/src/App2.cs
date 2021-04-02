@@ -411,23 +411,6 @@ namespace Z0.Asm
 
         public static MsgPattern<CmdId> DispatchingCmd() => "Dispatching {0}";
 
-        static bool parse(string src, out CilRow dst)
-        {
-            var parts = @readonly(src.SplitClean(Chars.Pipe));
-            var count = parts.Length;
-            if(count != 3)
-            {
-                dst = default;
-                return false;
-            }
-            else
-            {
-                DataParser.parse(skip(parts,0), out dst.BaseAddress);
-                DataParser.parse(skip(parts,1), out dst.Uri);
-                DataParser.parse(skip(parts,2), out dst.CilCode);
-                return true;
-            }
-        }
 
         static string FormatAttributes(IXmlElement src)
             => src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();
@@ -493,7 +476,7 @@ namespace Z0.Asm
 
         void EmitMsil()
         {
-            var pipe = Wf.IlPipe();
+            var pipe = Wf.MsilPipe();
             var members = Wf.Api.ApiHosts.Where(h => h.HostType == typeof(math)).Single().Methods;
             var buffer = text.buffer();
             var methods = msil(members);
@@ -843,40 +826,53 @@ namespace Z0.Asm
 
         }
 
-        void EmitCilBlocks()
+        static bool parse(string src, out CilCapture dst)
         {
-            var service = Cil.visualizer();
+            var parts = @readonly(src.SplitClean(Chars.Pipe));
+            var count = parts.Length;
+            if(count != CilCapture.FieldCount)
+            {
+                dst = default;
+                return false;
+            }
+            else
+            {
+                var i=0;
+                DataParser.parse(skip(parts,i++), out dst.MemberId);
+                DataParser.parse(skip(parts,i++), out dst.BaseAddress);
+                DataParser.parse(skip(parts,i++), out dst.Uri);
+                DataParser.parse(skip(parts,i++), out dst.CilCode);
+                return true;
+            }
+        }
+
+        Index<CilCapture> LoadCilRows()
+        {
+            var flow = Wf.Running($"Loading cil data rows");
             var input = Db.CilDataFiles().View;
             var count = input.Length;
-            var builder = text.build();
+            var dst = RecordList.create<CilCapture>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
-                var output = Db.CilCodeFile(path.FileName.WithoutExtension);
                 using var reader = path.Reader();
-                using var writer = output.Writer();
-                var flow = Wf.EmittingFile(output);
                 while(!reader.EndOfStream)
                 {
-                    builder.Clear();
                     var line = reader.ReadLine();
                     if(parse(line, out var row))
                     {
-                        var code = row.CilCode;
-                        service.DumpILBlock(code, code.Length, builder);
-                        writer.WriteLine(string.Format("// {0} {1}", row.BaseAddress, row.Uri));
-                        writer.WriteLine("{");
-                        writer.WriteLine(builder.ToString());
-                        writer.WriteLine("}");
-                        writer.WriteLine();
+                        dst.Add(row);
                     }
                     else
+                    {
                         Wf.Warn($"The content {line} could not be parsed");
-
+                    }
                 }
-                Wf.EmittedFile(flow,1);
             }
+            Wf.Ran(flow,$"Loaded {dst.Count} cil rows");
+            return dst.Emit();
         }
+
 
         void DumpImages()
         {
@@ -1013,12 +1009,19 @@ namespace Z0.Asm
 
         }
 
-        uint ICount;
-
-
-        public void Run()
+        void EmitRuntimeMembers()
         {
-            CaptureSelectedRoutines();
+            var service = ApiRuntime.create(Wf);
+            var members = service.EmitRuntimeIndex();
+        }
+
+        void LoadCurrentCatalog()
+        {
+            var entries = Wf.ApiCatalogs().Current();
+        }
+
+        void ProcessInstructions()
+        {
             var store = Wf.ApiCodeStore();
             var blocks = store.CodeBlocks();
             var metrics = blocks.CalcMetrics();
@@ -1031,6 +1034,19 @@ namespace Z0.Asm
             var duration = clock.Elapsed.Ms;
             var productions = receiver.Productions;
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
+        }
+
+        public void Run()
+        {
+            //CaptureSelectedRoutines();
+
+            //LoadCurrentCatalog();
+
+            //EmitCilBlocks(Db.AppLogDir() + FS.folder("cil"));
+
+            //var rows = LoadCilRows();
+            Wf.MsilPipe().LoadCapturedCil();
+
         }
 
         public static void Main(params string[] args)

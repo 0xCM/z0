@@ -19,42 +19,42 @@ namespace Z0.Asm
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static reg<T> reg<T>(T src)
-            where T : unmanaged, IRegister
+            where T : unmanaged, IReg
                 => new reg<T>(src);
 
         [MethodImpl(Inline)]
         public static r8 reg<R>(R r, byte data = default)
-            where R : unmanaged, IRegister
+            where R : unmanaged, IReg
                 => new r8(data, r.RegKind);
 
         [MethodImpl(Inline)]
         public static r16 reg<R>(R r, ushort data = default)
-            where R : unmanaged, IRegister
+            where R : unmanaged, IReg
                 => new r16(data, r.RegKind);
 
         [MethodImpl(Inline)]
         public static r32 reg<R>(R r, uint data = default)
-            where R : unmanaged, IRegister
+            where R : unmanaged, IReg
                 => new r32(data, r.RegKind);
 
         [MethodImpl(Inline)]
         public static r64 reg<R>(R r, ulong data = default)
-            where R : unmanaged, IRegister
+            where R : unmanaged, IReg
                 => new r64(data, r.RegKind);
 
         [MethodImpl(Inline)]
         public static Xmm<R> reg<R>(R r, Cell128 data = default)
-            where R : unmanaged, IRegister
+            where R : unmanaged, IReg
                 => new Xmm<R>(data);
 
         [MethodImpl(Inline)]
         public static Ymm<R> reg<R>(R r, Cell256 data = default)
-            where R : unmanaged, IRegister
+            where R : unmanaged, IReg
                 => new Ymm<R>(data);
 
         [MethodImpl(Inline)]
         public static Zmm<R> reg<R>(R r, Cell512 data = default)
-            where R : unmanaged, IRegister
+            where R : unmanaged, IReg
                 => new Zmm<R>(data);
     }
 }

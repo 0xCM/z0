@@ -22,11 +22,14 @@ namespace Z0
 
         ApiCaptureEmitter Emitter;
 
+        ApiJit Jitter;
+
         protected override void OnInit()
         {
             Extractor = ApiCodeExtractors.service();
             Services = Wf.ApiServices();
             Emitter = Wf.CaptureEmitter(Wf.AsmContext());
+            Jitter = Wf.ApiJit();
         }
 
         /// <summary>
@@ -170,7 +173,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(Services.ApiJit.JitHost(host));
+                return Extractor.Extract(Jitter.JitHost(host));
             }
             catch(Exception e)
             {

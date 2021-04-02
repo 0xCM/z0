@@ -63,12 +63,12 @@ namespace Z0
             where D : Delegate
                 => jit(src.Untyped);
 
-        public BasedApiMembers JitCatalog()
+        public ApiMembers JitCatalog()
         {
             return JitCatalog(Wf.ApiParts.ApiCatalog);
         }
 
-        public BasedApiMembers JitCatalog(IApiCatalogDataset catalog)
+        public ApiMembers JitCatalog(IApiCatalogDataset catalog)
         {
             var @base = Runtime.CurrentProcess.BaseAddress;
             var parts = catalog.Parts;
@@ -79,8 +79,9 @@ namespace Z0
             foreach(var part in parts)
                 all.Add(JitPart(part));
 
-            var members = new BasedApiMembers(@base, all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array());
-            Wf.Ran(flow, Msg.JittedParts.Format(members.MemberCount, parts.Length));
+
+            var members = new ApiMembers(@base, all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array());
+            Wf.Ran(flow, Msg.JittedParts.Format(members.Count, parts.Length));
             return members;
         }
 

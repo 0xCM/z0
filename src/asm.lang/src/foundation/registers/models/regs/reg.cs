@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         public readonly struct reg<T> : IRegOp<T>
-            where T : unmanaged, IRegister
+            where T : unmanaged, IReg
         {
             public T Content {get;}
 

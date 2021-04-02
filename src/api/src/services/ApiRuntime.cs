@@ -10,51 +10,51 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiHost(ApiNames.ApiRuntime, true)]
-    public readonly struct ApiRuntime
+    public class ApiRuntime : WfService<ApiRuntime>
     {
-        const string RenderPattern = "| {0,-16} | {1,-112} | {2, -64} | {3}";
+        const string RenderPattern = "{0,-16} | {1,-112} | {2, -82} | {3}";
 
         public static string format(in ApiRuntimeMember src)
-            => string.Format(RenderPattern, src.Address, src.Uri, src.Sig, src.Cil);
+            => string.Format(RenderPattern, src.Address, src.Uri, src.Sig, src.Cil.Encoded.Format());
 
-        [Op]
-        public static Outcome<FS.FilePath> EmitRuntimeIndex(IWfShell wf)
+        public Index<ApiRuntimeMember> EmitRuntimeIndex()
         {
             try
             {
-                var hosts = wf.Api.ApiHosts;
+                var hosts = Wf.Api.ApiHosts;
                 var kHost = (uint)hosts.Length;
-                var view  = @readonly(members(wf));
-                var target = wf.Db().IndexFile("api.members");
+                var members = RuntimeMembers();
+                var view  = members.View;
+                var target = Db.IndexFile("api.members");
+                var flow = Wf.EmittingFile(target);
                 using var writer = target.Writer();
                 var count = view.Length;
                 for(var i=0; i<count; i++)
                     writer.WriteLine(format(skip(view,i)));
-                return target;
+                Wf.EmittedFile(flow, count);
+                return members;
             }
             catch(Exception e)
             {
-                return e;
+                Wf.Error(e);
+                return Index<ApiRuntimeMember>.Empty;
             }
         }
 
-        [Op]
-        public static ApiRuntimeMember[] members(IWfShell wf)
+        public Index<ApiRuntimeMember> RuntimeMembers()
         {
-            var db = wf.Db();
-            var hosts = @readonly(wf.Api.ApiHosts);
+            var hosts = @readonly(Wf.Api.ApiHosts);
             var kHost = (uint)hosts.Length;
             var buffer = root.list<ApiRuntimeMember>();
-            var services = wf.ApiServices();
-
-            var flow = wf.Running(Msg.IndexingHosts.Format(kHost));
+            var services = Wf.ApiServices();
+            var flow = Wf.Running(Msg.IndexingHosts.Format(kHost));
+            var catalogs = Wf.ApiCatalogs();
 
             var counter = 0u;
             for(var i=0; i<kHost; i++)
             {
                 var host = skip(hosts,i);
-                var hostcat = services.HostCatalog(host);
+                var hostcat = catalogs.HostCatalog(host);
                 var component = host.HostType.Assembly;
                 var members = @readonly(hostcat.Members.Storage);
                 var apicount = (uint)members.Length;
@@ -67,16 +67,15 @@ namespace Z0
                         buffer.Add(member);
                     }
 
-                    wf.Status(Msg.IndexedHost.Format(hostcat.Host.Uri, apicount, counter));
+                    Wf.Status(Msg.IndexedHost.Format(hostcat.Host.Uri, apicount, counter));
                 }
             }
 
-            wf.Ran(flow);
+            Wf.Ran(flow);
 
             return buffer.OrderBy(x => x.Address).Array();
         }
 
-        [Op]
         static ref ApiRuntimeMember fill(IApiHost host, ApiMember src, ref ApiRuntimeMember dst)
         {
             var method = src.Method;
@@ -91,6 +90,5 @@ namespace Z0
     partial struct Msg
     {
         public static MsgPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
-
     }
 }

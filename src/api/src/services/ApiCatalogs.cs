@@ -8,11 +8,102 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
+    using static Part;
     using static memory;
+    using static TextRules;
 
     [ApiHost]
-    public readonly struct ApiCatalogs
+    public class ApiCatalogs : WfService<ApiCatalogs>
     {
+        IApiJit ApiJit;
+
+        protected override void OnInit()
+        {
+            ApiJit = Wf.ApiJit();
+        }
+
+        public Index<ApiCatalogEntry> Current()
+        {
+            var dir = Db.IndexDir<ApiCatalogEntry>();
+            var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
+            var parser = Tables.parser<ApiCatalogEntry>(parse);
+            var rows = root.list<ApiCatalogEntry>();
+            if(files.Length != 0)
+            {
+                var src = files[files.Length - 1];
+                var flow = Wf.Running(string.Format("Loading api catalog from {0}", src.ToUri()));
+
+                using var reader = src.Reader();
+                var index = uint.MaxValue;
+                reader.ReadLine();
+                var line = reader.ReadLine();
+                while(line != null)
+                {
+                    var outcome = parser.ParseRow(line, out var row);
+                    if(outcome)
+                        rows.Add(row);
+                    else
+                    {
+                        Wf.Error(outcome.Message);
+                        return sys.empty<ApiCatalogEntry>();
+                    }
+                    line = reader.ReadLine();
+                }
+
+                Wf.Ran(flow, text.format("Loaded {0} api catalog entries from {1}", rows.Count, src.ToUri()));
+            }
+
+            return rows.ToArray();
+        }
+
+        static Outcome parse(string src, out ApiCatalogEntry dst)
+        {
+            const char Delimiter = FieldDelimiter;
+            const byte FieldCount = ApiCatalogEntry.FieldCount;
+
+            var fields = Tables.fields(src, Delimiter).View;
+            if(fields.Length != FieldCount)
+            {
+                dst = default;
+                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, Format.delimit(fields, Delimiter)));
+            }
+
+            var i = 0;
+            DataParser.parse(skip(fields, i++), out dst.Sequence);
+            DataParser.parse(skip(fields, i++), out dst.ProcessBase);
+            DataParser.parse(skip(fields, i++), out dst.MemberBase);
+            DataParser.parse(skip(fields, i++), out dst.MemberOffset);
+            DataParser.parse(skip(fields, i++), out dst.MemberRebase);
+            DataParser.parse(skip(fields, i++), out dst.MaxSize);
+            DataParser.parse(skip(fields, i++), out dst.PartName);
+            DataParser.parse(skip(fields, i++), out dst.HostName);
+            DataParser.parse(skip(fields, i++), out dst.OpUri);
+            return true;
+        }
+
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        public ApiHostCatalog HostCatalog(Type src)
+            => HostCatalog(ApiCatalogs.host(src));
+
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        [Op]
+        public ApiHostCatalog HostCatalog(IApiHost src)
+        {
+            var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.Uri));
+            var members = ApiJit.JitHost(src);
+            var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members.Sort());
+            Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.Uri, members.Count));
+            return result;
+        }
+
         [Op]
         public static IApiParts parts()
             => parts(root.controller(), Environment.GetCommandLineArgs());
@@ -61,11 +152,8 @@ namespace Z0
         [Op]
         public static ApiHostInfo hostinfo(Type t)
         {
-            var ass = t.Assembly;
-            var part = ass.Id();
-            var uri = t.HostUri();
             var methods = t.DeclaredMethods();
-            return new ApiHostInfo(t, uri, part, methods, index(methods));
+            return new ApiHostInfo(t, t.HostUri(), t.Assembly.Id(), methods, index(methods));
         }
 
         [Op]

@@ -4,15 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     [Record(TableId)]
-    public struct CilRow : IRecord<CilRow>
+    public struct CilCapture : IRecord<CilCapture>
     {
         public const string TableId = "cil.data";
+
+        public const byte FieldCount = 4;
+
+        public ClrToken MemberId;
 
         public MemoryAddress BaseAddress;
 

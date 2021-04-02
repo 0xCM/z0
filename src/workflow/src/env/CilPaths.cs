@@ -13,11 +13,11 @@ namespace Z0
         FS.FolderPath CilDataRoot()
             => CaptureRoot() + FS.folder(cildata);
 
-        FS.FilePath CilDataFile(FS.FileName name)
+        FS.FilePath CilDataPath(FS.FileName name)
             => CilDataRoot() + name;
 
-        FS.FilePath CilDataFile(ApiHostUri host)
-            => CilDataFile(ApiFiles.filename(host, X.IlData));
+        FS.FilePath CilDataPath(ApiHostUri host)
+            => CilDataPath(ApiFiles.filename(host, X.IlData));
 
         FS.Files CilDataFiles()
             => CilDataRoot().Files(X.Csv);
@@ -28,11 +28,14 @@ namespace Z0
         FS.FolderPath CilCodeRoot()
             => CaptureRoot() + FS.folder(cil);
 
-        FS.FilePath CilCodeFile(FS.FileName name)
+        FS.FilePath CilCodePath(FS.FileName name)
             => CilCodeRoot() + name;
 
-        FS.FilePath CilCodeFile(ApiHostUri host)
-            => CilCodeFile(ApiFiles.filename(host, X.Il));
+        FS.FilePath CilCodePath(ApiHostUri host)
+            => CilCodePath(ApiFiles.filename(host, X.Il));
+
+        FS.FilePath CilCodePath(FS.FolderPath dst, ApiHostUri host)
+            => dst + ApiFiles.filename(host, X.Il);
 
         FS.Files CilCodeFiles()
             => CilCodeRoot().Files(X.Csv);

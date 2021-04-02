@@ -45,5 +45,11 @@ namespace Z0
 
         public static ApiHex ApiHex(this IWfShell wf)
             => Z0.ApiHex.create(wf);
+
+        public static ApiCatalogs ApiCatalogs(this IWfShell wf)
+            => Z0.ApiCatalogs.create(wf);
+
+        public static ApiJit ApiJit(this IWfShell wf)
+            => Z0.ApiJit.create(wf);
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
         {
             Wf = wf;
             Asm = asm;
-            IlPipe = Wf.IlPipe();
+            IlPipe = Wf.MsilPipe();
         }
 
         public AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
@@ -57,8 +57,8 @@ namespace Z0
         {
             if(src.Count != 0)
             {
-                IlPipe.EmitMsil(src, Wf.Db().CilCodeFile(host));
-                IlPipe.EmitMsilData(src, Wf.Db().CilDataFile(host));
+                IlPipe.EmitMsil(src, Wf.Db().CilCodePath(host));
+                IlPipe.EmitMsilData(src, Wf.Db().CilDataPath(host));
             }
 
             return src.Count;

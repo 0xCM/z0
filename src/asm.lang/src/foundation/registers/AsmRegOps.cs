@@ -13,22 +13,28 @@ namespace Z0.Asm
     using R = AsmRegs;
 
 
-    public readonly struct RegOp
+    public readonly struct RegOp : IRegOp
     {
+        public AsmOpKind OpKind => AsmOpKind.R;
 
+        public BitWidth Width => throw new NotImplementedException();
+
+        public dynamic Content => throw new NotImplementedException();
+
+        public string Format()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public readonly struct RegOp<T>
     {
 
     }
+
     public readonly partial struct AsmRegOps
     {
-
-        public readonly struct al
-        {
-
-        }
+        public static RegOp<R.al> al => default;
 
     }
 }

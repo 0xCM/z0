@@ -21,7 +21,7 @@ namespace Z0
                 var match = rule.A;
                 var candidates = rule.B.Elements.View;
                 var count = candidates.Length;
-                var ix = Query.index(candidates, rule.A);
+                var ix = text.index(candidates, rule.A);
                 if(ix != NotFound)
                 {
                     dst = adjacent<char>(match, skip(candidates,ix));

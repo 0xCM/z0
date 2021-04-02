@@ -51,13 +51,13 @@ namespace Z0.Asm
             public static AsmStatement<r32> push(r32 r)
                 => asm.statement(M.PUSH, r);
 
-            /// <summary>
-            /// PUSH r64 | 50 +ro
-            /// </summary>
-            /// <param name="r"></param>
-            [MethodImpl(Inline), Op]
-            public static AsmStatement<r64> push(r64 r)
-                => asm.statement(M.PUSH, r);
+            // /// <summary>
+            // /// PUSH r64 | 50 +ro
+            // /// </summary>
+            // /// <param name="r"></param>
+            // [MethodImpl(Inline), Op]
+            // public static AsmStatement<r64> push(r64 r)
+            //     => asm.statement(M.PUSH, r);
         }
     }
 }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Text;
     using System.Reflection.Metadata;
 
     using static memory;
@@ -27,6 +26,53 @@ namespace Z0
         public MsilPipe()
         {
             IlViz = Cil.visualizer();
+        }
+
+        static bool parse(string src, out CilCapture dst)
+        {
+            var parts = @readonly(src.SplitClean(Chars.Pipe));
+            var count = parts.Length;
+            if(count != CilCapture.FieldCount)
+            {
+                dst = default;
+                return false;
+            }
+            else
+            {
+                var i=0;
+                DataParser.parse(skip(parts,i++), out dst.MemberId);
+                DataParser.parse(skip(parts,i++), out dst.BaseAddress);
+                DataParser.parse(skip(parts,i++), out dst.Uri);
+                DataParser.parse(skip(parts,i++), out dst.CilCode);
+                return true;
+            }
+        }
+
+        public Index<CilCapture> LoadCapturedCil()
+        {
+            var flow = Wf.Running($"Loading cil data rows");
+            var input = Db.CilDataFiles().View;
+            var count = input.Length;
+            var dst = RecordList.create<CilCapture>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(input,i);
+                using var reader = path.Reader();
+                while(!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    if(parse(line, out var row))
+                    {
+                        dst.Add(row);
+                    }
+                    else
+                    {
+                        Wf.Warn($"The content {line} could not be parsed");
+                    }
+                }
+            }
+            Wf.Ran(flow,$"Loaded {dst.Count} cil rows");
+            return dst.Emit();
         }
 
         public void EmitMsil(Index<ApiMemberCode> src, FS.FilePath dst)

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.IO;
 
-    public interface IMemoryEmitter : IWfService
+    public interface IMemoryEmitter
     {
         void Emit(MemoryRange src, StreamWriter dst, byte bpl = 40);
 

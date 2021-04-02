@@ -10,10 +10,14 @@ namespace Z0
     {
         static MsgPattern<Count, DelimitedIndex<PartId>> RunningMachine => "Executing machine workflow for {0} parts: {1}";
 
+        static MsgPattern<Count, DelimitedIndex<PartId>> RanMachine => "Executed machine workflow for {0} parts: {1}";
+
         public void Run(MachineOptions options)
         {
             var parts = Wf.Api.PartIdentities;
-            using var flow = Wf.Running(RunningMachine.Format(parts.Length, Seq.delimit(Chars.Comma, 0, Wf.Api.PartIdentities)));
+            var partList = Seq.delimit(Chars.Comma, 0, Wf.Api.PartIdentities);
+            var partCount = parts.Length;
+            var flow = Wf.Running(RunningMachine.Format(partCount, partList));
             try
             {
                 var api = Wf.ApiServices();
@@ -107,6 +111,8 @@ namespace Z0
             {
                 Wf.Error(e);
             }
+
+            Wf.Ran(flow, RanMachine.Format(partCount, partList));
         }
 
         void Emitted<T>(ReadOnlySpan<T> src)

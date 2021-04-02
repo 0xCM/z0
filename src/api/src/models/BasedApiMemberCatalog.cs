@@ -6,17 +6,17 @@ namespace Z0
 {
     public readonly struct BasedApiMemberCatalog
     {
-        readonly BasedApiMembers Members {get;}
+        readonly FS.FilePath Location {get;}
 
         readonly Index<ApiCatalogEntry> Addresses {get;}
 
-        readonly FS.FilePath Location {get;}
+        readonly ApiMembers Members {get;}
 
-        internal BasedApiMemberCatalog(FS.FilePath location, BasedApiMembers members, Index<ApiCatalogEntry> addresses)
+        internal BasedApiMemberCatalog(FS.FilePath location, ApiMembers members, Index<ApiCatalogEntry> addresses)
         {
+            Location = location;
             Members = members;
             Addresses = addresses;
-            Location = location;
         }
     }
 }

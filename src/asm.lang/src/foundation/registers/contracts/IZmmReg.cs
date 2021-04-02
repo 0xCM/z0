@@ -17,7 +17,7 @@ namespace Z0.Asm
         where F : struct, IZmmReg<F,N>
         where N : unmanaged, ITypeNat
     {
-        RegIndex IRegister.Index
+        RegIndex IReg.Index
             => (RegIndex)TypeNats.nat64u<N>();
     }
 }

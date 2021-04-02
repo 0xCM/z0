@@ -8,7 +8,7 @@ namespace Z0
     {
         LocatedMethod JitMethod(IdentifiedMethod src);
 
-        BasedApiMembers JitCatalog();
+        ApiMembers JitCatalog();
 
         ApiMembers JitPart(IPart src);
 

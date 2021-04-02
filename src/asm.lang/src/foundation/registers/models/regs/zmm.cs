@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     partial struct AsmRegs
     {
-        public readonly struct zmm : IZmmReg, IRegOp512<Cell512>
+        public readonly struct zmm : IZmmReg
         {
             public Cell512 Content {get;}
 
@@ -28,8 +28,8 @@ namespace Z0.Asm
             }
         }
 
-        public struct Zmm<R> : IReg<Zmm<R>,W512,Cell512>, IRegOp512<Cell512>
-            where R : unmanaged, IRegister
+        public struct Zmm<R> : IReg<Zmm<R>,W512,Cell512>
+            where R : unmanaged, IReg
         {
             public Cell512 Content {get;}
 
@@ -43,7 +43,7 @@ namespace Z0.Asm
             public static implicit operator zmm(Zmm<R> src)
                 => new zmm(src.Content, src.RegKind);
         }
-        public readonly struct zmm0 : IZmmReg<zmm0,N0>, IRegOp512<T>
+        public readonly struct zmm0 : IZmmReg<zmm0,N0>
         {
             public T Content {get;}
 
@@ -57,7 +57,7 @@ namespace Z0.Asm
                 => K.ZMM0;
         }
 
-        public readonly struct zmm1 : IZmmReg<zmm1,N1>, IRegOp512<T>
+        public readonly struct zmm1 : IZmmReg<zmm1,N1>
         {
             public T Content {get;}
 
@@ -71,7 +71,7 @@ namespace Z0.Asm
                 => K.ZMM1;
         }
 
-        public readonly struct zmm2 : IZmmReg<zmm2,N2>, IRegOp512<T>
+        public readonly struct zmm2 : IZmmReg<zmm2,N2>
         {
             public T Content {get;}
 
@@ -85,7 +85,7 @@ namespace Z0.Asm
                 => K.ZMM2;
         }
 
-        public readonly struct zmm3 : IZmmReg<zmm3,N3>, IRegOp512<T>
+        public readonly struct zmm3 : IZmmReg<zmm3,N3>
         {
             public T Content {get;}
 
@@ -98,7 +98,7 @@ namespace Z0.Asm
             public K RegKind => K.ZMM3;
         }
 
-        public readonly struct zmm4 : IZmmReg<zmm4,N4>, IRegOp512<T>
+        public readonly struct zmm4 : IZmmReg<zmm4,N4>
         {
             public T Content {get;}
 
@@ -112,7 +112,7 @@ namespace Z0.Asm
             public K RegKind => K.ZMM4;
         }
 
-        public readonly struct zmm5 : IZmmReg<zmm5,N5>, IRegOp512<T>
+        public readonly struct zmm5 : IZmmReg<zmm5,N5>
         {
             public T Content {get;}
 
@@ -125,7 +125,7 @@ namespace Z0.Asm
             public K RegKind => K.ZMM5;
         }
 
-        public readonly struct zmm6 : IZmmReg<zmm6,N6>, IRegOp512<T>
+        public readonly struct zmm6 : IZmmReg<zmm6,N6>
         {
             public T Content {get;}
 
@@ -138,7 +138,7 @@ namespace Z0.Asm
             public K RegKind => K.ZMM6;
         }
 
-        public readonly struct zmm7 : IZmmReg<zmm7,N7>, IRegOp512<T>
+        public readonly struct zmm7 : IZmmReg<zmm7,N7>
         {
             public T Content {get;}
 

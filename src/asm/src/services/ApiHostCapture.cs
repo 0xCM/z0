@@ -15,11 +15,14 @@ namespace Z0.Asm
 
         ApiServices Api;
 
+        ApiCatalogs Catalogs;
+
         protected override void OnInit()
         {
             base.OnInit();
             Asm = Wf.AsmContext();
             Api = Wf.ApiServices();
+            Catalogs =  Wf.ApiCatalogs();
         }
 
         public ApiHostCaptureSet Capture(Type host)
@@ -30,7 +33,7 @@ namespace Z0.Asm
 
         public ApiHostCaptureSet Capture(Type host, FS.FilePath dst)
         {
-            var catalog = Api.HostCatalog(host);
+            var catalog = Catalogs.HostCatalog(host);
             using var service = Wf.CaptureQuick(Asm);
             var blocks = service.CaptureHost(catalog);
             var count = blocks.Length;

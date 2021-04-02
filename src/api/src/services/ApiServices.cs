@@ -10,62 +10,34 @@ namespace Z0
 
     using static memory;
     using static Part;
-    using static TextRules;
     using static Sequential;
 
     public sealed class ApiServices : WfService<ApiServices>
     {
-        public IApiJit ApiJit {get; private set;}
+        public IApiJit ApiJit;
+
+        ApiCatalogs Catalogs;
 
         protected override void OnInit()
         {
-            ApiJit = Z0.ApiJit.create(Wf);
-        }
-
-        public Index<ApiCatalogEntry> LoadCatalogRecords()
-        {
-            var dir = Db.IndexDir<ApiCatalogEntry>();
-            var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
-            var parser = Tables.parser<ApiCatalogEntry>(parse);
-            var rows = root.list<ApiCatalogEntry>();
-            if(files.Length != 0)
-            {
-                var src = files[files.Length - 1];
-                using var reader = src.Reader();
-                var index = uint.MaxValue;
-                reader.ReadLine();
-                var line = reader.ReadLine();
-                while(line != null)
-                {
-                    var outcome = parser.ParseRow(line, out var row);
-                    if(outcome)
-                        rows.Add(row);
-                    else
-                    {
-                        Wf.Error(outcome.Message);
-                        return sys.empty<ApiCatalogEntry>();
-                    }
-                    line = reader.ReadLine();
-                }
-            }
-
-            return rows.ToArray();
+            ApiJit = Wf.ApiJit();
+            Catalogs = Wf.ApiCatalogs();
         }
 
         public Index<DataType> DataTypes()
             => Z0.DataTypes.search(Wf.Components);
 
-        public BasedApiMembers JitCatalog()
+        public ApiMembers JitCatalog()
             => ApiJit.JitCatalog();
 
         public BasedApiMemberCatalog RebaseMembers(Timestamp? ts = null)
             => RebaseMembers(JitCatalog(), ts);
 
-        public BasedApiMemberCatalog RebaseMembers(BasedApiMembers src, Timestamp? ts = null)
+        public BasedApiMemberCatalog RebaseMembers(ApiMembers src, Timestamp? ts = null)
         {
             var dst = Db.IndexTable<ApiCatalogEntry>((ts ?? root.timestamp()).Format());
             var flow = Wf.EmittingTable<ApiCatalogEntry>(dst);
-            var records = CatalogEntries(src.Base, src.Members.View);
+            var records = CreateCatalogEntries(src.BaseAddress, src.View);
             var count = Tables.emit<ApiCatalogEntry>(records, dst, 16);
             Wf.EmittedTable<ApiCatalogEntry>(flow, count, dst);
             return new BasedApiMemberCatalog(dst, src, records);
@@ -76,29 +48,6 @@ namespace Z0
 
         public ApiMemberBlocks Correlate()
             => Correlate(Wf.Api.PartCatalogs());
-
-        /// <summary>
-        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="src">The host type</param>
-        public ApiHostCatalog HostCatalog(Type src)
-            => HostCatalog(ApiCatalogs.host(src));
-
-        /// <summary>
-        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="src">The host type</param>
-        [Op]
-        public ApiHostCatalog HostCatalog(IApiHost src)
-        {
-            var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.Uri));
-            var members = ApiJit.JitHost(src);
-            var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members.Sort());
-            Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.Uri, members.Count));
-            return result;
-        }
 
         public ApiMemberBlocks Correlate(Index<IApiPartCatalog> src)
         {
@@ -120,7 +69,7 @@ namespace Z0
                     if(hexpath.Exists)
                     {
                         var blocks = reader.ReadHexBlocks(hexpath);
-                        var catalog = HostCatalog(Wf.Api.FindHost(host.Uri).Require());
+                        var catalog = Catalogs.HostCatalog(Wf.Api.FindHost(host.Uri).Require());
                         Correlate(catalog, blocks, dst, records);
                     }
                 }
@@ -173,7 +122,7 @@ namespace Z0
         }
 
         [Op]
-        Index<ApiCatalogEntry> CatalogEntries(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
+        Index<ApiCatalogEntry> CreateCatalogEntries(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
         {
             var count = members.Length;
             var buffer = alloc<ApiCatalogEntry>(count);
@@ -191,34 +140,9 @@ namespace Z0
                 record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
                 record.HostName = member.Host.Name;
                 record.PartName = member.Host.Part.Format();
-                record.OpUri = member.OpUri.UriText;
+                record.OpUri = member.OpUri;
             }
             return buffer;
-        }
-
-        static Outcome parse(string src, out ApiCatalogEntry dst)
-        {
-            const char Delimiter = FieldDelimiter;
-            const byte FieldCount = ApiCatalogEntry.FieldCount;
-
-            var fields = Tables.fields(src,Delimiter).View;
-            if(fields.Length != FieldCount)
-            {
-                dst = default;
-                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, Format.delimit(fields, Delimiter)));
-            }
-
-            var i = 0;
-            Numeric.parser<uint>().Parse(skip(fields, i++), out dst.Sequence);
-            Addresses.parse(skip(fields, i++), out dst.ProcessBase);
-            Addresses.parse(skip(fields, i++), out dst.MemberBase);
-            Addresses.parse(skip(fields, i++), out dst.MemberOffset);
-            Addresses.parse(skip(fields, i++), out dst.MemberRebase);
-            ByteSize.parse(skip(fields, i++), out dst.MaxSize);
-            dst.PartName = skip(fields, i++);
-            dst.HostName = skip(fields, i++);
-            dst.OpUri = skip(fields, i++);
-            return true;
         }
     }
 }

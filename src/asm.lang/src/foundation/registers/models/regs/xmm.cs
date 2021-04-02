@@ -15,7 +15,7 @@ namespace Z0.Asm
 
     partial struct AsmRegs
     {
-        public struct xmm : IReg<xmm,W,T>, IRegOp128<T>
+        public struct xmm : IReg<xmm,W,T>
         {
             public T Content {get;}
 
@@ -36,8 +36,8 @@ namespace Z0.Asm
 
         }
 
-        public struct Xmm<R> : IReg<Xmm<R>,W128,Cell128>, IRegOp128<Cell128>
-            where R : unmanaged, IRegister
+        public struct Xmm<R> : IReg<Xmm<R>,W128,Cell128>
+            where R : unmanaged, IReg
         {
             public Cell128 Content {get;}
 
@@ -53,7 +53,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm0 : IReg<xmm0,W,T>, IRegOp128<T>
+        public struct xmm0 : IReg128<xmm0,T>
         {
             public const byte Index = 0;
 
@@ -76,7 +76,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm1 : IReg<xmm1,W,T>, IRegOp128<T>
+        public struct xmm1 : IReg128<xmm1,T>
         {
             public const byte Index = 1;
 
@@ -99,7 +99,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm2 : IReg<xmm2,W,T>, IRegOp128<T>
+        public struct xmm2 : IReg128<xmm2,T>
         {
             public const byte Index = 2;
 
@@ -122,7 +122,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm3 : IReg<xmm3,W,T>, IRegOp128<T>
+        public struct xmm3 : IReg128<xmm3,T>
         {
             public const byte Index = 3;
 
@@ -145,7 +145,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm4 : IReg<xmm4,W,T>, IRegOp128<T>
+        public struct xmm4 : IReg128<xmm4,T>
         {
             public const byte Index = 4;
 
@@ -168,7 +168,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm5 : IReg<xmm5,W,T>, IRegOp128<T>
+        public struct xmm5 : IReg128<xmm5,T>
         {
             public const byte Index = 5;
 
@@ -191,7 +191,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm6 : IReg<xmm6,W,T>, IRegOp128<T>
+        public struct xmm6 : IReg128<xmm6,T>
         {
             public const byte Index = 6;
 
@@ -214,7 +214,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm7 : IReg<xmm7,W,T>, IRegOp128<T>
+        public struct xmm7 : IReg128<xmm7,T>
         {
             public const byte Index = 7;
 
@@ -237,7 +237,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm8 : IReg<xmm8,W,T>, IRegOp128<T>
+        public struct xmm8 : IReg128<xmm8,T>
         {
             public const byte Index = 8;
 
@@ -261,7 +261,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm9 : IReg<xmm9,W,T>, IRegOp128<T>
+        public struct xmm9 : IReg128<xmm9,T>
         {
             public const byte Index = 9;
 
@@ -284,7 +284,7 @@ namespace Z0.Asm
                 => new xmm(src.Content, src.RegKind);
         }
 
-        public struct xmm10 : IReg<xmm10,W,T>, IRegOp128<T>
+        public struct xmm10 : IReg128<xmm10,T>
         {
             public const byte Index = 10;
 
@@ -308,7 +308,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm11 : IReg<xmm11,W,T>, IRegOp128<T>
+        public struct xmm11 : IReg128<xmm11,T>
         {
             public const byte Index = 11;
 
@@ -332,7 +332,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm12 : IReg<xmm12,W,T>, IRegOp128<T>
+        public struct xmm12 : IReg128<xmm12,T>
         {
             public const byte Index = 12;
 
@@ -356,7 +356,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm13 : IXmmReg<xmm13,N13>, IRegOp128<T>
+        public struct xmm13 : IReg128<xmm13,T>
         {
             public const byte Index = 13;
 
@@ -380,7 +380,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm14 : IXmmReg<xmm14,N14>, IRegOp128<T>
+        public struct xmm14 : IReg128<xmm14,T>
         {
             public const byte Index = 14;
 
@@ -404,7 +404,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm15 : IXmmReg<xmm15,N15>, IRegOp128<T>
+        public struct xmm15 : IReg128<xmm15,T>
         {
             public const byte Index = 15;
 
@@ -429,7 +429,7 @@ namespace Z0.Asm
 
         }
 
-        public struct xmm16 : IXmmReg<xmm16,N16>, IRegOp128<T>
+        public struct xmm16 : IReg128<xmm16,T>
         {
             public T Data;
 
@@ -446,7 +446,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM16;
         }
 
-        public struct xmm17 : IXmmReg<xmm17,N17>, IRegOp128<T>
+        public struct xmm17 : IReg128<xmm17,T>
         {
             public T Data;
 
@@ -463,7 +463,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM17;
         }
 
-        public struct xmm18 : IXmmReg<xmm18,N18>, IRegOp128<T>
+        public struct xmm18 : IReg128<xmm18,T>
         {
             public T Data;
 
@@ -480,7 +480,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM18;
         }
 
-        public struct xmm19 : IXmmReg<xmm19,N19>, IRegOp128<T>
+        public struct xmm19 : IReg128<xmm19,T>
         {
             public T Data;
 
@@ -497,7 +497,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM19;
         }
 
-        public struct xmm20 : IXmmReg<xmm20,N20>, IRegOp128<T>
+        public struct xmm20 : IReg128<xmm20,T>
         {
             public T Data;
 
@@ -514,7 +514,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM20;
         }
 
-        public struct xmm21 : IXmmReg<xmm21,N21>, IRegOp128<T>
+        public struct xmm21 : IReg128<xmm21,T>
         {
             public T Data;
 
@@ -531,7 +531,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM21;
         }
 
-        public struct xmm22 : IXmmReg<xmm22,N22>, IRegOp128<T>
+        public struct xmm22 : IReg128<xmm22,T>
         {
             public T Data;
 
@@ -548,7 +548,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM22;
         }
 
-        public struct xmm23 : IXmmReg<xmm23,N23>, IRegOp128<T>
+        public struct xmm23 : IReg128<xmm23,T>
         {
             public T Data;
 
@@ -565,7 +565,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM23;
         }
 
-        public struct xmm24 : IXmmReg<xmm24,N24>, IRegOp128<T>
+        public struct xmm24 : IReg128<xmm24,T>
         {
             public T Data;
 
@@ -582,7 +582,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM24;
         }
 
-        public struct xmm25 : IXmmReg<xmm25,N25>, IRegOp128<T>
+        public struct xmm25 : IReg128<xmm25,T>
         {
             public T Data;
 
@@ -599,7 +599,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM25;
         }
 
-        public struct xmm26 : IXmmReg<xmm26,N26>, IRegOp128<T>
+        public struct xmm26 : IReg128<xmm26,T>
         {
             public T Data;
 
@@ -616,7 +616,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM26;
         }
 
-        public struct xmm27 : IXmmReg<xmm27,N27>, IRegOp128<T>
+        public struct xmm27 : IReg128<xmm27,T>
         {
             public T Data;
 
@@ -633,7 +633,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM27;
         }
 
-        public struct xmm28 : IXmmReg<xmm28,N28>, IRegOp128<T>
+        public struct xmm28 : IReg128<xmm28,T>
         {
             public T Data;
 
@@ -650,7 +650,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM28;
         }
 
-        public struct xmm29 : IXmmReg<xmm29,N29>, IRegOp128<T>
+        public struct xmm29 : IReg128<xmm29,T>
         {
             public T Data;
 
@@ -667,7 +667,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM29;
         }
 
-        public struct xmm30 : IXmmReg<xmm30,N30>, IRegOp128<T>
+        public struct xmm30 : IReg128<xmm30,T>
         {
             public T Data;
 
@@ -684,7 +684,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM30;
         }
 
-        public struct xmm31 : IXmmReg<xmm31,N31>, IRegOp128<T>
+        public struct xmm31 : IReg128<xmm31,T>
         {
             public T Data;
 
