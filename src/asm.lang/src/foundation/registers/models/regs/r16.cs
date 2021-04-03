@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
 
     using K = RegKind;
-    using W = W16;
     using T = System.UInt16;
     using G = AsmRegs.r16;
 

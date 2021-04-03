@@ -28,7 +28,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct Zmm<R> : IReg<Zmm<R>,W512,Cell512>
+        public struct Zmm<R> : IReg512<Zmm<R>,Cell512>
             where R : unmanaged, IReg
         {
             public Cell512 Content {get;}
@@ -43,7 +43,8 @@ namespace Z0.Asm
             public static implicit operator zmm(Zmm<R> src)
                 => new zmm(src.Content, src.RegKind);
         }
-        public readonly struct zmm0 : IZmmReg<zmm0,N0>
+
+        public readonly struct zmm0 : IReg512<zmm0,T>
         {
             public T Content {get;}
 
@@ -57,7 +58,7 @@ namespace Z0.Asm
                 => K.ZMM0;
         }
 
-        public readonly struct zmm1 : IZmmReg<zmm1,N1>
+        public readonly struct zmm1 : IReg512<zmm1,T>
         {
             public T Content {get;}
 

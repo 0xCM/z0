@@ -20,7 +20,7 @@ namespace Z0
             => CmdId.from<T>();
 
         string ITextual.Format()
-            => Cmd.format(this);
+            => CmdFormat.format(this);
     }
 
     [Free]

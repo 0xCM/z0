@@ -24,6 +24,6 @@ namespace Z0
 
         public static string Format<C>(this C src)
             where C : struct, ICmd<C>
-                => Cmd.format(src);
+                => CmdFormat.format(src);
     }
 }

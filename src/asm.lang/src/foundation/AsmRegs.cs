@@ -14,25 +14,19 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmRegs
     {
-        [MethodImpl(Inline)]
-        public static RegCode<T> code<T>(T src)
-            where T : unmanaged, IBitNumber<T>
-                => new RegCode<T>(src);
-
-
         [Op, Closures(UnsignedInts)]
         public static string format<T>(IReg<T> src)
             where T : unmanaged
         {
             switch(src.Width)
             {
-                case 8:
+                case RegWidth.W8:
                     return format(src as IReg8<T>);
-                case 16:
+                case RegWidth.W16:
                     return format(src as IReg16<T>);
-                case 32:
+                case RegWidth.W32:
                     return format(src as IReg32<T>);
-                case 64:
+                case RegWidth.W64:
                     return format(src as IReg64<T>);
                 default:
                     var data = bytes(src.Content);

@@ -41,7 +41,6 @@ namespace Z0.Asm
         public static void run(ref AsmMachine m)
         {
 
-
         }
     }
 }

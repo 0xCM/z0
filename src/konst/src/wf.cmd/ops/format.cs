@@ -12,45 +12,10 @@ namespace Z0
 
     partial struct Cmd
     {
-        public static string format<T>(ICmd<T> src)
-            where T : struct, ICmd<T>
-        {
-            var buffer = text.buffer();
-            buffer.AppendFormat("{0}{1}", src.CmdId, Chars.LParen);
-
-            var fields = ClrFields.instance(typeof(T));
-            if(fields.Length != 0)
-                render(__makeref(src), fields, buffer);
-
-            buffer.Append(Chars.RParen);
-            return buffer.Emit();
-        }
-
-        [Op]
-        static void render(TypedReference src, ReadOnlySpan<ClrField> fields, ITextBuffer dst)
-        {
-            var count = fields.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                dst.AppendFormat(RP.Assign, field.Name, field.GetValueDirect(src));
-                if(i != count - 1)
-                    dst.Append(", ");
-            }
-        }
-
 
         [Op]
         public static string format(CmdVarValue src)
             => src.Content ?? EmptyString;
-
-        [Op]
-        public static string format(CmdTypeInfo src)
-        {
-            var buffer = Buffers.text();
-            render(src, buffer);
-            return buffer.Emit();
-        }
 
         [Op]
         public static void render(CmdTypeInfo src, ITextBuffer dst)

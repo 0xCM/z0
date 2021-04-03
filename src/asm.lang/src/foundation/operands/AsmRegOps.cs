@@ -2,15 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using R = AsmRegs;
 
-    using static Part;
-
-    partial struct Formatters
+    public readonly partial struct AsmRegOps
     {
-
+        public static RegOp<R.al> al => default;
     }
 }

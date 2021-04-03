@@ -9,6 +9,12 @@ namespace Z0
 
     using static Part;
 
+    public interface IFormatProvider<T> : IFormatProvider
+    {
+
+    }
+
+
     public readonly struct ProvidedFormatter<T> : IFormatProvider<T>
         where T : IFormattable
     {

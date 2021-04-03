@@ -28,29 +28,6 @@ namespace Z0
             Delimiter = delimiter;
         }
 
-        public string HeaderText
-            => header().Render(Delimiter);
-
-        public string[] Labels
-            => labels();
-
-        [MethodImpl(Inline)]
-        public int Index(F field)
-            => index(field);
-
-        [MethodImpl(Inline)]
-        public int Width(F field)
-            => width(field);
-
-        [MethodImpl(Inline)]
-        public void Reset()
-            => State.Clear();
-
-        [MethodImpl(Inline)]
-        public void EmitEol()
-        {
-            State.Append(Eol);
-        }
 
         [MethodImpl(Inline)]
         public string Render(bool reset = true)
@@ -73,33 +50,6 @@ namespace Z0
             State.Append(text.rspace(Delimiter));
             State.Append(render(content).PadRight(width(f)));
         }
-
-        public void EmitHeader(bool eol)
-        {
-            var h = header();
-            for(var i=0; i<h.Fields.Length; i++)
-                Delimit(h.Fields[i], h.Labels[i]);
-
-            if(eol)
-                State.Append(Eol);
-        }
-
-        public void Append<T>(F f, T content)
-            where T : ITextual
-        {
-            State.Append(render(content).PadRight(width(f)));
-        }
-
-        public void Delimit<T>(F f, T content)
-            where T : ITextual
-        {
-            State.Append(text.rspace(Delimiter));
-            State.Append(render(content).PadRight(width(f)));
-        }
-
-        public void DelimitSome<T>(F f, T src)
-            where T : unmanaged, Enum
-                => DelimitField(f, src.IsSome()  ? src.ToString() : EmptyString, Delimiter);
 
         public void DelimitField(F f, object content, char delimiter)
         {
@@ -128,15 +78,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the field index from a field specifier
-        /// </summary>
-        /// <param name="field">The field specifier</param>
-        /// <typeparam name="F">The field specifier type</typeparam>
-        [MethodImpl(Inline)]
-        static int index(F field)
-            => (int)(Datasets.PosMask & ClrEnums.e32u(field));
-
-        /// <summary>
         /// Computes the field width from a field specifier
         /// </summary>
         /// <param name="field">The field specifier</param>
@@ -148,9 +89,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static DatasetHeader<F> header()
             => default;
-
-        [MethodImpl(Inline)]
-        static string[] labels()
-            => ClrPrimitives.literals<F>().Names;
     }
 }

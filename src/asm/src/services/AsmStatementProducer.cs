@@ -55,9 +55,11 @@ namespace Z0.Asm
             return counter;
         }
 
+        const string PageBreak = "----------------------------------------------------------------------------------------------------------------------------------------------------------------";
+
         uint Produce(in AsmMemberRoutine src, ITextBuffer dst)
         {
-            dst.AppendLine(AsmComment.separate());
+            dst.AppendLine(PageBreak);
             FormatHeader(src, dst);
             return ProduceInstructions(src, dst);
         }
@@ -73,7 +75,7 @@ namespace Z0.Asm
             {
                 ref readonly var routine = ref skip(src,i);
 
-                writer.WriteLine(AsmComment.separate());
+                writer.WriteLine(PageBreak);
                 FormatHeader(routine, buffer);
                 writer.Write(buffer.Emit());
 

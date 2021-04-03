@@ -32,7 +32,7 @@ namespace Z0.Asm
                 => src.Content;
         }
 
-        public readonly struct Ymm<R> : IReg<Ymm<R>,W256,Cell256>
+        public readonly struct Ymm<R> : IReg256<Ymm<R>,Cell256>
             where R : unmanaged, IReg
         {
             public Cell256 Content {get;}
@@ -49,7 +49,7 @@ namespace Z0.Asm
                 => new ymm(src.Content, src.RegKind);
         }
 
-        public readonly struct ymm0 : IReg<ymm0,W256,T>
+        public readonly struct ymm0 : IReg256<ymm0,T>
         {
             public T Content {get;}
 
@@ -60,7 +60,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM0;
         }
 
-        public readonly struct ymm1 : IReg<ymm1,W256,T>
+        public readonly struct ymm1 : IReg256<ymm1,T>
         {
             public T Content {get;}
 
@@ -71,7 +71,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM1;
         }
 
-        public readonly struct ymm2 : IReg<ymm2,W256,T>
+        public readonly struct ymm2 : IReg256<ymm2,T>
         {
             public T Content {get;}
 
@@ -82,7 +82,7 @@ namespace Z0.Asm
             public K RegKind => K.XMM2;
         }
 
-        public readonly struct ymm3 : IReg<ymm3,W256,T>
+        public readonly struct ymm3 : IReg256<ymm3,T>
         {
             public T Content {get;}
 

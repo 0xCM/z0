@@ -10,9 +10,11 @@ namespace Z0
 
     partial struct Cmd
     {
+        [MethodImpl(Inline), Op]
         public static CmdResult fail(ICmd cmd)
             => new CmdResult(cmd.CmdId, false);
 
+        [MethodImpl(Inline), Op]
         public static CmdResult fail(ICmd cmd, Exception e)
             => new CmdResult(cmd.CmdId, e);
 

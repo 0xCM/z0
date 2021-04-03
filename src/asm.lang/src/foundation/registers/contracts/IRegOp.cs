@@ -9,12 +9,14 @@ namespace Z0.Asm
     using static memory;
     using static Part;
 
-    using api = AsmRegs;
-
     [Free]
     public interface IRegOp : IAsmOp, ITextual
     {
         RegKind RegKind => default;
+
+        BitWidth ISized.Width => (uint)Width;
+
+        new RegWidth Width {get;}
     }
 
     [Free]

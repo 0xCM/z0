@@ -11,12 +11,6 @@ namespace Z0.Asm
 
     public readonly struct AsmComment
     {
-        const string Sep = "----------------------------------------------------------------------------------------------------------------------------------------------------------------";
-
-        [MethodImpl(Inline)]
-        public static AsmComment separate()
-            => Sep;
-
         public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
@@ -25,7 +19,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-            => AsmRender.format(this);
+            => Content.IsNonEmpty ? string.Format("; {0}",Content) : EmptyString;
 
         public override string ToString()
             => Format();
@@ -55,6 +49,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator string(AsmComment src)
             => src.Format();
-
     }
 }

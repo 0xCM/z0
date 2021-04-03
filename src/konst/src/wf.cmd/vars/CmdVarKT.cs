@@ -61,6 +61,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdVar<K,T>(Paired<K,T> src)
             => new CmdVar<K,T>(src.Left, src.Right);
-
     }
 }

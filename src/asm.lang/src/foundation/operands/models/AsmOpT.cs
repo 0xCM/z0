@@ -13,7 +13,6 @@ namespace Z0.Asm
     /// Defines an asm operand
     /// </summary>
     public readonly struct AsmOp<T>
-        where T : struct
     {
 
     }

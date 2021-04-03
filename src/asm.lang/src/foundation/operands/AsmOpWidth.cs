@@ -2,15 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    partial struct Formatters
+    public enum AsmOpWidth : byte
     {
+        None = 0,
 
+        W8 = 1,
+
+        W16 = 2,
+
+        W32 = 3,
+
+        W64 = 4,
+
+        W128 = 5,
+
+        W256 = 6,
+
+        W512 = 7
     }
 }

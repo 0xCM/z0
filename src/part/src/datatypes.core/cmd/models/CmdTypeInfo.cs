@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
+    using static memory;
 
     [Datatype]
     public readonly struct CmdTypeInfo : ICmdTypeInfo, IDataType<CmdTypeInfo>
@@ -34,9 +35,30 @@ namespace Z0
         }
 
         public string Format()
-            => Cmd.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();
+
+        [Op]
+        static string format(CmdTypeInfo src)
+        {
+            var buffer = Buffers.text();
+            render(src, buffer);
+            return buffer.Emit();
+        }
+
+        [Op]
+        static void render(CmdTypeInfo src, ITextBuffer dst)
+        {
+            dst.Append(src.DataType.Name);
+            var fields = src.Fields.View;;
+            var count = fields.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(fields,count);
+                dst.Append(string.Format(" | {0}:{1}", field.Name, field.FieldType.Name));
+            }
+        }
     }
 }

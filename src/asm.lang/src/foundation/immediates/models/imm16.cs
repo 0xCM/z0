@@ -20,7 +20,7 @@ namespace Z0.Asm
                 => Content = value;
 
             public AsmOpKind OpKind
-                => AsmOpKind.Imm | AsmOpKind.W16;
+                => AsmOpKind.Imm;
         }
     }
 }

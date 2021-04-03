@@ -32,13 +32,6 @@ namespace Z0
         public static IWfEventSink term(string src)
             => new TermLog(src);
 
-        [Op]
-        public static ICaseLog cases(FS.FilePath dst)
-            => new CaseLog(cases<TestCaseField,TestCaseRecord>(dst));
-        [Op]
-        public static IBuildLog build(FS.FilePath dst)
-            => new BuildLog(dst);
-
         [MethodImpl(Inline), Op]
         public static WfLogConfig configure(PartId part, FS.FolderPath dbRoot)
             => new WfLogConfig(part, dbRoot);
@@ -47,10 +40,5 @@ namespace Z0
         public static WfLogConfig configure(PartId part, FS.FolderPath dbRoot, string area)
             => new WfLogConfig(part, dbRoot);
 
-        [MethodImpl(Inline)]
-        static CaseLog<F,T> cases<F,T>(FS.FilePath dst)
-            where T : struct, ITextual
-            where F : unmanaged, Enum
-                => new CaseLog<F,T>(dst);
     }
 }

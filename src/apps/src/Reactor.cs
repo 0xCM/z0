@@ -65,17 +65,8 @@ namespace Z0
                 case ShowRuntimeArchiveCmd.CmdName:
                     Builder.ShowRuntimeArchive().RunTask(Wf);
                     break;
-                // case EmitHexIndexCmd.CmdName:
-                //     Builder.EmitHexIndex().RunTask(Wf);
-                // break;
                 case EmitAssemblyRefsCmd.CmdName:
                     Builder.EmitAssemblyRefs().RunTask(Wf);
-                break;
-                // case EmitRuntimeIndexCmd.CmdName:
-                //     Builder.EmitRuntimeIndex().RunTask(Wf);
-                // break;
-                case DumpCliTablesCmd.CmdName:
-                    Builder.DumpCliTables(Parts.Part.Assembly).RunTask(Wf);
                 break;
                 case BuildProjectCmd.CmdName:
                     Builder.Build().RunTask(Wf);

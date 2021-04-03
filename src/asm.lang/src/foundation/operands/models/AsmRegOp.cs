@@ -8,32 +8,30 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    public readonly struct RegCode<T>
-        where T : unmanaged, IBitNumber
+    public readonly struct AsmRegOp : IRegOp
     {
-        public T Value {get;}
+        readonly ushort Data;
 
         [MethodImpl(Inline)]
-        public RegCode(T value)
+        public AsmRegOp(RegWidth width, RegClass @class, RegIndex index)
         {
-            Value = value;
+            Data = math.or(math.srl((ushort)width,3), math.sll((ushort)@class,5) , math.sll((ushort)index, 10));
         }
 
-        public ReadOnlySpan<bit> Bits
+        public AsmOpKind OpKind
+            => AsmOpKind.R;
+
+        public RegWidth Width
         {
             [MethodImpl(Inline)]
-            get => Value.Bits;
+            get => (RegWidth)math.sll(Data,3);
         }
 
         public string Format()
-            => Value.Format();
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator RegCode<T>(T src)
-            => new RegCode<T>(src);
+        {
+            return "";
+        }
     }
 }

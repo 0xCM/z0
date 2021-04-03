@@ -23,7 +23,5 @@ namespace Z0
         {
             seek(dst,offset) = execute(name, code, skip(a,offset), skip(b,offset));
         }
-
-
     }
 }

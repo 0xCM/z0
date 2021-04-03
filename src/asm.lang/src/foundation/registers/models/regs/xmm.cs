@@ -10,12 +10,11 @@ namespace Z0.Asm
     using static Part;
 
     using K = RegKind;
-    using W = W128;
     using T = Cell128;
 
     partial struct AsmRegs
     {
-        public struct xmm : IReg<xmm,W,T>
+        public struct xmm : IReg128<xmm,T>
         {
             public T Content {get;}
 
@@ -36,7 +35,7 @@ namespace Z0.Asm
 
         }
 
-        public struct Xmm<R> : IReg<Xmm<R>,W128,Cell128>
+        public struct Xmm<R> : IReg128<Xmm<R>,Cell128>
             where R : unmanaged, IReg
         {
             public Cell128 Content {get;}

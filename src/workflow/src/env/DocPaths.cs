@@ -31,6 +31,9 @@ namespace Z0
         FS.FolderPath DocRoot()
             => DbRoot() + FS.folder(docs);
 
+        FS.FolderPath DocDir<S>(S subject)
+            => DocRoot() + SubjectFolder(subject);
+
         FS.FilePath Doc(string name, FS.FileExt ext)
             => DocRoot() + FS.file(name, ext);
 
