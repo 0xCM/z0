@@ -37,10 +37,24 @@ namespace Z0.Asm
             Comment = comment ?? AsmComment.Empty;
         }
 
-
-        [MethodImpl(Inline)]
         public string Format()
-            => Statement.Format();
+        {
+            if(Label.IsNonEmpty)
+                return string.Format("{0}:",Label.Name);
+            else if(Statement.IsNonEmpty)
+            {
+                if(Comment.IsNonEmpty)
+                    return string.Format("{0,-42} ; {1}", Statement, Comment.Content);
+                else
+                    return Statement.Format();
+            }
+            else if(Comment.IsNonEmpty)
+            {
+                return string.Format("; {0}", Comment.Content);
+            }
+            else
+                return EmptyString;
+        }
 
         public override string ToString()
             => Format();

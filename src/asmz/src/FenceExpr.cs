@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
     using static Rules;
-    using static memory;
 
     public readonly struct FenceExprCases
     {

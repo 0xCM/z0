@@ -51,6 +51,12 @@ namespace Z0.Asm
                 return BinaryCode.Empty;
         }
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Content.IsNonEmpty;
+        }
+
         public int CompareTo(AsmStatementExpr src)
             => Content.CompareTo(src.Content);
 

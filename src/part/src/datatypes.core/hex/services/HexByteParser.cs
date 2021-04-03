@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [Op]
-        public static bool parse(string src, out byte[] dst)
+        public static bool parse(string src, out BinaryCode dst)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Z0
                 else if(HexFormat.HasPostSpec(s0))
                     s0 = text.slice(s0, 0, len - PostSpec.Length);
                 var blocks = text.split(s0, Chars.Space);
-                dst = blocks.Select(x => byte.Parse(x, NumberStyles.HexNumber));
+                dst = blocks.Select(x => byte.Parse(x, NumberStyles.HexNumber)).Storage;
                 return true;
             }
             catch(Exception)

@@ -5,9 +5,9 @@
 | 32 / r           | XOR r8, r/m8     | RM    | Valid       | Valid           | r8 XOR r/m8.                     |
 | 33 / r           | XOR r16, r/m16   | RM    | Valid       | Valid           | r16 XOR r/m16.                   |
 | 33 / r           | XOR r32, r/m32   | RM    | Valid       | Valid           | r32 XOR r/m32.                   |
-| 34 ib            | XOR AL, i mm8    | I     | Valid       | Valid           | AL XOR imm8.                     |
-| 35 iw            | XOR AX, i mm16   | I     | Valid       | Valid           | AX XOR imm16.                    |
-| 35 id            | XOR EAX, i mm32  | I     | Valid       | Valid           | EAX XOR imm32.                   |
+| 34 ib            | XOR AL, imm8    | I     | Valid       | Valid           | AL XOR imm8.                     |
+| 35 iw            | XOR AX, imm16   | I     | Valid       | Valid           | AX XOR imm16.                    |
+| 35 id            | XOR EAX, imm32  | I     | Valid       | Valid           | EAX XOR imm32.                   |
 | 80 /6 ib         | XOR r/m8, imm8   | MI    | Valid       | Valid           | r/m8 XOR imm8.                   |
 | 81 /6 iw         | XOR r/m16, imm16 | MI    | Valid       | Valid           | r/m16 XOR imm16.                 |
 | 81 /6 id         | XOR r/m32, imm32 | MI    | Valid       | Valid           | r/m32 XOR imm32.                 |

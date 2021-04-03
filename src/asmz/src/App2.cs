@@ -1066,8 +1066,9 @@ namespace Z0.Asm
         {
             var parser = CultParser.create(Wf);
             var input = Db.ToolOutDir(Toolsets.cult) + FS.file("cult", FS.Asm);
+            var target = Db.AppLogDir() + FS.file("cult.exported", FS.Asm);
 
-            parser.Parse(input);
+            parser.Parse(input,target);
             //NasmRunner.create(Wf).Run();
 
             //Produce();
