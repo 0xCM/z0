@@ -44,7 +44,7 @@ namespace Z0
                 var fenced = Query.fenced(input, fence);
                 if(fenced)
                 {
-                    if(!Parse.unfence(input, fence, out content))
+                    if(!text.unfence(input, fence, out content))
                         return sys.empty<BitMaskInfo>();
                 }
 

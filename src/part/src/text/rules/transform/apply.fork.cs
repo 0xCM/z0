@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
     using static Rules;
 
     partial struct TextRules
@@ -21,7 +18,7 @@ namespace Z0
             /// <param name="src">The source string</param>
             [Op]
             public static Pair<string> apply(Fork<char> rule, string src)
-                => root.pair(Parse.before(src, rule.Criterion), Parse.after(src, rule.Criterion));
+                => root.pair(text.before(src, rule.Criterion), text.after(src, rule.Criterion));
         }
     }
 }

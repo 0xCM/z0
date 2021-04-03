@@ -9,24 +9,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     partial class text
     {
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> span(string src)
-            => src;
-
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Formats the content with a space on either side
+        /// </summary>
+        /// <param name="content">The source content</param>
+        [MethodImpl(Inline), Op]
         public static string spaced(object content)
-            => Format.spaced(content);
+            => $" {content} ";
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string spaced(char c)
-            => Format.spaced(c);
+            => TextFormat.concat(Space, c, Space);
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Separates each item with a space
+        /// </summary>
+        [MethodImpl(Inline), Op]
         public static string spaced(IEnumerable<object> items)
-            => Format.spaced(items);
+            => string.Join(Chars.Space, items);
     }
 }

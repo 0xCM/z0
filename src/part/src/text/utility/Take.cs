@@ -14,14 +14,14 @@ namespace Z0
     {
         [MethodImpl(Inline), TextUtility]
         public static string TakeBefore(this string src, char match)
-            => Parse.before(src, match);
+            => text.before(src, match);
 
         [MethodImpl(Inline), TextUtility]
         public static string TakeAfter(this string src, char match)
-            => Parse.after(src,match);
+            => text.after(src,match);
 
         [MethodImpl(Inline), TextUtility]
         public static string TakeAfter(this string s, string match)
-            => Parse.after(s,match);
+            => text.after(s,match);
     }
 }

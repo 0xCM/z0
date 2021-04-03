@@ -20,7 +20,7 @@ namespace Z0.Asm
             {
                 var count = Count;
                 if(count != 0)
-                    return TextRules.Format.join(Delimiter, this);
+                    return TextFormat.join(Delimiter, this);
                 else
                     return EmptyString;
             }

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
     using static Rules;
     using static memory;
 
@@ -20,7 +19,7 @@ namespace Z0
 
         public static string format<T>(BitFieldPart<T> src)
             where T : unmanaged
-                => Format.enclose(Format.adjacent(src.LastIndex, SegmentDelimiter, src.FirstIndex), SegmentFence);
+                => TextFormat.enclose(TextFormat.adjacent(src.LastIndex, SegmentDelimiter, src.FirstIndex), SegmentFence);
 
         [Op]
         static string[] lines(in BitFieldModel src)

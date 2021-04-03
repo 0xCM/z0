@@ -7,7 +7,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public readonly partial struct TextFormatter
+    public readonly partial struct TextFormat
     {
         const NumericKind Closure = UnsignedInts;
     }

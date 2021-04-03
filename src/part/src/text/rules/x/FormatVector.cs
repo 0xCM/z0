@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static TextRules;
-
     partial class XText
     {
         /// <summary>
@@ -21,7 +19,7 @@ namespace Z0
         public static string FormatVector<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma)
         {
             var body = src.Map(x => x.ToString()).Join(sep);
-            return Format.enclose(body, Rules.fence(Chars.Lt, Chars.Gt));
+            return TextFormat.enclose(body, Rules.fence(Chars.Lt, Chars.Gt));
         }
 
         /// <summary>

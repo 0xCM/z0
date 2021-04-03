@@ -69,7 +69,7 @@ namespace Z0.Asm
             if(src.category.IsNonEmpty)
                 classes.Add(src.category.Format());
             if(classes.Count != 0)
-                dst.AppendLineFormat("# Classification: {0}", TextRules.Format.join(", ", classes));
+                dst.AppendLineFormat("# Classification: {0}", TextFormat.join(", ", classes));
 
             dst.AppendLineFormat("# Header: {0}", src.header);
             dst.Append(src.instructions.Format());

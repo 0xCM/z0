@@ -182,7 +182,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(PathSeparator sep, bool quote = false)
-                => quote ? TextRules.Format.enquote(Name.Format(sep)) : Name.Format(sep);
+                => quote ? Z0.text.enquote(Name.Format(sep)) : Name.Format(sep);
 
             public override string ToString()
                 => Format();
@@ -193,10 +193,6 @@ namespace Z0
             [MethodImpl(Inline)]
             static SearchOption option(bool recurse)
                 => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-
-            // [MethodImpl(Inline)]
-            // public static implicit operator Z0.FolderPath(FolderPath src)
-            //     => Z0.FolderPath.Define(src.Name);
 
             static FilePath[] Files(FolderPath src, bool recurse, params FileExt[] ext)
                 => ext.SelectMany(x => Directory.EnumerateFiles(src.Name, x.SearchPattern, option(recurse))).Map(FS.path);

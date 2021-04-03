@@ -226,7 +226,7 @@ namespace Z0.Asm
         public Index<AsmSigOperandExpr> OperandExpressions(AsmSigExpr src)
         {
             if(syntax.mnemonic(src.Content, out var monic))
-                if(Parse.after(src.Content, monic.Name, out var remainder))
+                if(text.after(src.Content, monic.Name, out var remainder))
                     return OperandExpressions(remainder);
             return Index<AsmSigOperandExpr>.Empty;
         }
@@ -254,7 +254,7 @@ namespace Z0.Asm
         {
             dst = default;
             if(Parse.rule(src, Cache.RegDigitRule, out var result) &&
-                Parse.digit(result.B, out var digit))
+                text.digit(result.B, out var digit))
                     return assign(digit, out dst);
             return false;
         }

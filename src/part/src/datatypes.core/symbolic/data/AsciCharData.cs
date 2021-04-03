@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
 
+    [ApiComplete]
     public readonly partial struct AsciCharData
     {
         public const byte LetterCount = 26;

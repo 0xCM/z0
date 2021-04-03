@@ -11,7 +11,7 @@ namespace Z0
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string embrace<T>(T src)
             => RP.embrace(src);
     }

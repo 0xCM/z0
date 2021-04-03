@@ -165,7 +165,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(PathSeparator sep, bool quote = false)
-                => quote ? TextRules.Format.enquote(Name.Format(sep)) : Name.Format(sep);
+                => quote ? Z0.text.enquote(Name.Format(sep)) : Name.Format(sep);
 
             [MethodImpl(Inline)]
             public FileUri ToUri()

@@ -12,7 +12,7 @@ namespace Z0
     partial class text
     {
         [MethodImpl(Inline), Op]
-        public static string rspace(object content)
-            => $"{content} ";
+        public static ReadOnlySpan<char> span(string src)
+            => src;
     }
 }

@@ -11,8 +11,13 @@ namespace Z0
 
     partial class text
     {
+       /// <summary>
+        /// Creates a string of the form "name: content"
+        /// </summary>
+        /// <param name="name">The label name</param>
+        /// <param name="content">The labeled content</param>
         [MethodImpl(Inline), Op]
-        public static string rspace(object content)
-            => $"{content} ";
+        public static string label(object name, object content)
+            => TextFormat.concat(name, Chars.Colon, Space, content);
     }
 }

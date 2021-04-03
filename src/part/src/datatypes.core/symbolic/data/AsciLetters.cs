@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static AsciCharCode;
+    using static memory;
 
     using Facets = AsciCodeFacets;
 
@@ -20,5 +20,9 @@ namespace Z0
         public static ReadOnlySpan<AsciCharCode> UpperLetterCodes => new AsciCharCode[Facets.UpperCount]{
             A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
             };
+
+        public static ReadOnlySpan<char> UpperLetterChars => span("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+
+        public static ReadOnlySpan<char> LowerLetterChars => span("abcdefghijklmnopqrstuvwxyz");
     }
 }

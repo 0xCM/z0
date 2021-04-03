@@ -116,14 +116,14 @@ namespace Z0.Asm
             {
                 var lhs = skip(parts,0);
                 var rhs = skip(parts,1);
-                if(unfence(lhs, SigFence, out var sigexpr))
+                if(text.unfence(lhs, SigFence, out var sigexpr))
                 {
                     if(AsmSyntax.sig(sigexpr, out var sig, out outcome))
                     {
                         if(!AsmSyntax.code(sig.Mnemonic, out var monic))
                             Wf.Warn(Msg.MonicCodeParseFailed.Format(sig.Mnemonic));
 
-                        if(unfence(lhs, OpCodeFence, out var opcode))
+                        if(text.unfence(lhs, OpCodeFence, out var opcode))
                         {
                             if(AsmBytes.hexcode(rhs, out var encoded))
                             {

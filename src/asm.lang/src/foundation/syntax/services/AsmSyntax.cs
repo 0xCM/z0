@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static Chars;
     using static Rules;
-    using static TextRules;
-    using static TextRules.Parse;
 
     [ApiHost]
     public readonly struct AsmSyntax
@@ -73,11 +71,11 @@ namespace Z0.Asm
         public static Outcome form(string src, out AsmFormExpr dst)
         {
             dst = AsmFormExpr.Empty;
-            if(unfence(src, SigFence, out var sigexpr))
+            if(text.unfence(src, SigFence, out var sigexpr))
             {
                 if(AsmSyntax.sig(sigexpr, out var sig))
                 {
-                    if(unfence(src, OpCodeFence, out var opcode))
+                    if(text.unfence(src, OpCodeFence, out var opcode))
                     {
                         dst = new AsmFormExpr(asm.opcode(opcode), sig);
                         return true;
@@ -158,7 +156,7 @@ namespace Z0.Asm
             if(opcount != 0)
             {
                 dst.Append(Chars.Space);
-                dst.Append(Format.join(OperandDelimiter, operands));
+                dst.Append(TextFormat.join(OperandDelimiter, operands));
             }
         }
 

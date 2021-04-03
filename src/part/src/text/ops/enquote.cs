@@ -8,12 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        [ Op]
         public static string enquote(string src)
-            => Format.enquote(src);
-    }
+        {
+            if(!string.IsNullOrWhiteSpace(src))
+                return TextFormat.concat(Chars.Quote, src, Chars.Quote);
+            else
+                return EmptyString;
+        }
+   }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static TextRules;
-
     partial struct BitFieldSpecs
     {
         /// <summary>
@@ -19,7 +17,7 @@ namespace Z0
             where T : unmanaged
         {
             dst = default;
-            if(Parse.unfence(src, SegmentFence, out var fenced))
+            if(text.unfence(src, SegmentFence, out var fenced))
             {
                 var parts = text.split(fenced, SegmentDelimiter);
                 if(parts.Count == 2)

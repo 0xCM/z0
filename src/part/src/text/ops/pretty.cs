@@ -13,23 +13,19 @@ namespace Z0
     partial class text
     {
         [MethodImpl(Inline)]
-        public static string squote(object src)
-            => Format.enclose(src, CharText.SQuote);
-
-        [MethodImpl(Inline)]
         public static string assign(object lhs, object rhs)
-            => Format.concat(lhs, Space, Assignment, Space, rhs);
+            => TextFormat.concat(lhs, Space, Assignment, Space, rhs);
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Encloses content between '(' and ')' characters
+        /// </summary>
+        /// <param name="content">The items to be enclosed</param>
+        [Op]
         public static string parenthetical(params object[] content)
-            => Format.parenthetical(content);
+            => TextFormat.enclose(string.Concat(content.Select(x => x.ToString())), Chars.LParen, Chars.RParen);
 
         [MethodImpl(Inline)]
         public static string rpad(string src, int width, char c = Space)
             => Format.rpad(src, width, c);
-
-        [MethodImpl(Inline)]
-        public static string label(object name, object content)
-            => Format.label(name, content);
     }
 }

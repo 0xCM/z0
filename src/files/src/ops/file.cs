@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static TextRules;
 
     partial struct FS
     {
@@ -26,7 +25,7 @@ namespace Z0
 
         [Op]
         public static FileName file(PartId part, string hostname, FileExt ext)
-            => file(Format.concat(part.Format(), Chars.Dot, hostname), ext);
+            => file(TextFormat.concat(part.Format(), Chars.Dot, hostname), ext);
 
         [MethodImpl(Inline), Op]
         public static FileName file(PathPart name, FileExt ext)
