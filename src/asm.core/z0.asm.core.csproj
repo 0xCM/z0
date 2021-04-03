@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(Konst)" />
+      <ProjectReference Include="$(Part)" />
+      <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 
 </Project>

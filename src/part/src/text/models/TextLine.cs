@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     /// <summary>
     /// Represents a line of text in the context of a line-oriented text data source
@@ -85,7 +84,12 @@ namespace Z0
             : sys.empty<string>();
 
         public string[] Split(char delimiter, bool clean = true)
-            => clean ? Content.SplitClean(delimiter) : Content.Split(delimiter);
+        {
+            if(text.empty(Content))
+                return sys.empty<string>();
+            else
+                return clean ? Content.SplitClean(delimiter) : Content.Split(delimiter);
+        }
 
         public string Format()
             => $"{LineNumber.ToString().PadLeft(8, '0')}:{Content}";

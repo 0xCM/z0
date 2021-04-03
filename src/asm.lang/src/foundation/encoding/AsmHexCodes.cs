@@ -12,7 +12,9 @@ namespace Z0.Asm
     using static gcpu;
     using static MemBlocks;
 
-    partial struct AsmBytes
+
+    [ApiHost]
+    public readonly struct AsmHexCodes
     {
         [MethodImpl(Inline), Op]
         public static AsmHexCode define(Hex8 a0)

@@ -26,6 +26,8 @@ namespace Z0
 
         public static ToolId xed => asm.xed;
 
+        public static ToolId cult => asm.cult;
+
         public readonly struct clang
         {
             public static ToolId name => "clang";
@@ -42,6 +44,8 @@ namespace Z0
             public static ToolId ndisasm => "ndisasm";
 
             public static ToolId xed => "xed";
+
+            public static ToolId cult = "cult";
         }
 
         public readonly struct llvm

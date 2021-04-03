@@ -34,5 +34,15 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
+
+        public static AsmLabel Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmLabel(Identifier.Empty);
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmLabel(string src)
+            => new AsmLabel(src);
     }
 }

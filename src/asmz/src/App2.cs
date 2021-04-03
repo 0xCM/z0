@@ -1064,10 +1064,13 @@ namespace Z0.Asm
 
         public void Run()
         {
+            var parser = CultParser.create(Wf);
+            var input = Db.ToolOutDir(Toolsets.cult) + FS.file("cult", FS.Asm);
 
+            parser.Parse(input);
             //NasmRunner.create(Wf).Run();
 
-            Produce();
+            //Produce();
 
             // var f = BinaryOpFactory.create<byte>("mul_8u_8u_8u", mul_ᐤ8uㆍ8uᐤ);
             // var c = f(4,8);

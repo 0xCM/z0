@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl.Test
 {
-    using System;
-
     public class t_geev : UnitTest<t_geev>
     {
         public void test1()

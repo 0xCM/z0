@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static memory;
 
     [ApiHost]
-    public readonly partial struct AsmBytes
+    public readonly struct AsmBytes
     {
         [MethodImpl(Inline), Op]
         public static byte size(AsmHexCode src)

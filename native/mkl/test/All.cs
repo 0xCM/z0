@@ -9,7 +9,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
     using static Examples;
 
     static class Examples

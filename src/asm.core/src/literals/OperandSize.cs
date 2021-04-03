@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     public enum OperandSize : byte
     {
         W16 = (byte)DataWidth.W16,

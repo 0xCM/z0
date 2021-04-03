@@ -17,7 +17,7 @@ namespace Z0.Asm
         internal Cell128 Data;
 
         [MethodImpl(Inline)]
-        internal AsmHexCode(Cell128 data)
+        public AsmHexCode(Cell128 data)
             => Data = data;
 
         public byte Size

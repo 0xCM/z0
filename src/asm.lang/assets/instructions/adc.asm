@@ -3,62 +3,62 @@ adc al, 0                                   ; 1400
 adc cl, 1                                   ; 80D101
 adc dl, 2                                   ; 80D202
 adc bl, 3                                   ; 80D303
-rex adc sil, 4                              ; 4080D604
-rex adc dil, 5                              ; 4080D705
+adc sil, 4                                  ; 4080D604, rex
+adc dil, 5                                  ; 4080D705, rex
 adc al, 6                                   ; 1406
 adc cl, 7                                   ; 80D107
 adc dl, 8                                   ; 80D208
 adc bl, 9                                   ; 80D309
-rex adc sil, 10                             ; 4080D60A
-rex adc dil, 11                             ; 4080D70B
+adc sil, 10                                 ; 4080D60A, rex
+adc dil, 11                                 ; 4080D70B, rex
 adc al, 12                                  ; 140C
 adc cl, 13                                  ; 80D10D
 adc dl, 14                                  ; 80D20E
 adc bl, 15                                  ; 80D30F
-rex adc sil, 0                              ; 4080D600
-rex adc dil, 1                              ; 4080D701
+adc sil, 0                                  ; 4080D600, rex
+adc dil, 1                                  ; 4080D701, rex
 adc al, 2                                   ; 1402
 adc cl, 3                                   ; 80D103
 adc dl, 4                                   ; 80D204
 adc bl, 5                                   ; 80D305
-rex adc sil, 6                              ; 4080D606
-rex adc dil, 7                              ; 4080D707
+adc sil, 6                                  ; 4080D606, rex
+adc dil, 7                                  ; 4080D707, rex
 adc al, 8                                   ; 1408
 adc cl, 9                                   ; 80D109
 adc dl, 10                                  ; 80D20A
 adc bl, 11                                  ; 80D30B
-rex adc sil, 12                             ; 4080D60C
-rex adc dil, 13                             ; 4080D70D
+adc sil, 12                                 ; 4080D60C, rex
+adc dil, 13                                 ; 4080D70D, rex
 adc al, 14                                  ; 140E
 adc cl, 15                                  ; 80D10F
 adc dl, 0                                   ; 80D200
 adc bl, 1                                   ; 80D301
-rex adc sil, 2                              ; 4080D602
-rex adc dil, 3                              ; 4080D703
+adc sil, 2                                  ; 4080D602, rex
+adc dil, 3                                  ; 4080D703, rex
 adc al, 4                                   ; 1404
 adc cl, 5                                   ; 80D105
 adc dl, 6                                   ; 80D206
 adc bl, 7                                   ; 80D307
-rex adc sil, 8                              ; 4080D608
-rex adc dil, 9                              ; 4080D709
+adc sil, 8                                  ; 4080D608, rex
+adc dil, 9                                  ; 4080D709, rex
 adc al, 10                                  ; 140A
 adc cl, 11                                  ; 80D10B
 adc dl, 12                                  ; 80D20C
 adc bl, 13                                  ; 80D30D
-rex adc sil, 14                             ; 4080D60E
-rex adc dil, 15                             ; 4080D70F
+adc sil, 14                                 ; 4080D60E, rex
+adc dil, 15                                 ; 4080D70F, rex
 adc al, 0                                   ; 1400
 adc cl, 1                                   ; 80D101
 adc dl, 2                                   ; 80D202
 adc bl, 3                                   ; 80D303
-rex adc sil, 4                              ; 4080D604
-rex adc dil, 5                              ; 4080D705
+adc sil, 4                                  ; 4080D604, rex
+adc dil, 5                                  ; 4080D705, rex
 adc al, 6                                   ; 1406
 adc cl, 7                                   ; 80D107
 adc dl, 8                                   ; 80D208
 adc bl, 9                                   ; 80D309
-rex adc sil, 10                             ; 4080D60A
-rex adc dil, 11                             ; 4080D70B
+adc sil, 10                                 ; 4080D60A, rex
+adc dil, 11                                 ; 4080D70B, rex
 adc al, 12                                  ; 140C
 adc cl, 13                                  ; 80D10D
 adc dl, 14                                  ; 80D20E
@@ -649,9 +649,3 @@ adc cl, al                                  ; 10C1
 adc dl, cl                                  ; 10CA
 adc bl, dl                                  ; 10D3
 adc sil, bl                                 ; 4010DE, rex
-
-
-
-
-
-

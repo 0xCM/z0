@@ -9,22 +9,38 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmLine
+    public readonly struct AsmLine : IRecord<AsmLine>
     {
         public uint LineNumber {get;}
 
-        public TextBlock Content {get;}
+        public AsmLabel Label {get;}
+
+        public AsmStatementExpr Statement {get;}
+
+        public AsmComment Comment {get;}
 
         [MethodImpl(Inline)]
-        public AsmLine(uint number, TextBlock content)
+        public AsmLine(uint number, AsmStatementExpr statement, AsmComment? comment = null)
         {
             LineNumber = number;
-            Content = content;
+            Label = AsmLabel.Empty;
+            Statement = statement;
+            Comment = comment ?? AsmComment.Empty;
         }
 
         [MethodImpl(Inline)]
+        public AsmLine(uint number, AsmLabel label, AsmComment? comment = null)
+        {
+            LineNumber = number;
+            Label = label;
+            Statement = AsmStatementExpr.Empty;
+            Comment = comment ?? AsmComment.Empty;
+        }
+
+
+        [MethodImpl(Inline)]
         public string Format()
-            => Content.Format();
+            => Statement.Format();
 
         public override string ToString()
             => Format();
@@ -32,7 +48,7 @@ namespace Z0.Asm
         public static AsmLine Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmLine(0, EmptyString);
+            get => new AsmLine(0, AsmStatementExpr.Empty);
         }
     }
 }

@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
 {
-    using System;
-
-    using static Konst;
-
     public class t_potrf : UnitTest<t_potrf>
     {
         public void posdef1()

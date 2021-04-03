@@ -73,8 +73,26 @@ namespace Z0
         public Index<T> Emit(bool clear = true)
         {
             var data = Storage.ToArray();
-            Storage.Clear();
+            Clear();
             return data;
+        }
+
+        [MethodImpl(Inline)]
+        public void Clear()
+        {
+            Storage.Clear();
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Storage.Count != 0;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Storage.Count == 0;
         }
 
         public IReadOnlyList<T> Items
