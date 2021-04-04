@@ -4,10 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+    using static memory;
     using R = AsmRegs;
 
     public readonly partial struct AsmRegOps
     {
         public static RegOp<R.al> al => default;
+
+
     }
+
+
 }

@@ -110,7 +110,7 @@ namespace Z0.Asm
 
         public Symbols<IClass> EmitClasses()
         {
-            var symbols = SymCache<IClass>.get().Entries;
+            var symbols = SymCache<IClass>.get().Index;
             var entries = symbols.View;
             var dst = Db.AsmCatalogFile(FS.file("xed-classes", FS.Csv));
             EmitSymbols(entries, dst);

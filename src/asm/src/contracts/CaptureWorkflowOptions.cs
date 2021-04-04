@@ -14,6 +14,5 @@ namespace Z0
         EmitImm = 1,
 
         CaptureContext = 2,
-
     }
 }

@@ -12,6 +12,11 @@ namespace Z0
     partial struct Symbols
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Sym<T> symbol<T>(SymIdentity id, SymKey<byte> index, Identifier name, T value, SymExpr expr)
+            where T : unmanaged
+                => new Sym<T>(id, index, name, value, expr);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Sym8<T> symbol<T>(W8 w, SymIdentity id, SymKey<byte> index, Identifier name, T value, SymExpr expr)
             where T : unmanaged
                 => new Sym8<T>(id, index, name,value,expr);
@@ -28,19 +33,5 @@ namespace Z0
         public static Sym8<T> symbol<T>(W8 w, Sym<T> entry)
             where T : unmanaged
                 => symbol(w, entry.Identity, (byte)entry.Index, entry.Name, entry.Value, entry.Expression);
-
-        public static Sym8<E> symbol<E>(W8 w, uint index)
-            where E : unmanaged, Enum
-        {
-            ref readonly var entry = ref SymCache<E>.get().Entries[index];
-            return symbol(w, entry);
-        }
-
-        public static Sym16<E> symbol<E>(W16 w, uint index)
-            where E : unmanaged, Enum
-        {
-            ref readonly var entry = ref SymCache<E>.get().Entries[index];
-            return symbol(w, entry);
-        }
     }
 }

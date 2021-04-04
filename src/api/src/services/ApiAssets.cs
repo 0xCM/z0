@@ -120,7 +120,7 @@ namespace Z0
             using var writer = target.Writer();
             writer.Write(utf);
             Wf.EmittedFile(flow,1);
-            return Links.link(src,target);
+            return Arrows.link(src,target);
         }
     }
 
@@ -129,6 +129,5 @@ namespace Z0
         public static MsgPattern<Assembly,utf8> NoMatchingResources => "No {0} resources found that match {1}";
 
         public static MsgPattern<Assembly,uint> EmittingResources => "Emitting {1} {0} resources";
-
     }
 }

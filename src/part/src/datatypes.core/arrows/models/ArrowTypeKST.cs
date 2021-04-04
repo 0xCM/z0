@@ -9,7 +9,9 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct LinkType<S,T,K>
+    using api = Arrows;
+
+    public readonly struct ArrowType<S,T,K>
         where K : unmanaged
     {
         public Type Kind {get;}
@@ -19,7 +21,7 @@ namespace Z0
         public Type Target {get;}
 
         [MethodImpl(Inline)]
-        internal LinkType(Type kind, Type src, Type dst)
+        internal ArrowType(Type kind, Type src, Type dst)
         {
             Kind = kind;
             Source = src;
@@ -27,22 +29,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(LinkType src)
-            => Links.eq(this, src);
+        public bool Equals(ArrowType src)
+            => api.eq(this, src);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Links.format(this);
+            => api.format(this);
 
         public override int GetHashCode()
-            => (int)Links.hash32(this);
+            => (int)api.hash32(this);
 
-        public static implicit operator Type(LinkType<S,T,K> src)
+        public static implicit operator Type(ArrowType<S,T,K> src)
             => typeof(Arrow<S,T,K>);
 
         [MethodImpl(Inline)]
-        public static implicit operator LinkType(LinkType<S,T,K> src)
-            => new LinkType(src.Source, src.Target, src.Kind);
+        public static implicit operator ArrowType(ArrowType<S,T,K> src)
+            => new ArrowType(src.Source, src.Target, src.Kind);
 
     }
 }

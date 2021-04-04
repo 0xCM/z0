@@ -9,33 +9,36 @@ namespace Z0
 
     using static Part;
 
-    using api = Links;
+    using api = Arrows;
 
-    public readonly struct LinkType<S,T>
+    /// <summary>
+    /// Defines the type signature for a node-homogenous link
+    /// </summary>
+    public readonly struct ArrowType<T>
     {
         public Type Source {get;}
 
         public Type Target {get;}
 
         [MethodImpl(Inline)]
-        public LinkType(Type src, Type dst)
+        internal ArrowType(Type src, Type dst)
         {
             Source = src;
             Target = dst;
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(LinkType src)
+        public bool Equals(ArrowType src)
             => api.eq(this, src);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Links.format(this);
+            => api.format(this);
 
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => (uint)typeof(LinkType<S,T>).GetHashCode();
+            get => (uint)typeof(ArrowType<T>).GetHashCode();
         }
 
         public ulong Hash64
@@ -47,12 +50,11 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hashed;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Type(LinkType<S,T> src)
-            => typeof(LinkType<S,T>);
+        public static implicit operator Type(ArrowType<T> src)
+            => typeof(ArrowType<T>);
 
         [MethodImpl(Inline)]
-        public static implicit operator LinkType(LinkType<S,T> src)
-            => new LinkType(src.Source, src.Target);
+        public static implicit operator ArrowType(ArrowType<T> src)
+            => new ArrowType(src.Source, src.Target);
     }
 }

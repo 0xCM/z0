@@ -9,38 +9,15 @@ namespace Z0
 
     using static Part;
 
-    using api = Symbols;
-
     public readonly struct Symbols<K> : IIndex<Sym<K>>
         where K : unmanaged
     {
         readonly Index<Sym<K>> Data;
 
         [MethodImpl(Inline)]
-        public Symbols(Sym<K>[] src)
-            => Data = src;
-
-        public bool Contains(SymExpr src)
-            => api.contains(this, src);
-
-        public bool Match(SymExpr src, out Sym<K> dst)
-            => api.match(this, src, out dst);
-
-        public string DataHeader
+        public Symbols(Index<Sym<K>> src)
         {
-            [MethodImpl(Inline)]
-            get => api.header();
-        }
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data.IsEmpty;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
+            Data = src;
         }
 
         public Sym<K>[] Storage
@@ -61,10 +38,10 @@ namespace Z0
             get => Data.Length;
         }
 
-        public ref readonly Sym<K> this[uint index]
+        public ref Sym<K> First
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => ref Data.First;
         }
 
         public ReadOnlySpan<Sym<K>> View
@@ -72,13 +49,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.View;
         }
-
         [MethodImpl(Inline)]
         public static implicit operator Symbols<K>(Sym<K>[] src)
             => new Symbols<K>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<K>[](Symbols<K> src)
-            => src.Storage;
+            => src.Data;
     }
 }

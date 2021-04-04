@@ -11,6 +11,68 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    [ApiHost]
+    public ref struct SymbolManager
+    {
+        public static SymbolManager create()
+            => new SymbolManager();
+
+        public Symbols<K> Symbols<K>()
+            where K : unmanaged, Enum
+                => SymCache<K>.get().Index;
+
+        [MethodImpl(Inline), Closures(UnsignedInts)]
+        public ReadOnlySpan<byte> EncodeName<K>(Sym<K> src)
+            where K : unmanaged
+                => bytes(span(src.Name.Content));
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<char> DecodeName(ReadOnlySpan<byte> src)
+            => recover<char>(src);
+
+        public Index<ByteSpanProp> NameProps<K>(Symbols<K> src)
+            where K : unmanaged
+        {
+            var view = src.View;
+            var count = view.Length;
+            var buffer = alloc<ByteSpanProp>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var sym = ref skip(view,i);
+                seek(dst,i) = NameProp(sym);
+            }
+            return buffer;
+        }
+
+        public ByteSpanProp NameProp<K>(Sym<K> src)
+            where K : unmanaged
+                => ByteSpans.property(src.Name, EncodeName(src).ToArray());
+
+    }
+
+
+    [ApiComplete]
+    public readonly struct AsmSymbolData
+    {
+        const string Reg32NameText = "eaxecxedxebxespebpesiedi";
+
+        static ReadOnlySpan<char> RegGp32Names => Reg32NameText;
+
+        static ReadOnlySpan<byte> RegGp32Indices => new byte[8]{0,3,6,9,12,15,18,19};
+
+        static ReadOnlySpan<byte> RegGp32Sizes => new byte[8]{3,3,3,3,3,3,3,3};
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> name(RegIndex index)
+        {
+            ref readonly var i = ref skip(RegGp32Indices,(byte)(index));
+            ref readonly var l = ref skip(RegGp32Sizes,(byte)(index));
+            return slice(RegGp32Names,i,l);
+        }
+
+    }
+
     public struct AsmInstructionDetail
     {
         public AsmMnemonicCode Mnemonic;

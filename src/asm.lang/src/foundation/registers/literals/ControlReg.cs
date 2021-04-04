@@ -4,13 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System.Runtime.CompilerServices;
+    using static RegIndex;
 
-    using static Part;
-
-    public class AsmTokens : WfService<AsmTokens>
+    /// <summary>
+    /// Classifies the accessible control registers
+    /// </summary>
+    public enum ControlReg : byte
     {
+        CR0 = r0,
 
+        CR2 = r2,
 
+        CR3 = r3,
+
+        CR4 = r4,
+
+        CR8 = r8,
     }
 }

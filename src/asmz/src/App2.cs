@@ -111,6 +111,24 @@ namespace Z0.Asm
             Wf.Row(s0.ToString());
         }
 
+        public void EmitSymbolData()
+        {
+            var mgr = SymbolManager.create();
+            var symbols  = mgr.Symbols<Gp32>().View;
+            var count = symbols.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var symbol = ref skip(symbols,i);
+                var eName = mgr.EncodeName(symbol);
+                var dName = mgr.DecodeName(eName);
+                BinaryCode name = eName.ToArray();
+
+
+                var rendered = string.Format("{0,-8} | {1,-8} | {2}", symbol.Index, dName.ToString(), name.Format());
+                Wf.Row(rendered);
+            }
+        }
+
         public static ReadOnlySpan<byte> TestCase01 => new byte[44]{0x0f,0x1f,0x44,0x00,0x00,0x49,0xb8,0x68,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x4d,0x8b,0x00,0x48,0xba,0x28,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x48,0x8b,0x12,0x48,0xb8,0x90,0x2c,0x8b,0x64,0xfe,0x7f,0x00,0x00,0x48,0xff,0xe0};
 
         public static bool TestJmpRax(ReadOnlySpan<byte> src, int offset, out byte delta)
@@ -201,17 +219,15 @@ namespace Z0.Asm
             //Wf.Status(definitions.BlockCount);
         }
 
-
         [Op]
         public static bool test(AsmOpCodeExpr opcode, AsmOpCodeToken token, Symbols<AsmOpCodeToken> symbols)
         {
-            symbols.Match(opcode.Content, out var match);
-            return match.Value == token;
+            return default;
         }
 
         void ShowOpCodeTokens()
         {
-            var symbols = Symbols.load<AsmOpCodeToken>();
+            var symbols = Symbols.cache<AsmOpCodeToken>();
             Show(symbols.View, FS.file("opcode-symbols", FS.Csv), oc => oc.Format(), Symbols.header());
         }
 
@@ -970,7 +986,7 @@ namespace Z0.Asm
         Index<AsmMemberRoutine> CaptureSelectedRoutines()
         {
             var options = CaptureWorkflowOptions.EmitImm;
-            var parts = root.array(PartId.AsmLang, PartId.AsmZ, PartId.Asm);
+            var parts = root.array(PartId.AsmZ);
             var routines = Capture.run(Wf, parts, options);
             return routines;
         }
@@ -1064,9 +1080,10 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var parser = CultParser.create(Wf);
-            var input = Db.ToolOutDir(Toolsets.cult) + FS.file("cult", FS.Asm);
-            parser.Parse(input);
+            // var parser = CultParser.create(Wf);
+            // var input = Db.ToolOutDir(Toolsets.cult) + FS.file("cult", FS.Asm);
+            // parser.Parse(input);
+
             //NasmRunner.create(Wf).Run();
 
             //Produce();
@@ -1075,7 +1092,8 @@ namespace Z0.Asm
             // var c = f(4,8);
             // Wf.Row(c);
 
-            //CaptureSelectedRoutines();
+            CaptureSelectedRoutines();
+            EmitSymbolData();
 
             //var a = Hex.chars((byte)0xAB);
 

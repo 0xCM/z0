@@ -4,9 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface INode
+    public interface INode : ITextual
     {
         Label Label {get;}
+
+        string ITextual.Format()
+            => Label;
     }
 
     /// <summary>

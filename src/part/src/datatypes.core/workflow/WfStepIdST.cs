@@ -25,7 +25,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator LinkType<S,T>(WfStepId<S,T> src)
+        public static implicit operator ArrowType<S,T>(WfStepId<S,T> src)
             => src.Type;
 
         [MethodImpl(Inline)]
@@ -44,7 +44,7 @@ namespace Z0
         public Type Target
             => typeof(S);
 
-        public LinkType<S,T> Type
+        public ArrowType<S,T> Type
             => default;
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => default(LinkType<S,T>).Hashed;
+            get => default(ArrowType<S,T>).Hashed;
         }
 
         public ulong Hash64

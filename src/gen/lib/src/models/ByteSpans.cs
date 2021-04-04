@@ -46,6 +46,7 @@ namespace Z0
         public static ByteSpanProp property(Identifier name, BinaryCode data, bool @static = true)
             => new ByteSpanProp(name, data, @static);
 
+
         [MethodImpl(Inline), Op]
         public static string property(CodeBlock src, OpIdentity id)
             => comment(new ByteSpanProp(LegalIdentityBuilder.code(id), src).Format());

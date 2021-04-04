@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial class XTend
+    partial struct Arrows
     {
         /// <summary>
         /// Finds the edges in a graph that target an identified vertex
@@ -17,9 +18,20 @@ namespace Z0
         /// <param name="graph">The declaring graph</param>
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<Arrow<V>> Incoming<V>(this Graph<V> graph, V target)
+        public static ReadOnlySpan<Arrow<V>> incoming<V>(Graph<V> graph, V target)
             where V : unmanaged
-                => Graphs.incoming(graph, target);
+        {
+            var count = graph.EdgeCount;
+            var buffer = alloc<Arrow<V>>(count);
+            Span<Arrow<V>> edges = buffer;
+            var j = 0;
+            for(var i = 0; i<count; i++)
+            {
+                ref readonly var edge = ref graph.Edge(i);
+                if(edge.Target.Equals(target))
+                    seek(edges,j++) = edge;
+            }
+            return slice(edges,0, j);
+        }
     }
 }

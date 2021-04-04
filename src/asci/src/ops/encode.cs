@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, Span<byte> dst)
         {
-            var count = Math.Min(src.Length, dst.Length);
+            var count = root.min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = (byte)skip(src,i);
             return count;

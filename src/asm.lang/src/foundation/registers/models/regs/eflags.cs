@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static gbits;
 
     using K = EFlagKind;
-    using I = EFlagIndex;
+    using I = EFlag;
 
     partial struct AsmRegs
     {

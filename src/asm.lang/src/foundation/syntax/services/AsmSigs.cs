@@ -58,19 +58,10 @@ namespace Z0.Asm
 
         readonly Symbols<AsmMnemonicCode> MnemonicSyms;
 
-        [FixedAddressValueType]
-        static readonly Symbols<AsmMnemonicCode> _Mnemonics;
-
-        static AsmSigs()
-        {
-            _Mnemonics = Symbols.load<AsmMnemonicCode>();
-
-        }
-
         public AsmSigs()
         {
             Cache = AsmSigSymbolCache.create();
-            MnemonicSyms = _Mnemonics;
+            MnemonicSyms = Symbols.cache<AsmMnemonicCode>().Index;
         }
 
         void DefineSubstitutions()

@@ -2,15 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System.Runtime.CompilerServices;
+    using System;
 
-    using static Part;
-
-    public class AsmTokens : WfService<AsmTokens>
+    partial struct Symbols
     {
-
-
+        public static SymCache<E> cache<E>()
+            where E : unmanaged, Enum
+                => SymCache<E>.get();
     }
 }

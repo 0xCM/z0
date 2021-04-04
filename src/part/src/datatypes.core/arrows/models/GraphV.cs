@@ -26,7 +26,7 @@ namespace Z0
         readonly Nodes<V> Index;
 
         [MethodImpl(Inline)]
-        internal Graph(Node<V>[] vertices, Arrow<V>[] edges)
+        public Graph(Node<V>[] vertices, Arrow<V>[] edges)
         {
             Nodes = vertices;
             Edges = edges;

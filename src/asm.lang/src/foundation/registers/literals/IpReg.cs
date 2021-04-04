@@ -4,13 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    public class AsmTokens : WfService<AsmTokens>
+    /// <summary>
+    /// Classifies instruction pointer registers
+    /// </summary>
+    public enum IpReg : byte
     {
+        IP,
 
+        EIP,
 
+        RIP,
     }
 }

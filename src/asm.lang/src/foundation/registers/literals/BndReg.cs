@@ -4,13 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System.Runtime.CompilerServices;
+    using static RegIndex;
 
-    using static Part;
-
-    public class AsmTokens : WfService<AsmTokens>
+    public enum BndReg : byte
     {
+        DR0 = r0,
 
+        DR1 = r1,
 
+        DR2 = r2,
+
+        DR3 = r3,
     }
 }

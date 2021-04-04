@@ -12,33 +12,16 @@ namespace Z0
 
     partial struct Symbols
     {
-        public static Index<E,Sym8<E>> symbols<E>(W8 w)
+        internal static Symbols<E> index<E>()
             where E : unmanaged, Enum
         {
-            var entries = SymCache<E>.get().Entries.View;
-            var count = entries.Length;
-            var buffer = alloc<Sym8<E>>(count);
-            var dst = span(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var entry = ref skip(entries,i);
-                seek(dst,i) = symbol(w8, entry.Identity, (byte)entry.Index, entry.Name, entry.Value, entry.Expression);
-            }
-            return buffer;
-        }
-
-        public static Index<E,Sym16<E>> symbols<E>(W16 w)
-            where E : unmanaged, Enum
-        {
-            var entries = SymCache<E>.get().Entries.View;
-            var count = entries.Length;
-            var buffer = alloc<Sym16<E>>(count);
-            var dst = span(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var entry = ref skip(entries,i);
-                seek(dst,i) = symbol(w16, entry.Identity, (ushort)entry.Index, entry.Name, entry.Value, entry.Expression);
-            }
+            var literals = SymbolicLiterals.load<E>();
+            var view = literals.View;
+            var count = view.Length;
+            var buffer = alloc<Sym<E>>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = new Sym<E>(i, skip(view,i));
             return buffer;
         }
     }

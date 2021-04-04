@@ -9,7 +9,9 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct LinkType : IEquatable<LinkType>
+    using api = Arrows;
+
+    public readonly struct ArrowType : IEquatable<ArrowType>
     {
         public Type Source {get;}
 
@@ -18,7 +20,7 @@ namespace Z0
         public Type Kind {get;}
 
         [MethodImpl(Inline)]
-        internal LinkType(Type src, Type dst)
+        internal ArrowType(Type src, Type dst)
         {
             Source = src;
             Target = dst;
@@ -26,7 +28,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal LinkType(Type src, Type dst, Type kind)
+        internal ArrowType(Type src, Type dst, Type kind)
         {
             Source = src;
             Target = dst;
@@ -34,35 +36,35 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(LinkType src)
-            => Links.eq(this, src);
+        public bool Equals(ArrowType src)
+            => api.eq(this, src);
 
         public string Format()
-            => Links.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
-            => (int)Links.hash32(this);
+            => (int)api.hash32(this);
 
         public override bool Equals(object src)
-            => src is LinkType x && Equals(x);
+            => src is ArrowType x && Equals(x);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(LinkType a, LinkType b)
+        public static bool operator ==(ArrowType a, ArrowType b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(LinkType a, LinkType b)
+        public static bool operator !=(ArrowType a, ArrowType b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static implicit operator LinkType((Type src, Type dst) x)
-            => new LinkType(x.src, x.dst);
+        public static implicit operator ArrowType((Type src, Type dst) x)
+            => new ArrowType(x.src, x.dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator LinkType((Type src, Type dst, Type kind) x)
-            => new LinkType(x.src, x.dst, x.kind);
+        public static implicit operator ArrowType((Type src, Type dst, Type kind) x)
+            => new ArrowType(x.src, x.dst, x.kind);
     }
 }
