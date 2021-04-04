@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial struct IceExtractors
     {
@@ -26,7 +25,6 @@ namespace Z0.Asm
             dst.Kind = opkind(fx, index);
             dst.Branch = IceOpTest.isBranch(dst.Kind) ? branch(@base, fx, branch(fx,index)) : default;
             dst.ImmInfo = imminfo(fx, index);
-
             return dst;
         }
     }

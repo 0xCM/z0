@@ -247,9 +247,28 @@ namespace Z0.Asm
         static string FormatSegKind(Name name)
             => name.IsEmpty ? EmptyString : text.concat("seg:", Chars.LBracket, name, Chars.RBracket);
 
+        /// <summary>
+        /// If operand kind represents a memory segment, returns the mnemonic/name for the segment; otheriwise returns empty
+        /// </summary>
+        /// <param name="src"></param>
+        [Op]
+        public static Name segname(IceOpKind src)
+            => src switch {
+                MemorySegSI => "si",
+                MemorySegESI => "esi",
+                MemorySegRSI => "rsi",
+                MemorySegDI => "di",
+                MemorySegEDI => "edi",
+                MemorySegRDI => "rdi",
+                MemoryESDI => "esdi",
+                MemoryESEDI => "esedi",
+                MemoryESRDI => "esrdi",
+            _ => Name.Empty
+            };
+
         [Op]
         static string FormatSegKind(IceOpKind src)
-            => FormatSegKind(IceExtractors.segname(src));
+            => FormatSegKind(segname(src));
 
         [Op]
         static string FormatAddress(IceInstruction src, int pad = 16)

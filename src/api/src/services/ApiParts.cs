@@ -9,10 +9,7 @@ namespace Z0
 
     using static memory;
 
-    /// <summary>
-    /// Associates a collection of components along with a<see cref = 'IApiCatalogDataset'/>
-    /// </summary>
-    public class ApiPartSet : IApiParts
+    public class ApiParts : IApiParts
     {
         /// <summary>
         /// The root of the archive one which the api module set is predicated
@@ -25,7 +22,7 @@ namespace Z0
 
         public IApiCatalogDataset ApiCatalog {get;}
 
-        public ApiPartSet(FS.FolderPath source, PartId[] parts)
+        public ApiParts(FS.FolderPath source, PartId[] parts)
         {
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
@@ -33,7 +30,7 @@ namespace Z0
             Components = ApiCatalog.PartComponents;
         }
 
-        public ApiPartSet(FS.FolderPath source)
+        public ApiParts(FS.FolderPath source)
         {
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));

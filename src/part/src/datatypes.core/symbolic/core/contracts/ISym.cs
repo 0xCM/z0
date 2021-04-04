@@ -6,22 +6,22 @@ namespace Z0
 {
     public interface ISym : ITextual
     {
-        Identifier Kind {get;}
+        Identifier Type {get;}
 
         Identifier Name {get;}
 
         SymExpr Expression {get;}
 
-        ulong Value {get;}
+        ulong Kind {get;}
     }
 
     public interface ISym<T> : ISym
         where T : unmanaged
     {
-        new T Value {get;}
+        new T Kind {get;}
 
-        ulong ISym.Value
-            => memory.bw32(Value);
+        ulong ISym.Kind
+            => memory.bw32(Kind);
     }
 
     public interface ISym<W,T> : ISym<T>

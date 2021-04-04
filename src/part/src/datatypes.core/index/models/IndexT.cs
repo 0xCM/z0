@@ -97,15 +97,22 @@ namespace Z0
             get => ref Index.last(Data);
         }
 
-        [MethodImpl(Inline)]
-        public ConstIndex<T> Freeze()
-            => Data;
-
         public Index<T> Sort()
         {
             if(Length != 0)
                 Array.Sort(Data);
             return this;
+        }
+
+        [MethodImpl(Inline)]
+        public bool Any(Func<T,bool> predicate)
+        {
+            var count = Count;
+            var view = View;
+            for(var i=0; i<count; i++)
+                if(predicate(skip(view,i)))
+                    return true;
+            return false;
         }
 
         public Index<T> Clear()

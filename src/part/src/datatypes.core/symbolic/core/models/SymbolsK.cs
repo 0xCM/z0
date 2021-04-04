@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    public readonly struct Symbols<K> : IIndex<Sym<K>>
+    public readonly struct Symbols<K>
         where K : unmanaged
     {
         readonly Index<Sym<K>> Data;
@@ -18,6 +19,23 @@ namespace Z0
         public Symbols(Index<Sym<K>> src)
         {
             Data = src;
+        }
+
+        public bool Match(SymExpr src, out Sym<K> dst)
+        {
+            var count = Count;
+            var view = View;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var sym = ref skip(view,i);
+                if(sym.Expression.Equals(src))
+                {
+                    dst = sym;
+                    return true;
+                }
+            }
+            dst = Sym<K>.Empty;
+            return false;
         }
 
         public Sym<K>[] Storage

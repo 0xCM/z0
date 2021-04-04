@@ -16,10 +16,9 @@ namespace Z0.Asm
             => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dispacement(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
 
         [Op]
-        public static IceMemoryInfo meminfo(IceInstruction src, byte index)
+        public static IceMemoryInfo meminfo(in IceInstruction src, byte index)
         {
             var k = opkind(src, (byte)index);
-
             if(IceOpTest.isMem(k))
             {
                 var direct = IceOpTest.isMemDirect(k);

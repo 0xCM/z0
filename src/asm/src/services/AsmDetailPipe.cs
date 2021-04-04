@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public void Process()
         {
-            var table = Symbols.table<AsmMnemonicCode>();
+            var _table = Symbols.cache<AsmMnemonicCode>().Index;
             var counter = 0u;
             var mnemonics = root.hashset<AsmMnemonicCode>();
             var failures = root.hashset<string>();
@@ -41,7 +41,7 @@ namespace Z0.Asm
             void CollectMnemonics(AsmStatementDetail src)
             {
                 var symbol = src.Mnemonic.Name.ToLower();
-                if(table.TokenFromSymbol(symbol, out var t))
+                if(_table.Match(symbol, out var t))
                     mnemonics.Add(t.Kind);
                 else
                     failures.Add(symbol);

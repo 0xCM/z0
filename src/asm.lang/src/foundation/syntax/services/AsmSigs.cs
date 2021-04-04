@@ -13,30 +13,21 @@ namespace Z0.Asm
     using static memory;
     using static Rules;
     using static TextRules;
-    using static Pow2x16;
 
     using syntax = AsmSyntax;
 
-    unsafe struct AsmSigSymbolCache
+    struct AsmSigSymbolCache
     {
         const char DigitQualifier = FSlash;
 
         public static AsmSigSymbolCache create()
         {
             var dst = new AsmSigSymbolCache();
-            dst.SigOpSymbols = Symbols.table<AsmSigToken>();
-            dst.Composites = Symbols.table<CompositeSigToken>();
-            dst.Mnemonics = Symbols.table<AsmMnemonicCode>();
             dst.RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             dst.RegDigitRule = Rules.adjacent(DigitQualifier, oneof(dst.RegDigits));
             return dst;
         }
 
-        public SymTable<AsmMnemonicCode> Mnemonics;
-
-        public SymTable<AsmSigToken> SigOpSymbols;
-
-        public SymTable<CompositeSigToken> Composites;
 
         public Index<char> RegDigits;
 
@@ -48,20 +39,22 @@ namespace Z0.Asm
     {
         const char DigitQualifier = FSlash;
 
-        const char OperandDelimiter = Chars.Comma;
-
-        const char MnemonicTerminator = Chars.Space;
-
         const char CompositeIndicator = Chars.FSlash;
 
         readonly AsmSigSymbolCache Cache;
 
         readonly Symbols<AsmMnemonicCode> MnemonicSyms;
 
+        readonly Symbols<CompositeSigToken> Composites;
+
+        readonly Symbols<AsmSigToken> SigOps;
+
         public AsmSigs()
         {
             Cache = AsmSigSymbolCache.create();
-            MnemonicSyms = Symbols.cache<AsmMnemonicCode>().Index;
+            MnemonicSyms = Symbols.cache<AsmMnemonicCode>();
+            Composites = Symbols.cache<CompositeSigToken>();
+            SigOps = Symbols.cache<AsmSigToken>();
         }
 
         void DefineSubstitutions()
@@ -70,26 +63,18 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public SymTable<CompositeSigToken> CompositeTokens()
-            => Cache.Composites;
+        public Symbols<CompositeSigToken> CompositeTokens()
+            => Composites;
 
         [MethodImpl(Inline), Op]
-        public SymTable<AsmSigToken> SigTokens()
-            => Cache.SigOpSymbols;
+        public Symbols<AsmSigToken> SigTokens()
+            => SigOps;
 
         [MethodImpl(Inline), Op]
         public Symbols<AsmMnemonicCode> Mnemonics()
             => MnemonicSyms;
 
-        void ShowSymbols<T>(SymTable<T> src, ShowLog dst)
-            where T : unmanaged
-        {
-            var count = src.TokenCount;
-            var symbols = src.Symbols;
-            for(var i=0; i<count; i++)
-                dst.Show(skip(symbols,i).Format());
-        }
-
+        [Op,Closures(UInt64k)]
         void ShowSymbols<T>(Symbols<T> src, ShowLog dst)
             where T : unmanaged
         {
@@ -157,38 +142,14 @@ namespace Z0.Asm
         [Op]
         public Outcome ParseOperand(string src, out AsmSigOperand dst)
         {
-            if(Cache.SigOpSymbols.TokenFromSymbol(src, out var token))
+            if(SigOps.Match(src, out var sym))
             {
-                dst = new AsmSigOperand(token.Identifier, token.Kind, token.SymbolName);
+                dst = new AsmSigOperand(sym.Name, sym.Kind, sym.Expression);
                 return true;
             }
             else
             {
                 dst = AsmSigOperand.Empty;
-                return (false, $"Cannot match symbol for the operand expression <{src}>");
-            }
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref readonly Token<AsmSigToken> Token(AsmSigToken kind)
-        {
-            if((ushort)kind <= (ushort)P2ᐞ11)
-                return ref _SigOpTokens[(byte)kind];
-            else
-                return ref _SigOpTokens[0];
-        }
-
-        [Op]
-        public bool ParseToken(AsmSigOperandExpr src, out Token<AsmSigToken> token)
-        {
-            if(Cache.SigOpSymbols.IndexFromSymbol(src.Content, out var index))
-            {
-                token = _SigOpTokens[index];
-                return true;
-            }
-            else
-            {
-                token = default;
                 return false;
             }
         }
@@ -204,9 +165,8 @@ namespace Z0.Asm
 
         [Op]
         public bool IsComposite(AsmSigOperandExpr src)
-            => Cache.Composites.ContainsSymbol(src.Content);
+            => Composites.Match(src.Content, out var _);
 
-        [Op]
         public bool IsComposite(AsmSigExpr src)
             => src.Operands.Any(IsComposite);
 
@@ -263,12 +223,6 @@ namespace Z0.Asm
                 text.digit(result.B, out var digit))
                     return assign(digit, out dst);
             return false;
-        }
-
-        Index<Token<AsmSigToken>> _SigOpTokens
-        {
-            [MethodImpl(Inline), Op]
-            get => Cache.SigOpSymbols.Tokens;
         }
 
         [MethodImpl(Inline), Op]

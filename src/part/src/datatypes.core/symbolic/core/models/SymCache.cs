@@ -38,6 +38,10 @@ namespace Z0
             get => address(Storage);
         }
 
+        [MethodImpl(Inline)]
+        public static implicit operator Symbols<K>(SymCache<K> src)
+            => src.Index;
+
         [FixedAddressValueType]
         static Symbols<K> Storage;
     }

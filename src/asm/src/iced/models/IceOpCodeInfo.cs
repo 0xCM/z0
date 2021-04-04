@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public struct IceOpCodeInfo : IAsmOpCodeInfo
+    public struct IceOpCodeInfo
     {
         //
         // Summary:

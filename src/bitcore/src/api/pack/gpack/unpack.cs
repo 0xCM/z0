@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [Unpack, Closures(Closure)]
-        public static Span<bit> unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)
+        public static void unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
         {
             var kCell = src.Length;
@@ -35,7 +35,6 @@ namespace Z0
             for(var i=0; i<kCell; i++)
             for(byte j=0; j<wCell; j++, k++)
                 seek(target, k) = gbits.testbit(skip(src,i), j);
-            return dst;
         }
 
         /// <summary>
@@ -50,7 +49,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(bit))
-                return recover<bit,T>(unpack(src, recover<T,bit>(dst)));
+            {
+                var target = recover<T,bit>(dst);
+                unpack(src, target);
+                return recover<bit,T>(target);
+            }
             else
             {
                 var wCell = width<S>(w32);
@@ -71,14 +74,20 @@ namespace Z0
         /// <param name="dst">The target array of length at least bitsize[T]*length(Span[T])</param>
         /// <typeparam name="T">The source value type</typeparam>
         [Unpack, Closures(Closure)]
-        public static Span<bit> unpack<T>(Span<T> src, bit[] dst)
+        public static void unpack<T>(Span<T> src, bit[] dst)
             where T : unmanaged
-                => unpack(src.ReadOnly(), memory.span(dst));
+        {
+            unpack(src.ReadOnly(), dst);
+        }
 
         [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => unpack(src, alloc<bit>(width<T>()*src.Length));
+        {
+            var dst = alloc<bit>(width<T>()*src.Length);
+            unpack(src, dst);
+            return dst;
+        }
 
         /// <summary>
         /// Projects each bit from a source value into target span element at the corresponding index

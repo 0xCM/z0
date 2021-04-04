@@ -5,12 +5,10 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
-
 
     public struct AsmInstructionDetail
     {

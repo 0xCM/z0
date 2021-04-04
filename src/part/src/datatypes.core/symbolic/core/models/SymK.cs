@@ -20,42 +20,42 @@ namespace Z0
 
         public Identifier Name {get;}
 
-        public K Value {get;}
+        public K Kind {get;}
 
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        internal Sym(uint index, SymLiteral<K> literal)
+        internal Sym(uint index, SymLiteral<K> src)
         {
-            Identity = literal.Identity;
+            Identity = src.Identity;
             Index = index;
-            Value = literal.DirectValue;
-            Name = literal.Name;
-            Expression = literal.Symbol;
+            Kind = src.DirectValue;
+            Name = src.Name;
+            Expression = src.Symbol;
 
         }
 
         [MethodImpl(Inline)]
-        internal Sym(uint index, string name, K value, SymExpr symbol)
+        internal Sym(uint index, string name, K kind, SymExpr symbol)
         {
             Index = index;
             Name = name;
-            Value = value;
+            Kind = kind;
             Expression = symbol;
             Identity = default;
         }
 
         [MethodImpl(Inline)]
-        internal Sym(SymIdentity id, SymKey index, Identifier name, K value, SymExpr symbol)
+        internal Sym(SymIdentity id, SymKey index, Identifier name, K kind, SymExpr symbol)
         {
             Identity = id;
             Index = index;
             Name = name;
-            Value = value;
+            Kind = kind;
             Expression = symbol;
         }
 
-        public Identifier Kind
+        public Identifier Type
             => typeof(K).Name;
 
         public string Format()

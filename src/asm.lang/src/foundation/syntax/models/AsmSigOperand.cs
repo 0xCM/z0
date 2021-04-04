@@ -18,10 +18,10 @@ namespace Z0.Asm
 
         public AsmSigToken Kind {get;}
 
-        public SymbolName<AsmSigToken> Symbol {get;}
+        public SymExpr Symbol {get;}
 
         [MethodImpl(Inline)]
-        public AsmSigOperand(Identifier name, AsmSigToken kind, SymbolName<AsmSigToken> symbol)
+        public AsmSigOperand(Identifier name, AsmSigToken kind, SymExpr symbol)
         {
             Name  = name;
             Kind = kind;

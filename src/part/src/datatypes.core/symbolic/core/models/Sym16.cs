@@ -17,22 +17,22 @@ namespace Z0
 
         public SymKey<ushort> Index {get;}
 
-        public Identifier Kind {get;}
+        public Identifier Type {get;}
 
         public Identifier Name {get;}
 
-        public ushort Value {get;}
+        public ushort Kind {get;}
 
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier kind, Identifier name, ushort value, SymExpr expr)
+        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier type, Identifier name, ushort kind, SymExpr expr)
         {
             Identity = id;
             Index = index;
-            Kind = kind;
+            Type = type;
             Name = name;
-            Value = value;
+            Kind = kind;
             Expression = expr;
         }
         public string Format()
@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<ushort>(Sym16 src)
-            => new Sym<ushort>(src.Index.Value, src.Name, src.Value, src.Expression);
+            => new Sym<ushort>(src.Index.Value, src.Name, src.Kind, src.Expression);
     }
 
     public readonly struct Sym16<T> : ISym<W16,T>
@@ -53,31 +53,31 @@ namespace Z0
 
         public SymKey<ushort> Index {get;}
 
-        public Identifier Kind
+        public Identifier Type
             => typeof(T).Name;
         public Identifier Name {get;}
 
-        public T Value {get;}
+        public T Kind {get;}
 
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        public Sym16(SymKey<ushort> index, Identifier name, T value, SymExpr expr)
+        public Sym16(SymKey<ushort> index, Identifier name, T kind, SymExpr expr)
         {
             Identity = default;
             Index = index;
             Name = name;
-            Value = value;
+            Kind = kind;
             Expression = expr;
         }
 
         [MethodImpl(Inline)]
-        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier name, T value, SymExpr expr)
+        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier name, T kind, SymExpr expr)
         {
             Identity = id;
             Index = index;
             Name = name;
-            Value = value;
+            Kind = kind;
             Expression = expr;
         }
 
@@ -89,10 +89,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym16(Sym16<T> src)
-            => new Sym16(src.Identity, src.Index, src.Kind, src.Name, memory.bw16(src.Value), src.Expression);
+            => new Sym16(src.Identity, src.Index, src.Type, src.Name, memory.bw16(src.Kind), src.Expression);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym16<T> src)
-            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Value, src.Expression);
+            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expression);
     }
 }

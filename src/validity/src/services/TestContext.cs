@@ -41,10 +41,9 @@ namespace Z0
 
         protected TestContext()
         {
-            ApiParts = ApiCatalogs.parts();
+
         }
 
-        public IApiParts ApiParts {get;}
     }
 
     public abstract class TestContext<U> : TestContext, ITestContext<U>

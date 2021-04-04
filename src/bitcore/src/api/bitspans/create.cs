@@ -71,6 +71,9 @@ namespace Z0
         [Op, Closures(Closure)]
         public static BitSpan create<T>(ReadOnlySpan<T> src, Span<bit> buffer)
             where T : unmanaged
-                => gpack.unpack(src, buffer);
+        {
+            gpack.unpack(src, buffer);
+            return buffer;
+        }
     }
 }

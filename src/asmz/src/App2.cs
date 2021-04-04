@@ -339,23 +339,8 @@ namespace Z0.Asm
             var count = mov.Length;
             for(var i=0; i<count; i++)
                 Wf.Row(skip(mov,i).Format());
-
         }
 
-        void ShowSymbols()
-        {
-            var components = Wf.Api.PartComponents.Storage;
-            var sources = components.Enums().Tagged<SymbolSourceAttribute>();
-            using var log = OpenShowLog("symbols", FS.Extensions.Csv);
-            foreach(var source in sources)
-            {
-                var symbols = Symbols.table(source);
-                foreach(var token in symbols.Tokens)
-                {
-                    Show(token.Format(), log);
-                }
-            }
-        }
 
         public static MsgPattern<T> DispatchingCmd<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
@@ -906,7 +891,7 @@ namespace Z0.Asm
         Index<AsmMemberRoutine> CaptureSelectedRoutines()
         {
             var options = CaptureWorkflowOptions.EmitImm;
-            var parts = root.array(PartId.AsmZ);
+            var parts = root.array(PartId.AsmZ, PartId.AsmLang);
             var routines = Capture.run(Wf, parts, options);
             return routines;
         }
@@ -1014,7 +999,7 @@ namespace Z0.Asm
             // Wf.Row(c);
 
             //Wf.SymLiterals().Emit();
-            // CaptureSelectedRoutines();
+            CaptureSelectedRoutines();
             // EmitSymbolData();
 
             //var a = Hex.chars((byte)0xAB);

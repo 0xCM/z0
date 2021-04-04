@@ -17,11 +17,11 @@ namespace Z0
 
         public SymKey<byte> Index {get;}
 
-        public Identifier Kind {get;}
+        public Identifier Type {get;}
 
         public Identifier Name {get;}
 
-        public byte Value {get;}
+        public byte Kind {get;}
 
         public SymExpr Expression {get;}
 
@@ -30,9 +30,9 @@ namespace Z0
         {
             Identity = id;
             Index = key;
-            Kind = kind;
+            Type = kind;
             Name = name;
-            Value = value;
+            Kind = value;
             Expression = expr;
         }
 
@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<byte>(Sym8 src)
-            => new Sym<byte>(src.Index.Value, src.Name, src.Value, src.Expression);
+            => new Sym<byte>(src.Index.Value, src.Name, src.Kind, src.Expression);
     }
 
     public readonly struct Sym8<T> : ISym<W8,T>
@@ -56,11 +56,11 @@ namespace Z0
 
         public Identifier Name {get;}
 
-        public T Value {get;}
+        public T Kind {get;}
 
         public SymExpr Expression {get;}
 
-        public Identifier Kind
+        public Identifier Type
             => typeof(T).Name;
 
         [MethodImpl(Inline)]
@@ -69,7 +69,7 @@ namespace Z0
             Identity = id;
             Index = key;
             Name = name;
-            Value = value;
+            Kind = value;
             Expression = expr;
         }
 
@@ -81,10 +81,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym8(Sym8<T> src)
-            => new Sym8(src.Identity, src.Index, src.Kind, src.Name, memory.bw8(src.Value), src.Expression);
+            => new Sym8(src.Identity, src.Index, src.Type, src.Name, memory.bw8(src.Kind), src.Expression);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym8<T> src)
-            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Value, src.Expression);
+            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expression);
     }
 }

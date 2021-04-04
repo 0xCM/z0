@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public struct IceInstruction : IAsmFxInfo
+    public struct IceInstruction //: IAsmFxInfo
     {
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
@@ -68,9 +68,6 @@ namespace Z0.Asm
         //     may still not fit in a signed byte if it's an EVEX encoded instruction. Use this
         //     property if the operand has kind Iced.Intel.OpKind.Memory
         public int MemoryDisplSize {get; set;}
-
-        public AsmDisplacement MemDx
-            => asm.dispacement(MemoryDisplacement, (AsmDisplacementSize)MemoryDisplSize);
 
         //
         // Summary:

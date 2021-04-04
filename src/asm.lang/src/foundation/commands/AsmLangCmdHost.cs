@@ -55,23 +55,23 @@ namespace Z0.Asm
 
         [Action(K.ShowModeSymbols)]
         void ShowModeSymbols()
-            => root.use(OpenShowLog("sigops.modes"), log => root.iter(SigSymbols.Modes.Tokens, token => Show(token, log)));
+            => root.use(OpenShowLog("sigops.modes"), log => root.iter(SigSymbols.Modes.Storage, symbol => Show(symbol, log)));
 
         [Action(K.ShowCompositeSymbols)]
         void ShowCompositeSymbols()
-            => root.use(OpenShowLog("sigops.composites"), log => root.iter(SigSymbols.Composites.Tokens, token => Show(token, log)));
+            => root.use(OpenShowLog("sigops.composites"), log => root.iter(SigSymbols.Composites.Storage, symbol => Show(symbol, log)));
 
         [Action(K.ShowEFlagSymbols)]
         void ShowEFlagSymbols()
-            => root.use(OpenShowLog("sigops.flags"), log => root.iter(SigSymbols.Flags.Tokens, token => Show(token, log)));
+            => root.use(OpenShowLog("sigops.flags"), log => root.iter(SigSymbols.Flags.Storage, symbol => Show(symbol, log)));
 
         [Action(K.ShowMnemonicSymbols)]
         void ShowMnemonicSymbols()
-            => root.use(OpenShowLog("sigops.mnemonics"), log => root.iter(SigSymbols.Mnemonics.Tokens, token => Show(token, log)));
+            => root.use(OpenShowLog("sigops.mnemonics"), log => root.iter(SigSymbols.Mnemonics.Storage, symbol => Show(symbol, log)));
 
         [Action(K.ShowOperandSymbols)]
         void ShowOperandSymbols()
-            => root.use(OpenShowLog("sigops.operands"), log => root.iter(SigSymbols.SigOps.Tokens, token => Show(token, log)));
+            => root.use(OpenShowLog("sigops.operands"), log => root.iter(SigSymbols.SigOps.Storage, symbol => Show(symbol, log)));
 
         [Action(K.ShowRexBits)]
         void ShowRexBits()

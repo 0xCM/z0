@@ -16,8 +16,6 @@ namespace Z0.Asm
 
         readonly Index<StokeAsmImportRow> RowBuffer;
 
-        readonly SymTable<AsmMnemonicCode> MnemonicCodes;
-
         const uint MaxRowCount = 2500;
 
         const char AsmCatDelimiter = Chars.Tab;
@@ -26,7 +24,6 @@ namespace Z0.Asm
         {
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
-            MnemonicCodes = Symbols.table<AsmMnemonicCode>();
             CatalogSymbols = AsmSigSymbols.load();
         }
 

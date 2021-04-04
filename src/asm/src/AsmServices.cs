@@ -14,9 +14,6 @@ namespace Z0.Asm
     [ApiHost]
     public sealed class AsmServices
     {
-        public static AsmServices create(IWfShell wf, IAsmContext asm)
-            => new AsmServices(wf, asm);
-
         public static void MatchAddresses(IWfShell wf, ApiMemberExtract[] extracted, AsmRoutine[] decoded)
         {
             try
