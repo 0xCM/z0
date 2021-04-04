@@ -22,7 +22,7 @@ namespace Z0
 
         public K Kind {get;}
 
-        public SymExpr Expression {get;}
+        public SymExpr Expr {get;}
 
         [MethodImpl(Inline)]
         internal Sym(uint index, SymLiteral<K> src)
@@ -31,7 +31,7 @@ namespace Z0
             Index = index;
             Kind = src.DirectValue;
             Name = src.Name;
-            Expression = src.Symbol;
+            Expr = src.Symbol;
 
         }
 
@@ -41,7 +41,7 @@ namespace Z0
             Index = index;
             Name = name;
             Kind = kind;
-            Expression = symbol;
+            Expr = symbol;
             Identity = default;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
             Index = index;
             Name = name;
             Kind = kind;
-            Expression = symbol;
+            Expr = symbol;
         }
 
         public Identifier Type

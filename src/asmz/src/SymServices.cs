@@ -10,36 +10,26 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public readonly struct StringPack
+    public static partial class XTend
     {
-        public string Content {get;}
+        public static SymServices SymServices(this IWfShell wf)
+            => Asm.SymServices.create(wf);
+    }
 
-        readonly Index<uint> Indices;
 
-        readonly Index<uint> Lengths;
-
-        public StringPack(string[] src)
+    public readonly struct SymbolDataProviders
+    {
+        public readonly struct XData
         {
-            var view = @readonly(src);
-            Content = src.Concat();
-            var count = src.Length;
-            Indices = alloc<uint>(count);
-            Lengths = alloc<uint>(count);
-            var indices = Indices.Edit;
-            var lengths = Lengths.Edit;
-            for(var i=0u; i<count; i++)
-            {
-                seek(indices,i) = i;
-                seek(lengths,i) = (uint)skip(view,i).Length;
-            }
-        }
+            public const string XNameText = "";
 
-        public ReadOnlySpan<char> Data
-        {
-            [MethodImpl(Inline)]
-            get => Content;
-        }
+            public static ReadOnlySpan<char> XNameChars => XNameText;
 
+            public static ReadOnlySpan<byte> XNameIndicies => new byte[]{0};
+
+            public static ReadOnlySpan<byte> XNameLengths => new byte[]{0};
+
+        }
     }
 
     [ApiComplete]
@@ -60,24 +50,57 @@ namespace Z0.Asm
             ref readonly var l = ref skip(RegGp32Sizes,(byte)(index));
             return slice(RegGp32Names,i,l);
         }
-
     }
+
 
     public class SymServices : WfService<SymServices>
     {
-        public void EmitSymbolData()
+        public static ref SymRecord record<T>(Sym<T> src, ushort count, out SymRecord dst)
+            where T : unmanaged
         {
-            var symbols  = Symbols<Gp32>().View;
+            dst.TypeName = src.Type.Name;
+            dst.SymCount = count;
+            dst.Index = src.Index;
+            dst.Name = src.Name;
+            dst.Expr = src.Expr;
+            dst.NameData = EncodeText(src.Name);
+            dst.NameSize = (ushort)dst.NameData.Count;
+            dst.ExprData = EncodeText(src.Expr.Format());
+            dst.ExprSize = (ushort)dst.ExprData.Count;
+            return ref dst;
+        }
+
+        public static ref SymTypeInfo symtype<T>(out SymTypeInfo dst)
+            where T : unmanaged, Enum
+        {
+            var t = typeof(T);
+            dst.TypeName = t.Name;
+            dst.DataType = (PrimalCode)ClrEnums.ecode(t);
+            dst.SymCount = (ushort)t.GetFields().Length;
+            dst.TypeNameData = EncodeText(dst.TypeName);
+            dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
+            return ref dst;
+        }
+
+        public void EmitSymData<E>()
+            where E : unmanaged, Enum
+        {
+            var dst = Db.Table<SymRecord>(typeof(E).Name);
+            var flow = Wf.EmittingTable<SymRecord>(dst);
+            var symbols  = Symbols<E>().View;
             var count = symbols.Length;
+            var buffer = alloc<SymRecord>(count);
+            ref var target = ref first(buffer);
+            var formatter = Tables.formatter<SymRecord>(SymRecord.RenderWidths);
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
-                var eName = EncodeName(symbol);
-                var dName = DecodeName(eName);
-                BinaryCode name = eName.ToArray();
-                var rendered = string.Format("{0,-8} | {1,-8} | {2}", symbol.Index, dName.ToString(), name.Format());
-                Wf.Row(rendered);
+                record(symbol, (ushort)count, out seek(target,i));
+                writer.WriteLine(formatter.Format(skip(target,i)));
             }
+            Wf.EmittedTable(flow, count);
         }
 
         public void GenBits()
@@ -92,7 +115,7 @@ namespace Z0.Asm
                 var b = @bytes(block.Data);
                 seek(dst,i) = ByteSpans.property(string.Format("Block{0:X2}", i), b.ToArray());
             }
-            var merge = ByteSpans.merge(buffer, "CharBytes");
+            var merge = ByteSpans.merge("CharBytes", buffer);
             var s0 = recover<char>(merge.Segment(16,16));
             Wf.Row(s0.ToString());
         }
@@ -121,12 +144,11 @@ namespace Z0.Asm
                 => SymCache<K>.get().Index;
 
         [MethodImpl(Inline), Closures(UnsignedInts)]
-        public ReadOnlySpan<byte> EncodeName<K>(Sym<K> src)
-            where K : unmanaged
-                => bytes(span(src.Name.Content));
+        public static BinaryCode EncodeText(string src)
+            => bytes(span(src)).ToArray();
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<char> DecodeName(ReadOnlySpan<byte> src)
+        public static ReadOnlySpan<char> DecodText(ReadOnlySpan<byte> src)
             => recover<char>(src);
 
         public Index<ByteSpanProp> NameProps<K>(Symbols<K> src)
@@ -146,6 +168,6 @@ namespace Z0.Asm
 
         public ByteSpanProp NameProp<K>(Sym<K> src)
             where K : unmanaged
-                => ByteSpans.property(src.Name, EncodeName(src).ToArray());
+                => ByteSpans.property(src.Name, EncodeText(src.Name));
     }
 }

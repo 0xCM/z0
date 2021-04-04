@@ -28,7 +28,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var sym = ref skip(view,i);
-                if(sym.Expression.Equals(src))
+                if(sym.Expr.Equals(src))
                 {
                     dst = sym;
                     return true;

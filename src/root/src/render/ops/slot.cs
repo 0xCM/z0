@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The slot index value</param>
         [MethodImpl(Inline), Op]
-        public static string slot(uint index)
+        public static string slot(byte index)
             => string.Concat("{", index, "}");
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The slot index value</param>
         [MethodImpl(Inline), Op]
-        public static string slot(uint index, short pad)
+        public static string slot(byte index, short pad)
             => string.Concat("{", index, ",", pad, "}");
     }
 }

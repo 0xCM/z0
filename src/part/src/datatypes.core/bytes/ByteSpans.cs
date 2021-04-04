@@ -13,6 +13,12 @@ namespace Z0
     [ApiHost]
     public readonly struct ByteSpans
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public ByteSpan<T> create<T>(Index<T> src)
+            => new ByteSpan<T>(src);
+
         [MethodImpl(Inline), Op]
         public static ByteSize size(Index<ByteSpanProp> src)
         {
@@ -23,8 +29,16 @@ namespace Z0
             return size;
         }
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ByteSpanProp property<T>(Identifier name, ByteSpan<T> src, bool @static = true)
+            => new ByteSpanProp(name, src.View.ToArray(), @static);
+
+        [MethodImpl(Inline), Op]
+        public static ByteSpanProp property(Identifier name, BinaryCode data, bool @static = true)
+            => new ByteSpanProp(name, data, @static);
+
         [Op]
-        public static ByteSpanProp merge(ByteSpanProps props, Identifier name)
+        public static ByteSpanProp merge(Identifier name, ByteSpanProps props)
         {
             var buffer = alloc<byte>(props.TotalSize);
             var c0 = props.Count;
@@ -43,15 +57,27 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ByteSpanProp property(Identifier name, BinaryCode data, bool @static = true)
-            => new ByteSpanProp(name, data, @static);
-
-        [MethodImpl(Inline), Op]
         public static string property(CodeBlock src, OpIdentity id)
             => comment(new ByteSpanProp(LegalIdentityBuilder.code(id), src).Format());
 
         [MethodImpl(Inline), Op]
         public static string comment(string text)
             =>  $"; {text}";
+
+        [Op]
+        public static string format(ByteSpanProp src)
+        {
+            var dst = text.build();
+            dst.Append("public");
+            dst.Append(Chars.Space);
+            dst.Append(src.IsStatic ? text.rspace("static") : EmptyString);
+            dst.Append("ReadOnlySpan<byte>");
+            dst.Append(Chars.Space);
+            dst.Append(src.Name);
+            dst.Append(" => ");
+            dst.Append(string.Concat("new byte", text.bracket(src.Data.Length), text.embrace(HexFormats.array<byte>(src.Data))));
+            dst.Append(Chars.Semicolon);
+            return dst.ToString();
+        }
     }
 }

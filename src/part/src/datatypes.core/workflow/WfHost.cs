@@ -17,15 +17,12 @@ namespace Z0
 
         public string Name {get;}
 
-        public WfStepLauncher Launcher {get;}
-
         [MethodImpl(Inline)]
-        public WfHost(WfStepId id, Type type, WfStepLauncher launch)
+        public WfHost(WfStepId id, Type type)
         {
             Id =id;
             Type = type;
             Name = type.Name;
-            Launcher = launch;
         }
 
         public string Identifier
@@ -33,10 +30,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Type.Name;
         }
-
-        [MethodImpl(Inline)]
-        public void Run(IWfShell shell)
-            => Launcher(shell);
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfHost src)

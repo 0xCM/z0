@@ -7,15 +7,18 @@ namespace Z0.Asm
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IRegOp128 : IRegOp
+    public interface IRegOp512 : IRegOp
     {
-
+        RegWidth IRegOp.Width
+            => RegWidth.W512;
     }
 
     [Free]
-    public interface IRegOp128<T> : IRegOp128, IRegOp<T>
-        where T : unmanaged
+    public interface IRegOp512<T> : IRegOp512, IRegOp<T>
+        where T : unmanaged, IRegOp512<T>
     {
-    }
+        RegClass IRegOp.Class
+            => RegClass.ZMM;
 
+    }
 }

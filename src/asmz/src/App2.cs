@@ -984,8 +984,18 @@ namespace Z0.Asm
         }
 
 
+        void EmitSymbolData()
+        {
+            var services = Wf.SymServices();
+            var dst = Db.AppLog(nameof(Gp8) + ".symdata", FS.Csv);
+            services.EmitSymData<Gp8>();
+
+        }
+
         public void Run()
         {
+            CaptureSelectedRoutines();
+
             // var parser = CultParser.create(Wf);
             // var input = Db.ToolOutDir(Toolsets.cult) + FS.file("cult", FS.Asm);
             // parser.Parse(input);
@@ -999,7 +1009,6 @@ namespace Z0.Asm
             // Wf.Row(c);
 
             //Wf.SymLiterals().Emit();
-            CaptureSelectedRoutines();
             // EmitSymbolData();
 
             //var a = Hex.chars((byte)0xAB);

@@ -6,23 +6,21 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    /// <summary>
-    /// Characterizes a register operand reprentation
-    /// </summary>
     [Free]
-    public interface IRegOp16 : IRegOp
+    public interface IRegOp128 : IRegOp
     {
+        RegWidth IRegOp.Width
+            => RegWidth.W128;
 
     }
 
-    /// <summary>
-    /// Characterizes a register operand reprentation
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     [Free]
-    public interface IRegOp16<T> : IRegOp16, IRegOp<T>
-        where T : unmanaged
+    public interface IRegOp128<T> : IRegOp128, IRegOp<T>
+        where T : unmanaged, IRegOp128<T>
     {
+        RegClass IRegOp.Class
+            => RegClass.XMM;
+
     }
 
 }

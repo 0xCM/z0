@@ -57,6 +57,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator WfHost(WfHost<H> src)
-            => new WfHost(src.Id, src.Type, src.Execute);
+            => new WfHost(src.Id, src.Type);
     }
 }

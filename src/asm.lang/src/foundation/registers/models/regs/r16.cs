@@ -39,7 +39,7 @@ namespace Z0.Asm
         }
 
         public readonly struct R16<R> : IReg16<R16<R>,T>
-            where R : unmanaged, IRegOp16
+            where R : unmanaged, IReg16<R>
         {
             public ushort Content {get;}
 

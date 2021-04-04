@@ -9,10 +9,5 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct RegOp<R>
-        where R : unmanaged, IReg
-    {
-
-    }
 
 }

@@ -8,24 +8,16 @@ namespace Z0
 
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public delegate void WfStepLauncher(IWfShell wf);
-
     public interface IWfHost : IWfStep, ITextual
     {
         Type Type {get;}
 
-        StringRef Name {get;}
-
-        void Run(IWfShell shell);
+        string Name => Type.Name;
 
         string Identifier
             => Type.Name;
         string ITextual.Format()
             => Id.Format();
-
-        WfStepLauncher Launcher
-            => Run;
     }
 
     public interface IWfHost<H> : IWfHost, IWfStep<H>
@@ -36,23 +28,17 @@ namespace Z0
 
         WfStepId IWfStep.Id
             => typeof(H);
-
-        StringRef IWfHost.Name
-            => typeof(H).Name;
     }
 
     public interface IWfHost<H,S> : IWfHost<H>
         where H : IWfHost<H,S>, new()
     {
-        void Run(IWfShell wf, in S src);
+
     }
 
     public interface IWfHost<H,S,T> : IWfHost<H,S>
         where H : IWfHost<H,S,T>, new()
     {
-        ref T Run(IWfShell wf, in S src, out T dst);
 
-        void IWfHost<H,S>.Run(IWfShell wf, in S src)
-            => Run(wf,src, out var _);
     }
 }

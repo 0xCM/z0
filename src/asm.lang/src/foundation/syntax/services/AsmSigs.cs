@@ -144,7 +144,7 @@ namespace Z0.Asm
         {
             if(SigOps.Match(src, out var sym))
             {
-                dst = new AsmSigOperand(sym.Name, sym.Kind, sym.Expression);
+                dst = new AsmSigOperand(sym.Name, sym.Kind, sym.Expr);
                 return true;
             }
             else

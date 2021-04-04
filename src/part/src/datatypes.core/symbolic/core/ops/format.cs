@@ -15,23 +15,23 @@ namespace Z0
 
         [Op]
         public static string format(Sym8 src)
-            => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expression);
+            => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expr);
 
         [Op]
         public static string format(Sym16 src)
-            => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expression);
+            => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expr);
 
         public static string format<E>(Sym8<E> src)
             where E : unmanaged
-                => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expression);
+                => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expr);
 
         public static string format<E>(Sym16<E> src)
             where E : unmanaged
-                => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expression);
+                => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expr);
 
         public static string format<E>(Sym<E> src)
             where E : unmanaged
-                => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expression);
+                => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expr);
 
         [Op]
         public static string format(Token src)

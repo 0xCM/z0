@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Concurrent;
 
     using static Part;
 
@@ -62,7 +61,7 @@ namespace Z0
             Ct = root.correlate(config.ControlId);
             EventSink = Loggers.events(config.LogConfig);
             EventBroker = new WfBroker(EventSink, Ct);
-            Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
+            Host = new WfHost(typeof(WfShell), typeof(WfShell));
             Polysource = default;
             Verbosity = LogLevel.Status;
             Paths = config.Shell.Paths;

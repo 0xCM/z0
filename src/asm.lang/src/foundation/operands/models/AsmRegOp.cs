@@ -29,6 +29,16 @@ namespace Z0.Asm
             get => (RegWidth)math.sll(Data,3);
         }
 
+        public RegClass Class
+        {
+            get => default;
+        }
+
+        public RegIndex Index
+        {
+            get => default;
+        }
+
         public string Format()
         {
             return "";

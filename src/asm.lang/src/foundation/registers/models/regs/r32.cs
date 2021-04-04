@@ -39,7 +39,7 @@ namespace Z0.Asm
         }
 
         public readonly struct R32<R> : IReg32<R32<R>,T>
-            where R : unmanaged, IRegOp32
+            where R : unmanaged, IReg32<R>
         {
             public T Content {get;}
 

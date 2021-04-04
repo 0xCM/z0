@@ -53,7 +53,7 @@ namespace Z0
         }
 
         public ByteSpanProp Merge(Identifier name)
-            => api.merge(this, name);
+            => api.merge(name, this);
 
         [MethodImpl(Inline)]
         public static implicit operator ByteSpanProps(ByteSpanProp[] src)

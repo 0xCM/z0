@@ -16,7 +16,7 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         public struct R8<R> : IReg8<R8<R>,T>
-            where R : unmanaged, IRegOp8
+            where R : unmanaged, IReg8<R>
         {
             public byte Data;
 

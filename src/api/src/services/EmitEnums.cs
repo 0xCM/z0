@@ -10,28 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [WfHost(CommandName)]
-    public sealed class EmitEnums : WfHost<EmitEnums,ClrAssembly>
-    {
-        public const string CommandName = nameof(EmitEnums);
-
-        protected override void Execute(IWfShell wf, in ClrAssembly src)
-        {
-            using var step = new EmitEnumsStep(wf, this, src);
-            step.Run();
-        }
-
-        public static void run(IWfShell wf)
-        {
-            wf.Db().ClearTables<ClrEnumRecord>();
-            var components = wf.Api.PartComponents;
-            foreach(var component in components)
-            {
-                EmitEnums.create().Run(wf, component);
-            }
-        }
-    }
-
     ref struct EmitEnumsStep
     {
         readonly IWfShell Wf;

@@ -12,11 +12,15 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp : IAsmOp, ITextual
     {
-        RegKind RegKind => default;
+        BitWidth ISized.Width
+            => (uint)Width;
 
-        BitWidth ISized.Width => (uint)Width;
+        RegIndex Index {get;}
+
+        RegClass Class {get;}
 
         new RegWidth Width {get;}
+
     }
 
     [Free]

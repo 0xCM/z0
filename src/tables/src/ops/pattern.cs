@@ -13,7 +13,7 @@ namespace Z0
     partial struct Tables
     {
         [Op]
-        internal static string slot(uint index, RenderWidth width, string delimiter = DefaultDelimiter)
+        internal static string slot(byte index, RenderWidth width, string delimiter = DefaultDelimiter)
             => delimiter + RP.slot(index, (short)(-(short)width));
 
         [Op]
@@ -25,7 +25,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 var cell = skip(view,i);
-                seek(parts,i) = slot(i, cell.Width, i!=0 ? delimiter : EmptyString);
+                seek(parts,i) = slot((byte)i, cell.Width, i!=0 ? delimiter : EmptyString);
             }
             return string.Concat(parts);
         }

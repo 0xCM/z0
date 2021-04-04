@@ -33,8 +33,6 @@ namespace Z0
             return service;
         }
 
-        IWfEventCache Events {get; set;}
-
         public IWfShell Wf {get; private set;}
 
         protected WfHost Host {get; private set;}
@@ -55,7 +53,6 @@ namespace Z0
             Host = new WfSelfHost(typeof(H));
             Wf = wf.WithHost(Host);
             Db = new WfDb(wf, wf.Env.Db.Value);
-            Events = EventCache.create();
             OnInit();
             Initialized();
             wf.Created(flow);
@@ -71,7 +68,6 @@ namespace Z0
         {
             Host = new WfSelfHost(HostName);
             Wf = wf;
-            //Wf = wf.WithHost(Host);
         }
 
         FS.FileName NameShowLog(string src, FS.FileExt ext)

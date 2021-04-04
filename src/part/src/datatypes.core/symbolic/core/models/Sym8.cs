@@ -23,7 +23,7 @@ namespace Z0
 
         public byte Kind {get;}
 
-        public SymExpr Expression {get;}
+        public SymExpr Expr {get;}
 
         [MethodImpl(Inline)]
         public Sym8(SymIdentity id, SymKey<byte> key, Identifier kind, Identifier name, byte value, SymExpr expr)
@@ -33,7 +33,7 @@ namespace Z0
             Type = kind;
             Name = name;
             Kind = value;
-            Expression = expr;
+            Expr = expr;
         }
 
         public string Format()
@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<byte>(Sym8 src)
-            => new Sym<byte>(src.Index.Value, src.Name, src.Kind, src.Expression);
+            => new Sym<byte>(src.Index.Value, src.Name, src.Kind, src.Expr);
     }
 
     public readonly struct Sym8<T> : ISym<W8,T>
@@ -58,7 +58,7 @@ namespace Z0
 
         public T Kind {get;}
 
-        public SymExpr Expression {get;}
+        public SymExpr Expr {get;}
 
         public Identifier Type
             => typeof(T).Name;
@@ -70,7 +70,7 @@ namespace Z0
             Index = key;
             Name = name;
             Kind = value;
-            Expression = expr;
+            Expr = expr;
         }
 
         public string Format()
@@ -81,10 +81,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym8(Sym8<T> src)
-            => new Sym8(src.Identity, src.Index, src.Type, src.Name, memory.bw8(src.Kind), src.Expression);
+            => new Sym8(src.Identity, src.Index, src.Type, src.Name, memory.bw8(src.Kind), src.Expr);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym8<T> src)
-            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expression);
+            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expr);
     }
 }

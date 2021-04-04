@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Pow2x16;
-
     [Flags]
     public enum AsmOpKind : ushort
     {

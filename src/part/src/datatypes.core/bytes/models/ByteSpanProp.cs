@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using api = ByteSpans;
 
     public readonly struct ByteSpanProp : ITextual
     {
@@ -42,19 +43,7 @@ namespace Z0
         public ReadOnlySpan<byte> Segment(ByteSize offset, ByteSize size)
             => slice(Data.View, offset, size);
         public string Format()
-        {
-            var dst = text.build();
-            dst.Append("public");
-            dst.Append(Chars.Space);
-            dst.Append(IsStatic ? text.rspace("static") : EmptyString);
-            dst.Append("ReadOnlySpan<byte>");
-            dst.Append(Chars.Space);
-            dst.Append(Name);
-            dst.Append(" => ");
-            dst.Append(string.Concat("new byte", text.bracket(Data.Length), text.embrace(HexFormats.array<byte>(Data))));
-            dst.Append(Chars.Semicolon);
-            return dst.ToString();
-        }
+            => api.format(this);
 
         public override string ToString()
             => Format();

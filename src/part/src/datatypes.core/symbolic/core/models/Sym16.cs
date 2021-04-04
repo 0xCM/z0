@@ -23,7 +23,7 @@ namespace Z0
 
         public ushort Kind {get;}
 
-        public SymExpr Expression {get;}
+        public SymExpr Expr {get;}
 
         [MethodImpl(Inline)]
         public Sym16(SymIdentity id, SymKey<ushort> index, Identifier type, Identifier name, ushort kind, SymExpr expr)
@@ -33,7 +33,7 @@ namespace Z0
             Type = type;
             Name = name;
             Kind = kind;
-            Expression = expr;
+            Expr = expr;
         }
         public string Format()
             => api.format(this);
@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<ushort>(Sym16 src)
-            => new Sym<ushort>(src.Index.Value, src.Name, src.Kind, src.Expression);
+            => new Sym<ushort>(src.Index.Value, src.Name, src.Kind, src.Expr);
     }
 
     public readonly struct Sym16<T> : ISym<W16,T>
@@ -59,7 +59,7 @@ namespace Z0
 
         public T Kind {get;}
 
-        public SymExpr Expression {get;}
+        public SymExpr Expr {get;}
 
         [MethodImpl(Inline)]
         public Sym16(SymKey<ushort> index, Identifier name, T kind, SymExpr expr)
@@ -68,7 +68,7 @@ namespace Z0
             Index = index;
             Name = name;
             Kind = kind;
-            Expression = expr;
+            Expr = expr;
         }
 
         [MethodImpl(Inline)]
@@ -78,7 +78,7 @@ namespace Z0
             Index = index;
             Name = name;
             Kind = kind;
-            Expression = expr;
+            Expr = expr;
         }
 
         public string Format()
@@ -89,10 +89,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym16(Sym16<T> src)
-            => new Sym16(src.Identity, src.Index, src.Type, src.Name, memory.bw16(src.Kind), src.Expression);
+            => new Sym16(src.Identity, src.Index, src.Type, src.Name, memory.bw16(src.Kind), src.Expr);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym16<T> src)
-            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expression);
+            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expr);
     }
 }

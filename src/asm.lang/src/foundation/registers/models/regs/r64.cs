@@ -39,7 +39,7 @@ namespace Z0.Asm
         }
 
         public struct R64<R> : IReg64<R64<R>,T>
-            where R : unmanaged, IRegOp64
+            where R : unmanaged, IReg64<T>
         {
             public T Content {get;}
 

@@ -10,7 +10,7 @@ namespace Z0
 
         Identifier Name {get;}
 
-        SymExpr Expression {get;}
+        SymExpr Expr {get;}
 
         ulong Kind {get;}
     }
