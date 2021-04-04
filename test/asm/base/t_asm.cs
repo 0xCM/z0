@@ -44,7 +44,7 @@ namespace Z0.Asm
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
-            => Wf.AsmWriter(TargetArchive.AsmPath(FS.file($"{caller}", FS.Extensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
+            => Wf.AsmWriter(TargetArchive.AsmPath(FS.file($"{caller}", FS.Extensions.Asm)));
 
         protected Index<ApiCodeBlock> ReadHostBits(ApiHostUri host)
         {

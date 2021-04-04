@@ -68,7 +68,7 @@ namespace Z0.Asm
             var emitted = 0;
             var routines = src.Routines.Edit;
             var count = routines.Length;
-            var formatter = Asm.Formatter;
+            var formatter = Wf.AsmFormatter();
             using var writer = dst.Writer();
             writer.WriteLine(header);
             for(var i=0; i<count; i++)

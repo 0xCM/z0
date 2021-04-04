@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    class ApiCaptureArchive : WfService<ApiCaptureArchive>, IApiCaptureArchive
+    public class ApiCaptureArchive : WfService<ApiCaptureArchive>
     {
         public ApiCaptureArchive()
         {

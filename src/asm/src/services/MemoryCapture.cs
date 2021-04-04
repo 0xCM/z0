@@ -35,7 +35,7 @@ namespace Z0
         internal MemoryCapture(IWfShell wf, IAsmContext asm, uint bufferlen = Pow2.T14)
         {
             Wf = wf;
-            Formatter = asm.Formatter;
+            Formatter = wf.AsmFormatter();
             ExtractBuffer = alloc<byte>(bufferlen);
             ParseBuffer = alloc<byte>(bufferlen);
             Decoder = asm.RoutineDecoder;

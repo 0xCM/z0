@@ -12,7 +12,6 @@ namespace Z0
     [ApiHost(ApiNames.ClrEnums, true)]
     public readonly partial struct ClrEnums
     {
-
         [MethodImpl(Inline)]
         public static ClrEnum<E> @enum<E>()
             where E : unmanaged, Enum

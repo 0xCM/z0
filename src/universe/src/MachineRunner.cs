@@ -20,18 +20,24 @@ namespace Z0
             var flow = Wf.Running(RunningMachine.Format(partCount, partList));
             try
             {
-                var store = Wf.ApiCodeStore();
-                var rowstore = Wf.AsmRowStore();
-                var blocks = store.IndexedBlocks();
+                var blocks = Wf.ApiCodeStore().IndexedBlocks();
 
                 if(options.EmitHexIndex)
                     Emitted(Wf.ApiHex().EmitHexIndex(blocks));
 
                 if(options.EmitAsmRows)
-                    Emitted(rowstore.EmitAsmRows(blocks));
+                    Emitted(Wf.AsmRowStore().EmitAsmRows(blocks));
 
-                if(options.EmitAsmAnalysis)
-                    rowstore.EmitAnalyses(blocks);
+                if(options.EmitCallData || options.EmitJmpData)
+                {
+                    var decoded = Wf.ApiDecoder().Decode(blocks);
+
+                    if(options.EmitJmpData)
+                        Emitted(Wf.AsmJmpPipe().EmitRows(decoded));
+
+                    if(options.EmitCallData)
+                        Emitted(Wf.AsmCallPipe().EmitRows(decoded));
+                }
 
                 if(options.EmitResBytes)
                     Emitted(Wf.ResBytesEmitter().Emit(blocks));
@@ -41,7 +47,7 @@ namespace Z0
                     Emitted(statements.EmitStatements(blocks));
 
                 if(options.EmitAsmBitstrings)
-                    statements.EmitBitstrings();
+                    Emitted(statements.EmitBitstrings());
 
                 if(options.CorrelateMembers)
                     Wf.ApiServices().Correlate();

@@ -124,9 +124,9 @@ namespace Z0.Asm
             else if(IceOpTest.isMem(kind))
                 desc = format(IceExtractors.meminfo(src, i));
             else if (IceOpTest.isBranch(kind))
-                desc = format(IceExtractors.branch(@base, src, i));
+                desc = AsmRender.format(IceExtractors.branch(@base, src, i));
             else if(IceOpTest.isImm(kind))
-                desc = format(IceExtractors.imminfo(src, i));
+                desc = AsmRender.format(IceExtractors.imminfo(src, i));
             else
                 desc = kind.ToString();
 
@@ -184,39 +184,8 @@ namespace Z0.Asm
                 seq.Format(InstructionCountPad));
 
         [Op]
-        static string format(MemoryAddress src)
-            => string.Format("{0:x}" + HexFormatSpecs.PostSpec, src);
-
-        [Op]
-        static string format(AsmBranchInfo src)
-            => text.concat(format(src.Source), " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
-
-        static HexFormatOptions HexSpec
-        {
-            [MethodImpl(Inline), Op]
-            get => HexFormatSpecs.options(zpad:false, specifier:false);
-        }
-
-        [Op]
-        static string format(in AsmDisplacement src)
-            => (src.Size switch{
-                AsmDisplacementSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
-                AsmDisplacementSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
-                AsmDisplacementSize.y4 => ((uint)src.Value).FormatHex(HexSpec),
-                _ => (src.Value).FormatHex(HexSpec),
-            }) + "dx";
-
-        [Op]
-        static string format(in AsmImmInfo src)
-            => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
-
-        [Op]
         static string format(IceRegister src)
             => text.format("{0}",src);
-
-        [Op]
-        static string Render(AsmDisplacement src)
-            => format(src);
 
         [Op, MethodImpl(NotInline)]
         static string format(IceOpKind src)
@@ -269,7 +238,7 @@ namespace Z0.Asm
             }
 
             if(src.Dx.NonZero)
-                dst.Append(text.concat(Chars.Space, Chars.Plus, Chars.Space, Render(src.Dx)));
+                dst.Append(text.concat(Chars.Space, Chars.Plus, Chars.Space, AsmRender.format(src.Dx)));
 
             return dst.ToString();
         }

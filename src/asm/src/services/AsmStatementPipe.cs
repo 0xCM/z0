@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
 
     using static Part;
     using static memory;
@@ -148,7 +149,6 @@ namespace Z0.Asm
             => Db.TableDir<AsmApiStatement>() + FS.folder(host.Part.Format())
                 + FS.file(string.Format("{0}.{1}", host.Part.Format(), host.Name), ext);
 
-
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
 
         uint CreateStatements(in ApiHostCode src, List<AsmApiStatement> dst)
@@ -208,7 +208,7 @@ namespace Z0.Asm
             }
         }
 
-        public void EmitBitstrings()
+        public Index<AsmBitstring> EmitBitstrings()
         {
             const string RenderPattern = "{0,-16} | {1,-10} | {2,-4} | {3,-42} | {4,-32} | {5,-32} | {6,-32} | {7}";
 
@@ -218,7 +218,8 @@ namespace Z0.Asm
             var writers = root.dict<ApiHostUri,StreamWriter>();
             var @base = new MemoryAddress();
             var opcodes = root.hashset<AsmOpCodeExpr>();
-            var bitstrings = AsmBitstrings.service();
+            var service = AsmBitstrings.service();
+            var bitstrings = root.hashset<AsmBitstring>();
 
             var dir = Db.TableDir("asm.bitstrings");
             dir.Delete();
@@ -254,6 +255,7 @@ namespace Z0.Asm
                 return writer;
             }
 
+
             void receive(AsmApiStatement src)
             {
                 if(@base == 0)
@@ -266,10 +268,11 @@ namespace Z0.Asm
                 var asmcode = src.Expression;
                 var hexcode = src.Encoded;
                 var sig = src.Sig;
-                var bitcode = bitstrings.Format(hexcode);
+                var bitcode = service.Format(hexcode);
                 var offset = Addresses.address((uint)(src.IP - @base));
                 var target = writer(src.OpUri.Host);
                 var row = string.Format(RenderPattern, src.IP, offset, hexcode.Size, asmcode, sig, opcode, hexcode, bitcode);
+                bitstrings.Add((hexcode,bitcode));
                 target.WriteLine(row);
                 all.WriteLine(row);
                 counter++;
@@ -288,6 +291,8 @@ namespace Z0.Asm
             root.iter(ocsorted, oc => ocwriter.WriteLine(oc));
             Wf.EmittedFile(eoc, ocsorted.Length);
             Wf.Ran(flow, counter);
+
+            return bitstrings.ToArray();
         }
     }
 }

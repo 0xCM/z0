@@ -9,18 +9,18 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct MappedKinds<I,K> : IClassifierMapHost<MappedKinds<I,K>,I,K>
+    public readonly struct MappedKinds<I,K>
         where I : unmanaged
         where K : unmanaged
     {
-        internal readonly Paired<I,K>[] IndexKind;
+        readonly Paired<I,K>[] IndexKind;
 
-        internal readonly Paired<K,I>[] KindIndex;
+        readonly Paired<K,I>[] KindIndex;
 
         public uint Count {get;}
 
         [MethodImpl(Inline)]
-        internal MappedKinds(uint count, Paired<I,K>[] index, Paired<K,I>[] kinds)
+        public MappedKinds(uint count, Paired<I,K>[] index, Paired<K,I>[] kinds)
         {
             Count = count;
             IndexKind = index;

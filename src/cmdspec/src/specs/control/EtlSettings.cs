@@ -50,6 +50,10 @@ namespace Z0
 
         public Setting<bool> EmitHexIndex;
 
+        public Setting<bool> EmitCallData;
+
+        public Setting<bool> EmitJmpData;
+
         public static MachineOptions @default()
         {
             var dst = new MachineOptions();
@@ -75,6 +79,8 @@ namespace Z0
             dst.EmitSymbolicLiterals = true;
             dst.EmitApiBitMasks = true;
             dst.EmitHexIndex = true;
+            dst.EmitCallData = true;
+            dst.EmitJmpData = true;
             return dst;
         }
 

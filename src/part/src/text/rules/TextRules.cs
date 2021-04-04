@@ -57,7 +57,7 @@ namespace Z0
 
         }
 
-        [ApiHost("text.rules.parse")]
+        //[ApiHost("text.rules.parse")]
         public readonly partial struct Parse
         {
 

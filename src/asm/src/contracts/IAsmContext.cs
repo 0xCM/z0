@@ -35,21 +35,15 @@ namespace Z0.Asm
             => Pow2.T16;
 
         /// <summary>
-        /// The default asm formatting configuration
-        /// </summary>
-        AsmFormatConfig FormatConfig
-            => AsmFormatConfig.DefaultStreamFormat;
-
-        /// <summary>
         /// The context formatter
         /// </summary>
         IAsmRoutineFormatter Formatter
-            => AsmServices.formatter(FormatConfig);
+            => AsmServices.formatter();
 
         /// <summary>
         /// The context decoder
         /// </summary>
         IAsmDecoder RoutineDecoder
-            => CaptureServices.RoutineDecoder(FormatConfig);
+            => CaptureServices.RoutineDecoder();
     }
 }

@@ -33,12 +33,5 @@ namespace Z0.Asm
         /// <param name="src">The source routine</param>
         /// <param name="dst">The target buffer</param>
         void Render(in AsmRoutine src, ITextBuffer dst);
-
-        /// <summary>
-        /// Renders a routine sequence to a caller-supplied buffer
-        /// </summary>
-        /// <param name="src">The source routines</param>
-        /// <param name="dst">The target buffer</param>
-        void Render(in AsmRoutineIndex src, ITextBuffer dst);
     }
 }

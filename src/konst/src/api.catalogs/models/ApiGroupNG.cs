@@ -29,7 +29,7 @@ namespace Z0
         /// <summary>
         /// The grouped operations
         /// </summary>
-        public TableSpan<ApiMethodNG> Members {get;}
+        public Index<ApiMethodNG> Members {get;}
 
         [MethodImpl(Inline)]
         public ApiGroupNG(OpIdentity group, IApiHost host, IEnumerable<ApiMethodNG> members)

@@ -272,22 +272,12 @@ namespace Z0.Asm
             }
 
             Wf.AsmTraverser().Traverse(parse);
-
-            // using var stats = Db.AppLog("opcode-stats", FS.Log).Writer();
-            // for(var i=0; i<tokens.Count; i++)
-            // {
-            //     var t = (AsmOpCodeToken)i;
-            //     var count = tokens[t];
-            //     if(count != 0)
-            //         stats.WriteLine(string.Format("{0, -10} | {1}", t, count));
-            // }
-
         }
 
         void CheckIndexDecoder()
         {
             var blocks = ApiServices.HexIndexer().IndexApiBlocks();
-            var dataset = Wf.ApiIndexDecoder().Decode(blocks);
+            var dataset = Wf.ApiDecoder().Decode(blocks);
         }
 
         void TestRel32()
@@ -455,7 +445,6 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,1);
         }
 
-
         public static Index<OpMsil> msil(MethodInfo[] src)
         {
             var count = src.Length;
@@ -553,11 +542,6 @@ namespace Z0.Asm
             return paths;
         }
 
-        void ShowHandlers()
-        {
-            root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
-        }
-
         public void Display(CmdLine cmd)
         {
             Wf.Status(cmd.Format());
@@ -569,13 +553,6 @@ namespace Z0.Asm
             Wf.Status(Db.Root);
         }
 
-        static void RunInterpreter(IWfShell wf)
-        {
-            var cmd = WinCmdShell.create(wf);
-            cmd.Submit("dir J:\\");
-            cmd.Run();
-            cmd.WaitForExit();
-        }
 
         static void TestCmdLine(params string[] args)
         {
@@ -738,17 +715,6 @@ namespace Z0.Asm
             Wf.Row(buffer.Emit());
         }
 
-        void ShowCmdModels()
-        {
-            var models = @readonly(Cmd.cmdtypes(Wf));
-            var buffer = Buffers.text();
-            for(var i=0; i<models.Length; i++)
-            {
-                Cmd.render(skip(models,i), buffer);
-                Wf.Row(buffer.Emit());
-            }
-        }
-
         void ShowOptions()
         {
             const string @case = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
@@ -880,7 +846,6 @@ namespace Z0.Asm
             return dst.Emit();
         }
 
-
         void DumpImages()
         {
             var emitter = MemoryEmitter.create(Wf);
@@ -1004,7 +969,8 @@ namespace Z0.Asm
 
         public void EmitBitstrings()
         {
-            Wf.AsmStatementPipe().EmitBitstrings();
+            var bitstrings = Wf.AsmStatementPipe().EmitBitstrings();
+            Wf.Status($"Emitted {bitstrings.Length} distinct bistrings");
         }
 
         void CheckCpuid()
@@ -1050,7 +1016,7 @@ namespace Z0.Asm
             Wf.Status(metrics);
 
             var clock = Time.counter(true);
-            var traverser = Wf.ApiiCodeBlockTraverser();
+            var traverser = Wf.ApiCodeBlockTraverser();
             var receiver  = new AsmDetailProducer(Wf,750000);
             traverser.Traverse(blocks,receiver);
             var duration = clock.Elapsed.Ms;
@@ -1095,7 +1061,7 @@ namespace Z0.Asm
             // var c = f(4,8);
             // Wf.Row(c);
 
-            Wf.SymLiterals().Emit();
+            //Wf.SymLiterals().Emit();
             // CaptureSelectedRoutines();
             // EmitSymbolData();
 

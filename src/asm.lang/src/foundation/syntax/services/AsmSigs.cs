@@ -240,11 +240,26 @@ namespace Z0.Asm
             return false;
         }
 
+        public static bool rule(string src, Adjacent<char, OneOf<char>> rule, out Adjacent<char> dst)
+        {
+            var match = rule.A;
+            var candidates = rule.B.Elements.View;
+            var count = candidates.Length;
+            var ix = text.index(candidates, rule.A);
+            if(ix != NotFound)
+            {
+                dst = adjacent<char>(match, skip(candidates,ix));
+                return true;
+            }
+            dst = default;
+            return false;
+        }
+
         [Op]
         public bool ParseDigit(string src, out RegDigit dst)
         {
             dst = default;
-            if(Parse.rule(src, Cache.RegDigitRule, out var result) &&
+            if(rule(src, Cache.RegDigitRule, out var result) &&
                 text.digit(result.B, out var digit))
                     return assign(digit, out dst);
             return false;

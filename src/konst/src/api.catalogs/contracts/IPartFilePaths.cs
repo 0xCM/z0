@@ -8,7 +8,7 @@ namespace Z0
 
     using X = FS.Extensions;
 
-    public interface IPartFilePaths : IPartFileNames, IFileArchive
+    public interface IPartFilePaths : IFileArchive
     {
         FS.FolderPath HexDir(FS.FolderPath root)
             => (root + FS.folder(HexFolder));

@@ -9,11 +9,11 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmBitstring
+    public readonly struct AsmBitstring : IEquatable<AsmBitstring>
     {
-        readonly MemoryAddress Bits;
-
         public AsmHexCode Code {get;}
+
+        readonly MemoryAddress Bits;
 
         [MethodImpl(Inline)]
         public AsmBitstring(AsmHexCode code, string bits)
@@ -21,5 +21,19 @@ namespace Z0.Asm
             Code = code;
             Bits = memory.address(string.Intern(bits));
         }
+
+        public override int GetHashCode()
+            => (int)Bits.Hash;
+
+        [MethodImpl(Inline)]
+
+        public bool Equals(AsmBitstring src)
+            => Bits.Equals(src.Bits);
+
+        public override bool Equals(object src)
+            => src is AsmBitstring b && Equals(b);
+
+        public static implicit operator AsmBitstring((AsmHexCode code, string bits) src)
+            => new AsmBitstring(src.code, src.bits);
     }
 }

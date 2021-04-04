@@ -43,10 +43,5 @@ namespace Z0
             State.Append(Datasets.render(content).PadRight(width(f)));
         }
 
-        void DelimitField(F f, object content, char delimiter)
-        {
-            State.Append(text.rspace(delimiter));
-            State.Append(Datasets.render(content).PadRight(width(f)));
-        }
     }
 }

@@ -10,6 +10,38 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    public readonly struct StringPack
+    {
+        public string Content {get;}
+
+        readonly Index<uint> Indices;
+
+        readonly Index<uint> Lengths;
+
+        public StringPack(string[] src)
+        {
+            var view = @readonly(src);
+            Content = src.Concat();
+            var count = src.Length;
+            Indices = alloc<uint>(count);
+            Lengths = alloc<uint>(count);
+            var indices = Indices.Edit;
+            var lengths = Lengths.Edit;
+            for(var i=0u; i<count; i++)
+            {
+                seek(indices,i) = i;
+                seek(lengths,i) = (uint)skip(view,i).Length;
+            }
+        }
+
+        public ReadOnlySpan<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => Content;
+        }
+
+    }
+
     [ApiComplete]
     public readonly struct AsmSymbolData
     {
@@ -48,7 +80,24 @@ namespace Z0.Asm
             }
         }
 
-        public Index<CharBlock8> ByteCharBlocks(ushort start = 0, ushort end = 255)
+        public void GenBits()
+        {
+            var blocks = BitBlocks().View;
+            var count = blocks.Length;
+            var buffer = alloc<ByteSpanProp>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+                var b = @bytes(block.Data);
+                seek(dst,i) = ByteSpans.property(string.Format("Block{0:X2}", i), b.ToArray());
+            }
+            var merge = ByteSpans.merge(buffer, "CharBytes");
+            var s0 = recover<char>(merge.Segment(16,16));
+            Wf.Row(s0.ToString());
+        }
+
+        public Index<CharBlock8> BitBlocks(ushort start = 0, ushort end = 255)
         {
             var count = end - start + 1;
             var buffer = alloc<CharBlock8>(count);
@@ -65,23 +114,6 @@ namespace Z0.Asm
             }
 
             return buffer;
-        }
-
-        public void GenBits()
-        {
-            var blocks = ByteCharBlocks().View;
-            var count = blocks.Length;
-            var buffer = alloc<ByteSpanProp>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(blocks,i);
-                var b = @bytes(block.Data);
-                seek(dst,i) = ByteSpans.property(string.Format("Block{0:X2}", i), b.ToArray());
-            }
-            var merge = ByteSpans.merge(buffer, "CharBytes");
-            var s0 = recover<char>(merge.Segment(16,16));
-            Wf.Row(s0.ToString());
         }
 
         public Symbols<K> Symbols<K>()

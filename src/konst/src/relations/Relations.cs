@@ -14,13 +14,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline)]
-        public static Isomorphic<S,T> isomorphic<S,T>(S src, T dst)
-            => default;
-
-        [MethodImpl(Inline)]
-        public static Isomorphic isomorphic(Type src, Type dst)
-            => new Isomorphic(src, dst);
 
         [MethodImpl(Inline)]
         public static string format<T>(Dependency<T> src)

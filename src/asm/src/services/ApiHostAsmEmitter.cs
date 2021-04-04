@@ -13,7 +13,6 @@ namespace Z0.Asm
     {
         readonly IWfShell Wf;
 
-
         readonly IAsmContext Asm;
 
         public ApiHostAsmEmitter(IWfShell wf, IAsmContext asm)
@@ -26,7 +25,7 @@ namespace Z0.Asm
         {
             var flow = Wf.Running(Msg.EmittingHostRoutines.Format(host));
             Decode(host, src, out dst);
-            var emitted = emit(Wf, host, dst.Storage, Asm.Formatter.Config);
+            var emitted = emit(Wf, host, dst.Storage);
             Wf.Ran(flow, Msg.EmittedHostRoutines.Format(src.Length, host, emitted.ToUri()));
             return ref dst;
         }
@@ -37,7 +36,7 @@ namespace Z0.Asm
             dst = decoder.Decode(host, src);
         }
 
-        static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmMemberRoutine> src, in AsmFormatConfig format)
+        static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmMemberRoutine> src)
         {
             var count = src.Length;
             if(count != 0)
@@ -49,7 +48,7 @@ namespace Z0.Asm
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var item = ref skip(src,i);
-                    AsmRoutineFormatter.format(item.Routine, format, buffer);
+                    AsmFormatter.format(item.Routine, AsmFormatConfig.DefaultStreamFormat, buffer);
                     writer.Write(buffer.Emit());
                 }
                 return path;

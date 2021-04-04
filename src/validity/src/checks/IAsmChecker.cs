@@ -15,9 +15,6 @@ namespace Z0.Asm
         IAsmDecoder Decoder
             => Context.RoutineDecoder;
 
-        IAsmRoutineFormatter Formatter
-            => Context.Formatter;
-
         IPolyrand IPolyrandProvider.Random
             => Context.Random;
 
@@ -27,7 +24,7 @@ namespace Z0.Asm
         void WriteAsm(ApiCaptureBlock capture, StreamWriter dst)
         {
             var asm = Decoder.Decode(capture).Require();
-            var formatted = Formatter.Format(asm);
+            var formatted = Context.Formatter.Format(asm);
             dst.Write(formatted);
         }
 
@@ -44,8 +41,7 @@ namespace Z0.Asm
         }
 
         void WriteAsm(AsmRoutine f, StreamWriter dst)
-            => dst.WriteLine(Formatter.Format(f));
-
+            => dst.WriteLine(Context.Formatter.Format(f));
 
         Option<AsmRoutine> CaptureAsm<D>(DynamicDelegate<D> src)
             where D : Delegate

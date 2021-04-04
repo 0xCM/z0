@@ -63,7 +63,6 @@ namespace Z0
                 dst.AddRange(CapturePart(skip(catalogs,i)));
             Wf.Ran(flow, count);
             return dst.ToArray();
-
         }
 
         Index<AsmMemberRoutines> RunCapture()
@@ -92,14 +91,12 @@ namespace Z0
 
         void ClearArchive()
         {
-            using var archive = ApiCaptureArchive.create(Wf);
-            archive.Clear();
+            Wf.ApiCaptureArchive().Clear();
         }
 
         void ClearArchive(Index<PartId> parts)
         {
-            using var archive = ApiCaptureArchive.create(Wf);
-            archive.Clear(parts);
+            Wf.ApiCaptureArchive().Clear(parts);
         }
 
         /// <summary>

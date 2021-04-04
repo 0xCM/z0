@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System.Runtime.CompilerServices;
+
     using static Part;
     using static Chars;
 
@@ -19,6 +21,30 @@ namespace Z0.Asm
         {
             const string FormatPattern = "fx:{0} subfx:{1} => eax:{2} ebx:{3} ecx:{4} edx:{5}";
             return text.format(FormatPattern, src.Fx, src.SubFx, src.Eax, src.Ebx, src.Ecx, src.Edx);
+        }
+
+        [Op]
+        public static string format(in AsmBranchInfo src)
+            => text.concat(src.Source, " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
+
+        [Op]
+        public static string format(in AsmImmInfo src)
+            => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
+
+        [Op]
+        public static string format(in AsmDisplacement src)
+            => (src.Size switch{
+                AsmDisplacementSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
+                AsmDisplacementSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
+                AsmDisplacementSize.y4 => ((uint)src.Value).FormatHex(HexSpec),
+                _ => (src.Value).FormatHex(HexSpec),
+            }) + "dx";
+
+
+        static HexFormatOptions HexSpec
+        {
+            [MethodImpl(Inline), Op]
+            get => HexFormatSpecs.options(zpad:false, specifier:false);
         }
 
         [Op]

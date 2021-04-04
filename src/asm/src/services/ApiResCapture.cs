@@ -57,6 +57,7 @@ namespace Z0.Asm
             var codes = span(alloc<ApiCaptureBlock>(count));
             var captured = alloc<CapturedApiRes>(count);
             var target = span(captured);
+            var formatter = Wf.AsmFormatter();
 
             using var writer = dst.Writer();
             using var quick = Wf.CaptureQuick(Asm);
@@ -71,7 +72,7 @@ namespace Z0.Asm
                 {
                     ref readonly var data = ref skip(codes,i);
                     var decoded = DecodeRoutine(data).ValueOrDefault(AsmRoutineCode.Empty);
-                    var formatted = Asm.Formatter.Format(decoded.Routine);
+                    var formatted = formatter.Format(decoded.Routine);
                     seek(target, i) = new CapturedApiRes(accessor.Host, accessor, decoded);
                     writer.Write(formatted);
                 }

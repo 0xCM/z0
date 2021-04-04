@@ -20,54 +20,6 @@ namespace Z0.Asm
         public static AsmRowSets<T> rowsets<T>(AsmRowSet<T>[] src)
             => new AsmRowSets<T>(src);
 
-        /// <summary>
-        /// Filters a set of instructions predicated on s specified mnemonic
-        /// </summary>
-        /// <param name="src">The data sourde</param>
-        /// <param name="mnemonic">The mnemonic of interest</param>
-        [Op]
-        static Index<ApiInstruction> filter(Index<ApiInstruction> src, IceMnemonic mnemonic)
-            => from a in src.Storage
-                let i = a.Instruction
-                where i.Mnemonic == mnemonic
-                select a;
-
-        /// <summary>
-        /// Filters a set of instructions predicated on s specified mnemonic
-        /// </summary>
-        /// <param name="src">The data sourde</param>
-        /// <param name="mnemonic">The mnemonic of interest</param>
-        [Op]
-        static Index<ApiInstruction> filter(Index<ApiInstruction> src, AsmMnemonic mnemonic)
-            => from a in src.Storage
-                let i = a.Instruction
-                where i.AsmMnemonic == mnemonic
-                select a;
-
-        [Op]
-        public Index<AsmCallRow> Calls(Index<ApiInstruction> src)
-        {
-            var calls = filter(src, IceMnemonic.Call).View;
-            var count = calls.Length;
-            var buffer = alloc<AsmCallRow>(count);
-            ref var row = ref first(span(buffer));
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var call = ref skip(calls,i);
-                ref var dst = ref seek(row,i);
-                var bytes = span(call.EncodedData.Storage);
-                var offset = ByteReader.read(bytes.Slice(1));
-                var target = call.NextIp + offset;
-                dst.Source = call.IP;
-                dst.Target = target;
-                dst.InstructionSize = call.ByteLength;
-                dst.TargetOffset = target - (call.IP + src.Length);
-                dst.Instruction = call.FormattedInstruction;
-                dst.Encoded = call.Encoded.Storage;
-            }
-            return buffer;
-        }
-
         public uint Emit(AsmRowSet<IceMnemonic> src)
         {
             var count = src.Count;

@@ -36,6 +36,21 @@ namespace Z0.Asm
         public static AsmFormatConfig DefaultStreamFormat
             => create(EmitSectionDelimiter : true, EmitBaseAddress : true);
 
+        public static ref AsmFormatConfig @default(out AsmFormatConfig dst)
+        {
+            dst.EmitCaptureTermCode = true;
+            dst.EmitFileHeader = true;
+            dst.EmitBaseAddress = true;
+            dst.EmitSectionDelimiter = true;
+            dst.InstructionPad = 40;
+            dst.AbsoluteLabels = false;
+            dst.FieldDelimiter = RP.FieldSep;
+            dst.SectionDelimiter = "; " + RP.PageBreak160;
+            dst.EmitLineAddresses = true;
+            dst.HeaderEncodingFormat = HexFormatSpecs.options();
+            return ref dst;
+        }
+
         public static AsmFormatConfig create(
            bool EmitCaptureTermCode = true,
            bool EmitFileHeader = true,
@@ -43,7 +58,7 @@ namespace Z0.Asm
            bool EmitSectionDelimiter = false,
            byte InstructionPad = 40,
            bool ShowLineAddresses = true,
-           bool AbsoluteLabels = true,
+           bool AbsoluteLabels = false,
            int SectionDelimiterWidth = 120
            ) => new AsmFormatConfig(EmitCaptureTermCode, EmitFileHeader, EmitBaseAddress, EmitSectionDelimiter,
                     InstructionPad, ShowLineAddresses, AbsoluteLabels, SectionDelimiterWidth);

@@ -18,7 +18,6 @@ namespace Z0
     [ApiHost]
     public readonly struct StringRef : ITextual
     {
-
         readonly Vector128<ulong> Data;
 
         [MethodImpl(Inline), Op]

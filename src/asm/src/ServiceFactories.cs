@@ -10,11 +10,17 @@ namespace Z0
 
     partial class XTend
     {
+        public static AsmFormatter AsmFormatter(this IWfShell wf)
+            => Asm.AsmFormatter.create(wf);
+
         public static AsmDetailPipe AsmDetailPipe(this IWfShell wf)
             => Asm.AsmDetailPipe.create(wf);
 
         public static AsmEtl AsmRowEtl(this IWfShell wf)
             => AsmEtl.create(wf);
+
+        public static ApiCaptureArchive ApiCaptureArchive(this IWfShell wf)
+            => Z0.ApiCaptureArchive.create(wf);
 
         public static ICmdRunner<AsmWfCmdKind> AsmWfCmd(this IWfShell wf)
             => AsmWfCmdHost.create(wf);
@@ -38,8 +44,8 @@ namespace Z0
         public static ResBytesEmitter ResBytesEmitter(this IWfShell wf)
             => Z0.ResBytesEmitter.create(wf);
 
-        public static AsmJmpCollector AsmJmpCollector(this IWfShell wf)
-            => Services.AsmJmpCollector.create(wf);
+        public static AsmJmpPipe AsmJmpPipe(this IWfShell wf)
+            => Services.AsmJmpPipe.create(wf);
 
         public static ApiResCapture ApiResCapture(this IWfShell wf)
             => Services.ApiResCapture.create(wf);
@@ -47,8 +53,8 @@ namespace Z0
         public static ApiImmEmitter ImmEmitter(this IWfShell wf)
             => ApiImmEmitter.create(wf);
 
-        public static IAsmWriter AsmWriter(this IWfShell wf, FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, new AsmRoutineFormatter(config));
+        public static IAsmWriter AsmWriter(this IWfShell wf, FS.FilePath dst)
+            => new AsmWriter(dst, wf.AsmFormatter());
 
         public static AsmServices AsmServices(this IWfShell wf)
             => Services.AsmServices.create(wf);
@@ -77,14 +83,11 @@ namespace Z0
         public static ImmSpecializer ImmSpecializer(this IWfShell wf)
             => Z0.Asm.ImmSpecializer.create(wf);
 
-        public static IAsmDecoder AsmDecoder(this IWfShell wf, in AsmFormatConfig config)
-            => new AsmRoutineDecoder(config);
-
         public static IAsmDecoder AsmDecoder(this IWfShell wf)
-            => new AsmRoutineDecoder(AsmFormatConfig.DefaultStreamFormat);
+            => new AsmRoutineDecoder(wf);
 
-        public static IApiIndexDecoder ApiIndexDecoder(this IWfShell wf)
-            => Services.ApiIndexDecoder.create(wf);
+        public static IApiIndexDecoder ApiDecoder(this IWfShell wf)
+            => Services.ApiDecoder.create(wf);
 
         public static AsmDistiller AsmDistiller(this IWfShell wf)
             => Z0.Asm.AsmDistiller.create(wf);
@@ -95,10 +98,14 @@ namespace Z0
         public static AsmStatementPipe AsmStatementPipe(this IWfShell wf)
             => Asm.AsmStatementPipe.create(wf);
 
-        public static ApiCodeBlockTraverser ApiiCodeBlockTraverser(this IWfShell src)
+        public static ApiCodeBlockTraverser ApiCodeBlockTraverser(this IWfShell src)
             => Asm.ApiCodeBlockTraverser.create(src);
 
         public static AsmStatementProducer AsmStatementProducer(this IWfShell wf)
             => Asm.AsmStatementProducer.create(wf);
+
+        public static AsmCallPipe AsmCallPipe(this IWfShell wf)
+            => Asm.AsmCallPipe.create(wf);
+
     }
 }

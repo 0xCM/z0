@@ -64,42 +64,39 @@ namespace Z0.Asm
             => ApiHostCapture.create(wf);
 
         [MethodImpl(Inline), Op]
-        public static IAsmRoutineFormatter formatter(in AsmFormatConfig config)
-            => new AsmRoutineFormatter(config);
+        public static IAsmRoutineFormatter formatter()
+            => new AsmRoutineFormatter(null);
+
+        [MethodImpl(Inline), Op]
+        public static IAsmRoutineFormatter formatter(IWfShell wf)
+            => new AsmRoutineFormatter(null);
 
         [MethodImpl(Inline), Op]
         public static ICaptureExchange exchange(BufferToken capture)
             => new CaptureExchangeProxy(capture);
 
         public static IAsmImmWriter immwriter(IWfShell wf, IAsmContext context, ApiHostUri host)
-            => new AsmImmWriter(wf, host, context.Formatter);
+            => new AsmImmWriter(wf, host, wf.AsmFormatter());
 
         IWfShell Wf {get;}
 
         IAsmContext Asm {get;}
-
-        AsmFormatConfig FormatConfig;
 
         [MethodImpl(Inline)]
         AsmServices(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
             Asm = asm;
-            FormatConfig = AsmFormatConfig.DefaultStreamFormat;
         }
 
-        [MethodImpl(Inline), Op]
-        public IAsmRoutineFormatter Formatter(in AsmFormatConfig config)
-            => new AsmRoutineFormatter(config);
-
         public IAsmDecoder Decoder()
-            => Wf.AsmDecoder(FormatConfig);
+            => Wf.AsmDecoder();
 
         public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
         {
             var count = src.Length;
-            var decoder = Wf.AsmDecoder(FormatConfig);
-            var _formatter = formatter(FormatConfig);
+            var decoder = Wf.AsmDecoder();
+            var _formatter = formatter(Wf);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var captured = ref skip(src,i);
@@ -121,8 +118,8 @@ namespace Z0.Asm
         {
             var count = src.Length;
             var dst = span<AsmRoutineCode>(count);
-            var decoder = Wf.AsmDecoder(FormatConfig);
-            var _formatter = formatter(FormatConfig);
+            var decoder = Wf.AsmDecoder();
+            var _formatter = formatter(Wf);
             using var writer = target.Writer();
             for(var i=0u; i<count; i++)
             {
