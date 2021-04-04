@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    [ApiHost]
     ref struct AsmMovHandler
     {
         readonly Span<Arrow<Imm64,IceRegister>> Buffer;
@@ -23,7 +24,7 @@ namespace Z0.Asm
             Index = 0;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public void Handle(in IceInstruction i)
         {
             if(i.Mnemonic == IceMnemonic.Mov && i.Op1Kind == IceOpKind.Immediate64 && i.Op0Kind == IceOpKind.Register)
@@ -33,7 +34,7 @@ namespace Z0.Asm
         public ReadOnlySpan<Arrow<Imm64,IceRegister>> Collected
         {
             [MethodImpl(Inline)]
-            get => Buffer.Slice(0, Index);
+            get => slice(Buffer,0, Index);
         }
 
         public int CollectionCount
@@ -42,11 +43,9 @@ namespace Z0.Asm
             get => Index;
         }
 
-        Arrow<Imm64,IceRegister> this[int index]
-        {
-            [MethodImpl(Inline)]
-            set => seek(Buffer, (uint)index) = value;
-        }
+        [MethodImpl(Inline), Op]
+        public ref Arrow<Imm64,IceRegister> Entry(int index)
+            => ref seek(Buffer, index);
 
         bool HasCapacity
         {
@@ -54,11 +53,11 @@ namespace Z0.Asm
             get => Index < Buffer.Length;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         void Handle(Imm64 src, IceRegister dst)
         {
             if(HasCapacity)
-                this[Index++] = Arrows.link(src, dst);
+                Entry(Index++) = Arrows.link(src, dst);
         }
     }
 }

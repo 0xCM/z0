@@ -18,22 +18,28 @@ namespace Z0
             => ApiHexReader.create(wf);
 
         public static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
-            => src.Length != 0 ? Tables.emit(src,dst) : 0;
+            => src.Length != 0 ? Tables.emit(src, dst) : 0;
 
         [Op]
         public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
+        {
+            var dst = wf.Db().ApiHexFile(uri);
+            return emit(wf,uri, src, dst);
+        }
+
+        [Op]
+        public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Length;
             if(count != 0)
             {
                 var content = rows(uri, src);
-                var hexpath = wf.Db().ApiHexFile(uri);
                 if(content.Length != count)
                     wf.Error($"The distilled row count of {content.Length} does not match the input count of {count}");
                 else
                 {
-                    var fa = wf.EmittingTable<ApiHexRow>(hexpath);
-                    emit(content, hexpath);
+                    var fa = wf.EmittingTable<ApiHexRow>(dst);
+                    emit(content, dst);
                     wf.EmittedTable(fa,count);
 
                     var b = wf.Db().ParsedExtractFile(uri);

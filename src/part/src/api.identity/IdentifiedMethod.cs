@@ -39,5 +39,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator IdentifiedMethod((OpIdentity id, MethodInfo method) src)
             => new IdentifiedMethod(src.id,src.method);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MethodInfo(IdentifiedMethod src)
+            => src.Method;
     }
 }

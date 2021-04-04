@@ -93,45 +93,6 @@ namespace Z0.Asm
             return address;
         }
 
-
-        public Index<CharBlock8> ByteCharBlocks(ushort start = 0, ushort end = 255)
-        {
-            var count = end - start + 1;
-            var buffer = alloc<CharBlock8>(count);
-            ref var dst = ref first(buffer);
-            var k = 0;
-            for(var i=start; i<=end; i++, k++)
-            {
-                var block = CharBlocks.alloc(n8);
-                var data = block.Data;
-                for(var j=0; j<8; j++)
-                    seek(data,j) = bit.test(i,(byte)j).ToChar();
-                block.Data.Invert();
-                seek(dst,k) = block;
-
-            }
-
-            return buffer;
-        }
-
-
-        public void GenBits()
-        {
-            var blocks = ByteCharBlocks().View;
-            var count = blocks.Length;
-            var buffer = alloc<ByteSpanProp>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(blocks,i);
-                var b = @bytes(block.Data);
-                seek(dst,i) = ByteSpans.property(string.Format("Block{0:X2}", i), b.ToArray());
-            }
-            var merge = ByteSpans.merge(buffer, "CharBytes");
-            var s0 = recover<char>(merge.Segment(16,16));
-            Wf.Row(s0.ToString());
-        }
-
         public static ReadOnlySpan<byte> TestCase01 => new byte[44]{0x0f,0x1f,0x44,0x00,0x00,0x49,0xb8,0x68,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x4d,0x8b,0x00,0x48,0xba,0x28,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x48,0x8b,0x12,0x48,0xb8,0x90,0x2c,0x8b,0x64,0xfe,0x7f,0x00,0x00,0x48,0xff,0xe0};
 
         public static bool TestJmpRax(ReadOnlySpan<byte> src, int offset, out byte delta)
@@ -220,12 +181,6 @@ namespace Z0.Asm
             //var capture = Wf.ApiResCapture();
             //var captured = capture.CaptureAccessors(accessors, dst);
             //Wf.Status(definitions.BlockCount);
-        }
-
-        [Op]
-        public static bool test(AsmOpCodeExpr opcode, AsmOpCodeToken token, Symbols<AsmOpCodeToken> symbols)
-        {
-            return default;
         }
 
         void ShowOpCodeTokens()
@@ -344,7 +299,6 @@ namespace Z0.Asm
             var archive = Wf.ApiHexArchive();
             archive.CodeBlocks(part, accept);
         }
-
 
         void ShowInterfaceMaps()
         {
@@ -645,7 +599,6 @@ namespace Z0.Asm
             cmd.TargetPath = Db.IndexTable("clrtests");
             cmd.FileUriMode = true;
             cmd.WithExt(FS.Extensions.Cmd);
-            //cmd.WithLimit(20);
             return cmd;
         }
 
@@ -796,7 +749,6 @@ namespace Z0.Asm
             Wf.Row($"6: {bits.View(w6, 0)}");
             Wf.Row($"7: {bits.View(w7, 0)}");
             Wf.Row($"8: {bits.View(w8, 0)}");
-
         }
 
         static bool parse(string src, out CilCapture dst)

@@ -96,8 +96,8 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = ApiJit.jit(src);
-                var summary = capture(exchange, id, pSrc);
+                var address = ApiJit.jit(src);
+                var summary = capture(exchange, id, address);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.Code, outcome.TermCode);
                 return captured;

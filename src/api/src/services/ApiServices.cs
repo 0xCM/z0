@@ -13,13 +13,10 @@ namespace Z0
 
     public sealed class ApiServices : WfService<ApiServices>
     {
-        public ApiJit ApiJit;
-
         ApiCatalogs Catalogs;
 
         protected override void OnInit()
         {
-            ApiJit = Wf.ApiJit();
             Catalogs = Wf.ApiCatalogs();
         }
 
@@ -27,7 +24,7 @@ namespace Z0
             => Z0.DataTypes.search(Wf.Components);
 
         public ApiMembers JitCatalog()
-            => ApiJit.JitCatalog();
+            => Wf.ApiJit().JitCatalog();
 
         public BasedApiMemberCatalog RebaseMembers(Timestamp? ts = null)
             => RebaseMembers(JitCatalog(), ts);

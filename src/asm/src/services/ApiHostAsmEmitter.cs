@@ -13,36 +13,30 @@ namespace Z0.Asm
     {
         readonly IWfShell Wf;
 
-        readonly IAsmContext Asm;
-
-        public ApiHostAsmEmitter(IWfShell wf, IAsmContext asm)
+        public ApiHostAsmEmitter(IWfShell wf)
         {
             Wf = wf;
-            Asm = asm;
         }
 
-        public ref AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmMemberRoutines dst)
+        public AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)
+            => Emit(host,src, Wf.Db().AsmFile(host));
+
+        public AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
             var flow = Wf.Running(Msg.EmittingHostRoutines.Format(host));
-            Decode(host, src, out dst);
-            var emitted = emit(Wf, host, dst.Storage);
-            Wf.Ran(flow, Msg.EmittedHostRoutines.Format(src.Length, host, emitted.ToUri()));
-            return ref dst;
+            var decoder = Wf.AsmDecoder();
+            var decoded = Wf.ApiHostDecoder(decoder).Decode(host, src);
+            var emitted = Emit(host, decoded.Storage, dst);
+            Wf.Ran(flow, Msg.EmittedHostRoutines.Format(emitted, host, dst.ToUri()));
+            return decoded;
         }
 
-        void Decode(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmMemberRoutines dst)
-        {
-            var decoder = Wf.ApiHostDecoder(Asm.RoutineDecoder);
-            dst = decoder.Decode(host, src);
-        }
-
-        static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmMemberRoutine> src)
+        Count Emit(ApiHostUri uri, ReadOnlySpan<AsmMemberRoutine> src, FS.FilePath dst)
         {
             var count = src.Length;
             if(count != 0)
             {
-                var path = wf.Db().AsmFile(uri);
-                using var writer = path.Writer();
+                using var writer = dst.Writer();
                 var buffer = Buffers.text();
 
                 for(var i=0; i<count; i++)
@@ -51,10 +45,9 @@ namespace Z0.Asm
                     AsmFormatter.format(item.Routine, AsmFormatConfig.DefaultStreamFormat, buffer);
                     writer.Write(buffer.Emit());
                 }
-                return path;
             }
-            else
-                return FS.FilePath.Empty;
+
+            return count;
         }
     }
 }

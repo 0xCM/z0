@@ -26,9 +26,9 @@ namespace Z0
 
         protected override void OnInit()
         {
-            Extractor = ApiCodeExtractors.service();
+            Extractor = Wf.MemberExtractor();
             Services = Wf.ApiServices();
-            Emitter = Wf.CaptureEmitter(Wf.AsmContext());
+            Emitter = Wf.CaptureEmitter();
             Jitter = Wf.ApiJit();
         }
 
@@ -130,11 +130,11 @@ namespace Z0
             }
             catch(IOException e)
             {
-                Wf.Error(string.Format("!!IOException!! {0}", e.Message));
+                Wf.Error(string.Format("IOException: {0}", e.Message));
             }
             catch(Exception e)
             {
-                Wf.Error(string.Format("!!Exception!! {0}", e.Message));
+                Wf.Error(e);
             }
 
             return dst.ToArray();
@@ -149,20 +149,37 @@ namespace Z0
             return dst.ToArray();
         }
 
-        public AsmMemberRoutines CaptureHost(IApiHost api)
+        public AsmMemberRoutines CaptureHost(IApiHost src)
         {
-            api = root.require(api);
+            src = root.require(src);
             var routines = AsmMemberRoutines.Empty;
-            var flow = Wf.Running(api.Name);
+            var flow = Wf.Running(src.Name);
             try
             {
-                routines = Emitter.Emit(api.Uri, ExtractHostOps(api));
+                routines = Emitter.Emit(src.Uri, ExtractHostOps(src));
             }
             catch(Exception e)
             {
                 Wf.Error(e);
             }
-            Wf.Ran(flow, api.Name);
+            Wf.Ran(flow, src.Name);
+            return routines;
+        }
+
+        public AsmMemberRoutines CaptureHost(IApiHost src, FS.FolderPath dst)
+        {
+            src = root.require(src);
+            var routines = AsmMemberRoutines.Empty;
+            var flow = Wf.Running(src.Name);
+            try
+            {
+                routines = Emitter.Emit(src.Uri, ExtractHostOps(src));
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+            Wf.Ran(flow, src.Name);
             return routines;
         }
 
@@ -196,7 +213,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(Services.ApiJit.Jit(types));
+                return Extractor.Extract(Jitter.Jit(types));
             }
             catch(Exception e)
             {

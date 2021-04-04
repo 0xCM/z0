@@ -10,6 +10,12 @@ namespace Z0
     using static Part;
     using static memory;
 
+    public static partial class XTend
+    {
+        public static ApiMemberExtractor MemberExtractor(this IWfShell wf)
+            => new ApiMemberExtractor(Pow2.T14 + Pow2.T08);
+    }
+
     [ApiHost]
     public unsafe readonly struct ApiCodeExtractors
     {
@@ -27,10 +33,6 @@ namespace Z0
         public const int DefaultBufferLength = Pow2.T14 + Pow2.T08;
 
         const int MaxZeroCount = 10;
-
-        [MethodImpl(Inline), Op]
-        public static ApiMemberExtractor service(int bufferlen = DefaultBufferLength)
-            => new ApiMemberExtractor(bufferlen);
 
         [MethodImpl(Inline), Op]
         public static BytePatternParser<EncodingPatternKind> patterns(byte[] buffer)

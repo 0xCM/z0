@@ -38,8 +38,8 @@ namespace Z0
             => Services.AsmRowStore.create(wf);
 
         [Op]
-        public static ApiHostAsmEmitter AsmHostEmitter(this IWfShell wf, IAsmContext asm)
-            => new ApiHostAsmEmitter(wf, asm);
+        public static ApiHostAsmEmitter AsmHostEmitter(this IWfShell wf)
+            => new ApiHostAsmEmitter(wf);
 
         public static ResBytesEmitter ResBytesEmitter(this IWfShell wf)
             => Z0.ResBytesEmitter.create(wf);
@@ -59,8 +59,8 @@ namespace Z0
         public static AsmServices AsmServices(this IWfShell wf)
             => Services.AsmServices.create(wf);
 
-        public static ApiCaptureEmitter CaptureEmitter(this IWfShell wf, IAsmContext asm)
-            => new ApiCaptureEmitter(wf, asm);
+        public static ApiCaptureEmitter CaptureEmitter(this IWfShell wf)
+            => new ApiCaptureEmitter(wf);
 
         public static ApiCaptureRunner CaptureRunner(this IWfShell wf)
             => ApiCaptureRunner.create(wf);

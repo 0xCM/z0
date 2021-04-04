@@ -16,14 +16,11 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly IAsmContext Asm;
-
         readonly MsilPipe IlPipe;
 
-        public ApiCaptureEmitter(IWfShell wf, IAsmContext asm)
+        public ApiCaptureEmitter(IWfShell wf)
         {
             Wf = wf;
-            Asm = asm;
             IlPipe = Wf.MsilPipe();
         }
 
@@ -33,13 +30,14 @@ namespace Z0
             try
             {
                 var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
-                var emitted = EmitExtracts(host, src);
-                var code = ParseExtracts(host, src);
-                if(code.Length != 0)
+                var extracts = EmitExtracts(host, src, Wf.Db().RawExtractFile(host));
+                var parsed = ParseExtracts(host, src);
+                if(parsed.Length != 0)
                 {
-                    EmitApiHex(host, code);
-                    EmitCil(host, code);
-                    routines = DecodeMembers(host, code, src);
+                    EmitApiHex(host, parsed, Wf.Db().ApiHexFile(host));
+                    EmitMsilData(host, parsed, Wf.Db().CilDataPath(host));
+                    EmitMsilCode(host, parsed, Wf.Db().CilCodePath(host));
+                    routines = DecodeMembers(host, parsed, src);
                 }
                 Wf.Ran(flow);
             }
@@ -51,29 +49,36 @@ namespace Z0
         }
 
         public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src)
-            => ApiHex.emit(Wf, host, src.View);
+            => ApiHex.emit(Wf, host, src.View, Wf.Db().ApiHexFile(host));
 
-        public Count EmitCil(ApiHostUri host, Index<ApiMemberCode> src)
+        public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
+            => ApiHex.emit(Wf, host, src.View, dst);
+
+        public Count EmitMsilCode(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
         {
             if(src.Count != 0)
-            {
-                IlPipe.EmitMsil(src, Wf.Db().CilCodePath(host));
-                IlPipe.EmitMsilData(src, Wf.Db().CilDataPath(host));
-            }
+                IlPipe.EmitMsil(src, dst);
+            return src.Count;
+        }
+
+        public Count EmitMsilData(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
+        {
+            if(src.Count != 0)
+                IlPipe.EmitMsilData(src, dst);
 
             return src.Count;
         }
 
-        Index<ApiExtractRow> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
+        public Index<ApiExtractRow> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src, FS.FilePath dst)
         {
             var count = src.Length;
             var blocks = src.Map(x => new ApiExtractBlock(x.Address, x.OpUri, x.Encoded));
-            var dst = Wf.Db().RawExtractFile(host);
             var flow = Wf.EmittingTable<ApiExtractRow>(dst);
             var emitted = Emit(blocks, dst);
             Wf.EmittedTable(flow, count);
             return emitted;
         }
+
 
         Index<ApiMemberCode> ParseExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
         {
@@ -90,9 +95,12 @@ namespace Z0
         }
 
         AsmMemberRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
+            => DecodeMembers(host,src,extracts, Wf.Db().AsmFile(host));
+
+        AsmMemberRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts, FS.FilePath dst)
         {
-            var emitter = Wf.AsmHostEmitter(Asm);
-            emitter.Emit(host, src, out var decoded);
+            var emitter = Wf.AsmHostEmitter();
+            var decoded = emitter.Emit(host, src, dst);
             if(decoded.Count != 0)
                 AsmServices.MatchAddresses(Wf, extracts, decoded.AsmRoutines);
             return decoded;

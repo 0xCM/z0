@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     using static memory;
     using static Part;
@@ -17,24 +16,28 @@ namespace Z0
     public sealed class ApiJit : WfService<ApiJit>
     {
         [Op]
+        static MemoryAddress fptr(MethodInfo src)
+            => src.MethodHandle.GetFunctionPointer();
+
+        [Op]
         public static MemoryAddress jit(ApiMember src)
         {
             sys.prepare(src.Method.MethodHandle);
-            return src.Method.MethodHandle.GetFunctionPointer();
+            return fptr(src.Method);
         }
 
         [Op]
         public static MemoryAddress jit(MethodInfo src)
         {
             sys.prepare(src.MethodHandle);
-            return src.MethodHandle.GetFunctionPointer();
+            return fptr(src);
         }
 
         [Op]
         public static LocatedMethod jit(IdentifiedMethod src)
         {
             sys.prepare(src.MethodHandle);
-            return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
+            return new LocatedMethod(src.Id, src.Method, fptr(src));
         }
 
         [Op]
@@ -53,10 +56,10 @@ namespace Z0
         }
 
         [Op]
-        public static IntPtr jit(Delegate src)
+        public static MemoryAddress jit(Delegate src)
         {
             sys.prepare(src);
-            return src.Method.MethodHandle.GetFunctionPointer();
+            return fptr(src.Method);
         }
 
         [Op]
