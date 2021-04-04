@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Root;
-    using static memory;
-
     partial struct ClrEnums
     {
         /// <summary>

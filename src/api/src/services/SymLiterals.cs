@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using static memory;
@@ -13,10 +12,24 @@ namespace Z0
     public sealed class SymLiterals : WfService<SymLiterals>
     {
         public Index<SymLiteral> Emit()
+            => Emit(Db.IndexTable<SymLiteral>());
+
+        public Index<SymLiteral> Emit(FS.FilePath dst)
+            => Emit(Wf.Components, dst);
+
+        public Index<SymLiteral> Emit(Index<Assembly> src, FS.FilePath dst)
         {
-            var target = Db.IndexTable(SymLiteral.TableId);
-            var components = Wf.Components;
-            return Emit(Wf.Components, target);
+            var flow = Wf.EmittingTable<SymLiteral>(dst);
+            var rows = SymbolicLiterals.symbolic(src);
+            var view = rows.View;
+            var count = rows.Length;
+            var formatter = Tables.formatter<SymLiteral>(24);
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+                writer.WriteLine(formatter.Format(skip(view,i)));
+            Wf.EmittedTable<SymLiteral>(flow, count);
+            return rows;
         }
 
         public void EmitApiClasses()
@@ -29,22 +42,6 @@ namespace Z0
             var literals = classifiers.SelectMany(x => x.Literals);
             var count = Tables.emit(literals, dst);
             Wf.EmittedTable(flow, count);
-        }
-
-        public Index<SymLiteral> Emit(Index<Assembly> src, FS.FilePath dst)
-        {
-            var flow = Wf.EmittingTable<SymLiteral>(dst);
-            var rows = SymbolicLiterals.symbolic(src).Sort();
-            var kRows = rows.Length;
-            using var writer = dst.Writer();
-            var formatter = Tables.formatter<SymLiteral>(16);
-            writer.WriteLine(formatter.FormatHeader());
-
-            for(var i=0; i<kRows; i++)
-                writer.WriteLine(formatter.Format(rows[i]));
-
-            Wf.EmittedTable<SymLiteral>(flow, rows.Length);
-            return rows;
         }
 
         public Index<SymLiteral> Load(TextDoc src)

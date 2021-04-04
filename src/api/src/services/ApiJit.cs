@@ -13,60 +13,72 @@ namespace Z0
     using static memory;
     using static Part;
 
-    [Service(typeof(IApiJit)), ApiHost]
-    public sealed class ApiJit : WfService<ApiJit>, IApiJit
+    [ApiHost]
+    public sealed class ApiJit : WfService<ApiJit>
     {
         [Op]
         public static MemoryAddress jit(ApiMember src)
         {
-            RuntimeHelpers.PrepareMethod(src.Method.MethodHandle);
+            sys.prepare(src.Method.MethodHandle);
             return src.Method.MethodHandle.GetFunctionPointer();
         }
 
         [Op]
         public static MemoryAddress jit(MethodInfo src)
         {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            sys.prepare(src.MethodHandle);
             return src.MethodHandle.GetFunctionPointer();
         }
 
         [Op]
         public static LocatedMethod jit(IdentifiedMethod src)
         {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            sys.prepare(src.MethodHandle);
             return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
         }
 
         [Op]
-        public LocatedMethod JitMethod(IdentifiedMethod src)
+        public static Index<MemberAddress> jit(Index<MethodInfo> src)
         {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
+            var methods = src.View;
+            var count = methods.Length;
+            var buffer = alloc<MemberAddress>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                var method = skip(methods, i);
+                seek(dst,i) = ClrMembers.address(method, jit(method));
+            }
+            return buffer;
         }
 
         [Op]
         public static IntPtr jit(Delegate src)
         {
-            RuntimeHelpers.PrepareDelegate(src);
+            sys.prepare(src);
             return src.Method.MethodHandle.GetFunctionPointer();
         }
 
         [Op]
         public static DynamicPointer jit(DynamicDelegate src)
         {
-            RuntimeHelpers.PrepareDelegate(src.Operation);
+            sys.prepare(src.Operation);
             return ClrDynamic.pointer(src);
         }
 
-        [MethodImpl(Inline)]
         public static DynamicPointer jit<D>(DynamicDelegate<D> src)
             where D : Delegate
                 => jit(src.Untyped);
 
-        public ApiMembers JitCatalog()
+        [Op]
+        public LocatedMethod JitMethod(IdentifiedMethod src)
         {
-            return JitCatalog(Wf.ApiParts.ApiCatalog);
+            sys.prepare(src.MethodHandle);
+            return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
         }
+
+        public ApiMembers JitCatalog()
+            => JitCatalog(Wf.ApiParts.ApiCatalog);
 
         public ApiMembers JitCatalog(IApiCatalogDataset catalog)
         {
@@ -161,7 +173,7 @@ namespace Z0
         [Op]
         IntPtr Jit(MethodInfo src)
         {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            sys.prepare(src.MethodHandle);
             return src.MethodHandle.GetFunctionPointer();
         }
 

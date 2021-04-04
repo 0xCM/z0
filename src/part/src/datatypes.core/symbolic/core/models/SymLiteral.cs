@@ -4,23 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     /// <summary>
     /// Defines a symbolized literal
     /// </summary>
     [Record(TableId)]
-    public struct SymLiteral : IComparableRecord<SymLiteral>
+    public struct SymLiteral : IRecord<SymLiteral>
     {
         public const string TableId = "symbolic.literals";
+
+        public const byte FieldCount = 8;
 
         /// <summary>
         /// The component that defines the literal
         /// </summary>
-        public ClrAssemblyName Component;
+        public Name Component;
 
         /// <summary>
         /// The literal's declaring type
@@ -36,11 +33,6 @@ namespace Z0
         /// The literal name
         /// </summary>
         public Identifier Name;
-
-        /// <summary>
-        /// A global identifier
-        /// </summary>
-        public Name UniqueName;
 
         /// <summary>
         /// The literal's primitive classifier
@@ -61,9 +53,5 @@ namespace Z0
         /// The meaning of the literal, if available; otherwise empty
         /// </summary>
         public TextBlock Description;
-
-        [MethodImpl(Inline)]
-        public int CompareTo(SymLiteral src)
-            => UniqueName.Content.CompareTo(src.UniqueName);
     }
 }

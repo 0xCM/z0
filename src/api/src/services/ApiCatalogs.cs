@@ -15,7 +15,7 @@ namespace Z0
     [ApiHost]
     public class ApiCatalogs : WfService<ApiCatalogs>
     {
-        IApiJit ApiJit;
+        ApiJit ApiJit;
 
         protected override void OnInit()
         {

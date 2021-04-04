@@ -66,33 +66,5 @@ namespace Z0
             var formatter = BitFormatter.create<T>(config);
             return text.concat(name, Chars.Colon, formatter.Format(data));
         }
-
-        /// <summary>
-        /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
-        /// </summary>
-        /// <param name="value">The field value</param>
-        /// <typeparam name="E">The field value type</typeparam>
-        /// <typeparam name="T">The field data type</typeparam>
-        public static string format<E,T>(E src, Base10 @base, string name)
-            where E : unmanaged, Enum
-            where T : unmanaged
-        {
-            var data = ClrEnums.scalar<E,T>(src);
-            return text.concat(name, Chars.Colon, Numeric.format(data, @base));
-        }
-
-        /// <summary>
-        /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
-        /// </summary>
-        /// <param name="value">The field value</param>
-        /// <typeparam name="E">The field value type</typeparam>
-        /// <typeparam name="T">The field data type</typeparam>
-        public static string format<E,T>(E src, Base16 @base, string name)
-            where E : unmanaged, Enum
-            where T : unmanaged
-        {
-            var data = ClrEnums.scalar<E,T>(src);
-            return text.concat(name, Chars.Colon, Hex.formatter<T>().FormatItem(data));
-        }
-    }
+   }
 }

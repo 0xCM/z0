@@ -43,12 +43,6 @@ namespace Z0
             get => Literal.DataType;
         }
 
-        public Identifier UniqueName
-        {
-            [MethodImpl(Inline)]
-            get => Literal.UniqueName;
-        }
-
         public SymbolName SymbolName
         {
             [MethodImpl(Inline)]
@@ -84,18 +78,8 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Index != 0;
         }
-
-        const string FormatPattern = "{0,-24} | {1,-8} | {2,-12} | {3}";
-
-        public static string HeaderFormat
-            => string.Format(FormatPattern, nameof(LiteralType), nameof(Index), nameof(Identifier), nameof(SymbolText));
-
         public string Format()
-            => Description.IsEmpty
-            ? string.Format("{0,-24} | {1,-8} | {2,-12} | {3}",
-                Literal.Type, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol))
-            : string.Format("{0,-24} | {1,-8} | {2,-12} | {3} | {4}",
-                Literal.Type, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol), Description);
+            => Symbols.format(this);
 
         public override string ToString()
             => Format();

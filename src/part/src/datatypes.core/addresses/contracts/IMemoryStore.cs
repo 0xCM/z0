@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
 
-    public interface IMemoryStore : IDataStore
+    public interface IMemoryStore
     {
         UIntPtr StoreLocation {get;}
     }
 
-    public interface IMemoryStore<T> : IMemoryStore, IDataStore<T>
+    public interface IMemoryStore<T> : IMemoryStore
         where T : struct
     {
         ref T Deposited {get;}

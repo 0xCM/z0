@@ -72,23 +72,22 @@ namespace Z0
         }
 
         [Op]
-        public static Index<SymLiteral> symbolic(params Assembly[] src)
+        public static Index<SymLiteral> symbolic(Index<Assembly> src)
         {
-            var kvTypes = ClrEnums.types(src);
+            var kvTypes = ClrEnums.types(src).View;
             var partCount = kvTypes.Length;
             var dst = root.list<SymLiteral>();
             for(var i=0; i<partCount; i++)
             {
-                var types = kvTypes[i];
+                var types = skip(kvTypes,i).View;
                 var kTypes = types.Length;
                 for(var j=0u; j<kTypes; j++)
                 {
-                    var kv = types[j];
-                    (var asm, var type) = kv;
-                    var lits = symbolic(type);
-                    var kLits = lits.Length;
+                    (var asm, var type) = skip(types,j);
+                    var syms = symbolic(type);
+                    var kLits = syms.Length;
                     for(var k=0; k<kLits; k++)
-                        dst.Add(lits[k]);
+                        dst.Add(syms[k]);
                 }
             }
             return dst.ToArray();
@@ -98,9 +97,8 @@ namespace Z0
         static void fill(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymLiteral> dst)
         {
             var count = fields.Length;
-            var typeAddress = type.TypeHandle.Value;
 
-            ClrAssemblyName component = type.Assembly;
+            var component = type.Assembly.GetSimpleName();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var f = ref skip(fields,i);

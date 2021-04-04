@@ -93,10 +93,31 @@ namespace Z0.Asm
             return address;
         }
 
+
+        public Index<CharBlock8> ByteCharBlocks(ushort start = 0, ushort end = 255)
+        {
+            var count = end - start + 1;
+            var buffer = alloc<CharBlock8>(count);
+            ref var dst = ref first(buffer);
+            var k = 0;
+            for(var i=start; i<=end; i++, k++)
+            {
+                var block = CharBlocks.alloc(n8);
+                var data = block.Data;
+                for(var j=0; j<8; j++)
+                    seek(data,j) = bit.test(i,(byte)j).ToChar();
+                block.Data.Invert();
+                seek(dst,k) = block;
+
+            }
+
+            return buffer;
+        }
+
+
         public void GenBits()
         {
-            var factory = BitStoreFactory.create(Wf);
-            var blocks = factory.ByteCharBlocks().View;
+            var blocks = ByteCharBlocks().View;
             var count = blocks.Length;
             var buffer = alloc<ByteSpanProp>(count);
             ref var dst = ref first(buffer);
@@ -109,24 +130,6 @@ namespace Z0.Asm
             var merge = ByteSpans.merge(buffer, "CharBytes");
             var s0 = recover<char>(merge.Segment(16,16));
             Wf.Row(s0.ToString());
-        }
-
-        public void EmitSymbolData()
-        {
-            var mgr = SymbolManager.create();
-            var symbols  = mgr.Symbols<Gp32>().View;
-            var count = symbols.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var symbol = ref skip(symbols,i);
-                var eName = mgr.EncodeName(symbol);
-                var dName = mgr.DecodeName(eName);
-                BinaryCode name = eName.ToArray();
-
-
-                var rendered = string.Format("{0,-8} | {1,-8} | {2}", symbol.Index, dName.ToString(), name.Format());
-                Wf.Row(rendered);
-            }
         }
 
         public static ReadOnlySpan<byte> TestCase01 => new byte[44]{0x0f,0x1f,0x44,0x00,0x00,0x49,0xb8,0x68,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x4d,0x8b,0x00,0x48,0xba,0x28,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x48,0x8b,0x12,0x48,0xb8,0x90,0x2c,0x8b,0x64,0xfe,0x7f,0x00,0x00,0x48,0xff,0xe0};
@@ -531,7 +534,7 @@ namespace Z0.Asm
 
         }
 
-        FS.Files EmitSymbolPaths()
+        FS.Files EmitPdbSymbolPaths()
         {
             var symbols = Wf.PdbSymbolStore();
             var src = Db.DefaultSymbolCache();
@@ -1048,7 +1051,7 @@ namespace Z0.Asm
 
             var clock = Time.counter(true);
             var traverser = Wf.ApiiCodeBlockTraverser();
-            var receiver  = new Receiver59(Wf,750000);
+            var receiver  = new AsmDetailProducer(Wf,750000);
             traverser.Traverse(blocks,receiver);
             var duration = clock.Elapsed.Ms;
             var productions = receiver.Productions;
@@ -1092,8 +1095,9 @@ namespace Z0.Asm
             // var c = f(4,8);
             // Wf.Row(c);
 
-            CaptureSelectedRoutines();
-            EmitSymbolData();
+            Wf.SymLiterals().Emit();
+            // CaptureSelectedRoutines();
+            // EmitSymbolData();
 
             //var a = Hex.chars((byte)0xAB);
 

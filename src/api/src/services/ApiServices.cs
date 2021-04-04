@@ -9,12 +9,11 @@ namespace Z0
     using System.Linq;
 
     using static memory;
-    using static Part;
     using static Sequential;
 
     public sealed class ApiServices : WfService<ApiServices>
     {
-        public IApiJit ApiJit;
+        public ApiJit ApiJit;
 
         ApiCatalogs Catalogs;
 

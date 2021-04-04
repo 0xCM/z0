@@ -113,6 +113,10 @@ namespace Z0
 
       CreateDelegate,
 
-      Substring
+      Substring,
+
+      PrepareMethod,
+
+      PrepareDelegate,
     }
 }

@@ -5,20 +5,21 @@
 namespace Z0
 {
     using System;
-
     using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
-    using H = HexCharData;
-
-    [ApiHost]
-    public partial class Hex
+    partial class XTend
     {
-        public static MemorySegment[] HexRefs
-            => sys.array(memseg(H.UpperSymData), memseg(H.LowerSymData), memseg(H.UpperCodes), memseg(H.LowerCodes));
+        [MethodImpl(Inline)]
+        public static bool IsZero<T>(this T src)
+            where T : unmanaged, Enum
+                => bw64(src) == 0;
 
-        const NumericKind Closure = UnsignedInts;
+        [MethodImpl(Inline)]
+        public static bool IsNonZero<T>(this T src)
+            where T : unmanaged, Enum
+                => bw64(src) != 0;
     }
 }

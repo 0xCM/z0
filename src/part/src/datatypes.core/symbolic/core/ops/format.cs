@@ -32,5 +32,14 @@ namespace Z0
         public static string format<E>(Sym<E> src)
             where E : unmanaged
                 => string.Format(SymFormatPattern, src.Index, src.Kind, src.Name, src.Expression);
+
+        [Op]
+        public static string format(Token src)
+            => src.Description.IsEmpty
+            ? string.Format("{0,-24} | {1,-8} | {2,-12} | {3}",
+                src.Literal.Type, src.Index, text.ifempty(src.Identifier, RP.EmptySymbol), text.ifempty(src.SymbolText, RP.EmptySymbol))
+            : string.Format("{0,-24} | {1,-8} | {2,-12} | {3} | {4}",
+                src.Literal.Type, src.Index, text.ifempty(src.Identifier, RP.EmptySymbol), text.ifempty(src.SymbolText, RP.EmptySymbol), src.Description);
+
     }
 }

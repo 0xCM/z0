@@ -12,45 +12,24 @@ namespace Z0
     using static memory;
 
 
-    public static partial class XTend
+    readonly struct MathOps
     {
-        public static bool IsZero<T>(this T src)
-            where T : unmanaged, Enum
-                => bw64(src) == 0;
+        public static MathOps init()
+            => new MathOps(ApiJit.jit(typeof(math).DeclaredStaticMethods()));
 
-        public static bool IsNonZero<T>(this T src)
-            where T : unmanaged, Enum
-                => bw64(src) != 0;
+        readonly Index<MemberAddress> Addresses;
 
-    }
+        readonly Index<ClrMemberName> Names;
 
-    readonly struct ScalarBitLogicOps
-    {
-        readonly Index<MemberAddress> Members;
-
-        readonly Index<ClrMemberName> MemberNames;
-
-        static MethodInfo[] prepare(MethodInfo[] src)
+        MathOps(Index<MemberAddress> src)
         {
-            var count = src.Length;
-            ref readonly var method = ref first(src);
+            Addresses = src;
+            Array.Sort(Addresses);
+            var count = Addresses.Length;
+            Names = alloc<ClrMemberName>(count);
+            ref var name = ref Names.First;
             for(var i=0; i<count; i++)
-                ApiJit.jit(skip(method,i));
-            return src;
-        }
-
-        public static ScalarBitLogicOps init()
-            => new ScalarBitLogicOps(prepare(typeof(math).DeclaredStaticMethods()));
-
-        ScalarBitLogicOps(MethodInfo[] src)
-        {
-            Members = src.Select(MemberAddress.from);
-            Array.Sort(Members);
-            var count = Members.Length;
-            MemberNames = alloc<ClrMemberName>(count);
-            ref var name = ref MemberNames.First;
-            for(var i=0; i<count; i++)
-                seek(name,i) = Members[i].Member.Name;
+                seek(name,i) = Addresses[i].Member.Name;
         }
     }
 }
