@@ -46,7 +46,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string FormatHex<T>(this Span<T> src)
             where T : unmanaged
-                => HexFormat.format(src.ReadOnly(),Chars.Space, false);
+                => HexFormat.format(src.ReadOnly(), Chars.Space, false);
 
         /// <summary>
         /// Formats a span of numeric cell type as a sequence of hex values

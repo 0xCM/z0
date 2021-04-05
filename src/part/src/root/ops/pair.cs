@@ -25,5 +25,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Pair<T> pair<T>(T a, T b)
             => new Pair<T>(a,b);
+
+        public static IEnumerable<uint> seq(uint min, uint max)
+        {
+            var current = min;
+            while(current < max)
+            {
+                yield return current++;
+            }
+        }
     }
 }

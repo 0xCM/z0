@@ -15,6 +15,24 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmBytes
     {
+        [Op]
+        public static bool parse(string src, out AsmHexCode dst)
+        {
+            var storage = Cells.alloc(w128);
+            var size = parse(span(src),storage.Bytes);
+            if(size == 0 || size > 15)
+            {
+                dst = AsmHexCode.Empty;
+                return false;
+            }
+            else
+            {
+                dst = new AsmHexCode(storage);
+                dst.Cell(15) = (byte)size;
+                return true;
+            }
+        }
+
         /// <summary>
         /// Parses a nibble
         /// </summary>
@@ -74,16 +92,13 @@ namespace Z0.Asm
                     return j;
 
                 ref readonly var c = ref skip(src,i);
-                if(Query.whitespace(c))
+                if(Query.whitespace(c) && nonzero(c0, c1))
                 {
-                    if(nonzero(c0, c1))
-                    {
-                        if(parse(c0, c1, out seek(dst,j)))
-                            j++;
+                    if(parse(c0, c1, out seek(dst,j)))
+                        j++;
 
-                        c0 = Zero;
-                        c1 = Zero;
-                    }
+                    c0 = Zero;
+                    c1 = Zero;
                 }
                 else
                 {

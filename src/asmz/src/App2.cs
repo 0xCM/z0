@@ -994,6 +994,11 @@ namespace Z0.Asm
         }
         public void Run()
         {
+
+            var processor = CultProcessor.create(Wf);
+            var src = Db.ToolOutput(Toolsets.cult, "cult", FS.Asm);
+            processor.Process(src);
+
             //CaptureSelectedRoutines();
 
 

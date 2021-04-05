@@ -11,6 +11,8 @@ namespace Z0.Asm
 
     public readonly struct AsmLine : IRecord<AsmLine>
     {
+        public const byte InstructionWidth = 46;
+
         public uint LineNumber {get;}
 
         public AsmLabel Label {get;}
@@ -44,7 +46,7 @@ namespace Z0.Asm
             else if(Statement.IsNonEmpty)
             {
                 if(Comment.IsNonEmpty)
-                    return string.Format("{0,-42} ; {1}", Statement, Comment.Content);
+                    return string.Format("{0,-46} ; {1}", Statement, Comment.Content);
                 else
                     return Statement.Format();
             }

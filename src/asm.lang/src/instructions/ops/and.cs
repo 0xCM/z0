@@ -31,5 +31,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public And and(r8b r, Imm8 imm8)
             => Builder.and(asmhex(x24, imm8));
+
     }
 }

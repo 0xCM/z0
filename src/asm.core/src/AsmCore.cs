@@ -13,6 +13,9 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmCore
     {
+        public static string[] operands(string instruction)
+            => instruction.RightOfFirst(Chars.Space).Split(Chars.Comma).Select(x => x.Trim());
+
         [MethodImpl(Inline), Op]
         public static AsmLabel label(Identifier name)
             => new AsmLabel(name);

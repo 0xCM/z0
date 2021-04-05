@@ -23,19 +23,25 @@ namespace Z0.Asm
 
         FS.FolderPath DetailRoot;
 
+        AsmBitstrings AsmBits;
+
+        IHexParser<byte> HexParser;
+
         public CultProcessor()
         {
             Summaries = new();
             AsmLines = new();
             HexCharBuffer = sys.alloc<char>(HexBufferLength);
+            AsmBits = AsmBitstrings.service();
+            HexParser = HexParsers.bytes();
         }
 
-        public void Parse(FS.FilePath src)
+        public uint Process(FS.FilePath src)
         {
             if(!src.Exists)
             {
                 Wf.Error(FS.Msg.DoesNotExist.Format(src));
-                return;
+                return 0;
             }
 
             DetailRoot = Db.DocDir(Toolsets.cult);
@@ -73,9 +79,9 @@ namespace Z0.Asm
 
             using var summary = Db.Doc(Toolsets.cult, FS.Csv).Writer();
             foreach(var s in Summaries.Emit())
-            {
-                summary.WriteLine(string.Format("{0:D8} | {1}", s.LineNumber, s.Content));
-            }
+                summary.WriteLine(string.Format("{0:D8} | {1,-46} | {2,-46}", s.LineNumber, s.Id, s.Content));
+
+            return counter;
         }
 
         void Process(uint batch, uint counter, ReadOnlySpan<TextLine> input, Span<CultRecord> output)
@@ -106,19 +112,36 @@ namespace Z0.Asm
             }
         }
 
+        static Identifier identify(in CultSummaryRecord src)
+        {
+            var individuals = AsmCore.operands(src.Instruction);
+            var joined = individuals.Length != 0 ? individuals.Join(Chars.Underscore) : EmptyString;
+            if(text.nonempty(joined))
+                return string.Format("{0}_{1}", src.Mnemonic, joined);
+            else
+                return src.Mnemonic.Format(MnemonicCase.Lowercase);
+        }
+
+        static AsmMnemonic monic(string instruction)
+            => instruction.LeftOfFirst(Chars.Space);
+
+        static string content(in CultRecord src)
+            => src.Comment.Replace(LatencyMarker, FieldDelimiter).Replace(RcpMarker, FieldDelimiter).Trim();
+
         CultSummaryRecord Summarize(in CultRecord record)
         {
             var summary = new CultSummaryRecord();
-            summary.Content = record.Comment.Replace(LatencyMarker, FieldDelimiter).Replace(RcpMarker, FieldDelimiter).Trim();
+            summary.Content = content(record);
             summary.Instruction = summary.Content.Format().LeftOfFirst(FieldDelimiter);
-            summary.Mnemonic = summary.Instruction.LeftOfFirst(Chars.Space);
+            summary.Mnemonic = monic(summary.Instruction);
             summary.LineNumber = record.LineNumber;
+            summary.Id = identify(summary);
             return summary;
         }
 
         void EmitDetails(in CultSummaryRecord summary)
         {
-            var mnemonic = summary.Mnemonic;
+            var mnemonic = summary.Mnemonic.Format(MnemonicCase.Lowercase);
             var path = DetailRoot + FS.file(mnemonic, FS.Asm);
             using var writer = path.Writer(true);
             writer.WriteLine();
@@ -130,7 +153,7 @@ namespace Z0.Asm
                 foreach(var line in AsmLines)
                 {
                     var lf = line.Format();
-                    if(lf.StartsWith(summary.Mnemonic + Chars.Space))
+                    if(lf.StartsWith(summary.Mnemonic.Format(MnemonicCase.Lowercase) + Chars.Space))
                         writer.WriteLine(lf);
                 }
                 AsmLines.Clear();
@@ -165,7 +188,6 @@ namespace Z0.Asm
         public Outcome Parse(TextLine src, out CultRecord dst)
         {
             var content = src.Content ?? EmptyString;
-
             var parts = @readonly(content.Split(Chars.Semicolon));
             if(text.nonempty(content))
             {
@@ -173,7 +195,6 @@ namespace Z0.Asm
                     return ParseStatement(src, parts, out dst);
                 else if(content.Contains(Chars.Colon))
                 {
-
                     if(content.Contains(SummaryMarker))
                         return ParseSummary(src, out dst);
                     else
@@ -206,9 +227,13 @@ namespace Z0.Asm
         {
             var statement = skip(parts,0);
             var comment = skip(parts,1);
+            var bitstring = "----";
             var formatted = FormatBytes(comment, out var count);
+            if(HexByteParser.ParseData(formatted, out var parsed))
+                bitstring = AsmBits.Format(AsmBytes.hexcode(parsed));
+
             if(count != 0)
-                comment = string.Format("{0,-20} | {1,-6} | [{2}]", comment, count, formatted);
+                comment = string.Format("{0,-20} | {1,-6} | [{2} | {3}]", comment, count, formatted, bitstring);
 
             if(statement.StartsWith("rex "))
             {
@@ -232,6 +257,7 @@ namespace Z0.Asm
             dst.RecordKind = CultRecordKind.Summary;
             return true;
         }
+
 
         string FormatBytes(ReadOnlySpan<char> src, out uint size)
             => NormalizeBytes(src, out size).ToString();
