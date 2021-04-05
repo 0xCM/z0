@@ -23,10 +23,10 @@ namespace Z0
                 var blocks = Wf.ApiCodeStore().IndexedBlocks();
 
                 if(options.EmitHexIndex)
-                    Emitted(Wf.ApiHex().EmitIndex(blocks));
+                    Emitted(Wf.ApiHex().EmitHexIndex(blocks.Blocks));
 
                 if(options.EmitAsmRows)
-                    Emitted(Wf.AsmRowStore().EmitAsmRows(blocks));
+                    Emitted(Wf.AsmRowStore().EmitAsmRows(blocks.Blocks));
 
                 if(options.EmitCallData || options.EmitJmpData)
                 {

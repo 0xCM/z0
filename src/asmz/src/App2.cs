@@ -26,7 +26,6 @@ namespace Z0.Asm
             Catalog = AsmCatalogEtl.create(Wf);
 
             ApiServices = Wf.ApiServices();
-            AsmServices = Wf.AsmServices();
             Forms = root.hashset<AsmFormExpr>();
             Sigs = Wf.AsmSigs();
 
@@ -40,7 +39,6 @@ namespace Z0.Asm
 
         ApiServices ApiServices;
 
-        AsmServices AsmServices;
 
         public void GenerateInstructionModels()
         {
@@ -888,7 +886,7 @@ namespace Z0.Asm
         Index<AsmMemberRoutine> CaptureSelectedRoutines()
         {
             var options = CaptureWorkflowOptions.EmitImm;
-            var parts = root.array(PartId.AsmZ, PartId.AsmLang);
+            var parts = root.array(PartId.AsmZ, PartId.AsmLang, PartId.AsmCore);
             var routines = Capture.run(Wf, parts, options);
             return routines;
         }
@@ -996,37 +994,8 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            CaptureSelectedRoutines();
+            //CaptureSelectedRoutines();
 
-            var blocks = LoadApiBlocks();
-
-
-            // var parser = CultParser.create(Wf);
-            // var input = Db.ToolOutDir(Toolsets.cult) + FS.file("cult", FS.Asm);
-            // parser.Parse(input);
-
-            //NasmRunner.create(Wf).Run();
-
-            //Produce();
-
-            // var f = BinaryOpFactory.create<byte>("mul_8u_8u_8u", mul_ᐤ8uㆍ8uᐤ);
-            // var c = f(4,8);
-            // Wf.Row(c);
-
-            //Wf.SymLiterals().Emit();
-            // EmitSymbolData();
-
-            //var a = Hex.chars((byte)0xAB);
-
-            // var digits = Hex.digits((byte)0xCF, LowerCase);
-            // root.iter(digits, d => Wf.Row(d));
-
-            //LoadCurrentCatalog();
-
-            //EmitCilBlocks(Db.AppLogDir() + FS.folder("cil"));
-
-            //var rows = LoadCilRows();
-            //Wf.MsilPipe().LoadCapturedCil();
 
         }
 

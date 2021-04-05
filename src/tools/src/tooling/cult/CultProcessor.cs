@@ -116,7 +116,6 @@ namespace Z0.Asm
             return summary;
         }
 
-
         void EmitDetails(in CultSummaryRecord summary)
         {
             var mnemonic = summary.Mnemonic;

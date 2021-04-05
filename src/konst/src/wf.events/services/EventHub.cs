@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    using api = WfBrokers;
+    using api = EventHubs;
 
     public readonly struct EventHub : IEventHub
     {

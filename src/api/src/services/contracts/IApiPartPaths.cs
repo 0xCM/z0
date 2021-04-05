@@ -6,9 +6,6 @@ namespace Z0
 {
     public interface IApiPartPaths : IPartFilePaths
     {
-        FS.FolderPath HexDir()
-            => HexDir(Root);
-
         FS.FilePath HexPath(FS.FileName name)
             => HexFilePath(Root, name);
 

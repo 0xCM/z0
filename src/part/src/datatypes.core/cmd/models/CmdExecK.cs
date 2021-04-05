@@ -9,31 +9,31 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct WfCmdExec<K>
+    public readonly struct CmdExec<K>
         where K : unmanaged
     {
         public K Kind {get;}
 
-        public WfCmdExec Enclosed {get;}
+        public CmdExec Enclosed {get;}
 
         [MethodImpl(Inline)]
-        public WfCmdExec(K kind, WfCmdExec cmd)
+        public CmdExec(K kind, CmdExec cmd)
         {
             Kind = kind;
             Enclosed = cmd;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator WfCmdExec(WfCmdExec<K> src)
+        public static implicit operator CmdExec(CmdExec<K> src)
             => src.Enclosed;
 
         [MethodImpl(Inline)]
-        public static implicit operator K(WfCmdExec<K> src)
+        public static implicit operator K(CmdExec<K> src)
             => src.Kind;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfCmdExec<K>((K kind, WfCmdExec cmd) src)
-            => new WfCmdExec<K>(src.kind, src.cmd);
+        public static implicit operator CmdExec<K>((K kind, CmdExec cmd) src)
+            => new CmdExec<K>(src.kind, src.cmd);
     }
 
 }

@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static Chars;
     using static memory;
     using static Rules;
-    using static TextRules.Parse;
 
     public sealed class AsmThumbprints : WfService<AsmThumbprints>
     {
@@ -23,15 +22,17 @@ namespace Z0.Asm
 
         static Fence<char> SizeFence => (LBracket, RBracket);
 
-        FS.FilePath ThumbprintsPath()
+        FS.FilePath DefaultPath()
             => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
 
         public AsmThumprintCatalog LoadThumbprints()
+            => LoadThumbprints(DefaultPath());
+
+        public AsmThumprintCatalog LoadThumbprints(FS.FilePath src)
         {
             var dst = root.list<Paired<AsmStatementExpr,AsmThumbprint>>();
             var tpPipe = AsmThumbprints.create(Wf);
-            var source = ThumbprintsPath();
-            using var reader = source.Reader();
+            using var reader = src.Reader();
             while(!reader.EndOfStream)
             {
                 var data = reader.ReadLine();
@@ -81,9 +82,14 @@ namespace Z0.Asm
 
         public void EmitThumbprints(AsmStatementSummaries src)
         {
-            var target = ThumbprintsPath();
-            var flow = Wf.EmittingFile(target);
-            using var writer = target.Writer();
+            var dst = DefaultPath();
+            EmitThumbprints(src,dst);
+        }
+
+        public void EmitThumbprints(AsmStatementSummaries src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
             var buffer = text.buffer();
             render(src, buffer);
             writer.Write(buffer.Emit());

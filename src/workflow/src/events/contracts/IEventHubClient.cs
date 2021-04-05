@@ -2,10 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public sealed class AsmCatalog : WfService<AsmCatalog>
-    {
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IEventHubClient : IDataEventSink
+    {
+        IEventHub Hub {get;}
+
+        void Connect();
     }
 }

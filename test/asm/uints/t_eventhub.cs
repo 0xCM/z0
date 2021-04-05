@@ -47,7 +47,7 @@ namespace Z0
             }
 
             var examples = ExampleEvents.Examples;
-            var hub = HubClientExample.create(WfBrokers.relay(x => Receiver(x)));
+            var hub = HubClientExample.create(EventHubs.relay(x => Receiver(x)));
             var e1 = examples.Event1.Define(E1, D1);
             var e2 = examples.Event2.Define(E2, D2);
             var e3 = examples.Event3.Define(E3, D3);

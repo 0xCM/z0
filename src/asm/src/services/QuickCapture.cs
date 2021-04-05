@@ -82,6 +82,11 @@ namespace Z0
 
         }
 
+        public ReadOnlySpan<AsmRoutineCode> Capture(ReadOnlySpan<MethodInfo> src, FS.FilePath target)
+        {
+            return Wf.ApiDecoder().Decode(Capture(src), target);
+        }
+
         Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
         {
             var count = src.Length;

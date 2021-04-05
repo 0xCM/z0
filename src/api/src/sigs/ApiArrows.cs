@@ -181,6 +181,5 @@ namespace Z0
                 Data = data;
             }
         }
-
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public readonly struct WfBrokers
+    public readonly struct EventHubs
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -19,8 +19,8 @@ namespace Z0
             => new EventHub(capacity);
 
         [MethodImpl(Inline), Op]
-        public static WfHubClient client(IEventHub hub, IDataEventSink sink, Action connect, Action exec)
-            => new WfHubClient(hub, sink, connect, exec);
+        public static EventHubClient client(IEventHub hub, IDataEventSink sink, Action connect, Action exec)
+            => new EventHubClient(hub, sink, connect, exec);
 
         /// <summary>
         /// Creates a T-parametric sink predicated on a <see cref='Receiver{T}'/> process function

@@ -4,10 +4,52 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
+    using static Part;
     using static memory;
 
     public sealed class ApiDecoder : AsmWfService<ApiDecoder>, IApiIndexDecoder
     {
+        static IAsmRoutineFormatter formatter(IWfShell wf)
+            => new AsmRoutineFormatter(null);
+
+        public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
+        {
+            var count = src.Length;
+            var dst = span<AsmRoutineCode>(count);
+            var decoder = Wf.AsmDecoder();
+            var _formatter = formatter(Wf);
+            using var writer = target.Writer();
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var captured = ref skip(src,i);
+                if(decoder.Decode(captured, out var fx))
+                {
+                    seek(dst,i) = new AsmRoutineCode(fx,captured);
+                    var asm = _formatter.Format(fx);
+                    writer.Write(asm);
+                }
+            }
+            return dst;
+        }
+
+        public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
+        {
+            var count = src.Length;
+            var decoder = Wf.AsmDecoder();
+            var _formatter = formatter(Wf);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var captured = ref skip(src,i);
+                if(decoder.Decode(captured, out var routine))
+                {
+                    var asm = _formatter.Format(routine);
+                    seek(dst,i) = new AsmRoutineCode(routine, captured);
+                }
+            }
+        }
+
         public ApiAsmDataset Decode(ApiBlockIndex src)
         {
             var decoder = Asm.RoutineDecoder;

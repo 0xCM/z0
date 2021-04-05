@@ -9,6 +9,8 @@ namespace Z0
     {
         public const string TableId = "api.hex";
 
+        public const byte FieldCount = 7;
+
         public int Seq;
 
         public int SourceSeq;
@@ -22,10 +24,5 @@ namespace Z0
         public OpUri Uri;
 
         public BinaryCode Data;
-    }
-
-    public readonly struct ApiHexRowSpec
-    {
-        public const byte FieldCount = 7;
     }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class EvalControl : IEvalControl
     {
         readonly IWfShell Wf;

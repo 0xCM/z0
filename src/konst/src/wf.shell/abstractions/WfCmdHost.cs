@@ -27,14 +27,14 @@ namespace Z0
 
         public static Type CommandType => typeof(K);
 
-        protected WfCmdIndex Index;
+        protected CmdIndex Index;
 
-        public IEnumerable<WfCmdExec> Hosted
+        public IEnumerable<CmdExec> Hosted
             => Index.Values;
 
         protected override void Initialized()
         {
-            Index = WfCmdIndex.create();
+            Index = CmdIndex.create();
             if(!CommandsRegistered)
             {
                 RegisterCommands(Index);
@@ -43,7 +43,7 @@ namespace Z0
             }
         }
 
-        protected virtual void RegisterCommands(WfCmdIndex index)
+        protected virtual void RegisterCommands(CmdIndex index)
         {
             var count = GetType().DeclaredInstanceMethods().Tagged<ActionAttribute>(out var methods);
             if(count != 0)

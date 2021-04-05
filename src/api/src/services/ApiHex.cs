@@ -16,6 +16,11 @@ namespace Z0
         public Index<ApiCodeBlock> ApiBlocks()
         {
             var parsed = Db.ParsedExtractFiles();
+            return ApiBlocks(parsed);
+        }
+
+        public Index<ApiCodeBlock> ApiBlocks(FS.Files parsed)
+        {
             var count = parsed.Length;
             if(count == 0)
                 return Index<ApiCodeBlock>.Empty;
@@ -116,9 +121,9 @@ namespace Z0
                 }
 
                 var fields = text.slice(src,1).SplitClean(FieldDelimiter);
-                if(fields.Length !=  (uint)ApiHexRowSpec.FieldCount)
+                if(fields.Length !=  (uint)ApiHexRow.FieldCount)
                 {
-                    Wf.Error($"Found {fields.Length} but {ApiHexRowSpec.FieldCount} are required");
+                    Wf.Error($"Found {fields.Length} but {ApiHexRow.FieldCount} are required");
                     return false;
                 }
 
@@ -139,21 +144,21 @@ namespace Z0
             }
         }
 
-        public Index<ApiHexIndexRow> EmitIndex(ApiBlockIndex src)
+        public Index<ApiHexIndexRow> EmitHexIndex(ApiBlockIndex src)
         {
             var dst = Db.IndexFile(ApiHexIndexRow.TableId);
-            return EmitIndex(src.Blocks, dst);
+            return EmitHexIndex(src.Blocks, dst);
         }
 
         [Op]
-        public Index<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src)
+        public Index<ApiHexIndexRow> EmitHexIndex(Index<ApiCodeBlock> src)
         {
             var dst = Db.IndexFile(ApiHexIndexRow.TableId);
-            return EmitIndex(src, dst);
+            return EmitHexIndex(src, dst);
         }
 
         [Op]
-        public Index<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src, FS.FilePath dst)
+        public Index<ApiHexIndexRow> EmitHexIndex(Index<ApiCodeBlock> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<ApiHexIndexRow>(dst);
             Array.Sort(src.Storage);

@@ -31,10 +31,6 @@ namespace Z0
             => AsmWfCmdHost.create(wf);
 
         [Op]
-        public static AsmCatalog AsmCatalog(this IWfShell wf)
-            => Services.AsmCatalog.create(wf);
-
-        [Op]
         public static AsmSemanticRender AsmSemanticRender(this IWfShell wf)
             => Services.AsmSemanticRender.create(wf);
 
@@ -69,10 +65,6 @@ namespace Z0
         [Op]
         public static IAsmWriter AsmWriter(this IWfShell wf, FS.FilePath dst)
             => new AsmWriter(dst, wf.AsmFormatter());
-
-        [Op]
-        public static AsmServices AsmServices(this IWfShell wf)
-            => Services.AsmServices.create(wf);
 
         [Op]
         public static ApiCaptureEmitter CaptureEmitter(this IWfShell wf)
@@ -111,7 +103,7 @@ namespace Z0
             => new AsmRoutineDecoder(wf);
 
         [Op]
-        public static IApiIndexDecoder ApiDecoder(this IWfShell wf)
+        public static ApiDecoder ApiDecoder(this IWfShell wf)
             => Services.ApiDecoder.create(wf);
 
         [Op]

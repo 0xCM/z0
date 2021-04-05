@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct WfHubClient : IWfHubClient
+    public readonly struct EventHubClient : IEventHubClient
     {
         public IEventHub Hub {get;}
 
@@ -20,7 +20,7 @@ namespace Z0
         readonly Action Executor;
 
         [MethodImpl(Inline)]
-        public WfHubClient(IEventHub hub, IDataEventSink sink, Action connect, Action exec)
+        public EventHubClient(IEventHub hub, IDataEventSink sink, Action connect, Action exec)
         {
             Hub = hub;
             Sink = sink;

@@ -15,7 +15,6 @@ namespace Z0
         [Op]
         public static BitFieldModel model(Name name, ReadOnlySpan<string> names, ReadOnlySpan<byte> widths)
         {
-            Demands.insist(names.Length, widths.Length);
             var count = (uint)names.Length;
             var fieldWidths = span(widths);
             var posbuffer = alloc<uint>(count);

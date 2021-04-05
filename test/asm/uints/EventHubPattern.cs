@@ -15,13 +15,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static EventHub create(IDataEventSink sink)
         {
-            var hub = WfBrokers.hub();
+            var hub = EventHubs.hub();
             var client = new HubClientExample(hub, sink);
             return hub;
         }
 
         [MethodImpl(Inline), Op]
-        public static Action connector(IWfHubClient client)
+        public static Action connector(IEventHubClient client)
             => client.Connect;
 
         public IEventHub Hub {get;}
@@ -40,7 +40,7 @@ namespace Z0
         {
             Hub = hub;
             Sink = sink;
-            (this as IWfHubClient).Connect();
+            (this as IEventHubClient).Connect();
         }
     }
 
@@ -113,7 +113,7 @@ namespace Z0
         ExampleEvent3 Event3 => default;
     }
 
-    public interface IHubClientExample : IExampleEvents, IWfHubClient
+    public interface IHubClientExample : IExampleEvents, IEventHubClient
     {
         void OnEvent(in ExampleEvent1 e)
             => Deposit(e);
@@ -124,7 +124,7 @@ namespace Z0
         void OnEvent(in ExampleEvent3 e)
             => Deposit(e);
 
-        void IWfHubClient.Connect()
+        void IEventHubClient.Connect()
         {
             Hub.Subscribe(Event1, OnEvent);
             Hub.Subscribe(Event2, OnEvent);

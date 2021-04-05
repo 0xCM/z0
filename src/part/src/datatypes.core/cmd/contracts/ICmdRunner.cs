@@ -11,7 +11,7 @@ namespace Z0
     {
         Type CommandType {get;}
 
-        IEnumerable<WfCmdExec> Hosted {get;}
+        IEnumerable<CmdExec> Hosted {get;}
     }
 
     public interface ICmdRunner<K> : ICmdRunner

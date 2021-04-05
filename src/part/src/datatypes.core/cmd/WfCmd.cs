@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static Part;
-
     [ApiHost]
     public readonly struct WfCmd
     {
@@ -20,19 +18,19 @@ namespace Z0
                 root.@throw(string.Format("{0}:Unable to include {1}", nameof(WfCmd), name));
         }
 
-        public static WfCmdExec<K> assign<K>(K kind, Action handler)
+        public static CmdExec<K> assign<K>(K kind, Action handler)
             where K : unmanaged
         {
-            WfCmdExec<K> cmd = (kind, new WfCmdExec(kind.ToString()));
+            CmdExec<K> cmd = (kind, new CmdExec(kind.ToString()));
             assign(cmd.Enclosed.WorkflowName, handler);
             return cmd;
         }
 
-        public static bool find(WfCmdExec cmd, out Action handler)
+        public static bool find(CmdExec cmd, out Action handler)
             => _Lookup.TryGetValue(cmd.WorkflowName, out handler);
 
         [Op]
-        public static bool find(Name name, out WfCmdExec cmd)
+        public static bool find(Name name, out CmdExec cmd)
         {
             if(_Lookup.ContainsKey(name))
             {
@@ -41,12 +39,12 @@ namespace Z0
             }
             else
             {
-                cmd = WfCmdExec.Empty;
+                cmd = CmdExec.Empty;
                 return false;
             }
         }
 
-        public static bool find<K>(K kind, out WfCmdExec<K> cmd)
+        public static bool find<K>(K kind, out CmdExec<K> cmd)
             where K : unmanaged
         {
             if(find(kind.ToString(), out var c))
@@ -56,7 +54,7 @@ namespace Z0
             }
             else
             {
-                cmd = (kind, WfCmdExec.Empty);
+                cmd = (kind, CmdExec.Empty);
                 return false;
             }
         }

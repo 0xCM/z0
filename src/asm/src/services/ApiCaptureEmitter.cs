@@ -102,7 +102,7 @@ namespace Z0
             var emitter = Wf.AsmHostEmitter();
             var decoded = emitter.Emit(host, src, dst);
             if(decoded.Count != 0)
-                AsmServices.MatchAddresses(Wf, extracts, decoded.AsmRoutines);
+                MatchAddresses(extracts, decoded.AsmRoutines);
             return decoded;
        }
 
@@ -142,6 +142,41 @@ namespace Z0
             dst.Encoded = src.Storage;
             dst.Uri = src.Uri.Format();
             return ref dst;
+        }
+
+
+        void MatchAddresses(ApiMemberExtract[] extracted, AsmRoutine[] decoded)
+        {
+            try
+            {
+                var flow = Wf.Running(string.Format("Attempting to match <{0}> routine addresses", extracted.Length));
+                var a = extracted.Select(x => x.Address).ToHashSet();
+                if(a.Count != extracted.Length)
+                {
+                    Wf.Error($"count(Extracted) = {extracted.Length} != {a.Count} = count(set(Extracted))");
+                    return;
+                }
+
+                var b = decoded.Select(f => f.BaseAddress).ToHashSet();
+                if(b.Count != decoded.Length)
+                {
+                    Wf.Error($"count(Decoded) = {decoded.Length} != {b.Count} = count(set(Decoded))");
+                    return;
+                }
+
+                b.IntersectWith(a);
+                if(b.Count != decoded.Length)
+                {
+                    Wf.Error($"count(Decoded) = {decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))");
+                    return;
+                }
+
+                Wf.Ran(flow, string.Format("Matched <{0}> routine addresses", extracted.Length));
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
         }
 
         static ReadOnlySpan<byte> X86TableWidths => new byte[3]{16,80,80};

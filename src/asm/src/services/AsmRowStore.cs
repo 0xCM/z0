@@ -120,6 +120,9 @@ namespace Z0.Asm
         }
 
         public Index<AsmRow> EmitAsmRows(ApiBlockIndex src)
+            => EmitAsmRows(src.Blocks);
+
+        public Index<AsmRow> EmitAsmRows(Index<ApiCodeBlock> src)
         {
             var rows = BuildAsmRows(src);
             var rowsets = @readonly(rows.GroupBy(x => x.Mnemonic).Select(x => AsmEtl.rowset(x.Key, x.Array())).Array());
@@ -130,21 +133,24 @@ namespace Z0.Asm
             return rows;
         }
 
-        public Index<AsmRow> BuildAsmRows(ApiBlockIndex src)
+        public Index<AsmRow> BuildAsmRows(Index<ApiCodeBlock> src)
         {
-            var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(src.BlockCount));
-            var addresses = src.Addresses.View;
-            var count = addresses.Length;
+            var view = src.View;
+            var count = view.Length;
+            var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(count));
             var rows = root.list<AsmRow>();
             for(var i=0u; i<count; i++)
             {
-                var block = src[skip(addresses, i)];
+                ref readonly var block = ref skip(view,i);
                 rows.AddRange(BuildAsmRows(block));
             }
 
             Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
             return rows.ToArray();
         }
+
+        public Index<AsmRow> BuildAsmRows(ApiBlockIndex src)
+            => BuildAsmRows(src.Blocks);
 
         Index<AsmRow> BuildAsmRows(in ApiCodeBlock src)
         {

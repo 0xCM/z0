@@ -10,12 +10,12 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class WfCmdIndex : Dictionary<ulong,WfCmdExec>
+    public sealed class CmdIndex : Dictionary<ulong,CmdExec>
     {
-        public static WfCmdIndex create()
-            => new WfCmdIndex();
+        public static CmdIndex create()
+            => new CmdIndex();
 
-        public WfCmdExec<K> Include<K>(K kind, WfCmdExec cmd)
+        public CmdExec<K> Include<K>(K kind, CmdExec cmd)
             where K : unmanaged
         {
 
@@ -23,7 +23,7 @@ namespace Z0
             return (kind, cmd);
         }
 
-        public WfCmdExec<K> Include<K>(WfCmdExec<K> cmd)
+        public CmdExec<K> Include<K>(CmdExec<K> cmd)
             where K : unmanaged
         {
             this[bw64(cmd.Kind)] = cmd;

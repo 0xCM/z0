@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
     using static HexFormatSpecs;
-    using static TextRules;
     using static root;
     using static memory;
 
@@ -19,32 +18,6 @@ namespace Z0
     {
         public static HexByteParser Service
             => default(HexByteParser);
-
-        /// <summary>
-        /// Parses a single hex digit
-        /// </summary>
-        /// <param name="c">The source character</param>
-        [MethodImpl(Inline), Op]
-        public static bool parse(char c, out byte dst)
-        {
-            if(HexDigitTest.scalar(c))
-            {
-                dst = (byte)((byte)c - MinScalarCode);
-                return true;
-            }
-            else if(HexDigitTest.upper(c))
-            {
-                dst = (byte)((byte)c - MinCharCodeU + 0xA);
-                return true;
-            }
-            else if(HexDigitTest.lower(c))
-            {
-                dst = (byte)((byte)c - MinCharCodeL + 0xa);
-                return true;
-            }
-            dst = byte.MaxValue;
-            return false;
-        }
 
         [Op]
         public static bool parse(string src, out BinaryCode dst)
@@ -78,70 +51,6 @@ namespace Z0
             {
                 return unparsed<byte>(src, e);
             }
-        }
-
-        public static int parse(string src, Span<byte> dst)
-        {
-            const char Null = (char)0;
-            try
-            {
-                var input = span(src);
-                var maxbytes = dst.Length;
-                var j=0;
-                var count = input.Length;
-                var c0 = Null;
-                var c1 = Null;
-                for(var i=0; i<count; i++)
-                {
-                    if(j == maxbytes)
-                        return j;
-
-                    ref readonly var c = ref skip(input,i);
-                    if(Query.whitespace(c))
-                    {
-                        if(c0 != Null || c1 != Null)
-                        {
-                            if(parse(c0, c1, out seek(dst,j)))
-                                j++;
-                            c0 = Null;
-                            c1 = Null;
-                        }
-                    }
-
-                    else
-                    {
-                        if(c0 == Null)
-                            c0 = c;
-                        else if(c1 == Null)
-                            c1 = c;
-                        else
-                        {
-                            if(parse(c0, c1, out seek(dst,j)))
-                                j++;
-                            c0 = Null;
-                            c1 = Null;
-                        }
-                    }
-                }
-
-                return j;
-            }
-            catch(Exception)
-            {
-                return 0;
-            }
-        }
-
-        [Op]
-        public static bool parse(char c0, char c1, out byte dst)
-        {
-            if(parse(c0, out var d0) && parse(c1, out var d1))
-            {
-                dst = (byte)(d0 | (d1 << 8));
-                return true;
-            }
-            dst = 0;
-            return false;
         }
 
         /// <summary>

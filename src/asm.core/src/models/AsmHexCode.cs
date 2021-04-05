@@ -88,6 +88,15 @@ namespace Z0.Asm
         public static implicit operator AsmHexCode(string src)
             => api.hexcode(src);
 
+        [MethodImpl(Inline)]
+        public static bool operator ==(AsmHexCode a, AsmHexCode b)
+            => a.Equals(b);
+
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(AsmHexCode a, AsmHexCode b)
+            => !a.Equals(b);
+
         public static AsmHexCode Empty
         {
             [MethodImpl(Inline)]

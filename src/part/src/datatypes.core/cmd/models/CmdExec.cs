@@ -10,40 +10,40 @@ namespace Z0
     using static Part;
 
     [Cmd(CmdName)]
-    public struct WfCmdExec : ICmd<WfCmdExec>
+    public struct CmdExec : ICmd<CmdExec>
     {
         public const string CmdName = "exec-wf";
 
         public Name WorkflowName;
 
         [MethodImpl(Inline)]
-        public WfCmdExec(Name name)
+        public CmdExec(Name name)
             => WorkflowName = name;
 
         [MethodImpl(Inline)]
-        public bool Equals(WfCmdExec src)
+        public bool Equals(CmdExec src)
             => WorkflowName.Equals(src.WorkflowName);
 
         public override int GetHashCode()
             => WorkflowName.GetHashCode();
 
         public override bool Equals(object src)
-            => src is WfCmdExec c && Equals(c);
+            => src is CmdExec c && Equals(c);
 
         [MethodImpl(Inline)]
-        public static implicit operator WfCmdExec(string name)
-            => new WfCmdExec(name);
+        public static implicit operator CmdExec(string name)
+            => new CmdExec(name);
 
         [MethodImpl(Inline)]
-        public static implicit operator WfCmdExec(Name name)
-            => new WfCmdExec(name);
+        public static implicit operator CmdExec(Name name)
+            => new CmdExec(name);
 
-        public static bool operator ==(WfCmdExec a, WfCmdExec b)
+        public static bool operator ==(CmdExec a, CmdExec b)
             => a.Equals(b);
 
-        public static bool operator !=(WfCmdExec a, WfCmdExec b)
+        public static bool operator !=(CmdExec a, CmdExec b)
             => !a.Equals(b);
 
-        public static WfCmdExec Empty => new WfCmdExec(Name.Empty);
+        public static CmdExec Empty => new CmdExec(Name.Empty);
     }
 }
