@@ -285,7 +285,7 @@ namespace Z0
             => (byte)(U.MaxLiteral & x);
 
         static BitFormat FormatConfig3
-            => BitFormatter.limited(U.Width,U.Width);
+            => BitFormatter.limited(U.Width, U.Width);
 
         [MethodImpl(Inline)]
         public static string format(U src)

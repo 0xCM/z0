@@ -58,15 +58,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-        {
-            var dst = text.buffer();
-            dst.Append(Rm.Format());
-            dst.Append(Chars.Space);
-            dst.Append(Reg.Format());
-            dst.Append(Chars.Space);
-            dst.Append(Mod.Format());
-            return dst.ToString();
-        }
+            => AsmRender.format(this);
 
 
         public override string ToString()

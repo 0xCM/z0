@@ -12,6 +12,46 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmRender : WfService<AsmRender>
     {
+        readonly BitFormat Bf1;
+
+        readonly BitFormat Bf2;
+
+        readonly BitFormat Bf3;
+
+        readonly BitFormat Bf4;
+
+        readonly BitFormat Bf5;
+
+        readonly BitFormat Bf6;
+
+        readonly BitFormat Bf7;
+
+        readonly BitFormat Bf8;
+
+        public AsmRender()
+        {
+            Bf1 = BitFormatOptions.bitmax(uint1.Width, uint1.Width);
+            Bf2 = BitFormatOptions.bitmax(uint2.Width, uint2.Width);
+            Bf3 = BitFormatOptions.bitmax(uint3.Width, uint3.Width);
+            Bf4 = BitFormatOptions.bitmax(uint4.Width, uint4.Width);
+            Bf5 = BitFormatOptions.bitmax(uint5.Width, uint5.Width);
+            Bf6 = BitFormatOptions.bitmax(uint6.Width, uint6.Width);
+            Bf7 = BitFormatOptions.bitmax(uint7.Width, uint7.Width);
+            Bf8 = BitFormatOptions.bitmax(uint8T.Width, uint8T.Width);
+        }
+
+        [Op]
+        public static string format(ModRm src)
+        {
+            var dst = text.buffer();
+            dst.Append(src.Rm.Format());
+            dst.Append(Chars.Space);
+            dst.Append(src.Reg.Format());
+            dst.Append(Chars.Space);
+            dst.Append(src.Mod.Format());
+            return dst.ToString();
+        }
+
         [Op]
         public static string format(in AsmComment src)
             => src.Content.IsNonEmpty ? string.Format("; {0}",src.Content) : EmptyString;

@@ -25,7 +25,6 @@ namespace Z0.Asm
         {
             Catalog = AsmCatalogEtl.create(Wf);
 
-            Asm = Wf.AsmContext();
             ApiServices = Wf.ApiServices();
             AsmServices = Wf.AsmServices();
             Forms = root.hashset<AsmFormExpr>();
@@ -38,8 +37,6 @@ namespace Z0.Asm
         AsmSigs Sigs;
 
         AsmCatalogEtl Catalog;
-
-        IAsmContext Asm;
 
         ApiServices ApiServices;
 
