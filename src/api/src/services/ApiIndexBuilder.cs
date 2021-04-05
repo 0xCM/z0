@@ -10,6 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static memory;
+    using static Part;
 
     [Service(typeof(IApiIndexBuilder))]
     public class ApiIndexBuilder : WfService<ApiIndexBuilder>, IApiIndexBuilder
@@ -63,6 +64,7 @@ namespace Z0
             Wf.Ran(flow, Product.CalcMetrics());
             return Product;
         }
+
 
         void Include(in ApiHexRow src)
         {

@@ -27,6 +27,11 @@ namespace Z0.Asm
             Index = new Dictionary<AsmMnemonic, ArrayBuilder<AsmRow>>();
         }
 
+        protected override void OnContextCreated()
+        {
+
+        }
+
         [MethodImpl(Inline), Op]
         public Index<AsmRow> Resequence(Index<AsmRow> src)
         {

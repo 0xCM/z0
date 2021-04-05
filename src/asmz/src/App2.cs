@@ -989,9 +989,17 @@ namespace Z0.Asm
 
         }
 
+
+        public Index<ApiCodeBlock> LoadApiBlocks()
+        {
+            return Wf.ApiHex().ApiBlocks();
+        }
         public void Run()
         {
-            CaptureSelectedRoutines();
+            //CaptureSelectedRoutines();
+
+            var blocks = LoadApiBlocks();
+
 
             // var parser = CultParser.create(Wf);
             // var input = Db.ToolOutDir(Toolsets.cult) + FS.file("cult", FS.Asm);

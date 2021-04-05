@@ -119,9 +119,14 @@ namespace Z0.Asm
 
         public Index<XedForm> EmitForms()
         {
+            var dst = Db.AsmCatalogFile(FS.file("xed-forms", FS.Csv));
+            return EmitForms(dst);
+        }
+
+        public Index<XedForm> EmitForms(FS.FilePath dst)
+        {
             var records = LoadForms();
             var src = records.View;
-            var dst = Db.AsmCatalogFile(FS.file("xed-forms", FS.Csv));
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();

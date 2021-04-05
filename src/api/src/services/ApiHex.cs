@@ -13,6 +13,37 @@ namespace Z0
     [ApiHost]
     public class ApiHex : WfService<ApiHex>
     {
+        public Index<ApiCodeBlock> ApiBlocks()
+        {
+            var parsed = Db.ParsedExtractFiles();
+            var count = parsed.Length;
+            if(count == 0)
+                return Index<ApiCodeBlock>.Empty;
+
+            var flow = Wf.Running(string.Format("Loading api blocks from {0} files", count));
+            var src = parsed.View;
+            var blocks = root.list<ApiCodeBlock>(32000);
+            var counter = 0;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(src,i);
+                var loaded = Rows(path);
+                var rowcount = loaded.Length;
+                if(rowcount != 0)
+                {
+                    var rows = loaded.View;
+                    for(var j=0; j<rowcount; j++)
+                        blocks.Add(block(skip(rows, j)));
+                }
+
+                counter += rowcount;
+            }
+
+            Wf.Ran(flow, string.Format("Loaded {0} api blocks", counter));
+
+            return blocks.ToArray();
+        }
+
         [Op]
         public static IApiHexReader reader(IWfShell wf)
             => ApiHexReader.create(wf);
@@ -54,7 +85,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiCodeBlock block(ApiHexRow src)
+        public static ApiCodeBlock block(in ApiHexRow src)
             => new ApiCodeBlock(src.Address, src.Uri, src.Data);
 
         public Index<ApiHexRow> Rows(FS.FilePath src)
@@ -108,20 +139,25 @@ namespace Z0
             }
         }
 
-        public Index<ApiHexIndexRow> EmitHexIndex(in ApiBlockIndex src)
+        public Index<ApiHexIndexRow> EmitIndex(ApiBlockIndex src)
         {
             var dst = Db.IndexFile(ApiHexIndexRow.TableId);
-            var flow = Wf.EmittingFile(dst);
-            var emitted = EmitHexIndex(src, dst);
-            Wf.EmittedFile(flow,1);
-            return emitted;
+            return EmitIndex(src.Blocks, dst);
         }
 
         [Op]
-        Index<ApiHexIndexRow> EmitHexIndex(in ApiBlockIndex src, FS.FilePath dst)
+        public Index<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src)
         {
-            Array.Sort(src.Blocks.Storage);
-            var blocks = src.Blocks.View;
+            var dst = Db.IndexFile(ApiHexIndexRow.TableId);
+            return EmitIndex(src, dst);
+        }
+
+        [Op]
+        public Index<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingTable<ApiHexIndexRow>(dst);
+            Array.Sort(src.Storage);
+            var blocks = src.View;
             var count = blocks.Length;
             var buffer = sys.alloc<ApiHexIndexRow>(count);
             var target = span(buffer);
@@ -139,6 +175,8 @@ namespace Z0
                 record.Uri = block.Uri;
                 emitter.Emit(record);
             }
+
+            Wf.EmittedTable(flow, count);
             return buffer;
         }
 
