@@ -25,6 +25,8 @@ namespace Z0.Asm
             dst.Kind = opkind(fx, index);
             dst.Branch = IceOpTest.isBranch(dst.Kind) ? branch(@base, fx, branch(fx,index)) : default;
             dst.ImmInfo = imminfo(fx, index);
+            dst.Memory = IceOpTest.isMem(dst.Kind) ? meminfo(fx,index) : default;
+            dst.Register = IceOpTest.isRegister(dst.Kind) ? register(fx,index) : default;
             return dst;
         }
     }

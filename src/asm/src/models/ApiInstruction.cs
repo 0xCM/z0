@@ -64,7 +64,7 @@ namespace Z0.Asm
             get => Instruction.FormattedInstruction;
         }
 
-        public AsmInstructionSpecExprLegacy Specifier
+        public AsmFormExpr AsmForm
             => Instruction.Specifier;
 
         public MemoryAddress IP

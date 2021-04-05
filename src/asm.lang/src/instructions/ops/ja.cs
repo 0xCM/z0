@@ -11,6 +11,7 @@ namespace Z0.Asm
     using static AsmInstructions;
     using static Hex8Seq;
     using static AsmRegOps;
+    using static AsmHexCodes;
 
     partial struct AsmStatement
     {
@@ -20,7 +21,7 @@ namespace Z0.Asm
         /// <param name="cb"></param>
         [MethodImpl(Inline), Op]
         public Ja ja(Address8 cb)
-            => Builder.ja(AsmHexCodes.define(x77, cb));
+            => Builder.ja(asmhex(x77, cb));
 
         /// <summary>
         /// (JA rel32) 0F 87 cd
@@ -28,6 +29,6 @@ namespace Z0.Asm
         /// <param name="cb"></param>
         [MethodImpl(Inline), Op]
         public Ja ja(Address32 cd)
-            => Builder.ja(AsmHexCodes.define(x77, cd));
+            => Builder.ja(asmhex(x77, cd));
     }
 }

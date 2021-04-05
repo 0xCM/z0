@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate256x16i(Vector128<sbyte> src)
-            => vconcat(vmaplo128x16i(src), vmaphi128x16i(src));
+            => vconcat(vlo128x16i(src), vhi128x16i(src));
 
         /// <summary>
         /// VPMOVSXBW ymm, m128

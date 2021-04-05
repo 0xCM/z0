@@ -183,10 +183,10 @@ namespace Z0.Asm
             record.LocalOffset = offset;
             record.GlobalOffset = NextOffset;
             record.Mnemonic = src.AsmMnemonic;
-            record.OpCode = asm.opcode(AsmOpCodes.conform(src.Specifier.OpCode.ToString()));
+            record.OpCode = src.Specifier.OpCode;
             record.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
             record.Statement = src.FormattedInstruction;
-            record.Instruction = src.Specifier.Sig;
+            record.Instruction = src.Specifier.Sig.Format();
             record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
             record.OpCodeId = src.Code.ToString();
             if(Index.TryGetValue(src.AsmMnemonic, out var builder))

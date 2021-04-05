@@ -44,7 +44,7 @@ namespace Z0
         public static void EmitBuildArchiveList(IWfShell wf, string label)
         {
             var builder = wf.CmdBuilder();
-            var archive = Archives.runtime(wf);
+            var archive = WfShell.RuntimeArchive(wf);
             var types = array(FS.Extensions.Dll, FS.Extensions.Exe, FS.Extensions.Pdb, FS.Extensions.Lib, FS.Extensions.Xml, FS.Extensions.Json);
             var cmd = builder.ListFiles(label + ".build-artifacts", archive.Root, types);
             wf.Router.Dispatch(cmd);

@@ -65,7 +65,7 @@ namespace Z0.Asm
             writer.WriteLine(RP.PageBreak120);
             root.iter(gHexRows, r => writer.WriteLine(r.Uri));
 
-            var mblocks = root.map(mHexRows.View, ApiHex.block);
+            var mblocks = root.map(mHexRows.Storage, ApiHex.block);
             check_unary_ops(mblocks);
         }
 

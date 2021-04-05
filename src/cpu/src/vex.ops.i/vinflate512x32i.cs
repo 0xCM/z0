@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<int> vinflate512x32i(Vector128<sbyte> src)
-            => (vmaplo256x32i(src), vmaphi256x32i(src));
+            => (vlo256x32i(src), vhi256x32i(src));
 
         /// <summary>
         /// 16x16i -> 16x32i
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<int> vinflate512x32i(Vector256<short> src)
-            => (vmaplo256x32i(src), vmaphi256x32i(src));
+            => (vlo256x32i(src), vhi256x32i(src));
 
         /// <summary>
         /// VPMOVSXWD ymm, m128

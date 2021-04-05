@@ -608,7 +608,7 @@ namespace Z0.Asm
         void EmitImageHeaders()
         {
             var svc = ImageDataEmitter.create(Wf);
-            svc.EmitImageHeaders(Archives.runtime(Wf));
+            svc.EmitImageHeaders(WfShell.RuntimeArchive(Wf));
         }
 
         void Receive(in ImageContent src)
@@ -996,7 +996,7 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            //CaptureSelectedRoutines();
+            CaptureSelectedRoutines();
 
             var blocks = LoadApiBlocks();
 
@@ -1027,7 +1027,6 @@ namespace Z0.Asm
 
             //var rows = LoadCilRows();
             //Wf.MsilPipe().LoadCapturedCil();
-
 
         }
 

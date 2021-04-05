@@ -85,7 +85,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiCodeBlock block(in ApiHexRow src)
+        public static ApiCodeBlock block(ApiHexRow src)
             => new ApiCodeBlock(src.Address, src.Uri, src.Data);
 
         public Index<ApiHexRow> Rows(FS.FilePath src)

@@ -83,7 +83,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(AsmInstructionSpecExprLegacy src, byte[] encoded, string sep)
+        public static string format(AsmFormExpr src, byte[] encoded, string sep)
             => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
 
         [Op]
@@ -100,7 +100,7 @@ namespace Z0.Asm
             else
                 dst.Append(string.Format(RelativePattern, label.Format(), src.Formatted.PadRight(config.InstructionPad, Space)));
 
-            dst.Append(asm.comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
+            dst.Append(asm.comment(format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
         }
 
         /// <summary>

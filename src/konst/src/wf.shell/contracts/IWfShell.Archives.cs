@@ -7,6 +7,6 @@ namespace Z0
     partial interface IWfShell
     {
         IRuntimeArchive RuntimeArchive()
-            => Archives.runtime(this);
+            => WfShell.RuntimeArchive(this);
     }
 }

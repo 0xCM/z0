@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Part;
@@ -30,7 +29,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ushort> vinflate512x16u(Vector256<byte> src)
-             => (vmaplo256x16u(src), vmaphi256x16u(src));
+             => (vlo256x16u(src), vhi256x16u(src));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128

@@ -16,47 +16,11 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmOpCodes
     {
-        public static string conform(string src)
-            => src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +");
+        public static AsmOpCodeExpr conform(string src)
+            => asm.opcode(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
 
-        public static AsmOpCode create()
-            => new AsmOpCode();
+        public static AsmHexCode create()
+            => new AsmHexCode();
 
-        [MethodImpl(Inline), Op]
-        public static AsmOpCode RexW(byte data)
-        {
-            var dst = create();
-            dst.Byte0 = (byte)REX.Rex48;
-            dst.Byte1 = data;
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmOpCode RexW(EscapeCode escape, byte data)
-        {
-            var dst = new AsmOpCode();
-            dst.Byte0 = (byte)REX.Rex48;
-            dst.Byte1 = (byte)escape;
-            dst.Byte2 = data;
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmOpCode Lock(byte data)
-        {
-            var dst = create();
-            dst.Byte0 = (byte)L.LOCK;
-            dst.Byte1 = data;
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmOpCode Escape(EscapeCode escape, byte data)
-        {
-            var dst = create();
-            dst.Byte0 = (byte)escape;
-            dst.Byte1 = data;
-            return dst;
-        }
     }
 }

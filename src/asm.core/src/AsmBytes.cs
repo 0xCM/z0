@@ -38,6 +38,10 @@ namespace Z0.Asm
             where T : unmanaged
                 => first(recover<T>(hexbytes(src)));
 
+        [MethodImpl(Inline), Op]
+        public static AsmHexCode hexcode()
+            => default;
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static AsmHexCode hexcode<T>(T src)
             where T : unmanaged

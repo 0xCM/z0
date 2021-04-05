@@ -8,6 +8,10 @@ namespace Z0
 
     partial class WfShell
     {
+
+        public static IRuntimeArchive RuntimeArchive(IWfShell wf)
+            => Z0.RuntimeArchive.create(wf.Controller.ImageDir);
+
         [Op]
         public static Index<ICmdReactor> reactors(IWfShell wf)
         {

@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vmask128<T>(ushort src)
             where T : unmanaged
-                => generic<T>(v8u(cpu.vmask128(src)));
+                => generic<T>(v8u(cpu.vinflate128x8u(src)));
 
         /// <summary>
         /// Distributes each bit of the source to a specified bit of each byte in a 128-bit target vector
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vmask128<T>(ushort src, byte index)
             where T : unmanaged
-                => generic<T>(v8u(cpu.vmask128(src, index)));
+                => generic<T>(v8u(cpu.vinflate128x8u(src, index)));
 
         /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vmask256<T>(uint src)
             where T : unmanaged
-                => generic<T>(v8u(cpu.vmask256(src)));
+                => generic<T>(v8u(cpu.vinflate256x8u(src)));
 
         /// <summary>
         /// Distributes each bit of the source to a specified bit of each byte in a 256-bit target vector
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vmask256<T>(uint src, byte index)
             where T : unmanaged
-                => generic<T>(v8u(cpu.vmask256(src,index)));
+                => generic<T>(v8u(cpu.vinflate256x8u(src,index)));
 
         /// <summary>
         /// int _mm_movemask_epi8 (__m128i a) PMOVMSKB reg, xmm

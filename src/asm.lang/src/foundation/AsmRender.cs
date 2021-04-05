@@ -53,6 +53,18 @@ namespace Z0.Asm
         }
 
         [Op]
+        public static string format(Sib src)
+        {
+            var dst = text.buffer();
+            dst.Append(src.Base.Format());
+            dst.Append(Chars.Space);
+            dst.Append(src.Index.Format());
+            dst.Append(Chars.Space);
+            dst.Append(src.Scale.Format());
+            return dst.ToString();
+        }
+
+        [Op]
         public static string format(in AsmComment src)
             => src.Content.IsNonEmpty ? string.Format("; {0}",src.Content) : EmptyString;
 

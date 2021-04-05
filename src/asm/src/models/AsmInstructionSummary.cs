@@ -32,21 +32,21 @@ namespace Z0.Asm
         /// <summary>
         /// The instruction string paired with the op code
         /// </summary>
-        public AsmInstructionSpecExprLegacy Spec {get;}
+        public AsmFormExpr AsmForm {get;}
 
         /// <summary>
         /// Describes the instruction operands
         /// </summary>
-        public IceOperandInfo[] Operands {get;}
+        public Index<IceOperandInfo> Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionSummary(MemoryAddress @base, uint offset, string content, AsmInstructionSpecExprLegacy spec, IceOperandInfo[] operands, byte[] encoded)
+        public AsmInstructionSummary(MemoryAddress @base, uint offset, string content, AsmFormExpr form, IceOperandInfo[] operands, byte[] encoded)
         {
             Encoded = new CodeBlock(@base, encoded);
             Offset = offset;
             Formatted = content;
             Operands = operands;
-            Spec = spec;
+            AsmForm = form;
         }
     }
 }

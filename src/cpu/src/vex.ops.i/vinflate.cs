@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct cpu
     {
-        [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vinflatelo256x16u(Vector256<byte> src)
-            => vinflate256x16u(vlo(src));
-
-        [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vinflatehi256x16u(Vector256<byte> src)
-            => vinflate256x16u(vhi(src));
-
         /// <summary>
         /// 32x8i -> (8x32i, 8x32i, 8x32i, 8x32i)
         /// </summary>
@@ -30,10 +22,10 @@ namespace Z0
         public static Vector1024<int> vinflate1024x32i(Vector256<sbyte> src)
         {
             (var lo, var hi) = vinflate512x16i(src);
-            var x0 = vmaplo256x32i(lo);
-            var x1 = vmaphi256x32i(lo);
-            var x2 = vmaplo256x32i(hi);
-            var x3 = vmaphi256x32i(hi);
+            var x0 = vlo256x32i(lo);
+            var x1 = vhi256x32i(lo);
+            var x2 = vlo256x32i(hi);
+            var x3 = vhi256x32i(hi);
             return (x0,x1,x2,x3);
         }
 

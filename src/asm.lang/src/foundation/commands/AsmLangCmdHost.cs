@@ -76,11 +76,11 @@ namespace Z0.Asm
         [Action(K.ShowRexBits)]
         void ShowRexBits()
         {
-            var bits = Rex.bits();
+            var bits = AsmEncoding.RexPrefixBits();
             using var log = OpenShowLog("rexbits");
             var count = bits.Length;
             for(var i=0; i<count; i++)
-                Show(Rex.FormatRow(skip(bits,i)), log);
+                Show(AsmEncoding.describe(skip(bits,i)), log);
         }
     }
 }

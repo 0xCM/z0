@@ -20,6 +20,13 @@ namespace Z0.Asm
 
         public Index<AsmSigOperandExpr> Operands {get;}
 
+        public AsmSigExpr(AsmMnemonic mnemonic, TextBlock formatted)
+        {
+            Data = formatted;
+            Mnemonic = mnemonic;
+            Operands = Index<AsmSigOperandExpr>.Empty;
+        }
+
         [MethodImpl(Inline)]
         public AsmSigExpr(AsmMnemonic monic, AsmSigOperandExpr[] operands, TextBlock formatted)
             : this()

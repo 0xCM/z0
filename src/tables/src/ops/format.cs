@@ -12,6 +12,41 @@ namespace Z0
 
     partial struct Tables
     {
+        [Op]
+        public static string format(ListedFiles src)
+        {
+            var dst = text.buffer();
+            format(src,dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static void format(ListedFiles src, ITextBuffer dst)
+        {
+            var records = src.View;
+            var count = records.Length;
+            var formatter = Tables.formatter<ListedFile>();
+            dst.AppendLine(formatter.FormatHeader());
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var listed = ref src[i];
+                dst.AppendLine(formatter.Format(listed));
+            }
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void format(ListedFiles src, Span<string> dst)
+        {
+            var count = src.Count;
+            var listed = src.View;
+            var formatter = Tables.formatter<ListedFile>();
+            ref readonly var file = ref src[0];
+            ref var formatted = ref first(dst);
+
+            for(var i=0u; i<count; i++)
+                seek(formatted,i) = formatter.Format(skip(file,i));
+        }
+
         /// <summary>
         /// Formats a <see cref='RowHeader'/>
         /// </summary>

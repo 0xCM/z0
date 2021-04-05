@@ -11,18 +11,19 @@ namespace Z0
 
     public readonly struct MemoryScale : ITextual
     {
+        [MethodImpl(Inline)]
+        public static MemoryScale from(byte value)
+            => from((ScaleFactor)value);
+
+        [MethodImpl(Inline)]
+        public static MemoryScale from(ScaleFactor factor)
+            => new MemoryScale(factor);
+
         public ScaleFactor Factor {get;}
 
         [MethodImpl(Inline)]
         public MemoryScale(ScaleFactor kind)
             => Factor = kind;
-
-        [MethodImpl(Inline)]
-        public MemoryAddress Apply(MemoryAddress src)
-            =>(ulong)Factor * src;
-
-        public static MemoryScale Empty
-            => new MemoryScale(0);
 
         public bool IsEmpty
         {
@@ -54,12 +55,26 @@ namespace Z0
             get => (byte) Factor;
         }
 
-        public MemoryScale Zero
-            => Empty;
+       public string Format()
+            => IsNonEmpty ? ((byte)Factor).ToString() : EmptyString;
+
+       public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator *(MemoryScale scale, MemoryAddress address)
+            => (ulong)scale.Factor * address;
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator *(MemoryAddress address, MemoryScale scale)
+            => (ulong)scale.Factor * address;
+
+        public static MemoryScale Empty
+            => new MemoryScale(0);
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryScale(int src)
-            => From(src);
+            => from((byte)src);
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryScale(ScaleFactor src)
@@ -68,20 +83,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ScaleFactor(MemoryScale src)
             => src.Factor;
-
-        [MethodImpl(Inline)]
-        public static MemoryScale From(int value)
-        {
-            if(value == 1 || value == 2 || value == 4 || value == 8)
-                return new MemoryScale((ScaleFactor)value);
-            else
-                return new MemoryScale(0);
-        }
-
-        public string Format()
-            => IsNonEmpty ? ((byte)Factor).ToString() : EmptyString;
-
-        public override string ToString()
-            => Format();
     }
 }

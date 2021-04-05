@@ -25,6 +25,6 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector512<long> vinflate512x64i(Vector256<int> src)
-            => (vmaplo256x64i(src), vmaphi256x64i(src));
+            => (vlo256x64i(src), vhi256x64i(src));
     }
 }
