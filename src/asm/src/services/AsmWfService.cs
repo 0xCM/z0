@@ -12,7 +12,7 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             Asm = Wf.AsmContext();
-            _Etl = root.lazy(Wf.AsmRowEtl);
+            _Etl = root.lazy(Wf.AsmEtl);
             OnContextCreated();
         }
 

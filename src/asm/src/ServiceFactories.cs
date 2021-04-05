@@ -16,8 +16,8 @@ namespace Z0
         public static AsmDetailPipe AsmDetailPipe(this IWfShell wf)
             => Asm.AsmDetailPipe.create(wf);
 
-        public static AsmEtl AsmRowEtl(this IWfShell wf)
-            => AsmEtl.create(wf);
+        public static AsmEtl AsmEtl(this IWfShell wf)
+            => Asm.AsmEtl.create(wf);
 
         public static ApiCaptureArchive ApiCaptureArchive(this IWfShell wf)
             => Z0.ApiCaptureArchive.create(wf);

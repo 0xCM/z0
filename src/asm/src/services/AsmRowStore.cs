@@ -116,12 +116,27 @@ namespace Z0.Asm
 
         public Index<AsmRow> EmitAsmRows(ApiBlockIndex src)
         {
+            var rows = BuildAsmRows(src);
+            var rowsets = @readonly(rows.GroupBy(x => x.Mnemonic).Select(x => AsmEtl.rowset(x.Key, x.Array())).Array());
+            var count = rowsets.Length;
+            var etl = Wf.AsmEtl();
+            for(var i=0; i<count; i++)
+                etl.Emit(skip(rowsets,i));
+            return rows;
+        }
+
+        public Index<AsmRow> BuildAsmRows(ApiBlockIndex src)
+        {
             var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(src.BlockCount));
             var addresses = src.Addresses.View;
             var count = addresses.Length;
             var rows = root.list<AsmRow>();
             for(var i=0u; i<count; i++)
-                rows.AddRange(BuildAsmRows(src[skip(addresses, i)]));
+            {
+                var block = src[skip(addresses, i)];
+                rows.AddRange(BuildAsmRows(block));
+            }
+
             Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
             return rows.ToArray();
         }

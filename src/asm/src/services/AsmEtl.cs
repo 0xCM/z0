@@ -41,6 +41,27 @@ namespace Z0.Asm
             return count;
         }
 
+        public uint Emit(AsmRowSet<AsmMnemonic> src)
+        {
+            var count = src.Count;
+            if(count != 0)
+            {
+                var dst = Db.Table(AsmRow.TableId, src.Key.ToString());
+                var flow = Wf.EmittingTable<AsmRow>(dst);
+                var records = span(src.Sequenced);
+                var formatter = Tables.formatter<AsmRow>(32);
+                using var writer = dst.Writer();
+                writer.WriteLine(formatter.FormatHeader());
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var record = ref skip(records,i);
+                    writer.WriteLine(formatter.Format(record));
+                }
+                Wf.EmittedTable(flow, count);
+            }
+            return count;
+        }
+
         [Op]
         public Index<ApiInstruction> ApiInstructions(ApiCodeBlock code, IceInstruction[] src)
             => ToApiInstructions(code,src);
