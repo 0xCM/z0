@@ -139,10 +139,18 @@ namespace Z0.Asm
             return summary;
         }
 
+        FS.FilePath DetailPath(AsmMnemonic src)
+        {
+            var mnemonic = src.Format(MnemonicCase.Lowercase);
+            var file = FS.file(string.Format("cult.{0}", mnemonic), FS.Asm);
+            return DetailRoot + file;
+        }
+
         void EmitDetails(in CultSummaryRecord summary)
         {
             var mnemonic = summary.Mnemonic.Format(MnemonicCase.Lowercase);
-            var path = DetailRoot + FS.file(mnemonic, FS.Asm);
+            //var path = DetailRoot + FS.file(mnemonic, FS.Asm);
+            var path = DetailPath(summary.Mnemonic);
             using var writer = path.Writer(true);
             writer.WriteLine();
             writer.WriteLine(comment(summary.Content));

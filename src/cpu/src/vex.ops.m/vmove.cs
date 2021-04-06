@@ -12,8 +12,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse2.X64;
-    using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse.X64;
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static Part;
     using static memory;
@@ -351,46 +349,6 @@ namespace Z0
         public static Vector256<long> vmove4x64i(Vector128<uint> src, W256 wDst)
             => ConvertToVector256Int64(src);
 
-        /// <summary>
-        /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
-        /// 4x64u -> 4x32u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vconvert32u(Vector256<ulong> src, W128 w)
-            => v32u(ConvertToVector128Int32(v64f(src)));
 
-        /// <summary>
-        /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
-        /// (2x64u,2x64u) -> 4x32u
-        /// </summary>
-        /// <param name="lo">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vconvert32u(Vector128<ulong> lo, Vector128<ulong> hi, W128 w)
-            => vconvert32u(vconcat(lo, hi), w);
-
-        /// <summary>
-        /// 16x8i -> (8x16u, 8x16u)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="lo">The first target vector</param>
-        /// <param name="hi">The second target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vmove16x16u(Vector128<sbyte> src, W256 w)
-            => v16u(ConvertToVector256Int16(src));
-
-        /// <summary>
-        /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
-        /// 16x8i -> 16x16u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<short> vmove16x16i(Vector128<sbyte> src, W256 w)
-            => ConvertToVector256Int16(src);
     }
 }

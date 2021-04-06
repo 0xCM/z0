@@ -50,6 +50,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflatehi256x16u(Vector256<byte> src)
             => vinflate256x16u(vhi(src));
-
     }
 }

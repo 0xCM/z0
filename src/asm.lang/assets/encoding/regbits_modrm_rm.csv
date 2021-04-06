@@ -1,62 +1,23 @@
 # ModRm.rm Prefix Encodings, AMD Vol4 Table 1-10
-| rm    | mod | Encoded |
-| rAX   | 11  | 000     |
-| rCX   | 11  | 001     |
-| rDX   | 11  | 010     |
-| rBX   | 11  | 011     |
-| rSP   | 11  | 100     |
-| rBP   | 11  | 101     |
-| rSI   | 11  | 110     |
-| DI    | 11  | 111     |
-| AH    | 11  | 100     |
-| CH    | 11  | 101     |
-| H     | 11  | 110     |
-| H     | 11  | 111     |
-| MMX0  | 11  | 000     |
-| MMX1  | 11  | 001     |
-| MMX2  | 11  | 010     |
-| MMX3  | 11  | 011     |
-| MMX4  | 11  | 100     |
-| MMX5  | 11  | 101     |
-| MMX6  | 11  | 110     |
-| MMX7  | 11  | 111     |
-| XMM0  | 11  | 000     |
-| XMM1  | 11  | 001     |
-| XMM2  | 11  | 010     |
-| XMM3  | 11  | 011     |
-| XMM4  | 11  | 100     |
-| XMM5  | 11  | 101     |
-| XMM6  | 11  | 110     |
-| XMM7  | 11  | 111     |
-| YMM0  | 11  | 000     |
-| YMM1  | 11  | 001     |
-| YMM2  | 11  | 010     |
-| YMM3  | 11  | 011     |
-| YMM4  | 11  | 100     |
-| YMM5  | 11  | 101     |
-| YMM6  | 11  | 110     |
-| YMM7  | 11  | 111     |
-| [rAX] | 00  | 000     |
-| [rCX] | 00  | 001     |
-| [rDX] | 00  | 010     |
-| [rBX] | 00  | 011     |
-| SIB   | 00  | 100     |
-| [rBP] | 00  | 101     |
-| [rSI] | 00  | 110     |
-| [rDI] | 00  | 111     |
-| [rAX] | 01  | 000     |
-| [rCX] | 01  | 001     |
-| [rDX] | 01  | 010     |
-| [rBX] | 01  | 011     |
-| SIB   | 01  | 100     |
-| [rBP] | 01  | 101     |
-| [rSI] | 01  | 110     |
-| [rDI] | 01  | 111     |
-| [rAX] | 10  | 000     |
-| [rCX] | 10  | 001     |
-| [rDX] | 10  | 010     |
-| [rBX] | 10  | 011     |
-| SIB   | 10  | 100     |
-| [rBP] | 10  | 101     |
-| [rSI] | 10  | 110     |
-| [rDI] | 10  | 111     |
+| mod | ModRM.reg                        | ModRM.r/m                        | Encoding |
+| 11  | al,ax,eax,rax,mmx0,xmm0,ymm0     | al,ax,eax,rax,mmx0,xmm0,ymm0     | 000      |
+| 11  | cl,cx,ecx,rcx,mmx1,xmm1,ymm1     | cl,cx,ecx,rcx,mmx1,xmm1,ymm1     | 001      |
+| 11  | dl,dx,edx,rdx,mmx2,xmm2,ymm2     | dl,dx,edx,rdx,mmx2,xmm2,ymm2     | 010      |
+| 11  | bl,bx,ebx,rbx,mmx3,xmm3,ymm3     | bl,bx,ebx,rbx,mmx3,xmm3,ymm3     | 011      |
+| 11  | ah,spl,sp,esp,rsp,mmx4,xmm4,ymm4 | ah,spl,sp,esp,rsp,mmx4,xmm4,ymm4 | 100      |
+| 11  | ch,bpl,bp,ebp,rbp,mmx5,xmm5,ymm5 | ch,bpl,bp,ebp,rbp,mmx5,xmm5,ymm5 | 101      |
+| 11  | dh,sil,si,esi,rsi,mmx6,xmm6,ymm6 | dh,sil,si,esi,rsi,mmx6,xmm6,ymm6 | 110      |
+| 11  | bh,dil,di,edi,rdi,mmx7,xmm7,ymm7 | bh,dil,di,edi,rdi,mmx7,xmm7,ymm7 | 111      |
+| __  | al,ax,eax,rax,mmx0,xmm0,ymm0     | [al],[ax],[eax],[rax]            | 000      |
+| __  | cl,cx,ecx,rcx,mmx1,xmm1,ymm1     | [cl],[cx],[ecx],[rcx]            | 001      |
+| __  | dl,dx,edx,rdx,mmx2,xmm2,ymm2     | [dl],[dx],[edx],[rdx]            | 010      |
+| __  | bl,bx,ebx,rbx,mmx3,xmm3,ymm3     | [bl],[bx],[ebx],[rbx]            | 011      |
+| __  | ah,spl,sp,esp,rsp,mmx4,xmm4,ymm4 | SIB                              | 100      |
+| __  | ch,bpl,bp,ebp,rbp,mmx5,xmm5,ymm5 | [bpl],[bp],[ebp],[rbp]           | 101      |
+| __  | dh,sil,si,esi,rsi,mmx6,xmm6,ymm6 | [sil],[si],[esi],[rsi]           | 110      |
+| __  | bh,dil,di,edi,rdi,mmx7,xmm7,ymm7 | [dil],[di],[edi],[rdi]           | 111      |
+
+
+and cl, al                                     ;  20C1                | 2      | [20 c1 | 0010 0000 11 000 001]
+and dl, cl                                     ;  20CA                | 2      | [20 ca | 0010 0000 11 001 010]
+and bl, dl                                     ;  20D3                | 2      | [20 d3 | 0010 0000 11 010 011]

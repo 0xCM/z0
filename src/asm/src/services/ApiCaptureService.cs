@@ -18,8 +18,6 @@ namespace Z0
     {
         ApiMemberExtractor Extractor;
 
-        ApiServices Services;
-
         ApiCaptureEmitter Emitter;
 
         ApiJit Jitter;
@@ -27,7 +25,6 @@ namespace Z0
         protected override void OnInit()
         {
             Extractor = Wf.MemberExtractor();
-            Services = Wf.ApiServices();
             Emitter = Wf.CaptureEmitter();
             Jitter = Wf.ApiJit();
         }
@@ -51,6 +48,11 @@ namespace Z0
             var captured = RunCapture(parts);
             Wf.Ran(flow);
             return captured.SelectMany(x => x.Storage);
+        }
+
+        public void CaptureMembers(ApiMembers src)
+        {
+            var hosted = src.GroupBy(x => x.Host).Select(x => new ApiHostMembers(x.Key, x.ToArray())).Array();
         }
 
         public Index<AsmMemberRoutines> CaptureApiCatalog(IApiCatalogDataset catalog)
@@ -166,35 +168,27 @@ namespace Z0
             return routines;
         }
 
-        public AsmMemberRoutines CaptureHost(IApiHost src, FS.FolderPath dst)
+        public AsmMemberRoutines CaptureHost(ApiHostMembers src, FS.FolderPath dst)
         {
-            src = root.require(src);
             var routines = AsmMemberRoutines.Empty;
-            var flow = Wf.Running(src.Name);
+            var flow = Wf.Running(src.Host);
             try
             {
-                routines = Emitter.Emit(src.Uri, ExtractHostOps(src));
+                routines = Emitter.Emit(src.Host, ExtractMembers(src));
             }
             catch(Exception e)
             {
                 Wf.Error(e);
             }
-            Wf.Ran(flow, src.Name);
+            Wf.Ran(flow, src.Host);
             return routines;
         }
 
         public Index<ApiMemberExtract> ExtractHostOps(IApiHost host)
-        {
-            try
-            {
-                return Extractor.Extract(Jitter.JitHost(host));
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-                return sys.empty<ApiMemberExtract>();
-            }
-        }
+            => Extractor.Extract(Jitter.JitHost(host));
+
+        public Index<ApiMemberExtract> ExtractMembers(ApiHostMembers src)
+            => Extractor.Extract(src.Members);
 
         public AsmMemberRoutines CaptureTypes(Index<ApiRuntimeType> src)
         {

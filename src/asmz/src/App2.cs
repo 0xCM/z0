@@ -226,7 +226,7 @@ namespace Z0.Asm
 
         void CheckIndexDecoder()
         {
-            var blocks = ApiServices.HexIndexer().IndexApiBlocks();
+            var blocks = Wf.ApiIndexBuilder().IndexApiBlocks();
             var dataset = Wf.ApiDecoder().Decode(blocks);
         }
 
@@ -988,20 +988,27 @@ namespace Z0.Asm
         }
 
 
+        public void ProccessCultFiles()
+        {
+            var processor = CultProcessor.create(Wf);
+            var src = Db.ToolOutput(Toolsets.cult, "cult", FS.Asm);
+            processor.Process(src);
+
+        }
         public Index<ApiCodeBlock> LoadApiBlocks()
         {
             return Wf.ApiHex().ApiBlocks();
         }
         public void Run()
         {
-
-            var processor = CultProcessor.create(Wf);
-            var src = Db.ToolOutput(Toolsets.cult, "cult", FS.Asm);
-            processor.Process(src);
-
+            var indices = array<byte>(0,3,5);
+            var widths = array<byte>(3,3,2);
+            var field = AsmBitfields.define(indices,widths);
+            var formatter = new AsmBitfieldFormatter(field);
+            byte input = 0b11_101_110;
+            var output = formatter.Format(input).ToString();
+            Wf.Row($"11_101_110 => {output}");
             //CaptureSelectedRoutines();
-
-
         }
 
         public static void Main(params string[] args)

@@ -69,12 +69,7 @@ namespace Z0
         {
             var dst = Paths.Table<T>(name);
             var flow = Wf.EmittingTable<T>(dst);
-            var count = (uint)src.Length;
-            var formatter = Tables.formatter<T>();
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0u; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(src,i)));
+            var count = Tables.emit(src,dst);
             return Wf.EmittedTable<T>(flow, count);
         }
 

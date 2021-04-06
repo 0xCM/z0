@@ -9,22 +9,23 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct EnvPaths : IEnvPaths
+    public readonly struct ApiHostMembers
     {
-        [MethodImpl(Inline)]
-        public static IEnvPaths create()
-            => new EnvPaths(Env.create());
+        public ApiHostUri Host {get;}
+
+        public ApiMembers Members {get;}
 
         [MethodImpl(Inline)]
-        public static IEnvPaths create(Env env)
-            => new EnvPaths(env);
-
-        public Env Env {get;}
-
-        [MethodImpl(Inline)]
-        public EnvPaths(Env env)
+        public ApiHostMembers(ApiHostUri host, ApiMembers members)
         {
-            Env = env;
+            Host = host;
+            Members = members;
+        }
+
+        public ReadOnlySpan<ApiMember> View
+        {
+            [MethodImpl(Inline)]
+            get => Members.View;
         }
     }
 }

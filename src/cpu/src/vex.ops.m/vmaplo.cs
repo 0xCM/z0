@@ -15,26 +15,6 @@ namespace Z0
 
     partial struct cpu
     {
-        /// <summary>
-        /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
-        /// 8x8i -> 8x16i
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<short> vlo128x16i(Vector128<sbyte> src)
-            => ConvertToVector128Int16(src);
-
-        /// <summary>
-        /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
-        /// dst[i] = src[i], i = 1, ..., 7
-        /// 8x8i -> 8x16u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vlo128x16u(Vector128<sbyte> src)
-            => v16u(ConvertToVector128Int16(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi32 (__m128i a) VPMOVSXBD ymm, xmm/m128
@@ -45,28 +25,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<int> vlo256x32i(Vector128<sbyte> src)
             => ConvertToVector256Int32(src);
-
-        /// <summary>
-        /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
-        /// 8x8u -> 8x16u
-        /// src[i] -> dst[i], i = 0,.., 7
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<short> vlo128x16i(Vector128<byte> src)
-            => ConvertToVector128Int16(src);
-
-        /// <summary>
-        /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
-        /// 8x8u -> 8x16u
-        /// src[i] -> dst[i], i = 0,.., 7
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vlo128x16u(Vector128<byte> src)
-            => v16u(ConvertToVector128Int16(src));
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -98,16 +56,6 @@ namespace Z0
             => ConvertToVector128Int32(src);
 
         /// <summary>
-        /// __m256i _mm256_cvtepi16_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
-        /// 4x16u -> 4x64u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<long> vlo256x64i(Vector128<short> src)
-            => ConvertToVector256Int64(src);
-
-        /// <summary>
         /// __m128i _mm_cvtepu16_epi32 (__m128i a)PMOVZXWD xmm, xmm/m64
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -133,17 +81,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vlo256x64u(Vector128<ushort> src)
             => v64u(ConvertToVector256Int64(src));
-
-        /// <summary>
-        /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
-        /// 2x32u -> 2x64i
-        /// src[i] -> dst[i], i = 0, 2
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<long> vlo128x64i(Vector128<uint> src)
-            => ConvertToVector128Int64(src);
 
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64

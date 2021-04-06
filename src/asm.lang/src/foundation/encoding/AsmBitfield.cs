@@ -8,23 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    public readonly struct EnvPaths : IEnvPaths
+    public readonly ref struct AsmBitfield
     {
-        [MethodImpl(Inline)]
-        public static IEnvPaths create()
-            => new EnvPaths(Env.create());
+        public ReadOnlySpan<byte> Indices {get;}
+
+        public ReadOnlySpan<byte> Widths {get;}
+
+        public byte FieldCount {get;}
 
         [MethodImpl(Inline)]
-        public static IEnvPaths create(Env env)
-            => new EnvPaths(env);
-
-        public Env Env {get;}
-
-        [MethodImpl(Inline)]
-        public EnvPaths(Env env)
+        public AsmBitfield(ReadOnlySpan<byte> ix, ReadOnlySpan<byte> w)
         {
-            Env = env;
+            Indices = ix;
+            Widths = w;
+            FieldCount = (byte)root.min(ix.Length, w.Length);
         }
     }
 }

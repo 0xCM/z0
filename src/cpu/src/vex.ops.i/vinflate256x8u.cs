@@ -14,14 +14,6 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<byte> vinflate256x8u(uint src)
-            => vconcat(vinflate128x8u((ushort)src), vinflate128x8u((ushort)(src >> 16)));
-
-        /// <summary>
         /// Distributes each bit of the source to to a specified bit of each byte in a 256-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -33,9 +25,5 @@ namespace Z0
             var hi = v8u(vparts(maskpart(src, 16, m), maskpart(src, 24, m)));
             return cpu.vconcat(lo,hi);
         }
-
-        [MethodImpl(Inline), Op]
-        static ulong maskpart(uint src, int offset, ulong mask)
-            => BitMasks.scatter((ulong)((byte)(src >> offset)), mask);
     }
 }

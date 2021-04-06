@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
 
+
     public interface IWfDb : IEnvPaths, IFileArchive
     {
         FS.Files ClearTables<T>()
             where T : struct, IRecord<T>;
-
-        FS.FilePath EmitSettings<T>(T settings)
-            where T : ISettingsSet<T>, new();
 
         WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
             where T : struct, IRecord<T>;

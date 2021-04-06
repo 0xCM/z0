@@ -48,9 +48,6 @@ namespace Z0
             return routines;
         }
 
-        public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src)
-            => ApiHex.emit(Wf, host, src.View, Wf.Db().ApiHexFile(host));
-
         public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
             => ApiHex.emit(Wf, host, src.View, dst);
 
@@ -78,7 +75,6 @@ namespace Z0
             Wf.EmittedTable(flow, count);
             return emitted;
         }
-
 
         Index<ApiMemberCode> ParseExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
         {
