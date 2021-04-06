@@ -8,10 +8,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static BSvcHosts;
 
-    partial class BSvc 
+    partial class BSvc
     {
         [MethodImpl(Inline)]
         public static Eq128<T> eq<T>(W128 w, T t = default)
@@ -42,7 +42,7 @@ namespace Z0
         public static Gt256<T> gt<T>(W256 w, T t = default)
             where T : unmanaged
                 => default(Gt256<T>);
- 
+
         [MethodImpl(Inline)]
         public static Max128<T> max<T>(W128 w, T t = default)
             where T : unmanaged

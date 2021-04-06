@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents the nothingness of the void
     /// </summary>
     public readonly struct TheEmpty
-    {        
+    {
         /// <summary>
         /// The only one
         /// </summary>
@@ -27,11 +27,11 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static implicit operator TheEmpty(TheEmpty<T> src)
-            => TheEmpty.The;        
+            => TheEmpty.The;
 
         /// <summary>
         /// The only parametric one
-        /// </summary>            
+        /// </summary>
         [MethodImpl(Inline)]
         public static TheEmpty<T> The(T zero) => new TheEmpty<T>(zero);
 
@@ -40,7 +40,7 @@ namespace Z0
         {
             Zero = zero;
         }
-        
+
         public readonly T Zero;
     }
 }

@@ -53,7 +53,7 @@ namespace Z0
             }
         }
 
-        public void Start(IWfShell wf)
+        public void Start()
         {
             ManagedThread = new Thread(new ThreadStart(Execute));
             ManagedThread.IsBackground = true;

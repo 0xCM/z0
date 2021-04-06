@@ -15,7 +15,7 @@ namespace Z0
     /// Defines api queries over a specific host
     /// </summary>
     [ApiHost(ApiNames.ApiHostQuery, true)]
-    public readonly struct ApiHostQuery : IApiView<ApiHostQuery,IApiHost>
+    public readonly struct ApiHostQuery
     {
         const NumericKind Closure = UnsignedInts;
 

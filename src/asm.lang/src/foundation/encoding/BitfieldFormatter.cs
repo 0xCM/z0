@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly ref struct AsmBitfieldFormatter
+    public readonly ref struct BitfieldFormatter
     {
         readonly ReadOnlySpan<byte> Indices;
 
@@ -21,8 +21,7 @@ namespace Z0
 
         readonly Span<char> Buffer;
 
-        [MethodImpl(Inline)]
-        public AsmBitfieldFormatter(AsmBitfield src)
+        public BitfieldFormatter(AsmBitfield src)
         {
             Indices = src.Indices;
             Widths = src.Widths;

@@ -8,10 +8,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static BSvcHosts;
 
-    partial class BSvc 
+    partial class BSvc
     {
         [MethodImpl(Inline)]
         public static Not128<T> not<T>(W128 w, T t = default)

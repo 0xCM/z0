@@ -18,8 +18,6 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly IAsmContext Asm;
-
         readonly NativeBuffer Buffer;
 
         readonly BufferTokens Tokens;
@@ -27,10 +25,9 @@ namespace Z0
         readonly ICaptureServiceProxy Service;
 
         [MethodImpl(Inline)]
-        internal QuickCapture(IWfShell wf, IAsmContext context, NativeBuffer buffer, BufferTokens tokens, ICaptureServiceProxy capture)
+        internal QuickCapture(IWfShell wf, NativeBuffer buffer, BufferTokens tokens, ICaptureServiceProxy capture)
         {
             Wf = wf;
-            Asm = context;
             Tokens = tokens;
             Service = capture;
             Buffer =  buffer;
@@ -63,39 +60,9 @@ namespace Z0
         public Option<ApiCaptureBlock> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
             where D : Delegate => Service.Capture(id, src);
 
-        public ApiCaptureBlocks Capture(ReadOnlySpan<MethodInfo> src)
+        public ReadOnlySpan<AsmRoutineCode> Capture(ReadOnlySpan<MethodInfo> src, FS.FilePath dst)
         {
-            var count = src.Length;
-            var buffer = alloc<ApiCaptureBlock>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var method = ref skip(src,i);
-                var identified = method.Identify();
-                var result = Capture(identified,method);
-                if(result)
-                    seek(dst,i) = result.Value;
-                else
-                    seek(dst,i) = ApiCaptureBlock.Empty;
-            }
-            return buffer;
-
-        }
-
-        public ReadOnlySpan<AsmRoutineCode> Capture(ReadOnlySpan<MethodInfo> src, FS.FilePath target)
-        {
-            return Wf.ApiDecoder().Decode(Capture(src), target);
-        }
-
-        Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
-        {
-            var count = src.Length;
-            var buffer = alloc<LocatedMethod>(count);
-            ref var located = ref first(span(buffer));
-            for(var i=0u; i<count; i++)
-                seek(located, i) = ApiJit.jit(skip(src, i));
-            Array.Sort(buffer);
-            return buffer;
+            return Wf.ApiDecoder().Decode(Capture(src), dst);
         }
 
         [Op]
@@ -119,6 +86,24 @@ namespace Z0
                 }
             }
             return blocks;
+        }
+
+        ApiCaptureBlocks Capture(ReadOnlySpan<MethodInfo> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<ApiCaptureBlock>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var method = ref skip(src,i);
+                var identified = method.Identify();
+                var result = Capture(identified,method);
+                if(result)
+                    seek(dst,i) = result.Value;
+                else
+                    seek(dst,i) = ApiCaptureBlock.Empty;
+            }
+            return buffer;
         }
 
         public void Dispose()

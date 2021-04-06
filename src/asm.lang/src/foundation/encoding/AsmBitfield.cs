@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     public readonly ref struct AsmBitfield
     {
@@ -19,7 +18,7 @@ namespace Z0
         public byte FieldCount {get;}
 
         [MethodImpl(Inline)]
-        public AsmBitfield(ReadOnlySpan<byte> ix, ReadOnlySpan<byte> w)
+        internal AsmBitfield(ReadOnlySpan<byte> ix, ReadOnlySpan<byte> w)
         {
             Indices = ix;
             Widths = w;

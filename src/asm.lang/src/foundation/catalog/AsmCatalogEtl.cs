@@ -294,7 +294,6 @@ namespace Z0.Asm
         FS.FolderName TargetFolder
             => FS.folder("asmcat");
 
-
         const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";
 
         static ReadOnlySpan<string> SourceHeaderFields

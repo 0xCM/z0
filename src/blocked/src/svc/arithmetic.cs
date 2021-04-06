@@ -8,10 +8,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static BSvcHosts;
 
-    partial class BSvc 
+    partial class BSvc
     {
         [MethodImpl(Inline)]
         public static Abs128<T> abs<T>(W128 w, T t = default)
@@ -52,7 +52,7 @@ namespace Z0
         public static Inc256<T> inc<T>(W256 w, T t = default)
             where T : unmanaged
                 => default(Inc256<T>);
- 
+
         [MethodImpl(Inline)]
         public static Negate128<T> negate<T>(W128 w, T t = default)
             where T : unmanaged

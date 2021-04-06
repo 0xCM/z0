@@ -14,12 +14,16 @@ namespace Z0
     public readonly struct AsmBitfields
     {
         [MethodImpl(Inline), Op]
+        public static BitfieldFormatter formatter(AsmBitfield src)
+            => new BitfieldFormatter(src);
+
+        [MethodImpl(Inline), Op]
         public static AsmBitfield define(ReadOnlySpan<byte> ix, ReadOnlySpan<byte> w)
             => new AsmBitfield(ix,w);
 
         [MethodImpl(Inline), Op]
         public static AsmBitfield modrm()
-            => AsmBitfields.define(ModRmIndices,ModRmWidths);
+            => define(ModRmIndices,ModRmWidths);
 
         static ReadOnlySpan<byte> ModRmIndices => new byte[3]{0,3,5};
 

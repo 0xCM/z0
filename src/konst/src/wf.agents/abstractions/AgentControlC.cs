@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     public abstract class AgentControl<S,C> : IAgentControl<S,C>

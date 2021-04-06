@@ -84,7 +84,7 @@ namespace Z0
 
         [Op]
         public static QuickCapture CaptureQuick(this IWfShell wf, IAsmContext asm)
-            => Capture.quick(wf,asm);
+            => Capture.quick(wf, asm);
 
         [Op]
         public static ICaptureServices CaptureServices(this IWfShell wf, IAsmContext asm)

@@ -20,7 +20,7 @@ namespace Z0
             var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
             var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
             var proxy = new CaptureServiceProxy(asm.CaptureCore, exchange);
-            return new QuickCapture(wf, asm, buffer, tokens, proxy);
+            return new QuickCapture(wf, buffer, tokens, proxy);
         }
 
         [Op]

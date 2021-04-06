@@ -18,21 +18,41 @@ namespace Z0
         public static IPart part(Assembly src)
             => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).Single();
 
-        /// <summary>
-        /// Attempts to resolve a part resolution type
-        /// </summary>
         [Op]
-        static Option<IPart> TryGetPart(Assembly src)
+        public static ApiPartTypes types(IPart src)
+            => new ApiPartTypes(src.Id, src.Owner.Types());
+
+        [Op]
+        public static ApiHostUri hosturi(Type t)
         {
-            try
+            var attrib = t.Tag<ApiHostAttribute>();
+            var name =  text.ifempty(attrib.MapValueOrDefault(a => a.HostName, t.Name), t.Name).ToLower();
+            return new ApiHostUri(t.Assembly.Id(), name);
+        }
+
+        public static ApiGroupNG[] ImmDirect(IApiHost host, RefinementClass kind)
+            => from g in direct(host)
+                let imm = ImmGroup(host, g, kind)
+                where !imm.IsEmpty
+                select g;
+
+        public static ApiMethodG[] ImmGeneric(IApiHost host, RefinementClass kind)
+            => generic(host).Where(op => op.Method.AcceptsImmediate(kind));
+
+        [Op]
+        public static Index<ApiHostUri> NestedHosts(Type src)
+        {
+            var dst = root.list<ApiHostUri>();
+            var nested = @readonly(src.GetNestedTypes());
+            var count = nested.Length;
+            for(var i=0; i<count; i++)
             {
-                return root.some(src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
+                var candidate = skip(nested,i);
+                var uri = candidate.HostUri();
+                if(uri.IsNonEmpty)
+                    dst.Add(uri);
             }
-            catch(Exception e)
-            {
-                term.error(text.format("Assembly {0} | {1}", src.GetSimpleName(), e));
-                return root.none<IPart>();
-            }
+            return dst.ToArray();
         }
 
         static MethodInfo[] TaggedOps(IApiHost src)
@@ -48,7 +68,17 @@ namespace Z0
         static MethodInfo GenericDefintion(MethodInfo src)
             => src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();
 
-       static IMultiDiviner Diviner
+        static IMultiDiviner Diviner
             => MultiDiviner.Service;
+
+        static ApiMethodG[] generic(IApiHost src)
+             => from m in TaggedOps(src).OpenGeneric()
+                let closures = ApiIdentityKinds.NumericClosureKinds(m)
+                where closures.Length != 0
+                select new ApiMethodG(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
+
+        static ApiGroupNG ImmGroup(IApiHost host, ApiGroupNG g, RefinementClass kind)
+            => new ApiGroupNG(g.GroupId, host,
+                g.Members.Storage.Where(m => m.Method.AcceptsImmediate(kind) && m.Method.ReturnsVector()));
     }
 }

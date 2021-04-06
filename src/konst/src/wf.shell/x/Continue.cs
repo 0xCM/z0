@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XWf
+    public static partial class XWf
     {
         public static Task Continue<T>(this Task<T> src, Action<T> @continue)
             where T : struct, ICmd

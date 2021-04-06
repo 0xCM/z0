@@ -15,22 +15,4 @@ namespace Z0
         public SignKind Kind
             => SignKind.Unsigned;
     }
-
-    /// <summary>
-    /// Defines a T-parametric <See cref="SignKind.Signed"/> literal classifier promotion
-    /// </summary>
-    public readonly struct Positive<T> : ISignedClass<Positive<T>,Positive,T>
-    {
-        /// <summary>
-        /// Reveals the singleton instance of the nonparametric classifier
-        /// </summary>
-        public Positive SignType
-            => default;
-
-        /// <summary>
-        /// Reveals the represented literal
-        /// </summary>
-        public SignKind Kind
-            => SignType.Kind;
-    }
 }

@@ -65,11 +65,6 @@ namespace Z0.Asm
             Wf.AsmFormPipe().EmitFormHashes();
         }
 
-        ApiHostCaptureSet CaptureHost(Type host)
-        {
-            var capture = AsmServices.HostCapture(Wf);
-            return capture.Capture(host);
-        }
 
         MemoryAddress GetKernel32Proc(string name = "CreateDirectoryA")
         {
@@ -184,45 +179,6 @@ namespace Z0.Asm
             Show(symbols.View, FS.file("opcode-symbols", FS.Csv), oc => oc.Format(), Symbols.header());
         }
 
-        void CheckOpCodeParser()
-        {
-            const string FormatPattern = "{0,-36} ; {1} [{2}]";
-
-            var vexpath = Db.AppLog("opcodes-vex", FS.Asm);
-            var rexpath = Db.AppLog("opcodes-rex", FS.Asm);
-            var rextp = root.hashset<string>();
-            var vextp = root.hashset<string>();
-            var bitstrings = AsmBitstrings.service();
-            using var vex = vexpath.Writer();
-            using var rex = rexpath.Writer();
-            void parse(AsmApiStatement src)
-            {
-                var tp = src.Thumbprint();
-                var tpexpr = tp.Format();
-
-                var parser = new AsmOpCodeParser(src.OpCode);
-                if(parser.HasRex())
-                {
-                    if(!rextp.Contains(tpexpr))
-                    {
-                        rex.WriteLine(string.Format(FormatPattern, src.Expression, tpexpr, bitstrings.Format(tp.Encoded)));
-                        rextp.Add(tpexpr);
-                    }
-                }
-                else if(parser.HasVex())
-                {
-                    if(!vextp.Contains(tpexpr))
-                    {
-                        vex.WriteLine(string.Format(FormatPattern, src.Expression, tpexpr, bitstrings.Format(tp.Encoded)));
-                        vextp.Add(tpexpr);
-                    }
-                }
-
-
-            }
-
-            Wf.AsmTraverser().Traverse(parse);
-        }
 
         void CheckIndexDecoder()
         {
@@ -1001,14 +957,15 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            var indices = array<byte>(0,3,5);
-            var widths = array<byte>(3,3,2);
-            var field = AsmBitfields.define(indices,widths);
-            var formatter = new AsmBitfieldFormatter(field);
-            byte input = 0b11_101_110;
-            var output = formatter.Format(input).ToString();
-            Wf.Row($"11_101_110 => {output}");
-            //CaptureSelectedRoutines();
+            CaptureSelectedRoutines();
+
+            // var indices = array<byte>(0,3,5);
+            // var widths = array<byte>(3,3,2);
+            // var field = AsmBitfields.define(indices,widths);
+            // var formatter = new AsmBitfieldFormatter(field);
+            // byte input = 0b11_101_110;
+            // var output = formatter.Format(input).ToString();
+            // Wf.Row($"11_101_110 => {output}");
         }
 
         public static void Main(params string[] args)

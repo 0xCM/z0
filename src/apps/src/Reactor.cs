@@ -59,9 +59,6 @@ namespace Z0
                 case CheckServiceCmd.CmdName:
                     Builder.CheckService(a0).RunTask(Wf);
                     break;
-                case JitApiCmd.CmdName:
-                    Builder.JitApiCmd().RunTask(Wf);
-                    break;
                 case ShowRuntimeArchiveCmd.CmdName:
                     Builder.ShowRuntimeArchive().RunTask(Wf);
                     break;
