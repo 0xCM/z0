@@ -14,6 +14,10 @@ namespace Z0
             => string.Format(SymFormatPattern, "Index", "Kind", "Name", "Expression");
 
         [Op]
+        public static string format(Sym src)
+            => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expr);
+
+        [Op]
         public static string format(Sym8 src)
             => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expr);
 
@@ -32,14 +36,5 @@ namespace Z0
         public static string format<E>(Sym<E> src)
             where E : unmanaged
                 => string.Format(SymFormatPattern, src.Index, src.Type, src.Name, src.Expr);
-
-        [Op]
-        public static string format(Token src)
-            => src.Description.IsEmpty
-            ? string.Format("{0,-24} | {1,-8} | {2,-12} | {3}",
-                src.Literal.Type, src.Index, text.ifempty(src.Identifier, RP.EmptySymbol), text.ifempty(src.SymbolText, RP.EmptySymbol))
-            : string.Format("{0,-24} | {1,-8} | {2,-12} | {3} | {4}",
-                src.Literal.Type, src.Index, text.ifempty(src.Identifier, RP.EmptySymbol), text.ifempty(src.SymbolText, RP.EmptySymbol), src.Description);
-
     }
 }

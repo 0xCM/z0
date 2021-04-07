@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Linq;
-
 
     using static Part;
 
@@ -25,7 +23,7 @@ namespace Z0
         }
 
         Task<uint> RunMachine(uint cycles)
-            => Task.Factory.StartNew(() => VectorMachine.create(Wf).Run(cycles));
+            => Task.Factory.StartNew(() => new Vmx128x2(1024, Rng.@default()).Run(cycles));
 
 
         ulong Run(uint count, uint cycles)

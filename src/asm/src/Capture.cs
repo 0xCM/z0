@@ -51,7 +51,7 @@ namespace Z0
             using var runner = wf.CaptureRunner();
 
             if(args.Length != 0)
-                return runner.Capture(wf.Api.PartIdentities,CaptureWorkflowOptions.EmitImm);
+                return runner.Capture(wf.Api.PartIdentities, CaptureWorkflowOptions.EmitImm);
             else
                 return runner.Run();
         }

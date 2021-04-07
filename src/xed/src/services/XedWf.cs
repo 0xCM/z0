@@ -32,7 +32,7 @@ namespace Z0
         {
             Wf = wf;
             Config = config;
-            Source = Xed.sources(Config.Source);
+            Source = XedApi.sources(Config.Source);
             var db = Wf.Db();
             Target = new DbTables<string>(db, Subject);
             Root = Target.Root;
@@ -50,7 +50,7 @@ namespace Z0
             var patterns = ExtractPatterns();
             var summaries = Emit(patterns);
             SaveMnemonics(summaries);
-            Xed.emit(Wf, Config, Source);
+            XedApi.emit(Wf, Config, Source);
         }
 
         public XedPattern[] EmitInstructions(FS.FilePath file)
@@ -63,7 +63,7 @@ namespace Z0
             for(var j = 0; j<parsed.Length; j++)
             {
                 ref readonly var p = ref skip(parsed, j);
-                Xed.emit(parsed, Config.InstructionDir + file.FileName);
+                XedApi.emit(parsed, Config.InstructionDir + file.FileName);
                 patterns.AddRange(p.Patterns);
             }
             Wf.Ran(flow, parsed.Length);
@@ -95,7 +95,7 @@ namespace Z0
 
         public XedSummaryRow[] Emit(XedPattern[] src)
         {
-            var records = Xed.sort(src).Map(p => Xed.row(p));
+            var records = XedApi.sort(src).Map(p => XedApi.row(p));
             var target = Wf.Db().Table<XedSummaryRow>("xed", FS.Csv);
             Tables.emit(records,  target);
             return records;

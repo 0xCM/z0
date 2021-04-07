@@ -12,14 +12,13 @@ namespace Z0
     public interface IToken : ITextual, INullity
     {
         Type TokenType {get;}
+
         uint Index {get;}
 
         Identifier Identifier {get;}
 
         TextBlock SymbolText {get;}
 
-        SymbolName SymbolName
-            => new SymbolName(this);
     }
 
     [Free]
@@ -30,10 +29,5 @@ namespace Z0
 
         Type IToken.TokenType
             => typeof(K);
-
-        SymbolName IToken.SymbolName
-            => new SymbolName(this);
-        new SymbolName<K> SymbolName
-            => new SymbolName<K>(this);
     }
 }

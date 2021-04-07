@@ -113,7 +113,7 @@ namespace Z0
             var rt = parts.Length == 2 ? parts[0] : string.Empty;
             var name = parts.Length == 1 ? parts[0] : (parts.Length == 2 ? parts[1] : EmptyString);
             var srcName = rows.Source.FileName;
-            return new XedRuleSet(srcName, name, rt, body.Map(x => new XedExpr(x)), Xed.rulefile(srcName, name));
+            return new XedRuleSet(srcName, name, rt, body.Map(x => new XedExpr(x)), XedApi.rulefile(srcName, name));
         }
 
         public XedRuleSet[] ParseFunctions(FS.FilePath src)

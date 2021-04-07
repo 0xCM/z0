@@ -21,7 +21,7 @@ namespace Z0
         new T Kind {get;}
 
         ulong ISym.Kind
-            => memory.bw32(Kind);
+            => memory.bw64(Kind);
     }
 
     public interface ISym<W,T> : ISym<T>

@@ -42,6 +42,8 @@
     <Clr>$(Src)clr/z0.clr.csproj</Clr>
     <Core>$(Src)core/z0.core.csproj</Core>
     <Cpu>$(Src)cpu/z0.cpu.csproj</Cpu>
+    <CpuDsl>$(Src)cpu.dsl/z0.cpu.dsl.csproj</CpuDsl>
+
 
     <Commands>$(Src)cmdspec/z0.cmdspec.csproj</Commands>
     <Reactors>$(Src)cmdexec/z0.cmdexec.csproj</Reactors>

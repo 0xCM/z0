@@ -122,7 +122,7 @@ namespace Z0
         public static IApiParts parts(Assembly control, Index<PartId> identifiers)
         {
             if(identifiers.IsNonEmpty)
-               return new ApiParts(FS.path(control.Location).FolderPath, identifiers);
+               return new ApiParts(identifiers);
             else
                 return new ApiParts(FS.path(control.Location).FolderPath);
         }
@@ -144,7 +144,7 @@ namespace Z0
             {
                 var identifiers = ApiPartIdParser.parse(args);
                 if(identifiers.Length != 0)
-                    return new ApiParts(FS.path(control.Location).FolderPath, identifiers);
+                    return new ApiParts(identifiers);
             }
 
             return new ApiParts(FS.path(control.Location).FolderPath);
@@ -269,6 +269,20 @@ namespace Z0
             return buffer;
         }
 
+        public static IPart[] PartsFromIdentities(PartId[] identities)
+        {
+            var dir = FS.path(root.controller().Location).FolderPath;
+            var query = from p in identities
+                        let @base = "z0." + p.Format()
+                        from f in root.seq(FS.file(@base, FS.Dll), FS.file(@base,FS.Exe))
+                        let path = dir + f
+                        where path.Exists
+                        let part = part(path)
+                        where part.IsSome()
+                        select part.Value;
+            return query.ToArray();
+        }
+
         public static IApiCatalogDataset dataset(IPart[] parts)
         {
             var catalogs = parts.Select(x => catalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);
@@ -281,6 +295,10 @@ namespace Z0
                 );
             return dst;
         }
+
+        [Op]
+        public static IApiCatalogDataset dataset(PartId[] identities)
+            => dataset(PartsFromIdentities(identities));
 
         /// <summary>
         /// Attempts to resolve a part from an assembly file path
@@ -300,10 +318,6 @@ namespace Z0
         [Op]
         public static IApiCatalogDataset dataset(FS.FolderPath src, PartId[] parts)
             => dataset(src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)));
-
-        [Op]
-        public static IApiCatalogDataset datset(Assembly src, PartId[] parts)
-            => dataset(FS.path(src.Location).FolderPath, parts);
 
         /// <summary>
         /// Loads an assembly from a potential part path

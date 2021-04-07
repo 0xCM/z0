@@ -4,63 +4,63 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Sym = AsciLetterUp;
+    using FF = AsciLetterUp;
 
     /// <summary>
     /// Defines symbols for file system drive letters
     /// </summary>
     public enum DriveLetter : ushort
     {
-        A = Sym.A,
+        A = FF.A,
 
-        B = Sym.B,
+        B = FF.B,
 
-        C = Sym.C,
+        C = FF.C,
 
-        D = Sym.D,
+        D = FF.D,
 
-        E = Sym.E,
+        E = FF.E,
 
-        F = Sym.F,
+        F = FF.F,
 
-        G = Sym.G,
+        G = FF.G,
 
-        H = Sym.H,
+        H = FF.H,
 
-        I = Sym.I,
+        I = FF.I,
 
-        J = Sym.J,
+        J = FF.J,
 
-        K  = Sym.K,
+        K  = FF.K,
 
-        L = Sym.L,
+        L = FF.L,
 
-        M = Sym.M,
+        M = FF.M,
 
-        N = Sym.N,
+        N = FF.N,
 
-        O = Sym.O,
+        O = FF.O,
 
-        P = Sym.P,
+        P = FF.P,
 
-        Q = Sym.Q,
+        Q = FF.Q,
 
-        R = Sym.R,
+        R = FF.R,
 
-        S = Sym.S,
+        S = FF.S,
 
-        T = Sym.T,
+        T = FF.T,
 
-        U = Sym.U,
+        U = FF.U,
 
-        V = Sym.V,
+        V = FF.V,
 
-        W = Sym.W,
+        W = FF.W,
 
-        X = Sym.X,
+        X = FF.X,
 
-        Y = Sym.Y,
+        Y = FF.Y,
 
-        Z = Sym.Z
+        Z = FF.Z
     }
 }

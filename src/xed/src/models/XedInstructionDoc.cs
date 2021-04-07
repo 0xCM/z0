@@ -44,28 +44,28 @@ namespace Z0
             => Content.Length;
 
         public string Class
-            => Xed.pattern(this, M.ICLASS);
+            => XedApi.pattern(this, M.ICLASS);
 
         public string Category
-            => Xed.pattern(this, M.CATEGORY);
+            => XedApi.pattern(this, M.CATEGORY);
 
         public string Extension
-            => Xed.pattern(this, M.EXTENSION);
+            => XedApi.pattern(this, M.EXTENSION);
 
         public string IsaSet
-            => Xed.pattern(this, M.ISA_SET);
+            => XedApi.pattern(this, M.ISA_SET);
 
         public string AttributeText
-            => Xed.pattern(this, M.ATTRIBUTES);
+            => XedApi.pattern(this, M.ATTRIBUTES);
 
         public string RealOpCode
-            => Xed.pattern(this, M.REAL_OPCODE);
+            => XedApi.pattern(this, M.REAL_OPCODE);
 
         public string IForm
-            => Xed.pattern(this, M.IFORM);
+            => XedApi.pattern(this, M.IFORM);
 
         public XedPattern[] Patterns
-            => Xed.patterns(this);
+            => XedApi.patterns(this);
 
         [MethodImpl(Inline)]
         internal bool IsProp(int index, string Name)

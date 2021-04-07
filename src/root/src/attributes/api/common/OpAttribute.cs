@@ -13,25 +13,29 @@ public class OpAttribute : ApiPartAttribute
 
     public ApiClass ClassId {get;}
 
-    public ApiAsmClass AsmId {get;}
+    public ulong ClassData {get;}
 
     public OpAttribute()
     {
         GroupName = "";
     }
 
-    public OpAttribute(ApiClass id, ApiAsmClass asm = 0)
+    public OpAttribute(ApiClass id, ulong data)
+    {
+        ClassId = id;
+        ClassData = data;
+    }
+
+    public OpAttribute(ApiClass id)
         : base((ulong)id)
     {
         ClassId = id;
-        AsmId = 0;
 
     }
 
-    public OpAttribute(string group, ApiAsmClass asm = 0)
+    public OpAttribute(string group)
     {
         GroupName = group;
-        AsmId = asm;
     }
 
     public override string ToString()

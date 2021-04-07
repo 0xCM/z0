@@ -8,67 +8,32 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a kinded token
     /// </summary>
-    public readonly struct Token<K> : IToken<K>
-        where K : unmanaged
+    public readonly struct Token<K>
+        where K : unmanaged, Enum
     {
-        public SymLiteral<K> Literal {get;}
+        readonly ushort Index;
 
         [MethodImpl(Inline)]
-        public Token(SymLiteral<K> src)
+        public Token(ushort index)
         {
-            Literal = src;
+            Index = index;
         }
 
-        public uint Index
+        ReadOnlySpan<Sym<K>> Syms
         {
             [MethodImpl(Inline)]
-            get => Literal.Position;
+            get => SymCache<K>.get().View;
         }
 
-        public Identifier Identifier
+        public SymExpr Expression
         {
             [MethodImpl(Inline)]
-            get => Literal.Name;
-        }
-
-        public ClrPrimalKind LiteralType
-        {
-            [MethodImpl(Inline)]
-            get => Literal.DataType;
-        }
-
-        public SymIdentity Identity
-        {
-            [MethodImpl(Inline)]
-            get => Literal.Identity;
-        }
-
-        public SymbolName<K> SymbolName
-        {
-            [MethodImpl(Inline)]
-            get => new SymbolName<K>(this);
-        }
-
-        public Type TokenType
-        {
-            [MethodImpl(Inline)]
-            get => typeof(K);
-        }
-
-        public K Kind
-        {
-            [MethodImpl(Inline)]
-            get => Literal.DirectValue;
-        }
-
-        public TextBlock SymbolText
-        {
-            [MethodImpl(Inline)]
-            get => Literal.Symbol;
+            get => skip(Syms, Index).Expr;
         }
 
         public bool IsEmpty
@@ -82,12 +47,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Index != 0;
         }
-
-        public string Format()
-            => string.Format("{0,-24} | {1,-8} | {2,-12} | {3}", typeof(K).Name, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol));
-
-        public override string ToString()
-            => Format();
 
         public static Token<K> Empty => default;
     }

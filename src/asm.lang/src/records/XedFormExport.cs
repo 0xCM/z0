@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static XedModels;
+    using static Xed;
 
     [Record(TableId)]
     public struct XedFormExport : IRecord<XedFormExport>

@@ -5,14 +5,14 @@
 namespace Z0
 {
     /// <summary>
-    /// Defines canonical literals for representing terms of permutations on 16 symbols
+    /// Defines canonical literals for representing terms of permutations on 32 symbols
     /// </summary>
     public enum Perm32L : byte
     {
         X0 = 0b00000,
-        
+
         X1 = 0b00001,
-        
+
         X2 = 0b00010,
 
         X3 = 0b00011,
@@ -39,12 +39,12 @@ namespace Z0
 
         XE = 0b01110,
 
-        XF = 0b01111,   
+        XF = 0b01111,
 
         XG = 0b10000,
-        
+
         XH = 0b10001,
-        
+
         XI = 0b10010,
 
         XJ = 0b10011,
@@ -71,6 +71,6 @@ namespace Z0
 
         XU = 0b11110,
 
-        XV = 0b11111,   
+        XV = 0b11111,
     }
 }

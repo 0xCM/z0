@@ -64,6 +64,11 @@ namespace Z0
         public override string ToString()
             => Format();
 
+
+        [MethodImpl(Inline)]
+        public static implicit operator Sym(Sym<K> src)
+            => new Sym(src.Identity, src.Index, src.Type, memory.bw64(src.Kind), src.Name, src.Expr);
+
         public static Sym<K> Empty
         {
             [MethodImpl(Inline)]

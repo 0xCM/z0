@@ -18,7 +18,7 @@ namespace Z0
     using F = XedSummaryField;
 
     [ApiHost]
-    public readonly partial struct Xed
+    public readonly partial struct XedApi
     {
         [Op]
         public static Index<XedSummaryRow> summaries(ITableArchive archive)
@@ -110,9 +110,9 @@ namespace Z0
             dst.Extension =  src.Extension;
             dst.IsaSet =  src.IsaSet;
             dst.IForm = src.IForm;
-            dst.BaseCode =  Xed.code(src);
-            dst.Mod =  Xed.mod(src);
-            dst.Reg =  Xed.reg(src);
+            dst.BaseCode =  XedApi.code(src);
+            dst.Mod =  XedApi.mod(src);
+            dst.Reg =  XedApi.reg(src);
             dst.Pattern =  src.PatternText;
             dst.Operands =  src.OperandText;
             return dst;
@@ -177,7 +177,7 @@ namespace Z0
                     if(src.IsProp(i + 1, OPERANDS))
                     {
                         var pattern = new XedPattern();
-                        Xed.pattern(src, i, ref pattern);
+                        XedApi.pattern(src, i, ref pattern);
                         patterns.Add(pattern);
                     }
                 }
@@ -190,7 +190,7 @@ namespace Z0
         public static void emit(ReadOnlySpan<XedRuleSet> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
-            Xed.emit(src, writer);
+            XedApi.emit(src, writer);
         }
 
         [Op]
@@ -303,7 +303,7 @@ namespace Z0
                     if(line.Contains(IMPLIES))
                     {
                         var left = line.LeftOfFirst(IMPLIES);
-                        var opcount = Xed.operands(left, out var _operands);
+                        var opcount = XedApi.operands(left, out var _operands);
                         var lhs = text.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
                         var rhs = line.RightOfFirst(IMPLIES);
                         writer.WriteLine(string.Format("{0} -> {1}", lhs, rhs));
@@ -311,7 +311,7 @@ namespace Z0
                     else if(line.Contains(Bar))
                     {
                         var left = line.LeftOfFirst(Bar);
-                        var opcount = Xed.operands(left, out var _operands);
+                        var opcount = XedApi.operands(left, out var _operands);
                         var lhs = text.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
                         var rhs = line.RightOfFirst(Bar);
                         writer.WriteLine(string.Format("{0} | {1}", lhs, rhs));

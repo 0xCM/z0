@@ -22,11 +22,11 @@ namespace Z0
 
         public IApiCatalogDataset ApiCatalog {get;}
 
-        public ApiParts(FS.FolderPath source, PartId[] parts)
+        public ApiParts(PartId[] parts)
         {
-            Source = source;
+            Source = FS.path(root.controller().Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiCatalog = ApiCatalogs.dataset(Source, parts);
+            ApiCatalog = ApiCatalogs.dataset(parts);
             Components = ApiCatalog.PartComponents;
         }
 
@@ -38,21 +38,5 @@ namespace Z0
             Components = ApiCatalog.PartComponents;
         }
 
-        public bool Component(PartId part, out Assembly component)
-        {
-            var components = @readonly(Components);
-            var count = Components.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var candidate = ref skip(components,i);
-                if(candidate.Id() == part)
-                {
-                    component = candidate;
-                    return true;
-                }
-            }
-            component = default;
-            return false;
-        }
     }
 }

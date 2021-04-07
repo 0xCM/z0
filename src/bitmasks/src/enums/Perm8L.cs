@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Sym = Perm8Sym;
+    using S = Perm8Sym;
 
     /// <summary>
     /// Defines canonical literals for representing terms of permutations on 8 symbols
@@ -14,41 +14,41 @@ namespace Z0
         /// <summary>
         /// Identifies the first permutation symbol
         /// </summary>
-        A = Sym.A,
+        A = S.A,
 
         /// <summary>
         /// Identifies the second permutation symbol
         /// </summary>
-        B = Sym.B,
+        B = S.B,
 
         /// <summary>
         /// Identifies the third permutation symbol
         /// </summary>
-        C = Sym.C,
+        C = S.C,
 
         /// <summary>
         /// Identifies the fourth permutation symbol
         /// </summary>
-        D = Sym.D, 
+        D = S.D,
 
         /// <summary>
         /// Identifies the fifth permutation symbol
         /// </summary>
-        E = Sym.E, 
+        E = S.E,
 
         /// <summary>
         /// Identifies the sixth permutation symbol
         /// </summary>
-        F = Sym.F, 
+        F = S.F,
 
         /// <summary>
         /// Identifies the seventh permutation symbol
         /// </summary>
-        G = Sym.G, 
+        G = S.G,
 
         /// <summary>
         /// Identifies the eighth permutation symbol
         /// </summary>
-        H = Sym.H, 
+        H = S.H,
     }
 }

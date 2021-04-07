@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    
+
     /// <summary>
-    /// Defines control mask values for constucting a 128-bit target by blending 
-    /// 4 32-bit segments from two 128-bit sources
+    /// Defines control mask values for constucting a 128-bit target by blending 4 32-bit segments from two 128-bit sources
     /// </summary>
     [Flags]
     public enum Blend4x32 : byte
@@ -55,9 +54,9 @@ namespace Z0
         RRLL = 0b0011,
 
         RRLR = 0b1101,
-        
+
         LRRR = 0b1110,
-        
+
         /// <summary>
         /// ([0 1 2 3], [4 5 6 7]) -> [4 5 6 7]
         /// </summary>

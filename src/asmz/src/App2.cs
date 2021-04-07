@@ -793,7 +793,7 @@ namespace Z0.Asm
             var pipe = Wf.Xed();
             var forms = pipe.LoadForms();
             using var log = ShowLog("xed-forms", FS.Extensions.Csv);
-            log.Show(XedModels.XedForm.Header);
+            log.Show(Xed.XedForm.Header);
             root.iter(forms, form => log.Show(form));
         }
 
@@ -955,9 +955,23 @@ namespace Z0.Asm
         {
             return Wf.ApiHex().ApiBlocks();
         }
+
+
+
         public void Run()
         {
-            CaptureSelectedRoutines();
+            //CaptureSelectedRoutines();
+
+            var symbols = Symbols.cache<AsmMnemonicCode>().View;
+            var count = symbols.Length;
+            var expressions = alloc<SymExpr>(count);
+            Symbols.expressions(symbols, expressions);
+
+            for(var i=0; i<count; i++)
+            {
+                Wf.Row(skip(expressions,i));
+            }
+
 
             // var indices = array<byte>(0,3,5);
             // var widths = array<byte>(3,3,2);

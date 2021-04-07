@@ -15,7 +15,7 @@ namespace Z0
             => (ApiClass)(ulong)Convert.ChangeType(id, typeof(ulong));
 
         protected OpKindAttribute(object id, ApiAsmClass asm = 0)
-            : base(@class(id), asm)
+            : base(@class(id))
         {
 
         }
