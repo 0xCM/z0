@@ -31,14 +31,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<char> letters(N4 n, BitString src, Span<char> dst)
+        public static void letters(N4 n, BitString src, Span<char> dst)
         {
             int i=0, j=0;
             dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
             dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
             dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
             dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
-            return dst;
         }
 
         /// <summary>
@@ -52,7 +51,8 @@ namespace Z0
             var bs = BitString.scalar((byte)src);
             var block = FormatBlock(src);
             var domain = $"{Perm4L.A}{Perm4L.B}{Perm4L.C}{Perm4L.D}";
-            var codomain = new string(letters(n,bs,buffer));
+            letters(n,bs,buffer);
+            var codomain = new string(buffer);
             return $"{block}: {domain} -> {codomain}";
         }
     }

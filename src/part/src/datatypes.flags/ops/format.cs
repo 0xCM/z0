@@ -47,7 +47,7 @@ namespace Z0
         {
             var fields = Clr.fields<E>();
             var count = root.min(fields.Length, src.DataWidth);
-            var buffer = Buffers.text();
+            var buffer = text.buffer();
             for(byte i=0; i<count; i++)
             {
                 var field = skip(fields, i);

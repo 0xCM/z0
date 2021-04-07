@@ -37,6 +37,5 @@ namespace Z0
             ApiCatalog =  ApiCatalogs.dataset(ManagedSources);
             Components = ApiCatalog.PartComponents;
         }
-
     }
 }

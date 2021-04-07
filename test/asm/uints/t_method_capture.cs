@@ -67,7 +67,7 @@ namespace Z0.Asm
         {
             using var dst = CaseWriter(FS.Extensions.Asm);
             var xor = LD.xor<uint>();
-            var alt = Capture.alt(Wf, Context);
+            var alt = Capture.alt(Wf);
             AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(ApiIdentity.identify(xor.Method), xor.Method)), dst);
             var gteq = LD.gteq<uint>();
             AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(ApiIdentity.identify(xor.Method), xor.Method)), dst);
@@ -83,7 +83,7 @@ namespace Z0.Asm
             for(var i=0; i<identified.Length; i++)
                 identified[i] = new IdentifiedMethod(ApiIdentity.identify(methods[i]), methods[i]);
             var buffer = sys.alloc<byte>(Pow2.T14);
-            var alt = Capture.alt(Wf, Context);
+            var alt = Capture.alt(Wf);
             var capture = alt.Capture(identified, buffer);
             AsmCheck.WriteAsm(capture, dst);
         }
@@ -115,7 +115,7 @@ namespace Z0.Asm
 
         public void read_library()
         {
-            var exchange = Capture.exchange(Context);
+            var exchange = Capture.exchange();
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
             for(var i=0; i<src.Length; i++)
             {

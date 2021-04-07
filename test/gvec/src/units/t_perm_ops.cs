@@ -97,7 +97,7 @@ namespace Z0
             var terms = gAlg.stream(0, length-1).ToArray();
             Claim.eq(length, terms.Length);
 
-            var permB = Permute.natural(n, terms);
+            var permB = Perm.natural(n, terms);
             Claim.require(permA == permB);
         }
 

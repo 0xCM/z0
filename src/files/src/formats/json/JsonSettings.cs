@@ -47,7 +47,7 @@ namespace Z0
         public static string format<S>(S src)
             where S : IJsonSettings
         {
-            var dst = Buffers.text();
+            var dst = text.buffer();
             var settings = @readonly(src.All.Array());
             var count = settings.Length;
             dst.AppendLine(Chars.LBrace);

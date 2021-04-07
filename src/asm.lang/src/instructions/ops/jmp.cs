@@ -2,22 +2,25 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static AsmInstructions;
+    using static Hex8Seq;
+    using static AsmRegOps;
+    using static AsmHexCodes;
+    using static AsmImm;
 
-    partial struct bit
+    partial struct AsmStatement
     {
         /// <summary>
-        /// Computes c = a & b
+        /// | FF /4       | JMP r/m64    | M     | Valid
         /// </summary>
-        /// <param name="a">The left bit</param>
-        /// <param name="b">The right bit</param>
-        [MethodImpl(Inline), And]
-        public static bit and(bit a, bit b)
-            => new bit(a.State & b.State);
+        /// <param name="dst"></param>
+        public Jmp jmp(r64 dst)
+            => Builder.jmp(asmhex(xff));
     }
 }

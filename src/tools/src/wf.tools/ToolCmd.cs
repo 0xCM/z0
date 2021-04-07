@@ -17,12 +17,11 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-
         [Op]
         public static string format(IToolCmd src)
         {
             var count = src.Args.Count;
-            var buffer = Buffers.text();
+            var buffer = text.buffer();
             buffer.AppendFormat("{0}{1}", src.CmdId.Format(), Chars.LParen);
             for(var i=0; i<count; i++)
             {

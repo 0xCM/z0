@@ -55,7 +55,7 @@ namespace Z0.Asm
         {
             if(imm8.Length != 0)
             {
-                var exchange = Capture.exchange(Asm);
+                var exchange = Capture.exchange();
                 EmitUnrefined(exchange, imm8.ToImm8Values(RefinementClass.Unrefined), parts);
             }
         }
@@ -67,7 +67,7 @@ namespace Z0.Asm
         }
 
         public void EmitRefined(PartId[] parts)
-            => EmitRefined(Capture.exchange(Asm), parts);
+            => EmitRefined(Capture.exchange(), parts);
 
         ParameterInfo RefiningParameter(MethodInfo src)
             => src.ImmParameters(RefinementClass.Refined).First();

@@ -650,11 +650,11 @@ namespace Z0.Asm
                 for(var b=0u; b<f1.Length; b++)
                 for(var a=0u; a<f0.Length; a++,i++)
                 {
-                    var m1 = AsmEncoding.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
-                    var m2 = AsmEncoding.modrm((byte)i);
-                    AsmEncoding.render(m1, dst.Buffer);
+                    var m1 = AsmEncoder.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
+                    var m2 = AsmEncoder.modrm((byte)i);
+                    AsmEncoder.render(m1, dst.Buffer);
                     dst.Buffer.Append(" ^ ");
-                    AsmEncoding.render(m2, dst.Buffer);
+                    AsmEncoder.render(m2, dst.Buffer);
                     dst.Buffer.Append(" = ");
                     dst.Buffer.Append((m1^m2).Encoded.FormatBits());
                     dst.ShowBuffer();
@@ -951,6 +951,7 @@ namespace Z0.Asm
             processor.Process(src);
 
         }
+
         public Index<ApiCodeBlock> LoadApiBlocks()
         {
             return Wf.ApiHex().ApiBlocks();
@@ -958,10 +959,8 @@ namespace Z0.Asm
 
 
 
-        public void Run()
+        void ShowSymbols()
         {
-            //CaptureSelectedRoutines();
-
             var symbols = Symbols.cache<AsmMnemonicCode>().View;
             var count = symbols.Length;
             var expressions = alloc<SymExpr>(count);
@@ -971,6 +970,12 @@ namespace Z0.Asm
             {
                 Wf.Row(skip(expressions,i));
             }
+        }
+
+
+        public void Run()
+        {
+            CaptureSelectedRoutines();
 
 
             // var indices = array<byte>(0,3,5);

@@ -14,7 +14,7 @@ namespace Z0
         [Op]
         public static string format(in CmdScript src)
         {
-            var dst = Buffers.text();
+            var dst = text.buffer();
             render(src, dst);
             return dst.Emit();
         }

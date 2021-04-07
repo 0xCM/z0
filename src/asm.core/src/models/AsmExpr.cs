@@ -16,7 +16,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmExpr(TextBlock src)
         {
-            Content = src;
+            Content = src.ToLower();
         }
 
         [MethodImpl(Inline)]

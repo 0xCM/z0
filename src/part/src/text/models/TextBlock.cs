@@ -73,6 +73,10 @@ namespace Z0
             => pad != null ? string.Format(RP.pad(pad.Value), Data) : Data;
 
         [MethodImpl(Inline)]
+        public TextBlock ToLower()
+            => Data?.ToLowerInvariant() ?? EmptyString;
+
+        [MethodImpl(Inline)]
         public TextBlock Trim()
             => Data?.Trim() ?? EmptyString;
 

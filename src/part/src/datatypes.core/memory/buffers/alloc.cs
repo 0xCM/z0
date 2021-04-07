@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="length">The sequence length</param>
         /// <param name="allocation">The allocation handle that defines ownership</param>
         [MethodImpl(Inline), Op]
-        public static NativeBuffers sequence(uint size, byte length, out NativeBuffer allocation)
+        public static NativeBuffers alloc(uint size, byte length, out NativeBuffer allocation)
         {
             var buffers = NativeBuffers.alloc(size,length,false);
             allocation = buffers.Allocation;

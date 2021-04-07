@@ -20,6 +20,13 @@ namespace Z0
             return ref src;
         }
 
+        [MethodImpl(Inline), Op]
+        public static ref readonly BinaryCode liberate(in BinaryCode src)
+        {
+            liberate<byte>(src.Ref);
+            return ref src;
+        }
+
         /// <summary>
         /// Enables bytespan execution
         /// </summary>

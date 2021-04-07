@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
 
     using RFI = RexFieldIndex;
-    using api = AsmEncoding;
+    using api = AsmEncoder;
 
     /// <summary>
     /// REX = [ 0100 | W:4 | R:3 | X:2 | B:1 ]

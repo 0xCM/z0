@@ -13,7 +13,7 @@ namespace Z0
     {
         const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.CaptureContext | CaptureWorkflowOptions.EmitImm;
 
-        public Index<AsmMemberRoutine> Run()
+        public Index<AsmMemberRoutine> Capture(Index<PartId> parts)
         {
             return Capture(Wf.Api.PartIdentities, DefaultOptions);
         }

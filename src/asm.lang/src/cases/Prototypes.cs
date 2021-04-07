@@ -35,6 +35,9 @@ namespace Z0.Asm
 
         const string vcopy = nameof(vcopy);
 
+        const string calls = nameof(calls);
+
+        const string targets = nameof(targets);
 
         [ApiHost(prototypes + branches)]
         public readonly partial struct Branches

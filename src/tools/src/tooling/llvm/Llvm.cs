@@ -28,7 +28,7 @@ namespace Z0.Tooling
 
         public CmdLine llvm_as(FS.FilePath input, FS.FilePath output)
         {
-            var dst = Buffers.text();
+            var dst = text.buffer();
             var name = ToolNames.@as;
             dst.AppendFormat("{0}", name);
             dst.AppendFormat(" -o {0}", output.Format(PathSeparator.BS));

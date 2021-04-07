@@ -43,7 +43,7 @@ namespace Z0
         [Op]
         static string format(CmdTypeInfo src)
         {
-            var buffer = Buffers.text();
+            var buffer = text.buffer();
             render(src, buffer);
             return buffer.Emit();
         }

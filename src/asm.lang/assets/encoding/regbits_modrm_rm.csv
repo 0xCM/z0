@@ -1,23 +1,53 @@
 # ModRm.rm Prefix Encodings, AMD Vol4 Table 1-10
 | mod | ModRM.reg                        | ModRM.r/m                        | Encoding |
-| 11  | al,ax,eax,rax,mmx0,xmm0,ymm0     | al,ax,eax,rax,mmx0,xmm0,ymm0     | 000      |
-| 11  | cl,cx,ecx,rcx,mmx1,xmm1,ymm1     | cl,cx,ecx,rcx,mmx1,xmm1,ymm1     | 001      |
-| 11  | dl,dx,edx,rdx,mmx2,xmm2,ymm2     | dl,dx,edx,rdx,mmx2,xmm2,ymm2     | 010      |
-| 11  | bl,bx,ebx,rbx,mmx3,xmm3,ymm3     | bl,bx,ebx,rbx,mmx3,xmm3,ymm3     | 011      |
-| 11  | ah,spl,sp,esp,rsp,mmx4,xmm4,ymm4 | ah,spl,sp,esp,rsp,mmx4,xmm4,ymm4 | 100      |
-| 11  | ch,bpl,bp,ebp,rbp,mmx5,xmm5,ymm5 | ch,bpl,bp,ebp,rbp,mmx5,xmm5,ymm5 | 101      |
-| 11  | dh,sil,si,esi,rsi,mmx6,xmm6,ymm6 | dh,sil,si,esi,rsi,mmx6,xmm6,ymm6 | 110      |
-| 11  | bh,dil,di,edi,rdi,mmx7,xmm7,ymm7 | bh,dil,di,edi,rdi,mmx7,xmm7,ymm7 | 111      |
-| __  | al,ax,eax,rax,mmx0,xmm0,ymm0     | [al],[ax],[eax],[rax]            | 000      |
-| __  | cl,cx,ecx,rcx,mmx1,xmm1,ymm1     | [cl],[cx],[ecx],[rcx]            | 001      |
-| __  | dl,dx,edx,rdx,mmx2,xmm2,ymm2     | [dl],[dx],[edx],[rdx]            | 010      |
-| __  | bl,bx,ebx,rbx,mmx3,xmm3,ymm3     | [bl],[bx],[ebx],[rbx]            | 011      |
-| __  | ah,spl,sp,esp,rsp,mmx4,xmm4,ymm4 | SIB                              | 100      |
-| __  | ch,bpl,bp,ebp,rbp,mmx5,xmm5,ymm5 | [bpl],[bp],[ebp],[rbp]           | 101      |
-| __  | dh,sil,si,esi,rsi,mmx6,xmm6,ymm6 | [sil],[si],[esi],[rsi]           | 110      |
-| __  | bh,dil,di,edi,rdi,mmx7,xmm7,ymm7 | [dil],[di],[edi],[rdi]           | 111      |
+| 11  | al/ax/eax/rax/mmx0/xmm0/ymm0     | al/ax/eax/rax/mmx0/xmm0/ymm0     | 000      |
+| 11  | cl/cx/ecx/rcx/mmx1/xmm1/ymm1     | cl/cx/ecx/rcx/mmx1/xmm1/ymm1     | 001      |
+| 11  | dl/dx/edx/rdx/mmx2/xmm2/ymm2     | dl/dx/edx/rdx/mmx2/xmm2/ymm2     | 010      |
+| 11  | bl/bx/ebx/rbx/mmx3/xmm3/ymm3     | bl/bx/ebx/rbx/mmx3/xmm3/ymm3     | 011      |
+| 11  | ah/spl/sp/esp/rsp/mmx4/xmm4/ymm4 | ah/spl/sp/esp/rsp/mmx4/xmm4/ymm4 | 100      |
+| 11  | ch/bpl/bp/ebp/rbp/mmx5/xmm5/ymm5 | ch/bpl/bp/ebp/rbp/mmx5/xmm5/ymm5 | 101      |
+| 11  | dh/sil/si/esi/rsi/mmx6/xmm6/ymm6 | dh/sil/si/esi/rsi/mmx6/xmm6/ymm6 | 110      |
+| 11  | bh/dil/di/edi/rdi/mmx7/xmm7/ymm7 | bh/dil/di/edi/rdi/mmx7/xmm7/ymm7 | 111      |
+| __  | al/ax/eax/rax/mmx0/xmm0/ymm0     | [al]/[ax]/[eax]/[rax]            | 000      |
+| __  | cl/cx/ecx/rcx/mmx1/xmm1/ymm1     | [cl]/[cx]/[ecx]/[rcx]            | 001      |
+| __  | dl/dx/edx/rdx/mmx2/xmm2/ymm2     | [dl]/[dx]/[edx]/[rdx]            | 010      |
+| __  | bl/bx/ebx/rbx/mmx3/xmm3/ymm3     | [bl]/[bx]/[ebx]/[rbx]            | 011      |
+| __  | ah/spl/sp/esp/rsp/mmx4/xmm4/ymm4 | SIB                              | 100      |
+| __  | ch/bpl/bp/ebp/rbp/mmx5/xmm5/ymm5 | [bpl]/[bp]/[ebp]/[rbp]           | 101      |
+| __  | dh/sil/si/esi/rsi/mmx6/xmm6/ymm6 | [sil]/[si]/[esi]/[rsi]           | 110      |
+| __  | bh/dil/di/edi/rdi/mmx7/xmm7/ymm7 | [dil]/[di]/[edi]/[rdi]           | 111      |
 
 
-and cl, al                                     ;  20C1                | 2      | [20 c1 | 0010 0000 11 000 001]
-and dl, cl                                     ;  20CA                | 2      | [20 ca | 0010 0000 11 001 010]
-and bl, dl                                     ;  20D3                | 2      | [20 d3 | 0010 0000 11 010 011]
+| EA REX.B = 0              | EA REX.B = 1         | mod | /0 | /1 | /2 | /3 | /4 | /5 | /6 | /7 | r/m |
+| [rAX]                     | [r8]                 | 00  | 00 | 08 | 10 | 18 | 20 | 28 | 30 | 38 | 000 |
+| [rCX]                     | [r9]                 | 00  | 01 | 09 | 11 | 19 | 21 | 29 | 31 | 39 | 001 |
+| [rDX]                     | [r10]                | 00  | 02 | 0A | 12 | 1A | 22 | 2A | 32 | 3A | 010 |
+| [rBX]                     | [r11]                | 00  | 03 | 0B | 13 | 1B | 23 | 2B | 33 | 3B | 011 |
+| SIB                       | SIB                  | 00  | 04 | 0C | 14 | 1C | 24 | 2C | 34 | 3C | 100 |
+| [rIP] + disp32            | [rIP] + disp32       | 00  | 05 | 0D | 15 | 1D | 25 | 2D | 35 | 3D | 101 |
+| [rSI]                     | [r14]                | 00  | 06 | 0E | 16 | 1E | 26 | 2E | 36 | 3E | 110 |
+| [rDI]                     | [r15]                | 00  | 07 | 0F | 17 | 1F | 27 | 2F | 37 | 3F | 111 |
+| [rAX] + disp8             | [r8] + disp8         | 01  | 40 | 48 | 50 | 58 | 60 | 68 | 70 | 78 | 000 |
+| [rCX] + disp8             | [r9] + disp8         | 01  | 41 | 49 | 51 | 59 | 61 | 69 | 71 | 79 | 001 |
+| [rDX] + disp8             | [r10] + disp8        | 01  | 42 | 4A | 52 | 5A | 62 | 6A | 72 | 7A | 010 |
+| [rBX] + disp8             | [r11] + disp8        | 01  | 43 | 4B | 53 | 5B | 63 | 6B | 73 | 7B | 011 |
+| [SIB] + disp8             | [SIB] + disp8        | 01  | 44 | 4C | 54 | 5C | 64 | 6C | 74 | 7C | 100 |
+| [rBP] + disp8             | [r13] + disp8        | 01  | 45 | 4D | 55 | 5D | 65 | 6D | 75 | 7D | 101 |
+| [rSI] + disp8             | [r14] + disp8        | 01  | 46 | 4E | 56 | 5E | 66 | 6E | 76 | 7E | 110 |
+| [rDI] + disp8             | [r15] + disp8        | 01  | 47 | 4F | 57 | 5F | 67 | 6F | 77 | 7F | 111 |
+| [rAX] + disp32            | [r8] + disp32        | 10  | 80 | 88 | 90 | 98 | A0 | A8 | B0 | B8 | 000 |
+| [rCX] + disp32            | [r9] + disp32        | 10  | 81 | 89 | 91 | 99 | A1 | A9 | B1 | B9 | 001 |
+| [rDX] + disp32            | [r10] + disp32       | 10  | 82 | 8A | 92 | 9A | A2 | AA | B2 | BA | 010 |
+| [rBX] + disp32            | [r11] + disp32       | 10  | 83 | 8B | 93 | 9B | A3 | AB | B3 | BB | 011 |
+| SIB + disp32              | SIB + disp32         | 10  | 84 | 8C | 94 | 9C | A4 | AC | B4 | BC | 100 |
+| [rBP] + disp32            | [r13] + disp32       | 10  | 85 | 8D | 95 | 9D | A5 | AD | B5 | BD | 101 |
+| [rSI] + disp32            | [r14] + disp32       | 10  | 86 | 8E | 96 | 9E | A6 | AE | B6 | BE | 110 |
+| [rDI] + disp32            | [r15] + disp32       | 10  | 87 | 8F | 97 | 9F | A7 | AF | B7 | BF | 111 |
+| AL/rAX/MMX0/XMM0/YMM0     | r8/MMX0/XMM8/YMM8    | 11  | C0 | C8 | D0 | D8 | E0 | E8 | F0 | F8 | 000 |
+| CL/rCX/MMX1/XMM1/YMM1     | r9/MMX1/XMM9/YMM9    | 11  | C1 | C9 | D1 | D9 | E1 | E9 | F1 | F9 | 001 |
+| DL/rDX/MMX2/XMM2/YMM2     | r10/MMX2/XMM10/YMM10 | 11  | C2 | CA | D2 | DA | E2 | EA | F2 | FA | 010 |
+| BL/rBX/MMX3/XMM3/YMM3     | r11/MMX3/XMM11/YMM11 | 11  | C3 | CB | D3 | DB | E3 | EB | F3 | FB | 011 |
+| AH/SPL/rSP/MMX4/XMM4/YMM4 | r12/MMX4/XMM12/YMM12 | 11  | C4 | CC | D4 | DC | E4 | EC | F4 | FC | 100 |
+| CH/BPL/rBP/MMX5/XMM5/YMM5 | r13/MMX5/XMM13/YMM13 | 11  | C5 | CD | D5 | DD | E5 | ED | F5 | FD | 101 |
+| DH/SIL/rSI/MMX6/XMM6/YMM6 | r14/MMX6/XMM14/YMM14 | 11  | C6 | CE | D6 | DE | E6 | EE | F6 | FE | 110 |
+| BH/DIL/rDI/MMX7/XMM7/YMM7 | r15/MMX7/XMM15/YMM15 | 11  | C7 | CF | D7 | DF | E7 | EF | F7 | FF | 111 |

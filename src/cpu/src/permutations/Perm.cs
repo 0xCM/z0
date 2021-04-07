@@ -22,6 +22,18 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> shuffles(NatPerm<N16> src)
+            => cpu.vload(w128, (byte)first(src.Terms));
+
+        [MethodImpl(Inline), Op]
+        public static Perm32 unsize(in NatPerm<N32,byte> spec)
+            => new Perm32(gcpu.vload(w256, spec.Terms));
+
+        [MethodImpl(Inline), Op]
+        public static Perm16 unsize(in NatPerm<N16,byte> spec)
+            => new Perm16(gcpu.vload(w128, spec.Terms));
+
         /// <summary>
         /// Defines a transposition for a permutation of natural length
         /// </summary>
@@ -216,7 +228,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The integral type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> Init<T>(ReadOnlySpan<T> src)
+        public static Perm<T> init<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => new Perm<T>(src.ToArray());
 
@@ -246,7 +258,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The integral type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> Init<T>(Span<T> src)
+        public static Perm<T> init<T>(Span<T> src)
             where T : unmanaged
                 => new Perm<T>(src);
 
@@ -275,17 +287,171 @@ namespace Z0
                 => new Perm<T>(gAlg.stream(default, gmath.dec(n)));
 
         /// <summary>
-        /// Initializes permutation with the identity followed by a sequence of transpostions
+        /// Distills a natural permutation on 4 symbols to its canonical literal specification
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline), Op]
+        public static Perm4L pack(NatPerm<N4> src)
+        {
+            const int segwidth = 2;
+            const int length = 4;
+
+            var dst = 0u;
+            for(int i=0, offset = 0; i< length; i++, offset +=segwidth)
+                dst |= (uint)src[i] << offset;
+            return (Perm4L)dst;
+        }
+
+        /// <summary>
+        /// Distills a natural permutation on 8 symbols to its canonical literal specification
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline), Op]
+        public static Perm8L pack(NatPerm<N8> src)
+        {
+            const int segwidth = 3;
+            const int length = 8;
+
+            var dst = 0u;
+            for(int i=0, offset = 0; i< length; i++, offset +=segwidth)
+                dst |= (uint)src[i] << offset;
+            return (Perm8L)dst;
+        }
+
+        /// <summary>
+        /// Distills a natural permutation on 16 symbols to its canonical literal specification
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline), Op]
+        public static Perm16L pack(NatPerm<N16> src)
+        {
+            const int segwidth = 4;
+            const int length = 16;
+
+            var dst = 0ul;
+            for(int i=0, offset = 0; i< length; i++, offset +=segwidth)
+                dst |= (ulong)src[i] << offset;
+            return (Perm16L)dst;
+        }
+
+        /// <summary>
+        /// Defines an identity permutation of natural length and applies a specified sequence of transpostions
+        /// </summary>
+        /// <param name="length">The length of the permutation</param>
+        /// <param name="terms">The ordered sequence of terms that specify the permutation</param>
+        /// <typeparam name="N">The length type</typeparam>
+        [MethodImpl(Inline)]
+        public static NatPerm<N> natural<N>(N n, params NatSwap<N>[] swaps)
+            where N : unmanaged, ITypeNat
+                => new NatPerm<N>(swaps);
+
+        /// <summary>
+        /// Defines an identity permutation of natural length and applies a specified sequence of transpostions
+        /// </summary>
+        /// <param name="length">The length of the permutation</param>
+        /// <param name="terms">The ordered sequence of terms that specify the permutation</param>
+        /// <typeparam name="N">The length type</typeparam>
+        [MethodImpl(Inline)]
+        public static NatPerm<N> natural<N>(params NatSwap<N>[] swaps)
+            where N : unmanaged, ITypeNat
+                => new NatPerm<N>(swaps);
+
+        /// <summary>
+        /// Defines a permutation of natural length
         /// </summary>
         /// <param name="n">The length of the permutation</param>
-        /// <param name="i">The source value</param>
-        /// <param name="j">The target value/param>
+        /// <param name="terms">The ordered sequence of terms that define the permutation</param>
+        /// <typeparam name="N">The length type</typeparam>
+        public static NatPerm<N> natural<N>(N n, ReadOnlySpan<int> terms)
+            where N : unmanaged, ITypeNat
+                => new NatPerm<N>(terms.ToArray());
+
+        /// <summary>
+        /// Defines a permutation of natural length
+        /// </summary>
+        /// <param name="n">The length of the permutation</param>
+        /// <param name="terms">The ordered sequence of terms that specify the permutation</param>
+        /// <typeparam name="N">The length type</typeparam>
+        /// <typeparam name="T">The symbol type</typeparam>
         [MethodImpl(Inline)]
-        public Perm(int n, (int i, int j)[] src)
+        public static NatPerm<N> natural<N>(N n, params int[] terms)
+            where N : unmanaged, ITypeNat
+                => new NatPerm<N>(terms);
+
+        /// <summary>
+        /// Reifies a permutation of length 8 from its canonical scalar specification
+        /// </summary>
+        /// <param name="spec">The representative</param>
+        [MethodImpl(Inline), Op]
+        public static ref readonly NatPerm<N4> natural(Perm4L spec, in NatPerm<N4> dst)
         {
-            terms = Identity(n).terms;
-            Swap(src);
+            uint data = (byte)spec;
+            for(int i=0, offset = 0; i<dst.Length; i++, offset +=2)
+                dst[i] = (int)cpu.segment(data, (byte)offset, (byte)(offset + 1));
+            return ref dst;
         }
+
+        public static NatPerm<N4> natural(Perm4L spec)
+            => natural(spec, NatPerm<N4>.Alloc());
+
+        /// <summary>
+        /// Reifies a permutation of length 8 from its canonical scalar specification
+        /// </summary>
+        /// <param name="spec">The representative</param>
+        [Op]
+        public static NatPerm<N8> natural(Perm8L spec)
+        {
+            uint data = (uint)spec;
+            var dst = NatPerm<N8>.Alloc();
+            for(int i=0, offset = 0; i<dst.Length; i++, offset +=3)
+                dst[i] = (int)cpu.segment(data, (byte)offset, (byte)(offset + 2));
+            return dst;
+        }
+
+        /// <summary>
+        /// Reifies a permutation of length 16 from its canonical scalar representative
+        /// </summary>
+        /// <param name="spec">The representative</param>
+        [MethodImpl(Inline), Op]
+        public static ref readonly NatPerm<N16> natural(Perm16L spec, in NatPerm<N16> dst)
+        {
+            ulong data = (ulong)spec;
+            for(int i=0, offset = 0; i<dst.Length; i++, offset +=4)
+                dst[i] = (int)cpu.segment(data, (byte)offset, (byte)(offset + 3));
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Reifies a permutation of length 16 from its canonical scalar representative
+        /// </summary>
+        /// <param name="spec">The representative</param>
+        [MethodImpl(Inline), Op]
+        public static NatPerm<N16> natural(Perm16L spec)
+            => natural(spec, NatPerm<N16>.Alloc());
+
+        /// <summary>
+        /// Creates a new identity permutation of natural length
+        /// </summary>
+        /// <typeparam name="N">The length type</typeparam>
+        /// <typeparam name="T">The term type</typeparam>
+        [MethodImpl(Inline)]
+        public static NatPerm<N> natural<N>(N n = default)
+            where N : unmanaged, ITypeNat
+                => NatPerm<N>.Identity.Replicate();
+
+        public static NatPerm<N,T> natural<N,T>(N n, ReadOnlySpan<T> terms)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            if(terms.Length != TypeNats.nat32i(n))
+                AppErrors.ThrowInvariantFailure($"{n} != {terms.Length}");
+            return new NatPerm<N,T>(Perm.init(terms));
+        }
+
+        public static NatPerm<N,T> natural<N,T>(N n, Span<T> terms)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => natural(n, terms.ReadOnly());
 
         [MethodImpl(Inline)]
         public Perm(int n, Swap[] src)

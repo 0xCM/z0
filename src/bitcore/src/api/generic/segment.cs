@@ -37,10 +37,10 @@ namespace Z0
         public static void segment<T>(T a, byte first, byte last, Span<byte> dst, int offset)
             where T : unmanaged
         {
-            var seg = gbits.segment(a, first, last);
-            var kBytes = GridCalcs.minbytes(last - first + 1);
+            var seg = segment(a, first, last);
+            var kBytes = bit.minbytes(last - first + 1);
             var src = slice(bytes<T>(seg), 0, kBytes);
-            src.CopyTo(dst,offset);
+            src.CopyTo(dst, offset);
         }
 
         /// <summary>
@@ -60,14 +60,14 @@ namespace Z0
 
             var sameSeg = i0.CellIndex == i1.CellIndex;
             var firstCount = ScalarCast.uint8(sameSeg ? bitcount : (uint)(width<T>() - i0.BitOffset));
-            var part1 = gbits.extract(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
+            var part1 = extract(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
 
             if(sameSeg)
                 return part1;
             else
             {
                 var lastCount = ScalarCast.uint8(bitcount - firstCount);
-                return gmath.or(part1, gmath.sal(gbits.extract(bitcell(src,i1), 0, lastCount), firstCount));
+                return gmath.or(part1, gmath.sal(extract(bitcell(src,i1), 0, lastCount), firstCount));
             }
         }
 

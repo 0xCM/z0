@@ -2,22 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Part;
 
-    partial struct Buffers
+    partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static ITextBuffer text()
-            => new TextBuffer(new StringBuilder());
-
-        [MethodImpl(Inline), Op]
-        public static ITextBuffer text(StringBuilder dst)
-            => new TextBuffer(dst);
+        public AsmEncoding encoding(AsmExpr asm, AsmHexCode code)
+            => new AsmEncoding(asm, code);
     }
 }

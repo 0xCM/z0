@@ -17,7 +17,7 @@ namespace Z0
         [Op]
         public static QuickCapture quick(IWfShell wf, IAsmContext asm)
         {
-            var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
+            var tokens = Buffers.alloc(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
             var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
             var proxy = new CaptureServiceProxy(asm.CaptureCore, exchange);
             return new QuickCapture(wf, buffer, tokens, proxy);
@@ -47,21 +47,22 @@ namespace Z0
         [Op]
         public static Index<AsmMemberRoutine> run(string[] args)
         {
-            using var wf = WfShell.create(ApiCatalogs.parts(root.controller(), args), args);
+            var parts = ApiCatalogs.parts(root.controller(), args);
+            var identities = parts.ApiCatalog.PartIdentities;
+            using var wf = WfShell.create(parts, args);
             using var runner = wf.CaptureRunner();
-
             if(args.Length != 0)
-                return runner.Capture(wf.Api.PartIdentities, CaptureWorkflowOptions.EmitImm);
+                return runner.Capture(identities, CaptureWorkflowOptions.EmitImm);
             else
-                return runner.Run();
+                return runner.Capture(identities);
         }
 
         [MethodImpl(Inline), Op]
-        public static CaptureAlt alt(IWfShell wf, IAsmContext asm)
+        public static CaptureAlt alt(IWfShell wf)
             => CaptureAlt.create(wf);
 
         [Op]
-        public static CaptureExchange exchange(IAsmContext context)
-            => new CaptureExchange(new byte[context.DefaultBufferLength]);
+        public static CaptureExchange exchange(uint size = Pow2.T16)
+            => new CaptureExchange(new byte[size]);
     }
 }

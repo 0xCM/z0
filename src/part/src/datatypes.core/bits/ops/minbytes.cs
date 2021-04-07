@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct GridCalcs
+    partial struct bit
     {
         /// <summary>
         /// Computes the minimum number of bytes required to cover a specified number of bits

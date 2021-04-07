@@ -20,7 +20,7 @@ namespace Z0
         {
             using var writer = dst.Writer();
             writer.WriteLine(EnumDatasets.header<F>());
-            var buffer = Buffers.text();
+            var buffer = text.buffer();
 
             var dataset = EnumDatasets.create<E,T>();
             for(var i=0; i<src.Length; i++)
@@ -39,7 +39,7 @@ namespace Z0
             var data = src.View;
             using var writer = dst.Writer();
             writer.WriteLine(format(spec.Header));
-            var buffer = Buffers.text();
+            var buffer = text.buffer();
             for(var i=0; i<count; i++)
             {
                 render(skip(data,i), spec, buffer);

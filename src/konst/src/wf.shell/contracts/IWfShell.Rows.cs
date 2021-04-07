@@ -40,7 +40,7 @@ namespace Z0
         {
             if(src.Length != 0)
             {
-                var buffer = Buffers.text();
+                var buffer = text.buffer();
                 var count = src.Length;
                 if(text.nonempty(label))
                     buffer.AppendLineFormat("Rowset {0}", label);

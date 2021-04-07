@@ -17,7 +17,7 @@ namespace Z0.Asm
     using RF = RexFieldIndex;
 
     [ApiHost]
-    public readonly partial struct AsmEncoding
+    public readonly partial struct AsmEncoder
     {
         [MethodImpl(Inline), Op]
         public static Vsib vsib(byte src)

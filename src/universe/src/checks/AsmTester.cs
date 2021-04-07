@@ -24,7 +24,7 @@ namespace Z0.Asm
         public AsmTester(IAsmContext context)
         {
             Context = context;
-            Tokens = Z0.Buffers.sequence(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
+            Tokens = Z0.Buffers.alloc(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
             CaptureExchange = AsmServices.exchange(Tokens[Aux3]);
         }
 

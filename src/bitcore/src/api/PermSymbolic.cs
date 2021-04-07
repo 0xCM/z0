@@ -15,6 +15,16 @@ namespace Z0
     [ApiHost]
     public readonly struct PermSymbolic
     {
+        [MethodImpl(Inline), Op]
+        public static void letters(N4 n, ReadOnlySpan<bit> src, Span<char> dst)
+        {
+            int i=0, j=0;
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+        }
+
         public static string fPerm2x128<T>(Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
             where T : unmanaged
         {

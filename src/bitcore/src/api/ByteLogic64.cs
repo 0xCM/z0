@@ -19,51 +19,51 @@ namespace Z0
     {
         [MethodImpl(Inline), Not]
         public static void not(in byte a, ref byte dst)
-            => write(L.not(u64(a)), ref dst);
+            => store(L.not(u64(a)), ref dst);
 
         [MethodImpl(Inline), And]
         public static void and(in byte a, in byte b, ref byte dst)
-            => write(L.and(u64(a), u64(b)), ref dst);
+            => store(L.and(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), Nand]
         public static void nand(in byte a, in byte b, ref byte dst)
-            => write(L.nand(u64(a), u64(b)), ref dst);
+            => store(L.nand(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), Or]
         public static void or(in byte a, in byte b, ref byte dst)
-            => write(L.or(u64(a), u64(b)), ref dst);
+            => store(L.or(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), Nor]
         public static void nor(in byte a, in byte b, ref byte dst)
-            => write(L.nor(u64(a), u64(b)), ref dst);
+            => store(L.nor(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), Xor]
         public static void xor(in byte a, in byte b, ref byte dst)
-            => write(L.xor(u64(a), u64(b)), ref dst);
+            => store(L.xor(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), Xnor]
         public static void xnor(in byte a, in byte b, ref byte dst)
-            => write(L.xnor(u64(a), u64(b)), ref dst);
+            => store(L.xnor(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), NonImpl]
         public static void nonimpl(in byte a, in byte b, ref byte dst)
-            => write(L.nonimpl(u64(a), u64(b)), ref dst);
+            => store(L.nonimpl(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), Impl]
         public static void impl(in byte a, in byte b, ref byte dst)
-            => write(L.impl(u64(a), u64(b)), ref dst);
+            => store(L.impl(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), CImpl]
         public static void cimpl(in byte a, in byte b, ref byte dst)
-            => write(L.cimpl(u64(a), u64(b)), ref dst);
+            => store(L.cimpl(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), CNonImpl]
         public static void cnonimpl(in byte a, in byte b, ref byte dst)
-            => write(L.cnonimpl(u64(a), u64(b)), ref dst);
+            => store(L.cnonimpl(u64(a), u64(b)), ref dst);
 
         [MethodImpl(Inline), XorNot]
         public static void xornot(in byte a, in byte b, ref byte dst)
-            => write(L.xor(u64(a), L.not(u64(b))), ref dst);
+            => store(L.xor(u64(a), L.not(u64(b))), ref dst);
 
         [MethodImpl(Inline), TestZ]
         public static bit testz(in byte a, in byte b)
@@ -79,7 +79,7 @@ namespace Z0
 
         [MethodImpl(Inline), Select]
         public static void select(in byte a, in byte b, in byte c, ref byte dst)
-            => write(L.select(u64(a), u64(b), u64(c)), ref dst);
+            => store(L.select(u64(a), u64(b), u64(c)), ref dst);
 
         [MethodImpl(Inline), TestZ]
         static bit testz(ulong a, ulong b)

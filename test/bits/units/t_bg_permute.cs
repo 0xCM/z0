@@ -9,7 +9,7 @@ namespace Z0
     {
         public void bg_permute_32x5()
         {
-            var p = Permute.natural(n32);
+            var p = Perm.natural(n32);
             Claim.eq(p.Length,32);
 
             var g = SubGrid.init(p);

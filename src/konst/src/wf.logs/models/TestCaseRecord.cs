@@ -52,7 +52,7 @@ namespace Z0
 
         public static string format(in TestCaseRecord src, char delimiter = FieldDelimiter)
         {
-            var dst = Buffers.text();
+            var dst = text.buffer();
             render(src, dst);
             return dst.Emit();
         }

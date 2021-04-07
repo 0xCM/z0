@@ -37,7 +37,7 @@ namespace Z0.Asm
             if(count != 0)
             {
                 using var writer = dst.Writer();
-                var buffer = Buffers.text();
+                var buffer = text.buffer();
 
                 for(var i=0; i<count; i++)
                 {
