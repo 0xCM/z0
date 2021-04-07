@@ -25,6 +25,9 @@ namespace Z0.Asm
         public string Format()
             => Content.Format();
 
+        public string FormatFixed()
+            => string.Format("{0,-46}", Content);
+
         [MethodImpl(Inline)]
         public bool Equals(AsmStatementExpr src)
             => Content.Equals(src.Content);
@@ -51,6 +54,9 @@ namespace Z0.Asm
                 return BinaryCode.Empty;
         }
 
+        public AsmStatementExpr Replace(string src, string dst)
+            => new AsmStatementExpr(Content.Replace(src,dst));
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
@@ -69,5 +75,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => new AsmStatementExpr(TextBlock.Empty);
         }
+
     }
 }

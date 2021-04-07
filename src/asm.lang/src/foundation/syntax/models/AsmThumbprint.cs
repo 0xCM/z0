@@ -13,6 +13,8 @@ namespace Z0.Asm
 
     public readonly struct AsmThumbprint : IDataTypeComparable<AsmThumbprint>
     {
+        public AsmStatementExpr Statement {get;}
+
         public AsmSigExpr Sig {get;}
 
         public AsmOpCodeExpr OpCode {get;}
@@ -20,8 +22,9 @@ namespace Z0.Asm
         public AsmHexCode Encoded {get;}
 
         [MethodImpl(Inline), Op]
-        public AsmThumbprint(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+        public AsmThumbprint(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
         {
+            Statement = statement;
             Sig = sig;
             OpCode = opcode;
             Encoded = encoded;
@@ -48,13 +51,10 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        public AsmThumbprintExpr ToExpression()
-            => new AsmThumbprintExpr(Format());
-
         public static AsmThumbprint Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmThumbprint(AsmSigExpr.Empty, AsmOpCodeExpr.Empty, AsmHexCode.Empty);
+            get => new AsmThumbprint(AsmStatementExpr.Empty, AsmSigExpr.Empty, AsmOpCodeExpr.Empty, AsmHexCode.Empty);
         }
     }
 }

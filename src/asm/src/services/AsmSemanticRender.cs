@@ -173,7 +173,7 @@ namespace Z0.Asm
         string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  AsmOffsetSequence seq)
         {
             var left = LineLocation(src.Instruction, address, offset, seq);
-            var right = text.concat(src.FormattedInstruction, SpecifierSep, src.AsmForm.Format(), EncodingSep, Format(src.Encoded));
+            var right = text.concat(src.Statment, SpecifierSep, src.AsmForm.Format(), EncodingSep, Format(src.Encoded));
             return text.concat(left, ColSep, right);
         }
 

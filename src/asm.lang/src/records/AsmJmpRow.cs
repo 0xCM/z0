@@ -21,6 +21,6 @@ namespace Z0.Asm
 
         public JmpKind Kind;
 
-        public string Asm;
+        public AsmStatementExpr Asm;
     }
 }

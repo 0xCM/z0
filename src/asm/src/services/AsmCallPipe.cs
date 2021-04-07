@@ -71,7 +71,7 @@ namespace Z0.Asm
                 dst.Target = target;
                 dst.InstructionSize = call.ByteLength;
                 dst.TargetOffset = target - (call.IP + src.Length);
-                dst.Instruction = call.FormattedInstruction;
+                dst.Instruction = call.Statment;
                 dst.Encoded = call.Encoded.Storage;
             }
             return buffer;

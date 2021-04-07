@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
     using static Chars;
@@ -20,17 +21,15 @@ namespace Z0.Asm
 
         static Fence<char> OpCodeFence => (Lt, Gt);
 
-        static Fence<char> SizeFence => (LBracket, RBracket);
-
         FS.FilePath DefaultPath()
             => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
 
-        public AsmThumprintCatalog LoadThumbprints()
+        public Index<AsmThumbprint> LoadThumbprints()
             => LoadThumbprints(DefaultPath());
 
-        public AsmThumprintCatalog LoadThumbprints(FS.FilePath src)
+        public Index<AsmThumbprint> LoadThumbprints(FS.FilePath src)
         {
-            var dst = root.list<Paired<AsmStatementExpr,AsmThumbprint>>();
+            var dst = root.list<AsmThumbprint>();
             var tpPipe = AsmThumbprints.create(Wf);
             using var reader = src.Reader();
             while(!reader.EndOfStream)
@@ -38,75 +37,47 @@ namespace Z0.Asm
                 var data = reader.ReadLine();
                 var statement = asm.statement(data.LeftOfFirst(Chars.Semicolon));
                 if(tpPipe.ParseThumbprint(data, out var thumbprint))
-                    dst.Add(root.paired(statement,thumbprint));
+                    dst.Add(thumbprint);
             }
-            return new AsmThumprintCatalog(dst.ToArray());
+            return dst.ToArray();
         }
 
-        public void EmitThumbprints()
+        public void EmitThumbprints(ReadOnlySpan<AsmThumbprint> src)
         {
-            var counter = 0;
-            var distinct = new AsmStatementSummaries();
+            var dst = DefaultPath();
+            var flow = Wf.EmittingFile(dst);
+            var count = src.Length;
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+                writer.WriteLine(format(skip(src,i)));
+            Wf.EmittedFile(flow, count);
+        }
 
-            void receiver(AsmApiStatement src)
-            {
-                counter++;
-                distinct.Add(src.Summary());
-            }
-
-            Wf.AsmTraverser().Traverse(receiver);
-            EmitThumbprints(distinct);
+        public void EmitThumbprints(ReadOnlySpan<AsmThumbprint> src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingFile(dst);
+            var count = src.Length;
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+                writer.WriteLine(format(skip(src,i)));
+            Wf.EmittedFile(flow, count);
         }
 
         public void ShowThumprintCatalog()
         {
-            var src = LoadThumbprints().Entries;
+            var src = LoadThumbprints().View;
             var count = src.Length;
             using var log = ShowLog(FS.Extensions.Asm, "thumbprints");
             for(var i=0; i<count; i++)
-            {
-                ref readonly var entry = ref skip(src,i);
-                var output = string.Format("{0,-48} ; {1}", entry.Left, entry.Right);
-                log.Show(output);
-            }
+                log.Show(AsmThumbprints.format(skip(src,i)));
         }
 
         public void EmitThumbprints(Index<AsmApiStatement> src)
         {
-            var distinct = new AsmStatementSummaries();
-            root.iter(src, s => distinct.Add(s.Summary()));
-            var collected = distinct.Collected();
-            Wf.Status($"Collected {collected.Length} thumbprints from {src.Count} statements");
-            EmitThumbprints(distinct);
-        }
-
-        public void EmitThumbprints(AsmStatementSummaries src)
-        {
-            var dst = DefaultPath();
-            EmitThumbprints(src,dst);
-        }
-
-        public void EmitThumbprints(AsmStatementSummaries src, FS.FilePath dst)
-        {
-            var flow = Wf.EmittingFile(dst);
-            using var writer = dst.Writer();
-            var buffer = text.buffer();
-            render(src, buffer);
-            writer.Write(buffer.Emit());
-            Wf.EmittedFile(flow,1);
-        }
-
-        static uint render(AsmStatementSummaries src, ITextBuffer dst)
-        {
-            var values = src.Collected();
-            var counter = 0u;
-            for(var i=0; i<values.Length; i++)
-            {
-                ref readonly var value = ref skip(values,i);
-                dst.AppendLineFormat("{0,-36} ; {1}", value.Statement, value.Thumbprint);
-                counter++;
-            }
-            return counter;
+            var distinct = root.hashset<AsmThumbprint>();
+            root.iter(src, s => distinct.Add(s.Thumbprint()));
+            Wf.Status($"Collected {distinct.Count} thumbprints from {src.Count} statements");
+            EmitThumbprints(distinct.ToArray());
         }
 
         public Outcome ParseThumbprint(string src, out AsmThumbprint thumbprint)
@@ -133,7 +104,7 @@ namespace Z0.Asm
                         {
                             if(AsmBytes.hexcode(rhs, out var encoded))
                             {
-                                thumbprint = new AsmThumbprint(sig, asm.opcode(opcode), encoded);
+                                thumbprint = new AsmThumbprint(statement, sig, asm.opcode(opcode), encoded);
                                 return true;
                             }
                             else
@@ -155,25 +126,13 @@ namespace Z0.Asm
             return false;
         }
 
-        [Op]
-        public static int cmp(in AsmThumbprintExpr a, in AsmThumbprintExpr b)
-        {
-            var e0 = a.Format().LeftOfFirst(Implication);
-            var e1 = b.Format().LeftOfFirst(Implication);
-            return e0.CompareTo(e1);
-        }
+        [MethodImpl(Inline),Op]
+        public static AsmThumbprint define(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+            => new AsmThumbprint(statement, sig, opcode, encoded);
 
         [MethodImpl(Inline),Op]
-        public static AsmThumbprint define(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
-            => new AsmThumbprint(sig, opcode, encoded);
-
-        [MethodImpl(Inline),Op]
-        public static AsmThumbprint define(AsmFormExpr form, AsmHexCode encoded)
-            => new AsmThumbprint(form.Sig, form.OpCode, encoded);
-
-        [Op]
-        public static AsmThumbprintExpr expression(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
-            => new AsmThumbprintExpr(define(sig, opcode, encoded).Format());
+        public static AsmThumbprint define(AsmStatementExpr statement, AsmFormExpr form, AsmHexCode encoded)
+            => new AsmThumbprint(statement, form.Sig, form.OpCode, encoded);
 
         [Op]
         public static int cmp(in AsmThumbprint a, in AsmThumbprint b)
@@ -185,10 +144,6 @@ namespace Z0.Asm
 
         [Op]
         public static string format(AsmThumbprint src)
-        {
-            var lhs = string.Format("({0})<{1}>[{2}]", src.Sig, src.OpCode, src.Encoded.Size);
-            var encoded = src.Encoded.Format();
-            return string.Concat(lhs,Implication, encoded);
-        }
+            => string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatFixed(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
     }
 }

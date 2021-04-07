@@ -95,7 +95,7 @@ namespace Z0.Asm
             dst.InstructionSize = src.Encoded.Size;
             dst.CallSite = dst.Source + dst.InstructionSize;
             dst.Target = IceExtractors.branch(dst.Source, src.Instruction, 0).Target.Address;
-            dst.Asm = src.FormattedInstruction;
+            dst.Asm = src.Statment;
             return ref dst;
         }
 

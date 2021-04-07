@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public MemoryAddress TargetOffset;
 
-        public string Instruction;
+        public AsmStatementExpr Instruction;
 
         public BinaryCode Encoded;
     }

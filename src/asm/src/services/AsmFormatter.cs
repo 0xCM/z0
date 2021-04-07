@@ -96,9 +96,9 @@ namespace Z0.Asm
             var address = @base + src.Offset;
 
             if(config.AbsoluteLabels)
-                dst.Append(string.Format(AbsolutePattern, address.Format(), label.Format(), src.Formatted.PadRight(config.InstructionPad, Space)));
+                dst.Append(string.Format(AbsolutePattern, address.Format(), label.Format(), src.Statement.FormatFixed()));
             else
-                dst.Append(string.Format(RelativePattern, label.Format(), src.Formatted.PadRight(config.InstructionPad, Space)));
+                dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatFixed()));
 
             dst.Append(asm.comment(format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
         }
@@ -127,7 +127,7 @@ namespace Z0.Asm
                     continue;
                 }
 
-                seek(dst, i) = IceExtractors.summarize(@base, instruction.Instruction, src.Code.Code, instruction.FormattedInstruction, offset);
+                seek(dst, i) = IceExtractors.summarize(@base, instruction.Instruction, src.Code.Code, instruction.Statment, offset);
                 offset += size;
             }
             return dst;

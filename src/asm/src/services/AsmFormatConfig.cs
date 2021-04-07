@@ -42,7 +42,7 @@ namespace Z0.Asm
             dst.EmitFileHeader = true;
             dst.EmitBaseAddress = true;
             dst.EmitSectionDelimiter = true;
-            dst.InstructionPad = 40;
+            dst.InstructionPad = 46;
             dst.AbsoluteLabels = false;
             dst.FieldDelimiter = RP.FieldSep;
             dst.SectionDelimiter = "; " + RP.PageBreak160;
@@ -56,7 +56,7 @@ namespace Z0.Asm
            bool EmitFileHeader = true,
            bool EmitBaseAddress = true,
            bool EmitSectionDelimiter = false,
-           byte InstructionPad = 40,
+           byte InstructionPad = 46,
            bool ShowLineAddresses = true,
            bool AbsoluteLabels = false,
            int SectionDelimiterWidth = 120

@@ -27,7 +27,7 @@ namespace Z0.Asm
         /// <summary>
         /// The instruction content, suitable for display
         /// </summary>
-        public string Formatted {get;}
+        public AsmStatementExpr Statement {get;}
 
         /// <summary>
         /// The instruction string paired with the op code
@@ -40,11 +40,11 @@ namespace Z0.Asm
         public Index<IceOperandInfo> Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionSummary(MemoryAddress @base, uint offset, string content, AsmFormExpr form, IceOperandInfo[] operands, byte[] encoded)
+        public AsmInstructionSummary(MemoryAddress @base, uint offset, AsmStatementExpr statment, AsmFormExpr form, IceOperandInfo[] operands, byte[] encoded)
         {
             Encoded = new CodeBlock(@base, encoded);
             Offset = offset;
-            Formatted = content;
+            Statement = statment;
             Operands = operands;
             AsmForm = form;
         }

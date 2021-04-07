@@ -58,7 +58,7 @@ namespace Z0.Asm
             get => IP - BaseAddress;
         }
 
-        public string FormattedInstruction
+        public AsmStatementExpr Statment
         {
             [MethodImpl(Inline)]
             get => Instruction.FormattedInstruction;

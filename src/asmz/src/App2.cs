@@ -857,13 +857,8 @@ namespace Z0.Asm
 
         public void EmitBitstrings()
         {
-            var blocks = LoadApiBlocks();
-            var pipe = Wf.AsmStatementPipe();
-            var statements= pipe.BuildStatements(blocks);
-            pipe.EmitBitstrings(statements);
-
-            // var bitstrings = Wf.AsmStatementPipe().EmitBitstrings();
-            // Wf.Status($"Emitted {bitstrings.Length} distinct bistrings");
+            var thumbprints = Wf.AsmThumbprints().LoadThumbprints().View;
+            Wf.AsmStatementPipe().EmitBitstrings(thumbprints);
         }
 
         void CheckCpuid()

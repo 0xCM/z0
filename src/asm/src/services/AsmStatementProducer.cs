@@ -21,15 +21,13 @@ namespace Z0.Asm
             => asm.form(src.OpCode, sig(src));
 
         AsmThumbprint thumbprint(in ApiInstruction src)
-            => AsmThumbprints.define(form(src), AsmBytes.hexcode(src.EncodedData));
+            => AsmThumbprints.define(src.Statment, form(src), AsmBytes.hexcode(src.EncodedData));
 
         string describe(in ApiInstruction src)
             => string.Format("{0} {1}", (Address16)src.Offset, thumbprint(src));
 
         AsmStatementExpr statement(ApiInstruction src)
-        {
-            return src.FormattedInstruction.Replace(" ptr", EmptyString);
-        }
+            => src.Statment.Replace(" ptr", EmptyString);
 
         void Produce(in ApiInstruction src, ITextBuffer dst)
             => dst.Append(string.Format("{0} {1}", string.Format("{0,-46}", statement(src)), asm.comment(describe(src))));

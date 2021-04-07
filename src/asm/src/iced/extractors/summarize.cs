@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial struct IceExtractors
     {
         [Op]
-        public static AsmInstructionSummary summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
-            => new AsmInstructionSummary(@base, offset,  formatted,  src.Specifier, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
+        public static AsmInstructionSummary summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, AsmStatementExpr statement, uint offset)
+            => new AsmInstructionSummary(@base, offset,  statement,  src.Specifier, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
     }
 }

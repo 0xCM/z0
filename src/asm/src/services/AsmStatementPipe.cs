@@ -81,7 +81,7 @@ namespace Z0.Asm
             if(clear)
                 ClearTarget();
 
-            var distinct = new AsmStatementSummaries();
+            var thumbprints = root.hashset<AsmThumbprint>();
             var formatter = Tables.formatter<AsmApiStatement>();
             var statements = src;
             var count = statements.Length;
@@ -99,7 +99,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(statements,i);
-                distinct.Add(statement.Summary());
+                thumbprints.Add(statement.Thumbprint());
                 var uri = statement.OpUri;
                 if(i == 0)
                 {
@@ -150,7 +150,7 @@ namespace Z0.Asm
                 counter++;
             }
 
-            Wf.AsmThumbprints().EmitThumbprints(distinct);
+            Wf.AsmThumbprints().EmitThumbprints(thumbprints.OrderBy(x => x.Statement.Content).ToArray());
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow,counter);
 
@@ -221,6 +221,25 @@ namespace Z0.Asm
             }
         }
 
+        public void EmitBitstrings(ReadOnlySpan<AsmThumbprint> src)
+        {
+            var bitstrings = AsmBitstrings.service();
+            var count = src.Length;
+            var dst = Db.IndexRoot() + FS.file("asm.bitstrings", FS.Asm);
+            var emitting = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var tp = ref skip(src,i);
+                var line1 = AsmThumbprints.format(tp);
+                var bits = bitstrings.Format(tp.Encoded);
+                var line2 = string.Format("{0,-46} ; {1}", Chars.Space, bits);
+                writer.WriteLine(line1);
+                writer.WriteLine(line2);
+            }
+            Wf.EmittedFile(emitting, count);
+        }
+
         public Index<AsmBitstring> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src)
         {
             var collecting = Wf.Running(string.Format("Collecting distinct bitstrings from {0} statements", src.Length));
@@ -250,7 +269,6 @@ namespace Z0.Asm
                 ref readonly var bitstring = ref skip(input,i);
                 var line1 = string.Format("{0,-46} ; ({1})<{2}>[3] => {4}", bitstring.Statement, bitstring.Sig, bitstring.OpCode, bitstring.Encoded.Size, bitstring.Encoded);
                 var line2 = string.Format("{0,-46} ; {1}", Chars.Space, bitstring.Format());
-                writer.WriteLine(asm.comment(RP.PageBreak120));
                 writer.WriteLine(line1);
                 writer.WriteLine(line2);
             }
@@ -258,94 +276,6 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, counter);
 
             return sorted;
-        }
-
-
-        public Index<AsmBitstring> EmitBitstrings()
-        {
-            const string RenderPattern = "{0,-16} | {1,-10} | {2,-4} | {3,-42} | {4,-32} | {5,-32} | {6,-32} | {7}";
-
-            var flow = Wf.Running();
-            var counter = 0u;
-            var allocated = 0u;
-            var writers = root.dict<ApiHostUri,StreamWriter>();
-            var @base = new MemoryAddress();
-            var opcodes = root.hashset<AsmOpCodeExpr>();
-            var service = AsmBitstrings.service();
-            var bitstrings = root.hashset<AsmBitstring>();
-
-            var dir = Db.TableDir("asm.bitstrings");
-            dir.Delete();
-            Wf.Babble($"Obliterated <{dir}>");
-
-            using var all = (dir + FS.file("asm.bitstrings", FS.Csv)).Writer();
-            all.WriteLine(header());
-
-            static string header()
-                => string.Format(RenderPattern, "Address", "Offset", "Size", "Statement", "Sig", "OpCode", "Hex", "Bits");
-
-            StreamWriter factory(FS.FilePath dst)
-            {
-                var writer = dst.Writer();
-                writer.WriteLine(header());
-                return writer;
-            }
-
-            FS.FilePath path(ApiHostUri host)
-                => dir + ApiFiles.folder(host.Part) + ApiFiles.filename(host, FS.Csv);
-
-            StreamWriter writer(ApiHostUri host)
-            {
-                var writer = default(StreamWriter);
-                if(!writers.TryGetValue(host, out writer))
-                {
-                    writer = factory(path(host));
-                    writers.Add(host, writer);
-                    allocated++;
-                    Wf.Babble($"Allocated <{host}> writer");
-                }
-
-                return writer;
-            }
-
-
-            void receive(AsmApiStatement src)
-            {
-                if(@base == 0)
-                    @base = src.IP;
-
-                var opcode = src.OpCode;
-                opcodes.Add(opcode);
-
-                var host = src.OpUri.Host;
-                var asmcode = src.Expression;
-                var hexcode = src.Encoded;
-                var sig = src.Sig;
-                var bitcode = service.Format(hexcode);
-                var offset = Addresses.address((uint)(src.IP - @base));
-                var target = writer(src.OpUri.Host);
-                var row = string.Format(RenderPattern, src.IP, offset, hexcode.Size, asmcode, sig, opcode, hexcode, bitcode);
-                //bitstrings.Add((hexcode,bitcode));
-                target.WriteLine(row);
-                all.WriteLine(row);
-                counter++;
-            }
-
-            Wf.AsmTraverser().Traverse(receive);
-
-            Wf.Babble($"Disposing <{writers.Values.Count}> out of <{allocated}> allocations");
-            root.iter(writers.Values, w => w.Dispose());
-
-            var ocpath = dir + FS.file("opcodes", FS.Csv);
-            var eoc = Wf.EmittingFile(ocpath);
-            using var ocwriter = ocpath.Writer();
-            ocwriter.WriteLine("OpCode");
-            var ocsorted = opcodes.Array().OrderBy(x => x.Content).Array();
-            root.iter(ocsorted, oc => ocwriter.WriteLine(oc));
-            Wf.EmittedFile(eoc, ocsorted.Length);
-            Wf.Ran(flow, counter);
-
-            return bitstrings.ToArray();
         }
     }
 }
