@@ -16,10 +16,10 @@ namespace Z0
     {
         readonly SpanBits<T> Data;
 
-        readonly BitFieldSpec<E,W> Spec;
+        readonly BitfieldSpec<E,W> Spec;
 
         [MethodImpl(Inline)]
-        public SpanBits(SpanBits<T> data, BitFieldSpec<E,W> spec)
+        public SpanBits(SpanBits<T> data, BitfieldSpec<E,W> spec)
         {
             Data = data;
             Spec = spec;
@@ -51,6 +51,6 @@ namespace Z0
         }
 
         public string Format()
-            => BitFieldSpecs.format(Spec.Segments);
+            => BitfieldSpecs.format(Spec.Segments);
     }
 }

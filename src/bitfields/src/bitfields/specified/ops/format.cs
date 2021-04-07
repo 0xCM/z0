@@ -11,10 +11,10 @@ namespace Z0
     using static Rules;
     using static memory;
 
-    partial struct BitFieldSpecs
+    partial struct BitfieldSpecs
     {
         [Op]
-        public static void render(in BitFieldPart src, ITextBuffer dst)
+        public static void render(in BitfieldPart src, ITextBuffer dst)
             => dst.Append(src.Format());
 
         public static string format<T>(BitFieldPart<T> src)
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="src">The source segment</param>
         /// <typeparam name="T">The type over which the segment is defined</typeparam>
         [Op]
-        public static string format(ReadOnlySpan<BitFieldPart> src)
+        public static string format(ReadOnlySpan<BitfieldPart> src)
         {
             var dst = text.buffer();
             dst.Append(OpenField);
@@ -99,7 +99,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in BitFieldPart seg)
+        public static string format(in BitfieldPart seg)
         {
             var dst = EmptyString;
             var name = seg.Name;

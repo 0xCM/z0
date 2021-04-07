@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct BitFieldSpecs
+    partial struct BitfieldSpecs
     {
         [Op]
         public static BitFieldModel model(Name name, ReadOnlySpan<string> names, ReadOnlySpan<byte> widths)
@@ -19,7 +19,7 @@ namespace Z0
             var fieldWidths = span(widths);
             var posbuffer = alloc<uint>(count);
             var positions = span(posbuffer);
-            var sBuffer = alloc<BitFieldPart>(count);
+            var sBuffer = alloc<BitfieldPart>(count);
             var segments = span(sBuffer);
             uint totalWidth = 0;
             for(var i=0u; i<count; i++)

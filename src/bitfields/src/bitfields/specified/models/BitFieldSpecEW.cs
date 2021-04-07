@@ -9,27 +9,27 @@ namespace Z0
 
     using static Part;
 
-    using api = BitFieldSpecs;
+    using api = BitfieldSpecs;
 
-   public readonly struct BitFieldSpec<E,W> : ITextual<BitFieldSpec<E,W>>
+   public readonly struct BitfieldSpec<E,W> : ITextual<BitfieldSpec<E,W>>
         where E : unmanaged
         where W : unmanaged
     {
         /// <summary>
         /// The bitfield definition upon which the reader is predicated
         /// </summary>
-        readonly BitFieldSpec Untyped;
+        readonly BitfieldSegSpecs Untyped;
 
         public uint TotalWidth {get;}
 
-        public ReadOnlySpan<BitFieldPart> Segments
+        public ReadOnlySpan<BitfieldPart> Segments
         {
             [MethodImpl(Inline)]
             get => Untyped.Segments;
         }
 
         [MethodImpl(Inline)]
-        public BitFieldSpec(in BitFieldSpec untyped, uint bitcount)
+        public BitfieldSpec(in BitfieldSegSpecs untyped, uint bitcount)
         {
             TotalWidth = bitcount;
             Untyped = untyped;

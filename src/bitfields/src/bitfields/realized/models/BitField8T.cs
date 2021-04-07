@@ -12,17 +12,18 @@ namespace Z0
 
     using api = BitFields;
 
-    public struct BitField8<T>
+
+    public struct Bitfield8<T>
         where T : unmanaged
     {
         byte _State;
 
         [MethodImpl(Inline)]
-        public BitField8(T state)
+        public Bitfield8(T state)
             => _State = uint8(state);
 
         [MethodImpl(Inline)]
-        public BitField8(byte state)
+        public Bitfield8(byte state)
             => _State = state;
 
         [MethodImpl(Inline)]
@@ -36,22 +37,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BitField8<T> Store(byte i0, byte i1, T src)
+        public Bitfield8<T> Store(byte i0, byte i1, T src)
         {
             api.store(i0, i1, src, ref this);
             return this;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator BitField8<T>(T src)
-            => new BitField8<T>(src);
+        public static implicit operator Bitfield8<T>(T src)
+            => new Bitfield8<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitField8<T>(byte src)
-            => new BitField8<T>(src);
+        public static implicit operator Bitfield8<T>(byte src)
+            => new Bitfield8<T>(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator byte(BitField8<T> src)
+        public static explicit operator byte(Bitfield8<T> src)
             => src._State;
     }
 }

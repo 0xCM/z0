@@ -9,15 +9,15 @@ namespace Z0
 
     using static Part;
 
-    public struct BitSegment<T>
+    public struct BitfieldSegment<T>
         where T : unmanaged
     {
-        readonly BitFieldPart Part;
+        readonly BitfieldPart Part;
 
         public T State;
 
         [MethodImpl(Inline)]
-        public BitSegment(BitFieldPart part, T state = default)
+        public BitfieldSegment(BitfieldPart part, T state = default)
         {
             Part = part;
             State = state;
@@ -42,7 +42,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSegment<T>(BitFieldPart part)
-            => new BitSegment<T>(part);
+        public static implicit operator BitfieldSegment<T>(BitfieldPart part)
+            => new BitfieldSegment<T>(part);
     }
 }

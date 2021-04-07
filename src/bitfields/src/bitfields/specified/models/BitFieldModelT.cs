@@ -40,7 +40,7 @@ namespace Z0
             SegmentCount = count;
             _Segments = segments;
             SegmentWidth = 0;
-            SegmentWidth = BitFieldSpecs.width(this);
+            SegmentWidth = BitfieldSpecs.width(this);
         }
 
         public ReadOnlySpan<BitFieldPart<T>> Segments

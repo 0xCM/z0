@@ -9,24 +9,24 @@ namespace Z0
 
     using static Part;
 
-    using api = BitFieldSpecs;
+    using api = BitfieldSpecs;
 
     /// <summary>
     /// Defines a partition over a contiguous sequence of bits
     /// </summary>
-    public readonly struct BitFieldSpec :  ITextual
+    public readonly struct BitfieldSegSpecs :  ITextual
     {
-        readonly Index<BitFieldPart> Data;
+        readonly Index<BitfieldPart> Data;
 
         [MethodImpl(Inline)]
-        public BitFieldSpec(BitFieldPart[] src)
+        public BitfieldSegSpecs(BitfieldPart[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public ref readonly BitFieldPart Segment(int index)
+        public ref readonly BitfieldPart Segment(int index)
             => ref Segments[index];
 
-        public ref readonly BitFieldPart this[int i]
+        public ref readonly BitfieldPart this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Segment(i);
@@ -47,7 +47,7 @@ namespace Z0
             get => api.width(this);
         }
 
-        public ReadOnlySpan<BitFieldPart> Segments
+        public ReadOnlySpan<BitfieldPart> Segments
         {
             [MethodImpl(Inline)]
             get => Data;

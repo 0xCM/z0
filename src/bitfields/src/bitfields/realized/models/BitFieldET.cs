@@ -17,21 +17,21 @@ namespace Z0
     /// </summary>
     /// <typeparam name="E">A indexing enumeration</typeparam>
     /// <typeparam name="T">The numeric type over which the bitfield is defined</typeparam>
-    public ref struct BitField<E,T>
+    public ref struct Bitfield<E,T>
         where E : unmanaged
         where T : unmanaged
     {
         /// <summary>
         /// The bitfield definition upon which the reader is predicated
         /// </summary>
-        readonly BitFieldSpec Spec;
+        readonly BitfieldSegSpecs Spec;
 
-        readonly ReadOnlySpan<BitFieldPart> Segments;
+        readonly ReadOnlySpan<BitfieldPart> Segments;
 
         T _State;
 
         [MethodImpl(Inline)]
-        public BitField(in BitFieldSpec spec, T state)
+        public Bitfield(in BitfieldSegSpecs spec, T state)
         {
             Spec = spec;
             Segments = spec.Segments;
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
-        public ref readonly BitFieldPart Segment(E index)
+        public ref readonly BitfieldPart Segment(E index)
             => ref skip(Segments, @as<E,byte>(index));
 
         /// <summary>

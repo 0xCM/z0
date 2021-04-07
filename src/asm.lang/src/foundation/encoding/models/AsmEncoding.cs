@@ -17,7 +17,7 @@ namespace Z0.Asm
         public AsmHexCode Encoding {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncoding(AsmExpr asm, AsmHexCode code)
+        public AsmEncoding(AsmExpr asm,  AsmHexCode code)
         {
             Asm = asm;
             Encoding = code;

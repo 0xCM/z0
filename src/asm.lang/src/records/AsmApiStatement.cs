@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
+
     [Record(TableId)]
     public struct AsmApiStatement : IRecord<AsmApiStatement>, IComparable<AsmApiStatement>
     {

@@ -38,20 +38,20 @@ namespace Z0
         /// </summary>
         public uint SegmentWidth {get;}
 
-        readonly Index<BitFieldPart> _Segments;
+        readonly Index<BitfieldPart> _Segments;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(Name name, uint count, uint width, Index<BitFieldPart> segments)
+        public BitFieldModel(Name name, uint count, uint width, Index<BitfieldPart> segments)
         {
             Name = name;
             StorageWidth = width;
             SegmentCount = count;
             _Segments = segments;
             SegmentWidth = 0;
-            SegmentWidth = BitFieldSpecs.width(this);
+            SegmentWidth = BitfieldSpecs.width(this);
         }
 
-        public ReadOnlySpan<BitFieldPart> Segments
+        public ReadOnlySpan<BitfieldPart> Segments
         {
             [MethodImpl(Inline)]
             get => _Segments.View;
@@ -66,7 +66,7 @@ namespace Z0
             => Segment(index).FirstIndex;
 
         [MethodImpl(Inline)]
-        public ref readonly BitFieldPart Segment(int index)
+        public ref readonly BitfieldPart Segment(int index)
             => ref _Segments[index];
     }
 }

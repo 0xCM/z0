@@ -857,8 +857,13 @@ namespace Z0.Asm
 
         public void EmitBitstrings()
         {
-            var bitstrings = Wf.AsmStatementPipe().EmitBitstrings();
-            Wf.Status($"Emitted {bitstrings.Length} distinct bistrings");
+            var blocks = LoadApiBlocks();
+            var pipe = Wf.AsmStatementPipe();
+            var statements= pipe.BuildStatements(blocks);
+            pipe.EmitBitstrings(statements);
+
+            // var bitstrings = Wf.AsmStatementPipe().EmitBitstrings();
+            // Wf.Status($"Emitted {bitstrings.Length} distinct bistrings");
         }
 
         void CheckCpuid()
@@ -975,8 +980,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            CaptureSelectedRoutines();
-
+            //CaptureSelectedRoutines();
+            EmitBitstrings();
 
             // var indices = array<byte>(0,3,5);
             // var widths = array<byte>(3,3,2);

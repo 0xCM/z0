@@ -45,6 +45,19 @@ namespace Z0.Asm
             return records;
         }
 
+        public Index<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
+        {
+            var count = src.Length;
+            var dst = root.list<AsmApiStatement>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                var instructions = Decode(block);
+                CreateStatements(instructions,dst);
+            }
+            return dst.ToArray();
+        }
+
         public Index<AsmApiStatement> EmitStatements()
             => EmitStatements(DataStore.IndexedBlocks());
 
@@ -208,6 +221,46 @@ namespace Z0.Asm
             }
         }
 
+        public Index<AsmBitstring> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src)
+        {
+            var collecting = Wf.Running(string.Format("Collecting distinct bitstrings from {0} statements", src.Length));
+            var bitstrings = AsmBitstrings.service();
+            var collected = root.hashset<AsmBitstring>();
+            var count = src.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var statement = ref skip(src,i);
+                var content = bitstrings.Format(statement.Encoded);
+                if(collected.Add(new AsmBitstring(statement.Expression, statement.Sig, statement.OpCode, statement.Encoded, content)))
+                    counter++;
+
+            }
+
+            Wf.Ran(collecting, string.Format("Collected {0} distinct bitstrings", counter));
+
+            var sorted = collected.Array();
+            Array.Sort(sorted);
+            var dst = Db.IndexRoot() + FS.file("asm.bitstrings", FS.Asm);
+            var emitting = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            var input = @readonly(sorted);
+            for(var i=0; i<counter; i++)
+            {
+                ref readonly var bitstring = ref skip(input,i);
+                var line1 = string.Format("{0,-46} ; ({1})<{2}>[3] => {4}", bitstring.Statement, bitstring.Sig, bitstring.OpCode, bitstring.Encoded.Size, bitstring.Encoded);
+                var line2 = string.Format("{0,-46} ; {1}", Chars.Space, bitstring.Format());
+                writer.WriteLine(asm.comment(RP.PageBreak120));
+                writer.WriteLine(line1);
+                writer.WriteLine(line2);
+            }
+
+            Wf.EmittedFile(emitting, counter);
+
+            return sorted;
+        }
+
+
         public Index<AsmBitstring> EmitBitstrings()
         {
             const string RenderPattern = "{0,-16} | {1,-10} | {2,-4} | {3,-42} | {4,-32} | {5,-32} | {6,-32} | {7}";
@@ -272,7 +325,7 @@ namespace Z0.Asm
                 var offset = Addresses.address((uint)(src.IP - @base));
                 var target = writer(src.OpUri.Host);
                 var row = string.Format(RenderPattern, src.IP, offset, hexcode.Size, asmcode, sig, opcode, hexcode, bitcode);
-                bitstrings.Add((hexcode,bitcode));
+                //bitstrings.Add((hexcode,bitcode));
                 target.WriteLine(row);
                 all.WriteLine(row);
                 counter++;

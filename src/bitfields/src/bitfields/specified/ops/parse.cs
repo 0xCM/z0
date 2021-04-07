@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct BitFieldSpecs
+    partial struct BitfieldSpecs
     {
         /// <summary>
         /// Produces a <see cref='BitFieldPart{T}'/> from text of the form '[max:min]'

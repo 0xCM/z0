@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct BitFieldSpecs
+    partial struct BitfieldSpecs
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitFieldPart<T> part<T>(Identifier name, T start, T end)
@@ -17,15 +17,15 @@ namespace Z0
                 => new BitFieldPart<T>(name, start, end);
 
         [MethodImpl(Inline), Op]
-        public static BitFieldPart part(Identifier name, byte startpos, byte endpos)
-            => new BitFieldPart(name, startpos, endpos);
+        public static BitfieldPart part(Identifier name, byte startpos, byte endpos)
+            => new BitfieldPart(name, startpos, endpos);
 
         [MethodImpl(Inline)]
-        public static BitFieldPart part<E>(E id, byte startpos, byte endpos)
+        public static BitfieldPart part<E>(E id, byte startpos, byte endpos)
             where E : unmanaged, Enum
                 => part((Identifier)id.ToString(), startpos, endpos);
 
-        public static BitFieldPart part<I,W>(in BitFieldIndexEntry<I,W> entry, ref byte start)
+        public static BitfieldPart part<I,W>(in BitFieldIndexEntry<I,W> entry, ref byte start)
             where I : unmanaged, Enum
             where W : unmanaged, Enum
         {

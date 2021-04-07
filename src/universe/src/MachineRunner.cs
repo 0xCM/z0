@@ -42,13 +42,13 @@ namespace Z0
                 if(options.EmitResBytes)
                     Emitted(Wf.ResBytesEmitter().Emit(blocks));
 
-                var statements = Wf.AsmStatementPipe();
-                if(options.EmitStatements)
-                    Emitted(statements.EmitStatements(blocks));
-
-                if(options.EmitAsmBitstrings)
-                    Emitted(statements.EmitBitstrings());
-
+                if(options.EmitStatements || options.EmitAsmBitstrings)
+                {
+                    var pipe = Wf.AsmStatementPipe();
+                    var statements = Emitted(pipe.EmitStatements(blocks));
+                    if(options.EmitAsmBitstrings)
+                        Emitted(pipe.EmitBitstrings(statements));
+                }
                 if(options.CorrelateMembers)
                     Wf.ApiServices().Correlate();
 
@@ -127,7 +127,10 @@ namespace Z0
         }
 
 
-        void Emitted<T>(Index<T> src)
-            => Emitted(src.View);
+        Index<T> Emitted<T>(Index<T> src)
+        {
+
+            return src;
+        }
     }
 }

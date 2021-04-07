@@ -19,17 +19,17 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target value</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T store<T>(in BitFieldPart seg, in T src, ref T dst)
+        public static ref T store<T>(in BitfieldPart seg, in T src, ref T dst)
             where T : unmanaged
                 => ref gbits.copy(src, (byte)seg.FirstIndex, (byte)seg.Width, ref dst);
 
         [MethodImpl(Inline), Op, Closures(UInt8k)]
-        public static ref T state<T>(ref BitField8<T> src)
+        public static ref T state<T>(ref Bitfield8<T> src)
             where T : unmanaged
-                => ref @as<BitField8<T>,T>(src);
+                => ref @as<Bitfield8<T>,T>(src);
 
         [MethodImpl(Inline), Op, Closures(UInt8k)]
-        public static ref BitField8<T> store<T>(byte i0, byte i1, in T src, ref BitField8<T> dst)
+        public static ref Bitfield8<T> store<T>(byte i0, byte i1, in T src, ref Bitfield8<T> dst)
             where T : unmanaged
         {
             var input = u8(src);
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void store<T>(in BitFieldSpec spec, T src, Span<T> dst)
+        public static void store<T>(in BitfieldSegSpecs spec, T src, Span<T> dst)
             where T : unmanaged
         {
             var count = spec.FieldCount;
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T store<T>(in BitFieldSpec spec, ReadOnlySpan<T> src, ref T dst)
+        public static ref T store<T>(in BitfieldSegSpecs spec, ReadOnlySpan<T> src, ref T dst)
             where T : unmanaged
         {
             var count = spec.FieldCount;
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void store<E,W,T>(in BitFieldSpec<E,W> spec, T src, Span<T> dst)
+        public static void store<E,W,T>(in BitfieldSpec<E,W> spec, T src, Span<T> dst)
             where E : unmanaged, Enum
             where W : unmanaged, Enum
             where T : unmanaged
@@ -75,7 +75,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void store<S,T>(in BitFieldSpec spec, in S src, Span<T> dst)
+        public static void store<S,T>(in BitfieldSegSpecs spec, in S src, Span<T> dst)
             where S : unmanaged
             where T : unmanaged
         {
@@ -84,13 +84,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref T store<S,T>(in BitFieldPart segment, in S src, ref T dst)
+        public static ref T store<S,T>(in BitfieldPart segment, in S src, ref T dst)
             where S : unmanaged
             where T : unmanaged
                 => ref gbits.copy(@as<S,T>(src), (byte)segment.FirstIndex, (byte)segment.Width, ref dst);
 
         [MethodImpl(Inline)]
-        public static ref S store<S,T>(in BitFieldPart segment, in S src, ref S dst)
+        public static ref S store<S,T>(in BitfieldPart segment, in S src, ref S dst)
             where S : unmanaged
             where T : unmanaged
         {
@@ -100,7 +100,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T store2<T>(in BitFieldSpec spec, ReadOnlySpan<T> src, ref T data)
+        public static ref T store2<T>(in BitfieldSegSpecs spec, ReadOnlySpan<T> src, ref T data)
             where T : unmanaged
         {
             for(var i=0; i<spec.FieldCount; i++)

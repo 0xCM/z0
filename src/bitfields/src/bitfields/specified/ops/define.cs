@@ -9,14 +9,14 @@ namespace Z0
 
     using static Part;
 
-    partial struct BitFieldSpecs
+    partial struct BitfieldSpecs
     {
         /// Defines a bitfield predicated on explicitly-specified segments
         /// </summary>
         /// <param name="segments">The defining segments</param>
         [MethodImpl(Inline), Op]
-        public static BitFieldSpec define(params BitFieldPart[] segments)
-            => new BitFieldSpec(segments);
+        public static BitfieldSegSpecs define(params BitfieldPart[] segments)
+            => new BitfieldSegSpecs(segments);
 
         /// <summary>
         /// Defines a bitfield predicated on an indexing enumeration I, the underlying numeric type of I, T, and a width-defining enumeration W
@@ -25,11 +25,11 @@ namespace Z0
         /// <typeparam name="T">The underlying type of the indexing enum</typeparam>
         /// <typeparam name="W">The width enum type</typeparam>
         [MethodImpl(Inline)]
-        public static BitFieldSpec define<I,U,W>()
+        public static BitfieldSegSpecs define<I,U,W>()
             where I : unmanaged, Enum
             where U : unmanaged
             where W : unmanaged, Enum
-                => new BitFieldSpec(parts(index<I,U,W>()));
+                => new BitfieldSegSpecs(parts(index<I,U,W>()));
 
         /// <summary>
         /// Defines a bitfield predicated on an indexing enumeration I, with an assumed underlying
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="U">The underlying type of the indexing enum</typeparam>
         /// <typeparam name="W">The width enum type</typeparam>
         [MethodImpl(Inline)]
-        public static BitFieldSpec define<I,W>()
+        public static BitfieldSegSpecs define<I,W>()
             where I : unmanaged, Enum
             where W : unmanaged, Enum
                 => define<I,byte,W>();

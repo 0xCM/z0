@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct BitFieldSpecs
+    partial struct BitfieldSpecs
     {
         public static BitFieldIndex<I,W> index<I,U,W>()
             where I : unmanaged, Enum

@@ -9,12 +9,12 @@ namespace Z0
 
     using static Part;
 
-    using api = BitFieldSpecs;
+    using api = BitfieldSpecs;
 
     /// <summary>
     /// Represents a closed interval of bits from a data source operand and corresponds to the notation [max:min] or [min,max]
     /// </summary>
-    public readonly struct BitFieldPart : IBitFieldPart<byte>
+    public readonly struct BitfieldPart : IBitFieldPart<byte>
     {
         /// <summary>
         /// The section anme
@@ -32,7 +32,7 @@ namespace Z0
         public byte LastIndex {get;}
 
         [MethodImpl(Inline)]
-        public BitFieldPart(Identifier name, byte min, byte max)
+        public BitfieldPart(Identifier name, byte min, byte max)
         {
             Name = name;
             FirstIndex = min;
@@ -52,7 +52,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator BitFieldPart<byte>(BitFieldPart src)
-            => new BitFieldPart(src.Name, src.FirstIndex, src.LastIndex);
+        public static implicit operator BitFieldPart<byte>(BitfieldPart src)
+            => new BitfieldPart(src.Name, src.FirstIndex, src.LastIndex);
     }
 }

@@ -13,13 +13,13 @@ namespace Z0
     partial struct BitFields
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitSegment<T> segment<T>(BitFieldPart part, T state = default)
+        public static BitfieldSegment<T> segment<T>(BitfieldPart part, T state = default)
             where T : unmanaged
-                => new BitSegment<T>(part, state);
+                => new BitfieldSegment<T>(part, state);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitSegment<T> segment<T>(Identifier name, byte i0, byte i1, T state = default)
+        public static BitfieldSegment<T> segment<T>(Identifier name, byte i0, byte i1, T state = default)
             where T : unmanaged
-                => new BitSegment<T>(BitFieldSpecs.part(name, i0, i1), state);
+                => new BitfieldSegment<T>(BitfieldSpecs.part(name, i0, i1), state);
     }
 }

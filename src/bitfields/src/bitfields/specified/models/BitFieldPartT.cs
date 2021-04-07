@@ -42,23 +42,23 @@ namespace Z0
         public uint Width
         {
             [MethodImpl(Inline)]
-            get => BitFieldSpecs.width(this);
+            get => BitfieldSpecs.width(this);
         }
 
-        public BitFieldPart Untyped
+        public BitfieldPart Untyped
         {
             [MethodImpl(Inline)]
-            get => new BitFieldPart(Name, bw8(FirstIndex), bw8(LastIndex));
+            get => new BitfieldPart(Name, bw8(FirstIndex), bw8(LastIndex));
         }
 
         public string Format()
-            => BitFieldSpecs.format(this);
+            => BitfieldSpecs.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator BitFieldPart(BitFieldPart<T> src)
+        public static implicit operator BitfieldPart(BitFieldPart<T> src)
             => src.Untyped;
     }
 }

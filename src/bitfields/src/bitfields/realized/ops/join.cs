@@ -30,7 +30,7 @@ namespace Z0
          }
 
          [MethodImpl(Inline), Op, Closures(Closure)]
-         public static T join<T>(BitSegment<T> a, BitSegment<T> b)
+         public static T join<T>(BitfieldSegment<T> a, BitfieldSegment<T> b)
             where T : unmanaged
         {
             var dst = gmath.sll(a.State, a.FirstIndex);

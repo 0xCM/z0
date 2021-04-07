@@ -22,6 +22,8 @@
     <ProjectReference Include="$(Circuits)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(CpuDsl)" />
+
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(CmdExec)" />
 

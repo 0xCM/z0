@@ -29,7 +29,7 @@ namespace Z0
             where W : unmanaged, Enum
         {
             var data = fixedbits<T>(bitcount);
-            var spec = new BitFieldSpec<E,W>(BitFieldSpecs.define<E,T,W>(), bitcount);
+            var spec = new BitfieldSpec<E,W>(BitfieldSpecs.define<E,T,W>(), bitcount);
             return new SpanBits<E,T,W>(data, spec);
         }
     }

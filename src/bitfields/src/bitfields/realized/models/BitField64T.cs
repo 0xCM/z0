@@ -10,13 +10,14 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public struct BitField64<T>
+
+    public struct Bitfield64<T>
         where T : unmanaged
     {
         ulong State;
 
         [MethodImpl(Inline)]
-        public BitField64(T state)
+        public Bitfield64(T state)
             => State = uint64(state);
     }
 }

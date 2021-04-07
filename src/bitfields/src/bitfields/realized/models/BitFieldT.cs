@@ -16,18 +16,18 @@ namespace Z0
     /// Defines the (stateful) bitfield api surface
     /// </summary>
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
-    public struct BitField<T>
+    public struct Bitfield<T>
         where T : unmanaged
     {
         /// <summary>
         /// The bitfield definition upon which the reader is predicated
         /// </summary>
-        public readonly BitFieldSpec Spec;
+        public readonly BitfieldSegSpecs Spec;
 
         T _State;
 
         [MethodImpl(Inline)]
-        public BitField(in BitFieldSpec spec, T state)
+        public Bitfield(in BitfieldSegSpecs spec, T state)
         {
             Spec = spec;
             _State = state;
@@ -38,14 +38,14 @@ namespace Z0
             => _State;
 
         [MethodImpl(Inline)]
-        public BitField<T> State(in T src)
+        public Bitfield<T> State(in T src)
         {
             _State = src;
             return this;
         }
 
         [MethodImpl(Inline)]
-        public T Extract(in BitFieldPart seg)
+        public T Extract(in BitfieldPart seg)
             => api.read(seg, _State);
 
         [MethodImpl(Inline)]
@@ -53,14 +53,14 @@ namespace Z0
             => api.read(Segment(index), _State);
 
         [MethodImpl(Inline)]
-        public BitField<T> Deposit(in BitFieldPart seg, in T src)
+        public Bitfield<T> Deposit(in BitfieldPart seg, in T src)
         {
             api.store<T>(seg, src, ref _State);
             return this;
         }
 
         [MethodImpl(Inline)]
-        public BitField<T> Deposit(byte index, in T src)
+        public Bitfield<T> Deposit(byte index, in T src)
         {
             api.store<T>(Segment(index), src, ref _State);
             return this;
@@ -71,7 +71,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
-        public ref readonly BitFieldPart Segment(byte index)
+        public ref readonly BitfieldPart Segment(byte index)
             => ref skip(Spec.Segments, index);
 
         public T this[byte index]

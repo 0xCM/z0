@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
     /// <typeparam name="E">A indexing enumeration</typeparam>
-    public readonly ref struct BitField<S,E,T>
+    public readonly ref struct Bitfield<S,E,T>
         where S : unmanaged
         where E : unmanaged
         where T : unmanaged
@@ -25,12 +25,12 @@ namespace Z0
         /// <summary>
         /// The bitfield definition upon which the reader is predicated
         /// </summary>
-        readonly BitFieldSpec Spec;
+        readonly BitfieldSegSpecs Spec;
 
-        readonly ReadOnlySpan<BitFieldPart> Segments;
+        readonly ReadOnlySpan<BitfieldPart> Segments;
 
         [MethodImpl(Inline)]
-        public BitField(in BitFieldSpec spec, T state)
+        public Bitfield(in BitfieldSegSpecs spec, T state)
         {
             Spec = spec;
             Segments = spec.Segments;
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
-        public ref readonly BitFieldPart Segment(E index)
+        public ref readonly BitfieldPart Segment(E index)
             => ref skip(Segments, @as<E,uint>(index));
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="part">The segment spec</param>
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
-        public T Read(in BitFieldPart part, in S src)
+        public T Read(in BitfieldPart part, in S src)
             => api.read<S,T>(part, src);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
-        public T Read(in BitFieldPart segment, in S src, bool offset)
+        public T Read(in BitfieldPart segment, in S src, bool offset)
             => api.read<S,T>(segment, src, offset);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target value</param>
         [MethodImpl(Inline)]
-        public ref T Store(in BitFieldPart segment, in S src, ref T dst)
+        public ref T Store(in BitfieldPart segment, in S src, ref T dst)
         {
             api.store<S,T>(segment, src, ref dst);
             return ref dst;
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target value</param>
         [MethodImpl(Inline)]
-        public ref S Store(in BitFieldPart segment, in S src, ref S dst)
+        public ref S Store(in BitfieldPart segment, in S src, ref S dst)
         {
             api.store<S,T>(segment, src, ref dst);
             return ref dst;

@@ -13,7 +13,7 @@ namespace Z0
     using static TextRules;
     using static memory;
 
-    partial struct BitFieldSpecs
+    partial struct BitfieldSpecs
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint width<T>(BitFieldPart<T> src)
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The bitfield spec</param>
         [MethodImpl(Inline), Op]
-        public static uint width(in BitFieldSpec spec)
+        public static uint width(in BitfieldSegSpecs spec)
         {
             var total = 0u;
             var count = spec.FieldCount;

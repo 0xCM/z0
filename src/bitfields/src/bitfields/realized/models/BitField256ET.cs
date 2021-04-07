@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public struct BitField256<E,T>
+    public struct Bitfield256<E,T>
         where E : unmanaged
         where T : unmanaged
     {
@@ -20,7 +20,7 @@ namespace Z0
         readonly Vector256<byte> Widths;
 
         [MethodImpl(Inline)]
-        public BitField256(Vector256<byte> widths, Vector256<T> state)
+        public Bitfield256(Vector256<byte> widths, Vector256<T> state)
         {
             State = state;
             Widths = default;

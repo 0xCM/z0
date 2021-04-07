@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public readonly partial struct BitFieldSpecs
+    public readonly partial struct BitfieldSpecs
     {
         const NumericKind Closure = UnsignedInts;
     }

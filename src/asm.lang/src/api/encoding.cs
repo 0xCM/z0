@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public AsmEncoding encoding(AsmExpr asm, AsmHexCode code)
-            => new AsmEncoding(asm, code);
+        public AsmEncoding encoding(AsmExpr asm, AsmHexCode hex)
+            => new AsmEncoding(asm, hex);
     }
 }

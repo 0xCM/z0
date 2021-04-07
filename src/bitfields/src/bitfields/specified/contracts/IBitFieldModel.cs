@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// The defined segments
         /// </summary>
-        ReadOnlySpan<BitFieldPart> Segments {get;}
+        ReadOnlySpan<BitfieldPart> Segments {get;}
     }
 
     public interface IBitFieldModel<T> : IBitFieldModel
@@ -39,7 +39,7 @@ namespace Z0
     {
          new ReadOnlySpan<BitFieldPart<T>> Segments {get;}
 
-         ReadOnlySpan<BitFieldPart> IBitFieldModel.Segments
-            =>  Segments.Map(s => (BitFieldPart)s);
+         ReadOnlySpan<BitfieldPart> IBitFieldModel.Segments
+            =>  Segments.Map(s => (BitfieldPart)s);
     }
 }
