@@ -20,6 +20,12 @@ namespace Z0
         static SymCache()
             => Storage = Symbols.index<K>();
 
+        public ref readonly Sym<K> this[K index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Storage[index];
+        }
+
         public Symbols<K> Index
         {
             [MethodImpl(Inline)]

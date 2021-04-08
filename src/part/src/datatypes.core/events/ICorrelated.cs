@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    sealed class RunPart : CmdReactor<RunPartCmd>
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface ICorrelated
     {
-        protected override CmdResult Run(RunPartCmd cmd)
-        {
-            Wf.Warn(string.Format("{0} unimplemented", cmd.Format()));
-            return Cmd.ok(cmd);
-        }
+        CorrelationToken Ct
+            => CorrelationToken.Default;
     }
 }

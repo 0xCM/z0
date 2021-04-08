@@ -13,7 +13,6 @@ namespace Z0.Vdsl
 
     partial struct Intel
     {
-
         public struct __m128i<T>
             where T : unmanaged
         {

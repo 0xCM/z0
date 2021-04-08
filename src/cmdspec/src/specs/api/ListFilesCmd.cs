@@ -54,18 +54,5 @@ namespace Z0
             return ref cmd;
         }
 
-        [Op]
-        public static ref ListFilesCmd WithFormat(this ref ListFilesCmd cmd, ListFormatKind format)
-        {
-            cmd.ListFormat = format;
-            return ref cmd;
-        }
-
-        [Op]
-        public static ref ListFilesCmd WithLimit(this ref ListFilesCmd cmd, uint max)
-        {
-            cmd.EmissionLimit = max;
-            return ref cmd;
-        }
     }
 }

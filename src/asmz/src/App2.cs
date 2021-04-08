@@ -979,6 +979,27 @@ namespace Z0.Asm
         public void Run()
         {
             CaptureSelectedRoutines();
+
+            var lang = AsmLang.create();
+            var symbols = lang.LangSymbols;
+            var regs = symbols.Gp16Regs();
+            var count = regs.Length;
+            var dst = Db.AppLog("and_r16_r16", FS.Asm);
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var a = ref skip(regs,i);
+
+                for(var j=0; j<count; j++)
+                {
+                    ref readonly var b = ref skip(regs,j);
+
+                    var statement = lang.and(a.Kind, b.Kind);
+                    writer.WriteLine(statement);
+                }
+            }
+
+
             //EmitBitstrings();
 
             // var indices = array<byte>(0,3,5);

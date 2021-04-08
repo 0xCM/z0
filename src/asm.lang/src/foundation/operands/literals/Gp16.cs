@@ -27,7 +27,7 @@ namespace Z0.Asm
         [Symbol("bp")]
         BP = r5,
 
-        [Symbol("s1")]
+        [Symbol("si")]
         SI = r6,
 
         [Symbol("di")]

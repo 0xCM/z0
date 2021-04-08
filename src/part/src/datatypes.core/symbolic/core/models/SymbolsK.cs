@@ -21,6 +21,12 @@ namespace Z0
             Data = src;
         }
 
+        public ref readonly Sym<K> this[K index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[bw16(index)];
+        }
+
         public bool Match(SymExpr src, out Sym<K> dst)
         {
             var count = Count;

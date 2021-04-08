@@ -7,31 +7,19 @@ namespace Z0.Asm
     using static RegIndex;
 
     [SymbolSource]
-    public enum Gp8 : byte
+    public enum Gp8Lo : byte
     {
         [Symbol("al")]
         AL = r0,
 
-        [Symbol("ah")]
-        AH = r0  | r16,
-
         [Symbol("cl")]
         CL = r1,
-
-        [Symbol("ch")]
-        CH = r1  | r16,
 
         [Symbol("dl")]
         DL = r2,
 
-        [Symbol("dh")]
-        DH = r2  | r16,
-
         [Symbol("bl")]
         BL = r3,
-
-        [Symbol("bh")]
-        BH = r3  | r16,
 
         [Symbol("spl")]
         SPL = r4,

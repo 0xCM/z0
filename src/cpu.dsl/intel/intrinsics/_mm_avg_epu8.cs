@@ -20,7 +20,6 @@ namespace Z0.Vdsl
         public static __m128i<byte> _mm_avg_epu8(__m128i<byte> a, __m128i<byte> b)
             => cpu.vavg(a,b);
 
-
         partial struct Algs
         {
             [MethodImpl(Inline), AsmOp(IForm.PAVGB_XMMdq_XMMdq)]
