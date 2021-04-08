@@ -11,6 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmRegOps.r8;
+    using K = Gp8;
 
     partial struct AsmRegOps
     {
@@ -25,8 +26,16 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator AsmRegOp(r8 src)
+            public static implicit operator AsmRegOp(G src)
                 => new AsmRegOp(RegWidth.W8, RegClass.GP, src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(G src)
+                => (K)src.Index;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(K src)
+                => new G((I)src);
         }
 
         public readonly struct al : IRegOp8<al>

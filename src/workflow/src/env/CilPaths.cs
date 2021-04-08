@@ -19,11 +19,14 @@ namespace Z0
         FS.FilePath CilDataPath(ApiHostUri host)
             => CilDataPath(ApiFiles.filename(host, X.IlData));
 
-        FS.Files CilDataFiles()
+        FS.FilePath CilDataPath(FS.FolderPath root, ApiHostUri host)
+            => root + ApiFiles.filename(host, X.IlData);
+
+        FS.Files CilDataPaths()
             => CilDataRoot().Files(X.Csv);
 
-        FS.Files CilDataFiles(PartId part)
-            => CilDataFiles().Where(f => f.IsOwner(part));
+        FS.Files CilDataPaths(PartId part)
+            => CilDataPaths().Where(f => f.IsOwner(part));
 
         FS.FolderPath CilCodeRoot()
             => CaptureRoot() + FS.folder(cil);
@@ -37,10 +40,10 @@ namespace Z0
         FS.FilePath CilCodePath(FS.FolderPath dst, ApiHostUri host)
             => dst + ApiFiles.filename(host, X.Il);
 
-        FS.Files CilCodeFiles()
+        FS.Files CilCodePaths()
             => CilCodeRoot().Files(X.Csv);
 
-        FS.Files CilCodeFiles(PartId part)
-            => CilCodeFiles().Where(f => f.IsOwner(part));
+        FS.Files CilCodePaths(PartId part)
+            => CilCodePaths().Where(f => f.IsOwner(part));
     }
 }

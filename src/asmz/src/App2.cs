@@ -173,12 +173,6 @@ namespace Z0.Asm
             //Wf.Status(definitions.BlockCount);
         }
 
-        void ShowOpCodeTokens()
-        {
-            var symbols = Symbols.cache<AsmOpCodeToken>();
-            Show(symbols.View, FS.file("opcode-symbols", FS.Csv), oc => oc.Format(), Symbols.header());
-        }
-
 
         void CheckIndexDecoder()
         {
@@ -710,7 +704,7 @@ namespace Z0.Asm
         Index<CilCapture> LoadCilRows()
         {
             var flow = Wf.Running($"Loading cil data rows");
-            var input = Db.CilDataFiles().View;
+            var input = Db.CilDataPaths().View;
             var count = input.Length;
             var dst = RecordList.create<CilCapture>();
             for(var i=0; i<count; i++)
@@ -839,12 +833,21 @@ namespace Z0.Asm
             var count = producer.Produce(Toolsets.nasm, hosts);
         }
 
-        Index<AsmMemberRoutine> CaptureSelectedRoutines()
+        [Op]
+        public Index<AsmMemberRoutine> Capture(Index<PartId> parts, FS.FolderPath dst)
         {
-            var options = CaptureWorkflowOptions.EmitImm;
+            var capture = Wf.ApiCapture();
+            var src = Wf.Api.PartHosts(parts);
+            Wf.Status($"Capturing {src.Length} parts");
+            var members = src.SelectMany(x => Wf.ApiJit().JitHost(x)).Array();
+            return capture.CaptureMembers(members, dst);
+        }
+
+        void CaptureSelectedRoutines()
+        {
             var parts = root.array(PartId.AsmZ, PartId.AsmLang, PartId.AsmCore);
-            var routines = Capture.run(Wf, parts, options);
-            return routines;
+            var dst = Db.AppLogDir() + FS.folder("capture");
+            Capture(parts,dst);
         }
 
         public void EmitXedCatalog()
@@ -975,8 +978,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            //CaptureSelectedRoutines();
-            EmitBitstrings();
+            CaptureSelectedRoutines();
+            //EmitBitstrings();
 
             // var indices = array<byte>(0,3,5);
             // var widths = array<byte>(3,3,2);

@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using OCD = AsmOpCodeDocs;
-    using OCT = AsmOpCodeToken;
 
     [SymbolSource]
     public enum RegModifierToken : byte
@@ -16,31 +15,31 @@ namespace Z0.Asm
         /// <see cref='OCD.ᕀrb'/>
         /// </summary>
         [Symbol("+rb",OCD.ᕀrb)]
-        rb = OCT.rb,
+        rb,
 
         /// <summary>
         /// <see cref='OCD.ᕀrw'/>
         /// </summary>
         [Symbol("+rw", OCD.ᕀrw)]
-        rw = OCT.rw,
+        rw,
 
         /// <summary>
         /// <see cref='OCD.ᕀrd'/>
         /// </summary>
         [Symbol("+rd",OCD.ᕀrd)]
-        rd = OCT.rd,
+        rd,
 
         /// <summary>
         /// <see cref='OCD.ᕀro'/>
         /// </summary>
         [Symbol("+ro",OCD.ᕀro)]
-        ro = OCT.ro,
+        ro,
 
         /// <summary>
         /// <see cref='OCD.ᕀrq'/>
         /// </summary>
         [Symbol("+ro",OCD.ᕀrq)]
-        rq = OCT.rq,
+        rq,
     }
 }
 

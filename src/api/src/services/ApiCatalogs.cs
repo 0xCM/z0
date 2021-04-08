@@ -283,6 +283,31 @@ namespace Z0
             return query.ToArray();
         }
 
+        public static FS.Files colocated()
+            => FS.dir(root.controller().Location).TopFiles;
+
+        public static Index<Assembly> components(PartId[] identities)
+        {
+            var dst = root.list<Assembly>();
+            var dir = FS.dir(root.controller().Location);
+            var candidates = colocated();
+            foreach(var path in candidates)
+            {
+                if((path.Is(FS.Dll) || path.Is(FS.Exe)) && FS.managed(path))
+                {
+                    foreach(var id in identities)
+                    {
+                        var match = dir + FS.component(id, path.Ext);
+                        if(match.Equals(path))
+                            dst.Add(Assembly.LoadFrom(match.Name));
+                    }
+
+                }
+            }
+
+            return dst.ToArray();
+        }
+
         public static IApiCatalogDataset dataset(IPart[] parts)
         {
             var catalogs = parts.Select(x => catalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);

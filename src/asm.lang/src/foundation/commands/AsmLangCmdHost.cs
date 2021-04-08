@@ -29,7 +29,6 @@ namespace Z0.Asm
         void ShowSigSymbols()
         {
             ShowMnemonicSymbols();
-            ShowOperandSymbols();
             ShowEFlagSymbols();
             ShowCompositeSymbols();
             ShowModeSymbols();
@@ -68,10 +67,6 @@ namespace Z0.Asm
         [Action(K.ShowMnemonicSymbols)]
         void ShowMnemonicSymbols()
             => root.use(OpenShowLog("sigops.mnemonics"), log => root.iter(SigSymbols.Mnemonics.Storage, symbol => Show(symbol, log)));
-
-        [Action(K.ShowOperandSymbols)]
-        void ShowOperandSymbols()
-            => root.use(OpenShowLog("sigops.operands"), log => root.iter(SigSymbols.SigOps.Storage, symbol => Show(symbol, log)));
 
         [Action(K.ShowRexBits)]
         void ShowRexBits()

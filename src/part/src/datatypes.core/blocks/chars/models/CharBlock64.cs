@@ -47,6 +47,8 @@ namespace Z0
 
         public static CharBlock64 Empty => RP.Spaced64;
 
+        public static CharBlock64 Null => default;
+
         public const ushort CharCount = 64;
 
         /// <summary>

@@ -30,14 +30,39 @@ namespace Z0
             try
             {
                 var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
-                var extracts = EmitExtracts(host, src, Wf.Db().RawExtractFile(host));
+                var extracts = EmitExtracts(host, src, Wf.Db().RawExtractPath(host));
                 var parsed = ParseExtracts(host, src);
                 if(parsed.Length != 0)
                 {
-                    EmitApiHex(host, parsed, Wf.Db().ApiHexFile(host));
+                    EmitApiHex(host, parsed, Wf.Db().ApiHexPath(host));
                     EmitMsilData(host, parsed, Wf.Db().CilDataPath(host));
                     EmitMsilCode(host, parsed, Wf.Db().CilCodePath(host));
                     routines = DecodeMembers(host, parsed, src);
+                }
+                Wf.Ran(flow);
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+            return routines;
+        }
+
+        public AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src, FS.FolderPath dst)
+        {
+            var routines = AsmMemberRoutines.Empty;
+            try
+            {
+                var db = Wf.Db();
+                var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
+                var extracts = EmitExtracts(host, src, db.RawExtractPath(dst, host));
+                var parsed = ParseExtracts(host, src);
+                if(parsed.Length != 0)
+                {
+                    EmitApiHex(host, parsed, db.ApiHexPath(dst, host));
+                    EmitMsilData(host, parsed, db.CilDataPath(dst, host));
+                    EmitMsilCode(host, parsed, db.CilCodePath(dst, host));
+                    routines = DecodeMembers(host, parsed, src, db.AsmPath(dst,host));
                 }
                 Wf.Ran(flow);
             }
@@ -91,7 +116,7 @@ namespace Z0
         }
 
         AsmMemberRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
-            => DecodeMembers(host,src,extracts, Wf.Db().AsmFile(host));
+            => DecodeMembers(host,src,extracts, Wf.Db().AsmPath(host));
 
         AsmMemberRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts, FS.FilePath dst)
         {

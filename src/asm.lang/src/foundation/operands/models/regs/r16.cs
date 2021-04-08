@@ -11,6 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmRegOps.r16;
+    using K = Gp16;
 
     partial struct AsmRegOps
     {
@@ -25,8 +26,16 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator AsmRegOp(r16 src)
+            public static implicit operator AsmRegOp(G src)
                 => new AsmRegOp(RegWidth.W16, RegClass.GP, src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(G src)
+                => (K)src.Index;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(K src)
+                => new G((I)src);
         }
 
         public readonly struct ax : IRegOp16<ax>

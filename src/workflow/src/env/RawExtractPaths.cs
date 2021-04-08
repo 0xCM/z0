@@ -12,16 +12,19 @@ namespace Z0
         FS.FolderPath RawExtractRoot()
             => CaptureRoot() + FS.folder(extracts);
 
-        FS.Files RawExtractFiles()
+        FS.Files RawExtractPaths()
             => RawExtractRoot().TopFiles;
 
-        FS.FilePath RawExtractFile(FS.FileName name)
+        FS.FilePath RawExtractPath(FS.FileName name)
             => RawExtractRoot() + name;
 
-        FS.FilePath RawExtractFile(ApiHostUri host)
-            => RawExtractFile(ApiFiles.filename(host, X.XCsv));
+        FS.FilePath RawExtractPath(FS.FolderPath root, ApiHostUri host)
+            => root + ApiFiles.filename(host, X.XCsv);
+
+        FS.FilePath RawExtractPath(ApiHostUri host)
+            => RawExtractPath(ApiFiles.filename(host, X.XCsv));
 
         FS.Files RawExtractFiles(PartId part)
-            => RawExtractFiles().Where(f => f.IsOwner(part));
+            => RawExtractPaths().Where(f => f.IsOwner(part));
     }
 }

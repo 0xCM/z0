@@ -67,6 +67,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.View;
         }
+
         [MethodImpl(Inline)]
         public static implicit operator Symbols<K>(Sym<K>[] src)
             => new Symbols<K>(src);
@@ -74,5 +75,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Sym<K>[](Symbols<K> src)
             => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Index<K,Sym<K>>(Symbols<K> src)
+            => new Index<K, Sym<K>>(src.Data);
     }
 }

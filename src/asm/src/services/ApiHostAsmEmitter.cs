@@ -19,7 +19,7 @@ namespace Z0.Asm
         }
 
         public AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)
-            => Emit(host,src, Wf.Db().AsmFile(host));
+            => Emit(host,src, Wf.Db().AsmPath(host));
 
         public AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {

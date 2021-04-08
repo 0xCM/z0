@@ -51,7 +51,7 @@ namespace Z0
         public Index<CilCapture> LoadCapturedCil()
         {
             var flow = Wf.Running($"Loading cil data rows");
-            var input = Db.CilDataFiles().View;
+            var input = Db.CilDataPaths().View;
             var count = input.Length;
             var dst = RecordList.create<CilCapture>();
             for(var i=0; i<count; i++)

@@ -55,7 +55,7 @@ namespace Z0
         {
             var flow = Wf.Running();
             using var step = Wf.ApiCapture();
-            var captured = step.CaptureApi(parts);
+            var captured = step.CaptureParts(parts);
             Wf.Ran(flow);
             return captured;
         }

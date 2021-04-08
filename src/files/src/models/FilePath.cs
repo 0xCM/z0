@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct FilePath : IFsEntry<FilePath>, IComparable<FilePath>, ILocation<FilePath>
+        public readonly struct FilePath : IFsEntry<FilePath>, IComparable<FilePath>, ILocation<FilePath>, IEquatable<FilePath>
         {
             public PathPart Name {get;}
 
@@ -130,7 +130,6 @@ namespace Z0
             public bool IsNot(FileExt x1, FileExt x2)
                 => !Is(x1,x2);
 
-
             public FilePath WithoutExtension
                 => FolderPath + FileName.WithoutExtension;
 
@@ -158,6 +157,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public bool EndsWith(string substring)
                 => FileName.EndsWith(substring);
+
+            public bool Equals(FilePath src)
+                => Name.Equals(src.Name);
 
             [MethodImpl(Inline)]
             public string Format()

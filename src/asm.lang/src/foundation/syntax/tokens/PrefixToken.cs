@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
 
     [SymbolSource]
-    public enum AsmPrefixToken : byte
+    public enum PrefixToken : byte
     {
         None = 0,
 

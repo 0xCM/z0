@@ -17,6 +17,12 @@ namespace Z0
         public SymExpr(string content)
             => Content = content ?? EmptyString;
 
+        public ReadOnlySpan<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => Content;
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => Content;

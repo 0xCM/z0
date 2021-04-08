@@ -16,34 +16,31 @@ namespace Z0.Asm
     {
         public Identifier Name {get;}
 
-        public AsmSigToken Kind {get;}
-
         public SymExpr Symbol {get;}
 
         [MethodImpl(Inline)]
-        public AsmSigOperand(Identifier name, AsmSigToken kind, SymExpr symbol)
+        public AsmSigOperand(Identifier name, SymExpr symbol)
         {
             Name  = name;
-            Kind = kind;
             Symbol = symbol;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsEmpty || Kind == 0;
+            get => Name.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsNonEmpty || Kind != 0;
+            get => Name.IsNonEmpty;
         }
 
         public static AsmSigOperand Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSigOperand(Identifier.Empty, AsmSigToken.None, default);
+            get => new AsmSigOperand(Identifier.Empty, SymExpr.Empty);
         }
     }
 }

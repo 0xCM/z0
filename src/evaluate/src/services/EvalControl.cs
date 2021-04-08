@@ -27,7 +27,7 @@ namespace Z0
 
         void ExecuteHost(BufferTokens buffers, ApiHostUri host)
         {
-            var src = Wf.Db().ApiHexFile(host);
+            var src = Wf.Db().ApiHexPath(host);
             if(!src.Exists)
                 return;
 

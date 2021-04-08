@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Reflection;
+
     partial struct FS
     {
         [Op]

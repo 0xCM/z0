@@ -57,7 +57,7 @@ namespace Z0
         Outcome<uint> ClearParsed(PartId part)
         {
             var kind = FS.Extensions.PCsv;
-            var files = Db.ParsedExtractFiles(part);
+            var files = Db.ParsedExtractPaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);
@@ -69,7 +69,7 @@ namespace Z0
         Outcome<uint> ClearAsm(PartId part)
         {
             var kind = FS.Extensions.Asm;
-            var files = Db.AsmFiles(part);
+            var files = Db.AsmPaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);
@@ -81,7 +81,7 @@ namespace Z0
         Outcome<uint> ClearHex(PartId part)
         {
             var kind = FS.Extensions.Hex;
-            var files = Db.ApiHexFiles(part);
+            var files = Db.ApiHexPaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);
@@ -93,7 +93,7 @@ namespace Z0
         Outcome<uint> ClearCilData(PartId part)
         {
             var kind = FS.Extensions.IlData;
-            var files = Db.CilDataFiles(part);
+            var files = Db.CilDataPaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);
@@ -105,7 +105,7 @@ namespace Z0
         Outcome<uint> ClearCilCode(PartId part)
         {
             var kind = FS.Extensions.Il;
-            var files = Db.CilCodeFiles(part);
+            var files = Db.CilCodePaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);

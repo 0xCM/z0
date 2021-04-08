@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using SD = AsmSigDocs;
-    using ST = AsmSigToken;
+    using ST = RmToken;
 
     /// <summary>
     /// Classifies composite operand signature specifications
@@ -37,12 +37,12 @@ namespace Z0.Asm
         regM32 = ST.regM32,
 
         [Symbol("reg")]
-        reg = ST.reg,
+        reg = RegToken.reg,
 
         [Symbol("m", SD.m)]
-        m = ST.m,
+        m = MemToken.m,
 
         [Symbol("mem")]
-        mem = ST.mem,
+        mem = MemToken.mem,
     }
 }

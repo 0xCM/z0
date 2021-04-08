@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Linq;
     using System.IO;
+    using System.Collections.Generic;
 
     using Z0.Asm;
 
@@ -29,10 +29,16 @@ namespace Z0
             Jitter = Wf.ApiJit();
         }
 
+        public Index<ApiMemberExtract> ExtractHostOps(IApiHost host)
+            => Extractor.Extract(Jitter.JitHost(host));
+
+        public Index<ApiMemberExtract> ExtractMembers(ApiHostMembers src)
+            => Extractor.Extract(src.Members);
+
         /// <summary>
         /// Root capture routine that traverses and captures the apiset
         /// </summary>
-        public Index<AsmMemberRoutine> CaptureApi()
+        public Index<AsmMemberRoutine> CaptureParts()
         {
             using var flow = Wf.Running();
             ClearArchive();
@@ -41,7 +47,7 @@ namespace Z0
             return captured.SelectMany(x => x.Storage);
         }
 
-        public Index<AsmMemberRoutine> CaptureApi(Index<PartId> parts)
+        public Index<AsmMemberRoutine> CaptureParts(Index<PartId> parts)
         {
             using var flow = Wf.Running();
             ClearArchive(parts);
@@ -50,19 +56,39 @@ namespace Z0
             return captured.SelectMany(x => x.Storage);
         }
 
-        public void CaptureMembers(ApiMembers src)
+        public Index<AsmMemberRoutine> CaptureMembers(ApiMembers src, FS.FolderPath dst)
         {
             var hosted = src.GroupBy(x => x.Host).Select(x => new ApiHostMembers(x.Key, x.ToArray())).Array();
+            var count = hosted.Length;
+            var collected = root.list<AsmMemberRoutine>();
+            for(var i=0; i<count; i++)
+                CaptureMembers(skip(hosted,i), dst, collected);
+            return collected.ToArray();
         }
 
-        public Index<AsmMemberRoutines> CaptureApiCatalog(IApiCatalogDataset catalog)
+        public void CaptureMembers(ApiHostMembers src, FS.FolderPath path, List<AsmMemberRoutine> dst)
+        {
+            var routines = AsmMemberRoutines.Empty;
+            var flow = Wf.Running(src.Host);
+            try
+            {
+                routines = Emitter.Emit(src.Host, ExtractMembers(src), path);
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+            Wf.Ran(flow, src.Host);
+        }
+
+        public Index<AsmMemberRoutines> CaptureCatalog(IApiCatalogDataset catalog)
         {
             var dst = root.list<AsmMemberRoutines>();
             using var flow = Wf.Running();
             var catalogs = catalog.Catalogs.View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
-                dst.AddRange(CapturePart(skip(catalogs,i)));
+                dst.AddRange(CaptureCatalog(skip(catalogs,i)));
             Wf.Ran(flow, count);
             return dst.ToArray();
         }
@@ -74,7 +100,7 @@ namespace Z0
             var catalogs = Wf.Api.Catalogs.View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
-                dst.AddRange(CapturePart(skip(catalogs,i)));
+                dst.AddRange(CaptureCatalog(skip(catalogs,i)));
             Wf.Ran(flow, count);
             return dst.ToArray();
         }
@@ -86,7 +112,7 @@ namespace Z0
             var catalogs = Wf.Api.PartCatalogs(parts).View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
-                dst.AddRange(CapturePart(skip(catalogs,i)));
+                dst.AddRange(CaptureCatalog(skip(catalogs,i)));
             Wf.Ran(flow, count);
             return dst.ToArray();
         }
@@ -105,7 +131,7 @@ namespace Z0
         /// Captures a catalog-specified part
         /// </summary>
         /// <param name="src">The part catalog</param>
-        public Index<AsmMemberRoutines> CapturePart(IApiPartCatalog src)
+        public Index<AsmMemberRoutines> CaptureCatalog(IApiPartCatalog src)
         {
             if(src.IsEmpty)
                 return sys.empty<AsmMemberRoutines>();
@@ -145,10 +171,19 @@ namespace Z0
         public Index<AsmMemberRoutines> CaptureHosts(ReadOnlySpan<IApiHost> src)
         {
             var count = src.Length;
-            var dst = root.list<AsmMemberRoutines>();
+            var collected = root.list<AsmMemberRoutines>();
             for(var i=0; i<count; i++)
-                dst.Add(CaptureHost(skip(src, i)));
-            return dst.ToArray();
+                collected.Add(CaptureHost(skip(src, i)));
+            return collected.ToArray();
+        }
+
+        public Index<AsmMemberRoutines> CaptureHosts(ReadOnlySpan<IApiHost> src, FS.FolderPath dst)
+        {
+            var count = src.Length;
+            var collected = root.list<AsmMemberRoutines>();
+            for(var i=0; i<count; i++)
+                collected.Add(CaptureHost(skip(src, i), dst));
+            return collected.ToArray();
         }
 
         public AsmMemberRoutines CaptureHost(IApiHost src)
@@ -168,27 +203,23 @@ namespace Z0
             return routines;
         }
 
-        public AsmMemberRoutines CaptureHost(ApiHostMembers src, FS.FolderPath dst)
+        public AsmMemberRoutines CaptureHost(IApiHost src, FS.FolderPath dst)
         {
+            src = root.require(src);
             var routines = AsmMemberRoutines.Empty;
-            var flow = Wf.Running(src.Host);
+            var flow = Wf.Running(src.Name);
             try
             {
-                routines = Emitter.Emit(src.Host, ExtractMembers(src));
+                routines = Emitter.Emit(src.Uri, ExtractHostOps(src), dst);
             }
             catch(Exception e)
             {
                 Wf.Error(e);
             }
-            Wf.Ran(flow, src.Host);
+            Wf.Ran(flow, src.Name);
             return routines;
         }
 
-        public Index<ApiMemberExtract> ExtractHostOps(IApiHost host)
-            => Extractor.Extract(Jitter.JitHost(host));
-
-        public Index<ApiMemberExtract> ExtractMembers(ApiHostMembers src)
-            => Extractor.Extract(src.Members);
 
         public AsmMemberRoutines CaptureTypes(Index<ApiRuntimeType> src)
         {

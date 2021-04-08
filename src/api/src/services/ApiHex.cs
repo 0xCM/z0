@@ -15,7 +15,7 @@ namespace Z0
     {
         public Index<ApiCodeBlock> ApiBlocks()
         {
-            var parsed = Db.ParsedExtractFiles();
+            var parsed = Db.ParsedExtractPaths();
             return ApiBlocks(parsed);
         }
 
@@ -59,7 +59,7 @@ namespace Z0
         [Op]
         public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
-            var dst = wf.Db().ApiHexFile(uri);
+            var dst = wf.Db().ApiHexPath(uri);
             return emit(wf,uri, src, dst);
         }
 
@@ -78,7 +78,7 @@ namespace Z0
                     emit(content, dst);
                     wf.EmittedTable(fa,count);
 
-                    var b = wf.Db().ParsedExtractFile(uri);
+                    var b = wf.Db().ParsedExtractPath(uri);
                     var fb = wf.EmittingTable<ApiHexRow>(b);
                     emit(content, b);
                     wf.EmittedTable(fb,count);

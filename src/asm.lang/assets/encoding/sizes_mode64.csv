@@ -1,0 +1,7 @@
+# Table 3.4 - Effective Operand and Address Size attributes in 64-bit mode
+| Prefix                    | A  | B  | C  | D  | E  | F  | G  | H  |
+| Rex.W                     | 0  | 0  | 0  | 0  | 1  | 1  | 1  | 1  |
+| Operand Size Prefix (66h) | N  | N  | Y  | Y  | N  | N  | Y  | Y  |
+| Address Size prefix (67h) | N  | Y  | N  | Y  | N  | Y  | N  | Y  |
+| Effective Operand Size    | 32 | 32 | 16 | 16 | 64 | 64 | 64 | 64 |
+| Effective Address Size    | 64 | 32 | 64 | 32 | 64 | 32 | 64 | 32 |

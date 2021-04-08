@@ -39,7 +39,7 @@ namespace Z0
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
         {
             var paths = wf.Db();
-            var files = paths.ApiHexFiles().View;
+            var files = paths.ApiHexPaths().View;
             var empty = Index<ApiCodeDescriptor>.Empty;
             if(files.Length == 0)
             {

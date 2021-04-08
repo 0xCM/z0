@@ -112,14 +112,14 @@ namespace Z0.Asm
         {
             var symbols = SymCache<IClass>.get().Index;
             var entries = symbols.View;
-            var dst = Db.AsmCatalogFile(FS.file("xed-classes", FS.Csv));
+            var dst = Db.AsmCatalogPath(FS.file("xed-classes", FS.Csv));
             EmitSymbols(entries, dst);
             return symbols;
         }
 
         public Index<XedForm> EmitForms()
         {
-            var dst = Db.AsmCatalogFile(FS.file("xed-forms", FS.Csv));
+            var dst = Db.AsmCatalogPath(FS.file("xed-forms", FS.Csv));
             return EmitForms(dst);
         }
 

@@ -15,8 +15,6 @@ namespace Z0.Asm
 
         readonly Symbols<AsmMnemonicCode> _Mnemonics;
 
-        readonly Symbols<AsmSigToken> _SigOps;
-
         readonly Symbols<CompositeSigToken> _Composites;
 
         internal AsmSigSymbols()
@@ -24,7 +22,6 @@ namespace Z0.Asm
             _EFlags = Symbols.cache<EFlag>();
             _Modes = Symbols.cache<Mode>();
             _Mnemonics = Symbols.cache<AsmMnemonicCode>();
-            _SigOps = Symbols.cache<AsmSigToken>();
             _Composites = Symbols.cache<CompositeSigToken>();
         }
 
@@ -33,9 +30,6 @@ namespace Z0.Asm
 
         public Symbols<EFlag> Flags
             => _EFlags;
-
-        public Symbols<AsmSigToken> SigOps
-            => _SigOps;
 
         public Symbols<AsmMnemonicCode> Mnemonics
             => _Mnemonics;

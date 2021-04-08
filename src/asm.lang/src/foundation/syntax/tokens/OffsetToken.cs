@@ -5,45 +5,44 @@
 namespace Z0.Asm
 {
     using SD = AsmOpCodeDocs;
-    using OCT = AsmOpCodeToken;
 
     [SymbolSource]
-    public enum AsmOffsetToken : byte
+    public enum OffsetToken : byte
     {
         /// <summary>
         /// <see cref='SD.cb'/>
         /// </summary>
         [Symbol("cb", SD.cb)]
-        cb = OCT.cb,
+        cb,
 
         /// <summary>
         /// <see cref='SD.cw'/>
         /// </summary>
         [Symbol("cw", SD.cw)]
-        cw = OCT.cw,
+        cw,
 
         /// <summary>
         /// <see cref='SD.cd'/>
         /// </summary>
         [Symbol("cd", SD.cd)]
-        cd = OCT.cd,
+        cd,
 
         /// <summary>
         /// <see cref='SD.cp'/>
         /// </summary>
         [Symbol("cp", SD.cp)]
-        cp = OCT.cp,
+        cp,
 
         /// <summary>
         /// <see cref='SD.co'/>
         /// </summary>
         [Symbol("co", SD.co)]
-        co = OCT.co,
+        co,
 
         /// <summary>
         /// <see cref='SD.ct'/>
         /// </summary>
         [Symbol("ct", SD.ct)]
-        ct = OCT.ct,
+        ct,
     }
 }
