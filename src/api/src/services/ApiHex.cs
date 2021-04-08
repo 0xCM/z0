@@ -56,11 +56,30 @@ namespace Z0
         public static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
             => src.Length != 0 ? Tables.emit(src, dst) : 0;
 
-        [Op]
-        public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
+        public Index<ApiHexRow> Emit(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FolderPath dst)
         {
-            var dst = wf.Db().ApiHexPath(uri);
-            return emit(wf,uri, src, dst);
+            var count = src.Length;
+            if(count != 0)
+            {
+                var content = rows(uri, src);
+                if(content.Length != count)
+                    Wf.Error($"The distilled row count of {content.Length} does not match the input count of {count}");
+                else
+                {
+                    var p0 = Db.ApiHexPath(dst, uri);
+                    var fa = Wf.EmittingTable<ApiHexRow>(p0);
+                    emit(content, p0);
+                    Wf.EmittedTable(fa,count);
+
+                    var p1 = Db.ParsedExtractPath(dst, uri);
+                    var fb = Wf.EmittingTable<ApiHexRow>(p1);
+                    emit(content, p1);
+                    Wf.EmittedTable(fb,count);
+                }
+                return content;
+            }
+            else
+                return sys.empty<ApiHexRow>();
         }
 
         [Op]

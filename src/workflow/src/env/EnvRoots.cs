@@ -34,5 +34,12 @@ namespace Z0
 
         FS.FolderPath NtSymbolDir()
             => Env.DefaultSymbolCache;
+
+        FS.FolderName PartFolder(PartId part)
+            => FS.folder(part.Format());
+
+        FS.FileName HostFile(ApiHostUri host, FS.FileExt ext)
+            => FS.file(string.Format("{0}.{1}", host.Part.Format(), host.Name), ext);
+
     }
 }

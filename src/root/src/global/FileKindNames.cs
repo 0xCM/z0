@@ -194,6 +194,11 @@ namespace Z0
         public const string sh = nameof(sh);
 
         /// <summary>
+        /// Defines the 'statemetnts' literal
+        /// </summary>
+        public const string statements = nameof(statements);
+
+        /// <summary>
         /// Defines the 'settings' literal
         /// </summary>
         public const string settings = nameof(settings);

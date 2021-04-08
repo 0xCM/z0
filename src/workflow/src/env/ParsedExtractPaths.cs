@@ -17,10 +17,10 @@ namespace Z0
             => ParsedExtractRoot() + name;
 
         FS.FilePath ParsedExtractPath(ApiHostUri host)
-            => ParsedExtractPath(ApiFiles.filename(host, X.PCsv));
+            => ParsedExtractPath(HostFile(host, X.PCsv));
 
         FS.FilePath ParsedExtractPath(FS.FolderPath root, ApiHostUri host)
-            => root + ApiFiles.filename(host, X.PCsv);
+            => root + PartFolder(host.Part) + HostFile(host, X.PCsv);
 
         FS.Files ParsedExtractPaths()
             => ParsedExtractRoot().TopFiles;

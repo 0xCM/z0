@@ -25,7 +25,7 @@ namespace Z0
             => ApiHexDir(root) + name;
 
         FS.FilePath ApiHexPath(FS.FolderPath root, ApiHostUri host)
-            => root + ApiFiles.filename(host, X.Hex);
+            => root + PartFolder(host.Part) + HostFile(host, X.Hex);
 
         FS.FilePath ApiHexPath(PartId part, string api)
             => ApiHexRoot() + ApiFileName(part, api, X.Hex);

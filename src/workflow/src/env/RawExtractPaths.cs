@@ -19,10 +19,10 @@ namespace Z0
             => RawExtractRoot() + name;
 
         FS.FilePath RawExtractPath(FS.FolderPath root, ApiHostUri host)
-            => root + ApiFiles.filename(host, X.XCsv);
+            => root + PartFolder(host.Part) + HostFile(host, X.XCsv);
 
         FS.FilePath RawExtractPath(ApiHostUri host)
-            => RawExtractPath(ApiFiles.filename(host, X.XCsv));
+            => RawExtractPath(HostFile(host, X.XCsv));
 
         FS.Files RawExtractFiles(PartId part)
             => RawExtractPaths().Where(f => f.IsOwner(part));

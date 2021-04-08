@@ -56,7 +56,7 @@ namespace Z0
 
         Outcome<uint> ClearParsed(PartId part)
         {
-            var kind = FS.Extensions.PCsv;
+            var kind = FS.PCsv;
             var files = Db.ParsedExtractPaths(part);
             var result = Clear(files);
             if(result)
@@ -68,7 +68,7 @@ namespace Z0
 
         Outcome<uint> ClearAsm(PartId part)
         {
-            var kind = FS.Extensions.Asm;
+            var kind = FS.Asm;
             var files = Db.AsmPaths(part);
             var result = Clear(files);
             if(result)
@@ -80,7 +80,7 @@ namespace Z0
 
         Outcome<uint> ClearHex(PartId part)
         {
-            var kind = FS.Extensions.Hex;
+            var kind = FS.Hex;
             var files = Db.ApiHexPaths(part);
             var result = Clear(files);
             if(result)

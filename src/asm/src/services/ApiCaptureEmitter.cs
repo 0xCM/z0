@@ -18,10 +18,13 @@ namespace Z0
 
         readonly MsilPipe IlPipe;
 
+        readonly ApiHex ApiHex;
+
         public ApiCaptureEmitter(IWfShell wf)
         {
             Wf = wf;
             IlPipe = Wf.MsilPipe();
+            ApiHex = Wf.ApiHex();
         }
 
         public AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
@@ -59,7 +62,7 @@ namespace Z0
                 var parsed = ParseExtracts(host, src);
                 if(parsed.Length != 0)
                 {
-                    EmitApiHex(host, parsed, db.ApiHexPath(dst, host));
+                    EmitApiHex(host, parsed, dst);
                     EmitMsilData(host, parsed, db.CilDataPath(dst, host));
                     EmitMsilCode(host, parsed, db.CilCodePath(dst, host));
                     routines = DecodeMembers(host, parsed, src, db.AsmPath(dst,host));
@@ -75,6 +78,9 @@ namespace Z0
 
         public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
             => ApiHex.emit(Wf, host, src.View, dst);
+
+        public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src, FS.FolderPath dst)
+            => ApiHex.Emit(host, src.View, dst);
 
         public Count EmitMsilCode(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
         {

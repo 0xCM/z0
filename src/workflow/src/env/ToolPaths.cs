@@ -57,7 +57,7 @@ namespace Z0
             => ToolScriptRoot() + FS.folder(tool.Format());
 
         FS.FilePath ToolScript(ToolId tool, ScriptId script, FS.FileExt? ext = null)
-            => ToolScriptDir(tool) + FS.file(script.Format(), ext ?? FS.Extensions.Cmd);
+            => ToolScriptDir(tool) + FS.file(script.Format(), ext ?? FS.Cmd);
 
         FS.FilePath ToolScript(ToolId tool, FS.FileName file)
             => ToolScriptDir(tool) +  file;
@@ -66,7 +66,7 @@ namespace Z0
             => ToolScriptRoot() + FS.folder(kind.ToString());
 
         FS.FilePath ToolScript<K>(K kind, ScriptId script, FS.FileExt? ext = null)
-            => ToolScriptDir(kind) + FS.file(script.Format(), ext ?? FS.Extensions.Cmd);
+            => ToolScriptDir(kind) + FS.file(script.Format(), ext ?? FS.Cmd);
 
         FS.FolderPath Output(ToolId tool, CmdId cmd)
             => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);

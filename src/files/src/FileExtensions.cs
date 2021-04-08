@@ -78,6 +78,22 @@ namespace Z0
         /// </summary>
         public static FileExt Txt => ext(txt);
 
+        /// <summary>
+        /// Defines the <see cref='statements'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Statements => ext(statements);
+
+        /// <summary>
+        /// Defines the composite <see cref='xcsv'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt XCsv => ext(xcsv);
+
+        /// <summary>
+        /// Defines the composite <see cref='pcsv'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt PCsv => ext(pcsv);
+
+
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions
         {

@@ -104,12 +104,12 @@ namespace Z0.Asm
                 if(i == 0)
                 {
                     host = uri.Host;
-                    tablePath = TargetPath(host, FS.Extensions.Csv);
+                    tablePath = Db.AsmStatementPath(host, FS.Csv);
                     tableWriter = tablePath.Writer();
                     tableWriter.WriteLine(formatter.FormatHeader());
                     tableFlow = Wf.EmittingTable<AsmApiStatement>(tablePath);
 
-                    asmPath = TargetPath(host, FS.Extensions.Asm);
+                    asmPath = Db.AsmStatementPath(host, FS.Asm);
                     asmWriter = asmPath.Writer();
                     asmFlow = Wf.EmittingFile(asmPath);
                 }
@@ -123,13 +123,13 @@ namespace Z0.Asm
                     Wf.EmittedFile(asmFlow, counter);
 
                     host = statement.OpUri.Host;
-                    tablePath = TargetPath(host, FS.Extensions.Csv);
+                    tablePath = Db.AsmStatementPath(host, FS.Csv);
 
                     tableWriter = tablePath.Writer();
                     tableWriter.WriteLine(formatter.FormatHeader());
                     tableFlow = Wf.EmittingTable<AsmApiStatement>(tablePath);
 
-                    asmPath = TargetPath(host, FS.Extensions.Asm);
+                    asmPath = Db.AsmStatementPath(host, FS.Asm);
                     asmWriter = asmPath.Writer();
                     asmFlow = Wf.EmittingFile(asmPath);
 
@@ -157,10 +157,6 @@ namespace Z0.Asm
             asmWriter.Dispose();
             Wf.EmittedFile(asmFlow,counter);
         }
-
-        FS.FilePath TargetPath(ApiHostUri host, FS.FileExt ext)
-            => Db.TableDir<AsmApiStatement>() + FS.folder(host.Part.Format())
-                + FS.file(string.Format("{0}.{1}", host.Part.Format(), host.Name), ext);
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
 

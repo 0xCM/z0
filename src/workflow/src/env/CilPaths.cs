@@ -20,7 +20,7 @@ namespace Z0
             => CilDataPath(ApiFiles.filename(host, X.IlData));
 
         FS.FilePath CilDataPath(FS.FolderPath root, ApiHostUri host)
-            => root + ApiFiles.filename(host, X.IlData);
+            => root + PartFolder(host.Part) +   HostFile(host, X.IlData);
 
         FS.Files CilDataPaths()
             => CilDataRoot().Files(X.Csv);
@@ -38,7 +38,7 @@ namespace Z0
             => CilCodePath(ApiFiles.filename(host, X.Il));
 
         FS.FilePath CilCodePath(FS.FolderPath dst, ApiHostUri host)
-            => dst + ApiFiles.filename(host, X.Il);
+            => dst +  PartFolder(host.Part) +  HostFile(host, X.Il);
 
         FS.Files CilCodePaths()
             => CilCodeRoot().Files(X.Csv);
