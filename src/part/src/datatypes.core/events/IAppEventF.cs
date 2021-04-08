@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     [Free]
-    public interface IAppEvent<F> : IAppEvent, INullary<F>, ICorrelated<F>, IChronic<F>
+    public interface IAppEvent<F> : IAppEvent, INullary<F>, ICorrelated, IChronic
         where F : struct, IAppEvent<F>
     {
         F INullary<F>.Zero

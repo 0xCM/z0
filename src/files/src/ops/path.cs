@@ -22,10 +22,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FilePath path(FolderPath folder, FileName file)
             => folder + file;
-
-        [MethodImpl(Inline)]
-        public static FilePath<K> kind<K>(FS.FilePath src, K kind = default)
-            where K : struct, IFileKind<K>
-                => new FilePath<K>(src,kind);
     }
 }

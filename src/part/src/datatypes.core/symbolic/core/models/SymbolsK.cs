@@ -21,6 +21,12 @@ namespace Z0
             Data = src;
         }
 
+        public ref readonly Sym<K> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
         public ref readonly Sym<K> this[K index]
         {
             [MethodImpl(Inline)]

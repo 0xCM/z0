@@ -7,11 +7,17 @@ namespace Z0.Tooling
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Root;
     using static memory;
 
     partial class Nasm
     {
+        [MethodImpl(Inline), Op]
+        public NasmSource Source(Index<AsmExpr> expr, bool x64 = true)
+            => source(expr,x64);
+
         [Op]
         public NasmListing Listing(FS.FilePath src)
         {

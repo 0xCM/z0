@@ -348,7 +348,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmove4x64i(Vector128<uint> src, W256 wDst)
             => ConvertToVector256Int64(src);
-
-
     }
 }

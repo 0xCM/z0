@@ -87,11 +87,19 @@ namespace Z0
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(BitGrid64<T> gx, BitGrid64<T> gy)
+        public static implicit operator BitGrid64(BitGrid64<T> src)
+            => new BitGrid64(src.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid64<T>(BitGrid64 src)
+            => new BitGrid64<T>(src);
+
+        [MethodImpl(Inline)]
+        public static bit operator ==(BitGrid64<T> gx, BitGrid64<T> gy)
             => gx.Data == gy.Data;
 
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(BitGrid64<T> gx, BitGrid64<T> gy)
+        public static bit operator !=(BitGrid64<T> gx, BitGrid64<T> gy)
             => gx.Data != gy.Data;
     }
 }

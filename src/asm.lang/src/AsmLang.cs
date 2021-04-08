@@ -18,9 +18,9 @@ namespace Z0.Asm
         public static AsmLang create()
             => new AsmLang(new char[64]);
 
-        readonly AsmLangSymbols SymSpace;
+        readonly AsmSymbols SymSpace;
 
-        public AsmLangSymbols LangSymbols
+        public AsmSymbols LangSymbols
         {
             [MethodImpl(Inline), Op]
             get => SymSpace;
@@ -38,15 +38,18 @@ namespace Z0.Asm
 
         readonly Symbols<Gp64> Gp64Sym;
 
+        readonly Symbols<KReg> KRegSym;
+
         AsmLang(Span<char> buffer)
         {
             Buffer = buffer;
-            SymSpace = AsmLangSymbols.create();
+            SymSpace = AsmSymbols.create();
             Codes = Symbols.cache<AsmMnemonicCode>().Index;
             Gp8Sym = Symbols.cache<Gp8>();
             Gp16Sym = Symbols.cache<Gp16>();
             Gp32Sym = Symbols.cache<Gp32>();
             Gp64Sym = Symbols.cache<Gp64>();
+            KRegSym = Symbols.cache<KReg>();
         }
 
         [MethodImpl(Inline), Op]

@@ -22,7 +22,7 @@ namespace Z0
     [Free]
     public interface IFile<F,K> : IFile
         where F : struct, IFile<F,K>
-        where K : struct, IFileKind<K>
+        where K : struct, IFileType<K>
     {
 
     }

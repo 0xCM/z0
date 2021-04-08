@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Part;
 
@@ -17,6 +18,12 @@ namespace Z0.Asm
         public AsmExpr(TextBlock src)
         {
             Content = src.ToLower();
+        }
+
+        [MethodImpl(Inline)]
+        public AsmExpr(ReadOnlySpan<char> src)
+        {
+            Content =  new string(src);
         }
 
         [MethodImpl(Inline)]
@@ -32,10 +39,18 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmExpr(string src)
-            => new AsmExpr(src);
+            => new AsmExpr(new TextBlock(src));
 
         [MethodImpl(Inline)]
         public static implicit operator AsmExpr(TextBlock src)
+            => new AsmExpr(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmExpr(ReadOnlySpan<char> src)
+            => new AsmExpr(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmExpr(Span<char> src)
             => new AsmExpr(src);
 
         public static AsmExpr Empty

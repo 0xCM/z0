@@ -42,12 +42,5 @@ namespace Z0
             render(@base, @case, src,digits);
             return text.@string(digits);
         }
-
-        public static string format(in BinaryCode src)
-        {
-            var dst = span<char>(src.Length);
-            decode(src, dst);
-            return sys.@string(dst);
-        }
     }
 }

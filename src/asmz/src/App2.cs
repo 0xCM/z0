@@ -10,9 +10,12 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.IO;
 
+    using Z0.Tooling;
+
     using static Part;
     using static memory;
     using static Toolsets;
+
 
     class App : WfService<App>
     {
@@ -938,13 +941,6 @@ namespace Z0.Asm
         }
 
 
-        void EmitSymbolData()
-        {
-            var services = Wf.SymServices();
-            var dst = Db.AppLog(nameof(Gp8) + ".symdata", FS.Csv);
-            services.EmitSymData<Gp8>();
-
-        }
 
 
         public void ProccessCultFiles()
@@ -976,16 +972,14 @@ namespace Z0.Asm
         }
 
 
-        public void Run()
+        void NasmCases()
         {
-            CaptureSelectedRoutines();
-
             var lang = AsmLang.create();
             var symbols = lang.LangSymbols;
             var regs = symbols.Gp16Regs();
             var count = regs.Length;
-            var dst = Db.AppLog("and_r16_r16", FS.Asm);
-            using var writer = dst.Writer();
+
+            var dst = root.list<AsmExpr>(8*8);
             for(var i=0; i<count; i++)
             {
                 ref readonly var a = ref skip(regs,i);
@@ -993,12 +987,26 @@ namespace Z0.Asm
                 for(var j=0; j<count; j++)
                 {
                     ref readonly var b = ref skip(regs,j);
-
-                    var statement = lang.and(a.Kind, b.Kind);
-                    writer.WriteLine(statement);
+                    dst.Add(lang.and(a.Kind, b.Kind));
                 }
             }
 
+            var tool = Wf.nasm();
+            var name = FS.file("and_r16_r16", FS.Asm);
+            var source = tool.Source(dst.ToArray());
+            var target = tool.Input(name);
+            source.Save(target);
+
+        }
+
+        void NasmCase1()
+        {
+
+        }
+
+        public void Run()
+        {
+            //CaptureSelectedRoutines();
 
             //EmitBitstrings();
 

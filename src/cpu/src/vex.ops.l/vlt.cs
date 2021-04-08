@@ -133,7 +133,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// __m256i _mm256_cmpgt_epi16 (__m256i a, __m256i b)VPCMPGTW ymm, ymm, ymm/m256
+        /// __m256i _mm256_cmpgt_epi16 (__m256i a, __m256i b) VPCMPGTW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
