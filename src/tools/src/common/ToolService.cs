@@ -35,5 +35,7 @@ namespace Z0.Tooling
         public FS.FilePath Output(FS.FileName name)
             => OutDir + name;
 
+        public virtual FS.FilePath ToolPath()
+            => FS.path(string.Format("{0}.{1}", Id.Format(), FS.Exe));
     }
 }

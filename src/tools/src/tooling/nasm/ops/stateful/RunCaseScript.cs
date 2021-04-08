@@ -12,20 +12,19 @@ namespace Z0.Tooling
 
     partial class Nasm
     {
-        public Index<NasmListEntry> RunCase(string name)
+        public Index<NasmListEntry> RunCaseScript(Identifier name)
         {
-            var tool = Tools.nasm(Wf);
-            var @case = name;
-            using var log = ShowLog(tool.Id.Format() + "." + @case, FS.Log);
+            var @case = name.Format();
+            using var log = ShowLog(Id.Format() + "." + @case, FS.Log);
             var runner = ScriptRunner.create(Db);
-            var ran = runner.RunToolCmd(tool.Id, @case);
+            var ran = runner.RunToolCmd(Id, @case);
             if(ran)
                 root.iter(ran.Data, x => log.Show(x));
             else
-                Wf.Error(string.Format("{0}/{1} execution failed", tool.Id, @case));
+                Wf.Error(string.Format("{0}/{1} execution failed", Id, @case));
 
-            var listpath = tool.Listings().Where(l => l.Name.Contains(@case)).Single();
-            var listing = tool.Listing(listpath);
+            var listpath = Listings().Where(l => l.Name.Contains(@case)).Single();
+            var listing = ReadListing(listpath);
             var entries = root.list<NasmListEntry>();
             var lines = listing.Lines.View;
             log.Title(listpath.ToUri());
@@ -39,7 +38,7 @@ namespace Z0.Tooling
                     Wf.Error("Parse entry failed");
                 else
                 {
-                    tool.RenderEntry(entry, log.Buffer);
+                    RenderListEntry(entry, log.Buffer);
                     log.ShowBuffer();
                     entries.Add(entry);
                 }

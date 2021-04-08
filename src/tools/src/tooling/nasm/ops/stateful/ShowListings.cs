@@ -20,7 +20,7 @@ namespace Z0.Tooling
             var listings = Listings();
             foreach(var path in listings)
             {
-                var listing = Listing(path);
+                var listing = ReadListing(path);
                 var entries = root.list<NasmListEntry>();
                 var lines = listing.Lines.View;
                 log.Title(path.ToUri());
@@ -34,7 +34,7 @@ namespace Z0.Tooling
                         Wf.Error("Parse entry failed");
                     else
                     {
-                        RenderEntry(_entry, log.Buffer);
+                        RenderListEntry(_entry, log.Buffer);
                         log.ShowBuffer();
                     }
                 }

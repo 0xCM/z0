@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct CmdScript : ITextual
     {
-        public asci32 Id {get;}
+        public Identifier Id {get;}
 
         readonly Index<ScriptExpr> Data;
 

@@ -7,28 +7,22 @@ namespace Z0.Tooling
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Root;
     using static memory;
 
     partial class Nasm
     {
-        [MethodImpl(Inline), Op]
-        public NasmSource Source(Index<AsmExpr> expr, bool x64 = true)
-            => source(expr,x64);
-
         [Op]
-        public NasmListing Listing(FS.FilePath src)
+        public NasmListing ReadListing(FS.FilePath src)
         {
-            var flow = Wf.Running(string.Format("Loading list lines from {0}", src.ToUri()));
+            var flow = Wf.Running(Msg.ReadingNasmListing.Format(src));
             var dst = root.list<NasmListLine>();
             using var reader = src.Reader();
             var i = 1u;
             while(!reader.EndOfStream)
                 dst.Add(new NasmListLine(new TextLine(i++, reader.ReadLine())));
             var lines = dst.ToArray();
-            Wf.Ran(flow, string.Format("Loaded {0} list lines from {1}", lines.Length, src.ToUri()));
+            Wf.Ran(flow, Msg.ReadNasmListing.Format(lines.Length, src));
             return new NasmListing(src, lines);
         }
     }

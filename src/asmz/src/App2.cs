@@ -974,6 +974,10 @@ namespace Z0.Asm
 
         void NasmCases()
         {
+        }
+
+        void NasmCase1()
+        {
             var lang = AsmLang.create();
             var symbols = lang.LangSymbols;
             var regs = symbols.Gp16Regs();
@@ -997,10 +1001,6 @@ namespace Z0.Asm
             var target = tool.Input(name);
             source.Save(target);
 
-        }
-
-        void NasmCase1()
-        {
 
         }
 

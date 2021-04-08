@@ -2,23 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    [ApiHost]
-    public sealed partial class Nasm : ToolService<Nasm>
+    partial struct asm
     {
-        readonly BitFormatter<byte> BitFormat;
-
-        public Nasm()
-        {
-            Id = Toolsets.nasm;
-            BitFormat = BitFormatter.create<byte>(4);
-        }
-   }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static AsmSigOperand sigop<K>(Sym<K> sym)
+            where K : unmanaged
+                => new AsmSigOperand(sym.Name, sym.Expr);
+    }
 }

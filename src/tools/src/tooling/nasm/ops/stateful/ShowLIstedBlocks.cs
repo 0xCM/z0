@@ -2,39 +2,28 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tooling
 {
     using System;
-    using Z0.Tooling;
+    using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
-    public class NasmRunner : WfService<NasmRunner>
+    partial class Nasm
     {
-        public void Run()
+        public ReadOnlySpan<NasmCodeBlock> ShowListedBlocks(Identifier name)
         {
-            ShowListedBlocks("xor");
-        }
-
-        public void ShowListedBlocks(string name)
-        {
-            var tool = Wf.nasm();
-            var blocks = ListedBlocks("xor").View;
+            var blocks = LoadListedBlocks(name).View;
             var count = blocks.Length;
             using var log = ShowLog(name, FS.Log);
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(blocks,i);
-                tool.RenderBlock(block, log.Buffer);
+                RenderCodeBlock(block, log.Buffer);
                 log.ShowBuffer();
             }
-        }
-
-        public Index<NasmCodeBlock> ListedBlocks(string listname)
-        {
-            var tool = Wf.nasm();
-            return tool.ListedBlocks(listname);
+            return blocks;
         }
     }
 }
