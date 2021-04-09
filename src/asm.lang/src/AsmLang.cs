@@ -26,6 +26,8 @@ namespace Z0.Asm
 
         readonly Span<char> Buffer;
 
+        byte Position;
+
         readonly Symbols<AsmMnemonicCode> Codes;
 
         readonly Symbols<Gp8> Gp8Sym;
@@ -48,6 +50,7 @@ namespace Z0.Asm
             Gp32Sym = Symbols.cache<Gp32>();
             Gp64Sym = Symbols.cache<Gp64>();
             KRegSym = Symbols.cache<KReg>();
+            Position = 0;
         }
 
         [MethodImpl(Inline), Op]
@@ -63,27 +66,33 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        void Copy(ReadOnlySpan<char> src, Span<char> dst)
+        void Render(ReadOnlySpan<char> src)
         {
-            var count = root.min(src.Length, dst.Length);
+            var count = src.Length;
             for(var i=0; i<count; i++)
-                seek(dst,i) = skip(src,i);
+                seek(Buffer, Position++) = skip(src,i);
         }
 
         [MethodImpl(Inline), Op]
-        void Render<K>(Sym<K> src, ref byte j)
+        void Render<K>(Sym<K> src)
             where K : unmanaged
         {
             var data = src.Expr.Data;
             var len = data.Length;
             for(var i=0; i<len; i++)
-                seek(Buffer,j++) = skip(data,i);
+                seek(Buffer, Position++) = skip(data,i);
         }
 
         [MethodImpl(Inline), Op]
-        void Render(char src, ref byte j)
-        {
-            seek(Buffer, j++) = src;
-        }
+        void Render(char src)
+            => seek(Buffer, Position++) = src;
+
+        [Op]
+        public void Render(Imm64 src)
+            => Render(src.Format());
+
+        [MethodImpl(Inline), Op]
+        AsmExpr Emit()
+            => slice(Buffer, 0, Position);
     }
 }

@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
     using static AsmMnemonicCode;
-    using static memory;
 
     partial struct AsmLang
     {
@@ -18,16 +14,12 @@ namespace Z0.Asm
         public AsmExpr and(Gp8 dst, Gp8 src)
         {
             Clear();
-
-            byte j = 0;
-
-            Render(SymSpace.Symbol(AND), ref j);
-            Render(Chars.Space, ref j);
-            Render(SymSpace.Symbol(dst), ref j);
-            Render(Chars.Comma, ref j);
-            Render(SymSpace.Symbol(src), ref j);
-
-            return slice(Buffer,0,j);
+            Render(SymSpace.Symbol(AND));
+            Render(Chars.Space);
+            Render(SymSpace.Symbol(dst));
+            Render(Chars.Comma);
+            Render(SymSpace.Symbol(src));
+            return Emit();
         }
 
 
@@ -37,16 +29,12 @@ namespace Z0.Asm
         public AsmExpr and(Gp16 dst, Gp16 src)
         {
             Clear();
-
-            byte j = 0;
-
-            Render(SymSpace.Symbol(AND), ref j);
-            Render(Chars.Space, ref j);
-            Render(SymSpace.Symbol(dst), ref j);
-            Render(Chars.Comma, ref j);
-            Render(SymSpace.Symbol(src), ref j);
-
-            return slice(Buffer,0,j);
+            Render(SymSpace.Symbol(AND));
+            Render(Chars.Space);
+            Render(SymSpace.Symbol(dst));
+            Render(Chars.Comma);
+            Render(SymSpace.Symbol(src));
+            return Emit();
         }
     }
 }

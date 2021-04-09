@@ -18,6 +18,14 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public imm64(ulong value)
                 => Content = value;
+
+            [MethodImpl(Inline)]
+            public static implicit operator imm64(ulong src)
+                => new imm64(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator imm64(Imm64 src)
+                => new imm64(src);
         }
     }
 }
