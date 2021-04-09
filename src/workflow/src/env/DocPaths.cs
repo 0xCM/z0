@@ -6,8 +6,6 @@ namespace Z0
 {
     using static EnvFolders;
 
-    using X = FS.Extensions;
-
     partial interface IEnvPaths
     {
         FS.FolderPath ListRoot()
@@ -20,13 +18,13 @@ namespace Z0
             => TableRoot() + FS.folder(indices);
 
         FS.FilePath IndexFile(string id)
-            => IndexRoot() + FS.file(id, X.Idx);
+            => IndexRoot() + FS.file(id, FS.Idx);
 
         FS.FilePath IndexFile(string subject, string id)
-            => IndexDir(subject) + FS.file(id, X.Idx);
+            => IndexDir(subject) + FS.file(id, FS.Idx);
 
         FS.Files IndexFiles()
-            => IndexRoot().Files(X.Idx);
+            => IndexRoot().Files(FS.Idx);
 
         FS.FolderPath DocRoot()
             => DbRoot() + FS.folder(docs);

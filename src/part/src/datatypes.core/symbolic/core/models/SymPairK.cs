@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Symbols;
-
     public readonly struct SymPair<K>
         where K : unmanaged
     {
@@ -36,7 +34,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Pair<Sym<K>>(SymPair<K> src)
             => root.pair(src.Left, src.Right);
-
     }
-
 }

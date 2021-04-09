@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     partial struct AsmLang
     {
-
         public enum Gp64 : byte
         {
             [Symbol("rax")]

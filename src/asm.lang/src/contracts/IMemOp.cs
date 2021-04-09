@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using static AsmLang;
+
     [Free]
     public interface IMemOp : IAsmOp
     {

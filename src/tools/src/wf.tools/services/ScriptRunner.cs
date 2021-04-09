@@ -36,6 +36,27 @@ namespace Z0
         public Outcome<TextLines> RunToolScript(ToolId tool, ScriptId script, ToolScriptKind kind)
             => Run(CmdLine(ScriptFile(tool, script, kind), kind), script);
 
+        public Outcome<TextLines> RunScript(FS.FilePath src)
+        {
+            using var writer = Paths.CmdLog(src.FileName.Format()).Writer();
+
+            try
+            {
+                var cmd = WinCmd.script(src);
+                var process = ToolCmd.run(cmd).Wait();
+                var lines =  text.lines(process.Output);
+                root.iter(lines, line => writer.WriteLine(line));
+                return lines;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                writer.WriteLine(e.ToString());
+                return e;
+            }
+
+        }
+
         Outcome<TextLines> Run(CmdLine cmd, ScriptId script)
         {
             using var writer = Paths.CmdLog(script).Writer();

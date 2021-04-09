@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T[] divisors(T src)
-            => Divisors.Compute(src);
+            => Divisors.compute(src);
 
         /// <summary>
         /// Computes the divisors for each number in a specified interval
@@ -30,10 +30,10 @@ namespace Z0
         public DivisorIndex<T> index(Interval<T> interval)
         {
             var results = from n in range(interval).AsParallel()
-                        let d = Divisors.Compute(n)
-                        select Divisors.DefineList(n, d);
+                        let d = Divisors.compute(n)
+                        select Divisors.list(n, d);
 
-            return Divisors.DefineIndex(interval, results.ToList());
+            return Divisors.index(interval, results.ToArray());
         }
 
         /// <summary>
@@ -80,7 +80,6 @@ namespace Z0
                 {
                     yield return current;
                     current = gmath.dec(current);
-
                 }
             }
         }

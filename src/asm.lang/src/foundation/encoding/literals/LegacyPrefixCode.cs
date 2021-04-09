@@ -5,8 +5,7 @@
 namespace Z0.Asm
 {
     /// <summary>
-    /// Unifies the <see cref='LockPrefixCode'/>, <see cref='RepeatPrefixCode'/>, <see cref='BndPrefixCode'/>,
-    /// <see cref='SegOverrideCode'/>, <see cref='BranchHintCode'/> and <see cref='SizeOverrideCode'/> types
+    /// Unifies the legacy prefix codes
     /// </summary>
     public enum LegacyPrefixCode : byte
     {

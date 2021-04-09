@@ -82,7 +82,7 @@ namespace Z0.Asm
             return ref dst;
         }
 
-        public void EmitSymData<E>()
+        public Index<SymRecord> EmitSymRecords<E>()
             where E : unmanaged, Enum
         {
             var dst = Db.Table<SymRecord>(typeof(E).Name);
@@ -101,6 +101,7 @@ namespace Z0.Asm
                 writer.WriteLine(formatter.Format(skip(target,i)));
             }
             Wf.EmittedTable(flow, count);
+            return buffer;
         }
 
         public void GenBits()

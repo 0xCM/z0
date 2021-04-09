@@ -34,7 +34,7 @@ namespace Z0
                     term.inform(name);
 
                     if(!name.HasExtension)
-                        name = name.WithExtension(FS.Extensions.Cmd);
+                        name = name.WithExtension(FS.Cmd);
 
                     var script = paths.ControlScript(name);
                     if(script.Exists)

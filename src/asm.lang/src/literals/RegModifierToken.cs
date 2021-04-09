@@ -4,42 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using OCD = AsmOpCodeDocs;
-
-    [SymbolSource]
-    public enum RegModifierToken : byte
+    partial struct AsmLang
     {
-        None,
+        [SymbolSource]
+        public enum RegModifierToken : byte
+        {
+            None,
 
-        /// <summary>
-        /// <see cref='OCD.ᕀrb'/>
-        /// </summary>
-        [Symbol("+rb",OCD.ᕀrb)]
-        rb,
+            [Symbol("+rb", "For an 8-bit register, indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
+            rb,
 
-        /// <summary>
-        /// <see cref='OCD.ᕀrw'/>
-        /// </summary>
-        [Symbol("+rw", OCD.ᕀrw)]
-        rw,
+            [Symbol("+rw", "For a 16-bit register, in non-64-bit mode, a register code is arithmetically added to the value of the opcode byte, and in 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
+            rw,
 
-        /// <summary>
-        /// <see cref='OCD.ᕀrd'/>
-        /// </summary>
-        [Symbol("+rd",OCD.ᕀrd)]
-        rd,
+            [Symbol("+rd", "For a 32-bit register, in non-64-bit mode, a register code is arithmetically added to the value of the opcode byte, and In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
+            rd,
 
-        /// <summary>
-        /// <see cref='OCD.ᕀro'/>
-        /// </summary>
-        [Symbol("+ro",OCD.ᕀro)]
-        ro,
+            [Symbol("+ro", "For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
+            ro,
 
-        /// <summary>
-        /// <see cref='OCD.ᕀrq'/>
-        /// </summary>
-        [Symbol("+ro",OCD.ᕀrq)]
-        rq,
+            [Symbol("+rq", "For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
+            rq,
+        }
     }
 }
-

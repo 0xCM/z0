@@ -17,7 +17,7 @@ namespace Z0
 
         [Op]
         static FS.FilePath ProjectPath(this WfCmdBuilder src, in BuildCmdVars vars)
-            => src.Env.ZDev.Value + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Extensions.CsProj);
+            => src.Env.ZDev.Value + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.CsProj);
 
         [Op]
         static FS.FilePath SolutionPath(this WfCmdBuilder src, in BuildCmdVars vars)
@@ -36,7 +36,7 @@ namespace Z0
         [Op]
         public static Outcome<FS.FilePath> Save(this BuildProjectCmd src, FS.FolderPath dst)
         {
-            var path = dst + FS.file(src.Identifier(), FS.Extensions.Cmd);
+            var path = dst + FS.file(src.Identifier(), FS.Cmd);
             var result = path.Save(src.Format());
             if(result)
                 return path;

@@ -53,5 +53,29 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vinflate256x64u(in SpanBlock128<uint> src, uint offset)
             => v64u(ConvertToVector256Int64(gptr(src[offset])));
+
+        /// <summary>
+        /// VPMOVZXBQ ymm, m32
+        /// 4x8u -> 4x64u
+        /// Projects four unsigned 8-bit integers onto 4 unsigned 64-bit integers
+        /// </summary>
+        /// <param name="src">The input component source</param>
+        /// <param name="n">The source component count</param>
+        /// <param name="dst">The target component width</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<ulong> vmove4x64u(in byte src)
+            => v64u(ConvertToVector256Int64(gptr(src)));
+
+        /// <summary>
+        /// VPMOVZXWQ ymm, m64
+        /// 4x16u -> 4x64u
+        /// Projects 4 unsigned 16-bit integers onto 4 unsigned 64-bit integers
+        /// </summary>
+        /// <param name="src">The input component source</param>
+        /// <param name="n">The source component count</param>
+        /// <param name="w">The target component width</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<ulong> vmove4x64u(in ushort src)
+            => v64u(ConvertToVector256Int64(gptr(src)));
     }
 }

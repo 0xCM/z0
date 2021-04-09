@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static EnvFolders;
-    using X = FS.Extensions;
 
     partial interface IEnvPaths
     {
@@ -53,15 +52,15 @@ namespace Z0
 
         FS.FilePath Table<T>(string subject)
             where T : struct, IRecord<T>
-                => Table<T>(subject, X.Csv);
+                => Table<T>(subject, FS.Csv);
 
         FS.FilePath Table<T>(FS.FolderName subject)
             where T : struct, IRecord<T>
-                => TableDir(subject) + FS.file(TableId<T>(),X.Csv);
+                => TableDir(subject) + FS.file(TableId<T>(), DefaultTableExt);
 
         FS.FilePath Table<T>(FS.FolderName subject, string discriminator)
             where T : struct, IRecord<T>
-                => TableDir(subject) + FS.file(TableId<T>() + string.Format("-{0}", discriminator), X.Csv);
+                => TableDir(subject) + FS.file(TableId<T>() + string.Format("-{0}", discriminator), DefaultTableExt);
 
         FS.FilePath Table<T>(string subject, FS.FileExt ext)
             where T : struct, IRecord<T>
@@ -131,7 +130,7 @@ namespace Z0
                 => TableDir<T>(subject) + TableFile<T>(host, ext);
 
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
-            => TableRoot()+ FS.folder(id) + FS.file(text.format(EnvFolders.qualified, id, subject), ext ?? X.Csv);
+            => TableRoot()+ FS.folder(id) + FS.file(text.format(EnvFolders.qualified, id, subject), ext ?? DefaultTableExt);
 
         FS.FolderPath IndexDir(Type t)
             => IndexRoot() + FS.folder(TableId(t));
@@ -162,9 +161,9 @@ namespace Z0
 
         FS.FileName TableFileName<T>(string id)
             where T : struct, IRecord<T>
-                => FS.file(string.Format("{0}.{1}", TableId<T>(), id), X.Csv);
+                => FS.file(string.Format("{0}.{1}", TableId<T>(), id), DefaultTableExt);
 
         FS.FileExt DefaultTableExt
-             => X.Csv;
+             => FS.Csv;
     }
 }

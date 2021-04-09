@@ -5,7 +5,6 @@
 namespace Z0
 {
     using static EnvFolders;
-    using X = FS.Extensions;
 
     partial interface IEnvPaths
     {
@@ -16,7 +15,7 @@ namespace Z0
             => LogRoot() + FS.folder(etl);
 
         FS.FilePath EtlLog(string name)
-            => EtlLogRoot() + FS.file(name, X.Log);
+            => EtlLogRoot() + FS.file(name, FS.Log);
 
         FS.FolderPath EtlDir(string subject)
             => EtlRoot() + FS.folder(subject);

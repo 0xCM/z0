@@ -9,7 +9,6 @@ namespace Z0
     using static EnvFolders;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using X = FS.Extensions;
 
     partial interface IEnvPaths
     {
@@ -68,6 +67,6 @@ namespace Z0
             => TestLogRoot();
 
         FS.FilePath CaseLogSummary()
-            => TestLogSummaryRoot() + FS.file(AppName, X.Csv);
+            => TestLogSummaryRoot() + FS.file(AppName, FS.Csv);
     }
 }

@@ -8,19 +8,19 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Text;
-    
+
     /// <summary>
     /// Associates a contiguous sequence of dividends with their divisor lists
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DivisorIndex<T> 
+    public class DivisorIndex<T>
         where T : unmanaged
     {
-        public Interval<T> Range {get;}        
+        public Interval<T> Range {get;}
 
         IReadOnlyDictionary<T,DivisorList<T>> Lookup {get;}
 
-        public DivisorIndex(Interval<T> range, IReadOnlyList<DivisorList<T>> lists)
+        public DivisorIndex(Interval<T> range, Index<DivisorList<T>> lists)
         {
             Range = range;
             Lookup = lists.ToDictionary(x => x.Dividend, x => x);
@@ -29,7 +29,7 @@ namespace Z0
         public DivisorList<T> this[T dividend]
             => Lookup[dividend];
 
-        public IEnumerable<DivisorList<T>> Lists 
+        public IEnumerable<DivisorList<T>> Lists
             => Lookup.Values;
 
         public override string ToString()

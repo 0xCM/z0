@@ -364,7 +364,7 @@ namespace Z0.Asm
             var buffer = text.buffer();
             var methods = msil(members);
             root.iter(methods, m => pipe.Render(m,buffer));
-            using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Extensions.Il)).Writer();
+            using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Il)).Writer();
             writer.Write(buffer.Emit());
         }
 
@@ -439,7 +439,6 @@ namespace Z0.Asm
             Wf.Status(Wf.Settings.FormatList());
             Wf.Status(Db.Root);
         }
-
 
         static void TestCmdLine(params string[] args)
         {
@@ -531,7 +530,7 @@ namespace Z0.Asm
             cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\windows.x64.Debug");
             cmd.TargetPath = Db.IndexTable("clrtests");
             cmd.FileUriMode = true;
-            cmd.WithExt(FS.Extensions.Cmd);
+            cmd.WithExt(FS.Cmd);
             return cmd;
         }
 
@@ -941,8 +940,6 @@ namespace Z0.Asm
         }
 
 
-
-
         public void ProccessCultFiles()
         {
             var processor = CultProcessor.create(Wf);
@@ -955,8 +952,6 @@ namespace Z0.Asm
         {
             return Wf.ApiHex().ApiBlocks();
         }
-
-
 
         void ShowSymbols()
         {
@@ -974,40 +969,46 @@ namespace Z0.Asm
 
         void NasmCases()
         {
-        }
-
-        void NasmCase1()
-        {
             var lang = AsmLang.create();
             var symbols = lang.LangSymbols;
-            var regs = symbols.Gp16Regs();
-            var count = regs.Length;
-
-            var dst = root.list<AsmExpr>(8*8);
-            for(var i=0; i<count; i++)
+            var regs = symbols.Gp8Regs();
+            var count = 64;
+            var buffer = alloc<AsmExpr>(count);
+            ref var dst = ref first(buffer);
+            var grid = Symbols.grid(regs,regs);
+            var k=0;
+            for(var i=0u; i<grid.RowCount; i++)
             {
-                ref readonly var a = ref skip(regs,i);
-
-                for(var j=0; j<count; j++)
+                for(var j=0u; j<grid.ColCount; j++)
                 {
-                    ref readonly var b = ref skip(regs,j);
-                    dst.Add(lang.and(a.Kind, b.Kind));
+                    var pair = grid.Pair(i,j);
+                    seek(buffer,k++) = lang.and(pair.Left,pair.Right);
                 }
             }
 
             var tool = Wf.nasm();
-            var name = FS.file("and_r16_r16", FS.Asm);
-            var source = tool.Source(dst.ToArray());
+            var id = "and_r8_r8";
+            var name = FS.file(id, FS.Asm);
+            var source = tool.Source(buffer);
             var target = tool.Input(name);
             source.Save(target);
 
+            var script = tool.CreateCaseScript(id);
+            var runner = Wf.ScriptRunner();
+            var outcome = runner.RunScript(script.Path);
+            if(outcome)
+                root.iter(outcome.Data, line => Wf.Row(line));
+            else
+                Wf.Error(outcome.Message);
 
+            tool.ShowListedBlocks(id);
         }
 
         public void Run()
         {
-            //CaptureSelectedRoutines();
+            //NasmCases();
 
+            //CaptureSelectedRoutines();
             //EmitBitstrings();
 
             // var indices = array<byte>(0,3,5);

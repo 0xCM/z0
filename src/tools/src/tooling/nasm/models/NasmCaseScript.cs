@@ -4,16 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tooling
 {
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [Record(TableId)]
-    public struct NasmCase : IRecord<NasmCase>
+    using static Root;
+
+    public readonly struct NasmCaseScript
     {
-        public const string TableId = "nasm.case";
+        public NasmCase Case {get;}
 
-        public Identifier CaseId;
+        public FS.FilePath Path {get;}
 
-        public FS.FilePath SourcePath;
-
-        public FS.FilePath BinPath;
+        [MethodImpl(Inline)]
+        public NasmCaseScript(NasmCase @case, FS.FilePath path)
+        {
+            Case = @case;
+            Path = path;
+        }
     }
 }

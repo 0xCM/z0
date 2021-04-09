@@ -4,36 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using OCD = AsmOpCodeDocs;
-
-    /// <summary>
-    /// Specifies the size of an immediate operand in the context of an opcode specification
-    /// </summary>
-    [SymbolSource]
-    public enum ImmSizeToken : byte
+    partial struct AsmLang
     {
         /// <summary>
-        /// A size of one byte as described by <see cref='OCD.ib'/>
+        /// Specifies the size of an immediate operand in the context of an opcode specification
         /// </summary>
-        [Symbol("ib", OCD.ib)]
-        ib,
+        [SymbolSource]
+        public enum ImmSizeToken : byte
+        {
+            [Symbol("ib", "Indicates a 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.")]
+            ib,
 
-        /// <summary>
-        /// A size of two bytes as described by <see cref='OCD.iw'/>
-        /// </summary>
-        [Symbol("iw", OCD.iw)]
-        iw,
+            [Symbol("iw", "Indicates a 2-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.")]
+            iw,
 
-        /// <summary>
-        /// A size of four bytes as described by <see cref='OCD.id'/>
-        /// </summary>
-        [Symbol("id", OCD.id)]
-        id,
+            [Symbol("id", "Indicates a 4-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.")]
+            id,
 
-        /// <summary>
-        /// A size of eiqht bytes as described by <see cref='OCD.io'/>
-        /// </summary>
-        [Symbol("io", OCD.io)]
-        io,
+            [Symbol("io", "Indicates An 8-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes")]
+            io,
+        }
     }
 }

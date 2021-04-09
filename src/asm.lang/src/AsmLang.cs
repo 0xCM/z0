@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmMnemonicCode;
-    using static AsmRegOps;
     using static memory;
 
     [ApiHost]

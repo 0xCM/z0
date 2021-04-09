@@ -15,5 +15,13 @@ namespace Z0
        [Op]
        public static Nasm nasm(this IWfShell wf)
             => Nasm.create(wf);
+
+       [Op]
+       public static ScriptRunner ScriptRunner(this IWfShell wf)
+            => Z0.ScriptRunner.create(wf.Db());
+
+       [Op]
+       public static ScriptRunner ScriptRunner(this IEnvPaths paths)
+            => Z0.ScriptRunner.create(paths);
    }
 }

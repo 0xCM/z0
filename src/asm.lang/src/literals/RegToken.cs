@@ -4,131 +4,81 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SD = AsmSigDocs;
-
-    public enum RegToken : byte
+    partial struct AsmLang
     {
-        [Symbol("reg")]
-        reg,
+        public enum RegToken : byte
+        {
+            [Symbol("reg")]
+            reg,
 
-        [Symbol("al")]
-        al,
+            [Symbol("al")]
+            al,
 
-        [Symbol("ax")]
-        ax,
+            [Symbol("ax")]
+            ax,
 
-        [Symbol("eax")]
-        eax,
+            [Symbol("eax")]
+            eax,
 
-        [Symbol("rax")]
-        rax,
+            [Symbol("rax")]
+            rax,
 
-        /// <summary>
-        /// <see cref='SD.bnd'/>
-        /// </summary>
-        [Symbol("bnd", SD.bnd)]
-        bnd,
+            [Symbol("bnd", "A 128-bit bounds register. BND0 through BND3")]
+            bnd,
 
-       /// <summary>
-        /// <see cref='SD.r8'/>
-        /// </summary>
-        [Symbol("r8", SD.r8)]
-        r8,
+            [Symbol("r8", "One of the byte general-purpose registers: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL}; or one of the byte registers (R8L-R15L) available when using REX.R and 64-bit mode.")]
+            r8,
 
-        /// <summary>
-        /// <see cref='SD.r16'/>
-        /// </summary>
-        [Symbol("r16", SD.r16)]
-        r16,
+            [Symbol("r16", "One of the word general-purpose registers: {AX CX DX BX SP BP SI DI}; or one of the word registers (R8-R15) available when using REX.R and 64-bit mode")]
+            r16,
 
-        /// <summary>
-        /// <see cref='SD.r32'/>
-        /// </summary>
-        [Symbol("r32", SD.r32)]
-        r32,
+            [Symbol("r32", "One of the doubleword general-purpose registers: {EAX ECX EDX EBX ESP EBP ESI EDI}; or one of the doubleword registers (R8D - R15D) available when using REX.R in 64-bit mode")]
+            r32,
 
-        /// <summary>
-        /// <see cref='SD.r32a'/>
-        /// </summary>
-        [Symbol("r32a", SD.r32a)]
-        r32a,
+            [Symbol("r32a", "A first r32 register operand")]
+            r32a,
 
-        /// <summary>
-        /// <see cref='SD.r32b'/>
-        /// </summary>
-        [Symbol("r32b", SD.r32b)]
-        r32b,
+            [Symbol("r32b", "A second r32 register operand")]
+            r32b,
 
-        /// <summary>
-        /// <see cref='SD.r64'/>
-        /// </summary>
-        [Symbol("r64", SD.r64)]
-        r64,
+            [Symbol("r64", "One of the quadword general-purpose registers: {RAX RBX RCX RDX RDI RSI RBP RSP R8–R15}; These are available when using REX.R and 64-bit mode")]
+            r64,
 
-        /// <summary>
-        /// <see cref='SD.mm'/>
-        /// </summary>
-        [Symbol("mm", SD.mm)]
-        mm,
+            [Symbol("mm", "An MMX register. The 64-bit MMX registers are: MM0 through MM7. The 64-bit MMX registers are: MM0 through MM7. The contents of memory are found at the address provided by the effective address computation.")]
+            mm,
 
-        /// <summary>
-        /// <see cref='SD.xmm'/>
-        /// </summary>
-        [Symbol("xmm", SD.xmm)]
-        xmm,
+            [Symbol("xmm", "An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode.The contents of memory are found at the address provided by the effective address computation")]
+            xmm,
 
-        /// <summary>
-        /// <see cref='SD.xmm1'/>
-        /// </summary>
-        [Symbol("xmm1", SD.xmm1)]
-        xmm1,
+            [Symbol("xmm1", "A first xmm register operand")]
+            xmm1,
 
-        /// <summary>
-        /// <see cref='SD.xmm2'/>
-        /// </summary>
-        [Symbol("xmm2", SD.xmm2)]
-        xmm2,
+            [Symbol("xmm2", "A second xmm register operand")]
+            xmm2,
 
-        /// <summary>
-        /// <see cref='SD.xmm3'/>
-        /// </summary>
-        [Symbol("xmm3", SD.xmm3)]
-        xmm3,
+            [Symbol("xmm3", "A third xmm register operand")]
+            xmm3,
 
-        /// <summary>
-        /// <see cref='SD.ymm'/>
-        /// </summary>
-        [Symbol("ymm", SD.ymm)]
-        ymm,
+            [Symbol("ymm", "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode")]
+            ymm,
 
-        /// <summary>
-        /// <see cref='SD.ymm1'/>
-        /// </summary>
-        [Symbol("ymm1", SD.ymm1)]
-        ymm1,
+            [Symbol("ymm1", "A first ymm register operand")]
+            ymm1,
 
-        /// <summary>
-        /// <see cref='SD.ymm2'/>
-        /// </summary>
-        [Symbol("ymm2", SD.ymm2)]
-        ymm2,
+            [Symbol("ymm2", "A second ymm register operand")]
+            ymm2,
 
-        /// <summary>
-        /// <see cref='SD.ymm3'/>
-        /// </summary>
-        [Symbol("ymm3", SD.ymm3)]
-        ymm3,
+            [Symbol("ymm3", "A third ymm register operand")]
+            ymm3,
 
-        /// <summary>
-        /// A segment register, where the register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5
-        /// </summary>
-        [Symbol("Sreg", SD.Sreg)]
-        Sreg,
+            [Symbol("zmm", "A zmm register")]
+            zmm,
 
-        /// <summary>
-        /// A mask register used as a regular operand (either destination or source). The 64-bit k registers are: k0 through k7
-        /// </summary>
-        [Symbol("k1", SD.k1)]
-        k1,
+            [Symbol("Sreg", "A segment register. The segment register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5")]
+            Sreg,
+
+            [Symbol("k1", "A mask register used as a regular operand (either destination or source). The 64-bit k registers are: k0 through k7")]
+            k1,
+        }
     }
 }

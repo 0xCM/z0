@@ -53,6 +53,29 @@ namespace Z0
         public static unsafe Vector128<int> vinflate128x32i(in SpanBlock64<short> src, uint offset)
             => ConvertToVector128Int32(gptr(src[offset]));
 
+        /// <summary>
+        /// PMOVSXWD xmm, m64
+        /// 4x16i -> 4x32i
+        /// Projects 4 16-bit signed integers onto 4 32-bit signed integers
+        /// </summary>
+        /// <param name="src">The input component source</param>
+        /// <param name="n">The source component count</param>
+        /// <param name="w">The target component width</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<int> vmove4x32i(in short src)
+            => ConvertToVector128Int32(gptr(src));
 
+        /// <summary>
+        /// PMOVZXBD xmm, m32
+        /// 4x8u -> 4x32i
+        /// Projects four unsigned 8-bit integers onto 4 signed 32-bit integers
+        /// </summary>
+        /// <param name="src">The input component source</param>
+        /// <param name="n">The source component count</param>
+        /// <param name="w">The target component width</param>
+        /// <param name="i">Signals a sign extension</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<int> vmove2x32i(in byte src)
+            => ConvertToVector128Int32(gptr(src));
     }
 }

@@ -9,14 +9,13 @@ namespace Z0.Asm
 
     using static Part;
     using static AsmMnemonicCode;
-    using static AsmRegOps;
     using static memory;
 
     partial struct AsmLang
     {
-       // 22 /r            | AND r8, r/m8     | RM    | Valid       | Valid           | r8 AND r/m8.                              |
+        // 22 /r            | AND r8, r/m8     | RM    | Valid       | Valid           | r8 AND r/m8.                              |
         [Op]
-        public AsmExpr and(r8 dst, r8 src)
+        public AsmExpr and(Gp8 dst, Gp8 src)
         {
             Clear();
 
@@ -31,10 +30,11 @@ namespace Z0.Asm
             return slice(Buffer,0,j);
         }
 
+
         // | 23 /r            | AND r16, r/m16   | RM    | Valid       | Valid           | r16 AND r/m16.                            |
 
         [Op]
-        public AsmExpr and(r16 dst, r16 src)
+        public AsmExpr and(Gp16 dst, Gp16 src)
         {
             Clear();
 

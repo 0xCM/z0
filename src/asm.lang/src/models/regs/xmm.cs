@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static AsmLang;
 
     using I = RegIndex;
     using G = AsmRegOps.xmm;
@@ -26,8 +27,8 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator AsmRegOp(G src)
-                => new AsmRegOp(RegWidth.W128, RegClass.XMM, src.Index);
+            public static implicit operator RegOp(G src)
+                => new RegOp(RegWidth.W128, RegClass.XMM, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)

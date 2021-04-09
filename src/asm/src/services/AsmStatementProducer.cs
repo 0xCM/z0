@@ -114,7 +114,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var hr = ref skip(routines,i);
-                var dst = Db.ToolInput(consumer, FS.file(hr.Host, FS.Extensions.Asm));
+                var dst = Db.ToolInput(consumer, FS.file(hr.Host, FS.Asm));
                 counter += Produce(skip(routines,i), dst);
             }
             return counter;

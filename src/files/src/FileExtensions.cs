@@ -14,6 +14,11 @@ namespace Z0
         public static FileExt Asm => ext(asm);
 
         /// <summary>
+        /// Defines the <see cref='bin'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Bin => ext(bin);
+
+        /// <summary>
         /// Defines the <see cref='cmd'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Cmd => ext(cmd);
@@ -47,6 +52,16 @@ namespace Z0
         /// Defines the <see cref='lib'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Lib => ext(lib);
+
+        /// <summary>
+        /// Defines the <see cref='il'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Il => ext(il);
+
+        /// <summary>
+        /// Defines the composite <see cref='il'/> + <see cref='csv'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt IlData => ext(il, csv);
 
         /// <summary>
         /// Defines the <see cref='json'/> <see cref='FileExt'/>
@@ -93,6 +108,16 @@ namespace Z0
         /// </summary>
         public static FileExt PCsv => ext(pcsv);
 
+        /// <summary>
+        /// Defines the <see cref='idx'/> + <see cref='csv'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Idx => ext(idx, csv);
+
+
+        /// <summary>
+        /// Defines the <see cref='zip'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Zip => ext(zip);
 
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions
@@ -103,24 +128,9 @@ namespace Z0
             public static FileExt Asm => ext(asm);
 
             /// <summary>
-            /// Defines the <see cref='cmd'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Cmd => ext(cmd);
-
-            /// <summary>
-            /// Defines the <see cref='csproj'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt CsProj => ext(csproj);
-
-            /// <summary>
             /// Defines the <see cref='csv'/> <see cref='FileExt'/>
             /// </summary>
             public static FileExt Csv => ext(csv);
-
-            /// <summary>
-            /// Defines the <see cref='cs'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Cs => ext(cs);
 
             /// <summary>
             /// Defines the <see cref='dll'/> <see cref='FileExt'/>
@@ -141,21 +151,6 @@ namespace Z0
             /// Defines the <see cref='hex'/> <see cref='FileExt'/>
             /// </summary>
             public static FileExt Hex => ext(hex);
-
-            /// <summary>
-            /// Defines the <see cref='idx'/> + <see cref='csv'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Idx => ext(idx, csv);
-
-            /// <summary>
-            /// Defines the <see cref='il'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Il => ext(il);
-
-            /// <summary>
-            /// Defines the composite <see cref='il'/> + <see cref='csv'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt IlData => ext(il, csv);
 
             /// <summary>
             /// Defines the <see cref='log'/> <see cref='FileExt'/>

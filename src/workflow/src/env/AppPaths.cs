@@ -8,7 +8,6 @@ namespace Z0
 
     using static EnvFolders;
 
-    using X = FS.Extensions;
 
     partial interface IEnvPaths
     {
@@ -37,7 +36,7 @@ namespace Z0
             => AppLogDir() + file;
 
         FS.FilePath AppLog(string id)
-            => AppLogDir() + FS.file(id, X.Log);
+            => AppLogDir() + FS.file(id, FS.Log);
 
         FS.FilePath AppLog(string id, FS.FileExt ext)
             => AppLogDir() + FS.file(id,ext);
@@ -57,14 +56,14 @@ namespace Z0
         {
             var id = TableId<T>();
             var dir = AppTableDir<T>();
-            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? X.Csv);
+            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? FS.Csv);
         }
 
         FS.FilePath AppTablePath(Type t, string subject, FS.FileExt? ext = null)
         {
             var id = TableId(t);
             var dir = AppTableDir(t);
-            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? X.Csv);
+            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? FS.Csv);
         }
     }
 }

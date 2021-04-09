@@ -23,6 +23,9 @@ namespace Z0
         FS.FolderPath ToolHelpRoot()
             => ToolCatalogRoot() + FS.folder(help);
 
+        FS.FolderPath ToolScriptDir(ToolId tool)
+            => ToolScriptRoot() + FS.folder(tool.Format());
+
         FS.FolderPath ToolsetHelpDir(string toolset)
             => ToolHelpRoot() + FS.folder(toolset);
 
@@ -52,9 +55,6 @@ namespace Z0
 
         FS.FilePath ToolInput(ToolId tool,FS.FileName file)
             => ToolInDir(tool) + file;
-
-        FS.FolderPath ToolScriptDir(ToolId tool)
-            => ToolScriptRoot() + FS.folder(tool.Format());
 
         FS.FilePath ToolScript(ToolId tool, ScriptId script, FS.FileExt? ext = null)
             => ToolScriptDir(tool) + FS.file(script.Format(), ext ?? FS.Cmd);

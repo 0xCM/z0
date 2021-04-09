@@ -4,22 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum AsmOpWidth : byte
+    partial struct AsmLang
     {
-        None = 0,
+        public enum OpWidth : byte
+        {
+            None = 0,
 
-        W8 = 1,
+            W8 = 1,
 
-        W16 = 2,
+            W16 = 2,
 
-        W32 = 3,
+            W32 = 3,
 
-        W64 = 4,
+            W64 = 4,
 
-        W128 = 5,
+            W128 = 5,
 
-        W256 = 6,
+            W256 = 6,
 
-        W512 = 7
+            W512 = 7
+        }
     }
 }

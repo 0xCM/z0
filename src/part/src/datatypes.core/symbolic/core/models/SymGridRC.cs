@@ -9,29 +9,28 @@ namespace Z0
 
     using static Part;
 
-    using api = Symbols;
-
-    public readonly struct SymGrid<K>
-        where K : unmanaged
+    public readonly struct SymGrid<R,C>
+        where R : unmanaged
+        where C : unmanaged
     {
-        readonly Symbols<K> RowData;
+        readonly Symbols<R> RowData;
 
-        readonly Symbols<K> ColData;
+        readonly Symbols<C> ColData;
 
         [MethodImpl(Inline)]
-        public SymGrid(Symbols<K> rows, Symbols<K> cols)
+        public SymGrid(Symbols<R> rows, Symbols<C> cols)
         {
             RowData = rows;
             ColData = cols;
         }
 
-        public ReadOnlySpan<Sym<K>> Rows
+        public ReadOnlySpan<Sym<R>> Rows
         {
             [MethodImpl(Inline)]
             get => RowData.View;
         }
 
-        public ReadOnlySpan<Sym<K>> Cols
+        public ReadOnlySpan<Sym<C>> Cols
         {
             [MethodImpl(Inline)]
             get => ColData.View;
@@ -50,36 +49,36 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly Sym<K> Row(K row)
+        public ref readonly Sym<R> Row(R row)
             => ref RowData[row];
 
         [MethodImpl(Inline)]
-        public ref readonly Sym<K> Col(K col)
+        public ref readonly Sym<C> Col(C col)
             => ref ColData[col];
 
         [MethodImpl(Inline)]
-        public ref readonly Sym<K> Row(uint row)
+        public ref readonly Sym<R> Row(uint row)
             => ref RowData[row];
 
         [MethodImpl(Inline)]
-        public ref readonly Sym<K> Col(uint col)
+        public ref readonly Sym<C> Col(uint col)
             => ref ColData[col];
 
         [MethodImpl(Inline)]
-        public SymPair<K> Pair(K row, K col)
+        public SymPair<R,C> Pair(R row, C col)
             => (Row(row),Col(col));
 
         [MethodImpl(Inline)]
-        public SymPair<K> Pair(uint row, uint col)
+        public SymPair<R,C> Pair(uint row, uint col)
             => (Row(row),Col(col));
 
-        public SymPair<K> this[uint row, uint col]
+        public SymPair<R,C> this[uint row, uint col]
         {
             [MethodImpl(Inline)]
             get => Pair(row,col);
         }
 
-        public SymPair<K> this[K row, K col]
+        public SymPair<R,C> this[R row, C col]
         {
             [MethodImpl(Inline)]
             get => Pair(row,col);

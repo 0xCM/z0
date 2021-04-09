@@ -30,7 +30,6 @@ namespace Z0.Asm
         {
             ShowMnemonicSymbols();
             ShowEFlagSymbols();
-            ShowCompositeSymbols();
             ShowModeSymbols();
         }
 
@@ -56,9 +55,6 @@ namespace Z0.Asm
         void ShowModeSymbols()
             => root.use(OpenShowLog("sigops.modes"), log => root.iter(SigSymbols.Modes.Storage, symbol => Show(symbol, log)));
 
-        [Action(K.ShowCompositeSymbols)]
-        void ShowCompositeSymbols()
-            => root.use(OpenShowLog("sigops.composites"), log => root.iter(SigSymbols.Composites.Storage, symbol => Show(symbol, log)));
 
         [Action(K.ShowEFlagSymbols)]
         void ShowEFlagSymbols()

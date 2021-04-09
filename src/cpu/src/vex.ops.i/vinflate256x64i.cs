@@ -72,5 +72,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vinflate256x64i(in SpanBlock128<int> src, uint offset)
             => ConvertToVector256Int64(gptr(src[offset]));
+
+        /// <summary>
+        /// VPMOVZXBQ ymm, m32
+        /// 4x8u -> 4x64i
+        /// Projects four unsigned 8-bit integers onto 4 signed 64-bit integers
+        /// </summary>
+        /// <param name="src">The input component source</param>
+        /// <param name="n">The source component count</param>
+        /// <param name="w">The target component width</param>
+        /// <param name="i">Signals a sign extension</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<long> vmove4x64i(in byte src)
+            => ConvertToVector256Int64(gptr(src));
+
     }
 }

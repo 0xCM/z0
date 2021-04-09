@@ -80,10 +80,10 @@ namespace Z0
             => ShowLog(NameShowLog(name,ext));
 
         protected ShowLog ShowLog([Caller] string name = null, FS.FileExt? ext = null)
-            => ShowLog(NameShowLog(name,ext ?? FS.Extensions.Csv));
+            => ShowLog(NameShowLog(name,ext ?? FS.Csv));
 
         protected StreamWriter OpenShowLog(string name, FS.FileExt? ext = null)
-            => Db.ShowLog(NameShowLog(name, ext ?? FS.Extensions.Csv)).Writer();
+            => Db.ShowLog(NameShowLog(name, ext ?? FS.Csv)).Writer();
 
         protected void Show(string name, FS.FileExt ext, Action<ShowLog> f)
         {

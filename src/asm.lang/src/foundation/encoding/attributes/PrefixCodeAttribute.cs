@@ -13,27 +13,22 @@ namespace Z0.Asm
     {
         public PrefixCodeAttribute()
         {
-            Description = EmptyString;
             _Token = z8;
         }
 
         public PrefixCodeAttribute(string description)
         {
-            Description = description;
             _Token = z8;
         }
 
-        public PrefixCodeAttribute(object token, string description)
+        public PrefixCodeAttribute(object token)
         {
             _Token = token;
-            Description = description;
         }
 
         object _Token {get;}
 
         public byte Token
             => (byte)_Token;
-
-        public string Description {get;}
     }
 }

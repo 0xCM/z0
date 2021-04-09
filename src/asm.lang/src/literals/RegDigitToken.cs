@@ -4,60 +4,37 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using OCD = AsmOpCodeDocs;
-
-    /// <summary>
-    /// Specifies a '/r' token where r = 0..7
-    /// </summary>
-    [SymbolSource]
-    public enum RegDigitToken : byte
+    partial struct AsmLang
     {
         /// <summary>
-        /// See <see cref='OCD.r0'/>
+        /// Specifies a '/r' token where r = 0..7
         /// </summary>
-        [Symbol("/0", OCD.r0)]
-        r0,
+        [SymbolSource]
+        public enum RegDigitToken : byte
+        {
+            [Symbol("/0", "Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode")]
+            r0,
 
-        /// <summary>
-        /// See <see cref='OCD.r1'/>
-        /// </summary>
-        [Symbol("/1", OCD.r1)]
-        r1,
+            [Symbol("/1", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 1 provides an extension to the instruction's opcode")]
+            r1,
 
-        /// <summary>
-        /// See <see cref='OCD.r2'/>
-        /// </summary>
-        [Symbol("/2", OCD.r2)]
-        r2,
+            [Symbol("/2", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 2 provides an extension to the instruction's opcode")]
+            r2,
 
-        /// <summary>
-        /// See <see cref='OCD.r3'/>
-        /// </summary>
-        [Symbol("/3", OCD.r3)]
-        r3,
+            [Symbol("/3", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 3 provides an extension to the instruction's opcode")]
+            r3,
 
-        /// <summary>
-        /// See <see cref='OCD.r4'/>
-        /// </summary>
-        [Symbol("/4", OCD.r4)]
-        r4,
+            [Symbol("/4", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 4 provides an extension to the instruction's opcode")]
+            r4,
 
-        /// <summary>
-        /// See <see cref='OCD.r5'/>
-        /// </summary>
-        [Symbol("/5", OCD.r5)]
-        r5,
+            [Symbol("/5", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5 provides an extension to the instruction's opcode")]
+            r5,
 
-        /// <summary>
-        /// See <see cref='OCD.r6'/>
-        /// </summary>
-        [Symbol("/6", OCD.r6)]
-        r6,
+            [Symbol("/6", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6 provides an extension to the instruction's opcode")]
+            r6,
 
-        /// <summary>
-        /// See <see cref='OCD.r7'/>
-        /// </summary>
-        [Symbol("/7", OCD.r7)]
-        r7,
+            [Symbol("/7", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode")]
+            r7,
+        }
     }
 }

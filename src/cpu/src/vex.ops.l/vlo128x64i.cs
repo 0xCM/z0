@@ -35,5 +35,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<long> vlo128x64i(Vector128<uint> src)
             => ConvertToVector128Int64(src);
+
+        /// <summary>
+        /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<long> vlo256x64i(Vector128<ushort> src)
+            => ConvertToVector256Int64(src);
     }
 }

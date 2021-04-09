@@ -55,6 +55,7 @@ namespace Z0
             Expr = symbol;
         }
 
+
         public Identifier Type
             => typeof(K).Name;
 
@@ -68,6 +69,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Sym(Sym<K> src)
             => new Sym(src.Identity, src.Index, src.Type, memory.bw64(src.Kind), src.Name, src.Expr);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator K(Sym<K> src)
+            => src.Kind;
 
         public static Sym<K> Empty
         {

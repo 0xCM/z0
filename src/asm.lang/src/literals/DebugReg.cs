@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     partial struct AsmLang
     {
-
         /// <summary>
         /// Classifies the accessible debug registers
         /// </summary>

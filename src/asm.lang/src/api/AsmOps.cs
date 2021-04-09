@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
+    using static AsmLang;
 
     using R = AsmRegOps;
 
@@ -16,9 +16,8 @@ namespace Z0.Asm
     public readonly struct AsmOps
     {
         [MethodImpl(Inline), Op]
-        public static AsmRegOp reg(RegWidth width, RegClass @class, RegIndex index)
-            => new AsmRegOp(width,@class,index);
-
+        public static RegOp reg(RegWidth width, RegClass @class, RegIndex index)
+            => new RegOp(width,@class,index);
 
         public static R.al al => default;
 

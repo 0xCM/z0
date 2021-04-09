@@ -59,5 +59,5 @@ namespace Z0.Asm
             [Symbol("r15b")]
             R15B = r15,
         }
-        }
+    }
 }

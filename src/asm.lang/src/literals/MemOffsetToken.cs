@@ -9,28 +9,16 @@ namespace Z0.Asm
     [SymbolSource]
     public enum MemOffsetToken : byte
     {
-        /// <summary>
-        /// <see cref='SD.moffs8'/>
-        /// </summary>
-        [Symbol("moffs8", SD.moffs8)]
+        [Symbol("moffs8", "A simple memory variable (memory offset) of type byte, word, or doubleword used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction")]
         moffs8,
 
-        /// <summary>
-        /// <see cref='SD.moffs16'/>
-        /// </summary>
-        [Symbol("moffs16", SD.moffs16)]
+        [Symbol("moffs16", "A simple memory variable (memory offset) of type byte, word, or doubleword used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction")]
         moffs16,
 
-        /// <summary>
-        /// <see cref='SD.moffs32'/>
-        /// </summary>
-        [Symbol("moffs32", SD.moffs32)]
+        [Symbol("moffs32", "A simple memory variable (memory offset) of type byte, word, or doubleword used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction")]
         moffs32,
 
-        /// <summary>
-        /// <see cref='SD.moffs64'/>
-        /// </summary>
-        [Symbol("moffs64", SD.moffs64)]
+        [Symbol("moffs64", "A simple memory variable (memory offset) of type byte, word, or doubleword used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction")]
         moffs64,
     }
 }

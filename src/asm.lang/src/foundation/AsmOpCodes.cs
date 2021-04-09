@@ -10,9 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using L = LockPrefixCode;
-    using REX = RexPrefixCode;
-
     [ApiHost]
     public readonly partial struct AsmOpCodes
     {
@@ -21,6 +18,5 @@ namespace Z0.Asm
 
         public static AsmHexCode create()
             => new AsmHexCode();
-
     }
 }

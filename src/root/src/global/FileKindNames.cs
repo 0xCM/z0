@@ -79,6 +79,11 @@ namespace Z0
         public const string exe = nameof(exe);
 
         /// <summary>
+        /// Defines the 'bin' literal
+        /// </summary>
+        public const string bin = nameof(bin);
+
+        /// <summary>
         /// Defines the 'hex' literal
         /// </summary>
         public const string hex = nameof(hex);

@@ -11,8 +11,8 @@ namespace Z0
 
     public readonly struct ControlScriptNames
     {
-        public static FS.FileName BuildRespack => FS.file("build-respack", FS.Extensions.Cmd);
+        public static FS.FileName BuildRespack => FS.file("build-respack", FS.Cmd);
 
-        public static FS.FileName PackRespack => FS.file("pack-respack", FS.Extensions.Cmd);
+        public static FS.FileName PackRespack => FS.file("pack-respack", FS.Cmd);
     }
 }

@@ -35,5 +35,30 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vinflate128x32u(in SpanBlock64<ushort> src, uint offset)
             => v32u(ConvertToVector128Int32(gptr(src[offset])));
+
+        /// <summary>
+        /// PMOVZXBD xmm, m32
+        /// 4x8u -> 4x32u
+        /// Projects 4 unsigned 8-bit values onto 4 unsigned 32-bit values
+        /// </summary>
+        /// <param name="src">The input component source</param>
+        /// <param name="n">The source component count</param>
+        /// <param name="dst">The target component width</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<uint> vmove4x32u(in byte src)
+            => v32u(ConvertToVector128Int32(gptr(src)));
+
+        /// <summary>
+        /// PMOVSXWD xmm, m64
+        /// 4x16u -> 4x32u
+        /// Projects 4 16-bit unsigned integers onto 4 32-bit unsigned integers
+        /// </summary>
+        /// <param name="src">The input component source</param>
+        /// <param name="n">The source component count</param>
+        /// <param name="w">The target component width</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<uint> vmove4x32u(in ushort src)
+            => v32u(ConvertToVector128Int32(gptr(in src)));
+
     }
 }

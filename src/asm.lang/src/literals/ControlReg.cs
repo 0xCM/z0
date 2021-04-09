@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     partial struct AsmLang
     {
-
         /// <summary>
         /// Specifies the accessible control registers
         /// </summary>

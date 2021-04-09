@@ -24,6 +24,8 @@ namespace Z0.Asm
 
             readonly Symbols<Gp64> Gp64Sym;
 
+            readonly Symbols<KReg> KRegSym;
+
             public static AsmSymbols create()
                 => new AsmSymbols();
 
@@ -34,6 +36,7 @@ namespace Z0.Asm
                 Gp16Sym = Symbols.cache<Gp16>();
                 Gp32Sym = Symbols.cache<Gp32>();
                 Gp64Sym = Symbols.cache<Gp64>();
+                KRegSym = Symbols.cache<KReg>();
             }
 
             [MethodImpl(Inline), Op]
@@ -57,8 +60,12 @@ namespace Z0.Asm
                 => ref Gp64Sym[src];
 
             [MethodImpl(Inline), Op]
-            public ReadOnlySpan<Sym<Gp8>> Gp8Regs()
-                => Gp8Sym.View;
+            public ref readonly Sym<KReg> Symbol(KReg src)
+                => ref KRegSym[src];
+
+            [MethodImpl(Inline), Op]
+            public Symbols<Gp8> Gp8Regs()
+                => Gp8Sym;
 
             [MethodImpl(Inline), Op]
             public ReadOnlySpan<Sym<Gp16>> Gp16Regs()
@@ -72,12 +79,16 @@ namespace Z0.Asm
             public ReadOnlySpan<Sym<Gp64>> Gp64Regs()
                 => Gp64Sym.View;
 
+            [MethodImpl(Inline), Op]
+            public ReadOnlySpan<Sym<KReg>> KRegs()
+                => KRegSym.View;
+
             [MethodImpl(Inline)]
             public ReadOnlySpan<Sym<K>> Regs<K>()
                 where K : unmanaged
             {
                 if(typeof(K) == typeof(Gp8))
-                    return memory.recover<Sym<Gp8>,Sym<K>>(Gp8Regs());
+                    return memory.recover<Sym<Gp8>,Sym<K>>(Gp8Regs().View);
                 else if(typeof(K) == typeof(Gp16))
                     return memory.recover<Sym<Gp16>,Sym<K>>(Gp16Regs());
                 else if(typeof(K) == typeof(Gp32))

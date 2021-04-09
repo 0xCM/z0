@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tooling
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Root;
-    using static memory;
 
     partial class Nasm
     {
@@ -28,7 +24,7 @@ namespace Z0.Tooling
                 dst.AppendFormat("{0}{1,-24}", RenderDelimiter, src.Encoding);
 
                 if(kind == NasmListLineKind.Encoding)
-                    RenderEncoding(src.Encoding, dst);
+                    RenderBitstring(src.Encoding, dst);
                 else
                     dst.AppendFormat("{0}{1,-48}", RenderDelimiter, EmptyString);
 

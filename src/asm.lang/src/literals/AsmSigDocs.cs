@@ -21,16 +21,6 @@ namespace Z0.Asm
 
         public const string ᛁerᛁ = "Indicates support for embedded rounding control, which is only applicable to the register-register form of the instruction. This also implies support for SAE (Suppress All Exceptions)";
 
-        public const string imm8 = "An immediate 8-bit value in the inclusive range [–128, 127]. For instructions in which imm8 is combined with a word or doubleword operand, the immediate value is sign-extended to form a word or doubleword. The upper byte of the word is filled with the topmost bit of the immediate value";
-
-        public const string imm16 = "An immediate value for a 16-bit operand in the inclusive range [–32_768, 32_767]";
-
-        public const string imm32 = "An immediate value for a 32-bit operand in the inclusive range [–2_147_483_648, 2_147_483_647]";
-
-        public const string imm64 = "An immediate value for a 64-bit operand in the inclusive range [–9_223_372_036_854_775_808, 9_223_372_036_854_775_807]";
-
-        public const string k1 = "A mask register used as a regular operand (either destination or source). The 64-bit k registers are: k0 through k7";
-
         public const string m = "An operand in memory of width 16, 32 or 64 bits";
 
         public const string m8 = "A byte operand in memory ( usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. In 64-bit mode, it is pointed to by the RSI or RDI registers";
@@ -39,9 +29,6 @@ namespace Z0.Asm
 
         public const string m32  = "A doubleword operand in memory (usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. This nomenclature is used only with the string instructions";
 
-        public const string m64  = "A 64-bit operand in memory";
-
-        public const string m128 = "A memory double quadword operand in memory";
 
         public const string m16ᙾ16 = "A memory operand containing a far pointer composed of two numbers. The number to the left of the colon corresponds to the pointer's segment selector. The number to the right corresponds to its offset";
 
@@ -67,13 +54,6 @@ namespace Z0.Asm
 
         public const string m80fp = "A double extended-precision floating-point operand in memory. These symbols designate floating-point values that are used as operands for x87 FPU floating-point instructions";
 
-        public const string m16int = "A word integer operand in memory. These symbols designate integers that are used as operands for x87 FPU integer instructions";
-
-        public const string m32int = "A doubleword integer operand in memory. These symbols designate integers that are used as operands for x87 FPU integer instructions";
-
-        public const string m64int = "A quadword integer operand in memory. These symbols designate integers that are used as operands for x87 FPU integer instructions";
-
-        public const string mm = "An MMX register. The 64-bit MMX registers are: MM0 through MM7. The 64-bit MMX registers are: MM0 through MM7. The contents of memory are found at the address provided by the effective address computation.";
 
         public const string mmノm32 = "The low order 32 bits of an MMX register or a 32-bit memory operand";
 
@@ -81,37 +61,7 @@ namespace Z0.Asm
 
         public const string mib = "A memory operand using SIB addressing form, where the index register is not used in address calculation, Scale is ignored. Only the base and displacement are used in effective address calculation";
 
-        public const string moffs8 = "A simple memory variable (memory offset) of type byte, word, or doubleword used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction";
-
-        public const string moffs16 = "A simple memory variable (memory offset) of type byte, word, or doubleword used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction";
-
-        public const string moffs32 = "A simple memory variable (memory offset) of type byte, word, or doubleword used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction";
-
-        public const string moffs64 = "A simple memory variable (memory offset) of type byte, word, or doubleword used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction";
-
-        public const string r8 = "One of the byte general-purpose registers: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL}; or one of the byte registers (R8L-R15L) available when using REX.R and 64-bit mode.";
-
-        public const string r16 = "One of the word general-purpose registers: {AX CX DX BX SP BP SI DI}; or one of the word registers (R8-R15) available when using REX.R and 64-bit mode";
-
-        public const string r32 = "One of the doubleword general-purpose registers: {EAX ECX EDX EBX ESP EBP ESI EDI}; or one of the doubleword registers (R8D - R15D) available when using REX.R in 64-bit mode";
-
-        public const string r64  = "One of the quadword general-purpose registers: {RAX RBX RCX RDX RDI RSI RBP RSP R8–R15}; These are available when using REX.R and 64-bit mode";
-
-        public const string rel8 = "A relative address in the range from 128 bytes before the end of the instruction to 127 bytes after the end of the instruction";
-
-        public const string rel16 = "A relative address within the same code segment as the instruction assembled. The rel16 symbol applies to instructions with an operand-size attribute of 16 bits";
-
-        public const string rel32 = "A relative address within the same code segment as the instruction assembled. The rel32 symbol applies to instructions with an operand-size attribute of 32 bits";
-
         public const string rm8 = "A byte operand that is either the contents of a byte general-purpose register: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL}; or a byte from memory. Byte registers R8L - R15L are available using REX.R in 64-bit mode";
-
-        public const string rm16 = "A word general-purpose register or memory operand used for instructions whose operand-size attribute is 16 bits. The word general-purpose registers are: AX, CX, DX, BX, SP, BP, SI, DI. The contents of memory are found at the address provided by the effective address computation. Word registers R8W - R15W are available using REX.R in 64-bit mode";
-
-        public const string rm32 = "A doubleword general-purpose register or memory operand used for instructions whose operand size attribute is 32 bits. The doubleword general-purpose registers are: EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI. The contents of memory are found at the address provided by the effective address computation. Doubleword registers R8D - R15D are available when using REX.R in 64-bit mode";
-
-        public const string rm64 = "A quadword general-purpose register or memory operand used for instructions whose operand-size attribute is 64 bits when using REX.W. Quadword general-purpose registers are: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15; these are available only in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
-
-        public const string Sreg = "A segment register. The segment register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5";
 
         public const string sae = "Indicates support for SAE (Suppress All Exceptions). This is used for instructions that support SAE, but do not support embedded rounding control";
 
@@ -137,31 +87,9 @@ namespace Z0.Asm
 
         public const string ᐸXMM0ᐳ = "Indicates implied use of the XMM0 register. When there is ambiguity xmm1 indicates the first source operand using an XMM register and xmm2 the second source operand using an XMM register. Some instructions use the XMM0 register as the third source operand, indicated by <XMM0>. The use of the third XMM register operand is implicit in the instruction encoding and does not affect the ModR/M encoding";
 
-        public const string ymm = "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode";
-
-        public const string r32a ="A first r32 register operand";
-
-        public const string r32b ="A second r32 register operand";
-
-        public const string xmm1 ="A first xmm register operand";
-
-        public const string xmm2 ="A second xmm register operand";
-
-        public const string xmm3 ="A third xmm register operand";
-
-        public const string ymm1 ="A first ymm register operand";
-
-        public const string ymm2 ="A second ymm register operand";
-
-        public const string ymm3 ="A third ymm register operand";
-
-        public const string m256 = "A 256-bit operand in memory. This nomenclature is used only with AVX instructions";
-
         public const string ymmノm256 = "A YMM register or 256-bit memory operand";
 
         public const string ᐸYMM0ᐳ = "Indicates use of the YMM0 register as an implicit argument";
-
-        public const string zmm = "A ZMM register";
 
         public const string m512 = "A 64-byte operand in memory";
 

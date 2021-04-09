@@ -28,6 +28,7 @@ namespace Z0.Asm
         {
             var dst = AsmBytes.hexcode();
             dst.Cell(index) = rex(wrxb);
+            dst.Cell(15) = 1;
             return dst;
         }
 

@@ -9,22 +9,22 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmSyntaxNode<T> : IAsmSyntaxNode<AsmSyntaxNode<T>>
-        where T : IAsmSyntaxNode<T>, new()
+    public readonly struct AsmBitstring : ITextual
     {
-        public IAsmSyntaxNode Source {get;}
-
-        public AsmNodeKind NodeKind
-            => Source.NodeKind;
+        public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmSyntaxNode(IAsmSyntaxNode src)
+        public AsmBitstring(TextBlock content)
         {
-            Source = src;
+            Content = content;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmSyntaxNode<T>(T src)
-            => new AsmSyntaxNode<T>(src);
+        public string Format()
+            => Content;
+
+        public override string ToString()
+            => Format();
     }
+
 }

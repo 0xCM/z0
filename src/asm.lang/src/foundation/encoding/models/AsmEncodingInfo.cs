@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmBitstring : IEquatable<AsmBitstring>, IComparable<AsmBitstring>
+    public readonly struct AsmEncodingInfo : IEquatable<AsmEncodingInfo>, IComparable<AsmEncodingInfo>
     {
         public AsmStatementExpr Statement {get;}
 
@@ -26,7 +26,7 @@ namespace Z0.Asm
         readonly uint Length {get;}
 
         [MethodImpl(Inline)]
-        public AsmBitstring(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode hex, string bits)
+        public AsmEncodingInfo(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode hex, string bits)
         {
             Statement = statement;
             Sig = sig;
@@ -41,7 +41,7 @@ namespace Z0.Asm
         public string Format()
             => Formatted;
 
-        public int CompareTo(AsmBitstring src)
+        public int CompareTo(AsmEncodingInfo src)
             => Statement.CompareTo(src.Statement);
 
         public override int GetHashCode()
@@ -49,10 +49,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
 
-        public bool Equals(AsmBitstring src)
+        public bool Equals(AsmEncodingInfo src)
             => Bits.Equals(src.Bits);
 
         public override bool Equals(object src)
-            => src is AsmBitstring b && Equals(b);
+            => src is AsmEncodingInfo b && Equals(b);
     }
 }

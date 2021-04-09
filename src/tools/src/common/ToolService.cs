@@ -23,11 +23,17 @@ namespace Z0.Tooling
         public FS.FolderPath OutDir
             => Paths.ToolOutDir(Id);
 
+        public FS.FolderPath ScriptDir
+            => Paths.ToolScriptDir(Id);
+
         public FS.Files Inputs()
             => Paths.ToolInDir(Id).AllFiles;
 
         public FS.Files Outputs()
             => Paths.ToolOutDir(Id).AllFiles;
+
+        public FS.FilePath Script(FS.FileName name)
+            => ScriptDir + name;
 
         public FS.FilePath Input(FS.FileName name)
             => InDir + name;

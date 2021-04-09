@@ -61,7 +61,7 @@ namespace Z0
             where T : struct, IRecord<T>
         {
             var dir = Paths.TableDir<T>();
-            return Clear(dir.EnumerateFiles(FS.Extensions.Csv, false).Array());
+            return Clear(dir.EnumerateFiles(FS.Csv, false).Array());
         }
 
         public WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)

@@ -10,8 +10,6 @@ namespace Z0
 
     using static Part;
 
-    using X = FS.Extensions;
-
     struct DbTables<S> : ITableArchive
     {
         public IEnvPaths Paths {get;}
@@ -35,6 +33,6 @@ namespace Z0
             => (FS.dir(Root.Name) + folder).Clear();
 
         public IEnumerable<FS.FilePath> Files()
-            => Root.Files(X.Csv, true);
+            => Root.Files(FS.Csv, true);
     }
 }

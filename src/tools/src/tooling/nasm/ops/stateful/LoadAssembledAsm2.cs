@@ -2,17 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Tooling
 {
-    public interface IAsmSyntaxNode
+    using Z0.Asm;
+
+    partial class Nasm
     {
-        AsmNodeKind NodeKind {get;}
+        public Index<AssembledAsm> LoadAssembledAsm(Identifier listname)
+            => Assembled(LoadListedBlocks(listname));
     }
-
-    public interface IAsmSyntaxNode<T> : IAsmSyntaxNode
-        where T : IAsmSyntaxNode<T>, new()
-    {
-
-    }
-
 }

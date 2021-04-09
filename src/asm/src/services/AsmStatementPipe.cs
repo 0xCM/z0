@@ -236,18 +236,18 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, count);
         }
 
-        public Index<AsmBitstring> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src)
+        public Index<AsmEncodingInfo> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src)
         {
             var collecting = Wf.Running(string.Format("Collecting distinct bitstrings from {0} statements", src.Length));
             var bitstrings = AsmBitstrings.service();
-            var collected = root.hashset<AsmBitstring>();
+            var collected = root.hashset<AsmEncodingInfo>();
             var count = src.Length;
             var counter = 0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(src,i);
                 var content = bitstrings.Format(statement.Encoded);
-                if(collected.Add(new AsmBitstring(statement.Expression, statement.Sig, statement.OpCode, statement.Encoded, content)))
+                if(collected.Add(new AsmEncodingInfo(statement.Expression, statement.Sig, statement.OpCode, statement.Encoded, content)))
                     counter++;
 
             }

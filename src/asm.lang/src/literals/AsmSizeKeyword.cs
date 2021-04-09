@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [SymbolSource]
-    public enum AsmKeywordToken : byte
+    public enum AsmSizeKeyword : byte
     {
         /// <summary>
         /// 8 bits

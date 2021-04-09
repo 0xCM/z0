@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Classifies defined asm syntax nodes
     /// </summary>
-    public enum AsmNodeKind : byte
+    public enum AsmLinePart : byte
     {
         None = 0,
 

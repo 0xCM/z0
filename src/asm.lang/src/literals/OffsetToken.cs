@@ -4,45 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SD = AsmOpCodeDocs;
-
-    [SymbolSource]
-    public enum OffsetToken : byte
+    partial struct AsmLang
     {
-        /// <summary>
-        /// <see cref='SD.cb'/>
-        /// </summary>
-        [Symbol("cb", SD.cb)]
-        cb,
+        [SymbolSource]
+        public enum OffsetToken : byte
+        {
+            [Symbol("cb", "Indicates a 1-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
+            cb,
 
-        /// <summary>
-        /// <see cref='SD.cw'/>
-        /// </summary>
-        [Symbol("cw", SD.cw)]
-        cw,
+            [Symbol("cw", "Indicates a 2-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
+            cw,
 
-        /// <summary>
-        /// <see cref='SD.cd'/>
-        /// </summary>
-        [Symbol("cd", SD.cd)]
-        cd,
+            [Symbol("cd", "Indicates a 4-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
+            cd,
 
-        /// <summary>
-        /// <see cref='SD.cp'/>
-        /// </summary>
-        [Symbol("cp", SD.cp)]
-        cp,
+            [Symbol("cp", "Indicates a 6-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
+            cp,
 
-        /// <summary>
-        /// <see cref='SD.co'/>
-        /// </summary>
-        [Symbol("co", SD.co)]
-        co,
+            [Symbol("co", "Indicates an 8-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
+            co,
 
-        /// <summary>
-        /// <see cref='SD.ct'/>
-        /// </summary>
-        [Symbol("ct", SD.ct)]
-        ct,
+            [Symbol("ct", "Indicates a 10-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
+            ct,
+        }
     }
 }

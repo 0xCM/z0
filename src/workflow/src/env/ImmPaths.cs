@@ -7,18 +7,16 @@ namespace Z0
     using static EnvFolders;
     using static Part;
 
-    using X = FS.Extensions;
-
     partial interface IEnvPaths
     {
         FS.FolderPath ImmRoot()
             => CaptureRoot() + FS.folder(imm);
 
         FS.Files ImmAsmFiles()
-            => ImmRoot().Files(X.Asm, true);
+            => ImmRoot().Files(FS.Asm, true);
 
         FS.Files ImmHexFiles()
-            => ImmRoot().Files(X.Hex, true);
+            => ImmRoot().Files(FS.Hex, true);
 
         FS.FolderPath[] ImmDirs(PartId part)
             => ImmRoot().SubDirs().Where(d => d.Name.EndsWith(part.Format()));
@@ -33,9 +31,9 @@ namespace Z0
             => (ImmRoot() + name);
 
         FS.FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id, bool refined)
-            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + id.ToFileName(refined ? "r" : EmptyString, X.Hex);
+            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + id.ToFileName(refined ? "r" : EmptyString, FS.Hex);
 
         FS.FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id, bool refined)
-            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + id.ToFileName(refined ? "r" : EmptyString, X.Asm);
+            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + id.ToFileName(refined ? "r" : EmptyString, FS.Asm);
     }
 }

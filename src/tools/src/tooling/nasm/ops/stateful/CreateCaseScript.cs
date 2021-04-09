@@ -12,14 +12,24 @@ namespace Z0.Tooling
 
     partial class Nasm
     {
-        public CmdScript CreateCaseScript(NasmCase src)
+        public NasmCaseScript CreateCaseScript(Identifier name)
+        {
+            var @case = new NasmCase();
+            @case.CaseId = name;
+            @case.SourcePath = Input(FS.file(name.Format(), FS.Asm));
+            @case.BinPath = Output(FS.file(name.Format(), FS.Bin));
+            @case.ListPath = FS.path(string.Format("{0}.list.asm",@case.BinPath));
+            return CreateCaseScript(@case);
+        }
+
+        public NasmCaseScript CreateCaseScript(NasmCase src)
         {
             var dst = text.buffer();
             dst.AppendLine("@echo off");
             dst.AppendLine(string.Format("set SrcId={0}", src.CaseId));
             var srcPath = src.SourcePath.Format(PathSeparator.BS);
             var binPath = src.BinPath.Format(PathSeparator.BS);
-            var listPath = string.Format("{0}.list.asm",binPath);
+            var listPath = src.ListPath.Format(PathSeparator.BS);
             var toolPath = ToolPath().Format(PathSeparator.BS);
 
             dst.AppendLine(string.Format("set SrcPath={0}", srcPath));
@@ -29,8 +39,11 @@ namespace Z0.Tooling
             dst.AppendLine("set CmdSpec=%tool% %SrcPath% -o %BinPath% -f bin -l %ListPath%");
             dst.AppendLine("echo CmdSpec:%CmdSpec%");
             dst.AppendLine("%CmdSpec%");
-            var expr = ToolCmd.expr(dst.Emit());
-            return ToolCmd.script(src.CaseId,expr);
+
+            var cmdpath = Script(FS.file(src.CaseId.Format(), FS.Cmd));
+            cmdpath.Overwrite(dst.Emit());
+
+            return new NasmCaseScript(src,cmdpath);
         }
     }
 }

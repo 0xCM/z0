@@ -15,14 +15,11 @@ namespace Z0.Asm
 
         readonly Symbols<AsmMnemonicCode> _Mnemonics;
 
-        readonly Symbols<CompositeSigToken> _Composites;
-
         internal AsmSigSymbols()
         {
             _EFlags = Symbols.cache<EFlag>();
             _Modes = Symbols.cache<Mode>();
             _Mnemonics = Symbols.cache<AsmMnemonicCode>();
-            _Composites = Symbols.cache<CompositeSigToken>();
         }
 
         public Symbols<Mode> Modes
@@ -34,8 +31,6 @@ namespace Z0.Asm
         public Symbols<AsmMnemonicCode> Mnemonics
             => _Mnemonics;
 
-        public Symbols<CompositeSigToken> Composites
-            => _Composites;
 
         public enum Mode : byte
         {
