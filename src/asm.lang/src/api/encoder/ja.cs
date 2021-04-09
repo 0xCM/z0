@@ -10,17 +10,25 @@ namespace Z0.Asm
     using static Part;
     using static AsmInstructions;
     using static Hex8Seq;
-    using static AsmRegOps;
+    using static AsmOps;
     using static AsmHexCodes;
-    using static AsmImm;
 
-    partial struct AsmStatement
+    partial struct AsmEncoder
     {
         /// <summary>
-        /// | FF /4       | JMP r/m64    | M     | Valid
+        /// (JA rel8) 77 cb
         /// </summary>
-        /// <param name="dst"></param>
-        public Jmp jmp(r64 dst)
-            => Builder.jmp(asmhex(xff));
+        /// <param name="cb"></param>
+        [MethodImpl(Inline), Op]
+        public Ja ja(Address8 cb)
+            => Builder.ja(asmhex(x77, cb));
+
+        /// <summary>
+        /// (JA rel32) 0F 87 cd
+        /// </summary>
+        /// <param name="cb"></param>
+        [MethodImpl(Inline), Op]
+        public Ja ja(Address32 cd)
+            => Builder.ja(asmhex(x77, cd));
     }
 }

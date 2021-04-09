@@ -11,10 +11,10 @@ namespace Z0.Asm
     using static AsmLang;
 
     using I = RegIndex;
-    using G = AsmRegOps.rK;
+    using G = AsmOps.rK;
     using K = AsmLang.KReg;
 
-    partial struct AsmRegOps
+    partial struct AsmOps
     {
         public readonly struct rK : IRegOp64<rK>
         {

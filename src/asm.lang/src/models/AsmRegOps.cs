@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     using static Part;
 
-
-    public readonly partial struct AsmRegOps
+    [ApiHost]
+    public readonly partial struct AsmOps
     {
 
     }
@@ -19,4 +19,5 @@ namespace Z0.Asm
     public static partial class XAsm
     {
     }
+
 }

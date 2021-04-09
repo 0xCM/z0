@@ -14,6 +14,8 @@ namespace Z0.Asm
 
     public struct AsmHexCode : IDataTypeComparable<AsmHexCode>
     {
+        public const byte SizeIndex = 15;
+
         internal Cell128 Data;
 
         [MethodImpl(Inline)]

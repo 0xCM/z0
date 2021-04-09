@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmImm
+    partial struct AsmOps
     {
         public readonly struct imm64 : IImmOp64<Imm64>
         {

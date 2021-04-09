@@ -124,7 +124,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static byte size(in AsmHexCode src)
-            => BitNumbers.cell8(src.Data, 15);
+            => BitNumbers.cell8(src.Data, AsmHexCode.SizeIndex);
 
         [MethodImpl(Inline), Op]
         public static int compare(in AsmHexCode a, in AsmHexCode b)
@@ -148,7 +148,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static Span<byte> hexbytes(in AsmHexCode src)
-            => slice(bytes(src.Data), 0, size(src));
+            => slice(bytes(src.Data), 0, src.Size);
 
         [MethodImpl(Inline), Op]
         public static Span<byte> rawbytes(in AsmHexCode src)

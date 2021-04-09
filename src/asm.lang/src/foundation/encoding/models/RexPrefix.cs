@@ -86,6 +86,14 @@ namespace Z0.Asm
             => src.Data;
 
         [MethodImpl(Inline)]
+        public static implicit operator RexPrefix(RexPrefixCode src)
+            => new RexPrefix((byte)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(RexPrefix src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
         public static RexPrefix operator ++(RexPrefix src)
             => api.next(src);
 

@@ -30,7 +30,11 @@ namespace Z0.Asm
             }
 
             public string Format()
-                => string.Format("{0,-24} | {1}", string.Format("{0} {1}", name, form), xed);
+            {
+                var inst = string.Format("Instruction: {0} {1}\r\n", name, form);
+                var iform = string.Format("# Iform: {0}", xed);
+                return inst + iform;
+            }
 
             public override string ToString()
                 => Format();

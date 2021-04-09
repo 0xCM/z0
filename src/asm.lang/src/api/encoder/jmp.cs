@@ -10,26 +10,17 @@ namespace Z0.Asm
     using static Part;
     using static AsmInstructions;
     using static Hex8Seq;
-    using static AsmRegOps;
+    using static AsmOps;
     using static AsmHexCodes;
 
-    partial struct AsmStatement
+    partial struct AsmEncoder
     {
         /// <summary>
-        /// (AND AL, imm8)[24 ib]
+        /// | FF /4       | JMP r/m64    | M     | Valid
         /// </summary>
-        /// <param name="r"></param>
-        /// <param name="imm8"></param>
-        public And and(al r, Imm8 imm8)
-            => Builder.and(asmhex(x24, imm8));
-
-        /// <summary>
-        /// (AND r/m8, imm8)[80 /4 ib]
-        /// </summary>
-        /// <param name="r"></param>
-        /// <param name="imm8"></param>
+        /// <param name="dst"></param>
         [MethodImpl(Inline), Op]
-        public And and(r8b r, Imm8 imm8)
-            => Builder.and(asmhex(x24, imm8));
+        public Jmp jmp(r64 dst)
+            => Builder.jmp(asmhex(xff));
     }
 }

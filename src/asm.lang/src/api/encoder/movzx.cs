@@ -9,12 +9,11 @@ namespace Z0.Asm
 
     using static Part;
     using static AsmInstructions;
-    using static Hex8Seq;
-    using static AsmRegOps;
+    using static AsmOps;
     using static AsmMemOps;
 
 
-    partial struct AsmStatement
+    partial struct AsmEncoder
     {
         /// <summary>
         /// | 0F B6 /r | MOVZX r16, r8 | Move byte to word with zero-extension.

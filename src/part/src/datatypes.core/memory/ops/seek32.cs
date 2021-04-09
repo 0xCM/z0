@@ -21,15 +21,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref uint seek32<T>(in T src, uint count)
             => ref Add(ref As<T,uint>(ref edit(src)), (int)count);
-
-        /// <summary>
-        /// Adds an offset to the head of a span, measured relative to 32-bit segments, and returns the reinterpreted reference
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 32-bit segments to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint seek32<T>(Span<T> src, uint count)
-            => ref Add(ref As<T,uint>(ref first(src)), (int)count);
     }
 }

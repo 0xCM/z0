@@ -1011,6 +1011,15 @@ namespace Z0.Asm
             //CaptureSelectedRoutines();
             //EmitBitstrings();
 
+            var encoder = AsmEncoder.create();
+            //REX.W B8 +ro io                  | MOV r64, imm64                   | mov rcx,7ffa9930f380h            | 48 b9 80 f3 30 99 fa 7f 00 00
+            var mov = encoder.mov(AsmRegOps.rcx, 0x7ffa9930f380);
+            Wf.Row(mov.Encoded.Format());
+
+            var code = AsmHexCodes.asmhex(Hex8Seq.x05, Hex8Seq.x20);
+            var formatted = code.Format();
+            Wf.Row(formatted);
+
             // var indices = array<byte>(0,3,5);
             // var widths = array<byte>(3,3,2);
             // var field = AsmBitfields.define(indices,widths);

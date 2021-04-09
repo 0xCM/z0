@@ -52,5 +52,18 @@ namespace Z0
         public static ref T cell<T>(Span<byte> src, uint offset)
             where T : unmanaged
                 => ref first<T>(slice(src, offset));
+
+        [MethodImpl(Inline), Op]
+        public static ref ushort cell16(Span<byte> src, uint offset)
+            => ref first<ushort>(slice(src, offset));
+
+        [MethodImpl(Inline), Op]
+        public static ref uint cell32(Span<byte> src, uint offset)
+            => ref first<uint>(slice(src, offset));
+
+        [MethodImpl(Inline), Op]
+        public static ref ulong cell64(Span<byte> src, uint offset)
+            => ref first<ulong>(slice(src, offset));
+
     }
 }

@@ -10,10 +10,10 @@ namespace Z0.Asm
     using static Part;
     using static AsmLang;
 
-    using R = AsmRegOps;
+    using R = AsmOps;
 
     [ApiHost]
-    public readonly struct AsmOps
+    public readonly struct AsmRegOps
     {
         [MethodImpl(Inline), Op]
         public static RegOp reg(RegWidth width, RegClass @class, RegIndex index)

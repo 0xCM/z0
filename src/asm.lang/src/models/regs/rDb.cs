@@ -11,10 +11,10 @@ namespace Z0.Asm
     using static AsmLang;
 
     using I = RegIndex;
-    using G = AsmRegOps.rDb;
+    using G = AsmOps.rDb;
     using K = AsmLang.Gp64;
 
-    partial struct AsmRegOps
+    partial struct AsmOps
     {
         public readonly struct rDb : IRegOp64<r64>
         {

@@ -11,10 +11,10 @@ namespace Z0.Asm
     using static AsmLang;
 
     using I = RegIndex;
-    using G = AsmRegOps.r32;
+    using G = AsmOps.r32;
     using K = AsmLang.Gp32;
 
-    partial struct AsmRegOps
+    partial struct AsmOps
     {
         public readonly struct r32 : IRegOp32<r32>
         {
@@ -37,6 +37,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(K src)
                 => new G((I)src);
+
+            [MethodImpl(Inline)]
+            public static explicit operator byte(G src)
+                => (byte)src.Index;
         }
 
         public readonly struct eax : IRegOp32<eax>

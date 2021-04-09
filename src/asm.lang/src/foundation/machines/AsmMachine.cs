@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static AsmMem;
     using static AsmRegs;
-    using static AsmImm;
 
     [ApiComplete]
     public readonly ref partial struct AsmMachine
@@ -97,7 +96,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public void mov(ref r8 dst, imm8 src)
+        public void mov(ref r8 dst, Imm8 src)
         {
             Regs[w8, dst.Index] = src.Content;
         }
@@ -108,7 +107,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public void mov(r16 dst, imm16 src)
+        public void mov(r16 dst, Imm16 src)
         {
             Regs[w16, dst.Index] = src.Content;
         }
@@ -119,7 +118,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public void mov(r32 dst, imm32 src)
+        public void mov(r32 dst, Imm32 src)
         {
             Regs[w32, dst.Index] = src.Content;
         }
@@ -130,7 +129,7 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public void mov(r64 dst, imm64 src)
+        public void mov(r64 dst, Imm64 src)
         {
             Regs[w64, dst.Index] = src.Content;
         }

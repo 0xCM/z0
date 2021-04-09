@@ -34,7 +34,7 @@ namespace Z0.Asm
         Rex47,
 
         [Symbol("REX.W", "48h | [0100 1000] | W:1 | R:0 | X:0 | B:0")]
-        Rex48,
+        RexW,
 
         [Symbol("REX.WB", "49h | [0100 1001] | W:1 | R:0 | X:0 | B:1")]
         Rex49,
