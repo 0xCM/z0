@@ -6,10 +6,10 @@ namespace Z0
 {
     using static TextRules;
 
-    partial class WfShell
+    partial class WfRuntime
     {
         [Op]
-        public static IWfShell create(IApiParts parts, string[] args, bool verbose = true)
+        public static IWfRuntime create(IApiParts parts, string[] args, bool verbose = true)
         {
             var status = new WfInitStatus();
             status.Args = args;
@@ -72,12 +72,12 @@ namespace Z0
             if(verbose)
                 term.inform(AppMsg.status("Creating shell"));
 
-            IWfShell wf = new WfShell(init);
+            IWfRuntime wf = new WfRuntime(init);
 
             if(verbose)
                 term.inform(AppMsg.status("Created shell"));
 
-            var reactors = WfShell.reactors(wf);
+            var reactors = WfRuntime.reactors(wf);
             if(reactors.IsNonEmpty)
                 wf.Router.Enlist(reactors);
 

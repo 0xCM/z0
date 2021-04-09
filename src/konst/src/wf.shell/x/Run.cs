@@ -6,7 +6,7 @@ namespace Z0
 {
     partial class XWf
     {
-        public static CmdResult RunTask<T>(this T cmd, IWfShell wf)
+        public static CmdResult RunTask<T>(this T cmd, IWfRuntime wf)
             where T : struct, ICmd
         {
             var task = wf.Dispatch(cmd);
@@ -14,7 +14,7 @@ namespace Z0
             return task.Result;
         }
 
-        public static CmdResult RunDirect<T>(this T cmd, IWfShell wf)
+        public static CmdResult RunDirect<T>(this T cmd, IWfRuntime wf)
             where T : struct, ICmd
                 => wf.Execute(cmd);
     }

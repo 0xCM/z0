@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
-
     public sealed class WfDb : WfService<WfDb>, IWfDb
     {
         public FS.FolderPath Root {get; private set;}
@@ -20,7 +17,7 @@ namespace Z0
 
         }
 
-        internal WfDb(IWfShell wf, FS.FolderPath root)
+        internal WfDb(IWfRuntime wf, FS.FolderPath root)
             : base(wf)
         {
             Env = wf.Env;

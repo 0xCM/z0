@@ -208,7 +208,7 @@ namespace Z0
         }
 
         [Op]
-        internal static void emit(IWfShell wf, in XedWfConfig config, in XedDataSource xs)
+        internal static void emit(IWfRuntime wf, in XedWfConfig config, in XedDataSource xs)
         {
             var parser = XedSourceParser.Service;
             var sources = xs.FunctionFiles.View;

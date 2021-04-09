@@ -9,11 +9,10 @@ namespace Z0.Asm
 
     using static Part;
 
-    /// <summary>
-    /// Defines a 32-bit operand
-    /// </summary>
-    public readonly struct AsmOp32<T>
+    partial struct asm
     {
-
+        [MethodImpl(Inline), Op]
+        public static AsmMnemonic mnemonic(string src)
+            => new AsmMnemonic(src);
     }
 }

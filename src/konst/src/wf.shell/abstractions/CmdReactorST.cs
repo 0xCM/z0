@@ -10,7 +10,7 @@ namespace Z0
     public abstract class CmdReactor<C,T> : ICmdReactor<C,T>
         where C : struct, ICmd
     {
-        protected IWfShell Wf;
+        protected IWfRuntime Wf;
 
         protected IWfDb Db => Wf.Db();
 
@@ -36,7 +36,7 @@ namespace Z0
         CmdResult ICmdReactor.Invoke(ICmd src)
             => Invoke((C)src);
 
-        public void Init(IWfShell wf)
+        public void Init(IWfRuntime wf)
         {
             Wf = wf;
         }

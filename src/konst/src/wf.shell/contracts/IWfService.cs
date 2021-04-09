@@ -11,11 +11,11 @@ namespace Z0
     [Free]
     public interface IWfService : IService, IDisposable
     {
-        IWfShell Wf {get;}
+        IWfRuntime Wf {get;}
 
         IWfDb Db => Wf.Db();
 
-        void Init(IWfShell wf);
+        void Init(IWfRuntime wf);
 
 
         void IDisposable.Dispose() {}

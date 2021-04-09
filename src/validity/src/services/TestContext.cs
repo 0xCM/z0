@@ -21,9 +21,9 @@ namespace Z0
     {
         public bool DiagnosticMode {get; private set;}
 
-        protected IWfShell Wf {get; private set;}
+        protected IWfRuntime Wf {get; private set;}
 
-        public void InjectShell(IWfShell wf)
+        public void InjectShell(IWfRuntime wf)
         {
             Wf = wf;
             OnShellInjected();

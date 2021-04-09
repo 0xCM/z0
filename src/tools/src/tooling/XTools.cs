@@ -13,11 +13,11 @@ namespace Z0
    public static partial class XTools
    {
        [Op]
-       public static Nasm nasm(this IWfShell wf)
+       public static Nasm nasm(this IWfRuntime wf)
             => Nasm.create(wf);
 
        [Op]
-       public static ScriptRunner ScriptRunner(this IWfShell wf)
+       public static ScriptRunner ScriptRunner(this IWfRuntime wf)
             => Z0.ScriptRunner.create(wf.Db());
 
        [Op]

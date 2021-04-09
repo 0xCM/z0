@@ -31,12 +31,12 @@ namespace Z0.Tooling
             // Emit(tool.Script("dumpbin.loadConfig",  DumpBin.CmdId.EmitLoadConfig, modules));
 
         }
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         public FS.FolderPath OutputDir {get;}
 
         [Op]
-        public static DumpBin create(IWfShell wf)
+        public static DumpBin create(IWfRuntime wf)
             => new DumpBin(wf, typeof(DumpBin));
 
         public const string FlagPrefix = CharText.FS;
@@ -52,7 +52,7 @@ namespace Z0.Tooling
         public ToolCmdArgs<Flag,object> Args {get;}
 
         [MethodImpl(Inline)]
-        internal DumpBin(IWfShell wf, ToolId id)
+        internal DumpBin(IWfRuntime wf, ToolId id)
         {
             Wf = wf;
             Id = id;

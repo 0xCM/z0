@@ -11,12 +11,12 @@ namespace Z0.Asm
 
     readonly struct CaptureServices : ICaptureServices
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly IAsmContext Asm;
 
         [MethodImpl(Inline)]
-        public CaptureServices(IWfShell wf, IAsmContext asm)
+        public CaptureServices(IWfRuntime wf, IAsmContext asm)
         {
             Wf = wf;
             Asm = asm;

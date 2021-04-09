@@ -10,7 +10,7 @@ namespace Z0
 
     using static WfEvents;
 
-    public partial interface IWfShell : IDisposable, ITextual
+    public partial interface IWfRuntime : IDisposable, ITextual
     {
         IAppPaths Paths {get;}
 
@@ -46,7 +46,7 @@ namespace Z0
 
         WfServices Services {get;}
 
-        IWfShell WithSource(IPolySource source);
+        IWfRuntime WithSource(IPolySource source);
 
         Env Env {get;}
 
@@ -72,7 +72,7 @@ namespace Z0
         CmdResult Execute(ICmd cmd)
             => Router.Dispatch(cmd);
 
-        IWfShell WithHost(WfHost host)
+        IWfRuntime WithHost(WfHost host)
             => this;
 
         Assembly[] Components

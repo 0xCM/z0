@@ -14,13 +14,13 @@ namespace Z0
 
     public struct ApiCaptureEmitter : IApiCaptureEmitter
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly MsilPipe IlPipe;
 
         readonly ApiHex ApiHex;
 
-        public ApiCaptureEmitter(IWfShell wf)
+        public ApiCaptureEmitter(IWfRuntime wf)
         {
             Wf = wf;
             IlPipe = Wf.MsilPipe();

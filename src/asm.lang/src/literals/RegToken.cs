@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     partial struct AsmLang
     {
+        [SymbolSource]
         public enum RegToken : byte
         {
             [Symbol("reg")]

@@ -15,7 +15,7 @@ namespace Z0
         public Dictionary<FS.FilePath, Dictionary<string,string>> Collect()
             => collect(Wf);
 
-        public static Dictionary<FS.FilePath, Dictionary<string,string>> collect(IWfShell wf)
+        public static Dictionary<FS.FilePath, Dictionary<string,string>> collect(IWfRuntime wf)
         {
             var src = pull(wf);
             var dst = new Dictionary<FS.FilePath, Dictionary<string,ApiComment>>();
@@ -55,7 +55,7 @@ namespace Z0
         public static string format(ApiComment src)
             => text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
 
-        static Dictionary<FS.FilePath, Dictionary<string,string>> pull(IWfShell wf)
+        static Dictionary<FS.FilePath, Dictionary<string,string>> pull(IWfRuntime wf)
         {
             var archive = wf.RuntimeArchive();
             var paths = archive.XmlFiles;

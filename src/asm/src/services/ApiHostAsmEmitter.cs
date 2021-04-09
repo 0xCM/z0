@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     public struct ApiHostAsmEmitter
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
-        public ApiHostAsmEmitter(IWfShell wf)
+        public ApiHostAsmEmitter(IWfRuntime wf)
         {
             Wf = wf;
         }

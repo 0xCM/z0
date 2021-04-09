@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     public interface IWfDb : IEnvPaths, IFileArchive
     {
         FS.Files ClearTables<T>()

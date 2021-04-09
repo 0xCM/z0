@@ -11,15 +11,15 @@ namespace Z0
         public static void run(string[] args)
             => app(shell(args)).Run();
 
-        static Machine app(IWfShell wf)
+        static Machine app(IWfRuntime wf)
             => new Machine(wf);
 
-        static IWfShell shell(string[] args)
-            => WfShell.create(ApiCatalogs.parts(root.controller(), args), args).WithSource(Rng.@default());
+        static IWfRuntime shell(string[] args)
+            => WfRuntime.create(ApiCatalogs.parts(root.controller(), args), args).WithSource(Rng.@default());
 
-        IWfShell Wf;
+        IWfRuntime Wf;
 
-        Machine(IWfShell wf)
+        Machine(IWfRuntime wf)
         {
             Wf = wf;
         }

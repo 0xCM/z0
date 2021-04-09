@@ -14,12 +14,12 @@ namespace Z0
     public abstract class Interpreter<H> : IWfService<H,IInterpreter>, IInterpreter
         where H : Interpreter<H>, new()
     {
-        public IWfShell Wf {get; private set;}
+        public IWfRuntime Wf {get; private set;}
 
         public static H create()
             => new H();
 
-        public static H create(IWfShell wf)
+        public static H create(IWfRuntime wf)
         {
             var host = new H();
             host.Init(wf);
@@ -98,7 +98,7 @@ namespace Z0
             SpinTask = root.task(() => Spin());
         }
 
-        public void Init(IWfShell wf)
+        public void Init(IWfRuntime wf)
         {
             try
             {

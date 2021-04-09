@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct ShowLog : IDisposable
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly Lazy<StreamWriter> _Writer;
 
@@ -23,7 +23,7 @@ namespace Z0
         readonly FS.FilePath Target;
 
         [MethodImpl(Inline)]
-        internal ShowLog(IWfShell wf, FS.FilePath dst)
+        internal ShowLog(IWfRuntime wf, FS.FilePath dst)
         {
             Wf = wf;
             _Writer = root.lazy(() => dst.Writer());

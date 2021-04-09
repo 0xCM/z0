@@ -26,10 +26,10 @@ namespace Z0.Asm
 
         public Sym<AsmMnemonicCode> Mnemonic {get;}
 
-        public Index<AsmSigOperand> Operands {get;}
+        public Index<AsmSigOp> Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmSig(Sym<AsmMnemonicCode> monic, Index<AsmSigOperand> operands)
+        public AsmSig(Sym<AsmMnemonicCode> monic, Index<AsmSigOp> operands)
         {
             Mnemonic = monic;
             Operands = operands;
@@ -60,7 +60,7 @@ namespace Z0.Asm
         public static AsmSig Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSig(Sym<AsmMnemonicCode>.Empty, sys.empty<AsmSigOperand>());
+            get => new AsmSig(Sym<AsmMnemonicCode>.Empty, sys.empty<AsmSigOp>());
         }
     }
 }

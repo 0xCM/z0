@@ -39,7 +39,7 @@ namespace Z0
             => src.Files(FS.Extensions.Pdb, true);
 
         [MethodImpl(Inline)]
-        static ITracer tracer(IWfShell wf)
+        static ITracer tracer(IWfRuntime wf)
             => new SymbolTracer(wf);
     }
 }

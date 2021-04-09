@@ -19,13 +19,13 @@ namespace Z0
     {
         public IAgentEventSink EventLog {get;}
 
-        public IWfShell Wf {get;}
+        public IWfRuntime Wf {get;}
 
         ConcurrentDictionary<ulong,IAgent> Agents {get;}
             = new ConcurrentDictionary<ulong, IAgent>();
 
         [MethodImpl(Inline)]
-        public AgentContext(IWfShell wf, IAgentEventSink sink)
+        public AgentContext(IWfRuntime wf, IAgentEventSink sink)
         {
             Wf = wf;
             EventLog = sink;

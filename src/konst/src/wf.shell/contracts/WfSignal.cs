@@ -13,13 +13,13 @@ namespace Z0
     readonly struct EventSignal
     {
         [MethodImpl(Inline)]
-        public static EventSignal create(IWfShell wf)
+        public static EventSignal create(IWfRuntime wf)
             => new EventSignal(wf);
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         [MethodImpl(Inline)]
-        EventSignal(IWfShell wf)
+        EventSignal(IWfRuntime wf)
             => Wf = wf;
 
         CorrelationToken Ct

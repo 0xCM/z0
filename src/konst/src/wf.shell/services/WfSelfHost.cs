@@ -11,7 +11,7 @@ namespace Z0
 
     public sealed class WfSelfHost : WfHost<WfSelfHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfRuntime shell)
             => AppErrors.missing();
 
         Type HostType;

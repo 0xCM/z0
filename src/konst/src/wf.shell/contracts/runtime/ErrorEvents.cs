@@ -12,7 +12,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    partial interface IWfShell
+    partial interface IWfRuntime
     {
         void Error(WfStepId step, Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
         {

@@ -25,6 +25,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static StatusEvent<T> status<T>(Type host, T content, CorrelationToken ct = default)
             => new StatusEvent<T>(host, content);
-
     }
 }

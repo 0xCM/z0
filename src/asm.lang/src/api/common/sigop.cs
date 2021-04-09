@@ -8,13 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial struct asm
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static AsmSigOperand sigop<K>(Sym<K> sym)
+        public static AsmSigOp sigop<K>(Sym<K> sym)
             where K : unmanaged
-                => new AsmSigOperand(sym.Name, sym.Expr);
+                => new AsmSigOp(sym.Name, sym.Expr);
     }
 }

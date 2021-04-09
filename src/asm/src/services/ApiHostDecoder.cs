@@ -12,12 +12,12 @@ namespace Z0.Asm
 
     public readonly struct ApiHostDecoder
     {
-        public IWfShell Wf {get;}
+        public IWfRuntime Wf {get;}
 
         readonly IAsmDecoder Decoder;
 
         [MethodImpl(Inline)]
-        internal ApiHostDecoder(IWfShell wf, IAsmDecoder decoder)
+        internal ApiHostDecoder(IWfRuntime wf, IAsmDecoder decoder)
         {
             Wf = wf;
             Decoder = decoder;

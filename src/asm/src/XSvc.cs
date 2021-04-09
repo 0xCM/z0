@@ -11,123 +11,123 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static AsmFormatter AsmFormatter(this IWfShell wf)
+        public static AsmFormatter AsmFormatter(this IWfRuntime wf)
             => Asm.AsmFormatter.create(wf);
 
         [Op]
-        public static AsmDetailPipe AsmDetailPipe(this IWfShell wf)
+        public static AsmDetailPipe AsmDetailPipe(this IWfRuntime wf)
             => Asm.AsmDetailPipe.create(wf);
 
         [Op]
-        public static AsmEtl AsmEtl(this IWfShell wf)
+        public static AsmEtl AsmEtl(this IWfRuntime wf)
             => Asm.AsmEtl.create(wf);
 
         [Op]
-        public static ApiCaptureArchive ApiCaptureArchive(this IWfShell wf)
+        public static ApiCaptureArchive ApiCaptureArchive(this IWfRuntime wf)
             => Z0.ApiCaptureArchive.create(wf);
 
         [Op]
-        public static ICmdRunner<AsmWfCmdKind> AsmWfCmd(this IWfShell wf)
+        public static ICmdRunner<AsmWfCmdKind> AsmWfCmd(this IWfRuntime wf)
             => AsmWfCmdHost.create(wf);
 
         [Op]
-        public static AsmSemanticRender AsmSemanticRender(this IWfShell wf)
+        public static AsmSemanticRender AsmSemanticRender(this IWfRuntime wf)
             => Services.AsmSemanticRender.create(wf);
 
         [Op]
-        public static ApiCodeStore ApiCodeStore(this IWfShell wf)
+        public static ApiCodeStore ApiCodeStore(this IWfRuntime wf)
             => Services.ApiCodeStore.create(wf);
 
         [Op]
-        public static AsmRowStore AsmRowStore(this IWfShell wf)
+        public static AsmRowStore AsmRowStore(this IWfRuntime wf)
             => Services.AsmRowStore.create(wf);
 
         [Op]
-        public static ApiHostAsmEmitter AsmHostEmitter(this IWfShell wf)
+        public static ApiHostAsmEmitter AsmHostEmitter(this IWfRuntime wf)
             => new ApiHostAsmEmitter(wf);
 
         [Op]
-        public static ResBytesEmitter ResBytesEmitter(this IWfShell wf)
+        public static ResBytesEmitter ResBytesEmitter(this IWfRuntime wf)
             => Z0.ResBytesEmitter.create(wf);
 
         [Op]
-        public static AsmJmpPipe AsmJmpPipe(this IWfShell wf)
+        public static AsmJmpPipe AsmJmpPipe(this IWfRuntime wf)
             => Services.AsmJmpPipe.create(wf);
 
         [Op]
-        public static ApiResCapture ApiResCapture(this IWfShell wf)
+        public static ApiResCapture ApiResCapture(this IWfRuntime wf)
             => Services.ApiResCapture.create(wf);
 
         [Op]
-        public static ApiImmEmitter ImmEmitter(this IWfShell wf)
+        public static ApiImmEmitter ImmEmitter(this IWfRuntime wf)
             => ApiImmEmitter.create(wf);
 
         [Op]
-        public static IAsmWriter AsmWriter(this IWfShell wf, FS.FilePath dst)
+        public static IAsmWriter AsmWriter(this IWfRuntime wf, FS.FilePath dst)
             => new AsmWriter(dst, wf.AsmFormatter());
 
         [Op]
-        public static ApiCaptureEmitter CaptureEmitter(this IWfShell wf)
+        public static ApiCaptureEmitter CaptureEmitter(this IWfRuntime wf)
             => new ApiCaptureEmitter(wf);
 
         [Op]
-        public static ApiCaptureRunner CaptureRunner(this IWfShell wf)
+        public static ApiCaptureRunner CaptureRunner(this IWfRuntime wf)
             => ApiCaptureRunner.create(wf);
 
         [Op]
-        public static IAsmContext AsmContext(this IWfShell wf)
+        public static IAsmContext AsmContext(this IWfRuntime wf)
             => Services.AsmServices.context(wf);
 
         [Op]
-        public static ApiCaptureService ApiCapture(this IWfShell wf)
+        public static ApiCaptureService ApiCapture(this IWfRuntime wf)
             => Z0.ApiCaptureService.create(wf);
 
         [Op]
-        public static QuickCapture CaptureQuick(this IWfShell wf, IAsmContext asm)
+        public static QuickCapture CaptureQuick(this IWfRuntime wf, IAsmContext asm)
             => Capture.quick(wf, asm);
 
         [Op]
-        public static ICaptureServices CaptureServices(this IWfShell wf, IAsmContext asm)
+        public static ICaptureServices CaptureServices(this IWfRuntime wf, IAsmContext asm)
             => new CaptureServices(wf, asm);
 
         [Op]
-        public static ICaptureCore CaptureCore(this IWfShell wf, IAsmContext asm)
+        public static ICaptureCore CaptureCore(this IWfRuntime wf, IAsmContext asm)
             => Services.CaptureCore.create(wf);
 
         [Op]
-        public static ImmSpecializer ImmSpecializer(this IWfShell wf)
+        public static ImmSpecializer ImmSpecializer(this IWfRuntime wf)
             => Z0.Asm.ImmSpecializer.create(wf);
 
         [Op]
-        public static IAsmDecoder AsmDecoder(this IWfShell wf)
+        public static IAsmDecoder AsmDecoder(this IWfRuntime wf)
             => new AsmRoutineDecoder(wf);
 
         [Op]
-        public static ApiDecoder ApiDecoder(this IWfShell wf)
+        public static ApiDecoder ApiDecoder(this IWfRuntime wf)
             => Services.ApiDecoder.create(wf);
 
         [Op]
-        public static AsmDistiller AsmDistiller(this IWfShell wf)
+        public static AsmDistiller AsmDistiller(this IWfRuntime wf)
             => Z0.Asm.AsmDistiller.create(wf);
 
         [Op]
-        public static ApiHostDecoder ApiHostDecoder(this IWfShell wf, IAsmDecoder decoder)
+        public static ApiHostDecoder ApiHostDecoder(this IWfRuntime wf, IAsmDecoder decoder)
             => new ApiHostDecoder(wf, decoder);
 
         [Op]
-        public static AsmStatementPipe AsmStatementPipe(this IWfShell wf)
+        public static AsmStatementPipe AsmStatementPipe(this IWfRuntime wf)
             => Asm.AsmStatementPipe.create(wf);
 
         [Op]
-        public static ApiCodeBlockTraverser ApiCodeBlockTraverser(this IWfShell src)
+        public static ApiCodeBlockTraverser ApiCodeBlockTraverser(this IWfRuntime src)
             => Asm.ApiCodeBlockTraverser.create(src);
 
         [Op]
-        public static AsmStatementProducer AsmStatementProducer(this IWfShell wf)
+        public static AsmStatementProducer AsmStatementProducer(this IWfRuntime wf)
             => Asm.AsmStatementProducer.create(wf);
 
         [Op]
-        public static AsmCallPipe AsmCallPipe(this IWfShell wf)
+        public static AsmCallPipe AsmCallPipe(this IWfRuntime wf)
             => Asm.AsmCallPipe.create(wf);
     }
 }

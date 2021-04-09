@@ -12,7 +12,7 @@ namespace Z0
 
     public static partial class XTend
     {
-        public static ApiMemberExtractor MemberExtractor(this IWfShell wf)
+        public static ApiMemberExtractor MemberExtractor(this IWfRuntime wf)
             => new ApiMemberExtractor(Pow2.T14 + Pow2.T08);
     }
 

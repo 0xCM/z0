@@ -10,7 +10,7 @@ namespace Z0
     [WfHost]
     public sealed class EmitFieldMetadata : WfHost<EmitFieldMetadata>
     {
-        protected override void Execute(IWfShell wf)
+        protected override void Execute(IWfRuntime wf)
         {
             wf.ImageDataEmitter().EmitFieldMetadata();
         }

@@ -16,7 +16,7 @@ namespace Z0
             => new Fsm32(terms, rules, s0, s1);
 
         [Op]
-        public static void Run(IWfShell wf, Fsm32 fsm)
+        public static void Run(IWfRuntime wf, Fsm32 fsm)
         {
             var term = 0u;
             while(fsm.Accepting)

@@ -12,7 +12,7 @@ namespace Z0
     [WfHost]
     public sealed class EmitFieldLiterals : WfHost<EmitFieldLiterals>
     {
-        protected override void Execute(IWfShell wf)
+        protected override void Execute(IWfRuntime wf)
         {
             using var step = FieldLiteralEmitter.create(wf);
             step.Run();

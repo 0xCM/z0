@@ -21,6 +21,6 @@ namespace Z0
         Type IService.HostType
             => GetType();
 
-        void IWfService.Init(IWfShell wf){}
+        void IWfService.Init(IWfRuntime wf){}
     }
 }

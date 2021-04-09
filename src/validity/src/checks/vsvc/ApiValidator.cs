@@ -10,7 +10,7 @@ namespace Z0
     {
         protected IDomainSource Source {get; private set;}
 
-        public static V create(IWfShell wf, IDomainSource src)
+        public static V create(IWfRuntime wf, IDomainSource src)
         {
             var service = create(wf);
             service.Source = src;

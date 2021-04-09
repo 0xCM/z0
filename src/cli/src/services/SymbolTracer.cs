@@ -13,10 +13,10 @@ namespace Z0
 
     readonly struct SymbolTracer : ITracer
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         [MethodImpl(Inline)]
-        public SymbolTracer(IWfShell wf)
+        public SymbolTracer(IWfRuntime wf)
             => Wf = wf;
 
         [MethodImpl(Inline), Op]

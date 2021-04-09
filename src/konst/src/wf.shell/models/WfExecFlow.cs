@@ -11,12 +11,12 @@ namespace Z0
 
     public struct WfExecFlow : IDisposable
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         public WfExecToken Token {get;}
 
         [MethodImpl(Inline)]
-        internal WfExecFlow(IWfShell wf, in WfExecToken token)
+        internal WfExecFlow(IWfRuntime wf, in WfExecToken token)
         {
             Wf = wf;
             Token = token;
@@ -28,14 +28,14 @@ namespace Z0
 
     public readonly struct WfExecFlow<T>: IDisposable
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         public T Data {get;}
 
         public WfExecToken Token {get;}
 
         [MethodImpl(Inline)]
-        internal WfExecFlow(IWfShell wf, T data, in WfExecToken token)
+        internal WfExecFlow(IWfRuntime wf, T data, in WfExecToken token)
         {
             Wf = wf;
             Data = data;

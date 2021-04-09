@@ -13,7 +13,7 @@ namespace Z0
 
     class EvalExecutor : IEvalExecutor
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly IDomainSource Source;
 
@@ -22,7 +22,7 @@ namespace Z0
         EvalExecutorContext Context;
 
         [MethodImpl(Inline)]
-        internal EvalExecutor(IWfShell wf, IDomainSource source)
+        internal EvalExecutor(IWfRuntime wf, IDomainSource source)
         {
             Wf = wf;
             RepCount = 128;

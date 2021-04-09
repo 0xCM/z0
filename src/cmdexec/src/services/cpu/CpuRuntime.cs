@@ -13,14 +13,14 @@ namespace Z0
     {
         const uint DefaultBufferSize = CpuBuffer.BufferSize;
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly CpuBuffers Buffers;
 
         int ProcessedCount;
 
         [MethodImpl(Inline)]
-        public CpuRuntime(IWfShell wf)
+        public CpuRuntime(IWfRuntime wf)
         {
             Wf = wf;
             Buffers = CpuBuffers.create(DefaultBufferSize);

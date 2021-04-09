@@ -26,14 +26,14 @@ namespace Z0
         /// Creates and initializes the service
         /// </summary>
         /// <param name="wf">The source workflow</param>
-        public static H create(IWfShell wf)
+        public static H create(IWfRuntime wf)
         {
             var service = @new();
             service.Init(wf);
             return service;
         }
 
-        public IWfShell Wf {get; private set;}
+        public IWfRuntime Wf {get; private set;}
 
         protected WfHost Host {get; private set;}
 
@@ -47,7 +47,7 @@ namespace Z0
 
         public Identifier HostName {get;}
 
-        public void Init(IWfShell wf)
+        public void Init(IWfRuntime wf)
         {
             var flow = wf.Creating(typeof(H).Name);
             Host = new WfSelfHost(typeof(H));
@@ -63,7 +63,7 @@ namespace Z0
             HostName = GetType().Name;
         }
 
-        protected WfService(IWfShell wf)
+        protected WfService(IWfRuntime wf)
             : this()
         {
             Host = new WfSelfHost(HostName);

@@ -8,7 +8,7 @@ namespace Z0
     {
         AgentContext AgentContext;
 
-        IWfShell Wf;
+        IWfRuntime Wf;
 
         Option<AgentComplex> Complex;
 
@@ -17,7 +17,7 @@ namespace Z0
         MachinesTestApp(AgentContext context, string[] args)
         {
             AgentContext = context;
-            Wf = WfShell.create(ApiCatalogs.parts(root.controller(), args),args);
+            Wf = WfRuntime.create(ApiCatalogs.parts(root.controller(), args),args);
             Control = Agents.control(Wf.Context);
         }
 
@@ -54,7 +54,7 @@ namespace Z0
             }
         }
 
-        public static void run(IWfShell wf, params string[] args)
+        public static void run(IWfRuntime wf, params string[] args)
         {
             var app = new MachinesTestApp(new AgentContext(wf, SystemEventWriter.Log), args);
             app.Exec();

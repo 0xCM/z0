@@ -11,18 +11,18 @@ namespace Z0
 
     public readonly struct WfCmdBuilder
     {
-        readonly IWfShell _Wf;
+        readonly IWfRuntime _Wf;
 
         readonly IWfDb _Db;
 
         [MethodImpl(Inline)]
-        public WfCmdBuilder(IWfShell wf)
+        public WfCmdBuilder(IWfRuntime wf)
         {
             _Wf = wf;
             _Db = wf.Db();
         }
 
-        public IWfShell Wf
+        public IWfRuntime Wf
         {
             [MethodImpl(Inline)]
             get => _Wf;

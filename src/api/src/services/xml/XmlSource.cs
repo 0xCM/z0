@@ -34,7 +34,7 @@ namespace Z0
 
     public struct XmlSource : IXmlSource
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly StreamReader Source;
 
@@ -42,11 +42,11 @@ namespace Z0
 
         bool TriggerCompletion;
 
-        public static XmlSource create(IWfShell wf, FS.FilePath src)
+        public static XmlSource create(IWfRuntime wf, FS.FilePath src)
             => new XmlSource(wf, src);
 
         [MethodImpl(Inline)]
-        public XmlSource(IWfShell wf, FS.FilePath path)
+        public XmlSource(IWfRuntime wf, FS.FilePath path)
         {
             Wf = wf;
             Source = path.Reader();

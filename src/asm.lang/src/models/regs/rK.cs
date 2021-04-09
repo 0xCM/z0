@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmLang;
 
     using I = RegIndex;
     using G = AsmOps.rK;
@@ -75,6 +74,19 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator K(k2 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct k3 : IRegOp64<k3>
+        {
+            public I Index => I.r2;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(k3 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(k3 src)
                 => (K)src.Index;
         }
 

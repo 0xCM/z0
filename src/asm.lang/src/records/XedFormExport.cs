@@ -23,5 +23,4 @@ namespace Z0.Asm
 
         public Extension Extension;
     }
-
 }

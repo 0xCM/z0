@@ -12,13 +12,13 @@ namespace Z0
 
     public static partial class XTend
     {
-        public static IEvalControl EvalControl(this IWfShell wf, IDomainSource source = null, uint? buffersize = null)
+        public static IEvalControl EvalControl(this IWfRuntime wf, IDomainSource source = null, uint? buffersize = null)
             => Evaluate.control(wf, source ?? Rng.@default(), wf.Db().ApiHexRoot(), buffersize ?? Pow2.T14);
 
-        public static IEvalDispatcher EvalDispatcher(this IWfShell wf, IDomainSource source = null, uint? buffersize = null)
+        public static IEvalDispatcher EvalDispatcher(this IWfRuntime wf, IDomainSource source = null, uint? buffersize = null)
             => Evaluate.dispatcher(wf, source ?? Rng.@default(), buffersize ?? Pow2.T14);
 
-        public static IEvalExecutor EvalExecutor(this IWfShell wf, IDomainSource source = null)
+        public static IEvalExecutor EvalExecutor(this IWfRuntime wf, IDomainSource source = null)
             => Evaluate.executor(wf, source ?? Rng.@default());
     }
 
@@ -26,15 +26,15 @@ namespace Z0
     public readonly partial struct Evaluate
     {
         [MethodImpl(Inline), Op]
-        public static IEvalDispatcher dispatcher(IWfShell wf, IDomainSource source, uint bufferSize)
+        public static IEvalDispatcher dispatcher(IWfRuntime wf, IDomainSource source, uint bufferSize)
             => new EvalDispatcher(wf, source, bufferSize);
 
         [MethodImpl(Inline), Op]
-        public static IEvalExecutor executor(IWfShell wf, IDomainSource source)
+        public static IEvalExecutor executor(IWfRuntime wf, IDomainSource source)
             => new EvalExecutor(wf, source);
 
         [MethodImpl(Inline), Op]
-        public static IEvalControl control(IWfShell wf, IDomainSource source, FS.FolderPath root, uint bufferSize)
+        public static IEvalControl control(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint bufferSize)
             => new EvalControl(wf, source, root, bufferSize);
 
         public static ref readonly UnaryEvaluations<T> compute<T>(in UnaryEvalContext<T> exchange, Action<Exception> error)

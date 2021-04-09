@@ -17,7 +17,7 @@ namespace Z0
     public readonly struct ImageArchives
     {
         [Op]
-        public static IImageReader csvreader(IWfShell wf, FS.FilePath src)
+        public static IImageReader csvreader(IWfRuntime wf, FS.FilePath src)
         {
             if(!src.Exists)
                 @throw(FS.missing(src));
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [Op]
-        public static void pipe(IWfShell wf, FS.FilePath src, Receiver<ImageContent> dst)
+        public static void pipe(IWfRuntime wf, FS.FilePath src, Receiver<ImageContent> dst)
         {
             using var reader = csvreader(wf, src);
             var record = default(ImageContent);
@@ -41,10 +41,10 @@ namespace Z0
         }
 
         [Op]
-        public static void EmitBuildArchiveList(IWfShell wf, string label)
+        public static void EmitBuildArchiveList(IWfRuntime wf, string label)
         {
             var builder = wf.CmdBuilder();
-            var archive = WfShell.RuntimeArchive(wf);
+            var archive = WfRuntime.RuntimeArchive(wf);
             var types = array(FS.Extensions.Dll, FS.Extensions.Exe, FS.Extensions.Pdb, FS.Extensions.Lib, FS.Extensions.Xml, FS.Extensions.Json);
             var cmd = builder.ListFiles(label + ".build-artifacts", archive.Root, types);
             wf.Router.Dispatch(cmd);
@@ -55,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="wf">The workflow source</param>
         [Op]
-        public static IFileArchive tables(IWfShell wf)
+        public static IFileArchive tables(IWfRuntime wf)
             => new FileArchive(wf.Db().TableDir<ImageContent>());
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="wf">The workflow source</param>
         [Op]
-        public static IFileArchive runtime(IWfShell wf)
+        public static IFileArchive runtime(IWfRuntime wf)
             => new FileArchive(wf.Controller.ImageDir);
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         /// </summary>
         /// <param name="wf">The workflow source</param>
         [Op]
-        public static IFileArchive build(IWfShell wf)
+        public static IFileArchive build(IWfRuntime wf)
             => new FileArchive(wf.Db().BuildArchiveRoot());
 
         [MethodImpl(Inline), Op]

@@ -11,7 +11,7 @@ namespace Z0
 
     partial class XCmd
     {
-        public static IEnumerable<ICmd> FindCommands(this IWfShell wf)
+        public static IEnumerable<ICmd> FindCommands(this IWfRuntime wf)
         {
             foreach(var a in wf.Components)
             {

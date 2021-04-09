@@ -13,12 +13,12 @@ namespace Z0
     [ApiHost]
     public readonly ref struct XedWf
     {
-        public static XedWf create(IWfShell wf)
+        public static XedWf create(IWfRuntime wf)
             => new XedWf(wf,new XedWfConfig(wf));
 
         readonly XedWfConfig Config;
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly XedDataSource Source;
 
@@ -28,7 +28,7 @@ namespace Z0
 
         readonly FS.FolderPath Root;
 
-        public XedWf(IWfShell wf, XedWfConfig config)
+        public XedWf(IWfRuntime wf, XedWfConfig config)
         {
             Wf = wf;
             Config = config;

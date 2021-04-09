@@ -21,7 +21,7 @@ namespace Z0.Asm
         readonly AsmFormatConfig AsmFormat;
 
         [MethodImpl(Inline)]
-        public AsmRoutineDecoder(IWfShell wf)
+        public AsmRoutineDecoder(IWfRuntime wf)
             => AsmFormat = AsmFormatConfig.DefaultStreamFormat;
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)

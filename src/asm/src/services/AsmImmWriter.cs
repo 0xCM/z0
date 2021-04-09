@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public readonly struct AsmImmWriter : IAsmImmWriter
     {
-        public IWfShell Wf {get;}
+        public IWfRuntime Wf {get;}
 
         public ApiHostUri Uri {get;}
 
@@ -23,7 +23,7 @@ namespace Z0.Asm
         readonly IAsmRoutineFormatter Formatter;
 
         [MethodImpl(Inline)]
-        public AsmImmWriter(IWfShell wf, ApiHostUri host, IAsmRoutineFormatter formatter)
+        public AsmImmWriter(IWfRuntime wf, ApiHostUri host, IAsmRoutineFormatter formatter)
         {
             Wf = wf;
             Uri = host;

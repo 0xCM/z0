@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [Op]
-        public static IApiHexReader reader(IWfShell wf)
+        public static IApiHexReader reader(IWfRuntime wf)
             => ApiHexReader.create(wf);
 
         public static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
@@ -83,7 +83,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
+        public static Index<ApiHexRow> emit(IWfRuntime wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Length;
             if(count != 0)

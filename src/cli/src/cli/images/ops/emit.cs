@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct ImageMaps
     {
-        public static Index<ProcessImageRow> emit(IWfShell wf, Timestamp? ts = null)
+        public static Index<ProcessImageRow> emit(IWfRuntime wf, Timestamp? ts = null)
         {
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
@@ -34,7 +34,7 @@ namespace Z0
             return records;
         }
 
-        public static Outcome<WfExecToken> emit(IWfShell wf, ImageMap src, FS.FilePath dst)
+        public static Outcome<WfExecToken> emit(IWfRuntime wf, ImageMap src, FS.FilePath dst)
         {
             try
             {

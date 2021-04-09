@@ -9,50 +9,50 @@ namespace Z0
     public static class XSvcFactory
     {
         [Op]
-        public static ApiComments ApiComments(this IWfShell wf)
+        public static ApiComments ApiComments(this IWfRuntime wf)
             => Z0.ApiComments.create(wf);
 
         [Op]
-        public static ApiResProvider ApiResProvider(this IWfShell wf)
+        public static ApiResProvider ApiResProvider(this IWfRuntime wf)
             => Z0.ApiResProvider.create(wf);
 
         [Op]
-        public static ICmdRunner<ApiCmd> ApiCmdRunner(this IWfShell wf)
+        public static ICmdRunner<ApiCmd> ApiCmdRunner(this IWfRuntime wf)
             => Z0.ApiCmdHost.create(wf);
 
         [Op]
-        public static ApiServices ApiServices(this IWfShell wf)
+        public static ApiServices ApiServices(this IWfRuntime wf)
             => Z0.ApiServices.create(wf);
 
-        public static ApiHexArchive ApiHexArchive(this IWfShell wf)
+        public static ApiHexArchive ApiHexArchive(this IWfRuntime wf)
             => Z0.ApiHexArchive.create(wf);
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static ApiIndexBuilder ApiIndexBuilder(this IWfShell wf)
+        public static ApiIndexBuilder ApiIndexBuilder(this IWfRuntime wf)
              => Z0.ApiIndexBuilder.create(wf);
 
-        public static BitMaskServices ApiBitMasks(this IWfShell wf)
+        public static BitMaskServices ApiBitMasks(this IWfRuntime wf)
             => BitMaskServices.create(wf);
 
-        public static ApiAssets ApiAssets(this IWfShell wf)
+        public static ApiAssets ApiAssets(this IWfRuntime wf)
             => Z0.ApiAssets.create(wf);
 
-        public static SymLiterals SymLiterals(this IWfShell wf)
+        public static SymLiterals SymLiterals(this IWfRuntime wf)
             => Z0.SymLiterals.create(wf);
 
-        public static ApiHex ApiHex(this IWfShell wf)
+        public static ApiHex ApiHex(this IWfRuntime wf)
             => Z0.ApiHex.create(wf);
 
-        public static ApiCatalogs ApiCatalogs(this IWfShell wf)
+        public static ApiCatalogs ApiCatalogs(this IWfRuntime wf)
             => Z0.ApiCatalogs.create(wf);
 
-        public static ApiJit ApiJit(this IWfShell wf)
+        public static ApiJit ApiJit(this IWfRuntime wf)
             => Z0.ApiJit.create(wf);
 
-        public static ApiClassCatalog ApiClassCatalog(this IWfShell wf)
+        public static ApiClassCatalog ApiClassCatalog(this IWfRuntime wf)
             => Z0.ApiClassCatalog.create(wf);
     }
 }

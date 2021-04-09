@@ -16,12 +16,12 @@ namespace Z0
     public struct SeqParserChecks
     {
         [Op]
-        public static SeqParserChecks create(IWfShell wf)
+        public static SeqParserChecks create(IWfRuntime wf)
             => new SeqParserChecks(wf);
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         [MethodImpl(Inline)]
-        internal SeqParserChecks(IWfShell wf)
+        internal SeqParserChecks(IWfRuntime wf)
         {
             Wf = wf;
         }

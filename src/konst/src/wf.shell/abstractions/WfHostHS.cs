@@ -35,13 +35,13 @@ namespace Z0
             get => ref _State[0];
         }
 
-        protected virtual void Execute(IWfShell wf, in S src)
+        protected virtual void Execute(IWfRuntime wf, in S src)
             => Execute(wf);
 
-        protected override void Execute(IWfShell wf)
+        protected override void Execute(IWfRuntime wf)
             => Execute(wf);
 
-        public void Run(IWfShell wf, in S src)
+        public void Run(IWfRuntime wf, in S src)
         {
             try
             {

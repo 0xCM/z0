@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="index">The rng stream index</param>
         /// <typeparam name="T">The primal fsm type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec, ulong seed, ulong index)
+        public static Fsm<T,T> create<T>(IWfRuntime wf, PrimalFsmSpec<T> spec, ulong seed, ulong index)
             where T : unmanaged
                 => create(wf, spec);
 
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="spec">The FSM definition</param>
         /// <typeparam name="T">The primal fsm type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec)
+        public static Fsm<T,T> create<T>(IWfRuntime wf, PrimalFsmSpec<T> spec)
             where T : unmanaged
                 => Fsm.machine(identify(spec), wf, spec.StartState, spec.EndState, transition(wf.Polysource, spec), spec.ReceiptLimit);
 
@@ -295,7 +295,7 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static Fsm<E,S> machine<E,S>(string id, IWfShell wf, S s0, S sZ, TransitionFunction<E,S> f, ulong? limit = null)
+        public static Fsm<E,S> machine<E,S>(string id, IWfRuntime wf, S s0, S sZ, TransitionFunction<E,S> f, ulong? limit = null)
             => new Fsm<E,S>(id, wf, s0, sZ, f, limit);
 
         /// <summary>
@@ -354,7 +354,7 @@ namespace Z0
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The entry action type</typeparam>
         [MethodImpl(Inline)]
-        public static Fsm<E,S,A> machine<E,S,A>(string id, IWfShell wf, S s0, S sZ, TransitionFunction<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
+        public static Fsm<E,S,A> machine<E,S,A>(string id, IWfRuntime wf, S s0, S sZ, TransitionFunction<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
             => new Fsm<E,S,A>(id, wf, s0, sZ, t, entry,exit, limit);
 
         /// <summary>

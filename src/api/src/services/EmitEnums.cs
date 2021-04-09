@@ -12,7 +12,7 @@ namespace Z0
 
     ref struct EmitEnumsStep
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         public readonly ClrAssembly Source;
 
@@ -24,7 +24,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public EmitEnumsStep(IWfShell wf, WfHost host, ClrAssembly src)
+        public EmitEnumsStep(IWfRuntime wf, WfHost host, ClrAssembly src)
         {
             Wf = wf;
             Host = host;

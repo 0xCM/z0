@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface ICmdReactor
     {
-        void Init(IWfShell wf);
+        void Init(IWfRuntime wf);
 
         CmdId CmdId {get;}
 

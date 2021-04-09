@@ -24,12 +24,12 @@ namespace Z0
             => new H();
 
         [MethodImpl(Inline)]
-        public ref T Run(IWfShell wf, in S src, out T dst)
+        public ref T Run(IWfRuntime wf, in S src, out T dst)
         {
             Execute(wf, src, out dst);
             return ref dst;
         }
 
-        protected abstract ref T Execute(IWfShell wf, in S src, out T dst);
+        protected abstract ref T Execute(IWfRuntime wf, in S src, out T dst);
     }
 }

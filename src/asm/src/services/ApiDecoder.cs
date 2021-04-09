@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public sealed class ApiDecoder : AsmWfService<ApiDecoder>, IApiIndexDecoder
     {
-        static IAsmRoutineFormatter formatter(IWfShell wf)
+        static IAsmRoutineFormatter formatter(IWfRuntime wf)
             => new AsmRoutineFormatter(null);
 
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)

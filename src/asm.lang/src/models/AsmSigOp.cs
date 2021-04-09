@@ -12,14 +12,14 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an operand in the context of an instruction signature
     /// </summary>
-    public readonly struct AsmSigOperand
+    public readonly struct AsmSigOp
     {
         public Identifier Name {get;}
 
         public SymExpr Symbol {get;}
 
         [MethodImpl(Inline)]
-        public AsmSigOperand(Identifier name, SymExpr symbol)
+        public AsmSigOp(Identifier name, SymExpr symbol)
         {
             Name  = name;
             Symbol = symbol;
@@ -37,10 +37,10 @@ namespace Z0.Asm
             get => Name.IsNonEmpty;
         }
 
-        public static AsmSigOperand Empty
+        public static AsmSigOp Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSigOperand(Identifier.Empty, SymExpr.Empty);
+            get => new AsmSigOp(Identifier.Empty, SymExpr.Empty);
         }
     }
 }

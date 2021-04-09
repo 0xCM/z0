@@ -13,7 +13,7 @@ namespace Z0
     {
         KeyedValues<PartId,string> _PartNames;
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly PartId[] _Parts;
 
@@ -29,7 +29,7 @@ namespace Z0
             get => _Parts;
         }
 
-        public Reflected(IWfShell wf)
+        public Reflected(IWfRuntime wf)
             : this()
         {
             Wf = wf;

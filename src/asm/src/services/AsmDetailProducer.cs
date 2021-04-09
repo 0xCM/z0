@@ -22,7 +22,7 @@ namespace Z0.Asm
     {
         readonly uint Capacity;
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly RegKindConverter RegConverter;
 
@@ -34,7 +34,7 @@ namespace Z0.Asm
 
         readonly Index<AsmInstructionDetail> Produced;
 
-        public AsmDetailProducer(IWfShell wf, uint capacity)
+        public AsmDetailProducer(IWfRuntime wf, uint capacity)
         {
             Wf = wf;
             Capacity = capacity;

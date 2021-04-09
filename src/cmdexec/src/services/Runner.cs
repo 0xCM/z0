@@ -21,7 +21,7 @@ namespace Z0
     {
         readonly Span<string> Buffer;
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         byte offset;
 

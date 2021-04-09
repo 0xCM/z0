@@ -14,7 +14,7 @@ namespace Z0
     public ref struct FunctionWorkflows
     {
         [Op]
-        public static void run(IWfShell wf)
+        public static void run(IWfRuntime wf)
         {
             var fx = new FunctionWorkflows(wf);
             var f = fx.RunF();
@@ -34,7 +34,7 @@ namespace Z0
 
         const byte FunctionCount = 4;
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         ReadOnlySpan<byte> Left;
 
@@ -42,7 +42,7 @@ namespace Z0
 
         Span<byte> Target;
 
-        public FunctionWorkflows(IWfShell wf)
+        public FunctionWorkflows(IWfRuntime wf)
         {
             Wf = wf;
             Left = array<byte>(1, 2, 4, 8);

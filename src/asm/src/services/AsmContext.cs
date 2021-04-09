@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public IAppContext ContextRoot {get;}
 
-        public IWfShell Wf {get;}
+        public IWfRuntime Wf {get;}
 
         public IAppMsgQueue MessageQueue {get;}
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
         public IPolyrand Random {get;}
 
         [MethodImpl(Inline)]
-        public AsmContext(IAppContext app, IWfShell wf)
+        public AsmContext(IAppContext app, IWfRuntime wf)
         {
             ContextRoot = app;
             Wf = wf;

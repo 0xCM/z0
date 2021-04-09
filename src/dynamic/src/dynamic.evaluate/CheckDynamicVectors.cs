@@ -12,10 +12,10 @@ namespace Z0
 
     public readonly struct CheckDynamicVectors
     {
-        public static CheckDynamicVectors create(IWfShell wf, Type host, BufferToken buffer)
+        public static CheckDynamicVectors create(IWfRuntime wf, Type host, BufferToken buffer)
             => new CheckDynamicVectors(wf, Rng.@default(), host, buffer);
 
-        readonly IWfShell Context;
+        readonly IWfRuntime Context;
 
         readonly BufferToken Buffer;
 
@@ -23,7 +23,7 @@ namespace Z0
 
         readonly Type Host;
 
-        public CheckDynamicVectors(IWfShell context, IPolySource source, Type host, BufferToken buffer)
+        public CheckDynamicVectors(IWfRuntime context, IPolySource source, Type host, BufferToken buffer)
         {
             Context = context;
             Source = source;

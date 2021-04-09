@@ -11,7 +11,7 @@ namespace Z0
         protected override CmdResult Run(ListFilesCmd cmd)
             => run(Wf,cmd);
 
-        static CmdResult run(IWfShell wf, ListFilesCmd cmd)
+        static CmdResult run(IWfRuntime wf, ListFilesCmd cmd)
         {
             var archive = Archives.create(cmd.SourceDir);
             var files = cmd.SourceDir.EnumerateFiles(true).Where(f => cmd.Extensions.Contains(f.Ext));

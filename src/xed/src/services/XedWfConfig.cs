@@ -8,7 +8,7 @@ namespace Z0
 
     public readonly struct XedWfConfig
     {
-        public XedWfConfig(IWfShell wf)
+        public XedWfConfig(IWfRuntime wf)
         {
             var db = wf.Db();
             Source = db.DataSourceDir("xed");

@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
-    partial struct AsmMemOps
+    partial struct AsmOps
     {
         /// <summary>
         /// Defines a 32-bit memory operand

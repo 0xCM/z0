@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmLang
+    partial struct AsmOps
     {
         public readonly struct RegOp : IRegOp
         {

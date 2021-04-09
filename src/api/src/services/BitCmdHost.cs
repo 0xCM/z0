@@ -111,7 +111,7 @@ namespace Z0
 
     public static partial class XTend
     {
-        public static BitCmdHost BitCmd(this IWfShell wf)
+        public static BitCmdHost BitCmd(this IWfRuntime wf)
             => BitCmdHost.create(wf);
     }
 }

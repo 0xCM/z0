@@ -14,7 +14,7 @@ namespace Z0.Asm
         public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmExpr(TextBlock src)
+        public AsmExpr(string src)
         {
             Content = src.ToLower();
         }
@@ -38,7 +38,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmExpr(string src)
-            => new AsmExpr(new TextBlock(src));
+            => new AsmExpr(src);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmExpr(TextBlock src)

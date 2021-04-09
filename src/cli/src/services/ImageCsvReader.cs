@@ -14,7 +14,7 @@ namespace Z0
     {
         readonly FS.FilePath Source;
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly StreamReader Reader;
 
@@ -26,7 +26,7 @@ namespace Z0
 
         public HexByteParser ByteParser;
 
-        public ImageCsvReader(IWfShell wf, FS.FilePath src)
+        public ImageCsvReader(IWfRuntime wf, FS.FilePath src)
         {
             Wf = wf;
             Source = src;

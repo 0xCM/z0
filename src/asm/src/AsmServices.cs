@@ -14,11 +14,11 @@ namespace Z0.Asm
     public sealed class AsmServices
     {
         [Op]
-        public static IAsmContext context(IWfShell wf)
+        public static IAsmContext context(IWfRuntime wf)
             => new AsmContext(Apps.context(wf), wf);
 
         [Op]
-        public static IApiHostCapture HostCapture(IWfShell wf)
+        public static IApiHostCapture HostCapture(IWfRuntime wf)
             => ApiHostCapture.create(wf);
 
         [MethodImpl(Inline), Op]
@@ -29,7 +29,7 @@ namespace Z0.Asm
         public static ICaptureExchange exchange(BufferToken capture)
             => new CaptureExchangeProxy(capture);
 
-        public static IAsmImmWriter immwriter(IWfShell wf, IAsmContext context, ApiHostUri host)
+        public static IAsmImmWriter immwriter(IWfRuntime wf, IAsmContext context, ApiHostUri host)
             => new AsmImmWriter(wf, host, wf.AsmFormatter());
     }
 }

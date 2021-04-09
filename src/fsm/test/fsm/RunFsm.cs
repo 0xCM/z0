@@ -14,10 +14,10 @@ namespace Z0
 
     public ref struct RunFsm
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         [MethodImpl(Inline)]
-        public RunFsm(IWfShell wf)
+        public RunFsm(IWfRuntime wf)
         {
             Wf = wf;
         }
@@ -42,7 +42,7 @@ namespace Z0
 
         }
 
-        public static void Run(IWfShell wf)
+        public static void Run(IWfRuntime wf)
         {
             using var step = new RunFsm(wf);
             step.Run();

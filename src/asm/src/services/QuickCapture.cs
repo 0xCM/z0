@@ -16,7 +16,7 @@ namespace Z0
 
     public readonly struct QuickCapture : IDisposable
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly NativeBuffer Buffer;
 
@@ -25,7 +25,7 @@ namespace Z0
         readonly ICaptureServiceProxy Service;
 
         [MethodImpl(Inline)]
-        internal QuickCapture(IWfShell wf, NativeBuffer buffer, BufferTokens tokens, ICaptureServiceProxy capture)
+        internal QuickCapture(IWfRuntime wf, NativeBuffer buffer, BufferTokens tokens, ICaptureServiceProxy capture)
         {
             Wf = wf;
             Tokens = tokens;

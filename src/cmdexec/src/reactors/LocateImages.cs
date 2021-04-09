@@ -9,7 +9,7 @@ namespace Z0
         protected override FS.FilePath Run(LocateImagesCmd cmd)
             => react(Wf,cmd);
 
-        static FS.FilePath react(IWfShell wf, LocateImagesCmd cmd)
+        static FS.FilePath react(IWfRuntime wf, LocateImagesCmd cmd)
         {
             ImageMaps.emit(ImageMaps.index(), cmd.Target);
             return cmd.Target;

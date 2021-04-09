@@ -12,46 +12,9 @@ namespace Z0.Asm
 
     public static partial class XTend
     {
-        public static SymServices SymServices(this IWfShell wf)
+        public static SymServices SymServices(this IWfRuntime wf)
             => Asm.SymServices.create(wf);
     }
-
-
-    public readonly struct SymbolDataProviders
-    {
-        public readonly struct XData
-        {
-            public const string XNameText = "";
-
-            public static ReadOnlySpan<char> XNameChars => XNameText;
-
-            public static ReadOnlySpan<byte> XNameIndicies => new byte[]{0};
-
-            public static ReadOnlySpan<byte> XNameLengths => new byte[]{0};
-
-        }
-    }
-
-    [ApiComplete]
-    public readonly struct AsmSymbolData
-    {
-        const string Reg32NameText = "eaxecxedxebxespebpesiedi";
-
-        static ReadOnlySpan<char> RegGp32Names => Reg32NameText;
-
-        static ReadOnlySpan<byte> RegGp32Indices => new byte[8]{0,3,6,9,12,15,18,19};
-
-        static ReadOnlySpan<byte> RegGp32Sizes => new byte[8]{3,3,3,3,3,3,3,3};
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> name(RegIndex index)
-        {
-            ref readonly var i = ref skip(RegGp32Indices,(byte)(index));
-            ref readonly var l = ref skip(RegGp32Sizes,(byte)(index));
-            return slice(RegGp32Names,i,l);
-        }
-    }
-
 
     public class SymServices : WfService<SymServices>
     {

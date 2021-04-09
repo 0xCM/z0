@@ -17,9 +17,9 @@ namespace Z0
 
         protected static S State;
 
-        protected static IWfShell Wf;
+        protected static IWfRuntime Wf;
 
-        IWfShell IWfService.Wf
+        IWfRuntime IWfService.Wf
             => Wf;
 
         [MethodImpl(Inline)]
@@ -31,7 +31,7 @@ namespace Z0
         /// Creates and initializes the service
         /// </summary>
         /// <param name="wf">The source workflow</param>
-        public static H init(IWfShell wf)
+        public static H init(IWfRuntime wf)
         {
             if(Wf == null)
             {
@@ -42,7 +42,7 @@ namespace Z0
             return Service;
         }
 
-        public void Init(IWfShell wf)
+        public void Init(IWfRuntime wf)
         {
             init(wf);
         }

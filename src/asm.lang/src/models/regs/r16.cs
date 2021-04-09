@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmLang;
 
     using I = RegIndex;
     using G = AsmOps.r16;
@@ -50,6 +49,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator r16(ax src)
                 => new r16(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(ax src)
+                => (K)src.Index;
+
         }
 
         public struct cx : IRegOp16<cx>
@@ -59,6 +63,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(cx src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(cx src)
+                => (K)src.Index;
         }
 
         public struct dx : IRegOp16<dx>
@@ -68,6 +76,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(dx src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(dx src)
+                => (K)src.Index;
         }
 
         public struct bx : IRegOp16<bx>
@@ -77,6 +89,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(bx src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(bx src)
+                => (K)src.Index;
         }
 
         public struct si : IRegOp16<si>
@@ -86,6 +102,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(si src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(si src)
+                => (K)src.Index;
         }
 
         public struct di : IRegOp16<di>
@@ -95,6 +115,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(di src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(di src)
+                => (K)src.Index;
         }
 
         public struct sp : IRegOp16<sp>

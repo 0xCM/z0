@@ -11,7 +11,7 @@ namespace Z0
 
     public sealed class WfServices : IDisposable
     {
-        IWfShell Wf {get;}
+        IWfRuntime Wf {get;}
 
         ConcurrentDictionary<Type,IService> Lookup {get;}
 
@@ -19,7 +19,7 @@ namespace Z0
 
         public Env Env {get;}
 
-        internal WfServices(IWfShell wf, Env env, Assembly[] components)
+        internal WfServices(IWfRuntime wf, Env env, Assembly[] components)
         {
             Wf = wf;
             Env = env;

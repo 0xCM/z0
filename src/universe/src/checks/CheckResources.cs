@@ -14,7 +14,7 @@ namespace Z0
     {
         public const string StepName = nameof(CheckResourcesStep);
 
-        protected override void Execute(IWfShell wf)
+        protected override void Execute(IWfRuntime wf)
         {
             var src = FS.path("J:/dev/projects/z0-logs/builds/respack/lib/netcoreapp3.1/z0.respack.dll");
             using var step = new CheckResourcesStep(wf,this,src);
@@ -24,14 +24,14 @@ namespace Z0
 
     public ref struct CheckResourcesStep
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly WfHost Host;
 
         readonly FS.FilePath Source;
 
         [MethodImpl(Inline)]
-        public CheckResourcesStep(IWfShell wf, WfHost host, FS.FilePath src)
+        public CheckResourcesStep(IWfRuntime wf, WfHost host, FS.FilePath src)
         {
             Wf = wf;
             Host = host;

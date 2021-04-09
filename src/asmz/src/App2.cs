@@ -444,7 +444,7 @@ namespace Z0.Asm
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
-            using var wf = WfShell.create(ApiCatalogs.parts(root.controller(), args), args).WithSource(Rng.@default());
+            using var wf = WfRuntime.create(ApiCatalogs.parts(root.controller(), args), args).WithSource(Rng.@default());
             var process = ToolCmd.run(cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
@@ -558,7 +558,7 @@ namespace Z0.Asm
         void EmitImageHeaders()
         {
             var svc = ImageDataEmitter.create(Wf);
-            svc.EmitImageHeaders(WfShell.RuntimeArchive(Wf));
+            svc.EmitImageHeaders(WfRuntime.RuntimeArchive(Wf));
         }
 
         void Receive(in ImageContent src)
@@ -1012,13 +1012,11 @@ namespace Z0.Asm
             //EmitBitstrings();
 
             var encoder = AsmEncoder.create();
-            //REX.W B8 +ro io                  | MOV r64, imm64                   | mov rcx,7ffa9930f380h            | 48 b9 80 f3 30 99 fa 7f 00 00
+            var expr = asm.expression("mov rcx,7ffa9930f380h");
+            var expect = asm.encoding(expr,  AsmBytes.hexcode("48 b9 80 f3 30 99 fa 7f 00 00"));
             var mov = encoder.mov(AsmRegOps.rcx, 0x7ffa9930f380);
-            Wf.Row(mov.Encoded.Format());
-
-            var code = AsmHexCodes.asmhex(Hex8Seq.x05, Hex8Seq.x20);
-            var formatted = code.Format();
-            Wf.Row(formatted);
+            var actual = asm.encoding(expr, mov);
+            Wf.Row(expect.Equals(actual));
 
             // var indices = array<byte>(0,3,5);
             // var widths = array<byte>(3,3,2);
@@ -1033,7 +1031,7 @@ namespace Z0.Asm
         {
             try
             {
-                using var wf = WfShell.create(ApiCatalogs.parts(Index<PartId>.Empty), args).WithSource(Rng.@default());
+                using var wf = WfRuntime.create(ApiCatalogs.parts(Index<PartId>.Empty), args).WithSource(Rng.@default());
                 var app = App.create(wf);
                 app.Run();
 

@@ -11,14 +11,14 @@ namespace Z0.Asm
     using static AsmRegs;
     public class CpuModel
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly Stack<ulong> CallStack;
 
-        public static CpuModel create(IWfShell wf)
+        public static CpuModel create(IWfRuntime wf)
             => new CpuModel(wf);
 
-        CpuModel(IWfShell wf)
+        CpuModel(IWfRuntime wf)
         {
             Wf = wf;
         }

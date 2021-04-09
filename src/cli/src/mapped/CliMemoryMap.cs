@@ -16,7 +16,7 @@ namespace Z0
     [ApiHost, Free]
     public unsafe partial class CliMemoryMap : IDisposable
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly MemoryFile Source;
 
@@ -30,7 +30,7 @@ namespace Z0
 
         public PEMemoryBlock CliMetadata {get;}
 
-        public CliMemoryMap(IWfShell wf, FS.FilePath src)
+        public CliMemoryMap(IWfRuntime wf, FS.FilePath src)
         {
             Source = MemoryFiles.map(src);
             Wf = wf;
@@ -41,7 +41,7 @@ namespace Z0
             CliMetadata = PeReader.GetMetadata();
         }
 
-        public static CliMemoryMap create(IWfShell wf, FS.FilePath src)
+        public static CliMemoryMap create(IWfRuntime wf, FS.FilePath src)
             => new CliMemoryMap(wf,src);
 
         public DirectoryEntry ResourcesDirectory

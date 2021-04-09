@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     public readonly struct AsmEncoding : IEquatable<AsmEncoding>, IComparable<AsmEncoding>
     {
@@ -17,7 +16,7 @@ namespace Z0.Asm
         public AsmHexCode Encoding {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncoding(AsmExpr asm,  AsmHexCode code)
+        public AsmEncoding(AsmExpr asm, AsmHexCode code)
         {
             Asm = asm;
             Encoding = code;

@@ -15,7 +15,7 @@ namespace Z0
 
         public void EmitRuntimeHeaders()
         {
-            EmitImageHeaders(WfShell.RuntimeArchive(Wf));
+            EmitImageHeaders(WfRuntime.RuntimeArchive(Wf));
         }
 
         public void EmitImageHeaders(IRuntimeArchive src)

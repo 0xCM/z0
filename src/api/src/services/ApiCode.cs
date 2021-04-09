@@ -36,7 +36,7 @@ namespace Z0
             => src.OpUri.OpId.Components.Count() - 1;
 
         [Op]
-        public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
+        public static Index<ApiCodeDescriptor> descriptors(IWfRuntime wf)
         {
             var paths = wf.Db();
             var files = paths.ApiHexPaths().View;

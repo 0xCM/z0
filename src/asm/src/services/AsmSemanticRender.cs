@@ -19,16 +19,16 @@ namespace Z0.Asm
     public readonly struct AsmSemanticRender
     {
         [MethodImpl(Inline), Op]
-        public static AsmSemanticRender create(IWfShell wf)
+        public static AsmSemanticRender create(IWfRuntime wf)
             => new AsmSemanticRender(wf);
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly HexFormatOptions DataFormat;
 
         readonly List<string> Buffer;
 
-        internal AsmSemanticRender(IWfShell wf)
+        internal AsmSemanticRender(IWfRuntime wf)
         {
             Wf = wf;
             Buffer = root.list<string>();

@@ -9,11 +9,10 @@ namespace Z0.Asm
 
     using static Part;
 
-    /// <summary>
-    /// Defines a 512-bit operand
-    /// </summary>
-    public readonly struct AsmOp512<T>
+    partial struct asm
     {
-
+        [MethodImpl(Inline), Op]
+        public static AsmExpr expression(string src)
+            => new AsmExpr(src);
     }
 }

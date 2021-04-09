@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct Capture
     {
         [Op]
-        public static QuickCapture quick(IWfShell wf, IAsmContext asm)
+        public static QuickCapture quick(IWfRuntime wf, IAsmContext asm)
         {
             var tokens = Buffers.alloc(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
             var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
@@ -24,21 +24,21 @@ namespace Z0
         }
 
         [Op]
-        public static Index<AsmMemberRoutine> run(IWfShell wf, Index<PartId> parts, CaptureWorkflowOptions options)
+        public static Index<AsmMemberRoutine> run(IWfRuntime wf, Index<PartId> parts, CaptureWorkflowOptions options)
         {
             using var runner = wf.CaptureRunner();
             return runner.Capture(parts, options);
         }
 
         [Op]
-        public static Index<AsmMemberRoutines> run(IWfShell wf, Index<ApiHostUri> parts, CaptureWorkflowOptions options)
+        public static Index<AsmMemberRoutines> run(IWfRuntime wf, Index<ApiHostUri> parts, CaptureWorkflowOptions options)
         {
             using var runner = wf.CaptureRunner();
             return runner.Capture(parts, options);
         }
 
         [Op]
-        public static Index<AsmMemberRoutine> run(IWfShell wf, PartId part)
+        public static Index<AsmMemberRoutine> run(IWfRuntime wf, PartId part)
         {
             using var runner = wf.CaptureRunner();
             return runner.Capture(part);
@@ -49,7 +49,7 @@ namespace Z0
         {
             var parts = ApiCatalogs.parts(root.controller(), args);
             var identities = parts.ApiCatalog.PartIdentities;
-            using var wf = WfShell.create(parts, args);
+            using var wf = WfRuntime.create(parts, args);
             using var runner = wf.CaptureRunner();
             if(args.Length != 0)
                 return runner.Capture(identities, CaptureWorkflowOptions.EmitImm);
@@ -58,7 +58,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static CaptureAlt alt(IWfShell wf)
+        public static CaptureAlt alt(IWfRuntime wf)
             => CaptureAlt.create(wf);
 
         [Op]

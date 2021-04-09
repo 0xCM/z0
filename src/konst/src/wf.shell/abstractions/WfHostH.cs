@@ -32,7 +32,7 @@ namespace Z0
             Id = Type;
         }
 
-        public virtual void Run(IWfShell wf)
+        public virtual void Run(IWfRuntime wf)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Z0
 
         protected virtual void Init() { }
 
-        protected abstract void Execute(IWfShell shell);
+        protected abstract void Execute(IWfRuntime shell);
 
         public virtual string Format()
             => Id.Format();

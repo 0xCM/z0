@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [Record(TableId)]
-    public struct SymTypeInfo
+    public struct SymTypeInfo : IRecord<SymTypeInfo>
     {
         public const string TableId = "symtype";
 

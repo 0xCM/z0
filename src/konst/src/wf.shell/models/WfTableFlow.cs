@@ -12,7 +12,7 @@ namespace Z0
    public readonly struct WfTableFlow<T>
         where T : struct, IRecord<T>
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         public WfExecToken Token {get;}
 
@@ -21,7 +21,7 @@ namespace Z0
         public Count EmissionCount {get;}
 
         [MethodImpl(Inline)]
-        internal WfTableFlow(IWfShell wf, FS.FilePath dst, in WfExecToken token, uint count = 0)
+        internal WfTableFlow(IWfRuntime wf, FS.FilePath dst, in WfExecToken token, uint count = 0)
         {
             Wf = wf;
             Token = token;

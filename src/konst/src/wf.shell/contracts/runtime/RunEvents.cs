@@ -8,7 +8,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    partial interface IWfShell
+    partial interface IWfRuntime
     {
         WfExecFlow<string> Running([Caller] string operation = null)
         {
@@ -27,6 +27,5 @@ namespace Z0
         WfExecToken Ran<T>(WfExecFlow<T> src);
 
         WfExecToken Ran<T,D>(WfExecFlow<T> flow, D data);
-
     }
 }

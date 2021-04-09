@@ -10,7 +10,7 @@ namespace Z0
     using static WfEvents;
     using static Part;
 
-    partial interface IWfShell
+    partial interface IWfRuntime
     {
        void Row<T>(T data)
             => Raise(row(data));

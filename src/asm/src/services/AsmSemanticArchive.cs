@@ -13,15 +13,15 @@ namespace Z0.Asm
     public readonly struct AsmSemanticArchive : ISemanticArchive<AsmSemanticArchive>
     {
         [MethodImpl(Inline), Op]
-        public static ISemanticArchive create(IWfShell wf)
+        public static ISemanticArchive create(IWfRuntime wf)
             => new AsmSemanticArchive(wf);
 
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public AsmSemanticArchive(IWfShell wf)
+        public AsmSemanticArchive(IWfRuntime wf)
         {
             Wf = wf;
             Root = wf.Db().TableRoot() + FS.folder("asm.semantic");

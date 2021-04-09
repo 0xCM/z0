@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmLang;
 
     using I = RegIndex;
     using G = AsmOps.r8;
@@ -50,6 +49,10 @@ namespace Z0.Asm
 
             public static implicit operator r8(al src)
                 => new r8(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(al src)
+                => (K)src.Index;
         }
 
         public struct cl : IRegOp8<cl>
@@ -59,6 +62,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(cl src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(cl src)
+                => (K)src.Index;
         }
 
         public struct dl : IRegOp8<dl>
@@ -68,6 +75,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(dl src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(dl src)
+                => (K)src.Index;
         }
 
         public struct bl : IRegOp8<bl>
@@ -77,6 +88,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(bl src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(bl src)
+                => (K)src.Index;
         }
 
         public struct sil : IRegOp8<sil>
@@ -86,6 +101,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(sil src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(sil src)
+                => (K)src.Index;
         }
 
         public struct dil : IRegOp8<dil>
@@ -95,6 +114,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(dil src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(dil src)
+                => (K)src.Index;
         }
 
         public struct spl : IRegOp8<spl>
@@ -105,6 +128,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(spl src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(spl src)
+                => (K)src.Index;
         }
 
         public struct bpl : IRegOp8<bpl>
@@ -116,6 +143,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(bpl src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(bpl src)
+                => (K)src.Index;
         }
 
         public struct r8b : IRegOp8<r8b>
@@ -125,6 +156,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r8b src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r8b src)
+                => (K)src.Index;
         }
 
         public struct r9b : IRegOp8<r9b>
@@ -134,6 +169,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r9b src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r9b src)
+                => (K)src.Index;
         }
 
         public struct r10b : IRegOp8<r10b>
@@ -143,6 +182,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r10b src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r10b src)
+                => (K)src.Index;
         }
 
         public struct r11b : IRegOp8<r11b>
@@ -152,6 +195,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r11b src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r11b src)
+                => (K)src.Index;
         }
 
         public struct r12b : IRegOp8<r12b>
@@ -161,6 +208,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r12b src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r12b src)
+                => (K)src.Index;
         }
 
         public struct r13b : IRegOp8<r13b>
@@ -170,6 +221,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r13b src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r13b src)
+                => (K)src.Index;
         }
 
         public struct r14b : IRegOp8<r14b>
@@ -179,6 +234,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r14b src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r14b src)
+                => (K)src.Index;
         }
 
         public struct r15b : IRegOp8<r15b>
@@ -188,6 +247,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r15b src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r15b src)
+                => (K)src.Index;
         }
     }
 }

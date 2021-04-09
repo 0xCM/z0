@@ -6,7 +6,7 @@ namespace Z0
 {
     public class EvalControl : IEvalControl
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly byte BufferCount;
 
@@ -16,7 +16,7 @@ namespace Z0
 
         readonly IApiCatalogDataset ApiGlobal;
 
-        internal EvalControl(IWfShell wf, IDomainSource source, FS.FolderPath root, uint buffersize)
+        internal EvalControl(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint buffersize)
         {
             Wf = wf;
             BufferCount = 3;

@@ -42,14 +42,14 @@ namespace Z0
 
     public sealed partial class Minidump : IDisposable
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly MemoryFile Source;
 
-        public static Minidump open(IWfShell wf, FS.FilePath src)
+        public static Minidump open(IWfRuntime wf, FS.FilePath src)
             => new Minidump(wf,src);
 
-        Minidump(IWfShell wf, FS.FilePath src)
+        Minidump(IWfRuntime wf, FS.FilePath src)
         {
             Wf = wf;
             Source = MemoryFiles.map(src);

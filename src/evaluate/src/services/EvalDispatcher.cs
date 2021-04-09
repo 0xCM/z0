@@ -16,7 +16,7 @@ namespace Z0
 
     class EvalDispatcher : IEvalDispatcher
     {
-        readonly IWfShell Wf;
+        readonly IWfRuntime Wf;
 
         readonly IDomainSource DataSource;
 
@@ -24,7 +24,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public EvalDispatcher(IWfShell wf, IDomainSource source, uint bufferSize)
+        public EvalDispatcher(IWfRuntime wf, IDomainSource source, uint bufferSize)
         {
             Wf = wf;
             DataSource = source;

@@ -9,7 +9,7 @@ namespace Z0
 
     public interface IAgentContext
     {
-        IWfShell Wf {get;}
+        IWfRuntime Wf {get;}
 
         IEnumerable<IAgent> Members {get;}
 

@@ -6,7 +6,7 @@ namespace Z0
 {
     using static WfEvents;
 
-    partial interface IWfShell
+    partial interface IWfRuntime
     {
         void Disposed()
         {

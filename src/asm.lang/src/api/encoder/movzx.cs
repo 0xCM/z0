@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static AsmInstructions;
     using static AsmOps;
-    using static AsmMemOps;
-
 
     partial struct AsmEncoder
     {

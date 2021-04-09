@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmLang;
 
     using I = RegIndex;
     using G = AsmOps.r32;
@@ -50,6 +49,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(eax src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(eax src)
+                => (K)src.Index;
         }
 
         public struct ecx : IRegOp32<ecx>
@@ -59,6 +62,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(ecx src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(ecx src)
+                => (K)src.Index;
         }
 
         public struct edx : IRegOp32<edx>
@@ -68,6 +75,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(edx src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(edx src)
+                => (K)src.Index;
+
         }
 
         public struct ebx : IRegOp32<ebx>
@@ -77,6 +89,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(ebx src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(ebx src)
+                => (K)src.Index;
+
         }
 
         public struct esi : IRegOp32<esi>
@@ -86,6 +103,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(esi src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(esi src)
+                => (K)src.Index;
         }
 
         public struct edi : IRegOp32<edi>
@@ -95,6 +116,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(edi src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(edi src)
+                => (K)src.Index;
         }
 
         public struct esp : IRegOp32<esp>
@@ -104,6 +129,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(esp src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(esp src)
+                => (K)src.Index;
         }
 
         public struct ebp : IRegOp32<ebp>
@@ -113,6 +142,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(ebp src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(ebp src)
+                => (K)src.Index;
         }
 
         public struct r8d : IRegOp32<r8d>
@@ -122,6 +155,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r8d src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r8d src)
+                => (K)src.Index;
         }
 
         public struct r9d : IRegOp32<r9d>
@@ -131,6 +168,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r9d src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r9d src)
+                => (K)src.Index;
         }
 
         public struct r10d : IRegOp32<r10d>
@@ -140,6 +181,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r10d src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r10d src)
+                => (K)src.Index;
         }
 
         public struct r11d : IRegOp32<r11d>
@@ -149,6 +194,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r11d src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r11d src)
+                => (K)src.Index;
         }
 
         public struct r12d : IRegOp32<r12d>
@@ -158,6 +207,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r12d src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r12d src)
+                => (K)src.Index;
         }
 
         public struct r13d : IRegOp32<r13d>
@@ -167,6 +220,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r13d src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r13d src)
+                => (K)src.Index;
         }
 
         public struct r14d : IRegOp32<r14d>
@@ -176,6 +233,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r14d src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r14d src)
+                => (K)src.Index;
         }
 
         public struct r15d : IRegOp32<r15d>
@@ -185,6 +246,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(r15d src)
                 => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(r15d src)
+                => (K)src.Index;
         }
     }
 }

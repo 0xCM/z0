@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [ApiHost(ApiNames.WfShell, true)]
-    public partial class WfShell : IWfShell
+    public partial class WfRuntime : IWfRuntime
     {
         public IWfContext Context {get;}
 
@@ -48,11 +48,10 @@ namespace Z0
 
         public Env Env {get;}
 
-
         TokenDispenser Tokens;
 
         [MethodImpl(Inline)]
-        public WfShell(IWfInit config)
+        public WfRuntime(IWfInit config)
         {
             Tokens = TokenDispenser.acquire();
             Env = Z0.Env.create();
@@ -61,7 +60,7 @@ namespace Z0
             Ct = root.correlate(config.ControlId);
             EventSink = Loggers.events(config.LogConfig);
             EventBroker = new WfBroker(EventSink, Ct);
-            Host = new WfHost(typeof(WfShell), typeof(WfShell));
+            Host = new WfHost(typeof(WfRuntime), typeof(WfRuntime));
             Polysource = default;
             Verbosity = LogLevel.Status;
             Paths = config.Shell.Paths;
@@ -75,7 +74,7 @@ namespace Z0
             Services = new WfServices(this, Env, Api.PartComponents);
         }
 
-        public IWfShell WithSource(IPolySource random)
+        public IWfRuntime WithSource(IPolySource random)
         {
             Polysource = random;
             return this;
