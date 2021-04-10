@@ -4,14 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tooling
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
     using static memory;
 
     partial class Nasm
     {
+        [Op]
         public static string format(NasmSource src)
         {
             var dst = text.buffer();

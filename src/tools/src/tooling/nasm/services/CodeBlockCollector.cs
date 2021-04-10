@@ -9,8 +9,6 @@ namespace Z0.Tooling
     using System.Collections.Generic;
 
     using static Root;
-    using static memory;
-
 
     partial class Nasm
     {
@@ -42,6 +40,5 @@ namespace Z0.Tooling
             public NasmCodeBlock ToBlock()
                 => new NasmCodeBlock(Label, Code.ToArray());
         }
-
     }
 }
