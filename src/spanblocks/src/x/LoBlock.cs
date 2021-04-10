@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class BXTend
+    partial class XSb
     {
         /// <summary>
         /// Extracts the lower half of an index-identified block

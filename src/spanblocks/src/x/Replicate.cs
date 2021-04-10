@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class BXTend
+    partial class XSb
     {
         /// <summary>
         /// Clones a 32-bit blocked container

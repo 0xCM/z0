@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class BXTend
+    partial class XSb
     {
         /// <summary>
         /// Constructs a 32-bit blocked span from an unblocked span

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static CellCalcs;
 
-    partial class BXTend
+    partial class XSb
     {
         /// <summary>
         /// Extracts the upper half of an index-identified block

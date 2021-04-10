@@ -10,9 +10,8 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public static partial class BXTend
+    public static partial class XSb
     {
         const NumericKind Closure = UnsignedInts;
-
     }
 }

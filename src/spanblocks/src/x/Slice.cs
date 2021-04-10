@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
 
-    partial class BXTend
+    partial class XSb
     {
         /// <summary>
         /// Slices a blocked data source at the cellular level

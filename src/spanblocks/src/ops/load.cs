@@ -11,7 +11,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-
     using static CellCalcs;
 
     partial struct SpanBlocks
@@ -126,53 +125,7 @@ namespace Z0
             where T : unmanaged
                 => new SpanBlock512<T>(cover(src, count*blocklength<T>(w)));
 
-        /// <summary>
-        /// Allocates and deposits vector content to a data block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SpanBlock128<T> load<T>(Vector128<T> src)
-            where T : unmanaged
-        {
-            var w = w128;
-            var stack = MemBlocks.block(n16);
-            ref var dst = ref MemBlocks.first<T>(ref stack);
-            gcpu.vstore(src, ref dst);
-            return SpanBlocks.load(w, ref dst);
-        }
 
-        /// <summary>
-        /// Allocates and deposits vector content to a data block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SpanBlock256<T> load<T>(Vector256<T> src)
-            where T : unmanaged
-        {
-            var w = w256;
-            var stack = MemBlocks.block(n32);
-            ref var dst = ref MemBlocks.first<T>(ref stack);
-            gcpu.vstore(src, ref dst);
-            return SpanBlocks.load(w, ref dst);
-        }
-
-        /// <summary>
-        /// Allocates and deposits vector content to a data block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SpanBlock512<T> load<T>(Vector512<T> src)
-            where T : unmanaged
-        {
-            var w = w512;
-            var stack = MemBlocks.block(n64);
-            ref var dst = ref MemBlocks.first<T>(ref stack);
-            gcpu.vstore(src, ref dst);
-            return SpanBlocks.load(w, ref dst);
-        }
 
         /// <summary>
         /// Loads 8-bit segments from a span, raising an error if said source does not evenly partition

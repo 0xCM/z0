@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class BXTend
+    partial class XSb
     {
         /// <summary>
         /// Converts 64-bit blocks to 32-bit blocks without allocation

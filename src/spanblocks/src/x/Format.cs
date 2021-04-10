@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class BXTend
+    partial class XSb
     {
         /// <summary>
         /// The default item list delimiter

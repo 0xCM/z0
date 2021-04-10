@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct gcpu
     {
+
         /// <summary>
         /// Loads a 128-bit vector from the first 128-bit source block
         /// </summary>
