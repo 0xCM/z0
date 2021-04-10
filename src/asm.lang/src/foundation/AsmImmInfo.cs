@@ -9,11 +9,40 @@ namespace Z0.Asm
 
     using static Part;
 
+    using W = NumericWidth;
+
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
     public struct AsmImmInfo
     {
+        [MethodImpl(Inline), Op]
+        public static AsmImmInfo define(byte value, bool direct)
+            => new AsmImmInfo(W.W8, value, direct);
+
+        [MethodImpl(Inline), Op]
+        public static AsmImmInfo define(short value, bool direct, Sx sek)
+            => new AsmImmInfo(W.W16, value, direct, sek);
+
+        [MethodImpl(Inline), Op]
+        public static AsmImmInfo define(ushort value, bool direct)
+            => new AsmImmInfo(W.W16, value, direct);
+
+        [MethodImpl(Inline), Op]
+        public static AsmImmInfo define(int value, bool direct, Sx sek)
+            => new AsmImmInfo(W.W32, value, direct, sek);
+
+        [MethodImpl(Inline), Op]
+        public static AsmImmInfo define(uint value, bool direct)
+            => new AsmImmInfo(W.W32, value, direct);
+
+        [MethodImpl(Inline), Op]
+        public static AsmImmInfo define(long value, bool direct, Sx sek)
+            => new AsmImmInfo(W.W64, value, direct, sek);
+
+        [MethodImpl(Inline), Op]
+        public static AsmImmInfo define(ulong value, bool direct)
+            => new AsmImmInfo(W.W64, value, direct);
         public NumericWidth Width;
 
         public ulong Value;

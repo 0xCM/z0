@@ -12,12 +12,13 @@ namespace Z0.Asm
     partial struct AsmOps
     {
         /// <summary>
-        /// Defines an 8-bit memory operand
+        /// Defines a 128-bit memory operand
         /// </summary>
-        public struct m8 : IMemOp8<m8>
+        public struct m256 : IMemOp256<m256>
         {
+
             [MethodImpl(Inline)]
-            public static implicit operator mem<m8>(m8 src)
+            public static implicit operator mem<m256>(m256 src)
                 => src;
         }
     }

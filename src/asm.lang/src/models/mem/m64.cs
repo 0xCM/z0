@@ -4,14 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
     partial struct AsmOps
     {
         /// <summary>
         /// Defines a 64-bit memory operand
         /// </summary>
-        public struct m64 : IMemOp32<m64>
+        public struct m64 : IMemOp64<m64>
         {
-
+            [MethodImpl(Inline)]
+            public static implicit operator mem<m64>(m64 src)
+                => src;
         }
     }
 }

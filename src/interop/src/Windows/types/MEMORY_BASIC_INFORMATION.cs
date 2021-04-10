@@ -17,10 +17,10 @@ namespace Windows
 
         public ulong RegionSize;
 
-        public MemAllocType State;
+        public MemoryState State;
 
         public PageProtection Protect;
 
-        public MemAllocType Type;
+        public MemoryType Type;
     }
 }

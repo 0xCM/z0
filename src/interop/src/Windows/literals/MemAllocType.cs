@@ -4,6 +4,7 @@
 using System;
 namespace Windows
 {
+
     [Flags]
     public enum MemAllocType : uint
     {

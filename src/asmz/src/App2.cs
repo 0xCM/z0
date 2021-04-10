@@ -219,7 +219,7 @@ namespace Z0.Asm
             buffer.AppendLine(text.prop(nameof(info.AllocationBase), info.AllocationBase));
             buffer.AppendLine(text.prop(nameof(info.RegionSize), info.RegionSize));
             buffer.AppendLine(text.prop(nameof(info.StackSize), info.StackSize));
-            buffer.AppendLine(text.prop(nameof(info.Protection), info.Protection));
+            buffer.AppendLine(text.prop(nameof(info.AllocProtect), info.AllocProtect));
             Wf.Row(buffer.Emit());
         }
 

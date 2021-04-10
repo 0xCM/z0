@@ -18,6 +18,8 @@ namespace Z0.Asm
         mov_r64_imm64,
 
         [Symbol("","")]
-        and_r8_imm8
+        and_r8_imm8,
+
+        vlddqu_xmm_m128,
     }
 }

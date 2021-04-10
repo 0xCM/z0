@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
 
     partial struct cpu
@@ -35,6 +33,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<short> vlo128x16i(Vector128<byte> src)
             => ConvertToVector128Int16(src);
-
     }
 }

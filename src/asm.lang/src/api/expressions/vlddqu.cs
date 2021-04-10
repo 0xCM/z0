@@ -4,16 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static AsmMnemonicCode;
 
-    [ApiHost]
-    public readonly partial struct AsmOps
+    using static AsmOps;
+    partial struct AsmX
     {
-
+        [Op, AsmSig(AsmSigKind.vlddqu_xmm_m128)]
+        public AsmExpr vlddqu(xmm a0, ptr<m128> a1)
+            => default;
     }
-
-    [ApiHost]
-    public static partial class XAsm
-    {
-    }
-
 }

@@ -8,17 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static AsmOps;
 
-    partial struct AsmOps
+    partial struct asm
     {
-        /// <summary>
-        /// Defines an 8-bit memory operand
-        /// </summary>
-        public struct m8 : IMemOp8<m8>
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator mem<m8>(m8 src)
-                => src;
-        }
+        [MethodImpl(Inline), Op, Closures(UInt32k)]
+        public static ptr<T> ptr<T>(T dst)
+            where T : unmanaged
+                => new ptr<T>(dst);
     }
 }

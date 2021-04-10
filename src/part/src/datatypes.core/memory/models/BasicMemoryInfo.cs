@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Windows;
+
     public struct BasicMemoryInfo
     {
         public MemoryAddress BaseAddress;
@@ -14,6 +16,12 @@ namespace Z0
 
         public ByteSize StackSize;
 
+        public PageProtection AllocProtect;
+
         public PageProtection Protection;
+
+        public MemoryState State;
+
+        public MemoryType Type;
     }
 }

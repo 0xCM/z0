@@ -83,22 +83,6 @@ namespace Z0
         public static Vector128<uint> vinsert(uint src, Vector128<uint> dst, [Imm] byte index)
             => Insert(dst, src, index);
 
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vinsert(uint src, Vector128<uint> dst, N0 n)
-            => Insert(dst, src, 0);
-
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vinsert(uint src, Vector128<uint> dst, N1 n)
-            => Insert(dst, src, 1);
-
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vinsert(uint src, Vector128<uint> dst, N2 n)
-            => Insert(dst, src, 2);
-
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vinsert(uint src, Vector128<uint> dst, N3 n)
-            => Insert(dst, src, 3);
-
         /// <summary>
         /// __m128i _mm_insert_epi64 (__m128i a, __int64 i, const int imm8) PINSRQ xmm, reg/m64,imm8
         /// Overwrites an identified component in the target vector with a specified value

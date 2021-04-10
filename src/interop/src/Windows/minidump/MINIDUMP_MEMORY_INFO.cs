@@ -24,7 +24,7 @@ namespace Windows
 
         public MINIDUMP_REGION_STATE State;
 
-        public PAGE_PROTECTION Protect;
+        public PageProtection Protect;
 
         public MINIDUMP_REGION_TYPE Type;
 

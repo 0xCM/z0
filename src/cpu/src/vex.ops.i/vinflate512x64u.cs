@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
     using static memory;
@@ -57,6 +54,5 @@ namespace Z0
         public static unsafe Vector512<ulong> vinflate512x64u(in SpanBlock128<ushort> src, uint offset)
             => (v64u(ConvertToVector256Int64(gptr(src[offset]))),
                 v64u(ConvertToVector256Int64(gptr(src[offset],4))));
-
     }
 }

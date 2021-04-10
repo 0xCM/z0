@@ -51,8 +51,17 @@ namespace Windows
 
         WRITECOPY = 0x08,
 
+        /// <summary>
+        /// Enables execute access to the committed region of pages. An attempt to write to the committed region results in
+        /// an access violation. This flag is not supported by the CreateFileMapping function.
+        /// </summary>
         EXECUTE = 0x10,
 
+        /// <summary>
+        /// Enables execute or read-only access to the committed region of pages. An attempt to write to the committed region
+        /// results in an access violation. Windows Server 2003 and Windows XP: This attribute is not supported by the CreateFileMapping
+        /// function until Windows XP with SP2 and Windows Server 2003 with SP1.
+        /// </summary>
         EXECUTE_READ = 0x20,
 
         EXECUTE_READWRITE = 0x40,
