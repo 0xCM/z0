@@ -15,13 +15,17 @@ namespace Z0
     /// Describes an 8-bit immediate that is potentially refined
     /// </summary>
     [Datatype]
-    public readonly struct Imm8R : IImmediate<Imm8R,W8,byte>
+    public readonly struct Imm8R : IImm<Imm8R,byte>
     {
         public byte Content {get;}
 
         [MethodImpl(Inline)]
         public Imm8R(byte value)
             => Content = value;
+
+        public ImmWidth Width => ImmWidth.W8;
+
+        public ImmKind Kind => ImmKind.Imm8;
 
         public string Format()
             => HexFormat.format(W, Content);

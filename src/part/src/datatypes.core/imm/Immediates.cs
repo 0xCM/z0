@@ -47,31 +47,5 @@ namespace Z0
         public static Imm64<T> imm64<T>(T src)
             where T : unmanaged
                 => new Imm64<T>(src);
-
-        [MethodImpl(Inline)]
-        public static Imm<W,T> imm<W,T>(T src)
-            where T : unmanaged
-            where W : unmanaged, INumericWidth
-                => new Imm<W,T>(src);
-
-        [MethodImpl(Inline), Op, Closures(UInt8k)]
-        public static Imm<W8,T> imm<T>(W8 w, T src)
-            where T : unmanaged
-                => imm<W8,T>(src);
-
-        [MethodImpl(Inline), Op, Closures(UInt8k | UInt16k)]
-        public static Imm<W16,T> imm<T>(W16 w, T src)
-            where T : unmanaged
-                => imm<W16,T>(src);
-
-        [MethodImpl(Inline), Op, Closures(UInt8k | UInt16k | UInt32k)]
-        public static Imm<W32,T> imm<T>(W32 w, T src)
-            where T : unmanaged
-                => imm<W32,T>(src);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Imm<W64,T> imm<T>(W64 w, T src)
-            where T : unmanaged
-                => imm<W64,T>(src);
     }
 }

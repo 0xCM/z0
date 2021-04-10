@@ -16,13 +16,17 @@ namespace Z0
     /// Defines an 8-bit immediate value
     /// </summary>
     [Datatype("imm8")]
-    public readonly struct Imm8 : IImmediate<I,W,byte>
+    public readonly struct Imm8 : IImm<I,byte>
     {
         public byte Content {get;}
 
         [MethodImpl(Inline)]
         public Imm8(byte src)
             => Content = src;
+
+        public ImmWidth Width => ImmWidth.W8;
+
+        public ImmKind Kind => ImmKind.Imm8;
 
         public uint Hash
         {
@@ -81,6 +85,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator byte(I src)
             => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Imm<byte>(I src)
+            => new Imm<byte>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator I(byte src)

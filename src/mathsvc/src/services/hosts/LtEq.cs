@@ -21,8 +21,8 @@ namespace Z0
                 => gmath.lteq(x,y);
 
             [MethodImpl(Inline)]
-            public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-                => apply(this, lhs,rhs,dst);
+            public Span<bit> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
+                => apply(this, a,b,dst);
         }
     }
 }

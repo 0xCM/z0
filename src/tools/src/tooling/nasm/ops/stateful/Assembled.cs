@@ -14,8 +14,8 @@ namespace Z0.Tooling
     {
         public ref AssembledAsm Assembled(in NasmEncoding src, out AssembledAsm dst)
         {
-            dst.Bitstring = new AsmBitstring(FormatBitstring(src.Code));
-            dst.Encoding = src.Code;
+            dst.Bitstring = new AsmBitstring(FormatBitstring(src.Encoded));
+            dst.Encoding = src.Encoded;
             dst.Expression = src.SourceText;
             dst.SourceLine = src.LineNumber;
             dst.Offset = src.Offset;
@@ -31,9 +31,7 @@ namespace Z0.Tooling
                 ref readonly var block = ref skip(blocks,i);
                 var code = block.Code.View;
                 for(var j=0; j<code.Length; j++)
-                {
                     dst.Add(Assembled(skip(code,j), out var a));
-                }
             }
             return dst.ToArray();
         }

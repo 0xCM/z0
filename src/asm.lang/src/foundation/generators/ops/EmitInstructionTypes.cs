@@ -33,7 +33,7 @@ namespace Z0.Asm
             {
                 ref readonly var monic = ref skip(src,i);
                 model = monic;
-                model.Render(margin, buffer);
+                model.RenderType(margin, buffer);
             }
 
             margin -= Indent;

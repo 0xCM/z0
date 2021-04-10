@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Part;
-
     partial class AsmGen
     {
         FS.FilePath GetTargetPath(AsmGenTarget kind)

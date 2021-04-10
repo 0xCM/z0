@@ -57,7 +57,7 @@ namespace Z0.Asm
                 dst.AppendLine();
             }
 
-            public void Render(uint margin, ITextBuffer dst)
+            public void RenderType(uint margin, ITextBuffer dst)
             {
                 dst.IndentLine(margin, string.Format("public struct {0} : {1}<{0}>", TypeName, InstructionContractName));
                 dst.IndentLine(margin, Open);
@@ -82,6 +82,8 @@ namespace Z0.Asm
                 dst.IndentLine(margin, string.Format("public static implicit operator AsmMnemonic({0} src) => AsmMnemonics.{1};", TypeName, Monic.Name));
                 dst.AppendLine();
                 dst.IndentLine(margin, string.Format("public static implicit operator AsmHexCode({0} src) => src.Encoded;", TypeName));
+                dst.AppendLine();
+                dst.IndentLine(margin, string.Format("public static implicit operator {0}(AsmHexCode src) => new {0}(src);", TypeName));
                 margin -= Indent;
                 dst.IndentLine(margin, Close);
                 dst.AppendLine();

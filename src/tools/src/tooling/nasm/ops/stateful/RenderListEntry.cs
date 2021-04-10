@@ -24,11 +24,11 @@ namespace Z0.Tooling
                 dst.AppendFormat("{0}{1,-24}", RenderDelimiter, src.Encoding);
 
                 if(kind == NasmListLineKind.Encoding)
-                    RenderBitstring(src.Encoding, dst);
+                    dst.AppendFormat("{0}{1,-48}", RenderDelimiter, FormatBitstring(src.Encoding));
                 else
                     dst.AppendFormat("{0}{1,-48}", RenderDelimiter, EmptyString);
 
-                RenderSource(src.SourceText, dst);
+                    dst.AppendFormat("{0}{1}", RenderDelimiter, src.SourceText);
             }
         }
     }

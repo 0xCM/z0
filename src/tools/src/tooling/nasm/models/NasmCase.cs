@@ -12,6 +12,8 @@ namespace Z0.Tooling
 
         public Identifier CaseId;
 
+        public FS.FilePath ScriptPath;
+
         public FS.FilePath SourcePath;
 
         public FS.FilePath BinPath;

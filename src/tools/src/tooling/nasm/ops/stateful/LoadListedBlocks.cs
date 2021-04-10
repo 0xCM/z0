@@ -41,7 +41,7 @@ namespace Z0.Tooling
                 else if(kind == NasmListLineKind.Encoding)
                 {
                     var encoding = new NasmEncoding();
-                    encoding.Code = entry.Encoding;
+                    encoding.Encoded = entry.Encoding;
                     encoding.LineNumber = entry.LineNumber;
                     encoding.Offset  = entry.Offset;
                     encoding.SourceText = entry.SourceText;

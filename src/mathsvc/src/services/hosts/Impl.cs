@@ -23,8 +23,8 @@ namespace Z0
                 => gmath.impl(a,b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => gspan.impl(lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+                => gspan.impl(a,b,dst);
         }
     }
 }

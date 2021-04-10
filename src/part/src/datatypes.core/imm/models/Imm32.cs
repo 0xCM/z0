@@ -16,13 +16,17 @@ namespace Z0
     /// Defines a 32-bit immediate value
     /// </summary>
     [Datatype("imm32")]
-    public readonly struct Imm32 : IImmediate<I,W32,uint>
+    public readonly struct Imm32 : IImm<I,uint>
     {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
         public Imm32(uint src)
             => Content = src;
+
+        public ImmWidth Width => ImmWidth.W32;
+
+        public ImmKind Kind => ImmKind.Imm32;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -83,6 +87,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator uint(I src)
             => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Imm<uint>(I src)
+            => new Imm<uint>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell32(I src)

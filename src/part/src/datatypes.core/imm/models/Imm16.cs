@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a 16-bit immediate value
     /// </summary>
     [Datatype("imm16")]
-    public readonly struct Imm16 : IImmediate<I,W16,ushort>
+    public readonly struct Imm16 : IImm<I,ushort>
     {
         public ushort Content {get;}
 
@@ -25,6 +25,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Imm16(ushort src)
             => Content = src;
+
+        public ImmWidth Width => ImmWidth.W16;
+
+        public ImmKind Kind => ImmKind.Imm16;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -85,6 +89,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(I src)
             => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Imm<ushort>(I src)
+            => new Imm<ushort>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell16(I src)

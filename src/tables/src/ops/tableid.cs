@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial struct Tables
     {
@@ -40,6 +39,5 @@ namespace Z0
             => src.Tag<RecordAttribute>().MapValueOrElse(
                     a => new TableId(src, a.TableId),
                     () => new TableId(src, src.Name));
-
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmLang
+    partial struct AsmX
     {
         /// <summary>
         /// Specifies the size of an immediate operand in the context of an opcode specification

@@ -127,41 +127,6 @@ namespace Z0.Asm
 
         }
 
-        public interface IFourByteDisplacement : IDisplacement<W32>
-        {
 
-        }
-
-        public interface IImm : ISegment<N5>
-        {
-            ReadOnlySpan<byte> Data {get;}
-        }
-
-        public interface IImm<W,T> : IImm, ISized<W>, IImmediate<W,T>
-            where W : unmanaged, INumericWidth
-            where T : unmanaged
-        {
-            T Value {get;}
-
-            ReadOnlySpan<byte> IImm.Data
-                => memory.bytes(Value);
-        }
-
-
-        public interface IOneByteImm : IImm<W8,Cell8>
-        {
-
-        }
-
-
-        public interface ITwoByteImm : IImm<W16,Cell16>
-        {
-
-        }
-
-        public interface IFourByteImm : IImm<W32,Cell32>
-        {
-
-        }
     }
 }

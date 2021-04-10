@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using W = W64;
 
@@ -15,14 +16,22 @@ namespace Z0
     /// Defines a refined 64-bit immediate value
     /// </summary>
     [Datatype("imm64r")]
-    public readonly struct Imm64<K> : IImmediate<Imm64<K>,W,K>
+    public readonly struct Imm64<K> : IImm<Imm64<K>,K>
         where K : unmanaged
     {
         public K Content {get;}
 
+        public ImmWidth Width => ImmWidth.W64;
+
+        public ImmKind Kind => ImmKind.Imm64;
+
         [MethodImpl(Inline)]
         public Imm64(K src)
             => Content = src;
+
+        [MethodImpl(Inline)]
+        public ulong AsPrimitive()
+            => bw64(this);
 
         public string Format()
             => HexFormat.format(Content, W);

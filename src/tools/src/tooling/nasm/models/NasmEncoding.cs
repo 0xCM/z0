@@ -13,8 +13,8 @@ namespace Z0.Tooling
 
         public MemoryAddress Offset;
 
-        public BinaryCode Code;
-
         public TextBlock SourceText;
+
+        public BinaryCode Encoded;
     }
 }

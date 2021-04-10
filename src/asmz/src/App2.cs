@@ -967,64 +967,15 @@ namespace Z0.Asm
         }
 
 
-        void NasmCases()
-        {
-            var lang = AsmLang.create();
-            var symbols = lang.LangSymbols;
-            var regs = symbols.Gp8Regs();
-            var count = 64;
-            var buffer = alloc<AsmExpr>(count);
-            ref var dst = ref first(buffer);
-            var grid = Symbols.grid(regs,regs);
-            var k=0;
-            for(var i=0u; i<grid.RowCount; i++)
-            {
-                for(var j=0u; j<grid.ColCount; j++)
-                {
-                    var pair = grid.Pair(i,j);
-                    seek(buffer,k++) = lang.and(pair.Left,pair.Right);
-                }
-            }
-
-            var tool = Wf.nasm();
-            var id = "and_r8_r8";
-            var name = FS.file(id, FS.Asm);
-            var source = tool.Source(buffer);
-            var target = tool.Input(name);
-            source.Save(target);
-
-            var script = tool.CreateCaseScript(id);
-            var runner = Wf.ScriptRunner();
-            var outcome = runner.RunScript(script.Path);
-            if(outcome)
-                root.iter(outcome.Data, line => Wf.Row(line));
-            else
-                Wf.Error(outcome.Message);
-
-            tool.ShowListedBlocks(id);
-        }
-
         public void Run()
         {
-            //NasmCases();
+            var cases = AsmExprCases.create(Wf);
+            cases.Run(AsmSigKind.and_r8_r8);
 
             //CaptureSelectedRoutines();
-            //EmitBitstrings();
+            //Wf.AsmCodeGenerator().GenerateModelsInPlace();
+            //cases.Run(AsmSigKind.mov_r64_imm64);
 
-            var encoder = AsmEncoder.create();
-            var expr = asm.expression("mov rcx,7ffa9930f380h");
-            var expect = asm.encoding(expr,  AsmBytes.hexcode("48 b9 80 f3 30 99 fa 7f 00 00"));
-            var mov = encoder.mov(AsmRegOps.rcx, 0x7ffa9930f380);
-            var actual = asm.encoding(expr, mov);
-            Wf.Row(expect.Equals(actual));
-
-            // var indices = array<byte>(0,3,5);
-            // var widths = array<byte>(3,3,2);
-            // var field = AsmBitfields.define(indices,widths);
-            // var formatter = new AsmBitfieldFormatter(field);
-            // byte input = 0b11_101_110;
-            // var output = formatter.Format(input).ToString();
-            // Wf.Row($"11_101_110 => {output}");
         }
 
         public static void Main(params string[] args)

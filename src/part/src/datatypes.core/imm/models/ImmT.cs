@@ -9,9 +9,9 @@ namespace Z0
 
     using static Part;
     using static Numeric;
+    using static memory;
 
-    public readonly struct Imm<W,T> : IImmediate<Imm<W,T>,W,T>
-        where W : unmanaged, INumericWidth
+    public readonly struct Imm<T> : IImm<Imm<T>,T>
         where T : unmanaged
     {
         public T Content {get;}
@@ -21,7 +21,17 @@ namespace Z0
         public Imm(T src)
             => Content = src;
 
-        public static W Width => default;
+        public static ImmWidth Width
+        {
+            [MethodImpl(Inline)]
+            get => (ImmWidth)(byte)memory.width<T>();
+        }
+
+        public static ImmKind Kind
+        {
+            [MethodImpl(Inline)]
+            get => (ImmKind)Width;
+        }
 
         public ulong Imm64
         {
@@ -58,36 +68,45 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public bool Equals(Imm<W,T> src)
+        public bool Equals(Imm<T> src)
             => Imm64 == src.Imm64;
 
         public override bool Equals(object obj)
-            => obj is Imm<W,T> x && Equals(x);
+            => obj is Imm<T> x && Equals(x);
 
         public string Format()
-            => HexFormat.format(Content, Width);
+        {
+            if(width<T>() == 8)
+                return HexFormat.format(w8,Content);
+            else if(width<T>() == 16)
+                return HexFormat.format(w16,Content);
+            else if(width<T>() == 32)
+                return HexFormat.format(w32,Content);
+            else
+                return HexFormat.format(w64,Content);
+        }
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public int CompareTo(Imm<W,T> src)
+        public int CompareTo(Imm<T> src)
             => Imm64 == src.Imm64 ? 0 : Imm64 < src.Imm64 ? -1 : 1;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<W,T>(byte src)
-            => new Imm<W,T>(force<byte,T>(src));
+        public static implicit operator Imm<T>(byte src)
+            => new Imm<T>(force<byte,T>(src));
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<W,T>(ushort src)
-            => new Imm<W,T>(force<ushort,T>(src));
+        public static implicit operator Imm<T>(ushort src)
+            => new Imm<T>(force<ushort,T>(src));
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<W,T>(uint src)
-            => new Imm<W,T>(force<uint,T>(src));
+        public static implicit operator Imm<T>(uint src)
+            => new Imm<T>(force<uint,T>(src));
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<W,T>(ulong src)
-            => new Imm<W,T>(force<ulong,T>(src));
+        public static implicit operator Imm<T>(ulong src)
+            => new Imm<T>(force<ulong,T>(src));
     }
 }

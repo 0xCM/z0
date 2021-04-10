@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOps.r16;
-    using K = AsmLang.Gp16;
+    using K = AsmX.Gp16;
 
     partial struct AsmOps
     {
@@ -40,6 +40,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static explicit operator byte(G src)
                 => (byte)src.Index;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(Sym<K> src)
+                => new G((I)src.Kind);
+
         }
 
         public readonly struct ax : IRegOp16<ax>

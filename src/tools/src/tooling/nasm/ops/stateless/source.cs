@@ -10,7 +10,6 @@ namespace Z0.Tooling
     using Z0.Asm;
 
     using static Root;
-    using static memory;
 
     partial class Nasm
     {

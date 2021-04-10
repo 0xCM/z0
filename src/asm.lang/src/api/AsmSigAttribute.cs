@@ -2,13 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0.Asm
 {
     using System;
 
-    partial class Nasm
+    public class AsmSigAttribute : Attribute
     {
-        public string FormatBitstring(in BinaryCode src)
-            => BitFormat.Format(src.Storage.Reverse());
+        public AsmSigAttribute(AsmSigKind kind)
+        {
+            Kind = kind;
+        }
+
+        public AsmSigKind Kind {get;}
     }
 }

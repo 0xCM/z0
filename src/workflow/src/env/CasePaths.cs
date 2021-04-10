@@ -15,23 +15,17 @@ namespace Z0
         FS.FolderPath CaseRoot()
             => DbRoot() + FS.folder(cases);
 
-        FS.FolderPath CaseSourceRoot()
-            => CaseRoot() + FS.folder(sources);
+        FS.FolderPath CaseDir<T>(T subject)
+            => CaseRoot() + FS.folder(string.Format("{0}", subject));
 
-        FS.FolderPath CaseSource(string id)
-            => CaseSourceRoot() + FS.folder(id);
+        FS.FolderPath CaseDir<T,D>(T subject, D discriminator)
+            => CaseDir(subject) + FS.folder(string.Format("{0}", discriminator));
 
-        FS.FilePath CaseSourcePath(string id, FS.FileName file)
-            => CaseSource(id) + file;
+        FS.FilePath CasePath<T,K>(T subject, K id, FS.FileExt ext)
+            => CaseDir(subject) + FS.file(id.ToString(), ext);
 
-        FS.FolderPath CaseTargetRoot()
-            => CaseRoot() + FS.folder(targets);
-
-        FS.FolderPath CaseTarget(string id)
-            => CaseTargetRoot() + FS.folder(id);
-
-        FS.FilePath CaseTargetPath(string id, FS.FileName file)
-            => CaseTarget(id) + file;
+        FS.FilePath CasePath<T,D,K>(T subject, D discriminator, K id, FS.FileExt ext)
+            => CaseDir(subject, discriminator) + FS.file(id.ToString(), ext);
 
         FS.FolderPath TestLogRoot()
             => LogRoot() + FS.folder(tests);

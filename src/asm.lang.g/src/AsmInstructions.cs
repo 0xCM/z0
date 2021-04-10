@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Generated   :  2021-03-31.15.58.57.8400
+// Generated   :  2021-04-09.14.40.58.9160
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -29,6 +29,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aaa src) => AsmMnemonics.AAA;
 
             public static implicit operator AsmHexCode(Aaa src) => src.Encoded;
+
+            public static implicit operator Aaa(AsmHexCode src) => new Aaa(src);
         }
 
         public Aaa aaa() => default;
@@ -55,6 +57,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aad src) => AsmMnemonics.AAD;
 
             public static implicit operator AsmHexCode(Aad src) => src.Encoded;
+
+            public static implicit operator Aad(AsmHexCode src) => new Aad(src);
         }
 
         public Aad aad() => default;
@@ -81,6 +85,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aam src) => AsmMnemonics.AAM;
 
             public static implicit operator AsmHexCode(Aam src) => src.Encoded;
+
+            public static implicit operator Aam(AsmHexCode src) => new Aam(src);
         }
 
         public Aam aam() => default;
@@ -107,6 +113,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aas src) => AsmMnemonics.AAS;
 
             public static implicit operator AsmHexCode(Aas src) => src.Encoded;
+
+            public static implicit operator Aas(AsmHexCode src) => new Aas(src);
         }
 
         public Aas aas() => default;
@@ -133,6 +141,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Adc src) => AsmMnemonics.ADC;
 
             public static implicit operator AsmHexCode(Adc src) => src.Encoded;
+
+            public static implicit operator Adc(AsmHexCode src) => new Adc(src);
         }
 
         public Adc adc() => default;
@@ -159,6 +169,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Add src) => AsmMnemonics.ADD;
 
             public static implicit operator AsmHexCode(Add src) => src.Encoded;
+
+            public static implicit operator Add(AsmHexCode src) => new Add(src);
         }
 
         public Add add() => default;
@@ -185,6 +197,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Addpd src) => AsmMnemonics.ADDPD;
 
             public static implicit operator AsmHexCode(Addpd src) => src.Encoded;
+
+            public static implicit operator Addpd(AsmHexCode src) => new Addpd(src);
         }
 
         public Addpd addpd() => default;
@@ -211,6 +225,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaddpd src) => AsmMnemonics.VADDPD;
 
             public static implicit operator AsmHexCode(Vaddpd src) => src.Encoded;
+
+            public static implicit operator Vaddpd(AsmHexCode src) => new Vaddpd(src);
         }
 
         public Vaddpd vaddpd() => default;
@@ -237,6 +253,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Addps src) => AsmMnemonics.ADDPS;
 
             public static implicit operator AsmHexCode(Addps src) => src.Encoded;
+
+            public static implicit operator Addps(AsmHexCode src) => new Addps(src);
         }
 
         public Addps addps() => default;
@@ -263,6 +281,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaddps src) => AsmMnemonics.VADDPS;
 
             public static implicit operator AsmHexCode(Vaddps src) => src.Encoded;
+
+            public static implicit operator Vaddps(AsmHexCode src) => new Vaddps(src);
         }
 
         public Vaddps vaddps() => default;
@@ -289,6 +309,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Addsd src) => AsmMnemonics.ADDSD;
 
             public static implicit operator AsmHexCode(Addsd src) => src.Encoded;
+
+            public static implicit operator Addsd(AsmHexCode src) => new Addsd(src);
         }
 
         public Addsd addsd() => default;
@@ -315,6 +337,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaddsd src) => AsmMnemonics.VADDSD;
 
             public static implicit operator AsmHexCode(Vaddsd src) => src.Encoded;
+
+            public static implicit operator Vaddsd(AsmHexCode src) => new Vaddsd(src);
         }
 
         public Vaddsd vaddsd() => default;
@@ -341,6 +365,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Addss src) => AsmMnemonics.ADDSS;
 
             public static implicit operator AsmHexCode(Addss src) => src.Encoded;
+
+            public static implicit operator Addss(AsmHexCode src) => new Addss(src);
         }
 
         public Addss addss() => default;
@@ -367,6 +393,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaddss src) => AsmMnemonics.VADDSS;
 
             public static implicit operator AsmHexCode(Vaddss src) => src.Encoded;
+
+            public static implicit operator Vaddss(AsmHexCode src) => new Vaddss(src);
         }
 
         public Vaddss vaddss() => default;
@@ -393,6 +421,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Addsubpd src) => AsmMnemonics.ADDSUBPD;
 
             public static implicit operator AsmHexCode(Addsubpd src) => src.Encoded;
+
+            public static implicit operator Addsubpd(AsmHexCode src) => new Addsubpd(src);
         }
 
         public Addsubpd addsubpd() => default;
@@ -419,6 +449,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaddsubpd src) => AsmMnemonics.VADDSUBPD;
 
             public static implicit operator AsmHexCode(Vaddsubpd src) => src.Encoded;
+
+            public static implicit operator Vaddsubpd(AsmHexCode src) => new Vaddsubpd(src);
         }
 
         public Vaddsubpd vaddsubpd() => default;
@@ -445,6 +477,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Addsubps src) => AsmMnemonics.ADDSUBPS;
 
             public static implicit operator AsmHexCode(Addsubps src) => src.Encoded;
+
+            public static implicit operator Addsubps(AsmHexCode src) => new Addsubps(src);
         }
 
         public Addsubps addsubps() => default;
@@ -471,6 +505,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaddsubps src) => AsmMnemonics.VADDSUBPS;
 
             public static implicit operator AsmHexCode(Vaddsubps src) => src.Encoded;
+
+            public static implicit operator Vaddsubps(AsmHexCode src) => new Vaddsubps(src);
         }
 
         public Vaddsubps vaddsubps() => default;
@@ -497,6 +533,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aesdec src) => AsmMnemonics.AESDEC;
 
             public static implicit operator AsmHexCode(Aesdec src) => src.Encoded;
+
+            public static implicit operator Aesdec(AsmHexCode src) => new Aesdec(src);
         }
 
         public Aesdec aesdec() => default;
@@ -523,6 +561,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaesdec src) => AsmMnemonics.VAESDEC;
 
             public static implicit operator AsmHexCode(Vaesdec src) => src.Encoded;
+
+            public static implicit operator Vaesdec(AsmHexCode src) => new Vaesdec(src);
         }
 
         public Vaesdec vaesdec() => default;
@@ -549,6 +589,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aesdeclast src) => AsmMnemonics.AESDECLAST;
 
             public static implicit operator AsmHexCode(Aesdeclast src) => src.Encoded;
+
+            public static implicit operator Aesdeclast(AsmHexCode src) => new Aesdeclast(src);
         }
 
         public Aesdeclast aesdeclast() => default;
@@ -575,6 +617,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaesdeclast src) => AsmMnemonics.VAESDECLAST;
 
             public static implicit operator AsmHexCode(Vaesdeclast src) => src.Encoded;
+
+            public static implicit operator Vaesdeclast(AsmHexCode src) => new Vaesdeclast(src);
         }
 
         public Vaesdeclast vaesdeclast() => default;
@@ -601,6 +645,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aesenc src) => AsmMnemonics.AESENC;
 
             public static implicit operator AsmHexCode(Aesenc src) => src.Encoded;
+
+            public static implicit operator Aesenc(AsmHexCode src) => new Aesenc(src);
         }
 
         public Aesenc aesenc() => default;
@@ -627,6 +673,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaesenc src) => AsmMnemonics.VAESENC;
 
             public static implicit operator AsmHexCode(Vaesenc src) => src.Encoded;
+
+            public static implicit operator Vaesenc(AsmHexCode src) => new Vaesenc(src);
         }
 
         public Vaesenc vaesenc() => default;
@@ -653,6 +701,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aesenclast src) => AsmMnemonics.AESENCLAST;
 
             public static implicit operator AsmHexCode(Aesenclast src) => src.Encoded;
+
+            public static implicit operator Aesenclast(AsmHexCode src) => new Aesenclast(src);
         }
 
         public Aesenclast aesenclast() => default;
@@ -679,6 +729,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaesenclast src) => AsmMnemonics.VAESENCLAST;
 
             public static implicit operator AsmHexCode(Vaesenclast src) => src.Encoded;
+
+            public static implicit operator Vaesenclast(AsmHexCode src) => new Vaesenclast(src);
         }
 
         public Vaesenclast vaesenclast() => default;
@@ -705,6 +757,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aesimc src) => AsmMnemonics.AESIMC;
 
             public static implicit operator AsmHexCode(Aesimc src) => src.Encoded;
+
+            public static implicit operator Aesimc(AsmHexCode src) => new Aesimc(src);
         }
 
         public Aesimc aesimc() => default;
@@ -731,6 +785,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaesimc src) => AsmMnemonics.VAESIMC;
 
             public static implicit operator AsmHexCode(Vaesimc src) => src.Encoded;
+
+            public static implicit operator Vaesimc(AsmHexCode src) => new Vaesimc(src);
         }
 
         public Vaesimc vaesimc() => default;
@@ -757,6 +813,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Aeskeygenassist src) => AsmMnemonics.AESKEYGENASSIST;
 
             public static implicit operator AsmHexCode(Aeskeygenassist src) => src.Encoded;
+
+            public static implicit operator Aeskeygenassist(AsmHexCode src) => new Aeskeygenassist(src);
         }
 
         public Aeskeygenassist aeskeygenassist() => default;
@@ -783,6 +841,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vaeskeygenassist src) => AsmMnemonics.VAESKEYGENASSIST;
 
             public static implicit operator AsmHexCode(Vaeskeygenassist src) => src.Encoded;
+
+            public static implicit operator Vaeskeygenassist(AsmHexCode src) => new Vaeskeygenassist(src);
         }
 
         public Vaeskeygenassist vaeskeygenassist() => default;
@@ -809,6 +869,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(And src) => AsmMnemonics.AND;
 
             public static implicit operator AsmHexCode(And src) => src.Encoded;
+
+            public static implicit operator And(AsmHexCode src) => new And(src);
         }
 
         public And and() => default;
@@ -835,6 +897,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Andn src) => AsmMnemonics.ANDN;
 
             public static implicit operator AsmHexCode(Andn src) => src.Encoded;
+
+            public static implicit operator Andn(AsmHexCode src) => new Andn(src);
         }
 
         public Andn andn() => default;
@@ -861,6 +925,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Andpd src) => AsmMnemonics.ANDPD;
 
             public static implicit operator AsmHexCode(Andpd src) => src.Encoded;
+
+            public static implicit operator Andpd(AsmHexCode src) => new Andpd(src);
         }
 
         public Andpd andpd() => default;
@@ -887,6 +953,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vandpd src) => AsmMnemonics.VANDPD;
 
             public static implicit operator AsmHexCode(Vandpd src) => src.Encoded;
+
+            public static implicit operator Vandpd(AsmHexCode src) => new Vandpd(src);
         }
 
         public Vandpd vandpd() => default;
@@ -913,6 +981,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Andps src) => AsmMnemonics.ANDPS;
 
             public static implicit operator AsmHexCode(Andps src) => src.Encoded;
+
+            public static implicit operator Andps(AsmHexCode src) => new Andps(src);
         }
 
         public Andps andps() => default;
@@ -939,6 +1009,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vandps src) => AsmMnemonics.VANDPS;
 
             public static implicit operator AsmHexCode(Vandps src) => src.Encoded;
+
+            public static implicit operator Vandps(AsmHexCode src) => new Vandps(src);
         }
 
         public Vandps vandps() => default;
@@ -965,6 +1037,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Andnpd src) => AsmMnemonics.ANDNPD;
 
             public static implicit operator AsmHexCode(Andnpd src) => src.Encoded;
+
+            public static implicit operator Andnpd(AsmHexCode src) => new Andnpd(src);
         }
 
         public Andnpd andnpd() => default;
@@ -991,6 +1065,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vandnpd src) => AsmMnemonics.VANDNPD;
 
             public static implicit operator AsmHexCode(Vandnpd src) => src.Encoded;
+
+            public static implicit operator Vandnpd(AsmHexCode src) => new Vandnpd(src);
         }
 
         public Vandnpd vandnpd() => default;
@@ -1017,6 +1093,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Andnps src) => AsmMnemonics.ANDNPS;
 
             public static implicit operator AsmHexCode(Andnps src) => src.Encoded;
+
+            public static implicit operator Andnps(AsmHexCode src) => new Andnps(src);
         }
 
         public Andnps andnps() => default;
@@ -1043,6 +1121,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vandnps src) => AsmMnemonics.VANDNPS;
 
             public static implicit operator AsmHexCode(Vandnps src) => src.Encoded;
+
+            public static implicit operator Vandnps(AsmHexCode src) => new Vandnps(src);
         }
 
         public Vandnps vandnps() => default;
@@ -1069,6 +1149,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Arpl src) => AsmMnemonics.ARPL;
 
             public static implicit operator AsmHexCode(Arpl src) => src.Encoded;
+
+            public static implicit operator Arpl(AsmHexCode src) => new Arpl(src);
         }
 
         public Arpl arpl() => default;
@@ -1095,6 +1177,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Blendpd src) => AsmMnemonics.BLENDPD;
 
             public static implicit operator AsmHexCode(Blendpd src) => src.Encoded;
+
+            public static implicit operator Blendpd(AsmHexCode src) => new Blendpd(src);
         }
 
         public Blendpd blendpd() => default;
@@ -1121,6 +1205,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vblendpd src) => AsmMnemonics.VBLENDPD;
 
             public static implicit operator AsmHexCode(Vblendpd src) => src.Encoded;
+
+            public static implicit operator Vblendpd(AsmHexCode src) => new Vblendpd(src);
         }
 
         public Vblendpd vblendpd() => default;
@@ -1147,6 +1233,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Bextr src) => AsmMnemonics.BEXTR;
 
             public static implicit operator AsmHexCode(Bextr src) => src.Encoded;
+
+            public static implicit operator Bextr(AsmHexCode src) => new Bextr(src);
         }
 
         public Bextr bextr() => default;
@@ -1173,6 +1261,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Blendps src) => AsmMnemonics.BLENDPS;
 
             public static implicit operator AsmHexCode(Blendps src) => src.Encoded;
+
+            public static implicit operator Blendps(AsmHexCode src) => new Blendps(src);
         }
 
         public Blendps blendps() => default;
@@ -1199,6 +1289,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vblendps src) => AsmMnemonics.VBLENDPS;
 
             public static implicit operator AsmHexCode(Vblendps src) => src.Encoded;
+
+            public static implicit operator Vblendps(AsmHexCode src) => new Vblendps(src);
         }
 
         public Vblendps vblendps() => default;
@@ -1225,6 +1317,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Blendvpd src) => AsmMnemonics.BLENDVPD;
 
             public static implicit operator AsmHexCode(Blendvpd src) => src.Encoded;
+
+            public static implicit operator Blendvpd(AsmHexCode src) => new Blendvpd(src);
         }
 
         public Blendvpd blendvpd() => default;
@@ -1251,6 +1345,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vblendvpd src) => AsmMnemonics.VBLENDVPD;
 
             public static implicit operator AsmHexCode(Vblendvpd src) => src.Encoded;
+
+            public static implicit operator Vblendvpd(AsmHexCode src) => new Vblendvpd(src);
         }
 
         public Vblendvpd vblendvpd() => default;
@@ -1277,6 +1373,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Blendvps src) => AsmMnemonics.BLENDVPS;
 
             public static implicit operator AsmHexCode(Blendvps src) => src.Encoded;
+
+            public static implicit operator Blendvps(AsmHexCode src) => new Blendvps(src);
         }
 
         public Blendvps blendvps() => default;
@@ -1303,6 +1401,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vblendvps src) => AsmMnemonics.VBLENDVPS;
 
             public static implicit operator AsmHexCode(Vblendvps src) => src.Encoded;
+
+            public static implicit operator Vblendvps(AsmHexCode src) => new Vblendvps(src);
         }
 
         public Vblendvps vblendvps() => default;
@@ -1329,6 +1429,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Blsi src) => AsmMnemonics.BLSI;
 
             public static implicit operator AsmHexCode(Blsi src) => src.Encoded;
+
+            public static implicit operator Blsi(AsmHexCode src) => new Blsi(src);
         }
 
         public Blsi blsi() => default;
@@ -1355,6 +1457,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Blsmsk src) => AsmMnemonics.BLSMSK;
 
             public static implicit operator AsmHexCode(Blsmsk src) => src.Encoded;
+
+            public static implicit operator Blsmsk(AsmHexCode src) => new Blsmsk(src);
         }
 
         public Blsmsk blsmsk() => default;
@@ -1381,6 +1485,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Blsr src) => AsmMnemonics.BLSR;
 
             public static implicit operator AsmHexCode(Blsr src) => src.Encoded;
+
+            public static implicit operator Blsr(AsmHexCode src) => new Blsr(src);
         }
 
         public Blsr blsr() => default;
@@ -1407,6 +1513,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Bound src) => AsmMnemonics.BOUND;
 
             public static implicit operator AsmHexCode(Bound src) => src.Encoded;
+
+            public static implicit operator Bound(AsmHexCode src) => new Bound(src);
         }
 
         public Bound bound() => default;
@@ -1433,6 +1541,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Bsf src) => AsmMnemonics.BSF;
 
             public static implicit operator AsmHexCode(Bsf src) => src.Encoded;
+
+            public static implicit operator Bsf(AsmHexCode src) => new Bsf(src);
         }
 
         public Bsf bsf() => default;
@@ -1459,6 +1569,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Bsr src) => AsmMnemonics.BSR;
 
             public static implicit operator AsmHexCode(Bsr src) => src.Encoded;
+
+            public static implicit operator Bsr(AsmHexCode src) => new Bsr(src);
         }
 
         public Bsr bsr() => default;
@@ -1485,6 +1597,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Bswap src) => AsmMnemonics.BSWAP;
 
             public static implicit operator AsmHexCode(Bswap src) => src.Encoded;
+
+            public static implicit operator Bswap(AsmHexCode src) => new Bswap(src);
         }
 
         public Bswap bswap() => default;
@@ -1511,6 +1625,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Bt src) => AsmMnemonics.BT;
 
             public static implicit operator AsmHexCode(Bt src) => src.Encoded;
+
+            public static implicit operator Bt(AsmHexCode src) => new Bt(src);
         }
 
         public Bt bt() => default;
@@ -1537,6 +1653,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Btc src) => AsmMnemonics.BTC;
 
             public static implicit operator AsmHexCode(Btc src) => src.Encoded;
+
+            public static implicit operator Btc(AsmHexCode src) => new Btc(src);
         }
 
         public Btc btc() => default;
@@ -1563,6 +1681,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Btr src) => AsmMnemonics.BTR;
 
             public static implicit operator AsmHexCode(Btr src) => src.Encoded;
+
+            public static implicit operator Btr(AsmHexCode src) => new Btr(src);
         }
 
         public Btr btr() => default;
@@ -1589,6 +1709,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Bts src) => AsmMnemonics.BTS;
 
             public static implicit operator AsmHexCode(Bts src) => src.Encoded;
+
+            public static implicit operator Bts(AsmHexCode src) => new Bts(src);
         }
 
         public Bts bts() => default;
@@ -1615,6 +1737,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Bzhi src) => AsmMnemonics.BZHI;
 
             public static implicit operator AsmHexCode(Bzhi src) => src.Encoded;
+
+            public static implicit operator Bzhi(AsmHexCode src) => new Bzhi(src);
         }
 
         public Bzhi bzhi() => default;
@@ -1641,6 +1765,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Call src) => AsmMnemonics.CALL;
 
             public static implicit operator AsmHexCode(Call src) => src.Encoded;
+
+            public static implicit operator Call(AsmHexCode src) => new Call(src);
         }
 
         public Call call() => default;
@@ -1667,6 +1793,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cbw src) => AsmMnemonics.CBW;
 
             public static implicit operator AsmHexCode(Cbw src) => src.Encoded;
+
+            public static implicit operator Cbw(AsmHexCode src) => new Cbw(src);
         }
 
         public Cbw cbw() => default;
@@ -1693,6 +1821,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cwde src) => AsmMnemonics.CWDE;
 
             public static implicit operator AsmHexCode(Cwde src) => src.Encoded;
+
+            public static implicit operator Cwde(AsmHexCode src) => new Cwde(src);
         }
 
         public Cwde cwde() => default;
@@ -1719,6 +1849,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cdqe src) => AsmMnemonics.CDQE;
 
             public static implicit operator AsmHexCode(Cdqe src) => src.Encoded;
+
+            public static implicit operator Cdqe(AsmHexCode src) => new Cdqe(src);
         }
 
         public Cdqe cdqe() => default;
@@ -1745,6 +1877,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Clc src) => AsmMnemonics.CLC;
 
             public static implicit operator AsmHexCode(Clc src) => src.Encoded;
+
+            public static implicit operator Clc(AsmHexCode src) => new Clc(src);
         }
 
         public Clc clc() => default;
@@ -1771,6 +1905,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cld src) => AsmMnemonics.CLD;
 
             public static implicit operator AsmHexCode(Cld src) => src.Encoded;
+
+            public static implicit operator Cld(AsmHexCode src) => new Cld(src);
         }
 
         public Cld cld() => default;
@@ -1797,6 +1933,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Clflush src) => AsmMnemonics.CLFLUSH;
 
             public static implicit operator AsmHexCode(Clflush src) => src.Encoded;
+
+            public static implicit operator Clflush(AsmHexCode src) => new Clflush(src);
         }
 
         public Clflush clflush() => default;
@@ -1823,6 +1961,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cli src) => AsmMnemonics.CLI;
 
             public static implicit operator AsmHexCode(Cli src) => src.Encoded;
+
+            public static implicit operator Cli(AsmHexCode src) => new Cli(src);
         }
 
         public Cli cli() => default;
@@ -1849,6 +1989,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Clts src) => AsmMnemonics.CLTS;
 
             public static implicit operator AsmHexCode(Clts src) => src.Encoded;
+
+            public static implicit operator Clts(AsmHexCode src) => new Clts(src);
         }
 
         public Clts clts() => default;
@@ -1875,6 +2017,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmc src) => AsmMnemonics.CMC;
 
             public static implicit operator AsmHexCode(Cmc src) => src.Encoded;
+
+            public static implicit operator Cmc(AsmHexCode src) => new Cmc(src);
         }
 
         public Cmc cmc() => default;
@@ -1901,6 +2045,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmova src) => AsmMnemonics.CMOVA;
 
             public static implicit operator AsmHexCode(Cmova src) => src.Encoded;
+
+            public static implicit operator Cmova(AsmHexCode src) => new Cmova(src);
         }
 
         public Cmova cmova() => default;
@@ -1927,6 +2073,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovae src) => AsmMnemonics.CMOVAE;
 
             public static implicit operator AsmHexCode(Cmovae src) => src.Encoded;
+
+            public static implicit operator Cmovae(AsmHexCode src) => new Cmovae(src);
         }
 
         public Cmovae cmovae() => default;
@@ -1953,6 +2101,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovb src) => AsmMnemonics.CMOVB;
 
             public static implicit operator AsmHexCode(Cmovb src) => src.Encoded;
+
+            public static implicit operator Cmovb(AsmHexCode src) => new Cmovb(src);
         }
 
         public Cmovb cmovb() => default;
@@ -1979,6 +2129,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovbe src) => AsmMnemonics.CMOVBE;
 
             public static implicit operator AsmHexCode(Cmovbe src) => src.Encoded;
+
+            public static implicit operator Cmovbe(AsmHexCode src) => new Cmovbe(src);
         }
 
         public Cmovbe cmovbe() => default;
@@ -2005,6 +2157,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovc src) => AsmMnemonics.CMOVC;
 
             public static implicit operator AsmHexCode(Cmovc src) => src.Encoded;
+
+            public static implicit operator Cmovc(AsmHexCode src) => new Cmovc(src);
         }
 
         public Cmovc cmovc() => default;
@@ -2031,6 +2185,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmove src) => AsmMnemonics.CMOVE;
 
             public static implicit operator AsmHexCode(Cmove src) => src.Encoded;
+
+            public static implicit operator Cmove(AsmHexCode src) => new Cmove(src);
         }
 
         public Cmove cmove() => default;
@@ -2057,6 +2213,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovg src) => AsmMnemonics.CMOVG;
 
             public static implicit operator AsmHexCode(Cmovg src) => src.Encoded;
+
+            public static implicit operator Cmovg(AsmHexCode src) => new Cmovg(src);
         }
 
         public Cmovg cmovg() => default;
@@ -2083,6 +2241,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovge src) => AsmMnemonics.CMOVGE;
 
             public static implicit operator AsmHexCode(Cmovge src) => src.Encoded;
+
+            public static implicit operator Cmovge(AsmHexCode src) => new Cmovge(src);
         }
 
         public Cmovge cmovge() => default;
@@ -2109,6 +2269,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovl src) => AsmMnemonics.CMOVL;
 
             public static implicit operator AsmHexCode(Cmovl src) => src.Encoded;
+
+            public static implicit operator Cmovl(AsmHexCode src) => new Cmovl(src);
         }
 
         public Cmovl cmovl() => default;
@@ -2135,6 +2297,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovle src) => AsmMnemonics.CMOVLE;
 
             public static implicit operator AsmHexCode(Cmovle src) => src.Encoded;
+
+            public static implicit operator Cmovle(AsmHexCode src) => new Cmovle(src);
         }
 
         public Cmovle cmovle() => default;
@@ -2161,6 +2325,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovna src) => AsmMnemonics.CMOVNA;
 
             public static implicit operator AsmHexCode(Cmovna src) => src.Encoded;
+
+            public static implicit operator Cmovna(AsmHexCode src) => new Cmovna(src);
         }
 
         public Cmovna cmovna() => default;
@@ -2187,6 +2353,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnae src) => AsmMnemonics.CMOVNAE;
 
             public static implicit operator AsmHexCode(Cmovnae src) => src.Encoded;
+
+            public static implicit operator Cmovnae(AsmHexCode src) => new Cmovnae(src);
         }
 
         public Cmovnae cmovnae() => default;
@@ -2213,6 +2381,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnb src) => AsmMnemonics.CMOVNB;
 
             public static implicit operator AsmHexCode(Cmovnb src) => src.Encoded;
+
+            public static implicit operator Cmovnb(AsmHexCode src) => new Cmovnb(src);
         }
 
         public Cmovnb cmovnb() => default;
@@ -2239,6 +2409,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnbe src) => AsmMnemonics.CMOVNBE;
 
             public static implicit operator AsmHexCode(Cmovnbe src) => src.Encoded;
+
+            public static implicit operator Cmovnbe(AsmHexCode src) => new Cmovnbe(src);
         }
 
         public Cmovnbe cmovnbe() => default;
@@ -2265,6 +2437,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnc src) => AsmMnemonics.CMOVNC;
 
             public static implicit operator AsmHexCode(Cmovnc src) => src.Encoded;
+
+            public static implicit operator Cmovnc(AsmHexCode src) => new Cmovnc(src);
         }
 
         public Cmovnc cmovnc() => default;
@@ -2291,6 +2465,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovne src) => AsmMnemonics.CMOVNE;
 
             public static implicit operator AsmHexCode(Cmovne src) => src.Encoded;
+
+            public static implicit operator Cmovne(AsmHexCode src) => new Cmovne(src);
         }
 
         public Cmovne cmovne() => default;
@@ -2317,6 +2493,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovng src) => AsmMnemonics.CMOVNG;
 
             public static implicit operator AsmHexCode(Cmovng src) => src.Encoded;
+
+            public static implicit operator Cmovng(AsmHexCode src) => new Cmovng(src);
         }
 
         public Cmovng cmovng() => default;
@@ -2343,6 +2521,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnge src) => AsmMnemonics.CMOVNGE;
 
             public static implicit operator AsmHexCode(Cmovnge src) => src.Encoded;
+
+            public static implicit operator Cmovnge(AsmHexCode src) => new Cmovnge(src);
         }
 
         public Cmovnge cmovnge() => default;
@@ -2369,6 +2549,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnl src) => AsmMnemonics.CMOVNL;
 
             public static implicit operator AsmHexCode(Cmovnl src) => src.Encoded;
+
+            public static implicit operator Cmovnl(AsmHexCode src) => new Cmovnl(src);
         }
 
         public Cmovnl cmovnl() => default;
@@ -2395,6 +2577,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnle src) => AsmMnemonics.CMOVNLE;
 
             public static implicit operator AsmHexCode(Cmovnle src) => src.Encoded;
+
+            public static implicit operator Cmovnle(AsmHexCode src) => new Cmovnle(src);
         }
 
         public Cmovnle cmovnle() => default;
@@ -2421,6 +2605,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovno src) => AsmMnemonics.CMOVNO;
 
             public static implicit operator AsmHexCode(Cmovno src) => src.Encoded;
+
+            public static implicit operator Cmovno(AsmHexCode src) => new Cmovno(src);
         }
 
         public Cmovno cmovno() => default;
@@ -2447,6 +2633,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnp src) => AsmMnemonics.CMOVNP;
 
             public static implicit operator AsmHexCode(Cmovnp src) => src.Encoded;
+
+            public static implicit operator Cmovnp(AsmHexCode src) => new Cmovnp(src);
         }
 
         public Cmovnp cmovnp() => default;
@@ -2473,6 +2661,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovns src) => AsmMnemonics.CMOVNS;
 
             public static implicit operator AsmHexCode(Cmovns src) => src.Encoded;
+
+            public static implicit operator Cmovns(AsmHexCode src) => new Cmovns(src);
         }
 
         public Cmovns cmovns() => default;
@@ -2499,6 +2689,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovnz src) => AsmMnemonics.CMOVNZ;
 
             public static implicit operator AsmHexCode(Cmovnz src) => src.Encoded;
+
+            public static implicit operator Cmovnz(AsmHexCode src) => new Cmovnz(src);
         }
 
         public Cmovnz cmovnz() => default;
@@ -2525,6 +2717,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovo src) => AsmMnemonics.CMOVO;
 
             public static implicit operator AsmHexCode(Cmovo src) => src.Encoded;
+
+            public static implicit operator Cmovo(AsmHexCode src) => new Cmovo(src);
         }
 
         public Cmovo cmovo() => default;
@@ -2551,6 +2745,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovp src) => AsmMnemonics.CMOVP;
 
             public static implicit operator AsmHexCode(Cmovp src) => src.Encoded;
+
+            public static implicit operator Cmovp(AsmHexCode src) => new Cmovp(src);
         }
 
         public Cmovp cmovp() => default;
@@ -2577,6 +2773,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovpe src) => AsmMnemonics.CMOVPE;
 
             public static implicit operator AsmHexCode(Cmovpe src) => src.Encoded;
+
+            public static implicit operator Cmovpe(AsmHexCode src) => new Cmovpe(src);
         }
 
         public Cmovpe cmovpe() => default;
@@ -2603,6 +2801,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovpo src) => AsmMnemonics.CMOVPO;
 
             public static implicit operator AsmHexCode(Cmovpo src) => src.Encoded;
+
+            public static implicit operator Cmovpo(AsmHexCode src) => new Cmovpo(src);
         }
 
         public Cmovpo cmovpo() => default;
@@ -2629,6 +2829,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovs src) => AsmMnemonics.CMOVS;
 
             public static implicit operator AsmHexCode(Cmovs src) => src.Encoded;
+
+            public static implicit operator Cmovs(AsmHexCode src) => new Cmovs(src);
         }
 
         public Cmovs cmovs() => default;
@@ -2655,6 +2857,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmovz src) => AsmMnemonics.CMOVZ;
 
             public static implicit operator AsmHexCode(Cmovz src) => src.Encoded;
+
+            public static implicit operator Cmovz(AsmHexCode src) => new Cmovz(src);
         }
 
         public Cmovz cmovz() => default;
@@ -2681,6 +2885,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmp src) => AsmMnemonics.CMP;
 
             public static implicit operator AsmHexCode(Cmp src) => src.Encoded;
+
+            public static implicit operator Cmp(AsmHexCode src) => new Cmp(src);
         }
 
         public Cmp cmp() => default;
@@ -2707,6 +2913,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmppd src) => AsmMnemonics.CMPPD;
 
             public static implicit operator AsmHexCode(Cmppd src) => src.Encoded;
+
+            public static implicit operator Cmppd(AsmHexCode src) => new Cmppd(src);
         }
 
         public Cmppd cmppd() => default;
@@ -2733,6 +2941,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcmppd src) => AsmMnemonics.VCMPPD;
 
             public static implicit operator AsmHexCode(Vcmppd src) => src.Encoded;
+
+            public static implicit operator Vcmppd(AsmHexCode src) => new Vcmppd(src);
         }
 
         public Vcmppd vcmppd() => default;
@@ -2759,6 +2969,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpps src) => AsmMnemonics.CMPPS;
 
             public static implicit operator AsmHexCode(Cmpps src) => src.Encoded;
+
+            public static implicit operator Cmpps(AsmHexCode src) => new Cmpps(src);
         }
 
         public Cmpps cmpps() => default;
@@ -2785,6 +2997,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcmpps src) => AsmMnemonics.VCMPPS;
 
             public static implicit operator AsmHexCode(Vcmpps src) => src.Encoded;
+
+            public static implicit operator Vcmpps(AsmHexCode src) => new Vcmpps(src);
         }
 
         public Vcmpps vcmpps() => default;
@@ -2811,6 +3025,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmps src) => AsmMnemonics.CMPS;
 
             public static implicit operator AsmHexCode(Cmps src) => src.Encoded;
+
+            public static implicit operator Cmps(AsmHexCode src) => new Cmps(src);
         }
 
         public Cmps cmps() => default;
@@ -2837,6 +3053,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpsb src) => AsmMnemonics.CMPSB;
 
             public static implicit operator AsmHexCode(Cmpsb src) => src.Encoded;
+
+            public static implicit operator Cmpsb(AsmHexCode src) => new Cmpsb(src);
         }
 
         public Cmpsb cmpsb() => default;
@@ -2863,6 +3081,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpsw src) => AsmMnemonics.CMPSW;
 
             public static implicit operator AsmHexCode(Cmpsw src) => src.Encoded;
+
+            public static implicit operator Cmpsw(AsmHexCode src) => new Cmpsw(src);
         }
 
         public Cmpsw cmpsw() => default;
@@ -2889,6 +3109,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpsd src) => AsmMnemonics.CMPSD;
 
             public static implicit operator AsmHexCode(Cmpsd src) => src.Encoded;
+
+            public static implicit operator Cmpsd(AsmHexCode src) => new Cmpsd(src);
         }
 
         public Cmpsd cmpsd() => default;
@@ -2915,6 +3137,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpsq src) => AsmMnemonics.CMPSQ;
 
             public static implicit operator AsmHexCode(Cmpsq src) => src.Encoded;
+
+            public static implicit operator Cmpsq(AsmHexCode src) => new Cmpsq(src);
         }
 
         public Cmpsq cmpsq() => default;
@@ -2941,6 +3165,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcmpsd src) => AsmMnemonics.VCMPSD;
 
             public static implicit operator AsmHexCode(Vcmpsd src) => src.Encoded;
+
+            public static implicit operator Vcmpsd(AsmHexCode src) => new Vcmpsd(src);
         }
 
         public Vcmpsd vcmpsd() => default;
@@ -2967,6 +3193,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpss src) => AsmMnemonics.CMPSS;
 
             public static implicit operator AsmHexCode(Cmpss src) => src.Encoded;
+
+            public static implicit operator Cmpss(AsmHexCode src) => new Cmpss(src);
         }
 
         public Cmpss cmpss() => default;
@@ -2993,6 +3221,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcmpss src) => AsmMnemonics.VCMPSS;
 
             public static implicit operator AsmHexCode(Vcmpss src) => src.Encoded;
+
+            public static implicit operator Vcmpss(AsmHexCode src) => new Vcmpss(src);
         }
 
         public Vcmpss vcmpss() => default;
@@ -3019,6 +3249,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpxchg src) => AsmMnemonics.CMPXCHG;
 
             public static implicit operator AsmHexCode(Cmpxchg src) => src.Encoded;
+
+            public static implicit operator Cmpxchg(AsmHexCode src) => new Cmpxchg(src);
         }
 
         public Cmpxchg cmpxchg() => default;
@@ -3045,6 +3277,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpxchg8b src) => AsmMnemonics.CMPXCHG8B;
 
             public static implicit operator AsmHexCode(Cmpxchg8b src) => src.Encoded;
+
+            public static implicit operator Cmpxchg8b(AsmHexCode src) => new Cmpxchg8b(src);
         }
 
         public Cmpxchg8b cmpxchg8b() => default;
@@ -3071,6 +3305,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cmpxchg16b src) => AsmMnemonics.CMPXCHG16B;
 
             public static implicit operator AsmHexCode(Cmpxchg16b src) => src.Encoded;
+
+            public static implicit operator Cmpxchg16b(AsmHexCode src) => new Cmpxchg16b(src);
         }
 
         public Cmpxchg16b cmpxchg16b() => default;
@@ -3097,6 +3333,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Comisd src) => AsmMnemonics.COMISD;
 
             public static implicit operator AsmHexCode(Comisd src) => src.Encoded;
+
+            public static implicit operator Comisd(AsmHexCode src) => new Comisd(src);
         }
 
         public Comisd comisd() => default;
@@ -3123,6 +3361,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcomisd src) => AsmMnemonics.VCOMISD;
 
             public static implicit operator AsmHexCode(Vcomisd src) => src.Encoded;
+
+            public static implicit operator Vcomisd(AsmHexCode src) => new Vcomisd(src);
         }
 
         public Vcomisd vcomisd() => default;
@@ -3149,6 +3389,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Comiss src) => AsmMnemonics.COMISS;
 
             public static implicit operator AsmHexCode(Comiss src) => src.Encoded;
+
+            public static implicit operator Comiss(AsmHexCode src) => new Comiss(src);
         }
 
         public Comiss comiss() => default;
@@ -3175,6 +3417,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcomiss src) => AsmMnemonics.VCOMISS;
 
             public static implicit operator AsmHexCode(Vcomiss src) => src.Encoded;
+
+            public static implicit operator Vcomiss(AsmHexCode src) => new Vcomiss(src);
         }
 
         public Vcomiss vcomiss() => default;
@@ -3201,6 +3445,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cpuid src) => AsmMnemonics.CPUID;
 
             public static implicit operator AsmHexCode(Cpuid src) => src.Encoded;
+
+            public static implicit operator Cpuid(AsmHexCode src) => new Cpuid(src);
         }
 
         public Cpuid cpuid() => default;
@@ -3227,6 +3473,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Crc32 src) => AsmMnemonics.CRC32;
 
             public static implicit operator AsmHexCode(Crc32 src) => src.Encoded;
+
+            public static implicit operator Crc32(AsmHexCode src) => new Crc32(src);
         }
 
         public Crc32 crc32() => default;
@@ -3253,6 +3501,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtdq2pd src) => AsmMnemonics.CVTDQ2PD;
 
             public static implicit operator AsmHexCode(Cvtdq2pd src) => src.Encoded;
+
+            public static implicit operator Cvtdq2pd(AsmHexCode src) => new Cvtdq2pd(src);
         }
 
         public Cvtdq2pd cvtdq2pd() => default;
@@ -3279,6 +3529,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtdq2pd src) => AsmMnemonics.VCVTDQ2PD;
 
             public static implicit operator AsmHexCode(Vcvtdq2pd src) => src.Encoded;
+
+            public static implicit operator Vcvtdq2pd(AsmHexCode src) => new Vcvtdq2pd(src);
         }
 
         public Vcvtdq2pd vcvtdq2pd() => default;
@@ -3305,6 +3557,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtdq2ps src) => AsmMnemonics.CVTDQ2PS;
 
             public static implicit operator AsmHexCode(Cvtdq2ps src) => src.Encoded;
+
+            public static implicit operator Cvtdq2ps(AsmHexCode src) => new Cvtdq2ps(src);
         }
 
         public Cvtdq2ps cvtdq2ps() => default;
@@ -3331,6 +3585,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtdq2ps src) => AsmMnemonics.VCVTDQ2PS;
 
             public static implicit operator AsmHexCode(Vcvtdq2ps src) => src.Encoded;
+
+            public static implicit operator Vcvtdq2ps(AsmHexCode src) => new Vcvtdq2ps(src);
         }
 
         public Vcvtdq2ps vcvtdq2ps() => default;
@@ -3357,6 +3613,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtpd2dq src) => AsmMnemonics.CVTPD2DQ;
 
             public static implicit operator AsmHexCode(Cvtpd2dq src) => src.Encoded;
+
+            public static implicit operator Cvtpd2dq(AsmHexCode src) => new Cvtpd2dq(src);
         }
 
         public Cvtpd2dq cvtpd2dq() => default;
@@ -3383,6 +3641,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtpd2dq src) => AsmMnemonics.VCVTPD2DQ;
 
             public static implicit operator AsmHexCode(Vcvtpd2dq src) => src.Encoded;
+
+            public static implicit operator Vcvtpd2dq(AsmHexCode src) => new Vcvtpd2dq(src);
         }
 
         public Vcvtpd2dq vcvtpd2dq() => default;
@@ -3409,6 +3669,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtpd2pi src) => AsmMnemonics.CVTPD2PI;
 
             public static implicit operator AsmHexCode(Cvtpd2pi src) => src.Encoded;
+
+            public static implicit operator Cvtpd2pi(AsmHexCode src) => new Cvtpd2pi(src);
         }
 
         public Cvtpd2pi cvtpd2pi() => default;
@@ -3435,6 +3697,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtpd2ps src) => AsmMnemonics.CVTPD2PS;
 
             public static implicit operator AsmHexCode(Cvtpd2ps src) => src.Encoded;
+
+            public static implicit operator Cvtpd2ps(AsmHexCode src) => new Cvtpd2ps(src);
         }
 
         public Cvtpd2ps cvtpd2ps() => default;
@@ -3461,6 +3725,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtpd2ps src) => AsmMnemonics.VCVTPD2PS;
 
             public static implicit operator AsmHexCode(Vcvtpd2ps src) => src.Encoded;
+
+            public static implicit operator Vcvtpd2ps(AsmHexCode src) => new Vcvtpd2ps(src);
         }
 
         public Vcvtpd2ps vcvtpd2ps() => default;
@@ -3487,6 +3753,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtpi2pd src) => AsmMnemonics.CVTPI2PD;
 
             public static implicit operator AsmHexCode(Cvtpi2pd src) => src.Encoded;
+
+            public static implicit operator Cvtpi2pd(AsmHexCode src) => new Cvtpi2pd(src);
         }
 
         public Cvtpi2pd cvtpi2pd() => default;
@@ -3513,6 +3781,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtpi2ps src) => AsmMnemonics.CVTPI2PS;
 
             public static implicit operator AsmHexCode(Cvtpi2ps src) => src.Encoded;
+
+            public static implicit operator Cvtpi2ps(AsmHexCode src) => new Cvtpi2ps(src);
         }
 
         public Cvtpi2ps cvtpi2ps() => default;
@@ -3539,6 +3809,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtps2dq src) => AsmMnemonics.CVTPS2DQ;
 
             public static implicit operator AsmHexCode(Cvtps2dq src) => src.Encoded;
+
+            public static implicit operator Cvtps2dq(AsmHexCode src) => new Cvtps2dq(src);
         }
 
         public Cvtps2dq cvtps2dq() => default;
@@ -3565,6 +3837,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtps2dq src) => AsmMnemonics.VCVTPS2DQ;
 
             public static implicit operator AsmHexCode(Vcvtps2dq src) => src.Encoded;
+
+            public static implicit operator Vcvtps2dq(AsmHexCode src) => new Vcvtps2dq(src);
         }
 
         public Vcvtps2dq vcvtps2dq() => default;
@@ -3591,6 +3865,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtps2pd src) => AsmMnemonics.CVTPS2PD;
 
             public static implicit operator AsmHexCode(Cvtps2pd src) => src.Encoded;
+
+            public static implicit operator Cvtps2pd(AsmHexCode src) => new Cvtps2pd(src);
         }
 
         public Cvtps2pd cvtps2pd() => default;
@@ -3617,6 +3893,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtps2pd src) => AsmMnemonics.VCVTPS2PD;
 
             public static implicit operator AsmHexCode(Vcvtps2pd src) => src.Encoded;
+
+            public static implicit operator Vcvtps2pd(AsmHexCode src) => new Vcvtps2pd(src);
         }
 
         public Vcvtps2pd vcvtps2pd() => default;
@@ -3643,6 +3921,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtps2pi src) => AsmMnemonics.CVTPS2PI;
 
             public static implicit operator AsmHexCode(Cvtps2pi src) => src.Encoded;
+
+            public static implicit operator Cvtps2pi(AsmHexCode src) => new Cvtps2pi(src);
         }
 
         public Cvtps2pi cvtps2pi() => default;
@@ -3669,6 +3949,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtsd2si src) => AsmMnemonics.CVTSD2SI;
 
             public static implicit operator AsmHexCode(Cvtsd2si src) => src.Encoded;
+
+            public static implicit operator Cvtsd2si(AsmHexCode src) => new Cvtsd2si(src);
         }
 
         public Cvtsd2si cvtsd2si() => default;
@@ -3695,6 +3977,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtsd2si src) => AsmMnemonics.VCVTSD2SI;
 
             public static implicit operator AsmHexCode(Vcvtsd2si src) => src.Encoded;
+
+            public static implicit operator Vcvtsd2si(AsmHexCode src) => new Vcvtsd2si(src);
         }
 
         public Vcvtsd2si vcvtsd2si() => default;
@@ -3721,6 +4005,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtsd2ss src) => AsmMnemonics.CVTSD2SS;
 
             public static implicit operator AsmHexCode(Cvtsd2ss src) => src.Encoded;
+
+            public static implicit operator Cvtsd2ss(AsmHexCode src) => new Cvtsd2ss(src);
         }
 
         public Cvtsd2ss cvtsd2ss() => default;
@@ -3747,6 +4033,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtsd2ss src) => AsmMnemonics.VCVTSD2SS;
 
             public static implicit operator AsmHexCode(Vcvtsd2ss src) => src.Encoded;
+
+            public static implicit operator Vcvtsd2ss(AsmHexCode src) => new Vcvtsd2ss(src);
         }
 
         public Vcvtsd2ss vcvtsd2ss() => default;
@@ -3773,6 +4061,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtsi2sd src) => AsmMnemonics.CVTSI2SD;
 
             public static implicit operator AsmHexCode(Cvtsi2sd src) => src.Encoded;
+
+            public static implicit operator Cvtsi2sd(AsmHexCode src) => new Cvtsi2sd(src);
         }
 
         public Cvtsi2sd cvtsi2sd() => default;
@@ -3799,6 +4089,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtsi2sd src) => AsmMnemonics.VCVTSI2SD;
 
             public static implicit operator AsmHexCode(Vcvtsi2sd src) => src.Encoded;
+
+            public static implicit operator Vcvtsi2sd(AsmHexCode src) => new Vcvtsi2sd(src);
         }
 
         public Vcvtsi2sd vcvtsi2sd() => default;
@@ -3825,6 +4117,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtsi2ss src) => AsmMnemonics.CVTSI2SS;
 
             public static implicit operator AsmHexCode(Cvtsi2ss src) => src.Encoded;
+
+            public static implicit operator Cvtsi2ss(AsmHexCode src) => new Cvtsi2ss(src);
         }
 
         public Cvtsi2ss cvtsi2ss() => default;
@@ -3851,6 +4145,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtsi2ss src) => AsmMnemonics.VCVTSI2SS;
 
             public static implicit operator AsmHexCode(Vcvtsi2ss src) => src.Encoded;
+
+            public static implicit operator Vcvtsi2ss(AsmHexCode src) => new Vcvtsi2ss(src);
         }
 
         public Vcvtsi2ss vcvtsi2ss() => default;
@@ -3877,6 +4173,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtss2sd src) => AsmMnemonics.CVTSS2SD;
 
             public static implicit operator AsmHexCode(Cvtss2sd src) => src.Encoded;
+
+            public static implicit operator Cvtss2sd(AsmHexCode src) => new Cvtss2sd(src);
         }
 
         public Cvtss2sd cvtss2sd() => default;
@@ -3903,6 +4201,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtss2sd src) => AsmMnemonics.VCVTSS2SD;
 
             public static implicit operator AsmHexCode(Vcvtss2sd src) => src.Encoded;
+
+            public static implicit operator Vcvtss2sd(AsmHexCode src) => new Vcvtss2sd(src);
         }
 
         public Vcvtss2sd vcvtss2sd() => default;
@@ -3929,6 +4229,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvtss2si src) => AsmMnemonics.CVTSS2SI;
 
             public static implicit operator AsmHexCode(Cvtss2si src) => src.Encoded;
+
+            public static implicit operator Cvtss2si(AsmHexCode src) => new Cvtss2si(src);
         }
 
         public Cvtss2si cvtss2si() => default;
@@ -3955,6 +4257,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtss2si src) => AsmMnemonics.VCVTSS2SI;
 
             public static implicit operator AsmHexCode(Vcvtss2si src) => src.Encoded;
+
+            public static implicit operator Vcvtss2si(AsmHexCode src) => new Vcvtss2si(src);
         }
 
         public Vcvtss2si vcvtss2si() => default;
@@ -3981,6 +4285,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvttpd2dq src) => AsmMnemonics.CVTTPD2DQ;
 
             public static implicit operator AsmHexCode(Cvttpd2dq src) => src.Encoded;
+
+            public static implicit operator Cvttpd2dq(AsmHexCode src) => new Cvttpd2dq(src);
         }
 
         public Cvttpd2dq cvttpd2dq() => default;
@@ -4007,6 +4313,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvttpd2dq src) => AsmMnemonics.VCVTTPD2DQ;
 
             public static implicit operator AsmHexCode(Vcvttpd2dq src) => src.Encoded;
+
+            public static implicit operator Vcvttpd2dq(AsmHexCode src) => new Vcvttpd2dq(src);
         }
 
         public Vcvttpd2dq vcvttpd2dq() => default;
@@ -4033,6 +4341,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvttpd2pi src) => AsmMnemonics.CVTTPD2PI;
 
             public static implicit operator AsmHexCode(Cvttpd2pi src) => src.Encoded;
+
+            public static implicit operator Cvttpd2pi(AsmHexCode src) => new Cvttpd2pi(src);
         }
 
         public Cvttpd2pi cvttpd2pi() => default;
@@ -4059,6 +4369,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvttps2dq src) => AsmMnemonics.CVTTPS2DQ;
 
             public static implicit operator AsmHexCode(Cvttps2dq src) => src.Encoded;
+
+            public static implicit operator Cvttps2dq(AsmHexCode src) => new Cvttps2dq(src);
         }
 
         public Cvttps2dq cvttps2dq() => default;
@@ -4085,6 +4397,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvttps2dq src) => AsmMnemonics.VCVTTPS2DQ;
 
             public static implicit operator AsmHexCode(Vcvttps2dq src) => src.Encoded;
+
+            public static implicit operator Vcvttps2dq(AsmHexCode src) => new Vcvttps2dq(src);
         }
 
         public Vcvttps2dq vcvttps2dq() => default;
@@ -4111,6 +4425,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvttps2pi src) => AsmMnemonics.CVTTPS2PI;
 
             public static implicit operator AsmHexCode(Cvttps2pi src) => src.Encoded;
+
+            public static implicit operator Cvttps2pi(AsmHexCode src) => new Cvttps2pi(src);
         }
 
         public Cvttps2pi cvttps2pi() => default;
@@ -4137,6 +4453,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvttsd2si src) => AsmMnemonics.CVTTSD2SI;
 
             public static implicit operator AsmHexCode(Cvttsd2si src) => src.Encoded;
+
+            public static implicit operator Cvttsd2si(AsmHexCode src) => new Cvttsd2si(src);
         }
 
         public Cvttsd2si cvttsd2si() => default;
@@ -4163,6 +4481,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvttsd2si src) => AsmMnemonics.VCVTTSD2SI;
 
             public static implicit operator AsmHexCode(Vcvttsd2si src) => src.Encoded;
+
+            public static implicit operator Vcvttsd2si(AsmHexCode src) => new Vcvttsd2si(src);
         }
 
         public Vcvttsd2si vcvttsd2si() => default;
@@ -4189,6 +4509,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cvttss2si src) => AsmMnemonics.CVTTSS2SI;
 
             public static implicit operator AsmHexCode(Cvttss2si src) => src.Encoded;
+
+            public static implicit operator Cvttss2si(AsmHexCode src) => new Cvttss2si(src);
         }
 
         public Cvttss2si cvttss2si() => default;
@@ -4215,6 +4537,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvttss2si src) => AsmMnemonics.VCVTTSS2SI;
 
             public static implicit operator AsmHexCode(Vcvttss2si src) => src.Encoded;
+
+            public static implicit operator Vcvttss2si(AsmHexCode src) => new Vcvttss2si(src);
         }
 
         public Vcvttss2si vcvttss2si() => default;
@@ -4241,6 +4565,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cwd src) => AsmMnemonics.CWD;
 
             public static implicit operator AsmHexCode(Cwd src) => src.Encoded;
+
+            public static implicit operator Cwd(AsmHexCode src) => new Cwd(src);
         }
 
         public Cwd cwd() => default;
@@ -4267,6 +4593,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cdq src) => AsmMnemonics.CDQ;
 
             public static implicit operator AsmHexCode(Cdq src) => src.Encoded;
+
+            public static implicit operator Cdq(AsmHexCode src) => new Cdq(src);
         }
 
         public Cdq cdq() => default;
@@ -4293,6 +4621,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Cqo src) => AsmMnemonics.CQO;
 
             public static implicit operator AsmHexCode(Cqo src) => src.Encoded;
+
+            public static implicit operator Cqo(AsmHexCode src) => new Cqo(src);
         }
 
         public Cqo cqo() => default;
@@ -4319,6 +4649,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Daa src) => AsmMnemonics.DAA;
 
             public static implicit operator AsmHexCode(Daa src) => src.Encoded;
+
+            public static implicit operator Daa(AsmHexCode src) => new Daa(src);
         }
 
         public Daa daa() => default;
@@ -4345,6 +4677,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Das src) => AsmMnemonics.DAS;
 
             public static implicit operator AsmHexCode(Das src) => src.Encoded;
+
+            public static implicit operator Das(AsmHexCode src) => new Das(src);
         }
 
         public Das das() => default;
@@ -4371,6 +4705,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Dec src) => AsmMnemonics.DEC;
 
             public static implicit operator AsmHexCode(Dec src) => src.Encoded;
+
+            public static implicit operator Dec(AsmHexCode src) => new Dec(src);
         }
 
         public Dec dec() => default;
@@ -4397,6 +4733,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Div src) => AsmMnemonics.DIV;
 
             public static implicit operator AsmHexCode(Div src) => src.Encoded;
+
+            public static implicit operator Div(AsmHexCode src) => new Div(src);
         }
 
         public Div div() => default;
@@ -4423,6 +4761,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Divpd src) => AsmMnemonics.DIVPD;
 
             public static implicit operator AsmHexCode(Divpd src) => src.Encoded;
+
+            public static implicit operator Divpd(AsmHexCode src) => new Divpd(src);
         }
 
         public Divpd divpd() => default;
@@ -4449,6 +4789,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vdivpd src) => AsmMnemonics.VDIVPD;
 
             public static implicit operator AsmHexCode(Vdivpd src) => src.Encoded;
+
+            public static implicit operator Vdivpd(AsmHexCode src) => new Vdivpd(src);
         }
 
         public Vdivpd vdivpd() => default;
@@ -4475,6 +4817,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Divps src) => AsmMnemonics.DIVPS;
 
             public static implicit operator AsmHexCode(Divps src) => src.Encoded;
+
+            public static implicit operator Divps(AsmHexCode src) => new Divps(src);
         }
 
         public Divps divps() => default;
@@ -4501,6 +4845,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vdivps src) => AsmMnemonics.VDIVPS;
 
             public static implicit operator AsmHexCode(Vdivps src) => src.Encoded;
+
+            public static implicit operator Vdivps(AsmHexCode src) => new Vdivps(src);
         }
 
         public Vdivps vdivps() => default;
@@ -4527,6 +4873,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Divsd src) => AsmMnemonics.DIVSD;
 
             public static implicit operator AsmHexCode(Divsd src) => src.Encoded;
+
+            public static implicit operator Divsd(AsmHexCode src) => new Divsd(src);
         }
 
         public Divsd divsd() => default;
@@ -4553,6 +4901,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vdivsd src) => AsmMnemonics.VDIVSD;
 
             public static implicit operator AsmHexCode(Vdivsd src) => src.Encoded;
+
+            public static implicit operator Vdivsd(AsmHexCode src) => new Vdivsd(src);
         }
 
         public Vdivsd vdivsd() => default;
@@ -4579,6 +4929,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Divss src) => AsmMnemonics.DIVSS;
 
             public static implicit operator AsmHexCode(Divss src) => src.Encoded;
+
+            public static implicit operator Divss(AsmHexCode src) => new Divss(src);
         }
 
         public Divss divss() => default;
@@ -4605,6 +4957,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vdivss src) => AsmMnemonics.VDIVSS;
 
             public static implicit operator AsmHexCode(Vdivss src) => src.Encoded;
+
+            public static implicit operator Vdivss(AsmHexCode src) => new Vdivss(src);
         }
 
         public Vdivss vdivss() => default;
@@ -4631,6 +4985,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Dppd src) => AsmMnemonics.DPPD;
 
             public static implicit operator AsmHexCode(Dppd src) => src.Encoded;
+
+            public static implicit operator Dppd(AsmHexCode src) => new Dppd(src);
         }
 
         public Dppd dppd() => default;
@@ -4657,6 +5013,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vdppd src) => AsmMnemonics.VDPPD;
 
             public static implicit operator AsmHexCode(Vdppd src) => src.Encoded;
+
+            public static implicit operator Vdppd(AsmHexCode src) => new Vdppd(src);
         }
 
         public Vdppd vdppd() => default;
@@ -4683,6 +5041,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Dpps src) => AsmMnemonics.DPPS;
 
             public static implicit operator AsmHexCode(Dpps src) => src.Encoded;
+
+            public static implicit operator Dpps(AsmHexCode src) => new Dpps(src);
         }
 
         public Dpps dpps() => default;
@@ -4709,6 +5069,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vdpps src) => AsmMnemonics.VDPPS;
 
             public static implicit operator AsmHexCode(Vdpps src) => src.Encoded;
+
+            public static implicit operator Vdpps(AsmHexCode src) => new Vdpps(src);
         }
 
         public Vdpps vdpps() => default;
@@ -4735,6 +5097,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Emms src) => AsmMnemonics.EMMS;
 
             public static implicit operator AsmHexCode(Emms src) => src.Encoded;
+
+            public static implicit operator Emms(AsmHexCode src) => new Emms(src);
         }
 
         public Emms emms() => default;
@@ -4761,6 +5125,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Enter src) => AsmMnemonics.ENTER;
 
             public static implicit operator AsmHexCode(Enter src) => src.Encoded;
+
+            public static implicit operator Enter(AsmHexCode src) => new Enter(src);
         }
 
         public Enter enter() => default;
@@ -4787,6 +5153,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Extractps src) => AsmMnemonics.EXTRACTPS;
 
             public static implicit operator AsmHexCode(Extractps src) => src.Encoded;
+
+            public static implicit operator Extractps(AsmHexCode src) => new Extractps(src);
         }
 
         public Extractps extractps() => default;
@@ -4813,6 +5181,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vextractps src) => AsmMnemonics.VEXTRACTPS;
 
             public static implicit operator AsmHexCode(Vextractps src) => src.Encoded;
+
+            public static implicit operator Vextractps(AsmHexCode src) => new Vextractps(src);
         }
 
         public Vextractps vextractps() => default;
@@ -4839,6 +5209,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(F2xm1 src) => AsmMnemonics.F2XM1;
 
             public static implicit operator AsmHexCode(F2xm1 src) => src.Encoded;
+
+            public static implicit operator F2xm1(AsmHexCode src) => new F2xm1(src);
         }
 
         public F2xm1 f2xm1() => default;
@@ -4865,6 +5237,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fabs src) => AsmMnemonics.FABS;
 
             public static implicit operator AsmHexCode(Fabs src) => src.Encoded;
+
+            public static implicit operator Fabs(AsmHexCode src) => new Fabs(src);
         }
 
         public Fabs fabs() => default;
@@ -4891,6 +5265,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fadd src) => AsmMnemonics.FADD;
 
             public static implicit operator AsmHexCode(Fadd src) => src.Encoded;
+
+            public static implicit operator Fadd(AsmHexCode src) => new Fadd(src);
         }
 
         public Fadd fadd() => default;
@@ -4917,6 +5293,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Faddp src) => AsmMnemonics.FADDP;
 
             public static implicit operator AsmHexCode(Faddp src) => src.Encoded;
+
+            public static implicit operator Faddp(AsmHexCode src) => new Faddp(src);
         }
 
         public Faddp faddp() => default;
@@ -4943,6 +5321,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fiadd src) => AsmMnemonics.FIADD;
 
             public static implicit operator AsmHexCode(Fiadd src) => src.Encoded;
+
+            public static implicit operator Fiadd(AsmHexCode src) => new Fiadd(src);
         }
 
         public Fiadd fiadd() => default;
@@ -4969,6 +5349,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fbld src) => AsmMnemonics.FBLD;
 
             public static implicit operator AsmHexCode(Fbld src) => src.Encoded;
+
+            public static implicit operator Fbld(AsmHexCode src) => new Fbld(src);
         }
 
         public Fbld fbld() => default;
@@ -4995,6 +5377,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fbstp src) => AsmMnemonics.FBSTP;
 
             public static implicit operator AsmHexCode(Fbstp src) => src.Encoded;
+
+            public static implicit operator Fbstp(AsmHexCode src) => new Fbstp(src);
         }
 
         public Fbstp fbstp() => default;
@@ -5021,6 +5405,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fchs src) => AsmMnemonics.FCHS;
 
             public static implicit operator AsmHexCode(Fchs src) => src.Encoded;
+
+            public static implicit operator Fchs(AsmHexCode src) => new Fchs(src);
         }
 
         public Fchs fchs() => default;
@@ -5047,6 +5433,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fclex src) => AsmMnemonics.FCLEX;
 
             public static implicit operator AsmHexCode(Fclex src) => src.Encoded;
+
+            public static implicit operator Fclex(AsmHexCode src) => new Fclex(src);
         }
 
         public Fclex fclex() => default;
@@ -5073,6 +5461,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fnclex src) => AsmMnemonics.FNCLEX;
 
             public static implicit operator AsmHexCode(Fnclex src) => src.Encoded;
+
+            public static implicit operator Fnclex(AsmHexCode src) => new Fnclex(src);
         }
 
         public Fnclex fnclex() => default;
@@ -5099,6 +5489,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcmovb src) => AsmMnemonics.FCMOVB;
 
             public static implicit operator AsmHexCode(Fcmovb src) => src.Encoded;
+
+            public static implicit operator Fcmovb(AsmHexCode src) => new Fcmovb(src);
         }
 
         public Fcmovb fcmovb() => default;
@@ -5125,6 +5517,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcmove src) => AsmMnemonics.FCMOVE;
 
             public static implicit operator AsmHexCode(Fcmove src) => src.Encoded;
+
+            public static implicit operator Fcmove(AsmHexCode src) => new Fcmove(src);
         }
 
         public Fcmove fcmove() => default;
@@ -5151,6 +5545,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcmovbe src) => AsmMnemonics.FCMOVBE;
 
             public static implicit operator AsmHexCode(Fcmovbe src) => src.Encoded;
+
+            public static implicit operator Fcmovbe(AsmHexCode src) => new Fcmovbe(src);
         }
 
         public Fcmovbe fcmovbe() => default;
@@ -5177,6 +5573,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcmovu src) => AsmMnemonics.FCMOVU;
 
             public static implicit operator AsmHexCode(Fcmovu src) => src.Encoded;
+
+            public static implicit operator Fcmovu(AsmHexCode src) => new Fcmovu(src);
         }
 
         public Fcmovu fcmovu() => default;
@@ -5203,6 +5601,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcmovnb src) => AsmMnemonics.FCMOVNB;
 
             public static implicit operator AsmHexCode(Fcmovnb src) => src.Encoded;
+
+            public static implicit operator Fcmovnb(AsmHexCode src) => new Fcmovnb(src);
         }
 
         public Fcmovnb fcmovnb() => default;
@@ -5229,6 +5629,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcmovne src) => AsmMnemonics.FCMOVNE;
 
             public static implicit operator AsmHexCode(Fcmovne src) => src.Encoded;
+
+            public static implicit operator Fcmovne(AsmHexCode src) => new Fcmovne(src);
         }
 
         public Fcmovne fcmovne() => default;
@@ -5255,6 +5657,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcmovnbe src) => AsmMnemonics.FCMOVNBE;
 
             public static implicit operator AsmHexCode(Fcmovnbe src) => src.Encoded;
+
+            public static implicit operator Fcmovnbe(AsmHexCode src) => new Fcmovnbe(src);
         }
 
         public Fcmovnbe fcmovnbe() => default;
@@ -5281,6 +5685,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcmovnu src) => AsmMnemonics.FCMOVNU;
 
             public static implicit operator AsmHexCode(Fcmovnu src) => src.Encoded;
+
+            public static implicit operator Fcmovnu(AsmHexCode src) => new Fcmovnu(src);
         }
 
         public Fcmovnu fcmovnu() => default;
@@ -5307,6 +5713,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcom src) => AsmMnemonics.FCOM;
 
             public static implicit operator AsmHexCode(Fcom src) => src.Encoded;
+
+            public static implicit operator Fcom(AsmHexCode src) => new Fcom(src);
         }
 
         public Fcom fcom() => default;
@@ -5333,6 +5741,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcomp src) => AsmMnemonics.FCOMP;
 
             public static implicit operator AsmHexCode(Fcomp src) => src.Encoded;
+
+            public static implicit operator Fcomp(AsmHexCode src) => new Fcomp(src);
         }
 
         public Fcomp fcomp() => default;
@@ -5359,6 +5769,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcompp src) => AsmMnemonics.FCOMPP;
 
             public static implicit operator AsmHexCode(Fcompp src) => src.Encoded;
+
+            public static implicit operator Fcompp(AsmHexCode src) => new Fcompp(src);
         }
 
         public Fcompp fcompp() => default;
@@ -5385,6 +5797,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcomi src) => AsmMnemonics.FCOMI;
 
             public static implicit operator AsmHexCode(Fcomi src) => src.Encoded;
+
+            public static implicit operator Fcomi(AsmHexCode src) => new Fcomi(src);
         }
 
         public Fcomi fcomi() => default;
@@ -5411,6 +5825,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcomip src) => AsmMnemonics.FCOMIP;
 
             public static implicit operator AsmHexCode(Fcomip src) => src.Encoded;
+
+            public static implicit operator Fcomip(AsmHexCode src) => new Fcomip(src);
         }
 
         public Fcomip fcomip() => default;
@@ -5437,6 +5853,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fucomi src) => AsmMnemonics.FUCOMI;
 
             public static implicit operator AsmHexCode(Fucomi src) => src.Encoded;
+
+            public static implicit operator Fucomi(AsmHexCode src) => new Fucomi(src);
         }
 
         public Fucomi fucomi() => default;
@@ -5463,6 +5881,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fucomip src) => AsmMnemonics.FUCOMIP;
 
             public static implicit operator AsmHexCode(Fucomip src) => src.Encoded;
+
+            public static implicit operator Fucomip(AsmHexCode src) => new Fucomip(src);
         }
 
         public Fucomip fucomip() => default;
@@ -5489,6 +5909,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fcos src) => AsmMnemonics.FCOS;
 
             public static implicit operator AsmHexCode(Fcos src) => src.Encoded;
+
+            public static implicit operator Fcos(AsmHexCode src) => new Fcos(src);
         }
 
         public Fcos fcos() => default;
@@ -5515,6 +5937,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fdecstp src) => AsmMnemonics.FDECSTP;
 
             public static implicit operator AsmHexCode(Fdecstp src) => src.Encoded;
+
+            public static implicit operator Fdecstp(AsmHexCode src) => new Fdecstp(src);
         }
 
         public Fdecstp fdecstp() => default;
@@ -5541,6 +5965,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fdiv src) => AsmMnemonics.FDIV;
 
             public static implicit operator AsmHexCode(Fdiv src) => src.Encoded;
+
+            public static implicit operator Fdiv(AsmHexCode src) => new Fdiv(src);
         }
 
         public Fdiv fdiv() => default;
@@ -5567,6 +5993,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fdivp src) => AsmMnemonics.FDIVP;
 
             public static implicit operator AsmHexCode(Fdivp src) => src.Encoded;
+
+            public static implicit operator Fdivp(AsmHexCode src) => new Fdivp(src);
         }
 
         public Fdivp fdivp() => default;
@@ -5593,6 +6021,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fidiv src) => AsmMnemonics.FIDIV;
 
             public static implicit operator AsmHexCode(Fidiv src) => src.Encoded;
+
+            public static implicit operator Fidiv(AsmHexCode src) => new Fidiv(src);
         }
 
         public Fidiv fidiv() => default;
@@ -5619,6 +6049,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fdivr src) => AsmMnemonics.FDIVR;
 
             public static implicit operator AsmHexCode(Fdivr src) => src.Encoded;
+
+            public static implicit operator Fdivr(AsmHexCode src) => new Fdivr(src);
         }
 
         public Fdivr fdivr() => default;
@@ -5645,6 +6077,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fdivrp src) => AsmMnemonics.FDIVRP;
 
             public static implicit operator AsmHexCode(Fdivrp src) => src.Encoded;
+
+            public static implicit operator Fdivrp(AsmHexCode src) => new Fdivrp(src);
         }
 
         public Fdivrp fdivrp() => default;
@@ -5671,6 +6105,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fidivr src) => AsmMnemonics.FIDIVR;
 
             public static implicit operator AsmHexCode(Fidivr src) => src.Encoded;
+
+            public static implicit operator Fidivr(AsmHexCode src) => new Fidivr(src);
         }
 
         public Fidivr fidivr() => default;
@@ -5697,6 +6133,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ffree src) => AsmMnemonics.FFREE;
 
             public static implicit operator AsmHexCode(Ffree src) => src.Encoded;
+
+            public static implicit operator Ffree(AsmHexCode src) => new Ffree(src);
         }
 
         public Ffree ffree() => default;
@@ -5723,6 +6161,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ficom src) => AsmMnemonics.FICOM;
 
             public static implicit operator AsmHexCode(Ficom src) => src.Encoded;
+
+            public static implicit operator Ficom(AsmHexCode src) => new Ficom(src);
         }
 
         public Ficom ficom() => default;
@@ -5749,6 +6189,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ficomp src) => AsmMnemonics.FICOMP;
 
             public static implicit operator AsmHexCode(Ficomp src) => src.Encoded;
+
+            public static implicit operator Ficomp(AsmHexCode src) => new Ficomp(src);
         }
 
         public Ficomp ficomp() => default;
@@ -5775,6 +6217,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fild src) => AsmMnemonics.FILD;
 
             public static implicit operator AsmHexCode(Fild src) => src.Encoded;
+
+            public static implicit operator Fild(AsmHexCode src) => new Fild(src);
         }
 
         public Fild fild() => default;
@@ -5801,6 +6245,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fincstp src) => AsmMnemonics.FINCSTP;
 
             public static implicit operator AsmHexCode(Fincstp src) => src.Encoded;
+
+            public static implicit operator Fincstp(AsmHexCode src) => new Fincstp(src);
         }
 
         public Fincstp fincstp() => default;
@@ -5827,6 +6273,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Finit src) => AsmMnemonics.FINIT;
 
             public static implicit operator AsmHexCode(Finit src) => src.Encoded;
+
+            public static implicit operator Finit(AsmHexCode src) => new Finit(src);
         }
 
         public Finit finit() => default;
@@ -5853,6 +6301,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fninit src) => AsmMnemonics.FNINIT;
 
             public static implicit operator AsmHexCode(Fninit src) => src.Encoded;
+
+            public static implicit operator Fninit(AsmHexCode src) => new Fninit(src);
         }
 
         public Fninit fninit() => default;
@@ -5879,6 +6329,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fist src) => AsmMnemonics.FIST;
 
             public static implicit operator AsmHexCode(Fist src) => src.Encoded;
+
+            public static implicit operator Fist(AsmHexCode src) => new Fist(src);
         }
 
         public Fist fist() => default;
@@ -5905,6 +6357,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fistp src) => AsmMnemonics.FISTP;
 
             public static implicit operator AsmHexCode(Fistp src) => src.Encoded;
+
+            public static implicit operator Fistp(AsmHexCode src) => new Fistp(src);
         }
 
         public Fistp fistp() => default;
@@ -5931,6 +6385,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fisttp src) => AsmMnemonics.FISTTP;
 
             public static implicit operator AsmHexCode(Fisttp src) => src.Encoded;
+
+            public static implicit operator Fisttp(AsmHexCode src) => new Fisttp(src);
         }
 
         public Fisttp fisttp() => default;
@@ -5957,6 +6413,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fld src) => AsmMnemonics.FLD;
 
             public static implicit operator AsmHexCode(Fld src) => src.Encoded;
+
+            public static implicit operator Fld(AsmHexCode src) => new Fld(src);
         }
 
         public Fld fld() => default;
@@ -5983,6 +6441,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fld1 src) => AsmMnemonics.FLD1;
 
             public static implicit operator AsmHexCode(Fld1 src) => src.Encoded;
+
+            public static implicit operator Fld1(AsmHexCode src) => new Fld1(src);
         }
 
         public Fld1 fld1() => default;
@@ -6009,6 +6469,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fldl2t src) => AsmMnemonics.FLDL2T;
 
             public static implicit operator AsmHexCode(Fldl2t src) => src.Encoded;
+
+            public static implicit operator Fldl2t(AsmHexCode src) => new Fldl2t(src);
         }
 
         public Fldl2t fldl2t() => default;
@@ -6035,6 +6497,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fldl2e src) => AsmMnemonics.FLDL2E;
 
             public static implicit operator AsmHexCode(Fldl2e src) => src.Encoded;
+
+            public static implicit operator Fldl2e(AsmHexCode src) => new Fldl2e(src);
         }
 
         public Fldl2e fldl2e() => default;
@@ -6061,6 +6525,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fldpi src) => AsmMnemonics.FLDPI;
 
             public static implicit operator AsmHexCode(Fldpi src) => src.Encoded;
+
+            public static implicit operator Fldpi(AsmHexCode src) => new Fldpi(src);
         }
 
         public Fldpi fldpi() => default;
@@ -6087,6 +6553,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fldlg2 src) => AsmMnemonics.FLDLG2;
 
             public static implicit operator AsmHexCode(Fldlg2 src) => src.Encoded;
+
+            public static implicit operator Fldlg2(AsmHexCode src) => new Fldlg2(src);
         }
 
         public Fldlg2 fldlg2() => default;
@@ -6113,6 +6581,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fldln2 src) => AsmMnemonics.FLDLN2;
 
             public static implicit operator AsmHexCode(Fldln2 src) => src.Encoded;
+
+            public static implicit operator Fldln2(AsmHexCode src) => new Fldln2(src);
         }
 
         public Fldln2 fldln2() => default;
@@ -6139,6 +6609,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fldz src) => AsmMnemonics.FLDZ;
 
             public static implicit operator AsmHexCode(Fldz src) => src.Encoded;
+
+            public static implicit operator Fldz(AsmHexCode src) => new Fldz(src);
         }
 
         public Fldz fldz() => default;
@@ -6165,6 +6637,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fldcw src) => AsmMnemonics.FLDCW;
 
             public static implicit operator AsmHexCode(Fldcw src) => src.Encoded;
+
+            public static implicit operator Fldcw(AsmHexCode src) => new Fldcw(src);
         }
 
         public Fldcw fldcw() => default;
@@ -6191,6 +6665,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fldenv src) => AsmMnemonics.FLDENV;
 
             public static implicit operator AsmHexCode(Fldenv src) => src.Encoded;
+
+            public static implicit operator Fldenv(AsmHexCode src) => new Fldenv(src);
         }
 
         public Fldenv fldenv() => default;
@@ -6217,6 +6693,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fmul src) => AsmMnemonics.FMUL;
 
             public static implicit operator AsmHexCode(Fmul src) => src.Encoded;
+
+            public static implicit operator Fmul(AsmHexCode src) => new Fmul(src);
         }
 
         public Fmul fmul() => default;
@@ -6243,6 +6721,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fmulp src) => AsmMnemonics.FMULP;
 
             public static implicit operator AsmHexCode(Fmulp src) => src.Encoded;
+
+            public static implicit operator Fmulp(AsmHexCode src) => new Fmulp(src);
         }
 
         public Fmulp fmulp() => default;
@@ -6269,6 +6749,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fimul src) => AsmMnemonics.FIMUL;
 
             public static implicit operator AsmHexCode(Fimul src) => src.Encoded;
+
+            public static implicit operator Fimul(AsmHexCode src) => new Fimul(src);
         }
 
         public Fimul fimul() => default;
@@ -6295,6 +6777,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fnop src) => AsmMnemonics.FNOP;
 
             public static implicit operator AsmHexCode(Fnop src) => src.Encoded;
+
+            public static implicit operator Fnop(AsmHexCode src) => new Fnop(src);
         }
 
         public Fnop fnop() => default;
@@ -6321,6 +6805,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fpatan src) => AsmMnemonics.FPATAN;
 
             public static implicit operator AsmHexCode(Fpatan src) => src.Encoded;
+
+            public static implicit operator Fpatan(AsmHexCode src) => new Fpatan(src);
         }
 
         public Fpatan fpatan() => default;
@@ -6347,6 +6833,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fprem src) => AsmMnemonics.FPREM;
 
             public static implicit operator AsmHexCode(Fprem src) => src.Encoded;
+
+            public static implicit operator Fprem(AsmHexCode src) => new Fprem(src);
         }
 
         public Fprem fprem() => default;
@@ -6373,6 +6861,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fprem1 src) => AsmMnemonics.FPREM1;
 
             public static implicit operator AsmHexCode(Fprem1 src) => src.Encoded;
+
+            public static implicit operator Fprem1(AsmHexCode src) => new Fprem1(src);
         }
 
         public Fprem1 fprem1() => default;
@@ -6399,6 +6889,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fptan src) => AsmMnemonics.FPTAN;
 
             public static implicit operator AsmHexCode(Fptan src) => src.Encoded;
+
+            public static implicit operator Fptan(AsmHexCode src) => new Fptan(src);
         }
 
         public Fptan fptan() => default;
@@ -6425,6 +6917,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Frndint src) => AsmMnemonics.FRNDINT;
 
             public static implicit operator AsmHexCode(Frndint src) => src.Encoded;
+
+            public static implicit operator Frndint(AsmHexCode src) => new Frndint(src);
         }
 
         public Frndint frndint() => default;
@@ -6451,6 +6945,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Frstor src) => AsmMnemonics.FRSTOR;
 
             public static implicit operator AsmHexCode(Frstor src) => src.Encoded;
+
+            public static implicit operator Frstor(AsmHexCode src) => new Frstor(src);
         }
 
         public Frstor frstor() => default;
@@ -6477,6 +6973,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fsave src) => AsmMnemonics.FSAVE;
 
             public static implicit operator AsmHexCode(Fsave src) => src.Encoded;
+
+            public static implicit operator Fsave(AsmHexCode src) => new Fsave(src);
         }
 
         public Fsave fsave() => default;
@@ -6503,6 +7001,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fnsave src) => AsmMnemonics.FNSAVE;
 
             public static implicit operator AsmHexCode(Fnsave src) => src.Encoded;
+
+            public static implicit operator Fnsave(AsmHexCode src) => new Fnsave(src);
         }
 
         public Fnsave fnsave() => default;
@@ -6529,6 +7029,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fscale src) => AsmMnemonics.FSCALE;
 
             public static implicit operator AsmHexCode(Fscale src) => src.Encoded;
+
+            public static implicit operator Fscale(AsmHexCode src) => new Fscale(src);
         }
 
         public Fscale fscale() => default;
@@ -6555,6 +7057,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fsin src) => AsmMnemonics.FSIN;
 
             public static implicit operator AsmHexCode(Fsin src) => src.Encoded;
+
+            public static implicit operator Fsin(AsmHexCode src) => new Fsin(src);
         }
 
         public Fsin fsin() => default;
@@ -6581,6 +7085,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fsincos src) => AsmMnemonics.FSINCOS;
 
             public static implicit operator AsmHexCode(Fsincos src) => src.Encoded;
+
+            public static implicit operator Fsincos(AsmHexCode src) => new Fsincos(src);
         }
 
         public Fsincos fsincos() => default;
@@ -6607,6 +7113,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fsqrt src) => AsmMnemonics.FSQRT;
 
             public static implicit operator AsmHexCode(Fsqrt src) => src.Encoded;
+
+            public static implicit operator Fsqrt(AsmHexCode src) => new Fsqrt(src);
         }
 
         public Fsqrt fsqrt() => default;
@@ -6633,6 +7141,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fst src) => AsmMnemonics.FST;
 
             public static implicit operator AsmHexCode(Fst src) => src.Encoded;
+
+            public static implicit operator Fst(AsmHexCode src) => new Fst(src);
         }
 
         public Fst fst() => default;
@@ -6659,6 +7169,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fstp src) => AsmMnemonics.FSTP;
 
             public static implicit operator AsmHexCode(Fstp src) => src.Encoded;
+
+            public static implicit operator Fstp(AsmHexCode src) => new Fstp(src);
         }
 
         public Fstp fstp() => default;
@@ -6685,6 +7197,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fstcw src) => AsmMnemonics.FSTCW;
 
             public static implicit operator AsmHexCode(Fstcw src) => src.Encoded;
+
+            public static implicit operator Fstcw(AsmHexCode src) => new Fstcw(src);
         }
 
         public Fstcw fstcw() => default;
@@ -6711,6 +7225,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fnstcw src) => AsmMnemonics.FNSTCW;
 
             public static implicit operator AsmHexCode(Fnstcw src) => src.Encoded;
+
+            public static implicit operator Fnstcw(AsmHexCode src) => new Fnstcw(src);
         }
 
         public Fnstcw fnstcw() => default;
@@ -6737,6 +7253,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fstenv src) => AsmMnemonics.FSTENV;
 
             public static implicit operator AsmHexCode(Fstenv src) => src.Encoded;
+
+            public static implicit operator Fstenv(AsmHexCode src) => new Fstenv(src);
         }
 
         public Fstenv fstenv() => default;
@@ -6763,6 +7281,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fnstenv src) => AsmMnemonics.FNSTENV;
 
             public static implicit operator AsmHexCode(Fnstenv src) => src.Encoded;
+
+            public static implicit operator Fnstenv(AsmHexCode src) => new Fnstenv(src);
         }
 
         public Fnstenv fnstenv() => default;
@@ -6789,6 +7309,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fstsw src) => AsmMnemonics.FSTSW;
 
             public static implicit operator AsmHexCode(Fstsw src) => src.Encoded;
+
+            public static implicit operator Fstsw(AsmHexCode src) => new Fstsw(src);
         }
 
         public Fstsw fstsw() => default;
@@ -6815,6 +7337,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fnstsw src) => AsmMnemonics.FNSTSW;
 
             public static implicit operator AsmHexCode(Fnstsw src) => src.Encoded;
+
+            public static implicit operator Fnstsw(AsmHexCode src) => new Fnstsw(src);
         }
 
         public Fnstsw fnstsw() => default;
@@ -6841,6 +7365,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fsub src) => AsmMnemonics.FSUB;
 
             public static implicit operator AsmHexCode(Fsub src) => src.Encoded;
+
+            public static implicit operator Fsub(AsmHexCode src) => new Fsub(src);
         }
 
         public Fsub fsub() => default;
@@ -6867,6 +7393,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fsubp src) => AsmMnemonics.FSUBP;
 
             public static implicit operator AsmHexCode(Fsubp src) => src.Encoded;
+
+            public static implicit operator Fsubp(AsmHexCode src) => new Fsubp(src);
         }
 
         public Fsubp fsubp() => default;
@@ -6893,6 +7421,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fisub src) => AsmMnemonics.FISUB;
 
             public static implicit operator AsmHexCode(Fisub src) => src.Encoded;
+
+            public static implicit operator Fisub(AsmHexCode src) => new Fisub(src);
         }
 
         public Fisub fisub() => default;
@@ -6919,6 +7449,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fsubr src) => AsmMnemonics.FSUBR;
 
             public static implicit operator AsmHexCode(Fsubr src) => src.Encoded;
+
+            public static implicit operator Fsubr(AsmHexCode src) => new Fsubr(src);
         }
 
         public Fsubr fsubr() => default;
@@ -6945,6 +7477,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fsubrp src) => AsmMnemonics.FSUBRP;
 
             public static implicit operator AsmHexCode(Fsubrp src) => src.Encoded;
+
+            public static implicit operator Fsubrp(AsmHexCode src) => new Fsubrp(src);
         }
 
         public Fsubrp fsubrp() => default;
@@ -6971,6 +7505,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fisubr src) => AsmMnemonics.FISUBR;
 
             public static implicit operator AsmHexCode(Fisubr src) => src.Encoded;
+
+            public static implicit operator Fisubr(AsmHexCode src) => new Fisubr(src);
         }
 
         public Fisubr fisubr() => default;
@@ -6997,6 +7533,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ftst src) => AsmMnemonics.FTST;
 
             public static implicit operator AsmHexCode(Ftst src) => src.Encoded;
+
+            public static implicit operator Ftst(AsmHexCode src) => new Ftst(src);
         }
 
         public Ftst ftst() => default;
@@ -7023,6 +7561,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fucom src) => AsmMnemonics.FUCOM;
 
             public static implicit operator AsmHexCode(Fucom src) => src.Encoded;
+
+            public static implicit operator Fucom(AsmHexCode src) => new Fucom(src);
         }
 
         public Fucom fucom() => default;
@@ -7049,6 +7589,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fucomp src) => AsmMnemonics.FUCOMP;
 
             public static implicit operator AsmHexCode(Fucomp src) => src.Encoded;
+
+            public static implicit operator Fucomp(AsmHexCode src) => new Fucomp(src);
         }
 
         public Fucomp fucomp() => default;
@@ -7075,6 +7617,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fucompp src) => AsmMnemonics.FUCOMPP;
 
             public static implicit operator AsmHexCode(Fucompp src) => src.Encoded;
+
+            public static implicit operator Fucompp(AsmHexCode src) => new Fucompp(src);
         }
 
         public Fucompp fucompp() => default;
@@ -7101,6 +7645,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fxam src) => AsmMnemonics.FXAM;
 
             public static implicit operator AsmHexCode(Fxam src) => src.Encoded;
+
+            public static implicit operator Fxam(AsmHexCode src) => new Fxam(src);
         }
 
         public Fxam fxam() => default;
@@ -7127,6 +7673,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fxch src) => AsmMnemonics.FXCH;
 
             public static implicit operator AsmHexCode(Fxch src) => src.Encoded;
+
+            public static implicit operator Fxch(AsmHexCode src) => new Fxch(src);
         }
 
         public Fxch fxch() => default;
@@ -7153,6 +7701,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fxrstor src) => AsmMnemonics.FXRSTOR;
 
             public static implicit operator AsmHexCode(Fxrstor src) => src.Encoded;
+
+            public static implicit operator Fxrstor(AsmHexCode src) => new Fxrstor(src);
         }
 
         public Fxrstor fxrstor() => default;
@@ -7179,6 +7729,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fxrstor64 src) => AsmMnemonics.FXRSTOR64;
 
             public static implicit operator AsmHexCode(Fxrstor64 src) => src.Encoded;
+
+            public static implicit operator Fxrstor64(AsmHexCode src) => new Fxrstor64(src);
         }
 
         public Fxrstor64 fxrstor64() => default;
@@ -7205,6 +7757,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fxsave src) => AsmMnemonics.FXSAVE;
 
             public static implicit operator AsmHexCode(Fxsave src) => src.Encoded;
+
+            public static implicit operator Fxsave(AsmHexCode src) => new Fxsave(src);
         }
 
         public Fxsave fxsave() => default;
@@ -7231,6 +7785,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fxsave64 src) => AsmMnemonics.FXSAVE64;
 
             public static implicit operator AsmHexCode(Fxsave64 src) => src.Encoded;
+
+            public static implicit operator Fxsave64(AsmHexCode src) => new Fxsave64(src);
         }
 
         public Fxsave64 fxsave64() => default;
@@ -7257,6 +7813,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fxtract src) => AsmMnemonics.FXTRACT;
 
             public static implicit operator AsmHexCode(Fxtract src) => src.Encoded;
+
+            public static implicit operator Fxtract(AsmHexCode src) => new Fxtract(src);
         }
 
         public Fxtract fxtract() => default;
@@ -7283,6 +7841,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fyl2x src) => AsmMnemonics.FYL2X;
 
             public static implicit operator AsmHexCode(Fyl2x src) => src.Encoded;
+
+            public static implicit operator Fyl2x(AsmHexCode src) => new Fyl2x(src);
         }
 
         public Fyl2x fyl2x() => default;
@@ -7309,6 +7869,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fyl2xp1 src) => AsmMnemonics.FYL2XP1;
 
             public static implicit operator AsmHexCode(Fyl2xp1 src) => src.Encoded;
+
+            public static implicit operator Fyl2xp1(AsmHexCode src) => new Fyl2xp1(src);
         }
 
         public Fyl2xp1 fyl2xp1() => default;
@@ -7335,6 +7897,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Haddpd src) => AsmMnemonics.HADDPD;
 
             public static implicit operator AsmHexCode(Haddpd src) => src.Encoded;
+
+            public static implicit operator Haddpd(AsmHexCode src) => new Haddpd(src);
         }
 
         public Haddpd haddpd() => default;
@@ -7361,6 +7925,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vhaddpd src) => AsmMnemonics.VHADDPD;
 
             public static implicit operator AsmHexCode(Vhaddpd src) => src.Encoded;
+
+            public static implicit operator Vhaddpd(AsmHexCode src) => new Vhaddpd(src);
         }
 
         public Vhaddpd vhaddpd() => default;
@@ -7387,6 +7953,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Haddps src) => AsmMnemonics.HADDPS;
 
             public static implicit operator AsmHexCode(Haddps src) => src.Encoded;
+
+            public static implicit operator Haddps(AsmHexCode src) => new Haddps(src);
         }
 
         public Haddps haddps() => default;
@@ -7413,6 +7981,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vhaddps src) => AsmMnemonics.VHADDPS;
 
             public static implicit operator AsmHexCode(Vhaddps src) => src.Encoded;
+
+            public static implicit operator Vhaddps(AsmHexCode src) => new Vhaddps(src);
         }
 
         public Vhaddps vhaddps() => default;
@@ -7439,6 +8009,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Hlt src) => AsmMnemonics.HLT;
 
             public static implicit operator AsmHexCode(Hlt src) => src.Encoded;
+
+            public static implicit operator Hlt(AsmHexCode src) => new Hlt(src);
         }
 
         public Hlt hlt() => default;
@@ -7465,6 +8037,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Hsubpd src) => AsmMnemonics.HSUBPD;
 
             public static implicit operator AsmHexCode(Hsubpd src) => src.Encoded;
+
+            public static implicit operator Hsubpd(AsmHexCode src) => new Hsubpd(src);
         }
 
         public Hsubpd hsubpd() => default;
@@ -7491,6 +8065,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vhsubpd src) => AsmMnemonics.VHSUBPD;
 
             public static implicit operator AsmHexCode(Vhsubpd src) => src.Encoded;
+
+            public static implicit operator Vhsubpd(AsmHexCode src) => new Vhsubpd(src);
         }
 
         public Vhsubpd vhsubpd() => default;
@@ -7517,6 +8093,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Hsubps src) => AsmMnemonics.HSUBPS;
 
             public static implicit operator AsmHexCode(Hsubps src) => src.Encoded;
+
+            public static implicit operator Hsubps(AsmHexCode src) => new Hsubps(src);
         }
 
         public Hsubps hsubps() => default;
@@ -7543,6 +8121,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vhsubps src) => AsmMnemonics.VHSUBPS;
 
             public static implicit operator AsmHexCode(Vhsubps src) => src.Encoded;
+
+            public static implicit operator Vhsubps(AsmHexCode src) => new Vhsubps(src);
         }
 
         public Vhsubps vhsubps() => default;
@@ -7569,6 +8149,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Idiv src) => AsmMnemonics.IDIV;
 
             public static implicit operator AsmHexCode(Idiv src) => src.Encoded;
+
+            public static implicit operator Idiv(AsmHexCode src) => new Idiv(src);
         }
 
         public Idiv idiv() => default;
@@ -7595,6 +8177,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Imul src) => AsmMnemonics.IMUL;
 
             public static implicit operator AsmHexCode(Imul src) => src.Encoded;
+
+            public static implicit operator Imul(AsmHexCode src) => new Imul(src);
         }
 
         public Imul imul() => default;
@@ -7621,6 +8205,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(In src) => AsmMnemonics.IN;
 
             public static implicit operator AsmHexCode(In src) => src.Encoded;
+
+            public static implicit operator In(AsmHexCode src) => new In(src);
         }
 
         public In @in() => default;
@@ -7647,6 +8233,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Inc src) => AsmMnemonics.INC;
 
             public static implicit operator AsmHexCode(Inc src) => src.Encoded;
+
+            public static implicit operator Inc(AsmHexCode src) => new Inc(src);
         }
 
         public Inc inc() => default;
@@ -7673,6 +8261,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ins src) => AsmMnemonics.INS;
 
             public static implicit operator AsmHexCode(Ins src) => src.Encoded;
+
+            public static implicit operator Ins(AsmHexCode src) => new Ins(src);
         }
 
         public Ins ins() => default;
@@ -7699,6 +8289,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Insb src) => AsmMnemonics.INSB;
 
             public static implicit operator AsmHexCode(Insb src) => src.Encoded;
+
+            public static implicit operator Insb(AsmHexCode src) => new Insb(src);
         }
 
         public Insb insb() => default;
@@ -7725,6 +8317,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Insw src) => AsmMnemonics.INSW;
 
             public static implicit operator AsmHexCode(Insw src) => src.Encoded;
+
+            public static implicit operator Insw(AsmHexCode src) => new Insw(src);
         }
 
         public Insw insw() => default;
@@ -7751,6 +8345,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Insd src) => AsmMnemonics.INSD;
 
             public static implicit operator AsmHexCode(Insd src) => src.Encoded;
+
+            public static implicit operator Insd(AsmHexCode src) => new Insd(src);
         }
 
         public Insd insd() => default;
@@ -7777,6 +8373,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Insertps src) => AsmMnemonics.INSERTPS;
 
             public static implicit operator AsmHexCode(Insertps src) => src.Encoded;
+
+            public static implicit operator Insertps(AsmHexCode src) => new Insertps(src);
         }
 
         public Insertps insertps() => default;
@@ -7803,6 +8401,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vinsertps src) => AsmMnemonics.VINSERTPS;
 
             public static implicit operator AsmHexCode(Vinsertps src) => src.Encoded;
+
+            public static implicit operator Vinsertps(AsmHexCode src) => new Vinsertps(src);
         }
 
         public Vinsertps vinsertps() => default;
@@ -7829,6 +8429,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Int src) => AsmMnemonics.INT;
 
             public static implicit operator AsmHexCode(Int src) => src.Encoded;
+
+            public static implicit operator Int(AsmHexCode src) => new Int(src);
         }
 
         public Int @int() => default;
@@ -7855,6 +8457,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Into src) => AsmMnemonics.INTO;
 
             public static implicit operator AsmHexCode(Into src) => src.Encoded;
+
+            public static implicit operator Into(AsmHexCode src) => new Into(src);
         }
 
         public Into into() => default;
@@ -7881,6 +8485,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Invd src) => AsmMnemonics.INVD;
 
             public static implicit operator AsmHexCode(Invd src) => src.Encoded;
+
+            public static implicit operator Invd(AsmHexCode src) => new Invd(src);
         }
 
         public Invd invd() => default;
@@ -7907,6 +8513,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Invlpg src) => AsmMnemonics.INVLPG;
 
             public static implicit operator AsmHexCode(Invlpg src) => src.Encoded;
+
+            public static implicit operator Invlpg(AsmHexCode src) => new Invlpg(src);
         }
 
         public Invlpg invlpg() => default;
@@ -7933,6 +8541,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Invpcid src) => AsmMnemonics.INVPCID;
 
             public static implicit operator AsmHexCode(Invpcid src) => src.Encoded;
+
+            public static implicit operator Invpcid(AsmHexCode src) => new Invpcid(src);
         }
 
         public Invpcid invpcid() => default;
@@ -7959,6 +8569,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Iret src) => AsmMnemonics.IRET;
 
             public static implicit operator AsmHexCode(Iret src) => src.Encoded;
+
+            public static implicit operator Iret(AsmHexCode src) => new Iret(src);
         }
 
         public Iret iret() => default;
@@ -7985,6 +8597,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Iretd src) => AsmMnemonics.IRETD;
 
             public static implicit operator AsmHexCode(Iretd src) => src.Encoded;
+
+            public static implicit operator Iretd(AsmHexCode src) => new Iretd(src);
         }
 
         public Iretd iretd() => default;
@@ -8011,6 +8625,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Iretq src) => AsmMnemonics.IRETQ;
 
             public static implicit operator AsmHexCode(Iretq src) => src.Encoded;
+
+            public static implicit operator Iretq(AsmHexCode src) => new Iretq(src);
         }
 
         public Iretq iretq() => default;
@@ -8037,6 +8653,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ja src) => AsmMnemonics.JA;
 
             public static implicit operator AsmHexCode(Ja src) => src.Encoded;
+
+            public static implicit operator Ja(AsmHexCode src) => new Ja(src);
         }
 
         public Ja ja() => default;
@@ -8063,6 +8681,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jae src) => AsmMnemonics.JAE;
 
             public static implicit operator AsmHexCode(Jae src) => src.Encoded;
+
+            public static implicit operator Jae(AsmHexCode src) => new Jae(src);
         }
 
         public Jae jae() => default;
@@ -8089,6 +8709,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jb src) => AsmMnemonics.JB;
 
             public static implicit operator AsmHexCode(Jb src) => src.Encoded;
+
+            public static implicit operator Jb(AsmHexCode src) => new Jb(src);
         }
 
         public Jb jb() => default;
@@ -8115,6 +8737,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jbe src) => AsmMnemonics.JBE;
 
             public static implicit operator AsmHexCode(Jbe src) => src.Encoded;
+
+            public static implicit operator Jbe(AsmHexCode src) => new Jbe(src);
         }
 
         public Jbe jbe() => default;
@@ -8141,6 +8765,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jc src) => AsmMnemonics.JC;
 
             public static implicit operator AsmHexCode(Jc src) => src.Encoded;
+
+            public static implicit operator Jc(AsmHexCode src) => new Jc(src);
         }
 
         public Jc jc() => default;
@@ -8167,6 +8793,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jcxz src) => AsmMnemonics.JCXZ;
 
             public static implicit operator AsmHexCode(Jcxz src) => src.Encoded;
+
+            public static implicit operator Jcxz(AsmHexCode src) => new Jcxz(src);
         }
 
         public Jcxz jcxz() => default;
@@ -8193,6 +8821,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jecxz src) => AsmMnemonics.JECXZ;
 
             public static implicit operator AsmHexCode(Jecxz src) => src.Encoded;
+
+            public static implicit operator Jecxz(AsmHexCode src) => new Jecxz(src);
         }
 
         public Jecxz jecxz() => default;
@@ -8219,6 +8849,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jrcxz src) => AsmMnemonics.JRCXZ;
 
             public static implicit operator AsmHexCode(Jrcxz src) => src.Encoded;
+
+            public static implicit operator Jrcxz(AsmHexCode src) => new Jrcxz(src);
         }
 
         public Jrcxz jrcxz() => default;
@@ -8245,6 +8877,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Je src) => AsmMnemonics.JE;
 
             public static implicit operator AsmHexCode(Je src) => src.Encoded;
+
+            public static implicit operator Je(AsmHexCode src) => new Je(src);
         }
 
         public Je je() => default;
@@ -8271,6 +8905,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jg src) => AsmMnemonics.JG;
 
             public static implicit operator AsmHexCode(Jg src) => src.Encoded;
+
+            public static implicit operator Jg(AsmHexCode src) => new Jg(src);
         }
 
         public Jg jg() => default;
@@ -8297,6 +8933,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jge src) => AsmMnemonics.JGE;
 
             public static implicit operator AsmHexCode(Jge src) => src.Encoded;
+
+            public static implicit operator Jge(AsmHexCode src) => new Jge(src);
         }
 
         public Jge jge() => default;
@@ -8323,6 +8961,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jl src) => AsmMnemonics.JL;
 
             public static implicit operator AsmHexCode(Jl src) => src.Encoded;
+
+            public static implicit operator Jl(AsmHexCode src) => new Jl(src);
         }
 
         public Jl jl() => default;
@@ -8349,6 +8989,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jle src) => AsmMnemonics.JLE;
 
             public static implicit operator AsmHexCode(Jle src) => src.Encoded;
+
+            public static implicit operator Jle(AsmHexCode src) => new Jle(src);
         }
 
         public Jle jle() => default;
@@ -8375,6 +9017,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jna src) => AsmMnemonics.JNA;
 
             public static implicit operator AsmHexCode(Jna src) => src.Encoded;
+
+            public static implicit operator Jna(AsmHexCode src) => new Jna(src);
         }
 
         public Jna jna() => default;
@@ -8401,6 +9045,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnae src) => AsmMnemonics.JNAE;
 
             public static implicit operator AsmHexCode(Jnae src) => src.Encoded;
+
+            public static implicit operator Jnae(AsmHexCode src) => new Jnae(src);
         }
 
         public Jnae jnae() => default;
@@ -8427,6 +9073,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnb src) => AsmMnemonics.JNB;
 
             public static implicit operator AsmHexCode(Jnb src) => src.Encoded;
+
+            public static implicit operator Jnb(AsmHexCode src) => new Jnb(src);
         }
 
         public Jnb jnb() => default;
@@ -8453,6 +9101,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnbe src) => AsmMnemonics.JNBE;
 
             public static implicit operator AsmHexCode(Jnbe src) => src.Encoded;
+
+            public static implicit operator Jnbe(AsmHexCode src) => new Jnbe(src);
         }
 
         public Jnbe jnbe() => default;
@@ -8479,6 +9129,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnc src) => AsmMnemonics.JNC;
 
             public static implicit operator AsmHexCode(Jnc src) => src.Encoded;
+
+            public static implicit operator Jnc(AsmHexCode src) => new Jnc(src);
         }
 
         public Jnc jnc() => default;
@@ -8505,6 +9157,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jne src) => AsmMnemonics.JNE;
 
             public static implicit operator AsmHexCode(Jne src) => src.Encoded;
+
+            public static implicit operator Jne(AsmHexCode src) => new Jne(src);
         }
 
         public Jne jne() => default;
@@ -8531,6 +9185,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jng src) => AsmMnemonics.JNG;
 
             public static implicit operator AsmHexCode(Jng src) => src.Encoded;
+
+            public static implicit operator Jng(AsmHexCode src) => new Jng(src);
         }
 
         public Jng jng() => default;
@@ -8557,6 +9213,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnge src) => AsmMnemonics.JNGE;
 
             public static implicit operator AsmHexCode(Jnge src) => src.Encoded;
+
+            public static implicit operator Jnge(AsmHexCode src) => new Jnge(src);
         }
 
         public Jnge jnge() => default;
@@ -8583,6 +9241,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnl src) => AsmMnemonics.JNL;
 
             public static implicit operator AsmHexCode(Jnl src) => src.Encoded;
+
+            public static implicit operator Jnl(AsmHexCode src) => new Jnl(src);
         }
 
         public Jnl jnl() => default;
@@ -8609,6 +9269,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnle src) => AsmMnemonics.JNLE;
 
             public static implicit operator AsmHexCode(Jnle src) => src.Encoded;
+
+            public static implicit operator Jnle(AsmHexCode src) => new Jnle(src);
         }
 
         public Jnle jnle() => default;
@@ -8635,6 +9297,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jno src) => AsmMnemonics.JNO;
 
             public static implicit operator AsmHexCode(Jno src) => src.Encoded;
+
+            public static implicit operator Jno(AsmHexCode src) => new Jno(src);
         }
 
         public Jno jno() => default;
@@ -8661,6 +9325,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnp src) => AsmMnemonics.JNP;
 
             public static implicit operator AsmHexCode(Jnp src) => src.Encoded;
+
+            public static implicit operator Jnp(AsmHexCode src) => new Jnp(src);
         }
 
         public Jnp jnp() => default;
@@ -8687,6 +9353,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jns src) => AsmMnemonics.JNS;
 
             public static implicit operator AsmHexCode(Jns src) => src.Encoded;
+
+            public static implicit operator Jns(AsmHexCode src) => new Jns(src);
         }
 
         public Jns jns() => default;
@@ -8713,6 +9381,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jnz src) => AsmMnemonics.JNZ;
 
             public static implicit operator AsmHexCode(Jnz src) => src.Encoded;
+
+            public static implicit operator Jnz(AsmHexCode src) => new Jnz(src);
         }
 
         public Jnz jnz() => default;
@@ -8739,6 +9409,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jo src) => AsmMnemonics.JO;
 
             public static implicit operator AsmHexCode(Jo src) => src.Encoded;
+
+            public static implicit operator Jo(AsmHexCode src) => new Jo(src);
         }
 
         public Jo jo() => default;
@@ -8765,6 +9437,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jp src) => AsmMnemonics.JP;
 
             public static implicit operator AsmHexCode(Jp src) => src.Encoded;
+
+            public static implicit operator Jp(AsmHexCode src) => new Jp(src);
         }
 
         public Jp jp() => default;
@@ -8791,6 +9465,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jpe src) => AsmMnemonics.JPE;
 
             public static implicit operator AsmHexCode(Jpe src) => src.Encoded;
+
+            public static implicit operator Jpe(AsmHexCode src) => new Jpe(src);
         }
 
         public Jpe jpe() => default;
@@ -8817,6 +9493,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jpo src) => AsmMnemonics.JPO;
 
             public static implicit operator AsmHexCode(Jpo src) => src.Encoded;
+
+            public static implicit operator Jpo(AsmHexCode src) => new Jpo(src);
         }
 
         public Jpo jpo() => default;
@@ -8843,6 +9521,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Js src) => AsmMnemonics.JS;
 
             public static implicit operator AsmHexCode(Js src) => src.Encoded;
+
+            public static implicit operator Js(AsmHexCode src) => new Js(src);
         }
 
         public Js js() => default;
@@ -8869,6 +9549,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jz src) => AsmMnemonics.JZ;
 
             public static implicit operator AsmHexCode(Jz src) => src.Encoded;
+
+            public static implicit operator Jz(AsmHexCode src) => new Jz(src);
         }
 
         public Jz jz() => default;
@@ -8895,6 +9577,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Jmp src) => AsmMnemonics.JMP;
 
             public static implicit operator AsmHexCode(Jmp src) => src.Encoded;
+
+            public static implicit operator Jmp(AsmHexCode src) => new Jmp(src);
         }
 
         public Jmp jmp() => default;
@@ -8921,6 +9605,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lahf src) => AsmMnemonics.LAHF;
 
             public static implicit operator AsmHexCode(Lahf src) => src.Encoded;
+
+            public static implicit operator Lahf(AsmHexCode src) => new Lahf(src);
         }
 
         public Lahf lahf() => default;
@@ -8947,6 +9633,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lar src) => AsmMnemonics.LAR;
 
             public static implicit operator AsmHexCode(Lar src) => src.Encoded;
+
+            public static implicit operator Lar(AsmHexCode src) => new Lar(src);
         }
 
         public Lar lar() => default;
@@ -8973,6 +9661,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lddqu src) => AsmMnemonics.LDDQU;
 
             public static implicit operator AsmHexCode(Lddqu src) => src.Encoded;
+
+            public static implicit operator Lddqu(AsmHexCode src) => new Lddqu(src);
         }
 
         public Lddqu lddqu() => default;
@@ -8999,6 +9689,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vlddqu src) => AsmMnemonics.VLDDQU;
 
             public static implicit operator AsmHexCode(Vlddqu src) => src.Encoded;
+
+            public static implicit operator Vlddqu(AsmHexCode src) => new Vlddqu(src);
         }
 
         public Vlddqu vlddqu() => default;
@@ -9025,6 +9717,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ldmxcsr src) => AsmMnemonics.LDMXCSR;
 
             public static implicit operator AsmHexCode(Ldmxcsr src) => src.Encoded;
+
+            public static implicit operator Ldmxcsr(AsmHexCode src) => new Ldmxcsr(src);
         }
 
         public Ldmxcsr ldmxcsr() => default;
@@ -9051,6 +9745,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vldmxcsr src) => AsmMnemonics.VLDMXCSR;
 
             public static implicit operator AsmHexCode(Vldmxcsr src) => src.Encoded;
+
+            public static implicit operator Vldmxcsr(AsmHexCode src) => new Vldmxcsr(src);
         }
 
         public Vldmxcsr vldmxcsr() => default;
@@ -9077,6 +9773,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lds src) => AsmMnemonics.LDS;
 
             public static implicit operator AsmHexCode(Lds src) => src.Encoded;
+
+            public static implicit operator Lds(AsmHexCode src) => new Lds(src);
         }
 
         public Lds lds() => default;
@@ -9103,6 +9801,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lss src) => AsmMnemonics.LSS;
 
             public static implicit operator AsmHexCode(Lss src) => src.Encoded;
+
+            public static implicit operator Lss(AsmHexCode src) => new Lss(src);
         }
 
         public Lss lss() => default;
@@ -9129,6 +9829,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Les src) => AsmMnemonics.LES;
 
             public static implicit operator AsmHexCode(Les src) => src.Encoded;
+
+            public static implicit operator Les(AsmHexCode src) => new Les(src);
         }
 
         public Les les() => default;
@@ -9155,6 +9857,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lfs src) => AsmMnemonics.LFS;
 
             public static implicit operator AsmHexCode(Lfs src) => src.Encoded;
+
+            public static implicit operator Lfs(AsmHexCode src) => new Lfs(src);
         }
 
         public Lfs lfs() => default;
@@ -9181,6 +9885,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lgs src) => AsmMnemonics.LGS;
 
             public static implicit operator AsmHexCode(Lgs src) => src.Encoded;
+
+            public static implicit operator Lgs(AsmHexCode src) => new Lgs(src);
         }
 
         public Lgs lgs() => default;
@@ -9207,6 +9913,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lea src) => AsmMnemonics.LEA;
 
             public static implicit operator AsmHexCode(Lea src) => src.Encoded;
+
+            public static implicit operator Lea(AsmHexCode src) => new Lea(src);
         }
 
         public Lea lea() => default;
@@ -9233,6 +9941,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Leave src) => AsmMnemonics.LEAVE;
 
             public static implicit operator AsmHexCode(Leave src) => src.Encoded;
+
+            public static implicit operator Leave(AsmHexCode src) => new Leave(src);
         }
 
         public Leave leave() => default;
@@ -9259,6 +9969,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lfence src) => AsmMnemonics.LFENCE;
 
             public static implicit operator AsmHexCode(Lfence src) => src.Encoded;
+
+            public static implicit operator Lfence(AsmHexCode src) => new Lfence(src);
         }
 
         public Lfence lfence() => default;
@@ -9285,6 +9997,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lgdt src) => AsmMnemonics.LGDT;
 
             public static implicit operator AsmHexCode(Lgdt src) => src.Encoded;
+
+            public static implicit operator Lgdt(AsmHexCode src) => new Lgdt(src);
         }
 
         public Lgdt lgdt() => default;
@@ -9311,6 +10025,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lidt src) => AsmMnemonics.LIDT;
 
             public static implicit operator AsmHexCode(Lidt src) => src.Encoded;
+
+            public static implicit operator Lidt(AsmHexCode src) => new Lidt(src);
         }
 
         public Lidt lidt() => default;
@@ -9337,6 +10053,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lldt src) => AsmMnemonics.LLDT;
 
             public static implicit operator AsmHexCode(Lldt src) => src.Encoded;
+
+            public static implicit operator Lldt(AsmHexCode src) => new Lldt(src);
         }
 
         public Lldt lldt() => default;
@@ -9363,6 +10081,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lmsw src) => AsmMnemonics.LMSW;
 
             public static implicit operator AsmHexCode(Lmsw src) => src.Encoded;
+
+            public static implicit operator Lmsw(AsmHexCode src) => new Lmsw(src);
         }
 
         public Lmsw lmsw() => default;
@@ -9389,6 +10109,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lock src) => AsmMnemonics.LOCK;
 
             public static implicit operator AsmHexCode(Lock src) => src.Encoded;
+
+            public static implicit operator Lock(AsmHexCode src) => new Lock(src);
         }
 
         public Lock @lock() => default;
@@ -9415,6 +10137,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lods src) => AsmMnemonics.LODS;
 
             public static implicit operator AsmHexCode(Lods src) => src.Encoded;
+
+            public static implicit operator Lods(AsmHexCode src) => new Lods(src);
         }
 
         public Lods lods() => default;
@@ -9441,6 +10165,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lodsb src) => AsmMnemonics.LODSB;
 
             public static implicit operator AsmHexCode(Lodsb src) => src.Encoded;
+
+            public static implicit operator Lodsb(AsmHexCode src) => new Lodsb(src);
         }
 
         public Lodsb lodsb() => default;
@@ -9467,6 +10193,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lodsw src) => AsmMnemonics.LODSW;
 
             public static implicit operator AsmHexCode(Lodsw src) => src.Encoded;
+
+            public static implicit operator Lodsw(AsmHexCode src) => new Lodsw(src);
         }
 
         public Lodsw lodsw() => default;
@@ -9493,6 +10221,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lodsd src) => AsmMnemonics.LODSD;
 
             public static implicit operator AsmHexCode(Lodsd src) => src.Encoded;
+
+            public static implicit operator Lodsd(AsmHexCode src) => new Lodsd(src);
         }
 
         public Lodsd lodsd() => default;
@@ -9519,6 +10249,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lodsq src) => AsmMnemonics.LODSQ;
 
             public static implicit operator AsmHexCode(Lodsq src) => src.Encoded;
+
+            public static implicit operator Lodsq(AsmHexCode src) => new Lodsq(src);
         }
 
         public Lodsq lodsq() => default;
@@ -9545,6 +10277,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Loop src) => AsmMnemonics.LOOP;
 
             public static implicit operator AsmHexCode(Loop src) => src.Encoded;
+
+            public static implicit operator Loop(AsmHexCode src) => new Loop(src);
         }
 
         public Loop loop() => default;
@@ -9571,6 +10305,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Loope src) => AsmMnemonics.LOOPE;
 
             public static implicit operator AsmHexCode(Loope src) => src.Encoded;
+
+            public static implicit operator Loope(AsmHexCode src) => new Loope(src);
         }
 
         public Loope loope() => default;
@@ -9597,6 +10333,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Loopne src) => AsmMnemonics.LOOPNE;
 
             public static implicit operator AsmHexCode(Loopne src) => src.Encoded;
+
+            public static implicit operator Loopne(AsmHexCode src) => new Loopne(src);
         }
 
         public Loopne loopne() => default;
@@ -9623,6 +10361,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lsl src) => AsmMnemonics.LSL;
 
             public static implicit operator AsmHexCode(Lsl src) => src.Encoded;
+
+            public static implicit operator Lsl(AsmHexCode src) => new Lsl(src);
         }
 
         public Lsl lsl() => default;
@@ -9649,6 +10389,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ltr src) => AsmMnemonics.LTR;
 
             public static implicit operator AsmHexCode(Ltr src) => src.Encoded;
+
+            public static implicit operator Ltr(AsmHexCode src) => new Ltr(src);
         }
 
         public Ltr ltr() => default;
@@ -9675,6 +10417,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Lzcnt src) => AsmMnemonics.LZCNT;
 
             public static implicit operator AsmHexCode(Lzcnt src) => src.Encoded;
+
+            public static implicit operator Lzcnt(AsmHexCode src) => new Lzcnt(src);
         }
 
         public Lzcnt lzcnt() => default;
@@ -9701,6 +10445,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Maskmovdqu src) => AsmMnemonics.MASKMOVDQU;
 
             public static implicit operator AsmHexCode(Maskmovdqu src) => src.Encoded;
+
+            public static implicit operator Maskmovdqu(AsmHexCode src) => new Maskmovdqu(src);
         }
 
         public Maskmovdqu maskmovdqu() => default;
@@ -9727,6 +10473,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmaskmovdqu src) => AsmMnemonics.VMASKMOVDQU;
 
             public static implicit operator AsmHexCode(Vmaskmovdqu src) => src.Encoded;
+
+            public static implicit operator Vmaskmovdqu(AsmHexCode src) => new Vmaskmovdqu(src);
         }
 
         public Vmaskmovdqu vmaskmovdqu() => default;
@@ -9753,6 +10501,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Maskmovq src) => AsmMnemonics.MASKMOVQ;
 
             public static implicit operator AsmHexCode(Maskmovq src) => src.Encoded;
+
+            public static implicit operator Maskmovq(AsmHexCode src) => new Maskmovq(src);
         }
 
         public Maskmovq maskmovq() => default;
@@ -9779,6 +10529,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Maxpd src) => AsmMnemonics.MAXPD;
 
             public static implicit operator AsmHexCode(Maxpd src) => src.Encoded;
+
+            public static implicit operator Maxpd(AsmHexCode src) => new Maxpd(src);
         }
 
         public Maxpd maxpd() => default;
@@ -9805,6 +10557,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmaxpd src) => AsmMnemonics.VMAXPD;
 
             public static implicit operator AsmHexCode(Vmaxpd src) => src.Encoded;
+
+            public static implicit operator Vmaxpd(AsmHexCode src) => new Vmaxpd(src);
         }
 
         public Vmaxpd vmaxpd() => default;
@@ -9831,6 +10585,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Maxps src) => AsmMnemonics.MAXPS;
 
             public static implicit operator AsmHexCode(Maxps src) => src.Encoded;
+
+            public static implicit operator Maxps(AsmHexCode src) => new Maxps(src);
         }
 
         public Maxps maxps() => default;
@@ -9857,6 +10613,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmaxps src) => AsmMnemonics.VMAXPS;
 
             public static implicit operator AsmHexCode(Vmaxps src) => src.Encoded;
+
+            public static implicit operator Vmaxps(AsmHexCode src) => new Vmaxps(src);
         }
 
         public Vmaxps vmaxps() => default;
@@ -9883,6 +10641,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Maxsd src) => AsmMnemonics.MAXSD;
 
             public static implicit operator AsmHexCode(Maxsd src) => src.Encoded;
+
+            public static implicit operator Maxsd(AsmHexCode src) => new Maxsd(src);
         }
 
         public Maxsd maxsd() => default;
@@ -9909,6 +10669,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmaxsd src) => AsmMnemonics.VMAXSD;
 
             public static implicit operator AsmHexCode(Vmaxsd src) => src.Encoded;
+
+            public static implicit operator Vmaxsd(AsmHexCode src) => new Vmaxsd(src);
         }
 
         public Vmaxsd vmaxsd() => default;
@@ -9935,6 +10697,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Maxss src) => AsmMnemonics.MAXSS;
 
             public static implicit operator AsmHexCode(Maxss src) => src.Encoded;
+
+            public static implicit operator Maxss(AsmHexCode src) => new Maxss(src);
         }
 
         public Maxss maxss() => default;
@@ -9961,6 +10725,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmaxss src) => AsmMnemonics.VMAXSS;
 
             public static implicit operator AsmHexCode(Vmaxss src) => src.Encoded;
+
+            public static implicit operator Vmaxss(AsmHexCode src) => new Vmaxss(src);
         }
 
         public Vmaxss vmaxss() => default;
@@ -9987,6 +10753,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mfence src) => AsmMnemonics.MFENCE;
 
             public static implicit operator AsmHexCode(Mfence src) => src.Encoded;
+
+            public static implicit operator Mfence(AsmHexCode src) => new Mfence(src);
         }
 
         public Mfence mfence() => default;
@@ -10013,6 +10781,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Minpd src) => AsmMnemonics.MINPD;
 
             public static implicit operator AsmHexCode(Minpd src) => src.Encoded;
+
+            public static implicit operator Minpd(AsmHexCode src) => new Minpd(src);
         }
 
         public Minpd minpd() => default;
@@ -10039,6 +10809,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vminpd src) => AsmMnemonics.VMINPD;
 
             public static implicit operator AsmHexCode(Vminpd src) => src.Encoded;
+
+            public static implicit operator Vminpd(AsmHexCode src) => new Vminpd(src);
         }
 
         public Vminpd vminpd() => default;
@@ -10065,6 +10837,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Minps src) => AsmMnemonics.MINPS;
 
             public static implicit operator AsmHexCode(Minps src) => src.Encoded;
+
+            public static implicit operator Minps(AsmHexCode src) => new Minps(src);
         }
 
         public Minps minps() => default;
@@ -10091,6 +10865,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vminps src) => AsmMnemonics.VMINPS;
 
             public static implicit operator AsmHexCode(Vminps src) => src.Encoded;
+
+            public static implicit operator Vminps(AsmHexCode src) => new Vminps(src);
         }
 
         public Vminps vminps() => default;
@@ -10117,6 +10893,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Minsd src) => AsmMnemonics.MINSD;
 
             public static implicit operator AsmHexCode(Minsd src) => src.Encoded;
+
+            public static implicit operator Minsd(AsmHexCode src) => new Minsd(src);
         }
 
         public Minsd minsd() => default;
@@ -10143,6 +10921,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vminsd src) => AsmMnemonics.VMINSD;
 
             public static implicit operator AsmHexCode(Vminsd src) => src.Encoded;
+
+            public static implicit operator Vminsd(AsmHexCode src) => new Vminsd(src);
         }
 
         public Vminsd vminsd() => default;
@@ -10169,6 +10949,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Minss src) => AsmMnemonics.MINSS;
 
             public static implicit operator AsmHexCode(Minss src) => src.Encoded;
+
+            public static implicit operator Minss(AsmHexCode src) => new Minss(src);
         }
 
         public Minss minss() => default;
@@ -10195,6 +10977,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vminss src) => AsmMnemonics.VMINSS;
 
             public static implicit operator AsmHexCode(Vminss src) => src.Encoded;
+
+            public static implicit operator Vminss(AsmHexCode src) => new Vminss(src);
         }
 
         public Vminss vminss() => default;
@@ -10221,6 +11005,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Monitor src) => AsmMnemonics.MONITOR;
 
             public static implicit operator AsmHexCode(Monitor src) => src.Encoded;
+
+            public static implicit operator Monitor(AsmHexCode src) => new Monitor(src);
         }
 
         public Monitor monitor() => default;
@@ -10247,6 +11033,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mov src) => AsmMnemonics.MOV;
 
             public static implicit operator AsmHexCode(Mov src) => src.Encoded;
+
+            public static implicit operator Mov(AsmHexCode src) => new Mov(src);
         }
 
         public Mov mov() => default;
@@ -10273,6 +11061,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movapd src) => AsmMnemonics.MOVAPD;
 
             public static implicit operator AsmHexCode(Movapd src) => src.Encoded;
+
+            public static implicit operator Movapd(AsmHexCode src) => new Movapd(src);
         }
 
         public Movapd movapd() => default;
@@ -10299,6 +11089,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovapd src) => AsmMnemonics.VMOVAPD;
 
             public static implicit operator AsmHexCode(Vmovapd src) => src.Encoded;
+
+            public static implicit operator Vmovapd(AsmHexCode src) => new Vmovapd(src);
         }
 
         public Vmovapd vmovapd() => default;
@@ -10325,6 +11117,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movaps src) => AsmMnemonics.MOVAPS;
 
             public static implicit operator AsmHexCode(Movaps src) => src.Encoded;
+
+            public static implicit operator Movaps(AsmHexCode src) => new Movaps(src);
         }
 
         public Movaps movaps() => default;
@@ -10351,6 +11145,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovaps src) => AsmMnemonics.VMOVAPS;
 
             public static implicit operator AsmHexCode(Vmovaps src) => src.Encoded;
+
+            public static implicit operator Vmovaps(AsmHexCode src) => new Vmovaps(src);
         }
 
         public Vmovaps vmovaps() => default;
@@ -10377,6 +11173,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movbe src) => AsmMnemonics.MOVBE;
 
             public static implicit operator AsmHexCode(Movbe src) => src.Encoded;
+
+            public static implicit operator Movbe(AsmHexCode src) => new Movbe(src);
         }
 
         public Movbe movbe() => default;
@@ -10403,6 +11201,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movd src) => AsmMnemonics.MOVD;
 
             public static implicit operator AsmHexCode(Movd src) => src.Encoded;
+
+            public static implicit operator Movd(AsmHexCode src) => new Movd(src);
         }
 
         public Movd movd() => default;
@@ -10429,6 +11229,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movq src) => AsmMnemonics.MOVQ;
 
             public static implicit operator AsmHexCode(Movq src) => src.Encoded;
+
+            public static implicit operator Movq(AsmHexCode src) => new Movq(src);
         }
 
         public Movq movq() => default;
@@ -10455,6 +11257,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovd src) => AsmMnemonics.VMOVD;
 
             public static implicit operator AsmHexCode(Vmovd src) => src.Encoded;
+
+            public static implicit operator Vmovd(AsmHexCode src) => new Vmovd(src);
         }
 
         public Vmovd vmovd() => default;
@@ -10481,6 +11285,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovq src) => AsmMnemonics.VMOVQ;
 
             public static implicit operator AsmHexCode(Vmovq src) => src.Encoded;
+
+            public static implicit operator Vmovq(AsmHexCode src) => new Vmovq(src);
         }
 
         public Vmovq vmovq() => default;
@@ -10507,6 +11313,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movddup src) => AsmMnemonics.MOVDDUP;
 
             public static implicit operator AsmHexCode(Movddup src) => src.Encoded;
+
+            public static implicit operator Movddup(AsmHexCode src) => new Movddup(src);
         }
 
         public Movddup movddup() => default;
@@ -10533,6 +11341,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovddup src) => AsmMnemonics.VMOVDDUP;
 
             public static implicit operator AsmHexCode(Vmovddup src) => src.Encoded;
+
+            public static implicit operator Vmovddup(AsmHexCode src) => new Vmovddup(src);
         }
 
         public Vmovddup vmovddup() => default;
@@ -10559,6 +11369,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movdqa src) => AsmMnemonics.MOVDQA;
 
             public static implicit operator AsmHexCode(Movdqa src) => src.Encoded;
+
+            public static implicit operator Movdqa(AsmHexCode src) => new Movdqa(src);
         }
 
         public Movdqa movdqa() => default;
@@ -10585,6 +11397,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovdqa src) => AsmMnemonics.VMOVDQA;
 
             public static implicit operator AsmHexCode(Vmovdqa src) => src.Encoded;
+
+            public static implicit operator Vmovdqa(AsmHexCode src) => new Vmovdqa(src);
         }
 
         public Vmovdqa vmovdqa() => default;
@@ -10611,6 +11425,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movdqu src) => AsmMnemonics.MOVDQU;
 
             public static implicit operator AsmHexCode(Movdqu src) => src.Encoded;
+
+            public static implicit operator Movdqu(AsmHexCode src) => new Movdqu(src);
         }
 
         public Movdqu movdqu() => default;
@@ -10637,6 +11453,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovdqu src) => AsmMnemonics.VMOVDQU;
 
             public static implicit operator AsmHexCode(Vmovdqu src) => src.Encoded;
+
+            public static implicit operator Vmovdqu(AsmHexCode src) => new Vmovdqu(src);
         }
 
         public Vmovdqu vmovdqu() => default;
@@ -10663,6 +11481,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movdq2q src) => AsmMnemonics.MOVDQ2Q;
 
             public static implicit operator AsmHexCode(Movdq2q src) => src.Encoded;
+
+            public static implicit operator Movdq2q(AsmHexCode src) => new Movdq2q(src);
         }
 
         public Movdq2q movdq2q() => default;
@@ -10689,6 +11509,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movhlps src) => AsmMnemonics.MOVHLPS;
 
             public static implicit operator AsmHexCode(Movhlps src) => src.Encoded;
+
+            public static implicit operator Movhlps(AsmHexCode src) => new Movhlps(src);
         }
 
         public Movhlps movhlps() => default;
@@ -10715,6 +11537,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovhlps src) => AsmMnemonics.VMOVHLPS;
 
             public static implicit operator AsmHexCode(Vmovhlps src) => src.Encoded;
+
+            public static implicit operator Vmovhlps(AsmHexCode src) => new Vmovhlps(src);
         }
 
         public Vmovhlps vmovhlps() => default;
@@ -10741,6 +11565,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movhpd src) => AsmMnemonics.MOVHPD;
 
             public static implicit operator AsmHexCode(Movhpd src) => src.Encoded;
+
+            public static implicit operator Movhpd(AsmHexCode src) => new Movhpd(src);
         }
 
         public Movhpd movhpd() => default;
@@ -10767,6 +11593,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovhpd src) => AsmMnemonics.VMOVHPD;
 
             public static implicit operator AsmHexCode(Vmovhpd src) => src.Encoded;
+
+            public static implicit operator Vmovhpd(AsmHexCode src) => new Vmovhpd(src);
         }
 
         public Vmovhpd vmovhpd() => default;
@@ -10793,6 +11621,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movhps src) => AsmMnemonics.MOVHPS;
 
             public static implicit operator AsmHexCode(Movhps src) => src.Encoded;
+
+            public static implicit operator Movhps(AsmHexCode src) => new Movhps(src);
         }
 
         public Movhps movhps() => default;
@@ -10819,6 +11649,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovhps src) => AsmMnemonics.VMOVHPS;
 
             public static implicit operator AsmHexCode(Vmovhps src) => src.Encoded;
+
+            public static implicit operator Vmovhps(AsmHexCode src) => new Vmovhps(src);
         }
 
         public Vmovhps vmovhps() => default;
@@ -10845,6 +11677,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movlhps src) => AsmMnemonics.MOVLHPS;
 
             public static implicit operator AsmHexCode(Movlhps src) => src.Encoded;
+
+            public static implicit operator Movlhps(AsmHexCode src) => new Movlhps(src);
         }
 
         public Movlhps movlhps() => default;
@@ -10871,6 +11705,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovlhps src) => AsmMnemonics.VMOVLHPS;
 
             public static implicit operator AsmHexCode(Vmovlhps src) => src.Encoded;
+
+            public static implicit operator Vmovlhps(AsmHexCode src) => new Vmovlhps(src);
         }
 
         public Vmovlhps vmovlhps() => default;
@@ -10897,6 +11733,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movlpd src) => AsmMnemonics.MOVLPD;
 
             public static implicit operator AsmHexCode(Movlpd src) => src.Encoded;
+
+            public static implicit operator Movlpd(AsmHexCode src) => new Movlpd(src);
         }
 
         public Movlpd movlpd() => default;
@@ -10923,6 +11761,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovlpd src) => AsmMnemonics.VMOVLPD;
 
             public static implicit operator AsmHexCode(Vmovlpd src) => src.Encoded;
+
+            public static implicit operator Vmovlpd(AsmHexCode src) => new Vmovlpd(src);
         }
 
         public Vmovlpd vmovlpd() => default;
@@ -10949,6 +11789,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movlps src) => AsmMnemonics.MOVLPS;
 
             public static implicit operator AsmHexCode(Movlps src) => src.Encoded;
+
+            public static implicit operator Movlps(AsmHexCode src) => new Movlps(src);
         }
 
         public Movlps movlps() => default;
@@ -10975,6 +11817,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovlps src) => AsmMnemonics.VMOVLPS;
 
             public static implicit operator AsmHexCode(Vmovlps src) => src.Encoded;
+
+            public static implicit operator Vmovlps(AsmHexCode src) => new Vmovlps(src);
         }
 
         public Vmovlps vmovlps() => default;
@@ -11001,6 +11845,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movmskpd src) => AsmMnemonics.MOVMSKPD;
 
             public static implicit operator AsmHexCode(Movmskpd src) => src.Encoded;
+
+            public static implicit operator Movmskpd(AsmHexCode src) => new Movmskpd(src);
         }
 
         public Movmskpd movmskpd() => default;
@@ -11027,6 +11873,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovmskpd src) => AsmMnemonics.VMOVMSKPD;
 
             public static implicit operator AsmHexCode(Vmovmskpd src) => src.Encoded;
+
+            public static implicit operator Vmovmskpd(AsmHexCode src) => new Vmovmskpd(src);
         }
 
         public Vmovmskpd vmovmskpd() => default;
@@ -11053,6 +11901,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movmskps src) => AsmMnemonics.MOVMSKPS;
 
             public static implicit operator AsmHexCode(Movmskps src) => src.Encoded;
+
+            public static implicit operator Movmskps(AsmHexCode src) => new Movmskps(src);
         }
 
         public Movmskps movmskps() => default;
@@ -11079,6 +11929,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovmskps src) => AsmMnemonics.VMOVMSKPS;
 
             public static implicit operator AsmHexCode(Vmovmskps src) => src.Encoded;
+
+            public static implicit operator Vmovmskps(AsmHexCode src) => new Vmovmskps(src);
         }
 
         public Vmovmskps vmovmskps() => default;
@@ -11105,6 +11957,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movntdqa src) => AsmMnemonics.MOVNTDQA;
 
             public static implicit operator AsmHexCode(Movntdqa src) => src.Encoded;
+
+            public static implicit operator Movntdqa(AsmHexCode src) => new Movntdqa(src);
         }
 
         public Movntdqa movntdqa() => default;
@@ -11131,6 +11985,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovntdqa src) => AsmMnemonics.VMOVNTDQA;
 
             public static implicit operator AsmHexCode(Vmovntdqa src) => src.Encoded;
+
+            public static implicit operator Vmovntdqa(AsmHexCode src) => new Vmovntdqa(src);
         }
 
         public Vmovntdqa vmovntdqa() => default;
@@ -11157,6 +12013,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movntdq src) => AsmMnemonics.MOVNTDQ;
 
             public static implicit operator AsmHexCode(Movntdq src) => src.Encoded;
+
+            public static implicit operator Movntdq(AsmHexCode src) => new Movntdq(src);
         }
 
         public Movntdq movntdq() => default;
@@ -11183,6 +12041,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovntdq src) => AsmMnemonics.VMOVNTDQ;
 
             public static implicit operator AsmHexCode(Vmovntdq src) => src.Encoded;
+
+            public static implicit operator Vmovntdq(AsmHexCode src) => new Vmovntdq(src);
         }
 
         public Vmovntdq vmovntdq() => default;
@@ -11209,6 +12069,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movnti src) => AsmMnemonics.MOVNTI;
 
             public static implicit operator AsmHexCode(Movnti src) => src.Encoded;
+
+            public static implicit operator Movnti(AsmHexCode src) => new Movnti(src);
         }
 
         public Movnti movnti() => default;
@@ -11235,6 +12097,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movntpd src) => AsmMnemonics.MOVNTPD;
 
             public static implicit operator AsmHexCode(Movntpd src) => src.Encoded;
+
+            public static implicit operator Movntpd(AsmHexCode src) => new Movntpd(src);
         }
 
         public Movntpd movntpd() => default;
@@ -11261,6 +12125,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovntpd src) => AsmMnemonics.VMOVNTPD;
 
             public static implicit operator AsmHexCode(Vmovntpd src) => src.Encoded;
+
+            public static implicit operator Vmovntpd(AsmHexCode src) => new Vmovntpd(src);
         }
 
         public Vmovntpd vmovntpd() => default;
@@ -11287,6 +12153,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movntps src) => AsmMnemonics.MOVNTPS;
 
             public static implicit operator AsmHexCode(Movntps src) => src.Encoded;
+
+            public static implicit operator Movntps(AsmHexCode src) => new Movntps(src);
         }
 
         public Movntps movntps() => default;
@@ -11313,6 +12181,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovntps src) => AsmMnemonics.VMOVNTPS;
 
             public static implicit operator AsmHexCode(Vmovntps src) => src.Encoded;
+
+            public static implicit operator Vmovntps(AsmHexCode src) => new Vmovntps(src);
         }
 
         public Vmovntps vmovntps() => default;
@@ -11339,6 +12209,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movntq src) => AsmMnemonics.MOVNTQ;
 
             public static implicit operator AsmHexCode(Movntq src) => src.Encoded;
+
+            public static implicit operator Movntq(AsmHexCode src) => new Movntq(src);
         }
 
         public Movntq movntq() => default;
@@ -11365,6 +12237,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movq2dq src) => AsmMnemonics.MOVQ2DQ;
 
             public static implicit operator AsmHexCode(Movq2dq src) => src.Encoded;
+
+            public static implicit operator Movq2dq(AsmHexCode src) => new Movq2dq(src);
         }
 
         public Movq2dq movq2dq() => default;
@@ -11391,6 +12265,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movs src) => AsmMnemonics.MOVS;
 
             public static implicit operator AsmHexCode(Movs src) => src.Encoded;
+
+            public static implicit operator Movs(AsmHexCode src) => new Movs(src);
         }
 
         public Movs movs() => default;
@@ -11417,6 +12293,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movsb src) => AsmMnemonics.MOVSB;
 
             public static implicit operator AsmHexCode(Movsb src) => src.Encoded;
+
+            public static implicit operator Movsb(AsmHexCode src) => new Movsb(src);
         }
 
         public Movsb movsb() => default;
@@ -11443,6 +12321,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movsw src) => AsmMnemonics.MOVSW;
 
             public static implicit operator AsmHexCode(Movsw src) => src.Encoded;
+
+            public static implicit operator Movsw(AsmHexCode src) => new Movsw(src);
         }
 
         public Movsw movsw() => default;
@@ -11469,6 +12349,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movsd src) => AsmMnemonics.MOVSD;
 
             public static implicit operator AsmHexCode(Movsd src) => src.Encoded;
+
+            public static implicit operator Movsd(AsmHexCode src) => new Movsd(src);
         }
 
         public Movsd movsd() => default;
@@ -11495,6 +12377,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movsq src) => AsmMnemonics.MOVSQ;
 
             public static implicit operator AsmHexCode(Movsq src) => src.Encoded;
+
+            public static implicit operator Movsq(AsmHexCode src) => new Movsq(src);
         }
 
         public Movsq movsq() => default;
@@ -11521,6 +12405,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovsd src) => AsmMnemonics.VMOVSD;
 
             public static implicit operator AsmHexCode(Vmovsd src) => src.Encoded;
+
+            public static implicit operator Vmovsd(AsmHexCode src) => new Vmovsd(src);
         }
 
         public Vmovsd vmovsd() => default;
@@ -11547,6 +12433,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movshdup src) => AsmMnemonics.MOVSHDUP;
 
             public static implicit operator AsmHexCode(Movshdup src) => src.Encoded;
+
+            public static implicit operator Movshdup(AsmHexCode src) => new Movshdup(src);
         }
 
         public Movshdup movshdup() => default;
@@ -11573,6 +12461,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovshdup src) => AsmMnemonics.VMOVSHDUP;
 
             public static implicit operator AsmHexCode(Vmovshdup src) => src.Encoded;
+
+            public static implicit operator Vmovshdup(AsmHexCode src) => new Vmovshdup(src);
         }
 
         public Vmovshdup vmovshdup() => default;
@@ -11599,6 +12489,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movsldup src) => AsmMnemonics.MOVSLDUP;
 
             public static implicit operator AsmHexCode(Movsldup src) => src.Encoded;
+
+            public static implicit operator Movsldup(AsmHexCode src) => new Movsldup(src);
         }
 
         public Movsldup movsldup() => default;
@@ -11625,6 +12517,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovsldup src) => AsmMnemonics.VMOVSLDUP;
 
             public static implicit operator AsmHexCode(Vmovsldup src) => src.Encoded;
+
+            public static implicit operator Vmovsldup(AsmHexCode src) => new Vmovsldup(src);
         }
 
         public Vmovsldup vmovsldup() => default;
@@ -11651,6 +12545,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movss src) => AsmMnemonics.MOVSS;
 
             public static implicit operator AsmHexCode(Movss src) => src.Encoded;
+
+            public static implicit operator Movss(AsmHexCode src) => new Movss(src);
         }
 
         public Movss movss() => default;
@@ -11677,6 +12573,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovss src) => AsmMnemonics.VMOVSS;
 
             public static implicit operator AsmHexCode(Vmovss src) => src.Encoded;
+
+            public static implicit operator Vmovss(AsmHexCode src) => new Vmovss(src);
         }
 
         public Vmovss vmovss() => default;
@@ -11703,6 +12601,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movsx src) => AsmMnemonics.MOVSX;
 
             public static implicit operator AsmHexCode(Movsx src) => src.Encoded;
+
+            public static implicit operator Movsx(AsmHexCode src) => new Movsx(src);
         }
 
         public Movsx movsx() => default;
@@ -11729,6 +12629,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movsxd src) => AsmMnemonics.MOVSXD;
 
             public static implicit operator AsmHexCode(Movsxd src) => src.Encoded;
+
+            public static implicit operator Movsxd(AsmHexCode src) => new Movsxd(src);
         }
 
         public Movsxd movsxd() => default;
@@ -11755,6 +12657,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movupd src) => AsmMnemonics.MOVUPD;
 
             public static implicit operator AsmHexCode(Movupd src) => src.Encoded;
+
+            public static implicit operator Movupd(AsmHexCode src) => new Movupd(src);
         }
 
         public Movupd movupd() => default;
@@ -11781,6 +12685,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovupd src) => AsmMnemonics.VMOVUPD;
 
             public static implicit operator AsmHexCode(Vmovupd src) => src.Encoded;
+
+            public static implicit operator Vmovupd(AsmHexCode src) => new Vmovupd(src);
         }
 
         public Vmovupd vmovupd() => default;
@@ -11807,6 +12713,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movups src) => AsmMnemonics.MOVUPS;
 
             public static implicit operator AsmHexCode(Movups src) => src.Encoded;
+
+            public static implicit operator Movups(AsmHexCode src) => new Movups(src);
         }
 
         public Movups movups() => default;
@@ -11833,6 +12741,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmovups src) => AsmMnemonics.VMOVUPS;
 
             public static implicit operator AsmHexCode(Vmovups src) => src.Encoded;
+
+            public static implicit operator Vmovups(AsmHexCode src) => new Vmovups(src);
         }
 
         public Vmovups vmovups() => default;
@@ -11859,6 +12769,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Movzx src) => AsmMnemonics.MOVZX;
 
             public static implicit operator AsmHexCode(Movzx src) => src.Encoded;
+
+            public static implicit operator Movzx(AsmHexCode src) => new Movzx(src);
         }
 
         public Movzx movzx() => default;
@@ -11885,6 +12797,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mpsadbw src) => AsmMnemonics.MPSADBW;
 
             public static implicit operator AsmHexCode(Mpsadbw src) => src.Encoded;
+
+            public static implicit operator Mpsadbw(AsmHexCode src) => new Mpsadbw(src);
         }
 
         public Mpsadbw mpsadbw() => default;
@@ -11911,6 +12825,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmpsadbw src) => AsmMnemonics.VMPSADBW;
 
             public static implicit operator AsmHexCode(Vmpsadbw src) => src.Encoded;
+
+            public static implicit operator Vmpsadbw(AsmHexCode src) => new Vmpsadbw(src);
         }
 
         public Vmpsadbw vmpsadbw() => default;
@@ -11937,6 +12853,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mul src) => AsmMnemonics.MUL;
 
             public static implicit operator AsmHexCode(Mul src) => src.Encoded;
+
+            public static implicit operator Mul(AsmHexCode src) => new Mul(src);
         }
 
         public Mul mul() => default;
@@ -11963,6 +12881,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mulpd src) => AsmMnemonics.MULPD;
 
             public static implicit operator AsmHexCode(Mulpd src) => src.Encoded;
+
+            public static implicit operator Mulpd(AsmHexCode src) => new Mulpd(src);
         }
 
         public Mulpd mulpd() => default;
@@ -11989,6 +12909,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmulpd src) => AsmMnemonics.VMULPD;
 
             public static implicit operator AsmHexCode(Vmulpd src) => src.Encoded;
+
+            public static implicit operator Vmulpd(AsmHexCode src) => new Vmulpd(src);
         }
 
         public Vmulpd vmulpd() => default;
@@ -12015,6 +12937,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mulps src) => AsmMnemonics.MULPS;
 
             public static implicit operator AsmHexCode(Mulps src) => src.Encoded;
+
+            public static implicit operator Mulps(AsmHexCode src) => new Mulps(src);
         }
 
         public Mulps mulps() => default;
@@ -12041,6 +12965,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmulps src) => AsmMnemonics.VMULPS;
 
             public static implicit operator AsmHexCode(Vmulps src) => src.Encoded;
+
+            public static implicit operator Vmulps(AsmHexCode src) => new Vmulps(src);
         }
 
         public Vmulps vmulps() => default;
@@ -12067,6 +12993,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mulsd src) => AsmMnemonics.MULSD;
 
             public static implicit operator AsmHexCode(Mulsd src) => src.Encoded;
+
+            public static implicit operator Mulsd(AsmHexCode src) => new Mulsd(src);
         }
 
         public Mulsd mulsd() => default;
@@ -12093,6 +13021,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmulsd src) => AsmMnemonics.VMULSD;
 
             public static implicit operator AsmHexCode(Vmulsd src) => src.Encoded;
+
+            public static implicit operator Vmulsd(AsmHexCode src) => new Vmulsd(src);
         }
 
         public Vmulsd vmulsd() => default;
@@ -12119,6 +13049,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mulss src) => AsmMnemonics.MULSS;
 
             public static implicit operator AsmHexCode(Mulss src) => src.Encoded;
+
+            public static implicit operator Mulss(AsmHexCode src) => new Mulss(src);
         }
 
         public Mulss mulss() => default;
@@ -12145,6 +13077,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmulss src) => AsmMnemonics.VMULSS;
 
             public static implicit operator AsmHexCode(Vmulss src) => src.Encoded;
+
+            public static implicit operator Vmulss(AsmHexCode src) => new Vmulss(src);
         }
 
         public Vmulss vmulss() => default;
@@ -12171,6 +13105,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mulx src) => AsmMnemonics.MULX;
 
             public static implicit operator AsmHexCode(Mulx src) => src.Encoded;
+
+            public static implicit operator Mulx(AsmHexCode src) => new Mulx(src);
         }
 
         public Mulx mulx() => default;
@@ -12197,6 +13133,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Mwait src) => AsmMnemonics.MWAIT;
 
             public static implicit operator AsmHexCode(Mwait src) => src.Encoded;
+
+            public static implicit operator Mwait(AsmHexCode src) => new Mwait(src);
         }
 
         public Mwait mwait() => default;
@@ -12223,6 +13161,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Neg src) => AsmMnemonics.NEG;
 
             public static implicit operator AsmHexCode(Neg src) => src.Encoded;
+
+            public static implicit operator Neg(AsmHexCode src) => new Neg(src);
         }
 
         public Neg neg() => default;
@@ -12249,6 +13189,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Nop src) => AsmMnemonics.NOP;
 
             public static implicit operator AsmHexCode(Nop src) => src.Encoded;
+
+            public static implicit operator Nop(AsmHexCode src) => new Nop(src);
         }
 
         public Nop nop() => default;
@@ -12275,6 +13217,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Not src) => AsmMnemonics.NOT;
 
             public static implicit operator AsmHexCode(Not src) => src.Encoded;
+
+            public static implicit operator Not(AsmHexCode src) => new Not(src);
         }
 
         public Not not() => default;
@@ -12301,6 +13245,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Or src) => AsmMnemonics.OR;
 
             public static implicit operator AsmHexCode(Or src) => src.Encoded;
+
+            public static implicit operator Or(AsmHexCode src) => new Or(src);
         }
 
         public Or or() => default;
@@ -12327,6 +13273,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Orpd src) => AsmMnemonics.ORPD;
 
             public static implicit operator AsmHexCode(Orpd src) => src.Encoded;
+
+            public static implicit operator Orpd(AsmHexCode src) => new Orpd(src);
         }
 
         public Orpd orpd() => default;
@@ -12353,6 +13301,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vorpd src) => AsmMnemonics.VORPD;
 
             public static implicit operator AsmHexCode(Vorpd src) => src.Encoded;
+
+            public static implicit operator Vorpd(AsmHexCode src) => new Vorpd(src);
         }
 
         public Vorpd vorpd() => default;
@@ -12379,6 +13329,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Orps src) => AsmMnemonics.ORPS;
 
             public static implicit operator AsmHexCode(Orps src) => src.Encoded;
+
+            public static implicit operator Orps(AsmHexCode src) => new Orps(src);
         }
 
         public Orps orps() => default;
@@ -12405,6 +13357,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vorps src) => AsmMnemonics.VORPS;
 
             public static implicit operator AsmHexCode(Vorps src) => src.Encoded;
+
+            public static implicit operator Vorps(AsmHexCode src) => new Vorps(src);
         }
 
         public Vorps vorps() => default;
@@ -12431,6 +13385,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Out src) => AsmMnemonics.OUT;
 
             public static implicit operator AsmHexCode(Out src) => src.Encoded;
+
+            public static implicit operator Out(AsmHexCode src) => new Out(src);
         }
 
         public Out @out() => default;
@@ -12457,6 +13413,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Outs src) => AsmMnemonics.OUTS;
 
             public static implicit operator AsmHexCode(Outs src) => src.Encoded;
+
+            public static implicit operator Outs(AsmHexCode src) => new Outs(src);
         }
 
         public Outs outs() => default;
@@ -12483,6 +13441,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Outsb src) => AsmMnemonics.OUTSB;
 
             public static implicit operator AsmHexCode(Outsb src) => src.Encoded;
+
+            public static implicit operator Outsb(AsmHexCode src) => new Outsb(src);
         }
 
         public Outsb outsb() => default;
@@ -12509,6 +13469,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Outsw src) => AsmMnemonics.OUTSW;
 
             public static implicit operator AsmHexCode(Outsw src) => src.Encoded;
+
+            public static implicit operator Outsw(AsmHexCode src) => new Outsw(src);
         }
 
         public Outsw outsw() => default;
@@ -12535,6 +13497,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Outsd src) => AsmMnemonics.OUTSD;
 
             public static implicit operator AsmHexCode(Outsd src) => src.Encoded;
+
+            public static implicit operator Outsd(AsmHexCode src) => new Outsd(src);
         }
 
         public Outsd outsd() => default;
@@ -12561,6 +13525,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pabsb src) => AsmMnemonics.PABSB;
 
             public static implicit operator AsmHexCode(Pabsb src) => src.Encoded;
+
+            public static implicit operator Pabsb(AsmHexCode src) => new Pabsb(src);
         }
 
         public Pabsb pabsb() => default;
@@ -12587,6 +13553,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pabsw src) => AsmMnemonics.PABSW;
 
             public static implicit operator AsmHexCode(Pabsw src) => src.Encoded;
+
+            public static implicit operator Pabsw(AsmHexCode src) => new Pabsw(src);
         }
 
         public Pabsw pabsw() => default;
@@ -12613,6 +13581,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pabsd src) => AsmMnemonics.PABSD;
 
             public static implicit operator AsmHexCode(Pabsd src) => src.Encoded;
+
+            public static implicit operator Pabsd(AsmHexCode src) => new Pabsd(src);
         }
 
         public Pabsd pabsd() => default;
@@ -12639,6 +13609,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpabsb src) => AsmMnemonics.VPABSB;
 
             public static implicit operator AsmHexCode(Vpabsb src) => src.Encoded;
+
+            public static implicit operator Vpabsb(AsmHexCode src) => new Vpabsb(src);
         }
 
         public Vpabsb vpabsb() => default;
@@ -12665,6 +13637,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpabsw src) => AsmMnemonics.VPABSW;
 
             public static implicit operator AsmHexCode(Vpabsw src) => src.Encoded;
+
+            public static implicit operator Vpabsw(AsmHexCode src) => new Vpabsw(src);
         }
 
         public Vpabsw vpabsw() => default;
@@ -12691,6 +13665,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpabsd src) => AsmMnemonics.VPABSD;
 
             public static implicit operator AsmHexCode(Vpabsd src) => src.Encoded;
+
+            public static implicit operator Vpabsd(AsmHexCode src) => new Vpabsd(src);
         }
 
         public Vpabsd vpabsd() => default;
@@ -12717,6 +13693,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Packsswb src) => AsmMnemonics.PACKSSWB;
 
             public static implicit operator AsmHexCode(Packsswb src) => src.Encoded;
+
+            public static implicit operator Packsswb(AsmHexCode src) => new Packsswb(src);
         }
 
         public Packsswb packsswb() => default;
@@ -12743,6 +13721,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Packssdw src) => AsmMnemonics.PACKSSDW;
 
             public static implicit operator AsmHexCode(Packssdw src) => src.Encoded;
+
+            public static implicit operator Packssdw(AsmHexCode src) => new Packssdw(src);
         }
 
         public Packssdw packssdw() => default;
@@ -12769,6 +13749,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpacksswb src) => AsmMnemonics.VPACKSSWB;
 
             public static implicit operator AsmHexCode(Vpacksswb src) => src.Encoded;
+
+            public static implicit operator Vpacksswb(AsmHexCode src) => new Vpacksswb(src);
         }
 
         public Vpacksswb vpacksswb() => default;
@@ -12795,6 +13777,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpackssdw src) => AsmMnemonics.VPACKSSDW;
 
             public static implicit operator AsmHexCode(Vpackssdw src) => src.Encoded;
+
+            public static implicit operator Vpackssdw(AsmHexCode src) => new Vpackssdw(src);
         }
 
         public Vpackssdw vpackssdw() => default;
@@ -12821,6 +13805,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Packusdw src) => AsmMnemonics.PACKUSDW;
 
             public static implicit operator AsmHexCode(Packusdw src) => src.Encoded;
+
+            public static implicit operator Packusdw(AsmHexCode src) => new Packusdw(src);
         }
 
         public Packusdw packusdw() => default;
@@ -12847,6 +13833,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpackusdw src) => AsmMnemonics.VPACKUSDW;
 
             public static implicit operator AsmHexCode(Vpackusdw src) => src.Encoded;
+
+            public static implicit operator Vpackusdw(AsmHexCode src) => new Vpackusdw(src);
         }
 
         public Vpackusdw vpackusdw() => default;
@@ -12873,6 +13861,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Packuswb src) => AsmMnemonics.PACKUSWB;
 
             public static implicit operator AsmHexCode(Packuswb src) => src.Encoded;
+
+            public static implicit operator Packuswb(AsmHexCode src) => new Packuswb(src);
         }
 
         public Packuswb packuswb() => default;
@@ -12899,6 +13889,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpackuswb src) => AsmMnemonics.VPACKUSWB;
 
             public static implicit operator AsmHexCode(Vpackuswb src) => src.Encoded;
+
+            public static implicit operator Vpackuswb(AsmHexCode src) => new Vpackuswb(src);
         }
 
         public Vpackuswb vpackuswb() => default;
@@ -12925,6 +13917,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Paddb src) => AsmMnemonics.PADDB;
 
             public static implicit operator AsmHexCode(Paddb src) => src.Encoded;
+
+            public static implicit operator Paddb(AsmHexCode src) => new Paddb(src);
         }
 
         public Paddb paddb() => default;
@@ -12951,6 +13945,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Paddw src) => AsmMnemonics.PADDW;
 
             public static implicit operator AsmHexCode(Paddw src) => src.Encoded;
+
+            public static implicit operator Paddw(AsmHexCode src) => new Paddw(src);
         }
 
         public Paddw paddw() => default;
@@ -12977,6 +13973,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Paddd src) => AsmMnemonics.PADDD;
 
             public static implicit operator AsmHexCode(Paddd src) => src.Encoded;
+
+            public static implicit operator Paddd(AsmHexCode src) => new Paddd(src);
         }
 
         public Paddd paddd() => default;
@@ -13003,6 +14001,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpaddb src) => AsmMnemonics.VPADDB;
 
             public static implicit operator AsmHexCode(Vpaddb src) => src.Encoded;
+
+            public static implicit operator Vpaddb(AsmHexCode src) => new Vpaddb(src);
         }
 
         public Vpaddb vpaddb() => default;
@@ -13029,6 +14029,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpaddw src) => AsmMnemonics.VPADDW;
 
             public static implicit operator AsmHexCode(Vpaddw src) => src.Encoded;
+
+            public static implicit operator Vpaddw(AsmHexCode src) => new Vpaddw(src);
         }
 
         public Vpaddw vpaddw() => default;
@@ -13055,6 +14057,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpaddd src) => AsmMnemonics.VPADDD;
 
             public static implicit operator AsmHexCode(Vpaddd src) => src.Encoded;
+
+            public static implicit operator Vpaddd(AsmHexCode src) => new Vpaddd(src);
         }
 
         public Vpaddd vpaddd() => default;
@@ -13081,6 +14085,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Paddq src) => AsmMnemonics.PADDQ;
 
             public static implicit operator AsmHexCode(Paddq src) => src.Encoded;
+
+            public static implicit operator Paddq(AsmHexCode src) => new Paddq(src);
         }
 
         public Paddq paddq() => default;
@@ -13107,6 +14113,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpaddq src) => AsmMnemonics.VPADDQ;
 
             public static implicit operator AsmHexCode(Vpaddq src) => src.Encoded;
+
+            public static implicit operator Vpaddq(AsmHexCode src) => new Vpaddq(src);
         }
 
         public Vpaddq vpaddq() => default;
@@ -13133,6 +14141,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Paddsb src) => AsmMnemonics.PADDSB;
 
             public static implicit operator AsmHexCode(Paddsb src) => src.Encoded;
+
+            public static implicit operator Paddsb(AsmHexCode src) => new Paddsb(src);
         }
 
         public Paddsb paddsb() => default;
@@ -13159,6 +14169,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Paddsw src) => AsmMnemonics.PADDSW;
 
             public static implicit operator AsmHexCode(Paddsw src) => src.Encoded;
+
+            public static implicit operator Paddsw(AsmHexCode src) => new Paddsw(src);
         }
 
         public Paddsw paddsw() => default;
@@ -13185,6 +14197,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpaddsb src) => AsmMnemonics.VPADDSB;
 
             public static implicit operator AsmHexCode(Vpaddsb src) => src.Encoded;
+
+            public static implicit operator Vpaddsb(AsmHexCode src) => new Vpaddsb(src);
         }
 
         public Vpaddsb vpaddsb() => default;
@@ -13211,6 +14225,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpaddsw src) => AsmMnemonics.VPADDSW;
 
             public static implicit operator AsmHexCode(Vpaddsw src) => src.Encoded;
+
+            public static implicit operator Vpaddsw(AsmHexCode src) => new Vpaddsw(src);
         }
 
         public Vpaddsw vpaddsw() => default;
@@ -13237,6 +14253,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Paddusb src) => AsmMnemonics.PADDUSB;
 
             public static implicit operator AsmHexCode(Paddusb src) => src.Encoded;
+
+            public static implicit operator Paddusb(AsmHexCode src) => new Paddusb(src);
         }
 
         public Paddusb paddusb() => default;
@@ -13263,6 +14281,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Paddusw src) => AsmMnemonics.PADDUSW;
 
             public static implicit operator AsmHexCode(Paddusw src) => src.Encoded;
+
+            public static implicit operator Paddusw(AsmHexCode src) => new Paddusw(src);
         }
 
         public Paddusw paddusw() => default;
@@ -13289,6 +14309,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpaddusb src) => AsmMnemonics.VPADDUSB;
 
             public static implicit operator AsmHexCode(Vpaddusb src) => src.Encoded;
+
+            public static implicit operator Vpaddusb(AsmHexCode src) => new Vpaddusb(src);
         }
 
         public Vpaddusb vpaddusb() => default;
@@ -13315,6 +14337,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpaddusw src) => AsmMnemonics.VPADDUSW;
 
             public static implicit operator AsmHexCode(Vpaddusw src) => src.Encoded;
+
+            public static implicit operator Vpaddusw(AsmHexCode src) => new Vpaddusw(src);
         }
 
         public Vpaddusw vpaddusw() => default;
@@ -13341,6 +14365,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Palignr src) => AsmMnemonics.PALIGNR;
 
             public static implicit operator AsmHexCode(Palignr src) => src.Encoded;
+
+            public static implicit operator Palignr(AsmHexCode src) => new Palignr(src);
         }
 
         public Palignr palignr() => default;
@@ -13367,6 +14393,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpalignr src) => AsmMnemonics.VPALIGNR;
 
             public static implicit operator AsmHexCode(Vpalignr src) => src.Encoded;
+
+            public static implicit operator Vpalignr(AsmHexCode src) => new Vpalignr(src);
         }
 
         public Vpalignr vpalignr() => default;
@@ -13393,6 +14421,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pand src) => AsmMnemonics.PAND;
 
             public static implicit operator AsmHexCode(Pand src) => src.Encoded;
+
+            public static implicit operator Pand(AsmHexCode src) => new Pand(src);
         }
 
         public Pand pand() => default;
@@ -13419,6 +14449,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpand src) => AsmMnemonics.VPAND;
 
             public static implicit operator AsmHexCode(Vpand src) => src.Encoded;
+
+            public static implicit operator Vpand(AsmHexCode src) => new Vpand(src);
         }
 
         public Vpand vpand() => default;
@@ -13445,6 +14477,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pandn src) => AsmMnemonics.PANDN;
 
             public static implicit operator AsmHexCode(Pandn src) => src.Encoded;
+
+            public static implicit operator Pandn(AsmHexCode src) => new Pandn(src);
         }
 
         public Pandn pandn() => default;
@@ -13471,6 +14505,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpandn src) => AsmMnemonics.VPANDN;
 
             public static implicit operator AsmHexCode(Vpandn src) => src.Encoded;
+
+            public static implicit operator Vpandn(AsmHexCode src) => new Vpandn(src);
         }
 
         public Vpandn vpandn() => default;
@@ -13497,6 +14533,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pause src) => AsmMnemonics.PAUSE;
 
             public static implicit operator AsmHexCode(Pause src) => src.Encoded;
+
+            public static implicit operator Pause(AsmHexCode src) => new Pause(src);
         }
 
         public Pause pause() => default;
@@ -13523,6 +14561,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pavgb src) => AsmMnemonics.PAVGB;
 
             public static implicit operator AsmHexCode(Pavgb src) => src.Encoded;
+
+            public static implicit operator Pavgb(AsmHexCode src) => new Pavgb(src);
         }
 
         public Pavgb pavgb() => default;
@@ -13549,6 +14589,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pavgw src) => AsmMnemonics.PAVGW;
 
             public static implicit operator AsmHexCode(Pavgw src) => src.Encoded;
+
+            public static implicit operator Pavgw(AsmHexCode src) => new Pavgw(src);
         }
 
         public Pavgw pavgw() => default;
@@ -13575,6 +14617,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpavgb src) => AsmMnemonics.VPAVGB;
 
             public static implicit operator AsmHexCode(Vpavgb src) => src.Encoded;
+
+            public static implicit operator Vpavgb(AsmHexCode src) => new Vpavgb(src);
         }
 
         public Vpavgb vpavgb() => default;
@@ -13601,6 +14645,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpavgw src) => AsmMnemonics.VPAVGW;
 
             public static implicit operator AsmHexCode(Vpavgw src) => src.Encoded;
+
+            public static implicit operator Vpavgw(AsmHexCode src) => new Vpavgw(src);
         }
 
         public Vpavgw vpavgw() => default;
@@ -13627,6 +14673,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pblendvb src) => AsmMnemonics.PBLENDVB;
 
             public static implicit operator AsmHexCode(Pblendvb src) => src.Encoded;
+
+            public static implicit operator Pblendvb(AsmHexCode src) => new Pblendvb(src);
         }
 
         public Pblendvb pblendvb() => default;
@@ -13653,6 +14701,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpblendvb src) => AsmMnemonics.VPBLENDVB;
 
             public static implicit operator AsmHexCode(Vpblendvb src) => src.Encoded;
+
+            public static implicit operator Vpblendvb(AsmHexCode src) => new Vpblendvb(src);
         }
 
         public Vpblendvb vpblendvb() => default;
@@ -13679,6 +14729,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pblendw src) => AsmMnemonics.PBLENDW;
 
             public static implicit operator AsmHexCode(Pblendw src) => src.Encoded;
+
+            public static implicit operator Pblendw(AsmHexCode src) => new Pblendw(src);
         }
 
         public Pblendw pblendw() => default;
@@ -13705,6 +14757,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpblendw src) => AsmMnemonics.VPBLENDW;
 
             public static implicit operator AsmHexCode(Vpblendw src) => src.Encoded;
+
+            public static implicit operator Vpblendw(AsmHexCode src) => new Vpblendw(src);
         }
 
         public Vpblendw vpblendw() => default;
@@ -13731,6 +14785,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pclmulqdq src) => AsmMnemonics.PCLMULQDQ;
 
             public static implicit operator AsmHexCode(Pclmulqdq src) => src.Encoded;
+
+            public static implicit operator Pclmulqdq(AsmHexCode src) => new Pclmulqdq(src);
         }
 
         public Pclmulqdq pclmulqdq() => default;
@@ -13757,6 +14813,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpclmulqdq src) => AsmMnemonics.VPCLMULQDQ;
 
             public static implicit operator AsmHexCode(Vpclmulqdq src) => src.Encoded;
+
+            public static implicit operator Vpclmulqdq(AsmHexCode src) => new Vpclmulqdq(src);
         }
 
         public Vpclmulqdq vpclmulqdq() => default;
@@ -13783,6 +14841,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpeqb src) => AsmMnemonics.PCMPEQB;
 
             public static implicit operator AsmHexCode(Pcmpeqb src) => src.Encoded;
+
+            public static implicit operator Pcmpeqb(AsmHexCode src) => new Pcmpeqb(src);
         }
 
         public Pcmpeqb pcmpeqb() => default;
@@ -13809,6 +14869,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpeqw src) => AsmMnemonics.PCMPEQW;
 
             public static implicit operator AsmHexCode(Pcmpeqw src) => src.Encoded;
+
+            public static implicit operator Pcmpeqw(AsmHexCode src) => new Pcmpeqw(src);
         }
 
         public Pcmpeqw pcmpeqw() => default;
@@ -13835,6 +14897,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpeqd src) => AsmMnemonics.PCMPEQD;
 
             public static implicit operator AsmHexCode(Pcmpeqd src) => src.Encoded;
+
+            public static implicit operator Pcmpeqd(AsmHexCode src) => new Pcmpeqd(src);
         }
 
         public Pcmpeqd pcmpeqd() => default;
@@ -13861,6 +14925,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpeqb src) => AsmMnemonics.VPCMPEQB;
 
             public static implicit operator AsmHexCode(Vpcmpeqb src) => src.Encoded;
+
+            public static implicit operator Vpcmpeqb(AsmHexCode src) => new Vpcmpeqb(src);
         }
 
         public Vpcmpeqb vpcmpeqb() => default;
@@ -13887,6 +14953,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpeqw src) => AsmMnemonics.VPCMPEQW;
 
             public static implicit operator AsmHexCode(Vpcmpeqw src) => src.Encoded;
+
+            public static implicit operator Vpcmpeqw(AsmHexCode src) => new Vpcmpeqw(src);
         }
 
         public Vpcmpeqw vpcmpeqw() => default;
@@ -13913,6 +14981,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpeqd src) => AsmMnemonics.VPCMPEQD;
 
             public static implicit operator AsmHexCode(Vpcmpeqd src) => src.Encoded;
+
+            public static implicit operator Vpcmpeqd(AsmHexCode src) => new Vpcmpeqd(src);
         }
 
         public Vpcmpeqd vpcmpeqd() => default;
@@ -13939,6 +15009,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpeqq src) => AsmMnemonics.PCMPEQQ;
 
             public static implicit operator AsmHexCode(Pcmpeqq src) => src.Encoded;
+
+            public static implicit operator Pcmpeqq(AsmHexCode src) => new Pcmpeqq(src);
         }
 
         public Pcmpeqq pcmpeqq() => default;
@@ -13965,6 +15037,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpeqq src) => AsmMnemonics.VPCMPEQQ;
 
             public static implicit operator AsmHexCode(Vpcmpeqq src) => src.Encoded;
+
+            public static implicit operator Vpcmpeqq(AsmHexCode src) => new Vpcmpeqq(src);
         }
 
         public Vpcmpeqq vpcmpeqq() => default;
@@ -13991,6 +15065,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpestri src) => AsmMnemonics.PCMPESTRI;
 
             public static implicit operator AsmHexCode(Pcmpestri src) => src.Encoded;
+
+            public static implicit operator Pcmpestri(AsmHexCode src) => new Pcmpestri(src);
         }
 
         public Pcmpestri pcmpestri() => default;
@@ -14017,6 +15093,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpestri src) => AsmMnemonics.VPCMPESTRI;
 
             public static implicit operator AsmHexCode(Vpcmpestri src) => src.Encoded;
+
+            public static implicit operator Vpcmpestri(AsmHexCode src) => new Vpcmpestri(src);
         }
 
         public Vpcmpestri vpcmpestri() => default;
@@ -14043,6 +15121,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpestrm src) => AsmMnemonics.PCMPESTRM;
 
             public static implicit operator AsmHexCode(Pcmpestrm src) => src.Encoded;
+
+            public static implicit operator Pcmpestrm(AsmHexCode src) => new Pcmpestrm(src);
         }
 
         public Pcmpestrm pcmpestrm() => default;
@@ -14069,6 +15149,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpestrm src) => AsmMnemonics.VPCMPESTRM;
 
             public static implicit operator AsmHexCode(Vpcmpestrm src) => src.Encoded;
+
+            public static implicit operator Vpcmpestrm(AsmHexCode src) => new Vpcmpestrm(src);
         }
 
         public Vpcmpestrm vpcmpestrm() => default;
@@ -14095,6 +15177,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpgtb src) => AsmMnemonics.PCMPGTB;
 
             public static implicit operator AsmHexCode(Pcmpgtb src) => src.Encoded;
+
+            public static implicit operator Pcmpgtb(AsmHexCode src) => new Pcmpgtb(src);
         }
 
         public Pcmpgtb pcmpgtb() => default;
@@ -14121,6 +15205,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpgtw src) => AsmMnemonics.PCMPGTW;
 
             public static implicit operator AsmHexCode(Pcmpgtw src) => src.Encoded;
+
+            public static implicit operator Pcmpgtw(AsmHexCode src) => new Pcmpgtw(src);
         }
 
         public Pcmpgtw pcmpgtw() => default;
@@ -14147,6 +15233,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpgtd src) => AsmMnemonics.PCMPGTD;
 
             public static implicit operator AsmHexCode(Pcmpgtd src) => src.Encoded;
+
+            public static implicit operator Pcmpgtd(AsmHexCode src) => new Pcmpgtd(src);
         }
 
         public Pcmpgtd pcmpgtd() => default;
@@ -14173,6 +15261,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpgtb src) => AsmMnemonics.VPCMPGTB;
 
             public static implicit operator AsmHexCode(Vpcmpgtb src) => src.Encoded;
+
+            public static implicit operator Vpcmpgtb(AsmHexCode src) => new Vpcmpgtb(src);
         }
 
         public Vpcmpgtb vpcmpgtb() => default;
@@ -14199,6 +15289,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpgtw src) => AsmMnemonics.VPCMPGTW;
 
             public static implicit operator AsmHexCode(Vpcmpgtw src) => src.Encoded;
+
+            public static implicit operator Vpcmpgtw(AsmHexCode src) => new Vpcmpgtw(src);
         }
 
         public Vpcmpgtw vpcmpgtw() => default;
@@ -14225,6 +15317,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpgtd src) => AsmMnemonics.VPCMPGTD;
 
             public static implicit operator AsmHexCode(Vpcmpgtd src) => src.Encoded;
+
+            public static implicit operator Vpcmpgtd(AsmHexCode src) => new Vpcmpgtd(src);
         }
 
         public Vpcmpgtd vpcmpgtd() => default;
@@ -14251,6 +15345,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpgtq src) => AsmMnemonics.PCMPGTQ;
 
             public static implicit operator AsmHexCode(Pcmpgtq src) => src.Encoded;
+
+            public static implicit operator Pcmpgtq(AsmHexCode src) => new Pcmpgtq(src);
         }
 
         public Pcmpgtq pcmpgtq() => default;
@@ -14277,6 +15373,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpgtq src) => AsmMnemonics.VPCMPGTQ;
 
             public static implicit operator AsmHexCode(Vpcmpgtq src) => src.Encoded;
+
+            public static implicit operator Vpcmpgtq(AsmHexCode src) => new Vpcmpgtq(src);
         }
 
         public Vpcmpgtq vpcmpgtq() => default;
@@ -14303,6 +15401,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpistri src) => AsmMnemonics.PCMPISTRI;
 
             public static implicit operator AsmHexCode(Pcmpistri src) => src.Encoded;
+
+            public static implicit operator Pcmpistri(AsmHexCode src) => new Pcmpistri(src);
         }
 
         public Pcmpistri pcmpistri() => default;
@@ -14329,6 +15429,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpistri src) => AsmMnemonics.VPCMPISTRI;
 
             public static implicit operator AsmHexCode(Vpcmpistri src) => src.Encoded;
+
+            public static implicit operator Vpcmpistri(AsmHexCode src) => new Vpcmpistri(src);
         }
 
         public Vpcmpistri vpcmpistri() => default;
@@ -14355,6 +15457,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pcmpistrm src) => AsmMnemonics.PCMPISTRM;
 
             public static implicit operator AsmHexCode(Pcmpistrm src) => src.Encoded;
+
+            public static implicit operator Pcmpistrm(AsmHexCode src) => new Pcmpistrm(src);
         }
 
         public Pcmpistrm pcmpistrm() => default;
@@ -14381,6 +15485,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpcmpistrm src) => AsmMnemonics.VPCMPISTRM;
 
             public static implicit operator AsmHexCode(Vpcmpistrm src) => src.Encoded;
+
+            public static implicit operator Vpcmpistrm(AsmHexCode src) => new Vpcmpistrm(src);
         }
 
         public Vpcmpistrm vpcmpistrm() => default;
@@ -14407,6 +15513,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pdep src) => AsmMnemonics.PDEP;
 
             public static implicit operator AsmHexCode(Pdep src) => src.Encoded;
+
+            public static implicit operator Pdep(AsmHexCode src) => new Pdep(src);
         }
 
         public Pdep pdep() => default;
@@ -14433,6 +15541,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pext src) => AsmMnemonics.PEXT;
 
             public static implicit operator AsmHexCode(Pext src) => src.Encoded;
+
+            public static implicit operator Pext(AsmHexCode src) => new Pext(src);
         }
 
         public Pext pext() => default;
@@ -14459,6 +15569,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pextrb src) => AsmMnemonics.PEXTRB;
 
             public static implicit operator AsmHexCode(Pextrb src) => src.Encoded;
+
+            public static implicit operator Pextrb(AsmHexCode src) => new Pextrb(src);
         }
 
         public Pextrb pextrb() => default;
@@ -14485,6 +15597,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pextrd src) => AsmMnemonics.PEXTRD;
 
             public static implicit operator AsmHexCode(Pextrd src) => src.Encoded;
+
+            public static implicit operator Pextrd(AsmHexCode src) => new Pextrd(src);
         }
 
         public Pextrd pextrd() => default;
@@ -14511,6 +15625,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pextrq src) => AsmMnemonics.PEXTRQ;
 
             public static implicit operator AsmHexCode(Pextrq src) => src.Encoded;
+
+            public static implicit operator Pextrq(AsmHexCode src) => new Pextrq(src);
         }
 
         public Pextrq pextrq() => default;
@@ -14537,6 +15653,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpextrb src) => AsmMnemonics.VPEXTRB;
 
             public static implicit operator AsmHexCode(Vpextrb src) => src.Encoded;
+
+            public static implicit operator Vpextrb(AsmHexCode src) => new Vpextrb(src);
         }
 
         public Vpextrb vpextrb() => default;
@@ -14563,6 +15681,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpextrd src) => AsmMnemonics.VPEXTRD;
 
             public static implicit operator AsmHexCode(Vpextrd src) => src.Encoded;
+
+            public static implicit operator Vpextrd(AsmHexCode src) => new Vpextrd(src);
         }
 
         public Vpextrd vpextrd() => default;
@@ -14589,6 +15709,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpextrq src) => AsmMnemonics.VPEXTRQ;
 
             public static implicit operator AsmHexCode(Vpextrq src) => src.Encoded;
+
+            public static implicit operator Vpextrq(AsmHexCode src) => new Vpextrq(src);
         }
 
         public Vpextrq vpextrq() => default;
@@ -14615,6 +15737,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pextrw src) => AsmMnemonics.PEXTRW;
 
             public static implicit operator AsmHexCode(Pextrw src) => src.Encoded;
+
+            public static implicit operator Pextrw(AsmHexCode src) => new Pextrw(src);
         }
 
         public Pextrw pextrw() => default;
@@ -14641,6 +15765,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpextrw src) => AsmMnemonics.VPEXTRW;
 
             public static implicit operator AsmHexCode(Vpextrw src) => src.Encoded;
+
+            public static implicit operator Vpextrw(AsmHexCode src) => new Vpextrw(src);
         }
 
         public Vpextrw vpextrw() => default;
@@ -14667,6 +15793,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Phaddw src) => AsmMnemonics.PHADDW;
 
             public static implicit operator AsmHexCode(Phaddw src) => src.Encoded;
+
+            public static implicit operator Phaddw(AsmHexCode src) => new Phaddw(src);
         }
 
         public Phaddw phaddw() => default;
@@ -14693,6 +15821,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Phaddd src) => AsmMnemonics.PHADDD;
 
             public static implicit operator AsmHexCode(Phaddd src) => src.Encoded;
+
+            public static implicit operator Phaddd(AsmHexCode src) => new Phaddd(src);
         }
 
         public Phaddd phaddd() => default;
@@ -14719,6 +15849,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vphaddw src) => AsmMnemonics.VPHADDW;
 
             public static implicit operator AsmHexCode(Vphaddw src) => src.Encoded;
+
+            public static implicit operator Vphaddw(AsmHexCode src) => new Vphaddw(src);
         }
 
         public Vphaddw vphaddw() => default;
@@ -14745,6 +15877,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vphaddd src) => AsmMnemonics.VPHADDD;
 
             public static implicit operator AsmHexCode(Vphaddd src) => src.Encoded;
+
+            public static implicit operator Vphaddd(AsmHexCode src) => new Vphaddd(src);
         }
 
         public Vphaddd vphaddd() => default;
@@ -14771,6 +15905,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Phaddsw src) => AsmMnemonics.PHADDSW;
 
             public static implicit operator AsmHexCode(Phaddsw src) => src.Encoded;
+
+            public static implicit operator Phaddsw(AsmHexCode src) => new Phaddsw(src);
         }
 
         public Phaddsw phaddsw() => default;
@@ -14797,6 +15933,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vphaddsw src) => AsmMnemonics.VPHADDSW;
 
             public static implicit operator AsmHexCode(Vphaddsw src) => src.Encoded;
+
+            public static implicit operator Vphaddsw(AsmHexCode src) => new Vphaddsw(src);
         }
 
         public Vphaddsw vphaddsw() => default;
@@ -14823,6 +15961,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Phminposuw src) => AsmMnemonics.PHMINPOSUW;
 
             public static implicit operator AsmHexCode(Phminposuw src) => src.Encoded;
+
+            public static implicit operator Phminposuw(AsmHexCode src) => new Phminposuw(src);
         }
 
         public Phminposuw phminposuw() => default;
@@ -14849,6 +15989,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vphminposuw src) => AsmMnemonics.VPHMINPOSUW;
 
             public static implicit operator AsmHexCode(Vphminposuw src) => src.Encoded;
+
+            public static implicit operator Vphminposuw(AsmHexCode src) => new Vphminposuw(src);
         }
 
         public Vphminposuw vphminposuw() => default;
@@ -14875,6 +16017,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Phsubw src) => AsmMnemonics.PHSUBW;
 
             public static implicit operator AsmHexCode(Phsubw src) => src.Encoded;
+
+            public static implicit operator Phsubw(AsmHexCode src) => new Phsubw(src);
         }
 
         public Phsubw phsubw() => default;
@@ -14901,6 +16045,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Phsubd src) => AsmMnemonics.PHSUBD;
 
             public static implicit operator AsmHexCode(Phsubd src) => src.Encoded;
+
+            public static implicit operator Phsubd(AsmHexCode src) => new Phsubd(src);
         }
 
         public Phsubd phsubd() => default;
@@ -14927,6 +16073,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vphsubw src) => AsmMnemonics.VPHSUBW;
 
             public static implicit operator AsmHexCode(Vphsubw src) => src.Encoded;
+
+            public static implicit operator Vphsubw(AsmHexCode src) => new Vphsubw(src);
         }
 
         public Vphsubw vphsubw() => default;
@@ -14953,6 +16101,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vphsubd src) => AsmMnemonics.VPHSUBD;
 
             public static implicit operator AsmHexCode(Vphsubd src) => src.Encoded;
+
+            public static implicit operator Vphsubd(AsmHexCode src) => new Vphsubd(src);
         }
 
         public Vphsubd vphsubd() => default;
@@ -14979,6 +16129,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Phsubsw src) => AsmMnemonics.PHSUBSW;
 
             public static implicit operator AsmHexCode(Phsubsw src) => src.Encoded;
+
+            public static implicit operator Phsubsw(AsmHexCode src) => new Phsubsw(src);
         }
 
         public Phsubsw phsubsw() => default;
@@ -15005,6 +16157,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vphsubsw src) => AsmMnemonics.VPHSUBSW;
 
             public static implicit operator AsmHexCode(Vphsubsw src) => src.Encoded;
+
+            public static implicit operator Vphsubsw(AsmHexCode src) => new Vphsubsw(src);
         }
 
         public Vphsubsw vphsubsw() => default;
@@ -15031,6 +16185,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pinsrb src) => AsmMnemonics.PINSRB;
 
             public static implicit operator AsmHexCode(Pinsrb src) => src.Encoded;
+
+            public static implicit operator Pinsrb(AsmHexCode src) => new Pinsrb(src);
         }
 
         public Pinsrb pinsrb() => default;
@@ -15057,6 +16213,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pinsrd src) => AsmMnemonics.PINSRD;
 
             public static implicit operator AsmHexCode(Pinsrd src) => src.Encoded;
+
+            public static implicit operator Pinsrd(AsmHexCode src) => new Pinsrd(src);
         }
 
         public Pinsrd pinsrd() => default;
@@ -15083,6 +16241,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pinsrq src) => AsmMnemonics.PINSRQ;
 
             public static implicit operator AsmHexCode(Pinsrq src) => src.Encoded;
+
+            public static implicit operator Pinsrq(AsmHexCode src) => new Pinsrq(src);
         }
 
         public Pinsrq pinsrq() => default;
@@ -15109,6 +16269,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpinsrb src) => AsmMnemonics.VPINSRB;
 
             public static implicit operator AsmHexCode(Vpinsrb src) => src.Encoded;
+
+            public static implicit operator Vpinsrb(AsmHexCode src) => new Vpinsrb(src);
         }
 
         public Vpinsrb vpinsrb() => default;
@@ -15135,6 +16297,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpinsrd src) => AsmMnemonics.VPINSRD;
 
             public static implicit operator AsmHexCode(Vpinsrd src) => src.Encoded;
+
+            public static implicit operator Vpinsrd(AsmHexCode src) => new Vpinsrd(src);
         }
 
         public Vpinsrd vpinsrd() => default;
@@ -15161,6 +16325,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpinsrq src) => AsmMnemonics.VPINSRQ;
 
             public static implicit operator AsmHexCode(Vpinsrq src) => src.Encoded;
+
+            public static implicit operator Vpinsrq(AsmHexCode src) => new Vpinsrq(src);
         }
 
         public Vpinsrq vpinsrq() => default;
@@ -15187,6 +16353,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pinsrw src) => AsmMnemonics.PINSRW;
 
             public static implicit operator AsmHexCode(Pinsrw src) => src.Encoded;
+
+            public static implicit operator Pinsrw(AsmHexCode src) => new Pinsrw(src);
         }
 
         public Pinsrw pinsrw() => default;
@@ -15213,6 +16381,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpinsrw src) => AsmMnemonics.VPINSRW;
 
             public static implicit operator AsmHexCode(Vpinsrw src) => src.Encoded;
+
+            public static implicit operator Vpinsrw(AsmHexCode src) => new Vpinsrw(src);
         }
 
         public Vpinsrw vpinsrw() => default;
@@ -15239,6 +16409,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmaddubsw src) => AsmMnemonics.PMADDUBSW;
 
             public static implicit operator AsmHexCode(Pmaddubsw src) => src.Encoded;
+
+            public static implicit operator Pmaddubsw(AsmHexCode src) => new Pmaddubsw(src);
         }
 
         public Pmaddubsw pmaddubsw() => default;
@@ -15265,6 +16437,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaddubsw src) => AsmMnemonics.VPMADDUBSW;
 
             public static implicit operator AsmHexCode(Vpmaddubsw src) => src.Encoded;
+
+            public static implicit operator Vpmaddubsw(AsmHexCode src) => new Vpmaddubsw(src);
         }
 
         public Vpmaddubsw vpmaddubsw() => default;
@@ -15291,6 +16465,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmaddwd src) => AsmMnemonics.PMADDWD;
 
             public static implicit operator AsmHexCode(Pmaddwd src) => src.Encoded;
+
+            public static implicit operator Pmaddwd(AsmHexCode src) => new Pmaddwd(src);
         }
 
         public Pmaddwd pmaddwd() => default;
@@ -15317,6 +16493,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaddwd src) => AsmMnemonics.VPMADDWD;
 
             public static implicit operator AsmHexCode(Vpmaddwd src) => src.Encoded;
+
+            public static implicit operator Vpmaddwd(AsmHexCode src) => new Vpmaddwd(src);
         }
 
         public Vpmaddwd vpmaddwd() => default;
@@ -15343,6 +16521,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmaxsb src) => AsmMnemonics.PMAXSB;
 
             public static implicit operator AsmHexCode(Pmaxsb src) => src.Encoded;
+
+            public static implicit operator Pmaxsb(AsmHexCode src) => new Pmaxsb(src);
         }
 
         public Pmaxsb pmaxsb() => default;
@@ -15369,6 +16549,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaxsb src) => AsmMnemonics.VPMAXSB;
 
             public static implicit operator AsmHexCode(Vpmaxsb src) => src.Encoded;
+
+            public static implicit operator Vpmaxsb(AsmHexCode src) => new Vpmaxsb(src);
         }
 
         public Vpmaxsb vpmaxsb() => default;
@@ -15395,6 +16577,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmaxsd src) => AsmMnemonics.PMAXSD;
 
             public static implicit operator AsmHexCode(Pmaxsd src) => src.Encoded;
+
+            public static implicit operator Pmaxsd(AsmHexCode src) => new Pmaxsd(src);
         }
 
         public Pmaxsd pmaxsd() => default;
@@ -15421,6 +16605,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaxsd src) => AsmMnemonics.VPMAXSD;
 
             public static implicit operator AsmHexCode(Vpmaxsd src) => src.Encoded;
+
+            public static implicit operator Vpmaxsd(AsmHexCode src) => new Vpmaxsd(src);
         }
 
         public Vpmaxsd vpmaxsd() => default;
@@ -15447,6 +16633,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmaxsw src) => AsmMnemonics.PMAXSW;
 
             public static implicit operator AsmHexCode(Pmaxsw src) => src.Encoded;
+
+            public static implicit operator Pmaxsw(AsmHexCode src) => new Pmaxsw(src);
         }
 
         public Pmaxsw pmaxsw() => default;
@@ -15473,6 +16661,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaxsw src) => AsmMnemonics.VPMAXSW;
 
             public static implicit operator AsmHexCode(Vpmaxsw src) => src.Encoded;
+
+            public static implicit operator Vpmaxsw(AsmHexCode src) => new Vpmaxsw(src);
         }
 
         public Vpmaxsw vpmaxsw() => default;
@@ -15499,6 +16689,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmaxub src) => AsmMnemonics.PMAXUB;
 
             public static implicit operator AsmHexCode(Pmaxub src) => src.Encoded;
+
+            public static implicit operator Pmaxub(AsmHexCode src) => new Pmaxub(src);
         }
 
         public Pmaxub pmaxub() => default;
@@ -15525,6 +16717,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaxub src) => AsmMnemonics.VPMAXUB;
 
             public static implicit operator AsmHexCode(Vpmaxub src) => src.Encoded;
+
+            public static implicit operator Vpmaxub(AsmHexCode src) => new Vpmaxub(src);
         }
 
         public Vpmaxub vpmaxub() => default;
@@ -15551,6 +16745,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmaxud src) => AsmMnemonics.PMAXUD;
 
             public static implicit operator AsmHexCode(Pmaxud src) => src.Encoded;
+
+            public static implicit operator Pmaxud(AsmHexCode src) => new Pmaxud(src);
         }
 
         public Pmaxud pmaxud() => default;
@@ -15577,6 +16773,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaxud src) => AsmMnemonics.VPMAXUD;
 
             public static implicit operator AsmHexCode(Vpmaxud src) => src.Encoded;
+
+            public static implicit operator Vpmaxud(AsmHexCode src) => new Vpmaxud(src);
         }
 
         public Vpmaxud vpmaxud() => default;
@@ -15603,6 +16801,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmaxuw src) => AsmMnemonics.PMAXUW;
 
             public static implicit operator AsmHexCode(Pmaxuw src) => src.Encoded;
+
+            public static implicit operator Pmaxuw(AsmHexCode src) => new Pmaxuw(src);
         }
 
         public Pmaxuw pmaxuw() => default;
@@ -15629,6 +16829,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaxuw src) => AsmMnemonics.VPMAXUW;
 
             public static implicit operator AsmHexCode(Vpmaxuw src) => src.Encoded;
+
+            public static implicit operator Vpmaxuw(AsmHexCode src) => new Vpmaxuw(src);
         }
 
         public Vpmaxuw vpmaxuw() => default;
@@ -15655,6 +16857,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pminsb src) => AsmMnemonics.PMINSB;
 
             public static implicit operator AsmHexCode(Pminsb src) => src.Encoded;
+
+            public static implicit operator Pminsb(AsmHexCode src) => new Pminsb(src);
         }
 
         public Pminsb pminsb() => default;
@@ -15681,6 +16885,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpminsb src) => AsmMnemonics.VPMINSB;
 
             public static implicit operator AsmHexCode(Vpminsb src) => src.Encoded;
+
+            public static implicit operator Vpminsb(AsmHexCode src) => new Vpminsb(src);
         }
 
         public Vpminsb vpminsb() => default;
@@ -15707,6 +16913,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pminsd src) => AsmMnemonics.PMINSD;
 
             public static implicit operator AsmHexCode(Pminsd src) => src.Encoded;
+
+            public static implicit operator Pminsd(AsmHexCode src) => new Pminsd(src);
         }
 
         public Pminsd pminsd() => default;
@@ -15733,6 +16941,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpminsd src) => AsmMnemonics.VPMINSD;
 
             public static implicit operator AsmHexCode(Vpminsd src) => src.Encoded;
+
+            public static implicit operator Vpminsd(AsmHexCode src) => new Vpminsd(src);
         }
 
         public Vpminsd vpminsd() => default;
@@ -15759,6 +16969,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pminsw src) => AsmMnemonics.PMINSW;
 
             public static implicit operator AsmHexCode(Pminsw src) => src.Encoded;
+
+            public static implicit operator Pminsw(AsmHexCode src) => new Pminsw(src);
         }
 
         public Pminsw pminsw() => default;
@@ -15785,6 +16997,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpminsw src) => AsmMnemonics.VPMINSW;
 
             public static implicit operator AsmHexCode(Vpminsw src) => src.Encoded;
+
+            public static implicit operator Vpminsw(AsmHexCode src) => new Vpminsw(src);
         }
 
         public Vpminsw vpminsw() => default;
@@ -15811,6 +17025,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pminub src) => AsmMnemonics.PMINUB;
 
             public static implicit operator AsmHexCode(Pminub src) => src.Encoded;
+
+            public static implicit operator Pminub(AsmHexCode src) => new Pminub(src);
         }
 
         public Pminub pminub() => default;
@@ -15837,6 +17053,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpminub src) => AsmMnemonics.VPMINUB;
 
             public static implicit operator AsmHexCode(Vpminub src) => src.Encoded;
+
+            public static implicit operator Vpminub(AsmHexCode src) => new Vpminub(src);
         }
 
         public Vpminub vpminub() => default;
@@ -15863,6 +17081,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pminud src) => AsmMnemonics.PMINUD;
 
             public static implicit operator AsmHexCode(Pminud src) => src.Encoded;
+
+            public static implicit operator Pminud(AsmHexCode src) => new Pminud(src);
         }
 
         public Pminud pminud() => default;
@@ -15889,6 +17109,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpminud src) => AsmMnemonics.VPMINUD;
 
             public static implicit operator AsmHexCode(Vpminud src) => src.Encoded;
+
+            public static implicit operator Vpminud(AsmHexCode src) => new Vpminud(src);
         }
 
         public Vpminud vpminud() => default;
@@ -15915,6 +17137,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pminuw src) => AsmMnemonics.PMINUW;
 
             public static implicit operator AsmHexCode(Pminuw src) => src.Encoded;
+
+            public static implicit operator Pminuw(AsmHexCode src) => new Pminuw(src);
         }
 
         public Pminuw pminuw() => default;
@@ -15941,6 +17165,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpminuw src) => AsmMnemonics.VPMINUW;
 
             public static implicit operator AsmHexCode(Vpminuw src) => src.Encoded;
+
+            public static implicit operator Vpminuw(AsmHexCode src) => new Vpminuw(src);
         }
 
         public Vpminuw vpminuw() => default;
@@ -15967,6 +17193,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovmskb src) => AsmMnemonics.PMOVMSKB;
 
             public static implicit operator AsmHexCode(Pmovmskb src) => src.Encoded;
+
+            public static implicit operator Pmovmskb(AsmHexCode src) => new Pmovmskb(src);
         }
 
         public Pmovmskb pmovmskb() => default;
@@ -15993,6 +17221,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovmskb src) => AsmMnemonics.VPMOVMSKB;
 
             public static implicit operator AsmHexCode(Vpmovmskb src) => src.Encoded;
+
+            public static implicit operator Vpmovmskb(AsmHexCode src) => new Vpmovmskb(src);
         }
 
         public Vpmovmskb vpmovmskb() => default;
@@ -16019,6 +17249,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovsxbw src) => AsmMnemonics.PMOVSXBW;
 
             public static implicit operator AsmHexCode(Pmovsxbw src) => src.Encoded;
+
+            public static implicit operator Pmovsxbw(AsmHexCode src) => new Pmovsxbw(src);
         }
 
         public Pmovsxbw pmovsxbw() => default;
@@ -16045,6 +17277,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovsxbd src) => AsmMnemonics.PMOVSXBD;
 
             public static implicit operator AsmHexCode(Pmovsxbd src) => src.Encoded;
+
+            public static implicit operator Pmovsxbd(AsmHexCode src) => new Pmovsxbd(src);
         }
 
         public Pmovsxbd pmovsxbd() => default;
@@ -16071,6 +17305,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovsxbq src) => AsmMnemonics.PMOVSXBQ;
 
             public static implicit operator AsmHexCode(Pmovsxbq src) => src.Encoded;
+
+            public static implicit operator Pmovsxbq(AsmHexCode src) => new Pmovsxbq(src);
         }
 
         public Pmovsxbq pmovsxbq() => default;
@@ -16097,6 +17333,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovsxwd src) => AsmMnemonics.PMOVSXWD;
 
             public static implicit operator AsmHexCode(Pmovsxwd src) => src.Encoded;
+
+            public static implicit operator Pmovsxwd(AsmHexCode src) => new Pmovsxwd(src);
         }
 
         public Pmovsxwd pmovsxwd() => default;
@@ -16123,6 +17361,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovsxwq src) => AsmMnemonics.PMOVSXWQ;
 
             public static implicit operator AsmHexCode(Pmovsxwq src) => src.Encoded;
+
+            public static implicit operator Pmovsxwq(AsmHexCode src) => new Pmovsxwq(src);
         }
 
         public Pmovsxwq pmovsxwq() => default;
@@ -16149,6 +17389,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovsxdq src) => AsmMnemonics.PMOVSXDQ;
 
             public static implicit operator AsmHexCode(Pmovsxdq src) => src.Encoded;
+
+            public static implicit operator Pmovsxdq(AsmHexCode src) => new Pmovsxdq(src);
         }
 
         public Pmovsxdq pmovsxdq() => default;
@@ -16175,6 +17417,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovsxbw src) => AsmMnemonics.VPMOVSXBW;
 
             public static implicit operator AsmHexCode(Vpmovsxbw src) => src.Encoded;
+
+            public static implicit operator Vpmovsxbw(AsmHexCode src) => new Vpmovsxbw(src);
         }
 
         public Vpmovsxbw vpmovsxbw() => default;
@@ -16201,6 +17445,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovsxbd src) => AsmMnemonics.VPMOVSXBD;
 
             public static implicit operator AsmHexCode(Vpmovsxbd src) => src.Encoded;
+
+            public static implicit operator Vpmovsxbd(AsmHexCode src) => new Vpmovsxbd(src);
         }
 
         public Vpmovsxbd vpmovsxbd() => default;
@@ -16227,6 +17473,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovsxbq src) => AsmMnemonics.VPMOVSXBQ;
 
             public static implicit operator AsmHexCode(Vpmovsxbq src) => src.Encoded;
+
+            public static implicit operator Vpmovsxbq(AsmHexCode src) => new Vpmovsxbq(src);
         }
 
         public Vpmovsxbq vpmovsxbq() => default;
@@ -16253,6 +17501,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovsxwd src) => AsmMnemonics.VPMOVSXWD;
 
             public static implicit operator AsmHexCode(Vpmovsxwd src) => src.Encoded;
+
+            public static implicit operator Vpmovsxwd(AsmHexCode src) => new Vpmovsxwd(src);
         }
 
         public Vpmovsxwd vpmovsxwd() => default;
@@ -16279,6 +17529,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovsxwq src) => AsmMnemonics.VPMOVSXWQ;
 
             public static implicit operator AsmHexCode(Vpmovsxwq src) => src.Encoded;
+
+            public static implicit operator Vpmovsxwq(AsmHexCode src) => new Vpmovsxwq(src);
         }
 
         public Vpmovsxwq vpmovsxwq() => default;
@@ -16305,6 +17557,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovsxdq src) => AsmMnemonics.VPMOVSXDQ;
 
             public static implicit operator AsmHexCode(Vpmovsxdq src) => src.Encoded;
+
+            public static implicit operator Vpmovsxdq(AsmHexCode src) => new Vpmovsxdq(src);
         }
 
         public Vpmovsxdq vpmovsxdq() => default;
@@ -16331,6 +17585,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovzxbw src) => AsmMnemonics.PMOVZXBW;
 
             public static implicit operator AsmHexCode(Pmovzxbw src) => src.Encoded;
+
+            public static implicit operator Pmovzxbw(AsmHexCode src) => new Pmovzxbw(src);
         }
 
         public Pmovzxbw pmovzxbw() => default;
@@ -16357,6 +17613,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovzxbd src) => AsmMnemonics.PMOVZXBD;
 
             public static implicit operator AsmHexCode(Pmovzxbd src) => src.Encoded;
+
+            public static implicit operator Pmovzxbd(AsmHexCode src) => new Pmovzxbd(src);
         }
 
         public Pmovzxbd pmovzxbd() => default;
@@ -16383,6 +17641,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovzxbq src) => AsmMnemonics.PMOVZXBQ;
 
             public static implicit operator AsmHexCode(Pmovzxbq src) => src.Encoded;
+
+            public static implicit operator Pmovzxbq(AsmHexCode src) => new Pmovzxbq(src);
         }
 
         public Pmovzxbq pmovzxbq() => default;
@@ -16409,6 +17669,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovzxwd src) => AsmMnemonics.PMOVZXWD;
 
             public static implicit operator AsmHexCode(Pmovzxwd src) => src.Encoded;
+
+            public static implicit operator Pmovzxwd(AsmHexCode src) => new Pmovzxwd(src);
         }
 
         public Pmovzxwd pmovzxwd() => default;
@@ -16435,6 +17697,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovzxwq src) => AsmMnemonics.PMOVZXWQ;
 
             public static implicit operator AsmHexCode(Pmovzxwq src) => src.Encoded;
+
+            public static implicit operator Pmovzxwq(AsmHexCode src) => new Pmovzxwq(src);
         }
 
         public Pmovzxwq pmovzxwq() => default;
@@ -16461,6 +17725,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmovzxdq src) => AsmMnemonics.PMOVZXDQ;
 
             public static implicit operator AsmHexCode(Pmovzxdq src) => src.Encoded;
+
+            public static implicit operator Pmovzxdq(AsmHexCode src) => new Pmovzxdq(src);
         }
 
         public Pmovzxdq pmovzxdq() => default;
@@ -16487,6 +17753,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovzxbw src) => AsmMnemonics.VPMOVZXBW;
 
             public static implicit operator AsmHexCode(Vpmovzxbw src) => src.Encoded;
+
+            public static implicit operator Vpmovzxbw(AsmHexCode src) => new Vpmovzxbw(src);
         }
 
         public Vpmovzxbw vpmovzxbw() => default;
@@ -16513,6 +17781,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovzxbd src) => AsmMnemonics.VPMOVZXBD;
 
             public static implicit operator AsmHexCode(Vpmovzxbd src) => src.Encoded;
+
+            public static implicit operator Vpmovzxbd(AsmHexCode src) => new Vpmovzxbd(src);
         }
 
         public Vpmovzxbd vpmovzxbd() => default;
@@ -16539,6 +17809,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovzxbq src) => AsmMnemonics.VPMOVZXBQ;
 
             public static implicit operator AsmHexCode(Vpmovzxbq src) => src.Encoded;
+
+            public static implicit operator Vpmovzxbq(AsmHexCode src) => new Vpmovzxbq(src);
         }
 
         public Vpmovzxbq vpmovzxbq() => default;
@@ -16565,6 +17837,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovzxwd src) => AsmMnemonics.VPMOVZXWD;
 
             public static implicit operator AsmHexCode(Vpmovzxwd src) => src.Encoded;
+
+            public static implicit operator Vpmovzxwd(AsmHexCode src) => new Vpmovzxwd(src);
         }
 
         public Vpmovzxwd vpmovzxwd() => default;
@@ -16591,6 +17865,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovzxwq src) => AsmMnemonics.VPMOVZXWQ;
 
             public static implicit operator AsmHexCode(Vpmovzxwq src) => src.Encoded;
+
+            public static implicit operator Vpmovzxwq(AsmHexCode src) => new Vpmovzxwq(src);
         }
 
         public Vpmovzxwq vpmovzxwq() => default;
@@ -16617,6 +17893,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmovzxdq src) => AsmMnemonics.VPMOVZXDQ;
 
             public static implicit operator AsmHexCode(Vpmovzxdq src) => src.Encoded;
+
+            public static implicit operator Vpmovzxdq(AsmHexCode src) => new Vpmovzxdq(src);
         }
 
         public Vpmovzxdq vpmovzxdq() => default;
@@ -16643,6 +17921,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmuldq src) => AsmMnemonics.PMULDQ;
 
             public static implicit operator AsmHexCode(Pmuldq src) => src.Encoded;
+
+            public static implicit operator Pmuldq(AsmHexCode src) => new Pmuldq(src);
         }
 
         public Pmuldq pmuldq() => default;
@@ -16669,6 +17949,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmuldq src) => AsmMnemonics.VPMULDQ;
 
             public static implicit operator AsmHexCode(Vpmuldq src) => src.Encoded;
+
+            public static implicit operator Vpmuldq(AsmHexCode src) => new Vpmuldq(src);
         }
 
         public Vpmuldq vpmuldq() => default;
@@ -16695,6 +17977,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmulhrsw src) => AsmMnemonics.PMULHRSW;
 
             public static implicit operator AsmHexCode(Pmulhrsw src) => src.Encoded;
+
+            public static implicit operator Pmulhrsw(AsmHexCode src) => new Pmulhrsw(src);
         }
 
         public Pmulhrsw pmulhrsw() => default;
@@ -16721,6 +18005,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmulhrsw src) => AsmMnemonics.VPMULHRSW;
 
             public static implicit operator AsmHexCode(Vpmulhrsw src) => src.Encoded;
+
+            public static implicit operator Vpmulhrsw(AsmHexCode src) => new Vpmulhrsw(src);
         }
 
         public Vpmulhrsw vpmulhrsw() => default;
@@ -16747,6 +18033,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmulhuw src) => AsmMnemonics.PMULHUW;
 
             public static implicit operator AsmHexCode(Pmulhuw src) => src.Encoded;
+
+            public static implicit operator Pmulhuw(AsmHexCode src) => new Pmulhuw(src);
         }
 
         public Pmulhuw pmulhuw() => default;
@@ -16773,6 +18061,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmulhuw src) => AsmMnemonics.VPMULHUW;
 
             public static implicit operator AsmHexCode(Vpmulhuw src) => src.Encoded;
+
+            public static implicit operator Vpmulhuw(AsmHexCode src) => new Vpmulhuw(src);
         }
 
         public Vpmulhuw vpmulhuw() => default;
@@ -16799,6 +18089,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmulhw src) => AsmMnemonics.PMULHW;
 
             public static implicit operator AsmHexCode(Pmulhw src) => src.Encoded;
+
+            public static implicit operator Pmulhw(AsmHexCode src) => new Pmulhw(src);
         }
 
         public Pmulhw pmulhw() => default;
@@ -16825,6 +18117,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmulhw src) => AsmMnemonics.VPMULHW;
 
             public static implicit operator AsmHexCode(Vpmulhw src) => src.Encoded;
+
+            public static implicit operator Vpmulhw(AsmHexCode src) => new Vpmulhw(src);
         }
 
         public Vpmulhw vpmulhw() => default;
@@ -16851,6 +18145,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmulld src) => AsmMnemonics.PMULLD;
 
             public static implicit operator AsmHexCode(Pmulld src) => src.Encoded;
+
+            public static implicit operator Pmulld(AsmHexCode src) => new Pmulld(src);
         }
 
         public Pmulld pmulld() => default;
@@ -16877,6 +18173,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmulld src) => AsmMnemonics.VPMULLD;
 
             public static implicit operator AsmHexCode(Vpmulld src) => src.Encoded;
+
+            public static implicit operator Vpmulld(AsmHexCode src) => new Vpmulld(src);
         }
 
         public Vpmulld vpmulld() => default;
@@ -16903,6 +18201,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmullw src) => AsmMnemonics.PMULLW;
 
             public static implicit operator AsmHexCode(Pmullw src) => src.Encoded;
+
+            public static implicit operator Pmullw(AsmHexCode src) => new Pmullw(src);
         }
 
         public Pmullw pmullw() => default;
@@ -16929,6 +18229,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmullw src) => AsmMnemonics.VPMULLW;
 
             public static implicit operator AsmHexCode(Vpmullw src) => src.Encoded;
+
+            public static implicit operator Vpmullw(AsmHexCode src) => new Vpmullw(src);
         }
 
         public Vpmullw vpmullw() => default;
@@ -16955,6 +18257,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pmuludq src) => AsmMnemonics.PMULUDQ;
 
             public static implicit operator AsmHexCode(Pmuludq src) => src.Encoded;
+
+            public static implicit operator Pmuludq(AsmHexCode src) => new Pmuludq(src);
         }
 
         public Pmuludq pmuludq() => default;
@@ -16981,6 +18285,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmuludq src) => AsmMnemonics.VPMULUDQ;
 
             public static implicit operator AsmHexCode(Vpmuludq src) => src.Encoded;
+
+            public static implicit operator Vpmuludq(AsmHexCode src) => new Vpmuludq(src);
         }
 
         public Vpmuludq vpmuludq() => default;
@@ -17007,6 +18313,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pop src) => AsmMnemonics.POP;
 
             public static implicit operator AsmHexCode(Pop src) => src.Encoded;
+
+            public static implicit operator Pop(AsmHexCode src) => new Pop(src);
         }
 
         public Pop pop() => default;
@@ -17033,6 +18341,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Popa src) => AsmMnemonics.POPA;
 
             public static implicit operator AsmHexCode(Popa src) => src.Encoded;
+
+            public static implicit operator Popa(AsmHexCode src) => new Popa(src);
         }
 
         public Popa popa() => default;
@@ -17059,6 +18369,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Popad src) => AsmMnemonics.POPAD;
 
             public static implicit operator AsmHexCode(Popad src) => src.Encoded;
+
+            public static implicit operator Popad(AsmHexCode src) => new Popad(src);
         }
 
         public Popad popad() => default;
@@ -17085,6 +18397,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Popcnt src) => AsmMnemonics.POPCNT;
 
             public static implicit operator AsmHexCode(Popcnt src) => src.Encoded;
+
+            public static implicit operator Popcnt(AsmHexCode src) => new Popcnt(src);
         }
 
         public Popcnt popcnt() => default;
@@ -17111,6 +18425,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Popf src) => AsmMnemonics.POPF;
 
             public static implicit operator AsmHexCode(Popf src) => src.Encoded;
+
+            public static implicit operator Popf(AsmHexCode src) => new Popf(src);
         }
 
         public Popf popf() => default;
@@ -17137,6 +18453,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Popfd src) => AsmMnemonics.POPFD;
 
             public static implicit operator AsmHexCode(Popfd src) => src.Encoded;
+
+            public static implicit operator Popfd(AsmHexCode src) => new Popfd(src);
         }
 
         public Popfd popfd() => default;
@@ -17163,6 +18481,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Popfq src) => AsmMnemonics.POPFQ;
 
             public static implicit operator AsmHexCode(Popfq src) => src.Encoded;
+
+            public static implicit operator Popfq(AsmHexCode src) => new Popfq(src);
         }
 
         public Popfq popfq() => default;
@@ -17189,6 +18509,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Por src) => AsmMnemonics.POR;
 
             public static implicit operator AsmHexCode(Por src) => src.Encoded;
+
+            public static implicit operator Por(AsmHexCode src) => new Por(src);
         }
 
         public Por por() => default;
@@ -17215,6 +18537,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpor src) => AsmMnemonics.VPOR;
 
             public static implicit operator AsmHexCode(Vpor src) => src.Encoded;
+
+            public static implicit operator Vpor(AsmHexCode src) => new Vpor(src);
         }
 
         public Vpor vpor() => default;
@@ -17241,6 +18565,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Prefetcht0 src) => AsmMnemonics.PREFETCHT0;
 
             public static implicit operator AsmHexCode(Prefetcht0 src) => src.Encoded;
+
+            public static implicit operator Prefetcht0(AsmHexCode src) => new Prefetcht0(src);
         }
 
         public Prefetcht0 prefetcht0() => default;
@@ -17267,6 +18593,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Prefetcht1 src) => AsmMnemonics.PREFETCHT1;
 
             public static implicit operator AsmHexCode(Prefetcht1 src) => src.Encoded;
+
+            public static implicit operator Prefetcht1(AsmHexCode src) => new Prefetcht1(src);
         }
 
         public Prefetcht1 prefetcht1() => default;
@@ -17293,6 +18621,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Prefetcht2 src) => AsmMnemonics.PREFETCHT2;
 
             public static implicit operator AsmHexCode(Prefetcht2 src) => src.Encoded;
+
+            public static implicit operator Prefetcht2(AsmHexCode src) => new Prefetcht2(src);
         }
 
         public Prefetcht2 prefetcht2() => default;
@@ -17319,6 +18649,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Prefetchnta src) => AsmMnemonics.PREFETCHNTA;
 
             public static implicit operator AsmHexCode(Prefetchnta src) => src.Encoded;
+
+            public static implicit operator Prefetchnta(AsmHexCode src) => new Prefetchnta(src);
         }
 
         public Prefetchnta prefetchnta() => default;
@@ -17345,6 +18677,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psadbw src) => AsmMnemonics.PSADBW;
 
             public static implicit operator AsmHexCode(Psadbw src) => src.Encoded;
+
+            public static implicit operator Psadbw(AsmHexCode src) => new Psadbw(src);
         }
 
         public Psadbw psadbw() => default;
@@ -17371,6 +18705,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsadbw src) => AsmMnemonics.VPSADBW;
 
             public static implicit operator AsmHexCode(Vpsadbw src) => src.Encoded;
+
+            public static implicit operator Vpsadbw(AsmHexCode src) => new Vpsadbw(src);
         }
 
         public Vpsadbw vpsadbw() => default;
@@ -17397,6 +18733,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pshufb src) => AsmMnemonics.PSHUFB;
 
             public static implicit operator AsmHexCode(Pshufb src) => src.Encoded;
+
+            public static implicit operator Pshufb(AsmHexCode src) => new Pshufb(src);
         }
 
         public Pshufb pshufb() => default;
@@ -17423,6 +18761,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpshufb src) => AsmMnemonics.VPSHUFB;
 
             public static implicit operator AsmHexCode(Vpshufb src) => src.Encoded;
+
+            public static implicit operator Vpshufb(AsmHexCode src) => new Vpshufb(src);
         }
 
         public Vpshufb vpshufb() => default;
@@ -17449,6 +18789,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pshufd src) => AsmMnemonics.PSHUFD;
 
             public static implicit operator AsmHexCode(Pshufd src) => src.Encoded;
+
+            public static implicit operator Pshufd(AsmHexCode src) => new Pshufd(src);
         }
 
         public Pshufd pshufd() => default;
@@ -17475,6 +18817,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpshufd src) => AsmMnemonics.VPSHUFD;
 
             public static implicit operator AsmHexCode(Vpshufd src) => src.Encoded;
+
+            public static implicit operator Vpshufd(AsmHexCode src) => new Vpshufd(src);
         }
 
         public Vpshufd vpshufd() => default;
@@ -17501,6 +18845,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pshufhw src) => AsmMnemonics.PSHUFHW;
 
             public static implicit operator AsmHexCode(Pshufhw src) => src.Encoded;
+
+            public static implicit operator Pshufhw(AsmHexCode src) => new Pshufhw(src);
         }
 
         public Pshufhw pshufhw() => default;
@@ -17527,6 +18873,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpshufhw src) => AsmMnemonics.VPSHUFHW;
 
             public static implicit operator AsmHexCode(Vpshufhw src) => src.Encoded;
+
+            public static implicit operator Vpshufhw(AsmHexCode src) => new Vpshufhw(src);
         }
 
         public Vpshufhw vpshufhw() => default;
@@ -17553,6 +18901,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pshuflw src) => AsmMnemonics.PSHUFLW;
 
             public static implicit operator AsmHexCode(Pshuflw src) => src.Encoded;
+
+            public static implicit operator Pshuflw(AsmHexCode src) => new Pshuflw(src);
         }
 
         public Pshuflw pshuflw() => default;
@@ -17579,6 +18929,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpshuflw src) => AsmMnemonics.VPSHUFLW;
 
             public static implicit operator AsmHexCode(Vpshuflw src) => src.Encoded;
+
+            public static implicit operator Vpshuflw(AsmHexCode src) => new Vpshuflw(src);
         }
 
         public Vpshuflw vpshuflw() => default;
@@ -17605,6 +18957,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pshufw src) => AsmMnemonics.PSHUFW;
 
             public static implicit operator AsmHexCode(Pshufw src) => src.Encoded;
+
+            public static implicit operator Pshufw(AsmHexCode src) => new Pshufw(src);
         }
 
         public Pshufw pshufw() => default;
@@ -17631,6 +18985,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psignb src) => AsmMnemonics.PSIGNB;
 
             public static implicit operator AsmHexCode(Psignb src) => src.Encoded;
+
+            public static implicit operator Psignb(AsmHexCode src) => new Psignb(src);
         }
 
         public Psignb psignb() => default;
@@ -17657,6 +19013,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psignw src) => AsmMnemonics.PSIGNW;
 
             public static implicit operator AsmHexCode(Psignw src) => src.Encoded;
+
+            public static implicit operator Psignw(AsmHexCode src) => new Psignw(src);
         }
 
         public Psignw psignw() => default;
@@ -17683,6 +19041,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psignd src) => AsmMnemonics.PSIGND;
 
             public static implicit operator AsmHexCode(Psignd src) => src.Encoded;
+
+            public static implicit operator Psignd(AsmHexCode src) => new Psignd(src);
         }
 
         public Psignd psignd() => default;
@@ -17709,6 +19069,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsignb src) => AsmMnemonics.VPSIGNB;
 
             public static implicit operator AsmHexCode(Vpsignb src) => src.Encoded;
+
+            public static implicit operator Vpsignb(AsmHexCode src) => new Vpsignb(src);
         }
 
         public Vpsignb vpsignb() => default;
@@ -17735,6 +19097,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsignw src) => AsmMnemonics.VPSIGNW;
 
             public static implicit operator AsmHexCode(Vpsignw src) => src.Encoded;
+
+            public static implicit operator Vpsignw(AsmHexCode src) => new Vpsignw(src);
         }
 
         public Vpsignw vpsignw() => default;
@@ -17761,6 +19125,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsignd src) => AsmMnemonics.VPSIGND;
 
             public static implicit operator AsmHexCode(Vpsignd src) => src.Encoded;
+
+            public static implicit operator Vpsignd(AsmHexCode src) => new Vpsignd(src);
         }
 
         public Vpsignd vpsignd() => default;
@@ -17787,6 +19153,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pslldq src) => AsmMnemonics.PSLLDQ;
 
             public static implicit operator AsmHexCode(Pslldq src) => src.Encoded;
+
+            public static implicit operator Pslldq(AsmHexCode src) => new Pslldq(src);
         }
 
         public Pslldq pslldq() => default;
@@ -17813,6 +19181,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpslldq src) => AsmMnemonics.VPSLLDQ;
 
             public static implicit operator AsmHexCode(Vpslldq src) => src.Encoded;
+
+            public static implicit operator Vpslldq(AsmHexCode src) => new Vpslldq(src);
         }
 
         public Vpslldq vpslldq() => default;
@@ -17839,6 +19209,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psllw src) => AsmMnemonics.PSLLW;
 
             public static implicit operator AsmHexCode(Psllw src) => src.Encoded;
+
+            public static implicit operator Psllw(AsmHexCode src) => new Psllw(src);
         }
 
         public Psllw psllw() => default;
@@ -17865,6 +19237,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pslld src) => AsmMnemonics.PSLLD;
 
             public static implicit operator AsmHexCode(Pslld src) => src.Encoded;
+
+            public static implicit operator Pslld(AsmHexCode src) => new Pslld(src);
         }
 
         public Pslld pslld() => default;
@@ -17891,6 +19265,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psllq src) => AsmMnemonics.PSLLQ;
 
             public static implicit operator AsmHexCode(Psllq src) => src.Encoded;
+
+            public static implicit operator Psllq(AsmHexCode src) => new Psllq(src);
         }
 
         public Psllq psllq() => default;
@@ -17917,6 +19293,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsllw src) => AsmMnemonics.VPSLLW;
 
             public static implicit operator AsmHexCode(Vpsllw src) => src.Encoded;
+
+            public static implicit operator Vpsllw(AsmHexCode src) => new Vpsllw(src);
         }
 
         public Vpsllw vpsllw() => default;
@@ -17943,6 +19321,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpslld src) => AsmMnemonics.VPSLLD;
 
             public static implicit operator AsmHexCode(Vpslld src) => src.Encoded;
+
+            public static implicit operator Vpslld(AsmHexCode src) => new Vpslld(src);
         }
 
         public Vpslld vpslld() => default;
@@ -17969,6 +19349,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsllq src) => AsmMnemonics.VPSLLQ;
 
             public static implicit operator AsmHexCode(Vpsllq src) => src.Encoded;
+
+            public static implicit operator Vpsllq(AsmHexCode src) => new Vpsllq(src);
         }
 
         public Vpsllq vpsllq() => default;
@@ -17995,6 +19377,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psraw src) => AsmMnemonics.PSRAW;
 
             public static implicit operator AsmHexCode(Psraw src) => src.Encoded;
+
+            public static implicit operator Psraw(AsmHexCode src) => new Psraw(src);
         }
 
         public Psraw psraw() => default;
@@ -18021,6 +19405,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psrad src) => AsmMnemonics.PSRAD;
 
             public static implicit operator AsmHexCode(Psrad src) => src.Encoded;
+
+            public static implicit operator Psrad(AsmHexCode src) => new Psrad(src);
         }
 
         public Psrad psrad() => default;
@@ -18047,6 +19433,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsraw src) => AsmMnemonics.VPSRAW;
 
             public static implicit operator AsmHexCode(Vpsraw src) => src.Encoded;
+
+            public static implicit operator Vpsraw(AsmHexCode src) => new Vpsraw(src);
         }
 
         public Vpsraw vpsraw() => default;
@@ -18073,6 +19461,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsrad src) => AsmMnemonics.VPSRAD;
 
             public static implicit operator AsmHexCode(Vpsrad src) => src.Encoded;
+
+            public static implicit operator Vpsrad(AsmHexCode src) => new Vpsrad(src);
         }
 
         public Vpsrad vpsrad() => default;
@@ -18099,6 +19489,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psrldq src) => AsmMnemonics.PSRLDQ;
 
             public static implicit operator AsmHexCode(Psrldq src) => src.Encoded;
+
+            public static implicit operator Psrldq(AsmHexCode src) => new Psrldq(src);
         }
 
         public Psrldq psrldq() => default;
@@ -18125,6 +19517,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsrldq src) => AsmMnemonics.VPSRLDQ;
 
             public static implicit operator AsmHexCode(Vpsrldq src) => src.Encoded;
+
+            public static implicit operator Vpsrldq(AsmHexCode src) => new Vpsrldq(src);
         }
 
         public Vpsrldq vpsrldq() => default;
@@ -18151,6 +19545,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psrlw src) => AsmMnemonics.PSRLW;
 
             public static implicit operator AsmHexCode(Psrlw src) => src.Encoded;
+
+            public static implicit operator Psrlw(AsmHexCode src) => new Psrlw(src);
         }
 
         public Psrlw psrlw() => default;
@@ -18177,6 +19573,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psrld src) => AsmMnemonics.PSRLD;
 
             public static implicit operator AsmHexCode(Psrld src) => src.Encoded;
+
+            public static implicit operator Psrld(AsmHexCode src) => new Psrld(src);
         }
 
         public Psrld psrld() => default;
@@ -18203,6 +19601,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psrlq src) => AsmMnemonics.PSRLQ;
 
             public static implicit operator AsmHexCode(Psrlq src) => src.Encoded;
+
+            public static implicit operator Psrlq(AsmHexCode src) => new Psrlq(src);
         }
 
         public Psrlq psrlq() => default;
@@ -18229,6 +19629,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsrlw src) => AsmMnemonics.VPSRLW;
 
             public static implicit operator AsmHexCode(Vpsrlw src) => src.Encoded;
+
+            public static implicit operator Vpsrlw(AsmHexCode src) => new Vpsrlw(src);
         }
 
         public Vpsrlw vpsrlw() => default;
@@ -18255,6 +19657,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsrld src) => AsmMnemonics.VPSRLD;
 
             public static implicit operator AsmHexCode(Vpsrld src) => src.Encoded;
+
+            public static implicit operator Vpsrld(AsmHexCode src) => new Vpsrld(src);
         }
 
         public Vpsrld vpsrld() => default;
@@ -18281,6 +19685,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsrlq src) => AsmMnemonics.VPSRLQ;
 
             public static implicit operator AsmHexCode(Vpsrlq src) => src.Encoded;
+
+            public static implicit operator Vpsrlq(AsmHexCode src) => new Vpsrlq(src);
         }
 
         public Vpsrlq vpsrlq() => default;
@@ -18307,6 +19713,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psubb src) => AsmMnemonics.PSUBB;
 
             public static implicit operator AsmHexCode(Psubb src) => src.Encoded;
+
+            public static implicit operator Psubb(AsmHexCode src) => new Psubb(src);
         }
 
         public Psubb psubb() => default;
@@ -18333,6 +19741,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psubw src) => AsmMnemonics.PSUBW;
 
             public static implicit operator AsmHexCode(Psubw src) => src.Encoded;
+
+            public static implicit operator Psubw(AsmHexCode src) => new Psubw(src);
         }
 
         public Psubw psubw() => default;
@@ -18359,6 +19769,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psubd src) => AsmMnemonics.PSUBD;
 
             public static implicit operator AsmHexCode(Psubd src) => src.Encoded;
+
+            public static implicit operator Psubd(AsmHexCode src) => new Psubd(src);
         }
 
         public Psubd psubd() => default;
@@ -18385,6 +19797,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsubb src) => AsmMnemonics.VPSUBB;
 
             public static implicit operator AsmHexCode(Vpsubb src) => src.Encoded;
+
+            public static implicit operator Vpsubb(AsmHexCode src) => new Vpsubb(src);
         }
 
         public Vpsubb vpsubb() => default;
@@ -18411,6 +19825,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsubw src) => AsmMnemonics.VPSUBW;
 
             public static implicit operator AsmHexCode(Vpsubw src) => src.Encoded;
+
+            public static implicit operator Vpsubw(AsmHexCode src) => new Vpsubw(src);
         }
 
         public Vpsubw vpsubw() => default;
@@ -18437,6 +19853,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsubd src) => AsmMnemonics.VPSUBD;
 
             public static implicit operator AsmHexCode(Vpsubd src) => src.Encoded;
+
+            public static implicit operator Vpsubd(AsmHexCode src) => new Vpsubd(src);
         }
 
         public Vpsubd vpsubd() => default;
@@ -18463,6 +19881,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psubq src) => AsmMnemonics.PSUBQ;
 
             public static implicit operator AsmHexCode(Psubq src) => src.Encoded;
+
+            public static implicit operator Psubq(AsmHexCode src) => new Psubq(src);
         }
 
         public Psubq psubq() => default;
@@ -18489,6 +19909,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsubq src) => AsmMnemonics.VPSUBQ;
 
             public static implicit operator AsmHexCode(Vpsubq src) => src.Encoded;
+
+            public static implicit operator Vpsubq(AsmHexCode src) => new Vpsubq(src);
         }
 
         public Vpsubq vpsubq() => default;
@@ -18515,6 +19937,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psubsb src) => AsmMnemonics.PSUBSB;
 
             public static implicit operator AsmHexCode(Psubsb src) => src.Encoded;
+
+            public static implicit operator Psubsb(AsmHexCode src) => new Psubsb(src);
         }
 
         public Psubsb psubsb() => default;
@@ -18541,6 +19965,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psubsw src) => AsmMnemonics.PSUBSW;
 
             public static implicit operator AsmHexCode(Psubsw src) => src.Encoded;
+
+            public static implicit operator Psubsw(AsmHexCode src) => new Psubsw(src);
         }
 
         public Psubsw psubsw() => default;
@@ -18567,6 +19993,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsubsb src) => AsmMnemonics.VPSUBSB;
 
             public static implicit operator AsmHexCode(Vpsubsb src) => src.Encoded;
+
+            public static implicit operator Vpsubsb(AsmHexCode src) => new Vpsubsb(src);
         }
 
         public Vpsubsb vpsubsb() => default;
@@ -18593,6 +20021,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsubsw src) => AsmMnemonics.VPSUBSW;
 
             public static implicit operator AsmHexCode(Vpsubsw src) => src.Encoded;
+
+            public static implicit operator Vpsubsw(AsmHexCode src) => new Vpsubsw(src);
         }
 
         public Vpsubsw vpsubsw() => default;
@@ -18619,6 +20049,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psubusb src) => AsmMnemonics.PSUBUSB;
 
             public static implicit operator AsmHexCode(Psubusb src) => src.Encoded;
+
+            public static implicit operator Psubusb(AsmHexCode src) => new Psubusb(src);
         }
 
         public Psubusb psubusb() => default;
@@ -18645,6 +20077,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Psubusw src) => AsmMnemonics.PSUBUSW;
 
             public static implicit operator AsmHexCode(Psubusw src) => src.Encoded;
+
+            public static implicit operator Psubusw(AsmHexCode src) => new Psubusw(src);
         }
 
         public Psubusw psubusw() => default;
@@ -18671,6 +20105,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsubusb src) => AsmMnemonics.VPSUBUSB;
 
             public static implicit operator AsmHexCode(Vpsubusb src) => src.Encoded;
+
+            public static implicit operator Vpsubusb(AsmHexCode src) => new Vpsubusb(src);
         }
 
         public Vpsubusb vpsubusb() => default;
@@ -18697,6 +20133,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsubusw src) => AsmMnemonics.VPSUBUSW;
 
             public static implicit operator AsmHexCode(Vpsubusw src) => src.Encoded;
+
+            public static implicit operator Vpsubusw(AsmHexCode src) => new Vpsubusw(src);
         }
 
         public Vpsubusw vpsubusw() => default;
@@ -18723,6 +20161,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ptest src) => AsmMnemonics.PTEST;
 
             public static implicit operator AsmHexCode(Ptest src) => src.Encoded;
+
+            public static implicit operator Ptest(AsmHexCode src) => new Ptest(src);
         }
 
         public Ptest ptest() => default;
@@ -18749,6 +20189,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vptest src) => AsmMnemonics.VPTEST;
 
             public static implicit operator AsmHexCode(Vptest src) => src.Encoded;
+
+            public static implicit operator Vptest(AsmHexCode src) => new Vptest(src);
         }
 
         public Vptest vptest() => default;
@@ -18775,6 +20217,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Punpckhbw src) => AsmMnemonics.PUNPCKHBW;
 
             public static implicit operator AsmHexCode(Punpckhbw src) => src.Encoded;
+
+            public static implicit operator Punpckhbw(AsmHexCode src) => new Punpckhbw(src);
         }
 
         public Punpckhbw punpckhbw() => default;
@@ -18801,6 +20245,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Punpckhwd src) => AsmMnemonics.PUNPCKHWD;
 
             public static implicit operator AsmHexCode(Punpckhwd src) => src.Encoded;
+
+            public static implicit operator Punpckhwd(AsmHexCode src) => new Punpckhwd(src);
         }
 
         public Punpckhwd punpckhwd() => default;
@@ -18827,6 +20273,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Punpckhdq src) => AsmMnemonics.PUNPCKHDQ;
 
             public static implicit operator AsmHexCode(Punpckhdq src) => src.Encoded;
+
+            public static implicit operator Punpckhdq(AsmHexCode src) => new Punpckhdq(src);
         }
 
         public Punpckhdq punpckhdq() => default;
@@ -18853,6 +20301,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Punpckhqdq src) => AsmMnemonics.PUNPCKHQDQ;
 
             public static implicit operator AsmHexCode(Punpckhqdq src) => src.Encoded;
+
+            public static implicit operator Punpckhqdq(AsmHexCode src) => new Punpckhqdq(src);
         }
 
         public Punpckhqdq punpckhqdq() => default;
@@ -18879,6 +20329,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpunpckhbw src) => AsmMnemonics.VPUNPCKHBW;
 
             public static implicit operator AsmHexCode(Vpunpckhbw src) => src.Encoded;
+
+            public static implicit operator Vpunpckhbw(AsmHexCode src) => new Vpunpckhbw(src);
         }
 
         public Vpunpckhbw vpunpckhbw() => default;
@@ -18905,6 +20357,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpunpckhwd src) => AsmMnemonics.VPUNPCKHWD;
 
             public static implicit operator AsmHexCode(Vpunpckhwd src) => src.Encoded;
+
+            public static implicit operator Vpunpckhwd(AsmHexCode src) => new Vpunpckhwd(src);
         }
 
         public Vpunpckhwd vpunpckhwd() => default;
@@ -18931,6 +20385,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpunpckhdq src) => AsmMnemonics.VPUNPCKHDQ;
 
             public static implicit operator AsmHexCode(Vpunpckhdq src) => src.Encoded;
+
+            public static implicit operator Vpunpckhdq(AsmHexCode src) => new Vpunpckhdq(src);
         }
 
         public Vpunpckhdq vpunpckhdq() => default;
@@ -18957,6 +20413,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpunpckhqdq src) => AsmMnemonics.VPUNPCKHQDQ;
 
             public static implicit operator AsmHexCode(Vpunpckhqdq src) => src.Encoded;
+
+            public static implicit operator Vpunpckhqdq(AsmHexCode src) => new Vpunpckhqdq(src);
         }
 
         public Vpunpckhqdq vpunpckhqdq() => default;
@@ -18983,6 +20441,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Punpcklbw src) => AsmMnemonics.PUNPCKLBW;
 
             public static implicit operator AsmHexCode(Punpcklbw src) => src.Encoded;
+
+            public static implicit operator Punpcklbw(AsmHexCode src) => new Punpcklbw(src);
         }
 
         public Punpcklbw punpcklbw() => default;
@@ -19009,6 +20469,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Punpcklwd src) => AsmMnemonics.PUNPCKLWD;
 
             public static implicit operator AsmHexCode(Punpcklwd src) => src.Encoded;
+
+            public static implicit operator Punpcklwd(AsmHexCode src) => new Punpcklwd(src);
         }
 
         public Punpcklwd punpcklwd() => default;
@@ -19035,6 +20497,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Punpckldq src) => AsmMnemonics.PUNPCKLDQ;
 
             public static implicit operator AsmHexCode(Punpckldq src) => src.Encoded;
+
+            public static implicit operator Punpckldq(AsmHexCode src) => new Punpckldq(src);
         }
 
         public Punpckldq punpckldq() => default;
@@ -19061,6 +20525,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Punpcklqdq src) => AsmMnemonics.PUNPCKLQDQ;
 
             public static implicit operator AsmHexCode(Punpcklqdq src) => src.Encoded;
+
+            public static implicit operator Punpcklqdq(AsmHexCode src) => new Punpcklqdq(src);
         }
 
         public Punpcklqdq punpcklqdq() => default;
@@ -19087,6 +20553,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpunpcklbw src) => AsmMnemonics.VPUNPCKLBW;
 
             public static implicit operator AsmHexCode(Vpunpcklbw src) => src.Encoded;
+
+            public static implicit operator Vpunpcklbw(AsmHexCode src) => new Vpunpcklbw(src);
         }
 
         public Vpunpcklbw vpunpcklbw() => default;
@@ -19113,6 +20581,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpunpcklwd src) => AsmMnemonics.VPUNPCKLWD;
 
             public static implicit operator AsmHexCode(Vpunpcklwd src) => src.Encoded;
+
+            public static implicit operator Vpunpcklwd(AsmHexCode src) => new Vpunpcklwd(src);
         }
 
         public Vpunpcklwd vpunpcklwd() => default;
@@ -19139,6 +20609,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpunpckldq src) => AsmMnemonics.VPUNPCKLDQ;
 
             public static implicit operator AsmHexCode(Vpunpckldq src) => src.Encoded;
+
+            public static implicit operator Vpunpckldq(AsmHexCode src) => new Vpunpckldq(src);
         }
 
         public Vpunpckldq vpunpckldq() => default;
@@ -19165,6 +20637,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpunpcklqdq src) => AsmMnemonics.VPUNPCKLQDQ;
 
             public static implicit operator AsmHexCode(Vpunpcklqdq src) => src.Encoded;
+
+            public static implicit operator Vpunpcklqdq(AsmHexCode src) => new Vpunpcklqdq(src);
         }
 
         public Vpunpcklqdq vpunpcklqdq() => default;
@@ -19191,6 +20665,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Push src) => AsmMnemonics.PUSH;
 
             public static implicit operator AsmHexCode(Push src) => src.Encoded;
+
+            public static implicit operator Push(AsmHexCode src) => new Push(src);
         }
 
         public Push push() => default;
@@ -19217,6 +20693,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pushq src) => AsmMnemonics.PUSHQ;
 
             public static implicit operator AsmHexCode(Pushq src) => src.Encoded;
+
+            public static implicit operator Pushq(AsmHexCode src) => new Pushq(src);
         }
 
         public Pushq pushq() => default;
@@ -19243,6 +20721,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pushw src) => AsmMnemonics.PUSHW;
 
             public static implicit operator AsmHexCode(Pushw src) => src.Encoded;
+
+            public static implicit operator Pushw(AsmHexCode src) => new Pushw(src);
         }
 
         public Pushw pushw() => default;
@@ -19269,6 +20749,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pusha src) => AsmMnemonics.PUSHA;
 
             public static implicit operator AsmHexCode(Pusha src) => src.Encoded;
+
+            public static implicit operator Pusha(AsmHexCode src) => new Pusha(src);
         }
 
         public Pusha pusha() => default;
@@ -19295,6 +20777,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pushad src) => AsmMnemonics.PUSHAD;
 
             public static implicit operator AsmHexCode(Pushad src) => src.Encoded;
+
+            public static implicit operator Pushad(AsmHexCode src) => new Pushad(src);
         }
 
         public Pushad pushad() => default;
@@ -19321,6 +20805,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pushf src) => AsmMnemonics.PUSHF;
 
             public static implicit operator AsmHexCode(Pushf src) => src.Encoded;
+
+            public static implicit operator Pushf(AsmHexCode src) => new Pushf(src);
         }
 
         public Pushf pushf() => default;
@@ -19347,6 +20833,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pushfd src) => AsmMnemonics.PUSHFD;
 
             public static implicit operator AsmHexCode(Pushfd src) => src.Encoded;
+
+            public static implicit operator Pushfd(AsmHexCode src) => new Pushfd(src);
         }
 
         public Pushfd pushfd() => default;
@@ -19373,6 +20861,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pushfq src) => AsmMnemonics.PUSHFQ;
 
             public static implicit operator AsmHexCode(Pushfq src) => src.Encoded;
+
+            public static implicit operator Pushfq(AsmHexCode src) => new Pushfq(src);
         }
 
         public Pushfq pushfq() => default;
@@ -19399,6 +20889,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Pxor src) => AsmMnemonics.PXOR;
 
             public static implicit operator AsmHexCode(Pxor src) => src.Encoded;
+
+            public static implicit operator Pxor(AsmHexCode src) => new Pxor(src);
         }
 
         public Pxor pxor() => default;
@@ -19425,6 +20917,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpxor src) => AsmMnemonics.VPXOR;
 
             public static implicit operator AsmHexCode(Vpxor src) => src.Encoded;
+
+            public static implicit operator Vpxor(AsmHexCode src) => new Vpxor(src);
         }
 
         public Vpxor vpxor() => default;
@@ -19451,6 +20945,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rcl src) => AsmMnemonics.RCL;
 
             public static implicit operator AsmHexCode(Rcl src) => src.Encoded;
+
+            public static implicit operator Rcl(AsmHexCode src) => new Rcl(src);
         }
 
         public Rcl rcl() => default;
@@ -19477,6 +20973,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rcr src) => AsmMnemonics.RCR;
 
             public static implicit operator AsmHexCode(Rcr src) => src.Encoded;
+
+            public static implicit operator Rcr(AsmHexCode src) => new Rcr(src);
         }
 
         public Rcr rcr() => default;
@@ -19503,6 +21001,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rol src) => AsmMnemonics.ROL;
 
             public static implicit operator AsmHexCode(Rol src) => src.Encoded;
+
+            public static implicit operator Rol(AsmHexCode src) => new Rol(src);
         }
 
         public Rol rol() => default;
@@ -19529,6 +21029,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ror src) => AsmMnemonics.ROR;
 
             public static implicit operator AsmHexCode(Ror src) => src.Encoded;
+
+            public static implicit operator Ror(AsmHexCode src) => new Ror(src);
         }
 
         public Ror ror() => default;
@@ -19555,6 +21057,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rcpps src) => AsmMnemonics.RCPPS;
 
             public static implicit operator AsmHexCode(Rcpps src) => src.Encoded;
+
+            public static implicit operator Rcpps(AsmHexCode src) => new Rcpps(src);
         }
 
         public Rcpps rcpps() => default;
@@ -19581,6 +21085,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vrcpps src) => AsmMnemonics.VRCPPS;
 
             public static implicit operator AsmHexCode(Vrcpps src) => src.Encoded;
+
+            public static implicit operator Vrcpps(AsmHexCode src) => new Vrcpps(src);
         }
 
         public Vrcpps vrcpps() => default;
@@ -19607,6 +21113,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rcpss src) => AsmMnemonics.RCPSS;
 
             public static implicit operator AsmHexCode(Rcpss src) => src.Encoded;
+
+            public static implicit operator Rcpss(AsmHexCode src) => new Rcpss(src);
         }
 
         public Rcpss rcpss() => default;
@@ -19633,6 +21141,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vrcpss src) => AsmMnemonics.VRCPSS;
 
             public static implicit operator AsmHexCode(Vrcpss src) => src.Encoded;
+
+            public static implicit operator Vrcpss(AsmHexCode src) => new Vrcpss(src);
         }
 
         public Vrcpss vrcpss() => default;
@@ -19659,6 +21169,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rdfsbase src) => AsmMnemonics.RDFSBASE;
 
             public static implicit operator AsmHexCode(Rdfsbase src) => src.Encoded;
+
+            public static implicit operator Rdfsbase(AsmHexCode src) => new Rdfsbase(src);
         }
 
         public Rdfsbase rdfsbase() => default;
@@ -19685,6 +21197,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rdgsbase src) => AsmMnemonics.RDGSBASE;
 
             public static implicit operator AsmHexCode(Rdgsbase src) => src.Encoded;
+
+            public static implicit operator Rdgsbase(AsmHexCode src) => new Rdgsbase(src);
         }
 
         public Rdgsbase rdgsbase() => default;
@@ -19711,6 +21225,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rdmsr src) => AsmMnemonics.RDMSR;
 
             public static implicit operator AsmHexCode(Rdmsr src) => src.Encoded;
+
+            public static implicit operator Rdmsr(AsmHexCode src) => new Rdmsr(src);
         }
 
         public Rdmsr rdmsr() => default;
@@ -19737,6 +21253,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rdpmc src) => AsmMnemonics.RDPMC;
 
             public static implicit operator AsmHexCode(Rdpmc src) => src.Encoded;
+
+            public static implicit operator Rdpmc(AsmHexCode src) => new Rdpmc(src);
         }
 
         public Rdpmc rdpmc() => default;
@@ -19763,6 +21281,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rdrand src) => AsmMnemonics.RDRAND;
 
             public static implicit operator AsmHexCode(Rdrand src) => src.Encoded;
+
+            public static implicit operator Rdrand(AsmHexCode src) => new Rdrand(src);
         }
 
         public Rdrand rdrand() => default;
@@ -19789,6 +21309,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rdtsc src) => AsmMnemonics.RDTSC;
 
             public static implicit operator AsmHexCode(Rdtsc src) => src.Encoded;
+
+            public static implicit operator Rdtsc(AsmHexCode src) => new Rdtsc(src);
         }
 
         public Rdtsc rdtsc() => default;
@@ -19815,6 +21337,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rdtscp src) => AsmMnemonics.RDTSCP;
 
             public static implicit operator AsmHexCode(Rdtscp src) => src.Encoded;
+
+            public static implicit operator Rdtscp(AsmHexCode src) => new Rdtscp(src);
         }
 
         public Rdtscp rdtscp() => default;
@@ -19841,6 +21365,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rep_ins src) => AsmMnemonics.REP_INS;
 
             public static implicit operator AsmHexCode(Rep_ins src) => src.Encoded;
+
+            public static implicit operator Rep_ins(AsmHexCode src) => new Rep_ins(src);
         }
 
         public Rep_ins rep_ins() => default;
@@ -19867,6 +21393,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rep_movs src) => AsmMnemonics.REP_MOVS;
 
             public static implicit operator AsmHexCode(Rep_movs src) => src.Encoded;
+
+            public static implicit operator Rep_movs(AsmHexCode src) => new Rep_movs(src);
         }
 
         public Rep_movs rep_movs() => default;
@@ -19893,6 +21421,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rep_outs src) => AsmMnemonics.REP_OUTS;
 
             public static implicit operator AsmHexCode(Rep_outs src) => src.Encoded;
+
+            public static implicit operator Rep_outs(AsmHexCode src) => new Rep_outs(src);
         }
 
         public Rep_outs rep_outs() => default;
@@ -19919,6 +21449,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rep_lods src) => AsmMnemonics.REP_LODS;
 
             public static implicit operator AsmHexCode(Rep_lods src) => src.Encoded;
+
+            public static implicit operator Rep_lods(AsmHexCode src) => new Rep_lods(src);
         }
 
         public Rep_lods rep_lods() => default;
@@ -19945,6 +21477,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rep_stos src) => AsmMnemonics.REP_STOS;
 
             public static implicit operator AsmHexCode(Rep_stos src) => src.Encoded;
+
+            public static implicit operator Rep_stos(AsmHexCode src) => new Rep_stos(src);
         }
 
         public Rep_stos rep_stos() => default;
@@ -19971,6 +21505,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Repe_cmps src) => AsmMnemonics.REPE_CMPS;
 
             public static implicit operator AsmHexCode(Repe_cmps src) => src.Encoded;
+
+            public static implicit operator Repe_cmps(AsmHexCode src) => new Repe_cmps(src);
         }
 
         public Repe_cmps repe_cmps() => default;
@@ -19997,6 +21533,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Repe_scas src) => AsmMnemonics.REPE_SCAS;
 
             public static implicit operator AsmHexCode(Repe_scas src) => src.Encoded;
+
+            public static implicit operator Repe_scas(AsmHexCode src) => new Repe_scas(src);
         }
 
         public Repe_scas repe_scas() => default;
@@ -20023,6 +21561,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Repne_cmps src) => AsmMnemonics.REPNE_CMPS;
 
             public static implicit operator AsmHexCode(Repne_cmps src) => src.Encoded;
+
+            public static implicit operator Repne_cmps(AsmHexCode src) => new Repne_cmps(src);
         }
 
         public Repne_cmps repne_cmps() => default;
@@ -20049,6 +21589,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Repne_scas src) => AsmMnemonics.REPNE_SCAS;
 
             public static implicit operator AsmHexCode(Repne_scas src) => src.Encoded;
+
+            public static implicit operator Repne_scas(AsmHexCode src) => new Repne_scas(src);
         }
 
         public Repne_scas repne_scas() => default;
@@ -20075,6 +21617,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ret src) => AsmMnemonics.RET;
 
             public static implicit operator AsmHexCode(Ret src) => src.Encoded;
+
+            public static implicit operator Ret(AsmHexCode src) => new Ret(src);
         }
 
         public Ret ret() => default;
@@ -20101,6 +21645,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rorx src) => AsmMnemonics.RORX;
 
             public static implicit operator AsmHexCode(Rorx src) => src.Encoded;
+
+            public static implicit operator Rorx(AsmHexCode src) => new Rorx(src);
         }
 
         public Rorx rorx() => default;
@@ -20127,6 +21673,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Roundpd src) => AsmMnemonics.ROUNDPD;
 
             public static implicit operator AsmHexCode(Roundpd src) => src.Encoded;
+
+            public static implicit operator Roundpd(AsmHexCode src) => new Roundpd(src);
         }
 
         public Roundpd roundpd() => default;
@@ -20153,6 +21701,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vroundpd src) => AsmMnemonics.VROUNDPD;
 
             public static implicit operator AsmHexCode(Vroundpd src) => src.Encoded;
+
+            public static implicit operator Vroundpd(AsmHexCode src) => new Vroundpd(src);
         }
 
         public Vroundpd vroundpd() => default;
@@ -20179,6 +21729,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Roundps src) => AsmMnemonics.ROUNDPS;
 
             public static implicit operator AsmHexCode(Roundps src) => src.Encoded;
+
+            public static implicit operator Roundps(AsmHexCode src) => new Roundps(src);
         }
 
         public Roundps roundps() => default;
@@ -20205,6 +21757,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vroundps src) => AsmMnemonics.VROUNDPS;
 
             public static implicit operator AsmHexCode(Vroundps src) => src.Encoded;
+
+            public static implicit operator Vroundps(AsmHexCode src) => new Vroundps(src);
         }
 
         public Vroundps vroundps() => default;
@@ -20231,6 +21785,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Roundsd src) => AsmMnemonics.ROUNDSD;
 
             public static implicit operator AsmHexCode(Roundsd src) => src.Encoded;
+
+            public static implicit operator Roundsd(AsmHexCode src) => new Roundsd(src);
         }
 
         public Roundsd roundsd() => default;
@@ -20257,6 +21813,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vroundsd src) => AsmMnemonics.VROUNDSD;
 
             public static implicit operator AsmHexCode(Vroundsd src) => src.Encoded;
+
+            public static implicit operator Vroundsd(AsmHexCode src) => new Vroundsd(src);
         }
 
         public Vroundsd vroundsd() => default;
@@ -20283,6 +21841,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Roundss src) => AsmMnemonics.ROUNDSS;
 
             public static implicit operator AsmHexCode(Roundss src) => src.Encoded;
+
+            public static implicit operator Roundss(AsmHexCode src) => new Roundss(src);
         }
 
         public Roundss roundss() => default;
@@ -20309,6 +21869,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vroundss src) => AsmMnemonics.VROUNDSS;
 
             public static implicit operator AsmHexCode(Vroundss src) => src.Encoded;
+
+            public static implicit operator Vroundss(AsmHexCode src) => new Vroundss(src);
         }
 
         public Vroundss vroundss() => default;
@@ -20335,6 +21897,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rsm src) => AsmMnemonics.RSM;
 
             public static implicit operator AsmHexCode(Rsm src) => src.Encoded;
+
+            public static implicit operator Rsm(AsmHexCode src) => new Rsm(src);
         }
 
         public Rsm rsm() => default;
@@ -20361,6 +21925,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rsqrtps src) => AsmMnemonics.RSQRTPS;
 
             public static implicit operator AsmHexCode(Rsqrtps src) => src.Encoded;
+
+            public static implicit operator Rsqrtps(AsmHexCode src) => new Rsqrtps(src);
         }
 
         public Rsqrtps rsqrtps() => default;
@@ -20387,6 +21953,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vrsqrtps src) => AsmMnemonics.VRSQRTPS;
 
             public static implicit operator AsmHexCode(Vrsqrtps src) => src.Encoded;
+
+            public static implicit operator Vrsqrtps(AsmHexCode src) => new Vrsqrtps(src);
         }
 
         public Vrsqrtps vrsqrtps() => default;
@@ -20413,6 +21981,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Rsqrtss src) => AsmMnemonics.RSQRTSS;
 
             public static implicit operator AsmHexCode(Rsqrtss src) => src.Encoded;
+
+            public static implicit operator Rsqrtss(AsmHexCode src) => new Rsqrtss(src);
         }
 
         public Rsqrtss rsqrtss() => default;
@@ -20439,6 +22009,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vrsqrtss src) => AsmMnemonics.VRSQRTSS;
 
             public static implicit operator AsmHexCode(Vrsqrtss src) => src.Encoded;
+
+            public static implicit operator Vrsqrtss(AsmHexCode src) => new Vrsqrtss(src);
         }
 
         public Vrsqrtss vrsqrtss() => default;
@@ -20465,6 +22037,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sahf src) => AsmMnemonics.SAHF;
 
             public static implicit operator AsmHexCode(Sahf src) => src.Encoded;
+
+            public static implicit operator Sahf(AsmHexCode src) => new Sahf(src);
         }
 
         public Sahf sahf() => default;
@@ -20491,6 +22065,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sal src) => AsmMnemonics.SAL;
 
             public static implicit operator AsmHexCode(Sal src) => src.Encoded;
+
+            public static implicit operator Sal(AsmHexCode src) => new Sal(src);
         }
 
         public Sal sal() => default;
@@ -20517,6 +22093,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sar src) => AsmMnemonics.SAR;
 
             public static implicit operator AsmHexCode(Sar src) => src.Encoded;
+
+            public static implicit operator Sar(AsmHexCode src) => new Sar(src);
         }
 
         public Sar sar() => default;
@@ -20543,6 +22121,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Shl src) => AsmMnemonics.SHL;
 
             public static implicit operator AsmHexCode(Shl src) => src.Encoded;
+
+            public static implicit operator Shl(AsmHexCode src) => new Shl(src);
         }
 
         public Shl shl() => default;
@@ -20569,6 +22149,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Shr src) => AsmMnemonics.SHR;
 
             public static implicit operator AsmHexCode(Shr src) => src.Encoded;
+
+            public static implicit operator Shr(AsmHexCode src) => new Shr(src);
         }
 
         public Shr shr() => default;
@@ -20595,6 +22177,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sarx src) => AsmMnemonics.SARX;
 
             public static implicit operator AsmHexCode(Sarx src) => src.Encoded;
+
+            public static implicit operator Sarx(AsmHexCode src) => new Sarx(src);
         }
 
         public Sarx sarx() => default;
@@ -20621,6 +22205,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Shlx src) => AsmMnemonics.SHLX;
 
             public static implicit operator AsmHexCode(Shlx src) => src.Encoded;
+
+            public static implicit operator Shlx(AsmHexCode src) => new Shlx(src);
         }
 
         public Shlx shlx() => default;
@@ -20647,6 +22233,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Shrx src) => AsmMnemonics.SHRX;
 
             public static implicit operator AsmHexCode(Shrx src) => src.Encoded;
+
+            public static implicit operator Shrx(AsmHexCode src) => new Shrx(src);
         }
 
         public Shrx shrx() => default;
@@ -20673,6 +22261,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sbb src) => AsmMnemonics.SBB;
 
             public static implicit operator AsmHexCode(Sbb src) => src.Encoded;
+
+            public static implicit operator Sbb(AsmHexCode src) => new Sbb(src);
         }
 
         public Sbb sbb() => default;
@@ -20699,6 +22289,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Scas src) => AsmMnemonics.SCAS;
 
             public static implicit operator AsmHexCode(Scas src) => src.Encoded;
+
+            public static implicit operator Scas(AsmHexCode src) => new Scas(src);
         }
 
         public Scas scas() => default;
@@ -20725,6 +22317,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Scasb src) => AsmMnemonics.SCASB;
 
             public static implicit operator AsmHexCode(Scasb src) => src.Encoded;
+
+            public static implicit operator Scasb(AsmHexCode src) => new Scasb(src);
         }
 
         public Scasb scasb() => default;
@@ -20751,6 +22345,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Scasw src) => AsmMnemonics.SCASW;
 
             public static implicit operator AsmHexCode(Scasw src) => src.Encoded;
+
+            public static implicit operator Scasw(AsmHexCode src) => new Scasw(src);
         }
 
         public Scasw scasw() => default;
@@ -20777,6 +22373,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Scasd src) => AsmMnemonics.SCASD;
 
             public static implicit operator AsmHexCode(Scasd src) => src.Encoded;
+
+            public static implicit operator Scasd(AsmHexCode src) => new Scasd(src);
         }
 
         public Scasd scasd() => default;
@@ -20803,6 +22401,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Scasq src) => AsmMnemonics.SCASQ;
 
             public static implicit operator AsmHexCode(Scasq src) => src.Encoded;
+
+            public static implicit operator Scasq(AsmHexCode src) => new Scasq(src);
         }
 
         public Scasq scasq() => default;
@@ -20829,6 +22429,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Seta src) => AsmMnemonics.SETA;
 
             public static implicit operator AsmHexCode(Seta src) => src.Encoded;
+
+            public static implicit operator Seta(AsmHexCode src) => new Seta(src);
         }
 
         public Seta seta() => default;
@@ -20855,6 +22457,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setae src) => AsmMnemonics.SETAE;
 
             public static implicit operator AsmHexCode(Setae src) => src.Encoded;
+
+            public static implicit operator Setae(AsmHexCode src) => new Setae(src);
         }
 
         public Setae setae() => default;
@@ -20881,6 +22485,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setb src) => AsmMnemonics.SETB;
 
             public static implicit operator AsmHexCode(Setb src) => src.Encoded;
+
+            public static implicit operator Setb(AsmHexCode src) => new Setb(src);
         }
 
         public Setb setb() => default;
@@ -20907,6 +22513,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setbe src) => AsmMnemonics.SETBE;
 
             public static implicit operator AsmHexCode(Setbe src) => src.Encoded;
+
+            public static implicit operator Setbe(AsmHexCode src) => new Setbe(src);
         }
 
         public Setbe setbe() => default;
@@ -20933,6 +22541,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setc src) => AsmMnemonics.SETC;
 
             public static implicit operator AsmHexCode(Setc src) => src.Encoded;
+
+            public static implicit operator Setc(AsmHexCode src) => new Setc(src);
         }
 
         public Setc setc() => default;
@@ -20959,6 +22569,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sete src) => AsmMnemonics.SETE;
 
             public static implicit operator AsmHexCode(Sete src) => src.Encoded;
+
+            public static implicit operator Sete(AsmHexCode src) => new Sete(src);
         }
 
         public Sete sete() => default;
@@ -20985,6 +22597,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setg src) => AsmMnemonics.SETG;
 
             public static implicit operator AsmHexCode(Setg src) => src.Encoded;
+
+            public static implicit operator Setg(AsmHexCode src) => new Setg(src);
         }
 
         public Setg setg() => default;
@@ -21011,6 +22625,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setge src) => AsmMnemonics.SETGE;
 
             public static implicit operator AsmHexCode(Setge src) => src.Encoded;
+
+            public static implicit operator Setge(AsmHexCode src) => new Setge(src);
         }
 
         public Setge setge() => default;
@@ -21037,6 +22653,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setl src) => AsmMnemonics.SETL;
 
             public static implicit operator AsmHexCode(Setl src) => src.Encoded;
+
+            public static implicit operator Setl(AsmHexCode src) => new Setl(src);
         }
 
         public Setl setl() => default;
@@ -21063,6 +22681,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setle src) => AsmMnemonics.SETLE;
 
             public static implicit operator AsmHexCode(Setle src) => src.Encoded;
+
+            public static implicit operator Setle(AsmHexCode src) => new Setle(src);
         }
 
         public Setle setle() => default;
@@ -21089,6 +22709,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setna src) => AsmMnemonics.SETNA;
 
             public static implicit operator AsmHexCode(Setna src) => src.Encoded;
+
+            public static implicit operator Setna(AsmHexCode src) => new Setna(src);
         }
 
         public Setna setna() => default;
@@ -21115,6 +22737,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnae src) => AsmMnemonics.SETNAE;
 
             public static implicit operator AsmHexCode(Setnae src) => src.Encoded;
+
+            public static implicit operator Setnae(AsmHexCode src) => new Setnae(src);
         }
 
         public Setnae setnae() => default;
@@ -21141,6 +22765,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnb src) => AsmMnemonics.SETNB;
 
             public static implicit operator AsmHexCode(Setnb src) => src.Encoded;
+
+            public static implicit operator Setnb(AsmHexCode src) => new Setnb(src);
         }
 
         public Setnb setnb() => default;
@@ -21167,6 +22793,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnbe src) => AsmMnemonics.SETNBE;
 
             public static implicit operator AsmHexCode(Setnbe src) => src.Encoded;
+
+            public static implicit operator Setnbe(AsmHexCode src) => new Setnbe(src);
         }
 
         public Setnbe setnbe() => default;
@@ -21193,6 +22821,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnc src) => AsmMnemonics.SETNC;
 
             public static implicit operator AsmHexCode(Setnc src) => src.Encoded;
+
+            public static implicit operator Setnc(AsmHexCode src) => new Setnc(src);
         }
 
         public Setnc setnc() => default;
@@ -21219,6 +22849,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setne src) => AsmMnemonics.SETNE;
 
             public static implicit operator AsmHexCode(Setne src) => src.Encoded;
+
+            public static implicit operator Setne(AsmHexCode src) => new Setne(src);
         }
 
         public Setne setne() => default;
@@ -21245,6 +22877,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setng src) => AsmMnemonics.SETNG;
 
             public static implicit operator AsmHexCode(Setng src) => src.Encoded;
+
+            public static implicit operator Setng(AsmHexCode src) => new Setng(src);
         }
 
         public Setng setng() => default;
@@ -21271,6 +22905,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnge src) => AsmMnemonics.SETNGE;
 
             public static implicit operator AsmHexCode(Setnge src) => src.Encoded;
+
+            public static implicit operator Setnge(AsmHexCode src) => new Setnge(src);
         }
 
         public Setnge setnge() => default;
@@ -21297,6 +22933,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnl src) => AsmMnemonics.SETNL;
 
             public static implicit operator AsmHexCode(Setnl src) => src.Encoded;
+
+            public static implicit operator Setnl(AsmHexCode src) => new Setnl(src);
         }
 
         public Setnl setnl() => default;
@@ -21323,6 +22961,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnle src) => AsmMnemonics.SETNLE;
 
             public static implicit operator AsmHexCode(Setnle src) => src.Encoded;
+
+            public static implicit operator Setnle(AsmHexCode src) => new Setnle(src);
         }
 
         public Setnle setnle() => default;
@@ -21349,6 +22989,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setno src) => AsmMnemonics.SETNO;
 
             public static implicit operator AsmHexCode(Setno src) => src.Encoded;
+
+            public static implicit operator Setno(AsmHexCode src) => new Setno(src);
         }
 
         public Setno setno() => default;
@@ -21375,6 +23017,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnp src) => AsmMnemonics.SETNP;
 
             public static implicit operator AsmHexCode(Setnp src) => src.Encoded;
+
+            public static implicit operator Setnp(AsmHexCode src) => new Setnp(src);
         }
 
         public Setnp setnp() => default;
@@ -21401,6 +23045,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setns src) => AsmMnemonics.SETNS;
 
             public static implicit operator AsmHexCode(Setns src) => src.Encoded;
+
+            public static implicit operator Setns(AsmHexCode src) => new Setns(src);
         }
 
         public Setns setns() => default;
@@ -21427,6 +23073,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setnz src) => AsmMnemonics.SETNZ;
 
             public static implicit operator AsmHexCode(Setnz src) => src.Encoded;
+
+            public static implicit operator Setnz(AsmHexCode src) => new Setnz(src);
         }
 
         public Setnz setnz() => default;
@@ -21453,6 +23101,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Seto src) => AsmMnemonics.SETO;
 
             public static implicit operator AsmHexCode(Seto src) => src.Encoded;
+
+            public static implicit operator Seto(AsmHexCode src) => new Seto(src);
         }
 
         public Seto seto() => default;
@@ -21479,6 +23129,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setp src) => AsmMnemonics.SETP;
 
             public static implicit operator AsmHexCode(Setp src) => src.Encoded;
+
+            public static implicit operator Setp(AsmHexCode src) => new Setp(src);
         }
 
         public Setp setp() => default;
@@ -21505,6 +23157,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setpe src) => AsmMnemonics.SETPE;
 
             public static implicit operator AsmHexCode(Setpe src) => src.Encoded;
+
+            public static implicit operator Setpe(AsmHexCode src) => new Setpe(src);
         }
 
         public Setpe setpe() => default;
@@ -21531,6 +23185,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setpo src) => AsmMnemonics.SETPO;
 
             public static implicit operator AsmHexCode(Setpo src) => src.Encoded;
+
+            public static implicit operator Setpo(AsmHexCode src) => new Setpo(src);
         }
 
         public Setpo setpo() => default;
@@ -21557,6 +23213,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sets src) => AsmMnemonics.SETS;
 
             public static implicit operator AsmHexCode(Sets src) => src.Encoded;
+
+            public static implicit operator Sets(AsmHexCode src) => new Sets(src);
         }
 
         public Sets sets() => default;
@@ -21583,6 +23241,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Setz src) => AsmMnemonics.SETZ;
 
             public static implicit operator AsmHexCode(Setz src) => src.Encoded;
+
+            public static implicit operator Setz(AsmHexCode src) => new Setz(src);
         }
 
         public Setz setz() => default;
@@ -21609,6 +23269,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sfence src) => AsmMnemonics.SFENCE;
 
             public static implicit operator AsmHexCode(Sfence src) => src.Encoded;
+
+            public static implicit operator Sfence(AsmHexCode src) => new Sfence(src);
         }
 
         public Sfence sfence() => default;
@@ -21635,6 +23297,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sgdt src) => AsmMnemonics.SGDT;
 
             public static implicit operator AsmHexCode(Sgdt src) => src.Encoded;
+
+            public static implicit operator Sgdt(AsmHexCode src) => new Sgdt(src);
         }
 
         public Sgdt sgdt() => default;
@@ -21661,6 +23325,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Shld src) => AsmMnemonics.SHLD;
 
             public static implicit operator AsmHexCode(Shld src) => src.Encoded;
+
+            public static implicit operator Shld(AsmHexCode src) => new Shld(src);
         }
 
         public Shld shld() => default;
@@ -21687,6 +23353,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Shrd src) => AsmMnemonics.SHRD;
 
             public static implicit operator AsmHexCode(Shrd src) => src.Encoded;
+
+            public static implicit operator Shrd(AsmHexCode src) => new Shrd(src);
         }
 
         public Shrd shrd() => default;
@@ -21713,6 +23381,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Shufpd src) => AsmMnemonics.SHUFPD;
 
             public static implicit operator AsmHexCode(Shufpd src) => src.Encoded;
+
+            public static implicit operator Shufpd(AsmHexCode src) => new Shufpd(src);
         }
 
         public Shufpd shufpd() => default;
@@ -21739,6 +23409,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vshufpd src) => AsmMnemonics.VSHUFPD;
 
             public static implicit operator AsmHexCode(Vshufpd src) => src.Encoded;
+
+            public static implicit operator Vshufpd(AsmHexCode src) => new Vshufpd(src);
         }
 
         public Vshufpd vshufpd() => default;
@@ -21765,6 +23437,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Shufps src) => AsmMnemonics.SHUFPS;
 
             public static implicit operator AsmHexCode(Shufps src) => src.Encoded;
+
+            public static implicit operator Shufps(AsmHexCode src) => new Shufps(src);
         }
 
         public Shufps shufps() => default;
@@ -21791,6 +23465,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vshufps src) => AsmMnemonics.VSHUFPS;
 
             public static implicit operator AsmHexCode(Vshufps src) => src.Encoded;
+
+            public static implicit operator Vshufps(AsmHexCode src) => new Vshufps(src);
         }
 
         public Vshufps vshufps() => default;
@@ -21817,6 +23493,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sidt src) => AsmMnemonics.SIDT;
 
             public static implicit operator AsmHexCode(Sidt src) => src.Encoded;
+
+            public static implicit operator Sidt(AsmHexCode src) => new Sidt(src);
         }
 
         public Sidt sidt() => default;
@@ -21843,6 +23521,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sldt src) => AsmMnemonics.SLDT;
 
             public static implicit operator AsmHexCode(Sldt src) => src.Encoded;
+
+            public static implicit operator Sldt(AsmHexCode src) => new Sldt(src);
         }
 
         public Sldt sldt() => default;
@@ -21869,6 +23549,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Smsw src) => AsmMnemonics.SMSW;
 
             public static implicit operator AsmHexCode(Smsw src) => src.Encoded;
+
+            public static implicit operator Smsw(AsmHexCode src) => new Smsw(src);
         }
 
         public Smsw smsw() => default;
@@ -21895,6 +23577,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sqrtpd src) => AsmMnemonics.SQRTPD;
 
             public static implicit operator AsmHexCode(Sqrtpd src) => src.Encoded;
+
+            public static implicit operator Sqrtpd(AsmHexCode src) => new Sqrtpd(src);
         }
 
         public Sqrtpd sqrtpd() => default;
@@ -21921,6 +23605,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vsqrtpd src) => AsmMnemonics.VSQRTPD;
 
             public static implicit operator AsmHexCode(Vsqrtpd src) => src.Encoded;
+
+            public static implicit operator Vsqrtpd(AsmHexCode src) => new Vsqrtpd(src);
         }
 
         public Vsqrtpd vsqrtpd() => default;
@@ -21947,6 +23633,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sqrtps src) => AsmMnemonics.SQRTPS;
 
             public static implicit operator AsmHexCode(Sqrtps src) => src.Encoded;
+
+            public static implicit operator Sqrtps(AsmHexCode src) => new Sqrtps(src);
         }
 
         public Sqrtps sqrtps() => default;
@@ -21973,6 +23661,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vsqrtps src) => AsmMnemonics.VSQRTPS;
 
             public static implicit operator AsmHexCode(Vsqrtps src) => src.Encoded;
+
+            public static implicit operator Vsqrtps(AsmHexCode src) => new Vsqrtps(src);
         }
 
         public Vsqrtps vsqrtps() => default;
@@ -21999,6 +23689,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sqrtsd src) => AsmMnemonics.SQRTSD;
 
             public static implicit operator AsmHexCode(Sqrtsd src) => src.Encoded;
+
+            public static implicit operator Sqrtsd(AsmHexCode src) => new Sqrtsd(src);
         }
 
         public Sqrtsd sqrtsd() => default;
@@ -22025,6 +23717,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vsqrtsd src) => AsmMnemonics.VSQRTSD;
 
             public static implicit operator AsmHexCode(Vsqrtsd src) => src.Encoded;
+
+            public static implicit operator Vsqrtsd(AsmHexCode src) => new Vsqrtsd(src);
         }
 
         public Vsqrtsd vsqrtsd() => default;
@@ -22051,6 +23745,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sqrtss src) => AsmMnemonics.SQRTSS;
 
             public static implicit operator AsmHexCode(Sqrtss src) => src.Encoded;
+
+            public static implicit operator Sqrtss(AsmHexCode src) => new Sqrtss(src);
         }
 
         public Sqrtss sqrtss() => default;
@@ -22077,6 +23773,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vsqrtss src) => AsmMnemonics.VSQRTSS;
 
             public static implicit operator AsmHexCode(Vsqrtss src) => src.Encoded;
+
+            public static implicit operator Vsqrtss(AsmHexCode src) => new Vsqrtss(src);
         }
 
         public Vsqrtss vsqrtss() => default;
@@ -22103,6 +23801,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Stc src) => AsmMnemonics.STC;
 
             public static implicit operator AsmHexCode(Stc src) => src.Encoded;
+
+            public static implicit operator Stc(AsmHexCode src) => new Stc(src);
         }
 
         public Stc stc() => default;
@@ -22129,6 +23829,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Std src) => AsmMnemonics.STD;
 
             public static implicit operator AsmHexCode(Std src) => src.Encoded;
+
+            public static implicit operator Std(AsmHexCode src) => new Std(src);
         }
 
         public Std std() => default;
@@ -22155,6 +23857,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sti src) => AsmMnemonics.STI;
 
             public static implicit operator AsmHexCode(Sti src) => src.Encoded;
+
+            public static implicit operator Sti(AsmHexCode src) => new Sti(src);
         }
 
         public Sti sti() => default;
@@ -22181,6 +23885,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Stmxcsr src) => AsmMnemonics.STMXCSR;
 
             public static implicit operator AsmHexCode(Stmxcsr src) => src.Encoded;
+
+            public static implicit operator Stmxcsr(AsmHexCode src) => new Stmxcsr(src);
         }
 
         public Stmxcsr stmxcsr() => default;
@@ -22207,6 +23913,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vstmxcsr src) => AsmMnemonics.VSTMXCSR;
 
             public static implicit operator AsmHexCode(Vstmxcsr src) => src.Encoded;
+
+            public static implicit operator Vstmxcsr(AsmHexCode src) => new Vstmxcsr(src);
         }
 
         public Vstmxcsr vstmxcsr() => default;
@@ -22233,6 +23941,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Stos src) => AsmMnemonics.STOS;
 
             public static implicit operator AsmHexCode(Stos src) => src.Encoded;
+
+            public static implicit operator Stos(AsmHexCode src) => new Stos(src);
         }
 
         public Stos stos() => default;
@@ -22259,6 +23969,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Stosb src) => AsmMnemonics.STOSB;
 
             public static implicit operator AsmHexCode(Stosb src) => src.Encoded;
+
+            public static implicit operator Stosb(AsmHexCode src) => new Stosb(src);
         }
 
         public Stosb stosb() => default;
@@ -22285,6 +23997,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Stosw src) => AsmMnemonics.STOSW;
 
             public static implicit operator AsmHexCode(Stosw src) => src.Encoded;
+
+            public static implicit operator Stosw(AsmHexCode src) => new Stosw(src);
         }
 
         public Stosw stosw() => default;
@@ -22311,6 +24025,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Stosd src) => AsmMnemonics.STOSD;
 
             public static implicit operator AsmHexCode(Stosd src) => src.Encoded;
+
+            public static implicit operator Stosd(AsmHexCode src) => new Stosd(src);
         }
 
         public Stosd stosd() => default;
@@ -22337,6 +24053,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Stosq src) => AsmMnemonics.STOSQ;
 
             public static implicit operator AsmHexCode(Stosq src) => src.Encoded;
+
+            public static implicit operator Stosq(AsmHexCode src) => new Stosq(src);
         }
 
         public Stosq stosq() => default;
@@ -22363,6 +24081,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Str src) => AsmMnemonics.STR;
 
             public static implicit operator AsmHexCode(Str src) => src.Encoded;
+
+            public static implicit operator Str(AsmHexCode src) => new Str(src);
         }
 
         public Str str() => default;
@@ -22389,6 +24109,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sub src) => AsmMnemonics.SUB;
 
             public static implicit operator AsmHexCode(Sub src) => src.Encoded;
+
+            public static implicit operator Sub(AsmHexCode src) => new Sub(src);
         }
 
         public Sub sub() => default;
@@ -22415,6 +24137,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Subpd src) => AsmMnemonics.SUBPD;
 
             public static implicit operator AsmHexCode(Subpd src) => src.Encoded;
+
+            public static implicit operator Subpd(AsmHexCode src) => new Subpd(src);
         }
 
         public Subpd subpd() => default;
@@ -22441,6 +24165,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vsubpd src) => AsmMnemonics.VSUBPD;
 
             public static implicit operator AsmHexCode(Vsubpd src) => src.Encoded;
+
+            public static implicit operator Vsubpd(AsmHexCode src) => new Vsubpd(src);
         }
 
         public Vsubpd vsubpd() => default;
@@ -22467,6 +24193,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Subps src) => AsmMnemonics.SUBPS;
 
             public static implicit operator AsmHexCode(Subps src) => src.Encoded;
+
+            public static implicit operator Subps(AsmHexCode src) => new Subps(src);
         }
 
         public Subps subps() => default;
@@ -22493,6 +24221,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vsubps src) => AsmMnemonics.VSUBPS;
 
             public static implicit operator AsmHexCode(Vsubps src) => src.Encoded;
+
+            public static implicit operator Vsubps(AsmHexCode src) => new Vsubps(src);
         }
 
         public Vsubps vsubps() => default;
@@ -22519,6 +24249,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Subsd src) => AsmMnemonics.SUBSD;
 
             public static implicit operator AsmHexCode(Subsd src) => src.Encoded;
+
+            public static implicit operator Subsd(AsmHexCode src) => new Subsd(src);
         }
 
         public Subsd subsd() => default;
@@ -22545,6 +24277,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vsubsd src) => AsmMnemonics.VSUBSD;
 
             public static implicit operator AsmHexCode(Vsubsd src) => src.Encoded;
+
+            public static implicit operator Vsubsd(AsmHexCode src) => new Vsubsd(src);
         }
 
         public Vsubsd vsubsd() => default;
@@ -22571,6 +24305,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Subss src) => AsmMnemonics.SUBSS;
 
             public static implicit operator AsmHexCode(Subss src) => src.Encoded;
+
+            public static implicit operator Subss(AsmHexCode src) => new Subss(src);
         }
 
         public Subss subss() => default;
@@ -22597,6 +24333,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vsubss src) => AsmMnemonics.VSUBSS;
 
             public static implicit operator AsmHexCode(Vsubss src) => src.Encoded;
+
+            public static implicit operator Vsubss(AsmHexCode src) => new Vsubss(src);
         }
 
         public Vsubss vsubss() => default;
@@ -22623,6 +24361,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Swapgs src) => AsmMnemonics.SWAPGS;
 
             public static implicit operator AsmHexCode(Swapgs src) => src.Encoded;
+
+            public static implicit operator Swapgs(AsmHexCode src) => new Swapgs(src);
         }
 
         public Swapgs swapgs() => default;
@@ -22649,6 +24389,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Syscall src) => AsmMnemonics.SYSCALL;
 
             public static implicit operator AsmHexCode(Syscall src) => src.Encoded;
+
+            public static implicit operator Syscall(AsmHexCode src) => new Syscall(src);
         }
 
         public Syscall syscall() => default;
@@ -22675,6 +24417,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sysenter src) => AsmMnemonics.SYSENTER;
 
             public static implicit operator AsmHexCode(Sysenter src) => src.Encoded;
+
+            public static implicit operator Sysenter(AsmHexCode src) => new Sysenter(src);
         }
 
         public Sysenter sysenter() => default;
@@ -22701,6 +24445,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sysexit src) => AsmMnemonics.SYSEXIT;
 
             public static implicit operator AsmHexCode(Sysexit src) => src.Encoded;
+
+            public static implicit operator Sysexit(AsmHexCode src) => new Sysexit(src);
         }
 
         public Sysexit sysexit() => default;
@@ -22727,6 +24473,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Sysret src) => AsmMnemonics.SYSRET;
 
             public static implicit operator AsmHexCode(Sysret src) => src.Encoded;
+
+            public static implicit operator Sysret(AsmHexCode src) => new Sysret(src);
         }
 
         public Sysret sysret() => default;
@@ -22753,6 +24501,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Test src) => AsmMnemonics.TEST;
 
             public static implicit operator AsmHexCode(Test src) => src.Encoded;
+
+            public static implicit operator Test(AsmHexCode src) => new Test(src);
         }
 
         public Test test() => default;
@@ -22779,6 +24529,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Tzcnt src) => AsmMnemonics.TZCNT;
 
             public static implicit operator AsmHexCode(Tzcnt src) => src.Encoded;
+
+            public static implicit operator Tzcnt(AsmHexCode src) => new Tzcnt(src);
         }
 
         public Tzcnt tzcnt() => default;
@@ -22805,6 +24557,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ucomisd src) => AsmMnemonics.UCOMISD;
 
             public static implicit operator AsmHexCode(Ucomisd src) => src.Encoded;
+
+            public static implicit operator Ucomisd(AsmHexCode src) => new Ucomisd(src);
         }
 
         public Ucomisd ucomisd() => default;
@@ -22831,6 +24585,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vucomisd src) => AsmMnemonics.VUCOMISD;
 
             public static implicit operator AsmHexCode(Vucomisd src) => src.Encoded;
+
+            public static implicit operator Vucomisd(AsmHexCode src) => new Vucomisd(src);
         }
 
         public Vucomisd vucomisd() => default;
@@ -22857,6 +24613,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ucomiss src) => AsmMnemonics.UCOMISS;
 
             public static implicit operator AsmHexCode(Ucomiss src) => src.Encoded;
+
+            public static implicit operator Ucomiss(AsmHexCode src) => new Ucomiss(src);
         }
 
         public Ucomiss ucomiss() => default;
@@ -22883,6 +24641,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vucomiss src) => AsmMnemonics.VUCOMISS;
 
             public static implicit operator AsmHexCode(Vucomiss src) => src.Encoded;
+
+            public static implicit operator Vucomiss(AsmHexCode src) => new Vucomiss(src);
         }
 
         public Vucomiss vucomiss() => default;
@@ -22909,6 +24669,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Ud2 src) => AsmMnemonics.UD2;
 
             public static implicit operator AsmHexCode(Ud2 src) => src.Encoded;
+
+            public static implicit operator Ud2(AsmHexCode src) => new Ud2(src);
         }
 
         public Ud2 ud2() => default;
@@ -22935,6 +24697,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Unpckhpd src) => AsmMnemonics.UNPCKHPD;
 
             public static implicit operator AsmHexCode(Unpckhpd src) => src.Encoded;
+
+            public static implicit operator Unpckhpd(AsmHexCode src) => new Unpckhpd(src);
         }
 
         public Unpckhpd unpckhpd() => default;
@@ -22961,6 +24725,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vunpckhpd src) => AsmMnemonics.VUNPCKHPD;
 
             public static implicit operator AsmHexCode(Vunpckhpd src) => src.Encoded;
+
+            public static implicit operator Vunpckhpd(AsmHexCode src) => new Vunpckhpd(src);
         }
 
         public Vunpckhpd vunpckhpd() => default;
@@ -22987,6 +24753,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Unpckhps src) => AsmMnemonics.UNPCKHPS;
 
             public static implicit operator AsmHexCode(Unpckhps src) => src.Encoded;
+
+            public static implicit operator Unpckhps(AsmHexCode src) => new Unpckhps(src);
         }
 
         public Unpckhps unpckhps() => default;
@@ -23013,6 +24781,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vunpckhps src) => AsmMnemonics.VUNPCKHPS;
 
             public static implicit operator AsmHexCode(Vunpckhps src) => src.Encoded;
+
+            public static implicit operator Vunpckhps(AsmHexCode src) => new Vunpckhps(src);
         }
 
         public Vunpckhps vunpckhps() => default;
@@ -23039,6 +24809,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Unpcklpd src) => AsmMnemonics.UNPCKLPD;
 
             public static implicit operator AsmHexCode(Unpcklpd src) => src.Encoded;
+
+            public static implicit operator Unpcklpd(AsmHexCode src) => new Unpcklpd(src);
         }
 
         public Unpcklpd unpcklpd() => default;
@@ -23065,6 +24837,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vunpcklpd src) => AsmMnemonics.VUNPCKLPD;
 
             public static implicit operator AsmHexCode(Vunpcklpd src) => src.Encoded;
+
+            public static implicit operator Vunpcklpd(AsmHexCode src) => new Vunpcklpd(src);
         }
 
         public Vunpcklpd vunpcklpd() => default;
@@ -23091,6 +24865,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Unpcklps src) => AsmMnemonics.UNPCKLPS;
 
             public static implicit operator AsmHexCode(Unpcklps src) => src.Encoded;
+
+            public static implicit operator Unpcklps(AsmHexCode src) => new Unpcklps(src);
         }
 
         public Unpcklps unpcklps() => default;
@@ -23117,6 +24893,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vunpcklps src) => AsmMnemonics.VUNPCKLPS;
 
             public static implicit operator AsmHexCode(Vunpcklps src) => src.Encoded;
+
+            public static implicit operator Vunpcklps(AsmHexCode src) => new Vunpcklps(src);
         }
 
         public Vunpcklps vunpcklps() => default;
@@ -23143,6 +24921,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vbroadcastss src) => AsmMnemonics.VBROADCASTSS;
 
             public static implicit operator AsmHexCode(Vbroadcastss src) => src.Encoded;
+
+            public static implicit operator Vbroadcastss(AsmHexCode src) => new Vbroadcastss(src);
         }
 
         public Vbroadcastss vbroadcastss() => default;
@@ -23169,6 +24949,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vbroadcastsd src) => AsmMnemonics.VBROADCASTSD;
 
             public static implicit operator AsmHexCode(Vbroadcastsd src) => src.Encoded;
+
+            public static implicit operator Vbroadcastsd(AsmHexCode src) => new Vbroadcastsd(src);
         }
 
         public Vbroadcastsd vbroadcastsd() => default;
@@ -23195,6 +24977,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vbroadcastf128 src) => AsmMnemonics.VBROADCASTF128;
 
             public static implicit operator AsmHexCode(Vbroadcastf128 src) => src.Encoded;
+
+            public static implicit operator Vbroadcastf128(AsmHexCode src) => new Vbroadcastf128(src);
         }
 
         public Vbroadcastf128 vbroadcastf128() => default;
@@ -23221,6 +25005,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtph2ps src) => AsmMnemonics.VCVTPH2PS;
 
             public static implicit operator AsmHexCode(Vcvtph2ps src) => src.Encoded;
+
+            public static implicit operator Vcvtph2ps(AsmHexCode src) => new Vcvtph2ps(src);
         }
 
         public Vcvtph2ps vcvtph2ps() => default;
@@ -23247,6 +25033,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vcvtps2ph src) => AsmMnemonics.VCVTPS2PH;
 
             public static implicit operator AsmHexCode(Vcvtps2ph src) => src.Encoded;
+
+            public static implicit operator Vcvtps2ph(AsmHexCode src) => new Vcvtps2ph(src);
         }
 
         public Vcvtps2ph vcvtps2ph() => default;
@@ -23273,6 +25061,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Verr src) => AsmMnemonics.VERR;
 
             public static implicit operator AsmHexCode(Verr src) => src.Encoded;
+
+            public static implicit operator Verr(AsmHexCode src) => new Verr(src);
         }
 
         public Verr verr() => default;
@@ -23299,6 +25089,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Verw src) => AsmMnemonics.VERW;
 
             public static implicit operator AsmHexCode(Verw src) => src.Encoded;
+
+            public static implicit operator Verw(AsmHexCode src) => new Verw(src);
         }
 
         public Verw verw() => default;
@@ -23325,6 +25117,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vextractf128 src) => AsmMnemonics.VEXTRACTF128;
 
             public static implicit operator AsmHexCode(Vextractf128 src) => src.Encoded;
+
+            public static implicit operator Vextractf128(AsmHexCode src) => new Vextractf128(src);
         }
 
         public Vextractf128 vextractf128() => default;
@@ -23351,6 +25145,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vextracti128 src) => AsmMnemonics.VEXTRACTI128;
 
             public static implicit operator AsmHexCode(Vextracti128 src) => src.Encoded;
+
+            public static implicit operator Vextracti128(AsmHexCode src) => new Vextracti128(src);
         }
 
         public Vextracti128 vextracti128() => default;
@@ -23377,6 +25173,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd132pd src) => AsmMnemonics.VFMADD132PD;
 
             public static implicit operator AsmHexCode(Vfmadd132pd src) => src.Encoded;
+
+            public static implicit operator Vfmadd132pd(AsmHexCode src) => new Vfmadd132pd(src);
         }
 
         public Vfmadd132pd vfmadd132pd() => default;
@@ -23403,6 +25201,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd213pd src) => AsmMnemonics.VFMADD213PD;
 
             public static implicit operator AsmHexCode(Vfmadd213pd src) => src.Encoded;
+
+            public static implicit operator Vfmadd213pd(AsmHexCode src) => new Vfmadd213pd(src);
         }
 
         public Vfmadd213pd vfmadd213pd() => default;
@@ -23429,6 +25229,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd231pd src) => AsmMnemonics.VFMADD231PD;
 
             public static implicit operator AsmHexCode(Vfmadd231pd src) => src.Encoded;
+
+            public static implicit operator Vfmadd231pd(AsmHexCode src) => new Vfmadd231pd(src);
         }
 
         public Vfmadd231pd vfmadd231pd() => default;
@@ -23455,6 +25257,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd132ps src) => AsmMnemonics.VFMADD132PS;
 
             public static implicit operator AsmHexCode(Vfmadd132ps src) => src.Encoded;
+
+            public static implicit operator Vfmadd132ps(AsmHexCode src) => new Vfmadd132ps(src);
         }
 
         public Vfmadd132ps vfmadd132ps() => default;
@@ -23481,6 +25285,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd213ps src) => AsmMnemonics.VFMADD213PS;
 
             public static implicit operator AsmHexCode(Vfmadd213ps src) => src.Encoded;
+
+            public static implicit operator Vfmadd213ps(AsmHexCode src) => new Vfmadd213ps(src);
         }
 
         public Vfmadd213ps vfmadd213ps() => default;
@@ -23507,6 +25313,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd231ps src) => AsmMnemonics.VFMADD231PS;
 
             public static implicit operator AsmHexCode(Vfmadd231ps src) => src.Encoded;
+
+            public static implicit operator Vfmadd231ps(AsmHexCode src) => new Vfmadd231ps(src);
         }
 
         public Vfmadd231ps vfmadd231ps() => default;
@@ -23533,6 +25341,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd132sd src) => AsmMnemonics.VFMADD132SD;
 
             public static implicit operator AsmHexCode(Vfmadd132sd src) => src.Encoded;
+
+            public static implicit operator Vfmadd132sd(AsmHexCode src) => new Vfmadd132sd(src);
         }
 
         public Vfmadd132sd vfmadd132sd() => default;
@@ -23559,6 +25369,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd213sd src) => AsmMnemonics.VFMADD213SD;
 
             public static implicit operator AsmHexCode(Vfmadd213sd src) => src.Encoded;
+
+            public static implicit operator Vfmadd213sd(AsmHexCode src) => new Vfmadd213sd(src);
         }
 
         public Vfmadd213sd vfmadd213sd() => default;
@@ -23585,6 +25397,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd231sd src) => AsmMnemonics.VFMADD231SD;
 
             public static implicit operator AsmHexCode(Vfmadd231sd src) => src.Encoded;
+
+            public static implicit operator Vfmadd231sd(AsmHexCode src) => new Vfmadd231sd(src);
         }
 
         public Vfmadd231sd vfmadd231sd() => default;
@@ -23611,6 +25425,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd132ss src) => AsmMnemonics.VFMADD132SS;
 
             public static implicit operator AsmHexCode(Vfmadd132ss src) => src.Encoded;
+
+            public static implicit operator Vfmadd132ss(AsmHexCode src) => new Vfmadd132ss(src);
         }
 
         public Vfmadd132ss vfmadd132ss() => default;
@@ -23637,6 +25453,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd213ss src) => AsmMnemonics.VFMADD213SS;
 
             public static implicit operator AsmHexCode(Vfmadd213ss src) => src.Encoded;
+
+            public static implicit operator Vfmadd213ss(AsmHexCode src) => new Vfmadd213ss(src);
         }
 
         public Vfmadd213ss vfmadd213ss() => default;
@@ -23663,6 +25481,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmadd231ss src) => AsmMnemonics.VFMADD231SS;
 
             public static implicit operator AsmHexCode(Vfmadd231ss src) => src.Encoded;
+
+            public static implicit operator Vfmadd231ss(AsmHexCode src) => new Vfmadd231ss(src);
         }
 
         public Vfmadd231ss vfmadd231ss() => default;
@@ -23689,6 +25509,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmaddsub132pd src) => AsmMnemonics.VFMADDSUB132PD;
 
             public static implicit operator AsmHexCode(Vfmaddsub132pd src) => src.Encoded;
+
+            public static implicit operator Vfmaddsub132pd(AsmHexCode src) => new Vfmaddsub132pd(src);
         }
 
         public Vfmaddsub132pd vfmaddsub132pd() => default;
@@ -23715,6 +25537,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmaddsub213pd src) => AsmMnemonics.VFMADDSUB213PD;
 
             public static implicit operator AsmHexCode(Vfmaddsub213pd src) => src.Encoded;
+
+            public static implicit operator Vfmaddsub213pd(AsmHexCode src) => new Vfmaddsub213pd(src);
         }
 
         public Vfmaddsub213pd vfmaddsub213pd() => default;
@@ -23741,6 +25565,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmaddsub231pd src) => AsmMnemonics.VFMADDSUB231PD;
 
             public static implicit operator AsmHexCode(Vfmaddsub231pd src) => src.Encoded;
+
+            public static implicit operator Vfmaddsub231pd(AsmHexCode src) => new Vfmaddsub231pd(src);
         }
 
         public Vfmaddsub231pd vfmaddsub231pd() => default;
@@ -23767,6 +25593,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmaddsub132ps src) => AsmMnemonics.VFMADDSUB132PS;
 
             public static implicit operator AsmHexCode(Vfmaddsub132ps src) => src.Encoded;
+
+            public static implicit operator Vfmaddsub132ps(AsmHexCode src) => new Vfmaddsub132ps(src);
         }
 
         public Vfmaddsub132ps vfmaddsub132ps() => default;
@@ -23793,6 +25621,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmaddsub213ps src) => AsmMnemonics.VFMADDSUB213PS;
 
             public static implicit operator AsmHexCode(Vfmaddsub213ps src) => src.Encoded;
+
+            public static implicit operator Vfmaddsub213ps(AsmHexCode src) => new Vfmaddsub213ps(src);
         }
 
         public Vfmaddsub213ps vfmaddsub213ps() => default;
@@ -23819,6 +25649,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmaddsub231ps src) => AsmMnemonics.VFMADDSUB231PS;
 
             public static implicit operator AsmHexCode(Vfmaddsub231ps src) => src.Encoded;
+
+            public static implicit operator Vfmaddsub231ps(AsmHexCode src) => new Vfmaddsub231ps(src);
         }
 
         public Vfmaddsub231ps vfmaddsub231ps() => default;
@@ -23845,6 +25677,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsubadd132pd src) => AsmMnemonics.VFMSUBADD132PD;
 
             public static implicit operator AsmHexCode(Vfmsubadd132pd src) => src.Encoded;
+
+            public static implicit operator Vfmsubadd132pd(AsmHexCode src) => new Vfmsubadd132pd(src);
         }
 
         public Vfmsubadd132pd vfmsubadd132pd() => default;
@@ -23871,6 +25705,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsubadd213pd src) => AsmMnemonics.VFMSUBADD213PD;
 
             public static implicit operator AsmHexCode(Vfmsubadd213pd src) => src.Encoded;
+
+            public static implicit operator Vfmsubadd213pd(AsmHexCode src) => new Vfmsubadd213pd(src);
         }
 
         public Vfmsubadd213pd vfmsubadd213pd() => default;
@@ -23897,6 +25733,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsubadd231pd src) => AsmMnemonics.VFMSUBADD231PD;
 
             public static implicit operator AsmHexCode(Vfmsubadd231pd src) => src.Encoded;
+
+            public static implicit operator Vfmsubadd231pd(AsmHexCode src) => new Vfmsubadd231pd(src);
         }
 
         public Vfmsubadd231pd vfmsubadd231pd() => default;
@@ -23923,6 +25761,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsubadd132ps src) => AsmMnemonics.VFMSUBADD132PS;
 
             public static implicit operator AsmHexCode(Vfmsubadd132ps src) => src.Encoded;
+
+            public static implicit operator Vfmsubadd132ps(AsmHexCode src) => new Vfmsubadd132ps(src);
         }
 
         public Vfmsubadd132ps vfmsubadd132ps() => default;
@@ -23949,6 +25789,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsubadd213ps src) => AsmMnemonics.VFMSUBADD213PS;
 
             public static implicit operator AsmHexCode(Vfmsubadd213ps src) => src.Encoded;
+
+            public static implicit operator Vfmsubadd213ps(AsmHexCode src) => new Vfmsubadd213ps(src);
         }
 
         public Vfmsubadd213ps vfmsubadd213ps() => default;
@@ -23975,6 +25817,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsubadd231ps src) => AsmMnemonics.VFMSUBADD231PS;
 
             public static implicit operator AsmHexCode(Vfmsubadd231ps src) => src.Encoded;
+
+            public static implicit operator Vfmsubadd231ps(AsmHexCode src) => new Vfmsubadd231ps(src);
         }
 
         public Vfmsubadd231ps vfmsubadd231ps() => default;
@@ -24001,6 +25845,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub132pd src) => AsmMnemonics.VFMSUB132PD;
 
             public static implicit operator AsmHexCode(Vfmsub132pd src) => src.Encoded;
+
+            public static implicit operator Vfmsub132pd(AsmHexCode src) => new Vfmsub132pd(src);
         }
 
         public Vfmsub132pd vfmsub132pd() => default;
@@ -24027,6 +25873,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub213pd src) => AsmMnemonics.VFMSUB213PD;
 
             public static implicit operator AsmHexCode(Vfmsub213pd src) => src.Encoded;
+
+            public static implicit operator Vfmsub213pd(AsmHexCode src) => new Vfmsub213pd(src);
         }
 
         public Vfmsub213pd vfmsub213pd() => default;
@@ -24053,6 +25901,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub231pd src) => AsmMnemonics.VFMSUB231PD;
 
             public static implicit operator AsmHexCode(Vfmsub231pd src) => src.Encoded;
+
+            public static implicit operator Vfmsub231pd(AsmHexCode src) => new Vfmsub231pd(src);
         }
 
         public Vfmsub231pd vfmsub231pd() => default;
@@ -24079,6 +25929,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub132ps src) => AsmMnemonics.VFMSUB132PS;
 
             public static implicit operator AsmHexCode(Vfmsub132ps src) => src.Encoded;
+
+            public static implicit operator Vfmsub132ps(AsmHexCode src) => new Vfmsub132ps(src);
         }
 
         public Vfmsub132ps vfmsub132ps() => default;
@@ -24105,6 +25957,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub213ps src) => AsmMnemonics.VFMSUB213PS;
 
             public static implicit operator AsmHexCode(Vfmsub213ps src) => src.Encoded;
+
+            public static implicit operator Vfmsub213ps(AsmHexCode src) => new Vfmsub213ps(src);
         }
 
         public Vfmsub213ps vfmsub213ps() => default;
@@ -24131,6 +25985,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub231ps src) => AsmMnemonics.VFMSUB231PS;
 
             public static implicit operator AsmHexCode(Vfmsub231ps src) => src.Encoded;
+
+            public static implicit operator Vfmsub231ps(AsmHexCode src) => new Vfmsub231ps(src);
         }
 
         public Vfmsub231ps vfmsub231ps() => default;
@@ -24157,6 +26013,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub132sd src) => AsmMnemonics.VFMSUB132SD;
 
             public static implicit operator AsmHexCode(Vfmsub132sd src) => src.Encoded;
+
+            public static implicit operator Vfmsub132sd(AsmHexCode src) => new Vfmsub132sd(src);
         }
 
         public Vfmsub132sd vfmsub132sd() => default;
@@ -24183,6 +26041,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub213sd src) => AsmMnemonics.VFMSUB213SD;
 
             public static implicit operator AsmHexCode(Vfmsub213sd src) => src.Encoded;
+
+            public static implicit operator Vfmsub213sd(AsmHexCode src) => new Vfmsub213sd(src);
         }
 
         public Vfmsub213sd vfmsub213sd() => default;
@@ -24209,6 +26069,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub231sd src) => AsmMnemonics.VFMSUB231SD;
 
             public static implicit operator AsmHexCode(Vfmsub231sd src) => src.Encoded;
+
+            public static implicit operator Vfmsub231sd(AsmHexCode src) => new Vfmsub231sd(src);
         }
 
         public Vfmsub231sd vfmsub231sd() => default;
@@ -24235,6 +26097,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub132ss src) => AsmMnemonics.VFMSUB132SS;
 
             public static implicit operator AsmHexCode(Vfmsub132ss src) => src.Encoded;
+
+            public static implicit operator Vfmsub132ss(AsmHexCode src) => new Vfmsub132ss(src);
         }
 
         public Vfmsub132ss vfmsub132ss() => default;
@@ -24261,6 +26125,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub213ss src) => AsmMnemonics.VFMSUB213SS;
 
             public static implicit operator AsmHexCode(Vfmsub213ss src) => src.Encoded;
+
+            public static implicit operator Vfmsub213ss(AsmHexCode src) => new Vfmsub213ss(src);
         }
 
         public Vfmsub213ss vfmsub213ss() => default;
@@ -24287,6 +26153,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfmsub231ss src) => AsmMnemonics.VFMSUB231SS;
 
             public static implicit operator AsmHexCode(Vfmsub231ss src) => src.Encoded;
+
+            public static implicit operator Vfmsub231ss(AsmHexCode src) => new Vfmsub231ss(src);
         }
 
         public Vfmsub231ss vfmsub231ss() => default;
@@ -24313,6 +26181,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd132pd src) => AsmMnemonics.VFNMADD132PD;
 
             public static implicit operator AsmHexCode(Vfnmadd132pd src) => src.Encoded;
+
+            public static implicit operator Vfnmadd132pd(AsmHexCode src) => new Vfnmadd132pd(src);
         }
 
         public Vfnmadd132pd vfnmadd132pd() => default;
@@ -24339,6 +26209,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd213pd src) => AsmMnemonics.VFNMADD213PD;
 
             public static implicit operator AsmHexCode(Vfnmadd213pd src) => src.Encoded;
+
+            public static implicit operator Vfnmadd213pd(AsmHexCode src) => new Vfnmadd213pd(src);
         }
 
         public Vfnmadd213pd vfnmadd213pd() => default;
@@ -24365,6 +26237,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd231pd src) => AsmMnemonics.VFNMADD231PD;
 
             public static implicit operator AsmHexCode(Vfnmadd231pd src) => src.Encoded;
+
+            public static implicit operator Vfnmadd231pd(AsmHexCode src) => new Vfnmadd231pd(src);
         }
 
         public Vfnmadd231pd vfnmadd231pd() => default;
@@ -24391,6 +26265,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd132ps src) => AsmMnemonics.VFNMADD132PS;
 
             public static implicit operator AsmHexCode(Vfnmadd132ps src) => src.Encoded;
+
+            public static implicit operator Vfnmadd132ps(AsmHexCode src) => new Vfnmadd132ps(src);
         }
 
         public Vfnmadd132ps vfnmadd132ps() => default;
@@ -24417,6 +26293,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd213ps src) => AsmMnemonics.VFNMADD213PS;
 
             public static implicit operator AsmHexCode(Vfnmadd213ps src) => src.Encoded;
+
+            public static implicit operator Vfnmadd213ps(AsmHexCode src) => new Vfnmadd213ps(src);
         }
 
         public Vfnmadd213ps vfnmadd213ps() => default;
@@ -24443,6 +26321,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd231ps src) => AsmMnemonics.VFNMADD231PS;
 
             public static implicit operator AsmHexCode(Vfnmadd231ps src) => src.Encoded;
+
+            public static implicit operator Vfnmadd231ps(AsmHexCode src) => new Vfnmadd231ps(src);
         }
 
         public Vfnmadd231ps vfnmadd231ps() => default;
@@ -24469,6 +26349,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd132sd src) => AsmMnemonics.VFNMADD132SD;
 
             public static implicit operator AsmHexCode(Vfnmadd132sd src) => src.Encoded;
+
+            public static implicit operator Vfnmadd132sd(AsmHexCode src) => new Vfnmadd132sd(src);
         }
 
         public Vfnmadd132sd vfnmadd132sd() => default;
@@ -24495,6 +26377,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd213sd src) => AsmMnemonics.VFNMADD213SD;
 
             public static implicit operator AsmHexCode(Vfnmadd213sd src) => src.Encoded;
+
+            public static implicit operator Vfnmadd213sd(AsmHexCode src) => new Vfnmadd213sd(src);
         }
 
         public Vfnmadd213sd vfnmadd213sd() => default;
@@ -24521,6 +26405,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd231sd src) => AsmMnemonics.VFNMADD231SD;
 
             public static implicit operator AsmHexCode(Vfnmadd231sd src) => src.Encoded;
+
+            public static implicit operator Vfnmadd231sd(AsmHexCode src) => new Vfnmadd231sd(src);
         }
 
         public Vfnmadd231sd vfnmadd231sd() => default;
@@ -24547,6 +26433,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd132ss src) => AsmMnemonics.VFNMADD132SS;
 
             public static implicit operator AsmHexCode(Vfnmadd132ss src) => src.Encoded;
+
+            public static implicit operator Vfnmadd132ss(AsmHexCode src) => new Vfnmadd132ss(src);
         }
 
         public Vfnmadd132ss vfnmadd132ss() => default;
@@ -24573,6 +26461,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd213ss src) => AsmMnemonics.VFNMADD213SS;
 
             public static implicit operator AsmHexCode(Vfnmadd213ss src) => src.Encoded;
+
+            public static implicit operator Vfnmadd213ss(AsmHexCode src) => new Vfnmadd213ss(src);
         }
 
         public Vfnmadd213ss vfnmadd213ss() => default;
@@ -24599,6 +26489,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmadd231ss src) => AsmMnemonics.VFNMADD231SS;
 
             public static implicit operator AsmHexCode(Vfnmadd231ss src) => src.Encoded;
+
+            public static implicit operator Vfnmadd231ss(AsmHexCode src) => new Vfnmadd231ss(src);
         }
 
         public Vfnmadd231ss vfnmadd231ss() => default;
@@ -24625,6 +26517,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub132pd src) => AsmMnemonics.VFNMSUB132PD;
 
             public static implicit operator AsmHexCode(Vfnmsub132pd src) => src.Encoded;
+
+            public static implicit operator Vfnmsub132pd(AsmHexCode src) => new Vfnmsub132pd(src);
         }
 
         public Vfnmsub132pd vfnmsub132pd() => default;
@@ -24651,6 +26545,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub213pd src) => AsmMnemonics.VFNMSUB213PD;
 
             public static implicit operator AsmHexCode(Vfnmsub213pd src) => src.Encoded;
+
+            public static implicit operator Vfnmsub213pd(AsmHexCode src) => new Vfnmsub213pd(src);
         }
 
         public Vfnmsub213pd vfnmsub213pd() => default;
@@ -24677,6 +26573,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub231pd src) => AsmMnemonics.VFNMSUB231PD;
 
             public static implicit operator AsmHexCode(Vfnmsub231pd src) => src.Encoded;
+
+            public static implicit operator Vfnmsub231pd(AsmHexCode src) => new Vfnmsub231pd(src);
         }
 
         public Vfnmsub231pd vfnmsub231pd() => default;
@@ -24703,6 +26601,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub132ps src) => AsmMnemonics.VFNMSUB132PS;
 
             public static implicit operator AsmHexCode(Vfnmsub132ps src) => src.Encoded;
+
+            public static implicit operator Vfnmsub132ps(AsmHexCode src) => new Vfnmsub132ps(src);
         }
 
         public Vfnmsub132ps vfnmsub132ps() => default;
@@ -24729,6 +26629,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub213ps src) => AsmMnemonics.VFNMSUB213PS;
 
             public static implicit operator AsmHexCode(Vfnmsub213ps src) => src.Encoded;
+
+            public static implicit operator Vfnmsub213ps(AsmHexCode src) => new Vfnmsub213ps(src);
         }
 
         public Vfnmsub213ps vfnmsub213ps() => default;
@@ -24755,6 +26657,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub231ps src) => AsmMnemonics.VFNMSUB231PS;
 
             public static implicit operator AsmHexCode(Vfnmsub231ps src) => src.Encoded;
+
+            public static implicit operator Vfnmsub231ps(AsmHexCode src) => new Vfnmsub231ps(src);
         }
 
         public Vfnmsub231ps vfnmsub231ps() => default;
@@ -24781,6 +26685,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub132sd src) => AsmMnemonics.VFNMSUB132SD;
 
             public static implicit operator AsmHexCode(Vfnmsub132sd src) => src.Encoded;
+
+            public static implicit operator Vfnmsub132sd(AsmHexCode src) => new Vfnmsub132sd(src);
         }
 
         public Vfnmsub132sd vfnmsub132sd() => default;
@@ -24807,6 +26713,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub213sd src) => AsmMnemonics.VFNMSUB213SD;
 
             public static implicit operator AsmHexCode(Vfnmsub213sd src) => src.Encoded;
+
+            public static implicit operator Vfnmsub213sd(AsmHexCode src) => new Vfnmsub213sd(src);
         }
 
         public Vfnmsub213sd vfnmsub213sd() => default;
@@ -24833,6 +26741,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub231sd src) => AsmMnemonics.VFNMSUB231SD;
 
             public static implicit operator AsmHexCode(Vfnmsub231sd src) => src.Encoded;
+
+            public static implicit operator Vfnmsub231sd(AsmHexCode src) => new Vfnmsub231sd(src);
         }
 
         public Vfnmsub231sd vfnmsub231sd() => default;
@@ -24859,6 +26769,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub132ss src) => AsmMnemonics.VFNMSUB132SS;
 
             public static implicit operator AsmHexCode(Vfnmsub132ss src) => src.Encoded;
+
+            public static implicit operator Vfnmsub132ss(AsmHexCode src) => new Vfnmsub132ss(src);
         }
 
         public Vfnmsub132ss vfnmsub132ss() => default;
@@ -24885,6 +26797,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub213ss src) => AsmMnemonics.VFNMSUB213SS;
 
             public static implicit operator AsmHexCode(Vfnmsub213ss src) => src.Encoded;
+
+            public static implicit operator Vfnmsub213ss(AsmHexCode src) => new Vfnmsub213ss(src);
         }
 
         public Vfnmsub213ss vfnmsub213ss() => default;
@@ -24911,6 +26825,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vfnmsub231ss src) => AsmMnemonics.VFNMSUB231SS;
 
             public static implicit operator AsmHexCode(Vfnmsub231ss src) => src.Encoded;
+
+            public static implicit operator Vfnmsub231ss(AsmHexCode src) => new Vfnmsub231ss(src);
         }
 
         public Vfnmsub231ss vfnmsub231ss() => default;
@@ -24937,6 +26853,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vgatherdpd src) => AsmMnemonics.VGATHERDPD;
 
             public static implicit operator AsmHexCode(Vgatherdpd src) => src.Encoded;
+
+            public static implicit operator Vgatherdpd(AsmHexCode src) => new Vgatherdpd(src);
         }
 
         public Vgatherdpd vgatherdpd() => default;
@@ -24963,6 +26881,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vgatherqpd src) => AsmMnemonics.VGATHERQPD;
 
             public static implicit operator AsmHexCode(Vgatherqpd src) => src.Encoded;
+
+            public static implicit operator Vgatherqpd(AsmHexCode src) => new Vgatherqpd(src);
         }
 
         public Vgatherqpd vgatherqpd() => default;
@@ -24989,6 +26909,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vgatherdps src) => AsmMnemonics.VGATHERDPS;
 
             public static implicit operator AsmHexCode(Vgatherdps src) => src.Encoded;
+
+            public static implicit operator Vgatherdps(AsmHexCode src) => new Vgatherdps(src);
         }
 
         public Vgatherdps vgatherdps() => default;
@@ -25015,6 +26937,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vgatherqps src) => AsmMnemonics.VGATHERQPS;
 
             public static implicit operator AsmHexCode(Vgatherqps src) => src.Encoded;
+
+            public static implicit operator Vgatherqps(AsmHexCode src) => new Vgatherqps(src);
         }
 
         public Vgatherqps vgatherqps() => default;
@@ -25041,6 +26965,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpgatherdd src) => AsmMnemonics.VPGATHERDD;
 
             public static implicit operator AsmHexCode(Vpgatherdd src) => src.Encoded;
+
+            public static implicit operator Vpgatherdd(AsmHexCode src) => new Vpgatherdd(src);
         }
 
         public Vpgatherdd vpgatherdd() => default;
@@ -25067,6 +26993,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpgatherqd src) => AsmMnemonics.VPGATHERQD;
 
             public static implicit operator AsmHexCode(Vpgatherqd src) => src.Encoded;
+
+            public static implicit operator Vpgatherqd(AsmHexCode src) => new Vpgatherqd(src);
         }
 
         public Vpgatherqd vpgatherqd() => default;
@@ -25093,6 +27021,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpgatherdq src) => AsmMnemonics.VPGATHERDQ;
 
             public static implicit operator AsmHexCode(Vpgatherdq src) => src.Encoded;
+
+            public static implicit operator Vpgatherdq(AsmHexCode src) => new Vpgatherdq(src);
         }
 
         public Vpgatherdq vpgatherdq() => default;
@@ -25119,6 +27049,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpgatherqq src) => AsmMnemonics.VPGATHERQQ;
 
             public static implicit operator AsmHexCode(Vpgatherqq src) => src.Encoded;
+
+            public static implicit operator Vpgatherqq(AsmHexCode src) => new Vpgatherqq(src);
         }
 
         public Vpgatherqq vpgatherqq() => default;
@@ -25145,6 +27077,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vinsertf128 src) => AsmMnemonics.VINSERTF128;
 
             public static implicit operator AsmHexCode(Vinsertf128 src) => src.Encoded;
+
+            public static implicit operator Vinsertf128(AsmHexCode src) => new Vinsertf128(src);
         }
 
         public Vinsertf128 vinsertf128() => default;
@@ -25171,6 +27105,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vinserti128 src) => AsmMnemonics.VINSERTI128;
 
             public static implicit operator AsmHexCode(Vinserti128 src) => src.Encoded;
+
+            public static implicit operator Vinserti128(AsmHexCode src) => new Vinserti128(src);
         }
 
         public Vinserti128 vinserti128() => default;
@@ -25197,6 +27133,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmaskmovps src) => AsmMnemonics.VMASKMOVPS;
 
             public static implicit operator AsmHexCode(Vmaskmovps src) => src.Encoded;
+
+            public static implicit operator Vmaskmovps(AsmHexCode src) => new Vmaskmovps(src);
         }
 
         public Vmaskmovps vmaskmovps() => default;
@@ -25223,6 +27161,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vmaskmovpd src) => AsmMnemonics.VMASKMOVPD;
 
             public static implicit operator AsmHexCode(Vmaskmovpd src) => src.Encoded;
+
+            public static implicit operator Vmaskmovpd(AsmHexCode src) => new Vmaskmovpd(src);
         }
 
         public Vmaskmovpd vmaskmovpd() => default;
@@ -25249,6 +27189,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpblendd src) => AsmMnemonics.VPBLENDD;
 
             public static implicit operator AsmHexCode(Vpblendd src) => src.Encoded;
+
+            public static implicit operator Vpblendd(AsmHexCode src) => new Vpblendd(src);
         }
 
         public Vpblendd vpblendd() => default;
@@ -25275,6 +27217,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpbroadcastb src) => AsmMnemonics.VPBROADCASTB;
 
             public static implicit operator AsmHexCode(Vpbroadcastb src) => src.Encoded;
+
+            public static implicit operator Vpbroadcastb(AsmHexCode src) => new Vpbroadcastb(src);
         }
 
         public Vpbroadcastb vpbroadcastb() => default;
@@ -25301,6 +27245,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpbroadcastw src) => AsmMnemonics.VPBROADCASTW;
 
             public static implicit operator AsmHexCode(Vpbroadcastw src) => src.Encoded;
+
+            public static implicit operator Vpbroadcastw(AsmHexCode src) => new Vpbroadcastw(src);
         }
 
         public Vpbroadcastw vpbroadcastw() => default;
@@ -25327,6 +27273,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpbroadcastd src) => AsmMnemonics.VPBROADCASTD;
 
             public static implicit operator AsmHexCode(Vpbroadcastd src) => src.Encoded;
+
+            public static implicit operator Vpbroadcastd(AsmHexCode src) => new Vpbroadcastd(src);
         }
 
         public Vpbroadcastd vpbroadcastd() => default;
@@ -25353,6 +27301,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpbroadcastq src) => AsmMnemonics.VPBROADCASTQ;
 
             public static implicit operator AsmHexCode(Vpbroadcastq src) => src.Encoded;
+
+            public static implicit operator Vpbroadcastq(AsmHexCode src) => new Vpbroadcastq(src);
         }
 
         public Vpbroadcastq vpbroadcastq() => default;
@@ -25379,6 +27329,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vbroadcasti128 src) => AsmMnemonics.VBROADCASTI128;
 
             public static implicit operator AsmHexCode(Vbroadcasti128 src) => src.Encoded;
+
+            public static implicit operator Vbroadcasti128(AsmHexCode src) => new Vbroadcasti128(src);
         }
 
         public Vbroadcasti128 vbroadcasti128() => default;
@@ -25405,6 +27357,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpermd src) => AsmMnemonics.VPERMD;
 
             public static implicit operator AsmHexCode(Vpermd src) => src.Encoded;
+
+            public static implicit operator Vpermd(AsmHexCode src) => new Vpermd(src);
         }
 
         public Vpermd vpermd() => default;
@@ -25431,6 +27385,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpermpd src) => AsmMnemonics.VPERMPD;
 
             public static implicit operator AsmHexCode(Vpermpd src) => src.Encoded;
+
+            public static implicit operator Vpermpd(AsmHexCode src) => new Vpermpd(src);
         }
 
         public Vpermpd vpermpd() => default;
@@ -25457,6 +27413,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpermps src) => AsmMnemonics.VPERMPS;
 
             public static implicit operator AsmHexCode(Vpermps src) => src.Encoded;
+
+            public static implicit operator Vpermps(AsmHexCode src) => new Vpermps(src);
         }
 
         public Vpermps vpermps() => default;
@@ -25483,6 +27441,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpermq src) => AsmMnemonics.VPERMQ;
 
             public static implicit operator AsmHexCode(Vpermq src) => src.Encoded;
+
+            public static implicit operator Vpermq(AsmHexCode src) => new Vpermq(src);
         }
 
         public Vpermq vpermq() => default;
@@ -25509,6 +27469,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vperm2i128 src) => AsmMnemonics.VPERM2I128;
 
             public static implicit operator AsmHexCode(Vperm2i128 src) => src.Encoded;
+
+            public static implicit operator Vperm2i128(AsmHexCode src) => new Vperm2i128(src);
         }
 
         public Vperm2i128 vperm2i128() => default;
@@ -25535,6 +27497,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpermilpd src) => AsmMnemonics.VPERMILPD;
 
             public static implicit operator AsmHexCode(Vpermilpd src) => src.Encoded;
+
+            public static implicit operator Vpermilpd(AsmHexCode src) => new Vpermilpd(src);
         }
 
         public Vpermilpd vpermilpd() => default;
@@ -25561,6 +27525,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpermilps src) => AsmMnemonics.VPERMILPS;
 
             public static implicit operator AsmHexCode(Vpermilps src) => src.Encoded;
+
+            public static implicit operator Vpermilps(AsmHexCode src) => new Vpermilps(src);
         }
 
         public Vpermilps vpermilps() => default;
@@ -25587,6 +27553,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vperm2f128 src) => AsmMnemonics.VPERM2F128;
 
             public static implicit operator AsmHexCode(Vperm2f128 src) => src.Encoded;
+
+            public static implicit operator Vperm2f128(AsmHexCode src) => new Vperm2f128(src);
         }
 
         public Vperm2f128 vperm2f128() => default;
@@ -25613,6 +27581,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaskmovd src) => AsmMnemonics.VPMASKMOVD;
 
             public static implicit operator AsmHexCode(Vpmaskmovd src) => src.Encoded;
+
+            public static implicit operator Vpmaskmovd(AsmHexCode src) => new Vpmaskmovd(src);
         }
 
         public Vpmaskmovd vpmaskmovd() => default;
@@ -25639,6 +27609,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpmaskmovq src) => AsmMnemonics.VPMASKMOVQ;
 
             public static implicit operator AsmHexCode(Vpmaskmovq src) => src.Encoded;
+
+            public static implicit operator Vpmaskmovq(AsmHexCode src) => new Vpmaskmovq(src);
         }
 
         public Vpmaskmovq vpmaskmovq() => default;
@@ -25665,6 +27637,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsllvd src) => AsmMnemonics.VPSLLVD;
 
             public static implicit operator AsmHexCode(Vpsllvd src) => src.Encoded;
+
+            public static implicit operator Vpsllvd(AsmHexCode src) => new Vpsllvd(src);
         }
 
         public Vpsllvd vpsllvd() => default;
@@ -25691,6 +27665,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsllvq src) => AsmMnemonics.VPSLLVQ;
 
             public static implicit operator AsmHexCode(Vpsllvq src) => src.Encoded;
+
+            public static implicit operator Vpsllvq(AsmHexCode src) => new Vpsllvq(src);
         }
 
         public Vpsllvq vpsllvq() => default;
@@ -25717,6 +27693,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsravd src) => AsmMnemonics.VPSRAVD;
 
             public static implicit operator AsmHexCode(Vpsravd src) => src.Encoded;
+
+            public static implicit operator Vpsravd(AsmHexCode src) => new Vpsravd(src);
         }
 
         public Vpsravd vpsravd() => default;
@@ -25743,6 +27721,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsrlvd src) => AsmMnemonics.VPSRLVD;
 
             public static implicit operator AsmHexCode(Vpsrlvd src) => src.Encoded;
+
+            public static implicit operator Vpsrlvd(AsmHexCode src) => new Vpsrlvd(src);
         }
 
         public Vpsrlvd vpsrlvd() => default;
@@ -25769,6 +27749,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vpsrlvq src) => AsmMnemonics.VPSRLVQ;
 
             public static implicit operator AsmHexCode(Vpsrlvq src) => src.Encoded;
+
+            public static implicit operator Vpsrlvq(AsmHexCode src) => new Vpsrlvq(src);
         }
 
         public Vpsrlvq vpsrlvq() => default;
@@ -25795,6 +27777,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vtestps src) => AsmMnemonics.VTESTPS;
 
             public static implicit operator AsmHexCode(Vtestps src) => src.Encoded;
+
+            public static implicit operator Vtestps(AsmHexCode src) => new Vtestps(src);
         }
 
         public Vtestps vtestps() => default;
@@ -25821,6 +27805,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vtestpd src) => AsmMnemonics.VTESTPD;
 
             public static implicit operator AsmHexCode(Vtestpd src) => src.Encoded;
+
+            public static implicit operator Vtestpd(AsmHexCode src) => new Vtestpd(src);
         }
 
         public Vtestpd vtestpd() => default;
@@ -25847,6 +27833,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vzeroall src) => AsmMnemonics.VZEROALL;
 
             public static implicit operator AsmHexCode(Vzeroall src) => src.Encoded;
+
+            public static implicit operator Vzeroall(AsmHexCode src) => new Vzeroall(src);
         }
 
         public Vzeroall vzeroall() => default;
@@ -25873,6 +27861,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vzeroupper src) => AsmMnemonics.VZEROUPPER;
 
             public static implicit operator AsmHexCode(Vzeroupper src) => src.Encoded;
+
+            public static implicit operator Vzeroupper(AsmHexCode src) => new Vzeroupper(src);
         }
 
         public Vzeroupper vzeroupper() => default;
@@ -25899,6 +27889,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Wait src) => AsmMnemonics.WAIT;
 
             public static implicit operator AsmHexCode(Wait src) => src.Encoded;
+
+            public static implicit operator Wait(AsmHexCode src) => new Wait(src);
         }
 
         public Wait wait() => default;
@@ -25925,6 +27917,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Fwait src) => AsmMnemonics.FWAIT;
 
             public static implicit operator AsmHexCode(Fwait src) => src.Encoded;
+
+            public static implicit operator Fwait(AsmHexCode src) => new Fwait(src);
         }
 
         public Fwait fwait() => default;
@@ -25951,6 +27945,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Wbinvd src) => AsmMnemonics.WBINVD;
 
             public static implicit operator AsmHexCode(Wbinvd src) => src.Encoded;
+
+            public static implicit operator Wbinvd(AsmHexCode src) => new Wbinvd(src);
         }
 
         public Wbinvd wbinvd() => default;
@@ -25977,6 +27973,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Wrfsbase src) => AsmMnemonics.WRFSBASE;
 
             public static implicit operator AsmHexCode(Wrfsbase src) => src.Encoded;
+
+            public static implicit operator Wrfsbase(AsmHexCode src) => new Wrfsbase(src);
         }
 
         public Wrfsbase wrfsbase() => default;
@@ -26003,6 +28001,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Wrgsbase src) => AsmMnemonics.WRGSBASE;
 
             public static implicit operator AsmHexCode(Wrgsbase src) => src.Encoded;
+
+            public static implicit operator Wrgsbase(AsmHexCode src) => new Wrgsbase(src);
         }
 
         public Wrgsbase wrgsbase() => default;
@@ -26029,6 +28029,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Wrmsr src) => AsmMnemonics.WRMSR;
 
             public static implicit operator AsmHexCode(Wrmsr src) => src.Encoded;
+
+            public static implicit operator Wrmsr(AsmHexCode src) => new Wrmsr(src);
         }
 
         public Wrmsr wrmsr() => default;
@@ -26055,6 +28057,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xacquire src) => AsmMnemonics.XACQUIRE;
 
             public static implicit operator AsmHexCode(Xacquire src) => src.Encoded;
+
+            public static implicit operator Xacquire(AsmHexCode src) => new Xacquire(src);
         }
 
         public Xacquire xacquire() => default;
@@ -26081,6 +28085,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xrelease src) => AsmMnemonics.XRELEASE;
 
             public static implicit operator AsmHexCode(Xrelease src) => src.Encoded;
+
+            public static implicit operator Xrelease(AsmHexCode src) => new Xrelease(src);
         }
 
         public Xrelease xrelease() => default;
@@ -26107,6 +28113,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xabort src) => AsmMnemonics.XABORT;
 
             public static implicit operator AsmHexCode(Xabort src) => src.Encoded;
+
+            public static implicit operator Xabort(AsmHexCode src) => new Xabort(src);
         }
 
         public Xabort xabort() => default;
@@ -26133,6 +28141,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xadd src) => AsmMnemonics.XADD;
 
             public static implicit operator AsmHexCode(Xadd src) => src.Encoded;
+
+            public static implicit operator Xadd(AsmHexCode src) => new Xadd(src);
         }
 
         public Xadd xadd() => default;
@@ -26159,6 +28169,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xbegin src) => AsmMnemonics.XBEGIN;
 
             public static implicit operator AsmHexCode(Xbegin src) => src.Encoded;
+
+            public static implicit operator Xbegin(AsmHexCode src) => new Xbegin(src);
         }
 
         public Xbegin xbegin() => default;
@@ -26185,6 +28197,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xchg src) => AsmMnemonics.XCHG;
 
             public static implicit operator AsmHexCode(Xchg src) => src.Encoded;
+
+            public static implicit operator Xchg(AsmHexCode src) => new Xchg(src);
         }
 
         public Xchg xchg() => default;
@@ -26211,6 +28225,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xend src) => AsmMnemonics.XEND;
 
             public static implicit operator AsmHexCode(Xend src) => src.Encoded;
+
+            public static implicit operator Xend(AsmHexCode src) => new Xend(src);
         }
 
         public Xend xend() => default;
@@ -26237,6 +28253,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xgetbv src) => AsmMnemonics.XGETBV;
 
             public static implicit operator AsmHexCode(Xgetbv src) => src.Encoded;
+
+            public static implicit operator Xgetbv(AsmHexCode src) => new Xgetbv(src);
         }
 
         public Xgetbv xgetbv() => default;
@@ -26263,6 +28281,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xlat src) => AsmMnemonics.XLAT;
 
             public static implicit operator AsmHexCode(Xlat src) => src.Encoded;
+
+            public static implicit operator Xlat(AsmHexCode src) => new Xlat(src);
         }
 
         public Xlat xlat() => default;
@@ -26289,6 +28309,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xlatb src) => AsmMnemonics.XLATB;
 
             public static implicit operator AsmHexCode(Xlatb src) => src.Encoded;
+
+            public static implicit operator Xlatb(AsmHexCode src) => new Xlatb(src);
         }
 
         public Xlatb xlatb() => default;
@@ -26315,6 +28337,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xor src) => AsmMnemonics.XOR;
 
             public static implicit operator AsmHexCode(Xor src) => src.Encoded;
+
+            public static implicit operator Xor(AsmHexCode src) => new Xor(src);
         }
 
         public Xor xor() => default;
@@ -26341,6 +28365,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xorpd src) => AsmMnemonics.XORPD;
 
             public static implicit operator AsmHexCode(Xorpd src) => src.Encoded;
+
+            public static implicit operator Xorpd(AsmHexCode src) => new Xorpd(src);
         }
 
         public Xorpd xorpd() => default;
@@ -26367,6 +28393,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vxorpd src) => AsmMnemonics.VXORPD;
 
             public static implicit operator AsmHexCode(Vxorpd src) => src.Encoded;
+
+            public static implicit operator Vxorpd(AsmHexCode src) => new Vxorpd(src);
         }
 
         public Vxorpd vxorpd() => default;
@@ -26393,6 +28421,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xorps src) => AsmMnemonics.XORPS;
 
             public static implicit operator AsmHexCode(Xorps src) => src.Encoded;
+
+            public static implicit operator Xorps(AsmHexCode src) => new Xorps(src);
         }
 
         public Xorps xorps() => default;
@@ -26419,6 +28449,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Vxorps src) => AsmMnemonics.VXORPS;
 
             public static implicit operator AsmHexCode(Vxorps src) => src.Encoded;
+
+            public static implicit operator Vxorps(AsmHexCode src) => new Vxorps(src);
         }
 
         public Vxorps vxorps() => default;
@@ -26445,6 +28477,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xrstor src) => AsmMnemonics.XRSTOR;
 
             public static implicit operator AsmHexCode(Xrstor src) => src.Encoded;
+
+            public static implicit operator Xrstor(AsmHexCode src) => new Xrstor(src);
         }
 
         public Xrstor xrstor() => default;
@@ -26471,6 +28505,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xrstor64 src) => AsmMnemonics.XRSTOR64;
 
             public static implicit operator AsmHexCode(Xrstor64 src) => src.Encoded;
+
+            public static implicit operator Xrstor64(AsmHexCode src) => new Xrstor64(src);
         }
 
         public Xrstor64 xrstor64() => default;
@@ -26497,6 +28533,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xsave src) => AsmMnemonics.XSAVE;
 
             public static implicit operator AsmHexCode(Xsave src) => src.Encoded;
+
+            public static implicit operator Xsave(AsmHexCode src) => new Xsave(src);
         }
 
         public Xsave xsave() => default;
@@ -26523,6 +28561,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xsave64 src) => AsmMnemonics.XSAVE64;
 
             public static implicit operator AsmHexCode(Xsave64 src) => src.Encoded;
+
+            public static implicit operator Xsave64(AsmHexCode src) => new Xsave64(src);
         }
 
         public Xsave64 xsave64() => default;
@@ -26549,6 +28589,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xsaveopt src) => AsmMnemonics.XSAVEOPT;
 
             public static implicit operator AsmHexCode(Xsaveopt src) => src.Encoded;
+
+            public static implicit operator Xsaveopt(AsmHexCode src) => new Xsaveopt(src);
         }
 
         public Xsaveopt xsaveopt() => default;
@@ -26575,6 +28617,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xsaveopt64 src) => AsmMnemonics.XSAVEOPT64;
 
             public static implicit operator AsmHexCode(Xsaveopt64 src) => src.Encoded;
+
+            public static implicit operator Xsaveopt64(AsmHexCode src) => new Xsaveopt64(src);
         }
 
         public Xsaveopt64 xsaveopt64() => default;
@@ -26601,6 +28645,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xsetbv src) => AsmMnemonics.XSETBV;
 
             public static implicit operator AsmHexCode(Xsetbv src) => src.Encoded;
+
+            public static implicit operator Xsetbv(AsmHexCode src) => new Xsetbv(src);
         }
 
         public Xsetbv xsetbv() => default;
@@ -26627,6 +28673,8 @@ namespace Z0.Asm
             public static implicit operator AsmMnemonic(Xtest src) => AsmMnemonics.XTEST;
 
             public static implicit operator AsmHexCode(Xtest src) => src.Encoded;
+
+            public static implicit operator Xtest(AsmHexCode src) => new Xtest(src);
         }
 
         public Xtest xtest() => default;

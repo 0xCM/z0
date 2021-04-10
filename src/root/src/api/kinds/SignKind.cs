@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// Indicates a value is greater than or equal to zero
         /// </summary>
-        Unsigned = 1,
+        Unsigned = 0,
 
         /// <summary>
         /// Indicates a value is less than zero

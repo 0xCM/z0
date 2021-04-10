@@ -11,9 +11,9 @@ namespace Z0.Asm
 
         public uint SourceLine;
 
-        public AsmExpr Expression;
-
         public MemoryAddress Offset;
+
+        public AsmExpr Expression;
 
         public BinaryCode Encoding;
 

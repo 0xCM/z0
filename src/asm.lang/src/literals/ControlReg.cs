@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static RegIndex;
 
-    partial struct AsmLang
+    partial struct AsmX
     {
         /// <summary>
         /// Specifies the accessible control registers

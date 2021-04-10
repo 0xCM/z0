@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmLang
+    partial struct AsmX
     {
         /// <summary>
         /// Specifies a '/r' token where r = 0..7

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using W = W32;
 
@@ -15,12 +16,16 @@ namespace Z0
     /// Defines a refined 32-bit immediate value
     /// </summary>
     [Datatype("imm32r")]
-    public readonly struct Imm32<E> : IImmediate<Imm32<E>,W, E>
+    public readonly struct Imm32<E> : IImm<Imm32<E>, E>
         where E : unmanaged
     {
         public E Content {get;}
 
         public static W W => default;
+
+        public ImmWidth Width => ImmWidth.W32;
+
+        public ImmKind Kind => ImmKind.Imm32;
 
         [MethodImpl(Inline)]
         public static implicit operator E(Imm32<E> src)
@@ -33,6 +38,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public Imm32(E src)
             => Content = src;
+
+        [MethodImpl(Inline)]
+        public uint AsPrimitive()
+            => bw32(this);
+
 
         [MethodImpl(Inline)]
         public string Format()

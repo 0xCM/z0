@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tooling
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static memory;
 
     public abstract class ToolService<T> : WfService<T>, ITool<T>
         where T : ToolService<T>, new()
@@ -35,11 +30,20 @@ namespace Z0.Tooling
         public FS.FilePath Script(FS.FileName name)
             => ScriptDir + name;
 
+        public FS.FilePath Script(FS.FolderPath dir, FS.FileName name)
+            => dir + name;
+
         public FS.FilePath Input(FS.FileName name)
             => InDir + name;
 
         public FS.FilePath Output(FS.FileName name)
             => OutDir + name;
+
+        public FS.FilePath Input(FS.FolderPath dir, FS.FileName name)
+            => dir + name;
+
+        public FS.FilePath Output(FS.FolderPath dir, FS.FileName name)
+            => dir + name;
 
         public virtual FS.FilePath ToolPath()
             => FS.path(string.Format("{0}.{1}", Id.Format(), FS.Exe));

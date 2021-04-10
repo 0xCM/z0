@@ -22,8 +22,11 @@ namespace Z0.Tooling
             for(var i=0; i<count; i++)
             {
                 ref readonly var encoding = ref skip(encodings,i);
-                RenderEncoding(encoding, dst);
-                RenderSource(encoding.SourceText, dst);
+                dst.AppendFormat("{0,-8}", encoding.LineNumber);
+                dst.AppendFormat("{0}{1,-16}", RenderDelimiter, encoding.Offset);
+                dst.AppendFormat("{0}{1,-46}", RenderDelimiter, encoding.SourceText);
+                dst.AppendFormat("{0}{1,-24}", RenderDelimiter, encoding.Encoded);
+                dst.AppendFormat("{0}{1,-48}", RenderDelimiter, FormatBitstring(encoding.Encoded));
                 dst.AppendLine();
             }
         }

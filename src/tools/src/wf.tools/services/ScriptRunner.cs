@@ -54,7 +54,6 @@ namespace Z0
                 writer.WriteLine(e.ToString());
                 return e;
             }
-
         }
 
         Outcome<TextLines> Run(CmdLine cmd, ScriptId script)

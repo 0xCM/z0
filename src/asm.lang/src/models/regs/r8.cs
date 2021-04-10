@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOps.r8;
-    using K = AsmLang.Gp8;
+    using K = AsmX.Gp8;
 
     partial struct AsmOps
     {
@@ -40,6 +40,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static explicit operator byte(G src)
                 => (byte)src.Index;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(Sym<K> src)
+                => new G((I)src.Kind);
 
         }
 

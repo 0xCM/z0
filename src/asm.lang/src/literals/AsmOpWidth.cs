@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmLang
+    partial struct AsmX
     {
         public enum OpWidth : byte
         {

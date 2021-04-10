@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a 64-bit immediate value
     /// </summary>
     [Datatype("imm64")]
-    public readonly struct Imm64 : IImmediate<I,W64,ulong>
+    public readonly struct Imm64 : IImm<Imm64,ulong>
     {
         public ulong Content {get;}
 
@@ -25,6 +25,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Imm64(ulong src)
             => Content = src;
+
+        public ImmWidth Width => ImmWidth.W64;
+
+        public ImmKind Kind => ImmKind.Imm64;
 
         public uint Hash
         {
@@ -84,6 +88,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ulong(I src)
             => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Imm<ulong>(I src)
+            => new Imm<ulong>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell64(I src)

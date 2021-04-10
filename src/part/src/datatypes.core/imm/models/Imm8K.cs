@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using W = W8;
 
@@ -15,7 +16,7 @@ namespace Z0
     /// Defines a refined 8-bit immediate value
     /// </summary>
     [Datatype("imm8r")]
-    public readonly struct Imm8<E> : IImmediate<Imm8<E>,W,E>
+    public readonly struct Imm8<E> : IImm<Imm8<E>,E>
         where E : unmanaged
     {
         public E Content {get;}
@@ -24,9 +25,17 @@ namespace Z0
         public Imm8(E src)
             => Content = src;
 
+        public ImmWidth Width => ImmWidth.W8;
+
+        public ImmKind Kind => ImmKind.Imm8;
+
         [MethodImpl(Inline)]
         public string Format()
             => HexFormat.format(Content, W);
+
+        [MethodImpl(Inline)]
+        public byte AsPrimitive()
+            => bw8(this);
 
         public override string ToString()
             => Format();
@@ -43,6 +52,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator E(Imm8<E> src)
             => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(Imm8<E> src)
+            => src.AsPrimitive();
 
         [MethodImpl(Inline)]
         public static implicit operator Imm8<E>(E src)
