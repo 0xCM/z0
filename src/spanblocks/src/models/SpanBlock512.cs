@@ -131,20 +131,12 @@ namespace Z0
         /// </summary>
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
-        public Span<T> Block(int block)
+        public Span<T> CellBlock(int block)
             => slice(Data, block * BlockLength, BlockLength);
 
         [MethodImpl(Inline)]
-        public ref T BlockRef(int index)
+        public ref T BlockLead(int index)
             => ref add(First, index*BlockLength);
-
-        /// <summary>
-        /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
-        /// </summary>
-        /// <param name="block">The block index</param>
-        [MethodImpl(Inline)]
-        public SpanBlock512<T> Extract(int block)
-            => new SpanBlock512<T>(Block(block));
 
         /// <summary>
         /// Retrieves the lower 256 bits of an index-identified block

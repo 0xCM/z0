@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly SpanBlock512<byte> unpack1x8x64(ulong src, in SpanBlock512<byte> dst, int block)
         {
-            unpack1x8x64(src, dst.Block(block));
+            unpack1x8x64(src, dst.CellBlock(block));
             return ref dst;
         }
     }

@@ -136,7 +136,7 @@ namespace Z0
 
             for(var block = 0; block<BlockCount; block++)
             {
-                var target = A.Block(block);
+                var target = A.CellBlock(block);
                 var source = gmath.even(block) ? pattern0 : pattern1;
                 source.StoreTo(target);
             }

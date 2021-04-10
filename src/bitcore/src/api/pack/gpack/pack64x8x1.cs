@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong pack64x8x1<T>(in SpanBlock512<T> src, uint block)
             where T : unmanaged
-                => pack64x8x1(src.BlockRef((int)block));
+                => pack64x8x1(src.BlockLead((int)block));
 
         /// <summary>
         /// Packs 64 1-bit values taken from the least significant bit of each source byte

@@ -72,6 +72,18 @@ namespace Z0
             get => Header.IsNonEmpty;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => LineCount == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => LineCount != 0;
+        }
+
         public IEnumerable<TextRows> Partition(int offset, Func<TextRow,bool> f)
         {
             var part = root.list<TextRow>();

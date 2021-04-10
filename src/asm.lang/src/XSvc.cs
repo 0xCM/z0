@@ -52,5 +52,9 @@ namespace Z0
         [Op]
         public static AsmGen AsmCodeGenerator(this IWfRuntime wf)
             => AsmGen.create(wf);
+
+        [Op]
+        public static AsmDb AsmDb(this IWfRuntime wf)
+            => Asm.AsmDb.create(wf);
     }
 }

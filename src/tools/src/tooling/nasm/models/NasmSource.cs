@@ -39,5 +39,4 @@ namespace Z0.Tooling
         public static implicit operator NasmSource(Index<AsmExpr> src)
             => new NasmSource(src);
     }
-
 }

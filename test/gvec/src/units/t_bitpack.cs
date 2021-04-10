@@ -81,12 +81,12 @@ namespace Z0
         {
             var block1 = SpanBlocks.alloc<ushort>(w16,1);
             block1[0] = ushort.MaxValue;
-            var val1 = block1.BlockRef(0);
+            var val1 = block1.BlockLead(0);
             Trace(val1.ToBitString());
 
             var block2 = SpanBlocks.alloc<uint>(w32,1);
             block2[0] = uint.MaxValue;
-            var val2 = block2.BlockRef(0);
+            var val2 = block2.BlockLead(0);
             Trace(val2.ToBitString());
         }
 

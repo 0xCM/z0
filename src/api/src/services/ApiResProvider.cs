@@ -52,7 +52,7 @@ namespace Z0
                 ref readonly var accessor = ref skip(src,i);
                 var pMethod = accessor.Member.MethodHandle.GetFunctionPointer().ToPointer<byte>();
                 var reader = memory.reader(pMethod, 29);
-                reader.ReadAll(blocks.Block(i));
+                reader.ReadAll(blocks.CellBlock(i));
             }
 
             return blocks;

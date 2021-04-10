@@ -47,7 +47,7 @@ namespace Z0
             var bytes = src.Bytes();
             ref readonly var input = ref first(bytes);
             for(var block=0; block<blockcount; block++)
-                BitPack.unpack1x32x8(skip(input, block), dst.Block(block));
+                BitPack.unpack1x32x8(skip(input, block), dst.CellBlock(block));
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         {
             const int blocklen = 8;
             const int blockcount = 1;
-            unpack1x32(skip(src, block), dst.Block(block));
+            unpack1x32(skip(src, block), dst.CellBlock(block));
         }
 
         /// <summary>

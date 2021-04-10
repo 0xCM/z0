@@ -52,6 +52,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack8x8x1<T>(in SpanBlock64<T> src, uint block)
             where T : unmanaged
-                => pack8(force<T,ulong>(src.BlockRef((int)block)));
+                => pack8(force<T,ulong>(src.BlockLead((int)block)));
     }
 }

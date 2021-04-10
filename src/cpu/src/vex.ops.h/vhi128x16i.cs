@@ -10,7 +10,6 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
 
     partial struct cpu
@@ -35,5 +34,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<short> vhi128x16i(Vector128<byte> src)
             =>  ConvertToVector128Int16(vshi(src));
+
+        /// <summary>
+        /// __m128i _mm_cvtepi16_epi32 (__m128i a) PMOVSXWD xmm, xmm/m64
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width selector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<int> vhi128x16i(Vector128<short> src)
+            => ConvertToVector128Int32(vshi(src));
     }
 }

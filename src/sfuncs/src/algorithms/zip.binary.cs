@@ -18,7 +18,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block<blocks; block++)
-                f.Invoke(a.Block(block), b.Block(block), dst);
+                f.Invoke(a.CellBlock(block), b.CellBlock(block), dst);
             return ref dst;
         }
 
@@ -29,7 +29,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block<blocks; block++)
-                f.Invoke(a.Block(block), b.Block(block), dst);
+                f.Invoke(a.CellBlock(block), b.CellBlock(block), dst);
             return ref dst;
         }
 
@@ -40,7 +40,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block<blocks; block++)
-                f.Invoke(a.Block(block), b.Block(block), dst);
+                f.Invoke(a.CellBlock(block), b.CellBlock(block), dst);
             return ref dst;
         }
 

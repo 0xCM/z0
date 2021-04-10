@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly SpanBlock128<byte> unpack1x8x16(ushort src, in SpanBlock128<byte> dst, int block)
         {
-            unpack(src, dst.Block(block));
+            unpack(src, dst.CellBlock(block));
             return ref dst;
         }
 

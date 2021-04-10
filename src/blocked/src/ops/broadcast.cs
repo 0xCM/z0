@@ -24,7 +24,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var i=0; i<blocks; i++)
-                broadcast(src, dst.Block(i));
+                broadcast(src, dst.CellBlock(i));
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var i=0; i<blocks; i++)
-                broadcast(src, dst.Block(i));
+                broadcast(src, dst.CellBlock(i));
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var i=0; i<blocks; i++)
-                broadcast(src, dst.Block(i));
+                broadcast(src, dst.CellBlock(i));
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var i=0; i<blocks; i++)
-                broadcast(src, dst.Block(i));
+                broadcast(src, dst.CellBlock(i));
         }
 
         /// <summary>

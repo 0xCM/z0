@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<sbyte> src, ref sbyte dst)
+        public static unsafe void vstorent(Vector128<sbyte> src, ref sbyte dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<byte> src, ref byte dst)
+        public static unsafe void vstorent(Vector128<byte> src, ref byte dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<short> src, ref short dst)
+        public static unsafe void vstorent(Vector128<short> src, ref short dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<ushort> src, ref ushort dst)
+        public static unsafe void vstorent(Vector128<ushort> src, ref ushort dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<int> src, ref int dst)
+        public static unsafe void vstorent(Vector128<int> src, ref int dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<uint> src, ref uint dst)
+        public static unsafe void vstorent(Vector128<uint> src, ref uint dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<long> src, ref long dst)
+        public static unsafe void vstorent(Vector128<long> src, ref long dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<ulong> src, ref ulong dst)
+        public static unsafe void vstorent(Vector128<ulong> src, ref ulong dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector128<float> src, ref float dst)
+        public static unsafe void vstorent(Vector128<float> src, ref float dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<sbyte> src, ref sbyte dst)
+        public static unsafe void vstorent(Vector256<sbyte> src, ref sbyte dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<byte> src, ref byte dst)
+        public static unsafe void vstorent(Vector256<byte> src, ref byte dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<short> src, ref short dst)
+        public static unsafe void vstorent(Vector256<short> src, ref short dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<ushort> src, ref ushort dst)
+        public static unsafe void vstorent(Vector256<ushort> src, ref ushort dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<int> src, ref int dst)
+        public static unsafe void vstorent(Vector256<int> src, ref int dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void ntstore(Vector256<uint> src, ref uint dst)
+        public static unsafe void vstorent(Vector256<uint> src, ref uint dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<long> src, ref long dst)
+        public static unsafe void vstorent(Vector256<long> src, ref long dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<ulong> src, ref ulong dst)
+        public static unsafe void vstorent(Vector256<ulong> src, ref ulong dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<float> src, ref float dst)
+        public static unsafe void vstorent(Vector256<float> src, ref float dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The storage target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vntstore(Vector256<double> src, ref double dst)
+        public static unsafe void vstorent(Vector256<double> src, ref double dst)
             => StoreAlignedNonTemporal(refptr(ref dst), src);
     }
 }

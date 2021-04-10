@@ -969,8 +969,9 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var cases = AsmExprCases.create(Wf);
-            cases.Run(AsmSigKind.and_r8_r8);
+            Wf.AsmDb().ShowSourceDocs();
+            // var cases = AsmExprCases.create(Wf);
+            // cases.Run(AsmSigKind.and_r8_r8);
 
             //CaptureSelectedRoutines();
             //Wf.AsmCodeGenerator().GenerateModelsInPlace();

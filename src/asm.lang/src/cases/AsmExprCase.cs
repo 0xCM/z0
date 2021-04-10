@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static AsmX;
 
     using static Part;
     using static memory;
@@ -14,22 +15,40 @@ namespace Z0.Asm
     {
         readonly AsmX asmx;
 
+        Index<AsmExpr> _Buffer;
+
         public AsmExprCases()
         {
             asmx = AsmX.create();
+            _Buffer = alloc<AsmExpr>(256);
         }
+
+        [MethodImpl(Inline)]
+        Index<AsmExpr> Buffer()
+        {
+            _Buffer.Clear();
+            return _Buffer;
+        }
+
+        [MethodImpl(Inline)]
+        Symbols<Gp8> Gp8Regs()
+            => asmx.SymbolSet.Gp8Regs();
+
+
+        [MethodImpl(Inline)]
+        Symbols<Gp64> Gp64Regs()
+            => asmx.SymbolSet.Gp64Regs();
 
         void case_and_r8_r8(AsmSigKind id)
         {
-            var symbols = asmx.SymbolSet;
-            var casename = id.ToString();
+            var casename = CaseName(id);
             var flow = Wf.Running(casename);
-            var regs = symbols.Gp8Regs();
+            var regs = Gp8Regs();
             var grid = Symbols.grid(regs,regs);
             var rows = grid.RowCount;
             var cols = grid.ColCount;
             var count = rows * cols;
-            var buffer = alloc<AsmExpr>(count);
+            var buffer = Buffer();
             var k=0;
             var defining = Wf.Running(DefiningExpressions.Format(count,id));
             for(var i=0u; i<rows; i++)
@@ -37,12 +56,32 @@ namespace Z0.Asm
                 for(var j=0u; j<cols; j++)
                 {
                     var pair = grid.Pair(i,j);
-                    seek(buffer,k++) = asmx.and(pair.Left, pair.Right);
+                    buffer[k++] = asmx.and(pair.Left, pair.Right);
                 }
             }
             Wf.Ran(defining, DefinedExpressions.Format(count,id));
             Assemble(id, buffer);
             Wf.Ran(flow);
+        }
+
+
+        void case_move_r64_imm64(AsmSigKind id)
+        {
+            const ulong Imm64 = 0x7ffa9930f380;
+
+            var casename = CaseName(id);
+            var regs = Gp64Regs();
+            var count = regs.Count;
+            var buffer = Buffer();
+            for(byte i=0; i<count; i++)
+                buffer[i]= asmx.mov(regs[i], Imm64);
+
+            var encoder = AsmEncoder.create();
+            var expr = asm.expression("mov rcx,7ffa9930f380h");
+            var expect = asm.encoding(expr,  AsmBytes.hexcode("48 b9 80 f3 30 99 fa 7f 00 00"));
+            var mov = encoder.mov(AsmRegOps.rcx, Imm64);
+            var actual = asm.encoding(expr, mov);
+            Wf.Row(expect.Equals(actual));
         }
 
         string CaseName(AsmSigKind id)
@@ -91,15 +130,6 @@ namespace Z0.Asm
 
         }
 
-        void case_move_r64_imm64(AsmSigKind id)
-        {
-            var encoder = AsmEncoder.create();
-            var expr = asm.expression("mov rcx,7ffa9930f380h");
-            var expect = asm.encoding(expr,  AsmBytes.hexcode("48 b9 80 f3 30 99 fa 7f 00 00"));
-            var mov = encoder.mov(AsmRegOps.rcx, 0x7ffa9930f380);
-            var actual = asm.encoding(expr, mov);
-            Wf.Row(expect.Equals(actual));
-        }
 
         public void Run(AsmSigKind id)
         {

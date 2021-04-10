@@ -78,12 +78,12 @@ namespace Z0
         {
             var x = SpanBlocks.safeload(w128, array<int>(1,2,3,4,5,6,7,8));
 
-            var block0 = x.Block(0);
+            var block0 = x.CellBlock(0);
             Claim.eq(4, block0.Length);
             var y = SpanBlocks.safeload(w128, array(1,2,3,4));
             Claim.eq(block0, y);
 
-            var block2 = x.Block(1);
+            var block2 = x.CellBlock(1);
             Claim.eq(4, block2.Length);
             Claim.eq(block2, SpanBlocks.parts(w128,5,6,7,8));
         }

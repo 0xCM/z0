@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint pack32x8x1<T>(in SpanBlock256<T> src, uint block = 0)
             where T : unmanaged
-                => pack32x8x1(src.BlockRef((int)block));
+                => pack32x8x1(src.BlockLead((int)block));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte

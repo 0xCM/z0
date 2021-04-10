@@ -82,6 +82,8 @@ public enum PartId : ulong
 
     Gather = 66 | Shell,
 
+    SpanBlocks = 67,
+
     BitVectors = 100,
 
     BitSpans = 102,

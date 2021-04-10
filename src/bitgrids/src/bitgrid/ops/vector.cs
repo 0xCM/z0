@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vector<T>(in BitGrid<T> src, int block, W256 w = default)
             where T : unmanaged
-                => gcpu.vload(w, src.Data.BlockRef(block));
+                => gcpu.vload(w, src.Data.BlockLead(block));
 
         /// <summary>
         /// Loads a 256-bit cpu vector from an index-identified block
@@ -36,6 +36,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => gcpu.vload(w, src.Data.BlockRef(block));
+                => gcpu.vload(w, src.Data.BlockLead(block));
     }
 }

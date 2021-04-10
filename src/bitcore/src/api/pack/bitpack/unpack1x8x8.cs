@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
         public static void unpack1x8x8(byte src, in SpanBlock64<byte> dst, int block)
-            => unpack(src, dst.Block(block));
+            => unpack(src, dst.CellBlock(block));
 
         /// <summary>
         /// Sends each source bit to to least bit of each 8-bit segment in the target

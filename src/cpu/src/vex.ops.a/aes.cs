@@ -81,14 +81,14 @@ namespace Z0
         public static void aesEncode(SpanBlock128<byte> src, Vector128<byte> key, SpanBlock128<byte> dst)
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 cpu.vstore(aesEncode(src.LoadVector(block),key), ref dst.BlockRef(block));
+                 cpu.vstore(aesEncode(src.LoadVector(block),key), ref dst.BlockLead(block));
         }
 
         [MethodImpl(Inline), Op]
         public static void aesdec(SpanBlock128<byte> src, Vector128<byte> key, SpanBlock128<byte> dst)
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 cpu.vstore(aesDecode(src.LoadVector(block),key), ref dst.BlockRef(block));
+                 cpu.vstore(aesDecode(src.LoadVector(block),key), ref dst.BlockLead(block));
         }
     }
 }

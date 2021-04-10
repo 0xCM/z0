@@ -12,16 +12,6 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline)]
-        public static SeqSub<S,T> substitute<S,T>(S src, Index<T> dst)
-            where S : IEquatable<S>
-                => new SeqSub<S,T>(src,dst);
-
-        [MethodImpl(Inline)]
-        public static bool matches<S,T>(SeqSub<S,T> rule, S src)
-            where S : IEquatable<S>
-                => src.Equals(rule.Source);
-
-        [MethodImpl(Inline)]
         public static Outcome apply<S,T>(SeqSub<S,T> rule, S src, out Index<T> dst)
             where S : IEquatable<S>
         {

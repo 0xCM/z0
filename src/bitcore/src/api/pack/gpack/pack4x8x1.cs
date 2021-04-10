@@ -23,6 +23,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack4x8x1<T>(in SpanBlock32<T> src, int block)
             where T : unmanaged
-                => (byte)gather(uint32(src.BlockRef(block)), Lsb32x8x1);
+                => (byte)gather(uint32(src.BlockLead(block)), Lsb32x8x1);
     }
 }

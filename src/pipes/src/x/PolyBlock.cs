@@ -22,7 +22,7 @@ namespace Z0
         public static ref readonly SpanBlock16<T> SpanBlock<T>(this IDomainSource src, T min, T max, in SpanBlock16<T> dst, int block)
             where T : unmanaged
         {
-            src.Fill(min,max,dst.Block(block));
+            src.Fill(min,max,dst.CellBlock(block));
             return ref dst;
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         public static ref readonly SpanBlock32<T> SpanBlock<T>(this IDomainSource src, T min, T max, in SpanBlock32<T> dst, int block)
             where T : unmanaged
         {
-            src.Fill(min,max,dst.Block(block));
+            src.Fill(min,max,dst.CellBlock(block));
             return ref dst;
         }
 
@@ -54,7 +54,7 @@ namespace Z0
         public static ref readonly SpanBlock64<T> SpanBlock<T>(this IDomainSource random, T min, T max, in SpanBlock64<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.Fill(min,max,dst.CellBlock(block));
             return ref dst;
         }
 
@@ -70,7 +70,7 @@ namespace Z0
         public static ref readonly SpanBlock128<T> SpanBlock<T>(this IDomainSource random, T min, T max, in SpanBlock128<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.Fill(min,max,dst.CellBlock(block));
             return ref dst;
         }
 
@@ -86,7 +86,7 @@ namespace Z0
         public static ref readonly SpanBlock256<T> SpanBlock<T>(this IDomainSource random, T min, T max, in SpanBlock256<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.Fill(min,max,dst.CellBlock(block));
             return ref dst;
         }
 
@@ -102,7 +102,7 @@ namespace Z0
         public static ref readonly SpanBlock512<T> SpanBlock<T>(this IDomainSource random, T min, T max, in SpanBlock512<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(min,max,dst.Block(block));
+            random.Fill(min,max,dst.CellBlock(block));
             return ref dst;
         }
 
@@ -274,7 +274,7 @@ namespace Z0
         public static ref readonly SpanBlock16<T> SpanBlock<T>(this ISource source, in SpanBlock16<T> dst, int block)
             where T : unmanaged
         {
-            source.Fill(dst.Block(block));
+            source.Fill(dst.CellBlock(block));
             return ref dst;
         }
 
@@ -288,7 +288,7 @@ namespace Z0
         public static ref readonly SpanBlock32<T> SpanBlock<T>(this ISource source, in SpanBlock32<T> dst, int block)
             where T : unmanaged
         {
-            source.Fill(dst.Block(block));
+            source.Fill(dst.CellBlock(block));
             return ref dst;
         }
 
@@ -302,7 +302,7 @@ namespace Z0
         public static ref readonly SpanBlock64<T> SpanBlock<T>(this ISource source, in SpanBlock64<T> dst, int block)
             where T : unmanaged
         {
-            source.Fill(dst.Block(block));
+            source.Fill(dst.CellBlock(block));
             return ref dst;
         }
 
@@ -316,7 +316,7 @@ namespace Z0
         public static ref readonly SpanBlock128<T> SpanBlock<T>(this ISource random, in SpanBlock128<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.Fill(dst.CellBlock(block));
             return ref dst;
         }
 
@@ -330,7 +330,7 @@ namespace Z0
         public static ref readonly SpanBlock256<T> SpanBlock<T>(this ISource random, in SpanBlock256<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.Fill(dst.CellBlock(block));
             return ref dst;
         }
 
@@ -344,7 +344,7 @@ namespace Z0
         public static ref readonly SpanBlock512<T> SpanBlock<T>(this ISource random, in SpanBlock512<T> dst, int block)
             where T : unmanaged
         {
-            random.Fill(dst.Block(block));
+            random.Fill(dst.CellBlock(block));
             return ref dst;
         }
 

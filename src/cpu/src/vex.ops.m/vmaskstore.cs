@@ -228,8 +228,8 @@ namespace Z0
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vmaskstore8(Vector128<long> src, Vector128<byte> mask, in SpanBlock128<byte> dst)
-            => MaskMove(v8u(src), mask, ptr(dst));
+        public static unsafe void vmaskstore8(Vector128<long> src, Vector128<byte> mask, in SpanBlock128<byte> dst, uint block)
+            => MaskMove(v8u(src), mask, gptr(dst.BlockLead(block)));
 
         /// <summary>
         /// void _mm_maskmoveu_si128 (__m128i a, __m128i mask, char* mem_address) MASKMOVDQU xmm, xmm
@@ -513,8 +513,8 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vmaskstore(Vector128<ulong> src, Vector128<ulong> mask, in SpanBlock128<ulong> dst)
-            => MaskStore(ptr(dst), src, mask);
+        public static unsafe void vmaskstore(Vector128<ulong> src, Vector128<ulong> mask, in SpanBlock128<ulong> dst, uint block = 0)
+            => MaskStore(gptr(dst.BlockLead(block)), src, mask);
 
         /// <summary>
         /// Conditionally stores 8-bit components from the source vector to memory according to a vectorized mask
@@ -525,10 +525,12 @@ namespace Z0
         /// <param name="mask">The source content selector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vmaskstore(Vector256<byte> src, Vector256<byte> mask, in SpanBlock256<byte> dst)
+        public static unsafe void vmaskstore(Vector256<byte> src, Vector256<byte> mask, in SpanBlock256<byte> dst, uint block = 0)
         {
-            vmaskstore(vlo(src), vlo(mask), ref dst.First);
-            vmaskstore(vhi(src), vhi(mask), ref seek(dst.First, 16));
+            ref var a = ref dst.BlockLead(block);
+            ref var b = ref seek(a,16);
+            vmaskstore(vlo(src), vlo(mask), ref a);
+            vmaskstore(vhi(src), vhi(mask), ref b);
         }
 
         /// <summary>
@@ -541,8 +543,8 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vmaskstore(Vector256<int> src, Vector256<int> mask, in SpanBlock256<int> dst)
-            => MaskStore(ptr(dst), src, mask);
+        public static unsafe void vmaskstore(Vector256<int> src, Vector256<int> mask, in SpanBlock256<int> dst, uint block = 0)
+            => MaskStore(gptr(dst.BlockLead(block)), src, mask);
 
         /// <summary>
         /// void _mm256_maskstore_epi32 (int* mem_addr, __m256i mask, __m256i a) VPMASKMOVD m256, ymm, ymm
@@ -554,8 +556,8 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vmaskstore(Vector256<uint> src, Vector256<uint> mask, in SpanBlock256<uint> dst)
-            => MaskStore(ptr(dst), src, mask);
+        public static unsafe void vmaskstore(Vector256<uint> src, Vector256<uint> mask, in SpanBlock256<uint> dst, uint block = 0)
+            => MaskStore(gptr(dst.BlockLead(block)), src, mask);
 
         /// <summary>
         /// void _mm256_maskstore_epi64 (__int64* mem_addr, __m256i mask, __m256i a) VPMASKMOVQ m256, ymm, ymm
@@ -567,8 +569,8 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vmaskstore(Vector256<long> src, Vector256<long> mask, in SpanBlock256<long> dst)
-            => MaskStore(ptr(dst), src, mask);
+        public static unsafe void vmaskstore(Vector256<long> src, Vector256<long> mask, in SpanBlock256<long> dst, uint block = 0)
+            => MaskStore(gptr(dst.BlockLead(block)), src, mask);
 
         /// <summary>
         /// void _mm256_maskstore_epi64 (__int64* mem_addr, __m256i mask, __m256i a) VPMASKMOVQ m256, ymm, ymm
@@ -580,7 +582,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The target memory reference</param>
         [MethodImpl(Inline), Op]
-        public static unsafe void vmaskstore(Vector256<ulong> src, Vector256<ulong> mask, in SpanBlock256<ulong> dst)
-            => MaskStore(ptr(dst), src, mask);
+        public static unsafe void vmaskstore(Vector256<ulong> src, Vector256<ulong> mask, in SpanBlock256<ulong> dst, uint block = 0)
+            => MaskStore(gptr(dst.BlockLead(block)), src, mask);
     }
 }

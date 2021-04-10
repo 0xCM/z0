@@ -20,9 +20,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width</param>
-        /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static int vint32i(Vector128<int> src)
+        public static int vlo32i(Vector128<int> src)
             => ConvertToInt32(src);
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width</param>
         [MethodImpl(Inline), Op]
-        public static uint vint32u(Vector128<uint> src)
+        public static uint vlo32u(Vector128<uint> src)
             => ConvertToUInt32(src);
     }
 }

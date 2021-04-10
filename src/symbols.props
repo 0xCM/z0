@@ -87,6 +87,7 @@
     <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>
 
     <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
+    <SpanBlocks>$(Src)spanblocks/z0.spanblocks.csproj</SpanBlocks>
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
 

@@ -107,10 +107,10 @@ namespace Z0
 
             ref var g32src = ref g32.First;
 
-            var row124 = cpu.vload(n, g32.BlockRef(124*cpr));
-            var row125 = cpu.vload(n, g32.BlockRef(125*cpr));
-            var row126 = cpu.vload(n, g32.BlockRef(126*cpr));
-            var row127 = cpu.vload(n, g32.BlockRef(127*cpr));
+            var row124 = cpu.vload(n, g32.BlockLead(124*cpr));
+            var row125 = cpu.vload(n, g32.BlockLead(125*cpr));
+            var row126 = cpu.vload(n, g32.BlockLead(126*cpr));
+            var row127 = cpu.vload(n, g32.BlockLead(127*cpr));
 
             var diagA = cpu.vgather(n, in g32src, cpu.vparts(n, 496, 501, 506, 511));
             var diagB = cpu.vparts(n, g32[496], g32[501], g32[506], g32[511]);

@@ -60,5 +60,4 @@ namespace Z0
         /// </summary>
         public const uint Size = CharCount * 2;
     }
-
 }

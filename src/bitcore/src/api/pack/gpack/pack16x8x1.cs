@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort pack16x8x1<T>(in SpanBlock128<T> src, uint block = 0)
             where T : unmanaged
-                => pack16x8x1(src.BlockRef((int)block));
+                => pack16x8x1(src.BlockLead((int)block));
 
         /// <summary>
         /// Pack 16 1-bit values taken from the least significant bit of each source byte

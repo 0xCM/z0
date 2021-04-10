@@ -20,17 +20,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width</param>
         [MethodImpl(Inline), Op]
-        public static long vint64i(Vector128<long> src)
+        public static long vlo64i(Vector128<long> src)
             => ConvertToInt64(src);
-
-        /// <summary>
-        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="wDst">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static ulong vint64u(Vector128<ulong> src)
-            => ConvertToUInt64(src);
 
         /// <summary>
         /// __int64 _mm_cvtss_si64 (__m128 a) CVTSS2SI r64, xmm/m32
@@ -39,7 +30,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width</param>
         [MethodImpl(Inline), Op]
-        public static long vint64i(Vector128<float> src)
+        public static long vlo64i(Vector128<float> src)
             => ConvertToInt64(src);
 
         /// <summary>
@@ -49,7 +40,16 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width</param>
         [MethodImpl(Inline), Op]
-        public static long vint64i(Vector128<double> src)
+        public static long vlo64i(Vector128<double> src)
             => ConvertToInt64(src);
+
+        /// <summary>
+        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="wDst">The target width</param>
+        [MethodImpl(Inline), Op]
+        public static ulong vlo64u(Vector128<ulong> src)
+            => ConvertToUInt64(src);
     }
 }
