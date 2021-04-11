@@ -6,10 +6,10 @@ namespace Windows
     // Represents the image format of a DLL or executable.
     public enum ImageFormat : byte
     {
-        NATIVE,
+        Native,
 
-        MANAGED,
+        Managed,
 
-        UNKNOWN
+        Unknown
     }
 }

@@ -14,19 +14,7 @@ namespace Z0.Asm
     {
         public class Parameters : List<Parameter>
         {
-            const string Delimiter = ", ";
 
-            public string Format()
-            {
-                var count = Count;
-                if(count != 0)
-                    return TextFormat.join(Delimiter, this);
-                else
-                    return EmptyString;
-            }
-
-            public override string ToString()
-                => Format();
         }
     }
 }

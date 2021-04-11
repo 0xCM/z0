@@ -6,25 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Threading;
+    using System.Threading.Tasks;
     using System.IO;
 
     using static Part;
     using static FS;
 
-    using CK = FS.ChangeKind;
+    public delegate void FileChanged(FileChange description);
 
-    public readonly struct ArchiveMonitor : IArchiveMonitor
+    public class ArchiveMonitor : IArchiveMonitor
     {
-        public void run(FS.FolderPath path)
-        {
-            using var monitor = create(path, OnChange);
-            monitor.Start();
-            Console.ReadKey();
-        }
-
-        [MethodImpl(Inline), Op]
-        public static IArchiveMonitor create(FS.FolderPath src, FS.ChangeHandler handler = null, bool recursive = true, string filter = null)
-            => new ArchiveMonitor(src, handler, recursive, filter);
+        public static IArchiveMonitor start(FS.FolderPath path, FileChanged listener, bool recursive = true, string filter = null)
+            => new ArchiveMonitor(path, listener, recursive, filter);
 
         public FS.FolderPath Root {get;}
 
@@ -32,36 +26,24 @@ namespace Z0
 
         readonly FS.ChangeHandler Handler;
 
-        public ArchiveMonitor(FS.FolderPath subject, FS.ChangeHandler handler, bool recursive = true, string filter = null)
-            : this()
+        event FileChanged Listener;
+
+        public ArchiveMonitor(FS.FolderPath subject, FileChanged listener, bool recursive = true, string filter = null)
         {
             Root = subject;
-            Watcher = new FileSystemWatcher(subject.Name, filter ?? EmptyString);
+            Watcher = new FileSystemWatcher(subject.Name, filter ?? "*.*");
             Watcher.IncludeSubdirectories = recursive;
-            Handler = handler ?? OnChange;
+            Handler = SignalChange;
+            Listener += listener;
             Subscribe();
+            Start();
         }
 
-        void OnChange(FsEntry subject, FS.ChangeKind kind)
+        void SignalChange(FileChange change)
         {
             try
             {
-                if(kind != 0)
-                {
-                    Log(subject, kind);
-
-                    switch(kind)
-                    {
-                        case CK.Created:
-                        break;
-                        case CK.Deleted:
-                        break;
-                        case CK.Modified:
-                        break;
-                        case CK.Renamed:
-                        break;
-                    }
-                }
+                Task.Factory.StartNew(() => Listener.Invoke(change));
             }
             catch(Exception e)
             {
@@ -69,36 +51,25 @@ namespace Z0
             }
         }
 
-        FileChange Log(FsEntry subject, FS.ChangeKind kind)
-            => new FileChange(subject.Name, subject.Kind, kind);
-
         [MethodImpl(Inline)]
-        public static FsEntry objects(FileSystemEventArgs src)
-            => new FsEntry(src.FullPath, FS.ObjectKind.File);
+        public static FileChange change(FileSystemEventArgs e)
+            => new FileChange(FS.path(e.FullPath), (FS.ChangeKind)e.ChangeType);
 
         [MethodImpl(Inline)]
         void Created(object sender, FileSystemEventArgs e)
-        {
-            Handler(objects(e), (FS.ChangeKind)e.ChangeType);
-        }
+            => Handler(change(e));
 
         [MethodImpl(Inline)]
         void Deleted(object sender, FileSystemEventArgs e)
-        {
-            Handler(objects(e), (FS.ChangeKind)e.ChangeType);
-        }
+            => Handler(change(e));
 
         [MethodImpl(Inline)]
         void Changed(object sender, FileSystemEventArgs e)
-        {
-            Handler(objects(e), (FS.ChangeKind)e.ChangeType);
-        }
+            => Handler(change(e));
 
         [MethodImpl(Inline)]
         void Renamed(object sender, FileSystemEventArgs e)
-        {
-            Handler(objects(e), (FS.ChangeKind)e.ChangeType);
-        }
+            => Handler(change(e));
 
         void Subscribe()
         {

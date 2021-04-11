@@ -1,19 +1,19 @@
-namespace Z0.Workers
+namespace Z0
 {
     using System;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
 
-    public class Program
+    class App
     {
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }
 
-        static Worker worker(IServiceProvider provider)
-            => new Worker(provider.GetService<ILogger<Worker>>());
+        static Controller worker(IServiceProvider provider)
+            => new Controller(provider.GetService<ILogger<Controller>>());
 
         public static IHostBuilder CreateHostBuilder(string[] args)
             => Host.CreateDefaultBuilder(args)

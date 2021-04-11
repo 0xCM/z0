@@ -27,13 +27,13 @@ namespace Z0.Tooling
             var outputs = Outputs();
             var listings = Listings();
 
-            log.Title(NasmFileKind.Input);
+            log.Title(FlowDirection.Input);
             i=0;
-            root.iter(inputs, path => log.Row(i++, NasmFileKind.Input, path.ToUri()));
+            root.iter(inputs, path => log.Row(i++, FlowDirection.Input, path.ToUri()));
 
-            log.Title(NasmFileKind.Output);
+            log.Title(FlowDirection.Output);
             i=0;
-            root.iter(outputs, path => log.Row(i++, NasmFileKind.Output, path.ToUri()));
+            root.iter(outputs, path => log.Row(i++, FlowDirection.Output, path.ToUri()));
         }
     }
 }

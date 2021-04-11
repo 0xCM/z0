@@ -14,4 +14,23 @@ namespace Windows
 
         GENERIC_READ = 0x80000000
     }
+
+    // Flags that control caching and other behavior of the underlying file object.  Used only for
+    // CreateFile.
+    [Flags]
+    public enum FileFlagsAndAttributes : uint
+    {
+        NORMAL = 0x80,
+
+        OPEN_REPARSE_POINT = 0x200000,
+
+        SEQUENTIAL_SCAN = 0x8000000,
+
+        RANDOM_ACCESS = 0x10000000,
+
+        NO_BUFFERING = 0x20000000,
+
+        OVERLAPPED = 0x40000000
+    }
+
 }

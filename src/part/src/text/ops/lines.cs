@@ -13,10 +13,6 @@ namespace Z0
 
     partial class text
     {
-        [MethodImpl(Inline), Op]
-        public static TextLines lines(params TextLine[] src)
-            => src;
-
         [Op]
         public static TextLines lines(string src, bool keepblank = false)
         {
@@ -27,8 +23,7 @@ namespace Z0
                 var next = reader.ReadLine();
                 while (next != null)
                 {
-                    var blank = Query.blank(next);
-                    if(blank)
+                    if(Query.blank(next))
                     {
                         if(keepblank)
                             lines.Add(new TextLine(++lineNumber, next));

@@ -5,8 +5,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Xed
+    partial struct XedModels
     {
+
         [SymbolSource]
         public enum Extension : byte
         {

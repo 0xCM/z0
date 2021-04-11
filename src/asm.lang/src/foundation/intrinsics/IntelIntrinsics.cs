@@ -56,26 +56,36 @@ namespace Z0.Asm
             return dst;
         }
 
+
+        public static void render(Operation src, ITextBuffer dst)
+        {
+            if(src.Content != null)
+                root.iter(src.Content, x => dst.AppendLine(x));
+        }
+
+        public static void render(Instructions src, ITextBuffer dst)
+            => root.iter(src, x => dst.AppendLineFormat("# {0}",x));
+
         public static string format(Intrinsic src)
         {
             var dst = text.buffer();
-            dst.AppendLine(string.Format("# Intrinsic: {0} {1}({2})", src.@return,  src.name, src.parameters));
+            dst.AppendLine(string.Format("# Intrinsic: {0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray())));
 
             var classes = root.list<string>(3);
             if(text.nonempty(src.tech))
                 classes.Add(src.tech);
             if(src.CPUID.IsNonEmpty)
-                classes.Add(src.CPUID.Format());
+                classes.Add(src.CPUID.Content);
             if(src.category.IsNonEmpty)
-                classes.Add(src.category.Format());
+                classes.Add(src.category.Content);
             if(classes.Count != 0)
-                dst.AppendLineFormat("# Classification: {0}", TextFormat.join(", ", classes));
+                dst.AppendLineFormat("# Classification: {0}", string.Join(", ", classes));
 
             dst.AppendLineFormat("# Header: {0}", src.header);
-            dst.Append(src.instructions.Format());
+            render(src.instructions, dst);
             dst.AppendLineFormat("# Description: {0}", src.description);
             dst.AppendLine("BEGIN");
-            dst.Append(src.operation.Format());
+            render(src.operation, dst);
             dst.AppendLine("END");
             return dst.Emit();
         }
@@ -138,23 +148,13 @@ namespace Z0.Asm
                 }
             }
 
-            return span(entries).Slice(0,i).ToArray();
+            return slice(span(entries),0,i).ToArray();
         }
 
         static void read(XmlReader reader, ref Operation dst)
         {
             var content = reader.ReadInnerXml().Replace(XmlEntities.gt, ">").Replace(XmlEntities.lt, "<");
-            var lines = text.lines(content).View;
-            var count = lines.Length;
-            if(count != 0)
-            {
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var line = ref skip(lines,i);
-                    if(line.IsNonEmpty)
-                        dst.Content.Add(line);
-                }
-            }
+            dst.Content.AddRange(text.lines(content));
         }
 
         static void read(XmlReader reader, ref CpuId dst)

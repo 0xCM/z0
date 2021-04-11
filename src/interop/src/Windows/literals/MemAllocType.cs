@@ -4,36 +4,35 @@
 using System;
 namespace Windows
 {
-
     [Flags]
     public enum MemAllocType : uint
     {
-        COMMIT = 0x1000,
+        Commit = 0x1000,
 
-        RESERVE = 0x2000,
+        Reserve = 0x2000,
 
-        DECOMMIT = 0x4000,
+        Decommit = 0x4000,
 
-        RELEASE = 0x8000,
+        Release = 0x8000,
 
-        FREE = 0x10000,
+        Free = 0x10000,
 
-        PRIVATE = 0x20000,
+        Private = 0x20000,
 
-        MAPPED = 0x40000,
+        Mapped = 0x40000,
 
-        RESET = 0x80000,
+        Reset = 0x80000,
 
-        TOP_DOWN = 0x100000,
+        TopDown = 0x100000,
 
-        WRITE_WATCH = 0x200000,
+        WriteMatch = 0x200000,
 
-        PHYSICAL = 0x400000,
+        Physical = 0x400000,
 
-        ROTATE = 0x800000,
+        Rotate = 0x800000,
 
-        LARGE_PAGES = 0x20000000,
+        PagesLarge = 0x20000000,
 
-        MEM_4MB_PAGES = 0x80000000,
+        Pages4Mb = 0x80000000,
     }
 }

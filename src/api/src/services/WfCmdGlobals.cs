@@ -27,7 +27,7 @@ namespace Z0
             const string FormatPattern = "{0,-5} | {1,-5} | {2}";
 
             var header = string.Format(FormatPattern, "Dec", "Hex", "Bits");
-            using var logger = Db.ShowLog(ext:FS.Extensions.Csv).Writer();
+            using var logger = Db.ShowLog(ext:FS.Csv).Writer();
             Wf.Row(header);
             logger.WriteLine(header);
             var options = BitFormatOptions.bitblock(4, Chars.Space);

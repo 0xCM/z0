@@ -25,7 +25,18 @@ namespace Z0
 
         [TextUtility]
         public static string Join(this Span<string> src, string sep)
-            => TextFormat.concat(src,sep);
+        {
+            var dst = text.build();
+            for(var i=0; i<src.Length; i++)
+            {
+                ref var cell = ref src[i];
+                if(i != src.Length - 1)
+                    dst.Append($"{cell}{sep}");
+                else
+                    dst.Append(cell);
+            }
+            return dst.ToString();
+        }
 
         [TextUtility]
         public static string Join(this ReadOnlySpan<string> src, char sep)

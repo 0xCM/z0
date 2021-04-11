@@ -52,7 +52,7 @@ namespace Z0.Asm
                 {
                     var i = text.index(src, MnemonicTerminator);
                     var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(sigop) : sys.empty<AsmSigOperandExpr>();
-                    dst = new AsmSigExpr(monic, operands, format(monic, operands));
+                    dst = asm.sig(monic, format(monic, operands));
                     return true;
                 }
             }
@@ -156,7 +156,7 @@ namespace Z0.Asm
             if(opcount != 0)
             {
                 dst.Append(Chars.Space);
-                dst.Append(TextFormat.join(OperandDelimiter, operands));
+                dst.Append(text.join(OperandDelimiter, operands));
             }
         }
 

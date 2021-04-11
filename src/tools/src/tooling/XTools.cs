@@ -17,6 +17,10 @@ namespace Z0
             => Nasm.create(wf);
 
        [Op]
+       public static XedTool XedTool(this IWfRuntime wf)
+            => Tooling.XedTool.create(wf);
+
+       [Op]
        public static ScriptRunner ScriptRunner(this IWfRuntime wf)
             => Z0.ScriptRunner.create(wf.Db());
 

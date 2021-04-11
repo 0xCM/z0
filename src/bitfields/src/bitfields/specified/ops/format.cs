@@ -19,7 +19,7 @@ namespace Z0
 
         public static string format<T>(BitFieldPart<T> src)
             where T : unmanaged
-                => TextFormat.enclose(TextFormat.adjacent(src.LastIndex, SegmentDelimiter, src.FirstIndex), SegmentFence);
+                => text.enclose(text.adjacent(src.LastIndex, SegmentDelimiter, src.FirstIndex), SegmentFence);
 
         [Op]
         static string[] lines(in BitFieldModel src)

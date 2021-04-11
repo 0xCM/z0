@@ -7,11 +7,9 @@ namespace Windows
     using System.Runtime.InteropServices;
     using System.Diagnostics;
 
-    using static ApiSets;
-
     public readonly partial struct AdvApi
     {
-        const string LibName = "advapi32";
+        const string LibName = "advapi32.dll";
 
         /// <summary>Opens the access token associated with a process.</summary>
         /// <param name="processHandle">

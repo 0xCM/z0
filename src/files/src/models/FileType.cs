@@ -11,19 +11,19 @@ namespace Z0
 
     public readonly struct FileType
     {
-        public MimeType ContentType {get;}
+        public FileKind Kind {get;}
 
         public Index<FS.FileExt> Extensions {get;}
 
         [MethodImpl(Inline)]
-        public FileType(MimeType kind, FS.FileExt[] extensions)
+        public FileType(FileKind kind, FS.FileExt[] extensions)
         {
-            ContentType = kind;
+            Kind = kind;
             Extensions = extensions;
         }
 
         public string Format()
-            => FileTypes.format(this);
+            => FS.format(this);
 
         public override string ToString()
             => Format();

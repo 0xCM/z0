@@ -9,18 +9,18 @@ namespace Windows
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct MEMORY_BASIC_INFORMATION
     {
-        public byte* BaseAddress;
+        public ulong BaseAddress;
 
-        public byte* AllocationBase;
+        public ulong AllocationBase;
 
         public PageProtection AllocationProtect;
 
         public ulong RegionSize;
 
-        public MemoryState State;
+        public MemState State;
 
         public PageProtection Protect;
 
-        public MemoryType Type;
+        public MemType Type;
     }
 }

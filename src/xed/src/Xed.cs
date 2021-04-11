@@ -15,15 +15,13 @@ namespace Z0
     using static memory;
     using static XedSourceMarkers;
 
-    using F = XedSummaryField;
-
     [ApiHost]
     public readonly partial struct XedApi
     {
         [Op]
         public static Index<XedSummaryRow> summaries(ITableArchive archive)
         {
-            var src = archive.TablePath(FS.file(XedSummaryRow.TableId, FS.Extensions.Csv));
+            var src = archive.TablePath(FS.file(XedSummaryRow.TableId, FS.Csv));
             var doc = archive.Document(src).Require();
             var count = doc.RowCount;
             var buffer = sys.alloc<XedSummaryRow>(count);

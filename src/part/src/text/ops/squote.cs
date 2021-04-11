@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string squote(object src)
-            => TextFormat.enclose(src, CharText.SQuote);
+            => enclose(src, CharText.SQuote);
     }
 }

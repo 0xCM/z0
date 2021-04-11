@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.IO;
+
     using static memory;
 
     partial class XFs
@@ -13,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         public static Index<string> ReadLines(this FS.FilePath src)
-            => FS.lines(src);
+            => src.Exists ? File.ReadAllLines(src.Name) : sys.empty<string>();
 
         /// <summary>
         /// Reads the line-partitioned content of a text file
@@ -21,6 +24,6 @@ namespace Z0
         /// <param name="src">The file path</param>
         [Op]
         public static TextLines ReadTextLines(this FS.FilePath src)
-            => FS.text(src);
+            => FS.lines(src);
     }
 }

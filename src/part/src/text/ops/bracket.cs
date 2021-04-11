@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="content">The content to enclose</param>
         [MethodImpl(Inline), Op]
         public static string bracket(object content)
-            => TextFormat.enclose($"{content}", Chars.LBracket, Chars.RBracket);
+            => enclose($"{content}", Chars.LBracket, Chars.RBracket);
     }
 }

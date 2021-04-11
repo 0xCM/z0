@@ -13,6 +13,20 @@ namespace Z0
 
     partial class text
     {
+        [Op, Closures(Closure)]
+        public static string format<T>(PropFormat<T> src, char sep = RP.PropertySep)
+            => string.Format("{0}{1}{2}",
+                string.Format(RP.pad(src.Pad), src.Name),
+                string.Format("{0} ",sep),
+                    src.Value);
+
+        [Op]
+        public static string format(PropFormat src, char sep = RP.PropertySep)
+            => string.Format("{0}{1}{2}",
+                string.Format(RP.pad(src.Pad), src.Name),
+                string.Format("{0} ", sep),
+                    src.Value);
+
         [MethodImpl(Inline)]
         static string msgarg<T>(T src)
             => string.Format("<{0}>", src);
@@ -51,9 +65,9 @@ namespace Z0
         public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1, ReadOnlySpan<char> a2)
             => Format.format(pattern, a0, a1, a2);
 
-        [MethodImpl(Inline)]
+        [Op]
         public static string format(string pattern, params object[] args)
-            => Format.format(pattern, args);
+            => string.Format(pattern, args);
 
         [MethodImpl(Inline)]
         public static string format(object src)
@@ -87,13 +101,59 @@ namespace Z0
         public static string format<A,B,C,D,E,F>(string pattern, A a, B b, C c, D d, E e, F f)
             => Format.format(pattern, a, b, c, d, e, f);
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Renders a septet of values according to a format pattern
+        /// </summary>
+        /// <param name="a">The first value</param>
+        /// <param name="b">The second value</param>
+        /// <param name="c">The third value</param>
+        /// <param name="d">The fourth value</param>
+        /// <param name="e">The fifth value</param>
+        /// <param name="f">The sixth value</param>
+        /// <typeparam name="A">The first value type</typeparam>
+        /// <typeparam name="B">The second value type</typeparam>
+        /// <typeparam name="C">The third value type</typeparam>
+        /// <typeparam name="D">The fourth value type</typeparam>
+        /// <typeparam name="E">The fifth value type</typeparam>
+        /// <typeparam name="F">The sixth value type</typeparam>
+        /// <typeparam name="G">The seventh value type</typeparam>
         public static string format<A,B,C,D,E,F,G>(string pattern, A a, B b, C c, D d, E e, F f, G g)
-            => Format.format(pattern, a, b, c, d, e, f, g);
-
-        [MethodImpl(Inline)]
+            => string.Format(pattern,
+                            a is ITextual t0 ? t0.Format() : $"{a}",
+                            b is ITextual t1 ? t1.Format() : $"{b}",
+                            c is ITextual t2 ? t2.Format() : $"{c}",
+                            d is ITextual t3 ? t3.Format() : $"{d}",
+                            e is ITextual t4 ? t4.Format() : $"{e}",
+                            f is ITextual t5 ? t5.Format() : $"{f}",
+                            g is ITextual t6 ? t6.Format() : $"{g}"
+                            );
+        /// <summary>
+        /// Renders an octet of values according to a format pattern
+        /// </summary>
+        /// <param name="a">The first value</param>
+        /// <param name="b">The second value</param>
+        /// <param name="c">The third value</param>
+        /// <param name="d">The fourth value</param>
+        /// <param name="e">The fifth value</param>
+        /// <param name="f">The sixth value</param>
+        /// <typeparam name="A">The first value type</typeparam>
+        /// <typeparam name="B">The second value type</typeparam>
+        /// <typeparam name="C">The third value type</typeparam>
+        /// <typeparam name="D">The fourth value type</typeparam>
+        /// <typeparam name="E">The fifth value type</typeparam>
+        /// <typeparam name="F">The sixth value type</typeparam>
+        /// <typeparam name="G">The seventh value type</typeparam>
         public static string format<A,B,C,D,E,F,G,H>(string pattern, A a, B b, C c, D d, E e, F f, G g, H h)
-            => Format.format(pattern, a, b, c, d, e, f, g, h);
+            => string.Format(pattern,
+                            a is ITextual t0 ? t0.Format() : $"{a}",
+                            b is ITextual t1 ? t1.Format() : $"{b}",
+                            c is ITextual t2 ? t2.Format() : $"{c}",
+                            d is ITextual t3 ? t3.Format() : $"{d}",
+                            e is ITextual t4 ? t4.Format() : $"{e}",
+                            f is ITextual t5 ? t5.Format() : $"{f}",
+                            g is ITextual t6 ? t6.Format() : $"{g}",
+                            h is ITextual t7 ? t7.Format() : $"{h}"
+                            );
 
         /// <summary>
         /// Renders a pair of <see cref='ITextual'/> values as pipe-delimited text

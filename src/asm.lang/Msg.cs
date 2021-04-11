@@ -23,5 +23,8 @@ namespace Z0
 
         public static MsgPattern<TextRow,string> CouldNotParseStatementRow => "Could not parse statement from {0}: {1}";
 
+        public static MsgPattern<Fence<char>> OpCodeFenceNotFound => "Op code fence {0} not found";
+
+        public static MsgPattern<Count,Count> CollectedThumbprints => "Collected {0} distinct thumbprints from {1} statements";
     }
 }

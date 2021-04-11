@@ -12,6 +12,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string pattern(params FileExt[] src)
-            => Z0.text.join(Chars.Pipe, src.Select(x => x.SearchPattern));
+            => string.Join(Chars.Pipe, src.Select(x => x.SearchPattern));
     }
 }

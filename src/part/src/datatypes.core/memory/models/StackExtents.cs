@@ -11,12 +11,12 @@ namespace Z0
 
     public unsafe readonly struct StackExtents
     {
-        public byte* BaseAddress {get;}
+        public MemoryAddress BaseAddress {get;}
 
-        public ulong Size {get;}
+        public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
-        public StackExtents(byte* @base, ulong size)
+        public StackExtents(MemoryAddress @base, ulong size)
         {
             BaseAddress = @base;
             Size = size;

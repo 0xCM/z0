@@ -26,7 +26,7 @@ namespace Z0
         public Index<ApiCatalogEntry> Current()
         {
             var dir = Db.IndexDir<ApiCatalogEntry>();
-            var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
+            var files = dir.Files(FS.Csv).OrderBy(f => f.Name);
             var parser = Tables.parser<ApiCatalogEntry>(parse);
             var rows = root.list<ApiCatalogEntry>();
             if(files.Length != 0)
@@ -66,7 +66,7 @@ namespace Z0
             if(fields.Length != FieldCount)
             {
                 dst = default;
-                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, Format.delimit(fields, Delimiter)));
+                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, text.delimit(fields, Delimiter)));
             }
 
             var i = 0;

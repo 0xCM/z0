@@ -9,8 +9,6 @@ namespace Z0.Tooling
 
     using static DumpBin.Flag;
 
-    using X = FS.Extensions;
-
     public partial struct DumpBin
     {
         const string Space = " ";
@@ -25,20 +23,20 @@ namespace Z0.Tooling
             switch(id)
             {
                 case CmdId.EmitAsm:
-                    return ext(DISASM) + ext(NOBYTES) + X.Asm;
+                    return ext(DISASM) + ext(NOBYTES) + FS.Asm;
                 case CmdId.EmitRawData:
-                    return ext(RAWDATA) + X.Log;
+                    return ext(RAWDATA) + FS.Log;
                 case CmdId.EmitHeaders:
-                    return ext(HEADERS) + X.Log;
+                    return ext(HEADERS) + FS.Log;
                 case CmdId.EmitRelocations:
-                    return ext(RELOCATIONS) + X.Log;
+                    return ext(RELOCATIONS) + FS.Log;
                 case CmdId.EmitExports:
-                    return ext(EXPORTS) + X.Log;
+                    return ext(EXPORTS) + FS.Log;
                 case CmdId.EmitLoadConfig:
-                    return ext(LOADCONFIG) + X.Log;
+                    return ext(LOADCONFIG) + FS.Log;
             }
 
-            return X.Log;
+            return FS.Log;
         }
 
         public static CmdScript script(DumpBin tool, string name, CmdId id, FileModule[] src)

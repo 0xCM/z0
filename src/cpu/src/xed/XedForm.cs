@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly partial struct Xed
+    public readonly partial struct XedModels
     {
         public readonly struct XedForm
         {

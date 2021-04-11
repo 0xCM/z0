@@ -113,11 +113,25 @@ namespace Z0
         /// </summary>
         public static FileExt Idx => ext(idx, csv);
 
+        /// <summary>
+        /// Defines the <see cref='xml'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Xml => ext(xml);
 
         /// <summary>
         /// Defines the <see cref='zip'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Zip => ext(zip);
+
+        /// <summary>
+        /// Defines the composite <see cref='djson'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt JsonDeps => ext(djson);
+
+        /// <summary>
+        /// Defines the <see cref='sln'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Sln => ext(sln);
 
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions
@@ -171,10 +185,6 @@ namespace Z0
             /// </summary>
             public static FileExt JsonConfig => ext(cjson);
 
-            /// <summary>
-            /// Defines the composite <see cref='djson'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt JsonDeps => ext(djson);
 
             /// <summary>
             /// Defines the <see cref='pdb'/> <see cref='FileExt'/>
@@ -186,10 +196,6 @@ namespace Z0
             /// </summary>
             public static FileExt StatusLog => ext(status) + Log;
 
-            /// <summary>
-            /// Defines the <see cref='sln'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Sln => ext(sln);
 
             /// <summary>
             /// Defines the <see cref='targets'/> <see cref='FileExt'/>

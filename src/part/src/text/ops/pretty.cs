@@ -12,9 +12,9 @@ namespace Z0
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        [Op]
         public static string assign(object lhs, object rhs)
-            => TextFormat.concat(lhs, Space, Assignment, Space, rhs);
+            => concat(lhs, Space, Assignment, Space, rhs);
 
         /// <summary>
         /// Encloses content between '(' and ')' characters
@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="content">The items to be enclosed</param>
         [Op]
         public static string parenthetical(params object[] content)
-            => TextFormat.enclose(string.Concat(content.Select(x => x.ToString())), Chars.LParen, Chars.RParen);
+            => enclose(string.Concat(content.Select(x => x.ToString())), Chars.LParen, Chars.RParen);
 
         [MethodImpl(Inline)]
         public static string rpad(string src, int width, char c = Space)

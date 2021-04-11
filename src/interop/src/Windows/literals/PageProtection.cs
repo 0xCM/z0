@@ -5,23 +5,62 @@ namespace Windows
 {
     using System;
 
-    // Flags that control caching and other behavior of the underlying file object.  Used only for
-    // CreateFile.
     [Flags]
-    public enum FileFlagsAndAttributes : uint
+    public enum PageProtection : uint
     {
-        NORMAL = 0x80,
+        /// <summary>
+        /// Disables all access to the committed region of pages. An attempt to read from, write to, or execute the committed region results in an access violation.
+        /// </summary>
+        NoAccess = 0x01,
 
-        OPEN_REPARSE_POINT = 0x200000,
+        /// <summary>
+        /// Enables read-only access to the committed region of pages
+        /// </summary>
+        Readonly = 0x02,
 
-        SEQUENTIAL_SCAN = 0x8000000,
+        /// <summary>
+        /// Enables execute, read-only, or read/write access to the committed region of pages.
+        /// </summary>
+        ReadWrite = 0x04,
 
-        RANDOM_ACCESS = 0x10000000,
+        WriteCopy = 0x08,
 
-        NO_BUFFERING = 0x20000000,
+        /// <summary>
+        /// Enables execute access to the committed region of pages. An attempt to write to the committed region results in
+        /// an access violation. This flag is not supported by the CreateFileMapping function.
+        /// </summary>
+        Execute = 0x10,
 
-        OVERLAPPED = 0x40000000
+        /// <summary>
+        /// Enables execute or read-only access to the committed region of pages. An attempt to write to the committed region
+        /// results in an access violation. Windows Server 2003 and Windows XP: This attribute is not supported by the CreateFileMapping
+        /// function until Windows XP with SP2 and Windows Server 2003 with SP1.
+        /// </summary>
+        ExecuteRead = 0x20,
+
+        ExecuteReadWrite = 0x40,
+
+        /// <summary>
+        /// Enables execute, read-only, or copy-on-write access to a mapped view of a file mapping object.
+        /// An attempt to write to a committed copy-on-write page results in a private copy of the page being
+        /// made for the process. The private page is marked as PAGE_EXECUTE_READWRITE, and the change is
+        /// written to the new page. This flag is not supported by the VirtualAlloc or VirtualAllocEx functions
+        /// </summary>
+        ExecuteWriteCopy = 0x80,
+
+        /// <summary>
+        /// Pages in the region become guard pages. Any attempt to access a guard page causes the system to raise a STATUS_GUARD_PAGE_VIOLATION exception and turn off the guard page status. Guard pages thus act as a one-time access alarm.
+        /// </summary>
+        Guard = 0x100,
+
+        /// <summary>
+        /// Sets all pages to be non-cachable.
+        /// </summary>
+        NoCahe = 0x200,
+
+        WriteCombine = 0x400,
     }
+
 
     // A flag indicating the format of the path string that Windows returns from a call to
     // QueryFullProcessImageName().
@@ -32,46 +71,10 @@ namespace Windows
         NATIVE_SYSTEM_FORMAT = 1
     }
 
-
     // Determines the amount of information requested (and hence the type of structure returned)
     // by a call to NtQueryInformationProcess.
     public enum PROCESSINFOCLASS : int
     {
         PROCESS_BASIC_INFORMATION = 0
     };
-
-    [Flags]
-    public enum PageProtection : uint
-    {
-        NOACCESS = 0x01,
-
-        READONLY = 0x02,
-
-        READWRITE = 0x04,
-
-        WRITECOPY = 0x08,
-
-        /// <summary>
-        /// Enables execute access to the committed region of pages. An attempt to write to the committed region results in
-        /// an access violation. This flag is not supported by the CreateFileMapping function.
-        /// </summary>
-        EXECUTE = 0x10,
-
-        /// <summary>
-        /// Enables execute or read-only access to the committed region of pages. An attempt to write to the committed region
-        /// results in an access violation. Windows Server 2003 and Windows XP: This attribute is not supported by the CreateFileMapping
-        /// function until Windows XP with SP2 and Windows Server 2003 with SP1.
-        /// </summary>
-        EXECUTE_READ = 0x20,
-
-        EXECUTE_READWRITE = 0x40,
-
-        EXECUTE_WRITECOPY = 0x80,
-
-        GUARD = 0x100,
-
-        NOCACHE = 0x200,
-
-        WRITECOMBINE = 0x400,
-    }
 }

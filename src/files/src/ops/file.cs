@@ -25,7 +25,7 @@ namespace Z0
 
         [Op]
         public static FileName file(PartId part, string hostname, FileExt ext)
-            => file(TextFormat.concat(part.Format(), Chars.Dot, hostname), ext);
+            => file(text.concat(part.Format(), Chars.Dot, hostname), ext);
 
         [MethodImpl(Inline), Op]
         public static FileName file(PathPart name, FileExt ext)

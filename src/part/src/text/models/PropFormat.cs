@@ -9,8 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using api = TextRules.Format;
-
     public readonly struct PropFormat : ITextual
     {
         public Name Name {get;}
@@ -28,7 +26,7 @@ namespace Z0
         }
 
         public string Format(char sep)
-            => api.format(this, sep);
+            => text.format(this, sep);
 
         public string Format()
             => Format(RP.PropertySep);
@@ -62,7 +60,7 @@ namespace Z0
         }
 
         public string Format(char sep)
-            => api.format(this, sep);
+            => text.format(this, sep);
 
         public string Format()
             => Format(RP.PropertySep);

@@ -30,7 +30,7 @@ namespace Z0
             }
 
             public static void render<T>(Join<T> rule, ITextBuffer dst)
-                => TextFormat.join(rule.Delimiter, rule.Terms);
+                => string.Join(rule.Delimiter, rule.Terms);
         }
     }
 }

@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Xed
+    partial struct XedModels
     {
         [SymbolSource]
         public enum Category : byte
@@ -35,6 +35,7 @@ namespace Z0
 
             AVX512_BITALG,
             AVX512_VBMI,
+
             AVX512_VP2INTERSECT,
             BINARY,
             BITBYTE,

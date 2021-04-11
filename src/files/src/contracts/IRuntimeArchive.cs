@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using X = FS.Extensions;
+    using static FS;
 
     public interface IRuntimeArchive : IFileArchive
     {
@@ -12,43 +12,42 @@ namespace Z0
         /// All runtime-related files in the archive
         /// </summary>
         FS.Files Files
-             => Root.Files(false, X.Exe, X.Dll, X.Pdb, X.Json, X.Xml).Where(x => !x.Name.Contains("System.Private.CoreLib"));
+             => Root.Files(false, Exe, Dll, Pdb, Json, Xml).Where(x => !x.Name.Contains("System.Private.CoreLib"));
 
         IModuleArchive Modules
             => ModuleArchive.create(Root);
 
         FS.Files ManagedDllFiles
-            => ArchiveFiles().Where(x => FS.managed(x) && x.Is(X.Dll)).Array();
+            => ArchiveFiles().Where(x => FS.managed(x) && x.Is(Dll)).Array();
 
         FS.Files ManagedExecutables
-            => ArchiveFiles().Where(x => FS.managed(x) && x.Is(X.Exe)).Array();
+            => ArchiveFiles().Where(x => FS.managed(x) && x.Is(Exe)).Array();
 
         FS.Files NativeDllFiles
-            => ArchiveFiles().Where(x => !FS.managed(x) && x.Is(X.Dll)).Array();
+            => ArchiveFiles().Where(x => !FS.managed(x) && x.Is(Dll)).Array();
 
         FS.Files NativeLibFiles
-            => Root.EnumerateFiles(X.Lib, true).Array();
+            => Root.EnumerateFiles(Lib, true).Array();
 
         FS.Files NativeExecutables
-            => ArchiveFiles().Where(x => !FS.managed(x) && x.Is(X.Exe)).Array();
+            => ArchiveFiles().Where(x => !FS.managed(x) && x.Is(Exe)).Array();
 
         FS.Files ExeFiles
-            => ArchiveFiles().Where(x => x.Is(X.Exe)).Array();
+            => ArchiveFiles().Where(x => x.Is(Exe)).Array();
 
         FS.Files JsonFiles
-            => ArchiveFiles().Where(x => x.Is(X.Json)).Array();
+            => ArchiveFiles().Where(x => x.Is(Json)).Array();
 
         FS.Files XmlFiles
-            => ArchiveFiles().Where(x => x.Is(X.Xml)).Array();
+            => ArchiveFiles().Where(x => x.Is(Xml)).Array();
 
         FS.Files DllFiles
-            => ArchiveFiles().Where(x => x.Is(X.Dll)).Array();
+            => ArchiveFiles().Where(x => x.Is(Dll)).Array();
 
         FS.Files PdbFiles
-            => ArchiveFiles().Where(x => x.Is(X.Pdb)).Array();
+            => ArchiveFiles().Where(x => x.Is(Pdb)).Array();
 
         FS.Files JsonDepsFiles
-            => Root.EnumerateFiles(X.JsonDeps, true).Array();
-
+            => Root.EnumerateFiles(JsonDeps, true).Array();
     }
 }

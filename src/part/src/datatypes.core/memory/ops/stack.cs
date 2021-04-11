@@ -20,7 +20,7 @@ namespace Z0
         {
             var info = new MEMORY_BASIC_INFORMATION();
             Kernel32.VirtualQuery(&info, ref info, new UIntPtr((uint)sizeof(MEMORY_BASIC_INFORMATION)));
-            var @base = info.AllocationBase;
+            MemoryAddress @base = info.AllocationBase;
             var size = (ulong)(info.BaseAddress - info.AllocationBase) + info.RegionSize;
             return new StackExtents(@base,size);
         }

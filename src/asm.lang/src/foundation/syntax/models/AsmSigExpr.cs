@@ -18,22 +18,10 @@ namespace Z0.Asm
 
         public AsmMnemonic Mnemonic {get;}
 
-        public Index<AsmSigOperandExpr> Operands {get;}
-
         public AsmSigExpr(AsmMnemonic mnemonic, TextBlock formatted)
         {
             Data = formatted;
             Mnemonic = mnemonic;
-            Operands = Index<AsmSigOperandExpr>.Empty;
-        }
-
-        [MethodImpl(Inline)]
-        public AsmSigExpr(AsmMnemonic monic, AsmSigOperandExpr[] operands, TextBlock formatted)
-            : this()
-        {
-            Mnemonic = monic;
-            Operands = operands;
-            Data = formatted;
         }
 
         public string Content
@@ -94,6 +82,6 @@ namespace Z0.Asm
             => !a.Equals(b);
 
         public static AsmSigExpr Empty
-            => new AsmSigExpr(AsmMnemonic.Empty, sys.empty<AsmSigOperandExpr>(), TextBlock.Empty);
+            => new AsmSigExpr(AsmMnemonic.Empty, TextBlock.Empty);
     }
 }

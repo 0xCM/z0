@@ -9,6 +9,6 @@ namespace Z0
     partial struct FS
     {
         [Free]
-        public delegate void ChangeHandler(FsEntry subject, ChangeKind kind);
+        public delegate void ChangeHandler(FileChange change);
     }
 }

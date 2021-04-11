@@ -67,7 +67,7 @@ namespace Z0.Asm
         {
             var src = LoadThumbprints().View;
             var count = src.Length;
-            using var log = ShowLog(FS.Extensions.Asm, "thumbprints");
+            using var log = ShowLog(FS.Asm, "thumbprints");
             for(var i=0; i<count; i++)
                 log.Show(AsmThumbprints.format(skip(src,i)));
         }
@@ -76,7 +76,7 @@ namespace Z0.Asm
         {
             var distinct = root.hashset<AsmThumbprint>();
             root.iter(src, s => distinct.Add(s.Thumbprint()));
-            Wf.Status($"Collected {distinct.Count} thumbprints from {src.Count} statements");
+            Wf.Status(Msg.CollectedThumbprints.Format(distinct.Count, src.Count));
             EmitThumbprints(distinct.ToArray());
         }
 
@@ -111,7 +111,7 @@ namespace Z0.Asm
                                 Wf.Error($"Could not parse the encoded bytes");
                         }
                         else
-                            Wf.Error($"Could not located the opcode fence ${OpCodeFence}");
+                            Wf.Error(Msg.OpCodeFenceNotFound.Format(OpCodeFence));
 
                     }
                     else

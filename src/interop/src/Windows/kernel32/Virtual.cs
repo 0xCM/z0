@@ -26,11 +26,13 @@ namespace Windows
         [DllImport(LibName, SetLastError = true, ExactSpelling = true), Free]
         public static extern unsafe UIntPtr VirtualQuery(void* lpAddress, ref MEMORY_BASIC_INFORMATION lpBuffer, UIntPtr dwLength);
 
+        [DllImport(LibName, SetLastError = true), Free]
+        public static extern int VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress, out MEMORY_BASIC_INFORMATION lpBuffer, uint dwLength);
+
         [DllImport(LibName), Free]
-        public static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags);
+        public static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, PageProtection flags, out PageProtection oldFlags);
 
         [DllImport(LibName, SetLastError = true), Free]
-        static extern UIntPtr VirtualAlloc(UIntPtr lpAddress, UIntPtr allocSize, [MarshalAs(UnmanagedType.U4)] MemAllocType allocationType,
-            [MarshalAs(UnmanagedType.U4)] PageProtection protection);
+        static extern UIntPtr VirtualAlloc(UIntPtr lpAddress, UIntPtr allocSize, MemAllocType allocationType, PageProtection protection);
     }
 }

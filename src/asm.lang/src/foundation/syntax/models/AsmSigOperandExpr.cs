@@ -65,5 +65,4 @@ namespace Z0.Asm
         public static AsmSigOperandExpr Empty
             => new AsmSigOperandExpr(EmptyString);
     }
-
 }

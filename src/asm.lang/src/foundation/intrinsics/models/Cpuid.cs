@@ -25,6 +25,7 @@ namespace Z0.Asm
 
             public bool IsNonEmpty
             {
+                [MethodImpl(Inline)]
                 get => text.nonempty(Content);
             }
             public string Format()

@@ -27,7 +27,7 @@ namespace Z0.Asm
 
         public ApiHostCaptureSet Capture(Type host)
         {
-            var asmpath = Db.AppLog($"{host.Name}", FS.Extensions.Asm);
+            var asmpath = Db.AppLog($"{host.Name}", FS.Asm);
             return Capture(host, asmpath);
         }
 

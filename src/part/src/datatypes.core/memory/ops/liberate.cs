@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Windows;
     using static Windows.Kernel32;
     using static Root;
 
@@ -72,23 +73,11 @@ namespace Z0
             where T : unmanaged
         {
             IntPtr buffer = (IntPtr)(void*)pSrc;
-            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, 0x40, out uint _))
+            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, PageProtection.ExecuteReadWrite, out PageProtection _))
                 ThrowLiberationError(buffer, length);
             return pSrc;
         }
 
-        /// <summary>
-        /// Enables an executable memory segment
-        /// </summary>
-        /// <param name="src">The leading cell pointer</param>
-        /// <param name="length">The length of the segment, in bytes</param>
-        [MethodImpl(Inline)]
-        public static IntPtr liberate(IntPtr src, int length)
-        {
-            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, src, (UIntPtr)(ulong)length, 0x40, out uint _))
-                ThrowLiberationError(src, length);
-            return src;
-        }
 
         /// <summary>
         /// Enables en executable memory segment
@@ -102,9 +91,22 @@ namespace Z0
         {
             var pSrc = Unsafe.AsPointer(ref src);
             IntPtr buffer = (IntPtr)pSrc;
-            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, 0x40, out uint _))
+            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, PageProtection.ExecuteReadWrite, out PageProtection _))
                 ThrowLiberationError(buffer, length);
             return (T*)pSrc;
+        }
+
+        /// <summary>
+        /// Enables an executable memory segment
+        /// </summary>
+        /// <param name="src">The leading cell pointer</param>
+        /// <param name="length">The length of the segment, in bytes</param>
+        [MethodImpl(Inline)]
+        public static IntPtr liberate(IntPtr src, int length)
+        {
+            if (!VirtualProtectEx(CurrentProcess.ProcessHandle, src, (UIntPtr)(ulong)length, PageProtection.ExecuteReadWrite, out PageProtection _))
+                ThrowLiberationError(src, length);
+            return src;
         }
 
         internal static void ThrowLiberationError(IntPtr pCode, int Length)

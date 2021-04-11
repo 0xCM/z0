@@ -9,7 +9,7 @@ namespace Z0.Vdsl
 
     using static Part;
     using static memory;
-    using static Xed;
+    using static XedModels;
 
     partial struct Intel
     {

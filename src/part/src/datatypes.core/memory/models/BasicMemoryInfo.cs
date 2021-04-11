@@ -20,8 +20,8 @@ namespace Z0
 
         public PageProtection Protection;
 
-        public MemoryState State;
+        public MemState State;
 
-        public MemoryType Type;
+        public MemType Type;
     }
 }

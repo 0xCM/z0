@@ -11,24 +11,24 @@ namespace Z0
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        [Op]
         public static string adjacent(dynamic a, dynamic b)
-            => TextFormat.adjacent(a, b);
+            => string.Format(RP.Adjacent2, a, b);
 
-        [MethodImpl(Inline)]
+        [Op]
         public static string adjacent(dynamic a, dynamic b, dynamic c)
-            => TextFormat.adjacent(a, b, c);
+            => string.Format(RP.Adjacent3, a, b, c);
 
-        [MethodImpl(Inline)]
+        [Op]
         public static string adjacent(dynamic a, dynamic b, dynamic c, dynamic d)
-            => TextFormat.adjacent(a, b, c, d);
+            => string.Format(RP.Adjacent4, a, b, c, d);
 
-        [MethodImpl(Inline)]
+        [Op]
         public static string adjacent(dynamic a, dynamic b, dynamic c, dynamic d, dynamic e)
-            => TextFormat.adjacent(a, b, c, d, e);
+            => string.Format(RP.Adjacent5, a, b, c, d, e);
 
-        [MethodImpl(Inline)]
+        [Op]
         public static string adjacent(dynamic a, dynamic b, dynamic c, dynamic d, dynamic e, dynamic f)
-            => TextFormat.adjacent(a, b, c, d, e, f);
+            => string.Format(RP.Adjacent6, a, b, c, d, e, f);
     }
 }

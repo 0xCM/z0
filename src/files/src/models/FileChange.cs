@@ -9,17 +9,22 @@ namespace Z0
     {
         public const string TableId = "fs.change";
 
-        public FS.PathPart Subject;
-
-        public FS.ObjectKind SubjectKind;
+        public FS.FilePath File;
 
         public FS.ChangeKind ChangeKind;
 
-        public FileChange(FS.PathPart name, FS.ObjectKind objkind, FS.ChangeKind kind)
+        public FileChange(FS.FilePath path, FS.ChangeKind kind)
         {
             ChangeKind = kind;
-            SubjectKind = objkind;
-            Subject = name;
+            File = path;
         }
+
+        public string Format()
+            => string.Format("[{0,10}] {1}]", ChangeKind, File.ToUri());
+
+
+        public override string ToString()
+            => Format();
+
     }
 }

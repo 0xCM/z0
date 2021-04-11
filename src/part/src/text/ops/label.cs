@@ -11,13 +11,13 @@ namespace Z0
 
     partial class text
     {
-       /// <summary>
+        /// <summary>
         /// Creates a string of the form "name: content"
         /// </summary>
         /// <param name="name">The label name</param>
         /// <param name="content">The labeled content</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string label(object name, object content)
-            => TextFormat.concat(name, Chars.Colon, Space, content);
+            => concat(name, Chars.Colon, Space, content);
     }
 }

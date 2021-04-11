@@ -15,7 +15,7 @@ namespace Z0
         public static string enquote(string src)
         {
             if(!string.IsNullOrWhiteSpace(src))
-                return TextFormat.concat(Chars.Quote, src, Chars.Quote);
+                return concat(Chars.Quote, src, Chars.Quote);
             else
                 return EmptyString;
         }

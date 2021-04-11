@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static FS.Extensions;
+    using static FS;
 
     [ApiHost]
     public readonly struct RuntimeArchive : IRuntimeArchive

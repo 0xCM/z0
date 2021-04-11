@@ -9,23 +9,38 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial class text
     {
-        [MethodImpl(Inline)]
-        public static string join<T>(string delimiter, IEnumerable<T> src)
-            => TextFormat.join(delimiter, src);
+        [Op, Closures(Closure)]
+        public static string join<T>(string sep, IEnumerable<T> src)
+            => string.Join(sep, src);
 
-        [MethodImpl(Inline)]
-        public static string join<T>(string delimiter, params T[] src)
-            => TextFormat.join(delimiter, src);
+        [Op, Closures(Closure)]
+        public static string join<T>(string sep, params T[] src)
+            => string.Join(sep, src);
 
-        [MethodImpl(Inline)]
-        public static string join<T>(char delimiter, IEnumerable<T> src)
-            => TextFormat.join(delimiter, src);
+        [Op, Closures(Closure)]
+        public static string join<T>(char sep, IEnumerable<T> src)
+            => string.Join(sep, src);
 
-        [MethodImpl(Inline)]
-        public static string join<T>(char delimiter, params T[] src)
-            => TextFormat.join(delimiter, src);
+        [Op, Closures(Closure)]
+        public static string join<T>(string sep, ReadOnlySpan<T> src)
+        {
+            var dst = text.buffer();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                if(i != 0)
+                    dst.Append(sep);
+                dst.AppendItem(skip(src,i));
+            }
+            return dst.ToString();
+        }
+
+        [Op, Closures(Closure)]
+        public static string join<T>(char sep, params T[] src)
+            => string.Join(sep, src);
     }
 }

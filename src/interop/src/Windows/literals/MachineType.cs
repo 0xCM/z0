@@ -8,7 +8,7 @@ namespace Windows
     // http://www.microsoft.com/whdc/system/platform/firmware/PECOFF.mspx
     public enum MachineType : ushort
     {
-        UNKNOWN = 0x0,
+        None = 0x0,
 
         X64 = 0x8664,
 

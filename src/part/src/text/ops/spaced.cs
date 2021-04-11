@@ -20,9 +20,9 @@ namespace Z0
         public static string spaced(object content)
             => $" {content} ";
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string spaced(char c)
-            => TextFormat.concat(Space, c, Space);
+            => concat(Space, c, Space);
 
         /// <summary>
         /// Separates each item with a space

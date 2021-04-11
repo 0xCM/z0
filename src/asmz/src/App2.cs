@@ -10,8 +10,6 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.IO;
 
-    using Z0.Tooling;
-
     using static Part;
     using static memory;
     using static Toolsets;
@@ -789,7 +787,7 @@ namespace Z0.Asm
             var pipe = Wf.Xed();
             var forms = pipe.LoadForms();
             using var log = ShowLog("xed-forms", FS.Extensions.Csv);
-            log.Show(Xed.XedForm.Header);
+            log.Show(XedModels.XedForm.Header);
             root.iter(forms, form => log.Show(form));
         }
 
@@ -969,7 +967,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            Wf.AsmDb().ShowSourceDocs();
+            Wf.IntelCpuIntrinsics().Emit();
+            //Wf.AsmDb().ShowSourceDocs();
             // var cases = AsmExprCases.create(Wf);
             // cases.Run(AsmSigKind.and_r8_r8);
 

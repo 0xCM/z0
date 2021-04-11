@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     partial class IntelIntrinsics
     {
-        public struct Operation : ITextual
+        public struct Operation
         {
             public const string ElementName = "operation";
 
@@ -24,21 +24,6 @@ namespace Z0.Asm
                 Content = src;
             }
 
-            public override string ToString()
-                => Format();
-
-            public string Format()
-            {
-                if(Content != null)
-                {
-                    var dst = text.buffer();
-                    foreach(var line in Content)
-                        dst.AppendLine(line);
-                    return dst.Emit();
-                }
-                else
-                    return EmptyString;
-            }
         }
     }
 }

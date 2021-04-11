@@ -97,6 +97,7 @@ namespace Z0
             return true;
         }
 
+
         [MethodImpl(Inline)]
         public static Outcome eparse<T>(string src, out T dst)
             where T : unmanaged, Enum

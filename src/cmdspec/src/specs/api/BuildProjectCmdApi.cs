@@ -21,11 +21,11 @@ namespace Z0
 
         [Op]
         static FS.FilePath SolutionPath(this WfCmdBuilder src, in BuildCmdVars vars)
-            => src.Env.ZDev.Value + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Extensions.Sln);
+            => src.Env.ZDev.Value + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Sln);
 
         [Op]
         static FS.FilePath LogPath(this WfCmdBuilder src, in BuildCmdVars vars)
-            => src.Db.BuildLogPath(FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Extensions.Log));
+            => src.Db.BuildLogPath(FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Log));
 
         [Op]
         public static string Identifier(this BuildProjectCmd src)

@@ -12,23 +12,8 @@ namespace Z0.Asm
 
     partial class IntelIntrinsics
     {
-        public class Instructions : List<Instruction>, ITextual
+        public class Instructions : List<Instruction>
         {
-            public string Format()
-            {
-                var count = Count;
-                if(count != 0)
-                {
-                    var dst = text.buffer();
-                    root.iter(this, x => dst.AppendLineFormat("# {0}",x));
-                    return dst.Emit();
-                }
-                else
-                    return EmptyString;
-            }
-
-            public override string ToString()
-                => Format();
         }
     }
 }

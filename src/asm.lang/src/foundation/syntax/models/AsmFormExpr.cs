@@ -22,12 +22,6 @@ namespace Z0.Asm
             Sig = sig;
         }
 
-        public Index<AsmSigOperandExpr> Operands
-        {
-            [MethodImpl(Inline)]
-            get => Sig.Operands;
-        }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

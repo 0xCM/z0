@@ -4,9 +4,6 @@ namespace Windows
 {
     using System;
 
-
-
-
     /// <summary>
     /// The ACCESS_MASK type is a bitmask that specifies a set of access rights in the access mask of an access control entry.
     /// </summary>
