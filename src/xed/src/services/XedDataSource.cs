@@ -19,7 +19,7 @@ namespace Z0
         internal XedDataSource(FS.FolderPath root)
         {
             Root = root;
-            Files = Root.Files(FS.Extensions.Txt, true);
+            Files = Root.Files(FS.Txt, true);
         }
 
         bool DefinesInstructions(FS.FilePath file)

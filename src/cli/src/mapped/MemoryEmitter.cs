@@ -27,7 +27,7 @@ namespace Z0
             for(ushort i=0; i<count; i++)
             {
                 ref readonly var file = ref mapped[i];
-                var target = dst + FS.file(file.Path.FileName.Name, FS.Extensions.Hex);
+                var target = dst + FS.file(file.Path.FileName.Name, FS.Hex);
                 var flow = Wf.EmittingFile(target);
                 Emit(file.BaseAddress, file.Size, target);
                 Wf.EmittedFile(flow, (uint)file.Size);

@@ -21,13 +21,6 @@ namespace Z0.Asm
         string Format(AsmRoutine src);
 
         /// <summary>
-        /// Formats a single instruction
-        /// </summary>
-        /// <param name="@base">The base address to which the instruction is relative</param>
-        /// <param name="src">The source instruction</param>
-        string Format(in MemoryAddress @base, in AsmInstructionSummary src);
-
-        /// <summary>
         /// Renders a routine to a caller-supplied buffer
         /// </summary>
         /// <param name="src">The source routine</param>

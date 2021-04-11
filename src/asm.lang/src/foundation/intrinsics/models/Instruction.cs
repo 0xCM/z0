@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial class IntelIntrinsics
     {
-        public struct Instruction : ITextual
+        public struct Instruction
         {
             public const string ElementName = "instruction";
 
@@ -28,16 +28,6 @@ namespace Z0.Asm
                 this.form = form;
                 this.xed = xed;
             }
-
-            public string Format()
-            {
-                var inst = string.Format("Instruction: {0} {1}\r\n", name, form);
-                var iform = string.Format("# Iform: {0}", xed);
-                return inst + iform;
-            }
-
-            public override string ToString()
-                => Format();
 
             public static Instruction Empty
                 => new Instruction(EmptyString, EmptyString, EmptyString);

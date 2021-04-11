@@ -11,7 +11,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static TextRules;
 
     [ApiHost]
     public class ApiCatalogs : WfService<ApiCatalogs>

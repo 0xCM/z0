@@ -117,6 +117,5 @@ namespace Z0
             var z1 = v32i(vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
         }
-
     }
 }

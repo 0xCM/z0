@@ -110,7 +110,7 @@ namespace Z0
             dst.Sequence = seq;
             dst.CaptureAddress = code.BaseAddress;
             dst.RuntimeAddress = member.BaseAddress;
-            dst.Id = code.Uri;
+            dst.Id = code.OpUri;
             return ref dst;
         }
 

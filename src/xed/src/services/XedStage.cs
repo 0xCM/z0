@@ -29,7 +29,7 @@ namespace Z0
             => Root = root;
 
         public IEnumerable<FS.FilePath> Files
-            => Root.Files(FS.Extensions.Txt,true);
+            => Root.Files(FS.Txt,true);
 
         public int FileCount => Files.Count();
 

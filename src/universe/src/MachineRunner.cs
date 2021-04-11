@@ -20,7 +20,7 @@ namespace Z0
             var flow = Wf.Running(RunningMachine.Format(partCount, partList));
             try
             {
-                var blocks = Wf.ApiCodeStore().IndexedBlocks();
+                var blocks = Wf.ApiIndexBuilder().IndexApiBlocks();
 
                 if(options.EmitHexIndex)
                     Emitted(Wf.ApiHex().EmitHexIndex(blocks.Blocks));
@@ -30,22 +30,22 @@ namespace Z0
 
                 if(options.EmitCallData || options.EmitJmpData)
                 {
-                    var decoded = Wf.ApiDecoder().Decode(blocks);
+                    var routines = Wf.ApiDecoder().Decode(blocks).Routines;
 
                     if(options.EmitJmpData)
-                        Emitted(Wf.AsmJmpPipe().EmitRows(decoded));
+                        Emitted(Wf.AsmJmpPipe().EmitRows(routines));
 
                     if(options.EmitCallData)
-                        Emitted(Wf.AsmCallPipe().EmitRows(decoded));
+                        Emitted(Wf.AsmCallPipe().EmitRows(routines));
                 }
 
                 if(options.EmitResBytes)
-                    Emitted(Wf.ResBytesEmitter().Emit(blocks));
+                    Emitted(Wf.ResBytesEmitter().Emit(blocks.Blocks));
 
                 if(options.EmitStatements || options.EmitAsmBitstrings)
                 {
                     var pipe = Wf.AsmStatementPipe();
-                    var statements = Emitted(pipe.EmitStatements(blocks));
+                    var statements = Emitted(pipe.EmitStatements(blocks.Blocks));
                     if(options.EmitAsmBitstrings)
                         Emitted(pipe.EmitBitstrings(statements));
                 }
@@ -61,7 +61,6 @@ namespace Z0
                     var xed = Wf.Xed();
                     xed.EmitForms();
                     xed.EmitClasses();
-                    xed.EmitSumbolSummary();
                 }
 
                 if(options.EmitIntrinsicsInfo)

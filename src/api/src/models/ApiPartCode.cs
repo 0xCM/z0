@@ -19,23 +19,23 @@ namespace Z0
         /// <summary>
         /// The code in the set
         /// </summary>
-        public Index<ApiHostCode> HostCode {get;}
+        public Index<ApiHostBlocks> HostCode {get;}
 
         [MethodImpl(Inline)]
-        public ApiPartCode(PartId part, ApiHostCode[] src)
+        public ApiPartCode(PartId part, ApiHostBlocks[] src)
         {
             Part = part;
             HostCode = src;
         }
 
 
-        public Span<ApiHostCode> Edit
+        public Span<ApiHostBlocks> Edit
         {
             [MethodImpl(Inline)]
             get => HostCode.Edit;
         }
 
-        public ReadOnlySpan<ApiHostCode> View
+        public ReadOnlySpan<ApiHostBlocks> View
         {
             [MethodImpl(Inline)]
             get => HostCode.View;

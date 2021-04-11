@@ -61,6 +61,6 @@ namespace Z0
 
         public static MsgPattern<Count,ApiHostUri> CreatingHostStatements => "Creating {0} {1} routine productions";
 
-
+        public static MsgPattern<Count,ApiHostUri> DecodedHostMembers => "Decoded {0} {1} members";
     }
 }

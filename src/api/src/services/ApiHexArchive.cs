@@ -21,7 +21,7 @@ namespace Z0
         }
 
         FS.FileExt Ext
-            => FS.Extensions.Hex;
+            => FS.Hex;
 
         public FS.Files Files()
             => Root.Files(Ext);

@@ -30,11 +30,8 @@ namespace Z0.Asm
 
         const string FieldSep = RP.FieldSep;
 
-        public static AsmFormatConfig Default
-            => create();
-
         public static AsmFormatConfig DefaultStreamFormat
-            => create(EmitSectionDelimiter : true, EmitBaseAddress : true);
+            => @default(out var _);
 
         public static ref AsmFormatConfig @default(out AsmFormatConfig dst)
         {
@@ -50,40 +47,5 @@ namespace Z0.Asm
             dst.HeaderEncodingFormat = HexFormatSpecs.options();
             return ref dst;
         }
-
-        public static AsmFormatConfig create(
-           bool EmitCaptureTermCode = true,
-           bool EmitFileHeader = true,
-           bool EmitBaseAddress = true,
-           bool EmitSectionDelimiter = false,
-           byte InstructionPad = 46,
-           bool ShowLineAddresses = true,
-           bool AbsoluteLabels = false,
-           int SectionDelimiterWidth = 120
-           ) => new AsmFormatConfig(EmitCaptureTermCode, EmitFileHeader, EmitBaseAddress, EmitSectionDelimiter,
-                    InstructionPad, ShowLineAddresses, AbsoluteLabels, SectionDelimiterWidth);
-
-        public AsmFormatConfig(
-           bool EmitCaptureTermCode,
-           bool EmitFileHeader,
-           bool EmitLocation,
-           bool EmitSectionDelimiter,
-           byte InstructionPad,
-           bool ShowLineAddresses,
-           bool AbsoluteLabels,
-           int SectionDelimiterWidth
-           )
-       {
-           this.EmitCaptureTermCode = EmitCaptureTermCode;
-           this.EmitFileHeader = EmitFileHeader;
-           this.EmitBaseAddress = EmitLocation;
-           this.EmitSectionDelimiter = EmitSectionDelimiter;
-           this.InstructionPad = InstructionPad;
-           this.EmitLineAddresses = ShowLineAddresses;
-           this.FieldDelimiter = FieldSep;
-           this.SectionDelimiter  = SectionSep;
-           this.AbsoluteLabels = AbsoluteLabels;
-           this.HeaderEncodingFormat = HexFormatSpecs.options();
-       }
     }
 }

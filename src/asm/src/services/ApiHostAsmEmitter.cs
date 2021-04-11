@@ -24,8 +24,7 @@ namespace Z0.Asm
         public AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
             var flow = Wf.Running(Msg.EmittingHostRoutines.Format(host));
-            var decoder = Wf.AsmDecoder();
-            var decoded = Wf.ApiHostDecoder(decoder).Decode(host, src);
+            var decoded = Wf.ApiHostDecoder().Decode(host, src);
             var emitted = Emit(host, decoded.Storage, dst);
             Wf.Ran(flow, Msg.EmittedHostRoutines.Format(emitted, host, dst.ToUri()));
             return decoded;

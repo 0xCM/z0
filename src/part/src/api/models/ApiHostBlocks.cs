@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Collects code derived from members declared by a specific operation host
     /// </summary>
-    public readonly struct ApiHostCode
+    public readonly struct ApiHostBlocks : IIndex<ApiCodeBlock>
     {
         /// <summary>
         /// The defining host
@@ -26,10 +26,16 @@ namespace Z0
         readonly ApiCodeBlock[] Data;
 
         [MethodImpl(Inline)]
-        public ApiHostCode(ApiHostUri host, ApiCodeBlock[] code)
+        public ApiHostBlocks(ApiHostUri host, ApiCodeBlock[] code)
         {
             Host = host;
             Data = code.OrderBy(x => x.BaseAddress);
+        }
+
+        public ApiCodeBlock[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
         }
 
         public ref readonly ApiCodeBlock this[long index]
@@ -77,10 +83,10 @@ namespace Z0
             get => Data;
         }
 
-        public static ApiHostCode Empty
+        public static ApiHostBlocks Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiHostCode(ApiHostUri.Empty, sys.empty<ApiCodeBlock>());
+            get => new ApiHostBlocks(ApiHostUri.Empty, sys.empty<ApiCodeBlock>());
         }
     }
 }

@@ -23,7 +23,6 @@ namespace Z0.Asm
             {
                 Content = src;
             }
-
         }
     }
 }

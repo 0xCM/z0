@@ -212,8 +212,8 @@ namespace Z0
             var sources = xs.FunctionFiles.View;
             var kSrc = sources.Length;
 
-            var rulepath = config.Target + FS.file("rules", FS.Extensions.Txt);
-            var funcpath = config.Target + FS.file("functions", FS.Extensions.Txt);
+            var rulepath = config.Target + FS.file("rules", FS.Txt);
+            var funcpath = config.Target + FS.file("functions", FS.Txt);
             using var rulewriter = rulepath.Writer();
             using var funcwriter = funcpath.Writer();
 

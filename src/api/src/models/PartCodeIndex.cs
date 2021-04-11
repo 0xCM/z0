@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCode>;
+    using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostBlocks>;
 
     public readonly struct PartCodeIndex
     {
@@ -35,7 +35,7 @@ namespace Z0
         public PartCodeIndexEntry[] Entries
             => entries(this);
 
-        public bool HostCode(ApiHostUri host, out ApiHostCode code)
+        public bool HostCode(ApiHostUri host, out ApiHostBlocks code)
         {
             if(Data.TryGetValue(host, out code))
                 return true;

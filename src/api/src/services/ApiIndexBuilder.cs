@@ -82,8 +82,8 @@ namespace Z0
         Triple<bool> Include(in ApiCodeBlock src)
         {
             var a = CodeAddress.TryAdd(src.BaseAddress, src);
-            var b = AddressUri.TryAdd(src.BaseAddress, src.Uri);
-            var c = UriCode.TryAdd(src.Uri, src);
+            var b = AddressUri.TryAdd(src.BaseAddress, src.OpUri);
+            var c = UriCode.TryAdd(src.OpUri, src);
             return root.triple(a,b,c);
         }
 
@@ -109,10 +109,10 @@ namespace Z0
         {
             var memories = CodeAddress.ToKVPairs();
             var parts = UriCode.Keys.Select(x => x.Host.Part).Distinct().Array();
-            var code = CodeAddress.Values.Select(x => (x.Uri.Host, Code: x))
+            var code = CodeAddress.Values.Select(x => (x.OpUri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)
-                .Select(x => (new ApiHostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
+                .Select(x => (new ApiHostBlocks(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
             return new ApiBlockIndex(
                    new PartCodeAddresses(parts, memories),

@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         ApiAsmDataset Decode(ApiBlockIndex src);
 
-        ApiHostRoutines Decode(ApiHostCode src);
+        ApiHostRoutines Decode(ApiHostBlocks src);
     }
 }

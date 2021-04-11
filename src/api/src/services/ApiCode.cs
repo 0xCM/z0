@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct ApiCode
     {
         [MethodImpl(Inline), Op]
-        public static ApiPartCode combine(PartId part, ApiHostCode[] src)
+        public static ApiPartCode combine(PartId part, ApiHostBlocks[] src)
             => new ApiPartCode(part,src);
 
         /// <summary>

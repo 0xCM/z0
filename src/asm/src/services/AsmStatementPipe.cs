@@ -17,33 +17,11 @@ namespace Z0.Asm
     {
         IAsmDecoder Decoder;
 
-        ApiCodeStore DataStore;
-
         protected override void OnInit()
         {
-            DataStore = Wf.ApiCodeStore();
             Decoder = Wf.AsmDecoder();
         }
 
-        public Index<AsmApiStatement> BuildStatements(ApiBlockIndex src)
-        {
-            var hosts = src.Hosts.View;
-            var count = hosts.Length;
-            var buffer = root.list<AsmApiStatement>();
-            var counter = 0u;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var host = ref skip(hosts,i);
-                var flow = Wf.Running(Msg.CreatingApiStatements.Format(host));
-                var kStatements = CreateStatements(src.HostCodeBlocks(host), buffer);
-                counter += kStatements;
-                Wf.Ran(flow, Msg.CreatedApiStatements.Format(host, kStatements));
-            }
-
-            var records = buffer.ToArray();
-            Array.Sort(records);
-            return records;
-        }
 
         public Index<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
         {
@@ -58,10 +36,7 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
-        public Index<AsmApiStatement> EmitStatements()
-            => EmitStatements(DataStore.IndexedBlocks());
-
-        public Index<AsmApiStatement> EmitStatements(ApiBlockIndex src)
+        public Index<AsmApiStatement> EmitStatements(ReadOnlySpan<ApiCodeBlock> src)
         {
             var statements = BuildStatements(src);
             EmitStatements(statements);
@@ -160,7 +135,7 @@ namespace Z0.Asm
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
 
-        uint CreateStatements(in ApiHostCode src, List<AsmApiStatement> dst)
+        uint CreateStatements(in ApiHostBlocks src, List<AsmApiStatement> dst)
         {
             var blocks = src.Blocks.View;
             var count = blocks.Length;

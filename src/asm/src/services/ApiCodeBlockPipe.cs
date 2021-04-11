@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public uint Run(ApiBlockIndex src, Action<ApiHostCode> receiver)
+        public uint Run(ApiBlockIndex src, Action<ApiHostBlocks> receiver)
         {
             var hosts = src.Hosts.View;
             var count = hosts.Length;
@@ -48,7 +48,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public uint Run(ApiHostCode src, Action<ApiCodeBlock> receiver)
+        public uint Run(ApiHostBlocks src, Action<ApiCodeBlock> receiver)
         {
             var blocks = src.Blocks.View;
             var count = blocks.Length;

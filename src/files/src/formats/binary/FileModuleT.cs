@@ -25,9 +25,9 @@ namespace Z0
 
         public FS.FileExt DefaultExt
             => ModuleKind switch {
-                BinaryModuleKind.Dll => FS.Extensions.Dll,
-                BinaryModuleKind.Exe => FS.Extensions.Exe,
-                BinaryModuleKind.Lib => FS.Extensions.Lib,
+                BinaryModuleKind.Dll => FS.Dll,
+                BinaryModuleKind.Exe => FS.Exe,
+                BinaryModuleKind.Lib => FS.Lib,
                 _ =>  FS.FileExt.Empty
             };
         [MethodImpl(Inline)]

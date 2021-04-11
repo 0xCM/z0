@@ -10,17 +10,13 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public readonly struct ApiHostDecoder
+    public class ApiHostDecoder : WfService<ApiHostDecoder>
     {
-        public IWfRuntime Wf {get;}
+        IAsmDecoder Decoder;
 
-        readonly IAsmDecoder Decoder;
-
-        [MethodImpl(Inline)]
-        internal ApiHostDecoder(IWfRuntime wf, IAsmDecoder decoder)
+        protected override void OnInit()
         {
-            Wf = wf;
-            Decoder = decoder;
+            Decoder = Wf.AsmDecoder();
         }
 
         public AsmMemberRoutines Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
@@ -29,7 +25,8 @@ namespace Z0.Asm
             {
                 var flow = Wf.Running(uri);
                 var count = src.Length;
-                var dst = alloc<AsmMemberRoutine>(count);
+                var buffer = alloc<AsmMemberRoutine>(count);
+                ref var dst = ref first(buffer);
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var code = ref skip(src, i);
@@ -37,11 +34,11 @@ namespace Z0.Asm
                     if(!decoded)
                         HandleFailure(code);
 
-                    dst[i] = decoded ? new AsmMemberRoutine(code.Member, decoded.Value) : AsmMemberRoutine.Empty;
+                    seek(dst, i) = decoded ? new AsmMemberRoutine(code.Member, decoded.Value) : AsmMemberRoutine.Empty;
                 }
 
-                Wf.Ran(flow, string.Format("Decoded {0} {1} functions", dst.Length, uri));
-                return dst;
+                Wf.Ran(flow, Msg.DecodedHostMembers.Format(buffer.Length, uri));
+                return buffer;
             }
             catch(Exception e)
             {

@@ -236,7 +236,7 @@ namespace Z0.Asm
 
             void accept(in ApiCodeBlock block)
             {
-                if(catalog.Host(block.Uri.Host, out var host))
+                if(catalog.Host(block.OpUri.Host, out var host))
                 {
                     Wf.Row(string.Format("{0} | {1}", host.Uri, block.OpUri));
                 }
@@ -366,47 +366,47 @@ namespace Z0.Asm
             writer.Write(buffer.Emit());
         }
 
-        void EmitStatementCases()
-        {
-            var cases = root.dict<AsmHexCode,AsmStatementCase>();
+        // void EmitStatementCases()
+        // {
+        //     var cases = root.dict<AsmHexCode,AsmStatementCase>();
 
-            void Collect(AsmStatementDetail src)
-            {
-                var encoded = src.Encoded;
-                if(!cases.ContainsKey(encoded))
-                {
-                    var dst = new AsmStatementCase();
-                    dst.Encoded = encoded;
-                    dst.Expression = src.Expression.Format();
-                    dst.OpCode = src.OpCode;
-                    dst.Sig = src.Sig;
-                    cases[encoded] = dst;
-                }
-            }
+        //     void Collect(AsmStatementDetail src)
+        //     {
+        //         var encoded = src.Encoded;
+        //         if(!cases.ContainsKey(encoded))
+        //         {
+        //             var dst = new AsmStatementCase();
+        //             dst.Encoded = encoded;
+        //             dst.Expression = src.Expression.Format();
+        //             dst.OpCode = src.OpCode;
+        //             dst.Sig = src.Sig;
+        //             cases[encoded] = dst;
+        //         }
+        //     }
 
-            Wf.AsmDetailPipe().Run(Collect);
+        //     Wf.AsmDetailPipe().Run(Collect);
 
-            var collected = @readonly(cases.Values.OrderBy(x => x.Encoded).Array());
-            var dst = Db.IndexTable<AsmStatementCase>();
-            var flow = Wf.EmittingTable<AsmStatementCase>(dst);
-            var count = Tables.emit(collected, dst, 42);
-            Wf.EmittedTable(flow,count);
+        //     var collected = @readonly(cases.Values.OrderBy(x => x.Encoded).Array());
+        //     var dst = Db.IndexTable<AsmStatementCase>();
+        //     var flow = Wf.EmittingTable<AsmStatementCase>(dst);
+        //     var count = Tables.emit(collected, dst, 42);
+        //     Wf.EmittedTable(flow,count);
 
-            var id = Db.TableId<AsmStatementCase>();
+        //     var id = Db.TableId<AsmStatementCase>();
 
-            var asmcases = Db.IndexRoot() + FS.file(id, FS.Extensions.Asm);
-            var asmflow = Wf.EmittingFile(asmcases);
-            using var writer = asmcases.Writer();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var @case = ref skip(collected,i);
-                var line = string.Format("{0,-36} ; ({1})[{2}] => {3}", @case.Expression, @case.Sig.Format(), @case.OpCode, @case.Encoded);
-                writer.WriteLine(line);
-            }
+        //     var asmcases = Db.IndexRoot() + FS.file(id, FS.Extensions.Asm);
+        //     var asmflow = Wf.EmittingFile(asmcases);
+        //     using var writer = asmcases.Writer();
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var @case = ref skip(collected,i);
+        //         var line = string.Format("{0,-36} ; ({1})[{2}] => {3}", @case.Expression, @case.Sig.Format(), @case.OpCode, @case.Encoded);
+        //         writer.WriteLine(line);
+        //     }
 
-            Wf.EmittedFile(asmflow, count);
+        //     Wf.EmittedFile(asmflow, count);
 
-        }
+        // }
 
         FS.Files EmitPdbSymbolPaths()
         {
@@ -855,7 +855,6 @@ namespace Z0.Asm
             var xed = Wf.Xed();
             xed.EmitForms();
             xed.EmitClasses();
-            xed.EmitSumbolSummary();
         }
 
         public void EmitBitstrings()
@@ -901,15 +900,11 @@ namespace Z0.Asm
 
         void ProcessInstructions()
         {
-            var store = Wf.ApiCodeStore();
-            var blocks = store.IndexedBlocks();
-            var metrics = blocks.CalcMetrics();
-            Wf.Status(metrics);
-
+            var blocks = LoadApiBlocks();
             var clock = Time.counter(true);
             var traverser = Wf.ApiCodeBlockTraverser();
             var receiver  = new AsmDetailProducer(Wf,750000);
-            traverser.Traverse(blocks,receiver);
+            traverser.Traverse(blocks, receiver);
             var duration = clock.Elapsed.Ms;
             var productions = receiver.Productions;
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
@@ -921,20 +916,30 @@ namespace Z0.Asm
 
         public void t_digit_parser()
         {
-            ReadOnlySpan<char> input = "0123456789ABCDEF";
+            ReadOnlySpan<char> input = "754d91";
+            Span<uint4> output = new uint4[256];
             var count = input.Length;
             var dst = EmptyString;
-            for(var i=0; i<count; i++)
+            var j=0;
+
+            for(var i=count-1; i>=0; i--)
             {
                 ref readonly var c = ref skip(input,i);
-                DigitParser.digit(@base16, c, out var d);
-                var s = Digital.symbol(UpperCase, d);
-
-                dst += (char)s;
-
+                if(DigitParser.digit(@base16, c, out var d))
+                    seek(output,j++) = d;
+                else
+                    Wf.Error(c.ToString());
             }
 
-            Wf.Row(dst);
+             var value = 0u;
+             value = ((uint)skip(output,0) << 0);
+             value |= ((uint)skip(output,1) << 4);
+             value |= ((uint)skip(output,2) << 8);
+             value |= ((uint)skip(output,3) << 12);
+             value |= ((uint)skip(output,4) << 16);
+             value |= ((uint)skip(output,5) << 20);
+
+            Wf.Row(value.ToString("x"));
         }
 
 
@@ -967,7 +972,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            Wf.IntelCpuIntrinsics().Emit();
+            t_digit_parser();
+            //Wf.IntelCpuIntrinsics().Emit();
             //Wf.AsmDb().ShowSourceDocs();
             // var cases = AsmExprCases.create(Wf);
             // cases.Run(AsmSigKind.and_r8_r8);

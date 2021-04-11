@@ -11,6 +11,8 @@ namespace Z0
 
     public readonly partial struct XedModels
     {
+        const string xed = nameof(xed);
+
         public readonly struct XedForm
         {
             public ushort Index {get;}

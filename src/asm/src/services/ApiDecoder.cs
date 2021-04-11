@@ -5,21 +5,25 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Linq;
 
     using static Part;
     using static memory;
 
     public sealed class ApiDecoder : AsmWfService<ApiDecoder>, IApiIndexDecoder
     {
-        static IAsmRoutineFormatter formatter(IWfRuntime wf)
-            => new AsmRoutineFormatter(null);
+        IAsmRoutineFormatter Formatter;
+
+        protected override void OnContextCreated()
+        {
+            Formatter = new AsmRoutineFormatter();
+        }
 
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
         {
             var count = src.Length;
             var dst = span<AsmRoutineCode>(count);
             var decoder = Wf.AsmDecoder();
-            var _formatter = formatter(Wf);
             using var writer = target.Writer();
             for(var i=0u; i<count; i++)
             {
@@ -27,7 +31,7 @@ namespace Z0.Asm
                 if(decoder.Decode(captured, out var fx))
                 {
                     seek(dst,i) = new AsmRoutineCode(fx,captured);
-                    var asm = _formatter.Format(fx);
+                    var asm = Formatter.Format(fx);
                     writer.Write(asm);
                 }
             }
@@ -38,17 +42,19 @@ namespace Z0.Asm
         {
             var count = src.Length;
             var decoder = Wf.AsmDecoder();
-            var _formatter = formatter(Wf);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var captured = ref skip(src,i);
                 if(decoder.Decode(captured, out var routine))
                 {
-                    var asm = _formatter.Format(routine);
+                    var asm = Formatter.Format(routine);
                     seek(dst,i) = new AsmRoutineCode(routine, captured);
                 }
             }
         }
+
+
+
 
         public ApiAsmDataset Decode(ApiBlockIndex src)
         {
@@ -99,7 +105,7 @@ namespace Z0.Asm
             return new ApiAsmDataset(src, dst);
         }
 
-        public ApiHostRoutines Decode(ApiHostCode src)
+        public ApiHostRoutines Decode(ApiHostBlocks src)
         {
             var host = src.Host;
             var flow = Wf.Running(Msg.DecodingHostRoutines.Format(host));
@@ -108,7 +114,7 @@ namespace Z0.Asm
             return routines;
         }
 
-        ApiHostRoutines DecodeRoutines(ApiHostCode src)
+        ApiHostRoutines DecodeRoutines(ApiHostBlocks src)
         {
             var host = src.Host;
             var view = src.Blocks.View;

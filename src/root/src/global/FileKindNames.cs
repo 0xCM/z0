@@ -144,6 +144,11 @@ namespace Z0
         public const string sln = nameof(sln);
 
         /// <summary>
+        /// Defines the 'h' literal
+        /// </summary>
+        public const string h = nameof(h);
+
+        /// <summary>
         /// Defines the 'csproj' literal
         /// </summary>
         public const string csproj = nameof(csproj);

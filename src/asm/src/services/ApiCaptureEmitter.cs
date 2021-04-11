@@ -171,7 +171,6 @@ namespace Z0
             return ref dst;
         }
 
-
         void MatchAddresses(ApiMemberExtract[] extracted, AsmRoutine[] decoded)
         {
             try

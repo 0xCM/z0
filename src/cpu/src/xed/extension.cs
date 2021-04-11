@@ -8,7 +8,7 @@ namespace Z0
     partial struct XedModels
     {
 
-        [SymbolSource]
+        [SymbolSource(xed)]
         public enum Extension : byte
         {
             None,

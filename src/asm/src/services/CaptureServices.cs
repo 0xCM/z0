@@ -15,15 +15,18 @@ namespace Z0.Asm
 
         readonly IAsmContext Asm;
 
+        readonly IAsmDecoder Decoder;
+
         [MethodImpl(Inline)]
         public CaptureServices(IWfRuntime wf, IAsmContext asm)
         {
             Wf = wf;
             Asm = asm;
+            Decoder = wf.AsmDecoder();
         }
 
-        public IAsmDecoder RoutineDecoder(in AsmFormatConfig? format)
-            => Wf.AsmDecoder();
+        public IAsmDecoder RoutineDecoder()
+            => Decoder;
 
         public ICaptureCore CaptureCore
             => Wf.CaptureCore(Asm);

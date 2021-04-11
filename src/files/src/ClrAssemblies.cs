@@ -30,7 +30,7 @@ namespace Z0
         [Op]
         public static ref readonly FS.FilePath xmlpath(ClrAssembly src, out FS.FilePath dst)
         {
-            var candidate = FS.path(Path.ChangeExtension(src.Definition.Location, FS.Extensions.Xml.Name));
+            var candidate = FS.path(Path.ChangeExtension(src.Definition.Location, FS.Xml.Name));
             dst = candidate.Exists ? candidate : FS.FilePath.Empty;
             return ref dst;
         }
@@ -38,7 +38,7 @@ namespace Z0
         [Op]
         public static ref readonly FS.FilePath pdbpath(ClrAssembly src, out FS.FilePath dst)
         {
-            var candidate = FS.path(Path.ChangeExtension(src.Definition.Location, FS.Extensions.Pdb.Name));
+            var candidate = FS.path(Path.ChangeExtension(src.Definition.Location, FS.Pdb.Name));
             dst = candidate.Exists ? candidate : FS.FilePath.Empty;
             return ref dst;
         }

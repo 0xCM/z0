@@ -133,6 +133,16 @@ namespace Z0
         /// </summary>
         public static FileExt Sln => ext(sln);
 
+        /// <summary>
+        /// Defines the <see cref='h'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt H => ext(h);
+
+        /// <summary>
+        /// Defines the <see cref='targets'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Targets => ext(targets);
+
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions
         {
@@ -185,7 +195,6 @@ namespace Z0
             /// </summary>
             public static FileExt JsonConfig => ext(cjson);
 
-
             /// <summary>
             /// Defines the <see cref='pdb'/> <see cref='FileExt'/>
             /// </summary>
@@ -197,15 +206,6 @@ namespace Z0
             public static FileExt StatusLog => ext(status) + Log;
 
 
-            /// <summary>
-            /// Defines the <see cref='targets'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Targets => ext(targets);
-
-            /// <summary>
-            /// Defines the <see cref='txt'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Txt => ext(txt);
 
             /// <summary>
             /// Defines the composite <see cref='xcsv'/> <see cref='FileExt'/>

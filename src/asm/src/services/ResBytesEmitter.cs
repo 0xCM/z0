@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
 
     using static CodeGenerator;
     using static memory;
@@ -30,6 +31,12 @@ namespace Z0
         public Index<ApiHostRes> Emit(ApiBlockIndex src)
         {
             var apires = Emit(src, RespackDir);
+            RunScripts();
+            return apires;
+        }
+
+        void RunScripts()
+        {
             var runner = ScriptRunner.create(Db);
 
             var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
@@ -37,26 +44,54 @@ namespace Z0
 
             var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
             root.iter(pack, line => Wf.Row(line));
-            return apires;
+        }
+
+        public Index<ApiHostRes> Emit(Index<ApiCodeBlock> blocks)
+            => Emit(blocks, RespackDir);
+
+        public Index<ApiHostRes> Emit(Index<ApiCodeBlock> blocks, FS.FolderPath dst)
+        {
+            var hosted = blocks.GroupBy(b => b.HostUri).Select(x => new ApiHostBlocks(x.Key,x.Array())).Array();
+            return Emit(hosted, dst);
+        }
+
+        Index<ApiHostRes> Emit(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath dst)
+        {
+            var flow = Wf.Running();
+            var count = src.Length;
+            var counter = 0u;
+            var buffer = alloc<ApiHostRes>(count);
+            dst.Clear();
+
+            ref var target = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                seek(target,i) = Emit(skip(src,i), dst);
+                counter += seek(target,i).Count;
+            }
+
+            RunScripts();
+
+            Wf.Ran(flow);
+
+            return buffer;
         }
 
         Index<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst)
         {
             var emissions = root.list<ApiHostRes>();
             var flow = Wf.Running();
-            var counter = 0;
             dst.Clear();
             foreach(var host in index.NonemptyHosts)
             {
                 var emitted = Emit(index.HostCodeBlocks(host), dst);
                 emissions.Add(emitted);
-                counter += emitted.Count;
             }
             Wf.Ran(flow);
             return emissions.ToArray();
         }
 
-        ApiHostRes Emit(in ApiHostCode src, FS.FolderPath dst)
+        ApiHostRes Emit(in ApiHostBlocks src, FS.FolderPath dst)
         {
             var target = dst + ApiFiles.filename(src.Host, FS.Cs);
             var flow = Wf.EmittingFile(target);
@@ -65,9 +100,8 @@ namespace Z0
             return emission;
         }
 
-        ApiHostRes Emit(in ApiHostCode src, FS.FilePath target)
+        ApiHostRes Emit(in ApiHostBlocks src, FS.FilePath target)
         {
-            //var resources = Resources.from(src);
             var resources = ResProvider.Hosted(src);
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
             var typename = text.concat(src.Host.Part.Format(), Chars.Underscore, hostname);

@@ -53,7 +53,7 @@ namespace Z0.Asm
             //var dst = span<string>(8);
             var dst = HeaderBuffer.Edit;
             const string Separator = "; " + RP.PageBreak160;
-            var count = lines(new ApiCodeBlockHeader(Separator, src.Code.Uri, src.DisplaySig, src.Code, src.TermCode), dst);
+            var count = lines(new ApiCodeBlockHeader(Separator, src.Code.OpUri, src.DisplaySig, src.Code, src.TermCode), dst);
             return slice(dst, 0, count);
         }
 
@@ -66,7 +66,7 @@ namespace Z0.Asm
         {
             var dst = span<string>(8);
             const string Separator = "; " + RP.PageBreak160;
-            var count = lines(new ApiCodeBlockHeader(Separator, src.Code.Uri, src.DisplaySig, src.Code, src.TermCode), dst);
+            var count = lines(new ApiCodeBlockHeader(Separator, src.Code.OpUri, src.DisplaySig, src.Code, src.TermCode), dst);
             return slice(dst, 0, count);
         }
 

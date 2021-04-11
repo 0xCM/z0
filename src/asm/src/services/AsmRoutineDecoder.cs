@@ -22,7 +22,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public AsmRoutineDecoder(IWfRuntime wf)
-            => AsmFormat = AsmFormatConfig.DefaultStreamFormat;
+            => AsmFormat = AsmFormatConfig.@default(out var _);
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.OpUri, src.Parsed, src.BaseAddress)
@@ -128,7 +128,7 @@ namespace Z0.Asm
         }
 
         public Option<IceInstructionList> Decode(ApiCodeBlock src, Action<IceInstruction> f)
-            => Decode(src.Uri, new CodeBlock(src.BaseAddress, src.Data), f);
+            => Decode(src.OpUri, new CodeBlock(src.BaseAddress, src.Data), f);
 
         public Option<AsmRoutine> Decode(ApiMemberCode src)
         {

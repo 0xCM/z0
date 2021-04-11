@@ -5,32 +5,32 @@
 namespace Z0
 {
     using static EnvFolders;
-    using X = FS.Extensions;
+    using static FS;
 
     partial interface IEnvPaths
     {
-        FS.FolderPath ApiHexRoot()
+        FolderPath ApiHexRoot()
             => CaptureRoot() + FS.folder(hex);
 
-        FS.Files ApiHexPaths()
-            => ApiHexRoot().Files(X.Hex);
+        Files ApiHexPaths()
+            => ApiHexRoot().Files(Hex);
 
         FS.FilePath ApiHexPath(FS.FileName name)
             => ApiHexRoot() + name;
 
         FS.FilePath ApiHexPath(ApiHostUri host)
-            => ApiHexPath(ApiFiles.filename(host, X.Hex));
+            => ApiHexPath(ApiFiles.filename(host, Hex));
 
         FS.FilePath ApiHexPath(FS.FolderPath root, FS.FileName name)
             => ApiHexDir(root) + name;
 
         FS.FilePath ApiHexPath(FS.FolderPath root, ApiHostUri host)
-            => root + PartFolder(host.Part) + HostFile(host, X.Hex);
+            => root + PartFolder(host.Part) + HostFile(host, Hex);
 
         FS.FilePath ApiHexPath(PartId part, string api)
-            => ApiHexRoot() + ApiFileName(part, api, X.Hex);
+            => ApiHexRoot() + ApiFileName(part, api, Hex);
         FS.FileName ApiHexFileName(OpIdentity id)
-            => LegalFileName(id, X.Hex);
+            => LegalFileName(id, Hex);
 
         FS.FolderPath ApiHexDir(FS.FolderPath root)
             => (root + FS.folder(hex));

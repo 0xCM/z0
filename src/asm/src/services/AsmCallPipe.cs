@@ -15,7 +15,7 @@ namespace Z0.Asm
         public Index<AsmCallRow> EmitRows(ApiAsmDataset src)
             => EmitRows(src.Routines);
 
-        public Index<AsmCallRow> EmitRows(Index<ApiPartRoutines> routines)
+        public Index<AsmCallRow> EmitRows(ReadOnlySpan<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmCallRow>();
             var count = routines.Length;

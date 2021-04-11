@@ -14,10 +14,7 @@ namespace Z0
     public class ApiHex : WfService<ApiHex>
     {
         public Index<ApiCodeBlock> ApiBlocks()
-        {
-            var parsed = Db.ParsedExtractPaths();
-            return ApiBlocks(parsed);
-        }
+            => ApiBlocks(Db.ParsedExtractPaths());
 
         public Index<ApiCodeBlock> ApiBlocks(FS.Files parsed)
         {
@@ -163,11 +160,6 @@ namespace Z0
             }
         }
 
-        public Index<ApiHexIndexRow> EmitHexIndex(ApiBlockIndex src)
-        {
-            var dst = Db.IndexFile(ApiHexIndexRow.TableId);
-            return EmitHexIndex(src.Blocks, dst);
-        }
 
         [Op]
         public Index<ApiHexIndexRow> EmitHexIndex(Index<ApiCodeBlock> src)
@@ -196,7 +188,7 @@ namespace Z0
                 record.Component = block.OpUri.Part.Format();
                 record.HostName = block.OpUri.Host.Name;
                 record.MethodName = block.OpId.Name;
-                record.Uri = block.Uri;
+                record.Uri = block.OpUri;
                 emitter.Emit(record);
             }
 

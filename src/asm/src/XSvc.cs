@@ -15,10 +15,6 @@ namespace Z0
             => Asm.AsmFormatter.create(wf);
 
         [Op]
-        public static AsmDetailPipe AsmDetailPipe(this IWfRuntime wf)
-            => Asm.AsmDetailPipe.create(wf);
-
-        [Op]
         public static AsmEtl AsmEtl(this IWfRuntime wf)
             => Asm.AsmEtl.create(wf);
 
@@ -33,10 +29,6 @@ namespace Z0
         [Op]
         public static AsmSemanticRender AsmSemanticRender(this IWfRuntime wf)
             => Services.AsmSemanticRender.create(wf);
-
-        [Op]
-        public static ApiCodeStore ApiCodeStore(this IWfRuntime wf)
-            => Services.ApiCodeStore.create(wf);
 
         [Op]
         public static AsmRowStore AsmRowStore(this IWfRuntime wf)
@@ -107,12 +99,8 @@ namespace Z0
             => Services.ApiDecoder.create(wf);
 
         [Op]
-        public static AsmDistiller AsmDistiller(this IWfRuntime wf)
-            => Z0.Asm.AsmDistiller.create(wf);
-
-        [Op]
-        public static ApiHostDecoder ApiHostDecoder(this IWfRuntime wf, IAsmDecoder decoder)
-            => new ApiHostDecoder(wf, decoder);
+        public static ApiHostDecoder ApiHostDecoder(this IWfRuntime wf)
+            => Asm.ApiHostDecoder.create(wf);
 
         [Op]
         public static AsmStatementPipe AsmStatementPipe(this IWfRuntime wf)

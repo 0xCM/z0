@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
 
     using static memory;
-    using static Asm.AsmOpCodesLegacy;
 
     using K = AsmWfCmdKind;
 
@@ -17,18 +16,10 @@ namespace Z0.Asm
 
         AsmCatalogEtl Catalog;
 
-        Lazy<ApiCodeStore> _AsmData;
-
-        ApiCodeStore AsmData
-        {
-            get => _AsmData.Value;
-        }
-
         protected override void OnInit()
         {
             Catalog = Wf.AsmCatalogEtl();
             ApiServices = Wf.ApiServices();
-            _AsmData = root.lazy(Wf.ApiCodeStore);
         }
 
         [Action(K.EmitResBytes)]
@@ -61,17 +52,10 @@ namespace Z0.Asm
         void ExportStokeImports()
             => Catalog.ExportImport();
 
-        [Action(K.DistillAsmStatements)]
-        void DistillAsmStatements()
-            => Wf.AsmDistiller().DistillStatements();
 
         [Action(K.EmitImmSpecializations)]
         void EmitImmSpecializations()
             => Wf.ImmEmitter().Emit();
-
-        [Action(K.EmitAsmRows)]
-        void EmitAsmRows()
-            => Wf.AsmRowStore().EmitAsmRows(AsmData.IndexedBlocks());
 
         [Action(K.CheckDigitParser)]
         void CheckDigitParser()
@@ -100,25 +84,5 @@ namespace Z0.Asm
             // Wf.Ran(flow);
         }
 
-        [Action(K.EmitLegacyOpCodes)]
-        void EmitLegacyOpCodes()
-        {
-            var data = dataset().Entries;
-            var count = data.Count;
-            var view = data.View;
-            var formatter = Tables.formatter<AsmOpCodeRowLegacy>();
-            var rowbuffer = alloc<AsmOpCodeRowLegacy>(count);
-            var rows = span(rowbuffer);
-            var path = Db.IndexTable<AsmOpCodeRowLegacy>();
-            using var dst = path.Writer();
-            dst.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(view,i);
-                seek(rows,i) = record;
-
-                dst.WriteLine(formatter.Format(record));
-            }
-        }
     }
 }

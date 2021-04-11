@@ -41,11 +41,5 @@ namespace Z0.Asm
             emit<RegWidth,ushort>();
         }
 
-        public void enum_dataset_convert()
-        {
-            var path = CasePath(FS.Csv);
-            var enums = @readonly(ClrEnums.describe<AsmOpCodeField,byte>());
-            Tables.emit(enums,path);
-        }
     }
 }

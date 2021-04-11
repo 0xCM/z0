@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCode>;
+    using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostBlocks>;
 
     public sealed class ApiHostCodeLookup : LU
     {

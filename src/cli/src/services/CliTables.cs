@@ -46,7 +46,7 @@ namespace Z0
                 var component = skip(components,i);
                 var source = FS.path(component.Location);
                 var name = source.FileName.WithoutExtension;
-                var target = dir + name + FS.Extensions.Txt;
+                var target = dir + name + FS.Txt;
                 tables.DumpMetadata(source,target);
             }
         }

@@ -25,10 +25,10 @@ namespace Z0
             Data = src;
         }
 
-        public int Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => (uint)Data.Length;
         }
 
         public ref readonly BinaryResSpec this[int index]

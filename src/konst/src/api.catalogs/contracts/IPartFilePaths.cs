@@ -6,8 +6,6 @@ namespace Z0
 {
     using static ArchiveFolders;
 
-    using X = FS.Extensions;
-
     public interface IPartFilePaths : IFileArchive
     {
         FS.FolderPath HexDir(FS.FolderPath root)
@@ -20,7 +18,7 @@ namespace Z0
             => HexDir(root) + name;
 
         FS.FilePath HexFilePath(FS.FolderPath root, ApiHostUri host)
-            => HexDir(root) + FS.file(host.Name, X.Hex);
+            => HexDir(root) + FS.file(host.Name, FS.Hex);
 
         FS.FilePath AsmFilePath(FS.FolderPath root, FS.FileName name)
             => AsmDirPath(root) + name;

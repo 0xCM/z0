@@ -11,7 +11,6 @@ namespace Z0
     using System.IO;
 
     using static Part;
-    using static FS;
 
     public delegate void FileChanged(FileChange description);
 

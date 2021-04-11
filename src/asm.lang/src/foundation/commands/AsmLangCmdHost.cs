@@ -41,7 +41,7 @@ namespace Z0.Asm
             var query = AsmRegs.query();
             var classes = AsmRegs.classes();
 
-            using var log = ShowLog("register-bits", FS.Extensions.Log);
+            using var log = ShowLog("register-bits", FS.Log);
 
             foreach(var k in classes)
             {

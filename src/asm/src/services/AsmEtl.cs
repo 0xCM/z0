@@ -62,7 +62,7 @@ namespace Z0.Asm
                 var fx = src[i];
                 var len = fx.ByteLength;
                 var data = span(code.Storage);
-                var recoded = new ApiCodeBlock(fx.IP, code.Uri, data.Slice((int)offseq.Offset, len).ToArray());
+                var recoded = new ApiCodeBlock(fx.IP, code.OpUri, data.Slice((int)offseq.Offset, len).ToArray());
                 seek(dst, i) = new ApiInstruction(@base, fx, recoded);
                 offseq = offseq.AccrueOffset((uint)len);
             }

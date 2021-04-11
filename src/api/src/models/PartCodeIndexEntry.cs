@@ -13,10 +13,10 @@ namespace Z0
     {
         public ApiHostUri Host {get;}
 
-        public ApiHostCode Code {get;}
+        public ApiHostBlocks Code {get;}
 
         [MethodImpl(Inline)]
-        public PartCodeIndexEntry(ApiHostUri host, in ApiHostCode code)
+        public PartCodeIndexEntry(ApiHostUri host, in ApiHostBlocks code)
         {
             Host = host;
             Code = code;

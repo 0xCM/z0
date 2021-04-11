@@ -133,16 +133,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiHostCode HostCodeBlocks(ApiHostUri host)
+        public ApiHostBlocks HostCodeBlocks(ApiHostUri host)
         {
             if(PartIndex.HostCode(host, out var code))
                 return code;
             else
-                return ApiHostCode.Empty;
+                return ApiHostBlocks.Empty;
         }
 
         [MethodImpl(Inline), Op]
-        static ApiPartCode combine(PartId part, ApiHostCode[] src)
+        static ApiPartCode combine(PartId part, ApiHostBlocks[] src)
             => new ApiPartCode(part,src);
 
         [MethodImpl(Inline)]
@@ -155,7 +155,7 @@ namespace Z0
             get => Code(location);
         }
 
-        public ApiHostCode this[ApiHostUri id]
+        public ApiHostBlocks this[ApiHostUri id]
         {
             [MethodImpl(Inline)]
             get => HostCodeBlocks(id);

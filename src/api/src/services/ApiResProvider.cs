@@ -42,7 +42,7 @@ namespace Z0
         /// 0019h mov rax,rcx                    ; MOV r64, r/m64      | REX.W 8B /r     | 3   | 48 8b c1
         /// 001ch ret                            ; RET                 | C3              | 1   | c3
         /// </remarks>
-        public unsafe SpanBlock256<byte> Definitions(ReadOnlySpan<ApiResAccessor> src)
+        public static unsafe SpanBlock256<byte> definitions(ReadOnlySpan<ApiResAccessor> src)
         {
             var count = src.Length;
             var blocks = SpanBlocks.alloc<byte>(w256,count);
@@ -50,14 +50,13 @@ namespace Z0
             {
                 var offset = i*32;
                 ref readonly var accessor = ref skip(src,i);
-                var pMethod = accessor.Member.MethodHandle.GetFunctionPointer().ToPointer<byte>();
+                var pMethod = ApiJit.jit(accessor.Member).Pointer<byte>();
                 var reader = memory.reader(pMethod, 29);
                 reader.ReadAll(blocks.CellBlock(i));
             }
 
             return blocks;
         }
-
 
         [MethodImpl(Inline), Op]
         public unsafe ApiRes Resource(ApiResAccessor src)
@@ -112,7 +111,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to query</param>
         [Op]
-        public Index<ApiResAccessor> ByteSpans(Type src)
+        public static Index<ApiResAccessor> bytespans(Type src)
             => src.StaticProperties()
                  .Ignore()
                   .WithPropertyType(ByteSpanAcessorType)
@@ -126,7 +125,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to query</param>
         [Op]
-        public Index<ApiResAccessor> CharSpans(Type src)
+        public static Index<ApiResAccessor> charspans(Type src)
             => src.StaticProperties()
                  .Ignore()
                   .WithPropertyType(CharSpanAcessorType)
@@ -136,7 +135,7 @@ namespace Z0
                   .Select(x => new ApiResAccessor(src.HostUri(), x, ApiAccessorKind(x.ReturnType)));
 
 
-        public ApiHostRes Hosted(ApiHostCode src)
+        public static ApiHostRes hosted(ApiHostBlocks src)
         {
             var count = src.Length;
             var buffer = alloc<BinaryResSpec>(count);
@@ -150,6 +149,9 @@ namespace Z0
             }
             return new ApiHostRes(src.Host, buffer);
         }
+
+        public ApiHostRes Hosted(ApiHostBlocks src)
+            => hosted(src);
 
         static Type[] ResAccessorTypes
             => new Type[]{ByteSpanAcessorType, CharSpanAcessorType};

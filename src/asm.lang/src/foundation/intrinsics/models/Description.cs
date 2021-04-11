@@ -20,7 +20,7 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public Description(string src)
             {
-                Content = src;
+                Content = src.Replace("\r\n", " ");
             }
 
             public string Format()

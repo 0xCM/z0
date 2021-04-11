@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The operation uri
         /// </summary>
-        public OpUri Uri {get;}
+        public OpUri OpUri {get;}
 
         /// <summary>
         /// The encoded operation data
@@ -27,15 +27,27 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
-            Uri = uri;
+            OpUri = uri;
             Code = new CodeBlock(@base, src);
         }
 
         [MethodImpl(Inline)]
         public ApiCodeBlock(OpUri uri, CodeBlock code)
         {
-            Uri = uri;
+            OpUri = uri;
             Code = code;
+        }
+
+        public ApiHostUri HostUri
+        {
+            [MethodImpl(Inline)]
+            get => OpUri.Host;
+        }
+
+        public PartId Part
+        {
+            [MethodImpl(Inline)]
+            get => OpUri.Part;
         }
 
         [MethodImpl(Inline)]
@@ -66,25 +78,7 @@ namespace Z0
         public OpIdentity OpId
         {
              [MethodImpl(Inline)]
-             get => Uri.OpId;
-        }
-
-        /// <summary>
-        /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparsed uri text
-        /// </summary>
-        public readonly string Identifier
-        {
-             [MethodImpl(Inline)]
-             get => Uri.UriText;
-        }
-
-        /// <summary>
-        /// The operation uri
-        /// </summary>
-        public readonly OpUri OpUri
-        {
-            [MethodImpl(Inline)]
-            get => Uri;
+             get => OpUri.OpId;
         }
 
         /// <summary>
@@ -138,7 +132,7 @@ namespace Z0
         public OpIdentity Id
         {
             [MethodImpl(Inline)]
-            get => Uri.OpId;
+            get => OpUri.OpId;
         }
 
         [MethodImpl(Inline)]

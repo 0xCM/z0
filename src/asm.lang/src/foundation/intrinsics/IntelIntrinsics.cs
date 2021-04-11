@@ -14,22 +14,67 @@ namespace Z0.Asm
 
     public partial class IntelIntrinsics : WfService<IntelIntrinsics>
     {
+        const string DocName = "intel-intrinsics";
+
         public Index<Intrinsic> Emit()
         {
-            var doc = IntelIntrinsics.doc();
-            var name = "intel-intrinsics";
-            Db.Doc(name, FS.Extensions.Xml).Overwrite(doc.Content);
+            var src = IntelIntrinsics.doc();
+            Db.Doc(DocName, FS.Xml).Overwrite(src.Content);
             var intrinsics = Wf.IntelCpuIntrinsics();
-            var parsed = intrinsics.Parse(doc);
+            var parsed = intrinsics.Parse(src);
             var elements = parsed.View;
             var count = elements.Length;
-            var path = Db.Doc(name, FS.Extensions.Log);
+            var path = Db.Doc(DocName, FS.Log);
             var flow = Wf.EmittingFile(path);
             using var writer = path.Writer();
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(elements,i).Format());
             Wf.EmittedFile(flow, count);
+
+            EmitSummary(parsed, Db.Doc(DocName, FS.Csv));
+            EmitPseudoHeader(parsed, Db.Doc(DocName, FS.ext("h")));
+
             return parsed;
+        }
+
+        void EmitPseudoHeader(ReadOnlySpan<Intrinsic> src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingFile(dst);
+            var count = src.Length;
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+                writer.WriteLine(string.Format("{0};", sig(skip(src,i))));
+
+            Wf.EmittedFile(flow, count);
+
+        }
+
+        void EmitSummary(ReadOnlySpan<Intrinsic> src, FS.FilePath dst)
+        {
+            const string Pattern = "{0,-100} | {1,-48} | {2}";
+            var flow = Wf.EmittingFile(dst);
+            var count = src.Length;
+            using var writer = dst.Writer();
+            writer.WriteLine(string.Format(Pattern, "Signature", "Intruction", "XedIForm"));
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var intrinsic = ref skip(src,i);
+                var instructions = intrinsic.instructions;
+                if(instructions.Count!=0)
+                {
+                    var ins = instructions[0];
+                    writer.WriteLine(string.Format(Pattern,
+                            sig(intrinsic),
+                            string.Format("{0} {1}", ins.name, ins.form),
+                            ins.xed));
+                }
+                else
+                {
+                    writer.WriteLine(string.Format(Pattern, sig(intrinsic), EmptyString, EmptyString));
+                }
+            }
+
+            Wf.EmittedFile(flow, count);
         }
 
         public static XmlDoc doc()
@@ -56,20 +101,31 @@ namespace Z0.Asm
             return dst;
         }
 
-
         public static void render(Operation src, ITextBuffer dst)
         {
             if(src.Content != null)
-                root.iter(src.Content, x => dst.AppendLine(x));
+                root.iter(src.Content, x => dst.AppendLine("  " + x.Content));
         }
 
-        public static void render(Instructions src, ITextBuffer dst)
-            => root.iter(src, x => dst.AppendLineFormat("# {0}",x));
+        public static string format(Instruction src)
+             => string.Format("# Instruction: {0} {1}\r\n", src.name, src.form) + string.Format("# Iform: {0}", src.xed);
 
-        public static string format(Intrinsic src)
+        public static void render(Instructions src, ITextBuffer dst)
+            => root.iter(src, x => dst.AppendLine(format(x)));
+
+        public static string sig(Intrinsic src)
+            => string.Format("{0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray()));
+
+        public static void body(Intrinsic src, ITextBuffer dst)
         {
-            var dst = text.buffer();
-            dst.AppendLine(string.Format("# Intrinsic: {0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray())));
+            dst.AppendLine("BEGIN");
+            render(src.operation, dst);
+            dst.AppendLine("END");
+        }
+
+        public static void overview(Intrinsic src, ITextBuffer dst)
+        {
+            dst.AppendLine(string.Format("# Intrinsic: {0}", sig(src)));
 
             var classes = root.list<string>(3);
             if(text.nonempty(src.tech))
@@ -81,12 +137,16 @@ namespace Z0.Asm
             if(classes.Count != 0)
                 dst.AppendLineFormat("# Classification: {0}", string.Join(", ", classes));
 
-            dst.AppendLineFormat("# Header: {0}", src.header);
             render(src.instructions, dst);
             dst.AppendLineFormat("# Description: {0}", src.description);
-            dst.AppendLine("BEGIN");
-            render(src.operation, dst);
-            dst.AppendLine("END");
+
+        }
+
+        public static string format(Intrinsic src)
+        {
+            var dst = text.buffer();
+            overview(src, dst);
+            body(src, dst);
             return dst.Emit();
         }
 

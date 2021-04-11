@@ -198,6 +198,14 @@ namespace Z0
         public static implicit operator U(uint src)
             => uint4(src);
 
+        [MethodImpl(Inline)]
+        public static implicit operator U(HexDigit src)
+            => new U((byte)src, true);
+
+        [MethodImpl(Inline)]
+        public static implicit operator HexDigit(U src)
+            => (HexDigit)src.data;
+
         /// <summary>
         /// Creates a 4-bit integer from the least four bits of the source operand
         /// </summary>

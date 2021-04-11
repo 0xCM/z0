@@ -7,7 +7,7 @@ namespace Z0
 {
     partial struct XedModels
     {
-        [SymbolSource]
+        [SymbolSource(xed)]
         public enum RegRole : byte
         {
             None,

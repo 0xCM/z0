@@ -15,9 +15,9 @@ namespace Z0.Asm
     public sealed class AsmJmpPipe : WfService<AsmJmpPipe>
     {
         public Index<AsmJmpRow> EmitRows(ApiAsmDataset src)
-            => EmitJmpRows(src.Routines);
+            => EmitRows(src.Routines);
 
-        public Index<AsmJmpRow> EmitJmpRows(Index<ApiPartRoutines> routines)
+        public Index<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmJmpRow>();
             var count = routines.Length;

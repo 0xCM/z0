@@ -17,13 +17,9 @@ namespace Z0.Asm
         public static IAsmContext context(IWfRuntime wf)
             => new AsmContext(Apps.context(wf), wf);
 
-        [Op]
-        public static IApiHostCapture HostCapture(IWfRuntime wf)
-            => ApiHostCapture.create(wf);
-
         [MethodImpl(Inline), Op]
         public static IAsmRoutineFormatter formatter()
-            => new AsmRoutineFormatter(null);
+            => new AsmRoutineFormatter();
 
         [MethodImpl(Inline), Op]
         public static ICaptureExchange exchange(BufferToken capture)

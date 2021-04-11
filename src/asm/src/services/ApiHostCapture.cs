@@ -13,15 +13,11 @@ namespace Z0.Asm
     {
         IAsmContext Asm;
 
-        ApiServices Api;
-
         ApiCatalogs Catalogs;
 
         protected override void OnInit()
         {
-            base.OnInit();
             Asm = Wf.AsmContext();
-            Api = Wf.ApiServices();
             Catalogs =  Wf.ApiCatalogs();
         }
 

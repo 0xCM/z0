@@ -44,7 +44,7 @@ namespace Z0
 
         Outcome<uint> ClearExtracts(PartId part)
         {
-            var kind = FS.Extensions.XCsv;
+            var kind = FS.XCsv;
             var files = Db.RawExtractFiles(part);
             var result = Clear(files);
             if(result)

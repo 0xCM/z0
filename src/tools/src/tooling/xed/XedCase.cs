@@ -4,19 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tooling
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static memory;
+
     [Record(TableId)]
-    public struct NasmCase : IRecord<NasmCase>
+    public struct XedCase : IRecord<XedCase>
     {
-        public const string TableId = "nasm.case";
+        public const string TableId = "xed.case";
 
         public Identifier CaseId;
 
         public FS.FilePath ScriptPath;
 
-        public FS.FilePath SourcePath;
+        public FS.FilePath SrcPath;
 
-        public FS.FilePath BinPath;
+        public FS.FilePath SummaryPath;
 
-        public FS.FilePath ListPath;
+        public FS.FilePath DetailPath;
     }
 }
