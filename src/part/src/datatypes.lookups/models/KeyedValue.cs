@@ -26,10 +26,6 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static KeyedValue<K,V> Define(K key, V value)
-            => new KeyedValue<K,V>(key,value);
-
-        [MethodImpl(Inline)]
         public KeyedValue(K key, V value)
         {
             Key = key;

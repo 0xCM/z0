@@ -85,6 +85,5 @@ namespace Z0
             else
                 throw no<T>();
         }
-
     }
 }

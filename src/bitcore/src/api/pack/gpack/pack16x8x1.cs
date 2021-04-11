@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static BitMasks.Literals;
     using static memory;
     using static Part;
 

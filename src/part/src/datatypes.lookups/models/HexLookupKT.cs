@@ -14,7 +14,7 @@ namespace Z0
     /// Defines a sequence of unmanaged values indexed by an integer in the range [0,255]
     /// </summary>
     public readonly ref struct HexLookup<K,T>
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
         readonly Span<T> Values;
 

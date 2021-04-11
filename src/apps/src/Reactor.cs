@@ -44,17 +44,8 @@ namespace Z0
                 case EmitResDataCmd.CmdName:
                     Builder.EmitResData().RunTask(Wf);
                     break;
-                case ShowEnvCmd.CmdName:
-                    Builder.ShowEnv().RunTask(Wf);
-                    break;
                 case RunScriptCmd.CmdName:
                     Builder.RunScript(FS.path(a0)).RunDirect(Wf);
-                    break;
-                case ShowProcessMemoryCmd.CmdName:
-                    Builder.ShowProcessMemory().RunTask(Wf);
-                    break;
-                case EmitEnumCatalogCmd.CmdName:
-                    Builder.EmitEnumCatalog().RunTask(Wf);
                     break;
                 case CheckServiceCmd.CmdName:
                     Builder.CheckService(a0).RunTask(Wf);

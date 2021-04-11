@@ -13,9 +13,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [Op, Closures(UInt8k)]
-        public static LookupGrid<byte,byte,byte,T> grid<T>(W8 ixj)
-            => new LookupGrid<byte,byte,byte,T>(new byte[256,256], new T[256*256]);
     }
 
     partial class XTend

@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static cpu;
 
     partial struct BitPack
     {
@@ -20,8 +21,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref byte pack8x32x1(in uint src, ref byte dst)
         {
-            var v0 = cpu.vload(w256, src);
-            dst = (byte)gcpu.vpacklsb(cpu.vpack128x8u(v0));
+            var v0 = vload(w256, src);
+            dst = (byte)gcpu.vpacklsb(vpack128x8u(v0));
             return ref dst;
         }
 
@@ -33,8 +34,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte pack8x32x1(Span<uint> src)
         {
-            var v0 = cpu.vload(w256, first(src));
-            return (byte)gcpu.vpacklsb(cpu.vpack128x8u(v0));
+            var v0 = vload(w256, first(src));
+            return (byte)gcpu.vpacklsb(vpack128x8u(v0));
         }
 
         /// <summary>

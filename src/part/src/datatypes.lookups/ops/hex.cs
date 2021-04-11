@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static HexLookup<K,T> hex<K,T>(Func<T,K> f, T[] src, T[] dst)
             where T : struct
-            where K : unmanaged, Enum
+            where K : unmanaged
         {
             Span<T> index = dst;
             ReadOnlySpan<T> view = src;
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static HexLookup<K,T> hex<K,T>(HexLookupEntry<K,T>[] src)
             where T : struct
-            where K : unmanaged, Enum
+            where K : unmanaged
         {
             var input = @readonly(src);
             var buffer = sys.alloc<T>(src.Length);
