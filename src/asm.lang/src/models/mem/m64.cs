@@ -16,9 +16,7 @@ namespace Z0.Asm
         /// </summary>
         public struct m64 : IMemOp64<m64>
         {
-            [MethodImpl(Inline)]
-            public static implicit operator mem<m64>(m64 src)
-                => src;
+
         }
     }
 }

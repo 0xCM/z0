@@ -16,9 +16,7 @@ namespace Z0.Asm
         /// </summary>
         public struct m512 : IMemOp512<m512>
         {
-            [MethodImpl(Inline)]
-            public static implicit operator mem<m512>(m512 src)
-                => src;
+
         }
     }
 }

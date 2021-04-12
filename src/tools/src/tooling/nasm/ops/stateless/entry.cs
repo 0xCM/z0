@@ -10,7 +10,6 @@ namespace Z0.Tooling
     using static Root;
     using static memory;
 
-
     partial class Nasm
     {
         public static Outcome entry(NasmListLine src, out NasmListEntry dst)
@@ -46,19 +45,11 @@ namespace Z0.Tooling
             {
                 if(outcount == 1)
                 {
-                    // Numeric.parse(part0, out uint ln);
-                    // dst.LineNumber = ln;
-
                     if(text.nonempty(input) && input.Contains(Chars.Colon))
                         dst.Label = input.RemoveAny(Chars.Colon);
                 }
                 else if(outcount == 3)
                 {
-                    // if(Numeric.parse(part0, out uint ln))
-                    //     dst.LineNumber = ln;
-                    // else
-                    //     return (false, string.Format($"Parse {outparts[0]} failed"));
-
                     if(HexNumericParser.parse64u(part1, out var offset))
                         dst.Offset = offset;
                     else

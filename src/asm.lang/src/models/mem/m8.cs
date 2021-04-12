@@ -16,9 +16,7 @@ namespace Z0.Asm
         /// </summary>
         public struct m8 : IMemOp8<m8>
         {
-            [MethodImpl(Inline)]
-            public static implicit operator mem<m8>(m8 src)
-                => src;
+
         }
     }
 }

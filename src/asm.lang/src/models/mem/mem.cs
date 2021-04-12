@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmX;
 
     partial struct AsmOps
     {
@@ -18,8 +17,17 @@ namespace Z0.Asm
         public struct mem<T> : IMemOp<mem<T>>
             where T : unmanaged
         {
+            public T Content;
 
+            [MethodImpl(Inline)]
+            public mem(T content)
+            {
+                Content = content;
+            }
 
+            [MethodImpl(Inline)]
+            public static implicit operator mem<T>(T content)
+                => new mem<T>(content);
         }
     }
 }

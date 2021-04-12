@@ -10,7 +10,7 @@ namespace Z0.Asm
     partial struct AsmX
     {
         [Op, AsmSig(AsmSigKind.vlddqu_xmm_m128)]
-        public AsmExpr vlddqu(xmm a0, ptr<m128> a1)
+        public AsmExpr vlddqu(xmm a0, mem<xmm> a1)
             => default;
     }
 }

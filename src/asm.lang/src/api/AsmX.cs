@@ -66,6 +66,74 @@ namespace Z0.Asm
             get => (byte)Buffer.Length;
         }
 
+        [MethodImpl(Inline)]
+        AsmExpr Produce<A,B,C>(Sym<A> a, Sym<B> b, Sym<C> c)
+            where A : unmanaged
+            where B : unmanaged
+            where C : unmanaged
+        {
+            Clear();
+            Render(a);
+            Render(Chars.Space);
+            Render(b);
+            Render(Chars.Comma);
+            Render(c);
+            return Emit();
+        }
+
+        [MethodImpl(Inline)]
+        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm8 c)
+            where A : unmanaged
+            where B : unmanaged
+                => Produce<A,B,byte>(a,b,c);
+
+        [MethodImpl(Inline), Op]
+        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm16 c)
+            where A : unmanaged
+            where B : unmanaged
+                => Produce<A,B,ushort>(a,b,c);
+
+        [MethodImpl(Inline), Op]
+        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm32 c)
+            where A : unmanaged
+            where B : unmanaged
+                => Produce<A,B,uint>(a,b,c);
+
+        [MethodImpl(Inline), Op]
+        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm64 c)
+            where A : unmanaged
+            where B : unmanaged
+                => Produce<A,B,ulong>(a,b,c);
+
+
+        [MethodImpl(Inline), Op]
+        AsmExpr Produce<A,B,T>(Sym<A> a, Sym<B> b, Imm<T> c)
+            where A : unmanaged
+            where B : unmanaged
+            where T : unmanaged
+        {
+            Clear();
+            Render(a);
+            Render(Chars.Space);
+            Render(b);
+            Render(Chars.Comma);
+            Render(c);
+            return Emit();
+        }
+
+        [Op]
+        AsmExpr Emit()
+            => slice(Buffer.Edit, 0, Position);
+
+        [Op]
+        void Render<T>(Imm<T> src)
+            where T : unmanaged
+                => Render("0" + src.Format());
+
+        [MethodImpl(Inline), Op]
+        void Render(char src)
+            => Buffer[Position++] = src;
+
         [MethodImpl(Inline), Op]
         void Render(ReadOnlySpan<char> src)
         {
@@ -83,61 +151,5 @@ namespace Z0.Asm
             for(var i=0; i<len; i++)
                 Buffer[Position++] = skip(data,i);
         }
-
-        [MethodImpl(Inline), Op]
-        AsmExpr Produce<A,B,C>(Sym<A> a, Sym<B> b, Sym<C> c)
-            where A : unmanaged
-            where B : unmanaged
-            where C : unmanaged
-        {
-            Clear();
-            Render(a);
-            Render(Chars.Space);
-            Render(b);
-            Render(Chars.Comma);
-            Render(c);
-            return Emit();
-        }
-
-        [MethodImpl(Inline), Op]
-        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm8 c)
-            where A : unmanaged
-            where B : unmanaged
-        {
-            Clear();
-            Render(a);
-            Render(Chars.Space);
-            Render(b);
-            Render(Chars.Comma);
-            Render<byte>(c);
-            return Emit();
-        }
-
-        [MethodImpl(Inline), Op]
-        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm64 c)
-            where A : unmanaged
-            where B : unmanaged
-        {
-            Clear();
-            Render(a);
-            Render(Chars.Space);
-            Render(b);
-            Render(Chars.Comma);
-            Render<ulong>(c);
-            return Emit();
-        }
-
-        [MethodImpl(Inline), Op]
-        void Render(char src)
-            => Buffer[Position++] = src;
-
-        [Op]
-        public void Render<T>(Imm<T> src)
-            where T : unmanaged
-                => Render(src.Format());
-
-        [Op]
-        AsmExpr Emit()
-            => slice(Buffer.Edit, 0, Position);
     }
 }

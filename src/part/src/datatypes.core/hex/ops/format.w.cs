@@ -18,65 +18,51 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(W) == typeof(W8))
-                return SmallHex.format(Numeric.force<T,byte>(value), postspec);
+                return format(w8, Numeric.force<T,byte>(value), postspec);
             else if(typeof(W) == typeof(W16))
-                return SmallHex.format(Numeric.force<T,ushort>(value), postspec);
+                return format(w16, Numeric.force<T,ushort>(value), postspec);
             else if(typeof(W) == typeof(W32))
-                return SmallHex.format(Numeric.force<T,uint>(value), postspec);
+                return format(w32, Numeric.force<T,uint>(value), postspec);
             else
-                return SmallHex.format(Numeric.force<T,ulong>(value), postspec);
+                return format(w64, Numeric.force<T,ulong>(value), postspec);
         }
 
-        [Op]
-        public static string format(W8 w, byte src, bool postspec = false)
-            => format8(src,postspec);
-
-        [Op]
-        public static string format(W16 w, ushort src, bool postspec = false)
-            => format16(src,postspec);
-
-        [Op]
-        public static string format(W32 w, uint src, bool postspec = false)
-            => format32(src,postspec);
-
-        [Op]
-        public static string format(W64 w, ulong src, bool postspec = false)
-            => format64(src,postspec);
 
         [Op, Closures(Closure)]
         public static string format<T>(W8 w, T src, bool postspec = false)
             where T : unmanaged
-                => format8(uint8(src), postspec);
+                => format(w, uint8(src), postspec);
 
         [Op, Closures(Closure)]
         public static string format<T>(W16 w, T src, bool postspec = false)
             where T : unmanaged
-                => format16(uint16(src), postspec);
+                => format(w, uint16(src), postspec);
 
         [Op, Closures(Closure)]
         public static string format<T>(W32 w, T src, bool postspec = false)
             where T : unmanaged
-                => format32(uint32(src), postspec);
+                => format(w, uint32(src), postspec);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(W64 w, T src, bool postspec = false)
              where T : unmanaged
-                => format64(uint64(src), postspec);
+                => format(w, uint64(src), postspec);
 
         [Op]
-        static string format8(byte src, bool postspec = false)
-            => format64(((ulong)src), postspec);
+        public static string format(W8 w, byte src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex8Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
 
         [Op]
-        static string format16(ushort src, bool postspec = false)
-            => format64(((ulong)src), postspec);
+        public static string format(W16 w, ushort src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex16Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
 
         [Op]
-        static string format32(uint src, bool postspec = false)
-            => format64(((ulong)src), postspec);
+        public static string format(W32 w, uint src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex32Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
 
         [Op]
-        static string format64(ulong src, bool postspec = false)
-            => src.ToString(HexFormatSpecs.SmallHexSpec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+        public static string format(W64 w, ulong src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex64Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
     }
 }

@@ -983,10 +983,10 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            //AsmExprCases.create(Wf).Create();
+            AsmExprCases.create(Wf).Create();
 
             //ProccessCultFiles();
-            Wf.IntelCpuIntrinsics().Emit();
+            //Wf.IntelCpuIntrinsics().Emit();
             //Wf.AsmDb().ShowSourceDocs();
             // var cases = AsmExprCases.create(Wf);
             // cases.Run(AsmSigKind.and_r8_r8);

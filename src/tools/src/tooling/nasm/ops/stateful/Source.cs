@@ -5,11 +5,8 @@
 namespace Z0.Tooling
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-
-    using static Root;
 
     partial class Nasm
     {
@@ -21,6 +18,5 @@ namespace Z0.Tooling
         [Op]
         public NasmSource Source(ReadOnlySpan<AsmExpr> expr, bool x64 = true)
             => source(expr.ToArray(), x64);
-
     }
 }

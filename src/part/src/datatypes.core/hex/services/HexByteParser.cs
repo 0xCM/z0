@@ -30,8 +30,14 @@ namespace Z0
                     s0 = text.slice(s0, len - PreSpec.Length);
                 else if(HexFormat.HasPostSpec(s0))
                     s0 = text.slice(s0, 0, len - PostSpec.Length);
-                var blocks = text.split(s0, Chars.Space);
-                dst = blocks.Select(x => byte.Parse(x, NumberStyles.HexNumber)).Storage;
+                var blocks = text.split(s0, Chars.Space).View;
+                var count = blocks.Length;
+                var buffer = alloc<byte>(count);
+                ref var target = ref first(buffer);
+                for(var i=0; i<count; i++)
+                    seek(target,count-1-i) = byte.Parse(skip(blocks,i), NumberStyles.HexNumber);
+                dst = buffer;
+
                 return true;
             }
             catch(Exception)

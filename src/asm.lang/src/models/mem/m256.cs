@@ -17,9 +17,6 @@ namespace Z0.Asm
         public struct m256 : IMemOp256<m256>
         {
 
-            [MethodImpl(Inline)]
-            public static implicit operator mem<m256>(m256 src)
-                => src;
         }
     }
 }

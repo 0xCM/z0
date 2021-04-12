@@ -30,9 +30,8 @@ namespace Z0
 
         public ImmKind Kind => ImmKind.Imm16;
 
-        [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Content, W);
+            => HexFormat.format(W, Content);
 
         public override string ToString()
             => Format();
@@ -91,7 +90,7 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<ushort>(I src)
+        public static implicit operator Imm<ushort>(Imm16 src)
             => new Imm<ushort>(src);
 
         [MethodImpl(Inline)]

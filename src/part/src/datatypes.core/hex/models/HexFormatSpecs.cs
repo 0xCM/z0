@@ -178,6 +178,9 @@ namespace Z0
         /// </summary>
         public const string Hex28Spec = "x7";
 
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex32Width"/>
+        /// </summary>
         public const string Hex32Spec = "x8";
 
         public const string Hex36Spec = "x9";

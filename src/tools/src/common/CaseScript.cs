@@ -8,7 +8,6 @@ namespace Z0.Tooling
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     public readonly struct CaseScript<T>
     {
@@ -27,5 +26,4 @@ namespace Z0.Tooling
         public static implicit operator CaseScript<T>((T @case, FS.FilePath path) src)
             => new CaseScript<T>(src.@case, src.path);
     }
-
 }

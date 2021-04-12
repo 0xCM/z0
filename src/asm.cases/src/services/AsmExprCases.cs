@@ -11,23 +11,50 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    public class AsmCaseAttribute : Attribute
+    {
+        public AsmCaseAttribute(AsmSigKind id)
+        {
+            Id = id;
+        }
+
+        public AsmSigKind Id {get;}
+    }
+
     public class AsmExprCases : WfService<AsmExprCases>
     {
         readonly AsmX asmx;
 
         Index<AsmExpr> _Buffer;
 
+        uint Position;
+
         public AsmExprCases()
         {
             asmx = AsmX.create();
             _Buffer = alloc<AsmExpr>(256);
+            Position = 0;
         }
 
         [MethodImpl(Inline)]
         Index<AsmExpr> Buffer()
         {
-            _Buffer.Clear();
+            Clear();
             return _Buffer;
+        }
+
+        [MethodImpl(Inline)]
+        Index<AsmExpr> Buffer(bool clear)
+        {
+            if(clear)
+                Clear();
+            return _Buffer;
+        }
+
+        void Clear()
+        {
+            _Buffer.Clear();
+            Position = 0;
         }
 
         [MethodImpl(Inline)]
@@ -37,6 +64,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         Symbols<Gp16> Gp16Regs()
             => asmx.SymbolSet.Gp16Regs();
+
+        [MethodImpl(Inline)]
+        Symbols<Gp32> Gp32Regs()
+            => asmx.SymbolSet.Gp32Regs();
 
         [MethodImpl(Inline)]
         Symbols<Gp64> Gp64Regs()
@@ -69,7 +100,7 @@ namespace Z0.Asm
 
         void case_move_r64_imm64(AsmSigKind id)
         {
-            const ulong Imm64 = 0x7ffa9930f380;
+            const ulong a1 = 0x7ffa9930f380;
             var casename = CaseName(id);
             var flow = Wf.Running(casename);
             var regs = Gp64Regs();
@@ -77,10 +108,40 @@ namespace Z0.Asm
             var buffer = Buffer();
             var defining = Wf.Running(Msg.DefiningExpressions.Format(count,id));
             for(byte i=0; i<count; i++)
-                buffer[i] = asmx.mov(regs[i], Imm64);
+                buffer[i] = asmx.mov(regs[i], a1);
             Wf.Ran(defining, Msg.DefinedExpressions.Format(count,id));
             Assemble(id, slice(buffer.View,0, count));
             Wf.Ran(flow);
+        }
+
+        [AsmCase(AsmSigKind.cmp_r8_imm8)]
+        void case_cmp_r8_imm8(AsmSigKind id)
+        {
+            const byte a1 = 0x3C;
+            var regs = Gp8Regs();
+            Generate(id, (byte)regs.Count, i => asmx.cmp(regs[i], a1));
+        }
+
+        [AsmCase(AsmSigKind.cmp_r16_r16)]
+        void case_cmp_r16_r16(AsmSigKind id)
+        {
+            var left = Gp16Regs();
+            var right = Gp16Regs();
+            var count = (byte)left.Count;
+            for(byte i=0; i<count; i++)
+                Enqueue(id, count, j => asmx.cmp(left[i], right[j]));
+            Assemble(id);
+        }
+
+        [AsmCase(AsmSigKind.cmp_r32_r32)]
+        void case_cmp_r32_r32(AsmSigKind id)
+        {
+            var left = Gp32Regs();
+            var right = Gp32Regs();
+            var count = (byte)left.Count;
+            for(byte i=0; i<count; i++)
+                Enqueue(id, count, j => asmx.cmp(left[i], right[j]));
+            Assemble(id);
         }
 
         void case_move_r64_imm64_example(AsmSigKind id)
@@ -104,6 +165,33 @@ namespace Z0.Asm
         string CaseName(AsmSigKind id)
             => id.ToString();
 
+        void Enqueue(AsmSigKind id, byte count, Func<byte,AsmExpr> f)
+        {
+            var buffer = Buffer(false);
+            for(byte i=0; i<count; i++)
+                buffer[Position++] = f(i);
+        }
+
+        void Generate(AsmSigKind id, byte count, Func<byte,AsmExpr> f)
+        {
+            var casename = CaseName(id);
+            var flow = Wf.Running(casename);
+            var defining = Wf.Running(Msg.DefiningExpressions.Format(count,id));
+            var buffer = Buffer();
+            for(byte i=0; i<count; i++)
+                buffer[i] = f(i);
+            Wf.Ran(defining, Msg.DefinedExpressions.Format(count,id));
+            Assemble(id, slice(buffer.View,0, count));
+            Wf.Ran(flow);
+        }
+
+        void Assemble(AsmSigKind id)
+        {
+            var buffer = Buffer(false).View;
+            Assemble(id, slice(buffer, 0, Position));
+            Clear();
+        }
+
         void Assemble(AsmSigKind id, ReadOnlySpan<AsmExpr> input)
         {
             var subject = Tables.tableid<AssembledAsm>();
@@ -111,7 +199,7 @@ namespace Z0.Asm
             var casename = CaseName(id);
             var tool = Wf.nasm();
             var source = tool.Source(input);
-            var target = tool.Input(casedir, FS.file(casename, FS.Asm));
+            var target = casedir + FS.file(casename, FS.Asm);
             var emitting = Wf.EmittingFile(target);
             source.Save(target);
             Wf.EmittedFile(emitting,1);
@@ -141,25 +229,12 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
-        public void Create(AsmSigKind id)
-        {
-            switch(id)
-            {
-                case AsmSigKind.and_r8_r8:
-                    case_and_r8_r8(id);
-                break;
-                case AsmSigKind.mov_r64_imm64:
-                    case_move_r64_imm64(id);
-                    break;
-                default:
-                break;
-            }
-        }
-
         public void Create()
         {
-            Create(AsmSigKind.and_r8_r8);
-            //Create(AsmSigKind.mov_r64_imm64);
+            case_and_r8_r8(AsmSigKind.and_r8_r8);
+            case_cmp_r8_imm8(AsmSigKind.cmp_r8_imm8);
+            case_cmp_r16_r16(AsmSigKind.cmp_r16_r16);
+            case_cmp_r32_r32(AsmSigKind.cmp_r32_r32);
         }
     }
 }
