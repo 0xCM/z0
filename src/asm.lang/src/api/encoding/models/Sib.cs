@@ -37,16 +37,16 @@ namespace Z0.Asm
             get => Pow2.pow8u(Scale);
         }
 
-        public bool IsZero
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Data.Equals(0);
         }
 
-        public bool IsNonZero
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !IsZero;
+            get => !IsEmpty;
         }
 
         public string Format()

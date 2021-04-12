@@ -36,10 +36,16 @@ namespace Z0.Asm
             get => ref seek(Bytes, 2);
         }
 
-        public ref byte Modifier
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => ref seek(Bytes, 3);
+            get => Data == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
         }
 
         public Span<byte> Bytes

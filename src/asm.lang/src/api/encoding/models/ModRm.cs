@@ -56,6 +56,18 @@ namespace Z0.Asm
             get => Data;
         }
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Data != 0;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Data == 0;
+        }
+
         public string Format()
             => AsmRender.format(this);
 

@@ -21,7 +21,7 @@ namespace Z0
         public Imm(T src)
             => Content = src;
 
-        public static ImmWidth Width
+        public static ImmWidth Capacity
         {
             [MethodImpl(Inline)]
             get => (ImmWidth)(byte)memory.width<T>();
@@ -30,7 +30,13 @@ namespace Z0
         public static ImmKind Kind
         {
             [MethodImpl(Inline)]
-            get => (ImmKind)Width;
+            get => (ImmKind)Capacity;
+        }
+
+        public byte EffectiveWidth
+        {
+            [MethodImpl(Inline)]
+            get => Widths.effective(Imm64);
         }
 
         public ulong Imm64
@@ -62,6 +68,19 @@ namespace Z0
             [MethodImpl(Inline)]
             get => alg.hash.calc(Content);
         }
+
+        public bool IsZero
+        {
+            [MethodImpl(Inline)]
+            get => Imm8 == 0;
+        }
+
+        public bool IsNonZero
+        {
+            [MethodImpl(Inline)]
+            get => Imm8 != 0;
+        }
+
 
         public override int GetHashCode()
             => (int)Hash;

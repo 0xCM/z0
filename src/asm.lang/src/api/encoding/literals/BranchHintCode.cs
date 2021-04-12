@@ -16,7 +16,6 @@ namespace Z0.Asm
         /// </summary>
         BT = x2e,
 
-
         /// <summary>
         /// Branch not taken
         /// </summary>

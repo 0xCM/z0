@@ -14,10 +14,6 @@ namespace Z0.Asm
 
 
 /*
-neg r8/m                                      | ANY  | F6 /3                         | M        |        | F6         |     |     |      |      | false | 3    |       |         | -1       | false | false |
-neg r16/m                                     | ANY  | 66 F7 /3                      | M        |        | F7         |     |     | 66   |      | false | 3    |       |         | -1       | false | false |
-neg r32/m                                     | ANY  | F7 /3                         | M        |        | F7         |     |     |      |      | false | 3    |       |         | -1       | false | false |
-neg r64/m                                     | X64  | REX.W F7 /3                   | M        |        | F7         |     | W1  |      |      | false | 3    |       |         | -1       | false | false |
 
 */
     }

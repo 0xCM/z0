@@ -31,6 +31,8 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => bit.test(Data, (byte)RFI.W);
+            [MethodImpl(Inline)]
+            set => Data = bit.set(Data, (byte)RFI.W, value);
         }
 
         /// <summary>
@@ -40,6 +42,8 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => bit.test(Data, (byte)RFI.R);
+            [MethodImpl(Inline)]
+            set => Data = bit.set(Data, (byte)RFI.R, value);
         }
 
         /// <summary>
@@ -49,6 +53,8 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => bit.test(Data, (byte)RFI.X);
+            [MethodImpl(Inline)]
+            set => Data = bit.set(Data, (byte)RFI.X, value);
         }
 
         /// <summary>
@@ -58,6 +64,8 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => bit.test(Data,(byte)RFI.B);
+            [MethodImpl(Inline)]
+            set => Data = bit.set(Data, (byte)RFI.B, value);
         }
 
         public RexPrefixCode Code
@@ -73,6 +81,12 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => Data == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
         }
 
         public string Format()
@@ -92,14 +106,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator byte(RexPrefix src)
             => src.Data;
-
-        [MethodImpl(Inline)]
-        public static RexPrefix operator ++(RexPrefix src)
-            => api.next(src);
-
-        [MethodImpl(Inline)]
-        public static RexPrefix operator --(RexPrefix src)
-            => api.prior(src);
 
         public static RexPrefix Empty
             => new RexPrefix(0);

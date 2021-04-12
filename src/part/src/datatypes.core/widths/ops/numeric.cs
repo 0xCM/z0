@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics.X86;
 
     using static Part;
 
@@ -13,6 +14,7 @@ namespace Z0
 
     partial class Widths
     {
+
         public static K numeric(Type t)
         {
             var k = Numeric.kind(t);
