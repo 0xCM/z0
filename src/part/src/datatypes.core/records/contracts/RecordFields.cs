@@ -6,11 +6,52 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+
+    using static memory;
 
     using static Part;
 
     public readonly struct RecordFields : IIndex<RecordField>
     {
+
+        /// <summary>
+        /// Discerns a <see cref='RecordFields'/> for a parametrically-identified record type
+        /// </summary>
+        /// <typeparam name="T">The record type</typeparam>
+        public static RecordFields discover<T>()
+            where T : struct
+                => discover(typeof(T));
+
+        /// <summary>
+        /// Discerns a <see cref='RecordFields'/> for a specified record type
+        /// </summary>
+        /// <param name="src">The record type</typeparam>
+        [Op]
+        public static RecordFields discover(Type src)
+        {
+            var fields = src.DeclaredPublicInstanceFields();
+            var count = fields.Length;
+            var dst = sys.alloc<RecordField>(count);
+            map(fields,dst);
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        static ref RecordField map(FieldInfo src, ushort index, ref RecordField dst)
+        {
+            dst.FieldIndex = index;
+            dst.Definition = src;
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        static void map(ReadOnlySpan<FieldInfo> src, Span<RecordField> dst)
+        {
+            var count = (ushort)src.Length;
+            for(var i=z16; i<count; i++)
+                map(skip(src, i), i, ref seek(dst, i));
+        }
         readonly Index<RecordField> Data;
 
         [MethodImpl(Inline)]

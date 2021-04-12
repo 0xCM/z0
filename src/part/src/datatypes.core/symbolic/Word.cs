@@ -21,13 +21,13 @@ namespace Z0
         /// <summary>
         /// The symbols that comprise the word
         /// </summary>
-        public Index<Symbol<S>> Symbols {get;}
+        public Index<SymVal<S>> Symbols {get;}
 
         [MethodImpl(Inline)]
         public Word(params Word<S>[] src)
         {
             var len = src.Sum(s => s.Length);
-            Symbols = new Symbol<S>[len];
+            Symbols = new SymVal<S>[len];
             var symidx = 0;
             for(var i=0; i< src.Length; i++)
             {
@@ -38,10 +38,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Word(params Symbol<S>[] src)
+        public Word(params SymVal<S>[] src)
         {
-            if(src.Length == 1 && src[0].Value.Equals(Symbol<S>.Empty))
-                Symbols = new Symbol<S>[]{};
+            if(src.Length == 1 && src[0].Value.Equals(SymVal<S>.Empty))
+                Symbols = new SymVal<S>[]{};
             else
                 Symbols = src;
         }
@@ -58,7 +58,7 @@ namespace Z0
         public int Length
             => Symbols.Length;
 
-        public Symbol<S> this[int index]
+        public SymVal<S> this[int index]
         {
             [MethodImpl(Inline)]
             get => Symbols[index];
@@ -132,14 +132,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source symbols</param>
         /// <typeparam name="A">The alphabet</typeparam>
-        public static implicit operator Word<S>(Symbol<S>[] src)
+        public static implicit operator Word<S>(SymVal<S>[] src)
             => new Word<S>(src);
 
         /// <summary>
         /// Converts a word to its equivalent symbolic representation
         /// </summary>
         /// <param name="src">The source word</param>
-        public static implicit operator Symbol<S>[](Word<S> src)
+        public static implicit operator SymVal<S>[](Word<S> src)
             => src.Symbols;
 
         /// <summary>
@@ -154,6 +154,6 @@ namespace Z0
         /// Represents the empty word, with an invariant length of 0
         /// </summary>
         /// <typeparam name="A">The alphabet type</typeparam>
-        public static Word<S> Empty => new Word<S>(Symbol<S>.Empty);
+        public static Word<S> Empty => new Word<S>(SymVal<S>.Empty);
     }
 }

@@ -7,18 +7,13 @@ namespace Z0.Tooling
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
-    [ApiHost]
-    public sealed partial class Nasm : ToolService<Nasm>
+    partial class Nasm
     {
-        readonly BitFormatter<byte> BitFormat;
-
-        public Nasm()
-        {
-            Id = Toolsets.nasm;
-            BitFormat = BitFormatter.create<byte>(4);
-        }
-   }
+        [MethodImpl(Inline), Op]
+        public static NasmCaseScript script(NasmCase @case, FS.FilePath src)
+            => new NasmCaseScript(@case, src);
+    }
 }

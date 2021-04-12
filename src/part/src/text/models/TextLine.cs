@@ -58,6 +58,9 @@ namespace Z0
         public TextBlock Slice(uint offset, uint length)
             => text.slice(Content, offset, length);
 
+        public TextBlock Trim()
+            => IsNonEmpty ? Content.Trim() : TextBlock.Empty;
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]

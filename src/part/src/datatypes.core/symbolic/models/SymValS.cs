@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a symbol, characterized by its value, that defines an atomic element in some vocabulary/grammar
     /// </summary>
-    public readonly struct Symbol<S> : ISymbol<S>, IEquatable<Symbol<S>>
+    public readonly struct SymVal<S> : ISymVal<S>, IEquatable<SymVal<S>>
         where S : unmanaged
     {
         /// <summary>
@@ -21,7 +21,7 @@ namespace Z0
         public S Value {get;}
 
         [MethodImpl(Inline)]
-        public Symbol(S src)
+        public SymVal(S src)
             => Value = src;
 
         public Identifier Name
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(Symbol<S> src)
+        public bool Equals(SymVal<S> src)
             => Value.Equals(src.Value);
 
         [MethodImpl(Inline)]
@@ -42,24 +42,24 @@ namespace Z0
             => Format();
 
         public override bool Equals(object src)
-            => src is Symbol<S> x && Equals(x);
+            => src is SymVal<S> x && Equals(x);
 
         public override int GetHashCode()
             => Value.GetHashCode();
 
         [MethodImpl(Inline)]
-        public static explicit operator char(Symbol<S> src)
-            => SymbolSets.render(src);
+        public static explicit operator char(SymVal<S> src)
+            => memory.@as<S,char>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator S(Symbol<S> src)
+        public static implicit operator S(SymVal<S> src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator Symbol<S>(S src)
-            => new Symbol<S>(src);
+        public static implicit operator SymVal<S>(S src)
+            => new SymVal<S>(src);
 
-        public static Symbol<S> Empty
+        public static SymVal<S> Empty
             => default;
     }
 }

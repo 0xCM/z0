@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines an S-symbol value, of bit-width N, covered by a T-storage cell
     /// </summary>
-    public readonly struct Symbol<S,T,N> : ISymbol<Symbol<S,T,N>,S,T,N>
+    public readonly struct SymVal<S,T,N> : ISymbol<SymVal<S,T,N>,S,T,N>
         where S : unmanaged
         where T : unmanaged
         where N : unmanaged, ITypeNat
@@ -24,7 +24,7 @@ namespace Z0
         public S Value {get;}
 
         [MethodImpl(Inline)]
-        public Symbol(S src)
+        public SymVal(S src)
             => Value = src;
 
         public Identifier Name
@@ -33,10 +33,10 @@ namespace Z0
             get => Value.ToString();
         }
 
-        public Symbol<S> Simplified
+        public SymVal<S> Simplified
         {
             [MethodImpl(Inline)]
-            get => new Symbol<S>(Value);
+            get => new SymVal<S>(Value);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         public string Format()
-            => Name;
+            => Value.ToString();
 
         public override string ToString()
             => Format();
@@ -82,19 +82,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static explicit operator char(Symbol<S,T,N> src)
-            => SymbolSets.render(src);
+        public static explicit operator char(SymVal<S,T,N> src)
+            => @as<S,char>(src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator S(Symbol<S,T,N> src)
+        public static implicit operator S(SymVal<S,T,N> src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator Symbol<S>(Symbol<S,T,N> src)
-            => new Symbol<S>(src.Value);
+        public static implicit operator SymVal<S>(SymVal<S,T,N> src)
+            => new SymVal<S>(src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator Symbol<S,T>(Symbol<S,T,N> src)
-            => new Symbol<S,T>(src.Value);
+        public static implicit operator SymVal<S,T>(SymVal<S,T,N> src)
+            => new SymVal<S,T>(src.Value);
     }
 }

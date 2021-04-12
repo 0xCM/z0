@@ -12,37 +12,37 @@ namespace Z0
     partial struct Digital
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<BitSeq1>> sbits(N1 n)
-            => Bytes.cells<Symbol<BitSeq1>>(n2);
+        public static ReadOnlySpan<SymVal<BitSeq1>> sbits(N1 n)
+            => Bytes.cells<SymVal<BitSeq1>>(n2);
 
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<BitSeq2>> sbits(N2 n)
-            => Bytes.cells<Symbol<BitSeq2>>(n4);
+        public static ReadOnlySpan<SymVal<BitSeq2>> sbits(N2 n)
+            => Bytes.cells<SymVal<BitSeq2>>(n4);
 
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<BitSeq3>> sbits(N3 n)
-            => Bytes.cells<Symbol<BitSeq3>>(n8);
+        public static ReadOnlySpan<SymVal<BitSeq3>> sbits(N3 n)
+            => Bytes.cells<SymVal<BitSeq3>>(n8);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<BitSeq4>> sbits(N4 n)
-            => Bytes.cells<Symbol<BitSeq4>>(n16);
+        public static ReadOnlySpan<SymVal<BitSeq4>> sbits(N4 n)
+            => Bytes.cells<SymVal<BitSeq4>>(n16);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<BitSeq5>> sbits(N5 n)
-            => Bytes.cells<Symbol<BitSeq5>>(n32);
+        public static ReadOnlySpan<SymVal<BitSeq5>> sbits(N5 n)
+            => Bytes.cells<SymVal<BitSeq5>>(n32);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<BitSeq6>> sbits(N6 n)
-            => Bytes.cells<Symbol<BitSeq6>>(n64);
+        public static ReadOnlySpan<SymVal<BitSeq6>> sbits(N6 n)
+            => Bytes.cells<SymVal<BitSeq6>>(n64);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<BitSeq7>> sbits(N7 n)
-            => Bytes.cells<Symbol<BitSeq7>>(n128);
+        public static ReadOnlySpan<SymVal<BitSeq7>> sbits(N7 n)
+            => Bytes.cells<SymVal<BitSeq7>>(n128);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<BitSeq8>> sbits(N8 n)
-            => Bytes.cells<Symbol<BitSeq8>>(n256);
+        public static ReadOnlySpan<SymVal<BitSeq8>> sbits(N8 n)
+            => Bytes.cells<SymVal<BitSeq8>>(n256);
     }
 }

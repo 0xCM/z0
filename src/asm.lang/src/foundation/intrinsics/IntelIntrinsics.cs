@@ -140,7 +140,7 @@ namespace Z0.Asm
         }
 
         public static XmlDoc doc()
-            => text.xml(Resources.utf8(Assets.create().InstrinsicXml()));
+            => text.xml(Resources.utf8(Parts.AsmLang.Assets.InstrinsicXml()));
 
         public Index<Intrinsic> Parse()
             => Parse(doc());

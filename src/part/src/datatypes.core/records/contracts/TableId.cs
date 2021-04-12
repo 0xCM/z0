@@ -6,11 +6,31 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
     public readonly struct TableId : ITableId
     {
+        /// <summary>
+        /// Computes the <see cref='TableId'/> of a parametrically-identified record
+        /// </summary>
+        /// <typeparam name="T">The record type</typeparam>
+        [MethodImpl(Inline)]
+        public static TableId identify<T>()
+            where T : struct, IRecord<T>
+                => default(T).TableId;
+
+        /// <summary>
+        /// Computes the <see cref='TableId'/> of a specified record type
+        /// </summary>
+        /// <param name="src">The record type</typeparam>
+        [Op]
+        public static TableId identify(Type src)
+            => src.Tag<RecordAttribute>().MapValueOrElse(
+                    a => new TableId(src, a.TableId),
+                    () => new TableId(src, src.Name));
+
         public Name RecordType {get;}
 
         public Name Identifier {get;}
@@ -31,6 +51,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TableId(Type src)
-            => RecUtil.tableid(src);
+            => identify(src);
     }
 }

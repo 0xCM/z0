@@ -14,7 +14,6 @@ namespace Z0.Asm
     using static memory;
     using static Toolsets;
 
-
     class App : WfService<App>
     {
         public App()
@@ -617,7 +616,7 @@ namespace Z0.Asm
             var descriptors = Resources.descriptors(Wf.Controller, LogName);
             if(descriptors.ResourceCount == 1)
             {
-                var data = descriptors[0].Utf8();
+                var data = descriptors[0].ViewChars();
                 using var reader = new StringReader(data.ToString());
                 var line = reader.ReadLine();
                 while(line != null)
@@ -910,7 +909,6 @@ namespace Z0.Asm
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
-
         static ReadOnlySpan<byte> mul_ᐤ8uㆍ8uᐤ
             => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x0f,0xaf,0xc2,0x0f,0xb6,0xc0,0xc3};
 
@@ -941,7 +939,6 @@ namespace Z0.Asm
 
             Wf.Row(value.ToString("x"));
         }
-
 
         public void ProccessCultFiles()
         {
@@ -979,11 +976,14 @@ namespace Z0.Asm
                 var encoded = points.EncodeDispatch(0,Target);
                 Wf.Status(encoded.FormatHexData());
             }
-
         }
+
         public void Run()
         {
             AsmExprCases.create(Wf).Create();
+
+            // var inxs = ParseNasmInstructions();
+            // ShowRecords(inxs.View);
 
             //ProccessCultFiles();
             //Wf.IntelCpuIntrinsics().Emit();

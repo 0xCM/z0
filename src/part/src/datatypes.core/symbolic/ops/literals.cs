@@ -5,19 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using static Part;
     using static memory;
 
-    [ApiHost]
-    public readonly struct SymbolicLiterals
+    partial struct Symbols
     {
-        [Op]
-        public static SymIdentity identity(FieldInfo field, ushort index)
-            => text.format(RP.SlotDot4, field.DeclaringType.Assembly.GetSimpleName(), field.DeclaringType.Name, index, field.Name);
-
-        public static Index<SymLiteral<E>> load<E>()
+        public static Index<SymLiteral<E>> literals<E>()
             where E : unmanaged, Enum
         {
             var src = typeof(E);
@@ -52,7 +48,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<SymLiteral> symbolic(Type src)
+        public static Index<SymLiteral> literals(Type src)
         {
             var fields = @readonly(src.LiteralFields());
             var dst = alloc<SymLiteral>(fields.Length);
@@ -61,18 +57,18 @@ namespace Z0
         }
 
         [Op]
-        public static Index<SymLiteral> symbolic(Index<Type> src)
+        public static Index<SymLiteral> literals(Index<Type> src)
         {
             var dst = root.list<SymLiteral>();
             var kTypes = src.Count;
             for(var i=0; i<kTypes; i++)
-                dst.AddRange(symbolic(src[i]));
+                dst.AddRange(literals(src[i]));
 
             return dst.Array();
         }
 
         [Op]
-        public static Index<SymLiteral> symbolic(Index<Assembly> src)
+        public static Index<SymLiteral> literals(Index<Assembly> src)
         {
             var kvTypes = ClrEnums.types(src).View;
             var partCount = kvTypes.Length;
@@ -84,7 +80,7 @@ namespace Z0
                 for(var j=0u; j<kTypes; j++)
                 {
                     (var asm, var type) = skip(types,j);
-                    var syms = symbolic(type);
+                    var syms = literals(type);
                     var kLits = syms.Length;
                     for(var k=0; k<kLits; k++)
                         dst.Add(syms[k]);

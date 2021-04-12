@@ -8,8 +8,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using api = RecUtil;
-
     [Free]
     public interface IRecord
     {
@@ -24,10 +22,10 @@ namespace Z0
         where T : struct, IRecord<T>
     {
         TableId IRecord.TableId
-            => api.tableid(typeof(T));
+            => TableId.identify<T>();
 
         RecordFields IRecord.Fields()
-            => api.fields<T>();
+            => RecordFields.discover<T>();
     }
 
     public interface IComparableRecord<T> : IRecord<T>, IComparable<T>

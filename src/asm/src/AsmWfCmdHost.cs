@@ -28,11 +28,11 @@ namespace Z0.Asm
 
         [Action(K.EmitApiClasses)]
         void EmitApiClasses()
-            => Wf.SymLiterals().EmitApiClasses();
+            => Wf.Symbolism().EmitApiClasses();
 
         [Action(K.EmitSymbolicLiterals)]
         void EmitSymbolicLiterals()
-            => Wf.SymLiterals().Emit();
+            => Wf.Symbolism().Emit();
 
         [Action(K.ShowFormCatalog)]
         void ShowFormCatalog()

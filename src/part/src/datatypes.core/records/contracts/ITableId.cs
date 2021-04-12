@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using api = RecUtil;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -26,6 +25,6 @@ namespace Z0
             => typeof(T).Name;
 
         Name ITableId.Identifier
-            => api.tableid(typeof(T)).Identifier;
+            => TableId.identify<T>().Identifier;
     }
 }

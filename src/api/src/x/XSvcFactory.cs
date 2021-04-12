@@ -40,8 +40,8 @@ namespace Z0
         public static ApiAssets ApiAssets(this IWfRuntime wf)
             => Z0.ApiAssets.create(wf);
 
-        public static SymLiterals SymLiterals(this IWfRuntime wf)
-            => Z0.SymLiterals.create(wf);
+        public static Symbolism Symbolism(this IWfRuntime wf)
+            => Z0.Symbolism.create(wf);
 
         public static ApiHex ApiHex(this IWfRuntime wf)
             => Z0.ApiHex.create(wf);

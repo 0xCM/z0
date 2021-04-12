@@ -5,18 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
     partial struct Symbols
     {
-        internal static Symbols<E> index<E>()
+        public static Symbols<E> symbols<E>()
             where E : unmanaged, Enum
         {
-            var literals = SymbolicLiterals.load<E>();
-            var view = literals.View;
+            var src = literals<E>();
+            var view = src.View;
             var count = view.Length;
             var buffer = alloc<Sym<E>>(count);
             ref var dst = ref first(buffer);

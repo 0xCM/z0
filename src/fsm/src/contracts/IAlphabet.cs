@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     public interface IAlphabet<A> : IIndex<ushort,A>
-        where A : unmanaged, ISymbol
+        where A : unmanaged, ISymVal
     {
 
     }

@@ -9,16 +9,14 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static AsmDbSourceDocs;
 
     using IF = AsmDbSourceDocs.InstructionField;
-    using OF = AsmDbSourceDocs.OperandField;
 
     public class AsmDb : WfService<AsmDb>
     {
         public AsmDbSourceDocs SourceDocs()
         {
-            var assets = Assets.create();
+            var assets = Parts.AsmLang.Assets;
             if(Resources.document(assets.AsmDbInstructions(), TextDocFormat.Structured(), out var instructions)
             && (Resources.document(assets.AsmDbOperands(), TextDocFormat.Structured(), out var operands)))
                 return new AsmDbSourceDocs(instructions,operands);

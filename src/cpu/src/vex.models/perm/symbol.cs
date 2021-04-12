@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="dst">The symbol, if successful</param>
         /// <returns>True if symbol was successfully extracted, false otherwise</returns>
         [MethodImpl(Inline), Op]
-        public static bool symbol(Perm4L src, int index, out Symbol<Perm4L> dst)
+        public static bool symbol(Perm4L src, int index, out SymVal<Perm4L> dst)
         {
             const byte SegWidth = 2;
             var first = (byte)(index * SegWidth);
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="dst">The symbol, if successful</param>
         /// <returns>True if symbol was successfully extracted, false otherwise</returns>
         [MethodImpl(Inline), Op]
-        public static bool symbol(Perm8L src, int index, out Symbol<Perm8L> dst)
+        public static bool symbol(Perm8L src, int index, out SymVal<Perm8L> dst)
         {
             const byte Segwidth = 3;
             var first = (byte)(index * Segwidth);
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="dst">The symbol, if successful</param>
         /// <returns>True if symbol was successfully extracted, false otherwise</returns>
         [MethodImpl(Inline), Op]
-        public static bool symbol(Perm16L src, int index, out Symbol<Perm16L> dst)
+        public static bool symbol(Perm16L src, int index, out SymVal<Perm16L> dst)
         {
             const byte Segwidth = 4;
             var first = (byte)(index * Segwidth);

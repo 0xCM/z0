@@ -11,16 +11,16 @@ namespace Z0
     /// <summary>
     /// Characterizes a sequence of bits with external semantics
     /// </summary>
-    public interface ISymbol : ITextual
+    public interface ISymVal : ITextual
     {
-        Identifier Name {get;}
+
     }
 
     /// <summary>
-    /// Characterizes a parametric <see cref='ISymbol'/> value
+    /// Characterizes a parametric <see cref='ISymVal'/> value
     /// </summary>
     /// <typeparam name="S">The symbol value type</typeparam>
-    public interface ISymbol<S> : ISymbol
+    public interface ISymVal<S> : ISymVal
         where S : unmanaged
     {
         /// <summary>
@@ -28,14 +28,11 @@ namespace Z0
         /// </summary>
         S Value {get;}
 
-        Identifier ISymbol.Name
-            => Value is Enum e ? e.ToString("g") : Value.ToString();
-
         string ITextual.Format()
-            => string.Format("{0}", Value);
+            => Value.ToString();
     }
 
-    public interface ISymbol<S,T> : ISymbol<S>
+    public interface ISymVal<S,T> : ISymVal<S>
         where S : unmanaged
         where T : unmanaged
     {
@@ -46,7 +43,7 @@ namespace Z0
             => (ushort)width<T>();
     }
 
-    public interface ISymbol<S,T,N> : ISymbol<S,T>
+    public interface ISymVal<S,T,N> : ISymVal<S,T>
         where S : unmanaged
         where T : unmanaged
         where N : unmanaged, ITypeNat
@@ -64,7 +61,7 @@ namespace Z0
             => (ushort)(SegWidth/SymWidth);
     }
 
-    public interface ISymbol<H,S,T,N> : ISymbol<S,T,N>
+    public interface ISymbol<H,S,T,N> : ISymVal<S,T,N>
         where H : unmanaged, ISymbol<H,S,T,N>
         where S : unmanaged
         where T : unmanaged

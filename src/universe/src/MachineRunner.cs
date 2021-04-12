@@ -67,7 +67,7 @@ namespace Z0
                     Emitted(Wf.IntelCpuIntrinsics().Emit());
 
                 if(options.EmitSymbolicLiterals)
-                    Emitted(Wf.SymLiterals().Emit());
+                    Emitted(Wf.Symbolism().Emit());
 
                 if(options.EmitApiBitMasks)
                     Emitted(Wf.ApiBitMasks().Emit());

@@ -20,16 +20,16 @@ namespace Z0.Tooling
         {
             var buffer = text.buffer();
             buffer.AppendLine("@echo off");
-            buffer.AppendLine(string.Format("set SrcId={0}", src.CaseId));
-            buffer.AppendLine(string.Format("set SrcPath={0}", format(src.SourcePath)));
-            buffer.AppendLine(string.Format("set BinPath={0}", format(src.BinPath)));
-            buffer.AppendLine(string.Format("set ListPath={0}", format(src.ListPath)));
-            buffer.AppendLine(string.Format("set tool={0}", format(ToolPath())));
+            buffer.AppendLineFormat("set SrcId={0}", src.CaseId);
+            buffer.AppendLineFormat("set SrcPath={0}", format(src.SourcePath));
+            buffer.AppendLineFormat("set BinPath={0}", format(src.BinPath));
+            buffer.AppendLineFormat("set ListPath={0}", format(src.ListPath));
+            buffer.AppendLineFormat("set tool={0}", format(ToolPath()));
             buffer.AppendLine("set CmdSpec=%tool% %SrcPath% -o %BinPath% -f bin -l %ListPath%");
             buffer.AppendLine("echo CmdSpec:%CmdSpec%");
             buffer.AppendLine("%CmdSpec%");
             dst.Overwrite(buffer.Emit());
-            return new NasmCaseScript(src, dst);
+            return script(src, dst);
         }
     }
 }

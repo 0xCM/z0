@@ -8,7 +8,14 @@ namespace Z0
 
     partial class XTend
     {
-        public static ReadOnlySpan<char> Utf8(this ResDescriptor src)
+        public static ReadOnlySpan<char> ViewChars(this ResDescriptor src)
             => Resources.utf8(src);
+
+        public static string ViewText(this ResDescriptor src)
+            => Resources.utf8(src);
+
+        public static ReadOnlySpan<byte> ViewBytes(this ResDescriptor src)
+            => Resources.view(src);
+
     }
 }

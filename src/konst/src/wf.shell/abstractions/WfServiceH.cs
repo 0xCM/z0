@@ -91,6 +91,29 @@ namespace Z0
             f(log);
         }
 
+        protected void ShowRecords<T>(ReadOnlySpan<T> src)
+            where T : struct, IRecord<T>
+        {
+            var id = Tables.tableid<T>();
+            var count = src.Length;
+            if(count ==0)
+            {
+                Wf.Warn($"No {id} records were provided");
+                return;
+            }
+            var dst = Db.AppLogDir() + FS.file(id.Format(), FS.Csv);
+            var flow = Wf.EmittingTable<T>(dst);
+            var formatter = Tables.formatter<T>();
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                var formatted = formatter.Format(memory.skip(src,i));
+                writer.WriteLine(formatted);
+                Wf.Row(formatted);
+            }
+            Wf.EmittedTable(flow, count);
+        }
         protected void Show<T>(ReadOnlySpan<T> src, FS.FileName file, Func<T,string> render, string title = EmptyString)
         {
             var count = src.Length;

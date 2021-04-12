@@ -308,7 +308,7 @@ namespace Z0
         void perm4_symbol_check(Perm4L perm, params Perm4L[] expect)
         {
             Claim.eq(4, expect.Length);
-            var symbol = default(Symbol<Perm4L>);
+            var symbol = default(SymVal<Perm4L>);
             for(var i=0; i<expect.Length; i++)
             {
                 Claim.require(VPerm.symbol(perm, i, out symbol));

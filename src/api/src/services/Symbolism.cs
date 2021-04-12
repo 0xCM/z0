@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
 
-    public sealed class SymLiterals : WfService<SymLiterals>
+    public sealed class Symbolism : WfService<Symbolism>
     {
         public Index<SymLiteral> Emit()
             => Emit(Db.IndexTable<SymLiteral>());
@@ -20,7 +20,7 @@ namespace Z0
         public Index<SymLiteral> Emit(Index<Assembly> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<SymLiteral>(dst);
-            var rows = SymbolicLiterals.symbolic(src);
+            var rows = Symbols.literals(src);
             var view = rows.View;
             var count = rows.Length;
             var formatter = Tables.formatter<SymLiteral>(24);

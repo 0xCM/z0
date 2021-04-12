@@ -16,7 +16,6 @@ namespace Z0.Tooling
 
         const string DetailFlags = "-v 4 -isa-set -64";
 
-
         public XedCase DefineCase(Identifier name, FS.FolderPath dst)
         {
             var @case = new XedCase();

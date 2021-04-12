@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines an S-symbol value covered by a T-storage cell
     /// </summary>
-    public readonly struct Symbol<S,T> : ISymbol<S,T>
+    public readonly struct SymVal<S,T> : ISymVal<S,T>
         where S : unmanaged
         where T : unmanaged
     {
@@ -23,14 +23,8 @@ namespace Z0
         public S Value {get;}
 
         [MethodImpl(Inline)]
-        public Symbol(S src)
+        public SymVal(S src)
             => Value = src;
-
-        public Identifier Name
-        {
-            [MethodImpl(Inline)]
-            get => Value.ToString();
-        }
 
         /// <summary>
         /// The symbol value, from storage cell perspective
@@ -41,10 +35,10 @@ namespace Z0
             get => @as<S,T>(Value);
         }
 
-        public Symbol<S> Simplified
+        public SymVal<S> Simplified
         {
             [MethodImpl(Inline)]
-            get => new Symbol<S>(Value);
+            get => new SymVal<S>(Value);
         }
 
         public Type ValueType
@@ -54,15 +48,15 @@ namespace Z0
             => typeof(T);
 
         [MethodImpl(Inline)]
-        public static explicit operator char(Symbol<S,T> src)
-            => SymbolSets.render(src);
+        public static explicit operator char(SymVal<S,T> src)
+            => @as<S,char>(src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator S(Symbol<S,T> src)
+        public static implicit operator S(SymVal<S,T> src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator Symbol<S>(Symbol<S,T> src)
-            => new Symbol<S>(src.Value);
+        public static implicit operator SymVal<S>(SymVal<S,T> src)
+            => new SymVal<S>(src.Value);
     }
 }
