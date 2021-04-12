@@ -19,16 +19,6 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmEncoder
     {
-        readonly AsmStatementBuilder Builder;
-
-        public static AsmEncoder create()
-            => new AsmEncoder(new AsmStatementBuilder());
-
-        [MethodImpl(Inline)]
-        AsmEncoder(AsmStatementBuilder builder)
-        {
-            Builder = builder;
-        }
 
         [MethodImpl(Inline), Op]
         public static Vsib vsib(byte src)

@@ -969,11 +969,24 @@ namespace Z0.Asm
             }
         }
 
+        void CheckEntryPoints()
+        {
+            const ulong Target = 0x7ffa77aa1460;
 
+            var points = EntryPoints.create(Wf);
+            if(points.Create<ulong>(0))
+            {
+                var encoded = points.EncodeDispatch(0,Target);
+                Wf.Status(encoded.FormatHexData());
+            }
+
+        }
         public void Run()
         {
-            t_digit_parser();
-            //Wf.IntelCpuIntrinsics().Emit();
+            //AsmExprCases.create(Wf).Create();
+
+            //ProccessCultFiles();
+            Wf.IntelCpuIntrinsics().Emit();
             //Wf.AsmDb().ShowSourceDocs();
             // var cases = AsmExprCases.create(Wf);
             // cases.Run(AsmSigKind.and_r8_r8);

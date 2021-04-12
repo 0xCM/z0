@@ -10,7 +10,6 @@ namespace Z0.Tooling
     using Z0.Asm;
 
     using static Root;
-    using static memory;
 
     partial class Nasm
     {
@@ -19,8 +18,9 @@ namespace Z0.Tooling
         /// </summary>
         /// <param name="expr">The sequence of expressions that comprise the document</param>
         /// <param name="x64">The bitness</param>
-        [MethodImpl(Inline), Op]
-        public NasmSource Source(Index<AsmExpr> expr, bool x64 = true)
-            => source(expr,x64);
+        [Op]
+        public NasmSource Source(ReadOnlySpan<AsmExpr> expr, bool x64 = true)
+            => source(expr.ToArray(), x64);
+
     }
 }

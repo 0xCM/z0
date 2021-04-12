@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static AsmX;
 
+    using static AsmX;
     using static Part;
     using static memory;
 
@@ -34,6 +34,9 @@ namespace Z0.Asm
         Symbols<Gp8> Gp8Regs()
             => asmx.SymbolSet.Gp8Regs();
 
+        [MethodImpl(Inline)]
+        Symbols<Gp16> Gp16Regs()
+            => asmx.SymbolSet.Gp16Regs();
 
         [MethodImpl(Inline)]
         Symbols<Gp64> Gp64Regs()
@@ -50,7 +53,7 @@ namespace Z0.Asm
             var count = rows * cols;
             var buffer = Buffer();
             var k=0;
-            var defining = Wf.Running(DefiningExpressions.Format(count,id));
+            var defining = Wf.Running(Msg.DefiningExpressions.Format(count,id));
             for(var i=0u; i<rows; i++)
             {
                 for(var j=0u; j<cols; j++)
@@ -59,13 +62,28 @@ namespace Z0.Asm
                     buffer[k++] = asmx.and(pair.Left, pair.Right);
                 }
             }
-            Wf.Ran(defining, DefinedExpressions.Format(count,id));
-            Assemble(id, buffer);
+            Wf.Ran(defining, Msg.DefinedExpressions.Format(count,id));
+            Assemble(id, slice(buffer.View,0, count));
             Wf.Ran(flow);
         }
 
-
         void case_move_r64_imm64(AsmSigKind id)
+        {
+            const ulong Imm64 = 0x7ffa9930f380;
+            var casename = CaseName(id);
+            var flow = Wf.Running(casename);
+            var regs = Gp64Regs();
+            var count = regs.Count;
+            var buffer = Buffer();
+            var defining = Wf.Running(Msg.DefiningExpressions.Format(count,id));
+            for(byte i=0; i<count; i++)
+                buffer[i] = asmx.mov(regs[i], Imm64);
+            Wf.Ran(defining, Msg.DefinedExpressions.Format(count,id));
+            Assemble(id, slice(buffer.View,0, count));
+            Wf.Ran(flow);
+        }
+
+        void case_move_r64_imm64_example(AsmSigKind id)
         {
             const ulong Imm64 = 0x7ffa9930f380;
 
@@ -76,10 +94,9 @@ namespace Z0.Asm
             for(byte i=0; i<count; i++)
                 buffer[i]= asmx.mov(regs[i], Imm64);
 
-            var encoder = AsmEncoder.create();
             var expr = asm.expression("mov rcx,7ffa9930f380h");
             var expect = asm.encoding(expr,  AsmBytes.hexcode("48 b9 80 f3 30 99 fa 7f 00 00"));
-            var mov = encoder.mov(AsmRegOps.rcx, Imm64);
+            var mov = AsmEncoder.mov(AsmRegOps.rcx, Imm64);
             var actual = asm.encoding(expr, mov);
             Wf.Row(expect.Equals(actual));
         }
@@ -87,7 +104,7 @@ namespace Z0.Asm
         string CaseName(AsmSigKind id)
             => id.ToString();
 
-        void Assemble(AsmSigKind id, Index<AsmExpr> input)
+        void Assemble(AsmSigKind id, ReadOnlySpan<AsmExpr> input)
         {
             var subject = Tables.tableid<AssembledAsm>();
             var casedir = Db.CaseDir(subject,id).Create();
@@ -107,9 +124,8 @@ namespace Z0.Asm
             else
                 Wf.Error(outcome.Message);
 
-            var assembled = tool.LoadAssembledAsm(casename);
+            var assembled = tool.LoadAssembledAsm(casedir, casename);
             var tablepath = Db.CasePath(subject, id, id, FS.Csv);
-
             SaveTable(id, assembled, tablepath);
         }
 
@@ -125,13 +141,7 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
-        void case_and_r8_imm8(AsmSigKind id)
-        {
-
-        }
-
-
-        public void Run(AsmSigKind id)
+        public void Create(AsmSigKind id)
         {
             switch(id)
             {
@@ -141,16 +151,15 @@ namespace Z0.Asm
                 case AsmSigKind.mov_r64_imm64:
                     case_move_r64_imm64(id);
                     break;
-                case AsmSigKind.and_r8_imm8:
-                    case_and_r8_imm8(id);
-                    break;
                 default:
                 break;
             }
         }
 
-        static MsgPattern<Count,AsmSigKind> DefiningExpressions => "Defining {0} expressions of kind {1}";
-
-        static MsgPattern<Count,AsmSigKind> DefinedExpressions => "Defining {0} expressions of kind {1}";
+        public void Create()
+        {
+            Create(AsmSigKind.and_r8_r8);
+            //Create(AsmSigKind.mov_r64_imm64);
+        }
     }
 }

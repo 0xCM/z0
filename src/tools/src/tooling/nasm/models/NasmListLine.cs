@@ -11,8 +11,6 @@ namespace Z0.Tooling
 
     public readonly struct NasmListLine : ITextual
     {
-        public const byte DataWidth = 40;
-
         public TextLine Text {get;}
 
         [MethodImpl(Inline)]

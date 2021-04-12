@@ -11,14 +11,13 @@ namespace Z0.Asm
     using static AsmInstructions;
     using static AsmOps;
     using static AsmHexCodes;
-    using static Hex8Seq;
 
     partial struct AsmEncoder
     {
         // REX.W + B8+ rd io | MOV r64, imm64           | OI    | Valid       | N.E.            | Move imm64 to r64.                                             |
 
         [MethodImpl(Inline), Op]
-        public Mov mov(r64 r64, Imm64 imm64)
+        public static Mov mov(r64 r64, Imm64 imm64)
             => asmhex(RexPrefixCode.RexW, (Hex8)(0xb8 + (byte)r64.Index), imm64);
     }
 }

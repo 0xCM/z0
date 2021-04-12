@@ -9,10 +9,14 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse41;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+
     using static Part;
 
     partial struct cpu
     {
+
+        //_mm256_mpsadbw_epu8
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
         /// 2x32u -> 2x64u

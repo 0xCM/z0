@@ -4,10 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
     [Record(TableId)]
     public struct CultSummaryRecord : IRecord<CultSummaryRecord>
     {
         public const string TableId = "cult.summary";
+
+        public const byte FieldCount = 6;
 
         public uint LineNumber;
 
@@ -17,6 +20,10 @@ namespace Z0.Asm
 
         public string Instruction;
 
-        public TextBlock Content;
+        public string Lat;
+
+        public string Rcp;
+
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{12,46,46,46,6,6};
     }
 }

@@ -21,11 +21,19 @@ namespace Z0.Asm
             => Value = value;
 
         [MethodImpl(Inline)]
+        public RegDigit(byte value)
+            => Value = value;
+
+        [MethodImpl(Inline)]
         public static implicit operator RegDigit(uint3 src)
             => new RegDigit(src);
 
         [MethodImpl(Inline)]
         public static implicit operator RegDigit(byte src)
             => new RegDigit(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator RegDigit(RegDigitCode src)
+            => new RegDigit((byte)src);
     }
 }

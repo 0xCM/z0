@@ -10,5 +10,8 @@ namespace Z0.Tooling
     {
         public Index<AssembledAsm> LoadAssembledAsm(Identifier listname)
             => Assembled(LoadListedBlocks(listname));
+
+        public Index<AssembledAsm> LoadAssembledAsm(FS.FolderPath src, Identifier listname)
+            => Assembled(LoadListedBlocks(ListPath(src, listname)));
     }
 }

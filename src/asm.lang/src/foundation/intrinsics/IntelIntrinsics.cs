@@ -11,32 +11,87 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
+    using static XedModels;
 
     public partial class IntelIntrinsics : WfService<IntelIntrinsics>
     {
         const string DocName = "intel-intrinsics";
 
         public Index<Intrinsic> Emit()
+            => Emit(Db.DocRoot());
+
+        public Index<Intrinsic> Emit(FS.FolderPath dst)
         {
+            var refpath = dst + FS.file(DocName, FS.Xml);
             var src = IntelIntrinsics.doc();
-            Db.Doc(DocName, FS.Xml).Overwrite(src.Content);
+            refpath.Overwrite(src.Content);
             var intrinsics = Wf.IntelCpuIntrinsics();
             var parsed = intrinsics.Parse(src);
             var elements = parsed.View;
             var count = elements.Length;
-            var path = Db.Doc(DocName, FS.Log);
-            var flow = Wf.EmittingFile(path);
-            using var writer = path.Writer();
+            var logpath = dst + FS.file(DocName, FS.Log);
+            var flow = Wf.EmittingFile(logpath);
+            using var writer = logpath.Writer();
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(elements,i).Format());
             Wf.EmittedFile(flow, count);
 
-            EmitSummary(parsed, Db.Doc(DocName, FS.Csv));
-            EmitPseudoHeader(parsed, Db.Doc(DocName, FS.ext("h")));
+            var algodir = dst + FS.folder(string.Format("{0}.{1}", DocName, FS.Alg.Name));
+            algodir.Clear();
 
+            EmitSummary(parsed, dst + FS.file(DocName, FS.Csv));
+            EmitPseudoHeader(parsed, dst + FS.file(DocName, FS.ext("h")));
+            EmitAlogrithms(parsed, algodir);
             return parsed;
         }
 
+        void EmitAlogrithms(ReadOnlySpan<Intrinsic> src, FS.FolderPath dst)
+        {
+            var count = src.Length;
+            using var unknown =  (dst + FS.file("None",FS.Alg)).Writer();
+            var xed = IForm.None;
+            var writer = default(StreamWriter);
+            var path = FS.FilePath.Empty;
+            var buffer = text.buffer();
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var intrinsic = ref skip(src,i);
+                body(intrinsic, buffer);
+                if(instruction(intrinsic, out var ix) && ix.xed != 0)
+                {
+                    if(xed == 0)
+                    {
+                        xed = ix.xed;
+                        path = dst + FS.file(xed.ToString(), FS.Alg);
+                        writer = path.Writer(true);
+                    }
+                    else
+                    {
+                        xed = ix.xed;
+                        if(!writer.Equals(unknown))
+                        {
+                            writer.Flush();
+                            writer.Dispose();
+                            path = dst + FS.file(xed.ToString(), FS.Alg);
+                            writer = path.Writer(true);
+                        }
+                    }
+                }
+
+                if(writer == null)
+                    writer = unknown;
+
+                writer.WriteLine(sig(intrinsic));
+                writer.WriteLine(buffer.Emit());
+            }
+
+            if(writer != null)
+            {
+                writer.Flush();
+                writer.Dispose();
+            }
+        }
         void EmitPseudoHeader(ReadOnlySpan<Intrinsic> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
@@ -46,7 +101,22 @@ namespace Z0.Asm
                 writer.WriteLine(string.Format("{0};", sig(skip(src,i))));
 
             Wf.EmittedFile(flow, count);
+        }
 
+
+        static bool instruction(Intrinsic src, out Instruction dst)
+        {
+            var instructions = src.instructions;
+            if(instructions.Count!=0)
+            {
+                dst = instructions[0];
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
         }
 
         void EmitSummary(ReadOnlySpan<Intrinsic> src, FS.FilePath dst)
@@ -59,19 +129,11 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var intrinsic = ref skip(src,i);
-                var instructions = intrinsic.instructions;
-                if(instructions.Count!=0)
-                {
-                    var ins = instructions[0];
+                if(instruction(intrinsic, out var  ix))
                     writer.WriteLine(string.Format(Pattern,
-                            sig(intrinsic),
-                            string.Format("{0} {1}", ins.name, ins.form),
-                            ins.xed));
-                }
+                            sig(intrinsic), string.Format("{0} {1}", ix.name, ix.form), ix.xed));
                 else
-                {
                     writer.WriteLine(string.Format(Pattern, sig(intrinsic), EmptyString, EmptyString));
-                }
             }
 
             Wf.EmittedFile(flow, count);
@@ -118,9 +180,9 @@ namespace Z0.Asm
 
         public static void body(Intrinsic src, ITextBuffer dst)
         {
-            dst.AppendLine("BEGIN");
+            dst.AppendLine("{");
             render(src.operation, dst);
-            dst.AppendLine("END");
+            dst.AppendLine("}");
         }
 
         public static void overview(Intrinsic src, ITextBuffer dst)
@@ -256,10 +318,10 @@ namespace Z0.Asm
 
         static void read(XmlReader reader, Instructions dst)
         {
-            var element = Instruction.Empty;
+            var element = new Instruction();
             element.name = reader[nameof(Instruction.name)];
             element.form = reader[nameof(Instruction.form)];
-            element.xed = reader[nameof(Instruction.xed)];
+            element.xed = Enums.parse(reader[nameof(Instruction.xed)], IForm.None);
             dst.Add(element);
         }
     }

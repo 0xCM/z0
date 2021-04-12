@@ -9,6 +9,8 @@ namespace Z0.Tooling
     {
         public const string TableId = "nasm.listing";
 
+        public uint EntryNumber;
+
         public uint LineNumber;
 
         public Identifier Label;

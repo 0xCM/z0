@@ -19,6 +19,11 @@ namespace Z0
         public const string txt = nameof(txt);
 
         /// <summary>
+        /// Defines the 'alg' literal
+        /// </summary>
+        public const string alg = nameof(alg);
+
+        /// <summary>
         /// Defines the 'il' literal
         /// </summary>
         public const string il = nameof(il);

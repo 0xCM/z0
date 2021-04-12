@@ -11,6 +11,7 @@ namespace Z0.Tooling
         public Index<NasmCodeBlock> LoadListedBlocks(Identifier listname)
             => LoadListedBlocks(ListPath(listname));
 
+
         public Index<NasmCodeBlock> LoadListedBlocks(FS.FilePath path)
         {
             if(!path.Exists)

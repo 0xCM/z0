@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static XedModels;
 
     partial class IntelIntrinsics
     {
@@ -19,18 +20,8 @@ namespace Z0.Asm
 
             public string form;
 
-            public string xed;
+            public IForm xed;
 
-            [MethodImpl(Inline)]
-            public Instruction(string name, string form, string xed)
-            {
-                this.name = name;
-                this.form = form;
-                this.xed = xed;
-            }
-
-            public static Instruction Empty
-                => new Instruction(EmptyString, EmptyString, EmptyString);
         }
     }
 }

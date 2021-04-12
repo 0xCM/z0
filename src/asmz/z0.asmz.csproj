@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-
+    <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(AsmCore)" />
+    <ProjectReference Include="$(AsmCases)" />
 
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(CmdSpec)" />

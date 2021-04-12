@@ -20,15 +20,15 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="cb"></param>
         [MethodImpl(Inline), Op]
-        public Ja ja(Address8 cb)
-            => Builder.ja(asmhex(x77, cb));
+        public static Ja ja(Address8 cb)
+            => asmhex(x77, cb);
 
         /// <summary>
         /// (JA rel32) 0F 87 cd
         /// </summary>
         /// <param name="cb"></param>
         [MethodImpl(Inline), Op]
-        public Ja ja(Address32 cd)
-            => Builder.ja(asmhex(x77, cd));
+        public static Ja ja(Address32 cd)
+            => asmhex(x77, cd);
     }
 }

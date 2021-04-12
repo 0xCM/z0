@@ -74,7 +74,7 @@ namespace Z0
         {
             IntPtr buffer = (IntPtr)(void*)pSrc;
             if (!VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, PageProtection.ExecuteReadWrite, out PageProtection _))
-                ThrowLiberationError(buffer, length);
+                ThrowLiberationError(buffer, (ulong)length);
             return pSrc;
         }
 
@@ -92,7 +92,7 @@ namespace Z0
             var pSrc = Unsafe.AsPointer(ref src);
             IntPtr buffer = (IntPtr)pSrc;
             if (!VirtualProtectEx(CurrentProcess.ProcessHandle, buffer, (UIntPtr)length, PageProtection.ExecuteReadWrite, out PageProtection _))
-                ThrowLiberationError(buffer, length);
+                ThrowLiberationError(buffer, (ulong)length);
             return (T*)pSrc;
         }
 
@@ -105,11 +105,15 @@ namespace Z0
         public static IntPtr liberate(IntPtr src, int length)
         {
             if (!VirtualProtectEx(CurrentProcess.ProcessHandle, src, (UIntPtr)(ulong)length, PageProtection.ExecuteReadWrite, out PageProtection _))
-                ThrowLiberationError(src, length);
+                ThrowLiberationError(src, (ulong)length);
             return src;
         }
 
-        internal static void ThrowLiberationError(IntPtr pCode, int Length)
+        [MethodImpl(Inline), Op]
+        public static MemoryAddress liberate(MemoryAddress src, ulong length)
+             => VirtualProtectEx(CurrentProcess.ProcessHandle, src, (UIntPtr)(ulong)length, PageProtection.ExecuteReadWrite, out var _) ? src : MemoryAddress.Zero;
+
+        internal static void ThrowLiberationError(IntPtr pCode, ulong Length)
         {
             var start = (ulong)pCode;
             var end = start + (ulong)Length;

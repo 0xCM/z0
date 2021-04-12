@@ -9,6 +9,9 @@ namespace Z0.Tooling
         public FS.FilePath ListPath(Identifier name)
             => Output(FS.file(name + ".bin", ListingExt));
 
+        public FS.FilePath ListPath(FS.FolderPath dst, Identifier name)
+            => dst + FS.file(name + ".bin", ListingExt);
+
         public FS.Files Listings()
             => OutDir.Files(ListingExt, true);
 

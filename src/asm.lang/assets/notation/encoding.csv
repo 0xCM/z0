@@ -4,6 +4,7 @@
 | I     | AL/AX/EAX/RAX (r)                          | imm8/16/32                             | NA                                     | NA        |
 | M     | ModRM:r/m (w)                              | NA                                     | NA                                     | NA        |
 | M     | ModRM:r/m (r, w)                           | NA                                     | NA                                     | NA        |
+| M     | ModRM:r/m (r, w)                           | NA                                     | NA                                     | NA        |
 | MI    | ModRM:r/m (r, w)                           | imm8/16/32                             | NA                                     | NA        |
 | MI    | ModRM:r/m (r)                              | imm8                                   | NA                                     | NA        |
 | MI    | ModRM:r/m (r)                              | imm8/16/32                             | NA                                     | NA        |

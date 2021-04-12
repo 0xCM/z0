@@ -21,8 +21,8 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public Movzx movzx(r16 dst, r8 src)
-            => Builder.movzx();
+        public static Movzx movzx(r16 dst, r8 src)
+            => default;
 
         /// <summary>
         /// | 0F B6 /r | MOVZX r16, m8 | Move byte to word with zero-extension.
@@ -30,8 +30,8 @@ namespace Z0.Asm
         /// <param name="dst">The target register</param>
         /// <param name="src">The memory source</param>
         /// <typeparam name="T">The target register type</typeparam>
-        public Movzx movzx(r16 dst, m8 src)
-            => Builder.movzx();
+        public static Movzx movzx(r16 dst, m8 src)
+            => default;
 
         /// <summary>
         /// 0F B6 /r | MOVZX r32, r8 | Move byte to doubleword, zero-extension.
@@ -41,8 +41,8 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public Movzx movzx(r32 dst, r8 src)
-            => Builder.movzx();
+        public static Movzx movzx(r32 dst, r8 src)
+            => default;
 
         /// <summary>
         /// 0F B6 /r | MOVZX r32, m8 | Move byte to doubleword, zero-extension.
@@ -50,8 +50,8 @@ namespace Z0.Asm
         /// <param name="dst">The target register</param>
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
-        public Movzx movzx(r32 dst, m8 src)
-            => Builder.movzx();
+        public static Movzx movzx(r32 dst, m8 src)
+            => default;
 
         /// <summary>
         /// REX.W + 0F B6 /r | MOVZX r64, r8 | Move byte to quadword, zero-extension.
@@ -61,8 +61,8 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public Movzx movzx(r64 dst, r8 src)
-            => Builder.movzx();
+        public static Movzx movzx(r64 dst, r8 src)
+            => default;
 
         /// <summary>
         /// REX.W + 0F B6 /r | MOVZX r64, m8 | Move byte to quadword, zero-extension.
@@ -70,8 +70,8 @@ namespace Z0.Asm
         /// <param name="dst">The target register</param>
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
-        public Movzx movzx(r64 dst, m8 src)
-            => Builder.movzx();
+        public static Movzx movzx(r64 dst, m8 src)
+            => default;
 
         /// <summary>
         /// 0F B7 /r | MOVZX r32, r16 | Move word to doubleword, zero-extension.
@@ -81,8 +81,8 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public Movzx movzx(r32 dst, r16 src)
-            => Builder.movzx();
+        public static Movzx movzx(r32 dst, r16 src)
+            => default;
 
         /// <summary>
         /// 0F B7 /r | MOVZX r32, m16 | Move word to doubleword, zero-extension.
@@ -91,8 +91,8 @@ namespace Z0.Asm
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public Movzx movzx(r32 dst, m16 src)
-            => Builder.movzx();
+        public static Movzx movzx(r32 dst, m16 src)
+            => default;
 
         /// <summary>
         /// REX.W + 0F B7 /r | MOVZX r64, m16 | Move word to quadword, zero-extension.
@@ -101,7 +101,7 @@ namespace Z0.Asm
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public Movzx movzx(r64 dst, m16 src)
-            => Builder.movzx();
+        public static Movzx movzx(r64 dst, m16 src)
+            => default;
     }
 }

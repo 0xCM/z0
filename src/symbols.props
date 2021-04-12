@@ -2,12 +2,6 @@
 
   <PropertyGroup>
     <Share>$(Src)share/z0.share.projitems</Share>
-    <Root>$(Src)root/Z0.root.csproj</Root>
-    <Refs>$(Src)refs/z0.refs.csproj</Refs>
-    <Interop>$(Src)interop/z0.interop.csproj</Interop>
-    <Res>$(Src)res/Z0.res.csproj</Res>
-    <Part>$(Src)part/z0.part.csproj</Part>
-    <Konst>$(Src)konst/z0.konst.csproj</Konst>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -16,7 +10,7 @@
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
     <AsmLang>$(Src)asm.lang/z0.asm.lang.csproj</AsmLang>
     <AsmLangG>$(Src)asm.lang.g/z0.asm.lang.g.csproj</AsmLangG>
-
+    <AsmCases>$(Src)asm.cases/z0.asm.cases.csproj</AsmCases>
     <AsmCore>$(Src)asm.core/z0.asm.core.csproj</AsmCore>
     <Asci>$(Src)asci/z0.asci.csproj</Asci>
 
@@ -43,22 +37,15 @@
     <Core>$(Src)core/z0.core.csproj</Core>
     <Cpu>$(Src)cpu/z0.cpu.csproj</Cpu>
     <CpuDsl>$(Src)cpu.dsl/z0.cpu.dsl.csproj</CpuDsl>
-
-
     <Commands>$(Src)cmdspec/z0.cmdspec.csproj</Commands>
-    <Reactors>$(Src)cmdexec/z0.cmdexec.csproj</Reactors>
 
     <CmdSpec>$(Src)cmdspec/z0.cmdspec.csproj</CmdSpec>
     <CmdExec>$(Src)cmdexec/z0.cmdexec.csproj</CmdExec>
-
-
     <Checks>$(Src)checks/z0.checks.csproj</Checks>
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
     <Digital>$(Src)digital/z0.digital.csproj</Digital>
     <Dynamic>$(Src)dynamic/z0.dynamic.csproj</Dynamic>
-    <Gen>$(Src)gen/lib/z0.gen.lib.csproj</Gen>
-
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
 
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
@@ -69,11 +56,16 @@
     <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
 
+    <Gen>$(Src)gen/lib/z0.gen.lib.csproj</Gen>
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
     <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
 
+    <Interop>$(Src)interop/z0.interop.csproj</Interop>
+
     <Lang>$(Src)lang/z0.lang.csproj</Lang>
     <Logix>$(Src)logix/z0.logix.csproj</Logix>
+
+    <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
     <Math>$(Src)math/z0.math.csproj</Math>
     <MathSvc>$(Src)mathsvc/z0.mathsvc.csproj</MathSvc>
@@ -83,8 +75,13 @@
 
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
 
+    <Part>$(Src)part/z0.part.csproj</Part>
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>
+
+    <Refs>$(Src)refs/z0.refs.csproj</Refs>
+    <Res>$(Src)res/Z0.res.csproj</Res>
+    <Root>$(Src)root/Z0.root.csproj</Root>
 
     <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
     <SpanBlocks>$(Src)spanblocks/z0.spanblocks.csproj</SpanBlocks>
@@ -99,9 +96,10 @@
 
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
-    <Xed>$(Src)xed/z0.xed.csproj</Xed>
+
     <Workflow>$(Src)workflow/z0.workflow.csproj</Workflow>
 
+    <Xed>$(Src)xed/z0.xed.csproj</Xed>
   </PropertyGroup>
 
 </Project>

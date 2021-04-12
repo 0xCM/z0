@@ -47,6 +47,12 @@ namespace Z0
             get => Size == 0;
         }
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Size != 0;
+        }
+
         public override int GetHashCode()
             => (int)alg.hash.combine((ulong)Min, (ulong)Max);
 

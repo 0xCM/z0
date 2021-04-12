@@ -12,10 +12,27 @@ namespace Z0.Asm
     using static gcpu;
     using static MemBlocks;
 
-
     [ApiHost]
     public readonly struct AsmHexCodes
     {
+        public const RexPrefixCode RexW = RexPrefixCode.RexW;
+
+        public const RegDigitCode rd0 = RegDigitCode.rd0;
+
+        public const RegDigitCode rd1 = RegDigitCode.rd1;
+
+        public const RegDigitCode rd2 = RegDigitCode.rd2;
+
+        public const RegDigitCode rd3 = RegDigitCode.rd3;
+
+        public const RegDigitCode rd4 = RegDigitCode.rd4;
+
+        public const RegDigitCode rd5 = RegDigitCode.rd5;
+
+        public const RegDigitCode rd6 = RegDigitCode.rd6;
+
+        public const RegDigitCode rd7 = RegDigitCode.rd7;
+
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0)
         {
@@ -34,6 +51,15 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(RexPrefix a0, Hex8 a1)
+        {
+            var writer = memory.writer(buffer());
+            writer.Write8(a0);
+            writer.Write8(a1);
+            return load(writer);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static AsmHexCode asmhex(RexPrefix a0, Hex8 a1, RegDigit rd)
         {
             var writer = memory.writer(buffer());
             writer.Write8(a0);

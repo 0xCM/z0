@@ -20,8 +20,8 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="r"></param>
         /// <param name="imm8"></param>
-        public And and(al r, Imm8 imm8)
-            => Builder.and(asmhex(x24, imm8));
+        public static And and(al r, Imm8 imm8)
+            => asmhex(x24, imm8);
 
         /// <summary>
         /// (AND r/m8, imm8)[80 /4 ib]
@@ -29,7 +29,7 @@ namespace Z0.Asm
         /// <param name="r"></param>
         /// <param name="imm8"></param>
         [MethodImpl(Inline), Op]
-        public And and(r8b r, Imm8 imm8)
-            => Builder.and(asmhex(x24, imm8));
+        public static And and(r8b r, Imm8 imm8)
+            => asmhex(x24, imm8);
     }
 }

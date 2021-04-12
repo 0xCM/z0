@@ -77,19 +77,31 @@ namespace Z0.Asm
             if(current != 0)
                 Process(batch,counter,input,output);
 
-            using var summary = Db.Doc(Toolsets.cult, FS.Csv).Writer();
-            foreach(var s in Summaries.Emit())
-                summary.WriteLine(string.Format("{0:D8} | {1,-46} | {2,-46}", s.LineNumber, s.Id, s.Content));
+
+            EmitSummary();
 
             return counter;
         }
 
+        void EmitSummary()
+        {
+            var dst = Db.Doc(Toolsets.cult, FS.Csv);
+            var flow = Wf.EmittingTable<CultSummaryRecord>(dst);
+            var formatter = Tables.formatter<CultSummaryRecord>(CultSummaryRecord.RenderWidths);
+            using var summary = Db.Doc(Toolsets.cult, FS.Csv).Writer();
+            summary.WriteLine(formatter.FormatHeader());
+            var summaries = Summaries.Emit();
+            foreach(var s in summaries)
+                summary.WriteLine(formatter.Format(s));
+            Wf.EmittedTable(flow, summaries.Count);
+        }
+
         void Process(uint batch, uint counter, ReadOnlySpan<TextLine> input, Span<CultRecord> output)
         {
-            var processing = Wf.Running(string.Format("Processing batch {0:D2}:{1,-6}", batch, counter));
+            var processing = Wf.Running(ProcessingBatch.Format(batch, counter));
             var parsed = slice(output, 0, Parse(input, output));
             Process(parsed);
-            Wf.Ran(processing, string.Format("Processed batch {0:D2}:{1,-6} ({2}/{3})", batch, counter, parsed.Length, BatchSize));
+            Wf.Ran(processing, ProcessedBatch.Format(batch, counter, parsed.Length, BatchSize));
         }
 
         void Process(ReadOnlySpan<CultRecord> src)
@@ -122,17 +134,35 @@ namespace Z0.Asm
                 return src.Mnemonic.Format(MnemonicCase.Lowercase);
         }
 
+        //   adc r32, i32                            : Lat:   0.66 Rcp:   0.66
+
         static AsmMnemonic monic(string instruction)
             => instruction.LeftOfFirst(Chars.Space);
 
-        static string content(in CultRecord src)
-            => src.Comment.Replace(LatencyMarker, FieldDelimiter).Replace(RcpMarker, FieldDelimiter).Trim();
+        static void metrics(in CultRecord src, out string lat, out string rcp)
+        {
+            var content = src.Comment.Format().RightOfFirst(Chars.Colon).Remove(LatencyMarker).Replace(RcpMarker,"|").SplitClean("|");
+            if(content.Length == 2)
+            {
+                lat = content[0].Trim();
+                rcp = content[1].Trim();
+            }
+            else
+            {
+                lat = EmptyString;
+                rcp = EmptyString;
+            }
+        }
+
+
+        static FS.FileName DetailFile(AsmMnemonic src)
+            => FS.file(string.Format("cult.{0}", src.Format(MnemonicCase.Lowercase)), FS.Asm);
 
         CultSummaryRecord Summarize(in CultRecord record)
         {
             var summary = new CultSummaryRecord();
-            summary.Content = content(record);
-            summary.Instruction = summary.Content.Format().LeftOfFirst(FieldDelimiter);
+            metrics(record, out summary.Lat, out summary.Rcp);
+            summary.Instruction = record.Comment.Format().LeftOfFirst(Chars.Colon).Trim();
             summary.Mnemonic = monic(summary.Instruction);
             summary.LineNumber = record.LineNumber;
             summary.Id = identify(summary);
@@ -140,21 +170,16 @@ namespace Z0.Asm
         }
 
         FS.FilePath DetailPath(AsmMnemonic src)
-        {
-            var mnemonic = src.Format(MnemonicCase.Lowercase);
-            var file = FS.file(string.Format("cult.{0}", mnemonic), FS.Asm);
-            return DetailRoot + file;
-        }
+            => DetailRoot + DetailFile(src);
 
         void EmitDetails(in CultSummaryRecord summary)
         {
             var mnemonic = summary.Mnemonic.Format(MnemonicCase.Lowercase);
-            //var path = DetailRoot + FS.file(mnemonic, FS.Asm);
             var path = DetailPath(summary.Mnemonic);
             using var writer = path.Writer(true);
             writer.WriteLine();
-            writer.WriteLine(comment(summary.Content));
-            writer.WriteLine(comment(RP.PageBreak120));
+            writer.WriteLine(comment(summary.Id));
+            writer.WriteLine(comment(PageBreak));
 
             if(AsmLines.IsNonEmpty)
             {
@@ -181,17 +206,6 @@ namespace Z0.Asm
             return j;
         }
 
-        const byte HexBufferLength = 128;
-
-        const char FieldDelimiter = Chars.Pipe;
-
-        const string SummaryMarker = ": Lat";
-
-        const string LatencyMarker = ": Lat:";
-
-        const string RcpMarker = "Rcp:";
-
-        string[] NonLabels = array("In", " ", "VendorName", "ModelId", "FamilyId", "SteppingId", "Codename", "CpuDetect");
 
         public Outcome Parse(TextLine src, out CultRecord dst)
         {
@@ -233,21 +247,16 @@ namespace Z0.Asm
 
         Outcome ParseStatement(TextLine src, ReadOnlySpan<string> parts, out CultRecord dst)
         {
-            var statement = skip(parts,0);
+            var statement = skip(parts,0).Remove(RexRemove);
             var comment = skip(parts,1);
-            var bitstring = "----";
+            var bitstring = "<error>";
             var formatted = FormatBytes(comment, out var count);
             if(HexByteParser.ParseData(formatted, out var parsed))
                 bitstring = AsmBits.Format(AsmBytes.hexcode(parsed));
 
             if(count != 0)
-                comment = string.Format("{0,-20} | {1,-6} | [{2} | {3}]", comment, count, formatted, bitstring);
+                comment = string.Format(StatementCommentPattern, comment, count, formatted, bitstring);
 
-            if(statement.StartsWith("rex "))
-            {
-                statement = statement.Remove("rex ");
-                comment = string.Format("{0} | {1}", comment, "rex");
-            }
             dst.LineNumber = src.LineNumber;
             dst.Statement = statement;
             dst.Comment = comment;
@@ -265,7 +274,6 @@ namespace Z0.Asm
             dst.RecordKind = CultRecordKind.Summary;
             return true;
         }
-
 
         string FormatBytes(ReadOnlySpan<char> src, out uint size)
             => NormalizeBytes(src, out size).ToString();
@@ -312,5 +320,25 @@ namespace Z0.Asm
                 return slice(chars,0,len);
             }
         }
+
+        string[] NonLabels = array("In", " ", "VendorName", "ModelId", "FamilyId", "SteppingId", "Codename", "CpuDetect");
+
+        const byte HexBufferLength = 128;
+
+        const string SummaryMarker = ": Lat";
+
+        const string LatencyMarker = "Lat:";
+
+        const string RcpMarker = "Rcp:";
+
+        const string RexRemove = "rex ";
+
+        const string PageBreak = RP.PageBreak160;
+
+        const string StatementCommentPattern = "{0,-20} | {1,-6} | [{2} <-> {3}]";
+
+        static MsgPattern<Count,Count> ProcessingBatch => "Processing batch {0:D2}:{1,-6}";
+
+        static MsgPattern<Count,Count,Count,Count> ProcessedBatch => "Processed batch {0:D2}:{1,-6} ({2}/{3})";
     }
 }
