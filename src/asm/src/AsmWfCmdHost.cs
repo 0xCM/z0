@@ -14,28 +14,28 @@ namespace Z0.Asm
     {
         ApiServices ApiServices;
 
-        AsmCatalogEtl Catalog;
+        StanfordAsmCatalog Catalog;
 
         protected override void OnInit()
         {
-            Catalog = Wf.AsmCatalogEtl();
+            Catalog = Wf.StanfordCatalog();
             ApiServices = Wf.ApiServices();
         }
 
         [Action(K.EmitResBytes)]
-        void EmitResBytes()
+        public void EmitResBytes()
             => Wf.ResBytesEmitter().Emit();
 
         [Action(K.EmitApiClasses)]
-        void EmitApiClasses()
+        public void EmitApiClasses()
             => Wf.Symbolism().EmitApiClasses();
 
         [Action(K.EmitSymbolicLiterals)]
-        void EmitSymbolicLiterals()
+        public void EmitSymbolicLiterals()
             => Wf.Symbolism().Emit();
 
-        [Action(K.ShowFormCatalog)]
-        void ShowFormCatalog()
+        [Action(K.ShowStandfordForms)]
+        public void ShowStanfordForms()
         {
             using var writer = OpenShowLog("asm.forms");
             var forms = Catalog.KnownFormExpressions();
@@ -45,16 +45,15 @@ namespace Z0.Asm
         }
 
         [Action(K.ShowEncodingKindNames)]
-        void ShowEncodingKindNames()
+        public void ShowEncodingKindNames()
             => root.iter(Catalog.EncodingKindNames(), Wf.Row);
 
         [Action(K.ExportStokeImports)]
-        void ExportStokeImports()
+        public void ExportStokeImports()
             => Catalog.ExportImport();
 
-
         [Action(K.EmitImmSpecializations)]
-        void EmitImmSpecializations()
+        public void EmitImmSpecializations()
             => Wf.ImmEmitter().Emit();
 
         [Action(K.CheckDigitParser)]
@@ -78,10 +77,6 @@ namespace Z0.Asm
         {
             var catalogs = Wf.Api.PartCatalogs();
             var blocks = ApiServices.Correlate(catalogs);
-            // var flow = Wf.Running("Evaluator");
-            // var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
-            // evaluate.Execute(Wf.Api.PartIdentities);
-            // Wf.Ran(flow);
         }
 
     }

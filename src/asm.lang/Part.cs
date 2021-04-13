@@ -5,25 +5,21 @@
 [assembly: PartId(PartId.AsmLang)]
 namespace Z0.Parts
 {
-    public sealed class AsmLang : Part<AsmLang>
+    public sealed partial class AsmLang : Part<AsmLang>
     {
-        public static PartAssets Assets => new PartAssets();
+        public static PartAssets Assets = new PartAssets();
 
+        public static IAssets AssetSet
+            => Assets;
+
+        public AsmLang()
+        {
+        }
 
         public sealed class PartAssets : Assets<PartAssets>
         {
-            public ResDescriptor AsmCatalog() => Asset("AsmCatalog.csv");
-
-            public ResDescriptor AsmMnemonicInfo() => Asset("AsmMnemonicInfo.csv");
-
-            public ResDescriptor InstrinsicXml() => Asset("intel-intrinsics.xml");
-
-            public ResDescriptor AsmDbInstructions() => Asset("asmdb.instructions.csv");
-
-            public ResDescriptor AsmDbOperands() => Asset("asmdb.operands.csv");
 
 
-            public ResDescriptor NasmInstructions() => Asset("nasm-instructions.txt");
         }
     }
 }

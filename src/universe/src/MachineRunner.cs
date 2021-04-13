@@ -54,17 +54,17 @@ namespace Z0
 
                 if(options.EmitAsmCatalogs)
                 {
-                    var etl = Wf.AsmCatalogEtl();
+                    var etl = Wf.StanfordCatalog();
                     Emitted(etl.ImportSource());
                     Emitted(etl.ExportImport());
 
-                    var xed = Wf.Xed();
+                    var xed = Wf.XedCatalog();
                     xed.EmitForms();
                     xed.EmitClasses();
                 }
 
                 if(options.EmitIntrinsicsInfo)
-                    Emitted(Wf.IntelCpuIntrinsics().Emit());
+                    Emitted(Wf.IntrinsicsCatalog().Emit());
 
                 if(options.EmitSymbolicLiterals)
                     Emitted(Wf.Symbolism().Emit());

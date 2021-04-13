@@ -23,7 +23,7 @@ namespace Z0.Asm
         public MemoryAddress TargetOffset;
 
         [MethodImpl(Inline)]
-        public AsmBranchInfo(MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
+        public AsmBranchInfo(MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, MemoryAddress offset)
         {
             Base = @base;
             Source = src;

@@ -27,6 +27,10 @@ namespace Z0.Asm
 
         IHexParser<byte> HexParser;
 
+        FS.FolderPath CatalogRoot;
+
+        ToolId Tool;
+
         public CultProcessor()
         {
             Summaries = new();
@@ -34,7 +38,17 @@ namespace Z0.Asm
             HexCharBuffer = sys.alloc<char>(HexBufferLength);
             AsmBits = AsmBitstrings.service();
             HexParser = HexParsers.bytes();
+            Tool = Toolsets.cult;
         }
+
+        protected override void OnInit()
+        {
+            CatalogRoot = Db.CatalogDir("asm") + FS.folder(Tool.Format());
+            DetailRoot = CatalogRoot + FS.folder("details");
+        }
+
+        FS.FilePath SummaryPath
+            => CatalogRoot + FS.file(Tool.Format() + ".summary", FS.Csv);
 
         public uint Process(FS.FilePath src)
         {
@@ -44,7 +58,6 @@ namespace Z0.Asm
                 return 0;
             }
 
-            DetailRoot = Db.DocDir(Toolsets.cult);
             DetailRoot.Clear();
             Summaries.Clear();
             AsmLines.Clear();
@@ -83,12 +96,26 @@ namespace Z0.Asm
             return counter;
         }
 
+        uint Parse(ReadOnlySpan<TextLine> src, Span<CultRecord> dst)
+        {
+            var count = src.Length;
+            var j=0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var input = ref skip(src,i);
+                if(Parse(input, out var record))
+                    seek(dst, j++) = record;
+            }
+            return j;
+        }
+
+
         void EmitSummary()
         {
-            var dst = Db.Doc(Toolsets.cult, FS.Csv);
+            var dst = SummaryPath;
             var flow = Wf.EmittingTable<CultSummaryRecord>(dst);
             var formatter = Tables.formatter<CultSummaryRecord>(CultSummaryRecord.RenderWidths);
-            using var summary = Db.Doc(Toolsets.cult, FS.Csv).Writer();
+            using var summary = dst.Writer();
             summary.WriteLine(formatter.FormatHeader());
             var summaries = Summaries.Emit();
             foreach(var s in summaries)
@@ -124,90 +151,7 @@ namespace Z0.Asm
             }
         }
 
-        static Identifier identify(in CultSummaryRecord src)
-        {
-            var individuals = AsmCore.operands(src.Instruction);
-            var joined = individuals.Length != 0 ? individuals.Join(Chars.Underscore) : EmptyString;
-            if(text.nonempty(joined))
-                return string.Format("{0}_{1}", src.Mnemonic, joined);
-            else
-                return src.Mnemonic.Format(MnemonicCase.Lowercase);
-        }
-
-        //   adc r32, i32                            : Lat:   0.66 Rcp:   0.66
-
-        static AsmMnemonic monic(string instruction)
-            => instruction.LeftOfFirst(Chars.Space);
-
-        static void metrics(in CultRecord src, out string lat, out string rcp)
-        {
-            var content = src.Comment.Format().RightOfFirst(Chars.Colon).Remove(LatencyMarker).Replace(RcpMarker,"|").SplitClean("|");
-            if(content.Length == 2)
-            {
-                lat = content[0].Trim();
-                rcp = content[1].Trim();
-            }
-            else
-            {
-                lat = EmptyString;
-                rcp = EmptyString;
-            }
-        }
-
-
-        static FS.FileName DetailFile(AsmMnemonic src)
-            => FS.file(string.Format("cult.{0}", src.Format(MnemonicCase.Lowercase)), FS.Asm);
-
-        CultSummaryRecord Summarize(in CultRecord record)
-        {
-            var summary = new CultSummaryRecord();
-            metrics(record, out summary.Lat, out summary.Rcp);
-            summary.Instruction = record.Comment.Format().LeftOfFirst(Chars.Colon).Trim();
-            summary.Mnemonic = monic(summary.Instruction);
-            summary.LineNumber = record.LineNumber;
-            summary.Id = identify(summary);
-            return summary;
-        }
-
-        FS.FilePath DetailPath(AsmMnemonic src)
-            => DetailRoot + DetailFile(src);
-
-        void EmitDetails(in CultSummaryRecord summary)
-        {
-            var mnemonic = summary.Mnemonic.Format(MnemonicCase.Lowercase);
-            var path = DetailPath(summary.Mnemonic);
-            using var writer = path.Writer(true);
-            writer.WriteLine();
-            writer.WriteLine(comment(summary.Id));
-            writer.WriteLine(comment(PageBreak));
-
-            if(AsmLines.IsNonEmpty)
-            {
-                foreach(var line in AsmLines)
-                {
-                    var lf = line.Format();
-                    if(lf.StartsWith(summary.Mnemonic.Format(MnemonicCase.Lowercase) + Chars.Space))
-                        writer.WriteLine(lf);
-                }
-                AsmLines.Clear();
-            }
-        }
-
-        public uint Parse(ReadOnlySpan<TextLine> src, Span<CultRecord> dst)
-        {
-            var count = src.Length;
-            var j=0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var input = ref skip(src,i);
-                if(Parse(input, out var record))
-                    seek(dst, j++) = record;
-            }
-            return j;
-        }
-
-
-        public Outcome Parse(TextLine src, out CultRecord dst)
+        Outcome Parse(TextLine src, out CultRecord dst)
         {
             var content = src.Content ?? EmptyString;
             var parts = @readonly(content.Split(Chars.Semicolon));
@@ -233,6 +177,17 @@ namespace Z0.Asm
 
             dst = CultRecord.Empty;
             return false;
+        }
+
+        CultSummaryRecord Summarize(in CultRecord record)
+        {
+            var summary = new CultSummaryRecord();
+            metrics(record, out summary.Lat, out summary.Rcp);
+            summary.Instruction = record.Comment.Format().LeftOfFirst(Chars.Colon).Trim();
+            summary.Mnemonic = monic(summary.Instruction);
+            summary.LineNumber = record.LineNumber;
+            summary.Id = identify(summary);
+            return summary;
         }
 
         Outcome ParseLabel(TextLine src, string name, out CultRecord dst)
@@ -318,6 +273,63 @@ namespace Z0.Asm
             {
                 var len = skip(chars,j-1) == Chars.Space ? j - 1 : j;
                 return slice(chars,0,len);
+            }
+        }
+
+        FS.FilePath DetailPath(AsmMnemonic src)
+            => DetailRoot + DetailFile(src);
+
+        void EmitDetails(in CultSummaryRecord summary)
+        {
+            var mnemonic = summary.Mnemonic.Format(MnemonicCase.Lowercase);
+            var path = DetailPath(summary.Mnemonic);
+            using var writer = path.Writer(true);
+            writer.WriteLine();
+            writer.WriteLine(comment(summary.Id));
+            writer.WriteLine(comment(PageBreak));
+
+            if(AsmLines.IsNonEmpty)
+            {
+                foreach(var line in AsmLines)
+                {
+                    var lf = line.Format();
+                    if(lf.StartsWith(summary.Mnemonic.Format(MnemonicCase.Lowercase) + Chars.Space))
+                        writer.WriteLine(lf);
+                }
+                AsmLines.Clear();
+            }
+        }
+
+        static FS.FileName DetailFile(AsmMnemonic src)
+            => FS.file(string.Format("cult.{0}", src.Format(MnemonicCase.Lowercase)), FS.Asm);
+
+        static Identifier identify(in CultSummaryRecord src)
+        {
+            var individuals = AsmCore.operands(src.Instruction);
+            var joined = individuals.Length != 0 ? individuals.Join(Chars.Underscore) : EmptyString;
+            if(text.nonempty(joined))
+                return string.Format("{0}_{1}", src.Mnemonic, joined);
+            else
+                return src.Mnemonic.Format(MnemonicCase.Lowercase);
+        }
+
+        //   adc r32, i32                            : Lat:   0.66 Rcp:   0.66
+
+        static AsmMnemonic monic(string instruction)
+            => instruction.LeftOfFirst(Chars.Space);
+
+        static void metrics(in CultRecord src, out string lat, out string rcp)
+        {
+            var content = src.Comment.Format().RightOfFirst(Chars.Colon).Remove(LatencyMarker).Replace(RcpMarker,"|").SplitClean("|");
+            if(content.Length == 2)
+            {
+                lat = content[0].Trim();
+                rcp = content[1].Trim();
+            }
+            else
+            {
+                lat = EmptyString;
+                rcp = EmptyString;
             }
         }
 

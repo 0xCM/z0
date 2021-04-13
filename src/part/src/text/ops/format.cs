@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text.Encodings;
+    using System.Text;
 
     using static Part;
     using static TextRules;

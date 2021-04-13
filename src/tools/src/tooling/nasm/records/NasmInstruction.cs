@@ -19,6 +19,5 @@ namespace Z0.Tooling
         public TextBlock Encoding;
 
         public TextBlock Flags;
-
     }
 }

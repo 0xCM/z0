@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static memory;
     using static XedModels;
 
-    public sealed class XedServices : WfService<XedServices>
+    public sealed class XedCatalog : WfService<XedCatalog>
     {
         const char CommentMarker = Chars.Hash;
 
@@ -112,14 +112,14 @@ namespace Z0.Asm
         {
             var symbols = SymCache<IClass>.get().Index;
             var entries = symbols.View;
-            var dst = Db.AsmCatalogPath(FS.file("xed-classes", FS.Csv));
+            var dst = Db.AsmCatalogPath("xed", FS.file("xed-classes", FS.Csv));
             EmitSymbols(entries, dst);
             return symbols;
         }
 
         public Index<XedForm> EmitForms()
         {
-            var dst = Db.AsmCatalogPath(FS.file("xed-forms", FS.Csv));
+            var dst = Db.AsmCatalogPath("xed", FS.file("xed-forms", FS.Csv));
             return EmitForms(dst);
         }
 
@@ -137,9 +137,19 @@ namespace Z0.Asm
             return records;
         }
 
+        public void EmitSources()
+        {
+            var dst = Db.DataSource(FS.file("xed-idata", FS.Txt));
+            var flow = Wf.EmittingFile(dst);
+            var data = Parts.AsmCore.Assets.XedInstructionData().Utf8();
+            dst.Overwrite(data);
+            Wf.EmittedFile(flow, data.Length);
+        }
+
         public Index<XedFormSource> LoadFormSources()
         {
             var src = Db.DataSource(FS.file("xed-idata", FS.Txt));
+
             var flow = Wf.Running($"Importing {src.ToUri()}");
             using var reader = src.Reader();
             var counter = 0u;
@@ -149,7 +159,11 @@ namespace Z0.Asm
             while(!reader.EndOfStream)
             {
                 var line = reader.ReadTextLine(counter);
+
                 if(line.StartsWith(CommentMarker))
+                    continue;
+
+                if(line.IsEmpty)
                     continue;
 
                 if(counter==0)

@@ -12,14 +12,6 @@ namespace Z0.Asm
 
     public sealed class AsmEtl : WfService<AsmEtl>
     {
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AsmRowSet<T> rowset<T>(T key, AsmRow[] src)
-            => new AsmRowSet<T>(key,src);
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AsmRowSets<T> rowsets<T>(AsmRowSet<T>[] src)
-            => new AsmRowSets<T>(src);
-
         public uint Emit(AsmRowSet<AsmMnemonic> src)
         {
             var count = src.Count;
@@ -52,7 +44,7 @@ namespace Z0.Asm
         public static Index<ApiInstruction> ToApiInstructions(ApiCodeBlock code, IceInstruction[] src)
         {
             var @base = code.BaseAddress;
-            var offseq = AsmOffsetSequence.Zero;
+            var offseq = AsmOffsetSeq.Zero;
             var count = src.Length;
             var buffer = alloc<ApiInstruction>(count);
             ref var dst = ref first(buffer);

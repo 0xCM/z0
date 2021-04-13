@@ -26,7 +26,8 @@ namespace Z0.Asm
 
         public Index<AsmFormExpr> LoadFormExpressions()
         {
-            Wf.AsmEtlCmd().Run(AsmEtlCmdKind.EmitFormCatalog);
+            var catalog = Wf.StanfordCatalog();
+            catalog.Emit(catalog.KnownFormExpressions());
 
             var pipe = AsmFormPipe.create(Wf);
             var src = Db.AsmCatalogTable<AsmFormRecord>();

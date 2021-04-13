@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl>
+    public sealed class StanfordAsmCatalog : WfService<StanfordAsmCatalog>
     {
         readonly TextDocFormat SourceFormat;
 
@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         const char AsmCatDelimiter = Chars.Tab;
 
-        public AsmCatalogEtl()
+        public StanfordAsmCatalog()
         {
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
@@ -30,29 +30,6 @@ namespace Z0.Asm
         public uint ImportRowCount {get; private set;}
 
         public AsmSigSymbols CatalogSymbols {get;}
-
-        public Index<AsmMnemonicInfo> MnemonicInfo()
-        {
-            var descriptor = Parts.AsmLang.Assets.AsmMnemonicInfo();
-            if(Resources.document(descriptor, TextDocFormat.Structured(), out var doc))
-            {
-                var buffer = alloc<AsmMnemonicInfo>(doc.RowCount);
-                doc.Parse(buffer, row => new AsmMnemonicInfo(row[0].Text, row[1].Text));
-                return buffer;
-            }
-            else
-                throw new Exception();
-        }
-
-        public Index<AsmMnemonicInfo> EmitMnemonicInfo()
-        {
-            var src = MnemonicInfo();
-            var dst = Db.AsmCatalogTable<AsmMnemonicInfo>();
-            var flow = Wf.EmittingTable<AsmMnemonicInfo>(dst);
-            var count = Tables.emit(src,dst);
-            Wf.EmittedTable(flow,count);
-            return src;
-        }
 
         public Index<StokeAsmExportRow> ExportImport()
         {
@@ -181,7 +158,7 @@ namespace Z0.Asm
 
         ReadOnlySpan<StokeAsmImportRow> ImportStokeRows()
         {
-            var descriptor = Parts.AsmLang.Assets.AsmCatalog();
+            var descriptor = Parts.AsmCore.Assets.StanfordAsmCatalog();
             var content = Resources.utf8(descriptor);
             ByteSize sz = content.Length*2;
             Wf.Status($"Loaded source catalog data of size {sz} bytes");

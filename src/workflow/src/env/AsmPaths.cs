@@ -44,13 +44,13 @@ namespace Z0
             => LegalFileName(id, FS.Asm);
 
         FS.FolderPath AsmCatalogRoot()
-            => TableRoot() + FS.folder(asmcat);
+            => CatalogRoot() + FS.folder(asm);
 
         FS.FilePath AsmCatalogTable<T>()
             where T : struct, IRecord<T>
                 => AsmCatalogRoot() + FS.file(TableId<T>(), FS.Csv);
 
-        FS.FilePath AsmCatalogPath(FS.FileName name)
-            => AsmCatalogRoot() + name;
+        FS.FilePath AsmCatalogPath<T>(T subject, FS.FileName name)
+            => AsmCatalogRoot() + FS.folder(subject.ToString()) + name;
     }
 }

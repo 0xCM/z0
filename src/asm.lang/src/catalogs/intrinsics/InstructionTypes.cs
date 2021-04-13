@@ -2,17 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
-    using System.Reflection;
+    using System.Collections.Generic;
 
-    public interface IAssets
+    partial class IntrinsicsCatalog
     {
-        Assembly DataSource {get;}
+        public class InstructionTypes : List<InstructionType>
+        {
 
-        ResDescriptors All();
-
-        ResDescriptor Asset(ResourceName id);
+        }
     }
 }

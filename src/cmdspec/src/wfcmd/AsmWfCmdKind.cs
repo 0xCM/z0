@@ -20,7 +20,7 @@ namespace Z0.Asm
         EmitSymbolicLiterals,
 
         [Alias("show-forms")]
-        ShowFormCatalog,
+        ShowStandfordForms,
 
         ShowEncodingKindNames,
 

@@ -14,6 +14,16 @@ namespace Z0
     /// </summary>
     public readonly struct ResDescriptor : IDataTypeComparable<ResDescriptor>, IAddressable
     {
+        /// <summary>
+        /// Defines a <see cref='ResDescriptor'/>
+        /// </summary>
+        /// <param name="name">The resource name</param>
+        /// <param name="address">The memory location at which the resource content begins</param>
+        /// <param name="size">The size of the resource, in bytes</param>
+        [MethodImpl(Inline), Op]
+        public static ResDescriptor define(Name name, MemoryAddress address, ByteSize size)
+            => new ResDescriptor(name, address, size);
+
         public Name Name {get;}
 
         public MemoryAddress Address {get;}

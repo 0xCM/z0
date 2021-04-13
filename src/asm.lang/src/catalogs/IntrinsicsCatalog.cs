@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Xml;
     using System.IO;
 
@@ -13,19 +12,25 @@ namespace Z0.Asm
     using static memory;
     using static XedModels;
 
-    public partial class IntelIntrinsics : WfService<IntelIntrinsics>
+    public partial class IntrinsicsCatalog : WfService<IntrinsicsCatalog>
     {
-        const string DocName = "intel-intrinsics";
+        const string DocName = "intrinsics";
 
         public Index<Intrinsic> Emit()
-            => Emit(Db.DocRoot());
+            => Emit(Db.CatalogDir("asm") + FS.folder("intrinsics"));
+
+        static FS.FolderName AlgFolder
+            => FS.folder("algorithms");
+
+        FS.FolderPath AlgDir(FS.FolderPath root)
+            => root + AlgFolder;
 
         public Index<Intrinsic> Emit(FS.FolderPath dst)
         {
             var refpath = dst + FS.file(DocName, FS.Xml);
-            var src = IntelIntrinsics.doc();
+            var src = IntrinsicsCatalog.doc();
             refpath.Overwrite(src.Content);
-            var intrinsics = Wf.IntelCpuIntrinsics();
+            var intrinsics = Wf.IntrinsicsCatalog();
             var parsed = intrinsics.Parse(src);
             var elements = parsed.View;
             var count = elements.Length;
@@ -36,7 +41,7 @@ namespace Z0.Asm
                 writer.WriteLine(skip(elements,i).Format());
             Wf.EmittedFile(flow, count);
 
-            var algodir = dst + FS.folder(string.Format("{0}.{1}", DocName, FS.Alg.Name));
+            var algodir = AlgDir(dst);
             algodir.Clear();
 
             EmitSummary(parsed, dst + FS.file(DocName, FS.Csv));
@@ -103,7 +108,6 @@ namespace Z0.Asm
             Wf.EmittedFile(flow, count);
         }
 
-
         static bool instruction(Intrinsic src, out Instruction dst)
         {
             var instructions = src.instructions;
@@ -140,7 +144,7 @@ namespace Z0.Asm
         }
 
         public static XmlDoc doc()
-            => text.xml(Resources.utf8(Parts.AsmLang.Assets.InstrinsicXml()));
+            => text.xml(Resources.utf8(Parts.AsmCore.Assets.InstrinsicXml()));
 
         public Index<Intrinsic> Parse()
             => Parse(doc());

@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Specifies the asm routine determined by an api member

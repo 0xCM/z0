@@ -75,7 +75,7 @@ namespace Z0
             dst.CorrelateMembers = true;
             dst.EmitAsmBitstrings = true;
             dst.EmitAssetIndex = true;
-            dst.EmitAssetContent = true;
+            dst.EmitAssetContent = false;
             dst.EmitSymbolicLiterals = true;
             dst.EmitApiBitMasks = true;
             dst.EmitHexIndex = true;

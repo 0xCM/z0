@@ -9,18 +9,24 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial class IntelIntrinsics
+    partial class IntrinsicsCatalog
     {
-        public struct Header : ITextual
+        public struct Category : ITextual
         {
-            public const string ElementName = "header";
+            public const string ElementName = "category";
 
             public string Content;
 
             [MethodImpl(Inline)]
-            public Header(string src)
+            public Category(string src)
             {
                 Content = src;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => text.nonempty(Content);
             }
 
             public string Format()
@@ -30,8 +36,8 @@ namespace Z0.Asm
                 => Content;
 
             [MethodImpl(Inline)]
-            public static implicit operator Header(string src)
-                => new Header(src);
+            public static implicit operator Category(string src)
+                => new Category(src);
         }
     }
 }

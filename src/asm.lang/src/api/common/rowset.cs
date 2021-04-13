@@ -6,14 +6,15 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
+    using static memory;
 
-    partial class IntelIntrinsics
+    partial struct asm
     {
-        public class Instructions : List<Instruction>
-        {
-        }
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static AsmRowSet<T> rowset<T>(T key, AsmRow[] src)
+            => new AsmRowSet<T>(key,src);
+
     }
 }

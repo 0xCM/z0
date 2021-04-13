@@ -23,18 +23,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ResDescriptors descriptors(Assembly src)
-            => new ResDescriptors(src, collect(src));
-
-        [MethodImpl(Inline), Op]
         public static ResDescriptors descriptors(Assembly src, utf8 match)
             => new ResDescriptors(src, collect(src, match));
+
+        [MethodImpl(Inline), Op]
+        public static ResDescriptors descriptors(Assembly src)
+            => ResDescriptors.from(src);
 
         [Op]
         static unsafe Index<ResDescriptor> collect(Assembly src, utf8? match = null)
         {
             root.require(src != null, () => "Argument NULL");
-            var resnames = Resources.names(src, match);
+            var resnames = @readonly(Resources.names(src, match));
             var count = resnames.Length;
             if(count == 0)
                 return sys.empty<ResDescriptor>();

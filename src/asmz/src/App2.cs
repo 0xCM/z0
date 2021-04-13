@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            Catalog = AsmCatalogEtl.create(Wf);
+            Catalog = StanfordAsmCatalog.create(Wf);
 
             ApiServices = Wf.ApiServices();
             Forms = root.hashset<AsmFormExpr>();
@@ -36,7 +36,7 @@ namespace Z0.Asm
 
         AsmSigs Sigs;
 
-        AsmCatalogEtl Catalog;
+        StanfordAsmCatalog Catalog;
 
         ApiServices ApiServices;
 
@@ -49,11 +49,6 @@ namespace Z0.Asm
         public void GenerateInstructionModelPreview()
         {
             Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
-        }
-
-        void EmitMnemonicInfo()
-        {
-            Wf.AsmCatalogEtl().EmitMnemonicInfo();
         }
 
         void ShowSigSymbols()
@@ -766,7 +761,7 @@ namespace Z0.Asm
 
         void ShowXedInstructions()
         {
-            var pipe = Wf.Xed();
+            var pipe = Wf.XedCatalog();
             var records = pipe.LoadFormSources().View;
             var count = records.Length;
             if(count !=0 )
@@ -784,7 +779,7 @@ namespace Z0.Asm
 
         void ShowXedForms()
         {
-            var pipe = Wf.Xed();
+            var pipe = Wf.XedCatalog();
             var forms = pipe.LoadForms();
             using var log = ShowLog("xed-forms", FS.Extensions.Csv);
             log.Show(XedModels.XedForm.Header);
@@ -865,7 +860,7 @@ namespace Z0.Asm
 
         public void EmitXedCatalog()
         {
-            var xed = Wf.Xed();
+            var xed = Wf.XedCatalog();
             xed.EmitForms();
             xed.EmitClasses();
         }
@@ -1000,13 +995,54 @@ namespace Z0.Asm
             var @case = tool.DefineCase(id, dir);
             return tool.CreateScript(@case, dst);
         }
+
+
+        void CheckHeap()
+        {
+            const string segments = "A" + "BB" + "CCC" + "DDDD";
+            var entries = array<uint>(0,   1,    3,     6);
+            var heap = Heaps.cover(text.span(segments), entries);
+            for(var i=0u; i<entries.Length; i++)
+            {
+                var seg = text.format(heap.Segment(i));
+                Wf.Row(seg);
+
+            }
+        }
+
+        void CheckAssets()
+        {
+            var assets = Parts.AsmLang.AssetSet;
+            foreach(var descriptor in assets.Descriptors)
+            {
+                Wf.Row(descriptor.Format());
+            }
+        }
+
+        void EmitCpuIntrinsics()
+        {
+            Wf.IntrinsicsCatalog().Emit();
+        }
+
+        void EmitXedSources()
+        {
+            Wf.XedCatalog().EmitSources();
+        }
+
+
+        void EmitNasmInstructions()
+        {
+            Wf.NasmTool().EmitInstructionCatalog();
+        }
+
         public void Run()
         {
             //AsmExprCases.create(Wf).Create();
 
             //var script = CreateXedCase(AsmOc.mov_r64_imm64);
 
-
+            EmitXedSources();
+            EmitXedCatalog();
             // var tool = Wf.NasmTool();
             // tool.EmitInstructionAssets();
 
@@ -1014,12 +1050,12 @@ namespace Z0.Asm
             // ShowRecords(inxs.View);
 
             //ProccessCultFiles();
-            //Wf.IntelCpuIntrinsics().Emit();
             //Wf.AsmDb().ShowSourceDocs();
             // var cases = AsmExprCases.create(Wf);
             // cases.Run(AsmSigKind.and_r8_r8);
+            //ProccessCultFiles();
 
-            CaptureSelectedRoutines();
+            //CaptureSelectedRoutines();
             //Wf.AsmCodeGenerator().GenerateModelsInPlace();
             //cases.Run(AsmSigKind.mov_r64_imm64);
 

@@ -10,4 +10,8 @@
       <ProjectReference Include="$(BitMasks)" />
   </ItemGroup>
 
+   <ItemGroup>
+    <EmbeddedResource Include="assets/**/*.*" />
+   </ItemGroup>
+
 </Project>

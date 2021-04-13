@@ -3,10 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 [assembly: PartId(PartId.AsmCore)]
-
 namespace Z0.Parts
 {
-    public sealed class AsmCore : Part<AsmCore>
+    public sealed partial class AsmCore : Part<AsmCore>
     {
 
     }

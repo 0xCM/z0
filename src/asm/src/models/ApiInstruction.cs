@@ -8,12 +8,24 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Describes an instruction within the context of the defining api member
     /// </summary>
     public readonly struct ApiInstruction
     {
+        public static LocalOffsetVector offsets(Index<ApiInstruction> src)
+        {
+            var offsets = src.View;
+            var count = src.Length;
+            var buffer = alloc<Address16>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = (Address16)skip(offsets,i).Offset;
+            return buffer;
+        }
+
         /// <summary>
         /// Filters a set of instructions predicated on s specified mnemonic
         /// </summary>

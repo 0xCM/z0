@@ -12,10 +12,14 @@ namespace Z0
 
     partial struct Resources
     {
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<string> names(Assembly src, utf8? match = null)
+        [Op]
+        public static string[] names(Assembly src, utf8? match)
             => match != null && match.Value.IsNonEmpty
             ? src.ManifestResourceNames().Where(n => n.Contains(match.Value))
             : src.ManifestResourceNames();
+
+        [MethodImpl(Inline), Op]
+        public static string[] names(Assembly src)
+            => src.GetManifestResourceNames();
     }
 }

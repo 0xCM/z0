@@ -9,24 +9,18 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial class IntelIntrinsics
+    partial class IntrinsicsCatalog
     {
-        public struct Category : ITextual
+        public struct Description : ITextual
         {
-            public const string ElementName = "category";
+            public const string ElementName = "description";
 
             public string Content;
 
             [MethodImpl(Inline)]
-            public Category(string src)
+            public Description(string src)
             {
-                Content = src;
-            }
-
-            public bool IsNonEmpty
-            {
-                [MethodImpl(Inline)]
-                get => text.nonempty(Content);
+                Content = src.Replace("\r\n", " ");
             }
 
             public string Format()
@@ -36,8 +30,8 @@ namespace Z0.Asm
                 => Content;
 
             [MethodImpl(Inline)]
-            public static implicit operator Category(string src)
-                => new Category(src);
+            public static implicit operator Description(string src)
+                => new Description(src);
         }
     }
 }

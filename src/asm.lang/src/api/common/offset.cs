@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <param name="size">The size, in bytes, of the call/branch/jmp instruction</param>
         /// <param name="dst">The call/branch/jmp target</param>
         [MethodImpl(Inline), Op]
-        public static uint offset(MemoryAddress src, byte fxSize, MemoryAddress dst)
-            => (uint)(dst - (src + fxSize));
+        public static MemoryAddress offset(MemoryAddress src, byte fxSize, MemoryAddress dst)
+            => (MemoryAddress)(dst - (src + fxSize));
     }
 }

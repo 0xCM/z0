@@ -12,11 +12,11 @@ namespace Z0.Asm
 
     using IF = AsmDbSourceDocs.InstructionField;
 
-    public class AsmDb : WfService<AsmDb>
+    public class AsmDbCatalog : WfService<AsmDbCatalog>
     {
         public AsmDbSourceDocs SourceDocs()
         {
-            var assets = Parts.AsmLang.Assets;
+            var assets = Parts.AsmCore.Assets;
             if(Resources.document(assets.AsmDbInstructions(), TextDocFormat.Structured(), out var instructions)
             && (Resources.document(assets.AsmDbOperands(), TextDocFormat.Structured(), out var operands)))
                 return new AsmDbSourceDocs(instructions,operands);
@@ -26,7 +26,7 @@ namespace Z0.Asm
 
         public void ShowSourceDocs()
         {
-            var asmdb = Wf.AsmDb();
+            var asmdb = Wf.AsmDbCatalog();
             var docs = asmdb.SourceDocs();
             if(docs.IsNonEmpty)
             {
@@ -72,6 +72,7 @@ namespace Z0.Asm
 
         static bool SupportsX64(string src)
             => src == "ANY" || src == "X64";
+
         static string ConformSig(string src)
         {
             return src.Replace("/ub", EmptyString);

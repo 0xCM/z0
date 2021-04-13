@@ -20,9 +20,6 @@ namespace Z0
 
         public Assembly Owner {get;}
 
-        protected static PartId[] parts(params PartId[] src)
-            => src;
-
         /// <summary>
         /// The resolved part
         /// </summary>

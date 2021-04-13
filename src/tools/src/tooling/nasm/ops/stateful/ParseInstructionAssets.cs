@@ -12,27 +12,9 @@ namespace Z0.Tooling
 
     partial class Nasm
     {
-        public Index<NasmInstruction> EmitInstructionAssets(FS.FilePath dst)
-        {
-            var src = ParseInstuctionAssets();
-            var count = src.Length;
-            if(count != 0)
-            {
-                var flow = Wf.EmittingTable<NasmInstruction>(dst);
-                var emitted = Tables.emit(src.View, dst);
-                Wf.EmittedTable(flow, emitted);
-                return src;
-            }
-            else
-                return Index<NasmInstruction>.Empty;
-        }
-
-        public Index<NasmInstruction> EmitInstructionAssets()
-            => EmitInstructionAssets(Db.CatalogTable<NasmInstruction>("asm"));
-
         public Index<NasmInstruction> ParseInstuctionAssets()
         {
-            var lines = text.lines(Parts.Tools.Assets.NasmInstructions().ViewText()).View;
+            var lines = text.lines(Parts.AsmCore.Assets.NasmInstructions().ViewText()).View;
             var count = lines.Length;
             var section = EmptyString;
             var records = RecordList.create<NasmInstruction>(7000);

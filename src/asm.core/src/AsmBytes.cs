@@ -16,6 +16,20 @@ namespace Z0.Asm
     public readonly struct AsmBytes
     {
         [Op]
+        public static uint Serialize(AsmHexVector src, Span<byte> dst)
+        {
+            var j=0u;
+            first16u(dst) = src.HexSize;
+            j+=2;
+            var input = bytes(src.Bytes);
+            input.CopyTo(slice(dst,j+=src.HexSize));
+            input = bytes(src.Offsets);
+            input.CopyTo(slice(dst,j));
+            j+= (uint)src.Offsets.Length*2;
+            return j;
+        }
+
+        [Op]
         public static bool parse(string src, out AsmHexCode dst)
         {
             var storage = Cells.alloc(w128);

@@ -10,19 +10,11 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial class IntelIntrinsics
+    partial class IntrinsicsCatalog
     {
-        public struct Operation
+        public class Parameters : List<Parameter>
         {
-            public const string ElementName = "operation";
 
-            public List<TextLine> Content;
-
-            [MethodImpl(Inline)]
-            public Operation(List<TextLine> src)
-            {
-                Content = src;
-            }
         }
     }
 }

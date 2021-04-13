@@ -6,22 +6,14 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
-    using static XedModels;
 
-    partial class IntelIntrinsics
+    partial class IntrinsicsCatalog
     {
-        public struct Instruction
+        public class Instructions : List<Instruction>
         {
-            public const string ElementName = "instruction";
-
-            public string name;
-
-            public string form;
-
-            public IForm xed;
-
         }
     }
 }

@@ -95,7 +95,7 @@ namespace Z0.Asm
             Buffer.Add(src.OpId);
             Buffer.Add(SectionSep);
 
-            var sequence = AsmOffsetSequence.Zero;
+            var sequence = AsmOffsetSeq.Zero;
             var @base = src.BaseAddress;
             var address = @base;
             var instructions = src.Instructions.View;
@@ -138,7 +138,7 @@ namespace Z0.Asm
             => src.Storage.FormatHex(DataFormat);
 
         [Op]
-        void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
+        void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSeq seq)
         {
             var @base = address;
             var fx = src.Instruction;
@@ -170,7 +170,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  AsmOffsetSequence seq)
+        string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  AsmOffsetSeq seq)
         {
             var left = LineLocation(src.Instruction, address, offset, seq);
             var right = text.concat(src.Statment, SpecifierSep, src.AsmForm.Format(), EncodingSep, Format(src.Encoded));
@@ -178,7 +178,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        static string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
+        static string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSeq seq)
             => text.concat(FormatAddress(src, AddressPad),
                 text.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
