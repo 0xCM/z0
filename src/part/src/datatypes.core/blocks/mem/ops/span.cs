@@ -208,8 +208,18 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> span<T>(ref Block80 src)
+            where T : unmanaged
+                => recover<T>(cover(u8(src), Block80.Size));
+
+        /// <summary>
+        /// Fills a span with data from a memory block
+        /// </summary>
+        /// <param name="src">The stack storage source</param>
+        /// <typeparam name="T">The span cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> span<T>(ref Block128 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), 128));
+                => recover<T>(cover(u8(src), Block128.Size));
     }
 }

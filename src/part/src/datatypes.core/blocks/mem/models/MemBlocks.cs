@@ -101,6 +101,16 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => span<byte>(ref this);
             }
+
+            /// <summary>
+            /// Specifies a reference to the leading cell
+            /// </summary>
+            public ref byte First
+            {
+                [MethodImpl(Inline)]
+                get => ref memory.first(Bytes);
+            }
+
         }
 
         /// <summary>
@@ -380,7 +390,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Covers 64 bytes = 512 bits of stack-allocated storage
+        /// Covers 64 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         public struct Block64 : IMemBlock<Block64>
@@ -399,11 +409,32 @@ namespace Z0
         }
 
         /// <summary>
+        /// Covers 64 bytes of storage
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block80 : IMemBlock<Block80>
+        {
+            public const byte Size = 80;
+
+            Block64 A;
+
+            Block18 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
+        }
+
+        /// <summary>
         /// Covers 128 bytes = 1024 bits of stack-allocated storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         public struct Block128
         {
+            public const byte Size = 128;
+
             internal Block64 A;
 
             internal Block64 B;
@@ -479,27 +510,36 @@ namespace Z0
         public struct Block08<T> : IMemBlock<Block08<T>>
             where T : unmanaged
         {
-            Block04<T> Cell0;
+            Block04<T> A;
 
-            Block04<T> Cell1;
+            Block04<T> B;
         }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct Block12<T> : IMemBlock<Block12<T>>
             where T : unmanaged
         {
-            Block06<T> Cell0;
+            Block06<T> A;
 
-            Block06<T> Cell1;
+            Block06<T> B;
         }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct Block16<T> : IMemBlock<Block16<T>>
             where T : unmanaged
         {
-            Block08<T> Cell0;
+            Block08<T> A;
 
-            Block08<T> Cell1;
+            Block08<T> B;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block32<T> : IMemBlock<Block32<T>>
+            where T : unmanaged
+        {
+            Block16<T> Cell0;
+
+            Block16<T> Cell1;
         }
     }
 }

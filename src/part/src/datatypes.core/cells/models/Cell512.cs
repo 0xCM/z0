@@ -6,8 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Part;
+    using static memory;
 
     using F = Cell512;
 
@@ -97,6 +99,16 @@ namespace Z0
         public Vector512<T> ToVector<T>()
             where T : unmanaged
                 => Unsafe.As<Cell512,Vector512<T>>(ref Unsafe.AsRef(this));
+
+        [MethodImpl(Inline)]
+        public Vector256<T> LoVector<T>()
+            where T : unmanaged
+                => @as<Cell256,Vector256<T>>(Lo);
+
+        [MethodImpl(Inline)]
+        public Vector256<T> HiVector<T>()
+            where T : unmanaged
+                => @as<Cell256,Vector256<T>>(Hi);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell512((Cell256 x0, Cell256 x1) x)

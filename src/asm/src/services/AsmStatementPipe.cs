@@ -68,7 +68,6 @@ namespace Z0.Asm
             var asmPath = FS.FilePath.Empty;
             var asmFlow = default(WfFileFlow);
             var buffer = text.buffer();
-            var offset = z16;
 
             for(var i=0; i<count; i++)
             {

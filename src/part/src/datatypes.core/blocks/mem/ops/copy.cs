@@ -81,6 +81,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void copy(in Block64 src, ref Block128 dst, byte offset)
             => seek(@as<Block128,Block64>(dst), offset) = src;
-
     }
 }
