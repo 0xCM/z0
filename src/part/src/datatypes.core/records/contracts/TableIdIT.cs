@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct TableId<I,T> : ITableId<T>
+    public readonly struct TableId<I,T> : ITableId
         where T : struct, IRecord<T>
         where I : unmanaged
     {

@@ -83,10 +83,10 @@ namespace Z0
                 => Raise(emittedTable<T>(Host, dst, Ct));
 
         public void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => Raise(emittedTable(Host, type, count, dst, Ct));
+            => Raise(emittedTable(Host, Tables.tableid(type), count, dst, Ct));
 
         public void EmittedTable(Type type, FS.FilePath dst)
-            => Raise(emittedTable(Host, type, dst, Ct));
+            => Raise(emittedTable(Host, Tables.tableid(type), dst, Ct));
 
         public void EmittingFile(FS.FilePath dst)
             => Raise(emittingFile(Host, dst, Ct));

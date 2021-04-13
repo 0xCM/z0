@@ -20,16 +20,4 @@ namespace Z0
         TableId IRowType.Table
             => Table;
     }
-
-    public interface IRowType<I,T> : IRowType<T>
-        where T : struct, IRecord<T>
-        where I : unmanaged
-    {
-        new TableId<I,T> Table {get;}
-
-        I TableIndex {get;}
-
-        TableId<T> IRowType<T>.Table
-            => Table;
-    }
 }

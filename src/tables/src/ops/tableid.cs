@@ -18,17 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableId tableid<T>()
             where T : struct, IRecord<T>
-                => default(T).TableId;
-
-        /// <summary>
-        /// Computes the <see cref='TableId'/> of a parametrically-identified record
-        /// </summary>
-        /// <typeparam name="T">The record type</typeparam>
-        [MethodImpl(Inline)]
-        public static TableId<I,T> tableid<I,T>(I index)
-            where T : struct, IRecord<T>
-            where I : unmanaged
-                => new TableId<I,T>(tableid(typeof(T)), index);
+                => TableId.identify<T>();
 
         /// <summary>
         /// Computes the <see cref='TableId'/> of a specified record type
@@ -36,8 +26,6 @@ namespace Z0
         /// <param name="src">The record type</typeparam>
         [Op]
         public static TableId tableid(Type src)
-            => src.Tag<RecordAttribute>().MapValueOrElse(
-                    a => new TableId(src, a.TableId),
-                    () => new TableId(src, src.Name));
+            => TableId.identify(src);
     }
 }

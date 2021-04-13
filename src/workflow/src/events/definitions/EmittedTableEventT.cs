@@ -18,7 +18,7 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public TableId TableId => typeof(T);
+        public TableId TableId => Tables.tableid(typeof(T));
 
         public Count RowCount {get;}
 

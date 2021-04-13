@@ -13,7 +13,7 @@ namespace Z0
    public static partial class XTools
    {
        [Op]
-       public static Nasm nasm(this IWfRuntime wf)
+       public static Nasm NasmTool(this IWfRuntime wf)
             => Nasm.create(wf);
 
        [Op]

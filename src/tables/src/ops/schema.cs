@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct Tables
     {
-
         [Op]
         public static RecordSchema schema(Type src)
         {

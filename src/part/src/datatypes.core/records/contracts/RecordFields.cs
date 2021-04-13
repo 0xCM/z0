@@ -14,7 +14,6 @@ namespace Z0
 
     public readonly struct RecordFields : IIndex<RecordField>
     {
-
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a parametrically-identified record type
         /// </summary>

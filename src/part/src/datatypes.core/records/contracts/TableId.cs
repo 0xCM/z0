@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
 
@@ -19,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableId identify<T>()
             where T : struct, IRecord<T>
-                => default(T).TableId;
+                => identify(typeof(T));
 
         /// <summary>
         /// Computes the <see cref='TableId'/> of a specified record type
@@ -48,9 +47,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator TableId(Type src)
-            => identify(src);
     }
 }

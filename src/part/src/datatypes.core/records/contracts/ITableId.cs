@@ -16,15 +16,4 @@ namespace Z0
         string ITextual.Format()
             => Identifier.Format();
     }
-
-    [Free]
-    public interface ITableId<T> : ITableId
-        where T : struct, IRecord<T>
-    {
-        Name ITableId.RecordType
-            => typeof(T).Name;
-
-        Name ITableId.Identifier
-            => TableId.identify<T>().Identifier;
-    }
 }

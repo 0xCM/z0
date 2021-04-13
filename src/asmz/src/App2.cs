@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
     using System.IO;
+    using Z0.Tooling;
 
     using static Part;
     using static memory;
@@ -980,7 +981,11 @@ namespace Z0.Asm
 
         public void Run()
         {
-            AsmExprCases.create(Wf).Create();
+            //AsmExprCases.create(Wf).Create();
+
+
+            var tool = Wf.NasmTool();
+            tool.EmitInstructionAssets();
 
             // var inxs = ParseNasmInstructions();
             // ShowRecords(inxs.View);

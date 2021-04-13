@@ -22,7 +22,7 @@ namespace Z0
         where T : struct, IRecord<T>
     {
         TableId IRecord.TableId
-            => TableId.identify<T>();
+            => TableId.identify(typeof(T));
 
         RecordFields IRecord.Fields()
             => RecordFields.discover<T>();
