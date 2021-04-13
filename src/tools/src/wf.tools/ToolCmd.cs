@@ -150,7 +150,7 @@ namespace Z0
         {
             var info = new ProcessStartInfo
             {
-                FileName = spec.CmdPath.Name,
+                FileName = spec.ToolPath.Name,
                 Arguments = spec.Args.Format(),
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
@@ -162,7 +162,7 @@ namespace Z0
             if (!spec.WorkingDir.IsNonEmpty)
                 process.StartInfo.WorkingDirectory = spec.WorkingDir.Name;
 
-            root.iter(spec.Vars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
+            root.iter(spec.EnvVars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
 
             process.OutputDataReceived += (s,d) => status(d.Data ?? EmptyString);
             process.ErrorDataReceived += (s,d) => error(d.Data ?? EmptyString);
@@ -200,9 +200,9 @@ namespace Z0
         public static ToolCmdSpec specify(FS.FilePath path, params ToolCmdArg[] args)
         {
             var dst = new ToolCmdSpec();
-            dst.CmdPath = path;
+            dst.ToolPath = path;
             dst.Args = args.Select(x => x.Format());
-            dst.Vars = NamedValues.empty<string>();
+            dst.EnvVars = NamedValues.empty<string>();
             dst.WorkingDir = FS.dir(Environment.CurrentDirectory);
             return dst;
         }

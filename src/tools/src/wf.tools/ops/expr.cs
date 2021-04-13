@@ -16,17 +16,13 @@ namespace Z0
             => new ScriptExpr(pattern);
 
         [MethodImpl(Inline), Op]
-        public static ScriptExpr expr(in Paired<ScriptPattern,CmdVarIndex> src)
-            => new ScriptExpr(src.Left, src.Right);
-
-        [MethodImpl(Inline), Op]
-        public static ScriptExpr expr(ScriptPattern pattern, CmdVarIndex vars)
+        public static ScriptExpr expr(ScriptPattern pattern, Index<CmdVar> vars)
             => new ScriptExpr(pattern, vars);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ScriptExpr<K> expr<K>(ScriptPattern pattern, CmdVarIndex<K> content)
+        public static ScriptExpr<K> expr<K>(ScriptPattern pattern, Index<CmdVar<K>> vars)
             where K : unmanaged
-                => new ScriptExpr<K>(pattern, content);
+                => new ScriptExpr<K>(pattern, vars);
 
         [MethodImpl(Inline)]
         public static ScriptExpr<K,T> expr<K,T>(K id, T content)

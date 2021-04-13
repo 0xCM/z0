@@ -834,20 +834,33 @@ namespace Z0.Asm
         }
 
         [Op]
-        public Index<AsmMemberRoutine> Capture(Index<PartId> parts, FS.FolderPath dst)
+        public void Capture(Index<PartId> parts, FS.FolderPath dst)
         {
+            var jit = Wf.ApiJit();
+            var hex = Wf.ApiHex();
             var capture = Wf.ApiCapture();
-            var src = Wf.Api.PartHosts(parts);
-            Wf.Status($"Capturing {src.Length} parts");
-            var members = src.SelectMany(x => Wf.ApiJit().JitHost(x)).Array();
-            return capture.CaptureMembers(members, dst);
+            var pipe = Wf.AsmStatementPipe();
+            var partcount = parts.Length;
+            var hosts = Wf.Api.PartHosts(parts);
+            var hostcount = hosts.Length;
+            for(var i=0; i<hostcount; i++)
+            {
+                var host = hosts[i];
+                var members = jit.JitHost(host);
+                var routines = capture.CaptureMembers(members, dst);
+                var hexpath = Db.ApiHexPath(dst, host.Uri);
+                var blocks = hex.ReadBlocks(hexpath);
+            }
+
         }
 
         void CaptureSelectedRoutines()
         {
-            var parts = root.array(PartId.AsmZ, PartId.AsmLang, PartId.AsmCore);
+            var parts = root.array(PartId.AsmLang, PartId.AsmCore, PartId.AsmCases);
             var dst = Db.AppLogDir() + FS.folder("capture");
+            dst.Clear();
             Capture(parts,dst);
+
         }
 
         public void EmitXedCatalog()
@@ -951,7 +964,7 @@ namespace Z0.Asm
 
         public Index<ApiCodeBlock> LoadApiBlocks()
         {
-            return Wf.ApiHex().ApiBlocks();
+            return Wf.ApiHex().ReadBlocks();
         }
 
         void ShowSymbols()
@@ -979,13 +992,23 @@ namespace Z0.Asm
             }
         }
 
+        ToolScript<XedCase> CreateXedCase(AsmOc id)
+        {
+            var tool = Wf.XedTool();
+            var dir = Db.CaseDir("asm.assembled", id);
+            var dst = dir + FS.file(string.Format("{0}.{1}", id, tool.Id), FS.Cmd);
+            var @case = tool.DefineCase(id, dir);
+            return tool.CreateScript(@case, dst);
+        }
         public void Run()
         {
             //AsmExprCases.create(Wf).Create();
 
+            //var script = CreateXedCase(AsmOc.mov_r64_imm64);
 
-            var tool = Wf.NasmTool();
-            tool.EmitInstructionAssets();
+
+            // var tool = Wf.NasmTool();
+            // tool.EmitInstructionAssets();
 
             // var inxs = ParseNasmInstructions();
             // ShowRecords(inxs.View);
@@ -996,7 +1019,7 @@ namespace Z0.Asm
             // var cases = AsmExprCases.create(Wf);
             // cases.Run(AsmSigKind.and_r8_r8);
 
-            //CaptureSelectedRoutines();
+            CaptureSelectedRoutines();
             //Wf.AsmCodeGenerator().GenerateModelsInPlace();
             //cases.Run(AsmSigKind.mov_r64_imm64);
 

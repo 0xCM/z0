@@ -13,9 +13,34 @@ namespace Z0
     using System.IO;
     using Microsoft.CodeAnalysis.Emit;
 
+    using static Root;
+
     [ApiHost]
     public readonly struct CsTools
     {
+        [MethodImpl(Inline), Op]
+        public static ToolShimSpec shimspec(Identifier name, FS.FilePath tool, FS.FolderPath dst)
+            => new ToolShimSpec(name, tool, dst+ FS.file(name.Format(), FS.Extensions.Exe));
+
+        [Op]
+        public static ToolShimSpec shim(Identifier name, FS.FilePath tool, FS.FolderPath dst)
+        {
+            var spec = shimspec(name,tool,dst);
+            var emission = create(spec);
+            if(!emission.Success)
+                root.@throw(emission.Diagnostics.Map(x => x.ToString()).Array().Concat(Chars.Eol));
+            return spec;
+        }
+
+        public static bool create(ToolShimSpec spec, out EmitResult dst, out string[] errors)
+        {
+            errors = sys.empty<string>();
+            dst = create(spec);
+            if(!dst.Success)
+                errors = dst.Diagnostics.Map(x => x.ToString()).Array();
+            return dst.Success;
+        }
+
         public static PortableExecutableReference pe<T>()
             => PortableExecutableReference.CreateFromFile(typeof(T).Assembly.Location);
 
@@ -28,7 +53,7 @@ namespace Z0
             => src.Select(pe);
 
         [Op]
-        public static CSharpCompilation compilation(string name)
+        public static CSharpCompilation compilation(Identifier name)
             => CSharpCompilation.Create(name);
 
         [Op]
@@ -36,41 +61,28 @@ namespace Z0
             => CSharpSyntaxTree.ParseText(src);
 
         [Op]
-        public static CSharpCompilation compilation(string name, MetadataReference[] refs)
+        public static CSharpCompilation compilation(Identifier name, MetadataReference[] refs)
             => compilation(name).AddReferences(refs);
 
         [Op]
-        public static CSharpCompilation compilation(string name, MetadataReference[] refs, params SyntaxTree[] syntax)
+        public static CSharpCompilation compilation(Identifier name, MetadataReference[] refs, params SyntaxTree[] syntax)
             => compilation(name,refs).AddSyntaxTrees(syntax);
-
 
         public static CSharpCompilation compilation(ToolShimSpec config)
         {
-            root.require(config.Source.Exists, () => $"The file {config.Source}, it must exist");
-
+            root.require(config.ToolPath.Exists, () => $"The file {config.ToolPath}, it must exist");
             var refs = CsTools.pe(typeof(object), typeof(Enumerable), typeof(ProcessStartInfo));
-            var dst = FS.create(config.OutDir) + FS.file(config.Name, FS.Extensions.Exe);
-            var code = new ToolShimCode(dst);
+            var code = new ToolShimCode(config.TargetPath);
             return CsTools.compilation(config.Name, refs, CsTools.parse(code.Generate()));
         }
 
-        public static EmitResult shim(ToolShimSpec config)
+        public static EmitResult create(ToolShimSpec config)
         {
             var compile = CsTools.compilation(config);
             var dst = config.TargetPath.EnsureParentExists();
-
             using (var exe = new FileStream(dst.Name, FileMode.Create))
             using (var resources = compile.CreateDefaultWin32Resources(true, true, null, null))
                 return compile.Emit(exe, win32Resources: resources);
-        }
-
-        public static bool shim(ToolShimSpec spec, out EmitResult dst, out string[] errors)
-        {
-            errors = sys.empty<string>();
-            dst = shim(spec);
-            if(!dst.Success)
-                errors = dst.Diagnostics.Map(x => x.ToString()).Array();
-            return dst.Success;
         }
     }
 }

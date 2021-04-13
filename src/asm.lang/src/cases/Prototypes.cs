@@ -29,6 +29,8 @@ namespace Z0.Asm
 
         const string extensions = nameof(extensions);
 
+        const string store = nameof(store);
+
         const string @switch = nameof(@switch);
 
         const string nested = nameof(nested);

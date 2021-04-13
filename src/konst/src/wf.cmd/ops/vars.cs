@@ -9,16 +9,16 @@ namespace Z0
         internal const byte MaxVarCount = 16;
 
         [Op]
-        public static CmdVarIndex vars(byte count)
-            => new CmdVarIndex(new CmdVar[count]);
+        public static Index<CmdVar> vars(byte count)
+            => new CmdVar[count];
 
         [Op]
-        public static CmdVarIndex vars()
-            => new CmdVarIndex(new CmdVar[MaxVarCount]);
+        public static Index<CmdVar> vars()
+            => new CmdVar[MaxVarCount];
 
         [Op, Closures(Closure)]
-        public static CmdVarIndex<K> vars<K>()
+        public static Index<CmdVar<K>> vars<K>()
             where K : unmanaged
-                => new CmdVarIndex<K>(new CmdVar<K>[MaxVarCount]);
+                => new CmdVar<K>[MaxVarCount];
     }
 }

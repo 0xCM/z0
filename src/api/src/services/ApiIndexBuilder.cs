@@ -38,7 +38,7 @@ namespace Z0
 
         public ApiBlockIndex IndexApiBlocks()
         {
-            var src = Db.ParsedExtractPaths().View;
+            var src = Db.ApiHexPaths().View;
             var count = src.Length;
             var flow = Wf.Running(Msg.IndexingPartFiles.Format(count));
             var hex = Wf.ApiHex();
@@ -47,7 +47,7 @@ namespace Z0
             {
                 ref readonly var path = ref skip(src,i);
                 var inner = Wf.Running(Msg.IndexingCodeBlocks.Format(path));
-                var result = hex.Rows(path);
+                var result = hex.ReadRows(path);
                 if(result.Count != 0)
                 {
                     var blocks = result.View;

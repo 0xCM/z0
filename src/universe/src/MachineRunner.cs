@@ -23,7 +23,7 @@ namespace Z0
                 var blocks = Wf.ApiIndexBuilder().IndexApiBlocks();
 
                 if(options.EmitHexIndex)
-                    Emitted(Wf.ApiHex().EmitHexIndex(blocks.Blocks));
+                    Emitted(Wf.ApiHex().EmitIndex(blocks.Blocks));
 
                 if(options.EmitAsmRows)
                     Emitted(Wf.AsmRowStore().EmitAsmRows(blocks.Blocks));

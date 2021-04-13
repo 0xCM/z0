@@ -14,17 +14,10 @@ namespace Z0
     {
         public ScriptPattern Pattern {get;}
 
-        public CmdVarIndex<K> Variables {get;}
+        public Index<CmdVar<K>> Variables {get;}
 
         [MethodImpl(Inline)]
-        internal ScriptExpr(ScriptPattern pattern)
-        {
-            Pattern = pattern;
-            Variables = Cmd.vars<K>();
-        }
-
-        [MethodImpl(Inline)]
-        public ScriptExpr(ScriptPattern pattern, CmdVarIndex<K> vars)
+        public ScriptExpr(ScriptPattern pattern, Index<CmdVar<K>> vars)
         {
             Pattern = pattern;
             Variables = vars;

@@ -56,15 +56,24 @@ namespace Z0
         /// <param name="src">The source strings</param>
         /// <param name="sep">The separator, if any</param>
         [TextUtility]
-        public static string Concat(this IEnumerable<string> src)
-            => string.Join(string.Empty, src);
+        public static string Concat(this IEnumerable<string> src, string delimiter = "")
+            => string.Join(delimiter, src);
+
+        /// <summary>
+        /// Joins the strings provided by the enumerable with an optional separator
+        /// </summary>
+        /// <param name="src">The source strings</param>
+        /// <param name="sep">The separator, if any</param>
+        [TextUtility]
+        public static string Concat(this string[] src, string delimiter = "")
+            => string.Join(delimiter, src);
 
         /// <summary>
         /// Sequentially concatenates each indexed cell to the next without deimiters/interspersal
         /// </summary>
         /// <param name="src">The source text</param>
         [TextUtility]
-        public static string Concat(this Span<string> src)
-            => src.Join(string.Empty);
+        public static string Concat(this Span<string> src, string delimiter = "")
+            => src.Join(delimiter);
     }
 }

@@ -18,16 +18,14 @@ namespace Z0
 
         string ITextual.Format()
             => Rules.format(this);
-
     }
 
     [Free]
     public interface IVar<T> : IVar
-        where T : struct
     {
         new T Value {get;}
 
         string IVar.Value
-            => Value.ToString();
+            => Value?.ToString() ?? "";
     }
 }

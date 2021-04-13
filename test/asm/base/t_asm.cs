@@ -50,7 +50,7 @@ namespace Z0.Asm
         {
             var capture = ApiArchives.capture(Wf.Db().CaptureRoot());
             var hex = Wf.ApiHex();
-            var rows = hex.Rows(capture.HexPath(host));
+            var rows = hex.ReadRows(capture.HexPath(host));
             var code = rows.Map(row => new ApiCodeBlock(row.Uri, new CodeBlock(row.Address, row.Data)));
             return code;
         }

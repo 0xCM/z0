@@ -142,7 +142,7 @@ namespace Z0
             if(e != null && e.Data != null)
             {
                 WorkerLog?.LogStatus(e.Data);
-                TermLog.Deposit(WfEvents.status(GetType(), e.Data));
+                TermLog.Deposit(EventFactory.status(GetType(), e.Data));
             }
         }
 
@@ -151,7 +151,7 @@ namespace Z0
             if(e != null && e.Data != null)
             {
                 WorkerLog?.LogError(e.Data);
-                TermLog.Deposit(WfEvents.error(GetType(), e.Data, WfEvents.originate("InterpreterError")));
+                TermLog.Deposit(EventFactory.error(GetType(), e.Data, EventFactory.originate("InterpreterError")));
             }
         }
 

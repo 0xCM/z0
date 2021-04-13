@@ -4,15 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
     using static memory;
 
     partial struct Cmd
     {
-
         [Op]
         public static string format(CmdVarValue src)
             => src.Content ?? EmptyString;

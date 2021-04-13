@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-
-    using VCtx = VarContextKind;
+    using static VarContextKind;
 
     [ApiHost]
-    public readonly struct VarSymbols
+    public readonly struct ScriptVars
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -22,7 +21,7 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static string format<T>(VarSymbol<T> src)
-            => format(VarContextKind.Workflow, src);
+            => format(Workflow, src);
 
         [Op]
         public static string format(VarContextKind vck, VarSymbol src)
@@ -43,10 +42,10 @@ namespace Z0
         static string pattern(VarContextKind vck)
             => vck switch
             {
-                VCtx.CmdScript => "%{0}%",
-                VCtx.PsScript => "${0}",
-                VCtx.BashScript => "${0}",
-                VCtx.MsBuild => "$({0})",
+                CmdScript => "%{0}%",
+                PsScript => "${0}",
+                BashScript => "${0}",
+                MsBuild => "$({0})",
                 _ => "{0}"
             };
     }

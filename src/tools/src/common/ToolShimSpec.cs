@@ -11,21 +11,18 @@ namespace Z0
 
     public struct ToolShimSpec
     {
-        public string Name;
+        public Identifier Name;
 
-        public FS.FilePath Source;
-
-        public FS.FolderPath OutDir;
+        public FS.FilePath ToolPath;
 
         public FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public ToolShimSpec(string name, FS.FilePath src, FS.FolderPath dst)
+        public ToolShimSpec(string name, FS.FilePath src, FS.FilePath dst)
         {
             Name = name;
-            Source = src;
-            OutDir = dst;
-            TargetPath = OutDir + FS.file(Name, FS.Extensions.Exe);
+            ToolPath = src;
+            TargetPath = dst;
         }
     }
 }

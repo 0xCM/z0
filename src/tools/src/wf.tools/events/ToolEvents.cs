@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using Z0.Tooling;
 
     using static Part;
 
     public readonly struct ToolEvents
     {
-
         /// <summary>
         /// Defines a <see cref='ToolRanEvent{T}'/> event indicating failure
         /// </summary>

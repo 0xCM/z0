@@ -10,30 +10,25 @@ namespace Z0
     partial interface IEnvPaths
     {
         FolderPath ApiHexRoot()
-            => CaptureRoot() + FS.folder(hex);
+            => CaptureRoot() + FS.folder(parsed);
 
-        Files ApiHexPaths()
-            => ApiHexRoot().Files(Hex);
+        FS.FolderPath ApiHexDir(FS.FolderPath root)
+            => (root + FS.folder(parsed));
+
+        FS.Files ApiHexPaths()
+            => ApiHexRoot().Files(PCsv);
 
         FS.FilePath ApiHexPath(FS.FileName name)
             => ApiHexRoot() + name;
 
         FS.FilePath ApiHexPath(ApiHostUri host)
-            => ApiHexPath(ApiFiles.filename(host, Hex));
+            => ApiHexPath(ApiFiles.filename(host, PCsv));
 
         FS.FilePath ApiHexPath(FS.FolderPath root, FS.FileName name)
             => ApiHexDir(root) + name;
 
         FS.FilePath ApiHexPath(FS.FolderPath root, ApiHostUri host)
-            => root + PartFolder(host.Part) + HostFile(host, Hex);
-
-        FS.FilePath ApiHexPath(PartId part, string api)
-            => ApiHexRoot() + ApiFileName(part, api, Hex);
-        FS.FileName ApiHexFileName(OpIdentity id)
-            => LegalFileName(id, Hex);
-
-        FS.FolderPath ApiHexDir(FS.FolderPath root)
-            => (root + FS.folder(hex));
+            => root + PartFolder(host.Part) + HostFile(host, PCsv);
 
         FS.Files ApiHexPaths(PartId part)
             => ApiHexPaths().Where(f => f.IsOwner(part));

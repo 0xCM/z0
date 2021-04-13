@@ -37,11 +37,11 @@ namespace Z0
             if(catalog.IsEmpty)
                 return;
 
-
+            var hex = Wf.ApiHex();
             var members = Wf.ApiIndexBuilder().CreateMemberIndex(catalog);
             Wf.Status($"Indexed {members.EntryCount} {host} members");
 
-            var blocks = ApiHex.reader(Wf).ReadHexBlocks(src);
+            var blocks = hex.ReadBlocks(src);
             Wf.Status($"Read {blocks.Count} {host} operations from {src}");
 
             var api = Wf.ApiServices();

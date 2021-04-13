@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum AsmSigKind : ushort
+    public enum AsmOc : ushort
     {
         None = 0,
 

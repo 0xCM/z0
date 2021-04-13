@@ -55,7 +55,7 @@ namespace Z0
             {
                 ref readonly var file = ref skip(files,i);
                 var inner = wf.Running(file, "apihex");
-                var rows = hex.Rows(file).View;
+                var rows = hex.ReadRows(file).View;
                 var blocks = rows.Length;
                 if(blocks == 0)
                     wf.Warn($"No content found in {file.ToUri()}");

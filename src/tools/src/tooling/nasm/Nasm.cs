@@ -10,8 +10,8 @@ namespace Z0.Tooling
         readonly BitFormatter<byte> BitFormat;
 
         public Nasm()
+            : base(Toolsets.nasm)
         {
-            Id = Toolsets.nasm;
             BitFormat = BitFormatter.create<byte>(4);
         }
    }

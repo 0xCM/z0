@@ -2,13 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0
 {
-
     public abstract class ToolService<T> : WfService<T>, ITool<T>
         where T : ToolService<T>, new()
     {
-        public ToolId Id {get; protected set;}
+        public ToolId Id {get;}
+
+        protected ToolService(ToolId id)
+        {
+            Id = id;
+        }
 
         protected IEnvPaths Paths => Db;
 
@@ -59,5 +63,11 @@ namespace Z0.Tooling
 
         protected static FS.FileName logfile(Identifier src)
             => file(src, FS.Log);
+
+        protected FS.FileName ToolFile(Identifier id, FS.FileExt ext)
+            => FS.file(string.Format("{0}.{1}", id, Id), ext);
+
+        protected FS.FileName ToolFile(Identifier id,  Identifier discriminator, FS.FileExt ext)
+            => FS.file(string.Format("{0}.{1}.{2}", id, Id, discriminator), ext);
     }
 }

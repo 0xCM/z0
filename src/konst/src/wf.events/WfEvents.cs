@@ -8,8 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    partial struct WfEvents
+    using static Part;
+
+    [ApiHost(ApiNames.WfEvents, true)]
+    readonly struct WfEvents
     {
+        const string HandlerNotFound = "Handler for {0} not found";
+
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op]
+        internal static EventSignal signal(IWfRuntime wf)
+            => EventSignal.create(wf.EventSink, wf.Host, wf.Ct);
+
         [Op]
         public static void format(ErrorEvent<Exception> error, StringBuilder dst)
         {

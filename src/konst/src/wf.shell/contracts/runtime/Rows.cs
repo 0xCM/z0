@@ -13,7 +13,7 @@ namespace Z0
     partial interface IWfRuntime
     {
        void Row<T>(T data)
-            => Raise(row(data));
+            => Raise(EventFactory.row(data));
 
         void Row<T>(uint index, T data)
             => Row(string.Format("{0:D4}: {1}", index, data));
@@ -47,7 +47,7 @@ namespace Z0
 
                 for(var i=0; i<count; i++)
                     buffer.AppendLine(skip(src,i));
-                Raise(rows(buffer.Emit()));
+                Raise(EventFactory.rows(buffer.Emit()));
             }
         }
     }

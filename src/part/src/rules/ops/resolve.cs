@@ -14,5 +14,9 @@ namespace Z0
         [Op]
         public static string resolve(VarContextKind vck, ScriptVar var)
             => string.Format(FormatPattern(vck), var.Value);
+
+        [Op]
+        public static string resolve<T>(VarContextKind vck, ScriptVar<T> var)
+            => string.Format(FormatPattern(vck), var.Value);
     }
 }

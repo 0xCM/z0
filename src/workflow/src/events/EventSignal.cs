@@ -7,31 +7,32 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static WfEvents;
+    using static EventFactory;
     using static Part;
 
-    readonly struct EventSignal
+    public readonly struct EventSignal
     {
+        readonly IWfEventSink Sink;
+
+        readonly CorrelationToken Ct;
+
+        readonly WfHost Host;
+
+        public static EventSignal create(IWfEventSink sink, WfHost host, CorrelationToken ct)
+            => new EventSignal(sink, host, ct);
+
         [MethodImpl(Inline)]
-        public static EventSignal create(IWfRuntime wf)
-            => new EventSignal(wf);
-
-        readonly IWfRuntime Wf;
-
-        [MethodImpl(Inline)]
-        EventSignal(IWfRuntime wf)
-            => Wf = wf;
-
-        CorrelationToken Ct
-            => Wf.Ct;
-
-        WfHost Host
-            => Wf.Host;
+        EventSignal(IWfEventSink sink, WfHost host, CorrelationToken ct)
+        {
+            Ct = ct;
+            Host = host;
+            Sink = sink;
+        }
 
         public WfEventId Raise<E>(in E e)
             where E : IWfEvent
         {
-            Wf.EventSink.Deposit(e);
+            Sink.Deposit(e);
             return e.EventId;
         }
 

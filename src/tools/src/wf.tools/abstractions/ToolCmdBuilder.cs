@@ -9,27 +9,20 @@ namespace Z0
 
     using static Part;
 
-    public abstract class ToolCmdBuilder<T> : IToolCmdBuilder
+    public abstract class ToolCmdBuilder<T> : WfService<T>,  IToolCmdBuilder
         where T : ToolCmdBuilder<T>, new()
     {
         protected Index<ToolCmdArg> Args;
 
         ushort Index;
 
-        protected FS.FileName ToolName;
-
-        protected ToolCmdBuilder(Name tool)
-        {
-            Args = memory.alloc<ToolCmdArg>(256);
-            Index = 0;
-            ToolName = FS.file(tool.Format(), FS.Extensions.Exe);
-        }
+        public ToolId Tool {get;}
 
         protected ToolCmdBuilder(ToolId tool)
         {
             Args = memory.alloc<ToolCmdArg>(256);
             Index = 0;
-            ToolName = FS.file(tool.Format(), FS.Extensions.Exe);
+            Tool = tool;
         }
 
         protected virtual PathSeparator PathSeparator
@@ -66,7 +59,7 @@ namespace Z0
             => FS.FolderPath.Empty;
 
         protected FS.FilePath ToolPath
-            => ToolDir + ToolName;
+            => ToolDir + FS.file(Tool.Format(), FS.Extensions.Exe);
 
         [Op]
         public ToolCmdSpec Emit(bool clear = true)

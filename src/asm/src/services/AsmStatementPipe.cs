@@ -22,7 +22,6 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
         }
 
-
         public Index<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;

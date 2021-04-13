@@ -14,6 +14,9 @@ namespace Z0.Parts
         {
             public ResDescriptor NasmInstructions() => Asset("nasm-instructions.txt");
 
+            public ResDescriptor XedInstructionData() => Asset("xed-idata.txt");
+
+            public ResDescriptor XedChipData() => Asset("xed-cdata.txt");
         }
     }
 }

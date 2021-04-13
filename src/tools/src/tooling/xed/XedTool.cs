@@ -10,19 +10,30 @@ namespace Z0.Tooling
     using static Part;
     using static memory;
 
+    using Z0.Asm;
+
     public sealed partial class XedTool : ToolService<XedTool>
     {
         const string SummaryFlags = "-isa-set -64";
 
         const string DetailFlags = "-v 4 -isa-set -64";
 
-        public XedCase DefineCase(Identifier name, FS.FolderPath dst)
+        static string format(AsmOc id)
+            => id.ToString();
+
+        public XedTool()
+            : base(Toolsets.xed)
+        {
+
+        }
+
+        public XedCase DefineCase(AsmOc id, FS.FolderPath dst)
         {
             var @case = new XedCase();
-            @case.CaseId = name;
-            @case.InputPath = input(dst,  binfile(name));
-            @case.SummaryPath = output(dst, logfile(name));
-            @case.DetailPath = output(dst, logfile(string.Format("{0}.{1}", name, "detail")));
+            @case.CaseId = format(id);
+            @case.InputPath = input(dst,  binfile(format(id)));
+            @case.SummaryPath = output(dst, ToolFile(format(id), "summary", FS.Log));
+            @case.DetailPath =  output(dst, ToolFile(format(id), "detail", FS.Log));
             return @case;
         }
 
@@ -46,7 +57,7 @@ namespace Z0.Tooling
             dst.AppendLine("%CmdSpec% > %DetailPath%");
         }
 
-        public CaseScript<XedCase> CreateScript(XedCase src, FS.FilePath dst)
+        public ToolScript<XedCase> CreateScript(XedCase src, FS.FilePath dst)
         {
             var buffer = text.buffer();
             AppendScript(src,buffer);

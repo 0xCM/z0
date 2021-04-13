@@ -44,7 +44,7 @@ namespace Z0.Asm
             var dSrc = typeof(math).HostUri();
             var gSrc = typeof(gmath).HostUri();
             var id = PartId.GMath;
-            var parsed = Wf.Db().ParsedExtractPaths();
+            var parsed = Wf.Db().ApiHexPaths();
             Claim.nonzero(parsed.Count);
 
             var hex = Wf.ApiHex();
@@ -54,12 +54,12 @@ namespace Z0.Asm
             root.iter(parsed, f => writer.WriteLine(f));
 
             var mHex = Db.ApiHexPath(typeof(math).HostUri());
-            var mHexRows = hex.Rows(mHex);
+            var mHexRows = hex.ReadRows(mHex);
             writer.WriteLine(RP.PageBreak120);
             root.iter(mHexRows, r => writer.WriteLine(r.Uri));
 
             var gHex = Db.ApiHexPath(typeof(gmath).HostUri());
-            var gHexRows = hex.Rows(gHex);
+            var gHexRows = hex.ReadRows(gHex);
             writer.WriteLine(RP.PageBreak120);
             root.iter(gHexRows, r => writer.WriteLine(r.Uri));
 

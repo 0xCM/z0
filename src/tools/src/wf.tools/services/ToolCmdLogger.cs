@@ -54,10 +54,10 @@ namespace Z0
             LogStream.Flush();
         }
 
-        public void LogError(string content)
+        public void Error(string content)
             => Log(LogLevel.Error, content);
 
-        public void LogError(string format, params object[] args)
+        public void Error(string format, params object[] args)
             => Log(LogLevel.Error, args);
     }
 }

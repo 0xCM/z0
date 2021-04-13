@@ -13,7 +13,7 @@ namespace Z0
     {
         public ScriptPattern Pattern {get;}
 
-        public CmdVarIndex Variables {get;}
+        public Index<CmdVar> Variables {get;}
 
         [MethodImpl(Inline)]
         public ScriptExpr(string pattern)
@@ -23,14 +23,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal ScriptExpr(ScriptPattern pattern)
+        public ScriptExpr(ScriptPattern pattern)
         {
             Pattern = pattern;
             Variables = Cmd.vars();
         }
 
         [MethodImpl(Inline)]
-        internal ScriptExpr(ScriptPattern pattern, CmdVarIndex vars)
+        public ScriptExpr(ScriptPattern pattern, Index<CmdVar> vars)
         {
             Pattern = pattern;
             Variables = vars;
@@ -72,9 +72,6 @@ namespace Z0
         public static implicit operator string(ScriptExpr src)
             => src.Pattern;
 
-        [MethodImpl(Inline)]
-        public static implicit operator ScriptExpr(Paired<ScriptPattern,CmdVarIndex> src)
-            => ToolCmd.expr(src);
 
         [MethodImpl(Inline)]
         public string Format()

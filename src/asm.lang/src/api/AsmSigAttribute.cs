@@ -8,11 +8,11 @@ namespace Z0.Asm
 
     public class AsmSigAttribute : Attribute
     {
-        public AsmSigAttribute(AsmSigKind kind)
+        public AsmSigAttribute(AsmOc kind)
         {
             Kind = kind;
         }
 
-        public AsmSigKind Kind {get;}
+        public AsmOc Kind {get;}
     }
 }

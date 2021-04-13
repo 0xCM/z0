@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-
-    [ApiHost(ApiNames.WfEvents, true)]
-    public readonly partial struct WfEvents
+    public interface IToolCmdBuilder : ITextual
     {
-        const string HandlerNotFound = "Handler for {0} not found";
+        ToolCmdSpec Emit(bool clear = true);
 
-        const NumericKind Closure = UnsignedInts;
+        ToolId Tool {get;}
     }
 }

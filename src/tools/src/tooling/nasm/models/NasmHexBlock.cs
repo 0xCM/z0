@@ -6,9 +6,6 @@ namespace Z0.Tooling
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-
-    using Z0.Asm;
 
     using static Part;
     using static memory;

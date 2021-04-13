@@ -10,12 +10,10 @@ namespace Z0
     public interface IScriptVar : IVar
     {
 
-
     }
 
     [Free]
     public interface IScriptVar<T> : IScriptVar, IVar<T>
-        where T : struct
     {
 
     }

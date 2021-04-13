@@ -45,7 +45,7 @@ namespace Z0
         public ApiMemberBlocks Correlate(Index<IApiPartCatalog> src)
         {
             var flow = Wf.Running(Msg.CorrelatingParts.Format(src.Count));
-            var reader = ApiHex.reader(Wf);
+            var hex = Wf.ApiHex();
             var count = src.Length;
             var dst = root.list<ApiMemberCode>();
             var records = root.list<ApiCorrelationEntry>();
@@ -61,7 +61,7 @@ namespace Z0
                     var hexpath = Db.ApiHexPath(host.Uri);
                     if(hexpath.Exists)
                     {
-                        var blocks = reader.ReadHexBlocks(hexpath);
+                        var blocks = hex.ReadBlocks(hexpath);
                         var catalog = Catalogs.HostCatalog(Wf.Api.FindHost(host.Uri).Require());
                         Correlate(catalog, blocks, dst, records);
                     }

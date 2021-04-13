@@ -11,7 +11,7 @@ namespace Z0
         void Disposed()
         {
             if(Verbosity.IsBabble())
-                Raise(disposed(Host.Id, Ct));
+                Raise(EventFactory.disposed(Host.Id, Ct));
         }
 
         WfExecFlow<T> Creating<T>(T data)

@@ -13,12 +13,12 @@ namespace Z0.Asm
 
     public class AsmCaseAttribute : Attribute
     {
-        public AsmCaseAttribute(AsmSigKind id)
+        public AsmCaseAttribute(AsmOc id)
         {
             Id = id;
         }
 
-        public AsmSigKind Id {get;}
+        public AsmOc Id {get;}
     }
 
     public class AsmExprCases : WfService<AsmExprCases>
@@ -73,7 +73,7 @@ namespace Z0.Asm
         Symbols<Gp64> Gp64Regs()
             => asmx.SymbolSet.Gp64Regs();
 
-        void case_and_r8_r8(AsmSigKind id)
+        void case_and_r8_r8(AsmOc id)
         {
             var casename = CaseName(id);
             var flow = Wf.Running(casename);
@@ -98,7 +98,7 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-        void case_move_r64_imm64(AsmSigKind id)
+        void case_move_r64_imm64(AsmOc id)
         {
             const ulong a1 = 0x7ffa9930f380;
             var casename = CaseName(id);
@@ -114,16 +114,16 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-        [AsmCase(AsmSigKind.cmp_r8_imm8)]
-        void case_cmp_r8_imm8(AsmSigKind id)
+        [AsmCase(AsmOc.cmp_r8_imm8)]
+        void case_cmp_r8_imm8(AsmOc id)
         {
             const byte a1 = 0x3C;
             var regs = Gp8Regs();
             Generate(id, (byte)regs.Count, i => asmx.cmp(regs[i], a1));
         }
 
-        [AsmCase(AsmSigKind.cmp_r16_r16)]
-        void case_cmp_r16_r16(AsmSigKind id)
+        [AsmCase(AsmOc.cmp_r16_r16)]
+        void case_cmp_r16_r16(AsmOc id)
         {
             var left = Gp16Regs();
             var right = Gp16Regs();
@@ -133,8 +133,8 @@ namespace Z0.Asm
             Assemble(id);
         }
 
-        [AsmCase(AsmSigKind.cmp_r32_r32)]
-        void case_cmp_r32_r32(AsmSigKind id)
+        [AsmCase(AsmOc.cmp_r32_r32)]
+        void case_cmp_r32_r32(AsmOc id)
         {
             var left = Gp32Regs();
             var right = Gp32Regs();
@@ -144,7 +144,7 @@ namespace Z0.Asm
             Assemble(id);
         }
 
-        void case_move_r64_imm64_example(AsmSigKind id)
+        void case_move_r64_imm64_example(AsmOc id)
         {
             const ulong Imm64 = 0x7ffa9930f380;
 
@@ -162,17 +162,17 @@ namespace Z0.Asm
             Wf.Row(expect.Equals(actual));
         }
 
-        string CaseName(AsmSigKind id)
+        string CaseName(AsmOc id)
             => id.ToString();
 
-        void Enqueue(AsmSigKind id, byte count, Func<byte,AsmExpr> f)
+        void Enqueue(AsmOc id, byte count, Func<byte,AsmExpr> f)
         {
             var buffer = Buffer(false);
             for(byte i=0; i<count; i++)
                 buffer[Position++] = f(i);
         }
 
-        void Generate(AsmSigKind id, byte count, Func<byte,AsmExpr> f)
+        void Generate(AsmOc id, byte count, Func<byte,AsmExpr> f)
         {
             var casename = CaseName(id);
             var flow = Wf.Running(casename);
@@ -185,14 +185,14 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-        void Assemble(AsmSigKind id)
+        void Assemble(AsmOc id)
         {
             var buffer = Buffer(false).View;
             Assemble(id, slice(buffer, 0, Position));
             Clear();
         }
 
-        void Assemble(AsmSigKind id, ReadOnlySpan<AsmExpr> input)
+        void Assemble(AsmOc id, ReadOnlySpan<AsmExpr> input)
         {
             var subject = Tables.tableid<AssembledAsm>();
             var casedir = Db.CaseDir(subject,id).Create();
@@ -217,7 +217,7 @@ namespace Z0.Asm
             SaveTable(id, assembled, tablepath);
         }
 
-        void SaveTable(AsmSigKind id, ReadOnlySpan<AssembledAsm> src, FS.FilePath dst)
+        void SaveTable(AsmOc id, ReadOnlySpan<AssembledAsm> src, FS.FilePath dst)
         {
             var count = src.Length;
             var formatter = Tables.formatter<AssembledAsm>();
@@ -231,10 +231,10 @@ namespace Z0.Asm
 
         public void Create()
         {
-            case_and_r8_r8(AsmSigKind.and_r8_r8);
-            case_cmp_r8_imm8(AsmSigKind.cmp_r8_imm8);
-            case_cmp_r16_r16(AsmSigKind.cmp_r16_r16);
-            case_cmp_r32_r32(AsmSigKind.cmp_r32_r32);
+            case_and_r8_r8(AsmOc.and_r8_r8);
+            case_cmp_r8_imm8(AsmOc.cmp_r8_imm8);
+            case_cmp_r16_r16(AsmOc.cmp_r16_r16);
+            case_cmp_r32_r32(AsmOc.cmp_r32_r32);
         }
     }
 }

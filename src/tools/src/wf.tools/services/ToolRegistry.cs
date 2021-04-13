@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IToolCmdBuilder : ITextual
+    public class ToolRegistry : WfService<ToolRegistry>
     {
-        ToolCmdSpec Emit(bool clear = true);
+
     }
 }

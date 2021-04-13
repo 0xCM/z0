@@ -13,23 +13,44 @@ namespace Z0
     [ApiHost]
     public class ApiHex : WfService<ApiHex>
     {
-        public Index<ApiCodeBlock> ApiBlocks()
-            => ApiBlocks(Db.ParsedExtractPaths());
+        public static FS.Files files(FS.FolderPath src)
+            => src.Files(FS.PCsv);
 
-        public Index<ApiCodeBlock> ApiBlocks(FS.Files parsed)
+        [MethodImpl(Inline), Op]
+        public static ApiCodeBlock block(ApiHexRow src)
+            => new ApiCodeBlock(src.Address, src.Uri, src.Data);
+
+        public Index<ApiCodeBlock> ReadBlocks()
+            => ReadBlocks(Db.ApiHexPaths());
+
+        public Index<ApiCodeBlock> ReadBlocks(FS.FilePath src)
         {
-            var count = parsed.Length;
+            var loaded = ReadRows(src);
+            var rowcount = loaded.Length;
+            var blocks = root.list<ApiCodeBlock>(128);
+            if(rowcount != 0)
+            {
+                var rows = loaded.View;
+                for(var j=0; j<rowcount; j++)
+                    blocks.Add(block(skip(rows, j)));
+            }
+            return blocks.ToArray();
+        }
+
+        public Index<ApiCodeBlock> ReadBlocks(FS.Files src)
+        {
+            var count = src.Length;
             if(count == 0)
                 return Index<ApiCodeBlock>.Empty;
 
             var flow = Wf.Running(string.Format("Loading api blocks from {0} files", count));
-            var src = parsed.View;
+            var view = src.View;
             var blocks = root.list<ApiCodeBlock>(32000);
             var counter = 0;
             for(var i=0; i<count; i++)
             {
-                ref readonly var path = ref skip(src,i);
-                var loaded = Rows(path);
+                ref readonly var path = ref skip(view,i);
+                var loaded = ReadRows(path);
                 var rowcount = loaded.Length;
                 if(rowcount != 0)
                 {
@@ -46,33 +67,16 @@ namespace Z0
             return blocks.ToArray();
         }
 
-        [Op]
-        public static IApiHexReader reader(IWfRuntime wf)
-            => ApiHexReader.create(wf);
-
-        public static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
-            => src.Length != 0 ? Tables.emit(src, dst) : 0;
-
-        public Index<ApiHexRow> Emit(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FolderPath dst)
+        public Index<ApiHexRow> WriteBlocks(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FolderPath dst)
         {
             var count = src.Length;
             if(count != 0)
             {
                 var content = rows(uri, src);
-                if(content.Length != count)
-                    Wf.Error($"The distilled row count of {content.Length} does not match the input count of {count}");
-                else
-                {
-                    var p0 = Db.ApiHexPath(dst, uri);
-                    var fa = Wf.EmittingTable<ApiHexRow>(p0);
-                    emit(content, p0);
-                    Wf.EmittedTable(fa,count);
-
-                    var p1 = Db.ParsedExtractPath(dst, uri);
-                    var fb = Wf.EmittingTable<ApiHexRow>(p1);
-                    emit(content, p1);
-                    Wf.EmittedTable(fb,count);
-                }
+                var path = Db.ApiHexPath(dst, uri);
+                var emitting = Wf.EmittingTable<ApiHexRow>(path);
+                emit(content, path);
+                Wf.EmittedTable(emitting,count);
                 return content;
             }
             else
@@ -80,36 +84,22 @@ namespace Z0
         }
 
         [Op]
-        public static Index<ApiHexRow> emit(IWfRuntime wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
+        public Index<ApiHexRow> WriteBlocks(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Length;
             if(count != 0)
             {
                 var content = rows(uri, src);
-                if(content.Length != count)
-                    wf.Error($"The distilled row count of {content.Length} does not match the input count of {count}");
-                else
-                {
-                    var fa = wf.EmittingTable<ApiHexRow>(dst);
-                    emit(content, dst);
-                    wf.EmittedTable(fa,count);
-
-                    var b = wf.Db().ParsedExtractPath(uri);
-                    var fb = wf.EmittingTable<ApiHexRow>(b);
-                    emit(content, b);
-                    wf.EmittedTable(fb,count);
-                }
+                var emitting = Wf.EmittingTable<ApiHexRow>(dst);
+                emit(content, dst);
+                Wf.EmittedTable(emitting, count);
                 return content;
             }
             else
                 return sys.empty<ApiHexRow>();
         }
 
-        [MethodImpl(Inline), Op]
-        public static ApiCodeBlock block(ApiHexRow src)
-            => new ApiCodeBlock(src.Address, src.Uri, src.Data);
-
-        public Index<ApiHexRow> Rows(FS.FilePath src)
+        public Index<ApiHexRow> ReadRows(FS.FilePath src)
         {
             var data = @readonly(src.ReadLines().Storage.Skip(1));
             var count = data.Length;
@@ -117,7 +107,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 var input = skip(data,i);
-                if(Parse(input, out var dst))
+                if(ParseRow(input, out var dst))
                     buffer.Add(dst);
                 else
                     Wf.Error(string.Format("Parse failure for source text {0}", input));
@@ -125,7 +115,7 @@ namespace Z0
             return buffer.ToArray();
         }
 
-        public bool Parse(string src, out ApiHexRow dst)
+        public bool ParseRow(string src, out ApiHexRow dst)
         {
             dst = new ApiHexRow();
             try
@@ -160,16 +150,15 @@ namespace Z0
             }
         }
 
-
         [Op]
-        public Index<ApiHexIndexRow> EmitHexIndex(Index<ApiCodeBlock> src)
+        public Index<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src)
         {
             var dst = Db.IndexFile(ApiHexIndexRow.TableId);
-            return EmitHexIndex(src, dst);
+            return EmitIndex(src, dst);
         }
 
         [Op]
-        public Index<ApiHexIndexRow> EmitHexIndex(Index<ApiCodeBlock> src, FS.FilePath dst)
+        public Index<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<ApiHexIndexRow>(dst);
             Array.Sort(src.Storage);
@@ -223,5 +212,9 @@ namespace Z0
             dst.Data = src.Encoded;
             return dst;
         }
+
+        static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
+            => src.Length != 0 ? Tables.emit(src, dst) : 0;
+
     }
 }

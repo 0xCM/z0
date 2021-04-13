@@ -22,9 +22,8 @@ namespace Z0
             var total = 0u;
             var flow = Wf.Running(string.Format("Clearing {0} files", part.Format()));
             total += ClearExtracts(part);
-            total += ClearParsed(part);
-            total += ClearAsm(part);
             total += ClearHex(part);
+            total += ClearAsm(part);
             total += ClearCilData(part);
             total += ClearCilCode(part);
             Wf.Ran(flow, string.Format("Cleared {0} files for part {1}", total, part.Format()));
@@ -54,10 +53,10 @@ namespace Z0
             return result;
         }
 
-        Outcome<uint> ClearParsed(PartId part)
+        Outcome<uint> ClearHex(PartId part)
         {
             var kind = FS.PCsv;
-            var files = Db.ParsedExtractPaths(part);
+            var files = Db.ApiHexPaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);
@@ -70,18 +69,6 @@ namespace Z0
         {
             var kind = FS.Asm;
             var files = Db.AsmPaths(part);
-            var result = Clear(files);
-            if(result)
-                ClearStatus(part, kind, result.Data);
-            else
-                Wf.Error(result.Message);
-            return result;
-        }
-
-        Outcome<uint> ClearHex(PartId part)
-        {
-            var kind = FS.Hex;
-            var files = Db.ApiHexPaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);
