@@ -91,8 +91,11 @@ namespace Z0
             return catalog;
         }
 
-        Index<ProcessImageRow> EmitMaps(Timestamp ts)
-            => ImageMaps.emit(Wf, ts);
+        void EmitMaps(Timestamp ts)
+        {
+            ImageMaps.EmitSummaries(Wf, ts);
+            ImageMaps.EmitDetails(Wf, ts);
+        }
 
         void EmitDump(Timestamp ts)
         {

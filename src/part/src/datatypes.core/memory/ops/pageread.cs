@@ -9,7 +9,7 @@ namespace Z0
     partial struct memory
     {
         [Op]
-        public void pageread(MemoryRange src, Span<MemoryPage> dst)
+        public void pageread(MemoryRange src, Span<PageBuffer> dst)
         {
             var pages = root.min((uint)(src.Size/PageSize), dst.Length);
             var reader = memory.reader<byte>(src);

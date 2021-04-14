@@ -155,6 +155,10 @@ namespace Z0
         FS.FilePath IndexTable(Type t, string discriminator)
             => IndexDir(t) + FS.file(TableId(t) + discriminator, DefaultTableExt);
 
+        FS.FilePath IndexTable<T>(string discriminator, Timestamp ts)
+            where T : struct, IRecord<T>
+                => IndexDir(typeof(T)) + FS.file(TableId<T>() + "." + ts.Format(), DefaultTableExt);
+
         FS.FilePath IndexTable<T>(string discriminator)
             where T : struct, IRecord<T>
                 => IndexDir(typeof(T)) + FS.file(TableId<T>() + "." + discriminator, DefaultTableExt);

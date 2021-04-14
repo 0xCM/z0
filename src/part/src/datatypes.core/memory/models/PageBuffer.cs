@@ -13,12 +13,12 @@ namespace Z0
     /// <summary>
     /// Captures the content of a page in memory
     /// </summary>
-    public readonly struct MemoryPage
+    public readonly struct PageBuffer
     {
         readonly Index<byte> Content;
 
         [MethodImpl(Inline)]
-        public MemoryPage(MemoryRange range, Index<byte> src)
+        public PageBuffer(MemoryRange range, Index<byte> src)
         {
             Range = range;
             Content = src;

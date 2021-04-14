@@ -10,7 +10,8 @@ namespace Z0
 
     partial struct ImageMaps
     {
-        public static Index<ProcessImageRow> emit(IWfRuntime wf, Timestamp? ts = null)
+
+        public static Index<ProcessImageRow> EmitSummaries(IWfRuntime wf, Timestamp? ts = null)
         {
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
@@ -19,6 +20,18 @@ namespace Z0
             var rows = emit(index(process), dst);
             wf.EmittedTable(flow, rows.Count);
             return rows;
+        }
+
+        public static Index<MemoryPageInfo> EmitDetails(IWfRuntime wf, Timestamp? ts = null)
+        {
+            var process = Runtime.CurrentProcess;
+            var name = process.ProcessName;
+            var dst = wf.Db().IndexTable<MemoryPageInfo>(name, ts ?? root.timestamp());
+            var flow = wf.EmittingTable<MemoryPageInfo>(dst);
+            var segments = SystemMemory.snapshot(process);
+            Tables.emit(segments,dst);
+            wf.EmittedTable(flow, segments.Count);
+            return segments;
         }
 
         public static Index<ProcessImageRow> emit(Index<LocatedImage> src, FS.FilePath dst)

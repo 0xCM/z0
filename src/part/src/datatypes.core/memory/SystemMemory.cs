@@ -6,19 +6,35 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
+    using System.IO;
+
+    using Windows;
 
     using static Part;
+    using static memory;
 
-    [ApiHost(ApiNames.CellBuffers, true)]
-    public readonly struct NativeCells
+    [ApiHost]
+    public readonly struct SystemMemory
     {
+        [Op]
+        public static Index<MemoryPageInfo> snapshot()
+            => pages(MemoryNode.snapshot().Describe());
+
+        [Op]
+        public static Index<MemoryPageInfo> snapshot(int procid)
+            => pages(MemoryNode.snapshot(procid).Describe());
+
+        [Op]
+        public static Index<MemoryPageInfo> snapshot(Process src)
+            => pages(MemoryNode.snapshot(src.Id).Describe());
+
         /// <summary>
         /// Creates an array of tokens that identify a sequence of buffers
         /// </summary>
         /// <param name="base">The base address</param>
         /// <param name="size">The number of bytes covered by each represented buffer</param>
         /// <param name="count">The length of the buffer sequence</param>
-        [MethodImpl(Inline)]
         public static NativeCellToken<F>[] tokenize<F>(IntPtr @base, uint size, uint count)
             where F : unmanaged, IDataCell
         {
@@ -68,6 +84,41 @@ namespace Z0
             var totalSize = count*(bufferSize);
             var allocated = NativeBuffer.alloc(totalSize);
             return new NativeCells<F>(allocated, count, bufferSize, totalSize);
+        }
+
+        static Index<MemoryPageInfo> pages(ReadOnlySpan<MemorySegInfo> src)
+        {
+            var count = src.Length;
+            var buffer = memory.alloc<MemoryPageInfo>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                fill(skip(src,i), out seek(dst,i));
+            return buffer;
+        }
+
+        static ref MemoryPageInfo fill(in MemorySegInfo src, out MemoryPageInfo dst)
+        {
+            var identity = src.Owner;
+            if(text.nonempty(identity))
+            {
+                dst.FullIdentity = identity;
+                if(identity.EndsWith(".exe") || identity.EndsWith(".dll"))
+                    dst.Identity = Path.GetFileName(identity);
+                else
+                    dst.Identity = "?";
+            }
+            else
+            {
+                dst.Identity = EmptyString;
+                dst.FullIdentity = EmptyString;
+            }
+            dst.StartAddress = src.StartAddress;
+            dst.EndAddress = src.EndAddress;
+            dst.Size = src.Size;
+            dst.Protection = src.Protection;
+            dst.Type = src.Type;
+            dst.State = src.State;
+            return ref dst;
         }
     }
 }

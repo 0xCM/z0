@@ -34,7 +34,7 @@ namespace Z0
             BufferCount = bufferCount;
             TotalSize = totalSize;
             Cover = new Span<F>(allocation.Handle.ToPointer(), (int)TotalSize);
-            Tokens = NativeCells.tokenize<F>(Allocation.Handle, BufferSize, BufferCount);
+            Tokens = SystemMemory.tokenize<F>(Allocation.Handle, BufferSize, BufferCount);
         }
 
         /// <summary>

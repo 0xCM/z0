@@ -1029,20 +1029,34 @@ namespace Z0.Asm
             Wf.XedCatalog().EmitSources();
         }
 
+        void JitApiCatalog()
+        {
+            Wf.ApiJit().JitCatalog();
+        }
 
         void EmitNasmInstructions()
         {
             Wf.NasmTool().EmitInstructionCatalog();
         }
 
+        void MapMemory()
+        {
+            var dst = Db.IndexTable<MemoryPageInfo>();
+            var flow = Wf.EmittingTable<MemoryPageInfo>(dst);
+            var segments = SystemMemory.snapshot();
+            Tables.emit(segments,dst);
+            Wf.EmittedTable(flow, segments.Count);
+        }
+
         public void Run()
         {
+
+            JitApiCatalog();
+            MapMemory();
             //AsmExprCases.create(Wf).Create();
 
             //var script = CreateXedCase(AsmOc.mov_r64_imm64);
 
-            EmitXedSources();
-            EmitXedCatalog();
             // var tool = Wf.NasmTool();
             // tool.EmitInstructionAssets();
 

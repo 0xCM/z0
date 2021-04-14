@@ -11,10 +11,10 @@ namespace Z0
 
     partial struct memory
     {
-        public static Index<MemoryPage> pagealloc(MemoryRange range, ushort size = PageSize)
+        public static Index<PageBuffer> pagealloc(MemoryRange range, ushort size = PageSize)
         {
             var count = (uint)(range.Size/size);
-            var buffer = alloc<MemoryPage>(count);
+            var buffer = alloc<PageBuffer>(count);
             ref var dst = ref first(buffer);
             var current = range.Min;
             for(var i=0; i<count; i++)
