@@ -99,7 +99,6 @@ namespace alg
             return rolling;
         }
 
-
         [MethodImpl(Inline)]
         public static uint calc<T>(Span<T> src)
             => calc(@readonly(src));
