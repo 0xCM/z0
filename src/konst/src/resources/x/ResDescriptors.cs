@@ -16,6 +16,5 @@ namespace Z0
 
         public static ReadOnlySpan<byte> ViewBytes(this ResDescriptor src)
             => Resources.view(src);
-
     }
 }

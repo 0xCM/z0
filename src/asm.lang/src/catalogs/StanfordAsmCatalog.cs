@@ -248,7 +248,7 @@ namespace Z0.Asm
 
         bool parse(ushort seq, in TextLine src, ref StokeAsmImportRow dst)
         {
-            if(TextDocs.row(src, SourceFormat, out var row))
+            if(TextDoc.row(src, SourceFormat, out var row))
             {
                 if(row.CellCount == 15)
                 {

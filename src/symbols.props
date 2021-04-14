@@ -56,7 +56,7 @@
     <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
 
-    <Gen>$(Src)gen/lib/z0.gen.lib.csproj</Gen>
+    <Gen>$(Src)gen/z0.gen.csproj</Gen>
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
     <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
 

@@ -15,7 +15,8 @@ namespace Z0.Asm
         {
             var operands = src.Operands.View;
             var count = operands.Length;
-            var monic = src.Mnemonic.Expr;
+            var monic = src.Mnemonic;
+            dst.AppendFormat("{0} ", monic.Format(MnemonicCase.Lowercase));
             for(var i=0; i<count; i++)
             {
                 dst.Append(memory.skip(operands,i).Symbol.Format());
@@ -24,12 +25,12 @@ namespace Z0.Asm
             }
         }
 
-        public Sym<AsmMnemonicCode> Mnemonic {get;}
+        public AsmMnemonic Mnemonic {get;}
 
         public Index<AsmSigOp> Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmSig(Sym<AsmMnemonicCode> monic, Index<AsmSigOp> operands)
+        public AsmSig(AsmMnemonic monic, Index<AsmSigOp> operands)
         {
             Mnemonic = monic;
             Operands = operands;
@@ -38,13 +39,13 @@ namespace Z0.Asm
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Mnemonic.Kind == 0;
+            get => Mnemonic.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Mnemonic.Kind != 0;
+            get => Mnemonic.IsNonEmpty;
         }
 
         public string Format()
@@ -60,7 +61,7 @@ namespace Z0.Asm
         public static AsmSig Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSig(Sym<AsmMnemonicCode>.Empty, sys.empty<AsmSigOp>());
+            get => new AsmSig(AsmMnemonic.Empty, sys.empty<AsmSigOp>());
         }
     }
 }

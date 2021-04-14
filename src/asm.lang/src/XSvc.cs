@@ -9,9 +9,9 @@ namespace Z0
     [ApiHost]
     public static class XSvc
     {
-        [Op]
-        public static ICmdRunner<AsmLangCmdKind> AsmLangCmdRunner(this IWfRuntime wf)
-            => AsmLangCmdHost.create(wf);
+        // [Op]
+        // public static ICmdRunner<AsmLangCmdKind> AsmLangCmdRunner(this IWfRuntime wf)
+        //     => AsmLangCmdHost.create(wf);
 
         [Op]
         public static IntrinsicsCatalog IntrinsicsCatalog(this IWfRuntime wf)

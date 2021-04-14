@@ -13,7 +13,7 @@ namespace Z0.Parts
 
         public sealed class PartAssets : Assets<PartAssets>
         {
-            public ResDescriptor StanfordAsmCatalog() => Asset("stanford_asm_catalog.csv");
+            public ResDescriptor StanfordAsmCatalog() => Asset("stanford-asm-catalog.csv");
 
             public ResDescriptor InstrinsicXml() => Asset("intel-intrinsics.xml");
 
