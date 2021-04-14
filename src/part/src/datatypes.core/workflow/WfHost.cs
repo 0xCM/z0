@@ -34,5 +34,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfHost src)
             => src.Id;
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfHost(Type src)
+            => new WfHost(src,src);
     }
 }

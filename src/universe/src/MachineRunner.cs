@@ -58,9 +58,8 @@ namespace Z0
                     Emitted(etl.ImportSource());
                     Emitted(etl.ExportImport());
 
-                    var xed = Wf.XedCatalog();
-                    xed.EmitForms();
-                    xed.EmitClasses();
+                    Wf.XedCatalog().EmitCatalog();
+
                 }
 
                 if(options.EmitIntrinsicsInfo)

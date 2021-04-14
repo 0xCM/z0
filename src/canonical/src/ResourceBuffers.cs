@@ -50,7 +50,7 @@ namespace Z0
             public static SegRef<byte> reference()
                 => memory.segref(Buffer_2688);
 
-            const byte Sz = MemorySegment.Size;
+            const byte Sz = MemorySegment.StorageSize;
 
             static ReadOnlySpan<byte> SegIndex => new byte[8*Sz]{
                 0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0,

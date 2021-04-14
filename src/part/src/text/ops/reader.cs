@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Part;
     using static memory;
 
-    partial struct Resources
+    partial class text
     {
-        [MethodImpl(Inline), Op]
-        public static Index<StringResRow> rows(Index<StringRes> src)
-            => src.Select(r => row(r));
+        [Op]
+        public static StringReader reader(string src)
+            => new StringReader(src);
     }
 }

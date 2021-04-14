@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tooling
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
    partial struct Msg
    {
        public static MsgPattern<Count> ParsingNasmListEntries => "Parsing list entries from {0} lines";

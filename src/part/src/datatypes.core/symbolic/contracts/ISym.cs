@@ -20,8 +20,11 @@ namespace Z0
     {
         new T Kind {get;}
 
-        ulong ISym.Kind
+        ulong Value
             => memory.bw64(Kind);
+
+        ulong ISym.Kind
+            => Value;
     }
 
     public interface ISym<W,T> : ISym<T>

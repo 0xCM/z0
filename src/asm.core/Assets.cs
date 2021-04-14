@@ -21,9 +21,9 @@ namespace Z0.Parts
 
             public ResDescriptor AsmDbOperands() => Asset("asmdb.operands.csv");
 
-            public ResDescriptor XedTables() => Asset("xed-tables.txt");
+            public ResDescriptor XedInstructionDetail() => Asset("xed-tables.txt");
 
-            public ResDescriptor XedInstructionData() => Asset("xed-idata.txt");
+            public ResDescriptor XedInstructionSummary() => Asset("xed-idata.txt");
 
             public ResDescriptor XedChipData() => Asset("xed-cdata.txt");
 

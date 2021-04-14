@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using W = W32;
     using I = Imm32;
@@ -18,6 +19,17 @@ namespace Z0
     [Datatype("imm32")]
     public readonly struct Imm32 : IImm<I,uint>
     {
+        [MethodImpl(Inline)]
+        public static Imm64 from(ReadOnlySpan<byte> src)
+        {
+            var storage = z32;
+            ref var dst = ref @as<byte>(storage);
+            var count = root.min(W,src.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+            return storage;
+        }
+
         public uint Content {get;}
 
         [MethodImpl(Inline)]

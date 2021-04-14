@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [Op]
-        public static Count lines(string src, Action<TextLine> receiver)
+        public static Count lines(string src, Action<TextLine> receiver, bool keepblank = false)
         {
             var lineNumber = 0u;
             using(var reader = new StringReader(src))
@@ -46,7 +46,13 @@ namespace Z0
                 var next = reader.ReadLine();
                 while(next != null)
                 {
-                    receiver(new TextLine(++lineNumber, next));
+                    if(Query.blank(next))
+                    {
+                        if(keepblank)
+                            receiver(new TextLine(++lineNumber, next));
+                    }
+                    else
+                        receiver(new TextLine(++lineNumber, next));
                     next = reader.ReadLine();
                 }
             }

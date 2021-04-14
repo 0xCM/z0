@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Part;
 
-    partial class XText
+    partial struct XedModels
     {
-        [MethodImpl(Inline), Op]
-        public static TextLine ReadTextLine(this StreamReader src, uint number)
-            => new TextLine(number, src.ReadLine());
+        public struct FormOperand
+        {
+
+        }
     }
 }

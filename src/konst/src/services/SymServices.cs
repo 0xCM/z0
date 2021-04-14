@@ -71,13 +71,13 @@ namespace Z0.Asm
         {
             var blocks = BitBlocks().View;
             var count = blocks.Length;
-            var buffer = alloc<ByteSpanProp>(count);
+            var buffer = alloc<ByteSpanSpec>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(blocks,i);
                 var b = @bytes(block.Data);
-                seek(dst,i) = ByteSpans.property(string.Format("Block{0:X2}", i), b.ToArray());
+                seek(dst,i) = ByteSpans.spec(string.Format("Block{0:X2}", i), b.ToArray());
             }
             var merge = ByteSpans.merge("CharBytes", buffer);
             var s0 = recover<char>(merge.Segment(16,16));
@@ -115,12 +115,12 @@ namespace Z0.Asm
         public static ReadOnlySpan<char> DecodText(ReadOnlySpan<byte> src)
             => recover<char>(src);
 
-        public Index<ByteSpanProp> NameProps<K>(Symbols<K> src)
+        public Index<ByteSpanSpec> NameProps<K>(Symbols<K> src)
             where K : unmanaged
         {
             var view = src.View;
             var count = view.Length;
-            var buffer = alloc<ByteSpanProp>(count);
+            var buffer = alloc<ByteSpanSpec>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
@@ -130,8 +130,8 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public ByteSpanProp NameProp<K>(Sym<K> src)
+        public ByteSpanSpec NameProp<K>(Sym<K> src)
             where K : unmanaged
-                => ByteSpans.property(src.Name, EncodeText(src.Name));
+                => ByteSpans.spec(src.Name, EncodeText(src.Name));
     }
 }

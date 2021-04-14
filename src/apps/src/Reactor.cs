@@ -47,17 +47,11 @@ namespace Z0
                 case RunScriptCmd.CmdName:
                     Builder.RunScript(FS.path(a0)).RunDirect(Wf);
                     break;
-                case CheckServiceCmd.CmdName:
-                    Builder.CheckService(a0).RunTask(Wf);
-                    break;
                 case ShowRuntimeArchiveCmd.CmdName:
                     Builder.ShowRuntimeArchive().RunTask(Wf);
                     break;
                 case EmitAssemblyRefsCmd.CmdName:
                     Builder.EmitAssemblyRefs().RunTask(Wf);
-                break;
-                case BuildProjectCmd.CmdName:
-                    Builder.Build().RunTask(Wf);
                 break;
                 case RunPartCmd.CmdName:
                     Builder.RunPart(ApiPartIdParser.single(a0)).Dispatch(Wf).Wait();
@@ -80,11 +74,6 @@ namespace Z0
             var dst = FS.path(@"k:\dumps\run\run.dmp");
             dst.Delete();
             DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
-        }
-
-        void Run(in BuildProjectCmd cmd)
-        {
-            cmd.Save(Db.JobQueue());
         }
 
         void Run(in ShowConfigCmd cmd)

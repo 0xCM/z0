@@ -145,7 +145,7 @@ namespace Z0.Asm
             Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
-        void CheckResPack()
+        void EmitByteCode()
         {
             var package = Db.Package("respack");
             var path = package + FS.file("z0.respack.dll");
@@ -154,19 +154,60 @@ namespace Z0.Asm
             var assembly = Assembly.LoadFrom(path.Name);
             var accessors = Resources.accessors(assembly).View;
             var count = accessors.Length;
+            var dst = Db.AppLog("respack", FS.Asm);
+            var decoder = Wf.AsmDecoder();
+            var buffer = text.buffer();
+            var sequence = 0u;
+            var segments = root.list<MemorySegment>(30000);
+            using var writer = dst.Writer();
+            using var hexout = dst.ChangeExtension(FS.Hex).Writer();
             for(var i=0; i<count; i++)
             {
+                var seqlabel = sequence.ToString("d6") + ": ";
                 ref readonly var accessor = ref skip(accessors,i);
-                var description = ApiResProvider.description(accessor);
-                var resource = ApiResProvider.resource(accessor);
-                Wf.Row(string.Format("{0} | {1,-8} | {2}", resource.Address, resource.Size, resource.Accessor.Member.Name));
-                //Wf.Row(string.Format("{0} | {1} ", description.FormatHex(), accessor.Member.Name));
+                var raw = Resources.definition(accessor).ToArray();
+                var bytes = @readonly(raw);
+                var decoded = decoder.Decode(raw, MemoryAddress.Zero).View;
+                var name = accessor.DeclaringType.Name + "/" + accessor.Member.Name;
+                writer.WriteLine(asm.comment(seqlabel + name));
+                AsmFormatter.render(raw,decoded,buffer);
+                writer.Write(buffer.Emit());
+
+                var offset = z16;
+                var mov = AsmHexCode.Empty;
+                var movsize = AsmHexCode.Empty;
+                hexout.Write(seqlabel);
+                for(var j=0; j<decoded.Length; j++)
+                {
+                    ref readonly var fx = ref skip(decoded,j);
+                    var size = (byte)fx.ByteLength;
+                    var code = AsmBytes.hexcode(slice(bytes,offset,size));
+
+                    if(j !=0)
+                        hexout.Write(Chars.Space);
+                    hexout.Write(code.Format());
+                    if(size == 10)
+                        mov = code;
+                    else if(size == 7)
+                        movsize = code;
+                    offset += size;
+                }
+
+                var imm64 = Imm64.from(slice(mov.Bytes,2));
+                var imm32 = Imm32.from(slice(movsize.Bytes,3));
+                hexout.Write(string.Format(" ## {0:X} ## {1:X}", imm64, imm32));
+                hexout.WriteLine();
+
+                segments.Add(Resources.capture(accessor));
+
+                sequence++;
             }
 
-            //var dst = Db.AppLog("respack", FS.Extensions.Asm);
-            //var capture = Wf.ApiResCapture();
-            //var captured = capture.CaptureAccessors(accessors, dst);
-            //Wf.Status(definitions.BlockCount);
+            using var proplog = Db.AppLog("respack.props").Writer();
+            foreach(var prop in segments)
+            {
+                proplog.WriteLine(string.Format("{0}[{1}]:{2}", prop.BaseAddress, prop.Size, prop.Buffer.FormatHex()));
+            }
         }
 
 
@@ -762,7 +803,7 @@ namespace Z0.Asm
         void ShowXedInstructions()
         {
             var pipe = Wf.XedCatalog();
-            var records = pipe.LoadFormSources().View;
+            var records = pipe.LoadFormSummaries().View;
             var count = records.Length;
             if(count !=0 )
             {
@@ -780,9 +821,9 @@ namespace Z0.Asm
         void ShowXedForms()
         {
             var pipe = Wf.XedCatalog();
-            var forms = pipe.LoadForms();
+            var forms = pipe.LoadFormDetails();
             using var log = ShowLog("xed-forms", FS.Extensions.Csv);
-            log.Show(XedModels.XedForm.Header);
+            log.Show(XedModels.FormDetail.Header);
             root.iter(forms, form => log.Show(form));
         }
 
@@ -860,9 +901,7 @@ namespace Z0.Asm
 
         public void EmitXedCatalog()
         {
-            var xed = Wf.XedCatalog();
-            xed.EmitForms();
-            xed.EmitClasses();
+            Wf.XedCatalog().EmitCatalog();
         }
 
         public void EmitBitstrings()
@@ -1048,11 +1087,22 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, segments.Count);
         }
 
+        public void ParseXedForms()
+        {
+            var parser = XedFormParser.create(Wf.EventSink);
+            var parsed = parser.ParseSummaries();
+            Wf.Status($"Parsed {parsed.Length} summaries");
+            Wf.XedCatalog().Emit(parsed);
+        }
+
+
         public void Run()
         {
+            EmitByteCode();
+            //EmitXedCatalog();
 
-            JitApiCatalog();
-            MapMemory();
+            // JitApiCatalog();
+            // MapMemory();
             //AsmExprCases.create(Wf).Create();
 
             //var script = CreateXedCase(AsmOc.mov_r64_imm64);

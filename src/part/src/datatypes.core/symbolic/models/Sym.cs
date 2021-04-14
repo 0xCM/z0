@@ -20,12 +20,15 @@ namespace Z0
         public Identifier Type {get;}
 
         public ulong Kind {get;}
+
         public Identifier Name {get;}
 
         public SymExpr Expr {get;}
 
+        public TextBlock Description {get;}
+
         [MethodImpl(Inline)]
-        public Sym(SymIdentity id, SymKey index, Identifier type, ulong kind, Identifier name, SymExpr symbol)
+        public Sym(SymIdentity id, SymKey index, Identifier type, ulong kind, Identifier name, SymExpr symbol, TextBlock? description = null)
         {
             Identity = id;
             Index = index;
@@ -33,6 +36,13 @@ namespace Z0
             Kind = kind;
             Name = name;
             Expr = symbol;
+            Description = description ?? TextBlock.Empty;
+        }
+
+        public ulong Value
+        {
+            [MethodImpl(Inline)]
+            get => Kind;
         }
 
         public string Format()

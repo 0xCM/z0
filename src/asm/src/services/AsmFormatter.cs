@@ -57,6 +57,21 @@ namespace Z0.Asm
             return slice(dst, 0, count);
         }
 
+        public static void render(ReadOnlySpan<byte> block, ReadOnlySpan<IceInstruction> src, ITextBuffer dst)
+        {
+            Address16 offset = z16;
+            var count = src.Length;
+            dst.AppendLine(asm.comment(block.FormatHex()));
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var fx = ref skip(src,i);
+                var size = (byte)fx.ByteLength;
+                var code = slice(block,offset,size);
+                dst.AppendLineFormat("{0,-6} {1,-46} ; {2,-2} | {3}", offset, fx.FormattedInstruction, size, code.FormatHex());
+                offset += size;
+            }
+        }
+
         /// <summary>
         /// Formats the function header
         /// </summary>

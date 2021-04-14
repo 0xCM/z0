@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public readonly struct MemorySegment : IMemorySegment, ITextual, IEquatable<MemorySegment>, IHashed
     {
-        public const byte Size = 16;
+        public const byte StorageSize = 16;
 
         readonly Vector128<ulong> Segment;
 
@@ -40,6 +40,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Segment.GetElement(0);
+        }
+
+        public ByteSize Size
+        {
+            [MethodImpl(Inline)]
+            get => Segment.GetElement(1);
         }
 
         /// <summary>

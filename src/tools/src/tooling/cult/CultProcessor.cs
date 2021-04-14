@@ -71,7 +71,7 @@ namespace Z0.Asm
             var batch = 0u;
             while(!reader.EndOfStream)
             {
-                var line = reader.ReadTextLine(++counter);
+                var line = reader.ReadLine(++counter);
                 if(current < max)
                 {
                     seek(input, current++) = line;

@@ -14,6 +14,10 @@ namespace Z0
     partial class XText
     {
         [TextUtility]
+        public static StringReader Reader(this string src)
+            => text.reader(src);
+
+        [TextUtility]
         public static MemoryStream Stream(this string src, Encoding encoding = null)
             => text.stream(src, encoding);
     }

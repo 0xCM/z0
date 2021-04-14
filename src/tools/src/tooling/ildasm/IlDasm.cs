@@ -10,7 +10,6 @@ namespace Z0.Tooling
 
     public readonly struct IlDasm
     {
-
         [Flags]
         public enum FlagKind : ushort
         {

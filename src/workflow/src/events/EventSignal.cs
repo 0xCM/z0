@@ -18,7 +18,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public static EventSignal create(IWfEventSink sink, WfHost host, CorrelationToken ct)
+        public static EventSignal create(IWfEventSink sink, WfHost host, CorrelationToken ct = default)
             => new EventSignal(sink, host, ct);
 
         [MethodImpl(Inline)]
@@ -118,6 +118,9 @@ namespace Z0
 
         public void Babble<T>(T data)
             => Babble(Host, data);
+
+        public void Error<T>(T body)
+            => Raise(error(Host.Identifier, body));
 
         public void Error<T>(WfStepId step, T body, EventOrigin source)
             => Raise(error(step, body, source));

@@ -12,26 +12,26 @@ namespace Z0
     partial struct Symbols
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Sym<T> symbol<T>(SymIdentity id, SymKey<byte> index, Identifier name, T value, SymExpr expr)
+        public static Sym<T> symbol<T>(SymIdentity id, SymKey<byte> index, Identifier name, T value, SymExpr expr, TextBlock description)
             where T : unmanaged
-                => new Sym<T>(id, index, name, value, expr);
+                => new Sym<T>(id, index, name, value, expr, description);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Sym8<T> symbol<T>(W8 w, SymIdentity id, SymKey<byte> index, Identifier name, T value, SymExpr expr)
+        public static Sym8<T> symbol<T>(W8 w, SymIdentity id, SymKey<byte> index, Identifier name, T value, SymExpr expr, TextBlock description)
             where T : unmanaged
                 => new Sym8<T>(id, index, name,value,expr);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Sym16<T> symbol<T>(W16 w, SymIdentity id, SymKey<ushort> index, Identifier name, T value, SymExpr expr)
+        public static Sym16<T> symbol<T>(W16 w, SymIdentity id, SymKey<ushort> index, Identifier name, T value, SymExpr expr, TextBlock description)
             where T : unmanaged
                 => new Sym16<T>(id, index, name,value,expr);
 
         public static Sym16<T> symbol<T>(W16 w, Sym<T> entry)
             where T : unmanaged
-                => symbol(w, entry.Identity, (ushort)entry.Index, entry.Name, entry.Kind, entry.Expr);
+                => symbol(w, entry.Identity, (ushort)entry.Index, entry.Name, entry.Kind, entry.Expr, entry.Description);
 
         public static Sym8<T> symbol<T>(W8 w, Sym<T> entry)
             where T : unmanaged
-                => symbol(w, entry.Identity, (byte)entry.Index, entry.Name, entry.Kind, entry.Expr);
+                => symbol(w, entry.Identity, (byte)entry.Index, entry.Name, entry.Kind, entry.Expr, entry.Description);
     }
 }

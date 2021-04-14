@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using W = W64;
     using I = Imm64;
@@ -18,6 +19,17 @@ namespace Z0
     [Datatype("imm64")]
     public readonly struct Imm64 : IImm<Imm64,ulong>
     {
+        [MethodImpl(Inline)]
+        public static Imm64 from(ReadOnlySpan<byte> src)
+        {
+            var storage = z64;
+            ref var dst = ref @as<byte>(storage);
+            var count = root.min(W,src.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+            return storage;
+        }
+
         public ulong Content {get;}
 
         public static W W => default;
@@ -100,5 +112,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator I(ulong src)
             => new I(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(I src)
+            => src.Content;
     }
 }

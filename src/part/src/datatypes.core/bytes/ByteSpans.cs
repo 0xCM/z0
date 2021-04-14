@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
     using static memory;
@@ -15,12 +16,12 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public ByteSpan<T> create<T>(Index<T> src)
-            => new ByteSpan<T>(src);
+        [MethodImpl(Inline), Op]
+        public static ByteSpanProp prop(MemberInfo member, BinaryCode code, MemoryAddress location, ByteSize size)
+            => new ByteSpanProp(member,code,location,size);
 
         [MethodImpl(Inline), Op]
-        public static ByteSize size(Index<ByteSpanProp> src)
+        public static ByteSize size(Index<ByteSpanSpec> src)
         {
             var size = ByteSize.Zero;
             var count = src.Count;
@@ -29,16 +30,12 @@ namespace Z0
             return size;
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ByteSpanProp property<T>(Identifier name, ByteSpan<T> src, bool @static = true)
-            => new ByteSpanProp(name, src.View.ToArray(), @static);
-
         [MethodImpl(Inline), Op]
-        public static ByteSpanProp property(Identifier name, BinaryCode data, bool @static = true)
-            => new ByteSpanProp(name, data, @static);
+        public static ByteSpanSpec spec(Identifier name, BinaryCode data, bool @static = true)
+            => new ByteSpanSpec(name, data, @static);
 
         [Op]
-        public static ByteSpanProp merge(Identifier name, ByteSpanProps props)
+        public static ByteSpanSpec merge(Identifier name, ByteSpanSpecs props)
         {
             var buffer = alloc<byte>(props.TotalSize);
             var c0 = props.Count;
@@ -53,19 +50,19 @@ namespace Z0
                 for(var j=0; j<c1; j++, k++)
                     seek(dst,k) = skip(src,j);
             }
-            return property(name, buffer, props.First.IsStatic);
+            return spec(name, buffer, props.First.IsStatic);
         }
 
         [MethodImpl(Inline), Op]
         public static string property(CodeBlock src, OpIdentity id)
-            => comment(new ByteSpanProp(LegalIdentityBuilder.code(id), src).Format());
+            => comment(new ByteSpanSpec(LegalIdentityBuilder.code(id), src).Format());
 
         [MethodImpl(Inline), Op]
         public static string comment(string text)
             =>  $"; {text}";
 
         [Op]
-        public static string format(ByteSpanProp src)
+        public static string format(ByteSpanSpec src)
         {
             var dst = text.build();
             dst.Append("public");

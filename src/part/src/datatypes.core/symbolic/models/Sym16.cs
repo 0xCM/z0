@@ -25,8 +25,10 @@ namespace Z0
 
         public SymExpr Expr {get;}
 
+        public TextBlock Description {get;}
+
         [MethodImpl(Inline)]
-        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier type, Identifier name, ushort kind, SymExpr expr)
+        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier type, Identifier name, ushort kind, SymExpr expr, TextBlock? description = null)
         {
             Identity = id;
             Index = index;
@@ -34,7 +36,15 @@ namespace Z0
             Name = name;
             Kind = kind;
             Expr = expr;
+            Description = description ?? TextBlock.Empty;
         }
+
+        public ushort Value
+        {
+            [MethodImpl(Inline)]
+            get => Kind;
+        }
+
         public string Format()
             => api.format(this);
 
@@ -61,24 +71,34 @@ namespace Z0
 
         public SymExpr Expr {get;}
 
+        public TextBlock Description {get;}
+
         [MethodImpl(Inline)]
-        public Sym16(SymKey<ushort> index, Identifier name, T kind, SymExpr expr)
+        public Sym16(SymKey<ushort> index, Identifier name, T kind, SymExpr expr, TextBlock? description = null)
         {
             Identity = default;
             Index = index;
             Name = name;
             Kind = kind;
             Expr = expr;
+            Description = description ?? TextBlock.Empty;
         }
 
         [MethodImpl(Inline)]
-        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier name, T kind, SymExpr expr)
+        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier name, T kind, SymExpr expr, TextBlock? description = null)
         {
             Identity = id;
             Index = index;
             Name = name;
             Kind = kind;
             Expr = expr;
+            Description = description ?? TextBlock.Empty;
+        }
+
+        public ushort Value
+        {
+            [MethodImpl(Inline)]
+            get => memory.bw16(Kind);
         }
 
         public string Format()

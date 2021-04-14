@@ -25,8 +25,10 @@ namespace Z0
 
         public SymExpr Expr {get;}
 
+        public TextBlock Description {get;}
+
         [MethodImpl(Inline)]
-        public Sym8(SymIdentity id, SymKey<byte> key, Identifier kind, Identifier name, byte value, SymExpr expr)
+        public Sym8(SymIdentity id, SymKey<byte> key, Identifier kind, Identifier name, byte value, SymExpr expr, TextBlock? description = null)
         {
             Identity = id;
             Index = key;
@@ -34,6 +36,13 @@ namespace Z0
             Name = name;
             Kind = value;
             Expr = expr;
+            Description = description ?? TextBlock.Empty;
+        }
+
+        public byte Value
+        {
+            [MethodImpl(Inline)]
+            get => Kind;
         }
 
         public string Format()
@@ -60,19 +69,27 @@ namespace Z0
 
         public SymExpr Expr {get;}
 
+        public TextBlock Description {get;}
+
         public Identifier Type
             => typeof(T).Name;
 
         [MethodImpl(Inline)]
-        public Sym8(SymIdentity id, SymKey<byte> key, Identifier name, T value, SymExpr expr)
+        public Sym8(SymIdentity id, SymKey<byte> key, Identifier name, T value, SymExpr expr, TextBlock? description = null)
         {
             Identity = id;
             Index = key;
             Name = name;
             Kind = value;
             Expr = expr;
+            Description = description ?? TextBlock.Empty;
         }
 
+        public byte Value
+        {
+            [MethodImpl(Inline)]
+            get => memory.bw8(Kind);
+        }
         public string Format()
             => api.format(this);
 

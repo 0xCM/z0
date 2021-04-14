@@ -16,14 +16,22 @@ namespace Z0
         FS.FolderPath CatalogDir(Identifier id)
             => CatalogRoot() + FS.folder(id.Format());
 
+        FS.FolderPath CatalogDir(Identifier id, Identifier subject)
+            => CatalogRoot() + FS.folder(id.Format()) + FS.folder(subject.Format());
+
+
         FS.FilePath CatalogTable(Identifier catalog, TableId table)
             => CatalogDir(catalog) + FS.file(table.Format(), FS.Csv);
+
+        FS.FilePath CatalogTable(Identifier catalog, TableId table, Identifier subject)
+            => CatalogDir(catalog,subject) + FS.file(table.Format(), FS.Csv);
 
         FS.FilePath CatalogTable<T>(Identifier catalog)
             where T : struct, IRecord<T>
                 => CatalogTable(catalog, Tables.tableid<T>());
 
-        FS.FilePath CatalogDoc(Identifier catalog, FS.FileName file)
-            => CatalogDir(catalog) + file;
+        FS.FilePath CatalogTable<T>(Identifier catalog, Identifier subject)
+            where T : struct, IRecord<T>
+                => CatalogTable(catalog, Tables.tableid<T>(), subject);
     }
 }

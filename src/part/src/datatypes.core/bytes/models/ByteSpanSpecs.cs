@@ -11,23 +11,23 @@ namespace Z0
 
     using api = ByteSpans;
 
-    public readonly struct ByteSpanProps
+    public readonly struct ByteSpanSpecs
     {
-        readonly Index<ByteSpanProp> Data;
+        readonly Index<ByteSpanSpec> Data;
 
         [MethodImpl(Inline)]
-        public ByteSpanProps(ByteSpanProp[] src)
+        public ByteSpanSpecs(ByteSpanSpec[] src)
         {
             Data = src;
         }
 
-        public ReadOnlySpan<ByteSpanProp> View
+        public ReadOnlySpan<ByteSpanSpec> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public Span<ByteSpanProp> Edit
+        public Span<ByteSpanSpec> Edit
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
@@ -39,7 +39,7 @@ namespace Z0
             get => Data.Count;
         }
 
-        public ref ByteSpanProp First
+        public ref ByteSpanSpec First
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
@@ -52,11 +52,8 @@ namespace Z0
 
         }
 
-        public ByteSpanProp Merge(Identifier name)
-            => api.merge(name, this);
-
         [MethodImpl(Inline)]
-        public static implicit operator ByteSpanProps(ByteSpanProp[] src)
-            => new ByteSpanProps(src);
+        public static implicit operator ByteSpanSpecs(ByteSpanSpec[] src)
+            => new ByteSpanSpecs(src);
     }
 }

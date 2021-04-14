@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tooling
 {
     [ApiHost]
     public static class BuildProjectCmdApi
@@ -90,7 +90,6 @@ namespace Z0
                 dst.AppendFormat(QuotedOptionAssign, "flp", nameof(src.LogFile), src.LogFile.Format(PathSeparator.BS));
                 if(src.Verbosity != 0)
                     dst.AppendFormat(";{0}={1} ","verbosity", src.Verbosity);
-
             }
 
             if(src.MaxCpuCount != 0)

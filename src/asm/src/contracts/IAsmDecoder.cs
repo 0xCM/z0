@@ -11,6 +11,8 @@ namespace Z0.Asm
     /// </summary>
     public interface IAsmDecoder
     {
+        Index<IceInstruction> Decode(BinaryCode code, MemoryAddress @base);
+
         /// <summary>
         /// Decodes a function from member capture data
         /// </summary>

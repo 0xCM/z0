@@ -84,6 +84,35 @@ namespace Z0.Asm
             }
         }
 
+        public Index<IceInstruction> Decode(BinaryCode code, MemoryAddress @base)
+        {
+            var decoded = new Iced.InstructionList();
+            var reader = new Iced.ByteArrayCodeReader(code);
+            var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
+            decoder.IP = @base;
+            while (reader.CanReadByte)
+            {
+                ref var instruction = ref decoded.AllocUninitializedElement();
+                decoder.Decode(out instruction);
+            }
+
+            var count = decoded.Count;
+            var formatter = iformatter(AsmFormat);
+            var instructions = alloc<Asm.IceInstruction>(count);
+            var formatted = formatter.FormatInstructions(decoded, @base);
+            var position = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var instruction = ref decoded[i];
+                var size = (uint)instruction.ByteLength;
+                var encoded = slice(code.View, position, size).ToArray();
+                instructions[i] = IceExtractors.extract(instruction, formatted[i], encoded);
+                position += size;
+            }
+            return instructions;
+
+        }
+
         public Option<AsmInstructionBlock> Decode(OpUri uri, BinaryCode code, MemoryAddress @base)
         {
             try
@@ -94,30 +123,31 @@ namespace Z0.Asm
                     return Option.none<AsmInstructionBlock>();
                 }
 
-                var decoded = new Iced.InstructionList();
-                var reader = new Iced.ByteArrayCodeReader(code.Storage);
-                var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
-                decoder.IP = @base;
-                while (reader.CanReadByte)
-                {
-                    ref var instruction = ref decoded.AllocUninitializedElement();
-                    decoder.Decode(out instruction);
-                }
+                var instructions = Decode(code,@base);
+                // var decoded = new Iced.InstructionList();
+                // var reader = new Iced.ByteArrayCodeReader(code.Storage);
+                // var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
+                // decoder.IP = @base;
+                // while (reader.CanReadByte)
+                // {
+                //     ref var instruction = ref decoded.AllocUninitializedElement();
+                //     decoder.Decode(out instruction);
+                // }
 
-                var count = decoded.Count;
-                var formatter = iformatter(AsmFormat);
-                var instructions = alloc<Asm.IceInstruction>(count);
-                var formatted = formatter.FormatInstructions(decoded, @base);
-                var position = 0u;
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var instruction = ref decoded[i];
-                    var size = (uint)instruction.ByteLength;
-                    var encoded = slice(code.View, position, size).ToArray();
-                    instructions[i] = IceExtractors.extract(instruction, formatted[i], encoded);
-                    position += size;
+                // var count = decoded.Count;
+                // var formatter = iformatter(AsmFormat);
+                // var instructions = alloc<Asm.IceInstruction>(count);
+                // var formatted = formatter.FormatInstructions(decoded, @base);
+                // var position = 0u;
+                // for(var i=0; i<count; i++)
+                // {
+                //     ref readonly var instruction = ref decoded[i];
+                //     var size = (uint)instruction.ByteLength;
+                //     var encoded = slice(code.View, position, size).ToArray();
+                //     instructions[i] = IceExtractors.extract(instruction, formatted[i], encoded);
+                //     position += size;
 
-                }
+                // }
                 return new AsmInstructionBlock(uri, instructions, code);
             }
             catch(Exception e)

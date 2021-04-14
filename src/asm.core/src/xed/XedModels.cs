@@ -4,13 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd(CmdName)]
-    public struct LocateImagesCmd : ICmdSpec<LocateImagesCmd,FS.FilePath>
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    public readonly partial struct XedModels
     {
-        public const string CmdName = "locate-images";
-
-        public int ProcessId;
-
-        public FS.FilePath Target;
+        const string xed = nameof(xed);
     }
 }

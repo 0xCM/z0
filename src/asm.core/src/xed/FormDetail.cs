@@ -9,28 +9,28 @@ namespace Z0
 
     using static Part;
 
-    public readonly partial struct XedModels
+    partial struct XedModels
     {
-        const string xed = nameof(xed);
-
-        public readonly struct XedForm
+        public struct FormDetail
         {
-            public ushort Index {get;}
+            public ushort Index;
 
-            public IForm Identifier {get;}
+            public IForm Identifier;
 
-            public IClass Class {get;}
+            public IClass Class;
 
-            public Category Category {get;}
+            public Category Category;
 
-            public Index<AttributeKind> Attributes {get;}
+            public Index<AttributeKind> Attributes;
 
-            public IsaKind IsaKind {get;}
+            public IsaKind IsaKind;
 
-            public Extension Extension {get;}
+            public Extension Extension;
+
+            public Index<FormOperand> Operands;
 
             [MethodImpl(Inline)]
-            public XedForm(ushort index, IForm key, IClass iclass, Category category, Index<AttributeKind> attribs, IsaKind isa, Extension ext)
+            public FormDetail(ushort index, IForm key, IClass iclass, Category category, Index<AttributeKind> attribs, IsaKind isa, Extension ext)
             {
                 Index = index;
                 Identifier = key;
@@ -39,6 +39,7 @@ namespace Z0
                 Attributes = attribs;
                 IsaKind = isa;
                 Extension = ext;
+                Operands = Index<FormOperand>.Empty;
             }
 
             const string FormatPattern = "{0,-8} | {1,-56} | {2,-32} | {3,-16} | {4,-16} | {5}";

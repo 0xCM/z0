@@ -6,46 +6,35 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
     using static memory;
-    using api = ByteSpans;
 
-    public readonly struct ByteSpanProp : ITextual
+    public readonly struct ByteSpanProp
     {
-        public Identifier Name {get;}
+        public MemberInfo Member {get;}
 
-        public BinaryCode Data {get;}
+        public BinaryCode MemberCode {get;}
 
-        public bool IsStatic {get;}
+        public MemoryAddress StorageLocation {get;}
 
-        [MethodImpl(Inline)]
-        public ByteSpanProp(string name, byte[] data, bool isStatic = true)
-        {
-            Name = name;
-            Data = data;
-            IsStatic = isStatic;
-        }
-
-        public ref byte FirstByte
-        {
-            [MethodImpl(Inline)]
-            get => ref Data.First;
-        }
-
-        public ByteSize DataSize
-        {
-            [MethodImpl(Inline)]
-            get => Data.Size;
-        }
+        public ByteSize DataSize {get;}
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> Segment(ByteSize offset, ByteSize size)
-            => slice(Data.View, offset, size);
-        public string Format()
-            => api.format(this);
+        public ByteSpanProp(MemberInfo def, BinaryCode code, MemoryAddress location, ByteSize size)
+        {
+            Member = def;
+            MemberCode = code;
+            StorageLocation = location;
+            DataSize = size;
+        }
 
-        public override string ToString()
-            => Format();
+        public ReadOnlySpan<byte> StoredBytes
+        {
+            [MethodImpl(Inline)]
+            get => cover<byte>(StorageLocation, DataSize);
+        }
     }
+
 }

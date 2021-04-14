@@ -12,12 +12,22 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using api = Resources;
-
     public sealed class ApiResProvider : WfService<ApiResProvider>
     {
+        [Op]
+        static MemoryAddress fptr(MethodInfo src)
+            => src.MethodHandle.GetFunctionPointer();
+
+        [Op]
+        static MemoryAddress jit(MethodInfo src)
+        {
+            sys.prepare(src.MethodHandle);
+            return fptr(src);
+        }
+
+
         [MethodImpl(Inline), Op]
-        public static unsafe ApiRes resource(ApiResAccessor src)
+        public static unsafe ApiRes load(ApiResAccessor src)
         {
             var data = description(src);
             var address = slice(data,8,8).TakeUInt64();
@@ -27,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<byte> description(ApiResAccessor src, byte size = 29)
-            => cover<byte>(ApiJit.jit(src.Member), size);
+            => cover<byte>(jit(src.Member), size);
 
         /// <summary>
         /// Loades the corresponding method definitions
@@ -57,82 +67,6 @@ namespace Z0
 
             return blocks;
         }
-
-        [MethodImpl(Inline), Op]
-        public unsafe ApiRes Resource(ApiResAccessor src)
-            => resource(src);
-
-        [MethodImpl(Inline), Op]
-        public unsafe ReadOnlySpan<byte> Description(ApiResAccessor src)
-            => description(src);
-
-        /// <summary>
-        /// Queries the source assemblies for ByteSpan property getters
-        /// </summary>
-        /// <param name="src">The assemblies to query</param>
-        [Op]
-        public Index<ApiResAccessor> Accessors(Assembly[] src)
-            => api.accessors(src);
-
-        /// <summary>
-        /// Queries the source assembly for ByteSpan property getters
-        /// </summary>
-        /// <param name="src">The assembly to query</param>
-        [MethodImpl(Inline), Op]
-        public Index<ApiResAccessor> Accessors(Assembly src)
-            => api.accessors(src);
-
-        /// <summary>
-        /// Queries the source types for ByteSpan property getters
-        /// </summary>
-        /// <param name="src">The types to query</param>
-        [Op]
-        public Index<ApiResAccessor> Accessors(Type[] src)
-            => api.accessors(src);
-
-        /// <summary>
-        /// Queries the source types for ByteSpan property getters
-        /// </summary>
-        /// <param name="src">The types to query</param>
-        [Op]
-        public Index<ApiResAccessor> Accessors(Index<Type> src)
-            => api.accessors(src);
-
-        /// <summary>
-        /// Queries the source type for ByteSpan property getters
-        /// </summary>
-        /// <param name="src">The type to query</param>
-        [Op]
-        public Index<ApiResAccessor> Accessors(Type src)
-            => api.accessors(src);
-
-        /// <summary>
-        /// Queries the source type for ByteSpan property getters
-        /// </summary>
-        /// <param name="src">The type to query</param>
-        [Op]
-        public static Index<ApiResAccessor> bytespans(Type src)
-            => src.StaticProperties()
-                 .Ignore()
-                  .WithPropertyType(ByteSpanAcessorType)
-                  .Select(p => p.GetGetMethod(true))
-                  .Where(m  => m != null)
-                  .Concrete()
-                  .Select(x => new ApiResAccessor(src.HostUri(), x, ApiAccessorKind(x.ReturnType)));
-
-        /// <summary>
-        /// Queries the source type for ByteSpan property getters
-        /// </summary>
-        /// <param name="src">The type to query</param>
-        [Op]
-        public static Index<ApiResAccessor> charspans(Type src)
-            => src.StaticProperties()
-                 .Ignore()
-                  .WithPropertyType(CharSpanAcessorType)
-                  .Select(p => p.GetGetMethod(true))
-                  .Where(m  => m != null)
-                  .Concrete()
-                  .Select(x => new ApiResAccessor(src.HostUri(), x, ApiAccessorKind(x.ReturnType)));
 
 
         public static ApiHostRes hosted(ApiHostBlocks src)

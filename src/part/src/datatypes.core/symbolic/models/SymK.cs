@@ -24,6 +24,8 @@ namespace Z0
 
         public SymExpr Expr {get;}
 
+        public TextBlock Description {get;}
+
         [MethodImpl(Inline)]
         internal Sym(uint index, SymLiteral<K> src)
         {
@@ -32,29 +34,35 @@ namespace Z0
             Kind = src.DirectValue;
             Name = src.Name;
             Expr = src.Symbol;
-
+            Description = src.Description;
         }
 
         [MethodImpl(Inline)]
-        internal Sym(uint index, string name, K kind, SymExpr symbol)
+        internal Sym(uint index, string name, K kind, SymExpr symbol, TextBlock? description = null)
         {
             Index = index;
             Name = name;
             Kind = kind;
             Expr = symbol;
             Identity = default;
+            Description = description ?? TextBlock.Empty;
         }
 
         [MethodImpl(Inline)]
-        internal Sym(SymIdentity id, SymKey index, Identifier name, K kind, SymExpr symbol)
+        internal Sym(SymIdentity id, SymKey index, Identifier name, K kind, SymExpr symbol, TextBlock? description = null)
         {
             Identity = id;
             Index = index;
             Name = name;
             Kind = kind;
             Expr = symbol;
+            Description = description ?? TextBlock.Empty;
         }
-
+        public ulong Value
+        {
+            [MethodImpl(Inline)]
+            get => memory.bw64(Kind);
+        }
 
         public Identifier Type
             => typeof(K).Name;

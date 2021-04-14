@@ -16,6 +16,8 @@ namespace Z0.Asm
 
         const char FieldDelimiter = Chars.Space;
 
+        static Parts.AsmCore.PartAssets Assets => Parts.AsmCore.Assets;
+
         IForm ParseIForm(string src)
         {
             if(Enum.TryParse<IForm>(src, out var dst))
@@ -71,7 +73,7 @@ namespace Z0.Asm
             return count != 0 ? parts.Select(ParseAttribute) : sys.empty<AttributeKind>();
         }
 
-        XedForm LoadForm(ushort index, XedFormSource src)
+        FormDetail LoadDetail(ushort index, FormInfo src)
         {
             var id = ParseIForm(src.Form);
             var iclass = ParseIClass(src.Class);
@@ -79,17 +81,23 @@ namespace Z0.Asm
             var attributes = ParseAttributes(src.Attributes);
             var isa = ParseIsaKind(src.IsaSet);
             var ext = ParseExtension(src.Extension);
-            return new XedForm((ushort)index, id, iclass, category, attributes, isa, ext);
+            return new FormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
         }
 
-        public Index<XedForm> LoadForms()
+        public void EmitCatalog()
         {
-            var records = LoadFormSources().View;
-            var count = records.Length;
-            var buffer = alloc<XedForm>(count);
+            EmitFormDetails();
+            EmitSymbols();
+        }
+
+        public Index<FormDetail> LoadFormDetails()
+        {
+            var summaries = LoadFormSummaries().View;
+            var count = summaries.Length;
+            var buffer = alloc<FormDetail>(count);
             var dst = span(buffer);
             for(var i=0; i<count; i++)
-                seek(dst,i) = LoadForm((ushort)i, skip(records,i));
+                seek(dst,i) = LoadDetail((ushort)i, skip(summaries,i));
             return buffer;
         }
 
@@ -108,29 +116,66 @@ namespace Z0.Asm
             }
         }
 
-        public Symbols<IClass> EmitClasses()
+        const string Subject = "xed";
+
+        public void EmitSymbols()
         {
-            var symbols = SymCache<IClass>.get().Index;
-            var entries = symbols.View;
-            var dst = Db.AsmCatalogPath("xed", FS.file("xed-classes", FS.Csv));
-            EmitSymbols(entries, dst);
-            return symbols;
+            var src = typeof(XedModels).GetNestedTypes().Enums();
+            var literals = Symbols.literals(src);
+            var dst = Db.AsmCatalogPath("xed", FS.file("xed-symbol-index", FS.Csv));
+            var emitting = Wf.EmittingTable<SymLiteral>(dst);
+            var count = Tables.emit(literals,dst);
+            Wf.EmittedTable(emitting,count);
+
+            EmitSymbols<AddressWidth>();
+            EmitSymbols<AttributeKind>();
+            EmitSymbols<Category>();
+            EmitSymbols<ChipCode>();
+            EmitSymbols<CpuidBit>();
+            EmitSymbols<EFlag>();
+            EmitSymbols<Extension>();
+            EmitSymbols<IClass>();
+            EmitSymbols<IForm>();
+            EmitSymbols<IsaKind>();
+            EmitSymbols<MachineMode>();
+            EmitSymbols<Nonterminal>();
+            EmitSymbols<OperandWidth>();
+            EmitSymbols<OperandVisibility>();
+            EmitSymbols<RegClass>();
+            EmitSymbols<RegId>();
+            EmitSymbols<RegRole>();
+
         }
 
-        public Index<XedForm> EmitForms()
+        void EmitSymbols<K>()
+            where K : unmanaged, Enum
+        {
+            EmitSymbols(Symbols.cache<K>().View, Db.AsmCatalogPath(Subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
+        }
+
+        // public Symbols<IClass> EmitClasses()
+        // {
+        //     var symbols = SymCache<IClass>.get().Index;
+        //     var entries = symbols.View;
+        //     var dst = Db.AsmCatalogPath("xed", FS.file("xed-classes", FS.Csv));
+        //     EmitSymbols(entries, dst);
+        //     return symbols;
+        // }
+
+        public Index<FormDetail> EmitFormDetails()
         {
             var dst = Db.AsmCatalogPath("xed", FS.file("xed-forms", FS.Csv));
-            return EmitForms(dst);
+            return EmitFormDetails(dst);
         }
 
-        public Index<XedForm> EmitForms(FS.FilePath dst)
+        public Index<FormDetail> EmitFormDetails(FS.FilePath dst)
         {
-            var records = LoadForms();
+            var records = LoadFormDetails();
             var src = records.View;
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            writer.WriteLine(XedForm.Header);
+            writer.WriteLine(FormDetail.Header);
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(src,i).Format());
             Wf.EmittedFile(flow, count);
@@ -141,24 +186,38 @@ namespace Z0.Asm
         {
             var dst = Db.DataSource(FS.file("xed-idata", FS.Txt));
             var flow = Wf.EmittingFile(dst);
-            var data = Parts.AsmCore.Assets.XedInstructionData().Utf8();
+            var data = Assets.XedInstructionSummary().Utf8();
             dst.Overwrite(data);
             Wf.EmittedFile(flow, data.Length);
         }
 
-        public Index<XedFormSource> LoadFormSources()
+        public void EmitSummaries()
+        {
+            var parser = XedFormParser.create(Wf.EventSink);
+            var parsed = parser.ParseSummaries();
+            Emit(parsed);
+        }
+
+        public void Emit(ReadOnlySpan<FormInfo> src)
+        {
+            var dst = Db.CatalogTable<FormInfo>("asm", "xed");
+            var flow = Wf.EmittingTable<FormInfo>(dst);
+            var count = Tables.emit(src,dst);
+            Wf.EmittedTable(flow,count);
+        }
+
+        public Index<FormInfo> LoadFormSummaries()
         {
             var src = Db.DataSource(FS.file("xed-idata", FS.Txt));
-
-            var flow = Wf.Running($"Importing {src.ToUri()}");
+            var flow = Wf.Running("Loading xed instruction summaries");
             using var reader = src.Reader();
             var counter = 0u;
-            var header = memory.alloc<string>(XedFormSource.FieldCount);
+            var header = memory.alloc<string>(FormInfo.FieldCount);
             var succeeded = true;
-            var records = root.list<XedFormSource>();
+            var records = root.list<FormInfo>();
             while(!reader.EndOfStream)
             {
-                var line = reader.ReadTextLine(counter);
+                var line = reader.ReadLine(counter);
 
                 if(line.StartsWith(CommentMarker))
                     continue;
@@ -178,8 +237,8 @@ namespace Z0.Asm
                 }
                 else
                 {
-                   var dst = new XedFormSource();
-                   var outcome = ParseSource(line, out dst);
+                   var dst = new FormInfo();
+                   var outcome = ParseSummary(line, out dst);
                    if(outcome)
                    {
                        records.Add(dst);
@@ -201,13 +260,13 @@ namespace Z0.Asm
             return records.ToArray();
         }
 
-        static Outcome ParseSource(TextLine src, out XedFormSource dst)
+        static Outcome ParseSummary(TextLine src, out FormInfo dst)
         {
             dst = default;
             var parts = @readonly(src.Split(FieldDelimiter));
             var count = parts.Length;
-            if(count != XedFormSource.FieldCount)
-                return(false, $"Line splits into {count} parts, not {XedFormSource.FieldCount} as required");
+            if(count != FormInfo.FieldCount)
+                return(false, $"Line splits into {count} parts, not {FormInfo.FieldCount} as required");
             var i = 0;
             dst.Class = skip(parts,i++);
             dst.Extension = skip(parts,i++);
@@ -222,8 +281,8 @@ namespace Z0.Asm
         {
             var parts = @readonly(src.Split(FieldDelimiter));
             var count = parts.Length;
-            if(count != XedFormSource.FieldCount)
-                return(false, $"Line splits into {count} parts, not {XedFormSource.FieldCount} as required");
+            if(count != FormInfo.FieldCount)
+                return(false, $"Line splits into {count} parts, not {FormInfo.FieldCount} as required");
 
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(parts,i);

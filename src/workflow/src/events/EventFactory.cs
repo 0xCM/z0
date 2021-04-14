@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -51,8 +52,8 @@ namespace Z0
             => new WarnEvent<T>(step, body, ct);
 
         [Op, Closures(Closure)]
-        public static ErrorEvent<T> error<T>(string cmd, T data,  EventOrigin source)
-            => new ErrorEvent<T>(cmd, data, source);
+        public static ErrorEvent<T> error<T>(string label, T data, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new ErrorEvent<T>(label, data, originate(caller, caller,file, line ?? 0));
 
         [Op, Closures(UInt64k)]
         public static ErrorEvent<T> error<T>(WfStepId step, T data, EventOrigin source)
