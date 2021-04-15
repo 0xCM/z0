@@ -64,12 +64,6 @@ namespace Z0
             get => decode(this);
         }
 
-        public C Zero
-        {
-            [MethodImpl(Inline), Op]
-            get => Empty;
-        }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline), Op]

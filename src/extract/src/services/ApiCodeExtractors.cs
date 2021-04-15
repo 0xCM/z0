@@ -34,13 +34,13 @@ namespace Z0
 
         const int MaxZeroCount = 10;
 
-        [MethodImpl(Inline), Op]
-        public static BytePatternParser<EncodingPatternKind> patterns(byte[] buffer)
-            => new BytePatternParser<EncodingPatternKind>(EncodingPatterns.Default, buffer);
+        // [MethodImpl(Inline), Op]
+        // public static BytePatternParser<EncodingPatternKind> patterns(byte[] buffer)
+        //     => new BytePatternParser<EncodingPatternKind>(EncodingPatterns.Default, buffer);
 
         [MethodImpl(Inline), Op]
-        public static PatternExtractParser parser(byte[] buffer)
-            => new PatternExtractParser(buffer);
+        public static EncodingParser patterns(byte[] buffer)
+            => new EncodingParser(EncodingPatterns.Default, buffer);
 
         [MethodImpl(Inline), Op]
         public static PatternExtractParser parser(uint size = DefaultBufferLength)

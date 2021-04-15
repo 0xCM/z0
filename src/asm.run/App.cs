@@ -21,21 +21,23 @@ namespace Z0
 
         ApiCaptureRunner CaptureRunner;
 
+
+        FS.FolderPath CaptureDir;
+
         protected override void OnInit()
         {
             ResProvider = Wf.ApiResProvider();
             CaptureRunner = Wf.CaptureRunner();
+            CaptureDir = Db.PartDir(PartId.AsmRun) + FS.folder("capture");
         }
 
         public static ReadOnlySpan<byte> Store4 => new byte[4]{0x8D, 0x04, 0x11, 0xc3}; // lea eax, [rcx+rdx] | ret
 
-
         void CaptureMe()
         {
             var parts = root.array(PartId.AsmRun);
-            var dst = Db.AppLogDir() + FS.folder("capture");
-            dst.Clear();
-            CaptureRunner.Capture(parts, dst);
+            CaptureDir.Clear();
+            CaptureRunner.Capture(parts, CaptureDir);
 
         }
 
@@ -47,9 +49,9 @@ namespace Z0
 
         void Run()
         {
-            SigClient.run();
             CaptureMe();
-            EmitContext();
+            //CaptureMe();
+            //EmitContext();
 
         }
 

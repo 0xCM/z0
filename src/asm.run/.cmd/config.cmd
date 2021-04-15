@@ -1,5 +1,5 @@
 @echo off
-set ProjectId=asmrun
+set ProjectId=asm.run
 set ZFramework=net5.0
 set ZRuntimeId=win-x64
 set ConfigName=Release
@@ -8,7 +8,7 @@ set ProjectName=z0.%ProjectId%
 set ProjectPath=%ZDev%\src\%ProjectId%\%ProjectName%.csproj
 
 set BuildDir=%ZData%\builds
-set PubDir=%BuildDir%\bin\%ConfigName%\%ProjectName%\%ZFramework%\%ZRuntimeId%\publish
+set PubDir=%BuildDir%\bin\%ProjectName%\%ZFramework%\%ZRuntimeId%\publish
 set BinDir=%ZTools%\z5
 
 set DeploySrc=%PubDir%

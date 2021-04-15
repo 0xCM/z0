@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using BP = BytePatternParser<EncodingPatternKind>;
+    using BP = EncodingParser;
 
     [ApiHost]
     public readonly struct PatternExtractParser

@@ -1082,41 +1082,46 @@ namespace Z0.Asm
             Wf.Row(@string);
         }
 
-        void Show(in AsciCodeTable src)
-        {
-            var @string = text.format(src.Chars);
-            Wf.Row(@string);
-        }
-
         public void CheckAsciTables()
         {
             var chars = span<char>(128);
-            ShowChars(AsciTables.digits(), chars);
-            ShowChars(AsciTables.letters(LowerCase), chars);
-            ShowChars(AsciTables.letters(UpperCase), chars);
-            Show(AsciTables.digits(out var _));
-
-            // var count = decode(codes,chars);
-            // var decoded = slice(chars,0,count);
-            // var @string = text.format(decoded);
-            // Wf.Row(@string);
-
+            ShowChars(AsciTables.letters(LowerCase).Codes, chars);
+            ShowChars(AsciTables.letters(UpperCase).Codes, chars);
+            ShowChars(AsciTables.digits().Codes, chars);
         }
 
         public Index<AsmHostStatements> EmitHostStatements()
         {
             var pipe = Wf.AsmStatementPipe();
-            var hex = Wf.ApiHex();
-            var blocks = ApiHostBlocks.partition(hex.ReadBlocks());
-            var dst = Db.AsmStatementRoot();
-            dst.Delete();
-            return pipe.EmitStatements(blocks);
+            return pipe.EmitHostStatements();
+        }
+
+        void Capture(params PartId[] parts)
+        {
+            var dst = Db.AppLogDir() + FS.folder("capture");
+            dst.Clear();
+            var runner = Wf.CaptureRunner();
+            runner.Capture(parts, dst);
+            Wf.ProcessContextEmitter().Emit(Db.ImageDumpRoot());
         }
 
         public void Run()
         {
-            EmitHostStatements();
+
+            //EmitHostStatements();
             //LoadCapturedCil();
+
+            //CheckAsciTables();
+
+
+            //CaptureSelectedRoutines();
+
+            // var a0 = Prototypes.Calls.call(n0);
+            // var a1 = Prototypes.Calls.call(n1);
+            // var a2 = Prototypes.Calls.call(n2);
+            // var a3 = Prototypes.Calls.call(n3);
+
+            //Wf.Row(string.Format("{0,-16} | {1,-16} | {2,-16} | {3,-16}", a0, a1, a2, a3));
 
             //EmitXedCatalog();
 
