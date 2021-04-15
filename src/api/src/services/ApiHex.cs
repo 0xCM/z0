@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
@@ -13,8 +14,11 @@ namespace Z0
     [ApiHost]
     public class ApiHex : WfService<ApiHex>
     {
-        public static FS.Files files(FS.FolderPath src)
+        public FS.Files Files(FS.FolderPath src)
             => src.Files(FS.PCsv);
+
+        public FS.Files Files()
+            => Db.ApiHexRoot().Files(FS.PCsv);
 
         [MethodImpl(Inline), Op]
         public static ApiCodeBlock block(ApiHexRow src)
@@ -35,6 +39,17 @@ namespace Z0
                     blocks.Add(block(skip(rows, j)));
             }
             return blocks.ToArray();
+        }
+
+        public Count ReadBlocks(FS.FilePath src, List<ApiCodeBlock> dst)
+        {
+            var rows = new RecordList<ApiHexRow>(1600);
+            var count = ReadRows(src, rows);
+            for(var i=0; i<count; i++)
+            {
+                dst.Add(block(rows[i]));
+            }
+            return count;
         }
 
         public Index<ApiCodeBlock> ReadBlocks(FS.Files src)
@@ -113,6 +128,26 @@ namespace Z0
                     Wf.Error(string.Format("Parse failure for source text {0}", input));
             }
             return buffer.ToArray();
+        }
+
+        public Count ReadRows(FS.FilePath src, RecordList<ApiHexRow> dst)
+        {
+            var data = @readonly(src.ReadLines().Storage.Skip(1));
+            var count = data.Length;
+            var buffer = root.list<ApiHexRow>(count);
+            var j=0;
+            for(var i=0; i<count; i++)
+            {
+                var input = skip(data,i);
+                if(ParseRow(input, out var row))
+                {
+                    dst.Add(row);
+                    j++;
+                }
+                else
+                    Wf.Error(string.Format("Parse failure for source text {0}", input));
+            }
+            return count;
         }
 
         public bool ParseRow(string src, out ApiHexRow dst)
@@ -215,6 +250,5 @@ namespace Z0
 
         static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
             => src.Length != 0 ? Tables.emit(src, dst) : 0;
-
     }
 }

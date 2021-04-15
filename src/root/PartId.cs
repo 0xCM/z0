@@ -140,6 +140,8 @@ public enum PartId : ulong
 
     AsmCases = 127,
 
+    AsmRun = 128,
+
     External = 130,
 
     Capture = 131,

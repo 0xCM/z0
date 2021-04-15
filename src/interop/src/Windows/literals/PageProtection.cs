@@ -60,21 +60,4 @@ namespace Windows
 
         WriteCombine = 0x400,
     }
-
-
-    // A flag indicating the format of the path string that Windows returns from a call to
-    // QueryFullProcessImageName().
-    public enum ProcessQueryImageNameMode : uint
-    {
-        WIN32_FORMAT = 0,
-
-        NATIVE_SYSTEM_FORMAT = 1
-    }
-
-    // Determines the amount of information requested (and hence the type of structure returned)
-    // by a call to NtQueryInformationProcess.
-    public enum PROCESSINFOCLASS : int
-    {
-        PROCESS_BASIC_INFORMATION = 0
-    };
 }

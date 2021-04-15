@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
     using static memory;
@@ -15,6 +16,11 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHostBlocks : IIndex<ApiCodeBlock>
     {
+        public static Index<ApiHostBlocks> partition(Index<ApiCodeBlock> src)
+        {
+            return src.GroupBy(b => b.HostUri).Select(x => new ApiHostBlocks(x.Key,x.Array())).Array();
+        }
+
         /// <summary>
         /// The defining host
         /// </summary>
@@ -33,6 +39,12 @@ namespace Z0
         }
 
         public ApiCodeBlock[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public ReadOnlySpan<ApiCodeBlock> View
         {
             [MethodImpl(Inline)]
             get => Data;

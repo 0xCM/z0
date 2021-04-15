@@ -11,6 +11,13 @@ namespace Z0
 
     public unsafe readonly partial struct ConstBytesReader : IStorageReader<ConstBytesReader, ConstBytes256>
     {
+
+        public static ReadOnlySpan<Utf8Point> Utf8Points
+        {
+            [MethodImpl(Inline)]
+            get => memory.recover<byte,Utf8Point>(ConstBytes256.Storage.Seg(n7, n0));
+        }
+
         readonly ConstBytes256 Data;
 
         [MethodImpl(Inline)]

@@ -21,12 +21,6 @@ namespace Z0
 
         public static Utf8Point MaxValue => From(127);
 
-        public static ReadOnlySpan<Utf8Point> All
-        {
-            [MethodImpl(Inline)]
-            get => recover<byte,Utf8Point>(ConstBytes256.Storage.Seg(n7, n0));
-        }
-
         [MethodImpl(Inline)]
         public static Utf8Point operator &(Utf8Point a, Utf8Point b)
             => From(a.Code & b.Code);

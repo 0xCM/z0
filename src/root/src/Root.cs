@@ -21,12 +21,6 @@ namespace Z0
         /// </summary>
         public const FileWriteMode Overwrite = FileWriteMode.Overwrite;
 
-
-        /// <summary>
-        /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field
-        /// </summary>
-        public const int WidthOffset = 16;
-
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
         /// <summary>

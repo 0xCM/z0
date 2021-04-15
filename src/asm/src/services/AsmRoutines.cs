@@ -4,17 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
     using static memory;
 
     [ApiHost]
     public sealed class AsmRoutines : AsmWfService<AsmRoutines>
     {
-
         [Op]
         public static uint filter(ReadOnlySpan<AsmMemberRoutine> src, Predicate<AsmMemberRoutine> predicate, Span<AsmMemberRoutine> dst)
         {

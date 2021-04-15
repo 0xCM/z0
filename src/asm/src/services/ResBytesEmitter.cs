@@ -51,8 +51,7 @@ namespace Z0
 
         public Index<ApiHostRes> Emit(Index<ApiCodeBlock> blocks, FS.FolderPath dst)
         {
-            var hosted = blocks.GroupBy(b => b.HostUri).Select(x => new ApiHostBlocks(x.Key,x.Array())).Array();
-            return Emit(hosted, dst);
+            return Emit(ApiHostBlocks.partition(blocks), dst);
         }
 
         Index<ApiHostRes> Emit(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath dst)

@@ -28,8 +28,14 @@ namespace Z0
         FS.FilePath AsmPath(FS.FolderPath root, ApiHostUri host)
             => root + PartFolder(host.Part) +  ApiFiles.filename(host, FS.Asm);
 
+        FS.FolderPath AsmStatementRoot()
+            => TableRoot() + FS.folder("asm.statements");
+
+        FS.FolderPath AsmStatementDir(PartId part)
+            => AsmStatementRoot() + PartFolder(part);
+
         FS.FilePath AsmStatementPath(ApiHostUri host, FS.FileExt ext)
-            => TableRoot() + FS.folder("asm.statements") + PartFolder(host.Part) + HostFile(host, ext);
+            => AsmStatementDir(host.Part) + HostFile(host, ext);
 
         FS.FilePath AsmPath(PartId part, string api)
             => AsmRoot() + ApiFileName(part, api, FS.Asm);

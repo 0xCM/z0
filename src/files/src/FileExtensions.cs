@@ -148,6 +148,11 @@ namespace Z0
         /// </summary>
         public static FileExt Alg => ext(alg);
 
+        /// <summary>
+        /// Defines the <see cref='dmp'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Dmp => ext(dmp);
+
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions
         {

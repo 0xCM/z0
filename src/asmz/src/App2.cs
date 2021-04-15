@@ -15,6 +15,8 @@ namespace Z0.Asm
     using static memory;
     using static Toolsets;
 
+
+
     class App : WfService<App>
     {
         public App()
@@ -145,6 +147,7 @@ namespace Z0.Asm
             Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
+
         void EmitByteCode()
         {
             var package = Db.Package("respack");
@@ -152,7 +155,8 @@ namespace Z0.Asm
             var exists = path.Exists ? "Exists" : "Missing";
             Wf.Status($"{path} | {exists}");
             var assembly = Assembly.LoadFrom(path.Name);
-            var accessors = Resources.accessors(assembly).View;
+            var provider = Wf.ApiResProvider();
+            var accessors = provider.PackagedCode().View;
             var count = accessors.Length;
             var dst = Db.AppLog("respack", FS.Asm);
             var decoder = Wf.AsmDecoder();
@@ -401,48 +405,6 @@ namespace Z0.Asm
             using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Il)).Writer();
             writer.Write(buffer.Emit());
         }
-
-        // void EmitStatementCases()
-        // {
-        //     var cases = root.dict<AsmHexCode,AsmStatementCase>();
-
-        //     void Collect(AsmStatementDetail src)
-        //     {
-        //         var encoded = src.Encoded;
-        //         if(!cases.ContainsKey(encoded))
-        //         {
-        //             var dst = new AsmStatementCase();
-        //             dst.Encoded = encoded;
-        //             dst.Expression = src.Expression.Format();
-        //             dst.OpCode = src.OpCode;
-        //             dst.Sig = src.Sig;
-        //             cases[encoded] = dst;
-        //         }
-        //     }
-
-        //     Wf.AsmDetailPipe().Run(Collect);
-
-        //     var collected = @readonly(cases.Values.OrderBy(x => x.Encoded).Array());
-        //     var dst = Db.IndexTable<AsmStatementCase>();
-        //     var flow = Wf.EmittingTable<AsmStatementCase>(dst);
-        //     var count = Tables.emit(collected, dst, 42);
-        //     Wf.EmittedTable(flow,count);
-
-        //     var id = Db.TableId<AsmStatementCase>();
-
-        //     var asmcases = Db.IndexRoot() + FS.file(id, FS.Extensions.Asm);
-        //     var asmflow = Wf.EmittingFile(asmcases);
-        //     using var writer = asmcases.Writer();
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var @case = ref skip(collected,i);
-        //         var line = string.Format("{0,-36} ; ({1})[{2}] => {3}", @case.Expression, @case.Sig.Format(), @case.OpCode, @case.Encoded);
-        //         writer.WriteLine(line);
-        //     }
-
-        //     Wf.EmittedFile(asmflow, count);
-
-        // }
 
         FS.Files EmitPdbSymbolPaths()
         {
@@ -737,7 +699,7 @@ namespace Z0.Asm
             }
         }
 
-        Index<CilCapture> LoadCilRows()
+        Index<CilCapture> LoadCapturedCil()
         {
             var flow = Wf.Running($"Loading cil data rows");
             var input = Db.CilDataPaths().View;
@@ -751,13 +713,9 @@ namespace Z0.Asm
                 {
                     var line = reader.ReadLine();
                     if(parse(line, out var row))
-                    {
                         dst.Add(row);
-                    }
                     else
-                    {
                         Wf.Warn($"The content {line} could not be parsed");
-                    }
                 }
             }
             Wf.Ran(flow,$"Loaded {dst.Count} cil rows");
@@ -818,6 +776,37 @@ namespace Z0.Asm
             }
         }
 
+
+        public Index<ApiCodeBlock> Jumpers()
+        {
+            var jumpers = root.list<ApiCodeBlock>();
+            var buffer = root.list<ApiCodeBlock>();
+            var hex = Wf.ApiHex();
+            var files = hex.Files().View;
+            var flow = Wf.Running(string.Format("Processing {0} hex files", files.Length));
+            for(var i=0; i<files.Length; i++)
+            {
+                var file = skip(files,i);
+                var reading = Wf.Running(string.Format("Processing {0}", file.ToUri()));
+                buffer.Clear();
+                var count = hex.ReadBlocks(file, buffer);
+                var k = 0;
+                for(var j=0; j<count; j++)
+                {
+                    var block = buffer[j];
+                    if(JmpRel32.test(block.Encoded))
+                    {
+                        jumpers.Add(block);
+                        k++;
+                    }
+                }
+                Wf.Ran(reading, string.Format("Collected {0} jump stub candidates from {1}", k, file.ToUri()));
+
+            }
+            Wf.Ran(flow, string.Format("Collected {0} jump stub candidates", jumpers.Count));
+            return jumpers.ToArray();
+        }
+
         void ShowXedForms()
         {
             var pipe = Wf.XedCatalog();
@@ -863,31 +852,9 @@ namespace Z0.Asm
 
         void Produce()
         {
-
             var producer = Wf.AsmStatementProducer();
             var hosts = NestedHosts(typeof(Prototypes));
             var count = producer.Produce(Toolsets.nasm, hosts);
-        }
-
-        [Op]
-        public void Capture(Index<PartId> parts, FS.FolderPath dst)
-        {
-            var jit = Wf.ApiJit();
-            var hex = Wf.ApiHex();
-            var capture = Wf.ApiCapture();
-            var pipe = Wf.AsmStatementPipe();
-            var partcount = parts.Length;
-            var hosts = Wf.Api.PartHosts(parts);
-            var hostcount = hosts.Length;
-            for(var i=0; i<hostcount; i++)
-            {
-                var host = hosts[i];
-                var members = jit.JitHost(host);
-                var routines = capture.CaptureMembers(members, dst);
-                var hexpath = Db.ApiHexPath(dst, host.Uri);
-                var blocks = hex.ReadBlocks(hexpath);
-            }
-
         }
 
         void CaptureSelectedRoutines()
@@ -895,7 +862,7 @@ namespace Z0.Asm
             var parts = root.array(PartId.AsmLang, PartId.AsmCore, PartId.AsmCases);
             var dst = Db.AppLogDir() + FS.folder("capture");
             dst.Clear();
-            Capture(parts,dst);
+            Wf.CaptureRunner().Capture(parts, dst);
 
         }
 
@@ -1082,7 +1049,7 @@ namespace Z0.Asm
         {
             var dst = Db.IndexTable<MemoryPageInfo>();
             var flow = Wf.EmittingTable<MemoryPageInfo>(dst);
-            var segments = SystemMemory.snapshot();
+            var segments = WinMem.snapshot();
             Tables.emit(segments,dst);
             Wf.EmittedTable(flow, segments.Count);
         }
@@ -1096,9 +1063,61 @@ namespace Z0.Asm
         }
 
 
+        static uint decode(ReadOnlySpan<AsciCharCode> src, Span<char> dst)
+        {
+            var count = (uint)src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var code = ref skip(src,i);
+                seek(dst,i) = Asci.decode(code);
+            }
+            return count;
+        }
+
+        void ShowChars(ReadOnlySpan<AsciCharCode> src, Span<char> buffer)
+        {
+            var count = decode(src,buffer);
+            var decoded = slice(buffer,0,count);
+            var @string = text.format(decoded);
+            Wf.Row(@string);
+        }
+
+        void Show(in AsciCodeTable src)
+        {
+            var @string = text.format(src.Chars);
+            Wf.Row(@string);
+        }
+
+        public void CheckAsciTables()
+        {
+            var chars = span<char>(128);
+            ShowChars(AsciTables.digits(), chars);
+            ShowChars(AsciTables.letters(LowerCase), chars);
+            ShowChars(AsciTables.letters(UpperCase), chars);
+            Show(AsciTables.digits(out var _));
+
+            // var count = decode(codes,chars);
+            // var decoded = slice(chars,0,count);
+            // var @string = text.format(decoded);
+            // Wf.Row(@string);
+
+        }
+
+        public Index<AsmHostStatements> EmitHostStatements()
+        {
+            var pipe = Wf.AsmStatementPipe();
+            var hex = Wf.ApiHex();
+            var blocks = ApiHostBlocks.partition(hex.ReadBlocks());
+            var dst = Db.AsmStatementRoot();
+            dst.Delete();
+            return pipe.EmitStatements(blocks);
+        }
+
         public void Run()
         {
-            EmitByteCode();
+            EmitHostStatements();
+            //LoadCapturedCil();
+
             //EmitXedCatalog();
 
             // JitApiCatalog();

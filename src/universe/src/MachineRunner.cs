@@ -21,6 +21,7 @@ namespace Z0
             try
             {
                 var blocks = Wf.ApiIndexBuilder().IndexApiBlocks();
+                var partitioned = ApiHostBlocks.partition(blocks.Blocks);
 
                 if(options.EmitHexIndex)
                     Emitted(Wf.ApiHex().EmitIndex(blocks.Blocks));
@@ -45,9 +46,9 @@ namespace Z0
                 if(options.EmitStatements || options.EmitAsmBitstrings)
                 {
                     var pipe = Wf.AsmStatementPipe();
-                    var statements = Emitted(pipe.EmitStatements(blocks.Blocks));
+                    var statements = Emitted(pipe.EmitStatements(partitioned));
                     if(options.EmitAsmBitstrings)
-                        Emitted(pipe.EmitBitstrings(statements));
+                        Emitted(pipe.EmitBitstrings(statements.SelectMany(x => x.Statements)));
                 }
                 if(options.CorrelateMembers)
                     Wf.ApiServices().Correlate();

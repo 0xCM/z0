@@ -9,7 +9,7 @@ namespace Z0
     partial struct ImageMaps
     {
         [Op]
-        static Index<ProcessImageRow> rows(Index<LocatedImage> src)
+        public static Index<ProcessImageRow> rows(Index<LocatedImage> src)
         {
             var count = src.Count;
             var images = src.View;

@@ -35,6 +35,71 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
+        public Index<AsmApiStatement> BuildStatements(in ApiHostBlocks src)
+        {
+            var dst = root.list<AsmApiStatement>();
+            var blocks = src.Blocks.View;
+            var count = blocks.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+                var decoded = Decode(block);
+                counter += CreateStatements(decoded, dst);
+            }
+            return dst.ToArray();
+        }
+
+        public Index<AsmHostStatements> EmitHostStatements(bool clear = true)
+        {
+            var hex = Wf.ApiHex();
+            var blocks = ApiHostBlocks.partition(hex.ReadBlocks());
+            return EmitStatements(blocks, clear);
+        }
+
+        public Index<AsmHostStatements> EmitStatements(ReadOnlySpan<ApiHostBlocks> src, bool clear = true)
+        {
+            if(clear)
+                Db.AsmStatementRoot().Delete();
+
+            var count = src.Length;
+            var buffer = root.list<AsmHostStatements>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var blocks = ref skip(src,i);
+                if(blocks.Length == 0)
+                    continue;
+                var host = blocks.Host;
+                var statements = BuildStatements(blocks);
+                var scount = statements.Length;
+                var sview = statements.View;
+                var csvdst = Db.AsmStatementPath(host, FS.Csv);
+                var asmdst = Db.AsmStatementPath(host, FS.Asm);
+                var emittingAsm = Wf.EmittingFile(asmdst);
+                using var asmwriter = asmdst.Writer();
+                for(var j=0; j<scount;j++)
+                {
+                    ref readonly var statement = ref skip(sview,j);
+                    if(statement.BlockOffset == 0)
+                    {
+                        asmwriter.WriteLine(AsmBlockSeparator);
+                        asmwriter.WriteLine(string.Format("; {0}, uri={1}", statement.BaseAddress, statement.OpUri));
+                        asmwriter.WriteLine(AsmBlockSeparator);
+                    }
+
+                    asmwriter.WriteLine(string.Format("{0} {1,-36} ; {2}", statement.BlockOffset, statement.Expression, statement.Thumbprint()));
+                }
+
+                Wf.EmittedFile(emittingAsm, scount);
+
+                var emittingCsv = Wf.EmittingTable<AsmApiStatement>(csvdst);
+                var csvCount= Tables.emit(statements, csvdst);
+                Wf.EmittedTable(emittingCsv, csvCount);
+                buffer.Add(new AsmHostStatements(host, statements));
+            }
+            return buffer.ToArray();
+        }
+
         public Index<AsmApiStatement> EmitStatements(ReadOnlySpan<ApiCodeBlock> src)
         {
             var statements = BuildStatements(src);
@@ -133,19 +198,6 @@ namespace Z0.Asm
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
 
-        uint CreateStatements(in ApiHostBlocks src, List<AsmApiStatement> dst)
-        {
-            var blocks = src.Blocks.View;
-            var count = blocks.Length;
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(blocks,i);
-                var decoded = Decode(block);
-                counter += CreateStatements(decoded, dst);
-            }
-            return counter;
-        }
 
         uint CreateStatements(in AsmInstructionBlock src, List<AsmApiStatement> dst)
         {

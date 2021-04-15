@@ -89,6 +89,12 @@ namespace Z0
             get => Storage.Count != 0;
         }
 
+        public T this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => Storage[index];
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

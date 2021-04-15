@@ -36,7 +36,13 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public ref byte Cell(byte index)
-            => ref first(Bytes);
+            => ref seek(Bytes,index);
+
+        public ref byte this[byte index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(Bytes,index);
+        }
 
         [MethodImpl(Inline)]
         public byte ToUInt8()

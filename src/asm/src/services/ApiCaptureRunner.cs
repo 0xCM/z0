@@ -11,6 +11,26 @@ namespace Z0
 
     public class ApiCaptureRunner : WfService<ApiCaptureRunner>
     {
+        [Op]
+        public void Capture(Index<PartId> parts, FS.FolderPath dst)
+        {
+            var jit = Wf.ApiJit();
+            var hex = Wf.ApiHex();
+            var capture = Wf.ApiCapture();
+            var pipe = Wf.AsmStatementPipe();
+            var partcount = parts.Length;
+            var hosts = Wf.Api.PartHosts(parts);
+            var hostcount = hosts.Length;
+            for(var i=0; i<hostcount; i++)
+            {
+                var host = hosts[i];
+                var members = jit.JitHost(host);
+                var routines = capture.CaptureMembers(members, dst);
+                var hexpath = Db.ApiHexPath(dst, host.Uri);
+                var blocks = hex.ReadBlocks(hexpath);
+            }
+        }
+
         const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.CaptureContext | CaptureWorkflowOptions.EmitImm;
 
         public Index<AsmMemberRoutine> Capture(Index<PartId> parts)

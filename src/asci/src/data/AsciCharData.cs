@@ -8,14 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static memory;
+
+    using F = AsciCodeFacets;
 
     [ApiComplete]
     public readonly partial struct AsciCharData
     {
-        public const byte LetterCount = 26;
-
-        public const byte DigitCount = 10;
-
         public const ushort CharByteCount = byte.MaxValue + 1;
 
         public const byte CodeByteCount = sbyte.MaxValue + 1;
@@ -60,10 +59,10 @@ namespace Z0
             120, 121,122, 123, 124, 125, 126, 127,
         };
 
-        public static ReadOnlySpan<AsciCharCode> CharCodes
+        public static ReadOnlySpan<AsciCharCode> Codes
         {
             [MethodImpl(Inline)]
-            get => memory.recover<AsciCharCode>(CodeBytes);
+            get => recover<AsciCharCode>(CodeBytes);
         }
     }
 }
