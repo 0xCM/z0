@@ -72,6 +72,12 @@ namespace Windows
 
                 address = child.BasicInfo.BaseAddress + child.BasicInfo.RegionSize;
 
+                // if(child.Protection == PageProtection.NoAccess)
+                // {
+                //     if(NativeMethods.read(process.Handle, (IntPtr)address, child.BasicInfo.RegionSize))
+                //         liberated.Add((IntPtr)address);
+                // }
+
                 if(NativeMethods.liberate(process.Handle, (IntPtr)address, child.BasicInfo.RegionSize))
                     liberated.Add((IntPtr)address);
 
@@ -113,7 +119,7 @@ namespace Windows
             if(!IsRoot)
             {
                 dst.Add(new MemorySegInfo{
-                    StartAddress = Address,
+                    BaseAddress = Address,
                     EndAddress = Address+Size -1,
                     Size = Size,
                     Type = MemType,

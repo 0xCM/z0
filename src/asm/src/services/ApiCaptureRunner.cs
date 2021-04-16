@@ -103,37 +103,42 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        BasedApiMemberCatalog EmitRebase(Timestamp ts)
-        {
-            var rebasing = Wf.Running();
-            var catalog = Wf.ApiServices().RebaseMembers(ts);
-            Wf.Ran(rebasing);
-            return catalog;
-        }
+        // BasedApiMemberCatalog EmitRebase(Timestamp ts)
+        // {
+        //     var rebasing = Wf.Running();
+        //     var catalog = Wf.ApiServices().RebaseMembers(ts);
+        //     Wf.Ran(rebasing);
+        //     return catalog;
+        // }
 
-        void EmitMaps(Timestamp ts)
-        {
-            ImageMaps.EmitSummaries(Wf, ts);
-            ImageMaps.EmitDetails(Wf, ts);
-        }
+        // void EmitMaps(Timestamp ts)
+        // {
+        //     ImageMaps.EmitSummaries(Wf, ts);
+        //     ImageMaps.EmitDetails(Wf, ts);
+        // }
 
-        void EmitDump(Timestamp ts)
-        {
-            var process = Runtime.CurrentProcess;
-            var name = process.ProcessName;
-            var dst = Db.ProcDumpPath(name).EnsureParentExists();
-            dst.Delete();
-            var flow = Wf.EmittingFile(dst);
-            DumpEmitter.emit(process, dst.Name, DumpTypeOption.Full);
-            Wf.EmittedFile(flow,1);
-        }
+        // void EmitDump(Timestamp ts)
+        // {
+        //     var process = Runtime.CurrentProcess;
+        //     var name = process.ProcessName;
+        //     var dst = Db.ProcDumpPath(name).EnsureParentExists();
+        //     dst.Delete();
+        //     var flow = Wf.EmittingFile(dst);
+        //     DumpEmitter.emit(process, dst.Name, DumpTypeOption.Full);
+        //     Wf.EmittedFile(flow,1);
+        // }
 
         void EmitContext()
         {
-            var ts = root.timestamp();
-            EmitRebase(ts);
-            EmitMaps(ts);
-            EmitDump(ts);
+            var context = Wf.ProcessContextPipe().Emit();
+
+            var rebasing = Wf.Running();
+            var catalog = Wf.ApiServices().RebaseMembers(context.Timestamp);
+            Wf.Ran(rebasing);
+            // var ts = root.timestamp();
+            // EmitRebase(ts);
+            // EmitMaps(ts);
+            // EmitDump(ts);
         }
     }
 }

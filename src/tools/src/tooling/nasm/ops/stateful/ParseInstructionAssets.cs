@@ -14,7 +14,7 @@ namespace Z0.Tooling
     {
         public Index<NasmInstruction> ParseInstuctionAssets()
         {
-            var lines = text.lines(Parts.AsmCore.Assets.NasmInstructions().ViewText()).View;
+            var lines = text.lines(Parts.AsmCore.Assets.NasmInstructions().Utf8()).View;
             var count = lines.Length;
             var section = EmptyString;
             var records = RecordList.create<NasmInstruction>(7000);

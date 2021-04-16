@@ -81,6 +81,8 @@ namespace Z0
 
         public const string dumps = nameof(dumps);
 
+        public const string context = nameof(context);
+
         public const string source = nameof(source);
 
         public const string src = nameof(src);

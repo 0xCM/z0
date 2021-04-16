@@ -16,9 +16,14 @@ namespace Z0
         public static MemorySymbols alloc(uint count)
             => new MemorySymbols(count);
 
+        public static MemorySymbols alloc(int count)
+            => new MemorySymbols((uint)count);
+
         Index<MemoryAddress> Addresses;
 
-        Index<string> Names;
+        Index<SymExpr> Expressions;
+
+        Index<MemorySymbol> Deposited;
 
         uint CurrentIndex;
 
@@ -28,24 +33,30 @@ namespace Z0
         {
             Capacity = count;
             Addresses = alloc<MemoryAddress>(count);
-            Names = alloc<string>(count);
+            Expressions = alloc<SymExpr>(count);
+            Deposited = alloc<MemorySymbol>(count);
             CurrentIndex = 0;
         }
 
         [MethodImpl(Inline), Op]
-        public string SymbolName(uint index)
-            => index < Capacity-1 ? Names[index] ?? EmptyString : EmptyString;
+        public bool IsDefined(uint index)
+            => (index < Capacity - 1) && Deposited[index].IsNonEmpty;
+
+        [MethodImpl(Inline), Op]
+        public SymExpr Expression(uint index)
+            => index < Capacity-1 ? Expressions[index] : SymExpr.Empty;
 
         [Op]
-        public MemorySymbol Deposit(MemoryAddress address, string name)
+        public MemorySymbol Deposit(MemoryAddress address, ByteSize size, SymExpr expr)
         {
             if(CurrentIndex < Capacity - 1)
             {
                 Addresses[CurrentIndex] = address;
-                Names[CurrentIndex] = name;
-                var symbol = new MemorySymbol(this, CurrentIndex);
+                Expressions[CurrentIndex] = expr;
+                var deposited = new MemorySymbol(this, size, CurrentIndex);
+                Deposited[CurrentIndex] = deposited;
                 CurrentIndex++;
-                return symbol;
+                return deposited;
 
             }
             else
@@ -53,7 +64,7 @@ namespace Z0
         }
 
         [Op]
-        public string SymbolName(MemoryAddress address)
+        public MemorySymbol FromAddress(MemoryAddress address)
         {
             if(address != 0)
             {
@@ -61,10 +72,10 @@ namespace Z0
                 for(var i=0; i<Capacity; i++)
                 {
                     if(skip(addresses,i) == address)
-                        return Names[i];
+                        return Deposited[i];
                 }
             }
-            return EmptyString;
+            return MemorySymbol.Empty;
         }
     }
 }

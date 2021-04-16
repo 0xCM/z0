@@ -35,6 +35,9 @@ namespace Z0
         FS.FolderName VersionFolderName(byte major, byte minor, byte revision)
             => FS.folder(string.Format("{0}.{1}.{2}", major, minor, revision));
 
+        FS.FolderPath ProcessContextRoot()
+            => CacheRoot() + FS.folder(context) + FS.folder(images);
+
         FS.FolderPath ImageDumpRoot()
             => CacheRoot() + FS.folder(dumps) + FS.folder(images);
 

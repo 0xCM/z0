@@ -19,13 +19,6 @@ namespace Z0
               : 0;
 
         /// <summary>
-        /// Determines whether a type is a span
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static bool test(Type t)
-            => kind(t) != 0;
-
-        /// <summary>
         /// Tests whether a type defines a system-defined span
         /// </summary>
         /// <param name="t">The type to test</param>

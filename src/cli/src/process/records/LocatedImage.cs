@@ -6,39 +6,43 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
 
     using static Part;
 
     /// <summary>
     /// Describes a PE image from the perspective of process entry point
     /// </summary>
-    [Datatype]
-    public readonly struct LocatedImage : ILocatedImage<LocatedImage>
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct LocatedImage : IRecord<LocatedImage>
     {
+        public const string TableId = "images.located";
+
         /// <summary>
         /// The image source path
         /// </summary>
-        public FS.FilePath ImagePath {get;}
+        public FS.FilePath ImagePath;
 
         /// <summary>
         /// The image part identifier, if any
         /// </summary>
-        public PartId PartId {get;}
+        public PartId PartId;
 
         /// <summary>
         /// The image's memory base
         /// </summary>
-        public MemoryAddress BaseAddress {get;}
+        public MemoryAddress BaseAddress;
 
         /// <summary>
         /// The process entry point
         /// </summary>
-        public MemoryAddress EntryAddress {get;}
+        public MemoryAddress EntryAddress;
 
         /// <summary>
         /// The image size
         /// </summary>
-        public ByteSize Size {get;}
+        public ByteSize Size;
 
         [MethodImpl(Inline)]
         public LocatedImage(FS.FilePath path, PartId part, MemoryAddress entry, MemoryAddress @base, uint size)
@@ -79,12 +83,5 @@ namespace Z0
 
         public int CompareTo(LocatedImage src)
             => BaseAddress.CompareTo(src.BaseAddress);
-
-        public string Format()
-            => ImageMaps.format(this);
-
-
-        public override string ToString()
-            => Format();
     }
 }

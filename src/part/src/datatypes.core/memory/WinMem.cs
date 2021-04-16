@@ -91,26 +91,26 @@ namespace Z0
             return new NativeCells<F>(allocated, count, bufferSize, totalSize);
         }
 
-        const string Kernel = "kernel32.dll";
-
-        [DllImport(Kernel, SetLastError = true), Free]
-        public static extern int VirtualQueryEx(IntPtr process, IntPtr address, out BasicMemoryInfo lpBuffer, uint dwLength);
-
-        [DllImport(Kernel, SetLastError = true), Free]
-        public static extern bool VirtualProtectEx(IntPtr process, IntPtr address, UIntPtr size, PageProtection protect, out PageProtection prior);
-
-        [DllImport(Kernel, SetLastError = true), Free]
-        public static extern bool VirtualProtect(IntPtr address, UIntPtr size, PageProtection protect, out PageProtection prior);
-
         [MethodImpl(Inline)]
-        public static T* VirtualAlloc<T>(ulong size, MemAllocType type, PageProtection protection)
+        public static T* valloc<T>(ulong size, MemAllocType type, PageProtection protection)
             where T : unmanaged
                 => (T*)VirtualAlloc(UIntPtr.Zero, (UIntPtr)size, type, protection);
 
         [MethodImpl(Inline)]
-        public static bool VirtualFree<T>(T* pSrc, ulong size, MemFreeType type)
+        public static bool vfree<T>(T* pSrc, ulong size, MemFreeType type)
             where T : unmanaged
                 => VirtualFree((void*)pSrc, (UIntPtr)size, type);
+
+        const string Kernel = "kernel32.dll";
+
+        [DllImport(Kernel, SetLastError = true), Free]
+        static extern int VirtualQueryEx(IntPtr process, IntPtr address, out BasicMemoryInfo lpBuffer, uint dwLength);
+
+        [DllImport(Kernel, SetLastError = true), Free]
+        static extern bool VirtualProtectEx(IntPtr process, IntPtr address, UIntPtr size, PageProtection protect, out PageProtection prior);
+
+        [DllImport(Kernel, SetLastError = true), Free]
+        static extern bool VirtualProtect(IntPtr address, UIntPtr size, PageProtection protect, out PageProtection prior);
 
         [DllImport(Kernel, SetLastError = true), Free]
         static extern UIntPtr VirtualAlloc(UIntPtr address, UIntPtr size, MemAllocType type, PageProtection protect);
@@ -134,17 +134,18 @@ namespace Z0
             if(text.nonempty(identity))
             {
                 dst.FullIdentity = identity;
-                if(identity.EndsWith(".exe") || identity.EndsWith(".dll"))
+                if(identity.Contains("."))
                     dst.Identity = Path.GetFileName(identity);
                 else
-                    dst.Identity = "?";
+                    dst.Identity = identity.Substring(0, root.min(identity.Length, 12));
             }
             else
             {
-                dst.Identity = EmptyString;
-                dst.FullIdentity = EmptyString;
+                dst.Identity = "unknown";
+                dst.FullIdentity = "unknown";
             }
-            dst.StartAddress = src.StartAddress;
+
+            dst.BaseAddress = src.BaseAddress;
             dst.EndAddress = src.EndAddress;
             dst.Size = src.Size;
             dst.Protection = src.Protection;

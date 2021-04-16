@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Defines a partial state machine output function of the form
@@ -42,7 +41,7 @@ namespace Z0
         public Option<IOutputRule<E,S,O>> Rule(IRuleKey key)
         {
             if(RuleIndex.TryGetValue(key.Hash, out IOutputRule<E,S,O> dst))
-                return some(dst);
+                return Option.some(dst);
             else
                 return default;
         }

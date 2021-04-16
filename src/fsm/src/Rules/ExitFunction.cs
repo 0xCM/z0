@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static z;
-
     /// <summary>
     /// Defines a set of rules that define actions associated with state Exit
     /// </summary>
@@ -26,7 +24,7 @@ namespace Z0
         public Option<IFsmActionRule<A>> Rule(IRuleKey key)
         {
             if(RuleIndex.TryGetValue(key.Hash, out IFsmActionRule<A> dst))
-                return some(dst);
+                return Option.some(dst);
             else
                 return default;
         }

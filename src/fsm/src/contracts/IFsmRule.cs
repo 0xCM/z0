@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
     public interface IFsmRule
     {
-        int RuleId {get;}   
+        int RuleId {get;}
     }
 
     /// <summary>

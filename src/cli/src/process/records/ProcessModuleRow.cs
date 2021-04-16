@@ -4,19 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Record(TableId)]
-    public struct ProcessImageRow : IRecord<ProcessImageRow>
+    using System.Runtime.InteropServices;
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct ProcessModuleRow : IRecord<ProcessModuleRow>
     {
-        public const string TableId = "process.images";
+        public const string TableId = "process.modules";
 
         public MemoryAddress BaseAddress;
 
-        public MemoryAddress EndAddress;
-
         public ByteSize MemorySize;
 
-        public ByteSize Gap;
-
         public Name ImageName;
+
+        public MemoryAddress EntryAddress;
+
+        public VersionInfo Version;
+
+        public FS.FilePath ImagePath;
     }
 }

@@ -11,7 +11,8 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct ImageMaps
+    [ApiHost]
+    readonly struct ImageRecords
     {
         [MethodImpl(Inline), Op]
         public static void fill(ReadOnlySpan<ProcessModule> src, Span<ProcessModuleRow> dst)
@@ -19,28 +20,6 @@ namespace Z0
             var count = root.min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
                 fill(skip(src,i), ref seek(dst,i));
-        }
-
-        [MethodImpl(Inline), Op]
-        public static void fill(Process[] src, ProcessState[] dst)
-        {
-            var count = root.min(src.Length, dst.Length);
-            ref readonly var s = ref first(span(src));
-            ref var t = ref first(span(dst));
-            for(var i=0u; i<count; i++)
-                fill(skip(s,i), ref seek(t,i));
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref ProcessModuleRow fill(ProcessModule src, ref ProcessModuleRow dst)
-        {
-            dst.ImageName = src.ModuleName;
-            dst.BaseAddress = src.BaseAddress;
-            dst.EntryAddress = src.EntryPointAddress;
-            dst.ImagePath = FS.path(src.FileName);
-            dst.MemorySize = src.ModuleMemorySize;
-            dst.Version = root.pair((uint)src.FileVersionInfo.FileMajorPart, (uint)src.FileVersionInfo.FileMinorPart);
-            return ref dst;
         }
 
         [Op]
@@ -63,5 +42,18 @@ namespace Z0
             dst.MaxVirtualSize = src.PeakVirtualMemorySize64;
             return ref dst;
         }
+
+        [MethodImpl(Inline), Op]
+        public static ref ProcessModuleRow fill(ProcessModule src, ref ProcessModuleRow dst)
+        {
+            dst.ImageName = src.ModuleName;
+            dst.BaseAddress = src.BaseAddress;
+            dst.EntryAddress = src.EntryPointAddress;
+            dst.ImagePath = FS.path(src.FileName);
+            dst.MemorySize = src.ModuleMemorySize;
+            dst.Version = root.pair((uint)src.FileVersionInfo.FileMajorPart, (uint)src.FileVersionInfo.FileMinorPart);
+            return ref dst;
+        }
+
     }
 }

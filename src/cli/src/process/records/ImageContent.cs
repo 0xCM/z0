@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Record(TableId)]
+    using System.Runtime.InteropServices;
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ImageContent : IRecord<ImageContent>
     {
         public const string TableId = "image.content";

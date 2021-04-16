@@ -11,14 +11,14 @@ namespace Z0
 
     public readonly struct TypeIdentityProvider : ITypeIdentityProvider
     {
-        readonly Func<Type,TypeIdentity> f;
+        readonly Func<Type,TypeIdentity> Fx;
 
         [MethodImpl(Inline)]
         public TypeIdentityProvider(Func<Type, TypeIdentity> f)
-            => this.f = f;
+            => Fx = f;
 
         [MethodImpl(Inline)]
         public TypeIdentity Identify(Type src)
-            => f(src);
+            => Fx(src);
     }
 }

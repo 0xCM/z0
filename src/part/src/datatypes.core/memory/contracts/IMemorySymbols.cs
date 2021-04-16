@@ -6,6 +6,12 @@ namespace Z0
 {
     public interface IMemorySymbols
     {
-        string SymbolName(MemoryAddress address);
+        MemorySymbol FromAddress(MemoryAddress address);
+
+        SymExpr Expression(uint index);
+
+        bool IsDefined(uint index);
+
+        MemorySymbol Deposit(MemoryAddress address, ByteSize size, SymExpr expr);
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string Utf8(this ResDescriptor src)
-            => text.utf8(src.Bytes());
+            => Resources.utf8(src);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> Bytes(this ResDescriptor src)

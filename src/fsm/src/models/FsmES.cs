@@ -124,7 +124,6 @@ namespace Z0
             Runtime = Time.stopwatch(false);
         }
 
-
         /// <summary>
         /// Specifies the events that the machine can accept
         /// </summary>

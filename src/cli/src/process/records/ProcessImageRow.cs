@@ -4,28 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Windows;
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct BasicMemoryInfo : IRecord<BasicMemoryInfo>
+    public struct ProcessImageRow : IRecord<ProcessImageRow>
     {
-        public const string TableId = "memory.basic";
+        public const string TableId = "process.images";
 
         public MemoryAddress BaseAddress;
 
-        public MemoryAddress AllocationBase;
+        public MemoryAddress EndAddress;
 
-        public ByteSize RegionSize;
+        public ByteSize Size;
 
-        public ByteSize StackSize;
+        public ByteSize Gap;
 
-        public PageProtection AllocProtect;
-
-        public PageProtection Protection;
-
-        public MemState State;
-
-        public MemType Type;
+        public Name ImageName;
     }
 }

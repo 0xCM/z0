@@ -13,13 +13,16 @@ namespace Z0
     {
         readonly IMemorySymbols Store;
 
-        public uint SymbolId {get;}
+        public uint Index {get;}
+
+        public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
-        internal MemorySymbol(IMemorySymbols store, uint id)
+        internal MemorySymbol(IMemorySymbols store, ByteSize size, uint index)
         {
             Store = store;
-            SymbolId = id;
+            Index = index;
+            Size = size;
         }
 
         public bool IsEmpty
@@ -28,16 +31,22 @@ namespace Z0
             get => Store is null;
         }
 
-        public string SymbolName
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Store?.SymbolName(SymbolId) ?? EmptyString;
+            get => !IsEmpty;
+        }
+
+        public SymExpr Expression
+        {
+            [MethodImpl(Inline)]
+            get => Store?.Expression(Index) ?? SymExpr.Empty;
         }
 
         public static MemorySymbol Empty
         {
             [MethodImpl(Inline)]
-            get => new MemorySymbol(null, uint.MaxValue);
+            get => new MemorySymbol(null, 0, 0);
         }
     }
 }

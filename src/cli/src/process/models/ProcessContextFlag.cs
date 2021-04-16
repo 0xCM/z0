@@ -5,15 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Text;
-    using System.Reflection;
 
     using static memory;
 
-    public readonly struct MsilServices
+    [Flags]
+    public enum ProcessContextFlag : byte
     {
-        [Op]
-        public static RuntimeIndex index(Assembly src)
-            => RuntimeIndex.create(src);
+        None,
+
+        Summary = 1,
+
+        Detail = 2,
+
+        Dump = 4,
+
+        All = Summary | Detail | Dump
     }
 }

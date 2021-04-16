@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
     using static PrimalFsmSpec1.Event;
     using static PrimalFsmSpec1.State;
 
@@ -16,13 +15,13 @@ namespace Z0
 
     public readonly struct PrimalFsmSpec1
     {
-        public readonly TableSpan<Event> Events;
+        public readonly Index<Event> Events;
 
-        public readonly TableSpan<State> States;
+        public readonly Index<State> States;
 
-        public readonly TableSpan<Result> Results;
+        public readonly Index<Result> Results;
 
-        public readonly TableSpan<TransitionRule<Event,State>> Rules;
+        public readonly Index<TransitionRule<Event,State>> Rules;
 
         [MethodImpl(Inline)]
         public PrimalFsmSpec1(Event[] events, State[] states, Result[] results)

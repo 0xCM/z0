@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
     {
@@ -26,7 +25,7 @@ namespace Z0
             else if(arg.IsSystemDefined())
                 return ApiUri.primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
-                return some(EnumIdentity.define(arg).AsTypeIdentity());
+                return Option.some(EnumIdentity.define(arg).AsTypeIdentity());
             else if(arg.IsSegmented())
                 return SegmentedId(arg);
             else if(arg.IsArray)
@@ -82,7 +81,7 @@ namespace Z0
                 return TypeIdentity.define(text.concat(kind.Format(), idCell));
             }
             else
-                return none<TypeIdentity>();
+                return Option.none<TypeIdentity>();
         }
 
         static Option<TypeIdentity> ArrayId(Type arg)
@@ -94,7 +93,7 @@ namespace Z0
                 return TypeIdentity.define(text.concat(IDI.Array, Chars.Underscore, cellId));
             }
             else
-                return none<TypeIdentity>();
+                return Option.none<TypeIdentity>();
         }
 
         /// <summary>
@@ -113,7 +112,7 @@ namespace Z0
                 return TypeIdentity.define(text);
             }
             else
-                return none<TypeIdentity>();
+                return Option.none<TypeIdentity>();
         }
 
         static readonly ITypeIdentityProvider DefaultProvider

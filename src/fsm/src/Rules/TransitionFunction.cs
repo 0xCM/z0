@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Encapsulates the set of all rules (input : E, source : S) -> target : S that define state machine transitions
@@ -32,7 +31,7 @@ namespace Z0
         public Option<ITransitionRule<E,S>> Rule(IRuleKey key)
         {
             if(Index.TryGetValue(key.Hash, out ITransitionRule<E,S> dst))
-                return some(dst);
+                return Option.some(dst);
             else
                 return default;
         }

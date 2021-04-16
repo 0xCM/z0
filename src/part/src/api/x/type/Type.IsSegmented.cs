@@ -11,7 +11,6 @@ namespace Z0
 
     partial class XApi
     {
-
         /// <summary>
         /// Determines whether a type is classified as a blocked type via attribution
         /// </summary>

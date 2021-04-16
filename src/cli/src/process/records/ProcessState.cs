@@ -5,10 +5,13 @@
 namespace Z0
 {
     using System.Diagnostics;
+    using System.Runtime.InteropServices;
 
-    [Record]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ProcessState : IRecord<ProcessState>
     {
+        public const string TableId = "process.state";
+
         /// <summary>
         /// The base address of the process
         /// </summary>

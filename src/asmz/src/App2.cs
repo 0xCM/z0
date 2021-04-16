@@ -615,7 +615,7 @@ namespace Z0.Asm
             var descriptors = Resources.descriptors(Wf.Controller, LogName);
             if(descriptors.ResourceCount == 1)
             {
-                var data = descriptors[0].ViewChars();
+                var data = descriptors[0].Utf8();
                 using var reader = new StringReader(data.ToString());
                 var line = reader.ReadLine();
                 while(line != null)
@@ -745,12 +745,12 @@ namespace Z0.Asm
             emitter.DumpImages(src,dst);
         }
 
-        void EmitImageMaps()
-        {
-            var src = ImageMaps.current();
-            var dst = Db.AppLog("imagemap", FS.Extensions.Csv);
-            ImageMaps.emit(Wf, src, dst);
-        }
+        // void EmitImageMaps()
+        // {
+        //     var src = ImageMaps.current();
+        //     var dst = Db.AppLog("imagemap", FS.Extensions.Csv);
+        //     ImageMaps.emit(Wf, src, dst);
+        // }
 
         void ShowThumprintCatalog()
         {
@@ -1102,11 +1102,43 @@ namespace Z0.Asm
             dst.Clear();
             var runner = Wf.CaptureRunner();
             runner.Capture(parts, dst);
-            Wf.ProcessContextEmitter().Emit(Db.ImageDumpRoot());
+            Wf.ProcessContextPipe().Emit(Db.ProcessContextRoot());
+        }
+
+        MemorySymbols SymbolizeDetails(in ProcessContext src)
+        {
+            var details = src.Details.View;
+            var count = details.Length;
+            var symbols = MemorySymbols.alloc(count);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var detail = ref skip(details,i);
+                symbols.Deposit(detail.BaseAddress, detail.Size, detail.Identity.Format());
+            }
+            return symbols;
+        }
+
+        MemorySymbols SymbolizeSummaries(in ProcessContext src)
+        {
+            var summaries = src.Summaries.View;
+            var count = summaries.Length;
+            var symbols = MemorySymbols.alloc(count);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var summary = ref skip(summaries,i);
+                symbols.Deposit(summary.BaseAddress, summary.Size, summary.ImageName.Format());
+            }
+            return symbols;
         }
 
         public void Run()
         {
+            var dst = Db.ImageDumpRoot();
+            var emitter = Wf.ProcessContextPipe();
+            var pre = emitter.Emit(dst, "prejit", ProcessContextFlag.Detail | ProcessContextFlag.Summary);
+
+            var members = Wf.ApiJit().JitCatalog();
+            var post = emitter.Emit(dst, "postjit", ProcessContextFlag.All);
 
             //EmitHostStatements();
             //LoadCapturedCil();

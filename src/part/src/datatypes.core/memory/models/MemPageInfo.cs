@@ -4,17 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Windows;
+    using System.Runtime.InteropServices;
 
-    [Record(TableId)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct MemoryPageInfo : IRecord<MemoryPageInfo>
     {
         public const string TableId = "memory.pages";
 
         public Name Identity;
 
-        public MemoryAddress StartAddress;
+        public MemoryAddress BaseAddress;
 
         public MemoryAddress EndAddress;
 
