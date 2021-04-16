@@ -61,6 +61,5 @@ namespace Z0
     public readonly struct VirtualAddress
     {
         readonly ulong Value;
-
     }
 }

@@ -44,7 +44,6 @@ namespace Z0
             var blocks = hex.ReadBlocks(src);
             Wf.Status($"Read {blocks.Count} {host} operations from {src}");
 
-            var api = Wf.ApiServices();
             var operations = ApiIndex.create(blocks);
             Wf.Status($"Hydrated {operations.EntryCount} {host} operations from {blocks.Count} blocks");
 

@@ -51,14 +51,13 @@ namespace Z0
                         Emitted(pipe.EmitBitstrings(statements.SelectMany(x => x.Statements)));
                 }
                 if(options.CorrelateMembers)
-                    Wf.ApiServices().Correlate();
+                    Wf.ApiCatalogs().Correlate();
 
                 if(options.EmitAsmCatalogs)
                 {
                     var etl = Wf.StanfordCatalog();
                     Emitted(etl.ImportSource());
                     Emitted(etl.ExportImport());
-
                     Wf.XedCatalog().EmitCatalog();
 
                 }

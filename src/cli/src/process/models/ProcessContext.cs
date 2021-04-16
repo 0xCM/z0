@@ -19,7 +19,7 @@ namespace Z0
 
         public FS.FilePath SummaryPath;
 
-        public Index<MemoryPageInfo> Details;
+        public Index<MemoryRegion> Details;
 
         public FS.FilePath DetailPath;
 

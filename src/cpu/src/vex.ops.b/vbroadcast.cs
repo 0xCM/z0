@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Broadcast]
         public static uint broadcast(ushort src, N32 w)
-            => cpu.vbroadcast(w128, src).AsUInt32().GetElement(0);
+            => vbroadcast(w128, src).AsUInt32().GetElement(0);
 
         /// <summary>
         /// Replicates an 8-bit source over a 64-bit target
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Broadcast]
         public static ulong broadcast(byte src, N64 w)
-            => cpu.vbroadcast(w128, src).AsUInt64().GetElement(0);
+            => vbroadcast(w128, src).AsUInt64().GetElement(0);
 
         /// <summary>
         /// Replicates a 16-bit source over a 64-bit target
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Broadcast]
         public static ulong broadcast(ushort src, N64 w)
-            => cpu.vbroadcast(w128, src).AsUInt64().GetElement(0);
+            => vbroadcast(w128, src).AsUInt64().GetElement(0);
 
         /// <summary>
         /// Replicates a 32-bit source over a 64-bit target
@@ -49,10 +49,11 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Broadcast]
         public static ulong broadcast(uint src, N64 w)
-            => cpu.vbroadcast(w128, src).AsUInt64().GetElement(0);
+            => vbroadcast(w128, src).AsUInt64().GetElement(0);
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
+        /// __m128i _mm_broadcastb_epi8 (__m128i a) VPBROADCASTB xmm, m8
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
@@ -61,6 +62,7 @@ namespace Z0
             => BroadcastScalarToVector128(&src);
 
         /// <summary>
+        ///  __m128i _mm_broadcastb_epi8 (__m128i a) VPBROADCASTB xmm, m8
         /// Creates a target vector where each component is initialized with the same value
         /// </summary>
         /// <param name="w">The target vector width</param>
@@ -71,6 +73,7 @@ namespace Z0
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
+        ///  __m128i _mm_broadcastw_epi16 (__m128i a) VPBROADCASTW xmm, m16
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
@@ -80,6 +83,7 @@ namespace Z0
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
+        /// __m128i _mm_broadcastw_epi16 (__m128i a) VPBROADCASTW xmm, m16
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
@@ -89,6 +93,7 @@ namespace Z0
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
+        /// __m128i _mm_broadcastd_epi32 (__m128i a) VPBROADCASTD xmm, m32
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
@@ -98,6 +103,7 @@ namespace Z0
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
+        /// __m128i _mm_broadcastd_epi32 (__m128i a) VPBROADCASTD xmm, m32
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
@@ -107,6 +113,7 @@ namespace Z0
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
+        /// __m128i _mm_broadcastq_epi64 (__m128i a) VPBROADCASTQ xmm, m64
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
@@ -116,12 +123,31 @@ namespace Z0
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
+        /// __m128i _mm_broadcastq_epi64 (__m128i a) VPBROADCASTQ xmm, m64
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<ulong> vbroadcast(W128 w, ulong src)
             => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// __m128 _mm_broadcast_ss (float const * mem_addr) VBROADCASTSS xmm, m32
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<float> vbroadcast(W128 w, float src)
+            => BroadcastScalarToVector128(gptr(src));
+
+        /// <summary>
+        /// Broadcasts a 64-bit floating point value to the upper and lower cells of a 128-bit floating-point vector
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<double> vbroadcast(W128 w, double src)
+            => Vector128.Create(src);
 
         /// <summary>
         /// __m256i _mm256_broadcastb_epi8 (__m128i a) VPBROADCASTB ymm, m8
@@ -222,24 +248,6 @@ namespace Z0
             => BroadcastScalarToVector256(gptr(src));
 
         /// <summary>
-        /// __m128 _mm_broadcast_ss (float const * mem_addr) VBROADCASTSS xmm, m32
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Broadcast]
-        public static unsafe Vector128<float> vbroadcast(W128 w, float src)
-            => BroadcastScalarToVector128(gptr(src));
-
-        /// <summary>
-        /// Broadcasts a 64-bit floating point value to the upper and lower cells of a 128-bit floating-point vector
-        /// </summary>
-        /// <param name="w">The target vector width</param>
-        /// <param name="src">The value to broadcast</param>
-        [MethodImpl(Inline), Broadcast]
-        public static unsafe Vector128<double> vbroadcast(W128 w, double src)
-            => Vector128.Create(src);
-
-        /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
         /// and the upper 128-bit lane is filled with replicas of the hi value
         /// </summary>
@@ -248,7 +256,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Broadcast]
         public static Vector256<byte> vbroadcast(W256 w, byte lo, byte hi)
-            => cpu.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
+            => vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -259,7 +267,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Broadcast]
         public static Vector256<ushort> vbroadcast(W256 w, ushort lo, ushort hi)
-            => cpu.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
+            => vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -270,7 +278,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Broadcast]
         public static Vector256<uint> vbroadcast(W256 w, uint lo, uint hi)
-            => cpu.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
+            => vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -281,7 +289,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Broadcast]
         public static Vector256<ulong> vbroadcast(W256 w, ulong lo, ulong hi)
-            => cpu.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
+            => vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
 
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector512<byte> vbroadcast(W512 w, byte src)
@@ -290,6 +298,5 @@ namespace Z0
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector512<ushort> vbroadcast(W512 w, ushort src)
             => (BroadcastScalarToVector256(&src), BroadcastScalarToVector256(&src));
-
     }
 }

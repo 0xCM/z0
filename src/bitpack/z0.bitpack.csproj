@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(BitPack)" />
-
+    <ProjectReference Include="$(Cpu)" />
   </ItemGroup>
 
 </Project>

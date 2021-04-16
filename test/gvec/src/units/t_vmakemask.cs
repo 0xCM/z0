@@ -11,7 +11,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.BitVector(n16);
-                var b = cpu.vmask16u(cpu.vmask128x8u(a));
+                var b = cpu.vmovemask(cpu.vmask128x8u(a));
                 Claim.eq(b,a.Content);
             }
         }
@@ -21,7 +21,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.BitVector(n32);
-                var b = cpu.vmask32u(cpu.vmask256x8u(a));
+                var b = cpu.vmovemask(cpu.vmask256x8u(a));
                 Claim.eq(b,a.Content);
             }
         }

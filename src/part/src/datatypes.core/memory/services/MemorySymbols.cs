@@ -13,17 +13,19 @@ namespace Z0
     [ApiHost]
     public class MemorySymbols : IMemorySymbols
     {
-        public static MemorySymbols alloc(uint count)
-            => new MemorySymbols(count);
+        public static MemorySymbols alloc(uint capacity)
+            => new MemorySymbols(capacity);
 
-        public static MemorySymbols alloc(int count)
-            => new MemorySymbols((uint)count);
+        public static MemorySymbols alloc(int capacity)
+            => new MemorySymbols((uint)capacity);
 
         Index<MemoryAddress> _Addresses;
 
         Index<SymExpr> _Expressions;
 
         Index<MemorySymbol> _Deposited;
+
+        Index<AddressHash> _Hashed;
 
         uint CurrentIndex;
 
@@ -60,6 +62,7 @@ namespace Z0
             _Expressions = alloc<SymExpr>(count);
             _Deposited = alloc<MemorySymbol>(count);
             CurrentIndex = 0;
+            _Hashed = sys.empty<AddressHash>();
         }
 
         [MethodImpl(Inline), Op]
@@ -81,25 +84,22 @@ namespace Z0
                 _Deposited[CurrentIndex] = deposited;
                 CurrentIndex++;
                 return deposited;
-
             }
             else
                 return MemorySymbol.Empty;
         }
 
-        [Op]
-        public MemorySymbol FromAddress(MemoryAddress address)
+        public ReadOnlySpan<AddressHash> Seal()
         {
-            if(address != 0)
+            if(_Hashed.IsEmpty)
             {
-                var addresses = _Addresses.View;
-                for(var i=0; i<Capacity; i++)
-                {
-                    if(skip(addresses,i) == address)
-                        return _Deposited[i];
-                }
+                var src = Addresses;
+                var count = (uint)src.Length;
+                _Hashed = alloc<AddressHash>(count);
+                var dst = _Hashed.Edit;
+                memory.hash(src, dst);
             }
-            return MemorySymbol.Empty;
+            return _Hashed;
         }
     }
 }

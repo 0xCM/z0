@@ -12,14 +12,11 @@ namespace Z0.Asm
 
     public sealed class AsmWfCmdHost : WfCmdHost<AsmWfCmdHost, AsmWfCmdKind>
     {
-        ApiServices ApiServices;
-
         StanfordAsmCatalog Catalog;
 
         protected override void OnInit()
         {
             Catalog = Wf.StanfordCatalog();
-            ApiServices = Wf.ApiServices();
         }
 
         [Action(K.EmitResBytes)]
@@ -76,7 +73,7 @@ namespace Z0.Asm
         void CorrelateApiCode()
         {
             var catalogs = Wf.Api.PartCatalogs();
-            var blocks = ApiServices.Correlate(catalogs);
+            var blocks = Wf.ApiCatalogs().Correlate(catalogs);
         }
 
     }

@@ -4,14 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     public interface IMemorySymbols
     {
-        MemorySymbol FromAddress(MemoryAddress address);
-
         SymExpr Expression(uint index);
 
         bool IsDefined(uint index);
 
         MemorySymbol Deposit(MemoryAddress address, ByteSize size, SymExpr expr);
+
+        ReadOnlySpan<AddressHash> Seal();
     }
 }

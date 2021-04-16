@@ -20,7 +20,7 @@ namespace Z0
             var src = cpu.vscalar(w128,g.Data);
             for(var i=7; i>= 0; i--)
             {
-                dst.Cell(i) = (byte)cpu.vmask16u(cpu.v8u(src));
+                dst.Cell(i) = (byte)cpu.vmovemask(cpu.v8u(src));
                 src = cpu.vsll(src,1);
             }
             return dst.As<T>();

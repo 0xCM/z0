@@ -100,21 +100,6 @@ namespace Z0
             return new ImageMap(state, images, addresses.Sort(), modules(src));
         }
 
-        [Op]
-        public static Index<MemoryAddress> hash(ReadOnlySpan<MemoryAddress> src)
-        {
-            var count = (uint)src.Length;
-            var buffer = alloc<MemoryAddress>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var address = ref skip(src,i);
-                seek(dst, memory.hash(count,address)) = address;
-            }
-
-            return buffer;
-        }
-
         public MemorySymbols SymbolizeDetails(in ProcessContext src)
         {
             var details = src.Details.View;
@@ -152,27 +137,13 @@ namespace Z0
             EmitHashes(details.Addresses, detailpath);
         }
 
-        public Index<HashedAddress> EmitHashes(ReadOnlySpan<MemoryAddress> addresses, FS.FilePath dst)
+        public Index<AddressHash> EmitHashes(ReadOnlySpan<MemoryAddress> addresses, FS.FilePath dst)
         {
-            var flow = Wf.EmittingTable<HashedAddress>(dst);
+            var flow = Wf.EmittingTable<AddressHash>(dst);
             var count = (uint)addresses.Length;
-            var h0 = hash(addresses).View;
-            var buffer = alloc<HashedAddress>(count);
-            ref var hashed = ref first(buffer);
-
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var address = ref skip(addresses,i);
-                var h = memory.hash(count,address);
-                ref readonly var found = ref skip(h0,h);
-                ref var target = ref seek(hashed,i);
-                target.Index = i;
-                target.Address = address;
-                target.HashCode = h;
-            }
-
+            var buffer = alloc<AddressHash>(count);
+            memory.hash(addresses,buffer);
             Tables.emit(buffer, dst);
-
             Wf.EmittedTable(flow, count);
             return buffer;
         }
@@ -372,16 +343,16 @@ namespace Z0
             return count;
         }
 
-        public Index<MemoryPageInfo> EmitDetails(Process process, FS.FilePath dst)
+        public Index<MemoryRegion> EmitDetails(Process process, FS.FilePath dst)
         {
             var details = WinMem.snapshot(process);
             EmitDetails(details,dst);
             return details;
         }
 
-        public Count EmitDetails(Index<MemoryPageInfo> src, FS.FilePath dst)
+        public Count EmitDetails(Index<MemoryRegion> src, FS.FilePath dst)
         {
-            var flow = Wf.EmittingTable<MemoryPageInfo>(dst);
+            var flow = Wf.EmittingTable<MemoryRegion>(dst);
             var count = Tables.emit(src,dst);
             Wf.EmittedTable(flow,count);
             return count;

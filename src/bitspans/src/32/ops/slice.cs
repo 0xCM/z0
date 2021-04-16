@@ -73,7 +73,6 @@ namespace Z0
             return BitPack32.pack<byte>(unpacked);
         }
 
-
         /// <summary>
         /// Materializes a 16-bit unsigned integer from a bitspan segment
         /// </summary>

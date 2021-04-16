@@ -10,8 +10,10 @@ namespace Z0
     using static Part;
     using static memory;
 
+
     partial struct BitPack
     {
+
         public static Span<byte> pack(ReadOnlySpan<byte> src, uint offset = 0, int? minlen = null)
         {
             const byte M = 8;

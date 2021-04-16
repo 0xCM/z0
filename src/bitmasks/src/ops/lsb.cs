@@ -9,10 +9,12 @@ namespace Z0
 
     using static Part;
     using static Numeric;
+    using static memory;
     using static BitMasks.Literals;
 
     partial class BitMasks
     {
+
         /// <summary>
         /// [00000001 ... 00000001]
         /// Enables the least significant bit of each 8-bit segment

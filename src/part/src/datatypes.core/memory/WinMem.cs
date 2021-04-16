@@ -21,15 +21,15 @@ namespace Z0
     public readonly unsafe struct WinMem
     {
         [Op]
-        public static Index<MemoryPageInfo> snapshot()
+        public static Index<MemoryRegion> snapshot()
             => pages(MemoryNode.snapshot().Describe());
 
         [Op]
-        public static Index<MemoryPageInfo> snapshot(int procid)
+        public static Index<MemoryRegion> snapshot(int procid)
             => pages(MemoryNode.snapshot(procid).Describe());
 
         [Op]
-        public static Index<MemoryPageInfo> snapshot(Process src)
+        public static Index<MemoryRegion> snapshot(Process src)
             => pages(MemoryNode.snapshot(src.Id).Describe());
 
         [MethodImpl(Inline)]
@@ -118,17 +118,17 @@ namespace Z0
         [DllImport(Kernel, SetLastError = true), Free]
         static unsafe extern bool VirtualFree(void* pAddress, UIntPtr sizeToFree, MemFreeType type);
 
-        static Index<MemoryPageInfo> pages(ReadOnlySpan<MemorySegInfo> src)
+        static Index<MemoryRegion> pages(ReadOnlySpan<MemorySegInfo> src)
         {
             var count = src.Length;
-            var buffer = memory.alloc<MemoryPageInfo>(count);
+            var buffer = memory.alloc<MemoryRegion>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
                 fill(skip(src,i), out seek(dst,i));
             return buffer;
         }
 
-        static ref MemoryPageInfo fill(in MemorySegInfo src, out MemoryPageInfo dst)
+        static ref MemoryRegion fill(in MemorySegInfo src, out MemoryRegion dst)
         {
             var identity = src.Owner;
             if(text.nonempty(identity))

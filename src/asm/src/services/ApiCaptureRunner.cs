@@ -48,25 +48,9 @@ namespace Z0
                 EmitImm(parts);
 
             if((options & CaptureWorkflowOptions.CaptureContext) != 0)
-                EmitContext(members(captured));
+                EmitContext(AsmMemberRoutine.members(captured));
 
             return captured;
-        }
-
-        static ApiMembers members(Index<AsmMemberRoutine> src)
-        {
-            if(src.Length == 0)
-                return ApiMembers.Empty;
-            var members = src.Select(x => x.Member).Sort();
-            return new ApiMembers(members.First.BaseAddress,members);
-        }
-
-        static ApiMembers members(Index<AsmHostRoutines> src)
-        {
-            if(src.Length == 0)
-                return ApiMembers.Empty;
-            var members = src.SelectMany(x => x.Storage).Select(x => x.Member).Sort();
-            return new ApiMembers(members.First.BaseAddress,members);
         }
 
         public Index<AsmHostRoutines> Capture(ReadOnlySpan<ApiHostUri> hosts, CaptureWorkflowOptions options)
@@ -79,7 +63,7 @@ namespace Z0
                 EmitImm(hosts);
 
             if((options & CaptureWorkflowOptions.CaptureContext) != 0)
-                EmitContext(members(captured));
+                EmitContext(AsmHostRoutines.members(captured));
 
             return captured;
         }
@@ -119,21 +103,13 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        // void EmitContext()
-        // {
-        //     var context = Wf.ProcessContextPipe().Emit();
-        //     var rebasing = Wf.Running();
-        //     var catalog = Wf.ApiServices().RebaseMembers(context.Timestamp);
-        //     Wf.Ran(rebasing);
-        // }
-
         void EmitContext(ApiMembers members)
         {
             var context = Wf.ProcessContextPipe().Emit();
             var rebasing = Wf.Running();
-            var catalog = Wf.ApiServices().RebaseMembers(members, context.Timestamp);
+            var dst = Db.IndexTable<ApiCatalogEntry>(context.Timestamp.Format());
+            var entries = Wf.ApiCatalogs().RebaseMembers(members, dst);
             Wf.Ran(rebasing);
         }
-
     }
 }

@@ -20,10 +20,6 @@ namespace Z0
         public static ICmdRunner<ApiCmd> ApiCmdRunner(this IWfRuntime wf)
             => Z0.ApiCmdHost.create(wf);
 
-        [Op]
-        public static ApiServices ApiServices(this IWfRuntime wf)
-            => Z0.ApiServices.create(wf);
-
         public static ApiHexArchive ApiHexArchive(this IWfRuntime wf)
             => Z0.ApiHexArchive.create(wf);
 

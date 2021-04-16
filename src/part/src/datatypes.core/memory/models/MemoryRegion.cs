@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct MemoryPageInfo : IRecord<MemoryPageInfo>
+    public struct MemoryRegion : IRecord<MemoryRegion>
     {
-        public const string TableId = "memory.pages";
+        public const string TableId = "memory.regions";
 
         public Name Identity;
 

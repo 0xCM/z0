@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct HashedAddress : IRecord<HashedAddress>
+    public struct AddressHash : IRecord<AddressHash>
     {
         public const string TableId = "addresses.hashed";
 

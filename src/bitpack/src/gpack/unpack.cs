@@ -19,7 +19,7 @@ namespace Z0
             var count = width<T>(w8);
             var dst = span<bit>(count);
             for(byte i=0; i<count; i++)
-                seek(dst,i) = gbits.testbit(src,i);
+                seek(dst,i) = BitMasks.testbit(src,i);
             return dst;
         }
 
@@ -34,7 +34,7 @@ namespace Z0
             var k = 0;
             for(var i=0; i<kCell; i++)
             for(byte j=0; j<wCell; j++, k++)
-                seek(target, k) = gbits.testbit(skip(src,i), j);
+                seek(target, k) = BitMasks.testbit(skip(src,i), j);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
                 var k = 0u;
                 for(var i=0; i<cells; i++)
                 for(byte j=0; j<wCell; j++)
-                    seek(dst, k++) = gbits.testbit(skip(src,i), j) == bit.On ? Numeric.one<T>() : zero<T>();
+                    seek(dst, k++) = BitMasks.testbit(skip(src,i), j) == bit.On ? Numeric.one<T>() : zero<T>();
                 return dst;
             }
         }
@@ -103,7 +103,7 @@ namespace Z0
         {
             var count = root.min(width<S>(), dst.Length);
             for(var i=0u; i<count; i++)
-                seek(dst, i) = gbits.testbit(src, (byte)i) == bit.On ? Numeric.one<T>() : zero<T>();
+                seek(dst, i) = BitMasks.testbit(src, (byte)i) == bit.On ? Numeric.one<T>() : zero<T>();
             return dst;
         }
 

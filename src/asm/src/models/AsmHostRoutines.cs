@@ -11,6 +11,14 @@ namespace Z0.Asm
 
     public readonly struct AsmHostRoutines : IIndex<AsmMemberRoutine>
     {
+        public static ApiMembers members(Index<AsmHostRoutines> src)
+        {
+            if(src.Length == 0)
+                return ApiMembers.Empty;
+            var members = src.SelectMany(x => x.Storage).Select(x => x.Member).Sort();
+            return new ApiMembers(members.First.BaseAddress,members);
+        }
+
         readonly Index<AsmMemberRoutine> Data;
 
         [MethodImpl(Inline)]

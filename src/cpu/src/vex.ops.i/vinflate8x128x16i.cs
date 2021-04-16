@@ -17,22 +17,14 @@ namespace Z0
         /// <summary>
         /// PMOVZXBW xmm, m64
         /// 8x8u -> 8x16u
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector128<ushort> vinflate128x16u(in SpanBlock64<byte> src, uint offset)
-            => v16u(ConvertToVector128Int16(gptr(src[offset])));
-
-        /// <summary>
-        /// PMOVZXBW xmm, m64
-        /// 8x8u -> 8x16u
-        /// Projects 8 8-bit unsigned integers onto 8 16-bit unsigned integers
+        /// Projects 8 8-bit unsigned integers onto 8 signed 16-bit integers
         /// </summary>
         /// <param name="src">The input component source</param>
         /// <param name="n">The source component count</param>
-        /// <param name="dst">The target component width</param>
+        /// <param name="w">The target component width</param>
+        /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<ushort> vinflate128x16u(in ulong src)
-            => v16u(ConvertToVector128Int16(gptr(u8(src))));
+        public static unsafe Vector128<short> vinflate8x128x16i(in byte src)
+            => ConvertToVector128Int16(gptr(src));
     }
 }
