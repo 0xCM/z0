@@ -105,7 +105,7 @@ namespace Z0
 
         void EmitContext(ApiMembers members)
         {
-            var context = Wf.ProcessContextPipe().Emit();
+            var context = Wf.ProcessContextPipe().Emit("post-capture");
             var rebasing = Wf.Running();
             var dst = Db.IndexTable<ApiCatalogEntry>(context.Timestamp.Format());
             var entries = Wf.ApiCatalogs().RebaseMembers(members, dst);

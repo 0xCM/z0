@@ -6,7 +6,7 @@ namespace Z0.Schemas.Pe
 {
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ResourceDirectory : IRecord<ResourceDirectory>
     {
         public const string TableId = "pe.resdir";

@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Pe
 {
-    [Record(TableName)]
+    using System.Runtime.InteropServices;
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct CorHeader : IRecord<CorHeader>
     {
-        public const string TableName = "pe-corheader";
+        public const string TableId = "pe-corheader";
 
         public ushort MajorRuntimeVersion;
 

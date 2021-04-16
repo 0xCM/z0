@@ -14,6 +14,6 @@ namespace Z0
 
         MemorySymbol Deposit(MemoryAddress address, ByteSize size, SymExpr expr);
 
-        ReadOnlySpan<AddressHash> Seal();
+        MemoryLookup Seal();
     }
 }

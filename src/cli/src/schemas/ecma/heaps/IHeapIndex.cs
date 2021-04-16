@@ -14,7 +14,6 @@ namespace Z0.Schemas.Ecma
     public interface IHeapIndex<T> : IHeapIndex
         where T : unmanaged, IHeapIndexKind
     {
-
         HeapIndexKind IHeapIndex.Classifier
             => default(T).Classifier;
     }

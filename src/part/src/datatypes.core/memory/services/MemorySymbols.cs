@@ -89,7 +89,7 @@ namespace Z0
                 return MemorySymbol.Empty;
         }
 
-        public ReadOnlySpan<AddressHash> Seal()
+        public MemoryLookup Seal()
         {
             if(_Hashed.IsEmpty)
             {
@@ -99,7 +99,7 @@ namespace Z0
                 var dst = _Hashed.Edit;
                 memory.hash(src, dst);
             }
-            return _Hashed;
+            return new MemoryLookup(_Deposited, _Hashed);
         }
     }
 }

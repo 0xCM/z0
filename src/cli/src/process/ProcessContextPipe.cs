@@ -244,7 +244,7 @@ namespace Z0
         {
             var dst = Db.ProcessContextRoot();
             var emitter = Wf.ProcessContextPipe();
-            return emitter.Emit(dst,subject,flag);
+            return emitter.Emit(dst, subject, flag);
         }
 
         public ProcessContext Emit(FS.FolderPath dst, Identifier subject = default, PCK flag = PCK.All)

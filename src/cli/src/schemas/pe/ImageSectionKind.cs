@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-
     // See: http://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/
     public enum ImageSectionKind : byte
     {
@@ -48,6 +45,4 @@ namespace Z0
         [Symbol(".cormeta")]
         ClrMetadata,
     }
-
-
 }

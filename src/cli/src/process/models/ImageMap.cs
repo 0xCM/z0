@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ImageMap : IDataType<ImageMap>
+    public readonly struct ImageMap
     {
         public ProcessState Process {get;}
 

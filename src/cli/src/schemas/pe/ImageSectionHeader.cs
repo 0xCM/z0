@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
     using System.Reflection.PortableExecutable;
+    using System.Runtime.InteropServices;
 
-    [Record(TableId)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ImageSectionHeader : IRecord<ImageSectionHeader>
     {
         public const string TableId = "image.headers";

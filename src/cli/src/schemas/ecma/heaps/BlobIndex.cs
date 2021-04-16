@@ -9,7 +9,6 @@ namespace Z0.Schemas.Ecma
     using static Part;
     using static HeapIndexKinds;
 
-
     public readonly struct BlobIndex : IHeapIndex<BlobIndexKind,BlobIndex>
     {
         public uint Key {get;}
