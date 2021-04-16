@@ -27,9 +27,9 @@ namespace Z0
             ApiHex = Wf.ApiHex();
         }
 
-        public AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
+        public AsmHostRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
         {
-            var routines = AsmMemberRoutines.Empty;
+            var routines = AsmHostRoutines.Empty;
             try
             {
                 var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
@@ -51,9 +51,9 @@ namespace Z0
             return routines;
         }
 
-        public AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src, FS.FolderPath dst)
+        public AsmHostRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src, FS.FolderPath dst)
         {
-            var routines = AsmMemberRoutines.Empty;
+            var routines = AsmHostRoutines.Empty;
             try
             {
                 var db = Wf.Db();
@@ -121,10 +121,10 @@ namespace Z0
                 return Index<ApiMemberCode>.Empty;
         }
 
-        AsmMemberRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
+        AsmHostRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
             => DecodeMembers(host,src,extracts, Wf.Db().AsmPath(host));
 
-        AsmMemberRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts, FS.FilePath dst)
+        AsmHostRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts, FS.FilePath dst)
         {
             var emitter = Wf.AsmHostEmitter();
             var decoded = emitter.Emit(host, src, dst);

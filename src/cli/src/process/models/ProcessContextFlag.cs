@@ -19,6 +19,8 @@ namespace Z0
 
         Dump = 4,
 
-        All = Summary | Detail | Dump
+        Hashes = 8,
+
+        All = Summary | Detail | Dump | Hashes
     }
 }

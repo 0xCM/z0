@@ -19,7 +19,7 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
         }
 
-        public AsmMemberRoutines Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
+        public AsmHostRoutines Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
             try
             {

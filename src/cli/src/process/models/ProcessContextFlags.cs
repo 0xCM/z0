@@ -18,10 +18,12 @@ namespace Z0
 
         public bit EmitDump;
 
+        public bit EmitHashes;
+
         public bit IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => EmitSummary | EmitDetail | EmitDump;
+            get => EmitSummary | EmitDetail | EmitDump | EmitHashes;
         }
 
         public bit IsEmpty

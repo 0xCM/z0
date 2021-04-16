@@ -10,12 +10,11 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.IO;
     using Z0.Tooling;
+    using System.Runtime.InteropServices;
 
     using static Part;
     using static memory;
     using static Toolsets;
-
-
 
     class App : WfService<App>
     {
@@ -1062,7 +1061,6 @@ namespace Z0.Asm
             Wf.XedCatalog().Emit(parsed);
         }
 
-
         static uint decode(ReadOnlySpan<AsciCharCode> src, Span<char> dst)
         {
             var count = (uint)src.Length;
@@ -1131,14 +1129,24 @@ namespace Z0.Asm
             return symbols;
         }
 
+        public static void correlate(MemorySymbols a, MemorySymbols b)
+        {
+
+        }
+
         public void Run()
         {
-            var dst = Db.ImageDumpRoot();
-            var emitter = Wf.ProcessContextPipe();
-            var pre = emitter.Emit(dst, "prejit", ProcessContextFlag.Detail | ProcessContextFlag.Summary);
-
+            var dst = Db.ProcessContextRoot();
+            var pipe = Wf.ProcessContextPipe();
+            var flags = ProcessContextFlag.Detail | ProcessContextFlag.Summary | ProcessContextFlag.Hashes;
+            var prejit = pipe.Emit(dst, "prejit", flags);
             var members = Wf.ApiJit().JitCatalog();
-            var post = emitter.Emit(dst, "postjit", ProcessContextFlag.All);
+            var postjit = pipe.Emit(dst, "postjit", flags);
+
+            // var post = emitter.Emit(dst, "postjit", ProcessContextFlag.All);
+
+            // var s2 = SymbolizeSummaries(post);
+            // var s3 = SymbolizeDetails(post);
 
             //EmitHostStatements();
             //LoadCapturedCil();

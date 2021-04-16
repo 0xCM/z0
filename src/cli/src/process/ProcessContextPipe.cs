@@ -36,7 +36,6 @@ namespace Z0
             return buffer;
         }
 
-
         [Op]
         public static MemoryAddress @base(Assembly src)
             => @base(Path.GetFileNameWithoutExtension(src.Location));
@@ -92,13 +91,90 @@ namespace Z0
             var images = ProcessContextPipe.locate(src);
             ref readonly var image = ref images.First;
             var count = images.Count;
-            Index<MemoryAddress> locations = alloc<MemoryAddress>(count);
-            ref var location = ref locations.First;
+            Index<MemoryAddress> addresses = alloc<MemoryAddress>(count);
+            ref var address = ref addresses.First;
             for(var i=0; i<count; i++)
-                seek(location,i) = skip(image,i).BaseAddress;
+                seek(address,i) = skip(image,i).BaseAddress;
             var state = new ProcessState();
             ImageRecords.fill(src, ref state);
-            return new ImageMap(state, images, locations.Sort(), modules(src));
+            return new ImageMap(state, images, addresses.Sort(), modules(src));
+        }
+
+        [Op]
+        public static Index<MemoryAddress> hash(ReadOnlySpan<MemoryAddress> src)
+        {
+            var count = (uint)src.Length;
+            var buffer = alloc<MemoryAddress>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var address = ref skip(src,i);
+                seek(dst, memory.hash(count,address)) = address;
+            }
+
+            return buffer;
+        }
+
+        public MemorySymbols SymbolizeDetails(in ProcessContext src)
+        {
+            var details = src.Details.View;
+            var count = details.Length;
+            var symbols = MemorySymbols.alloc(count);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var detail = ref skip(details,i);
+                symbols.Deposit(detail.BaseAddress, detail.Size, detail.Identity.Format());
+            }
+            return symbols;
+        }
+
+        public MemorySymbols SymbolizeSummaries(in ProcessContext src)
+        {
+            var summaries = src.Summaries.View;
+            var count = summaries.Length;
+            var symbols = MemorySymbols.alloc(count);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var summary = ref skip(summaries,i);
+                symbols.Deposit(summary.BaseAddress, summary.Size, summary.ImageName.Format());
+            }
+            return symbols;
+        }
+
+        public void EmitHashes(in ProcessContext src, FS.FolderPath dst)
+        {
+            var summaries = SymbolizeSummaries(src);
+            var summarypath = SummaryHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
+            EmitHashes(summaries.Addresses, summarypath);
+
+            var details = SymbolizeDetails(src);
+            var detailpath = DetialHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
+            EmitHashes(details.Addresses, detailpath);
+        }
+
+        public Index<HashedAddress> EmitHashes(ReadOnlySpan<MemoryAddress> addresses, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingTable<HashedAddress>(dst);
+            var count = (uint)addresses.Length;
+            var h0 = hash(addresses).View;
+            var buffer = alloc<HashedAddress>(count);
+            ref var hashed = ref first(buffer);
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var address = ref skip(addresses,i);
+                var h = memory.hash(count,address);
+                ref readonly var found = ref skip(h0,h);
+                ref var target = ref seek(hashed,i);
+                target.Index = i;
+                target.Address = address;
+                target.HashCode = h;
+            }
+
+            Tables.emit(buffer, dst);
+
+            Wf.EmittedTable(flow, count);
+            return buffer;
         }
 
         [Op]
@@ -153,6 +229,7 @@ namespace Z0
             options.EmitSummary = enabled(src,PCK.Summary);
             options.EmitDetail= enabled(src,PCK.Detail);
             options.EmitDump= enabled(src,PCK.Dump);
+            options.EmitHashes = enabled(src,PCK.Hashes);
             return options;
         }
 
@@ -213,13 +290,15 @@ namespace Z0
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
             var ts = root.timestamp();
+            subject = text.ifempty(subject,"none");
             context.ProcessId = process.Id;
             context.ProcessName = process.ProcessName;
             context.Timestamp = ts;
+            context.Subject = subject;
             if(selection.EmitSummary)
             {
                 context.SummaryPath = SummaryPath(dst, process, ts, subject);
-                context.Summaries = EmitSummaries(process,context.SummaryPath);
+                context.Summaries = EmitSummaries(process, context.SummaryPath);
             }
             if(selection.EmitDetail)
             {
@@ -230,6 +309,10 @@ namespace Z0
             {
                 context.DumpPath = DumpPath(dst, process,ts, subject);
                 EmitDump(process, context.DumpPath);
+            }
+            if(selection.EmitHashes)
+            {
+                EmitHashes(context, dst);
             }
 
             Wf.Ran(flow,"Emitted process context");
@@ -242,8 +325,20 @@ namespace Z0
         public FS.FilePath DumpPath(FS.FolderPath dst, Process process, Timestamp ts, Identifier subject)
             => dst + FS.folder(process.ProcessName) + DumpFile(process, ts, subject);
 
+        public FS.FileName SummaryHashFile(string process, Timestamp ts, Identifier subject)
+            => FS.file(string.Format("process.summary.addresses.{0}.{1}.{2}", text.ifempty(subject, process), process, ts.Format()), FS.Csv);
+
+        public FS.FileName DetailHashFile(string process, Timestamp ts, Identifier subject)
+            => FS.file(string.Format("process.detail.addresses.{0}.{1}.{2}", text.ifempty(subject, process), process, ts.Format()), FS.Csv);
+
         public FS.FileName DetailFile(Process process, Timestamp ts, Identifier subject)
             => FS.file(string.Format("process.detail.{0}.{1}.{2}", text.ifempty(subject, process.ProcessName), process.ProcessName, ts.Format()), FS.Csv);
+
+        public FS.FilePath DetialHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
+            => dst + FS.folder(process) + DetailHashFile(process, ts, subject);
+
+        public FS.FilePath SummaryHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
+            => dst + FS.folder(process) + SummaryHashFile(process, ts, subject);
 
         public FS.FilePath DetailPath(FS.FolderPath dst, Process process, Timestamp ts, Identifier subject)
             => dst + FS.folder(process.ProcessName) + DetailFile(process, ts, subject);

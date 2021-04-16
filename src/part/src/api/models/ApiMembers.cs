@@ -99,6 +99,6 @@ namespace Z0
             => src.Data;
 
         public static ApiMembers Empty
-            => new ApiMembers(TableSpan<ApiMember>.Empty);
+            => new ApiMembers(Index<ApiMember>.Empty);
     }
 }

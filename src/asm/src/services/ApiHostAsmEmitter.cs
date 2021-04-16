@@ -18,10 +18,10 @@ namespace Z0.Asm
             Wf = wf;
         }
 
-        public AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)
+        public AsmHostRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)
             => Emit(host,src, Wf.Db().AsmPath(host));
 
-        public AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
+        public AsmHostRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
             var flow = Wf.Running(Msg.EmittingHostRoutines.Format(host));
             var decoded = Wf.ApiHostDecoder().Decode(host, src);

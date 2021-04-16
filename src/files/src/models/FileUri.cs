@@ -23,9 +23,11 @@ namespace Z0
             public FileUri(FilePath src)
                 => Source = src.Replace("file:///", EmptyString);
 
-            [MethodImpl(Inline)]
             public string Format()
                 => Z0.text.format("file:///{0}", Source.Format());
+
+            public string FormatMarkdown(string label = null)
+                => string.Format("{0}: <{1}>", label ?? Source.FileName.Format(), Format());
 
             public override string ToString()
                 => Format();

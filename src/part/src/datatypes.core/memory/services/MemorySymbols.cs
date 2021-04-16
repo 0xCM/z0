@@ -19,42 +19,66 @@ namespace Z0
         public static MemorySymbols alloc(int count)
             => new MemorySymbols((uint)count);
 
-        Index<MemoryAddress> Addresses;
+        Index<MemoryAddress> _Addresses;
 
-        Index<SymExpr> Expressions;
+        Index<SymExpr> _Expressions;
 
-        Index<MemorySymbol> Deposited;
+        Index<MemorySymbol> _Deposited;
 
         uint CurrentIndex;
 
         uint Capacity;
 
+        public uint EntryCount
+        {
+            [MethodImpl(Inline)]
+            get => CurrentIndex;
+        }
+
+        public ReadOnlySpan<MemoryAddress> Addresses
+        {
+            [MethodImpl(Inline)]
+            get => slice(_Addresses.View,0,EntryCount);
+        }
+
+        public ReadOnlySpan<MemorySymbol> Deposited
+        {
+            [MethodImpl(Inline)]
+            get => slice(_Deposited.View,0, EntryCount);
+        }
+
+        public ReadOnlySpan<SymExpr> Expressions
+        {
+            [MethodImpl(Inline)]
+            get => slice(_Expressions.View,0, EntryCount);
+        }
+
         MemorySymbols(uint count)
         {
             Capacity = count;
-            Addresses = alloc<MemoryAddress>(count);
-            Expressions = alloc<SymExpr>(count);
-            Deposited = alloc<MemorySymbol>(count);
+            _Addresses = alloc<MemoryAddress>(count);
+            _Expressions = alloc<SymExpr>(count);
+            _Deposited = alloc<MemorySymbol>(count);
             CurrentIndex = 0;
         }
 
         [MethodImpl(Inline), Op]
         public bool IsDefined(uint index)
-            => (index < Capacity - 1) && Deposited[index].IsNonEmpty;
+            => (index < Capacity - 1) && _Deposited[index].IsNonEmpty;
 
         [MethodImpl(Inline), Op]
         public SymExpr Expression(uint index)
-            => index < Capacity-1 ? Expressions[index] : SymExpr.Empty;
+            => index < Capacity-1 ? _Expressions[index] : SymExpr.Empty;
 
         [Op]
         public MemorySymbol Deposit(MemoryAddress address, ByteSize size, SymExpr expr)
         {
             if(CurrentIndex < Capacity - 1)
             {
-                Addresses[CurrentIndex] = address;
-                Expressions[CurrentIndex] = expr;
+                _Addresses[CurrentIndex] = address;
+                _Expressions[CurrentIndex] = expr;
                 var deposited = new MemorySymbol(this, size, CurrentIndex);
-                Deposited[CurrentIndex] = deposited;
+                _Deposited[CurrentIndex] = deposited;
                 CurrentIndex++;
                 return deposited;
 
@@ -68,11 +92,11 @@ namespace Z0
         {
             if(address != 0)
             {
-                var addresses = Addresses.View;
+                var addresses = _Addresses.View;
                 for(var i=0; i<Capacity; i++)
                 {
                     if(skip(addresses,i) == address)
-                        return Deposited[i];
+                        return _Deposited[i];
                 }
             }
             return MemorySymbol.Empty;

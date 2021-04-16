@@ -11,6 +11,8 @@ namespace Z0
 
         public string ProcessName;
 
+        public Identifier Subject;
+
         public Timestamp Timestamp;
 
         public Index<ProcessImageRow> Summaries;

@@ -48,12 +48,28 @@ namespace Z0
                 EmitImm(parts);
 
             if((options & CaptureWorkflowOptions.CaptureContext) != 0)
-                EmitContext();
+                EmitContext(members(captured));
 
             return captured;
         }
 
-        public Index<AsmMemberRoutines> Capture(ReadOnlySpan<ApiHostUri> hosts, CaptureWorkflowOptions options)
+        static ApiMembers members(Index<AsmMemberRoutine> src)
+        {
+            if(src.Length == 0)
+                return ApiMembers.Empty;
+            var members = src.Select(x => x.Member).Sort();
+            return new ApiMembers(members.First.BaseAddress,members);
+        }
+
+        static ApiMembers members(Index<AsmHostRoutines> src)
+        {
+            if(src.Length == 0)
+                return ApiMembers.Empty;
+            var members = src.SelectMany(x => x.Storage).Select(x => x.Member).Sort();
+            return new ApiMembers(members.First.BaseAddress,members);
+        }
+
+        public Index<AsmHostRoutines> Capture(ReadOnlySpan<ApiHostUri> hosts, CaptureWorkflowOptions options)
         {
             using var flow = Wf.Running();
             Wf.Status(Seq.enclose(hosts).Format());
@@ -63,7 +79,7 @@ namespace Z0
                 EmitImm(hosts);
 
             if((options & CaptureWorkflowOptions.CaptureContext) != 0)
-                EmitContext();
+                EmitContext(members(captured));
 
             return captured;
         }
@@ -80,7 +96,7 @@ namespace Z0
             return captured;
         }
 
-        Index<AsmMemberRoutines> CaptureHosts(ReadOnlySpan<ApiHostUri> src)
+        Index<AsmHostRoutines> CaptureHosts(ReadOnlySpan<ApiHostUri> src)
         {
             var flow = Wf.Running();
             using var step = Wf.ApiCapture();
@@ -103,42 +119,21 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        // BasedApiMemberCatalog EmitRebase(Timestamp ts)
+        // void EmitContext()
         // {
+        //     var context = Wf.ProcessContextPipe().Emit();
         //     var rebasing = Wf.Running();
-        //     var catalog = Wf.ApiServices().RebaseMembers(ts);
+        //     var catalog = Wf.ApiServices().RebaseMembers(context.Timestamp);
         //     Wf.Ran(rebasing);
-        //     return catalog;
         // }
 
-        // void EmitMaps(Timestamp ts)
-        // {
-        //     ImageMaps.EmitSummaries(Wf, ts);
-        //     ImageMaps.EmitDetails(Wf, ts);
-        // }
-
-        // void EmitDump(Timestamp ts)
-        // {
-        //     var process = Runtime.CurrentProcess;
-        //     var name = process.ProcessName;
-        //     var dst = Db.ProcDumpPath(name).EnsureParentExists();
-        //     dst.Delete();
-        //     var flow = Wf.EmittingFile(dst);
-        //     DumpEmitter.emit(process, dst.Name, DumpTypeOption.Full);
-        //     Wf.EmittedFile(flow,1);
-        // }
-
-        void EmitContext()
+        void EmitContext(ApiMembers members)
         {
             var context = Wf.ProcessContextPipe().Emit();
-
             var rebasing = Wf.Running();
-            var catalog = Wf.ApiServices().RebaseMembers(context.Timestamp);
+            var catalog = Wf.ApiServices().RebaseMembers(members, context.Timestamp);
             Wf.Ran(rebasing);
-            // var ts = root.timestamp();
-            // EmitRebase(ts);
-            // EmitMaps(ts);
-            // EmitDump(ts);
         }
+
     }
 }
