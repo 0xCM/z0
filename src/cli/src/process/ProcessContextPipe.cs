@@ -240,14 +240,13 @@ namespace Z0
         uint Read(BinaryReader src, Span<byte> dst)
             => (uint)src.Read(dst);
 
-        public ProcessContext Emit(Identifier subject = default, PCK flag = PCK.All)
+        public ProcessContext Emit(Timestamp ts, Identifier subject = default, PCK flag = PCK.All)
         {
             var dst = Db.ProcessContextRoot();
-            var emitter = Wf.ProcessContextPipe();
-            return emitter.Emit(dst, subject, flag);
+            return Emit(dst, ts, subject, flag);
         }
 
-        public ProcessContext Emit(FS.FolderPath dst, Identifier subject = default, PCK flag = PCK.All)
+        public ProcessContext Emit(FS.FolderPath dst, Timestamp ts, Identifier subject = default, PCK flag = PCK.All)
         {
             var selection = flags(flag);
             if(selection.IsEmpty)
@@ -260,7 +259,6 @@ namespace Z0
             var context = new ProcessContext();
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
-            var ts = root.timestamp();
             subject = text.ifempty(subject,"none");
             context.ProcessId = process.Id;
             context.ProcessName = process.ProcessName;
@@ -268,17 +266,17 @@ namespace Z0
             context.Subject = subject;
             if(selection.EmitSummary)
             {
-                context.SummaryPath = SummaryPath(dst, process, ts, subject);
+                context.SummaryPath = SummaryPath(dst, process, ts);
                 context.Summaries = EmitSummaries(process, context.SummaryPath);
             }
             if(selection.EmitDetail)
             {
-                context.DetailPath = DetailPath(dst, process,ts, subject);
+                context.DetailPath = DetailPath(dst, process, ts);
                 context.Details = EmitDetails(process, context.DetailPath);
             }
             if(selection.EmitDump)
             {
-                context.DumpPath = DumpPath(dst, process,ts, subject);
+                context.DumpPath = Db.DumpPath(dst, process, ts);
                 EmitDump(process, context.DumpPath);
             }
             if(selection.EmitHashes)
@@ -290,35 +288,29 @@ namespace Z0
             return context;
         }
 
-        public FS.FileName DumpFile(Process process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("process.dump.{0}.{1}.{2}", text.ifempty(subject, process.ProcessName),  process.ProcessName, ts.Format()), FS.Dmp);
-
-        public FS.FilePath DumpPath(FS.FolderPath dst, Process process, Timestamp ts, Identifier subject)
-            => dst + FS.folder(process.ProcessName) + DumpFile(process, ts, subject);
-
         public FS.FileName SummaryHashFile(string process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("process.summary.addresses.{0}.{1}.{2}", text.ifempty(subject, process), process, ts.Format()), FS.Csv);
+            => FS.file(string.Format("memory.hash.summary.{0}.{1}", process, ts.Format()), FS.Csv);
 
         public FS.FileName DetailHashFile(string process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("process.detail.addresses.{0}.{1}.{2}", text.ifempty(subject, process), process, ts.Format()), FS.Csv);
+            => FS.file(string.Format("memory.hash.detail.{0}.{1}", process, ts.Format()), FS.Csv);
 
-        public FS.FileName DetailFile(Process process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("process.detail.{0}.{1}.{2}", text.ifempty(subject, process.ProcessName), process.ProcessName, ts.Format()), FS.Csv);
+        public FS.FileName DetailFile(Process process, Timestamp ts)
+            => FS.file(string.Format("memory.detail.{0}.{1}", process.ProcessName, ts.Format()), FS.Csv);
 
         public FS.FilePath DetialHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
-            => dst + FS.folder(process) + DetailHashFile(process, ts, subject);
+            => dst + DetailHashFile(process, ts, subject);
 
         public FS.FilePath SummaryHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
-            => dst + FS.folder(process) + SummaryHashFile(process, ts, subject);
+            => dst + SummaryHashFile(process, ts, subject);
 
-        public FS.FilePath DetailPath(FS.FolderPath dst, Process process, Timestamp ts, Identifier subject)
-            => dst + FS.folder(process.ProcessName) + DetailFile(process, ts, subject);
+        public FS.FilePath DetailPath(FS.FolderPath dst, Process process, Timestamp ts)
+            => dst + DetailFile(process, ts);
 
-        public FS.FileName SummaryFile(Process process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("process.summary.{0}.{1}.{2}", text.ifempty(subject, process.ProcessName),  process.ProcessName, ts.Format()), FS.Csv);
+        public FS.FileName SummaryFile(Process process, Timestamp ts)
+            => FS.file(string.Format("memory.summary.{0}.{1}", process.ProcessName, ts.Format()), FS.Csv);
 
-        public FS.FilePath SummaryPath(FS.FolderPath dst, Process process, Timestamp ts, Identifier subject)
-            => dst + FS.folder(process.ProcessName) + SummaryFile(process,ts, subject);
+        public FS.FilePath SummaryPath(FS.FolderPath dst, Process process, Timestamp ts)
+            => dst + SummaryFile(process,ts);
 
         public Count EmitDump(Process process, FS.FilePath dst)
         {

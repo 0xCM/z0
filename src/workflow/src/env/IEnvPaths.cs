@@ -55,23 +55,11 @@ namespace Z0
         FS.FolderPath BinaryRoot()
             => DbRoot() + FS.folder(bin);
 
-        FS.FolderPath ProcDumpRoot()
-            => BinaryRoot() +  FS.folder(dumps);
-
         FS.FolderPath RepoArchiveDir()
             => BinaryRoot() + FS.folder(source);
 
         FS.Files RepoArchives()
             => RepoArchiveDir().Files(X.Zip);
-
-        FS.FolderPath DumpFileRoot()
-            => BinaryRoot() + FS.folder(dumps);
-
-        FS.FilePath DumpFilePath(string id)
-            => DumpFileRoot() + FS.file(id, X.Dmp);
-
-        FS.FilePath DumpFilePath(PartId id)
-            => DumpFilePath(id.Format());
 
         FS.FolderPath EventRoot()
             => DbRoot() + FS.folder(events);
@@ -93,6 +81,7 @@ namespace Z0
 
         FS.FolderPath TmpDir<S>(S subject)
             => TmpRoot() + SubjectFolder(subject);
+
         FS.FilePath CmdLog(ScriptId id)
             => CmdLogRoot() + (id.IsDiscriminated
                 ? FS.file(string.Format("{0}-{1}", id.Id, id.Token), X.Log)
@@ -106,9 +95,6 @@ namespace Z0
 
         FS.FilePath ShowLog(FS.FileName file)
             => ShowLogs() + file;
-
-        FS.FilePath ProcDumpPath(Name process)
-            => ProcDumpRoot() + FS.file(process.Format(), X.Dmp);
 
         FS.FolderPath DataSourceRoot()
             => DbRoot() + FS.folder("sources");

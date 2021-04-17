@@ -13,6 +13,9 @@ namespace Z0
         FS.FolderPath CaptureRoot()
             => DbRoot() + FS.folder(capture);
 
+        FS.FolderPath CaptureIndexRoot()
+            => CaptureRoot() + FS.folder(indices);
+
         FS.FolderPath AsmRoot()
             => CaptureRoot() + FS.folder(asm);
 

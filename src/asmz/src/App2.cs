@@ -1129,7 +1129,9 @@ namespace Z0.Asm
             dst.Clear();
             var runner = Wf.CaptureRunner();
             runner.Capture(parts, dst);
-            Wf.ProcessContextPipe().Emit(Db.ProcessContextRoot());
+            var ts = root.timestamp();
+
+            Wf.ProcessContextPipe().Emit(Db.ProcessContextRoot(),ts);
         }
 
         public void CheckMemoryLookup()
@@ -1180,20 +1182,12 @@ namespace Z0.Asm
         {
             var dst = Db.ProcessContextRoot();
             var pipe = Wf.ProcessContextPipe();
+            var ts = root.timestamp();
             var flags = ProcessContextFlag.Detail | ProcessContextFlag.Summary | ProcessContextFlag.Hashes;
-            var prejit = pipe.Emit(dst, "prejit", flags);
+            var prejit = pipe.Emit(dst, ts, "prejit", flags);
             var members = Wf.ApiJit().JitCatalog();
-            var postjit = pipe.Emit(dst, "postjit", flags);
+            var postjit = pipe.Emit(dst, ts, "postjit", flags);
         }
-
-        /*
-            0000h nop dword ptr [rax+rax]                       ; NOP r/m32                        | 0F 1F /0                         | 5   | 0f 1f 44 00 00
-            0005h mov rdx,rcx                                   ; MOV r64, r/m64                   | REX.W 8B /r                      | 3   | 48 8b d1
-            0008h mov rcx,7ffaa5240f50h                         ; MOV r64, imm64                   | REX.W B8 +ro io                  | 10  | 48 b9 50 0f 24 a5 fa 7f 00 00
-            0012h mov rax,7ffaa699dd30h                         ; MOV r64, imm64                   | REX.W B8 +ro io                  | 10  | 48 b8 30 dd 99 a6 fa 7f 00 00
-            001ch jmp rax                                       ; JMP r/m64                        | FF /4                            | 3   | 48 ff e0
-
-        */
 
         static ReadOnlySpan<byte> x7ffaa76f0ae0 => new byte[32]{0x0f,0x1f,0x44,0x00,0x00,0x48,0x8b,0xd1,0x48,0xb9,0x50,0x0f,0x24,0xa5,0xfa,0x7f,0x00,0x00,0x48,0xb8,0x30,0xdd,0x99,0xa6,0xfa,0x7f,0x00,0x00,0x48,0xff,0xe0,0};
 
@@ -1219,7 +1213,6 @@ namespace Z0.Asm
             //     seek(dst,i) = bit.test(indices,i) ? i : z8;
 
             Wf.Row(indices.FormatList());
-
         }
 
         public void Run()
@@ -1229,8 +1222,24 @@ namespace Z0.Asm
             //EmitHostStatements();
             //LoadCapturedCil();
             //CheckMemoryLookup();
-            var source = Rng.@default();
-            CheckMullo(source);
+
+            Wf.ApiHex().EmitHexPack(false);
+            // var packed = HexPack(true).View;
+            // var dst = Db.AppLog("api",FS.ext("xpack"));
+            // HexPack(dst,true);
+
+            // var emitting = Wf.EmittingFile(dst);
+            // using var writer = dst.Writer();
+            // var count = packed.Length;
+            // for(var i=0; i<count; i++)
+            // {
+            //     writer.WriteLine(skip(packed,i).Format());
+            // }
+            // Wf.EmittedFile(emitting, count);
+
+            // var source = Rng.@default();
+            // CheckMullo(source);
+
 
             //CaptureSelectedRoutines();
 

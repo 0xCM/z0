@@ -69,7 +69,7 @@ namespace Z0
 
         public void Summarize()
         {
-            var src = Wf.Db().DumpFilePath("capture");
+            var src = Wf.Db().DumpPath("capture");
             if(src.Exists)
             {
                 var formatter = Tables.formatter<Minidump.FileHeader>();

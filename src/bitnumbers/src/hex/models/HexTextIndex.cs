@@ -30,13 +30,13 @@ namespace Z0
             where K : unmanaged, Enum
         {
             if(typeof(K) == typeof(Hex1Seq))
-                return Hex.generic<K>(init(n1));
+                return gHex.generic<K>(init(n1));
             else if(typeof(K) == typeof(Hex2Seq))
-                return Hex.generic<K>(init(n2));
+                return gHex.generic<K>(init(n2));
             else if(typeof(K) == typeof(Hex3Seq))
-                return Hex.generic<K>(init(n3));
+                return gHex.generic<K>(init(n3));
             else if(typeof(K) == typeof(Hex4Seq))
-                return Hex.generic<K>(init(n4));
+                return gHex.generic<K>(init(n4));
             else
                 return HexStrings<K>.Empty;
         }

@@ -54,6 +54,8 @@ namespace Z0
 
         public Setting<bool> EmitJmpData;
 
+        public Setting<bool> EmitHexPack;
+
         public static MachineOptions @default()
         {
             var dst = new MachineOptions();
@@ -81,6 +83,7 @@ namespace Z0
             dst.EmitHexIndex = true;
             dst.EmitCallData = true;
             dst.EmitJmpData = true;
+            dst.EmitHexPack = true;
             return dst;
         }
 

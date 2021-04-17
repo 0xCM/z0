@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
     using Z0.Asm;
 
@@ -103,13 +104,24 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        void EmitContext(ApiMembers members)
+        void EmitRebase(ApiMembers members, Timestamp ts)
         {
-            var context = Wf.ProcessContextPipe().Emit("post-capture");
             var rebasing = Wf.Running();
-            var dst = Db.IndexTable<ApiCatalogEntry>(context.Timestamp.Format());
+            var dst = Db.CaptureIndexRoot() + FS.file(string.Format("{0}.{1}", Tables.tableid<ApiCatalogEntry>(), ts.Format()), FS.Csv);
             var entries = Wf.ApiCatalogs().RebaseMembers(members, dst);
             Wf.Ran(rebasing);
+        }
+
+        void EmitContext(ApiMembers members)
+        {
+            var dir = Db.CaptureIndexRoot();
+            var ts = root.timestamp();
+            var process = Process.GetCurrentProcess();
+            var pipe = Wf.ProcessContextPipe();
+            var summaries = pipe.EmitSummaries(process, pipe.SummaryPath(dir,process,ts));
+            var details = pipe.EmitDetails(process, pipe.DetailPath(dir,process,ts));
+            pipe.EmitDump(process, Db.DumpPath(process, ts));
+            EmitRebase(members, ts);
         }
     }
 }

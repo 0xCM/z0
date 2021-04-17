@@ -27,6 +27,72 @@ namespace Z0
         public Index<ApiCodeBlock> ReadBlocks()
             => ReadBlocks(Db.ApiHexPaths());
 
+        public Index<HexPacked> BuildHexPack(bool validate = false)
+        {
+            return BuildHexPack(ReadBlocks(), validate);
+        }
+
+        public Index<HexPacked> BuildHexPack(Index<ApiCodeBlock> src, bool validate = false)
+        {
+            var blocks = src.Sort().View;
+            var count = blocks.Length;
+            var packs = alloc<HexPacked>(count);
+            ref var dst = ref first(packs);
+            var size = Hex.hexpack(blocks, packs);
+            if(validate)
+            {
+                var buffer = span<HexDigit>(48400);
+                var flow = Wf.Running("Validating pack");
+                for(var i=0; i<count; i++)
+                {
+                    buffer.Clear();
+                    ref readonly var pack = ref skip(dst,i);
+                    var outcome = Hex.digits(pack.Data,buffer);
+                    if(!outcome)
+                    {
+                        Wf.Error("Reconstitution failed");
+                        break;
+                    }
+                }
+                Wf.Ran(flow,$"Validated {count} packs");
+            }
+
+            return packs;
+        }
+
+        public Index<HexPacked> EmitHexPack(FS.FilePath dst, bool validate = false)
+        {
+            var result = BuildHexPack(validate);
+            var packed = result.View;
+            var emitting = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            var count = packed.Length;
+            for(var i=0; i<count; i++)
+                writer.WriteLine(skip(packed,i).Format());
+            Wf.EmittedFile(emitting, count);
+            return result;
+        }
+
+        public Index<HexPacked> EmitHexPack(Index<ApiCodeBlock> blocks, FS.FilePath? dst = null, bool validate = false)
+        {
+            var _dst = dst ?? Db.TableRoot() + FS.file("apihex", FS.ext("xpack"));
+            var result = BuildHexPack(blocks,validate);
+            var packed = result.View;
+            var emitting = Wf.EmittingFile(_dst);
+            using var writer = _dst.Writer();
+            var count = packed.Length;
+            for(var i=0; i<count; i++)
+                writer.WriteLine(skip(packed,i).Format());
+            Wf.EmittedFile(emitting, count);
+            return result;
+        }
+
+        public Index<HexPacked> EmitHexPack(bool validate = false)
+        {
+            var dst = Db.TableRoot() + FS.file("apihex", FS.ext("xpack"));
+            return EmitHexPack(dst,validate);
+        }
+
         public Index<ApiCodeBlock> ReadBlocks(FS.FilePath src)
         {
             var loaded = ReadRows(src);

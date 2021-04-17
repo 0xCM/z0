@@ -26,6 +26,9 @@ namespace Z0
                 if(options.EmitHexIndex)
                     Emitted(Wf.ApiHex().EmitIndex(blocks.Blocks));
 
+                if(options.EmitHexPack)
+                    Emitted(Wf.ApiHex().EmitHexPack(blocks.Blocks));
+
                 if(options.EmitAsmRows)
                     Emitted(Wf.AsmRowStore().EmitAsmRows(blocks.Blocks));
 

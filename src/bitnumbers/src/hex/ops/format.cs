@@ -33,18 +33,18 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(Hex1Seq kind)
-            => format(text(n1), kind);
+            => format(hexstring(n1), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex2Seq kind)
-            => format(text(n2), kind);
+            => format(hexstring(n2), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex3Seq kind)
-            => format(text(n3), kind);
+            => format(hexstring(n3), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex4Seq kind)
-            => format(text(n4), kind);
+            => format(hexstring(n4), kind);
     }
 }
