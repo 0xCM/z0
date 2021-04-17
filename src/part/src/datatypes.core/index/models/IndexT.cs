@@ -166,6 +166,16 @@ namespace Z0
         public Span<T> ToSpan()
             => Storage;
 
+        /// <summary>
+        /// Allocates and populates a copy of the underlying storage
+        /// </summary>
+        public Index<T> Replicate()
+        {
+            var dst = alloc<T>(Count);
+            Array.Copy(Storage,dst,Count);
+            return dst;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Index<T> src)
             => src.Edit;

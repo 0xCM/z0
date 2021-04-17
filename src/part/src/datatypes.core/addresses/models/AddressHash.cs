@@ -4,17 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System;
+
+    using static Part;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct AddressHash : IRecord<AddressHash>
+    public struct AddressHash : IRecord<AddressHash>, IComparable<AddressHash>
     {
         public const string TableId = "addresses.hashed";
-
-        public MemoryAddress Address;
 
         public uint Index;
 
         public uint HashCode;
+
+        public MemoryAddress Address;
+
+        [MethodImpl(Inline)]
+        public int CompareTo(AddressHash src)
+            => Address.CompareTo(src.Address);
     }
 }

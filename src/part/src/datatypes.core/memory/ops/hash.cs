@@ -12,9 +12,9 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Hashes an address, perfectly
+        /// Hashes an address
         /// </summary>
-        /// <param name="count">The number of address the the perfect hash bucket</param>
+        /// <param name="count">The number of addresses in the bucket</param>
         /// <param name="src">The address to hash</param>
         [MethodImpl(Inline), Op]
         public static uint hash(uint count, MemoryAddress src)
@@ -28,11 +28,30 @@ namespace Z0
             {
                 ref readonly var address = ref skip(src,i);
                 ref var target = ref seek(dst,i);
+                if(address == 0)
+                    continue;
+
                 target.Index = i;
                 target.Address = address;
                 target.HashCode = hash(count, address);
             }
             return count;
+        }
+
+        public static MemoryLookup lookup(Index<MemorySymbol> symbols)
+        {
+            var count = (uint)symbols.Length;
+            var keys = alloc<uint>(count);
+            ref var k = ref first(keys);
+            ref var s = ref symbols.First;
+            for(var i=0; i<count; i++)
+            {
+                ref var symbol = ref seek(s,i);
+                symbol.HashCode = memory.hash(count, symbol.Address);
+                seek(k, symbol.HashCode) = symbol.Index;
+
+            }
+            return new MemoryLookup(symbols,keys);
         }
     }
 }

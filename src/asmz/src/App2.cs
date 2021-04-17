@@ -1099,9 +1099,48 @@ namespace Z0.Asm
             Wf.ProcessContextPipe().Emit(Db.ProcessContextRoot());
         }
 
-        public static void correlate(MemorySymbols a, MemorySymbols b)
+        public void CheckMemoryLookup()
         {
+            var blocks = Wf.ApiHex().ReadBlocks().View;
+            var count = blocks.Length;
+            var distinct = blocks.Map(b => b.BaseAddress).ToArray().ToHashSet();
+            if(distinct.Count != count)
+            {
+                Wf.Warn(string.Format("There should be {0} distinct base addresses and yet there are {1}", count, distinct.Count));
+            }
 
+            var symbols = MemorySymbols.alloc(count);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+                symbols.Deposit(block.BaseAddress, block.Size, block.OpUri.Format());
+            }
+
+            var lookup = symbols.ToLookup();
+            var dst = Db.AppLog("addresses.lookup", FS.Csv);
+            var emitting = Wf.EmittingTable<MemorySymbol>(dst);
+            var emitted = Tables.emit(lookup.Symbols,dst);
+            Wf.EmittedTable(emitting,emitted);
+            var found = 0;
+
+            var hashes = lookup.Symbols.Map(x => x.HashCode).ToArray().ToHashSet();
+            if(hashes.Count != count)
+            {
+                Wf.Warn(string.Format("There should be {0} distinct hash codes and yet there are {1}", count, hashes.Count));
+            }
+
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+                if(lookup.FindIndex(block.BaseAddress, out var index))
+                {
+                    found++;
+                }
+            }
+
+            Wf.Status(string.Format("Blocks: {0}", count));
+            Wf.Status(string.Format("Found: {0}", found));
         }
 
         void CollectMemStats()
@@ -1153,10 +1192,10 @@ namespace Z0.Asm
         public void Run()
         {
 
-            CheckV();
+            //CheckV();
             //EmitHostStatements();
             //LoadCapturedCil();
-
+            CheckMemoryLookup();
 
             //CaptureSelectedRoutines();
 

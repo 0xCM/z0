@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public class MemorySymbols : IMemorySymbols
+    public class MemorySymbols
     {
         public static MemorySymbols alloc(uint capacity)
             => new MemorySymbols(capacity);
@@ -21,11 +21,7 @@ namespace Z0
 
         Index<MemoryAddress> _Addresses;
 
-        Index<SymExpr> _Expressions;
-
-        Index<MemorySymbol> _Deposited;
-
-        Index<AddressHash> _Hashed;
+        Index<MemorySymbol> _Symbols;
 
         uint CurrentIndex;
 
@@ -43,35 +39,17 @@ namespace Z0
             get => slice(_Addresses.View,0,EntryCount);
         }
 
-        public ReadOnlySpan<MemorySymbol> Deposited
-        {
-            [MethodImpl(Inline)]
-            get => slice(_Deposited.View,0, EntryCount);
-        }
-
-        public ReadOnlySpan<SymExpr> Expressions
-        {
-            [MethodImpl(Inline)]
-            get => slice(_Expressions.View,0, EntryCount);
-        }
-
         MemorySymbols(uint count)
         {
             Capacity = count;
             _Addresses = alloc<MemoryAddress>(count);
-            _Expressions = alloc<SymExpr>(count);
-            _Deposited = alloc<MemorySymbol>(count);
+            _Symbols = alloc<MemorySymbol>(count);
             CurrentIndex = 0;
-            _Hashed = sys.empty<AddressHash>();
         }
 
         [MethodImpl(Inline), Op]
         public bool IsDefined(uint index)
-            => (index < Capacity - 1) && _Deposited[index].IsNonEmpty;
-
-        [MethodImpl(Inline), Op]
-        public SymExpr Expression(uint index)
-            => index < Capacity-1 ? _Expressions[index] : SymExpr.Empty;
+            => (index < Capacity - 1) && _Symbols[index].IsNonEmpty;
 
         [Op]
         public MemorySymbol Deposit(MemoryAddress address, ByteSize size, SymExpr expr)
@@ -79,9 +57,8 @@ namespace Z0
             if(CurrentIndex < Capacity - 1)
             {
                 _Addresses[CurrentIndex] = address;
-                _Expressions[CurrentIndex] = expr;
-                var deposited = new MemorySymbol(this, size, CurrentIndex);
-                _Deposited[CurrentIndex] = deposited;
+                var deposited = new MemorySymbol(CurrentIndex, 0, address, size, expr);
+                _Symbols[CurrentIndex] = deposited;
                 CurrentIndex++;
                 return deposited;
             }
@@ -89,17 +66,21 @@ namespace Z0
                 return MemorySymbol.Empty;
         }
 
-        public MemoryLookup Seal()
-        {
-            if(_Hashed.IsEmpty)
-            {
-                var src = Addresses;
-                var count = (uint)src.Length;
-                _Hashed = alloc<AddressHash>(count);
-                var dst = _Hashed.Edit;
-                memory.hash(src, dst);
-            }
-            return new MemoryLookup(_Deposited, _Hashed);
-        }
+        public MemoryLookup ToLookup()
+            => memory.lookup(slice(_Symbols.Edit,0, EntryCount).ToArray());
+        // {
+        //     var count = EntryCount;
+        //     var src = slice(_Symbols.Edit, 0, count);
+        //     ref var dst = ref first(src);
+        //     for(var i=0u; i<count; i++)
+        //         seek(dst,i).HashCode = memory.hash(count, skip(src,i).Address);
+        //     return new MemoryLookup(_Symbols, count);
+        // }
+
+    }
+    partial struct Msg
+    {
+        public static MsgPattern<MemoryAddress,uint,MemoryAddress> SymbolHashMismatch
+            => "The hashed address {0} at index {1} does not match the symbol address {2} at the corresponding index";
     }
 }
