@@ -144,7 +144,7 @@ namespace Z0.Asm
         }
 
         public static XmlDoc doc()
-            => text.xml(Resources.utf8(Parts.AsmCore.Assets.InstrinsicXml()));
+            => text.xml(Resources.utf8(Parts.AsmCatalogs.Assets.InstrinsicXml()));
 
         public Index<Intrinsic> Parse()
             => Parse(doc());

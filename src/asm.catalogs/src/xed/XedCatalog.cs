@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         const char FieldDelimiter = Chars.Space;
 
-        static Parts.AsmCore.PartAssets Assets => Parts.AsmCore.Assets;
+        static Parts.AsmCatalogs.PartAssets Assets => Parts.AsmCatalogs.Assets;
 
         IForm ParseIForm(string src)
         {

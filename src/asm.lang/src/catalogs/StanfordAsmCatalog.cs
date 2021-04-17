@@ -155,7 +155,7 @@ namespace Z0.Asm
 
         ReadOnlySpan<StokeAsmImportRow> ImportStokeRows()
         {
-            var descriptor = Parts.AsmCore.Assets.StanfordAsmCatalog();
+            var descriptor = Parts.AsmCatalogs.Assets.StanfordAsmCatalog();
             var content = Resources.utf8(descriptor);
             ByteSize sz = content.Length*2;
             Wf.Status($"Loaded source catalog data of size {sz} bytes");

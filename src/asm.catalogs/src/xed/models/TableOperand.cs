@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
 
     partial struct XedModels
     {
-        public struct FormOperand
+        public struct TableOperand
         {
+
 
         }
     }

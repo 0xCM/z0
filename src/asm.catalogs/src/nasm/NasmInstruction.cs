@@ -2,19 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Z0.Asm;
 
     using static Part;
     using static memory;
 
-    partial class Nasm
+
+    public class NasmCatalog : WfService<NasmCatalog>
     {
         public Index<NasmInstruction> ParseInstuctionAssets()
         {
-            var lines = text.lines(Parts.AsmCore.Assets.NasmInstructions().Utf8()).View;
+            var lines = text.lines(Parts.AsmCatalogs.Assets.NasmInstructions().Utf8()).View;
             var count = lines.Length;
             var section = EmptyString;
             var records = RecordList.create<NasmInstruction>(7000);
@@ -43,5 +43,38 @@ namespace Z0.Tooling
 
             return records.Emit();
         }
+        public Index<NasmInstruction> EmitInstructionCatalog(FS.FilePath dst)
+        {
+            var src = ParseInstuctionAssets();
+            var count = src.Length;
+            if(count != 0)
+            {
+                var flow = Wf.EmittingTable<NasmInstruction>(dst);
+                var emitted = Tables.emit(src.View, dst);
+                Wf.EmittedTable(flow, emitted);
+                return src;
+            }
+            else
+                return Index<NasmInstruction>.Empty;
+        }
+
+        public Index<NasmInstruction> EmitInstructionCatalog()
+            => EmitInstructionCatalog(Db.CatalogTable<NasmInstruction>("asm"));
+    }
+
+
+    public struct NasmInstruction : IRecord<NasmInstruction>
+    {
+        public const string TableId = "nasm.instructions";
+
+        public uint LineNumber;
+
+        public AsmMnemonic Mnemonic;
+
+        public TextBlock Operands;
+
+        public TextBlock Encoding;
+
+        public TextBlock Flags;
     }
 }

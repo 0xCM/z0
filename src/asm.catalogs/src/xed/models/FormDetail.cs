@@ -27,8 +27,6 @@ namespace Z0
 
             public Extension Extension;
 
-            public Index<FormOperand> Operands;
-
             [MethodImpl(Inline)]
             public FormDetail(ushort index, IForm key, IClass iclass, Category category, Index<AttributeKind> attribs, IsaKind isa, Extension ext)
             {
@@ -39,7 +37,6 @@ namespace Z0
                 Attributes = attribs;
                 IsaKind = isa;
                 Extension = ext;
-                Operands = Index<FormOperand>.Empty;
             }
 
             const string FormatPattern = "{0,-8} | {1,-56} | {2,-32} | {3,-16} | {4,-16} | {5}";

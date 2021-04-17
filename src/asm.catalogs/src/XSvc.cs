@@ -16,5 +16,9 @@ namespace Z0
         [Op]
         public static XedCatalog XedCatalog(this IWfRuntime wf)
             => Asm.XedCatalog.create(wf);
+
+        [Op]
+        public static NasmCatalog NasmCatalog(this IWfRuntime wf)
+            => Asm.NasmCatalog.create(wf);
     }
 }

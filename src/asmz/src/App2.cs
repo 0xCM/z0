@@ -1037,7 +1037,7 @@ namespace Z0.Asm
 
         void EmitNasmInstructions()
         {
-            Wf.NasmTool().EmitInstructionCatalog();
+            Wf.NasmCatalog().EmitInstructionCatalog();
         }
 
         void MapMemory()
