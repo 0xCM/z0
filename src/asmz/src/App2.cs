@@ -1076,6 +1076,39 @@ namespace Z0.Asm
             Wf.Row(@string);
         }
 
+        void CheckMullo(IDomainSource Source)
+        {
+            var @class = ApiClass.MulLo;
+            var count = 12;
+            var left = Source.Array<uint>(count,100,200);
+            var right = Source.Array<uint>(count,100,200);
+            var buffer = alloc<uint>(count);
+            ref readonly var x = ref first(left);
+            ref readonly var y = ref first(right);
+            ref var dst = ref first(buffer);
+            var results = alloc<ApiCall>(count);
+            var output = alloc<uint>(count);
+            ref var expected = ref first(output);
+            ref var calls = ref first(results);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var a = ref skip(x,i);
+                ref readonly var b = ref skip(y,i);
+                ref var actual = ref seek(dst,i);
+                ref var expect = ref seek(expected,i);
+                actual = cpu.mullo(a,b);
+                expect = math.mul(a,b);
+                seek(calls, i) = ApiCalls.result(@class,a,b,actual);
+            }
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var call = ref skip(calls,i);
+                ref readonly var expect = ref skip(expected,i);
+                Wf.Row(call.Format() + " ?=? " + expect.ToString());
+            }
+        }
+
         public void CheckAsciTables()
         {
             var chars = span<char>(128);
@@ -1195,7 +1228,9 @@ namespace Z0.Asm
             //CheckV();
             //EmitHostStatements();
             //LoadCapturedCil();
-            CheckMemoryLookup();
+            //CheckMemoryLookup();
+            var source = Rng.@default();
+            CheckMullo(source);
 
             //CaptureSelectedRoutines();
 

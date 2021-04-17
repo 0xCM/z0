@@ -16,7 +16,7 @@ namespace Z0.Asm
         public AsmSigExpr Sig {get;}
 
         [MethodImpl(Inline)]
-        internal AsmFormExpr(AsmOpCodeExpr opcode, AsmSigExpr sig)
+        public AsmFormExpr(AsmOpCodeExpr opcode, AsmSigExpr sig)
         {
             OpCode = opcode;
             Sig = sig;
@@ -45,7 +45,7 @@ namespace Z0.Asm
             => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
         public string Format()
-            => AsmRender.format(this);
+            => string.Format("({0})<{1}>", Sig, OpCode);
 
         public override string ToString()
             => Format();

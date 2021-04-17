@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     [Record(TableId)]
     public struct StokeAsmExportRow : IRecord<StokeAsmExportRow>
     {

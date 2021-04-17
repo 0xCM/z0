@@ -13,13 +13,10 @@ namespace Z0.Asm
 
         readonly Symbols<EFlag> _EFlags;
 
-        readonly Symbols<AsmMnemonicCode> _Mnemonics;
-
         internal AsmSigSymbols()
         {
             _EFlags = Symbols.cache<EFlag>();
             _Modes = Symbols.cache<Mode>();
-            _Mnemonics = Symbols.cache<AsmMnemonicCode>();
         }
 
         public Symbols<Mode> Modes
@@ -27,10 +24,6 @@ namespace Z0.Asm
 
         public Symbols<EFlag> Flags
             => _EFlags;
-
-        public Symbols<AsmMnemonicCode> Mnemonics
-            => _Mnemonics;
-
 
         public enum Mode : byte
         {

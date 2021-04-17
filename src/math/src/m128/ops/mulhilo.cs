@@ -26,7 +26,7 @@ namespace Z0
         public static unsafe uint mullo(uint x, uint y)
         {
             var lo = 0u;
-            MultiplyNoFlags(x,y, gptr(lo));
+            MultiplyNoFlags(x, y, gptr(lo));
             return lo;
         }
 
@@ -34,7 +34,7 @@ namespace Z0
         public static unsafe ulong mullo(ulong x, ulong y)
         {
             var lo = 0ul;
-            MultiplyNoFlags(x,y, &lo);
+            MultiplyNoFlags(x, y, &lo);
             return lo;
         }
     }

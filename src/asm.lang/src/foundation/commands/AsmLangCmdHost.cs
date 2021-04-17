@@ -13,25 +13,17 @@ namespace Z0.Asm
 
     public sealed class AsmLangCmdHost : WfCmdHost<AsmLangCmdHost,K>
     {
-        Lazy<AsmSigSymbols> _SigSymbols;
-
-        AsmSigSymbols SigSymbols
-        {
-            get => _SigSymbols.Value;
-        }
-
         protected override void OnInit()
         {
-            _SigSymbols = root.lazy(AsmSigSymbols.load);
         }
 
-        [Action(K.ShowAllSymbols)]
-        void ShowSigSymbols()
-        {
-            ShowMnemonicSymbols();
-            ShowEFlagSymbols();
-            ShowModeSymbols();
-        }
+        // [Action(K.ShowAllSymbols)]
+        // void ShowSigSymbols()
+        // {
+        //     //ShowMnemonicSymbols();
+        //     ShowEFlagSymbols();
+        //     ShowModeSymbols();
+        // }
 
         [Action(K.ShowRegBits)]
         void ShowRegBits()
@@ -51,18 +43,18 @@ namespace Z0.Asm
             }
         }
 
-        [Action(K.ShowModeSymbols)]
-        void ShowModeSymbols()
-            => root.use(OpenShowLog("sigops.modes"), log => root.iter(SigSymbols.Modes.Storage, symbol => Show(symbol, log)));
+        // [Action(K.ShowModeSymbols)]
+        // void ShowModeSymbols()
+        //     => root.use(OpenShowLog("sigops.modes"), log => root.iter(SigSymbols.Modes.Storage, symbol => Show(symbol, log)));
 
 
-        [Action(K.ShowEFlagSymbols)]
-        void ShowEFlagSymbols()
-            => root.use(OpenShowLog("sigops.flags"), log => root.iter(SigSymbols.Flags.Storage, symbol => Show(symbol, log)));
+        // [Action(K.ShowEFlagSymbols)]
+        // void ShowEFlagSymbols()
+        //     => root.use(OpenShowLog("sigops.flags"), log => root.iter(SigSymbols.Flags.Storage, symbol => Show(symbol, log)));
 
-        [Action(K.ShowMnemonicSymbols)]
-        void ShowMnemonicSymbols()
-            => root.use(OpenShowLog("sigops.mnemonics"), log => root.iter(SigSymbols.Mnemonics.Storage, symbol => Show(symbol, log)));
+        // [Action(K.ShowMnemonicSymbols)]
+        // void ShowMnemonicSymbols()
+        //     => root.use(OpenShowLog("sigops.mnemonics"), log => root.iter(SigSymbols.Mnemonics.Storage, symbol => Show(symbol, log)));
 
         [Action(K.ShowRexBits)]
         void ShowRexBits()

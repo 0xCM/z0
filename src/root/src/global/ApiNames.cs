@@ -73,9 +73,6 @@ public readonly struct ApiNames
 
     public const string ApiSpecs = api + dot + specs;
 
-    public const string ApiCallMap = api + dot + calls + dot + "map";
-
-    public const string ApiCallRoutes = api + dot + calls + dot + routes;
 
     public const string ApiCode = api + dot + "code";
 

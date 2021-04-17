@@ -17,6 +17,7 @@ namespace Z0.Lang
 
         public Index<StatementBlock> Blocks {get;}
 
+        [MethodImpl(Inline)]
         public Switch(IScope scope, Index<SwitchCase> cases, Index<StatementBlock> blocks)
         {
             Scope = scope;

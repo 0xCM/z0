@@ -13,10 +13,80 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Bmi2;
+    using static System.Runtime.Intrinsics.X86.Bmi2.X64;
+
     using static Part;
+    using static memory;
 
     partial struct cpu
     {
+        /// <summary>
+        /// unsigned int _mulx_u32 (unsigned int a, unsigned int b, unsigned int* hi) MULX r32a, r32b, reg/m32
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), MulHi]
+        public static unsafe uint mulhi(uint x, uint y)
+        {
+            var lo = 0u;
+            return MultiplyNoFlags(x, y, &lo);
+        }
+
+        /// <summary>
+        /// unsigned __int64 _mulx_u64 (unsigned __int64 a, unsigned __int64 b, unsigned __int64* hi) MULX r64a, r64b, reg/m64
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), MulHi]
+        public static unsafe ulong mulhi(ulong x, ulong y)
+        {
+            var lo = 0ul;
+            return MultiplyNoFlags(x, y, &lo);
+        }
+
+        /// <summary>
+        /// unsigned int _mulx_u32 (unsigned int a, unsigned int b, unsigned int* hi) MULX
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        [MethodImpl(Inline), MulLo]
+        public static unsafe uint mullo(uint a, uint b)
+        {
+            var lo = 0u;
+            MultiplyNoFlags(a, b, &lo);
+            return lo;
+        }
+
+        /// <summary>
+        /// unsigned __int64 _mulx_u64 (unsigned __int64 a, unsigned __int64 b, unsigned  __int64* hi) MULX r64a, r64b, reg/m64
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        [MethodImpl(Inline), MulLo]
+        public static unsafe ulong mullo(ulong a, ulong b)
+        {
+            var lo = 0ul;
+            MultiplyNoFlags(a, b, &lo);
+            return lo;
+        }
+
+        [MethodImpl(Inline), MulX]
+        public static unsafe Pair<uint> mulx(uint a, uint b)
+        {
+            var lo = 0u;
+            var hi = MultiplyNoFlags(a, b, &lo);
+            return (lo,hi);
+        }
+
+        [MethodImpl(Inline), MulX]
+        public static unsafe Pair<ulong> mulx(ulong a, ulong b)
+        {
+            var lo = 0ul;
+            var hi = MultiplyNoFlags(a, b, &lo);
+            return (lo,hi);
+        }
+
         /// <summary>
         /// Computes the full 16-bit product of corresponding left and right source components
         /// </summary>

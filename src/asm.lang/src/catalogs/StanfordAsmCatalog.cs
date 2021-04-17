@@ -24,12 +24,9 @@ namespace Z0.Asm
         {
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
-            CatalogSymbols = AsmSigSymbols.load();
         }
 
         public uint ImportRowCount {get; private set;}
-
-        public AsmSigSymbols CatalogSymbols {get;}
 
         public Index<StokeAsmExportRow> ExportImport()
         {

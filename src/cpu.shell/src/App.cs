@@ -9,6 +9,7 @@ namespace Z0
     using System.Threading.Tasks;
 
     using static Part;
+    using static memory;
 
     class CpuShell : WfApp<CpuShell>
     {
@@ -35,6 +36,8 @@ namespace Z0
                 counter += t.Result;
             return counter;
         }
+
+
         protected override void Run()
         {
             var jobs = 128u;

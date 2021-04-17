@@ -6,6 +6,7 @@
 
   <ItemGroup>
       <ProjectReference Include="$(AsmLangG)"/>
+      <ProjectReference Include="$(AsmCatalogs)"/>
       <ProjectReference Include="$(Konst)" />
       <ProjectReference Include="$(BitCore)" />
       <ProjectReference Include="$(Cpu)" />

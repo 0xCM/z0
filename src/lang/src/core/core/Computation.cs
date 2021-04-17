@@ -9,20 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct SwitchCase
+    public struct Computation
     {
-        public uint Index {get;}
-
-        public Value Match {get;}
-
-        public Identifier Name {get;}
+        readonly uint Rule;
 
         [MethodImpl(Inline)]
-        public SwitchCase(uint group, Name name, Value test)
+        public Computation(uint rule)
         {
-            Index = group;
-            Name = name;
-            Match = test;
+            Rule = rule;
         }
     }
 }

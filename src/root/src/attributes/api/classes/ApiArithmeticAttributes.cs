@@ -31,6 +31,8 @@ namespace Z0
 
     public sealed class MulHiAttribute : A { public MulHiAttribute(ApiAsmClass asm = 0) : base(K.MulHi, asm) {} }
 
+    public sealed class MulXAttribute : A { public MulXAttribute(ApiAsmClass asm = 0) : base(K.MulX, asm) {} }
+
     public sealed class DivAttribute : A { public DivAttribute(ApiAsmClass asm = 0) : base(K.Div, asm) {} }
 
     public sealed class ModAttribute : A { public ModAttribute(ApiAsmClass asm = 0) : base(K.Mod, asm) {} }

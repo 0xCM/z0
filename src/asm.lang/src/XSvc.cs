@@ -13,9 +13,6 @@ namespace Z0
         // public static ICmdRunner<AsmLangCmdKind> AsmLangCmdRunner(this IWfRuntime wf)
         //     => AsmLangCmdHost.create(wf);
 
-        [Op]
-        public static IntrinsicsCatalog IntrinsicsCatalog(this IWfRuntime wf)
-            => Asm.IntrinsicsCatalog.create(wf);
 
         [Op]
         public static StanfordAsmCatalog StanfordCatalog(this IWfRuntime wf)
@@ -25,9 +22,6 @@ namespace Z0
         public static AsmDbCatalog AsmDbCatalog(this IWfRuntime wf)
             => Asm.AsmDbCatalog.create(wf);
 
-        [Op]
-        public static XedCatalog XedCatalog(this IWfRuntime wf)
-            => Asm.XedCatalog.create(wf);
 
         [Op]
         public static AsmSigs AsmSigs(this IWfRuntime wf)

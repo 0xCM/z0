@@ -110,6 +110,8 @@ public enum ApiClass : ushort
 
     MulHi,
 
+    MulX,
+
     Div,
 
     Divides,

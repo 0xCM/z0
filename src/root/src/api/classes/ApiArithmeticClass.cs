@@ -41,6 +41,8 @@ namespace Z0
 
         MulHi = Id.MulHi,
 
+        MulX = Id.MulX,
+
         Div = Id.Div,
 
         Mod = Id.Mod,

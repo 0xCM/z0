@@ -9,7 +9,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static XedModels;
-    using static EventFactory;
 
     public ref struct XedFormParser
     {
