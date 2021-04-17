@@ -9,20 +9,20 @@ namespace Z0.Vdsl
 
     using static Part;
     using static memory;
-    using static XedModels;
+    //using static XedModels;
 
     partial struct Intel
     {
         /// <summary>
         /// __m128i _mm_blend_epi32(__m128i a, __m128i b, const int imm8)
         /// </summary>
-        [MethodImpl(Inline), AsmOp(IForm.PAVGB_XMMdq_XMMdq)]
+        [MethodImpl(Inline)]
         public static __m128i<byte> _mm_avg_epu8(__m128i<byte> a, __m128i<byte> b)
             => cpu.vavg(a,b);
 
         partial struct Algs
         {
-            [MethodImpl(Inline), AsmOp(IForm.PAVGB_XMMdq_XMMdq)]
+            [MethodImpl(Inline)]
             public static __m128i<byte> _mm_avg_epu8(__m128i<byte> a, __m128i<byte> b)
             {
                 var dst = z128<byte>();

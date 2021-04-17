@@ -9,20 +9,18 @@ namespace Z0.Vdsl
 
     using static Part;
     using static memory;
-    using static XedModels;
 
     partial struct Intel
     {
         /// <summary>
         /// __m128i _mm_blend_epi32(__m128i a, __m128i b, const int imm8)
         /// </summary>
-        [MethodImpl(Inline), AsmOp(IForm.VPBLENDD_XMMdq_XMMdq_XMMdq_IMMb)]
+        [MethodImpl(Inline)]
         public static __m128i<uint> _mm_blend_epi32(__m128i<uint> a, __m128i<uint> b, [Imm] byte imm8)
             => cpu.vblend4x32(a,b, imm8);
 
         partial struct Algs
         {
-            [AsmAlg(IForm.VPBLENDD_XMMdq_XMMdq_XMMdq_IMMb)]
             public static __m128i<uint> _mm_blend_epi32(__m128i<uint> a, __m128i<uint> b, Imm8 imm8)
             {
                 var dst = default(__m128i<uint>);

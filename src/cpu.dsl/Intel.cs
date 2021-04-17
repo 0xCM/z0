@@ -9,7 +9,6 @@ namespace Z0.Vdsl
 
     using static Part;
     using static memory;
-    using static XedModels;
 
     public interface ICheckContext
     {
