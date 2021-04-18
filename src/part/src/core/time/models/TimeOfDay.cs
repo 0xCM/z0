@@ -20,14 +20,19 @@ namespace System
     [XmlSchemaProvider("GetSchema")]
     public struct TimeOfDay : IEquatable<TimeOfDay>, IComparable<TimeOfDay>, IComparable, IFormattable, IXmlSerializable
     {
-        private const long TicksPerMillisecond = 10000;
-        private const long TicksPerSecond = TicksPerMillisecond * 1000;   // 10,000,000
-        private const long TicksPerMinute = TicksPerSecond * 60;         // 600,000,000
-        private const long TicksPerHour = TicksPerMinute * 60;        // 36,000,000,000
-        private const long TicksPerDay = TicksPerHour * 24;          // 864,000,000,000
+        public const long TicksPerMillisecond = 10000;
 
-        private const long MinTicks = 0L;
-        private const long MaxTicks = 863999999999L;
+        public const long TicksPerSecond = TicksPerMillisecond * 1000;   // 10,000,000
+
+        public const long TicksPerMinute = TicksPerSecond * 60;         // 600,000,000
+
+        public const long TicksPerHour = TicksPerMinute * 60;        // 36,000,000,000
+
+        public const long TicksPerDay = TicksPerHour * 24;          // 864,000,000,000
+
+        public const long MinTicks = 0L;
+
+        public const long MaxTicks = 863999999999L;
 
         /// <summary>
         /// Represents the smallest possible value of <see cref="TimeOfDay"/>. This field is read-only.
@@ -41,7 +46,7 @@ namespace System
 
         // Number of ticks (100ns units) since midnight at the beginning of a standard 24-hour day.
         // NOTE: This is the only field in this structure.
-        private readonly long _ticks;
+        readonly long _ticks;
 
         /// <summary>
         /// Initializes a new instance of a <see cref="TimeOfDay"/> structure to a specified number of ticks.

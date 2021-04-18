@@ -13,9 +13,7 @@ namespace Z0
     {
         readonly ulong Ticks;
 
-        //const string Pattern = "yyyyMMdd.HH.mm.ss.ffff";
-
-        const string Pattern = "yyyy-MM-dd.HH.mm.ss.ffff";
+        const string Pattern = "yyyy-MM-dd.HH.mm.ss.fff";
 
         [MethodImpl(Inline)]
         public Timestamp(ulong ticks)

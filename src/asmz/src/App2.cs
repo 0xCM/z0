@@ -1215,6 +1215,21 @@ namespace Z0.Asm
             Wf.Row(indices.FormatList());
         }
 
+
+        void LoadRegions()
+        {
+            var ts0 = root.timestamp();
+            var ts1 = ts0.Format();
+            var ts2 = Timestamp.Zero;
+            var outcome = DataParser.parse(ts1, out ts2);
+            if(!outcome)
+                Wf.Error(outcome.Message);
+            else
+                Wf.Status(ts1);
+
+            //var pipe = Wf.ProcessContextPipe();
+
+        }
         public void Run()
         {
 
@@ -1223,7 +1238,9 @@ namespace Z0.Asm
             //LoadCapturedCil();
             //CheckMemoryLookup();
 
-            Wf.ApiHex().EmitHexPack(false);
+            LoadRegions();
+
+            //Wf.ApiHex().EmitHexPack(false);
             // var packed = HexPack(true).View;
             // var dst = Db.AppLog("api",FS.ext("xpack"));
             // HexPack(dst,true);
