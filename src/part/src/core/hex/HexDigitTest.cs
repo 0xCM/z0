@@ -46,7 +46,7 @@ namespace Z0
             => (byte)c >= MinCharCodeL && (byte)c <= MaxCharCodeL;
 
         [MethodImpl(Inline), Op]
-        public static HexDigitKind classify(char src)
+        public static HexDigitKind kind(char src)
         {
             var @class = HexDigitKind.None;
             if(scalar(src))

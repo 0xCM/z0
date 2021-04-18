@@ -13,6 +13,31 @@ namespace Z0
 
     partial struct HexFormat
     {
+
+        [Op]
+        public static string bytes(ushort src)
+            => HexFormat.format(memory.bytes(src), HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(short src)
+            => HexFormat.format(memory.bytes(src), HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(int src)
+            => HexFormat.format(memory.bytes(src), HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(uint src)
+            => HexFormat.format(memory.bytes(src), HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(long src)
+            => HexFormat.format(memory.bytes(src), HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(ulong src)
+            => HexFormat.format(memory.bytes(src), HexFormatSpecs.HexData);
+
         [Op]
         public static string format(ReadOnlySpan<byte> src, in HexFormatOptions config)
         {

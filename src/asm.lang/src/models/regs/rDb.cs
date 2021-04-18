@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOps.rDb;
-    using K = AsmX.Gp64;
+    using K = AsmX.DebugReg;
 
     partial struct AsmOps
     {
@@ -24,6 +24,9 @@ namespace Z0.Asm
             {
                 Index = index;
             }
+
+            public override string ToString()
+                => ((K)Index).ToString();
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)

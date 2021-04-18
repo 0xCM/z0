@@ -13,7 +13,7 @@ namespace Z0
     using C = AsciChar;
     using D = HexDigit;
 
-    partial class Hex
+    partial struct Hex
     {
         [Op]
         public static bool parse(char src, out byte dst)

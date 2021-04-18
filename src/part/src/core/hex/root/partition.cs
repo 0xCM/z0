@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
 
-    partial class Hex
+    partial struct Hex
     {
         /// <summary>
         /// Partitions a bitstring into blocks of a specified maximum width

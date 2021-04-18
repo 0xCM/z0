@@ -38,7 +38,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Location.FormatAsmHex();
+            => HexFormat.format(Location, W, true);
+
+        public string FormatMinimal()
+            => Location.FormatTrimmedAsmHex();
 
         [MethodImpl(Inline)]
         public bool Equals(A src)

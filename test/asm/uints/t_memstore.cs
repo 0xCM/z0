@@ -42,7 +42,7 @@ namespace Z0
 
         public void emit_data()
         {
-            var refs = Hex.HexRefs;
+            var refs = HexCharData.Segments;
             using var dst = CasePath($"Symbolic").Writer();
             for(var i=0; i<refs.Length; i++)
             {

@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using x64 = System.Runtime.Intrinsics.X86.Bmi2.X64;
-
     using static Part;
     using static memory;
 

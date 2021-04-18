@@ -114,7 +114,8 @@ namespace Z0
             }
             Wf.EmittedTable(flow, count);
         }
-        protected void Show<T>(ReadOnlySpan<T> src, FS.FileName file, Func<T,string> render, string title = EmptyString)
+
+        protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, Func<T,string> render, string title = EmptyString)
         {
             var count = src.Length;
             if( count != 0)
@@ -129,8 +130,8 @@ namespace Z0
             }
         }
 
-        protected void Show<T>(ReadOnlySpan<T> src, FS.FileName file, string title = EmptyString)
-            => Show(src, file, item => text.format("{0}", item), title);
+        protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, string title = EmptyString)
+            => ShowSpan(src, file, item => text.format("{0}", item), title);
 
         protected void Show<T>(T data, StreamWriter dst)
         {

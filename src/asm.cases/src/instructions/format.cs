@@ -7,7 +7,7 @@ namespace Z0.Asm
     partial class AsmCases
     {
         [Op]
-        public static string format(in CallRel32 src)
+        public static string format(in CallRel32Case src)
         {
             var dst = text.buffer();
             dst.AppendLine(src.AsmSource);

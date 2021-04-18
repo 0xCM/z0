@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
     using static HexFormatSpecs;
 
-    partial class Hex
+    partial struct Hex
     {
         [MethodImpl(Inline), Op]
         public static char hexchar(LowerCased @case, byte value, byte pos)

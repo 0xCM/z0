@@ -5,9 +5,11 @@
 namespace Z0.Asm
 {
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
     using static Chars;
+    using static memory;
 
     [ApiHost]
     public class AsmRender : WfService<AsmRender>
@@ -28,6 +30,8 @@ namespace Z0.Asm
 
         readonly BitFormat Bf8;
 
+        readonly Symbols<AsmMnemonicCode> Mnemonics;
+
         public AsmRender()
         {
             Bf1 = BitFormatOptions.bitmax(uint1.Width, uint1.Width);
@@ -38,6 +42,8 @@ namespace Z0.Asm
             Bf6 = BitFormatOptions.bitmax(uint6.Width, uint6.Width);
             Bf7 = BitFormatOptions.bitmax(uint7.Width, uint7.Width);
             Bf8 = BitFormatOptions.bitmax(uint8T.Width, uint8T.Width);
+            Mnemonics = Symbols.cache<AsmMnemonicCode>().Index;
+
         }
 
         [Op]
@@ -111,7 +117,7 @@ namespace Z0.Asm
 
         [Op]
         public static string format(in AsmCallSite src)
-            => string.Format("{0}:{1}", src.Caller, src.InstructionOffset);
+            => string.Format("{0}:{1}", src.Caller, src.LocalOffset);
 
         [Op]
         public static string format(AsmFormExpr src)
@@ -130,5 +136,90 @@ namespace Z0.Asm
         [Op]
         public static string format(in CallRel32 src)
             => string.Format("{0}:{1} -> {2}", src.ClientAddress, src.TargetDx, src.TargetAddress);
+
+        public void RenderRows(AsmMnemonicCode code, FS.FilePath dst)
+        {
+            var rows = @readonly(Wf.AsmRowPipe().LoadAsmRows(code).OrderBy(x => x.Statement).Array());
+            var count = rows.Length;
+            if(count == 0)
+                return;
+
+            var bitstrings = AsmBitstrings.service();
+            using var writer = dst.Writer();
+
+            switch(code)
+            {
+                case AsmMnemonicCode.JMP:
+                    for(var i=0; i<count; i++)
+                    {
+                        ref readonly var row = ref skip(rows,i);
+                        var rendered = string.Format(RowPattern(code),
+                            row.IP,
+                            row.Statement,
+
+                            row.BlockAddress,
+                            row.LocalOffset,
+                            row.Encoded.Length,
+
+                            row.Instruction,
+                            row.OpCode,
+                            row.Encoded,
+                            bitstrings.Format(row.Encoded),
+                            Semantic(row)
+                        );
+                        writer.WriteLine(rendered);
+                    }
+                break;
+            }
+        }
+
+        [Op]
+        public string RowPattern(AsmMnemonicCode monic)
+        {
+            var pattern = EmptyString;
+            switch(monic)
+            {
+                case AsmMnemonicCode.JMP:
+                    pattern = "{0} {1,-32} ; [{2}:{3}:{4}] => ({5})<{6}> => [{7}] => [{8}] | {9}";
+                break;
+            }
+            return pattern;
+        }
+
+        [Op]
+        public string Semantic(in AsmRow row)
+        {
+            var monic = AsmMnemonicCode.None;
+            if(!AsmParser.parse(row.Mnemonic, out monic))
+                return string.Format("The mnemonic {0} is not known", row.Mnemonic);
+
+
+            var encoded = row.Encoded;
+            var ip = row.IP;
+            var @base = row.BlockAddress;
+
+            switch(monic)
+            {
+                case AsmMnemonicCode.JMP:
+
+                if(JmpRel8.test(encoded))
+                    return string.Format("jmp(rel8,{0},{1}) -> {2}",
+                        JmpRel8.dx(encoded),
+                        JmpRel8.offset(@base, ip, encoded),
+                        JmpRel8.target(ip, encoded)
+                        );
+                else if(JmpRel32.test(encoded))
+                    return string.Format("jmp(rel32,{0},{1}) -> {2}",
+                        JmpRel32.dx(encoded).FormatMinimal(),
+                        JmpRel32.offset(@base, ip, encoded).FormatMinimal(),
+                        JmpRel32.target(ip, encoded)
+                        );
+                else if(Jmp64.test(encoded))
+                    return string.Format("jmp({0})", Jmp64.target(encoded));
+
+                break;
+            }
+            return EmptyString;
+        }
     }
 }

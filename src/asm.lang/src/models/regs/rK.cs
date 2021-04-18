@@ -25,6 +25,9 @@ namespace Z0.Asm
                 Index = index;
             }
 
+            public override string ToString()
+                => ((K)Index).ToString();
+
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
                 => new RegOp(RegWidth.W64, RegClass.Mask, src.Index);

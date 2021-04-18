@@ -5,24 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Text;
 
     using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
     using static HexFormatSpecs;
-
-    using H = HexCharData;
-
-    [ApiHost]
-    public partial class Hex
-    {
-        public static MemorySegment[] HexRefs
-            => sys.array(memseg(H.UpperSymData), memseg(H.LowerSymData), memseg(H.UpperCodes), memseg(H.LowerCodes));
-
-        const NumericKind Closure = UnsignedInts;
-    }
 
     [ApiHost]
     public readonly partial struct gHex
@@ -33,31 +21,6 @@ namespace Z0
         public static byte value<H>(H h= default)
             where H : unmanaged, IHexType
                 => (byte)h.Value;
-
-        /// <summary>
-        /// Renders a sequence of primal numeric T-cells as a sequence of hex-formatted values
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="config">The format configuration</param>
-        /// <param name="dst">The rendered data receiver</param>
-        /// <typeparam name="T">The primal numeric type</typeparam>
-        [Op, Closures(Closure)]
-        public static void render<T>(ReadOnlySpan<T> src, in HexFormatOptions config, ITextBuffer dst)
-            where T : unmanaged
-        {
-            var count = src.Length;
-            ref readonly var cell = ref first(src);
-            var last = count - 1;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var current = ref skip(cell,i);
-                dst.Append(HexFormat.format(current, config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec));
-
-                if(i != last)
-                    dst.Append(config.SegDelimiter);
-            }
-        }
-
 
         [MethodImpl(Inline)]
         public static HexIndex<K> index<K>(K[] src)
@@ -141,8 +104,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = Hex.code(LowerCase, BitNumbers.uint4(d));
-                seek(dst, j--) = Hex.code(LowerCase, BitNumbers.srl(d, n4, w4));
+                seek(dst, j--) = Hex.code(n4, LowerCase, d);
+                seek(dst, j--) = Hex.code(n4, LowerCase, Bytes.srl(d, 4));
             }
         }
 
@@ -166,8 +129,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = (char)Hex.code(LowerCase, BitNumbers.uint4(d));
-                seek(dst, j--) = (char)Hex.code(LowerCase, BitNumbers.srl(d, n4, w4));
+                seek(dst, j--) = (char)Hex.code(n4, LowerCase, d);
+                seek(dst, j--) = (char)Hex.code(n4, LowerCase, Bytes.srl(d, 4));
             }
         }
 

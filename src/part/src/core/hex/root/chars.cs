@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
     using static HexFormatSpecs;
 
-    partial class Hex
+    partial struct Hex
     {
         /// <summary>
         /// Computes the 2-character hex representation of a signed byte

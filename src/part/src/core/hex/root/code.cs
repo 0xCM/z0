@@ -9,16 +9,16 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static HexFormatSpecs;
+    using static HexCharData;
 
-    partial class Hex
+    partial struct Hex
     {
         /// <summary>
-        /// Returns the hex character code for a <see cref='uint4'/> value
+        /// Returns the hex character code for a specified value of at most 4 bits
         /// </summary>
         /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
-        public static HexCodeUp code(UpperCased upper, uint4 src)
+        public static HexCodeUp code(N4 n, UpperCased upper, byte src)
             => (HexCodeUp)skip(first(UpperHexDigits), src);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
-        public static HexCodeLo code(LowerCased lower, uint4 src)
+        public static HexCodeLo code(N4 n, LowerCased lower, byte src)
             => (HexCodeLo)skip(first(LowerHexDigits), src);
     }
 }

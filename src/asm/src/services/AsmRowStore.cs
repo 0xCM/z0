@@ -42,86 +42,6 @@ namespace Z0.Asm
             return src;
         }
 
-        public Index<AsmRow> LoadAsmRows()
-        {
-            var records = RecordList.create<AsmRow>(Pow2.T18);
-            var paths = Db.TableDir<AsmRow>().AllFiles.View;
-            var flow = Wf.Running(string.Format("Loading {0} asm recordsets", paths.Length));
-            var count = paths.Length;
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(paths,i);
-                var result = LoadAsmRows(path, records);
-                if(result)
-                    counter += result.Data;
-            }
-
-            Wf.Ran(flow, string.Format("Loaded {0} total asm instruction rows", counter));
-            return records.Emit();
-        }
-
-        Outcome<Count> LoadAsmRows(FS.FilePath path, RecordList<AsmRow> dst)
-        {
-            var rowtype = path.FileName.WithoutExtension.Format().RightOfLast(Chars.Dot);
-            var flow = Wf.Running(string.Format("Loading {0} rows from {1}", rowtype, path.ToUri()));
-            var result = TextDocs.parse(path, out var doc);
-            var kRows = 0;
-            if(result)
-            {
-                var kCells = doc.Header.Labels.Count;
-                if(kCells != AsmRow.FieldCount)
-                    return (false,string.Format("Found {0} fields in {1} while {2} were expected", kCells, path.ToUri(), AsmRow.FieldCount));
-
-                var rows = doc.Rows;
-                kRows = rows.Length;
-                for(var j=0; j<kRows; j++)
-                {
-                    ref readonly var src = ref skip(rows,j);
-                    if(src.CellCount != AsmRow.FieldCount)
-                        return (false, string.Format("Found {0} fields in {1} while {2} were expected", kCells, src, AsmRow.FieldCount));
-                    var loaded = LoadAsmRow(src, out var row);
-                    if(!loaded)
-                    {
-                        Wf.Error(loaded.Message);
-                        return false;
-                    }
-
-                    dst.Add(row);
-                }
-
-                Wf.Ran(flow, string.Format("Loaded {0} {1} rows from {2}", kRows, rowtype, path.ToUri()));
-            }
-            else
-            {
-                Wf.Error(result.Message);
-            }
-
-            return (true,kRows);
-        }
-
-        Outcome LoadAsmRow(TextRow src, out AsmRow dst)
-        {
-            var input = src.Cells.View;
-            var i = 0;
-            DataParser.parse(skip(input, i++), out dst.Sequence);
-            DataParser.parse(skip(input, i++), out dst.BlockAddress);
-            DataParser.parse(skip(input, i++), out dst.IP);
-            DataParser.parse(skip(input, i++), out dst.LocalOffset);
-            DataParser.parse(skip(input, i++), out dst.GlobalOffset);
-            AsmParser.parse(skip(input, i++), out dst.Mnemonic);
-            AsmParser.parse(skip(input, i++), out dst.OpCode);
-            DataParser.parse(skip(input, i++), out dst.Encoded);
-            DataParser.parse(skip(input, i++), out dst.Statement);
-            DataParser.parse(skip(input, i++), out dst.Instruction);
-            DataParser.parse(skip(input, i++), out dst.CpuId);
-            DataParser.parse(skip(input, i++), out dst.OpCodeId);
-            return true;
-        }
-
-        public Index<AsmRow> EmitAsmRows(ApiBlockIndex src)
-            => EmitAsmRows(src.Blocks);
-
         public Index<AsmRow> EmitAsmRows(Index<ApiCodeBlock> src)
         {
             var rows = BuildAsmRows(src);
@@ -148,9 +68,6 @@ namespace Z0.Asm
             Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
             return rows.ToArray();
         }
-
-        public Index<AsmRow> BuildAsmRows(ApiBlockIndex src)
-            => BuildAsmRows(src.Blocks);
 
         Index<AsmRow> BuildAsmRows(in ApiCodeBlock src)
         {

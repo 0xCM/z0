@@ -1230,6 +1230,7 @@ namespace Z0.Asm
             var pipe = Wf.ProcessContextPipe();
 
         }
+
         public void Run()
         {
 
@@ -1237,8 +1238,10 @@ namespace Z0.Asm
             //EmitHostStatements();
             //LoadCapturedCil();
             //CheckMemoryLookup();
-
-            LoadRegions();
+            var code = AsmMnemonicCode.JMP;
+            var render = Wf.AsmRender();
+            var dst = Db.AppLog(code.ToString(), FS.Asm);
+            render.RenderRows(code, dst);
 
             //Wf.ApiHex().EmitHexPack(false);
             // var packed = HexPack(true).View;

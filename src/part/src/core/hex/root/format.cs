@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class Hex
+    partial struct Hex
     {
         [MethodImpl(Inline), Op]
         public static string format(in HexString<Hex1Seq> src, Hex1Seq kind)
@@ -33,18 +33,18 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(Hex1Seq kind)
-            => format(hexstring(n1), kind);
+            => format(Hex.hexstring(n1), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex2Seq kind)
-            => format(hexstring(n2), kind);
+            => format(Hex.hexstring(n2), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex3Seq kind)
-            => format(hexstring(n3), kind);
+            => format(Hex.hexstring(n3), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex4Seq kind)
-            => format(hexstring(n4), kind);
+            => format(Hex.hexstring(n4), kind);
     }
 }

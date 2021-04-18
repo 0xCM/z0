@@ -22,7 +22,6 @@ namespace Z0
             try
             {
                 var blocks = hex.ReadBlocks().Storage.Sort();
-                var indexed = Wf.ApiIndexBuilder().IndexApiBlocks();
                 var partitioned = ApiHostBlocks.partition(blocks);
 
                 if(options.EmitHexIndex)
@@ -36,7 +35,6 @@ namespace Z0
 
                 if(options.EmitCallData || options.EmitJmpData)
                 {
-                    //var routines = Wf.ApiDecoder().Decode(indexed).Routines;
                     var routines = Wf.ApiDecoder().Decode(blocks);
 
                     if(options.EmitJmpData)

@@ -13,6 +13,9 @@ namespace Z0
         // public static ICmdRunner<AsmLangCmdKind> AsmLangCmdRunner(this IWfRuntime wf)
         //     => AsmLangCmdHost.create(wf);
 
+        [Op]
+        public static AsmRowPipe AsmRowPipe(this IWfRuntime wf)
+            => Asm.AsmRowPipe.create(wf);
 
         [Op]
         public static StanfordAsmCatalog StanfordCatalog(this IWfRuntime wf)

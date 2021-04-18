@@ -7,7 +7,23 @@ namespace Z0.Asm
 
     partial class AsmCases
     {
-        public struct CallRel32
+        public readonly struct JmpRel32Case
+        {
+            public MemoryAddress Ip {get;}
+
+            public MemoryAddress Target {get;}
+
+            public AsmHexCode Encoded {get;}
+
+            public JmpRel32Case(MemoryAddress ip, MemoryAddress dst, AsmHexCode encoded)
+            {
+                Ip = ip;
+                Target = dst;
+                Encoded = encoded;
+            }
+        }
+
+        public struct CallRel32Case
         {
             public AsmCodeSyntax AsmSource;
 

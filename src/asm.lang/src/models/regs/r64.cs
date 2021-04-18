@@ -20,10 +20,13 @@ namespace Z0.Asm
             public RegIndex Index {get;}
 
             [MethodImpl(Inline)]
-            public r64(RegIndex index)
+            public r64(I index)
             {
                 Index = index;
             }
+
+            public override string ToString()
+                => ((K)Index).ToString();
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
@@ -38,13 +41,20 @@ namespace Z0.Asm
                 => new G((I)src);
 
             [MethodImpl(Inline)]
+            public static implicit operator G(uint4 src)
+                => new G((I)(byte)src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(I src)
+                => new G(src);
+
+            [MethodImpl(Inline)]
             public static explicit operator byte(G src)
                 => (byte)src.Index;
 
             [MethodImpl(Inline)]
             public static implicit operator G(Sym<K> src)
                 => new G((I)src.Kind);
-
         }
 
         public readonly struct rax : IRegOp64<rax>

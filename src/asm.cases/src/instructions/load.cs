@@ -24,10 +24,10 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Index<CallRel32> loadRel32(Call call)
+        public static Index<CallRel32Case> loadRel32(Call call)
         {
             var caller = asm.caller(0x7ffe6818a0e0ul, "canonical/abi2/Run");
-            var cases = alloc<CallRel32>(4);
+            var cases = alloc<CallRel32Case>(4);
             var buffer = span(cases);
             var index = 0u;
             var location = GridPoint.Zero;
@@ -43,8 +43,8 @@ namespace Z0.Asm
             return cases;
         }
 
-        static ref CallRel32 load(AsmCaller caller, MemoryAddress ip, MemoryAddress next, MemoryAddress target, AsmHexCode encoding, AsmCodeSyntax line,
-            ref CallRel32 dst)
+        static ref CallRel32Case load(AsmCaller caller, MemoryAddress ip, MemoryAddress next, MemoryAddress target, AsmHexCode encoding, AsmCodeSyntax line,
+            ref CallRel32Case dst)
         {
             dst.Caller= caller;
             dst.Ip = ip;

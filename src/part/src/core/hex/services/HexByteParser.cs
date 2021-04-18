@@ -105,7 +105,7 @@ namespace Z0
             catch(Exception e)
             {
                 dst = Index<byte>.Empty;
-                return e;
+                return (e,$"Input:{src}");
             }
         }
 

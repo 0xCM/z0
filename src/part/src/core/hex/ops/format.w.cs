@@ -27,7 +27,6 @@ namespace Z0
                 return format(w64, Numeric.force<T,ulong>(value), postspec);
         }
 
-
         [Op, Closures(Closure)]
         public static string format<T>(W8 w, T src, bool postspec = false)
             where T : unmanaged
@@ -63,6 +62,5 @@ namespace Z0
         [Op]
         public static string format(W64 w, ulong src, bool postspec = false)
             => src.ToString(HexFormatSpecs.Hex64Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
-
     }
 }

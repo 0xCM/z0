@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
 
     partial class AsmCases
     {
@@ -17,7 +13,7 @@ namespace Z0.Asm
         /// <param name="src">The case to validate</param>
         /// <param name="errors">An error receiver</param>
         [Op]
-        public static bool validate(in CallRel32 src, ITextBuffer errors)
+        public static bool validate(in CallRel32Case src, ITextBuffer errors)
         {
             var valid = true;
             const byte fxsize = 5;

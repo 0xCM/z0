@@ -63,6 +63,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public Outcome(Exception e, string msg)
+        {
+            Ok = false;
+            Message = string.Format("{0} - {1}", msg, AppMsg.error(e).Format());
+            MessageCode = memory.u8(Ok);
+        }
+
+        [MethodImpl(Inline)]
         Outcome(ulong code)
         {
             Ok = false;
@@ -102,6 +110,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Outcome(Exception e)
             => new Outcome(e);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome((Exception e, string msg) src)
+            => new Outcome(src.e,src.msg);
 
         [MethodImpl(Inline)]
         public static implicit operator Outcome(AppMsgData data)

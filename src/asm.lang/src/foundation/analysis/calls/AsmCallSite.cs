@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public AsmCaller Caller {get;}
 
-        public Address16 InstructionOffset {get;}
+        public Address16 LocalOffset {get;}
 
         public uint4 InstructionSize {get;}
 
@@ -21,7 +21,7 @@ namespace Z0.Asm
         public AsmCallSite(AsmCaller caller, Address16 offset, uint4 size)
         {
             Caller = caller;
-            InstructionOffset = offset;
+            LocalOffset = offset;
             InstructionSize = size;
         }
 

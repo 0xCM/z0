@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmMnemonicCode;
     using static AsmOps;
+
     partial struct AsmX
     {
         [Op, AsmSig(AsmOc.vlddqu_xmm_m128)]

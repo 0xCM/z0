@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class Hex
+    partial struct Hex
     {
         [MethodImpl(Inline), Op]
         public static HexString<Hex1Seq> hexstring(N1 n)

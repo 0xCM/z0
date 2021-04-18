@@ -56,6 +56,9 @@ namespace Z0
         public string Format()
             => HexFormat.format(Location, W, true);
 
+        public string FormatMinimal()
+            => Location.FormatTrimmedAsmHex();
+
         public override string ToString()
             => Format();
 

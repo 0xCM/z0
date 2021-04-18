@@ -26,6 +26,10 @@ namespace Z0.Asm
             return true;
         }
 
+        [Op]
+        public static Outcome parse(AsmMnemonic src, out AsmMnemonicCode dst)
+            => Enums.parse(src.Format(), out dst);
+
         [MethodImpl(Inline), Op]
         public static AsmStatementExpr statement(string src)
             => new AsmStatementExpr(src.Trim());

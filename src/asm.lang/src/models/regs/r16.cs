@@ -25,6 +25,10 @@ namespace Z0.Asm
                 Index = index;
             }
 
+            public override string ToString()
+                => ((K)Index).ToString();
+
+
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
                 => new RegOp(RegWidth.W16, RegClass.GP, src.Index);
@@ -36,6 +40,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(K src)
                 => new G((I)src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(I src)
+                => new G(src);
 
             [MethodImpl(Inline)]
             public static explicit operator byte(G src)

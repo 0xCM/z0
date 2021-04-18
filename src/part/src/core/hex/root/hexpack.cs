@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class Hex
+    partial struct Hex
     {
         [Op]
         public static Outcome<uint> digits(ReadOnlySpan<char> src, Span<HexDigit> dst)
@@ -19,7 +19,7 @@ namespace Z0
             var count = root.min(src.Length, dst.Length);
             for(var i=0; i<src.Length; i++)
             {
-                if(!parse((AsciChar)skip(src,i), out seek(dst,i)))
+                if(!Hex.parse((AsciChar)skip(src,i), out seek(dst,i)))
                     return false;
             }
             return j;
@@ -33,8 +33,8 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var b = ref skip(src,i);
-                seek(dst,j++) = hexchar(LowerCase, b, 1);
-                seek(dst,j++) = hexchar(LowerCase, b, 0);
+                seek(dst,j++) = Hex.hexchar(LowerCase, b, 1);
+                seek(dst,j++) = Hex.hexchar(LowerCase, b, 0);
             }
             return j;
         }

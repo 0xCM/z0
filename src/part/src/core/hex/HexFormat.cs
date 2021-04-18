@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-
     using static HexFormatSpecs;
+
 
     public readonly partial struct HexFormat
     {

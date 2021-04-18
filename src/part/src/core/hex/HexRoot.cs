@@ -2,17 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static memory;
+
     [ApiHost]
-    public readonly partial struct AsmOps
+    public readonly partial struct Hex
     {
 
-    }
 
-    [ApiHost]
-    public static partial class XAsm
-    {
     }
-
 }

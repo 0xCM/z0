@@ -51,7 +51,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Location, W);
+            => HexFormat.format(Location, W, true);
+
 
         public override string ToString()
             => Format();
@@ -72,6 +73,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T(A src)
             => src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator A(MemoryAddress src)
+            => new A((byte)src.Location);
 
         [MethodImpl(Inline)]
         public static implicit operator Address<W,T>(A src)

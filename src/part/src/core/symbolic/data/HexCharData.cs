@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using HCL = HexCodeLo;
     using HCU = HexCodeUp;
@@ -20,6 +21,9 @@ namespace Z0
     [ApiComplete]
     public readonly struct HexCharData
     {
+        public static MemorySegment[] Segments
+            => sys.array(memseg(UpperSymData), memseg(LowerSymData), memseg(UpperCodes), memseg(LowerCodes));
+
         /// <summary>
         /// Defines a 16-byte sequence with terms that correspond to the ASCI codes the hex digits {0..9,A..F}
         /// </summary>

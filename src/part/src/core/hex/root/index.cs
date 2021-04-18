@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class Hex
+    partial struct Hex
     {
         [MethodImpl(Inline), Op]
         public static HexIndex<Hex5> index(Hex5Seq[] src)
