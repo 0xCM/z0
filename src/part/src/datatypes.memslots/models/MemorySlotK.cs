@@ -11,37 +11,37 @@ namespace Z0
 
     using api = MemorySlots;
 
-    public struct MemorySlot<I>
-        where I : unmanaged
+    public struct MemorySlot<K>
+        where K : unmanaged
     {
-        internal I Index;
+        internal K Index;
 
         [MethodImpl(Inline)]
-        public MemorySlot(I value)
+        public MemorySlot(K value)
             => Index = value;
 
         [MethodImpl(Inline)]
-        public MemorySlot<I> Advance()
+        public MemorySlot<K> Advance()
             => api.advance(ref this);
 
         [MethodImpl(Inline)]
-        public MemorySlot<I> Retreat()
+        public MemorySlot<K> Retreat()
             => api.retreat(ref this);
 
         [MethodImpl(Inline)]
-        public static MemorySlot<I> operator++(MemorySlot<I> src)
+        public static MemorySlot<K> operator++(MemorySlot<K> src)
             => src.Advance();
 
         [MethodImpl(Inline)]
-        public static MemorySlot<I> operator--(MemorySlot<I> src)
+        public static MemorySlot<K> operator--(MemorySlot<K> src)
             => src.Retreat();
 
         [MethodImpl(Inline)]
-        public static implicit operator I(MemorySlot<I> src)
+        public static implicit operator K(MemorySlot<K> src)
             => src.Index;
 
         [MethodImpl(Inline)]
-        public static implicit operator MemorySlot<I>(I src)
-            => new MemorySlot<I>(src);
+        public static implicit operator MemorySlot<K>(K src)
+            => new MemorySlot<K>(src);
     }
 }

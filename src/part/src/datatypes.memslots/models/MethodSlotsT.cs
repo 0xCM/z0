@@ -13,8 +13,8 @@ namespace Z0
     /// <summary>
     /// Defines a key-parametric indexed view over <see cref='MethodSlot'/> values
     /// </summary>
-    public readonly struct MethodSlots<E>
-        where E : unmanaged
+    public readonly struct MethodSlots<K>
+        where K : unmanaged
     {
         readonly MethodSlot[] Data;
 
@@ -23,10 +23,10 @@ namespace Z0
             => Data = slots;
 
         [MethodImpl(Inline)]
-        public ref readonly MethodSlot Lookup(E index)
+        public ref readonly MethodSlot Lookup(K index)
             => ref skip(Data, uint32(index));
 
-        public ref readonly MethodSlot this[E index]
+        public ref readonly MethodSlot this[K index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);

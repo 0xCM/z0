@@ -13,8 +13,8 @@ namespace Z0
     /// <summary>
     /// Defines a key-parametric indexed view over <see cref='MemorySegment'/> values
     /// </summary>
-    public readonly struct MemorySlots<E>
-        where E : unmanaged
+    public readonly struct MemorySlots<K>
+        where K : unmanaged
     {
         readonly MemorySegment[] Data;
 
@@ -23,10 +23,10 @@ namespace Z0
             => Data = slots;
 
         [MethodImpl(Inline)]
-        public ref readonly MemorySegment Lookup(E index)
+        public ref readonly MemorySegment Lookup(K index)
             => ref skip(Data, uint32(index));
 
-        public ref readonly MemorySegment this[E index]
+        public ref readonly MemorySegment this[K index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);
