@@ -82,5 +82,10 @@ namespace Z0.Asm
 
         public Index<ApiInstruction> Instructions()
             => Data.Storage.SelectMany(x => x.Routines).SelectMany(x => x.Instructions.Storage).OrderBy(x => x.IP).Array();
+
+        public static ApiPartRoutines Empty
+        {
+            get => new ApiPartRoutines(PartId.None, sys.empty<ApiHostRoutines>());
+        }
     }
 }

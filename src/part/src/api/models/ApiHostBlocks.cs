@@ -38,6 +38,11 @@ namespace Z0
             Data = code.OrderBy(x => x.BaseAddress);
         }
 
+        public PartId Part
+        {
+            [MethodImpl(Inline)]
+            get => Host.Part;
+        }
         public ApiCodeBlock[] Storage
         {
             [MethodImpl(Inline)]

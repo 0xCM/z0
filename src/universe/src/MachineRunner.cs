@@ -18,33 +18,36 @@ namespace Z0
             var partList = Seq.delimit(Chars.Comma, 0, Wf.Api.PartIdentities);
             var partCount = parts.Length;
             var flow = Wf.Running(RunningMachine.Format(partCount, partList));
+            var hex = Wf.ApiHex();
             try
             {
-                var blocks = Wf.ApiIndexBuilder().IndexApiBlocks();
-                var partitioned = ApiHostBlocks.partition(blocks.Blocks);
+                var blocks = hex.ReadBlocks().Storage.Sort();
+                var indexed = Wf.ApiIndexBuilder().IndexApiBlocks();
+                var partitioned = ApiHostBlocks.partition(blocks);
 
                 if(options.EmitHexIndex)
-                    Emitted(Wf.ApiHex().EmitIndex(blocks.Blocks));
+                    Emitted(hex.EmitIndex(blocks));
 
                 if(options.EmitHexPack)
-                    Emitted(Wf.ApiHex().EmitHexPack(blocks.Blocks));
+                    Emitted(hex.EmitHexPack(blocks));
 
                 if(options.EmitAsmRows)
-                    Emitted(Wf.AsmRowStore().EmitAsmRows(blocks.Blocks));
+                    Emitted(Wf.AsmRowStore().EmitAsmRows(blocks));
 
                 if(options.EmitCallData || options.EmitJmpData)
                 {
-                    var routines = Wf.ApiDecoder().Decode(blocks).Routines;
+                    //var routines = Wf.ApiDecoder().Decode(indexed).Routines;
+                    var routines = Wf.ApiDecoder().Decode(blocks);
 
                     if(options.EmitJmpData)
-                        Emitted(Wf.AsmJmpPipe().EmitRows(routines));
+                        Emitted(Wf.AsmJmpPipe().EmitRows(routines.View));
 
                     if(options.EmitCallData)
-                        Emitted(Wf.AsmCallPipe().EmitRows(routines));
+                        Emitted(Wf.AsmCallPipe().EmitRows(routines.View));
                 }
 
                 if(options.EmitResBytes)
-                    Emitted(Wf.ResBytesEmitter().Emit(blocks.Blocks));
+                    Emitted(Wf.ResBytesEmitter().Emit(blocks));
 
                 if(options.EmitStatements || options.EmitAsmBitstrings)
                 {
@@ -53,6 +56,7 @@ namespace Z0
                     if(options.EmitAsmBitstrings)
                         Emitted(pipe.EmitBitstrings(statements.SelectMany(x => x.Statements)));
                 }
+
                 if(options.CorrelateMembers)
                     Wf.ApiCatalogs().Correlate();
 
@@ -62,7 +66,6 @@ namespace Z0
                     Emitted(etl.ImportSource());
                     Emitted(etl.ExportImport());
                     Wf.XedCatalog().EmitCatalog();
-
                 }
 
                 if(options.EmitIntrinsicsInfo)

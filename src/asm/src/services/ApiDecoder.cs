@@ -53,8 +53,51 @@ namespace Z0.Asm
             }
         }
 
+        public Index<ApiPartRoutines> Decode(Index<ApiCodeBlock> src)
+        {
+            var hosts = src.GroupBy(x => x.HostUri).Select(x => new ApiHostBlocks(x.Key, x.ToArray()));
+            var parts = @readonly(hosts.GroupBy(x => x.Part).Select(x => new ApiPartBlocks(x.Key, x.ToArray())).Array());
+            var partCount = parts.Length;
+            var hostFx = root.list<ApiHostRoutines>();
+            var stats = ApiDecoderStats.init();
+            var flow = Wf.Running(Msg.DecodingParts.Format(parts.Length));
+            var buffer = alloc<ApiPartRoutines>(partCount);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<partCount; i++)
+            {
+                hostFx.Clear();
 
+                ref readonly var part = ref skip(parts,i);
 
+                var hostBlocks = part.Blocks.View;
+                var kHosts = hostBlocks.Length;
+                if(kHosts == 0)
+                {
+                    seek(dst,i) = ApiPartRoutines.Empty;
+                    continue;
+                }
+
+                var decoding = Wf.Running(Msg.DecodingPartRoutines.Format(kHosts, part.PartId));
+                for(var j = 0; j<kHosts; j++)
+                {
+                    ref readonly var host = ref skip(hostBlocks,j);
+
+                    if(host.IsEmpty)
+                        continue;
+
+                    var routines = Decode(host);
+                    hostFx.Add(routines);
+                    stats.HostCount++;
+                    stats.MemberCount += routines.RoutineCount;
+                    stats.InstructionCount += routines.InstructionCount;
+                }
+
+                seek(dst,i) = new ApiPartRoutines(part.PartId, hostFx.ToArray());
+                Wf.Ran(decoding, string.Format("{0} | {1}", Msg.DecodedPartRoutines.Format(hostFx.Count, part.PartId), stats.Format()));
+            }
+            Wf.Ran(flow, Msg.DecodedMachine.Format(src.Count, parts.Length));
+            return buffer;
+        }
 
         public ApiAsmDataset Decode(ApiBlockIndex src)
         {

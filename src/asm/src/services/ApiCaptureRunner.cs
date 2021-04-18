@@ -118,8 +118,8 @@ namespace Z0
             var ts = root.timestamp();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();
-            var summaries = pipe.EmitSummaries(process, pipe.SummaryPath(dir,process,ts));
-            var details = pipe.EmitDetails(process, pipe.DetailPath(dir,process,ts));
+            var summaries = pipe.EmitProcParts(process, pipe.ProcPartPath(dir,process,ts));
+            var details = pipe.EmitRegions(process, pipe.MemoryRegionPath(dir,process,ts));
             pipe.EmitDump(process, Db.DumpPath(process, ts));
             EmitRebase(members, ts);
         }

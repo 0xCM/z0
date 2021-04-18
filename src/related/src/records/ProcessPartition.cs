@@ -7,9 +7,9 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct ProcessImageRow : IRecord<ProcessImageRow>
+    public struct ProcessPartition : IRecord<ProcessPartition>
     {
-        public const string TableId = "process.images";
+        public const string TableId = "memory.partitions";
 
         public MemoryAddress BaseAddress;
 

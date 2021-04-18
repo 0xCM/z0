@@ -18,6 +18,57 @@ namespace Z0
     [ApiHost]
     public readonly struct ImageRecords
     {
+        /// <summary>
+        /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>
+        /// </summary>
+        /// <param name="src">The source module</param>
+        [Op]
+        public static LocatedImage locate(ProcessModule src)
+        {
+            var part = ApiPartIdParser.fromFile(src.FileName);
+            var entry = (MemoryAddress)src.EntryPointAddress;
+            var @base = src.BaseAddress;
+            var size = (uint)src.ModuleMemorySize;
+            return new LocatedImage(FS.path(src.FileName), part, entry, @base, size);
+        }
+
+        [Op]
+        public static ImageMap map(Process src)
+        {
+            var images = locate(src);
+            ref readonly var image = ref images.First;
+            var count = images.Count;
+            Index<MemoryAddress> addresses = alloc<MemoryAddress>(count);
+            ref var address = ref addresses.First;
+            for(var i=0; i<count; i++)
+                seek(address,i) = skip(image,i).BaseAddress;
+            var state = new ProcessState();
+            fill(src, ref state);
+            return new ImageMap(state, images, addresses.Sort(), modules(src));
+        }
+
+        /// <summary>
+        /// Creates a <see cref='LocatedImage'/> description from the main module of the executing <see cref='Process'/>
+        /// </summary>
+        /// <param name="src">The source module</param>
+        public static LocatedImage locate()
+            => locate(Process.GetCurrentProcess().MainModule);
+
+        [Op]
+        public static Index<LocatedImage> locate(Process src)
+            => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
+
+
+        [Op]
+        public static Index<ProcessModuleRow> modules(Process src)
+        {
+            var modules = @readonly(src.Modules.Cast<ProcessModule>().Array());
+            var count = modules.Length;
+            var buffer = alloc<ProcessModuleRow>(count);
+            fill(modules, buffer);
+            return buffer;
+        }
+
         public static Index<MemoryRegion> pages(ReadOnlySpan<MemorySegInfo> src)
         {
             var count = src.Length;

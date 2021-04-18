@@ -24,56 +24,8 @@ namespace Z0
     }
 
     [ApiHost]
-    public class ProcessContextPipe : WfService<ProcessContextPipe>
+    public partial class ProcessContextPipe : WfService<ProcessContextPipe>
     {
-        public Outcome<Index<MemoryRegion>> LoadRegions(FS.FilePath src)
-        {
-            var tid = Tables.tableid<MemoryRegion>();
-            var flow = Wf.Running(string.Format("Reading {0} records from {1}", tid, src.ToUri()));
-            if(!src.Exists)
-                return (false, FS.Msg.DoesNotExist.Format(src));
-            var lines = src.ReadTextLines().View;
-            var count = lines.Length;
-            if(count == 0)
-            {
-                return (false,"No data");
-            }
-
-            ref readonly var header = ref first(lines);
-            var cells = header.Split(Chars.Pipe);
-            if(cells.Length != MemoryRegion.FieldCount)
-                return (false, Tables.FieldCountMismatch.Format(cells.Length, MemoryRegion.FieldCount));
-
-            var data = slice(lines,1);
-            var buffer = alloc<MemoryRegion>(data.Length);
-            ref var dst = ref first(buffer);
-            var counter = 0;
-            for(var i=0; i<data.Length; i++)
-            {
-                ref readonly var line = ref skip(data,i);
-                if(line.IsEmpty)
-                    continue;
-
-                var result = ImageRecords.parse(line.Content, out seek(dst,i));
-                if(!result)
-                    return result;
-
-                counter++;
-            }
-            Wf.Ran(flow, string.Format("Read {0} {1} records from {2}", counter, tid, src.ToUri()));
-            return (true,buffer);
-        }
-
-        [Op]
-        public static Index<ProcessModuleRow> modules(Process src)
-        {
-            var modules = @readonly(src.Modules.Cast<ProcessModule>().Array());
-            var count = modules.Length;
-            var buffer = alloc<ProcessModuleRow>(count);
-            ImageRecords.fill(modules, buffer);
-            return buffer;
-        }
-
         [Op]
         public static MemoryAddress @base(Assembly src)
             => @base(Path.GetFileNameWithoutExtension(src.Location));
@@ -82,7 +34,7 @@ namespace Z0
         public static MemoryAddress @base(Name procname)
         {
             var match =  procname.Content;
-            var module = modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
+            var module = ImageRecords.modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
             return module.BaseAddress;
         }
 
@@ -98,49 +50,9 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Creates a <see cref='LocatedImage'/> description from the main module of the executing <see cref='Process'/>
-        /// </summary>
-        /// <param name="src">The source module</param>
-        public static LocatedImage locate()
-            => locate(Process.GetCurrentProcess().MainModule);
-
-        [Op]
-        public static Index<LocatedImage> locate(Process src)
-            => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
-
-        /// <summary>
-        /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>
-        /// </summary>
-        /// <param name="src">The source module</param>
-        [Op]
-        public static LocatedImage locate(ProcessModule src)
-        {
-            var part = ApiPartIdParser.fromFile(src.FileName);
-            var entry = (MemoryAddress)src.EntryPointAddress;
-            var @base = src.BaseAddress;
-            var size = (uint)src.ModuleMemorySize;
-            return new LocatedImage(FS.path(src.FileName), part, entry, @base, size);
-        }
-
-        [Op]
-        public static ImageMap map(Process src)
-        {
-            var images = ProcessContextPipe.locate(src);
-            ref readonly var image = ref images.First;
-            var count = images.Count;
-            Index<MemoryAddress> addresses = alloc<MemoryAddress>(count);
-            ref var address = ref addresses.First;
-            for(var i=0; i<count; i++)
-                seek(address,i) = skip(image,i).BaseAddress;
-            var state = new ProcessState();
-            ImageRecords.fill(src, ref state);
-            return new ImageMap(state, images, addresses.Sort(), modules(src));
-        }
-
         public MemorySymbols SymbolizeDetails(in ProcessContext src)
         {
-            var details = src.Details.View;
+            var details = src.Regions.View;
             var count = details.Length;
             var symbols = MemorySymbols.alloc(count);
             for(var i=0; i<count; i++)
@@ -153,7 +65,7 @@ namespace Z0
 
         public MemorySymbols SymbolizeSummaries(in ProcessContext src)
         {
-            var summaries = src.Summaries.View;
+            var summaries = src.Partitions.View;
             var count = summaries.Length;
             var symbols = MemorySymbols.alloc(count);
             for(var i=0; i<count; i++)
@@ -167,11 +79,11 @@ namespace Z0
         public void EmitHashes(in ProcessContext src, FS.FolderPath dst)
         {
             var summaries = SymbolizeSummaries(src);
-            var summarypath = SummaryHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
+            var summarypath = ProcPartHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
             EmitHashes(summaries.Addresses, summarypath);
 
             var details = SymbolizeDetails(src);
-            var detailpath = DetialHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
+            var detailpath = MemoryRegionHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
             EmitHashes(details.Addresses, detailpath);
         }
 
@@ -187,38 +99,11 @@ namespace Z0
         }
 
         [Op]
-        public static Index<ProcessImageRow> rows(Index<LocatedImage> src)
+        public static Index<ProcessPartition> emit(Index<LocatedImage> src, FS.FilePath dst)
         {
-            var count = src.Count;
-            var images = src.View;
-            var buffer = alloc<ProcessImageRow>(count);
-            var summaries = span(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var image = ref skip(images, i);
-                ref var dst = ref seek(summaries,i);
-                dst.BaseAddress = image.BaseAddress;
-                dst.EndAddress = image.EndAddress;
-                dst.Size = image.Size;
-                dst.ImageName = image.Name;
-
-                if(i != 0)
-                {
-                    ref readonly var prior = ref skip(images, i - 1);
-                    var gap = (ulong)(image.BaseAddress - prior.EndAddress);
-                    dst.Gap = gap;
-                }
-            }
-
-            return buffer;
-        }
-
-        [Op ]
-        public static Index<ProcessImageRow> emit(Index<LocatedImage> src, FS.FilePath dst)
-        {
-            var records = rows(src);
+            var records = procparts(src);
             var target = records.Edit;
-            var formatter = Tables.formatter<ProcessImageRow>(16);
+            var formatter = Tables.formatter<ProcessPartition>(16);
             var count = records.Length;
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
@@ -278,12 +163,6 @@ namespace Z0
         uint Read(BinaryReader src, Span<byte> dst)
             => (uint)src.Read(dst);
 
-        public ProcessContext Emit(Timestamp ts, Identifier subject = default, PCK flag = PCK.All)
-        {
-            var dst = Db.ProcessContextRoot();
-            return Emit(dst, ts, subject, flag);
-        }
-
         public ProcessContext Emit(FS.FolderPath dst, Timestamp ts, Identifier subject = default, PCK flag = PCK.All)
         {
             var selection = flags(flag);
@@ -304,13 +183,13 @@ namespace Z0
             context.Subject = subject;
             if(selection.EmitSummary)
             {
-                context.SummaryPath = SummaryPath(dst, process, ts);
-                context.Summaries = EmitSummaries(process, context.SummaryPath);
+                context.PartitionPath = ProcPartPath(dst, process, ts);
+                context.Partitions = EmitProcParts(process, context.PartitionPath);
             }
             if(selection.EmitDetail)
             {
-                context.DetailPath = DetailPath(dst, process, ts);
-                context.Details = EmitDetails(process, context.DetailPath);
+                context.RegionPath = MemoryRegionPath(dst, process, ts);
+                context.Regions = EmitRegions(process, context.RegionPath);
             }
             if(selection.EmitDump)
             {
@@ -326,30 +205,6 @@ namespace Z0
             return context;
         }
 
-        public FS.FileName SummaryHashFile(string process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("memory.hash.summary.{0}.{1}", process, ts.Format()), FS.Csv);
-
-        public FS.FileName DetailHashFile(string process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("memory.hash.detail.{0}.{1}", process, ts.Format()), FS.Csv);
-
-        public FS.FileName DetailFile(Process process, Timestamp ts)
-            => FS.file(string.Format("memory.detail.{0}.{1}", process.ProcessName, ts.Format()), FS.Csv);
-
-        public FS.FilePath DetialHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
-            => dst + DetailHashFile(process, ts, subject);
-
-        public FS.FilePath SummaryHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
-            => dst + SummaryHashFile(process, ts, subject);
-
-        public FS.FilePath DetailPath(FS.FolderPath dst, Process process, Timestamp ts)
-            => dst + DetailFile(process, ts);
-
-        public FS.FileName SummaryFile(Process process, Timestamp ts)
-            => FS.file(string.Format("memory.summary.{0}.{1}", process.ProcessName, ts.Format()), FS.Csv);
-
-        public FS.FilePath SummaryPath(FS.FolderPath dst, Process process, Timestamp ts)
-            => dst + SummaryFile(process,ts);
-
         public Count EmitDump(Process process, FS.FilePath dst)
         {
             var dumping = Wf.EmittingFile(dst);
@@ -357,35 +212,5 @@ namespace Z0
             Wf.EmittedFile(dumping,1);
             return 1;
         }
-
-        public Index<ProcessImageRow> EmitSummaries(Process process, FS.FilePath dst)
-        {
-            var summaries = rows(locate(process));
-            EmitSummaries(summaries,dst);
-            return summaries;
-        }
-
-        public Count EmitSummaries(Index<ProcessImageRow> src, FS.FilePath dst)
-        {
-            var flow = Wf.EmittingTable<ProcessImageRow>(dst);
-            var count = Tables.emit(src,dst);
-            Wf.EmittedTable(flow,count);
-            return count;
-        }
-
-        public Index<MemoryRegion> EmitDetails(Process process, FS.FilePath dst)
-        {
-            var details = SystemMemory.snapshot(process);
-            EmitDetails(details,dst);
-            return details;
-        }
-
-        public Count EmitDetails(Index<MemoryRegion> src, FS.FilePath dst)
-        {
-            var flow = Wf.EmittingTable<MemoryRegion>(dst);
-            var count = Tables.emit(src,dst);
-            Wf.EmittedTable(flow,count);
-            return count;
-        }
-    }
+   }
 }

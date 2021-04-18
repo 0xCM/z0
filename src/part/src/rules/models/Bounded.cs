@@ -1,0 +1,42 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    partial struct Rules
+    {
+        /// <summary>
+        /// Specifies that a numeric value is within a closed interval
+        /// </summary>
+        public readonly struct Bounded<T>
+            where T : unmanaged
+        {
+            /// <summary>
+            /// The minimum value
+            /// </summary>
+            public T Min {get;}
+
+            /// <summary>
+            /// The maximum value
+            /// </summary>
+            public T Max {get;}
+
+            [MethodImpl(Inline)]
+            public Bounded(T min, T max)
+            {
+                Min = min;
+                Max = max;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator Bounded<T>((T min, T max) src)
+                => new Bounded<T>(src.min, src.max);
+        }
+    }
+}

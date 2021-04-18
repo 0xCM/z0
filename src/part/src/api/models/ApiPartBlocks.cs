@@ -9,20 +9,20 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiPartBlocks : IIndex<ApiCodeBlock>
+    public readonly struct ApiPartBlocks : IIndex<ApiHostBlocks>
     {
-        public PartId Part {get;}
+        public PartId PartId {get;}
 
-        public Index<ApiCodeBlock> Blocks {get;}
+        public Index<ApiHostBlocks> Blocks {get;}
 
         [MethodImpl(Inline)]
-        public ApiPartBlocks(PartId part, Index<ApiCodeBlock> blocks)
+        public ApiPartBlocks(PartId part, Index<ApiHostBlocks> blocks)
         {
-            Part = part;
+            PartId = part;
             Blocks = blocks;
         }
 
-        public ApiCodeBlock[] Storage
+        public ApiHostBlocks[] Storage
         {
             [MethodImpl(Inline)]
             get => Blocks.Storage;
@@ -40,7 +40,7 @@ namespace Z0
             get => Blocks.Length;
         }
 
-        public ReadOnlySpan<ApiCodeBlock> View
+        public ReadOnlySpan<ApiHostBlocks> View
         {
             [MethodImpl(Inline)]
             get => Blocks.View;

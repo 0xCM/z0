@@ -9,14 +9,16 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Rules;
 
     [ApiHost]
     public readonly struct DataParser
     {
-        //"yyyy-MM-dd.HH.mm.ss.ffff";
+        //"yyyy-MM-dd.HH.mm.ss.fff";
         [Op]
         public static Outcome parse(string src, out Timestamp dst)
         {
+            var outcome = Outcome.Empty;
             dst = Timestamp.Zero;
             var dash = text.index(src, Chars.Dash);
             if(dash == NotFound)
@@ -43,6 +45,7 @@ namespace Z0
             if(seg1.Length != 4)
                 return (false, $"The time segment has {seg1.Length} segments and should have 4");
 
+            var fffBounds = bounded(0,999);
             if(!parse(skip(seg0,0), out int yyyy))
                 return (false, "Attempt to parse year failed");
             if(!parse(skip(seg0,1), out int MM))
@@ -53,9 +56,12 @@ namespace Z0
                 return (false, "Attempt to parse hour failed");
             if(!parse(skip(seg1,1), out int mm))
                 return (false, "Attempt to parse minutes failed");
-            parse(skip(seg1,2), out int ss);
-            parse(skip(seg1,3), out int ffff);
-            dst =  new DateTime(yyyy,MM,dd,HH, mm, ss, ffff);
+            if(!parse(skip(seg1,2), out int ss))
+                return (false, "Attempt to parse seconds failed");
+            if(!parse(skip(seg1,3), fffBounds, out int fff, out outcome))
+                return outcome;
+
+            dst =  new DateTime(yyyy,MM,dd,HH, mm, ss, fff);
 
             return true;
         }
@@ -126,6 +132,21 @@ namespace Z0
             => Numeric.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
+        public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
+        {
+            outcome = Numeric.parse(src, out dst);
+            if(!outcome)
+                return false;
+
+            if(!satisfied(bounds,dst))
+            {
+                outcome = (false, $"The parsed value {dst} is not with the required range {bounds}");
+                return false;
+            }
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out uint dst)
             => Numeric.parse(src, out dst);
 
@@ -151,7 +172,6 @@ namespace Z0
             dst = src;
             return true;
         }
-
 
         [MethodImpl(Inline)]
         public static Outcome eparse<T>(string src, out T dst)

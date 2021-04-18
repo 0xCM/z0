@@ -1044,7 +1044,7 @@ namespace Z0.Asm
         {
             var dst = Db.IndexTable<MemoryRegion>();
             var flow = Wf.EmittingTable<MemoryRegion>(dst);
-            var segments = SystemMemory.snapshot();
+            var segments = SystemMemory.regions();
             Tables.emit(segments,dst);
             Wf.EmittedTable(flow, segments.Count);
         }
@@ -1123,16 +1123,16 @@ namespace Z0.Asm
             return pipe.EmitHostStatements();
         }
 
-        void Capture(params PartId[] parts)
-        {
-            var dst = Db.AppLogDir() + FS.folder("capture");
-            dst.Clear();
-            var runner = Wf.CaptureRunner();
-            runner.Capture(parts, dst);
-            var ts = root.timestamp();
+        // void Capture(params PartId[] parts)
+        // {
+        //     var dst = Db.AppLogDir() + FS.folder("capture");
+        //     dst.Clear();
+        //     var runner = Wf.CaptureRunner();
+        //     runner.Capture(parts, dst);
+        //     var ts = root.timestamp();
 
-            Wf.ProcessContextPipe().Emit(Db.ProcessContextRoot(),ts);
-        }
+        //     Wf.ProcessContextPipe().Emit(Db.ProcessContextRoot(),ts);
+        // }
 
         public void CheckMemoryLookup()
         {
@@ -1227,7 +1227,7 @@ namespace Z0.Asm
             else
                 Wf.Status(ts1);
 
-            //var pipe = Wf.ProcessContextPipe();
+            var pipe = Wf.ProcessContextPipe();
 
         }
         public void Run()

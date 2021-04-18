@@ -15,15 +15,15 @@ namespace Z0
     public readonly struct SystemMemory
     {
         [Op]
-        public static Index<MemoryRegion> snapshot()
+        public static Index<MemoryRegion> regions()
             => ImageRecords.pages(MemoryNode.snapshot().Describe());
 
         [Op]
-        public static Index<MemoryRegion> snapshot(int procid)
+        public static Index<MemoryRegion> regions(int procid)
             => ImageRecords.pages(MemoryNode.snapshot(procid).Describe());
 
         [Op]
-        public static Index<MemoryRegion> snapshot(Process src)
+        public static Index<MemoryRegion> regions(Process src)
             => ImageRecords.pages(MemoryNode.snapshot(src.Id).Describe());
     }
 }

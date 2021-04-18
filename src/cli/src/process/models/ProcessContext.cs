@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public struct ProcessContext
     {
         public int ProcessId;
@@ -15,13 +14,13 @@ namespace Z0
 
         public Timestamp Timestamp;
 
-        public Index<ProcessImageRow> Summaries;
+        public Index<ProcessPartition> Partitions;
 
-        public FS.FilePath SummaryPath;
+        public FS.FilePath PartitionPath;
 
-        public Index<MemoryRegion> Details;
+        public Index<MemoryRegion> Regions;
 
-        public FS.FilePath DetailPath;
+        public FS.FilePath RegionPath;
 
         public FS.FilePath DumpPath;
     }
