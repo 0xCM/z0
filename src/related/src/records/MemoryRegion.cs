@@ -12,6 +12,8 @@ namespace Z0
     {
         public const string TableId = "memory.regions";
 
+        public const byte FieldCount = 8;
+
         public Name Identity;
 
         public MemoryAddress BaseAddress;
@@ -26,6 +28,6 @@ namespace Z0
 
         public MemState State;
 
-        public string FullIdentity;
+        public TextBlock FullIdentity;
     }
 }

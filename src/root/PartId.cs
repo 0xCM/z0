@@ -84,6 +84,8 @@ public enum PartId : ulong
 
     SpanBlocks = 67,
 
+    Related = 68,
+
     BitVectors = 100,
 
     BitSpans = 102,

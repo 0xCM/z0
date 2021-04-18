@@ -14,7 +14,7 @@ namespace Z0
     {
         public static CodeBuffers create()
         {
-            if(!WinMem.liberate(Store128, out var pBuffer))
+            if(!memory.liberate(Store128, out var pBuffer))
                 throw new Exception("Failed to liberate buffer");
             return new CodeBuffers(pBuffer);
         }

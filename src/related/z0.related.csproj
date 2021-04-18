@@ -7,9 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Files)" />
-    <ProjectReference Include="$(CmdSpec)" />
-    <ProjectReference Include="$(Related)" />
-
+    <ProjectReference Include="$(Tables)" />
   </ItemGroup>
 
 </Project>

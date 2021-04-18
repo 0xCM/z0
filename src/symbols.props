@@ -82,6 +82,7 @@
     <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>
 
     <Refs>$(Src)refs/z0.refs.csproj</Refs>
+    <Related>$(Src)related/Z0.related.csproj</Related>
     <Res>$(Src)res/Z0.res.csproj</Res>
     <Root>$(Src)root/Z0.root.csproj</Root>
 

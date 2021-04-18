@@ -43,7 +43,7 @@ namespace Z0
 
         void EmitContext()
         {
-            Wf.ProcessContextEmitter().Emit(Db.ImageDumpRoot());
+
         }
 
 

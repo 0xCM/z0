@@ -13,7 +13,17 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public unsafe static T* valloc<T>(ulong size, MemAllocType type, PageProtection protection)
+            where T : unmanaged
+                => (T*)WinMem.VirtualAlloc(UIntPtr.Zero, (UIntPtr)size, type, protection);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public unsafe static bool vfree<T>(T* pSrc, ulong size, MemFreeType type)
+            where T : unmanaged
+                => VirtualFree((void*)pSrc, (UIntPtr)size, type);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ref readonly SegRef<T> liberate<T>(in SegRef<T> src)
             where T : unmanaged
         {
@@ -26,6 +36,35 @@ namespace Z0
         {
             liberate<byte>(src.Ref);
             return ref src;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static unsafe bool liberate(ReadOnlySpan<byte> src, out byte* pDst)
+        {
+            var size = (ulong)src.Length;
+            ref var cell = ref edit(first(src));
+            var pCell = pointer(ref cell);
+            if(liberate(pCell, size))
+            {
+                pDst = pCell;
+                return true;
+            }
+            else
+            {
+                pDst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe bool liberate<T>(T* pSrc, ulong size)
+            where T : unmanaged
+        {
+            IntPtr buffer = (IntPtr)(void*)pSrc;
+            if (!WinMem.VirtualProtect(buffer, (UIntPtr)size, PageProtection.ExecuteReadWrite, out PageProtection _))
+                return false;
+            else
+                return true;
         }
 
         /// <summary>
@@ -48,7 +87,7 @@ namespace Z0
         /// This may not be the best idea to solve your problem
         /// </summary>
         /// <param name="src">The buffer to let it be what it wants</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe byte* liberate(ReadOnlySpan<byte> src)
             => liberate<byte>(ref edit(first(src)), src.Length);
 
@@ -68,7 +107,7 @@ namespace Z0
         public static unsafe byte* liberate(MemoryRange range)
             => liberate(range.Min.Pointer<byte>(), range.Size);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* liberate<T>(T* pSrc, int length)
             where T : unmanaged
         {
@@ -78,14 +117,13 @@ namespace Z0
             return pSrc;
         }
 
-
         /// <summary>
         /// Enables en executable memory segment
         /// </summary>
         /// <param name="src">The leading cell reference</param>
         /// <param name="length">The length of the segment, in bytes</param>
         /// <typeparam name="T">The memory cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* liberate<T>(ref T src, int length)
             where T : unmanaged
         {
@@ -101,7 +139,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The leading cell pointer</param>
         /// <param name="length">The length of the segment, in bytes</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static IntPtr liberate(IntPtr src, int length)
         {
             if (!VirtualProtectEx(CurrentProcess.ProcessHandle, src, (UIntPtr)(ulong)length, PageProtection.ExecuteReadWrite, out PageProtection _))

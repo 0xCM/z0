@@ -86,6 +86,5 @@ namespace Z0
         /// The path of the process image
         /// </summary>
         public FS.FilePath ImagePath;
-
     }
 }

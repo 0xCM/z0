@@ -1044,7 +1044,7 @@ namespace Z0.Asm
         {
             var dst = Db.IndexTable<MemoryRegion>();
             var flow = Wf.EmittingTable<MemoryRegion>(dst);
-            var segments = WinMem.snapshot();
+            var segments = SystemMemory.snapshot();
             Tables.emit(segments,dst);
             Wf.EmittedTable(flow, segments.Count);
         }

@@ -54,7 +54,7 @@ namespace Z0
             var _fields = fields(record).View;
             var count = _fields.Length;
             if(count != widths.Length)
-                sys.@throw(RecordFieldWidthMismatch.Format((uint)count, (uint)widths.Length));
+                sys.@throw(FieldCountMismatch.Format(count, widths.Length));
             var buffer = alloc<HeaderCell>(count);
             var cells = span(buffer);
             for(var i=0u; i<count; i++)
@@ -62,7 +62,7 @@ namespace Z0
             return new RowHeader(buffer, delimiter);
         }
 
-        public static MsgPattern<uint,uint> RecordFieldWidthMismatch
-            => "The record field count of {0} does not match the supplied width count of {1}";
+        public static MsgPattern<Count,Count> FieldCountMismatch
+            => "The target requires {0} fields but {1} were found in the source";
     }
 }

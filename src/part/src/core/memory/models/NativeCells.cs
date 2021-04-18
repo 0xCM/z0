@@ -11,6 +11,25 @@ namespace Z0
     using static Part;
     using static memory;
 
+    public readonly struct NativeCells
+    {
+        /// <summary>
+        /// Creates an array of tokens that identify a sequence of buffers
+        /// </summary>
+        /// <param name="base">The base address</param>
+        /// <param name="size">The number of bytes covered by each represented buffer</param>
+        /// <param name="count">The length of the buffer sequence</param>
+        public static NativeCellToken<F>[] tokenize<F>(IntPtr @base, uint size, uint count)
+            where F : unmanaged, IDataCell
+        {
+            var tokens = new NativeCellToken<F>[count];
+            for(var i=0; i<count; i++)
+                tokens[i] = new NativeCellToken<F>(IntPtr.Add(@base, (int)size*i), size);
+            return tokens;
+        }
+
+    }
+
     public readonly ref struct NativeCells<F>
         where F : unmanaged, IDataCell
     {
@@ -34,7 +53,7 @@ namespace Z0
             BufferCount = bufferCount;
             TotalSize = totalSize;
             Cover = new Span<F>(allocation.Handle.ToPointer(), (int)TotalSize);
-            Tokens = WinMem.tokenize<F>(Allocation.Handle, BufferSize, BufferCount);
+            Tokens = NativeCells.tokenize<F>(Allocation.Handle, BufferSize, BufferCount);
         }
 
         /// <summary>

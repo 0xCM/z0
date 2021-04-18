@@ -337,7 +337,7 @@ namespace Z0
 
         public Index<MemoryRegion> EmitDetails(Process process, FS.FilePath dst)
         {
-            var details = WinMem.snapshot(process);
+            var details = SystemMemory.snapshot(process);
             EmitDetails(details,dst);
             return details;
         }
