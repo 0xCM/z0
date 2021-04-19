@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static SFx;
     using static memory;
 
-    public class ImmSpecializer : AsmWfService<ImmSpecializer>
+    public class ImmSpecializer : WfService<ImmSpecializer>
     {
         IAsmDecoder Decoder;
 
@@ -25,21 +25,12 @@ namespace Z0.Asm
 
         }
 
-        protected override void OnContextCreated()
+        protected override void OnInit()
         {
-            Decoder = Asm.RoutineDecoder;
-            Core = Wf.CaptureCore(Asm);
+            Decoder = Wf.AsmDecoder();
+            Core = Wf.CaptureCore();
             Dynamic = Dynops.Dynexus;
         }
-
-
-        // [MethodImpl(Inline)]
-        // public ImmSpecializer(IWfShell wf, IAsmContext asm)
-        // {
-        //     Decoder = asm.RoutineDecoder;
-        //     Core = wf.CaptureCore(asm);
-        //     Dynamic = Dynops.Dynexus;
-        // }
 
         public Option<AsmRoutine> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm)
         {

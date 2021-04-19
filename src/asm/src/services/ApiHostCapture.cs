@@ -15,10 +15,13 @@ namespace Z0.Asm
 
         ApiCatalogs Catalogs;
 
+        IAsmDecoder Decoder;
+
         protected override void OnInit()
         {
             Asm = Wf.AsmContext();
             Catalogs =  Wf.ApiCatalogs();
+            Decoder = Wf.AsmDecoder();
         }
 
         public ApiHostCaptureSet Capture(Type host)
@@ -30,7 +33,7 @@ namespace Z0.Asm
         public ApiHostCaptureSet Capture(Type host, FS.FilePath dst)
         {
             var catalog = Catalogs.HostCatalog(host);
-            using var service = Wf.CaptureQuick(Asm);
+            using var service = Wf.CaptureQuick();
             var blocks = service.CaptureHost(catalog);
             var count = blocks.Length;
             var decoded = Decode(catalog, blocks);
@@ -44,11 +47,10 @@ namespace Z0.Asm
             var set = new ApiHostCaptureSet(catalog, blocks, alloc<AsmRoutine>(count));
             var blockview = set.Blocks.View;
             var routines = set.Routines.Edit;
-            var decoder = Asm.RoutineDecoder;
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(blockview,i);
-                if(decoder.Decode(block, out var routine))
+                if(Decoder.Decode(block, out var routine))
                     seek(routines, i) = routine;
             }
 

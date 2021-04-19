@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    [WfHost]
-    public sealed class EmitFieldMetadata : WfHost<EmitFieldMetadata>
+    using static memory;
+
+    public sealed partial class CliDataPipe : WfService<CliDataPipe>
     {
-        protected override void Execute(IWfRuntime wf)
-        {
-            wf.ImageDataEmitter().EmitFieldMetadata();
-        }
+
     }
 }

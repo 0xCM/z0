@@ -8,9 +8,6 @@ namespace Z0
     using System.Diagnostics;
     using Windows;
 
-    using static memory;
-    using static Part;
-
     [ApiHost]
     public readonly struct SystemMemory
     {

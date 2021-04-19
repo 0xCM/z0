@@ -25,7 +25,5 @@ namespace Z0.Asm
         public static ICaptureExchange exchange(BufferToken capture)
             => new CaptureExchangeProxy(capture);
 
-        public static IAsmImmWriter immwriter(IWfRuntime wf, IAsmContext context, ApiHostUri host)
-            => new AsmImmWriter(wf, host, wf.AsmFormatter());
     }
 }

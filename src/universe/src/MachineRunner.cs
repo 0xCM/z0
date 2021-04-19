@@ -75,9 +75,6 @@ namespace Z0
                 if(options.EmitApiBitMasks)
                     Emitted(Wf.ApiBitMasks().Emit());
 
-                if(options.EmitFieldLiterals)
-                    Wf.FieldLiteralEmitter().Run();
-
                 if(options.CollectApiDocs)
                     Wf.ApiComments().Collect();
 
@@ -89,34 +86,38 @@ namespace Z0
                 if(options.EmitAssetContent)
                     Emitted(assets.EmitAssetContent());
 
-                if(options.EmitApiMetadata)
-                    Wf.CliTables().DumpApiMetadata();
+                if(options.ProcessCultFiles)
+                    Wf.CultProcessor().Run();
 
-                var images = Wf.ImageDataEmitter();
+                var cli = Wf.CliDataPipe();
+
+                if(options.EmitFieldLiterals)
+                    cli.EmitFieldLiterals();
+
+                if(options.EmitApiMetadata)
+                    cli.DumpApiMetadata();
 
                 if(options.EmitSectionHeaders)
-                    images.EmitRuntimeHeaders();
+                    cli.EmitSectionHeaders();
 
                 if(options.EmitMsilRecords)
-                    images.EmitMsilRows();
+                    cli.EmitMsilRows();
 
                 if(options.EmitCliStrings)
                 {
-                    Emitted(images.EmitUserStrings());
-                    Emitted(images.EmitSystemStrings());
+                    Emitted(cli.EmitUserStrings());
+                    Emitted(cli.EmitSystemStrings());
                 }
 
                 if(options.EmitCliConstants)
-                    images.EmitConstants();
+                    cli.EmitConstants();
 
                 if(options.EmitCliBlobs)
-                    images.EmitApiBlobs();
+                    cli.EmitBlobs();
 
                 if(options.EmitImageContent)
-                    images.EmitApiImageContent();
+                    cli.EmitImageContent();
 
-                if(options.ProcessCultFiles)
-                    Wf.CultProcessor().Run();
             }
             catch(Exception e)
             {

@@ -13,6 +13,13 @@ namespace Z0.Asm
 
     public sealed class ApiResCapture : AsmWfService<ApiResCapture>
     {
+        IAsmDecoder Decoder;
+
+        protected override void OnContextCreated()
+        {
+            Decoder = Wf.AsmDecoder();
+        }
+
         public Index<CapturedApiRes> CaptureApiRes(FS.FilePath src, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
@@ -40,7 +47,7 @@ namespace Z0.Asm
             var buffer = alloc<ApiCaptureBlock>(count);
             var blocks = span(buffer);
             var captured = alloc<CapturedApiRes>(count);
-            using var quick = Wf.CaptureQuick(Asm);
+            using var quick = Wf.CaptureQuick();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
@@ -48,7 +55,6 @@ namespace Z0.Asm
                 seek(blocks, i) = code;
             }
             return buffer;
-
         }
 
         public Index<CapturedApiRes> CaptureAccessors(ReadOnlySpan<ApiResAccessor> src, FS.FilePath dst)
@@ -60,7 +66,7 @@ namespace Z0.Asm
             var formatter = Wf.AsmFormatter();
 
             using var writer = dst.Writer();
-            using var quick = Wf.CaptureQuick(Asm);
+            using var quick = Wf.CaptureQuick();
 
             for(var i=0u; i<count; i++)
             {
@@ -88,7 +94,7 @@ namespace Z0.Asm
             var codes = span(alloc<ApiCaptureBlock>(count));
             var captured = alloc<ApiRes>(count);
             var target = span(captured);
-            using var quick = Wf.CaptureQuick(Asm);
+            using var quick = Wf.CaptureQuick();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
@@ -150,7 +156,7 @@ namespace Z0.Asm
 
         Option<AsmRoutineCode> DecodeRoutine(ApiCaptureBlock capture)
         {
-            var decoded = Asm.RoutineDecoder.Decode(capture);
+            var decoded = Decoder.Decode(capture);
             if(decoded)
                 return new AsmRoutineCode(decoded.Value, capture);
             else

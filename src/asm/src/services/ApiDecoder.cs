@@ -10,13 +10,20 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class ApiDecoder : AsmWfService<ApiDecoder>, IApiIndexDecoder
+    public sealed class ApiDecoder : WfService<ApiDecoder>, IApiIndexDecoder
     {
         IAsmRoutineFormatter Formatter;
 
-        protected override void OnContextCreated()
+        IAsmDecoder AsmDecoder;
+
+
+        AsmEtl Etl;
+
+        protected override void OnInit()
         {
             Formatter = new AsmRoutineFormatter();
+            AsmDecoder = Wf.AsmDecoder();
+            Etl = Wf.AsmEtl();
         }
 
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
@@ -101,7 +108,6 @@ namespace Z0.Asm
 
         public ApiAsmDataset Decode(ApiBlockIndex src)
         {
-            var decoder = Asm.RoutineDecoder;
             var parts = src.Parts;
             var partCount = parts.Length;
             var dst = alloc<ApiPartRoutines>(partCount);
@@ -165,12 +171,11 @@ namespace Z0.Asm
             var instructions = root.list<ApiInstructionBlock>();
             var ip = MemoryAddress.Zero;
             var target = root.list<IceInstruction>();
-            var decoder = Asm.RoutineDecoder;
             for(var i=0; i<count; i++)
             {
                 target.Clear();
                 ref readonly var block = ref skip(view,i);
-                var decoded = decoder.Decode(block, x => target.Add(x));
+                var decoded = AsmDecoder.Decode(block, x => target.Add(x));
                 if(decoded)
                 {
                     if(i == 0)

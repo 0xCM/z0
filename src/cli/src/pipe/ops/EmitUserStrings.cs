@@ -9,12 +9,10 @@ namespace Z0
 
     using static memory;
 
-    partial class ImageDataEmitter
+    partial class CliDataPipe
     {
         public Index<CliUserStringInfo> EmitUserStrings()
-        {
-            return EmitUserStrings(Wf.Components);
-        }
+            => EmitUserStrings(Wf.Components);
 
         public Index<CliUserStringInfo> EmitUserStrings(ReadOnlySpan<Assembly> src)
         {
@@ -24,7 +22,6 @@ namespace Z0
                 EmitUserStrings(skip(src,i), buffer);
             return buffer.Emit();
         }
-
 
         public void EmitUserStrings(Assembly src, RecordList<CliUserStringInfo> buffer)
         {

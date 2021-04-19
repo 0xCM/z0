@@ -130,7 +130,7 @@ namespace Z0.Asm
             => Wf.Api.PartHosts(parts);
 
         IAsmImmWriter Archive(IApiHost host)
-            => AsmServices.immwriter(Wf, Asm, host.Uri);
+            => Wf.ImmWriter(host.Uri);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, PartId[] parts)
         {

@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Schemas.Ecma
+namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct BlobRow : IRecord<BlobRow>
+    public struct CliBlob : IRecord<CliBlob>
     {
         public const string TableId = "ecma.blob";
 

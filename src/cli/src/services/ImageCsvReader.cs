@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    struct ImageCsvReader : IImageReader
+    public struct ImageCsvReader : IDisposable
     {
         readonly FS.FilePath Source;
 

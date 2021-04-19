@@ -12,13 +12,15 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmRowBuilder : AsmWfService<AsmRowBuilder>
+    public sealed class AsmRowBuilder : WfService<AsmRowBuilder>
     {
         readonly Dictionary<AsmMnemonic, ArrayBuilder<AsmRow>> Index;
 
         int Sequence;
 
         uint Offset;
+
+        IAsmDecoder Decoder;
 
         public AsmRowBuilder()
         {
@@ -27,9 +29,9 @@ namespace Z0.Asm
             Index = new Dictionary<AsmMnemonic, ArrayBuilder<AsmRow>>();
         }
 
-        protected override void OnContextCreated()
+        protected override void OnInit()
         {
-
+            Decoder = Wf.AsmDecoder();
         }
 
         [MethodImpl(Inline), Op]
@@ -71,7 +73,7 @@ namespace Z0.Asm
 
         Index<AsmRow> BuildAsmRows(in ApiCodeBlock src)
         {
-            var decoded = Asm.RoutineDecoder.Decode(src);
+            var decoded = Decoder.Decode(src);
             if(decoded)
                 return BuildAsmRows(src.Code, decoded.Value);
             else

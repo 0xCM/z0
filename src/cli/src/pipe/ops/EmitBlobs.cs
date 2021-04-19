@@ -12,9 +12,9 @@ namespace Z0
 
     using static memory;
 
-    partial class ImageDataEmitter
+    partial class CliDataPipe
     {
-        public void EmitApiBlobs()
+        public void EmitBlobs()
         {
             var flow = Wf.Running();
             ClearBlobs();
@@ -25,26 +25,26 @@ namespace Z0
 
         public void ClearBlobs()
         {
-            Wf.Db().TableDir<BlobRow>().Clear();
+            Wf.Db().TableDir<CliBlob>().Clear();
         }
 
         public WfExecToken EmitBlobs(FS.FilePath src, FS.FilePath dst)
         {
-            var flow = Wf.EmittingTable<BlobRow>(dst);
+            var flow = Wf.EmittingTable<CliBlob>(dst);
             using var reader = PeTableReader.open(src);
             var rows = reader.Blobs();
             var count = (uint)rows.Length;
-            var formatter = Tables.formatter<BlobRow>(16);
+            var formatter = Tables.formatter<CliBlob>(16);
 
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(rows,i)));
 
-            return Wf.EmittedTable<BlobRow>(flow, rows.Length);
+            return Wf.EmittedTable<CliBlob>(flow, rows.Length);
         }
 
         public WfExecToken EmitBlobs(Assembly src)
-            => EmitBlobs(FS.path(src.Location), Wf.Db().Table<BlobRow>(src.GetSimpleName()));
+            => EmitBlobs(FS.path(src.Location), Wf.Db().Table<CliBlob>(src.GetSimpleName()));
     }
 }

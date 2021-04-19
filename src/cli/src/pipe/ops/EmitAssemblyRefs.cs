@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class ImageDataEmitter
+    partial class CliDataPipe
     {
         public void EmitAssemblyRefs(FS.Files input, FS.FilePath dst)
         {

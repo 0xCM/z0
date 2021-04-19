@@ -550,8 +550,8 @@ namespace Z0.Asm
 
         void EmitImageHeaders()
         {
-            var svc = ImageDataEmitter.create(Wf);
-            svc.EmitImageHeaders(WfRuntime.RuntimeArchive(Wf));
+            var svc = CliDataPipe.create(Wf);
+            svc.EmitSectionHeaders(WfRuntime.RuntimeArchive(Wf));
         }
 
         void Receive(in ImageContent src)
@@ -815,7 +815,7 @@ namespace Z0.Asm
 
         public void EmitApiImageContent()
         {
-            Wf.ImageDataEmitter().EmitApiImageContent();
+            Wf.CliDataPipe().EmitImageContent();
         }
 
         void ShowRegKinds(RegKind src, ShowLog dst)
@@ -1339,7 +1339,7 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var images = Wf.ImageDataEmitter();
+            var images = Wf.CliDataPipe();
             images.EmitMsilRows();
 
 

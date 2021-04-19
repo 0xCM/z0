@@ -33,7 +33,7 @@ namespace Z0.Asm
             Next = app.MessageRelay;
             app.MessageQueue.Next += Relay;
             Random = app.Random;
-            CaptureServices = Wf.CaptureServices(this);
+            CaptureServices = Wf.CaptureServices();
         }
 
         [MethodImpl(Inline)]

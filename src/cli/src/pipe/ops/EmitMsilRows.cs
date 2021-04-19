@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class ImageDataEmitter
+    partial class CliDataPipe
     {
         public uint EmitMsilRows()
             => EmitMsilRows(Wf.Components);
@@ -26,24 +26,26 @@ namespace Z0
 
         public Index<MsilRow> EmitMsilRows(Assembly src)
         {
+            var methods = Index<MsilRow>.Empty;
             var srcPath = FS.path(src.Location);
-            var processing = Wf.Running(srcPath);
-            using var reader = CliDataReader.create(srcPath);
-            var methods = reader.ReadMsil();
-            var view = methods.View;
-            var count = (uint)methods.Length;
-            if(count != 0)
+            if(CliDataReader.HasMetadata(srcPath))
             {
-                var dst = Db.Table<MsilRow>(src.GetSimpleName());
-                var flow = Wf.EmittingTable<MsilRow>(dst);
-                Tables.emit(methods,dst);
-                Wf.EmittedTable<MsilRow>(flow, count);
+                var processing = Wf.Running(srcPath);
+                using var reader = CliDataReader.create(srcPath);
+                methods = reader.ReadMsil();
+                var view = methods.View;
+                var count = (uint)methods.Length;
+                if(count != 0)
+                {
+                    var dst = Db.Table<MsilRow>(src.GetSimpleName());
+                    var flow = Wf.EmittingTable<MsilRow>(dst);
+                    Tables.emit(methods,dst);
+                    Wf.EmittedTable<MsilRow>(flow, count);
+                }
+
+                Wf.Ran(processing, src);
             }
-
-            Wf.Ran(processing, src);
-
             return methods;
         }
-
     }
 }

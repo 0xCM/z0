@@ -75,20 +75,24 @@ namespace Z0
             => Z0.ApiCaptureService.create(wf);
 
         [Op]
-        public static QuickCapture CaptureQuick(this IWfRuntime wf, IAsmContext asm)
-            => Capture.quick(wf, asm);
+        public static QuickCapture CaptureQuick(this IWfRuntime wf)
+            => Capture.quick(wf);
 
         [Op]
-        public static ICaptureServices CaptureServices(this IWfRuntime wf, IAsmContext asm)
-            => new CaptureServices(wf, asm);
+        public static ICaptureServices CaptureServices(this IWfRuntime wf)
+            => new CaptureServices(wf);
 
         [Op]
-        public static ICaptureCore CaptureCore(this IWfRuntime wf, IAsmContext asm)
+        public static ICaptureCore CaptureCore(this IWfRuntime wf)
             => Services.CaptureCore.create(wf);
 
         [Op]
         public static ImmSpecializer ImmSpecializer(this IWfRuntime wf)
             => Z0.Asm.ImmSpecializer.create(wf);
+
+        [Op]
+        public static IAsmImmWriter ImmWriter(this IWfRuntime wf, ApiHostUri host)
+            => new AsmImmWriter(wf, host, wf.AsmFormatter());
 
         [Op]
         public static IAsmDecoder AsmDecoder(this IWfRuntime wf)

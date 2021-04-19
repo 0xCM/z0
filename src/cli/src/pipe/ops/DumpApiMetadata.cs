@@ -12,9 +12,9 @@ namespace Z0
 
     using static memory;
 
-    public sealed class CliTables : WfService<CliTables>
+    partial class CliDataPipe
     {
-        public WfExecToken DumpMetadata(FS.FilePath src, FS.FilePath dst)
+        public void DumpMetadata(FS.FilePath src, FS.FilePath dst)
         {
             try
             {
@@ -25,12 +25,11 @@ namespace Z0
                 var reader = peFile.GetMetadataReader();
                 var viz = new MetadataVisualizer(reader, target);
                 viz.Visualize();
-                return Wf.EmittedFile(flow,1);
+                Wf.EmittedFile(flow,1);
             }
             catch(Exception e)
             {
                 Wf.Error(e);
-                return WfExecToken.Empty;
             }
         }
 
@@ -40,14 +39,13 @@ namespace Z0
             dir.Clear();
             var components = Wf.Api.PartComponents.View;
             var count = components.Length;
-            var tables = Wf.CliTables();
             for(var i=0; i<count; i++)
             {
                 var component = skip(components,i);
                 var source = FS.path(component.Location);
                 var name = source.FileName.WithoutExtension;
                 var target = dir + name + FS.Txt;
-                tables.DumpMetadata(source,target);
+                DumpMetadata(source,target);
             }
         }
     }

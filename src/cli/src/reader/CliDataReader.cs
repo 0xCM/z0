@@ -14,10 +14,19 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class CliDataReader : IDisposable
+    [ApiHost]
+    public partial class CliDataReader : IDisposable
     {
         public static CliDataReader create(FS.FilePath src)
             => new CliDataReader(src);
+
+        [Op]
+        public static bool HasMetadata(FS.FilePath src)
+        {
+            using var stream = File.OpenRead(src.Name);
+            using var reader = new PEReader(stream);
+            return reader.HasMetadata;
+        }
 
         readonly FS.FilePath Source;
 
@@ -28,7 +37,6 @@ namespace Z0
         public MetadataReader MetadataReader {get;}
 
         public PEMemoryBlock MetadataBlock {get;}
-
 
         public CliDataReader(FS.FilePath src)
         {
@@ -44,6 +52,60 @@ namespace Z0
             PeReader?.Dispose();
             Stream?.Dispose();
         }
+
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<MethodDefinitionHandle> MethodDefHandles()
+            => MetadataReader.MethodDefinitions.ToReadOnlySpan();
+
+        [MethodImpl(Inline), Op]
+        public ref MethodBodyBlock Read(MethodDefinition src, ref MethodBodyBlock dst)
+        {
+            dst = PeReader.GetMethodBody(src.RelativeVirtualAddress);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public MethodDefinition ReadMethodDef(MethodDefinitionHandle src)
+            => MetadataReader.GetMethodDefinition(src);
+
+        [MethodImpl(Inline), Op]
+        public ref MethodDefinition ReadMethodDef(MethodDefinitionHandle src, ref MethodDefinition dst)
+        {
+            dst = ReadMethodDef(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public void ReadMeathodDefs(ReadOnlySpan<MethodDefinitionHandle> src, Span<MethodDefinition> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                 ReadMethodDef(skip(src,i), ref seek(dst,i));
+        }
+
+        [MethodImpl(Inline), Op]
+        public MethodImplementation ReadMethodImpl(MethodImplementationHandle src)
+            => MetadataReader.GetMethodImplementation(src);
+
+        [MethodImpl(Inline), Op]
+        public ref MethodImplementation ReadMethodImpl(MethodImplementationHandle src, ref MethodImplementation dst)
+        {
+            dst = ReadMethodImpl(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public void ReadMethodImpls(ReadOnlySpan<MethodImplementationHandle> src, Span<MethodImplementation> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                ReadMethodImpl(skip(src,i), ref seek(dst,i));
+        }
+
+        [MethodImpl(Inline), Op]
+        public void ReadAttributes(TableSpan<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
+            => src.Iter(handle => dst(MetadataReader.GetCustomAttribute(handle)));
 
         public Index<MsilRow> ReadMsil()
         {

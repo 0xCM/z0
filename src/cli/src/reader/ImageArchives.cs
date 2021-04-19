@@ -17,7 +17,7 @@ namespace Z0
     public readonly struct ImageArchives
     {
         [Op]
-        public static IImageReader csvreader(IWfRuntime wf, FS.FilePath src)
+        public static ImageCsvReader csvreader(IWfRuntime wf, FS.FilePath src)
         {
             if(!src.Exists)
                 @throw(FS.missing(src));

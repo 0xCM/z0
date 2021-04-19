@@ -15,11 +15,11 @@ namespace Z0
     public readonly struct Capture
     {
         [Op]
-        public static QuickCapture quick(IWfRuntime wf, IAsmContext asm)
+        public static QuickCapture quick(IWfRuntime wf)
         {
-            var tokens = Buffers.alloc(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
+            var tokens = Buffers.alloc(Pow2.T16, 5, out var buffer).Tokenize();
             var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
-            var proxy = new CaptureServiceProxy(asm.CaptureCore, exchange);
+            var proxy = new CaptureServiceProxy(wf.CaptureCore(), exchange);
             return new QuickCapture(wf, buffer, tokens, proxy);
         }
 

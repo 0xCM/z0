@@ -53,9 +53,6 @@ namespace Z0
                 case EmitAssemblyRefsCmd.CmdName:
                     Builder.EmitAssemblyRefs().RunTask(Wf);
                 break;
-                case RunPartCmd.CmdName:
-                    Builder.RunPart(ApiPartIdParser.single(a0)).Dispatch(Wf).Wait();
-                    break;
                 default:
                     Wf.Error(string.Format("Processor for {0} not found", name));
                     break;

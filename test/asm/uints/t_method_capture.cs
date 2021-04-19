@@ -48,7 +48,7 @@ namespace Z0.Asm
         public void capture_quick()
         {
             using var dst = CaseWriter(FS.Extensions.Asm);
-            using var quick = Wf.CaptureQuick(Context);
+            using var quick = Wf.CaptureQuick();
             foreach(var m in typeof(z).DeclaredMethods().Public().Static().NonGeneric())
             {
                 var code = quick.Capture(m);

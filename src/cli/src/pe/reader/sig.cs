@@ -10,7 +10,7 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static BlobRow sig(in ReaderState state, FieldDefinition src, Count seq)
+        public static CliBlob sig(in ReaderState state, FieldDefinition src, Count seq)
             => cover(state).Blob(src.Signature, seq);
     }
 }

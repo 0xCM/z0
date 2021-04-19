@@ -7,29 +7,32 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
+    using System.Reflection.PortableExecutable;
+    using System.IO;
+    using System.Linq;
 
     using static Part;
     using static memory;
 
-    partial class CliMemoryMap
+    partial class CliDataReader
     {
         [MethodImpl(Inline), Op]
-        public FieldDefinition Read(FieldDefinitionHandle src)
-            => CliReader.GetFieldDefinition(src);
+        public FieldDefinition ReadFieldDef(FieldDefinitionHandle src)
+            => MetadataReader.GetFieldDefinition(src);
 
         [MethodImpl(Inline), Op]
-        public ref FieldDefinition Read(FieldDefinitionHandle src, ref FieldDefinition dst)
+        public ref FieldDefinition ReadFieldDef(FieldDefinitionHandle src, ref FieldDefinition dst)
         {
-            dst = Read(src);
+            dst = ReadFieldDef(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<FieldDefinitionHandle> src, Span<FieldDefinition> dst)
+        public void ReadFieldDefs(ReadOnlySpan<FieldDefinitionHandle> src, Span<FieldDefinition> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
+                ReadFieldDef(skip(src,i), ref seek(dst,i));
         }
     }
 }
