@@ -143,6 +143,86 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline), Op]
+        public static byte read1(in byte src, Span<byte> dst)
+        {
+            first(dst) = src;
+            return 1;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static byte read2(in byte src, Span<byte> dst)
+        {
+            first(recover<ushort>(dst)) = u16(src);
+            return 2;
+        }
+
+        /// <summary>
+        /// Reads 5 bytes from a data source reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static byte read3(in byte src, Span<byte> dst)
+        {
+            read2(src,dst);
+            seek(dst,3) = skip(src,3);
+            return 3;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static byte read4(in byte src, Span<byte> dst)
+        {
+            first(recover<uint>(dst)) = u32(src);
+            return 4;
+        }
+
+        /// <summary>
+        /// Reads 5 bytes from a data source reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static byte read5(in byte src, Span<byte> dst)
+        {
+            read4(src,dst);
+            seek(dst,4) = skip(src,4);
+            return 5;
+        }
+
+        /// <summary>
+        /// Reads 6 bytes from a data source reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static byte read6(in byte src, Span<byte> dst)
+        {
+            read4(src,dst);
+            read2(skip(src,4), slice(dst,4));
+            return 6;
+        }
+
+        /// <summary>
+        /// Reads 6 bytes from a data source reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static byte read7(in byte src, Span<byte> dst)
+        {
+            read4(src,dst);
+            read3(skip(src,4), slice(dst,4));
+            return 7;
+        }
+
+        /// <summary>
+        /// Reads 6 bytes from a data source reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static byte read8(in byte src, Span<byte> dst)
+        {
+            first(recover<ulong>(dst)) = u64(src);
+            return 8;
+        }
+
         /// <summary>
         /// Reads 6 bytes from a data source reference
         /// </summary>
@@ -160,6 +240,7 @@ namespace Z0
             seek8(dst, i++) = skip(src,i);
             return dst;
         }
+
 
         /// <summary>
         /// Reads 7 bytes from a data source reference

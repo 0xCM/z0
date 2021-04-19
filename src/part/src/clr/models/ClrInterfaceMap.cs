@@ -9,20 +9,36 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Captures the content of a <see cref="InterfaceMapping"/>
     /// </summary>
     public struct ClrInterfaceMap : ITextual
     {
+        /// <summary>
+        /// The methods declared by an interface
+        /// </summary>
         public Index<MethodInfo> Specs;
 
+        /// <summary>
+        /// The interface type
+        /// </summary>
         public Type SpecType;
 
+        /// <summary>
+        /// The methods that realize an interface implementation
+        /// </summary>
         public Index<MethodInfo> Impl;
 
+        /// <summary>
+        /// The type that declares the methods that realize an interface contract
+        /// </summary>
         public Type ImplType;
 
+        /// <summary>
+        /// The number of interface members
+        /// </summary>
         public uint OperationCount
         {
             [MethodImpl(Inline)]
@@ -46,8 +62,8 @@ namespace Z0
                 ClrMethod spec = Specs[i];
                 ClrMethod impl = Impl[i];
                 dst.AppendLine($"   {spec.DeclaringType}::{spec.Name} --> {impl.DeclaringType}::{impl.Name}");
-                dst.AppendLineFormat("       MethodHandle 0x{0:X} --> MethodHandle 0x{1:X}", spec.HandleAddress, impl.HandleAddress);
-                dst.AppendLineFormat("       FunctionPtr  0x{0:X} --> FunctionPtr  0x{1:X}", spec.PointerAddress, impl.PointerAddress);
+                dst.AppendLineFormat("       Spec(MethodHandle) {0} --> Impl(MethodHandle) {1}", spec.HandleAddress, impl.HandleAddress);
+                dst.AppendLineFormat("       Spec(FunctionPtr) {0} --> Impl(FunctionPtr)  {1}", spec.PointerAddress, impl.PointerAddress);
             }
         }
 

@@ -98,7 +98,7 @@ namespace Z0
                     images.EmitRuntimeHeaders();
 
                 if(options.EmitMsilRecords)
-                    images.EmitMsilRecords();
+                    images.EmitMsilRows();
 
                 if(options.EmitCliStrings)
                 {

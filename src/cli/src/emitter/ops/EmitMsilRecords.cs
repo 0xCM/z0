@@ -12,26 +12,31 @@ namespace Z0
 
     partial class ImageDataEmitter
     {
-        public uint EmitMsilRecords()
-            => EmitMsilRecords(Wf.Components);
+        public uint EmitMsilRows()
+            => EmitMsilRows(Wf.Components);
 
-        public Index<MsilRow> EmitMsilRecords(Assembly src)
+        public uint EmitMsilRows(ReadOnlySpan<Assembly> src)
+        {
+            var total = 0u;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                EmitMsilRows(skip(src,i));
+            return total;
+        }
+
+        public Index<MsilRow> EmitMsilRows(Assembly src)
         {
             var srcPath = FS.path(src.Location);
             var processing = Wf.Running(srcPath);
-            var methods = CliFileReader.cil(srcPath);
+            using var reader = CliDataReader.create(srcPath);
+            var methods = reader.ReadMsil();
             var view = methods.View;
             var count = (uint)methods.Length;
             if(count != 0)
             {
                 var dst = Db.Table<MsilRow>(src.GetSimpleName());
                 var flow = Wf.EmittingTable<MsilRow>(dst);
-                using var writer = dst.Writer();
-                writer.WriteLine(CilRowHeader);
-
-                for(var i=0u; i<count; i++)
-                    writer.WriteLine(format(skip(view,i)));
-
+                Tables.emit(methods,dst);
                 Wf.EmittedTable<MsilRow>(flow, count);
             }
 
@@ -40,38 +45,5 @@ namespace Z0
             return methods;
         }
 
-        public uint EmitMsilRecords(ReadOnlySpan<Assembly> src)
-        {
-            var total = 0u;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                EmitMsilRecords(skip(src,i));
-            return total;
-        }
-
-        static string format(in MsilRow src)
-        {
-            var dst = EmptyString.Build();
-            dst.Append(FieldDelimiter);
-            dst.Append(Space);
-            dst.Append(src.MethodSig.Format().PadRight(80));
-            dst.Append(FieldDelimiter);
-            dst.Append(Space);
-            dst.Append(src.MethodName.PadRight(50));
-            dst.Append(FieldDelimiter);
-            dst.Append(Space);
-            dst.Append(src.Rva.Format().PadRight(12));
-            dst.Append(FieldDelimiter);
-            dst.Append(Space);
-            dst.Append(src.Code.Format());
-            return dst.ToString();
-        }
-
-        static string CilRowHeader
-            => text.concat(FieldDelimiter, Space,
-                "MethodSig".PadRight(80),  FieldDelimiter,  Space,
-                "MethodName".PadRight(50), FieldDelimiter,  Space,
-                "Rva".PadRight(12), FieldDelimiter, Space,
-                "Il");
     }
 }

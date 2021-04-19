@@ -14,8 +14,11 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct CliFileReader : IDisposable
+    public class CliDataReader : IDisposable
     {
+        public static CliDataReader create(FS.FilePath src)
+            => new CliDataReader(src);
+
         readonly FS.FilePath Source;
 
         readonly FileStream Stream;
@@ -26,7 +29,8 @@ namespace Z0
 
         public PEMemoryBlock MetadataBlock {get;}
 
-        public CliFileReader(FS.FilePath src)
+
+        public CliDataReader(FS.FilePath src)
         {
             Source = src;
             Stream = File.OpenRead(src.Name);
@@ -37,43 +41,37 @@ namespace Z0
 
         public void Dispose()
         {
-            PeReader.Dispose();
-            Stream.Dispose();
+            PeReader?.Dispose();
+            Stream?.Dispose();
         }
 
-        public static Index<MsilRow> cil(FS.FilePath src)
+        public Index<MsilRow> ReadMsil()
         {
             var dst = sys.list<MsilRow>();
-
-            using var stream = File.OpenRead(src.Name);
-            using var pe = new PEReader(stream);
-
-            var reader = pe.GetMetadataReader();
-            var types = @readonly(reader.TypeDefinitions.ToArray());
+            var types = @readonly(MetadataReader.TypeDefinitions.ToArray());
             var typeCount = types.Length;
             for(var k=0u; k<typeCount; k++)
             {
                  var hType = skip(types, k);
-                 var hMethods = reader.GetTypeDefinition(hType).GetMethods().Array();
-                 var methodCount = hMethods.Length;
-                 var methodDefs = root.map(hMethods, m=> reader.GetMethodDefinition(m));
-                 var view = @readonly(methodDefs);
-                 var buffer = alloc<MsilRow>(methodCount);
-                 var target = span(buffer);
+                 var methods = @readonly(MetadataReader.GetTypeDefinition(hType).GetMethods().Array());
+                 var methodCount = methods.Length;
+                 var definitions = @readonly(root.map(methods, m=> MetadataReader.GetMethodDefinition(m)));
                  for(var i=0u; i<methodCount; i++)
                  {
-                    ref readonly var def = ref skip(view,i);
-                    var rva = def.RelativeVirtualAddress;
+                    ref readonly var method = ref skip(methods,i);
+                    ref readonly var definition = ref skip(definitions,i);
+                    var rva = definition.RelativeVirtualAddress;
                     if(rva != 0)
                     {
-                        var body = pe.GetMethodBody(rva);
+                        var body = PeReader.GetMethodBody(rva);
                         dst.Add(new MsilRow
                         {
-                            MethodSig = reader.GetBlobBytes(def.Signature),
-                            MethodName = reader.GetString(def.Name),
-                            Rva = (Address32)rva,
+                            MethodRva = (Address32)rva,
+                            ImageName = Source.FileName,
+                            BodySize = body.Size,
+                            MaxStack = body.MaxStack,
+                            MethodName = MetadataReader.GetString(definition.Name),
                             Code = body.GetILBytes(),
-                            Size = body.Size
                         });
                     }
                  }

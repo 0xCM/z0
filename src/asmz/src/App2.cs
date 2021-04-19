@@ -283,9 +283,11 @@ namespace Z0.Asm
 
         void ShowInterfaceMaps()
         {
-            var imap = Clr.imap(typeof(Prototypes.ContractedEvaluator), typeof(Prototypes.IEvaluator));
+            var calc8 = Clr.imap(typeof(Prototypes.Calc8), typeof(Prototypes.ICalc8));
+            var calc64 = Clr.imap(typeof(Prototypes.Calc64), typeof(Prototypes.ICalc64));
             using var log = ShowLog("imap",FS.Log);
-            log.Show(imap.Format());
+            log.Show(calc8.Format());
+            log.Show(calc64.Format());
         }
 
         void RunScripts()
@@ -852,13 +854,11 @@ namespace Z0.Asm
             var count = producer.Produce(Toolsets.nasm, hosts);
         }
 
-        void CaptureSelectedRoutines()
+        void CaptureParts(params PartId[] parts)
         {
-            var parts = root.array(PartId.AsmLang, PartId.AsmCore, PartId.AsmCases);
             var dst = Db.AppLogDir() + FS.folder("capture");
             dst.Clear();
             Wf.CaptureRunner().Capture(parts, dst);
-
         }
 
         public void EmitXedCatalog()
@@ -1269,32 +1269,80 @@ namespace Z0.Asm
             var render = Wf.AsmRender();
             var dst = Db.AppLog(code.ToString(), FS.Asm);
             render.RenderRows(code, dst);
+        }
+
+
+        [Record(TableId)]
+        public struct JmpStub : IRecord<JmpStub>
+        {
+            public const string TableId = "jmp.stub";
+
+            public OpIdentity Method;
+
+            public MemoryAddress StubAddress;
+
+            public MemoryAddress TargetAddress;
+
+            public AsmHexCode StubCode;
+
+            public Address32 Displacement;
+
+            public Address32 Offset;
 
         }
 
-        void CheckPermFormat()
+        unsafe ReadOnlySpan<JmpStub> JmpStubs()
         {
-            var symbols = SymCache<Perm4L>.get().View;
-            var count = symbols.Length;
-            var j = 0;
-            for(var i=0; i<count; i++)
+            var source = typeof(Prototypes.Calc64);
+            var host = source.HostUri();
+            var methods = source.DeclaredMethods();
+            var count = methods.Length;
+            var entries = alloc<MemoryAddress>(count);
+            var located = span<JmpStub>(count);
+            ApiJit.jit(methods, entries);
+            var j=0;
+            for(var i=0; i< count; i++)
             {
-                ref readonly var sym = ref skip(symbols,i);
-                var input = sym.Kind;
-                if(input <= Perm4L.D)
-                    continue;
+                var encoded = Cells.alloc(w64).Bytes;
+                ref readonly var method = ref skip(methods,i);
+                ref readonly var entry = ref skip(entries,i);
 
-                var mapping = PermSymbolic.bitmap(input);
-                var desc = string.Format("{0:D2} ({1}) {2}", j++, input, mapping);
-
-                Wf.Row(desc);
-
+                ref var data = ref entry.Ref<byte>();
+                ByteReader.read5(data, encoded);
+                if(JmpRel32.test(encoded))
+                {
+                    var target = JmpRel32.target(entry, encoded);
+                    ref var info = ref seek(located,j++);
+                    info.Method = method.Identify();
+                    info.StubAddress = entry;
+                    info.TargetAddress = target;
+                    info.StubCode =  AsmBytes.hexcode(slice(encoded,0,5));
+                    info.Displacement = JmpRel32.dx(encoded);
+                    info.Offset = JmpRel32.offset(entry,entry,encoded);
+                    //seek(located,j++) = //new LocatedMethod(method.Identify(), method, target);
+                }
             }
 
+            return slice(located,0,j);
         }
+
+        void DoJumpStubs()
+        {
+            CaptureParts(PartId.AsmCases);
+            ShowInterfaceMaps();
+            var located = JmpStubs();
+            using var log = ShowLog("jumptargets",FS.Csv);
+            Tables.emit(located,log.Buffer);
+            log.ShowBuffer();
+
+        }
+
         public void Run()
         {
-            CheckPermFormat();
+            var images = Wf.ImageDataEmitter();
+            images.EmitMsilRows();
+
+
             //CheckV();
             //EmitHostStatements();
             //LoadCapturedCil();

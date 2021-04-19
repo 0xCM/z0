@@ -235,6 +235,14 @@ namespace Z0
             => (byte)(a - b);
 
         [MethodImpl(Inline), Op]
+        public static byte mod(byte a, byte b)
+            => (byte)(a % b);
+
+        [MethodImpl(Inline), Op]
+        public static byte mul(byte a, byte b)
+            => (byte)(a * b);
+
+        [MethodImpl(Inline), Op]
         public static byte and(byte a, byte b)
             => (byte)(a & b);
 

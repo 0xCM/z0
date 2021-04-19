@@ -34,6 +34,14 @@ namespace Z0
         }
 
         [Op]
+        public static void jit(ReadOnlySpan<MethodInfo> src, Span<MemoryAddress> dst)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = jit(skip(src,i));
+        }
+
+        [Op]
         public static LocatedMethod jit(IdentifiedMethod src)
         {
             sys.prepare(src.MethodHandle);

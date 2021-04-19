@@ -75,6 +75,18 @@ namespace Z0
             return count;
         }
 
+        public static Count emit<T>(ReadOnlySpan<T> src, ITextBuffer dst)
+            where T : struct, IRecord<T>
+        {
+            var count = src.Length;
+            var formatter = Tables.formatter<T>();
+            dst.AppendLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+                dst.AppendLine(formatter.Format(skip(src,i)));
+
+            return count;
+        }
+
         public static Count emit<T>(T[] src, FS.FilePath dst, byte? fieldwidth = null, bool append = false)
             where T : struct, IRecord<T>
                 => emit(@readonly(src), dst, fieldwidth, append);

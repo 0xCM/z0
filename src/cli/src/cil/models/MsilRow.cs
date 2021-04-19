@@ -7,16 +7,18 @@ namespace Z0
     [Record(TableId)]
     public struct MsilRow : IRecord<MsilRow>
     {
-        public const string TableId = "msil";
+        public const string TableId = "image.msil";
 
-        public BinaryCode MethodSig;
+        public FS.FileName ImageName;
+
+        public Address32 MethodRva;
+
+        public ByteSize BodySize;
+
+        public ByteSize MaxStack;
 
         public string MethodName;
 
-        public Address32 Rva;
-
         public BinaryCode Code;
-
-        public ByteSize Size;
     }
 }

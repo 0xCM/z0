@@ -122,16 +122,6 @@ namespace Z0
             dst.AppendLine();
         }
 
-        static ref MsilDataRow fill(in ApiMember src, ref MsilDataRow dst)
-        {
-            var cil = src.Cil;
-            dst.BaseAddress = cil.BaseAddress;
-            dst.MemberId = src.Token;
-            dst.Uri = src.OpUri;
-            dst.Encoded = cil.Encoded;
-            return ref dst;
-        }
-
         public void EmitMsilData(Index<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Count;
@@ -152,6 +142,16 @@ namespace Z0
 
                 Wf.EmittedTable(flow, count);
             }
+        }
+
+        static ref MsilDataRow fill(in ApiMember src, ref MsilDataRow dst)
+        {
+            var cil = src.Cil;
+            dst.BaseAddress = cil.BaseAddress;
+            dst.MemberId = src.Token;
+            dst.Uri = src.OpUri;
+            dst.Encoded = cil.Encoded;
+            return ref dst;
         }
     }
 }
