@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines the matrix api surface
     /// </summary>
-    public static class RandomMatrix
+    public static class PolyMatrix
     {
         /// <summary>
         /// Allocates and fills a matrix of natural dimensions with random values

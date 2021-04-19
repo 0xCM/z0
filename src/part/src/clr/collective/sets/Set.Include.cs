@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="dst">The target set</param>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static void Include<T>(this ISet<T> dst, IEnumerable<T> src)
-            => src.Iter(item => dst.Add(item));
+        public static bool[] Include<T>(this ISet<T> dst, IEnumerable<T> src)
+            => src.Map(item => dst.Add(item));
 
         /// <summary>
         /// Adds items from a parameter array to a target set
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="dst">The target set</param>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static void Include<T>(this ISet<T> dst, params T[] src)
-            => src.Iter(item => dst.Add(item));
+        public static bool[] Include<T>(this ISet<T> dst, params T[] src)
+            => src.Select(item => dst.Add(item));
     }
 }

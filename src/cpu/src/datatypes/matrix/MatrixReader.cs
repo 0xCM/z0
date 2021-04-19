@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     public readonly struct MatrixReader
     {
         public static Matrix256<M,N,T> read<M,N,T>(FS.FilePath src, M m = default, N n = default, T t = default)

@@ -4,13 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public static partial class XBlocks
+    using System;
+    using System.Reflection;
+
+    partial class ClrQuery
     {
-
-    }
-
-    public static partial class XTend
-    {
-
+        [Op]
+        public static FieldInfo[] DeclaredStaticFields(this Assembly[] src)
+            => src.SelectMany(x => x.DeclaredStaticFields());
     }
 }

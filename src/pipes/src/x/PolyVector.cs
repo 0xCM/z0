@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines the matrix api surface
     /// </summary>
-    public static class RandomVector
+    public static class PolyVector
     {
         /// <summary>
         /// Produces a blocked vector
@@ -279,7 +279,6 @@ namespace Z0
             where T : unmanaged
         {
             var len = src.Length;
-            Demands.insist(len == max.Length);
             var dst = Z0.RowVectors.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
                 dst[i] = gAlg.squeeze(src[i],max[i]);

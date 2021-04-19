@@ -14,7 +14,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrType> types(Assembly src)
-            => adapt(src.GetTypes());
+            => adapt(types(src, out var _));
 
+        [MethodImpl(Inline), Op]
+        public static Type[] types(Assembly src, out Type[] dst)
+            => dst = src.GetTypes();
     }
 }

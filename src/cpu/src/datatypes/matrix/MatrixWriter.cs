@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     public readonly struct MatrixWriter
     {
         public static Matrix256<M,N,T> write<M,N,T>(in Matrix256<M,N,T> src, FS.FilePath dst, M m = default, N n = default, T t = default)

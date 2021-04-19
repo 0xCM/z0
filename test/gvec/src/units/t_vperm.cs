@@ -296,7 +296,7 @@ namespace Z0
             var p_assembled = VPerm.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
             Claim.eq(p, p_assembled);
 
-            var pformat_actual = Permute.FormatMap(p);
+            var pformat_actual = PermSymbolic.bitmap(p);
             Claim.ClaimEq(pformat_epect, pformat_actual);
 
             var vIn = cpu.vparts(w128, 0,1,2,3);

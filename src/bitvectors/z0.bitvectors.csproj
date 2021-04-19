@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Matrix)" />
+    <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitSpans)" />
   </ItemGroup>

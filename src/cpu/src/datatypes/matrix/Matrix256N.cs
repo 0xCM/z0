@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -68,7 +68,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256(SpanBlock256<T> src)
         {
-            Demands.insist(src.CellCount >= CellCount);
+            var count = src.CellCount;
+            root.require(src.CellCount >= CellCount, () => $"{count} != {CellCount}");
             data = src;
         }
 

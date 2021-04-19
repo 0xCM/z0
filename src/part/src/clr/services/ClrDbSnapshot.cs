@@ -5,15 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
-    public static class Polynomial
+    public struct ClrDbSnapshot
     {
-        [MethodImpl(Inline)]
-        public static Polynomial<T> Define<T>(params (T scalar, uint exp)[] terms)
-            where T : unmanaged
-                => Polynomial<T>.create(terms);
+        public Index<Type[]> Types;
+
+        public Index<MethodInfo[]> Methods;
+
+        public Index<FieldInfo[]> Fields;
+
+        public Index<PropertyInfo[]> Properties;
     }
 }

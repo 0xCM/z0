@@ -20,33 +20,20 @@ namespace Z0
     public readonly struct Polynomial<T>
         where T : unmanaged
     {
-        readonly Monomial<T>[] terms;
+        readonly Monomial<T>[] _Terms;
 
         /// <summary>
         /// The canonical zero polynomial - with one term of order 0 with coefficient 0
         /// </summary>
-        public static Polynomial<T> Zero => create((zero<T>(), 0));
-
-        /// <summary>
-        /// Constructs a polynomial from a sparse term sequence of scalar coefficients  paired with the
-        /// corresponding term exponent value
-        /// </summary>
-        public static Polynomial<T> create(params (T scalar, uint exp)[] terms)
-        {
-            var expanse = new Monomial<T>[terms[0].exp + 1];
-            for(var i = 0; i < terms.Length; i++)
-                expanse[terms[i].exp] = terms[i];
-            expanse.Reverse();
-            return new Polynomial<T>(expanse);
-        }
+        public static Polynomial<T> Zero => new Polynomial<T>(sys.empty<Monomial<T>>());
 
         /// <summary>
         /// Initializes a polynomial from a dense sequence of monomials
         /// </summary>
         [MethodImpl(Inline)]
-        Polynomial(Monomial<T>[] terms)
+        internal Polynomial(Monomial<T>[] terms)
         {
-            this.terms = terms;
+            _Terms = terms;
         }
 
         /// <summary>
@@ -56,7 +43,7 @@ namespace Z0
         public uint Degree
         {
             [MethodImpl(Inline)]
-            get => terms[0].Exp;
+            get => _Terms[0].Exp;
         }
 
         /// <summary>
@@ -65,14 +52,14 @@ namespace Z0
         public Monomial<T>[] Terms
         {
             [MethodImpl(Inline)]
-            get => terms;
+            get => _Terms;
         }
 
         public T[] Coefficients()
         {
-            var dst = new T[terms.Length];
-            for(var i=0; i< terms.Length; i++)
-                dst[i] = terms[i].Scalar;
+            var dst = new T[_Terms.Length];
+            for(var i=0; i< _Terms.Length; i++)
+                dst[i] = _Terms[i].Scalar;
             return dst;
         }
 
@@ -101,8 +88,8 @@ namespace Z0
         {
             get
             {
-                for(var i=0; i<terms.Length; i++)
-                    if(terms[i].Nonzero)
+                for(var i=0; i<_Terms.Length; i++)
+                    if(_Terms[i].Nonzero)
                         return true;
                 return false;
             }
@@ -115,9 +102,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public Monomial<T> Term(uint exp)
         {
-            var index = terms.Length - (exp + 1);
+            var index = _Terms.Length - (exp + 1);
             if(index >=0)
-                return terms[index];
+                return _Terms[index];
             else
                 return Monomial<T>.Zero(exp);
         }
@@ -129,7 +116,7 @@ namespace Z0
         public Monomial<T> LeadingTerm
         {
             [MethodImpl(Inline)]
-            get => terms[0];
+            get => _Terms[0];
         }
 
         /// <summary>
@@ -140,7 +127,7 @@ namespace Z0
         {
             var result = default(T);
             for(var i=0; i<Terms.Length; i++)
-                result = gmath.add(result, terms[i].Eval(x));
+                result = gmath.add(result, _Terms[i].Eval(x));
             return result ;
         }
 
@@ -154,18 +141,18 @@ namespace Z0
         public string Format(char? variable = null)
         {
             var dst = new List<string>();
-            for(var i=0; i< terms.Length; i++)
-                if(terms[i].Nonzero)
+            for(var i=0; i< _Terms.Length; i++)
+                if(_Terms[i].Nonzero)
                 {
                     if(dst.Count != 0)
-                        dst.Add(GetSep(terms[i]));
+                        dst.Add(GetSep(_Terms[i]));
                     else
                     {
-                        if(gmath.negative(terms[i].Scalar))
+                        if(gmath.negative(_Terms[i].Scalar))
                             dst.Add("-");
                     }
 
-                    dst.Add(terms[i].Format(variable,true));
+                    dst.Add(_Terms[i].Format(variable,true));
                 }
 
             return dst.Concat();
@@ -188,12 +175,13 @@ namespace Z0
     {
         public readonly Monomial<M,T>[] Terms;
 
-        public static readonly uint Degree = (uint)new N().NatValue;
+        public static uint Degree => (uint)new N().NatValue;
 
         /// <summary>
         /// The zero polynomial of degree N
         /// </summary>
-        public static readonly Polynomial<M,N,T> Zero = new Polynomial<M,N,T>(Monomial<M,T>.Zero(Degree));
+        public static Polynomial<M,N,T> Zero
+            => new Polynomial<M,N,T>(Monomial<M,T>.Zero(Degree));
 
         [MethodImpl(Inline)]
         public Polynomial(params Monomial<M,T>[] terms)

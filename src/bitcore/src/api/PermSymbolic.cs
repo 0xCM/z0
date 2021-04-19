@@ -15,14 +15,71 @@ namespace Z0
     [ApiHost]
     public readonly struct PermSymbolic
     {
+        [Op]
+        public static ReadOnlySpan<char> bitblock(Perm4L src, bool bracketed = true)
+        {
+            var storage = 0ul;
+            var bits8u = cover(@as<byte>(storage),8);
+            BitPack.unpack((byte)src, bits8u);
+            var bits = recover<bit>(bits8u);
+            var chars = CharBlocks.alloc(n16).Data;
+            var i=0;
+            var j=0;
+
+            if(bracketed)
+                seek(chars,i++) = Chars.LBracket;
+
+            seek(chars,i++) = skip(bits,j + 1).ToChar();
+            seek(chars,i++) = skip(bits,j + 0).ToChar();
+            seek(chars,i++) = Chars.Space;
+
+            seek(chars,i++) = skip(bits,j + 3).ToChar();
+            seek(chars,i++) = skip(bits,j + 2).ToChar();
+
+            seek(chars,i++) = Chars.Space;
+            seek(chars,i++) = skip(bits,j + 5).ToChar();
+            seek(chars,i++) = skip(bits,j + 4).ToChar();
+
+            seek(chars,i++) = Chars.Space;
+            seek(chars,i++) = skip(bits,j + 7).ToChar();
+            seek(chars,i++) = skip(bits,j + 6).ToChar();
+
+            if(bracketed)
+                seek(chars,i++) = Chars.RBracket;
+
+            return slice(chars,0,i);
+        }
+
+        /// <summary>
+        /// Formats the value as a permutation map, i.e., [00 01 10 11]: ABCD -> ABDC
+        /// </summary>
+        /// <param name="src">The permutation spec</param>
+        [Op]
+        public static string bitmap(Perm4L src)
+        {
+            const string Domain ="ABCD";
+            const string Pattern = "{0}: {1} -> {2}";
+            const byte BitCount = 8;
+
+            var n = n4;
+            var storage = 0ul;
+            var bitbuffer = cover(@as<byte>(storage),BitCount);
+            BitPack.unpack((byte)src, bitbuffer);
+            var bits = recover<bit>(bitbuffer);
+            var block = bitblock(src,true);
+            var codomain = CharBlocks.alloc(n).Data;
+            letters(n, @readonly(bits), codomain);
+            return string.Format(Pattern, text.format(block), Domain, text.format(codomain));
+        }
+
         [MethodImpl(Inline), Op]
         public static void letters(N4 n, ReadOnlySpan<bit> src, Span<char> dst)
         {
             int i=0, j=0;
-            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
-            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
-            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
-            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            seek(dst,i++) = letter(n4, skip(src,j++), skip(src,j++));
+            seek(dst,i++) = letter(n4, skip(src,j++), skip(src,j++));
+            seek(dst,i++) = letter(n4, skip(src,j++), skip(src,j++));
+            seek(dst,i++) = letter(n4, skip(src,j++), skip(src,j++));
         }
 
         public static string fPerm2x128<T>(Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
@@ -40,24 +97,21 @@ namespace Z0
         public static Span<char> letters(N4 n, BitSpan src, Span<char> dst)
         {
             int i=0, j=0;
-            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
-            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
-            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
-            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            seek(dst,i++) = letter(n4, src[j++], src[j++]);
+            seek(dst,i++) = letter(n4, src[j++], src[j++]);
+            seek(dst,i++) = letter(n4, src[j++], src[j++]);
+            seek(dst,i++) = letter(n4, src[j++], src[j++]);
             return dst;
         }
+
+        static ReadOnlySpan<AsciCharCode> Perm4Codes
+            => new AsciCharCode[4]{AsciCharCode.A, AsciCharCode.B, AsciCharCode.C, AsciCharCode.D,};
 
         [MethodImpl(Inline), Op]
         public static char letter(N4 n, bit x, bit y)
         {
-            if(x && y)
-                return 'D';
-            else if(!x && !y)
-                return 'A';
-            else if(x && !y)
-                return 'B';
-            else
-                return 'C';
+            var index = Bytes.or(Bytes.sll((byte)y,1) , (byte)x);
+            return (char)skip(Perm4Codes, index);
         }
 
         /// <summary>

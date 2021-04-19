@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using System.Runtime.Intrinsics;
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
     using static Part;
 
@@ -15,44 +16,48 @@ namespace Z0
         /// <summary>
         /// Computes the caryless 16-bit product of two 8-bit operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline), ClMul]
-        public static ushort clmul(byte lhs, byte rhs)
-            => (ushort)clmul((uint)lhs, (uint)rhs);
+        public static ushort clmul(byte a, byte b)
+            => (ushort)clmul((uint)a, (uint)b);
 
         /// <summary>
         /// Returns the caryless 32 bit product of two 16-bit operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline), ClMul]
-        public static uint clmul(ushort lhs, ushort rhs)
-            => (uint)clmul((uint)lhs, (uint)rhs);
+        public static uint clmul(ushort a, ushort b)
+            => (uint)clmul((uint)a, (uint)b);
 
         /// <summary>
         /// Returns the caryless 64 bit product from two 32-bit operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline), ClMul]
-        public static ulong clmul(uint lhs, uint rhs)
-            => clmul((ulong)lhs, (ulong)rhs).Left;
+        public static ulong clmul(uint a, uint b)
+            => clmul((ulong)a, (ulong)b).Left;
 
         /// <summary>
         /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8
         /// Computes the caryless 128-bit product of two 64-bit operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline), ClMul]
-        public static ConstPair<ulong> clmul(ulong lhs, ulong rhs)
+        public static ConstPair<ulong> clmul(ulong a, ulong b)
         {
-            var a = cpu.vscalar(w128, lhs);
-            var b = cpu.vscalar(w128, rhs);
-            var result = CarrylessMultiply(a,b,0x00);
+            var m0 = cpu.vscalar(w128, a);
+            var m1 = cpu.vscalar(w128, b);
+            var result = CarrylessMultiply(m0,m1,0x00);
             return (vcell(result,0), vcell(result,1));
         }
+
+        [MethodImpl(Inline), ClMul]
+        public static Vector128<ulong> clmul2(ulong a, ulong b)
+            => vclmul(cpu.vparts(w128, a, b));
 
         /// <summary>
         /// Computes the carryless product of the operands reduced by a specified polynomial
@@ -108,7 +113,6 @@ namespace Z0
             return (uint)prod;
         }
 
-
         [MethodImpl(Inline), ClMul]
         public static ulong clmul64(ulong x, ulong y)
         {
@@ -117,32 +121,31 @@ namespace Z0
             var z = CarrylessMultiply(u, v, 0);
             return vcell(z,0);
         }
-
     }
 
     /// <summary>
     /// Defines a mask that specifies the left/right vector components from which a carry-less product will be formed
     /// </summary>
-    public enum ClMulMask : byte
+    public enum ClMulKind : byte
     {
         /// <summary>
         /// For a product P = XY, multiply the lo(X) and lo(Y)
         /// </summary>
-        X00 = 0x00,
+        Lo = 0x00,
 
         /// <summary>
         /// For a product P = XY, multiply the lo(X) and hi(Y)
         /// </summary>
-        X01 = 0x01,
+        LoHi = 0x01,
 
         /// <summary>
         /// For a product P = XY, multiply the hi(X) and lo(Y)
         /// </summary>
-        X10 = 0x10,
+        HiLo = 0x10,
 
         /// <summary>
         /// For a product P = XY, multiply the hi(X) and hi(Y)
         /// </summary>
-        X11 = 0x11,
+        Hi = 0x11,
     }
 }

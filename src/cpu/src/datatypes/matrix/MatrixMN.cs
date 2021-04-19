@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a blocked primal matrix of natural dimensions
@@ -16,58 +16,69 @@ namespace Z0
     /// <typeparam name="M">The row count type</typeparam>
     /// <typeparam name="N">The column count type</typeparam>
     /// <typeparam name="T">The primal type</typeparam>
-    public readonly ref struct Matrix256<M,N,T>
+    public struct Matrix<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        readonly SpanBlock256<T> data;
+        T[] data;
 
         /// <summary>
-        /// The number of matrix rows
+        /// The number of rows in the structure
         /// </summary>
-        public static int Rows
-            => (int)nat64u<M>();
+        public static int Rows => (int)nat64u<M>();
 
         /// <summary>
-        /// The number of matrix colums
+        /// The number of columns in the structure
         /// </summary>
-        public static int Cols
-            => (int)nat64u<N>();
+        public static int Cols => (int)nat64u<N>();
 
         /// <summary>
-        /// The total number of matrix cells
+        /// The total number of allocated elements
         /// </summary>
-        public static int Capacity
-            => (int)NatCalc.mul<M,N>();
-
-        public static implicit operator Matrix256<M,N,T>(in SpanBlock256<T> src)
-            => new Matrix256<M,N,T>(src);
-
-        public static implicit operator TableSpan<M,N,T>(in Matrix256<M,N,T> A)
-            => A.Natural;
-
-        public static implicit operator SpanBlock256<T>(in Matrix256<M,N,T> A)
-            => A.Unsized;
+        public static int Cells => (int)NatCalc.mul<M,N>();
 
         [MethodImpl(Inline)]
-        public static bool operator == (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B)
-            => A.Equals(B);
+        public static bool operator == (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs)
+            => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator != (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B)
-            => !A.Equals(B);
+        public static bool operator != (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs)
+            => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public Matrix256(in SpanBlock256<T> src)
+        public Matrix(T[] src)
         {
-            z.insist(Capacity >= src.CellCount, $"{nameof(Capacity)}:={Capacity} < {nameof(src.CellCount)}:={src.CellCount}");
+            root.require(src.Length >= Cells, () => $"{src.Length} != {Cells}");
             data = src;
         }
 
-        [MethodImpl(Inline)]
-        internal Matrix256(in SpanBlock256<T> src, bool skipChecks)
-            => data = src;
+        /// <summary>
+        /// The number of rows in the matrix
+        /// </summary>
+        public readonly int RowCount
+        {
+            [MethodImpl(Inline)]
+            get => Rows;
+        }
+
+        /// <summary>
+        /// The number of columns in the matrix
+        /// </summary>
+        public readonly int ColCount
+        {
+            [MethodImpl(Inline)]
+            get => Cols;
+        }
+
+        /// <summary>
+        /// Provides access to the underlying data as a linear unblocked span
+        /// </summary>
+        public T[] Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
 
         [MethodImpl(Inline)]
         public ref T Cell(int r, int c)
@@ -85,13 +96,22 @@ namespace Z0
             get => ref Cell((int)r,(int)c);
         }
 
+        /// <summary>
+        /// Returns a row data copy
+        /// </summary>
+        public Block256<N,T> this[int r]
+        {
+            [MethodImpl(Inline)]
+            get => GetRow(r);
+        }
+
         [MethodImpl(Inline)]
         public Block256<N,T> GetRow(int row)
         {
             if(row < 0 || row >= Rows)
                 throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
 
-            return RowVectors.blockload<N,T>(data.Slice(row * Cols, Cols));
+            return RowVectors.blockload<N,T>(data.AsSpan().Slice(row * Cols, Cols));
         }
 
         [MethodImpl(Inline)]
@@ -99,7 +119,7 @@ namespace Z0
         {
             if(row < 0 || row >= Rows)
                 throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
-             var src = data.Slice(row * Cols, Cols);
+             var src = data.AsSpan().Slice(row * Cols, Cols);
              src.CopyTo(dst.Unsized);
              return ref dst;
         }
@@ -135,46 +155,19 @@ namespace Z0
         /// <summary>
         /// Interchages rows and columns
         /// </summary>
-        public Matrix256<N,M,T> Transpose()
+        public Matrix<N,M,T> Transpose()
         {
-            var dst = Matrix.blockalloc<N,M,T>();
+            var dst = Matrix.alloc<N,M,T>();
             for(var row = 0; row < Rows; row++)
                 dst.SetCol(row, GetRow(row));
             return dst;
         }
 
         /// <summary>
-        /// Provides access to the underlying data as a linear unblocked span
-        /// </summary>
-        public Span<T> Unblocked
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        /// <summary>
-        /// Provides access to the underlying data as a 256-bit blocked span
-        /// </summary>
-        public SpanBlock256<T> Unsized
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        /// <summary>
-        /// Provides access to the underlying data as a span of natural dimensions
-        /// </summary>
-        public TableSpan<M,N,T> Natural
-        {
-            [MethodImpl(Inline)]
-            get => TableSpans.load<M,N,T>(data);
-        }
-
-        /// <summary>
         /// Applies a function to each cell and overwites the existing cell value with the result
         /// </summary>
         /// <param name="f">The function to apply</param>
-        public Matrix256<M,N,T> Apply(Func<T,T> f)
+        public Matrix<M,N,T> Apply(Func<T,T> f)
         {
             for(var r = 0; r < Rows; r++)
             for(var c = 0; c < Cols; c++)
@@ -186,19 +179,14 @@ namespace Z0
         {
             get
             {
-                for(var i = 0; i < data.CellCount; i++)
+                for(var i = 0; i < data.Length; i++)
                     if(gmath.nonz(data[i]))
                         return false;
                 return true;
             }
         }
 
-        public bool NonEmpty
-        {
-            get => !IsZero;
-        }
-
-        public bool Equals(Matrix256<M,N,T> rhs)
+        public bool Equals(Matrix<M,N,T> rhs)
         {
             for(var r = 0; r < (int)Rows; r ++)
             for(var c = 0; c < (int)Cols; c ++)
@@ -208,9 +196,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref Matrix256<M,N,T> CopyTo(ref Matrix256<M,N,T> dst)
+        public ref Matrix<M,N,T> CopyTo(ref Matrix<M,N,T> dst)
         {
-            Unblocked.CopyTo(dst.Unblocked);
+            Data.CopyTo(dst.Data);
             return ref dst;
         }
 
@@ -220,9 +208,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="U">The conversion target type</typeparam>
         [MethodImpl(Inline)]
-        public Matrix256<M,N,U> Convert<U>()
+        public Matrix<M,N,U> Convert<U>()
             where U : unmanaged
-               => new Matrix256<M,N,U>(SpanBlocks.force<T,U>(data));
+               => new Matrix<M,N,U>(NumericArrays.force<T,U>(data));
 
         /// <summary>
         /// Converts the entries of the matrix to a specified type and
@@ -230,38 +218,17 @@ namespace Z0
         /// </summary>
         /// <typeparam name="U">The conversion target type</typeparam>
         [MethodImpl(Inline)]
-        public ref Matrix256<M,N,U> Convert<U>(out Matrix256<M,N,U> dst)
+        public ref Matrix<M,N,U> Convert<U>(out Matrix<M,N,U> dst)
             where U : unmanaged
         {
-            dst = new Matrix256<M,N,U>(SpanBlocks.force<T,U>(data));
+            dst = new Matrix<M,N,U>(NumericArrays.force<T,U>(data));
             return ref dst;
         }
 
-        /// <summary>
-        /// Reinterprets the primal type of the matrix
-        /// </summary>
-        /// <typeparam name="U">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public Matrix256<M,N,U> As<U>()
-            where U : unmanaged
-               => new Matrix256<M,N,U>(data.As<U>());
-
-        /// <summary>
-        /// Reinterprets the primal type of the matrix
-        /// </summary>
-        /// <typeparam name="U">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public ref Matrix256<M,N,U> As<U>(out Matrix256<M,N,U> dst)
-            where U : unmanaged
-        {
-            dst = this.As<U>();
-            return ref dst;
-        }
-
-        public override bool Equals(object other)
-            => throw new NotSupportedException();
+        public override bool Equals(object rhs)
+            => rhs is Matrix<M,N,T> x && Equals(x);
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
+            => data.GetHashCode();
     }
 }

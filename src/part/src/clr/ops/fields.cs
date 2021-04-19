@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
 
@@ -17,13 +18,17 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrField> fields(Type src)
-            => adapt(src.GetFields(BF));
+            => adapt(fields(src, out var _));
+
+        [MethodImpl(Inline), Op]
+        public static FieldInfo[] fields(Type src, out FieldInfo[] dst)
+            => dst = src.GetFields(BF);
 
         /// <summary>
         /// Returns a <see cref='ClrField'/> readonly span of the fields defined by a parametrically-identified source type
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
-        [Op, Closures(Closure)]
+        [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrField> fields<T>()
             => adapt(typeof(T).GetFields(BF));
     }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static ReflectionFlags;
     using static Root;
@@ -14,6 +15,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrMethod> methods(Type src)
-            => adapt(src.GetMethods(BF_All));
+            => adapt(methods(src, out var _));
+
+        [MethodImpl(Inline), Op]
+        public static MethodInfo[] methods(Type src, out MethodInfo[] dst)
+            => dst = src.GetMethods(BF);
     }
 }

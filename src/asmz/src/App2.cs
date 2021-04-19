@@ -956,6 +956,18 @@ namespace Z0.Asm
 
         }
 
+        public void CheckClrKeys()
+        {
+            var types = Wf.Api.PartComponents.Storage.Types();
+            var unique = root.hashset<Type>();
+            var count = unique.Include(types).Where(x => x).Count();
+            Wf.Row($"{types.Length} ?=? {count}");
+
+            var fields = Wf.Api.PartComponents.Storage.DeclaredStaticFields();
+            root.iter(fields, f => Wf.Row(f.Name + ": " + f.FieldType.Name));
+
+        }
+
         public Index<ApiCodeBlock> LoadApiBlocks()
         {
             return Wf.ApiHex().ReadBlocks();
@@ -1259,9 +1271,30 @@ namespace Z0.Asm
             render.RenderRows(code, dst);
 
         }
+
+        void CheckPermFormat()
+        {
+            var symbols = SymCache<Perm4L>.get().View;
+            var count = symbols.Length;
+            var j = 0;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var sym = ref skip(symbols,i);
+                var input = sym.Kind;
+                if(input <= Perm4L.D)
+                    continue;
+
+                var mapping = PermSymbolic.bitmap(input);
+                var desc = string.Format("{0:D2} ({1}) {2}", j++, input, mapping);
+
+                Wf.Row(desc);
+
+            }
+
+        }
         public void Run()
         {
-            ProccessCultFiles();
+            CheckPermFormat();
             //CheckV();
             //EmitHostStatements();
             //LoadCapturedCil();

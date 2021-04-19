@@ -8,30 +8,30 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a suite of random number generators
     /// </summary>
     /// <typeparam name="N">The number of generators in the suite</typeparam>
-    public class RngSuite256<N> : IRngSuite256<N>
+    public class PolyBlocks256<N> : IPolyBlocks256<N>
         where N : unmanaged, ITypeNat
     {
-        readonly IPolyrand[] members;
+        readonly IPolySource[] members;
 
-        static readonly int n = (int)new N().NatValue;
+        static int n => (int)new N().NatValue;
 
-        public RngSuite256(IPolyrand[] members)
+        public PolyBlocks256(IPolySource[] members)
         {
             this.members = members.ToArray();
-            require(this.members.Length == n);
+            root.require(this.members.Length == n, () => $"Equality of {n} there is not");
         }
 
-        public RngSuite256(IEnumerable<IPolyrand> members)
+        public PolyBlocks256(IEnumerable<IPolySource> members)
         {
             this.members = members.ToArray();
-            require(this.members.Length == n);
+            root.require(this.members.Length == n, () => $"Equality of {n} there is not");
         }
 
         public Block256<N,T> Next<T>()
@@ -52,7 +52,7 @@ namespace Z0
             return dst;
         }
 
-        public Block256<N, T> Next<T>(T min, T max)
+        public Block256<N,T> Next<T>(T min, T max)
             where T : unmanaged
         {
             var dst = RowVectors.blockalloc<N,T>();
@@ -61,7 +61,7 @@ namespace Z0
             return dst;
         }
 
-        public Block256<N, T> Next<T>(Interval<T> domain)
+        public Block256<N,T> Next<T>(Interval<T> domain)
              where T : unmanaged
         {
             var dst = RowVectors.blockalloc<N,T>();
@@ -70,7 +70,7 @@ namespace Z0
             return dst;
         }
 
-        public IPolyrand Select(int index)
-            => members[index];
+        public IPolySource Select(int index)
+            => skip(members,index);
     }
 }

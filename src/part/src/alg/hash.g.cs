@@ -43,12 +43,14 @@ namespace alg
         public static ulong calc<S,T>()
             => (ulong)calc<S>() | (ulong)calc<T>() << 32;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static uint calc<T>(Vector128<T> src)
             where T : unmanaged
         {
-            var v = src.AsUInt64();
-            return alg.hash.combine(v.GetElement(0), v.GetElement(1));
+            Cell128 data = src.AsUInt64();
+            var input = @readonly(recover<ulong>(data.Bytes));
+            var output = calc(input);
+            return output;
         }
 
         /// <summary>

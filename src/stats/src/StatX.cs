@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
     public static class StatX
     {
@@ -31,7 +31,7 @@ namespace Z0
         public static BernoulliDist<T> Bernoulli<T>(this IPolyrand random, double p = 0.5)
             where T : unmanaged
                 => new BernoulliSpec<T>(p).Distribution(random);
-         
+
         public static IEnumerable<SeriesTerm<T>> Terms<T>(this TimeSeries<T> series)
             where T : unmanaged
                 => TimeSeries.Evolve(series);

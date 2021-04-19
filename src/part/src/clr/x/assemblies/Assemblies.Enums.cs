@@ -12,8 +12,12 @@ namespace Z0
 
     partial class ClrQuery
     {
-        [MethodImpl(Inline), Op]
-        public static Type[] Types(this Assembly[] src)
-            => src.SelectMany(x => x.GetTypes());
+        /// <summary>
+        /// Returns the <see cref='Enum'/> types defined in a specified <see cref='Assembly'/> sequence
+        /// </summary>
+        /// <param name="src">The assemblies to search</param>
+        [Op]
+        public static Type[] Enums(this Assembly[] src)
+            => src.Types().Enums();
     }
 }

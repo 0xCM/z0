@@ -31,20 +31,20 @@ namespace Z0
         public static int Length => (int)nat64u<N>();
 
         [MethodImpl(Inline)]
-        internal Block256(Span<T> src)
+        Block256(Span<T> src)
         {
             Data = SpanBlocks.safeload(n256, src);
         }
 
         [MethodImpl(Inline)]
-        internal Block256(SpanBlock256<T> src)
+        Block256(SpanBlock256<T> src)
         {
             root.require(src.CellCount >= Length, () => "no");
             Data = src;
         }
 
         [MethodImpl(Inline)]
-        internal Block256(NatSpan<N,T> src)
+        Block256(NatSpan<N,T> src)
         {
             Data = RowVectors.safeload(n256,src);
         }
@@ -165,8 +165,8 @@ namespace Z0
             => new Block256<N,T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (Block256<N,T> lhs, in Block256<N,T> rhs)
-            => lhs.Equals(rhs);
+        public static bool operator == (Block256<N,T> a, in Block256<N,T> b)
+            => a.Equals(b);
 
         [MethodImpl(Inline)]
         public static bool operator != (Block256<N,T> lhs, in Block256<N,T> rhs)

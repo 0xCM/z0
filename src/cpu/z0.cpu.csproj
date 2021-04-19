@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(SpanBlocks)" />
   </ItemGroup>
 

@@ -47,25 +47,25 @@ namespace Z0
         /// <summary>
         /// Calculates the scalar product between the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="a">The left vector</param>
+        /// <param name="b">The right vector</param>
         [MethodImpl(Inline)]
-        public static T operator &(RowVector<T> lhs, RowVector<T> rhs)
-            => gmath.dot<T>(lhs.data, rhs.data);
+        public static T operator &(RowVector<T> a, RowVector<T> b)
+            => gmath.dot<T>(a.data, b.data);
 
         /// <summary>
         /// Deems vectors are equal if they have the same number of components
         /// and corresponding components have identical content
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">Teh right vector</param>
+        /// <param name="a">The left vector</param>
+        /// <param name="b">Teh right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator == (RowVector<T> lhs, RowVector<T> rhs)
-            => lhs.Equals(rhs);
+        public static bool operator == (RowVector<T> a, RowVector<T> b)
+            => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator != (RowVector<T> lhs, RowVector<T> rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator != (RowVector<T> a, RowVector<T> b)
+            => !a.Equals(b);
 
         /// <summary>
         /// Initializes a vector from array content

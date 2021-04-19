@@ -4,18 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static Konst;
-    using static z;
-
     /// <summary>
     /// Characterizes a suite of random number generators
     /// </summary>
     /// <typeparam name="N">The number of generators in the suite</typeparam>
-    public interface IRngSuite256<N>
+    public interface IPolyBlocks256<N>
         where N : unmanaged, ITypeNat
     {
         /// <summary>
@@ -58,6 +51,6 @@ namespace Z0
         /// is in the range 0, 1, ..., N - 1
         /// </summary>
         /// <param name="index">The rng index</param>
-        IPolyrand Select(int index);
+        IPolySource Select(int index);
     }
 }

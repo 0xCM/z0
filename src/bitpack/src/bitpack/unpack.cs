@@ -13,6 +13,8 @@ namespace Z0
 
     partial struct BitPack
     {
+
+
         /// <summary>
         /// Distributes 8 packed source bits to 8 corresponding target bits
         /// </summary>

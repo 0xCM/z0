@@ -56,7 +56,7 @@ namespace Z0
             var rng = Rng.xorShift1024(seed);
             if(!States.TryAdd(id,rng))
                 throw new Exception($"Key {id} already exists");
-            return new TimeSeries<T>(id, domain, Term(0, z.zero<T>()));
+            return new TimeSeries<T>(id, domain, Term(0, memory.zero<T>()));
         }
 
         public static void EvolveSeries<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)
@@ -66,8 +66,8 @@ namespace Z0
             var series = Define(domain, seed);
             var terms = series.Terms().ToSpan(count);
             var elapsed = Duration.init(sw.ElapsedTicks);
-            Demands.insist(terms.Length == count);
-            Demands.insist(series.Observed.Observed.Equals(terms[count - 1].Observed));
+            root.require(terms.Length == count,() =>"");
+            root.require(series.Observed.Observed.Equals(terms[count - 1].Observed), () => "");
             complete(series,elapsed);
         }
 
@@ -79,8 +79,8 @@ namespace Z0
             var series = Define(domain, seed);
             var s0 = series.Snapshot();
             var terms = series.Terms().ToSpan(steps);
-            Demands.insist(terms.Length == steps);
-            Demands.insist(series.Observed.Observed.Equals(terms[steps - 1].Observed));
+            root.require(terms.Length == steps, () => "");
+            root.require(series.Observed.Observed.Equals(terms[steps - 1].Observed), () => "");
 
             var elapsed = Duration.init(sw.ElapsedTicks);
             var evolved = SeriesEvolution.define(seed, domain, s0.Observed, series.Observed, elapsed);

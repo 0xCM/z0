@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            Demands.insist(src.Length >= Cells);
+            root.require(src.Length >= Cells, () => $"{src.Length} != {Cells}");
             data = src;
         }
 
