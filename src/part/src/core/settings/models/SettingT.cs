@@ -38,7 +38,7 @@ namespace Z0
         }
 
         public string Format()
-            => text.format(Value);
+            => text.format(RP.Setting, Name, Value);
 
         public string Json()
             => text.format(RP.JsonProp, Name, Value);

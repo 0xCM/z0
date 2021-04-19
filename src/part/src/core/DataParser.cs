@@ -116,6 +116,10 @@ namespace Z0
             => Addresses.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
+        public static Outcome numeric<T>(string src, out T dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out byte dst)
             => Numeric.parse(src, out dst);
 
@@ -130,21 +134,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out int dst)
             => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
-        {
-            outcome = Numeric.parse(src, out dst);
-            if(!outcome)
-                return false;
-
-            if(!satisfied(bounds,dst))
-            {
-                outcome = (false, $"The parsed value {dst} is not with the required range {bounds}");
-                return false;
-            }
-            return true;
-        }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out uint dst)
@@ -163,19 +152,38 @@ namespace Z0
             => bit.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out bool dst)
+            => bool.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out ByteSize dst)
             => ByteSize.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out string dst)
         {
-            dst = src;
+            dst = src ?? EmptyString;
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
+        {
+            outcome = Numeric.parse(src, out dst);
+            if(!outcome)
+                return false;
+
+            if(!satisfied(bounds,dst))
+            {
+                outcome = (false, $"The parsed value {dst} is not with the required range {bounds}");
+                return false;
+            }
             return true;
         }
 
         [MethodImpl(Inline)]
         public static Outcome eparse<T>(string src, out T dst)
-            where T : unmanaged, Enum
+            where T : unmanaged
                 => Enums.parse(src, out dst);
 
         [MethodImpl(Inline), Op]

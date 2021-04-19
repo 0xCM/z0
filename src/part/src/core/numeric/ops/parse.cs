@@ -26,7 +26,6 @@ namespace Z0
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
         public static ParseResult<T> parse<T>(string src)
-            where T : unmanaged
         {
             if(parse(src, out T dst))
                 return parsed(src,dst);
@@ -36,12 +35,10 @@ namespace Z0
 
         [MethodImpl(Inline), ParseFunction, NumericClosures(AllNumeric)]
         public static bool parse<T>(string src, out T dst)
-            where T : unmanaged
-                => parse_u(src, out dst);
+            => parse_u(src, out dst);
 
         [MethodImpl(Inline)]
         static bool parse_u<T>(string src, out T dst)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return parse_8u(src, out dst);
@@ -57,7 +54,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bool parse_i<T>(string src, out T dst)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
                 return parse_8i(src, out dst);
@@ -73,7 +69,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bool parse_f<T>(string src, out T dst)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return parse_32f(src, out dst);

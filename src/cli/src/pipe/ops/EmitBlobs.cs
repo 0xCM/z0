@@ -8,8 +8,6 @@ namespace Z0
     using System.IO;
     using System.Reflection;
 
-    using Z0.Schemas.Ecma;
-
     using static memory;
 
     partial class CliDataPipe

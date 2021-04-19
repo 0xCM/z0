@@ -40,8 +40,8 @@ namespace Z0
         [Op]
         public ref AssemblyRefInfo Read(AssemblyReference src, ref AssemblyRefInfo dst)
         {
-            dst.Source = CliReader.GetAssemblyDefinition().GetAssemblyName();
-            dst.Target = src.GetAssemblyName();
+            dst.Source = CliReader.GetAssemblyDefinition().GetAssemblyName().ToString().LeftOfFirst(Chars.Comma);
+            dst.Target = src.GetAssemblyName().ToString().LeftOfFirst(Chars.Comma);
             dst.Token = Read(src.PublicKeyOrToken);
             return ref dst;
         }

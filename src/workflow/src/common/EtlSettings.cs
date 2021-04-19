@@ -58,6 +58,8 @@ namespace Z0
 
         public Setting<bool> ProcessCultFiles;
 
+        public Setting<bool> EmitAssemblyRefs;
+
         public static MachineOptions @default()
         {
             var dst = new MachineOptions();
@@ -87,6 +89,7 @@ namespace Z0
             dst.EmitJmpData = true;
             dst.EmitHexPack = true;
             dst.ProcessCultFiles = false;
+            dst.EmitAssemblyRefs = true;
             return dst;
         }
 

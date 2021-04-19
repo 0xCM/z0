@@ -39,8 +39,8 @@ namespace Z0
         [Op]
         public ref AssemblyRefInfo ReadAssemblyRef(AssemblyReference src, ref AssemblyRefInfo dst)
         {
-            dst.Source = MetadataReader.GetAssemblyDefinition().GetAssemblyName();
-            dst.Target = src.GetAssemblyName();
+            dst.Source = MetadataReader.GetAssemblyDefinition().GetAssemblyName().ToString().LeftOfFirst(Chars.Comma);
+            dst.Target = src.GetAssemblyName().ToString().LeftOfFirst(Chars.Comma);
             dst.Token = ReadBlob(src.PublicKeyOrToken);
             return ref dst;
         }

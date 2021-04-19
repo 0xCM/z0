@@ -4,13 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     public readonly struct NumericParser<T> : ITextParser<T>
-        where T : unmanaged
     {
         public ParseResult<T> Parse(string src)
             => Numeric.parse<T>(src);

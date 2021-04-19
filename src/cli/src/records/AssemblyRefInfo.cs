@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-
     /// <summary>
     /// Captures a dependency relationship between two assemblies
     /// </summary>
@@ -15,9 +12,9 @@ namespace Z0
     {
         public const string TableId = "cli.assemblyref";
 
-        public AssemblyName Source;
+        public Name Source;
 
-        public AssemblyName Target;
+        public Name Target;
 
         public BinaryCode Token;
     }

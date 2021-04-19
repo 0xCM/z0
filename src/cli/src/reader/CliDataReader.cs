@@ -53,7 +53,6 @@ namespace Z0
             Stream?.Dispose();
         }
 
-
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<MethodDefinitionHandle> MethodDefHandles()
             => MetadataReader.MethodDefinitions.ToReadOnlySpan();

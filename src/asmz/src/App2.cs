@@ -1271,7 +1271,6 @@ namespace Z0.Asm
             render.RenderRows(code, dst);
         }
 
-
         [Record(TableId)]
         public struct JmpStub : IRecord<JmpStub>
         {
@@ -1288,7 +1287,6 @@ namespace Z0.Asm
             public Address32 Displacement;
 
             public Address32 Offset;
-
         }
 
         unsafe ReadOnlySpan<JmpStub> JmpStubs()
@@ -1339,8 +1337,14 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var images = Wf.CliDataPipe();
-            images.EmitMsilRows();
+            var a = "A:603";
+            Settings.parse(a, out Setting<ushort> _a);
+            Wf.Row(_a);
+
+
+            var b = "B:true";
+            Settings.parse(b, out Setting<bool> _b);
+            Wf.Row(_b);
 
 
             //CheckV();

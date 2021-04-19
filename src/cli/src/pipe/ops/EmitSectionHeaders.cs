@@ -35,6 +35,9 @@ namespace Z0
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in src)
             {
+                if(!CliDataReader.HasMetadata(file))
+                    continue;
+
                 using var reader = CliDataReader.create(file);
                 var headers = reader.ReadSectionHeders();
                 var count = headers.Length;

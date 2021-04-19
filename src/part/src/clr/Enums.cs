@@ -42,7 +42,7 @@ namespace Z0
         }
 
         public static Outcome parse<E>(string src, out E dst)
-            where E : unmanaged, Enum
+            where E : unmanaged
         {
             if(Enum.TryParse(src, true, out dst))
                 return true;
@@ -52,6 +52,9 @@ namespace Z0
                 return false;
             }
         }
+
+        public static Outcome parse(Type t, string src, out object dst)
+            => Enum.TryParse(t, src, out dst);
 
         /// <summary>
         /// Gets the declaration-order indices for each named literal

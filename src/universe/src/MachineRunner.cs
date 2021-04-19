@@ -91,6 +91,9 @@ namespace Z0
 
                 var cli = Wf.CliDataPipe();
 
+                if(options.EmitAssemblyRefs)
+                    cli.EmitAssemblyRefs();
+
                 if(options.EmitFieldLiterals)
                     cli.EmitFieldLiterals();
 
