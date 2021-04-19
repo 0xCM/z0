@@ -41,6 +41,4 @@ namespace Z0
 
         XF = 0b1111,
     }
-
-
 }

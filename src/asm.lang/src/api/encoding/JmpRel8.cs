@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-
     [ApiHost]
     public readonly struct JmpRel8
     {

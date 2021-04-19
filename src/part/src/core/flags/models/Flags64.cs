@@ -11,21 +11,21 @@ namespace Z0
 
     using api = Flags;
 
-    public readonly struct Flags64<E> : IFlags<Flags64<E>,E,Pow2x64>
-        where E : unmanaged, Enum
+    public readonly struct Flags64<K> : IFlags<Flags64<K>,K,Pow2x64>
+        where K : unmanaged
     {
         public const byte Width = 64;
 
-        readonly E Data;
+        readonly K Data;
 
         [MethodImpl(Inline)]
-        public Flags64(E value)
+        public Flags64(K value)
             => Data = value;
 
         public byte DataWidth
             => Width;
 
-        public bit this[E flag]
+        public bit this[K flag]
         {
             [MethodImpl(Inline)]
             get => api.state(this, flag);
@@ -37,7 +37,7 @@ namespace Z0
             get => api.state(this, flag);
         }
 
-        public E Value
+        public K Value
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -50,11 +50,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Flags64<E>(E src)
-            => new Flags64<E>(src);
+        public static implicit operator Flags64<K>(K src)
+            => new Flags64<K>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator E(Flags64<E> src)
+        public static implicit operator K(Flags64<K> src)
             => src.Data;
     }
 }

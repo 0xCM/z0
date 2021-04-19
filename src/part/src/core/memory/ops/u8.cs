@@ -45,5 +45,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte u8<T>(in T src, int offset)
             => ref add(@as<T,byte>(src), offset);
+
+        /// <summary>
+        /// Reads a bytes from the data source, if present; otherewise, returns 0
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static byte u8(ReadOnlySpan<byte> src)
+            => has(src,default(N1)) ? skip(src,0) : z8;
     }
 }

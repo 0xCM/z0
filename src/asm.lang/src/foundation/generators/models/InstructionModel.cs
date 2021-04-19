@@ -18,11 +18,6 @@ namespace Z0.Asm
 
         const string InlineOpAttributeSpec = "[MethodImpl(Inline), Op]";
 
-        const string EncodedPropertyType = nameof(AsmHexCode);
-
-        const string HostAttributeSpec = "[ApiHost]";
-
-
         readonly struct InstructionModel
         {
             public AsmMnemonic Monic {get;}

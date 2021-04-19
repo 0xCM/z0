@@ -45,5 +45,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref uint u32<T>(in T src, int offset)
             => ref add(@as<T,uint>(src), offset);
+
+        /// <summary>
+        /// Reads 4 bytes or less from the source
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static uint u32(ReadOnlySpan<byte> src)
+            => has(src,default(N4)) ? first(recover<uint>(slice(src,0,4))) : u16(src);
     }
 }

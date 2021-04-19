@@ -19,5 +19,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static char hexchar(LowerCased @case, HexDigit value)
             => value == HexDigit.None ? Chars.Null : (char)symbol(@case, value);
+
+        /// <summary>
+        /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
+        /// </summary>
+        /// <param name="case">The case specifier</param>
+        /// <param name="value">The digit value</param>
+        [MethodImpl(Inline), Op]
+        public static char hexchar(UpperCased @case, HexDigit value)
+            => value == HexDigit.None ? Chars.Null : (char)symbol(@case, value);
     }
 }

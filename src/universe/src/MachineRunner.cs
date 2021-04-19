@@ -31,7 +31,7 @@ namespace Z0
                     Emitted(hex.EmitHexPack(blocks));
 
                 if(options.EmitAsmRows)
-                    Emitted(Wf.AsmRowStore().EmitAsmRows(blocks));
+                    Emitted(Wf.AsmRowBuilder().EmitAsmRows(blocks));
 
                 if(options.EmitCallData || options.EmitJmpData)
                 {
@@ -114,6 +114,9 @@ namespace Z0
 
                 if(options.EmitImageContent)
                     images.EmitApiImageContent();
+
+                if(options.ProcessCultFiles)
+                    Wf.CultProcessor().Run();
             }
             catch(Exception e)
             {

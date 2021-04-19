@@ -87,7 +87,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte vextract<N>(Vector128<byte> src, N n = default)
             where N : unmanaged, ITypeNat
-                => vextract(n0,src,n);
+                => vextract(n0, src, n);
 
         [MethodImpl(Inline), Op]
         public static ushort vextract(Vector128<ushort> src, byte index)

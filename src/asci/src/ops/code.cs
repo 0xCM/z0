@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using H = HexCharData;
     using C = AsciCharCode;
 
     partial struct Asci
@@ -47,25 +46,5 @@ namespace Z0
         public static C code<N>(in asci16 src, N index = default)
             where N : unmanaged, ITypeNat
                 => (C)cpu.vextract(src.Storage, index);
-
-        /// <summary>
-        /// Returns the upper-case hex code for a specified digit
-        /// </summary>
-        /// <param name="case">The case selector</param>
-        /// <param name="index">The digit value</param>
-        /// <remarks>movzx eax,dl -> movsxd rax,eax -> mov rdx,28b57e0aca9h -> movzx eax,byte ptr [rax+rdx] </remarks>
-        [MethodImpl(Inline), Op]
-        public static HexCode code(UpperCased @case, HexDigit digit)
-            => (HexCode)skip(H.UpperCodes, (byte)digit);
-
-        /// <summary>
-        /// Returns the lower-case hex code for a specified digit
-        /// </summary>
-        /// <param name="case">The case selector</param>
-        /// <param name="index">The digit value</param>
-        /// <remarks>movzx eax,dl -> movsxd rax,eax -> mov rdx,28b57e0aed9h -> movzx eax,byte ptr [rax+rdx]</remarks>
-        [MethodImpl(Inline), Op]
-        public static HexCode code(LowerCased @case, HexDigit digit)
-            => (HexCode)skip(H.LowerCodes, (byte)digit);
     }
 }

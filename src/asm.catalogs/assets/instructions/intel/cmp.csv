@@ -1,4 +1,4 @@
-# Instructions
+## Instructions
 | Opcode           | Instruction       | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                        |
 | 3C ib            | CMP AL, imm8      | I     | Valid       | Valid           | Compare imm8 with AL.                              |
 | 3D iw            | CMP AX, imm16     | I     | Valid       | Valid           | Compare imm16 with AX.                             |
@@ -23,15 +23,14 @@
 | 3B / r           | CMP r32, r/m32    | RM    | Valid       | Valid           | Compare r/m32 with r32.                            |
 | REX.W + 3B / r   | CMP r64, r/m64    | RM    | Valid       | N.E.            | Compare r/m64 with r64.                            |
 
-# Encoding
-
+## Encoding
 | Op/En | Operand 1         | Operand 2     | Operand 3 | Operand 4 |
 | RM    | ModRM:reg (r)     | ModRM:r/m (r) | NA        | NA        |
 | MR    | ModRM:r/m (r)     | ModRM:reg (r) | NA        | NA        |
 | MI    | ModRM:r/m (r)     | imm8/16/32    | NA        | NA        |
 | I     | AL/AX/EAX/RAX (r) | imm8/16/32    | NA        | NA        |
 
-# Layout
+## Layout
 | register1 with register2           | 0100 0R0B 0011 100w : 11 reg1 reg2            |
 | qwordregister1 with qwordregister2 | 0100 1R0B 0011 1001 : 11 qwordreg1 qwordreg2  |
 | register2 with register1           | 0100 0R0B 0011 101w : 11 reg1 reg2            |

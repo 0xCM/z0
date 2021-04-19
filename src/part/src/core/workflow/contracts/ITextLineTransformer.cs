@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class DataProcessor<S,T> : IDataProcessor<S,T>
+    public interface ITextLineTransformer : IDataTransformer<TextLine>
     {
-        public abstract Outcome Process(in S src, out T dst);
+
     }
 }

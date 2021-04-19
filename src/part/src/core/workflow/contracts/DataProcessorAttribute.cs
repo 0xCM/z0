@@ -2,17 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    partial struct asm
+    public class DataProcessorAttribute : Attribute
     {
-        [MethodImpl(Inline), Op]
-        public static AsmEncoding encoding(AsmExpr asm, AsmHexCode hex)
-            => new AsmEncoding(asm, hex);
+        public DataProcessorAttribute(string id)
+        {
+            Identifier = id;
+        }
+
+        public string Identifier {get;}
     }
 }

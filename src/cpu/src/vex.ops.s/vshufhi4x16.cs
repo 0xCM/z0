@@ -14,7 +14,6 @@ namespace Z0
 
     partial struct cpu
     {
-
         /// <summary>
         /// __m128i _mm_shufflehi_epi16 (__m128i a, int immediate) PSHUFHW xmm, xmm/m128, imm8
         /// </summary>

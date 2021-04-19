@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmRowStore : AsmWfService<AsmRowStore>
+    public sealed class AsmRowBuilder : AsmWfService<AsmRowBuilder>
     {
         readonly Dictionary<AsmMnemonic, ArrayBuilder<AsmRow>> Index;
 
@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         uint Offset;
 
-        public AsmRowStore()
+        public AsmRowBuilder()
         {
             Sequence = 0;
             Offset = 0;

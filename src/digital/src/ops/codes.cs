@@ -21,12 +21,11 @@ namespace Z0
         public static int codes(ReadOnlySpan<byte> src, UpperCased @case, Span<HexCode> dst)
         {
             var j=0u;
-            var casing = UpperCased.Case;
             for(var i=0u; i<src.Length; i++, j+=2)
             {
                 ref readonly var data = ref skip(src, i);
-                seek(dst, j) = code(casing, (HexDigit)(data >> 4));
-                seek(dst, j + 1) = code(casing, (HexDigit)(0xF & data));
+                seek(dst, j) = code(@case, (HexDigit)(data >> 4));
+                seek(dst, j + 1) = code(@case, (HexDigit)(0xF & data));
             }
             return (int)j;
         }
@@ -37,15 +36,14 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The hexcode target</param>
         [MethodImpl(Inline), Op]
-        public static int codes(ReadOnlySpan<byte> src, Span<HexCode> dst)
+        public static int codes(ReadOnlySpan<byte> src, LowerCased @case, Span<HexCode> dst)
         {
             var j=0u;
-            var casing = LowerCased.Case;
             for(var i=0u; i<src.Length; i++, j+=2)
             {
                 ref readonly var data = ref skip(src, i);
-                seek(dst, j) = code(casing, (HexDigit)(data >> 4));
-                seek(dst, j + 1) = code(casing, (HexDigit)(0xF & data));
+                seek(dst, j) = code(@case, (HexDigit)(data >> 4));
+                seek(dst, j + 1) = code(@case, (HexDigit)(0xF & data));
             }
             return (int)j;
         }

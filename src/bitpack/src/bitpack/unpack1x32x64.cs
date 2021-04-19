@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct BitPack
     {
-       /// <summary>
+        /// <summary>
         /// Unpacks 64 source bits over 64 32-bit target segments
         /// </summary>
         /// <param name="src">The source bits</param>

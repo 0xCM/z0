@@ -61,5 +61,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ulong u64<T>(in T src, int offset)
             => ref add(@as<T,ulong>(src), offset);
+
+        /// <summary>
+        /// Reads 8 bytes or less from the source
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static ulong u64(ReadOnlySpan<byte> src)
+            => has(src,default(N8)) ? first(recover<ulong>(slice(src,0,8))) : u32(src);
     }
 }

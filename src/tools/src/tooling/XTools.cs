@@ -9,6 +9,7 @@ namespace Z0
 
     using Z0.Tooling;
 
+
    [ApiHost]
    public static partial class XTools
    {
@@ -27,5 +28,11 @@ namespace Z0
        [Op]
        public static ScriptRunner ScriptRunner(this IEnvPaths paths)
             => Z0.ScriptRunner.create(paths);
+
+       [Op]
+        public static CultProcessor CultProcessor(this IWfRuntime wf)
+            => Tooling.CultProcessor.create(wf);
+
+
    }
 }

@@ -47,6 +47,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public Outcome(bool success, string message, ulong code)
+        {
+            Ok = success;
+            Message = message;
+            MessageCode = code;
+        }
+
+        [MethodImpl(Inline)]
         public Outcome(AppMsgData data)
         {
             Ok = !(data.Kind == LogLevel.Error);

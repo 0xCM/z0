@@ -952,9 +952,7 @@ namespace Z0.Asm
 
         public void ProccessCultFiles()
         {
-            var processor = CultProcessor.create(Wf);
-            var src = Db.ToolOutput(Toolsets.cult, "cult", FS.Asm);
-            processor.Process(src);
+            Wf.CultProcessor().Run();
 
         }
 
@@ -1231,17 +1229,43 @@ namespace Z0.Asm
 
         }
 
-        public void Run()
-        {
 
-            //CheckV();
-            //EmitHostStatements();
-            //LoadCapturedCil();
-            //CheckMemoryLookup();
+
+        void RenderMovzx()
+        {
+            static string semantic(in AsmRow src)
+            {
+                return EmptyString;
+            }
+
+            var render = Wf.AsmRender();
+            var code = AsmMnemonicCode.MOVZX;
+            var rows = @readonly(Wf.AsmRowPipe().LoadAsmRows(code).OrderBy(x => x.Statement).Array());
+            var count = rows.Length;
+            var dst = Db.AppLog(code.ToString(),FS.Asm);
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                writer.WriteLine(render.FormatRow(row, semantic));
+            }
+        }
+
+        void RenderJmp()
+        {
             var code = AsmMnemonicCode.JMP;
             var render = Wf.AsmRender();
             var dst = Db.AppLog(code.ToString(), FS.Asm);
             render.RenderRows(code, dst);
+
+        }
+        public void Run()
+        {
+            ProccessCultFiles();
+            //CheckV();
+            //EmitHostStatements();
+            //LoadCapturedCil();
+            //CheckMemoryLookup();
 
             //Wf.ApiHex().EmitHexPack(false);
             // var packed = HexPack(true).View;

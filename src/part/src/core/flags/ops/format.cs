@@ -12,20 +12,24 @@ namespace Z0
 
     partial struct Flags
     {
+        [Op, Closures(UInt8k)]
         public static string format<E>(Flags8<E> src, bool enabledOnly = true)
-            where E : unmanaged, Enum
+            where E : unmanaged
                 => _format(src,enabledOnly);
 
+        [Op, Closures(UInt8k | UInt16k)]
         public static string format<E>(Flags16<E> src, bool enabledOnly = true)
-            where E : unmanaged, Enum
+            where E : unmanaged
                 => _format(src,enabledOnly);
 
+        [Op, Closures(UInt8k | UInt16k | UInt32k)]
         public static string format<E>(Flags32<E> src, bool enabledOnly = true)
-            where E : unmanaged, Enum
+            where E : unmanaged
                 => _format(src,enabledOnly);
 
+        [Op, Closures(UnsignedInts)]
         public static string format<E>(Flags64<E> src, bool enabledOnly = true)
-            where E : unmanaged, Enum
+            where E : unmanaged
                 => _format(src,enabledOnly);
 
         const string RenderPattern = "{0,-48}: {1}" + Eol;
@@ -40,9 +44,10 @@ namespace Z0
                 dst.AppendFormat(RenderPattern, field.Name, state);
         }
 
+        [MethodImpl(Inline)]
         static string _format<F,W,E>(IFlags<F,E,W> src, bool enabledOnly = true)
-            where E : unmanaged, Enum
-            where W : unmanaged, Enum
+            where E : unmanaged
+            where W : unmanaged
             where F : IFlags<F,E,W>
         {
             var fields = Clr.fields<E>();

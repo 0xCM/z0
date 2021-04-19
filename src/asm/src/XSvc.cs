@@ -31,8 +31,8 @@ namespace Z0
             => Services.AsmSemanticRender.create(wf);
 
         [Op]
-        public static AsmRowStore AsmRowStore(this IWfRuntime wf)
-            => Services.AsmRowStore.create(wf);
+        public static AsmRowBuilder AsmRowBuilder(this IWfRuntime wf)
+            => Services.AsmRowBuilder.create(wf);
 
         [Op]
         public static ApiHostAsmEmitter AsmHostEmitter(this IWfRuntime wf)

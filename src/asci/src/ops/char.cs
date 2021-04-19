@@ -33,11 +33,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static char @char(UpperCased @case, HexDigit digit)
-            => (char)code(@case, digit);
+            => (char)Hex.code(@case, digit);
 
         [MethodImpl(Inline), Op]
         public static char @char(LowerCased @case, HexDigit digit)
-            => (char)code(@case, digit);
+            => (char)Hex.code(@case, digit);
 
         [MethodImpl(Inline), Op]
         public static char @char(AsciSymbol src)

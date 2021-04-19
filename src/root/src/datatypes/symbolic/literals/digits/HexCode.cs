@@ -11,7 +11,7 @@ namespace Z0
     /// Defines identifiers for the ASCI codes that correspond to both upper/lower-case hex digits
     /// </summary>
     [CodeProvider(typeof(Lo), typeof(Up))]
-    public enum HexCode : ushort
+    public enum HexCode : byte
     {
         /// <summary>
         /// The hex code with no code

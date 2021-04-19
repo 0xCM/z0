@@ -12,7 +12,7 @@ namespace Z0
     }
 
     public interface IFlags<E> : IFlags
-        where E : unmanaged, Enum
+        where E : unmanaged
     {
         E Value {get;}
 
@@ -20,15 +20,15 @@ namespace Z0
     }
 
     public interface IFlags<E,W> : IFlags<E>
-        where E : unmanaged, Enum
-        where W : unmanaged, Enum
+        where E : unmanaged
+        where W : unmanaged
     {
         bit this[W flag] {get;}
     }
 
     public interface IFlags<F,E,W> : IFlags<E,W>
-        where E : unmanaged, Enum
-        where W : unmanaged, Enum
+        where E : unmanaged
+        where W : unmanaged
         where F : IFlags<F,E,W>
     {
     }

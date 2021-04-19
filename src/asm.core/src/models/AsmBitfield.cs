@@ -18,7 +18,7 @@ namespace Z0
         public byte FieldCount {get;}
 
         [MethodImpl(Inline)]
-        internal AsmBitfield(ReadOnlySpan<byte> ix, ReadOnlySpan<byte> w)
+        public AsmBitfield(ReadOnlySpan<byte> ix, ReadOnlySpan<byte> w)
         {
             Indices = ix;
             Widths = w;

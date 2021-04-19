@@ -18,6 +18,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static Mov mov(r64 r64, Imm64 imm64)
-            => asmhex(RexPrefixCode.RexW, (Hex8)(0xb8 + (byte)r64.Index), imm64);
+            => asmhex(RexW, (Hex8)(0xb8 + (byte)r64.Index), imm64);
     }
 }

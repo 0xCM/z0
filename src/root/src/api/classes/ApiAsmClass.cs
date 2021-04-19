@@ -11,10 +11,6 @@ namespace Z0
     {
         None = 0,
 
-        CVTSS2SI = Id.CVTSS2SI,
-
-        CVTSD2SI = Id.CVTSD2SI,
-
         PAVGB = Id.PAVGB,
 
         PAVGW = Id.PAVGW,
@@ -22,14 +18,6 @@ namespace Z0
         VPAVGB = Id.VPAVGB,
 
         VPAVGW = Id.VPAVGW,
-
-        PSHUFLW = Id.PSHUFLW,
-
-        PSHUFHW = Id.PSHUFHW,
-
-        PSHUFB = Id.PSHUFB,
-
-        VPSHUFB = Id.VPSHUFB,
 
         VPERMD = Id.VPERMD,
 

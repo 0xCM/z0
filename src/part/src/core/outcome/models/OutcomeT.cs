@@ -32,6 +32,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public Outcome(Outcome src, T data)
+        {
+            Ok = src.Ok;
+            Data = data;
+            Message = src.Message;
+            MessageCode = src.MessageCode;
+        }
+
+        [MethodImpl(Inline)]
         public Outcome(bool ok, T data = default)
         {
             Ok = ok;

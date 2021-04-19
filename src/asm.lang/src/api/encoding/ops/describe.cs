@@ -9,9 +9,6 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static OperatingMode;
-    using static OperandSize;
-    using static AsmRefs;
 
     using RF = RexFieldIndex;
 

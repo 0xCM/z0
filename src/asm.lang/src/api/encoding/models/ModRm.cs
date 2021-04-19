@@ -14,7 +14,7 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct ModRm : ITextual
     {
-        readonly uint8T Data;
+        readonly byte Data;
 
         [MethodImpl(Inline)]
         public ModRm(byte src)
@@ -77,7 +77,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static ModRm operator ^(ModRm a, ModRm b)
-            => new ModRm(a.Data ^ b.Data);
+            => new ModRm(Bytes.xor(a.Data, b.Data));
 
         public static ModRm Empty => default;
     }

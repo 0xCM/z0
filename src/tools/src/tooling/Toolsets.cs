@@ -32,7 +32,7 @@ namespace Z0
         {
             public static ToolId name => "clang";
 
-            public static ToolId query => "clang-query";
+            public const string query = "clang-query";
 
             public static ToolId cc1 => "clang-cc1";
         }
@@ -45,7 +45,7 @@ namespace Z0
 
             public static ToolId xed => "xed";
 
-            public static ToolId cult = "cult";
+            public const string cult = "cult";
         }
 
         public readonly struct llvm

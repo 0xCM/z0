@@ -9,8 +9,8 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public abstract class TextDocProcessor<P,T> : DataProcessor<TextDoc,T>
-        where P : TextDocProcessor<P,T>, new()
+    public abstract class TextDocTransformer<P,T> : DataTransformer<TextDoc,T>
+        where P : TextDocTransformer<P,T>, new()
     {
         public static P create()
             => new P();
@@ -34,7 +34,7 @@ namespace Z0
             return default;
         }
 
-        protected abstract ITextLineProcessor Processor(in TextLine src);
+        protected abstract ITextLineTransformer Processor(in TextLine src);
 
         protected abstract void Processed(in TextLine src, dynamic output, ref T dst);
     }

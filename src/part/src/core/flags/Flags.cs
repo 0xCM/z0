@@ -10,26 +10,29 @@ namespace Z0
     using static Part;
     using static memory;
 
+    [ApiHost]
     public readonly partial struct Flags
     {
-        [MethodImpl(Inline)]
-        public static Flags8<E> flags8<E>(E e)
-            where E : unmanaged, Enum
-                => new Flags8<E>(e);
+        const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline)]
-        public static Flags16<E> flags16<E>(E e)
-            where E : unmanaged, Enum
-                => new Flags16<E>(e);
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        public static Flags8<K> flags8<K>(K state)
+            where K : unmanaged
+                => new Flags8<K>(state);
 
-        [MethodImpl(Inline)]
-        public static Flags32<E> flags32<E>(E e)
-            where E : unmanaged, Enum
-                => new Flags32<E>(e);
+        [MethodImpl(Inline), Op, Closures(UInt8k | UInt16k)]
+        public static Flags16<K> flags16<K>(K state)
+            where K : unmanaged
+                => new Flags16<K>(state);
 
-        [MethodImpl(Inline)]
-        public static Flags64<E> flags64<E>(E e)
-            where E : unmanaged, Enum
-                => new Flags64<E>(e);
+        [MethodImpl(Inline), Op, Closures(UInt8k | UInt16k | UInt32k)]
+        public static Flags32<K> flags32<K>(K state)
+            where K : unmanaged
+                => new Flags32<K>(state);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Flags64<K> flags64<K>(K state)
+            where K : unmanaged
+                => new Flags64<K>(state);
     }
 }

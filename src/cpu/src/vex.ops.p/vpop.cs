@@ -82,11 +82,11 @@ namespace Z0
             odd = vadd(vadd(maj, maj), odd);
 
             var dst = MemBlocks.block(n16);
-            vstore(odd, ref dst.X0);
+            vstore(odd, ref dst.A);
             var total = 0ul;
 
-            total += (dst.X0 * kf) >> 56;
-            total += (dst.X1 * kf) >> 56;
+            total += (dst.A * kf) >> 56;
+            total += (dst.B * kf) >> 56;
 
             return (uint)total;
         }

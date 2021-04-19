@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Part;
 
@@ -57,6 +58,14 @@ namespace Z0
             Block2 A;
 
             Block2 B;
+
+            [MethodImpl(Inline)]
+            public static implicit operator Block4(uint src)
+                => memory.@as<uint,Block4>(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator uint(Block4 src)
+                => memory.@as<Block4,uint>(src);
 
             public Span<byte> Bytes
             {
@@ -135,11 +144,33 @@ namespace Z0
 
             Block4 B;
 
+            [MethodImpl(Inline)]
+            public Block8(uint a, uint b)
+            {
+                A = a;
+                B = b;
+            }
+
+            [MethodImpl(Inline)]
+            public Block8(Block4 a, Block4 b)
+            {
+                A = a;
+                B = b;
+            }
+
             public Span<byte> Bytes
             {
                 [MethodImpl(Inline)]
                 get => span<byte>(ref this);
             }
+
+            [MethodImpl(Inline)]
+            public static implicit operator Block8(ulong src)
+                => memory.@as<ulong,Block8>(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator ulong(Block8 src)
+                => memory.@as<Block8,ulong>(src);
         }
 
         /// <summary>
@@ -279,9 +310,23 @@ namespace Z0
         {
             public const byte Size = 16;
 
-            public ulong X0;
+            public ulong A;
 
-            public ulong X1;
+            public ulong B;
+
+            [MethodImpl(Inline)]
+            public Block16(ulong a, ulong b)
+            {
+                A = a;
+                B = b;
+            }
+
+            [MethodImpl(Inline)]
+            public Block16(Block8 a, Block8 b)
+            {
+                A = a;
+                B = b;
+            }
 
             public Span<byte> Bytes
             {
@@ -347,6 +392,7 @@ namespace Z0
 
             Block4 B;
 
+
             public Span<byte> Bytes
             {
                 [MethodImpl(Inline)]
@@ -382,6 +428,13 @@ namespace Z0
 
             Block16 B;
 
+            [MethodImpl(Inline)]
+            public Block32(Block16 a, Block16 b)
+            {
+                A = a;
+                B = b;
+            }
+
             public Span<byte> Bytes
             {
                 [MethodImpl(Inline)]
@@ -400,6 +453,14 @@ namespace Z0
             Block32 A;
 
             Block32 B;
+
+
+            [MethodImpl(Inline)]
+            public Block64(Block32 a, Block32 b)
+            {
+                A = a;
+                B = b;
+            }
 
             public Span<byte> Bytes
             {

@@ -15,6 +15,9 @@ namespace Z0.Asm
 
     public sealed class AsmThumbprints : WfService<AsmThumbprints>
     {
+        public static AsmThumbprint from(AsmApiStatement src)
+            => AsmThumbprints.define(src.Expression, src.Sig, src.OpCode, src.Encoded);
+
         const string Implication = " => ";
 
         static Fence<char> SigFence => (LParen, RParen);

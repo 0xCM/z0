@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct Sib
     {
-        readonly uint8T Data;
+        readonly byte Data;
 
         public uint3 Base
         {

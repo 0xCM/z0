@@ -2,16 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Tooling
 {
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Part;
     using static memory;
-    using static AsmCore;
+    using static Asm.AsmCore;
 
-    public class CultProcessor : WfService<CultProcessor>
+    [DataProcessor(Toolsets.asm.cult)]
+    public class CultProcessor : WfService<CultProcessor>, IDataProcessor<FS.FilePath,uint>
     {
         public uint BatchSize => Pow2.T16;
 
@@ -31,6 +34,8 @@ namespace Z0.Asm
 
         ToolId Tool;
 
+        FS.FilePath InputFile;
+
         public CultProcessor()
         {
             Summaries = new();
@@ -39,6 +44,7 @@ namespace Z0.Asm
             AsmBits = AsmBitstrings.service();
             HexParser = HexParsers.bytes();
             Tool = Toolsets.cult;
+            InputFile = FS.FilePath.Empty;
         }
 
         protected override void OnInit()
@@ -47,10 +53,20 @@ namespace Z0.Asm
             DetailRoot = CatalogRoot + FS.folder("details");
         }
 
+        public void Inject(in FS.FilePath context)
+        {
+            InputFile = context;
+        }
+
         FS.FilePath SummaryPath
             => CatalogRoot + FS.file(Tool.Format() + ".summary", FS.Csv);
 
-        public uint Process(FS.FilePath src)
+        public Outcome<uint> Run()
+        {
+            return Run(InputFile.IsEmpty ? Db.ToolOutput(Toolsets.cult, "cult", FS.Asm) : InputFile);
+        }
+
+        public Outcome<uint> Run(FS.FilePath src)
         {
             if(!src.Exists)
             {
@@ -108,7 +124,6 @@ namespace Z0.Asm
             }
             return j;
         }
-
 
         void EmitSummary()
         {
@@ -332,6 +347,8 @@ namespace Z0.Asm
                 rcp = EmptyString;
             }
         }
+
+
 
         string[] NonLabels = array("In", " ", "VendorName", "ModelId", "FamilyId", "SteppingId", "Codename", "CpuDetect");
 

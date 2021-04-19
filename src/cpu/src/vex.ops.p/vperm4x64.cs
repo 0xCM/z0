@@ -112,6 +112,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vperm4x64(Vector256<double> x, [Imm] byte spec)
             => Permute4x64(x,spec);
-
     }
 }

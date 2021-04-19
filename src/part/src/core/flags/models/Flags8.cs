@@ -12,7 +12,7 @@ namespace Z0
     using api = Flags;
 
     public readonly struct Flags8<E> : IFlags<Flags8<E>,E,Pow2x8>
-        where E : unmanaged, Enum
+        where E : unmanaged
     {
         public const byte Width = 8;
 

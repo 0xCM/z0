@@ -4,29 +4,50 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    /// <summary>
+    /// Characterizes a serice that computes a result and which may have other side-effects
+    /// </summary>
+    [Free]
     public interface IDataProcessor
     {
-        Outcome Process(in dynamic src, out dynamic dst);
-    }
+        Outcome<dynamic> Run();
 
-    public interface IDataProcessor<S> : IDataProcessor
-    {
-        Outcome Process(in S src, out dynamic dst);
-
-        Outcome IDataProcessor.Process(in dynamic src, out dynamic dst)
-            => Process((S)src, out dst);
+        void Inject(dynamic context);
 
     }
 
-    public interface IDataProcessor<S,T> : IDataProcessor<S>
+    /// <summary>
+    /// Characterizes a processor that computes a payload of parametric type
+    /// </summary>
+    /// <typeparam name="R">The result type</typeparam>
+    [Free]
+    public interface IDataProcessor<R> : IDataProcessor
     {
-        Outcome Process(in S src, out T dst);
+        new Outcome<R> Run();
 
-        Outcome IDataProcessor<S>.Process(in S src, out dynamic dst)
+        void IDataProcessor.Inject(dynamic context){}
+
+        Outcome<dynamic> IDataProcessor.Run()
         {
-            var outcome = Process(src, out var _dst);
-            dst = _dst;
-            return outcome;
+            var typed = Run();
+            var untyped = new Outcome(typed.Ok, typed.Message, typed.MessageCode);
+            return new Outcome<dynamic>(untyped, typed.Data);
         }
     }
+
+    /// <summary>
+    /// Characterizes a processor that requires contexutal data to function
+    /// </summary>
+    /// <typeparam name="C">The context type</typeparam>
+    /// <typeparam name="R">The payload type</typeparam>
+    public interface IDataProcessor<C,R> : IDataProcessor<R>
+    {
+        void Inject(in C context);
+
+        void IDataProcessor.Inject(dynamic context)
+            => Inject((C)context);
+    }
+
 }

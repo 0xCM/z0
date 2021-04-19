@@ -18,7 +18,7 @@ namespace Z0
     {
         /// <summary>
         /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -27,7 +27,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -36,7 +37,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -45,7 +47,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -54,7 +57,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -63,7 +67,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -72,7 +77,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -81,7 +87,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -90,7 +97,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm_storeu_pd (double* mem_addr, __m128d a) MOVUPD m128, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -99,7 +107,7 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -108,7 +116,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -117,7 +126,8 @@ namespace Z0
             => Store(refptr(ref dst), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -126,7 +136,8 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -135,7 +146,8 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -144,7 +156,8 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
+        /// Stores vector content to a specified reference
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -153,7 +166,7 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -163,7 +176,7 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -173,7 +186,7 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -183,7 +196,7 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -193,7 +206,7 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -203,17 +216,18 @@ namespace Z0
             => Store(refptr(ref dst),src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
-        /// <intrinsic>void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm</intrinsic>
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector128<sbyte> src, ref sbyte dst, int offset)
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -223,7 +237,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -233,7 +248,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -242,7 +258,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -251,7 +268,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -260,7 +278,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -269,7 +288,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_si128 (__m128i* mem_addr, __m128i a) MOVDQU m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -278,7 +298,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        ///  void _mm_storeu_ps (float* mem_addr, __m128 a) MOVUPS m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -287,7 +308,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm_storeu_pd (double* mem_addr, __m128d a) MOVUPD m128, xmm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -296,7 +318,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -305,7 +328,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -314,7 +338,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -323,7 +348,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -333,7 +359,7 @@ namespace Z0
 
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -343,37 +369,37 @@ namespace Z0
 
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
-        /// Stores vector content to a memory location
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
-        ///<intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector256<uint> src, ref uint dst, int offset)
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
-        ///<intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector256<long> src, ref long dst, int offset)
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
-        ///<intrinsic>void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a) MOVDQU m256, ymm</intrinsic>
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector256<ulong> src, ref ulong dst, int offset)
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_ps (float * mem_addr, __m256 a) MOVUPS m256, ymm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -383,7 +409,8 @@ namespace Z0
             => Store(refptr(ref dst, offset), src);
 
         /// <summary>
-        /// Stores vector content to a memory location
+        /// void _mm256_storeu_pd (double * mem_addr, __m256d a) MOVUPD m256, ymm
+        /// Stores vector content to a specified reference, offset by a specified amount
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
@@ -401,14 +428,26 @@ namespace Z0
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector128<byte> src, Span<byte> dst)
-            => cpu.vstore(src, ref first(dst));
+            => vstore(src, ref first(dst));
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector256<byte> src, Span<byte> dst)
-            => cpu.vstore(src, ref first(dst));
+            => vstore(src, ref first(dst));
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector512<byte> src, Span<byte> dst)
-            => cpu.vstore(src, ref first(dst));
+            => vstore(src, ref first(dst));
+
+        [MethodImpl(Inline), Store]
+        public static unsafe void vstore(Vector128<byte> src, uint offset, Span<byte> dst)
+            => vstore(src, ref seek(dst,offset));
+
+        [MethodImpl(Inline), Store]
+        public static unsafe void vstore(Vector256<byte> src, uint offset, Span<byte> dst)
+            => vstore(src, ref seek(dst,offset));
+
+        [MethodImpl(Inline), Store]
+        public static unsafe void vstore(Vector512<byte> src, uint offset, Span<byte> dst)
+            => vstore(src, ref seek(dst,offset));
     }
 }

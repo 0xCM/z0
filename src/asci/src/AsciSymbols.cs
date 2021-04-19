@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="count">Tne number of codes to select</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)
-            => recover<AsciCharCode>(AsciCharData.CodeBytes.Slice(offset,count));
+            => recover<AsciCharCode>(slice(AsciCharData.CodeBytes, offset, count));
 
         /// <summary>
         /// Returns the asci characters corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -61,18 +61,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ushort> scalars(sbyte offset, sbyte count)
             => recover<char,ushort>(chars(offset,count));
-
-        ReadOnlySpan<MemoryAddress> ByteResources
-        {
-            [MethodImpl(Inline), Op]
-            get => new MemoryAddress[2]{address(first(CharBytes)), address(first(B001))};
-        }
-
-        ReadOnlySpan<MemoryAddress> TextResources
-        {
-            [MethodImpl(Inline), Op]
-            get => new MemoryAddress[2]{address(first(AsciChars)), address(first(UppercaseHexDigits))};
-        }
 
         public static string AsciCharString
         {

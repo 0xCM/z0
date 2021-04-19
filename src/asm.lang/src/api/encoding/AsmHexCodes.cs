@@ -15,23 +15,25 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmHexCodes
     {
-        public const RexPrefixCode RexW = RexPrefixCode.RexW;
+        public static RexPrefix RexW => RexPrefixCode.RexW;
 
-        public const RegDigitCode rd0 = RegDigitCode.rd0;
+        public static RexPrefix Rex40 => RexPrefixCode.Rex40;
 
-        public const RegDigitCode rd1 = RegDigitCode.rd1;
+        public static RegDigit rd0 => RegDigitCode.rd0;
 
-        public const RegDigitCode rd2 = RegDigitCode.rd2;
+        public static RegDigit rd1 => RegDigitCode.rd1;
 
-        public const RegDigitCode rd3 = RegDigitCode.rd3;
+        public static RegDigit rd2 => RegDigitCode.rd2;
 
-        public const RegDigitCode rd4 = RegDigitCode.rd4;
+        public static RegDigit rd3 => RegDigitCode.rd3;
 
-        public const RegDigitCode rd5 = RegDigitCode.rd5;
+        public static RegDigit rd4 => RegDigitCode.rd4;
 
-        public const RegDigitCode rd6 = RegDigitCode.rd6;
+        public static RegDigit rd5 => RegDigitCode.rd5;
 
-        public const RegDigitCode rd7 = RegDigitCode.rd7;
+        public static RegDigit rd6 => RegDigitCode.rd6;
+
+        public static RegDigit rd7 => RegDigitCode.rd7;
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0)

@@ -9,30 +9,33 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmEncoding : IEquatable<AsmEncoding>, IComparable<AsmEncoding>
+    public readonly struct AsmExprEncoding : IEquatable<AsmExprEncoding>, IComparable<AsmExprEncoding>
     {
         public AsmExpr Asm {get;}
 
         public AsmHexCode Encoding {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncoding(AsmExpr asm, AsmHexCode code)
+        public AsmExprEncoding(AsmExpr asm, AsmHexCode code)
         {
             Asm = asm;
             Encoding = code;
         }
 
-        public bool Equals(AsmEncoding src)
+        public bool Equals(AsmExprEncoding src)
             => Asm.Equals(src.Asm) && Encoding.Equals(src.Encoding);
 
-        public int CompareTo(AsmEncoding src)
+        public int CompareTo(AsmExprEncoding src)
             => Encoding.CompareTo(src.Encoding);
 
         public override bool Equals(object src)
-            => src is AsmEncoding x && Equals(x);
-
+            => src is AsmExprEncoding x && Equals(x);
 
         public override int GetHashCode()
             => (int)alg.hash.combine(Asm.GetHashCode(), Encoding.GetHashCode());
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmExprEncoding((AsmExpr expr, AsmHexCode hex) src)
+            => new AsmExprEncoding(src.expr, src.hex);
     }
 }

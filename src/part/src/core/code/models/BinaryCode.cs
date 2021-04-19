@@ -111,6 +111,7 @@ namespace Z0
             get => ref Data[index];
         }
 
+
         public uint Count
         {
             [MethodImpl(Inline)]

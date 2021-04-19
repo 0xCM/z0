@@ -32,6 +32,8 @@ namespace Z0.Asm
 
         readonly Symbols<AsmMnemonicCode> Mnemonics;
 
+        AsmBitstrings Bitstrings;
+
         public AsmRender()
         {
             Bf1 = BitFormatOptions.bitmax(uint1.Width, uint1.Width);
@@ -43,6 +45,12 @@ namespace Z0.Asm
             Bf7 = BitFormatOptions.bitmax(uint7.Width, uint7.Width);
             Bf8 = BitFormatOptions.bitmax(uint8T.Width, uint8T.Width);
             Mnemonics = Symbols.cache<AsmMnemonicCode>().Index;
+            Bitstrings = AsmBitstrings.service();
+
+        }
+
+        protected override void OnInit()
+        {
 
         }
 
@@ -137,6 +145,7 @@ namespace Z0.Asm
         public static string format(in CallRel32 src)
             => string.Format("{0}:{1} -> {2}", src.ClientAddress, src.TargetDx, src.TargetAddress);
 
+
         public void RenderRows(AsmMnemonicCode code, FS.FilePath dst)
         {
             var rows = @readonly(Wf.AsmRowPipe().LoadAsmRows(code).OrderBy(x => x.Statement).Array());
@@ -156,11 +165,9 @@ namespace Z0.Asm
                         var rendered = string.Format(RowPattern(code),
                             row.IP,
                             row.Statement,
-
                             row.BlockAddress,
                             row.LocalOffset,
                             row.Encoded.Length,
-
                             row.Instruction,
                             row.OpCode,
                             row.Encoded,
@@ -174,7 +181,22 @@ namespace Z0.Asm
         }
 
         [Op]
-        public string RowPattern(AsmMnemonicCode monic)
+        public string FormatRow(in AsmRow src, FuncIn<AsmRow,string> semantic)
+            => string.Format(RowPattern(),
+                            src.IP,
+                            src.Statement,
+                            src.BlockAddress,
+                            src.LocalOffset,
+                            src.Encoded.Length,
+                            src.Instruction,
+                            src.OpCode,
+                            src.Encoded,
+                            Bitstrings.Format(src.Encoded),
+                            Semantic(src)
+                        );
+
+        [Op]
+        public string RowPattern(AsmMnemonicCode monic = default)
         {
             var pattern = EmptyString;
             switch(monic)
@@ -182,6 +204,9 @@ namespace Z0.Asm
                 case AsmMnemonicCode.JMP:
                     pattern = "{0} {1,-32} ; [{2}:{3}:{4}] => ({5})<{6}> => [{7}] => [{8}] | {9}";
                 break;
+                default:
+                    pattern = "{0} {1,-32} ; [{2}:{3}:{4}] => ({5})<{6}> => [{7}] => [{8}] | {9}";
+                    break;
             }
             return pattern;
         }
