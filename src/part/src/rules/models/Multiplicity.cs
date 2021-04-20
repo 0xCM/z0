@@ -9,21 +9,21 @@ namespace Z0
 
     using static Part;
 
-    partial struct Relations
+    partial struct Rules
     {
-        public readonly struct TypeNode<T> : INode
+        public readonly struct Multiplicity
         {
-            public Label Label => typeof(T).Name;
+            public MultiplicityKind Kind {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator TypeNode<T>(T src)
-                => new TypeNode<T>();
+            public Multiplicity(MultiplicityKind kind)
+            {
+                Kind = kind;
+            }
 
             [MethodImpl(Inline)]
-            public static implicit operator TypeNode(TypeNode<T> src)
-                => new TypeNode(typeof(T));
-
-            public static TypeNode<T> Empty => default;
+            public static implicit operator Multiplicity(MultiplicityKind kind)
+                => new Multiplicity(kind);
         }
     }
 }

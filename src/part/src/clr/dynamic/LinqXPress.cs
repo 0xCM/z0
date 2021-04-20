@@ -4,18 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static Root;
 
-    using static Part;
-
-    [ApiHost(ApiNames.LinqXQuery, true)]
-    public partial class LinqXQuery
+    [ApiHost(ApiNames.LinqXPress, true)]
+    public partial class LinqXPress
     {
         const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline)]
-        static T cast<T>(object src)
-            => (T)src;
     }
 }

@@ -20,7 +20,7 @@ namespace Z0.Asm
         Rex40 = x40,
 
         [PrefixCode(T.Rex41)]
-        RexB = x41,
+        Rex41 = x41,
 
         [PrefixCode(T.Rex42)]
         Rex42 = x42,
@@ -29,7 +29,7 @@ namespace Z0.Asm
         Rex43 = x43,
 
         [PrefixCode(T.Rex44)]
-        RexR = x44,
+        Rex44 = x44,
 
         [PrefixCode(T.Rex45)]
         Rex45 = x45,
@@ -41,7 +41,7 @@ namespace Z0.Asm
         Rex47 = x47,
 
         [PrefixCode(T.RexW)]
-        RexW = x48,
+        Rex48 = x48,
 
         [PrefixCode(T.Rex49)]
         Rex49 = x49,

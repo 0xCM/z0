@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -19,8 +18,10 @@ namespace Z0
     /// <typeparam name="S">The source node type</typeparam>
     /// <typeparam name="T">The target node type</typeparam>
     [Free]
-    public interface IDependency<S,T> : IDependency, IRelation<S,T>
+    public interface IDependency<K,S,T> : IDependency, IRelation<K,S,T>
+        where K : IDependency<K,S,T>
     {
+        K IRelation<K,S,T>.Kind => (K)this;
     }
 
     /// <summary>
@@ -28,7 +29,9 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The node type</typeparam>
     [Free]
-    public interface IDependency<T> : IDependency<T,T>
+    public interface IDependency<K,T> : IDependency<K,T,T>
+        where K : IDependency<K,T>
     {
+
     }
 }

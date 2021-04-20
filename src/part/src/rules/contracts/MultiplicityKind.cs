@@ -4,19 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     /// <summary>
     /// Defines multiplicity categories
     /// </summary>
-    public enum MultiplicityKind : sbyte
+    [Flags]
+    public enum MultiplicityKind : byte
     {
         Unknown = 0,
 
-        ZeroOrOne = -1,
+        Zero = 1,
 
-        One = 1,
+        One = 2,
 
-        ZeroOrMore = 2,
+        ZeroOrOne = Zero | One,
 
-        OneOrMany = 3,
+        Many = 8,
+
+        ZeroOrMany = Zero | Many,
+
+        OneOrMany = One | Many,
     }
 }

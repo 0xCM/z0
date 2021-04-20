@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;

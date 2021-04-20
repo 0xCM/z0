@@ -10,8 +10,8 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    //using static memory;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="m">The source method</param>
         /// <param name="host">An object instance for the method, if applicable</param>
         public static Option<Func<X>> func<X>(MethodInfo m, object host = null)
-            => root.@try(() => (Func<X>)_cache.GetOrAdd(m, method =>
+            => Option.Try(() => (Func<X>)_cache.GetOrAdd(m, method =>
             {
                 var result = convert<X>(call(host, m));
                 return XPR.Lambda<Func<X>>(result).Compile();
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="m">The source method</param>
         /// <param name="host">An object instance for the method, if applicable</param>
         public static Option<Func<X,Y>> func<X,Y>(MethodInfo m, object host = null)
-            => root.@try(() => (Func<X,Y>)_cache.GetOrAdd(m, method =>
+            => Option.Try(() => (Func<X,Y>)_cache.GetOrAdd(m, method =>
             {
                 var args = array(paramX<X>());
                 var f = call(host, m, args);
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="m">The source method</param>
         /// <param name="host">The instance of the declaring type, if method is not static</param>
         public static Option<Func<X1,X2,Y>> func<X1,X2,Y>(MethodInfo m, object host = null)
-            => root.@try(() => (Func<X1,X2,Y>)_cache.GetOrAdd(m, method =>
+            => Option.Try(() => (Func<X1,X2,Y>)_cache.GetOrAdd(m, method =>
             {
                 var args = paramX<X1,X2>();
                 var f = call(host, m, args.ToArray());

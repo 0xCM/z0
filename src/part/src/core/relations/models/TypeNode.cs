@@ -9,27 +9,30 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct TypeNode : INode
+    partial struct Relations
     {
-        public Label Label {get;}
-
-        [MethodImpl(Inline)]
-        public TypeNode(Type src)
+        public readonly struct TypeNode : INode
         {
-            Label = src.Name;
+            public Label Label {get;}
+
+            [MethodImpl(Inline)]
+            public TypeNode(Type src)
+            {
+                Label = src.Name;
+            }
+
+            [MethodImpl(Inline)]
+            public string Format()
+                => Label;
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator TypeNode(Type src)
+                => new TypeNode(src);
+
+            public static TypeNode Empty => new TypeNode(typeof(void));
         }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Label;
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator TypeNode(Type src)
-            => new TypeNode(src);
-
-        public static TypeNode Empty => new TypeNode(typeof(void));
     }
 }

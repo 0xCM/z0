@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq.Expressions;
 
-    using static Part;
+    using static Root;
 
     [ApiHost(ApiNames.LinqXFuncX)]
     public static partial class XFuncX

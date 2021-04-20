@@ -32,6 +32,27 @@ namespace Z0
             return rows;
         }
 
+        public void EmitSymbols<K>(string subject)
+            where K : unmanaged, Enum
+        {
+            EmitSymbols(Symbols.cache<K>().View, Db.AsmCatalogPath(subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
+        }
+
+        public void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
+            where K : unmanaged
+        {
+            var count = src.Length;
+            if(count != 0)
+            {
+                var flow = Wf.EmittingFile(dst);
+                using var writer = dst.Writer();
+                writer.WriteLine(Symbols.header());
+                for(var i=0; i<count; i++)
+                    writer.WriteLine(skip(src,i));
+                Wf.EmittedFile(flow, count);
+            }
+        }
+
         public void EmitApiClasses()
         {
             var dst = Db.IndexTable("api.classes");

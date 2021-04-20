@@ -6502,77 +6502,55 @@ namespace Z0
         /// Description taken from the geberated documentation file xed-doc-top.txt
         /// </summary>
         public const string IFormInfo = @"Intel XED classifies instructions as iclasses (ADD, SUB, MUL, etc.) of type
-#xed_iclass_enum_t.  To get more information about instructions and
-their operands, Intel XED creates iforms of type #xed_iform_enum_t. The
-iforms are supposed to aid in creating dispatch tables for
-instructions. You can often use a flat array indexed by iform. The
-maximum iform is #XED_IFORM_LAST.
+            #xed_iclass_enum_t.  To get more information about instructions and
+            their operands, Intel XED creates iforms of type #xed_iform_enum_t. The
+            iforms are supposed to aid in creating dispatch tables for
+            instructions. You can often use a flat array indexed by iform. The
+            maximum iform is #XED_IFORM_LAST.
 
-The iforms sometimes do not uniquely identify instructions. For
-example, many instructions in the ISA are 'scalable' in that their
-operand width depends on the machine mode and the prefixes. The memory
-operation of these scalable opcodes is either 16 bits, 32 bits or 64
-bits. The same opcode can represent several instructions if you factor
-in the machine mode and prefixes. Those instructions often map to a
-single iform and need to be further refined by the
-#xed_operand_values_get_effective_operand_width function.
+            The iforms sometimes do not uniquely identify instructions. For
+            example, many instructions in the ISA are 'scalable' in that their
+            operand width depends on the machine mode and the prefixes. The memory
+            operation of these scalable opcodes is either 16 bits, 32 bits or 64
+            bits. The same opcode can represent several instructions if you factor
+            in the machine mode and prefixes. Those instructions often map to a
+            single iform and need to be further refined by the
+            #xed_operand_values_get_effective_operand_width function.
 
-The names of the iforms are derived from information about the
-#xed_iclass_enum_t and the names of their explicit operands (the name of
-nonterminals in the Intel XED internal grammar) and the data types of those
-operands. Other information is sometimes included to disambiguate
-similar instructions. For example, there are several opcodes and
-operands for encoding certain a 1-byte register-register ADD
-instruction as well as the 1-byte register-immediate ADD, so to
-differentiate those, Intel XED includes the opcode bytes as suffixes for the
-iform name:
+            The names of the iforms are derived from information about the
+            #xed_iclass_enum_t and the names of their explicit operands (the name of
+            nonterminals in the Intel XED internal grammar) and the data types of those
+            operands. Other information is sometimes included to disambiguate
+            similar instructions. For example, there are several opcodes and
+            operands for encoding certain a 1-byte register-register ADD
+            instruction as well as the 1-byte register-immediate ADD, so to
+            differentiate those, Intel XED includes the opcode bytes as suffixes for the
+            iform name:
 
-  ADD_GPR8_GPR8_00
-  ADD_GPR8_GPR8_02
-  ADD_GPR8_IMMb_80r0
-  ADD_GPR8_IMMb_82r0
+            ADD_GPR8_GPR8_00
+            ADD_GPR8_GPR8_02
+            ADD_GPR8_IMMb_80r0
+            ADD_GPR8_IMMb_82r0
 
-The naming scheme for iforms can get rather complex and continues to
-evolve over time as the instruction set architecture grows.  They
-mostly use the lower-case letter codes found in the opcode map found
-in the appendix to the Intel&reg; 64 and IA-32 Architectures Software
-Developers Manual.  For example the scalable instructions
-mentioned above use the 'v' code which the manuals describe as
-representing 16, 32 or 64b operands depending on the effective operand
-size.  The code 'z' implies either 16 or 32b operation; When the
-effective operand size is 64, the operand is still 32b. Other common
-suffixes one might see are 'd' for 32b and 'q' for 64b. The codes 'ps'
-and 'pd' stand for packed scalar (single precision floating point) and
-packed double (double precision floating point). The code 'dq' is used
-to describe 128b (16B) quantities typically in memory or an XMM
-register. Similarly 'qq' describes a 256b (32B) quantity in memory or
-a YMM register.  In many cases the codes were sufficient to describe
-what is needed; in other cases I had to improvise.
+            The iform enumeration #xed_iform_enum_t is dense and it has some
+            built-in structure. All the iforms for a particular iclass are sequential.
+            The function #xed_iform_max_per_iclass() indicates the number of iforms
+            for a particular iclass.
 
-All the iclasses and iforms are listed in the misc/idata.txt file in
-the Intel XED kit.
+            To get the first iform of a particular iclass you can use
+            #xed_iform_first_per_iclass() at runtime.  There is also the
+            #xed_iformfl_enum_t which indicates for every iclass, the first and
+            last iform in the #xed_iform_enum_t.
 
-The iform enumeration #xed_iform_enum_t is dense and it has some
-built-in structure. All the iforms for a particular iclass are sequential.
-The function #xed_iform_max_per_iclass() indicates the number of iforms
-for a particular iclass.
+            Given an iform, to get #xed_category_enum_t, #xed_extension_enum_t,
+            and #xed_iclass_enum_t information, you can use #xed_iform_map(), or
+            there are accessors listed below to get the iclass, category or
+            extension from that table directly.
 
-To get the first iform of a particular iclass you can use
-#xed_iform_first_per_iclass() at runtime.  There is also the
-#xed_iformfl_enum_t which indicates for every iclass, the first and
-last iform in the #xed_iform_enum_t.
-
-Given an iform, to get #xed_category_enum_t, #xed_extension_enum_t,
-and #xed_iclass_enum_t information, you can use #xed_iform_map(), or
-there are accessors listed below to get the iclass, category or
-extension from that table directly.
-
-Every Intel XED iform belongs to one #xed_isa_set_enum_t. Each Intel XED chip of
-type #xed_chip_enum_t represents a collection of xed isa-sets.  If
-you have a #xed_decoded_inst_t, you can get the isa set via
-the function #xed_decoded_inst_get_isa_set.
-
-";
+            Every Intel XED iform belongs to one #xed_isa_set_enum_t. Each Intel XED chip of
+            type #xed_chip_enum_t represents a collection of xed isa-sets.  If
+            you have a #xed_decoded_inst_t, you can get the isa set via
+            the function #xed_decoded_inst_get_isa_set.";
 
     }
 }

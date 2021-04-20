@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq.Expressions;
 
-    using static Part;
+    using static Root;
 
     partial class XFuncX
     {

@@ -39,10 +39,6 @@ namespace Z0.Asm
             => emath.between(src, R.Rex40, R.Rex4F);
 
         [MethodImpl(Inline), Op]
-        public static bit HasEscape(AsmOpCode src)
-            => emath.oneof(src.Byte0, EscapeCode.x0f, EscapeCode.x66);
-
-        [MethodImpl(Inline), Op]
         public static bit HasRexPrefix(AsmOpCode src)
             => IsRexPrefix(src.Byte0);
 

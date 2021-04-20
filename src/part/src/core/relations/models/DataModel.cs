@@ -9,18 +9,21 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct DataModel<K> : IDataModel<DataModel<K>, K>
-        where K : unmanaged
+    partial struct Relations
     {
-        public Name Name {get;}
-
-        public K Kind {get;}
-
-        [MethodImpl(Inline)]
-        public DataModel(string name, K kind)
+        public readonly struct DataModel<K> : IDataModel<DataModel<K>,K>
+            where K : unmanaged
         {
-            Name = name;
-            Kind = kind;
+            public Name Name {get;}
+
+            public K Kind {get;}
+
+            [MethodImpl(Inline)]
+            public DataModel(string name, K kind)
+            {
+                Name = name;
+                Kind = kind;
+            }
         }
     }
 }

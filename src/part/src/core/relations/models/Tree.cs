@@ -9,20 +9,24 @@ namespace Z0
 
     using static Part;
 
-    public class Tree<T> : ITree<T>
-        where T : ILeaf
+    partial struct Relations
     {
-        public Index<IBranch> Branches {get;}
+        public class Tree<T> : ITree<T>
+            where T : ILeaf
+        {
+            public Index<IBranch> Branches {get;}
 
-        public Index<T> Leaves {get;}
-    }
+            public Index<T> Leaves {get;}
+        }
 
-    public class Tree<B,L> : ITree<B,L>
-        where B : IBranch
-        where L : ILeaf
-    {
-        public Index<B> Branches {get;}
+        public class Tree<B,L> : ITree<B,L>
+            where B : IBranch
+            where L : ILeaf
+        {
+            public Index<B> Branches {get;}
 
-        public Index<L> Leaves {get;}
+            public Index<L> Leaves {get;}
+        }
+
     }
 }

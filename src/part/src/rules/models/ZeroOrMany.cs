@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct ZeroOrMore<T> : IRule<ZeroOrMore<T>,T>
+        public readonly struct ZeroOrMany<T> : IRule<ZeroOrMany<T>,T>
             where T : IEquatable<T>
         {
             public Index<T> Elements {get;}
@@ -29,15 +29,15 @@ namespace Z0
             }
 
             public MultiplicityKind Multiplicity
-                => MultiplicityKind.ZeroOrMore;
+                => MultiplicityKind.ZeroOrMany;
 
             [MethodImpl(Inline)]
-            public ZeroOrMore(T[] src)
+            public ZeroOrMany(T[] src)
                 => Elements = src;
 
             [MethodImpl(Inline)]
-            public static implicit operator ZeroOrMore<T>(T[] src)
-                => new ZeroOrMore<T>(src);
+            public static implicit operator ZeroOrMany<T>(T[] src)
+                => new ZeroOrMany<T>(src);
         }
     }
 }

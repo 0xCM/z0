@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=core
+set ProjectId=clr
 call %ControlScripts%\build-lib.cmd

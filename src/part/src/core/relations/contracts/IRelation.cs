@@ -9,9 +9,12 @@ namespace Z0
 
     public interface IRelation
     {
+        dynamic Kind {get;}
+
         dynamic Source {get;}
 
         dynamic Target {get;}
+
     }
 
     /// <summary>
@@ -25,6 +28,25 @@ namespace Z0
         new S Source {get;}
 
         new T Target {get;}
+
+        dynamic IRelation.Source
+            => Source;
+
+        dynamic IRelation.Target
+            => Target;
+    }
+
+    [Free]
+    public interface IRelation<K,S,T> : IRelation
+    {
+        new K Kind {get;}
+
+        new S Source {get;}
+
+        new T Target {get;}
+
+        dynamic IRelation.Kind
+            => Kind;
 
         dynamic IRelation.Source
             => Source;

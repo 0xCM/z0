@@ -90,6 +90,12 @@ namespace Z0.Asm
             EmitSymbols();
         }
 
+        public Index<SymLiteral> SymLiterals()
+        {
+            var src = typeof(XedModels).GetNestedTypes().Enums();
+            return Symbols.literals(src);
+        }
+
         public Index<FormDetail> LoadFormDetails()
         {
             var summaries = LoadFormSummaries().View;
@@ -101,32 +107,18 @@ namespace Z0.Asm
             return buffer;
         }
 
-        void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
-            where K : unmanaged
-        {
-            var count = src.Length;
-            if(count != 0)
-            {
-                var flow = Wf.EmittingFile(dst);
-                using var writer = dst.Writer();
-                writer.WriteLine(Symbols.header());
-                for(var i=0; i<count; i++)
-                    writer.WriteLine(skip(src,i));
-                Wf.EmittedFile(flow, count);
-            }
-        }
 
         const string Subject = "xed";
 
         public void EmitSymbols()
         {
-            var src = typeof(XedModels).GetNestedTypes().Enums();
-            var literals = Symbols.literals(src);
+            var src = SymLiterals();
             var dst = Db.AsmCatalogPath("xed", FS.file("xed-symbol-index", FS.Csv));
             var emitting = Wf.EmittingTable<SymLiteral>(dst);
-            var count = Tables.emit(literals,dst);
+            var count = Tables.emit(src,dst);
             Wf.EmittedTable(emitting,count);
 
+            //var symbolism = Wf.SymServices();
             EmitSymbols<AddressWidth>();
             EmitSymbols<AttributeKind>();
             EmitSymbols<Category>();
@@ -145,13 +137,27 @@ namespace Z0.Asm
             EmitSymbols<RegClass>();
             EmitSymbols<RegId>();
             EmitSymbols<RegRole>();
-
         }
 
         void EmitSymbols<K>()
             where K : unmanaged, Enum
         {
             EmitSymbols(Symbols.cache<K>().View, Db.AsmCatalogPath(Subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
+        }
+
+        void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
+            where K : unmanaged
+        {
+            var count = src.Length;
+            if(count != 0)
+            {
+                var flow = Wf.EmittingFile(dst);
+                using var writer = dst.Writer();
+                writer.WriteLine(Symbols.header());
+                for(var i=0; i<count; i++)
+                    writer.WriteLine(skip(src,i));
+                Wf.EmittedFile(flow, count);
+            }
         }
 
         // public Symbols<IClass> EmitClasses()

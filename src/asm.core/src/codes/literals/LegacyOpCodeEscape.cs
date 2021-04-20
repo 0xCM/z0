@@ -4,18 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using H = Hex8Seq;
-
-    /// <summary>
-    /// Defines the escape op code byte as specified by Intel Vol II, 2.1.2
-    /// </summary>
-    [PrefixCodes]
-    public enum EscapeCode : byte
+    public enum LegacyOpCodeEscape : ushort
     {
         None = 0,
 
-        x0f = H.x0f,
+        x0F = 0x0F,
 
-        x66 = H.x66,
+        x0F38 = 0x0F38,
+
+        x0F3A = 0x0F3A,
     }
 }
