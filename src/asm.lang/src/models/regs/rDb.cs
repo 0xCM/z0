@@ -11,7 +11,8 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOps.rDb;
-    using K = AsmX.DebugReg;
+    using K = AsmTokens.DebugReg;
+
 
     partial struct AsmOps
     {

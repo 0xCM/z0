@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOps.r32;
-    using K = AsmX.Gp32;
+    using K = AsmTokens.Gp32;
 
     partial struct AsmOps
     {

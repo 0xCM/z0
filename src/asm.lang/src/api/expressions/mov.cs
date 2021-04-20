@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using static AsmMnemonicCode;
 
+    using static AsmTokens;
+
     partial struct AsmX
     {
         [Op, AsmSig(AsmOc.mov_r64_imm64)]

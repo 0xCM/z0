@@ -50,6 +50,20 @@ namespace Z0
             return false;
         }
 
+        public bool MatchKind(SymExpr src, out K dst)
+        {
+            if(Match(src, out var matched))
+            {
+                dst = matched.Kind;
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
         public Sym<K>[] Storage
         {
             [MethodImpl(Inline)]

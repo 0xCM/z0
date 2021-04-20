@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static AsmTokens;
+
     public interface IAsmOp : ISized
     {
         AsmOpKind OpKind => default;

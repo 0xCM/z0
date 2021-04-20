@@ -87,7 +87,7 @@ namespace Z0.Asm
                         asmwriter.WriteLine(AsmBlockSeparator);
                     }
 
-                    asmwriter.WriteLine(string.Format("{0} {1,-36} ; {2}", statement.BlockOffset, statement.Expression, statement.Thumbprint()));
+                    asmwriter.WriteLine(string.Format("{0} {1,-36} ; {2}", statement.BlockOffset, statement.Expression, AsmThumbprints.from(statement)));
                 }
 
                 Wf.EmittedFile(emittingAsm, scount);
@@ -137,7 +137,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(statements,i);
-                thumbprints.Add(statement.Thumbprint());
+                thumbprints.Add(AsmThumbprints.from(statement));
                 var uri = statement.OpUri;
                 if(i == 0)
                 {
@@ -183,7 +183,7 @@ namespace Z0.Asm
 
                 tableWriter.WriteLine(formatter.Format(statement));
 
-                asmWriter.WriteLine(string.Format("{0} {1,-36} ; {2}", statement.BlockOffset, statement.Expression, statement.Thumbprint()));
+                asmWriter.WriteLine(string.Format("{0} {1,-36} ; {2}", statement.BlockOffset, statement.Expression, AsmThumbprints.from(statement)));
 
                 counter++;
             }

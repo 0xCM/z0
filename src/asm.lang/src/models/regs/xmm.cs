@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOps.xmm;
-    using K = AsmX.XmmReg;
+    using K = AsmTokens.XmmReg;
 
     partial struct AsmOps
     {

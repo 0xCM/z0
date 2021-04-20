@@ -7,6 +7,7 @@ namespace Z0.Asm
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using static AsmX;
+    using static AsmTokens;
 
     [Free]
     public interface IMemOp : IAsmOp

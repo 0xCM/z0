@@ -48,7 +48,7 @@ namespace Z0.Asm
 
         [Op]
         public static string describe(RexPrefix src)
-            => $"{src.Format()} | {rexbits(src)} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B}";
+            => $"{src.Format()} | {src.FormatBits()} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B}";
 
         public static string describe(Vsib src)
         {
@@ -61,16 +61,6 @@ namespace Z0.Asm
             buffer.Append(src.Base.ToString());
             buffer.Append(" ]");
             return buffer.Emit();
-        }
-
-        [Op]
-        static string rexbits(RexPrefix src)
-        {
-            var bs = src.Data.FormatBits();
-            var chars = text.span(bs);
-            var lo = slice(chars,0,4);
-            var hi = slice(chars,4,4);
-            return text.format("[{0} {1}]", lo, hi);
         }
     }
 }

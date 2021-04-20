@@ -1061,7 +1061,7 @@ namespace Z0.Asm
 
         public void ParseXedForms()
         {
-            var parser = XedFormParser.create(Wf.EventSink);
+            var parser = XedSummaryParser.create(Wf.EventSink);
             var parsed = parser.ParseSummaries();
             Wf.Status($"Parsed {parsed.Length} summaries");
             Wf.XedCatalog().Emit(parsed);

@@ -8,6 +8,7 @@ namespace Z0.Asm
 
     using static memory;
     using static Part;
+    using static AsmTokens;
 
     [Free]
     public interface IRegOp : IAsmOp, ITextual
