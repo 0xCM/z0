@@ -94,28 +94,28 @@ namespace Z0
         static string format<M,N>(ushort data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => z.bytes(data).FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => bytes(data).FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N>(uint data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => z.bytes(data).FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => bytes(data).FormatMatrixBits(nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N>(ulong data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => z.bytes(data).FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => bytes(data).FormatMatrixBits(nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N,T>(Vector128<T> data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => data.ToSpan().FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => data.ToSpan().FormatMatrixBits(nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N,T>(Vector256<T> data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => data.ToSpan().FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => data.ToSpan().FormatMatrixBits(nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
     }
 }

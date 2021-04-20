@@ -8,10 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static System.Runtime.InteropServices.MemoryMarshal;
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
     partial struct memory
     {
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<byte> src, int offset, int length)
             where T : unmanaged

@@ -46,6 +46,6 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public Span<byte> Serialize()
-            => z.bytes(this);
+            => memory.bytes(this);
     }
 }

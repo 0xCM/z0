@@ -34,7 +34,7 @@ namespace Z0
         public ref DfaState<S> this[ushort index]
         {
             [MethodImpl(Inline)]
-            get => ref States[z.u32(index)];
+            get => ref States[memory.u32(index)];
         }
 
         public DfaState<S>[] Storage

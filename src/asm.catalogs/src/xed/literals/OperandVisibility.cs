@@ -7,17 +7,18 @@ namespace Z0
 {
     partial struct XedModels
     {
+        [SymbolSource(xed)]
         public enum OperandVisibility : byte
         {
-            XED_OPVIS_INVALID,
+            INVALID,
 
-            XED_OPVIS_EXPLICIT, ///< Shows up in operand encoding
+            EXPLICIT, ///< Shows up in operand encoding
 
-            XED_OPVIS_IMPLICIT, ///< Part of the opcode, but listed as an operand
+            IMPLICIT, ///< Part of the opcode, but listed as an operand
 
-            XED_OPVIS_SUPPRESSED, ///< Part of the opcode, but not typically listed as an operand
+            SUPPRESSED, ///< Part of the opcode, but not typically listed as an operand
 
-            XED_OPVIS_LAST
+            LAST
         }
     }
 }

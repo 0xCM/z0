@@ -14,29 +14,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, byte count)
             => ref memory.seek(src,count);
-        [MethodImpl(Inline)]
-        public static ref T seek<T>(in T src, uint count)
-            => ref memory.seek(src,count);
-
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, uint count)
             => ref memory.seek(src, count);
 
-        [MethodImpl(Inline)]
-        public static ref T seek<T>(Span<T> src, long count)
-            => ref memory.seek(src,count);
 
-        [MethodImpl(Inline)]
-        public static ref T seek<T>(T[] src, uint count)
-            => ref memory.seek(src,count);
-
-        [MethodImpl(Inline)]
-        public static ref T seek<T>(T[] src, long count)
-            => ref memory.seek(src,count);
-
-        [MethodImpl(Inline)]
-        public static ref T seek<T>(T[] src, ulong count)
-            => ref memory.seek(src,count);
     }
 }

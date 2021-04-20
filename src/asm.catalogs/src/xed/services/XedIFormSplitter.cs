@@ -42,7 +42,7 @@ namespace Z0.Asm
 
         readonly Symbols<OperandVisibility> OpVisibility;
 
-        readonly Symbols<OperandWidth> OpWidths;
+        readonly Symbols<OperandWidthType> OpWidths;
 
         readonly Symbols<RegId> Registers;
 
@@ -68,7 +68,7 @@ namespace Z0.Asm
             OpVisibility = Symbols.cache<OperandVisibility>();
             RegClasses = Symbols.cache<RegClass>();
             AddressWidths = Symbols.cache<AddressWidth>();
-            OpWidths = Symbols.cache<OperandWidth>();
+            OpWidths = Symbols.cache<OperandWidthType>();
             EncodingGroups = Symbols.cache<EncodingGroup>();
             Partitions = alloc<FormParition>(Source.Count);
             Wf = wf;
@@ -126,7 +126,7 @@ namespace Z0.Asm
         bool Match(SymExpr src, out AddressWidth dst)
             => AddressWidths.MatchKind(src, out dst);
 
-        bool Match(SymExpr src, out OperandWidth dst)
+        bool Match(SymExpr src, out OperandWidthType dst)
             => OpWidths.MatchKind(src, out dst);
 
         bool Match(SymExpr src, out RegId dst)

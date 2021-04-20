@@ -12,6 +12,191 @@ namespace Z0.Asm
 
     public sealed class XedCatalog : WfService<XedCatalog>
     {
+        public void EmitCatalog()
+        {
+            EmitSourceAssets();
+            EmitFormDetails();
+            EmitSymCatalog();
+        }
+
+        public Index<FormDetail> EmitFormDetails()
+            => EmitFormDetails(Db.AsmCatalogPath("xed", FS.file("xed-forms", FS.Csv)));
+
+        public Index<FormDetail> EmitFormDetails(FS.FilePath dst)
+        {
+            var records = LoadFormDetails();
+            var src = records.View;
+            var count = src.Length;
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            writer.WriteLine(FormDetail.Header);
+            for(var i=0; i<count; i++)
+                writer.WriteLine(skip(src,i).Format());
+            Wf.EmittedFile(flow, count);
+            return records;
+        }
+
+
+        public Index<SymLiteral> SymLiterals()
+        {
+            var src = typeof(XedModels).GetNestedTypes().Enums();
+            return Symbols.literals(src);
+        }
+
+        public Index<FormDetail> LoadFormDetails()
+        {
+            var summaries = LoadFormSummaries().View;
+            var count = summaries.Length;
+            var buffer = alloc<FormDetail>(count);
+            var dst = span(buffer);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = LoadDetail((ushort)i, skip(summaries,i));
+            return buffer;
+        }
+
+        const string Subject = "xed";
+
+        public FS.FilePath EmitSymIndex()
+        {
+            var src = SymLiterals();
+            var dst = Db.AsmCatalogPath("xed", FS.file("xed-symbol-index", FS.Csv));
+            EmitSymIndex(dst);
+            return dst;
+        }
+
+        public Index<SymLiteral> EmitSymIndex(FS.FilePath dst)
+        {
+            var src = SymLiterals();
+            var emitting = Wf.EmittingTable<SymLiteral>(dst);
+            var count = Tables.emit(src,dst);
+            Wf.EmittedTable(emitting,count);
+            return src;
+        }
+
+        public void EmitSymCatalog()
+        {
+            EmitSymIndex();
+            EmitSymbols<AddressWidth>();
+            EmitSymbols<AttributeKind>();
+            EmitSymbols<Category>();
+            EmitSymbols<ChipCode>();
+            EmitSymbols<CpuidBit>();
+            EmitSymbols<EFlag>();
+            EmitSymbols<EncodingGroup>();
+            EmitSymbols<Extension>();
+            EmitSymbols<IClass>();
+            EmitSymbols<IForm>();
+            EmitSymbols<IsaKind>();
+            EmitSymbols<MachineMode>();
+            EmitSymbols<Nonterminal>();
+            EmitSymbols<OperandKind>();
+            EmitSymbols<OperandWidthType>();
+            EmitSymbols<OperandVisibility>();
+            EmitSymbols<RegClass>();
+            EmitSymbols<RegId>();
+            EmitSymbols<RegRole>();
+            EmitSymbols<SizeIndicator>();
+        }
+
+        public void EmitSourceAssets()
+        {
+            var dst = Db.DataSource(FS.file("xed-idata", FS.Txt));
+            var flow = Wf.EmittingFile(dst);
+            var data = Assets.XedInstructionSummary().Utf8();
+            dst.Overwrite(data);
+            Wf.EmittedFile(flow, data.Length);
+        }
+
+        public void EmitFormSummaries()
+        {
+            var parser = XedSummaryParser.create(Wf.EventSink);
+            var parsed = parser.ParseSummaries();
+            EmitFormSummaries(parsed);
+        }
+
+        public void EmitFormSummaries(ReadOnlySpan<FormInfo> src)
+        {
+            var dst = Db.CatalogTable<FormInfo>("asm", "xed");
+            var flow = Wf.EmittingTable<FormInfo>(dst);
+            var count = Tables.emit(src,dst);
+            Wf.EmittedTable(flow,count);
+        }
+
+        public Index<FormInfo> LoadFormSummaries()
+        {
+            var src = Db.DataSource(FS.file("xed-idata", FS.Txt));
+            var flow = Wf.Running("Loading xed instruction summaries");
+            using var reader = src.Reader();
+            var counter = 0u;
+            var header = memory.alloc<string>(FormInfo.FieldCount);
+            var succeeded = true;
+            var records = root.list<FormInfo>();
+            while(!reader.EndOfStream)
+            {
+                var line = reader.ReadLine(counter);
+
+                if(line.StartsWith(CommentMarker))
+                    continue;
+
+                if(line.IsEmpty)
+                    continue;
+
+                if(counter==0)
+                {
+                    var outcome = ParseSourceHeader(line,header);
+                    if(!outcome)
+                    {
+                        Wf.Error(outcome.Message);
+                        succeeded = false;
+                        break;
+                    }
+                }
+                else
+                {
+                   var dst = new FormInfo();
+                   var outcome = ParseSummary(line, out dst);
+                   if(outcome)
+                   {
+                       records.Add(dst);
+                   }
+                   else
+                   {
+                        Wf.Error(outcome.Message);
+                        succeeded = false;
+                        break;
+                   }
+                }
+
+                counter++;
+            }
+
+            if(succeeded)
+                Wf.Ran(flow, $"Imported {counter} records from {src.ToUri()}");
+
+            return records.ToArray();
+        }
+
+        void EmitSymbols<K>()
+            where K : unmanaged, Enum
+        {
+            EmitSymbols(Symbols.cache<K>().View, Db.AsmCatalogPath(Subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
+        }
+
+        void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
+            where K : unmanaged
+        {
+            var count = src.Length;
+            if(count != 0)
+            {
+                var flow = Wf.EmittingFile(dst);
+                using var writer = dst.Writer();
+                writer.WriteLine(Symbols.header());
+                for(var i=0; i<count; i++)
+                    writer.WriteLine(skip(src,i));
+                Wf.EmittedFile(flow, count);
+            }
+        }
+
         const char CommentMarker = Chars.Hash;
 
         const char FieldDelimiter = Chars.Space;
@@ -82,189 +267,6 @@ namespace Z0.Asm
             var isa = ParseIsaKind(src.IsaSet);
             var ext = ParseExtension(src.Extension);
             return new FormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
-        }
-
-        public void EmitCatalog()
-        {
-            EmitFormDetails();
-            EmitSymbols();
-        }
-
-        public Index<SymLiteral> SymLiterals()
-        {
-            var src = typeof(XedModels).GetNestedTypes().Enums();
-            return Symbols.literals(src);
-        }
-
-        public Index<FormDetail> LoadFormDetails()
-        {
-            var summaries = LoadFormSummaries().View;
-            var count = summaries.Length;
-            var buffer = alloc<FormDetail>(count);
-            var dst = span(buffer);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = LoadDetail((ushort)i, skip(summaries,i));
-            return buffer;
-        }
-
-
-        const string Subject = "xed";
-
-        public void EmitSymbols()
-        {
-            var src = SymLiterals();
-            var dst = Db.AsmCatalogPath("xed", FS.file("xed-symbol-index", FS.Csv));
-            var emitting = Wf.EmittingTable<SymLiteral>(dst);
-            var count = Tables.emit(src,dst);
-            Wf.EmittedTable(emitting,count);
-
-            //var symbolism = Wf.SymServices();
-            EmitSymbols<AddressWidth>();
-            EmitSymbols<AttributeKind>();
-            EmitSymbols<Category>();
-            EmitSymbols<ChipCode>();
-            EmitSymbols<CpuidBit>();
-            EmitSymbols<EFlag>();
-            EmitSymbols<EncodingGroup>();
-            EmitSymbols<Extension>();
-            EmitSymbols<IClass>();
-            EmitSymbols<IForm>();
-            EmitSymbols<IsaKind>();
-            EmitSymbols<MachineMode>();
-            EmitSymbols<Nonterminal>();
-            EmitSymbols<OperandWidth>();
-            EmitSymbols<OperandVisibility>();
-            EmitSymbols<RegClass>();
-            EmitSymbols<RegId>();
-            EmitSymbols<RegRole>();
-        }
-
-        void EmitSymbols<K>()
-            where K : unmanaged, Enum
-        {
-            EmitSymbols(Symbols.cache<K>().View, Db.AsmCatalogPath(Subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
-        }
-
-        void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
-            where K : unmanaged
-        {
-            var count = src.Length;
-            if(count != 0)
-            {
-                var flow = Wf.EmittingFile(dst);
-                using var writer = dst.Writer();
-                writer.WriteLine(Symbols.header());
-                for(var i=0; i<count; i++)
-                    writer.WriteLine(skip(src,i));
-                Wf.EmittedFile(flow, count);
-            }
-        }
-
-        // public Symbols<IClass> EmitClasses()
-        // {
-        //     var symbols = SymCache<IClass>.get().Index;
-        //     var entries = symbols.View;
-        //     var dst = Db.AsmCatalogPath("xed", FS.file("xed-classes", FS.Csv));
-        //     EmitSymbols(entries, dst);
-        //     return symbols;
-        // }
-
-        public Index<FormDetail> EmitFormDetails()
-        {
-            var dst = Db.AsmCatalogPath("xed", FS.file("xed-forms", FS.Csv));
-            return EmitFormDetails(dst);
-        }
-
-        public Index<FormDetail> EmitFormDetails(FS.FilePath dst)
-        {
-            var records = LoadFormDetails();
-            var src = records.View;
-            var count = src.Length;
-            var flow = Wf.EmittingFile(dst);
-            using var writer = dst.Writer();
-            writer.WriteLine(FormDetail.Header);
-            for(var i=0; i<count; i++)
-                writer.WriteLine(skip(src,i).Format());
-            Wf.EmittedFile(flow, count);
-            return records;
-        }
-
-        public void EmitSources()
-        {
-            var dst = Db.DataSource(FS.file("xed-idata", FS.Txt));
-            var flow = Wf.EmittingFile(dst);
-            var data = Assets.XedInstructionSummary().Utf8();
-            dst.Overwrite(data);
-            Wf.EmittedFile(flow, data.Length);
-        }
-
-        public void EmitSummaries()
-        {
-            var parser = XedSummaryParser.create(Wf.EventSink);
-            var parsed = parser.ParseSummaries();
-            Emit(parsed);
-        }
-
-        public void Emit(ReadOnlySpan<FormInfo> src)
-        {
-            var dst = Db.CatalogTable<FormInfo>("asm", "xed");
-            var flow = Wf.EmittingTable<FormInfo>(dst);
-            var count = Tables.emit(src,dst);
-            Wf.EmittedTable(flow,count);
-        }
-
-        public Index<FormInfo> LoadFormSummaries()
-        {
-            var src = Db.DataSource(FS.file("xed-idata", FS.Txt));
-            var flow = Wf.Running("Loading xed instruction summaries");
-            using var reader = src.Reader();
-            var counter = 0u;
-            var header = memory.alloc<string>(FormInfo.FieldCount);
-            var succeeded = true;
-            var records = root.list<FormInfo>();
-            while(!reader.EndOfStream)
-            {
-                var line = reader.ReadLine(counter);
-
-                if(line.StartsWith(CommentMarker))
-                    continue;
-
-                if(line.IsEmpty)
-                    continue;
-
-                if(counter==0)
-                {
-                    var outcome = ParseSourceHeader(line,header);
-                    if(!outcome)
-                    {
-                        Wf.Error(outcome.Message);
-                        succeeded = false;
-                        break;
-                    }
-                }
-                else
-                {
-                   var dst = new FormInfo();
-                   var outcome = ParseSummary(line, out dst);
-                   if(outcome)
-                   {
-                       records.Add(dst);
-                   }
-                   else
-                   {
-                        Wf.Error(outcome.Message);
-                        succeeded = false;
-                        break;
-                   }
-                }
-
-                counter++;
-            }
-
-            if(succeeded)
-                Wf.Ran(flow, $"Imported {counter} records from {src.ToUri()}");
-
-            return records.ToArray();
         }
 
         static Outcome ParseSummary(TextLine src, out FormInfo dst)

@@ -1037,7 +1037,7 @@ namespace Z0.Asm
 
         void EmitXedSources()
         {
-            Wf.XedCatalog().EmitSources();
+            Wf.XedCatalog().EmitSourceAssets();
         }
 
         void JitApiCatalog()
@@ -1064,7 +1064,7 @@ namespace Z0.Asm
             var parser = XedSummaryParser.create(Wf.EventSink);
             var parsed = parser.ParseSummaries();
             Wf.Status($"Parsed {parsed.Length} summaries");
-            Wf.XedCatalog().Emit(parsed);
+            Wf.XedCatalog().EmitFormSummaries(parsed);
         }
 
         static uint decode(ReadOnlySpan<AsciCharCode> src, Span<char> dst)
@@ -1374,7 +1374,7 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public void Run()
+        public void RunSplitter()
         {
             var splitter = XedFormSplitter.create(Wf);
             var parts = splitter.Run();
@@ -1392,6 +1392,13 @@ namespace Z0.Asm
                 writer.WriteLine(string.Format(rp, part.Index, part.Class));
             }
             Wf.EmittedFile(flow, count);
+
+        }
+
+        public void Run()
+        {
+            var xed = XedWf.create(Wf);
+            xed.Run();
         }
 
         public static void Main(params string[] args)

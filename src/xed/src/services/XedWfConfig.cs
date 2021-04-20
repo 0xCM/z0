@@ -22,12 +22,6 @@ namespace Z0
 
         public FS.FolderPath Target {get;}
 
-        public FS.FolderName ExtensionFolder
-            => FS.folder("extensions");
-
-        public FS.FolderName CategoryFolder
-            => FS.folder("categories");
-
         public FS.FolderName InstructionFolder
             => FS.folder("instructions");
 

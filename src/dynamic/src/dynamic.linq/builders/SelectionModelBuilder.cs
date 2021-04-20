@@ -14,12 +14,11 @@ namespace Z0.Dynamics
     using G = System.Collections.Generic;
 
     using static DynamicFacet;
-    using static z;
 
     public class SelectionModelBuilder
     {
-        public static ModelSpecifier<SelectionModel, T> Select<T>(params SelectionFacet[] facets)
-            => ModelSpecifier.Create<SelectionModel, T>(new ModelQueryProvider<SelectionModel>(BuildModel));
+        public static ModelSpecifier<SelectionModel,T> Select<T>(params SelectionFacet[] facets)
+            => ModelSpecifier.Create<SelectionModel,T>(new ModelQueryProvider<SelectionModel>(BuildModel));
 
         public static SelectionModel CreateModel<T>(IQueryable<T> q, params SelectionFacet[] facets)
             => (q.Provider as IModelQueryProvider).CreateModel<SelectionModel>(q.Expression, facets);
@@ -29,8 +28,8 @@ namespace Z0.Dynamics
             var builder = new SelectionModelBuilder(X);
             var selection = new MemberSelection(builder.selections);
             var order = builder.orders.Count != 0
-                      ? some(new MemberOrdering(builder.orders))
-                      : none<MemberOrdering>();
+                      ? root.some(new MemberOrdering(builder.orders))
+                      : root.none<MemberOrdering>();
 
             root.iter(builder.junctions, j => j.Flatten());
             var model = new SelectionModel(X, selection, order, builder.junctions , facets);

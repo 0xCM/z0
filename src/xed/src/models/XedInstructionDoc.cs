@@ -11,7 +11,7 @@ namespace Z0
 
     using M = XedSourceMarkers;
 
-    public readonly struct XedInstructionDoc : IXedRule<XedInstructionDoc>
+    public readonly struct XedInstructionDoc
     {
         public Index<TextRow> Content {get;}
 
@@ -37,46 +37,16 @@ namespace Z0
             get => !IsEmpty;
         }
 
-        public XedRuleKind RuleKind
-            => XedRuleKind.Instruction;
-
         public int RowCount
             => Content.Length;
 
-        public string Class
-            => XedApi.pattern(this, M.ICLASS);
-
-        public string Category
-            => XedApi.pattern(this, M.CATEGORY);
-
-        public string Extension
-            => XedApi.pattern(this, M.EXTENSION);
-
-        public string IsaSet
-            => XedApi.pattern(this, M.ISA_SET);
-
         public string AttributeText
-            => XedApi.pattern(this, M.ATTRIBUTES);
+            => XedParser.pattern(this, M.ATTRIBUTES);
 
         public string RealOpCode
-            => XedApi.pattern(this, M.REAL_OPCODE);
+            => XedParser.pattern(this, M.REAL_OPCODE);
 
         public string IForm
-            => XedApi.pattern(this, M.IFORM);
-
-        public XedPattern[] Patterns
-            => XedApi.patterns(this);
-
-        [MethodImpl(Inline)]
-        internal bool IsProp(int index, string Name)
-            => this[index].RowText.StartsWith(Name);
-
-        [MethodImpl(Inline)]
-        internal string ExtractProp(TextRow src)
-            => src.RowText.RightOfFirst(M.PROP_DELIMITER).Trim();
-
-        [MethodImpl(Inline)]
-        internal string ExtractProp(int index)
-            => ExtractProp(this[index]);
+            => XedParser.pattern(this, M.IFORM);
     }
 }

@@ -26,12 +26,6 @@ namespace Z0
             Root = paths.TableDir(subject.ToString());
         }
 
-        public void Clear()
-            => Root.Clear();
-
-        public void Clear(FS.FolderName folder)
-            => (FS.dir(Root.Name) + folder).Clear();
-
         public IEnumerable<FS.FilePath> Files()
             => Root.Files(FS.Csv, true);
     }

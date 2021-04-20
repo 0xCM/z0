@@ -9,16 +9,13 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct XedExpr : ITextual, IXedRule<XedExpr>
+    public readonly struct XedExpr : ITextual
     {
         public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
         public XedExpr(string src)
             => Content = src;
-
-        public XedRuleKind RuleKind
-            => XedRuleKind.Expression;
 
 
         [MethodImpl(Inline)]

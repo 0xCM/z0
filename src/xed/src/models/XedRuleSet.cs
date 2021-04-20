@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public struct XedRuleSet : IXedRule<XedRuleSet>
+    public struct XedRuleSet
     {
         public FS.FileName SourceFile;
 
@@ -33,8 +33,5 @@ namespace Z0
             Terms = terms;
             Description =  text.concat("# ", SourceFile, Chars.FSlash, XedSourceMarkers.RuleHeader(Name), ReturnType);
         }
-
-        public XedRuleKind RuleKind
-            => XedRuleKind.Ruleset;
     }
 }

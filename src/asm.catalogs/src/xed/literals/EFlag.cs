@@ -12,27 +12,37 @@ namespace Z0
         {
             None,
 
-            of, //<< overflow flag
+            [Symbol("of", "overflow flag")]
+            of,
 
-            sf, //< sign flag
+            [Symbol("sf", "sign flag")]
+            sf,
 
-            zf, //< zero flag
+            [Symbol("zf", "zero flag")]
+            zf,
 
-            af, //< auxiliary flag
+            [Symbol("af", "auxiliary flag")]
+            af,
 
-            pf, //< parity flag
+            [Symbol("pf", "parity flag")]
+            pf,
 
-            cf, //< carry flag
+            [Symbol("df", "carry flag")]
+            cf,
 
-            df, //< direction flag
+            [Symbol("df", "direction flag")]
+            df,
 
-            vif, //< virtual interrupt flag
+            [Symbol("vif", "virtual interrupt flag")]
+            vif,
 
-            iopl, //< I/O privilege level
+            [Symbol("iopl", "I/O privilege level")]
+            iopl,
 
-            [Symbol("if")]
-            _if, //< interrupt flag
+            [Symbol("if", "interrupt flag")]
+            _if,
 
+            [Symbol("ac", "alignment check")]
             ac, //< alignment check
 
             vm, //< virtual-8086 mode

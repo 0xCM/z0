@@ -62,5 +62,20 @@ namespace Z0
                 sys.@throw("Null arrays are bad");
             return src;
         }
+
+        [MethodImpl(Inline), Op]
+        public static void require(bool invariant, string msg, string caller, string file, int? line)
+        {
+            if(!invariant)
+                sys.@throw($"{msg}: Line {line} in {file}");
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void require(bool invariant, string msg, in AppMsgSource source)
+        {
+            if(!invariant)
+                sys.@throw($"{msg}: {source.Format()}");
+        }
+
     }
 }

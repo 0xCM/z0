@@ -9,13 +9,7 @@ namespace Z0
     [Free]
     public interface ITableArchive : IFileArchive
     {
-        ParseResult<TextDoc> Document(FS.FilePath src)
-            => TextDocs.parse(src);
-
         FS.FilePath TablePath(FS.FileName file)
             => Root + file;
-
-        void Clear()
-            => Root.Clear();
     }
 }

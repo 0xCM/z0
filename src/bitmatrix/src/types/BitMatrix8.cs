@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix8(ulong src)
-            => this.Data = z.bytes(src).Replicate();
+            => Data = bytes(src).Replicate();
 
         public ReadOnlySpan<byte> Bytes
         {

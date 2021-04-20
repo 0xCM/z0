@@ -15,7 +15,6 @@
     <ProjectReference Include="$(Term)" />
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Asci)" />
-    <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(Pipes)" />
     <ProjectReference Include="$(Tables)" />
 

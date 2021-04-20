@@ -51,7 +51,7 @@ namespace Z0
                 }
                 else if(typeof(T).IsEnum)
                 {
-                    if(Enums.parse(typeof(T), src, out object o))
+                    if(ClrEnums.parse(typeof(T), src, out object o))
                     {
                         dst = define(name, (T)o);
                         return true;

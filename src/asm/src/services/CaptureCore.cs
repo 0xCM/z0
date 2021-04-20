@@ -50,7 +50,7 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, address);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.Code, outcome.TermCode);
-                Demands.insist(address, captured.BaseAddress);
+                root.require(address == captured.BaseAddress, () => "Addresses don't match");
                 return captured;
             }
             catch(Exception e)
@@ -68,7 +68,8 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
                 var captured = new ApiCaptureBlock(id, src.Source, summary.Code.Input, summary.Code.Output, outcome.TermCode);
-                Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
+                root.require((MemoryAddress)pSrc == captured.BaseAddress,
+                    () => "Addresses don't match");
                 return captured;
             }
             catch(Exception e)

@@ -12,6 +12,15 @@ namespace Z0
 
     partial struct ClrEnums
     {
+        [MethodImpl(Inline)]
+        public static ClrEnumInfo<E> describe<E>()
+            where E : unmanaged, Enum
+                => default(ClrEnum<E>).Describe();
+
+        [MethodImpl(Inline), Op]
+        public static ClrEnumInfo<Hex8Seq> describe(Hex8Seq rep)
+            => describe<Hex8Seq>();
+
         /// <summary>
         /// Defines a useful representation of an enumeration literal
         /// </summary>

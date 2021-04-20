@@ -42,6 +42,6 @@ namespace Z0
         }
 
         public void AgentTransitioned(AgentTransition data)
-            => AgentTransitioned(2, data.Agent.PartId, data.Agent.HostId, data.Timestamp, z.bytes(data).ToArray());
+            => AgentTransitioned(2, data.Agent.PartId, data.Agent.HostId, data.Timestamp, memory.bytes(data).ToArray());
     }
 }

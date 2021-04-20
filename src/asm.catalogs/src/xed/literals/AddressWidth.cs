@@ -13,15 +13,15 @@ namespace Z0
             None=0,
 
             ///< 16b addressing
-            [Symbol("16b")]
+            [Symbol("16b", "16-bit addressing")]
             W16b=2,
 
             //< 32b addressing
-            [Symbol("32b")]
+            [Symbol("32b", "32-bit addressing")]
             W32b=4,
 
             //< 64b addressing
-            [Symbol("64b")]
+            [Symbol("64b", "64-bit addressing")]
             W64b=8,
         }
     }

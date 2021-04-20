@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     [ApiHost(ApiNames.ClrEnums, true)]
     public readonly partial struct ClrEnums
@@ -16,14 +17,5 @@ namespace Z0
         public static ClrEnum<E> @enum<E>()
             where E : unmanaged, Enum
                 => default;
-
-        [MethodImpl(Inline)]
-        public static ClrEnumInfo<E> describe<E>()
-            where E : unmanaged, Enum
-                => default(ClrEnum<E>).Describe();
-
-        [MethodImpl(Inline), Op]
-        public static ClrEnumInfo<Hex8Seq> describe(Hex8Seq rep)
-            => describe<Hex8Seq>();
     }
 }

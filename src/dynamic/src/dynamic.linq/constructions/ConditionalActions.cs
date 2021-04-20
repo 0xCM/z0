@@ -9,7 +9,7 @@ namespace Z0.Dynamics
     using System.Linq.Expressions;
 
     using static Konst;
-    
+
     /// <summary>
     /// Defines helper methods for working with LINQ expressions
     /// </summary>
@@ -28,7 +28,7 @@ namespace Z0.Dynamics
         /// <param name="x">The source expression</param>
         public static Option<INullityOperator> TryGetNullityOperator(this Expression x)
         {
-            var no = z.none<INullityOperator>();
+            var no = root.none<INullityOperator>();
             var C = (x as BinaryExpression)?.Right as ConstantExpression;
             if (C != null && C.Value == null)
             {
@@ -49,7 +49,7 @@ namespace Z0.Dynamics
         /// <param name="x">The source expression</param>
         public static Option<IComparisonOperator> TryGetComparisonOperator(this Expression x)
         {
-            var no = z.none<IComparisonOperator>();
+            var no = root.none<IComparisonOperator>();
 
             if (x.IsNullityOperator())
                 return no;

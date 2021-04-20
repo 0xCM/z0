@@ -13,7 +13,31 @@ namespace Z0
     [ApiHost]
     public readonly struct Structs
     {
-       const NumericKind Closure = Integers;
+        const NumericKind Closure = Integers;
+
+        /// <summary>
+        /// Determines whether a structural value is 'empty':
+        /// A structural value is *empty* if, when rendered as an array of bytes, each aelement of the array is zero.
+        /// </summary>
+        /// <param name="src">The value to adjudicate</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bool empty2<T>(in T src)
+            where T : struct
+        {
+            var x = memory.bytes(src);
+            var y = memory.bytes(default(T));
+            var length = y.Length;
+
+            if(x.Length != length)
+                return false;
+
+            for(var i=0u; i<length; i++)
+                if(skip(x,i) != 0)
+                    return false;
+
+            return true;
+        }
 
         [MethodImpl(Inline), Op]
         public static Span<byte> edit<T>(in T src)

@@ -47,7 +47,5 @@ namespace Z0
         FS.Files PdbFiles
             => ArchiveFiles().Where(x => x.Is(Pdb)).Array();
 
-        FS.Files JsonDepsFiles
-            => Root.EnumerateFiles(JsonDeps, true).Array();
     }
 }
