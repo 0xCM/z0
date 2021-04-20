@@ -20,5 +20,9 @@ namespace Z0
         [Op]
         public static NasmCatalog NasmCatalog(this IWfRuntime wf)
             => Asm.NasmCatalog.create(wf);
+
+        [Op]
+        public static XedFormSplitter XedFormSplitter(this IWfRuntime wf)
+            => Asm.XedFormSplitter.create(wf);
     }
 }

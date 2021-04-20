@@ -21,20 +21,20 @@ namespace Z0
         [Op]
         public static string format(object data, PrimalCode code)
             => code switch {
-                PK.String => cast<string>(data),
-                PK.C16 => cast<char>(data).ToString(),
-                PK.I8 => hex(cast<sbyte>(data)),
-                PK.U8 => hex(cast<byte>(data)),
-                PK.I16 => hex(cast<short>(data)),
-                PK.U16 => hex(cast<ushort>(data)),
-                PK.I32 => hex(cast<int>(data)),
-                PK.U32 => hex(cast<uint>(data)),
-                PK.I64 => hex(cast<long>(data)),
-                PK.U64 => hex(cast<ulong>(data)),
-                PK.F32 => hex(cast<float>(data)),
-                PK.F64 => hex(cast<double>(data)),
-                PK.F128 => hex(cast<decimal>(data)),
-                PK.U1 => cast<bool>(data).ToString(),
+                PrimalCode.String => cast<string>(data),
+                PrimalCode.C16 => cast<char>(data).ToString(),
+                PrimalCode.I8 => hex(cast<sbyte>(data)),
+                PrimalCode.U8 => hex(cast<byte>(data)),
+                PrimalCode.I16 => hex(cast<short>(data)),
+                PrimalCode.U16 => hex(cast<ushort>(data)),
+                PrimalCode.I32 => hex(cast<int>(data)),
+                PrimalCode.U32 => hex(cast<uint>(data)),
+                PrimalCode.I64 => hex(cast<long>(data)),
+                PrimalCode.U64 => hex(cast<ulong>(data)),
+                PrimalCode.F32 => hex(cast<float>(data)),
+                PrimalCode.F64 => hex(cast<double>(data)),
+                PrimalCode.F128 => hex(cast<decimal>(data)),
+                PrimalCode.U1 => cast<bool>(data).ToString(),
                 _ =>  $"{code} unrecognized"
             };
 

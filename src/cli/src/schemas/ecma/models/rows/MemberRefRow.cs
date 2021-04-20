@@ -6,6 +6,8 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
+    using static Relations;
+
     public struct MemberRefRow : IRecord<MemberRefRow>
     {
         public RowKey Key;

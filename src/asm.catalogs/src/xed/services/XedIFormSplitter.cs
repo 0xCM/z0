@@ -11,29 +11,10 @@ namespace Z0.Asm
     using static memory;
     using static XedModels;
 
-    public struct IFormPartition
+    public ref struct XedFormSplitter
     {
-        public ushort Index;
-
-        public IForm Source;
-
-        public Index<string> Parts;
-
-        public IClass Class;
-
-        public bool Complete;
-
-        public ushort PartCount
-        {
-            [MethodImpl(Inline)]
-            get => (ushort)Parts.Count;
-        }
-    }
-
-    public ref struct XedIFormSplitter
-    {
-        public static XedIFormSplitter create(IWfRuntime sink)
-            => new XedIFormSplitter(sink);
+        public static XedFormSplitter create(IWfRuntime sink)
+            => new XedFormSplitter(sink);
 
         readonly IWfRuntime Wf;
 
@@ -69,9 +50,9 @@ namespace Z0.Asm
 
         readonly Symbols<RegClass> RegClasses;
 
-        readonly Span<IFormPartition> Partitions;
+        readonly Span<FormParition> Partitions;
 
-        public XedIFormSplitter(IWfRuntime wf)
+        public XedFormSplitter(IWfRuntime wf)
         {
             Attributes = Symbols.cache<AttributeKind>();
             Categories = Symbols.cache<Category>();
@@ -89,11 +70,11 @@ namespace Z0.Asm
             AddressWidths = Symbols.cache<AddressWidth>();
             OpWidths = Symbols.cache<OperandWidth>();
             EncodingGroups = Symbols.cache<EncodingGroup>();
-            Partitions = alloc<IFormPartition>(Source.Count);
+            Partitions = alloc<FormParition>(Source.Count);
             Wf = wf;
         }
 
-        public void Run()
+        public ReadOnlySpan<FormParition> Run()
         {
             var count = Source.Count;
             var flow = Wf.Running(Msg.PartitioningIForms.Format(count));
@@ -101,6 +82,7 @@ namespace Z0.Asm
             for(ushort i=0; i<count; i++)
                 Partition(i, skip(forms,i));
             Wf.Ran(flow, Msg.PartitionedIForms.Format(count));
+            return Partitions;
         }
 
         void Partition(ushort index, IForm src)
@@ -121,6 +103,10 @@ namespace Z0.Asm
                         dst.Complete = false;
                         continue;
                     }
+                }
+                else
+                {
+                    Complete(ref dst);
                 }
             }
         }
@@ -146,7 +132,7 @@ namespace Z0.Asm
         bool Match(SymExpr src, out RegId dst)
             => Registers.MatchKind(src, out dst);
 
-        void Complete(ref IFormPartition partition)
+        void Complete(ref FormParition partition)
         {
             var count = partition.PartCount;
             if(count == 1)
@@ -158,7 +144,6 @@ namespace Z0.Asm
                 {
 
                 }
-
             }
         }
 

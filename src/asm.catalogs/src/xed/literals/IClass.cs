@@ -11,9 +11,13 @@ namespace Z0
         public enum IClass : ushort
         {
             None,
+
             AAA,
+
             AAD,
+
             AAM,
+
             AAS,
             ADC,
             ADCX,

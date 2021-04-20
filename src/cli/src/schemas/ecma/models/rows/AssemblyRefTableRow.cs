@@ -9,6 +9,8 @@ namespace Z0.Schemas.Ecma
 
     using R = AssemblyRefTableRow;
 
+    using static Relations;
+
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AssemblyRefTableRow : IRecord<R>
     {

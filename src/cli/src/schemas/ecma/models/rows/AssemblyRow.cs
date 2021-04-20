@@ -7,6 +7,8 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
+    using static Relations;
+
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AssemblyRow : IRecord<AssemblyRow>
     {

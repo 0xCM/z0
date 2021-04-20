@@ -120,7 +120,7 @@ namespace Z0
             using var writer = target.Writer();
             writer.Write(utf);
             Wf.EmittedFile(flow,1);
-            return Arrows.link(src,target);
+            return Relations.link(src,target);
         }
     }
 

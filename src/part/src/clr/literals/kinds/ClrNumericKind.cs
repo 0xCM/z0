@@ -14,58 +14,58 @@ namespace Z0
         None = 0,
 
         /// <summary>
-        /// An alias for <see cref='PK.U8'/>
+        /// An alias for <see cref='ClrPrimalKind.U8'/>
         /// </summary>
-        U8 = PK.U8,
+        U8 = ClrPrimalKind.U8,
 
         /// <summary>
-        /// An alias for <see cref='PK.U16'/>
+        /// An alias for <see cref='ClrPrimalKind.U16'/>
         /// </summary>
-        U16 = PK.U16,
+        U16 = ClrPrimalKind.U16,
 
         /// <summary>
-        /// An alias for <see cref='PK.U32'/>
+        /// An alias for <see cref='ClrPrimalKind.U32'/>
         /// </summary>
-        U32 = PK.U32,
+        U32 = ClrPrimalKind.U32,
 
         /// <summary>
-        /// An alias for <see cref='PK.U64'/>
+        /// An alias for <see cref='ClrPrimalKind.U64'/>
         /// </summary>
-        U64 = PK.U64,
+        U64 = ClrPrimalKind.U64,
 
         /// <summary>
-        /// An alias for <see cref='PK.I8'/>
+        /// An alias for <see cref='ClrPrimalKind.I8'/>
         /// </summary>
-        I8 = PK.I8,
+        I8 = ClrPrimalKind.I8,
 
         /// <summary>
-        /// An alias for <see cref='PK.I16'/>
+        /// An alias for <see cref='ClrPrimalKind.I16'/>
         /// </summary>
-        I16 = PK.I16,
+        I16 = ClrPrimalKind.I16,
 
         /// <summary>
-        /// An alias for <see cref='PK.I32'/>
+        /// An alias for <see cref='ClrPrimalKind.I32'/>
         /// </summary>
-        I32 =  PK.I32,
+        I32 = ClrPrimalKind.I32,
 
         /// <summary>
-        /// An alias for <see cref='PK.I64'/>
+        /// An alias for <see cref='ClrPrimalKind.I64'/>
         /// </summary>
-        I64 = PK.I64,
+        I64 = ClrPrimalKind.I64,
 
         /// <summary>
-        /// An alias for <see cref='PK.F32'/>
+        /// An alias for <see cref='ClrPrimalKind.F32'/>
         /// </summary>
-        F32 = PK.F32,
+        F32 = ClrPrimalKind.F32,
 
         /// <summary>
-        /// An alias for <see cref='PK.F64'/>
+        /// An alias for <see cref='ClrPrimalKind.F64'/>
         /// </summary>
-        F64 = PK.F64,
+        F64 = ClrPrimalKind.F64,
 
         /// <summary>
-        /// An alias for <see cref='PK.F128'/>
+        /// An alias for <see cref='ClrPrimalKind.F128'/>
         /// </summary>
-        F128 = PK.F128,
+        F128 = ClrPrimalKind.F128,
     }
 }

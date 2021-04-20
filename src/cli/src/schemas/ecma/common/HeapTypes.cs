@@ -8,6 +8,7 @@ namespace Z0.Schemas.Ecma
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static Relations;
 
     /// <summary>
     /// Specifies a sequence of bytes, otherwise known as a BLOB

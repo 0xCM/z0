@@ -1335,7 +1335,7 @@ namespace Z0.Asm
 
         }
 
-        public void Run()
+        void CheckSettingsParser()
         {
             var a = "A:603";
             Settings.parse(a, out Setting<ushort> _a);
@@ -1346,61 +1346,52 @@ namespace Z0.Asm
             Settings.parse(b, out Setting<bool> _b);
             Wf.Row(_b);
 
+        }
 
-            //CheckV();
-            //EmitHostStatements();
-            //LoadCapturedCil();
-            //CheckMemoryLookup();
+        const byte FieldCount = 2;
 
-            //Wf.ApiHex().EmitHexPack(false);
-            // var packed = HexPack(true).View;
-            // var dst = Db.AppLog("api",FS.ext("xpack"));
-            // HexPack(dst,true);
+        public static ReadOnlySpan<byte> SlotWidths
+            => new byte[FieldCount]{8,32};
 
-            // var emitting = Wf.EmittingFile(dst);
-            // using var writer = dst.Writer();
-            // var count = packed.Length;
-            // for(var i=0; i<count; i++)
-            // {
-            //     writer.WriteLine(skip(packed,i).Format());
-            // }
-            // Wf.EmittedFile(emitting, count);
+        public static byte labels(Span<string> dst)
+        {
+            var j=z8;
+            seek(dst,j++) = "Index";
+            seek(dst,j++) = "IClass";
+            return j;
+        }
 
-            // var source = Rng.@default();
-            // CheckMullo(source);
+        public static string pattern()
+        {
+            var sbuffer = span<char>(1024);
+            return text.format(slice(sbuffer, 0, text.slot(SlotWidths, Chars.Pipe, sbuffer)));
+        }
 
+        public static Index<string> headers()
+        {
+            var buffer = alloc<string>(FieldCount);
+            labels(buffer);
+            return buffer;
+        }
 
-            //CaptureSelectedRoutines();
+        public void Run()
+        {
+            var splitter = XedFormSplitter.create(Wf);
+            var parts = splitter.Run();
+            var count = parts.Length;
+            var dst = Db.AppLog("xed.forms.partitions", FS.Csv);
+            var flow = Wf.EmittingFile(dst);
+            var sbuffer = span<char>(1024);
+            var rp = pattern();
 
-            // var a0 = Prototypes.Calls.call(n0);
-            // var a1 = Prototypes.Calls.call(n1);
-            // var a2 = Prototypes.Calls.call(n2);
-            // var a3 = Prototypes.Calls.call(n3);
-
-            //EmitXedCatalog();
-
-            // JitApiCatalog();
-            // MapMemory();
-            //AsmExprCases.create(Wf).Create();
-
-            //var script = CreateXedCase(AsmOc.mov_r64_imm64);
-
-            // var tool = Wf.NasmTool();
-            // tool.EmitInstructionAssets();
-
-            // var inxs = ParseNasmInstructions();
-            // ShowRecords(inxs.View);
-
-            //ProccessCultFiles();
-            //Wf.AsmDb().ShowSourceDocs();
-            // var cases = AsmExprCases.create(Wf);
-            // cases.Run(AsmSigKind.and_r8_r8);
-            //ProccessCultFiles();
-
-            //CaptureSelectedRoutines();
-            //Wf.AsmCodeGenerator().GenerateModelsInPlace();
-            //cases.Run(AsmSigKind.mov_r64_imm64);
-
+            using var writer = dst.Writer();
+            writer.WriteLine(string.Format(rp, headers()));
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(parts,i);
+                writer.WriteLine(string.Format(rp, part.Index, part.Class));
+            }
+            Wf.EmittedFile(flow, count);
         }
 
         public static void Main(params string[] args)

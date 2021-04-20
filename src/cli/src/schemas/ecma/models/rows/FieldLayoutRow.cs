@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Ecma
 {
+    using static Relations;
+
     public struct FieldLayoutRow : IRecord<FieldLayoutRow>
     {
         public RowKey Key;
