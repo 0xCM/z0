@@ -5,6 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static memory;
+    using static Part;
 
     partial class XTend
     {
@@ -14,7 +18,7 @@ namespace Z0
         /// <param name="a">The left span</param>
         /// <param name="b">The right span</param>
         /// <typeparam name="T">The value type</typeparam>
-        [Op, Closures(Closure)]
+        [MethodImpl(Inline),  Op, Closures(Closure)]
         public static bool ValuesEqual<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : unmanaged, IEquatable<T>
         {
@@ -23,7 +27,7 @@ namespace Z0
                 return false;
 
             for(var i=0; i<count; i++)
-                if(!a[i].Equals(b[i]))
+                if(! skip(a,i).Equals(skip(b,i)))
                     return false;
             return true;
         }
@@ -31,12 +35,12 @@ namespace Z0
         /// <summary>
         /// Evaluates whether two spans have identical content
         /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
+        /// <param name="a">The left span</param>
+        /// <param name="b">The right span</param>
         /// <typeparam name="T">The value type</typeparam>
-        [Op, Closures(Closure)]
-        public static bool ValuesEqual<T>(this Span<T> lhs, ReadOnlySpan<T> rhs)
+        [MethodImpl(Inline),  Op, Closures(Closure)]
+        public static bool ValuesEqual<T>(this Span<T> a, ReadOnlySpan<T> b)
             where T : unmanaged, IEquatable<T>
-                => lhs.ReadOnly().ValuesEqual(rhs);
+                => a.ReadOnly().ValuesEqual(b);
     }
 }

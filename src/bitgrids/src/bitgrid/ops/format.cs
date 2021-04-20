@@ -17,7 +17,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Content.Bytes.FormatMatrixBits(z.nat32i<N>(), (int)NatCalc.mul<M,N>(), false);
+                => src.Content.Bytes.FormatMatrixBits(nat32i<N>(), (int)NatCalc.mul<M,N>(), false);
 
         public static string format<T>(BitGrid<T> src, bool showrow = false, int? maxbits = null)
             where T : unmanaged
@@ -94,7 +94,7 @@ namespace Z0
         static string format<M,N>(ushort data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => bytes(data).FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => bytes(data).FormatMatrixBits(nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N>(uint data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat

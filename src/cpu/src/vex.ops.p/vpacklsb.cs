@@ -10,24 +10,22 @@ namespace Z0
 
     using static Part;
 
-    partial struct gcpu
+    partial struct cpu
     {
         /// <summary>
-        /// Packs 16 1-bit values taken from the most significant bit of each source byte
+        /// Packs 16 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ushort vpackmsb<T>(Vector128<T> src)
-            where T : unmanaged
-                => vmask16u(src);
+        [MethodImpl(Inline), Op]
+        public static ushort vpacklsb(Vector128<byte> src)
+            => vmovemask(src, 0);
 
         /// <summary>
-        /// Packs 32 1-bit values taken from the most significant bit of each source byte
+        /// Packs 16 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint vpackmsb<T>(Vector256<T> src)
-            where T : unmanaged
-                => vmask32u(src);
+        [MethodImpl(Inline), Op]
+        public static uint vpacklsb(Vector256<byte> src)
+            => vmovemask(src, 0);
     }
 }

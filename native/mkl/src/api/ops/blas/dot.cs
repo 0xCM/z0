@@ -6,8 +6,8 @@ namespace Z0.Mkl
 {
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst;
+
+    using static Part;
 
     partial class mkl
     {
@@ -55,7 +55,7 @@ namespace Z0.Mkl
         /// <param name="X">The left vector</param>
         /// <param name="Y">The right vector</param>
         [MethodImpl(Inline)]
-        static float dot(Span<float> X, Span<float> Y)        
+        static float dot(Span<float> X, Span<float> Y)
             => CBLAS.cblas_sdot(X.Length, ref head(X), 1, ref head(Y), 1);
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0.Mkl
         /// <param name="X">The left vector</param>
         /// <param name="Y">The right vector</param>
         [MethodImpl(Inline)]
-        static double dot(Span<double> X, Span<double> Y)        
+        static double dot(Span<double> X, Span<double> Y)
             => CBLAS.cblas_ddot(X.Length, ref head(X), 1, ref head(Y), 1);
     }
 }

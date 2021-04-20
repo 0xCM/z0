@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitGrid64<N4,N16,ulong> transpose2(BitGrid64<N16,N4,ulong> A)
         {
-            const ulong C =0b0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001;
+            const ulong C = 0b0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001;
             var r = A.RowCount;
             var c = A.ColCount;
             var R = math.pow2m1(r);
@@ -74,7 +74,7 @@ namespace Z0
             return gT;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitGrid256<N16,N16,ushort> transpose(in BitGrid256<N16,N16,ushort> g)
         {
             var gT = default(Vector256<ushort>);

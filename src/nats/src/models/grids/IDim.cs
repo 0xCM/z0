@@ -32,6 +32,17 @@ namespace Z0
         ulong I {get;}
     }
 
+    public interface IDim2<T> : ITextual
+        where T : unmanaged
+    {
+        T I {get;}
+
+        T J {get;}
+
+        string ITextual.Format()
+            => $"{I}x{J}";
+    }
+
     public interface IDim2 : IDim
     {
         ulong I {get;}

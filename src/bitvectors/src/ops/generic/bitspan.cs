@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial class BitVector
     {
@@ -26,6 +27,6 @@ namespace Z0
         public static BitSpan32 bitspan<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitSpans32.from(x.Data, z.nat32i<N>());
+                => BitSpans32.from(x.Data, nat32i<N>());
     }
 }

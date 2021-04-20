@@ -81,7 +81,7 @@ namespace Z0
             get => (int)NatCalc.mul<M,N>();
         }
 
-        public Bit32 this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => BitGrid.readbit(ColCount, in Head, row, col);

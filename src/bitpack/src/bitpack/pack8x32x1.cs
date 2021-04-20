@@ -22,7 +22,7 @@ namespace Z0
         public static ref byte pack8x32x1(in uint src, ref byte dst)
         {
             var v0 = vload(w256, src);
-            dst = (byte)gcpu.vpacklsb(vpack128x8u(v0));
+            dst = (byte)cpu.vpacklsb(vpack128x8u(v0));
             return ref dst;
         }
 
@@ -35,7 +35,7 @@ namespace Z0
         public static byte pack8x32x1(Span<uint> src)
         {
             var v0 = vload(w256, first(src));
-            return (byte)gcpu.vpacklsb(vpack128x8u(v0));
+            return (byte)cpu.vpacklsb(vpack128x8u(v0));
         }
 
         /// <summary>

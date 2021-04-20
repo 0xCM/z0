@@ -19,6 +19,5 @@ namespace Z0.Asm
 
             Imm = AsmOpClass.Imm,
         }
-
     }
 }

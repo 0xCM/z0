@@ -23,7 +23,7 @@ namespace Z0
         {
             var v0 = vload(w256, skip(src, 0*8));
             var v1 = vload(w256, skip(src, 1*8));
-            dst = gcpu.vpacklsb(vpack128x8u(v0, v1));
+            dst = cpu.vpacklsb(vpack128x8u(v0, v1));
             return ref dst;
         }
 

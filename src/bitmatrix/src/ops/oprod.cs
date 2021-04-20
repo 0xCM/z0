@@ -36,7 +36,7 @@ namespace Z0
             var rhs = (T)y;
             ref var href = ref dst.Head;
             for(byte i=0; i<order; i++)
-                z.seek(href, i) = x[i] ? rhs : default;
+                memory.seek(href, i) = x[i] ? rhs : default;
             return ref dst;
         }
 

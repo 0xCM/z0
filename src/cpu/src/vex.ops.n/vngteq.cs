@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct cpu
     {
-       /// <summary>
+        /// <summary>
         /// __m128 _mm_cmpnge_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(1)
         /// </summary>
         /// <param name="x">The left vector</param>

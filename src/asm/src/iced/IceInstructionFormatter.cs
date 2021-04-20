@@ -61,7 +61,7 @@ namespace Z0.Asm
             {
                 ref readonly var instruction = ref src[(int)i];
                 MasmFormatter.Format(in instruction, output);
-                z.seek(dst, i) = sb.ToString();
+                memory.seek(dst, i) = sb.ToString();
                 sb.Clear();
             }
             return dst;

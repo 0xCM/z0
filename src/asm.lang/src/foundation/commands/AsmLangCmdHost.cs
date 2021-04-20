@@ -17,14 +17,6 @@ namespace Z0.Asm
         {
         }
 
-        // [Action(K.ShowAllSymbols)]
-        // void ShowSigSymbols()
-        // {
-        //     //ShowMnemonicSymbols();
-        //     ShowEFlagSymbols();
-        //     ShowModeSymbols();
-        // }
-
         [Action(K.ShowRegBits)]
         void ShowRegBits()
         {

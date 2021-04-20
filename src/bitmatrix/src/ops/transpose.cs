@@ -72,7 +72,7 @@ namespace Z0
                 src >>= 1;
             }
 
-            z.uint64(ref Z.Head) = data;
+            uint64(ref Z.Head) = data;
         }
 
         [MethodImpl(Inline)]
@@ -95,7 +95,7 @@ namespace Z0
             var data = 0ul;
             for(var i=0; i<width; i++)
                 data |= ((ulong)A.Col(i) << i*width);
-            memory.uint64(ref Z.Head) = data;
+            uint64(ref Z.Head) = data;
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
             data = data ^ t ^ (t << 14);
             t = (data ^ (data >> 28)) & 0x00000000F0F0F0F0ul;
             data = data ^ t ^ (t << 28);
-            z.uint64(ref Z.Head) = data;
+            uint64(ref Z.Head) = data;
         }
 
         public static BitMatrix16 transpose(in BitMatrix16 A)

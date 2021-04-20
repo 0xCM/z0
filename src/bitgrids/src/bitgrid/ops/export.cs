@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 

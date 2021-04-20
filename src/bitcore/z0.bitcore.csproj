@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(BitPack)" />
+    <ProjectReference Include="$(BitNumbers)" />
 
   </ItemGroup>
 

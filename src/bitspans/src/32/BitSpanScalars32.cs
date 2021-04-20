@@ -141,7 +141,6 @@ namespace Z0
             return ref dst;
         }
 
-
         [MethodImpl(Inline), Op]
         public static Span<uint> extract(in BitSpan32 src, int offset, int count)
            => slice(src.Edit,offset, count).Recover<Bit32,uint>();
@@ -150,7 +149,7 @@ namespace Z0
         public static byte extract8(in BitSpan32 src, int offset)
         {
             ref readonly var unpacked = ref first(extract(src, offset, 8));
-            return (byte)gcpu.vpacklsb(vpack128x8u(vload(w256, unpacked)));
+            return (byte)cpu.vpacklsb(vpack128x8u(vload(w256, unpacked)));
         }
 
         [MethodImpl(Inline), Op]

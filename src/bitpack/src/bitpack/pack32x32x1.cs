@@ -29,7 +29,7 @@ namespace Z0
             v1 = vload(w256, skip(src,3*8));
             var y = vpack256x16u(v0,v1);
 
-            dst = gcpu.vpacklsb(vpack256x8u(x, y));
+            dst = cpu.vpacklsb(vpack256x8u(x, y));
             return ref dst;
         }
 

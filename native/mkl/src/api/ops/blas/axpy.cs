@@ -6,8 +6,8 @@ namespace Z0.Mkl
 {
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class mkl
     {

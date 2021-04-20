@@ -60,6 +60,6 @@ namespace Z0
         public static BitVector<N,T> natural<N,T>(BitString src, N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => packseq(src.Slice(0, z.nat32i(n)).BitSeq, out T _);
+                => packseq(src.Slice(0, nat32i(n)).BitSeq, out T _);
     }
 }

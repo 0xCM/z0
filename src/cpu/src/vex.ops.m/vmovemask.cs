@@ -35,19 +35,6 @@ namespace Z0
             => (ushort)MoveMask(src);
 
         /// <summary>
-        /// Creates a 32-bit mask from each byte at a byte-relative bit index
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline), MoveMask]
-        public static ushort vmovemask(Vector128<byte> src, [Imm] byte index)
-            => vmovemask(v8u(vsll(v64u(src), (byte)(7 - index))));
-
-        [MethodImpl(Inline), MoveMask]
-        public static ushort vmovemask(Vector128<byte> src, byte offset, [Imm] byte index)
-            => vmovemask(vsllx(src, offset), index);
-
-        /// <summary>
         /// int _mm_movemask_ps (__m128 a) MOVMSKPS reg, xmm<
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
@@ -91,19 +78,6 @@ namespace Z0
             => (uint)MoveMask(v8u(src));
 
         /// <summary>
-        /// Creates a 32-bit mask from each byte at a byte-relative bit index
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline), MoveMask]
-        public static uint vmovemask(Vector256<byte> src, [Imm] byte index)
-            => vmovemask(v8u(vsll(v64u(src), (byte)(7 - index))));
-
-        [MethodImpl(Inline), MoveMask]
-        public static uint vmovemask(Vector256<byte> src, [Imm] byte offset, [Imm] byte index)
-            => vmovemask(vsllx(src, offset), index);
-
-        /// <summary>
         /// int _mm256_movemask_ps (__m256 a) VMOVMSKPS reg, ymm
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
@@ -120,5 +94,33 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int vmovemask(Vector256<double> src)
             => MoveMask(src);
+
+        /// <summary>
+        /// Creates a 32-bit mask from each byte at a byte-relative bit index
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">An integer between 0 and 7</param>
+        [MethodImpl(Inline), MoveMask]
+        public static ushort vmovemask(Vector128<byte> src, [Imm] byte index)
+            => vmovemask(v8u(vsll(v64u(src), (byte)(7 - index))));
+
+        /// <summary>
+        /// Creates a 32-bit mask from each byte at a byte-relative bit index
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">An integer between 0 and 7</param>
+        [MethodImpl(Inline), MoveMask]
+        public static uint vmovemask(Vector256<byte> src, [Imm] byte index)
+            => vmovemask(v8u(vsll(v64u(src), (byte)(7 - index))));
+
+        [MethodImpl(Inline), MoveMask]
+        public static ushort vmovemask(Vector128<byte> src, byte offset, [Imm] byte index)
+            => vmovemask(vsllx(src, offset), index);
+
+        [MethodImpl(Inline), MoveMask]
+        public static uint vmovemask(Vector256<byte> src, [Imm] byte offset, [Imm] byte index)
+            => vmovemask(vsllx(src, offset), index);
+
+
     }
 }

@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// mkl + u = Unsafe, Unsized, Unchecked and Unblocked

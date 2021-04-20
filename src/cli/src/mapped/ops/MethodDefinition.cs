@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class CliMemoryMap
     {

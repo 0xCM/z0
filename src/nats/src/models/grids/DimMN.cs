@@ -75,7 +75,19 @@ namespace Z0
             => (TypeNats.value<M>(), TypeNats.value<N>());
 
         [MethodImpl(Inline)]
-        public static implicit operator DimK(Dim<M,N> x)
-            => new DimK(x.I, x.J);
+        public static implicit operator Dim2<byte>(Dim<M,N> src)
+            => new Dim2<byte>((byte)src.I, (byte)src.J);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Dim2<ushort>(Dim<M,N> src)
+            => new Dim2<ushort>((ushort)src.I, (ushort)src.J);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Dim2<uint>(Dim<M,N> src)
+            => new Dim2<uint>((uint)src.I, (uint)src.J);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Dim2<ulong>(Dim<M,N> src)
+            => new Dim2<ulong>(src.I, src.J);
     }
 }

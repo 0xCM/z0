@@ -6,15 +6,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(External)" />
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(BitMasks)" />
-    <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(Term)" />
-    <ProjectReference Include="$(BitNumbers)" />
-    <ProjectReference Include="$(Asci)" />
+    <!-- <ProjectReference Include="$(BitNumbers)" /> -->
     <ProjectReference Include="$(Pipes)" />
     <ProjectReference Include="$(Tables)" />
 

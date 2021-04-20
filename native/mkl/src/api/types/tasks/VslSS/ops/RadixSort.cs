@@ -7,8 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
 
     using static VslSSTaskParameter;
     using static VslSSComputeRoutine;
@@ -23,7 +23,7 @@ namespace Z0.Mkl
         /// <param name="dim">The common dimension of each vector</param>
         /// <param name="dst">The buffer that will receive the sorted vectors</param>
         [MethodImpl(Inline)]
-        public static Observations<float> RadixSort(this Observations<float> samples, Observations<float> dst)        
+        public static Observations<float> RadixSort(this Observations<float> samples, Observations<float> dst)
             => samples.ApplyRadixSort(dst);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0.Mkl
         /// <param name="dim">The common dimension of each vector</param>
         /// <param name="dst">The buffer that will receive the sorted vectors</param>
         [MethodImpl(Inline)]
-        public static Observations<double> RadixSort(this Observations<double> samples, Observations<double> dst)        
+        public static Observations<double> RadixSort(this Observations<double> samples, Observations<double> dst)
             => samples.ApplyRadixSort(dst);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0.Mkl
         /// <param name="samples">The observation vectors in row-major format</param>
         /// <param name="dim">The common dimension of each vector</param>
         [MethodImpl(Inline)]
-        public static Observations<float> RadixSort(this Observations<float> samples)        
+        public static Observations<float> RadixSort(this Observations<float> samples)
             => samples.ApplyRadixSort(Observations.Alloc<float>(samples.Dim, samples.Count));
 
         /// <summary>
@@ -51,10 +51,10 @@ namespace Z0.Mkl
         /// <param name="samples">The observation vectors in row-major format</param>
         /// <param name="dim">The common dimension of each vector</param>
         [MethodImpl(Inline)]
-        public static Span<double> RadixSort(this Observations<double> samples)        
+        public static Span<double> RadixSort(this Observations<double> samples)
             => samples.ApplyRadixSort(Observations.Alloc<double>(samples.Dim, samples.Count));
 
-         static unsafe Observations<T> ApplyRadixSort<T>(this Observations<T> samples, Observations<T> dst)        
+         static unsafe Observations<T> ApplyRadixSort<T>(this Observations<T> samples, Observations<T> dst)
             where T : unmanaged
         {
             var dim = samples.Dim;
@@ -64,14 +64,14 @@ namespace Z0.Mkl
             var taskPtr = IntPtr.Zero;
 
             if(typeof(T) == typeof(float))
-                VSL.vslsSSNewTask(ref taskPtr, ref dim, ref sampleCount, ref mformat, 
+                VSL.vslsSSNewTask(ref taskPtr, ref dim, ref sampleCount, ref mformat,
                     ref MemoryMarshal.Cast<T,float>(samples)[0]).AutoThrow();
             else if(typeof(T) == typeof(double))
-                VSL.vsldSSNewTask(ref taskPtr, ref dim, ref sampleCount, ref mformat, 
+                VSL.vsldSSNewTask(ref taskPtr, ref dim, ref sampleCount, ref mformat,
                     ref MemoryMarshal.Cast<T,double>(samples)[0]).AutoThrow();
             else
                 throw Unsupported.define<T>();
-            
+
             using var handle = VslSSTaskHandle.Wrap<T>(taskPtr);
             handle.Set(VSL_SS_ED_OBSERV_STORAGE, ref iStorage);
             handle.Set(VSL_SS_ED_SORTED_OBSERV, ref dst[0]);

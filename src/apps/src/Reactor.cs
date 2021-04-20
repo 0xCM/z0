@@ -65,13 +65,6 @@ namespace Z0
         public void ShowSupported()
             => root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
 
-        void EmitProcessDump()
-        {
-            Wf.Status("Emitting dump");
-            var dst = FS.path(@"k:\dumps\run\run.dmp");
-            dst.Delete();
-            DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
-        }
 
         void Run(in ShowConfigCmd cmd)
         {

@@ -19,16 +19,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x)
-                => gcpu.vmask16u(x);
+                => cpu.vmovemask(cpu.v8u(x));
         }
 
         public readonly struct TakeMask256<T> : ISVUnaryScalarFunc256<T,uint>
             where T : unmanaged
         {
-
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x)
-                => gcpu.vmask32u(x);
+                => cpu.vmovemask(cpu.v8u(x));
         }
     }
 }

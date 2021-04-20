@@ -6,8 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_getrf : t_mkl<t_getrf>
     {

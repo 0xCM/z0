@@ -10,7 +10,7 @@ namespace Z0.Mkl
     using System.Collections;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     abstract class Sampler<T,S> : IRngSampler<T>
         where T : unmanaged

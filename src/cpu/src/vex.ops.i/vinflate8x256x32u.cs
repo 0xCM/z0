@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// VPMOVZXBD ymm, m64
         /// 8x8u -> 8x32u
-        /// Zero extends 8 packed 8-bit integers in the low 8 bytes of xmm2/m64 to 8 packed 32-bit integers in ymm1
+        /// Zero extends 8 8-bit integers to 8 32-bit integers in ymm1
         /// </summary>
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]

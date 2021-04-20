@@ -145,7 +145,6 @@ namespace Z0.Asm
         public static string format(in CallRel32 src)
             => string.Format("{0}:{1} -> {2}", src.ClientAddress, src.TargetDx, src.TargetAddress);
 
-
         public void RenderRows(AsmMnemonicCode code, FS.FilePath dst)
         {
             var rows = @readonly(Wf.AsmRowPipe().LoadAsmRows(code).OrderBy(x => x.Statement).Array());

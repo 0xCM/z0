@@ -14,6 +14,15 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
+        /// Distributes each bit of the source to a specified bit of each byte in a 128-bit target vector
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="index">The byte-relative bit position index in the range [0,7]</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<byte> vmask128(ushort src, byte index)
+            => vinflate128x8u(src, index);
+
+        /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte in a 128-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>

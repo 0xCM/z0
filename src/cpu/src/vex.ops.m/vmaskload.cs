@@ -78,7 +78,6 @@ namespace Z0
         public static unsafe Vector256<int> vmaskload(in int src, Vector256<int> mask)
             => MaskLoad(gptr(src),mask);
 
-
         /// <summary>
         /// __m256i _mm256_maskload_epi32 (int const* mem_addr, __m256i mask) VPMASKMOVD ymm, ymm, m256
         /// </summary>

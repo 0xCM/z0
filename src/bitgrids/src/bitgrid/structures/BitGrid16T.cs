@@ -69,7 +69,6 @@ namespace Z0
             get => ref Cell(index);
         }
 
-
         /// <summary>
         /// Reads/writes an index-identified cell
         /// </summary>

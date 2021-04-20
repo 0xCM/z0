@@ -16,7 +16,7 @@ namespace Z0
         /// Enumerates the valid dimensions for a 16-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dims(N8 w)
+        public static IEnumerable<Dim2<byte>> dims(N8 w)
         {
             yield return dim(n1,n8);
             yield return dim(n8,n1);
@@ -28,7 +28,7 @@ namespace Z0
         /// Enumerates the valid dimensions for a 16-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dims(N16 w)
+        public static IEnumerable<Dim2<byte>> dims(N16 w)
         {
             yield return dim(n1, n16);
             yield return dim(n16 ,n1);
@@ -41,7 +41,7 @@ namespace Z0
         /// Enumerates the valid dimensions for a 32-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dims(N32 w)
+        public static IEnumerable<Dim2<byte>> dims(N32 w)
         {
             yield return dim(n1, n32);
             yield return dim(n32, n1);
@@ -55,7 +55,7 @@ namespace Z0
         /// Enumerates the valid dimensions for a 64-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dims(N64 w)
+        public static IEnumerable<Dim2<byte>> dims(N64 w)
         {
             yield return dim(n1,n64);
             yield return dim(n64,n1);
@@ -70,7 +70,7 @@ namespace Z0
         /// Enumerates the valid dimensions for a 128-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dims(N128 w)
+        public static IEnumerable<Dim2<byte>> dims(N128 w)
         {
             yield return dim(n1,n128);
             yield return dim(n128,n1);
@@ -86,7 +86,7 @@ namespace Z0
         /// Enumerates the valid dimensions for a 256-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dims(N256 w)
+        public static IEnumerable<Dim2<ushort>> dims(N256 w)
         {
             yield return dim(n1,n256);
             yield return dim(n256,n1);

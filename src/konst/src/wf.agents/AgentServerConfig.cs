@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// A descriptive name
         /// </summary>
-        public readonly asci32 ServerName;
+        public readonly string ServerName;
 
         /// <summary>
         /// The CPU core to which the server is assigned

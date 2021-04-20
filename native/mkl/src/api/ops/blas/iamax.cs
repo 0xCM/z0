@@ -6,8 +6,8 @@ namespace Z0.Mkl
 {
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst;
+
+    using static Part;
 
     partial class mkl
     {
@@ -16,7 +16,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="X">The source vector</param>
         [MethodImpl(Inline)]
-        public static int iamax(RowVector256<float> X)        
+        public static int iamax(RowVector256<float> X)
             => (int)CBLAS.cblas_isamax(X.Length, ref head(X), 1);
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="X">The source vector</param>
         [MethodImpl(Inline)]
-        public static float amax(RowVector256<float> X)        
+        public static float amax(RowVector256<float> X)
             => X[iamax(X)];
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="X">The source vector</param>
         [MethodImpl(Inline)]
-        public static int iamax(RowVector256<double> X)        
+        public static int iamax(RowVector256<double> X)
             => (int)CBLAS.cblas_idamax(X.Length, ref head(X), 1);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="X">The source vector</param>
         [MethodImpl(Inline)]
-        public static double amax(RowVector256<double> X)        
+        public static double amax(RowVector256<double> X)
             => X[iamax(X)];
     }
 }
