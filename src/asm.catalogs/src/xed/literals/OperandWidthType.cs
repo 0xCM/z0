@@ -24,40 +24,56 @@ namespace Z0
 
             A32,
 
+            [Symbol("b")]
             B,
 
+            [Symbol("d")]
             D,
 
+            [Symbol("i8")]
             I8,
 
+            [Symbol("u8")]
             U8,
 
+            [Symbol("i16")]
             I16,
 
+            [Symbol("u16")]
             U16,
 
+            [Symbol("i32")]
             I32,
 
+            [Symbol("u32")]
             U32,
 
+            [Symbol("i64")]
             I64,
 
+            [Symbol("u64")]
             U64,
 
+            [Symbol("f16")]
             F16,
 
+            [Symbol("f32")]
             F32,
 
+            [Symbol("f64")]
             F64,
 
+            [Symbol("dq")]
             DQ,
 
             XUB,
 
             XUW,
 
+            [Symbol("xud")]
             XUD,
 
+            [Symbol("xuq")]
             XUQ,
 
             X128,
@@ -86,16 +102,22 @@ namespace Z0
 
             MQ,
 
+            [Symbol("m64int")]
             M64INT,
 
+            [Symbol("m64real")]
             M64REAL,
 
+            [Symbol("mem108")]
             MEM108,
 
+            [Symbol("mem14")]
             MEM14,
 
+            [Symbol("mem16")]
             MEM16,
 
+            [Symbol("mem16int")]
             MEM16INT,
 
             MEM28,
@@ -140,8 +162,10 @@ namespace Z0
 
             SS,
 
+            [Symbol("v")]
             V,
 
+            [Symbol("y")]
             Y,
 
             W,
@@ -174,8 +198,10 @@ namespace Z0
 
             VAR,
 
+            [Symbol("bnd32")]
             BND32,
 
+            [Symbol("bnd64")]
             BND64,
 
             PMMSZ16,
@@ -214,6 +240,7 @@ namespace Z0
 
             WRD,
 
+            [Symbol("mskw")]
             MSKW,
 
             ZMSKW,

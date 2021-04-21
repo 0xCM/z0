@@ -59,6 +59,10 @@ namespace Z0
             where T : struct, IRecord<T>
                 => AsmCatalogRoot() + FS.file(TableId<T>(), FS.Csv);
 
+        FS.FilePath AsmCatalogTable<T>(string subject)
+            where T : struct, IRecord<T>
+                => AsmCatalogRoot() + FS.folder(subject) + FS.file(TableId<T>(), FS.Csv);
+
         FS.FilePath AsmCatalogPath<T>(T subject, FS.FileName name)
             => AsmCatalogRoot() + FS.folder(subject.ToString()) + name;
     }

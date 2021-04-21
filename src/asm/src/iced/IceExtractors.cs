@@ -34,9 +34,9 @@ namespace Z0.Asm
         public static AsmFormExpr form(Iced.Instruction src)
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return asm.form(
+            return AsmCore.form(
                 AsmOpCodes.conform(iceOpCode.ToOpCodeString()),
-                asm.sig(src.Mnemonic.ToString().ToUpper(), iceOpCode.ToInstructionString()));
+                AsmCore.sig(src.Mnemonic.ToString().ToUpper(), iceOpCode.ToInstructionString()));
         }
 
         [MethodImpl(Inline), Op]

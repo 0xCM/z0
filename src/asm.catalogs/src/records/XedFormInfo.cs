@@ -4,16 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct XedModels
+    using System.Runtime.InteropServices;
+
+    partial struct AsmCatalogRecords
     {
         /// <summary>
         /// Defines a structure that reflects the content of the xed "idata.txt" file
         /// </summary>
 
-        [Record(TableId)]
-        public struct FormInfo : IRecord<FormInfo>
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct XedFormInfo : IRecord<XedFormInfo>
         {
-            public const string TableId = "xed.form-summary";
+            public const string TableId = "xed-form-summary";
 
             public const byte FieldCount = 6;
 

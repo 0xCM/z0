@@ -168,7 +168,7 @@ namespace Z0.Asm
                 var bytes = @readonly(raw);
                 var decoded = decoder.Decode(raw, MemoryAddress.Zero).View;
                 var name = accessor.DeclaringType.Name + "/" + accessor.Member.Name;
-                writer.WriteLine(asm.comment(seqlabel + name));
+                writer.WriteLine(AsmCore.comment(seqlabel + name));
                 AsmFormatter.render(raw,decoded,buffer);
                 writer.Write(buffer.Emit());
 
@@ -279,15 +279,6 @@ namespace Z0.Asm
 
             var archive = Wf.ApiHexArchive();
             archive.CodeBlocks(part, accept);
-        }
-
-        void ShowInterfaceMaps()
-        {
-            var calc8 = Clr.imap(typeof(Prototypes.Calc8), typeof(Prototypes.ICalc8));
-            var calc64 = Clr.imap(typeof(Prototypes.Calc64), typeof(Prototypes.ICalc64));
-            using var log = ShowLog("imap",FS.Log);
-            log.Show(calc8.Format());
-            log.Show(calc64.Format());
         }
 
         void RunScripts()
@@ -472,7 +463,7 @@ namespace Z0.Asm
             const ulong Displacement = 0xfc632176;
             var instruction = array<byte>(0xe8, 0x76, 0x21, 0x63, 0xfc);
             MemoryAddress Encoded =  0x7ffc52e94420;
-            MemoryAddress nextIp = asm.nextip(FunctionBase,  InstructionOffset, InstructionSize);
+            MemoryAddress nextIp = AsmCore.nextip(FunctionBase,  InstructionOffset, InstructionSize);
             MemoryAddress target = nextIp + Displacement;
         }
 
@@ -483,8 +474,8 @@ namespace Z0.Asm
             const uint Displacement = 0xfc632176;
 
             MemoryAddress client = FunctionBase + InstructionOffset;
-            var call = asm.call(client,Displacement);
-            Wf.Status(call.Format());
+            var call = AsmCore.call(client,Displacement);
+            Wf.Status(AsmRender.format(call));
         }
 
         public void ShowCommands()
@@ -854,12 +845,6 @@ namespace Z0.Asm
             var count = producer.Produce(Toolsets.nasm, hosts);
         }
 
-        void CaptureParts(params PartId[] parts)
-        {
-            var dst = Db.AppLogDir() + FS.folder("capture");
-            dst.Clear();
-            Wf.CaptureRunner().Capture(parts, dst);
-        }
 
         public void EmitXedCatalog()
         {
@@ -1271,70 +1256,6 @@ namespace Z0.Asm
             render.RenderRows(code, dst);
         }
 
-        [Record(TableId)]
-        public struct JmpStub : IRecord<JmpStub>
-        {
-            public const string TableId = "jmp.stub";
-
-            public OpIdentity Method;
-
-            public MemoryAddress StubAddress;
-
-            public MemoryAddress TargetAddress;
-
-            public AsmHexCode StubCode;
-
-            public Address32 Displacement;
-
-            public Address32 Offset;
-        }
-
-        unsafe ReadOnlySpan<JmpStub> JmpStubs()
-        {
-            var source = typeof(Prototypes.Calc64);
-            var host = source.HostUri();
-            var methods = source.DeclaredMethods();
-            var count = methods.Length;
-            var entries = alloc<MemoryAddress>(count);
-            var located = span<JmpStub>(count);
-            ApiJit.jit(methods, entries);
-            var j=0;
-            for(var i=0; i< count; i++)
-            {
-                var encoded = Cells.alloc(w64).Bytes;
-                ref readonly var method = ref skip(methods,i);
-                ref readonly var entry = ref skip(entries,i);
-
-                ref var data = ref entry.Ref<byte>();
-                ByteReader.read5(data, encoded);
-                if(JmpRel32.test(encoded))
-                {
-                    var target = JmpRel32.target(entry, encoded);
-                    ref var info = ref seek(located,j++);
-                    info.Method = method.Identify();
-                    info.StubAddress = entry;
-                    info.TargetAddress = target;
-                    info.StubCode =  AsmBytes.hexcode(slice(encoded,0,5));
-                    info.Displacement = JmpRel32.dx(encoded);
-                    info.Offset = JmpRel32.offset(entry,entry,encoded);
-                    //seek(located,j++) = //new LocatedMethod(method.Identify(), method, target);
-                }
-            }
-
-            return slice(located,0,j);
-        }
-
-        void DoJumpStubs()
-        {
-            CaptureParts(PartId.AsmCases);
-            ShowInterfaceMaps();
-            var located = JmpStubs();
-            using var log = ShowLog("jumptargets",FS.Csv);
-            Tables.emit(located,log.Buffer);
-            log.ShowBuffer();
-
-        }
-
         void CheckSettingsParser()
         {
             var a = "A:603";
@@ -1376,8 +1297,8 @@ namespace Z0.Asm
 
         public void RunSplitter()
         {
-            var splitter = XedFormSplitter.create(Wf);
-            var parts = splitter.Run();
+            var pipe = Wf.XedFormPipe();
+            var parts = pipe.Run();
             var count = parts.Length;
             var dst = Db.AppLog("xed.forms.partitions", FS.Csv);
             var flow = Wf.EmittingFile(dst);
@@ -1392,13 +1313,19 @@ namespace Z0.Asm
                 writer.WriteLine(string.Format(rp, part.Index, part.Class));
             }
             Wf.EmittedFile(flow, count);
+        }
+
+        public void RunOldXedWf()
+        {
+            var xed = XedWf.create(Wf);
+            xed.Run();
 
         }
 
         public void Run()
         {
-            var xed = XedWf.create(Wf);
-            xed.Run();
+            var pipe = Wf.XedFormPipe();
+            pipe.EmitFormAspects();
         }
 
         public static void Main(params string[] args)

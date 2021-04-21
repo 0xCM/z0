@@ -16,13 +16,13 @@ namespace Z0.Asm
     {
         public static Outcome parse(string src, out AsmMnemonic dst)
         {
-            dst = asm.mnemonic(src);
+            dst = AsmCore.mnemonic(src);
             return true;
         }
 
         public static Outcome parse(string src, out AsmOpCodeExpr dst)
         {
-            dst = asm.opcode(src);
+            dst = AsmCore.opcode(src);
             return true;
         }
 
@@ -45,9 +45,9 @@ namespace Z0.Asm
                 DataParser.parse(skip(cells, i++), out dst.BaseAddress);
                 DataParser.parse(skip(cells, i++), out dst.IP);
                 DataParser.parse(skip(cells, i++), out dst.BlockOffset);
-                dst.Expression = asm.statement(skip(cells,i++));
+                dst.Expression = AsmCore.statement(skip(cells,i++));
                 AsmSyntax.sig(skip(cells, i++), out dst.Sig);
-                dst.OpCode = asm.opcode(skip(cells, i++));
+                dst.OpCode = AsmCore.opcode(skip(cells, i++));
                 dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
                 if(!DataParser.parse(skip(cells, i++), out dst.OpUri))
                     return (false, $"Failed to parse uri text <{skip(cells,i)}>");

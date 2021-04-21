@@ -22,7 +22,7 @@ namespace Z0
             => Asm.NasmCatalog.create(wf);
 
         [Op]
-        public static XedFormSplitter XedFormSplitter(this IWfRuntime wf)
-            => Asm.XedFormSplitter.create(wf);
+        public static XedFormPipe XedFormPipe(this IWfRuntime wf)
+            => Asm.XedFormPipe.create(wf);
     }
 }

@@ -37,10 +37,6 @@ namespace Z0.Asm
             var opseq = z8;
             var state = TableParserState.ParsingInstruction;
             var outcome = Outcome.Empty;
-            var instruction = default(TableInstruction);
-            var instructions = root.list<TableInstruction>();
-            var operands = root.list<TableOperand>();
-            var operand = default(TableOperand);
             while(reader.ReadLine(++counter, out line))
             {
                 if(line.IsEmpty || line.StartsWith(CommentMarker))
@@ -70,14 +66,13 @@ namespace Z0.Asm
                         break;
                     }
 
-                    outcome = ParseOperand(opseq, line, out operand);
+                    outcome = default;
                     if(!outcome)
                     {
                         Wf.Error(outcome.Message);
                         succeeded = false;
                         break;
                     }
-                    operands.Add(operand);
 
                     if(opseq == opcount - 1)
                     {
@@ -93,14 +88,13 @@ namespace Z0.Asm
                         break;
                     }
 
-                    outcome = ParseInstruction(seq,line, out instruction);
+                    outcome = default;
                     if(!outcome)
                     {
                         Wf.Error(outcome.Message);
                         succeeded = false;
                         break;
                     }
-                    instructions.Add(instruction);
 
                     state = TableParserState.ParsingOpCount;
                     seq++;
@@ -116,21 +110,6 @@ namespace Z0.Asm
             return succeeded;
         }
 
-        Outcome ParseOperand(byte opseq, TextLine src, out TableOperand dst)
-        {
-            var succeeded = true;
-
-
-            return succeeded;
-        }
-
-        Outcome ParseInstruction(uint seq, TextLine src, out TableInstruction dst)
-        {
-            var succeeded = true;
-
-
-            return succeeded;
-        }
 
     }
         /*

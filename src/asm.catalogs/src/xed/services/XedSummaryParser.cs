@@ -9,6 +9,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static XedModels;
+    using static AsmCatalogRecords;
 
     public ref struct XedSummaryParser
     {
@@ -19,7 +20,7 @@ namespace Z0.Asm
 
         readonly Index<FormDetail> DetailTarget;
 
-        readonly Index<FormInfo> SummaryTarget;
+        readonly Index<XedFormInfo> SummaryTarget;
 
         readonly ResDescriptor TableSource;
 
@@ -31,19 +32,19 @@ namespace Z0.Asm
         {
             LineBuffer = buffer;
             DetailTarget = alloc<FormDetail>(count);
-            SummaryTarget = alloc<FormInfo>(count);
+            SummaryTarget = alloc<XedFormInfo>(count);
             TableSource = Parts.AsmCatalogs.Assets.XedTables();
             SummarySource = Parts.AsmCatalogs.Assets.XedInstructionSummary();
             Wf = EventSignal.create(sink, typeof(XedSummaryParser));
         }
 
-        public ReadOnlySpan<FormInfo> ParseSummaries()
+        public ReadOnlySpan<XedFormInfo> ParseSummaries()
         {
             using var reader = SummarySource.Utf8().Reader();
             var counter = 0u;
             var j = 0;
             var line = TextLine.Empty;
-            var header = memory.alloc<string>(FormInfo.FieldCount);
+            var header = memory.alloc<string>(XedFormInfo.FieldCount);
             ref var dst = ref SummaryTarget.First;
             while(reader.ReadLine(++counter, out line))
             {
@@ -64,7 +65,7 @@ namespace Z0.Asm
                 }
                 else
                 {
-                   var info = new FormInfo();
+                   var info = new XedFormInfo();
                    var outcome = ParseSummary(line, out info);
                    if(!outcome)
                    {
@@ -89,8 +90,8 @@ namespace Z0.Asm
         {
             var parts = @readonly(src.Split(FieldDelimiter));
             var count = parts.Length;
-            if(count != FormInfo.FieldCount)
-                return(false, $"Line splits into {count} parts, not {FormInfo.FieldCount} as required");
+            if(count != XedFormInfo.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
 
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(parts,i);
@@ -98,13 +99,13 @@ namespace Z0.Asm
             return true;
         }
 
-        static Outcome ParseSummary(TextLine src, out FormInfo dst)
+        static Outcome ParseSummary(TextLine src, out XedFormInfo dst)
         {
             dst = default;
             var parts = @readonly(src.Split(FieldDelimiter));
             var count = parts.Length;
-            if(count != FormInfo.FieldCount)
-                return(false, $"Line splits into {count} parts, not {FormInfo.FieldCount} as required");
+            if(count != XedFormInfo.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
             var i = 0;
             dst.Class = skip(parts,i++);
             dst.Extension = skip(parts,i++);

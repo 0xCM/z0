@@ -30,11 +30,5 @@ namespace Z0.Asm
             Identity = identity;
             Base = @base;
         }
-
-        public string Format()
-            => AsmRender.format(this);
-
-        public override string ToString()
-            => Format();
     }
 }

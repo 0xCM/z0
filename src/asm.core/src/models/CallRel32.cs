@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct CallRel32 : ITextual
+    public readonly struct CallRel32
     {
         public MemoryAddress ClientAddress {get;}
 
@@ -33,11 +33,5 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => ClientAddress + InstructionSize + TargetDx;
         }
-
-        public string Format()
-            => AsmRender.format(this);
-
-        public override string ToString()
-            => Format();
     }
 }

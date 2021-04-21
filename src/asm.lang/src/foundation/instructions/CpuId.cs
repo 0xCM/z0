@@ -30,7 +30,6 @@ namespace Z0.Asm
         public void Clear()
             => clear(ref this);
 
-
         [MethodImpl(Inline)]
         public CpuId WithRequest(eax fx, ecx subfx)
         {

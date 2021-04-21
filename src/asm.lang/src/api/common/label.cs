@@ -12,10 +12,6 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmLabel label(Identifier name)
-            => new AsmLabel(name);
-
-        [MethodImpl(Inline), Op]
         public static AsmOffsetLabel label(W8 w, ulong offset)
             => new AsmOffsetLabel((byte)offset);
 

@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Represents a based code block that issues a call instruction
     /// </summary>
-    public readonly struct AsmCaller : ITextual
+    public readonly struct AsmCaller
     {
         public MemoryAddress Base {get;}
 
@@ -31,12 +31,6 @@ namespace Z0.Asm
             Base = address;
             Identity = identity;
         }
-
-        public string Format()
-            => AsmRender.format(this);
-
-        public override string ToString()
-            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator AsmCaller((MemoryAddress address, string name) src)

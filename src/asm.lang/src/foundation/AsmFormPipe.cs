@@ -174,7 +174,7 @@ namespace Z0.Asm
             {
                 var i = 0u;
                 DataParser.parse(NextCell(parts, ref i), out dst.Seq);
-                dst.OpCode = asm.opcode(NextCell(parts, ref i));
+                dst.OpCode = AsmCore.opcode(NextCell(parts, ref i));
                 AsmSyntax.sig(NextCell(parts, ref i), out dst.Sig);
                 dst.FormExpr = new AsmFormExpr(dst.OpCode, dst.Sig);
                 return true;

@@ -365,54 +365,103 @@ namespace Z0
             TMM6,
 
             TMM7,
+
             UIF,
+
             ST0,
+
             ST1,
+
             ST2,
+
             ST3,
+
             ST4,
+
             ST5,
+
             ST6,
+
             ST7,
+
             XCR0,
+
             XMM0,
+
             XMM1,
+
             XMM2,
+
             XMM3,
+
             XMM4,
+
             XMM5,
+
             XMM6,
+
             XMM7,
+
             XMM8,
+
             XMM9,
+
             XMM10,
+
             XMM11,
+
             XMM12,
+
             XMM13,
+
             XMM14,
+
             XMM15,
+
             XMM16,
+
             XMM17,
+
             XMM18,
+
             XMM19,
+
             XMM20,
+
             XMM21,
+
             XMM22,
+
             XMM23,
+
             XMM24,
+
             XMM25,
+
             XMM26,
+
             XMM27,
+
             XMM28,
+
             XMM29,
+
             XMM30,
+
             XMM31,
+
             YMM0,
+
             YMM1,
+
             YMM2,
+
             YMM3,
+
             YMM4,
+
             YMM5,
+
             YMM6,
             YMM7,
             YMM8,
@@ -472,62 +521,174 @@ namespace Z0
             ZMM30,
             ZMM31,
             LAST,
-            BNDCFG_FIRST=BNDCFGU, //< PSEUDO
-            BNDCFG_LAST=BNDCFGU, //<PSEUDO
-            BNDSTAT_FIRST=BNDSTATUS, //< PSEUDO
-            BNDSTAT_LAST=BNDSTATUS, //<PSEUDO
-            BOUND_FIRST=BND0, //< PSEUDO
-            BOUND_LAST=BND3, //<PSEUDO
-            CR_FIRST=CR0, //< PSEUDO
-            CR_LAST=CR15, //<PSEUDO
-            DR_FIRST=DR0, //< PSEUDO
-            DR_LAST=DR7, //<PSEUDO
-            FLAGS_FIRST=FLAGS, //< PSEUDO
-            FLAGS_LAST=RFLAGS, //<PSEUDO
-            GPR16_FIRST=AX, //< PSEUDO
-            GPR16_LAST=R15W, //<PSEUDO
-            GPR32_FIRST=EAX, //< PSEUDO
-            GPR32_LAST=R15D, //<PSEUDO
-            GPR64_FIRST=RAX, //< PSEUDO
-            GPR64_LAST=R15, //<PSEUDO
-            GPR8_FIRST=AL, //< PSEUDO
-            GPR8_LAST=R15B, //<PSEUDO
-            GPR8h_FIRST=AH, //< PSEUDO
-            GPR8h_LAST=BH, //<PSEUDO
-            INVALID_FIRST=None, //< PSEUDO
-            INVALID_LAST=ERROR, //<PSEUDO
-            IP_FIRST=RIP, //< PSEUDO
-            IP_LAST=IP, //<PSEUDO
-            MASK_FIRST=K0, //< PSEUDO
-            MASK_LAST=K7, //<PSEUDO
-            MMX_FIRST=MMX0, //< PSEUDO
-            MMX_LAST=MMX7, //<PSEUDO
-            MSR_FIRST=SSP, //< PSEUDO
-            MSR_LAST=IA32_U_CET, //<PSEUDO
-            MXCSR_FIRST=MXCSR, //< PSEUDO
-            MXCSR_LAST=MXCSR, //<PSEUDO
-            PSEUDO_FIRST=STACKPUSH, //< PSEUDO
-            PSEUDO_LAST=TILECONFIG, //<PSEUDO
-            PSEUDOX87_FIRST=X87CONTROL, //< PSEUDO
-            PSEUDOX87_LAST=X87LASTDP, //<PSEUDO
-            SR_FIRST=ES, //< PSEUDO
-            SR_LAST=GS, //<PSEUDO
-            TMP_FIRST=TMP0, //< PSEUDO
-            TMP_LAST=TMP15, //<PSEUDO
-            TREG_FIRST=TMM0, //< PSEUDO
-            TREG_LAST=TMM7, //<PSEUDO
-            UIF_FIRST=UIF, //< PSEUDO
-            UIF_LAST=UIF, //<PSEUDO
-            X87_FIRST=ST0, //< PSEUDO
-            X87_LAST=ST7, //<PSEUDO
-            XCR_FIRST=XCR0, //< PSEUDO
-            XCR_LAST=XCR0, //<PSEUDO
-            XMM_FIRST=XMM0, //< PSEUDO
-            XMM_LAST=XMM31, //<PSEUDO
-            YMM_FIRST=YMM0, //< PSEUDO
-            YMM_LAST=YMM31, //<PSEUDO
-            ZMM_FIRST=ZMM0, //< PSEUDO
-            ZMM_LAST=ZMM31 //<PSEUDO
+
+            [AsmPseudoReg]
+            BNDCFG_FIRST=BNDCFGU,
+
+            [AsmPseudoReg]
+            BNDCFG_LAST=BNDCFGU,
+
+            [AsmPseudoReg]
+            BNDSTAT_FIRST=BNDSTATUS,
+
+            [AsmPseudoReg]
+            BNDSTAT_LAST=BNDSTATUS,
+
+            [AsmPseudoReg]
+            BOUND_FIRST=BND0,
+
+            [AsmPseudoReg]
+            BOUND_LAST=BND3,
+
+            [AsmPseudoReg]
+            CR_FIRST=CR0,
+
+            [AsmPseudoReg]
+            CR_LAST=CR15,
+
+            [AsmPseudoReg]
+            DR_FIRST=DR0,
+
+            [AsmPseudoReg]
+            DR_LAST=DR7,
+
+            [AsmPseudoReg]
+            FLAGS_FIRST=FLAGS,
+
+            [AsmPseudoReg]
+            FLAGS_LAST=RFLAGS,
+
+            [AsmPseudoReg]
+            GPR16_FIRST=AX,
+
+            [AsmPseudoReg]
+            GPR16_LAST=R15W,
+
+            [AsmPseudoReg]
+            GPR32_FIRST=EAX,
+
+            [AsmPseudoReg]
+            GPR32_LAST=R15D,
+
+            [AsmPseudoReg]
+            GPR64_FIRST=RAX,
+
+            [AsmPseudoReg]
+            GPR64_LAST=R15,
+
+            [AsmPseudoReg]
+            GPR8_FIRST=AL,
+
+            [AsmPseudoReg]
+            GPR8_LAST=R15B,
+
+            [AsmPseudoReg]
+            GPR8h_FIRST=AH,
+
+            [AsmPseudoReg]
+            GPR8h_LAST=BH,
+
+            [AsmPseudoReg]
+            INVALID_FIRST=None,
+
+            [AsmPseudoReg]
+            INVALID_LAST=ERROR,
+
+            [AsmPseudoReg]
+            IP_FIRST=RIP,
+
+            [AsmPseudoReg]
+            IP_LAST=IP,
+
+            [AsmPseudoReg]
+            MASK_FIRST=K0,
+
+            [AsmPseudoReg]
+            MASK_LAST=K7,
+
+            [AsmPseudoReg]
+            MMX_FIRST=MMX0,
+
+            [AsmPseudoReg]
+            MMX_LAST=MMX7,
+
+            [AsmPseudoReg]
+            MSR_FIRST=SSP,
+
+            [AsmPseudoReg]
+            MSR_LAST=IA32_U_CET,
+
+            [AsmPseudoReg]
+            MXCSR_FIRST=MXCSR,
+
+            [AsmPseudoReg]
+            MXCSR_LAST=MXCSR,
+
+            [AsmPseudoReg]
+            PSEUDO_FIRST=STACKPUSH,
+
+            [AsmPseudoReg]
+            PSEUDO_LAST=TILECONFIG,
+
+            [AsmPseudoReg]
+            PSEUDOX87_FIRST=X87CONTROL,
+
+            [AsmPseudoReg]
+            PSEUDOX87_LAST=X87LASTDP,
+
+            [AsmPseudoReg]
+            SR_FIRST=ES,
+
+            [AsmPseudoReg]
+            SR_LAST=GS,
+
+            [AsmPseudoReg]
+            TMP_FIRST=TMP0,
+
+            [AsmPseudoReg]
+            TMP_LAST=TMP15,
+
+            [AsmPseudoReg]
+            TREG_FIRST=TMM0,
+
+            [AsmPseudoReg]
+            TREG_LAST=TMM7,
+
+            [AsmPseudoReg]
+            UIF_FIRST=UIF,
+
+            [AsmPseudoReg]
+            UIF_LAST=UIF,
+
+            [AsmPseudoReg]
+            X87_FIRST=ST0,
+
+            [AsmPseudoReg]
+            X87_LAST=ST7,
+
+            [AsmPseudoReg]
+            XCR_FIRST=XCR0,
+
+            [AsmPseudoReg]
+            XCR_LAST=XCR0,
+
+            [AsmPseudoReg]
+            XMM_FIRST=XMM0,
+
+            [AsmPseudoReg]
+            XMM_LAST=XMM31,
+
+            [AsmPseudoReg]
+            YMM_FIRST=YMM0,
+
+            [AsmPseudoReg]
+            YMM_LAST=YMM31,
+
+            [AsmPseudoReg]
+            ZMM_FIRST=ZMM0,
+
+            [AsmPseudoReg]
+            ZMM_LAST=ZMM31
         }
     }
 }

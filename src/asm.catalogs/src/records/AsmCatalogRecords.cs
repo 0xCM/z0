@@ -2,17 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [ApiHost]
-    public readonly partial struct AsmOps
+    public readonly partial struct AsmCatalogRecords
     {
 
     }
-
-    [ApiHost]
-    public static partial class XAsm
-    {
-    }
-
 }

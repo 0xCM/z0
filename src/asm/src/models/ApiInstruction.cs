@@ -95,6 +95,6 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         public AsmOpCodeExpr OpCode
-            => asm.opcode(Instruction.OpCode.OpCodeString);
+            => AsmCore.opcode(Instruction.OpCode.OpCodeString);
     }
 }

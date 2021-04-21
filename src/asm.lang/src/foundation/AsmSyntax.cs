@@ -52,7 +52,7 @@ namespace Z0.Asm
                 {
                     var i = text.index(src, MnemonicTerminator);
                     var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(sigop) : sys.empty<AsmSigOperandExpr>();
-                    dst = asm.sig(monic, format(monic, operands));
+                    dst = AsmCore.sig(monic, format(monic, operands));
                     return true;
                 }
             }
@@ -77,7 +77,7 @@ namespace Z0.Asm
                 {
                     if(text.unfence(src, OpCodeFence, out var opcode))
                     {
-                        dst = new AsmFormExpr(asm.opcode(opcode), sig);
+                        dst = new AsmFormExpr(AsmCore.opcode(opcode), sig);
                         return true;
                     }
                     else

@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using Z0.Asm;
-
     using static Part;
     using static memory;
 
+    using static AsmCatalogRecords;
 
     public class NasmCatalog : WfService<NasmCatalog>
     {
@@ -62,19 +61,4 @@ namespace Z0.Asm
             => EmitInstructionCatalog(Db.CatalogTable<NasmInstruction>("asm"));
     }
 
-
-    public struct NasmInstruction : IRecord<NasmInstruction>
-    {
-        public const string TableId = "nasm.instructions";
-
-        public uint LineNumber;
-
-        public AsmMnemonic Mnemonic;
-
-        public TextBlock Operands;
-
-        public TextBlock Encoding;
-
-        public TextBlock Flags;
-    }
 }

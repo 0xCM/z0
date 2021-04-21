@@ -6,17 +6,22 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
     using static memory;
     using static XedModels;
 
-    public ref struct XedFormSplitter
+    using R = AsmCatalogRecords;
+
+    public ref struct XedFormPipe
     {
-        public static XedFormSplitter create(IWfRuntime sink)
-            => new XedFormSplitter(sink);
+        public static XedFormPipe create(IWfRuntime sink)
+            => new XedFormPipe(sink);
 
         readonly IWfRuntime Wf;
+
+        readonly IEnvPaths Paths;
 
         readonly Symbols<IForm> Source;
 
@@ -52,8 +57,12 @@ namespace Z0.Asm
 
         readonly Span<FormParition> Partitions;
 
-        public XedFormSplitter(IWfRuntime wf)
+        Span<FormAspect> Aspects;
+
+        public XedFormPipe(IWfRuntime wf)
         {
+            Wf = wf;
+            Paths = wf.Db();
             Attributes = Symbols.cache<AttributeKind>();
             Categories = Symbols.cache<Category>();
             ChipCodes = Symbols.cache<ChipCode>();
@@ -70,8 +79,79 @@ namespace Z0.Asm
             AddressWidths = Symbols.cache<AddressWidth>();
             OpWidths = Symbols.cache<OperandWidthType>();
             EncodingGroups = Symbols.cache<EncodingGroup>();
+            Aspects = default;
             Partitions = alloc<FormParition>(Source.Count);
-            Wf = wf;
+        }
+
+        public Index<R.XedFormAspect> EmitFormAspects()
+        {
+            var duplicates = root.dict<Hash32,uint>();
+            var pipe = Wf.XedFormPipe();
+            var aspects = pipe.ComputeFormAspects();
+            var count = (uint)aspects.Length;
+            var buffer = alloc<R.XedFormAspect>(count);
+            var path = FormComponentPath();
+            var formatter = Tables.formatter<R.XedFormAspect>();
+            var emitting = Wf.EmittingTable<R.XedFormAspect>(path);
+            using var writer = path.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0u; i<count; i++)
+            {
+                ref var record = ref seek(buffer,i);
+                ref readonly var aspect = ref skip(aspects,i);
+                record.Index = i;
+                record.Value = aspect.Value;
+                record.Hash = aspect.GetHashCode();
+                if(duplicates.TryGetValue(record.Hash, out var c))
+                    duplicates[record.Hash] = ++c;
+                else
+                    duplicates.Add(record.Hash, 0);
+                writer.WriteLine(formatter.Format(record));
+            }
+
+            var perfect = !duplicates.Values.Any(x => x > 0);
+            if(perfect)
+            {
+                Wf.Status($"Hash Perfect");
+            }
+            else
+                Wf.Warn("Hash Imperfect");
+
+            Wf.EmittedTable(emitting, count);
+            return buffer;
+        }
+
+        public FS.FilePath FormComponentPath()
+            => Paths.AsmCatalogTable<R.XedFormAspect>("xed");
+
+        public ReadOnlySpan<FormAspect> ComputeFormAspects()
+        {
+            if(Aspects.Length != 0)
+                return Aspects;
+            else
+            {
+                var count = Source.Count;
+                var forms = Source.View;
+                var distinct = root.hashset<FormAspect>();
+                var counter = 0u;
+                for(ushort i=0; i<count; i++)
+                {
+                    var form = skip(forms,i);
+                    var parts = @readonly(form.Kind.ToString().Split(Chars.Underscore));
+                    var kParts = parts.Length;
+                    if(kParts < 2)
+                        continue;
+
+                    for(var j=1; j<kParts; j++)
+                    {
+                        if(distinct.Add(skip(parts,j)))
+                            counter++;
+                    }
+                }
+
+                Aspects = root.index(distinct.ToArray()).Sort();
+                return Aspects;
+            }
         }
 
         public ReadOnlySpan<FormParition> Run()

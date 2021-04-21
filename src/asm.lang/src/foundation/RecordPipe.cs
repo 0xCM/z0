@@ -48,6 +48,7 @@ namespace Z0
         protected ReadOnlySpan<string> Cells(string src)
             => src.SplitClean(FieldDelimiter);
 
-        protected static MsgPattern<TableId,Count,Count> FieldCountMismatch => "The {0} row had {1} fields while {2} were expected";
+        protected static MsgPattern<TableId,Count,Count> FieldCountMismatch
+            => "The {0} row had {1} fields while {2} were expected";
     }
 }

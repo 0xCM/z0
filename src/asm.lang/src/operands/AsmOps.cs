@@ -4,15 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    partial struct asm
+    [ApiHost]
+    public readonly partial struct AsmOps
     {
-        [MethodImpl(Inline), Op]
-        public static AsmComment comment(string src)
-            =>  src;
     }
+
+    [ApiHost]
+    public static partial class XAsm
+    {
+
+
+    }
+
+
 }

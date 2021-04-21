@@ -9,6 +9,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static XedModels;
+    using static AsmCatalogRecords;
 
     public sealed class XedCatalog : WfService<XedCatalog>
     {
@@ -114,23 +115,23 @@ namespace Z0.Asm
             EmitFormSummaries(parsed);
         }
 
-        public void EmitFormSummaries(ReadOnlySpan<FormInfo> src)
+        public void EmitFormSummaries(ReadOnlySpan<XedFormInfo> src)
         {
-            var dst = Db.CatalogTable<FormInfo>("asm", "xed");
-            var flow = Wf.EmittingTable<FormInfo>(dst);
+            var dst = Db.CatalogTable<XedFormInfo>("asm", "xed");
+            var flow = Wf.EmittingTable<XedFormInfo>(dst);
             var count = Tables.emit(src,dst);
             Wf.EmittedTable(flow,count);
         }
 
-        public Index<FormInfo> LoadFormSummaries()
+        public Index<XedFormInfo> LoadFormSummaries()
         {
             var src = Db.DataSource(FS.file("xed-idata", FS.Txt));
             var flow = Wf.Running("Loading xed instruction summaries");
             using var reader = src.Reader();
             var counter = 0u;
-            var header = memory.alloc<string>(FormInfo.FieldCount);
+            var header = memory.alloc<string>(XedFormInfo.FieldCount);
             var succeeded = true;
-            var records = root.list<FormInfo>();
+            var records = root.list<XedFormInfo>();
             while(!reader.EndOfStream)
             {
                 var line = reader.ReadLine(counter);
@@ -153,7 +154,7 @@ namespace Z0.Asm
                 }
                 else
                 {
-                   var dst = new FormInfo();
+                   var dst = new XedFormInfo();
                    var outcome = ParseSummary(line, out dst);
                    if(outcome)
                    {
@@ -258,7 +259,7 @@ namespace Z0.Asm
             return count != 0 ? parts.Select(ParseAttribute) : sys.empty<AttributeKind>();
         }
 
-        FormDetail LoadDetail(ushort index, FormInfo src)
+        FormDetail LoadDetail(ushort index, XedFormInfo src)
         {
             var id = ParseIForm(src.Form);
             var iclass = ParseIClass(src.Class);
@@ -269,13 +270,13 @@ namespace Z0.Asm
             return new FormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
         }
 
-        static Outcome ParseSummary(TextLine src, out FormInfo dst)
+        static Outcome ParseSummary(TextLine src, out XedFormInfo dst)
         {
             dst = default;
             var parts = @readonly(src.Split(FieldDelimiter));
             var count = parts.Length;
-            if(count != FormInfo.FieldCount)
-                return(false, $"Line splits into {count} parts, not {FormInfo.FieldCount} as required");
+            if(count != XedFormInfo.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
             var i = 0;
             dst.Class = skip(parts,i++);
             dst.Extension = skip(parts,i++);
@@ -290,8 +291,8 @@ namespace Z0.Asm
         {
             var parts = @readonly(src.Split(FieldDelimiter));
             var count = parts.Length;
-            if(count != FormInfo.FieldCount)
-                return(false, $"Line splits into {count} parts, not {FormInfo.FieldCount} as required");
+            if(count != XedFormInfo.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
 
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(parts,i);

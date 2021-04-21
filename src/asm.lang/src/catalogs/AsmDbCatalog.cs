@@ -56,7 +56,7 @@ namespace Z0.Asm
                     var modrm = row.Cell(IF.ModRM);
 
                     DataParser.parse(index, out entry.Index);
-                    entry.Mnemonic = asm.mnemonic(monic);
+                    entry.Mnemonic = AsmCore.mnemonic(monic);
                     entry.X64 = SupportsX64(arch);
                     if(DataParser.parse(ocb, out byte _ocb))
                         entry.OpCodeByte = _ocb;

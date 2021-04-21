@@ -15,6 +15,11 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmBytes
     {
+
+        [MethodImpl(Inline), Op]
+        public static ref ModRm modrm(in AsmHexCode src, uint4 offset)
+            => ref @as<byte,ModRm>(skip(src.Bytes, offset));
+
         [Op]
         public static uint Serialize(AsmHexVector src, Span<byte> dst)
         {

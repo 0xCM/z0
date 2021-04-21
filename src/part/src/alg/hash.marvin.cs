@@ -22,14 +22,14 @@ namespace alg
         /// Compute a Marvin hash and collapse it into a 32-bit hash.
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static uint marvin(ReadOnlySpan<byte> src, ulong seed = DefaultMarvivSeed)
-            => (uint)ComputeHash32(ref MemoryMarshal.GetReference(src), (uint)src.Length, (uint)seed, (uint)(seed >> 32));
+        public static Hash32 marvin(ReadOnlySpan<byte> src, ulong seed = DefaultMarvivSeed)
+            => ComputeHash32(ref MemoryMarshal.GetReference(src), (uint)src.Length, (uint)seed, (uint)(seed >> 32));
 
         /// <summary>
         /// Compute a Marvin hash and collapse it into a 32-bit hash.
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static uint marvin(ReadOnlySpan<char> src, ulong seed = DefaultMarvivSeed)
+        public static Hash32 marvin(ReadOnlySpan<char> src, ulong seed = DefaultMarvivSeed)
             => marvin(memory.recover<char,byte>(src), seed);
 
         /// <summary>

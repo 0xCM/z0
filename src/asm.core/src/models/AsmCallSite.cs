@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmCallSite : ITextual
+    public readonly struct AsmCallSite
     {
         public AsmCaller Caller {get;}
 
@@ -24,17 +24,5 @@ namespace Z0.Asm
             LocalOffset = offset;
             InstructionSize = size;
         }
-
-        public MemoryAddress NextIp
-        {
-            [MethodImpl(Inline)]
-            get => asm.nextip(this);
-        }
-
-        public string Format()
-            => AsmRender.format(this);
-
-        public override string ToString()
-            => Format();
     }
 }

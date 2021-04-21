@@ -38,7 +38,7 @@ namespace Z0.Asm
             while(!reader.EndOfStream)
             {
                 var data = reader.ReadLine();
-                var statement = asm.statement(data.LeftOfFirst(Chars.Semicolon));
+                var statement = AsmCore.statement(data.LeftOfFirst(Chars.Semicolon));
                 if(tpPipe.ParseThumbprint(data, out var thumbprint))
                     dst.Add(thumbprint);
             }
@@ -107,7 +107,7 @@ namespace Z0.Asm
                         {
                             if(AsmBytes.hexcode(rhs, out var encoded))
                             {
-                                thumbprint = new AsmThumbprint(statement, sig, asm.opcode(opcode), encoded);
+                                thumbprint = new AsmThumbprint(statement, sig, AsmCore.opcode(opcode), encoded);
                                 return true;
                             }
                             else

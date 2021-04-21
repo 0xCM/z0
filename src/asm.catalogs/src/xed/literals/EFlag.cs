@@ -43,27 +43,37 @@ namespace Z0
             _if,
 
             [Symbol("ac", "alignment check")]
-            ac, //< alignment check
+            ac,
 
-            vm, //< virtual-8086 mode
+            [Symbol("vm", "virtual-8086 mode")]
+            vm,
 
-            rf, //< resume flag
+            [Symbol("rf", "resume flag")]
+            rf,
 
-            nt, //< nested task
+            [Symbol("nt", "nested task")]
+            nt,
 
-            tf, //< traf flag
+            [Symbol("tf", "trap flag")]
+            tf,
 
-            id, //< ID flag
+            [Symbol("id", "id flag")]
+            id,
 
-            vip, //< virtual interrupt pending
+            [Symbol("vip", "virtual interrupt pending")]
+            vip,
 
-            fc0, //< x87 FC0 flag
+            [Symbol("fc0", "x87 FC0 flag")]
+            fc0,
 
-            fc1, //< x87 FC1 flag
+            [Symbol("fc1", "x87 FC1 flag")]
+            fc1,
 
-            fc2, //< x87 FC2 flag
+            [Symbol("fc2", "x87 FC2 flag")]
+            fc2,
 
-            fc3, //< x87 FC3 flag
+            [Symbol("fc3", "x87 FC3 flag")]
+            fc3,
         }
     }
 }

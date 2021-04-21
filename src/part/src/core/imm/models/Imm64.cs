@@ -116,5 +116,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(I src)
             => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator I(MemoryAddress src)
+            => new I(src);
     }
 }

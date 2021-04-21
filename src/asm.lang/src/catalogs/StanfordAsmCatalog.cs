@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
+    using static AsmCatalogRecords;
 
     public sealed class StanfordAsmCatalog : WfService<StanfordAsmCatalog>
     {
@@ -66,7 +67,7 @@ namespace Z0.Asm
         void Fill(in StokeAsmImportRow src, ref StokeAsmExportRow dst)
         {
             dst.Sequence = src.Sequence;
-            dst.OpCode = asm.opcode(src.OpCode);
+            dst.OpCode = AsmCore.opcode(src.OpCode);
             dst.Instruction = src.Instruction;
             dst.Mode64 = mode64(src.Mode64);
             dst.LegacyMode = src.LegacyMode;
@@ -230,9 +231,9 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(imported, i);
-                var oc = asm.opcode(row.OpCode);
+                var oc = AsmCore.opcode(row.OpCode);
                 if(AsmSyntax.sig(row.Instruction, out var sig))
-                    seek(buffer, k++) = asm.form(oc, sig);
+                    seek(buffer, k++) = AsmCore.form(oc, sig);
                 else
                 {
                     seek(buffer, k++) = AsmFormExpr.Empty;

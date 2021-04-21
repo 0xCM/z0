@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static Z0.Asm.AsmRegOps;
+    using static Z0.Asm.AsmOp;
 
     public readonly struct EntryPoint
     {
@@ -86,7 +86,7 @@ namespace Z0
         {
             var address = Trampolines[slot].Location;
             ref var payload = ref Payloads[slot];
-            var mov = AsmEncoder.mov(rcx, asm.imm64(target)).Content.Bytes;
+            var mov = AsmEncoder.mov(rcx, target).Content.Bytes;
             var jmp = AsmEncoder.jmp(rcx).Content.Bytes;
             var dst = payload.Bytes;
             var j=0;

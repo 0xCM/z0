@@ -158,6 +158,7 @@ namespace Z0
 
             GPR64_X,
 
+            [Symbol("GPR8b")]
             GPR8_B,
 
             GPR8_R,

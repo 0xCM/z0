@@ -14,10 +14,13 @@ namespace Z0
     }
 
     [Free]
-    public interface IHashCode<T> : IHashCode
+    public interface IHashCode<T> : IHashCode, ITextual
         where T : unmanaged
      {
          T Value {get;}
+
+        string ITextual.Format()
+            => Value.ToString();
 
         ReadOnlySpan<byte> IHashCode.Data
             => memory.bytes(Value);

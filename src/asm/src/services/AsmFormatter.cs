@@ -61,7 +61,7 @@ namespace Z0.Asm
         {
             Address16 offset = z16;
             var count = src.Length;
-            dst.AppendLine(asm.comment(block.FormatHex()));
+            dst.AppendLine(AsmCore.comment(block.FormatHex()));
             for(var i=0; i<count; i++)
             {
                 ref readonly var fx = ref skip(src,i);
@@ -90,10 +90,10 @@ namespace Z0.Asm
         {
             var i = z8;
             seek(dst, i++) = src.Separator;
-            seek(dst, i++) = asm.comment($"{src.DisplaySig}::{src.Uri}");
+            seek(dst, i++) = AsmCore.comment($"{src.DisplaySig}::{src.Uri}");
             seek(dst, i++) = ByteSpans.property(src.CodeBlock, src.Uri.OpId);
-            seek(dst, i++) = asm.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
-            seek(dst, i++) = asm.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
+            seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
+            seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
             return i;
         }
 
@@ -115,7 +115,7 @@ namespace Z0.Asm
             else
                 dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatFixed()));
 
-            dst.Append(asm.comment(format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
+            dst.Append(AsmCore.comment(format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
         }
 
         /// <summary>

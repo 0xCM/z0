@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Captures operation invocation information from the client perspective
     /// </summary>
-    public struct AsmCallInfo : ITextual
+    public struct AsmCallInfo
     {
         /// <summary>
         /// The base-relative address that captures the offset follows the client call instruction
@@ -30,11 +30,5 @@ namespace Z0.Asm
             CallSite = callsite;
             Target = target;
         }
-
-        public string Format()
-            => AsmRender.format(this);
-
-        public override string ToString()
-            => Format();
     }
 }
