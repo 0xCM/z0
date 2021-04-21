@@ -8,37 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-
-    using W = Windows;
-
-    partial class Minidump
-    {
-        [Record(TableId)]
-        public unsafe struct FileHeader : IRecord<FileHeader>
-        {
-            public const string TableId = "minidump.header";
-
-            public asci4 Signature;
-
-            public ushort Version;
-
-            ushort _Filler1;
-
-            /// <summary>
-            /// The number of streams in the minidump directory.
-            /// </summary>
-            public Count StreamCount;
-
-            /// <summary>
-            /// The base RVA of the minidump directory
-            /// </summary>
-            public Address32 Streams;
-
-            public ulong Timestamp;
-
-            public Flags64<W.MinidumpType> Properties;
-        }
-    }
+    using static Images;
 
     public sealed partial class Minidump : IDisposable
     {
@@ -56,10 +26,10 @@ namespace Z0
             Wf.Status($"Mapped file {Source.Path} to process memory based at {Source.BaseAddress}");
         }
 
-        public ref readonly FileHeader Header
+        public ref readonly DumpFileHeader Header
         {
             [MethodImpl(Inline)]
-            get => ref Source.One<FileHeader>(0);
+            get => ref Source.One<DumpFileHeader>(0);
         }
 
         public void Dispose()
@@ -72,7 +42,7 @@ namespace Z0
             var src = Wf.Db().DumpPath("capture");
             if(src.Exists)
             {
-                var formatter = Tables.formatter<Minidump.FileHeader>();
+                var formatter = Tables.formatter<DumpFileHeader>();
                 using var md = Minidump.open(Wf, src);
                 var header = formatter.Format(md.Header, RecordFormatKind.KeyValuePairs);
                 Wf.Row(header);

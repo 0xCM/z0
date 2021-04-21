@@ -197,27 +197,16 @@ namespace System.Reflection.Metadata
             }
         }
 
-        public string DumpMethod(
-            int maxStack,
-            ReadOnlySpan<byte> ilBytes,
-            ReadOnlySpan<LocalInfo> locals,
-            IReadOnlyList<HandlerSpan> exceptionHandlers,
-            IReadOnlyDictionary<int, string> markers = null,
-            bool localsAreZeroed = true)
+        public string DumpMethod(int maxStack, ReadOnlySpan<byte> ilBytes, ReadOnlySpan<LocalInfo> locals, IReadOnlyList<HandlerSpan> exceptionHandlers,
+            IReadOnlyDictionary<int, string> markers = null, bool localsAreZeroed = true)
         {
             var builder = new StringBuilder();
             DumpMethod(builder, maxStack, ilBytes, locals, exceptionHandlers, markers, localsAreZeroed);
             return builder.ToString();
         }
 
-        public void DumpMethod(
-            StringBuilder dst,
-            int maxStack,
-            ReadOnlySpan<byte> ilBytes,
-            ReadOnlySpan<LocalInfo> locals,
-            IReadOnlyList<HandlerSpan> exceptionHandlers,
-            IReadOnlyDictionary<int, string> markers = null,
-            bool localsAreZeroed = true)
+        public void DumpMethod(StringBuilder dst, int maxStack, ReadOnlySpan<byte> ilBytes, ReadOnlySpan<LocalInfo> locals,
+            IReadOnlyList<HandlerSpan> exceptionHandlers, IReadOnlyDictionary<int, string> markers = null, bool localsAreZeroed = true)
         {
             dst.AppendLine("{");
             VisualizeHeader(dst, ilBytes.Length, maxStack, locals, localsAreZeroed);

@@ -9,39 +9,46 @@ namespace Z0
     using System.IO;
 
     using static Part;
+    using static Images;
 
-    public struct ImageCsvReader : IDisposable
+    public class ImageCsvReader : WfService<ImageCsvReader>
     {
-        readonly FS.FilePath Source;
-
-        readonly IWfRuntime Wf;
-
-        readonly StreamReader Reader;
-
         uint CurrentIndex;
-
-        public string Header {get;}
-
-        public ByteSize FileSize {get;}
 
         public HexByteParser ByteParser;
 
-        public ImageCsvReader(IWfRuntime wf, FS.FilePath src)
+        public ImageCsvReader()
         {
-            Wf = wf;
-            Source = src;
             CurrentIndex = 0;
-            if(!src.Exists)
-                @throw(new FileNotFoundException(src.ToUri().Format()));
-            Reader = src.Reader();
-            FileSize = src.Size;
-            Header = Reader.ReadLine();
             ByteParser = HexByteParser.Service;
         }
 
-        public bool Read(ref ImageContent data)
+        public void Read(FS.FilePath src, Receiver<ImageContent> dst)
         {
-            var line = Reader.ReadLine();
+            CurrentIndex = 0;
+
+            if(!src.Exists)
+                @throw(new FileNotFoundException(src.ToUri().Format()));
+
+            using var reader = src.Reader();
+            var size = src.Size;
+
+            var header = reader.ReadLine();
+
+            var record = default(ImageContent);
+            var @continue = true;
+            while(@continue)
+            {
+                if(Read(reader, ref record))
+                    dst(record);
+                else
+                    @continue = false;
+            }
+        }
+
+        public bool Read(StreamReader src, ref ImageContent data)
+        {
+            var line = src.ReadLine();
             if(line == null)
                 return false;
 
@@ -55,11 +62,6 @@ namespace Z0
             data.Data = root.succeed(ByteParser.ParseData(parts[1]));
 
             return true;
-        }
-
-        public void Dispose()
-        {
-            Reader?.Dispose();
         }
     }
 }

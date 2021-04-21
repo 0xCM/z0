@@ -8,6 +8,7 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static memory;
+    using static Images;
 
     public sealed class MsilPipe : WfService<MsilPipe>
     {
@@ -28,32 +29,13 @@ namespace Z0
             IlViz = Cil.visualizer();
         }
 
-        static bool parse(string src, out CilCapture dst)
-        {
-            var parts = @readonly(src.SplitClean(Chars.Pipe));
-            var count = parts.Length;
-            if(count != CilCapture.FieldCount)
-            {
-                dst = default;
-                return false;
-            }
-            else
-            {
-                var i=0;
-                DataParser.parse(skip(parts,i++), out dst.MemberId);
-                DataParser.parse(skip(parts,i++), out dst.BaseAddress);
-                DataParser.parse(skip(parts,i++), out dst.Uri);
-                DataParser.parse(skip(parts,i++), out dst.CilCode);
-                return true;
-            }
-        }
 
-        public Index<CilCapture> LoadCapturedCil()
+        public Index<MsilCapture> LoadCapturedCil()
         {
             var flow = Wf.Running($"Loading cil data rows");
             var input = Db.CilDataPaths().View;
             var count = input.Length;
-            var dst = RecordList.create<CilCapture>();
+            var dst = RecordList.create<MsilCapture>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
@@ -75,7 +57,34 @@ namespace Z0
             return dst.Emit();
         }
 
-        public void EmitMsil(Index<ApiMemberCode> src, FS.FilePath dst)
+        public void EmitCode(ReadOnlySpan<MsilMetadata> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return;
+
+            var builder = text.build();
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                builder.Clear();
+                ref readonly var row = ref skip(src,i);
+                if(i != 0)
+                    writer.WriteLine(CilPageBreak);
+
+                writer.WriteLine("// Rva:{0,-12} | Size:{1,-8} | Method:{2}:{3}", row.MethodRva, row.BodySize, row.ImageName, row.MethodName);
+                IlViz.DumpMethod(row.MaxStack, row.Code.View, builder);
+                writer.WriteLine("{");
+                writer.WriteLine(builder.ToString());
+                writer.WriteLine("}");
+                writer.WriteLine();
+
+            }
+            Wf.EmittedFile(flow, count);
+        }
+
+        public void EmitCode(Index<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Count;
             var builder = text.build();
@@ -122,7 +131,7 @@ namespace Z0
             dst.AppendLine();
         }
 
-        public void EmitMsilData(Index<ApiMemberCode> src, FS.FilePath dst)
+        public void EmitData(Index<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Count;
             if(count != 0)
@@ -153,5 +162,26 @@ namespace Z0
             dst.Encoded = cil.Encoded;
             return ref dst;
         }
+
+        static bool parse(string src, out MsilCapture dst)
+        {
+            var parts = @readonly(src.SplitClean(Chars.Pipe));
+            var count = parts.Length;
+            if(count != MsilCapture.FieldCount)
+            {
+                dst = default;
+                return false;
+            }
+            else
+            {
+                var i=0;
+                DataParser.parse(skip(parts,i++), out dst.MemberId);
+                DataParser.parse(skip(parts,i++), out dst.BaseAddress);
+                DataParser.parse(skip(parts,i++), out dst.Uri);
+                DataParser.parse(skip(parts,i++), out dst.CilCode);
+                return true;
+            }
+        }
+
     }
 }

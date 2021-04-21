@@ -9,19 +9,21 @@ namespace Z0
     partial struct Images
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct ProcessPartition : IRecord<ProcessPartition>
+        public struct ResourceDirectory : IRecord<ResourceDirectory>
         {
-            public const string TableId = "memory.partitions";
+            public const string TableId = "resources-directory";
 
-            public MemoryAddress BaseAddress;
+            public uint Characteristics;
 
-            public MemoryAddress EndAddress;
+            public uint Timestamp;
 
-            public ByteSize Size;
+            public ushort MajorVersion;
 
-            public ByteSize Gap;
+            public ushort MinorVersion;
 
-            public Name ImageName;
+            public ushort NumberOfNamedEntries;
+
+            public ushort NumberOfIdEntries;
         }
     }
 }

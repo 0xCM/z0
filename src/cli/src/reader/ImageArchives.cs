@@ -12,34 +12,11 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
     [ApiHost]
     public readonly struct ImageArchives
     {
-        [Op]
-        public static ImageCsvReader csvreader(IWfRuntime wf, FS.FilePath src)
-        {
-            if(!src.Exists)
-                @throw(FS.missing(src));
-
-            return new ImageCsvReader(wf, src);
-        }
-
-        [Op]
-        public static void pipe(IWfRuntime wf, FS.FilePath src, Receiver<ImageContent> dst)
-        {
-            using var reader = csvreader(wf, src);
-            var record = default(ImageContent);
-            var @continue = true;
-            while(@continue)
-            {
-                if(reader.Read(ref record))
-                    dst(record);
-                else
-                    @continue = false;
-            }
-        }
-
         [Op]
         public static void EmitBuildArchiveList(IWfRuntime wf, string label)
         {

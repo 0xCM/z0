@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         public void EmitFieldMetadata()
         {

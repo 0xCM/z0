@@ -9,7 +9,7 @@ namespace Z0
 
     using static System.Reflection.Metadata.ILOpCode;
 
-    partial struct Cil
+    partial struct MsilApi
     {
         /// <summary>
         /// Get a long form of the specified branch op-code.

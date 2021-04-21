@@ -9,19 +9,19 @@ namespace Z0
     partial struct Images
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct ProcessPartition : IRecord<ProcessPartition>
+        public struct MsilCapture : IRecord<MsilCapture>
         {
-            public const string TableId = "memory.partitions";
+            public const string TableId = "cil.data";
+
+            public const byte FieldCount = 4;
+
+            public ClrToken MemberId;
 
             public MemoryAddress BaseAddress;
 
-            public MemoryAddress EndAddress;
+            public OpUri Uri;
 
-            public ByteSize Size;
-
-            public ByteSize Gap;
-
-            public Name ImageName;
+            public BinaryCode CilCode;
         }
     }
 }

@@ -9,15 +9,16 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
-    public readonly ref struct RegionTraverser
+    public readonly ref struct MemoryRegionTraverser
     {
         readonly ReadOnlySpan<MemoryRegion> Regions;
 
         readonly bool IsLive;
 
         [MethodImpl(Inline)]
-        public RegionTraverser(ReadOnlySpan<MemoryRegion> src, bool live)
+        public MemoryRegionTraverser(ReadOnlySpan<MemoryRegion> src, bool live)
         {
             Regions = src;
             IsLive = live;

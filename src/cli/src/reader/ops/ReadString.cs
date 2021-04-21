@@ -14,7 +14,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class CliDataReader
+    partial class ImageMetaReader
     {
         [MethodImpl(Inline), Op]
         public string ReadString(StringHandle src)

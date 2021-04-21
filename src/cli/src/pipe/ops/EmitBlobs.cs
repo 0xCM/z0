@@ -10,7 +10,7 @@ namespace Z0
 
     using static memory;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         public void EmitBlobs()
         {

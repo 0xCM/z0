@@ -15,6 +15,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
+    using static Images;
 
     class App : WfService<App>
     {
@@ -56,6 +57,26 @@ namespace Z0.Asm
         void EmitFormHashes()
         {
             Wf.AsmFormPipe().EmitFormHashes();
+        }
+
+
+        public static void EmitByteResProps(Type[] types, FS.FilePath dst)
+        {
+            var summary = dst.Writer();
+            var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
+            summary.WriteLine(header);
+            //var types = array(typeof(HexCharData), typeof(CpuBytes));
+            var mod = types[0].Module;
+            var props = types.StaticProperties().Where(p => p.GetGetMethod() != null && p.PropertyType == typeof(ReadOnlySpan<byte>));
+
+            foreach(var p in props)
+            {
+                var m = p.GetGetMethod();
+                var body = m.GetMethodBody();
+                var cil = body.GetILAsByteArray();
+                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHex());
+                summary.WriteLine(line);
+            }
         }
 
 
@@ -541,7 +562,7 @@ namespace Z0.Asm
 
         void EmitImageHeaders()
         {
-            var svc = CliDataPipe.create(Wf);
+            var svc = ImageMetaPipe.create(Wf);
             svc.EmitSectionHeaders(WfRuntime.RuntimeArchive(Wf));
         }
 
@@ -667,11 +688,11 @@ namespace Z0.Asm
             Wf.Row($"8: {bits.View(w8, 0)}");
         }
 
-        static bool parse(string src, out CilCapture dst)
+        static bool parse(string src, out MsilCapture dst)
         {
             var parts = @readonly(src.SplitClean(Chars.Pipe));
             var count = parts.Length;
-            if(count != CilCapture.FieldCount)
+            if(count != MsilCapture.FieldCount)
             {
                 dst = default;
                 return false;
@@ -687,12 +708,12 @@ namespace Z0.Asm
             }
         }
 
-        Index<CilCapture> LoadCapturedCil()
+        Index<MsilCapture> LoadCapturedCil()
         {
             var flow = Wf.Running($"Loading cil data rows");
             var input = Db.CilDataPaths().View;
             var count = input.Length;
-            var dst = RecordList.create<CilCapture>();
+            var dst = RecordList.create<MsilCapture>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
@@ -806,7 +827,7 @@ namespace Z0.Asm
 
         public void EmitApiImageContent()
         {
-            Wf.CliDataPipe().EmitImageContent();
+            Wf.ImageMetaPipe().EmitImageContent();
         }
 
         void ShowRegKinds(RegKind src, ShowLog dst)

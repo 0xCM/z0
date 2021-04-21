@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Diagnostics;
 
+    using static Images;
+
     partial class ProcessContextPipe
     {
         public FS.FileName MemoryRegionHashFile(string process, Timestamp ts, Identifier subject)

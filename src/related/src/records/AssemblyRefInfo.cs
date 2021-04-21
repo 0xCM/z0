@@ -8,20 +8,19 @@ namespace Z0
 
     partial struct Images
     {
+        /// <summary>
+        /// Captures a dependency relationship between two assemblies
+        /// </summary>
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct ProcessPartition : IRecord<ProcessPartition>
+        public struct AssemblyRefInfo : IRecord<AssemblyRefInfo>
         {
-            public const string TableId = "memory.partitions";
+            public const string TableId = "cli.assemblyref";
 
-            public MemoryAddress BaseAddress;
+            public Name Source;
 
-            public MemoryAddress EndAddress;
+            public Name Target;
 
-            public ByteSize Size;
-
-            public ByteSize Gap;
-
-            public Name ImageName;
+            public BinaryCode Token;
         }
     }
 }

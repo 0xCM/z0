@@ -8,17 +8,18 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static System.Reflection.Metadata.ILOpCode;
+    using static Part;
 
-    partial struct Cil
+    partial struct MsilApi
     {
         /// <summary>
-        /// Get a short form of the specified branch op-code.
+        /// Calculate the size of the specified branch instruction operand.
         /// </summary>
         /// <param name="opCode">Branch op-code.</param>
-        /// <returns>Short form of the branch op-code.</returns>
+        /// <returns>1 if <paramref name="opCode"/> is a short branch or 4 if it is a long branch.</returns>
         /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
         [Op]
-        public static ILOpCode ShortBranch(ILOpCode opCode)
+        public static byte BranchOperandSize(ILOpCode opCode)
         {
             switch (opCode)
             {
@@ -36,49 +37,23 @@ namespace Z0
                 case Ble_un_s:
                 case Blt_un_s:
                 case Leave_s:
-                    return opCode;
+                    return 1;
 
                 case Br:
-                    return Br_s;
-
                 case Brfalse:
-                    return Brfalse_s;
-
                 case Brtrue:
-                    return Brtrue_s;
-
                 case Beq:
-                    return Beq_s;
-
                 case Bge:
-                    return Bge_s;
-
                 case Bgt:
-                    return Bgt_s;
-
                 case Ble:
-                    return Ble_s;
-
                 case Blt:
-                    return Blt_s;
-
                 case Bne_un:
-                    return Bne_un_s;
-
                 case Bge_un:
-                    return Bge_un_s;
-
                 case Bgt_un:
-                    return Bgt_un_s;
-
                 case Ble_un:
-                    return Ble_un_s;
-
                 case Blt_un:
-                    return Blt_un_s;
-
                 case Leave:
-                    return Leave_s;
+                    return 4;
             }
 
             return 0;

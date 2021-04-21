@@ -85,14 +85,14 @@ namespace Z0
         public Count EmitMsilCode(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
         {
             if(src.Count != 0)
-                IlPipe.EmitMsil(src, dst);
+                IlPipe.EmitCode(src, dst);
             return src.Count;
         }
 
         public Count EmitMsilData(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
         {
             if(src.Count != 0)
-                IlPipe.EmitMsilData(src, dst);
+                IlPipe.EmitData(src, dst);
 
             return src.Count;
         }

@@ -13,6 +13,7 @@ namespace Z0
 
     using static memory;
     using static Part;
+    using static Images;
 
     using PCK = ProcessContextFlag;
 
@@ -34,7 +35,7 @@ namespace Z0
         public static MemoryAddress @base(Name procname)
         {
             var match =  procname.Content;
-            var module = ImageRecords.modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
+            var module = Images.modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
             return module.BaseAddress;
         }
 
@@ -46,7 +47,7 @@ namespace Z0
         public static ProcessState state(Process src)
         {
             var dst = new ProcessState();
-            ImageRecords.fill(src, ref dst);
+            Images.fill(src, ref dst);
             return dst;
         }
 

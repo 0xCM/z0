@@ -89,7 +89,7 @@ namespace Z0
                 if(options.ProcessCultFiles)
                     Wf.CultProcessor().Run();
 
-                var cli = Wf.CliDataPipe();
+                var cli = Wf.ImageMetaPipe();
 
                 if(options.EmitAssemblyRefs)
                     cli.EmitAssemblyRefs();

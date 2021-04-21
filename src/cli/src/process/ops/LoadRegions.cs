@@ -9,6 +9,7 @@ namespace Z0
 
     using static memory;
     using static Part;
+    using static Images;
 
     partial class ProcessContextPipe
     {
@@ -40,7 +41,7 @@ namespace Z0
                 if(line.IsEmpty)
                     continue;
 
-                var result = ImageRecords.parse(line.Content, out seek(dst,i));
+                var result = Images.parse(line.Content, out seek(dst,i));
                 if(!result)
                     return result;
 

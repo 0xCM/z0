@@ -9,6 +9,7 @@ namespace Z0
 
     using static memory;
     using static Part;
+    using static Images;
 
     partial class ProcessContextPipe
     {
@@ -26,7 +27,7 @@ namespace Z0
 
         public Index<ProcessPartition> EmitProcParts(Process process, FS.FilePath dst)
         {
-            var summaries = procparts(ImageRecords.locate(process));
+            var summaries = procparts(Images.locate(process));
             EmitProcParts(summaries,dst);
             return summaries;
         }

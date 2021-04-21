@@ -8,7 +8,7 @@ namespace Z0
 
     using static memory;
 
-    public sealed partial class CliDataPipe : WfService<CliDataPipe>
+    public sealed partial class ImageMetaPipe : WfService<ImageMetaPipe>
     {
 
     }

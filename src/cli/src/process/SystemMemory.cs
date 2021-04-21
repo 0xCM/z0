@@ -8,19 +8,21 @@ namespace Z0
     using System.Diagnostics;
     using Windows;
 
+    using static Images;
+
     [ApiHost]
     public readonly struct SystemMemory
     {
         [Op]
         public static Index<MemoryRegion> regions()
-            => ImageRecords.pages(MemoryNode.snapshot().Describe());
+            => Images.pages(MemoryNode.snapshot().Describe());
 
         [Op]
         public static Index<MemoryRegion> regions(int procid)
-            => ImageRecords.pages(MemoryNode.snapshot(procid).Describe());
+            => Images.pages(MemoryNode.snapshot(procid).Describe());
 
         [Op]
         public static Index<MemoryRegion> regions(Process src)
-            => ImageRecords.pages(MemoryNode.snapshot(src.Id).Describe());
+            => Images.pages(MemoryNode.snapshot(src.Id).Describe());
     }
 }

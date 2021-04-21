@@ -6,15 +6,18 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct ImageContent : IRecord<ImageContent>
+    partial struct Images
     {
-        public const string TableId = "image.content";
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct ImageContent : IRecord<ImageContent>
+        {
+            public const string TableId = "image.content";
 
-        public const byte RowDataSize = 64;
+            public const byte RowDataSize = 64;
 
-        public MemoryAddress Address;
+            public MemoryAddress Address;
 
-        public BinaryCode Data;
+            public BinaryCode Data;
+        }
     }
 }

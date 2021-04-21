@@ -8,7 +8,7 @@ namespace Z0
 
     using static memory;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         FS.FolderPath FieldLiteralTarget
             => Wf.Db().TableRoot() + FS.folder(CliFieldName.TableId);

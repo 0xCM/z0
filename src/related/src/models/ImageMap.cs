@@ -9,29 +9,35 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ImageMap
+    using W = Windows;
+
+    partial struct Images
     {
-        public ProcessState Process {get;}
 
-        public Index<LocatedImage> Images {get;}
-
-        public Index<MemoryAddress> Locations {get;}
-
-        public Index<ProcessModuleRow> Modules {get;}
-
-        [MethodImpl(Inline)]
-        public ImageMap(ProcessState state, LocatedImage[] images, Index<MemoryAddress> locations, ProcessModuleRow[] modules)
+        public readonly struct ImageMap
         {
-            Process = state;
-            Images = images;
-            Locations = locations;
-            Modules = modules;
+            public ProcessState Process {get;}
+
+            public Index<LocatedImage> Images {get;}
+
+            public Index<MemoryAddress> Locations {get;}
+
+            public Index<ProcessModuleRow> Modules {get;}
+
+            [MethodImpl(Inline)]
+            public ImageMap(ProcessState state, LocatedImage[] images, Index<MemoryAddress> locations, ProcessModuleRow[] modules)
+            {
+                Process = state;
+                Images = images;
+                Locations = locations;
+                Modules = modules;
+            }
+
+            public string Format()
+                => Process.ImageName;
+
+            public override string ToString()
+                => Format();
         }
-
-        public string Format()
-            => Process.ImageName;
-
-        public override string ToString()
-            => Format();
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         public Index<CliSystemStringInfo> EmitSystemStrings()
             => EmitSystemStrings(Wf.Components);

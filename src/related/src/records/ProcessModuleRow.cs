@@ -6,21 +6,24 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct ProcessModuleRow : IRecord<ProcessModuleRow>
+    partial struct Images
     {
-        public const string TableId = "process.modules";
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct ProcessModuleRow : IRecord<ProcessModuleRow>
+        {
+            public const string TableId = "process.modules";
 
-        public MemoryAddress BaseAddress;
+            public MemoryAddress BaseAddress;
 
-        public ByteSize MemorySize;
+            public ByteSize MemorySize;
 
-        public Name ImageName;
+            public Name ImageName;
 
-        public MemoryAddress EntryAddress;
+            public MemoryAddress EntryAddress;
 
-        public VersionInfo Version;
+            public VersionInfo Version;
 
-        public FS.FilePath ImagePath;
+            public FS.FilePath ImagePath;
+        }
     }
 }

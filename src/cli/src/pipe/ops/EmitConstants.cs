@@ -10,7 +10,7 @@ namespace Z0
 
     using T = CliConstantInfo;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         public void EmitConstants()
         {

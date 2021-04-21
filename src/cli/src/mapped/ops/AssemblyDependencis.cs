@@ -10,6 +10,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
     partial class CliMemoryMap
     {

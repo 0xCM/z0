@@ -16,7 +16,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct ImageRecords
+    public readonly partial struct Images
     {
         /// <summary>
         /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>

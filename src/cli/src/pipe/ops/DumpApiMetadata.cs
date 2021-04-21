@@ -12,7 +12,7 @@ namespace Z0
 
     using static memory;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         public void DumpMetadata(FS.FilePath src, FS.FilePath dst)
         {

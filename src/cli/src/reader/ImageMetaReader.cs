@@ -13,12 +13,13 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
     [ApiHost]
-    public partial class CliDataReader : IDisposable
+    public partial class ImageMetaReader : IDisposable
     {
-        public static CliDataReader create(FS.FilePath src)
-            => new CliDataReader(src);
+        public static ImageMetaReader create(FS.FilePath src)
+            => new ImageMetaReader(src);
 
         [Op]
         public static bool HasMetadata(FS.FilePath src)
@@ -38,7 +39,7 @@ namespace Z0
 
         public PEMemoryBlock MetadataBlock {get;}
 
-        public CliDataReader(FS.FilePath src)
+        public ImageMetaReader(FS.FilePath src)
         {
             Source = src;
             Stream = File.OpenRead(src.Name);
@@ -106,9 +107,9 @@ namespace Z0
         public void ReadAttributes(TableSpan<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
             => src.Iter(handle => dst(MetadataReader.GetCustomAttribute(handle)));
 
-        public Index<MsilRow> ReadMsil()
+        public Index<MsilMetadata> ReadMsil()
         {
-            var dst = sys.list<MsilRow>();
+            var dst = sys.list<MsilMetadata>();
             var types = @readonly(MetadataReader.TypeDefinitions.ToArray());
             var typeCount = types.Length;
             for(var k=0u; k<typeCount; k++)
@@ -125,11 +126,12 @@ namespace Z0
                     if(rva != 0)
                     {
                         var body = PeReader.GetMethodBody(rva);
-                        dst.Add(new MsilRow
+                        dst.Add(new MsilMetadata
                         {
                             MethodRva = (Address32)rva,
                             ImageName = Source.FileName,
                             BodySize = body.Size,
+                            LocalInit = body.LocalVariablesInitialized,
                             MaxStack = body.MaxStack,
                             MethodName = MetadataReader.GetString(definition.Name),
                             Code = body.GetILBytes(),

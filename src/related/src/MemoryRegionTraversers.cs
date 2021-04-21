@@ -12,13 +12,14 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
     [ApiHost]
-    public readonly struct RegionTraversers
+    public readonly struct MemoryRegionTraversers
     {
         [Op, MethodImpl(Inline)]
-        public static RegionTraverser create(ReadOnlySpan<MemoryRegion> src, bool live)
-            => new RegionTraverser(src, live);
+        public static MemoryRegionTraverser create(ReadOnlySpan<MemoryRegion> src, bool live)
+            => new MemoryRegionTraverser(src, live);
 
         # if NET5_0_OR_GREATER
         [Op, MethodImpl(Inline)]

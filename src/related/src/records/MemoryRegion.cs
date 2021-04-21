@@ -7,27 +7,30 @@ namespace Z0
     using Windows;
     using System.Runtime.InteropServices;
 
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct MemoryRegion : IRecord<MemoryRegion>
+    partial struct Images
     {
-        public const string TableId = "memory.regions";
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct MemoryRegion : IRecord<MemoryRegion>
+        {
+            public const string TableId = "memory.regions";
 
-        public const byte FieldCount = 8;
+            public const byte FieldCount = 8;
 
-        public Name Identity;
+            public Name Identity;
 
-        public MemoryAddress BaseAddress;
+            public MemoryAddress BaseAddress;
 
-        public MemoryAddress EndAddress;
+            public MemoryAddress EndAddress;
 
-        public ByteSize Size;
+            public ByteSize Size;
 
-        public MemType Type;
+            public MemType Type;
 
-        public PageProtection Protection;
+            public PageProtection Protection;
 
-        public MemState State;
+            public MemState State;
 
-        public TextBlock FullIdentity;
+            public TextBlock FullIdentity;
+        }
     }
 }

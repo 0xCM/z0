@@ -7,8 +7,9 @@ namespace Z0
     using System;
 
     using static memory;
+    using static Images;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         static ReadOnlySpan<byte> SectionHeaderWidths
             => new byte[9]{60,16,16,12,12,60,16,16,16};
@@ -35,10 +36,10 @@ namespace Z0
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in src)
             {
-                if(!CliDataReader.HasMetadata(file))
+                if(!ImageMetaReader.HasMetadata(file))
                     continue;
 
-                using var reader = CliDataReader.create(file);
+                using var reader = ImageMetaReader.create(file);
                 var headers = reader.ReadSectionHeders();
                 var count = headers.Length;
                 var view = headers.View;

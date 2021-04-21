@@ -11,8 +11,9 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         public void EmitAssemblyRefs(FS.Files input, FS.FilePath dst)
         {
@@ -25,7 +26,7 @@ namespace Z0
             {
                 ref readonly var source = ref skip(sources,k);
                 Wf.Status(string.Format("Emitting {0} assembly references", source.Name));
-                using var reader = CliDataReader.create(source);
+                using var reader = ImageMetaReader.create(source);
                 var data = reader.ReadAssemblyRefs();
                 var count = data.Length;
                 for(var i=0; i<count; i++)
@@ -37,9 +38,9 @@ namespace Z0
         {
             var path = FS.path(src.Location);
             var counter = 0u;
-            if(CliDataReader.HasMetadata(path))
+            if(ImageMetaReader.HasMetadata(path))
             {
-                using var reader = CliDataReader.create(path);
+                using var reader = ImageMetaReader.create(path);
                 var refs = reader.ReadAssemblyRefs();
                 var count = refs.Length;
                 for(var i=0; i<count; i++)

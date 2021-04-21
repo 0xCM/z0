@@ -9,19 +9,23 @@ namespace Z0
     partial struct Images
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct ProcessPartition : IRecord<ProcessPartition>
+        public struct MsilMetadata : IRecord<MsilMetadata>
         {
-            public const string TableId = "memory.partitions";
+            public const string TableId = "msil-metadata";
 
-            public MemoryAddress BaseAddress;
+            public FS.FileName ImageName;
 
-            public MemoryAddress EndAddress;
+            public Address32 MethodRva;
 
-            public ByteSize Size;
+            public ByteSize BodySize;
 
-            public ByteSize Gap;
+            public ByteSize MaxStack;
 
-            public Name ImageName;
+            public bool LocalInit;
+
+            public string MethodName;
+
+            public BinaryCode Code;
         }
     }
 }

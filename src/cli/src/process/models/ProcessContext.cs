@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static Images;
+
     public struct ProcessContext
     {
         public int ProcessId;

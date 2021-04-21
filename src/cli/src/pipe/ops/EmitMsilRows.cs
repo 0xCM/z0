@@ -9,8 +9,9 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
-    partial class CliDataPipe
+    partial class ImageMetaPipe
     {
         public uint EmitMsilRows()
             => EmitMsilRows(Wf.Components);
@@ -24,23 +25,23 @@ namespace Z0
             return total;
         }
 
-        public Index<MsilRow> EmitMsilRows(Assembly src)
+        public Index<MsilMetadata> EmitMsilRows(Assembly src)
         {
-            var methods = Index<MsilRow>.Empty;
+            var methods = Index<MsilMetadata>.Empty;
             var srcPath = FS.path(src.Location);
-            if(CliDataReader.HasMetadata(srcPath))
+            if(ImageMetaReader.HasMetadata(srcPath))
             {
                 var processing = Wf.Running(srcPath);
-                using var reader = CliDataReader.create(srcPath);
+                using var reader = ImageMetaReader.create(srcPath);
                 methods = reader.ReadMsil();
                 var view = methods.View;
                 var count = (uint)methods.Length;
                 if(count != 0)
                 {
-                    var dst = Db.Table<MsilRow>(src.GetSimpleName());
-                    var flow = Wf.EmittingTable<MsilRow>(dst);
+                    var dst = Db.Table<MsilMetadata>(src.GetSimpleName());
+                    var flow = Wf.EmittingTable<MsilMetadata>(dst);
                     Tables.emit(methods,dst);
-                    Wf.EmittedTable<MsilRow>(flow, count);
+                    Wf.EmittedTable<MsilMetadata>(flow, count);
                 }
 
                 Wf.Ran(processing, src);

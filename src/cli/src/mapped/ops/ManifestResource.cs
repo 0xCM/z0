@@ -25,7 +25,7 @@ namespace Z0
         }
 
         [Op]
-        public unsafe bool Search(string name, out ResourceSegment dst)
+        public unsafe bool Search(string name, out ResSegment dst)
         {
             dst = default;
 
@@ -40,7 +40,7 @@ namespace Z0
                     var blobReader = directory.GetReader((int)description.Offset, directory.Length - (int)description.Offset);
                     var length = blobReader.ReadUInt32();
                     MemoryAddress address = blobReader.CurrentPointer;
-                    dst = new ResourceSegment(name, new MemorySegment(address,length));
+                    dst = new ResSegment(name, new MemorySegment(address,length));
                     return true;
                 }
             }
@@ -48,11 +48,11 @@ namespace Z0
         }
 
         [Op]
-        public unsafe ReadOnlySpan<ResourceSegment> ResourceSegments()
+        public unsafe ReadOnlySpan<ResSegment> ResourceSegments()
         {
             var resources = ManifestResourceDescriptions();
             var count = resources.Length;
-            var dst = span<ResourceSegment>(count);
+            var dst = span<ResSegment>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var res = ref skip(resources, i);
@@ -60,7 +60,7 @@ namespace Z0
                 var blobReader = resdir.GetReader((int)res.Offset, resdir.Length - (int)res.Offset);
                 var length = blobReader.ReadUInt32();
                 MemoryAddress address = blobReader.CurrentPointer;
-                seek(dst,i) = new ResourceSegment(res.Name, new MemorySegment(address,length));
+                seek(dst,i) = new ResSegment(res.Name, new MemorySegment(address,length));
             }
             return dst;
         }

@@ -13,12 +13,12 @@ namespace Z0
 
     public sealed class CliWfCmdHost : WfCmdHost<CliWfCmdHost, CliWfCmdKind>
     {
-        CliDataPipe Emitter;
+        ImageMetaPipe Emitter;
 
 
         protected override void OnInit()
         {
-            Emitter = Wf.CliDataPipe();
+            Emitter = Wf.ImageMetaPipe();
         }
     }
 }
