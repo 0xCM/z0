@@ -32,5 +32,9 @@ namespace Z0
             for(var i=0u; i<count; i++)
                  ReadMethodDef(skip(src,i), ref seek(dst,i));
         }
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<MethodDefinitionHandle> MethodDefHandles()
+            => MetadataReader.MethodDefinitions.ToReadOnlySpan();
     }
 }

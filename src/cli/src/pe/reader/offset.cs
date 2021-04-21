@@ -11,6 +11,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
     partial class PeTableReader
     {
@@ -21,18 +22,18 @@ namespace Z0
         public const string OffsetPatternText = "{0,-60} | {1,-16}";
 
         [MethodImpl(Inline)]
-        static string[] labels(CliOffset src)
-            => typeof(CliOffset).DeclaredInstanceFields().Select(x => x.Name);
+        static string[] labels(ImageOffset src)
+            => typeof(ImageOffset).DeclaredInstanceFields().Select(x => x.Name);
 
         [MethodImpl(Inline)]
-        static string format(CliOffset src)
+        static string format(ImageOffset src)
             => text.format(OffsetPatternText, src.Name, src.Value);
 
         [Op]
-        public static void save(ReadOnlySpan<CliOffset> src, FS.FilePath dst)
+        public static void save(ReadOnlySpan<ImageOffset> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
-            var l = labels(default(CliOffset));
+            var l = labels(default(ImageOffset));
             writer.WriteLine(text.format(OffsetPatternText, l[0], l[1]));
             for(var i=0u; i<src.Length; i++)
                 writer.WriteLine(format(skip(src,i)));

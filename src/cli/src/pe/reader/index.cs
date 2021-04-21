@@ -10,17 +10,19 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Part;
+    using static Images;
+
 
     partial class PeTableReader
     {
-        public static CliTableIndex? index(in ReaderState state, Handle handle)
+        public static MetaTableIndex? index(in ReaderState state, Handle handle)
         {
             if(!handle.IsNil)
             {
                 var table = index(handle);
                 var token = state.Reader.GetToken(handle);
                 if (table != null)
-                    return new CliTableIndex(token, table.Value);
+                    return new MetaTableIndex(token, table.Value);
             }
 
             return null;

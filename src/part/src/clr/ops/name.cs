@@ -13,6 +13,10 @@ namespace Z0
     partial struct Clr
     {
         [MethodImpl(Inline), Op]
+        public static ClrMemberName membername(string src)
+            => new ClrMemberName(src);
+
+        [MethodImpl(Inline), Op]
         public static ClrAssemblyName name(Assembly src)
             => new ClrAssemblyName(src);
 

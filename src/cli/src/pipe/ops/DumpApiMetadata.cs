@@ -50,8 +50,7 @@ namespace Z0
             {
                 var component = skip(components,i);
                 var source = FS.path(component.Location);
-                var name = FS.file(source.FileName.Format(), FS.Txt);
-                var target = dir + name + FS.Txt;
+                var target = dir + FS.file(source.FileName.Format(), FS.Txt);
                 EmitMetadump(source,target);
             }
         }

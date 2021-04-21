@@ -16,8 +16,6 @@ namespace Z0
     [ApiHost, Free]
     public unsafe partial class CliMemoryMap : IDisposable
     {
-        readonly IWfRuntime Wf;
-
         readonly MemoryFile Source;
 
         public PEReader PeReader {get;}
@@ -33,7 +31,6 @@ namespace Z0
         public CliMemoryMap(IWfRuntime wf, FS.FilePath src)
         {
             Source = MemoryFiles.map(src);
-            Wf = wf;
             BasePointer = Source.BaseAddress.Pointer<byte>();
             PeReader = new PEReader(BasePointer, (int)Source.Size);
             ImageSize = Source.Size;
@@ -44,26 +41,6 @@ namespace Z0
         public static CliMemoryMap create(IWfRuntime wf, FS.FilePath src)
             => new CliMemoryMap(wf,src);
 
-        public DirectoryEntry ResourcesDirectory
-            => CorHeader.ResourcesDirectory;
-
-        public DirectoryEntry CodeManagerTableDirectory
-            => CorHeader.CodeManagerTableDirectory;
-
-        public DirectoryEntry ExportAddressTableJumpsDirectory
-            => CorHeader.ExportAddressTableJumpsDirectory;
-
-        public CorFlags Flags
-            => CorHeader.Flags;
-
-        public DirectoryEntry ManagedNativeHeaderDirectory
-            => CorHeader.ManagedNativeHeaderDirectory;
-
-        public DirectoryEntry MetadataDirectory
-            => CorHeader.MetadataDirectory;
-
-        public DirectoryEntry VtableFixupsDirectory
-            => CorHeader.VtableFixupsDirectory;
 
         public void Dispose()
         {
@@ -93,12 +70,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => PeHeaders.CorHeader;
-        }
-
-        public ReadOnlySpan<SectionHeader> SectionHeaders
-        {
-            [MethodImpl(Inline)]
-            get => PeHeaders.SectionHeaders.ToReadOnlySpan();
         }
 
         [MethodImpl(Inline)]

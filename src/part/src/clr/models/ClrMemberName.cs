@@ -17,40 +17,32 @@ namespace Z0
     /// </summary>
     public readonly struct ClrMemberName : IDataTypeComparable<ClrMemberName>
     {
-        internal readonly MemberInfo Source;
-
-        string NameContent
-        {
-            [MethodImpl(Inline)]
-            get => Source.Name;
-        }
-
-        public Name Name
-        {
-            [MethodImpl(Inline)]
-            get => Source.Name;
-        }
+        public Name Name {get;}
 
         [MethodImpl(Inline)]
         public ClrMemberName(MemberInfo src)
-            => Source = src;
+            => Name = src.Name.Replace(Chars.Pipe, (char)SymNotKind.Chi);
+
+        [MethodImpl(Inline)]
+        public ClrMemberName(string src)
+            => Name = (src ?? EmptyString).Replace(Chars.Pipe, (char)SymNotKind.Chi);
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)NameContent.GetHashCode();
+            get => (uint)Name.GetHashCode();
         }
 
         public Count Count
         {
             [MethodImpl(Inline)]
-            get => NameContent.Length;
+            get => Name.Length;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => NameContent.Length;
+            get => Name.Length;
         }
 
         public ByteSize Size
@@ -61,18 +53,18 @@ namespace Z0
 
         [MethodImpl(Inline), Ignore]
         public int CompareTo(ClrMemberName src)
-            => api.compare(NameContent, src.NameContent);
+            => api.compare(Name, src.Name);
 
         [MethodImpl(Inline), Ignore]
         public bool Equals(ClrMemberName src)
-            => string.Equals(NameContent, src.NameContent);
+            => string.Equals(Name, src.Name);
 
         [MethodImpl(Inline)]
         public string Format()
-            => NameContent;
+            => Name;
 
         public override string ToString()
-            => NameContent;
+            => Name;
 
         public override int GetHashCode()
             => (int)Hash;
@@ -82,7 +74,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(ClrMemberName src)
-            => src.NameContent;
+            => src.Name;
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(FieldInfo src)
@@ -106,7 +98,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<char>(ClrMemberName src)
-            => src.NameContent;
+            => src.Name;
 
         [MethodImpl(Inline)]
         public static bool operator <(ClrMemberName x, ClrMemberName y)

@@ -41,7 +41,7 @@ namespace Z0
                             BodySize = body.Size,
                             LocalInit = body.LocalVariablesInitialized,
                             MaxStack = body.MaxStack,
-                            MethodName = MetadataReader.GetString(definition.Name),
+                            MethodName = Clr.membername(MetadataReader.GetString(definition.Name)),
                             Code = body.GetILBytes(),
                         });
                     }

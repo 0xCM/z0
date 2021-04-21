@@ -1310,12 +1310,30 @@ namespace Z0.Asm
         {
             var pipe = Wf.ImageMetaPipe();
             pipe.EmitMetadaSets(WorkflowOptions.@default());
+
+        }
+
+        public void DeriveMsil()
+        {
+            var pipe = Wf.MsilPipe();
+            var files = pipe.MetadataFiles().View;
+            var count = files.Length;
+            for(var i=0; i<count; i++)
+            {
+                var src = skip(files,i);
+                var dst = Db.AppLogDir() + src.FileName.ChangeExtension(FS.Il);
+                var records = pipe.LoadMetadata(src);
+                pipe.EmitCode(records,dst);
+            }
+
         }
 
         public void Run()
         {
-            var tool = Wf.DumpBin();
-            var path = tool.EmitScripts(Db.RuntimeRoot(), Db.ImageArchiveRoot());
+            EmitImageMetadata();
+            DeriveMsil();
+            // var tool = Wf.DumpBin();
+            // var path = tool.EmitScripts(Db.RuntimeRoot(), Db.ImageArchiveRoot());
 
             //var src = Symbols.cache<PartId>().Index;
 

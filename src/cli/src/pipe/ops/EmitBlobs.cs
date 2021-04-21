@@ -30,8 +30,9 @@ namespace Z0
         public WfExecToken EmitBlobs(FS.FilePath src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<MetadataBlob>(dst);
-            using var reader = PeTableReader.open(src);
-            var rows = reader.Blobs();
+            //using var reader = PeTableReader.open(src);
+            using var reader = ImageMetaReader.create(src);
+            var rows = reader.ReadBlobs();
             var count = (uint)rows.Length;
             var formatter = Tables.formatter<MetadataBlob>(16);
 

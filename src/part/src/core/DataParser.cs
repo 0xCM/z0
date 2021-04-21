@@ -167,6 +167,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out ClrMemberName dst)
+        {
+            dst = Clr.membername(src);
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
         public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
         {
             outcome = Numeric.parse(src, out dst);

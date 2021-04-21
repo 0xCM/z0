@@ -13,6 +13,8 @@ namespace Z0
         {
             public const string TableId = "image.msil";
 
+            public const byte FieldCount = 7;
+
             public FS.FileName ImageName;
 
             public Address32 MethodRva;
@@ -23,7 +25,7 @@ namespace Z0
 
             public bool LocalInit;
 
-            public string MethodName;
+            public ClrMemberName MethodName;
 
             public BinaryCode Code;
         }

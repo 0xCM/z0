@@ -4,24 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Reflection;
+    using System;
     using System.Runtime.InteropServices;
 
     partial struct Images
     {
-        /// <summary>
-        /// Captures a dependency relationship between two assemblies
-        /// </summary>
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyRefInfo : IRecord<AssemblyRefInfo>
+        public struct ImageOffset : IRecord<ImageOffset>
         {
-            public const string TableId = "image.assemblyrefs";
+            public const string TableId = "image.offsets";
 
-            public AssemblyName Source;
+            public string Name;
 
-            public AssemblyName Target;
-
-            public BinaryCode Token;
+            public ulong Value;
         }
     }
 }

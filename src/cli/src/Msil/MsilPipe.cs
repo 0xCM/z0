@@ -29,13 +29,13 @@ namespace Z0
             IlViz = Cil.visualizer();
         }
 
-
         public Index<MsilCapture> LoadCaptured()
         {
             var flow = Wf.Running($"Loading cil data rows");
-            var input = Db.CilDataPaths().View;
+            var input = CapturesFiles().View;
             var count = input.Length;
             var dst = RecordList.create<MsilCapture>();
+            var row = default(MsilCapture);
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
@@ -43,7 +43,7 @@ namespace Z0
                 while(!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    if(parse(line, out var row))
+                    if(parse(line, out row))
                     {
                         dst.Add(row);
                     }
@@ -54,6 +54,42 @@ namespace Z0
                 }
             }
             Wf.Ran(flow,$"Loaded {dst.Count} cil rows");
+            return dst.Emit();
+        }
+
+        public FS.Files MetadataFiles()
+            => Db.TableDir<MsilMetadata>().AllFiles;
+
+        public FS.Files CapturesFiles()
+            => Db.CilDataPaths();
+
+        public Index<MsilMetadata> LoadMetadata(FS.FilePath src)
+        {
+            var flow = Wf.Running(src.ToUri());
+            var dst = RecordList.create<MsilMetadata>();
+            using var reader = src.Reader();
+            var fields = reader.ReadLine().SplitClean(Chars.Pipe);
+            if(fields.Length != MsilMetadata.FieldCount)
+            {
+                Wf.Error(Tables.FieldCountMismatch.Format(MsilMetadata.FieldCount, fields.Length));
+                return Index<MsilMetadata>.Empty;
+            }
+
+            var row = default(MsilMetadata);
+            while(!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                var outcome = parse(line, out row);
+                if(outcome)
+                    dst.Add(row);
+                else
+                {
+                    Wf.Warn(line);
+                    //return Index<MsilMetadata>.Empty;
+                }
+            }
+
+            Wf.Ran(flow, dst.Count);
             return dst.Emit();
         }
 
@@ -74,10 +110,9 @@ namespace Z0
                     writer.WriteLine(CilPageBreak);
 
                 writer.WriteLine("// Rva:{0,-12} | Size:{1,-8} | Method:{2}:{3}", row.MethodRva, row.BodySize, row.ImageName, row.MethodName);
+                writer.WriteLine(CilPageBreak);
                 IlViz.DumpMethod(row.MaxStack, row.Code.View, builder);
-                writer.WriteLine("{");
                 writer.WriteLine(builder.ToString());
-                writer.WriteLine("}");
                 writer.WriteLine();
 
             }
@@ -180,6 +215,43 @@ namespace Z0
                 DataParser.parse(skip(parts,i++), out dst.Uri);
                 DataParser.parse(skip(parts,i++), out dst.Encoded);
                 return true;
+            }
+        }
+
+        static Outcome parse(string src, out MsilMetadata dst)
+        {
+            dst = default;
+            var parts = @readonly(src.Split(Chars.Pipe));
+            var count = parts.Length;
+            if(count != MsilMetadata.FieldCount)
+                return (false, Tables.FieldCountMismatch.Format(MsilMetadata.FieldCount, count));
+            else
+            {
+                var outcome = Outcome.Empty;
+                var i=0;
+                dst.ImageName = FS.file(skip(parts,i++));
+                outcome = DataParser.parse(skip(parts,i++), out dst.MethodRva);
+                if(!outcome)
+                    return outcome;
+
+                outcome = DataParser.parse(skip(parts,i++), out dst.BodySize);
+                if(!outcome)
+                    return outcome;
+
+                outcome = DataParser.parse(skip(parts,i++), out dst.MaxStack);
+                if(!outcome)
+                    return outcome;
+
+                outcome = DataParser.parse(skip(parts,i++), out dst.LocalInit);
+                if(!outcome)
+                    return outcome;
+
+                outcome = DataParser.parse(skip(parts,i++), out dst.MethodName);
+                if(!outcome)
+                    return outcome;
+
+                outcome = DataParser.parse(skip(parts,i++), out dst.Code);
+                return outcome;
             }
         }
     }

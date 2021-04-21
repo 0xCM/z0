@@ -4,24 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Reflection.Metadata;
 
     partial struct Images
     {
-        /// <summary>
-        /// Captures a dependency relationship between two assemblies
-        /// </summary>
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyRefInfo : IRecord<AssemblyRefInfo>
+        public struct ImageConstant : IRecord<ImageConstant>
         {
-            public const string TableId = "image.assemblyrefs";
+            public const string TableId = "image.constants";
 
-            public AssemblyName Source;
+            public Count Sequence;
 
-            public AssemblyName Target;
+            public ClrToken ParentId;
 
-            public BinaryCode Token;
+            public string Source;
+
+            public ConstantTypeCode DataType;
+
+            public BinaryCode Content;
         }
     }
 }

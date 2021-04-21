@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
+    using System.Runtime.InteropServices;
 
     using W = Windows;
 
     partial struct Images
     {
-        [Record(TableId)]
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public unsafe struct DumpFileHeader : IRecord<DumpFileHeader>
         {
             public const string TableId = "image.minidump-header";
@@ -38,6 +36,5 @@ namespace Z0
 
             public Flags64<W.MinidumpType> Properties;
         }
-
     }
 }
