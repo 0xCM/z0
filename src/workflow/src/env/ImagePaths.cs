@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
+    using static EnvFolders;
+    using static FS;
 
-    /// <summary>
-    /// Generic vectorized intrinsics
-    /// </summary>
-    [ApiHost]
-    public partial class gvec
+    partial interface IEnvPaths
     {
-        const NumericKind Closure = UnsignedInts;
+        FS.FolderPath ImageArchiveRoot()
+            => DataRoot() + FS.folder(images);
     }
 }

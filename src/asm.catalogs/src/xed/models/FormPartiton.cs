@@ -12,22 +12,22 @@ namespace Z0
 
     partial struct XedModels
     {
-        public struct FormParition
+        public struct FormPartiton
         {
             public ushort Index;
 
-            public IForm Source;
+            public IForm Form;
 
-            public Index<string> Parts;
+            public Index<string> Aspects;
 
             public IClass Class;
 
             public bool Complete;
 
-            public ushort PartCount
+            public ushort AspectCount
             {
                 [MethodImpl(Inline)]
-                get => (ushort)Parts.Count;
+                get => (ushort)Aspects.Count;
             }
         }
     }

@@ -44,7 +44,7 @@ namespace Z0.Asm
             Bf6 = BitFormatOptions.bitmax(uint6.Width, uint6.Width);
             Bf7 = BitFormatOptions.bitmax(uint7.Width, uint7.Width);
             Bf8 = BitFormatOptions.bitmax(uint8T.Width, uint8T.Width);
-            Mnemonics = Symbols.cache<AsmMnemonicCode>().Index;
+            Mnemonics = Symbols.symbolic<AsmMnemonicCode>();
             Bitstrings = AsmBitstrings.service();
 
         }
@@ -52,6 +52,30 @@ namespace Z0.Asm
         protected override void OnInit()
         {
 
+        }
+
+        [Op]
+        public static string format(AsmThumbprint src)
+            => string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatFixed(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
+
+        [Op]
+        public static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
+        {
+            var dst = text.buffer();
+            render(monic, operands, dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static void render(AsmMnemonic monic, Index<AsmSigOperandExpr> operands, ITextBuffer dst)
+        {
+            dst.Append(monic.Format(MnemonicCase.Uppercase));
+            var opcount = operands.Length;
+            if(opcount != 0)
+            {
+                dst.Append(Chars.Space);
+                dst.Append(text.join(Chars.Comma, operands));
+            }
         }
 
         [Op]

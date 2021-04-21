@@ -11,7 +11,7 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct ResourceDirectory : IRecord<ResourceDirectory>
         {
-            public const string TableId = "resources-directory";
+            public const string TableId = "image.resdir";
 
             public uint Characteristics;
 

@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using static Images;
+
     partial class ImageMetaPipe
     {
         public void EmitFieldMetadata()
@@ -30,16 +32,19 @@ namespace Z0
             Wf.Ran(flow, count);
         }
 
+        public FS.FilePath FieldMetadataPath(Assembly src)
+            => Db.Table(MemberField.TableId, src.Id());
+
         public uint EmitFieldMetadata(Assembly src)
         {
-            var target = Db.Table(ClrFieldInfo.TableId, src.Id());
-            var flow = Wf.EmittingTable<ClrFieldInfo>(target);
+            var dst = FieldMetadataPath(src);
+            var flow = Wf.EmittingTable<MemberField>(dst);
             using var reader = PeTableReader.open(FS.path(src.Location));
             var fields = reader.Fields();
             var count = (uint)fields.Length;
 
-            var formatter = Tables.formatter<ClrFieldInfo>(FieldMetadataWidths);
-            using var writer = target.Writer();
+            var formatter = Tables.formatter<MemberField>(FieldMetadataWidths);
+            using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in fields)
                 writer.WriteLine(formatter.Format(item));
@@ -49,6 +54,6 @@ namespace Z0
         }
 
         public static ReadOnlySpan<byte> FieldMetadataWidths
-            => new byte[ClrFieldInfo.FieldCount]{16,60,12,12,16,40,30};
+            => new byte[MemberField.FieldCount]{16,60,12,12,16,40,30};
     }
 }

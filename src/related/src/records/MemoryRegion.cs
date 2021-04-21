@@ -12,7 +12,7 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct MemoryRegion : IRecord<MemoryRegion>
         {
-            public const string TableId = "memory.regions";
+            public const string TableId = "image.memory.regions";
 
             public const byte FieldCount = 8;
 

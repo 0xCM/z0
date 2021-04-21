@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Part;
 
-    using api = AsmThumbprints;
-
     public readonly struct AsmThumbprint : IDataTypeComparable<AsmThumbprint>
     {
         public AsmStatementExpr Statement {get;}
@@ -37,16 +35,16 @@ namespace Z0.Asm
         }
 
         public int CompareTo(AsmThumbprint src)
-            => api.cmp(this, src);
+            => cmp(this, src);
 
 
         public bool Equals(AsmThumbprint src)
-            => api.eq(this, src);
+            => eq(this, src);
 
         public override int GetHashCode()
             => Format().GetHashCode();
         public string Format()
-            => api.format(this);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();
@@ -56,5 +54,13 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => new AsmThumbprint(AsmStatementExpr.Empty, AsmSigExpr.Empty, AsmOpCodeExpr.Empty, AsmHexCode.Empty);
         }
+
+        [Op]
+        static int cmp(in AsmThumbprint a, in AsmThumbprint b)
+            => AsmRender.format(a).CompareTo(AsmRender.format(b));
+
+        [Op]
+        static bool eq(in AsmThumbprint a, in AsmThumbprint b)
+            => AsmRender.format(a).Equals(AsmRender.format(b));
     }
 }

@@ -54,7 +54,7 @@ namespace Z0.Asm
         {
             var count = src.Length;
             using var unknown =  (dst + FS.file("None",FS.Alg)).Writer();
-            var xed = IForm.None;
+            var xed = IFormType.None;
             var writer = default(StreamWriter);
             var path = FS.FilePath.Empty;
             var buffer = text.buffer();
@@ -325,7 +325,7 @@ namespace Z0.Asm
             var element = new Instruction();
             element.name = reader[nameof(Instruction.name)];
             element.form = reader[nameof(Instruction.form)];
-            element.xed = ClrEnums.parse(reader[nameof(Instruction.xed)], IForm.None);
+            element.xed = ClrEnums.parse(reader[nameof(Instruction.xed)], IFormType.None);
             dst.Add(element);
         }
     }

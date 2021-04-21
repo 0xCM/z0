@@ -11,7 +11,7 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct MsilMetadata : IRecord<MsilMetadata>
         {
-            public const string TableId = "msil-metadata";
+            public const string TableId = "image.msil";
 
             public FS.FileName ImageName;
 

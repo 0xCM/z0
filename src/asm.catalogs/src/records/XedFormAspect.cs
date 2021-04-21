@@ -8,11 +8,10 @@ namespace Z0
 
     partial struct AsmCatalogRecords
     {
-
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct XedFormAspect : IRecord<XedFormAspect>
         {
-            public const string TableId = "xed-form-aspects";
+            public const string TableId = "xed.aspects";
 
             public uint Index;
 
@@ -20,6 +19,5 @@ namespace Z0
 
             public Hash32 Hash;
         }
-
     }
 }

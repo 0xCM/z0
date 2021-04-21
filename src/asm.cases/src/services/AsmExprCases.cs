@@ -198,7 +198,7 @@ namespace Z0.Asm
             var subject = Tables.tableid<AssembledAsm>();
             var casedir = Db.CaseDir(subject,id).Create();
             var casename = CaseName(id);
-            var tool = Wf.NasmTool();
+            var tool = Wf.Nasm();
             var source = tool.Source(input);
             var target = casedir + FS.file(casename, FS.Asm);
             var emitting = Wf.EmittingFile(target);

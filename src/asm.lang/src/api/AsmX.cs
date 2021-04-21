@@ -45,12 +45,12 @@ namespace Z0.Asm
         {
             Buffer = buffer;
             S = AsmSymbols.create();
-            Codes = Symbols.cache<AsmMnemonicCode>();
-            Gp8Sym = Symbols.cache<Gp8>();
-            Gp16Sym = Symbols.cache<Gp16>();
-            Gp32Sym = Symbols.cache<Gp32>();
-            Gp64Sym = Symbols.cache<Gp64>();
-            KRegSym = Symbols.cache<KReg>();
+            Codes = Symbols.symbolic<AsmMnemonicCode>();
+            Gp8Sym = Symbols.symbolic<Gp8>();
+            Gp16Sym = Symbols.symbolic<Gp16>();
+            Gp32Sym = Symbols.symbolic<Gp32>();
+            Gp64Sym = Symbols.symbolic<Gp64>();
+            KRegSym = Symbols.symbolic<KReg>();
             Position = 0;
         }
 

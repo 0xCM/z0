@@ -7,21 +7,23 @@ namespace Z0
     using System;
     using System.Reflection.Metadata.Ecma335;
 
+    using static Images;
+
     partial class PeTableReader
     {
-        public Index<CliSystemStringInfo> SystemStrings()
+        public Index<SystemString> SystemStrings()
         {
             var reader = State.Reader;
             int size = reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
-                return sys.empty<CliSystemStringInfo>();
+                return sys.empty<SystemString>();
 
-            var values = root.list<CliSystemStringInfo>();
+            var values = root.list<SystemString>();
             var handle = MetadataTokens.StringHandle(0);
             var i=0;
             do
             {
-                values.Add(new CliSystemStringInfo(seq: i++, CliStringRecord.Source.System, size, (Address32)reader.GetHeapOffset(handle), reader.GetString(handle)));
+                values.Add(new SystemString(seq: i++, size, (Address32)reader.GetHeapOffset(handle), reader.GetString(handle)));
                 handle = reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);

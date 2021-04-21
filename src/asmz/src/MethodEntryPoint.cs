@@ -13,22 +13,22 @@ namespace Z0
     using static memory;
     using static Z0.Asm.AsmOp;
 
-    public readonly struct EntryPoint
+    public readonly struct MethodEntryPoint
     {
         public MemoryRange Location {get;}
 
         [MethodImpl(Inline)]
-        public EntryPoint(MemoryRange address)
+        public MethodEntryPoint(MemoryRange address)
         {
             Location = address;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator EntryPoint(MemoryRange src)
-            => new EntryPoint(src);
+        public static implicit operator MethodEntryPoint(MemoryRange src)
+            => new MethodEntryPoint(src);
     }
 
-    public struct EntryPoint<T>
+    public struct MethodEntryPoint<T>
         where T : unmanaged
     {
 
@@ -50,9 +50,9 @@ namespace Z0
         }
     }
 
-    public class EntryPoints : WfService<EntryPoints>
+    public class MethodEntryPoints : WfService<MethodEntryPoints>
     {
-        Index<EntryPoint> Trampolines;
+        Index<MethodEntryPoint> Trampolines;
 
         Index<Cell128> Payloads;
 
@@ -60,9 +60,9 @@ namespace Z0
 
         const uint SlotCount = 256;
 
-        public EntryPoints()
+        public MethodEntryPoints()
         {
-            Trampolines = alloc<EntryPoint>(SlotCount);
+            Trampolines = alloc<MethodEntryPoint>(SlotCount);
             Payloads = alloc<Cell128>(SlotCount);
             Receivers = alloc<MemoryAddress>(SlotCount);
             Receivers[0] = ApiJit.jit(GetType().Method(nameof(Receive64u)));
@@ -71,7 +71,7 @@ namespace Z0
         public bool Create<T>(byte slot)
             where T : unmanaged
         {
-             var ep = new EntryPoint<T>();
+             var ep = new MethodEntryPoint<T>();
             Trampolines[slot] = ep.Init();
             return Trampolines[slot].Location.IsNonEmpty;
         }

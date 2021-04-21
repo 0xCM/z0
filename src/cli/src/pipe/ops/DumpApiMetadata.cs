@@ -14,18 +14,25 @@ namespace Z0
 
     partial class ImageMetaPipe
     {
-        public void DumpMetadata(FS.FilePath src, FS.FilePath dst)
+        public void EmitMetadump(FS.FilePath src, FS.FilePath dst)
         {
             try
             {
-                var flow = Wf.EmittingFile(dst);
-                using var stream = File.OpenRead(src.Name);
-                using var peFile = new PEReader(stream);
-                using var target = dst.Writer();
-                var reader = peFile.GetMetadataReader();
-                var viz = new MetadataVisualizer(reader, target);
-                viz.Visualize();
-                Wf.EmittedFile(flow,1);
+                if(ImageMetaReader.HasMetadata(src))
+                {
+                    var flow = Wf.EmittingFile(dst);
+                    using var stream = File.OpenRead(src.Name);
+                    using var peFile = new PEReader(stream);
+                    using var target = dst.Writer();
+                    var reader = peFile.GetMetadataReader();
+                    var viz = new MetadataVisualizer(reader, target);
+                    viz.Visualize();
+                    Wf.EmittedFile(flow,1);
+                }
+            }
+            catch(BadImageFormatException bfe)
+            {
+                Wf.Warn(bfe);
             }
             catch(Exception e)
             {
@@ -33,9 +40,9 @@ namespace Z0
             }
         }
 
-        public void DumpApiMetadata()
+        public void EmitApiMetadump()
         {
-            var dir = Db.TableDir("api.metadata");
+            var dir = Db.TableDir("image.metadump");
             dir.Clear();
             var components = Wf.Api.PartComponents.View;
             var count = components.Length;
@@ -43,9 +50,29 @@ namespace Z0
             {
                 var component = skip(components,i);
                 var source = FS.path(component.Location);
-                var name = source.FileName.WithoutExtension;
+                var name = FS.file(source.FileName.Format(), FS.Txt);
                 var target = dir + name + FS.Txt;
-                DumpMetadata(source,target);
+                EmitMetadump(source,target);
+            }
+        }
+
+        public void EmitMetadadump(bool externals = true)
+        {
+            if(externals)
+            {
+                var dstdir = Db.TableDir("image.metadump.external");
+                dstdir.Clear();
+                var srcdir = Db.RuntimeRoot();
+                var files = srcdir.AllFiles.Where(f => f.Is(FS.Exe) || f.Is(FS.Dll));
+                foreach(var src in files)
+                {
+                    var dst = dstdir + FS.file(src.FileName.Format(), FS.Txt);
+                    EmitMetadump(src,dst);
+                }
+            }
+            else
+            {
+                EmitApiMetadump();
             }
         }
     }

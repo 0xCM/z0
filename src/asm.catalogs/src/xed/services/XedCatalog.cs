@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
@@ -20,8 +21,11 @@ namespace Z0.Asm
             EmitSymCatalog();
         }
 
+        AsmCatPaths CatPaths
+            => new AsmCatPaths(Db);
+
         public Index<FormDetail> EmitFormDetails()
-            => EmitFormDetails(Db.AsmCatalogPath("xed", FS.file("xed-forms", FS.Csv)));
+            => EmitFormDetails(CatPaths.XedFormDetailPath());
 
         public Index<FormDetail> EmitFormDetails(FS.FilePath dst)
         {
@@ -29,14 +33,15 @@ namespace Z0.Asm
             var src = records.View;
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
-            using var writer = dst.Writer();
-            writer.WriteLine(FormDetail.Header);
-            for(var i=0; i<count; i++)
-                writer.WriteLine(skip(src,i).Format());
+            Tables.emit(records.View, dst, FormDetail.FieldWidths);
+
+            // using var writer = dst.Writer();
+            // writer.WriteLine(FormDetail.Header);
+            // for(var i=0; i<count; i++)
+            //     writer.WriteLine(skip(src,i).Format());
             Wf.EmittedFile(flow, count);
             return records;
         }
-
 
         public Index<SymLiteral> SymLiterals()
         {
@@ -60,7 +65,7 @@ namespace Z0.Asm
         public FS.FilePath EmitSymIndex()
         {
             var src = SymLiterals();
-            var dst = Db.AsmCatalogPath("xed", FS.file("xed-symbol-index", FS.Csv));
+            var dst = CatPaths.XedSymIndexPath();
             EmitSymIndex(dst);
             return dst;
         }
@@ -86,7 +91,6 @@ namespace Z0.Asm
             EmitSymbols<EncodingGroup>();
             EmitSymbols<Extension>();
             EmitSymbols<IClass>();
-            EmitSymbols<IForm>();
             EmitSymbols<IsaKind>();
             EmitSymbols<MachineMode>();
             EmitSymbols<Nonterminal>();
@@ -99,9 +103,13 @@ namespace Z0.Asm
             EmitSymbols<SizeIndicator>();
         }
 
+
+        public FS.FilePath IDataSourcePath()
+            => Db.DataSource(FS.file("xed-idata", FS.Txt));
+
         public void EmitSourceAssets()
         {
-            var dst = Db.DataSource(FS.file("xed-idata", FS.Txt));
+            var dst = IDataSourcePath();
             var flow = Wf.EmittingFile(dst);
             var data = Assets.XedInstructionSummary().Utf8();
             dst.Overwrite(data);
@@ -125,7 +133,7 @@ namespace Z0.Asm
 
         public Index<XedFormInfo> LoadFormSummaries()
         {
-            var src = Db.DataSource(FS.file("xed-idata", FS.Txt));
+            var src = IDataSourcePath();
             var flow = Wf.Running("Loading xed instruction summaries");
             using var reader = src.Reader();
             var counter = 0u;
@@ -180,7 +188,8 @@ namespace Z0.Asm
         void EmitSymbols<K>()
             where K : unmanaged, Enum
         {
-            EmitSymbols(Symbols.cache<K>().View, Db.AsmCatalogPath(Subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
+            EmitSymbols(Symbols.symbolic<K>().View, Db.AsmCatalogPath(Subject,
+                FS.file(string.Format("{0}.{1}", Subject,  typeof(K).Name.ToLower()), FS.Csv)));
         }
 
         void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
@@ -204,9 +213,9 @@ namespace Z0.Asm
 
         static Parts.AsmCatalogs.PartAssets Assets => Parts.AsmCatalogs.Assets;
 
-        IForm ParseIForm(string src)
+        IFormType ParseIForm(string src)
         {
-            if(Enum.TryParse<IForm>(src, out var dst))
+            if(Enum.TryParse<IFormType>(src, out var dst))
                 return dst;
             else
                 return 0;

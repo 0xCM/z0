@@ -21,7 +21,7 @@ namespace Z0
 
             public OpUri Uri;
 
-            public BinaryCode CilCode;
+            public BinaryCode Encoded;
         }
     }
 }

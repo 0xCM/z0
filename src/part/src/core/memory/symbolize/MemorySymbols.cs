@@ -67,15 +67,7 @@ namespace Z0
         }
 
         public MemoryLookup ToLookup()
-            => memory.lookup(slice(_Symbols.Edit,0, EntryCount).ToArray());
-        // {
-        //     var count = EntryCount;
-        //     var src = slice(_Symbols.Edit, 0, count);
-        //     ref var dst = ref first(src);
-        //     for(var i=0u; i<count; i++)
-        //         seek(dst,i).HashCode = memory.hash(count, skip(src,i).Address);
-        //     return new MemoryLookup(_Symbols, count);
-        // }
+            => memory.lookup(_Symbols, EntryCount);
 
     }
     partial struct Msg

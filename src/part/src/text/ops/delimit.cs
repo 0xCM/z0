@@ -24,6 +24,10 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static string delimit<T>(ReadOnlySpan<T> src, char delimiter, int pad)
+            => delimit(src,delimiter, pad, true);
+
+        [Op, Closures(Closure)]
+        public static string delimit<T>(ReadOnlySpan<T> src, char delimiter, int pad, bool space)
         {
             var dst = text.buffer();
             var count = src.Length;
@@ -35,7 +39,8 @@ namespace Z0
                 if(i != last)
                 {
                     dst.Append(delimiter);
-                    dst.Append(Chars.Space);
+                    if(space)
+                        dst.Append(Chars.Space);
                 }
             }
             return dst.Emit();

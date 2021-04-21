@@ -10,6 +10,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Rules;
 
     [ApiHost("text.rules")]
     public readonly partial struct TextRules
@@ -19,6 +20,22 @@ namespace Z0
         const MethodImplOptions Options = NotInline;
 
         public const StringComparison InvariantCulture = StringComparison.InvariantCulture;
+
+        public static bool eval(string src, Adjacent<char, OneOf<char>> rule, out Adjacent<char> dst)
+        {
+            var match = rule.A;
+            var candidates = rule.B.Elements.View;
+            var count = candidates.Length;
+            var ix = text.index(candidates, rule.A);
+            if(ix != NotFound)
+            {
+                dst = adjacent<char>(match, skip(candidates,ix));
+                return true;
+            }
+            dst = default;
+            return false;
+        }
+
 
         [Op]
         public static RuleParser parser(string src)

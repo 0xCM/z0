@@ -15,10 +15,13 @@ namespace Z0
     {
         readonly Index<Sym<K>> Data;
 
+        readonly Index<K> _Kinds;
+
         [MethodImpl(Inline)]
-        public Symbols(Index<Sym<K>> src)
+        Symbols(Index<Sym<K>> src)
         {
             Data = src;
+            _Kinds = src.Select(x => x.Kind);
         }
 
         public ref readonly Sym<K> this[uint index]
@@ -62,6 +65,12 @@ namespace Z0
                 dst = default;
                 return false;
             }
+        }
+
+        public ReadOnlySpan<K> Kinds
+        {
+            [MethodImpl(Inline)]
+            get => _Kinds;
         }
 
         public Sym<K>[] Storage

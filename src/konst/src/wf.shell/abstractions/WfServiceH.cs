@@ -115,6 +115,16 @@ namespace Z0
             Wf.EmittedTable(flow, count);
         }
 
+        [Op,Closures(UInt64k)]
+        protected void ShowSymbols<T>(Symbols<T> src, ShowLog dst)
+            where T : unmanaged
+        {
+            var count = src.Count;
+            var symbols = src.View;
+            for(var i=0; i<count; i++)
+                dst.Show(memory.skip(symbols,i).Format());
+        }
+
         protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, Func<T,string> render, string title = EmptyString)
         {
             var count = src.Length;

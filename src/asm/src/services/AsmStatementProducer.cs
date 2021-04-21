@@ -86,7 +86,7 @@ namespace Z0.Asm
         }
 
         static AsmSigExpr sig(in ApiInstruction src)
-            => AsmSyntax.sig(src.Instruction.OpCode.InstructionString);
+            => AsmParser.sig(src.Instruction.OpCode.InstructionString);
 
         static AsmFormExpr form(in ApiInstruction src)
             => AsmCore.form(src.OpCode, sig(src));

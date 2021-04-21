@@ -12,8 +12,13 @@ namespace Z0
 
     partial struct Symbols
     {
-        public static SymCache<E> cache<E>()
+        internal static SymCache<E> cache<E>()
             where E : unmanaged, Enum
                 => SymCache<E>.get();
+
+        [MethodImpl(Inline)]
+        public static Symbols<E> symbolic<E>()
+            where E : unmanaged, Enum
+                => cache<E>();
     }
 }

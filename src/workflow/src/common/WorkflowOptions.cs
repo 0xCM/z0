@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct MachineOptions : ISettingsSet<MachineOptions>
+    public struct WorkflowOptions : ISettingsSet<WorkflowOptions>
     {
         public Setting<bool> EmitAssetIndex;
 
@@ -14,7 +14,7 @@ namespace Z0
 
         public Setting<bool> EmitSectionHeaders;
 
-        public Setting<bool> EmitMsilRecords;
+        public Setting<bool> EmitMsilMetadata;
 
         public Setting<bool> EmitCliStrings;
 
@@ -60,13 +60,13 @@ namespace Z0
 
         public Setting<bool> EmitAssemblyRefs;
 
-        public static MachineOptions @default()
+        public static WorkflowOptions @default()
         {
-            var dst = new MachineOptions();
+            var dst = new WorkflowOptions();
             dst.CollectApiDocs = true;
             dst.EmitImageContent = true;
             dst.EmitSectionHeaders = true;
-            dst.EmitMsilRecords = true;
+            dst.EmitMsilMetadata = true;
             dst.EmitCliStrings = true;
             dst.EmitCliBlobs = true;
             dst.EmitCliConstants = true;

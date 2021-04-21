@@ -8,6 +8,9 @@ namespace Z0
 
     public partial interface IEnvPaths
     {
+        FS.FolderPath DataRoot()
+            => Env.DataRoot;
+
         FS.FolderPath DbRoot()
             => Env.Db;
 

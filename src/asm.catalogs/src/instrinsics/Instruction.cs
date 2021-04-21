@@ -20,8 +20,7 @@ namespace Z0.Asm
 
             public string form;
 
-            public IForm xed;
-
+            public IFormType xed;
         }
     }
 }

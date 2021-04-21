@@ -57,5 +57,10 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static CmdScript Empty
+        {
+            get => new CmdScript(sys.empty<ScriptExpr>());
+        }
     }
 }

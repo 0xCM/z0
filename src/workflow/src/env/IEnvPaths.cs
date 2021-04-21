@@ -59,7 +59,7 @@ namespace Z0
             => BinaryRoot() + FS.folder(source);
 
         FS.Files RepoArchives()
-            => RepoArchiveDir().Files(X.Zip);
+            => RepoArchiveDir().Files(FS.Zip);
 
         FS.FolderPath EventRoot()
             => DbRoot() + FS.folder(events);
@@ -107,14 +107,5 @@ namespace Z0
 
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();
-
-        FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)
-            => id.ToFileName(ext);
-
-        FS.FileName LegalFileName(ApiHostUri host, FS.FileExt ext)
-            => FS.file(string.Concat(host.Part.Format(), Chars.Dot, host.Name), ext);
-
-        FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
-            => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
     }
 }

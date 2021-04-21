@@ -14,12 +14,15 @@ namespace Z0
    public static partial class XTools
    {
        [Op]
-       public static Nasm NasmTool(this IWfRuntime wf)
-            => Nasm.create(wf);
+       public static Nasm Nasm(this IWfRuntime wf)
+            => Tooling.Nasm.create(wf);
 
        [Op]
        public static XedTool XedTool(this IWfRuntime wf)
             => Tooling.XedTool.create(wf);
+
+        public static DumpBin DumpBin(this IWfRuntime wf)
+            => Tooling.DumpBin.create(wf);
 
        [Op]
        public static ScriptRunner ScriptRunner(this IWfRuntime wf)
@@ -29,10 +32,8 @@ namespace Z0
        public static ScriptRunner ScriptRunner(this IEnvPaths paths)
             => Z0.ScriptRunner.create(paths);
 
-       [Op]
+        [Op]
         public static CultProcessor CultProcessor(this IWfRuntime wf)
             => Tooling.CultProcessor.create(wf);
-
-
    }
 }

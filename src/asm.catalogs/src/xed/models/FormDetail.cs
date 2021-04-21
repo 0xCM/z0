@@ -6,50 +6,47 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Part;
 
     partial struct XedModels
     {
-        public struct FormDetail
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct FormDetail : IRecord<FormDetail>
         {
+            public const string TableId = "xed.forms.details";
+
+            public const byte FieldCount = 7;
+
             public ushort Index;
 
-            public IForm Identifier;
+            public IForm Form;
 
             public IClass Class;
 
             public Category Category;
 
-            public Index<AttributeKind> Attributes;
-
             public IsaKind IsaKind;
 
             public Extension Extension;
 
+            public DelimitedIndex<AttributeKind> Attributes;
+
             [MethodImpl(Inline)]
-            public FormDetail(ushort index, IForm key, IClass iclass, Category category, Index<AttributeKind> attribs, IsaKind isa, Extension ext)
+            public FormDetail(ushort index, IFormType form, IClass iclass, Category category, Index<AttributeKind> attribs, IsaKind isa, Extension ext)
             {
                 Index = index;
-                Identifier = key;
+                Form = form;
                 Class = iclass;
                 Category = category;
-                Attributes = attribs;
+                Attributes = Seq.delimit(Chars.Colon, 0, attribs.Storage);
                 IsaKind = isa;
                 Extension = ext;
             }
 
-            const string FormatPattern = "{0,-8} | {1,-56} | {2,-32} | {3,-16} | {4,-16} | {5}";
-
-            public static string Header
-                => string.Format(FormatPattern, nameof(Index), nameof(Identifier), nameof(Class),
-                     nameof(IsaKind),nameof(Extension), nameof(Attributes));
-
-            public string Format()
-                => string.Format(FormatPattern, Index, Identifier, Class, IsaKind, Extension, Attributes.Delimit(Chars.Comma));
-
-            public override string ToString()
-                => Format();
-        }
+            public static ReadOnlySpan<byte> FieldWidths
+                => new byte[FieldCount]{8,60,32,16,16,16,1};
+       }
     }
 }

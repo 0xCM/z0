@@ -16,14 +16,14 @@ namespace Z0.Asm
 
     public ref struct XedFormPipe
     {
-        public static XedFormPipe create(IWfRuntime sink)
-            => new XedFormPipe(sink);
+        public static XedFormPipe create(IWfRuntime wf)
+            => new XedFormPipe(wf);
 
         readonly IWfRuntime Wf;
 
         readonly IEnvPaths Paths;
 
-        readonly Symbols<IForm> Source;
+        readonly Symbols<IFormType> FormTypes;
 
         readonly Symbols<AddressWidth> AddressWidths;
 
@@ -55,7 +55,7 @@ namespace Z0.Asm
 
         readonly Symbols<RegClass> RegClasses;
 
-        readonly Span<FormParition> Partitions;
+        Span<FormPartiton> Partitions;
 
         Span<FormAspect> Aspects;
 
@@ -63,25 +63,28 @@ namespace Z0.Asm
         {
             Wf = wf;
             Paths = wf.Db();
-            Attributes = Symbols.cache<AttributeKind>();
-            Categories = Symbols.cache<Category>();
-            ChipCodes = Symbols.cache<ChipCode>();
-            Source = Symbols.cache<IForm>();
-            IsaKinds = Symbols.cache<IsaKind>();
-            IClasses = Symbols.cache<IClass>();
-            Extensions = Symbols.cache<Extension>();
-            EFlags = Symbols.cache<EFlag>();
-            Registers = Symbols.cache<RegId>();
-            RegRoles = Symbols.cache<RegRole>();
-            OpKinds = Symbols.cache<OperandKind>();
-            OpVisibility = Symbols.cache<OperandVisibility>();
-            RegClasses = Symbols.cache<RegClass>();
-            AddressWidths = Symbols.cache<AddressWidth>();
-            OpWidths = Symbols.cache<OperandWidthType>();
-            EncodingGroups = Symbols.cache<EncodingGroup>();
+            Attributes = Symbols.symbolic<AttributeKind>();
+            Categories = Symbols.symbolic<Category>();
+            ChipCodes = Symbols.symbolic<ChipCode>();
+            FormTypes = Symbols.symbolic<IFormType>();
+            IsaKinds = Symbols.symbolic<IsaKind>();
+            IClasses = Symbols.symbolic<IClass>();
+            Extensions = Symbols.symbolic<Extension>();
+            EFlags = Symbols.symbolic<EFlag>();
+            Registers = Symbols.symbolic<RegId>();
+            RegRoles = Symbols.symbolic<RegRole>();
+            OpKinds = Symbols.symbolic<OperandKind>();
+            OpVisibility = Symbols.symbolic<OperandVisibility>();
+            RegClasses = Symbols.symbolic<RegClass>();
+            AddressWidths = Symbols.symbolic<AddressWidth>();
+            OpWidths = Symbols.symbolic<OperandWidthType>();
+            EncodingGroups = Symbols.symbolic<EncodingGroup>();
             Aspects = default;
-            Partitions = alloc<FormParition>(Source.Count);
+            Partitions = default;
         }
+
+        AsmCatPaths CatPaths
+            => new AsmCatPaths(Paths);
 
         public Index<R.XedFormAspect> EmitFormAspects()
         {
@@ -90,7 +93,7 @@ namespace Z0.Asm
             var aspects = pipe.ComputeFormAspects();
             var count = (uint)aspects.Length;
             var buffer = alloc<R.XedFormAspect>(count);
-            var path = FormComponentPath();
+            var path = CatPaths.XedFormAspectPath();
             var formatter = Tables.formatter<R.XedFormAspect>();
             var emitting = Wf.EmittingTable<R.XedFormAspect>(path);
             using var writer = path.Writer();
@@ -121,17 +124,14 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public FS.FilePath FormComponentPath()
-            => Paths.AsmCatalogTable<R.XedFormAspect>("xed");
-
         public ReadOnlySpan<FormAspect> ComputeFormAspects()
         {
             if(Aspects.Length != 0)
                 return Aspects;
             else
             {
-                var count = Source.Count;
-                var forms = Source.View;
+                var count = FormTypes.Count;
+                var forms = FormTypes.View;
                 var distinct = root.hashset<FormAspect>();
                 var counter = 0u;
                 for(ushort i=0; i<count; i++)
@@ -154,25 +154,37 @@ namespace Z0.Asm
             }
         }
 
-        public ReadOnlySpan<FormParition> Run()
+        public ReadOnlySpan<FormPartiton> ComputePartitions()
         {
-            var count = Source.Count;
+            if(Partitions.Length != 0)
+                return Partitions;
+
+            Partitions = alloc<FormPartiton>(FormTypes.Count);
+
+            var count = FormTypes.Count;
             var flow = Wf.Running(Msg.PartitioningIForms.Format(count));
-            var forms = Source.View;
+            var forms = FormTypes.View;
+
             for(ushort i=0; i<count; i++)
                 Partition(i, skip(forms,i));
             Wf.Ran(flow, Msg.PartitionedIForms.Format(count));
             return Partitions;
         }
 
-        void Partition(ushort index, IForm src)
+        void Partition(ushort index, IFormType src)
         {
             ref var dst = ref seek(Partitions, index);
             dst.Index = index;
-            dst.Source = src;
-            dst.Parts = src.ToString().Split(Chars.Underscore);
-            ref var parts = ref dst.Parts.First;
-            var count = dst.Parts.Count;
+            dst.Form = src;
+
+            var candidates = span(src.ToString().Split(Chars.Underscore));
+            if(candidates.Length <= 1)
+                return;
+
+            dst.Aspects = slice(candidates,1).ToArray();
+            ref var parts = ref dst.Aspects.First;
+            var count = dst.Aspects.Count;
+
             for(var i=0; i<count; i++)
             {
                 ref readonly var part = ref skip(parts,i);
@@ -212,21 +224,23 @@ namespace Z0.Asm
         bool Match(SymExpr src, out RegId dst)
             => Registers.MatchKind(src, out dst);
 
-        void Complete(ref FormParition partition)
+        void Complete(ref FormPartiton partition)
         {
-            var count = partition.PartCount;
-            if(count == 1)
+            var count = partition.AspectCount;
+            if(count == 0)
+            {
                 partition.Complete = true;
+            }
             else
             {
-                ref var parts = ref partition.Parts[1];
-                for(var i=1; i<count; i++)
+                ref var parts = ref partition.Aspects[1];
+                for(var i=0; i<count; i++)
                 {
 
                 }
+                partition.Complete = true;
             }
         }
-
     }
 }
 
@@ -238,7 +252,5 @@ namespace Z0
         public static MsgPattern<Count> PartitioningIForms => "Partitioning {0} IForm identifiers";
 
         public static MsgPattern<Count> PartitionedIForms => "Partitoned {0} IForm identifiers";
-
     }
-
 }

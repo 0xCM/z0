@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
     using static LogicSig;
+    using static gcpu;
 
     using ULK = UnaryBitLogicKind;
     using BLK = BinaryBitLogicKind;
@@ -33,10 +33,10 @@ namespace Z0
         {
             switch(kind)
             {
-                case ULK.Not: return gcpu.vnot(a);
-                case ULK.Identity: return gcpu.videntity(a);
-                case ULK.False: return gcpu.vfalse(a);
-                case ULK.True: return gcpu.vtrue(a);
+                case ULK.Not: return vnot(a);
+                case ULK.Identity: return videntity(a);
+                case ULK.False: return vfalse(a);
+                case ULK.True: return vtrue(a);
                 default: throw Unsupported.value(sig<T>(kind));
              }
         }
@@ -54,9 +54,9 @@ namespace Z0
         {
             switch(kind)
             {
-                case BCK.Eq: return gcpu.veq(a,b);
-                case BCK.Lt: return gcpu.vlt(a,b);
-                case BCK.Gt: return gcpu.vgt(a,b);
+                case BCK.Eq: return veq(a,b);
+                case BCK.Lt: return vlt(a,b);
+                case BCK.Gt: return vgt(a,b);
                 default: throw Unsupported.value(sig<T>(kind));
             }
         }
@@ -67,8 +67,8 @@ namespace Z0
         {
             switch(kind)
             {
-                case BAR.Add: return gcpu.vadd(x,y);
-                case BAR.Sub: return gcpu.vsub(x,y);
+                case BAR.Add: return vadd(x,y);
+                case BAR.Sub: return vsub(x,y);
                 default: throw Unsupported.value(sig<T>(kind));
             }
         }
@@ -86,10 +86,10 @@ namespace Z0
         {
             switch(kind)
             {
-                case BSK.Sll: return gcpu.vsll(a,count);
-                case BSK.Srl: return gcpu.vsrl(a,count);
-                case BSK.Rotl: return gcpu.vrotl(a,count);
-                case BSK.Rotr: return gcpu.vrotr(a,count);
+                case BSK.Sll: return vsll(a,count);
+                case BSK.Srl: return vsrl(a,count);
+                case BSK.Rotl: return vrotl(a,count);
+                case BSK.Rotr: return vrotr(a,count);
                 default: throw Unsupported.value(sig<T>(kind));
             }
         }
@@ -107,22 +107,22 @@ namespace Z0
         {
             switch(kind)
             {
-                case BLK.True: return gcpu.vtrue(a,b);
-                case BLK.False: return gcpu.vfalse(a,b);
-                case BLK.And: return gcpu.vand(a,b);
-                case BLK.Nand: return gcpu.vnand(a,b);
-                case BLK.Or: return gcpu.vor(a,b);
-                case BLK.Nor: return gcpu.vnor(a,b);
-                case BLK.Xor: return gcpu.vxor(a,b);
-                case BLK.Xnor: return gcpu.vxnor(a,b);
-                case BLK.LProject: return gcpu.vleft(a,b);
-                case BLK.RProject: return gcpu.vright(a,b);
-                case BLK.LNot: return gcpu.vlnot(a,b);
-                case BLK.RNot: return gcpu.vrnot(a,b);
-                case BLK.Impl: return gcpu.vimpl(a,b);
-                case BLK.NonImpl: return gcpu.vnonimpl(a,b);
-                case BLK.CImpl: return gcpu.vcimpl(a,b);
-                case BLK.CNonImpl: return gcpu.vcnonimpl(a,b);
+                case BLK.True: return vtrue(a,b);
+                case BLK.False: return vfalse(a,b);
+                case BLK.And: return vand(a,b);
+                case BLK.Nand: return vnand(a,b);
+                case BLK.Or: return vor(a,b);
+                case BLK.Nor: return vnor(a,b);
+                case BLK.Xor: return vxor(a,b);
+                case BLK.Xnor: return vxnor(a,b);
+                case BLK.LProject: return vleft(a,b);
+                case BLK.RProject: return vright(a,b);
+                case BLK.LNot: return vlnot(a,b);
+                case BLK.RNot: return vrnot(a,b);
+                case BLK.Impl: return vimpl(a,b);
+                case BLK.NonImpl: return vnonimpl(a,b);
+                case BLK.CImpl: return vcimpl(a,b);
+                case BLK.CNonImpl: return vcnonimpl(a,b);
                 default: throw Unsupported.value(sig<T>(kind));
             }
         }
@@ -150,22 +150,22 @@ namespace Z0
         {
             switch(kind)
             {
-                case BLK.True: return gcpu.vtrue;
-                case BLK.False: return gcpu.vfalse;
-                case BLK.And: return gcpu.vand;
-                case BLK.Nand: return gcpu.vnand;
-                case BLK.Or: return gcpu.vor;
-                case BLK.Nor: return gcpu.vnor;
-                case BLK.Xor: return gcpu.vxor;
-                case BLK.Xnor: return gcpu.vxnor;
-                case BLK.LProject: return gcpu.vleft;
-                case BLK.RProject: return gcpu.vright;
-                case BLK.LNot: return gcpu.vlnot;
-                case BLK.RNot: return gcpu.vrnot;
-                case BLK.Impl: return gcpu.vimpl;
-                case BLK.NonImpl: return gcpu.vnonimpl;
-                case BLK.CImpl: return gcpu.vcimpl;
-                case BLK.CNonImpl: return gcpu.vcnonimpl;
+                case BLK.True: return vtrue;
+                case BLK.False: return vfalse;
+                case BLK.And: return vand;
+                case BLK.Nand: return vnand;
+                case BLK.Or: return vor;
+                case BLK.Nor: return vnor;
+                case BLK.Xor: return vxor;
+                case BLK.Xnor: return vxnor;
+                case BLK.LProject: return vleft;
+                case BLK.RProject: return vright;
+                case BLK.LNot: return vlnot;
+                case BLK.RNot: return vrnot;
+                case BLK.Impl: return vimpl;
+                case BLK.NonImpl: return vnonimpl;
+                case BLK.CImpl: return vcimpl;
+                case BLK.CNonImpl: return vcnonimpl;
                 default: throw Unsupported.value(sig<T>(kind));
             }
         }
@@ -219,162 +219,162 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f01<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-            => gcpu.vnor(a, gcpu.vor(b,c));
+            => vnor(a, vor(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f02<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(c, gcpu.vnor(b,a));
+                => vand(c, vnor(b,a));
 
          // b nor a
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f03<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnor(b,a);
+                => vnor(b,a);
 
        // b and (a nor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f04<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(b, gcpu.vnor(a,c));
+                => vand(b, vnor(a,c));
 
         // c nor a
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f05<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnor(c,a);
+                => vnor(c,a);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f06<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(a), gcpu.vxor(b,c));
+                => vand(vnot(a), vxor(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f07<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnor(a, gcpu.vand(b,c));
+                => vnor(a, vand(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f08<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vand(gcpu.vnot(a),b), c);
+                => vand(vand(vnot(a),b), c);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f09<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnor(a, gcpu.vxor(b,c));
+                => vnor(a, vxor(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0a<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(c, gcpu.vnot(a));
+                => vand(c, vnot(a));
 
         // not a and ((b xor 1) or c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0b<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(a), gcpu.vor(gcpu.vnot(b),  c));
+                => vand(vnot(a), vor(vnot(b),  c));
 
         // b and (not a)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0c<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(b, gcpu.vnot(a));
+                => vand(b, vnot(a));
 
         // not a and (b or (c xor 1))
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0d<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(a), gcpu.vor(b, gcpu.vnot(c)));
+                => vand(vnot(a), vor(b, vnot(c)));
 
         // not a and (b or c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0e<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(a), gcpu.vor(b,c));
+                => vand(vnot(a), vor(b,c));
 
         // not a
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0f<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnot(a);
+                => vnot(a);
 
         // a and (b nor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f10<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(a, gcpu.vnor(b, c));
+                => vand(a, vnor(b, c));
 
         // c nor b
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f11<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnor(c,b);
+                => vnor(c,b);
 
         // not b and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f12<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(b), gcpu.vxor(a,c));
+                => vand(vnot(b), vxor(a,c));
 
         // b nor (a and c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f13<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnor(b, gcpu.vand(a,c));
+                => vnor(b, vand(a,c));
 
         // not c and (a xor b)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f14<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(c), gcpu.vxor(a,b));
+                => vand(vnot(c), vxor(a,b));
 
         // c nor (b and a)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f15<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnor(c, gcpu.vand(a,b));
+                => vnor(c, vand(a,b));
 
         // a ? (b nor c) : (b xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f16<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vselect(a, gcpu.vnor(b,c), gcpu.vxor(b,c));
+                => vselect(a, vnor(b,c), vxor(b,c));
 
         // not(a ? (b or c) : (b and c))
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f17<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnot(gcpu.vselect(a, gcpu.vor(b,c), gcpu.vand(b,c)));
+                => vnot(vselect(a, vor(b,c), vand(b,c)));
 
         // (a xor b) and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f18<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vxor(a,b), gcpu.vxor(a,c));
+                => vand(vxor(a,b), vxor(a,c));
 
         // ((b xor c) xor (a and (b and c))
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f19<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vxor(gcpu.vxor(b,c), gcpu.vand(a, gcpu.vand(b,c)));
+                => vxor(vxor(b,c), vand(a, vand(b,c)));
 
         // not ((a and b)) and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f1a<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnot(gcpu.vand(gcpu.vand(a,b), gcpu.vxor(a, c)));
+                => vnot(vand(vand(a,b), vxor(a, c)));
 
         // c ? not a : not b
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f1b<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vselect(c, gcpu.vnot(a), gcpu.vnot(b));
+                => vselect(c, vnot(a), vnot(b));
 
         // a ? (b xnor c) : (b nand c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f97<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vselect(c, gcpu.vxnor(b,c), gcpu.vnand(b,c));
+                => vselect(c, vxnor(b,c), vnand(b,c));
     }
 }

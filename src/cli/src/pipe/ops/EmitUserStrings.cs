@@ -8,27 +8,28 @@ namespace Z0
     using System.Reflection;
 
     using static memory;
+    using static Images;
 
     partial class ImageMetaPipe
     {
-        public Index<CliUserStringInfo> EmitUserStrings()
+        public Index<UserString> EmitUserStrings()
             => EmitUserStrings(Wf.Components);
 
-        public Index<CliUserStringInfo> EmitUserStrings(ReadOnlySpan<Assembly> src)
+        public Index<UserString> EmitUserStrings(ReadOnlySpan<Assembly> src)
         {
-            var buffer = RecordList.create<CliUserStringInfo>();
+            var buffer = RecordList.create<UserString>();
             var count = src.Length;
             for(var i=0; i<count; i++)
                 EmitUserStrings(skip(src,i), buffer);
             return buffer.Emit();
         }
 
-        public void EmitUserStrings(Assembly src, RecordList<CliUserStringInfo> buffer)
+        public void EmitUserStrings(Assembly src, RecordList<UserString> buffer)
         {
             using var reader = PeTableReader.open(FS.path(src.Location));
             var records = reader.UserStrings();
             buffer.Add(records);
-            Db.EmitTable<CliUserStringInfo>(records, src.GetSimpleName());
+            Db.EmitTable<UserString>(records, src.GetSimpleName());
         }
     }
 }

@@ -16,12 +16,12 @@ namespace Z0
 
         readonly Index<uint> _Keys;
 
-        public uint EntryCount {get;}
+        public uint Capacity {get;}
 
         [MethodImpl(Inline)]
-        internal MemoryLookup(Index<MemorySymbol> symbols, Index<uint> keys)
+        internal MemoryLookup(Index<MemorySymbol> symbols, Index<uint> keys, uint capacity)
         {
-            EntryCount = symbols.Count;
+            Capacity = capacity;
             _Symbols = symbols;
             _Keys =  keys;
         }
@@ -44,18 +44,27 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool FindIndex(MemoryAddress address, out uint index)
         {
-            var hash = memory.hash(EntryCount,address);
-            if(hash < EntryCount)
+            var key = _Keys[memory.bucket(address,Capacity)];
+            if(_Symbols[key].Address == address)
             {
-                var key = _Keys[hash];
-                if(_Symbols[key].Address == address)
-                {
-                    index = key;
-                    return true;
-                }
+                index = key;
+                return true;
             }
-            index = uint.MaxValue;
-            return false;
+            else
+            {
+                var search = Symbols;
+                var count = search.Length;
+                for(var i=0u; i< count; i++)
+                {
+                    if(skip(search,i).Address == address)
+                    {
+                        index = i;
+                        return true;
+                    }
+                }
+                index = uint.MaxValue;
+                return false;
+            }
         }
 
         [MethodImpl(Inline)]

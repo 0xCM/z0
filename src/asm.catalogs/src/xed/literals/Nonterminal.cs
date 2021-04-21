@@ -493,13 +493,21 @@ namespace Z0
 
             YMM_R3,
             YMM_R3_32,
+
             YMM_R3_64,
+
             YMM_R_32,
+
             YMM_R_64,
+
             YMM_SE,
+
             YMM_SE32,
+
             YMM_SE64,
+
             ZMM_B3,
+
             ZMM_B3_32,
 
             ZMM_B3_64,

@@ -12,6 +12,8 @@ namespace Z0
 
         public static ToolId dia2dump => msdev.dia2dump;
 
+        public static ToolId dumpbin => msdev.dumpbin;
+
         public static ToolId msbuild => msdev.msbuild;
 
         public static ToolId cl => msdev.cl;
@@ -81,6 +83,8 @@ namespace Z0
             public static ToolId pdb2xml => "pdb2xml";
 
             public static ToolId dia2dump => "dia2dump";
+
+            public static ToolId dumpbin => "dumpbin";
         }
     }
 }

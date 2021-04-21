@@ -7,11 +7,12 @@ namespace Z0
     using System;
 
     using static memory;
+    using static Images;
 
     partial class ImageMetaPipe
     {
         FS.FolderPath FieldLiteralTarget
-            => Wf.Db().TableRoot() + FS.folder(CliFieldName.TableId);
+            => Wf.Db().TableRoot() + FS.folder(MemberFieldName.TableId);
 
         Index<Paired<FieldRef,string>> EmitFieldLiterals(ApiPartTypes src)
         {

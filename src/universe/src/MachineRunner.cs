@@ -12,7 +12,7 @@ namespace Z0
 
         static MsgPattern<Count, DelimitedIndex<PartId>> RanMachine => "Executed machine workflow for {0} parts: {1}";
 
-        public void Run(MachineOptions options)
+        public void Run(WorkflowOptions options)
         {
             var parts = Wf.Api.PartIdentities;
             var partList = Seq.delimit(Chars.Comma, 0, Wf.Api.PartIdentities);
@@ -89,37 +89,7 @@ namespace Z0
                 if(options.ProcessCultFiles)
                     Wf.CultProcessor().Run();
 
-                var cli = Wf.ImageMetaPipe();
-
-                if(options.EmitAssemblyRefs)
-                    cli.EmitAssemblyRefs();
-
-                if(options.EmitFieldLiterals)
-                    cli.EmitFieldLiterals();
-
-                if(options.EmitApiMetadata)
-                    cli.DumpApiMetadata();
-
-                if(options.EmitSectionHeaders)
-                    cli.EmitSectionHeaders();
-
-                if(options.EmitMsilRecords)
-                    cli.EmitMsilRows();
-
-                if(options.EmitCliStrings)
-                {
-                    Emitted(cli.EmitUserStrings());
-                    Emitted(cli.EmitSystemStrings());
-                }
-
-                if(options.EmitCliConstants)
-                    cli.EmitConstants();
-
-                if(options.EmitCliBlobs)
-                    cli.EmitBlobs();
-
-                if(options.EmitImageContent)
-                    cli.EmitImageContent();
+                Wf.ImageMetaPipe().EmitMetadaSets(options);
 
             }
             catch(Exception e)

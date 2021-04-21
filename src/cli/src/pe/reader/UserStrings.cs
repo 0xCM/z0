@@ -6,23 +6,24 @@ namespace Z0
 {
     using System;
     using System.Reflection.Metadata.Ecma335;
+    using static Images;
 
     partial class PeTableReader
     {
-        public Index<CliUserStringInfo> UserStrings()
+        public Index<UserString> UserStrings()
         {
             var reader = State.Reader;
             int size = reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
-                return sys.empty<CliUserStringInfo>();
+                return sys.empty<UserString>();
 
-            var values = root.list<CliUserStringInfo>();
+            var values = root.list<UserString>();
             var handle = MetadataTokens.UserStringHandle(0);
             var i=0;
 
             do
             {
-                values.Add(new CliUserStringInfo(seq: i++, CliStringRecord.Source.User, size, offset(reader,handle), ustring(reader,handle)));
+                values.Add(new UserString(seq: i++, size, offset(reader,handle), ustring(reader,handle)));
                 handle = reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);

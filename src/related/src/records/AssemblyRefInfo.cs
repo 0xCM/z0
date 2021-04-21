@@ -14,7 +14,7 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct AssemblyRefInfo : IRecord<AssemblyRefInfo>
         {
-            public const string TableId = "cli.assemblyref";
+            public const string TableId = "image.assemblyrefs";
 
             public Name Source;
 

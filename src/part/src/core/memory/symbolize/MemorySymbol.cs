@@ -13,7 +13,7 @@ namespace Z0
     {
         public uint Index;
 
-        public uint HashCode;
+        public Hash32 HashCode;
 
         public MemoryAddress Address;
 

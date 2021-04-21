@@ -16,7 +16,7 @@ namespace Z0
         [Record(TableId)]
         public unsafe struct DumpFileHeader : IRecord<DumpFileHeader>
         {
-            public const string TableId = "minidump.header";
+            public const string TableId = "image.minidump-header";
 
             public CharBlock4 Signature;
 

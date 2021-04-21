@@ -60,12 +60,11 @@ namespace Z0.Asm
                     entry.X64 = SupportsX64(arch);
                     if(DataParser.parse(ocb, out byte _ocb))
                         entry.OpCodeByte = _ocb;
-                    AsmSyntax.sig(sig, out entry.Sig);
+                    AsmParser.sig(sig, out entry.Sig);
 
 
                     var summary = string.Format(pattern, index, monic, ocb, arch, sig, opcode, encrule, prefix);
                     log.Show(summary);
-
                 }
             }
         }

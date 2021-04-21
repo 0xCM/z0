@@ -11,7 +11,7 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct ProcessPartition : IRecord<ProcessPartition>
         {
-            public const string TableId = "memory.partitions";
+            public const string TableId = "image.process.partitions";
 
             public MemoryAddress BaseAddress;
 

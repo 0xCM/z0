@@ -18,7 +18,7 @@ namespace Z0
             => new SymCache<K>();
 
         static SymCache()
-            => Storage = Symbols.symbols<K>();
+            => Storage = Symbols.load<K>();
 
         public ref readonly Sym<K> this[K index]
         {

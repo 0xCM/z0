@@ -112,11 +112,10 @@ namespace Z0.Asm
             var dst = root.hashset<AsmMnemonic>();
             var rows = ImportedStokeRows();
             var count = rows.Length;
-            var sigs = AsmSigs.create(Wf);
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                if(AsmSyntax.mnemonic(row.Instruction, out var monic))
+                if(AsmParser.mnemonic(row.Instruction, out var monic))
                     dst.Add(monic);
             }
             return dst.ToArray();
@@ -225,14 +224,13 @@ namespace Z0.Asm
             var imported = ImportedStokeRows();
             var count = imported.Length;
             var buffer = span<AsmFormExpr>(count);
-            var sigs = AsmSigs.create(Wf);
             var j=0u;
             var k=0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(imported, i);
                 var oc = AsmCore.opcode(row.OpCode);
-                if(AsmSyntax.sig(row.Instruction, out var sig))
+                if(AsmParser.sig(row.Instruction, out var sig))
                     seek(buffer, k++) = AsmCore.form(oc, sig);
                 else
                 {

@@ -12,7 +12,7 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct ProcessState : IRecord<ProcessState>
         {
-            public const string TableId = "process.state";
+            public const string TableId = "image.process.state";
 
             /// <summary>
             /// The base address of the process

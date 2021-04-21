@@ -13,19 +13,30 @@ namespace Z0
 
     partial class ImageMetaPipe
     {
-        public uint EmitMsilRows()
-            => EmitMsilRows(Wf.Components);
+        public uint EmitMsilMetadata()
+            => EmitMsilMetadata(Wf.Components);
 
-        public uint EmitMsilRows(ReadOnlySpan<Assembly> src)
+        public uint EmitMsilMetadata(ReadOnlySpan<Assembly> src)
         {
             var total = 0u;
             var count = src.Length;
             for(var i=0; i<count; i++)
-                EmitMsilRows(skip(src,i));
+                EmitMsilMetadata(skip(src,i));
             return total;
         }
 
-        public Index<MsilMetadata> EmitMsilRows(Assembly src)
+        public void ClearMsilMetadata()
+        {
+            MsilDir().Clear();
+        }
+
+        public FS.FolderPath MsilDir()
+            => Db.TableDir<MsilMetadata>();
+
+        public FS.FilePath MsilPath(Assembly src)
+            => Db.Table<MsilMetadata>(src.GetSimpleName());
+
+        public Index<MsilMetadata> EmitMsilMetadata(Assembly src)
         {
             var methods = Index<MsilMetadata>.Empty;
             var srcPath = FS.path(src.Location);
@@ -38,7 +49,7 @@ namespace Z0
                 var count = (uint)methods.Length;
                 if(count != 0)
                 {
-                    var dst = Db.Table<MsilMetadata>(src.GetSimpleName());
+                    var dst = MsilPath(src);
                     var flow = Wf.EmittingTable<MsilMetadata>(dst);
                     Tables.emit(methods,dst);
                     Wf.EmittedTable<MsilMetadata>(flow, count);

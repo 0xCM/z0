@@ -15,8 +15,8 @@ namespace Z0.Asm
 
         internal AsmSigSymbols()
         {
-            _EFlags = Symbols.cache<EFlag>();
-            _Modes = Symbols.cache<Mode>();
+            _EFlags = Symbols.symbolic<EFlag>();
+            _Modes = Symbols.symbolic<Mode>();
         }
 
         public Symbols<Mode> Modes

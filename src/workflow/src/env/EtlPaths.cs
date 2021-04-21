@@ -24,7 +24,7 @@ namespace Z0
             => EtlDir(subject) + file;
 
         FS.FolderPath EtlTableRoot()
-            => EtlDir("tables");
+            => EtlDir(tables);
 
         FS.FilePath EtlTable<T>(string id)
             where T : struct, IRecord<T>

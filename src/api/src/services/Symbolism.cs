@@ -35,7 +35,7 @@ namespace Z0
         public void EmitSymbols<K>(string subject)
             where K : unmanaged, Enum
         {
-            EmitSymbols(Symbols.cache<K>().View, Db.AsmCatalogPath(subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
+            EmitSymbols(Symbols.symbolic<K>().View, Db.AsmCatalogPath(subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
         }
 
         public void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)

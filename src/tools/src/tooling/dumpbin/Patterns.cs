@@ -39,15 +39,15 @@ namespace Z0.Tooling
             return FS.Log;
         }
 
-        public static CmdScript script(DumpBin tool, string name, CmdId id, FileModule[] src)
-            => ToolCmd.script(name,src.Map(file => tool.Command(id, file.Path)));
+        public static CmdScript script(DumpBin tool, string name, CmdId id, FileModule[] src, FS.FolderPath outdir)
+            => ToolCmd.script(name, src.Map(file => tool.Command(id, file.Path, outdir)));
 
-        public CmdScript Script(string name, CmdId id, FileModule[] src)
-            => script(this, name, id, src);
+        public CmdScript Script(string name, CmdId id, FileModule[] src, FS.FolderPath outdir)
+            => script(this, name, id, src, outdir);
 
-        public ScriptExpr Command(CmdId id, FS.FilePath src)
+        public ScriptExpr Command(CmdId id, FS.FilePath src, FS.FolderPath outdir)
         {
-            var subdir = OutputDir + FS.folder(src.FileName.WithoutExtension.Name);
+            var subdir = outdir + FS.folder(src.FileName.WithoutExtension.Name);
             subdir.Create();
             var x = OutputExt(id);
             var output = subdir + src.FileName.ChangeExtension(x);

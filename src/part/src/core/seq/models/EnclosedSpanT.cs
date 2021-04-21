@@ -18,7 +18,7 @@ namespace Z0
         public char Delimiter {get;}
 
         [MethodImpl(Inline)]
-        public EnclosedSpan(ReadOnlySpan<T> src, SeqEnclosureKind kind = SeqEnclosureKind.Embraced,  char delimiter =  Chars.Comma)
+        public EnclosedSpan(ReadOnlySpan<T> src, SeqEnclosureKind kind = SeqEnclosureKind.Embraced, char delimiter =  Chars.Comma)
         {
             Data = src;
             Kind = kind;

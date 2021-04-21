@@ -8,7 +8,6 @@ namespace Z0
 
     using static EnvFolders;
 
-
     partial interface IEnvPaths
     {
         FS.FolderPath LibRoot()

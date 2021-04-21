@@ -35,6 +35,7 @@ namespace Z0
             dst.SymCacheRoot = dir(N.SymCacheRoot);
             dst.CacheRoot = dir(N.CacheRoot);
             dst.Libs = dir(N.Libs);
+            dst.DataRoot = dir(N.ZData);
         }
 
         public EnvDirVar ZDev;
@@ -66,6 +67,8 @@ namespace Z0
         public EnvDirVar CacheRoot;
 
         public EnvDirVar Libs;
+
+        public EnvDirVar DataRoot;
 
         public string Format()
         {

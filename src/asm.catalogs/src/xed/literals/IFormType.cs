@@ -7,9 +7,8 @@ namespace Z0
 {
     partial struct XedModels
     {
-
         [SymbolSource(xed)]
-        public enum IForm : ushort
+        public enum IFormType : ushort
         {
             None=0,
 

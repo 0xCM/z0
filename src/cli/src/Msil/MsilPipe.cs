@@ -30,7 +30,7 @@ namespace Z0
         }
 
 
-        public Index<MsilCapture> LoadCapturedCil()
+        public Index<MsilCapture> LoadCaptured()
         {
             var flow = Wf.Running($"Loading cil data rows");
             var input = Db.CilDataPaths().View;
@@ -117,7 +117,7 @@ namespace Z0
             }
         }
 
-        public void Render(OpMsil src, ITextBuffer dst)
+        public void RenderCode(OpMsil src, ITextBuffer dst)
         {
             var bytes = src.Encoded;
             var sig = src.Signature.Data;
@@ -136,15 +136,15 @@ namespace Z0
             var count = src.Count;
             if(count != 0)
             {
-                var flow = Wf.EmittingTable<MsilDataRow>(dst);
+                var flow = Wf.EmittingTable<MsilCapture>(dst);
                 var view = src.View;
 
-                var formatter = Tables.formatter<MsilDataRow>(array<byte>(16,16,80,20));
+                var formatter = Tables.formatter<MsilCapture>(array<byte>(16,16,80,20));
                 using var writer = dst.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 for(var i=0u; i<count; i++)
                 {
-                    var row = new MsilDataRow();
+                    var row = new MsilCapture();
                     fill(skip(view,i).Member, ref row);
                     writer.WriteLine(formatter.Format(row));
                 }
@@ -153,7 +153,7 @@ namespace Z0
             }
         }
 
-        static ref MsilDataRow fill(in ApiMember src, ref MsilDataRow dst)
+        static ref MsilCapture fill(in ApiMember src, ref MsilCapture dst)
         {
             var cil = src.Cil;
             dst.BaseAddress = cil.BaseAddress;
@@ -178,10 +178,9 @@ namespace Z0
                 DataParser.parse(skip(parts,i++), out dst.MemberId);
                 DataParser.parse(skip(parts,i++), out dst.BaseAddress);
                 DataParser.parse(skip(parts,i++), out dst.Uri);
-                DataParser.parse(skip(parts,i++), out dst.CilCode);
+                DataParser.parse(skip(parts,i++), out dst.Encoded);
                 return true;
             }
         }
-
     }
 }

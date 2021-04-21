@@ -49,16 +49,10 @@ namespace Z0.Asm
             Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
         }
 
-        void ShowSigSymbols()
-        {
-            Sigs.ShowSymbols();
-        }
-
         void EmitFormHashes()
         {
             Wf.AsmFormPipe().EmitFormHashes();
         }
-
 
         public static void EmitByteResProps(Type[] types, FS.FilePath dst)
         {
@@ -379,38 +373,13 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,1);
         }
 
-        public static Index<OpMsil> msil(MethodInfo[] src)
-        {
-            var count = src.Length;
-            var buffer = alloc<OpMsil>(count);
-            var methods = @readonly(src);
-            var target = span(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var method = ref skip(methods,i);
-                var address = ApiJit.jit(method);
-                var located = new LocatedMethod(method.Identify(), method, address);
-                var uri = ApiUri.located(method.DeclaringType.HostUri(), method.Name, method.Identify());
-                var body = method.GetMethodBody();
-                var sig = method.ResolveSignature();
-                if(body != null)
-                {
-                    var ilbytes = body.GetILAsByteArray() ?? Array.Empty<byte>();
-                    var length = ilbytes.Length;
-                    seek(target,i) = new OpMsil(method.MetadataToken, address, uri, sig, ilbytes, method.MethodImplementationFlags);
-                }
-            }
-
-            return buffer;
-        }
-
         void EmitMsil()
         {
             var pipe = Wf.MsilPipe();
             var members = Wf.Api.ApiHosts.Where(h => h.HostType == typeof(math)).Single().Methods;
             var buffer = text.buffer();
-            var methods = msil(members);
-            root.iter(methods, m => pipe.Render(m,buffer));
+            var methods = ApiCode.msil(members);
+            root.iter(methods, m => pipe.RenderCode(m,buffer));
             using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Il)).Writer();
             writer.Write(buffer.Emit());
         }
@@ -703,7 +672,7 @@ namespace Z0.Asm
                 DataParser.parse(skip(parts,i++), out dst.MemberId);
                 DataParser.parse(skip(parts,i++), out dst.BaseAddress);
                 DataParser.parse(skip(parts,i++), out dst.Uri);
-                DataParser.parse(skip(parts,i++), out dst.CilCode);
+                DataParser.parse(skip(parts,i++), out dst.Encoded);
                 return true;
             }
         }
@@ -814,15 +783,6 @@ namespace Z0.Asm
             }
             Wf.Ran(flow, string.Format("Collected {0} jump stub candidates", jumpers.Count));
             return jumpers.ToArray();
-        }
-
-        void ShowXedForms()
-        {
-            var pipe = Wf.XedCatalog();
-            var forms = pipe.LoadFormDetails();
-            using var log = ShowLog("xed-forms", FS.Extensions.Csv);
-            log.Show(XedModels.FormDetail.Header);
-            root.iter(forms, form => log.Show(form));
         }
 
         public void EmitApiImageContent()
@@ -981,7 +941,7 @@ namespace Z0.Asm
 
         void ShowSymbols()
         {
-            var symbols = Symbols.cache<AsmMnemonicCode>().View;
+            var symbols = Symbols.symbolic<AsmMnemonicCode>().View;
             var count = symbols.Length;
             var expressions = alloc<SymExpr>(count);
             Symbols.expressions(symbols, expressions);
@@ -996,7 +956,7 @@ namespace Z0.Asm
         {
             const ulong Target = 0x7ffa77aa1460;
 
-            var points = EntryPoints.create(Wf);
+            var points = MethodEntryPoints.create(Wf);
             if(points.Create<ulong>(0))
             {
                 var encoded = points.EncodeDispatch(0,Target);
@@ -1139,47 +1099,44 @@ namespace Z0.Asm
             return pipe.EmitHostStatements();
         }
 
-        // void Capture(params PartId[] parts)
-        // {
-        //     var dst = Db.AppLogDir() + FS.folder("capture");
-        //     dst.Clear();
-        //     var runner = Wf.CaptureRunner();
-        //     runner.Capture(parts, dst);
-        //     var ts = root.timestamp();
-
-        //     Wf.ProcessContextPipe().Emit(Db.ProcessContextRoot(),ts);
-        // }
-
         public void CheckMemoryLookup()
         {
+            var capacity = Pow2.T15;
             var blocks = Wf.ApiHex().ReadBlocks().View;
             var count = blocks.Length;
+
+            if(count > capacity)
+                Wf.Error("Not enout capacity");
+
             var distinct = blocks.Map(b => b.BaseAddress).ToArray().ToHashSet();
             if(distinct.Count != count)
             {
                 Wf.Warn(string.Format("There should be {0} distinct base addresses and yet there are {1}", count, distinct.Count));
             }
 
-            var symbols = MemorySymbols.alloc(count);
+            var symbols = MemorySymbols.alloc(capacity);
+
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(blocks,i);
                 symbols.Deposit(block.BaseAddress, block.Size, block.OpUri.Format());
             }
 
+            Wf.Status("Creating lookup");
+
             var lookup = symbols.ToLookup();
+            var entries = slice(lookup.Symbols, 0,symbols.EntryCount);
             var dst = Db.AppLog("addresses.lookup", FS.Csv);
             var emitting = Wf.EmittingTable<MemorySymbol>(dst);
-            var emitted = Tables.emit(lookup.Symbols,dst);
+            var emitted = Tables.emit(entries, dst);
             Wf.EmittedTable(emitting,emitted);
             var found = 0;
 
-            var hashes = lookup.Symbols.Map(x => x.HashCode).ToArray().ToHashSet();
+            var hashes = entries.Map(x => x.HashCode).ToArray().ToHashSet();
             if(hashes.Count != count)
             {
                 Wf.Warn(string.Format("There should be {0} distinct hash codes and yet there are {1}", count, hashes.Count));
             }
-
 
             for(var i=0; i<count; i++)
             {
@@ -1316,25 +1273,6 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public void RunSplitter()
-        {
-            var pipe = Wf.XedFormPipe();
-            var parts = pipe.Run();
-            var count = parts.Length;
-            var dst = Db.AppLog("xed.forms.partitions", FS.Csv);
-            var flow = Wf.EmittingFile(dst);
-            var sbuffer = span<char>(1024);
-            var rp = pattern();
-
-            using var writer = dst.Writer();
-            writer.WriteLine(string.Format(rp, headers()));
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(parts,i);
-                writer.WriteLine(string.Format(rp, part.Index, part.Class));
-            }
-            Wf.EmittedFile(flow, count);
-        }
 
         public void RunOldXedWf()
         {
@@ -1343,10 +1281,46 @@ namespace Z0.Asm
 
         }
 
+        public void EmitFormAspects()
+        {
+            var catalog = Wf.XedCatalog();
+            catalog.EmitCatalog();
+            var pipe = Wf.XedFormPipe();
+            var aspects = pipe.EmitFormAspects();
+            var aix = aspects.Select(x => (x.Value, x.Index)).ToDictionary();
+            var parts = pipe.ComputePartitions();
+            var count = parts.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(parts,i);
+                var pa = part.Aspects.View;
+                var ka = pa.Length;
+                for(var j=0; j<ka; j++)
+                {
+                    ref readonly var a = ref skip(pa,j);
+                    if(!aix.TryGetValue(a, out var index))
+                    {
+                        Wf.Error(string.Format("Index for {0} not found", a));
+                    }
+                }
+            }
+        }
+
+        public void EmitImageMetadata()
+        {
+            var pipe = Wf.ImageMetaPipe();
+            pipe.EmitMetadaSets(WorkflowOptions.@default());
+        }
+
         public void Run()
         {
-            var pipe = Wf.XedFormPipe();
-            pipe.EmitFormAspects();
+            var tool = Wf.DumpBin();
+            var path = tool.EmitScripts(Db.RuntimeRoot(), Db.ImageArchiveRoot());
+
+            //var src = Symbols.cache<PartId>().Index;
+
+
+            //EmitFormAspects();
         }
 
         public static void Main(params string[] args)

@@ -15,6 +15,12 @@ namespace Z0
 
     partial class ImageMetaPipe
     {
+        public FS.FilePath AssemblyRefsPath()
+            => Db.IndexTable<AssemblyRefInfo>();
+
+        public void EmitAssemblyRefs(FS.Files src)
+            => EmitAssemblyRefs(src, AssemblyRefsPath());
+
         public void EmitAssemblyRefs(FS.Files input, FS.FilePath dst)
         {
             var sources = input.View;
@@ -32,6 +38,22 @@ namespace Z0
                 for(var i=0; i<count; i++)
                     writer.WriteLine(formatter.Format(skip(data,i)));
             }
+        }
+
+        public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs(Assembly src)
+        {
+            var path = FS.path(src.Location);
+            if(ImageMetaReader.HasMetadata(path))
+            {
+
+                using var reader = ImageMetaReader.create(path);
+                return reader.ReadAssemblyRefs();
+            }
+            else
+            {
+                return Index<AssemblyRefInfo>.Empty;
+            }
+
         }
 
         uint EmitAssemblyRefs(Assembly src, IRecordFormatter formatter, StreamWriter dst)
@@ -58,7 +80,7 @@ namespace Z0
             var components = Wf.Api.PartComponents.View;
             var count = components.Length;
             var counter = 0u;
-            var dst = Db.IndexTable<AssemblyRefInfo>();
+            var dst = AssemblyRefsPath();
             var flow = Wf.EmittingTable<AssemblyRefInfo>(dst);
             var formatter = Tables.formatter<AssemblyRefInfo>(48);
             using var writer = dst.Writer();

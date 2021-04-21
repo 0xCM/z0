@@ -14,16 +14,22 @@ namespace Z0.Tooling
         {
             None = 0,
 
+            [Symbol("rawdata")]
             EmitRawData,
 
+            [Symbol("loadconfig")]
             EmitLoadConfig,
 
+            [Symbol("relocations")]
             EmitRelocations,
 
+            [Symbol("exports")]
             EmitExports,
 
+            [Symbol("disasm")]
             EmitAsm,
 
+            [Symbol("headers")]
             EmitHeaders,
         }
 

@@ -220,7 +220,7 @@ namespace Z0.Asm
                 statement.IP = instruction.IP;
                 statement.OpUri = src.Uri;
                 statement.Expression = instruction.FormattedInstruction;
-                AsmSyntax.sig(instruction.OpCode.InstructionString, out statement.Sig);
+                AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
                 statement.Encoded = AsmBytes.hexcode(bytes.Slice(offset, size));
                 statement.OpCode = opcode;
 
@@ -252,7 +252,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var tp = ref skip(src,i);
-                var line1 = AsmThumbprints.format(tp);
+                var line1 = AsmRender.format(tp);
                 var bits = bitstrings.Format(tp.Encoded);
                 var line2 = string.Format("{0,-46} ; {1}", Chars.Space, bits);
                 writer.WriteLine(line1);

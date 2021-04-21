@@ -10,6 +10,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Images;
 
     partial class CliMemoryMap
     {
@@ -66,10 +67,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<CliManifestResourceInfo> ManifestResourceDescriptions()
+        public ReadOnlySpan<ManifestResourceInfo> ManifestResourceDescriptions()
         {
             var handles = ManifestResourceHandles();
-            return Read(handles, alloc<CliManifestResourceInfo>(handles.Length));
+            return Read(handles, alloc<ManifestResourceInfo>(handles.Length));
         }
 
         [MethodImpl(Inline), Op]
@@ -88,7 +89,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public Span<CliManifestResourceInfo> Read(ReadOnlySpan<ManifestResourceHandle> src, Span<CliManifestResourceInfo> dst)
+        public Span<ManifestResourceInfo> Read(ReadOnlySpan<ManifestResourceHandle> src, Span<ManifestResourceInfo> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -97,7 +98,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public ref CliManifestResourceInfo Read(in ManifestResource src, ref CliManifestResourceInfo dst)
+        public ref ManifestResourceInfo Read(in ManifestResource src, ref ManifestResourceInfo dst)
         {
             dst.Name = Read(src.Name);
             dst.Offset = (ulong)src.Offset;

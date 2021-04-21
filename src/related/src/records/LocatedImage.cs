@@ -18,7 +18,7 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct LocatedImage : IRecord<LocatedImage>
         {
-            public const string TableId = "images.located";
+            public const string TableId = "image.located";
 
             /// <summary>
             /// The image source path

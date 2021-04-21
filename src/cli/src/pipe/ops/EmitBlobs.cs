@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static memory;
+    using static Images;
 
     partial class ImageMetaPipe
     {
@@ -23,26 +24,26 @@ namespace Z0
 
         public void ClearBlobs()
         {
-            Wf.Db().TableDir<CliBlob>().Clear();
+            Wf.Db().TableDir<MetadataBlob>().Clear();
         }
 
         public WfExecToken EmitBlobs(FS.FilePath src, FS.FilePath dst)
         {
-            var flow = Wf.EmittingTable<CliBlob>(dst);
+            var flow = Wf.EmittingTable<MetadataBlob>(dst);
             using var reader = PeTableReader.open(src);
             var rows = reader.Blobs();
             var count = (uint)rows.Length;
-            var formatter = Tables.formatter<CliBlob>(16);
+            var formatter = Tables.formatter<MetadataBlob>(16);
 
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(rows,i)));
 
-            return Wf.EmittedTable<CliBlob>(flow, rows.Length);
+            return Wf.EmittedTable<MetadataBlob>(flow, rows.Length);
         }
 
         public WfExecToken EmitBlobs(Assembly src)
-            => EmitBlobs(FS.path(src.Location), Wf.Db().Table<CliBlob>(src.GetSimpleName()));
+            => EmitBlobs(FS.path(src.Location), Wf.Db().Table<MetadataBlob>(src.GetSimpleName()));
     }
 }

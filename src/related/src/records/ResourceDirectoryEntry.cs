@@ -19,7 +19,7 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct ResourceDirectoryEntry
         {
-            public const string TableId = "resources-entries";
+            public const string TableId = "image.resdir.entry";
 
             /// <summary>
             /// The offset of a string that gives the Type, Name, or Language ID entry, depending on level of table.

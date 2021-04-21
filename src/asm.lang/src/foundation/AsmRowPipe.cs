@@ -112,9 +112,7 @@ namespace Z0.Asm
             if(!outcome)
                 return outcome;
 
-            outcome = AsmParser.parse(skip(input, i++), out dst.Mnemonic);
-            if(!outcome)
-                return outcome;
+            dst.Mnemonic = new AsmMnemonic(skip(input, i++));
 
             outcome = AsmParser.parse(skip(input, i++), out dst.OpCode);
             if(!outcome)

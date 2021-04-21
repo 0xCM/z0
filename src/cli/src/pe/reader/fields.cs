@@ -11,32 +11,33 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static memory;
+    using static Images;
 
     partial class PeTableReader
     {
-        public ReadOnlySpan<ClrFieldInfo> Fields()
+        public ReadOnlySpan<MemberField> Fields()
         {
             var reader = State.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = memory.span<ClrFieldInfo>(count);
+            var dst = memory.span<MemberField>(count);
 
             for(var i=0u; i<count; i++)
             {
                 ref readonly var handle = ref skip(handles,i);
                 var entry = reader.GetFieldDefinition(handle);
                 int offset = entry.GetOffset();
-                seek(dst,i) = new ClrFieldInfo(i, FieldName(entry.Name, i), sig(State, entry, i), format(entry.Attributes));
+                seek(dst,i) = new MemberField(i, FieldName(entry.Name, i), sig(State, entry, i), format(entry.Attributes));
             }
             return dst;
         }
 
-        public CliFieldName FieldName(StringHandle handle, Count seq)
+        public MemberFieldName FieldName(StringHandle handle, Count seq)
         {
             var value = State.Reader.GetString(handle);
             var offset = State.Reader.GetHeapOffset(handle);
             var size = State.Reader.GetHeapSize(HeapIndex.String);
-            return new CliFieldName(seq, size, (Address32)offset, value);
+            return new MemberFieldName(seq, size, (Address32)offset, value);
         }
 
         internal static string format(FieldAttributes src)
