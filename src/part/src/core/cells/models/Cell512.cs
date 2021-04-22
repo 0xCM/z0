@@ -29,6 +29,12 @@ namespace Z0
             get => (X0, X1);
         }
 
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => memory.bytes(this);
+        }
+
         public Cell256 Lo
         {
             [MethodImpl(Inline)]

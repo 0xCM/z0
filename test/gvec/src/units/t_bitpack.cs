@@ -35,7 +35,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample ++)
             {
                 var src = Random.Next<ushort>();
-                var dst = SpanBlocks.alloc<byte>(n128);
+                var dst = SpanBlocks.single<byte>(n128);
 
                 BitPack.unpack1x8x16(src, dst, 0);
                 unpack_check(src,dst);
@@ -50,7 +50,7 @@ namespace Z0
             for(var sample=0; sample< RepCount; sample++)
             {
                 var src = Random.Next<uint>();
-                var dst = SpanBlocks.alloc<byte>(n256);
+                var dst = SpanBlocks.single<byte>(n256);
                 BitPack.unpack1x8x32(src, dst,0);
 
                 unpack_check(src,dst);
@@ -65,7 +65,7 @@ namespace Z0
             for(var sample=0; sample< RepCount; sample++)
             {
                 var src = Random.Next<ulong>();
-                var dst = SpanBlocks.alloc<byte>(n512);
+                var dst = SpanBlocks.single<byte>(n512);
                 BitPack.unpack1x8x64(src, dst,0);
 
                 unpack_check(src,dst.Storage);
@@ -144,7 +144,7 @@ namespace Z0
         {
             void case1()
             {
-                var src = SpanBlocks.alloc<byte>(n256);
+                var src = SpanBlocks.single<byte>(n256);
                 gcpu.vones<byte>(n256).StoreTo(src);
                 var dst = gpack.pack32x8x1(src);
                 Claim.eq(dst,uint.MaxValue);
@@ -153,7 +153,7 @@ namespace Z0
 
             void case2()
             {
-                var src = SpanBlocks.alloc<byte>(n128);
+                var src = SpanBlocks.single<byte>(n128);
                 gcpu.vones<byte>(n128).StoreTo(src);
                 var dst = gpack.pack16x8x1(src);
                 Claim.eq(dst,ushort.MaxValue);

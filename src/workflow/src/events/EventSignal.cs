@@ -18,6 +18,7 @@ namespace Z0
 
         readonly WfHost Host;
 
+        [MethodImpl(Inline)]
         public static EventSignal create(IWfEventSink sink, WfHost host, CorrelationToken ct = default)
             => new EventSignal(sink, host, ct);
 

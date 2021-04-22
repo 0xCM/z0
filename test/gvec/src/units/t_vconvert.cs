@@ -114,7 +114,7 @@ namespace Z0
 
             var tbc = 1;
 
-            var sb = SpanBlocks.alloc<byte>(sw);
+            var sb = SpanBlocks.single<byte>(sw);
             var tb = SpanBlocks.alloc<ushort>(tw,tbc);
 
             for(var sample = 0; sample < RepCount; sample++)
@@ -146,8 +146,8 @@ namespace Z0
 
             var tbc = 2;
 
-            var sb = SpanBlocks.alloc<byte>(sw);
-            var tb = SpanBlocks.alloc(tw,tbc,tt);
+            var sb = SpanBlocks.single<byte>(sw);
+            var tb = SpanBlocks.alloc<ushort>(tw,tbc);
 
             for(var sample = 0; sample < RepCount; sample++)
             {

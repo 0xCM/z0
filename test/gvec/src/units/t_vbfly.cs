@@ -77,7 +77,7 @@ namespace Z0
                 var x = Random.CpuVector<uint>(n);
                 var y = gcpu.vbfly<uint>(w, x);
                 var xs = x.ToSpan();
-                var zs = SpanBlocks.alloc<uint>(n);
+                var zs = SpanBlocks.single<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
@@ -94,7 +94,7 @@ namespace Z0
                 var x = Random.CpuVector<uint>(n);
                 var y = gcpu.vbfly<uint>(w, x);
                 var xs = x.ToSpan();
-                var zs = SpanBlocks.alloc<uint>(n);
+                var zs = SpanBlocks.single<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
@@ -112,7 +112,7 @@ namespace Z0
                 var x = Random.CpuVector<ulong>(n);
                 var y = gcpu.vbfly<ulong>(w, x);
                 var xs = x.ToSpan();
-                var zs = SpanBlocks.alloc<ulong>(n);
+                var zs = SpanBlocks.single<ulong>(n);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
@@ -131,7 +131,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var y = gcpu.vbfly(b, x);
                 var xs = x.ToSpan();
-                var zs = SpanBlocks.alloc<T>(w);
+                var zs = SpanBlocks.single<T>(w);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(b,xs[j]);
                 var z = zs.LoadVector();

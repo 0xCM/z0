@@ -27,6 +27,18 @@ namespace Z0
         public SpanBlock256(params T[] src)
             => Data = src;
 
+        [MethodImpl(Inline)]
+        public SpanBlock256<T> Slice(uint block)
+            => new SpanBlock256<T>(slice(Data, block * (uint)BlockLength));
+
+        [MethodImpl(Inline)]
+        public SpanBlock256<T> Slice(uint start, uint blocks)
+            => new SpanBlock256<T>(slice(Data, start * (uint)BlockLength,  blocks*(uint)BlockLength));
+
+        [MethodImpl(Inline)]
+        public ref Cell256 Cell(uint block)
+            => ref first(recover<T,Cell256>(CellBlock((int)block)));
+
         /// <summary>
         /// The unblocked storage cells
         /// </summary>
@@ -84,10 +96,16 @@ namespace Z0
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public ulong BitCount
+        public BitWidth BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * (ulong)width<T>();
+            get => CellCount * width<T>();
+        }
+
+        public ByteSize ByteCount
+        {
+            [MethodImpl(Inline)]
+            get => CellCount * size<T>();
         }
 
         /// <summary>

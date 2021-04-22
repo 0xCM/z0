@@ -8,84 +8,100 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct SpanBlocks
     {
         /// <summary>
-        /// Allocates a single 8-bit block
+        /// Creates a single block from stack-allocated storage
         /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        /// <param name="w">The block width</param>
+        /// <typeparam name="T">The block cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock8<T> single<T>(W8 w)
             where T : unmanaged
-                => alloc<T>(w,1);
+        {
+            ref var storage = ref first(recover<T>(Cells.alloc(w).Bytes));
+            return load(w, ref storage, 1);
+        }
 
         /// <summary>
-        /// Allocates a single 16-bit block
+        /// Creates a single block from stack-allocated storage
         /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        /// <param name="w">The block width</param>
+        /// <typeparam name="T">The block cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock16<T> single<T>(W16 w)
             where T : unmanaged
-                => alloc<T>(w,1);
+        {
+            ref var storage = ref first(recover<T>(Cells.alloc(w).Bytes));
+            return load(w, ref storage, 1);
+        }
 
         /// <summary>
-        /// Allocates a single 32-bit block
+        /// Creates a single block from stack-allocated storage
         /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        /// <param name="w">The block width</param>
+        /// <typeparam name="T">The block cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock32<T> single<T>(W32 w)
             where T : unmanaged
-                => alloc<T>(w,1);
+        {
+            ref var storage = ref first(recover<T>(Cells.alloc(w).Bytes));
+            return load(w, ref storage, 1);
+        }
 
         /// <summary>
-        /// Allocates a single 64-bit block
+        /// Creates a single block from stack-allocated storage
         /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        /// <param name="w">The block width</param>
+        /// <typeparam name="T">The block cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock64<T> single<T>(W64 w)
             where T : unmanaged
-                => alloc<T>(w,1);
+        {
+            ref var storage = ref first(recover<T>(Cells.alloc(w).Bytes));
+            return load(w, ref storage, 1);
+        }
 
         /// <summary>
-        /// Allocates a single 128-bit block
+        /// Creates a single block from stack-allocated storage
         /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        /// <param name="w">The block width</param>
+        /// <typeparam name="T">The block cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock128<T> single<T>(W128 w)
             where T : unmanaged
-                => alloc<T>(w,1);
+        {
+            ref var storage = ref first(recover<T>(Cells.alloc(w).Bytes));
+            return load(w, ref storage, 1);
+        }
 
         /// <summary>
-        /// Allocates a single 256-bit block
+        /// Creates a single block from stack-allocated storage
         /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        /// <param name="w">The block width</param>
+        /// <typeparam name="T">The block cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock256<T> single<T>(W256 w)
             where T : unmanaged
-                => alloc<T>(w,1);
+        {
+            ref var storage = ref first(recover<T>(Cells.alloc(w).Bytes));
+            return load(w, ref storage, 1);
+        }
 
         /// <summary>
-        /// Allocates a single 512-bit block
+        /// Creates a single block from stack-allocated storage
         /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        /// <param name="w">The block width</param>
+        /// <typeparam name="T">The block cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock512<T> single<T>(W512 w)
             where T : unmanaged
-                => alloc<T>(w,1);
+        {
+            ref var storage = ref first(recover<T>(Cells.alloc(w).Bytes));
+            return load(w, ref storage, 1);
+        }
+
     }
 }

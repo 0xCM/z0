@@ -40,5 +40,15 @@ namespace Z0
         {
 
         }
+
+        [Free, SFx]
+        public interface IBlockedFunc<W,S,T> : IBlockedFunc<W>
+            where W : unmanaged, ITypeWidth
+            where S : unmanaged
+            where T : unmanaged
+        {
+
+        }
+
     }
 }

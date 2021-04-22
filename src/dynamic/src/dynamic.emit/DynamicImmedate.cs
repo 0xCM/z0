@@ -13,7 +13,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static SpanBlockDelegates;
+    using static SpanBlocks;
 
     public static class DynamicImmediate
     {

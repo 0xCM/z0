@@ -271,7 +271,7 @@ namespace Z0
             var n = n64;
             var tf = 4;
             var pick = BitMasks.msb(n1,n1,t);
-            var pattern = SpanBlocks.alloc<byte>(w);
+            var pattern = SpanBlocks.single<byte>(w);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
 
@@ -280,7 +280,7 @@ namespace Z0
             var y = gcpu.vadd(x, gmath.add(x.LastCell(), Numeric.one<byte>()));
             var z = gcpu.vblendp(x,y,spec);
 
-            var dst = SpanBlocks.alloc(w,2,t);
+            var dst = SpanBlocks.alloc<byte>(w,2);
             gcpu.vlo(z).StoreTo(dst,0);
             gcpu.vhi(z).StoreTo(dst,1);
 
@@ -301,7 +301,7 @@ namespace Z0
             where T : unmanaged
         {
             var pick = BitMasks.msb(n1,n1,t);
-            var pattern = SpanBlocks.alloc<T>(w);
+            var pattern = SpanBlocks.single<T>(w);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
             return pattern.LoadVector();
@@ -313,23 +313,23 @@ namespace Z0
 
         static Vector128<T> rrll_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.even(n2,n2,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.even(n2,n2,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.odd<ulong>(n2,n2), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.odd<ulong>(n2,n2), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.lsb(n2,n1,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.lsb(n2,n1,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         static Vector128<T> lr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.msb(n2,n1,z64), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.msb(n2,n1,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         static Vector256<T> rl_pattern<T>(N256 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.lsb(n2,n1,t), enabled(t), SpanBlocks.alloc<T>(w)).LoadVector();
+                => Blocked.broadcast(BitMasks.lsb(n2,n1,t), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         void vblendp_check<T>(Vector128<T> spec, [Caller] string title = null)
             where T : unmanaged
@@ -479,7 +479,7 @@ namespace Z0
             var b = gcpu.vadd(a, gmath.add(a.LastCell(), Numeric.one<T>()));
             var c = gcpu.vblendp(a,b,spec);
 
-            var dst = SpanBlocks.alloc(w,2,t);
+            var dst = SpanBlocks.alloc<T>(w,2);
             c.Lo.StoreTo(dst,0);
             c.Hi.StoreTo(dst,1);
 

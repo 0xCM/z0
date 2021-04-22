@@ -38,7 +38,7 @@ namespace Z0
         }
 
 
-        protected override void Run()
+        void RunWf1()
         {
             var jobs = 128u;
             var cycles = Pow2.T14;
@@ -47,6 +47,17 @@ namespace Z0
             var count = Run(jobs, cycles);
             var time = clock.Elapsed;
             Wf.Ran(flow, string.Format("Processed {0:##,#} items in {1} ms", count, time.Ms));
+
+        }
+
+        void RunWf2()
+        {
+            //VPipeRunner.test(Wf);
+        }
+
+        protected override void Run()
+        {
+            RunWf1();
         }
     }
 }

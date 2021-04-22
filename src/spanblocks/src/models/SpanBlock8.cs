@@ -81,16 +81,16 @@ namespace Z0
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public ulong BitCount
+        public BitWidth BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * width<T>();
+            get => CellCount * width<T>();
         }
 
-        public int ByteCount
+        public ByteSize ByteCount
         {
             [MethodImpl(Inline)]
-            get => (int)size<T>() * CellCount;
+            get => CellCount * size<T>();
         }
 
         /// <summary>

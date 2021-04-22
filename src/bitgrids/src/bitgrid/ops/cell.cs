@@ -48,16 +48,5 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => ref seek(src.Head, bitpos / width<T>());
-
-        [MethodImpl(Inline)]
-        public static RowBits<T> rowcells<M,N,T>(in BitGrid<M,N,T> g, uint row)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-        {
-            var rowcells = (nat32u<N>() / 8u)/size<T>();
-            var rowoffset = ((row*nat32u<N>())/8)/size<T>();
-            return RowBits.load(g.Content.Slice(rowoffset, rowcells));
-        }
     }
 }

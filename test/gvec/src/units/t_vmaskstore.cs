@@ -19,7 +19,7 @@ namespace Z0
             const byte N = 0;
 
             var w = w128;
-            var dst = SpanBlocks.alloc<byte>(w);
+            var dst = SpanBlocks.single<byte>(w);
             var m0 = cpu.vparts(w128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
             var m1 = cpu.vsllx(m0,32);
             var m2 = cpu.vsllx(m1,32);
@@ -53,7 +53,7 @@ namespace Z0
         {
             var count = 32;
             var x = Random.CpuVector(w256, z8);
-            var storage = SpanBlocks.alloc<byte>(w256);
+            var storage = SpanBlocks.single<byte>(w256);
             var stored = gcpu.vzero(w256,z8);
             var mask = gcpu.vzero(w256,z8);
 

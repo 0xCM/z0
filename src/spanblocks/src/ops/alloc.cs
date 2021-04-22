@@ -13,83 +13,6 @@ namespace Z0
     partial struct SpanBlocks
     {
         /// <summary>
-        /// Allocates a single 8-bit block
-        /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static SpanBlock8<T> alloc<T>(W8 w)
-            where T : unmanaged
-                => alloc<T>(w,1);
-
-        /// <summary>
-        /// Allocates a single 16-bit block
-        /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static SpanBlock16<T> alloc<T>(W16 w)
-            where T : unmanaged
-                => alloc<T>(w,1);
-
-        /// <summary>
-        /// Allocates a single 32-bit block
-        /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static SpanBlock32<T> alloc<T>(W32 w)
-            where T : unmanaged
-                => alloc<T>(w,1);
-
-        /// <summary>
-        /// Allocates a single 64-bit block
-        /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static SpanBlock64<T> alloc<T>(W64 w)
-            where T : unmanaged
-                => alloc<T>(w,1);
-
-        /// <summary>
-        /// Allocates a single 128-bit block over cells of parametric kind
-        /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static SpanBlock128<T> alloc<T>(W128 w)
-            where T : unmanaged
-                => alloc<T>(w,1);
-
-        /// <summary>
-        /// Allocates a single 256-bit block
-        /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static SpanBlock256<T> alloc<T>(W256 w)
-            where T : unmanaged
-                => alloc<T>(w,1);
-
-        /// <summary>
-        /// Allocates a single 512-bit block
-        /// </summary>
-        /// <param name="w">The block width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static SpanBlock512<T> alloc<T>(W512 w)
-            where T : unmanaged
-                => alloc<T>(w,1);
-
-        /// <summary>
         /// Allocates a specified number of 8-bit blocks, filled with an optional pattern
         /// </summary>
         /// <param name="w">The block width selector</param>
@@ -217,7 +140,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock128<T> alloc<T>(W128 w, long count, T t = default)
+        public static SpanBlock128<T> alloc<T>(W128 w, long count)
             where T : unmanaged
                 => new SpanBlock128<T>(new T[count * blocklength<T>(w)]);
 
@@ -228,7 +151,7 @@ namespace Z0
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock256<T> alloc<T>(W256 w, long blocks, T t = default)
+        public static SpanBlock256<T> alloc<T>(W256 w, long blocks)
             where T : unmanaged
                 => new SpanBlock256<T>(new T[blocks * blocklength<T>(w)]);
 
@@ -239,7 +162,7 @@ namespace Z0
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock512<T> alloc<T>(W512 w, long blocks, T t = default)
+        public static SpanBlock512<T> alloc<T>(W512 w, long blocks)
             where T : unmanaged
                 => new SpanBlock512<T>(new T[blocks * blocklength<T>(w)]);
     }

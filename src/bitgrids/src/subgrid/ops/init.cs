@@ -26,7 +26,7 @@ namespace Z0
             var m = n32;
             var n = n5;
             var w = n256;
-            var dst = SpanBlocks.alloc<ulong>(w);
+            var dst = SpanBlocks.single<ulong>(w);
             var mask = Lsb64x8x5;
             var bs = BitString.alloc(w);
             for(int i=0, j=0 ; i< p.Length; i++, j+=5)
