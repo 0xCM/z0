@@ -18,10 +18,13 @@ namespace Z0
         public static void test(IWfRuntime wf)
         {
             var flow = wf.Running();
-            var runner = Pipes.vrunner(w128, blocks(Rng.@default(), Pow2.T08), mapper(), sink(signal(wf)), z8,z8);
-            (var count, var size) = runner.Run();
+            (var count, var size)  = run(w128,blocks(Rng.@default(), Pow2.T08), mapper(), sink(signal(wf)));
             wf.Ran(flow, string.Format("Processed {0} blocks covering {1} bytes", count, size));
         }
+
+        [Op]
+        public static Paired<uint,ByteSize> run(W128 w, BlockSource01 source, VMap01 mapper, BlockSink01 sink)
+            => Pipes.vrunner(w128, source, mapper, sink, z8, z8).Run();
 
         [MethodImpl(Inline), Op]
         static EventSignal signal(IWfRuntime wf)
@@ -50,14 +53,6 @@ namespace Z0
             var bcast = cpu.vbroadcast(w128, mask);
             return cpu.vand(a, bcast);
         }
-
-        [MethodImpl(Inline)]
-        public VPipe128<VMap01,byte,byte> ToPipe()
-            => Pipes.vpipe(w128,this,z8,z8);
-
-        [MethodImpl(Inline)]
-        public static implicit operator VPipe128<VMap01,byte,byte>(VMap01 src)
-            => src.ToPipe();
     }
 
     public struct BlockSink01 : IBlockSink128<BlockSink01,byte>

@@ -14,7 +14,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.BitVector(n32);
-                BitVector.part2x16(x, dst);
+                BitVector.pack16x2(x, dst);
                 Claim.eq(dst[0], x.Lo);
                 Claim.eq(dst[1], x.Hi);
             }
@@ -26,7 +26,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.BitVector(n32);
-                BitVector.part8x4(x,dst);
+                BitVector.pack4x8(x,dst);
                 for(byte j=0,k=0; j<28; j+=4, k++)
                 {
                     var y = (BitVector4)x[j,(byte)(j+4)];

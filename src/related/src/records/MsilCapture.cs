@@ -15,7 +15,7 @@ namespace Z0
 
             public const byte FieldCount = 4;
 
-            public ClrToken MemberId;
+            public ClrToken Token;
 
             public MemoryAddress BaseAddress;
 

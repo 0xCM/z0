@@ -24,7 +24,7 @@ namespace Z0
 
         public Setting<bool> EmitApiMetadata;
 
-        public Setting<bool> EmitFieldLiterals;
+        public Setting<bool> EmitFieldMetadata;
 
         public Setting<bool> EmitSymbolicLiterals;
 
@@ -70,7 +70,7 @@ namespace Z0
             dst.EmitCliStrings = true;
             dst.EmitCliBlobs = true;
             dst.EmitCliConstants = true;
-            dst.EmitFieldLiterals = true;
+            dst.EmitFieldMetadata = true;
             dst.EmitAsmCatalogs = true;
             dst.EmitAsmRows = true;
             dst.EmitResBytes = true;

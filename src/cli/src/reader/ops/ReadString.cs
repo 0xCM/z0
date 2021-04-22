@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-
+    using System.Reflection.Metadata.Ecma335;
+    using static Images;
     using static Part;
     using static memory;
 
     partial class ImageMetaReader
     {
+
         [MethodImpl(Inline), Op]
         public string ReadString(StringHandle src)
             => MetadataReader.GetString(src);

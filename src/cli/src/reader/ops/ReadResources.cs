@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Part;
     using static memory;
@@ -80,5 +81,30 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<ManifestResourceHandle> ResourceHandles()
             => MetadataReader.ManifestResources.ToReadOnlySpan();
+
+        [MethodImpl(Inline), Op]
+        public static ManifestResourceHandle ResourceHandle(uint row)
+            => MetadataTokens.ManifestResourceHandle((int)row);
+
+        public static TableIndex? table(Handle handle)
+        {
+            if(MetadataTokens.TryGetTableIndex(handle.Kind, out var table))
+                return table;
+            else
+                return null;
+        }
+
+        public ClrTableEntry? metaindex(Handle handle)
+        {
+            if(!handle.IsNil)
+            {
+                var table = ImageMetaReader.table(handle);
+                var token = MetadataReader.GetToken(handle);
+                if (table != null)
+                    return new ClrTableEntry(token, table.Value);
+            }
+
+            return null;
+        }
     }
 }

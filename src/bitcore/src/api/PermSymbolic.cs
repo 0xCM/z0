@@ -20,7 +20,7 @@ namespace Z0
         {
             var storage = 0ul;
             var bits8u = cover(@as<byte>(storage),8);
-            BitPack.unpack((byte)src, bits8u);
+            BitPack.unpack1x8((byte)src, bits8u);
             var bits = recover<bit>(bits8u);
             var chars = CharBlocks.alloc(n16).Data;
             var i=0;
@@ -64,7 +64,7 @@ namespace Z0
             var n = n4;
             var storage = 0ul;
             var bitbuffer = cover(@as<byte>(storage),BitCount);
-            BitPack.unpack((byte)src, bitbuffer);
+            BitPack.unpack1x8((byte)src, bitbuffer);
             var bits = recover<bit>(bitbuffer);
             var block = bitblock(src,true);
             var codomain = CharBlocks.alloc(n).Data;

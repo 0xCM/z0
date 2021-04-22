@@ -23,7 +23,7 @@ namespace Z0
             var storage = MemBlocks.block(n32);
             ref var target = ref MemBlocks.first<uint>(ref storage);
 
-            BitPack.unpack1x8x8(src, ref tmp);
+            BitPack.unpack1x8(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
             return BitSpans32.load(MemBlocks.span<uint>(ref storage).Recover<Bit32>());
         }
@@ -37,7 +37,7 @@ namespace Z0
             var storage = MemBlocks.block(n64);
             ref var target = ref MemBlocks.first<uint>(ref storage);
 
-            BitPack.unpack1x8x16(src, ref tmp);
+            BitPack.unpack1x16(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
             vinflate8x256x32u(tmp, 1, ref target);
             return BitSpans32.load(MemBlocks.span<uint>(ref storage).Recover<Bit32>());
@@ -69,7 +69,7 @@ namespace Z0
             Span<uint> storage = new uint[64];
             ref var target = ref first(storage);
 
-            BitPack.unpack1x8x64(src, ref tmp);
+            BitPack.unpack1x64(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
             vinflate8x256x32u(tmp, 1, ref target);
             vinflate8x256x32u(tmp, 2, ref target);
@@ -88,7 +88,7 @@ namespace Z0
             ref var tmp = ref MemBlocks.first<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
-            BitPack.unpack1x8x8(src, ref tmp);
+            BitPack.unpack1x8(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
             return ref dst;
         }
@@ -100,7 +100,7 @@ namespace Z0
             ref var tmp = ref MemBlocks.first<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
-            BitPack.unpack1x8x16(src, ref tmp);
+            BitPack.unpack1x16(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
             vinflate8x256x32u(tmp, 1, ref target);
             return ref dst;
@@ -157,7 +157,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(extract(src, offset, 16));
             var buffer = z16;
-            return BitPack.pack16x32x1(unpacked, ref buffer);
+            return BitPack.pack1x16(unpacked, ref buffer);
         }
 
         [MethodImpl(Inline), Op]
@@ -165,7 +165,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(extract(src, offset, 32));
             var buffer = z32;
-            return BitPack.pack32x32x1(unpacked, ref buffer);
+            return BitPack.pack1x32(unpacked, ref buffer);
         }
 
         [MethodImpl(Inline), Op]
@@ -173,7 +173,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(extract(src, offset, 64));
             var buffer = z64;
-            return BitPack.pack64x32x1(unpacked, ref buffer);
+            return BitPack.pack1x64(unpacked, ref buffer);
         }
     }
 }

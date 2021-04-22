@@ -26,8 +26,8 @@ namespace Z0
 
         public void EmitUserStrings(Assembly src, RecordList<UserString> buffer)
         {
-            using var reader = PeTableReader.open(FS.path(src.Location));
-            var records = reader.UserStrings();
+            using var reader = ImageMetaReader.create(FS.path(src.Location));
+            var records = reader.ReadUserStrings();
             buffer.Add(records);
             Db.EmitTable<UserString>(records, src.GetSimpleName());
         }

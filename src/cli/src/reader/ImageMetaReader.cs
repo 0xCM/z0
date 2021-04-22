@@ -128,34 +128,16 @@ namespace Z0
         public PEMemoryBlock ReadSectionData(DirectoryEntry src)
             => PeReader.GetSectionData(src.RelativeVirtualAddress);
 
+        public ClrTableEntry TableEntry(Handle src)
+        {
+            var table = Clr.table(src);
+            if(table != null)
+                return new ClrTableEntry(MetadataReader.GetToken(src), table.Value);
+
+            return ClrTableEntry.Empty;
+        }
 
         internal static string format(FieldAttributes src)
             => src.ToString();
-
-        // public ReadOnlySpan<MemberField> Fields()
-        // {
-        //     var reader = MetadataReader;
-        //     var handles = reader.FieldDefinitions.ToReadOnlySpan();
-        //     var count = handles.Length;
-        //     var dst = memory.span<MemberField>(count);
-
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var handle = ref skip(handles,i);
-        //         var entry = reader.GetFieldDefinition(handle);
-        //         int offset = entry.GetOffset();
-        //         seek(dst,i) = new MemberField(i, FieldName(entry.Name, i), sig(entry, i), format(entry.Attributes));
-        //     }
-        //     return dst;
-        // }
-
-        public MemberFieldName FieldName(StringHandle handle, Count seq)
-        {
-            var value = MetadataReader.GetString(handle);
-            var offset = MetadataReader.GetHeapOffset(handle);
-            var size = MetadataReader.GetHeapSize(HeapIndex.String);
-            return new MemberFieldName(seq, size, (Address32)offset, value);
-        }
-
     }
 }

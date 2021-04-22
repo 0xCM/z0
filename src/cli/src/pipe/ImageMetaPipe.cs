@@ -11,8 +11,8 @@ namespace Z0
             if(options.EmitAssemblyRefs)
                 EmitAssemblyRefs();
 
-            if(options.EmitFieldLiterals)
-                EmitFieldLiterals();
+            if(options.EmitFieldMetadata)
+                EmitFieldMetadata();
 
             if(options.EmitApiMetadata)
                 EmitApiMetadump();

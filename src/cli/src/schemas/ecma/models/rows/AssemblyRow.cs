@@ -12,7 +12,7 @@ namespace Z0.Schemas.Ecma
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AssemblyRow : IRecord<AssemblyRow>
     {
-        public const TableIndex TableId = TableIndex.Assembly;
+        public const ClrTableKind TableId = ClrTableKind.Assembly;
 
         public RowKey Key;
 

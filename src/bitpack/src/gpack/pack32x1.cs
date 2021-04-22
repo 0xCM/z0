@@ -22,13 +22,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(BitPack.pack8x32x1(src));
+                return generic<T>(BitPack.pack1x8(src));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(BitPack.pack16x32x1(src));
+                return generic<T>(BitPack.pack1x16(src));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BitPack.pack32x32x1(src));
+                return generic<T>(BitPack.pack1x32(src));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BitPack.pack64x32x1(src));
+                return generic<T>(BitPack.pack1x64(src));
             else
                 return pack32x1_i<T>(src);
         }
@@ -38,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return Numeric.force<T>(BitPack.pack8x32x1(src));
+                return Numeric.force<T>(BitPack.pack1x8(src));
             else if(typeof(T) == typeof(short))
-                return Numeric.force<T>(BitPack.pack16x32x1(src));
+                return Numeric.force<T>(BitPack.pack1x16(src));
             else if(typeof(T) == typeof(int))
-                return Numeric.force<T>(BitPack.pack32x32x1(src));
+                return Numeric.force<T>(BitPack.pack1x32(src));
             else if(typeof(T) == typeof(long))
-                return Numeric.force<T>(BitPack.pack64x32x1(src));
+                return Numeric.force<T>(BitPack.pack1x64(src));
             else
                 throw no<T>();
         }

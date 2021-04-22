@@ -109,7 +109,7 @@ namespace Z0
                 if(i != 0)
                     writer.WriteLine(CilPageBreak);
 
-                writer.WriteLine("// Rva:{0,-12} | Size:{1,-8} | Method:{2}:{3}", row.MethodRva, row.BodySize, row.ImageName, row.MethodName);
+                writer.WriteLine("// Token:{0,-16} Rva:{1,-12} | Size:{2,-8} | Method:{3}:{4}", row.Token, row.MethodRva, row.BodySize, row.ImageName, row.MethodName);
                 writer.WriteLine(CilPageBreak);
                 IlViz.DumpMethod(row.MaxStack, row.Code.View, builder);
                 writer.WriteLine(builder.ToString());
@@ -192,7 +192,7 @@ namespace Z0
         {
             var cil = src.Cil;
             dst.BaseAddress = cil.BaseAddress;
-            dst.MemberId = src.Token;
+            dst.Token = src.Token;
             dst.Uri = src.OpUri;
             dst.Encoded = cil.Encoded;
             return ref dst;
@@ -210,7 +210,7 @@ namespace Z0
             else
             {
                 var i=0;
-                DataParser.parse(skip(parts,i++), out dst.MemberId);
+                DataParser.parse(skip(parts,i++), out dst.Token);
                 DataParser.parse(skip(parts,i++), out dst.BaseAddress);
                 DataParser.parse(skip(parts,i++), out dst.Uri);
                 DataParser.parse(skip(parts,i++), out dst.Encoded);
@@ -230,6 +230,11 @@ namespace Z0
                 var outcome = Outcome.Empty;
                 var i=0;
                 dst.ImageName = FS.file(skip(parts,i++));
+
+                outcome = DataParser.parse(skip(parts,i++), out dst.Token);
+                if(!outcome)
+                    return outcome;
+
                 outcome = DataParser.parse(skip(parts,i++), out dst.MethodRva);
                 if(!outcome)
                     return outcome;

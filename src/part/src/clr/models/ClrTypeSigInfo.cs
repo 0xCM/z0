@@ -4,11 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
+
     /// <summary>
     /// A succinct type signature
     /// </summary>
-    public struct ClrTypeSigInfo
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct ClrTypeSigInfo : IRecord<ClrTypeSigInfo>
     {
+        public const string TableId = "clr.typesigs";
+
         public string DisplayName;
 
         public string Modifier;

@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static BitVector8 create(N8 n, bit b0, bit b1, bit b2, bit b3)
-            => BitPack.pack4x1(b0, b1, b2, b3);
+            => bit.condense(b0, b1, b2, b3);
 
         /// <summary>
         /// Creates an 8-bit bitvector from 8 explicit bits
@@ -121,7 +121,7 @@ namespace Z0
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static BitVector8 create(N8 n, bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
-            => BitPack.pack8x1(b0, b1, b2, b3, b4, b5, b6, b7);
+            => bit.condense(b0, b1, b2, b3, b4, b5, b6, b7);
 
         /// <summary>
         /// Creates an 8-bit bitvector from a byte

@@ -32,7 +32,6 @@ namespace Z0
 
         }
 
-
         /// <summary>
         /// Characterizes a 256-bit vectorized transformation parameterized by source/target component types
         /// </summary>
@@ -54,6 +53,5 @@ namespace Z0
         {
 
         }
-
     }
 }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Reflection.Metadata;
 
     using static Root;
 
@@ -74,6 +75,18 @@ namespace Z0
         internal ClrToken(uint token)
             => Data = token;
 
+        public ClrTable Table
+        {
+            [MethodImpl(Inline)]
+            get => (ClrTableKind)(Data >> 24);
+        }
+
+        public uint RowId
+        {
+            [MethodImpl(Inline)]
+            get => Data & 0xFF000000;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -88,7 +101,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data.FormatHex(zpad:false);
+            => Data.FormatHex();
 
 
         public override string ToString()
@@ -147,6 +160,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator int(ClrToken src)
             => (int)src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrToken(Handle src)
+            => Clr.token(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrToken(EntityHandle src)
+            => Clr.token(src);
 
         public static ClrToken Empty
             => default;

@@ -74,7 +74,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(convert(src, 0, width<ushort>(w8)));
             var buffer = z16;
-            return BitPack.pack16x32x1(unpacked, ref buffer);
+            return BitPack.pack1x16(unpacked, ref buffer);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(convert(src, 0, width<uint>(w8)));
             var buffer = z32;
-            return BitPack.pack32x32x1(unpacked, ref buffer);
+            return BitPack.pack1x32(unpacked, ref buffer);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(convert(src, 0, width<ulong>(w8)));
             var buffer = z64;
-            return BitPack.pack64x32x1(unpacked, ref buffer);
+            return BitPack.pack1x64(unpacked, ref buffer);
         }
 
         [MethodImpl(Inline)]

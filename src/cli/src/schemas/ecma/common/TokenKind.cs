@@ -4,79 +4,79 @@ namespace Z0.Schemas.Ecma
 {
     public enum TokenKind : byte
     {
-        Module = (byte)TableIndex.Module,
+        Module = (byte)ClrTableKind.Module,
 
-        TypeRef = (byte)TableIndex.TypeRef,
+        TypeRef = (byte)ClrTableKind.TypeRef,
 
-        TypeDef = (byte)TableIndex.TypeDef,
+        TypeDef = (byte)ClrTableKind.TypeDef,
 
-        FieldDef = (byte)TableIndex.Field,
+        FieldDef = (byte)ClrTableKind.Field,
 
-        MethodDef = (byte)TableIndex.MethodDef,
+        MethodDef = (byte)ClrTableKind.MethodDef,
 
-        ParamDef = (byte)TableIndex.Param,
+        ParamDef = (byte)ClrTableKind.Param,
 
-        InterfaceImpl = (byte)TableIndex.InterfaceImpl,
+        InterfaceImpl = (byte)ClrTableKind.InterfaceImpl,
 
-        MemberRef = (byte)TableIndex.MemberRef,
+        MemberRef = (byte)ClrTableKind.MemberRef,
 
-        Constant = (byte)TableIndex.Constant,
+        Constant = (byte)ClrTableKind.Constant,
 
-        CustomAttribute = (byte)TableIndex.CustomAttribute,
+        CustomAttribute = (byte)ClrTableKind.CustomAttribute,
 
-        DeclSecurity = (byte)TableIndex.DeclSecurity,
+        DeclSecurity = (byte)ClrTableKind.DeclSecurity,
 
-        Signature = (byte)TableIndex.StandAloneSig,
+        Signature = (byte)ClrTableKind.StandAloneSig,
 
-        EventMap = (byte)TableIndex.EventMap,
+        EventMap = (byte)ClrTableKind.EventMap,
 
-        Event = (byte)TableIndex.Event,
+        Event = (byte)ClrTableKind.Event,
 
-        PropertyMap = (byte)TableIndex.PropertyMap,
+        PropertyMap = (byte)ClrTableKind.PropertyMap,
 
-        Property = (byte)TableIndex.Property,
+        Property = (byte)ClrTableKind.Property,
 
-        MethodSemantics = (byte)TableIndex.MethodSemantics,
+        MethodSemantics = (byte)ClrTableKind.MethodSemantics,
 
-        MethodImpl = (byte)TableIndex.MethodImpl,
+        MethodImpl = (byte)ClrTableKind.MethodImpl,
 
-        ModuleRef = (byte)TableIndex.ModuleRef,
+        ModuleRef = (byte)ClrTableKind.ModuleRef,
 
-        TypeSpec = (byte)TableIndex.TypeSpec,
+        TypeSpec = (byte)ClrTableKind.TypeSpec,
 
-        Assembly = (byte)TableIndex.Assembly,
+        Assembly = (byte)ClrTableKind.Assembly,
 
-        AssemblyRef = (byte)TableIndex.AssemblyRef,
+        AssemblyRef = (byte)ClrTableKind.AssemblyRef,
 
-        File = (byte)TableIndex.File,
+        File = (byte)ClrTableKind.File,
 
-        ExportedType = (byte)TableIndex.ExportedType,
+        ExportedType = (byte)ClrTableKind.ExportedType,
 
-        ManifestResource = (byte)TableIndex.ManifestResource,
+        ManifestResource = (byte)ClrTableKind.ManifestResource,
 
-        NestedClass = (byte)TableIndex.NestedClass,
+        NestedClass = (byte)ClrTableKind.NestedClass,
 
-        GenericParam = (byte)TableIndex.GenericParam,
+        GenericParam = (byte)ClrTableKind.GenericParam,
 
-        MethodSpec = (byte)TableIndex.MethodSpec,
+        MethodSpec = (byte)ClrTableKind.MethodSpec,
 
-        GenericParamConstraint = (byte)TableIndex.GenericParamConstraint,
+        GenericParamConstraint = (byte)ClrTableKind.GenericParamConstraint,
 
-        Document = (byte)TableIndex.Document,
+        Document = (byte)ClrTableKind.Document,
 
-        MethodDebugInformation = (byte)TableIndex.MethodDebugInformation,
+        MethodDebugInformation = (byte)ClrTableKind.MethodDebugInformation,
 
-        LocalScope = (byte)TableIndex.LocalScope,
+        LocalScope = (byte)ClrTableKind.LocalScope,
 
-        LocalVariable = (byte)TableIndex.LocalVariable,
+        LocalVariable = (byte)ClrTableKind.LocalVariable,
 
-        LocalConstant = (byte)TableIndex.LocalConstant,
+        LocalConstant = (byte)ClrTableKind.LocalConstant,
 
-        ImportScope = (byte)TableIndex.ImportScope,
+        ImportScope = (byte)ClrTableKind.ImportScope,
 
-        AsyncMethod = (byte)TableIndex.StateMachineMethod,
+        AsyncMethod = (byte)ClrTableKind.StateMachineMethod,
 
-        CustomDebugInformation = (byte)TableIndex.CustomDebugInformation,
+        CustomDebugInformation = (byte)ClrTableKind.CustomDebugInformation,
 
         UserString = 0x70,     // #UserString heap
 

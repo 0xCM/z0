@@ -37,6 +37,7 @@ namespace Z0
                         dst.Add(new MsilMetadata
                         {
                             MethodRva = (Address32)rva,
+                            Token = Clr.token(method),
                             ImageName = Source.FileName,
                             BodySize = body.Size,
                             LocalInit = body.LocalVariablesInitialized,

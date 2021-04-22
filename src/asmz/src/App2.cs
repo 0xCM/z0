@@ -657,48 +657,6 @@ namespace Z0.Asm
             Wf.Row($"8: {bits.View(w8, 0)}");
         }
 
-        static bool parse(string src, out MsilCapture dst)
-        {
-            var parts = @readonly(src.SplitClean(Chars.Pipe));
-            var count = parts.Length;
-            if(count != MsilCapture.FieldCount)
-            {
-                dst = default;
-                return false;
-            }
-            else
-            {
-                var i=0;
-                DataParser.parse(skip(parts,i++), out dst.MemberId);
-                DataParser.parse(skip(parts,i++), out dst.BaseAddress);
-                DataParser.parse(skip(parts,i++), out dst.Uri);
-                DataParser.parse(skip(parts,i++), out dst.Encoded);
-                return true;
-            }
-        }
-
-        Index<MsilCapture> LoadCapturedCil()
-        {
-            var flow = Wf.Running($"Loading cil data rows");
-            var input = Db.CilDataPaths().View;
-            var count = input.Length;
-            var dst = RecordList.create<MsilCapture>();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(input,i);
-                using var reader = path.Reader();
-                while(!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    if(parse(line, out var row))
-                        dst.Add(row);
-                    else
-                        Wf.Warn($"The content {line} could not be parsed");
-                }
-            }
-            Wf.Ran(flow,$"Loaded {dst.Count} cil rows");
-            return dst.Emit();
-        }
 
         void DumpImages()
         {
@@ -847,21 +805,6 @@ namespace Z0.Asm
 
         }
 
-        void CheckFenceParser()
-        {
-            var input = FenceExprCases.CaseA;
-            var parser = FenceExprPaser.create((Chars.LParen, Chars.RParen));
-            var output = parser.Parse(input);
-            var delimiter = string.Format(" {0} ", SymNotKind.Right.ToChar());
-            for(var i=0; i<output.Length; i++)
-            {
-                ref readonly var x = ref skip(output,i);
-                //if(text.nonempty(x.Right))
-                Wf.Row(x.Format(delimiter));
-            }
-
-        }
-
         void EmitRuntimeMembers()
         {
             var service = ApiRuntime.create(Wf);
@@ -972,7 +915,6 @@ namespace Z0.Asm
             var @case = tool.DefineCase(id, dir);
             return tool.CreateScript(@case, dst);
         }
-
 
         void CheckHeap()
         {
@@ -1170,7 +1112,7 @@ namespace Z0.Asm
             var mask = cpu.vindices(cpu.vload(w256,x7ffaa76f0ae0), 0x48);
             var bits = recover<bit>(Cells.alloc(w256).Bytes);
             var buffer = Cells.alloc(w256).Bytes;
-            BitPack.unpack(mask,bits);
+            BitPack.unpack1x32(mask,bits);
             var j=z8;
             for(byte i=0; i<count; i++)
             {
@@ -1201,10 +1143,7 @@ namespace Z0.Asm
                 Wf.Status(ts1);
 
             var pipe = Wf.ProcessContextPipe();
-
         }
-
-
 
         void RenderMovzx()
         {
@@ -1311,6 +1250,14 @@ namespace Z0.Asm
             var pipe = Wf.ImageMetaPipe();
             pipe.EmitMetadaSets(WorkflowOptions.@default());
 
+
+        }
+
+        void CaptureParts(params PartId[] parts)
+        {
+            var dst = Db.AppLogDir() + FS.folder("capture");
+            dst.Clear();
+            Wf.CaptureRunner().Capture(parts, dst);
         }
 
         public void DeriveMsil()
@@ -1330,8 +1277,9 @@ namespace Z0.Asm
 
         public void Run()
         {
-            EmitImageMetadata();
+            //CaptureParts(PartId.AsmZ);
             DeriveMsil();
+            //DeriveMsil();
             // var tool = Wf.DumpBin();
             // var path = tool.EmitScripts(Db.RuntimeRoot(), Db.ImageArchiveRoot());
 

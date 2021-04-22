@@ -15,36 +15,20 @@ namespace Z0
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct MemberField : IRecord<MemberField>
         {
-            public const byte FieldCount = 7;
+            public const byte FieldCount = 4;
 
             public const string TableId = "image.fields";
 
-            public Count Sequence;
+            public ClrToken Token;
 
-            public BinaryCode Sig;
-
-            public ByteSize HeapSize;
-
-            public Count Length;
-
-            public Address32 Offset;
-
-            public string Value;
+            public Name FieldName;
 
             public string Attribs;
 
-            [MethodImpl(Inline)]
-            public MemberField(Count seq, MemberFieldName name, MetadataBlob sig, string attribs)
-            {
-                Sequence = seq;
-                Sig = sig.Data;
-                HeapSize = name.HeapSize;
-                Length = name.Length;
-                Offset = name.Offset;
-                Value = name.Value;
-                Sig = sig.Data;
-                Attribs = attribs;
-            }
+            public BinaryCode Sig;
+
+            public static ReadOnlySpan<byte> RenderWidths
+                => new byte[FieldCount]{10,48,24,64};
         }
     }
 }

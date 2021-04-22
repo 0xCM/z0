@@ -13,9 +13,11 @@ namespace Z0
         {
             public const string TableId = "image.msil";
 
-            public const byte FieldCount = 7;
+            public const byte FieldCount = 8;
 
             public FS.FileName ImageName;
+
+            public ClrToken Token;
 
             public Address32 MethodRva;
 

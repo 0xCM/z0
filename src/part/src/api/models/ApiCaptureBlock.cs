@@ -39,7 +39,7 @@ namespace Z0
             OpUri = ApiUri.hex(method.DeclaringType.HostUri(), method.Name, id);
             TermCode = term;
             Cil = ClrDynamic.cil(parsed.BaseAddress, OpUri, method);
-            CliSig = CliBridge.sig(method);
+            CliSig = Clr.sig(method);
         }
 
         public ReadOnlySpan<byte> InputData

@@ -39,21 +39,16 @@ namespace Z0
         {
             var dst = FieldMetadataPath(src);
             var flow = Wf.EmittingTable<MemberField>(dst);
-            using var reader = PeTableReader.open(FS.path(src.Location));
-            var fields = reader.Fields();
+            using var reader = ImageMetaReader.create(FS.path(src.Location));
+            var fields = reader.ReadFields();
             var count = (uint)fields.Length;
-
-            var formatter = Tables.formatter<MemberField>(FieldMetadataWidths);
+            var formatter = Tables.formatter<MemberField>(MemberField.RenderWidths);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in fields)
                 writer.WriteLine(formatter.Format(item));
-
             Wf.EmittedTable(flow, count);
             return count;
         }
-
-        public static ReadOnlySpan<byte> FieldMetadataWidths
-            => new byte[MemberField.FieldCount]{16,60,12,12,16,40,30};
     }
 }

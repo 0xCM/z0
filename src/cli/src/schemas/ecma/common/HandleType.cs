@@ -7,80 +7,80 @@ namespace Z0.Schemas.Ecma
     /// </summary>
     public readonly struct HandleType
     {
-        public const uint Module = (uint)TableIndex.Module;
+        public const uint Module = (uint)ClrTableKind.Module;
 
-        public const uint TypeRef = (uint)TableIndex.TypeRef;
+        public const uint TypeRef = (uint)ClrTableKind.TypeRef;
 
-        public const uint TypeDef = (uint)TableIndex.TypeDef;
+        public const uint TypeDef = (uint)ClrTableKind.TypeDef;
 
-        public const uint FieldDef = (uint)TableIndex.Field;
+        public const uint FieldDef = (uint)ClrTableKind.Field;
 
-        public const uint MethodDef = (uint)TableIndex.MethodDef;
+        public const uint MethodDef = (uint)ClrTableKind.MethodDef;
 
-        public const uint ParamDef = (uint)TableIndex.Param;
+        public const uint ParamDef = (uint)ClrTableKind.Param;
 
-        public const uint InterfaceImpl = (uint)TableIndex.InterfaceImpl;
+        public const uint InterfaceImpl = (uint)ClrTableKind.InterfaceImpl;
 
-        public const uint MemberRef = (uint)TableIndex.MemberRef;
+        public const uint MemberRef = (uint)ClrTableKind.MemberRef;
 
-        public const uint Constant = (uint)TableIndex.Constant;
+        public const uint Constant = (uint)ClrTableKind.Constant;
 
-        public const uint CustomAttribute = (uint)TableIndex.CustomAttribute;
+        public const uint CustomAttribute = (uint)ClrTableKind.CustomAttribute;
 
-        public const uint DeclSecurity = (uint)TableIndex.DeclSecurity;
+        public const uint DeclSecurity = (uint)ClrTableKind.DeclSecurity;
 
-        public const uint Signature = (uint)TableIndex.StandAloneSig;
+        public const uint Signature = (uint)ClrTableKind.StandAloneSig;
 
-        public const uint EventMap = (uint)TableIndex.EventMap;
+        public const uint EventMap = (uint)ClrTableKind.EventMap;
 
-        public const uint Event = (uint)TableIndex.Event;
+        public const uint Event = (uint)ClrTableKind.Event;
 
-        public const uint PropertyMap = (uint)TableIndex.PropertyMap;
+        public const uint PropertyMap = (uint)ClrTableKind.PropertyMap;
 
-        public const uint Property = (uint)TableIndex.Property;
+        public const uint Property = (uint)ClrTableKind.Property;
 
-        public const uint MethodSemantics = (uint)TableIndex.MethodSemantics;
+        public const uint MethodSemantics = (uint)ClrTableKind.MethodSemantics;
 
-        public const uint MethodImpl = (uint)TableIndex.MethodImpl;
+        public const uint MethodImpl = (uint)ClrTableKind.MethodImpl;
 
-        public const uint ModuleRef = (uint)TableIndex.ModuleRef;
+        public const uint ModuleRef = (uint)ClrTableKind.ModuleRef;
 
-        public const uint TypeSpec = (uint)TableIndex.TypeSpec;
+        public const uint TypeSpec = (uint)ClrTableKind.TypeSpec;
 
-        public const uint Assembly = (uint)TableIndex.Assembly;
+        public const uint Assembly = (uint)ClrTableKind.Assembly;
 
-        public const uint AssemblyRef = (uint)TableIndex.AssemblyRef;
+        public const uint AssemblyRef = (uint)ClrTableKind.AssemblyRef;
 
-        public const uint File = (uint)TableIndex.File;
+        public const uint File = (uint)ClrTableKind.File;
 
-        public const uint ExportedType = (uint)TableIndex.ExportedType;
+        public const uint ExportedType = (uint)ClrTableKind.ExportedType;
 
-        public const uint ManifestResource = (uint)TableIndex.ManifestResource;
+        public const uint ManifestResource = (uint)ClrTableKind.ManifestResource;
 
-        public const uint NestedClass = (uint)TableIndex.NestedClass;
+        public const uint NestedClass = (uint)ClrTableKind.NestedClass;
 
-        public const uint GenericParam = (uint)TableIndex.GenericParam;
+        public const uint GenericParam = (uint)ClrTableKind.GenericParam;
 
-        public const uint MethodSpec = (uint)TableIndex.MethodSpec;
+        public const uint MethodSpec = (uint)ClrTableKind.MethodSpec;
 
-        public const uint GenericParamConstraint = (uint)TableIndex.GenericParamConstraint;
+        public const uint GenericParamConstraint = (uint)ClrTableKind.GenericParamConstraint;
 
         // debug tables:
-        public const uint Document = (uint)TableIndex.Document;
+        public const uint Document = (uint)ClrTableKind.Document;
 
-        public const uint MethodDebugInformation = (uint)TableIndex.MethodDebugInformation;
+        public const uint MethodDebugInformation = (uint)ClrTableKind.MethodDebugInformation;
 
-        public const uint LocalScope = (uint)TableIndex.LocalScope;
+        public const uint LocalScope = (uint)ClrTableKind.LocalScope;
 
-        public const uint LocalVariable = (uint)TableIndex.LocalVariable;
+        public const uint LocalVariable = (uint)ClrTableKind.LocalVariable;
 
-        public const uint LocalConstant = (uint)TableIndex.LocalConstant;
+        public const uint LocalConstant = (uint)ClrTableKind.LocalConstant;
 
-        public const uint ImportScope = (uint)TableIndex.ImportScope;
+        public const uint ImportScope = (uint)ClrTableKind.ImportScope;
 
-        public const uint AsyncMethod = (uint)TableIndex.StateMachineMethod;
+        public const uint AsyncMethod = (uint)ClrTableKind.StateMachineMethod;
 
-        public const uint CustomDebugInformation = (uint)TableIndex.CustomDebugInformation;
+        public const uint CustomDebugInformation = (uint)ClrTableKind.CustomDebugInformation;
 
         public const uint UserString = 0x70;     // #UserString heap
 

@@ -13,21 +13,21 @@ namespace Z0
 
     partial class text
     {
+        /// <summary>
+        /// Returns the text right of, but not including, a specified index; or empty if invalid index is provided
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="index"></param>
         [MethodImpl(Inline), Op]
-        public static string right(string src, int desired)
+        public static string right(string src, int index)
         {
-            var count = Query.length(src);
-            if (count == 0)
+            var length = src.Length;
+            var last = length - 1;
+            var offset = index + 1;
+            if(offset < last && offset >= 0)
+                return slice(src,offset);
+            else
                 return EmptyString;
-
-            var data = span(src);
-            var actual = count < desired ? count : desired;
-
-            Span<char> dst = stackalloc char[actual];
-            for (var i=0u; i<count; i++)
-                seek(dst,i) = skip(data, count - actual + i);
-
-            return new string(dst);
         }
     }
 }

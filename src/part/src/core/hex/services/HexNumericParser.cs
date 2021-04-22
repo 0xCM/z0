@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
     using static HexFormatSpecs;
-    using static memory;
 
     [ApiHost]
     public readonly struct HexNumericParser

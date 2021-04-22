@@ -14,36 +14,6 @@ namespace Z0
 
     public class t_arithmetic : t_mathsvc<t_arithmetic>
     {
-       public void signum_8i()
-            => signum_check<sbyte>();
-
-        public void signum_16i()
-            => signum_check<short>();
-
-        public void signum_32i()
-            => signum_check<int>();
-
-        public void signum_64i()
-            => signum_check<long>();
-
-        public void signum_32f()
-            => signum_check<float>();
-
-        public void signum_64f()
-            => signum_check<double>();
-
-        void signum_check<T>()
-            where T : unmanaged
-        {
-            var zero = Numeric.zero<T>();
-            for(var i=0; i<RepCount; i++)
-            {
-                var x = Random.Next<T>();
-                var expect = gmath.lt(x, zero) ? SignKind.Signed : SignKind.Unsigned;
-                var actual = gmath.signum(x);
-                NumericClaims.eq(expect,actual);
-            }
-        }
 
         [MethodImpl(Inline)]
         void add_check<T>(S.BinaryOp<T> f, T t = default)

@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Root;
 
@@ -48,12 +46,15 @@ namespace Z0
             => Clr.references(Definition);
 
         public ClrToken Id
-            => (uint)Part;
+        {
+            [MethodImpl(Inline)]
+            get => Definition.ManifestModule.MetadataToken;
+        }
 
         public ReadOnlySpan<byte> RawMetadata
         {
             [MethodImpl(Inline)]
-            get => CliBridge.metaspan(Definition);
+            get => Clr.metaspan(Definition);
         }
 
         string IClrArtifact.Name

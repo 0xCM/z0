@@ -253,17 +253,5 @@ namespace Z0
             else
                 return src;
         }
-
-        [MethodImpl(Inline), Op, Closures(Floats)]
-        public static SignKind signum<T>(T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return math.signum(float32(src));
-            else if(typeof(T) == typeof(double))
-                return math.signum(float64(src));
-            else
-                throw no<T>();
-        }
-    }
+   }
 }

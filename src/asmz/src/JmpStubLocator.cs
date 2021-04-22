@@ -66,7 +66,6 @@ namespace Z0.Asm
 
         void ShowInterfaceMaps()
         {
-
             var calc8 = Clr.imap(typeof(Prototypes.Calc8), typeof(Prototypes.ICalc8));
             var calc64 = Clr.imap(typeof(Prototypes.Calc64), typeof(Prototypes.ICalc64));
             using var log = ShowLog("imap",FS.Log);

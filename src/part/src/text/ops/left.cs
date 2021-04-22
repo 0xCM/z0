@@ -13,10 +13,17 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Returns the substring [0,chars-1]
+        /// Returns the text left of, but not including, a specified index; or empty if invalid index is provided
         /// </summary>
+        /// <param name="src"></param>
+        /// <param name="index"></param>
         [Op]
-        public static string left(string src, int chars)
-            => Query.blank(src) ? src : text.substring(src, 0, src.Length < chars ? src.Length : chars);
+        public static string left(string src, int index)
+        {
+            if(empty(src) || index < 0 || index > src.Length - 1)
+                return EmptyString;
+
+            return slice(src, 0, index);
+        }
     }
 }

@@ -31,8 +31,8 @@ namespace Z0
                 var blob = reader.GetBlobBytes(entry.Value);
                 ref var target = ref seek(dst, i - 1u);
                 target.Sequence = counter++;
-                target.ParentId = (parent ?? MetaTableIndex.Empty).Key;
-                target.Source = (parent ?? MetaTableIndex.Empty).Source.ToString();
+                target.ParentId = (parent ?? ClrTableEntry.Empty).Token;
+                target.Source = (parent ?? ClrTableEntry.Empty).Table.ToString();
                 target.DataType = entry.TypeCode;
                 target.Content = blob;
             }

@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Part;
     using static memory;
@@ -15,6 +17,7 @@ namespace Z0
     public readonly struct DataParser
     {
         //"yyyy-MM-dd.HH.mm.ss.fff";
+
         [Op]
         public static Outcome parse(string src, out Timestamp dst)
         {
@@ -84,20 +87,20 @@ namespace Z0
         public static Outcome parse(string src, out MemoryAddress dst)
             => Addresses.parse(src, out dst);
 
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out ClrToken dst)
-        {
-            if(HexNumericParser.parse32u(src, out var result))
-            {
-                dst = result;
-                return true;
-            }
-            else
-            {
-                dst = ClrToken.Empty;
-                return false;
-            }
-        }
+        // [MethodImpl(Inline), Op]
+        // public static Outcome parse(string src, out ClrToken dst)
+        // {
+        //     if(HexNumericParser.parse32u(src, out var result))
+        //     {
+        //         dst = result;
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         dst = ClrToken.Empty;
+        //         return false;
+        //     }
+        // }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Address64 dst)
@@ -212,5 +215,34 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out OpUri dst)
             => ApiUri.parse(src, out dst);
+
+        [Op]
+        public static Outcome parse(string src, out ClrToken dst)
+        {
+            var i = text.index(src,Chars.Colon);
+            var outcome = Outcome.Empty;
+            dst = ClrToken.Empty;
+            if(i != NotFound)
+            {
+                outcome = HexNumericParser.parse8u(src.LeftOfIndex(i), out var table);
+                if(!outcome)
+                    return outcome;
+
+                outcome = HexNumericParser.parse32u(text.right(src,i), out var row);
+                if(!outcome)
+                    return outcome;
+
+                dst = Clr.token((TableIndex)table, row);
+                return true;
+            }
+            else
+            {
+                outcome = HexNumericParser.parse32u(src, out var token);
+                if(!outcome)
+                    return outcome;
+                dst = token;
+                return true;
+            }
+        }
     }
 }
