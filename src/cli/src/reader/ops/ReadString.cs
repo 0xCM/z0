@@ -17,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public string ReadString(StringHandle src)
-            => MetadataReader.GetString(src);
+            => MD.GetString(src);
 
         [MethodImpl(Inline), Op]
         public ref string ReadString(StringHandle src, ref string dst)

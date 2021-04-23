@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public MethodDefinition ReadMethodDef(MethodDefinitionHandle src)
-            => MetadataReader.GetMethodDefinition(src);
+            => MD.GetMethodDefinition(src);
 
         [MethodImpl(Inline), Op]
         public ref MethodDefinition ReadMethodDef(MethodDefinitionHandle src, ref MethodDefinition dst)
@@ -35,6 +35,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<MethodDefinitionHandle> MethodDefHandles()
-            => MetadataReader.MethodDefinitions.ToReadOnlySpan();
+            => MD.MethodDefinitions.ToReadOnlySpan();
     }
 }

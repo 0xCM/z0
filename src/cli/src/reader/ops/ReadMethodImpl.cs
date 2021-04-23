@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public MethodImplementation ReadMethodImpl(MethodImplementationHandle src)
-            => MetadataReader.GetMethodImplementation(src);
+            => MD.GetMethodImplementation(src);
 
         [MethodImpl(Inline), Op]
         public ref MethodImplementation ReadMethodImpl(MethodImplementationHandle src, ref MethodImplementation dst)

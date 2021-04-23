@@ -15,10 +15,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public void ReadTypeDefs(TypeDefinitionHandle src, Receiver<TypeDefinition> dst)
-            => dst(MetadataReader.GetTypeDefinition(src));
+            => dst(MD.GetTypeDefinition(src));
 
         [MethodImpl(Inline), Op]
         public void ReadTypeDefs(Index<TypeDefinitionHandle> src, Receiver<TypeDefinition> dst)
-            => src.Iter(handle => dst(MetadataReader.GetTypeDefinition(handle)));
+            => src.Iter(handle => dst(MD.GetTypeDefinition(handle)));
     }
 }

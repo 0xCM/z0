@@ -18,6 +18,9 @@ namespace Z0
         public FS.FilePath AssemblyRefsPath()
             => Db.IndexTable<AssemblyRefInfo>();
 
+        public FS.FilePath MemberRefsPath(Assembly src)
+            => Db.Table<MemberRef>(src.GetSimpleName());
+
         public void EmitAssemblyRefs(FS.Files src)
             => EmitAssemblyRefs(src, AssemblyRefsPath());
 
@@ -92,5 +95,6 @@ namespace Z0
 
             Wf.EmittedTable(flow, counter);
         }
+
     }
 }

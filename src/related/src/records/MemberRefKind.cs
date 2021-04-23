@@ -2,20 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Schemas.Ecma
+namespace Z0
 {
+    using Windows;
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    public struct MemberRefRow : IRecord<MemberRefRow>
+    partial struct Images
     {
-        public RowKey Key;
+        public enum MemberRefKind : byte
+        {
+            Method,
 
-        public int Class;
+            Field = 1,
+        }
 
-        public FK<StringIndex> Name;
-
-        public FK<BlobIndex> Signature;
     }
 }

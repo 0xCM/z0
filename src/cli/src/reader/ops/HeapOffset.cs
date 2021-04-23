@@ -21,6 +21,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public Address32 HeapOffset(UserStringHandle handle)
-            => (Address32)MetadataReader.GetHeapOffset(handle);
+            => (Address32)MD.GetHeapOffset(handle);
     }
 }

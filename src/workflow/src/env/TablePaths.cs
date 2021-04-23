@@ -47,8 +47,9 @@ namespace Z0
         FS.FilePath Table(string subject, PartId part)
             => TableDir(subject) + FS.file(string.Format(RP.SlotDot2, subject, part.Format()), DefaultTableExt);
 
-        FS.FilePath Table(PartId part, string subject, FS.FileExt ext)
-            => TableDir(subject) + FS.file(part.Format(), ext);
+        FS.FilePath Table<T>(PartId part)
+            where T : struct, IRecord<T>
+                => TableDir<T>() + FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format(), FS.Csv));
 
         FS.FilePath Table<T>(string subject)
             where T : struct, IRecord<T>

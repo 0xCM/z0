@@ -18,14 +18,14 @@ namespace Z0
         public Index<MsilMetadata> ReadMsil()
         {
             var dst = sys.list<MsilMetadata>();
-            var types = @readonly(MetadataReader.TypeDefinitions.ToArray());
+            var types = @readonly(MD.TypeDefinitions.ToArray());
             var typeCount = types.Length;
             for(var k=0u; k<typeCount; k++)
             {
                  var hType = skip(types, k);
-                 var methods = @readonly(MetadataReader.GetTypeDefinition(hType).GetMethods().Array());
+                 var methods = @readonly(MD.GetTypeDefinition(hType).GetMethods().Array());
                  var methodCount = methods.Length;
-                 var definitions = @readonly(root.map(methods, m=> MetadataReader.GetMethodDefinition(m)));
+                 var definitions = @readonly(root.map(methods, m=> MD.GetMethodDefinition(m)));
                  for(var i=0u; i<methodCount; i++)
                  {
                     ref readonly var method = ref skip(methods,i);
@@ -42,7 +42,7 @@ namespace Z0
                             BodySize = body.Size,
                             LocalInit = body.LocalVariablesInitialized,
                             MaxStack = body.MaxStack,
-                            MethodName = Clr.membername(MetadataReader.GetString(definition.Name)),
+                            MethodName = Clr.membername(MD.GetString(definition.Name)),
                             Code = body.GetILBytes(),
                         });
                     }

@@ -16,11 +16,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public string ReadUserString(UserStringHandle handle)
-            => MetadataReader.GetUserString(handle);
+            => MD.GetUserString(handle);
 
         public Index<UserString> ReadUserStrings()
         {
-            var reader = MetadataReader;
+            var reader = MD;
             int size = reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
                 return sys.empty<UserString>();

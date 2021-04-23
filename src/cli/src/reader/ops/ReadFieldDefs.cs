@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public FieldDefinition ReadFieldDef(FieldDefinitionHandle src)
-            => MetadataReader.GetFieldDefinition(src);
+            => MD.GetFieldDefinition(src);
 
         [MethodImpl(Inline), Op]
         public ref FieldDefinition ReadFieldDef(FieldDefinitionHandle src, ref FieldDefinition dst)

@@ -14,6 +14,7 @@ namespace Z0
 
     partial class ImageMetaReader
     {
+
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<ManifestResourceInfo> ReadResDescriptions()
         {

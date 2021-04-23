@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ManifestResource ReadResource(ManifestResourceHandle src)
-            => MetadataReader.GetManifestResource(src);
+            => MD.GetManifestResource(src);
 
         [Op]
         public unsafe bool ResourceSearch(string name, out ResSegment dst)
@@ -80,7 +80,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<ManifestResourceHandle> ResourceHandles()
-            => MetadataReader.ManifestResources.ToReadOnlySpan();
+            => MD.ManifestResources.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
         public static ManifestResourceHandle ResourceHandle(uint row)
@@ -99,7 +99,7 @@ namespace Z0
             if(!handle.IsNil)
             {
                 var table = ImageMetaReader.table(handle);
-                var token = MetadataReader.GetToken(handle);
+                var token = MD.GetToken(handle);
                 if (table != null)
                     return new ClrTableEntry(token, table.Value);
             }

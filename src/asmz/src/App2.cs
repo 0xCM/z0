@@ -1248,7 +1248,8 @@ namespace Z0.Asm
         public void EmitImageMetadata()
         {
             var pipe = Wf.ImageMetaPipe();
-            pipe.EmitMetadaSets(WorkflowOptions.@default());
+            pipe.EmitMemberRefs();
+            //pipe.EmitMetadaSets(WorkflowOptions.@default());
 
 
         }
@@ -1275,10 +1276,12 @@ namespace Z0.Asm
 
         }
 
+
+
         public void Run()
         {
+            EmitImageMetadata();
             //CaptureParts(PartId.AsmZ);
-            DeriveMsil();
             //DeriveMsil();
             // var tool = Wf.DumpBin();
             // var path = tool.EmitScripts(Db.RuntimeRoot(), Db.ImageArchiveRoot());

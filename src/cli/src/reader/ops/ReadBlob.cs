@@ -18,9 +18,9 @@ namespace Z0
         [Op]
         public MetadataBlob ReadBlob(BlobHandle handle, Count seq)
         {
-            var offset = (Address32)MetadataReader.GetHeapOffset(handle);
-            var value = MetadataReader.GetBlobBytes(handle) ?? sys.empty<byte>();
-            var size = MetadataReader.GetHeapSize(HeapIndex.Blob);
+            var offset = (Address32)MD.GetHeapOffset(handle);
+            var value = MD.GetBlobBytes(handle) ?? sys.empty<byte>();
+            var size = MD.GetHeapSize(HeapIndex.Blob);
             var row = new MetadataBlob();
             row.Sequence = seq;
             row.HeapSize = size;
@@ -32,7 +32,7 @@ namespace Z0
 
         public ReadOnlySpan<MetadataBlob> ReadBlobs()
         {
-            int size = MetadataReader.GetHeapSize(HeapIndex.Blob);
+            int size = MD.GetHeapSize(HeapIndex.Blob);
             if (size == 0)
                 return Span<MetadataBlob>.Empty;
 
@@ -41,15 +41,15 @@ namespace Z0
             var values = new List<MetadataBlob>();
             do
             {
-                var value = MetadataReader.GetBlobBytes(handle);
+                var value = MD.GetBlobBytes(handle);
                 var row = new MetadataBlob();
                 row.Sequence = i++;
                 row.HeapSize = size;
-                row.Offset = (Address32)MetadataReader.GetHeapOffset(handle);
-                row.Data = MetadataReader.GetBlobBytes(handle);
+                row.Offset = (Address32)MD.GetHeapOffset(handle);
+                row.Data = MD.GetBlobBytes(handle);
                 row.DataSize = row.Data.Length;
                 values.Add(row);
-                handle = MetadataReader.GetNextHandle(handle);
+                handle = MD.GetNextHandle(handle);
             }
             while (!handle.IsNil);
 
@@ -58,7 +58,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public BinaryCode ReadBlobData(BlobHandle src)
-            => MetadataReader.GetBlobBytes(src);
+            => MD.GetBlobBytes(src);
 
         [MethodImpl(Inline), Op]
         public ref BinaryCode ReadBlobData(BlobHandle src, ref BinaryCode dst)

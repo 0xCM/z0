@@ -15,11 +15,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<AssemblyFileHandle> AssemblyFileHandles()
-            => MetadataReader.AssemblyFiles.ToReadOnlySpan();
+            => MD.AssemblyFiles.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
         public AssemblyFile ReadFile(AssemblyFileHandle src)
-            => MetadataReader.GetAssemblyFile(src);
+            => MD.GetAssemblyFile(src);
 
         [MethodImpl(Inline), Op]
         public ref AssemblyFile ReadFile(AssemblyFileHandle src, ref AssemblyFile dst)

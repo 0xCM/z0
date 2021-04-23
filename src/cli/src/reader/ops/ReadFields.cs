@@ -18,7 +18,7 @@ namespace Z0
     {
         public ReadOnlySpan<MemberField> ReadFields()
         {
-            var reader = MetadataReader;
+            var reader = MD;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
             var dst = memory.span<MemberField>(count);
@@ -41,9 +41,9 @@ namespace Z0
 
         public MemberFieldName ReadFieldName(StringHandle handle, Count seq)
         {
-            var value = MetadataReader.GetString(handle);
-            var offset = MetadataReader.GetHeapOffset(handle);
-            var size = MetadataReader.GetHeapSize(HeapIndex.String);
+            var value = MD.GetString(handle);
+            var offset = MD.GetHeapOffset(handle);
+            var size = MD.GetHeapSize(HeapIndex.String);
             return new MemberFieldName(seq, size, (Address32)offset, value);
         }
     }

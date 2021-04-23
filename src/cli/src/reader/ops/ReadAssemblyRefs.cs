@@ -29,7 +29,7 @@ namespace Z0
             var count = src.Length;
             for(var i=0u; i<count; i++)
             {
-                var ar = MetadataReader.GetAssemblyReference(skip(src,i));
+                var ar = MD.GetAssemblyReference(skip(src,i));
                 ReadAssemblyRef(ar, ref seek(dst,i));
             }
         }
@@ -37,7 +37,7 @@ namespace Z0
         [Op]
         public ref AssemblyRefInfo ReadAssemblyRef(AssemblyReference src, ref AssemblyRefInfo dst)
         {
-            dst.Source = MetadataReader.GetAssemblyDefinition().GetAssemblyName();
+            dst.Source = MD.GetAssemblyDefinition().GetAssemblyName();
             dst.Target = src.GetAssemblyName();
             dst.Token = ReadBlobData(src.PublicKeyOrToken);
             return ref dst;
@@ -46,6 +46,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         ReadOnlySpan<AssemblyReferenceHandle> AssemblyReferenceHandles()
-            => MetadataReader.AssemblyReferences.ToReadOnlySpan();
+            => MD.AssemblyReferences.ToReadOnlySpan();
     }
 }

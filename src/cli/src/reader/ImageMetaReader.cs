@@ -52,7 +52,7 @@ namespace Z0
 
         public PEReader PeReader {get;}
 
-        public MetadataReader MetadataReader {get;}
+        public MetadataReader MD {get;}
 
         public PEMemoryBlock MetadataBlock {get;}
 
@@ -61,7 +61,7 @@ namespace Z0
             Source = src;
             Stream = File.OpenRead(src.Name);
             PeReader = new PEReader(Stream);
-            MetadataReader = PeReader.GetMetadataReader();
+            MD = PeReader.GetMetadataReader();
             MetadataBlock = PeReader.GetMetadata();
         }
 
@@ -99,6 +99,9 @@ namespace Z0
             get => PeHeaders.SectionHeaders.ToReadOnlySpan();
         }
 
+        public ReadOnlySpan<MemberReferenceHandle> MemberRefHandles
+            => MD.MemberReferences.ToArray();
+
         public DirectoryEntry ResourcesDirectory
             => CorHeader.ResourcesDirectory;
 
@@ -122,7 +125,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public void ReadAttributes(Index<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
-            => src.Iter(handle => dst(MetadataReader.GetCustomAttribute(handle)));
+            => src.Iter(handle => dst(MD.GetCustomAttribute(handle)));
 
         [MethodImpl(Inline)]
         public PEMemoryBlock ReadSectionData(DirectoryEntry src)
@@ -132,10 +135,12 @@ namespace Z0
         {
             var table = Clr.table(src);
             if(table != null)
-                return new ClrTableEntry(MetadataReader.GetToken(src), table.Value);
+                return new ClrTableEntry(MD.GetToken(src), table.Value);
 
             return ClrTableEntry.Empty;
         }
+
+
 
         internal static string format(FieldAttributes src)
             => src.ToString();
