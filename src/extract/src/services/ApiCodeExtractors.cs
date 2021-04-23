@@ -34,10 +34,6 @@ namespace Z0
 
         const int MaxZeroCount = 10;
 
-        // [MethodImpl(Inline), Op]
-        // public static BytePatternParser<EncodingPatternKind> patterns(byte[] buffer)
-        //     => new BytePatternParser<EncodingPatternKind>(EncodingPatterns.Default, buffer);
-
         [MethodImpl(Inline), Op]
         public static EncodingParser patterns(byte[] buffer)
             => new EncodingParser(EncodingPatterns.Default, buffer);
@@ -47,49 +43,12 @@ namespace Z0
             => new PatternExtractParser(sys.alloc<byte>(size));
 
         [MethodImpl(Inline), Op]
-        public static Option<CodeBlock> parse(CodeBlock src, byte[] buffer)
-        {
-            if(parse(src, buffer, out var dst))
-                return root.some(dst);
-            else
-                return root.none<CodeBlock>();
-        }
-
-        [MethodImpl(Inline), Op]
-        public static CodeBlock extract(MemoryAddress src, byte[] buffer)
-        {
-            Span<byte> target = buffer;
-            var length = extract(src, target);
-            return new CodeBlock(src, sys.array(target.Slice(0, length)));
-        }
-
-        [MethodImpl(Inline), Op]
         public static ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
         {
             var address = src.BaseAddress;
             var length = extract(address, buffer);
             var extracted = sys.array(buffer.Slice(0,length));
-            var block = new ApiExtractBlock(address,src.OpUri, extracted);
-            return new ApiMemberExtract(src, block);
-        }
-
-        [Op]
-        static bool parse(in CodeBlock src, in BinaryCode buffer, out CodeBlock dst)
-        {
-            var parser = patterns(buffer);
-            var status = parser.Parse(src);
-            var matched = parser.Result;
-            var succeeded = matched.IsSome() && status.Success();
-            if(succeeded)
-            {
-                dst = new CodeBlock(src.BaseAddress, parser.Parsed);
-                return true;
-            }
-            else
-            {
-                dst = CodeBlock.Empty;
-                return false;
-            }
+            return new ApiMemberExtract(src, new ApiExtractBlock(address, src.OpUri, extracted));
         }
 
         [MethodImpl(Inline), Op]

@@ -18,6 +18,10 @@ namespace Z0
         public static MethodEntryPoint entry(MethodInfo src)
             => new MethodEntryPoint(src.MetadataToken, ApiJit.jit(src));
 
+        [Op]
+        public static MethodEntryPoint entry(ApiMember src)
+            => new MethodEntryPoint(src.Token, src.BaseAddress);
+
         [Op, Closures(UInt16k)]
         public static MethodEntryPoint<K> entry<K>(MethodInfo src, K kind)
             where K : unmanaged
@@ -31,6 +35,21 @@ namespace Z0
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
                 seek(dst,i) = entry(skip(src,i));
+            return new MethodTable(name, buffer);
+        }
+
+        public static MethodTable create(PartId part, ApiMembers src)
+            => create(part.Format(), src);
+
+        [Op]
+        public static MethodTable create(Identifier name, ApiMembers src)
+        {
+            var count = src.Length;
+            var buffer = alloc<MethodEntryPoint>(count);
+            ref var dst = ref first(buffer);
+            var view = src.View;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = entry(skip(view,i));
             return new MethodTable(name, buffer);
         }
 

@@ -7,15 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Asm;
-
     using static Part;
     using static EncodingPatternKind;
     using static EncodingPatternTokens;
 
     using D = EncodingPatternOffset;
 
-    public readonly struct EncodingPatterns : IBytePatternSet<EncodingPatternKind>
+    public readonly struct EncodingPatterns
     {
         public static EncodingPatterns Default
             => new EncodingPatterns(0);
@@ -30,9 +28,6 @@ namespace Z0
 
         public ReadOnlySpan<EncodingPatternKind> FullPatternKinds
             => FullKinds;
-
-        public ReadOnlySpan<EncodingPatternKind> PartialPatternKinds
-            => PartialKinds;
 
         EncodingPatterns(int dummy)
         {
@@ -83,17 +78,7 @@ namespace Z0
             };
 
         public bool IsSuccessPattern(EncodingPatternKind kind)
-            => kind != 0; // && kind != EncodingPatternKind.Zx7;
-
-        public ReadOnlySpan<byte?> PartialPattern(EncodingPatternKind kind)
-            => kind switch {
-                EncodingPatternKind.CALL32_INTR => CALL32_INTR,
-                _ => EmptyPartial
-            };
-
-        [MethodImpl(Inline)]
-        int IBytePatternSet<EncodingPatternKind>.MatchOffset(EncodingPatternKind code)
-            => (int)MatchOffset(code);
+            => kind != 0;
 
         static ReadOnlySpan<byte> RET_SBB
             => new byte[]{RET_xC3, SBB_x19};
@@ -116,13 +101,7 @@ namespace Z0
         static ReadOnlySpan<byte> Z7
             => new byte[]{ZED,ZED,ZED,ZED,ZED,ZED,ZED};
 
-        static ReadOnlySpan<byte?> CALL32_INTR
-            => new byte?[]{Call_xE8,null,null,null,null,INTR_xCC};
-
         static ReadOnlySpan<byte> Empty
             => sys.empty<byte>();
-
-        static ReadOnlySpan<byte?> EmptyPartial
-            => sys.empty<byte?>();
     }
 }

@@ -1303,15 +1303,30 @@ namespace Z0.Asm
 
         public void CollectMethodTables()
         {
-            var catalog = ApiDeployment.rooted(FS.path(Parts.Math.Assembly.Location).FolderPath);
+            var catalog = Wf.ApiCatalog;
             var jit = Wf.ApiJit();
             var members = jit.JitCatalog(catalog);
-            Wf.Row(members.Length);
+            var flow = Wf.Running("Creating method table");
+            var table = MethodTables.create(root.controller().Id(), members);
+            Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
+        }
+
+        public void ParseExtracts()
+        {
+            var pipe = Wf.ApiExtractPipe();
+            var paths = pipe.Paths();
+            var extracts = pipe.Read(paths).View;
+            var parsed = ApiExtracts.parse(extracts);
+            var hex = Wf.ApiHex();
+            var packed = hex.BuildHexPack(parsed);
+            var outfile = Db.AppLog("apihex", FS.ext("xpack"));
+            hex.EmitHexPack(parsed.ToArray(), outfile);
         }
 
         public void Run()
         {
-            CollectMethodTables();
+            CaptureParts(PartId.Extract);
+            //ParseExtracts();
             //CaptureParts(PartId.AsmZ);
             //DeriveMsil();
             // var tool = Wf.DumpBin();

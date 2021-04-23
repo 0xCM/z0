@@ -15,6 +15,11 @@ namespace Z0
     public readonly struct ApiExtractBlock : IComparable<ApiExtractBlock>
     {
         /// <summary>
+        /// The Extract's base address
+        /// </summary>
+        public MemoryAddress BaseAddress {get;}
+
+        /// <summary>
         /// The operation uri
         /// </summary>
         public OpUri Uri {get;}
@@ -22,42 +27,28 @@ namespace Z0
         /// <summary>
         /// The enExtractd operation data
         /// </summary>
-        public ExtractBlock Extract {get;}
+        public readonly BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
         public ApiExtractBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
+            BaseAddress = @base;
             Uri = uri;
-            Extract = new ExtractBlock(@base, src);
-        }
-
-        [MethodImpl(Inline)]
-        public ApiExtractBlock(OpUri uri, ExtractBlock src)
-        {
-            Uri = uri;
-            Extract = src;
+            Encoded = src;
         }
 
         public byte[] Storage
         {
             [MethodImpl(Inline)]
-            get => Extract.Storage;
+            get => Encoded.Storage;
         }
 
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => Extract.Storage;
+            get => Encoded.View;
         }
 
-        /// <summary>
-        /// The Extract's base address
-        /// </summary>
-        public MemoryAddress BaseAddress
-        {
-             [MethodImpl(Inline)]
-             get => Extract.BaseAddress;
-        }
 
         public OpIdentity OpId
         {
@@ -83,14 +74,6 @@ namespace Z0
             get => Uri;
         }
 
-        /// <summary>
-        /// The enExtractd operation data
-        /// </summary>
-        public readonly BinaryCode Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Extract;
-        }
 
         public byte[] Data
         {
@@ -162,10 +145,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(ApiExtractBlock src)
-            => src.Extract;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ExtractBlock(ApiExtractBlock src)
-            => src.Extract;
+            => src.Encoded;
     }
 }

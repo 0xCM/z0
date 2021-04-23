@@ -100,7 +100,7 @@ namespace Z0
         public Index<ApiExtractRow> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src, FS.FilePath dst)
         {
             var count = src.Length;
-            var blocks = src.Map(x => new ApiExtractBlock(x.Address, x.OpUri, x.Encoded));
+            var blocks = src.Map(x => x.Block);
             var flow = Wf.EmittingTable<ApiExtractRow>(dst);
             var emitted = Emit(blocks, dst);
             Wf.EmittedTable(flow, count);
@@ -165,7 +165,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static ref ApiExtractRow row(in ApiExtractBlock src, ref ApiExtractRow dst)
         {
-            dst.Base = src.Extract.BaseAddress;
+            dst.Base = src.BaseAddress;
             dst.Encoded = src.Storage;
             dst.Uri = src.Uri.Format();
             return ref dst;

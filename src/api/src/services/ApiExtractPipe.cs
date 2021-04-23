@@ -5,29 +5,42 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
 
-    public class ApiExtractPipe : WfService<ApiExtractPipe>, IApiExtractReader, IApiExtractParser
+    public class ApiExtractPipe : WfService<ApiExtractPipe>
     {
-        public Index<ApiExtractBlock> Read(FS.FilePath src)
+        public FS.Files Paths()
+            => Db.RawExtractPaths();
+
+        public uint Read(FS.FilePath src, List<ApiExtractBlock> dst)
         {
             var lines = src.ReadLines().View;
             var count = lines.Length;
-            var buffer = sys.alloc<ApiExtractBlock>(count);
-            var dst = span(buffer);
+            var flow = Wf.Running(string.Format("Reading extracts from {0}", src.ToUri()));
             for(var i=1u; i<count; i++)
             {
                 ref readonly var line = ref skip(lines,i);
-
                 if(Parse(line, out var block))
-                    seek(dst, i) = block;
+                    dst.Add(block);
                 else
-                    seek(dst, i) = ApiExtractBlock.Empty;
+                    Wf.Warn($"Unable to process {line}");
 
             }
-            return buffer;
+            var accepted = (uint)dst.Count;
+            Wf.Ran(flow, string.Format("Read {0} extract blocks from {1}", accepted, src.ToUri()));
+            return accepted;
+        }
+
+        public Index<ApiExtractBlock> Read(FS.Files src)
+        {
+            var dst = root.list<ApiExtractBlock>();
+            var counter = 0u;
+            foreach(var file in src)
+                counter += Read(file,dst);
+            return dst.ToArray();
         }
 
         public Outcome Parse(string src, out ApiExtractBlock dst)
@@ -35,7 +48,6 @@ namespace Z0
             dst = ApiExtractBlock.Empty;
             try
             {
-                var flow = Wf.Running("Parsing extract blocks");
                 var parts = src.SplitClean(FieldDelimiter);
                 var parser = HexParsers.bytes();
                 if(parts.Length != 3)
@@ -45,7 +57,6 @@ namespace Z0
                 var uri = ApiUri.parse(parts[(byte)ApiExtractField.Uri].Trim()).ValueOrDefault();
                 var bytes = parts[(byte)ApiExtractField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
                 dst = new ApiExtractBlock(address, uri, bytes);
-                Wf.Ran(flow, string.Format("Parsed {0} extract blocks", (ByteSize)bytes.Length));
                 return true;
             }
             catch(Exception e)

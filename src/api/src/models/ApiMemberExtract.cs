@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct ApiMemberExtract
     {
-        public ExtractBlock Encoded {get;}
+        public ApiExtractBlock Block {get;}
 
         public OpIdentity Id {get;}
 
@@ -29,48 +29,41 @@ namespace Z0
         public byte[] Data
         {
             [MethodImpl(Inline)]
-            get => Encoded.Code;
+            get => Block.Encoded;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Encoded.Length;
+            get => Block.Length;
         }
 
         public ref readonly byte this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Encoded[index];
+            get => ref Block[index];
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Encoded.IsEmpty;
+            get => Block.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Encoded.IsNonEmpty;
+            get => Block.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
-        public ApiMemberExtract(OpIdentity id, OpUri uri, ApiMember member, ExtractBlock encoded)
+        public ApiMemberExtract(ApiMember member, ApiExtractBlock block)
         {
-            Id = id;
-            OpUri = uri;
+            Id = member.Id;
+            OpUri = member.OpUri;
             Member = member;
-            Encoded = encoded;
+            Block = block;
         }
-
-        [MethodImpl(Inline)]
-        public ApiMemberExtract(ApiMember member, ExtractBlock encoded)
-            : this(member.Id, member.OpUri, member, encoded)
-            {
-
-            }
 
         public MethodInfo Method
             => Member.Method;
@@ -78,7 +71,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Encoded.BaseAddress;
+            get => Block.BaseAddress;
         }
 
         public ApiHostUri Host
@@ -89,13 +82,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Encoded.Format();
+            => Block.Format();
 
         [MethodImpl(Inline)]
         public bool Equals(ApiMemberExtract src)
-            => Encoded.Equals(src.Encoded);
+            => Block.Equals(src.Block);
 
         public static ApiMemberExtract Empty
-            => new ApiMemberExtract(ApiMember.Empty, ExtractBlock.Empty);
+            => new ApiMemberExtract(ApiMember.Empty, ApiExtractBlock.Empty);
     }
 }

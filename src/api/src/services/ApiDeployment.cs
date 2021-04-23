@@ -15,6 +15,14 @@ namespace Z0
     public readonly struct ApiDeployment
     {
         [Op]
+        public static PartContext context(FS.FilePath src, bool collectible = true)
+            => new PartContext(src, collectible);
+
+        [Op]
+        public static PartContext context(PartId part, bool collectible = true)
+            => new PartContext(part, collectible);
+
+        [Op]
         public static FS.Files managed(FS.FolderPath dir)
             => dir.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
 
@@ -41,6 +49,12 @@ namespace Z0
             return dst.ToArray();
         }
 
+        public static IPart[] parts(PartContext context)
+            => from component in context.Assemblies.Array().Where(x => x.Id() != 0)
+                let part = ApiQuery.part(component)
+                where part.IsSome()
+                select part.Value;
+
         public static IPart[] parts(FS.FolderPath dir, params PartId[] identities)
         {
             var query = from p in identities
@@ -53,6 +67,14 @@ namespace Z0
                         select part.Value;
             return query.ToArray();
         }
+
+        [Op]
+        public static IApiRuntimeCatalog catalog(PartContext context)
+            => ApiQuery.runtime(parts(context));
+
+        [Op]
+        public static IApiRuntimeCatalog catalog(Index<IPart> parts)
+            => ApiQuery.runtime(parts);
 
         [Op]
         public static IApiRuntimeCatalog rooted(FS.FolderPath location)
@@ -113,7 +135,6 @@ namespace Z0
 
             return dst.ToArray();
         }
-
 
         /// <summary>
         /// Attempts to resolve a part from an assembly file path

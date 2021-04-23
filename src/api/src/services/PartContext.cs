@@ -9,8 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Tooling.DotNet;
-
     public class PartContext : AssemblyLoadContext, IDisposable
     {
         IEnvPaths Paths;
@@ -23,22 +21,22 @@ namespace Z0
 
         public Index<Assembly> Dependencies {get;}
 
-        public PartContext(FS.FilePath src)
-            : base(src.FileName.WithoutExtension.Format(), true)
+        public PartContext(FS.FilePath src, bool collectible = true)
+            : base(collectible)
         {
             Paths = EnvPaths.create();
             LibPath = src;
             LibDir = src.FolderPath;
-            Component = LoadFromAssemblyPath(LibPath.Name);
+            Component = LoadFromAssemblyPath(src.Name);
             Dependencies = this.LoadPartDependencies(Component, LibDir).Distinct().Array();
         }
 
-        public PartContext(PartId src)
-            : base(src.Format(), true)
+        public PartContext(PartId src, bool collectible = true)
+            : base(src.Format(), collectible)
         {
             Paths = EnvPaths.create();
-            LibDir = Paths.LibDir(src, TargetFrameworks.NetCoreApp31);
-            LibPath = Paths.LibPath(src, TargetFrameworks.NetCoreApp31);
+            LibDir = Paths.LibDir(src, NetCoreApp31);
+            LibPath = Paths.LibPath(src, NetCoreApp31);
             Component = LoadFromAssemblyPath(LibPath.Name);
             Dependencies = this.LoadPartDependencies(Component, LibDir).Distinct().Array();
         }
@@ -48,5 +46,7 @@ namespace Z0
         {
             Unload();
         }
+
+        const string NetCoreApp31 = "netcoreapp3.1";
     }
 }

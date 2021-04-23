@@ -40,11 +40,12 @@ namespace Z0
             else
             {
                 Span<byte> data = src;
-                var len = ExtractLength(data,cut, 0xC3);
+                var len = ExtractLength(data, cut, 0xC3);
                 var keep = data.Slice(0, len);
                 return new CodeBlock(address, keep.ToArray());
             }
         }
+
 
         [Op]
         public Outcome<ApiMemberCode> ParseMember(in ApiMemberExtract src, uint seq)
@@ -52,11 +53,11 @@ namespace Z0
             try
             {
                 var parser = Parser;
-                var status = parser.Parse(src.Encoded);
+                var status = parser.Parse(src.Block.Encoded);
                 var term = status.HasFailed() ? ExtractTermCode.Fail : parser.Result.ToTermCode();
                 if(term != ExtractTermCode.Fail)
                 {
-                    var code = Locate(src.Encoded.BaseAddress, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
+                    var code = Locate(src.Block.BaseAddress, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
                     return new ApiMemberCode(src.Member, new ApiCodeBlock(code.BaseAddress, src.OpUri, code), seq, term);
                 }
                 else

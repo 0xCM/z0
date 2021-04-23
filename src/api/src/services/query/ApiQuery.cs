@@ -113,7 +113,15 @@ namespace Z0
                  dst = default;
                  return false;
             }
+        }
 
+        [Op]
+        public static Option<IPart> part(Assembly src)
+        {
+            if(part(src, out var dst))
+                return Option.some(dst);
+            else
+                return Option.none<IPart>();
         }
 
         [Op]

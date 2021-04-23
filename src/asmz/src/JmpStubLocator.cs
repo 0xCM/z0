@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static Toolsets;
 
     [Record(TableId)]
     public struct JmpStub : IRecord<JmpStub>

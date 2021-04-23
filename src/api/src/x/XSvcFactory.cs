@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [ApiHost]
     public static class XSvcFactory
     {
@@ -47,6 +46,9 @@ namespace Z0
 
         public static ApiJit ApiJit(this IWfRuntime wf)
             => Z0.ApiJit.create(wf);
+
+        public static ApiExtractPipe ApiExtractPipe(this IWfRuntime wf)
+            => Z0.ApiExtractPipe.create(wf);
 
         public static ApiClassCatalog ApiClassCatalog(this IWfRuntime wf)
             => Z0.ApiClassCatalog.create(wf);

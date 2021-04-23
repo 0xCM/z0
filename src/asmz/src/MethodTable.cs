@@ -24,16 +24,22 @@ namespace Z0
             EntryPoints = src;
         }
 
-        public ref readonly MethodEntryPoint this[uint index]
+        public ref MethodEntryPoint this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref EntryPoints[index];
         }
 
-        public ReadOnlySpan<MethodEntryPoint> Entries
+        public ReadOnlySpan<MethodEntryPoint> View
         {
             [MethodImpl(Inline)]
             get => EntryPoints.View;
+        }
+
+        public Span<MethodEntryPoint> Edit
+        {
+            [MethodImpl(Inline)]
+            get => EntryPoints.Edit;
         }
     }
 }

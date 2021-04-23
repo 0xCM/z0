@@ -12,7 +12,6 @@ namespace Z0
 
     partial class XFs
     {
-
         [Op]
         public static Assembly LoadFrom(this AssemblyLoadContext context, FS.FilePath src)
             => context.LoadFromAssemblyPath(src.Name);

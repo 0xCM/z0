@@ -9,7 +9,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-
     readonly struct MathOps
     {
         public static MathOps init()

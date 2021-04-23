@@ -22,14 +22,6 @@ namespace Z0
             => state == BytePatternParserState.Failed;
 
         [MethodImpl(Inline), Op]
-        public static bool Success(this BytePatternParserState state)
-            => state == BytePatternParserState.Succeeded;
-
-        [MethodImpl(Inline), Op]
-        public static bool IsSome(this EncodingPatternKind code)
-            => code != 0;
-
-        [MethodImpl(Inline), Op]
         public static ExtractTermCode ToTermCode(this EncodingPatternKind src)
         {
             if(src != 0)
