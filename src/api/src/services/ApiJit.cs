@@ -102,8 +102,7 @@ namespace Z0
             foreach(var part in parts)
                 all.Add(JitPart(part));
 
-
-            var members = new ApiMembers(@base, all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array());
+            var members = ApiMembers.create(all.SelectMany(x => x).Array());
             Wf.Ran(flow, Msg.JittedParts.Format(members.Count, parts.Length));
             return members;
         }
@@ -112,8 +111,7 @@ namespace Z0
         {
             var direct = JitDirect(src);
             var generic = JitGeneric(src);
-            var all = direct.Concat(generic).Array();
-            return all.OrderBy(x => x.BaseAddress);
+            return ApiMembers.create(direct.Concat(generic).Array());
         }
 
         public ApiMembers Jit(Index<ApiRuntimeType> src)
@@ -124,28 +122,27 @@ namespace Z0
             ref var lead = ref src.First;
             for(var i=0u; i<count; i++)
                 dst.AddRange(Jit(skip(lead,i), exclusions));
-            var collected = dst.ToArray();
-            Array.Sort(collected);
-            return collected;
+            return ApiMembers.create(dst.ToArray());
         }
 
         public ApiMembers JitPart(IPart src)
         {
             var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
-            var dst = root.list<ApiMember>();
+            var buffer = root.list<ApiMember>();
             var catalog = ApiQuery.catalog(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 
             foreach(var t in types)
-                dst.AddRange(Jit(t));
+                buffer.AddRange(Jit(t));
 
             foreach(var h in hosts)
-                dst.AddRange(JitHost(h));
+                buffer.AddRange(JitHost(h));
 
-            Wf.Ran(flow, Msg.JittedPart.Format(dst.Count, src.Id));
+            var members = ApiMembers.create(buffer.ToArray());
+            Wf.Ran(flow, Msg.JittedPart.Format(members.Count, src.Id));
 
-            return dst.ToArray();
+            return members;
         }
 
         public Index<ApiMember> Jit(ApiRuntimeType src)
@@ -156,7 +153,6 @@ namespace Z0
         {
             var methods = src.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions).Select(m => new JittedMethod(src.Uri, m));
             var located = methods.Select(m => m.WithLocation(address(Jit(m.Method))));
-            Array.Sort(located);
             return Members(located);
         }
 
@@ -172,7 +168,7 @@ namespace Z0
                 var kind = method.KindId();
                 var id = Diviner.Identify(method);
                 var uri = ApiUri.define(ApiUriScheme.Located, member.Host, method.Name, id);
-                dst[i] = new ApiMember(uri,method, kind, member.Location);
+                dst[i] = new ApiMember(uri, method, kind, member.Location);
             }
 
             return dst;
@@ -191,7 +187,7 @@ namespace Z0
         [Op]
         ApiMember[] JitDirect(IApiHost src)
         {
-            var methods = ApiQuery.DirectMethods(src);
+            var methods = ApiQuery.nongeneric(src).Select(m => new JittedMethod(src.Uri, m));
             var count = methods.Length;
             var buffer = alloc<ApiMember>(count);
             ref var dst = ref first(buffer);
@@ -202,8 +198,7 @@ namespace Z0
                 var kid = m.Method.KindId();
                 var id = Diviner.Identify(m.Method);
                 var uri = ApiUri.define(ApiUriScheme.Located, src.Uri, m.Method.Name, id);
-                var location = address(Jit(m.Method));
-                seek(dst,i) = new ApiMember(uri, m.Method, kid, location);
+                seek(dst,i) = new ApiMember(uri, m.Method, kid, address(Jit(m.Method)));
 
             }
             return buffer;
@@ -212,7 +207,7 @@ namespace Z0
         [Op]
         ApiMember[] JitGeneric(IApiHost src)
         {
-            var generic = @readonly(ApiQuery.GenericMethods(src));
+            var generic = @readonly(ApiQuery.generic(src).Select(m => new JittedMethod(src.Uri, m)));
             var gCount = generic.Length;
             var buffer = root.list<ApiMember>();
             for(var i=0; i<gCount; i++)

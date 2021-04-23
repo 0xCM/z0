@@ -20,6 +20,10 @@ namespace Z0
             => new AsciTable(kind,min,max);
 
         [MethodImpl(Inline), Op]
+        public static AsciTable segment(AsciCharCode min, AsciCharCode max)
+            => new AsciTable(AsciTableKind.None, min,max);
+
+        [MethodImpl(Inline), Op]
         public static AsciTable digits()
             => table(AsciTableKind.Digits, F.MinDigitCode, F.MaxDigitCode);
 

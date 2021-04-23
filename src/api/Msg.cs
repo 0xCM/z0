@@ -39,11 +39,11 @@ namespace Z0
 
         public static MsgPattern<string> CorrelatingOperations => "Correlating {0} operations";
 
-        public static MsgPattern<int> JittingParts => "Jitting {0} parts";
+        public static MsgPattern<Count> JittingParts => "Jitting {0} parts";
 
         public static MsgPattern<PartId> JittingPart => "Jitting {0} members";
 
-        public static MsgPattern<int,PartId> JittedPart => "Jitted {0} {1} members";
+        public static MsgPattern<Count,PartId> JittedPart => "Jitted {0} {1} members";
 
         public static MsgPattern<dynamic,dynamic> JittedParts => "Jitted {0} members from {1} parts";
     }

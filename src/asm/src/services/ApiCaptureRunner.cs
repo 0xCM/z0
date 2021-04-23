@@ -39,6 +39,9 @@ namespace Z0
             return Capture(Wf.ApiCatalog.PartIdentities, DefaultOptions);
         }
 
+        public static ApiMembers members(Index<AsmMemberRoutine> src)
+            => ApiMembers.create(src.Select(x => x.Member));
+
         public Index<AsmMemberRoutine> Capture(Index<PartId> parts, CaptureWorkflowOptions options)
         {
             using var flow = Wf.Running();
@@ -49,7 +52,7 @@ namespace Z0
                 EmitImm(parts);
 
             if((options & CaptureWorkflowOptions.CaptureContext) != 0)
-                EmitContext(AsmMemberRoutine.members(captured));
+                EmitContext(members(captured));
 
             return captured;
         }

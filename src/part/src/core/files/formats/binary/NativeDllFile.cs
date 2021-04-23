@@ -9,25 +9,31 @@ namespace Z0
 
     using static Root;
 
+    using api = NativeModules;
+
     /// <summary>
-    /// Represents a native executable
+    /// Represents a native dll
     /// </summary>
-    public readonly struct NativeExeFile : IFileModule<NativeExeFile>
+    public readonly struct NativeDllFile : IFileModule<NativeDllFile>
     {
         public FS.FilePath Path {get;}
 
+        public FileModuleKind ModuleKind
+            => FileModuleKind.NativeDll;
+
         [MethodImpl(Inline)]
-        public NativeExeFile(FS.FilePath path)
+        public NativeDllFile(FS.FilePath path)
             => Path = path;
 
-        public BinaryModuleKind ModuleKind
-            => BinaryModuleKind.NativeExe;
-
         public FS.FileExt DefaultExt
-            => FS.Extensions.Exe;
+            => FS.Extensions.Dll;
 
         [MethodImpl(Inline)]
-        public static implicit operator FileModule(NativeExeFile src)
+        public static implicit operator FileModule(NativeDllFile src)
             => new FileModule(src.Path, src.ModuleKind);
+
+        [MethodImpl(Inline)]
+        public NativeModule Load()
+            => api.load(Path);
     }
 }

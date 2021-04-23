@@ -51,14 +51,15 @@ namespace Z0
         /// </summary>
         public Index<MethodInfo> Operations {get;}
 
-        public ApiPartCatalog(PartId part, Assembly component, ApiRuntimeType[] apitypes, ApiHost[] apihosts, Type[] svchosts)
+        public ApiPartCatalog(PartId part, Assembly component, ApiRuntimeType[] apitypes, IApiHost[] apihosts, Type[] svchosts)
         {
             PartId = part;
             Owner = component;
             ApiTypes = apitypes;
             OperationHosts = apihosts.Map(h => (IApiHost)h);
             ServiceHosts = svchosts;
-            ApiHosts = apitypes.Cast<IApiHost>().Cast<IApiHost>().Concat(apihosts.Cast<IApiHost>()).Array();
+            //ApiHosts = apitypes.Cast<IApiHost>().Cast<IApiHost>().Concat(apihosts.Cast<IApiHost>()).Array();
+            ApiHosts = apihosts;
             Operations = apihosts.SelectMany(x => x.Methods);
         }
 

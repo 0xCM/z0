@@ -64,5 +64,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => recover<AsciCharCode>(CodeBytes);
         }
+
+        public static ReadOnlySpan<char> Chars
+        {
+            [MethodImpl(Inline)]
+            get => recover<char>(CharBytes);
+        }
     }
 }

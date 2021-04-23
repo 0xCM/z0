@@ -16,12 +16,6 @@ namespace Z0
     {
         public static ParseResult<string,TextDoc> parse(FS.FilePath src, TextDocFormat? format = null)
         {
-            if(!src.Exists)
-            {
-                term.error($"No such file {src}");
-                return root.unparsed(src.Name.Format(), default(TextDoc));
-            };
-
             using var reader = src.Reader();
             return TextDoc.parse(reader, format).Select(doc => root.parsed(src.Name.Format(), doc)).Value;
         }

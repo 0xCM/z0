@@ -9,7 +9,7 @@ namespace Z0
     [Free]
     public interface IFileModule : IFile
     {
-        BinaryModuleKind ModuleKind {get;}
+        FileModuleKind ModuleKind {get;}
 
         string ITextual.Format()
             => Path.Name;

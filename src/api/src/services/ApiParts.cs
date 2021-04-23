@@ -24,9 +24,10 @@ namespace Z0
 
         public ApiParts(PartId[] parts)
         {
-            Source = FS.path(root.controller().Location).FolderPath;
+            var control =  FS.path(root.controller().Location);
+            Source = control.FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            RuntimeCatalog = ApiQuery.runtime(parts);
+            RuntimeCatalog = ApiDeployment.catalog(Source,parts);
             Components = RuntimeCatalog.PartComponents;
         }
 
@@ -34,7 +35,7 @@ namespace Z0
         {
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            RuntimeCatalog =  ApiQuery.runtime(ManagedSources);
+            RuntimeCatalog = ApiDeployment.catalog(ManagedSources);
             Components = RuntimeCatalog.PartComponents;
         }
     }

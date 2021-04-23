@@ -1299,14 +1299,19 @@ namespace Z0.Asm
                 var id = heap.Identifier(i);
                 writer.WriteLine(string.Format("{0:D6} | {1,-32} | {2}", i, id, expr));
             }
+        }
 
-
+        public void CollectMethodTables()
+        {
+            var catalog = ApiDeployment.rooted(FS.path(Parts.Math.Assembly.Location).FolderPath);
+            var jit = Wf.ApiJit();
+            var members = jit.JitCatalog(catalog);
+            Wf.Row(members.Length);
         }
 
         public void Run()
         {
-            CaptureParts(PartId.AsmZ);
-
+            CollectMethodTables();
             //CaptureParts(PartId.AsmZ);
             //DeriveMsil();
             // var tool = Wf.DumpBin();

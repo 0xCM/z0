@@ -15,10 +15,6 @@ namespace Z0
     public readonly struct AsciSymbols
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> charbytes(N0 index)
-            => CharBytes;
-
-        [MethodImpl(Inline), Op]
         public static string @string(sbyte offset, sbyte count)
             => text.slice(AsciCharString, offset, count);
 
@@ -109,8 +105,5 @@ namespace Z0
             [Op]
             get => UppercaseHexString;
         }
-
-        static ReadOnlySpan<byte> B001
-            => new byte[16]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     }
 }

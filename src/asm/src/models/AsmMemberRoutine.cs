@@ -11,14 +11,6 @@ namespace Z0.Asm
 
     public readonly struct AsmMemberRoutine : IComparable<AsmMemberRoutine>
     {
-        public static ApiMembers members(Index<AsmMemberRoutine> src)
-        {
-            if(src.Length == 0)
-                return ApiMembers.Empty;
-            var members = src.Select(x => x.Member).Sort();
-            return new ApiMembers(members.First.BaseAddress,members);
-        }
-
         /// <summary>
         /// The defining member
         /// </summary>

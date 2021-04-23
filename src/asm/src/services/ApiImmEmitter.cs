@@ -80,7 +80,7 @@ namespace Z0.Asm
 
         void EmitDirectRefinements(in CaptureExchange exchange, IApiHost host, IAsmImmWriter dst)
         {
-            var groups = ApiQuery.ImmDirect(host,RefinementClass.Refined);
+            var groups = ApiQuery.imm(host,RefinementClass.Refined);
             var uri = host.Uri;
             var generic = false;
             foreach(var g in groups)
@@ -155,7 +155,7 @@ namespace Z0.Asm
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host);
-                var groups = ApiQuery.ImmDirect(host, RefinementClass.Unrefined);
+                var groups = ApiQuery.imm(host, RefinementClass.Unrefined);
                 routines.AddRange(EmitUnrefinedDirect(exchange, groups,imm8, archive));
             }
             return routines.ToArray();
@@ -186,7 +186,7 @@ namespace Z0.Asm
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host);
-                var specs = ApiQuery.ImmGeneric(host, RefinementClass.Unrefined);
+                var specs = ApiQuery.immG(host, RefinementClass.Unrefined);
                 foreach(var spec in specs)
                     routines.AddRange(EmitUnrefinedGeneric(exchange, spec, imm8, archive));
             }
@@ -195,7 +195,7 @@ namespace Z0.Asm
 
         Index<AsmRoutine> EmitGenericRefinements(in CaptureExchange exchange, IApiHost host, IAsmImmWriter dst)
         {
-            var specs = ApiQuery.ImmGeneric(host, RefinementClass.Refined);
+            var specs = ApiQuery.immG(host, RefinementClass.Refined);
             var routines = root.list<AsmRoutine>();
             foreach(var f in specs)
             {

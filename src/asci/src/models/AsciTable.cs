@@ -26,30 +26,36 @@ namespace Z0
     {
         public AsciTableKind Kind {get;}
 
-        public byte Count {get;}
+        public sbyte Count {get;}
 
-        readonly AsciCharCode Min {get;}
+        readonly sbyte Min {get;}
 
-        readonly AsciCharCode Max {get;}
+        readonly sbyte Max {get;}
 
         public AsciTable(AsciTableKind kind, AsciCharCode min, AsciCharCode max)
         {
             Kind = kind;
-            Min = min;
-            Max = max;
-            Count = (byte)((byte)(Max - Min) + 1);
+            Min = (sbyte)min;
+            Max = (sbyte)max;
+            Count = (sbyte)((sbyte)(Max - Min) + 1);
         }
 
         public ReadOnlySpan<AsciCharCode> Codes
         {
             [MethodImpl(Inline), Op]
-            get => slice(AsciCharData.Codes,(byte)Min,Count);
+            get => AsciSymbols.codes(Min, Count);
         }
 
         public ReadOnlySpan<AsciSymbol> Symbols
         {
             [MethodImpl(Inline), Op]
             get => recover<AsciCharCode,AsciSymbol>(Codes);
+        }
+
+        public ReadOnlySpan<char> Chars
+        {
+            [MethodImpl(Inline), Op]
+            get => AsciSymbols.chars(Min,Count);
         }
     }
 }

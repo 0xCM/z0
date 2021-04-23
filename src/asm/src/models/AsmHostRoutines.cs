@@ -15,8 +15,8 @@ namespace Z0.Asm
         {
             if(src.Length == 0)
                 return ApiMembers.Empty;
-            var members = src.SelectMany(x => x.Storage).Select(x => x.Member).Sort();
-            return new ApiMembers(members.First.BaseAddress,members);
+            else
+                return ApiMembers.create(src.SelectMany(x => x.Storage).Select(x => x.Member));
         }
 
         readonly Index<AsmMemberRoutine> Data;

@@ -35,8 +35,8 @@ namespace Z0
         public FS.FileExt DefaultExt
             =>  FS.Extensions.Dll;
 
-        public BinaryModuleKind ModuleKind
-            => BinaryModuleKind.ManagedDll;
+        public FileModuleKind ModuleKind
+            => FileModuleKind.ManagedDll;
 
         [MethodImpl(Inline)]
         public static implicit operator FileModule(ManagedDllFile src)

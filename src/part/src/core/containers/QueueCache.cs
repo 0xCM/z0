@@ -12,34 +12,34 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class EventCache : IWfEventCache
+    public sealed class QueueCache<T>
     {
-        readonly ConcurrentQueue<IWfEvent> Queue;
+        readonly ConcurrentQueue<T> Queue;
 
-        public EventCache()
+        public QueueCache()
         {
-            Queue = new ConcurrentQueue<IWfEvent>();
+            Queue = new ConcurrentQueue<T>();
         }
 
-        public static IWfEventCache create()
-            => new EventCache();
+        public static QueueCache<T> create()
+            => new QueueCache<T>();
 
         public uint Count
             => (uint)Queue.Count;
 
         [MethodImpl(Inline)]
-        public bool Take(out IWfEvent e)
-            => Queue.TryDequeue(out e);
+        public bool Take(out T item)
+            => Queue.TryDequeue(out item);
 
-        public uint Take(Span<IWfEvent> dst)
+        public uint Take(Span<T> dst)
         {
-            var count = root.min(Count, (uint)dst.Length);
+            var max = (uint)dst.Length;
             var taken = 0u;
-            for(var i=0; i<count; i++)
+            for(var i=0; i<max; i++)
             {
-                if(Take(out var e))
+                if(Take(out var item))
                 {
-                    seek(dst,i) = e;
+                    seek(dst,i) = item;
                     taken++;
                 }
                 else
@@ -48,20 +48,13 @@ namespace Z0
             return taken;
         }
 
-        public IEnumerable<IWfEvent> Take()
+        public IEnumerable<T> Take()
         {
             while(Take(out var e))
                 yield return e;
         }
 
-        public void Deposit(IWfEvent src)
-        {
-            Queue.Enqueue(src);
-        }
-
-        public void Dispose()
-        {
-
-        }
+        public void Deposit(in T src)
+            => Queue.Enqueue(src);
     }
 }

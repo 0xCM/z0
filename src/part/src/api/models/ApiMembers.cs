@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
 
@@ -14,27 +15,26 @@ namespace Z0
     /// </summary>
     public readonly struct ApiMembers : IIndex<ApiMember>
     {
+        public static ApiMembers create(Index<ApiMember> src)
+        {
+            if(src.Length != 0)
+            {
+                Array.Sort(src.Storage);
+                return new ApiMembers(src.First.BaseAddress, src);
+            }
+            else
+                return Empty;
+        }
+
         readonly Index<ApiMember> Data;
 
         public MemoryAddress BaseAddress {get;}
 
         [MethodImpl(Inline)]
-        public ApiMembers(ApiMember[] src)
-        {
-            Data = src;
-            BaseAddress = default;
-        }
-
-        [MethodImpl(Inline)]
-        public ApiMembers(MemoryAddress @base, ApiMember[] src)
+        ApiMembers(MemoryAddress @base, Index<ApiMember> src)
         {
             Data = src;
             BaseAddress = @base;
-        }
-
-        public bool IsBased
-        {
-            get => BaseAddress != 0;
         }
 
         public Count Count
@@ -73,22 +73,28 @@ namespace Z0
             get => ref Data[index];
         }
 
+        public Index<ApiHostMembers> HostGroups()
+        {
+            var dst = root.list<ApiHostMembers>();
+            var groups = Storage.GroupBy(x => x.Host);
+            foreach(var g in groups)
+            {
+                var host = g.Key;
+                var members = g.ToArray();
+                dst.Add(new ApiHostMembers(host, create(members)));
+            }
+            return dst.ToArray();
+        }
+
         public ApiMembers Sort()
         {
             Data.Sort();
             return this;
         }
 
-        public ApiMembers Where(Func<ApiMember,bool> predicate)
-            => Data.Storage.Where(predicate);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiMembers(ApiMember[] src)
-            => new ApiMembers(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ApiMembers((MemoryAddress @base, ApiMember[] members) src)
-            => new ApiMembers(src.@base, src.members);
+        // [MethodImpl(Inline)]
+        // public static implicit operator ApiMembers((MemoryAddress @base, ApiMember[] members) src)
+        //     => new ApiMembers(src.@base, src.members);
 
         [MethodImpl(Inline)]
         public static implicit operator ApiMember[](ApiMembers src)
@@ -99,6 +105,6 @@ namespace Z0
             => src.Data;
 
         public static ApiMembers Empty
-            => new ApiMembers(Index<ApiMember>.Empty);
+            => new ApiMembers(MemoryAddress.Zero, Index<ApiMember>.Empty);
     }
 }

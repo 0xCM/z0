@@ -12,7 +12,7 @@ namespace Z0
     /// Classifies file modules
     /// </summary>
     [Flags]
-    public enum BinaryModuleKind : byte
+    public enum FileModuleKind : byte
     {
         Unknown = 0,
 

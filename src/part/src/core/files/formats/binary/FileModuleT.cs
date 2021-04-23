@@ -14,10 +14,10 @@ namespace Z0
     {
         public FS.FilePath Path {get;}
 
-        public BinaryModuleKind ModuleKind {get;}
+        public FileModuleKind ModuleKind {get;}
 
         [MethodImpl(Inline)]
-        public FileModule(FS.FilePath src, BinaryModuleKind kind)
+        public FileModule(FS.FilePath src, FileModuleKind kind)
         {
             Path = src;
             ModuleKind = kind;
@@ -25,9 +25,9 @@ namespace Z0
 
         public FS.FileExt DefaultExt
             => ModuleKind switch {
-                BinaryModuleKind.Dll => FS.Dll,
-                BinaryModuleKind.Exe => FS.Exe,
-                BinaryModuleKind.Lib => FS.Lib,
+                FileModuleKind.Dll => FS.Dll,
+                FileModuleKind.Exe => FS.Exe,
+                FileModuleKind.Lib => FS.Lib,
                 _ =>  FS.FileExt.Empty
             };
         [MethodImpl(Inline)]

@@ -13,10 +13,10 @@ namespace Z0
     {
         public FS.FilePath Path {get;}
 
-        public BinaryModuleKind ModuleKind {get;}
+        public FileModuleKind ModuleKind {get;}
 
         [MethodImpl(Inline)]
-        public FileModule(FS.FilePath src, BinaryModuleKind kind)
+        public FileModule(FS.FilePath src, FileModuleKind kind)
         {
             Path = src;
             ModuleKind = kind;
@@ -25,31 +25,31 @@ namespace Z0
         public bool IsManaged
         {
             [MethodImpl(Inline)]
-            get => (ModuleKind & BinaryModuleKind.Managed) != 0;
+            get => (ModuleKind & FileModuleKind.Managed) != 0;
         }
 
         public bool IsExe
         {
             [MethodImpl(Inline)]
-            get => (ModuleKind & BinaryModuleKind.Exe) != 0;
+            get => (ModuleKind & FileModuleKind.Exe) != 0;
         }
 
         public bool IsDll
         {
             [MethodImpl(Inline)]
-            get => (ModuleKind & BinaryModuleKind.Dll) != 0;
+            get => (ModuleKind & FileModuleKind.Dll) != 0;
         }
 
         public bool IsStaticLib
         {
             [MethodImpl(Inline)]
-            get => (ModuleKind & BinaryModuleKind.Lib) != 0;
+            get => (ModuleKind & FileModuleKind.Lib) != 0;
         }
 
         public bool IsNative
         {
             [MethodImpl(Inline)]
-            get => (ModuleKind & BinaryModuleKind.Native) != 0;
+            get => (ModuleKind & FileModuleKind.Native) != 0;
         }
     }
 }

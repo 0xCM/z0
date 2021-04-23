@@ -20,8 +20,8 @@ namespace Z0
         public NativeLibFile(FS.FilePath path)
             => Path = path;
 
-        public BinaryModuleKind ModuleKind
-            => BinaryModuleKind.NativeLib;
+        public FileModuleKind ModuleKind
+            => FileModuleKind.NativeLib;
 
         public FS.FileExt DefaultExt
             =>  FS.Extensions.Lib;

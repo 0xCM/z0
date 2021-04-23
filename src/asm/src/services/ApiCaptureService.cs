@@ -68,7 +68,7 @@ namespace Z0
 
         public Index<AsmMemberRoutine> CaptureMembers(ApiMembers src, FS.FolderPath dst)
         {
-            var hosted = src.GroupBy(x => x.Host).Select(x => new ApiHostMembers(x.Key, x.ToArray())).Array();
+            var hosted = src.HostGroups().View;
             var count = hosted.Length;
             var collected = root.list<AsmMemberRoutine>();
             for(var i=0; i<count; i++)
@@ -114,7 +114,6 @@ namespace Z0
             Wf.Ran(flow, count);
             return dst.ToArray();
         }
-
 
         Index<AsmHostRoutines> RunCapture(Index<PartId> parts)
         {
