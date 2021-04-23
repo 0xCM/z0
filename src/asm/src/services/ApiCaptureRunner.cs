@@ -20,7 +20,7 @@ namespace Z0
             var capture = Wf.ApiCapture();
             var pipe = Wf.AsmStatementPipe();
             var partcount = parts.Length;
-            var hosts = Wf.Api.PartHosts(parts);
+            var hosts = Wf.ApiCatalog.PartHosts(parts);
             var hostcount = hosts.Length;
             for(var i=0; i<hostcount; i++)
             {
@@ -36,7 +36,7 @@ namespace Z0
 
         public Index<AsmMemberRoutine> Capture(Index<PartId> parts)
         {
-            return Capture(Wf.Api.PartIdentities, DefaultOptions);
+            return Capture(Wf.ApiCatalog.PartIdentities, DefaultOptions);
         }
 
         public Index<AsmMemberRoutine> Capture(Index<PartId> parts, CaptureWorkflowOptions options)

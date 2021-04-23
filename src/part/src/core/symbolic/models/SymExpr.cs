@@ -17,25 +17,43 @@ namespace Z0
         public SymExpr(string content)
             => Content = content ?? EmptyString;
 
+        public ushort CharCount
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)(Content?.Length ?? 0);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => CharCount == 0;
+        }
+
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => Content ?? EmptyString;
+        }
+
         public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
-            get => Content;
+            get => Text;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content;
+            => Text;
 
         [MethodImpl(Inline)]
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
-            => Content.GetHashCode();
+            => Text.GetHashCode();
 
         public bool Equals(SymExpr src)
-            => Content.Equals(src.Content);
+            => Text.Equals(src.Text);
 
         public override bool Equals(object src)
             => src is SymExpr e && Equals(e);

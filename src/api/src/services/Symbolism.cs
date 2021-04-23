@@ -11,13 +11,16 @@ namespace Z0
 
     public sealed class Symbolism : WfService<Symbolism>
     {
-        public Index<SymLiteral> Emit()
-            => Emit(Db.IndexTable<SymLiteral>());
+        public Index<SymLiteral> EmitLiterals()
+            => EmitLiterals(Db.IndexTable<SymLiteral>());
 
-        public Index<SymLiteral> Emit(FS.FilePath dst)
-            => Emit(Wf.Components, dst);
+        public Index<SymLiteral> EmitLiterals(FS.FilePath dst)
+            => EmitLiterals(Wf.Components, dst);
 
-        public Index<SymLiteral> Emit(Index<Assembly> src, FS.FilePath dst)
+        public Index<SymLiteral> DiscoverLiterals()
+            => Symbols.literals(Wf.Components);
+
+        public Index<SymLiteral> EmitLiterals(Index<Assembly> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<SymLiteral>(dst);
             var rows = Symbols.literals(src);
@@ -65,34 +68,54 @@ namespace Z0
             Wf.EmittedTable(flow, count);
         }
 
-        public Index<SymLiteral> Load(TextDoc src)
-        {
-            var rc = src.RowCount;
-            var dst = alloc<SymLiteral>(rc);
-            var parser = HexByteParser.Service;
-            for(var i=0; i<rc; i++)
-            {
-                ref readonly var row = ref src[i];
-                if(row.CellCount >= 3)
-                {
-                    var data = row[2];
-                    var result = parser.ParseData(data);
-                    if(result.Succeeded)
-                    {
-                        var bytes = span(result.Value);
-                        var storage = 0ul;
-                        ref var store = ref @as<ulong,byte>(storage);
-                        var count = root.min(bytes.Length,8);
-                        for(var j=0u; j<count; j++)
-                            seek(store,j) = skip(bytes,j);
+        Outcome FieldCountMismatch(int actual)
+            => (false, Tables.FieldCountMismatch.Format(SymLiteral.FieldCount, actual));
 
-                        dst[i] = default;
-                    }
-                }
-                else
-                    dst[i] = default;
+        Outcome Parse(TextLine src, out SymLiteral dst)
+        {
+            var outcome = Outcome.Success;
+            var j=0;
+            var cells = src.Split(Chars.Pipe);
+            if(cells.Length != SymLiteral.FieldCount)
+            {
+                dst = default;
+                return FieldCountMismatch(cells.Length);
             }
-            return dst;
+
+            outcome += DataParser.parse(skip(cells,j), out dst.Component);
+            outcome += DataParser.parse(skip(cells,j), out dst.Type);
+            outcome += DataParser.parse(skip(cells,j), out dst.Position);
+            outcome += DataParser.parse(skip(cells,j), out dst.Name);
+            outcome += DataParser.eparse(skip(cells,j), out dst.DataType);
+            outcome += DataParser.parse(skip(cells,j), out dst.EncodedValue);
+            outcome += DataParser.parse(skip(cells,j), out dst.Symbol);
+            outcome += DataParser.parse(skip(cells,j), out dst.Description);
+            return outcome;
+        }
+
+        public Index<SymLiteral> LoadLiterals(FS.FilePath src)
+        {
+            using var reader = src.TableReader<SymLiteral>(Parse);
+            var header = reader.Header.Split(Chars.Tab);
+            if(header.Length != SymLiteral.FieldCount)
+            {
+                Wf.Error(FieldCountMismatch(header.Length).Message);
+                return Index<SymLiteral>.Empty;
+            }
+
+            var dst = new RecordList<SymLiteral>();
+            while(!reader.Complete)
+            {
+                var outcome = reader.ReadRow(out var row);
+                if(!outcome)
+                {
+                    Wf.Error(outcome.Message);
+                    break;
+                }
+                dst.Add(row);
+            }
+
+            return dst.Emit();
         }
     }
 }

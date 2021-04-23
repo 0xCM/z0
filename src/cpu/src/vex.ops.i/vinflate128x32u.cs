@@ -59,6 +59,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmove4x32u(in ushort src)
             => v32u(ConvertToVector128Int32(gptr(in src)));
-
     }
 }

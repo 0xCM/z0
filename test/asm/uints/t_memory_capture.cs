@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public void check_decoder()
         {
-            DecodeHostBits(Context.ApiGlobal.ApiHosts.Map(h => h.Uri));
+            DecodeHostBits(Context.RuntimeCatalog.ApiHosts.Map(h => h.Uri));
         }
 
         public static ReadOnlySpan<byte> AsChar_Span8u_Input

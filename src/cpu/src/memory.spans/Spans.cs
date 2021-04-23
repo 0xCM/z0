@@ -10,7 +10,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free, ApiHost(ApiNames.Spans, true)]
-    public static partial class Spans
+    public static class Spans
     {
         const NumericKind Closure = UnsignedInts;
 

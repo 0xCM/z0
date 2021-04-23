@@ -47,7 +47,7 @@ namespace Z0
         /// <summary>
         /// The symbol, if so attributed, otherwise, the identifier
         /// </summary>
-        public TextBlock Symbol;
+        public SymExpr Symbol;
 
         /// <summary>
         /// The meaning of the literal, if available; otherwise empty

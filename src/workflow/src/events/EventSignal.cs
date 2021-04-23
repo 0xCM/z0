@@ -16,17 +16,17 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly WfHost Host;
+        readonly WfHost Source;
 
         [MethodImpl(Inline)]
-        public static EventSignal create(IWfEventSink sink, WfHost host, CorrelationToken ct = default)
-            => new EventSignal(sink, host, ct);
+        public static EventSignal create(IWfEventSink sink, WfHost source, CorrelationToken ct = default)
+            => new EventSignal(sink, source, ct);
 
         [MethodImpl(Inline)]
-        EventSignal(IWfEventSink sink, WfHost host, CorrelationToken ct)
+        EventSignal(IWfEventSink sink, WfHost src, CorrelationToken ct)
         {
             Ct = ct;
-            Host = host;
+            Source = src;
             Sink = sink;
         }
 
@@ -38,19 +38,19 @@ namespace Z0
         }
 
         public void TableEmitting(Type type, FS.FilePath dst)
-            => Raise(emittingTable(Host, type, dst, Ct));
+            => Raise(emittingTable(Source, type, dst, Ct));
 
         public void EmittingTable<T>(FS.FilePath dst)
-            => Raise(emittingTable<T>(Host, dst, Ct));
+            => Raise(emittingTable<T>(Source, dst, Ct));
 
         public void Ran<T>(T data)
-            => Raise(ran(Host, data, Ct));
+            => Raise(ran(Source, data, Ct));
 
         public void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));
 
         public void Running()
-            => Raise(running(Host, Ct));
+            => Raise(running(Source, Ct));
 
         public void Running(WfHost host)
             => Raise(running(host, Ct));
@@ -59,69 +59,69 @@ namespace Z0
             => Raise(running(host, data, Ct));
 
         public void Running<T>(T data)
-            => Raise(running(Host, data, Ct));
+            => Raise(running(Source, data, Ct));
 
         public void Running<T>(string operation, T data)
-            => Raise(running(Host, operation, data, Ct));
+            => Raise(running(Source, operation, data, Ct));
 
         public void Processed<T>(T data)
-            => Raise(processed(Host, data, Ct));
+            => Raise(processed(Source, data, Ct));
 
         public void Processed<T>(ApiHostUri uri, T data)
-            => Raise(processed(Host, Seq.delimit(Chars.Pipe, 0, uri, data), Ct));
+            => Raise(processed(Source, Seq.delimit(Chars.Pipe, 0, uri, data), Ct));
 
         public void Creating<T>(T data)
-            => Raise(creating(Host, data, Ct));
+            => Raise(creating(Source, data, Ct));
 
         public void Created<T>(T data)
-            => Raise(created(Host, data, Ct));
+            => Raise(created(Source, data, Ct));
 
         public void EmittedTable<T>(Count count, FS.FilePath dst)
             where T : struct
-                => Raise(emittedTable<T>(Host, count, dst, Ct));
+                => Raise(emittedTable<T>(Source, count, dst, Ct));
 
         public void EmittedTable<T>(FS.FilePath dst)
             where T : struct
-                => Raise(emittedTable<T>(Host, dst, Ct));
+                => Raise(emittedTable<T>(Source, dst, Ct));
 
         public void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => Raise(emittedTable(Host, Tables.tableid(type), count, dst, Ct));
+            => Raise(emittedTable(Source, Tables.tableid(type), count, dst, Ct));
 
         public void EmittedTable(Type type, FS.FilePath dst)
-            => Raise(emittedTable(Host, Tables.tableid(type), dst, Ct));
+            => Raise(emittedTable(Source, Tables.tableid(type), dst, Ct));
 
         public void EmittingFile(FS.FilePath dst)
-            => Raise(emittingFile(Host, dst, Ct));
+            => Raise(emittingFile(Source, dst, Ct));
 
         public void EmittedFile(FS.FilePath dst)
-            => Raise(emittedFile(Host, dst, Ct));
+            => Raise(emittedFile(Source, dst, Ct));
 
         public void EmittedFile(Count count, FS.FilePath dst)
-            => Raise(emittedFile(Host, dst, count, Ct));
+            => Raise(emittedFile(Source, dst, count, Ct));
 
         public void EmittingFile<T>(T payload, FS.FilePath dst)
-            => Raise(emittingFile<T>(Host, payload, dst, Ct));
+            => Raise(emittingFile<T>(Source, payload, dst, Ct));
 
         public void EmittedFile<T>(T payload, Count count, FS.FilePath dst)
-            => Raise(emittedFile(Host, payload, count, dst, Ct));
+            => Raise(emittedFile(Source, payload, count, dst, Ct));
 
         public void EmittedFile<T>(T payload, FS.FilePath dst)
-            => Raise(emittedFile(Host, payload, dst, Ct));
+            => Raise(emittedFile(Source, payload, dst, Ct));
 
         public void Status<T>(WfStepId step, T data)
             => Raise(status(step, data));
 
         public void Status<T>(T data)
-            => Status(Host, data);
+            => Status(Source, data);
 
         public void Babble<T>(WfStepId step, T data)
             => Raise(babble(step, data, Ct));
 
         public void Babble<T>(T data)
-            => Babble(Host, data);
+            => Babble(Source, data);
 
         public void Error<T>(T body)
-            => Raise(error(Host.Identifier, body));
+            => Raise(error(Source.Identifier, body));
 
         public void Error<T>(WfStepId step, T body, EventOrigin source)
             => Raise(error(step, body, source));
@@ -130,15 +130,26 @@ namespace Z0
             => Raise(error(step, e, source));
 
         public void Error(Exception e, EventOrigin source)
-            => Raise(error(Host, e, source));
+            => Raise(error(Source, e, source));
 
         public void Error<T>(T body, EventOrigin source)
-            => Error(Host, body, source);
+            => Error(Source, body, source);
 
         public void Warn<T>(WfStepId step, T content)
             => Raise(warn(step, content, Ct));
 
         public void Warn<T>(T content)
-            => Warn(Host,content);
+            => Warn(Source,content);
+    }
+
+    partial class XTend
+    {
+        [MethodImpl(Inline), Op]
+       public static EventSignal Signal(this IWfEventSink sink, WfHost source)
+            => EventSignal.create(sink, source);
+
+        [MethodImpl(Inline), Op]
+       public static EventSignal Signal<T>(this IWfEventSink sink)
+            => EventSignal.create(sink, typeof(T));
     }
 }

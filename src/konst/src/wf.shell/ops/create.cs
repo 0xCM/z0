@@ -32,7 +32,7 @@ namespace Z0
             status.AppConfigPath = jsonConfigPath;
 
 
-            var partIdList = parts.ApiCatalog.PartIdentities;
+            var partIdList = parts.RuntimeCatalog.PartIdentities;
             status.Parts = partIdList;
 
             if(verbose)

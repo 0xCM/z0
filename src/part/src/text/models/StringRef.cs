@@ -54,6 +54,15 @@ namespace Z0
             => new StringRef(address, length);
 
         /// <summary>
+        /// Creates a <see cref='StringRef'/> from a specified <see cref='MemoryAddress'/> and memory size
+        /// </summary>
+        /// <param name="address">The reference address</param>
+        /// <param name="length">The size, in bytes, of the segment</param>
+        [MethodImpl(Inline), Op]
+        public static StringRef create(MemoryAddress address, int length)
+            => new StringRef(address, (uint)length);
+
+        /// <summary>
         /// Creates a <see cref='StringRef'/> from a specified <see cref='MemorySegment'/>
         /// </summary>
         /// <param name="src">The source reference</param>

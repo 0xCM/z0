@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         public IApiParts ApiParts {get;}
 
-        public IApiCatalogDataset ApiGlobal {get;}
+        public IApiRuntimeCatalog ApiGlobal {get;}
 
         [MethodImpl(Inline)]
         public WfInit(IWfContext ctx, WfLogConfig logConfig, PartId[] parts)
@@ -53,7 +53,7 @@ namespace Z0
             Context = ctx;
             ApiParts = ctx.ApiParts;
             Control = ctx.Controller;
-            ApiGlobal = ctx.ApiParts.ApiCatalog;
+            ApiGlobal = ctx.ApiParts.RuntimeCatalog;
             ControlId = ctx.Controller.Id;
             LogConfig = logConfig;
             PartIdentities = parts;

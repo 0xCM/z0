@@ -15,6 +15,7 @@ namespace Z0
     {
         /// <summary>
         /// Counts the enabled bits in the source
+        /// int _mm_popcnt_u32 (unsigned int a) POPCNT reg, reg/m32
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Pop]
@@ -23,6 +24,7 @@ namespace Z0
 
         /// <summary>
         /// Counts the enabled bits in the source
+        /// int _mm_popcnt_u32 (unsigned int a) POPCNT reg, reg/m32
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Pop]
@@ -31,6 +33,7 @@ namespace Z0
 
         /// <summary>
         /// Counts the enabled bits in the source
+        /// int _mm_popcnt_u32 (unsigned int a) POPCNT reg, reg/m32
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Pop]
@@ -39,6 +42,7 @@ namespace Z0
 
         /// <summary>
         /// Counts the enabled bits in the source
+        /// int _mm_popcnt_u32 (unsigned int a) POPCNT reg, reg/m32
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Pop]
@@ -47,6 +51,7 @@ namespace Z0
 
         /// <summary>
         /// Counts the enabled bits in the source
+        /// int _mm_popcnt_u32 (unsigned int a) POPCNT reg, reg/m32
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Pop]
@@ -55,6 +60,7 @@ namespace Z0
 
         /// <summary>
         /// Counts the enabled bits in the source
+        /// int _mm_popcnt_u32 (unsigned int a) POPCNT reg, reg/m32
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Pop]
@@ -63,6 +69,7 @@ namespace Z0
 
         /// <summary>
         /// Counts the enabled bits in the source
+        /// __int64 _mm_popcnt_u64 (unsigned __int64 a) POPCNT reg64, reg/m64
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Pop]
@@ -71,15 +78,12 @@ namespace Z0
 
         /// <summary>
         /// Counts the enabled bits in the source
+        /// __int64 _mm_popcnt_u64 (unsigned __int64 a) POPCNT reg64, reg/m64
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Pop]
         public static uint pop(ulong src)
             => (uint)PopCount(src);
-
-        [MethodImpl(Inline), Pop]
-        public static uint pop(ulong x0, ulong x1)
-            => (uint)(PopCount(x0) + PopCount(x1));
 
         /// <summary>
         /// Computes the population count of the content of 3 64-bit unsigned integers

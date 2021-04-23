@@ -189,7 +189,7 @@ namespace Z0
         public void Run()
         {
 
-            var api = Wf.Api;
+            var api = Wf.ApiCatalog;
             var catalogs = api.Catalogs;
             if(catalogs.View.Length == 0)
                 Wf.Warn("No catalogs");

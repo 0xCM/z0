@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<short> vinflate16x256x16i(in byte src)
+        public static unsafe Vector256<short> vunpack8x16i(in byte src)
             => ConvertToVector256Int16(gptr(src));
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The input component source</param>
         /// <param name="dst">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ushort> vinflate16x256ix16u(in byte src)
+        public static unsafe Vector256<ushort> vunpack8x16u(in byte src)
             => v16u(ConvertToVector256Int16(gptr(src)));
     }
 }

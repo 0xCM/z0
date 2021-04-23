@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="index">The bit position index, an integer in the range [0,7]</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vinflate128x8u(ushort src, byte index)
+        public static Vector128<byte> vunpack1x16(ushort src, byte index)
         {
             var m = Lsb64x8x1 << index;
             return v8u(vparts(maskpart(src,0, m), maskpart(src,8, m)));

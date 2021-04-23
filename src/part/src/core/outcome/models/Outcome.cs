@@ -14,6 +14,9 @@ namespace Z0
     /// </summary>
     public readonly struct Outcome : IOutcome
     {
+        public static Outcome combine(Outcome a, Outcome b)
+            => a.Fail ? a : b;
+
         public bool Ok {get;}
 
         public string Message {get;}
@@ -92,11 +95,7 @@ namespace Z0
             get => MessageCode == ulong.MaxValue;
         }
 
-        public static Outcome Empty
-        {
-            [MethodImpl(Inline)]
-            get => new Outcome(ulong.MaxValue);
-        }
+
 
         [MethodImpl(Inline)]
         public string Format()
@@ -110,6 +109,10 @@ namespace Z0
             if(Fail)
                 throw new Exception(Message ?? "An eggregious blunder");
         }
+
+        [MethodImpl(Inline)]
+        public static Outcome operator +(Outcome a, Outcome b)
+            => combine(a,b);
 
         [MethodImpl(Inline)]
         public static implicit operator Outcome(bool success)
@@ -146,5 +149,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator bool(Outcome src)
             => src.Ok;
+
+        public static Outcome Success
+        {
+            [MethodImpl(Inline)]
+            get => new Outcome(true);
+        }
+
+        public static Outcome Empty
+        {
+            [MethodImpl(Inline)]
+            get => new Outcome(ulong.MaxValue);
+        }
+
     }
 }

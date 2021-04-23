@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vsplit32x8x1(uint src)
+        public static Vector256<byte> vunpack1x32(uint src)
         {
             var a = vbroadcast(w256, src);
             var b = vbroadcast(w256, Msb32x8x7);

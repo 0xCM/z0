@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class ApiCatalogDataset : IApiCatalogDataset
+    public class ApiRuntimeCatalog : IApiRuntimeCatalog
     {
         /// <summary>
         /// The parts included in the datset
@@ -80,25 +80,25 @@ namespace Z0
             get => _Operations;
         }
 
-        IPart[] IApiCatalogDataset.Parts
+        IPart[] IApiRuntimeCatalog.Parts
             => _Parts;
 
-        PartId[] IApiCatalogDataset.PartIdentities
+        PartId[] IApiRuntimeCatalog.PartIdentities
             => _PartIdentities;
 
-        Index<Assembly> IApiCatalogDataset.PartComponents
+        Index<Assembly> IApiRuntimeCatalog.PartComponents
             => _PartComponents;
 
-        ApiPartCatalogs IApiCatalogDataset.Catalogs
+        ApiPartCatalogs IApiRuntimeCatalog.Catalogs
             => _Catalogs;
 
-        IApiHost[] IApiCatalogDataset.ApiHosts
+        IApiHost[] IApiRuntimeCatalog.ApiHosts
             => _ApiHosts;
 
-        MethodInfo[] IApiCatalogDataset.Operations
+        MethodInfo[] IApiRuntimeCatalog.Operations
             => _Operations;
 
-        public ApiCatalogDataset(Index<IPart> parts, Index<Assembly> components, ApiPartCatalogs catalogs, Index<IApiHost> hosts, Index<PartId> partIds, Index<MethodInfo> ops)
+        public ApiRuntimeCatalog(Index<IPart> parts, Index<Assembly> components, ApiPartCatalogs catalogs, Index<IApiHost> hosts, Index<PartId> partIds, Index<MethodInfo> ops)
         {
             _Parts = parts;
             _PartComponents = components;

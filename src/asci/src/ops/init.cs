@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static cpu;
 
     partial struct Asci
     {
@@ -24,15 +23,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci8 init(N8 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci8(gcpu.vlo64(vbroadcast(w128, (byte)fill)));
+            => new asci8(gcpu.vlo64(cpu.vbroadcast(w128, (byte)fill)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci16(vbroadcast(w128, (byte)fill));
+            => new asci16(cpu.vbroadcast(w128, (byte)fill));
 
         [MethodImpl(Inline), Op]
         public static asci32 init(N32 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci32(vbroadcast(w256, (byte)fill));
+            => new asci32(cpu.vbroadcast(w256, (byte)fill));
 
         [MethodImpl(Inline)]
         public static asci2 init(N2 n, ReadOnlySpan<AsciCharCode> src)
@@ -60,7 +59,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci64 init(N64 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci64(vbroadcast(w512, (byte)fill));
+            => new asci64(cpu.vbroadcast(w512, (byte)fill));
 
         [MethodImpl(Inline), Op]
         public static asci2 init(N2 n, ReadOnlySpan<byte> src)

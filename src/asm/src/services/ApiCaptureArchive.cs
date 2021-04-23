@@ -13,7 +13,7 @@ namespace Z0
 
         public void Clear()
         {
-            foreach(var part in Wf.Api.PartIdentities)
+            foreach(var part in Wf.ApiCatalog.PartIdentities)
                 Clear(part);
         }
 

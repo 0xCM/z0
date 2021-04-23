@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline), Enable]
         public static sbyte enable(sbyte src, byte pos)
-            =>  src |= (sbyte)(1 << pos);
+            => src |= (sbyte)(1 << pos);
 
         /// <summary>
         /// Enables a specified source bit
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline), Enable]
         public static byte enable(byte src, byte pos)
-            =>  src |= (byte)(1 << pos);
+            => src |= (byte)(1 << pos);
 
         /// <summary>
         /// Enables a specified source bit
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline), Enable]
         public static int enable(int src, byte pos)
-            =>  src |= (1 << pos);
+            => src |= (1 << pos);
 
         /// <summary>
         /// Enables a specified source bit
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline), Enable]
         public static long enable(long src, byte pos)
-            =>  src |= (1L << pos);
+            => src |= (1L << pos);
 
         /// <summary>
         /// Enables a specified source bit
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline), Enable]
         public static ulong enable(ulong src, byte pos)
-            =>  src |= (1ul << pos);
+            => src |= (1ul << pos);
 
         /// <summary>
         /// Enables a specified source bit

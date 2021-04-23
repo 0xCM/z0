@@ -14,7 +14,7 @@ namespace Z0
 
         readonly IEvalDispatcher Dispatcher;
 
-        readonly IApiCatalogDataset ApiGlobal;
+        readonly IApiRuntimeCatalog ApiGlobal;
 
         internal EvalControl(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint buffersize)
         {
@@ -22,7 +22,7 @@ namespace Z0
             BufferCount = 3;
             BufferSize = buffersize;
             Dispatcher = Wf.EvalDispatcher(source, BufferSize);
-            ApiGlobal = wf.Api;
+            ApiGlobal = wf.ApiCatalog;
         }
 
         void ExecuteHost(BufferTokens buffers, ApiHostUri host)
@@ -33,7 +33,7 @@ namespace Z0
 
             var catalogs = Wf.ApiCatalogs();
             var flow = Wf.Running($"Running {host.Format()} evaluaton workflow");
-            var catalog = catalogs.HostCatalog(Wf.Api.FindHost(host).Require());
+            var catalog = catalogs.HostCatalog(Wf.ApiCatalog.FindHost(host).Require());
             if(catalog.IsEmpty)
                 return;
 

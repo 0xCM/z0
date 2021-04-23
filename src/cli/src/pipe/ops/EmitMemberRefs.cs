@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using System.Reflection;
-    using System.IO;
-
     using static Part;
     using static memory;
     using static Images;
@@ -17,7 +12,7 @@ namespace Z0
     {
         public void EmitMemberRefs()
         {
-            var components = Wf.Api.PartComponents.View;
+            var components = Wf.ApiCatalog.PartComponents.View;
             var count = components.Length;
             var counter = 0u;
             for(var i=0; i<count; i++)
@@ -31,6 +26,5 @@ namespace Z0
                 counter += emitted;
             }
         }
-
     }
 }

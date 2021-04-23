@@ -29,7 +29,7 @@ namespace Z0.Asm
 
         [Action(K.EmitSymbolicLiterals)]
         public void EmitSymbolicLiterals()
-            => Wf.Symbolism().Emit();
+            => Wf.Symbolism().EmitLiterals();
 
         [Action(K.ShowStandfordForms)]
         public void ShowStanfordForms()
@@ -72,7 +72,7 @@ namespace Z0.Asm
         [Action(K.CorrelateApiCode)]
         void CorrelateApiCode()
         {
-            var catalogs = Wf.Api.PartCatalogs();
+            var catalogs = Wf.ApiCatalog.PartCatalogs();
             var blocks = Wf.ApiCatalogs().Correlate(catalogs);
         }
 

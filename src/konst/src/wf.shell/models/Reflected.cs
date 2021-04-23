@@ -33,7 +33,7 @@ namespace Z0
             : this()
         {
             Wf = wf;
-            _Parts = wf.Api.PartIdentities;
+            _Parts = wf.ApiCatalog.PartIdentities;
             _PartNames = _Parts.Select(x => root.kvp(x,x.Format()));
         }
     }

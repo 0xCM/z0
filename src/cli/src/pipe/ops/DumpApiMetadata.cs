@@ -44,7 +44,7 @@ namespace Z0
         {
             var dir = Db.TableDir("image.metadump");
             dir.Clear();
-            var components = Wf.Api.PartComponents.View;
+            var components = Wf.ApiCatalog.PartComponents.View;
             var count = components.Length;
             for(var i=0; i<count; i++)
             {

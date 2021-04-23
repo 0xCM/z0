@@ -87,5 +87,7 @@ namespace Z0
         LsbOff = Id.LsbOff,
 
         XLsb = Id.XLsb,
+
+        XMsb = Id.XMsb,
     }
 }

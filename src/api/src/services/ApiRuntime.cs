@@ -21,7 +21,7 @@ namespace Z0
         {
             try
             {
-                var hosts = Wf.Api.ApiHosts;
+                var hosts = Wf.ApiCatalog.ApiHosts;
                 var kHost = (uint)hosts.Length;
                 var members = RuntimeMembers();
                 var view  = members.View;
@@ -43,7 +43,7 @@ namespace Z0
 
         public Index<ApiRuntimeMember> RuntimeMembers()
         {
-            var hosts = @readonly(Wf.Api.ApiHosts);
+            var hosts = @readonly(Wf.ApiCatalog.ApiHosts);
             var kHost = (uint)hosts.Length;
             var buffer = root.list<ApiRuntimeMember>();
             var flow = Wf.Running(Msg.IndexingHosts.Format(kHost));

@@ -17,17 +17,6 @@ namespace Z0
     {
         /// <summary>
         /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// cpu::vblend2x64:v128x8i->v128x8i->imm8->v128x8i
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vblend2x64(Vector128<sbyte> x, Vector128<sbyte> y, [Imm] byte spec)
-            => v8i(Blend(v64f(x), v64f(y), spec));
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -53,108 +42,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vblend2x64(Vector128<short> x, Vector128<short> y, [Imm] byte spec)
-            => v16i(Blend(v64f(x), v64f(y), (byte)spec));
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vblend2x64(Vector128<ushort> x, Vector128<ushort> y, [Imm] byte spec)
-            => v16u(Blend(v64f(x), v64f(y), spec));
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<int> vblend2x64(Vector128<int> x, Vector128<int> y, [Imm] byte spec)
-            => v32i(Blend(v64f(x), v64f(y), spec));
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vblend2x64(Vector128<uint> x, Vector128<uint> y, [Imm] byte spec)
-            => v32u(Blend(v64f(x), v64f(y), spec));
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
         public static Vector128<long> vblend2x64(Vector128<long> x, Vector128<long> y, [Imm] byte spec)
             => v64i(Blend(v64f(x), v64f(y), spec));
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vblend2x64(Vector128<sbyte> x, Vector128<sbyte> y, [Imm] Blend2x64 spec)
-            => vblend2x64(x,y,(byte)spec);
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<byte> vblend2x64(Vector128<byte> x, Vector128<byte> y, [Imm] Blend2x64 spec)
-            => vblend2x64(x,y, (byte)spec);
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8)BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<short> vblend2x64(Vector128<short> x, Vector128<short> y, [Imm] Blend2x64 spec)
-            => vblend2x64(x,y,(byte)spec);
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vblend2x64(Vector128<ushort> x, Vector128<ushort> y, [Imm] Blend2x64 spec)
-            => vblend2x64(x,y,(byte)spec);
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<int> vblend(Vector128<int> x, Vector128<int> y, [Imm] Blend2x64 spec)
-            => vblend2x64(x,y,(byte)spec);
-
-        /// <summary>
-        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vblend(Vector128<uint> x, Vector128<uint> y, [Imm] Blend2x64 spec)
-            => vblend2x64(x,y,(byte)spec);
 
         /// <summary>
         /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8

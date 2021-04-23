@@ -20,22 +20,22 @@ namespace Z0
 
         public Assembly[] Components {get;}
 
-        public IApiCatalogDataset ApiCatalog {get;}
+        public IApiRuntimeCatalog RuntimeCatalog {get;}
 
         public ApiParts(PartId[] parts)
         {
             Source = FS.path(root.controller().Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiCatalog = ApiCatalogs.dataset(parts);
-            Components = ApiCatalog.PartComponents;
+            RuntimeCatalog = ApiQuery.runtime(parts);
+            Components = RuntimeCatalog.PartComponents;
         }
 
         public ApiParts(FS.FolderPath source)
         {
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiCatalog =  ApiCatalogs.dataset(ManagedSources);
-            Components = ApiCatalog.PartComponents;
+            RuntimeCatalog =  ApiQuery.runtime(ManagedSources);
+            Components = RuntimeCatalog.PartComponents;
         }
     }
 }

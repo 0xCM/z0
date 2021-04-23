@@ -228,6 +228,16 @@ namespace Z0
         public static ref T seek<T>(T[] src, long count)
             => ref seek(src, (ulong)count);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public unsafe static ref T seek<T>(T* pSrc, long count)
+            where T : unmanaged
+                => ref @ref(pSrc + size<T>()*count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public unsafe static ref T seek<T>(T* pSrc, ulong count)
+            where T : unmanaged
+                => ref @ref(pSrc + size<T>()*count);
+
         /// <summary>
         /// Returns a reference to a T-measured count-identified cell
         /// </summary>
@@ -263,9 +273,5 @@ namespace Z0
 
             public byte Data;
         }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public unsafe static ref char seek(char* pSrc, int i)
-            =>  ref @ref(pSrc + size<char>()*i);
     }
 }

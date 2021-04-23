@@ -25,7 +25,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IApiCatalogDataset : IApiCatalogQueries
+    public interface IApiRuntimeCatalog : IApiCatalogQueries
     {
         IPart[] Parts {get;}
 

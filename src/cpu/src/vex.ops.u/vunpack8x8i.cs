@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<short> vinflate8x128x16i(in byte src)
+        public static unsafe Vector128<short> vunpack8x8i(in byte src)
             => ConvertToVector128Int16(gptr(src));
     }
 }

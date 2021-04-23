@@ -8,7 +8,7 @@ namespace Z0
     {
         protected override CmdResult Run(EmitEnumCatalogCmd cmd)
         {
-            Wf.Symbolism().Emit(Wf.Components, cmd.Target);
+            Wf.Symbolism().EmitLiterals(Wf.Components, cmd.Target);
             return Cmd.ok(cmd);
         }
     }

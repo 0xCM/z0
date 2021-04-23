@@ -47,8 +47,8 @@ namespace Z0
         [Op]
         public static Index<AsmMemberRoutine> run(string[] args)
         {
-            var parts = ApiCatalogs.parts(root.controller(), args);
-            var identities = parts.ApiCatalog.PartIdentities;
+            var parts = ApiQuery.parts(root.controller(), args);
+            var identities = parts.RuntimeCatalog.PartIdentities;
             using var wf = WfRuntime.create(parts, args);
             using var runner = wf.CaptureRunner();
             if(args.Length != 0)

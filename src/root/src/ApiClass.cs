@@ -417,6 +417,8 @@ public enum ApiClass : ushort
 
     XLsb,
 
+    XMsb,
+
     AddAssign,
 
     SubAssign,

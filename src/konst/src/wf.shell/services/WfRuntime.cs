@@ -32,7 +32,7 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        public IApiCatalogDataset Api {get;}
+        public IApiRuntimeCatalog ApiCatalog {get;}
 
         public string AppName {get;}
 
@@ -67,11 +67,11 @@ namespace Z0
             Args = config.Shell.Args;
             Settings = config.Shell.Settings;
             ApiParts = config.ApiParts;
-            Api = config.ApiParts.ApiCatalog;
+            ApiCatalog = config.ApiParts.RuntimeCatalog;
             Controller = config.Control;
             AppName = config.Shell.AppName;
             Router = new WfCmdRouter(this);
-            Services = new WfServices(this, Env, Api.PartComponents);
+            Services = new WfServices(this, Env, ApiCatalog.PartComponents);
         }
 
         public IWfRuntime WithSource(IPolySource random)

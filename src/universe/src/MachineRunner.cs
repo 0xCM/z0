@@ -14,8 +14,8 @@ namespace Z0
 
         public void Run(WorkflowOptions options)
         {
-            var parts = Wf.Api.PartIdentities;
-            var partList = Seq.delimit(Chars.Comma, 0, Wf.Api.PartIdentities);
+            var parts = Wf.ApiCatalog.PartIdentities;
+            var partList = Seq.delimit(Chars.Comma, 0, Wf.ApiCatalog.PartIdentities);
             var partCount = parts.Length;
             var flow = Wf.Running(RunningMachine.Format(partCount, partList));
             var hex = Wf.ApiHex();
@@ -70,7 +70,7 @@ namespace Z0
                     Emitted(Wf.IntrinsicsCatalog().Emit());
 
                 if(options.EmitSymbolicLiterals)
-                    Emitted(Wf.Symbolism().Emit());
+                    Emitted(Wf.Symbolism().EmitLiterals());
 
                 if(options.EmitApiBitMasks)
                     Emitted(Wf.ApiBitMasks().Emit());

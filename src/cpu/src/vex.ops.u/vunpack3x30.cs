@@ -19,14 +19,14 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vsplit30x8x3(uint src)
+        public static Vector256<ushort> vunpack3x30(uint src)
         {
             var a = src & uint.MaxValue >> 2;
-            var lo = ScalarCast.uint16(Lsb16x16x15 & a);
-            var hi = ScalarCast.uint16(Lsb16x16x15 & (a >> 15));
+            var lo = (ushort)(Lsb16x16x15 & a);
+            var hi = (ushort)(Lsb16x16x15 & (a >> 15));
             var m = vsplit30x8x3Mask(src);
             var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0);
-            var q = vbroadcast(w256, ScalarCast.uint32(lo | hi << 16));
+            var q = vbroadcast(w256, (uint)(lo | hi << 16));
             var r = v16u(vsrlv(vand(q,m), shifts));
             var s = vsplit30x8x3Assemble(r);
             return s;

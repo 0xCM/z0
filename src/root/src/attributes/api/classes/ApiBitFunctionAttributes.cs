@@ -82,4 +82,7 @@ namespace Z0
     public sealed class LsbOffAttribute : A { public LsbOffAttribute() : base(K.LsbOff) {} }
 
     public sealed class XLsbAttribute : A { public XLsbAttribute() : base(K.XLsb) {} }
+
+    public sealed class XMsbAttribute : A { public XMsbAttribute() : base(K.XMsb) {} }
+
 }

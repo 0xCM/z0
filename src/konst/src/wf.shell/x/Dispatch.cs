@@ -12,7 +12,6 @@ namespace Z0
 
     partial class XWf
     {
-        [Op]
         public static Task<CmdResult> Dispatch<T>(this T cmd, IWfRuntime wf)
             where T : struct, ICmd
                 => wf.Dispatch(cmd);

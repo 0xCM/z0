@@ -89,9 +89,9 @@ namespace Z0
         }
 
         public ApiMembers JitCatalog()
-            => JitCatalog(Wf.ApiParts.ApiCatalog);
+            => JitCatalog(Wf.ApiParts.RuntimeCatalog);
 
-        public ApiMembers JitCatalog(IApiCatalogDataset catalog)
+        public ApiMembers JitCatalog(IApiRuntimeCatalog catalog)
         {
             var @base = Runtime.CurrentProcess.BaseAddress;
             var parts = catalog.Parts;
@@ -133,7 +133,7 @@ namespace Z0
         {
             var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
             var dst = root.list<ApiMember>();
-            var catalog = ApiCatalogs.catalog(src);
+            var catalog = ApiQuery.catalog(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 
@@ -191,7 +191,7 @@ namespace Z0
         [Op]
         ApiMember[] JitDirect(IApiHost src)
         {
-            var methods = DirectMethods(src);
+            var methods = ApiQuery.DirectMethods(src);
             var count = methods.Length;
             var buffer = alloc<ApiMember>(count);
             ref var dst = ref first(buffer);
@@ -212,7 +212,7 @@ namespace Z0
         [Op]
         ApiMember[] JitGeneric(IApiHost src)
         {
-            var generic = @readonly(GenericMethods(src));
+            var generic = @readonly(ApiQuery.GenericMethods(src));
             var gCount = generic.Length;
             var buffer = root.list<ApiMember>();
             for(var i=0; i<gCount; i++)
@@ -263,22 +263,6 @@ namespace Z0
                         select (m, tag.Value.ProviderType);
             return query.ToDictionary();
         }
-
-        [Op]
-        static JittedMethod[] GenericMethods(IApiHost host)
-            => host.HostType.DeclaredMethods().OpenGeneric(1).Where(IsGeneric).Select(m => new JittedMethod(host.Uri, m));
-
-        [Op]
-        static bool IsGeneric(MethodInfo src)
-            => src.Tagged<OpAttribute>() && src.Tagged<ClosuresAttribute>() && !src.AcceptsImmediate();
-
-        [Op]
-        static JittedMethod[] DirectMethods(IApiHost host)
-            => host.HostType.DeclaredMethods().NonGeneric().Where(IsDirect).Select(m => new JittedMethod(host.Uri, m));
-
-        [Op]
-        static bool IsDirect(MethodInfo src)
-            => src.Tagged<OpAttribute>() && !src.AcceptsImmediate();
 
         static HashSet<string> Ignore
             => root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));

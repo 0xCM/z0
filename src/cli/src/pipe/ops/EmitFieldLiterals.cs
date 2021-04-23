@@ -26,7 +26,7 @@ namespace Z0
         public void EmitFieldLiterals()
         {
             FieldLiteralTarget.Clear();
-            var parts = span(Wf.Api.Parts.Map(part => ApiPartTypes.from(part)));
+            var parts = span(Wf.ApiCatalog.Parts.Map(part => ApiPartTypes.from(part)));
             foreach(var part in parts)
             {
                 try

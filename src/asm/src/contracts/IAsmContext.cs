@@ -16,8 +16,8 @@ namespace Z0.Asm
 
         ICaptureServices CaptureServices {get;}
 
-        IApiCatalogDataset ApiGlobal
-            => ContextRoot.ApiGlobal;
+        IApiRuntimeCatalog RuntimeCatalog
+            => ContextRoot.RuntimeCatalog;
 
         /// <summary>
         /// The capture service

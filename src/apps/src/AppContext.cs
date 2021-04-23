@@ -8,7 +8,7 @@ namespace Z0
 
     public class AppContext : IAppContext
     {
-        public IApiCatalogDataset ApiGlobal {get;}
+        public IApiRuntimeCatalog RuntimeCatalog {get;}
 
         public IJsonSettings Settings {get;}
 
@@ -22,15 +22,15 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(IAppPaths paths, IApiCatalogDataset catalog, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
+        public AppContext(IAppPaths paths, IApiRuntimeCatalog catalog, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
         {
             Paths = paths;
             Next = msg => {};
             Random = random;
             Settings = settings;
             MessageQueue = queue;
-            ApiGlobal = catalog;
-            ApiParts = ApiCatalogs.parts();
+            RuntimeCatalog = catalog;
+            ApiParts = ApiQuery.parts();
         }
     }
 }

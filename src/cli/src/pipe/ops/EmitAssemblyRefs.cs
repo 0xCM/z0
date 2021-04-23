@@ -80,7 +80,7 @@ namespace Z0
 
         public void EmitAssemblyRefs()
         {
-            var components = Wf.Api.PartComponents.View;
+            var components = Wf.ApiCatalog.PartComponents.View;
             var count = components.Length;
             var counter = 0u;
             var dst = AssemblyRefsPath();

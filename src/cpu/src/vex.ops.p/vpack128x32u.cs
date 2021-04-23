@@ -46,15 +46,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vpack128x32u(Vector128<ulong> lo, Vector128<ulong> hi)
             => vpack128x32u(vconcat(lo, hi), w128);
-
-        // /// <summary>
-        // /// (2x64w,2x64w) -> 4x32w
-        // /// </summary>
-        // /// <param name="a">The first source vector</param>
-        // /// <param name="b">The second source vector</param>
-        // /// <param name="dst">The target vector</param>
-        // [MethodImpl(Inline), Op]
-        // public static Vector128<uint> vpack128x32u(Vector128<ulong> a, Vector128<ulong> b)
-        //     => vparts(w128, (uint)vcell(a, 0),(uint)vcell(a, 1),(uint)vcell(b, 0),(uint)vcell(b, 1));
     }
 }

@@ -28,6 +28,7 @@ namespace Z0
             => RecordFields.discover<T>();
     }
 
+    [Free]
     public interface IComparableRecord<T> : IRecord<T>, IComparable<T>
         where T : struct, IComparableRecord<T>
     {

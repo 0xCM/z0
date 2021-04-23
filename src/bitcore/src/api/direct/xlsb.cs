@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), XLsb]
-        public static uint xslb(uint src)
+        public static uint xlsb(uint src)
             => ExtractLowestSetBit(src);
 
         /// <summary>

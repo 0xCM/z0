@@ -21,6 +21,6 @@ namespace Z0
 
         Assembly[] Components {get;}
 
-        IApiCatalogDataset ApiCatalog {get;}
+        IApiRuntimeCatalog RuntimeCatalog {get;}
     }
 }

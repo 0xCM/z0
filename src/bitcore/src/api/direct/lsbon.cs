@@ -74,6 +74,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static long lsbon(long src)
             => src | (src + 1);
-
     }
 }

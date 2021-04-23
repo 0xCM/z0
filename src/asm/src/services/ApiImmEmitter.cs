@@ -32,7 +32,7 @@ namespace Z0.Asm
 
         public void Emit(params PartId[] parts)
         {
-            var selected = parts.Length == 0 ? Wf.Api.PartIdentities : parts;
+            var selected = parts.Length == 0 ? Wf.ApiCatalog.PartIdentities : parts;
             ClearArchive(selected);
             EmitUnrefined(selected);
             EmitRefined(selected);
@@ -127,7 +127,7 @@ namespace Z0.Asm
         }
 
         IApiHost[] Hosts(params PartId[] parts)
-            => Wf.Api.PartHosts(parts);
+            => Wf.ApiCatalog.PartHosts(parts);
 
         IAsmImmWriter Archive(IApiHost host)
             => Wf.ImmWriter(host.Uri);

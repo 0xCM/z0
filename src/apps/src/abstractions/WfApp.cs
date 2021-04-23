@@ -10,7 +10,7 @@ namespace Z0
         public static void run(string[] args, params PartId[] parts)
         {
 
-            using var wf = WfRuntime.create(ApiCatalogs.parts(parts), args);
+            using var wf = WfRuntime.create(ApiQuery.parts(parts), args);
             using var app = new A();
             app.Init(wf);
             var name = typeof(A).Name;

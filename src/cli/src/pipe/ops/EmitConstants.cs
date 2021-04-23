@@ -20,7 +20,7 @@ namespace Z0
             using var writer = target.Writer();
             writer.WriteLine(formatter.FormatHeader());
 
-            foreach(var part in Wf.Api.Parts)
+            foreach(var part in Wf.ApiCatalog.Parts)
             {
                 try
                 {

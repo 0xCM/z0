@@ -112,7 +112,7 @@ namespace Z0.Asm
 
         void ShowPartComponents()
         {
-            var src = Clr.adapt(Wf.Api.PartComponents);
+            var src = Clr.adapt(Wf.ApiCatalog.PartComponents);
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var item = ref skip(src,i);
@@ -281,8 +281,8 @@ namespace Z0.Asm
         void CheckApiHexArchive()
         {
             var part = PartId.Math;
-            var component = Wf.Api.FindComponent(part).Require();
-            var catalog = ApiCatalogs.catalog(component);
+            var component = Wf.ApiCatalog.FindComponent(part).Require();
+            var catalog = ApiQuery.catalog(component);
 
             void accept(in ApiCodeBlock block)
             {
@@ -376,7 +376,7 @@ namespace Z0.Asm
         void EmitMsil()
         {
             var pipe = Wf.MsilPipe();
-            var members = Wf.Api.ApiHosts.Where(h => h.HostType == typeof(math)).Single().Methods;
+            var members = Wf.ApiCatalog.ApiHosts.Where(h => h.HostType == typeof(math)).Single().Methods;
             var buffer = text.buffer();
             var methods = ApiCode.msil(members);
             root.iter(methods, m => pipe.RenderCode(m,buffer));
@@ -418,7 +418,7 @@ namespace Z0.Asm
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
-            using var wf = WfRuntime.create(ApiCatalogs.parts(root.controller(), args), args).WithSource(Rng.@default());
+            using var wf = WfRuntime.create(ApiQuery.parts(root.controller(), args), args).WithSource(Rng.@default());
             var process = ToolCmd.run(cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
@@ -867,12 +867,12 @@ namespace Z0.Asm
 
         public void CheckClrKeys()
         {
-            var types = Wf.Api.PartComponents.Storage.Types();
+            var types = Wf.ApiCatalog.PartComponents.Storage.Types();
             var unique = root.hashset<Type>();
             var count = unique.Include(types).Where(x => x).Count();
             Wf.Row($"{types.Length} ?=? {count}");
 
-            var fields = Wf.Api.PartComponents.Storage.DeclaredStaticFields();
+            var fields = Wf.ApiCatalog.PartComponents.Storage.DeclaredStaticFields();
             root.iter(fields, f => Wf.Row(f.Name + ": " + f.FieldType.Name));
 
         }
@@ -899,7 +899,7 @@ namespace Z0.Asm
         {
             const ulong Target = 0x7ffa77aa1460;
 
-            var points = MethodEntryPoints.create(Wf);
+            var points = JmpStubSynthetics.create(Wf);
             if(points.Create<ulong>(0))
             {
                 var encoded = points.EncodeDispatch(0,Target);
@@ -1276,11 +1276,37 @@ namespace Z0.Asm
 
         }
 
+        void ToBistring()
+        {
+            const ushort Input = 0b1100_1110_1100_0011;
+            var step1 = cpu.vunpack1x16(Input,0);
+            var step2 = cpu.vinflate256x16u(step1);
+        }
 
+        void SymbolHeapCreate()
+        {
+            var symbolic = Wf.Symbolism();
+            var literals = symbolic.DiscoverLiterals();
+            Wf.Status($"Creating heap for {literals.Count} literals");
+            var heap = SymbolHeap.create(literals);
+
+            var count = heap.SymbolCount;
+            var dst = Db.AppLog("heap", FS.Csv);
+            using var writer = dst.Writer();
+            for(ushort i=0; i<count; i++)
+            {
+                var expr = heap.Expression(i);
+                var id = heap.Identifier(i);
+                writer.WriteLine(string.Format("{0:D6} | {1,-32} | {2}", i, id, expr));
+            }
+
+
+        }
 
         public void Run()
         {
-            EmitImageMetadata();
+            CaptureParts(PartId.AsmZ);
+
             //CaptureParts(PartId.AsmZ);
             //DeriveMsil();
             // var tool = Wf.DumpBin();
@@ -1296,7 +1322,7 @@ namespace Z0.Asm
         {
             try
             {
-                using var wf = WfRuntime.create(ApiCatalogs.parts(Index<PartId>.Empty), args).WithSource(Rng.@default());
+                using var wf = WfRuntime.create(ApiQuery.parts(Index<PartId>.Empty), args).WithSource(Rng.@default());
                 var app = App.create(wf);
                 app.Run();
 

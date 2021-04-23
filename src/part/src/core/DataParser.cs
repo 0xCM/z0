@@ -77,6 +77,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out Identifier dst)
+        {
+            dst = src ?? EmptyString;
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out TextBlock dst)
         {
             dst = src ?? EmptyString;
@@ -164,6 +171,13 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out string dst)
+        {
+            dst = src ?? EmptyString;
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out SymExpr dst)
         {
             dst = src ?? EmptyString;
             return true;

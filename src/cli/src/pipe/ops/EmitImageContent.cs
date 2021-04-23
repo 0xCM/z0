@@ -31,7 +31,7 @@ namespace Z0
             var flow = Wf.Running();
             var pipe = Wf.ProcessContextPipe();
             ClearImageContent();
-            root.iter(Wf.Api.PartComponents, c => EmitImageContent(c));
+            root.iter(Wf.ApiCatalog.PartComponents, c => EmitImageContent(c));
             Wf.Ran(flow);
         }
 

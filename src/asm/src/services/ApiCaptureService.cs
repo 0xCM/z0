@@ -91,7 +91,7 @@ namespace Z0
             Wf.Ran(flow, src.Host);
         }
 
-        public Index<AsmHostRoutines> CaptureCatalog(IApiCatalogDataset catalog)
+        public Index<AsmHostRoutines> CaptureCatalog(IApiRuntimeCatalog catalog)
         {
             var dst = root.list<AsmHostRoutines>();
             using var flow = Wf.Running();
@@ -107,7 +107,7 @@ namespace Z0
         {
             var dst = root.list<AsmHostRoutines>();
             using var flow = Wf.Running();
-            var catalogs = Wf.Api.Catalogs.View;
+            var catalogs = Wf.ApiCatalog.Catalogs.View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 dst.AddRange(CaptureCatalog(skip(catalogs,i)));
@@ -120,7 +120,7 @@ namespace Z0
         {
             var dst = root.list<AsmHostRoutines>();
             using var flow = Wf.Running();
-            var catalogs = Wf.Api.PartCatalogs(parts).View;
+            var catalogs = Wf.ApiCatalog.PartCatalogs(parts).View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 dst.AddRange(CaptureCatalog(skip(catalogs,i)));
@@ -158,7 +158,7 @@ namespace Z0
             var dst = root.list<AsmHostRoutines>();
             try
             {
-                var hosts = Wf.Api.FindHosts(src);
+                var hosts = Wf.ApiCatalog.FindHosts(src);
                 var count = hosts.Length;
                 var view = hosts.View;
                 for(var i=0; i<count; i++)
