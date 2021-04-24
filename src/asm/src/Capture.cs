@@ -57,10 +57,6 @@ namespace Z0
                 return runner.Capture(identities);
         }
 
-        [MethodImpl(Inline), Op]
-        public static CaptureAlt alt(IWfRuntime wf)
-            => CaptureAlt.create(wf);
-
         [Op]
         public static CaptureExchange exchange(uint size = Pow2.T16)
             => new CaptureExchange(new byte[size]);

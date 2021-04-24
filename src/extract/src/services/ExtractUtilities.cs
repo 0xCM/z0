@@ -14,12 +14,12 @@ namespace Z0
     public static class ExtractUtilities
     {
         [MethodImpl(Inline), Op]
-        public static bool Finished(this BytePatternParserState state)
-            => (state & BytePatternParserState.Completed) != 0;
+        public static bool Finished(this EncodingParserState state)
+            => (state & EncodingParserState.Completed) != 0;
 
         [MethodImpl(Inline), Op]
-        public static bool HasFailed(this BytePatternParserState state)
-            => state == BytePatternParserState.Failed;
+        public static bool HasFailed(this EncodingParserState state)
+            => state == EncodingParserState.Failed;
 
         [MethodImpl(Inline), Op]
         public static ExtractTermCode ToTermCode(this EncodingPatternKind src)

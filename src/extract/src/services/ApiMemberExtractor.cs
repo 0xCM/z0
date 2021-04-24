@@ -33,6 +33,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Index<ApiMemberExtract> Extract(ApiMember[] members)
-            => ApiCodeExtractors.extract(members, Buffer);
+            => ApiExtracts.extract(members, Buffer);
     }
 }

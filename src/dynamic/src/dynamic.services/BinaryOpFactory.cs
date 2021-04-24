@@ -29,23 +29,23 @@ namespace Z0
             where T : unmanaged
                 => create<T>(identify<T>(name), code);
 
-        [MethodImpl(Inline)]
-        public static BinaryOp<T> create<T,K>(K kind, in BinaryCode code, bool generic)
-            where K : unmanaged, IApiKey
-            where T : unmanaged
-                => emit<T>(identify<T,K>(kind, generic), memory.liberate(code).Ref);
+        // [MethodImpl(Inline)]
+        // public static BinaryOp<T> create<T,K>(K kind, in BinaryCode code, bool generic)
+        //     where K : unmanaged, IApiKey
+        //     where T : unmanaged
+        //         => emit<T>(identify<T,K>(kind, generic), memory.liberate(code).Ref);
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> create<T>(OpIdentity id, in BinaryCode code)
             => emit<T>(id, memory.liberate(code).Ref);
 
-        static OpIdentity identify<T,K>(K k, bool generic)
-            where K : unmanaged, IApiKey
-            where T : unmanaged
-        {
-            var operand = MultiDiviner.Service.Identify(typeof(T));
-            return ApiIdentityBuilder.build(k.Id, Numeric.kind<T>(),generic);
-        }
+        // static OpIdentity identify<T,K>(K k, bool generic)
+        //     where K : unmanaged, IApiKey
+        //     where T : unmanaged
+        // {
+        //     var operand = MultiDiviner.Service.Identify(typeof(T));
+        //     return ApiIdentityBuilder.build(k.Id, Numeric.kind<T>(),generic);
+        // }
 
         static OpIdentity identify<T>(string name)
         {

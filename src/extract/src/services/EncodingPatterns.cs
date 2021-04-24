@@ -18,20 +18,16 @@ namespace Z0
         public static EncodingPatterns Default
             => new EncodingPatterns(0);
 
-        readonly EncodingPatternKind[] FullKinds;
+        readonly EncodingPatternKind[] _Kinds;
 
-        readonly EncodingPatternKind[] PartialKinds;
+        public int PatternCount {get;}
 
-        public int FullPatternCount {get;}
-
-        public int PartialPatternCount {get;}
-
-        public ReadOnlySpan<EncodingPatternKind> FullPatternKinds
-            => FullKinds;
+        public ReadOnlySpan<EncodingPatternKind> Kinds
+            => _Kinds;
 
         EncodingPatterns(int dummy)
         {
-            FullKinds = new EncodingPatternKind[]
+            _Kinds = new EncodingPatternKind[]
             {
                 EncodingPatternKind.RET_SBB,
                 RET_INTR,
@@ -42,16 +38,10 @@ namespace Z0
                 Zx7,
             };
 
-            PartialKinds = new EncodingPatternKind[]
-            {
-                EncodingPatternKind.CALL32_INTR
-            };
-
-            FullPatternCount = FullKinds.Length;
-            PartialPatternCount = PartialKinds.Length;
+            PatternCount = _Kinds.Length;
         }
 
-        public ReadOnlySpan<byte> FullPattern(EncodingPatternKind code)
+        public ReadOnlySpan<byte> Pattern(EncodingPatternKind code)
             => code switch{
                 EncodingPatternKind.RET_SBB => RET_SBB,
                 RET_INTR => RET_INT,
@@ -77,6 +67,7 @@ namespace Z0
                 _ => 0
             };
 
+        [MethodImpl(Inline)]
         public bool IsSuccessPattern(EncodingPatternKind kind)
             => kind != 0;
 

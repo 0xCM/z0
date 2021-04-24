@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using K = EncodingPatternKind;
-    using S = BytePatternParserState;
+    using S = EncodingParserState;
 
     using static Part;
     using static memory;
@@ -26,7 +26,7 @@ namespace Z0
 
         int Delta;
 
-        readonly Dictionary<byte,int> Accepted;
+        //readonly Dictionary<byte,int> Accepted;
 
         readonly EncodingPatterns Patterns;
 
@@ -39,7 +39,6 @@ namespace Z0
         internal EncodingParser(EncodingPatterns patterns, byte[] buffer)
         {
             Buffer = buffer;
-            Accepted = new Dictionary<byte,int>();
             Patterns = patterns;
             Offset = default;
             State = default;
@@ -50,14 +49,13 @@ namespace Z0
         public void Start()
         {
             Buffer.Clear();
-            Accepted.Clear();
             Offset = default;
             State = S.Accepting;
             Outcome = default;
             Delta = default;
         }
 
-        public S Parse(Span<byte> src)
+        public S Parse(ReadOnlySpan<byte> src)
         {
             Start();
 
@@ -72,27 +70,18 @@ namespace Z0
             return State;
         }
 
-        [MethodImpl(Inline)]
-        public BytePatternParserState Parse(byte[] src)
-            => Parse(src.AsSpan());
-
         public S Parse(byte src)
         {
             if(State == S.Accepting && Offset < Buffer.Length)
             {
                 seek(Buffer, Offset++) = src;
 
-                if(Accepted.TryGetValue(src, out var count))
-                    Accepted[src] = ++ count;
-                else
-                    Accepted[src] = 1;
-
                 if(TryMatch(out Outcome, out Delta))
                 {
                     if(Patterns.IsSuccessPattern(Outcome))
-                        State = BytePatternParserState.Succeeded;
+                        State = S.Succeeded;
                     else
-                        State = BytePatternParserState.Failed;
+                        State = S.Failed;
                 }
             }
 
@@ -110,11 +99,11 @@ namespace Z0
             kind = default;
             delta = 0;
 
-            ref readonly var codes = ref first(Patterns.FullPatternKinds);
-            for(var i=0; i<Patterns.FullPatternCount; i++)
+            ref readonly var codes = ref first(Patterns.Kinds);
+            for(var i=0; i<Patterns.PatternCount; i++)
             {
                 var match = skip(codes,i);
-                var pattern = Patterns.FullPattern(match);
+                var pattern = Patterns.Pattern(match);
                 var len = pattern.Length;
                 var matched = Offset > len ? Buffer.Slice(Offset -  1 - len, len).EndsWith(pattern) : false;
                 if(matched)

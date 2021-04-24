@@ -52,7 +52,7 @@ namespace Z0.Asm
             foreach(var m in typeof(z).DeclaredMethods().Public().Static().NonGeneric())
             {
                 var code = quick.Capture(m);
-                code.OnSome(c => AsmCheck.WriteAsm(c,dst));
+                AsmCheck.WriteAsm(code,dst);
             }
         }
 
@@ -66,26 +66,36 @@ namespace Z0.Asm
         void capture_dynamic_delegates()
         {
             using var dst = CaseWriter(FS.Extensions.Asm);
+            using var quick = Wf.CaptureQuick();
+
             var xor = LD.xor<uint>();
-            var alt = Capture.alt(Wf);
-            AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(ApiIdentity.identify(xor.Method), xor.Method)), dst);
             var gteq = LD.gteq<uint>();
-            AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(ApiIdentity.identify(xor.Method), xor.Method)), dst);
+            //var alt = Capture.alt(Wf);
+            var m1 = new IdentifiedMethod(ApiIdentity.identify(xor.Method), xor.Method);
+            var m2 = new IdentifiedMethod(ApiIdentity.identify(gteq.Method), gteq.Method);
+
+            AsmCheck.WriteAsm(quick.Capture(m1), dst);
+            AsmCheck.WriteAsm(quick.Capture(m2), dst);
         }
 
         void capture_dynamic_delegate_batch()
         {
             using var dst = CaseWriter(FS.Extensions.Asm);
+            using var quick = Wf.CaptureQuick();
+
             var methods = root.array(
                 LD.xor<byte>().Method, LD.xor<ushort>().Method, LD.xor<uint>().Method, LD.xor<ulong>().Method
                 );
-            var identified = memory.alloc<IdentifiedMethod>(methods.Length);
-            for(var i=0; i<identified.Length; i++)
-                identified[i] = new IdentifiedMethod(ApiIdentity.identify(methods[i]), methods[i]);
-            var buffer = sys.alloc<byte>(Pow2.T14);
-            var alt = Capture.alt(Wf);
-            var capture = alt.Capture(identified, buffer);
-            AsmCheck.WriteAsm(capture, dst);
+
+            foreach(var method in methods)
+                AsmCheck.WriteAsm(quick.Capture(method), dst);
+
+            // var identified = memory.alloc<IdentifiedMethod>(methods.Length);
+            // for(var i=0; i<identified.Length; i++)
+            //     identified[i] = new IdentifiedMethod(ApiIdentity.identify(methods[i]), methods[i]);
+            // var buffer = sys.alloc<byte>(Pow2.T14);
+            // var capture = quick.Capture(identified, buffer);
+            // AsmCheck.WriteAsm(capture, dst);
         }
 
         public void capture_delegates()

@@ -112,7 +112,7 @@ namespace Z0
             if(src.Length != 0)
             {
                 var flow = Wf.Running();
-                var parser = ApiCodeExtractors.parser();
+                var parser = ApiExtracts.parser();
                 var parsed = parser.ParseMembers(src);
                 Wf.Ran(flow, Msg.ParsedExtractBlocks.Format(parsed.Count, host));
                 return parsed;
@@ -133,33 +133,42 @@ namespace Z0
             return decoded;
        }
 
-        Index<ApiExtractRow> Emit(ReadOnlySpan<ApiExtractBlock> src, FS.FilePath dst, bool append = false)
+        Index<ApiExtractRow> Emit(ReadOnlySpan<ApiExtractBlock> src, FS.FilePath dst)
         {
             var count = src.Length;
-            var header = (dst.Exists && append) ? false : true;
-            ref readonly var w0 = ref skip(X86TableWidths, 0);
-            ref readonly var w1 = ref skip(X86TableWidths, 1);
-            ref readonly var w2 = ref skip(X86TableWidths, 2);
-            var pattern = text.embrace($"0,-{w0}") + RP.SpacedPipe
-                        + text.embrace($"1,-{w1}") + RP.SpacedPipe
-                        + text.embrace($"2,-{w2}");
-
-            using var writer = dst.Writer(append);
-            if(header)
-                writer.WriteLine(string.Format(pattern, nameof(ApiExtractRow.Base), nameof(ApiExtractRow.Uri), nameof(ApiExtractRow.Encoded)));
-
             var buffer = alloc<ApiExtractRow>(count);
             var records = span(buffer);
-            for(var i=0u; i<count; i++)
+            for(var i=0; i<count; i++)
             {
-                ref readonly var code = ref skip(src, i);
+                ref readonly var code = ref skip(src,i);
                 if(code.IsNonEmpty)
-                {
-                    var extract = row(code, ref seek(records,i));
-                    writer.WriteLine(string.Format(pattern, extract.Base, extract.Uri, extract.Encoded));
-                }
+                    row(code, ref seek(records,i));
             }
+            Tables.emit(records,dst);
             return buffer;
+            // var count = src.Length;
+            // ref readonly var w0 = ref skip(X86TableWidths, 0);
+            // ref readonly var w1 = ref skip(X86TableWidths, 1);
+            // ref readonly var w2 = ref skip(X86TableWidths, 2);
+            // var pattern = text.embrace($"0,-{w0}") + RP.SpacedPipe
+            //             + text.embrace($"1,-{w1}") + RP.SpacedPipe
+            //             + text.embrace($"2,-{w2}");
+
+            // using var writer = dst.Writer();
+            // writer.WriteLine(string.Format(pattern, nameof(ApiExtractRow.Base), nameof(ApiExtractRow.Uri), nameof(ApiExtractRow.Encoded)));
+
+            // var buffer = alloc<ApiExtractRow>(count);
+            // var records = span(buffer);
+            // for(var i=0u; i<count; i++)
+            // {
+            //     ref readonly var code = ref skip(src, i);
+            //     if(code.IsNonEmpty)
+            //     {
+            //         var extract = row(code, ref seek(records,i));
+            //         writer.WriteLine(string.Format(pattern, extract.Base, extract.Uri, extract.Encoded));
+            //     }
+            // }
+            // return buffer;
         }
 
         [MethodImpl(Inline), Op]

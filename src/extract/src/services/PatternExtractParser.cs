@@ -29,7 +29,7 @@ namespace Z0
         BP Parser
         {
             [MethodImpl(Inline)]
-            get => ApiCodeExtractors.patterns(Buffer.Clear());
+            get => ApiExtracts.patterns(Buffer.Clear());
         }
 
         [Op]
@@ -46,14 +46,13 @@ namespace Z0
             }
         }
 
-
         [Op]
         public Outcome<ApiMemberCode> ParseMember(in ApiMemberExtract src, uint seq)
         {
             try
             {
                 var parser = Parser;
-                var status = parser.Parse(src.Block.Encoded);
+                var status = parser.Parse(src.Block.Encoded.View);
                 var term = status.HasFailed() ? ExtractTermCode.Fail : parser.Result.ToTermCode();
                 if(term != ExtractTermCode.Fail)
                 {
@@ -99,7 +98,6 @@ namespace Z0
                 var start = srcLen - maxcut - 1;
                 ref readonly var lead = ref skip(src, maxcut);
                 ref readonly var current = ref lead;
-
                 for(var i=start; i<srcLen && cut < maxcut; i++, cut++)
                 {
                     current = ref skip(lead, i);

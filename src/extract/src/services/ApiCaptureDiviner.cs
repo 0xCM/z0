@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static ExtractTermCode;
 
     [ApiHost]
-    readonly unsafe struct CaptureDiviner
+    public readonly unsafe struct ApiCaptureDiviner
     {
         const byte ZED = 0;
 

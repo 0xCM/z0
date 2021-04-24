@@ -51,7 +51,7 @@ namespace Z0.Asm
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
-                var code = quick.Capture(accessor.Member).ValueOrDefault(ApiCaptureBlock.Empty);
+                var code = quick.Capture(accessor.Member);
                 seek(blocks, i) = code;
             }
             return buffer;
@@ -71,7 +71,7 @@ namespace Z0.Asm
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
-                var code = quick.Capture(accessor.Member).ValueOrDefault(ApiCaptureBlock.Empty);
+                var code = quick.Capture(accessor.Member);
                 seek(codes, i) = code;
 
                 if(code.IsNonEmpty)
@@ -98,7 +98,7 @@ namespace Z0.Asm
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
-                var code = quick.Capture(accessor.Member).ValueOrDefault(ApiCaptureBlock.Empty);
+                var code = quick.Capture(accessor.Member);
                 seek(codes, i) = code;
 
                 if(code.IsNonEmpty)
