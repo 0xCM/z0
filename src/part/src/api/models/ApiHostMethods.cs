@@ -13,33 +13,29 @@ namespace Z0
     /// <summary>
     /// Defines a catalog over <see cref='ApiMember'/> values for a specified <see cref='IApiHost'/>
     /// </summary>
-    public readonly struct ApiHostMethods
+    public readonly struct ApiHostMethods : IIndex<MethodInfo>
     {
-        [MethodImpl(Inline)]
-        public static ApiHostMethods create(IApiHost host, params MethodInfo[] src)
-            => new ApiHostMethods(host, src);
-
         public IApiHost Host {get;}
 
-        public Index<MethodInfo> Methods {get;}
+        public MethodInfo[] Storage {get;}
 
         [MethodImpl(Inline)]
         public ApiHostMethods(IApiHost host, MethodInfo[] src)
         {
             Host = host;
-            Methods = src;
+            Storage = src;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Methods.IsEmpty;
+            get => (Storage?.Length ?? 0) == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Methods.IsNonEmpty;
+            get => !IsEmpty;
         }
 
         public static ApiHostMethods Empty
@@ -50,6 +46,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MethodInfo[](ApiHostMethods src)
-            => src.Methods;
+            => src.Storage;
     }
 }

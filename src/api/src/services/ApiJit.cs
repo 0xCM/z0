@@ -10,7 +10,6 @@ namespace Z0
     using System.Reflection;
 
     using static memory;
-    using static Part;
 
     [ApiHost]
     public sealed class ApiJit : AppService<ApiJit>
@@ -129,7 +128,7 @@ namespace Z0
         {
             var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
             var buffer = root.list<ApiMember>();
-            var catalog = ApiQuery.catalog(src);
+            var catalog = ApiQuery.partcat(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 

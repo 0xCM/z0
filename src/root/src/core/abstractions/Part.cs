@@ -10,6 +10,31 @@ namespace Z0
 
     using static Root;
 
+    public readonly struct PartResolution
+    {
+        public static bool resolve(Type type, out IPart part)
+        {
+            try
+            {
+                part = (IPart)Activator.CreateInstance(type);
+                return true;
+            }
+            catch(Exception)
+            {
+                part = default;
+                return false;
+            }
+        }
+
+        public const string ResolutionProperty = "Resolved";
+    }
+
+    public readonly struct PartResolution<P>
+        where P : Part<P>, IPart<P>, new()
+    {
+        public P Resolved => new P();
+    }
+
     public abstract class Part<P> : IPart<P>
         where P : Part<P>, IPart<P>, new()
     {

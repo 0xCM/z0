@@ -7,19 +7,22 @@ namespace Z0
     using System;
     using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
     using static memory;
 
     using api = ApiKeys;
 
-    public struct ApiKey<K>
+    public readonly struct ApiKey<K>
         where K : unmanaged
     {
         public static W128 W => default;
 
-        internal ApiKey Storage;
+        readonly ApiKey Storage;
+
+        [MethodImpl(Inline)]
+        public ApiKey(ApiKey src)
+            => Storage = src;
 
         [MethodImpl(Inline)]
         public ApiKey(ReadOnlySpan<byte> src)
@@ -29,14 +32,18 @@ namespace Z0
         public ApiKey(ReadOnlySpan<ApiKeyPart> src)
             => Storage = src;
 
-        public ApiClassKind Class
+        public K Kind
         {
             [MethodImpl(Inline)]
-            get => api.@class(Storage);
+            get => api.kind<K>(Storage);
         }
 
         [MethodImpl(Inline)]
         public static implicit operator ApiKey(ApiKey<K> src)
             => src.Storage;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiKey<K>(ApiKey src)
+            => new ApiKey<K>(src);
     }
 }

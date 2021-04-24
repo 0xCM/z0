@@ -282,7 +282,7 @@ namespace Z0.Asm
         {
             var part = PartId.Math;
             var component = Wf.ApiCatalog.FindComponent(part).Require();
-            var catalog = ApiQuery.catalog(component);
+            var catalog = ApiQuery.partcat(component);
 
             void accept(in ApiCodeBlock block)
             {

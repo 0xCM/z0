@@ -27,13 +27,13 @@ namespace Z0
             Right = right;
         }
 
+        public DataWidth Width => DataWidth.W32;
+
         public ReadOnlySpan<byte> Data
         {
             [MethodImpl(Inline)]
             get => api.data(this);
         }
-
-        public DataWidth Width => DataWidth.W32;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(ApiKeyJoin src)

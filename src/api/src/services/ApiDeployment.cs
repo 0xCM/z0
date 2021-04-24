@@ -70,11 +70,11 @@ namespace Z0
 
         [Op]
         public static IApiRuntimeCatalog catalog(PartContext context)
-            => ApiQuery.runtime(parts(context));
+            => ApiQuery.catalog(parts(context));
 
         [Op]
         public static IApiRuntimeCatalog catalog(Index<IPart> parts)
-            => ApiQuery.runtime(parts);
+            => ApiQuery.catalog(parts);
 
         [Op]
         public static IApiRuntimeCatalog rooted(FS.FolderPath location)
@@ -88,33 +88,16 @@ namespace Z0
                     parts.Add(part);
             }
 
-            return ApiQuery.runtime(parts.Array());
+            return ApiQuery.catalog(parts.Array());
         }
 
         [Op]
         public static IApiRuntimeCatalog catalog(FS.FolderPath location, params PartId[] identities)
-            => ApiQuery.runtime(parts(location, identities));
+            => ApiQuery.catalog(parts(location, identities));
 
         [Op]
         public static IApiRuntimeCatalog catalog(FS.Files paths)
-            => ApiQuery.runtime(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
-
-        /// <summary>
-        /// Loads an assembly from a potential part path
-        /// </summary>
-        [Op]
-        public static Option<Assembly> assembly(FS.FilePath src)
-        {
-            try
-            {
-                return Assembly.LoadFrom(src.Name);
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return default;
-            }
-        }
+            => ApiQuery.catalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         public static Index<Assembly> assemblies(FS.FolderPath dir, PartId[] parts)
         {
@@ -147,27 +130,40 @@ namespace Z0
             from part in resolve(p)
             select part;
 
+        /// <summary>
+        /// Loads an assembly from a potential part path
+        /// </summary>
         [Op]
-        static bool nonempty(Assembly src)
-            => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Count() > 0;
+        static Option<Assembly> assembly(FS.FilePath src)
+        {
+            try
+            {
+                return Assembly.LoadFrom(src.Name);
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return default;
+            }
+        }
 
         /// <summary>
         /// Attempts to resolve a part resolution type
         /// </summary>
-        internal static Option<Type> resolve(Assembly src)
+        static Option<Type> resolve(Assembly src)
             => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).FirstOrDefault();
 
         /// <summary>
         /// Attempts to resolve a part resolution property
         /// </summary>
-        internal static Option<PropertyInfo> resolve(Type src)
-            => src.StaticProperties().Where(p => p.Name == "Resolved").FirstOrDefault();
+        static Option<PropertyInfo> resolve(Type src)
+            => src.StaticProperties().Where(p => p.Name == PartResolution.ResolutionProperty).FirstOrDefault();
 
         /// <summary>
         /// Attempts to resolve a part from a resolution property
         /// </summary>
         [Op]
-        internal static Option<IPart> resolve(PropertyInfo src)
+        static Option<IPart> resolve(PropertyInfo src)
             => root.@try(src, x => (IPart)x.GetValue(null));
     }
 }

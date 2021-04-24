@@ -20,6 +20,10 @@ namespace Z0
             => new ApiKey(src);
 
         [MethodImpl(Inline), Op]
+        public static ApiKey key(ReadOnlySpan<ApiKeyPart> src)
+            => new ApiKey(src);
+
+        [MethodImpl(Inline), Op]
         public static ApiKeyPart part(ReadOnlySpan<byte> src)
             => first(span16u(src));
 
@@ -31,6 +35,14 @@ namespace Z0
         public static ApiKeyPart part(ushort src)
             => new ApiKeyPart(src);
 
+        [MethodImpl(Inline)]
+        public static ApiKeyPart part(ApiKey src, byte index)
+            => cpu.vextract(src.V16u, index);
+
+        [MethodImpl(Inline), Op]
+        public static ApiKey part(ApiKey src, byte index, ApiKeyPart value)
+            => new ApiKey(cpu.vinsert(value, src.V16u, index));
+
         [MethodImpl(Inline), Op]
         public static ApiKeyJoin join(uint src)
         {
@@ -40,14 +52,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiKey key(ReadOnlySpan<ApiKeyPart> src)
-            => new ApiKey(src);
-
-        [MethodImpl(Inline), Op]
         public static ApiKeyJoin join(ApiKey src, byte i, byte j)
         {
             var m = mask(ApiKey.W, i, j);
-            var a = cpu.vshuf16x8(src.Storage, m);
+            var a = cpu.vshuf16x8(src.V8u, m);
             var b = cpu.v32u(a);
             var d = cpu.vextract(b,0);
             return join(d);
@@ -57,7 +65,7 @@ namespace Z0
         public static ReadOnlySpan<byte> data(ApiKey src)
         {
             var dst = Cells.alloc(ApiKey.W);
-            gcpu.vstore(src.Storage, ref dst);
+            gcpu.vstore(src.V8u, ref dst);
             return dst.Bytes;
         }
 
@@ -84,8 +92,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiClassKind @class(ApiKey src)
-            => (ApiClassKind)(ushort)src.Part(n2);
+        public static K kind<K>(ApiKey src)
+            => @as<ApiKeyPart,K>(src.Part(n2));
+
+        [MethodImpl(Inline), Op]
+        public static ApiKey<K> kind<K>(K kind, ApiKey src)
+            where K : unmanaged
+                => part(src, 2, part(bw16(kind)));
 
         [MethodImpl(Inline), Op]
         internal static Vector128<byte> mask(W128 w, byte i, byte j)
