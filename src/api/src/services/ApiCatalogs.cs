@@ -14,7 +14,7 @@ namespace Z0
     using static Sequential;
 
     [ApiHost]
-    public class ApiCatalogs : WfService<ApiCatalogs>
+    public class ApiCatalogs : AppService<ApiCatalogs>
     {
         ApiJit ApiJit;
 

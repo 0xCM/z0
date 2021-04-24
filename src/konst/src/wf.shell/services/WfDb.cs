@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public sealed class WfDb : WfService<WfDb>, IWfDb
+    public sealed class WfDb : AppService<WfDb>, IWfDb
     {
         public FS.FolderPath Root {get; private set;}
 

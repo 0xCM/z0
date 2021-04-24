@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IResBytesEmitter : IWfService
+    public interface IResBytesEmitter : IAppService
     {
         Index<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst);
     }

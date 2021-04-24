@@ -14,7 +14,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class ApiCaptureService : WfService<ApiCaptureService>
+    public sealed class ApiCaptureService : AppService<ApiCaptureService>
     {
         ApiMemberExtractor Extractor;
 

@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    unsafe sealed class CaptureCore : WfService<CaptureCore>, ICaptureCore
+    unsafe sealed class CaptureCore : AppService<CaptureCore>, ICaptureCore
     {
         public Option<ApiParseResult> Capture(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {

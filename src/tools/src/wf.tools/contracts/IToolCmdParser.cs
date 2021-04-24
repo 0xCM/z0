@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IToolCmdParser : IWfService
+    public interface IToolCmdParser : IAppService
     {
         Outcome Parse(CmdLine src, out ToolExecSpec dst);
 

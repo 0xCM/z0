@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmStatementPipe : WfService<AsmStatementPipe>
+    public sealed class AsmStatementPipe : AppService<AsmStatementPipe>
     {
         IAsmDecoder Decoder;
 

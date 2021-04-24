@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Part;
     using static AsmInstructions;
 
-    public class AsmDataFlows : WfService<AsmDataFlows>
+    public class AsmDataFlows : AppService<AsmDataFlows>
     {
 
         public void Submit(in AsmFormExpr src, AsmHexCode code)

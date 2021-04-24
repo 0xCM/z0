@@ -10,8 +10,8 @@ namespace Z0
     using static Part;
 
     [WfService]
-    public abstract class WfSingleton<H,S> : IWfService<H>
-        where H : WfSingleton<H,S>, new()
+    public abstract class AppSingleton<H,S> : IAppService<H>
+        where H : AppSingleton<H,S>, new()
     {
         static H Service;
 
@@ -19,7 +19,7 @@ namespace Z0
 
         protected static IWfRuntime Wf;
 
-        IWfRuntime IWfService.Wf
+        IWfRuntime IAppService.Wf
             => Wf;
 
         [MethodImpl(Inline)]

@@ -9,7 +9,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmTraverser : WfService<AsmTraverser>
+    public sealed class AsmTraverser : AppService<AsmTraverser>
     {
         const byte StatementFieldCount = AsmApiStatement.FieldCount;
 

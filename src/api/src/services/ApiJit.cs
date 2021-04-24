@@ -13,7 +13,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public sealed class ApiJit : WfService<ApiJit>
+    public sealed class ApiJit : AppService<ApiJit>
     {
         [Op]
         static MemoryAddress fptr(MethodInfo src)

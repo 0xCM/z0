@@ -10,7 +10,7 @@ namespace Z0
     using static CodeGenerator;
     using static memory;
 
-    public sealed class ResBytesEmitter : WfService<ResBytesEmitter>
+    public sealed class ResBytesEmitter : AppService<ResBytesEmitter>
     {
         FS.FolderPath RespackDir
             => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");

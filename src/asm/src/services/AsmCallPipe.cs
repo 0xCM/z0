@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmCallPipe : WfService<AsmCallPipe>
+    public sealed class AsmCallPipe : AppService<AsmCallPipe>
     {
         public Index<AsmCallRow> EmitRows(ApiAsmDataset src)
             => EmitRows(src.Routines);

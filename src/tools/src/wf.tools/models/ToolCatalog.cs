@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class ToolCatalog : WfService<ToolCatalog>
+    public class ToolCatalog : AppService<ToolCatalog>
     {
         FS.FolderPath Root;
 

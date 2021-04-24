@@ -5,12 +5,12 @@
 namespace Z0.Asm
 {
     [ApiHost]
-    public partial class AsmCases : WfService<AsmCases>
+    public partial class AsmCases : AppService<AsmCases>
     {
 
     }
 
-    public sealed class AsmCaseRunner : WfService<AsmCaseRunner>
+    public sealed class AsmCaseRunner : AppService<AsmCaseRunner>
     {
         public void Run()
         {

@@ -25,7 +25,7 @@ namespace Z0
     }
 
     [ApiHost]
-    public partial class ProcessContextPipe : WfService<ProcessContextPipe>
+    public partial class ProcessContextPipe : AppService<ProcessContextPipe>
     {
         [Op]
         public static MemoryAddress @base(Assembly src)

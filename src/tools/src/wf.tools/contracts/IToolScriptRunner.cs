@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IToolScriptRunner : IWfService
+    public interface IToolScriptRunner
     {
         Outcome<TextLines> Run(CmdLine cmd);
 

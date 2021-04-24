@@ -11,7 +11,7 @@ namespace Z0
     using static SFx;
 
     [ApiHost]
-    public class MSvcEval : WfService<MSvcEval>
+    public class MSvcEval : AppService<MSvcEval>
     {
         IPolySource Source;
 

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface IApiResCapture : IWfService
+    public interface IApiResCapture : IAppService
     {
         Index<CapturedApiRes> CaptureApiRes(FS.FilePath src, FS.FolderPath dst);
 

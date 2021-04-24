@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [Service(typeof(IMemoryEmitter))]
-    public class MemoryEmitter : WfService<MemoryEmitter>, IMemoryEmitter
+    public class MemoryEmitter : AppService<MemoryEmitter>, IMemoryEmitter
     {
         static string status(MemoryFileInfo file)
             => string.Format("Created memory map: {0} | {1} | {2,-12} | {3}", file.BaseAddress, file.EndAddress, file.Size, file.Path.ToUri());

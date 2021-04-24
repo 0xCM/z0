@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using K = AsmWfCmdKind;
 
-    public sealed class AsmWfCmdHost : WfCmdHost<AsmWfCmdHost, AsmWfCmdKind>
+    public sealed class AsmWfCmdHost : AppCmdHost<AsmWfCmdHost, AsmWfCmdKind>
     {
         StanfordAsmCatalog Catalog;
 

@@ -14,7 +14,7 @@ namespace Z0.Asm
     using static memory;
 
     [ApiHost]
-    public class ApiCodeBlockPipe : WfService<ApiCodeBlockPipe>
+    public class ApiCodeBlockPipe : AppService<ApiCodeBlockPipe>
     {
         [Op]
         public uint Run(ApiBlockIndex src, Action<ApiCodeBlock> receiver)

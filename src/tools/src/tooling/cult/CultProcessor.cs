@@ -14,7 +14,7 @@ namespace Z0.Tooling
     using static Asm.AsmCore;
 
     [DataProcessor(Toolsets.asm.cult)]
-    public class CultProcessor : WfService<CultProcessor>, IDataProcessor<FS.FilePath,uint>
+    public class CultProcessor : AppService<CultProcessor>, IDataProcessor<FS.FilePath,uint>
     {
         public uint BatchSize => Pow2.T16;
 

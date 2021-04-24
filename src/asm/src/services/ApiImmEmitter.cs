@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using E = SpecializedImmEvent;
 
-    public class ApiImmEmitter :  WfService<ApiImmEmitter>
+    public class ApiImmEmitter :  AppService<ApiImmEmitter>
     {
         IAsmContext Asm;
 

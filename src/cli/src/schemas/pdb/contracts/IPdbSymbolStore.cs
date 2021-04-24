@@ -9,9 +9,8 @@ namespace Z0
     using Microsoft.SymbolStore;
     using Microsoft.SymbolStore.KeyGenerators;
     using SOS;
-    using System.Collections.Generic;
 
-    public interface IPdbSymbolStore : IWfService
+    public interface IPdbSymbolStore
     {
         DirectorySymbolStore DirectoryStore(FS.FolderPath dir);
 

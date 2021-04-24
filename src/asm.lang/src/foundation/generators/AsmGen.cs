@@ -7,7 +7,7 @@ namespace Z0.Asm
     using T = AsmGenTarget;
 
     [ApiHost]
-    public sealed partial class AsmGen : WfService<AsmGen>
+    public sealed partial class AsmGen : AppService<AsmGen>
     {
         [Op]
         public void GenerateModelsInPlace(Index<AsmMnemonic> src)

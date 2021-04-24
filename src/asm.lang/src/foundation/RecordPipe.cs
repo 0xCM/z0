@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public abstract class RecordPipe<H,T> : WfService<H>
+    public abstract class RecordPipe<H,T> : AppService<H>
         where H : RecordPipe<H,T>, new()
         where T : struct, IRecord<T>
     {

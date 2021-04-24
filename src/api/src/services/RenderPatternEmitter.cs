@@ -9,7 +9,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public sealed class RenderPatternEmitter : WfService<RenderPatternEmitter>
+    public sealed class RenderPatternEmitter : AppService<RenderPatternEmitter>
     {
         public void Emit(Type src, FS.FilePath dst)
         {

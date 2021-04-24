@@ -12,7 +12,7 @@ namespace Z0
 
     using static Root;
 
-    public sealed class PdbSymbolStore : WfService<PdbSymbolStore>
+    public sealed class PdbSymbolStore : AppService<PdbSymbolStore>
     {
         public DirectorySymbolStore DirectoryStore(FS.FolderPath dir)
             => new DirectorySymbolStore(tracer(Wf), null, dir.Name);

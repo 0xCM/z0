@@ -27,7 +27,7 @@ namespace Z0.Asm
         public Address32 Offset;
     }
 
-    public class JmpStubLocator : WfService<JmpStubLocator>
+    public class JmpStubLocator : AppService<JmpStubLocator>
     {
         unsafe ReadOnlySpan<JmpStub> JmpStubs()
         {

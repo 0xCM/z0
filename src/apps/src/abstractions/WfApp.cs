@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class WfApp<A> : WfService<A>
+    public abstract class WfApp<A> : AppService<A>
         where A : WfApp<A>, new()
     {
         public static void run(string[] args, params PartId[] parts)

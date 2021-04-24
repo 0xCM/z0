@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class Reactor : WfSingleton<Reactor,int>, IReactor
+    public sealed class Reactor : AppSingleton<Reactor,int>, IReactor
     {
         WfCmdBuilder Builder;
 

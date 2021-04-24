@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class ApiDecoder : WfService<ApiDecoder>, IApiIndexDecoder
+    public sealed class ApiDecoder : AppService<ApiDecoder>, IApiIndexDecoder
     {
         IAsmRoutineFormatter Formatter;
 

@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static memory;
     using static AsmCatalogRecords;
 
-    public sealed class StanfordAsmCatalog : WfService<StanfordAsmCatalog>
+    public sealed class StanfordAsmCatalog : AppService<StanfordAsmCatalog>
     {
         readonly TextDocFormat SourceFormat;
 

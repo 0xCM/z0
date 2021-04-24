@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_blocks_svc : WfService<t_blocks_svc>
+    public class t_blocks_svc : AppService<t_blocks_svc>
     {
 
     }

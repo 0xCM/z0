@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public abstract class ToolCmdBuilder<T> : WfService<T>,  IToolCmdBuilder
+    public abstract class ToolCmdBuilder<T> : AppService<T>,  IToolCmdBuilder
         where T : ToolCmdBuilder<T>, new()
     {
         protected Index<ToolCmdArg> Args;

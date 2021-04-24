@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Concurrent;
 
-    public sealed class WfCmdRouter : WfService<WfCmdRouter>, ICmdRouter<WfCmdRouter>
+    public sealed class WfCmdRouter : AppService<WfCmdRouter>, ICmdRouter<WfCmdRouter>
     {
         ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
 

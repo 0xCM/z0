@@ -19,7 +19,7 @@ namespace Z0
         EmitAssetContent,
     }
 
-    sealed class ApiCmdHost : WfCmdHost<ApiCmdHost,K>
+    sealed class ApiCmdHost : AppCmdHost<ApiCmdHost,K>
     {
         Lazy<ApiAssets> _ApiAssets;
 

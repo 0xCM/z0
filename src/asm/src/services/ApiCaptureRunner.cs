@@ -10,7 +10,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    public class ApiCaptureRunner : WfService<ApiCaptureRunner>
+    public class ApiCaptureRunner : AppService<ApiCaptureRunner>
     {
         [Op]
         public void Capture(Index<PartId> parts, FS.FolderPath dst)

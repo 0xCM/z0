@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static Images;
 
-    public class ImageCsvReader : WfService<ImageCsvReader>
+    public class ImageCsvReader : AppService<ImageCsvReader>
     {
         uint CurrentIndex;
 

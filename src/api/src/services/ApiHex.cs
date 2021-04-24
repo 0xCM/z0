@@ -12,7 +12,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public class ApiHex : WfService<ApiHex>
+    public class ApiHex : AppService<ApiHex>
     {
         public FS.Files Files(FS.FolderPath src)
             => src.Files(FS.PCsv);

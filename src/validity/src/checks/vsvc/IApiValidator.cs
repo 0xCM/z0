@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public interface IApiValidator : IWfService
+    public interface IApiValidator : IAppService
     {
 
     }

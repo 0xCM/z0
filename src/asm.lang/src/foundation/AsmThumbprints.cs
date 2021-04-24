@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmThumbprints : WfService<AsmThumbprints>
+    public sealed class AsmThumbprints : AppService<AsmThumbprints>
     {
         public static AsmThumbprint from(AsmApiStatement src)
             => AsmThumbprints.define(src.Expression, src.Sig, src.OpCode, src.Encoded);

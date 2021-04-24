@@ -14,7 +14,7 @@ namespace Z0.Asm
     using static TextRules;
 
     [ApiHost]
-    public class AsmSigs : WfService<AsmSigs>
+    public class AsmSigs : AppService<AsmSigs>
     {
         const char DigitQualifier = FSlash;
 

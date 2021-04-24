@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using K = ToolCmdKind;
 
-    public sealed class ToolCmdHost : WfCmdHost<ToolCmdHost,ToolCmdKind>
+    public sealed class ToolCmdHost : AppCmdHost<ToolCmdHost,ToolCmdKind>
     {
         [Action(K.UpdateToolHelpIndex)]
         void UpdateToolHelpIndex()

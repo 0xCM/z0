@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static memory;
 
     [ApiHost]
-    public class AsmRender : WfService<AsmRender>
+    public class AsmRender : AppService<AsmRender>
     {
         readonly BitFormat Bf1;
 

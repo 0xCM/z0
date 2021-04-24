@@ -23,7 +23,7 @@ namespace Z0
     using CT = CreditModel.ContentType;
 
     [ApiHost]
-    public class CheckCredits : WfService<CheckCredits>
+    public class CheckCredits : AppService<CheckCredits>
     {
         public void Run()
         {

@@ -11,7 +11,7 @@ namespace Z0.Tooling
     using static memory;
 
     [ApiHost]
-    public sealed partial class Robocopy : WfService<Robocopy>, ITool<Robocopy>
+    public sealed partial class Robocopy : AppService<Robocopy>, ITool<Robocopy>
     {
         public ToolId Id => Toolsets.nasm;
 

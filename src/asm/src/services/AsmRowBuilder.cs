@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmRowBuilder : WfService<AsmRowBuilder>
+    public sealed class AsmRowBuilder : AppService<AsmRowBuilder>
     {
         readonly Dictionary<AsmMnemonic, ArrayBuilder<AsmRow>> Index;
 

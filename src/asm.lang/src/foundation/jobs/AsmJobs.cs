@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
 
     [ApiHost]
-    public class AsmJobs : WfService<AsmJobs>
+    public class AsmJobs : AppService<AsmJobs>
     {
         [Op]
         public static AsmEncodingJob encoding(uint count)

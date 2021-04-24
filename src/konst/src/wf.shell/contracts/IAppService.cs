@@ -9,7 +9,7 @@ namespace Z0
     using System;
 
     [Free]
-    public interface IWfService : IService, IDisposable
+    public interface IAppService : IService, IDisposable
     {
         IWfRuntime Wf {get;}
 
@@ -26,15 +26,15 @@ namespace Z0
     /// </summary>
     /// <typeparam name="H">The reifying type</typeparam>
     [Free]
-    public interface IWfService<H> : IWfService, IService<H>
-        where H : IWfService<H>, new()
+    public interface IAppService<H> : IAppService, IService<H>
+        where H : IAppService<H>, new()
     {
 
     }
 
     [Free]
-    public interface IWfService<H,C> : IWfService<H>, IService<H,C>
-        where H : IWfService<H,C>, new()
+    public interface IAppService<H,C> : IAppService<H>, IService<H,C>
+        where H : IAppService<H,C>, new()
     {
         Type IService.ContractType
             => typeof(C);

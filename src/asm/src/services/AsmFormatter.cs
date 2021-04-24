@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public class AsmFormatter : WfService<AsmFormatter>,  IAsmRoutineFormatter
+    public class AsmFormatter : AppService<AsmFormatter>,  IAsmRoutineFormatter
     {
         AsmFormatConfig _Config;
 

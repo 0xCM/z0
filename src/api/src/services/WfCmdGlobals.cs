@@ -19,7 +19,7 @@ namespace Z0
         ShowByteConversions,
     }
 
-    public class WfCmdGlobals : WfCmdHost<WfCmdGlobals, GlobalWfCmd>
+    public class WfCmdGlobals : AppCmdHost<WfCmdGlobals, GlobalWfCmd>
     {
         [Action(K.ShowByteConversions)]
         void ShowByteConversions()

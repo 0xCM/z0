@@ -23,10 +23,6 @@ namespace Z0
             => Z0.ApiCaptureArchive.create(wf);
 
         [Op]
-        public static ICmdRunner<AsmWfCmdKind> AsmWfCmd(this IWfRuntime wf)
-            => AsmWfCmdHost.create(wf);
-
-        [Op]
         public static AsmSemanticRender AsmSemanticRender(this IWfRuntime wf)
             => Services.AsmSemanticRender.create(wf);
 

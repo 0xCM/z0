@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class ApiExtractPipe : WfService<ApiExtractPipe>
+    public class ApiExtractPipe : AppService<ApiExtractPipe>
     {
         public FS.Files Paths()
             => Db.RawExtractPaths();

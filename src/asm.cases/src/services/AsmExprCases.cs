@@ -22,7 +22,7 @@ namespace Z0.Asm
         public AsmOc Id {get;}
     }
 
-    public class AsmExprCases : WfService<AsmExprCases>
+    public class AsmExprCases : AppService<AsmExprCases>
     {
         readonly AsmX asmx;
 

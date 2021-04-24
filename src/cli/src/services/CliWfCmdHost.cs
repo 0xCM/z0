@@ -11,7 +11,7 @@ namespace Z0
 
     }
 
-    public sealed class CliWfCmdHost : WfCmdHost<CliWfCmdHost, CliWfCmdKind>
+    public sealed class CliWfCmdHost : AppCmdHost<CliWfCmdHost, CliWfCmdKind>
     {
         ImageMetaPipe Emitter;
 

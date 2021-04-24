@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmEtl : WfService<AsmEtl>
+    public sealed class AsmEtl : AppService<AsmEtl>
     {
         public uint Emit(AsmRowSet<AsmMnemonic> src)
         {

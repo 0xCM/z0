@@ -9,7 +9,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmStatementProducer : WfService<AsmStatementProducer>
+    public sealed class AsmStatementProducer : AppService<AsmStatementProducer>
     {
         public uint Produce(in AsmMemberRoutine src, ITextBuffer dst)
         {

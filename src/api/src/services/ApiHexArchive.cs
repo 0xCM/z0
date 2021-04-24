@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class ApiHexArchive : WfService<ApiHexArchive>
+    public class ApiHexArchive : AppService<ApiHexArchive>
     {
         FS.FolderPath Root;
 

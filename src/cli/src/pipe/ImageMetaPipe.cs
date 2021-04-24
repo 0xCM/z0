@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed partial class ImageMetaPipe : WfService<ImageMetaPipe>
+    public sealed partial class ImageMetaPipe : AppService<ImageMetaPipe>
     {
         public void EmitMetadaSets(WorkflowOptions options)
         {

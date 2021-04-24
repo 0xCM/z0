@@ -11,7 +11,7 @@ namespace Z0.Asm
         void Handle(I instruction);
     }
 
-    public abstract class AsmHandler<H,I> : WfService<H>, IAsmHandler<H,I>
+    public abstract class AsmHandler<H,I> : AppService<H>, IAsmHandler<H,I>
         where H : AsmHandler<H,I>, new()
         where I : struct, ITypedInstruction<I>
     {

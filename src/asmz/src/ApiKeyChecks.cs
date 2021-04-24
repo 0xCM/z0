@@ -4,7 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class ToolRegistry : AppService<ToolRegistry>
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static memory;
+
+    public class ApiKeyChecks : AppService<ApiKeyChecks>
     {
 
     }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public class MachineRunner : WfService<MachineRunner>
+    public class MachineRunner : AppService<MachineRunner>
     {
         static MsgPattern<Count, DelimitedIndex<PartId>> RunningMachine => "Executing machine workflow for {0} parts: {1}";
 

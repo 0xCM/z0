@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using K = AsmLangCmdKind;
 
-    public sealed class AsmLangCmdHost : WfCmdHost<AsmLangCmdHost,K>
+    public sealed class AsmLangCmdHost : AppCmdHost<AsmLangCmdHost,K>
     {
         protected override void OnInit()
         {

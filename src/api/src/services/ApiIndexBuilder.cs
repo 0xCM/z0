@@ -13,7 +13,7 @@ namespace Z0
     using static Part;
 
     [Service(typeof(IApiIndexBuilder))]
-    public class ApiIndexBuilder : WfService<ApiIndexBuilder>, IApiIndexBuilder
+    public class ApiIndexBuilder : AppService<ApiIndexBuilder>, IApiIndexBuilder
     {
         public ApiBlockIndex Product;
 

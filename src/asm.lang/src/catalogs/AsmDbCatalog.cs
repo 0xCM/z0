@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using IF = AsmDbSourceDocs.InstructionField;
 
-    public class AsmDbCatalog : WfService<AsmDbCatalog>
+    public class AsmDbCatalog : AppService<AsmDbCatalog>
     {
         public AsmDbSourceDocs SourceDocs()
         {

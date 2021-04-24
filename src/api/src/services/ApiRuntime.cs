@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class ApiRuntime : WfService<ApiRuntime>
+    public class ApiRuntime : AppService<ApiRuntime>
     {
         const string RenderPattern = "{0,-16} | {1,-112} | {2, -82} | {3}";
 

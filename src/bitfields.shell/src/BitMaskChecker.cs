@@ -13,7 +13,7 @@ namespace Z0
     using static BitMasks;
 
     [ApiHost]
-    public class BitMaskChecker : WfService<BitMaskChecker>
+    public class BitMaskChecker : AppService<BitMaskChecker>
     {
         uint SuccessCount;
 

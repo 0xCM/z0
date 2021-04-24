@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public class ApiHostDecoder : WfService<ApiHostDecoder>
+    public class ApiHostDecoder : AppService<ApiHostDecoder>
     {
         IAsmDecoder Decoder;
 

@@ -17,7 +17,7 @@ namespace Z0.Asm
     using static Toolsets;
     using static Images;
 
-    class App : WfService<App>
+    class App : AppService<App>
     {
         public App()
         {

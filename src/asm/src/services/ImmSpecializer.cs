@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static SFx;
     using static memory;
 
-    public class ImmSpecializer : WfService<ImmSpecializer>
+    public class ImmSpecializer : AppService<ImmSpecializer>
     {
         IAsmDecoder Decoder;
 

@@ -21,7 +21,7 @@ namespace Z0.Asm
         ParsingOperand,
     }
 
-    public class XedTableParser : WfService<XedTableParser>
+    public class XedTableParser : AppService<XedTableParser>
     {
         const char CommentMarker = Chars.Hash;
 

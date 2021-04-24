@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class ApiResProvider : WfService<ApiResProvider>
+    public sealed class ApiResProvider : AppService<ApiResProvider>
     {
         public Index<ApiResAccessor> PackagedCode()
         {

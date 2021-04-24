@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static memory;
 
     [ApiHost]
-    public class ApiCodeBlockTraverser : WfService<ApiCodeBlockTraverser>
+    public class ApiCodeBlockTraverser : AppService<ApiCodeBlockTraverser>
     {
         IAsmDecoder Decoder;
 

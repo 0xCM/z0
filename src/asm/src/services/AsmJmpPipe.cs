@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using K = JmpKind;
 
-    public sealed class AsmJmpPipe : WfService<AsmJmpPipe>
+    public sealed class AsmJmpPipe : AppService<AsmJmpPipe>
     {
         public Index<AsmJmpRow> EmitRows(ApiAsmDataset src)
             => EmitRows(src.Routines);

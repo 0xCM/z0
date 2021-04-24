@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    public class TextFileSplitter : WfService<TextFileSplitter>
+    public class TextFileSplitter : AppService<TextFileSplitter>
     {
         public Outcome<FileSplitInfo> Run(FileSplitSpec spec)
         {

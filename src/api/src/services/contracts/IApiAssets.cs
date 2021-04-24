@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Reflection;
 
-    public interface IApiAssets : IWfService
+    public interface IApiAssets : IAppService
     {
         Index<ResEmission> EmitAssetContent();
 

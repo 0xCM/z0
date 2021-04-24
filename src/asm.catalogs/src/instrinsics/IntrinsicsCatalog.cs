@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static memory;
     using static XedModels;
 
-    public partial class IntrinsicsCatalog : WfService<IntrinsicsCatalog>
+    public partial class IntrinsicsCatalog : AppService<IntrinsicsCatalog>
     {
         const string DocName = "intrinsics";
 

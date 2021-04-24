@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static XedModels;
     using static AsmCatalogRecords;
 
-    public sealed class XedCatalog : WfService<XedCatalog>
+    public sealed class XedCatalog : AppService<XedCatalog>
     {
         public void EmitCatalog()
         {

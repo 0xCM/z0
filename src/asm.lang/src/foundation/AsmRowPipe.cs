@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public class AsmRowPipe : WfService<AsmRowPipe>
+    public class AsmRowPipe : AppService<AsmRowPipe>
     {
         public FS.Files AsmRowFiles()
             => Db.TableDir<AsmRow>().AllFiles;

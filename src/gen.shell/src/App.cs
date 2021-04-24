@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    sealed class Generator : WfService<Generator>
+    sealed class Generator : AppService<Generator>
     {
         public void Generate(string[] args)
         {

@@ -12,7 +12,7 @@ namespace Z0
 
     using K = BitCmdKind;
 
-    public sealed class BitCmdHost : WfCmdHost<BitCmdHost,K>
+    public sealed class BitCmdHost : AppCmdHost<BitCmdHost,K>
     {
         void ShowBitSeq(N1 n, ShowLog dst)
         {

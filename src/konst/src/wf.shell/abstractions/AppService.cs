@@ -13,8 +13,8 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     [WfService]
-    public abstract class WfService<H> : IWfService<H>
-        where H : WfService<H>, new()
+    public abstract class AppService<H> : IAppService<H>
+        where H : AppService<H>, new()
     {
         /// <summary>
         /// Instantites the serice without initialization
@@ -58,12 +58,12 @@ namespace Z0
             wf.Created(flow);
         }
 
-        protected WfService()
+        protected AppService()
         {
             HostName = GetType().Name;
         }
 
-        protected WfService(IWfRuntime wf)
+        protected AppService(IWfRuntime wf)
             : this()
         {
             Host = new WfSelfHost(HostName);

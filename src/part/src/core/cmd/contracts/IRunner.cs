@@ -4,14 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IWfCmdHost : ICmdRunner
+    public interface IRunner
     {
-
+        void Run();
     }
 
-    public interface IWfCmdHost<K> : IWfCmdHost, ICmdRunner<K>
-        where K : unmanaged
+    public interface IRunner<T>
     {
-
+        void Run(in T spec);
     }
 }

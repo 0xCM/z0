@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
 
-    public sealed class Symbolism : WfService<Symbolism>
+    public sealed class Symbolism : AppService<Symbolism>
     {
         public Index<SymLiteral> EmitLiterals()
             => EmitLiterals(Db.IndexTable<SymLiteral>());

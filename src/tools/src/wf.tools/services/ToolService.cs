@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class ToolService<T> : WfService<T>, ITool<T>
+    public abstract class ToolService<T> : AppService<T>, ITool<T>
         where T : ToolService<T>, new()
     {
         public ToolId Id {get;}

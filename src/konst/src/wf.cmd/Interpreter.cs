@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    public abstract class Interpreter<H> : IWfService<H,IInterpreter>, IInterpreter
+    public abstract class Interpreter<H> : IAppService<H,IInterpreter>, IInterpreter
         where H : Interpreter<H>, new()
     {
         public IWfRuntime Wf {get; private set;}

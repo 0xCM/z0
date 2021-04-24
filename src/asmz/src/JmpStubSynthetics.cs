@@ -15,7 +15,7 @@ namespace Z0
     using static Z0.Asm.AsmOp;
 
 
-    public class JmpStubSynthetics : WfService<JmpStubSynthetics>
+    public class JmpStubSynthetics : AppService<JmpStubSynthetics>
     {
         Index<MemoryRange> Trampolines;
 

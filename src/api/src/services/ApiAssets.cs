@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class ApiAssets : WfService<ApiAssets>, IApiAssets
+    public sealed class ApiAssets : AppService<ApiAssets>, IApiAssets
     {
         public Index<ResEmission> EmitAssetContent()
         {

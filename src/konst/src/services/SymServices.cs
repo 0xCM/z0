@@ -16,7 +16,7 @@ namespace Z0.Asm
             => Asm.SymServices.create(wf);
     }
 
-    public class SymServices : WfService<SymServices>
+    public class SymServices : AppService<SymServices>
     {
         public static ref SymRecord record<T>(Sym<T> src, ushort count, out SymRecord dst)
             where T : unmanaged

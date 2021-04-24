@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public sealed class Tools : WfService<Tools>
+    public sealed class Tools : AppService<Tools>
     {
         public void Run(CmdLine src)
         {

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static AsmCatalogRecords;
 
-    public class NasmCatalog : WfService<NasmCatalog>
+    public class NasmCatalog : AppService<NasmCatalog>
     {
         public Index<NasmInstruction> ParseInstuctionAssets()
         {

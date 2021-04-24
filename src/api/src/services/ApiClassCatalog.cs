@@ -7,7 +7,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    public sealed class ApiClassCatalog : WfService<ApiClassCatalog>, IApiClassCatalog
+    public sealed class ApiClassCatalog : AppService<ApiClassCatalog>, IApiClassCatalog
     {
         public Index<ApiClassifier> Classifiers()
             => Parts.Root.Assembly.ApiClasses().GroupBy(x => x.Type).Select(x => new ApiClassifier(x.Key, x.ToArray())).Array();
