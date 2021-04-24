@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitNumbers)" />
-    <ProjectReference Include="$(Bits)" />
 
   </ItemGroup>
 

@@ -1288,7 +1288,7 @@ namespace Z0.Asm
             var symbolic = Wf.Symbolism();
             var literals = symbolic.DiscoverLiterals();
             Wf.Status($"Creating heap for {literals.Count} literals");
-            var heap = SymbolHeap.create(literals);
+            var heap = SymHeaps.specify(literals);
 
             var count = heap.SymbolCount;
             var dst = Db.AppLog("heap", FS.Csv);

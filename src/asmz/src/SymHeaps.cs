@@ -6,23 +6,41 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
     using static memory;
 
-
-    public struct SymbolHeapEntry
-    {
-        public ushort Index;
-
-        public Identifier Name;
-
-    }
-
     [ApiHost]
-    public class SymbolHeap
+    public readonly struct SymHeaps
     {
+        [MethodImpl(Inline), Op]
+        public static ushort width(SymHeapSpec src, ushort index)
+            => width(src.Widths, index);
+
+        [MethodImpl(Inline), Op]
+        public static ushort width(ReadOnlySpan<ushort> src, ushort index)
+            => skip(src,index);
+
+        [MethodImpl(Inline), Op]
+        public static uint offset(SymHeapSpec src, ushort index)
+            => offset(src.Offsets, index);
+
+        [MethodImpl(Inline), Op]
+        public static uint offset(ReadOnlySpan<uint> src, ushort index)
+            => skip(src, index);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> symchars(SymHeapSpec src, ushort index)
+            => slice(src.Expressions.View, offset(src.Offsets.View, index), width(src,index));
+
+        [Op]
+        public static SymExpr symexpr(SymHeapSpec src, ushort index)
+            => text.format(symchars(src,index));
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly Identifier identifier(SymHeapSpec src, ushort index)
+            => ref src.Identifiers[index];
+
         [MethodImpl(Inline), Op]
         public static uint charcount(ReadOnlySpan<SymLiteral> src)
         {
@@ -36,37 +54,18 @@ namespace Z0
             return width;
         }
 
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> symchars(SymbolHeap src, ushort index)
-            => slice(src.Expressions.View, offset(src, index), width(src,index));
 
         [Op]
-        public static SymExpr symexpr(SymbolHeap src, ushort index)
-            => text.format(symchars(src,index));
-
-        [MethodImpl(Inline), Op]
-        public static uint offset(SymbolHeap src, ushort index)
-            => src.Offsets[index];
-
-        [MethodImpl(Inline), Op]
-        public static ushort width(SymbolHeap src, ushort index)
-            => src.Widths[index];
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly Identifier identifier(SymbolHeap src, ushort index)
-            => ref src.Identifiers[index];
-
-        [Op]
-        public static SymbolHeap create(ReadOnlySpan<SymLiteral> src)
+        public static SymHeapSpec specify(ReadOnlySpan<SymLiteral> src)
         {
-            var dst = new SymbolHeap();
+            var dst = new SymHeapSpec();
 
             var kSym = (uint)src.Length;
             var kEntry = (uint)Bits.next((Pow2x16)Bits.xmsb(kSym));
             dst.SymbolCount = kSym;
             dst.EntryCount = kEntry;
             dst.Widths = alloc<ushort>(kEntry);
-            dst.Values = alloc<ulong>(kEntry);
+            dst.Values = alloc<ushort>(kEntry);
             dst.Identifiers = alloc<Identifier>(kEntry);
             dst.Expressions = alloc<char>(charcount(src));
             dst.Offsets = alloc<uint>(kEntry);
@@ -84,7 +83,7 @@ namespace Z0
                 var width = (ushort)symsrc.Length;
 
                 seek(widths, i) = width;
-                seek(values, i) = literal.EncodedValue;
+                seek(values, i) = (ushort)literal.EncodedValue;
                 seek(id, i) = literal.Name;
                 seek(offsets,i) = offset;
                 symsrc.CopyTo(cover(seek(symdst, offset), width));
@@ -94,31 +93,5 @@ namespace Z0
 
             return dst;
         }
-
-        Index<char> Expressions;
-
-        Index<ushort> Widths;
-
-        Index<uint> Offsets;
-
-        Index<ulong> Values;
-
-        Index<Identifier> Identifiers;
-
-        public uint SymbolCount {get; private set;}
-
-        uint EntryCount;
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<char> SymChars(ushort index)
-            => symchars(this, index);
-
-        [Op]
-        public SymExpr Expression(ushort index)
-            => symexpr(this, index);
-
-        [Op]
-        public ref readonly Identifier Identifier(ushort index)
-            => ref identifier(this,index);
     }
 }

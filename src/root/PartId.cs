@@ -86,6 +86,8 @@ public enum PartId : ulong
 
     Related = 68,
 
+    Bits = 70,
+
     BitVectors = 100,
 
     BitSpans = 102,

@@ -99,6 +99,16 @@ namespace Z0
                 => recover<ushort,T>(src);
 
         /// <summary>
+        /// Presents a <see cref='char'/> span as a <typeparamref name='T'/> span
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline), Recover, Closures(Closure)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<char> src)
+            where T : struct
+                => recover<char,T>(src);
+
+        /// <summary>
         /// Presents a <see cref='int'/> span as a T-span
         /// </summary>
         /// <param name="src">The source span</param>

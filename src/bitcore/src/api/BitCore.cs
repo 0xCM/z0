@@ -8,21 +8,6 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiSetKind.Bits)]
-    public partial class Bits
-    {
-        const NumericKind Closure = Konst.UnsignedInts;
-
-        /// <summary>
-        /// Wraps a bitview around a generic reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The generic type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitEditor<T> editor<T>(in T src)
-            where T : unmanaged
-                => new BitEditor<T>(src);
-    }
 
     [ApiHost(ApiSetKind.Bits | ApiSetKind.Generic)]
     public partial class gbits
