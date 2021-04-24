@@ -14,12 +14,10 @@ namespace Z0.Asm
         /// <summary>
         /// The buffer that receives the captured data
         /// </summary>
-        internal readonly Span<byte> TargetBuffer;
+        internal readonly Span<byte> Buffer;
 
         [MethodImpl(Inline)]
         public CaptureExchange(Span<byte> capture)
-        {
-            TargetBuffer = capture;
-        }
+            => Buffer = capture;
     }
 }

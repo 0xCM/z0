@@ -4,11 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
     using Z0.Asm;
 
     [ApiHost]
     public readonly struct Capture
     {
+        [Op]
+        public static IAsmContext context(IWfRuntime wf)
+            => new AsmContext(Apps.context(wf), wf);
+
+        [MethodImpl(Inline), Op]
+        public static ICaptureExchange exchange(BufferToken capture)
+            => new CaptureExchangeProxy(capture);
+
         [Op]
         public static Index<AsmMemberRoutine> run(string[] args)
         {
@@ -29,8 +42,8 @@ namespace Z0
         [Op]
         public static QuickCapture quick(IWfRuntime wf)
         {
-            var tokens = Buffers.alloc(Pow2.T16, 5, out var buffer).Tokenize();
-            var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
+            var tokens = memory.alloc(Pow2.T16, 5, out var buffer).Tokenize();
+            var exchange = Capture.exchange(tokens[BufferSeqId.Aux3]);
             var proxy = new CaptureServiceProxy(wf.CaptureCore(), exchange);
             return new QuickCapture(wf, buffer, tokens, proxy);
         }

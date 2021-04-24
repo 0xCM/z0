@@ -18,9 +18,9 @@ namespace Z0
 
         public IApiParts ApiParts {get;}
 
-        public IWfEventSink EventSink {get;}
+        public IEventSink EventSink {get;}
 
-        public IWfEventBroker EventBroker {get;}
+        public IEventBroker EventBroker {get;}
 
         public ICmdRouter Router {get;}
 

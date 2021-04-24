@@ -23,7 +23,7 @@ namespace Z0
             => Db.ApiHexRoot().Files(FS.PCsv);
 
         [MethodImpl(Inline), Op]
-        public static ApiCodeBlock block(in ApiHexRow src)
+        public static ApiCodeBlock block(ApiHexRow src)
             => new ApiCodeBlock(src.Address, src.Uri, src.Data);
 
         [Op]

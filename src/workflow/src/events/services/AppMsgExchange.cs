@@ -11,17 +11,17 @@ namespace Z0
 
     using static Part;
 
-    public sealed class AppMsgExchange : IAppMsgQueue
+    public sealed class AppMsgExchange : IMessageQueue
     {
-        readonly IAppMsgQueue Queue;
+        readonly IMessageQueue Queue;
 
         /// <summary>
         /// Creates an exchange and underlying queue
         /// </summary>
         public static AppMsgExchange Create()
-            => new AppMsgExchange(AppMsgQueue.Create());
+            => new AppMsgExchange(MessageQueue.Create());
 
-        public AppMsgExchange(IAppMsgQueue dst)
+        public AppMsgExchange(IMessageQueue dst)
         {
             Queue = dst;
             Queue.Next += Relay;
@@ -54,7 +54,7 @@ namespace Z0
             return messages;
         }
 
-        public void Flush(Exception e, IAppMsgSink target)
+        public void Flush(Exception e, IMessageSink target)
             => target.Deposit(Flush(e));
 
         public void Deposit(IAppMsg msg)

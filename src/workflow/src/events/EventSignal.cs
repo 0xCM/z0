@@ -10,20 +10,20 @@ namespace Z0
     using static EventFactory;
     using static Part;
 
-    public readonly struct EventSignal
+    public class EventSignal
     {
-        readonly IWfEventSink Sink;
+        [MethodImpl(Inline)]
+        public static EventSignal create(IEventSink sink, WfHost source, CorrelationToken ct = default)
+            => new EventSignal(sink, source, ct);
+
+        readonly IEventSink Sink;
 
         readonly CorrelationToken Ct;
 
         readonly WfHost Source;
 
         [MethodImpl(Inline)]
-        public static EventSignal create(IWfEventSink sink, WfHost source, CorrelationToken ct = default)
-            => new EventSignal(sink, source, ct);
-
-        [MethodImpl(Inline)]
-        EventSignal(IWfEventSink sink, WfHost src, CorrelationToken ct)
+        EventSignal(IEventSink sink, WfHost src, CorrelationToken ct)
         {
             Ct = ct;
             Source = src;
@@ -145,11 +145,11 @@ namespace Z0
     partial class XTend
     {
         [MethodImpl(Inline), Op]
-       public static EventSignal Signal(this IWfEventSink sink, WfHost source)
+       public static EventSignal Signal(this IEventSink sink, WfHost source)
             => EventSignal.create(sink, source);
 
         [MethodImpl(Inline), Op]
-       public static EventSignal Signal<T>(this IWfEventSink sink)
+       public static EventSignal Signal<T>(this IEventSink sink)
             => EventSignal.create(sink, typeof(T));
     }
 }

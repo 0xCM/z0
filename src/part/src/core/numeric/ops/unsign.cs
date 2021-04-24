@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct Numeric
     {
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='byte'/>

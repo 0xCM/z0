@@ -10,9 +10,9 @@ namespace Z0
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IAppContext : IAppMsgQueue, IPolyrandProvider, IAppMsgContext, IWfContext
+    public interface IAppContext : IMessageQueue, IPolyrandProvider, IWfContext
     {
-        IAppMsgQueue MessageQueue {get;}
+        IMessageQueue MessageQueue {get;}
 
         WfController IWfContext.Controller
             => root.controller();
@@ -28,16 +28,16 @@ namespace Z0
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => MessageQueue.Deposit(msg);
 
-        void IAppMsgSink.Notify(string msg, LogLevel? severity)
+        void IMessageSink.Notify(string msg, LogLevel? severity)
             => MessageQueue.Notify(msg, severity);
 
-        IReadOnlyList<IAppMsg> IAppMsgQueue.Dequeue()
+        IReadOnlyList<IAppMsg> IMessageQueue.Dequeue()
             => MessageQueue.Dequeue();
 
-        IReadOnlyList<IAppMsg> IAppMsgQueue.Flush(Exception e)
+        IReadOnlyList<IAppMsg> IMessageQueue.Flush(Exception e)
             => MessageQueue.Flush(e);
 
-        void IAppMsgQueue.Emit(FS.FilePath dst)
+        void IMessageQueue.Emit(FS.FilePath dst)
             => MessageQueue.Emit(dst);
     }
 }

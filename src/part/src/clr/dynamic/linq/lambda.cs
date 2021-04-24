@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Expression<T> lambda<T>((PX p1, PX p2) parameters, Expression body)
             where T : Delegate
-                => XPR.Lambda<T>(body, root.seq(parameters.p1, parameters.p2));
+                => XPR.Lambda<T>(body, root.stream(parameters.p1, parameters.p2));
 
         /// <summary>
         /// Defines a lambda expression
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Expression<T> lambda<T>((PX p1, PX p2, PX p3) parameters, Expression body)
             where T : Delegate
-                => XPR.Lambda<T>(body, root.seq(parameters.p1, parameters.p2, parameters.p3));
+                => XPR.Lambda<T>(body, root.stream(parameters.p1, parameters.p2, parameters.p3));
 
         /// <summary>
         /// Creates a an emitter expression
@@ -109,7 +109,7 @@ namespace Z0
         {
             var p1 = paramX<X>();
             var eval = f(p1);
-            return lambda<Func<X,Y>>(root.seq(p1), eval);
+            return lambda<Func<X,Y>>(root.stream(p1), eval);
         }
 
         /// <summary>

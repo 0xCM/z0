@@ -39,7 +39,7 @@ namespace Z0
         public static LiteralLogicSeqExpr<N> ToLogicSeq<N>(this BitString src, N n = default)
             where N : unmanaged, ITypeNat
         {
-            z.insist<N>(src.Length);
+            root.require<N>(src.Length);
             return new LiteralLogicSeqExpr<N>(src.ToLogicSeq().Terms);
         }
     }

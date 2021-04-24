@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Covers a sequence of allocated buffers
     /// </summary>
-    public unsafe readonly ref struct NativeBuffers
+    public unsafe class NativeBuffers : IDisposable
     {
         /// <summary>
         /// Creates a buffer sequence that owns the underlying memory allocation and releases it upon disposal
@@ -26,9 +26,7 @@ namespace Z0
 
         internal readonly NativeBuffer Allocation;
 
-        readonly Span<byte> View;
-
-        readonly Span<BufferToken> Tokens;
+        readonly Index<BufferToken> Tokens;
 
         readonly byte BufferCount;
 
@@ -45,17 +43,13 @@ namespace Z0
             BufferSize = size;
             TotalSize = BufferCount*BufferSize;
             Allocation = NativeBuffer.alloc(TotalSize);
-            View = new Span<byte>(Allocation.Handle.ToPointer(), (int)TotalSize);
-            Tokens = Buffers.tokenize(Allocation.Handle, BufferSize, BufferCount);
+            //View = new Span<byte>(Allocation.Handle.ToPointer(), (int)TotalSize);
+            Tokens = memory.tokenize(Allocation.Handle, BufferSize, BufferCount);
         }
 
-        /// <summary>
-        /// Presents an index-identified buffer as a span of bytes
-        /// </summary>
-        /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public Span<byte> Buffer(byte index)
-            => slice(View, index*BufferSize, BufferSize);
+        public Span<byte> Edit(byte index)
+            => memory.edit(Token(index));
 
         /// <summary>
         /// Covers a token-identified buffer with a span over cells of unmanaged type
@@ -64,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> Buffer<T>(byte index)
             where T : unmanaged
-                => Buffer(index).Recover<T>();
+                => Edit(index).Recover<T>();
 
         /// <summary>
         /// Retrieves an index-identified token
@@ -72,7 +66,7 @@ namespace Z0
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public ref readonly BufferToken Token(byte index)
-            => ref skip(Tokens,index);
+            => ref Tokens[index];
 
         /// <summary>
         /// Retrieves an index-identified token

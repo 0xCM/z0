@@ -13,6 +13,21 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
+        /// Covers a token-identified buffer with a bytespan
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<byte> edit(BufferToken src)
+            => cover(src.Address.Pointer<byte>(), src.BufferSize);
+
+        /// <summary>
+        /// Covers a token-identified buffer with a span
+        /// </summary>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> edit<T>(BufferToken src)
+            where T : unmanaged
+                => cover(src.Address.Pointer<byte>(), src.BufferSize).Recover<T>();
+
+        /// <summary>
         /// Interprets a readonly generic reference as a uint8 reference
         /// </summary>
         /// <param name="src">The source reference</param>

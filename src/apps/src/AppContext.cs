@@ -14,7 +14,7 @@ namespace Z0
 
         public IPolyrand Random {get;}
 
-        public IAppMsgQueue MessageQueue {get;}
+        public IMessageQueue MessageQueue {get;}
 
         public IAppPaths Paths {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(IAppPaths paths, IApiRuntimeCatalog catalog, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
+        public AppContext(IAppPaths paths, IApiRuntimeCatalog catalog, IPolyrand random, IJsonSettings settings, IMessageQueue queue)
         {
             Paths = paths;
             Next = msg => {};

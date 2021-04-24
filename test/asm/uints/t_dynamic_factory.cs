@@ -114,13 +114,13 @@ namespace Z0.Asm
             using var hexTarget = HexWriter();
             using var asmTarget = AsmWriter();
 
-            var fCaptured = AsmCheck.Capture(f.Identify(), f).Require();
+            var fCaptured = AsmChecks.Capture(f.Identify(), f).Require();
             hexTarget.Write(fCaptured.CodeBlock);
-            asmTarget.WriteAsm(AsmCheck.Decoder.Decode(fCaptured).Require());
+            asmTarget.WriteAsm(AsmChecks.Decoder.Decode(fCaptured).Require());
 
-            var gCaptured = AsmCheck.Capture(g.Identify(), g).Require();
+            var gCaptured = AsmChecks.Capture(g.Identify(), g).Require();
             hexTarget.Write(gCaptured.CodeBlock);
-            asmTarget.WriteAsm(AsmCheck.Decoder.Decode(gCaptured).Require());
+            asmTarget.WriteAsm(AsmChecks.Decoder.Decode(gCaptured).Require());
         }
 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
@@ -143,7 +143,7 @@ namespace Z0.Asm
             else if(gMatch.Count > 1)
                 Claim.failed($"More than one match for {gId} found in {gHost.Uri}");
 
-            return AsmCheck.Match(OperatorClasses.binary(), w, dMatch[0], gMatch[0], dst);
+            return AsmChecks.Match(OperatorClasses.binary(), w, dMatch[0], gMatch[0], dst);
         }
 
         public TestCaseRecord[] vector_bitlogic_match(BufferTokens buffers)

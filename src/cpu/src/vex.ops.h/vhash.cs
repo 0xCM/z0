@@ -17,7 +17,7 @@ namespace Z0
             where T : unmanaged
         {
             var v = v64u(src);
-            return alg.hash.combine(vcell(v,0), vcell(v,1));
+            return alg.hash.combine(cpu.vcell(v,0), cpu.vcell(v,1));
         }
 
         /// <summary>

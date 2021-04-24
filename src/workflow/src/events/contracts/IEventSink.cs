@@ -5,20 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IAppMsgQueue : IAppMsgSink, ICallbackSource<IAppMsg>
+    public interface IEventSink : ISink<IWfEvent>, IDisposable
     {
-        IReadOnlyList<IAppMsg> Dequeue();
 
-        void Emit(FS.FilePath dst);
-
-        IReadOnlyList<IAppMsg> Flush(Exception e);
-
-        void Flush(Exception e, IAppMsgSink target)
-            => target.Deposit(Flush(e));
     }
 }

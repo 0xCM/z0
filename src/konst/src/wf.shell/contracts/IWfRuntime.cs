@@ -30,9 +30,9 @@ namespace Z0
 
         IWfContext Context {get;}
 
-        IWfEventSink EventSink {get;}
+        IEventSink EventSink {get;}
 
-        IWfEventBroker EventBroker {get;}
+        IEventBroker EventBroker {get;}
 
         ICmdRouter Router {get;}
 

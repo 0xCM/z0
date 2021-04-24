@@ -14,6 +14,14 @@ namespace Z0
 
     using api = ApiKeys;
 
+
+    /// <summary>
+    /// Defines a 128-bit bitfield that identifies an api operation along with its operands
+    /// </summary>
+    /// <remarks>
+    /// [ Operands              | ApiClass  | Host | Component ]
+    /// [ 7 | 6 | 5 | 4 | 3     | 2         | 1    | 0         ]
+    /// </remarks>
     [ApiComplete]
     public readonly struct ApiKey
     {
@@ -47,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiKeyJoin Join(byte i, byte j)
-            => api.join(this,i,j);
+            => api.join(this, i, j);
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N0 n)

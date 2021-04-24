@@ -132,10 +132,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static ApiParseResult capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
-            => ApiCaptureDiviner.divine(exchange.TargetBuffer, id, (byte*)Unsafe.AsPointer(ref src));
+            => ApiCaptureDiviner.divine(exchange.Buffer, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
         static ApiParseResult capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
-            => ApiCaptureDiviner.divine(exchange.TargetBuffer, id, src.ToPointer<byte>());
+            => ApiCaptureDiviner.divine(exchange.Buffer, id, src.ToPointer<byte>());
     }
 }

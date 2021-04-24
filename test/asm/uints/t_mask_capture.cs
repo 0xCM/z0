@@ -64,9 +64,9 @@ namespace Z0.Asm
 
             foreach(var src in NaturalClosures)
             {
-                var captured = AsmCheck.Capture(src.Identify(), src).Require();
+                var captured = AsmChecks.Capture(src.Identify(), src).Require();
                 hexout.Write(captured.CodeBlock);
-                asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
+                asmout.WriteAsm(AsmChecks.Decoder.Decode(captured).Require());
             }
         }
 
@@ -82,9 +82,9 @@ namespace Z0.Asm
 
             foreach(var src in methods)
             {
-                var captured = AsmCheck.Capture(src.Identify(), src).Require();
+                var captured = AsmChecks.Capture(src.Identify(), src).Require();
                 hexout.Write(captured.CodeBlock);
-                asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
+                asmout.WriteAsm(AsmChecks.Decoder.Decode(captured).Require());
             }
         }
 

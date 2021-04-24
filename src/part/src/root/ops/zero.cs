@@ -9,16 +9,11 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost]
-    public partial struct z
+    partial struct root
     {
-
-        const NumericKind Closure = UnsignedInts;
-    }
-
-    public static partial class XTend
-    {
-        const NumericKind Closure = UnsignedInts;
-
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static T zero<T>()
+            where T : unmanaged
+                => default(T);
     }
 }

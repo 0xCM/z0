@@ -101,7 +101,7 @@ namespace Z0
 
             void check()
             {
-                var zed = z.zero(t);
+                var zed = root.zero<T>();
                 var src = Random.SpanBlocks<T>(w, Interval.closed(zed, Numeric.maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
@@ -110,7 +110,7 @@ namespace Z0
                 var expect = 0u;
 
                 for(byte i=0; i<vlen; i++)
-                    expect += f.Invoke(vcell(x0,i),vcell(x1,i),vcell(x2,i));
+                    expect += f.Invoke(cpu.vcell(x0,i), cpu.vcell(x1,i), cpu.vcell(x2,i));
 
                 var result = f.Invoke(x0,x1,x2);
                 Claim.eq(expect,result);
@@ -135,7 +135,7 @@ namespace Z0
                 var expect = 0u;
 
                 for(byte i=0; i<vlen; i++)
-                    expect += f.Invoke(vcell(x0,i),vcell(x1,i), vcell(x2,i));
+                    expect += f.Invoke(cpu.vcell(x0,i), cpu.vcell(x1,i), cpu.vcell(x2,i));
 
                 var result = f.Invoke(x0,x1,x2);
                 Claim.eq(expect,result);

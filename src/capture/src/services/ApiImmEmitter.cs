@@ -13,18 +13,10 @@ namespace Z0.Asm
 
     public class ApiImmEmitter :  AppService<ApiImmEmitter>
     {
-        IAsmContext Asm;
-
         ImmSpecializer Specializer;
-
-        public ApiImmEmitter()
-        {
-
-        }
 
         protected override void OnInit()
         {
-            Asm = Wf.AsmContext();
             Specializer = Wf.ImmSpecializer();
         }
 

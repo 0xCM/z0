@@ -12,7 +12,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-
     partial struct root
     {
         /// <summary>
@@ -74,5 +73,23 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IEnumerable<T> stream<T>(IEnumerable<T> s1, IEnumerable<T> s2, IEnumerable<T> s3)
             => s1.Concat(s2).Concat(s3);
+
+        [MethodImpl(Inline), Op, Closures(UInt32k)]
+        public static IEnumerable<T> stream<T>(T min, T max)
+            where T : unmanaged
+        {
+            var _min = memory.bw64(min);
+            var _max = memory.bw64(max);
+            var current = _min;
+            var storage = z64;
+            var dst = default(T);
+
+            while(current < _max)
+            {
+                storage = current++;
+                dst = memory.@as<ulong,T>(storage);
+                yield return dst;
+            }
+        }
     }
 }

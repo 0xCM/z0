@@ -86,25 +86,25 @@ namespace Z0.Asm
                     if(ApiCode.accepts(code, NumericKind.U8))
                     {
                         writer.WriteLine($"{uri} is an 8-bit unary operator");
-                        var results = AsmCheck.EvalEquality<Cell8>(K.unary(), code, code);
+                        var results = AsmChecks.EvalEquality<Cell8>(K.unary(), code, code);
                         root.iter(results,result => log(result.A, result.B, result.Result, writer));
                     }
                     else if(ApiCode.accepts(code, NumericKind.U16))
                     {
                         writer.WriteLine($"{uri} is a 16-bit unary operator");
-                        var results = AsmCheck.EvalEquality<Cell16>(K.unary(), code, code);
+                        var results = AsmChecks.EvalEquality<Cell16>(K.unary(), code, code);
                         root.iter(results,result => log(result.A, result.B, result.Result, writer));
                     }
                     else if(ApiCode.accepts(code, NumericKind.U32))
                     {
                         writer.WriteLine($"{uri} is a 32-bit unary operator");
-                        var results = AsmCheck.EvalEquality<Cell32>(K.unary(), code, code);
+                        var results = AsmChecks.EvalEquality<Cell32>(K.unary(), code, code);
                         root.iter(results,result => log(result.A, result.B, result.Result, writer));
                     }
                     else if(ApiCode.accepts(code, NumericKind.U64))
                     {
                         writer.WriteLine($"{uri} is a 64-bit unary operator");
-                        var results = AsmCheck.EvalEquality<Cell64>(K.unary(), code, code);
+                        var results = AsmChecks.EvalEquality<Cell64>(K.unary(), code, code);
                         root.iter(results,result => log(result.A, result.B, result.Result, writer));
                     }
                     else
@@ -112,41 +112,6 @@ namespace Z0.Asm
                         writer.WriteLine($"{uri} form unrecognized");
                     }
                 }
-            }
-        }
-    }
-
-    unsafe struct FixedTest
-    {
-        fixed ulong Data[10];
-
-        TxN<sbyte,byte,short,ushort,int,uint> T;
-
-        [MethodImpl(Inline), Op]
-        public static FixedTest init(ref ulong src)
-        {
-            var lu = new FixedTest();
-            var pData = lu.Data;
-            *pData++ = skip(src,0);
-            *pData++ = skip(src,1);
-            *pData++ = skip(src,2);
-            *pData++ = skip(src,3);
-            *pData++ = skip(src,4);
-            *pData++ = skip(src,5);
-            *pData++ = skip(src,6);
-            *pData++ = skip(src,7);
-            *pData++ = skip(src,8);
-            *pData++ = skip(src,9);
-            return lu;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref ulong Lookup(in FixedTest src, byte index)
-        {
-            fixed(ulong* pData = src.Data)
-            {
-                ref var rData = ref Unsafe.AsRef<ulong>(pData);
-                return ref Unsafe.Add(ref rData, index);
             }
         }
     }

@@ -56,7 +56,7 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        protected readonly IAppMsgQueue Queue;
+        protected readonly IMessageQueue Queue;
 
         Queue<TestCaseRecord> TestResults {get;}
             = new Queue<TestCaseRecord>();
@@ -84,7 +84,7 @@ namespace Z0
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => Queue.Deposit(msg);
 
-        void IAppMsgSink.NotifyConsole(IAppMsg msg)
+        void IMessageSink.NotifyConsole(IAppMsg msg)
             => Queue.NotifyConsole(msg);
 
         public IEnumerable<TestCaseRecord> TakeOutcomes()
@@ -111,7 +111,7 @@ namespace Z0
         public IReadOnlyList<IAppMsg> Flush(Exception e)
             => Queue.Flush(e);
 
-        public void Flush(Exception e, IAppMsgSink target)
+        public void Flush(Exception e, IMessageSink target)
             => Queue.Flush(e, target);
 
         public void Emit(FS.FilePath dst)

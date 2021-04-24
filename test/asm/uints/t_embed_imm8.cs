@@ -93,8 +93,8 @@ namespace Z0.Asm
                 var method = Dynamic.CreateUnaryOp(w, src, imm).Require();
                 var vOutput = method.Invoke(vones);
                 var id = src.Identify().WithImm8(imm);
-                var capture = AsmCheck.Capture(id, method).Require();
-                AsmCheck.WriteAsm(capture,dst);
+                var capture = AsmChecks.Capture(id, method).Require();
+                AsmChecks.WriteAsm(capture,dst);
             }
         }
 
@@ -108,8 +108,8 @@ namespace Z0.Asm
             var method = ClrDynamic.method(ClrDynamic.handle(f.Target));
             Claim.ClaimEq(method.Name, name);
 
-            var capture = AsmCheck.Capture(id, f).Require();
-            AsmCheck.WriteAsm(capture,dst);
+            var capture = AsmChecks.Capture(id, f).Require();
+            AsmChecks.WriteAsm(capture,dst);
         }
 
         void check_vbsll_imm(W256 w, StreamWriter dst)
@@ -123,8 +123,8 @@ namespace Z0.Asm
             var method = ClrDynamic.method(ClrDynamic.handle(f.Target));
             Claim.ClaimEq(method.Name, name);
 
-            var capture = AsmCheck.Capture(id, f).Require();
-            AsmCheck.WriteAsm(capture,dst);
+            var capture = AsmChecks.Capture(id, f).Require();
+            AsmChecks.WriteAsm(capture,dst);
         }
 
         void check_unary_shift(MethodInfo src, W256 w, StreamWriter dst)
@@ -151,8 +151,8 @@ namespace Z0.Asm
                 var method = Dynamic.CreateUnaryOp(w, src, imm).Require();
                 var vOutput = method.Invoke(vones);
                 var id = src.Identify().WithImm8(imm);
-                var capture = AsmCheck.Capture(id, method).Require();
-                AsmCheck.WriteAsm(capture,dst);
+                var capture = AsmChecks.Capture(id, method).Require();
+                AsmChecks.WriteAsm(capture,dst);
             }
         }
 
@@ -163,16 +163,16 @@ namespace Z0.Asm
             var imm = (byte)Blend8x16.LRLRLRLR;
             var vKind = K.vk256<ushort>();
             var src = typeof(cpu).DeclaredMethods().WithName(name).OfKind(vKind).WithParameterType<byte>().Single();
-            var injector = AsmCheck.Dynamic.BinaryInjector<ushort>(w);
+            var injector = AsmChecks.Dynamic.BinaryInjector<ushort>(w);
             var x = Random.CpuVector<ushort>(w);
             var y = Random.CpuVector<ushort>(w);
             var f = injector.EmbedImmediate(src,imm);
             var v1 = f.Operation.Invoke(x,y);
-            var captured = AsmCheck.Capture(f.Id, f).Require();
-            var asm = AsmCheck.Decoder.Decode(captured).Require();
-            AsmCheck.WriteAsm(asm, dst);
+            var captured = AsmChecks.Capture(f.Id, f).Require();
+            var asm = AsmChecks.Decoder.Decode(captured).Require();
+            AsmChecks.WriteAsm(asm, dst);
 
-            var g = Dynamic.EmitFixedBinary<Cell256>(AsmCheck[Main], asm.Code);
+            var g = Dynamic.EmitFixedBinary<Cell256>(AsmChecks[Main], asm.Code);
             var v2 = g(x,y).ToVector<ushort>();
             Claim.veq(v1,v2);
         }

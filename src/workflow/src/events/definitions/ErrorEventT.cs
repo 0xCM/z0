@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Event(Kind)]
-    public readonly struct ErrorEvent<T> : IWfEvent<ErrorEvent<T>,T>, IWfErrorEvent
+    public readonly struct ErrorEvent<T> : IWfEvent<ErrorEvent<T>,T>, IErrorEvent
     {
         public const string EventName = GlobalEvents.Error;
 

@@ -62,7 +62,7 @@ namespace Z0.Mkl
             SampleCount = samples.Length / dim;
             Weights = weights;
             Indices = indices;
-            z.require(weights.Length == SampleCount);
+            root.require(weights.Length == SampleCount);
         }
 
         public abstract VslSSStatus Allocate();

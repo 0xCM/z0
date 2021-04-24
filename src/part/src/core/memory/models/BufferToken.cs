@@ -44,13 +44,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public BufferToken Load(in BinaryCode src)
         {
-            Buffers.load(src, this);
+            memory.load(src, this);
             return this;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator Span<byte>(BufferToken src)
-            => Buffers.cover(src);
+            => memory.edit(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BufferToken((IntPtr handle, uint size) src)

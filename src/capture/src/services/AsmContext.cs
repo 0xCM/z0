@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         public IWfRuntime Wf {get;}
 
-        public IAppMsgQueue MessageQueue {get;}
+        public IMessageQueue MessageQueue {get;}
 
         public event Action<IAppMsg> Next;
 

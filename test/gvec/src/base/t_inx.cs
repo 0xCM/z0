@@ -15,7 +15,7 @@ namespace Z0
     /// Base type for intrinsic tests
     /// </summary>
     /// <typeparam name="X">The concrete subtype</typeparam>
-    public abstract class t_inx<X> : UnitTest<X, CheckIntrinsics, TCheckIntrinsics>
+    public abstract class t_inx<X> : UnitTest<X, CheckIntrinsics, ICheckVectors>
         where X : t_inx<X>
     {
         protected t_inx()

@@ -9,8 +9,6 @@ namespace Z0
 
     public interface IAgentContext
     {
-        IWfRuntime Wf {get;}
-
         IEnumerable<IAgent> Members {get;}
 
         IAgentEventSink EventLog {get;}

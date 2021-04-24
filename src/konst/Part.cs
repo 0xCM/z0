@@ -18,6 +18,7 @@ namespace Z0
     [ApiHost]
     public static partial class XTend
     {
+        const NumericKind Closure = Part.UnsignedInts;
 
     }
 

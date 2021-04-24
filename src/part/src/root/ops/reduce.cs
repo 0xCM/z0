@@ -11,14 +11,14 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct root
     {
         /// <summary>
         /// Implements the canonical join operation that reduces the monadic depth by one level
         /// </summary>
         /// <param name="src">The optional option</param>
         /// <typeparam name="T">The encapsulated value</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static Option<T> reduce<T>(Option<Option<T>> src)
             => src.ValueOrDefault(root.none<T>());
 
@@ -27,8 +27,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The optional option</param>
         /// <typeparam name="T">The encapsulated value</typeparam>
-        [MethodImpl(Inline)]
-        public static IEnumerable<T> reduce<T>(params IEnumerable<T>[] src)
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static T[] reduce<T>(params IEnumerable<T>[] src)
             => src.SelectMany(x => x);
     }
 }

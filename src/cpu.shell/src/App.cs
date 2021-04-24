@@ -30,7 +30,7 @@ namespace Z0
         ulong Run(uint count, uint cycles)
         {
             var counter = 0ul;
-            var tasks = root.seq(0,count).Map(i => RunMachine(cycles));
+            var tasks = root.stream(0u,count).Map(i => RunMachine(cycles));
             Task.WaitAll(tasks);
             foreach(var t in tasks)
                 counter += t.Result;

@@ -5,15 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
+        /// <summary>
+        /// Deallocates a native allocation
+        /// </summary>
+        /// <param name="handle">The allocation handle</param>
         [MethodImpl(Inline), Op]
-        public static IndexedSeq<T> seq<T>(params T[] src)
-            => new IndexedSeq<T>(src);
+        public static void release(IntPtr handle)
+            => Marshal.FreeHGlobal(handle);
     }
 }

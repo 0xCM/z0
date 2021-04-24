@@ -8,31 +8,31 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    public interface IMsgExchange : IAppMsgQueue
+    public interface IMsgExchange : IMessageQueue
     {
-        void IAppMsgSink.Deposit(IEnumerable<IAppMsg> msg)
+        void IMessageSink.Deposit(IEnumerable<IAppMsg> msg)
         {}
 
-        void IAppMsgSink.Notify(string msg, LogLevel? kind)
+        void IMessageSink.Notify(string msg, LogLevel? kind)
         {}
 
-        void IAppMsgSink.NotifyConsole(IAppMsg msg)
+        void IMessageSink.NotifyConsole(IAppMsg msg)
         {
         }
 
         void ISink<IAppMsg>.Deposit(IAppMsg src)
         {}
 
-        IReadOnlyList<IAppMsg> IAppMsgQueue.Dequeue()
+        IReadOnlyList<IAppMsg> IMessageQueue.Dequeue()
             => sys.empty<IAppMsg>();
 
-        void IAppMsgQueue.Emit(FS.FilePath dst)
+        void IMessageQueue.Emit(FS.FilePath dst)
         {}
 
-        IReadOnlyList<IAppMsg> IAppMsgQueue.Flush(Exception e)
+        IReadOnlyList<IAppMsg> IMessageQueue.Flush(Exception e)
             => sys.empty<IAppMsg>();
 
-        void IAppMsgQueueFlush(Exception e, IAppMsgSink target)
+        void IAppMsgQueueFlush(Exception e, IMessageSink target)
         {}
     }
 }

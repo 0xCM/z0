@@ -17,15 +17,21 @@ namespace Z0.Asm
 
         readonly ICaptureCore Capture;
 
+        readonly IAsmRoutineFormatter Formatter;
+
         [MethodImpl(Inline)]
         public CaptureServices(IWfRuntime wf)
         {
             Wf = wf;
             Decoder = Wf.AsmDecoder();
             Capture = Wf.CaptureCore();
+            Formatter = new AsmFormatter();
         }
 
-        public IAsmDecoder RoutineDecoder()
+        public IAsmRoutineFormatter RoutineFormatter
+            => Formatter;
+
+        public IAsmDecoder RoutineDecoder
             => Decoder;
 
         public ICaptureCore CaptureCore

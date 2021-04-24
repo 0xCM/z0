@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a nexus of shared state and services for assembly-related services
     /// </summary>
-    public interface IAsmContext : IAppMsgQueue, IPolyrandProvider, IAppMsgContext
+    public interface IAsmContext : IMessageQueue, IPolyrandProvider
     {
         /// <summary>
         /// The root of this context
@@ -16,34 +16,25 @@ namespace Z0.Asm
 
         ICaptureServices CaptureServices {get;}
 
-        IApiRuntimeCatalog RuntimeCatalog
-            => ContextRoot.RuntimeCatalog;
-
         /// <summary>
         /// The capture service
         /// </summary>
         ICaptureCore CaptureCore
             => CaptureServices.CaptureCore;
 
-        IAppMsgQueue MessageQueue
+        IMessageQueue MessageQueue
             => ContextRoot.MessageQueue;
-
-        /// <summary>
-        /// The buffer length to use whenever a buffer length is unspecified
-        /// </summary>
-        uint DefaultBufferLength
-            => Pow2.T16;
 
         /// <summary>
         /// The context formatter
         /// </summary>
         IAsmRoutineFormatter Formatter
-            => AsmServices.formatter();
+            => new AsmRoutineFormatter();
 
         /// <summary>
         /// The context decoder
         /// </summary>
         IAsmDecoder RoutineDecoder
-            => CaptureServices.RoutineDecoder();
+            => CaptureServices.RoutineDecoder;
     }
 }

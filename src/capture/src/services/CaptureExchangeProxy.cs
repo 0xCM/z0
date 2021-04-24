@@ -21,5 +21,11 @@ namespace Z0.Asm
         {
             TargetBuffer = target;
         }
+
+        public CaptureExchange Context
+        {
+            [MethodImpl(Inline)]
+            get => new CaptureExchange(memory.edit(TargetBuffer));
+        }
     }
 }

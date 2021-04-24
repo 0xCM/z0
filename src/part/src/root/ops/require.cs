@@ -9,8 +9,19 @@ namespace Z0
 
     using static Root;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     partial struct root
     {
+        [Op]
+        public static void require(bool invariant, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        {
+            if(!invariant)
+                sys.@throw(AppErrors.InvariantFailure("The invariant, it failed", caller, file, line));
+        }
+
         /// <summary>
         /// Insists upon invariant satisfaction
         /// </summary>
@@ -77,5 +88,34 @@ namespace Z0
                 sys.@throw($"{msg}: {source.Format()}");
         }
 
+        [MethodImpl(Inline)]
+        public static ulong insist<N>(ulong src, N n = default)
+            where N : unmanaged, ITypeNat
+        {
+            const string Pattern = "The natural value {0} and the operand value {1} are different";
+
+            if(memory.nat64u<N>() == src)
+                return src;
+            else
+            {
+                sys.@throw(string.Format(Pattern, n, src));
+                return 0;
+            }
+        }
+
+        [MethodImpl(Inline)]
+        public static int require<N>(int src, N n = default)
+            where N : unmanaged, ITypeNat
+        {
+            const string Pattern = "The natural value {0} and the operand value {1} are different";
+
+            if(memory.nat32i<N>() == src)
+                return src;
+            else
+            {
+                sys.@throw(string.Format(Pattern, n, src));
+                return 0;
+            }
+        }
     }
 }

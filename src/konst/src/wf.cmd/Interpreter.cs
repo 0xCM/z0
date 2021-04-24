@@ -41,7 +41,7 @@ namespace Z0
 
         public Name Name {get;}
 
-        IWfEventSink TermLog;
+        IEventSink TermLog;
 
         Duration Frequency;
 

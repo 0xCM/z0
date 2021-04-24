@@ -9,25 +9,13 @@ namespace Z0
 
     using static Part;
 
-    /// <summary>
-    /// Identifies a parametric type
-    /// </summary>
-    public readonly struct TxN<T0> { }
+    public readonly struct OpN<T0> { }
 
-    /// <summary>
-    /// Identifies a pair of parametric types
-    /// </summary>
-    public readonly struct TxN<T0,T1> { }
+    public readonly struct OpN<T0,T1> { }
 
-    /// <summary>
-    /// Identifies a triple of parametric types
-    /// </summary>
-    public readonly struct TxN<T0,T1,T2> { }
+    public readonly struct OpN<T0,T1,T2> { }
 
-    /// <summary>
-    /// Identifies a quartet of parametric types
-    /// </summary>
-    public readonly struct TxN<T0,T1,T2,T3>
+    public readonly struct OpN<T0,T1,T2,T3>
     {
         readonly Type @null;
 
@@ -40,7 +28,7 @@ namespace Z0
         readonly Type t3;
 
         [MethodImpl(Inline)]
-        internal TxN(int i)
+        internal OpN(int i)
         {
             @null = typeof(void);
             t0 = typeof(T0);
@@ -65,10 +53,7 @@ namespace Z0
         }
     }
 
-    /// <summary>
-    /// Identifies a quintent of parametric types
-    /// </summary>
-    public readonly struct TxN<T0,T1,T2,T3,T4>
+    public readonly struct OpN<T0,T1,T2,T3,T4>
     {
         readonly Type @null;
 
@@ -84,7 +69,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        internal TxN(int i)
+        internal OpN(int i)
         {
             @null = typeof(void);
             t0 = typeof(T0);
@@ -115,7 +100,7 @@ namespace Z0
     /// <summary>
     /// Identifies a sextet of parametric types
     /// </summary>
-    public readonly struct TxN<T0,T1,T2,T3,T4,T5>
+    public readonly struct OpN<T0,T1,T2,T3,T4,T5>
     {
         readonly Type @null;
 
@@ -132,7 +117,7 @@ namespace Z0
         readonly Type t5;
 
         [MethodImpl(Inline)]
-        internal TxN(int i)
+        internal OpN(int i)
         {
             @null = typeof(void);
             t0 = typeof(T0);
@@ -166,7 +151,7 @@ namespace Z0
     /// <summary>
     /// Identifies a septet of parametric types
     /// </summary>
-    public readonly struct TxN<T0,T1,T2,T3,T4,T5,T6>
+    public readonly struct OpN<T0,T1,T2,T3,T4,T5,T6>
     {
         readonly Type @null;
 
@@ -185,7 +170,7 @@ namespace Z0
         readonly Type t6;
 
         [MethodImpl(Inline)]
-        internal TxN(int i)
+        internal OpN(int i)
         {
             @null = typeof(void);
             t0 = typeof(T0);
@@ -222,7 +207,7 @@ namespace Z0
     /// <summary>
     /// Identifies an octet of parametric types
     /// </summary>
-    public readonly struct TxN<T0,T1,T2,T3,T4,T5,T6,T7>
+    public readonly struct OpN<T0,T1,T2,T3,T4,T5,T6,T7>
     {
         readonly Type @null;
 
@@ -243,7 +228,7 @@ namespace Z0
         readonly Type t7;
 
         [MethodImpl(Inline)]
-        internal TxN(int i)
+        internal OpN(int i)
         {
             @null = typeof(void);
             t0 = typeof(T0);
@@ -280,7 +265,7 @@ namespace Z0
         }
     }
 
-    public readonly struct TxN<T0,T1,T2,T3,T4,T5,T6,T7,T8>
+    public readonly struct OpN<T0,T1,T2,T3,T4,T5,T6,T7,T8>
     {
         readonly Type @null;
 
@@ -303,7 +288,7 @@ namespace Z0
         readonly Type t8;
 
         [MethodImpl(Inline)]
-        internal TxN(int i)
+        internal OpN(int i)
         {
             @null = typeof(void);
             t0 = typeof(T0);
@@ -343,7 +328,7 @@ namespace Z0
         }
     }
 
-    public readonly struct TxN<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>
+    public readonly struct OpN<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>
     {
         readonly Type @null;
 
@@ -368,7 +353,7 @@ namespace Z0
         readonly Type t9;
 
         [MethodImpl(Inline)]
-        internal TxN(int i)
+        internal OpN(int i)
         {
             @null = typeof(void);
             t0 = typeof(T0);

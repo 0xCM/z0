@@ -92,21 +92,5 @@ namespace Z0
 
         public const NK Numeric8x16k = Int8x16k;
 
-        public const NK UInt8k = NK.U8;
-
-        public const NK UInt16k = NK.U16;
-
-        public const NK UInt32k = NK.U32;
-
-        public const NK UInt64k = NK.U64;
-
-        public const NK UInt8x64k = Int8x64k;
-
-        public const NK UInt8x16k = Int8x16k;
-
-        public const NK UInt8x16x32k = Int8x16x32k;
-
-        public const NK UInt16x32x64k = Int16x32x64k;
-
     }
 }

@@ -39,8 +39,8 @@ namespace Z0.Asm
                 {
                     var reified = definition.MakeGenericMethod(closure);
                     var id = reified.Identify();
-                    var captured = AsmCheck.Capture(id, reified);
-                    captured.OnSome(c => AsmCheck.WriteAsm(c, dst));
+                    var captured = AsmChecks.Capture(id, reified);
+                    captured.OnSome(c => AsmChecks.WriteAsm(c, dst));
                 }
             }
         }
@@ -49,10 +49,10 @@ namespace Z0.Asm
         {
             using var dst = CaseWriter(FS.Extensions.Asm);
             using var quick = Wf.CaptureQuick();
-            foreach(var m in typeof(z).DeclaredMethods().Public().Static().NonGeneric())
+            foreach(var m in typeof(cpu).DeclaredMethods().Public().Static().NonGeneric())
             {
                 var code = quick.Capture(m);
-                AsmCheck.WriteAsm(code,dst);
+                AsmChecks.WriteAsm(code,dst);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Z0.Asm
         {
             using var dst = CaseWriter(FS.Extensions.Asm);
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
-                AsmCheck.Capture(m.Identify(), m).OnSome(capture => AsmCheck.WriteAsm(capture, dst));
+                AsmChecks.Capture(m.Identify(), m).OnSome(capture => AsmChecks.WriteAsm(capture, dst));
         }
 
         void capture_dynamic_delegates()
@@ -74,8 +74,8 @@ namespace Z0.Asm
             var m1 = new IdentifiedMethod(ApiIdentity.identify(xor.Method), xor.Method);
             var m2 = new IdentifiedMethod(ApiIdentity.identify(gteq.Method), gteq.Method);
 
-            AsmCheck.WriteAsm(quick.Capture(m1), dst);
-            AsmCheck.WriteAsm(quick.Capture(m2), dst);
+            AsmChecks.WriteAsm(quick.Capture(m1), dst);
+            AsmChecks.WriteAsm(quick.Capture(m2), dst);
         }
 
         void capture_dynamic_delegate_batch()
@@ -88,7 +88,7 @@ namespace Z0.Asm
                 );
 
             foreach(var method in methods)
-                AsmCheck.WriteAsm(quick.Capture(method), dst);
+                AsmChecks.WriteAsm(quick.Capture(method), dst);
 
             // var identified = memory.alloc<IdentifiedMethod>(methods.Length);
             // for(var i=0; i<identified.Length; i++)
@@ -103,24 +103,24 @@ namespace Z0.Asm
             using var dst = CaseWriter(FS.Extensions.Asm);
 
             var case1In = CaptureCases.And256;
-            var case1Out = AsmCheck.Capture(case1In.Identify(), case1In).Require();
-            AsmCheck.WriteAsm(case1Out, dst);
+            var case1Out = AsmChecks.Capture(case1In.Identify(), case1In).Require();
+            AsmChecks.WriteAsm(case1Out, dst);
 
             var case2In = CaptureCases.And256;
-            var case2Out = AsmCheck.Capture(case2In.Identify(), case1In).Require();
-            AsmCheck.WriteAsm(case2Out, dst);
+            var case2Out = AsmChecks.Capture(case2In.Identify(), case1In).Require();
+            AsmChecks.WriteAsm(case2Out, dst);
 
             var case3In = CaptureCases.shuffler(4);
-            var case3Out = AsmCheck.Capture(case3In.Identify(), case3In).Require();
-            AsmCheck.WriteAsm(case3Out, dst);
+            var case3Out = AsmChecks.Capture(case3In.Identify(), case3In).Require();
+            AsmChecks.WriteAsm(case3Out, dst);
 
             var case4In = CaptureCases.shifter(7);
-            var case4Out = AsmCheck.Capture(case4In.Identify(), case4In).Require();
-            AsmCheck.WriteAsm(case4Out, dst);
+            var case4Out = AsmChecks.Capture(case4In.Identify(), case4In).Require();
+            AsmChecks.WriteAsm(case4Out, dst);
 
             var case5In = CaptureCases.vand;
             root.iter(case5In,
-                src => AsmCheck.WriteAsm(AsmCheck.Capture(src.Identify(), src).Require(), dst));
+                src => AsmChecks.WriteAsm(AsmChecks.Capture(src.Identify(), src).Require(), dst));
         }
 
         public void read_library()
@@ -129,7 +129,7 @@ namespace Z0.Asm
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
             for(var i=0; i<src.Length; i++)
             {
-                var capture = AsmCheck.Capture(src[i].Identify(), src[i]);
+                var capture = AsmChecks.Capture(src[i].Identify(), src[i]);
             }
         }
     }

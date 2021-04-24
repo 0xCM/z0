@@ -9,7 +9,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IWfEventLog : IWfEventSink, ISink<IAppEvent>, ISink<IAppMsg>, ISink<IWfEvent>, IDisposable
+    public interface IWfEventLog : IEventSink, ISink<IAppEvent>, ISink<IAppMsg>, ISink<IWfEvent>, IDisposable
     {
 
     }

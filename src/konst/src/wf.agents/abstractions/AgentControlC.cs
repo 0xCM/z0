@@ -11,14 +11,20 @@ namespace Z0
         where S : IAgentControl
         where C : IAgentContext
     {
-        protected AgentControl(IWfContext context)
+        protected AgentControl()
+        {
+
+        }
+
+
+        protected AgentControl(IAgentContext context)
         {
             Context = context;
         }
 
-        public AgentStats SummaryStats {get; protected set;}
+        protected IAgentContext Context;
 
-        public IWfContext Context {get;}
+        public AgentStats SummaryStats {get; protected set;}
 
         public event Action<C> Configured;
 

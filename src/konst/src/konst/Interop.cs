@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Runtime.InteropServices;
-
     using CC = System.Runtime.InteropServices.CallingConvention;
 
     partial struct Konst
@@ -36,6 +34,5 @@ namespace Z0
         /// </summary>
         public const CC ThisCall = CC.ThisCall;
 
-        public const LayoutKind DefaultLayout = LayoutKind.Sequential;
     }
 }

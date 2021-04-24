@@ -19,7 +19,7 @@ namespace Z0
         public readonly BufferTokens Tokens {get;}
 
         public DynamicEvalBuffer(uint length, byte count)
-            => Tokens = Buffers.alloc(length, count, out BufferAlloc).Tokenize();
+            => Tokens = memory.alloc(length, count, out BufferAlloc).Tokenize();
 
         public void Dispose()
             => BufferAlloc.Dispose();

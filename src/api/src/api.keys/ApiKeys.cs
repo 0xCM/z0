@@ -51,6 +51,12 @@ namespace Z0
             return new ApiKeyJoin(left,right);
         }
 
+        // public static ApiKey opcount(ApiKey src, byte count)
+        // {
+        //     var dst = cpu.vcell(src.V8u, 15, count);
+
+        // }
+
         [MethodImpl(Inline), Op]
         public static ApiKeyJoin join(ApiKey src, byte i, byte j)
         {

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    class AppMsgQueue : IAppMsgQueue, IAppMsgContext
+    class MessageQueue : IMessageQueue
     {
         object lockobj = new object();
 
@@ -20,11 +20,11 @@ namespace Z0
         List<IAppMsg> Messages {get;}
 
         [MethodImpl(Inline)]
-        public static AppMsgQueue Create()
-            => new AppMsgQueue();
+        public static MessageQueue Create()
+            => new MessageQueue();
 
         [MethodImpl(Inline)]
-        AppMsgQueue()
+        MessageQueue()
         {
             Messages = new List<IAppMsg>();
             Next = x => {};

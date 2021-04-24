@@ -46,7 +46,7 @@ namespace Z0
             => string.Concat(src.Format(), Eol);
 
         [MethodImpl(Inline)]
-        static string summary(IWfErrorEvent src)
+        static string summary(IErrorEvent src)
             => string.Concat(src.Format(), Eol);
 
         public void Deposit(IAppMsg e)
@@ -101,7 +101,7 @@ namespace Z0
 
             try
             {
-                if(e is IWfErrorEvent error)
+                if(e is IErrorEvent error)
                 {
                     Error.AppendLine(e.Format());
                     FS.write(summary(error), Status);

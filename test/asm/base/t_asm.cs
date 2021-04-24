@@ -15,14 +15,11 @@ namespace Z0.Asm
         protected IApiPartPaths TargetArchive
             => ApiArchives.capture(UnitDataDir);
 
-        protected new IAsmContext Context;
-
-        protected ICaptureChecker AsmCheck;
+        protected ICaptureChecks AsmChecks;
 
         protected override void OnShellInjected()
         {
-            Context = AsmServices.context(Wf);
-            AsmCheck = Z0.AsmChecks.tester(Context);
+            AsmChecks = CaptureChecks.create(Wf);
             UnitDataDir.Clear();
         }
 
@@ -57,7 +54,7 @@ namespace Z0.Asm
 
         protected IceInstructionList[] DecodeHostBits(ApiHostUri[] hosts)
         {
-            var decoder = AsmCheck.Decoder;
+            var decoder = AsmChecks.Decoder;
 
             var totalCount = 0ul;
             var hostCount = 0ul;

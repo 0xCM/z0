@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public ref struct XedSummaryParser
     {
-        public static XedSummaryParser create(IWfEventSink sink)
+        public static XedSummaryParser create(IEventSink sink)
             => new XedSummaryParser(sink, alloc<TextLine>(16), 8200);
 
         readonly Span<TextLine> LineBuffer;
@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         readonly EventSignal Wf;
 
-        XedSummaryParser(IWfEventSink sink, Span<TextLine> buffer, ushort count)
+        XedSummaryParser(IEventSink sink, Span<TextLine> buffer, ushort count)
         {
             LineBuffer = buffer;
             DetailTarget = alloc<FormDetail>(count);

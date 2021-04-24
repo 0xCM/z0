@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     public interface ICaptureExchange
     {
         /// <summary>
@@ -16,10 +11,6 @@ namespace Z0.Asm
         /// </summary>
         BufferToken TargetBuffer {get;}
 
-        CaptureExchange Context
-        {
-            [MethodImpl(Inline)]
-            get => new CaptureExchange(Buffers.cover(TargetBuffer));
-        }
+        CaptureExchange Context {get;}
     }
 }

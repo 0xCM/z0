@@ -10,20 +10,20 @@ namespace Z0
 
     using static Part;
 
-    public class WfBroker : IWfEventBroker
+    public class WfBroker : IEventBroker
     {
         readonly Dictionary<Type,ISink> Subscriptions;
 
         readonly Dictionary<ulong, Receiver<IAppEvent>> Receivers;
 
-        public IWfEventSink Sink {get;}
+        public IEventSink Sink {get;}
 
         object locker;
 
         public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
-        public WfBroker(IWfEventSink sink, CorrelationToken ct)
+        public WfBroker(IEventSink sink, CorrelationToken ct)
         {
             Ct = ct;
             Sink = sink;

@@ -10,22 +10,25 @@ namespace Z0
 
     public class AgentControl : AgentControl<IAgentControl,IAgentContext>, IAgentControl
     {
-        IAgentContext AgentContext;
-
-        public AgentControl(IWfContext Context)
-            : base(Context)
+        public AgentControl(IAgentContext context)
+            : base(context)
         {
 
         }
 
-        void UpdateAgentContext(IAgentContext context)
+        public AgentControl()
         {
-            this.AgentContext = context;
+
+        }
+
+        void UpdateContext(IAgentContext context)
+        {
+            Context = context;
             SummaryStats = new AgentStats(context.Members.Count());
         }
 
         protected override async Task Configure(IAgentContext context)
-            => await Task.Factory.StartNew(() => UpdateAgentContext(context));
+            => await Task.Factory.StartNew(() => UpdateContext(context));
 
         Task IAgentControl.Configure(IAgentContext context)
             => Configure(context);

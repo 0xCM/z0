@@ -10,7 +10,7 @@ namespace Z0
     [ApiHost]
     public readonly struct Agents
     {
-        public static IAgentControl control(IWfContext context)
+        public static IAgentControl control(IAgentContext context)
             => new AgentControl(context);
 
         /// <summary>
@@ -57,6 +57,5 @@ namespace Z0
             AgentComplex.Complex = complex;
             return complex;
         }
-
     }
 }

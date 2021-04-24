@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IWfEventBroker : IDisposable, IMultiSink
+    public interface IEventBroker : IDisposable, IMultiSink
     {
         Outcome Subscribe<E>(Action<E> receiver, E model = default)
             where E : IAppEvent;
@@ -15,6 +15,6 @@ namespace Z0
 
         void Raise(IAppEvent e);
 
-        IWfEventSink Sink {get;}
+        IEventSink Sink {get;}
     }
 }

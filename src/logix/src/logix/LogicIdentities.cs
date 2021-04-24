@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct LogicIdentities
     {
         public static IEnumerable<ComparisonExpr> All
-            => root.seq(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
+            => root.stream(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
 
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))

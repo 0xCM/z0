@@ -29,7 +29,7 @@ namespace Z0
             => new WfEventLog(config);
 
         [MethodImpl(Inline), Op]
-        public static IWfEventSink term(string src)
+        public static IEventSink term(string src)
             => new TermLog(src);
 
         [MethodImpl(Inline), Op]

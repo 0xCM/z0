@@ -6,7 +6,17 @@ namespace Z0
 {
     using System;
 
-    public interface ITestContext : IAppMsgContext, IDisposable, IPolyrandProvider, ITestService, ITestQueue, IClocked, ICheckAction, ICheckSettings, ITestCaseIdentity, IClaimValidator
+    public interface ITestContext :
+        IMessageSink,
+        IDisposable,
+        IPolyrandProvider,
+        ITestService,
+        ITestQueue,
+        IClocked,
+        ICheckAction,
+        ICheckSettings,
+        ITestCaseIdentity,
+        IClaimValidator
     {
         bool DiagnosticMode {get;}
 

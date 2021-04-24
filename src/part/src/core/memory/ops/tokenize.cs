@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Buffers
+    partial struct memory
     {
         /// <summary>
         /// Creates an array of tokens that identify a sequence of buffers

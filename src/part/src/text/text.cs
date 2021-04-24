@@ -17,6 +17,16 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
+        /// <summary>
+        /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
+        /// </summary>
+        public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;
+
+        /// <summary>
+        /// An abbreviation for the somewhat verbose "StringComparison.InvariantCulture"
+        /// </summary>
+        public const StringComparison Cased = StringComparison.InvariantCulture;
+
         const string Assignment = ":=";
 
         [MethodImpl(Inline)]

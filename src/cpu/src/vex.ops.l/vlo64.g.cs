@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong vlo64<T>(Vector128<T> src)
             where T : unmanaged
-                => vcell(v64u(src),0);
+                => cpu.vcell(v64u(src),0);
 
         /// <summary>
         /// Extracts the lower 256-bit vector from the source

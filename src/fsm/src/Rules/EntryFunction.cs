@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static z;
-
     /// <summary>
     /// Defines a set of rules that define actions associated with state entry
     /// </summary>

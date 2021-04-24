@@ -4,7 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IAppMsgContext : IAppMsgSink
-    {        
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IErrorEvent : IWfEvent
+    {
+        bool IAppEvent.IsError
+            => true;
     }
 }

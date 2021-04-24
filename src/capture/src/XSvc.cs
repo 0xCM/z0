@@ -53,9 +53,5 @@ namespace Z0
         [Op]
         public static ImmSpecializer ImmSpecializer(this IWfRuntime wf)
             => Z0.Asm.ImmSpecializer.create(wf);
-
-        [Op]
-        public static IAsmContext AsmContext(this IWfRuntime wf)
-            => Services.AsmServices.context(wf);
     }
 }

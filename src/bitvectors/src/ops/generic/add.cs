@@ -34,7 +34,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var sum = cpu.vadd(gcpu.v64u(x.Data), gcpu.v64u(y.Data));
-            bit carry = x.Lo > gcpu.vcell(sum,0);
+            bit carry = x.Lo > cpu.vcell(sum,0);
             return  memory.generic<T>(cpu.vadd(sum, cpu.vbroadcast(w128, (ulong)carry)));
         }
     }
