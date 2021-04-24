@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         [MethodImpl(Inline), Op]
-        public static ApiClass KindId(this MethodInfo src)
+        public static ApiClassKind KindId(this MethodInfo src)
         {
             if(src.Tag<OpKindAttribute>(out var dst))
                 return dst.ClassId;

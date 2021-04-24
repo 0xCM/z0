@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Id = ApiClass;
+    using Id = ApiClassKind;
 
     /// <summary>
     /// Identifies comparison (predicate) kinds

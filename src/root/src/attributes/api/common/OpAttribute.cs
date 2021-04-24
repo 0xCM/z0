@@ -11,7 +11,7 @@ public class OpAttribute : ApiPartAttribute
 {
     public string GroupName {get;}
 
-    public ApiClass ClassId {get;}
+    public ApiClassKind ClassId {get;}
 
     public ulong ClassData {get;}
 
@@ -20,13 +20,13 @@ public class OpAttribute : ApiPartAttribute
         GroupName = "";
     }
 
-    public OpAttribute(ApiClass id, ulong data)
+    public OpAttribute(ApiClassKind id, ulong data)
     {
         ClassId = id;
         ClassData = data;
     }
 
-    public OpAttribute(ApiClass id)
+    public OpAttribute(ApiClassKind id)
         : base((ulong)id)
     {
         ClassId = id;

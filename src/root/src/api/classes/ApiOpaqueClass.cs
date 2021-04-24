@@ -9,7 +9,7 @@ namespace Z0
     {
         None = 0,
 
-        Root = ApiClass.Opaque,
+        Root = ApiClassKind.Opaque,
 
         First = Root + 1,
 

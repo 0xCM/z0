@@ -1,0 +1,99 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Threading;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static Part;
+    using static memory;
+
+    [ApiHost]
+    public readonly struct ApiKeys
+    {
+        [MethodImpl(Inline), Op]
+        public static ApiKey key(ReadOnlySpan<byte> src)
+            => new ApiKey(src);
+
+        [MethodImpl(Inline), Op]
+        public static ApiKeyPart part(ReadOnlySpan<byte> src)
+            => first(span16u(src));
+
+        [MethodImpl(Inline), Op]
+        public static ApiKeyJoin join(ReadOnlySpan<byte> src)
+            => first(span32u(src));
+
+        [MethodImpl(Inline), Op]
+        public static ApiKeyPart part(ushort src)
+            => new ApiKeyPart(src);
+
+        [MethodImpl(Inline), Op]
+        public static ApiKeyJoin join(uint src)
+        {
+            var left = (ushort)(src & ushort.MaxValue);
+            var right = (ushort)(src >> 16);
+            return new ApiKeyJoin(left,right);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ApiKey key(ReadOnlySpan<ApiKeyPart> src)
+            => new ApiKey(src);
+
+        [MethodImpl(Inline), Op]
+        public static ApiKeyJoin join(ApiKey src, byte i, byte j)
+        {
+            var m = mask(ApiKey.W, i, j);
+            var a = cpu.vshuf16x8(src.Storage, m);
+            var b = cpu.v32u(a);
+            var d = cpu.vextract(b,0);
+            return join(d);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> data(ApiKey src)
+        {
+            var dst = Cells.alloc(ApiKey.W);
+            gcpu.vstore(src.Storage, ref dst);
+            return dst.Bytes;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> data(ApiKeyJoin src)
+            => bytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> data(ApiKeyPart src)
+            => bytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> render(ApiKeyPart src)
+        {
+            ushort data = src;
+            return Hex.chars(LowerCase, data);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void render(ApiKeyPart src, Span<char> dst)
+        {
+            ushort data = src;
+            Hex.chars(LowerCase, data, dst, 0);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ApiClassKind @class(ApiKey src)
+            => (ApiClassKind)(ushort)src.Part(n2);
+
+        [MethodImpl(Inline), Op]
+        internal static Vector128<byte> mask(W128 w, byte i, byte j)
+        {
+            var storage = recover<ushort>(Cells.alloc(w).Bytes);
+            seek(storage, i) = ushort.MaxValue;
+            seek(storage, j) = ushort.MaxValue;
+            return cpu.vload(w, recover<byte>(storage));
+        }
+    }
+}

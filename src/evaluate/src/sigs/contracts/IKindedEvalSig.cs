@@ -14,7 +14,7 @@ namespace Z0
     {
         public interface IKindedEvalSig : IEvalSig
         {
-            ApiClass Class {get;}
+            ApiClassKind Class {get;}
 
             EvalSig CoreSig {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
             K Kind
                 => default;
 
-            ApiClass IKindedEvalSig.Class
+            ApiClassKind IKindedEvalSig.Class
                 => Kind.ClassId;
         }
 

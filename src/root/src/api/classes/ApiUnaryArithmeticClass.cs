@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using Id = ApiClass;
+    using Id = ApiClassKind;
 
     /// <summary>
     /// Classifies unary arithmetic operators

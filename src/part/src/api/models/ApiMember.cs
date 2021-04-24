@@ -21,7 +21,7 @@ namespace Z0
 
         public MethodInfo Method {get;}
 
-        public ApiClass ApiClass {get;}
+        public ApiClassKind ApiClass {get;}
 
         public MemoryAddress BaseAddress {get;}
 
@@ -33,7 +33,7 @@ namespace Z0
 
         public ClrMethodArtifact Metadata {get;}
 
-        public ApiMember(OpUri uri, MethodInfo method, ApiClass kindId, MemoryAddress address)
+        public ApiMember(OpUri uri, MethodInfo method, ApiClassKind kindId, MemoryAddress address)
         {
             Id = uri.OpId;
             OpUri = uri;

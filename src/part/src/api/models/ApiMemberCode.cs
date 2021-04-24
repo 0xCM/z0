@@ -107,7 +107,7 @@ namespace Z0
             get => Encoded.BaseAddress;
         }
 
-        public ApiClass KindId
+        public ApiClassKind KindId
              => Member.ApiClass;
 
         public OpIdentity Id

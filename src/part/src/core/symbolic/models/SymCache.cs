@@ -52,7 +52,6 @@ namespace Z0
         public static implicit operator SymSource<K>(SymCache<K> src)
             => new SymSource<K>(src.Index);
 
-        [FixedAddressValueType]
         static Symbols<K> Storage;
     }
 }

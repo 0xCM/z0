@@ -24,7 +24,7 @@ namespace Z0
             => kind.ToString().ToLower();
 
         [Op]
-        public static string Format(this ApiClass? id)
+        public static string Format(this ApiClassKind? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [Op]

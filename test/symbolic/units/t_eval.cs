@@ -66,13 +66,13 @@ namespace Z0
 
     public interface IKindedEvaluator : IEvaluator
     {
-        ApiClass Class {get;}
+        ApiClassKind Class {get;}
     }
 
     public interface IKindedEvaluator<K> : IKindedEvaluator
         where K : unmanaged, IApiKind
     {
-        ApiClass IKindedEvaluator.Class
+        ApiClassKind IKindedEvaluator.Class
             => (default(K) as IApiKind).ClassId;
     }
 

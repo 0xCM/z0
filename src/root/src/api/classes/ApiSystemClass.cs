@@ -12,11 +12,11 @@ namespace Z0
         /// <summary>
         /// Identifies operations that initialize a resource where allocation may be required...or not
         /// </summary>
-        Init = ApiClass.Init,
+        Init = ApiClassKind.Init,
 
         /// <summary>
         /// Identifies operations assign kind classifiers
         /// </summary>
-        Kind = ApiClass.Kind
+        Kind = ApiClassKind.Kind
     }
 }

@@ -14,12 +14,12 @@ namespace Z0
     {
         public readonly struct KindedEvalSig : IKindedEvalSig, IEquatable<KindedEvalSig>
         {
-            public ApiClass Class {get;}
+            public ApiClassKind Class {get;}
 
             public EvalSig CoreSig {get;}
 
             [MethodImpl(Inline)]
-            public KindedEvalSig(ApiClass @class, EvalSig core)
+            public KindedEvalSig(ApiClassKind @class, EvalSig core)
             {
                 Class = @class;
                 CoreSig = core;

@@ -42,7 +42,7 @@ namespace Z0
             var w = w128;
 
             var resolver = VImm8UnaryResolvers.create<uint>(host, w);
-            var vbsll = resolver.inject(imm8, ApiClass.Bsll).Operation;
+            var vbsll = resolver.inject(imm8, ApiClassKind.Bsll).Operation;
 
             for(var i=0; i<RepCount; i++)
             {

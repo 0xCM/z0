@@ -37,11 +37,11 @@ namespace Z0
             => new EvalSig(components);
 
         [MethodImpl(Inline)]
-        public static KindedEvalSig sig(ApiClass @class, EvalSig core)
+        public static KindedEvalSig sig(ApiClassKind @class, EvalSig core)
             => new KindedEvalSig(@class, core);
 
         [MethodImpl(Inline)]
-        public static KindedEvalSig sig(ApiClass @class, Type[] components)
+        public static KindedEvalSig sig(ApiClassKind @class, Type[] components)
             => new KindedEvalSig(@class, sig(components));
 
         [MethodImpl(Inline)]

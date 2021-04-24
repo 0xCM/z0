@@ -274,7 +274,7 @@ namespace Z0.Asm
         void FilterApiBlocks()
         {
             var blocks = Wf.ApiCatalogs().Correlate();
-            var f1 = blocks.Filter(ApiClass.And);
+            var f1 = blocks.Filter(ApiClassKind.And);
             root.iter(f1,f => Wf.Row(f.Uri));
         }
 
@@ -996,7 +996,7 @@ namespace Z0.Asm
 
         void CheckMullo(IDomainSource Source)
         {
-            var @class = ApiClass.MulLo;
+            var @class = ApiClassKind.MulLo;
             var count = 12;
             var left = Source.Array<uint>(count,100,200);
             var right = Source.Array<uint>(count,100,200);

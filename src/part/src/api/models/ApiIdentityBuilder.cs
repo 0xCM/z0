@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct ApiIdentityBuilder
     {
         [MethodImpl(Inline), Op]
-        public static ApiClass klass(MethodInfo src)
+        public static ApiClassKind klass(MethodInfo src)
         {
             if(src.Tag<OpKindAttribute>(out var dst))
                 return dst.ClassId;
@@ -107,7 +107,7 @@ namespace Z0
             => build(opname, TypeWidth.None, k, generic);
 
         [Op]
-        public static OpIdentity build(ApiClass k, NumericKind nk, bool generic)
+        public static OpIdentity build(ApiClassKind k, NumericKind nk, bool generic)
             => build(k.Format(), nk, generic);
 
         /// <summary>

@@ -7,7 +7,7 @@ using K = Z0.Pow2;
 /// <summary>
 /// Defines operand kind identity classifiers
 /// </summary>
-public enum ApiClass : ushort
+public enum ApiClassKind : ushort
 {
     /// <summary>
     /// The empty identity

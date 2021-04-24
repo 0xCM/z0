@@ -11,18 +11,18 @@ namespace Z0
 
     public readonly struct ApiCalls
     {
-        public static ApiCall<A,B,C> result<A,B,C>(ApiClass @class, A a, B b, C c)
+        public static ApiCall<A,B,C> result<A,B,C>(ApiClassKind @class, A a, B b, C c)
             => new ApiCall<A,B,C>(@class, a, b, c, string.Format("{0}({1},{2}) = {3}", @class.Format(), a, b, c));
     }
 
     public readonly struct ApiCall : ITextual
     {
-        public ApiClass Class {get;}
+        public ApiClassKind Class {get;}
 
         public TextBlock Expression {get;}
 
         [MethodImpl(Inline)]
-        public ApiCall(ApiClass @class, TextBlock expression)
+        public ApiCall(ApiClassKind @class, TextBlock expression)
         {
             Class = @class;
             Expression = expression;
@@ -38,7 +38,7 @@ namespace Z0
 
     public readonly struct ApiCall<A,B,C> : ITextual
     {
-        public ApiClass Class {get;}
+        public ApiClassKind Class {get;}
 
         public TextBlock Expression {get;}
 
@@ -49,7 +49,7 @@ namespace Z0
         public C Result {get;}
 
         [MethodImpl(Inline)]
-        public ApiCall(ApiClass @class, A a, B b, C c, TextBlock expression)
+        public ApiCall(ApiClassKind @class, A a, B b, C c, TextBlock expression)
         {
             Class = @class;
             Arg0 = a;

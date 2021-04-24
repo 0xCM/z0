@@ -37,7 +37,7 @@ namespace Z0
             => src.Kind;
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiClass(ApiClass<K> src)
-            => Root.@as<K,ApiClass>(src.Kind);
+        public static implicit operator ApiClassKind(ApiClass<K> src)
+            => Root.@as<K,ApiClassKind>(src.Kind);
     }
 }

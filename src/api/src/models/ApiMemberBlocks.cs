@@ -56,7 +56,7 @@ namespace Z0
             get => ref Data[index];
         }
 
-        public ApiMemberBlocks Filter(ApiClass @class)
+        public ApiMemberBlocks Filter(ApiClassKind @class)
             => Data.Where(b => b.Member.ApiClass == @class);
 
         [MethodImpl(Inline)]

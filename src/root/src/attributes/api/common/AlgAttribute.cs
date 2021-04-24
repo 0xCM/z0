@@ -9,7 +9,7 @@ namespace Z0
     public class AsmAlgAttribute : OpAttribute
     {
         public AsmAlgAttribute(object data)
-            : base(ApiClass.Asm, (ushort)data)
+            : base(ApiClassKind.Asm, (ushort)data)
         {
 
         }
@@ -18,7 +18,7 @@ namespace Z0
     public class AsmOpAttribute : OpAttribute
     {
         public AsmOpAttribute(object data)
-            : base(ApiClass.Asm, (ushort)data)
+            : base(ApiClassKind.Asm, (ushort)data)
         {
 
         }

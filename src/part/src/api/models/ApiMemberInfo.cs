@@ -15,7 +15,7 @@ namespace Z0
 
         public Name Member;
 
-        public ApiClass ApiKind;
+        public ApiClassKind ApiKind;
 
         public TextBlock Uri;
     }

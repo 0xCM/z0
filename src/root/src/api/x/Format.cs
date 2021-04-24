@@ -12,15 +12,15 @@ namespace Z0
     partial class XApi
     {
         [MethodImpl(Inline), Op]
-        public static bool IsDefined(this ApiClass src)
+        public static bool IsDefined(this ApiClassKind src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
-        public static bool IsUserApi(this ApiClass src)
+        public static bool IsUserApi(this ApiClassKind src)
             => src.IsDefined() && !src.IsOpaque();
 
         [MethodImpl(Inline), Op]
-        public static string Format(this ApiClass src)
+        public static string Format(this ApiClassKind src)
             => src.IsOpaque() ? "opaque" : src.ToString().ToLower();
 
         public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)

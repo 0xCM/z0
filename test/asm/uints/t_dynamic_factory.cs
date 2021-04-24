@@ -86,7 +86,7 @@ namespace Z0.Asm
             const byte imm8 = 9;
 
             var resolver = VImm8UnaryResolvers.create<uint>(typeof(gcpu), w128);
-            var vbsll = resolver.inject(imm8, ApiClass.Bsll).Operation;
+            var vbsll = resolver.inject(imm8, ApiClassKind.Bsll).Operation;
 
             for(var i=0; i<RepCount; i++)
             {

@@ -8,7 +8,7 @@ namespace Z0
 
     public interface IApiClass : ITextual
     {
-        ApiClass ClassId {get;}
+        ApiClassKind ClassId {get;}
 
         string ITextual.Format()
             => ClassId.ToString().ToLower();
@@ -19,8 +19,8 @@ namespace Z0
     {
         K Kind {get;}
 
-        ApiClass IApiClass.ClassId
-            => Root.@as<K,ApiClass>(Kind);
+        ApiClassKind IApiClass.ClassId
+            => Root.@as<K,ApiClassKind>(Kind);
     }
 
     public interface IApiClass<F,K> : IApiClass<K>, IEquatable<F>

@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct HexFormat
     {
-
         [Op]
         public static string bytes(ushort src)
             => HexFormat.format(memory.bytes(src), HexFormatSpecs.HexData);

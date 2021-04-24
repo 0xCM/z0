@@ -12,26 +12,26 @@ namespace Z0
         /// <summary>
         /// Identifies operations that allocate memory/resources
         /// </summary>
-        Alloc = ApiClass.Alloc,
+        Alloc = ApiClassKind.Alloc,
 
         /// <summary>
         /// Identifies operations that move data from B -> A
         /// </summary>
-        Load = ApiClass.Load,
+        Load = ApiClassKind.Load,
 
         /// <summary>
         /// Identifies operations that move data from A -> B
         /// </summary>
-        Store = ApiClass.Store,
+        Store = ApiClassKind.Store,
 
         /// <summary>
         /// Identifies an operation that accepts a memory buffer, such as a memory segmented covered by an S-span,
         /// and returns the buffer unaltered but with an alternate presentation, such as a T-span
         /// </summary>
-        Recover = ApiClass.Recover,
+        Recover = ApiClassKind.Recover,
 
-        MemAdd = ApiClass.MemAdd,
+        MemAdd = ApiClassKind.MemAdd,
 
-        MemSub = ApiClass.MemSub,
+        MemSub = ApiClassKind.MemSub,
     }
 }
