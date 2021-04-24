@@ -70,11 +70,10 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> vstore<T>(Vector128<T> src, Span<T> dst)
+        public static void vstore<T>(Vector128<T> src, Span<T> dst)
             where T : unmanaged
         {
             vstore(src, ref memory.first(dst));
-            return dst;
         }
 
         /// <summary>
@@ -84,11 +83,10 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> vstore<T>(Vector256<T> src, Span<T> dst)
+        public static void vstore<T>(Vector256<T> src, Span<T> dst)
             where T : unmanaged
         {
             vstore(src, ref memory.first(dst));
-            return dst;
         }
 
         /// <summary>

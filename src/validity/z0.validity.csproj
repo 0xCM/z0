@@ -14,6 +14,7 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(VSvc)" />
+    <ProjectReference Include="$(Capture)" />
   </ItemGroup>
 
 </Project>

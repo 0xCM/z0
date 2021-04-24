@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static BufferSeqId;
 
-    public readonly struct AsmTester : IAsmChecker
+    public readonly struct AsmTester : ICaptureChecker
     {
         public IAsmContext Context {get;}
 

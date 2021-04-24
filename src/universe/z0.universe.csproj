@@ -19,6 +19,7 @@
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Blocked)" />
 
+    <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Circuits)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Cpu)" />

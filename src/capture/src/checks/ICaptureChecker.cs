@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static BufferSeqId;
 
-    public interface IAsmChecker : IContextual<IAsmContext>, IBufferedChecker, ITestDynamic, ICaptureServiceProxy, ICheckDynamicVectors
+    public interface ICaptureChecker : IContextual<IAsmContext>, IBufferedChecker, ITestDynamic, ICaptureServiceProxy, ICheckDynamicVectors
     {
         IAsmDecoder Decoder
             => Context.RoutineDecoder;

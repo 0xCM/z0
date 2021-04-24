@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public abstract class ApiValidator<V> : AppService<V>, IApiValidator
         where V : ApiValidator<V>,new()
     {

@@ -18,6 +18,7 @@
     <ProjectReference Include="$(CmdSpec)" />
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Related)" />
+    <ProjectReference Include="$(Capture)" />
 
     <ProjectReference Include="$(AsmLangG)"/>
 

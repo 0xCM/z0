@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         protected new IAsmContext Context;
 
-        protected IAsmChecker AsmCheck;
+        protected ICaptureChecker AsmCheck;
 
         protected override void OnShellInjected()
         {

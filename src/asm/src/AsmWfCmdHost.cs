@@ -49,9 +49,6 @@ namespace Z0.Asm
         public void ExportStokeImports()
             => Catalog.ExportImport();
 
-        [Action(K.EmitImmSpecializations)]
-        public void EmitImmSpecializations()
-            => Wf.ImmEmitter().Emit();
 
         [Action(K.CheckDigitParser)]
         void CheckDigitParser()

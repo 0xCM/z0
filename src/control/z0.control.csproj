@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Capture)" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static memory;
 
     [ApiHost]
-    ref struct AsmMovHandler
+    public ref struct AsmMovHandler
     {
         readonly Span<Arrow<Imm64,IceRegister>> Buffer;
 

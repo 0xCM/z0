@@ -4,16 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using Z0.Asm;
-
-    using static Part;
 
     [ApiHost]
     public readonly struct Capture
     {
+        [Op]
+        public static Index<AsmMemberRoutine> run(string[] args)
+        {
+            var control = root.controller();
+            var dir = FS.path(control.Location).FolderPath;
+            var parts = ApiQuery.parts(control, args);
+            var identities = parts.RuntimeCatalog.PartIdentities;
+            using var wf = WfRuntime.create(parts, args);
+            using var runner = wf.CaptureRunner();
+
+            var running = wf.Running(string.Format("Capturing routines from components in {0}", dir.Format(PathSeparator.FS)));
+            var routines = args.Length != 0 ? runner.Capture(identities, CaptureWorkflowOptions.EmitImm) : runner.Capture(identities);
+            wf.Ran(running, string.Format("Captured {0} routines", routines.Length));
+
+            return routines;
+        }
+
         [Op]
         public static QuickCapture quick(IWfRuntime wf)
         {
@@ -44,18 +56,6 @@ namespace Z0
             return runner.Capture(part);
         }
 
-        [Op]
-        public static Index<AsmMemberRoutine> run(string[] args)
-        {
-            var parts = ApiQuery.parts(root.controller(), args);
-            var identities = parts.RuntimeCatalog.PartIdentities;
-            using var wf = WfRuntime.create(parts, args);
-            using var runner = wf.CaptureRunner();
-            if(args.Length != 0)
-                return runner.Capture(identities, CaptureWorkflowOptions.EmitImm);
-            else
-                return runner.Capture(identities);
-        }
 
         [Op]
         public static CaptureExchange exchange(uint size = Pow2.T16)
