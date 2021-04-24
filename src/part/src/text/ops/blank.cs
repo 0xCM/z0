@@ -8,12 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     partial class text
     {
-        [MethodImpl(Inline)]
-        public static bool blank(string src)
-            => Query.blank(src);
+        /// <summary>
+        /// Tests whether the source string is either empty, null or consists only of whitespace
+        /// </summary>
+        /// <param name="src">The string to evaluate</param>
+        [MethodImpl(Inline), Op]
+        public static bit blank(string src)
+            => string.IsNullOrWhiteSpace(src);
     }
 }

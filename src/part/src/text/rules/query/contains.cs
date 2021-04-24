@@ -47,9 +47,9 @@ namespace Z0
             /// <param name="src">The source string</param>
             /// <param name="match">The character to match</param>
             [Op]
-            public static bool contains(string src, char match)
+            public static bit contains(string src, char match)
             {
-                if(nonempty(src))
+                if(text.nonempty(src))
                     return(contains(span(src), match));
                 else
                     return false;
@@ -61,7 +61,7 @@ namespace Z0
             /// <param name="src">The source string</param>
             /// <param name="match">The character to match</param>
             [MethodImpl(Inline), Op]
-            public static bool contains(ReadOnlySpan<char> src, char match)
+            public static bit contains(ReadOnlySpan<char> src, char match)
             {
                 var len = src.Length;
                 for(var i=0; i<len; i++)
@@ -76,7 +76,7 @@ namespace Z0
             /// <param name="src">The source string</param>
             /// <param name="match">The string to match</param>
             [Op]
-            public static bool contains(string src, string match)
+            public static bit contains(string src, string match)
                 => src.Contains(match);
         }
     }

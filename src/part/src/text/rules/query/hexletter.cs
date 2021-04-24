@@ -20,15 +20,15 @@ namespace Z0
             /// </summary>
             /// <param name="src">The value to test</param>
             [MethodImpl(Inline), Op]
-            public static bool hexletter(C src)
-                => between(src, C.a, C.f) || between(src,C.A, C.B);
+            public static bit hexletter(C src)
+                => text.between(src, C.a, C.f) || text.between(src,C.A, C.B);
 
             /// <summary>
             /// Determines whether a <see cref='char'/> is within the range [a..f] or the range [A..F]
             /// </summary>
             /// <param name="src">The value to test</param>
             [MethodImpl(Inline), Op]
-            public static bool hexletter(char src)
+            public static bit hexletter(char src)
                 => hexletter((C)src);
         }
     }

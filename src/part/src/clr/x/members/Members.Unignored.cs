@@ -21,7 +21,6 @@ namespace Z0
             where T : MemberInfo
                 => src.Where(m => !m.Tagged(typeof(IgnoreAttribute)));
 
-
         /// <summary>
         /// Selects source methods that are not tagged with <see cref='IgnoreAttribute'/>
         /// </summary>

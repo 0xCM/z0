@@ -19,9 +19,9 @@ namespace Z0
             /// <param name="src">The source text</param>
             /// <param name="match">The match text</param>
             [Op]
-            public static bool tail(string src, string match)
+            public static bit tail(string src, string match)
             {
-                if(nonempty(src) && nonempty(match))
+                if(text.nonempty(src) && text.nonempty(match))
                     return src.EndsWith(match, InvariantCulture);
                 return false;
             }
@@ -32,9 +32,9 @@ namespace Z0
             /// <param name="src">The source text</param>
             /// <param name="match">The match text</param>
             [Op]
-            public unsafe static bool tail(string src, char match)
+            public unsafe static bit tail(string src, char match)
             {
-                var len = length(src);
+                var len = text.length(src);
                 if(len != 0)
                     return src[len - 1] == match;
                 else

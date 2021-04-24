@@ -12,17 +12,64 @@ namespace Z0
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
+        public static bool equals(char a, char b)
+            => a == b;
+
+        /// <summary>
+        /// Performs a string comparison according to a specified comparison type
+        /// </summary>
+        /// <param name="a">The first string</param>
+        /// <param name="b">The second string</param>
+        /// <param name="type">The comparison type</param>
+        [MethodImpl(Inline), Op]
         public static bool equals(string a, string b, StringComparison type)
-            => Query.equals(a, b, type);
+            => string.Equals(a,b, type);
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Performs a case-insensitive comparison on two source strings
+        /// </summary>
+        /// <param name="a">The first string</param>
+        /// <param name="b">The second string</param>
+        [MethodImpl(Inline), Op]
         public static bool equals(string a, string b)
-            => Query.equals(a,b);
+            => string.Equals(a,b, NoCase);
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Performs a string comparison according to a specified comparison type
+        /// </summary>
+        /// <param name="a">The first string</param>
+        /// <param name="b">The second string</param>
+        /// <param name="type">The comparison type</param>
+        [MethodImpl(Inline), Op]
         public static bool neq(string a, string b, StringComparison type)
-            => Query.neq(a, b, type);
+            => !equals(a, b, type);
 
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline), Op]
+        public static bool equals(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
+            => a.CompareTo(b, InvariantCulture) == 0;
+
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline), Op]
+        public static bool equals(Span<char> a, ReadOnlySpan<char> b)
+            => equals(a.ReadOnly(), b);
+
+        /// <summary>
+        /// Returns true if the character spans are equal as strings, false otherwise
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline), Op]
+        public static bool equals(Span<char> a, Span<char> b)
+            => equals(a.ReadOnly(), b.ReadOnly());
     }
 }

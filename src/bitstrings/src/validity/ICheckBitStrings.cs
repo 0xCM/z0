@@ -12,7 +12,6 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-
     public interface ICheckBitStrings : IClaimValidator
     {
         void eq(BitString a, BitString b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

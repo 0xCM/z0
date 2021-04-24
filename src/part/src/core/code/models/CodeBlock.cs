@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CodeBlock(MemoryAddress src, BinaryCode code)
+        public CodeBlock(MemoryAddress src, in BinaryCode code)
         {
             BaseAddress = src;
             Code = code;

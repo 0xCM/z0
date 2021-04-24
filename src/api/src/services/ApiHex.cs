@@ -14,24 +14,27 @@ namespace Z0
     [ApiHost]
     public class ApiHex : AppService<ApiHex>
     {
+        [Op]
         public FS.Files Files(FS.FolderPath src)
             => src.Files(FS.PCsv);
 
+        [Op]
         public FS.Files Files()
             => Db.ApiHexRoot().Files(FS.PCsv);
 
         [MethodImpl(Inline), Op]
-        public static ApiCodeBlock block(ApiHexRow src)
+        public static ApiCodeBlock block(in ApiHexRow src)
             => new ApiCodeBlock(src.Address, src.Uri, src.Data);
 
+        [Op]
         public Index<ApiCodeBlock> ReadBlocks()
             => ReadBlocks(Db.ApiHexPaths());
 
+        [Op]
         public Index<HexPacked> BuildHexPack(bool validate = false)
-        {
-            return BuildHexPack(ReadBlocks(), validate);
-        }
+            => BuildHexPack(ReadBlocks(), validate);
 
+        [Op]
         public Index<HexPacked> BuildHexPack(Index<ApiCodeBlock> src, bool validate = false)
         {
             var blocks = src.Sort().View;
@@ -60,6 +63,7 @@ namespace Z0
             return packs;
         }
 
+        [Op]
         public Index<HexPacked> EmitHexPack(FS.FilePath dst, bool validate = false)
         {
             var result = BuildHexPack(validate);
@@ -73,6 +77,7 @@ namespace Z0
             return result;
         }
 
+        [Op]
         public Index<HexPacked> EmitHexPack(Index<ApiCodeBlock> blocks, FS.FilePath? dst = null, bool validate = false)
         {
             var _dst = dst ?? Db.TableRoot() + FS.file("apihex", FS.ext("xpack"));
@@ -87,12 +92,14 @@ namespace Z0
             return result;
         }
 
+        [Op]
         public Index<HexPacked> EmitHexPack(bool validate = false)
         {
             var dst = Db.TableRoot() + FS.file("apihex", FS.ext("xpack"));
             return EmitHexPack(dst,validate);
         }
 
+        [Op]
         public Index<ApiCodeBlock> ReadBlocks(FS.FilePath src)
         {
             var loaded = ReadRows(src);
@@ -107,6 +114,7 @@ namespace Z0
             return blocks.ToArray();
         }
 
+        [Op]
         public Count ReadBlocks(FS.FilePath src, List<ApiCodeBlock> dst)
         {
             var rows = new RecordList<ApiHexRow>(1600);
@@ -118,6 +126,7 @@ namespace Z0
             return count;
         }
 
+        [Op]
         public Index<ApiCodeBlock> ReadBlocks(FS.Files src)
         {
             var count = src.Length;
@@ -148,6 +157,7 @@ namespace Z0
             return blocks.ToArray();
         }
 
+        [Op]
         public Index<ApiHexRow> WriteBlocks(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src, FS.FolderPath dst)
         {
             var count = src.Length;
@@ -170,16 +180,18 @@ namespace Z0
             var count = src.Length;
             if(count != 0)
             {
-                var content = rows(uri, src);
                 var emitting = Wf.EmittingTable<ApiHexRow>(dst);
-                emit(content, dst);
+                var rows = alloc<ApiHexRow>(count);
+                fill(uri, src, rows);
+                emit(rows, dst);
                 Wf.EmittedTable(emitting, count);
-                return content;
+                return rows;
             }
             else
                 return sys.empty<ApiHexRow>();
         }
 
+        [Op]
         public Index<ApiHexRow> ReadRows(FS.FilePath src)
         {
             var data = @readonly(src.ReadLines().Storage.Skip(1));
@@ -196,6 +208,7 @@ namespace Z0
             return buffer.ToArray();
         }
 
+        [Op]
         public Count ReadRows(FS.FilePath src, RecordList<ApiHexRow> dst)
         {
             var data = @readonly(src.ReadLines().Storage.Skip(1));
@@ -216,6 +229,7 @@ namespace Z0
             return count;
         }
 
+        [Op]
         public bool ParseRow(string src, out ApiHexRow dst)
         {
             dst = new ApiHexRow();
@@ -293,17 +307,27 @@ namespace Z0
             var buffer = alloc<ApiHexRow>(count);
             if(count != 0)
             {
-                var dst = span(buffer);
+                ref var dst = ref first(buffer);
                 for(var i=0u; i<count; i++)
-                    seek(dst, i) = row(skip(src, i), i);
+                    fill(skip(src, i), i, out seek(dst, i));
             }
             return buffer;
         }
 
-        [MethodImpl(Inline), Op]
-        static ApiHexRow row(in ApiMemberCode src, uint seq)
+        [Op]
+        static void fill(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, Span<ApiHexRow> dst)
         {
-            var dst = new ApiHexRow();
+            var count = src.Length;
+            if(count != 0)
+            {
+                for(var i=0u; i<count; i++)
+                    fill(skip(src, i), i, out seek(dst, i));
+            }
+        }
+
+        [Op]
+        static void fill(in ApiMemberCode src, uint seq, out ApiHexRow dst)
+        {
             dst.Seq = (int)seq;
             dst.SourceSeq = (int)src.Sequence;
             dst.Address = src.Address;
@@ -311,9 +335,9 @@ namespace Z0
             dst.TermCode = src.TermCode;
             dst.Uri = src.OpUri;
             dst.Data = src.Encoded;
-            return dst;
         }
 
+        [Op]
         static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
             => src.Length != 0 ? Tables.emit(src, dst) : 0;
     }

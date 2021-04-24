@@ -4,7 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_bits<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
+
+    public interface ITestBits : ICheckBitVectors, ICheckBitStrings, ICheckNumeric, ICheckVectors
+    {
+
+    }
+
+    public readonly struct BitTester : ITestBits
+    {
+
+
+    }
+
+    public abstract class t_bits<X> : UnitTest<X, BitTester, ITestBits>
         where X : t_bits<X>, new()
     {
         protected override int RepCount => Pow2.T04;

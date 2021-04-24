@@ -19,6 +19,10 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [Op]
+        public static MethodInfo[] methods(in ApiRuntimeType src, HashSet<string> exclusions)
+            => src.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions);
+
+        [Op]
         public static Identifier hostname(Type src)
         {
             var attrib = src.Tag<ApiHostAttribute>();

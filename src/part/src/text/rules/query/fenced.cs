@@ -22,9 +22,9 @@ namespace Z0
             /// <param name="left">The left boundary</param>
             /// <param name="right">The right boundary</param>
             [Op]
-            public static bool fenced(string src, char left, char right)
+            public static bit fenced(string src, char left, char right)
             {
-                if(nonempty(src))
+                if(text.nonempty(src))
                 {
                     var leftIndex = -1;
                     var rightIndex = -1;
@@ -40,7 +40,7 @@ namespace Z0
             public static bool fenced(string src, Fence<char> fence, out Pair<int> location)
             {
                 location = root.pair(NotFound,NotFound);
-                if(nonempty(src))
+                if(text.nonempty(src))
                 {
                     var chars = span(src);
                     var count = chars.Length;
@@ -76,7 +76,7 @@ namespace Z0
             /// <param name="right">The right marker</param>
             /// <param name="compare">Th comparison type</param>
             [Op]
-            public static bool fenced(string src, string left, string right)
+            public static bit fenced(string src, string left, string right)
                 => src.StartsWith(left, InvariantCulture) && src.EndsWith(right, InvariantCulture);
 
             /// <summary>
@@ -85,7 +85,7 @@ namespace Z0
             /// <param name="src">The source text</param>
             /// <param name="fence">The fence definition</param>
             [Op]
-            public static bool fenced(string src, Fence<char> fence)
+            public static bit fenced(string src, Fence<char> fence)
                 => fenced(src, fence.Left, fence.Right);
 
             /// <summary>
@@ -94,7 +94,7 @@ namespace Z0
             /// <param name="src">The source text</param>
             /// <param name="fence">The fence definition</param>
             [Op]
-            public static bool fenced(string src, Fence<string> fence)
+            public static bit fenced(string src, Fence<string> fence)
                 => fenced(src, fence.Left, fence.Right);
         }
     }

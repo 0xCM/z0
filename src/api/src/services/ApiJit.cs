@@ -149,11 +149,7 @@ namespace Z0
 
         [Op]
         ApiMember[] Jit(ApiRuntimeType src, HashSet<string> exclusions)
-        {
-            var methods = src.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions).Select(m => new JittedMethod(src.Uri, m));
-            var located = methods.Select(m => m.WithLocation(address(Jit(m.Method))));
-            return Members(located);
-        }
+            => Members(ApiQuery.methods(src,exclusions).Select(m => new JittedMethod(src.Uri, m, address(Jit(m)))));
 
         [Op]
         ApiMember[] Members(JittedMethod[] located)

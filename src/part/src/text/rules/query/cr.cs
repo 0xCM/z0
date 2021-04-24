@@ -18,7 +18,7 @@ namespace Z0
             /// </summary>
             /// <param name="c">The character to test</param>
             [MethodImpl(Inline), Op]
-            public static bool cr(char c)
+            public static bit cr(char c)
                 => (ushort)AsciChar.CR == (ushort)c;
         }
     }

@@ -8,12 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Determines the length of a specified <see cref='string'/>
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Inline), Op]
         public static int length(string src)
-            => Query.length(src);
+            => src?.Length ?? 0;
     }
 }

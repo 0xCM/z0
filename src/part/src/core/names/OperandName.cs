@@ -8,14 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     using api = Names;
 
     /// <summary>
     /// Defines the name of an operation argument
     /// </summary>
-    [Datatype]
     public readonly struct OperandName : IName<string>, IDataTypeComparable<OperandName>
     {
         readonly string Data;
@@ -27,13 +25,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Query.empty(Data);
+            get => text.empty(Data);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Query.nonempty(Data);
+            get => text.nonempty(Data);
         }
 
         public string Content

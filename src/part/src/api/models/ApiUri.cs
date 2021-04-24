@@ -159,8 +159,6 @@ namespace Z0
         public static string Imm8Suffix(byte imm8)
             => $"{IDI.SuffixSep}{IDI.Imm}{imm8}";
 
-
-
         [Op]
         public static string PathText(string scheme, PartId catalog, string host)
             => $"{scheme}{UriEndOfScheme}{catalog.Format()}{UriPathSep}{host}";

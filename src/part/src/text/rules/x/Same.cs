@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static TextRules;
-
     partial class XText
     {
         /// <summary>
@@ -17,7 +15,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         [TextUtility]
         public static bool Same(this ReadOnlySpan<char> a, ReadOnlySpan<char> b)
-             => Query.equals(a, b);
+             => text.equals(a, b);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -26,7 +24,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [TextUtility]
         public static bool Same(this Span<char> lhs, ReadOnlySpan<char> rhs)
-             => Query.equals(lhs, rhs);
+             => text.equals(lhs, rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -35,6 +33,6 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [TextUtility]
         public static bool Same(this Span<char> lhs, Span<char> rhs)
-             => Query.equals(lhs, rhs);
+             => text.equals(lhs, rhs);
     }
 }

@@ -26,7 +26,7 @@ namespace Z0
                 var elements = match.Elements.View;
                 for(var i=0; i<count; i++)
                 {
-                    if(equals(skip(elements,i), src))
+                    if(text.equals(skip(elements,i), src))
                     {
                         index = i;
                         return true;

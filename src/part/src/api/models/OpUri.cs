@@ -44,7 +44,7 @@ namespace Z0
         public PartId Part
             => Host.Part;
 
-        internal OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid, string uritext)
+        internal OpUri(ApiUriScheme scheme, in ApiHostUri host, string group, in OpIdentity opid, string uritext)
         {
             Scheme = scheme;
             Host = host;

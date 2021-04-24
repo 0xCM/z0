@@ -8,12 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     partial class text
     {
+        /// <summary>
+        /// Tests whether a specified <see cref='string'/> is either null or of zero length
+        /// </summary>
+        /// <param name="src">The source text</param>
         [MethodImpl(Inline)]
         public static bool empty(string src)
-            => Query.empty(src);
+            => string.IsNullOrEmpty(src);
+
+        /// <summary>
+        /// Tests whether a specified <see cref='char'/> matches the <see cref='Chars.Null'/> character
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Inline), Op]
+        public static bool empty(char src)
+            => src == Chars.Null;
     }
 }
