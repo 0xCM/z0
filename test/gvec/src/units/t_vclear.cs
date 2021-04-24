@@ -38,7 +38,7 @@ namespace Z0
                 byte length = (byte)(width<T>() - start);
                 var cellcount = w/width<T>();
                 var x = Random.CpuVector<T>(w);
-                var x1 = gbits.vbitclear(x, start, length);
+                var x1 = gcpu.vbitclear(x, start, length);
                 var x2 = gcpu.vsrl(x1,start);
                 Claim.nea(gcpu.vnonz(x2));
             }
@@ -53,7 +53,7 @@ namespace Z0
                 byte length = (byte)(width<T>() - start);
                 var cellcount = w/width<T>();
                 var x = Random.CpuVector<T>(w);
-                var x1 = gbits.vbitclear(x, start, length);
+                var x1 = gcpu.vbitclear(x, start, length);
                 var x2 = gcpu.vsrl(x1,start);
                 Claim.nea(gcpu.vnonz(x2));
             }

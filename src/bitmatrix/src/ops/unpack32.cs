@@ -21,7 +21,7 @@ namespace Z0
         public static ref readonly Matrix<N16,T> unpack32<T>(in BitMatrix16 src, in Matrix<N16,T> dst)
             where T : unmanaged
         {
-            gbits.unpack32(src.Content, dst.Data.AsSpan());
+            gpack.unpack32(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -35,7 +35,7 @@ namespace Z0
         public static ref readonly Matrix<N8,T> unpack32<T>(in BitMatrix8 src, in Matrix<N8,T> dst)
             where T : unmanaged
         {
-            gbits.unpack32(src.Data, dst.Data.AsSpan());
+            gpack.unpack32(src.Data, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -49,7 +49,7 @@ namespace Z0
         public static ref readonly Matrix<N32,T> unpack32<T>(in BitMatrix32 src, in Matrix<N32,T> dst)
             where T : unmanaged
         {
-            gbits.unpack32(src.Content, dst.Data.AsSpan());
+            gpack.unpack32(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         public static ref readonly Matrix<N64,T> unpack32<T>(in BitMatrix64 src, in Matrix<N64,T> dst)
             where T : unmanaged
         {
-            gbits.unpack32(src.Content, dst.Data.AsSpan());
+            gpack.unpack32(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -79,7 +79,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            gbits.unpack32(src.Content, Z.Data.AsSpan());
+            gpack.unpack32(src.Content, Z.Data.AsSpan());
             return ref Z;
         }
 
@@ -97,7 +97,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            gbits.unpack32(src.Content, dst.Data.AsSpan());
+            gpack.unpack32(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -117,7 +117,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            gbits.unpack32(src.Content, dst.Data.AsSpan());
+            gpack.unpack32(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -136,7 +136,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            gbits.unpack32(src.Content, dst.Unblocked);
+            gpack.unpack32(src.Content, dst.Unblocked);
             return ref dst;
         }
 
@@ -156,7 +156,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            gbits.unpack32(src.Content, dst.Unblocked);
+            gpack.unpack32(src.Content, dst.Unblocked);
             return ref dst;
         }
 
@@ -168,7 +168,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N8,Bit32> unpack32(in BitMatrix8 A, in Matrix<N8,Bit32> Z)
         {
-            gbits.unpack32(A.Data, Z.Data);
+            gpack.unpack32(A.Data, Z.Data);
             return ref Z;
         }
 
@@ -180,7 +180,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N8,Bit32> unpack32(in BitMatrix<byte> A, in Matrix<N8,Bit32> Z)
         {
-            gbits.unpack32(A.Content, Z.Data);
+            gpack.unpack32(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -192,7 +192,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N16,Bit32> unpack32(in BitMatrix16 A, in Matrix<N16,Bit32> Z)
         {
-            gbits.unpack32(A.Content, Z.Data);
+            gpack.unpack32(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -204,7 +204,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N16,Bit32> unpack32(in BitMatrix<ushort> A, in Matrix<N16,Bit32> Z)
         {
-            gbits.unpack32(A.Content, Z.Data);
+            gpack.unpack32(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -216,7 +216,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N32,Bit32> unpack32(in BitMatrix32 A, in Matrix<N32,Bit32> Z)
         {
-            gbits.unpack32(A.Content, Z.Data);
+            gpack.unpack32(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -228,7 +228,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N32,Bit32> unpack32(in BitMatrix<uint> A, in Matrix<N32,Bit32> Z)
         {
-            gbits.unpack32(A.Content, Z.Data);
+            gpack.unpack32(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -240,7 +240,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N64,Bit32> unpack32(in BitMatrix64 A, in Matrix<N64,Bit32> Z)
         {
-            gbits.unpack32(A.Content, Z.Data);
+            gpack.unpack32(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -252,7 +252,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N64,Bit32> unpack32(in BitMatrix<ulong> A, in Matrix<N64,Bit32> Z)
         {
-            gbits.unpack32(A.Content, Z.Data);
+            gpack.unpack32(A.Content, Z.Data);
             return ref Z;
         }
    }

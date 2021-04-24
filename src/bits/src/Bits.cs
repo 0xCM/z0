@@ -12,7 +12,7 @@ namespace Z0
     [ApiHost]
     public partial class Bits
     {
-        const NumericKind Closure = Konst.UnsignedInts;
+        const NumericKind Closure = UnsignedInts;
 
         /// <summary>
         /// Wraps a bitview around a generic reference

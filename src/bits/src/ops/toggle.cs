@@ -7,10 +7,10 @@ namespace Z0
      using System;
      using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
      partial class Bits
-     {                
+     {
           [MethodImpl(Inline), Toggle]
           public static sbyte toggle(sbyte src, int pos)
                => src ^= (sbyte)(1 << pos);

@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class gbits
+    partial struct gpack
     {
         [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static Span<Bit32> unpack32<T>(ReadOnlySpan<T> src, Span<Bit32> dst)
@@ -23,7 +23,7 @@ namespace Z0
             var k = 0;
             for(var i=0; i<src.Length; i++)
             for(byte j=0; j<srcsize; j++, k++)
-                seek(target, k) = testbit(skip(src,i), j);
+                seek(target, k) = BitMasks.testbit(skip(src,i), j);
             return dst;
         }
 
@@ -70,7 +70,7 @@ namespace Z0
                 var k = 0u;
                 for(var i=0; i<src.Length; i++)
                 for(byte j=0; j<srcsize; j++)
-                    seek(dst,k++)  = testbit(skip(src,i), j) == bit.On ? one<T>() : zero<T>();
+                    seek(dst,k++) = BitMasks.testbit(skip(src,i), j) == bit.On ? one<T>() : zero<T>();
                 return dst;
             }
         }

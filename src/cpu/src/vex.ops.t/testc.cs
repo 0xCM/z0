@@ -11,14 +11,14 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static Part;
 
-    partial class Bits
+    partial struct cpu
     {
         [MethodImpl(Inline), TestZ]
         public static bit testc(ulong a, ulong b)
-            => TestC(cpu.vbroadcast(w128, a), cpu.vbroadcast(w128, b));
+            => TestC(vbroadcast(w128, a), vbroadcast(w128, b));
 
         [MethodImpl(Inline), TestZ]
         public static bit testc(ulong a)
-            => TestC(cpu.vbroadcast(w128, a), gcpu.vones<ulong>(w128));
+            => TestC(vbroadcast(w128, a), vones<ulong>(w128));
     }
 }

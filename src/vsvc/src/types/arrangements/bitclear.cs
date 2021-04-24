@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count)
-                => gbits.vbitclear(x,offset,count);
+                => gcpu.vbitclear(x,offset,count);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c)
@@ -32,7 +32,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count)
-                => gbits.vbitclear(x,offset, count);
+                => gcpu.vbitclear(x,offset, count);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c)

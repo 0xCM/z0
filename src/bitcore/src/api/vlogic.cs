@@ -9,6 +9,12 @@ namespace Z0
 
     using static Part;
 
+    [ApiHost]
+    public partial class BitLogixOps
+    {
+
+    }
+
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>

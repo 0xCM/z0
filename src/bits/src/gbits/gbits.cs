@@ -21,12 +21,6 @@ namespace Z0
 
     }
 
-    [ApiHost]
-    public partial class BitLogixOps
-    {
-
-    }
-
     public static partial class XTend
     {
 

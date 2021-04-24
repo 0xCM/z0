@@ -10,8 +10,19 @@ namespace Z0
 
     using static Part;
 
-    partial class gbits
+    partial struct gcpu
     {
+        /// <summary>
+        /// Defines a mask that disables a sequence of bits
+        /// </summary>
+        /// <param name="start">The index at which to begin</param>
+        /// <param name="count">The number of bits to disable</param>
+        /// <typeparam name="T">The primal type over which the mask is defined</typeparam>
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static T eraser<T>(byte start, byte count)
+            where T : unmanaged
+                => gmath.xor(Numeric.maxval<T>(), gmath.sll(BitMasks.lo<T>((byte)(count - 1)), start));
+
         /// <summary>
         /// Clears a sequence of bits from each component
         /// </summary>
@@ -23,9 +34,9 @@ namespace Z0
         public static Vector128<T> vbitclear<T>(Vector128<T> src, byte start, byte count)
             where T : unmanaged
         {
-            var cellmask = gbits.eraser<T>(start,count);
-            var vmask = gcpu.vbroadcast(w128, cellmask);
-            return gcpu.vand(vmask,src);
+            var cellmask = eraser<T>(start,count);
+            var vmask = vbroadcast(w128, cellmask);
+            return vand(vmask,src);
         }
 
         /// <summary>
@@ -39,10 +50,9 @@ namespace Z0
         public static Vector256<T> vbitclear<T>(Vector256<T> src, byte start, byte count)
             where T : unmanaged
         {
-            var n = n256;
-            var cellmask = gbits.eraser<T>(start,count);
-            var vmask = gcpu.vbroadcast(w256, cellmask);
-            return gcpu.vand(vmask,src);
+            var cellmask = eraser<T>(start,count);
+            var vmask = vbroadcast(w256, cellmask);
+            return vand(vmask,src);
         }
     }
 }

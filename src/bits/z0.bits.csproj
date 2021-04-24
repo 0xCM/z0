@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(BitPack)" />
-    <ProjectReference Include="$(BitNumbers)" />
+    <ProjectReference Include="$(BitMasks)" />
 
   </ItemGroup>
 
