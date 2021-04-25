@@ -29,15 +29,6 @@ namespace Z0
             }
         }
 
-        // [Op]
-        // public static void emit(ReadOnlySpan<ClrHandleRecord> src,  StreamWriter dst)
-        // {
-        //     var count = src.Length;
-        //     var formatter = Records.formatter<ClrHandleRecord>();
-        //     for(var i=0; i<count; i++)
-        //         dst.WriteLine(formatter.Format(skip(src, i)));
-        // }
-
         [Op]
         public static ReadOnlySpan<ClrHandle<RuntimeTypeHandle>> types(Assembly src)
         {
@@ -73,7 +64,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = field(module, ClrTokens.from(skip(src,i)));
+                seek(dst,i) = field(module, Clr.token(skip(src,i)));
         }
 
 
@@ -82,7 +73,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = type(module, ClrTokens.from(skip(src,i)));
+                seek(dst,i) = type(module, Clr.token(skip(src,i)));
         }
 
         [Op]
@@ -90,7 +81,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = method(module, ClrTokens.from(skip(src,i)));
+                seek(dst,i) = method(module, Clr.token(skip(src,i)));
         }
 
         [MethodImpl(Inline), Op]

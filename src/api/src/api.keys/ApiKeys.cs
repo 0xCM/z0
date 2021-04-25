@@ -16,7 +16,34 @@ namespace Z0
     public readonly struct ApiKeys
     {
         [MethodImpl(Inline), Op]
+        public static ApiKey key(PartId part, ushort host, ApiClass @class)
+        {
+            var dst = span16u(Cells.alloc(w128).Bytes);
+            seek(dst,0) = (ushort)part;
+            seek(dst,1) = host;
+            seek(dst,2) = @class;
+            return key(dst);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ApiKey key(PartId part, ushort host, ApiClass @class, params ushort[] data)
+        {
+            var dst = span16u(Cells.alloc(w128).Bytes);
+            seek(dst,0) = (ushort)part;
+            seek(dst,1) = host;
+            seek(dst,2) = @class;
+            var src = @readonly(data);
+            for(var i=3; i<data.Length + 3; i++)
+                seek(dst,i) = skip(src,i);
+            return key(dst);
+        }
+
+        [MethodImpl(Inline), Op]
         public static ApiKey key(ReadOnlySpan<byte> src)
+            => new ApiKey(src);
+
+        [MethodImpl(Inline), Op]
+        public static ApiKey key(ReadOnlySpan<ushort> src)
             => new ApiKey(src);
 
         [MethodImpl(Inline), Op]
@@ -50,12 +77,6 @@ namespace Z0
             var right = (ushort)(src >> 16);
             return new ApiKeyJoin(left,right);
         }
-
-        // public static ApiKey opcount(ApiKey src, byte count)
-        // {
-        //     var dst = cpu.vcell(src.V8u, 15, count);
-
-        // }
 
         [MethodImpl(Inline), Op]
         public static ApiKeyJoin join(ApiKey src, byte i, byte j)

@@ -34,6 +34,10 @@ namespace Z0
             => Storage = cpu.vload(W,src);
 
         [MethodImpl(Inline)]
+        public ApiKey(ReadOnlySpan<ushort> src)
+            => Storage = cpu.v8u(cpu.vload(W,src));
+
+        [MethodImpl(Inline)]
         public ApiKey(ReadOnlySpan<ApiKeyPart> src)
             => Storage = cpu.vload(W,bytes(src));
 

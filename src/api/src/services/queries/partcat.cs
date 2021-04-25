@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial struct ApiQuery
+    partial class ApiQuery
     {
         /// <summary>
         /// Defines a <see cref='ApiPartCatalog'/> for a specified part

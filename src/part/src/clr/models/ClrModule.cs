@@ -14,16 +14,16 @@ namespace Z0
 
     public readonly struct ClrModule : IClrArtifact<ClrModule>
     {
-        readonly R.Module Subject;
+        readonly R.Module Definition;
 
         [MethodImpl(Inline)]
         public ClrModule(R.Module src)
-            => Subject = src;
+            => Definition = src;
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
-            get => Subject.MetadataToken;
+            get => Definition.MetadataToken;
         }
 
         public ClrArtifactKind Kind
@@ -35,20 +35,32 @@ namespace Z0
         public string Name
         {
             [MethodImpl(Inline)]
-            get => Subject.Name;
+            get => Definition.Name;
         }
 
         public string FullName
         {
             [MethodImpl(Inline)]
-            get => Subject.FullyQualifiedName;
+            get => Definition.FullyQualifiedName;
         }
 
         public string ScopeName
         {
             [MethodImpl(Inline)]
-            get => Subject.ScopeName;
+            get => Definition.ScopeName;
         }
+
+        // public bool IsEmpty
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => Definition is null;
+        // }
+
+        // public bool IsNonEmpty
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => !IsEmpty;
+        // }
 
         [MethodImpl(Inline)]
         public static implicit operator ClrModule(R.Module src)
@@ -56,6 +68,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator R.Module(ClrModule src)
-            => src.Subject;
+            => src.Definition;
     }
 }

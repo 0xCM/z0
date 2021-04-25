@@ -28,7 +28,7 @@ namespace Z0
 
         [Op]
         public static ApiHostAsmEmitter AsmHostEmitter(this IWfRuntime wf)
-            => new ApiHostAsmEmitter(wf);
+            => Asm.ApiHostAsmEmitter.create(wf);
 
         [Op]
         public static ResBytesEmitter ResBytesEmitter(this IWfRuntime wf)
@@ -38,18 +38,20 @@ namespace Z0
         public static AsmJmpPipe AsmJmpPipe(this IWfRuntime wf)
             => Services.AsmJmpPipe.create(wf);
 
-
         [Op]
         public static IAsmWriter AsmWriter(this IWfRuntime wf, FS.FilePath dst)
             => new AsmWriter(dst, wf.AsmFormatter());
 
-
         [Op]
-        public static IAsmImmWriter ImmWriter(this IWfRuntime wf, ApiHostUri host)
+        public static IAsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host)
             => new AsmImmWriter(wf, host, wf.AsmFormatter());
 
         [Op]
-        public static IAsmDecoder AsmDecoder(this IWfRuntime wf)
+        public static IAsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host, AsmFormatter formatter)
+            => new AsmImmWriter(wf, host, formatter);
+
+        [Op]
+        public static AsmRoutineDecoder AsmDecoder(this IWfRuntime wf)
             => new AsmRoutineDecoder(wf);
 
         [Op]
@@ -59,6 +61,10 @@ namespace Z0
         [Op]
         public static ApiHostDecoder ApiHostDecoder(this IWfRuntime wf)
             => Asm.ApiHostDecoder.create(wf);
+
+        [Op]
+        public static AsmBitstringEmitter AsmBitstringEmitter(this IWfRuntime wf)
+            => Asm.AsmBitstringEmitter.create(wf);
 
         [Op]
         public static AsmStatementPipe AsmStatementPipe(this IWfRuntime wf)

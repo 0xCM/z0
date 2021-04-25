@@ -39,13 +39,25 @@ namespace Z0
             get => Definition.GetSimpleName();
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Definition is null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
         public ClrAssemblyName Name
             => Definition;
 
         public ReadOnlySpan<ClrAssemblyName> ReferencedAssemblies
             => Clr.references(Definition);
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.ManifestModule.MetadataToken;

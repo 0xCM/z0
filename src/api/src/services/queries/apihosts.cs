@@ -11,7 +11,7 @@ namespace Z0
 
     using static memory;
 
-    partial struct ApiQuery
+    partial class ApiQuery
     {
         [Op]
         public static Index<IApiHost> apihosts(Assembly src)

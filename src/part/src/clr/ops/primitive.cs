@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static PrimalBits;
+    using static Root;
+    using static memory;
 
-    partial struct ClrPrimitives
+    partial struct Clr
     {
         /// <summary>
-        /// Determines the numeric sign, if any, of the represented primitive
+        /// Determines whether a specified type is a system-defined primitive
         /// </summary>
-        /// <param name="f">The literal's bitfield</param>
-        [MethodImpl(Inline)]
-        public static SignKind sign(ClrPrimalKind f)
-            => (SignKind)select(f, Field.Sign);
+        /// <param name="src">The type to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool primitive(Type src)
+            => ClrPrimitives.kind(src) != 0;
     }
 }

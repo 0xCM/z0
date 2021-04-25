@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct ApiQuery
+    partial class ApiQuery
     {
         /// <summary>
         /// Describes an api host

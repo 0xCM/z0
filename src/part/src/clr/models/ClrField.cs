@@ -32,7 +32,7 @@ namespace Z0
             get => Definition.IsStatic;
         }
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -72,6 +72,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Definition.FieldHandle.Value;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Definition is null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
         }
 
         [MethodImpl(Inline)]

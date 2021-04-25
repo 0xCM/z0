@@ -9,15 +9,29 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Linq;
 
+    using static memory;
+
     using E = SpecializedImmEvent;
 
     public class ApiImmEmitter :  AppService<ApiImmEmitter>
     {
+        const uint BufferSize = Pow2.T16;
+
         ImmSpecializer Specializer;
+
+        AsmFormatter Formatter;
+
+        Index<byte> Buffer;
+
+        public ApiImmEmitter()
+        {
+            Buffer = alloc<byte>(BufferSize);
+        }
 
         protected override void OnInit()
         {
             Specializer = Wf.ImmSpecializer();
+            Formatter = Wf.AsmFormatter();
         }
 
         bool Append = true;
@@ -32,7 +46,19 @@ namespace Z0.Asm
 
         public void Emit(ReadOnlySpan<ApiHostUri> hosts)
         {
-
+            var count = hosts.Length;
+            var exchange = Exchange;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var uri = ref skip(hosts,i);
+                var host = Wf.ApiCatalog.FindHost(uri);
+                if(host)
+                {
+                    var dst = Archive(uri);
+                    EmitDirectRefinements(exchange, host.Value, dst);
+                    EmitGenericRefinements(exchange, host.Value, dst);
+                }
+            }
         }
 
         void ClearArchive(PartId[] parts)
@@ -47,8 +73,7 @@ namespace Z0.Asm
         {
             if(imm8.Length != 0)
             {
-                var exchange = Capture.exchange();
-                EmitUnrefined(exchange, imm8.ToImm8Values(RefinementClass.Unrefined), parts);
+                EmitUnrefined(Exchange, imm8.ToImm8Values(RefinementClass.Unrefined), parts);
             }
         }
 
@@ -58,8 +83,11 @@ namespace Z0.Asm
             EmitLiteral(defaults, parts);
         }
 
+        CaptureExchange Exchange
+            => Capture.exchange(Buffer.Storage);
+
         public void EmitRefined(PartId[] parts)
-            => EmitRefined(Capture.exchange(), parts);
+            => EmitRefined(Exchange, parts);
 
         ParameterInfo RefiningParameter(MethodInfo src)
             => src.ImmParameters(RefinementClass.Refined).First();
@@ -121,8 +149,8 @@ namespace Z0.Asm
         IApiHost[] Hosts(params PartId[] parts)
             => Wf.ApiCatalog.PartHosts(parts);
 
-        IAsmImmWriter Archive(IApiHost host)
-            => Wf.ImmWriter(host.Uri);
+        IAsmImmWriter Archive(in ApiHostUri host)
+            => Wf.ImmWriter(host, Formatter);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, PartId[] parts)
         {
@@ -135,7 +163,7 @@ namespace Z0.Asm
             var routines = root.list<AsmRoutine>();
             foreach(var host in Hosts(parts))
             {
-                var archive = Archive(host);
+                var archive = Archive(host.Uri);
                 EmitDirectRefinements(exchange, host, archive);
                 routines.AddRange(EmitGenericRefinements(exchange, host, archive));
             }
@@ -146,7 +174,7 @@ namespace Z0.Asm
             var routines = root.list<AsmRoutine>();
             foreach(var host in Hosts(parts))
             {
-                var archive = Archive(host);
+                var archive = Archive(host.Uri);
                 var groups = ApiQuery.imm(host, RefinementClass.Unrefined);
                 routines.AddRange(EmitUnrefinedDirect(exchange, groups,imm8, archive));
             }
@@ -177,7 +205,7 @@ namespace Z0.Asm
             var routines = root.list<AsmRoutine>();
             foreach(var host in Hosts(parts))
             {
-                var archive = Archive(host);
+                var archive = Archive(host.Uri);
                 var specs = ApiQuery.immG(host, RefinementClass.Unrefined);
                 foreach(var spec in specs)
                     routines.AddRange(EmitUnrefinedGeneric(exchange, spec, imm8, archive));

@@ -26,16 +26,34 @@ namespace Z0
             Storage = src;
         }
 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Storage?.Length ?? 0;
+        }
+
+        public uint OpCount
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Length;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Storage?.Length ?? 0) == 0;
+            get => Length == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
             get => !IsEmpty;
+        }
+
+        public ReadOnlySpan<ClrMethod> View
+        {
+            [MethodImpl(Inline)]
+            get => memory.recover<MethodInfo,ClrMethod>(memory.@readonly(Storage));
         }
 
         public static ApiHostMethods Empty

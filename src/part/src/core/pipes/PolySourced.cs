@@ -6,14 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    using static Root;
+    using static Part;
 
-    partial struct Clr
+    public readonly struct PolySourced : IPolySourced
     {
-        [MethodImpl(Inline), Op]
-        public static string @string(Module module, ClrToken token)
-            => module.ResolveString((int)token);
+        public IPolySource Source {get;}
+
+        [MethodImpl(Inline)]
+        public PolySourced(IPolySource source)
+        {
+            Source = source;
+        }
     }
 }

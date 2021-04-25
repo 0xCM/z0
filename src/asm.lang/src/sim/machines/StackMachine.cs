@@ -10,19 +10,21 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public ref struct StackMachine<T>
+    [ApiComplete]
+    public readonly ref struct StackMachine
     {
-        Span<StackState> State;
+        readonly Span<StackState> State;
 
-        readonly Span<T> Storage;
+        readonly Span<ulong> Storage;
 
         public StackMachine(uint capacity)
         {
-            Storage = alloc<T>(capacity);
+            Storage = alloc<ulong>(capacity);
             State = new StackState[1]{new StackState(capacity)};
         }
 
-        public bool Push(T src)
+        [MethodImpl(Inline)]
+        public bool Push(ulong src)
         {
             if(Input < Capacity)
             {
@@ -34,7 +36,8 @@ namespace Z0.Asm
                 return false;
         }
 
-        public bool Pop(out T dst)
+        [MethodImpl(Inline)]
+        public bool Pop(out ulong dst)
         {
             if(Output != Capacity)
             {
@@ -49,17 +52,30 @@ namespace Z0.Asm
         }
 
         ref uint Input
-            => ref first(State).Input;
+        {
+            [MethodImpl(Inline)]
+            get => ref first(State).Input;
+        }
 
         ref uint Output
-            => ref first(State).Output;
+        {
+            [MethodImpl(Inline)]
+            get => ref first(State).Output;
+        }
 
         ref uint Capacity
-            => ref first(State).Capacity;
+        {
+            [MethodImpl(Inline)]
+            get => ref first(State).Capacity;
+        }
 
         ref uint Index
-            => ref first(State).Index;
+        {
+            [MethodImpl(Inline)]
+            get => ref first(State).Index;
+        }
 
+        [MethodImpl(Inline)]
         public ref readonly StackState state()
             => ref first(State);
     }

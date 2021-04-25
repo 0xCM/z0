@@ -22,7 +22,7 @@ namespace Z0
         public ClrMethod(MethodInfo src)
             => Definition = src;
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -70,6 +70,23 @@ namespace Z0
             get => MethodHandle.GetFunctionPointer();
         }
 
+        public ClrDisplaySig DisplaySig
+        {
+            [MethodImpl(Inline)]
+            get => Definition.DisplaySig();
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Definition is null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
 
         [MethodImpl(Inline)]
         public string Format()

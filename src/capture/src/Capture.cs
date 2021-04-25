@@ -69,9 +69,12 @@ namespace Z0
             return runner.Capture(part);
         }
 
-
         [Op]
         public static CaptureExchange exchange(uint size = Pow2.T16)
             => new CaptureExchange(new byte[size]);
+
+        [MethodImpl(Inline),Op]
+        public static CaptureExchange exchange(byte[] buffer)
+            => new CaptureExchange(buffer);
     }
 }

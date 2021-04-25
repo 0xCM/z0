@@ -16,11 +16,6 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHostBlocks : IIndex<ApiCodeBlock>
     {
-        public static Index<ApiHostBlocks> partition(Index<ApiCodeBlock> src)
-        {
-            return src.GroupBy(b => b.HostUri).Select(x => new ApiHostBlocks(x.Key,x.Array())).Array();
-        }
-
         /// <summary>
         /// The defining host
         /// </summary>
@@ -43,6 +38,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Host.Part;
         }
+
         public ApiCodeBlock[] Storage
         {
             [MethodImpl(Inline)]

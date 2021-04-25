@@ -22,7 +22,7 @@ namespace Z0
             try
             {
                 var blocks = hex.ReadBlocks().Storage.Sort();
-                var partitioned = ApiHostBlocks.partition(blocks);
+                var partitioned = blocks.ToHostBlocks();
 
                 if(options.EmitHexIndex)
                     Emitted(hex.EmitIndex(blocks));
@@ -52,7 +52,7 @@ namespace Z0
                     var pipe = Wf.AsmStatementPipe();
                     var statements = Emitted(pipe.EmitStatements(partitioned));
                     if(options.EmitAsmBitstrings)
-                        Emitted(pipe.EmitBitstrings(statements.SelectMany(x => x.Statements)));
+                        Emitted(Wf.AsmBitstringEmitter().EmitBitstrings(statements.SelectMany(x => x.ApiStatements)));
                 }
 
                 if(options.CorrelateMembers)

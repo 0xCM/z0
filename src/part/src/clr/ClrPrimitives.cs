@@ -10,15 +10,9 @@ namespace Z0
     using static memory;
     using static Part;
 
-    using PK = ClrPrimalKind;
-
     [ApiHost(ApiNames.ClrPrimitives, true)]
     public readonly partial struct ClrPrimitives
     {
-        [MethodImpl(Inline), Op]
-        public static ClrPrimitiveInfo describe(ClrPrimalKind src)
-            => new ClrPrimitiveInfo(src, width(src), sign(src), (PrimalCode)code(src));
-
         static ReadOnlySpan<ClrPrimalKind> Kinds
         {
             [MethodImpl(Inline), Op]

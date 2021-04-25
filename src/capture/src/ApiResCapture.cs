@@ -13,11 +13,14 @@ namespace Z0.Asm
 
     public sealed class ApiResCapture : AsmWfService<ApiResCapture>
     {
-        IAsmDecoder Decoder;
+        AsmRoutineDecoder Decoder;
+
+       IAsmRoutineFormatter Formatter;
 
         protected override void OnContextCreated()
         {
             Decoder = Wf.AsmDecoder();
+            Formatter = Wf.AsmFormatter();
         }
 
         public Index<CapturedApiRes> CaptureApiRes(FS.FilePath src, FS.FilePath dst)
@@ -63,7 +66,6 @@ namespace Z0.Asm
             var codes = span(alloc<ApiCaptureBlock>(count));
             var captured = alloc<CapturedApiRes>(count);
             var target = span(captured);
-            var formatter = Wf.AsmFormatter();
 
             using var writer = dst.Writer();
             using var quick = Wf.CaptureQuick();
@@ -78,7 +80,7 @@ namespace Z0.Asm
                 {
                     ref readonly var data = ref skip(codes,i);
                     var decoded = DecodeRoutine(data).ValueOrDefault(AsmRoutineCode.Empty);
-                    var formatted = formatter.Format(decoded.Routine);
+                    var formatted = Formatter.Format(decoded.Routine);
                     seek(target, i) = new CapturedApiRes(accessor.Host, accessor, decoded);
                     writer.Write(formatted);
                 }
@@ -158,7 +160,10 @@ namespace Z0.Asm
         {
             var decoded = Decoder.Decode(capture);
             if(decoded)
-                return new AsmRoutineCode(decoded.Value, capture);
+            {
+                var asm = Formatter.Format(decoded.Value);
+                return new AsmRoutineCode(decoded.Value, capture, asm);
+            }
             else
                 return root.none<AsmRoutineCode>();
         }

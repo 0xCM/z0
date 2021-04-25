@@ -29,8 +29,8 @@ namespace Z0
 
         public string IdentityText
             => string.Format(RP.Arrow,
-                string.Format(MemberFormat, Source.Name, Source.Id),
-                string.Format(MemberFormat, Target.Name, Target.Id)
+                string.Format(MemberFormat, Source.Name, Source.Token),
+                string.Format(MemberFormat, Target.Name, Target.Token)
                 );
 
         [MethodImpl(Inline)]

@@ -15,9 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiClass(ApiClassKind kind)
-        {
-            Kind = kind;
-        }
+            => Kind = kind;
 
         [MethodImpl(Inline)]
         public static implicit operator ApiClass(ApiClassKind kind)
@@ -26,6 +24,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ApiClassKind(ApiClass src)
             => src.Kind;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(ApiClass src)
+            => (ushort)src.Kind;
 
         public string Format()
             => Kind.Format();

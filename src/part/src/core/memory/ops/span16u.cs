@@ -22,12 +22,21 @@ namespace Z0
                 => recover<ushort>(bytes(src));
 
         /// <summary>
-        /// Creates a u16 span from a T-cell reference
+        /// Creates a u16 span from a T-span
         /// </summary>
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ushort> span16u(ReadOnlySpan<byte> src)
-            => recover<ushort>(src);
+        public static Span<ushort> span16u<T>(Span<T> src)
+            => recover<T,ushort>(src);
+
+        /// <summary>
+        /// Creates a u16 span from a T-span
+        /// </summary>
+        /// <param name="src">The reference cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<ushort> span16u<T>(ReadOnlySpan<T> src)
+            => recover<T,ushort>(src);
     }
 }

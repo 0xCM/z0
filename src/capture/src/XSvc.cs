@@ -40,7 +40,7 @@ namespace Z0
 
         [Op]
         public static ApiCaptureEmitter CaptureEmitter(this IWfRuntime wf)
-            => new ApiCaptureEmitter(wf);
+            => ApiCaptureEmitter.create(wf);
 
         [Op]
         public static ICaptureServices CaptureServices(this IWfRuntime wf)

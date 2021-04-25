@@ -224,13 +224,6 @@ namespace Z0.Asm
             }
         }
 
-
-        void CheckIndexDecoder()
-        {
-            var blocks = Wf.ApiIndexBuilder().IndexApiBlocks();
-            var dataset = Wf.ApiDecoder().Decode(blocks);
-        }
-
         void TestRel32()
         {
             var builder = new AsmStatementBuilder();
@@ -784,7 +777,6 @@ namespace Z0.Asm
             var count = producer.Produce(Toolsets.nasm, hosts);
         }
 
-
         public void EmitXedCatalog()
         {
             Wf.XedCatalog().EmitCatalog();
@@ -793,7 +785,7 @@ namespace Z0.Asm
         public void EmitBitstrings()
         {
             var thumbprints = Wf.AsmThumbprints().LoadThumbprints().View;
-            Wf.AsmStatementPipe().EmitBitstrings(thumbprints);
+            Wf.AsmBitstringEmitter().EmitBitstrings(thumbprints);
         }
 
         void CheckCpuid()
@@ -1325,7 +1317,10 @@ namespace Z0.Asm
 
         public void Run()
         {
-            CaptureParts(PartId.Extract);
+            //CaptureParts(PartId.Extract);
+
+            var checks = ApiKeyChecks.create(Wf);
+            checks.Run();
             //ParseExtracts();
             //CaptureParts(PartId.AsmZ);
             //DeriveMsil();

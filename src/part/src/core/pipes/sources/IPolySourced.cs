@@ -2,12 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public interface IApiIndexDecoder
-    {
-        ApiAsmDataset Decode(ApiBlockIndex src);
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-        ApiHostRoutines Decode(ApiHostBlocks src);
+    [Free]
+    public interface IPolySourced
+    {
+        IPolySource Source {get;}
     }
 }

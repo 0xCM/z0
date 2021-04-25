@@ -51,7 +51,7 @@ namespace Z0
 
         public Index<ApiHostRes> Emit(Index<ApiCodeBlock> blocks, FS.FolderPath dst)
         {
-            return Emit(ApiHostBlocks.partition(blocks), dst);
+            return Emit(blocks.ToHostBlocks(), dst);
         }
 
         Index<ApiHostRes> Emit(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath dst)

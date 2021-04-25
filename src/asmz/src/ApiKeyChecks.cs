@@ -12,6 +12,10 @@ namespace Z0
 
     public class ApiKeyChecks : AppService<ApiKeyChecks>
     {
+        const GenericStateKind ng = GenericStateKind.Nongeneric;
+
+        const GenericStateKind g = GenericStateKind.OpenGeneric;
+
         public void Run()
         {
             var kinds = Symbols.symbolic<ApiClassKind>().View;
@@ -23,11 +27,19 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts, i);
-                var methods = host.Methods.View;
-                var mcount = methods.Length;
-                for(var j=0; j<mcount; j++)
+                var hosted = ApiQuery.operators(host, n2, ng);
+                var opcount = hosted.Length;
+                var methods = hosted.View;
+
+                for(var j=0; j<opcount; j++)
                 {
                     ref readonly var method = ref skip(methods,j);
+                    var @class = ApiQuery.apiclass(method);
+                    var key = ApiKeys.key(host.PartId, (ushort)host.HostType.MetadataToken, @class);
+
+                    var sig = method.Definition.DisplaySig();
+
+                    Wf.Row(ApiKeyFormats.bitfield(key));
                 }
             }
         }

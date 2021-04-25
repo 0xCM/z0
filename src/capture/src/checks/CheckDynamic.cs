@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    [ApiHost]
     public readonly struct CheckDynamic : ICheckDynamic
     {
         public static ICheckDynamic Checker => default(CheckDynamic);

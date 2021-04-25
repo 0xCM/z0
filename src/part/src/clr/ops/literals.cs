@@ -9,16 +9,15 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct ClrPrimitives
+    partial struct Clr
     {
         [Op, Closures(Closure)]
-        public static LiteralIndex<T> literals<T>()
-            where T : unmanaged
+        public static LiteralFields literals(Type type)
         {
-            var fields = typeof(T).Fields().Literals();
+            var fields = type.Fields().Literals();
             var count = (uint)fields.Length;
             var nameBuffer = sys.alloc<string>(count);
-            var valueBuffer = sys.alloc<T>(count);
+            var valueBuffer = sys.alloc<object>(count);
             ref var names = ref first(span(nameBuffer));
             ref var values = ref first(span(valueBuffer));
             var src = span(fields);
@@ -26,9 +25,9 @@ namespace Z0
             {
                 ref readonly var field = ref skip(src,i);
                 seek(names,i) = field.Name;
-                seek(values, i) = (T)field.GetRawConstantValue();
+                seek(values, i) = field.GetRawConstantValue();
             }
-            return new LiteralIndex<T>(fields, nameBuffer, valueBuffer);
+            return new LiteralFields(fields, nameBuffer, valueBuffer);
         }
     }
 }

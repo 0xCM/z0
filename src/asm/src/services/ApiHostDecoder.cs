@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public class ApiHostDecoder : AppService<ApiHostDecoder>
     {
-        IAsmDecoder Decoder;
+        AsmRoutineDecoder Decoder;
 
         protected override void OnInit()
         {

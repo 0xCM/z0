@@ -13,13 +13,13 @@ namespace Z0.Asm
     {
         public ApiHostUri Host {get;}
 
-        public Index<AsmApiStatement> Statements {get;}
+        public Index<AsmApiStatement> ApiStatements {get;}
 
         [MethodImpl(Inline)]
         public AsmHostStatements(ApiHostUri host, Index<AsmApiStatement> statements)
         {
             Host = host;
-            Statements = statements;
+            ApiStatements = statements;
         }
     }
 }

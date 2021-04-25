@@ -15,11 +15,14 @@ namespace Z0.Asm
 
         public ApiCaptureBlock Code {get;}
 
+        public TextBlock Asm {get;}
+
         [MethodImpl(Inline)]
-        public AsmRoutineCode(AsmRoutine f, ApiCaptureBlock code)
+        public AsmRoutineCode(AsmRoutine f, ApiCaptureBlock code, TextBlock asm)
         {
             Routine = f;
             Code = code;
+            Asm = asm;
         }
 
         public bool IsEmpty
@@ -36,5 +39,12 @@ namespace Z0.Asm
 
         public static AsmRoutineCode Empty
             => default;
+
+        public string Format()
+            => Asm;
+
+        public override string ToString()
+            => Format();
+
     }
 }

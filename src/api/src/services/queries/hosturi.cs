@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Reflection;
 
     using static memory;
 
-    partial struct ApiQuery
+    partial class ApiQuery
     {
         [Op]
         public static ApiHostUri hosturi(Type t)

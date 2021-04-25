@@ -25,7 +25,7 @@ namespace Z0
         public ClrDisplaySig DisplaySig
             => ClrDisplaySig.from(this);
 
-        ClrToken IClrArtifact.Id
+        ClrToken IClrArtifact.Token
             => Id;
 
         string IClrArtifact.Name

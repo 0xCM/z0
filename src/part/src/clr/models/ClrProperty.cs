@@ -18,7 +18,7 @@ namespace Z0
         public ClrProperty(PropertyInfo data)
             => Definition = data;
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -32,6 +32,18 @@ namespace Z0
 
         public ClrArtifactKind Kind
             => ClrArtifactKind.Property;
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Definition is null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
 
         [MethodImpl(Inline)]
         public string Format()

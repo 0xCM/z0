@@ -25,15 +25,19 @@ namespace Z0
         public static AppMsg FeatureUnsupported(object feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Fail($"Unsupported: {feature}", caller, file, line);
 
-        [Op]
         public static AppMsg KindOpUnsupported<S,T>(S src, T dst, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where S : Enum
             where T : Enum
                 => Fail($"fail(unsupported): {src} => {dst}", caller, file, line);
 
-        [Op]
-        public static AppMsg NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail($"fail(eq): {lhs} != {rhs}", caller, file, line);
+        public static AppMsg NotEqual<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Fail($"Equality fail, {lhs} != {rhs}", caller, file, line);
+
+        public static AppMsg neq<T>(T a, T b)
+            => AppMsg.colorize($"Equality fail, {a} != {b}", FlairKind.Error);
+
+        public static AppMsg eq<T>(T a,T b)
+            => AppMsg.colorize($"Inequality fail, {a} == {b}", FlairKind.Error);
 
         [Op]
         public static AppMsg NotClose(float lhs, float rhs, float err, float tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -44,8 +48,8 @@ namespace Z0
             => Fail($"fail(relerr): relerr({lhs},{rhs}) = {err} > {tolerance}",  caller, file, line) ;
 
         [Op]
-        public static AppMsg Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail($"fail(neq): {lhs} == {rhs}", caller, file, line) ;
+        public static AppMsg Equal<T>(T a,T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Fail($"fail(neq): {a} == {b}", caller, file, line) ;
 
         [Op]
         public static AppMsg NotLessThan(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

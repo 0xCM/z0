@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
 
-    partial struct ApiQuery
+    partial class ApiQuery
     {
         /// <summary>
         /// Searches an assembly for types tagged with the <see cref="ApiCompleteAttribute"/>
@@ -30,7 +30,7 @@ namespace Z0
                 var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
                 var uri = new ApiHostUri(part, name);
                 var declared = type.DeclaredMethods();
-                seek(dst, i) = new ApiRuntimeType(type, name, part, uri, declared, ApiQuery.index(declared));
+                seek(dst, i) = new ApiRuntimeType(type, name, part, uri, declared, index(declared));
             }
             return buffer;
         }

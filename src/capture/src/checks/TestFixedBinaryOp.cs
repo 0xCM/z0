@@ -15,18 +15,27 @@ namespace Z0
     {
         public IPolyrand Random {get;}
 
+        public IPolySource Source {get;}
+
         [MethodImpl(Inline)]
         internal static TestFixedBinaryOp Check(IPolyrand random)
             => new TestFixedBinaryOp(random);
 
         [MethodImpl(Inline)]
-        public static ICheckBinaryCellOp Service(IPolyrand random)
-            => Check(random);
+        internal static TestFixedBinaryOp Check(IPolySource source)
+            => new TestFixedBinaryOp(source);
 
         [MethodImpl(Inline)]
-        internal TestFixedBinaryOp(IPolyrand random)
+        internal TestFixedBinaryOp(IPolyrand source)
         {
-            Random = random;
+            Random = source;
+            Source = source;
+        }
+
+        [MethodImpl(Inline)]
+        internal TestFixedBinaryOp(IPolySource source)
+        {
+            Source = source;
         }
 
         ICheckAction ActionTest

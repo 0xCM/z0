@@ -37,7 +37,7 @@ namespace Z0
 
         public static MsgPattern<Count,PartName> DecodingPartRoutines => "Decoding {0} {1} hosts";
 
-        public static MsgPattern<Count,PartName> DecodedPartRoutines => "Decoded {0} {1} routines";
+        public static MsgPattern<Count,PartName,ApiDecoderStats> DecodedPartRoutines => "Decoded {0} {1} routines | {2}";
 
         public static MsgPattern<ApiHostUri> DecodingHostRoutines => "Decoding {0} routines";
 

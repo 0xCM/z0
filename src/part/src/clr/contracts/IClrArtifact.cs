@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// The artifact metadata token
         /// </summary>
-        ClrToken Id {get;}
+        ClrToken Token {get;}
 
         /// <summary>
         /// The artifact name
@@ -25,7 +25,7 @@ namespace Z0
         ClrArtifactKind Kind {get;}
 
         ClrArtifactRef Ref
-            => new ClrArtifactRef(Id, Kind ,Name);
+            => new ClrArtifactRef(Token, Kind ,Name);
 
         string ITextual.Format()
             => Name;

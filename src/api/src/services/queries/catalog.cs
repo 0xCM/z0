@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct ApiQuery
+    partial class ApiQuery
     {
         [Op]
         public static IApiRuntimeCatalog catalog(params IPart[] parts)

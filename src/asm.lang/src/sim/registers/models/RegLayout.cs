@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
 
     public struct RegLayout
     {
@@ -25,7 +21,6 @@ namespace Z0.Asm
 
         public RegKind R512;
     }
-
 
     /*
         | Index | Code  | [63:0] | [31:0] | [15:0] | [7:0] |
@@ -63,9 +58,5 @@ namespace Z0.Asm
         | 13    | 001101 | zmm13   | ymm13   | xmm13   |
         | 14    | 001110 | zmm14   | ymm14   | xmm14   |
         | 15    | 001111 | zmm15   | ymm15   | xmm15   |
-
-
     */
-
-
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct ApiQuery
+    partial class ApiQuery
     {
         [Op]
         public static ApiGroupNG[] imm(IApiHost host, RefinementClass kind)

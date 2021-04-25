@@ -57,7 +57,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 var method = skip(methods, i);
-                seek(dst,i) = ClrMembers.address(method, jit(method));
+                seek(dst,i) = Clr.address(method, jit(method));
             }
             return buffer;
         }

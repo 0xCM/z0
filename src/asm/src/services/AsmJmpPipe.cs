@@ -14,9 +14,6 @@ namespace Z0.Asm
 
     public sealed class AsmJmpPipe : AppService<AsmJmpPipe>
     {
-        public Index<AsmJmpRow> EmitRows(ApiAsmDataset src)
-            => EmitRows(src.Routines);
-
         public Index<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmJmpRow>();

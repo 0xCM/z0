@@ -16,7 +16,7 @@ namespace Z0.Asm
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    readonly struct AsmRoutineDecoder : IAsmDecoder
+    public class AsmRoutineDecoder : IAsmDecoder
     {
         readonly AsmFormatConfig AsmFormat;
 

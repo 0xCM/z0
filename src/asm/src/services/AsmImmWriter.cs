@@ -23,7 +23,7 @@ namespace Z0.Asm
         readonly IAsmRoutineFormatter Formatter;
 
         [MethodImpl(Inline)]
-        public AsmImmWriter(IWfRuntime wf, ApiHostUri host, IAsmRoutineFormatter formatter)
+        public AsmImmWriter(IWfRuntime wf, in ApiHostUri host, IAsmRoutineFormatter formatter)
         {
             Wf = wf;
             Uri = host;

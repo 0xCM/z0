@@ -12,7 +12,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ApiQuery
+    partial class ApiQuery
     {
         [Op]
         public static MethodInfo[] generic(IApiHost host)
@@ -52,5 +52,8 @@ namespace Z0
 
         static IEnumerable<ApiMethodNG> DirectOpSpecs(IApiHost src)
             => from m in tagged(src).NonGeneric() select new ApiMethodNG(src, Diviner.Identify(m), m);
+
+        static MethodInfo[] tagged(IApiHost src)
+            => src.Methods.Storage.Tagged<OpAttribute>();
     }
 }

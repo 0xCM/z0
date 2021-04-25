@@ -22,7 +22,7 @@ namespace Z0
         public ClrMember(MemberInfo src)
             => Definition = src;
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -32,6 +32,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Definition;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Definition is null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
         }
 
         MemberInfo IClrRuntimeObject<MemberInfo>.Definition

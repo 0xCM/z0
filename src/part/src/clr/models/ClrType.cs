@@ -27,7 +27,7 @@ namespace Z0
             get => Definition.Assembly;
         }
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -43,6 +43,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => memory.recover<Type,ClrType>(Definition.GetNestedTypes());
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Definition is null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
         }
 
         string IClrArtifact.Name

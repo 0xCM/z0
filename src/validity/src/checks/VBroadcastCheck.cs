@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
 
-    static class VChecks
+    public static class VBroadcastChecks
     {
        [MethodImpl(Inline)]
        public static VBroadcastCheck128<S,T> vbroadcast<S,T>(N128 w, S s = default, T t = default)

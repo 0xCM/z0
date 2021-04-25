@@ -5,18 +5,20 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
+    using static memory;
     using static Part;
 
-    partial struct ClrPrimitives
+    partial class ApiQuery
     {
-        /// <summary>
-        /// Determines whether an identified <see cref='ClrPrimalKind'/> can be a compile-time literal
-        /// </summary>
-        /// <param name="src">The kind to test</param>
         [MethodImpl(Inline), Op]
-        public static bool literal(ClrPrimalKind src)
-            => ((byte)src > 2 && (byte)src<16) || (byte)src == 18;
+        public static ApiHostMethods hosted(IApiHost host, MethodInfo[] methods)
+            => new ApiHostMethods(host, methods);
+
+        [MethodImpl(Inline), Op]
+        public static ApiHostMethods hosted(IApiHost src)
+            => hosted(src, src.Methods);
     }
 }

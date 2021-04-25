@@ -51,7 +51,7 @@ namespace Z0
                     row.Symbol = f.Name;
                 row.DirectValue = (E)f.GetRawConstantValue();
                 row.Identity = identity(f, row.Position);
-                row.EncodedValue = ClrPrimitives.encode(kind, row.DirectValue);
+                row.EncodedValue = ClrEnums.@ulong(kind, row.DirectValue);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
             }
 

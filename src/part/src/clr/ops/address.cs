@@ -17,15 +17,27 @@ namespace Z0
             => src.TypeHandle.Value;
 
         [MethodImpl(Inline), Op]
-        public static MemoryAddress address(MethodInfo src)
-            => src.MethodHandle.Value;
-
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress address(FieldInfo src)
-            => src.FieldHandle.Value;
-
-        [MethodImpl(Inline), Op]
         public static MemoryAddress address(Delegate src)
-            => src.Method.MethodHandle.Value;
+            => src.Method.MethodHandle.GetFunctionPointer();
+
+        [MethodImpl(Inline), Op]
+        public static MemberAddress address(ClrMember member, MemoryAddress address)
+            => new MemberAddress(member,address);
+
+        /// <summary>
+        /// Computes the <see cref='MemberAddress'/> of a specified <see cref='MethodInfo'/>
+        /// </summary>
+        /// <param name="src">The source member</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe MemberAddress address(MethodInfo src)
+            => new MemberAddress(src, src.MethodHandle.GetFunctionPointer());
+
+        /// <summary>
+        /// Computes the <see cref='MemberAddress'/> of a specified <see cref='FieldInfo'/>
+        /// </summary>
+        /// <param name="src">The source member</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe MemberAddress address(FieldInfo src)
+            => new MemberAddress(src, src.FieldHandle.Value.ToPointer());
     }
 }

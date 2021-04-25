@@ -2,10 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public interface IApiCaptureEmitter
+    public readonly struct CheckVectorsHost : ICheckVectors
     {
-        AsmHostRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src);
+
     }
 }

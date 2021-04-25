@@ -12,19 +12,24 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public struct ApiCaptureEmitter : IApiCaptureEmitter
+    public class ApiCaptureEmitter : AppService<ApiCaptureEmitter>//, IApiCaptureEmitter
     {
-        readonly IWfRuntime Wf;
+        MsilPipe IlPipe;
 
-        readonly MsilPipe IlPipe;
+        ApiHex ApiHex;
 
-        readonly ApiHex ApiHex;
+        ApiHostAsmEmitter HostEmitter;
 
-        public ApiCaptureEmitter(IWfRuntime wf)
+        public ApiCaptureEmitter()
         {
-            Wf = wf;
+
+        }
+
+        protected override void OnInit()
+        {
             IlPipe = Wf.MsilPipe();
             ApiHex = Wf.ApiHex();
+            HostEmitter = Wf.AsmHostEmitter();
         }
 
         public AsmHostRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
@@ -126,8 +131,7 @@ namespace Z0
 
         AsmHostRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts, FS.FilePath dst)
         {
-            var emitter = Wf.AsmHostEmitter();
-            var decoded = emitter.Emit(host, src, dst);
+            var decoded = HostEmitter.Emit(host, src, dst);
             if(decoded.Count != 0)
                 MatchAddresses(extracts, decoded.AsmRoutines);
             return decoded;
@@ -146,29 +150,6 @@ namespace Z0
             }
             Tables.emit(records,dst);
             return buffer;
-            // var count = src.Length;
-            // ref readonly var w0 = ref skip(X86TableWidths, 0);
-            // ref readonly var w1 = ref skip(X86TableWidths, 1);
-            // ref readonly var w2 = ref skip(X86TableWidths, 2);
-            // var pattern = text.embrace($"0,-{w0}") + RP.SpacedPipe
-            //             + text.embrace($"1,-{w1}") + RP.SpacedPipe
-            //             + text.embrace($"2,-{w2}");
-
-            // using var writer = dst.Writer();
-            // writer.WriteLine(string.Format(pattern, nameof(ApiExtractRow.Base), nameof(ApiExtractRow.Uri), nameof(ApiExtractRow.Encoded)));
-
-            // var buffer = alloc<ApiExtractRow>(count);
-            // var records = span(buffer);
-            // for(var i=0u; i<count; i++)
-            // {
-            //     ref readonly var code = ref skip(src, i);
-            //     if(code.IsNonEmpty)
-            //     {
-            //         var extract = row(code, ref seek(records,i));
-            //         writer.WriteLine(string.Format(pattern, extract.Base, extract.Uri, extract.Encoded));
-            //     }
-            // }
-            // return buffer;
         }
 
         [MethodImpl(Inline), Op]

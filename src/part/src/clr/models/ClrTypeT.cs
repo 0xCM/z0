@@ -18,7 +18,7 @@ namespace Z0
 
         public Type Definition => TD;
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

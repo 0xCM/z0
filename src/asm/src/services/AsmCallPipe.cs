@@ -5,16 +5,12 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
     public sealed class AsmCallPipe : AppService<AsmCallPipe>
     {
-        public Index<AsmCallRow> EmitRows(ApiAsmDataset src)
-            => EmitRows(src.Routines);
-
         public Index<AsmCallRow> EmitRows(ReadOnlySpan<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmCallRow>();

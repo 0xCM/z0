@@ -9,22 +9,27 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public struct ApiHostAsmEmitter
+    public class ApiHostAsmEmitter : AppService<ApiHostAsmEmitter>
     {
-        readonly IWfRuntime Wf;
+        ApiHostDecoder Decoder;
 
-        public ApiHostAsmEmitter(IWfRuntime wf)
+        public ApiHostAsmEmitter()
         {
-            Wf = wf;
+
+        }
+
+        protected override void OnInit()
+        {
+            Decoder = Wf.ApiHostDecoder();
         }
 
         public AsmHostRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)
-            => Emit(host,src, Wf.Db().AsmPath(host));
+            => Emit(host,src, Db.AsmPath(host));
 
         public AsmHostRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
             var flow = Wf.Running(Msg.EmittingHostRoutines.Format(host));
-            var decoded = Wf.ApiHostDecoder().Decode(host, src);
+            var decoded = Decoder.Decode(host, src);
             var emitted = Emit(host, decoded.Storage, dst);
             Wf.Ran(flow, Msg.EmittedHostRoutines.Format(emitted, host, dst.ToUri()));
             return decoded;

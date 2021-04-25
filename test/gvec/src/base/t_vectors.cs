@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_vectors<U> : UnitTest<U,CheckVectors,ICheckVectors>
+    public abstract class t_vectors<U> : UnitTest<U,CheckVectorsHost,ICheckVectors>
         where U : t_vectors<U>,new()
     {
 

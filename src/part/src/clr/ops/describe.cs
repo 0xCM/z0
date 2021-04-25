@@ -7,17 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static Root;
 
-    partial struct ClrPrimitives
+    partial struct Clr
     {
-        /// <summary>
-        /// Determines whether a specified type is a system-defined primitive
-        /// </summary>
-        /// <param name="src">The type to test</param>
         [MethodImpl(Inline), Op]
-        public static bool test(Type src)
-            => kind(src) != 0;
+        public static ClrPrimitiveInfo describe(ClrPrimalKind src)
+            => new ClrPrimitiveInfo(src, width(src), sign(src), (PrimalCode)typecode(src));
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
             get => Definition.IsStatic;
         }
 
-        public ClrToken Id
+        public ClrToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
