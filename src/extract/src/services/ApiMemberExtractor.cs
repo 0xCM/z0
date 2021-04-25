@@ -10,6 +10,8 @@ namespace Z0
     using static Part;
     using static memory;
 
+    using api = ApiExtracts;
+
     /// <summary>
     /// Extracts operations from an api host
     /// </summary>
@@ -28,11 +30,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal ApiMemberExtractor(int bufferlen)
-            => _Buffer = alloc<byte>(bufferlen);
+        internal ApiMemberExtractor(byte[] buffer)
+            => _Buffer = buffer;
 
         [MethodImpl(Inline)]
         public Index<ApiMemberExtract> Extract(ApiMember[] src)
-            => ApiExtracts.extract(src, Buffer);
+            => api.extract(src, Buffer);
     }
 }

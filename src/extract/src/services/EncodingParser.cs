@@ -7,32 +7,34 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using K = EncodingPatternKind;
-    using S = EncodingParserState;
-
     using static Part;
     using static memory;
+
+    using K = EncodingPatternKind;
+    using S = EncodingParserState;
+    using api = ApiExtracts;
 
     [ApiHost]
     public ref struct EncodingParser
     {
-        readonly Span<byte> Buffer;
+        internal readonly Span<byte> Buffer;
 
-        int Offset;
+        internal int Offset;
 
-        S State;
+        internal S State;
 
-        K Outcome;
+        internal K Outcome;
 
-        int Delta;
+        internal int Delta;
 
-        readonly EncodingPatterns Patterns;
+        internal readonly EncodingPatterns Patterns;
 
         public byte[] Parsed
             => ParsedSlice.ToArray();
 
         ReadOnlySpan<byte> ParsedSlice
-            =>  (Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : sys.empty<byte>();
+            => api.parsed(this);
+            //(Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : sys.empty<byte>();
 
         internal EncodingParser(EncodingPatterns patterns, byte[] buffer)
         {
