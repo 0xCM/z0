@@ -12,10 +12,6 @@ namespace Z0.Lang
             public UnaryArithmeticKind Kind {get;}
         }
 
-        public readonly struct BinaryArithmetic
-        {
-            public BinaryArithmeticKind Kind {get;}
-        }
 
         public readonly struct BooleanComparison
         {

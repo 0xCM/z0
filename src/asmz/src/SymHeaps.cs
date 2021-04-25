@@ -54,7 +54,6 @@ namespace Z0
             return width;
         }
 
-
         [Op]
         public static SymHeapSpec specify(ReadOnlySpan<SymLiteral> src)
         {
@@ -88,7 +87,7 @@ namespace Z0
                 seek(offsets,i) = offset;
                 symsrc.CopyTo(cover(seek(symdst, offset), width));
 
-                offset+=width;
+                offset += width;
             }
 
             return dst;

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using ULK = UnaryBitLogicKind;
     using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;

@@ -9,13 +9,19 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiClass
+    public readonly struct ApiClass : ITextual
     {
         readonly ApiClassKind Kind;
 
         [MethodImpl(Inline)]
         public ApiClass(ApiClassKind kind)
             => Kind = kind;
+
+        public string Format()
+            => Kind.Format();
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator ApiClass(ApiClassKind kind)
@@ -28,8 +34,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(ApiClass src)
             => (ushort)src.Kind;
-
-        public string Format()
-            => Kind.Format();
     }
 }

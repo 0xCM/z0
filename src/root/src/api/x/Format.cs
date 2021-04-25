@@ -19,9 +19,9 @@ namespace Z0
         public static bool IsUserApi(this ApiClassKind src)
             => src.IsDefined() && !src.IsOpaque();
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string Format(this ApiClassKind src)
-            => src.IsOpaque() ? "opaque" : src.ToString().ToLower();
+            => src == 0 ? "unclassified" : src.ToString().ToLower();
 
         public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
             => src != TernaryBitLogicKind.XFF

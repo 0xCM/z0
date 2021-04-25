@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Dynamics
 {
-    using System;
-    
     /// <summary>
     /// Represents a comparison operator
     /// </summary>
