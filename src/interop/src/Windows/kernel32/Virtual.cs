@@ -10,9 +10,6 @@ namespace Windows
 
     partial struct Kernel32
     {
-        [DllImport(LibName), Free]
-        public static extern bool GetProcessWorkingSetSizeEx(IntPtr hProcess, out IntPtr lpMinimumWorkingSetSize, out IntPtr lpMaximumWorkingSetSize, out uint flags);
-
         public static UIntPtr VirtualAlloc(uint allocSize, MemAllocType type, PageProtection protection)
             => VirtualAlloc(lpAddress: UIntPtr.Zero, new UIntPtr(allocSize), type, protection);
 

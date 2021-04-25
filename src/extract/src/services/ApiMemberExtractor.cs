@@ -32,7 +32,7 @@ namespace Z0
             => _Buffer = alloc<byte>(bufferlen);
 
         [MethodImpl(Inline)]
-        public Index<ApiMemberExtract> Extract(ApiMember[] members)
-            => ApiExtracts.extract(members, Buffer);
+        public Index<ApiMemberExtract> Extract(ApiMember[] src)
+            => ApiExtracts.extract(src, Buffer);
     }
 }

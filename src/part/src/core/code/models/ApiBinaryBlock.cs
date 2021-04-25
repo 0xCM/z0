@@ -2,26 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct ApiParseResult
+    public readonly struct ApiBinaryBlock : IApiSourceBlock<ApiBinaryBlock, BinarySourceBlock>
     {
-        public readonly OpIdentity Id;
+        public ApiToken Id {get;}
 
-        public readonly CapturedCodeBlock Code;
-
-        public readonly CaptureOutcome Outcome;
+        public BinarySourceBlock SourceCode {get;}
 
         [MethodImpl(Inline)]
-        public ApiParseResult(OpIdentity id, CaptureOutcome info, CapturedCodeBlock encoded)
+        public ApiBinaryBlock(ApiToken id, BinarySourceBlock src)
         {
             Id = id;
-            Outcome = info;
-            Code = encoded;
+            SourceCode = src;
         }
     }
 }

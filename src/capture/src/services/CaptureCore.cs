@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     unsafe sealed class CaptureCore : AppService<CaptureCore>, ICaptureCore
     {
-        public Option<ApiParseResult> Capture(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
+        public Option<ApiCaptureResult> Capture(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return root.none<ApiParseResult>();
+                return root.none<ApiCaptureResult>();
             }
         }
 
@@ -80,7 +80,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<ApiParseResult> Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
+        public Option<ApiCaptureResult> Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return root.none<ApiParseResult>();
+                return root.none<ApiCaptureResult>();
             }
         }
 
@@ -131,11 +131,11 @@ namespace Z0.Asm
             => new ApiCaptureBlock(id, src.Method, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
-        static ApiParseResult capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
-            => ApiCaptureDiviner.divine(exchange.Buffer, id, (byte*)Unsafe.AsPointer(ref src));
+        static ApiCaptureResult capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
+            => ApiExtracts.divine(exchange.Buffer, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
-        static ApiParseResult capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
-            => ApiCaptureDiviner.divine(exchange.Buffer, id, src.ToPointer<byte>());
+        static ApiCaptureResult capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
+            => ApiExtracts.divine(exchange.Buffer, id, src.ToPointer<byte>());
     }
 }

@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public static class EncodingPatternTokens
+    readonly struct EncodingPatternTokens
     {
         public const byte ZED = 0;
 

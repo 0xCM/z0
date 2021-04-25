@@ -65,7 +65,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Location);
+            get => (uint)Location;
         }
 
         [MethodImpl(Inline)]
@@ -109,6 +109,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(IntPtr src)
             => new MemoryAddress((ulong)src.ToInt64());
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(UIntPtr src)
+            => new MemoryAddress(src.ToUInt64());
 
         [MethodImpl(Inline)]
         public static implicit operator IntPtr(MemoryAddress src)

@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using K = EncodingPatternKind;
     using S = EncodingParserState;
+    using api = ApiExtracts;
 
     using static Part;
     using static memory;
+
 
     public ref struct EncodingParser
     {
@@ -25,8 +26,6 @@ namespace Z0
         K Outcome;
 
         int Delta;
-
-        //readonly Dictionary<byte,int> Accepted;
 
         readonly EncodingPatterns Patterns;
 
@@ -55,13 +54,13 @@ namespace Z0
             Delta = default;
         }
 
-        public S Parse(ReadOnlySpan<byte> src)
+        internal S Parse(ReadOnlySpan<byte> src)
         {
             Start();
 
             var i=0;
 
-            while(i < src.Length && !State.Finished())
+            while(i < src.Length && !Finished())
                 Parse(src[i++]);
 
             if(State == S.Accepting)
@@ -70,7 +69,17 @@ namespace Z0
             return State;
         }
 
-        public S Parse(byte src)
+        internal K Result
+        {
+            [MethodImpl(Inline)]
+            get => Finished() ? Outcome : default;
+        }
+
+        [MethodImpl(Inline)]
+        bool Finished()
+            => (State & EncodingParserState.Completed) != 0;
+
+        S Parse(byte src)
         {
             if(State == S.Accepting && Offset < Buffer.Length)
             {
@@ -86,12 +95,6 @@ namespace Z0
             }
 
             return State;
-        }
-
-        public K Result
-        {
-            [MethodImpl(Inline)]
-            get => State.Finished() ? Outcome : default;
         }
 
         bool TryMatch(out K kind, out int delta)

@@ -4,21 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    /// <summary>
-    /// Defines the potential byte parser states
-    /// </summary>
-    public enum EncodingParserState
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    [Flags]
+    public enum BinaryRenderKind : byte
     {
         None = 0,
 
-        Accepting = 1,
+        LowerHex = 1,
 
-        Failed = 2,
+        UpperHex = 2,
 
-        Succeeded = 4,
+        Bits = 4,
 
-        Unmatched = 8,
-
-        Completed = Failed | Succeeded
+        Delimited = 8,
     }
 }

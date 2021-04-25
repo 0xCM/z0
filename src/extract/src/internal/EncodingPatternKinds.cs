@@ -4,16 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum EncodingPatternKind : long
+    enum EncodingPatternKind : long
     {
         None = 0,
 
         RET_SBB = ExtractTermCode.CTC_RET_SBB,
-        
+
         RET_INTR = ExtractTermCode.CTC_RET_INTR,
 
         RET_ZED_SBB = ExtractTermCode.CTC_RET_ZED_SBB,
-        
+
         RET_Zx3 = ExtractTermCode.CTC_RET_Zx3,
 
         RET_Zx7 = ExtractTermCode.CTC_RET_Zx7,
@@ -26,7 +26,7 @@ namespace Z0
         Zx7 = ExtractTermCode.CTC_Zx7,
 
         JMP_RAX = ExtractTermCode.CTC_JMP_RAX,
-        
+
         /// <summary>
         /// Identifies the partial pattern e8 ?? ?? ?? ?? cc
         /// </summary>

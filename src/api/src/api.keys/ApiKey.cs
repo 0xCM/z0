@@ -14,7 +14,6 @@ namespace Z0
 
     using api = ApiKeys;
 
-
     /// <summary>
     /// Defines a 128-bit bitfield that identifies an api operation along with its operands
     /// </summary>

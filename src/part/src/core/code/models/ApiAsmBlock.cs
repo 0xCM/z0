@@ -8,9 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    public static partial class XSvc
+    public readonly struct ApiAsmBlock : IApiSourceBlock<ApiAsmBlock, AsmSourceBlock>
     {
+        public ApiToken Id {get;}
+
+        public AsmSourceBlock SourceCode {get;}
+
+        [MethodImpl(Inline)]
+        public ApiAsmBlock(ApiToken id, AsmSourceBlock src)
+        {
+            Id = id;
+            SourceCode = src;
+        }
     }
 }

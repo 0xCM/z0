@@ -71,7 +71,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="id">The identity to confer to the parsed buffer</param>
         /// <param name="src">The source buffer</param>
-        Option<ApiParseResult> Capture(OpIdentity id, Span<byte> src)
+        Option<ApiCaptureResult> Capture(OpIdentity id, Span<byte> src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>

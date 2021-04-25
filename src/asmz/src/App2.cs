@@ -1303,25 +1303,14 @@ namespace Z0.Asm
             Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
         }
 
-        public void ParseExtracts()
-        {
-            var pipe = Wf.ApiExtractPipe();
-            var paths = pipe.Paths();
-            var extracts = pipe.Read(paths).View;
-            var parsed = ApiExtracts.parse(extracts);
-            var hex = Wf.ApiHex();
-            var packed = hex.BuildHexPack(parsed);
-            var outfile = Db.AppLog("apihex", FS.ext("xpack"));
-            hex.EmitHexPack(parsed.ToArray(), outfile);
-        }
 
         public void Run()
         {
-            //CaptureParts(PartId.Extract);
+            CaptureParts(PartId.Extract);
 
-            var checks = ApiKeyChecks.create(Wf);
-            checks.Run();
-            //ParseExtracts();
+            // var checks = ApiKeyChecks.create(Wf);
+            // checks.Run();
+            // //ParseExtracts();
             //CaptureParts(PartId.AsmZ);
             //DeriveMsil();
             // var tool = Wf.DumpBin();

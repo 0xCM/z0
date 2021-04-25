@@ -9,6 +9,9 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static ExtractTermCode;
+
+    using EP = EncodingParser;
 
     [ApiHost]
     public readonly struct ApiExtracts
@@ -17,91 +20,27 @@ namespace Z0
 
         const int MaxZeroCount = 10;
 
-        [MethodImpl(Inline), Op]
-        public static EncodingParser patterns(byte[] buffer)
-            => new EncodingParser(EncodingPatterns.Default, buffer);
+        const byte ZED = 0;
+
+        const byte RET = 0xc3;
+
+        const byte INTR = 0xcc;
+
+        const byte SBB = 0x19;
+
+        const byte FF = 0xff;
+
+        const byte E0 = 0xe0;
+
+        const byte J48 = 0x48;
+
+
+        public static ApiMemberExtractor extractor()
+            => new ApiMemberExtractor(DefaultBufferLength);
 
         [MethodImpl(Inline), Op]
-        public static PatternExtractParser parser(uint size = DefaultBufferLength)
-            => new PatternExtractParser(sys.alloc<byte>(size));
-
-        [Op]
-        public static Index<ApiCodeBlock> parse(ReadOnlySpan<ApiExtractBlock> src)
-        {
-            var count = src.Length;
-            var buffer = alloc<ApiCodeBlock>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = parse(skip(src,i));
-            return buffer;
-        }
-
-        [Op]
-        public static ApiCodeBlock parse(in ApiExtractBlock src)
-        {
-            var j = terminal(src);
-            var code = slice(src.View, 0, j);
-            return new ApiCodeBlock(src.BaseAddress, src.Uri, code.ToArray());
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint parse(ReadOnlySpan<byte> src, Span<byte> dst)
-        {
-            var j = terminal(src);
-            var code = slice(src,0,j);
-            code.CopyTo(dst);
-            return j;
-        }
-
-        [MethodImpl(Inline), Op]
-        static uint terminal(ReadOnlySpan<byte> src)
-        {
-            var count = (uint)src.Length;
-            var j = count;
-            var test = 0u;
-            for(var i=0u; i<count - 1; i++)
-            {
-                test = terminal(skip(src,i),skip(src, i+1));
-                if(test !=0)
-                {
-                    j = i + test;
-                    break;
-                }
-            }
-
-            return j;
-        }
-
-        /// <summary>
-        /// Attempts to find the logical end of the block
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline), Op]
-        static uint terminal(in ApiExtractBlock src)
-            => terminal(src.Encoded.View);
-
-        /// <summary>
-        /// Tests for a terminal opcode sequence
-        /// </summary>
-        /// <param name="a0"></param>
-        /// <param name="a1"></param>
-        /// <returns>
-        /// This follows https://github.com/microsoft/Detours/samples/disas/disas.cpp, but seems to miss a lot
-        /// </returns>
-        [MethodImpl(Inline), Op]
-        static byte terminal(byte a0, byte a1)
-        {
-            if(0xC3 == a0 && 0x00 == a1)
-                return 2;
-
-            if (0xCB == a0 || 0xC2 == a0 || 0xCA == a0 || 0xEB == a0 || 0xE9 == a0 || 0xEA == a0)
-                return 1;
-
-            if(0xff == a0 && 0x25 == a1)
-                return 2;
-
-            return 0;
-        }
+        public static PatternExtractParser parser()
+            => new PatternExtractParser(sys.alloc<byte>(DefaultBufferLength));
 
         [Op]
         public static unsafe ApiMemberExtract[] extract(ReadOnlySpan<ApiMember> src, Span<byte> buffer)
@@ -123,8 +62,34 @@ namespace Z0
             return new ApiMemberExtract(src, new ApiExtractBlock(address, src.OpUri, extracted));
         }
 
+        [Op]
+        public static unsafe ApiCaptureResult divine(Span<byte> dst, OpIdentity id, byte* pSrc)
+        {
+            var limit = dst.Length - 1;
+            var start = (long)pSrc;
+            var offset = 0;
+            int? ret_offset = null;
+            var end = (long)pSrc;
+            var state = default(byte);
+
+            while(offset < limit)
+            {
+                state = ApiExtracts.step(dst, id, ref offset, ref end, ref pSrc);
+                if(ret_offset == null && state == RET)
+                    ret_offset = offset;
+                var tc = ApiExtracts.term(dst, offset, ret_offset, out var delta);
+                if(tc != null)
+                    return ApiExtracts.summarize(dst, id, tc.Value, start, end, delta);
+            }
+            return ApiExtracts.summarize(dst, id, CTC_BUFFER_OUT, start, end, 0);
+        }
+
         [MethodImpl(Inline), Op]
-        static unsafe int extract(MemoryAddress src, Span<byte> dst)
+        internal static EP encodings(byte[] buffer)
+            => new EP(EncodingPatterns.Default, buffer);
+
+        [MethodImpl(Inline), Op]
+        internal static unsafe int extract(MemoryAddress src, Span<byte> dst)
         {
             var pSrc = src.Pointer<byte>();
             var limit = dst.Length;
@@ -132,11 +97,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static unsafe int read(ref byte* pSrc, int count, Span<byte> dst)
+        internal static unsafe int read(ref byte* pSrc, int count, Span<byte> dst)
             => read(ref pSrc, count, ref first(dst));
 
         [MethodImpl(Inline), Op]
-        static unsafe int read(ref byte* pSrc, int limit, ref byte dst)
+        internal static unsafe int read(ref byte* pSrc, int limit, ref byte dst)
         {
             var offset = 0;
             var count = 0;
@@ -151,5 +116,220 @@ namespace Z0
             }
             return offset;
         }
+
+        [Op]
+        internal static int extractSize(Span<byte> src, int maxcut, byte code)
+        {
+            var srcLen = src.Length;
+            var cut = 0;
+            if(srcLen > maxcut)
+            {
+                var start = srcLen - maxcut - 1;
+                ref readonly var lead = ref skip(src, maxcut);
+                ref readonly var current = ref lead;
+                for(var i=start; i<srcLen && cut < maxcut; i++, cut++)
+                {
+                    current = ref skip(lead, i);
+                    if(current == code)
+                        break;
+                }
+            }
+            var dstLen = src.Length - cut;
+            return dstLen <= 0 ? src.Length : dstLen;
+        }
+
+        [Op]
+        internal static CodeBlock locate(MemoryAddress address, byte[] src, int cut)
+        {
+            if(cut == 0)
+                return new CodeBlock(address, src);
+            else
+            {
+                Span<byte> data = src;
+                var len = ApiExtracts.extractSize(data, cut, 0xC3);
+                var keep = data.Slice(0, len);
+                return new CodeBlock(address, keep.ToArray());
+            }
+        }
+
+        [MethodImpl(Inline), Op]
+        internal static ExtractTermCode termcode(EncodingPatternKind src)
+        {
+            if(src != 0)
+                return (ExtractTermCode)src;
+            else
+                return ExtractTermCode.Fail;
+        }
+
+        [MethodImpl(Inline), Op]
+        internal static bool failure(EncodingParserState state)
+            => state == EncodingParserState.Failed;
+
+        [Op]
+        internal static Outcome<ApiMemberCode> parse(EP parser, in ApiMemberExtract src, uint seq)
+        {
+            const int Zx7Cut = 7;
+
+            try
+            {
+                var status = parser.Parse(src.Block.Encoded.View);
+                var term = failure(status) ? ExtractTermCode.Fail : termcode(parser.Result);
+                if(term != ExtractTermCode.Fail)
+                {
+                    var code = locate(src.Block.BaseAddress, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
+                    return new ApiMemberCode(src.Member, new ApiCodeBlock(code.BaseAddress, src.OpUri, code), seq, term);
+                }
+                else
+                    return Outcomes.fail<ApiMemberCode>(term.ToString());
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+
+        [Op]
+        internal static Index<ApiMemberCode> parse(EP parser, ReadOnlySpan<ApiMemberExtract> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return default;
+
+            var buffer = alloc<ApiMemberCode>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                var outcome = parse(parser, skip(src,i), i);
+                if(outcome)
+                    seek(dst, i) = outcome.Data;
+                else
+                    seek(dst, i) = ApiMemberCode.Empty;
+            }
+            return buffer;
+        }
+
+        [Op, MethodImpl(Inline)]
+        internal static unsafe byte step(Span<byte> dst, OpIdentity id, ref int offset, ref long location, ref byte* pSrc)
+        {
+            var code = Unsafe.Read<byte>(pSrc++);
+            dst[offset++] = code;
+            location = (long)pSrc;
+            return code;
+        }
+
+        [Op, MethodImpl(Inline)]
+        internal static CaptureOutcome complete(ExtractTermCode tc, long start, long end, int delta)
+            => new CaptureOutcome(((ulong)start, (ulong)(end + delta)), tc);
+
+        [Op, MethodImpl(Inline)]
+        internal static ApiCaptureResult summarize(Span<byte> src, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        {
+            var outcome = complete(tc, start, end, delta);
+            var raw = src.Slice(0, (int)(end - start)).ToArray();
+            var trimmed = src.Slice(0, outcome.ByteCount).ToArray();
+            var bits = new CapturedCodeBlock((MemoryAddress)start, raw, trimmed);
+            return new ApiCaptureResult(id, outcome, bits);
+        }
+
+        [Op]
+        internal static ExtractTermCode? term(Span<byte> src, int offset, int? ret_offset, out int delta)
+        {
+            delta = 0;
+
+            if(offset >= 4)
+            {
+                var tc = scan4(src, offset, out delta);
+                if(tc != null)
+                    return tc;
+            }
+
+            if(offset >= 5)
+            {
+                var tc = scan5(src, offset, out delta);
+                if(tc != null)
+                    return tc;
+            }
+
+            if(offset >= 7 && Zx7(src, offset))
+            {
+                if(ret_offset == null)
+                {
+                    delta = -6;
+                    return CTC_Zx7;
+                }
+                delta = -(offset - ret_offset.Value);
+                return CTC_RET_Zx7;
+            }
+
+            return null;
+        }
+
+        [Op, MethodImpl(Inline)]
+        internal static ExtractTermCode? scan4(Span<byte> src, int offset, out int delta)
+        {
+            var x0 = src[offset - 3];
+            var x1 = src[offset - 2];
+            var x2 = src[offset - 1];
+            var x3 = src[offset - 0];
+            delta = -2;
+
+            if(match((x0,RET), (x1, SBB)))
+                return CTC_RET_SBB;
+            else if(match((x0, RET), (x1, INTR)))
+                return CTC_RET_INTR;
+            else if(match((x0, RET), (x1, ZED), (x2,SBB)))
+                return CTC_RET_ZED_SBB;
+            else if(match((x0, RET), (x1, ZED), (x2,ZED)))
+                return CTC_RET_Zx3;
+            else if(match((x0,INTR), (x1, INTR)))
+                return CTC_INTRx2;
+            else
+                return null;
+        }
+
+        [Op, MethodImpl(Inline)]
+        internal static ExtractTermCode? scan5(Span<byte> src, int offset, out int delta)
+        {
+            var x0 = src[offset - 5];
+            var x1 = src[offset - 4];
+            var x2 = src[offset - 3];
+            var x3 = src[offset - 2];
+            var x4 = src[offset - 1];
+            delta = 0;
+
+            if(match((x0,ZED), (x1,ZED), (x2,J48), (x3,FF), (x4,E0)))
+                return CTC_JMP_RAX;
+            else
+                return null;
+        }
+
+        [Op, MethodImpl(Inline)]
+        internal static bool Zx7(Span<byte> src, int offset)
+            =>      src[offset - 6] == ZED
+                && (src[offset - 5] == ZED)
+                && (src[offset - 4] == ZED)
+                && (src[offset - 3] == ZED)
+                && (src[offset - 2] == ZED)
+                && (src[offset - 1] == ZED)
+                && (src[offset - 0] == ZED);
+
+        [Op, MethodImpl(Inline)]
+        internal static bit match((byte x, byte y) a, (byte x, byte y) b)
+            => a.x == a.y
+            && b.x == b.y;
+
+        [Op, MethodImpl(Inline)]
+        internal static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c)
+            => a.x == a.y
+            && b.x == b.y
+            && c.x == c.y;
+
+        [Op, MethodImpl(Inline)]
+        internal static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c, (byte x, byte y) d, (byte x, byte y) e)
+            => a.x == a.y
+            && b.x == b.y
+            && c.x == c.y
+            && d.x == d.y
+            && e.x == e.y;
     }
 }

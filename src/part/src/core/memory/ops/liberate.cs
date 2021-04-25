@@ -76,14 +76,6 @@ namespace Z0
             => liberate((byte*)pointer(ref first(src)), src.Length);
 
         /// <summary>
-        /// Can this ever be a good way to solve your problem?
-        /// </summary>
-        /// <param name="src">The buffer to let it be what it wants</param>
-        [MethodImpl(Inline), Op]
-        public static Span<char> liberate(ReadOnlySpan<char> src)
-            => cover(first(edit(src)),src.Length);
-
-        /// <summary>
         /// This may not be the best idea to solve your problem
         /// </summary>
         /// <param name="src">The buffer to let it be what it wants</param>

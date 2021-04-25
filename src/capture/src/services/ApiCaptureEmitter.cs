@@ -20,9 +20,11 @@ namespace Z0
 
         ApiHostAsmEmitter HostEmitter;
 
+        PatternExtractParser ExtractParser;
+
         public ApiCaptureEmitter()
         {
-
+            ExtractParser = ApiExtracts.parser();
         }
 
         protected override void OnInit()
@@ -117,8 +119,7 @@ namespace Z0
             if(src.Length != 0)
             {
                 var flow = Wf.Running();
-                var parser = ApiExtracts.parser();
-                var parsed = parser.ParseMembers(src);
+                var parsed = ExtractParser.ParseMembers(src);
                 Wf.Ran(flow, Msg.ParsedExtractBlocks.Format(parsed.Count, host));
                 return parsed;
             }

@@ -8,9 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    public static partial class XSvc
+    public struct ApiCodePack
     {
+        public Index<ApiCodeBlock> Blocks {get;}
+
+        public Index<CliSig> CliSigs {get;}
+
+        public Index<AsmSourceBlock> AsmSources {get;}
     }
 }

@@ -9,11 +9,8 @@ namespace Z0
 
     using static Part;
 
-    using W = Windows;
-
     partial struct Images
     {
-
         public readonly struct ImageMap
         {
             public ProcessState Process {get;}

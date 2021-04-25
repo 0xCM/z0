@@ -13,7 +13,7 @@ namespace Z0
 
     using D = EncodingPatternOffset;
 
-    public readonly struct EncodingPatterns
+    readonly struct EncodingPatterns
     {
         public static EncodingPatterns Default
             => new EncodingPatterns(0);

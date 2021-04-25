@@ -166,6 +166,14 @@ namespace Z0
             => new ByteSize((ulong)src);
 
         [MethodImpl(Inline)]
+        public static implicit operator ByteSize(UIntPtr src)
+            => new ByteSize((ulong)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator UIntPtr(ByteSize src)
+            => new UIntPtr(src.Content);
+
+        [MethodImpl(Inline)]
         public static implicit operator ByteSize(TypeWidth src)
             => new ByteSize((ulong)src/8);
 

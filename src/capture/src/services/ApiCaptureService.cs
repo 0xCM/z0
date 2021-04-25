@@ -22,9 +22,13 @@ namespace Z0
 
         ApiJit Jitter;
 
+        public ApiCaptureService()
+        {
+            Extractor = ApiExtracts.extractor();
+        }
+
         protected override void OnInit()
         {
-            Extractor = Wf.MemberExtractor();
             Emitter = Wf.CaptureEmitter();
             Jitter = Wf.ApiJit();
         }
