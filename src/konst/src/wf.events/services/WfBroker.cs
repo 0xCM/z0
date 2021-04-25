@@ -44,7 +44,7 @@ namespace Z0
             if(Subscriptions.TryAdd(typeof(E), sink))
                 return true;
             else
-                return (false, AppMsg.warn($"Key for {model} was previously added for {sink}"));
+                return (false, $"Key for {model} was previously added for {sink}");
         }
 
         [MethodImpl(Inline)]

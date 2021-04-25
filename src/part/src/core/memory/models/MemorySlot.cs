@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = MemorySlots;
-
     public struct MemorySlot
     {
         internal Hex8Seq Index;
@@ -25,11 +23,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public MemorySlot Advance()
-            => api.advance(ref this);
+            => memory.advance(ref this);
 
         [MethodImpl(Inline)]
         public MemorySlot Retreat()
-            => api.retreat(ref this);
+            => memory.retreat(ref this);
 
         [MethodImpl(Inline)]
         public static MemorySlot operator++(MemorySlot src)

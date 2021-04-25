@@ -22,14 +22,6 @@ namespace Z0
                 => cover<T>(src.Ref<T>(), count);
 
         /// <summary>
-        /// Computes the whole number of T-cells identified by a reference
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint count<T>(MemorySegment src)
-            => (uint)(src.Length/size<T>());
-
-        /// <summary>
         /// Covers a memory reference with a readonly span
         /// </summary>
         /// <param name="src">The source reference</param>

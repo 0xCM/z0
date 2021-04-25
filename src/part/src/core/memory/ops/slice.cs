@@ -149,5 +149,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, ulong offset, ulong length)
             => CreateSpan(ref seek(first(src), offset), (int)length);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> slice(ReadOnlySpan<MemorySegment> refs, MemorySlot n, int offset)
+            => slice(load(refs, n),offset);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> slice(ReadOnlySpan<MemorySegment> refs, MemorySlot n, int offset, int length)
+            => slice(load(refs,n), offset, length);
     }
 }

@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Addresses;
-
     public readonly struct RelativeAddress<T> : ITextual, INullity
         where T : unmanaged
     {
@@ -51,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => AddressParser.format(this);
 
         public bool Equals(RelativeAddress<T> src)
             => Offset.Equals(src.Offset);

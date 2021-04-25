@@ -20,6 +20,15 @@ namespace Z0
             return sys.copy(source,target);
         }
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> load<T>(MemorySegment src)
+            where T : struct
+                => src.Load<T>();
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> load(ReadOnlySpan<MemorySegment> src, MemorySlot n)
+            => segment(src,n).Load();
+
         [MethodImpl(Inline)]
         static void @check(in BinaryCode src, BufferToken dst)
         {

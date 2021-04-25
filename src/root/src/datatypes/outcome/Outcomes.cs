@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly partial struct Outcomes
@@ -41,5 +41,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Outcome<T> fail<T>()
             => new Outcome<T>(false);
+
+        [MethodImpl(Inline)]
+        internal static unsafe byte u8(bool src)
+            => *((byte*)(&src));
+
     }
 }

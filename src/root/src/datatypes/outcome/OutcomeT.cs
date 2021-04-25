@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+
+    using api = Outcomes;
 
     /// <summary>
     /// Describes an operation result
@@ -46,7 +48,7 @@ namespace Z0
             Ok = ok;
             Data = data;
             Message = EmptyString;
-            MessageCode = memory.u8(Ok);
+            MessageCode = api.u8(Ok);
         }
 
         public Outcome(bool ok, string message)
@@ -63,7 +65,7 @@ namespace Z0
             Ok = ok;
             Data = data;
             Message = message ?? EmptyString;
-            MessageCode = memory.u8(Ok);
+            MessageCode = api.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -81,7 +83,7 @@ namespace Z0
             Ok = false;
             Data = data;
             Message = e.ToString();
-            MessageCode = memory.u8(Ok);
+            MessageCode = api.u8(Ok);
         }
 
         public bool IsEmpty
@@ -118,7 +120,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format("{0}: {1}", Ok ? "Success" : "Fail", Ok ? (object)Data : (object) Message);
+            => string.Format("{0}: {1}", Ok ? "Success" : "Fail", Ok ? (object)Data : (object) Message);
 
         [MethodImpl(Inline)]
         public Outcome<T> OnSuccess(Action<T> f)

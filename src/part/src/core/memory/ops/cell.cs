@@ -11,6 +11,42 @@ namespace Z0
 
     partial struct memory
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T cell<T>(ReadOnlySpan<T> src, long offset)
+            => ref skip(src, offset);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T cell<T>(ReadOnlySpan<T> src, ulong offset)
+            => ref skip(src, offset);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T cell<T>(ReadOnlySpan<MemorySegment> src, MemorySlot n, long offset)
+             where T : struct
+                => ref cell<T>(load<T>(segment(src,n)), offset);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T cell<T>(ReadOnlySpan<MemorySegment> src, MemorySlot n, ulong offset)
+             where T : struct
+                => ref cell<T>(load<T>(segment(src,n)), offset);
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly byte cell(ReadOnlySpan<MemorySegment> src, MemorySlot n, long i)
+            => ref skip(segment(src,n).Load(), (uint)i);
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly byte cell(ReadOnlySpan<MemorySegment> src, MemorySlot n, ulong i)
+            => ref skip(segment(src,n).Load(), (uint)i);
+
+        /// <summary>
+        /// Reads a generic value from the head of a source span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Int8x64k)]
+        public static ref T cell<T>(Span<byte> src)
+            where T : unmanaged
+                => ref first<T>(src);
+
         /// <summary>
         /// Reads a generic value from the head of a source span
         /// </summary>
@@ -31,16 +67,6 @@ namespace Z0
         public static ref readonly T cell<T>(ReadOnlySpan<byte> src, int offset)
             where T : unmanaged
                 => ref first<T>(slice(src,offset));
-
-        /// <summary>
-        /// Reads a generic value from the head of a source span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Int8x64k)]
-        public static ref T cell<T>(Span<byte> src)
-            where T : unmanaged
-                => ref first<T>(src);
 
         /// <summary>
         /// Reads an unmanaged generic value from a bytespan beginning at a specified offset
@@ -64,6 +90,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ulong cell64(Span<byte> src, uint offset)
             => ref first<ulong>(slice(src, offset));
-
     }
 }

@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct memory
     {
+        [Op]
         public static unsafe BasicMemoryInfo basic()
         {
             var src = new MEMORY_BASIC_INFORMATION();

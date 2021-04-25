@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Addresses;
-
     public readonly struct RelativeAddress
     {
         public MemoryAddress Base {get;}
@@ -44,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => AddressParser.format(this);
 
         [MethodImpl(Inline)]
         public bool Equals(RelativeAddress src)

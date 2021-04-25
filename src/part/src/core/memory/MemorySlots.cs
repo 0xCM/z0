@@ -10,26 +10,9 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiHost]
     public readonly struct MemorySlots
     {
-        readonly MemorySegment[] Data;
-
-        public static void update<E,T>(ReadOnlySpan<BinaryCode> src, MemorySlots<E> slots, T dst)
-            where E : unmanaged, Enum
-        {
-            var count = slots.Length;
-            ref readonly var lead = ref slots.Lookup(default(E));
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var code = ref skip(src,i);
-                ref readonly var source = ref code[0];
-                ref readonly var slot = ref skip(lead, i);
-                ref var target = ref slot.BaseAddress.Ref<byte>();
-                for(var j=0u; j<slot.Length; j++)
-                    seek(target,j) = skip(source,j);
-            }
-        }
+       readonly MemorySegment[] Data;
 
         public static string[] format<E>(MemorySlots<E> src)
             where E : unmanaged
@@ -47,42 +30,6 @@ namespace Z0
             ref readonly var lead = ref src.Lookup(default(E));
             for(var i=0u; i<count; i++)
                 seek(dst,i) = skip(lead,i).Format();
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref MemorySlot advance(ref MemorySlot slot)
-        {
-            if(slot.Index == MemorySlot.LastKey)
-                slot.Index = MemorySlot.FirstKey;
-            else
-                slot.Index += 1;
-            return ref slot;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref MemorySlot<I> advance<I>(ref MemorySlot<I> slot)
-            where I : unmanaged
-        {
-            memory.add(slot.Index, 1);
-            return ref slot;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref MemorySlot retreat(ref MemorySlot slot)
-        {
-            if(slot.Index == MemorySlot.FirstKey)
-                slot.Index = MemorySlot.LastKey;
-            else
-                slot.Index -= 1;
-            return ref slot;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref MemorySlot<I> retreat<I>(ref MemorySlot<I> slot)
-            where I : unmanaged
-        {
-            memory.sub(slot.Index, 1);
-            return ref slot;
         }
 
         [MethodImpl(Inline)]

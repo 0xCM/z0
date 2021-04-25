@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Addresses
+    partial struct memory
     {
         /// <summary>
         /// Defines a <see cref='RelativeAddress'/> offset with a specified offset

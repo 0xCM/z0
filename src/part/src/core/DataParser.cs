@@ -92,38 +92,23 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out MemoryAddress dst)
-            => Addresses.parse(src, out dst);
-
-        // [MethodImpl(Inline), Op]
-        // public static Outcome parse(string src, out ClrToken dst)
-        // {
-        //     if(HexNumericParser.parse32u(src, out var result))
-        //     {
-        //         dst = result;
-        //         return true;
-        //     }
-        //     else
-        //     {
-        //         dst = ClrToken.Empty;
-        //         return false;
-        //     }
-        // }
+            => AddressParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Address64 dst)
-            => Addresses.parse(src, out dst);
+            => AddressParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Address32 dst)
-            => Addresses.parse(src, out dst);
+            => AddressParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Address16 dst)
-            => Addresses.parse(src, out dst);
+            => AddressParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Address8 dst)
-            => Addresses.parse(src, out dst);
+            => AddressParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome numeric<T>(string src, out T dst)

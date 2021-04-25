@@ -9,9 +9,9 @@ namespace Z0
     partial class XTend
     {
         public static ParseFunction<MemoryAddress> Parser(this MemoryAddress src)
-            => Addresses.parse;
+            => AddressParser.parse;
 
         public static ParseFunction<MemoryAddress> Parser(this Address32 src)
-            => Addresses.parse;
+            => AddressParser.parse;
     }
 }

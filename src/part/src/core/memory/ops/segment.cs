@@ -15,6 +15,10 @@ namespace Z0
         public static MemorySegment segment(MemoryAddress min, MemoryAddress max)
             => new MemorySegment(range(min,max));
 
+        [MethodImpl(Inline), Op]
+        public static ref readonly MemorySegment segment(ReadOnlySpan<MemorySegment> refs, MemorySlot n)
+            => ref cell(refs, n);
+
         /// <summary>
         /// Extracts an inclusive seqment form the source span
         /// </summary>

@@ -150,13 +150,5 @@ namespace Z0
 
         public static MemorySegment Empty
             => default;
-
-        [MethodImpl(Inline)]
-        static uint count<T>(in MemorySegment src)
-            => (uint)(src.Length/size<T>());
-
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<T> view<T>(in MemorySegment src)
-            => cover(src.BaseAddress.Ref<T>(), count<T>(src));
     }
 }

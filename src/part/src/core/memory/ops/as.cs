@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Keyword, Closures(Closure)]
         public static unsafe ref T @as<T>(void* pSrc)
             => ref AsRef<T>(pSrc);
 
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The output value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Keyword, Closures(AllNumeric)]
         public static ref T @as<T>(in short src)
             => ref As<short,T>(ref AsRef(src));
 

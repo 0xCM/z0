@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+
+    using api = Outcomes;
 
     /// <summary>
     /// Defines the outcome of an operation/process
@@ -30,15 +32,7 @@ namespace Z0
         {
             Ok = success;
             Message = success ? "Good" : "Bad";
-            MessageCode = memory.u8(Ok);
-        }
-
-        [MethodImpl(Inline)]
-        public Outcome(bool success, AppMsg message)
-        {
-            Ok = success;
-            Message = message.Format();
-            MessageCode = memory.u8(Ok);
+            MessageCode = api.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -46,7 +40,7 @@ namespace Z0
         {
             Ok = success;
             Message = message;
-            MessageCode = memory.u8(Ok);
+            MessageCode = api.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -57,28 +51,18 @@ namespace Z0
             MessageCode = code;
         }
 
-        [MethodImpl(Inline)]
-        public Outcome(AppMsgData data)
-        {
-            Ok = !(data.Kind == LogLevel.Error);
-            Message = AppMsg.define(data).Format();
-            MessageCode = memory.u8(Ok);
-        }
-
-        [MethodImpl(Inline)]
         public Outcome(Exception e)
         {
             Ok = false;
-            Message = AppMsg.error(e).Format();
-            MessageCode = memory.u8(Ok);
+            Message = e.ToString();
+            MessageCode = api.u8(Ok);
         }
 
-        [MethodImpl(Inline)]
         public Outcome(Exception e, string msg)
         {
             Ok = false;
-            Message = string.Format("{0} - {1}", msg, AppMsg.error(e).Format());
-            MessageCode = memory.u8(Ok);
+            Message = string.Format("{0} - {1}", msg, e);
+            MessageCode = api.u8(Ok);
         }
 
         [MethodImpl(Inline)]
@@ -94,8 +78,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => MessageCode == ulong.MaxValue;
         }
-
-
 
         [MethodImpl(Inline)]
         public string Format()
@@ -127,14 +109,6 @@ namespace Z0
             => new Outcome(src.e,src.msg);
 
         [MethodImpl(Inline)]
-        public static implicit operator Outcome(AppMsgData data)
-            => new Outcome(data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Outcome((bool success, AppMsg msg) src)
-            => new Outcome(src.success, src.msg);
-
-        [MethodImpl(Inline)]
         public static implicit operator Outcome((bool success, string msg) src)
             => new Outcome(src.success, src.msg);
 
@@ -161,6 +135,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new Outcome(ulong.MaxValue);
         }
-
     }
 }

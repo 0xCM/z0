@@ -10,9 +10,6 @@ namespace Z0
 
     using Windows;
 
-    using static Part;
-    using static memory;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [ApiHost]
