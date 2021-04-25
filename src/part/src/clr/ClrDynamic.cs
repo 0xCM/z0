@@ -31,11 +31,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static OpMsil cil(DynamicDelegate src, OpIdentity id)
+        public static OpMsil msil(DynamicDelegate src, OpIdentity id)
             => cil(src.Target, id);
 
         [MethodImpl(Inline), Op]
-        public static OpMsil cil(MemoryAddress @base, OpUri uri, MethodInfo src)
+        public static OpMsil msil(MemoryAddress @base, OpUri uri, MethodInfo src)
             => new OpMsil(src.MetadataToken, @base, uri, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
 
         [MethodImpl(Inline), Op]

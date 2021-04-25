@@ -38,10 +38,10 @@ namespace Z0
             Id = uri.OpId;
             OpUri = uri;
             ApiClass = kindId;
-            Method = root.require(method != null, method, () => $"Unfortunately, the method for {uri} is null");
+            Method = root.require(method != null, method, () => "Unfortunately, the method is null");
             BaseAddress = address;
             Host = OpUri.Host;
-            Cil = ClrDynamic.cil(BaseAddress, uri, method);
+            Cil = ClrDynamic.msil(BaseAddress, uri, method);
             CliSig = address.IsNonZero ? method.ResolveSignature() : CliSig.Empty;
             Metadata = method.Artifact();
         }

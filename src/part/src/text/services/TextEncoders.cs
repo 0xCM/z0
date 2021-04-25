@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.TextEncoders, true)]
+    [ApiHost]
     public unsafe readonly struct TextEncoders
     {
         [MethodImpl(Inline), Op]
@@ -56,6 +56,21 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte[] GetBytes(Encoding e, string src)
             => e.GetBytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static byte[] GetUtf8Bytes(string src)
+            => utf8().GetBytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static byte[] GetUtf8Bytes(char[] src)
+            => utf8().GetBytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static ref string DecodeUtf8(ReadOnlySpan<byte> src, out string dst)
+        {
+            dst = utf8().GetString(src);
+            return ref dst;
+        }
 
         [MethodImpl(Inline), Op]
         public static int GetBytes(Encoding e, ReadOnlySpan<char> src, Span<byte> dst)

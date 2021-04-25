@@ -4,21 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct ApiCaptureResult
+    public class ApiExtractCases : AppService<ApiExtractCases>
     {
-        public CaptureOutcome Outcome {get;}
 
-        public CodeBlockPair Pair {get;}
-
-        [MethodImpl(Inline)]
-        internal ApiCaptureResult(CaptureOutcome outcome, CodeBlockPair pair)
-        {
-            Outcome = outcome;
-            Pair = pair;
-        }
     }
 }

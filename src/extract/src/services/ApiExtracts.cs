@@ -34,6 +34,9 @@ namespace Z0
 
         const byte J48 = 0x48;
 
+        [Op]
+        public static unsafe ApiCaptureResult capture(OpIdentity id, MemoryAddress src, Span<byte> dst)
+            => divine(dst, id, src.Pointer<byte>());
 
         public static ApiMemberExtractor extractor()
             => new ApiMemberExtractor(DefaultBufferLength);
@@ -54,11 +57,11 @@ namespace Z0
         }
 
         [Op]
-        public static unsafe ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
+        public static unsafe ApiMemberExtract extract(in ApiMember src, Span<byte> dst)
         {
             var address = src.BaseAddress;
-            var length = extract(address, buffer);
-            var extracted = sys.array(buffer.Slice(0,length));
+            var length = extract(address, dst);
+            var extracted = sys.array(dst.Slice(0,length));
             return new ApiMemberExtract(src, new ApiExtractBlock(address, src.OpUri, extracted));
         }
 
@@ -74,14 +77,14 @@ namespace Z0
 
             while(offset < limit)
             {
-                state = ApiExtracts.step(dst, id, ref offset, ref end, ref pSrc);
+                state = step(dst, id, ref offset, ref end, ref pSrc);
                 if(ret_offset == null && state == RET)
                     ret_offset = offset;
-                var tc = ApiExtracts.term(dst, offset, ret_offset, out var delta);
+                var tc = term(dst, offset, ret_offset, out var delta);
                 if(tc != null)
-                    return ApiExtracts.summarize(dst, id, tc.Value, start, end, delta);
+                    return summarize(dst, id, tc.Value, start, end, delta);
             }
-            return ApiExtracts.summarize(dst, id, CTC_BUFFER_OUT, start, end, 0);
+            return summarize(dst, id, CTC_BUFFER_OUT, start, end, 0);
         }
 
         [MethodImpl(Inline), Op]
@@ -146,7 +149,7 @@ namespace Z0
             else
             {
                 Span<byte> data = src;
-                var len = ApiExtracts.extractSize(data, cut, 0xC3);
+                var len = extractSize(data, cut, 0xC3);
                 var keep = data.Slice(0, len);
                 return new CodeBlock(address, keep.ToArray());
             }
@@ -227,8 +230,8 @@ namespace Z0
             var outcome = complete(tc, start, end, delta);
             var raw = src.Slice(0, (int)(end - start)).ToArray();
             var trimmed = src.Slice(0, outcome.ByteCount).ToArray();
-            var bits = new CapturedCodeBlock((MemoryAddress)start, raw, trimmed);
-            return new ApiCaptureResult(id, outcome, bits);
+            var bits = CodeBlocks.pair((MemoryAddress)start, raw, trimmed);
+            return CodeBlocks.result(id, outcome, bits);
         }
 
         [Op]

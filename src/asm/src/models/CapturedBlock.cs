@@ -1,62 +1,62 @@
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
-//-----------------------------------------------------------------------------
-namespace Z0.Asm
-{
-    using System;
-    using System.Runtime.CompilerServices;
+// //-----------------------------------------------------------------------------
+// // Copyright   :  (c) Chris Moore, 2020
+// // License     :  MIT
+// //-----------------------------------------------------------------------------
+// namespace Z0.Asm
+// {
+//     using System;
+//     using System.Runtime.CompilerServices;
 
-    using static Part;
+//     using static Part;
 
-    public readonly struct CapturedBlock
-    {
-        public CapturedCodeBlock Encoded {get;}
+//     public readonly struct CapturedBlock
+//     {
+//         public CodeBlockPair Encoded {get;}
 
-        public IceInstructionList Decoded {get;}
+//         public IceInstructionList Decoded {get;}
 
-        public string[] Formatted {get;}
+//         public string[] Formatted {get;}
 
-        [MethodImpl(Inline)]
-        public CapturedBlock(CapturedCodeBlock encoded, IceInstructionList fxList, string[] formatted)
-        {
-            Encoded = encoded;
-            Decoded = fxList;
-            Formatted = formatted;
-        }
+//         [MethodImpl(Inline)]
+//         public CapturedBlock(CodeBlockPair encoded, IceInstructionList fxList, string[] formatted)
+//         {
+//             Encoded = encoded;
+//             Decoded = fxList;
+//             Formatted = formatted;
+//         }
 
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Encoded.Length;
-        }
+//         public int Length
+//         {
+//             [MethodImpl(Inline)]
+//             get => Encoded.Length;
+//         }
 
-        public ref readonly byte this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Encoded[index];
-        }
+//         public ref readonly byte this[int index]
+//         {
+//             [MethodImpl(Inline)]
+//             get => ref Encoded[index];
+//         }
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Encoded.IsEmpty;
-        }
+//         public bool IsEmpty
+//         {
+//             [MethodImpl(Inline)]
+//             get => Encoded.IsEmpty;
+//         }
 
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Encoded.IsNonEmpty;
-        }
+//         public bool IsNonEmpty
+//         {
+//             [MethodImpl(Inline)]
+//             get => Encoded.IsNonEmpty;
+//         }
 
-        [MethodImpl(Inline)]
-        public bool Equals(CapturedBlock src)
-            => Encoded.Equals(src.Encoded);
+//         [MethodImpl(Inline)]
+//         public bool Equals(CapturedBlock src)
+//             => Encoded.Equals(src.Encoded);
 
-        public string Format()
-            => Encoded.Format();
+//         public string Format()
+//             => Encoded.Format();
 
-        public override string ToString()
-            => Format();
-    }
-}
+//         public override string ToString()
+//             => Format();
+//     }
+// }

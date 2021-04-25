@@ -31,8 +31,8 @@ namespace Z0.Asm
             try
             {
                 var summary = capture(exchange, src.Id, src.BaseAddress);
-                var size = summary.Code.Length;
-                var code = new ApiCaptureBlock(src.Id, src.Method, summary.Code.Input, summary.Code.Output, summary.Outcome.TermCode);
+                var size = summary.Pair.Length;
+                var code = CodeBlocks.capture(src.Id, src.Method, summary.Pair.Raw, summary.Pair.Parsed, summary.Outcome.TermCode);
                 return new ApiMemberCapture(src, code);
             }
             catch(Exception e)
@@ -49,8 +49,7 @@ namespace Z0.Asm
                 var address = ApiJit.jit(src);
                 var summary = capture(exchange, id, address);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.Code, outcome.TermCode);
-                root.require(address == captured.BaseAddress, () => "Addresses don't match");
+                var captured = DefineMember(id, src, summary.Pair, outcome.TermCode);
                 return captured;
             }
             catch(Exception e)
@@ -67,9 +66,7 @@ namespace Z0.Asm
                 var pSrc = ApiJit.jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
-                var captured = new ApiCaptureBlock(id, src.Source, summary.Code.Input, summary.Code.Output, outcome.TermCode);
-                root.require((MemoryAddress)pSrc == captured.BaseAddress,
-                    () => "Addresses don't match");
+                var captured = CodeBlocks.capture(id, src.Source, summary.Pair.Raw, summary.Pair.Parsed, outcome.TermCode);
                 return captured;
             }
             catch(Exception e)
@@ -100,7 +97,7 @@ namespace Z0.Asm
                 var address = ApiJit.jit(src);
                 var summary = capture(exchange, id, address);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.Code, outcome.TermCode);
+                var captured = DefineMember(id, src, summary.Pair, outcome.TermCode);
                 return captured;
             }
             catch(Exception e)
@@ -123,12 +120,12 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, CapturedCodeBlock bits, ExtractTermCode term)
-            => new ApiCaptureBlock(id, src, bits.Input, bits.Output, term);
+        static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, CodeBlockPair bits, ExtractTermCode term)
+            => CodeBlocks.capture(id, src, bits.Raw, bits.Parsed, term);
 
         [MethodImpl(Inline)]
-        static ApiCaptureBlock DefineMember(OpIdentity id, Delegate src, CapturedCodeBlock bits, ExtractTermCode term)
-            => new ApiCaptureBlock(id, src.Method, bits.Input, bits.Output, term);
+        static ApiCaptureBlock DefineMember(OpIdentity id, Delegate src, CodeBlockPair bits, ExtractTermCode term)
+            => CodeBlocks.capture(id, src.Method, bits.Raw, bits.Parsed, term);
 
         [MethodImpl(Inline)]
         static ApiCaptureResult capture(in CaptureExchange exchange, OpIdentity id, ref byte src)

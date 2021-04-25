@@ -10,13 +10,18 @@ namespace Z0
 
     using static Part;
 
+     partial struct Msg
+     {
+         public const string CaptureAddressMismatch = "The parsed address does not match the extration address";
+     }
+
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
     [ApiComplete]
     public struct ApiCaptureBlock
     {
-        readonly CodeBlock Extracted;
+        public CodeBlock Raw;
 
         public CodeBlock Parsed;
 
@@ -26,62 +31,20 @@ namespace Z0
 
         public ExtractTermCode TermCode;
 
-        public OpMsil Cil;
+        public OpMsil Msil;
 
         public CliSig CliSig;
 
-        public ApiCaptureBlock(OpIdentity id, MethodInfo method, CodeBlock extracted, CodeBlock parsed, ExtractTermCode term)
-        {
-            Extracted = extracted;
-            Parsed = parsed;
-            Method = method;
-            root.require(extracted.BaseAddress == parsed.BaseAddress, () => $"Parsed address {parsed.BaseAddress} does not match the extracted base address {extracted.BaseAddress}");
-            OpUri = ApiUri.hex(method.DeclaringType.HostUri(), method.Name, id);
-            TermCode = term;
-            Cil = ClrDynamic.cil(parsed.BaseAddress, OpUri, method);
-            CliSig = Clr.sig(method);
-        }
-
-        public ReadOnlySpan<byte> InputData
+        public ByteSize RawSize
         {
             [MethodImpl(Inline)]
-            get => Extracted.Code;
+            get => Raw.Length;
         }
 
-        public ReadOnlySpan<byte> OutputData
-        {
-            [MethodImpl(Inline)]
-            get => Parsed.Code;
-        }
-
-        public ByteSize InputSize
-        {
-            [MethodImpl(Inline)]
-            get => Extracted.Length;
-        }
-
-        public ByteSize OutputSize
+        public ByteSize ParsedSize
         {
             [MethodImpl(Inline)]
             get => Parsed.Length;
-        }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Parsed.Length;
-        }
-
-        public ref readonly byte this[long index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Parsed[index];
-        }
-
-        public ref readonly byte this[ulong index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Parsed[index];
         }
 
         public bool IsEmpty
@@ -111,7 +74,7 @@ namespace Z0
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Extracted.BaseAddress;
+            get => Parsed.BaseAddress;
         }
 
         public uint Hash
@@ -130,11 +93,11 @@ namespace Z0
         public bool Identical(in ApiCaptureBlock src)
             => Parsed.Equals(src.Parsed);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Ignore]
         public int Compare(in ApiCaptureBlock src)
             => BaseAddress.CompareTo(src.BaseAddress);
 
-        [MethodImpl(Inline)]
+        [Ignore]
         public string Format()
             => Parsed.Format();
 

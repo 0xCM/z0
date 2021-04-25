@@ -8,64 +8,67 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    [Datatype]
+    using api = TextEncoders;
+
+    [ApiComplete]
     public readonly struct utf8 : IDataTypeComparable<utf8>
     {
-        static TextEncoding Encoder => TextEncoders.utf8();
-
-        readonly byte[] Data;
+        readonly BinaryCode Data;
 
         [MethodImpl(Inline)]
         public utf8(byte[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
+        public utf8(BinaryCode src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
         public utf8(string src)
-            => Data = Encoder.GetBytes(src);
+            => Data = api.GetUtf8Bytes(src);
 
         [MethodImpl(Inline)]
         public utf8(char[] src)
-            => Data = Encoder.GetBytes(src);
+            => Data = api.GetUtf8Bytes(src);
 
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
 
         public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Edit;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data == null || Data.Length == 0;
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !IsEmpty;
+            get => Data.IsNonEmpty;
         }
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Data);
+            get => alg.hash.marvin(Data);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(utf8 src)
-            => span(Data).SequenceEqual(src.Data);
+            => Data.View.SequenceEqual(src.Data.View);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Ignore]
         public string Format()
-            => IsNonEmpty ? Encoder.Decode(Data, out string _) : EmptyString;
+            => IsNonEmpty ? api.DecodeUtf8(Data, out string _) : EmptyString;
 
         public override int GetHashCode()
             => (int)Hash;
@@ -76,6 +79,7 @@ namespace Z0
         public override bool Equals(object src)
           => src is utf8 x && Equals(x);
 
+        [Ignore]
         public int CompareTo(utf8 src)
             => Format().CompareTo(src.Format());
 
@@ -100,6 +104,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator utf8(char[] src)
             => new utf8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator utf8(BinaryCode src)
+            => new utf8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(utf8 src)
+            => src.Data;
 
         public static utf8 Empty
         {

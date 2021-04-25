@@ -9,12 +9,11 @@ namespace Z0
 
     using K = EncodingPatternKind;
     using S = EncodingParserState;
-    using api = ApiExtracts;
 
     using static Part;
     using static memory;
 
-
+    [ApiHost]
     public ref struct EncodingParser
     {
         readonly Span<byte> Buffer;
@@ -54,6 +53,7 @@ namespace Z0
             Delta = default;
         }
 
+        [Op]
         internal S Parse(ReadOnlySpan<byte> src)
         {
             Start();
@@ -79,6 +79,7 @@ namespace Z0
         bool Finished()
             => (State & EncodingParserState.Completed) != 0;
 
+        [Op]
         S Parse(byte src)
         {
             if(State == S.Accepting && Offset < Buffer.Length)
@@ -97,6 +98,7 @@ namespace Z0
             return State;
         }
 
+        [Op]
         bool TryMatch(out K kind, out int delta)
         {
             kind = default;

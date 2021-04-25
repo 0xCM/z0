@@ -9,16 +9,10 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ApiToken
+    partial struct CodeBlocks
     {
-        public ulong Value {get;}
-
-        [MethodImpl(Inline)]
-        public ApiToken(ulong src)
-        {
-            Value = src;
-        }
-
-        public static ApiToken Empty => default;
+        [MethodImpl(Inline), Op]
+        public static ApiCaptureResult result(OpIdentity id, CaptureOutcome outcome, CodeBlockPair pair)
+            => new ApiCaptureResult(outcome,pair);
     }
 }
