@@ -13,49 +13,15 @@ namespace Z0
     using static BitMasks.Literals;
     using static Part;
     using static memory;
+    using static PermLits;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
     /// </summary>
     [ApiHost]
-    public readonly struct Perm
+    public readonly partial struct Permute
     {
         const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline), Op]
-        public static Vector128<byte> shuffles(NatPerm<N16> src)
-            => cpu.vload(w128, (byte)first(src.Terms));
-
-        [MethodImpl(Inline), Op]
-        public static Perm32 unsize(in NatPerm<N32,byte> spec)
-            => new Perm32(gcpu.vload(w256, spec.Terms));
-
-        [MethodImpl(Inline), Op]
-        public static Perm16 unsize(in NatPerm<N16,byte> spec)
-            => new Perm16(gcpu.vload(w128, spec.Terms));
-
-        /// <summary>
-        /// Defines a transposition for a permutation of natural length
-        /// </summary>
-        /// <param name="i">The first index</param>
-        /// <param name="j">The second index</param>
-        /// <typeparam name="N">The length type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatSwap<N,T> swap<N,T>(T i, T j, N n = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => (i,j);
-
-        /// <summary>
-        /// Defines a transposition for a permutation of natural length
-        /// </summary>
-        /// <param name="i">The first index</param>
-        /// <param name="j">The second index</param>
-        /// <typeparam name="N">The length type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatSwap<N> swap<N>(int i, int j)
-            where N : unmanaged, ITypeNat
-                => (i,j);
 
         /// <summary>
         /// Creates a fixed 16-bit permutation over a generic permutation over 16 elements
@@ -81,6 +47,26 @@ namespace Z0
         public static Perm32 perm32(Vector256<byte> data)
             => new Perm32(cpu.vand(data, cpu.vbroadcast(w256, Msb8x8x3)));
 
+        [MethodImpl(Inline), Op]
+        public static Perm8L permid(N8 n)
+            => Perm8Identity;
+
+        [MethodImpl(Inline), Op]
+        public static Perm16L permid(N16 n)
+            => Perm16Identity;
+
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> shuffles(NatPerm<N16> src)
+            => cpu.vload(w128, (byte)first(src.Terms));
+
+        [MethodImpl(Inline), Op]
+        public static Perm32 unsize(in NatPerm<N32,byte> spec)
+            => new Perm32(gcpu.vload(w256, spec.Terms));
+
+        [MethodImpl(Inline), Op]
+        public static Perm16 unsize(in NatPerm<N16,byte> spec)
+            => new Perm16(gcpu.vload(w128, spec.Terms));
+
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
         /// where n is the length of the array
@@ -93,7 +79,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void apply<T>(Perm p, ReadOnlySpan<T> src, Span<T> dst)
+        public static void apply<T>(Permute p, ReadOnlySpan<T> src, Span<T> dst)
         {
             var terms = span(p.terms);
             var count = terms.Length;
@@ -124,7 +110,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Span<T> apply<T>(Perm p, ReadOnlySpan<T> src)
+        public static Span<T> apply<T>(Permute p, ReadOnlySpan<T> src)
         {
             var dst = sys.alloc<T>(src.Length);
             apply(p,src, dst);
@@ -178,8 +164,8 @@ namespace Z0
         /// Allocates an empty permutation
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static Perm Alloc(int n)
-            => new Perm(new int[n]);
+        public static Permute Alloc(int n)
+            => new Permute(new int[n]);
 
         /// <summary>
         /// Allocates an empty permutation of specified length
@@ -190,37 +176,12 @@ namespace Z0
                 => new Perm<T>(new T[n]);
 
         /// <summary>
-        /// Defines an untyped identity permutation
-        /// </summary>
-        /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline), Op]
-        public static Perm Identity(int n)
-            => new Perm(gAlg.stream(0, n-1));
-
-        /// <summary>
-        /// Defines an untyped identity permutation
-        /// </summary>
-        /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline), Op]
-        public static Perm Identity(uint n)
-            => new Perm(gAlg.stream((int)n, (int)n-1));
-
-        /// <summary>
-        /// Defines an identity permutation on n symbols
-        /// </summary>
-        /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> identity<T>(T n)
-            where T : unmanaged
-                => Perm.init(gAlg.stream(default, gmath.dec(n)));
-
-        /// <summary>
         /// Defines an untyped permutation determined by values in a source span
         /// </summary>
         /// <param name="src">The source span</param>
         [MethodImpl(Inline), Op]
-        public static Perm Init(ReadOnlySpan<int> src)
-            => new Perm(src.ToArray());
+        public static Permute Init(ReadOnlySpan<int> src)
+            => new Permute(src.ToArray());
 
         /// <summary>
         /// Creates a permutation from the elements in a readonly span
@@ -445,7 +406,7 @@ namespace Z0
         {
             if(terms.Length != TypeNats.nat32i(n))
                 AppErrors.ThrowInvariantFailure($"{n} != {terms.Length}");
-            return new NatPerm<N,T>(Perm.init(terms));
+            return new NatPerm<N,T>(Permute.init(terms));
         }
 
         public static NatPerm<N,T> natural<N,T>(N n, Span<T> terms)
@@ -454,14 +415,14 @@ namespace Z0
                 => natural(n, terms.ReadOnly());
 
         [MethodImpl(Inline)]
-        public Perm(int n, Swap[] src)
+        public Permute(int n, Swap[] src)
         {
-            terms = Identity(n).terms;
+            terms = identity(n).terms;
             Apply(src);
         }
 
         [MethodImpl(Inline)]
-        public Perm(int[] src)
+        public Permute(int[] src)
         {
             terms = src;
         }
@@ -476,19 +437,19 @@ namespace Z0
             for(var i=0; i<m; i++)
                 seek(dst, i) = skip(src,i);
 
-            var identity = Identity(n);
+            var identity = Permute.identity(n);
             for(var i=m; i<n; i++)
                 seek(dst, i) = identity[i - m];
         }
 
-        public Perm(int n, int[] src)
+        public Permute(int n, int[] src)
         {
             terms = new int[n];
             Absorb(src);
         }
 
         [MethodImpl(Inline)]
-        public Perm(IEnumerable<int> src)
+        public Permute(IEnumerable<int> src)
         {
             terms = src.ToArray();
         }
@@ -523,7 +484,7 @@ namespace Z0
         /// the transposition t is the function t(l) = g(f(l)) == l.
         /// </remarks>
         [MethodImpl(Inline)]
-        public Perm Swap(int i, int j)
+        public Permute Swap(int i, int j)
         {
             Swaps.swap(ref terms[i], ref terms[j]);
             return this;
@@ -532,7 +493,7 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public Perm Swap(params (int i, int j)[] specs)
+        public Permute Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
                 Swaps.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
@@ -542,7 +503,7 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public Perm Apply(params Swap[] specs)
+        public Permute Apply(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
                 Swaps.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
@@ -561,8 +522,8 @@ namespace Z0
         /// <summary>
         /// Clones the permutation
         /// </summary>
-        public Perm Replicate()
-            => new Perm(terms.Replicate());
+        public Permute Replicate()
+            => new Permute(terms.Replicate());
 
         /// <summary>
         /// Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n
@@ -570,7 +531,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
-        public Perm Compose(Perm g)
+        public Permute Compose(Permute g)
         {
             var n = terms.Length;
             var dst = Alloc(n);
@@ -584,7 +545,7 @@ namespace Z0
         /// Reverses the permutation in-place
         /// </summary>
         [MethodImpl(Inline)]
-        public Perm Reverse()
+        public Permute Reverse()
         {
             terms.Reverse();
             return this;
@@ -594,7 +555,7 @@ namespace Z0
         /// Computes the inverse permutation t of the current permutation p
         /// such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
-        public Perm Invert()
+        public Permute Invert()
         {
             var dst = Alloc(Length);
             for(var i=0; i< Length; i++)
@@ -605,7 +566,7 @@ namespace Z0
         /// <summary>
         /// Applies a modular increment to the permutation in-place
         /// </summary>
-        public Perm Inc()
+        public Permute Inc()
         {
             Span<int> src = Replicate().terms;
             var k = 1;
@@ -618,7 +579,7 @@ namespace Z0
         /// <summary>
         /// Applies a modular decrement to the permutation in-place
         /// </summary>
-        public Perm Dec()
+        public Permute Dec()
         {
             Span<int> src = Replicate().terms;
             terms[0] = src[Length - 1];
@@ -701,7 +662,7 @@ namespace Z0
         public override int GetHashCode()
             => terms.GetHashCode();
 
-        public bool Equals(Perm rhs)
+        public bool Equals(Permute rhs)
         {
             var len = rhs.Length;
             if(len != terms.Length)
@@ -715,14 +676,14 @@ namespace Z0
         }
 
         public override bool Equals(object o)
-            => o is Perm p  && Equals(p);
+            => o is Permute p  && Equals(p);
 
         [MethodImpl(Inline)]
-        public static implicit operator Perm(Span<int> src)
-            => new Perm(src.ToArray());
+        public static implicit operator Permute(Span<int> src)
+            => new Permute(src.ToArray());
 
         [MethodImpl(Inline)]
-        public static implicit operator Perm(ReadOnlySpan<int> src)
+        public static implicit operator Permute(ReadOnlySpan<int> src)
             => Init(src);
 
         /// <summary>
@@ -732,23 +693,23 @@ namespace Z0
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
         [MethodImpl(Inline)]
-        public static Perm operator *(Perm f, Perm g)
+        public static Permute operator *(Permute f, Permute g)
             => f.Compose(g);
 
         [MethodImpl(Inline)]
-        public static Perm operator ++(in Perm src)
+        public static Permute operator ++(in Permute src)
             => src.Inc();
 
         [MethodImpl(Inline)]
-        public static Perm operator --(in Perm src)
+        public static Permute operator --(in Permute src)
             => src.Dec();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Perm a, Perm b)
+        public static bool operator ==(Permute a, Permute b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Perm a, Perm b)
+        public static bool operator !=(Permute a, Permute b)
             => !(a == b);
     }
 }

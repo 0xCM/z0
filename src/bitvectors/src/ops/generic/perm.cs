@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="spec">The permutation</param>
         [Op, Closures(Closure)]
-        public static BitVector<T> perm<T>(BitVector<T> src, in Perm spec)
+        public static BitVector<T> perm<T>(BitVector<T> src, in Permute spec)
             where T : unmanaged
         {
             var dst = replicate(src);
@@ -32,7 +32,7 @@ namespace Z0
             return dst;
         }
 
-        public static BitVector<N,T> perm<N,T>(BitVector<N,T> src, in Perm spec)
+        public static BitVector<N,T> perm<N,T>(BitVector<N,T> src, in Permute spec)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

@@ -21,7 +21,7 @@ namespace Z0
         {
             var offset = 0;
             var count = 0;
-            while(offset < limit && count < MaxZeroCount)
+            while(offset<limit && count<MaxZeroCount)
             {
                 var value = Unsafe.Read<byte>(pSrc++);
                 seek(dst, offset++) = value;

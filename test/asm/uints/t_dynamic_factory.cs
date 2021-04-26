@@ -108,19 +108,19 @@ namespace Z0.Asm
 
         public void capture_shuffler()
         {
-            var f = shuffler<uint>(n2);
-            var g = shuffler(n3);
+            // var f = shuffler<uint>(n2);
+            // var g = shuffler(n3);
 
-            using var hexTarget = HexWriter();
-            using var asmTarget = AsmWriter();
+            // using var hexTarget = HexWriter();
+            // using var asmTarget = AsmWriter();
 
-            var fCaptured = AsmChecks.Capture(f.Identify(), f).Require();
-            hexTarget.Write(fCaptured.CodeBlock);
-            asmTarget.WriteAsm(AsmChecks.Decoder.Decode(fCaptured).Require());
+            // var fCaptured = AsmChecks.Capture(f.Identify(), f).Require();
+            // hexTarget.Write(fCaptured.CodeBlock);
+            // asmTarget.WriteAsm(AsmChecks.Decoder.Decode(fCaptured).Require());
 
-            var gCaptured = AsmChecks.Capture(g.Identify(), g).Require();
-            hexTarget.Write(gCaptured.CodeBlock);
-            asmTarget.WriteAsm(AsmChecks.Decoder.Decode(gCaptured).Require());
+            // var gCaptured = AsmChecks.Capture(g.Identify(), g).Require();
+            // hexTarget.Write(gCaptured.CodeBlock);
+            // asmTarget.WriteAsm(AsmChecks.Decoder.Decode(gCaptured).Require());
         }
 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)

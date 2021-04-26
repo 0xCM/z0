@@ -20,30 +20,6 @@ namespace Z0
 
         public ApiMember Member {get;}
 
-        public CliSig CliSig
-        {
-            [MethodImpl(Inline)]
-            get => Member.CliSig;
-        }
-
-        public byte[] Data
-        {
-            [MethodImpl(Inline)]
-            get => Block.Encoded;
-        }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Block.Length;
-        }
-
-        public ref readonly byte this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Block[index];
-        }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

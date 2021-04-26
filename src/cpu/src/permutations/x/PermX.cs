@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    using api = Perm;
+    using api = Permute;
 
     public static partial class XTend
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        static ref readonly Perm shuffle(in Perm src, IDomainSource random)
+        static ref readonly Permute shuffle(in Permute src, IDomainSource random)
         {
             random.Shuffle(src.Terms);
             return ref src;
@@ -98,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
-        public static Span<T> Permute<T>(this ReadOnlySpan<T> src, Perm p)
+        public static Span<T> Permute<T>(this ReadOnlySpan<T> src, Permute p)
         {
             Span<T> dst = new T[src.Length];
             for(var i=0; i<p.Length; i++)
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
         [MethodImpl(Inline)]
-        public static Span<T> Permute<T>(this Span<T> src, Perm p)
+        public static Span<T> Permute<T>(this Span<T> src, Permute p)
             => src.ReadOnly().Permute(p);
 
         /// <summary>
@@ -170,7 +170,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format(this Swap[] src)
             => string.Join(" -> ", src.Map(x => x.Format()));
-
 
         /// <summary>
         /// Applies a sequence of transpositions to a blocked container

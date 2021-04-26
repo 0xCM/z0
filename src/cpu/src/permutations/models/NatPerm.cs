@@ -17,7 +17,7 @@ namespace Z0
     public readonly struct NatPerm<N>
         where N : unmanaged, ITypeNat
     {
-        readonly Perm perm;
+        readonly Permute perm;
 
         static int n => nat32i<N>();
 
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The permutation to convert</param>
         [MethodImpl(Inline)]
-        public static implicit operator Perm(NatPerm<N> f)
+        public static implicit operator Permute(NatPerm<N> f)
             => f.perm;
 
         /// <summary>
@@ -92,11 +92,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatPerm(NatSwap<N>[] swaps)
         {
-            this.perm = new Perm(n, swaps.Unsized());
+            this.perm = new Permute(n, swaps.Unsized());
         }
 
         [MethodImpl(Inline)]
-        NatPerm(Perm src)
+        NatPerm(Permute src)
         {
             this.perm = src;
         }
@@ -108,7 +108,7 @@ namespace Z0
         public NatPerm(int[] src)
         {
             if(src.Length == n)
-                perm = new Perm(src);
+                perm = new Permute(src);
             else
             {
                 var tmp = new int[n];
@@ -119,7 +119,7 @@ namespace Z0
 
                 for(var i=m; i< n; i++)
                     tmp[i] = Identity[i - m];
-                perm = new Perm(tmp);
+                perm = new Permute(tmp);
             }
         }
 

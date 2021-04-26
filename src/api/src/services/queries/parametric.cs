@@ -45,7 +45,6 @@ namespace Z0
                 where closures.Length != 0
                 select new ApiMethodG(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 
-
         [MethodImpl(Inline), Op]
         static MethodInfo GenericDefintion(MethodInfo src)
             => src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();

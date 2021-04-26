@@ -15,6 +15,19 @@ namespace Z0
     public static class XBitString
     {
         /// <summary>
+        /// Shuffles bitstring content as determined by a permutation
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="p">The permutation to apply</param>
+        public static BitString Permute(this BitString src, Permute p)
+        {
+            var dst = BitString.alloc(p.Length);
+            for(var i = 0; i<p.Length; i++)
+                dst[i] = src[p[i]];
+            return dst;
+        }
+
+        /// <summary>
         /// Pretends the source bitstring is an mxn matrix and computes the transposition matrix of dimension nxm encoded as a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>

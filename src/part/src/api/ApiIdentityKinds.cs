@@ -80,6 +80,18 @@ namespace Z0
         public static string owner(Type host)
             => host.Assembly.Id().Format();
 
+        // public static Index<ConstructedMethod> construct(MethodInfo src)
+        // {
+        //     if(src.IsGenericMethodDefinition && src.Tag(out ClosuresAttribute tag))
+        //     {
+        //         var kind = (NumericKind)tag.Spec;
+        //     }
+        //     else
+        //     {
+        //         return Index<ConstructedMethod>.Empty;
+        //     }
+        // }
+
         /// <summary>
         /// Computes a method's numeric closures, predicated on available metadata
         /// </summary>
@@ -93,8 +105,8 @@ namespace Z0
 
         [Op]
         public static Type[] NumericClosureTypes(MethodInfo m)
-            => from c in NumericClosureKinds(m)
-               let t = c.ToSystemType()
+            => from k in NumericClosureKinds(m)
+               let t = Numeric.type(k)
                where t != typeof(void)
                select t;
 

@@ -11,14 +11,6 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static QuickCapture CaptureQuick(this IWfRuntime wf)
-            => Capture.quick(wf);
-
-        [Op]
-        public static ApiResCapture ApiResCapture(this IWfRuntime wf)
-            => Services.ApiResCapture.create(wf);
-
-        [Op]
         public static ApiCaptureArchive ApiCaptureArchive(this IWfRuntime wf)
             => Z0.ApiCaptureArchive.create(wf);
 
@@ -41,10 +33,6 @@ namespace Z0
         [Op]
         public static ApiCaptureEmitter CaptureEmitter(this IWfRuntime wf)
             => ApiCaptureEmitter.create(wf);
-
-        [Op]
-        public static ICaptureServices CaptureServices(this IWfRuntime wf)
-            => new CaptureServices(wf);
 
         [Op]
         public static ICaptureCore CaptureCore(this IWfRuntime wf)

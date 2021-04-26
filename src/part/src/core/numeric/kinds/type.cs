@@ -29,6 +29,5 @@ namespace Z0
                 NK.F64 => typeof(double),
                 _ => typeof(void)
             };
-
         }
 }

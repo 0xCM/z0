@@ -10,7 +10,7 @@ namespace Z0
     partial class ClrQuery
     {
         /// <summary>
-        /// Selects the concrete (not abstract) methods from a stream
+        /// Selects the concrete (not abstract and nongeneric) methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
         [Op]

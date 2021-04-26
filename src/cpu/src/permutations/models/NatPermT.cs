@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatPerm(NatSwap<N,T>[] swaps)
         {
-            this.perm = Perm.init(nT, swaps.Unsized());
+            this.perm = Permute.init(nT, swaps.Unsized());
         }
 
         [MethodImpl(Inline)]
@@ -110,7 +110,7 @@ namespace Z0
         public NatPerm(T[] src)
         {
             if(src.Length == n)
-                perm = Perm.init(src);
+                perm = Permute.init(src);
             else
             {
                 var tmp = new T[n];
@@ -121,7 +121,7 @@ namespace Z0
 
                 for(var i=m; i< n; i++)
                     tmp[i] = Identity[i - m];
-                perm = Perm.init(tmp);
+                perm = Permute.init(tmp);
             }
         }
 

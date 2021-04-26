@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct VPerm
+    partial struct Permute
     {
         /// <summary>
         /// Defines the canonical literal representation of the reversal of the identity permutation on 4 symbols

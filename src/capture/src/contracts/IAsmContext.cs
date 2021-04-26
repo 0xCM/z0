@@ -14,27 +14,7 @@ namespace Z0.Asm
         /// </summary>
         IAppContext ContextRoot {get;}
 
-        ICaptureServices CaptureServices {get;}
-
-        /// <summary>
-        /// The capture service
-        /// </summary>
-        ICaptureCore CaptureCore
-            => CaptureServices.CaptureCore;
-
         IMessageQueue MessageQueue
             => ContextRoot.MessageQueue;
-
-        /// <summary>
-        /// The context formatter
-        /// </summary>
-        IAsmRoutineFormatter Formatter
-            => new AsmRoutineFormatter();
-
-        /// <summary>
-        /// The context decoder
-        /// </summary>
-        IAsmDecoder RoutineDecoder
-            => CaptureServices.RoutineDecoder;
     }
 }

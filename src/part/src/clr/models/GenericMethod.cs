@@ -6,13 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
-    partial struct ApiExtracts
+    public readonly struct GenericMethod
     {
-        [Op, MethodImpl(Inline)]
-        internal static CaptureOutcome complete(ExtractTermCode tc, long start, long end, int delta)
-            => new CaptureOutcome(((ulong)start, (ulong)(end + delta)), tc);
+        public MethodInfo Definition {get;}
+
+        [MethodImpl(Inline)]
+        public GenericMethod(MethodInfo src)
+        {
+            Definition = src;
+        }
     }
 }

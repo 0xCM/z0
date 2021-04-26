@@ -20,8 +20,6 @@ namespace Z0.Asm
 
         public event Action<IAppMsg> Next;
 
-        public ICaptureServices CaptureServices {get;}
-
         public IPolyrand Random {get;}
 
         [MethodImpl(Inline)]
@@ -33,7 +31,6 @@ namespace Z0.Asm
             Next = app.MessageRelay;
             app.MessageQueue.Next += Relay;
             Random = app.Random;
-            CaptureServices = Wf.CaptureServices();
         }
 
         [MethodImpl(Inline)]

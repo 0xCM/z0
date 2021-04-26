@@ -1,0 +1,9 @@
+| Opcode     | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                                      |
+| AA         | STOS m8     | NA    | Valid       | Valid           | For legacy mode, store AL at address ES:(E)DI; For 64-bit mode store AL at address RDI or EDI.   |
+| AB         | STOS m16    | NA    | Valid       | Valid           | For legacy mode, store AX at address ES:(E)DI; For 64-bit mode store AX at address RDI or EDI.   |
+| AB         | STOS m32    | NA    | Valid       | Valid           | For legacy mode, store EAX at address ES:(E)DI; For 64-bit mode store EAX at address RDI or EDI. |
+| REX.W + AB | STOS m64    | NA    | Valid       | N.E.            | Store RAX at address RDI or EDI.                                                                 |
+| AA         | STOSB       | NA    | Valid       | Valid           | For legacy mode, store AL at address ES:(E)DI; For 64-bit mode store AL at address RDI or EDI.   |
+| AB         | STOSW       | NA    | Valid       | Valid           | For legacy mode, store AX at address ES:(E)DI; For 64-bit mode store AX at address RDI or EDI.   |
+| AB         | STOSD       | NA    | Valid       | Valid           | For legacy mode, store EAX at address ES:(E)DI; For 64-bit mode store EAX at address RDI or EDI. |
+| REX.W + AB | STOSQ       | NA    | Valid       | N.E.            | Store RAX at address RDI or EDI.                                                                 |

@@ -54,13 +54,16 @@ namespace Z0.Asm
             return counter;
         }
 
+        uint Produce(Index<AsmHostRoutines> src, FS.FilePath dst)
+            => Produce(src.SelectMany(x => x.Storage), dst);
+
         public void Produce(string name, ToolId consumer, params PartId[] parts)
         {
             var dst = Db.ToolInput(consumer, name, FS.Asm);
             var flow = Wf.Running();
             var options = CaptureWorkflowOptions.EmitImm;
             var routines = Capture.run(Wf, parts, options);
-            var statements = Produce(routines.View, dst);
+            var statements = Produce(routines, dst);
             Wf.Ran(flow);
         }
 

@@ -1304,9 +1304,26 @@ namespace Z0.Asm
         }
 
 
+        // void CaptureTest()
+        // {
+        //     var dst = ApiExtracts.buffer();
+        //     var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Math).Single();
+        //     var methods = @readonly(catalog.Operations.Storage.Concrete());
+        //     var count = methods.Length;
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var method = ref skip(methods,i);
+        //         var id = method.Identify();
+        //         var src = ApiJit.jit(method);
+        //         var result = ApiExtracts.capture(id, src, dst);
+        //         Wf.Row(string.Format("{0}: {1}", result.CaptureRange, id));
+        //     }
+        // }
+
         public void Run()
         {
-            CaptureParts(PartId.Extract);
+            //CaptureParts(PartId.Extract);
+            //CaptureTest();
 
             // var checks = ApiKeyChecks.create(Wf);
             // checks.Run();

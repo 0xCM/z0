@@ -10,15 +10,21 @@ namespace Z0
 
     public readonly struct ApiCaptureResult
     {
-        public CaptureOutcome Outcome {get;}
+        /// <summary>
+        /// The capture termination code indicating why the capture process reached end-state
+        /// </summary>
+        public ExtractTermCode TermCode {get;}
 
         public CodeBlockPair Pair {get;}
 
+        public MemoryRange CaptureRange {get;}
+
         [MethodImpl(Inline)]
-        internal ApiCaptureResult(CaptureOutcome outcome, CodeBlockPair pair)
+        internal ApiCaptureResult(ExtractTermCode term,  MemoryRange range, CodeBlockPair pair)
         {
-            Outcome = outcome;
+            TermCode = term;
             Pair = pair;
+            CaptureRange = range;
         }
     }
 }

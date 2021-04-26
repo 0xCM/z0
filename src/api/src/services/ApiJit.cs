@@ -224,11 +224,11 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var t = ref skip(types, i);
-                    var reified = src.Method.MakeGenericMethod(t);
-                    var address = memory.address(Jit(reified));
-                    var id = Diviner.Identify(reified);
+                    var constructed = src.Method.MakeGenericMethod(t);
+                    var address = memory.address(Jit(constructed));
+                    var id = Diviner.Identify(constructed);
                     var uri = ApiUri.define(ApiUriScheme.Located, src.Host, method.Name, id);
-                    seek(dst,i) = new ApiMember(uri, reified, @class, address);
+                    seek(dst,i) = new ApiMember(uri, constructed, @class, address);
                 }
             }
             catch(ArgumentException e)

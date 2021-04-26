@@ -12,7 +12,7 @@ namespace Z0
     partial struct CodeBlocks
     {
         [MethodImpl(Inline), Op]
-        public static ApiCaptureResult result(OpIdentity id, CaptureOutcome outcome, CodeBlockPair pair)
-            => new ApiCaptureResult(outcome,pair);
+        public static ApiCaptureResult result(OpIdentity id,  ExtractTermCode term, MemoryRange range, CodeBlockPair pair)
+            => new ApiCaptureResult(term, range,pair);
     }
 }

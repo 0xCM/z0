@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct VPerm
+    partial struct Permute
     {
         /// <summary>
         /// Determines whether a permutation literal is a symbol

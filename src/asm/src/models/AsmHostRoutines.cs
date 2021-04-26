@@ -31,6 +31,13 @@ namespace Z0.Asm
             get => Data.Select(x => x.Routine);
         }
 
+        public Index<ApiMember> Members
+        {
+            [MethodImpl(Inline)]
+            get => Data.Select(x => x.Member);
+        }
+
+
         public ApiHostUri Host
         {
             [MethodImpl(Inline)]

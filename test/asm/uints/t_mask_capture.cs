@@ -59,33 +59,33 @@ namespace Z0.Asm
 
         public void capture_natural_masks()
         {
-            using var hexout = HexWriter();
-            using var asmout = AsmWriter();
+            // using var hexout = HexWriter();
+            // using var asmout = AsmWriter();
 
-            foreach(var src in NaturalClosures)
-            {
-                var captured = AsmChecks.Capture(src.Identify(), src).Require();
-                hexout.Write(captured.CodeBlock);
-                asmout.WriteAsm(AsmChecks.Decoder.Decode(captured).Require());
-            }
+            // foreach(var src in NaturalClosures)
+            // {
+            //     var captured = AsmChecks.Capture(src.Identify(), src).Require();
+            //     hexout.Write(captured.CodeBlock);
+            //     asmout.WriteAsm(AsmChecks.Decoder.Decode(captured).Require());
+            // }
         }
 
         public void capture_masks()
         {
-            using var hexout = HexWriter();
-            using var asmout = AsmWriter();
+            // using var hexout = HexWriter();
+            // using var asmout = AsmWriter();
 
-            var methods =
-                from def in NumericMethodDefs
-                from closure in def.MakeGenericMethods(NumericArgs)
-                select closure;
+            // var methods =
+            //     from def in NumericMethodDefs
+            //     from closure in def.MakeGenericMethods(NumericArgs)
+            //     select closure;
 
-            foreach(var src in methods)
-            {
-                var captured = AsmChecks.Capture(src.Identify(), src).Require();
-                hexout.Write(captured.CodeBlock);
-                asmout.WriteAsm(AsmChecks.Decoder.Decode(captured).Require());
-            }
+            // foreach(var src in methods)
+            // {
+            //     var captured = AsmChecks.Capture(src.Identify(), src).Require();
+            //     hexout.Write(captured.CodeBlock);
+            //     asmout.WriteAsm(AsmChecks.Decoder.Decode(captured).Require());
+            // }
         }
 
         public static IEnumerable<MethodInfo> NumericMethods

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Reflection;
-    using System.Linq;
 
     using static Root;
 

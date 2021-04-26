@@ -10,14 +10,14 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct VPerm
+    partial struct Permute
     {
         [MethodImpl(Inline), Op]
         public static bool symbols(Perm4L src, Span<SymVal<Perm4L>> dst)
         {
             const byte Count = 4;
             for(byte i=0; i<Count; i++)
-                if(!symbol(src, i, out seek(dst, i)))
+                if(!Permute.symbol(src, i, out seek(dst, i)))
                     return false;
             return true;
         }
@@ -32,7 +32,7 @@ namespace Z0
         {
             const byte Count = 8;
             for(byte i=0; i<Count; i++)
-                if(!symbol(src, i, out seek(dst, i)))
+                if(!Permute.symbol(src, i, out seek(dst, i)))
                     return false;
             return true;
         }
@@ -47,7 +47,7 @@ namespace Z0
         {
             const byte Count = 16;
             for(byte i=0; i<Count; i++)
-                if(!symbol(src, i, out seek(dst,i)))
+                if(!Permute.symbol(src, i, out seek(dst,i)))
                     return false;
             return true;
         }

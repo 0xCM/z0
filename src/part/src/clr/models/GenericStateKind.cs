@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum GenericStateKind
+    public enum GenericStateKind : byte
     {
         Nongeneric = 0,
 

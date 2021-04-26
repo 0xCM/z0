@@ -34,7 +34,6 @@ namespace Z0
 
         ReadOnlySpan<byte> ParsedSlice
             => api.parsed(this);
-            //(Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : sys.empty<byte>();
 
         internal EncodingParser(EncodingPatterns patterns, byte[] buffer)
         {

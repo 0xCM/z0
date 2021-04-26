@@ -26,9 +26,6 @@ namespace Z0
             Location = location;
         }
 
-        public JittedMethod WithLocation(MemoryAddress location)
-            => new JittedMethod(Host, Method, location);
-
         [MethodImpl(Inline)]
         public int CompareTo(JittedMethod src)
             => Location.CompareTo(src.Location);

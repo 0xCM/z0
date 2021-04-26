@@ -10,14 +10,14 @@ namespace Z0
 
     using static Part;
 
-    partial struct VPerm
+    partial struct Permute
     {
         /// <summary>
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec as
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> digits(Perm16 spec)
+        public static Vector128<byte> vdigits(Perm16 spec)
             => cpu.vshuf16x8(gcpu.vinc<byte>(w128), spec.Data);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> digits(Perm32 spec)
+        public static Vector256<byte> vdigits(Perm32 spec)
             => cpu.vshuf32x8(gcpu.vinc<byte>(w256), spec.Data);
     }
 }

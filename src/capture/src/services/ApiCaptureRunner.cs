@@ -10,6 +10,8 @@ namespace Z0
 
     using Z0.Asm;
 
+    using static memory;
+
     public class ApiCaptureRunner : AppService<ApiCaptureRunner>
     {
         [Op]
@@ -34,15 +36,16 @@ namespace Z0
 
         const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.CaptureContext | CaptureWorkflowOptions.EmitImm;
 
-        public Index<AsmMemberRoutine> Capture(Index<PartId> parts)
+        public Index<AsmHostRoutines> Capture(Index<PartId> parts)
         {
             return Capture(Wf.ApiCatalog.PartIdentities, DefaultOptions);
         }
 
-        public static ApiMembers members(Index<AsmMemberRoutine> src)
-            => ApiMembers.create(src.Select(x => x.Member));
+        public static ApiMembers members(Index<AsmHostRoutines> src)
+            => ApiMembers.create(src.SelectMany(x => x.Members));
 
-        public Index<AsmMemberRoutine> Capture(Index<PartId> parts, CaptureWorkflowOptions options)
+
+        public Index<AsmHostRoutines> Capture(Index<PartId> parts, CaptureWorkflowOptions options)
         {
             using var flow = Wf.Running();
             Wf.Status(Seq.enclose(parts.Storage));
@@ -72,10 +75,10 @@ namespace Z0
             return captured;
         }
 
-        public Index<AsmMemberRoutine> Capture(PartId part, CaptureWorkflowOptions? options = null)
+        public Index<AsmHostRoutines> Capture(PartId part, CaptureWorkflowOptions? options = null)
             => Capture(root.array(part), CaptureWorkflowOptions.EmitImm);
 
-        Index<AsmMemberRoutine> CaptureParts(Index<PartId> parts)
+        Index<AsmHostRoutines> CaptureParts(Index<PartId> parts)
         {
             var flow = Wf.Running();
             using var step = Wf.ApiCapture();

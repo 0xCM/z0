@@ -16,6 +16,26 @@ namespace Z0
     partial struct ApiExtracts
     {
         [Op]
+        internal static Index<ApiMemberCode> parse(EP parser, ReadOnlySpan<ApiMemberExtract> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return default;
+
+            var buffer = alloc<ApiMemberCode>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                var outcome = parse(parser, skip(src,i), i);
+                if(outcome)
+                    seek(dst, i) = outcome.Data;
+                else
+                    seek(dst, i) = ApiMemberCode.Empty;
+            }
+            return buffer;
+        }
+
+        [Op]
         internal static Outcome<ApiMemberCode> parse(EP parser, in ApiMemberExtract src, uint seq)
         {
             const int Zx7Cut = 7;
@@ -39,23 +59,38 @@ namespace Z0
         }
 
         [Op]
-        internal static Index<ApiMemberCode> parse(EP parser, ReadOnlySpan<ApiMemberExtract> src)
+        internal static CodeBlock locate(MemoryAddress address, byte[] src, int cut)
         {
-            var count = src.Length;
-            if(count == 0)
-                return default;
-
-            var buffer = alloc<ApiMemberCode>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0u; i<count; i++)
+            if(cut == 0)
+                return new CodeBlock(address, src);
+            else
             {
-                var outcome = parse(parser, skip(src,i), i);
-                if(outcome)
-                    seek(dst, i) = outcome.Data;
-                else
-                    seek(dst, i) = ApiMemberCode.Empty;
+                Span<byte> data = src;
+                var len = extractSize(data, cut, 0xC3);
+                var keep = data.Slice(0, len);
+                return new CodeBlock(address, keep.ToArray());
             }
-            return buffer;
+        }
+
+        [Op]
+        internal static int extractSize(Span<byte> src, int maxcut, byte code)
+        {
+            var srcLen = src.Length;
+            var cut = 0;
+            if(srcLen > maxcut)
+            {
+                var start = srcLen - maxcut - 1;
+                ref readonly var lead = ref skip(src, maxcut);
+                ref readonly var current = ref lead;
+                for(var i=start; i<srcLen && cut < maxcut; i++, cut++)
+                {
+                    current = ref skip(lead, i);
+                    if(current == code)
+                        break;
+                }
+            }
+            var dstLen = src.Length - cut;
+            return dstLen <= 0 ? src.Length : dstLen;
         }
     }
 }

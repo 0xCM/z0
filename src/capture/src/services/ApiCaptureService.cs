@@ -42,22 +42,22 @@ namespace Z0
         /// <summary>
         /// Root capture routine that traverses and captures the apiset
         /// </summary>
-        public Index<AsmMemberRoutine> CaptureParts()
+        public Index<AsmHostRoutines> CaptureParts()
         {
             using var flow = Wf.Running();
             ClearArchive();
             var captured = RunCapture();
             Wf.Ran(flow);
-            return captured.SelectMany(x => x.Storage);
+            return captured;
         }
 
-        public Index<AsmMemberRoutine> CaptureParts(Index<PartId> parts)
+        public Index<AsmHostRoutines> CaptureParts(Index<PartId> parts)
         {
             using var flow = Wf.Running();
             ClearArchive(parts);
             var captured = RunCapture(parts);
             Wf.Ran(flow);
-            return captured.SelectMany(x => x.Storage);
+            return captured;
         }
 
         public AsmHostRoutines CaptureHost(ApiHostUri host, ApiMembers members, FS.FolderPath dst)

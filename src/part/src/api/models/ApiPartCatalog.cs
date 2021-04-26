@@ -58,7 +58,6 @@ namespace Z0
             ApiTypes = apitypes;
             OperationHosts = apihosts.Map(h => (IApiHost)h);
             ServiceHosts = svchosts;
-            //ApiHosts = apitypes.Cast<IApiHost>().Cast<IApiHost>().Concat(apihosts.Cast<IApiHost>()).Array();
             ApiHosts = apihosts;
             Operations = apihosts.SelectMany(x => x.Methods);
         }

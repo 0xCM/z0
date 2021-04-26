@@ -9,9 +9,9 @@ namespace Z0
 
     using static Part;
 
-    partial struct VPerm
+    partial struct Permute
     {
-        /// <summary>
+         /// <summary>
         /// Attempts to extract an index-identified permutation symbol
         /// </summary>
         /// <param name="src">The permutation spec</param>
