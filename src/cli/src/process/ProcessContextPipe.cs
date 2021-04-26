@@ -80,7 +80,7 @@ namespace Z0
         public void EmitHashes(in ProcessContext src, FS.FolderPath dst)
         {
             var summaries = SymbolizeSummaries(src);
-            var summarypath = ProcPartHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
+            var summarypath = PartitionHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
             EmitHashes(summaries.Addresses, summarypath);
 
             var details = SymbolizeDetails(src);
@@ -102,7 +102,7 @@ namespace Z0
         [Op]
         public static Index<ProcessPartition> emit(Index<LocatedImage> src, FS.FilePath dst)
         {
-            var records = procparts(src);
+            var records = partitions(src);
             var target = records.Edit;
             var formatter = Tables.formatter<ProcessPartition>(16);
             var count = records.Length;
@@ -148,8 +148,8 @@ namespace Z0
             context.Subject = subject;
             if(selection.EmitSummary)
             {
-                context.PartitionPath = ProcPartPath(dst, process, ts);
-                context.Partitions = EmitProcParts(process, context.PartitionPath);
+                context.PartitionPath = PartitionPath(dst, process, ts);
+                context.Partitions = EmitPartitions(process, context.PartitionPath);
             }
             if(selection.EmitDetail)
             {

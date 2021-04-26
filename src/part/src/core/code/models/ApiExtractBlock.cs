@@ -9,9 +9,6 @@ namespace Z0
 
     using static Part;
 
-    /// <summary>
-    /// The hex bits found at the end of a uri
-    /// </summary>
     public readonly struct ApiExtractBlock : IComparable<ApiExtractBlock>
     {
         /// <summary>

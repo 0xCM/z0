@@ -80,7 +80,7 @@ namespace Z0
             var flow = Wf.Running($"Evaluating {catalog.PartId.Format()}");
             using var buffers = NativeBuffers.alloc(BufferSize, BufferCount);
             foreach(var host in catalog.OperationHosts)
-                ExecuteHost(buffers.Tokenize(), host.Uri);
+                ExecuteHost(buffers.Tokenize(), host.HostUri);
             Wf.Ran(flow);
         }
 

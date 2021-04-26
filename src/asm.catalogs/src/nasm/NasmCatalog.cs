@@ -16,7 +16,7 @@ namespace Z0.Asm
             var lines = text.lines(Parts.AsmCatalogs.Assets.NasmInstructions().Utf8()).View;
             var count = lines.Length;
             var section = EmptyString;
-            var records = RecordList.create<NasmInstruction>(7000);
+            var records = DataList.create<NasmInstruction>(7000);
             for(var i=0; i<count; i++)
             {
                 ref readonly var line = ref skip(lines,i);

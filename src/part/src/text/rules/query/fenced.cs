@@ -39,7 +39,7 @@ namespace Z0
             [Op]
             public static bool fenced(string src, Fence<char> fence, out Pair<int> location)
             {
-                location = root.pair(NotFound,NotFound);
+                location = root.pair((int)NotFound,(int)NotFound);
                 if(text.nonempty(src))
                 {
                     var chars = span(src);

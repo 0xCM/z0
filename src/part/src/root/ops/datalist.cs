@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
-    using static memory;
 
-    [ApiHost]
-    public static partial class XSvc
+    partial struct root
     {
-        [Op]
-        public static ApiExtractor ApiExtractor(this IWfRuntime wf)
-            => Z0.ApiExtractor.create(wf);
+        [Op, Closures(Closure)]
+        public static DataList<T> datalist<T>(uint? capacity = null)
+            => DataList.create<T>(capacity);
     }
 }

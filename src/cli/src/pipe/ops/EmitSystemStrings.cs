@@ -18,13 +18,13 @@ namespace Z0
         public Index<SystemString> EmitSystemStrings(ReadOnlySpan<Assembly> src)
         {
             var count = src.Length;
-            var dst = RecordList.create<SystemString>(16404);
+            var dst = DataList.create<SystemString>(16404);
             for(var i=0; i<count; i++)
                 EmitSystemStrings(skip(src,i), dst);
             return dst.Emit();
         }
 
-        public uint EmitSystemStrings(Assembly src, RecordList<SystemString> dst)
+        public uint EmitSystemStrings(Assembly src, DataList<SystemString> dst)
         {
             var srcPath = FS.path(src.Location);
             using var reader = PeTableReader.open(srcPath);

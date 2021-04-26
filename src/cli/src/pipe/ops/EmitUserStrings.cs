@@ -17,14 +17,14 @@ namespace Z0
 
         public Index<UserString> EmitUserStrings(ReadOnlySpan<Assembly> src)
         {
-            var buffer = RecordList.create<UserString>();
+            var buffer = DataList.create<UserString>();
             var count = src.Length;
             for(var i=0; i<count; i++)
                 EmitUserStrings(skip(src,i), buffer);
             return buffer.Emit();
         }
 
-        public void EmitUserStrings(Assembly src, RecordList<UserString> buffer)
+        public void EmitUserStrings(Assembly src, DataList<UserString> buffer)
         {
             using var reader = ImageMetaReader.create(FS.path(src.Location));
             var records = reader.ReadUserStrings();

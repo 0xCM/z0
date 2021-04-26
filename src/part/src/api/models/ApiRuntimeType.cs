@@ -21,7 +21,7 @@ namespace Z0
 
         public string Name {get;}
 
-        public ApiHostUri Uri {get;}
+        public ApiHostUri HostUri {get;}
 
         Dictionary<string,MethodInfo> Index {get;}
 
@@ -31,7 +31,7 @@ namespace Z0
             HostType = type;
             Name = name;
             PartId = part;
-            Uri = uri;
+            HostUri = uri;
             Methods = methods;
             Index = index;
         }
@@ -41,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Uri.Format();
+            => HostUri.Format();
 
         public override string ToString()
             => Format();
@@ -62,7 +62,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiRuntimeType src)
-            => src.Uri;
+            => src.HostUri;
 
         [MethodImpl(Inline)]
         public static bool operator==(ApiRuntimeType a, ApiRuntimeType b)

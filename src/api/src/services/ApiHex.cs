@@ -117,7 +117,7 @@ namespace Z0
         [Op]
         public Count ReadBlocks(FS.FilePath src, List<ApiCodeBlock> dst)
         {
-            var rows = new RecordList<ApiHexRow>(1600);
+            var rows = new DataList<ApiHexRow>(1600);
             var count = ReadRows(src, rows);
             for(var i=0; i<count; i++)
             {
@@ -209,7 +209,7 @@ namespace Z0
         }
 
         [Op]
-        public Count ReadRows(FS.FilePath src, RecordList<ApiHexRow> dst)
+        public Count ReadRows(FS.FilePath src, DataList<ApiHexRow> dst)
         {
             var data = @readonly(src.ReadLines().Storage.Skip(1));
             var count = data.Length;

@@ -41,13 +41,6 @@ namespace Z0
         }
 
         [Op]
-        public static LocatedMethod jit(IdentifiedMethod src)
-        {
-            sys.prepare(src.MethodHandle);
-            return new LocatedMethod(src.Id, src.Method, fptr(src));
-        }
-
-        [Op]
         public static Index<MemberAddress> jit(Index<MethodInfo> src)
         {
             var methods = src.View;
@@ -80,13 +73,6 @@ namespace Z0
             where D : Delegate
                 => jit(src.Untyped);
 
-        [Op]
-        public LocatedMethod JitMethod(IdentifiedMethod src)
-        {
-            sys.prepare(src.MethodHandle);
-            return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
-        }
-
         public ApiMembers JitCatalog()
             => JitCatalog(Wf.ApiParts.RuntimeCatalog);
 
@@ -106,6 +92,7 @@ namespace Z0
             return members;
         }
 
+
         public ApiMembers JitHost(IApiHost src)
         {
             var direct = JitDirect(src);
@@ -117,7 +104,7 @@ namespace Z0
         {
             var dst = root.list<ApiMember>();
             var count = src.Count;
-            var exclusions = Ignore;
+            var exclusions = CommonExclusions;
             ref var lead = ref src.First;
             for(var i=0u; i<count; i++)
                 dst.AddRange(Jit(skip(lead,i), exclusions));
@@ -145,11 +132,11 @@ namespace Z0
         }
 
         public Index<ApiMember> Jit(ApiRuntimeType src)
-            => Jit(src, Ignore);
+            => Jit(src, CommonExclusions);
 
         [Op]
         ApiMember[] Jit(ApiRuntimeType src, HashSet<string> exclusions)
-            => Members(ApiQuery.methods(src,exclusions).Select(m => new JittedMethod(src.Uri, m, address(Jit(m)))));
+            => Members(ApiQuery.methods(src,exclusions).Select(m => new JittedMethod(src.HostUri, m, address(Jit(m)))));
 
         [Op]
         ApiMember[] Members(JittedMethod[] located)
@@ -182,7 +169,7 @@ namespace Z0
         [Op]
         ApiMember[] JitDirect(IApiHost src)
         {
-            var methods = ApiQuery.nongeneric(src).Select(m => new JittedMethod(src.Uri, m));
+            var methods = ApiQuery.nongeneric(src).Select(m => new JittedMethod(src.HostUri, m));
             var count = methods.Length;
             var buffer = alloc<ApiMember>(count);
             ref var dst = ref first(buffer);
@@ -192,7 +179,7 @@ namespace Z0
                 var m = methods[i];
                 var kid = m.Method.KindId();
                 var id = Diviner.Identify(m.Method);
-                var uri = ApiUri.define(ApiUriScheme.Located, src.Uri, m.Method.Name, id);
+                var uri = ApiUri.define(ApiUriScheme.Located, src.HostUri, m.Method.Name, id);
                 seek(dst,i) = new ApiMember(uri, m.Method, kid, address(Jit(m.Method)));
 
             }
@@ -202,7 +189,7 @@ namespace Z0
         [Op]
         ApiMember[] JitGeneric(IApiHost src)
         {
-            var generic = @readonly(ApiQuery.generic(src).Select(m => new JittedMethod(src.Uri, m)));
+            var generic = @readonly(ApiQuery.generic(src).Select(m => new JittedMethod(src.HostUri, m)));
             var gCount = generic.Length;
             var buffer = root.list<ApiMember>();
             for(var i=0; i<gCount; i++)
@@ -254,7 +241,7 @@ namespace Z0
             return query.ToDictionary();
         }
 
-        static HashSet<string> Ignore
+        static HashSet<string> CommonExclusions
             => root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
     }
 }

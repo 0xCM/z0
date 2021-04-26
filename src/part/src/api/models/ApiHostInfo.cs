@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHostInfo : IApiHost
     {
-        public ApiHostUri Uri {get;}
+        public ApiHostUri HostUri {get;}
 
         public PartId PartId {get;}
 
@@ -30,7 +30,7 @@ namespace Z0
         public ApiHostInfo(Type host, ApiHostUri uri, PartId part, MethodInfo[] methods, Dictionary<string,MethodInfo> index)
         {
             HostType = host;
-            Uri = uri;
+            HostUri = uri;
             PartId = part;
             Methods = methods;
             Index = index;

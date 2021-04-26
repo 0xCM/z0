@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
 
     /// <summary>
-    /// Describes a reified api member which may be of hosted or located state
+    /// Describes a concrete api
     /// </summary>
     public readonly struct ApiMember : IApiMember<ApiMember>
     {

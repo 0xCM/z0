@@ -5,15 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using static Part;
 
-    [Free]
-    public interface IHostedApiMethod : IApiMethod
+    using static memory;
+
+    partial struct ApiExtracts
     {
-        new IApiHost Host {get;}
-
-        ApiHostUri IApiMethod.Host
-            => Host.HostUri;
     }
 }

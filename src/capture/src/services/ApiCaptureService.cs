@@ -204,16 +204,16 @@ namespace Z0
         {
             src = root.require(src);
             var routines = AsmHostRoutines.Empty;
-            var flow = Wf.Running(src.Name);
+            var flow = Wf.Running(src.HostName);
             try
             {
-                routines = Emitter.Emit(src.Uri, ExtractHostOps(src));
+                routines = Emitter.Emit(src.HostUri, ExtractHostOps(src));
             }
             catch(Exception e)
             {
                 Wf.Error(e);
             }
-            Wf.Ran(flow, src.Name);
+            Wf.Ran(flow, src.HostName);
             return routines;
         }
 
@@ -221,16 +221,16 @@ namespace Z0
         {
             src = root.require(src);
             var routines = AsmHostRoutines.Empty;
-            var flow = Wf.Running(src.Name);
+            var flow = Wf.Running(src.HostName);
             try
             {
-                routines = Emitter.Emit(src.Uri, ExtractHostOps(src), dst);
+                routines = Emitter.Emit(src.HostUri, ExtractHostOps(src), dst);
             }
             catch(Exception e)
             {
                 Wf.Error(e);
             }
-            Wf.Ran(flow, src.Name);
+            Wf.Ran(flow, src.HostName);
             return routines;
         }
 

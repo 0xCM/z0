@@ -66,7 +66,7 @@ namespace Z0
                         buffer.Add(member);
                     }
 
-                    Wf.Status(Msg.IndexedHost.Format(hostcat.Host.Uri, apicount, counter));
+                    Wf.Status(Msg.IndexedHost.Format(hostcat.Host.HostUri, apicount, counter));
                 }
             }
 

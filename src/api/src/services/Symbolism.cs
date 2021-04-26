@@ -103,7 +103,7 @@ namespace Z0
                 return Index<SymLiteral>.Empty;
             }
 
-            var dst = new RecordList<SymLiteral>();
+            var dst = new DataList<SymLiteral>();
             while(!reader.Complete)
             {
                 var outcome = reader.ReadRow(out var row);

@@ -20,9 +20,9 @@ namespace Z0
 
         public Type HostType {get;}
 
-        public Identifier Name {get;}
+        public Identifier HostName {get;}
 
-        public ApiHostUri Uri {get;}
+        public ApiHostUri HostUri {get;}
 
         public Index<MethodInfo> Methods {get;}
 
@@ -32,9 +32,9 @@ namespace Z0
         public ApiHost(Type type, string name, PartId part, ApiHostUri uri, MethodInfo[] methods, Dictionary<string,MethodInfo> index)
         {
             HostType = type;
-            Name = name;
+            HostName = name;
             PartId = part;
-            Uri = uri;
+            HostUri = uri;
             Methods = methods;
             Index = index;
         }
@@ -56,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Uri.Format();
+            => HostUri.Format();
 
         public override string ToString()
             => Format();
@@ -77,7 +77,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiHost src)
-            => src.Uri;
+            => src.HostUri;
 
         [MethodImpl(Inline)]
         public static bool operator==(ApiHost a, ApiHost b)

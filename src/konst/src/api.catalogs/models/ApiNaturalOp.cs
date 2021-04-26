@@ -48,6 +48,6 @@ namespace Z0
             => GenericId.Generalize();
 
         ApiHostUri IApiMethod.Host
-                => Host.Uri;
+                => Host.HostUri;
     }
 }

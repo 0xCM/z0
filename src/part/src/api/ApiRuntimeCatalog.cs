@@ -123,7 +123,7 @@ namespace Z0
                 for(var j=0; j<kSearch; j++)
                 {
                     var candidate = skip(search,j);
-                    if(candidate.Uri == match)
+                    if(candidate.HostUri == match)
                     {
                         dst.Add(candidate);
                         break;
@@ -137,11 +137,11 @@ namespace Z0
             => _PartComponents.Where(c => c.Id() == id).FirstOrDefault();
 
         Option<IApiHost> IApiCatalogQueries.FindHost(ApiHostUri uri)
-            => root.option(_ApiHosts.Where(h => h.Uri == uri).FirstOrDefault());
+            => root.option(_ApiHosts.Where(h => h.HostUri == uri).FirstOrDefault());
 
         bool FindHost(ApiHostUri uri, out IApiHost host)
         {
-            host = _ApiHosts.Where(h => h.Uri == uri).FirstOrDefault();
+            host = _ApiHosts.Where(h => h.HostUri == uri).FirstOrDefault();
             return host != null;
         }
 

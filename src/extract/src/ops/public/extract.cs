@@ -24,12 +24,19 @@ namespace Z0
         }
 
         [Op]
-        public static unsafe ApiMemberExtract extract(in ApiMember src, Span<byte> dst)
+        public static unsafe ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
         {
             var address = src.BaseAddress;
-            var length = extract(address, dst);
-            var extracted = sys.array(dst.Slice(0,length));
+            var length = extract(address, buffer);
+            var extracted = sys.array(buffer.Slice(0,length));
             return new ApiMemberExtract(src, new ApiExtractBlock(address, src.OpUri, extracted));
+        }
+
+        [Op]
+        public static unsafe ApiExtractBlock extract(in ResolvedMethod src, Span<byte> buffer)
+        {
+            var size = extract(src.Address, buffer);
+            return new ApiExtractBlock(src.Address, src.Uri, slice(buffer,0, size).ToArray());
         }
     }
 }

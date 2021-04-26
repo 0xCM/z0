@@ -107,10 +107,10 @@ namespace Z0
         [Op]
         public ApiHostCatalog HostCatalog(IApiHost src)
         {
-            var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.Uri));
+            var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.HostUri));
             var members = ApiJit.JitHost(src);
             var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members.Sort());
-            Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.Uri, members.Count));
+            Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.HostUri, members.Count));
             return result;
         }
 
@@ -157,11 +157,11 @@ namespace Z0
                 for(var j=0; j<kHost; j++)
                 {
                     ref readonly var host = ref skip(hosts,j);
-                    var hexpath = Db.ApiHexPath(host.Uri);
+                    var hexpath = Db.ApiHexPath(host.HostUri);
                     if(hexpath.Exists)
                     {
                         var blocks = hex.ReadBlocks(hexpath);
-                        var catalog = HostCatalog(Wf.ApiCatalog.FindHost(host.Uri).Require());
+                        var catalog = HostCatalog(Wf.ApiCatalog.FindHost(host.HostUri).Require());
                         Correlate(catalog, blocks, dst, records);
                     }
                 }

@@ -25,8 +25,8 @@ namespace Z0
             {
                 ref readonly var method = ref skip(methods,i);
                 var address = ApiJit.jit(method);
-                var located = new LocatedMethod(method.Identify(), method, address);
                 var uri = ApiUri.located(method.DeclaringType.HostUri(), method.Name, method.Identify());
+                var located = new ResolvedMethod(uri, method, address);
                 var body = method.GetMethodBody();
                 var sig = method.ResolveSignature();
                 if(body != null)

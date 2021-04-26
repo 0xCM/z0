@@ -42,7 +42,7 @@ namespace Z0
         }
 
         ApiHostUri IApiMethod.Host
-            => Host.Uri;
+            => Host.HostUri;
 
         public override string ToString()
             => Id;

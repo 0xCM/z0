@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source elements</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static List<T> list<T>(params T[] src)
         {
             var length = src?.Length ?? 0;
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="capacity">The list capacity</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(AllNumeric)]
         public static List<T> list<T>(int capacity)
             => new List<T>(capacity);
 
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="capacity">The list capacity</param>
         /// <typeparam name="T">The item type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(AllNumeric)]
         public static List<T> list<T>(uint capacity)
             => new List<T>((int)capacity);
     }

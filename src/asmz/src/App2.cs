@@ -281,7 +281,7 @@ namespace Z0.Asm
             {
                 if(catalog.Host(block.OpUri.Host, out var host))
                 {
-                    Wf.Row(string.Format("{0} | {1}", host.Uri, block.OpUri));
+                    Wf.Row(string.Format("{0} | {1}", host.HostUri, block.OpUri));
                 }
             }
 
@@ -1304,24 +1304,24 @@ namespace Z0.Asm
         }
 
 
-        // void CaptureTest()
-        // {
-        //     var dst = ApiExtracts.buffer();
-        //     var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Math).Single();
-        //     var methods = @readonly(catalog.Operations.Storage.Concrete());
-        //     var count = methods.Length;
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var method = ref skip(methods,i);
-        //         var id = method.Identify();
-        //         var src = ApiJit.jit(method);
-        //         var result = ApiExtracts.capture(id, src, dst);
-        //         Wf.Row(string.Format("{0}: {1}", result.CaptureRange, id));
-        //     }
-        // }
+        void ExtractCatalog()
+        {
+            var extractor = Wf.ApiExtractor();
+
+            // var experiment = ExtractExperiment.create(Wf);
+            // experiment.Run();
+            var catalog = Wf.ApiCatalog;
+            var resolved = extractor.ResolveCatalog(catalog);
+            var extracts = extractor.ExtractCatalog(catalog);
+
+            // var members = Wf.ApiJit().JitCatalog();
+            // var context = Wf.ProcessContextPipe();
+            // var regions = context.EmitRegions(Db.AppLog("process.regions", FS.Csv));
+        }
 
         public void Run()
         {
+            ExtractCatalog();
             //CaptureParts(PartId.Extract);
             //CaptureTest();
 

@@ -18,9 +18,9 @@ namespace Z0.Tooling
     {
         public uint BatchSize => Pow2.T16;
 
-        RecordList<CultSummaryRecord> Summaries;
+        DataList<CultSummaryRecord> Summaries;
 
-        RecordList<AsmLine> AsmLines;
+        DataList<AsmLine> AsmLines;
 
         Index<char> HexCharBuffer;
 

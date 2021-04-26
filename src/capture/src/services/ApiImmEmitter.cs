@@ -101,7 +101,7 @@ namespace Z0.Asm
         void EmitDirectRefinements(in CaptureExchange exchange, IApiHost host, IAsmImmWriter dst)
         {
             var groups = ApiQuery.imm(host,RefinementClass.Refined);
-            var uri = host.Uri;
+            var uri = host.HostUri;
             var generic = false;
             foreach(var g in groups)
             {
@@ -163,7 +163,7 @@ namespace Z0.Asm
             var routines = root.list<AsmRoutine>();
             foreach(var host in Hosts(parts))
             {
-                var archive = Archive(host.Uri);
+                var archive = Archive(host.HostUri);
                 EmitDirectRefinements(exchange, host, archive);
                 routines.AddRange(EmitGenericRefinements(exchange, host, archive));
             }
@@ -174,7 +174,7 @@ namespace Z0.Asm
             var routines = root.list<AsmRoutine>();
             foreach(var host in Hosts(parts))
             {
-                var archive = Archive(host.Uri);
+                var archive = Archive(host.HostUri);
                 var groups = ApiQuery.imm(host, RefinementClass.Unrefined);
                 routines.AddRange(EmitUnrefinedDirect(exchange, groups,imm8, archive));
             }
@@ -205,7 +205,7 @@ namespace Z0.Asm
             var routines = root.list<AsmRoutine>();
             foreach(var host in Hosts(parts))
             {
-                var archive = Archive(host.Uri);
+                var archive = Archive(host.HostUri);
                 var specs = ApiQuery.immG(host, RefinementClass.Unrefined);
                 foreach(var spec in specs)
                     routines.AddRange(EmitUnrefinedGeneric(exchange, spec, imm8, archive));
@@ -245,7 +245,7 @@ namespace Z0.Asm
             foreach(var f in methods)
             {
                 var host = f.Host;
-                var uri = host.Uri;
+                var uri = host.HostUri;
                 var functions = Specializer.UnaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
@@ -266,7 +266,7 @@ namespace Z0.Asm
             foreach(var f in methods)
             {
                 var host = f.Host;
-                var uri = host.Uri;
+                var uri = host.HostUri;
                 var functions = Specializer.BinaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
@@ -283,7 +283,7 @@ namespace Z0.Asm
         Index<AsmRoutine> EmitUnary(in CaptureExchange exchange, ApiMethodG src, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
         {
             var gid = src.Id;
-            var uri = src.Host.Uri;
+            var uri = src.Host.HostUri;
             var generic = true;
             var closures = ApiIdentity.closures(src);
             var count = closures.Length;
@@ -306,7 +306,7 @@ namespace Z0.Asm
         Index<AsmRoutine> EmitBinary(in CaptureExchange exchange, ApiMethodG src, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
         {
             var gid = src.Id;
-            var host = src.Host.Uri;
+            var host = src.Host.HostUri;
             var generic = true;
             var closures = ApiIdentity.closures(src);
             var count = closures.Length;

@@ -18,7 +18,7 @@ namespace Z0
             {
                 var terms = src.View;
                 ref readonly var candidate = ref skip(terms,i);
-                if(candidate.Uri == uri)
+                if(candidate.HostUri == uri)
                 {
                     host = candidate;
                     return true;

@@ -14,8 +14,6 @@ namespace Z0
     {
         public ApiExtractBlock Block {get;}
 
-        public OpIdentity Id {get;}
-
         public OpUri OpUri {get;}
 
         public ApiMember Member {get;}
@@ -35,7 +33,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiMemberExtract(ApiMember member, ApiExtractBlock block)
         {
-            Id = member.Id;
             OpUri = member.OpUri;
             Member = member;
             Block = block;

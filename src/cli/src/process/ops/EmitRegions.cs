@@ -30,6 +30,13 @@ namespace Z0
             return regions;
         }
 
+        public Index<MemoryRegion> EmitRegions(FS.FilePath dst)
+        {
+            var regions = SystemMemory.regions();
+            EmitRegions(regions,dst);
+            return regions;
+        }
+
         public Count EmitRegions(Index<MemoryRegion> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<MemoryRegion>(dst);

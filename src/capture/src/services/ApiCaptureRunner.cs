@@ -29,7 +29,7 @@ namespace Z0
                 var host = hosts[i];
                 var members = jit.JitHost(host);
                 var routines = capture.CaptureMembers(members, dst);
-                var hexpath = Db.ApiHexPath(dst, host.Uri);
+                var hexpath = Db.ApiHexPath(dst, host.HostUri);
                 var blocks = hex.ReadBlocks(hexpath);
             }
         }
@@ -113,19 +113,19 @@ namespace Z0
         void EmitRebase(ApiMembers members, Timestamp ts)
         {
             var rebasing = Wf.Running();
-            var dst = Db.CaptureIndexRoot() + FS.file(string.Format("{0}.{1}", Tables.tableid<ApiCatalogEntry>(), ts.Format()), FS.Csv);
+            var dst = Db.CaptureContextRoot() + FS.file(string.Format("{0}.{1}", Tables.tableid<ApiCatalogEntry>(), ts.Format()), FS.Csv);
             var entries = Wf.ApiCatalogs().RebaseMembers(members, dst);
             Wf.Ran(rebasing);
         }
 
         void EmitContext(ApiMembers members)
         {
-            var dir = Db.CaptureIndexRoot();
+            var dir = Db.CaptureContextRoot();
             var ts = root.timestamp();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();
-            var summaries = pipe.EmitProcParts(process, pipe.ProcPartPath(dir,process,ts));
-            var details = pipe.EmitRegions(process, pipe.MemoryRegionPath(dir,process,ts));
+            var summaries = pipe.EmitPartitions(process, pipe.PartitionPath(dir, process, ts));
+            var details = pipe.EmitRegions(process, pipe.MemoryRegionPath(dir, process, ts));
             pipe.EmitDump(process, Db.DumpPath(process, ts));
             EmitRebase(members, ts);
         }

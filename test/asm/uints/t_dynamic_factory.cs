@@ -130,18 +130,18 @@ namespace Z0.Asm
             var archive = Wf.ApiHexArchive();
             var dHost = ApiQuery.hostinfo(typeof(cpu));
             var gHost = ApiQuery.hostinfo(typeof(gcpu));
-            var dMatch = archive.Read(dHost.Uri).Where(x => x.Id == dId);
+            var dMatch = archive.Read(dHost.HostUri).Where(x => x.Id == dId);
 
             if(dMatch.Count == 0)
-                Claim.failed($"No matches for {dId} found in {dHost.Uri}");
+                Claim.failed($"No matches for {dId} found in {dHost.HostUri}");
             else if(dMatch.Count > 1)
-                Claim.failed($"More than one match for {dId} found in {dHost.Uri}");
+                Claim.failed($"More than one match for {dId} found in {dHost.HostUri}");
 
-            var gMatch = archive.Read(gHost.Uri).Where(x => x.Id == gId);
+            var gMatch = archive.Read(gHost.HostUri).Where(x => x.Id == gId);
             if(gMatch.Count == 0)
-                Claim.failed($"No matches for {gId} found in {gHost.Uri}");
+                Claim.failed($"No matches for {gId} found in {gHost.HostUri}");
             else if(gMatch.Count > 1)
-                Claim.failed($"More than one match for {gId} found in {gHost.Uri}");
+                Claim.failed($"More than one match for {gId} found in {gHost.HostUri}");
 
             return AsmChecks.Match(OperatorClasses.binary(), w, dMatch[0], gMatch[0], dst);
         }

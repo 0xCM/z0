@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public Index<AsmRow> LoadAsmRows()
         {
-            var records = RecordList.create<AsmRow>(Pow2.T18);
+            var records = DataList.create<AsmRow>(Pow2.T18);
             var paths = AsmRowFiles().View;
             var flow = Wf.Running(string.Format("Loading {0} asm recordsets", paths.Length));
             var count = paths.Length;
@@ -42,12 +42,12 @@ namespace Z0.Asm
             if(file.IsEmpty)
                 return sys.empty<AsmRow>();
 
-            var records = RecordList.create<AsmRow>(Pow2.T12);
+            var records = DataList.create<AsmRow>(Pow2.T12);
             var count = LoadAsmRows(file, records);
             return records.Emit();
         }
 
-        Outcome<Count> LoadAsmRows(FS.FilePath path, RecordList<AsmRow> dst)
+        Outcome<Count> LoadAsmRows(FS.FilePath path, DataList<AsmRow> dst)
         {
             var rowtype = path.FileName.WithoutExtension.Format().RightOfLast(Chars.Dot);
             var flow = Wf.Running(string.Format("Loading {0} rows from {1}", rowtype, path.ToUri()));

@@ -78,7 +78,7 @@ namespace Z0
             => new byte[]{RET_xC3, INTR_xCC};
 
         static ReadOnlySpan<byte> RET_ZED_SBB
-            => new byte[]{RET_xC3, ZED,SBB_x19};
+            => new byte[]{RET_xC3, ZED, SBB_x19};
 
         static ReadOnlySpan<byte> RET_Zx2
             => new byte[]{RET_xC3, ZED,ZED};

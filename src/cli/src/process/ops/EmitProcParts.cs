@@ -13,26 +13,26 @@ namespace Z0
 
     partial class ProcessContextPipe
     {
-        public FS.FileName ProcPartHashFile(string process, Timestamp ts, Identifier subject)
+        public FS.FileName PartitionHashFile(string process, Timestamp ts, Identifier subject)
             => FS.file(string.Format("{0}.{1}.{2}.hashes", Tables.tableid<ProcessPartition>(), process, ts.Format()), FS.Csv);
 
-        public FS.FilePath ProcPartHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
-            => dst + ProcPartHashFile(process, ts, subject);
+        public FS.FilePath PartitionHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
+            => dst + PartitionHashFile(process, ts, subject);
 
-        public FS.FileName ProcPartFile(Process process, Timestamp ts)
+        public FS.FileName PartitionFile(Process process, Timestamp ts)
             => FS.file(string.Format("{0}.{1}.{2}", Tables.tableid<ProcessPartition>(), process.ProcessName, ts.Format()), FS.Csv);
 
-        public FS.FilePath ProcPartPath(FS.FolderPath dst, Process process, Timestamp ts)
-            => dst + ProcPartFile(process,ts);
+        public FS.FilePath PartitionPath(FS.FolderPath dst, Process process, Timestamp ts)
+            => dst + PartitionFile(process,ts);
 
-        public Index<ProcessPartition> EmitProcParts(Process process, FS.FilePath dst)
+        public Index<ProcessPartition> EmitPartitions(Process process, FS.FilePath dst)
         {
-            var summaries = procparts(Images.locate(process));
-            EmitProcParts(summaries,dst);
+            var summaries = partitions(Images.locate(process));
+            EmitPartitions(summaries,dst);
             return summaries;
         }
 
-        public Count EmitProcParts(Index<ProcessPartition> src, FS.FilePath dst)
+        public Count EmitPartitions(Index<ProcessPartition> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<ProcessPartition>(dst);
             var count = Tables.emit(src,dst);
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<ProcessPartition> procparts(Index<LocatedImage> src)
+        public static Index<ProcessPartition> partitions(Index<LocatedImage> src)
         {
             var count = src.Count;
             var images = src.View;

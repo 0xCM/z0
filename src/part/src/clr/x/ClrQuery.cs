@@ -5,6 +5,7 @@
 namespace Z0
 {
     using static Part;
+
     [ApiHost]
     public static partial class ClrQuery
     {
