@@ -7,22 +7,22 @@ namespace Z0
     /// <summary>
     /// Defines a server configuration record
     /// </summary>
-    public readonly struct AgentServerConfig
+    public struct AgentServerConfig
     {
         /// <summary>
         /// Identifies the server to which the configuration applies
         /// </summary>
-        public readonly uint ServerId;
+        public uint ServerId;
 
         /// <summary>
-        /// A descriptive name
+        /// The server name
         /// </summary>
-        public readonly string ServerName;
+        public string ServerName;
 
         /// <summary>
         /// The CPU core to which the server is assigned
         /// </summary>
-        public readonly uint CoreNumber;
+        public uint CoreNumber;
 
         public AgentServerConfig(uint id, string name, uint core)
         {

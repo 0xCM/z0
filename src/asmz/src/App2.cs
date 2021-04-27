@@ -1321,7 +1321,7 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ExtractCatalog();
+            //ExtractCatalog();
             //CaptureParts(PartId.Extract);
             //CaptureTest();
 
@@ -1338,6 +1338,21 @@ namespace Z0.Asm
 
             //EmitFormAspects();
         }
+
+        // void GetMethodInfo()
+        // {
+        //     var path = Parts.Math.Assembly.Location;
+        //     var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Math).Single();
+        //     var methods = catalog.Operations;
+        //     var method = methods.First;
+        //     var token = method.MetadataToken;
+        //     var result = SOS.SymbolReader.InitializeSymbolReader("");
+        //     if(SOS.SymbolReader.GetInfoForMethod(path, token, out var info))
+        //     {
+        //         var size = info.size;
+        //         Wf.Row($"{method.Name} | {size}");
+        //     }
+        // }
 
         public static void Main(params string[] args)
         {

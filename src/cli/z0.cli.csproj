@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Files)" />
-    <ProjectReference Include="$(External)" />
+    <ProjectReference Include="$(Minidump)" />
     <ProjectReference Include="$(Asci)" />
     <ProjectReference Include="$(CmdSpec)" />
     <ProjectReference Include="$(Related)" />

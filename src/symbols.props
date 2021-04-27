@@ -73,7 +73,7 @@
     <MathSvc>$(Src)mathsvc/z0.mathsvc.csproj</MathSvc>
     <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
-    <Merge>$(Src)merge/z0.merge.csproj</Merge>
+    <Minidump>$(Src)minidump/z0.minidump.csproj</Minidump>
 
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
 

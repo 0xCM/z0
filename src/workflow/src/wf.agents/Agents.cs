@@ -35,10 +35,11 @@ namespace Z0
             if(AgentComplex.Complex.IsSome())
                 return AgentComplex.Complex.ValueOrDefault();
 
-            var servers = 20;
+            var servers = 40;
             var complex = new AgentComplex(context);
             var configs = root.list<AgentServerConfig>();
             var processors = Environment.ProcessorCount;
+
             term.inform($"Server complex using {processors} processor cores");
 
             for(uint i = 0, corenum = 1; i <= servers; i++, corenum++)

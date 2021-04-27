@@ -16,7 +16,6 @@ namespace Z0
 
         }
 
-
         protected AgentControl(IAgentContext context)
         {
             Context = context;

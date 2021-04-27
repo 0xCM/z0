@@ -13,9 +13,9 @@ namespace Z0
 
     public class AgentIdentityPool
     {
-        const uint FirstAgentId = 111;
+        const uint FirstAgentId = 1;
 
-        const uint FirstServerId = 222;
+        const uint FirstServerId = 1;
 
         /// <summary>
         /// Retrieves the next server-relative agent identity

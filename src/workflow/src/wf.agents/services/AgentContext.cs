@@ -19,7 +19,6 @@ namespace Z0
     {
         public IAgentEventSink EventLog {get;}
 
-
         ConcurrentDictionary<ulong,IAgent> Agents {get;}
             = new ConcurrentDictionary<ulong, IAgent>();
 

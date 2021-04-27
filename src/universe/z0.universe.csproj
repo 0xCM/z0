@@ -31,7 +31,6 @@
     <ProjectReference Include="$(Dynamic)" />
 
     <ProjectReference Include="$(Evaluate)" />
-    <ProjectReference Include="$(External)" />
 
     <ProjectReference Include="$(Fsm)"/>
     <ProjectReference Include="$(Files)"/>
@@ -47,6 +46,7 @@
 
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(Minidump)" />
 
     <ProjectReference Include="$(Nats)" />
 

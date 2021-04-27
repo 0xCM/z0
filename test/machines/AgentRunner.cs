@@ -10,7 +10,7 @@ namespace Z0
 
         EventSignal Signal;
 
-        Option<AgentComplex> Complex;
+        AgentComplex Complex;
 
         IAgentControl Control;
 
@@ -41,11 +41,12 @@ namespace Z0
 
         void Terminate()
         {
-            Complex.OnSome(c => {
+            if(Complex != null)
+            {
                 Signal.Status("Shutting down server complex");
-                c.Stop().Wait();
+                Complex.Stop().Wait();
                 Signal.Status("Server complex shut down complete");
-            });
+            }
         }
 
         public static void run(EventSignal signal, params string[] args)

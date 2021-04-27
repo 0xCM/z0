@@ -28,15 +28,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public AgentEventOrigin(uint server, uint agent, ulong Time)
         {
-            this.Location = ((ulong)server << 32) | agent;
-            this.Timestamp = Time;
+            Location = ((ulong)server << 32) | agent;
+            Timestamp = Time;
         }
 
         [MethodImpl(Inline)]
-        public AgentEventOrigin(ulong Location, ulong Time)
+        public AgentEventOrigin(ulong location, ulong time)
         {
-            this.Location = Location;
-            this.Timestamp = Time;
+            Location = location;
+            Timestamp = time;
         }
 
         /// <summary>
