@@ -7,17 +7,15 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.DeclSecurity), StructLayout(LayoutKind.Sequential)]
     public struct DeclSecurityRow : IRecord<DeclSecurityRow>
     {
         public RowKey Key;
 
         public DeclarativeSecurityAction Action;
 
-        public Token Parent;
+        public RowKey Parent;
 
-        public FK<BlobIndex> PermissionSet;
+        public BlobIndex PermissionSet;
     }
 }

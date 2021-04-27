@@ -6,17 +6,15 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.Constant), StructLayout(LayoutKind.Sequential)]
     public struct ConstantRow : IRecord<ConstantRow>
     {
         public RowKey Key;
 
         public byte Type;
 
-        public int Parent;
+        public RowKey Parent;
 
-        public FK<BlobIndex> Value;
+        public BlobIndex Value;
     }
 }

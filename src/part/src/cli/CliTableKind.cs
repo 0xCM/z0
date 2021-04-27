@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 namespace Z0
 {
-    public enum ClrTableKind : byte
+    public enum CliTableKind : byte
     {
         Module = 0x00,
 

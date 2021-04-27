@@ -7,19 +7,17 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.Document), StructLayout(LayoutKind.Sequential)]
     public struct DocumentRow : IRecord<DocumentRow>
     {
         public RowKey Key;
 
-        public FK<BlobIndex> Name;
+        public BlobIndex Name;
 
-        public FK<GuidIndex> HashAlgorithm;
+        public GuidIndex HashAlgorithm;
 
-        public FK<BlobIndex> Hash;
+        public BlobIndex Hash;
 
-        public FK<GuidIndex> Language;
+        public GuidIndex Language;
     }
 }

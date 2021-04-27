@@ -7,13 +7,11 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.ModuleRef),  StructLayout(LayoutKind.Sequential)]
     public struct ModuleRefRow : IRecord<ModuleRefRow>
     {
         public RowKey Key;
 
-        public FK<StringIndex> Name;
+        public StringIndex Name;
     }
 }

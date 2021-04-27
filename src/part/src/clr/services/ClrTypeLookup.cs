@@ -9,10 +9,10 @@ namespace Z0
 
     using static Part;
 
-    using Storage = KeyedValues<ClrToken,System.Type>;
-    using T = KeyedValue<ClrToken,System.Type>;
+    using Storage = KeyedValues<CliToken,System.Type>;
+    using T = KeyedValue<CliToken,System.Type>;
     using V = System.Type;
-    using K = ClrToken;
+    using K = CliToken;
 
     [ApiComplete(ApiNames.ClrTypes, true)]
     public readonly struct ClrTypeLookup

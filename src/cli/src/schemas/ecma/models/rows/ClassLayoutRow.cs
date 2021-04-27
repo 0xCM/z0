@@ -6,9 +6,7 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.ClassLayout), StructLayout(LayoutKind.Sequential)]
     public struct ClassLayoutRow : IRecord<ClassLayoutRow>
     {
         public RowKey Key;
@@ -17,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public uint ClassSize;
 
-        public Token Parent;
+        public RowKey Parent;
     }
 }

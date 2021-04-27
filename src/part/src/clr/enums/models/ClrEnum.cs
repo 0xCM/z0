@@ -19,7 +19,7 @@ namespace Z0
         public ClrEnum(Type src)
             => Definition = src;
 
-        public ClrToken Id
+        public CliToken Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

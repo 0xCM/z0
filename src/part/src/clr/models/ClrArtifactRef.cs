@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source artifact</param>
         /// <typeparam name="A">The artifact type</typeparam>
         [MethodImpl(Inline)]
-        public static ClrArtifactRef define(ClrToken id, ClrArtifactKind kind, Name name)
+        public static ClrArtifactRef define(CliToken id, ClrArtifactKind kind, Name name)
             => new ClrArtifactRef(id,kind,name);
 
         /// <summary>
@@ -33,12 +33,12 @@ namespace Z0
 
         public ClrArtifactKind Kind {get;}
 
-        public ClrToken Token {get;}
+        public CliToken Token {get;}
 
         public Name Name {get;}
 
         [MethodImpl(Inline)]
-        public ClrArtifactRef(ClrToken id, ClrArtifactKind kind, Name name)
+        public ClrArtifactRef(CliToken id, ClrArtifactKind kind, Name name)
         {
             Token = id;
             Kind = kind;

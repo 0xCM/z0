@@ -57,7 +57,7 @@ namespace Z0
         public ReadOnlySpan<ClrAssemblyName> ReferencedAssemblies
             => Clr.references(Definition);
 
-        public ClrToken Token
+        public CliToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.ManifestModule.MetadataToken;

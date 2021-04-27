@@ -19,7 +19,7 @@ namespace Z0
         public ClrParameter(R.ParameterInfo src)
             => Definition = src;
 
-        public ClrToken Token
+        public CliToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

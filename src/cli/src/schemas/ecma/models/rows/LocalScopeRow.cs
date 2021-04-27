@@ -6,23 +6,21 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.LocalScope), StructLayout(LayoutKind.Sequential)]
     public struct LocalScopeRow  : IRecord<LocalScopeRow>
     {
         public RowKey Key;
 
-        public int Method;
+        public RowKey Method;
 
-        public int ImportScope;
+        public RowKey ImportScope;
 
-        public int VariableList;
+        public RowKey VariableList;
 
-        public int ConstantList;
+        public RowKey ConstantList;
 
-        public int StartOffset;
+        public uint StartOffset;
 
-        public int Length;
+        public uint Length;
     }
 }

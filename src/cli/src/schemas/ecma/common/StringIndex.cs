@@ -9,24 +9,24 @@ namespace Z0.Schemas.Ecma
 
     using static Part;
 
-    /// <summary>
-    /// Specifies a md token
-    /// </summary>
-    public struct Token
+    public readonly struct StringIndex : IHeapKey<StringIndex>
     {
+        public HeapKind HeapKind => HeapKind.String;
+
         public uint Value {get;}
 
         [MethodImpl(Inline)]
-        public Token(uint value)
-            => Value = value;
+        public StringIndex(uint value)
+        {
+            Value = value;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator Token(uint src)
-            => new Token(src);
+        public static implicit operator HeapKey(StringIndex src)
+            => new HeapKey(src.HeapKind, src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(Token src)
-            => src.Value;
+        public static implicit operator HeapKey<StringHeap>(StringIndex src)
+            => new HeapKey<StringHeap>(src.Value);
     }
-
 }

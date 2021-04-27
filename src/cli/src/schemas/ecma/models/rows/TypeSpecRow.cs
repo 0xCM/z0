@@ -14,6 +14,6 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public FK<BlobIndex> Signature;
+        public BlobIndex Signature;
     }
 }

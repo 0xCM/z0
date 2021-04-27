@@ -9,7 +9,7 @@ namespace Z0
     {
         public const string TableId = "clr.handles";
 
-        public ClrToken Token;
+        public CliToken Token;
 
         public ClrArtifactKind Kind;
 

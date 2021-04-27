@@ -7,9 +7,7 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.ManifestResource), StructLayout(LayoutKind.Sequential)]
     public struct ManifestResourceRow : IRecord<ManifestResourceRow>
     {
         public RowKey Key;
@@ -18,8 +16,8 @@ namespace Z0.Schemas.Ecma
 
         public ManifestResourceFlags Flags;
 
-        public FK<StringIndex> Name;
+        public StringIndex Name;
 
-        public int Implementation;
+        public RowKey Implementation;
     }
 }

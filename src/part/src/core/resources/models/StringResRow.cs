@@ -9,7 +9,7 @@ namespace Z0
     {
         public const string TableId = "stringres";
 
-        public ClrToken Id;
+        public CliToken Id;
 
         public MemoryAddress Address;
 

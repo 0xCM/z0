@@ -4,25 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Ecma
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static HeapIndexKinds;
 
-    public readonly struct BlobIndex : IHeapIndex<BlobIndexKind,BlobIndex>
+    public readonly struct BlobIndex : IHeapKey<BlobIndex>
     {
-        public uint Key {get;}
+        public HeapKind HeapKind => HeapKind.Blob;
+
+        public uint Value {get;}
 
         [MethodImpl(Inline)]
         public BlobIndex(uint value)
-            => Key = value;
+        {
+            Value = value;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator BlobIndex(uint value)
-            => new BlobIndex(value);
+        public static implicit operator HeapKey(BlobIndex src)
+            => new HeapKey(src.HeapKind, src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator BlobIndex(int value)
-            => new BlobIndex((uint)value);
+        public static implicit operator HeapKey<BlobHeap>(BlobIndex src)
+            => new HeapKey<BlobHeap>(src.Value);
     }
 }

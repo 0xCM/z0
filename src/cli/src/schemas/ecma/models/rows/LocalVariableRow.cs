@@ -6,8 +6,6 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
     [StructLayout(LayoutKind.Sequential)]
     public struct LocalVariableRow : IRecord<LocalVariableRow>
     {
@@ -17,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public ushort Index;
 
-        public FK<StringIndex> Name;
+        public StringIndex Name;
     }
 }

@@ -14,11 +14,11 @@ namespace Z0
         {
             public const string TableId = "image.memberrefs";
 
-            public ClrToken Token;
+            public CliToken Token;
 
             public MemberRefKind RefKind;
 
-            public ClrToken Parent;
+            public CliToken Parent;
 
             public Name Name;
 

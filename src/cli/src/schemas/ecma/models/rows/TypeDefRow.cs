@@ -16,9 +16,9 @@ namespace Z0.Schemas.Ecma
 
         public uint Flags;
 
-        public FK<name> Name;
+        public StringIndex Name;
 
-        public FK<name> Namespace;
+        public StringIndex Namespace;
 
         public int Extends;
 

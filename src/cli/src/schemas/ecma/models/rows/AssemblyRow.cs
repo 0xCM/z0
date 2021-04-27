@@ -7,13 +7,9 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.Assembly), StructLayout(LayoutKind.Sequential)]
     public struct AssemblyRow : IRecord<AssemblyRow>
     {
-        public const ClrTableKind TableId = ClrTableKind.Assembly;
-
         public RowKey Key;
 
         public AssemblyHashAlgorithm HashAlgorithm;
@@ -22,10 +18,10 @@ namespace Z0.Schemas.Ecma
 
         public AssemblyFlags Flags;
 
-        public FK<BlobIndex> AssemblyKey;
+        public BlobIndex AssemblyKey;
 
-        public FK<StringIndex> AssemblyName;
+        public StringIndex AssemblyName;
 
-        public FK<StringIndex> AssemblyCulture;
+        public StringIndex AssemblyCulture;
     }
 }

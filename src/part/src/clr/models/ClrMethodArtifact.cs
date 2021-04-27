@@ -6,7 +6,7 @@ namespace Z0
 {
     public struct ClrMethodArtifact : IClrArtifact
     {
-        public ClrToken Id;
+        public CliToken Id;
 
         public Name MethodName;
 
@@ -25,7 +25,7 @@ namespace Z0
         public ClrDisplaySig DisplaySig
             => ClrDisplaySig.from(this);
 
-        ClrToken IClrArtifact.Token
+        CliToken IClrArtifact.Token
             => Id;
 
         string IClrArtifact.Name

@@ -19,7 +19,7 @@ namespace Z0
 
             public const string TableId = "image.fields";
 
-            public ClrToken Token;
+            public CliToken Token;
 
             public Name FieldName;
 

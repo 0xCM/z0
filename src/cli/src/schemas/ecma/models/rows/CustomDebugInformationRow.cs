@@ -7,17 +7,15 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.CustomDebugInformation), StructLayout(LayoutKind.Sequential)]
     public struct CustomDebugInformationRow : IRecord<CustomDebugInformationRow>
     {
         public RowKey Key;
 
-        public Token Parent;
+        public RowKey Parent;
 
-        public FK<Guid> Kind;
+        public GuidIndex Kind;
 
-        public FK<BlobIndex> Value;
+        public BlobIndex Value;
     }
 }

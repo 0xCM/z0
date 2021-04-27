@@ -5,88 +5,88 @@ namespace Z0.Schemas.Ecma
 
     public readonly struct TokenTypes
     {
-        public const uint Module = HandleType.Module << RowIdBitCount;
+        public const uint Module = (uint)CliTableKind.Module << RowIdWidth;
 
-        public const uint TypeRef = HandleType.TypeRef << RowIdBitCount;
+        public const uint TypeRef = (uint)CliTableKind.TypeRef << RowIdWidth;
 
-        public const uint TypeDef = HandleType.TypeDef << RowIdBitCount;
+        public const uint TypeDef = (uint)CliTableKind.TypeDef << RowIdWidth;
 
-        public const uint FieldDef = HandleType.FieldDef << RowIdBitCount;
+        public const uint FieldDef = (uint)CliTableKind.Field << RowIdWidth;
 
-        public const uint MethodDef = HandleType.MethodDef << RowIdBitCount;
+        public const uint MethodDef = (uint)CliTableKind.MethodDef << RowIdWidth;
 
-        public const uint ParamDef = HandleType.ParamDef << RowIdBitCount;
+        public const uint ParamDef = (uint)CliTableKind.Param << RowIdWidth;
 
-        public const uint InterfaceImpl = HandleType.InterfaceImpl << RowIdBitCount;
+        public const uint InterfaceImpl = (uint)CliTableKind.InterfaceImpl << RowIdWidth;
 
-        public const uint MemberRef = HandleType.MemberRef << RowIdBitCount;
+        public const uint MemberRef = (uint)CliTableKind.MemberRef << RowIdWidth;
 
-        public const uint Constant = HandleType.Constant << RowIdBitCount;
+        public const uint Constant = (uint)CliTableKind.Constant << RowIdWidth;
 
-        public const uint CustomAttribute = HandleType.CustomAttribute << RowIdBitCount;
+        public const uint CustomAttribute = (uint)CliTableKind.CustomAttribute << RowIdWidth;
 
-        public const uint DeclSecurity = HandleType.DeclSecurity << RowIdBitCount;
+        public const uint DeclSecurity = (uint)CliTableKind.DeclSecurity << RowIdWidth;
 
-        public const uint Signature = HandleType.Signature << RowIdBitCount;
+        public const uint Signature = (uint)CliTableKind.StandAloneSig << RowIdWidth;
 
-        public const uint EventMap = HandleType.EventMap << RowIdBitCount;
+        public const uint EventMap = (uint)CliTableKind.EventMap << RowIdWidth;
 
-        public const uint Event = HandleType.Event << RowIdBitCount;
+        public const uint Event = (uint)CliTableKind.Event << RowIdWidth;
 
-        public const uint PropertyMap = HandleType.PropertyMap << RowIdBitCount;
+        public const uint PropertyMap = (uint)CliTableKind.PropertyMap << RowIdWidth;
 
-        public const uint Property = HandleType.Property << RowIdBitCount;
+        public const uint Property = (uint)CliTableKind.Property << RowIdWidth;
 
-        public const uint MethodSemantics = HandleType.MethodSemantics << RowIdBitCount;
+        public const uint MethodSemantics = (uint)CliTableKind.MethodSemantics << RowIdWidth;
 
-        public const uint MethodImpl = HandleType.MethodImpl << RowIdBitCount;
+        public const uint MethodImpl = (uint)CliTableKind.MethodImpl << RowIdWidth;
 
-        public const uint ModuleRef = HandleType.ModuleRef << RowIdBitCount;
+        public const uint ModuleRef = (uint)CliTableKind.ModuleRef << RowIdWidth;
 
-        public const uint TypeSpec = HandleType.TypeSpec << RowIdBitCount;
+        public const uint TypeSpec = (uint)CliTableKind.TypeSpec << RowIdWidth;
 
-        public const uint Assembly = HandleType.Assembly << RowIdBitCount;
+        public const uint Assembly = (uint)CliTableKind.Assembly << RowIdWidth;
 
-        public const uint AssemblyRef = HandleType.AssemblyRef << RowIdBitCount;
+        public const uint AssemblyRef = (uint)CliTableKind.AssemblyRef << RowIdWidth;
 
-        public const uint File = HandleType.File << RowIdBitCount;
+        public const uint File = (uint)CliTableKind.File << RowIdWidth;
 
-        public const uint ExportedType = HandleType.ExportedType << RowIdBitCount;
+        public const uint ExportedType = (uint)CliTableKind.ExportedType << RowIdWidth;
 
-        public const uint ManifestResource = HandleType.ManifestResource << RowIdBitCount;
+        public const uint ManifestResource = (uint)CliTableKind.ManifestResource << RowIdWidth;
 
-        public const uint NestedClass = HandleType.NestedClass << RowIdBitCount;
+        public const uint NestedClass = (uint)CliTableKind.NestedClass << RowIdWidth;
 
-        public const uint GenericParam = HandleType.GenericParam << RowIdBitCount;
+        public const uint GenericParam = (uint)CliTableKind.GenericParam << RowIdWidth;
 
-        public const uint MethodSpec = HandleType.MethodSpec << RowIdBitCount;
+        public const uint MethodSpec = (uint)CliTableKind.MethodSpec << RowIdWidth;
 
-        public const uint GenericParamConstraint = HandleType.GenericParamConstraint << RowIdBitCount;
+        public const uint GenericParamConstraint = (uint)CliTableKind.GenericParamConstraint << RowIdWidth;
 
         // debug tables:
-        public const uint Document = HandleType.Document << RowIdBitCount;
+        public const uint Document = (uint)CliTableKind.Document << RowIdWidth;
 
-        public const uint MethodDebugInformation = HandleType.MethodDebugInformation << RowIdBitCount;
+        public const uint MethodDebugInformation = (uint)CliTableKind.MethodDebugInformation << RowIdWidth;
 
-        public const uint LocalScope = HandleType.LocalScope << RowIdBitCount;
+        public const uint LocalScope = (uint)CliTableKind.LocalScope << RowIdWidth;
 
-        public const uint LocalVariable = HandleType.LocalVariable << RowIdBitCount;
+        public const uint LocalVariable = (uint)CliTableKind.LocalVariable << RowIdWidth;
 
-        public const uint LocalConstant = HandleType.LocalConstant << RowIdBitCount;
+        public const uint LocalConstant = (uint)CliTableKind.LocalConstant << RowIdWidth;
 
-        public const uint ImportScope = HandleType.ImportScope << RowIdBitCount;
+        public const uint ImportScope = (uint)CliTableKind.ImportScope << RowIdWidth;
 
-        public const uint AsyncMethod = HandleType.AsyncMethod << RowIdBitCount;
+        public const uint AsyncMethod = (uint)CliTableKind.StateMachineMethod << RowIdWidth;
 
-        public const uint CustomDebugInformation = HandleType.CustomDebugInformation << RowIdBitCount;
+        public const uint CustomDebugInformation = (uint)CliTableKind.CustomDebugInformation << RowIdWidth;
 
-        public const uint UserString = HandleType.UserString << RowIdBitCount;
+        public const uint UserString = (uint)HeapKind.UserString << RowIdWidth;
 
-        public const int RowIdBitCount = 24;
+        public const byte RowIdWidth = 24;
 
-        public const uint RIDMask = (1 << RowIdBitCount) - 1;
+        public const uint RIDMask = (1 << RowIdWidth) - 1;
 
-        public const uint TypeMask = HandleType.TypeMask << RowIdBitCount;
+        public const uint TypeMask = 0x7F << RowIdWidth;
 
         /// <summary>
         /// Use the highest bit to mark tokens that are virtual (synthesized).

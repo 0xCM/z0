@@ -56,7 +56,7 @@ namespace Z0
         /// <summary>
         /// The metadata token that identifies the backing field
         /// </summary>
-        public ClrToken Token
+        public CliToken Token
         {
             [MethodImpl(Inline)]
             get => DefiningField;

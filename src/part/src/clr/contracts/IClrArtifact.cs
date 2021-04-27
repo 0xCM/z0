@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// The artifact metadata token
         /// </summary>
-        ClrToken Token {get;}
+        CliToken Token {get;}
 
         /// <summary>
         /// The artifact name

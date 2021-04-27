@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="kind"></param>
         /// <param name="name"></param>
         [MethodImpl(Inline), Op]
-        public static ClrArtifactRef artifact(ClrToken token, ClrArtifactKind kind, Name name)
+        public static ClrArtifactRef artifact(CliToken token, ClrArtifactKind kind, Name name)
             => new ClrArtifactRef(token, kind, name);
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
 
             public FS.FileName ImageName;
 
-            public ClrToken Token;
+            public CliToken Token;
 
             public Address32 MethodRva;
 

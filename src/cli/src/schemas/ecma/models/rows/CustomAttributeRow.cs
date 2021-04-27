@@ -4,17 +4,15 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.CustomAttribute), StructLayout(LayoutKind.Sequential)]
     public struct CustomAttributeRow  : IRecord<CustomAttributeRow>
     {
         public RowKey Key;
 
-        public int Parent;
+        public RowKey Parent;
 
-        public int Type;
+        public RowKey Type;
 
-        public FK<BlobIndex> Value;
+        public BlobIndex Value;
     }
 }

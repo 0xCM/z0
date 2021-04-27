@@ -8,7 +8,6 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static System.Reflection.Metadata.ILOpCode;
-    using static Part;
 
     partial struct MsilApi
     {

@@ -13,7 +13,7 @@ namespace Z0
         where E : unmanaged, Enum
         where T : unmanaged
     {
-        public ClrToken Token {get;}
+        public CliToken Token {get;}
 
         public uint Position {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
         public T Scalar {get;}
 
         [MethodImpl(Inline)]
-        public EnumLiteralInfo(ClrToken id, uint index, string name, E literal, T scalar)
+        public EnumLiteralInfo(CliToken id, uint index, string name, E literal, T scalar)
         {
             Token = id;
             Position = index;

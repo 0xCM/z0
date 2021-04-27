@@ -22,7 +22,7 @@ namespace Z0
         IEnumerable<IClrRuntimeType> NestedTypes
             => root.stream<IClrRuntimeType>();
 
-        ClrToken IClrArtifact.Token
+        CliToken IClrArtifact.Token
             => Definition.MetadataToken;
     }
 

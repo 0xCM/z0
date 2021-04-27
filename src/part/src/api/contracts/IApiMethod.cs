@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// The clr metadata token
         /// </summary>
-        ClrToken Token
+        CliToken Token
             => Method;
 
         /// <summary>

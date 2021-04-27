@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static memory;
 
     /// <summary>
     /// Captures the content of a <see cref="InterfaceMapping"/>

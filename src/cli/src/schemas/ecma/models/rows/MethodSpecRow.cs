@@ -7,15 +7,13 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.MethodSpec), StructLayout(LayoutKind.Sequential)]
     public struct MethodSpecRow : IRecord<MethodSpecRow>
     {
         public RowKey Key;
 
-        public Token Method;
+        public RowKey Method;
 
-        public FK<BlobIndex> Instantiation;
+        public BlobIndex Instantiation;
     }
 }

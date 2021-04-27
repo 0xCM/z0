@@ -16,8 +16,8 @@ namespace Z0.Schemas.Ecma
 
         public ushort PropFlags;
 
-        public FK<StringIndex> Name;
+        public StringIndex Name;
 
-        public FK<BlobIndex> Type;
+        public BlobIndex Type;
     }
 }

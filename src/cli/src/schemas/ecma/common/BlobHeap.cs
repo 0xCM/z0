@@ -4,11 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Ecma
 {
+    using System;
+    using System.Runtime.CompilerServices;
 
-    using static HeapIndexKinds;
+    using static Part;
 
-    public readonly struct UserStringIndex : IHeapIndex<UserStringIndexKind,UserStringIndex>
+    public readonly struct BlobHeap : IHeap<BlobHeap>
     {
-        public uint Key {get;}
+        public HeapKind Kind => HeapKind.Blob;
     }
 }

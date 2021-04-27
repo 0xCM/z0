@@ -15,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public int Document;
 
-        public FK<BlobIndex> SequencePoints;
+        public BlobIndex SequencePoints;
     }
 }

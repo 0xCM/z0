@@ -15,67 +15,67 @@ namespace Z0
     partial struct Clr
     {
         [MethodImpl(Inline), Op]
-        public static ClrToken token(Handle handle)
+        public static CliToken token(Handle handle)
             => MetadataTokens.GetToken(handle);
 
         [MethodImpl(Inline), Op]
-        public static ClrToken token(EntityHandle handle)
+        public static CliToken token(EntityHandle handle)
             => MetadataTokens.GetToken(handle);
 
         [MethodImpl(Inline), Op]
-        public static ClrToken token(TableIndex table, uint row)
-            => new ClrToken(((uint)table << 24) | (0xFFFFFF &  row));
+        public static CliToken token(TableIndex table, uint row)
+            => new CliToken(((uint)table << 24) | (0xFFFFFF &  row));
 
         [MethodImpl(Inline), Op]
-        public static ClrToken token(Type src)
-            => new ClrToken(src);
+        public static CliToken token(Type src)
+            => new CliToken(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ClrToken token<T>()
-            => new ClrToken(typeof(T));
+        public static CliToken token<T>()
+            => new CliToken(typeof(T));
 
         [MethodImpl(Inline), Op]
-        public static ClrToken token(FieldInfo src)
-            => new ClrToken(src);
+        public static CliToken token(FieldInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline), Op]
-        public static ClrToken token(PropertyInfo src)
-            => new ClrToken(src);
+        public static CliToken token(PropertyInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline), Op]
-        public static ClrToken token(MethodInfo src)
-            => new ClrToken(src);
+        public static CliToken token(MethodInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline), Op]
-        public static ClrToken token(ParameterInfo src)
-            => new ClrToken(src);
+        public static CliToken token(ParameterInfo src)
+            => new CliToken(src);
 
         [MethodImpl(Inline), Op]
-        public static ClrToken token(Assembly src)
-            => new ClrToken(src);
+        public static CliToken token(Assembly src)
+            => new CliToken(src);
 
         [MethodImpl(Inline), Op]
-        public static string @string(Module module, ClrToken token)
+        public static string @string(Module module, CliToken token)
             => module.ResolveString((int)token);
 
         [MethodImpl(Inline), Op]
-        public static BinaryCode sig(Module src, ClrToken token)
+        public static BinaryCode sig(Module src, CliToken token)
             => src.ResolveSignature((int)token);
 
         [MethodImpl(Inline), Op]
-        public static MethodBase method(Module src, ClrToken token)
+        public static MethodBase method(Module src, CliToken token)
             => src.ResolveMethod((int)token);
 
         [MethodImpl(Inline), Op]
-        public static MemberInfo member(Module src, ClrToken token)
+        public static MemberInfo member(Module src, CliToken token)
             => src.ResolveMember((int)token);
 
         [MethodImpl(Inline), Op]
-        public static FieldInfo field(Module src, ClrToken token)
+        public static FieldInfo field(Module src, CliToken token)
             => src.ResolveField((int)token);
 
         [MethodImpl(Inline), Op]
-        public static Type type(Module src, ClrToken token)
+        public static Type type(Module src, CliToken token)
             => src.ResolveType((int)token);
     }
 }

@@ -85,15 +85,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeMethodHandle> method(Module src, ClrToken token)
+        public static ClrHandle<RuntimeMethodHandle> method(Module src, CliToken token)
             => new ClrHandle<RuntimeMethodHandle>(ClrArtifactKind.Method, token, src.ModuleHandle.GetRuntimeMethodHandleFromMetadataToken((int)token));
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeTypeHandle> type(Module src, ClrToken token)
+        public static ClrHandle<RuntimeTypeHandle> type(Module src, CliToken token)
             => new ClrHandle<RuntimeTypeHandle>(ClrArtifactKind.Type, token, src.ModuleHandle.GetRuntimeTypeHandleFromMetadataToken((int)token));
 
         [MethodImpl(Inline), Op]
-        public static ClrHandle<RuntimeFieldHandle> field(Module src, ClrToken token)
+        public static ClrHandle<RuntimeFieldHandle> field(Module src, CliToken token)
             => new ClrHandle<RuntimeFieldHandle>(ClrArtifactKind.Field, token, src.ModuleHandle.GetRuntimeFieldHandleFromMetadataToken((int)token));
 
         [MethodImpl(Inline), Op]

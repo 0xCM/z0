@@ -216,11 +216,11 @@ namespace Z0
             => ApiUri.parse(src, out dst);
 
         [Op]
-        public static Outcome parse(string src, out ClrToken dst)
+        public static Outcome parse(string src, out CliToken dst)
         {
             var i = text.index(src,Chars.Colon);
             var outcome = Outcome.Empty;
-            dst = ClrToken.Empty;
+            dst = CliToken.Empty;
             if(i != NotFound)
             {
                 outcome = HexNumericParser.parse8u(src.LeftOfIndex(i), out var table);

@@ -14,12 +14,12 @@ namespace Z0
     /// </summary>
     public readonly struct MethodEntryPoint
     {
-        public ClrToken Id {get;}
+        public CliToken Id {get;}
 
         public MemoryAddress Location {get;}
 
         [MethodImpl(Inline)]
-        public MethodEntryPoint(ClrToken id, MemoryAddress address)
+        public MethodEntryPoint(CliToken id, MemoryAddress address)
         {
             Id = id;
             Location = address;

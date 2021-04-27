@@ -7,27 +7,21 @@ namespace Z0.Schemas.Ecma
     using System;
     using System.Runtime.InteropServices;
 
-    using R = AssemblyRefTableRow;
-
-    using static Relations;
-
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct AssemblyRefTableRow : IRecord<R>
+    [Record(CliTableKind.AssemblyRef), StructLayout(LayoutKind.Sequential)]
+    public struct AssemblyRefTableRow : IRecord<AssemblyRefTableRow>
     {
-        public const ClrTableKind TableId = ClrTableKind.AssemblyRef;
-
         public RowKey Key;
 
         public ClrAssemblyVersion Version;
 
-        public FK<BlobIndex> PublicKeyToken;
+        public BlobIndex PublicKeyToken;
 
-        public FK<StringIndex> Name;
+        public StringIndex Name;
 
-        public FK<StringIndex> Culture;
+        public StringIndex Culture;
 
         public AssemblyFlags Flags;
 
-        public FK<BlobIndex> HashValue;
+        public BlobIndex HashValue;
     }
 }

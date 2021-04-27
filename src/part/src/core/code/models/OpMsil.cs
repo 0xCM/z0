@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct OpMsil
     {
-        public ClrToken Id {get;}
+        public CliToken Id {get;}
 
         /// <summary>
         /// The operation identity
@@ -40,7 +40,7 @@ namespace Z0
         public MethodImplAttributes ImplSpec {get;}
 
         [MethodImpl(Inline)]
-        public OpMsil(ClrToken id, MemoryAddress @base, OpUri name, CliSig sig, BinaryCode data, MethodImplAttributes impl)
+        public OpMsil(CliToken id, MemoryAddress @base, OpUri name, CliSig sig, BinaryCode data, MethodImplAttributes impl)
         {
             Id = id;
             BaseAddress = @base;

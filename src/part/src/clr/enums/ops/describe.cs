@@ -12,15 +12,6 @@ namespace Z0
 
     partial struct ClrEnums
     {
-        [MethodImpl(Inline)]
-        public static ClrEnumInfo<E> describe<E>()
-            where E : unmanaged, Enum
-                => default(ClrEnum<E>).Describe();
-
-        [MethodImpl(Inline), Op]
-        public static ClrEnumInfo<Hex8Seq> describe(Hex8Seq rep)
-            => describe<Hex8Seq>();
-
         /// <summary>
         /// Defines a useful representation of an enumeration literal
         /// </summary>
@@ -28,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The scalar type refined by the enum</typeparam>
         /// <typeparam name="A">The asci identifier type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumLiteralInfo<E,T> describe<E,T>(ClrToken token, uint index, Name name, E literal, T scalar)
+        public static EnumLiteralInfo<E,T> describe<E,T>(CliToken token, uint index, Name name, E literal, T scalar)
             where E : unmanaged, Enum
             where T : unmanaged
                 => new EnumLiteralInfo<E,T>(token, index, name, literal, scalar);

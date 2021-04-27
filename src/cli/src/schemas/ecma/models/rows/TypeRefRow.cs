@@ -16,8 +16,8 @@ namespace Z0.Schemas.Ecma
 
         public int ResolutionScope;
 
-        public FK<StringIndex> Name;
+        public StringIndex Name;
 
-        public FK<StringIndex> Namespace;
+        public StringIndex Namespace;
     }
 }

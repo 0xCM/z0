@@ -53,7 +53,7 @@ namespace Z0
             TermCode = 0;
         }
 
-        public ClrToken MemberToken
+        public CliToken MemberToken
         {
             [MethodImpl(Inline)]
             get => Member.Token;

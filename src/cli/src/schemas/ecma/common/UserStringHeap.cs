@@ -8,15 +8,10 @@ namespace Z0.Schemas.Ecma
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static Relations;
 
-    public interface IHeapRef
+    public readonly struct UserStringHeap : IHeap<UserStringHeap>
     {
-        Token Id {get;}
-    }
-
-    public interface IHeapRef<T> : IHeapRef
-        where T : unmanaged, IHeapRef<T>
-    {
-
+        public HeapKind Kind => HeapKind.String;
     }
 }

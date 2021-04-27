@@ -73,7 +73,7 @@ namespace Z0
             get => ClrEnums.@base<E>();
         }
 
-        public ClrToken Token
+        public CliToken Token
         {
             [MethodImpl(Inline)]
             get => Spec.Token;

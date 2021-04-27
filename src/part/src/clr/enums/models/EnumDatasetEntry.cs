@@ -17,12 +17,12 @@ namespace Z0
         /// <summary>
         /// The artifact identifier of the defining literal
         /// </summary>
-        public ClrToken Id;
+        public CliToken Id;
 
         /// <summary>
         /// The defining <see cref='Enum'/> id
         /// </summary>
-        public ClrToken EnumId;
+        public CliToken EnumId;
 
         /// <summary>
         /// The 0-based declaration order of the defining literal
@@ -45,7 +45,7 @@ namespace Z0
         public string Description;
 
         [MethodImpl(Inline)]
-        public EnumDatasetEntry(ClrToken id, ClrToken enumId, uint index, Name name, ulong scalar, string description)
+        public EnumDatasetEntry(CliToken id, CliToken enumId, uint index, Name name, ulong scalar, string description)
         {
             Id = id;
             EnumId = enumId;

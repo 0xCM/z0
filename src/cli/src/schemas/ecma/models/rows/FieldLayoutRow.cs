@@ -4,14 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Ecma
 {
-    using static Relations;
-
     public struct FieldLayoutRow : IRecord<FieldLayoutRow>
     {
         public RowKey Key;
 
-        public int Offset;
+        public uint Offset;
 
-        public int Field;
+        /// <summary>
+        /// Identifies a <see cref='FieldRow'/> record
+        /// </summary>
+        public RowKey Field;
     }
 }

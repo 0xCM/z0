@@ -20,5 +20,10 @@ namespace Z0.Schemas.Ecma
         [MethodImpl(Inline)]
         public static implicit operator RowKey(uint value)
             => new RowKey(value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator RowKey(int value)
+            => new RowKey((uint)value);
+
     }
 }

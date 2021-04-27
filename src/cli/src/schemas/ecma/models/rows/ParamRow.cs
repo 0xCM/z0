@@ -18,6 +18,6 @@ namespace Z0.Schemas.Ecma
 
         public ushort Sequence;
 
-        public FK<name> Name;
+        public StringIndex Name;
     }
 }

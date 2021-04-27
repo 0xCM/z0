@@ -15,14 +15,14 @@ namespace Z0
     public readonly struct MethodEntryPoint<K>
         where K : unmanaged
     {
-        public ClrToken Id {get;}
+        public CliToken Id {get;}
 
         public MemoryAddress Location {get;}
 
         public K Kind {get;}
 
         [MethodImpl(Inline)]
-        public MethodEntryPoint(ClrToken id, MemoryAddress address, K kind)
+        public MethodEntryPoint(CliToken id, MemoryAddress address, K kind)
         {
             Id = id;
             Location = address;

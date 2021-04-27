@@ -49,7 +49,7 @@ namespace Z0
         public ApiMember Zero
             => Empty;
 
-        public ClrToken Token
+        public CliToken Token
         {
             [MethodImpl(Inline)]
             get => Method;

@@ -14,11 +14,11 @@ namespace Z0
 
     public readonly struct ClrTable
     {
-        public ClrTableKind Kind {get;}
+        public CliTableKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public ClrTable(ClrTableKind value)
-            => Kind = (ClrTableKind)value;
+        public ClrTable(CliTableKind value)
+            => Kind = (CliTableKind)value;
 
         public string Format()
             => string.Format("{0:X2}",(byte)Kind);
@@ -27,16 +27,16 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrTable(ClrTableKind src)
+        public static implicit operator ClrTable(CliTableKind src)
             => new ClrTable(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrTableKind(ClrTable src)
+        public static implicit operator CliTableKind(ClrTable src)
             => src.Kind;
 
         [MethodImpl(Inline)]
         public static implicit operator ClrTable(TableIndex src)
-            => new ClrTable((ClrTableKind)src);
+            => new ClrTable((CliTableKind)src);
 
         [MethodImpl(Inline)]
         public static implicit operator TableIndex(ClrTable src)

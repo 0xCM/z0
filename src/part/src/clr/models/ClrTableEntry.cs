@@ -12,12 +12,12 @@ namespace Z0
 
     public struct ClrTableEntry : IRecord<ClrTableEntry>
     {
-        public ClrToken Token;
+        public CliToken Token;
 
         public TableIndex Table;
 
         [MethodImpl(Inline)]
-        public ClrTableEntry(ClrToken token, TableIndex src)
+        public ClrTableEntry(CliToken token, TableIndex src)
         {
             Token = token;
             Table = src;

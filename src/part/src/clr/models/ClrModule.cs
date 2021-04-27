@@ -20,7 +20,7 @@ namespace Z0
         public ClrModule(R.Module src)
             => Definition = src;
 
-        public ClrToken Token
+        public CliToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

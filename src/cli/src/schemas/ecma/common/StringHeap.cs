@@ -4,10 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Ecma
 {
-    using static HeapIndexKinds;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    public readonly struct GuidIndex : IHeapIndex<GuidIndexKind,GuidIndex>
+    using static Part;
+    using static Relations;
+
+    public readonly struct StringHeap : IHeap<StringHeap>
     {
-        public uint Key {get;}
+        public HeapKind Kind => HeapKind.String;
     }
 }

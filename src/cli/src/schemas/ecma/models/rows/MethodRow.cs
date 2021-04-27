@@ -21,9 +21,9 @@ namespace Z0.Schemas.Ecma
 
         public MethodAttributes Flags;
 
-        public FK<StringIndex> Name;
+        public StringIndex Name;
 
-        public FK<BlobIndex> Signature;
+        public BlobIndex Signature;
 
         public int ParamList;
     }

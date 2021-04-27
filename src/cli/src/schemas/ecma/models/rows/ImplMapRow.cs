@@ -6,20 +6,17 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
-
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.ImplMap), StructLayout(LayoutKind.Sequential)]
     public struct ImplMapRow
     {
         public RowKey Key;
 
         public PInvokeAttributes MappingFlags;
 
-        public int MemberForwarded;
+        public RowKey MemberForwarded;
 
-        public FK<StringIndex> ImportName;
+        public StringIndex ImportName;
 
-        public int ImportScope;
+        public RowKey ImportScope;
     }
 }

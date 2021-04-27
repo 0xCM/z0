@@ -6,13 +6,11 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(CliTableKind.ImportScope), StructLayout(LayoutKind.Sequential)]
     public struct ImportScopeRow
     {
-        public Token Parent;
+        public RowKey Parent;
 
-        public FK<BlobIndex> Imports;
+        public BlobIndex Imports;
     }
 }

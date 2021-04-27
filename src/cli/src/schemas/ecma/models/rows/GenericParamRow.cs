@@ -6,8 +6,6 @@ namespace Z0.Schemas.Ecma
 {
     using System.Runtime.InteropServices;
 
-    using static Relations;
-
     [StructLayout(LayoutKind.Sequential)]
     public struct GenericParamRow : IRecord<GenericParamRow>
     {
@@ -15,8 +13,8 @@ namespace Z0.Schemas.Ecma
 
         public ushort Flags;
 
-        public int Owner;
+        public RowKey Owner;
 
-        public FK<StringIndex> Name;
+        public StringIndex Name;
     }
 }

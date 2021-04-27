@@ -22,7 +22,7 @@ namespace Z0
         public ClrMethod(MethodInfo src)
             => Definition = src;
 
-        public ClrToken Token
+        public CliToken Token
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

@@ -12,7 +12,7 @@ namespace Z0
     [Datatype]
     public readonly struct WfStepId : IWfStepId
     {
-        public ClrToken HostKey {get;}
+        public CliToken HostKey {get;}
 
         public string HostName {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
         public WfStepId(Name name)
         {
             HostName = name;
-            HostKey = ClrToken.Empty;
+            HostKey = CliToken.Empty;
         }
 
         [MethodImpl(Inline)]
