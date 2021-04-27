@@ -15,7 +15,6 @@ namespace Z0
             => WfStepId.Empty;
     }
 
-
     /// <summary>
     /// Characterizes a reified event
     /// </summary>

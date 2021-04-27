@@ -8,7 +8,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Res)" />
     <ProjectReference Include="$(BitNumbers)" />
-
+    <ProjectReference Include="$(Cpu)" />
   </ItemGroup>
 
 </Project>

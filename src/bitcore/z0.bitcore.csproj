@@ -11,6 +11,7 @@
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Bits)" />
+    <ProjectReference Include="$(Pipes)" />
 
   </ItemGroup>
 

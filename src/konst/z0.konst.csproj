@@ -5,15 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(Term)" />
-    <!-- <ProjectReference Include="$(BitNumbers)" /> -->
-    <ProjectReference Include="$(Pipes)" />
-    <ProjectReference Include="$(Tables)" />
-
   </ItemGroup>
 
 </Project>

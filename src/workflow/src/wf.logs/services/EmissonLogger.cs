@@ -5,40 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.IO;
 
     using static Part;
 
-    [Record(TableId)]
-    public struct EmissionLogEntry : IRecord<EmissionLogEntry>
-    {
-        public const string TableId = "emissions";
 
-        public WfExecToken Token;
-
-        [RenderWidth(24)]
-        public FS.FileExt TargetExt;
-
-        public EmissionPhase Phase;
-
-        [RenderWidth(10)]
-        public ulong Metric;
-
-        public FS.FileUri Target;
-    }
-
-    [RenderWidth(12)]
-    public enum EmissionPhase : byte
-    {
-        None = 0,
-
-        Emitting = 1,
-
-        Emitted = 2
-    }
-
-    struct EmissonLogger : IEmissionLogger
+    class EmissonLogger : IEmissionLogger
     {
         readonly FileStream Emissions;
 

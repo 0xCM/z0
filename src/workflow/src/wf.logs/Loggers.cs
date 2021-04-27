@@ -39,6 +39,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static WfLogConfig configure(PartId part, FS.FolderPath dbRoot, string area)
             => new WfLogConfig(part, dbRoot);
-
     }
 }
