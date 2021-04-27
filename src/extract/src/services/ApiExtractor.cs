@@ -16,7 +16,6 @@ namespace Z0
 
     public class ApiExtractor : AppService<ApiExtractor>
     {
-
         byte[] Buffer;
 
         HashSet<string> Exclusions;
@@ -30,38 +29,62 @@ namespace Z0
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
         }
 
-        public Index<ResolvedMethod> ResolveCatalog(IApiRuntimeCatalog src)
+        public Index<ResolvedPart> ResolveCatalog(IApiRuntimeCatalog src)
         {
-            var dst = root.datalist<ResolvedMethod>();
+            var dst = root.list<ResolvedPart>();
             ResolveCatalog(src,dst);
-            return dst.Close();
+            return dst.ToArray();
         }
 
-        public uint ResolveCatalog(IApiRuntimeCatalog src, DataList<ResolvedMethod> dst)
+        public uint ResolveCatalog(IApiRuntimeCatalog src, List<ResolvedPart> dst)
         {
             var counter = 0u;
             foreach(var part in src.Parts)
-                counter += ResolvePart(part,dst);
+                counter += ResolvePart(part, dst);
             return counter;
         }
 
-        public uint ResolvePart(IPart src, DataList<ResolvedMethod> dst)
+        public uint ResolvePart(IPart src, List<ResolvedPart> dst)
         {
             var counter = 0u;
             var catalog = ApiQuery.partcat(src);
             var flow = Wf.Running(string.Format("Resolving part {0}", src.Id));
 
-            foreach(var t in catalog.ApiTypes)
-                counter += ResolveType(t, dst);
+            var hosts = root.list<ResolvedHost>();
 
-            foreach(var h in catalog.ApiHosts)
-                counter += ResolveHost(h, dst);
+            foreach(var host in catalog.ApiTypes)
+            {
+                var methods = root.list<ResolvedMethod>();
+                var count = ResolveType(host, methods);
+                if(count != 0)
+                {
+                    var resolved = methods.ToArray().Sort();
+                    var @base = first(resolved).Address;
+                    hosts.Add(new ResolvedHost(host.HostUri, @base, resolved));
+                    counter += count;
+                }
+            }
+
+            foreach(var host in catalog.ApiHosts)
+            {
+                var methods = root.list<ResolvedMethod>();
+                var count = ResolveHost(host, methods);
+                if(count != 0)
+                {
+                    var resolved = methods.ToArray().Sort();
+                    var @base = first(resolved).Address;
+                    hosts.Add(new ResolvedHost(host.HostUri, @base, resolved));
+                    counter += count;
+                }
+            }
+
+            dst.Add(new ResolvedPart(src.Id, hosts.ToArray()));
 
             Wf.Ran(flow, string.Format("Resolved {0} members from {1}", counter, src.Id));
             return counter;
         }
 
-        public uint ResolveHost(IApiHost src, DataList<ResolvedMethod> dst)
+        public uint ResolveHost(IApiHost src, List<ResolvedMethod> dst)
         {
             var counter = 0u;
 
@@ -87,7 +110,7 @@ namespace Z0
             return counter;
         }
 
-        public uint ResolveType(ApiRuntimeType src, DataList<ResolvedMethod> dst)
+        public uint ResolveType(ApiRuntimeType src, List<ResolvedMethod> dst)
         {
             var flow = Wf.Running(string.Format("Resolving type {0}", src.HostUri));
 
@@ -104,12 +127,47 @@ namespace Z0
 
         public Index<ApiExtractBlock> ExtractCatalog(IApiRuntimeCatalog catalog)
         {
-            var dst = DataList.create<ApiExtractBlock>(Pow2.T15);
+            var dst = root.list<ApiExtractBlock>(Pow2.T15);
             ExtractCatalog(catalog, dst);
-            return dst.Close();
+            return dst.ToArray();
         }
 
-        public uint ExtractCatalog(IApiRuntimeCatalog catalog, DataList<ApiExtractBlock> dst)
+        public Index<ApiExtractBlock> ExtractResolved(ReadOnlySpan<ResolvedPart> src)
+        {
+            var count = src.Length;
+            var counter = 0u;
+            var flow = Wf.Running(string.Format("Extracting {0} parts", count));
+            var dst = root.list<ApiExtractBlock>();
+            for(var i=0; i<count; i++)
+                counter += ExtractResolved(skip(src,i).Hosts, dst);
+
+            Wf.Ran(flow, string.Format("Extracted {0} methods from {1} parts", counter, count));
+            return dst.ToArray();
+        }
+
+        public uint ExtractResolved(ReadOnlySpan<ResolvedHost> src, List<ApiExtractBlock> dst)
+        {
+            var counter = 0u;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                counter += ExtractResolved(skip(src,i), dst);
+            return counter;
+        }
+
+        public uint ExtractResolved(ResolvedHost src, List<ApiExtractBlock> dst)
+        {
+            var methods = src.Methods.View;
+            var count = methods.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                dst.Add(extract(skip(methods,i), Buffer));
+                counter++;
+            }
+            return counter;
+        }
+
+        public uint ExtractCatalog(IApiRuntimeCatalog catalog, List<ApiExtractBlock> dst)
         {
             var counter = 0u;
             var parts = @readonly(catalog.Parts);
@@ -123,7 +181,7 @@ namespace Z0
             return counter;
         }
 
-        public uint ExtractPart(IPart src, DataList<ApiExtractBlock> dst)
+        public uint ExtractPart(IPart src, List<ApiExtractBlock> dst)
         {
             var counter = 0u;
             var buffer = root.list<ApiMember>();
@@ -141,7 +199,7 @@ namespace Z0
         }
 
         [Op]
-        public uint ExtractType(ApiRuntimeType src, DataList<ApiExtractBlock> dst)
+        public uint ExtractType(ApiRuntimeType src, List<ApiExtractBlock> dst)
         {
             var flow = Wf.Running(string.Format("Extracting type {0}", src.HostUri));
             var counter = 0u;
@@ -159,7 +217,7 @@ namespace Z0
             return counter;
         }
 
-        public uint ExtractHost(IApiHost src, DataList<ApiExtractBlock> dst)
+        public uint ExtractHost(IApiHost src, List<ApiExtractBlock> dst)
         {
             var flow = Wf.Running(string.Format("Extracting {0} members", src.HostUri));
             var counter = 0u;
@@ -169,8 +227,7 @@ namespace Z0
             return counter;
         }
 
-
-        uint ExtractNongeneric(IApiHost src, DataList<ApiExtractBlock> dst)
+        uint ExtractNongeneric(IApiHost src, List<ApiExtractBlock> dst)
         {
             var counter = 0u;
             var methods = @readonly(ApiQuery.nongeneric(src));
@@ -186,7 +243,7 @@ namespace Z0
             return counter;
         }
 
-        uint ExtractGeneric(IApiHost src, DataList<ApiExtractBlock> dst)
+        uint ExtractGeneric(IApiHost src, List<ApiExtractBlock> dst)
         {
             var counter = 0u;
             var methods = @readonly(ApiQuery.generic(src));
@@ -196,7 +253,7 @@ namespace Z0
             return counter;
         }
 
-        uint ExtractGeneric(ApiHostUri host, MethodInfo src, DataList<ApiExtractBlock> dst)
+        uint ExtractGeneric(ApiHostUri host, MethodInfo src, List<ApiExtractBlock> dst)
         {
             var counter = 0u;
             var args = @readonly(ApiIdentityKinds.NumericClosureTypes(src));
@@ -225,10 +282,6 @@ namespace Z0
             }
             return counter;
         }
-
-        ResolvedMethod Resolve(MethodInfo method, OpUri uri)
-            => new ResolvedMethod(uri,method, ApiJit.jit(method));
-
 
         [MethodImpl(Inline)]
         static ResolvedMethod resolve(MethodInfo method, OpUri uri, MemoryAddress address)

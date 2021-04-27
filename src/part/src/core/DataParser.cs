@@ -243,5 +243,9 @@ namespace Z0
                 return true;
             }
         }
+
+        [Op]
+        public static Outcome parse(string src, out MemoryRange dst)
+            => MemoryRangeParser.parse(src, out dst);
     }
 }

@@ -13,6 +13,6 @@ namespace Z0
             => WfRuntime.create(ApiQuery.parts(root.controller(), args), args).WithSource(Rng.@default());
 
         public static IAppContext context(IWfRuntime wf)
-            => new AppContext(wf.Paths, wf.ApiCatalog, Rng.@default(), json(wf.Paths.AppConfigPath), MsgExchange.Create());
+            => new AppContext(wf.Paths, Rng.@default(), json(wf.Paths.AppConfigPath), MsgExchange.Create());
     }
 }

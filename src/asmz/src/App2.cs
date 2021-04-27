@@ -1243,7 +1243,6 @@ namespace Z0.Asm
             pipe.EmitMemberRefs();
             //pipe.EmitMetadaSets(WorkflowOptions.@default());
 
-
         }
 
         void CaptureParts(params PartId[] parts)
@@ -1304,39 +1303,12 @@ namespace Z0.Asm
         }
 
 
-        void ExtractCatalog()
-        {
-            var extractor = Wf.ApiExtractor();
-
-            // var experiment = ExtractExperiment.create(Wf);
-            // experiment.Run();
-            var catalog = Wf.ApiCatalog;
-            var resolved = extractor.ResolveCatalog(catalog);
-            var extracts = extractor.ExtractCatalog(catalog);
-
-            // var members = Wf.ApiJit().JitCatalog();
-            // var context = Wf.ProcessContextPipe();
-            // var regions = context.EmitRegions(Db.AppLog("process.regions", FS.Csv));
-        }
 
         public void Run()
         {
-            //ExtractCatalog();
-            //CaptureParts(PartId.Extract);
-            //CaptureTest();
+            var experiment = ExtractExperiment.create(Wf);
+            experiment.Run();
 
-            // var checks = ApiKeyChecks.create(Wf);
-            // checks.Run();
-            // //ParseExtracts();
-            //CaptureParts(PartId.AsmZ);
-            //DeriveMsil();
-            // var tool = Wf.DumpBin();
-            // var path = tool.EmitScripts(Db.RuntimeRoot(), Db.ImageArchiveRoot());
-
-            //var src = Symbols.cache<PartId>().Index;
-
-
-            //EmitFormAspects();
         }
 
         // void GetMethodInfo()

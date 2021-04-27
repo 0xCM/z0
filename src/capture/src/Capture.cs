@@ -15,10 +15,6 @@ namespace Z0
     public readonly struct Capture
     {
         [Op]
-        public static IAsmContext context(IWfRuntime wf)
-            => new AsmContext(Apps.context(wf), wf);
-
-        [Op]
         public static Index<AsmHostRoutines> run(string[] args)
         {
             var control = root.controller();
@@ -26,8 +22,7 @@ namespace Z0
             var parts = ApiQuery.parts(control, args);
             var identities = parts.RuntimeCatalog.PartIdentities;
             using var wf = WfRuntime.create(parts, args);
-            using var runner = wf.CaptureRunner();
-
+            var runner = wf.CaptureRunner();
             var running = wf.Running(string.Format("Capturing routines from components in {0}", dir.Format(PathSeparator.FS)));
             var routines = args.Length != 0 ? runner.Capture(identities, CaptureWorkflowOptions.EmitImm) : runner.Capture(identities);
             wf.Ran(running, string.Format("Captured {0} routines", routines.Length));
@@ -47,22 +42,15 @@ namespace Z0
         [Op]
         public static Index<AsmHostRoutines> run(IWfRuntime wf, Index<PartId> parts, CaptureWorkflowOptions options)
         {
-            using var runner = wf.CaptureRunner();
+            var runner = wf.CaptureRunner();
             return runner.Capture(parts, options);
         }
 
         [Op]
         public static Index<AsmHostRoutines> run(IWfRuntime wf, Index<ApiHostUri> parts, CaptureWorkflowOptions options)
         {
-            using var runner = wf.CaptureRunner();
+            var runner = wf.CaptureRunner();
             return runner.Capture(parts, options);
-        }
-
-        [Op]
-        public static Index<AsmHostRoutines> run(IWfRuntime wf, PartId part)
-        {
-            using var runner = wf.CaptureRunner();
-            return runner.Capture(part);
         }
 
         [MethodImpl(Inline),Op]

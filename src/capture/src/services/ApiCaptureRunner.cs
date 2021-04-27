@@ -5,45 +5,33 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
     using Z0.Asm;
 
-    using static memory;
-
     public class ApiCaptureRunner : AppService<ApiCaptureRunner>
     {
         [Op]
-        public void Capture(Index<PartId> parts, FS.FolderPath dst)
+        public Index<AsmHostRoutines> Capture(Index<PartId> parts, FS.FolderPath dst)
         {
             var jit = Wf.ApiJit();
             var hex = Wf.ApiHex();
             var capture = Wf.ApiCapture();
             var pipe = Wf.AsmStatementPipe();
             var partcount = parts.Length;
-            var hosts = Wf.ApiCatalog.PartHosts(parts);
+            var hosts = Wf.ApiCatalog.PartHosts(parts).View;
             var hostcount = hosts.Length;
+            var routines = root.datalist<AsmHostRoutines>();
             for(var i=0; i<hostcount; i++)
-            {
-                var host = hosts[i];
-                var members = jit.JitHost(host);
-                var routines = capture.CaptureMembers(members, dst);
-                var hexpath = Db.ApiHexPath(dst, host.HostUri);
-                var blocks = hex.ReadBlocks(hexpath);
-            }
+                routines.Add(capture.CaptureHost(memory.skip(hosts,i), dst));
+            return routines.Close();
         }
-
-        const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.CaptureContext | CaptureWorkflowOptions.EmitImm;
 
         public Index<AsmHostRoutines> Capture(Index<PartId> parts)
-        {
-            return Capture(Wf.ApiCatalog.PartIdentities, DefaultOptions);
-        }
+            => Capture(Wf.ApiCatalog.PartIdentities, DefaultOptions);
 
-        public static ApiMembers members(Index<AsmHostRoutines> src)
+        static ApiMembers members(Index<AsmHostRoutines> src)
             => ApiMembers.create(src.SelectMany(x => x.Members));
-
 
         public Index<AsmHostRoutines> Capture(Index<PartId> parts, CaptureWorkflowOptions options)
         {
@@ -129,5 +117,7 @@ namespace Z0
             pipe.EmitDump(process, Db.DumpPath(process, ts));
             EmitRebase(members, ts);
         }
+
+        const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.CaptureContext | CaptureWorkflowOptions.EmitImm;
     }
 }

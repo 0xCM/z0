@@ -4,23 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct MemoryRangeParser : ITextParser<MemoryRange>
+    public readonly struct MemoryRangeParser
     {
-        public static ITextParser<MemoryRange> Service => default(MemoryRangeParser);
-
         /// <summary>
         /// Attempts to parse an address segment in standard form, [start,end]
         /// </summary>
         /// <param name="src">The source text</param>
-        public ParseResult<MemoryRange> Parse(string src)
-             => ParseOption(src).MapValueOrElse(x => ParseResult.win(src,x),
-                    () => ParseResult.fail<MemoryRange>(src));
+        public static Outcome parse(string src, out MemoryRange dst)
+        {
+            var option = parse(src);
+            if(option)
+            {
+                dst = option.Value;
+                return true;
+            }
+            else
+            {
+                dst = MemoryRange.Empty;
+                return false;
+            }
+        }
 
-        /// <summary>
-        /// Attempts to parse an address segment in standard form, [start,end]
-        /// </summary>
-        /// <param name="src">The source text</param>
-        static Option<MemoryRange> ParseOption(string src)
+        static Option<MemoryRange> parse(string src)
              => from i0 in src.FirstIndexOf(Chars.LBracket)
                 from i1 in src.FirstIndexOf(Chars.RBracket)
                 let inner = src.Substring(i0 + 1, i1 - i0 - 1)

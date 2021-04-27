@@ -12,8 +12,6 @@ namespace Z0.Asm
 
     public class AsmContext : IAsmContext
     {
-        public IAppContext ContextRoot {get;}
-
         public IWfRuntime Wf {get;}
 
         public IMessageQueue MessageQueue {get;}
@@ -25,7 +23,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmContext(IAppContext app, IWfRuntime wf)
         {
-            ContextRoot = app;
             Wf = wf;
             MessageQueue = app.MessageQueue;
             Next = app.MessageRelay;

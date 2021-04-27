@@ -70,23 +70,24 @@ namespace Z0
             return routines;
         }
 
-        public Index<AsmMemberRoutine> CaptureMembers(ApiMembers src, FS.FolderPath dst)
+        public Index<AsmHostRoutines> CaptureMembers(ApiMembers src, FS.FolderPath dst)
         {
             var hosted = src.HostGroups().View;
             var count = hosted.Length;
-            var collected = root.list<AsmMemberRoutine>();
+            var collected = root.datalist<AsmHostRoutines>();
             for(var i=0; i<count; i++)
                 CaptureMembers(skip(hosted,i), dst, collected);
-            return collected.ToArray();
+            return collected.Close();
         }
 
-        public void CaptureMembers(ApiHostMembers src, FS.FolderPath path, List<AsmMemberRoutine> dst)
+        public void CaptureMembers(ApiHostMembers src, FS.FolderPath path, DataList<AsmHostRoutines> dst)
         {
             var routines = AsmHostRoutines.Empty;
             var flow = Wf.Running(src.Host);
             try
             {
                 routines = Emitter.Emit(src.Host, ExtractMembers(src), path);
+                dst.Add(routines);
             }
             catch(Exception e)
             {

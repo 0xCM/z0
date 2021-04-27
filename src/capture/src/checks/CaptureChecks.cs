@@ -23,7 +23,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public CaptureChecks(IWfRuntime wf)
         {
-            Context = Capture.context(wf);
+            Context = new AsmContext(Apps.context(wf), wf);
             Tokens = memory.alloc(Pow2.T16, 5, out BufferAlloc).Tokenize();
         }
 

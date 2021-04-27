@@ -89,7 +89,6 @@ namespace Z0.Asm
             return 0;
         }
 
-
         /// c3 19 01 01
         static ReadOnlySpan<byte> Term4B => new byte[4]{0xc3, 0x19, 0x01, 01};
 
@@ -138,18 +137,6 @@ namespace Z0.Asm
                     segsize = 6;
                     break;
                 }
-                // else if(slice(data, offset, 6).SequenceEqual(Term6B))
-                // {
-                //     found = offset;
-                //     segsize = 6;
-                //     break;
-                // }
-                // else if(slice(data, offset, 6).SequenceEqual(Term6C))
-                // {
-                //     found = offset;
-                //     segsize = 6;
-                //     break;
-                // }
                 else if(slice(data, offset, 5).SequenceEqual(Term5))
                 {
                     found = offset;
@@ -174,12 +161,6 @@ namespace Z0.Asm
                     segsize = 4;
                     break;
                 }
-                // else if(slice(data, offset, 3).SequenceEqual(Term3C))
-                // {
-                //     found = offset;
-                //     segsize = 3;
-                //     break;
-                // }
             }
 
             return found;
@@ -215,7 +196,27 @@ namespace Z0.Asm
 
             return counter;
         }
-        public void Run()
+
+        void ExtractCatalog()
+        {
+            var extractor = Wf.ApiExtractor();
+            var catalog = Wf.ApiCatalog;
+            var resolved = extractor.ResolveCatalog(catalog);
+            var extracts = extractor.ExtractResolved(resolved).View;
+            var count = extracts.Length;
+            var found = 0;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var extract = ref skip(extracts,i);
+                var offset = Terminal(extract);
+                if(offset != NotFound)
+                    found++;
+            }
+
+            Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
+        }
+
+        void Test()
         {
             var paths = ExtractPipe.Paths().View;
             var count = paths.Length;
@@ -227,6 +228,12 @@ namespace Z0.Asm
                 ref readonly var path = ref skip(paths,i);
                 Run(path, success,fail);
             }
+
+        }
+
+        public void Run()
+        {
+            ExtractCatalog();
 
             // var parsed = parse(extracts);
             // var hex = Wf.ApiHex();

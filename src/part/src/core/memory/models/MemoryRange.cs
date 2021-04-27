@@ -14,10 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct MemoryRange : IMemoryRange<MemoryRange>
     {
-        [MethodImpl(Inline)]
-        public static ITextParser<MemoryRange> parser()
-            => MemoryRangeParser.Service;
-
         /// <summary>
         /// The inclusive address at which the range begins
         /// </summary>
@@ -64,27 +60,19 @@ namespace Z0
             => obj is MemoryRange x && Equals(x);
 
         [MethodImpl(Inline)]
-        public bool Includes(MemoryRange range)
-            => range.Min >= Min && range.Max <= Max;
+        public bool Contains(MemoryRange src)
+            => src.Min >= Min && src.Max <= Max;
 
         [MethodImpl(Inline)]
-        public bool Includes(MemoryAddress address)
-            => address.Location >= Min && address.Location <= Max;
+        public bool Contains(MemoryAddress src)
+            => src.Location >= Min && src.Location <= Max;
 
         [MethodImpl(Inline)]
-        public int CompareTo(MemoryRange other)
-            => this == other ? 0 : this < other ? -1 : 1;
-
-        [MethodImpl(Inline)]
-        static string enclose(object content, char left, char right)
-            => string.Concat(left, $"{content}", right);
-
-        [MethodImpl(Inline)]
-        static string bracket(object content)
-            => enclose($"{content}", Chars.LBracket, Chars.RBracket);
+        public int CompareTo(MemoryRange src)
+            => this == src ? 0 : this < src ? -1 : 1;
 
         public string Format()
-            => bracket(string.Concat(Min.Format(), Chars.Comma, Chars.Space, Max.Format()));
+            => text.bracket(string.Concat(Min.Format(), Chars.Comma, Chars.Space, Max.Format()));
 
         public override string ToString()
             => Format();

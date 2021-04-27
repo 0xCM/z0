@@ -9,12 +9,6 @@ namespace Z0.Asm
     /// </summary>
     public interface IAsmContext : IMessageQueue, IPolyrandProvider
     {
-        /// <summary>
-        /// The root of this context
-        /// </summary>
-        IAppContext ContextRoot {get;}
-
-        IMessageQueue MessageQueue
-            => ContextRoot.MessageQueue;
+        IMessageQueue MessageQueue {get;}
     }
 }
