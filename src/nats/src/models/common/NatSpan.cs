@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a span of natural length N
     /// </summary>
-    [CustomSpan(IDI.NatSpan)]
+    [CustomSpan(IDI.NatSpan), NatSpan]
     public readonly ref struct NatSpan<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged

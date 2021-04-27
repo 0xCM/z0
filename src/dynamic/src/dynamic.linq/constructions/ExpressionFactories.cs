@@ -5,11 +5,8 @@
 namespace Z0.Dynamics
 {
     using System;
-    using System.Collections;
     using System.Linq;
     using System.Linq.Expressions;
-
-    using static Konst;
 
     using XPR = System.Linq.Expressions.Expression;
 

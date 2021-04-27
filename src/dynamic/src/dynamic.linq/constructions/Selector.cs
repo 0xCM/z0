@@ -10,7 +10,7 @@ namespace Z0.Dynamics
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct Selector<T,Y>
     {
@@ -23,7 +23,7 @@ namespace Z0.Dynamics
         [MethodImpl(Inline)]
         public Selector(IEnumerable<KeyValuePair<T, Func<Y>>> choices)
             => functions = choices.ToDictionary(x => x.Key, x => x.Value);
-        
+
         [MethodImpl(Inline)]
         public Y Select(T t)
             => functions[t]();

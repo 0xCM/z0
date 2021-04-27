@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public static class Gates
     {
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static XOrGate xor()
             => default(XOrGate);
-            
+
         [MethodImpl(Inline)]
         public static AndGate<T> and<T>()
             where T : unmanaged

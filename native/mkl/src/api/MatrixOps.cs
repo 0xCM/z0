@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Mkl;
 
-    using static Konst;
+    using static Part;
 
     public static class MatrixOps
     {

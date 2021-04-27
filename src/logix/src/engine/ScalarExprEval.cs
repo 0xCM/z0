@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct ScalarExprEval
     {

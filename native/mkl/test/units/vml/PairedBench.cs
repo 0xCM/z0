@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
-    using static Konst;
+
+    using static Part;
 
     public readonly struct PairedBench
     {
         public static readonly PairedBench Zero = Define(BenchmarkRecord.Empty, BenchmarkRecord.Empty);
-        
+
         public static implicit operator PairedBench((BenchmarkRecord left, BenchmarkRecord right) src)
             => Define(src.left, src.right);
 
@@ -23,10 +24,10 @@ namespace Z0
                 throw new ArgumentException($"Operation counts not equal");
             this.Left = Left;
             this.Right = Right;
-        }        
+        }
 
         public readonly BenchmarkRecord Left;
-         
+
 
         public readonly BenchmarkRecord Right;
 
@@ -37,6 +38,6 @@ namespace Z0
             => Format();
 
         public string Format(int? labelPad = null)
-            => text.concat(Left.Format(labelPad), Eol, Right.Format(labelPad));            
+            => text.concat(Left.Format(labelPad), Eol, Right.Format(labelPad));
     }
 }

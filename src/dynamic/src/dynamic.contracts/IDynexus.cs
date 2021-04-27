@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
 
-   using static CellDelegates;
+    using static CellDelegates;
 
     public interface IDynexus : IDynamicFactories
     {

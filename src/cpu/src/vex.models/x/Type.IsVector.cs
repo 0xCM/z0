@@ -8,13 +8,6 @@ namespace Z0
 
     partial class XVex
     {
-        /// <summary>
-        /// Determines whether a type is classified as an intrinsic vector
-        /// </summary>
-        /// <param name="t">The type to test</param>
-        [Op]
-        public static bool IsVector(this Type t)
-            => VexReflex.IsVector(t);
 
         /// <summary>
         /// Determines whether a type is a 128-bit intrinsic vector closed over a specified type

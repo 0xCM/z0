@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
 
-
     class NatSpanCases
     {
         public static IEnumerable<(OpIdentity id, Type type)> All
@@ -21,11 +20,11 @@ namespace Z0
 
         [DisplayName("n4x32u")]
         public static NatSpan<N4,uint> Case_n4x32u
-            => NatSpans.alloc(n4,Konst.z32);
+            => NatSpans.alloc(n4, z32);
 
         [DisplayName("n128x64u")]
         public static NatSpan<N128,ulong> Case_n128x64u
-            => NatSpans.alloc(n128,Konst.z64);
+            => NatSpans.alloc(n128, z64);
 
         [DisplayName("n256x1u")]
         public static NatSpan<N256,Bit32> Case_n128x1u

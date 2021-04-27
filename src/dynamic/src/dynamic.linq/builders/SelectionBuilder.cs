@@ -9,8 +9,7 @@ namespace Z0.Dynamics
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static DynamicFacet;
+    using static Part;
 
     public class SelectionBuilder<T,X,R>
     {

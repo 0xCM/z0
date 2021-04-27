@@ -7,8 +7,6 @@ namespace Z0.Dynamics
     using System;
     using System.Collections.Generic;
 
-    using static DynamicFacet;
-
     public class TypeSelectionBuilder<R>
     {
         public static implicit operator Selector<Type,object,R>(TypeSelectionBuilder<R> builder)

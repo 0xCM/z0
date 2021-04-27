@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Konst;
     using static LogicSig;
     using static BitLogix;
 

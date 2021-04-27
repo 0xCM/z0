@@ -5,10 +5,7 @@
 namespace Z0.Dynamics
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
-
-    using static Konst;
 
     /// <summary>
     /// Defines helper methods for working with LINQ expressions

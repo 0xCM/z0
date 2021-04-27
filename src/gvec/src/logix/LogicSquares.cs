@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
     using static SFx;
 
-    using BL = ByteLogic64;
+    using BL = ByteLogic;
     using LS = vlogic;
 
     [FunctionalService]
