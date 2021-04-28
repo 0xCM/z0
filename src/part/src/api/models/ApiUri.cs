@@ -23,8 +23,8 @@ namespace Z0
         public static PrimalIdentity primal(Type src)
             => src.IsSystemDefined() ?
                (NumericKinds.test(src)
-               ? new PrimalIdentity(src.NumericKind(), ClrDisplaySig.keyword(src))
-               : new PrimalIdentity(ClrDisplaySig.keyword(src))
+               ? new PrimalIdentity(src.NumericKind(), MethodDisplaySig.keyword(src))
+               : new PrimalIdentity(MethodDisplaySig.keyword(src))
                ) : PrimalIdentity.Empty;
 
         /// <summary>

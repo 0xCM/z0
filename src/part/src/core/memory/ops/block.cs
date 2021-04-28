@@ -12,8 +12,8 @@ namespace Z0
     partial struct memory
     {
         [MethodImpl(Inline), Op]
-        public static MemoryBlock block(MemoryRange origin, Index<byte> data)
-            => new MemoryBlock(origin,data);
+        public static MemoryBlock block(MemoryRange origin, BinaryCode data)
+            => new MemoryBlock(origin, data);
 
         [Op]
         public static unsafe MemoryBlock block(byte* pSrc, ByteSize size)

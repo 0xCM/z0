@@ -29,43 +29,14 @@ namespace Z0
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
         }
 
-        public Index<ApiExtractBlock> ExtractCatalog(IApiRuntimeCatalog catalog)
-        {
-            var dst = root.list<ApiExtractBlock>(Pow2.T15);
-            ExtractCatalog(catalog, dst);
-            return dst.ToArray();
-        }
-
-        public Index<ApiExtractBlock> ExtractResolved(ReadOnlySpan<ResolvedPart> src)
-        {
-            var count = src.Length;
-            var counter = 0u;
-            var flow = Wf.Running(string.Format("Extracting {0} parts", count));
-            var dst = root.list<ApiExtractBlock>();
-            for(var i=0; i<count; i++)
-                counter += ExtractResolved(skip(src,i).Hosts, dst);
-
-            Wf.Ran(flow, string.Format("Extracted {0} methods from {1} parts", counter, count));
-            return dst.ToArray();
-        }
-
-        public Index<ApiExtractBlock> ExtractResolved(in ResolvedPart src)
+        public Index<ApiExtractBlock> ExtractHost(in ResolvedHost src)
         {
             var dst = root.list<ApiExtractBlock>();
-            ExtractResolved(src.Hosts, dst);
+            ExtractHost(src,dst);
             return dst.ToArray();
         }
 
-        public uint ExtractResolved(ReadOnlySpan<ResolvedHost> src, List<ApiExtractBlock> dst)
-        {
-            var counter = 0u;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                counter += ExtractResolved(skip(src,i), dst);
-            return counter;
-        }
-
-        public uint ExtractResolved(ResolvedHost src, List<ApiExtractBlock> dst)
+        public uint ExtractHost(ResolvedHost src, List<ApiExtractBlock> dst)
         {
             var methods = src.Methods.View;
             var count = methods.Length;
@@ -78,34 +49,12 @@ namespace Z0
             return counter;
         }
 
-        public uint ExtractCatalog(IApiRuntimeCatalog catalog, List<ApiExtractBlock> dst)
+        public uint ExtractHosts(ReadOnlySpan<ResolvedHost> src, List<ApiExtractBlock> dst)
         {
             var counter = 0u;
-            var parts = @readonly(catalog.Parts);
-            var count = parts.Length;
-
-            var flow = Wf.Running(string.Format("Extracting {0} parts", count));
+            var count = src.Length;
             for(var i=0; i<count; i++)
-                counter += ExtractPart(skip(parts,i),dst);
-
-            Wf.Ran(flow, string.Format("Extracted {0} members from {1} parts", counter, count));
-            return counter;
-        }
-
-        public uint ExtractPart(IPart src, List<ApiExtractBlock> dst)
-        {
-            var counter = 0u;
-            var buffer = root.list<ApiMember>();
-            var catalog = ApiQuery.partcat(src);
-            var types = catalog.ApiTypes;
-            var hosts = catalog.ApiHosts;
-
-            foreach(var type in types)
-                counter += ExtractType(type, dst);
-
-            foreach(var host in hosts)
-                counter  += ExtractHost(host, dst);
-
+                counter += ExtractHost(skip(src,i), dst);
             return counter;
         }
 
@@ -135,6 +84,64 @@ namespace Z0
             counter += ExtractNongeneric(src, dst);
             counter += ExtractGeneric(src,dst);
             Wf.Ran(flow,string.Format("Extracted {0} members from {1}", counter, src));
+            return counter;
+        }
+
+        public Index<ApiExtractBlock> ExtractParts(ReadOnlySpan<ResolvedPart> src)
+        {
+            var count = src.Length;
+            var counter = 0u;
+            var flow = Wf.Running(string.Format("Extracting {0} parts", count));
+            var dst = root.list<ApiExtractBlock>();
+            for(var i=0; i<count; i++)
+                counter += ExtractHosts(skip(src,i).Hosts, dst);
+
+            Wf.Ran(flow, string.Format("Extracted {0} methods from {1} parts", counter, count));
+            return dst.ToArray();
+        }
+
+        public Index<ApiExtractBlock> ExtractPart(in ResolvedPart src)
+        {
+            var dst = root.list<ApiExtractBlock>();
+            ExtractHosts(src.Hosts, dst);
+            return dst.ToArray();
+        }
+
+        public uint ExtractPart(IPart src, List<ApiExtractBlock> dst)
+        {
+            var counter = 0u;
+            var buffer = root.list<ApiMember>();
+            var catalog = ApiQuery.partcat(src);
+            var types = catalog.ApiTypes;
+            var hosts = catalog.ApiHosts;
+
+            foreach(var type in types)
+                counter += ExtractType(type, dst);
+
+            foreach(var host in hosts)
+                counter  += ExtractHost(host, dst);
+
+            return counter;
+        }
+
+        public Index<ApiExtractBlock> ExtractCatalog(IApiRuntimeCatalog catalog)
+        {
+            var dst = root.list<ApiExtractBlock>(Pow2.T15);
+            ExtractCatalog(catalog, dst);
+            return dst.ToArray();
+        }
+
+        public uint ExtractCatalog(IApiRuntimeCatalog catalog, List<ApiExtractBlock> dst)
+        {
+            var counter = 0u;
+            var parts = @readonly(catalog.Parts);
+            var count = parts.Length;
+
+            var flow = Wf.Running(string.Format("Extracting {0} parts", count));
+            for(var i=0; i<count; i++)
+                counter += ExtractPart(skip(parts,i),dst);
+
+            Wf.Ran(flow, string.Format("Extracted {0} members from {1} parts", counter, count));
             return counter;
         }
 

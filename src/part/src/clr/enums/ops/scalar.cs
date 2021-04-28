@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref long scalar<E>(in E eVal, out long tVal)
             where E : unmanaged, Enum
-                => ref ScalarStore.store(eVal, out tVal);
+                => ref deposit(eVal, out tVal);
 
         /// <summary>
         /// Reads a u64-value from an enum of primal u64-kind
@@ -114,7 +114,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref ulong scalar<E>(in E eVal, out ulong tVal)
             where E : unmanaged, Enum
-                => ref ScalarStore.store(eVal, out tVal);
+                => ref deposit(eVal, out tVal);
 
         /// <summary>
         /// Reads a c16-value from an enum of primal u16-kind

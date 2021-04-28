@@ -13,10 +13,10 @@ namespace Z0
     {
         public MemoryRange Origin {get;}
 
-        readonly Index<byte> Data;
+        readonly BinaryCode Data;
 
         [MethodImpl(Inline)]
-        public MemoryBlock(MemoryRange origin, Index<byte> data)
+        public MemoryBlock(MemoryRange origin, BinaryCode data)
         {
             Origin = origin;
             Data = data;
@@ -58,7 +58,7 @@ namespace Z0
         public static MemoryBlock Empty
         {
             [MethodImpl(Inline)]
-            get => new MemoryBlock(MemoryRange.Empty, Index<byte>.Empty);
+            get => new MemoryBlock(MemoryRange.Empty, BinaryCode.Empty);
         }
     }
 }

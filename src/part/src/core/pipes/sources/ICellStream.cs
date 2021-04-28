@@ -10,7 +10,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICellStreamer<F> : IStreamProvider<F>
+    public interface ICellStream<F> : IStreamProvider<F>
         where F : unmanaged, IDataCell
     {
         new IEnumerable<F> Stream {get;}
@@ -20,7 +20,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICellStreamer<F,W,T> : ICellStreamer<F>
+    public interface ICellStream<F,W,T> : ICellStream<F>
         where F : unmanaged, IDataCell
         where W : unmanaged, ITypeWidth
         where T : unmanaged

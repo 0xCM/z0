@@ -20,17 +20,16 @@ namespace Z0.Asm
     {
         readonly Index<IceInstruction> _Instructions;
 
-        public OpUri Uri {get;}
-
-        public CodeBlock Code {get;}
+        public ApiCodeBlock Code {get;}
 
         [MethodImpl(Inline)]
         internal AsmInstructionBlock(OpUri uri, IceInstruction[] src, BinaryCode code)
         {
-            Uri = uri;
             _Instructions = src;
-            Code = new CodeBlock(src[0].IP, code);
+            Code = new ApiCodeBlock(src[0].IP, uri, code);// new CodeBlock(src[0].IP, code), uri);
         }
+
+        public OpUri Uri  => Code.OpUri;
 
         public ReadOnlySpan<IceInstruction> Instructions
         {

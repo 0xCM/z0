@@ -21,7 +21,6 @@ namespace Z0
         where T : unmanaged
     {
 
-
     }
 
     [Free]
@@ -39,5 +38,4 @@ namespace Z0
     {
 
     }
-
 }

@@ -27,7 +27,7 @@ namespace Z0.Asm
         /// <summary>
         /// The source member signature
         /// </summary>
-        public ClrDisplaySig DisplaySig {get;}
+        public MethodDisplaySig DisplaySig {get;}
 
         /// <summary>
         /// The function encoding
@@ -45,7 +45,7 @@ namespace Z0.Asm
         public ExtractTermCode TermCode {get;}
 
         [MethodImpl(Inline)]
-        public AsmRoutine(OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, Index<ApiInstruction> instructions)
+        public AsmRoutine(OpUri uri, MethodDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, Index<ApiInstruction> instructions)
         {
             Uri = uri;
             OpId = uri.OpId;
@@ -80,6 +80,6 @@ namespace Z0.Asm
             => InstructionCount != 0;
 
         public static AsmRoutine Empty
-            => new AsmRoutine(OpUri.Empty, ClrDisplaySig.Empty, ApiCodeBlock.Empty, 0, Index<ApiInstruction>.Empty);
+            => new AsmRoutine(OpUri.Empty, MethodDisplaySig.Empty, ApiCodeBlock.Empty, 0, Index<ApiInstruction>.Empty);
     }
 }

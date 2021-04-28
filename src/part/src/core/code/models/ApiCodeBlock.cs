@@ -75,6 +75,12 @@ namespace Z0
              get => Code.BaseAddress;
         }
 
+        public MemoryRange Origin
+        {
+            [MethodImpl(Inline)]
+            get => new MemoryRange(BaseAddress, (ByteSize)Length);
+        }
+
         public OpIdentity OpId
         {
              [MethodImpl(Inline)]

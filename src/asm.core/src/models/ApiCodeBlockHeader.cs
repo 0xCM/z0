@@ -15,14 +15,14 @@ namespace Z0.Asm
 
         public OpUri Uri {get;}
 
-        public ClrDisplaySig DisplaySig {get;}
+        public MethodDisplaySig DisplaySig {get;}
 
         public CodeBlock CodeBlock {get;}
 
         public ExtractTermCode TermCode {get;}
 
         [MethodImpl(Inline)]
-        public ApiCodeBlockHeader(string sep, OpUri uri, ClrDisplaySig sig, CodeBlock code, ExtractTermCode term)
+        public ApiCodeBlockHeader(string sep, OpUri uri, MethodDisplaySig sig, CodeBlock code, ExtractTermCode term)
         {
             Separator = sep;
             Uri = uri;

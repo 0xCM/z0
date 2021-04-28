@@ -87,6 +87,20 @@ namespace Z0.Asm
             return new TermInfo(kind,(uint)found);
         }
 
+        public static uint terminals(ReadOnlySpan<ApiExtractBlock> src, Span<MemoryBlock> dst)
+        {
+            var count = src.Length;
+            var j = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var extract = ref skip(src,i);
+                var term = terminal(extract);
+                if(term.IsNonEmpty)
+                    seek(dst, j++) = block(extract, term);
+            }
+            return j;
+        }
+
         public enum TermKind : sbyte
         {
             None = -1,
@@ -180,9 +194,24 @@ namespace Z0.Asm
     {
         ApiExtractPipe ExtractPipe;
 
+        ApiExtractParser Parser;
+
+        ApiExtractor Extractor;
+
+        ApiResolver Resolver;
+
+        AsmRoutineDecoder Decoder;
+
+        AsmFormatter Formatter;
+
         protected override void OnInit()
         {
             ExtractPipe = Wf.ApiExtractPipe();
+            Parser = ApiExtracts.parser();
+            Extractor = Wf.ApiExtractor();
+            Resolver = Wf.ApiResolver();
+            Decoder = Wf.AsmDecoder();
+            Formatter = Wf.AsmFormatter();
         }
 
         /// <summary>
@@ -208,73 +237,142 @@ namespace Z0.Asm
             return 0;
         }
 
+        void ExtractPart(IPart src, FS.FolderPath dst)
+        {
+            var resolved = Resolver.ResolvePart(src, out var _);
+            var extracted = Extractor.ExtractPart(resolved).Sort();
+            var path = dst + FS.file(string.Format("{0}.{1}", src.Id.Format(), "extracts"), FS.XPack);
+            Emit(extracted, path);
+        }
 
-        HexPack Pack(ReadOnlySpan<ApiExtractBlock> src)
+        public static FS.FileName file(ApiHostUri host, string subject, FS.FileExt ext)
+            => FS.file(string.Format("{0}.{1}.{2}", host.Part.Format(), host.Name, subject), ext);
+
+        public static FS.FolderName folder(PartId part)
+            => FS.folder(part.Format());
+
+        Index<ApiExtractBlock> ExtractHost(IApiHost src, FS.FilePath dst)
+        {
+            var resolved = Resolver.ResolveHost(src);
+            var extracted = Extractor.ExtractHost(resolved).Sort();
+            Emit(extracted, dst);
+            return extracted;
+        }
+
+        Index<ApiExtractBlock> ExtractHost(IApiHost src)
+        {
+            var resolved = Resolver.ResolveHost(src);
+            var extracted = Extractor.ExtractHost(resolved).Sort();
+            return extracted;
+        }
+
+        Index<ApiCodeBlock> ParseExtracts(ReadOnlySpan<ApiExtractBlock> src)
         {
             var count = src.Length;
-            var buffer = alloc<MemoryBlock>(count);
+            var buffer = alloc<ApiCodeBlock>(count);
+            ref var parsed = ref first(buffer);
+            for(var i=0; i<count; i++)
+                Parser.Parse(skip(src,i), out seek(parsed,i));
+            return buffer;
+        }
+
+        Index<AsmInstructionBlock> DecodeParsed(ReadOnlySpan<ApiCodeBlock> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<AsmInstructionBlock>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
-                ref readonly var extract = ref skip(src,i);
-                seek(dst,i) = memory.block(extract.Origin, extract.Data);
+                Decoder.Decode(skip(src,i), out seek(dst,i));
             }
             return buffer;
         }
 
-
-        void Trim(ReadOnlySpan<ApiExtractBlock> src)
+        uint Emit(ReadOnlySpan<ApiExtractBlock> src, FS.FilePath dst)
         {
-            var extracts = src;
-            var count = extracts.Length;
+            var count = (uint)src.Length;
+            if(count == 0)
+                return 0;
+
             var blocks = alloc<MemoryBlock>(count);
-
-            var j = 0;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var extract = ref skip(extracts,i);
-                var term = Extraction.terminal(extract);
-                if(term.IsNonEmpty)
-                    seek(blocks, j++) = Extraction.block(extract, term);
-            }
-
-            var hexpacks = Wf.HexPacks();
-            var packed = Pack(extracts);
-            var hexout = Db.AppLog("extracts", FS.XPack);
-            Wf.HexPacks().Emit(blocks, hexout);
-            Wf.Status(string.Format("Identified {0} terminals from {1} methods", j, count));
-
+            var found = Extraction.terminals(src, blocks);
+            var packed = CodeBlocks.pack(blocks);
+            Wf.HexPacks().Emit(packed, dst);
+            Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
+            return count;
         }
 
-        void ExtractPart(IPart src)
+        uint Emit(ReadOnlySpan<ApiCodeBlock> src, FS.FilePath dst)
         {
-            var extractor = Wf.ApiExtractor();
-            var resolver = Wf.ApiResolver();
-            var resolved = resolver.ResolvePart(src, out var _);
-            var extracted = extractor.ExtractResolved(resolved).Sort();
-            Trim(extracted.View);
+            var count = (uint)src.Length;
+            if(count == 0)
+                return 0;
+            var packed = CodeBlocks.pack(src);
+            Wf.HexPacks().Emit(packed, dst);
+            return count;
+        }
+
+        uint Emit(ReadOnlySpan<AsmInstructionBlock> src, FS.FilePath dst)
+        {
+            var count = (uint)src.Length;
+            if(count == 0)
+                return 0;
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                if(block.IsNonEmpty)
+                {
+                    writer.WriteLine(Formatter.Format(block));
+                    writer.WriteLine(RP.PageBreak160);
+                }
+            }
+            Wf.EmittedFile(flow,count);
+
+            return count;
         }
 
         void ExtractCatalog()
         {
-            var extractor = Wf.ApiExtractor();
-            var resolver = Wf.ApiResolver();
             var catalog = Wf.ApiCatalog;
-            var resolved = resolver.ResolveCatalog(catalog);
-            var extracted = extractor.ExtractResolved(resolved).Sort();
-            Trim(extracted.View);
+            var resolved = Resolver.ResolveCatalog(catalog);
+            var extracted = Extractor.ExtractParts(resolved).Sort();
+            Emit(extracted,Db.AppLog("extracts", FS.XPack));
         }
 
+        void ExtractHosts(ApiHosts src, FS.FolderPath dir)
+        {
+            var count = src.Count;
+            var hosts = src.View;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var host = ref skip(hosts,i);
+                var extracts = ExtractHost(host);
+                Emit(extracts, dir + file(host.HostUri, "extracts", FS.XPack));
+                var parsed = ParseExtracts(extracts);
+                Emit(parsed, dir + file(host.HostUri, "parsed", FS.XPack));
+                var decoded = DecodeParsed(parsed);
+                Emit(decoded, dir + file(host.HostUri, "decoded", FS.Asm));
+            }
+        }
+
+        void ExtractParts(ReadOnlySpan<IApiPartCatalog> src, FS.FolderPath dir)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(src,i);
+                var dst = dir + folder(part.PartId);
+                ExtractHosts(part.ApiHosts,dst);
+            }
+        }
 
         public void Run()
         {
-            ExtractCatalog();
-
-            // var parsed = parse(extracts);
-            // var hex = Wf.ApiHex();
-            // var packed = hex.BuildHexPack(parsed);
-            // var outfile = Db.AppLog("apihex", FS.ext("xpack"));
-            // hex.EmitHexPack(parsed.ToArray(), outfile);
+            var catalog = Wf.ApiCatalog;
+            var dir = Db.AppLogDir();
+            ExtractParts(catalog.PartCatalogs(), dir);
         }
     }
 }

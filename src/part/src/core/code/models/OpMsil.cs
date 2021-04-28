@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct OpMsil
     {
-        public CliToken Id {get;}
+        public CliToken Token {get;}
 
         /// <summary>
         /// The operation identity
@@ -27,12 +27,12 @@ namespace Z0
         /// <summary>
         /// The Cli signature
         /// </summary>
-        public CliSig Signature {get;}
+        public CliSig CliSig {get;}
 
         /// <summary>
         /// The encoded cil
         /// </summary>
-        public BinaryCode Encoded {get;}
+        public BinaryCode MsilCode {get;}
 
         /// <summary>
         /// The method implementation attributes
@@ -40,13 +40,14 @@ namespace Z0
         public MethodImplAttributes ImplSpec {get;}
 
         [MethodImpl(Inline)]
-        public OpMsil(CliToken id, MemoryAddress @base, OpUri name, CliSig sig, BinaryCode data, MethodImplAttributes impl)
+        public OpMsil(CliToken id, MemoryAddress @base, OpUri uri, CliSig sig, BinaryCode data, MethodImplAttributes impl)
         {
-            Id = id;
+            Token = id;
             BaseAddress = @base;
-            Signature = sig;
-            Uri = name;
-            Encoded = data;
+            Uri = uri;
+            MsilCode = data;
+            CliSig = sig;
+            MsilCode = data;
             ImplSpec = impl;
         }
     }

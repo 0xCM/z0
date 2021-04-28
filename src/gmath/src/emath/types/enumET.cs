@@ -31,7 +31,7 @@ namespace Z0
         public T Scalar
         {
             [MethodImpl(Inline)]
-            get => Numeric.scalar<E,T>(Literal);
+            get => memory.@as<E,T>(Literal);
         }
 
         public DataWidth Width

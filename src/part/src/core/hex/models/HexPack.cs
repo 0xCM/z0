@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
 
@@ -17,10 +15,11 @@ namespace Z0
 
         public ByteSize MaxBlockSize {get;}
 
-        public HexPack(Index<MemoryBlock> src)
+        [MethodImpl(Inline)]
+        internal HexPack(Index<MemoryBlock> src, ByteSize max)
         {
-            _Blocks = src.Sort();
-            MaxBlockSize = _Blocks.Select(x => (uint)x.Size).Max();
+            _Blocks = src;
+            MaxBlockSize = max;
         }
 
         public ReadOnlySpan<MemoryBlock> Blocks
@@ -35,8 +34,10 @@ namespace Z0
             get => _Blocks.Count;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator HexPack(MemoryBlock[] src)
-            => new HexPack(src);
+        public static HexPack Empty
+        {
+            [MethodImpl(Inline)]
+            get => new HexPack(Index<MemoryBlock>.Empty, 0);
+        }
     }
 }

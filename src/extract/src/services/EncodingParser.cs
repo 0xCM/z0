@@ -45,15 +45,6 @@ namespace Z0
             Delta = default;
         }
 
-        public void Start()
-        {
-            Buffer.Clear();
-            Offset = default;
-            State = S.Accepting;
-            Outcome = default;
-            Delta = default;
-        }
-
         [Op]
         internal S Parse(ReadOnlySpan<byte> src)
         {
@@ -74,6 +65,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Finished() ? Outcome : default;
+        }
+
+        void Start()
+        {
+            Buffer.Clear();
+            Offset = default;
+            State = S.Accepting;
+            Outcome = default;
+            Delta = default;
         }
 
         [MethodImpl(Inline)]

@@ -8,11 +8,10 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [ApiHost(ApiNames.SpanBlocks)]
+    [ApiHost("api")]
     public readonly partial struct SpanBlocks
     {
         const NumericKind Closure = UnsignedInts;
-
 
         [Free]
         public delegate ref readonly SpanBlock8<T> UnarySpanOp8<T>(in SpanBlock8<T> src, in SpanBlock8<T> dst)

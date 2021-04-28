@@ -35,6 +35,25 @@ namespace Z0
             return buffer;
         }
 
+        internal static bool parse(EP parser, in ApiExtractBlock src, out ApiCodeBlock dst)
+        {
+            const int Zx7Cut = 7;
+            var status = parser.Parse(src.View);
+            var term = failed(status) ? Fail : termcode(parser.Result);
+            if(term != Fail)
+            {
+                var code = locate(src.BaseAddress, parser.Parsed, term == CTC_Zx7 ? Zx7Cut : 0);
+                dst = new ApiCodeBlock(src.BaseAddress, src.OpUri, code.Storage);
+                return true;
+            }
+            else
+            {
+                dst = ApiCodeBlock.Empty;
+                return false;
+
+            }
+        }
+
         [Op]
         internal static Outcome<ApiMemberCode> parse(EP parser, in ApiMemberExtract src, uint seq)
         {
@@ -59,7 +78,7 @@ namespace Z0
         }
 
         [Op]
-        internal static CodeBlock locate(MemoryAddress address, byte[] src, int cut)
+        static CodeBlock locate(MemoryAddress address, byte[] src, int cut)
         {
             if(cut == 0)
                 return new CodeBlock(address, src);
@@ -73,7 +92,7 @@ namespace Z0
         }
 
         [Op]
-        internal static int extractSize(Span<byte> src, int maxcut, byte code)
+        static int extractSize(Span<byte> src, int maxcut, byte code)
         {
             var srcLen = src.Length;
             var cut = 0;

@@ -4,13 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static SFx;
-
     public interface IVPipe<W,S,T>
         where W : unmanaged, ITypeWidth
         where S : unmanaged
@@ -23,14 +16,13 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
-        uint Flow(in SpanBlock128<S> src, SpanBlock128<T> dst);
+        uint Flow(in SpanBlock128<S> src, in SpanBlock128<T> dst);
     }
 
     public interface IVPipe256<S,T> : IVPipe<W256,S,T>
         where S : unmanaged
         where T : unmanaged
     {
-        uint Flow(in SpanBlock256<S> src, SpanBlock256<T> dst);
+        uint Flow(in SpanBlock256<S> src, in SpanBlock256<T> dst);
     }
-
 }

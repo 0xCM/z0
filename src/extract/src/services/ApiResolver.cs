@@ -44,50 +44,20 @@ namespace Z0
         {
             dst.Add(ResolvePart(src, out var counter));
             return counter;
-            // var counter = 0u;
-            // var catalog = ApiQuery.partcat(src);
-            // var flow = Wf.Running(string.Format("Resolving part {0}", src.Id));
-
-            // var hosts = root.list<ResolvedHost>();
-
-            // foreach(var host in catalog.ApiTypes)
-            // {
-            //     var methods = root.list<ResolvedMethod>();
-            //     var count = ResolveType(host, methods);
-            //     if(count != 0)
-            //     {
-            //         var resolved = methods.ToArray().Sort();
-            //         var @base = first(resolved).Address;
-            //         hosts.Add(new ResolvedHost(host.HostUri, @base, resolved));
-            //         counter += count;
-            //     }
-            // }
-
-            // foreach(var host in catalog.ApiHosts)
-            // {
-            //     var methods = root.list<ResolvedMethod>();
-            //     var count = ResolveHost(host, methods);
-            //     if(count != 0)
-            //     {
-            //         var resolved = methods.ToArray().Sort();
-            //         var @base = first(resolved).Address;
-            //         hosts.Add(new ResolvedHost(host.HostUri, @base, resolved));
-            //         counter += count;
-            //     }
-            // }
-
-            // dst.Add(new ResolvedPart(src.Id, hosts.ToArray()));
-
-            // Wf.Ran(flow, string.Format("Resolved {0} members from {1}", counter, src.Id));
-            // return counter;
         }
 
         public ResolvedHost ResolveHost(IApiHost src)
         {
             var dst = root.list<ResolvedMethod>();
             ResolveHost(src,dst);
-            dst.Sort();
-            return new ResolvedHost(src.HostUri, default, dst.ToArray());
+            if(dst.Count != 0)
+            {
+                dst.Sort();
+                var methods = dst.ToArray();
+                return new ResolvedHost(src.HostUri, first(methods).Address, methods);
+            }
+            else
+                return ResolvedHost.Empty;
         }
 
         public ResolvedPart ResolvePart(IPart src, out uint counter)
@@ -128,6 +98,7 @@ namespace Z0
             Wf.Ran(flow, string.Format("Resolved {0} members from {1}", counter, src.Id));
             return result;
         }
+
 
         public uint ResolveHost(IApiHost src, List<ResolvedMethod> dst)
         {

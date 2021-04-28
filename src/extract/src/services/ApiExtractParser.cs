@@ -12,12 +12,12 @@ namespace Z0
     using EP = EncodingParser;
     using api = ApiExtracts;
 
-    public readonly struct PatternExtractParser
+    public readonly struct ApiExtractParser
     {
         readonly byte[] Buffer;
 
         [MethodImpl(Inline)]
-        internal PatternExtractParser(byte[] buffer)
+        internal ApiExtractParser(byte[] buffer)
             => Buffer = buffer;
 
         EP Parser
@@ -26,8 +26,10 @@ namespace Z0
             get => api.encodings(Buffer.Clear());
         }
 
-        [Op]
         public Index<ApiMemberCode> ParseMembers(ReadOnlySpan<ApiMemberExtract> src)
             => api.parse(Parser,src);
+
+        public bool Parse(in ApiExtractBlock src, out ApiCodeBlock code)
+            => api.parse(Parser, src, out code);
     }
 }

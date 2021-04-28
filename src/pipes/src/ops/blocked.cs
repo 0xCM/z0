@@ -4,23 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
-
     using System.Runtime.CompilerServices;
 
-    using static SFx;
+    using static Part;
 
     partial struct Pipes
     {
         [MethodImpl(Inline)]
-        public static BlockPipe128<S,T> bpipe<S,T>(IBlockSource128<S> src, IBlockSink128<T> dst)
+        public static BlockPipe128<S,T> blocked<S,T>(IBlockSource128<S> src, IBlockSink128<T> dst)
             where S : unmanaged
             where T : unmanaged
                 => new BlockPipe128<S,T>(src,dst);
 
         [MethodImpl(Inline)]
-        public static BlockPipe128<A,S,B,T> bpipe<A,S,B,T>(W128 w, A src, B dst)
+        public static BlockPipe128<A,S,B,T> blocked<A,S,B,T>(W128 w, A src, B dst)
             where S : unmanaged
             where A : IBlockSource128<S>
             where T : unmanaged
@@ -28,13 +25,13 @@ namespace Z0
                 => new BlockPipe128<A,S,B,T>(src,dst);
 
         [MethodImpl(Inline)]
-        public static BlockPipe256<S,T> bpipe<S,T>(IBlockSource256<S> src, IBlockSink256<T> dst)
+        public static BlockPipe256<S,T> blocked<S,T>(IBlockSource256<S> src, IBlockSink256<T> dst)
             where S : unmanaged
             where T : unmanaged
                 => new BlockPipe256<S,T>(src,dst);
 
         [MethodImpl(Inline)]
-        public static BlockPipe256<A,S,B,T> bpipe<A,S,B,T>(W256 w, A src, B dst)
+        public static BlockPipe256<A,S,B,T> blocked<A,S,B,T>(W256 w, A src, B dst)
             where S : unmanaged
             where A : IBlockSource256<S>
             where T : unmanaged

@@ -22,8 +22,8 @@ namespace Z0
 
         public Index<string> TypeParameters;
 
-        public ClrDisplaySig DisplaySig
-            => ClrDisplaySig.from(this);
+        public MethodDisplaySig DisplaySig
+            => MethodDisplaySig.from(this);
 
         CliToken IClrArtifact.Token
             => Id;

@@ -70,7 +70,7 @@ namespace Z0
             get => MethodHandle.GetFunctionPointer();
         }
 
-        public ClrDisplaySig DisplaySig
+        public MethodDisplaySig DisplaySig
         {
             [MethodImpl(Inline)]
             get => Definition.DisplaySig();

@@ -29,7 +29,6 @@ namespace Z0
 
     }
 
-
     [Free]
     public interface IBlockSink256<T> : IBlockSink<W256,T>
         where T : unmanaged

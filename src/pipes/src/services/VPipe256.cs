@@ -11,30 +11,32 @@ namespace Z0
 
     using static SFx;
 
-    public struct VPipe128<P,S,T> : IVPipe128<S,T>
-        where P : IVMap128<S,T>
+    public struct VPipe256<P,S,T> : IVPipe256<S,T>
+        where P : IVMap256<S,T>
         where S : unmanaged
         where T : unmanaged
     {
         P VMap;
 
+        uint Counter;
+
         [MethodImpl(Inline)]
-        public VPipe128(P vmap)
+        public VPipe256(P vmap)
         {
             VMap = vmap;
+            Counter = 0;
         }
 
         [MethodImpl(Inline)]
-        public uint Flow(in SpanBlock128<S> src, SpanBlock128<T> dst)
+        public uint Flow(in SpanBlock256<S> src, in SpanBlock256<T> dst)
         {
             var count = src.BlockCount;
-            var counter = 0u;
             for(var i=0; i<count; i++)
             {
                 gcpu.vstore(VMap.Invoke(gcpu.vload(src,i)), dst,i);
-                counter++;
+                Counter++;
             }
-            return counter;
+            return Counter;
         }
     }
 }

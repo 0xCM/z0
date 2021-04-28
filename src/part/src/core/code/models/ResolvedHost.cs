@@ -25,8 +25,26 @@ namespace Z0
             BaseAddress = @base;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Uri.IsEmpty && Methods.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Uri.IsNonEmpty && Methods.IsNonEmpty;
+        }
+
         [MethodImpl(Inline)]
         public int CompareTo(ResolvedHost src)
             => BaseAddress.CompareTo(src.BaseAddress);
+
+        public static ResolvedHost Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ResolvedHost(ApiHostUri.Empty, default, sys.empty<ResolvedMethod>());
+        }
     }
 }

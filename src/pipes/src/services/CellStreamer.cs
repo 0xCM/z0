@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    class CellStreamer<F,W,T> : ICellStreamer<F,W,T>
+    class CellStream<F,W,T> : ICellStream<F,W,T>
         where F : unmanaged, IDataCell
         where W : unmanaged, ITypeWidth
         where T : unmanaged
@@ -23,7 +23,7 @@ namespace Z0
 
         readonly Func<F> ValueEmitter;
 
-        public CellStreamer(ISource src)
+        public CellStream(ISource src)
         {
             Source = src;
             Width = (CellWidth)default(F).Width;

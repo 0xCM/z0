@@ -12,12 +12,11 @@ namespace Z0
     partial struct ApiExtracts
     {
         [Op]
-        public static PatternExtractParser parser()
-            => new PatternExtractParser(buffer());
-
+        public static ApiExtractParser parser()
+            => new ApiExtractParser(buffer());
 
         [MethodImpl(Inline), Op]
-        public static PatternExtractParser parser(byte[] buffer)
-            => new PatternExtractParser(buffer);
+        public static ApiExtractParser parser(byte[] buffer)
+            => new ApiExtractParser(buffer);
     }
 }

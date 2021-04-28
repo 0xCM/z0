@@ -157,7 +157,6 @@ namespace Z0.Asm
             Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
-
         void EmitByteCode()
         {
             var package = Db.Package("respack");

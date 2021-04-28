@@ -15,7 +15,7 @@ namespace Z0
     /// Specifies data size in bytes
     /// </summary>
     [Datatype]
-    public readonly struct ByteSize : IDataType<ulong>
+    public readonly struct ByteSize : IDataTypeComparable<ByteSize>
     {
         public static Outcome parse(string src, out ByteSize dst)
         {
@@ -83,6 +83,10 @@ namespace Z0
 
         public bool Equals(ByteSize src)
             => Content == src.Content;
+
+        [MethodImpl(Inline),Ignore]
+        public int CompareTo(ByteSize src)
+            => Content.CompareTo(src.Content);
 
         public override bool Equals(object obj)
             => obj is ByteSize ? Equals((ByteSize)obj) : false;

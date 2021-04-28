@@ -10,7 +10,7 @@ namespace Z0
     partial class ClrQuery
     {
         [Op]
-        public static ClrDisplaySig DisplaySig(this MethodInfo src)
+        public static MethodDisplaySig DisplaySig(this MethodInfo src)
             => src.Artifact().DisplaySig;
     }
 }

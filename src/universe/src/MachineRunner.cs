@@ -28,7 +28,7 @@ namespace Z0
                     Emitted(hex.EmitIndex(blocks));
 
                 if(options.EmitHexPack)
-                    Emitted(hex.EmitHexPack(blocks));
+                    Emitted(Wf.HexPacks().Emit(blocks));
 
                 if(options.EmitAsmRows)
                     Emitted(Wf.AsmRowBuilder().EmitAsmRows(blocks));

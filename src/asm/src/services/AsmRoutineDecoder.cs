@@ -123,32 +123,7 @@ namespace Z0.Asm
                     return Option.none<AsmInstructionBlock>();
                 }
 
-                var instructions = Decode(code,@base);
-                // var decoded = new Iced.InstructionList();
-                // var reader = new Iced.ByteArrayCodeReader(code.Storage);
-                // var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
-                // decoder.IP = @base;
-                // while (reader.CanReadByte)
-                // {
-                //     ref var instruction = ref decoded.AllocUninitializedElement();
-                //     decoder.Decode(out instruction);
-                // }
-
-                // var count = decoded.Count;
-                // var formatter = iformatter(AsmFormat);
-                // var instructions = alloc<Asm.IceInstruction>(count);
-                // var formatted = formatter.FormatInstructions(decoded, @base);
-                // var position = 0u;
-                // for(var i=0; i<count; i++)
-                // {
-                //     ref readonly var instruction = ref decoded[i];
-                //     var size = (uint)instruction.ByteLength;
-                //     var encoded = slice(code.View, position, size).ToArray();
-                //     instructions[i] = IceExtractors.extract(instruction, formatted[i], encoded);
-                //     position += size;
-
-                // }
-                return new AsmInstructionBlock(uri, instructions, code);
+                return new AsmInstructionBlock(uri, Decode(code,@base), code);
             }
             catch(Exception e)
             {
@@ -184,7 +159,7 @@ namespace Z0.Asm
             }
         }
 
-        static AsmRoutine routine(OpUri uri, ClrDisplaySig sig, ApiBlockAsm src, bool check = false)
+        static AsmRoutine routine(OpUri uri, MethodDisplaySig sig, ApiBlockAsm src, bool check = false)
         {
             var count = src.InstructionCount;
             var info = new AsmInstructionSummary[count];

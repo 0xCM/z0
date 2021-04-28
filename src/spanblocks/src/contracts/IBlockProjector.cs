@@ -20,8 +20,6 @@ namespace Z0
         where T : unmanaged
     {
         void Project(in SpanBlock128<S> src, in SpanBlock128<T> dst);
-
-
     }
 
     [Free]

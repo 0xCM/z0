@@ -15,7 +15,7 @@ namespace Z0
         const string RenderPattern = "{0,-16} | {1,-112} | {2, -82} | {3}";
 
         public static string format(in ApiRuntimeMember src)
-            => string.Format(RenderPattern, src.Address, src.Uri, src.Sig, src.Cil.Encoded.Format());
+            => string.Format(RenderPattern, src.Address, src.Uri, src.DisplaySig, src.Msil.MsilCode.Format());
 
         public Index<ApiRuntimeMember> EmitRuntimeIndex()
         {
@@ -80,8 +80,8 @@ namespace Z0
             var method = src.Method;
             dst.Address = src.BaseAddress;
             dst.Uri = src.OpUri;
-            dst.Sig = ClrDisplaySig.from(method.Artifact());
-            dst.Cil = src.Cil;
+            dst.DisplaySig = MethodDisplaySig.from(method.Artifact());
+            dst.Msil = src.Cil;
             return ref dst;
         }
     }

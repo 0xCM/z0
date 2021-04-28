@@ -13,8 +13,8 @@ namespace Z0
 
         public OpUri Uri;
 
-        public ClrDisplaySig Sig;
+        public MethodDisplaySig DisplaySig;
 
-        public OpMsil Cil;
+        public OpMsil Msil;
     }
 }

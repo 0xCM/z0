@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ClrDisplaySig
+    public readonly struct MethodDisplaySig
     {
         /// <summary>
         /// For a system-defined type, returns the C#-specific keyword for the type if it has one;
@@ -59,11 +59,11 @@ namespace Z0
         }
 
         [Op]
-        public static ClrDisplaySig from(in ClrMethodArtifact src)
+        public static MethodDisplaySig from(in ClrMethodArtifact src)
         {
             var dst = new TextBuffer(new StringBuilder());
             format(src, dst);
-            return new ClrDisplaySig(dst.Emit());
+            return new MethodDisplaySig(dst.Emit());
         }
 
         [Op]
@@ -90,7 +90,7 @@ namespace Z0
         readonly TextBlock Content;
 
         [MethodImpl(Inline)]
-        ClrDisplaySig(TextBlock src)
+        MethodDisplaySig(TextBlock src)
             => Content = src;
 
         [MethodImpl(Inline)]
@@ -100,10 +100,10 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public static ClrDisplaySig Empty
+        public static MethodDisplaySig Empty
         {
             [MethodImpl(Inline)]
-            get => new ClrDisplaySig(TextBlock.Empty);
+            get => new MethodDisplaySig(TextBlock.Empty);
         }
     }
 }

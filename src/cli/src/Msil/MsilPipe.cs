@@ -134,7 +134,7 @@ namespace Z0
                     var member = code.Member;
                     var cil = member.Cil;
                     var sig = code.CliSig.Data;
-                    var bytes = cil.Encoded;
+                    var bytes = cil.MsilCode;
                     writer.WriteLine(CilPageBreak);
                     writer.WriteLine(string.Format(CilCodeHeader, member.Token, member.BaseAddress, member.OpUri));
                     writer.WriteLine(string.Format(CilSigHeader, sig.Length, sig.Format()));
@@ -154,10 +154,10 @@ namespace Z0
 
         public void RenderCode(OpMsil src, ITextBuffer dst)
         {
-            var bytes = src.Encoded;
-            var sig = src.Signature.Data;
+            var bytes = src.MsilCode;
+            var sig = src.CliSig.Data;
             dst.AppendLine(CilPageBreak);
-            dst.AppendLine(string.Format(CilCodeHeader, src.Id, src.BaseAddress, src.Uri));
+            dst.AppendLine(string.Format(CilCodeHeader, src.Token, src.BaseAddress, src.Uri));
             dst.AppendLine(string.Format(CilSigHeader, sig.Length, sig.Format()));
             dst.AppendLine(string.Format(CilEncodedHeader, bytes.Length, bytes.Format()));
             dst.AppendLine("{");
@@ -194,7 +194,7 @@ namespace Z0
             dst.BaseAddress = cil.BaseAddress;
             dst.Token = src.Token;
             dst.Uri = src.OpUri;
-            dst.Encoded = cil.Encoded;
+            dst.Encoded = cil.MsilCode;
             return ref dst;
         }
 

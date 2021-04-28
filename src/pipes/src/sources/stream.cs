@@ -8,7 +8,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static memory;
 
     partial struct Sources
     {

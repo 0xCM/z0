@@ -20,7 +20,7 @@ namespace Z0
 
         ApiHostAsmEmitter HostEmitter;
 
-        PatternExtractParser ExtractParser;
+        ApiExtractParser ExtractParser;
 
         public ApiCaptureEmitter()
         {

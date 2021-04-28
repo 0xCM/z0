@@ -37,6 +37,13 @@ namespace Z0.Asm
         public string Format(AsmRoutine src)
             => format(src, _Config);
 
+        public string Format(AsmInstructionBlock src)
+        {
+            var dst = text.buffer();
+            render(src.Code.Encoded, src.Instructions, dst);
+            return dst.Emit();
+        }
+
         public string Format(in MemoryAddress @base, in AsmInstructionSummary src)
             => format(@base, src, _Config);
 
@@ -50,10 +57,17 @@ namespace Z0.Asm
         [Op]
         public ReadOnlySpan<string> FormatHeader(AsmRoutine src)
         {
-            //var dst = span<string>(8);
             var dst = HeaderBuffer.Edit;
             const string Separator = "; " + RP.PageBreak160;
             var count = lines(new ApiCodeBlockHeader(Separator, src.Code.OpUri, src.DisplaySig, src.Code, src.TermCode), dst);
+            return slice(dst, 0, count);
+        }
+
+        public ReadOnlySpan<string> FormatHeader(ApiCodeBlock code, MethodDisplaySig sig)
+        {
+            var dst = HeaderBuffer.Edit;
+            const string Separator = "; " + RP.PageBreak160;
+            var count = lines(new ApiCodeBlockHeader(Separator, code.OpUri, sig, code, default), dst);
             return slice(dst, 0, count);
         }
 
@@ -66,7 +80,7 @@ namespace Z0.Asm
             {
                 ref readonly var fx = ref skip(src,i);
                 var size = (byte)fx.ByteLength;
-                var code = slice(block,offset,size);
+                var code = slice(block, offset, size);
                 dst.AppendLineFormat("{0,-6} {1,-46} ; {2,-2} | {3}", offset, fx.FormattedInstruction, size, code.FormatHex());
                 offset += size;
             }

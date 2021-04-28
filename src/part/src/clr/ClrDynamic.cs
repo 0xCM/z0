@@ -18,11 +18,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static MethodBase method(RuntimeMethodHandle src)
-            => MethodBase.GetMethodFromHandle(src);
-
-        [MethodImpl(Inline), Op]
-        public static OpMsil cil(DynamicMethod src, OpIdentity id)
+        public static OpMsil msil(DynamicMethod src, OpIdentity id)
         {
             var flags = src.GetMethodImplementationFlags();
             var uri = ApiUri.located(src.DeclaringType.HostUri(), src.Name, id);
@@ -32,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static OpMsil msil(DynamicDelegate src, OpIdentity id)
-            => cil(src.Target, id);
+            => msil(src.Target, id);
 
         [MethodImpl(Inline), Op]
         public static OpMsil msil(MemoryAddress @base, OpUri uri, MethodInfo src)
@@ -44,6 +40,10 @@ namespace Z0
             var getMethodDescriptorInfo = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
             return (RuntimeMethodHandle)getMethodDescriptorInfo.Invoke(src, null);
         }
+
+        [MethodImpl(Inline), Op]
+        public static MethodBase method(RuntimeMethodHandle src)
+            => MethodBase.GetMethodFromHandle(src);
 
         /// <summary>
         /// Creates a dynamic pointer from an untyped dynamic delegate
