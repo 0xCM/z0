@@ -18,7 +18,6 @@ namespace Z0
 
         public const string RanCmd = nameof(RanCmd);
 
-
         public const string CmdRan = nameof(CmdRan);
 
         public const string ClaimFailed = nameof(ClaimFailed);

@@ -22,7 +22,7 @@ namespace Z0
 
         public Index<ToolHelpEntry> UpdateHelpIndex()
         {
-            var path = Root + FS.file("help", FS.Extensions.Csv);
+            var path = Root + FS.file("help", FS.Csv);
             var files = HelpFiles();
             var flow = Wf.EmittingFile(path);
             var count = files.Count;

@@ -107,18 +107,18 @@ namespace Windows
             return sw.ToString();
         }
 
-        public MemorySegInfo[] Describe()
+        public MemoryRangeInfo[] Describe()
         {
-            var dst = new List<MemorySegInfo>();
+            var dst = new List<MemoryRangeInfo>();
             Describe(dst);
             return dst.ToArray();
         }
 
-        void Describe(List<MemorySegInfo> dst)
+        void Describe(List<MemoryRangeInfo> dst)
         {
             if(!IsRoot)
             {
-                dst.Add(new MemorySegInfo{
+                dst.Add(new MemoryRangeInfo{
                     BaseAddress = Address,
                     EndAddress = Address+Size -1,
                     Size = Size,

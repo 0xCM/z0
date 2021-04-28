@@ -38,10 +38,10 @@ namespace Z0
             Size = size;
         }
 
-        public MemorySegment Segment
+        public MemSeg Segment
         {
             [MethodImpl(Inline)]
-            get => new MemorySegment(Address, Size);
+            get => new MemSeg(Address, Size);
         }
 
         [MethodImpl(Inline)]

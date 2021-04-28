@@ -124,8 +124,6 @@ namespace Z0
             where T : unmanaged
                 => new SpanBlock512<T>(cover(src, count*blocklength<T>(w)));
 
-
-
         /// <summary>
         /// Loads 8-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>

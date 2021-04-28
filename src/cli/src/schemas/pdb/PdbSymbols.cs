@@ -36,7 +36,7 @@ namespace Z0
             => SymbolKeys(KeyGenerator(src)).Array();
 
         public FS.Files SymbolPaths(FS.FolderPath src)
-            => src.Files(FS.Extensions.Pdb, true);
+            => src.Files(FS.Pdb, true);
 
         [MethodImpl(Inline)]
         static ITracer tracer(IWfRuntime wf)

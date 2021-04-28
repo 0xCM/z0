@@ -139,7 +139,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var blocks = (int)CellCalcs.blocks<M,N,T>(W256.W);
+            var blocks = (int)CellCalcs.blockcount<M,N,T>(W256.W);
             for(var i=0; i<blocks; i++)
                 gz[i] = gcpu.vnand(x[i],y[i]);
             return ref gz;

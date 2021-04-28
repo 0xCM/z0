@@ -21,7 +21,7 @@ namespace Z0
         /// 001ch ret                            ; RET                 | C3              | 1   | c3
         /// </remarks>
         [Op]
-        public static MemorySegment capture(ApiResAccessor accessor)
+        public static MemSeg capture(ApiResAccessor accessor)
         {
             var definition = Resources.definition(accessor);
             var address = MemoryAddress.Zero;
@@ -44,7 +44,7 @@ namespace Z0
                 }
             }
 
-            return new MemorySegment(address, size);
+            return new MemSeg(address, size);
         }
 
         const byte MemberSegCount = 6;

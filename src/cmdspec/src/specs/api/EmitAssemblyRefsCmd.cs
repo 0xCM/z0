@@ -27,7 +27,7 @@ namespace Z0
         public static EmitAssemblyRefsCmd EmitAssemblyRefs(this WfCmdBuilder builder)
         {
             var cmd = new EmitAssemblyRefsCmd();
-            cmd.Sources = FS.dir(@"J:\tools\netsdk\sdk\3.1.403").Files(FS.Extensions.Dll);
+            cmd.Sources = FS.dir(@"J:\tools\netsdk\sdk\3.1.403").Files(FS.Dll);
             cmd.Target = builder.Db.IndexFile("assembly-refs");
             return cmd;
         }

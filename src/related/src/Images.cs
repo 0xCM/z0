@@ -69,7 +69,7 @@ namespace Z0
             return buffer;
         }
 
-        public static Index<MemoryRegion> pages(ReadOnlySpan<MemorySegInfo> src)
+        public static Index<MemoryRegion> pages(ReadOnlySpan<MemoryRangeInfo> src)
         {
             var count = src.Length;
             var buffer = memory.alloc<MemoryRegion>(count);
@@ -79,7 +79,7 @@ namespace Z0
             return buffer;
         }
 
-        public static ref MemoryRegion fill(in MemorySegInfo src, out MemoryRegion dst)
+        public static ref MemoryRegion fill(in MemoryRangeInfo src, out MemoryRegion dst)
         {
             var identity = src.Owner;
             if(text.nonempty(identity))

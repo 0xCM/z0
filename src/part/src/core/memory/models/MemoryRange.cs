@@ -31,6 +31,13 @@ namespace Z0
             Max = max;
         }
 
+        [MethodImpl(Inline)]
+        public MemoryRange(MemoryAddress min, ByteSize size)
+        {
+            Min = min;
+            Max = min + size;
+        }
+
         public ByteSize Size
         {
             [MethodImpl(Inline)]

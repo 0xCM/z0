@@ -25,16 +25,16 @@ namespace Z0
         public ReadOnlySpan<byte> One()
             => SegZ;
 
-        public MemorySegment[] SegRefs()
+        public MemSeg[] SegRefs()
         {
-            var buffer = alloc<MemorySegment>(SegCount);
-            Span<MemorySegment> dst = buffer;
+            var buffer = alloc<MemSeg>(SegCount);
+            Span<MemSeg> dst = buffer;
             SegRefs(dst);
             return buffer;
         }
 
         [MethodImpl(Inline), Op]
-        public void SegRefs(Span<MemorySegment> dst)
+        public void SegRefs(Span<MemSeg> dst)
         {
             var i=0u;
             seek(dst,i++) = memseg(Seg6x0);

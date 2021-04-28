@@ -19,7 +19,7 @@ namespace Z0
             var current = range.Min;
             for(var i=0; i<count; i++)
             {
-                seek(buffer,i) = page((current, current + size), size);
+                seek(buffer,i) = pagebuffer((current, current + size), size);
                 current += size;
             }
             return buffer;

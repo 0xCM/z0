@@ -13,7 +13,7 @@ namespace Z0
     partial struct CellCalcs
     {
         /// <summary>
-        /// Computes the number of cells that comprise a single 8-bit block
+        /// Computes the number of T-cells that comprise a single 8-bit block
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -23,7 +23,7 @@ namespace Z0
                 => (int)size<T>();
 
         /// <summary>
-        /// Computes the number of cells that comprise a single 16-bit block
+        /// Computes the number of T-cells that comprise a single 16-bit block
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -33,7 +33,7 @@ namespace Z0
                 => 2/(int)size<T>();
 
         /// <summary>
-        /// Computes the number of cells that comprise a single 32-bit block
+        /// Computes the number of T-cells that comprise a single 32-bit block
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -43,7 +43,7 @@ namespace Z0
                 => 4/(int)size<T>();
 
         /// <summary>
-        /// Computes the number of cells that comprise a single 64-bit block
+        /// Computes the number of T-cells that comprise a single 64-bit block
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -53,7 +53,7 @@ namespace Z0
                 => 8/(int)size<T>();
 
         /// <summary>
-        /// Computes the number of cells that comprise a single 128-bit block
+        /// Computes the number of T-cells that comprise a single 128-bit block
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -63,7 +63,7 @@ namespace Z0
                 => 16/(int)size<T>();
 
         /// <summary>
-        /// Computes the number of elements that comprise a 256-bit block
+        /// Computes the number of T-cells that comprise a 256-bit block
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -73,7 +73,7 @@ namespace Z0
                 => 32/(int)size<T>();
 
         /// <summary>
-        /// Computes the number of elements that comprise a 512-bit block
+        /// Computes the number of T-cells that comprise a 512-bit block
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>

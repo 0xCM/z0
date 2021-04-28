@@ -21,7 +21,7 @@ namespace Z0
     [ApiComplete]
     public readonly struct HexCharData
     {
-        public static MemorySegment[] Segments
+        public static MemSeg[] Segments
             => sys.array(memseg(UpperSymData), memseg(LowerSymData), memseg(UpperCodes), memseg(LowerCodes));
 
         /// <summary>

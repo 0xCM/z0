@@ -20,7 +20,7 @@ namespace Z0
         public static SpanBlock8<T> safeload<T>(W8 w, Span<T> src)
             where T : unmanaged
         {
-            var bz = blockcount<T>(w, src.Length, out int remainder);
+            var bz = blockcount<T>(w, src.Length, out var remainder);
             if(remainder == 0)
                 return new SpanBlock8<T>(src);
             else

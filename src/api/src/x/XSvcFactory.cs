@@ -48,5 +48,8 @@ namespace Z0
 
         public static ApiClassCatalog ApiClassCatalog(this IWfRuntime wf)
             => Z0.ApiClassCatalog.create(wf);
+
+        public static HexPacks HexPacks(this IWfRuntime wf)
+            => Z0.HexPacks.create(wf);
     }
 }

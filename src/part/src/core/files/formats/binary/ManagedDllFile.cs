@@ -33,7 +33,7 @@ namespace Z0
         }
 
         public FS.FileExt DefaultExt
-            =>  FS.Extensions.Dll;
+            =>  FS.Dll;
 
         public FileModuleKind ModuleKind
             => FileModuleKind.ManagedDll;

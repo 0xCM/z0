@@ -16,5 +16,10 @@ namespace Z0
         [Op]
         public static ApiExtractor ApiExtractor(this IWfRuntime wf)
             => Z0.ApiExtractor.create(wf);
+
+        [Op]
+        public static ApiResolver ApiResolver(this IWfRuntime wf)
+            => Z0.ApiResolver.create(wf);
+
     }
 }

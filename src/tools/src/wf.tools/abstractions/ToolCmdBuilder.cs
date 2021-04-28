@@ -59,7 +59,7 @@ namespace Z0
             => FS.FolderPath.Empty;
 
         protected FS.FilePath ToolPath
-            => ToolDir + FS.file(Tool.Format(), FS.Extensions.Exe);
+            => ToolDir + FS.file(Tool.Format(), FS.Exe);
 
         [Op]
         public ToolCmdSpec Emit(bool clear = true)

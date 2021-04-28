@@ -14,11 +14,11 @@ namespace Z0
     partial struct ConstBytesReader
     {
         [MethodImpl(Inline), Op]
-        public static MemorySegment[] refs(ConstBytes256 src)
+        public static MemSeg[] refs(ConstBytes256 src)
              => src.SegRefs();
 
         [Op]
-        public static void addresses(MemorySegments src, Span<MemoryAddress> dst)
+        public static void addresses(Index<MemSeg> src, Span<MemoryAddress> dst)
         {
             var view = src.View;
             var kSegs = view.Length;
@@ -81,7 +81,7 @@ namespace Z0
             => src.SegLeads();
 
         [Op]
-        public static ReadOnlySpan<MemoryAddress> addresses(ConstBytes256 src, MemorySegments store)
+        public static ReadOnlySpan<MemoryAddress> addresses(ConstBytes256 src, Index<MemSeg> store)
         {
             var sources = store.View;
             var results = sys.alloc<MemoryAddress>(sources.Length);
@@ -90,7 +90,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static MemorySegment segment(ConstBytes256 src, byte n)
+        public static MemSeg segment(ConstBytes256 src, byte n)
         {
             if(n == 0)
                 return segment(src, n0);
@@ -113,17 +113,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe MemorySegment segment<N>(ConstBytes256 src, N n = default)
+        public static unsafe MemSeg segment<N>(ConstBytes256 src, N n = default)
             where N : unmanaged, ITypeNat
         {
             var buffer = span<N>(src, n);
             var pSrc = gptr(memory.first(buffer));
-            return new MemorySegment(pSrc, buffer.Length);
+            return new MemSeg(pSrc, buffer.Length);
          }
 
         [MethodImpl(Inline), Op]
-        public static MemorySegments segments(ConstBytes256 src)
-            => MemorySegments.create(src.SegRefs());
+        public static Index<MemSeg> segments(ConstBytes256 src)
+            => src.SegRefs();
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> span(ConstBytes256 src, byte n)
@@ -179,16 +179,13 @@ namespace Z0
             internal Cache(ConstBytesReader reader)
             {
                 Refs = reader.Refs;
-                Storage = MemorySegments.create(Refs);
                 Stores = MemoryStore.Service;
                 Reader = reader;
             }
 
             readonly ConstBytesReader Reader;
 
-            readonly MemorySegment[] Refs;
-
-            readonly MemorySegments Storage;
+            readonly MemSeg[] Refs;
 
             readonly MemoryStore Stores;
 

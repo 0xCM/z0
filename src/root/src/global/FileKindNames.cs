@@ -59,6 +59,11 @@ namespace Z0
         public const string dll = nameof(dll);
 
         /// <summary>
+        /// Defines the 'xpack' literal
+        /// </summary>
+        public const string xpack = nameof(xpack);
+
+        /// <summary>
         /// Defines the 'json' literal
         /// </summary>
         public const string json = nameof(json);

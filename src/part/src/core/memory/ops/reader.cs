@@ -11,18 +11,18 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public unsafe static MemoryReader<T> reader<T>(T* pSrc, int length)
-            where T : unmanaged
-                => new MemoryReader<T>(pSrc, length);
-
         [MethodImpl(Inline), Op]
-        public unsafe static MemoryReader reader(byte* pSrc, int length)
-            => new MemoryReader(pSrc, length);
+        public unsafe static MemoryReader reader(byte* pSrc, ByteSize size)
+            => new MemoryReader(pSrc, size);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public unsafe static MemoryReader<T> reader<T>(T* pSrc, int count)
+            where T : unmanaged
+                => new MemoryReader<T>(pSrc, count);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static MemoryReader<T> reader<T>(MemoryRange src)
             where T : unmanaged
-                => reader(src.Min.Pointer<T>(), (int)src.Size);
+                => reader(src.Min.Pointer<T>(), src.Size);
     }
 }

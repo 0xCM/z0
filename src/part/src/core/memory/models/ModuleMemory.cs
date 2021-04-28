@@ -26,7 +26,7 @@ namespace Z0
             MemorySize = size;
         }
 
-        public MemorySegment Segment
+        public MemSeg Segment
         {
             [MethodImpl(Inline)]
             get => memseg(BaseAddress, MemorySize);

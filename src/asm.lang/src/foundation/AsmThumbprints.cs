@@ -17,7 +17,7 @@ namespace Z0.Asm
             => AsmThumbprints.define(src.Expression, src.Sig, src.OpCode, src.Encoded);
 
         FS.FilePath DefaultPath()
-            => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
+            => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Asm);
 
         public Index<AsmThumbprint> LoadThumbprints()
             => LoadThumbprints(DefaultPath());

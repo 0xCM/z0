@@ -20,21 +20,21 @@ namespace Z0
             => ref skip(src, offset);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T cell<T>(ReadOnlySpan<MemorySegment> src, MemorySlot n, long offset)
+        public static ref readonly T cell<T>(ReadOnlySpan<MemSeg> src, MemorySlot n, long offset)
              where T : struct
                 => ref cell<T>(load<T>(segment(src,n)), offset);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T cell<T>(ReadOnlySpan<MemorySegment> src, MemorySlot n, ulong offset)
+        public static ref readonly T cell<T>(ReadOnlySpan<MemSeg> src, MemorySlot n, ulong offset)
              where T : struct
                 => ref cell<T>(load<T>(segment(src,n)), offset);
 
         [MethodImpl(Inline), Op]
-        public static ref readonly byte cell(ReadOnlySpan<MemorySegment> src, MemorySlot n, long i)
+        public static ref readonly byte cell(ReadOnlySpan<MemSeg> src, MemorySlot n, long i)
             => ref skip(segment(src,n).Load(), (uint)i);
 
         [MethodImpl(Inline), Op]
-        public static ref readonly byte cell(ReadOnlySpan<MemorySegment> src, MemorySlot n, ulong i)
+        public static ref readonly byte cell(ReadOnlySpan<MemSeg> src, MemorySlot n, ulong i)
             => ref skip(segment(src,n).Load(), (uint)i);
 
         /// <summary>

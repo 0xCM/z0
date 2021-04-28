@@ -15,19 +15,19 @@ namespace Z0
     /// </summary>
     public readonly struct FieldRef : INullity
     {
-        public MemorySegment Segment {get;}
+        public MemSeg Segment {get;}
 
         public FieldInfo Field {get;}
 
         [MethodImpl(Inline)]
-        public FieldRef(FieldInfo field, MemorySegment seg)
+        public FieldRef(FieldInfo field, MemSeg seg)
         {
             Segment = seg;
             Field = field;
         }
 
         [MethodImpl(Inline)]
-        public FieldRef(MemorySegment seg, FieldInfo field)
+        public FieldRef(MemSeg seg, FieldInfo field)
         {
             Segment = seg;
             Field = field;
@@ -239,10 +239,10 @@ namespace Z0
         }
 
         public static FieldRef Empty
-            => new FieldRef(EmptyVessels.EmptyField, MemorySegment.Empty);
+            => new FieldRef(EmptyVessels.EmptyField, MemSeg.Empty);
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldRef((FieldInfo field, MemorySegment location) src)
+        public static implicit operator FieldRef((FieldInfo field, MemSeg location) src)
             => new FieldRef(src.location, src.field);
     }
 }

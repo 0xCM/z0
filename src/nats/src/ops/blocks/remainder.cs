@@ -17,7 +17,25 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The bit-width selector</param>
         [MethodImpl(Inline), Op]
-        public static uint remainder(uint src, W64 w)
+        public static ByteSize remainder(ByteSize src, W16 w)
+            => src % 2;
+
+        /// <summary>
+        /// Computes, in terms of bytes,the modulus src % w
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The bit-width selector</param>
+        [MethodImpl(Inline), Op]
+        public static ByteSize remainder(ByteSize src, W32 w)
+            => src % 4;
+
+        /// <summary>
+        /// Computes, in terms of bytes,the modulus src % w
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The bit-width selector</param>
+        [MethodImpl(Inline), Op]
+        public static ByteSize remainder(ByteSize src, W64 w)
             => src % 8;
 
         /// <summary>
@@ -26,7 +44,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The bit-width selector</param>
         [MethodImpl(Inline), Op]
-        public static uint remainder(uint src, W128 w)
+        public static ByteSize remainder(ByteSize src, W128 w)
             => src % 16;
 
         /// <summary>
@@ -35,7 +53,17 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="w">The bit-width selector</param>
         [MethodImpl(Inline), Op]
-        public static uint remainder(uint src, W256 w)
+        public static ByteSize remainder(ByteSize src, W256 w)
             => src % 32;
+
+        /// <summary>
+        /// Computes, in terms of bytes,the modulus src % w
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The bit-width selector</param>
+        [MethodImpl(Inline), Op]
+        public static ByteSize remainder(ByteSize src, W512 w)
+            => src % 64;
+
     }
 }

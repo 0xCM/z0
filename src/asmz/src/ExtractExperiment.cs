@@ -10,6 +10,171 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    public readonly struct Extraction
+    {
+        public static MemoryBlock block(in ApiExtractBlock src, TermInfo term)
+        {
+            if(term.IsEmpty)
+                return MemoryBlock.Empty;
+
+            var kind = term.Kind;
+            var size = ByteSize.Zero;
+            var modifier = skip(TermModifiers,(byte)kind);
+            if(kind == TermKind.Term5A)
+            {
+                size = term.Offset + modifier;
+            }
+            else
+            {
+                size = term.Offset;
+            }
+
+            var origin = new MemoryRange(src.BaseAddress, size);
+            var data = slice(src.View,0, size);
+            return memory.block(origin, data.ToArray());
+
+        }
+
+        public static TermInfo terminal(in ApiExtractBlock src)
+        {
+            const byte MaxSeg = 6;
+
+            var data = src.View;
+            var size = data.Length;
+            var found = NotFound;
+            var max = size + MaxSeg - 1;
+            var kind = TermKind.None;
+            for(var offset=0; offset<max; offset++)
+            {
+                if(slice(data, offset, 3).SequenceEqual(Term3A))
+                {
+                    found = offset;
+                    kind = TermKind.Term3A;
+                    break;
+                }
+                else if(slice(data, offset, 6).SequenceEqual(Term6A))
+                {
+                    found = offset;
+                    kind = TermKind.Term6A;
+                    break;
+                }
+                else if(slice(data, offset, 5).SequenceEqual(Term5A))
+                {
+                    found = offset;
+                    kind = TermKind.Term5A;
+                    break;
+                }
+                else if(slice(data, offset, 4).SequenceEqual(Term4A))
+                {
+                    found = offset;
+                    kind = TermKind.Term4A;
+                    break;
+                }
+                else if(slice(data, offset, 3).SequenceEqual(Term3B))
+                {
+                    found = offset;
+                    kind = TermKind.Term3B;
+                    break;
+                }
+                else if(slice(data, offset, 4).SequenceEqual(Term4B))
+                {
+                    found = offset;
+                    kind = TermKind.Term4B;
+                    break;
+                }
+            }
+
+            return new TermInfo(kind,(uint)found);
+        }
+
+        public enum TermKind : sbyte
+        {
+            None = -1,
+
+            Term3A = 0,
+
+            Term3B = 1,
+
+            Term4A = 2 ,
+
+            Term4B = 3,
+
+            Term5A = 4,
+
+            Term6A = 5
+        }
+
+        public readonly struct TermInfo
+        {
+            public TermKind Kind {get;}
+
+            public uint Offset {get;}
+
+            [MethodImpl(Inline)]
+            public TermInfo(TermKind kind, uint offset)
+            {
+                Offset = offset;
+                Kind = kind;
+            }
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Kind == TermKind.None;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Kind != TermKind.None && Offset != 0;
+            }
+
+            public static TermInfo Empty
+            {
+                [MethodImpl(Inline)]
+                get => new TermInfo(TermKind.None, 0);
+            }
+        }
+
+        const byte SBB = 0x19;
+
+        const byte RET = 0xc3;
+
+        const byte INT3 = 0xcc;
+
+        // cc cc cc
+        internal static ReadOnlySpan<byte> Term3A => new byte[3]{INT3, INT3, INT3};
+
+        internal const sbyte Term3AModifier = -3;
+
+        // cc 00 19
+        internal static ReadOnlySpan<byte> Term3B => new byte[3]{INT3, 0, SBB};
+
+        internal const sbyte Term3BModifier = -3;
+
+        //c3 00 00 19
+        internal static ReadOnlySpan<byte> Term4A => new byte[4]{RET, 0, 0, SBB};
+
+        internal const sbyte Term4AModifier = -3;
+
+        /// c3 19 01 01
+        internal static ReadOnlySpan<byte> Term4B => new byte[4]{RET, SBB, 0x01, 0x01};
+
+        internal const sbyte Term4BModifier = -3;
+
+        // 00 00 00 00 00
+        internal static ReadOnlySpan<byte> Term5A => new byte[5]{0, 0, 0, 0, 0};
+
+        internal const sbyte Term5Modifier = -5;
+
+        //19 00 00 00 40 00
+        internal static ReadOnlySpan<byte> Term6A => new byte[6]{SBB, 0, 0, 0, 0x40, 0};
+
+        internal const sbyte Term6AModifier = -6;
+
+        internal static ReadOnlySpan<sbyte> TermModifiers => new sbyte[6]{Term3AModifier,Term3BModifier,Term4AModifier, Term4BModifier,Term5Modifier,Term6AModifier};
+    }
+
     [ApiHost]
     class ExtractExperiment : AppService<ExtractExperiment>
     {
@@ -19,52 +184,6 @@ namespace Z0.Asm
         {
             ExtractPipe = Wf.ApiExtractPipe();
         }
-
-        [Op]
-        public static Index<ApiCodeBlock> parse(ReadOnlySpan<ApiExtractBlock> src)
-        {
-            var count = src.Length;
-            var buffer = alloc<ApiCodeBlock>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = parse(skip(src,i));
-            return buffer;
-        }
-
-        [Op]
-        public static ApiCodeBlock parse(in ApiExtractBlock src)
-        {
-            var j = terminal(src);
-            var code = slice(src.View, 0, j);
-            return new ApiCodeBlock(src.BaseAddress, src.Uri, code.ToArray());
-        }
-
-        [MethodImpl(Inline), Op]
-        static uint terminal(ReadOnlySpan<byte> src)
-        {
-            var count = (uint)src.Length;
-            var j = count;
-            var test = 0u;
-            for(var i=0u; i<count - 1; i++)
-            {
-                test = terminal(skip(src,i),skip(src, i+1));
-                if(test !=0)
-                {
-                    j = i + test;
-                    break;
-                }
-            }
-
-            return j;
-        }
-
-        /// <summary>
-        /// Attempts to find the logical end of the block
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline), Op]
-        static uint terminal(in ApiExtractBlock src)
-            => terminal(src.Encoded.View);
 
         /// <summary>
         /// Tests for a terminal opcode sequence
@@ -89,147 +208,63 @@ namespace Z0.Asm
             return 0;
         }
 
-        /// c3 19 01 01
-        static ReadOnlySpan<byte> Term4B => new byte[4]{0xc3, 0x19, 0x01, 01};
 
-        //c3 00 00 19
-        static ReadOnlySpan<byte> Term4A => new byte[4]{0xc3, 0, 0, 0x19};
-
-        // cc cc cc
-        static ReadOnlySpan<byte> Term3A => new byte[3]{0xcc, 0xcc, 0xcc};
-
-        // cc 00 19
-        static ReadOnlySpan<byte> Term3B => new byte[3]{0xcc, 0, 0x19};
-
-        //19 00 00 00 40 00
-        static ReadOnlySpan<byte> Term6A => new byte[6]{0x19, 0, 0, 0, 0x40, 0};
-
-        //19 04 01 00 04 42
-        static ReadOnlySpan<byte> Term6B => new byte[6]{0x19, 0x4, 0x1, 0, 0x4, 0x42};
-
-        //c3 00 00 00 19 01
-        static ReadOnlySpan<byte> Term6C => new byte[6]{0xc3, 0, 0, 0, 0x19, 0x01};
-
-        static ReadOnlySpan<byte> Term3C => new byte[3]{0x48, 0xFF, 0};
-
-        // 00 00 00 00 00
-        static ReadOnlySpan<byte> Term5 => new byte[5]{0, 0, 0, 0, 0};
-
-        int Terminal(in ApiExtractBlock src)
+        HexPack Pack(ReadOnlySpan<ApiExtractBlock> src)
         {
-            const byte MaxSeg = 6;
-            var data = src.View;
-            var size = data.Length;
-            var found = NotFound;
-            var max = size + MaxSeg - 1;
-            var segsize = z8;
-            for(var offset=0; offset<max; offset++)
+            var count = src.Length;
+            var buffer = alloc<MemoryBlock>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
             {
-                if(slice(data, offset, 3).SequenceEqual(Term3A))
-                {
-                    found = offset;
-                    segsize = 3;
-                    break;
-                }
-                else if(slice(data, offset, 6).SequenceEqual(Term6A))
-                {
-                    found = offset;
-                    segsize = 6;
-                    break;
-                }
-                else if(slice(data, offset, 5).SequenceEqual(Term5))
-                {
-                    found = offset;
-                    segsize = 5;
-                    break;
-                }
-                else if(slice(data, offset, 4).SequenceEqual(Term4A))
-                {
-                    found = offset;
-                    segsize = 4;
-                    break;
-                }
-                else if(slice(data, offset, 3).SequenceEqual(Term3B))
-                {
-                    found = offset;
-                    segsize = 3;
-                    break;
-                }
-                else if(slice(data, offset, 4).SequenceEqual(Term4B))
-                {
-                    found = offset;
-                    segsize = 4;
-                    break;
-                }
+                ref readonly var extract = ref skip(src,i);
+                seek(dst,i) = memory.block(extract.Origin, extract.Data);
             }
-
-            return found;
+            return buffer;
         }
 
-        uint Run(FS.FilePath src, StepLog success, StepLog fail)
-        {
-            var counter = 0u;
-            var running= Wf.Running(string.Format("Processed extract blocks from {0}", src.ToUri()));
-            var dst = root.datalist<ApiExtractBlock>();
-            var count = ExtractPipe.Load(src, dst);
-            var extracts = dst.View();
-            var found = 0u;
 
+        void Trim(ReadOnlySpan<ApiExtractBlock> src)
+        {
+            var extracts = src;
+            var count = extracts.Length;
+            var blocks = alloc<MemoryBlock>(count);
+
+            var j = 0;
             for(var i=0; i<count; i++)
             {
                 ref readonly var extract = ref skip(extracts,i);
-                var offset = Terminal(extract);
-                if(offset == NotFound)
-                {
-                    fail.WriteLine(extract.Data.FormatHex());
-                }
-                else
-                {
-                    found++;
-                    success.WriteLine(string.Format("{0,-8} | {1}", offset, extract.Data.FormatHex()));
-
-                }
-                counter++;
+                var term = Extraction.terminal(extract);
+                if(term.IsNonEmpty)
+                    seek(blocks, j++) = Extraction.block(extract, term);
             }
 
-            Wf.Ran(running, string.Format("Processed {0} extract blocks from {1} from which {2} terminals were identified", counter, src.ToUri(), found));
+            var hexpacks = Wf.HexPacks();
+            var packed = Pack(extracts);
+            var hexout = Db.AppLog("extracts", FS.XPack);
+            Wf.HexPacks().Emit(blocks, hexout);
+            Wf.Status(string.Format("Identified {0} terminals from {1} methods", j, count));
 
-            return counter;
+        }
+
+        void ExtractPart(IPart src)
+        {
+            var extractor = Wf.ApiExtractor();
+            var resolver = Wf.ApiResolver();
+            var resolved = resolver.ResolvePart(src, out var _);
+            var extracted = extractor.ExtractResolved(resolved).Sort();
+            Trim(extracted.View);
         }
 
         void ExtractCatalog()
         {
             var extractor = Wf.ApiExtractor();
+            var resolver = Wf.ApiResolver();
             var catalog = Wf.ApiCatalog;
-            var resolved = extractor.ResolveCatalog(catalog);
-            var extracts = extractor.ExtractResolved(resolved).View;
-            var count = extracts.Length;
-            var found = 0;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var extract = ref skip(extracts,i);
-                var offset = Terminal(extract);
-                if(offset != NotFound)
-                    found++;
-            }
-
-            Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
+            var resolved = resolver.ResolveCatalog(catalog);
+            var extracted = extractor.ExtractResolved(resolved).Sort();
+            Trim(extracted.View);
         }
 
-        void Test()
-        {
-            var paths = ExtractPipe.Paths().View;
-            var count = paths.Length;
-            using var success = Db.StepLog(GetType(), "terminals-found", FS.Csv);
-            using var fail = Db.StepLog(GetType(), "terminals-not-found", FS.Csv);
-
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(paths,i);
-                Run(path, success,fail);
-            }
-
-        }
 
         public void Run()
         {

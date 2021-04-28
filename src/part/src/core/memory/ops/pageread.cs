@@ -5,10 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     partial struct memory
     {
-        [Op]
+       [Op]
         public void pageread(MemoryRange src, Span<PageBuffer> dst)
         {
             var pages = root.min((uint)(src.Size/PageSize), dst.Length);

@@ -10,9 +10,6 @@ namespace Z0
         protected FS.FileExt CsvExt
             => FS.Extensions.Csv;
 
-        protected FS.FileExt AsmExt
-            => FS.Extensions.Asm;
-
         public static N0 n0 => default;
 
         public static N1 n1 => default;

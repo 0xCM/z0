@@ -12,6 +12,10 @@ namespace Z0
 
     partial struct Hex
     {
+        [MethodImpl(Inline), Op]
+        public static HexPack hexpack(Index<MemoryBlock> src)
+            => new HexPack(src);
+
         [Op]
         public static Outcome<uint> digits(ReadOnlySpan<char> src, Span<HexDigit> dst)
         {
@@ -52,7 +56,7 @@ namespace Z0
                 package.Index = i;
                 package.Address = block.BaseAddress;
                 package.Size = block.Size;
-                package.Data = Z0.text.format(slice(buffer,0, hexpack(block.View, buffer)));
+                package.Data = Z0.text.format(slice(buffer,0, Hex.hexpack(block.View, buffer)));
                 size += package.Size;
             }
             return size;

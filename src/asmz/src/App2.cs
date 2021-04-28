@@ -172,7 +172,7 @@ namespace Z0.Asm
             var decoder = Wf.AsmDecoder();
             var buffer = text.buffer();
             var sequence = 0u;
-            var segments = root.list<MemorySegment>(30000);
+            var segments = root.list<MemSeg>(30000);
             using var writer = dst.Writer();
             using var hexout = dst.ChangeExtension(FS.Hex).Writer();
             for(var i=0; i<count; i++)
@@ -254,7 +254,7 @@ namespace Z0.Asm
 
         void ShowMemory()
         {
-            var info = memory.basic();
+            var info = WinMem.BasicInfo();
             var buffer = text.buffer();
             buffer.AppendLine(text.prop(nameof(info.BaseAddress), info.BaseAddress));
             buffer.AppendLine(text.prop(nameof(info.AllocationBase), info.AllocationBase));
@@ -336,11 +336,11 @@ namespace Z0.Asm
         void ConvertPdbXml()
         {
             var dir = Db.ToolOutDir(Toolsets.pdb2xml);
-            var file = PartId.Math.Component(FS.Extensions.Pdb, FS.Extensions.Xml);
+            var file = PartId.Math.Component(FS.Pdb, FS.Xml);
             var srcPath = dir + file;
             var buffer = text.buffer();
 
-            var dstPath = Db.AppDataFile(file.WithExtension(FS.Extensions.Log));
+            var dstPath = Db.AppDataFile(file.WithExtension(FS.Log));
             using var writer = dstPath.Writer();
 
             const string Pattern = "{0}/{1}:{2}";

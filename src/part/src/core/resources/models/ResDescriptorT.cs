@@ -17,10 +17,10 @@ namespace Z0
     {
         public Name Name {get;}
 
-        public MemorySegment Segment {get;}
+        public MemSeg Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResDescriptor(Name name, MemorySegment seg)
+        public ResDescriptor(Name name, MemSeg seg)
         {
             Name = name;
             Segment = seg;
@@ -66,6 +66,6 @@ namespace Z0
             => Format();
 
         public static ResDescriptor<T> Empty
-            => new ResDescriptor<T>(Name.Empty, MemorySegment.Empty);
+            => new ResDescriptor<T>(Name.Empty, MemSeg.Empty);
     }
 }

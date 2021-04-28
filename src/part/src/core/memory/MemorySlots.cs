@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct MemorySlots
     {
-       readonly MemorySegment[] Data;
+       readonly MemSeg[] Data;
 
         public static string[] format<E>(MemorySlots<E> src)
             where E : unmanaged
@@ -33,14 +33,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public MemorySlots(MemorySegment[] src)
+        public MemorySlots(MemSeg[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public ref readonly MemorySegment Lookup(byte index)
+        public ref readonly MemSeg Lookup(byte index)
             => ref Data[index];
 
-        public ref readonly MemorySegment this[byte index]
+        public ref readonly MemSeg this[byte index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);
@@ -53,15 +53,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator MemorySlots(MemorySegment[] src)
+        public static implicit operator MemorySlots(MemSeg[] src)
             => new MemorySlots(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemorySlots(Index<MemorySegment> src)
+        public static implicit operator MemorySlots(Index<MemSeg> src)
             => new MemorySlots(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemorySegment[](MemorySlots src)
+        public static implicit operator MemSeg[](MemorySlots src)
             => src.Data;
     }
 }

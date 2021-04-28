@@ -26,25 +26,25 @@ namespace Z0
                 => f.Invoke(x,y);
 
         [MethodImpl(Inline)]
-        public static Span<T> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
+        public static Span<T> apply<F,T>(F f, ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : unmanaged
             where F : IBinaryOp<T>
         {
-            var count = lhs.Length;
+            var count = a.Length;
             var dst = span<T>(count);
-            ref readonly var a = ref first(lhs);
-            ref readonly var b = ref first(rhs);
+            ref readonly var _left = ref first(a);
+            ref readonly var _right = ref first(b);
             ref var target = ref first(dst);
             for(var i=0u; i<count; i++)
-                seek(target, i) = f.Invoke(skip(a, i), skip(b, i));
+                seek(target, i) = f.Invoke(skip(_left, i), skip(_right, i));
             return dst;
         }
 
         [MethodImpl(Inline)]
-        public static Span<T> apply<F,T>(F f, Span<T> lhs, Span<T> rhs)
+        public static Span<T> apply<F,T>(F f, Span<T> a, Span<T> b)
             where T : unmanaged
             where F : IBinaryOp<T>
-                => apply(f, lhs.ReadOnly(), rhs.ReadOnly());
+                => apply(f, a.ReadOnly(), b.ReadOnly());
 
 
         [MethodImpl(Inline)]

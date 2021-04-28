@@ -11,40 +11,40 @@ namespace Z0
     using static memory;
 
     /// <summary>
-    /// Defines a key-parametric indexed view over <see cref='MemorySegment'/> values
+    /// Defines a key-parametric indexed view over <see cref='MemSeg'/> values
     /// </summary>
     public readonly struct MemorySlots<K>
         where K : unmanaged
     {
-        readonly MemorySegment[] Data;
+        readonly MemSeg[] Data;
 
         [MethodImpl(Inline)]
-        public MemorySlots(MemorySegment[] slots)
+        public MemorySlots(MemSeg[] slots)
             => Data = slots;
 
         [MethodImpl(Inline)]
-        public ref readonly MemorySegment Lookup(K index)
+        public ref readonly MemSeg Lookup(K index)
             => ref skip(Data, uint32(index));
 
-        public ref readonly MemorySegment this[K index]
+        public ref readonly MemSeg this[K index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);
         }
 
-        public ref MemorySegment First
+        public ref MemSeg First
         {
             [MethodImpl(Inline)]
             get => ref first(Data);
         }
 
-        public MemorySegment[] Content
+        public MemSeg[] Content
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ref MemorySegment this[uint index]
+        public ref MemSeg this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

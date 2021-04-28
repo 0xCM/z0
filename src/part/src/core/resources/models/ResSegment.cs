@@ -13,10 +13,10 @@ namespace Z0
     {
         public Name Name {get;}
 
-        public MemorySegment Segment {get;}
+        public MemSeg Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResSegment(Name name, in MemorySegment segment)
+        public ResSegment(Name name, in MemSeg segment)
         {
             Name = name;
             Segment = segment;

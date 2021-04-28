@@ -153,23 +153,28 @@ namespace Z0
         /// </summary>
         public static FileExt Dmp => ext(dmp);
 
+        /// <summary>
+        /// Defines the <see cref='xpack'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt XPack => ext(xpack);
+
+        /// <summary>
+        /// Defines the <see cref='bat'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Bat => ext(bat);
+
+        /// <summary>
+        /// Defines the <see cref='sh'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Sh => ext(sh);
+
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions
         {
             /// <summary>
-            /// Defines the <see cref='asm'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Asm => ext(asm);
-
-            /// <summary>
             /// Defines the <see cref='csv'/> <see cref='FileExt'/>
             /// </summary>
             public static FileExt Csv => ext(csv);
-
-            /// <summary>
-            /// Defines the <see cref='dll'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Dll => ext(dll);
 
             /// <summary>
             /// Defines the <see cref='error'/> + <see cref='Log'/> <see cref='FileExt'/>
@@ -182,11 +187,6 @@ namespace Z0
             public static FileExt Exe => ext(exe);
 
             /// <summary>
-            /// Defines the <see cref='hex'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Hex => ext(hex);
-
-            /// <summary>
             /// Defines the <see cref='log'/> <see cref='FileExt'/>
             /// </summary>
             public static FileExt Log => ext(log);
@@ -196,8 +196,6 @@ namespace Z0
             /// </summary>
             public static FileExt Lib => ext(lib);
 
-            public static FileExt Json => ext(json);
-
             public static FileExt Config => ext(config);
 
             /// <summary>
@@ -206,54 +204,15 @@ namespace Z0
             public static FileExt JsonConfig => ext(cjson);
 
             /// <summary>
-            /// Defines the <see cref='pdb'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Pdb => ext(pdb);
-
-            /// <summary>
             /// Defines the composite <see cref='status'/> + <see cref='Log'/> <see cref='FileExt'/>
             /// </summary>
             public static FileExt StatusLog => ext(status) + Log;
-
-            /// <summary>
-            /// Defines the composite <see cref='xcsv'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt XCsv => ext(xcsv);
-
-            /// <summary>
-            /// Defines the <see cref='xml'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Xml => ext(xml);
 
             /// <summary>
             /// Defines the <see cref='cfg'/> <see cref='FileExt'/>
             /// </summary>
             public static FileExt Cfg => ext(cfg);
 
-            /// <summary>
-            /// Defines the <see cref='ps1'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Ps1 => ext(ps1);
-
-            /// <summary>
-            /// Defines the <see cref='bat'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Bat => ext(bat);
-
-            /// <summary>
-            /// Defines the <see cref='dmp'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Dmp => ext(dmp);
-
-            /// <summary>
-            /// Defines the <see cref='zip'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Zip => ext(zip);
-
-            /// <summary>
-            /// Defines the <see cref='sh'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Sh => ext(sh);
 
             /// <summary>
             /// Defines the <see cref='settings'/> <see cref='FileExt'/>

@@ -15,22 +15,22 @@ namespace Z0
     /// <summary>
     /// Defines a reference to a memory segment
     /// </summary>
-    public readonly struct MemorySegment : IMemorySegment, ITextual, IEquatable<MemorySegment>, IHashed
+    public readonly struct MemSeg : IMemorySegment, ITextual, IEquatable<MemSeg>, IHashed
     {
         public const byte StorageSize = 16;
 
         readonly Vector128<ulong> Segment;
 
         [MethodImpl(Inline)]
-        public unsafe MemorySegment(byte* src, ByteSize size)
+        public unsafe MemSeg(byte* src, ByteSize size)
             => Segment = Create((ulong)src, (ulong)size);
 
         [MethodImpl(Inline)]
-        public MemorySegment(MemoryAddress src, ByteSize size)
+        public MemSeg(MemoryAddress src, ByteSize size)
             => Segment = Create((ulong)src, (ulong)size);
 
         [MethodImpl(Inline)]
-        public MemorySegment(MemoryRange range)
+        public MemSeg(MemoryRange range)
             : this(range.Min, range.Size)
         {
 
@@ -126,21 +126,21 @@ namespace Z0
             => alg.hash.calc(Segment);
 
         [MethodImpl(Inline)]
-        public bool Equals(MemorySegment src)
+        public bool Equals(MemSeg src)
             => src.Segment.Equals(Segment);
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<ulong>(in MemorySegment src)
+        public static implicit operator Vector128<ulong>(in MemSeg src)
             => src.Segment;
 
         uint IHashed.Hash
             => Hash();
 
-        bool IEquatable<MemorySegment>.Equals(MemorySegment src)
+        bool IEquatable<MemSeg>.Equals(MemSeg src)
             => Equals(src);
 
         public override bool Equals(object src)
-            => src is MemorySegment x && Equals(x);
+            => src is MemSeg x && Equals(x);
 
         public override string ToString()
             => Format();
@@ -148,7 +148,7 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hash();
 
-        public static MemorySegment Empty
+        public static MemSeg Empty
             => default;
     }
 }

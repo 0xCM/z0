@@ -34,6 +34,6 @@ namespace Z0
                 let parser = HexScalarParser.Service
                 from start in parser.Parse(parts[0]).ToOption()
                 from end in parser.Parse(parts[1]).ToOption()
-                select new MemoryRange(start, end);
+                select new MemoryRange((MemoryAddress)start, (MemoryAddress)end);
     }
 }

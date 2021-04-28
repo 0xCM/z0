@@ -34,6 +34,12 @@ namespace Z0
             Encoded = src;
         }
 
+        public MemoryRange Origin
+        {
+            [MethodImpl(Inline)]
+            get => new MemoryRange(BaseAddress, Encoded.Length);
+        }
+
         public byte[] Storage
         {
             [MethodImpl(Inline)]
@@ -70,7 +76,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Uri;
         }
-
 
         public byte[] Data
         {

@@ -22,7 +22,7 @@ namespace Z0
         {
             var builder = wf.CmdBuilder();
             var archive = WfRuntime.RuntimeArchive(wf);
-            var types = array(FS.Extensions.Dll, FS.Extensions.Exe, FS.Extensions.Pdb, FS.Extensions.Lib, FS.Extensions.Xml, FS.Extensions.Json);
+            var types = array(FS.Dll, FS.Exe, FS.Pdb, FS.Lib, FS.Xml, FS.Json);
             var cmd = builder.ListFiles(label + ".build-artifacts", archive.Root, types);
             wf.Router.Dispatch(cmd);
         }

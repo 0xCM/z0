@@ -61,9 +61,9 @@ namespace Z0
                 Process(skip(sources,i), store);
         }
 
-        unsafe void Process(in MemorySegment src, in MemorySegments store)
+        unsafe void Process(in MemSeg src, Index<MemSeg> store)
         {
-            var reader = memory.reader(src.BaseAddress.Pointer<byte>(), (int)src.Length);
+            var reader = memory.reader(src.BaseAddress.Pointer<byte>(), src.Length);
             var dstA = memory.span<byte>(src.Length);
             var count = reader.ReadAll(dstA);
             Claim.eq(count,src.Length);

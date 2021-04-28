@@ -9,9 +9,8 @@ namespace Z0
 
     using static Part;
 
-    public unsafe readonly partial struct ConstBytesReader : IStorageReader<ConstBytesReader, ConstBytes256>
+    public unsafe readonly partial struct ConstBytesReader
     {
-
         public static ReadOnlySpan<Utf8Point> Utf8Points
         {
             [MethodImpl(Inline)]
@@ -24,14 +23,14 @@ namespace Z0
         internal ConstBytesReader(ConstBytes256 data)
             => Data = data;
 
-        public MemorySegment[] Refs
+        public MemSeg[] Refs
         {
             [MethodImpl(Inline)]
             get => Data.SegRefs();
         }
 
         [MethodImpl(Inline), Op]
-        public MemorySegments Segments()
+        public Index<MemSeg> Segments()
             => segments(Data);
 
         [MethodImpl(Inline), Op]
@@ -39,7 +38,7 @@ namespace Z0
             => leads(Data);
 
         [Op]
-        public ReadOnlySpan<MemoryAddress> Locations(MemorySegments store)
+        public ReadOnlySpan<MemoryAddress> Locations(Index<MemSeg> store)
             => addresses(Data, store);
 
         [MethodImpl(Inline)]
@@ -47,7 +46,7 @@ namespace Z0
             => span(Data, n);
 
         [MethodImpl(Inline)]
-        public MemorySegment Segment(byte n)
+        public MemSeg Segment(byte n)
             => segment(Data, n);
 
         [MethodImpl(Inline)]
@@ -70,7 +69,7 @@ namespace Z0
                 => ref cell(Data, n, i);
 
         [MethodImpl(Inline)]
-        public unsafe MemorySegment Segment<N>(N n = default)
+        public unsafe MemSeg Segment<N>(N n = default)
             where N : unmanaged, ITypeNat
                 => segment(Data, n);
     }

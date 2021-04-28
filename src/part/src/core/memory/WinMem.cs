@@ -19,6 +19,24 @@ namespace Z0
     {
         const string Kernel = "kernel32.dll";
 
+        [Op]
+        public static unsafe BasicMemoryInfo BasicInfo()
+        {
+            var src = new MEMORY_BASIC_INFORMATION();
+            var dst = new BasicMemoryInfo();
+            VirtualQuery(&src, ref src, new IntPtr(sizeof(MEMORY_BASIC_INFORMATION)));
+
+            dst.AllocationBase = src.AllocationBase;
+            dst.BaseAddress = src.BaseAddress;
+            dst.RegionSize = src.RegionSize;
+            dst.StackSize = (ulong)(dst.BaseAddress - dst.AllocationBase) + dst.RegionSize;
+            dst.AllocProtect = (PageProtection)src.AllocationProtect;
+            dst.Protection = (PageProtection)src.Protect;
+            dst.State = src.State;
+            dst.Type = src.Type;
+            return dst;
+        }
+
         /// <summary>
         /// Reserves, commits, or changes the state of a region of pages in the virtual address space of the calling process.
         /// Memory allocated by this function is automatically initialized to zero.
@@ -81,5 +99,9 @@ namespace Z0
 
         [DllImport(Kernel, SetLastError = true), Free]
         public static extern bool GetProcessWorkingSetSizeEx(IntPtr hProcess, out IntPtr minSize, out IntPtr maxSize, out WorkingSetFlags flags);
+
+        [DllImport(Kernel)]
+        static unsafe extern IntPtr VirtualQuery(void* address, ref MEMORY_BASIC_INFORMATION buffer, IntPtr length);
+
    }
 }

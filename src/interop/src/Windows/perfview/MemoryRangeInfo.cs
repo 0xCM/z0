@@ -4,7 +4,7 @@ namespace Windows
 {
     using System;
 
-    public struct MemorySegInfo
+    public struct MemoryRangeInfo
     {
         public ulong BaseAddress;
 

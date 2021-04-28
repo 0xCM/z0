@@ -11,11 +11,12 @@ namespace Z0
 
     partial struct memory
     {
-        public static PageBuffer page(MemoryRange range, ushort size = PageSize)
+        [Op]
+        public static PageBuffer pagebuffer(MemoryRange range, ushort size = PageSize)
             => new PageBuffer(range, memory.alloc<byte>(size));
 
         [MethodImpl(Inline), Op]
-        public static PageBuffer page(MemoryRange range, Index<byte> content)
-            => new PageBuffer(range, content);
+        public static PageBuffer pagebuffer(MemoryRange range, Index<byte> data)
+            => new PageBuffer(range, data);
     }
 }
