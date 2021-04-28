@@ -17,7 +17,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [Op]
         public static string format(IToolCmd src)
         {
             var count = src.Args.Count;

@@ -1305,9 +1305,13 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var experiment = ExtractExperiment.create(Wf);
-            experiment.Run();
+            // var experiment = ExtractExperiment.create(Wf);
+            // experiment.Run();
 
+            var modules = Wf.AppModules();
+            var cpu = Wf.ApiCatalog.PartCatalogs(PartId.Cpu).Single();
+            var source = modules.SymbolSource(cpu.ComponentPath);
+            Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
         }
 
         // void GetMethodInfo()

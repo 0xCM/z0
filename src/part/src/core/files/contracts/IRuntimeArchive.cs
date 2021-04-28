@@ -14,9 +14,6 @@ namespace Z0
         FS.Files Files
              => Root.Files(false, Exe, Dll, Pdb, Json, Xml).Where(x => !x.Name.Contains("System.Private.CoreLib"));
 
-        IModuleArchive Modules
-            => ModuleArchive.create(Root);
-
         FS.Files ManagedDllFiles
             => ArchiveFiles().Where(x => FS.managed(x) && x.Is(Dll)).Array();
 
@@ -46,6 +43,5 @@ namespace Z0
 
         FS.Files PdbFiles
             => ArchiveFiles().Where(x => x.Is(Pdb)).Array();
-
     }
 }

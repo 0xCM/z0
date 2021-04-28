@@ -20,9 +20,9 @@ namespace Z0.Tooling
         {
             var paths = root.list<FS.FilePath>();
             var archive = ModuleArchive.create(src);
-            var exe = archive.NativeExeFiles().Array();
-            var lib = archive.StaticLibs().Array();
-            var dll = archive.NativeDllFiles().Array();
+            var exe = archive.NativeExeFiles();
+            var lib = archive.StaticLibs();
+            var dll = archive.NativeDllFiles();
             var sid = Identifier.Empty;
             var cmd = DumpBin.CmdId.None;
             var ext = FS.FileExt.Empty;

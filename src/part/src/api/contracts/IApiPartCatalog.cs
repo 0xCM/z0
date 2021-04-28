@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The defining assembly
         /// </summary>
-        Assembly Owner {get;}
+        Assembly Component {get;}
 
         /// <summary>
         /// The operation hosts
@@ -50,6 +50,9 @@ namespace Z0
         /// </summary>
         Index<MethodInfo> Operations {get;}
 
+        FS.FilePath ComponentPath
+            => FS.path(Component.Location);
+
         bool Host(ApiHostUri uri, out IApiHost host)
             => ApiHosts.Host(uri, out host);
 
@@ -57,7 +60,7 @@ namespace Z0
         /// The component's manifest module
         /// </summary>
         Module ManifestModule
-            => Owner.ManifestModule;
+            => Component.ManifestModule;
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identified assembly

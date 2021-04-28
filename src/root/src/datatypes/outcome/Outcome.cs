@@ -97,8 +97,12 @@ namespace Z0
             => combine(a,b);
 
         [MethodImpl(Inline)]
-        public static implicit operator Outcome(bool success)
-            => new Outcome(success);
+        public static implicit operator Outcome(bool src)
+            => new Outcome(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator bool(Outcome src)
+            => src.Ok;
 
         [MethodImpl(Inline)]
         public static implicit operator Outcome(Exception e)
@@ -120,9 +124,6 @@ namespace Z0
         public static bool operator false(Outcome src)
             => src.Ok == false;
 
-        [MethodImpl(Inline)]
-        public static implicit operator bool(Outcome src)
-            => src.Ok;
 
         public static Outcome Success
         {

@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The assembly that defines and owns the catalog
         /// </summary>
-        public Assembly Owner {get;}
+        public Assembly Component {get;}
 
         /// <summary>
         /// The data types defined by the assembly
@@ -54,7 +54,7 @@ namespace Z0
         public ApiPartCatalog(PartId part, Assembly component, ApiRuntimeType[] apitypes, IApiHost[] apihosts, Type[] svchosts)
         {
             PartId = part;
-            Owner = component;
+            Component = component;
             ApiTypes = apitypes;
             OperationHosts = apihosts.Map(h => (IApiHost)h);
             ServiceHosts = svchosts;
@@ -65,7 +65,7 @@ namespace Z0
         public Module ManifestModule
         {
             [MethodImpl(Inline)]
-            get => Owner.ManifestModule;
+            get => Component.ManifestModule;
         }
 
         /// <summary>
