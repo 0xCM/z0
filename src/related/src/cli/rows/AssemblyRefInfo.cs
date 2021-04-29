@@ -12,11 +12,9 @@ namespace Z0
         /// <summary>
         /// Captures a dependency relationship between two assemblies
         /// </summary>
-        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        [Record(CliTableKind.AssemblyRef), StructLayout(LayoutKind.Sequential)]
         public struct AssemblyRefInfo : IRecord<AssemblyRefInfo>
         {
-            public const string TableId = "image.assemblyrefs";
-
             public AssemblyName Source;
 
             public AssemblyName Target;

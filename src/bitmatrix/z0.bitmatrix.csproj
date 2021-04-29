@@ -9,7 +9,7 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />
-    <ProjectReference Include="$(Blocked)" />
+    <ProjectReference Include="$(Calc)" />
   </ItemGroup>
 
 </Project>

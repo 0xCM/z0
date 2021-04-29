@@ -1323,13 +1323,10 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var experiment = ExtractExperiment.create(Wf);
-            experiment.Run();
-            // var component = Parts.Cpu.Assembly;
-            // using var provider = ImageMetadata.provider(component);
-            // var reader = provider.GetMetadataReader();
-            // var defs = reader.MethodDefinitions.Select(x => memory.uint32(x));
-            // root.iter(defs, def => Wf.Row(def));
+            // var experiment = ExtractExperiment.create(Wf);
+            // experiment.Run();
+
+            ListPdbMethods();
 
         }
 

@@ -20,5 +20,12 @@ namespace Z0
             HResult result = src.Source.GetToken(out var token);
             return result ? token : CliToken.Empty;
         }
+
+        [Op]
+        public static uint SeqPointCount(Method src)
+        {
+            HResult result = src.Source.GetSequencePointCount(out var count);
+            return result ? (uint)count : 0;
+        }
     }
 }

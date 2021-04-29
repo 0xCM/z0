@@ -17,6 +17,25 @@ namespace Z0
     using static memory;
     using static Images;
 
+    public readonly struct ImageRowIndex
+    {
+        readonly Index<CliTableKind,Index<Address32>> Data;
+
+        public ImageRowIndex(Index<CliTableKind,Index<Address32>> src)
+        {
+            Data = src;
+        }
+
+        [MethodImpl(Inline)]
+        public Span<Address32> Edit(CliTableKind table)
+            => Data[table].Edit;
+
+        [MethodImpl(Inline)]
+        public uint Count(CliTableKind table)
+            => Data[table].Count;
+
+    }
+
     [ApiHost]
     public partial class ImageMetaReader : IDisposable
     {

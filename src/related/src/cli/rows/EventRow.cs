@@ -9,7 +9,7 @@ namespace Z0
 
     partial struct Images
     {
-        [Record, StructLayout(LayoutKind.Sequential)]
+        [Record(CliTableKind.Event), StructLayout(LayoutKind.Sequential)]
         public struct EventRow : IRecord<EventRow>
         {
             public RowKey Key;

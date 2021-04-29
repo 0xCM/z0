@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Pipes)" />
-    <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(BitCore)" />
   </ItemGroup>
 
 </Project>

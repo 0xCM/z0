@@ -13,7 +13,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            void Invoke(in SpanBlock8<S> a, in SpanBlock8<T> dst);
+            void Invoke(in SpanBlock8<S> src, in SpanBlock8<T> dst);
         }
 
         [Free]
@@ -21,7 +21,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            void Invoke(in SpanBlock16<S> a, in SpanBlock16<T> dst);
+            void Invoke(in SpanBlock16<S> src, in SpanBlock16<T> dst);
         }
 
         [Free]
@@ -29,7 +29,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            void Invoke(in SpanBlock32<S> a, in SpanBlock32<T> dst);
+            void Invoke(in SpanBlock32<S> src, in SpanBlock32<T> dst);
         }
 
         [Free]
@@ -37,16 +37,15 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            void Invoke(in SpanBlock64<S> a, in SpanBlock64<T> dst);
+            void Invoke(in SpanBlock64<S> src, in SpanBlock64<T> dst);
         }
-
 
         [Free]
         public interface IBlockedProjector128<S,T> : IBlockedFunc<W128,S,T>
             where S : unmanaged
             where T : unmanaged
         {
-            void Invoke(in SpanBlock128<S> a, in SpanBlock128<T> dst);
+            void Invoke(in SpanBlock128<S> src, in SpanBlock128<T> dst);
         }
 
         [Free]
@@ -54,7 +53,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            void Invoke(in SpanBlock256<S> a, in SpanBlock256<T> dst);
+            void Invoke(in SpanBlock256<S> src, in SpanBlock256<T> dst);
         }
 
         [Free]

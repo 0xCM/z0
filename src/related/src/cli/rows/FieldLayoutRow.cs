@@ -8,7 +8,7 @@ namespace Z0
 
     partial struct Images
     {
-        [Record, StructLayout(LayoutKind.Sequential)]
+        [Record(CliTableKind.FieldLayout), StructLayout(LayoutKind.Sequential)]
         public struct FieldLayoutRow : IRecord<FieldLayoutRow>
         {
             public RowKey Key;

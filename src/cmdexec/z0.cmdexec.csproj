@@ -15,7 +15,7 @@
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(VSvc)" />
+    <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Gen)" />
     <ProjectReference Include="$(Validity)" />
 

@@ -8,7 +8,7 @@ namespace Z0
 
     partial struct Images
     {
-        [StructLayout(LayoutKind.Sequential)]
+        [Record(CliTableKind.LocalVariable), StructLayout(LayoutKind.Sequential)]
         public struct LocalVariableRow : IRecord<LocalVariableRow>
         {
             public RowKey Key;

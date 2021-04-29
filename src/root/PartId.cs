@@ -48,6 +48,8 @@ public enum PartId : ulong
 
     Polyrand = 36,
 
+    Calc = 37,
+
     Tools = 41,
 
     UInt = 42,

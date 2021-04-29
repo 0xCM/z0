@@ -9,7 +9,7 @@ namespace Z0
 
     partial struct Images
     {
-        [Record, StructLayout(LayoutKind.Sequential)]
+        [Record(CliTableKind.EncMap), StructLayout(LayoutKind.Sequential)]
         public struct EncMapRow : IRecord<EncMapRow>
         {
             public RowKey Key;

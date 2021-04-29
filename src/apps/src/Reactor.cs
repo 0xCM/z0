@@ -65,11 +65,5 @@ namespace Z0
         public void ShowSupported()
             => root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
 
-
-        void Run(in ShowConfigCmd cmd)
-        {
-            var settings = Wf.Settings;
-            Wf.Row(settings.Format());
-        }
     }
 }

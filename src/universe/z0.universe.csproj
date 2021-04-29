@@ -15,9 +15,9 @@
     <ProjectReference Include="$(BitMatrix)" />
     <ProjectReference Include="$(BitSpans)" />
     <ProjectReference Include="$(BitStrings)" />
-    <ProjectReference Include="$(BitSvc)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Blocked)" />
+
+    <ProjectReference Include="$(Calc)" />
 
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Circuits)" />
@@ -45,7 +45,6 @@
     <ProjectReference Include="$(Logix)" />
 
     <ProjectReference Include="$(Math)" />
-    <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Minidump)" />
 
     <ProjectReference Include="$(Nats)" />
@@ -60,8 +59,6 @@
     <ProjectReference Include="$(Term)" />
 
     <ProjectReference Include="$(Validity)" />
-
-    <ProjectReference Include="$(VSvc)" />
 
     <ProjectReference Include="$(Xed)" />
 

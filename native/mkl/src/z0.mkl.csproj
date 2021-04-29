@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Cpu)" />
   </ItemGroup>

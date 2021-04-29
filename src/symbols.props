@@ -31,6 +31,7 @@
     <Blocked>$(Src)blocked/z0.blocked.csproj</Blocked>
     <BitMasks>$(Src)bitmasks/z0.bitmasks.csproj</BitMasks>
 
+    <Calc>$(Src)calc/z0.calc.csproj</Calc>
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <Check>$(Src)check/z0.check.csproj</Check>
     <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>

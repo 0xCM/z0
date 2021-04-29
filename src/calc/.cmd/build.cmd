@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=vsvc
+set ProjectId=calc
 call %ControlScripts%\build-lib.cmd

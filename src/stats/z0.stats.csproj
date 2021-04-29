@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Cpu)" />
 
