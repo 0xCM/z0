@@ -15,7 +15,7 @@ namespace Z0
     partial class PeTableReader
     {
         [MethodImpl(Inline), Op]
-        internal static PeTableReader cover(ReaderState src)
+        internal static PeTableReader cover(PeStream src)
             => new PeTableReader(src);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         {
             var stream = File.OpenRead(src.Name);
             var reader = new PEReader(stream);
-            return new PeTableReader(new ReaderState(stream, reader));
+            return new PeTableReader(new PeStream(stream, reader));
         }
     }
 }

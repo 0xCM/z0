@@ -50,7 +50,7 @@ namespace Z0
             get => _Parts;
         }
 
-        public ReadOnlySpan<Assembly> PartComponents
+        public Index<Assembly> Components
         {
             [MethodImpl(Inline)]
             get => _PartComponents;
@@ -62,19 +62,13 @@ namespace Z0
             get => _PartIdentities;
         }
 
-        public ReadOnlySpan<IApiPartCatalog> PartCatalogs
-        {
-            [MethodImpl(Inline)]
-            get => _Catalogs.View;
-        }
-
         public ReadOnlySpan<IApiHost> ApiHosts
         {
             [MethodImpl(Inline)]
             get => _ApiHosts;
         }
 
-        public ReadOnlySpan<MethodInfo> Operations
+        public ReadOnlySpan<MethodInfo> Methods
         {
             [MethodImpl(Inline)]
             get => _Operations;
@@ -86,17 +80,12 @@ namespace Z0
         PartId[] IApiRuntimeCatalog.PartIdentities
             => _PartIdentities;
 
-        Index<Assembly> IApiRuntimeCatalog.PartComponents
-            => _PartComponents;
-
         ApiPartCatalogs IApiRuntimeCatalog.Catalogs
             => _Catalogs;
 
         IApiHost[] IApiRuntimeCatalog.ApiHosts
             => _ApiHosts;
 
-        MethodInfo[] IApiRuntimeCatalog.Operations
-            => _Operations;
 
         public ApiRuntimeCatalog(Index<IPart> parts, Index<Assembly> components, ApiPartCatalogs catalogs, Index<IApiHost> hosts, Index<PartId> partIds, Index<MethodInfo> ops)
         {
@@ -108,7 +97,7 @@ namespace Z0
             _Operations = ops;
         }
 
-        Index<IApiHost> IApiCatalogQueries.FindHosts(ReadOnlySpan<ApiHostUri> src)
+        public Index<IApiHost> FindHosts(ReadOnlySpan<ApiHostUri> src)
         {
             var dst = root.list<IApiHost>();
             var search = _ApiHosts;
@@ -133,10 +122,10 @@ namespace Z0
             return dst.ToArray();
         }
 
-        Option<Assembly> IApiCatalogQueries.FindComponent(PartId id)
+        public Option<Assembly> FindComponent(PartId id)
             => _PartComponents.Where(c => c.Id() == id).FirstOrDefault();
 
-        Option<IApiHost> IApiCatalogQueries.FindHost(ApiHostUri uri)
+        public Option<IApiHost> FindHost(ApiHostUri uri)
             => root.option(_ApiHosts.Where(h => h.HostUri == uri).FirstOrDefault());
 
         bool FindHost(ApiHostUri uri, out IApiHost host)
@@ -145,7 +134,7 @@ namespace Z0
             return host != null;
         }
 
-        bool IApiCatalogQueries.FindMethod(OpUri uri, out MethodInfo method)
+        public bool FindMethod(OpUri uri, out MethodInfo method)
         {
             if(FindHost(uri.Host, out var host))
                 return host.FindMethod(uri, out method);
@@ -153,7 +142,7 @@ namespace Z0
             return false;
         }
 
-        Index<IApiPartCatalog> IApiCatalogQueries.PartCatalogs(params PartId[] parts)
+        public Index<IApiPartCatalog> PartCatalogs(params PartId[] parts)
         {
             if(parts.Length == 0)
                 return _Catalogs.Storage;
@@ -163,7 +152,7 @@ namespace Z0
                        select c;
         }
 
-        Index<IApiHost> IApiCatalogQueries.PartHosts(params PartId[] parts)
+        public Index<IApiHost> PartHosts(params PartId[] parts)
         {
             if(parts.Length == 0)
                 return _ApiHosts;

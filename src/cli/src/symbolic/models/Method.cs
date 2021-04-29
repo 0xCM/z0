@@ -6,16 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
     using Microsoft.DiaSymReader;
 
     using static Part;
 
+    using api = AppSymbolics;
+
     partial struct AppSymbolics
     {
-        public readonly struct Method
+        public readonly struct Method : IAppSymAdapter<Method, ISymUnmanagedMethod>
         {
-            readonly ISymUnmanagedMethod Source;
+            internal readonly ISymUnmanagedMethod Source;
 
             [MethodImpl(Inline)]
             internal Method(ISymUnmanagedMethod src)
@@ -31,6 +32,12 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => Source != null;
+            }
+
+            public CliToken Token
+            {
+                [MethodImpl(Inline)]
+                get => api.token(this);
             }
 
             [MethodImpl(Inline)]

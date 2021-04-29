@@ -6,29 +6,27 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using System.Runtime.CompilerServices;
+
     using Microsoft.DiaSymReader;
 
     using static AppSymbolics;
+    using static Part;
 
     public class AppSymReader
     {
         public SymbolSource Source {get;}
 
-        ISymUnmanagedReader5 Reader {get;}
+        internal ISymUnmanagedReader5 Provider {get;}
 
-        public AppSymReader(SymbolSource src, ISymUnmanagedReader5 reader)
+        [MethodImpl(Inline)]
+        public AppSymReader(SymbolSource src, ISymUnmanagedReader5 provider)
         {
             Source = src;
-            Reader = reader;
+            Provider = provider;
         }
 
         public HResult<Method> Method(CliToken token)
-        {
-            HResult result = Reader.GetMethod((int)token, out var accessor);
-            if(result)
-                return method(accessor);
-            else
-                return result;
-        }
+            => method(this,token);
     }
 }

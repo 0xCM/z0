@@ -39,7 +39,7 @@ namespace Z0
         {
             var dst = FieldMetadataPath(src);
             var flow = Wf.EmittingTable<MemberField>(dst);
-            using var reader = ImageMetaReader.create(FS.path(src.Location));
+            using var reader = ImageMetadata.reader(FS.path(src.Location));
             var fields = reader.ReadFields();
             var count = (uint)fields.Length;
             var formatter = Tables.formatter<MemberField>(MemberField.RenderWidths);

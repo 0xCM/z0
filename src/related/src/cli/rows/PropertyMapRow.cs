@@ -1,0 +1,22 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.InteropServices;
+
+    partial struct Images
+    {
+        [StructLayout(LayoutKind.Sequential)]
+        public struct PropertyMapRow : IRecord<PropertyMapRow>
+        {
+            public RowKey Key;
+
+            public RowKey Parent;
+
+            public RowKey PropertyList;
+        }
+    }
+}

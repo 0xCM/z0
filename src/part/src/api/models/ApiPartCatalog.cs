@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The host-defined operations
         /// </summary>
-        public Index<MethodInfo> Operations {get;}
+        public Index<MethodInfo> Methods {get;}
 
         public ApiPartCatalog(PartId part, Assembly component, ApiRuntimeType[] apitypes, IApiHost[] apihosts, Type[] svchosts)
         {
@@ -59,7 +59,7 @@ namespace Z0
             OperationHosts = apihosts.Map(h => (IApiHost)h);
             ServiceHosts = svchosts;
             ApiHosts = apihosts;
-            Operations = apihosts.SelectMany(x => x.Methods);
+            Methods = apihosts.SelectMany(x => x.Methods);
         }
 
         public Module ManifestModule

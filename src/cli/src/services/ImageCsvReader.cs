@@ -32,9 +32,7 @@ namespace Z0
 
             using var reader = src.Reader();
             var size = src.Size;
-
             var header = reader.ReadLine();
-
             var record = default(ImageContent);
             var @continue = true;
             while(@continue)

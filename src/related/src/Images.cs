@@ -18,6 +18,15 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Images
     {
+        [MethodImpl(Inline), Op]
+        public static DirectorySpec directory(Address32 rva, uint size)
+        {
+            var dst = new DirectorySpec();
+            dst.Rva = rva;
+            dst.Size = size;
+            return dst;
+        }
+
         /// <summary>
         /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>
         /// </summary>
@@ -57,7 +66,6 @@ namespace Z0
         [Op]
         public static Index<LocatedImage> locate(Process src)
             => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
-
 
         [Op]
         public static Index<ProcessModuleRow> modules(Process src)

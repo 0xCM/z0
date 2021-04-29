@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Reflection;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
@@ -18,7 +19,7 @@ namespace Z0
 
         FS.Files ManagedSources {get;}
 
-        Assembly[] Components {get;}
+        Index<Assembly> Components {get;}
 
         IApiRuntimeCatalog RuntimeCatalog {get;}
     }

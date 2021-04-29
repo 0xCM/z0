@@ -20,17 +20,16 @@ namespace Z0
         internal static ReadOnlySpan<R> empty<R>()
             => ReadOnlySpan<R>.Empty;
 
-        readonly ReaderState State;
+        readonly PeStream Stream;
 
         [MethodImpl(Inline)]
-        internal PeTableReader(ReaderState src)
-            => State = src;
+        internal PeTableReader(PeStream src)
+            => Stream = src;
 
         public void Dispose()
-            => State.Dispose();
+            => Stream.Dispose();
 
-        [MethodImpl(Inline), Op]
-        public static string ustring(MetadataReader reader, UserStringHandle handle)
+        public static string UserString(MetadataReader reader, UserStringHandle handle)
             => reader.GetUserString(handle);
 
         internal static TableIndex? index(Handle handle)

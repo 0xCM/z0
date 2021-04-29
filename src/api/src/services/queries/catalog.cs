@@ -15,7 +15,7 @@ namespace Z0
                 catalogs,
                 catalogs.SelectMany(c => c.ApiHosts.Storage),
                 parts.Select(p => p.Id),
-                catalogs.SelectMany(x => x.Operations)
+                catalogs.SelectMany(x => x.Methods)
                 );
             return dst;
         }

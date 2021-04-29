@@ -11,6 +11,11 @@ namespace Z0
 
     public interface IApiCatalogQueries
     {
+    }
+
+    [Free]
+    public interface IApiRuntimeCatalog
+    {
         Option<IApiHost> FindHost(ApiHostUri uri);
 
         Option<Assembly> FindComponent(PartId id);
@@ -22,21 +27,17 @@ namespace Z0
         Index<IApiHost> PartHosts(params PartId[] parts);
 
         Index<IApiHost> FindHosts(ReadOnlySpan<ApiHostUri> src);
-    }
 
-    [Free]
-    public interface IApiRuntimeCatalog : IApiCatalogQueries
-    {
         IPart[] Parts {get;}
 
         PartId[] PartIdentities {get;}
 
-        Index<Assembly> PartComponents {get;}
+        Index<Assembly> Components {get;}
 
         ApiPartCatalogs Catalogs {get;}
 
         IApiHost[] ApiHosts {get;}
 
-        MethodInfo[] Operations {get;}
+        ReadOnlySpan<MethodInfo> Methods {get;}
     }
 }

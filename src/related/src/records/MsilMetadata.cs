@@ -6,30 +6,27 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct MsilMetadata : IRecord<MsilMetadata>
     {
-        [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct MsilMetadata : IRecord<MsilMetadata>
-        {
-            public const string TableId = "image.msil";
+        public const string TableId = "image.msil";
 
-            public const byte FieldCount = 8;
+        public const byte FieldCount = 8;
 
-            public FS.FileName ImageName;
+        public FS.FileName ImageName;
 
-            public CliToken Token;
+        public CliToken Token;
 
-            public Address32 MethodRva;
+        public Address32 MethodRva;
 
-            public ByteSize BodySize;
+        public ByteSize BodySize;
 
-            public ByteSize MaxStack;
+        public ByteSize MaxStack;
 
-            public bool LocalInit;
+        public bool LocalInit;
 
-            public ClrMemberName MethodName;
+        public ClrMemberName MethodName;
 
-            public BinaryCode Code;
-        }
+        public BinaryCode Code;
     }
 }

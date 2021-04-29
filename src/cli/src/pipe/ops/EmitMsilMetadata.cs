@@ -40,10 +40,10 @@ namespace Z0
         {
             var methods = Index<MsilMetadata>.Empty;
             var srcPath = FS.path(src.Location);
-            if(ImageMetaReader.HasMetadata(srcPath))
+            if(ImageMetadata.valid(srcPath))
             {
                 var processing = Wf.Running(srcPath);
-                using var reader = ImageMetaReader.create(srcPath);
+                using var reader = ImageMetadata.reader(srcPath);
                 methods = reader.ReadMsil();
                 var view = methods.View;
                 var count = (uint)methods.Length;

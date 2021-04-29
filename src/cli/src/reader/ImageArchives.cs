@@ -50,21 +50,5 @@ namespace Z0
         [Op]
         public static IFileArchive build(IWfRuntime wf)
             => new FileArchive(wf.Db().BuildArchiveRoot());
-
-        [MethodImpl(Inline), Op]
-        public unsafe static MetadataReaderProvider provider(byte* pStart, ByteSize size)
-            => MetadataReaderProvider.FromMetadataImage(pStart, size);
-
-        [MethodImpl(Inline), Op]
-        public static MetadataReaderProvider provider(Stream stream, MetadataStreamOptions options = MetadataStreamOptions.Default)
-            => MetadataReaderProvider.FromMetadataStream(stream, options);
-
-        [MethodImpl(Inline), Op]
-        public unsafe static MetadataReaderProvider pdbprovider(byte* pSrc, ByteSize size)
-            => MetadataReaderProvider.FromPortablePdbImage(pSrc, size);
-
-        [MethodImpl(Inline), Op]
-        public static MetadataReaderProvider pdbprovider(Stream src, MetadataStreamOptions options = MetadataStreamOptions.Default)
-            => MetadataReaderProvider.FromPortablePdbStream(src, options);
     }
 }

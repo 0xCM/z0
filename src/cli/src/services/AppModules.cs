@@ -12,12 +12,6 @@ namespace Z0
     using static memory;
     using static AppSymbolics;
 
-    public static partial class XTend
-    {
-        public static AppModules AppModules(this IWfRuntime wf)
-            => Z0.AppModules.create(wf);
-    }
-
     public class AppModules : AppService<AppModules>
     {
         public SymbolSource SymbolSource(FileModule src)
@@ -37,7 +31,7 @@ namespace Z0
         public SymbolSource SymbolSource(FS.FilePath module)
             => AppSymbolics.source(module);
 
-        public ModuleArchive Modules()
+        public ModuleArchive Archive()
             => ModuleArchive.create(FS.path(root.controller().Location).FolderPath);
     }
 }

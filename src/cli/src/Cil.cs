@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
+
+    using Msil;
 
     using static Part;
     using static memory;
-
-    using Msil;
-    using System.Reflection.Metadata;
 
     [ApiHost(ApiNames.Cil, true)]
     public readonly partial struct Cil
@@ -38,5 +38,4 @@ namespace Z0
         Cil(OpCodeInfo[] src)
             => Data = src;
     }
-
 }

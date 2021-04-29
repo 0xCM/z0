@@ -15,7 +15,7 @@ namespace Z0
     partial class PeTableReader
     {
         [MethodImpl(Inline), Op]
-        public static int ConstantCount(in ReaderState state)
+        public static int ConstantCount(in PeStream state)
             => state.Reader.GetTableRowCount(I.Constant);
     }
 }

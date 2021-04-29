@@ -17,7 +17,7 @@ namespace Z0
         public Index<ResEmission> EmitAssetContent()
         {
             var outer = Wf.Running("Emitting reference data");
-            var components = Wf.ApiCatalog.PartComponents;
+            var components = Wf.ApiCatalog.Components;
             var descriptors = Resources.descriptors(components).SelectMany(x => x.Storage).View;
             var count = descriptors.Length;
             var root = Db.RefDataRoot();

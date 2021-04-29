@@ -39,6 +39,12 @@ namespace Z0
             get => Definition.GetSimpleName();
         }
 
+        public MemSeg Metadata
+        {
+            [MethodImpl(Inline)]
+            get => Clr.metadata(this);
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

@@ -32,13 +32,12 @@ namespace Z0
         {
             var dst  = alloc<MemoryRegion>((uint)src.Length);
             var traverser = create(src,false);
-            var filter = new RegionFilter(dst,protect);
+            var filter = new MemoryRegionFilter(dst,protect);
             var size = traverser.Traverse(filter);
             return filter.Emit();
         }
 
-
-        unsafe struct RegionFilter : IReceiver<MemoryRegion>
+        unsafe struct MemoryRegionFilter : IReceiver<MemoryRegion>
         {
             readonly Index<MemoryRegion> Accepted;
 
@@ -47,7 +46,7 @@ namespace Z0
             uint Position;
 
             [MethodImpl(Inline)]
-            public RegionFilter(Index<MemoryRegion> dst, PageProtection protection)
+            public MemoryRegionFilter(Index<MemoryRegion> dst, PageProtection protection)
             {
                 Accepted = dst;
                 Protection = protection;

@@ -112,7 +112,7 @@ namespace Z0.Asm
 
         void ShowPartComponents()
         {
-            var src = Clr.adapt(Wf.ApiCatalog.PartComponents);
+            var src = Clr.adapt(Wf.ApiCatalog.Components);
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var item = ref skip(src,i);
@@ -858,12 +858,12 @@ namespace Z0.Asm
 
         public void CheckClrKeys()
         {
-            var types = Wf.ApiCatalog.PartComponents.Storage.Types();
+            var types = Wf.ApiCatalog.Components.Storage.Types();
             var unique = root.hashset<Type>();
             var count = unique.Include(types).Where(x => x).Count();
             Wf.Row($"{types.Length} ?=? {count}");
 
-            var fields = Wf.ApiCatalog.PartComponents.Storage.DeclaredStaticFields();
+            var fields = Wf.ApiCatalog.Components.Storage.DeclaredStaticFields();
             root.iter(fields, f => Wf.Row(f.Name + ": " + f.FieldType.Name));
 
         }
@@ -1301,17 +1301,36 @@ namespace Z0.Asm
             Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
         }
 
+        void ListPdbMethods()
+        {
+            var modules = Wf.AppModules();
+            var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Cpu).Single();
+            var source = modules.SymbolSource(catalog.ComponentPath);
+            Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
+            var reader = AppSymbolics.reader(source);
+            var methods = catalog.Methods;
+            foreach(var info in methods)
+            {
+                var method = reader.Method(info.MetadataToken);
+                if(method)
+                {
+                    Wf.Row(method.Payload.Token);
+                }
+            }
+
+        }
 
 
         public void Run()
         {
             // var experiment = ExtractExperiment.create(Wf);
             // experiment.Run();
+            var component = Parts.Cpu.Assembly;
+            using var provider = ImageMetadata.provider(component);
+            var reader = provider.GetMetadataReader();
+            var defs = reader.MethodDefinitions.Select(x => memory.uint32(x));
+            root.iter(defs, def => Wf.Row(def));
 
-            var modules = Wf.AppModules();
-            var cpu = Wf.ApiCatalog.PartCatalogs(PartId.Cpu).Single();
-            var source = modules.SymbolSource(cpu.ComponentPath);
-            Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
         }
 
         // void GetMethodInfo()

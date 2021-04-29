@@ -71,7 +71,7 @@ namespace Z0
             Controller = config.Control;
             AppName = config.Shell.AppName;
             Router = new WfCmdRouter(this);
-            Services = new WfServices(this, Env, ApiCatalog.PartComponents);
+            Services = new WfServices(this, Env, ApiCatalog.Components);
         }
 
         public IWfRuntime WithSource(IPolySource random)

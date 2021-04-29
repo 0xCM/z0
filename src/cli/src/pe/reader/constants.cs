@@ -20,14 +20,14 @@ namespace Z0
 
         public ReadOnlySpan<ImageConstant> constants(ref uint counter)
         {
-            var reader = State.Reader;
-            var count = ConstantCount(State);
+            var reader = Stream.Reader;
+            var count = ConstantCount(Stream);
             var dst = span<ImageConstant>(count);
             for(var i=1u; i<=count; i++)
             {
                 var k = ConstantHandle(i);
                 var entry = reader.GetConstant(k);
-                var parent = index(State, entry.Parent);
+                var parent = index(Stream, entry.Parent);
                 var blob = reader.GetBlobBytes(entry.Value);
                 ref var target = ref seek(dst, i - 1u);
                 target.Sequence = counter++;

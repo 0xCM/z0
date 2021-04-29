@@ -18,7 +18,8 @@ namespace Z0
 
         public FS.Files ManagedSources {get;}
 
-        public Assembly[] Components {get;}
+        public Index<Assembly> Components
+            => RuntimeCatalog.Components;
 
         public IApiRuntimeCatalog RuntimeCatalog {get;}
 
@@ -28,7 +29,6 @@ namespace Z0
             Source = control.FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             RuntimeCatalog = ApiDeployment.catalog(Source,parts);
-            Components = RuntimeCatalog.PartComponents;
         }
 
         public ApiParts(FS.FolderPath source)
@@ -36,7 +36,6 @@ namespace Z0
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             RuntimeCatalog = ApiDeployment.catalog(ManagedSources);
-            Components = RuntimeCatalog.PartComponents;
         }
     }
 }

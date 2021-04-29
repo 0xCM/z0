@@ -48,7 +48,7 @@ namespace Z0
         /// <summary>
         /// The operations defined by <see cref='ApiHosts'/>
         /// </summary>
-        Index<MethodInfo> Operations {get;}
+        Index<MethodInfo> Methods {get;}
 
         FS.FilePath ComponentPath
             => FS.path(Component.Location);

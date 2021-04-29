@@ -36,10 +36,10 @@ namespace Z0
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in src)
             {
-                if(!ImageMetaReader.HasMetadata(file))
+                if(!ImageMetadata.valid(file))
                     continue;
 
-                using var reader = ImageMetaReader.create(file);
+                using var reader = ImageMetadata.reader(file);
                 var headers = reader.ReadSectionHeders();
                 var count = headers.Length;
                 var view = headers.View;

@@ -13,7 +13,7 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static ClrTableEntry? index(in ReaderState state, Handle handle)
+        public static ClrTableEntry? index(in PeStream state, Handle handle)
         {
             if(!handle.IsNil)
             {

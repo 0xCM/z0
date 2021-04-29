@@ -14,13 +14,13 @@ namespace Z0
 
     partial struct AppSymbolics
     {
-        public sealed class AppMetadataProvider : ISymReaderMetadataProvider, IDisposable
+        public sealed class SymMetadataProvider : ISymMetadataProvider
         {
             readonly PEReader _peReader;
 
             readonly MetadataReader MetadataReader;
 
-            public AppMetadataProvider(SymbolSource source)
+            public SymMetadataProvider(SymbolSource source)
             {
                 _peReader = new PEReader(source.PeStream);
                 MetadataReader = _peReader.GetMetadataReader();
@@ -87,7 +87,6 @@ namespace Z0
             {
                 var signatureHandle = (StandaloneSignatureHandle)MetadataTokens.Handle(tkSignature);
                 var bytes = MetadataReader.GetBlobBytes(MetadataReader.GetStandaloneSignature(signatureHandle).Signature);
-
                 var pinned = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                 ppvSig = (byte*)pinned.AddrOfPinnedObject();
                 pcbSig = bytes.Length;

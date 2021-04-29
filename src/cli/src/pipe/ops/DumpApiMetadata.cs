@@ -18,7 +18,7 @@ namespace Z0
         {
             try
             {
-                if(ImageMetaReader.HasMetadata(src))
+                if(ImageMetadata.valid(src))
                 {
                     var flow = Wf.EmittingFile(dst);
                     using var stream = File.OpenRead(src.Name);
@@ -44,7 +44,7 @@ namespace Z0
         {
             var dir = Db.TableDir("image.metadump");
             dir.Clear();
-            var components = Wf.ApiCatalog.PartComponents.View;
+            var components = Wf.ApiCatalog.Components.View;
             var count = components.Length;
             for(var i=0; i<count; i++)
             {

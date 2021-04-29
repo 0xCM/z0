@@ -120,12 +120,12 @@ namespace Z0
             => new SegRef<T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(SegRef<T> lhs, SegRef<T> rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(SegRef<T> a, SegRef<T> b)
+            => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(SegRef<T> lhs, SegRef<T> rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(SegRef<T> a, SegRef<T> b)
+            => !a.Equals(b);
 
         public static SegRef<T> Empty
             => default;

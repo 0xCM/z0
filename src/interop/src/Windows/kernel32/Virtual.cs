@@ -10,9 +10,6 @@ namespace Windows
 
     partial struct Kernel32
     {
-        public static UIntPtr VirtualAlloc(uint allocSize, MemAllocType type, PageProtection protection)
-            => VirtualAlloc(lpAddress: UIntPtr.Zero, new UIntPtr(allocSize), type, protection);
-
         [DllImport(LibName, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static unsafe extern bool VirtualFree(void* lpAddress, UIntPtr sizeToFree, [MarshalAs(UnmanagedType.U4)] MemFreeType freeType);

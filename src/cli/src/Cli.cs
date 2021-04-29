@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
     using System.Reflection.Metadata;
 
     [ApiHost]
@@ -26,12 +22,5 @@ namespace Z0
     public static partial class XCmd
     {
 
-    }
-
-    public static partial class XSvc
-    {
-        [ServiceFactory]
-        public static PdbSymbolStore PdbSymbolStore(this IWfRuntime wf)
-            => Cli.symbols(wf);
     }
 }

@@ -20,32 +20,6 @@ namespace Z0
     [ApiHost]
     public partial class ImageMetaReader : IDisposable
     {
-        public static ImageMetaReader create(FS.FilePath src)
-            => new ImageMetaReader(src);
-
-        [Op]
-        public static bool create(FS.FilePath src, out ImageMetaReader dst)
-        {
-            if(HasMetadata(src))
-            {
-                dst = new ImageMetaReader(src);
-                return true;
-            }
-            else
-            {
-                dst = default;
-                return false;
-            }
-        }
-
-        [Op]
-        public static bool HasMetadata(FS.FilePath src)
-        {
-            using var stream = File.OpenRead(src.Name);
-            using var reader = new PEReader(stream);
-            return reader.HasMetadata;
-        }
-
         readonly FS.FilePath Source;
 
         readonly FileStream Stream;
@@ -139,8 +113,6 @@ namespace Z0
 
             return ClrTableEntry.Empty;
         }
-
-
 
         internal static string format(FieldAttributes src)
             => src.ToString();

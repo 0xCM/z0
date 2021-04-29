@@ -13,7 +13,7 @@ namespace Z0
     {
         public Index<SystemString> SystemStrings()
         {
-            var reader = State.Reader;
+            var reader = Stream.Reader;
             int size = reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
                 return sys.empty<SystemString>();
