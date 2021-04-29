@@ -29,7 +29,7 @@ namespace Z0
         public Index<ApiMemberCode> ParseMembers(ReadOnlySpan<ApiMemberExtract> src)
             => api.parse(Parser,src);
 
-        public bool Parse(in ApiExtractBlock src, out ApiCodeBlock code)
+        public bool Parse(in ApiMemberExtract src, out ApiMemberCode code)
             => api.parse(Parser, src, out code);
     }
 }

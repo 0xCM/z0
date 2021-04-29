@@ -167,7 +167,7 @@ namespace Z0
             try
             {
                 var flow = Wf.Running(string.Format("Attempting to match <{0}> routine addresses", extracted.Length));
-                var a = extracted.Select(x => x.Address).ToHashSet();
+                var a = extracted.Select(x => x.BaseAddress).ToHashSet();
                 if(a.Count != extracted.Length)
                 {
                     Wf.Error($"count(Extracted) = {extracted.Length} != {a.Count} = count(set(Extracted))");

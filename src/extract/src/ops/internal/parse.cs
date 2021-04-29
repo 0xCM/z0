@@ -35,20 +35,20 @@ namespace Z0
             return buffer;
         }
 
-        internal static bool parse(EP parser, in ApiExtractBlock src, out ApiCodeBlock dst)
+        internal static bool parse(EP parser, in ApiMemberExtract src, out ApiMemberCode dst)
         {
             const int Zx7Cut = 7;
-            var status = parser.Parse(src.View);
+            var status = parser.Parse(src.Block.Encoded);
             var term = failed(status) ? Fail : termcode(parser.Result);
             if(term != Fail)
             {
                 var code = locate(src.BaseAddress, parser.Parsed, term == CTC_Zx7 ? Zx7Cut : 0);
-                dst = new ApiCodeBlock(src.BaseAddress, src.OpUri, code.Storage);
+                dst = new ApiMemberCode(src.Member, new ApiCodeBlock(src.BaseAddress, src.OpUri, code));
                 return true;
             }
             else
             {
-                dst = ApiCodeBlock.Empty;
+                dst = ApiMemberCode.Empty;
                 return false;
 
             }

@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct ResolvedHost : IComparable<ResolvedHost>
     {
-        public ApiHostUri Uri {get;}
+        public ApiHostUri Host {get;}
 
         public Index<ResolvedMethod> Methods {get;}
 
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ResolvedHost(ApiHostUri uri, MemoryAddress @base, Index<ResolvedMethod> methods)
         {
-            Uri = uri;
+            Host = uri;
             Methods = methods;
             BaseAddress = @base;
         }
@@ -28,13 +28,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Uri.IsEmpty && Methods.IsEmpty;
+            get => Host == null;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Uri.IsNonEmpty && Methods.IsNonEmpty;
+            get => Host != null && Methods.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]

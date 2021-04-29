@@ -147,10 +147,9 @@ namespace Z0
             {
                 var member = located[i];
                 var method = member.Method;
-                var kind = method.KindId();
                 var id = Diviner.Identify(method);
                 var uri = ApiUri.define(ApiUriScheme.Located, member.Host, method.Name, id);
-                dst[i] = new ApiMember(uri, method, kind, member.Location);
+                dst[i] = new ApiMember(uri, method, member.Location);
             }
 
             return dst;
@@ -177,10 +176,9 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 var m = methods[i];
-                var kid = m.Method.KindId();
                 var id = Diviner.Identify(m.Method);
                 var uri = ApiUri.define(ApiUriScheme.Located, src.HostUri, m.Method.Name, id);
-                seek(dst,i) = new ApiMember(uri, m.Method, kid, address(Jit(m.Method)));
+                seek(dst,i) = new ApiMember(uri, m.Method, address(Jit(m.Method)));
 
             }
             return buffer;
@@ -205,7 +203,6 @@ namespace Z0
             var count = types.Length;
             var buffer = alloc<ApiMember>(count);
             var dst = span(buffer);
-            var @class = method.KindId();
             try
             {
                 for(var i=0u; i<count; i++)
@@ -215,7 +212,7 @@ namespace Z0
                     var address = memory.address(Jit(constructed));
                     var id = Diviner.Identify(constructed);
                     var uri = ApiUri.define(ApiUriScheme.Located, src.Host, method.Name, id);
-                    seek(dst,i) = new ApiMember(uri, constructed, @class, address);
+                    seek(dst,i) = new ApiMember(uri, constructed, address);
                 }
             }
             catch(ArgumentException e)

@@ -18,5 +18,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FolderName folder(PathPart a, PathPart b)
             => folder(a) + folder(b);
+
+        [Op]
+        public static FS.FolderName folder(PartId part)
+            => folder(part.Format());
+
     }
 }

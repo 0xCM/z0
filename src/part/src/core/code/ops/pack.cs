@@ -91,6 +91,29 @@ namespace Z0
         }
 
         [Op]
+        public static HexPack pack(ReadOnlySpan<ApiMemberExtract> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return HexPack.Empty;
+            var buffer = alloc<MemoryBlock>(count);
+
+            var max = ByteSize.Zero;
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var code = ref skip(src,i);
+                var encoded = code.Block.Encoded;
+                seek(dst,i) = memory.block(code.Origin, encoded);
+                if(encoded.Length > max)
+                    max = encoded.Length;
+            }
+
+            buffer.Sort();
+            return new HexPack(buffer, max);
+        }
+
+        [Op]
         public static HexPack pack(ReadOnlySpan<ApiExtractBlock> src, Index<MemoryBlock> buffer)
         {
             var count = src.Length;

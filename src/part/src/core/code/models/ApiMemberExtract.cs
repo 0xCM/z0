@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiMemberExtract
+    public readonly struct ApiMemberExtract : IComparable<ApiMemberExtract>
     {
         public ApiExtractBlock Block {get;}
 
@@ -41,10 +41,16 @@ namespace Z0
         public MethodInfo Method
             => Member.Method;
 
-        public MemoryAddress Address
+        public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
             get => Block.BaseAddress;
+        }
+
+        public MemoryRange Origin
+        {
+            [MethodImpl(Inline)]
+            get => Block.Origin;
         }
 
         public ApiHostUri Host
@@ -60,6 +66,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(ApiMemberExtract src)
             => Block.Equals(src.Block);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(ApiMemberExtract src)
+            => Block.BaseAddress.CompareTo(src.BaseAddress);
 
         public static ApiMemberExtract Empty
             => new ApiMemberExtract(ApiMember.Empty, ApiExtractBlock.Empty);

@@ -76,7 +76,7 @@ namespace Z0
                 {
                     var resolved = methods.ToArray().Sort();
                     var @base = first(resolved).Address;
-                    hosts.Add(new ResolvedHost(host.HostUri, @base, resolved));
+                    hosts.Add(new ResolvedHost(host, @base, resolved));
                     counter += count;
                 }
             }
@@ -98,7 +98,6 @@ namespace Z0
             Wf.Ran(flow, string.Format("Resolved {0} members from {1}", counter, src.Id));
             return result;
         }
-
 
         public uint ResolveHost(IApiHost src, List<ResolvedMethod> dst)
         {

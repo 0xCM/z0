@@ -10,9 +10,11 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    [ApiHost]
     public readonly struct Extraction
     {
-        public static MemoryBlock block(in ApiExtractBlock src, TermInfo term)
+        [Op]
+        public static MemoryBlock block(in ApiMemberCode src, TermInfo term)
         {
             if(term.IsEmpty)
                 return MemoryBlock.Empty;
@@ -21,25 +23,21 @@ namespace Z0.Asm
             var size = ByteSize.Zero;
             var modifier = skip(TermModifiers,(byte)kind);
             if(kind == TermKind.Term5A)
-            {
                 size = term.Offset + modifier;
-            }
             else
-            {
                 size = term.Offset;
-            }
 
-            var origin = new MemoryRange(src.BaseAddress, size);
-            var data = slice(src.View,0, size);
+            var origin = new MemoryRange(src.Address, size);
+            var data = slice(src.Encoded.View,0, size);
             return memory.block(origin, data.ToArray());
-
         }
 
-        public static TermInfo terminal(in ApiExtractBlock src)
+        [Op]
+        public static TermInfo terminal(in ApiMemberCode src)
         {
             const byte MaxSeg = 6;
 
-            var data = src.View;
+            var data = src.Encoded.View;
             var size = data.Length;
             var found = NotFound;
             var max = size + MaxSeg - 1;
@@ -84,10 +82,11 @@ namespace Z0.Asm
                 }
             }
 
-            return new TermInfo(kind,(uint)found);
+            return new TermInfo(kind, found);
         }
 
-        public static uint terminals(ReadOnlySpan<ApiExtractBlock> src, Span<MemoryBlock> dst)
+        [Op]
+        public static uint terminals(ReadOnlySpan<ApiMemberCode> src, Span<MemoryBlock> dst)
         {
             var count = src.Length;
             var j = 0u;
@@ -122,10 +121,10 @@ namespace Z0.Asm
         {
             public TermKind Kind {get;}
 
-            public uint Offset {get;}
+            public int Offset {get;}
 
             [MethodImpl(Inline)]
-            public TermInfo(TermKind kind, uint offset)
+            public TermInfo(TermKind kind, int offset)
             {
                 Offset = offset;
                 Kind = kind;
@@ -140,7 +139,7 @@ namespace Z0.Asm
             public bool IsNonEmpty
             {
                 [MethodImpl(Inline)]
-                get => Kind != TermKind.None && Offset != 0;
+                get => Kind != TermKind.None && Offset > 0;
             }
 
             public static TermInfo Empty
@@ -204,6 +203,8 @@ namespace Z0.Asm
 
         AsmFormatter Formatter;
 
+        HexPacks HexPacks;
+
         protected override void OnInit()
         {
             ExtractPipe = Wf.ApiExtractPipe();
@@ -212,83 +213,51 @@ namespace Z0.Asm
             Resolver = Wf.ApiResolver();
             Decoder = Wf.AsmDecoder();
             Formatter = Wf.AsmFormatter();
+            HexPacks = Wf.HexPacks();
         }
 
-        /// <summary>
-        /// Tests for a terminal opcode sequence
-        /// </summary>
-        /// <param name="a0"></param>
-        /// <param name="a1"></param>
-        /// <returns>
-        /// This follows https://github.com/microsoft/Detours/samples/disas/disas.cpp, but seems to miss a lot
-        /// </returns>
-        [MethodImpl(Inline), Op]
-        static byte terminal(byte a0, byte a1)
-        {
-            if(0xC3 == a0 && 0x00 == a1)
-                return 2;
-
-            if (0xCB == a0 || 0xC2 == a0 || 0xCA == a0 || 0xEB == a0 || 0xE9 == a0 || 0xEA == a0)
-                return 1;
-
-            if(0xff == a0 && 0x25 == a1)
-                return 2;
-
-            return 0;
-        }
-
-        void ExtractPart(IPart src, FS.FolderPath dst)
-        {
-            var resolved = Resolver.ResolvePart(src, out var _);
-            var extracted = Extractor.ExtractPart(resolved).Sort();
-            var path = dst + FS.file(string.Format("{0}.{1}", src.Id.Format(), "extracts"), FS.XPack);
-            Emit(extracted, path);
-        }
-
-        public static FS.FileName file(ApiHostUri host, string subject, FS.FileExt ext)
-            => FS.file(string.Format("{0}.{1}.{2}", host.Part.Format(), host.Name, subject), ext);
-
-        public static FS.FolderName folder(PartId part)
-            => FS.folder(part.Format());
-
-        Index<ApiExtractBlock> ExtractHost(IApiHost src, FS.FilePath dst)
+        ApiHostExtracts ExtractHost(IApiHost src, FS.FilePath dst)
         {
             var resolved = Resolver.ResolveHost(src);
             var extracted = Extractor.ExtractHost(resolved).Sort();
-            Emit(extracted, dst);
+            Emit(extracted.View, dst);
             return extracted;
         }
 
-        Index<ApiExtractBlock> ExtractHost(IApiHost src)
+        ApiHostExtracts ExtractHost(IApiHost src)
         {
             var resolved = Resolver.ResolveHost(src);
             var extracted = Extractor.ExtractHost(resolved).Sort();
             return extracted;
         }
 
-        Index<ApiCodeBlock> ParseExtracts(ReadOnlySpan<ApiExtractBlock> src)
+        Index<ApiMemberCode> ParseExtracts(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
-            var buffer = alloc<ApiCodeBlock>(count);
+            var buffer = alloc<ApiMemberCode>(count);
             ref var parsed = ref first(buffer);
             for(var i=0; i<count; i++)
                 Parser.Parse(skip(src,i), out seek(parsed,i));
             return buffer;
         }
 
-        Index<AsmInstructionBlock> DecodeParsed(ReadOnlySpan<ApiCodeBlock> src)
+        Index<AsmRoutine> DecodeParsed(ReadOnlySpan<ApiMemberCode> src)
         {
             var count = src.Length;
-            var buffer = alloc<AsmInstructionBlock>(count);
+            var buffer = alloc<AsmRoutine>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
-                Decoder.Decode(skip(src,i), out seek(dst,i));
+                var decoded = Decoder.Decode(skip(src,i));
+                if(decoded)
+                {
+                    seek(dst,i) = decoded.Value;
+                }
             }
             return buffer;
         }
 
-        uint Emit(ReadOnlySpan<ApiExtractBlock> src, FS.FilePath dst)
+        uint Emit(ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = (uint)src.Length;
             if(count == 0)
@@ -297,22 +266,22 @@ namespace Z0.Asm
             var blocks = alloc<MemoryBlock>(count);
             var found = Extraction.terminals(src, blocks);
             var packed = CodeBlocks.pack(blocks);
-            Wf.HexPacks().Emit(packed, dst);
+            HexPacks.Emit(packed, dst);
             Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
             return count;
         }
 
-        uint Emit(ReadOnlySpan<ApiCodeBlock> src, FS.FilePath dst)
+        uint Emit(ReadOnlySpan<ApiMemberExtract> src, FS.FilePath dst)
         {
             var count = (uint)src.Length;
             if(count == 0)
                 return 0;
             var packed = CodeBlocks.pack(src);
-            Wf.HexPacks().Emit(packed, dst);
+            HexPacks.Emit(packed, dst);
             return count;
         }
 
-        uint Emit(ReadOnlySpan<AsmInstructionBlock> src, FS.FilePath dst)
+        uint Emit(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
         {
             var count = (uint)src.Length;
             if(count == 0)
@@ -323,10 +292,7 @@ namespace Z0.Asm
             {
                 ref readonly var block = ref skip(src,i);
                 if(block.IsNonEmpty)
-                {
-                    writer.WriteLine(Formatter.Format(block));
-                    writer.WriteLine(RP.PageBreak160);
-                }
+                    writer.Write(Formatter.Format(block));
             }
             Wf.EmittedFile(flow,count);
 
@@ -338,22 +304,25 @@ namespace Z0.Asm
             var catalog = Wf.ApiCatalog;
             var resolved = Resolver.ResolveCatalog(catalog);
             var extracted = Extractor.ExtractParts(resolved).Sort();
-            Emit(extracted,Db.AppLog("extracts", FS.XPack));
+            Emit(extracted, Db.AppLog("extracts", FS.XPack));
         }
 
         void ExtractHosts(ApiHosts src, FS.FolderPath dir)
         {
             var count = src.Count;
+            if(count == 0)
+                return;
+
             var hosts = src.View;
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
                 var extracts = ExtractHost(host);
-                Emit(extracts, dir + file(host.HostUri, "extracts", FS.XPack));
-                var parsed = ParseExtracts(extracts);
-                Emit(parsed, dir + file(host.HostUri, "parsed", FS.XPack));
+                Emit(extracts.View, dir + FS.file(host.HostUri, "extracts", FS.XPack));
+                var parsed = ParseExtracts(extracts.View);
+                Emit(parsed, dir + FS.file(host.HostUri, "parsed", FS.XPack));
                 var decoded = DecodeParsed(parsed);
-                Emit(decoded, dir + file(host.HostUri, "decoded", FS.Asm));
+                Emit(decoded, dir + FS.file(host.HostUri, FS.Asm));
             }
         }
 
@@ -363,7 +332,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var part = ref skip(src,i);
-                var dst = dir + folder(part.PartId);
+                var dst = dir + FS.folder(part.PartId);
                 ExtractHosts(part.ApiHosts,dst);
             }
         }
@@ -372,6 +341,7 @@ namespace Z0.Asm
         {
             var catalog = Wf.ApiCatalog;
             var dir = Db.AppLogDir();
+            dir.Clear(true);
             ExtractParts(catalog.PartCatalogs(), dir);
         }
     }

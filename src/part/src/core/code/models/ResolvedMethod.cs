@@ -34,6 +34,9 @@ namespace Z0
             Address = address;
         }
 
+        public ApiMember ToApiMember()
+            => new ApiMember(Uri, Method, Address);
+
         public string Format()
             => Uri.UriText;
 

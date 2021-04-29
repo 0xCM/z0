@@ -65,7 +65,6 @@ namespace Z0
             return Product;
         }
 
-
         void Include(in ApiHexRow src)
         {
             if(src.Address.IsEmpty)

@@ -33,11 +33,11 @@ namespace Z0
 
         public ClrMethodArtifact Metadata {get;}
 
-        public ApiMember(OpUri uri, MethodInfo method, ApiClassKind kindId, MemoryAddress address)
+        public ApiMember(OpUri uri, MethodInfo method, MemoryAddress address)
         {
             Id = uri.OpId;
             OpUri = uri;
-            ApiClass = kindId;
+            ApiClass = method.KindId();
             Method = root.require(method != null, method, () => "Unfortunately, the method is null");
             BaseAddress = address;
             Host = OpUri.Host;
@@ -83,6 +83,6 @@ namespace Z0
             => BaseAddress.CompareTo(src.BaseAddress);
 
         public static ApiMember Empty
-            => new ApiMember(OpUri.Empty, EmptyVessels.EmptyMethod, 0, 0);
+            => new ApiMember(OpUri.Empty, EmptyVessels.EmptyMethod, 0);
     }
 }

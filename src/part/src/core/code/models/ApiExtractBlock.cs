@@ -52,7 +52,6 @@ namespace Z0
             get => Encoded.View;
         }
 
-
         public OpIdentity OpId
         {
              [MethodImpl(Inline)]
