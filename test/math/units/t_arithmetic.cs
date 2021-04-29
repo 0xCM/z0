@@ -14,12 +14,11 @@ namespace Z0
 
     public class t_arithmetic : t_mathsvc<t_arithmetic>
     {
-
         [MethodImpl(Inline)]
         void add_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.add(t);
+            var g = Calcs.add<T>();
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -29,7 +28,7 @@ namespace Z0
         void sub_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.sub(t);
+            var g = Calcs.sub<T>();
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -39,7 +38,7 @@ namespace Z0
         void mul_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.mul(t);
+            var g = Calcs.mul<T>();
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -49,7 +48,7 @@ namespace Z0
         void div_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.div(t);
+            var g = Calcs.div<T>();
             var validator = this.BinaryOpMatch(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -59,7 +58,7 @@ namespace Z0
         void mod_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.mod(t);
+            var g = Calcs.mod<T>();
             var validator = this.BinaryOpMatch(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -69,7 +68,7 @@ namespace Z0
         void modmul_check<T>(S.TernaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.modmul(t);
+            var g = Calcs.modmul<T>();
             var validator = this.TernaryOpMatch(true,t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -79,7 +78,7 @@ namespace Z0
         void clamp_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.clamp(t);
+            var g = Calcs.clamp<T>();
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -89,7 +88,7 @@ namespace Z0
         void inc_check<T>(S.UnaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.inc(t);
+            var g = Calcs.inc<T>();
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f, g);
             comparer.CheckSpanMatch(f, g);
@@ -99,7 +98,7 @@ namespace Z0
         void dec_check<T>(S.UnaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.dec(t);
+            var g = Calcs.dec<T>();
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f,g);
             comparer.CheckSpanMatch(f,g);
@@ -109,7 +108,7 @@ namespace Z0
         void negate_check<T>(S.UnaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.negate(t);
+            var g = Calcs.negate<T>();
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f, g);
             comparer.CheckSpanMatch(f, g);
@@ -119,7 +118,7 @@ namespace Z0
         void abs_check<T>(S.UnaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = MSvc.abs(t);
+            var g = Calcs.abs<T>();
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f,g);
             comparer.CheckSpanMatch(f,g);

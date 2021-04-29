@@ -51,7 +51,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            gspan.and(A.Content, B.Content, C.Content);
+            Calcs.and(A.Content, B.Content, C.Content);
             return ref C;
         }
 

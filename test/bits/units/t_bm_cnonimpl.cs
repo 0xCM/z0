@@ -12,7 +12,7 @@ namespace Z0
             {
                 var A = Random.BitMatrix(n32);
                 var B = BitMatrix.not(A);
-                var C = BitMatrix.from(n32, gspan.not(A.Bytes.Replicate(), A.Bytes.Replicate()));
+                var C = BitMatrix.from(n32, Calcs.not(A.Bytes.Replicate(), A.Bytes.Replicate()));
                 Claim.require(B == C);
             }
         }

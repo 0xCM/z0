@@ -1,0 +1,28 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static SFx;
+
+    partial struct CalcHosts
+    {
+        [Closures(AllNumeric), Add]
+        public readonly struct Add<T> : IBinaryOp<T>, IBinarySpanOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly T Invoke(T a, T b)
+                => gmath.add(a, b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+                => Calcs.add(a, b, dst);
+        }
+    }
+}

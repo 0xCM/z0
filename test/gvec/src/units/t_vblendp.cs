@@ -313,23 +313,23 @@ namespace Z0
 
         static Vector128<T> rrll_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.even(n2,n2,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
+                => Calcs.broadcast(BitMasks.even(n2,n2,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.odd<ulong>(n2,n2), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
+                => Calcs.broadcast(BitMasks.odd<ulong>(n2,n2), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.lsb(n2,n1,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
+                => Calcs.broadcast(BitMasks.lsb(n2,n1,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         static Vector128<T> lr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.msb(n2,n1,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
+                => Calcs.broadcast(BitMasks.msb(n2,n1,z64), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         static Vector256<T> rl_pattern<T>(N256 w, T t = default)
             where T : unmanaged
-                => Blocked.broadcast(BitMasks.lsb(n2,n1,t), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
+                => Calcs.broadcast(BitMasks.lsb(n2,n1,t), enabled(t), SpanBlocks.single<T>(w)).LoadVector();
 
         void vblendp_check<T>(Vector128<T> spec, [Caller] string title = null)
             where T : unmanaged

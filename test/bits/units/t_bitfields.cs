@@ -233,7 +233,7 @@ namespace Z0
         {
             var result = default(T);
             for(var i=0; i<src.Length; i++)
-                result = MSvc.or<T>().Invoke(result, skip(src,(uint)i));
+                result = Calcs.or<T>().Invoke(result, skip(src,(uint)i));
             return result;
         }
 
@@ -260,7 +260,7 @@ namespace Z0
 
                 BitFields.store(bf.Spec, input, dst);
 
-                gspan.sllv(dst, positions, tmp);
+                Calcs.sllv(dst, positions, tmp);
                 var result1 = or(tmp.ReadOnly());
 
                 var result2 = 0ul;

@@ -10,6 +10,7 @@ namespace Z0
 
     using static Part;
     using static BSvcHosts;
+    using static CalcHosts;
 
     partial class BSvc
     {

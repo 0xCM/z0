@@ -156,7 +156,7 @@ namespace Z0
             var xb = Random.SpanBlocks<T>(w, blocks);
             var yb = Random.SpanBlocks<T>(w, blocks);
             var zb = Z0.SpanBlocks.alloc<T>(w, blocks);
-            Blocked.or(xb,yb,zb);
+            Calcs.or(xb,yb,zb);
 
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
@@ -173,7 +173,7 @@ namespace Z0
             var xb = Random.SpanBlocks<T>(w, blocks);
             var yb = Random.SpanBlocks<T>(w, blocks);
             var zb = Z0.SpanBlocks.alloc<T>(w, blocks);
-            Blocked.or(xb,yb,zb);
+            Calcs.or(xb,yb,zb);
 
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);

@@ -13,16 +13,16 @@ namespace Z0
     {
         public void check_blocks()
         {
-            var methods = typeof(Blocked).DeclaredMethods().Tagged<OpAttribute>().WithName("add");
-            foreach(var method in methods)
-            {
-                foreach(var t in method.ParameterTypes())
-                {
-                    Claim.yea(t.IsSegmented(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
-                    var width = ApiIdentity.width(t);
-                    Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
-                }
-            }
+            // var methods = typeof(Blocked).DeclaredMethods().Tagged<OpAttribute>().WithName("add");
+            // foreach(var method in methods)
+            // {
+            //     foreach(var t in method.ParameterTypes())
+            //     {
+            //         Claim.yea(t.IsSegmented(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
+            //         var width = ApiIdentity.width(t);
+            //         Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
+            //     }
+            // }
         }
 
         public void vbsll_imm_handle()

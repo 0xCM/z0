@@ -16,7 +16,7 @@ namespace Z0.Mkl.Test
             mkl.mul(lhs,rhs, ref dst1);
 
             var dst2 = lhs.Replicate();
-            gspan.mul(lhs,rhs, dst2.Unblocked);
+            Calcs.mul(lhs,rhs, dst2.Unblocked);
             Claim.require(dst1 == dst2);
         }
 
@@ -28,7 +28,7 @@ namespace Z0.Mkl.Test
             mkl.mul(lhs,rhs, ref dst1);
 
             var dst2 = lhs.Replicate();
-            gspan.mul(lhs.Unsized,rhs.Unsized, dst2.Unsized);
+            Calcs.mul(lhs.Unsized,rhs.Unsized, dst2.Unsized);
             Claim.require(dst1 == dst2);
         }
 
@@ -40,7 +40,7 @@ namespace Z0.Mkl.Test
 
             var sw1 = Time.stopwatch(true);
             for(var i=0; i<cycles; i++)
-                gspan.mul(lhs1,rhs1, dst1.Unblocked);
+                Calcs.mul(lhs1,rhs1, dst1.Unblocked);
             var time1 = BenchmarkRecord.Define(cycles, Time.snapshot(sw1), "gmath");
 
             var lhs2 = lhs1.Replicate();

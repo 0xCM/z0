@@ -134,7 +134,7 @@ namespace Z0
 
 
                 var v3 = RowVectors.blockload(sub(v1.Unsized,v2.Unsized), n);
-                Blocked.sub(v1, v2, ref v1);
+                Calcs.sub(v1, v2, ref v1);
                 Claim.require(v3 == v1);
             }
         }
@@ -152,7 +152,7 @@ namespace Z0
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
                 sw.Start();
-                Blocked.sub(v1, v2, ref v1);
+                Calcs.sub(v1, v2, ref v1);
                 sw.Stop();
             }
             ReportBenchmark(opname,opcount,sw.Elapsed);

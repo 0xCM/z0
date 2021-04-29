@@ -15,7 +15,7 @@ namespace Z0
             var spec1 = Fsm.primal<ushort>("Fsm2",750,750,100,120,Pow2.T15);
             var stats = Fsm.run(spec1, machineCount);
             var counts = stats.Select(x => x.ReceiptCount).ToArray().AsSpan().ReadOnly();
-            var count = gspan.sum(counts);
+            var count = Calcs.sum(counts);
             term.inform($"A total of {count} events were processed");
         }
     }

@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Integers)]
         public static Span<T> and<T>(Span<T> a, Span<T> b)
             where T : unmanaged
-                => SFx.apply(MSvc.and<T>(), a, b);
+                => SFx.apply(Calcs.and<T>(), a, b);
 
         void bm_and_g8x8x8()
             => bm_and_check<byte>();

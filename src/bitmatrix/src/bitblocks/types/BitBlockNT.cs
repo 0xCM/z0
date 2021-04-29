@@ -193,15 +193,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator &(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            => new BitBlock<N,T>(gspan.and(x.data, y.data, x.data.Replicate()));
+            => new BitBlock<N,T>(Calcs.and(x.data, y.data, x.data.Replicate()));
 
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator |(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            => new BitBlock<N,T>(gspan.or(x.data, y.data, x.data.Replicate()));
+            => new BitBlock<N,T>(Calcs.or(x.data, y.data, x.data.Replicate()));
 
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator ^(in BitBlock<N,T> lhs, in BitBlock<N,T> rhs)
-            => new BitBlock<N,T>(gspan.xor(lhs.data, rhs.data, lhs.data.Replicate()));
+            => new BitBlock<N,T>(Calcs.xor(lhs.data, rhs.data, lhs.data.Replicate()));
 
         /// <summary>
         /// Computes the bitwise complement of the operand
@@ -209,7 +209,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator ~(in BitBlock<N,T> x)
-            => new BitBlock<N,T>(gspan.not(x.data, x.data.Replicate()));
+            => new BitBlock<N,T>(Calcs.not(x.data, x.data.Replicate()));
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -226,7 +226,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator -(in BitBlock<N,T> x)
-            => new BitBlock<N,T>(gspan.negate(x.data, x.data.Replicate()));
+            => new BitBlock<N,T>(Calcs.negate(x.data, x.data.Replicate()));
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise

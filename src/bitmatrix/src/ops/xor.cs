@@ -31,7 +31,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            gspan.xor(A.Content, B.Content, C.Content);
+            Calcs.xor(A.Content, B.Content, C.Content);
             return ref C;
         }
 

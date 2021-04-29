@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(n256,lhs.BlockCount);
-            gspan.and(lhs,rhs, dst.Storage);
+            Calcs.and(lhs,rhs, dst.Storage);
             return dst;
         }
 
@@ -48,7 +48,7 @@ namespace Z0
             var length = nat32i(n);
             var u = Random.VectorBlock(n,t);
             var v = Random.VectorBlock(n,t);
-            var result = Blocked.and(u, v);
+            var result = Calcs.and(u, v);
             var expect = and(u.Data, v.Data);
 
             ClaimNumeric.eq(expect.Storage, result.Data);
