@@ -13,7 +13,17 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Min128<T> min<T>(W128 w)
+            where T : unmanaged
+                => default(Min128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Min256<T> min<T>(W256 w)
+            where T : unmanaged
+                => default(Min256<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static Min<T> min<T>()
             where T : unmanaged
                 => default(Min<T>);
@@ -46,12 +56,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock128<T> min<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.min<T>(w128).Invoke(a, b, dst);
+                => ref min<T>(w128).Invoke(a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<T> min<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.min<T>(w256).Invoke(a, b, dst);
-
+                => ref min<T>(w256).Invoke(a, b, dst);
     }
 }

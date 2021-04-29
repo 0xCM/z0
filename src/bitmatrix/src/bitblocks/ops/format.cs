@@ -19,7 +19,6 @@ namespace Z0
         public static string format(Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
         {
             var dst = BitFormatter.chars(src);
-            //var dst = BitString.bitchars(src);
             var sb = text.build();
             var limit = maxbits ?? dst.Length;
             for(int i=0, rowidx=0; i<limit; i+= rowlen, rowidx++)
@@ -45,10 +44,5 @@ namespace Z0
         public static string format<T>(Span<T> src, int rowlen, int? maxbits = null, bool showrow = false)
             where T : unmanaged
                 => format(src.Bytes(),rowlen, maxbits, showrow);
-
-        public static string format<N,T>(BitBlock<N,T> src, BitFormat? config = null)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => src.ToBitString().Format(config);
     }
 }

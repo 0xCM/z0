@@ -13,19 +13,34 @@ namespace Z0
 
     partial struct Calcs
     {
+        [MethodImpl(Inline)]
+        public static Gt128<T> gt<T>(W128 w)
+            where T : unmanaged
+                => default(Gt128<T>);
+
+        [MethodImpl(Inline)]
+        public static Gt256<T> gt<T>(W256 w)
+            where T : unmanaged
+                => default(Gt256<T>);
+
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Gt<T> gt<T>()
             where T : unmanaged
                 => default(Gt<T>);
 
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
+        public static Span<bit> gt<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
+            where T : unmanaged
+                => apply(gt<T>(), a, b, dst);
+
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly SpanBlock128<T> gt<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.gt<T>(w128).Invoke(a, b, dst);
+                => ref gt<T>(w128).Invoke(a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly SpanBlock256<T> gt<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.gt<T>(w256).Invoke(a, b, dst);
+                => ref gt<T>(w256).Invoke(a, b, dst);
     }
 }

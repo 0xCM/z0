@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitBlock<N8,byte> ToNatBits(this BitVector8 src)
-            => BitBlocks.load(src);
+            => BitBlocks.load((byte)src);
 
         /// <summary>
         /// Converts the source bitvector to an equivalent natural/generic bitvector
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitBlock<N16,ushort> ToNatBits(this BitVector16 src)
-            => BitBlocks.load(src);
+            => BitBlocks.load((ushort)src);
 
         /// <summary>
         /// Converts the source bitvector it the equivalent natural/generic bitvector
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitBlock<N64,ulong> ToNatBits(this BitVector64 src)
-            => BitBlocks.load(src);
+            => BitBlocks.load((ulong)src);
 
         /// <summary>
         /// Constructs a bitvector of natural length from a source span

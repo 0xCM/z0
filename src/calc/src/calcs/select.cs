@@ -14,14 +14,24 @@ namespace Z0
 
     partial struct Calcs
     {
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static Select<T> select<T>()
+            where T : unmanaged
+                => default(Select<T>);
+
+        [MethodImpl(Inline), Select, Closures(Integers)]
+        public static Span<T> select<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
+            where T : unmanaged
+                => apply(select<T>(), a, b, c, dst);
+
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static ref readonly SpanBlock128<T> select<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> c, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.select<T>(w128).Invoke(a, b, c, dst);
+                => ref select<T>(w128).Invoke(a, b, c, dst);
 
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static ref readonly SpanBlock256<T> select<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> c, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.select<T>(w256).Invoke(a, b, c, dst);
+                => ref select<T>(w256).Invoke(a, b, c, dst);
     }
 }

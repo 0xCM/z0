@@ -68,7 +68,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format(this BitMatrix32 A)
-            => A.Content.FormatMatrixBits(A.Order);
+            => A.Content.FormatBitRows(A.Order);
 
         public static BitMatrix32 Transpose(this BitMatrix32 A)
             => BitMatrix.transpose(A);

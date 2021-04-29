@@ -4,8 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-     using System;
-     using System.Runtime.CompilerServices;
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
 
     [ApiHost]
     public partial class BitMatrix
@@ -38,6 +40,15 @@ namespace Z0
 
     public static partial class XTend
     {
+        static string format<N,T>(BitBlock<N,T> src, BitFormat? config = null)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.ToBitString().Format(config);
 
+        [MethodImpl(Inline)]
+        public static string Format<N,T>(this BitBlock<N,T> src, BitFormat? config = null)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => format(src,config);
     }
 }

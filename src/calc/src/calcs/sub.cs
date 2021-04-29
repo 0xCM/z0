@@ -14,25 +14,35 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory, Closures(AllNumeric)]
         public static Sub<T> sub<T>()
             where T : unmanaged
                 => default;
 
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Sub128<T> sub<T>(W128 w)
+            where T : unmanaged
+                => default(Sub128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Sub256<T> sub<T>(W256 w)
+            where T : unmanaged
+                => default(Sub256<T>);
+
         [MethodImpl(Inline), Sub, Closures(Integers)]
         public static Span<T> sub<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
-                => apply(Calcs.sub<T>(), a, b, dst);
+                => apply(sub<T>(), a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock128<T> sub<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.sub<T>(w128).Invoke(a, b, dst);
+                => ref sub<T>(w128).Invoke(a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<T> sub<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.sub<T>(w256).Invoke(a, b, dst);
+                => ref sub<T>(w256).Invoke(a, b, dst);
 
         /// <summary>
         /// Computes z[i] := x[i] - y[i] for i = 0...N-1
@@ -47,10 +57,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            Calcs.sub(x.Data, y.Data, z.Data);
+            sub(x.Data, y.Data, z.Data);
             return ref z;
         }
-
-
     }
 }

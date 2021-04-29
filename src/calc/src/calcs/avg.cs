@@ -12,41 +12,25 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), SpanOp, Closures(AllNumeric)]
+        [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avg<T>(ReadOnlySpan<T> src, bool @checked)
             where T : unmanaged
                 => avg_u(src,@checked);
 
-        [MethodImpl(Inline), SpanOp, Closures(AllNumeric)]
+        [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avg<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => avg_u(src,true);
 
-        [MethodImpl(Inline), SpanOp, Closures(AllNumeric)]
+        [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avg<T>(Span<T> src, bool @checked)
             where T : unmanaged
                 => avg(src.ReadOnly(), @checked);
 
-        [MethodImpl(Inline), SpanOp, Closures(AllNumeric)]
+        [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avg<T>(Span<T> src)
             where T : unmanaged
                 => avg(src.ReadOnly(), true);
-
-        [MethodImpl(Inline)]
-        public static T avgz<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-        {
-            ref readonly var a = ref first(src);
-            var result = a;
-            for(var i=1; i<src.Length; i++)
-                result = gmath.avgz(result, skip(a, i));
-            return result;
-        }
-
-        [MethodImpl(Inline)]
-        public static T avgz<T>(Span<T> src)
-            where T : unmanaged
-                => avgz(src.ReadOnly());
 
         [MethodImpl(Inline)]
         static T avg_u<T>(ReadOnlySpan<T> src, bool @checked)

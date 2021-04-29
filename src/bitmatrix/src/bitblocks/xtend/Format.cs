@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="maxbits">The maximum number of bits to format</param>
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
         [Op]
-        public static string FormatMatrixBits(this Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
+        public static string FormatBitRows(this Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
             => BitBlocks.format(src, rowlen, maxbits, showrow);
 
         /// <summary>
@@ -30,14 +30,10 @@ namespace Z0
         /// <param name="maxbits">The maximum number of bits to format</param>
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        public static string FormatMatrixBits<T>(this Span<T> src, int rowlen, int? maxbits = null, bool showrow = false)
+        public static string FormatBitRows<T>(this Span<T> src, int rowlen, int? maxbits = null, bool showrow = false)
             where T : unmanaged
                 => BitBlocks.format(src, rowlen, maxbits, showrow);
 
-        [MethodImpl(Inline)]
-        public static string Format<N,T>(this BitBlock<N,T> src, BitFormat? config = null)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitBlocks.format(src,config);
+
     }
 }

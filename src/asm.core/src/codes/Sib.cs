@@ -16,19 +16,19 @@ namespace Z0.Asm
         public uint3 Base
         {
             [MethodImpl(Inline)]
-            get => BitMasks.segment(Data, 0, 2);
+            get => Bits.bitseg(Data, 0, 2);
         }
 
         public uint3 Index
         {
             [MethodImpl(Inline)]
-            get => BitMasks.segment(Data, 3, 5);
+            get => Bits.bitseg(Data, 3, 5);
         }
 
         public uint2 Scale
         {
             [MethodImpl(Inline)]
-            get => BitMasks.segment(Data, 6, 7);
+            get => Bits.bitseg(Data, 6, 7);
         }
 
         public MemoryScale ScaleFactor

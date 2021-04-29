@@ -19,6 +19,15 @@ namespace Z0
             where T : unmanaged
                 => default;
 
+        [MethodImpl(Inline), Dec, Closures(Integers)]
+        public static Dec128<T> dec<T>(W128 w)
+            where T : unmanaged
+                => default(Dec128<T>);
+
+        [MethodImpl(Inline), Dec, Closures(Integers)]
+        public static Dec256<T> dec<T>(W256 w)
+            where T : unmanaged
+                => default(Dec256<T>);
 
         [MethodImpl(Inline), Dec, Closures(Integers)]
         public static Span<T> dec<T>(ReadOnlySpan<T> src, Span<T> dst)
@@ -28,12 +37,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly SpanBlock128<T> dec<T>(in SpanBlock128<T> a, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.dec<T>(w128).Invoke(a, dst);
+                => ref dec<T>(w128).Invoke(a, dst);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static ref readonly SpanBlock256<T> dec<T>(in SpanBlock256<T> a, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.dec<T>(w256).Invoke(a, dst);
-
+                => ref dec<T>(w256).Invoke(a, dst);
     }
 }

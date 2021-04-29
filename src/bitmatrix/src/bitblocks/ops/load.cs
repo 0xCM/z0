@@ -13,36 +13,36 @@ namespace Z0
     partial class BitBlocks
     {
         /// <summary>
-        /// Converts the source bitvector to bit cells
+        /// Loads a bitblock from a <see cref='byte'/> value
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock<N8,byte> load(BitVector8 src)
-            => new BitBlock<N8, byte>(src);
+        public static BitBlock<N8,byte> load(byte src)
+            => new BitBlock<N8,byte>(src);
 
         /// <summary>
-        /// Converts the source bitvector to an equivalent natural/generic bitvector
+        /// Loads a bitblock from a <see cref='ushort'/> value
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock<N16,ushort> load(BitVector16 src)
-            => new BitBlock<N16, ushort>(src);
+        public static BitBlock<N16,ushort> load(ushort src)
+            => new BitBlock<N16,ushort>(src);
 
         /// <summary>
-        /// Converts the source bitvector to an equivalent natural/generic bitvector
+        /// Loads a bitblock from a <see cref='uint'/> value
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock<N32,uint> load(BitVector32 src)
-            => new BitBlock<N32, uint>(src);
+        public static BitBlock<N32,uint> load(uint src)
+            => new BitBlock<N32,uint>(src);
 
         /// <summary>
-        /// Converts the source bitvector it the equivalent natural/generic bitvector
+        /// Loads a bitblock from a <see cref='ulong'/> value
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock<N64,ulong> load(BitVector64 src)
-            => new BitBlock<N64, ulong>(src);
+        public static BitBlock<N64,ulong> load(ulong src)
+            => new BitBlock<N64,ulong>(src);
 
         /// <summary>
         /// Loads a bitblock from a span
@@ -54,19 +54,6 @@ namespace Z0
         public static BitBlock<T> load<T>(Span<T> src, int n)
             where T : unmanaged
                 => new BitBlock<T>(src, (uint)n);
-
-        /// <summary>
-        /// Loads a bitblock from an array
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="n">The bitblock width representative</param>
-        /// <typeparam name="N">The bitwidth type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitBlock<N,T> load<N,T>(T[] src, N n = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => new BitBlock<N,T>(src);
 
         /// <summary>
         /// Creates a bitblock over an arbitrary number of segments
@@ -113,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="n">The bitvector length</param>
-        static BitBlock<T> load<T>(Span<byte> src, uint n)
+        public static BitBlock<T> load<T>(Span<byte> src, uint n)
             where T : unmanaged
         {
             var q = Math.DivRem(src.Length, (int)memory.size<T>(), out int r);

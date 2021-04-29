@@ -14,10 +14,20 @@ namespace Z0
 
     partial struct Calcs
     {
-       [MethodImpl(Inline), Op, Closures(Integers)]
-       public static And<T> and<T>()
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static And<T> and<T>()
             where T : unmanaged
                 => default(And<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static And128<T> and<T>(W128 w)
+            where T : unmanaged
+                => default(And128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static And256<T> and<T>(W256 w)
+            where T : unmanaged
+                => default(And256<T>);
 
         [MethodImpl(Inline), And, Closures(Integers)]
         public static Span<T> and<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
@@ -27,12 +37,12 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Closure)]
         public static ref readonly SpanBlock128<T> and<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.and<T>(w128).Invoke(a, b, dst);
+                => ref and<T>(w128).Invoke(a, b, dst);
 
         [MethodImpl(Inline), And, Closures(Closure)]
         public static ref readonly SpanBlock256<T> and<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.and<T>(w256).Invoke(a, b, dst);
+                => ref and<T>(w256).Invoke(a, b, dst);
 
         [MethodImpl(Inline)]
         static SpanBlock256<T> and<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, SpanBlock256<T> dst)
@@ -59,7 +69,5 @@ namespace Z0
             and<T>(lhs.Data, rhs.Data, dst);
             return dst;
         }
-
-
     }
 }

@@ -14,21 +14,31 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory, Closures(AllNumeric)]
         public static Add<T> add<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Add, Closures(Integers)]
-        public static Span<T> add<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Add128<T> add<T>(W128 w)
             where T : unmanaged
-                => apply(Calcs.add<T>(), l, r, dst);
+                => default(Add128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Add256<T> add<T>(W256 w)
+            where T : unmanaged
+                => default(Add256<T>);
+
+
+        [MethodImpl(Inline), Add, Closures(Integers)]
+        public static Span<T> add<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+            where T : unmanaged
+                => apply(add<T>(), a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<T> add<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.add<T>(w256).Invoke(a, b, dst);
-
+                => ref add<T>(w256).Invoke(a, b, dst);
 
         /// <summary>
         /// Computes lhs[i] := lhs[i] + rhs[i] for i = 0...N-1
@@ -38,12 +48,12 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref Block256<N,T> add<N,T>(ref Block256<N,T> x, in Block256<N,T> y)
+        public static ref Block256<N,T> add<N,T>(ref Block256<N,T> a, in Block256<N,T> b)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            Calcs.add<T>(x,y,x);
-            return ref x;
+            add<T>(a,b,a);
+            return ref a;
         }
     }
 }

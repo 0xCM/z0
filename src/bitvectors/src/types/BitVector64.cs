@@ -124,7 +124,7 @@ namespace Z0
         public BitVector64 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.segment(this,first, last);
+            get => BitVector.bitseg(this,first, last);
         }
 
         /// <summary>

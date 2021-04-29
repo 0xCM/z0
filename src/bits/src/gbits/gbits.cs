@@ -8,16 +8,10 @@ namespace Z0
 
     using static Part;
 
-
     [ApiHost(ApiSetKind.Bits | ApiSetKind.Generic)]
     public partial class gbits
     {
         const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline)]
-        public static NumericBitLogic<T> bitlogic<T>()
-            where T : unmanaged
-                => default(NumericBitLogic<T>);
 
     }
 

@@ -148,7 +148,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Bytes.FormatMatrixBits(16);
+            => Bytes.FormatBitRows(16);
 
         public override string ToString()
             => Format();

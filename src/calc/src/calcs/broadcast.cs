@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8k)]
+        [MethodImpl(Inline), Broadcast, Closures(Numeric8k)]
         public static void broadcast<T>(T src, in SpanBlock8<T> dst)
             where T : unmanaged
         {
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
+        [MethodImpl(Inline), Broadcast, Closures(Numeric8x16k)]
         public static void broadcast<T>(T src, in SpanBlock16<T> dst)
             where T : unmanaged
         {
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, Closures(Numeric8x16x32k)]
+        [MethodImpl(Inline), Broadcast, Closures(Numeric8x16x32k)]
         public static void broadcast<T>(T src, in SpanBlock32<T> dst)
             where T : unmanaged
         {
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Broadcast, Closures(AllNumeric)]
         public static void broadcast<T>(T src, in SpanBlock64<T> dst)
             where T : unmanaged
         {
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Broadcast, Closures(AllNumeric)]
         public static void broadcast<T>(T src, in SpanBlock128<T> dst)
             where T : unmanaged
                 => dst.Fill(src);
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Broadcast, Closures(AllNumeric)]
         public static void broadcast<T>(T src, in SpanBlock256<T> dst)
             where T : unmanaged
                 => dst.Fill(src);
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Broadcast, Closures(AllNumeric)]
         public static void broadcast<T>(T src, in SpanBlock512<T> dst)
             where T : unmanaged
                 => dst.Fill(src);

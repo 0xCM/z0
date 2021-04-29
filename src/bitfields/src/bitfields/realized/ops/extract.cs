@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static T read<T>(in Bitfield8<T> src, byte i0, byte i1)
             where T : unmanaged
-                => @as<T>(Bits.segment((byte)src, i0, i1));
+                => @as<T>(Bits.bitseg((byte)src, i0, i1));
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source value per the segment specification

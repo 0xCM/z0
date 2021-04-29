@@ -10,10 +10,11 @@ namespace Z0
 
     using static Part;
 
+
     partial struct gcpu
     {
         /// <summary>
-        /// Allocates and deposits vector content to a data block
+        /// Deposits vector content to a stack-allocated data block
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>

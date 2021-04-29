@@ -24,5 +24,23 @@ namespace Z0
             public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
                 => Calcs.negate(src,dst);
         }
+
+        [Closures(AllNumeric), Negate]
+        public readonly struct Negate128<T> : IBlockedUnaryOp128<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> c)
+                => ref map(a, c, VSvc.vnegate<T>(w128));
+        }
+
+        [Closures(AllNumeric), Negate]
+        public readonly struct Negate256<T> : IBlockedUnaryOp256<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> c)
+                => ref map(a, c, VSvc.vnegate<T>(w256));
+        }
     }
 }

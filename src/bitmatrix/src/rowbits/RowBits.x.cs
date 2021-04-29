@@ -12,7 +12,7 @@ namespace Z0
     {
         public static string Format<T>(this RowBits<T> src)
             where T : unmanaged
-                => src.Bytes.FormatMatrixBits(src.RowWidth);
+                => src.Bytes.FormatBitRows(src.RowWidth);
 
         public static RowBits<T> Replicate<T>(this RowBits<T> src)
             where T : unmanaged

@@ -14,25 +14,33 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory, Closures(AllNumeric)]
         public static Negate<T> negate<T>()
             where T : unmanaged
                 => default;
 
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Negate128<T> negate<T>(W128 w)
+            where T : unmanaged
+                => default(Negate128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Negate256<T> negate<T>(W256 w)
+            where T : unmanaged
+                => default(Negate256<T>);
         [MethodImpl(Inline), Negate, Closures(Integers)]
         public static Span<T> negate<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => apply(Calcs.negate<T>(), src, dst);
+                => apply(negate<T>(), src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock128<T> negate<T>(in SpanBlock128<T> a, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.negate<T>(w128).Invoke(a, dst);
+                => ref negate<T>(w128).Invoke(a, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<T> negate<T>(in SpanBlock256<T> a, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.negate<T>(w256).Invoke(a, dst);
-
+                => ref negate<T>(w256).Invoke(a, dst);
     }
 }

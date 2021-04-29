@@ -15,6 +15,16 @@ namespace Z0
     partial struct Calcs
     {
         [MethodImpl(Inline), Op, Closures(Integers)]
+        public static Sll128<T> sll<T>(W128 w)
+            where T : unmanaged
+                => default(Sll128<T>);
+
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static Sll256<T> sll<T>(W256 w)
+            where T : unmanaged
+                => default(Sll256<T>);
+
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Sll<T> sll<T>()
             where T : unmanaged
                 => default(Sll<T>);
@@ -34,12 +44,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock128<T> sll<T>(in SpanBlock128<T> a, [Imm] byte count, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.sll<T>(w128).Invoke(a, count, dst);
+                => ref sll<T>(w128).Invoke(a, count, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<T> sll<T>(in SpanBlock256<T> a, [Imm] byte count, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.sll<T>(w256).Invoke(a, count, dst);
+                => ref sll<T>(w256).Invoke(a, count, dst);
 
     }
 }

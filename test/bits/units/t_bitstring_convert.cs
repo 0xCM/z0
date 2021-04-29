@@ -4,15 +4,32 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static memory;
+
+
     public class t_bitstring_convert : t_bits<t_bitstring_convert>
     {
+
+        /// <summary>
+        /// Loads a bitblock from a bitstring
+        /// </summary>
+        /// <param name="src">The bitstring source</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<T> biblock<T>(BitString src)
+            where T : unmanaged
+                => BitBlocks.load<T>(src.ToPackedBytes(), (uint)src.Length);
+
         public void bitspan_from_bitstring_check<T>()
             where T : unmanaged
         {
             for(var i=0; i< RepCount; i++)
             {
                 var bs = Random.BitString(5,233);
-                var bc = BitBlocks.init<T>(bs);
+                var bc = biblock<T>(bs);
                 Claim.eq(bs.Length, bc.BitCount);
                 for(var j=0; j<bs.Length; j++)
                 {

@@ -14,25 +14,34 @@ namespace Z0
 
     partial struct Calcs
     {
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory, Closures(AllNumeric)]
         public static Inc<T> inc<T>()
             where T : unmanaged
                 => default;
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Inc128<T> inc<T>(W128 w)
+            where T : unmanaged
+                => default(Inc128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Inc256<T> inc<T>(W256 w)
+            where T : unmanaged
+                => default(Inc256<T>);
 
         [MethodImpl(Inline), Inc, Closures(Integers)]
         public static Span<T> inc<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => apply(Calcs.inc<T>(), src, dst);
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Inc, Closures(Integers)]
         public static ref readonly SpanBlock128<T> inc<T>(in SpanBlock128<T> a, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.inc<T>(w128).Invoke(a, dst);
+                => ref inc<T>(w128).Invoke(a, dst);
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Inc, Closures(Integers)]
         public static ref readonly SpanBlock256<T> inc<T>(in SpanBlock256<T> a, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.inc<T>(w256).Invoke(a, dst);
+                => ref inc<T>(w256).Invoke(a, dst);
     }
 }

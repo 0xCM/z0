@@ -104,7 +104,7 @@ namespace Z0
         public BitVector32 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get =>  Bits.segment(Data, first, last);
+            get =>  Bits.bitseg(Data, first, last);
         }
 
         [MethodImpl(Inline)]

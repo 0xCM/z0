@@ -26,5 +26,24 @@ namespace Z0
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
                 => Calcs.cnonimpl(lhs,rhs,dst);
         }
+
+        [Closures(Integers), CNonImpl]
+        public readonly struct CNonImpl128<T> : IBlockedBinaryOp128<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
+                => ref zip(a, b, dst, VSvc.vcnonimpl<T>(w128));
+        }
+
+        [Closures(Integers), CNonImpl]
+        public readonly struct CNonImpl256<T> : IBlockedBinaryOp256<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
+                => ref zip(a, b, dst, VSvc.vcnonimpl<T>(w256));
+        }
+
     }
 }

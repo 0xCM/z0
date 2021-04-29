@@ -13,11 +13,14 @@ namespace Z0
 
     partial struct Calcs
     {
-
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static GtEq<T> gteq<T>()
             where T : unmanaged
                 => default(GtEq<T>);
 
+        [MethodImpl(Inline), SpanOp, Closures(Integers)]
+        public static Span<bit> gteq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
+            where T : unmanaged
+                => apply(gteq<T>(), a, b, dst);
     }
 }

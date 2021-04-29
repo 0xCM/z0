@@ -26,5 +26,24 @@ namespace Z0
             public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
                 => Calcs.impl(a,b,dst);
         }
+
+        [Closures(Integers), Impl]
+        public readonly struct Impl128<T> : IBlockedBinaryOp128<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
+                => ref zip(a, b, dst, VSvc.vimpl<T>(w128));
+        }
+
+        [Closures(Integers), Impl]
+        public readonly struct Impl256<T> : IBlockedBinaryOp256<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
+                => ref zip(a, b, dst, VSvc.vimpl<T>(w256));
+        }
+
     }
 }

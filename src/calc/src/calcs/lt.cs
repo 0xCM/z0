@@ -18,6 +18,16 @@ namespace Z0
             where T : unmanaged
                 => default(Lt<T>);
 
+        [MethodImpl(Inline)]
+        public static Lt128<T> lt<T>(W128 w)
+            where T : unmanaged
+                => default(Lt128<T>);
+
+        [MethodImpl(Inline)]
+        public static Lt256<T> lt<T>(W256 w)
+            where T : unmanaged
+                => default(Lt256<T>);
+
         [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<bit> lt<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
@@ -26,12 +36,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock128<T> lt<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.lt<T>(w128).Invoke(a, b, dst);
+                => ref lt<T>(w128).Invoke(a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<T> lt<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.lt<T>(w256).Invoke(a, b, dst);
-
+                => ref lt<T>(w256).Invoke(a, b, dst);
     }
 }

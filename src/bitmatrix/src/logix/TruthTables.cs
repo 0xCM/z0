@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using System.Runtime.CompilerServices;
 
     using static Part;
 
@@ -177,6 +178,22 @@ namespace Z0
             return table;
         }
 
+        /// <summary>
+        /// Loads a bitblock from a 4-bit bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static BitBlock<N4,byte> bitblock(BitVector4 src)
+            => new BitBlock<N4,byte>(src);
+
+        /// <summary>
+        /// Loads a bitblock from an 8-bit bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static BitBlock<N8,byte> bitblock(BitVector8 src)
+            => new BitBlock<N8,byte>(src);
+
         static void WriteUnaryTruth(IBitMatrixWriter dst)
         {
             var ops = bitlogix.UnaryOpKinds.ToArray();
@@ -195,7 +212,7 @@ namespace Z0
             for(var i=0; i< 16; i++)
             {
                 BitVector4 result = (byte)i;
-                var bbResult = BitBlocks.init(result);
+                var bbResult = bitblock(result);
 
                 var table = BitMatrix.alloc<N4,N3,byte>();
                 table[0] = BitBlocks.single<N3,byte>(bit.condense(result[0], off, off));
@@ -211,7 +228,7 @@ namespace Z0
             for(var i=0; i< 256; i++)
             {
                 BitVector8 result = (byte)i;
-                var bbResult = BitBlocks.init(result);
+                var bbResult = bitblock(result);
 
                 var table = BitMatrix.alloc<N8,N4,byte>();
                 table[0] = BitBlocks.single<N4,byte>(bit.condense(result[0], off, off, off));

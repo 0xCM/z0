@@ -14,15 +14,24 @@ namespace Z0
 
     partial struct Calcs
     {
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static Xor<T> xor<T>()
+            where T : unmanaged
+                => default(Xor<T>);
+
+        [MethodImpl(Inline), Xor, Closures(Integers)]
+        public static Span<T> xor<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+            where T : unmanaged
+                => apply(xor<T>(), a, b, dst);
+
         [MethodImpl(Inline), Xor, Closures(Closure)]
         public static ref readonly SpanBlock128<T> xor<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.xor<T>(w128).Invoke(a, b, dst);
+                => ref xor<T>(w128).Invoke(a, b, dst);
 
         [MethodImpl(Inline), Xor, Closures(Closure)]
         public static ref readonly SpanBlock256<T> xor<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.xor<T>(w256).Invoke(a, b, dst);
-
+                => ref xor<T>(w256).Invoke(a, b, dst);
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class BSvcHosts
+    partial struct CalcHosts
     {
         [Closures(AllNumeric), Nonz]
         public readonly struct NonZ128<T> : IBlockedUnaryPred128<T>

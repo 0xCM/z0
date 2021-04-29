@@ -34,12 +34,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock128<T> srl<T>(in SpanBlock128<T> a, [Imm] byte count, in SpanBlock128<T> dst)
             where T : unmanaged
-                => ref BSvc.srl<T>(w128).Invoke(a, count, dst);
+                => ref srl<T>(w128).Invoke(a, count, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<T> srl<T>(in SpanBlock256<T> a, [Imm] byte count, in SpanBlock256<T> dst)
             where T : unmanaged
-                => ref BSvc.srl<T>(w256).Invoke(a, count, dst);
+                => ref srl<T>(w256).Invoke(a, count, dst);
 
     }
 }
