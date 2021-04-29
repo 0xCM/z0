@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(SignedInts), Abs]
-        public readonly struct Abs128<T> : IUnaryOp128D<T>
+        public readonly struct VAbs128<T> : IUnaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [Closures(SignedInts), Abs]
-        public readonly struct Abs256<T> : IUnaryOp256D<T>
+        public readonly struct VAbs256<T> : IUnaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

@@ -14,10 +14,20 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static Nand<T> nand<T>()
             where T : unmanaged
                 => default(Nand<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Nand128<T> nand<T>(W128 w)
+            where T : unmanaged
+                => default(Nand128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Nand256<T> nand<T>(W256 w)
+            where T : unmanaged
+                => default(Nand256<T>);
 
         [MethodImpl(Inline), Nand, Closures(Integers)]
         public static Span<T> nand<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)

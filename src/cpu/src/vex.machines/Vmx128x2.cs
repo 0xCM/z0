@@ -14,7 +14,7 @@ namespace Z0
     [ApiHost]
     public class Vmx128x2
     {
-        IPolySource Source;
+        ISource Source;
 
         Index<Cell128> LeftBuffer;
 
@@ -28,12 +28,15 @@ namespace Z0
 
         uint Cycle;
 
-        public Vmx128x2(uint cells, IPolySource source)
+        public Vmx128x2(uint cells, IDomainSource source)
         {
+            Source = source;
             CellCount = cells;
+            Position = 0;
             LeftBuffer = alloc<Cell128>(CellCount);
             RightBuffer = alloc<Cell128>(CellCount);
-            TargetBuffer= alloc<Cell128>(CellCount);
+            TargetBuffer = alloc<Cell128>(CellCount);
+            Refill();
         }
 
         [MethodImpl(Inline)]
@@ -42,23 +45,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Span<ulong> Left(W64 w)
-            =>  recover<Cell128,ulong>(LeftBuffer.Edit);
+            => recover<Cell128,ulong>(LeftBuffer.Edit);
 
         [MethodImpl(Inline)]
         Span<ulong> Right(W64 w)
-            =>  recover<Cell128,ulong>(RightBuffer.Edit);
+            => recover<Cell128,ulong>(RightBuffer.Edit);
 
         [MethodImpl(Inline)]
         Span<byte> Left(W8 w)
-            =>  recover<Cell128,byte>(LeftBuffer.Edit);
+            => recover<Cell128,byte>(LeftBuffer.Edit);
 
         [MethodImpl(Inline)]
         Span<byte> Right(W8 w)
-            =>  recover<Cell128,byte>(RightBuffer.Edit);
+            => recover<Cell128,byte>(RightBuffer.Edit);
 
         [MethodImpl(Inline)]
         Span<byte> Target(W8 w)
-            =>  recover<Cell128,byte>(TargetBuffer.Edit);
+            => recover<Cell128,byte>(TargetBuffer.Edit);
 
         [MethodImpl(Inline), Op]
         bool NextPair(W8 w, out Vector128<byte> a, out Vector128<byte> b)

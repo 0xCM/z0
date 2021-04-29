@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IAppContext : IMessageQueue, IPolyrandProvider, IWfContext
+    public interface ICheckContext : IMessageQueue, IPolyrandProvider, IWfContext
     {
         IMessageQueue MessageQueue {get;}
 

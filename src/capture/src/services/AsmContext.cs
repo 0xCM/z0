@@ -21,7 +21,7 @@ namespace Z0.Asm
         public IPolyrand Random {get;}
 
         [MethodImpl(Inline)]
-        public AsmContext(IAppContext app, IWfRuntime wf)
+        public AsmContext(ICheckContext app, IWfRuntime wf)
         {
             Wf = wf;
             MessageQueue = app.MessageQueue;

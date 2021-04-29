@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(Integers), Pop]
-        public readonly struct Pop128<T> : ISVTernaryScalar128D<T,uint>
+        public readonly struct VPop128<T> : ISVTernaryScalar128D<T,uint>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [Closures(Integers), Pop]
-        public readonly struct Pop256<T> : ISVTernaryScalarFunc256D<T,uint>
+        public readonly struct VPop256<T> : ISVTernaryScalarFunc256D<T,uint>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

@@ -24,24 +24,22 @@ namespace Z0
         }
 
         Task<uint> RunMachine(uint cycles)
-            => Task.Factory.StartNew(() => new Vmx128x2(1024, Rng.@default()).Run(cycles));
+            => Task.Factory.StartNew(() => new Vmx128x2(1024, Source).Run(cycles));
 
-
-        ulong Run(uint count, uint cycles)
+        ulong Run(uint jobs, uint cycles)
         {
             var counter = 0ul;
-            var tasks = root.stream(0u,count).Map(i => RunMachine(cycles));
+            var tasks = root.stream(0u,jobs).Map(i => RunMachine(cycles));
             Task.WaitAll(tasks);
             foreach(var t in tasks)
                 counter += t.Result;
             return counter;
         }
 
-
         void RunWf1()
         {
-            var jobs = 128u;
-            var cycles = Pow2.T14;
+            var jobs = 64u;
+            var cycles = 64u;
             var flow = Wf.Running();
             var clock = Time.counter(true);
             var count = Run(jobs, cycles);

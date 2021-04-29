@@ -8,68 +8,69 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static VSvcHosts;
+    using static CalcHosts;
+
 
     partial class VSvc
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Add128<T> vadd<T>(W128 w, T t = default)
+        public static VAdd128<T> vadd<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Add128<T>);
+                => default(VAdd128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Add256<T> vadd<T>(W256 w, T t = default)
+        public static VAdd256<T> vadd<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Add256<T>);
+                => default(VAdd256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Sub128<T> vsub<T>(W128 w, T t = default)
+        public static VSub128<T> vsub<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Sub128<T>);
+                => default(VSub128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Sub256<T> vsub<T>(W256 w, T t = default)
+        public static VSub256<T> vsub<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Sub256<T>);
+                => default(VSub256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Negate128<T> vnegate<T>(W128 w, T t = default)
+        public static VNegate128<T> vnegate<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Negate128<T>);
+                => default(VNegate128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Negate256<T> vnegate<T>(W256 w, T t = default)
+        public static VNegate256<T> vnegate<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Negate256<T>);
+                => default(VNegate256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Inc128<T> vinc<T>(W128 w, T t = default)
+        public static VInc128<T> vinc<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Inc128<T>);
+                => default(VInc128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Inc256<T> vinc<T>(W256 w, T t = default)
+        public static VInc256<T> vinc<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Inc256<T>);
+                => default(VInc256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Dec128<T> vdec<T>(W128 w, T t = default)
+        public static VDec128<T> vdec<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Dec128<T>);
+                => default(VDec128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Dec256<T> vdec<T>(W256 w, T t = default)
+        public static VDec256<T> vdec<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Dec256<T>);
+                => default(VDec256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Abs128<T> vabs<T>(W128 w, T t = default)
+        public static VAbs128<T> vabs<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Abs128<T>);
+                => default(VAbs128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Abs256<T> vabs<T>(W256 w, T t = default)
+        public static VAbs256<T> vabs<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Abs256<T>);
+                => default(VAbs256<T>);
     }
 }

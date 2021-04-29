@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(Integers), Select]
-        public readonly struct Select128<T> : ITernaryOp128D<T>
+        public readonly struct VSelect128<T> : ITernaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [Closures(Integers), Select]
-        public readonly struct Select256<T> : ITernaryOp256D<T>
+        public readonly struct VSelect256<T> : ITernaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

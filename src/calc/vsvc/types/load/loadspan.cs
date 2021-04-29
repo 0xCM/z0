@@ -11,9 +11,9 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
-        public readonly struct LoadSpan128<T> : ISpanLoader128<T,T>
+        public readonly struct VLoadSpan128<T> : ISpanLoader128<T,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,7 +21,7 @@ namespace Z0
                 => gcpu.vload(n128,x,offset);
         }
 
-        public readonly struct LoadSpan256<T> : ISpanLoader256<T,T>
+        public readonly struct VLoadSpan256<T> : ISpanLoader256<T,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

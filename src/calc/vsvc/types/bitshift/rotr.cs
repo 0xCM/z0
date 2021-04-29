@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(Integers), Rotr]
-        public readonly struct Rotr128<T> : IShiftOp128D<T>, IShiftOp128<T>
+        public readonly struct VRotr128<T> : IShiftOp128D<T>, IShiftOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [Closures(Integers), Rotr]
-        public readonly struct Rotr256<T> : IShiftOp256D<T>, IShiftOp256<T>
+        public readonly struct VRotr256<T> : IShiftOp256D<T>, IShiftOp256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

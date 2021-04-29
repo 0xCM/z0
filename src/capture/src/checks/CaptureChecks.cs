@@ -14,6 +14,12 @@ namespace Z0.Asm
         public static ICaptureChecks create(IWfRuntime wf)
             => new CaptureChecks(wf);
 
+        static IJsonSettings json(FS.FilePath src)
+            => JsonSettings.Load(src);
+
+        public static ICheckContext context(IWfRuntime wf)
+            => new CheckContext(wf.Paths, Rng.@default(), json(wf.Paths.AppConfigPath), MsgExchange.Create());
+
         public IAsmContext Context {get;}
 
         readonly NativeBuffer BufferAlloc;
@@ -23,7 +29,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public CaptureChecks(IWfRuntime wf)
         {
-            Context = new AsmContext(Apps.context(wf), wf);
+            Context = new AsmContext(context(wf), wf);
             Tokens = memory.alloc(Pow2.T16, 5, out BufferAlloc).Tokenize();
         }
 

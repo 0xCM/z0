@@ -18,5 +18,17 @@ namespace Z0
         public static ByteSwap<T> byteswap<T>()
             where T : unmanaged
                 => sfunc<ByteSwap<T>>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static VByteSwap128<T> vbyteswap<T>(W128 w)
+            where T : unmanaged
+                => default(VByteSwap128<T>);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static VByteSwap256<T> vbyteswap<T>(W256 w)
+            where T : unmanaged
+                => default(VByteSwap256<T>);
+
+
     }
 }

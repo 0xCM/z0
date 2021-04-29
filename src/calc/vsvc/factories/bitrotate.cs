@@ -8,48 +8,48 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static VSvcHosts;
+    using static CalcHosts;
 
     partial class VSvc
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Rotrx128<T> vrotrx<T>(W128 w, T t = default)
+        public static VRotrx128<T> vrotrx<T>(W128 w)
             where T : unmanaged
-                => default(Rotrx128<T>);
+                => default(VRotrx128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Rotrx256<T> vrotrx<T>(W256 w, T t = default)
+        public static VRotrx256<T> vrotrx<T>(W256 w)
             where T : unmanaged
-                => default(Rotrx256<T>);
+                => default(VRotrx256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Rotlx128<T> vrotlx<T>(W128 w, T t = default)
+        public static VRotlx128<T> vrotlx<T>(W128 w)
             where T : unmanaged
-                => default(Rotlx128<T>);
+                => default(VRotlx128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Rotlx256<T> vrotlx<T>(W256 w, T t = default)
+        public static VRotlx256<T> vrotlx<T>(W256 w)
             where T : unmanaged
-                => default(Rotlx256<T>);
+                => default(VRotlx256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Rotl128<T> vrotl<T>(W128 w, T t = default)
+        public static VRotl128<T> vrotl<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Rotl128<T>);
+                => default(VRotl128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Rotl256<T> vrotl<T>(W256 w, T t = default)
+        public static VRotl256<T> vrotl<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Rotl256<T>);
+                => default(VRotl256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Rotr128<T> vrotr<T>(W128 w, T t = default)
+        public static VRotr128<T> vrotr<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Rotr128<T>);
+                => default(VRotr128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Rotr256<T> vrotr<T>(W256 w, T t = default)
+        public static VRotr256<T> vrotr<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Rotr256<T>);
+                => default(VRotr256<T>);
     }
 }

@@ -12,10 +12,10 @@ namespace Z0
     using static Numeric;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(AllNumeric)]
-        public readonly struct Broadcast128<T> : IFactory128<T,T>
+        public readonly struct VBroadcast128<T> : IFactory128<T,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [Closures(AllNumeric)]
-        public readonly struct Broadcast128<S,T> : IFactory128<S,T>
+        public readonly struct VBroadcast128<S,T> : IFactory128<S,T>
             where T : unmanaged
             where S : unmanaged
         {
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [Closures(AllNumeric)]
-        public readonly struct Broadcast256<T> : IFactory256<T,T>
+        public readonly struct VBroadcast256<T> : IFactory256<T,T>
             where T : unmanaged
         {
 
@@ -43,7 +43,7 @@ namespace Z0
                 => gcpu.vbroadcast(n256, a);
         }
 
-        public readonly struct Broadcast256<S,T> : IFactory256<S,T>
+        public readonly struct VBroadcast256<S,T> : IFactory256<S,T>
             where T : unmanaged
             where S : unmanaged
         {

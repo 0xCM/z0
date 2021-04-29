@@ -14,10 +14,20 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static Or<T> or<T>()
             where T : unmanaged
                 => default(Or<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Or128<T> or<T>(W128 w)
+            where T : unmanaged
+                => default(Or128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Or256<T> or<T>(W256 w)
+            where T : unmanaged
+                => default(Or256<T>);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T or<T>(ReadOnlySpan<T> src)

@@ -11,6 +11,33 @@ namespace Z0
 
     public sealed class Reactor : AppSingleton<Reactor,int>, IReactor
     {
+        public static void dispatch(string[] args)
+        {
+            try
+            {
+                var parts = ApiQuery.parts(Index<PartId>.Empty);
+                term.inform(AppMsg.status(text.prop("PartCount", parts.Components.Length)));
+                var rng = Rng.@default();
+                using var wf = WfRuntime.create(parts, args).WithSource(rng);
+                if(args.Length == 0)
+                {
+                    wf.Status("usage: run <command> [options]");
+                    var settings = wf.Settings;
+                    wf.Row(settings.Format());
+                }
+                else
+                {
+                    wf.Status("Dispatching");
+                    Reactor.init(wf).Dispatch(args);
+                }
+
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+        }
+
         WfCmdBuilder Builder;
 
         IWfDb Db;
@@ -47,9 +74,6 @@ namespace Z0
                 case RunScriptCmd.CmdName:
                     Builder.RunScript(FS.path(a0)).RunDirect(Wf);
                     break;
-                case ShowRuntimeArchiveCmd.CmdName:
-                    Builder.ShowRuntimeArchive().RunTask(Wf);
-                    break;
                 case EmitAssemblyRefsCmd.CmdName:
                     Builder.EmitAssemblyRefs().RunTask(Wf);
                 break;
@@ -64,6 +88,5 @@ namespace Z0
 
         public void ShowSupported()
             => root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
-
     }
 }

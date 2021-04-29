@@ -13,20 +13,30 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static Lt<T> lt<T>()
             where T : unmanaged
                 => default(Lt<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static Lt128<T> lt<T>(W128 w)
             where T : unmanaged
                 => default(Lt128<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static Lt256<T> lt<T>(W256 w)
             where T : unmanaged
                 => default(Lt256<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static VLt128<T> vlt<T>(W128 w)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static VLt256<T> vlt<T>(W256 w)
+            where T : unmanaged
+                => default;
 
         [MethodImpl(Inline), SpanOp, Closures(Integers)]
         public static Span<bit> lt<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)

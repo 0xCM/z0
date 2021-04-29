@@ -24,5 +24,23 @@ namespace Z0
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
                 => apply(this, src, dst);
         }
+
+        [Closures(AllNumeric), Nonz]
+        public readonly struct NonZ128<T> : IBlockedUnaryPred128<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Span<bit> Invoke(in SpanBlock128<T> src, Span<bit> dst)
+                => map(src, dst, VSvc.vnonz<T>(w128));
+        }
+
+        [Closures(AllNumeric), Nonz]
+        public readonly struct NonZ256<T> : IBlockedUnaryPred256<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Span<bit> Invoke(in SpanBlock256<T> src, Span<bit> dst)
+                => map(src, dst, VSvc.vnonz<T>(w256));
+        }
     }
 }

@@ -8,18 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static VSvcHosts;
+    using static CalcHosts;
 
     partial class VSvc
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryBitLogic128<T> vbitlogic<T>(N128 w, T t = default)
+        public static VBitLogic128<T> vbitlogic<T>(N128 w, T t = default)
             where T : unmanaged
-                => default(BinaryBitLogic128<T>);
+                => default(VBitLogic128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryBitLogic256<T> vbitlogic<T>(N256 w, T t = default)
+        public static VBitLogic256<T> vbitlogic<T>(N256 w, T t = default)
             where T : unmanaged
-                => default(BinaryBitLogic256<T>);
+                => default(VBitLogic256<T>);
     }
 }

@@ -14,36 +14,6 @@ namespace Z0
     partial struct Calcs
     {
         [MethodImpl(Inline)]
-        public static Nand128<T> nand<T>(W128 w)
-            where T : unmanaged
-                => default(Nand128<T>);
-
-        [MethodImpl(Inline)]
-        public static Nand256<T> nand<T>(W256 w)
-            where T : unmanaged
-                => default(Nand256<T>);
-
-        [MethodImpl(Inline)]
-        public static Or128<T> or<T>(W128 w)
-            where T : unmanaged
-                => default(Or128<T>);
-
-        [MethodImpl(Inline)]
-        public static Or256<T> or<T>(W256 w)
-            where T : unmanaged
-                => default(Or256<T>);
-
-        [MethodImpl(Inline)]
-        public static Nor128<T> nor<T>(W128 w)
-            where T : unmanaged
-                => default(Nor128<T>);
-
-        [MethodImpl(Inline)]
-        public static Nor256<T> nor<T>(W256 w)
-            where T : unmanaged
-                => default(Nor256<T>);
-
-        [MethodImpl(Inline)]
         public static Xor128<T> xor<T>(W128 w)
             where T : unmanaged
                 => default(Xor128<T>);

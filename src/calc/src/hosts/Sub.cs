@@ -23,5 +23,24 @@ namespace Z0
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
                 => Calcs.sub(lhs,rhs,dst);
         }
+
+        [Closures(AllNumeric), Sub]
+        public readonly struct Sub128<T> : IBlockedBinaryOp128<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
+                => ref zip(a, b, dst, VSvc.vsub<T>(w128));
+        }
+
+        [Closures(AllNumeric), Sub]
+        public readonly struct Sub256<T> : IBlockedBinaryOp256<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
+                => ref zip(a, b, dst, VSvc.vsub<T>(w256));
+        }
+
     }
 }

@@ -11,9 +11,9 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
-        public readonly struct Hi128<T> : IUnaryOp128<T>
+        public readonly struct VHi128<T> : IUnaryOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -21,7 +21,7 @@ namespace Z0
                 => gcpu.vhi(x);
         }
 
-        public readonly struct Hi256<T> : IReducer256<T>
+        public readonly struct VHi256<T> : IReducer256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

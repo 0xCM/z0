@@ -14,10 +14,20 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static Nor<T> nor<T>()
             where T : unmanaged
                 => default(Nor<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Nor128<T> nor<T>(W128 w)
+            where T : unmanaged
+                => default(Nor128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static Nor256<T> nor<T>(W256 w)
+            where T : unmanaged
+                => default(Nor256<T>);
 
         [MethodImpl(Inline), Nor, Closures(Integers)]
         public static Span<T> nor<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)

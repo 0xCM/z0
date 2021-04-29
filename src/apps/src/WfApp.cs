@@ -17,7 +17,6 @@ namespace Z0
             var flow = wf.Running(text.msg("Running application {0}", name));
             app.Run();
             wf.Ran(flow, text.msg("Ran application {0}", name));
-
         }
 
         protected abstract void Run();

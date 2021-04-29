@@ -11,9 +11,9 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
-        public readonly struct Srlv128<T> : IBinaryOp128D<T>
+        public readonly struct VSrlv128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -25,7 +25,7 @@ namespace Z0
                 => gmath.srl(a, Numeric.force<T,byte>(count));
         }
 
-        public readonly struct Srlv256<T> : IBinaryOp256D<T>
+        public readonly struct VSrlv256<T> : IBinaryOp256D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

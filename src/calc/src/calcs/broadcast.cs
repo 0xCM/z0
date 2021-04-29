@@ -144,6 +144,29 @@ namespace Z0
             return ref dst;
         }
 
+
+        [MethodImpl(Inline), Factory, Closures(Closure)]
+        public static VBroadcast128<T> vbroadcast<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VBroadcast128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Closure)]
+        public static VBroadcast256<T> vbroadcast<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VBroadcast256<T>);
+
+        [MethodImpl(Inline)]
+        public static VBroadcast128<S,T> vbroadcast<S,T>(W128 w, S s = default, T t = default)
+            where T : unmanaged
+            where S : unmanaged
+                => default(VBroadcast128<S,T>);
+
+        [MethodImpl(Inline)]
+        public static VBroadcast256<S,T> vbroadcast<S,T>(W256 w, S s = default, T t = default)
+            where T : unmanaged
+            where S : unmanaged
+                => default(VBroadcast256<S,T>);
+
         [MethodImpl(Inline)]
         static void broadcast<T>(T src, Span<T> dst)
         {

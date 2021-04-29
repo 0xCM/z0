@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public class AppContext : IAppContext
+    public class CheckContext : ICheckContext
     {
         public IJsonSettings Settings {get;}
 
@@ -20,7 +20,7 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(IAppPaths paths, IPolyrand random, IJsonSettings settings, IMessageQueue queue)
+        public CheckContext(IAppPaths paths, IPolyrand random, IJsonSettings settings, IMessageQueue queue)
         {
             Paths = paths;
             Next = msg => {};

@@ -10,11 +10,6 @@ namespace Z0.Vdsl
     using static Part;
     using static memory;
 
-    public interface ICheckContext
-    {
-
-    }
-
     [ApiHost]
     public readonly partial struct Intel
     {

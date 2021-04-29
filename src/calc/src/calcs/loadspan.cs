@@ -8,18 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static VSvcHosts;
+    using static CalcHosts;
 
-    partial class VSvc
+    partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static LoadSpan128<T> vloadspan<T>(W128 w, T t = default)
+        [MethodImpl(Inline), Factory, Closures(Closure)]
+        public static VLoadSpan128<T> vloadspan<T>(W128 w)
             where T : unmanaged
-                => default(LoadSpan128<T>);
+                => default(VLoadSpan128<T>);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static LoadSpan256<T> vloadspan<T>(W256 w, T t = default)
+        [MethodImpl(Inline), Factory, Closures(Closure)]
+        public static VLoadSpan256<T> vloadspan<T>(W256 w)
             where T : unmanaged
-                => default(LoadSpan256<T>);
+                => default(VLoadSpan256<T>);
     }
 }

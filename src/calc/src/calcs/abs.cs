@@ -48,6 +48,5 @@ namespace Z0
         public static ref readonly SpanBlock128<T> add<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged
                 => ref add<T>(w128).Invoke(a, b, dst);
-
     }
 }

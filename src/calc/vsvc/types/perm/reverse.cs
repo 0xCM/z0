@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(Integers), Reverse]
-        public readonly struct Reverse128<T> : IUnaryOp128<T>
+        public readonly struct VReverse128<T> : IUnaryOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [Closures(Integers), Reverse]
-        public readonly struct Reverse256<T> : IUnaryOp256<T>
+        public readonly struct VReverse256<T> : IUnaryOp256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

@@ -73,7 +73,7 @@ namespace Z0
             where T : unmanaged
         {
             var name = CaseName(SFx.identity(nameof(veq_basecase), w.VectorKind<T>()));
-            var f = VSvc.veq(w,t);
+            var f = Calcs.veq<T>(w);
             var x = Random.SpanBlocks<T>(w, RepCount/cpu.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(Numeric.ones<T>());
@@ -85,7 +85,7 @@ namespace Z0
         {
 
             var name = CaseName(SFx.identity(nameof(veq_basecase), w.VectorKind<T>()));
-            var f = VSvc.veq(w,t);
+            var f = Calcs.veq<T>(w);
             var x = Random.SpanBlocks<T>(w, RepCount/cpu.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(Numeric.ones<T>());
@@ -94,10 +94,10 @@ namespace Z0
 
         void veq_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.veq(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(Calcs.veq<T>(w),w,t);
 
         void veq_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.veq(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(Calcs.veq<T>(w),w,t);
     }
 }

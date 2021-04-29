@@ -8,28 +8,28 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static VSvcHosts;
+    using static CalcHosts;
 
     partial class VSvc
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Ones128<T> vones<T>(W128 w, T t = default)
+        public static VOnes128<T> vones<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Ones128<T>);
+                => default(VOnes128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Ones256<T> vones<T>(W256 w, T t = default)
+        public static VOnes256<T> vones<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Ones256<T>);
+                => default(VOnes256<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Units128<T> vunits<T>(W128 w, T t = default)
+        public static VUnits128<T> vunits<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Units128<T>);
+                => default(VUnits128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Units256<T> vunits<T>(W256 w, T t = default)
+        public static VUnits256<T> vunits<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Units256<T>);
+                => default(VUnits256<T>);
     }
 }

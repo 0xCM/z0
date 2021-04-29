@@ -22,7 +22,7 @@ namespace Z0
                     WorkflowCommandDispatcher.dispatch(args);
                 break;
                 default:
-                    DefaultCmdDispatcher.dispatch(args);
+                    Reactor.dispatch(args);
                 break;
             }
         }

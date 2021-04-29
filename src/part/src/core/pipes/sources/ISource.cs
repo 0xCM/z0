@@ -58,23 +58,6 @@ namespace Z0
             dst = Next();
             return true;
         }
-
-        /// <summary>
-        /// Fills the span, from stem-to-stern with <typeparamref name='T'/> cells from the reifying source
-        /// </summary>
-        /// <param name="dst">The target spen</param>
-        uint Fill(Span<T> dst)
-        {
-            var count = (uint)dst.Length;
-            if(count != 0)
-            {
-                ref var target = ref first(dst);
-                for(var i=0u; i<count; i++)
-                    if(!Next(out target))
-                        return i;
-            }
-            return count;
-        }
     }
 
     [Free]

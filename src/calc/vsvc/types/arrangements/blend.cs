@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(Integers)]
-        public readonly struct Blend2x64x128<T> : IBinaryImm8Op128<T>
+        public readonly struct VBlend2x64x128<T> : IBinaryImm8Op128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Blend4x64x256<T> : IBinaryImm8Op256<T>
+        public readonly struct VBlend4x64x256<T> : IBinaryImm8Op256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Blend4x32x128<T> : IBinaryImm8Op128<T>
+        public readonly struct VBlend4x32x128<T> : IBinaryImm8Op128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Blend8x32x256<T> : IBinaryImm8Op256<T>
+        public readonly struct VBlend8x32x256<T> : IBinaryImm8Op256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Blend8x16x128<T> : IBinaryImm8Op128<T>
+        public readonly struct VBlend8x16x128<T> : IBinaryImm8Op128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [Closures(Integers)]
-        public readonly struct Blend8x16x256<T> : IBinaryImm8Op256<T>
+        public readonly struct VBlend8x16x256<T> : IBinaryImm8Op256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

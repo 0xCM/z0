@@ -46,10 +46,10 @@ namespace Z0
 
         protected void vbroadcast_check<T>(W128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckFactory(w, VSvc.vbroadcast(w,t,t), VBroadcastChecks.vbroadcast(w,t,t),t,t);
+                => CheckSVF.CheckFactory(w, Calcs.vbroadcast(w,t,t), VBroadcastChecks.vbroadcast(w,t,t),t,t);
 
         protected void vbroadcast_check<T>(W256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckFactory(w, VSvc.vbroadcast(w,t,t), VBroadcastChecks.vbroadcast(w,t,t),t,t);
+                => CheckSVF.CheckFactory(w, Calcs.vbroadcast(w,t,t), VBroadcastChecks.vbroadcast(w,t,t),t,t);
     }
 }

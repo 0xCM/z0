@@ -12,9 +12,9 @@ namespace Z0
 
     using K = VK;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
-        public readonly struct Units128<T> : SFx.IEmitter128<T>
+        public readonly struct VUnits128<T> : SFx.IEmitter128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -22,7 +22,7 @@ namespace Z0
                 => gcpu.vunits(K.vk128<T>());
         }
 
-        public readonly struct Units256<T> : SFx.IEmitter256<T>
+        public readonly struct VUnits256<T> : SFx.IEmitter256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

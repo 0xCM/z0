@@ -8,38 +8,38 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static VSvcHosts;
+    using static CalcHosts;
 
     partial class VSvc
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static Pop128<T> vpop<T>(W128 w, T t = default)
+        public static VPop128<T> vpop<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Pop128<T>);
+                => default(VPop128<T>);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static Pop256<T> vpop<T>(W256 w, T t = default)
+        public static VPop256<T> vpop<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Pop256<T>);
+                => default(VPop256<T>);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static TakeMask128<T> vtakemask<T>(W128 w, T t = default)
+        public static VTakeMask128<T> vtakemask<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(TakeMask128<T>);
+                => default(VTakeMask128<T>);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static TakeMask256<T> vtakemask<T>(W256 w, T t = default)
+        public static VTakeMask256<T> vtakemask<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(TakeMask256<T>);
+                => default(VTakeMask256<T>);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static TakeIMask128<T> vtakeimask<T>(W128 w, T t = default)
+        public static VTakeIMask128<T> vtakeimask<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(TakeIMask128<T>);
+                => default(VTakeIMask128<T>);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static TakeIMask256<T> vtakeimask<T>(W256 w, T t = default)
+        public static VTakeIMask256<T> vtakeimask<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(TakeIMask256<T>);
+                => default(VTakeIMask256<T>);
     }
 }

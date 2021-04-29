@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(Integers), Nand]
-        public readonly struct Nand128<T> : IBinaryOp128D<T>
+        public readonly struct VNand128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [Closures(Integers), Nand]
-        public readonly struct Nand256<T> : IBinaryOp256D<T>
+        public readonly struct VNand256<T> : IBinaryOp256D<T>
             where T : unmanaged
         {
 

@@ -14,16 +14,6 @@ namespace Z0
     partial struct Calcs
     {
         [MethodImpl(Inline)]
-        public static Srl128<T> srl<T>(W128 w)
-            where T : unmanaged
-                => default(Srl128<T>);
-
-        [MethodImpl(Inline)]
-        public static Srl256<T> srl<T>(W256 w)
-            where T : unmanaged
-                => default(Srl256<T>);
-
-        [MethodImpl(Inline)]
         public static Bsrl128<T> bsrl<T>(W128 w)
             where T : unmanaged
                 => default(Bsrl128<T>);

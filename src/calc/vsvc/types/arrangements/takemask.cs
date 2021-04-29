@@ -11,9 +11,9 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
-        public readonly struct TakeMask128<T> : IVUnaryScalarFunc128<T,ushort>
+        public readonly struct VTakeMask128<T> : IVUnaryScalarFunc128<T,ushort>
             where T : unmanaged
         {
 
@@ -22,7 +22,7 @@ namespace Z0
                 => cpu.vmovemask(cpu.v8u(x));
         }
 
-        public readonly struct TakeMask256<T> : ISVUnaryScalarFunc256<T,uint>
+        public readonly struct VTakeMask256<T> : ISVUnaryScalarFunc256<T,uint>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

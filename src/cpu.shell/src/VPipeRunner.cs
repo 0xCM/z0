@@ -91,10 +91,10 @@ namespace Z0
     {
         public uint BlockCount {get;}
 
-        readonly IPolySource PolySource;
+        readonly IDomainSource PolySource;
 
         [MethodImpl(Inline)]
-        public BlockSource01(IPolySource source, uint count)
+        public BlockSource01(IDomainSource source, uint count)
         {
             PolySource = source;
             BlockCount = count;

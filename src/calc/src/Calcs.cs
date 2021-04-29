@@ -24,12 +24,7 @@ namespace Z0
 
     }
 
-    public partial class VSvcHosts
-    {
-
-    }
-
-    public partial class VSvc : ISFxRoot<VSvc,VSvcHosts>
+    public partial class VSvc //: ISFxRoot<VSvc,VSvcHosts>
     {
         const NumericKind Closure = UInt64k;
     }

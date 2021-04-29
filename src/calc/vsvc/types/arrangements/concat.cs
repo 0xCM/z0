@@ -11,9 +11,9 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
-        public readonly struct Concat2x128<T> : IMerge2x128x256<T,T>
+        public readonly struct VConcat2x128<T> : IMerge2x128x256<T,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

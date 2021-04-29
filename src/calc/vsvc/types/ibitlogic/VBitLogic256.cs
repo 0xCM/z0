@@ -12,10 +12,10 @@ namespace Z0
 
     using K = ApiClasses;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
         [Closures(Integers)]
-        public readonly struct BinaryBitLogic256<T> : IUnaryBitLogic<Vector256<T>>, IBinaryBitLogic<Vector256<T>>, ITernaryBitLogic<Vector256<T>>
+        public readonly struct VBitLogic256<T> : IUnaryBitLogic<Vector256<T>>, IBinaryBitLogic<Vector256<T>>, ITernaryBitLogic<Vector256<T>>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

@@ -10,9 +10,9 @@ namespace Z0
 
     using static Part;
 
-    partial class VSvcHosts
+    partial struct CalcHosts
     {
-        public readonly struct Ones128<T> : SFx.IEmitter128<T>
+        public readonly struct VOnes128<T> : SFx.IEmitter128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -20,7 +20,7 @@ namespace Z0
                 => gcpu.vones<T>(w128);
         }
 
-        public readonly struct Ones256<T> : SFx.IEmitter256<T>
+        public readonly struct VOnes256<T> : SFx.IEmitter256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

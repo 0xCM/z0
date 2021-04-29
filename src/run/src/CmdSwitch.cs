@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-    using static memory;
-
     public enum CmdSwitchKind
     {
         None = 0,
