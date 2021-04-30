@@ -17,6 +17,50 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        Index<IApiKind> Kinds;
+
+        Index<ApiClassifier> _ApiClasses;
+
+        Index<SymLiteral> _ApiClassLiterals;
+
+        object locker;
+
+        public ApiQuery()
+        {
+            Kinds = Index<IApiKind>.Empty;
+            locker = new object();
+        }
+
+        public ReadOnlySpan<IApiKind> ApiKinds()
+        {
+            lock(locker)
+            {
+                if(Kinds.IsEmpty)
+                    Kinds = kinds();
+            }
+            return Kinds.View;
+        }
+
+        public ReadOnlySpan<SymLiteral> ApiClassLiterals()
+        {
+            lock(locker)
+            {
+                if(_ApiClassLiterals.IsEmpty)
+                    _ApiClassLiterals = ClassLiterals();
+            }
+            return _ApiClassLiterals.View;
+        }
+
+        public ReadOnlySpan<ApiClassifier> ApiClassifiers()
+        {
+            lock(locker)
+            {
+                if(_ApiClasses.IsEmpty)
+                    _ApiClasses = Classifiers();
+            }
+            return _ApiClasses.View;
+        }
+
         [Op]
         public static MethodInfo[] methods(in ApiRuntimeType src, HashSet<string> exclusions)
             => src.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions);

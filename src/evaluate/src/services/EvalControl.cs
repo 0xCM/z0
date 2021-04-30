@@ -31,7 +31,7 @@ namespace Z0
             if(!src.Exists)
                 return;
 
-            var catalogs = Wf.ApiCatalogs();
+            var catalogs = Wf.ApiData();
             var flow = Wf.Running($"Running {host.Format()} evaluaton workflow");
             var catalog = catalogs.HostCatalog(Wf.ApiCatalog.FindHost(host).Require());
             if(catalog.IsEmpty)

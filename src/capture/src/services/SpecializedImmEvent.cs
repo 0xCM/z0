@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         readonly bool Generic;
 
-        readonly RefinementClass ImmSource;
+        readonly ImmRefinementKind ImmSource;
 
         readonly Type Refinement;
 
@@ -29,21 +29,21 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static SpecializedImmEvent refined(WfStepId step, ApiHostUri uri, bool generic, Type refinement, FS.FilePath dst, CorrelationToken ct)
-            => new SpecializedImmEvent(step, uri, generic, RefinementClass.Refined, refinement, dst);
+            => new SpecializedImmEvent(step, uri, generic, ImmRefinementKind.Refined, refinement, dst);
 
         [MethodImpl(Inline)]
         public static SpecializedImmEvent literal(WfStepId step, ApiHostUri uri, bool generic, FS.FilePath dst, CorrelationToken ct)
-            => new SpecializedImmEvent(step, uri, generic, RefinementClass.Unrefined, typeof(void), dst);
+            => new SpecializedImmEvent(step, uri, generic, ImmRefinementKind.Unrefined, typeof(void), dst);
 
         [MethodImpl(Inline)]
         public static SpecializedImmEvent define(WfStepId step, ApiHostUri uri, bool generic, FS.FilePath dst, Type refinement, CorrelationToken ct)
             => new SpecializedImmEvent(step, uri, generic,
-                refinement != null ? RefinementClass.Refined : RefinementClass.Unrefined,
+                refinement != null ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined,
                 refinement,
                 dst);
 
         [MethodImpl(Inline)]
-        public SpecializedImmEvent(WfStepId step, ApiHostUri uri, bool generic, RefinementClass source, Type refinement, FS.FilePath dst)
+        public SpecializedImmEvent(WfStepId step, ApiHostUri uri, bool generic, ImmRefinementKind source, Type refinement, FS.FilePath dst)
         {
             EventId = WfEventId.define(EventName, step);
             Host = uri;

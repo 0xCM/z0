@@ -16,7 +16,12 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The interface type</typeparam>
         [Op]
-        public static Type[] Realize<T>(this IEnumerable<Type> src)
-            => src.Where(t => t.Interfaces().Contains(typeof(T))).Array();
+        public static Type[] Realize<T>(this Type[] src)
+            where T : class
+                => src.Where(t => t.Interfaces().Contains(typeof(T))).Array();
+
+        [Op]
+        public static Type[] Realize(this Type[] src, Type @interface)
+            => src.Where(t => t.Interfaces().Contains(@interface)).Array();
     }
 }

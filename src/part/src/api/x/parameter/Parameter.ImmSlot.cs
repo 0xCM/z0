@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static ImmFunctionClass;
+    using static ImmFunctionKind;
 
     partial class XApi
     {
        [Op]
-        public static ImmFunctionClass ImmSlot(this ParameterInfo p)
+        public static ImmFunctionKind ImmSlot(this ParameterInfo p)
         {
             switch(p.Position)
             {

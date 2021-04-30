@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = PredicateClass;
+    using K = PredicateKind;
 
     partial struct ApiClasses
     {

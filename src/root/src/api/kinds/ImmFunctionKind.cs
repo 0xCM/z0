@@ -12,7 +12,7 @@ namespace Z0
     /// Classifies operations according to their immediate needs
     /// </summary>
     [Flags]
-    public enum ImmFunctionClass : byte
+    public enum ImmFunctionKind : byte
     {
         /// <summary>
         /// The empty class

@@ -12,7 +12,7 @@ namespace Z0
     /// Classifies operators of arity up to 3
     /// </summary>
     [Flags]
-    public enum OperatorArity : ushort
+    public enum ApiOperatorKind : ushort
     {
         /// <summary>
         /// The empty class

@@ -9,14 +9,14 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct UnaryOperatorClass : IOperatorClass<UnaryOperatorClass,OperatorArity>
+    public readonly struct UnaryOperatorClass : IOperatorClass<UnaryOperatorClass,ApiOperatorKind>
     {
         [MethodImpl(Inline)]
         public static implicit operator OperatorClass(UnaryOperatorClass src)
             => src.Classifier;
 
-        public OperatorArity Kind
-            => OperatorArity.UnaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.UnaryOp;
 
         public OperatorClass Classifier
         {
@@ -25,10 +25,10 @@ namespace Z0
         }
     }
 
-    public readonly struct UnaryOperatorClass<T> : IOperatorClass<UnaryOperatorClass<T>, OperatorArity,T>
+    public readonly struct UnaryOperatorClass<T> : IOperatorClass<UnaryOperatorClass<T>, ApiOperatorKind,T>
     {
-        public OperatorArity Kind
-            => OperatorArity.UnaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.UnaryOp;
 
         public OperatorClass<T> Classifier
         {

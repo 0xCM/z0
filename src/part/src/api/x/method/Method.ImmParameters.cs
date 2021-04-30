@@ -15,13 +15,13 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static ParameterInfo[] ImmParameters(this MethodInfo src, RefinementClass refinement)
+        public static ParameterInfo[] ImmParameters(this MethodInfo src, ImmRefinementKind refinement)
         {
             var refined = src.GetParameters().Where(p => p.IsRefinedImmediate());
             var unrefined = src.GetParameters().Where(p => p.IsUnrefinedImmediate());
-            if(refinement == RefinementClass.All)
+            if(refinement == ImmRefinementKind.All)
                 return refined.Concat(unrefined).Array();
-            else if(refinement == RefinementClass.Refined)
+            else if(refinement == ImmRefinementKind.Refined)
                 return refined;
             else
                 return unrefined;

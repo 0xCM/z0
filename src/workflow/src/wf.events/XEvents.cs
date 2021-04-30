@@ -10,10 +10,12 @@ namespace Z0
 
     using static Part;
 
-    public static partial class XWf
+    public static class XEvents
     {
-        public static Task Continue<T>(this Task<T> src, Action<T> @continue)
-            where T : struct, ICmd
-                => src.ContinueWith(t => @continue(t.Result));
+        public static EventSignal Signal<T>(this IWfRuntime wf)
+            => wf.EventSink.Signal<T>();
+
+        public static EventSignal Signal(this IWfRuntime wf, WfHost source)
+            => wf.EventSink.Signal(source);
     }
 }

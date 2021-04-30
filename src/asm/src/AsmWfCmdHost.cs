@@ -70,7 +70,7 @@ namespace Z0.Asm
         void CorrelateApiCode()
         {
             var catalogs = Wf.ApiCatalog.PartCatalogs();
-            var blocks = Wf.ApiCatalogs().Correlate(catalogs);
+            var blocks = Wf.ApiData().Correlate(catalogs);
         }
 
     }

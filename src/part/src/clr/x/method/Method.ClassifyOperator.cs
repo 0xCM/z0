@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using OC = OperatorArity;
+    using OC = ApiOperatorKind;
 
     partial class ClrQuery
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         [Op]
-        public static OperatorArity ClassifyOperator(this MethodInfo src)
+        public static ApiOperatorKind ClassifyOperator(this MethodInfo src)
         {
             if(IsOperator(src))
             {

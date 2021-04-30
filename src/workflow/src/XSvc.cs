@@ -4,10 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class XCmd
+    [ApiHost]
+    public static class XSvc
     {
-        public static  CmdResult<C,P> ToResult<C,P>(this C spec, Outcome<P> outcome)
-            where C : struct, ICmd<C>
-                => Cmd.result(spec, outcome.Ok, outcome.Data, outcome.Message);
+        [Op]
+        public static AppServiceCache Services(this IWfRuntime src)
+            => Z0.AppServiceCache.create(src);
     }
 }

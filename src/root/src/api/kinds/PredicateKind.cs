@@ -9,31 +9,31 @@ namespace Z0
     using OC = OperationKind;
 
     [Flags]
-    public enum ArityClass : ushort
+    public enum PredicateKind : ushort
     {
         /// <summary>
-        /// Classifies nothing
+        /// The empty class
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// Classifies operations of arity 0
+        /// Classifies functions that return a system boolean value or a bit value
         /// </summary>
-        Nullary = OC.Nullary,
+        Predicate = OC.Predicate,
 
         /// <summary>
-        /// Classifies operations of arity 1
+        /// Classifies predicates that accept one argument
         /// </summary>
-        Unary = OC.Unary,
+        UnaryPredicate = OC.UnaryPredicate,
 
         /// <summary>
-        /// Classifies operations of arity 2
+        /// Classifies predicates that accept two arguments
         /// </summary>
-        Binary = OC.Binary,
+        BinaryPredicate = OC.BinaryPredicate,
 
         /// <summary>
-        /// Classifies operations of arity 3
+        /// Classifies predicates that accept three arguments
         /// </summary>
-        Ternary = OC.Ternary,
+        TernaryPredicate = OC.TernaryPredicate,
     }
 }

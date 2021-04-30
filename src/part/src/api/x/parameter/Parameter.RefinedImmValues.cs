@@ -14,13 +14,13 @@ namespace Z0
         public static Imm8R[] RefinedImmValues(this ParameterInfo param)
         {
             if(param.IsRefinedImmediate())
-                return param.ParameterType.GetEnumValues().Cast<byte>().Array().ToImm8Values(RefinementClass.Refined);
+                return param.ParameterType.GetEnumValues().Cast<byte>().Array().ToImm8Values(ImmRefinementKind.Refined);
             else
                 return sys.empty<Imm8R>();
         }
 
         [Op]
-        public static Imm8R[] ToImm8Values(this byte[] src, RefinementClass kind)
+        public static Imm8R[] ToImm8Values(this byte[] src, ImmRefinementKind kind)
             => src.Map(x => new Imm8R(x));
 
     }

@@ -9,11 +9,11 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct BinaryCellOpClass<W> : IApiCellOpClass<BinaryCellOpClass<W>,W,OperatorArity>
+    public readonly struct BinaryCellOpClass<W> : IApiCellOpClass<BinaryCellOpClass<W>,W,ApiOperatorKind>
         where W : unmanaged, ITypeWidth
     {
-        public OperatorArity Kind
-            => OperatorArity.BinaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.BinaryOp;
 
         public TypeWidth Width
             => Widths.type<W>();

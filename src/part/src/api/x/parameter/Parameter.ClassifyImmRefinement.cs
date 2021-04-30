@@ -10,12 +10,12 @@ namespace Z0
     partial class XApi
     {
         [Op]
-        public static RefinementClass ClassifyImmRefinement(this ParameterInfo src)
+        public static ImmRefinementKind ClassifyImmRefinement(this ParameterInfo src)
         {
             if(!src.Tagged<ImmAttribute>())
-                return RefinementClass.None;
+                return ImmRefinementKind.None;
             else
-                return src.ParameterType.IsEnum ? RefinementClass.Refined : RefinementClass.Unrefined;
+                return src.ParameterType.IsEnum ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined;
         }
     }
 }

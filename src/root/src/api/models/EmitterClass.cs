@@ -9,10 +9,10 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct EmitterClass : IOperatorClass<EmitterClass,OperatorArity>
+    public readonly struct EmitterClass : IOperatorClass<EmitterClass,ApiOperatorKind>
     {
-        public OperatorArity Kind
-            => OperatorArity.Emitter;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.Emitter;
 
         [MethodImpl(Inline)]
         public static implicit operator OperatorClass(EmitterClass src)
@@ -25,10 +25,10 @@ namespace Z0
         }
     }
 
-    public readonly struct EmitterClass<T> : IOperatorClass<EmitterClass<T>,OperatorArity,T>
+    public readonly struct EmitterClass<T> : IOperatorClass<EmitterClass<T>,ApiOperatorKind,T>
     {
-        public OperatorArity Kind
-            => OperatorArity.Emitter;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.Emitter;
 
         public OperatorClass<T> Classifier
         {

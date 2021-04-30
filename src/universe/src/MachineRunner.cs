@@ -55,8 +55,13 @@ namespace Z0
                         Emitted(Wf.AsmBitstringEmitter().EmitBitstrings(statements.SelectMany(x => x.ApiStatements)));
                 }
 
+                var apidata = Wf.ApiData();
+
                 if(options.CorrelateMembers)
-                    Wf.ApiCatalogs().Correlate();
+                    apidata.Correlate();
+
+                if(options.EmitApiClasses)
+                    apidata.EmitApiClasses();
 
                 if(options.EmitAsmCatalogs)
                 {

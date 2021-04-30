@@ -14,19 +14,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source parameter</param>
         [Op]
-        public static bool IsImmediate(this ParameterInfo param, RefinementClass refinement)
+        public static bool IsImmediate(this ParameterInfo param, ImmRefinementKind refinement)
         {
             if(param.Tagged<ImmAttribute>())
             {
                 var refined = param.ParameterType.IsEnum;
                 if(refined)
                 {
-                    if(refinement == RefinementClass.Refined || refinement == RefinementClass.All)
+                    if(refinement == ImmRefinementKind.Refined || refinement == ImmRefinementKind.All)
                         return true;
                 }
                 else
                 {
-                    if(refinement == RefinementClass.Unrefined)
+                    if(refinement == ImmRefinementKind.Unrefined)
                         return true;
                 }
 

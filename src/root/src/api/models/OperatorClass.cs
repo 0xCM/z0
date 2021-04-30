@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using K = OperatorArity;
+    using K = ApiOperatorKind;
 
     public readonly struct OperatorClass : IOperatorClass<OperatorClass,K>
     {
@@ -26,12 +26,12 @@ namespace Z0
         }
     }
 
-    public readonly struct OperatorClass<T> : IOperationClass<OperatorArity,T>
+    public readonly struct OperatorClass<T> : IOperationClass<ApiOperatorKind,T>
     {
-        public OperatorArity Kind {get;}
+        public ApiOperatorKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public OperatorClass(OperatorArity k)
+        public OperatorClass(ApiOperatorKind k)
             => Kind = k;
 
         [MethodImpl(Inline)]

@@ -9,12 +9,12 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct UnaryCellFunctionClass : ICellFunctionClass<UnaryCellFunctionClass,OperatorArity>
+    public readonly struct UnaryCellFunctionClass : ICellFunctionClass<UnaryCellFunctionClass,ApiOperatorKind>
     {
         public TypeWidth Width {get;}
 
-        public OperatorArity Kind
-            => OperatorArity.UnaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.UnaryOp;
 
         public OperatorClass Untyped
         {

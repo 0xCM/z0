@@ -24,6 +24,8 @@ namespace Z0
 
         public Setting<bool> EmitApiMetadata;
 
+        public Setting<bool> EmitApiClasses;
+
         public Setting<bool> EmitFieldMetadata;
 
         public Setting<bool> EmitSymbolicLiterals;
@@ -90,6 +92,7 @@ namespace Z0
             dst.EmitHexPack = true;
             dst.ProcessCultFiles = false;
             dst.EmitAssemblyRefs = true;
+            dst.EmitApiClasses = true;
             return dst;
         }
 

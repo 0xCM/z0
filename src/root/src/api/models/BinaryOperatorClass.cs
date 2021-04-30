@@ -10,15 +10,15 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Defines a type-level lift for the <see cref='OperatorArity.BinaryOp'/> classifier
+    /// Defines a type-level lift for the <see cref='ApiOperatorKind.BinaryOp'/> classifier
     /// </summary>
-    public readonly struct BinaryOperatorClass : IOperatorClass<BinaryOperatorClass,OperatorArity>
+    public readonly struct BinaryOperatorClass : IOperatorClass<BinaryOperatorClass,ApiOperatorKind>
     {
         public static implicit operator OperatorClass(BinaryOperatorClass src)
             => src.Classifier;
 
-        public OperatorArity Kind
-            => OperatorArity.BinaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.BinaryOp;
 
         public OperatorClass Classifier
         {
@@ -28,12 +28,12 @@ namespace Z0
     }
 
     /// <summary>
-    /// Defines an operand-parametric type-level lift for the <see cref='OperatorArity.BinaryOp'/> classifier
+    /// Defines an operand-parametric type-level lift for the <see cref='ApiOperatorKind.BinaryOp'/> classifier
     /// </summary>
-    public readonly struct BinaryOperatorClass<T> : IOperatorClass<BinaryOperatorClass<T>,OperatorArity,T>
+    public readonly struct BinaryOperatorClass<T> : IOperatorClass<BinaryOperatorClass<T>,ApiOperatorKind,T>
     {
-        public OperatorArity Kind
-            => OperatorArity.BinaryOp;
+        public ApiOperatorKind Kind
+            => ApiOperatorKind.BinaryOp;
 
         [MethodImpl(Inline)]
         public static implicit operator OperatorClass<T>(BinaryOperatorClass<T> src)

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArityClass;
+    using K = ApiArityKind;
 
     /// <summary>
     /// Classifies generic operations of arity 0

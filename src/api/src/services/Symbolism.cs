@@ -60,10 +60,7 @@ namespace Z0
         {
             var dst = Db.IndexTable("api.classes");
             var flow = Wf.EmittingTable<SymLiteral>(dst);
-            var service = Wf.ApiClassCatalog();
-            var formatter = Tables.formatter<SymLiteral>();
-            var classifiers = service.Classifiers();
-            var literals = classifiers.SelectMany(x => x.Literals);
+            var literals = Wf.ApiQuery().ApiClassLiterals();
             var count = Tables.emit(literals, dst);
             Wf.EmittedTable(flow, count);
         }

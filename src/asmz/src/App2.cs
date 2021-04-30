@@ -266,7 +266,7 @@ namespace Z0.Asm
 
         void FilterApiBlocks()
         {
-            var blocks = Wf.ApiCatalogs().Correlate();
+            var blocks = Wf.ApiData().Correlate();
             var f1 = blocks.Filter(ApiClassKind.And);
             root.iter(f1,f => Wf.Row(f.Uri));
         }
@@ -805,7 +805,7 @@ namespace Z0.Asm
 
         void LoadCurrentCatalog()
         {
-            var entries = Wf.ApiCatalogs().Current();
+            var entries = Wf.ApiData().Current();
         }
 
         void ProcessInstructions()
@@ -1343,18 +1343,19 @@ namespace Z0.Asm
             root.iter(reader.TypeDefKeys(), k => Wf.Row(k));
             root.iter(reader.TypeRefKeys(), k => Wf.Row(k));
             root.iter(reader.AssemblyRefKeys(), k => Wf.Row(k));
-
-
         }
 
+
+        public void EmitApiClasses()
+            => Wf.ApiData().EmitApiClasses();
 
         public void Run()
         {
             // var experiment = ExtractExperiment.create(Wf);
             // experiment.Run();
 
-            ListCliTables(Parts.Cpu.Assembly);
-
+            //ListCliTables(Parts.Cpu.Assembly);
+            EmitApiClasses();
         }
 
         // void GetMethodInfo()

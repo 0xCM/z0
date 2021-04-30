@@ -6,6 +6,9 @@ namespace Z0
 {
     public class AgentRunner
     {
+        public static void run(IWfRuntime wf)
+            => AgentRunner.run(wf.Signal(typeof(AgentRunner)), wf.Args);
+
         AgentContext AgentContext;
 
         EventSignal Signal;

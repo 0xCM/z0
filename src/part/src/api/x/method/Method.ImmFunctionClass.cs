@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using FC = ImmFunctionClass;
+    using FC = ImmFunctionKind;
 
     partial class XApi
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to classify</param>
         [Op]
-        public static ImmFunctionClass ImmFunctionClass(this MethodInfo src, RefinementClass refinement)
+        public static ImmFunctionKind ImmFunctionClass(this MethodInfo src, ImmRefinementKind refinement)
         {
             var found = src.ImmParameters(refinement);
             var count = found.Length;

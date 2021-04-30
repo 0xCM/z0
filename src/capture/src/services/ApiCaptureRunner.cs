@@ -102,7 +102,7 @@ namespace Z0
         {
             var rebasing = Wf.Running();
             var dst = Db.CaptureContextRoot() + FS.file(string.Format("{0}.{1}", Tables.tableid<ApiCatalogEntry>(), ts.Format()), FS.Csv);
-            var entries = Wf.ApiCatalogs().RebaseMembers(members, dst);
+            var entries = Wf.ApiData().RebaseMembers(members, dst);
             Wf.Ran(rebasing);
         }
 

@@ -20,6 +20,5 @@ namespace Z0
                 where t.IsConcrete() && t.Untagged<IgnoreAttribute>() && names.Contains(t.Name)
                 orderby t.Name
                 select t).Array();
-
     }
 }

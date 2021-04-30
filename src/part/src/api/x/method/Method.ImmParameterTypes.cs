@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static Type[] ImmParameterTypes(this MethodInfo src, RefinementClass kind)
+        public static Type[] ImmParameterTypes(this MethodInfo src, ImmRefinementKind kind)
             => src.ImmParameters(kind).Select(p => p.ParameterType);
     }
 }

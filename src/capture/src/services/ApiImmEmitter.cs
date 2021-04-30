@@ -73,7 +73,7 @@ namespace Z0.Asm
         {
             if(imm8.Length != 0)
             {
-                EmitUnrefined(Exchange, imm8.ToImm8Values(RefinementClass.Unrefined), parts);
+                EmitUnrefined(Exchange, imm8.ToImm8Values(ImmRefinementKind.Unrefined), parts);
             }
         }
 
@@ -90,17 +90,17 @@ namespace Z0.Asm
             => EmitRefined(Exchange, parts);
 
         ParameterInfo RefiningParameter(MethodInfo src)
-            => src.ImmParameters(RefinementClass.Refined).First();
+            => src.ImmParameters(ImmRefinementKind.Refined).First();
 
         Type RefinementType(MethodInfo src)
-            => src.ImmParameters(RefinementClass.Refined).First().ParameterType;
+            => src.ImmParameters(ImmRefinementKind.Refined).First().ParameterType;
 
         Imm8R[] RefinedValues(MethodInfo src)
             => RefiningParameter(src).RefinedImmValues();
 
         void EmitDirectRefinements(in CaptureExchange exchange, IApiHost host, IAsmImmWriter dst)
         {
-            var groups = ApiQuery.imm(host,RefinementClass.Refined);
+            var groups = ApiQuery.imm(host,ImmRefinementKind.Refined);
             var uri = host.HostUri;
             var generic = false;
             foreach(var g in groups)
@@ -108,7 +108,7 @@ namespace Z0.Asm
                 var gid = g.GroupId;
                 foreach(var member in g.Members.Storage)
                 {
-                    if(member.Method.IsVectorizedUnaryImm(RefinementClass.Refined))
+                    if(member.Method.IsVectorizedUnaryImm(ImmRefinementKind.Refined))
                     {
                         var imm8 = RefinedValues(member.Method);
                         if(imm8.Length != 0)
@@ -125,7 +125,7 @@ namespace Z0.Asm
                             }
                         }
                     }
-                    else if(member.Method.IsVectorizedBinaryImm(RefinementClass.Refined))
+                    else if(member.Method.IsVectorizedBinaryImm(ImmRefinementKind.Refined))
                     {
                         var values = RefinedValues(member.Method);
                         if(values.Length != 0)
@@ -175,7 +175,7 @@ namespace Z0.Asm
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host.HostUri);
-                var groups = ApiQuery.imm(host, RefinementClass.Unrefined);
+                var groups = ApiQuery.imm(host, ImmRefinementKind.Unrefined);
                 routines.AddRange(EmitUnrefinedDirect(exchange, groups,imm8, archive));
             }
             return routines.ToArray();
@@ -185,14 +185,14 @@ namespace Z0.Asm
         {
             var routines = root.list<AsmRoutine>();
             var unary = from g in groups
-                        let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(RefinementClass.Unrefined))
+                        let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
                         select (g,members.Array());
 
             foreach(var (g,members) in unary)
                 routines.AddRange(EmitUnrefinedUnary(exchange, g.GroupId, members, imm8, dst));
 
             var binary = from g in groups
-                        let members = g.Members.Where(m => m.Method.IsVectorizedBinaryImm(RefinementClass.Unrefined))
+                        let members = g.Members.Where(m => m.Method.IsVectorizedBinaryImm(ImmRefinementKind.Unrefined))
                         select (g,members.Array());
 
             foreach(var (g,members) in binary)
@@ -206,7 +206,7 @@ namespace Z0.Asm
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host.HostUri);
-                var specs = ApiQuery.immG(host, RefinementClass.Unrefined);
+                var specs = ApiQuery.immG(host, ImmRefinementKind.Unrefined);
                 foreach(var spec in specs)
                     routines.AddRange(EmitUnrefinedGeneric(exchange, spec, imm8, archive));
             }
@@ -215,13 +215,13 @@ namespace Z0.Asm
 
         Index<AsmRoutine> EmitGenericRefinements(in CaptureExchange exchange, IApiHost host, IAsmImmWriter dst)
         {
-            var specs = ApiQuery.immG(host, RefinementClass.Refined);
+            var specs = ApiQuery.immG(host, ImmRefinementKind.Refined);
             var routines = root.list<AsmRoutine>();
             foreach(var f in specs)
             {
-                if(f.Method.IsVectorizedUnaryImm(RefinementClass.Refined))
+                if(f.Method.IsVectorizedUnaryImm(ImmRefinementKind.Refined))
                     routines.AddRange(EmitUnary(exchange, f, RefinedValues(f.Method), dst, RefinementType(f.Method)));
-                else if(f.Method.IsVectorizedBinaryImm(RefinementClass.Refined))
+                else if(f.Method.IsVectorizedBinaryImm(ImmRefinementKind.Refined))
                     routines.AddRange(EmitBinary(exchange, f, RefinedValues(f.Method), dst, RefinementType(f.Method)));
             }
             return routines.ToArray();
@@ -230,9 +230,9 @@ namespace Z0.Asm
         Index<AsmRoutine> EmitUnrefinedGeneric(in CaptureExchange exchange, ApiMethodG src,  Imm8R[] imm8, IAsmImmWriter dst)
         {
             var routines = root.list<AsmRoutine>();
-            if(src.Method.IsVectorizedUnaryImm(RefinementClass.Unrefined))
+            if(src.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
                 routines.AddRange(EmitUnary(exchange, src, imm8, dst));
-            else if(src.Method.IsVectorizedBinaryImm(RefinementClass.Unrefined))
+            else if(src.Method.IsVectorizedBinaryImm(ImmRefinementKind.Unrefined))
                 routines.AddRange(EmitBinary(exchange, src, imm8, dst));
 
             return routines.ToArray();

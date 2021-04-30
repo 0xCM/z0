@@ -14,19 +14,32 @@ namespace Z0
     using static Sequential;
 
     [ApiHost]
-    public class ApiCatalogs : AppService<ApiCatalogs>
+    public class ApiDataService : AppService<ApiDataService>
     {
         ApiJit ApiJit;
+
+
+        ApiQuery Query;
 
         protected override void OnInit()
         {
             ApiJit = Wf.ApiJit();
+            Query = Wf.ApiQuery();
+        }
+
+        public void EmitApiClasses()
+        {
+            var dst = Db.IndexTable("api.classes");
+            var flow = Wf.EmittingTable<SymLiteral>(dst);
+            var literals = Query.ApiClassLiterals();
+            var count = Tables.emit(literals, dst);
+            Wf.EmittedTable(flow, count);
         }
 
         public Index<ApiCatalogEntry> RebaseMembers(ApiMembers src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<ApiCatalogEntry>(dst);
-            var records = ApiCatalogs.rebase(src.BaseAddress, src.View);
+            var records = rebase(src.BaseAddress, src.View);
             var count = Tables.emit<ApiCatalogEntry>(records, dst, 16);
             Wf.EmittedTable<ApiCatalogEntry>(flow, count, dst);
             return records;
