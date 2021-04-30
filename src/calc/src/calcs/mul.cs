@@ -15,12 +15,12 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Mul), Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory(Mul), Closures(Closure)]
         public static Mul<T> mul<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Factory(Mul), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Mul), Closures(Closure)]
         public static Span<T> mul<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => apply(Calcs.mul<T>(), l, r, dst);

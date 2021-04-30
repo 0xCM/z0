@@ -20,6 +20,16 @@ namespace Z0
             where T : unmanaged
                 => default(Or<T>);
 
+        [MethodImpl(Inline), Factory(Or), Closures(Closure)]
+        public static VOr128<T> vor<T>(W128 w)
+            where T : unmanaged
+                => default(VOr128<T>);
+
+        [MethodImpl(Inline), Factory(Or), Closures(Closure)]
+        public static VOr256<T> vor<T>(W256 w)
+            where T : unmanaged
+                => default(VOr256<T>);
+
         [MethodImpl(Inline), Factory(Or), Closures(Integers)]
         public static Or128<T> or<T>(W128 w)
             where T : unmanaged
@@ -44,7 +54,6 @@ namespace Z0
         public static Span<T> or<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
                 => apply(or<T>(), a, b, dst);
-
 
         [MethodImpl(Inline), Or, Closures(Closure)]
         public static ref readonly SpanBlock128<T> or<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

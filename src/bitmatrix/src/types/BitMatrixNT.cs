@@ -81,7 +81,7 @@ namespace Z0
             [MethodImpl(Inline)]
             set
             {
-                var index = GridCalcs.index(row, col, NatRep, NatRep, default(T));
+                var index = CellCalcs.index(row, col, NatRep, NatRep, default(T));
                 seek(Data,index.CellIndex) = gbits.setbit(skip(Data,index.CellIndex), index.BitOffset, value);
             }
         }

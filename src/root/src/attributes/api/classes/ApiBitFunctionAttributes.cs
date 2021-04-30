@@ -69,6 +69,8 @@ namespace Z0
 
     public sealed class MoveMaskAttribute : A { public MoveMaskAttribute() : base(K.MoveMask) {} }
 
+    public sealed class MoveIMaskAttribute : A { public MoveIMaskAttribute() : base(K.MoveIMask) {} }
+
     public sealed class ZeroExtendAttribute : A { public ZeroExtendAttribute() : base(K.ZeroExtend) {} }
 
     public sealed class SignExtendAttribute : A { public SignExtendAttribute() : base(K.SignExtend) {} }

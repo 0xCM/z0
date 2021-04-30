@@ -15,6 +15,16 @@ namespace Z0
 
     partial struct Calcs
     {
+        [MethodImpl(Inline), Factory(XorNot), Closures(Closure)]
+        public static VXorNot128<T> vxornot<T>(W128 w)
+            where T : unmanaged
+                => default(VXorNot128<T>);
+
+        [MethodImpl(Inline), Factory(XorNot), Closures(Closure)]
+        public static VXorNot256<T> vxornot<T>(W256 w)
+            where T : unmanaged
+                => default(VXorNot256<T>);
+
         [MethodImpl(Inline), Factory(XorNot), Closures(Integers)]
         public static XorNot128<T> xornot<T>(W128 w)
             where T : unmanaged

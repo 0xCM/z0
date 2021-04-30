@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Negative), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Negative), Closures(Closure)]
         public static NegativeOp<T> negative<T>()
             where T : unmanaged
                 => default(NegativeOp<T>);

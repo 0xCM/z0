@@ -68,13 +68,13 @@ namespace Z0
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => (uint)CellCalcs.cellcount<M,N,T>();
+            get => (uint)CellCalcs.gridcells<M,N,T>();
         }
 
         public uint BytCount
         {
             [MethodImpl(Inline)]
-            get => (uint)CellCalcs.tablesize<M,N>();
+            get => (uint)CellCalcs.gridsize<M,N>();
         }
 
         /// <summary>

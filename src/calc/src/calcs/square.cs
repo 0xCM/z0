@@ -15,12 +15,12 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Square), Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory(Square), Closures(Closure)]
         public static Square<T> square<T>()
             where T : unmanaged
                 => default;
 
-       [MethodImpl(Inline), Square, Closures(Integers)]
+       [MethodImpl(Inline), Square, Closures(Closure)]
         public static Span<T> square<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => apply(Calcs.square<T>(), src, dst);

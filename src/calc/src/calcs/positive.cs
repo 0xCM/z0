@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Positive), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Positive), Closures(Closure)]
         public static PositiveOp<T> positive<T>()
             where T : unmanaged
                 => default(PositiveOp<T>);

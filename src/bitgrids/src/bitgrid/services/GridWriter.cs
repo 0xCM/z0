@@ -34,7 +34,7 @@ namespace Z0
 
             for(var i = 0; i<points.Length; i++)
             {
-                var gs = GridCalcs.metrics((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats();
+                var gs = CellCalcs.metrics((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats();
                 if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
                     dst.WriteLine(Grids.format(gs));
             }

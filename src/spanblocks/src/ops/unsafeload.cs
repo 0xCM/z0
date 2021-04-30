@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Load, Closures(UInt8k)]
-        internal static SpanBlock8<T> unsafeload<T>(W8 w, Span<T> src)
+        public static SpanBlock8<T> unsafeload<T>(W8 w, Span<T> src)
             where T : unmanaged
                 => new SpanBlock8<T>(src);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Load, Closures(UInt16k)]
-        internal static SpanBlock16<T> unsafeload<T>(W16 w, Span<T> src)
+        public static SpanBlock16<T> unsafeload<T>(W16 w, Span<T> src)
             where T : unmanaged
                 => new SpanBlock16<T>(src);
 
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Load, Closures(UInt32k)]
-        internal static SpanBlock32<T> unsafeload<T>(W32 w, Span<T> src)
+        public static SpanBlock32<T> unsafeload<T>(W32 w, Span<T> src)
             where T : unmanaged
                 => new SpanBlock32<T>(src);
 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Load, Closures(UInt32k)]
-        internal static SpanBlock64<T> unsafeload<T>(W64 w, Span<T> src)
+        public static SpanBlock64<T> unsafeload<T>(W64 w, Span<T> src)
             where T : unmanaged
                 => new SpanBlock64<T>(src);
 
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Load, Closures(UInt32k)]
-        internal static SpanBlock256<T> unsafeload<T>(W256 w, Span<T> src)
+        public static SpanBlock256<T> unsafeload<T>(W256 w, Span<T> src)
             where T : unmanaged
                 => new SpanBlock256<T>(src);
 
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Load, Closures(UInt32k)]
-        internal static SpanBlock512<T> unsafeload<T>(W512 w, Span<T> src)
+        public static SpanBlock512<T> unsafeload<T>(W512 w, Span<T> src)
             where T : unmanaged
                 => new SpanBlock512<T>(src);
     }

@@ -15,22 +15,32 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Xor), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Xor), Closures(Closure)]
         public static Xor<T> xor<T>()
             where T : unmanaged
                 => default(Xor<T>);
 
-        [MethodImpl(Inline), Factory(Xor), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Xor), Closures(Closure)]
+        public static VXor128<T> vxor<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VXor128<T>);
+
+        [MethodImpl(Inline), Factory(Xor), Closures(Closure)]
+        public static VXor256<T> vxor<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VXor256<T>);
+
+        [MethodImpl(Inline), Factory(Xor), Closures(Closure)]
         public static Xor128<T> xor<T>(W128 w)
             where T : unmanaged
                 => default(Xor128<T>);
 
-        [MethodImpl(Inline), Factory(Xor), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Xor), Closures(Closure)]
         public static Xor256<T> xor<T>(W256 w)
             where T : unmanaged
                 => default(Xor256<T>);
 
-        [MethodImpl(Inline), Xor, Closures(Integers)]
+        [MethodImpl(Inline), Xor, Closures(Closure)]
         public static Span<T> xor<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
                 => apply(xor<T>(), a, b, dst);

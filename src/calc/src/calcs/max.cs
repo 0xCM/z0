@@ -14,6 +14,16 @@ namespace Z0
 
     partial struct Calcs
     {
+        [MethodImpl(Inline), Factory(Max), Closures(Closure)]
+        public static VMax128<T> vmax<T>(W128 w)
+            where T : unmanaged
+                => default(VMax128<T>);
+
+        [MethodImpl(Inline), Factory(Max), Closures(Closure)]
+        public static VMax256<T> vmax<T>(W256 w)
+            where T : unmanaged
+                => default;
+
         [MethodImpl(Inline), Factory(Max), Closures(Integers)]
         public static Max128<T> max<T>(W128 w)
             where T : unmanaged

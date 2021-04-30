@@ -20,6 +20,16 @@ namespace Z0
             where T : unmanaged
                 => default(CNonImpl<T>);
 
+        [MethodImpl(Inline), Factory(CNonImpl), Closures(Closure)]
+        public static VCNonImpl128<T> vcnonimpl<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VCNonImpl128<T>);
+
+        [MethodImpl(Inline), Factory(CNonImpl), Closures(Closure)]
+        public static VCNonImpl256<T> vcnonimpl<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VCNonImpl256<T>);
+
         [MethodImpl(Inline), Factory(CNonImpl), Closures(Integers)]
         public static CNonImpl128<T> cnonimpl<T>(W128 w)
             where T : unmanaged

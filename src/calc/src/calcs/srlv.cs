@@ -14,7 +14,18 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Srlv, Closures(Integers)]
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static VSrlv128<T> vsrlv<T>(W128 w)
+            where T : unmanaged
+                => default(VSrlv128<T>);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static VSrlv256<T> vsrlv<T>(W256 w)
+            where T : unmanaged
+                => default(VSrlv256<T>);
+
+        [MethodImpl(Inline), Srlv, Closures(Closure)]
         public static Span<T> srlv<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
             where T : unmanaged
         {

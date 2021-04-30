@@ -15,6 +15,16 @@ namespace Z0
 
     partial struct Calcs
     {
+        [MethodImpl(Inline), Factory(Bsrl), Closures(Integers)]
+        public static Bsrl128<T> bsrl<T>(W128 w)
+            where T : unmanaged
+                => default(Bsrl128<T>);
+
+        [MethodImpl(Inline), Factory(Bsrl), Closures(Integers)]
+        public static Bsrl256<T> bsrl<T>(W256 w)
+            where T : unmanaged
+                => default(Bsrl256<T>);
+
         [MethodImpl(Inline), Bsrl, Closures(Integers)]
         public static ref readonly SpanBlock128<T> bsrl<T>(in SpanBlock128<T> a, [Imm] byte count, in SpanBlock128<T> dst)
             where T : unmanaged

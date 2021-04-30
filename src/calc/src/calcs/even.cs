@@ -15,12 +15,12 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Even), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Even), Closures(Closure)]
         public static Even<T> even<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Even, Closures(Integers)]
+        [MethodImpl(Inline), Even, Closures(Closure)]
         public static Span<bit> even<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
                 => apply(Calcs.even<T>(), src,dst);

@@ -15,22 +15,32 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Srl), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Srl), Closures(Closure)]
         public static Srl<T> srl<T>()
             where T : unmanaged
                 => default(Srl<T>);
 
-        [MethodImpl(Inline), Factory(Srl), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Srl), Closures(Closure)]
+        public static VSrl128<T> vsrl<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VSrl128<T>);
+
+        [MethodImpl(Inline), Factory(Srl), Closures(Closure)]
+        public static VSrl256<T> vsrl<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VSrl256<T>);
+
+        [MethodImpl(Inline), Factory(Srl), Closures(Closure)]
         public static Srl128<T> srl<T>(W128 w)
             where T : unmanaged
                 => default(Srl128<T>);
 
-        [MethodImpl(Inline), Factory(Srl), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Srl), Closures(Closure)]
         public static Srl256<T> srl<T>(W256 w)
             where T : unmanaged
                 => default(Srl256<T>);
 
-        [MethodImpl(Inline), Srl, Closures(Integers)]
+        [MethodImpl(Inline), Srl, Closures(Closure)]
         public static Span<T> srl<T>(ReadOnlySpan<T> src, byte count, Span<T> dst)
             where T : unmanaged
         {

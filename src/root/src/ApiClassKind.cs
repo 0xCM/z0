@@ -288,6 +288,8 @@ public enum ApiClassKind : ushort
 
     MoveMask,
 
+    MoveIMask,
+
     BitCell,
 
     Enable,

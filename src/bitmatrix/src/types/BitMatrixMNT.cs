@@ -117,14 +117,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get
             {
-                var index = GridCalcs.index(row, col, RowDim, ColDim, default(T));
+                var index = CellCalcs.index(row, col, RowDim, ColDim, default(T));
                 return gbits.testbit(Data[index.CellIndex], index.BitOffset);
             }
 
             [MethodImpl(Inline)]
             set
             {
-                var index = GridCalcs.index(row, col, RowDim, ColDim, default(T));
+                var index = CellCalcs.index(row, col, RowDim, ColDim, default(T));
                 Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);
            }
         }
@@ -132,7 +132,7 @@ namespace Z0
         int RowCellCount
         {
             [MethodImpl(Inline)]
-            get => CellCalcs.minimum<N,T>();
+            get => CellCalcs.mincells<N,T>();
         }
 
         /// <summary>

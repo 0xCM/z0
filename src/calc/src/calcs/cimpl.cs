@@ -20,6 +20,16 @@ namespace Z0
             where T : unmanaged
                 => default(CImpl<T>);
 
+        [MethodImpl(Inline), Factory(CImpl), Closures(Closure)]
+        public static VCImpl128<T> vcimpl<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VCImpl128<T>);
+
+        [MethodImpl(Inline), Factory(CImpl), Closures(Closure)]
+        public static VCImpl256<T> vcimpl<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VCImpl256<T>);
+
         [MethodImpl(Inline), Factory(CImpl), Closures(Integers)]
         public static CImpl128<T> cimpl<T>(W128 w)
             where T : unmanaged
@@ -29,7 +39,6 @@ namespace Z0
         public static CImpl256<T> cimpl<T>(W256 w)
             where T : unmanaged
                 => default(CImpl256<T>);
-
 
         [MethodImpl(Inline), CImpl, Closures(Integers)]
         public static Span<T> cimpl<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)

@@ -15,22 +15,32 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Not), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Not), Closures(Closure)]
         public static Not<T> not<T>()
             where T : unmanaged
                 => default(Not<T>);
 
-        [MethodImpl(Inline), Factory(Not), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Not), Closures(Closure)]
+        public static VNot128<T> vnot<T>(W128 w)
+            where T : unmanaged
+                => default(VNot128<T>);
+
+        [MethodImpl(Inline), Factory(Not), Closures(Closure)]
+        public static VNot256<T> vnot<T>(W256 w)
+            where T : unmanaged
+                => default(VNot256<T>);
+
+        [MethodImpl(Inline), Factory(Not), Closures(Closure)]
         public static Not128<T> not<T>(W128 w)
             where T : unmanaged
                 => default(Not128<T>);
 
-        [MethodImpl(Inline), Factory(Not), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Not), Closures(Closure)]
         public static Not256<T> not<T>(W256 w)
             where T : unmanaged
                 => default(Not256<T>);
 
-        [MethodImpl(Inline), Not, Closures(Integers)]
+        [MethodImpl(Inline), Not, Closures(Closure)]
         public static Span<T> not<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => apply(not<T>(), src, dst);

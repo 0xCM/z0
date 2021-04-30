@@ -15,12 +15,12 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory, Closures(Closure)]
         public static ModOp<T> mod<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Mod, Closures(Integers)]
+        [MethodImpl(Inline), Mod, Closures(Closure)]
         public static Span<T> mod<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => apply(Calcs.mod<T>(), l, r, dst);

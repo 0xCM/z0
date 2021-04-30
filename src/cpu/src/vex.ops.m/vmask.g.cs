@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline), MoveMask, Closures(Closure)]
+        [MethodImpl(Inline), MoveIMask, Closures(Closure)]
         public static ushort vmask16u<T>(Vector128<T> src, [Imm] byte index)
             where T : unmanaged
                 => (ushort)MoveMask(v8u(cpu.vsll(v64u(src), (byte)(7 - index))));
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline), MoveMask, Closures(Closure)]
+        [MethodImpl(Inline), MoveIMask, Closures(Closure)]
         public static uint vmask32u<T>(Vector256<T> src, [Imm] byte index)
             where T : unmanaged
                 => (uint)MoveMask(v8u(cpu.vsll(v64u(src), (byte)(7 - index))));
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline), MoveMask, Closures(Closure)]
+        [MethodImpl(Inline), MoveIMask, Closures(Closure)]
         public static ushort vmask16u<T>(Vector128<T> src, [Imm] HexDigit index)
             where T : unmanaged
                 => (ushort)MoveMask(v8u(cpu.vsll(v64u(src), (byte)(7 - index))));

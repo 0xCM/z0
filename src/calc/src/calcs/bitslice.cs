@@ -15,7 +15,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory, Closures(Closure)]
         public static BitSlice<T> bitslice<T>()
             where T : unmanaged
                 => sfunc<BitSlice<T>>();

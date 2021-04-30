@@ -74,6 +74,8 @@ namespace Z0
 
         MoveMask = Id.MoveMask,
 
+        MoveIMask = Id.MoveIMask,
+
         ZeroExtend = Id.ZeroExtend,
 
         SignExtend = Id.SignExtend,

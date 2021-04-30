@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-
     public class t_vnot : t_inx<t_vnot>
     {
         public void vnot_check()
@@ -42,10 +38,10 @@ namespace Z0
 
         void vnot_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckUnaryOp(Calcs.vnot(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(Calcs.vnot<T>(w),w,t);
 
         void vnot_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckUnaryOp(Calcs.vnot(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(Calcs.vnot<T>(w),w,t);
   }
 }

@@ -20,6 +20,16 @@ namespace Z0
             where T : unmanaged
                 => default(Select<T>);
 
+        [MethodImpl(Inline), Factory(Select), Closures(Closure)]
+        public static VSelect128<T> vselect<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VSelect128<T>);
+
+        [MethodImpl(Inline), Factory(Select), Closures(Closure)]
+        public static VSelect256<T> vselect<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VSelect256<T>);
+
         [MethodImpl(Inline), Factory(Select), Closures(Integers)]
         public static Select128<T> select<T>(W128 w)
             where T : unmanaged

@@ -26,6 +26,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => CellCalcs.minimum<N,T>() * nat32i<M>();
+                => CellCalcs.mincells<N,T>() * nat32i<M>();
     }
 }

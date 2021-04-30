@@ -51,13 +51,13 @@ namespace Z0
             const string Delimited = Pair + ", ";
 
             dst.Append(Chars.LBracket);
-            dst.Append(string.Format(Delimited, j++, skip(data,k++).ToString("x")));
-            dst.Append(string.Format(Delimited, j++, skip(data,k++).ToString("x")));
-            dst.Append(string.Format(Delimited, j++, skip(data,k++).ToString("x")));
-            dst.Append(string.Format(Delimited, j++, skip(data,k++).ToString("x")));
-            dst.Append(string.Format(Delimited, j++, skip(data,k++).ToString("x")));
-            dst.Append(string.Format(Delimited, j++, skip(data,k++).ToString("x")));
-            dst.Append(string.Format(Delimited, j++, skip(data,k++).ToString("x")));
+            dst.Append(string.Format(Delimited, j++, skip(data, k++).ToString("x")));
+            dst.Append(string.Format(Delimited, j++, skip(data, k++).ToString("x")));
+            dst.Append(string.Format(Delimited, j++, skip(data, k++).ToString("x")));
+            dst.Append(string.Format(Delimited, j++, skip(data, k++).ToString("x")));
+            dst.Append(string.Format(Delimited, j++, skip(data, k++).ToString("x")));
+            dst.Append(string.Format(Delimited, j++, skip(data, k++).ToString("x")));
+            dst.Append(string.Format(Delimited, j++, skip(data, k++).ToString("x")));
             dst.Append(string.Format(Pair, j++, skip(data,k++).ToString("x")));
             dst.Append(Chars.RBracket);
             return dst.Emit();

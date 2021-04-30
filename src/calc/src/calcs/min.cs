@@ -14,17 +14,28 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Min), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Min), Closures(Closure)]
         public static Min<T> min<T>()
             where T : unmanaged
                 => default(Min<T>);
 
-        [MethodImpl(Inline), Factory(Min), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Min), Closures(Closure)]
+        public static VMin128<T> vmin<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline), Factory(Min), Closures(Closure)]
+        public static VMin256<T> vmin<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default;
+
+
+        [MethodImpl(Inline), Factory(Min), Closures(Closure)]
         public static Min128<T> min<T>(W128 w)
             where T : unmanaged
                 => default(Min128<T>);
 
-        [MethodImpl(Inline), Factory(Min), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Min), Closures(Closure)]
         public static Min256<T> min<T>(W256 w)
             where T : unmanaged
                 => default(Min256<T>);

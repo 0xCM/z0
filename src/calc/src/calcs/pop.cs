@@ -15,9 +15,20 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Pop), Closures(Integers)]
-        public static PopCount<T> pop<T>()
+        [MethodImpl(Inline), Factory(Pop), Closures(Closure)]
+        public static Pop<T> pop<T>()
             where T : unmanaged
-                => sfunc<PopCount<T>>();
+                => sfunc<Pop<T>>();
+
+        [MethodImpl(Inline), Factory(Pop), Closures(Closure)]
+        public static VPop128<T> vpop<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VPop128<T>);
+
+        [MethodImpl(Inline), Factory(Pop), Closures(Closure)]
+        public static VPop256<T> vpop<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VPop256<T>);
+
     }
 }

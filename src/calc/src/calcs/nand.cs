@@ -20,6 +20,16 @@ namespace Z0
             where T : unmanaged
                 => default(Nand<T>);
 
+        [MethodImpl(Inline), Factory(Nand), Closures(Closure)]
+        public static VNand128<T> vnand<T>(W128 w)
+            where T : unmanaged
+                => default(VNand128<T>);
+
+        [MethodImpl(Inline), Factory(Nand), Closures(Closure)]
+        public static VNand256<T> vnand<T>(W256 w)
+            where T : unmanaged
+                => default(VNand256<T>);
+
         [MethodImpl(Inline), Factory(Nand), Closures(Integers)]
         public static Nand128<T> nand<T>(W128 w)
             where T : unmanaged

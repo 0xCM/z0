@@ -36,7 +36,7 @@ namespace Z0
         {
             var lhs = Source.Cells<Cell256>(SampleCount);
             var rhs = Source.Cells<Cell256>(SampleCount);
-            Check(lhs,rhs);
+            Check(lhs, rhs);
         }
 
         [Op]

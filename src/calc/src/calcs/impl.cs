@@ -15,12 +15,32 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Impl), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Impl), Closures(Closure)]
         public static Impl<T> impl<T>()
             where T : unmanaged
                 => default(Impl<T>);
 
-        [MethodImpl(Inline), Impl, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Impl), Closures(Closure)]
+        public static VImpl128<T> vimpl<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VImpl128<T>);
+
+        [MethodImpl(Inline), Factory(Impl), Closures(Closure)]
+        public static VImpl256<T> vimpl<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VImpl256<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Closure)]
+        public static Impl128<T> impl<T>(W128 w)
+            where T : unmanaged
+                => default(Impl128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Closure)]
+        public static Impl256<T> impl<T>(W256 w)
+            where T : unmanaged
+                => default(Impl256<T>);
+
+        [MethodImpl(Inline), Impl, Closures(Closure)]
         public static Span<T> impl<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
                 => apply(impl<T>(), a, b, dst);

@@ -15,22 +15,22 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Negate), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Negate), Closures(Closure)]
         public static Negate<T> negate<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Factory(Negate), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Negate), Closures(Closure)]
         public static Negate128<T> negate<T>(W128 w)
             where T : unmanaged
                 => default(Negate128<T>);
 
-        [MethodImpl(Inline), Factory(Negate), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Negate), Closures(Closure)]
         public static Negate256<T> negate<T>(W256 w)
             where T : unmanaged
                 => default(Negate256<T>);
 
-        [MethodImpl(Inline), Factory(Negate), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Negate), Closures(Closure)]
         public static VNegate128<T> vnegate<T>(W128 w, T t = default)
             where T : unmanaged
                 => default(VNegate128<T>);
@@ -40,7 +40,7 @@ namespace Z0
             where T : unmanaged
                 => default(VNegate256<T>);
 
-        [MethodImpl(Inline), Negate, Closures(Integers)]
+        [MethodImpl(Inline), Negate, Closures(Closure)]
         public static Span<T> negate<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => apply(negate<T>(), src, dst);
