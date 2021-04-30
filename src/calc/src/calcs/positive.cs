@@ -10,17 +10,13 @@ namespace Z0
     using static Part;
     using static CalcHosts;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Positive), Closures(Integers)]
         public static PositiveOp<T> positive<T>()
             where T : unmanaged
                 => default(PositiveOp<T>);
-
-        [MethodImpl(Inline), Op, Closures(Integers)]
-        public static NegativeOp<T> negative<T>()
-            where T : unmanaged
-                => default(NegativeOp<T>);
     }
 }

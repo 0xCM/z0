@@ -12,7 +12,7 @@ namespace Z0
 
     using E = FunctionEvaluator;
 
-    public readonly struct CalcNative
+    public readonly struct CalcNativeDemo
     {
         /// <summary>
         /// Executes the code defined by <see cref="mul_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>

@@ -26,19 +26,19 @@ namespace Z0
 
         void vsll_bench(W128 w)
         {
-            vshift_bench(w,VSvc.vsll(w, z8), z8);
-            vshift_bench(w,VSvc.vsll(w, z16), z16);
-            vshift_bench(w,VSvc.vsll(w, z32), z32);
-            vshift_bench(w,VSvc.vsll(w, z64), z64);
+            vshift_bench(w,Calcs.vsll(w, z8), z8);
+            vshift_bench(w,Calcs.vsll(w, z16), z16);
+            vshift_bench(w,Calcs.vsll(w, z32), z32);
+            vshift_bench(w,Calcs.vsll(w, z64), z64);
         }
 
         void vsll_bench(N256 w)
         {
 
-            vshift_bench(w,VSvc.vsll(w, z8), z8);
-            vshift_bench(w,VSvc.vsll(w, z16), z16);
-            vshift_bench(w,VSvc.vsll(w, z32), z32);
-            vshift_bench(w,VSvc.vsll(w, z64), z64);
+            vshift_bench(w,Calcs.vsll(w, z8), z8);
+            vshift_bench(w,Calcs.vsll(w, z16), z16);
+            vshift_bench(w,Calcs.vsll(w, z32), z32);
+            vshift_bench(w,Calcs.vsll(w, z64), z64);
         }
 
         void vsll_check(W128 w)
@@ -67,10 +67,10 @@ namespace Z0
 
         void vsll_check<T>(W128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckShiftOp(VSvc.vsll(w,t),w,t);
+                => CheckSVF.CheckShiftOp(Calcs.vsll(w,t),w,t);
 
         void vsll_check<T>(W256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckShiftOp(VSvc.vsll(w,t),w,t);
+                => CheckSVF.CheckShiftOp(Calcs.vsll(w,t),w,t);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CalcSlots
+    public readonly struct CalcSlotsDemo
     {
         [Size(20), MethodImpl(NotInline)]
         public static byte add(byte x, byte y)

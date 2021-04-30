@@ -67,7 +67,7 @@ namespace Z0
 
         void vand_bench<T>(W128 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, VSvc.vand(w,t),t);
+                => vbinop_bench(w, Calcs.vand(w,t),t);
 
         void vand_bench(W256 w)
         {
@@ -79,30 +79,30 @@ namespace Z0
 
         void vand_bench<T>(W256 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, VSvc.vand(w,t),t);
+                => vbinop_bench(w, Calcs.vand(w,t),t);
 
-        static Bit32 vand<T>(Vector128<T> x, Vector128<T> y)
+        static bit vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
+            var w = w128;
             var svc = Calcs.bitlogic<T>();
-            var v1 = VSvc.vbitlogic<T>(w128).and(x,y);
-
+            var v1 = Calcs.vbitlogic<T>(w).and(x,y);
             var buffer = gcells.alloc<Cell128>();
             ref var dst = ref Cells.first<T>(buffer);
-            var count = cpu.vcount<T>(w128);
+            var count = cpu.vcount<T>(w);
 
             for(byte i=0; i< count; i++)
                 seek(dst, i) = svc.and(vcell(x,i), vcell(y,i));
-            var v2 = gcpu.vload(w128, dst);
+            var v2 = gcpu.vload(w, dst);
             return gcpu.vsame(v1, v2);
         }
 
         void vand_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.vand(w,t), w, t);
+                => CheckSVF.CheckBinaryOp(Calcs.vand<T>(w), w, t);
 
         void vand_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.vand(w,t), w, t);
+                => CheckSVF.CheckBinaryOp(Calcs.vand<T>(w), w, t);
      }
 }

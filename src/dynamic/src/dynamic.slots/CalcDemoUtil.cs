@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    readonly struct CalcChecks
+    readonly struct CalcDemoUtil
     {
         public static string apply<K,T>(K k, T x, T y)
             where K : IApiKind
@@ -28,6 +28,6 @@ namespace Z0
         public static string describe<K,T>(K k, T x, T y, T expect, T actual)
             where K : IApiKind
             where T : IEquatable<T>
-                => expect.Equals(actual) ? success(k,x,y,actual) : failure(k,x,y,expect,actual);
+                => expect.Equals(actual) ? success(k, x, y, actual) : failure(k, x, y, expect, actual);
     }
 }

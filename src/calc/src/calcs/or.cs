@@ -11,25 +11,26 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Or), Closures(Integers)]
         public static Or<T> or<T>()
             where T : unmanaged
                 => default(Or<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Or), Closures(Integers)]
         public static Or128<T> or<T>(W128 w)
             where T : unmanaged
                 => default(Or128<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Or), Closures(Integers)]
         public static Or256<T> or<T>(W256 w)
             where T : unmanaged
                 => default(Or256<T>);
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Or, Closures(Integers)]
         public static T or<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {

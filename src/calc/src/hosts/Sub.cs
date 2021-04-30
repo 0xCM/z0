@@ -30,7 +30,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
-                => ref zip(a, b, dst, VSvc.vsub<T>(w128));
+                => ref zip(a, b, dst, Calcs.vsub<T>(w128));
         }
 
         [Closures(AllNumeric), Sub]
@@ -39,7 +39,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
-                => ref zip(a, b, dst, VSvc.vsub<T>(w256));
+                => ref zip(a, b, dst, Calcs.vsub<T>(w256));
         }
 
     }

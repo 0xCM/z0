@@ -11,7 +11,7 @@ namespace Z0
     using static ApiClasses;
 
     [ApiHost]
-    public readonly struct CalcManaged
+    public readonly struct CalcManagedDemo
     {
         /// <summary>
         /// Computes the sum of two unsigned 8-bit integers

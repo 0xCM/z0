@@ -12,7 +12,16 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Method)]
     public class FactoryAttribute : OpAttribute
     {
+        public FactoryAttribute()
+        {
 
+        }
 
+        public FactoryAttribute(ApiClassKind kind)
+        {
+            ProductionKind = kind;
+        }
+
+        public ApiClassKind ProductionKind {get;}
     }
 }

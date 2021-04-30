@@ -43,11 +43,11 @@ namespace Z0
 
         void vor_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.vor(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(Calcs.vor(w,t),w,t);
 
         void vor_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.vor(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(Calcs.vor(w,t),w,t);
 
         public void vor_128x8i()
             => vor_check<sbyte>(n128);

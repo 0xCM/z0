@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
 
-    using static CalcManaged;
+    using static CalcManagedDemo;
     using static ApiClasses;
 
     using BLK = ApiClasses;
 
-    public readonly struct CalculatorCode
+    readonly struct CalculatorCode
     {
         /// <summary>
         /// X86-executable code obtained by disassembling <see cref="eval(Add, byte, byte)"/>

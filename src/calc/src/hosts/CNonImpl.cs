@@ -24,8 +24,8 @@ namespace Z0
                 => gmath.cnonimpl(a,b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => Calcs.cnonimpl(lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+                => Calcs.cnonimpl(a,b,dst);
         }
 
         [Closures(Integers), CNonImpl]
@@ -34,7 +34,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
-                => ref zip(a, b, dst, VSvc.vcnonimpl<T>(w128));
+                => ref zip(a, b, dst, Calcs.vcnonimpl<T>(w128));
         }
 
         [Closures(Integers), CNonImpl]
@@ -43,8 +43,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
-                => ref zip(a, b, dst, VSvc.vcnonimpl<T>(w256));
+                => ref zip(a, b, dst, Calcs.vcnonimpl<T>(w256));
         }
-
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static CalcHosts;
 
-    partial class VSvc
+    partial struct Calcs
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static VSll128<T> vsll<T>(W128 w, T t = default)
@@ -111,5 +111,7 @@ namespace Z0
         public static VSllv256<T> vsllv<T>(W256 w, T t = default)
             where T : unmanaged
                 => default(VSllv256<T>);
+
     }
+
 }

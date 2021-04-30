@@ -11,23 +11,35 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory(Inc), Closures(Integers)]
         public static Inc<T> inc<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Inc), Closures(Integers)]
+        public static VInc128<T> vinc<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VInc128<T>);
+
+        [MethodImpl(Inline), Factory(Inc), Closures(Integers)]
+        public static VInc256<T> vinc<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VInc256<T>);
+
+        [MethodImpl(Inline), Factory(Inc), Closures(Integers)]
         public static Inc128<T> inc<T>(W128 w)
             where T : unmanaged
                 => default(Inc128<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Inc), Closures(Integers)]
         public static Inc256<T> inc<T>(W256 w)
             where T : unmanaged
                 => default(Inc256<T>);
+
 
         [MethodImpl(Inline), Inc, Closures(Integers)]
         public static Span<T> inc<T>(ReadOnlySpan<T> src, Span<T> dst)

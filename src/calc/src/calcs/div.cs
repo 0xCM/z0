@@ -11,10 +11,11 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory(Div), Closures(AllNumeric)]
         public static Div<T> div<T>()
             where T : unmanaged
                 => default;

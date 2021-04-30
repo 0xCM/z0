@@ -9,22 +9,32 @@ namespace Z0
 
     using static Part;
     using static CalcHosts;
-    using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(And), Closures(Integers)]
         public static And<T> and<T>()
             where T : unmanaged
                 => default(And<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(And), Closures(Closure)]
+        public static VAnd128<T> vand<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VAnd128<T>);
+
+        [MethodImpl(Inline), Factory(And), Closures(Closure)]
+        public static VAnd256<T> vand<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VAnd256<T>);
+
+        [MethodImpl(Inline), Factory(And), Closures(Integers)]
         public static And128<T> and<T>(W128 w)
             where T : unmanaged
                 => default(And128<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(And), Closures(Integers)]
         public static And256<T> and<T>(W256 w)
             where T : unmanaged
                 => default(And256<T>);

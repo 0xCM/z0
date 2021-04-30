@@ -25,18 +25,18 @@ namespace Z0
 
         void vrotr_bench(W128 w)
         {
-            vshift_bench(w, VSvc.vrotr(w, z8), z8);
-            vshift_bench(w, VSvc.vrotr(w, z16),z16);
-            vshift_bench(w, VSvc.vrotr(w, z32), z32);
-            vshift_bench(w, VSvc.vrotr(w, z64), z64);
+            vshift_bench(w, Calcs.vrotr(w, z8), z8);
+            vshift_bench(w, Calcs.vrotr(w, z16),z16);
+            vshift_bench(w, Calcs.vrotr(w, z32), z32);
+            vshift_bench(w, Calcs.vrotr(w, z64), z64);
         }
 
         void vrotr_bench(W256 w)
         {
-            vshift_bench(w, VSvc.vrotr(w, z8), z8);
-            vshift_bench(w, VSvc.vrotr(w, z16),z16);
-            vshift_bench(w, VSvc.vrotr(w, z32), z32);
-            vshift_bench(w, VSvc.vrotr(w, z64), z64);
+            vshift_bench(w, Calcs.vrotr(w, z8), z8);
+            vshift_bench(w, Calcs.vrotr(w, z16),z16);
+            vshift_bench(w, Calcs.vrotr(w, z32), z32);
+            vshift_bench(w, Calcs.vrotr(w, z64), z64);
         }
 
 
@@ -58,11 +58,11 @@ namespace Z0
 
         void vrotr_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckShiftOp(VSvc.vrotr(w,t), w,t);
+                => CheckSVF.CheckShiftOp(Calcs.vrotr(w,t), w,t);
 
         void vrotr_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckShiftOp(VSvc.vrotr(w,t), w,t);
+                => CheckSVF.CheckShiftOp(Calcs.vrotr(w,t), w,t);
 
     }
 }

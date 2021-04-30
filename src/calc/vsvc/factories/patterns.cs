@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static CalcHosts;
 
-    partial class VSvc
+    partial struct Calcs
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static VOnes128<T> vones<T>(W128 w, T t = default)

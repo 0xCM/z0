@@ -51,7 +51,7 @@ namespace Z0
             where T : unmanaged
         {
             const int count = 16;
-            var service = VSvc.vtakemask(w,t);
+            var service = Calcs.vtakemask(w,t);
             var emitter = Sources.vemitter<T>(w,Random);
 
             void check()
@@ -73,7 +73,7 @@ namespace Z0
             where T : unmanaged
         {
             const int count = 32;
-            var service = VSvc.vtakemask(w,t);
+            var service = Calcs.vtakemask(w,t);
             var emitter = Sources.vemitter<T>(w,Random);
 
             void check()

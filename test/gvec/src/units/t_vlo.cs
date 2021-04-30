@@ -75,7 +75,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = cpu.vcount(w,t);
-            var f = VSvc.vlo(w,t);
+            var f = Calcs.vlo(w,t);
             var r = Sources.vemitter<T>(w,Random);
             for(var rep=0; rep < RepCount; rep++)
             {
@@ -90,7 +90,7 @@ namespace Z0
         protected void vlo_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var f = VSvc.vlo(w,t);
+            var f = Calcs.vlo(w,t);
             var r = Sources.vemitter<T>(w,Random);
             for(var rep=0; rep < RepCount; rep++)
             {

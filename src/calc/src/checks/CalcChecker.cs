@@ -1,19 +1,15 @@
+
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum CalcOpIndex : byte
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public class CalcChecker : AppService<CalcChecker>
     {
-        Add = 0,
 
-        Sub = 1,
-
-        Mul = 2,
-
-        Div = 3,
-
-        And = 4,
     }
 }

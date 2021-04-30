@@ -11,10 +11,11 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory, Closures(AllNumeric)]
         public static ModOp<T> mod<T>()
             where T : unmanaged
                 => default;
@@ -23,7 +24,6 @@ namespace Z0
         public static Span<T> mod<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => apply(Calcs.mod<T>(), l, r, dst);
-
 
     }
 }

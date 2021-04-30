@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static CalcChecks;
+    using static CalcDemoUtil;
     using static Part;
     using static memory;
 
-    using M = CalcManaged;
-    using N = CalcNative;
-    using I = CalcOpIndex;
+    using M = CalcManagedDemo;
+    using N = CalcNativeDemo;
+    using I = CalcOpDemoIndex;
     using K = ApiClasses;
 
     [ApiHost]
@@ -34,7 +34,7 @@ namespace Z0
 
         void Display2()
         {
-            var slots = ClrDynamic.slots(typeof(CalcSlots));
+            var slots = ClrDynamic.slots(typeof(CalcSlotsDemo));
             for(var i=0; i<slots.Length; i++)
             {
                 ref readonly var slot = ref skip(slots,i);
@@ -44,7 +44,7 @@ namespace Z0
 
         public static byte compute()
         {
-            var ops = BinaryOps.arithmetic();
+            var ops = BinaryOpsDemo.arithmetic();
             byte a = 1;
             byte b = 2;
             byte c = 0;
@@ -62,7 +62,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline),Op]
-        public static byte compute(BinaryOps<byte> ops, byte a, byte b)
+        public static byte compute(BinaryOpsDemo<byte> ops, byte a, byte b)
         {
             var c = ops[I.Add](a,b);
             var d = ops[I.Mul](a,c);
@@ -74,11 +74,11 @@ namespace Z0
         [Op]
         public static void run(Span<string> dst, ref byte offset)
         {
-            var slots = ClrDynamic.slots<CalcOpIndex>(typeof(CalcSlots));
-            ref readonly var add = ref slots[CalcOpIndex.Add];
-            ref readonly var sub = ref slots[CalcOpIndex.Sub];
-            ref readonly var mul = ref slots[CalcOpIndex.Mul];
-            ref readonly var div = ref slots[CalcOpIndex.Div];
+            var slots = ClrDynamic.slots<CalcOpDemoIndex>(typeof(CalcSlotsDemo));
+            ref readonly var add = ref slots[CalcOpDemoIndex.Add];
+            ref readonly var sub = ref slots[CalcOpDemoIndex.Sub];
+            ref readonly var mul = ref slots[CalcOpDemoIndex.Mul];
+            ref readonly var div = ref slots[CalcOpDemoIndex.Div];
 
             var mulCode = CalculatorCode.mul_ᐤ8uㆍ8uᐤ;
             var divCode = CalculatorCode.div_ᐤ8uㆍ8uᐤ;
@@ -91,15 +91,15 @@ namespace Z0
             for(var i=0u; i<size; i++)
                 seek(mulRef, i) = skip(divCode,i);
 
-            var z1 = CalcSlots.mul(x,y);
-            seek(dst, offset++) = (CalcChecks.describe(K.mul(), x,y, z1));
+            var z1 = CalcSlotsDemo.mul(x,y);
+            seek(dst, offset++) = (CalcDemoUtil.describe(K.mul(), x,y, z1));
 
             ref var divRef = ref div.Address.Ref<byte>();
             for(var i=0; i<size; i++)
                 seek(divRef, i) = skip(mulCode,i);
 
-            var z2 = CalcSlots.div(x,y);
-            seek(dst, offset++) = CalcChecks.describe(K.div(), x,y, z2);
+            var z2 = CalcSlotsDemo.div(x,y);
+            seek(dst, offset++) = CalcDemoUtil.describe(K.div(), x,y, z2);
         }
     }
 }

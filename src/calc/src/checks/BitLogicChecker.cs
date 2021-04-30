@@ -15,7 +15,7 @@ namespace Z0
     using K = ApiClasses;
 
     [ApiHost]
-    public sealed class VSvcValidator : ApiValidator<VSvcValidator>
+    public sealed class BitLogicChecker : ApiValidator<BitLogicChecker>
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -40,66 +40,66 @@ namespace Z0
         }
 
         [Op]
-        void Check(Index<Cell128> lhs, Index<Cell128> rhs)
+        void Check(Index<Cell128> a, Index<Cell128> b)
         {
             for(var i=0; i<SampleCount; i++)
             {
-                ref readonly var a = ref lhs[i];
-                ref readonly var b = ref rhs[i];
+                ref readonly var x = ref a[i];
+                ref readonly var y = ref b[i];
 
-                Check128x8u(a, b, K.and());
-                // Check128x8i(a, b, BitLogicKinds.and());
-                // Check128x16u(a, b, BitLogicKinds.and());
-                // Check128x16i(a, b, BitLogicKinds.and());
-                // Check128x32u(a, b, BitLogicKinds.and());
-                // Check128x32i(a, b, BitLogicKinds.and());
-                // Check128x64u(a, b, BitLogicKinds.and());
-                // Check128x64i(a, b, BitLogicKinds.and());
+                Check128x8u(x, y, K.and());
+                Check128x8i(x, y, K.and());
+                Check128x16u(x, y, K.and());
+                Check128x16i(x, y, K.and());
+                Check128x32u(x, y, K.and());
+                Check128x32i(x, y, K.and());
+                Check128x64u(x, y, K.and());
+                Check128x64i(x, y, K.and());
 
-                // Check128x8u(a, b, BitLogicKinds.or());
-                // Check128x8i(a, b, BitLogicKinds.or());
-                // Check128x16u(a, b, BitLogicKinds.or());
-                // Check128x16i(a, b, BitLogicKinds.or());
-                // Check128x32u(a, b, BitLogicKinds.or());
-                // Check128x32i(a, b, BitLogicKinds.or());
-                // Check128x64u(a, b, BitLogicKinds.or());
-                // Check128x64i(a, b, BitLogicKinds.or());
+                Check128x8u(x, y, K.or());
+                Check128x8i(x, y, K.or());
+                Check128x16u(x, y, K.or());
+                Check128x16i(x, y, K.or());
+                Check128x32u(x, y, K.or());
+                Check128x32i(x, y, K.or());
+                Check128x64u(x, y, K.or());
+                Check128x64i(x, y, K.or());
 
-                // Check128x8u(a, b, BitLogicKinds.xor());
-                // Check128x8i(a, b, BitLogicKinds.xor());
-                // Check128x16u(a, b, BitLogicKinds.xor());
-                // Check128x16i(a, b, BitLogicKinds.xor());
-                // Check128x32u(a, b, BitLogicKinds.xor());
-                // Check128x32i(a, b, BitLogicKinds.xor());
-                // Check128x64u(a, b, BitLogicKinds.xor());
-                // Check128x64i(a, b, BitLogicKinds.xor());
+                Check128x8u(x, y, K.xor());
+                Check128x8i(x, y, K.xor());
+                Check128x16u(x, y, K.xor());
+                Check128x16i(x, y, K.xor());
+                Check128x32u(x, y, K.xor());
+                Check128x32i(x, y, K.xor());
+                Check128x64u(x, y, K.xor());
+                Check128x64i(x, y, K.xor());
             }
         }
 
         [Op]
-        void Check(Index<Cell256> lhs, Index<Cell256> rhs)
+        void Check(Index<Cell256> a, Index<Cell256> b)
         {
             for(var i=0; i<SampleCount; i++)
             {
-                ref readonly var a = ref lhs[i];
-                ref readonly var b = ref rhs[i];
-                Check256x8u(a, b, K.and());
-                Check256x8i(a, b, K.and());
-                Check256x16u(a, b, K.and());
-                Check256x16i(a, b, K.and());
-                Check256x32u(a, b, K.and());
-                Check256x32i(a, b, K.and());
-                Check256x64u(a, b, K.and());
-                Check256x64i(a, b, K.and());
+                ref readonly var lhs = ref a[i];
+                ref readonly var rhs = ref b[i];
+                Check256x8u(lhs, rhs, K.and());
+                Check256x8i(lhs, rhs, K.and());
+                Check256x16u(lhs, rhs, K.and());
+                Check256x16i(lhs, rhs, K.and());
+                Check256x32u(lhs, rhs, K.and());
+                Check256x32i(lhs, rhs, K.and());
+                Check256x64u(lhs, rhs, K.and());
+                Check256x64i(lhs, rhs, K.and());
 
-                Check256x8u(a, b, K.or());
-                Check256x8i(a, b, K.or());
-                Check256x16u(a, b, K.or());
-                Check256x16i(a, b, K.or());
-                Check256x32u(a, b, K.or());
-                Check256x32i(a, b, K.or());
-                Check256x64u(a, b, K.or());
-                Check256x64i(a, b, K.or());
+                Check256x8u(lhs, rhs, K.or());
+                Check256x8i(lhs, rhs, K.or());
+                Check256x16u(lhs, rhs, K.or());
+                Check256x16i(lhs, rhs, K.or());
+                Check256x32u(lhs, rhs, K.or());
+                Check256x32i(lhs, rhs, K.or());
+                Check256x64u(lhs, rhs, K.or());
+                Check256x64i(lhs, rhs, K.or());
             }
         }
 
@@ -184,38 +184,38 @@ namespace Z0
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
-        bit CheckMatch<K,T>(Vector128<T> x, Vector128<T> y, K f = default)
+        bit CheckMatch<K,T>(Vector128<T> a, Vector128<T> b, K f = default)
             where K : unmanaged, IApiBitLogicClass
             where T : unmanaged
         {
             var w = w128;
             var mSvc = Calcs.bitlogic<T>();
-            var vSvc = VSvc.vbitlogic<T>(w);
+            var vSvc = Calcs.vbitlogic<T>(w);
             var buffer = Cells.alloc(w);
             ref var dst = ref Cells.first<T>(buffer);
             var cells = gcpu.vcount<T>(w);
             for(byte i=0; i<cells; i++)
-                seek(dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), f);
+                seek(dst, i) = mSvc.eval(vcell(a,i), vcell(b,i), f);
             var v1 = gcpu.vload(w, dst);
-            var v2 = vSvc.eval(x,y,f);
+            var v2 = vSvc.eval(a,b,f);
             return gcpu.vsame(v2,v1);
         }
 
         [MethodImpl(Inline)]
-        bit CheckMatch<K,T>(Vector256<T> x, Vector256<T> y, K f)
+        bit CheckMatch<K,T>(Vector256<T> a, Vector256<T> b, K f)
             where K : unmanaged, IApiBitLogicClass
             where T : unmanaged
         {
             var w = w256;
             var mSvc = Calcs.bitlogic<T>();
-            var vSvc = VSvc.vbitlogic<T>(w);
+            var vSvc = Calcs.vbitlogic<T>(w);
             var buffer = Cells.alloc(w);
             ref var dst = ref Cells.first<T>(buffer);
             var cells = gcpu.vcount<T>(w);
             for(byte i=0; i<cells; i++)
-                seek(dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), f);
+                seek(dst, i) = mSvc.eval(vcell(a,i), vcell(b,i), f);
             var v1 = gcpu.vload(w, dst);
-            var v2 = vSvc.eval(x,y,f);
+            var v2 = vSvc.eval(a,b,f);
             return gcpu.vsame(v2,v1);
         }
     }

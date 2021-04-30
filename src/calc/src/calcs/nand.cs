@@ -11,20 +11,21 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Nand), Closures(Integers)]
         public static Nand<T> nand<T>()
             where T : unmanaged
                 => default(Nand<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Nand), Closures(Integers)]
         public static Nand128<T> nand<T>(W128 w)
             where T : unmanaged
                 => default(Nand128<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Nand), Closures(Integers)]
         public static Nand256<T> nand<T>(W256 w)
             where T : unmanaged
                 => default(Nand256<T>);

@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
@@ -36,7 +37,7 @@ namespace Z0
             return src;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Floor, Closures(Floats)]
         public static Span<T> floor<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => floor(src, memory.span<T>(src.Length));

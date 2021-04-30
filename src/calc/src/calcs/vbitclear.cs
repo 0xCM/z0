@@ -10,15 +10,16 @@ namespace Z0
     using static Part;
     using static CalcHosts;
     using static memory;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Factory(BitClear), Closures(Integers)]
         public static VBitClear128<T> vbitclear<T>(N128 w)
             where T : unmanaged
                 => default(VBitClear128<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Factory(BitClear), Closures(Integers)]
         public static VBitClear256<T> vbitclear<T>(N256 w)
             where T : unmanaged
                 => default(VBitClear256<T>);

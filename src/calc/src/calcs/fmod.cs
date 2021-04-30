@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static ApiClassKind;
 
     partial struct Calcs
     {

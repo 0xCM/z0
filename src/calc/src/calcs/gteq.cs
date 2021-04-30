@@ -10,15 +10,16 @@ namespace Z0
     using static Part;
     using static CalcHosts;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory(GtEq), Closures(Integers)]
         public static GtEq<T> gteq<T>()
             where T : unmanaged
                 => default(GtEq<T>);
 
-        [MethodImpl(Inline), SpanOp, Closures(Integers)]
+        [MethodImpl(Inline), GtEq, Closures(Integers)]
         public static Span<bit> gteq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
                 => apply(gteq<T>(), a, b, dst);

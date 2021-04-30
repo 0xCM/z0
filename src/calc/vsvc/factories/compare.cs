@@ -73,48 +73,4 @@ namespace Z0
                 => default;
 
     }
-
-    partial class VSvc
-    {
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VMin128<T> vmin<T>(W128 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VMin256<T> vmin<T>(W256 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VNonZ128<T> vnonz<T>(W128 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VNonZ256<T> vnonz<T>(W256 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VTestC128<T> vtestc<T>(W128 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VTestC256<T> vtestc<T>(W256 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VTestZ128<T> vtestz<T>(W128 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VTestZ256<T> vtestz<T>(W256 w, T t = default)
-            where T : unmanaged
-                => default;
-    }
 }

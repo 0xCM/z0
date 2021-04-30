@@ -11,20 +11,21 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Sll), Closures(Integers)]
         public static Sll128<T> sll<T>(W128 w)
             where T : unmanaged
                 => default(Sll128<T>);
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Sll), Closures(Integers)]
         public static Sll256<T> sll<T>(W256 w)
             where T : unmanaged
                 => default(Sll256<T>);
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Sll), Closures(Integers)]
         public static Sll<T> sll<T>()
             where T : unmanaged
                 => default(Sll<T>);
@@ -41,12 +42,12 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Sll, Closures(Closure)]
         public static ref readonly SpanBlock128<T> sll<T>(in SpanBlock128<T> a, [Imm] byte count, in SpanBlock128<T> dst)
             where T : unmanaged
                 => ref sll<T>(w128).Invoke(a, count, dst);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Sll, Closures(Closure)]
         public static ref readonly SpanBlock256<T> sll<T>(in SpanBlock256<T> a, [Imm] byte count, in SpanBlock256<T> dst)
             where T : unmanaged
                 => ref sll<T>(w256).Invoke(a, count, dst);

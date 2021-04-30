@@ -72,7 +72,7 @@ namespace Z0
                 => build(kind.ToString().ToLower(), (TypeWidth)memory.width<T>(), Numeric.kind<T>(), true);
 
         public static OpIdentity klass<K,T>(K @class, T t = default)
-            where K : unmanaged, IApiClass
+            where K : unmanaged, IApiKind
             where T : unmanaged
                 => build(@class.Format(), (TypeWidth)memory.width<T>(), Numeric.kind<T>(), true);
 

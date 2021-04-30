@@ -11,12 +11,13 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct CallPatterns
+    public readonly struct CallPatternsDemo
     {
         public delegate byte Mul(byte x, byte y);
 
         public static byte mul(byte x, byte y)
             => (byte)(x*y);
+
         [Op]
         public static FPtr<Mul> testFptr()
         {

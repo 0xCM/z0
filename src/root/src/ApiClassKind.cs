@@ -427,6 +427,8 @@ public enum ApiClassKind : ushort
 
     DivAssign,
 
+    BitSeg,
+
     // ~~ Instructions/Intrinsics
     // ~~ -------------------------------------------------------------------------------------------------------------
 

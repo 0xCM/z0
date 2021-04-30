@@ -11,10 +11,11 @@ namespace Z0
     using static memory;
     using static CalcHosts;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Factory(Pop), Closures(Integers)]
         public static PopCount<T> pop<T>()
             where T : unmanaged
                 => sfunc<PopCount<T>>();

@@ -10,10 +10,11 @@ namespace Z0
     using static Part;
     using static CalcHosts;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Between, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Between), Closures(Integers)]
         public static Between<T> between<T>()
             where T : unmanaged
                 => default(Between<T>);

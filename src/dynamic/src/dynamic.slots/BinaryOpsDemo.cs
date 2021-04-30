@@ -11,14 +11,14 @@ namespace Z0
     using static memory;
 
     using C = CalculatorCode;
-    using I = CalcOpIndex;
+    using I = CalcOpDemoIndex;
 
-    public readonly struct BinaryOps
+    public readonly struct BinaryOpsDemo
     {
-        public static BinaryOps<T> index<T>()
-            => new BinaryOps<T>(new BinaryOp<T>[256]);
+        public static BinaryOpsDemo<T> index<T>()
+            => new BinaryOpsDemo<T>(new BinaryOp<T>[256]);
 
-        public static BinaryOps<byte> arithmetic()
+        public static BinaryOpsDemo<byte> arithmetic()
         {
             var dst = index<byte>();
             dst[I.Add] = BinaryOpFactory.create<byte>(OpIdentity.define(nameof(C.add_ᐤ8iㆍ8iᐤ)), C.add_ᐤ8iㆍ8iᐤ);
@@ -29,19 +29,19 @@ namespace Z0
         }
     }
 
-    public ref struct BinaryOps<T>
+    public ref struct BinaryOpsDemo<T>
     {
         readonly Span<BinaryOp<T>> Operators;
 
         byte Offset;
 
-        public BinaryOps(Span<BinaryOp<T>> src)
+        public BinaryOpsDemo(Span<BinaryOp<T>> src)
         {
             Operators = src;
             Offset = 0;
         }
 
-        public ref BinaryOp<T> this[CalcOpIndex index]
+        public ref BinaryOp<T> this[CalcOpDemoIndex index]
         {
             [MethodImpl(Inline)]
             get => ref seek(Operators,(byte)index);

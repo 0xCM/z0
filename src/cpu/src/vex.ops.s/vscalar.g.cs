@@ -127,13 +127,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vscalar_f<T>(W256 n, T src)
+        static Vector256<T> vscalar_f<T>(W256 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(cpu.vscalar(n, float32(src)));
+                return generic<T>(cpu.vscalar(w, float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(cpu.vscalar(n, float64(src)));
+                return generic<T>(cpu.vscalar(w, float64(src)));
             else
                 throw no<T>();
         }

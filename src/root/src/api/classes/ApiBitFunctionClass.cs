@@ -89,5 +89,7 @@ namespace Z0
         XLsb = Id.XLsb,
 
         XMsb = Id.XMsb,
+
+        BitSeg = Id.BitSeg,
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
@@ -23,7 +24,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avgz<T>(Span<T> src)
             where T : unmanaged
                 => avgz(src.ReadOnly());

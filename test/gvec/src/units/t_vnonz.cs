@@ -46,7 +46,7 @@ namespace Z0
             var min = Numeric.one<T>();
             var max = Numeric.maxval(t);
             var domain = Interval.closed(Numeric.one<T>(), Numeric.maxval<T>());
-            var f = VSvc.vnonz(w,t);
+            var f = Calcs.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero(w,t)));
 
@@ -60,7 +60,7 @@ namespace Z0
             var min = Numeric.one<T>();
             var max = Numeric.maxval(t);
             var domain = Interval.closed(Numeric.one<T>(), Numeric.maxval<T>());
-            var f = VSvc.vnonz(w,t);
+            var f = Calcs.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero<T>(w)));
 

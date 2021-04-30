@@ -10,30 +10,31 @@ namespace Z0
     using static Part;
     using static CalcHosts;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Eq), Closures(Integers)]
         public static Eq<T> eq<T>()
             where T : unmanaged
                 => default(Eq<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Eq), Closures(Integers)]
         public static Eq128<T> eq<T>(W128 w)
             where T : unmanaged
                 => default(Eq128<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Eq), Closures(Integers)]
         public static Eq256<T> eq<T>(W256 w)
             where T : unmanaged
                 => default(Eq256<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Eq), Closures(Integers)]
         public static VEq128<T> veq<T>(W128 w)
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Eq), Closures(Integers)]
         public static VEq256<T> veq<T>(W256 w)
             where T : unmanaged
                 => default;

@@ -44,11 +44,11 @@ namespace Z0
 
         void vreverse_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => vreverse_check(VSvc.vreverse(w,t),w,t);
+                => vreverse_check(Calcs.vreverse(w,t),w,t);
 
         void vreverse_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => vreverse_check(VSvc.vreverse(w,t),w,t);
+                => vreverse_check(Calcs.vreverse(w,t),w,t);
 
         void check_invariant<T>(N128 w, T t = default)
             where T : unmanaged

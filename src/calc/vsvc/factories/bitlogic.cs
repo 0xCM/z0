@@ -10,18 +10,8 @@ namespace Z0
     using static Part;
     using static CalcHosts;
 
-    partial class VSvc
+    partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VAnd128<T> vand<T>(W128 w, T t = default)
-            where T : unmanaged
-                => default(VAnd128<T>);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VAnd256<T> vand<T>(W256 w, T t = default)
-            where T : unmanaged
-                => default(VAnd256<T>);
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static VNand128<T> vnand<T>(W128 w, T t = default)
             where T : unmanaged
@@ -141,5 +131,5 @@ namespace Z0
         public static VCNonImpl256<T> vcnonimpl<T>(W256 w, T t = default)
             where T : unmanaged
                 => default(VCNonImpl256<T>);
-   }
+    }
 }

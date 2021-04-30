@@ -71,7 +71,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = cpu.vcount(w,t);
-            var f = VSvc.vhi(w,t);
+            var f = Calcs.vhi(w,t);
             var r = Sources.vemitter<T>(w,Random);
             for(var rep=0; rep < RepCount; rep++)
             {
@@ -86,7 +86,7 @@ namespace Z0
         protected void vhi_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var f = VSvc.vhi(w,t);
+            var f = Calcs.vhi(w,t);
             var r = Sources.vemitter<T>(w,Random);
             for(var rep=0; rep <RepCount; rep++)
             {

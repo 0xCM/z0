@@ -32,7 +32,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> src, in SpanBlock128<T> dst)
-                => ref map(src, dst, VSvc.vabs<T>(w128));
+                => ref map(src, dst, Calcs.vabs<T>(w128));
         }
 
         [Closures(AllNumeric), Abs]
@@ -41,7 +41,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> src, in SpanBlock256<T> dst)
-                => ref map(src, dst, VSvc.vabs<T>(w256));
+                => ref map(src, dst, Calcs.vabs<T>(w256));
         }
 
         [Closures(SignedInts), Abs]

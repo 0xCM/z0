@@ -40,11 +40,11 @@ namespace Z0
 
         void vxor_bench<T>(W128 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, VSvc.vxor(w,t),t);
+                => vbinop_bench(w, Calcs.vxor(w,t),t);
 
         void vxor_bench<T>(W256 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, VSvc.vxor(w,t),t);
+                => vbinop_bench(w, Calcs.vxor(w,t),t);
 
         void vxor_check(N128 w)
         {
@@ -72,10 +72,10 @@ namespace Z0
 
         void vxor_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.vxor(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(Calcs.vxor(w,t),w,t);
 
         void vxor_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.vxor(w,t),w,t);
+                => CheckSVF.CheckBinaryOp(Calcs.vxor(w,t),w,t);
      }
 }

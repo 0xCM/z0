@@ -11,13 +11,24 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Select), Closures(Integers)]
         public static Select<T> select<T>()
             where T : unmanaged
                 => default(Select<T>);
+
+        [MethodImpl(Inline), Factory(Select), Closures(Integers)]
+        public static Select128<T> select<T>(W128 w)
+            where T : unmanaged
+                => default(Select128<T>);
+
+        [MethodImpl(Inline), Factory(Select), Closures(Integers)]
+        public static Select256<T> select<T>(W256 w)
+            where T : unmanaged
+                => default(Select256<T>);
 
         [MethodImpl(Inline), Select, Closures(Integers)]
         public static Span<T> select<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)

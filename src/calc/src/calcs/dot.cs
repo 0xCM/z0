@@ -11,10 +11,11 @@ namespace Z0
     using static memory;
     using static CalcHosts;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Factory(Dot), Closures(Integers)]
         public static Dot<T> dot<T>(T t = default)
             where T : unmanaged
                 => sfunc<Dot<T>>();

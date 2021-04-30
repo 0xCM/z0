@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static CalcHosts;
 
-    partial class VSvc
+    partial struct Calcs
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static VConcat2x128<T> vconcat<T>(W128 w, T t = default)

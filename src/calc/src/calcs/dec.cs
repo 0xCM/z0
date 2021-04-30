@@ -11,6 +11,7 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
@@ -28,6 +29,16 @@ namespace Z0
         public static Dec256<T> dec<T>(W256 w)
             where T : unmanaged
                 => default(Dec256<T>);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static VDec128<T> vdec<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VDec128<T>);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static VDec256<T> vdec<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VDec256<T>);
 
         [MethodImpl(Inline), Dec, Closures(Integers)]
         public static Span<T> dec<T>(ReadOnlySpan<T> src, Span<T> dst)

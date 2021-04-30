@@ -24,7 +24,7 @@ namespace Z0
 
         void vconcat_check<T>(W128 w, T t = default)
             where T : unmanaged
-                => CheckAction(() => vconcat_checker(w,t), CaseName(VSvc.vconcat(w,t)));
+                => CheckAction(() => vconcat_checker(w,t), CaseName(Calcs.vconcat(w,t)));
 
         Action<W128,T> vconcat_checker<T>(W128 w, T t = default)
             where T : unmanaged
@@ -37,7 +37,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);
-                var z = VSvc.vconcat(w,t).Invoke(x,y);
+                var z = Calcs.vconcat(w,t).Invoke(x,y);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();

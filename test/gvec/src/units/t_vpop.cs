@@ -97,7 +97,7 @@ namespace Z0
         void vpop_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var f = VSvc.vpop(w,t);
+            var f = Calcs.vpop(w,t);
 
             void check()
             {
@@ -122,7 +122,7 @@ namespace Z0
         void vpop_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var f = VSvc.vpop(w,t);
+            var f = Calcs.vpop(w,t);
 
             void check()
             {

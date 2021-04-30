@@ -11,10 +11,11 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), BitSeg, Closures(Closure)]
+        [MethodImpl(Inline), Factory, Closures(Closure)]
         public static BitSeg<T> bitseg<T>()
             where T : unmanaged
                 => sfunc<BitSeg<T>>();

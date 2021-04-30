@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public readonly struct FxSlots
+    public readonly struct CalcSlotsDemoOps
     {
         [Op]
         public static byte exec(byte a, byte b)

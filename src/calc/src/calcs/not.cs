@@ -11,25 +11,26 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Not), Closures(Integers)]
         public static Not<T> not<T>()
             where T : unmanaged
                 => default(Not<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Not), Closures(Integers)]
         public static Not128<T> not<T>(W128 w)
             where T : unmanaged
                 => default(Not128<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Not), Closures(Integers)]
         public static Not256<T> not<T>(W256 w)
             where T : unmanaged
                 => default(Not256<T>);
 
-       [MethodImpl(Inline), Not, Closures(Integers)]
+        [MethodImpl(Inline), Not, Closures(Integers)]
         public static Span<T> not<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => apply(not<T>(), src, dst);

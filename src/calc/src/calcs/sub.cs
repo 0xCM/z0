@@ -11,35 +11,46 @@ namespace Z0
     using static CalcHosts;
     using static memory;
     using static SFx;
+    using static ApiClassKind;
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(AllNumeric)]
+        [MethodImpl(Inline), Factory(Sub), Closures(Integers)]
         public static Sub<T> sub<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Sub), Closures(Integers)]
         public static Sub128<T> sub<T>(W128 w)
             where T : unmanaged
                 => default(Sub128<T>);
 
-        [MethodImpl(Inline), Factory, Closures(Integers)]
+        [MethodImpl(Inline), Factory(Sub), Closures(Integers)]
         public static Sub256<T> sub<T>(W256 w)
             where T : unmanaged
                 => default(Sub256<T>);
+
+        [MethodImpl(Inline), Factory(Sub), Closures(Integers)]
+        public static VSub128<T> vsub<T>(W128 w, T t = default)
+            where T : unmanaged
+                => default(VSub128<T>);
+
+        [MethodImpl(Inline), Factory(Sub), Closures(Integers)]
+        public static VSub256<T> vsub<T>(W256 w, T t = default)
+            where T : unmanaged
+                => default(VSub256<T>);
 
         [MethodImpl(Inline), Sub, Closures(Integers)]
         public static Span<T> sub<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
                 => apply(sub<T>(), a, b, dst);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Sub, Closures(Integers)]
         public static ref readonly SpanBlock128<T> sub<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged
                 => ref sub<T>(w128).Invoke(a, b, dst);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Sub, Closures(Integers)]
         public static ref readonly SpanBlock256<T> sub<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
             where T : unmanaged
                 => ref sub<T>(w256).Invoke(a, b, dst);

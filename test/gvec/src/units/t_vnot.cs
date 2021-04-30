@@ -42,10 +42,10 @@ namespace Z0
 
         void vnot_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckUnaryOp(VSvc.vnot(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(Calcs.vnot(w,t),w,t);
 
         void vnot_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckUnaryOp(VSvc.vnot(w,t),w,t);
+                => CheckSVF.CheckUnaryOp(Calcs.vnot(w,t),w,t);
   }
 }
