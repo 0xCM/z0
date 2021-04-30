@@ -13,9 +13,9 @@ namespace Z0
     {
         public void EmitConstants()
         {
-            var target = Wf.Db().IndexTable<ImageConstant>();
-            var flow = Wf.EmittingTable<ImageConstant>(target);
-            var formatter = Tables.formatter<ImageConstant>();
+            var target = Wf.Db().IndexTable<ConstantField>();
+            var flow = Wf.EmittingTable<ConstantField>(target);
+            var formatter = Tables.formatter<ConstantField>();
             var counter = 0u;
             using var writer = target.Writer();
             writer.WriteLine(formatter.FormatHeader());

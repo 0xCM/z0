@@ -14,10 +14,31 @@ namespace Z0
 
     partial class ImageMetaReader
     {
+        public ReadOnlySpan<AssemblyRefRow> AssemblyRefRows()
+        {
+            var handles = CliReader.AssemblyRefHandles();
+            var count = handles.Length;
+            var buffer = alloc<AssemblyRefRow>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var handle = ref skip(handles,i);
+                ref var row = ref seek(dst,i);
+                var src = MD.GetAssemblyReference(handle);
+                row.Key = Cli.key(CliTableKind.AssemblyRef, handle);
+                row.Culture = src.Culture;
+                row.Flags = src.Flags;
+                row.Hash = src.HashValue;
+                row.Token = src.PublicKeyOrToken;
+                row.Version = src.Version;
+            }
+            return buffer;
+        }
+
         [Op]
         public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs()
         {
-            var src = AssemblyReferenceHandles();
+            var src = CliReader.AssemblyRefHandles();
             var dst = alloc<AssemblyRefInfo>(src.Length);
             ReadAssemblyRefs(src, dst);
             return dst;
@@ -39,13 +60,8 @@ namespace Z0
         {
             dst.Source = MD.GetAssemblyDefinition().GetAssemblyName();
             dst.Target = src.GetAssemblyName();
-            dst.Token = ReadBlobData(src.PublicKeyOrToken);
+            dst.Token = CliReader.Read(src.PublicKeyOrToken);
             return ref dst;
         }
-
-
-        [MethodImpl(Inline), Op]
-        ReadOnlySpan<AssemblyReferenceHandle> AssemblyReferenceHandles()
-            => MD.AssemblyReferences.ToReadOnlySpan();
     }
 }

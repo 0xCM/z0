@@ -17,26 +17,6 @@ namespace Z0
     using static memory;
     using static Images;
 
-    public readonly struct ImageRowIndex
-    {
-        readonly Index<CliTableKind,Index<Address32>> Data;
-
-        public ImageRowIndex(Index<CliTableKind,Index<Address32>> src)
-        {
-            Data = src;
-        }
-
-        [MethodImpl(Inline)]
-        public Span<Address32> Edit(CliTableKind table)
-            => Data[table].Edit;
-
-        [MethodImpl(Inline)]
-        public uint Count(CliTableKind table)
-            => Data[table].Count;
-
-    }
-
-    [ApiHost]
     public partial class ImageMetaReader : IDisposable
     {
         readonly FS.FilePath Source;
@@ -49,6 +29,8 @@ namespace Z0
 
         public PEMemoryBlock MetadataBlock {get;}
 
+        readonly CliReader CliReader;
+
         public ImageMetaReader(FS.FilePath src)
         {
             Source = src;
@@ -56,6 +38,7 @@ namespace Z0
             PeReader = new PEReader(Stream);
             MD = PeReader.GetMetadataReader();
             MetadataBlock = PeReader.GetMetadata();
+            CliReader = new CliReader(MetadataBlock);
         }
 
         [MethodImpl(Inline)]
@@ -123,15 +106,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public PEMemoryBlock ReadSectionData(DirectoryEntry src)
             => PeReader.GetSectionData(src.RelativeVirtualAddress);
-
-        public ClrTableEntry TableEntry(Handle src)
-        {
-            var table = Clr.table(src);
-            if(table != null)
-                return new ClrTableEntry(MD.GetToken(src), table.Value);
-
-            return ClrTableEntry.Empty;
-        }
 
         internal static string format(FieldAttributes src)
             => src.ToString();

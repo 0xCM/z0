@@ -64,7 +64,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = field(module, Clr.token(skip(src,i)));
+                seek(dst,i) = field(module, CliTokens.token(skip(src,i)));
         }
 
 
@@ -73,7 +73,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = type(module, Clr.token(skip(src,i)));
+                seek(dst,i) = type(module, CliTokens.token(skip(src,i)));
         }
 
         [Op]
@@ -81,7 +81,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = method(module, Clr.token(skip(src,i)));
+                seek(dst,i) = method(module, CliTokens.token(skip(src,i)));
         }
 
         [MethodImpl(Inline), Op]

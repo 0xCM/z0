@@ -163,11 +163,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CliToken(Handle src)
-            => Clr.token(src);
+            => CliTokens.token(src);
 
         [MethodImpl(Inline)]
         public static implicit operator CliToken(EntityHandle src)
-            => Clr.token(src);
+            => CliTokens.token(src);
 
         public static CliToken Empty
             => default;

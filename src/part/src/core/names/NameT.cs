@@ -21,6 +21,8 @@ namespace Z0
         public string Format()
             => string.Format("{0}", Content);
 
+        public string Text
+            => Format();
         public uint Hash
         {
             [MethodImpl(Inline)]

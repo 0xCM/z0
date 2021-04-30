@@ -9,9 +9,9 @@ namespace Z0
 
     partial class ImageMetaReader
     {
-        public Index<ImageSectionHeader> ReadSectionHeders()
+        public Index<SectionHeaderInfo> ReadSectionHeders()
         {
-            var dst = root.list<ImageSectionHeader>();
+            var dst = root.list<SectionHeaderInfo>();
 
             if(PeReader.HasMetadata)
             {
@@ -20,7 +20,7 @@ namespace Z0
 
                 foreach(var section in sections)
                 {
-                    var record = default(ImageSectionHeader);
+                    var record = default(SectionHeaderInfo);
                     record.File = Source.FileName;
                     record.EntryPoint = (Address32)headers.PEHeader.AddressOfEntryPoint;
                     record.CodeBase = (Address32)headers.PEHeader.BaseOfCode;
@@ -29,7 +29,7 @@ namespace Z0
                     record.SectionAspects = section.SectionCharacteristics;
                     record.SectionName = section.Name;
                     record.RawDataAddress = (Address32)section.PointerToRawData;
-                    record.RawDataSize = section.SizeOfRawData;
+                    record.RawDataSize = (uint)section.SizeOfRawData;
                     dst.Add(record);
                 }
             }

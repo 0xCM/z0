@@ -25,5 +25,20 @@ namespace Z0
                 VCK.MsBuild => "$({0})",
                 _ => "{0}"
             };
+
+        [Op]
+        public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
+        {
+            outcome = Numeric.parse(src, out dst);
+            if(!outcome)
+                return false;
+
+            if(!satisfied(bounds,dst))
+            {
+                outcome = (false, $"The parsed value {dst} is not with the required range {bounds}");
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -14,6 +14,16 @@ namespace Z0
 
     partial struct Calcs
     {
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static XorNot128<T> xornot<T>(W128 w)
+            where T : unmanaged
+                => default(XorNot128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static XorNot256<T> xornot<T>(W256 w)
+            where T : unmanaged
+                => default(XorNot256<T>);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock128<T> xornot<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
             where T : unmanaged

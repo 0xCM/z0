@@ -36,7 +36,7 @@ namespace Z0
             get => Subject.Name;
         }
 
-        public ClrAssemblyVersion Version
+        public AssemblyVersion Version
         {
             [MethodImpl(Inline)]
             get => api.version(Subject);

@@ -16,25 +16,25 @@ namespace Z0
 
     partial class ImageMetaReader
     {
-        public ReadOnlySpan<MemberField> ReadFields()
+        public ReadOnlySpan<MemberFieldInfo> ReadFields()
         {
             var reader = MD;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = memory.span<MemberField>(count);
+            var dst = memory.span<MemberFieldInfo>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var handle = ref skip(handles,i);
                 var entry = reader.GetFieldDefinition(handle);
                 int offset = entry.GetOffset();
                 ref var field = ref seek(dst,i);
-                var bsig = ReadSig(entry,i);
+                var bsig = CliReader.ReadSig(entry);
                 var name = ReadFieldName(entry.Name, i);
 
-                field.Token = Clr.token(handle);
+                field.Token = CliTokens.token(handle);
                 field.FieldName = name.Value;
                 field.Attribs = format(entry.Attributes);
-                field.Sig = bsig.Data;
+                field.Sig = bsig;
             }
             return dst;
         }

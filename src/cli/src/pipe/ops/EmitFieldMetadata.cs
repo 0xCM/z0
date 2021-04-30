@@ -33,16 +33,16 @@ namespace Z0
         }
 
         public FS.FilePath FieldMetadataPath(Assembly src)
-            => Db.Table(MemberField.TableId, src.Id());
+            => Db.Table(MemberFieldInfo.TableId, src.Id());
 
         public uint EmitFieldMetadata(Assembly src)
         {
             var dst = FieldMetadataPath(src);
-            var flow = Wf.EmittingTable<MemberField>(dst);
+            var flow = Wf.EmittingTable<MemberFieldInfo>(dst);
             using var reader = ImageMetadata.reader(FS.path(src.Location));
             var fields = reader.ReadFields();
             var count = (uint)fields.Length;
-            var formatter = Tables.formatter<MemberField>(MemberField.RenderWidths);
+            var formatter = Tables.formatter<MemberFieldInfo>(MemberFieldInfo.RenderWidths);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in fields)

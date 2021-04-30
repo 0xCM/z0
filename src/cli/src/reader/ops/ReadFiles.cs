@@ -14,10 +14,6 @@ namespace Z0
     partial class ImageMetaReader
     {
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<AssemblyFileHandle> AssemblyFileHandles()
-            => MD.AssemblyFiles.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
         public AssemblyFile ReadFile(AssemblyFileHandle src)
             => MD.GetAssemblyFile(src);
 

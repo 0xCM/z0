@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.IO;
 
     using static System.Runtime.Intrinsics.Vector128;
     using static Part;
@@ -96,6 +97,9 @@ namespace Z0
         public unsafe ref byte Cell(int offset)
             => ref memory.@ref<byte>((void*)(BaseAddress + offset));
 
+        [MethodImpl(Inline)]
+        public unsafe byte* Pointer(uint offset = 0)
+            => BaseAddress.Pointer<byte>() + offset;
         public ref byte this[int index]
         {
             [MethodImpl(Inline)]

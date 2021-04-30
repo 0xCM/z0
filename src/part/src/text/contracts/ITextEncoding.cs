@@ -31,7 +31,7 @@ namespace Z0
 
         byte[] GetBytes(string s);
 
-        void GetChars(ReadOnlySpan<byte> src, Span<char> dst);
+        int GetChars(ReadOnlySpan<byte> src, Span<char> dst);
 
         ByteSize IEncoder<char,byte>.Encode(ReadOnlySpan<char> src, Span<byte> dst)
             => GetBytes(src,dst);

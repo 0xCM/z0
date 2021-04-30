@@ -14,11 +14,10 @@ namespace Z0
 
     partial class ImageMetaReader
     {
-
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<ManifestResourceInfo> ReadResDescriptions()
         {
-            var handles = ResourceHandles();
+            var handles = CliReader.ResourceHandles();
             return ReadResDescriptions(handles, alloc<ManifestResourceInfo>(handles.Length));
         }
 
@@ -34,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public ref ManifestResourceInfo ReadResDescription(in ManifestResource src, ref ManifestResourceInfo dst)
         {
-            dst.Name = ReadString(src.Name);
+            dst.Name = CliReader.Read(src.Name);
             dst.Offset = (ulong)src.Offset;
             dst.Attributes = src.Attributes;
             return ref dst;

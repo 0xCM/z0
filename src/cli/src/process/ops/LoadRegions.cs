@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
     using static Part;
-    using static Images;
+    using static ProcessMemory;
 
     partial class ProcessContextPipe
     {

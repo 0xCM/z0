@@ -48,6 +48,12 @@ namespace Z0
             get => Data ?? EmptyString;
         }
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => Data ?? EmptyString;
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => Content;

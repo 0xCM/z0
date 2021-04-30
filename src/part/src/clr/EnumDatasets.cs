@@ -30,7 +30,7 @@ namespace Z0
         {
             var src = ClrEnums.details<E,T>();
             var count = src.Length;
-            var token = Clr.token<E>();
+            var token = CliTokens.token<E>();
             var datatype = ClrEnums.@base<E>();
             var description = string.Empty;
             var indices = sys.alloc<uint>(count);

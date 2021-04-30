@@ -15,13 +15,9 @@ namespace Z0
     partial class ImageMetaReader
     {
         [MethodImpl(Inline), Op]
-        public MethodDefinition ReadMethodDef(MethodDefinitionHandle src)
-            => MD.GetMethodDefinition(src);
-
-        [MethodImpl(Inline), Op]
         public ref MethodDefinition ReadMethodDef(MethodDefinitionHandle src, ref MethodDefinition dst)
         {
-            dst = ReadMethodDef(src);
+            dst = CliReader.Read(src);
             return ref dst;
         }
 
@@ -32,9 +28,5 @@ namespace Z0
             for(var i=0u; i<count; i++)
                  ReadMethodDef(skip(src,i), ref seek(dst,i));
         }
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<MethodDefinitionHandle> MethodDefHandles()
-            => MD.MethodDefinitions.ToReadOnlySpan();
     }
 }

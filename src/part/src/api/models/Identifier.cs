@@ -25,6 +25,11 @@ namespace Z0
         public Identifier(Name src)
             => Content = src;
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => Content;
+        }
         public Name Name
         {
             [MethodImpl(Inline)]

@@ -17,13 +17,9 @@ namespace Z0
     partial class ImageMetaReader
     {
         [MethodImpl(Inline), Op]
-        public FieldDefinition ReadFieldDef(FieldDefinitionHandle src)
-            => MD.GetFieldDefinition(src);
-
-        [MethodImpl(Inline), Op]
         public ref FieldDefinition ReadFieldDef(FieldDefinitionHandle src, ref FieldDefinition dst)
         {
-            dst = ReadFieldDef(src);
+            dst = CliReader.Read(src);
             return ref dst;
         }
 

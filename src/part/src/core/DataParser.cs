@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Part;
     using static memory;
@@ -16,58 +14,9 @@ namespace Z0
     [ApiHost]
     public readonly struct DataParser
     {
-        //"yyyy-MM-dd.HH.mm.ss.fff";
-
         [Op]
         public static Outcome parse(string src, out Timestamp dst)
-        {
-            var outcome = Outcome.Empty;
-            dst = Timestamp.Zero;
-            var dash = text.index(src, Chars.Dash);
-            if(dash == NotFound)
-                return (false, "Date separator not found");
-
-            var date = dash - 4;
-            if(date < 0)
-                return (false, $"The date index {date} is negative");
-
-            var dot = text.index(src,Chars.Dot);
-            if(dot == NotFound)
-                return (false, "Time separator not found");
-
-            var time = dot + 1;
-            if(time <= date)
-                return (false, $"The time separator index {time} is invalid");
-
-            var seg0 = text.slice(src, date, 10).Split(Chars.Dash);
-            if(seg0.Length != 3)
-                return (false, $"The date segment has {seg0.Length} segments and should have 3");
-
-            var seg1 = text.slice(src, time + 1).Split(Chars.Dot);
-
-            if(seg1.Length != 4)
-                return (false, $"The time segment has {seg1.Length} segments and should have 4");
-
-            var fffBounds = bounded(0,999);
-            if(!parse(skip(seg0,0), out int yyyy))
-                return (false, "Attempt to parse year failed");
-            if(!parse(skip(seg0,1), out int MM))
-                return (false, "Attempt to parse month failed");
-            if(!parse(skip(seg0,2), out int dd))
-                return (false, "Attempt to parse day failed");
-            if(!parse(skip(seg1,0), out int HH))
-                return (false, "Attempt to parse hour failed");
-            if(!parse(skip(seg1,1), out int mm))
-                return (false, "Attempt to parse minutes failed");
-            if(!parse(skip(seg1,2), out int ss))
-                return (false, "Attempt to parse seconds failed");
-            if(!parse(skip(seg1,3), fffBounds, out int fff, out outcome))
-                return outcome;
-
-            dst =  new DateTime(yyyy,MM,dd,HH, mm, ss, fff);
-
-            return true;
-        }
+            => Time.parse(src,out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Name dst)
@@ -177,18 +126,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
-        {
-            outcome = Numeric.parse(src, out dst);
-            if(!outcome)
-                return false;
-
-            if(!satisfied(bounds,dst))
-            {
-                outcome = (false, $"The parsed value {dst} is not with the required range {bounds}");
-                return false;
-            }
-            return true;
-        }
+            => Rules.parse(src,bounds, out dst, out outcome);
 
         [MethodImpl(Inline)]
         public static Outcome eparse<T>(string src, out T dst)
@@ -197,19 +135,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out BinaryCode dst)
-        {
-            var result = HexByteParser.ParseData(src, out var data);
-            if(result)
-            {
-                dst = data.Storage;
-                return result;
-            }
-            else
-            {
-                dst = BinaryCode.Empty;
-                return result;
-            }
-        }
+            => CodeBlocks.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out OpUri dst)
@@ -217,32 +143,7 @@ namespace Z0
 
         [Op]
         public static Outcome parse(string src, out CliToken dst)
-        {
-            var i = text.index(src,Chars.Colon);
-            var outcome = Outcome.Empty;
-            dst = CliToken.Empty;
-            if(i != NotFound)
-            {
-                outcome = HexNumericParser.parse8u(src.LeftOfIndex(i), out var table);
-                if(!outcome)
-                    return outcome;
-
-                outcome = HexNumericParser.parse32u(text.right(src,i), out var row);
-                if(!outcome)
-                    return outcome;
-
-                dst = Clr.token((TableIndex)table, row);
-                return true;
-            }
-            else
-            {
-                outcome = HexNumericParser.parse32u(src, out var token);
-                if(!outcome)
-                    return outcome;
-                dst = token;
-                return true;
-            }
-        }
+            => CliTokens.parse(src, out dst);
 
         [Op]
         public static Outcome parse(string src, out MemoryRange dst)

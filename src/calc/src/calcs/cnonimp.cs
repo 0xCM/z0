@@ -14,11 +14,20 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static CNonImpl<T> cnonimpl<T>()
             where T : unmanaged
                 => default(CNonImpl<T>);
 
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static CNonImpl128<T> cnonimpl<T>(W128 w)
+            where T : unmanaged
+                => default(CNonImpl128<T>);
+
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static CNonImpl256<T> cnonimpl<T>(W256 w)
+            where T : unmanaged
+                => default(CNonImpl256<T>);
 
         [MethodImpl(Inline), CNonImpl, Closures(Integers)]
         public static Span<T> cnonimpl<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)

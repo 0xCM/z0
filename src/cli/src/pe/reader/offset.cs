@@ -22,18 +22,18 @@ namespace Z0
         public const string OffsetPatternText = "{0,-60} | {1,-16}";
 
         [MethodImpl(Inline)]
-        static string[] labels(ImageOffset src)
-            => typeof(ImageOffset).DeclaredInstanceFields().Select(x => x.Name);
+        static string[] labels(FieldOffset src)
+            => typeof(FieldOffset).DeclaredInstanceFields().Select(x => x.Name);
 
         [MethodImpl(Inline)]
-        static string format(ImageOffset src)
+        static string format(FieldOffset src)
             => text.format(OffsetPatternText, src.Name, src.Value);
 
         [Op]
-        public static void save(ReadOnlySpan<ImageOffset> src, FS.FilePath dst)
+        public static void save(ReadOnlySpan<FieldOffset> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
-            var l = labels(default(ImageOffset));
+            var l = labels(default(FieldOffset));
             writer.WriteLine(text.format(OffsetPatternText, l[0], l[1]));
             for(var i=0u; i<src.Length; i++)
                 writer.WriteLine(format(skip(src,i)));

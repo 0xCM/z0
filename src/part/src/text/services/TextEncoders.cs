@@ -34,7 +34,7 @@ namespace Z0
             => e.GetChars(bytes,byteCount,chars,charCount);
 
         [MethodImpl(Inline), Op]
-        public static void GetChars(Encoding e, ReadOnlySpan<byte> src, Span<char> dst)
+        public static int GetChars(Encoding e, ReadOnlySpan<byte> src, Span<char> dst)
             => e.GetChars(src,dst);
 
         [MethodImpl(Inline), Op]
@@ -70,7 +70,12 @@ namespace Z0
         {
             dst = utf8().GetString(src);
             return ref dst;
+
         }
+
+        [MethodImpl(Inline), Op]
+        public static int GetUtf8Chars(ReadOnlySpan<byte> src, Span<char> dst)
+            => utf8().GetChars(src, dst);
 
         [MethodImpl(Inline), Op]
         public static int GetBytes(Encoding e, ReadOnlySpan<char> src, Span<byte> dst)

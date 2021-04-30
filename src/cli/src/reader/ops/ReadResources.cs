@@ -16,17 +16,6 @@ namespace Z0
     partial class ImageMetaReader
     {
         [MethodImpl(Inline), Op]
-        public static ManifestResource ReadResource(MetadataReader reader, ManifestResourceHandle src)
-            => reader.GetManifestResource(src);
-
-        [MethodImpl(Inline), Op]
-        public static ref ManifestResource ReadResource(MetadataReader reader, ManifestResourceHandle src, out ManifestResource dst)
-        {
-            dst = ReadResource(reader, src);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
         public ref ManifestResource ReadResource(ManifestResourceHandle src, out ManifestResource dst)
         {
             dst = ReadResource(src);
@@ -35,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ManifestResource ReadResource(ManifestResourceHandle src)
-            => MD.GetManifestResource(src);
+            => CliReader.Read(src);
 
         [Op]
         public unsafe bool ResourceSearch(string name, out ResSegment dst)
@@ -76,35 +65,6 @@ namespace Z0
                 seek(dst,i) = new ResSegment(res.Name, new MemSeg(address,length));
             }
             return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<ManifestResourceHandle> ResourceHandles()
-            => MD.ManifestResources.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public static ManifestResourceHandle ResourceHandle(uint row)
-            => MetadataTokens.ManifestResourceHandle((int)row);
-
-        public static TableIndex? table(Handle handle)
-        {
-            if(MetadataTokens.TryGetTableIndex(handle.Kind, out var table))
-                return table;
-            else
-                return null;
-        }
-
-        public ClrTableEntry? metaindex(Handle handle)
-        {
-            if(!handle.IsNil)
-            {
-                var table = ImageMetaReader.table(handle);
-                var token = MD.GetToken(handle);
-                if (table != null)
-                    return new ClrTableEntry(token, table.Value);
-            }
-
-            return null;
         }
     }
 }

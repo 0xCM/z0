@@ -26,6 +26,12 @@ namespace Z0
             get => text.empty(Data);
         }
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => Data ?? EmptyString;
+        }
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]

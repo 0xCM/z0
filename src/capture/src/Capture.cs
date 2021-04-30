@@ -30,15 +30,6 @@ namespace Z0
             return routines;
         }
 
-        // [Op]
-        // public static QuickCapture quick(IWfRuntime wf)
-        // {
-        //     var tokens = memory.alloc(Pow2.T16, 5, out var buffer).Tokenize();
-        //     var exchange = Capture.exchange(tokens[BufferSeqId.Aux3]);
-        //     var proxy = new CaptureServiceProxy(wf.CaptureCore(), exchange);
-        //     return new QuickCapture(wf, buffer, tokens, proxy);
-        // }
-
         [Op]
         public static Index<AsmHostRoutines> run(IWfRuntime wf, Index<PartId> parts, CaptureWorkflowOptions options)
         {

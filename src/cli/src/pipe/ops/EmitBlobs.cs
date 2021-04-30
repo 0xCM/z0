@@ -24,26 +24,26 @@ namespace Z0
 
         public void ClearBlobs()
         {
-            Wf.Db().TableDir<MetadataBlob>().Clear();
+            Wf.Db().TableDir<MetaBlob>().Clear();
         }
 
         public WfExecToken EmitBlobs(FS.FilePath src, FS.FilePath dst)
         {
-            var flow = Wf.EmittingTable<MetadataBlob>(dst);
+            var flow = Wf.EmittingTable<MetaBlob>(dst);
             using var reader = ImageMetadata.reader(src);
-            var rows = reader.ReadBlobs();
+            var rows = reader.ReadBlobDescriptions();
             var count = (uint)rows.Length;
-            var formatter = Tables.formatter<MetadataBlob>(16);
+            var formatter = Tables.formatter<MetaBlob>(16);
 
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(rows,i)));
 
-            return Wf.EmittedTable<MetadataBlob>(flow, rows.Length);
+            return Wf.EmittedTable<MetaBlob>(flow, rows.Length);
         }
 
         public WfExecToken EmitBlobs(Assembly src)
-            => EmitBlobs(FS.path(src.Location), Wf.Db().Table<MetadataBlob>(src.GetSimpleName()));
+            => EmitBlobs(FS.path(src.Location), Wf.Db().Table<MetaBlob>(src.GetSimpleName()));
     }
 }

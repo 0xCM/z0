@@ -16,6 +16,7 @@ namespace Z0.Asm
     using static memory;
     using static Toolsets;
     using static Images;
+    using static ProcessMemory;
 
     class App : AppService<App>
     {
@@ -953,7 +954,7 @@ namespace Z0.Asm
         {
             var dst = Db.IndexTable<MemoryRegion>();
             var flow = Wf.EmittingTable<MemoryRegion>(dst);
-            var segments = SystemMemory.regions();
+            var segments = ProcessMemory.regions();
             Tables.emit(segments,dst);
             Wf.EmittedTable(flow, segments.Count);
         }
@@ -1320,13 +1321,39 @@ namespace Z0.Asm
 
         }
 
+        static unsafe uint count(Images.StringHeap src)
+        {
+            var counter = 0u;
+            var pFirst = src.BaseAddress.Pointer<char>();
+            var pLast = (src.BaseAddress + src.Size).Pointer<char>();
+            var pCurrent = pFirst;
+            while(pCurrent < pLast)
+            {
+                if(*pCurrent++ == 0)
+                    counter++;
+            }
+            return counter;
+        }
+
+        public void ListCliTables(Assembly src)
+        {
+
+            var reader = CliReader.create(src);
+            root.iter(reader.MethodDefKeys(), k => Wf.Row(k));
+            root.iter(reader.TypeDefKeys(), k => Wf.Row(k));
+            root.iter(reader.TypeRefKeys(), k => Wf.Row(k));
+            root.iter(reader.AssemblyRefKeys(), k => Wf.Row(k));
+
+
+        }
+
 
         public void Run()
         {
             // var experiment = ExtractExperiment.create(Wf);
             // experiment.Run();
 
-            ListPdbMethods();
+            ListCliTables(Parts.Cpu.Assembly);
 
         }
 

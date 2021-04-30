@@ -18,8 +18,6 @@ namespace Z0
     using BAR = ApiBinaryArithmeticClass;
     using BCK = ApiComparisonClass;
     using BSK = ApiBitShiftClass;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
 
     public readonly struct NumericLogixHost
     {

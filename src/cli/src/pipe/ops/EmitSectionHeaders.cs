@@ -22,16 +22,16 @@ namespace Z0
         public void EmitSectionHeaders(IRuntimeArchive src)
         {
             var db = Wf.Db();
-            var dir = db.TableDir<ImageSectionHeader>();
-            EmitSectionHeaders(src.DllFiles, db.Table(ImageSectionHeader.TableId, "dll"));
-            EmitSectionHeaders(src.ExeFiles, db.Table(ImageSectionHeader.TableId, "exe"));
+            var dir = db.TableDir<SectionHeaderInfo>();
+            EmitSectionHeaders(src.DllFiles, db.Table(SectionHeaderInfo.TableId, "dll"));
+            EmitSectionHeaders(src.ExeFiles, db.Table(SectionHeaderInfo.TableId, "exe"));
         }
 
         public Outcome<Count> EmitSectionHeaders(FS.Files src, FS.FilePath dst)
         {
             var total = Count.Zero;
-            var formatter = Tables.formatter<ImageSectionHeader>(SectionHeaderWidths);
-            var flow = Wf.EmittingTable<ImageSectionHeader>(dst);
+            var formatter = Tables.formatter<SectionHeaderInfo>(SectionHeaderWidths);
+            var flow = Wf.EmittingTable<SectionHeaderInfo>(dst);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in src)

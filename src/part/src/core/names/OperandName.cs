@@ -22,6 +22,10 @@ namespace Z0
         public OperandName(string src)
             => Data = src;
 
+        public string Text
+        {
+            get => Data ?? EmptyString;
+        }
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

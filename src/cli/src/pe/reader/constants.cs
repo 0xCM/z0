@@ -18,11 +18,11 @@ namespace Z0
         public static ConstantHandle ConstantHandle(uint row)
             => MetadataTokens.ConstantHandle((int)row);
 
-        public ReadOnlySpan<ImageConstant> constants(ref uint counter)
+        public ReadOnlySpan<ConstantField> constants(ref uint counter)
         {
             var reader = Stream.Reader;
             var count = ConstantCount(Stream);
-            var dst = span<ImageConstant>(count);
+            var dst = span<ConstantField>(count);
             for(var i=1u; i<=count; i++)
             {
                 var k = ConstantHandle(i);
@@ -31,8 +31,8 @@ namespace Z0
                 var blob = reader.GetBlobBytes(entry.Value);
                 ref var target = ref seek(dst, i - 1u);
                 target.Sequence = counter++;
-                target.ParentId = (parent ?? ClrTableEntry.Empty).Token;
-                target.Source = (parent ?? ClrTableEntry.Empty).Table.ToString();
+                target.ParentId = (parent ?? CliRowIndex.Empty).Token;
+                target.Source = (parent ?? CliRowIndex.Empty).Table.ToString();
                 target.DataType = entry.TypeCode;
                 target.Content = blob;
             }

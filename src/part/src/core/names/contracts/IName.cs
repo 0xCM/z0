@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IName : ITextual, IIdentified
+    public interface IName : IIdentified, IText
     {
         string ITextual.Format()
             => IdentityText;

@@ -16,6 +16,10 @@ namespace Z0
             => new MemSeg(range(min,max));
 
         [MethodImpl(Inline), Op]
+        public static unsafe MemSeg segment(byte* pSrc, ByteSize size)
+            => new MemSeg(pSrc,size);
+
+        [MethodImpl(Inline), Op]
         public static ref readonly MemSeg segment(ReadOnlySpan<MemSeg> refs, MemorySlot n)
             => ref cell(refs, n);
 

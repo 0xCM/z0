@@ -15,10 +15,6 @@ namespace Z0
 
     partial class ImageMetaReader
     {
-        [MethodImpl(Inline), Op]
-        public string ReadUserString(UserStringHandle handle)
-            => MD.GetUserString(handle);
-
         public Index<UserString> ReadUserStrings()
         {
             var reader = MD;
@@ -32,7 +28,7 @@ namespace Z0
 
             do
             {
-                values.Add(new UserString(seq: i++, size, HeapOffset(handle), ReadUserString(handle)));
+                values.Add(new UserString(seq: i++, size, CliReader.HeapOffset(handle), CliReader.Read(handle)));
                 handle = reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);

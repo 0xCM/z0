@@ -19,7 +19,7 @@ namespace Z0
             => Db.IndexTable<AssemblyRefInfo>();
 
         public FS.FilePath MemberRefsPath(Assembly src)
-            => Db.Table<MemberRef>(src.GetSimpleName());
+            => Db.Table<MemberRefRow>(src.GetSimpleName());
 
         public void EmitAssemblyRefs(FS.Files src)
             => EmitAssemblyRefs(src, AssemblyRefsPath());

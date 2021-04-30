@@ -83,8 +83,8 @@ namespace Z0
             => api.GetChars(Encoding, bytes, byteCount, chars, charCount);
 
         [MethodImpl(Inline)]
-        public void GetChars(ReadOnlySpan<byte> src, Span<char> dst)
-            => api.GetChars(Encoding, src,dst);
+        public int GetChars(ReadOnlySpan<byte> src, Span<char> dst)
+            => api.GetChars(Encoding, src, dst);
 
         [MethodImpl(Inline)]
         public int GetByteCount(ReadOnlySpan<char> src)

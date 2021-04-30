@@ -19,7 +19,7 @@ namespace Z0
             {
                 var component = skip(components,i);
                 var dst = MemberRefsPath(component);
-                var flow = Wf.EmittingTable<MemberRef>(dst);
+                var flow = Wf.EmittingTable<MemberRefRow>(dst);
                 using var reader = ImageMetadata.reader(FS.path(component.Location));
                 var emitted = Tables.emit(reader.ReadMemberRefs(), dst);
                 Wf.EmittedTable(flow,emitted);

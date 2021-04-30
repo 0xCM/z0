@@ -14,5 +14,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static MemoryRange range(MemoryAddress min, MemoryAddress max)
             => new MemoryRange(min, max);
+
+        [MethodImpl(Inline), Op]
+        public static MemoryRange range(MemoryAddress min, ByteSize size)
+            => new MemoryRange(min, size);
     }
 }

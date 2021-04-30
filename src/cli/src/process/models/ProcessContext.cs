@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Images;
+    using static ProcessMemory;
 
     public struct ProcessContext
     {

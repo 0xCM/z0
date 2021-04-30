@@ -22,10 +22,10 @@ namespace Z0
             => new ClrAssemblyName(src);
 
         [MethodImpl(Inline), Op]
-        public static ClrAssemblyVersion version(AssemblyName src)
+        public static AssemblyVersion version(AssemblyName src)
         {
             var version = src.Version;
-            var dst = new ClrAssemblyVersion(version.Major, version.Minor, version.Build, version.Revision);
+            var dst = new AssemblyVersion((ushort)version.Major, (ushort)version.Minor, (ushort)version.Build, (ushort)version.Revision);
             return dst;
         }
 

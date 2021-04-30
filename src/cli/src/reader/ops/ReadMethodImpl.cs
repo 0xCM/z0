@@ -15,13 +15,9 @@ namespace Z0
     partial class ImageMetaReader
     {
         [MethodImpl(Inline), Op]
-        public MethodImplementation ReadMethodImpl(MethodImplementationHandle src)
-            => MD.GetMethodImplementation(src);
-
-        [MethodImpl(Inline), Op]
         public ref MethodImplementation ReadMethodImpl(MethodImplementationHandle src, ref MethodImplementation dst)
         {
-            dst = ReadMethodImpl(src);
+            dst = CliReader.Read(src);
             return ref dst;
         }
 
