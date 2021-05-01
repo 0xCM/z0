@@ -22,7 +22,6 @@ namespace Z0
 
         readonly uint BufferSize;
 
-
         [MethodImpl(Inline)]
         public EvalDispatcher(IWfRuntime wf, IDomainSource source, uint bufferSize)
         {
@@ -147,8 +146,6 @@ namespace Z0
             var sample = 0;
             var sampleMax = 10;
             var fp = typeof(T).IsFloatingPoint();
-
-            //Sink.AnalyzingEvaluation(api);
 
             var xLabel = eval.LeftLabel;
             var yLabel = eval.RightLabel;
@@ -328,7 +325,6 @@ namespace Z0
                 var x0 = eval[n0];
                 var x1 = eval[n1];
                 var x2 = eval[n2];
-                //Sink.EvaluatedPoint(api.Member.ApiKind.Format(), x0,x1,x2);
             }
         }
 
@@ -348,7 +344,6 @@ namespace Z0
                 var x0 = eval[n0];
                 var x1 = eval[n1];
                 var x2 = eval[n2];
-                //Sink.EvaluatedPoint(api.Member.ApiKind.Format(),x0,x1,x2);
             }
         }
 

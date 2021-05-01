@@ -41,7 +41,7 @@ namespace Z0
                 var buffer =  Buffers.Run();
                 var steps = buffer.Slice(0, ProcessedCount);
                 var log = Buffers.Log();
-                var count = Digital.render(steps, log);
+                var count = Hex.render(steps, log);
                 var hex = log.Slice(0,count).ToString();
                 Wf.Status(hex);
             }

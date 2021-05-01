@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static memory;
-
+    using static Part;
     [ApiHost]
     public readonly partial struct Hex
     {
-
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

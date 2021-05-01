@@ -50,5 +50,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexCodeLo code(N4 n, LowerCased lower, byte src)
             => (HexCodeLo)skip(first(LowerHexDigits), src);
-    }
+   }
 }

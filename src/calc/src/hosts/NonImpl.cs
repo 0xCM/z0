@@ -6,12 +6,40 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Part;
     using static SFx;
 
     partial struct CalcHosts
     {
+        [Closures(Integers), NonImpl]
+        public readonly struct VNonImpl128<T> : IBinaryOp128D<T>
+            where T : unmanaged
+        {
+
+            [MethodImpl(Inline)]
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
+                => gcpu.vnonimpl(x,y);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gbits.nonimpl(a,b);
+        }
+
+        [Closures(Integers), NonImpl]
+        public readonly struct VNonImpl256<T> : IBinaryOp256D<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
+                => gcpu.vnonimpl(x,y);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gbits.cnonimpl(a,b);
+       }
+
         [Closures(Integers), NonImpl]
         public readonly struct NonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged

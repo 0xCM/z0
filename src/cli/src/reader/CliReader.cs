@@ -104,7 +104,6 @@ namespace Z0
         public Address32 HeapOffset(GuidHandle handle)
             => (Address32)MD.GetHeapOffset(handle);
 
-
         [Op]
         public StringHeap StringHeap()
         {
@@ -192,6 +191,10 @@ namespace Z0
             => Cli.keys(MD.AssemblyReferences);
 
         [MethodImpl(Inline), Op]
+        public RowKeys FieldDefKeys()
+            => Cli.keys(MD.FieldDefinitions);
+
+        [MethodImpl(Inline), Op]
         public RowKeys MethodDefKeys()
             => Cli.keys(MD.MethodDefinitions);
 
@@ -202,6 +205,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public RowKeys MemberRefKeys()
             => Cli.keys(MD.MemberReferences);
+
+        [MethodImpl(Inline), Op]
+        public RowKeys PropertyDefKeys()
+            => Cli.keys(MD.PropertyDefinitions);
 
         [MethodImpl(Inline), Op]
         public RowKeys TypeDefKeys()
@@ -240,8 +247,33 @@ namespace Z0
             => MD.GetMethodDebugInformation(src);
 
         [MethodImpl(Inline), Op]
-        public MethodDefinition Read(MethodDefinitionHandle src)
-            => MD.GetMethodDefinition(src);
+        public MethodDefRow Read(MethodDefinitionHandle handle)
+        {
+            var src = MD.GetMethodDefinition(handle);
+            var dst = new MethodDefRow();
+            dst.Key = Cli.key(handle);
+            dst.Attributes = src.Attributes;
+            dst.ImplAttributes  = src.ImplAttributes;
+            dst.Rva = src.RelativeVirtualAddress;
+            dst.Name = src.Name;
+            dst.Signature = src.Signature;
+            var keys = Cli.keys(src.GetParameters());
+            var count = keys.Count;
+            if(count != 0)
+            {
+                dst.FirstParam = keys.First;
+                dst.ParamCount = (ushort)count;
+            }
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public void Read(ReadOnlySpan<MethodDefinitionHandle> src, Span<MethodDefRow> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                 seek(dst,i) = Read(skip(src,i));
+        }
 
         [MethodImpl(Inline), Op]
         public MethodImplementation Read(MethodImplementationHandle src)

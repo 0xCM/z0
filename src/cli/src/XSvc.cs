@@ -23,11 +23,9 @@ namespace Z0
         public static AppModules AppModules(this IWfRuntime wf)
             => Z0.AppModules.create(wf);
 
-        [ServiceFactory]
+        [Op]
         public static PdbSymbolStore PdbSymbolStore(this IWfRuntime wf)
             => Cli.symbols(wf);
 
     }
-
-
 }

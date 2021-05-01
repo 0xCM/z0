@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
     /// <typeparam name="E">A indexing enumeration</typeparam>
-    public readonly ref struct Bitfield<S,E,T>
+    public readonly ref struct BitfieldCover<S,E,T>
         where S : unmanaged
         where E : unmanaged
         where T : unmanaged
@@ -30,7 +30,7 @@ namespace Z0
         readonly ReadOnlySpan<BitfieldPart> Segments;
 
         [MethodImpl(Inline)]
-        public Bitfield(in BitfieldSegSpecs spec, T state)
+        public BitfieldCover(in BitfieldSegSpecs spec, T state)
         {
             Spec = spec;
             Segments = spec.Segments;
@@ -142,6 +142,5 @@ namespace Z0
             api.store<S,T>(Segment(index), src, ref dst);
             return ref dst;
         }
-
     }
 }

@@ -81,10 +81,10 @@ namespace Z0
             get => (CliTableKind)(Data >> 24);
         }
 
-        public uint RowId
+        public uint Row
         {
             [MethodImpl(Inline)]
-            get => Data & 0xFF000000;
+            get => Data & 0xFFFFFF;
         }
 
         public bool IsEmpty
@@ -101,7 +101,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data.FormatHex();
+            => IsEmpty ? EmptyString : string.Format("{0:X2} | {1:x6} | {2}", Table.Id, Row, Table.Name);
+            //Data.FormatHex();
 
 
         public override string ToString()

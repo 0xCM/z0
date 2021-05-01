@@ -29,10 +29,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static HexSym symbol(UpperCased @case, HexDigit src)
-            => (HexSym)code(@case, src);
+            => Hex.symbol(@case, src);
 
         [MethodImpl(Inline), Op]
         public static HexSym symbol(LowerCased @case, HexDigit src)
-            => (HexSym)code(@case, src);
+            => Hex.symbol(@case, src);
     }
 }

@@ -17,7 +17,6 @@ namespace Z0
 
             public ByteSize Size {get;}
 
-
             [MethodImpl(Inline)]
             public StringHeap(MemoryAddress @base, ByteSize size)
             {

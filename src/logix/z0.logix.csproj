@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(BitMatrix)" />

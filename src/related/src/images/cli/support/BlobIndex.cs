@@ -30,6 +30,12 @@ namespace Z0
                 Value = memory.u32(src);
             }
 
+            public string Format()
+                => Value.ToString("X");
+
+            public override string ToString()
+                => Format();
+
             [MethodImpl(Inline)]
             public static implicit operator BlobIndex(BlobHandle src)
                 => new BlobIndex(src);

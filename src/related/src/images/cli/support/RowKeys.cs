@@ -24,6 +24,28 @@ namespace Z0
                 Table = table;
             }
 
+            public ref RowKey First
+            {
+                [MethodImpl(Inline)]
+                get => ref Data.First;
+            }
+            public ref RowKey this[int index]
+            {
+                [MethodImpl(Inline)]
+                get => ref Data[index];
+            }
+
+            public ref RowKey this[uint index]
+            {
+                [MethodImpl(Inline)]
+                get => ref Data[index];
+            }
+            public uint Count
+            {
+                [MethodImpl(Inline)]
+                get => Data.Count;
+            }
+
             public ReadOnlySpan<RowKey> View
             {
                 [MethodImpl(Inline)]

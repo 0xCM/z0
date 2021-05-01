@@ -23,7 +23,11 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static RowKey key<T>(K kind, T handle)
             where T : unmanaged
-                => (kind,uint32(handle));
+                => (kind, uint32(handle));
+
+        [MethodImpl(Inline), Op]
+        public static RowKey key(MethodDefinitionHandle src)
+            => (K.MethodDef, uint32(src));
 
         [Op]
         public static RowKeys keys(AssemblyFileHandleCollection src)
@@ -64,6 +68,18 @@ namespace Z0
         [Op]
         public static RowKeys keys(ImportScopeCollection src)
             => (src.Map(handle => key(K.ImportScope, handle)), K.ImportScope);
+
+        [Op]
+        public static RowKeys keys(ParameterHandleCollection src)
+            => (src.Map(handle => key(K.Param, handle)), K.ImportScope);
+
+        [Op]
+        public static RowKeys keys(GenericParameterHandleCollection src)
+            => (src.Map(handle => key(K.GenericParam, handle)), K.ImportScope);
+
+        [Op]
+        public static RowKeys keys(GenericParameterConstraintHandleCollection src)
+            => (src.Map(handle => key(K.GenericParamConstraint, handle)), K.ImportScope);
 
         [Op]
         public static RowKeys keys(LocalScopeHandleCollection src)

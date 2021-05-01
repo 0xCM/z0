@@ -9,54 +9,17 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static HexCharData;
 
     using XF = HexSymFacet;
 
-    partial struct Digital
+    partial struct Hex
     {
-        [MethodImpl(Inline), Op]
-        public static HexSymLo hex(LowerCased casing, byte index)
-            => index < LowerSymbolCount ? skip(LowerSymbols, index) : HexSymLo.None;
-
-        [MethodImpl(Inline), Op]
-        public static HexSymUp hex(UpperCased casing, byte index)
-            => index < UpperSymbolCount ? skip(UpperSymbols, index) : HexSymUp.None;
-
-        [MethodImpl(Inline), Op]
-        public static HexSym hex(LowerCased @case, HexDigit src)
-            => src <= HexDigit.x9
-                ? (HexSym)((byte)src + (byte)XF.FirstNumber)
-                : (HexSym)((byte)src + (byte)XF.FirstLetterLo);
-
-        [MethodImpl(Inline), Op]
-        public static HexSym hex(UpperCased @case, HexDigit src)
-            => src <= HexDigit.x9
-                ? (HexSym)((byte)src + (byte)XF.FirstNumber)
-                : (HexSym)((byte)src + (byte)XF.FirstLetterUp);
-
-        /// <summary>
-        /// Tests whether a <see cref='HexSymLo'/> value is one of '0',...,'9'
-        /// </summary>
-        /// <param name="src">The symbol to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool number(HexSymLo src)
-            => (XF)src <= XF.LastNumber;
-
-        /// <summary>
-        /// Tests whether a <see cref='HexSymUp'/> value is one of '0',...,'9'
-        /// </summary>
-        /// <param name="src">The symbol to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool number(HexSymUp src)
-            => (XF)src <= XF.LastNumber;
-
         /// <summary>
         /// Determines whether a character is an upper-cased hex digit
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool hex(UpperCased casing, char c)
+        public static bool test(UpperCased casing, char c)
             => hexscalar(c) || hexupper(c);
 
         /// <summary>
@@ -64,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool hex(LowerCased casing, char c)
+        public static bool test(LowerCased casing, char c)
             => hexscalar(c) || hexlower(c);
 
         /// <summary>
@@ -72,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool hex(char c)
+        public static bool test(char c)
             => hexscalar(c) || hexlower(c) || hexupper(c);
 
         /// <summary>

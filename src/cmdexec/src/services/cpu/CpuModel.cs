@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
 
     using static AsmRegs;
+
     public class CpuModel
     {
         readonly IWfRuntime Wf;

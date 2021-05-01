@@ -12,7 +12,6 @@ namespace Z0
     using D = DecimalDigitFacets;
     using O = OctalDigitFacets;
     using B = BinaryDigitFacets;
-    using X = HexDigitFacets;
     using NB = NumericBaseKind;
 
     [ApiHost]
@@ -103,24 +102,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool digit(Base16 @base, char c, out HexDigit dst)
-        {
-            if(Digital.scalar(@base, c))
-            {
-                dst = (HexDigit)((HexCode)c - X.MinScalarCode);
-                return true;
-            }
-            else if(Digital.upper(@base, c))
-            {
-                dst = (HexDigit)((HexCode)c - X.MinLetterCodeU + 0xA);
-                return true;
-            }
-            else if(Digital.lower(@base,c))
-            {
-                dst = (HexDigit)((HexCode)c - X.MinLetterCodeL + 0xa);
-                return true;
-            }
-            dst = (HexDigit)byte.MaxValue;
-            return false;
-        }
+            => Hex.parse(c, out dst);
     }
 }

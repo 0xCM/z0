@@ -15,17 +15,19 @@ namespace Z0
         {
             public RowKey Key;
 
-            public uint BodyOffset;
+            public Address32 Rva;
 
-            public MethodImplAttributes ImplFlags;
+            public MethodImplAttributes ImplAttributes;
 
-            public MethodAttributes Flags;
+            public MethodAttributes Attributes;
 
             public StringIndex Name;
 
             public BlobIndex Signature;
 
-            public RowKey ParamList;
+            public RowKey FirstParam;
+
+            public ushort ParamCount;
         }
     }
 }

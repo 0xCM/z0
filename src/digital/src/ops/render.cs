@@ -20,7 +20,7 @@ namespace Z0
         public static void render(ReadOnlySpan<BinaryDigit> src, Span<char> dst)
         {
             for(var i=0u; i<src.Length; i++)
-                seek(dst,i) =  (char)symbol(skip(src,i));
+                seek(dst,i) = (char)symbol(skip(src,i));
         }
 
         /// <summary>
@@ -40,10 +40,7 @@ namespace Z0
         /// <param name="src">The source digits</param>
         [MethodImpl(Inline), Op]
         public static void render(ReadOnlySpan<HexDigit> src, Span<char> dst)
-        {
-            for(var i=0u; i < src.Length; i++)
-                seek(dst,i) = (char)symbol(UpperCase, skip(src,i));
-        }
+            => Hex.render(src,dst);
 
         [MethodImpl(Inline), Op]
         public static void render(Base2 @base, ReadOnlySpan<byte> src, Span<char> dst)
@@ -62,38 +59,6 @@ namespace Z0
                 seek(dst, j++) = (char)symbol(@base, (byte)((0b01000000 & cell) >> 6));
                 seek(dst, j++) = (char)symbol(@base, (byte)((0b10000000 & cell) >> 7));
             }
-        }
-
-        [MethodImpl(Inline), Op]
-        public static int render(ReadOnlySpan<HexCode> src, Span<char> dst)
-        {
-            var j=0u;
-            for(var i=0u; i<src.Length; i+=2, j+=3)
-            {
-                seek(dst, j) = (char)skip(src, i);
-                seek(dst, j + 1) = (char)skip(src, i + 1);
-                seek(dst, j + 2) = Chars.Space;
-            }
-
-            return (int)j;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static char hexchar(UpperCased @case, byte index)
-            => (char)symbol(@case, (HexDigit)index);
-
-        [MethodImpl(Inline), Op]
-        public static int render(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src, Span<char> dst)
-        {
-            var j=0u;
-            for(var i=0u; i<src.Length; i++, j+=3)
-            {
-                ref readonly var code = ref skip(src, i);
-                seek(dst, j) = hexchar(@case, (byte)(code >> 4));
-                seek(dst, j + 1) = hexchar(@case, (byte)(0xF & code));
-                seek(dst, j + 2) = Chars.Space;
-            }
-            return (int)j;
         }
 
         [MethodImpl(Inline)]

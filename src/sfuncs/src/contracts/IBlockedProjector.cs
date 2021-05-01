@@ -63,6 +63,5 @@ namespace Z0
         {
             void Invoke(in SpanBlock512<S> a, in SpanBlock512<T> dst);
         }
-
     }
 }

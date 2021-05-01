@@ -39,7 +39,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => string.Format("({0}) {1:X2}:{2}", Table, (byte)Table, Index);
+                => Value.ToString("X");
 
             public override string ToString()
                 => Format();

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct Digital
+    partial struct Hex
     {
         /// <summary>
         /// Projects a bytespan into a codespan

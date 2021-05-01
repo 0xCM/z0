@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     partial struct ApiSigs
     {
         public interface ITypeModifier<T> : ITextual

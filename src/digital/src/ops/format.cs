@@ -30,17 +30,9 @@ namespace Z0
         }
 
         public static string format(ReadOnlySpan<HexDigit> src)
-        {
-            Span<char> dst = stackalloc char[src.Length];
-            render(src,dst);
-            return text.@string(dst);
-        }
+            => Hex.format(src);
 
         public static string format(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
-        {
-            Span<char> digits = stackalloc char[src.Length*3];
-            render(@base, @case, src,digits);
-            return text.@string(digits);
-        }
+            => Hex.format(@case, src);
     }
 }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Part;
     using static SFx;
@@ -25,6 +26,32 @@ namespace Z0
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
                 => Calcs.impl(a,b,dst);
+        }
+
+        [Closures(Integers), Impl]
+        public readonly struct VImpl128<T> : IBinaryOp128D<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
+                => gcpu.vimpl(x,y);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gbits.impl(a,b);
+        }
+
+        [Closures(Integers), Impl]
+        public readonly struct VImpl256<T> : IBinaryOp256D<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
+                => gcpu.vimpl(x,y);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gbits.impl(a,b);
         }
 
         [Closures(Integers), Impl]

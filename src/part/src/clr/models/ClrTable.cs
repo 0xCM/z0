@@ -20,8 +20,20 @@ namespace Z0
         public ClrTable(CliTableKind value)
             => Kind = (CliTableKind)value;
 
+        public string Name
+        {
+            [MethodImpl(Inline)]
+            get => Kind.ToString();
+        }
+
+        public byte Id
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Kind;
+        }
+
         public string Format()
-            => string.Format("{0:X2}",(byte)Kind);
+            => string.Format("{0:X2}", (byte)Kind);
 
         public override string ToString()
             => Format();
@@ -29,6 +41,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ClrTable(CliTableKind src)
             => new ClrTable(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte(ClrTable src)
+            => (byte)src.Kind;
 
         [MethodImpl(Inline)]
         public static implicit operator CliTableKind(ClrTable src)

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     public readonly struct DfaState<S> : IDfaState<S>
         where S : IEquatable<S>
     {

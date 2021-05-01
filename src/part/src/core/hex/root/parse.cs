@@ -8,36 +8,125 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
+    using static TextRules;
     using static HexFormatSpecs;
 
+    using X = HexDigitFacets;
     using C = AsciChar;
     using D = HexDigit;
 
     partial struct Hex
     {
-        [Op]
-        public static bool parse(char src, out byte dst)
+        const char Zero = (char)0;
+
+        [MethodImpl(Inline), Op]
+        public static bool nonzero(char c0, char c1)
+            => c0 != Zero && c1 != Zero;
+
+        /// <summary>
+        /// Parses a nibble
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline), Op]
+        public static bool parse(char c, out byte dst)
         {
-            if(HexDigitTest.scalar(src))
+            if(Hex.scalar(c))
             {
-                dst = Bytes.sub((byte)src, MinScalarCode);
+                dst = (byte)((byte)c - MinScalarCode);
                 return true;
             }
-            else if(HexDigitTest.upper(src))
+            else if(Hex.upper(c))
             {
-                dst = Bytes.add(Bytes.sub((byte)src, MinCharCodeU), Numeric.u8(0xA));
+                dst = (byte)((byte)c - MinCharCodeU + 0xA);
                 return true;
             }
-            else if(HexDigitTest.lower(src))
+            else if(Hex.lower(c))
             {
-                dst = Bytes.add(Bytes.sub((byte)src,  MinCharCodeL), Numeric.u8(0xa));
+                dst = (byte)((byte)c - MinCharCodeL + 0xa);
                 return true;
             }
-            else
+            dst = byte.MaxValue;
+            return false;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static bool parse(char c0, char c1, out byte dst)
+        {
+            if(parse(c0, out byte d0) && parse(c1, out byte d1))
             {
-                dst = 0;
-                return false;
+                dst = (byte)((d0 << 4) | d1);
+                return true;
             }
+            dst = 0;
+            return false;
+        }
+
+        [Op]
+        public static int parse(ReadOnlySpan<char> src, Span<byte> dst)
+        {
+            var input = src;
+            var maxbytes = dst.Length;
+            var j=0;
+            var count = src.Length;
+            var c0 = Zero;
+            var c1 = Zero;
+            for(var i=0; i<count; i++)
+            {
+                if(j == maxbytes)
+                    return j;
+
+                ref readonly var c = ref skip(src,i);
+                if(Query.whitespace(c) && nonzero(c0, c1))
+                {
+                    if(parse(c0, c1, out seek(dst,j)))
+                        j++;
+
+                    c0 = Zero;
+                    c1 = Zero;
+                }
+                else
+                {
+                    if(c0 == Zero)
+                        c0 = c;
+                    else if(c1 == Zero)
+                        c1 = c;
+                    else
+                    {
+                        if(parse(c0, c1, out seek(dst,j)))
+                            j++;
+                        c0 = Zero;
+                        c1 = Zero;
+                    }
+                }
+            }
+
+            if(nonzero(c0, c1) && parse(c0, c1, out seek(dst,j)))
+                j++;
+
+            return j;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static bool parse(char c, out HexDigit dst)
+        {
+            if(scalar(c))
+            {
+                dst = (HexDigit)((HexCode)c - X.MinScalarCode);
+                return true;
+            }
+            else if(upper(c))
+            {
+                dst = (HexDigit)((HexCode)c - X.MinLetterCodeU + 0xA);
+                return true;
+            }
+            else if(lower(c))
+            {
+                dst = (HexDigit)((HexCode)c - X.MinLetterCodeL + 0xa);
+                return true;
+            }
+            dst = (HexDigit)byte.MaxValue;
+            return false;
         }
 
         [Op]

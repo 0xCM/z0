@@ -9,7 +9,7 @@ namespace Z0
 
     partial struct Images
     {
-        [StructLayout(LayoutKind.Sequential)]
+        [Record(CliTableKind.GenericParamConstraint), StructLayout(LayoutKind.Sequential)]
         public struct GenericParamConstraintRow : IRecord<GenericParamConstraintRow>
         {
             public RowKey Key;

@@ -13,6 +13,28 @@ namespace Z0
 
     partial struct Hex
     {
+        /// <summary>
+        /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
+        /// </summary>
+        /// <param name="case">The case specifier</param>
+        /// <param name="value">The digit value</param>
+        [MethodImpl(Inline), Op]
+        public static char hexchar(LowerCased @case, HexDigit value)
+            => (char)symbol(@case, value);
+
+        /// <summary>
+        /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
+        /// </summary>
+        /// <param name="case">The case specifier</param>
+        /// <param name="value">The digit value</param>
+        [MethodImpl(Inline), Op]
+        public static char hexchar(UpperCased @case, HexDigit value)
+            => (char)symbol(@case, value);
+
+        [MethodImpl(Inline), Op]
+        public static char hexchar(UpperCased @case, byte value)
+            => (char)symbol(@case, (HexDigit)value);
+
         [MethodImpl(Inline), Op]
         public static char hexchar(LowerCased @case, byte value, byte pos)
             => (char)skip(first(LowerHexDigits), (byte)(0xF & (byte)(value >> pos*4)));

@@ -115,7 +115,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 public static implicit operator Modifier(Imm src)
                     => new Modifier(src.Name,src.Kind);
-
             }
         }
     }

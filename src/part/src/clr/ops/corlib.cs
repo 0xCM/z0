@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Part;
+    using static Root;
 
-    public interface IAlphabet<A> : IIndex<ushort,A>
-        where A : unmanaged, ISymVal
+    partial struct Clr
     {
-
+        [MethodImpl(Inline), Op]
+        public static Assembly corlib()
+            => typeof(uint).Assembly;
     }
-
 }

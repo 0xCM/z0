@@ -89,37 +89,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(ulong src)
             => chars(base10, src);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexString<Hex1Seq> src, Hex1Seq kind)
-            => src.Chars(kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexString<Hex2Seq> src, Hex2Seq kind)
-            => src.Chars(kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexString<Hex3Seq> src, Hex3Seq kind)
-            => src.Chars(kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexString<Hex4Seq> src, Hex4Seq kind)
-            => src.Chars(kind);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex1Seq src)
-            => chars(Hex.hexstring(n1), src);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex2Seq src)
-            => chars(Hex.hexstring(n2), src);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex3Seq src)
-            => chars(Hex.hexstring(n3), src);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex4Seq src)
-            => chars(Hex.hexstring(n4), src);
-    }
+   }
 }

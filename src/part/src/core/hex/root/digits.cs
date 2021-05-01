@@ -24,5 +24,21 @@ namespace Z0
             }
             return j;
         }
+
+        [MethodImpl(Inline), Op]
+        public static void digits(ReadOnlySpan<HexSymLo> src, Span<HexDigit> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = digit(skip(src,i));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void digits(ReadOnlySpan<HexSymUp> src, Span<HexDigit> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = digit(skip(src,i));
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct BitFields
     {
-        public static string format<T>(in Bitfield<T> src)
+        public static string format<T>(in BitfieldCover<T> src)
             where T : unmanaged
         {
             var dst = text.buffer();
@@ -20,7 +20,7 @@ namespace Z0
         }
 
         [Op, Closures(UInt64k)]
-        public static void render<T>(in Bitfield<T> src, ITextBuffer dst)
+        public static void render<T>(in BitfieldCover<T> src, ITextBuffer dst)
             where T : unmanaged
         {
             var count = src.Spec.FieldCount;

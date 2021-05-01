@@ -36,7 +36,6 @@
     <ProjectReference Include="$(Files)"/>
 
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Gen)" />
 
     <ProjectReference Include="$(Konst)" />

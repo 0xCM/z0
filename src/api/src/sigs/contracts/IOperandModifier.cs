@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     partial struct ApiSigs
     {
         public interface IOperandModifier<T> : ITextual

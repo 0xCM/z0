@@ -82,7 +82,7 @@ namespace Z0
             => new Address32((uint)src);
 
         [MethodImpl(Inline)]
-        public static explicit operator Address32(int src)
+        public static implicit operator Address32(int src)
             => new A((uint)src);
 
         [MethodImpl(Inline)]

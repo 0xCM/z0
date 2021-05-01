@@ -12,7 +12,6 @@ namespace Z0
 
     using api = BitFields;
 
-
     public struct Bitfield8<T>
         where T : unmanaged
     {

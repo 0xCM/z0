@@ -16,7 +16,7 @@ namespace Z0
     /// Defines the (stateful) bitfield api surface
     /// </summary>
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
-    public struct Bitfield<T>
+    public struct BitfieldCover<T>
         where T : unmanaged
     {
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         T _State;
 
         [MethodImpl(Inline)]
-        public Bitfield(in BitfieldSegSpecs spec, T state)
+        public BitfieldCover(in BitfieldSegSpecs spec, T state)
         {
             Spec = spec;
             _State = state;
@@ -38,7 +38,7 @@ namespace Z0
             => _State;
 
         [MethodImpl(Inline)]
-        public Bitfield<T> State(in T src)
+        public BitfieldCover<T> State(in T src)
         {
             _State = src;
             return this;
@@ -53,14 +53,14 @@ namespace Z0
             => api.read(Segment(index), _State);
 
         [MethodImpl(Inline)]
-        public Bitfield<T> Deposit(in BitfieldPart seg, in T src)
+        public BitfieldCover<T> Deposit(in BitfieldPart seg, in T src)
         {
             api.store<T>(seg, src, ref _State);
             return this;
         }
 
         [MethodImpl(Inline)]
-        public Bitfield<T> Deposit(byte index, in T src)
+        public BitfieldCover<T> Deposit(byte index, in T src)
         {
             api.store<T>(Segment(index), src, ref _State);
             return this;

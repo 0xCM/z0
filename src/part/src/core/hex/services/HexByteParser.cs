@@ -67,9 +67,9 @@ namespace Z0
         public ParseResult<byte> Parse(char c)
         {
             var u = Char.ToUpperInvariant(c);
-            if(HexDigitTest.scalar(c))
+            if(Hex.scalar(c))
                 return parsed(c, (byte)((byte)u - MinScalarCode));
-            else if(HexDigitTest.upper(c))
+            else if(Hex.upper(c))
                 return parsed(c, (byte)((byte)u - MinCharCodeU + 0xA));
             else
                 return unparsed<byte>(c);

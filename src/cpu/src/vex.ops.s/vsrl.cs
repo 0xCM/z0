@@ -189,6 +189,179 @@ namespace Z0
         public static Vector256<ulong> vsrl(Vector256<ulong> src, [Imm] byte count)
             => ShiftRightLogical(src, count);
 
+        /// <summary>
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector128<byte> vsrl(Vector128<byte> src, Vector128<byte> count)
+        {
+            var y = v16u(count);
+            var dst = vsrl(vinflate256x16u(src),y);
+            return vpack128x8u(dst);
+        }
+
+        /// <summary>
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector128<sbyte> vsrl(Vector128<sbyte> src, Vector128<sbyte> count)
+        {
+            var y = v16i(count);
+            var dst = vsrl(vinflate256x16i(src),y);
+            return vpack128x8i(dst);
+        }
+
+        /// <summary>
+        ///  __m128i _mm_srl_epi16 (__m128i a, __m128i count) PSRLW xmm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector128<short> vsrl(Vector128<short> src, Vector128<short> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m128i _mm_srl_epi16 (__m128i a, __m128i count) PSRLW xmm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector128<ushort> vsrl(Vector128<ushort> src, Vector128<ushort> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m128i _mm_srl_epi16 (__m128i a, __m128i count) PSRLW xmm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector128<int> vsrl(Vector128<int> src, Vector128<int> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m128i _mm_srl_epi32 (__m128i a, __m128i count) PSRLD xmm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector128<uint> vsrl(Vector128<uint> src, Vector128<uint> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m128i _mm_srl_epi64 (__m128i a, __m128i count) PSRLQ xmm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector128<long> vsrl(Vector128<long> src, Vector128<long> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m128i _mm_srl_epi64 (__m128i a, __m128i count) PSRLQ xmm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector128<ulong> vsrl(Vector128<ulong> src, Vector128<ulong> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector256<sbyte> vsrl(Vector256<sbyte> src, Vector128<sbyte> count)
+        {
+            var y = v16i(count);
+            var lo = vsrl(vinflate256x16i(vlo(src)), y);
+            var hi = vsrl(vinflate256x16i(vhi(src)),y);
+            return vpack256x8i(lo, hi);
+        }
+
+        /// <summary>
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector256<byte> vsrl(Vector256<byte> src, Vector128<byte> count)
+        {
+            var y = v16u(count);
+            var lo = vsrl(vinflate256x16u(vlo(src)),y);
+            var hi = vsrl(vinflate256x16u(vhi(src)),y);
+            return vpack256x8u(lo, hi);
+        }
+
+        /// <summary>
+        /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count)VPSRLW ymm, ymm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector256<short> vsrl(Vector256<short> src, Vector128<short> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count)VPSRLW ymm, ymm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector256<ushort> vsrl(Vector256<ushort> src, Vector128<ushort> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        ///  __m256i _mm256_srl_epi32 (__m256i a, __m128i count) VPSRLD ymm, ymm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector256<int> vsrl(Vector256<int> src, Vector128<int> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        ///  __m256i _mm256_srl_epi32 (__m256i a, __m128i count) VPSRLD ymm, ymm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector256<uint> vsrl(Vector256<uint> src, Vector128<uint> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count) VPSRLQ ymm, ymm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector256<long> vsrl(Vector256<long> src, Vector128<long> count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count) VPSRLQ ymm, ymm, xmm/m128
+        /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The offset vector</param>
+        [MethodImpl(Inline), Srl]
+        public static Vector256<ulong> vsrl(Vector256<ulong> src, Vector128<ulong> count)
+            => ShiftRightLogical(src, count);
+
         [MethodImpl(Inline),Op]
         static byte lsb8f(byte density)
             => (byte)(Max8u >> (8 - density));

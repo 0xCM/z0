@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Xed)" />
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(Dynamic)" />

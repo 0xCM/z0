@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(BitMatrix)" />
   </ItemGroup>
 

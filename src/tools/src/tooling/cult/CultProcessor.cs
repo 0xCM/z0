@@ -259,7 +259,7 @@ namespace Z0.Tooling
             for(var i=0; i<count; i++)
             {
                 ref readonly var c = ref skip(src,i);
-                if(HexDigitTest.scalar(c))
+                if(Hex.scalar(c))
                 {
                     seek(chars,j++) = c;
                     if(++k == 2)
@@ -269,7 +269,7 @@ namespace Z0.Tooling
                         m++;
                     }
                 }
-                else if(HexDigitTest.upper(c))
+                else if(Hex.upper(c))
                 {
                     seek(chars, j++) = Char.ToLowerInvariant(c);
                     if(++k == 2)

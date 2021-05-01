@@ -11,10 +11,4 @@ namespace Z0
         public const string CmdName = "show-process-memory";
     }
 
-    partial class XCmd
-    {
-        [Op]
-        public static ShowProcessMemoryCmd ShowProcessMemory(this WfCmdBuilder builder)
-            => new ShowProcessMemoryCmd();
-    }
 }

@@ -1337,7 +1337,6 @@ namespace Z0.Asm
 
         public void ListCliTables(Assembly src)
         {
-
             var reader = CliReader.create(src);
             root.iter(reader.MethodDefKeys(), k => Wf.Row(k));
             root.iter(reader.TypeDefKeys(), k => Wf.Row(k));
@@ -1346,16 +1345,71 @@ namespace Z0.Asm
         }
 
 
+        public void ShowStringHeap(Assembly src)
+        {
+            var reader = CliReader.create(src);
+            var heap = reader.StringHeap();
+            var data = heap.Data;
+            //??
+        }
+
+        public void CheckApiKeys()
+        {
+            var keys = ApiKeyChecks.create(Wf);
+            keys.Run();
+        }
+
         public void EmitApiClasses()
             => Wf.ApiData().EmitApiClasses();
 
+
+        public void ReadImageCsv()
+        {
+            var buffer = root.list<ImageContent>();
+            void Receive(in ImageContent src)
+            {
+                buffer.Add(src);
+            }
+
+            var reader = Wf.ImageCsvReader();
+            var files = Db.TableDir<ImageContent>().AllFiles.View;
+            var count = files.Length;
+            for(var i=0; i<count; i++)
+            {
+                buffer.Clear();
+                ref readonly var path = ref skip(files,i);
+                reader.Read(path, Receive);
+                Wf.Status($"Read {buffer.Count} image content records from {path.ToUri()}");
+            }
+
+        }
+
+        public void ReadMethodDefs(Assembly src)
+        {
+            var reader = CliReader.create(src);
+            var handles = reader.MethodDefHandles();
+            var rows = handles.Map(h => reader.Read(h));
+            var count = rows.Length;
+            var formatter = Tables.formatter<MethodDefRow>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                Wf.Row(formatter.Format(row));
+            }
+        }
+
         public void Run()
         {
-            // var experiment = ExtractExperiment.create(Wf);
-            // experiment.Run();
+            ReadMethodDefs(Parts.Math.Assembly);
 
-            //ListCliTables(Parts.Cpu.Assembly);
-            EmitApiClasses();
+            // var tokens = Numeric.types().Map(Clr.token);
+            // var module = typeof(byte).Assembly.ManifestModule;
+            // foreach(var token in tokens)
+            // {
+            //     var type = CliTokens.type(module, token);
+            //     Wf.Row(string.Format("{0} | {1}", token, type.Name));
+            // }
+
         }
 
         // void GetMethodInfo()

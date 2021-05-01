@@ -30,6 +30,12 @@ namespace Z0
                 Value = memory.u32(value);
             }
 
+            public string Format()
+                => Value.ToString("X");
+
+            public override string ToString()
+                => Format();
+
             [MethodImpl(Inline)]
             public static implicit operator HeapKey(StringIndex src)
                 => new HeapKey(src.HeapKind, src.Value);

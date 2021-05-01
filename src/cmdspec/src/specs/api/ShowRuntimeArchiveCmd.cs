@@ -13,11 +13,4 @@ namespace Z0
     {
         public const string CmdName = "show-runtime-archive";
     }
-
-    partial class XCmd
-    {
-        [MethodImpl(Inline)]
-        public static ShowRuntimeArchiveCmd ShowRuntimeArchive(this WfCmdBuilder wf)
-            => default;
-    }
 }

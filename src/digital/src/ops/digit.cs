@@ -66,17 +66,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static HexDigit digit(Base16 @base, char src)
-        {
-            if(number(src))
-                return (HexDigit)((HexSymFacet)src - XF.NumberOffset);
-            else
-            {
-                if(hex(UpperCase, src))
-                    return (HexDigit)((XF)src - XF.LetterOffsetUp);
-                else
-                    return (HexDigit)((XF)src - XF.LetterOffsetLo);
-            }
-        }
+            => Hex.digit(src);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -84,19 +74,15 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(Base16 @base, LowerCased @case, char src)
-            => number(src)
-            ? (HexDigit)((XF)src - XF.NumberOffset)
-            : (HexDigit)((XF)src - XF.LetterOffsetLo);
+            => Hex.digit(@case, src);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static X digit(Base16 @base, UpperCased @case, char src)
-            => number(src)
-            ? (HexDigit)((XF)src - XF.NumberOffset)
-            : (HexDigit)((XF)src - XF.LetterOffsetUp);
+        public static HexDigit digit(Base16 @base, UpperCased @case, char src)
+            => Hex.digit(@case, src);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -104,9 +90,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymLo src)
-            => number(src)
-            ? (HexDigit)((XF)src - XF.NumberOffset)
-            : (HexDigit)((XF)src - XF.LetterOffsetLo);
+            => Hex.digit(src);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by an uppercase hex symbol
@@ -114,9 +98,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymUp src)
-            => number(src)
-            ? (HexDigit)((XF)src - XF.NumberOffset)
-            : (HexDigit)((XF)src - XF.LetterOffsetUp);
+            => Hex.digit(src);
 
         [MethodImpl(Inline), Op]
         public static DecimalDigit digit(Base10 @base, char c)

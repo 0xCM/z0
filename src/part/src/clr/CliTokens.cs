@@ -26,13 +26,13 @@ namespace Z0
         public static CliToken token(TableIndex table, uint row)
             => new CliToken(((uint)table << 24) | (0xFFFFFF &  row));
 
-        [MethodImpl(Inline), Op]
-        public static CliToken token(Type src)
-            => new CliToken(src);
-
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static CliToken token<T>()
             => new CliToken(typeof(T));
+
+        [MethodImpl(Inline), Op]
+        public static CliToken token(Type src)
+            => new CliToken(src);
 
         [MethodImpl(Inline), Op]
         public static CliToken token(FieldInfo src)

@@ -33,7 +33,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var pair = ref src[i];
-                dst[i] =  Tuples.triple(pair.Left, pair.Right, f(pair.Left,pair.Right));
+                dst[i] = Tuples.triple(pair.Left, pair.Right, f(pair.Left,pair.Right));
             }
             return ref dst;
         }

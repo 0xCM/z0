@@ -46,5 +46,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(Hex4Seq kind)
             => format(Hex.hexstring(n4), kind);
+
+        public static string format(ReadOnlySpan<HexDigit> src)
+        {
+            Span<char> dst = stackalloc char[src.Length];
+            render(src,dst);
+            return text.@string(dst);
+        }
+
+        public static string format(UpperCased @case, ReadOnlySpan<byte> src)
+        {
+            Span<char> digits = stackalloc char[src.Length*3];
+            render(@case, src,digits);
+            return text.@string(digits);
+        }
     }
 }

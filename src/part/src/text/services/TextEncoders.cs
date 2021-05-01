@@ -70,7 +70,13 @@ namespace Z0
         {
             dst = utf8().GetString(src);
             return ref dst;
+        }
 
+        [MethodImpl(Inline), Op]
+        public static ref string DecodeUtf16(ReadOnlySpan<byte> src, out string dst)
+        {
+            dst = utf16().GetString(src);
+            return ref dst;
         }
 
         [MethodImpl(Inline), Op]
@@ -112,6 +118,7 @@ namespace Z0
             return ref dst;
         }
 
+
         [MethodImpl(Inline), Op]
         public static ref byte[] Encode(Encoding e, string src, out byte[] dst)
         {
@@ -129,5 +136,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static TextEncoding utf8()
             => new TextEncoding(Encoding.UTF8);
+
+        [MethodImpl(Inline), Op]
+        public static TextEncoding utf7()
+            => new TextEncoding(Encoding.UTF7);
+
+        [MethodImpl(Inline), Op]
+        public static TextEncoding utf16()
+            => new TextEncoding(Encoding.Unicode);
     }
 }

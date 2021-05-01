@@ -26,6 +26,32 @@ namespace Z0
                 => Calcs.dec(src,dst);
         }
 
+        [NumericClosures(Integers), Dec]
+        public readonly struct VDec128<T> : IUnaryOp128D<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector128<T> Invoke(Vector128<T> x)
+                => gcpu.vdec(x);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a)
+                => gmath.dec(a);
+        }
+
+        [NumericClosures(Integers), Dec]
+        public readonly struct VDec256<T> : IUnaryOp256D<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector256<T> Invoke(Vector256<T> x)
+                => gcpu.vdec(x);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a)
+                => gmath.dec(a);
+        }
+
         [NumericClosures(AllNumeric), Dec]
         public readonly struct Dec128<T> : IBlockedUnaryOp128<T>
             where T : unmanaged

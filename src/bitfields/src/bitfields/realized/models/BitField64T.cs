@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-
     public struct Bitfield64<T>
         where T : unmanaged
     {

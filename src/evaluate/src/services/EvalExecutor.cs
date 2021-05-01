@@ -233,7 +233,6 @@ namespace Z0
             return ExecAction(check, fUri, gUri);
         }
 
-
         public EvalResult ExecAction(Action action, OpUri f, OpUri g)
         {
 

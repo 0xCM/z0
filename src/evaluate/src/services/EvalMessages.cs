@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     static class EvalMessages
     {
-
         public static AppMsg BufferSizeError(ApiMemberCode code, BufferToken buffer)
             => AppMsg.info($"There are {buffer.BufferSize} available buffer bytes but at least {code.Length} is required by {code.Member.Id}");
     }

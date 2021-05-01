@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    sealed class ShowEnv : CmdReactor<ShowEnvCmd>
+    using System;
+
+    public interface IApiSig
     {
-        protected override CmdResult Run(ShowEnvCmd cmd)
-        {
-            Wf.Row(Wf.Env.Format());
-            return Cmd.ok(cmd);
-        }
+        ApiClassKind Class {get;}
+
+        Index<Type> Components {get;}
     }
 }
