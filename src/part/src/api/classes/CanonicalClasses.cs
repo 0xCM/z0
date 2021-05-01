@@ -30,25 +30,5 @@ namespace Z0
         public readonly struct Copy : I { K I.Kind => K.Copy; }
 
         public readonly struct Zip : I { K I.Kind => K.Zip; }
-
-        //~ Parametric
-        //~ -------------------------------------------------------------------
-        public readonly struct Reverse<T> : IApiCanonicalClass<Reverse,T> {}
-
-        public readonly struct Identity<T> : IApiCanonicalClass<Identity,T> {}
-
-        public readonly struct Concat<T> : IApiCanonicalClass<Concat,T> {}
-
-        public readonly struct Parse<T> : IApiCanonicalClass<Parse,T> {}
-
-        public readonly struct Slice<T> : IApiCanonicalClass<Slice,T> {}
-
-        public readonly struct Zero<T> : IApiCanonicalClass<Zero,T> {}
-
-        public readonly struct One<T> : IApiCanonicalClass<One,T> {}
-
-        public readonly struct Test<T> : IApiCanonicalClass<Test,T> {}
-
-        public readonly struct Zip<T> : IApiCanonicalClass<Zip,T> {}
     }
 }

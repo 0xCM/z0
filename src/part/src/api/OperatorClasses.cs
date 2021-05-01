@@ -51,18 +51,6 @@ namespace Z0
         public static TernaryPredicate predicate(N3 n)
             => default;
 
-        public static PredicateClass<T> predicate<T>()
-            where T : unmanaged => default;
-
-        public static UnaryPredicate<T> predicate<T>(N1 n)
-            where T : unmanaged => default;
-
-        public static BinaryPredicate<T> predicate<T>(N2 n)
-            where T : unmanaged => default;
-
-        public static TernaryPredicate<T> predicate<T>(N3 n)
-            where T : unmanaged => default;
-
         [KindFactory]
         public static UnaryActionClass action(N1 n)
             => default;

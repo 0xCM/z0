@@ -32,6 +32,7 @@ namespace Z0
         public readonly struct VOr128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
+
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
                 => gcpu.vor(x,y);

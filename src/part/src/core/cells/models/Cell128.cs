@@ -22,6 +22,10 @@ namespace Z0
             => Data = src;
 
         [MethodImpl(Inline)]
+        public Cell128(ulong src)
+            => Data = Vector128.CreateScalarUnsafe(src);
+
+        [MethodImpl(Inline)]
         public Cell128(ulong x0, ulong x1)
             => Data = Vector128.Create(x0,x1);
 
@@ -62,6 +66,66 @@ namespace Z0
             get => memory.bytes(this);
         }
 
+        public Vector128<byte> V8u
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsByte();
+        }
+
+        public Vector128<sbyte> V8i
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsSByte();
+        }
+
+        public Vector128<ushort> V16u
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsUInt16();
+        }
+
+        public Vector128<short> V16i
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsInt16();
+        }
+
+        public Vector128<uint> V32u
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsUInt32();
+        }
+
+        public Vector128<int> V32i
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsInt32();
+        }
+
+        public Vector128<float> V32f
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsSingle();
+        }
+
+        public Vector128<ulong> V64u
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsUInt64();
+        }
+
+        public Vector128<long> V64i
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsInt64();
+        }
+
+        public Vector128<double> V64f
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsDouble();
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(Cell128 src)
             => Data.Equals(src.Data);
@@ -100,7 +164,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(ulong src)
-            => new Cell128(src, 0ul);
+            => new Cell128(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(in ConstPair<ulong> x)

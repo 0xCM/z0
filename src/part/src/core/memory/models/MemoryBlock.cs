@@ -46,6 +46,12 @@ namespace Z0
             get => Data.View;
         }
 
+        public Span<byte> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
         public ByteSize Size
         {
             [MethodImpl(Inline)]

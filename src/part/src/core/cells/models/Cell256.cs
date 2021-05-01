@@ -22,6 +22,10 @@ namespace Z0
         public Cell256(Vector256<ulong> src)
             => Content = src;
 
+        [MethodImpl(Inline)]
+        public Cell256(ulong src)
+            => Content = Vector256.CreateScalarUnsafe(src);
+
         public CellKind Kind
             => CellKind.Cell256;
 
@@ -51,6 +55,67 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Empty;
+        }
+
+        public Vector256<byte> V8u
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsByte();
+        }
+
+        public Vector256<sbyte> V8i
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsSByte();
+        }
+
+
+        public Vector256<ushort> V16u
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsUInt16();
+        }
+
+        public Vector256<short> V16i
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsInt16();
+        }
+
+        public Vector256<uint> V32u
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsUInt32();
+        }
+
+        public Vector256<int> V32i
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsInt32();
+        }
+
+        public Vector256<float> V32f
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsSingle();
+        }
+
+        public Vector256<ulong> V64u
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsUInt64();
+        }
+
+        public Vector256<long> V64i
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsInt64();
+        }
+
+        public Vector256<double> V64f
+        {
+            [MethodImpl(Inline)]
+            get => Content.AsDouble();
         }
 
         [MethodImpl(Inline)]
@@ -118,6 +183,10 @@ namespace Z0
             => init(x);
 
         [MethodImpl(Inline)]
+        public static implicit operator Cell256(ulong x)
+            => new Cell256(x);
+
+        [MethodImpl(Inline)]
         public static implicit operator Cell256(Vector256<ushort> x)
             => init(x);
 
@@ -131,35 +200,35 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<byte>(Cell256 x)
-            => x.Content.AsByte();
+            => x.V8u;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<sbyte>(Cell256 x)
-            => x.Content.AsSByte();
+            => x.V8i;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<ushort>(Cell256 x)
-            => x.Content.AsUInt16();
+            => x.V16u;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<short>(Cell256 x)
-            => x.Content.AsInt16();
+            => x.V16i;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<uint>(Cell256 x)
-            => x.Content.AsUInt32();
+            => x.V32u;
 
        [MethodImpl(Inline)]
         public static implicit operator Vector256<int>(Cell256 x)
-            => x.Content.AsInt32();
+            => x.V32i;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<long>(Cell256 x)
-            => x.Content.AsInt64();
+            => x.V64i;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<ulong>(Cell256 x)
-            => x.Content.AsUInt64();
+            => x.V64u;
 
         public static Cell256 Empty => default;
     }

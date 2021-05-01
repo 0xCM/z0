@@ -42,6 +42,12 @@ namespace Z0
         public DW DataWidth
             => Width;
 
+        public ByteSize DataSize
+        {
+            [MethodImpl(Inline)]
+            get => (ulong)Width/8;
+        }
+
         public TS TypeSign
             => Sign;
 

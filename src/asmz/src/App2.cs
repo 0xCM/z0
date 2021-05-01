@@ -254,7 +254,7 @@ namespace Z0.Asm
 
         void ShowMemory()
         {
-            var info = WinMem.BasicInfo();
+            var info = WinMem.basic();
             var buffer = text.buffer();
             buffer.AppendLine(text.prop(nameof(info.BaseAddress), info.BaseAddress));
             buffer.AppendLine(text.prop(nameof(info.AllocationBase), info.AllocationBase));

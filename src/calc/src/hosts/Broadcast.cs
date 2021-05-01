@@ -12,6 +12,8 @@ namespace Z0
     using static Numeric;
     using static SFx;
 
+    using K = ApiClasses;
+
     partial struct CalcHosts
     {
         [Closures(Closure)]

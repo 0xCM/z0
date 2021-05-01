@@ -24,7 +24,7 @@ namespace Z0
     /// <typeparam name="F">The kind classifier type</typeparam>
     /// <typeparam name="T">The numeric type</typeparam>
     [Free]
-    public interface IBitLogicKind<F,T> : IApiBitLogicClass
+    public interface IApiBitLogicClass<F,T> : IApiBitLogicClass
         where F : unmanaged, IApiBitLogicClass
     {
         ApiBitLogicClass IApiBitLogicClass.Kind

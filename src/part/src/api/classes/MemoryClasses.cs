@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = ApiMemoryClass;
-    using I = IMemoryApiKey;
+    using I = IApiMemoryClass;
 
     partial struct ApiClasses
     {
@@ -14,9 +14,5 @@ namespace Z0
         public readonly struct Store : I { K I.Kind => K.Store; }
 
         public readonly struct Load : I { K I.Kind => K.Load; }
-
-        //~ Parametric
-        //~ -------------------------------------------------------------------
-
     }
 }

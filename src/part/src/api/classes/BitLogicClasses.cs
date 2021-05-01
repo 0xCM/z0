@@ -45,28 +45,28 @@ namespace Z0
 
         public readonly struct RNot : I { K I.Kind => K.RNot; }
 
-        public readonly struct And<T> : IBitLogicKind<And,T> {}
+        public readonly struct And<T> : IApiBitLogicClass<And,T> {}
 
-        public readonly struct Nand<T> : IBitLogicKind<Nand,T> {}
+        public readonly struct Nand<T> : IApiBitLogicClass<Nand,T> {}
 
-        public readonly struct Or<T> : IBitLogicKind<Or,T> {}
+        public readonly struct Or<T> : IApiBitLogicClass<Or,T> {}
 
-        public readonly struct Nor<T> : IBitLogicKind<Nor,T> {}
+        public readonly struct Nor<T> : IApiBitLogicClass<Nor,T> {}
 
-        public readonly struct Xor<T> : IBitLogicKind<Xor,T> {}
+        public readonly struct Xor<T> : IApiBitLogicClass<Xor,T> {}
 
-        public readonly struct Xnor<T> : IBitLogicKind<Xnor,T> {}
+        public readonly struct Xnor<T> : IApiBitLogicClass<Xnor,T> {}
 
-        public readonly struct Impl<T> : IBitLogicKind<Impl,T> {}
+        public readonly struct Impl<T> : IApiBitLogicClass<Impl,T> {}
 
-        public readonly struct NonImpl<T> : IBitLogicKind<NonImpl,T> {}
+        public readonly struct NonImpl<T> : IApiBitLogicClass<NonImpl,T> {}
 
-        public readonly struct CImpl<T> : IBitLogicKind<CImpl,T> {}
+        public readonly struct CImpl<T> : IApiBitLogicClass<CImpl,T> {}
 
-        public readonly struct CNonImpl<T> : IBitLogicKind<CNonImpl,T> {}
+        public readonly struct CNonImpl<T> : IApiBitLogicClass<CNonImpl,T> {}
 
-        public readonly struct Not<T> : IBitLogicKind<Not,T> {}
+        public readonly struct Not<T> : IApiBitLogicClass<Not,T> {}
 
-        public readonly struct Select<T> : IBitLogicKind<Select,T> {}
+        public readonly struct Select<T> : IApiBitLogicClass<Select,T> {}
     }
 }

@@ -14,6 +14,7 @@ namespace Z0
 
     using BL = ByteLogic;
     using LS = vlogic;
+    using K = ApiClasses;
 
     partial struct CalcHosts
     {

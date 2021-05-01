@@ -48,20 +48,5 @@ namespace Z0
 
         public readonly struct Mod<T> : IApiArithmeticClass<Mod,T> {}
 
-        public readonly struct Clamp<T> : IApiArithmeticClass<Clamp,T> {}
-
-        public readonly struct Dot<T> : IApiArithmeticClass<Dot,T> {}
-
-        public readonly struct Inc<T> : IApiArithmeticClass<Inc,T> {}
-
-        public readonly struct Dec<T> : IApiArithmeticClass<Dec,T> {}
-
-        public readonly struct Negate<T> : IApiArithmeticClass<Negate,T> {}
-
-        public readonly struct Abs<T> : IApiArithmeticClass<Abs,T> {}
-
-        public readonly struct Square<T> : IApiArithmeticClass<Square,T> {}
-
-        public readonly struct Sqrt<T> : IApiArithmeticClass<Sqrt,T> {}
     }
 }

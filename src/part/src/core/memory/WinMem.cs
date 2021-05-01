@@ -21,7 +21,7 @@ namespace Z0
         const string Kernel = "kernel32.dll";
 
         [Op]
-        public static unsafe BasicMemoryInfo BasicInfo()
+        public static unsafe BasicMemoryInfo basic()
         {
             var src = new MEMORY_BASIC_INFORMATION();
             var dst = new BasicMemoryInfo();
@@ -49,11 +49,11 @@ namespace Z0
         /// https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static MemoryAddress VirtualAlloc(ByteSize size, MemAllocType type, PageProtection protect)
+        public static MemoryAddress valloc(ByteSize size, MemAllocType type, PageProtection protect)
             => VirtualAlloc(address: UIntPtr.Zero, size, type, protect);
 
         [MethodImpl(Inline), Op]
-        public static unsafe bool VirtualFree(MemoryAddress address, ByteSize size, MemFreeType type)
+        public static unsafe bool vfree(MemoryAddress address, ByteSize size, MemFreeType type)
             => VirtualFree(address.Pointer(), (UIntPtr)size, type);
 
         /// <summary>
@@ -65,8 +65,31 @@ namespace Z0
         /// https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualquery
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static void VirtualQuery(MemoryAddress address, ref BasicMemoryInfo dst)
+        public static void vquery(MemoryAddress address, ref BasicMemoryInfo dst)
             => VirtualQuery((IntPtr)address, ref dst, (UIntPtr)memory.size<BasicMemoryInfo>());
+
+        /// <summary>
+        /// Specifies the protection level for a page segment
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="size"></param>
+        /// <param name="protect"></param>
+        [MethodImpl(Inline), Op]
+        public static bool vprotect(MemoryAddress address, ByteSize size, PageProtection protect)
+            => VirtualProtect(address, size, protect, out var prior);
+
+        /// <summary>
+        /// Removes all protection from a page segment
+        /// </summary>
+        /// <param name="base">The segment base address</param>
+        /// <param name="size">The segment size</param>
+        [MethodImpl(Inline), Op]
+        public static bool liberate(MemoryAddress @base, ByteSize size)
+            => vprotect(@base,size, PageProtection.ExecuteReadWrite);
+
+        [MethodImpl(Inline), Op]
+        public static bool liberate(MemoryRange range)
+            => vprotect(range.Min, range.Size, PageProtection.ExecuteReadWrite);
 
         public static unsafe ulong ReadProcessMemory(IntPtr process, ulong address, Span<byte> dst)
         {
@@ -78,7 +101,7 @@ namespace Z0
                     return (ulong)read;
                 }
             }
-            catch (OverflowException)
+            catch (Exception)
             {
                 return 0;
             }
