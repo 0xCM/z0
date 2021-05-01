@@ -38,8 +38,6 @@
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Gen)" />
 
-    <ProjectReference Include="$(Konst)" />
-
     <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(Logix)" />
 
@@ -53,6 +51,7 @@
 
     <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Sources)" />
 
     <ProjectReference Include="$(Tables)" />
     <ProjectReference Include="$(Term)" />

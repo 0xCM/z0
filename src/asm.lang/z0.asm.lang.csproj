@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(AsmLangG)"/>
     <ProjectReference Include="$(AsmCatalogs)"/>
-    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Gen)" />

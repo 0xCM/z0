@@ -13,6 +13,7 @@
     <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(AsmCases)" />
+    <ProjectReference Include="$(Pipes)" />
 
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(CmdSpec)" />

@@ -9,6 +9,5 @@ namespace Z0
     public class PipeBuffer<T> : ConcurrentQueue<T>
     {
 
-
     }
 }

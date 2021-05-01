@@ -30,11 +30,11 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Pairs<T> pairs<T>(ISource src, Span<Pair<T>> dst)
             where T : struct
-                => Pipes.deposit(pairs<T>(src).Take(dst.Length),dst);
+                => memory.deposit(pairs<T>(src).Take(dst.Length),dst);
 
         [Op, Closures(Closure)]
         public static Pairs<T> pairs<T>(ISource src, Pair<T>[] dst)
             where T : struct
-                => Pipes.deposit(pairs<T>(src).Take(dst.Length), dst);
+                => memory.deposit(pairs<T>(src).Take(dst.Length), dst);
     }
 }

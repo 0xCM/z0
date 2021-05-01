@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Reflection;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [ApiComplete]
-    readonly partial struct Msg
+    using static Part;
+    using static memory;
+
+    public readonly struct DataSource
     {
+
 
     }
 }

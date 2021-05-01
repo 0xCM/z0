@@ -40,7 +40,7 @@ namespace Z0
             for(var j=0; j<count; j+=8)
             {
                 var src = source.Next<ulong>();
-                Pipes.deposit(src, bytes);
+                memory.deposit(src, bytes);
                 for(var k=0; k<8; k++, counter++)
                 {
                     if(counter == count)

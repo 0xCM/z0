@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Res)" />
+    <ProjectReference Include="$(Workflow)" />
   </ItemGroup>
 
 </Project>

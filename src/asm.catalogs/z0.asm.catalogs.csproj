@@ -6,7 +6,7 @@
 
   <ItemGroup>
       <ProjectReference Include="$(AsmCore)"/>
-      <ProjectReference Include="$(Konst)"/>
+      <ProjectReference Include="$(Workflow)"/>
   </ItemGroup>
 
    <ItemGroup>
