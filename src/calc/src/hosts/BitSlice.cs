@@ -25,7 +25,7 @@ namespace Z0
                 => SFx.identity<T>(Name);
 
             public T Invoke(T a, byte k1, byte k2)
-                => gbits.extract(a,k1,k2);
+                => gbits.bitslice(a,k1,k2);
         }
     }
 }

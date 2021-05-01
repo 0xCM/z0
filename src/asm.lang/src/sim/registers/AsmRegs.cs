@@ -102,7 +102,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegIndex index(RegKind src)
-            => (RegIndex)Bits.extract((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.C);
+            => (RegIndex)Bits.bitslice((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.C);
 
         /// <summary>
         /// Determines the register class from the kind
@@ -110,7 +110,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegClass @class(RegKind src)
-            => (RegClass)Bits.extract((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
+            => (RegClass)Bits.bitslice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
 
         /// <summary>
         /// Determines the register width from the kind
@@ -118,7 +118,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegWidth width(RegKind src)
-            => (RegWidth)Bits.extract((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
+            => (RegWidth)Bits.bitslice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
 
         /// <summary>
         /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegKind'/>

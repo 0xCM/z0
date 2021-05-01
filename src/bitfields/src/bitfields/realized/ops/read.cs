@@ -25,24 +25,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T read<T>(in BitfieldPart seg, T src)
             where T : unmanaged
-                => gbits.extract(src, (byte)seg.FirstIndex, (byte)seg.Width);
-
-        /// <summary>
-        /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
-        /// </summary>
-        /// <param name="index">The segment index</param>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The offset amount</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T offset<T>(in BitfieldPart seg, T src)
-            where T : unmanaged
-                => gmath.sll(read(seg, src), (byte)seg.FirstIndex);
+                => gbits.bitslice(src, (byte)seg.FirstIndex, (byte)seg.Width);
 
         [MethodImpl(Inline)]
         public static T read<S,T>(in BitfieldPart segment, in S src)
             where S : unmanaged
             where T : unmanaged
-                => memory.@as<S,T>(gbits.extract(src, (byte)segment.FirstIndex, (byte)segment.Width));
+                => memory.@as<S,T>(gbits.bitslice(src, (byte)segment.FirstIndex, (byte)segment.Width));
 
         [MethodImpl(Inline)]
         public static T read<S,T>(in BitfieldPart segment, in S src, bool offset)

@@ -18,9 +18,9 @@ namespace Z0
         /// <param name="index">The source/target start index</param>
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The target</param>
-        [MethodImpl(Inline), Copy]
+        [MethodImpl(Inline), BitCopy]
         public static byte bitcopy(byte src, byte index, byte count, byte dst)
-            => math.or(disable(dst, index, count), math.sll(extract(src, index, count), index));
+            => math.or(disable(dst, index, count), math.sll(bitslice(src, index, count), index));
 
         /// <summary>
         /// Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
@@ -29,9 +29,9 @@ namespace Z0
         /// <param name="index">The source/target start index</param>
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The target</param>
-        [MethodImpl(Inline), Copy]
+        [MethodImpl(Inline), BitCopy]
         public static ushort bitcopy(ushort src, byte index, byte count, ushort dst)
-            => math.or(disable(dst, index, count), math.sll(extract(src, index, count), index));
+            => math.or(disable(dst, index, count), math.sll(bitslice(src, index, count), index));
 
         /// <summary>
         /// Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
@@ -40,9 +40,9 @@ namespace Z0
         /// <param name="index">The source/target start index</param>
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The target</param>
-        [MethodImpl(Inline), Copy]
+        [MethodImpl(Inline), BitCopy]
         public static uint bitcopy(uint src, byte index, byte count, uint dst)
-            => math.or(disable(dst, index, count), math.sll(extract(src, index, count), index));
+            => math.or(disable(dst, index, count), math.sll(bitslice(src, index, count), index));
 
         /// <summary>
         /// Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
@@ -51,8 +51,8 @@ namespace Z0
         /// <param name="index">The source/target start index</param>
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The target</param>
-        [MethodImpl(Inline), Copy]
+        [MethodImpl(Inline), BitCopy]
         public static ulong bitcopy(ulong src, byte index, byte count, ulong dst)
-            => math.or(disable(dst, index, count), math.sll(extract(src, index, count), index));
+            => math.or(disable(dst, index, count), math.sll(bitslice(src, index, count), index));
      }
 }

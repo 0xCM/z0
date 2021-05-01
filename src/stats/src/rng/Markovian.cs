@@ -85,7 +85,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var n = nat64u<N>();
-            var data = SpanBlocks.rectangle<T>(n256, n, n);
+            var data = SpanBlocks.alloc<T>(n256, n, n);
             for(var row=0u; row < n; row++)
                 random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));
             return Z0.Matrix.blockload<N,T>(data);

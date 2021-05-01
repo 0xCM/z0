@@ -12,9 +12,26 @@ namespace Z0
     using static Part;
     using static SFx;
 
-
     partial struct CalcHosts
     {
+        [Closures(Integers), Bsrl]
+        public readonly struct VBsrl128<T> : IShiftOp128<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector128<T> Invoke(Vector128<T> x, byte count)
+                => gcpu.vbsrl(x,count);
+        }
+
+        [Closures(Integers), Bsrl]
+        public readonly struct VBsrl256<T> : IShiftOp256<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector256<T> Invoke(Vector256<T> x, byte count)
+                => gcpu.vbsrl(x,count);
+        }
+
         [Closures(Integers), Bsrl]
         public readonly struct Bsrl128<T> : IBlockedUnaryImm8Op128<T>
             where T : unmanaged

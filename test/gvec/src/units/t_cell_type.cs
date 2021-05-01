@@ -20,6 +20,7 @@ namespace Z0
         void check_cell_type(Type tVector, W128 w)
         {
             var kVector = VK.kind(tVector);
+            Claim.yea(kVector != 0);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)
@@ -91,6 +92,8 @@ namespace Z0
         void check_cell_type(Type tVector, N256 w)
         {
             var kVector = VK.kind(tVector);
+            Claim.yea(kVector != 0);
+
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)

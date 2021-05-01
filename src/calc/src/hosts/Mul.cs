@@ -18,11 +18,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.mul(a, b);
+            public readonly T Invoke(T a, T b)
+                => gmath.mul(a, b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => Calcs.mul(lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+                => Calcs.mul(a,b,dst);
         }
     }
 }

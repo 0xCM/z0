@@ -15,7 +15,6 @@ namespace Z0
 
     partial struct Calcs
     {
-
         [MethodImpl(Inline), Factory(TestC), Closures(Closure)]
         public static VTestC128<T> vtestc<T>(W128 w, T t = default)
             where T : unmanaged

@@ -67,6 +67,6 @@ namespace Z0
             where E : unmanaged, Enum
             where W : unmanaged, Enum
             where T : unmanaged
-                => new BitfieldCover<S,E,T>(BitfieldSpecs.define<E,T,W>(), state);
+                => new BitfieldCover<S,E,T>(BitfieldSpecs.specify<E,T,W>(), state);
     }
 }

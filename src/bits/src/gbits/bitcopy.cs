@@ -20,12 +20,12 @@ namespace Z0
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Copy, Closures(Integers)]
-        public static T copy<T>(T src, byte index, byte count, T dst)
+        [MethodImpl(Inline), BitCopy, Closures(Integers)]
+        public static T bitcopy<T>(T src, byte index, byte count, T dst)
             where T : unmanaged
         {
             var dstIdx = index;
-            var sliced = extract(src, index, count);
+            var sliced = bitslice(src, index, count);
             var cleared = gbits.disable(dst, dstIdx, count);
             return gmath.or(cleared, gmath.sll(sliced, dstIdx));
         }
@@ -39,11 +39,11 @@ namespace Z0
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Copy, Closures(Integers)]
-        public static ref T copy<T>(T src, byte index, byte count, ref T dst)
+        [MethodImpl(Inline), BitCopy, Closures(Integers)]
+        public static ref T bitcopy<T>(T src, byte index, byte count, ref T dst)
             where T : unmanaged
         {
-            dst = copy(src,index,count, dst);
+            dst = bitcopy(src,index,count, dst);
             return ref dst;
         }
 
@@ -57,11 +57,11 @@ namespace Z0
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Copy, Closures(Integers)]
-        public static T copy<T>(T src, byte srcIdx, byte dstIdx, byte count, T dst)
+        [MethodImpl(Inline), BitCopy, Closures(Integers)]
+        public static T bitcopy<T>(T src, byte srcIdx, byte dstIdx, byte count, T dst)
             where T : unmanaged
         {
-            var sliced = extract(src, srcIdx, count);
+            var sliced = bitslice(src, srcIdx, count);
             var cleared = gbits.disable(dst, dstIdx, count);
             return gmath.or(cleared, gmath.sll(sliced, dstIdx));
         }
@@ -76,11 +76,11 @@ namespace Z0
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Copy, Closures(Integers)]
-        public static ref T copy<T>(T src, byte srcidx, byte dstidx, byte count, ref T dst)
+        [MethodImpl(Inline), BitCopy, Closures(Integers)]
+        public static ref T bitcopy<T>(T src, byte srcidx, byte dstidx, byte count, ref T dst)
             where T : unmanaged
         {
-            dst = copy(src,srcidx, dstidx, count, dst);
+            dst = bitcopy(src,srcidx, dstidx, count, dst);
             return ref dst;
         }
     }

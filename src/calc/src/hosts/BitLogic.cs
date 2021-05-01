@@ -12,7 +12,7 @@ namespace Z0
     using K = ApiClasses;
 
     [Closures(Integers)]
-    public readonly struct ScalarBitLogic<T> : IBitLogic<T>
+    public readonly struct BitLogic<T> : IBitLogic<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]

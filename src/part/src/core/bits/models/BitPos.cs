@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-	[ApiComplete]
+	[ApiHost]
 	public partial struct BitPos
 	{
 		/// <summary>
@@ -40,7 +40,7 @@ namespace Z0
 		/// </summary>
         /// <param name="w">The storage cell width</param>
 		/// <param name="index">The linear bit index</param>
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
 		public static BitPos init(ushort w, uint index)
 			=> new BitPos(w, linear(w, index), offset(w, index));
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="w">The storage cell width</param>
 		/// <param name="cellindex">The container-relative cell index</param>
 		/// <param name="offset">The cell-relative bit offset</param>
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
 		public static BitPos FromCellIndex(ushort w, ushort cellindex, ushort offset)
 			=> new BitPos(w, cellindex, offset);
 
@@ -59,7 +59,7 @@ namespace Z0
 		/// </summary>
 		/// <param name="cellindex">The container-relative cell index</param>
 		/// <param name="offset">The cell-relative bit offset</param>
-		[MethodImpl(Inline), Closures(UnsignedInts)]
+		[MethodImpl(Inline), Op, Closures(UnsignedInts)]
 		public static BitPos<T> FromCellIndex<T>(ushort cellindex, byte offset)
 			where T : unmanaged
 				=> BitPos<T>.Define((ushort)cellindex, offset);
@@ -68,7 +68,7 @@ namespace Z0
 		/// Defines a bit position predicated on a parametric cell type and linear bit index
 		/// </summary>
 		/// <param name="index">The linear bit index</param>
-		[MethodImpl(Inline), Closures(UnsignedInts)]
+		[MethodImpl(Inline), Op, Closures(UnsignedInts)]
 		public static BitPos<T> FromBitIndex<T>(uint index)
 			where T : unmanaged
 				=> BitPos<T>.FromLinearIndex(index);
@@ -82,7 +82,7 @@ namespace Z0
 			get => linear(CellWidth, CellIndex, BitOffset);
 		}
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public void Add(uint bitindex)
         {
             var newindex = (uint)(LinearIndex + bitindex);
@@ -90,7 +90,7 @@ namespace Z0
             BitOffset = offset(CellWidth, newindex);
         }
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public void Sub(uint bitindex)
         {
             var newIndex = LinearIndex - bitindex;
@@ -106,7 +106,7 @@ namespace Z0
 			}
         }
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public void Dec()
         {
             if(BitOffset > 0)
@@ -121,7 +121,7 @@ namespace Z0
             }
         }
 
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public void Inc()
         {
             if(BitOffset < CellWidth - 1)

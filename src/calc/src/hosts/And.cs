@@ -10,6 +10,10 @@ namespace Z0
 
     using static Part;
     using static SFx;
+    using static memory;
+
+    using BL = ByteLogic;
+    using LS = vlogic;
 
     partial struct CalcHosts
     {
@@ -70,6 +74,35 @@ namespace Z0
             [MethodImpl(Inline)]
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
                 => ref zip(a, b, dst, Calcs.vand<T>(w256));
+        }
+
+        public readonly struct And<W,T> : IBinarySquare<W,T>
+            where W : unmanaged, ITypeWidth
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public void Invoke(in T a, in T b, ref T dst)
+            {
+                if(typeof(W) == typeof(W64))
+                    BL.and(u8(a), u8(b), ref u8(dst));
+                else if(typeof(W) == typeof(W128))
+                    LS.and(w128, a, b, ref dst);
+                else if(typeof(W) == typeof(W256))
+                    LS.and(w256, a, b, ref dst);
+                else
+                    throw no<W>();
+            }
+
+            [MethodImpl(Inline)]
+            public void Invoke(int count, int step, in T a, in T b, ref T dst)
+            {
+                if(typeof(W) == typeof(W128))
+                    LS.and(w128, count, step, a, b, ref dst);
+                else if(typeof(W) == typeof(W256))
+                    LS.and(w256, count, step, a, b, ref dst);
+                else
+                    throw no<W>();
+            }
         }
 
     }

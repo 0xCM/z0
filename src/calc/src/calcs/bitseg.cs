@@ -15,7 +15,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory, Closures(Closure)]
+        [MethodImpl(Inline), Factory(BitSeg), Closures(Closure)]
         public static BitSeg<T> bitseg<T>()
             where T : unmanaged
                 => sfunc<BitSeg<T>>();

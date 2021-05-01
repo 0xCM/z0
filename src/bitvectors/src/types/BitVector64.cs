@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector64(ulong data)
-            => this.Data = data;
+            => Data = data;
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -146,7 +146,7 @@ namespace Z0
             => Data.GetHashCode();
 
         public string Format(BitFormat config)
-            => BitVector.format(this,config);
+            => BitVector.format(this, config);
 
          public string Format()
             => BitVector.format(this);

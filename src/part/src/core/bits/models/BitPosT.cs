@@ -29,25 +29,13 @@ namespace Z0
 		/// </summary>
 		public ushort BitOffset;
 
-        /// <summary>
-        /// The zero position
-        /// </summary>
-		public static BitPos<T> Zero
-			=> default(BitPos<T>);
-
-		/// <summary>
-		/// Specifies the number of bits that can be placed in one segment
-		/// </summary>
-		public static ushort CellWidth
-			=> width<T>(w16);
-
 		/// <summary>
 		/// Constructs a bit position from a linear/absolute index
 		/// </summary>
 		/// <param name="bitindex">The linear index</param>
 		[MethodImpl(Inline)]
 		public static BitPos<T> FromLinearIndex(uint bitindex)
-			=> new BitPos<T>(BitPos.linear(CellWidth,bitindex), BitPos.offset(CellWidth, bitindex));
+			=> new BitPos<T>(BitPos.linear(CellWidth, bitindex), BitPos.offset(CellWidth, bitindex));
 
 		[MethodImpl(Inline)]
 		public BitPos(ushort cellindex, ushort bitoffset)
@@ -59,7 +47,7 @@ namespace Z0
 		public int LinearIndex
 		{
 			[MethodImpl(Inline)]
-			get => this.CellIndex * CellWidth + this.BitOffset;
+			get => CellIndex * CellWidth + BitOffset;
 		}
 
 		[MethodImpl(Inline)]
@@ -194,10 +182,22 @@ namespace Z0
 
 		[MethodImpl(Inline)]
         public static implicit operator BitPos<T>((ushort cellindex, byte bitoffset) x)
-            => Define(x.cellindex, x.bitoffset);
+            => new BitPos<T>(x.cellindex, x.bitoffset);
 
 		[MethodImpl(Inline)]
 		public static BitPos<T> Define(ushort cellindex, byte bitoffset)
 			=> new BitPos<T>(cellindex, bitoffset);
+
+        /// <summary>
+        /// The zero position
+        /// </summary>
+		public static BitPos<T> Zero
+			=> default(BitPos<T>);
+
+		/// <summary>
+		/// Specifies the number of bits that can be placed in one segment
+		/// </summary>
+		public static ushort CellWidth
+			=> width<T>(w16);
 	}
 }

@@ -70,7 +70,7 @@ namespace Z0
         public static Matrix256<N,T> blockalloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => SpanBlocks.rectangle<T>(n256, nat64u(n), nat64u(n));
+                => SpanBlocks.alloc<T>(n256, nat64u(n), nat64u(n));
 
         /// <summary>
         /// Allocates a blocked matrix of natual dimensions
@@ -86,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => SpanBlocks.rectangle<T>(n256, nat64u(m), nat64u(n));
+                => SpanBlocks.alloc<T>(n256, nat64u(m), nat64u(n));
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -283,12 +283,16 @@ namespace Z0
                 return default;
 
             var parser = Numeric.parser<T>();
-            var dst =  Matrix.blockload<M,N,T>(SpanBlocks.rectangle<T>(n256, nat64u<M>(), nat64u<N>()));
+            var dst =  Matrix.blockload<M,N,T>(SpanBlocks.alloc<T>(n256, nat64u<M>(), nat64u<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];
                 for(var j = 0; j<row.CellCount; j++)
-                    dst[i,j] = parser.Parse(row[j].Format()).ValueOrDefault();
+                {
+                    var result = default(T);
+                    parser.Parse(row[j].Format(), out result);
+                    dst[i,j] = result;
+                }
             }
 
             return dst;

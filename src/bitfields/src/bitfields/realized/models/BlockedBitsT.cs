@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly ref struct SpanBits<T>
+    public readonly ref struct BlockedBits<T>
         where T : unmanaged
     {
         public readonly uint BitCount {get;}
@@ -29,7 +29,7 @@ namespace Z0
             get => Data.Bytes;
         }
 
-        public SpanBits(SpanBlock64<T> src, uint bitcount)
+        public BlockedBits(SpanBlock64<T> src, uint bitcount)
         {
             Data = src;
             BitCount = bitcount;
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Slice(byte start, byte length)
-            => gbits.extract(Data[(int)(start/CellWidth)], (byte)(start % CellWidth), length);
+            => gbits.bitslice(Data[(int)(start/CellWidth)], (byte)(start % CellWidth), length);
 
         public bit this[ByteSize offset, byte pos]
         {

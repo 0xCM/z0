@@ -36,8 +36,13 @@ namespace Z0
         {
             var numeric = Numeric.parser<ulong>();
             var indicator = (NumericIndicator)kind.Last();
-            var w =  (NumericWidth)numeric.Parse(kind.TrimEnd(kind.Last())).ValueOrDefault();
-            return ((NumericWidth)w).ToNumericKind(indicator);
+            var input = kind.TrimEnd(kind.Last());
+            if(numeric.Parse(input, out var w))
+            {
+                return ((NumericWidth)w).ToNumericKind(indicator);
+            }
+            else
+                return 0;
         }
 
         public static NatKind Parse(string src)
@@ -46,8 +51,9 @@ namespace Z0
             var parts = text.split(src, IDI.SegSep);
             if(parts.Length == 3)
             {
-                var m = numeric.Parse(parts[0]).ValueOrDefault();
-                var n = numeric.Parse(parts[1]).ValueOrDefault();
+
+                numeric.Parse(parts[0], out var m);
+                numeric.Parse(parts[1], out var n);
                 var kind = parts[2];
                 if(kind.Length > 0)
                 {
@@ -57,7 +63,7 @@ namespace Z0
             }
             else if(parts.Length == 2)
             {
-                var n = numeric.Parse(parts[0]).ValueOrDefault();
+                numeric.Parse(parts[0], out var n);
                 var kind = parts[1];
                 if(kind.Length > 0)
                 {

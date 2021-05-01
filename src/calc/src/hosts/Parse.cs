@@ -18,7 +18,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public readonly T Invoke(string a)
-                => Numeric.parser<T>().Parse(a).ValueOrDefault();
+            {
+                if(Numeric.parser<T>().Parse(a, out var dst))
+                    return dst;
+                else
+                    return default;
+            }
         }
     }
 }

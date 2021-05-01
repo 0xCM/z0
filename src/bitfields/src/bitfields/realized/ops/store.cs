@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T store<T>(in BitfieldPart seg, in T src, ref T dst)
             where T : unmanaged
-                => ref gbits.copy(src, (byte)seg.FirstIndex, (byte)seg.Width, ref dst);
+                => ref gbits.bitcopy(src, (byte)seg.FirstIndex, (byte)seg.Width, ref dst);
 
         [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static ref T state<T>(ref Bitfield8<T> src)
@@ -87,7 +87,7 @@ namespace Z0
         public static ref T store<S,T>(in BitfieldPart segment, in S src, ref T dst)
             where S : unmanaged
             where T : unmanaged
-                => ref gbits.copy(@as<S,T>(src), (byte)segment.FirstIndex, (byte)segment.Width, ref dst);
+                => ref gbits.bitcopy(@as<S,T>(src), (byte)segment.FirstIndex, (byte)segment.Width, ref dst);
 
         [MethodImpl(Inline)]
         public static ref S store<S,T>(in BitfieldPart segment, in S src, ref S dst)
@@ -95,7 +95,7 @@ namespace Z0
             where T : unmanaged
         {
             var dstData = dst;
-            gbits.copy(src, (byte)segment.FirstIndex, (byte)segment.Width, ref dstData);
+            gbits.bitcopy(src, (byte)segment.FirstIndex, (byte)segment.Width, ref dstData);
             return ref dst;
         }
 
@@ -106,7 +106,7 @@ namespace Z0
             for(var i=0; i<spec.FieldCount; i++)
             {
                 ref readonly var segment = ref skip(spec.Segments,i);
-                gbits.copy(skip(src,i), (byte)segment.FirstIndex, (byte)segment.Width, ref data);
+                gbits.bitcopy(skip(src,i), (byte)segment.FirstIndex, (byte)segment.Width, ref data);
             }
             return ref data;
         }

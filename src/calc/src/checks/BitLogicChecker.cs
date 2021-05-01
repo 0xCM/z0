@@ -22,7 +22,7 @@ namespace Z0
         public override void Validate()
         {
             Check128();
-
+            Check256();
         }
 
         void Check128()
@@ -42,37 +42,70 @@ namespace Z0
         [Op]
         void Check(Index<Cell128> a, Index<Cell128> b)
         {
+            CheckAnd(a,b);
+            CheckOr(a,b);
+            CheckXor(a,b);
+        }
+
+        [Op]
+        void CheckAnd(Index<Cell128> a, Index<Cell128> b)
+        {
+            var f = K.and();
+            var msg = string.Format("Validating {0} over {1} samples", f.Format(), SampleCount);
+            var running = Wf.Running(msg);
+            var success = 0u;
             for(var i=0; i<SampleCount; i++)
             {
                 ref readonly var x = ref a[i];
                 ref readonly var y = ref b[i];
+                success += (uint)Check128x8u(x, y, f);
+                success += (uint)Check128x8i(x, y, f);
+                success += (uint)Check128x16u(x, y, f);
+                success += (uint)Check128x16i(x, y, f);
+                success += (uint)Check128x32u(x, y, f);
+                success += (uint)Check128x32i(x, y, f);
+                success += (uint)Check128x64u(x, y, f);
+                success += (uint)Check128x64i(x, y, f);
+            }
 
-                Check128x8u(x, y, K.and());
-                Check128x8i(x, y, K.and());
-                Check128x16u(x, y, K.and());
-                Check128x16i(x, y, K.and());
-                Check128x32u(x, y, K.and());
-                Check128x32i(x, y, K.and());
-                Check128x64u(x, y, K.and());
-                Check128x64i(x, y, K.and());
+            Wf.Ran(running, string.Format("{0} validation steps succeeded", success));
+        }
 
-                Check128x8u(x, y, K.or());
-                Check128x8i(x, y, K.or());
-                Check128x16u(x, y, K.or());
-                Check128x16i(x, y, K.or());
-                Check128x32u(x, y, K.or());
-                Check128x32i(x, y, K.or());
-                Check128x64u(x, y, K.or());
-                Check128x64i(x, y, K.or());
+        [Op]
+        void CheckOr(Index<Cell128> a, Index<Cell128> b)
+        {
+            var f = K.or();
+            for(var i=0; i<SampleCount; i++)
+            {
+                ref readonly var x = ref a[i];
+                ref readonly var y = ref b[i];
+                Check128x8u(x, y, f);
+                Check128x8i(x, y, f);
+                Check128x16u(x, y, f);
+                Check128x16i(x, y, f);
+                Check128x32u(x, y, f);
+                Check128x32i(x, y, f);
+                Check128x64u(x, y, f);
+                Check128x64i(x, y, f);
+            }
+        }
 
-                Check128x8u(x, y, K.xor());
-                Check128x8i(x, y, K.xor());
-                Check128x16u(x, y, K.xor());
-                Check128x16i(x, y, K.xor());
-                Check128x32u(x, y, K.xor());
-                Check128x32i(x, y, K.xor());
-                Check128x64u(x, y, K.xor());
-                Check128x64i(x, y, K.xor());
+        [Op]
+        void CheckXor(Index<Cell128> a, Index<Cell128> b)
+        {
+            var f = K.xor();
+            for(var i=0; i<SampleCount; i++)
+            {
+                ref readonly var x = ref a[i];
+                ref readonly var y = ref b[i];
+                Check128x8u(x, y, f);
+                Check128x8i(x, y, f);
+                Check128x16u(x, y, f);
+                Check128x16i(x, y, f);
+                Check128x32u(x, y, f);
+                Check128x32i(x, y, f);
+                Check128x64u(x, y, f);
+                Check128x64i(x, y, f);
             }
         }
 

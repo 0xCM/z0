@@ -35,7 +35,7 @@ namespace Z0
                     var range = Random.Interval(min, max);
                     var count = (byte)range.Width;
                     var expect = gbits.enable(zed, range.Left, count);
-                    var actual = gbits.copy(lit, range.Left, count, zed);
+                    var actual = gbits.bitcopy(lit, range.Left, count, zed);
                     if(gmath.neq(expect,actual))
                     {
                         Trace("expect", BitSpans32.from(expect).Format());
@@ -45,7 +45,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, CaseName(ApiIdentityBuilder.NumericOp<T>(nameof(gbits.copy))));
+            CheckAction(check, CaseName(ApiIdentityBuilder.NumericOp<T>("bitcopy")));
         }
     }
 }

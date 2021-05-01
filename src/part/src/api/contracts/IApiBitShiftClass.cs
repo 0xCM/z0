@@ -10,7 +10,6 @@ namespace Z0
     public interface IApiBitShiftClass : IApiKind<ApiBitShiftClass>
     {
         new ApiBitShiftClass Kind {get;}
-
     }
 
     /// <summary>

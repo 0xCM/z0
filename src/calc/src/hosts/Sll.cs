@@ -39,6 +39,30 @@ namespace Z0
                 => gmath.sll(a,count);
         }
 
+        public readonly struct VSllr128<T> : IBinaryOp128D<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets)
+                => gcpu.vsll(x,offsets);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T offset)
+                => gmath.sll(a, Numeric.force<T,byte>(offset));
+        }
+
+        public readonly struct VSllr256<T> : IBinaryOp256D<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offset)
+                => gcpu.vsll(x,offset);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T offset)
+                => gmath.sll(a, Numeric.force<T,byte>(offset));
+        }
+
         [Closures(Integers), Sll]
         public readonly struct Sll<T> : IUnaryImm8Op<T>, ISpanShift<T>
             where T : unmanaged

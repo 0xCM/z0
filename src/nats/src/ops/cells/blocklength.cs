@@ -93,6 +93,5 @@ namespace Z0
             where W : unmanaged, ITypeNat
             where T : unmanaged
                 => (int)((NatCalc.div(w, default(N8)))/size<T>());
-
     }
 }

@@ -27,9 +27,11 @@ namespace Z0
 
     public sealed class RankAttribute : A { public RankAttribute() : base(K.Rank) {} }
 
-    public sealed class BitSeg : A { public BitSeg() : base(K.BitSeg) {} }
+    public sealed class BitSegAttribute : A { public BitSegAttribute() : base(K.BitSeg) {} }
 
-    public sealed class ExtractAttribute : A { public ExtractAttribute() : base(K.Extract) {} }
+    public sealed class BitCopyAttribute : A { public BitCopyAttribute() : base(K.BitCopy) {} }
+
+    public sealed class BitSliceAttribute : A { public BitSliceAttribute() : base(K.BitSlice) {} }
 
     public sealed class TestBitAttribute : A { public TestBitAttribute() : base(K.TestBit) {} }
 

@@ -13,14 +13,14 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Reverse), Closures(Closure)]
-        public static VReverse128<T> vreverse<T>(N128 w)
+        [MethodImpl(Inline), Factory, Closures(Closure)]
+        public static VSwapHiLo128<T> vswaphl<T>(N128 w, T t = default)
             where T : unmanaged
-                => default(VReverse128<T>);
+                => default(VSwapHiLo128<T>);
 
-        [MethodImpl(Inline), Factory(Reverse), Closures(Closure)]
-        public static VReverse256<T> vreverse<T>(W256 w)
+        [MethodImpl(Inline), Factory, Closures(Closure)]
+        public static VSwapHiLo256<T> vswaphl<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(VReverse256<T>);
+                => default(VSwapHiLo256<T>);
     }
 }

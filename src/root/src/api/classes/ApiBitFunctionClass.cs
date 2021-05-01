@@ -34,7 +34,7 @@ namespace Z0
 
         Rank = Id.Rank,
 
-        Extract = Id.Extract,
+        BitSlice = Id.BitSlice,
 
         TestBit = Id.TestBit,
 
@@ -93,5 +93,7 @@ namespace Z0
         XMsb = Id.XMsb,
 
         BitSeg = Id.BitSeg,
+
+        BitCopy = Id.BitCopy,
     }
 }

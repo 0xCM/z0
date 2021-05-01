@@ -25,7 +25,7 @@ namespace Z0
 
         public void bitfield_a()
         {
-            var spec = BitfieldSpecs.define(
+            var spec = BitfieldSpecs.specify(
                 BitfieldSpecs.part(BF_A.F08_0, 0, 1),
                 BitfieldSpecs.part(BF_A.F08_1, 2, 3),
                 BitfieldSpecs.part(BF_A.F08_2, 4, 5),
@@ -64,10 +64,10 @@ namespace Z0
                 var seg2 = bf[2];
                 var seg3 = bf[3];
 
-                Claim.eq(Bits.extract(input, 0, 2), seg0);
-                Claim.eq(Bits.extract(input, 2, 2), seg1);
-                Claim.eq(Bits.extract(input, 4, 2), seg2);
-                Claim.eq(Bits.extract(input, 6, 2), seg3);
+                Claim.eq(Bits.bitslice(input, 0, 2), seg0);
+                Claim.eq(Bits.bitslice(input, 2, 2), seg1);
+                Claim.eq(Bits.bitslice(input, 4, 2), seg2);
+                Claim.eq(Bits.bitslice(input, 6, 2), seg3);
 
                 var output =  gmath.or(
                     gmath.sll(seg0, (byte)spec[0].FirstIndex),
@@ -91,7 +91,7 @@ namespace Z0
 
         public void bitfield_b()
         {
-            var spec = BitfieldSpecs.define(
+            var spec = BitfieldSpecs.specify(
                 BitfieldSpecs.part(BFB_I.BFB_0, 0, 3),
                 BitfieldSpecs.part(BFB_I.BFB_1, 4, 7),
                 BitfieldSpecs.part(BFB_I.BFB_2, 8, 9),
@@ -149,7 +149,7 @@ namespace Z0
 
         public void bitfield_c()
         {
-            var spec = BitfieldSpecs.define<BFC_I,BFC_W>();
+            var spec = BitfieldSpecs.specify<BFC_I,BFC_W>();
             var bf = BitFields.create<byte>(spec);
             var dst = alloc<byte>(spec.FieldCount);
             using var writer = CaseWriter(LogExt);
@@ -239,7 +239,7 @@ namespace Z0
 
         public void bitfield_d()
         {
-            var spec = BitfieldSpecs.define<BFD_I,BFD_W>();
+            var spec = BitfieldSpecs.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
             var dst = span(alloc<ulong>(spec.FieldCount));
             var tmp = span(alloc<ulong>(spec.FieldCount));
@@ -256,7 +256,7 @@ namespace Z0
                 dst.Clear();
                 tmp.Clear();
 
-                var expect = gbits.extract(input,0, (byte)spec.TotalWidth);
+                var expect = gbits.bitslice(input,0, (byte)spec.TotalWidth);
 
                 BitFields.store(bf.Spec, input, dst);
 
@@ -283,13 +283,13 @@ namespace Z0
 
         public void bitfield_IxW()
         {
-            var spec = BitfieldSpecs.define<BFD_I,BFD_W>();
+            var spec = BitfieldSpecs.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
         }
 
         public void fixed_bits()
         {
-            var bf = BitFields.fixedbits<BFD_I,byte,BFD_W>(64);
+            var bf = BitFields.blocked<BFD_I,byte,BFD_W>(64);
             bf[3] = byte.MaxValue;
 
         }

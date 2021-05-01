@@ -49,14 +49,16 @@ namespace Z0
 
         }
 
-        void RunWf2()
+        void RunChecks()
         {
-            //VPipeRunner.test(Wf);
+            var checker = BitLogicChecker.create(Wf, Rng.@default());
+            checker.Validate();
+
         }
 
         protected override void Run()
         {
-            RunWf1();
+            RunChecks();
         }
     }
 }

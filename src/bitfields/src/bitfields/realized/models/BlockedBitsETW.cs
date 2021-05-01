@@ -9,23 +9,23 @@ namespace Z0
 
     using static Part;
 
-    public readonly ref struct SpanBits<E,T,W>
+    public readonly ref struct BlockedBits<E,T,W>
         where E : unmanaged
         where T : unmanaged
         where W : unmanaged
     {
-        readonly SpanBits<T> Data;
+        readonly BlockedBits<T> Data;
 
         readonly BitfieldSpec<E,W> Spec;
 
         [MethodImpl(Inline)]
-        public SpanBits(SpanBits<T> data, BitfieldSpec<E,W> spec)
+        public BlockedBits(BlockedBits<T> data, BitfieldSpec<E,W> spec)
         {
             Data = data;
             Spec = spec;
         }
 
-        public SpanBits<T> Content
+        public BlockedBits<T> Content
         {
             [MethodImpl(Inline)]
             get => Data;

@@ -7,24 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static memory;
+
     partial struct Grids
     {
         [ParseFunction]
         public static bool Parse(string s, out GridDim dst)
         {
-            var parts = s.Split('x');
+            var parts = @readonly(s.Split('x'));
             var parser = Numeric.parser<uint>();
             dst = default;
-            var succeeded = false;
             if(parts.Length == 2)
             {
-                var m = parser.Parse(parts[0]);
-                var n = parser.Parse(parts[1]);
-                succeeded = m.Succeeded && n.Succeeded;
-                if(succeeded)
-                    dst = new GridDim(m.Value, n.Value);
+                if(parser.Parse(skip(parts,0), out var m) && parser.Parse(skip(parts,1), out var n))
+                {
+                    dst = new GridDim(m, n);
+                    return true;
+                }
             }
-            return succeeded;
+            return false;
         }
     }
 }

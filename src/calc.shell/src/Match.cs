@@ -46,7 +46,6 @@ namespace Z0
             public bit Found;
 
             public int MatchingBlock;
-
         }
     }
 }

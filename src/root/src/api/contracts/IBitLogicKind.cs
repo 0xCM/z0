@@ -16,7 +16,6 @@ namespace Z0
 
         NumericKind NumericKind
             => default;
-
     }
 
     /// <summary>
@@ -30,6 +29,5 @@ namespace Z0
     {
         ApiBitLogicClass IApiBitLogicClass.Kind
             => default(F).Kind;
-
     }
 }

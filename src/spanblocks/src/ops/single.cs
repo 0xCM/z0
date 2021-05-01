@@ -102,6 +102,5 @@ namespace Z0
             ref var storage = ref first(recover<T>(Cells.alloc(w).Bytes));
             return load(w, ref storage, 1);
         }
-
     }
 }

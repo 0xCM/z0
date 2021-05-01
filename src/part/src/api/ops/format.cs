@@ -4,9 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct NumericParser<T>
+    partial struct ApiClasses
     {
-        public Outcome Parse(string src, out T dst)
-            => Numeric.parse<T>(src, out dst);
+        public static string format<K>(K kind)
+            where K : IApiKind
+                => typeof(K).Name;
     }
 }

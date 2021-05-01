@@ -13,6 +13,32 @@ namespace Z0
 
     partial struct CalcHosts
     {
+        [Closures(Integers), Srl]
+        public readonly struct VSrl128<T> : IShiftOp128D<T>, IShiftOp128<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector128<T> Invoke(Vector128<T> x, byte count)
+                => gcpu.vsrl(x,count);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, byte count)
+                => gmath.srl(a,count);
+        }
+
+        [Closures(Integers), Srl]
+        public readonly struct VSrl256<T> : IShiftOp256D<T>, IShiftOp256<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public Vector256<T> Invoke(Vector256<T> x, byte count)
+                => gcpu.vsrl(x,count);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, byte count)
+                => gmath.srl(a,count);
+        }
+
         public readonly struct VSrlr128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {

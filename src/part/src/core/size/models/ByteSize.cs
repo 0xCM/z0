@@ -19,15 +19,14 @@ namespace Z0
     {
         public static Outcome parse(string src, out ByteSize dst)
         {
-            var result = Numeric.parse<ulong>(src);
-            if(result)
+            if(Numeric.parse<ulong>(src, out var x))
             {
-                dst = result.Value;
+                dst = x;
                 return true;
             }
             else
             {
-                dst = 0;
+                dst = default;
                 return false;
             }
         }

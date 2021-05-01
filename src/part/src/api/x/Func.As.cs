@@ -14,5 +14,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinaryOperatorClass<T> As<T>(this BinaryOperatorClass src)
              where T : unmanaged => default;
+
+        public static string Format<K>(this K src)
+            where K : IApiKind
+                => ApiClasses.format(src);
     }
 }

@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static memory;
+
     partial struct BitfieldSpecs
     {
         /// <summary>
@@ -13,19 +15,18 @@ namespace Z0
         /// <param name="dst">Upon success, the populated section</param>
         /// <typeparam name="T">The section index type</typeparam>
         [Op, Closures(Closure)]
-        public static bool parse<T>(string src, out BitFieldPart<T> dst)
+        public static Outcome parse<T>(string src, out BitFieldPart<T> dst)
             where T : unmanaged
         {
             dst = default;
             if(text.unfence(src, SegmentFence, out var fenced))
             {
-                var parts = text.split(fenced, SegmentDelimiter);
-                if(parts.Count == 2)
+                var parts = text.split(fenced, SegmentDelimiter).View;
+                if(parts.Length == 2)
                 {
-                    if(Numeric.parse(parts[0], out T max)
-                        && Numeric.parse(parts[1], out T min))
+                    if(Numeric.parse(skip(parts,0), out T max) && Numeric.parse(skip(parts,1), out T min))
                     {
-                        dst = part<T>("0b",min, max);
+                        dst = part<T>("0b", min, max);
                         return true;
                     }
                 }

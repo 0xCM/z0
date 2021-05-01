@@ -11,9 +11,9 @@ namespace Z0
 
     partial struct BitFields
     {
-       public static SpanBits<T> fixedbits<T>(uint bitcount)
+       public static BlockedBits<T> blocked<T>(uint bitcount)
             where T : unmanaged
-                => new SpanBits<T>(SpanBlocks.alloc<T>(n64, CellCalcs.bitcover<T>(bitcount)), bitcount);
+                => new BlockedBits<T>(SpanBlocks.alloc<T>(n64, CellCalcs.bitcover<T>(bitcount)), bitcount);
 
         /// <summary>
         /// Defines and creates a fixed-width bitfield
@@ -23,14 +23,14 @@ namespace Z0
         /// <typeparam name="T">The numeric type</typeparam>
         /// <typeparam name="W"></typeparam>
         /// <typeparam name="W">A width-defining enumeration</typeparam>
-        public static SpanBits<E,T,W> fixedbits<E,T,W>(uint bitcount)
+        public static BlockedBits<E,T,W> blocked<E,T,W>(uint bitcount)
             where E : unmanaged, Enum
             where T : unmanaged
             where W : unmanaged, Enum
         {
-            var data = fixedbits<T>(bitcount);
-            var spec = new BitfieldSpec<E,W>(BitfieldSpecs.define<E,T,W>(), bitcount);
-            return new SpanBits<E,T,W>(data, spec);
+            var data = blocked<T>(bitcount);
+            var spec = new BitfieldSpec<E,W>(BitfieldSpecs.specify<E,T,W>(), bitcount);
+            return new BlockedBits<E,T,W>(data, spec);
         }
     }
 }

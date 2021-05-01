@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>Code generation for this is good; type-specific specializations exist for convenience. Algorithm
         /// taken from https://graphics.stanford.edu/~seander/bithacks.html</remarks>
-        [MethodImpl(Inline), Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static T blend<T>(T a, T b, T mask)
             where T : unmanaged
                 => xor(a, and(xor(a,b), mask));

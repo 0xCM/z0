@@ -206,6 +206,8 @@ public enum ApiClassKind : ushort
 
     TestC,
 
+    BitCopy,
+
     TestZ,
 
     Fma,
@@ -272,7 +274,7 @@ public enum ApiClassKind : ushort
 
     Srlx,
 
-    Extract,
+    BitSlice,
 
     TestBit,
 

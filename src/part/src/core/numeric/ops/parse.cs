@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static root;
 
     using SP = ScalarParser;
 
@@ -19,19 +18,6 @@ namespace Z0
         public static NumericParser<T> parser<T>()
             where T : unmanaged
                 => default(NumericParser<T>);
-
-        /// <summary>
-        /// Attempts to parse the source text as a parametrically-identified type
-        /// </summary>
-        /// <param name="src">The source text</param>
-        [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
-        public static ParseResult<T> parse<T>(string src)
-        {
-            if(parse(src, out T dst))
-                return parsed(src,dst);
-            else
-                return unparsed<T>(src);
-        }
 
         [MethodImpl(Inline), ParseFunction, NumericClosures(AllNumeric)]
         public static bool parse<T>(string src, out T dst)
