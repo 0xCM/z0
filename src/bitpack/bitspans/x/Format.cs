@@ -9,9 +9,8 @@ namespace Z0
 
     using static Part;
 
-    public static partial class XBitSpans
+    partial class XTend
     {
-        [MethodImpl(Inline)]
         public static string Format(this BitSpan src, BitFormat? fmt = null)
             => BitSpans.format(src, fmt);
     }

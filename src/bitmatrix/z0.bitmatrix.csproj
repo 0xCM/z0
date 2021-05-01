@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Cpu)" />
-    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Calc)" />
   </ItemGroup>

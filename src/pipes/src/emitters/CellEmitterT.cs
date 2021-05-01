@@ -89,7 +89,5 @@ namespace Z0
         static F cell<K>(in K x)
             where K : struct
                 => @as<K,F>(x);
-
-
     }
 }

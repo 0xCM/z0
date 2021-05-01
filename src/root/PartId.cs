@@ -50,6 +50,8 @@ public enum PartId : ulong
 
     Calc = 37,
 
+    Sources = 38,
+
     CalcShell = Calc | Shell,
 
     Tools = 41,

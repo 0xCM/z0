@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitStrings)" />
   </ItemGroup>
 

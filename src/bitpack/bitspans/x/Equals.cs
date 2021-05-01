@@ -9,10 +9,14 @@ namespace Z0
 
     using static Part;
 
-    partial class XBitSpans
+    partial class XTend
     {
         [MethodImpl(Inline)]
-        public static BitSpan Concat(this BitSpan head, BitSpan tail)
-            => BitSpans.concat(head,tail);
+        public static bool Equals(this BitSpan a, BitSpan b)
+            => BitSpans.same(a,b);
+
+        [MethodImpl(Inline)]
+        public static int Pop(this BitSpan src)
+            => BitSpans.pop(src);
     }
 }

@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(BitCore)" />
-      <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(BitPack)" />
+    <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 
 </Project>

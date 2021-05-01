@@ -60,6 +60,5 @@ namespace Z0
     public static partial class XSource
     {
         const NumericKind Closure = AllNumeric;
-
     }
 }

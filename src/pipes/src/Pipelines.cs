@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
-
     using System.Runtime.CompilerServices;
 
-    using static SFx;
+    using static Part;
+    using static memory;
 
     public readonly struct Pipelines
     {

@@ -10,7 +10,7 @@ namespace Z0
 
    using static Part;
 
-    partial class XBitSpans
+    partial class XTend
     {
         /// <summary>
         /// Wraps a bitspan over a span of extant bits
@@ -110,6 +110,5 @@ namespace Z0
         public static BitSpan ToBitSpan<T>(this T src, uint? maxbits = null)
             where T : unmanaged, Enum
                 => BitSpans.load(src, maxbits);
-
    }
 }

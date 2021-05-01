@@ -5,17 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(AsmLangG)"/>
-      <ProjectReference Include="$(AsmCatalogs)"/>
-      <ProjectReference Include="$(Konst)" />
-      <ProjectReference Include="$(BitCore)" />
-      <ProjectReference Include="$(Cpu)" />
-      <ProjectReference Include="$(Gen)" />
-      <ProjectReference Include="$(Digital)" />
-      <ProjectReference Include="$(AsmCore)" />
-      <ProjectReference Include="$(BitFields)" />
-      <ProjectReference Include="$(Tools)" />
-
+    <ProjectReference Include="$(AsmLangG)"/>
+    <ProjectReference Include="$(AsmCatalogs)"/>
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(BitPack)" />
+    <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(Gen)" />
+    <ProjectReference Include="$(Digital)" />
+    <ProjectReference Include="$(AsmCore)" />
+    <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(Tools)" />
   </ItemGroup>
 
    <ItemGroup>

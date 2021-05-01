@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(Files)" />
+    <ProjectReference Include="$(Sources)" />
   </ItemGroup>
 
 </Project>

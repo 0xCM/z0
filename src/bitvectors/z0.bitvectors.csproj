@@ -7,8 +7,9 @@
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Cpu)" />
-    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitSpans)" />
+    <ProjectReference Include="$(Check)" />
   </ItemGroup>
 
 </Project>

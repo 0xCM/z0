@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(Extract)" />
     <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(Api)" />

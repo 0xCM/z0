@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Apps)" />
 
-    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(BitMatrix)" />
     <ProjectReference Include="$(BitSpans)" />

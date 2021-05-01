@@ -213,7 +213,7 @@ namespace Z0
                 => throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");
     }
 
-    partial class XTend
+    public static partial class XTend
     {
         /// <summary>
         /// Formats a permutation literal as one would hope

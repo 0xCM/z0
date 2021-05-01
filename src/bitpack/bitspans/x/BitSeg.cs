@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    public static partial class XTend
     {
         /// <summary>
         /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range

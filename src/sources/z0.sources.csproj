@@ -5,10 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Cpu)" />
-    <ProjectReference Include="$(BitPack)" />
-    <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(SFunc)" />
   </ItemGroup>
 
 </Project>
