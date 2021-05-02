@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static gcpu;
-    using static MemBlocks;
+    using static ByteBlocks;
 
     [ApiHost]
     public readonly struct AsmHexCodes

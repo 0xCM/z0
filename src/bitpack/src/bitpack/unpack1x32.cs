@@ -49,18 +49,18 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<uint> unpack1x32(uint src)
         {
-            var buffer = MemBlocks.block(n32);
-            ref var tmp = ref MemBlocks.first<byte>(ref buffer);
+            var buffer = ByteBlocks.block(n32);
+            ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
 
-            var storage = MemBlocks.block(n128);
-            ref var target = ref MemBlocks.first<uint>(ref storage);
+            var storage = ByteBlocks.block(n128);
+            ref var target = ref ByteBlocks.first<uint>(ref storage);
 
             unpack1x8x32(src, ref tmp);
             cpu.vinflate8x256x32u(tmp, 0, ref target);
             cpu.vinflate8x256x32u(tmp, 1, ref target);
             cpu.vinflate8x256x32u(tmp, 2, ref target);
             cpu.vinflate8x256x32u(tmp, 3, ref target);
-            return MemBlocks.span<uint>(ref storage);
+            return ByteBlocks.span<uint>(ref storage);
         }
 
         /// <summary>

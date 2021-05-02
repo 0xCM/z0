@@ -17,7 +17,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public static partial class MemBlocks
+    public static partial class ByteBlocks
     {
         const NumericKind Closure = UnsignedInts;
 

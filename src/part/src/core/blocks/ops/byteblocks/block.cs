@@ -10,14 +10,14 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemBlocks
+    partial class ByteBlocks
     {
         /// <summary>
         /// Stack allocates 8 bits of storage
         /// </summary>
         /// <param name="w">The storage width</param>
         [MethodImpl(Inline), Op]
-        public static Block1 block(N1 n)
+        public static ByteBlock1 block(N1 n)
             => default;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block2 block(N2 n)
+        public static ByteBlock2 block(N2 n)
             => default;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block3 block(N3 n)
+        public static ByteBlock3 block(N3 n)
             => default;
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block4 block(N4 n)
+        public static ByteBlock4 block(N4 n)
             => default;
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block5 block(N5 n)
+        public static ByteBlock5 block(N5 n)
             => default;
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block6 block(N6 n)
+        public static ByteBlock6 block(N6 n)
             => default;
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block7 block(N7 n)
+        public static ByteBlock7 block(N7 n)
             => default;
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block8 block(N8 n)
+        public static ByteBlock8 block(N8 n)
             => default;
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block9 block(N9 n)
+        public static ByteBlock9 block(N9 n)
             => default;
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block10 block(N10 n)
+        public static ByteBlock10 block(N10 n)
             => default;
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block11 block(N11 n)
+        public static ByteBlock11 block(N11 n)
             => default;
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block12 block(N12 n)
+        public static ByteBlock12 block(N12 n)
             => default;
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block13 block(N13 n)
+        public static ByteBlock13 block(N13 n)
             => default;
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block14 block(N14 n)
+        public static ByteBlock14 block(N14 n)
             => default;
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block15 block(N15 n)
+        public static ByteBlock15 block(N15 n)
             => default;
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block16 block(N16 n)
+        public static ByteBlock16 block(N16 n)
             => default;
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block17 block(N17 n)
+        public static ByteBlock17 block(N17 n)
             => default;
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block18 block(N18 n)
+        public static ByteBlock18 block(N18 n)
             => default;
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block24 block(N24 n)
+        public static ByteBlock24 block(N24 n)
             => default;
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block32 block(N32 n)
+        public static ByteBlock32 block(N32 n)
             => default;
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block64 block(N64 n)
+        public static ByteBlock64 block(N64 n)
             => default;
 
         /// <summary>
@@ -185,60 +185,60 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static Block128 block(N128 n)
+        public static ByteBlock128 block(N128 n)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static ref byte block(out Block1 dst)
+        public static ref byte block(out ByteBlock1 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte block(out Block2 dst)
+        public static ref byte block(out ByteBlock2 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte block(out Block4 dst)
+        public static ref byte block(out ByteBlock4 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte block(out Block8 dst)
+        public static ref byte block(out ByteBlock8 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte block(out Block16 dst)
+        public static ref byte block(out ByteBlock16 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte block(out Block32 dst)
+        public static ref byte block(out ByteBlock32 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte block(out Block64 dst)
+        public static ref byte block(out ByteBlock64 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte block(out Block128 dst)
+        public static ref byte block(out ByteBlock128 dst)
         {
             dst = default;
             return ref u8(dst);
@@ -249,7 +249,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void blocks(out Block16 a, out Block16 b)
+        public static void blocks(out ByteBlock16 a, out ByteBlock16 b)
         {
             a = default;
             b = default;
@@ -260,7 +260,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void blocks(out Block64 a, out Block64 b, out Block64 c)
+        public static void blocks(out ByteBlock64 a, out ByteBlock64 b, out ByteBlock64 c)
         {
             a = default;
             b = default;
@@ -272,7 +272,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void blocks(out Block128 a, out Block128 b, out Block128 c, out Block128 d)
+        public static void blocks(out ByteBlock128 a, out ByteBlock128 b, out ByteBlock128 c, out ByteBlock128 d)
         {
             a = default;
             b = default;

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemBlocks
+    partial class ByteBlocks
     {
         /// <summary>
         /// Presents the leading source storage cell as a generic reference
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T first<T>(ref Block8 src)
+        public static ref T first<T>(ref ByteBlock8 src)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T first<T>(ref Block16 src)
+        public static ref T first<T>(ref ByteBlock16 src)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
 
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T first<T>(ref Block32 src)
+        public static ref T first<T>(ref ByteBlock32 src)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T first<T>(ref Block64 src)
+        public static ref T first<T>(ref ByteBlock64 src)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
 
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T first<T>(ref Block128 src)
+        public static ref T first<T>(ref ByteBlock128 src)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
     }

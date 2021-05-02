@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct CharBlocks
     {
-        const NumericKind Closure = UInt64k;
+        const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T init<T>(ReadOnlySpan<char> src, out T dst)

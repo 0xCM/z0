@@ -66,9 +66,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte slice(in BitSpan32 src, W8 w, int offset, int count)
         {
-            var buffer = MemBlocks.block(n8);
-            var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
+            var buffer = ByteBlocks.block(n8);
+            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<byte>(unpacked);
         }
@@ -83,9 +83,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort slice(in BitSpan32 src, W16 w, int offset, int count)
         {
-            var buffer = MemBlocks.block(n16);
-            var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
+            var buffer = ByteBlocks.block(n16);
+            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<ushort>(unpacked);
         }
@@ -100,8 +100,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint slice(in BitSpan32 src, W32 w, int offset, int count)
         {
-            var buffer = MemBlocks.block(n32);
-            var unpacked = MemBlocks.span<Bit32>(ref buffer);
+            var buffer = ByteBlocks.block(n32);
+            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
             var take = math.min(src.Edit.Length -offset, count);
             src.Edit.Slice(offset,take).CopyTo(unpacked);
             return BitPack32.pack<uint>(unpacked);
@@ -117,9 +117,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong slice(in BitSpan32 src, W64 w, int offset, int count)
         {
-            var buffer = MemBlocks.block(n64);
-            var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
+            var buffer = ByteBlocks.block(n64);
+            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<ulong>(unpacked);
         }
@@ -127,9 +127,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static sbyte slice(in BitSpan32 src, W8i w, int offset, int count)
         {
-            var buffer = MemBlocks.block(n8);
-            var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
+            var buffer = ByteBlocks.block(n8);
+            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<sbyte>(unpacked);
         }
@@ -137,9 +137,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static short slice(in BitSpan32 src, W16i w, int offset, int count)
         {
-            var buffer = MemBlocks.block(n16);
-            var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
+            var buffer = ByteBlocks.block(n16);
+            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack(unpacked, z16i);
         }
@@ -147,9 +147,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int slice(in BitSpan32 src, W32i w, int offset, int count)
         {
-            var buffer = MemBlocks.block(n32);
-            var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
+            var buffer = ByteBlocks.block(n32);
+            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack(unpacked,z32i);
         }
@@ -157,9 +157,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static long slice(in BitSpan32 src, W64i w, int offset, int count)
         {
-            var buffer = MemBlocks.block(n64);
-            var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
+            var buffer = ByteBlocks.block(n64);
+            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack(unpacked, z64i);
         }

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemBlocks
+    partial class ByteBlocks
     {
         /// <summary>
         /// Fills a span with data from a memory block
@@ -18,9 +18,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> span<T>(ref Block3 src)
+        public static unsafe Span<T> span<T>(ref ByteBlock3 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block3.Size));
+                => recover<T>(cover(u8(src), ByteBlock3.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -28,9 +28,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> span<T>(ref Block4 src)
+        public static unsafe Span<T> span<T>(ref ByteBlock4 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block4.Size));
+                => recover<T>(cover(u8(src), ByteBlock4.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -38,9 +38,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> span<T>(ref Block5 src)
+        public static unsafe Span<T> span<T>(ref ByteBlock5 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block5.Size));
+                => recover<T>(cover(u8(src), ByteBlock5.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -48,9 +48,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> span<T>(ref Block6 src)
+        public static unsafe Span<T> span<T>(ref ByteBlock6 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block6.Size));
+                => recover<T>(cover(u8(src), ByteBlock6.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -58,9 +58,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> span<T>(ref Block8 src)
+        public static unsafe Span<T> span<T>(ref ByteBlock8 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block8.Size));
+                => recover<T>(cover(u8(src), ByteBlock8.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -68,9 +68,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block10 src)
+        public static Span<T> span<T>(ref ByteBlock10 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block10.Size));
+                => recover<T>(cover(u8(src), ByteBlock10.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -78,9 +78,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block11 src)
+        public static Span<T> span<T>(ref ByteBlock11 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block11.Size));
+                => recover<T>(cover(u8(src), ByteBlock11.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block12 src)
+        public static Span<T> span<T>(ref ByteBlock12 src)
             where T : unmanaged
                 => recover<T>(cover(u8(src), 12));
 
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block13 src)
+        public static Span<T> span<T>(ref ByteBlock13 src)
             where T : unmanaged
                 => recover<T>(cover(u8(src), 13));
 
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block14 src)
+        public static Span<T> span<T>(ref ByteBlock14 src)
             where T : unmanaged
                 => recover<T>(cover(u8(src), 14));
 
@@ -118,9 +118,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block15 src)
+        public static Span<T> span<T>(ref ByteBlock15 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block15.Size));
+                => recover<T>(cover(u8(src), ByteBlock15.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -128,9 +128,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block16 src)
+        public static Span<T> span<T>(ref ByteBlock16 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block16.Size));
+                => recover<T>(cover(u8(src), ByteBlock16.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block17 src)
+        public static Span<T> span<T>(ref ByteBlock17 src)
             where T : unmanaged
                 => recover<T>(cover(u8(src), 17));
 
@@ -148,9 +148,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block18 src)
+        public static Span<T> span<T>(ref ByteBlock18 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block18.Size));
+                => recover<T>(cover(u8(src), ByteBlock18.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -158,9 +158,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block19 src)
+        public static Span<T> span<T>(ref ByteBlock19 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block19.Size));
+                => recover<T>(cover(u8(src), ByteBlock19.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -168,9 +168,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block20 src)
+        public static Span<T> span<T>(ref ByteBlock20 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block20.Size));
+                => recover<T>(cover(u8(src), ByteBlock20.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -178,9 +178,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block24 src)
+        public static Span<T> span<T>(ref ByteBlock24 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block24.Size));
+                => recover<T>(cover(u8(src), ByteBlock24.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -188,9 +188,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(ref Block32 src)
+        public static Span<T> span<T>(ref ByteBlock32 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block32.Size));
+                => recover<T>(cover(u8(src), ByteBlock32.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -198,9 +198,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> span<T>(ref Block64 src)
+        public static unsafe Span<T> span<T>(ref ByteBlock64 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block64.Size));
+                => recover<T>(cover(u8(src), ByteBlock64.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -208,9 +208,9 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> span<T>(ref Block80 src)
+        public static unsafe Span<T> span<T>(ref ByteBlock80 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block80.Size));
+                => recover<T>(cover(u8(src), ByteBlock80.Size));
 
         /// <summary>
         /// Fills a span with data from a memory block
@@ -218,8 +218,8 @@ namespace Z0
         /// <param name="src">The stack storage source</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> span<T>(ref Block128 src)
+        public static unsafe Span<T> span<T>(ref ByteBlock128 src)
             where T : unmanaged
-                => recover<T>(cover(u8(src), Block128.Size));
+                => recover<T>(cover(u8(src), ByteBlock128.Size));
     }
 }

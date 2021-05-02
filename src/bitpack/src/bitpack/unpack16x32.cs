@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ushort> unpack16x32(in Cell256 src)
         {
-            var storage = recover<ushort>(MemBlocks.block(n64).Bytes);
+            var storage = recover<ushort>(ByteBlocks.block(n64).Bytes);
             cpu.vstore(vinflatelo256x16u(src), ref seek(storage,0));
             cpu.vstore(vinflatehi256x16u(src), ref seek(storage,16));
             return storage;

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static MemBlocks;
+    using static ByteBlocks;
 
     partial struct Prototypes
     {
@@ -93,14 +93,14 @@ namespace Z0.Asm
             }
 
             [Op]
-            public void deposit(Span<Block64> dst, Block64 a0, Block64 a1)
+            public void deposit(Span<ByteBlock64> dst, ByteBlock64 a0, ByteBlock64 a1)
             {
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;
             }
 
             [Op]
-            public void deposit(Span<Block128> dst, Block128 a0, Block128 a1)
+            public void deposit(Span<ByteBlock128> dst, ByteBlock128 a0, ByteBlock128 a1)
             {
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;

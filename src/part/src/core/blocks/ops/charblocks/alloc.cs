@@ -10,48 +10,86 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct CharStacks
+    readonly partial struct CharBlocks
     {
-        /// <summary>
-        /// Allocates a 2-character storage stack
-        /// </summary>
         [MethodImpl(Inline), Op]
-        public static CharStack2 alloc(N2 n)
+        public static CharBlock1 alloc(N1 n)
             => default;
 
-        /// <summary>
-        /// Allocates a 4-character storage stack
-        /// </summary>
         [MethodImpl(Inline), Op]
-        public static CharStack4 alloc(N4 n)
+        public static CharBlock2 alloc(N2 n)
             => default;
 
-        /// <summary>
-        /// Allocates an 8-character storage stack
-        /// </summary>
         [MethodImpl(Inline), Op]
-        public static CharStack8 alloc(N8 n)
+        public static CharBlock3 alloc(N3 n)
             => default;
 
-        /// <summary>
-        /// Allocates a 16-character storage stack
-        /// </summary>
         [MethodImpl(Inline), Op]
-        public static CharStack16 alloc(N16 n)
+        public static CharBlock4 alloc(N4 n)
             => default;
 
-        /// <summary>
-        /// Allocates a 32-character storage stack
-        /// </summary>
         [MethodImpl(Inline), Op]
-        public static CharStack32 alloc(N32 n)
+        public static CharBlock5 alloc(N5 n)
             => default;
 
-        /// <summary>
-        /// Allocates a 64-character storage stack
-        /// </summary>
         [MethodImpl(Inline), Op]
-        public static CharStack64 alloc(N64 n)
+        public static CharBlock6 alloc(N6 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock7 alloc(N7 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock8 alloc(N8 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock9 alloc(N9 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock10 alloc(N10 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock11 alloc(N11 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock12 alloc(N12 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock13 alloc(N13 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock14 alloc(N14 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock15 alloc(N15 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock16 alloc(N16 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock32 alloc(N32 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock64 alloc(N64 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock128 alloc(N128 n)
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock256 alloc(N256 n)
             => default;
 
         [MethodImpl(Inline), Op]

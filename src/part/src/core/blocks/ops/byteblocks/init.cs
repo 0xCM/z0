@@ -11,10 +11,10 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemBlocks
+    partial class ByteBlocks
     {
         [MethodImpl(Inline), Op]
-        public static Block32 init(Vector256<ushort> lo, Vector256<ushort> hi)
+        public static ByteBlock32 init(Vector256<ushort> lo, Vector256<ushort> hi)
         {
             var src = new Seg512(lo,hi);
             var dst = block(n32);
@@ -37,10 +37,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Block4 init<T>(in T src, W32 w)
+        public static ByteBlock4 init<T>(in T src, W32 w)
             where T : unmanaged
         {
-            ref var dst8 = ref block(out Block4 dst);
+            ref var dst8 = ref block(out ByteBlock4 dst);
             if(typeof(T) == typeof(byte))
             {
                 ref var x = ref dst8;
@@ -78,29 +78,29 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Block8 init<T>(in T src, W64 w)
+        public static ByteBlock8 init<T>(in T src, W64 w)
             where T : unmanaged
         {
             var x = vbroadcast(w128, uint8(src));
-            vstore(x, ref block(out Block16 dst));
-            return @as<Block16,Block8>(dst);
+            vstore(x, ref block(out ByteBlock16 dst));
+            return @as<ByteBlock16,ByteBlock8>(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Block16 init<T>(in T src, W128 w)
+        public static ByteBlock16 init<T>(in T src, W128 w)
             where T : unmanaged
         {
             var x = vbroadcast(w, uint8(src));
-            vstore(x, ref block(out Block16 dst));
+            vstore(x, ref block(out ByteBlock16 dst));
             return dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Block32 init<T>(in T src, W256 w)
+        public static ByteBlock32 init<T>(in T src, W256 w)
             where T : unmanaged
         {
             var x = vbroadcast(w, uint8(src));
-            vstore(x, ref block(out Block32 dst));
+            vstore(x, ref block(out ByteBlock32 dst));
             return dst;
         }
     }
