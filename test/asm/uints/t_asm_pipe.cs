@@ -23,7 +23,7 @@ namespace Z0.Asm
         {
 
             var archive = Wf.ApiHexArchive();
-            using var writer = CaseWriter(FS.Extensions.Csv);
+            using var writer = CaseWriter(FS.Csv);
             writer.WriteLine(string.Format(LinePattern, "Operation", "BaseAddress", "Hex"));
 
             var direct = ApiIndex.create(archive.HostBlocks<math>().Array());
@@ -44,7 +44,7 @@ namespace Z0.Asm
             var dSrc = typeof(math).HostUri();
             var gSrc = typeof(gmath).HostUri();
             var id = PartId.GMath;
-            var parsed = Wf.Db().ApiHexPaths();
+            var parsed = Wf.Db().ParsedExtractPaths();
             Claim.nonzero(parsed.Count);
 
             var hex = Wf.ApiHex();
@@ -53,12 +53,12 @@ namespace Z0.Asm
             writer.WriteLine(root.timestamp().Format());
             root.iter(parsed, f => writer.WriteLine(f));
 
-            var mHex = Db.ApiHexPath(typeof(math).HostUri());
+            var mHex = Db.ParsedExtractPath(typeof(math).HostUri());
             var mHexRows = hex.ReadRows(mHex);
             writer.WriteLine(RP.PageBreak120);
             root.iter(mHexRows, r => writer.WriteLine(r.Uri));
 
-            var gHex = Db.ApiHexPath(typeof(gmath).HostUri());
+            var gHex = Db.ParsedExtractPath(typeof(gmath).HostUri());
             var gHexRows = hex.ReadRows(gHex);
             writer.WriteLine(RP.PageBreak120);
             root.iter(gHexRows, r => writer.WriteLine(r.Uri));
@@ -74,7 +74,7 @@ namespace Z0.Asm
 
         void check_unary_ops(ReadOnlySpan<ApiCodeBlock> src)
         {
-            using var writer = CaseWriter(FS.Extensions.Log);
+            using var writer = CaseWriter(FS.Log);
             var count = src.Length;
             for(var i=0; i<count; i++)
             {

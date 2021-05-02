@@ -384,7 +384,7 @@ namespace Z0.Asm
             var paths = symbols.SymbolPaths(src);
             var view = paths.View;
             var count = view.Length;
-            var dst = Db.AppDataFile(FS.file("pdbsymbols", FS.Extensions.Csv));
+            var dst = Db.AppDataFile(FS.file("pdbsymbols", FS.Csv));
             using var writer = dst.Writer();
             writer.WriteLine(string.Format("{0,-6} | {1}", "Seq", "Path"));
             for(var i=0; i<count; i++)
@@ -625,7 +625,7 @@ namespace Z0.Asm
 
            }
 
-            Show("modrm", FS.Extensions.Log, emit);
+            Show("modrm", FS.Log, emit);
         }
 
         void CheckBitSpans()
@@ -694,7 +694,7 @@ namespace Z0.Asm
             var count = records.Length;
             if(count !=0 )
             {
-                using var log = ShowLog("xed-instructions", FS.Extensions.Csv);
+                using var log = ShowLog("xed-instructions", FS.Csv);
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var record = ref skip(records,i);

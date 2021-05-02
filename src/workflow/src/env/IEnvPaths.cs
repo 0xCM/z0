@@ -9,8 +9,6 @@ namespace Z0
 
     using static EnvFolders;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using X = FS.Extensions;
 
     public partial interface IEnvPaths
     {
@@ -32,7 +30,7 @@ namespace Z0
             => FS.folder(src.ToString().ToLowerInvariant());
 
         FS.FilePath SettingsPath(string id)
-            => SettingsRoot() + FS.file(id, X.Settings);
+            => SettingsRoot() + FS.file(id, FS.Settings);
 
         FS.FolderPath DevRoot(string id)
             => DevRoot() + FS.folder(id);
@@ -67,12 +65,6 @@ namespace Z0
         FS.FolderPath RefDataRoot()
             => DbRoot() + FS.folder(refdata);
 
-        FS.FolderPath LogRoot()
-            => DbRoot() + FS.folder(logs);
-
-        FS.FolderPath CmdLogRoot()
-            => LogRoot() + FS.folder(commands);
-
         FS.FilePath TmpFile(FS.FileName file)
             => TmpRoot() + file;
 
@@ -81,20 +73,6 @@ namespace Z0
 
         FS.FolderPath TmpDir<S>(S subject)
             => TmpRoot() + SubjectFolder(subject);
-
-        FS.FilePath CmdLog(ScriptId id)
-            => CmdLogRoot() + (id.IsDiscriminated
-                ? FS.file(string.Format("{0}-{1}", id.Id, id.Token), X.Log)
-                : FS.file(id.Format(), X.Log));
-
-        FS.FolderPath ShowLogs()
-            => LogRoot() + FS.folder("show");
-
-        FS.FilePath ShowLog([Caller]string name = null, FS.FileExt? ext = null)
-            => ShowLogs() + FS.file(name, ext ?? X.Log);
-
-        FS.FilePath ShowLog(FS.FileName file)
-            => ShowLogs() + file;
 
         FS.FolderPath DataSourceRoot()
             => DbRoot() + FS.folder("sources");

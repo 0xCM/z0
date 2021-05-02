@@ -28,7 +28,7 @@ namespace Z0.Asm
             Wf = wf;
             Uri = host;
             Db = Wf.Db();
-            ImmRoot = Db.ImmRoot();
+            ImmRoot = Db.ImmCaptureRoot();
             Formatter = formatter;
         }
 

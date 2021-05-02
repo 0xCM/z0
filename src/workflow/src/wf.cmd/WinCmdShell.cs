@@ -7,7 +7,7 @@ namespace Z0
     public sealed class WinCmdShell : Interpreter<WinCmdShell>
     {
         protected override FS.FilePath ExePath
-            => FS.file("cmd", FS.Extensions.Exe).ToPath();
+            => FS.file("cmd", FS.Exe).ToPath();
 
         public override void SubmitStop()
             => exit();

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
     using static EnvFolders;
 
@@ -13,12 +12,14 @@ namespace Z0
         FS.FolderPath CatalogRoot()
             => DbRoot() + FS.folder(catalogs);
 
+        FS.FolderPath AsmCatalogRoot()
+            => CatalogRoot() + FS.folder(asm);
+
         FS.FolderPath CatalogDir(Identifier id)
             => CatalogRoot() + FS.folder(id.Format());
 
         FS.FolderPath CatalogDir(Identifier id, Identifier subject)
             => CatalogRoot() + FS.folder(id.Format()) + FS.folder(subject.Format());
-
 
         FS.FilePath CatalogTable(Identifier catalog, TableId table)
             => CatalogDir(catalog) + FS.file(table.Format(), FS.Csv);
@@ -33,5 +34,16 @@ namespace Z0
         FS.FilePath CatalogTable<T>(Identifier catalog, Identifier subject)
             where T : struct, IRecord<T>
                 => CatalogTable(catalog, Tables.tableid<T>(), subject);
+
+        FS.FilePath AsmCatalogTable<T>()
+            where T : struct, IRecord<T>
+                => AsmCatalogRoot() + FS.file(TableId<T>(), FS.Csv);
+
+        FS.FilePath AsmCatalogTable<T>(string subject)
+            where T : struct, IRecord<T>
+                => AsmCatalogRoot() + FS.folder(subject) + FS.file(TableId<T>(), FS.Csv);
+
+        FS.FilePath AsmCatalogPath<T>(T subject, FS.FileName name)
+            => AsmCatalogRoot() + FS.folder(subject.ToString()) + name;
     }
 }

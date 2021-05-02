@@ -66,7 +66,7 @@ namespace Z0.Asm
             if(parts.Length != 0)
                 Db.ImmHostDirs(parts).Delete();
             else
-                Db.ImmRoot().Delete();
+                Db.ImmCaptureRoot().Delete();
         }
 
         void EmitLiteral(byte[] imm8, PartId[] parts)

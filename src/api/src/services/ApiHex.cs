@@ -20,7 +20,7 @@ namespace Z0
 
         [Op]
         public FS.Files Files()
-            => Db.ApiHexRoot().Files(FS.PCsv);
+            => Db.ParsedExtractRoot().Files(FS.PCsv);
 
         [MethodImpl(Inline), Op]
         public static ApiCodeBlock block(ApiHexRow src)
@@ -28,7 +28,7 @@ namespace Z0
 
         [Op]
         public Index<ApiCodeBlock> ReadBlocks()
-            => ReadBlocks(Db.ApiHexPaths());
+            => ReadBlocks(Db.ParsedExtractPaths());
 
         [Op]
         public Index<ApiCodeBlock> ReadBlocks(FS.FilePath src)
@@ -95,7 +95,7 @@ namespace Z0
             if(count != 0)
             {
                 var content = rows(uri, src);
-                var path = Db.ApiHexPath(dst, uri);
+                var path = Db.ParsedExtractPath(dst, uri);
                 var emitting = Wf.EmittingTable<ApiHexRow>(path);
                 emit(content, path);
                 Wf.EmittedTable(emitting,count);

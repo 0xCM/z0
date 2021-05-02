@@ -56,7 +56,7 @@ namespace Z0
         Outcome<uint> ClearHex(PartId part)
         {
             var kind = FS.PCsv;
-            var files = Db.ApiHexPaths(part);
+            var files = Db.ParsedExtractPaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);
@@ -68,7 +68,7 @@ namespace Z0
         Outcome<uint> ClearAsm(PartId part)
         {
             var kind = FS.Asm;
-            var files = Db.AsmPaths(part);
+            var files = Db.AsmCapturePaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);

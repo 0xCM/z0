@@ -81,7 +81,7 @@ namespace Z0
 
         public void Resource_Prop_Cil()
         {
-            var summary = CaseWriter(FS.Extensions.Csv);
+            var summary = CaseWriter(FS.Csv);
             var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
             summary.WriteLine(header);
 

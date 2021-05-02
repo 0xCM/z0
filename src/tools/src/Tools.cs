@@ -29,7 +29,7 @@ namespace Z0
         public void LaunchVsCode(string arg)
         {
             var dir = FS.dir(Environment.CurrentDirectory) + FS.folder(arg);
-            var app = FS.file("code", FS.Extensions.Exe);
+            var app = FS.file("code", FS.Exe);
             var path = dir.Format(PathSeparator.BS);
             var cmd = new CmdLine(string.Format("{0} \"{1}\"", app.Format(), path));
             Wf.Status(string.Format("Launching {0} for {1}", app, path));

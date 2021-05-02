@@ -34,6 +34,6 @@ namespace Z0
         }
 
         static FS.FilePath target(Env env)
-            => env.Logs.Value + FS.folder("emissions") + FS.file(env.AppId.Format() + ".emissions", FS.Extensions.Log);
+            => env.Logs.Value + FS.folder("emissions") + FS.file(env.AppId.Format() + ".emissions", FS.Log);
     }
 }

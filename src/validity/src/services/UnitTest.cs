@@ -8,7 +8,7 @@ namespace Z0
         where U : UnitTest<U>
     {
         protected FS.FileExt CsvExt
-            => FS.Extensions.Csv;
+            => FS.Csv;
 
         public static N0 n0 => default;
 

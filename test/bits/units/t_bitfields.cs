@@ -244,7 +244,7 @@ namespace Z0
             var dst = span(alloc<ulong>(spec.FieldCount));
             var tmp = span(alloc<ulong>(spec.FieldCount));
             var positions = spec.Segments.Map(s => (byte)s.FirstIndex);
-            using var writer = CaseWriter(FS.Extensions.Log);
+            using var writer = CaseWriter(FS.Log);
             writer.WriteLine(spec);
 
             for(var rep=0; rep<RepCount; rep++)

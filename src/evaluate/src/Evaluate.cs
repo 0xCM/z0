@@ -13,7 +13,7 @@ namespace Z0
     public static partial class XTend
     {
         public static IEvalControl EvalControl(this IWfRuntime wf, IDomainSource source = null, uint? buffersize = null)
-            => Evaluate.control(wf, source ?? Rng.@default(), wf.Db().ApiHexRoot(), buffersize ?? Pow2.T14);
+            => Evaluate.control(wf, source ?? Rng.@default(), wf.Db().ParsedExtractRoot(), buffersize ?? Pow2.T14);
 
         public static IEvalDispatcher EvalDispatcher(this IWfRuntime wf, IDomainSource source = null, uint? buffersize = null)
             => Evaluate.dispatcher(wf, source ?? Rng.@default(), buffersize ?? Pow2.T14);

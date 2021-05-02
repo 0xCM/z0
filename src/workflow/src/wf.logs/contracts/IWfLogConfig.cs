@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using X = FS.Extensions;
     using api = Loggers;
 
     public interface IWfLogConfig : ITextual
@@ -31,13 +30,13 @@ namespace Z0
         /// The status log path
         /// </summary>
         FS.FilePath StatusLog
-            => LogRoot + FS.file(ControlName, X.StatusLog);
+            => LogRoot + FS.file(ControlName, FS.StatusLog);
 
         /// <summary>
         /// The error log path
         /// </summary>
         FS.FilePath ErrorLog
-            => LogRoot + FS.file(ControlName, X.ErrorLog);
+            => LogRoot + FS.file(ControlName, FS.ErrorLog);
         string ITextual.Format()
             => api.format(this);
     }

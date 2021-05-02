@@ -65,11 +65,11 @@ namespace Z0
         public static Index<ApiCodeDescriptor> descriptors(IWfRuntime wf)
         {
             var paths = wf.Db();
-            var files = paths.ApiHexPaths().View;
+            var files = paths.ParsedExtractPaths().View;
             var empty = Index<ApiCodeDescriptor>.Empty;
             if(files.Length == 0)
             {
-                wf.Warn($"No code found in {paths.ApiHexRoot()}");
+                wf.Warn($"No code found in {paths.ParsedExtractRoot()}");
                 return empty;
             }
 

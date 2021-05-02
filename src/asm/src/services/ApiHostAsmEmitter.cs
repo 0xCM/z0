@@ -24,7 +24,7 @@ namespace Z0.Asm
         }
 
         public AsmHostRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)
-            => Emit(host,src, Db.AsmPath(host));
+            => Emit(host,src, Db.AsmCapturePath(host));
 
         public AsmHostRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {

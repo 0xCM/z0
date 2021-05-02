@@ -170,5 +170,30 @@ namespace Z0
 
         FS.FileExt DefaultTableExt
              => FS.Csv;
+
+        FS.FolderPath AppTableRoot
+            => AppLogDir() + FS.folder(tables);
+
+        FS.FolderPath AppTableDir<T>()
+            where T : struct, IRecord<T>
+                => AppTableRoot + TableFolder<T>();
+
+        FS.FolderPath AppTableDir(Type t)
+            => AppTableRoot + TableFolder(t);
+
+        FS.FilePath AppTablePath<T>(string subject, FS.FileExt? ext = null)
+            where T : struct, IRecord<T>
+        {
+            var id = TableId<T>();
+            var dir = AppTableDir<T>();
+            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? FS.Csv);
+        }
+
+        FS.FilePath AppTablePath(Type t, string subject, FS.FileExt? ext = null)
+        {
+            var id = TableId(t);
+            var dir = AppTableDir(t);
+            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? FS.Csv);
+        }
     }
 }

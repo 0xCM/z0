@@ -28,7 +28,7 @@ namespace Z0
             if(verbose)
                 term.inform(AppMsg.status(text.prop("DbRoot", dbRoot)));
 
-            var jsonConfigPath = dbRoot + FS.folder("settings") + FS.file(controlId.Format(), FS.Extensions.JsonConfig);
+            var jsonConfigPath = dbRoot + FS.folder("settings") + FS.file(controlId.Format(), FS.JsonConfig);
             status.AppConfigPath = jsonConfigPath;
 
 

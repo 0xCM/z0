@@ -24,7 +24,7 @@ namespace Z0
             => FileModuleKind.NativeLib;
 
         public FS.FileExt DefaultExt
-            =>  FS.Extensions.Lib;
+            =>  FS.Lib;
 
         [MethodImpl(Inline)]
         public static implicit operator FileModule(NativeLibFile src)

@@ -170,7 +170,7 @@ namespace Z0
                 for(var j=0; j<kHost; j++)
                 {
                     ref readonly var host = ref skip(hosts,j);
-                    var hexpath = Db.ApiHexPath(host.HostUri);
+                    var hexpath = Db.ParsedExtractPath(host.HostUri);
                     if(hexpath.Exists)
                     {
                         var blocks = hex.ReadBlocks(hexpath);

@@ -8,12 +8,6 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        FS.FolderPath BuildLogRoot()
-            => LogRoot() + FS.folder("build");
-
-        FS.FilePath BuildLogPath(FS.FileName src)
-            => BuildLogRoot() + src;
-
         FS.FolderPath BuildArchiveRoot()
             => BinaryRoot() + FS.folder(builds);
     }

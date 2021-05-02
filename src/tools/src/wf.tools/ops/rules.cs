@@ -11,7 +11,7 @@ namespace Z0
         {
             data.CmdRoot = paths.ToolExeRoot() +  data.CmdRootName;
             data.CmdName = FS.file(data.CmdHost.Format(), data.ScriptType);
-            data.CmdOutName = FS.file(string.Format("{0}.{1}", data.CmdHost, data.CmdArgName), FS.Extensions.Log);
+            data.CmdOutName = FS.file(string.Format("{0}.{1}", data.CmdHost, data.CmdArgName), FS.Log);
             data.CmdOutDir = paths.ToolOutDir(data.CmdHost);
             data.CmdOutPath = data.CmdOutDir + FS.file(data.CmdHost);
             data.ToolArgs = string.Format("{0}{0}", data.ArgPrefix, data.CmdArgName);

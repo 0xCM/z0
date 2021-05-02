@@ -20,7 +20,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ToolShimSpec shimspec(Identifier name, FS.FilePath tool, FS.FolderPath dst)
-            => new ToolShimSpec(name, tool, dst+ FS.file(name.Format(), FS.Extensions.Exe));
+            => new ToolShimSpec(name, tool, dst+ FS.file(name.Format(), FS.Exe));
 
         [Op]
         public static ToolShimSpec shim(Identifier name, FS.FilePath tool, FS.FolderPath dst)

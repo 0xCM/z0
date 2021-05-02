@@ -17,7 +17,7 @@ namespace Z0
 
         protected override void OnInit()
         {
-            Root = Db.ApiHexRoot();
+            Root = Db.ParsedExtractRoot();
         }
 
         FS.FileExt Ext

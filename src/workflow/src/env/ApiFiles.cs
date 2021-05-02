@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-
-    using static EnvFolders;
-
     public partial interface IEnvPaths
     {
         FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)

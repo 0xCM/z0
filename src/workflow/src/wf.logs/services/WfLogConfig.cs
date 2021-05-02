@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using X = FS.Extensions;
     using api = Loggers;
 
     public readonly struct WfLogConfig : IWfLogConfig
@@ -40,8 +39,8 @@ namespace Z0
             LogRoot = dbRoot + FS.folder("logs");
             ControlId = control;
             var app = ControlId.Format();
-            StatusLog = LogRoot + FS.file(app, X.StatusLog);
-            ErrorLog = LogRoot + FS.file(app, X.ErrorLog);
+            StatusLog = LogRoot + FS.file(app, FS.StatusLog);
+            ErrorLog = LogRoot + FS.file(app, FS.ErrorLog);
         }
 
         public override string ToString()

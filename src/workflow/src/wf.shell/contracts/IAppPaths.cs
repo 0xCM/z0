@@ -7,7 +7,6 @@ namespace Z0
     using System.Reflection;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-    using X = FS.Extensions;
 
     [Free]
     public interface IAppPaths : IFileArchive
@@ -19,7 +18,7 @@ namespace Z0
         /// The name of an application configuration file
         /// </summary>
         FS.FileName ConfigFileName
-            => FS.file(AppName, X.JsonConfig);
+            => FS.file(AppName, FS.JsonConfig);
 
         /// <summary>
         /// The executing application's configuration file path

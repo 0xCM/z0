@@ -14,18 +14,6 @@ namespace Z0
         FS.FilePath List(string name, FS.FileExt ext)
             => ListRoot() + FS.file(name, ext);
 
-        FS.FolderPath IndexRoot()
-            => TableRoot() + FS.folder(indices);
-
-        FS.FilePath IndexFile(string id)
-            => IndexRoot() + FS.file(id, FS.Idx);
-
-        FS.FilePath IndexFile(string subject, string id)
-            => IndexDir(subject) + FS.file(id, FS.Idx);
-
-        FS.Files IndexFiles()
-            => IndexRoot().Files(FS.Idx);
-
         FS.FolderPath DocRoot()
             => DbRoot() + FS.folder(docs);
 

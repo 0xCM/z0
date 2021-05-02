@@ -168,56 +168,34 @@ namespace Z0
         /// </summary>
         public static FileExt Sh => ext(sh);
 
-        [ValueProvider(typeof(FileExt))]
-        public readonly struct Extensions
-        {
-            /// <summary>
-            /// Defines the <see cref='csv'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Csv => ext(csv);
+        /// <summary>
+        /// Defines the <see cref='settings'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Settings => ext(settings);
 
-            /// <summary>
-            /// Defines the <see cref='error'/> + <see cref='Log'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt ErrorLog => ext(error) + Log;
+        /// <summary>
+        /// Defines the <see cref='config'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Config => ext(config);
 
-            /// <summary>
-            /// Defines the <see cref='exe'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Exe => ext(exe);
+        /// <summary>
+        /// Defines the composite <see cref='cjson'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt JsonConfig => ext(cjson);
 
-            /// <summary>
-            /// Defines the <see cref='log'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Log => ext(log);
+        /// <summary>
+        /// Defines the <see cref='status'/> + <see cref='log'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt StatusLog => ext(status) + Log;
 
-            /// <summary>
-            /// Defines the <see cref='lib'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Lib => ext(lib);
+        /// <summary>
+        /// Defines the <see cref='error'/> + <see cref='log'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt ErrorLog => ext(error) + Log;
 
-            public static FileExt Config => ext(config);
-
-            /// <summary>
-            /// Defines the composite <see cref='cjson'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt JsonConfig => ext(cjson);
-
-            /// <summary>
-            /// Defines the composite <see cref='status'/> + <see cref='Log'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt StatusLog => ext(status) + Log;
-
-            /// <summary>
-            /// Defines the <see cref='cfg'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Cfg => ext(cfg);
-
-
-            /// <summary>
-            /// Defines the <see cref='settings'/> <see cref='FileExt'/>
-            /// </summary>
-            public static FileExt Settings => ext(settings);
-        }
+        /// <summary>
+        /// Defines the <see cref='cfg'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Cfg => ext(cfg);
     }
 }

@@ -44,7 +44,7 @@ namespace Z0
                 var parsed = ParseExtracts(host, src);
                 if(parsed.Length != 0)
                 {
-                    EmitApiHex(host, parsed, Wf.Db().ApiHexPath(host));
+                    EmitApiHex(host, parsed, Wf.Db().ParsedExtractPath(host));
                     EmitMsilData(host, parsed, Wf.Db().CilDataPath(host));
                     EmitMsilCode(host, parsed, Wf.Db().CilCodePath(host));
                     routines = DecodeMembers(host, parsed, src);
@@ -72,7 +72,7 @@ namespace Z0
                     EmitApiHex(host, parsed, dst);
                     EmitMsilData(host, parsed, db.CilDataPath(dst, host));
                     EmitMsilCode(host, parsed, db.CilCodePath(dst, host));
-                    routines = DecodeMembers(host, parsed, src, db.AsmPath(dst,host));
+                    routines = DecodeMembers(host, parsed, src, db.AsmCapturePath(dst,host));
                 }
                 Wf.Ran(flow);
             }
@@ -128,7 +128,7 @@ namespace Z0
         }
 
         AsmHostRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
-            => DecodeMembers(host,src,extracts, Wf.Db().AsmPath(host));
+            => DecodeMembers(host,src,extracts, Wf.Db().AsmCapturePath(host));
 
         AsmHostRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts, FS.FilePath dst)
         {

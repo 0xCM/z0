@@ -174,7 +174,7 @@ namespace Z0
         protected FS.FolderPath UnitDataDir
             => Db.TestAppLogRoot<U>() + FS.folder(GetType().Name);
 
-        protected static FS.FileExt LogExt => FS.Extensions.Log;
+        protected static FS.FileExt LogExt => FS.Log;
 
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged

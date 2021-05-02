@@ -9,17 +9,14 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        FS.FolderPath ImmRoot()
-            => CaptureRoot() + FS.folder(imm);
-
         FS.Files ImmAsmFiles()
-            => ImmRoot().Files(FS.Asm, true);
+            => ImmCaptureRoot().Files(FS.Asm, true);
 
         FS.Files ImmHexFiles()
-            => ImmRoot().Files(FS.Hex, true);
+            => ImmCaptureRoot().Files(FS.Hex, true);
 
         FS.FolderPath[] ImmDirs(PartId part)
-            => ImmRoot().SubDirs().Where(d => d.Name.EndsWith(part.Format()));
+            => ImmCaptureRoot().SubDirs().Where(d => d.Name.EndsWith(part.Format()));
 
         FS.FolderPath[] ImmHostDirs(PartId part)
             => ImmDirs(part).SelectMany(path => path.SubDirs());
@@ -28,7 +25,7 @@ namespace Z0
             => parts.SelectMany(ImmHostDirs);
 
         FS.FolderPath ImmSubDir(FS.FolderName name)
-            => (ImmRoot() + name);
+            => (ImmCaptureRoot() + name);
 
         FS.FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id, bool refined)
             => ImmSubDir(FS.folder(owner.Format(), host.Name)) + id.ToFileName(refined ? "r" : EmptyString, FS.Hex);

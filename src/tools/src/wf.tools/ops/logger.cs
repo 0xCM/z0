@@ -18,6 +18,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ToolCmdLogger logger(IEnvPaths paths, string name)
-            => new ToolCmdLogger(paths.CmdLogRoot() + FS.file(name, FS.Extensions.StatusLog));
+            => new ToolCmdLogger(paths.CmdLogRoot() + FS.file(name, FS.StatusLog));
     }
 }
