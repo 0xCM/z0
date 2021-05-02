@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static Part;
@@ -68,6 +69,24 @@ namespace Z0
             Claim.veq(v2,v3);
         }
 
+        /// <summary>
+        /// Sets an index-identified component to a specified value
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">The index of the component to extract</param>
+        /// <param name="value">The new component value</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vset<T>(T src, byte index, Vector256<T> dst)
+            where T : unmanaged
+                => dst.WithElement(index, src);
+
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vset<T>(T src, byte index, Vector128<T> dst)
+            where T : unmanaged
+                => dst.WithElement(index, src);
+
         void vreverse_check<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
             where F : IUnaryOp128<T>
@@ -81,7 +100,7 @@ namespace Z0
                 var output = f.Invoke(input);
                 var expect = gcpu.vzero(w,t);
                 for(byte j = 0; j < n; j++)
-                    expect = gcpu.vset(cpu.vcell(input,(byte)((n - 1) - j)),j,expect);
+                    expect = vset(cpu.vcell(input,(byte)((n - 1) - j)),j,expect);
 
                 Claim.veq(expect,output);
             }
@@ -102,7 +121,7 @@ namespace Z0
                 var output = f.Invoke(input);
                 var expect = gcpu.vzero(w,t);
                 for(byte j = 0; j < n; j++)
-                    expect = gcpu.vset(cpu.vcell(input,(byte)((n - 1) - j)),j,expect);
+                    expect = vset(cpu.vcell(input, (byte)((n - 1) - j)), j, expect);
 
                 Claim.veq(expect,output);
             }

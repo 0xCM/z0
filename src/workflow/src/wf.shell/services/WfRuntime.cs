@@ -32,7 +32,7 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        public IApiRuntimeCatalog ApiCatalog {get;}
+        public IApiCatalog ApiCatalog {get;}
 
         public string AppName {get;}
 

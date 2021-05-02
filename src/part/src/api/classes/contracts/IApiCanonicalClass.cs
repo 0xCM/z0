@@ -10,17 +10,11 @@ namespace Z0
     using K = ApiCanonicalClass;
 
     [Free]
-    public interface IApiCanonicalClass : IApiKind<K>
+    public interface IApiCanonicalClass : IApiClass<K>
     {
         new ApiCanonicalClass Kind {get;}
-    }
 
-
-    [Free]
-    public interface IApiCanonicalClass<F,T> : IApiCanonicalClass
-        where F : unmanaged, IApiCanonicalClass
-    {
-        K I.Kind
-            => default(F).Kind;
+        K IApiClass<K>.Kind
+            => Kind;
     }
 }

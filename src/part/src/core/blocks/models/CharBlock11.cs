@@ -16,15 +16,9 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock11 : ICharBlock<CharBlock11>
     {
-        /// <summary>
-        /// The lower content
-        /// </summary>
-        public CharBlock10 Lo;
+        CharBlock10 Lo;
 
-        /// <summary>
-        /// The upper content
-        /// </summary>
-        public CharBlock1 Hi;
+        CharBlock1 Hi;
 
         /// <summary>
         /// The block content presented as an editable buffer
@@ -43,6 +37,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Data);
         }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator CharBlock11(string src)

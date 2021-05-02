@@ -10,124 +10,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static PageBlocks;
-
-    using api = PageBlocks;
-
-    public interface IPageBlock<T>
-        where T : unmanaged, IPageBlock<T>
-    {
-        ByteSize Size
-            => size<T>();
-
-        uint PageCount
-            => api.PageCount<T>();
-    }
-
-    public interface IPageBank<N,T>
-        where T : unmanaged, IPageBlock<T>
-        where N : unmanaged, ITypeNat
-    {
-        MemoryAddress BaseAddress {get;}
-
-        uint PageCount
-            => api.PageCount<T>();
-
-        ByteSize Size => size<T>();
-
-        MemoryRange Range => (BaseAddress, BaseAddress + Size);
-    }
-
-    [ApiHost]
-    public class PageBlockProvider
-    {
-        public static PageBlockProvider service()
-            => Instance;
-
-        [MethodImpl(Inline), Op]
-        public PageBlock Block(N0 n)
-            => new PageBlock(Ranges[0]);
-
-        [MethodImpl(Inline), Op]
-        public PageBlock Block(N1 n)
-            => new PageBlock(Ranges[1]);
-
-        [MethodImpl(Inline), Op]
-        public PageBlock Block(N2 n)
-            => new PageBlock(Ranges[2]);
-
-        [MethodImpl(Inline), Op]
-        public PageBlock Block(N3 n)
-            => new PageBlock(Ranges[3]);
-
-        public ByteSize BlockSize => _BlockSize;
-
-        Index<MemoryRange> Ranges;
-
-        PageBlockProvider()
-        {
-            Ranges = new MemoryRange[4];
-            ref var dst = ref Ranges.First;
-            seek(dst,0) = new MemoryRange(address(Block16x4x0), _BlockSize);
-            seek(dst,1) = new MemoryRange(address(Block16x4x1), _BlockSize);
-            seek(dst,2) = new MemoryRange(address(Block16x4x2), _BlockSize);
-            seek(dst,3) = new MemoryRange(address(Block16x4x3), _BlockSize);
-        }
-
-        static PageBlockProvider()
-        {
-            WinMem.liberate(address(Block16x4x0), size<PageBlock16x4>());
-            WinMem.liberate(address(Block16x4x1), size<PageBlock16x4>());
-            WinMem.liberate(address(Block16x4x2), size<PageBlock16x4>());
-            WinMem.liberate(address(Block16x4x3), size<PageBlock16x4>());
-            Instance = new PageBlockProvider();
-        }
-
-        static ByteSize _BlockSize => size<PageBlock16x4>();
-
-        static PageBlockProvider Instance;
-
-        [FixedAddressValueType]
-        static PageBlock16x4 Block16x4x0;
-
-        [FixedAddressValueType]
-        static PageBlock16x4 Block16x4x1;
-
-        [FixedAddressValueType]
-        static PageBlock16x4 Block16x4x2;
-
-        [FixedAddressValueType]
-        static PageBlock16x4 Block16x4x3;
-    }
-
-    public struct PageBank<N,T> : IPageBank<N,T>
-        where T : unmanaged, IPageBlock<T>
-        where N : unmanaged, ITypeNat
-    {
-
-        public ByteSize Size => size<T>();
-
-        public MemoryAddress BaseAddress
-        {
-            [MethodImpl(Inline)]
-            get => address(Storage);
-        }
-
-        public MemoryRange Range
-        {
-            [MethodImpl(Inline)]
-            get => (BaseAddress, BaseAddress + Size);
-        }
-
-        public uint PageCount
-        {
-            [MethodImpl(Inline)]
-            get => api.PageCount<T>();
-        }
-
-        [FixedAddressValueType]
-        static T Storage;
-    }
 
     [ApiHost]
     public readonly struct PageBlocks
@@ -150,14 +32,12 @@ namespace Z0
         public static void alloc(out PageBlock16x4 dst)
         {
             dst = default;
-
         }
 
         [MethodImpl(Inline)]
         public static void alloc(out PageBlock32x4 dst)
         {
             dst = default;
-
         }
 
         [MethodImpl(Inline)]
@@ -166,27 +46,10 @@ namespace Z0
             dst = default;
         }
 
-        internal static void bank<N,T>(N n, out PageBank<N,T> dst)
-            where T : unmanaged, IPageBlock<T>
-            where N : unmanaged, ITypeNat
-        {
-            dst = default;
-        }
-
         [MethodImpl(Inline)]
         public static uint PageCount<T>()
             where T : unmanaged, IPageBlock<T>
                 => size<T>()/PageSize;
-
-        public static uint copy<T>(in CellBuffer<T> src, uint offset, uint cells, Span<T> dst)
-            where T : unmanaged, IDataCell
-        {
-            var j=0u;
-            var max = root.min(offset + cells, dst.Length);
-            for(var i=offset; i<max; i++)
-                seek(dst,j++) = skip(src.View,i);
-            return j;
-        }
 
         /// <summary>
         /// Reserves 1 pages of memory that covers 2^12 = 4096 bytes
@@ -302,7 +165,6 @@ namespace Z0
 
             PageBlocks.PageBlock16 Block3;
         }
-
 
         [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
         public struct PageBlock32x4 : IPageBlock<PageBlock32x4>

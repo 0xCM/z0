@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmEncodingInfo : IEquatable<AsmEncodingInfo>, IComparable<AsmEncodingInfo>
+    public class AsmEncodingInfo : IEquatable<AsmEncodingInfo>, IComparable<AsmEncodingInfo>
     {
         public AsmStatementExpr Statement {get;}
 
@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         readonly string Formatted;
 
-        readonly uint Length {get;}
+        readonly uint Length;
 
         [MethodImpl(Inline)]
         public AsmEncodingInfo(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode hex, string bits)

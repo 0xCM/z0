@@ -25,14 +25,14 @@ namespace Z0
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
         }
 
-        public Index<ResolvedPart> ResolveCatalog(IApiRuntimeCatalog src)
+        public Index<ResolvedPart> ResolveCatalog(IApiCatalog src)
         {
             var dst = root.list<ResolvedPart>();
             ResolveCatalog(src,dst);
             return dst.ToArray();
         }
 
-        public uint ResolveCatalog(IApiRuntimeCatalog src, List<ResolvedPart> dst)
+        public uint ResolveCatalog(IApiCatalog src, List<ResolvedPart> dst)
         {
             var counter = 0u;
             foreach(var part in src.Parts)
@@ -45,6 +45,8 @@ namespace Z0
             dst.Add(ResolvePart(src, out var counter));
             return counter;
         }
+
+
 
         public ResolvedHost ResolveHost(IApiHost src)
         {
@@ -59,6 +61,9 @@ namespace Z0
             else
                 return ResolvedHost.Empty;
         }
+
+        public ResolvedPart ResolvePart(IPart src)
+            => ResolvePart(src, out var counter);
 
         public ResolvedPart ResolvePart(IPart src, out uint counter)
         {
@@ -115,9 +120,16 @@ namespace Z0
             {
                 foreach(var arg in ApiIdentityKinds.NumericClosureTypes(method))
                 {
-                    var constructed = method.MakeGenericMethod(arg);
-                    dst.Add(resolve(constructed, MemberUri(src.HostUri, constructed), ApiJit.jit(constructed)));
-                    counter++;
+                    try
+                    {
+                        var constructed = method.MakeGenericMethod(arg);
+                        dst.Add(resolve(constructed, MemberUri(src.HostUri, constructed), ApiJit.jit(constructed)));
+                        counter++;
+                    }
+                    catch(Exception e)
+                    {
+                        Wf.Warn(e.Message);
+                    }
                 }
             }
 

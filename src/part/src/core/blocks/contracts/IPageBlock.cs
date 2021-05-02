@@ -4,8 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly partial struct AsmCatalogRecords
-    {
+    using static memory;
 
+    using api = PageBlocks;
+
+    public interface IPageBlock<T>
+        where T : unmanaged, IPageBlock<T>
+    {
+        ByteSize Size
+            => size<T>();
+
+        uint PageCount
+            => api.PageCount<T>();
     }
 }

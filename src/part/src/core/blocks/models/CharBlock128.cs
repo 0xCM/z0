@@ -19,15 +19,9 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock128 : ICharBlock<CharBlock128>
     {
-        /// <summary>
-        /// The lower content
-        /// </summary>
-        public CharBlock64 Lo;
+        CharBlock64 Lo;
 
-        /// <summary>
-        /// The lower segment
-        /// </summary>
-        public CharBlock64 Hi;
+        CharBlock64 Hi;
 
         public Span<char> Data
         {
@@ -43,6 +37,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Data);
         }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator CharBlock128(string src)

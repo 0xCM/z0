@@ -996,7 +996,7 @@ namespace Z0.Asm
             ref readonly var x = ref first(left);
             ref readonly var y = ref first(right);
             ref var dst = ref first(buffer);
-            var results = alloc<ApiCall>(count);
+            var results = alloc<TextBlock>(count);
             var output = alloc<uint>(count);
             ref var expected = ref first(output);
             ref var calls = ref first(results);
@@ -1008,7 +1008,7 @@ namespace Z0.Asm
                 ref var expect = ref seek(expected,i);
                 actual = cpu.mullo(a,b);
                 expect = math.mul(a,b);
-                seek(calls, i) = ApiCalls.result(@class,a,b,actual);
+                //seek(calls, i) = ApiCalls.result(@class,a,b,actual);
             }
 
             for(var i=0; i<count; i++)
@@ -1121,7 +1121,6 @@ namespace Z0.Asm
 
             Wf.Row(indices.FormatList());
         }
-
 
         void LoadRegions()
         {
@@ -1274,7 +1273,7 @@ namespace Z0.Asm
             var step2 = cpu.vinflate256x16u(step1);
         }
 
-        void SymbolHeapCreate()
+        void CreateSymbolHeap()
         {
             var symbolic = Wf.Symbolism();
             var literals = symbolic.DiscoverLiterals();
@@ -1400,15 +1399,28 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ReadMethodDefs(Parts.Math.Assembly);
+            // var extractor = ApiExtractor.create(Wf);
+            // extractor.Run();
 
-            // var tokens = Numeric.types().Map(Clr.token);
-            // var module = typeof(byte).Assembly.ManifestModule;
-            // foreach(var token in tokens)
-            // {
-            //     var type = CliTokens.type(module, token);
-            //     Wf.Row(string.Format("{0} | {1}", token, type.Name));
-            // }
+            CheckBitstrings();
+        }
+
+
+        ReadOnlySpan<byte> Input => new byte[]{0x44, 0x01, 0x58,0x04};
+
+        const string InputBits = "0100 0100 0000 0001 0101 1000 0000 0100";
+
+
+        public void CheckBitstrings()
+        {
+            CharBlocks.alloc(n128, out var block);
+            var count = AsmBitstrings.render(Input, block.Data);
+            var chars = slice(block.Data,0,count);
+            var bits = text.format(chars);
+            Wf.Row(InputBits);
+            Wf.Row(bits);
+
+
 
         }
 

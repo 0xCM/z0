@@ -19,76 +19,60 @@ namespace Z0.Asm
             var input = src.Bytes;
             var size = (int)src.Size;
             var j = 0u;
-            for(var i=size; i>=0; i--)
-            {
-                ref readonly var b = ref skip(input,i);
-
-                seek(dst,j++) = bit.test(b,0).ToChar();
-                seek(dst,j++) = bit.test(b,1).ToChar();
-                seek(dst,j++) = bit.test(b,2).ToChar();
-                seek(dst,j++) = bit.test(b,3).ToChar();
-                seek(dst,j++) = Chars.Space;
-
-                seek(dst,j++) = bit.test(b,4).ToChar();
-                seek(dst,j++) = bit.test(b,5).ToChar();
-                seek(dst,j++) = bit.test(b,6).ToChar();
-                seek(dst,j++) = bit.test(b,7).ToChar();
-                seek(dst,j++) = Chars.Space;
-            }
-
+            for(var i=0; i<size; i++)
+                j+= render(skip(input, i), j, dst);
             return j - 1;
         }
 
         [Op]
-        public static uint render(uint src, Span<char> dst)
+        public static uint Render(ReadOnlySpan<byte> src, Span<char> dst)
         {
-            var input = bytes(src);
-            var size = 4;
+            var size = src.Length;
             var j = 0u;
-            for(var i=size; i>=0; i--)
-            {
-                ref readonly var b = ref skip(input,i);
-
-                seek(dst,j++) = bit.test(b,0).ToChar();
-                seek(dst,j++) = bit.test(b,1).ToChar();
-                seek(dst,j++) = bit.test(b,2).ToChar();
-                seek(dst,j++) = bit.test(b,3).ToChar();
-                seek(dst,j++) = Chars.Space;
-
-                seek(dst,j++) = bit.test(b,4).ToChar();
-                seek(dst,j++) = bit.test(b,5).ToChar();
-                seek(dst,j++) = bit.test(b,6).ToChar();
-                seek(dst,j++) = bit.test(b,7).ToChar();
-                seek(dst,j++) = Chars.Space;
-            }
-
+            for(var i=0; i<size; i++)
+                j+= render(skip(src, i), j, dst);
             return j - 1;
         }
 
-        public static AsmBitstrings service()
-            => new AsmBitstrings(_Formatter);
-
-        readonly BitFormatter<byte> Formatter;
-
         [MethodImpl(Inline)]
-        AsmBitstrings(BitFormatter<byte> formatter)
+        static uint render(byte cell, uint j, Span<char> dst)
         {
-            Formatter = formatter;
+            seek(dst,j++) = bit.bitchar(cell,7);
+            seek(dst,j++) = bit.bitchar(cell,6);
+            seek(dst,j++) = bit.bitchar(cell,5);
+            seek(dst,j++) = bit.bitchar(cell,4);
+            seek(dst,j++) = Chars.Space;
+            seek(dst,j++) = bit.bitchar(cell,3);
+            seek(dst,j++) = bit.bitchar(cell,2);
+            seek(dst,j++) = bit.bitchar(cell,1);
+            seek(dst,j++) = bit.bitchar(cell,0);
+            seek(dst,j++) = Chars.Space;
+            return 10;
         }
+
+        // public static AsmBitstrings service()
+        //     => new AsmBitstrings(BitFormatter.create<byte>(BitFormatter.blocked(4)));
+
+        public static AsmBitstrings service()
+            => new AsmBitstrings();
+
+        // readonly BitFormatter<byte> Formatter;
+
+        // [MethodImpl(Inline)]
+        // AsmBitstrings(BitFormatter<byte> formatter)
+        // {
+        //     Formatter = formatter;
+        // }
 
         public string Format(AsmHexCode src)
         {
-            var bytes = src.Bytes.Replicate();
-            bytes.Reverse();
-            return Formatter.Format(bytes);
+            CharBlocks.alloc(n128, out var block);
+            var count = render(src, block.Data);
+            var chars = slice(block.Data,0,count);
+            return text.format(chars);
+            // var bytes = src.Bytes.Replicate();
+            // bytes.Reverse();
+            // return Formatter.Format(bytes);
         }
-
-        static AsmBitstrings()
-        {
-            _Formatter = BitFormatter.create<byte>(BitFormatter.blocked(4));
-        }
-
-        [FixedAddressValueType]
-        static BitFormatter<byte> _Formatter;
     }
 }

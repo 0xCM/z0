@@ -5,13 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
-    using api = PageBlocks;
+    using api = Cells;
 
     public readonly struct CellBuffer<T>
         where T : unmanaged, IDataCell

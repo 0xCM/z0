@@ -7,22 +7,22 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICalcResult
+    public interface IApiCall
     {
         ApiKey Api {get;}
     }
 
     [Free]
-    public interface ICalcResult<H> : ICalcResult, IRecord<H>
-        where H : unmanaged, ICalcResult<H>
+    public interface IApiCall<H> : IApiCall, IRecord<H>
+        where H : unmanaged, IApiCall<H>
     {
     }
 
     [Free]
-    public interface ICalcResult<H,R> : ICalcResult<H>
-        where H : unmanaged, ICalcResult<H,R>
+    public interface IApiCall<H,R> : IApiCall<H>
+        where H : unmanaged, IApiCall<H,R>
         where R : unmanaged
     {
-        R Value {get;}
+        R Result {get;}
     }
 }

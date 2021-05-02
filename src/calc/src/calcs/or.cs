@@ -15,7 +15,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Or), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Or), Closures(Closure)]
         public static Or<T> or<T>()
             where T : unmanaged
                 => default(Or<T>);
@@ -30,17 +30,17 @@ namespace Z0
             where T : unmanaged
                 => default(VOr256<T>);
 
-        [MethodImpl(Inline), Factory(Or), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Or), Closures(Closure)]
         public static Or128<T> or<T>(W128 w)
             where T : unmanaged
                 => default(Or128<T>);
 
-        [MethodImpl(Inline), Factory(Or), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Or), Closures(Closure)]
         public static Or256<T> or<T>(W256 w)
             where T : unmanaged
                 => default(Or256<T>);
 
-        [MethodImpl(Inline), Or, Closures(Integers)]
+        [MethodImpl(Inline), Or, Closures(Closure)]
         public static T or<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -50,7 +50,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline), Or, Closures(Integers)]
+        [MethodImpl(Inline), Or, Closures(Closure)]
         public static Span<T> or<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
                 => apply(or<T>(), a, b, dst);

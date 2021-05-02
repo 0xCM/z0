@@ -52,7 +52,6 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static ushort u16(ReadOnlySpan<byte> src)
-            => has(src,default(N2)) ? first(recover<ushort>(slice(src,0,2))) : u8(src);
-
+            => has(src, default(N2)) ? first(recover<ushort>(slice(src,0,2))) : u8(src);
     }
 }

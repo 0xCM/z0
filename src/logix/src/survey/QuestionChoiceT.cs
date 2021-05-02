@@ -9,11 +9,13 @@ namespace Z0
 
     using static Root;
 
+    using api = Surveys;
+
     /// <summary>
     /// Defines a choice in the context of a survey question
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public readonly struct QuestionChoice<T> : ITextual<QuestionChoice<T>>
+    public readonly struct QuestionChoice<T> : ITextual
         where T : unmanaged
     {
         /// <summary>
@@ -33,11 +35,11 @@ namespace Z0
         {
             ChoiceId = id;
             Label = label;
-            Title = title ?? SurveyFormatter.title(id, label);
+            Title = title ?? api.title(id, label);
         }
 
         public string Format()
-            => SurveyFormatter.format(this);
+            => api.format(this);
 
 
         public override string ToString()

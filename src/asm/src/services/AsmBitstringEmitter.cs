@@ -15,7 +15,7 @@ namespace Z0.Asm
         {
             var bitstrings = AsmBitstrings.service();
             var count = src.Length;
-            var dst = Db.IndexRoot() + FS.file("asm.bitstrings", FS.Asm);
+            var dst = Db.IndexRoot() + IndexFileName;
             var emitting = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
@@ -23,7 +23,7 @@ namespace Z0.Asm
                 ref readonly var tp = ref skip(src,i);
                 var line1 = AsmRender.format(tp);
                 var bits = bitstrings.Format(tp.Encoded);
-                var line2 = string.Format("{0,-46} ; {1}", Chars.Space, bits);
+                var line2 = string.Format(BitLinePattern, Chars.Space, bits);
                 writer.WriteLine(line1);
                 writer.WriteLine(line2);
             }
@@ -32,7 +32,7 @@ namespace Z0.Asm
 
         public Index<AsmEncodingInfo> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src)
         {
-            var collecting = Wf.Running(string.Format("Collecting distinct bitstrings from {0} statements", src.Length));
+            var collecting = Wf.Running(Msg.CollectingBitstrings.Format(src.Length));
             var bitstrings = AsmBitstrings.service();
             var collected = root.hashset<AsmEncodingInfo>();
             var count = src.Length;
@@ -45,19 +45,19 @@ namespace Z0.Asm
                     counter++;
             }
 
-            Wf.Ran(collecting, string.Format("Collected {0} distinct bitstrings", counter));
+            Wf.Ran(collecting, Msg.CollectedBitstrings.Format(counter));
 
             var sorted = collected.Array();
             Array.Sort(sorted);
-            var dst = Db.IndexRoot() + FS.file("asm.bitstrings", FS.Asm);
+            var dst = Db.IndexRoot() + IndexFileName;
             var emitting = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             var input = @readonly(sorted);
             for(var i=0; i<counter; i++)
             {
                 ref readonly var bitstring = ref skip(input,i);
-                var line1 = string.Format("{0,-46} ; ({1})<{2}>[3] => {4}", bitstring.Statement, bitstring.Sig, bitstring.OpCode, bitstring.Encoded.Size, bitstring.Encoded);
-                var line2 = string.Format("{0,-46} ; {1}", Chars.Space, bitstring.Format());
+                var line1 = string.Format(AsmLinePattern, bitstring.Statement, bitstring.Sig, bitstring.OpCode, bitstring.Encoded.Size, bitstring.Encoded);
+                var line2 = string.Format(BitLinePattern, Chars.Space, bitstring.Format());
                 writer.WriteLine(line1);
                 writer.WriteLine(line2);
             }
@@ -66,5 +66,12 @@ namespace Z0.Asm
 
             return sorted;
         }
+
+        FS.FileName IndexFileName
+            => FS.file("asm.bitstrings", FS.Asm);
+
+        const string BitLinePattern = "{0,-46} ; {1}";
+
+        const string AsmLinePattern = "{0,-46} ; ({1})<{2}>[3] => {4}";
     }
 }

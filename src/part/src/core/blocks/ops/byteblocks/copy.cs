@@ -15,34 +15,28 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ByteBlock2 copy(ReadOnlySpan<byte> src, ref ByteBlock2 dst)
         {
-            u8(dst,0) = skip(src,0);
-            u8(dst,1) = skip(src,1);
+            u16(dst,0) = memory.first(uint16(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref ByteBlock3 copy(ReadOnlySpan<byte> src, ref ByteBlock3 dst)
         {
-            u8(dst,0) = skip(src,0);
-            u8(dst,1) = skip(src,1);
-            u8(dst,2) = skip(src,2);
+            dst = memory.first(recover<byte,ByteBlock3>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref ByteBlock4 copy(ReadOnlySpan<byte> src, ref ByteBlock4 dst)
         {
-            u8(dst,0) = skip(src,0);
-            u8(dst,1) = skip(src,1);
-            u8(dst,2) = skip(src,2);
-            u8(dst,3) = skip(src,3);
+            u32(dst,0) = memory.first(uint32(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref ByteBlock8 copy(ReadOnlySpan<byte> src, ref ByteBlock8 dst)
         {
-            dst = memory.first(recover<byte,ByteBlock8>(src));
+            u64(dst,0) = memory.first(uint64(src));
             return ref dst;
         }
 
@@ -77,9 +71,5 @@ namespace Z0
             copy(slice(src,64), ref dst.B);
             return ref dst;
         }
-
-        [MethodImpl(Inline), Op]
-        public static void copy(in ByteBlock64 src, ref ByteBlock128 dst, byte offset)
-            => seek(@as<ByteBlock128,ByteBlock64>(dst), offset) = src;
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     partial class ApiQuery
     {
         [Op]
-        public static IApiRuntimeCatalog catalog(params IPart[] parts)
+        public static IApiCatalog catalog(params IPart[] parts)
         {
             var catalogs = parts.Select(x => partcat(x) as IApiPartCatalog).Where(c => c.IsIdentified);
             var dst = new ApiRuntimeCatalog(parts,

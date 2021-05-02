@@ -17,48 +17,48 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        Index<IApiKind> Kinds;
+        Index<IApiClass> _Classes;
 
-        Index<ApiClassifier> _ApiClasses;
+        Index<ApiClassifier> _Classifiers;
 
-        Index<SymLiteral> _ApiClassLiterals;
+        Index<SymLiteral> _ClassLiterals;
 
         object locker;
 
         public ApiQuery()
         {
-            Kinds = Index<IApiKind>.Empty;
+            _Classes = Index<IApiClass>.Empty;
             locker = new object();
         }
 
-        public ReadOnlySpan<IApiKind> ApiKinds()
+        public ReadOnlySpan<IApiClass> ApiKinds()
         {
             lock(locker)
             {
-                if(Kinds.IsEmpty)
-                    Kinds = kinds();
+                if(_Classes.IsEmpty)
+                    _Classes = kinds();
             }
-            return Kinds.View;
+            return _Classes.View;
         }
 
         public ReadOnlySpan<SymLiteral> ApiClassLiterals()
         {
             lock(locker)
             {
-                if(_ApiClassLiterals.IsEmpty)
-                    _ApiClassLiterals = ClassLiterals();
+                if(_ClassLiterals.IsEmpty)
+                    _ClassLiterals = ClassLiterals();
             }
-            return _ApiClassLiterals.View;
+            return _ClassLiterals.View;
         }
 
         public ReadOnlySpan<ApiClassifier> ApiClassifiers()
         {
             lock(locker)
             {
-                if(_ApiClasses.IsEmpty)
-                    _ApiClasses = Classifiers();
+                if(_Classifiers.IsEmpty)
+                    _Classifiers = Classifiers();
             }
-            return _ApiClasses.View;
+            return _Classifiers.View;
         }
 
         [Op]

@@ -9,7 +9,7 @@ namespace Z0
         const NumericKind Closure = NumericKind.UnsignedInts;
 
         public static string format<K>(K kind)
-            where K : IApiKind
+            where K : IApiClass
                 => typeof(K).Name;
 
         public static ApiClass<K> describe<K>(K kind)
@@ -92,5 +92,20 @@ namespace Z0
         public static Mod mod()
             => default;
 
+        [KindFactory]
+        public static Sll sll()
+            => default;
+
+        [KindFactory]
+        public static Srl srl()
+            => default;
+
+        [KindFactory]
+        public static Rotl rotl()
+            => default;
+
+        [KindFactory]
+        public static Rotr rotr()
+            => default;
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
         public static ByteBlock32 init(Vector256<ushort> lo, Vector256<ushort> hi)
         {
             var src = new Seg512(lo,hi);
-            var dst = block(n32);
+            var dst = alloc(n32);
             copy(bytes(src), ref dst);
             return dst;
         }
@@ -40,7 +40,7 @@ namespace Z0
         public static ByteBlock4 init<T>(in T src, W32 w)
             where T : unmanaged
         {
-            ref var dst8 = ref block(out ByteBlock4 dst);
+            ref var dst8 = ref alloc(out ByteBlock4 dst);
             if(typeof(T) == typeof(byte))
             {
                 ref var x = ref dst8;
@@ -82,7 +82,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vbroadcast(w128, uint8(src));
-            vstore(x, ref block(out ByteBlock16 dst));
+            vstore(x, ref alloc(out ByteBlock16 dst));
             return @as<ByteBlock16,ByteBlock8>(dst);
         }
 
@@ -91,7 +91,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vbroadcast(w, uint8(src));
-            vstore(x, ref block(out ByteBlock16 dst));
+            vstore(x, ref alloc(out ByteBlock16 dst));
             return dst;
         }
 
@@ -100,7 +100,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vbroadcast(w, uint8(src));
-            vstore(x, ref block(out ByteBlock32 dst));
+            vstore(x, ref alloc(out ByteBlock32 dst));
             return dst;
         }
     }

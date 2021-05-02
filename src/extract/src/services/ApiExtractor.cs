@@ -124,14 +124,14 @@ namespace Z0
             return counter;
         }
 
-        public Index<ApiMemberExtract> ExtractCatalog(IApiRuntimeCatalog catalog)
+        public Index<ApiMemberExtract> ExtractCatalog(IApiCatalog catalog)
         {
             var dst = root.list<ApiMemberExtract>(Pow2.T15);
             ExtractCatalog(catalog, dst);
             return dst.ToArray();
         }
 
-        public uint ExtractCatalog(IApiRuntimeCatalog catalog, List<ApiMemberExtract> dst)
+        public uint ExtractCatalog(IApiCatalog catalog, List<ApiMemberExtract> dst)
         {
             var counter = 0u;
             var parts = @readonly(catalog.Parts);

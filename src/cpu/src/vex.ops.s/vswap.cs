@@ -37,12 +37,17 @@ namespace Z0
             var j0 = bit.parity((uint)j, bit.Off);
             var j1 = bit.parity((uint)j, bit.On);
 
-            perm = gcpu.vset(i0, j0, perm);
-            perm = gcpu.vset(i1, j1, perm);
-            perm = gcpu.vset(j0, i0, perm);
-            perm = gcpu.vset(j1, i1, perm);
+            perm = vset(i0, j0, perm);
+            perm = vset(i1, j1, perm);
+            perm = vset(j0, i0, perm);
+            perm = vset(j1, i1, perm);
 
             return vshuf16x8(src,perm);
         }
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vset<T>(T src, byte index, Vector128<T> dst)
+            where T : unmanaged
+                => dst.WithElement(index, src);
     }
 }

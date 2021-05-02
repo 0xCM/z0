@@ -76,7 +76,7 @@ namespace Z0
         public ApiMembers JitCatalog()
             => JitCatalog(Wf.ApiParts.RuntimeCatalog);
 
-        public ApiMembers JitCatalog(IApiRuntimeCatalog catalog)
+        public ApiMembers JitCatalog(IApiCatalog catalog)
         {
             var @base = Runtime.CurrentProcess.BaseAddress;
             var parts = catalog.Parts;

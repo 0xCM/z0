@@ -6,7 +6,6 @@ namespace Z0.Logix
 {
     using System;
 
-
     public class t_survey : UnitTest<t_survey>
     {
         void emit_asci_table()
@@ -34,34 +33,32 @@ namespace Z0.Logix
 
         public void survey_8u()
         {
-            var survey = SurveyBuilder.template<byte>(1, "Survey 8u");
-            var matrix = Survey.Matrix(survey);
+            var survey = Surveys.template<byte>(1, "Survey 8u");
+            var matrix = Surveys.matrix(survey);
 
         }
 
         public void survey_16u()
         {
-            var survey = SurveyBuilder.template<ushort>(1, "Survey 16u", 11, 5);
-            var matrix = Survey.Matrix(survey);
+            var survey = Surveys.template<ushort>(1, "Survey 16u", 11, 5);
+            var matrix = Surveys.matrix(survey);
 
             using var dst = BitMatrixServices.Factory.Writer(CasePath(FS.ext("survey.table")));
             dst.Write(matrix);
 
-            var response = Survey.Respond(survey, Random);
-
-
+            var response = Surveys.response(survey, Random);
         }
 
         public void survey_max32()
         {
-            var survey = SurveyBuilder.template<uint>(1, "Survey 32u", 20);
-            var matrix = Survey.Matrix(survey);
+            var survey = Surveys.template<uint>(1, "Survey 32u", 20);
+            var matrix = Surveys.matrix(survey);
         }
 
         public void survey_max64()
         {
-            var survey = SurveyBuilder.template<ulong>(1, "Survey 64u", 60, 10);
-            var matrix = Survey.Matrix(survey);
+            var survey = Surveys.template<ulong>(1, "Survey 64u", 60, 10);
+            var matrix = Surveys.matrix(survey);
             using var dst = BitMatrixServices.Factory.Writer(CasePath(FS.ext("table")));
             dst.Write(matrix);
         }

@@ -45,6 +45,10 @@ namespace Z0
 
         public static MsgPattern<Count,Count> DecodedMachine => "Decoded {0} routines from {1} parts";
 
+        public static MsgPattern<Count> CollectingBitstrings => "Collecting distinct bitstrings from {0} statements";
+
+        public static MsgPattern<Count> CollectedBitstrings => "Collecting {0} distinct bitstrings";
+
         public static MsgPattern<FS.FileUri> LoadingStatements
             => "Loading statements from {0}";
 

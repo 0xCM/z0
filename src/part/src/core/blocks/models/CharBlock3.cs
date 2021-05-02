@@ -20,9 +20,6 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock3 : ICharBlock<B>
     {
-        /// <summary>
-        /// The lower content
-        /// </summary>
         public CharBlock2 Lo;
 
         public CharBlock1 Hi;
@@ -44,6 +41,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Data);
         }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator B(string src)

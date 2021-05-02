@@ -4,17 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public interface IApiKind : IApiClass
+    public interface IClassified<K> : ITextual
     {
+        string Name => typeof(K).Name;
 
+        string ITextual.Format()
+            => Name;
     }
 
-    public interface IApiKind<E> : IApiKind, IApiClass<E>
-        where E : unmanaged, Enum
+    public interface IClassified<K,T> : IClassified<K>
     {
-        E IApiClass<E>.Kind
-            => Kind;
+
     }
 }

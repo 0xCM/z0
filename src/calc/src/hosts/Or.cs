@@ -10,15 +10,14 @@ namespace Z0
 
     using static Part;
     using static SFx;
+    using static ApiClasses;
 
     partial struct CalcHosts
     {
         [Closures(Integers), Or]
-        public readonly struct Or<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        public readonly struct Or<T> : IBinaryOp<T>, IBinarySpanOp<T>, IClassified<Or,T>
             where T : unmanaged
         {
-            public const BinaryBitLogicKind OpKind = BinaryBitLogicKind.Or;
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
                 => gmath.or(a,b);
@@ -29,10 +28,9 @@ namespace Z0
         }
 
         [Closures(Integers), Or]
-        public readonly struct VOr128<T> : IBinaryOp128D<T>
+        public readonly struct VOr128<T> : IBinaryOp128D<T>, IClassified<Or,T>
             where T : unmanaged
         {
-
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
                 => gcpu.vor(x,y);
@@ -43,7 +41,7 @@ namespace Z0
         }
 
         [Closures(Integers), Or]
-        public readonly struct VOr256<T> : IBinaryOp256D<T>
+        public readonly struct VOr256<T> : IBinaryOp256D<T>, IClassified<Or,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -56,7 +54,7 @@ namespace Z0
         }
 
         [Closures(Integers), Or]
-        public readonly struct Or128<T> : IBlockedBinaryOp128<T>
+        public readonly struct Or128<T> : IBlockedBinaryOp128<T>, IClassified<Or,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -65,13 +63,12 @@ namespace Z0
         }
 
         [Closures(Integers), Or]
-        public readonly struct Or256<T> : IBlockedBinaryOp256<T>
+        public readonly struct Or256<T> : IBlockedBinaryOp256<T>, IClassified<Or,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
                 => ref zip(a, b, dst, Calcs.vor<T>(w256));
         }
-
     }
 }

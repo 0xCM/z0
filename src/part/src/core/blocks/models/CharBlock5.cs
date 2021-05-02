@@ -53,6 +53,12 @@ namespace Z0
             get => CharCount;
         }
 
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock5(string src)
             => api.init(src, out CharBlock5 dst);

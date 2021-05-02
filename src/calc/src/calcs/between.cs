@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Between), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Between), Closures(Closure)]
         public static Between<T> between<T>()
             where T : unmanaged
                 => default(Between<T>);

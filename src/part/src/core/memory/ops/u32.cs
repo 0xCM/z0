@@ -52,6 +52,6 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static uint u32(ReadOnlySpan<byte> src)
-            => has(src,default(N4)) ? first(recover<uint>(slice(src,0,4))) : u16(src);
+            => has(src, default(N4)) ? first(recover<uint>(slice(src,0,4))) : u16(src);
     }
 }

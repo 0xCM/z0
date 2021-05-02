@@ -6,10 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-
-    using static Part;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct DataBlock01<T> : IDataBlock<DataBlock01<T>>

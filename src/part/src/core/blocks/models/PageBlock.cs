@@ -19,7 +19,7 @@ namespace Z0
         public MemoryRange Range {get;}
 
         [MethodImpl(Inline)]
-        internal PageBlock(MemoryRange range)
+        public PageBlock(MemoryRange range)
         {
             Range = range;
         }

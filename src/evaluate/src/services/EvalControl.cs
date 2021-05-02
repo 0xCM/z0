@@ -14,7 +14,7 @@ namespace Z0
 
         readonly IEvalDispatcher Dispatcher;
 
-        readonly IApiRuntimeCatalog ApiGlobal;
+        readonly IApiCatalog ApiGlobal;
 
         internal EvalControl(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint buffersize)
         {

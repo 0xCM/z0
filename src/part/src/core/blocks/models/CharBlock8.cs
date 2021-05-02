@@ -16,12 +16,9 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock8 : ICharBlock<CharBlock8>
     {
-        /// <summary>
-        /// The lower content
-        /// </summary>
-        public CharBlock4 Lo;
+        CharBlock4 Lo;
 
-        public CharBlock4 Hi;
+        CharBlock4 Hi;
 
         /// <summary>
         /// The block content presented as an editable buffer
@@ -41,9 +38,8 @@ namespace Z0
             get => ref first(Data);
         }
 
-        [MethodImpl(Inline)]
         public string Format()
-            => Data.ToString();
+            => api.format(this);
 
         public override string ToString()
             => Format();

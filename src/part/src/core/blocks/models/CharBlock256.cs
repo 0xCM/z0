@@ -11,21 +11,17 @@ namespace Z0
     using static Root;
     using static memory;
 
+    using api = CharBlocks;
+
     /// <summary>
     /// Defines a character block b with capacity(b) = 256x16u
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock256 : ICharBlock<CharBlock256>
     {
-        /// <summary>
-        /// The lower content
-        /// </summary>
-        public CharBlock128 Lo;
+        CharBlock128 Lo;
 
-        /// <summary>
-        /// The upper content
-        /// </summary>
-        public CharBlock128 Hi;
+        CharBlock128 Hi;
 
         public Span<char> Data
         {
@@ -41,6 +37,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Data);
         }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator CharBlock256(in Pair<CharBlock128> src)

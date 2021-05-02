@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Sllv, Closures(Integers)]
+        [MethodImpl(Inline), Sllv, Closures(Closure)]
         public static Span<T> sllv<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
             where T : unmanaged
         {

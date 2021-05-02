@@ -15,13 +15,13 @@ namespace Z0
     {
         const NumericKind Closure = Integers;
 
-        PageBlockProvider PageBlocks;
+        PageBanks PageBlocks;
 
         ByteSize BlockSize;
 
         public CalcBuilder()
         {
-            PageBlocks = PageBlockProvider.service();
+            PageBlocks = PageBanks.service();
             BlockSize = PageBlocks.BlockSize;
         }
 

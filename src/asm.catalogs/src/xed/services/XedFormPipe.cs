@@ -12,9 +12,7 @@ namespace Z0.Asm
     using static memory;
     using static XedModels;
 
-    using R = AsmCatalogRecords;
-
-    public ref struct XedFormPipe
+    public class XedFormPipe
     {
         public static XedFormPipe create(IWfRuntime wf)
             => new XedFormPipe(wf);
@@ -55,9 +53,9 @@ namespace Z0.Asm
 
         readonly Symbols<RegClass> RegClasses;
 
-        Span<FormPartiton> Partitions;
+        Index<FormPartiton> Partitions;
 
-        Span<FormAspect> Aspects;
+        Index<FormAspect> Aspects;
 
         public XedFormPipe(IWfRuntime wf)
         {
@@ -79,23 +77,23 @@ namespace Z0.Asm
             AddressWidths = Symbols.symbolic<AddressWidth>();
             OpWidths = Symbols.symbolic<OperandWidthType>();
             EncodingGroups = Symbols.symbolic<EncodingGroup>();
-            Aspects = default;
-            Partitions = default;
+            Aspects = Index<FormAspect>.Empty;
+            Partitions = Index<FormPartiton>.Empty;
         }
 
         AsmCatPaths CatPaths
             => new AsmCatPaths(Paths);
 
-        public Index<R.XedFormAspect> EmitFormAspects()
+        public Index<XedFormAspect> EmitFormAspects()
         {
             var duplicates = root.dict<Hash32,uint>();
             var pipe = Wf.XedFormPipe();
             var aspects = pipe.ComputeFormAspects();
             var count = (uint)aspects.Length;
-            var buffer = alloc<R.XedFormAspect>(count);
+            var buffer = alloc<XedFormAspect>(count);
             var path = CatPaths.XedFormAspectPath();
-            var formatter = Tables.formatter<R.XedFormAspect>();
-            var emitting = Wf.EmittingTable<R.XedFormAspect>(path);
+            var formatter = Tables.formatter<XedFormAspect>();
+            var emitting = Wf.EmittingTable<XedFormAspect>(path);
             using var writer = path.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0u; i<count; i++)
@@ -173,7 +171,7 @@ namespace Z0.Asm
 
         void Partition(ushort index, IFormType src)
         {
-            ref var dst = ref seek(Partitions, index);
+            ref var dst = ref seek(Partitions.First, index);
             dst.Index = index;
             dst.Form = src;
 

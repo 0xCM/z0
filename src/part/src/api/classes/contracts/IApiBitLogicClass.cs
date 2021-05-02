@@ -6,13 +6,18 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using K = ApiBitLogicClass;
+
     /// <summary>
     /// Characterizes a bitlogic operation classifier
     /// </summary>
     [Free]
-    public interface IApiBitLogicClass : IApiKind<ApiBitLogicClass>
+    public interface IApiBitLogicClass : IApiClass<K>
     {
-        new ApiBitLogicClass Kind {get;}
+        new K Kind {get;}
+
+        K IApiClass<K>.Kind
+            => Kind;
 
         NumericKind NumericKind
             => default;

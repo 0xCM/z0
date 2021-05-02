@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.IO;
-    using System.Collections.Generic;
 
     using Z0.Asm;
 
@@ -96,7 +95,7 @@ namespace Z0
             Wf.Ran(flow, src.Host);
         }
 
-        public Index<AsmHostRoutines> CaptureCatalog(IApiRuntimeCatalog catalog)
+        public Index<AsmHostRoutines> CaptureCatalog(IApiCatalog catalog)
         {
             var dst = root.list<AsmHostRoutines>();
             using var flow = Wf.Running();

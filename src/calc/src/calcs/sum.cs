@@ -15,7 +15,7 @@ namespace Z0
 
     partial struct Calcs
     {
-       [MethodImpl(Inline), Sum, Closures(Integers)]
+       [MethodImpl(Inline), Sum, Closures(Closure)]
         public static T sum<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {

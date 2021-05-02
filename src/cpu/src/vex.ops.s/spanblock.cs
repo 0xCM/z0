@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = w128;
-            var stack = ByteBlocks.block(n16);
+            var stack = ByteBlocks.alloc(n16);
             ref var dst = ref ByteBlocks.first<T>(ref stack);
             gcpu.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);
@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = w256;
-            var stack = ByteBlocks.block(n32);
+            var stack = ByteBlocks.alloc(n32);
             ref var dst = ref ByteBlocks.first<T>(ref stack);
             gcpu.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);
@@ -54,7 +54,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = w512;
-            var stack = ByteBlocks.block(n64);
+            var stack = ByteBlocks.alloc(n64);
             ref var dst = ref ByteBlocks.first<T>(ref stack);
             gcpu.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);

@@ -21,6 +21,6 @@ namespace Z0
 
         Index<Assembly> Components {get;}
 
-        IApiRuntimeCatalog RuntimeCatalog {get;}
+        IApiCatalog RuntimeCatalog {get;}
     }
 }

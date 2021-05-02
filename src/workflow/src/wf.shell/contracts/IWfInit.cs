@@ -35,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The configured api set
         /// </summary>
-        IApiRuntimeCatalog ApiGlobal {get;}
+        IApiCatalog ApiGlobal {get;}
 
         /// <summary>
         /// The controlling part

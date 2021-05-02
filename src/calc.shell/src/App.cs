@@ -58,7 +58,7 @@ namespace Z0
 
         void BasicPageTest()
         {
-            var provider = PageBlockProvider.service();
+            var provider = PageBanks.service();
             var block = provider.Block(n0);
             var segsize = 32;
             uint count = block.Size/segsize;
@@ -76,15 +76,15 @@ namespace Z0
 
         }
 
-        void Run128()
+        void Run128(PageBlock lhs, PageBlock rhs, PageBlock dst)
         {
-            var provider = PageBlockProvider.service();
+            var provider = PageBanks.service();
             var size = provider.BlockSize;
             var w = w128;
             var cells = size/size<Cell128>();
-            ref var left = ref provider.Block(n0).Segment<Cell128>(0);
-            ref var right = ref provider.Block(n1).Segment<Cell128>(1);
-            ref var target = ref provider.Block(n2).Segment<Cell128>(2);
+            ref var left = ref lhs.Segment<Cell128>(0);
+            ref var right = ref rhs.Segment<Cell128>(1);
+            ref var target = ref dst.Segment<Cell128>(2);
             var f = Calcs.vor<uint>(w);
             for(var i=0u; i<cells; i++)
             {
@@ -98,30 +98,26 @@ namespace Z0
 
         void Test2()
         {
-            var provider = PageBlockProvider.service();
-            var size = provider.BlockSize;
+            var bank = PageBanks.service();
+            var size = bank.BlockSize;
             var w = w128;
             var cells = size/size<Cell128>();
-            ref var left = ref provider.Block(n0).Segment<Cell128>(0);
-            ref var right = ref provider.Block(n1).Segment<Cell128>(1);
-            ref var target = ref provider.Block(n2).Segment<Cell128>(2);
-            var f = Calcs.vor<uint>(w);
-            for(var i=0u; i<cells; i++)
-            {
-                ref var a = ref seek(left,i);
-                a = cpu.vbroadcast(w,i);
-                ref var b = ref seek(right,i);
-                b = cpu.vbroadcast(w,i + Pow2.T12);
-                seek(target,i) = f.Invoke(a,b);
 
-            }
+            var left = bank.Block(n0);
+            var right = bank.Block(n1);
+            var dst = bank.Block(n2);
+            Run128(left, right, dst);
+
+            ref var lCell = ref left.Segment<Cell128>(0);
+            ref var rCell = ref right.Segment<Cell128>(0);
+            ref var target = ref dst.Segment<Cell128>(0);
 
             for(var i=0u; i<cells; i++)
             {
-                ref readonly var a = ref skip(left,i);
-                ref readonly var b = ref skip(right,i);
+                ref readonly var a = ref skip(lCell,i);
+                ref readonly var b = ref skip(rCell,i);
                 ref readonly var result = ref skip(target,i);
-                Wf.Row(string.Format("{0}([{1}],{2}) = {3}", "f", a.V32u.FormatHex(), b.V32u.FormatHex(), result.V32u.FormatHex()));
+                Wf.Row(string.Format("{0:D6} {1}([{2}],[{3}]) = {4}", i, "f", a.V32u.FormatHex(), b.V32u.FormatHex(), result.V32u.FormatHex()));
             }
 
         }

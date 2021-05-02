@@ -14,12 +14,12 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Neq<T> neq<T>()
             where T : unmanaged
                 => default(Neq<T>);
 
-        [MethodImpl(Inline), SpanOp, Closures(Integers)]
+        [MethodImpl(Inline), SpanOp, Closures(Closure)]
         public static Span<bit> neq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
                 => apply(Calcs.neq<T>(), a, b, dst);

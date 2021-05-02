@@ -9,6 +9,8 @@ namespace Z0
 
     using static Root;
 
+    using api = Surveys;
+
     /// <summary>
     /// Defines a question in the context of a survey
     /// </summary>
@@ -52,7 +54,7 @@ namespace Z0
             => $"{QuestionId} - {Label}";
 
         public string Format()
-            => SurveyFormatter.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Title;

@@ -17,26 +17,25 @@ namespace Z0
             => CalcChecker.create(wf);
 
         public static string apply<K,T>(K k, T x, T y)
-            where K : IApiKind
+            where K : IApiClass
                 => $"{k.Format()}({x},{y})";
 
         public static string success<K,T>(K k, T x, T y, T result)
-            where K : IApiKind
+            where K : IApiClass
                 => $"{k.Format()}({x},{y}) := {result}";
 
         public static string failure<K,T>(K k, T x, T y, T expect, T actual)
-            where K : IApiKind
+            where K : IApiClass
                 => $"{apply(k,x,y)} := {actual} != {expect}";
 
         public static string describe<K,T>(K k, T x, T y, T result)
-            where K : IApiKind
+            where K : IApiClass
             where T : IEquatable<T>
                 => $"{apply(k,x,y)} = {result}";
 
         public static string describe<K,T>(K k, T x, T y, T expect, T actual)
-            where K : IApiKind
+            where K : IApiClass
             where T : IEquatable<T>
                 => expect.Equals(actual) ? success(k, x, y, actual) : failure(k, x, y, expect, actual);
     }
-
 }

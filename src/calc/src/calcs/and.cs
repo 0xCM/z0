@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(And), Closures(Integers)]
+        [MethodImpl(Inline), Factory(And), Closures(Closure)]
         public static And<T> and<T>()
             where T : unmanaged
                 => default(And<T>);
@@ -29,17 +29,17 @@ namespace Z0
             where T : unmanaged
                 => default(VAnd256<T>);
 
-        [MethodImpl(Inline), Factory(And), Closures(Integers)]
+        [MethodImpl(Inline), Factory(And), Closures(Closure)]
         public static And128<T> and<T>(W128 w)
             where T : unmanaged
                 => default(And128<T>);
 
-        [MethodImpl(Inline), Factory(And), Closures(Integers)]
+        [MethodImpl(Inline), Factory(And), Closures(Closure)]
         public static And256<T> and<T>(W256 w)
             where T : unmanaged
                 => default(And256<T>);
 
-        [MethodImpl(Inline), And, Closures(Integers)]
+        [MethodImpl(Inline), And, Closures(Closure)]
         public static Span<T> and<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
                 => apply(and<T>(), a,b,dst);

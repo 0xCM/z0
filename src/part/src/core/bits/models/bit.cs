@@ -92,11 +92,6 @@ namespace Z0
         public bit(ulong state)
             => State = state != 0;
 
-
-        // [MethodImpl(Inline), Op]
-        // public char ToChar()
-        //     => (char)(u8(State) + 48);
-
         [MethodImpl(Inline)]
         public char ToChar()
             => State ? '1' : '0';

@@ -17,10 +17,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan32 from(byte src)
         {
-            var buffer = ByteBlocks.block(n8);
+            var buffer = ByteBlocks.alloc(n8);
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
 
-            var storage = ByteBlocks.block(n32);
+            var storage = ByteBlocks.alloc(n32);
             ref var target = ref ByteBlocks.first<uint>(ref storage);
 
             BitPack.unpack1x8(src, ref tmp);
@@ -31,10 +31,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan32 from(ushort src)
         {
-            var buffer = ByteBlocks.block(n16);
+            var buffer = ByteBlocks.alloc(n16);
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
 
-            var storage = ByteBlocks.block(n64);
+            var storage = ByteBlocks.alloc(n64);
             ref var target = ref ByteBlocks.first<uint>(ref storage);
 
             BitPack.unpack1x16(src, ref tmp);
@@ -46,10 +46,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan32 from(uint src)
         {
-            var buffer = ByteBlocks.block(n32);
+            var buffer = ByteBlocks.alloc(n32);
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
 
-            var storage = ByteBlocks.block(n128);
+            var storage = ByteBlocks.alloc(n128);
             ref var target = ref ByteBlocks.first<uint>(ref storage);
 
             BitPack.unpack1x8x32(src, ref tmp);
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan32 from(ulong src)
         {
-            var buffer = ByteBlocks.block(n64);
+            var buffer = ByteBlocks.alloc(n64);
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
 
             Span<uint> storage = new uint[64];
@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 fill(byte src, in BitSpan32 dst)
         {
-            var buffer = ByteBlocks.block(n8);
+            var buffer = ByteBlocks.alloc(n8);
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
@@ -96,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 fill(ushort src, in BitSpan32 dst)
         {
-            var buffer = ByteBlocks.block(n16);
+            var buffer = ByteBlocks.alloc(n16);
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
@@ -123,7 +123,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 fill(ulong src, in BitSpan32 dst)
         {
-            var buffer = ByteBlocks.block(n64);
+            var buffer = ByteBlocks.alloc(n64);
             ref var tmp = ref first(dst.Edit.Slice(56,8).Recover<Bit32,byte>());
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 

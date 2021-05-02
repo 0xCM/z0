@@ -15,14 +15,14 @@ namespace Z0
     partial class ApiQuery
     {
         [Op]
-        public static Index<IApiKind> kinds()
+        public static Index<IApiClass> kinds()
         {
-            var types = @readonly(typeof(ApiClasses).GetNestedTypes().NonGeneric().Realize<IApiKind>());
+            var types = @readonly(typeof(ApiClasses).GetNestedTypes().NonGeneric().Realize<IApiClass>());
             var count = types.Length;
-            var classes = alloc<IApiKind>(count);
+            var classes = alloc<IApiClass>(count);
             ref var dst = ref first(classes);
             for(var i=0; i<count; i++)
-                seek(dst,i) = (IApiKind)Activator.CreateInstance(skip(types,i));
+                seek(dst,i) = (IApiClass)Activator.CreateInstance(skip(types,i));
             return classes;
         }
 

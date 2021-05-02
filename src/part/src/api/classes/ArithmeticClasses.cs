@@ -34,19 +34,5 @@ namespace Z0
         public readonly struct Square : I {  K I.Kind => K.Square; }
 
         public readonly struct Sqrt : I { K I.Kind => K.Sqrt; }
-
-        //~ Parametric
-        //~ -------------------------------------------------------------------
-
-        public readonly struct Add<T> : IApiArithmeticClass<Add,T> {}
-
-        public readonly struct Sub<T> : IApiArithmeticClass<Sub,T> {}
-
-        public readonly struct Mul<T> : IApiArithmeticClass<Mul,T> {}
-
-        public readonly struct Div<T> : IApiArithmeticClass<Div,T> {}
-
-        public readonly struct Mod<T> : IApiArithmeticClass<Mod,T> {}
-
     }
 }

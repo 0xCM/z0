@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static byte u8(ReadOnlySpan<byte> src)
-            => has(src,default(N1)) ? skip(src,0) : z8;
+        public static ref readonly byte u8(ReadOnlySpan<byte> src)
+            => ref first(src);
     }
 }

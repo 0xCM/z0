@@ -9,11 +9,11 @@ namespace Z0
     /// <summary>
     /// Characterizes a bitfunction classifier
     /// </summary>
-    public interface IApiBitFunctionClass : IApiKind<K>
+    public interface IApiBitFunctionClass : IApiClass<K>
     {
         new ApiBitFunctionClass Kind {get;}
 
-        ApiBitFunctionClass IApiClass<ApiBitFunctionClass>.Kind
+        K IApiClass<K>.Kind
             => Kind;
     }
 }

@@ -20,7 +20,7 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Div, Closures(Integers)]
+        [MethodImpl(Inline), Div, Closures(Closure)]
         public static Span<T> div<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => apply(Calcs.div<T>(), l, r, dst);

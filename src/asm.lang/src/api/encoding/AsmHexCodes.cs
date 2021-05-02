@@ -167,7 +167,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         static Span<byte> buffer()
-            => block(n16).Bytes;
+            => alloc(n16).Bytes;
 
         [MethodImpl(Inline), Op]
         static AsmHexCode load(SpanWriter writer)

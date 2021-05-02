@@ -16,15 +16,9 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock12 : ICharBlock<CharBlock12>
     {
-        /// <summary>
-        /// The lower content
-        /// </summary>
-        public CharBlock8 Lo;
+        CharBlock8 Lo;
 
-        /// <summary>
-        /// The upper content
-        /// </summary>
-        public CharBlock4 Hi;
+        CharBlock4 Hi;
 
         /// <summary>
         /// The block content presented as an editable buffer
@@ -44,9 +38,18 @@ namespace Z0
             get => ref first(Data);
         }
 
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock12(string src)
             => api.init(src, out CharBlock12 dst);
+
+
+        public static CharBlock12 Empty => RP.Spaced12;
 
         public const ushort CharCount = 12;
 

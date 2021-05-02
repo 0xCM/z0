@@ -21,7 +21,7 @@ namespace Z0
         public Index<Assembly> Components
             => RuntimeCatalog.Components;
 
-        public IApiRuntimeCatalog RuntimeCatalog {get;}
+        public IApiCatalog RuntimeCatalog {get;}
 
         public ApiParts(PartId[] parts)
         {

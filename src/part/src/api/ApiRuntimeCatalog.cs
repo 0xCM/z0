@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class ApiRuntimeCatalog : IApiRuntimeCatalog
+    public class ApiRuntimeCatalog : IApiCatalog
     {
         /// <summary>
         /// The parts included in the datset
@@ -74,16 +74,16 @@ namespace Z0
             get => _Operations;
         }
 
-        IPart[] IApiRuntimeCatalog.Parts
+        IPart[] IApiCatalog.Parts
             => _Parts;
 
-        PartId[] IApiRuntimeCatalog.PartIdentities
+        PartId[] IApiCatalog.PartIdentities
             => _PartIdentities;
 
-        ApiPartCatalogs IApiRuntimeCatalog.Catalogs
+        ApiPartCatalogs IApiCatalog.Catalogs
             => _Catalogs;
 
-        IApiHost[] IApiRuntimeCatalog.ApiHosts
+        IApiHost[] IApiCatalog.ApiHosts
             => _ApiHosts;
 
 

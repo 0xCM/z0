@@ -16,7 +16,7 @@ namespace Z0
              where T : unmanaged => default;
 
         public static string Format<K>(this K src)
-            where K : IApiKind
+            where K : IApiClass
                 => ApiClasses.format(src);
     }
 }

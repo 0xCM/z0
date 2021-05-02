@@ -20,7 +20,7 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Clamp, Closures(Integers)]
+        [MethodImpl(Inline), Clamp, Closures(Closure)]
         public static Span<T> clamp<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => apply(clamp<T>(), l, r, dst);

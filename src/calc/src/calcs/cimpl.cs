@@ -15,7 +15,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(CImpl), Closures(Integers)]
+        [MethodImpl(Inline), Factory(CImpl), Closures(Closure)]
         public static CImpl<T> cimpl<T>()
             where T : unmanaged
                 => default(CImpl<T>);
@@ -30,17 +30,17 @@ namespace Z0
             where T : unmanaged
                 => default(VCImpl256<T>);
 
-        [MethodImpl(Inline), Factory(CImpl), Closures(Integers)]
+        [MethodImpl(Inline), Factory(CImpl), Closures(Closure)]
         public static CImpl128<T> cimpl<T>(W128 w)
             where T : unmanaged
                 => default(CImpl128<T>);
 
-        [MethodImpl(Inline), Factory(CImpl), Closures(Integers)]
+        [MethodImpl(Inline), Factory(CImpl), Closures(Closure)]
         public static CImpl256<T> cimpl<T>(W256 w)
             where T : unmanaged
                 => default(CImpl256<T>);
 
-        [MethodImpl(Inline), CImpl, Closures(Integers)]
+        [MethodImpl(Inline), CImpl, Closures(Closure)]
         public static Span<T> cimpl<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
                 => apply(cimpl<T>(), a, b, dst);

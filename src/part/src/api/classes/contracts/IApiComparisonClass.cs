@@ -1,0 +1,19 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using K = ApiComparisonClass;
+
+    /// <summary>
+    /// Characterizes a bitshift operation classifier
+    /// </summary>
+    public interface IApiComparisonClass : IApiClass<K>
+    {
+        new K Kind {get;}
+
+        K IApiClass<K>.Kind
+            => Kind;
+    }
+}

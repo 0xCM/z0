@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using api = Surveys;
+
     /// <summary>
     /// Defines a response to a survey question
     /// </summary>

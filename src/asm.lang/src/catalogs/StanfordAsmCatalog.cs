@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static AsmCatalogRecords;
 
     public sealed class StanfordAsmCatalog : AppService<StanfordAsmCatalog>
     {
@@ -67,7 +66,7 @@ namespace Z0.Asm
         void Fill(in StokeAsmImportRow src, ref StokeAsmExportRow dst)
         {
             dst.Sequence = src.Sequence;
-            dst.OpCode = AsmCore.opcode(src.OpCode);
+            dst.OpCode = src.OpCode;
             dst.Instruction = src.Instruction;
             dst.Mode64 = mode64(src.Mode64);
             dst.LegacyMode = src.LegacyMode;

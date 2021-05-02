@@ -7,30 +7,35 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
+
+    using api = Surveys;
+
     /// <summary>
-    /// Defines a response to a survey
+    /// Defines a survey predicated on primal type evaluation
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public readonly ref struct SurveyResponse<T>
+    public readonly struct Survey<T>
         where T : unmanaged
     {
-        /// <summary>
-        /// The survey identifier
-        /// </summary>
         public uint SurveyId {get;}
 
-        /// <summary>
-        /// The answered survey questions
-        /// </summary>
-        public Index<QuestionResponse<T>> Answered {get;}
+        public string Name {get;}
 
-        public SurveyResponse(uint id, params QuestionResponse<T>[] answered)
+        public Index<Question<T>> Questions {get;}
+
+        [MethodImpl(Inline)]
+        public Survey(uint id, string name, params Question<T>[] questions)
         {
             SurveyId = id;
-            Answered = answered;
+            Name = name;
+            Questions = questions;
         }
 
+        public string Format()
+            => api.format(this);
+
         public override string ToString()
-            => SurveyFormatter.format(this);
+            => Format();
     }
 }

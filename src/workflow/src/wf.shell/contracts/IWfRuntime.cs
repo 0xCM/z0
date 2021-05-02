@@ -26,7 +26,7 @@ namespace Z0
 
         WfController Controller {get;}
 
-        IApiRuntimeCatalog ApiCatalog {get;}
+        IApiCatalog ApiCatalog {get;}
 
         IWfContext Context {get;}
 

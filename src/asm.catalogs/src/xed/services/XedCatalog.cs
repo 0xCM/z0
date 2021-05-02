@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static XedModels;
-    using static AsmCatalogRecords;
 
     public sealed class XedCatalog : AppService<XedCatalog>
     {

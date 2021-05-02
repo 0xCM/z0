@@ -15,7 +15,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Select), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Select), Closures(Closure)]
         public static Select<T> select<T>()
             where T : unmanaged
                 => default(Select<T>);
@@ -30,17 +30,17 @@ namespace Z0
             where T : unmanaged
                 => default(VSelect256<T>);
 
-        [MethodImpl(Inline), Factory(Select), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Select), Closures(Closure)]
         public static Select128<T> select<T>(W128 w)
             where T : unmanaged
                 => default(Select128<T>);
 
-        [MethodImpl(Inline), Factory(Select), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Select), Closures(Closure)]
         public static Select256<T> select<T>(W256 w)
             where T : unmanaged
                 => default(Select256<T>);
 
-        [MethodImpl(Inline), Select, Closures(Integers)]
+        [MethodImpl(Inline), Select, Closures(Closure)]
         public static Span<T> select<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
             where T : unmanaged
                 => apply(select<T>(), a, b, c, dst);

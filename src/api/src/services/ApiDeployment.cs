@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Reflection;
 
     using static memory;
@@ -69,15 +68,15 @@ namespace Z0
         }
 
         [Op]
-        public static IApiRuntimeCatalog catalog(PartContext context)
+        public static IApiCatalog catalog(PartContext context)
             => ApiQuery.catalog(parts(context));
 
         [Op]
-        public static IApiRuntimeCatalog catalog(Index<IPart> parts)
+        public static IApiCatalog catalog(Index<IPart> parts)
             => ApiQuery.catalog(parts);
 
         [Op]
-        public static IApiRuntimeCatalog rooted(FS.FolderPath location)
+        public static IApiCatalog rooted(FS.FolderPath location)
         {
             var candidates = assemblies(location,true).Where(x => x.Id() != 0).View;
             var count = candidates.Length;
@@ -92,11 +91,11 @@ namespace Z0
         }
 
         [Op]
-        public static IApiRuntimeCatalog catalog(FS.FolderPath location, params PartId[] identities)
+        public static IApiCatalog catalog(FS.FolderPath location, params PartId[] identities)
             => ApiQuery.catalog(parts(location, identities));
 
         [Op]
-        public static IApiRuntimeCatalog catalog(FS.Files paths)
+        public static IApiCatalog catalog(FS.Files paths)
             => ApiQuery.catalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         public static Index<Assembly> assemblies(FS.FolderPath dir, PartId[] parts)

@@ -19,12 +19,9 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock64 : ICharBlock<CharBlock64>
     {
-        /// <summary>
-        /// The lower content
-        /// </summary>
-        public CharBlock32 Lo;
+        CharBlock32 Lo;
 
-        public CharBlock32 Hi;
+        CharBlock32 Hi;
 
         public Span<char> Data
         {
@@ -40,6 +37,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Data);
         }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator CharBlock64(string src)

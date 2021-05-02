@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         public IApiParts ApiParts {get;}
 
-        public IApiRuntimeCatalog ApiGlobal {get;}
+        public IApiCatalog ApiGlobal {get;}
 
         [MethodImpl(Inline)]
         public WfInit(IWfContext ctx, WfLogConfig logConfig, PartId[] parts)

@@ -146,6 +146,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<ulong> SetWidth(Vector128<ulong> src, uint width)
-            => v64u(gcpu.vset(v32u(src), 3, width));
+            => v64u(cpu.vcell(v32u(src), 3, width));
     }
 }

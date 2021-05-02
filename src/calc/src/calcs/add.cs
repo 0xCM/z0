@@ -20,12 +20,12 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline), Factory(Add), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Add), Closures(Closure)]
         public static Add128<T> add<T>(W128 w)
             where T : unmanaged
                 => default(Add128<T>);
 
-        [MethodImpl(Inline), Factory(Add), Closures(Integers)]
+        [MethodImpl(Inline), Factory(Add), Closures(Closure)]
         public static Add256<T> add<T>(W256 w)
             where T : unmanaged
                 => default(Add256<T>);
@@ -40,7 +40,7 @@ namespace Z0
             where T : unmanaged
                 => default(VAdd256<T>);
 
-        [MethodImpl(Inline), Add, Closures(Integers)]
+        [MethodImpl(Inline), Add, Closures(Closure)]
         public static Span<T> add<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
                 => apply(add<T>(), a, b, dst);

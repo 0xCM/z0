@@ -49,7 +49,7 @@ namespace Z0
         {
             var mask = Mask(index);
             var conformed = gmath.and(src,mask);
-            State = gcpu.vset(conformed, bw8(index), State);
+            State = cpu.vcell(State, bw8(index), conformed);
         }
     }
 }

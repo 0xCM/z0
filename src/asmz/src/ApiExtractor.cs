@@ -10,8 +10,10 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    using api = ApiExtraction;
+
     [ApiHost]
-    public readonly struct Extraction
+    public readonly struct ApiExtraction
     {
         [Op]
         public static MemoryBlock block(in ApiMemberCode src, TermInfo term)
@@ -189,13 +191,11 @@ namespace Z0.Asm
     }
 
     [ApiHost]
-    class ExtractExperiment : AppService<ExtractExperiment>
+    class ApiExtractor : AppService<ApiExtractor>
     {
-        ApiExtractPipe ExtractPipe;
-
         ApiExtractParser Parser;
 
-        ApiExtractor Extractor;
+        Z0.ApiExtractor Extractor;
 
         ApiResolver Resolver;
 
@@ -207,7 +207,6 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            ExtractPipe = Wf.ApiExtractPipe();
             Parser = ApiExtracts.parser();
             Extractor = Wf.ApiExtractor();
             Resolver = Wf.ApiResolver();
@@ -216,22 +215,25 @@ namespace Z0.Asm
             HexPacks = Wf.HexPacks();
         }
 
-        ApiHostExtracts ExtractHost(IApiHost src, FS.FilePath dst)
-        {
-            var resolved = Resolver.ResolveHost(src);
-            var extracted = Extractor.ExtractHost(resolved).Sort();
-            Emit(extracted.View, dst);
-            return extracted;
-        }
+        ResolvedHost Resolve(IApiHost src)
+            => Resolver.ResolveHost(src);
 
-        ApiHostExtracts ExtractHost(IApiHost src)
-        {
-            var resolved = Resolver.ResolveHost(src);
-            var extracted = Extractor.ExtractHost(resolved).Sort();
-            return extracted;
-        }
+        ResolvedPart Resolve(IPart src)
+            => Resolver.ResolvePart(src);
 
-        Index<ApiMemberCode> ParseExtracts(ReadOnlySpan<ApiMemberExtract> src)
+        Index<ResolvedPart> Resolve(IApiCatalog catalog)
+            => Resolver.ResolveCatalog(catalog);
+
+        ApiHostExtracts Extract(in ResolvedHost src)
+            => Extractor.ExtractHost(src).Sort();
+
+        ApiHostExtracts Extract(IApiHost src)
+            => Extractor.ExtractHost(Resolve(src)).Sort();
+
+        void Extract(IApiCatalog src, FS.FolderPath dir)
+            => Extract(Resolve(src), dir);
+
+        Index<ApiMemberCode> Parse(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             var buffer = alloc<ApiMemberCode>(count);
@@ -241,7 +243,7 @@ namespace Z0.Asm
             return buffer;
         }
 
-        Index<AsmRoutine> DecodeParsed(ReadOnlySpan<ApiMemberCode> src)
+        Index<AsmRoutine> Decode(ReadOnlySpan<ApiMemberCode> src)
         {
             var count = src.Length;
             var buffer = alloc<AsmRoutine>(count);
@@ -264,7 +266,7 @@ namespace Z0.Asm
                 return 0;
 
             var blocks = alloc<MemoryBlock>(count);
-            var found = Extraction.terminals(src, blocks);
+            var found = api.terminals(src, blocks);
             var packed = CodeBlocks.pack(blocks);
             HexPacks.Emit(packed, dst);
             Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
@@ -299,15 +301,46 @@ namespace Z0.Asm
             return count;
         }
 
-        void ExtractCatalog()
+        void Extract(ReadOnlySpan<ResolvedPart> src, FS.FolderPath dir)
         {
-            var catalog = Wf.ApiCatalog;
-            var resolved = Resolver.ResolveCatalog(catalog);
-            var extracted = Extractor.ExtractParts(resolved).Sort();
-            Emit(extracted, Db.AppLog("extracts", FS.XPack));
+            var count = src.Length;
+            if(count == 0)
+                return;
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(src,i);
+                Extract(part,dir);
+            }
         }
 
-        void ExtractHosts(ApiHosts src, FS.FolderPath dir)
+        void Extract(in ResolvedPart src, FS.FolderPath dir)
+        {
+            var hosts = src.Hosts.View;
+            var count = hosts.Length;
+            if(count == 0)
+                return;
+
+            var dst = dir + FS.folder(src.Part.Format());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var host = ref skip(hosts,i);
+                Extract(host, dst);
+            }
+        }
+
+        void Extract(in ResolvedHost src, FS.FolderPath dir)
+        {
+            var host = src.Host;
+            var extracts = Extract(src);
+            Emit(extracts.View, dir + FS.file(host, "extracts", FS.XPack));
+            var parsed = Parse(extracts.View);
+            Emit(parsed, dir + FS.file(host, "parsed", FS.XPack));
+            var decoded = Decode(parsed);
+            Emit(decoded, dir + FS.file(host, FS.Asm));
+        }
+
+        void Extract(ApiHosts src, FS.FolderPath dir)
         {
             var count = src.Count;
             if(count == 0)
@@ -317,32 +350,42 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
-                var extracts = ExtractHost(host);
-                Emit(extracts.View, dir + FS.file(host.HostUri, "extracts", FS.XPack));
-                var parsed = ParseExtracts(extracts.View);
-                Emit(parsed, dir + FS.file(host.HostUri, "parsed", FS.XPack));
-                var decoded = DecodeParsed(parsed);
-                Emit(decoded, dir + FS.file(host.HostUri, FS.Asm));
+                var resolved = Resolve(host);
+                Extract(resolved, dir);
             }
         }
 
-        void ExtractParts(ReadOnlySpan<IApiPartCatalog> src, FS.FolderPath dir)
+        void Extract(ReadOnlySpan<IApiPartCatalog> src, FS.FolderPath dir)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var part = ref skip(src,i);
                 var dst = dir + FS.folder(part.PartId);
-                ExtractHosts(part.ApiHosts,dst);
+                Extract(part.ApiHosts, dst);
             }
+        }
+
+        FS.FolderPath Dir()
+        {
+            var dir = Db.AppLogDir();
+            dir.Clear(true);
+            return dir;
+        }
+
+        void Run1()
+        {
+            Extract(Wf.ApiCatalog.PartCatalogs(), Dir());
+        }
+
+        void Run2()
+        {
+            Extract(Resolve(Wf.ApiCatalog), Dir());
         }
 
         public void Run()
         {
-            var catalog = Wf.ApiCatalog;
-            var dir = Db.AppLogDir();
-            dir.Clear(true);
-            ExtractParts(catalog.PartCatalogs(), dir);
+            Run2();
         }
     }
 }
