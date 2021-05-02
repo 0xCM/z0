@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
 
@@ -23,29 +24,31 @@ namespace Z0
             var identities = parts.RuntimeCatalog.PartIdentities;
             using var wf = WfRuntime.create(parts, args);
             var runner = wf.CaptureRunner();
-            var running = wf.Running(string.Format("Capturing routines from components in {0}", dir.Format(PathSeparator.FS)));
+            var running = wf.Running(Msg.CapturingRoutines.Format(dir));
             var routines = args.Length != 0 ? runner.Capture(identities, CaptureWorkflowOptions.EmitImm) : runner.Capture(identities);
-            wf.Ran(running, string.Format("Captured {0} routines", routines.Length));
-
+            var total = 0u;
+            root.iter(routines, r => total += r.Count);
+            wf.Ran(running, Msg.CapturedRoutines.Format(total,routines.Length));
             return routines;
         }
 
         [Op]
         public static Index<AsmHostRoutines> run(IWfRuntime wf, Index<PartId> parts, CaptureWorkflowOptions options)
-        {
-            var runner = wf.CaptureRunner();
-            return runner.Capture(parts, options);
-        }
+            => wf.CaptureRunner().Capture(parts, options);
 
         [Op]
         public static Index<AsmHostRoutines> run(IWfRuntime wf, Index<ApiHostUri> parts, CaptureWorkflowOptions options)
-        {
-            var runner = wf.CaptureRunner();
-            return runner.Capture(parts, options);
-        }
+            => wf.CaptureRunner().Capture(parts, options);
 
         [MethodImpl(Inline),Op]
         public static CaptureExchange exchange(byte[] buffer)
             => new CaptureExchange(buffer);
+    }
+
+    partial struct Msg
+    {
+        public static MsgPattern<FS.FolderPath> CapturingRoutines => "Capturing routines from {0}";
+
+        public static MsgPattern<Count,Count> CapturedRoutines => "Captured {0} routines from {1} hosts";
     }
 }

@@ -50,7 +50,7 @@ namespace Z0
             for (var i=0; i<length; i++)
             {
                 ref readonly var c = ref skip(data,i);
-                if ( !index.Contains(c))
+                if (!index.Contains(c))
                     seek(dst,j++) = c;
             }
             return new string(memory.slice(dst,0,j));

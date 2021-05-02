@@ -5,12 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using System.IO;
 
     using static Part;
+    using static memory;
 
-    public readonly struct ApiPartIdParser : IPartIdParser
+    public readonly struct ApiPartIdParser
     {
         public static ApiHostUri hosturi(Type src)
         {
@@ -27,7 +29,10 @@ namespace Z0
 
         [Op]
         public static PartId single(string src)
-            => parse<PartId>(src).ValueOrDefault(PartId.None);
+        {
+            parse(src, out var dst);
+            return dst;
+        }
 
         /// <summary>
         /// Parses each supplied identifier; if an identifier does not parse, the return slot
@@ -38,31 +43,16 @@ namespace Z0
         public static PartId[] parse(string[] parts)
         {
             var count = parts.Length;
-            var dst = sys.alloc<PartId>(count);
+            var buffer = sys.alloc<PartId>(count);
+            ref var dst = ref first(buffer);
+            ref readonly var src = ref first(parts);
             for(var i=0; i<count; i++)
-                dst[i] = parse<PartId>(parts[i]).ValueOrDefault();
-            return dst;
+                parse(text.remove(skip(src,i), Chars.Dot), out seek(dst,i));
+            return buffer;
         }
 
-        public ParseResult<PartId> Parse(string src)
-            => parse<PartId>(src);
-
-        /// <summary>
-        /// Attempts to parse an enum literal, ignoring case, and returns a null value if parsing failed
-        /// </summary>
-        /// <param name="name">The literal name</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        static ParseResult<E> parse<E>(string name)
-            where E : unmanaged, Enum
-        {
-            try
-            {
-                return root.parsed(name, Enum.Parse<E>(text.remove(name, Chars.Dot),true));
-            }
-            catch(Exception e)
-            {
-                return root.unparsed<E>(name, e);
-            }
-        }
+        [MethodImpl(Inline)]
+        static bool parse(string src, out PartId dst)
+            => ClrEnums.parse(text.remove(src, Chars.Dot), out dst);
     }
 }

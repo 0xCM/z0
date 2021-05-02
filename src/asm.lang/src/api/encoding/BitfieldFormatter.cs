@@ -25,7 +25,7 @@ namespace Z0
         {
             Indices = src.Indices;
             Widths = src.Widths;
-            Buffer = sys.alloc<char>(64);
+            Buffer = CharBlock64.Null.Data;
             FieldCount = src.FieldCount;
         }
 
@@ -43,6 +43,7 @@ namespace Z0
             return Format(bits);
         }
 
+        [Op]
         ReadOnlySpan<char> Format(Span<byte> bits)
         {
             var k = 0;
