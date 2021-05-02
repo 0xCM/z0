@@ -9,6 +9,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
 
     /// <summary>
     /// CommandOptions is a helper class for the Command class.  It stores options
@@ -20,30 +23,40 @@ namespace Z0
     /// </summary>
     public sealed class ScriptProcessOptions
     {
-        public bool noThrow;
-
-        public bool useShellExecute;
-
-        public bool noWindow;
-
-        public bool elevate;
-
-        public int timeoutMSec;
-
-        public string input;
-
-        public string outputFile;
-
-        public TextWriter outputStream;
-
-        public string currentDirectory;
-
-        public Dictionary<string, string> environmentVariables;
-
         /// <summary>
         /// Can be assigned to the Timeout Property to indicate infinite timeout.
         /// </summary>
         public const int Infinite = System.Threading.Timeout.Infinite;
+
+        public bool _NoThrow;
+
+        public bool _UseShellExecute;
+
+        public bool _NoWindow;
+
+        public bool _Elevate;
+
+        public int _TimeoutMS;
+
+        public string _Input;
+
+        public string _OutputFile;
+
+        public TextWriter _OutputStream;
+
+        public string _CurrentDirectory;
+
+        public Dictionary<string, string> _EnvVars;
+
+        Receiver<string> _StatusReceiver;
+
+        Receiver<string> _ErrorReceiver;
+
+        static void OnStaus(in string src)
+            => term.inform(src);
+
+        static void OnError(in string src)
+             => term.error(src);
 
         /// <summary>
         /// CommanOptions holds a set of options that can be passed to the constructor
@@ -51,8 +64,10 @@ namespace Z0
         /// </summary>
         public ScriptProcessOptions()
         {
-            timeoutMSec = 600000;
-            noThrow = true;
+            _TimeoutMS = 600000;
+            _NoThrow = true;
+            _StatusReceiver = OnStaus;
+            _ErrorReceiver = OnError;
         }
 
         public ScriptProcessOptions(TextWriter output)
@@ -61,14 +76,32 @@ namespace Z0
             OutputStream = output;
         }
 
+
+        public ScriptProcessOptions WithReceivers(Receiver<string> status, Receiver<string> error)
+        {
+            _ErrorReceiver = error;
+            _StatusReceiver = status;
+            return this;
+        }
+
+        public Receiver<string> StatusReceiver
+        {
+            [MethodImpl(Inline)]
+            get => _StatusReceiver;
+        }
+
+        public Receiver<string> ErrorReceiver
+        {
+            [MethodImpl(Inline)]
+            get => _ErrorReceiver;
+        }
+
         /// <summary>
         /// Return a copy an existing set of command options.
         /// </summary>
         /// <returns>The copy of the command options.</returns>
         public ScriptProcessOptions Clone()
-        {
-            return (ScriptProcessOptions)MemberwiseClone();
-        }
+            => (ScriptProcessOptions)MemberwiseClone();
 
         /// <summary>
         /// Normally commands will throw if the subprocess returns a non-zero
@@ -76,8 +109,8 @@ namespace Z0
         /// </summary>
         public bool NoThrow
         {
-            get => noThrow;
-            set => noThrow = value;
+            get => _NoThrow;
+            set => _NoThrow = value;
         }
 
         /// <summary>
@@ -86,7 +119,7 @@ namespace Z0
         /// </summary>
         public ScriptProcessOptions AddNoThrow()
         {
-            noThrow = true;
+            _NoThrow = true;
             return this;
         }
 
@@ -95,10 +128,10 @@ namespace Z0
         /// </summary>
         public bool Start
         {
-            get => useShellExecute;
+            get => _UseShellExecute;
             set
             {
-                useShellExecute = value;
+                _UseShellExecute = value;
             }
         }
 
@@ -118,8 +151,8 @@ namespace Z0
         /// </summary>
         public bool UseShellExecute
         {
-            get => useShellExecute;
-            set => useShellExecute = value;
+            get => _UseShellExecute;
+            set => _UseShellExecute = value;
         }
 
         /// <summary>
@@ -127,7 +160,7 @@ namespace Z0
         /// </summary>
         public ScriptProcessOptions AddUseShellExecute()
         {
-            useShellExecute = true;
+            _UseShellExecute = true;
             return this;
         }
 
@@ -136,8 +169,8 @@ namespace Z0
         /// </summary>
         public bool NoWindow
         {
-            get => noWindow;
-            set => noWindow = value;
+            get => _NoWindow;
+            set => _NoWindow = value;
         }
 
         /// <summary>
@@ -145,7 +178,7 @@ namespace Z0
         /// </summary>
         public ScriptProcessOptions AddNoWindow()
         {
-            noWindow = true;
+            _NoWindow = true;
             return this;
         }
 
@@ -155,8 +188,8 @@ namespace Z0
         /// </summary>
         public bool Elevate
         {
-            get => elevate;
-            set => elevate = value;
+            get => _Elevate;
+            set => _Elevate = value;
         }
 
         /// <summary>
@@ -164,7 +197,7 @@ namespace Z0
         /// </summary>
         public ScriptProcessOptions AddElevate()
         {
-            elevate = true;
+            _Elevate = true;
             return this;
         }
 
@@ -176,8 +209,8 @@ namespace Z0
         /// </summary>
         public int Timeout
         {
-            get => timeoutMSec;
-            set => timeoutMSec = value;
+            get => _TimeoutMS;
+            set => _TimeoutMS = value;
         }
 
         /// <summary>
@@ -186,7 +219,7 @@ namespace Z0
         /// </summary>
         public ScriptProcessOptions AddTimeout(int milliseconds)
         {
-            timeoutMSec = milliseconds;
+            _TimeoutMS = milliseconds;
             return this;
         }
 
@@ -195,8 +228,8 @@ namespace Z0
         /// </summary>
         public string Input
         {
-            get => input;
-            set => input = value;
+            get => _Input;
+            set => _Input = value;
         }
 
         /// <summary>
@@ -204,7 +237,7 @@ namespace Z0
         /// </summary>
         public ScriptProcessOptions AddInput(string input)
         {
-            this.input = input;
+            this._Input = input;
             return this;
         }
 
@@ -213,8 +246,8 @@ namespace Z0
         /// </summary>
         public string CurrentDirectory
         {
-            get => currentDirectory;
-            set => currentDirectory = value;
+            get => _CurrentDirectory;
+            set => _CurrentDirectory = value;
         }
 
         /// <summary>
@@ -222,7 +255,7 @@ namespace Z0
         /// </summary>
         public ScriptProcessOptions AddCurrentDirectory(string directoryPath)
         {
-            currentDirectory = directoryPath;
+            _CurrentDirectory = directoryPath;
             return this;
         }
 
@@ -235,13 +268,13 @@ namespace Z0
         /// </summary>
         public string OutputFile
         {
-            get => outputFile;
+            get => _OutputFile;
             set
             {
-                if (outputStream != null)
+                if (_OutputStream != null)
                     throw new Exception("OutputFile and OutputStream can not both be set");
 
-                outputFile = value;
+                _OutputFile = value;
             }
         }
 
@@ -261,13 +294,13 @@ namespace Z0
         /// </summary>
         public TextWriter OutputStream
         {
-            get => outputStream;
+            get => _OutputStream;
             set
             {
-                if (outputFile != null)
+                if (_OutputFile != null)
                     throw new Exception("OutputFile and OutputStream can not both be set");
 
-                outputStream = value;
+                _OutputStream = value;
             }
         }
 
@@ -292,8 +325,8 @@ namespace Z0
         {
             get
             {
-                environmentVariables ??= new Dictionary<string, string>();
-                return environmentVariables;
+                _EnvVars ??= new Dictionary<string, string>();
+                return _EnvVars;
             }
         }
 

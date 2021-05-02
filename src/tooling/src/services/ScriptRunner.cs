@@ -21,6 +21,12 @@ namespace Z0
         ScriptRunner(IEnvPaths paths)
             => Paths = paths;
 
+        void OnErrorEvent(in string src)
+            => term.error(src);
+
+        void OnStatusEvent(in string src)
+            => term.inform(src);
+
         public Outcome<TextLines> RunControlScript(FS.FileName name)
             => RunScript(Paths.ControlScript(name), new ScriptId(name.Name));
 
@@ -39,11 +45,10 @@ namespace Z0
         public Outcome<TextLines> RunScript(FS.FilePath src)
         {
             using var writer = Paths.CmdLog(src.FileName.Format()).Writer();
-
             try
             {
                 var cmd = WinCmd.script(src);
-                var process = ToolCmd.run(cmd).Wait();
+                var process = ToolCmd.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
                 var lines =  text.lines(process.Output);
                 root.iter(lines, line => writer.WriteLine(line));
                 return lines;

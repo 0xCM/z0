@@ -13,6 +13,7 @@ namespace Z0
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Threading;
+    using System.Threading.Tasks;
 
     using static Part;
 
@@ -116,7 +117,6 @@ namespace Z0
             {
                 if (_outputStream != null)
                     throw new Exception("Output not available if redirected to file or stream");
-
                 return _output.ToString();
             }
         }
@@ -153,23 +153,23 @@ namespace Z0
             Process = new Process { StartInfo = startInfo };
             Process.StartInfo = startInfo;
             _output = new StringBuilder();
-            if (options.elevate)
+            if (options._Elevate)
             {
-                options.useShellExecute = true;
+                options._UseShellExecute = true;
                 startInfo.Verb = "runas";
-                options.currentDirectory ??= Environment.CurrentDirectory;
+                options._CurrentDirectory ??= Environment.CurrentDirectory;
             }
 
-            Process.OutputDataReceived += OnProcessOutput;
-            Process.ErrorDataReceived += OnProcessOutput;
+            Process.OutputDataReceived += HandleStdEvent;
+            Process.ErrorDataReceived += HandleErrEvent;
 
-            if (options.environmentVariables != null)
+            if (options._EnvVars != null)
             {
                 // copy over the environment variables to the process startInfo options.
-                foreach (string key in options.environmentVariables.Keys)
+                foreach (string key in options._EnvVars.Keys)
                 {
                     // look for %VAR% strings in the value and subtitute the appropriate environment variable.
-                    string value = options.environmentVariables[key];
+                    string value = options._EnvVars[key];
                     if (value != null)
                     {
                         int startAt = 0;
@@ -202,18 +202,18 @@ namespace Z0
                 }
             }
 
-            startInfo.WorkingDirectory = options.currentDirectory;
+            startInfo.WorkingDirectory = options._CurrentDirectory;
 
-            if(options.outputStream != null)
+            if(options._OutputStream != null)
             {
-                _outputStream = options.outputStream;
+                _outputStream = options._OutputStream;
                 DisposeOutputStream = false;
             }
             else
             {
-                if (options.outputFile != null)
+                if (options._OutputFile != null)
                 {
-                    _outputStream = File.CreateText(options.outputFile);
+                    _outputStream = File.CreateText(options._OutputFile);
                     DisposeOutputStream = true;
                 }
             }
@@ -223,7 +223,7 @@ namespace Z0
             {
                 Process.Start();
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 string msg = "Failure starting Process\r\n" +
                     "    Exception: " + e.Message + "\r\n" +
@@ -242,9 +242,9 @@ namespace Z0
             }
 
             // Send any input to the command
-            if (options.input != null)
+            if (options._Input != null)
             {
-                Process.StandardInput.Write(options.input);
+                Process.StandardInput.Write(options._Input);
                 Process.StandardInput.Dispose();
             }
         }
@@ -253,9 +253,29 @@ namespace Z0
         /// Create a subprocess to run 'commandLine' with no special options.
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// </summary>
-        public ScriptProcess(string commandLine)
+        public ScriptProcess(CmdLine commandLine)
             : this(commandLine, new ScriptProcessOptions())
         {
+        }
+
+        void HandleStdEvent(object sender, DataReceivedEventArgs e)
+        {
+            if (_outputStream != null)
+                _outputStream.WriteLine(e.Data);
+            else
+                _output.AppendLine(e.Data);
+
+            Task.Run(() => Options.StatusReceiver.Invoke(e.Data));
+        }
+
+        void HandleErrEvent(object sender, DataReceivedEventArgs e)
+        {
+            if (_outputStream != null)
+                _outputStream.WriteLine(e.Data);
+            else
+                _output.AppendLine(e.Data);
+
+            Task.Run(() => Options.ErrorReceiver.Invoke(e.Data));
         }
 
         /// <summary>
@@ -268,12 +288,12 @@ namespace Z0
             bool killed = false;
             try
             {
-                Process.WaitForExit(Options.timeoutMSec);
+                Process.WaitForExit(Options._TimeoutMS);
                 waitReturned = true;
                 // TODO : HACK we see to have a race in the async process stuff
                 // If you do Run("cmd /c set") you get truncated output at the
                 // Looks like the problem in the framework.
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i<10; i++)
                     Thread.Sleep(1);
             }
             finally
@@ -291,9 +311,9 @@ namespace Z0
             _outputStream = null;
 
             if (waitReturned && killed)
-                throw new Exception("Timeout of " + Options.timeoutMSec / 1000 + " sec exceeded\r\n    Cmd: " + _commandLine);
+                throw new Exception("Timeout of " + Options._TimeoutMS / 1000 + " sec exceeded\r\n    Cmd: " + _commandLine);
 
-            if (Process.ExitCode != 0 && !Options.noThrow)
+            if (Process.ExitCode != 0 && !Options._NoThrow)
                 ThrowCommandFailure(null);
             return this;
         }
@@ -343,7 +363,6 @@ namespace Z0
         {
             // We use taskkill because it is built into windows, and knows
             // how to kill all subchildren of a process, which important.
-            // TODO (should we use WMI instead?)
             Debug.WriteLine("Killing process tree " + ProcessId + " Cmd: " + _commandLine);
             try
             {
@@ -367,7 +386,7 @@ namespace Z0
             } while (!Process.HasExited);
 
             // If we created the output stream, we should close it.
-            if (_outputStream != null && Options.outputFile != null)
+            if (_outputStream != null && Options._OutputFile != null)
                 _outputStream.Dispose();
             _outputStream = null;
         }
@@ -446,14 +465,5 @@ namespace Z0
         }
 
         static string[] s_paths;
-
-        /* called data comes to either StdErr or Stdout */
-        void OnProcessOutput(object sender, DataReceivedEventArgs e)
-        {
-            if (_outputStream != null)
-                _outputStream.WriteLine(e.Data);
-            else
-                _output.AppendLine(e.Data);
-        }
     }
 }

@@ -20,13 +20,12 @@ namespace Z0
 
     readonly struct ControlCommandDispatcher
     {
-        public static void dispatch(params string[] args)
+        public static void dispatch(ReadOnlySpan<string> args)
         {
             try
             {
                 var count = args.Length;
                 var paths = EnvPaths.create();
-                var _args = slice(span(args),1).ToArray();
                 var handlers = Toolsets.ResultHandlers(paths);
 
                 for(var i=1; i<count; i++)

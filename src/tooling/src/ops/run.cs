@@ -23,7 +23,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ScriptProcess run(CmdLine command)
-            => new ScriptProcess(command, new ScriptProcessOptions());
+            => new ScriptProcess(command);
+
+        [Op]
+        public static ScriptProcess run(CmdLine command, Receiver<string> status, Receiver<string> error)
+        {
+            var options = new ScriptProcessOptions();
+            options.WithReceivers(status,error);
+            return new ScriptProcess(command,options);
+        }
 
         [MethodImpl(Inline), Op]
         public static ScriptProcess run(CmdLine command, TextWriter output)

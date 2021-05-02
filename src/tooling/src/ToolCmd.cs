@@ -76,6 +76,7 @@ namespace Z0
             untype(src, ref dst);
             return dst;
         }
+
         /// <summary>
         /// Populates a <see cref='ToolCmdArg'/> structure from a specified source
         /// </summary>
