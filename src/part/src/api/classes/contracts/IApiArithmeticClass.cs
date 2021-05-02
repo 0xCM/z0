@@ -23,22 +23,4 @@ namespace Z0
         NumericKind OperandKind
             => default;
     }
-
-    /// <summary>
-    /// Characterizes a kind-parametric and numeric-parametric arithmetic operation classifier
-    /// </summary>
-    /// <typeparam name="F">The kind classifier type</typeparam>
-    /// <typeparam name="T">The numeric type</typeparam>
-    public interface IApiArithmeticClass<F,T> : IApiArithmeticApClass
-        where F : unmanaged, IApiArithmeticApClass
-    {
-        K I.Kind
-            => default(F).Kind;
-
-        /// <summary>
-        /// The parametrically-identified numeric kind
-        /// </summary>
-        NumericKind IApiArithmeticApClass.OperandKind
-            => Numeric.kind<T>();
-    }
 }

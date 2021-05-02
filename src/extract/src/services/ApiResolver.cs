@@ -46,8 +46,6 @@ namespace Z0
             return counter;
         }
 
-
-
         public ResolvedHost ResolveHost(IApiHost src)
         {
             var dst = root.list<ResolvedMethod>();

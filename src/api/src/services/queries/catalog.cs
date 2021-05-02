@@ -9,7 +9,7 @@ namespace Z0
         [Op]
         public static IApiCatalog catalog(params IPart[] parts)
         {
-            var catalogs = parts.Select(x => partcat(x) as IApiPartCatalog).Where(c => c.IsIdentified);
+            var catalogs = parts.Select(x => partcat(x)).Where(c => c.IsIdentified);
             var dst = new ApiRuntimeCatalog(parts,
                 parts.Select(p => p.Owner),
                 catalogs,

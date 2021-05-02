@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a catalog over a <see cref='IPart'/>
     /// </summary>
-    public readonly struct ApiPartCatalog : IApiPartCatalog
+    public class ApiPartCatalog : IApiPartCatalog
     {
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
@@ -85,5 +85,11 @@ namespace Z0
         /// </summary>
         public bool IsEmpty
             => (OperationHosts.Length + ApiTypes.Count) == 0;
+
+        public FS.FilePath ComponentPath
+            => FS.path(Component.Location);
+
+        public bool Host(ApiHostUri uri, out IApiHost host)
+            => ApiHosts.Host(uri, out host);
     }
 }

@@ -11,28 +11,18 @@ namespace Z0
 
     public readonly struct ApiIdentifier : IEquatable<ApiIdentifier>
     {
-        public static ApiIdentifier create(in OpIdentity src)
-            => new ApiIdentifier(LegalIdentityBuilder.code(src));
-
-        public Identifier Name {get;}
+        public Cell128 Data {get;}
 
         [MethodImpl(Inline)]
-        ApiIdentifier(string src)
-            => Name = src;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Name;
+        ApiIdentifier(Cell128 src)
+            => Data = src;
 
         [MethodImpl(Inline)]
         public bool Equals(ApiIdentifier src)
-            => Name.Equals(src.Name);
-
-        public override string ToString()
-            => Format();
+            => Data.Equals(src.Data);
 
         public override int GetHashCode()
-            => Name.GetHashCode();
+            => Data.GetHashCode();
 
         public override bool Equals(object src)
             => src is ApiIdentifier x && Equals(x);

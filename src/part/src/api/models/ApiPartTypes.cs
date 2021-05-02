@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     /// <summary>
-    /// Represents the types defined by a part
+    /// Collects the types defined by a part
     /// </summary>
     public readonly struct ApiPartTypes
     {

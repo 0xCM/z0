@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static IApiPartCatalog partcat(IPart src)
+        public static ApiPartCatalog partcat(IPart src)
             => partcat(src.Owner);
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static IApiPartCatalog partcat(Assembly src)
+        public static ApiPartCatalog partcat(Assembly src)
             => new ApiPartCatalog(src.Id(), src, complete(src), apihosts(src), svchosts(src));
     }
 }

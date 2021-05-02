@@ -11,10 +11,10 @@ namespace Z0
 
     public readonly struct ApiPartCatalogs : IIndexedView<ApiPartCatalogs,uint,IApiPartCatalog>
     {
-        readonly Index<IApiPartCatalog> Data;
+        readonly Index<ApiPartCatalog> Data;
 
         [MethodImpl(Inline)]
-        public ApiPartCatalogs(IApiPartCatalog[] src)
+        public ApiPartCatalogs(ApiPartCatalog[] src)
             => Data = src;
 
         public IApiPartCatalog[] Storage
@@ -23,7 +23,7 @@ namespace Z0
             get => Data.Storage;
         }
 
-        public ReadOnlySpan<IApiPartCatalog> View
+        public ReadOnlySpan<ApiPartCatalog> View
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
@@ -36,11 +36,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiPartCatalogs(IApiPartCatalog[] src)
+        public static implicit operator ApiPartCatalogs(ApiPartCatalog[] src)
             => new ApiPartCatalogs(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator IApiPartCatalog[](ApiPartCatalogs src)
+        public static implicit operator ApiPartCatalog[](ApiPartCatalogs src)
             => src.Data.Storage;
     }
 }

@@ -50,34 +50,29 @@ namespace Z0
         /// </summary>
         Index<MethodInfo> Methods {get;}
 
-        FS.FilePath ComponentPath
-            => FS.path(Component.Location);
+        FS.FilePath ComponentPath {get;}
 
-        bool Host(ApiHostUri uri, out IApiHost host)
-            => ApiHosts.Host(uri, out host);
+        bool Host(ApiHostUri uri, out IApiHost host);
 
         /// <summary>
         /// The component's manifest module
         /// </summary>
-        Module ManifestModule
-            => Component.ManifestModule;
+        Module ManifestModule {get;}
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identified assembly
         /// </summary>
-        bool IsIdentified
-            => PartId != 0;
+        bool IsIdentified {get;}
 
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
-        bool IsNonEmpty
-            => (OperationHosts.Length + ApiTypes.Count) != 0;
+        bool IsNonEmpty {get;}
 
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
-        bool IsEmpty
-            => (OperationHosts.Length + ApiTypes.Count) == 0;
+        bool IsEmpty {get;}
+
     }
 }

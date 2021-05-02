@@ -17,6 +17,5 @@ namespace Z0
 
         K IApiClass<K>.Kind
             => Kind;
-
     }
 }

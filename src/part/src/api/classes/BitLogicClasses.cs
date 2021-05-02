@@ -44,29 +44,5 @@ namespace Z0
         public readonly struct LNot : I { K I.Kind => K.LNot; }
 
         public readonly struct RNot : I { K I.Kind => K.RNot; }
-
-        public readonly struct And<T> : IApiBitLogicClass<And,T> {}
-
-        public readonly struct Nand<T> : IApiBitLogicClass<Nand,T> {}
-
-        public readonly struct Or<T> : IApiBitLogicClass<Or,T> {}
-
-        public readonly struct Nor<T> : IApiBitLogicClass<Nor,T> {}
-
-        public readonly struct Xor<T> : IApiBitLogicClass<Xor,T> {}
-
-        public readonly struct Xnor<T> : IApiBitLogicClass<Xnor,T> {}
-
-        public readonly struct Impl<T> : IApiBitLogicClass<Impl,T> {}
-
-        public readonly struct NonImpl<T> : IApiBitLogicClass<NonImpl,T> {}
-
-        public readonly struct CImpl<T> : IApiBitLogicClass<CImpl,T> {}
-
-        public readonly struct CNonImpl<T> : IApiBitLogicClass<CNonImpl,T> {}
-
-        public readonly struct Not<T> : IApiBitLogicClass<Not,T> {}
-
-        public readonly struct Select<T> : IApiBitLogicClass<Select,T> {}
     }
 }

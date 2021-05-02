@@ -5,8 +5,6 @@
 namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-    using I = IApiCanonicalClass;
     using K = ApiCanonicalClass;
 
     [Free]

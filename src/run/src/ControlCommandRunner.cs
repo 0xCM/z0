@@ -43,7 +43,7 @@ namespace Z0
                         var outcome = runner.RunControlScript(name);
                         if(outcome)
                         {
-                            var processor = Tools.processor(paths, script);
+                            var processor = ToolServices.processor(paths, script);
                             term.inform("Response");
                             root.iter(outcome.Data, x => processor.Process(x));
                         }

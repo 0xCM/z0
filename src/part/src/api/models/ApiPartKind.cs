@@ -9,6 +9,9 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// A cover for the <see cref='PartId'/> enum
+    /// </summary>
     public readonly struct ApiPartKind
     {
         public readonly PartId Id;
