@@ -51,7 +51,7 @@ namespace Z0
         }
 
         public void Run(CmdLine src)
-            => ToolServices.create(Wf).Run(src);
+            => Tooling.create(Wf).Run(src);
 
         public void Dispatch(CmdLine cmd)
         {

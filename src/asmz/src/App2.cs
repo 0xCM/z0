@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Linq;
     using System.Collections.Generic;
     using System.IO;
-    using Z0.Tooling;
+    using Z0.Tools;
     using System.Runtime.InteropServices;
 
     using static Part;

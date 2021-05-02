@@ -20,15 +20,13 @@ namespace Z0
 
         Index<IToolResultHandler> KnownHandlers;
 
-        public ToolResultProcessor(IEnvPaths paths, FS.FilePath script)
+        public ToolResultProcessor(IEnvPaths paths, FS.FilePath script, Index<IToolResultHandler> handlers)
         {
             Paths = paths;
             ScriptPath = script;
             DefaultHandler = new DefaultResultHandler(Paths);
             CurrentHandler = DefaultHandler;
-            KnownHandlers = sys.alloc<IToolResultHandler>(2);
-            KnownHandlers[0] = new MsBuildResultHandler(Paths);
-            KnownHandlers[1] = new RobocopyResultHandler(Paths);
+            KnownHandlers = handlers;
         }
 
         void Switch(IToolResultHandler handler)

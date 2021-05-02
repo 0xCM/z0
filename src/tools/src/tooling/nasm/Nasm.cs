@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0.Tools
 {
     [ApiHost]
     public sealed partial class Nasm : ToolService<Nasm>

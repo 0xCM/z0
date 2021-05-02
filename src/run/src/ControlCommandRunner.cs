@@ -27,6 +27,7 @@ namespace Z0
                 var count = args.Length;
                 var paths = EnvPaths.create();
                 var _args = slice(span(args),1).ToArray();
+                var handlers = Toolsets.ResultHandlers(paths);
 
                 for(var i=1; i<count; i++)
                 {
@@ -43,7 +44,7 @@ namespace Z0
                         var outcome = runner.RunControlScript(name);
                         if(outcome)
                         {
-                            var processor = ToolServices.processor(paths, script);
+                            var processor = Tooling.processor(paths, script, handlers);
                             term.inform("Response");
                             root.iter(outcome.Data, x => processor.Process(x));
                         }

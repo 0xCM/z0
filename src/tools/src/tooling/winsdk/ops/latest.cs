@@ -2,7 +2,7 @@
 // Copyright   :  Copyright 2020 Aaron R Robinson
 // License     :  See Robinson.lic in project license directory
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0.Tools
 {
     using Microsoft.Win32;
     using System;

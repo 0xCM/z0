@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public sealed class ToolServices : AppService<ToolServices>
+    public sealed class Tooling : AppService<Tooling>
     {
         public void Run(CmdLine src)
         {
@@ -45,7 +45,7 @@ namespace Z0
         public void Running(ToolExecSpec cmd)
             => Wf.Raise(new ToolRunningEvent(cmd.CmdId, Wf.Ct));
 
-        public static IToolResultProcessor processor(IEnvPaths paths, FS.FilePath script)
-            => new ToolResultProcessor(paths, script);
+        public static IToolResultProcessor processor(IEnvPaths paths, FS.FilePath script, Index<IToolResultHandler> handlers)
+            => new ToolResultProcessor(paths, script, handlers);
     }
 }

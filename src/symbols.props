@@ -97,6 +97,7 @@
     <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Term>$(Src)term/z0.term.csproj</Term>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
+    <Tooling>$(Src)tooling/z0.tooling.csproj</Tooling>
 
     <Universe>$(Src)universe/z0.universe.csproj</Universe>
 

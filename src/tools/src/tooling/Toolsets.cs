@@ -4,8 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static memory;
+
     public readonly struct Toolsets
     {
+        public static Index<IToolResultHandler> ResultHandlers(IEnvPaths paths)
+        {
+            var buffer = sys.alloc<IToolResultHandler>(2);
+            ref var dst = ref first(buffer);
+            seek(dst,0) = new MsBuildResultHandler(paths);
+            seek(dst,1) = new RobocopyResultHandler(paths);
+            return buffer;
+        }
+
         public static ToolId robocopy => windows.robocopy;
 
         public static ToolId cmd => windows.cmd;

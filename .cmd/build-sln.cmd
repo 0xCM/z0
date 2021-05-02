@@ -1,2 +1,2 @@
 @echo off
-call %ControlScripts%\build-master.cmd
+call %ControlScripts%\build-sln.cmd

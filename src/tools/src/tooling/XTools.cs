@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Tooling;
+    using Z0.Tools;
 
 
    [ApiHost]
@@ -15,14 +15,14 @@ namespace Z0
    {
        [Op]
        public static Nasm Nasm(this IWfRuntime wf)
-            => Tooling.Nasm.create(wf);
+            => Tools.Nasm.create(wf);
 
        [Op]
        public static XedTool XedTool(this IWfRuntime wf)
-            => Tooling.XedTool.create(wf);
+            => Tools.XedTool.create(wf);
 
         public static DumpBin DumpBin(this IWfRuntime wf)
-            => Tooling.DumpBin.create(wf);
+            => Tools.DumpBin.create(wf);
 
        [Op]
        public static ScriptRunner ScriptRunner(this IWfRuntime wf)
@@ -34,6 +34,6 @@ namespace Z0
 
         [Op]
         public static CultProcessor CultProcessor(this IWfRuntime wf)
-            => Tooling.CultProcessor.create(wf);
+            => Tools.CultProcessor.create(wf);
    }
 }

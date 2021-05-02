@@ -56,7 +56,7 @@ public enum PartId : ulong
 
     Tools = 41,
 
-    UInt = 42,
+    Tooling = 42,
 
     Fsm = 43,
 
@@ -227,8 +227,6 @@ public enum PartId : ulong
     ToolsTest = Tools | Test,
 
     TestDriver = Driver | Test,
-
-    UIntTest = UInt | Test,
 
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------

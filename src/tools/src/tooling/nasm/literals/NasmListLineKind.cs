@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0.Tools
 {
     /// <summary>
     /// Classfies, to a degree, the lines found in a <see cref='NasmListing'/>
