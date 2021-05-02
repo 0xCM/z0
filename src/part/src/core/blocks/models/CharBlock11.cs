@@ -50,6 +50,8 @@ namespace Z0
 
         public static CharBlock11 Empty => RP.Spaced11;
 
+        public static CharBlock11 Null => default;
+
         public const ushort CharCount = 11;
 
         /// <summary>

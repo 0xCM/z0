@@ -50,6 +50,8 @@ namespace Z0
 
         public static CharBlock8 Empty => RP.Spaced8;
 
+        public static CharBlock8 Null => default;
+
         /// <summary>
         /// The block capacity
         /// </summary>

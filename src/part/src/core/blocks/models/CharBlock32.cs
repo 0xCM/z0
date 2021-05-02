@@ -53,6 +53,8 @@ namespace Z0
 
         public static CharBlock32 Empty => RP.Spaced32;
 
+        public static CharBlock32 Null => default;
+
         public const ushort CharCount = 32;
 
         /// <summary>

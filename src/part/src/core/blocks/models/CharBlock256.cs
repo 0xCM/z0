@@ -45,13 +45,12 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CharBlock256(in Pair<CharBlock128> src)
-        {
-            var dst = default(CharBlock256);
-            dst.Lo = src.Left;
-            dst.Hi = src.Right;
-            return dst;
-        }
+        public static implicit operator CharBlock256(string src)
+            => api.init(src, out CharBlock256 dst);
+
+        public static CharBlock256 Empty => RP.Spaced256;
+
+        public static CharBlock256 Null => default;
 
         public const ushort CharCount = 256;
 

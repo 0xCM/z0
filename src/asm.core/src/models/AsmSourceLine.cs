@@ -2,18 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    readonly partial struct CharBlocks
+    public struct AsmSourceLine
     {
-        public static string format<T>(in T src)
-            where T : unmanaged, ICharBlock<T>
-                => cover(@as<T,char>(src), size<T>()/2).ToString().Trim();
+        CharBlock256 Storage;
+
+        [MethodImpl(Inline)]
+        public AsmSourceLine(string src)
+        {
+            Storage = src;
+        }
+
+        public string Format()
+            => Storage.Format();
     }
 }

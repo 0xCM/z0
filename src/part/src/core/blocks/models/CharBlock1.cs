@@ -19,7 +19,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct CharBlock1 : ICharBlock<CharBlock1>
     {
-        public char C;
+        char C;
 
         /// <summary>
         /// Presents block content as an editable buffer

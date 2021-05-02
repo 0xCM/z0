@@ -19,13 +19,19 @@ namespace Z0.Asm
             => instruction.RightOfFirst(Chars.Space).Split(Chars.Comma).Select(x => x.Trim());
 
         [MethodImpl(Inline), Op]
+        public ref AsmSourceLine source(string src, out AsmSourceLine dst)
+        {
+            dst = new AsmSourceLine(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
         public static AsmMnemonic mnemonic(string src)
             => new AsmMnemonic(src);
 
         [MethodImpl(Inline), Op]
         public static AsmLabel label(Identifier name)
             => new AsmLabel(name);
-
 
         [Op]
         public static LocalOffsetVector offsets(W16 w, ReadOnlySpan<AsmRow> src)

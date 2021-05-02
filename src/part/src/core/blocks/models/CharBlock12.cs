@@ -48,8 +48,9 @@ namespace Z0
         public static implicit operator CharBlock12(string src)
             => api.init(src, out CharBlock12 dst);
 
-
         public static CharBlock12 Empty => RP.Spaced12;
+
+        public static CharBlock12 Null => default;
 
         public const ushort CharCount = 12;
 
