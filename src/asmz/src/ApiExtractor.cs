@@ -6,11 +6,24 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
 
     using api = ApiExtraction;
+
+    public struct ApiHostDataset
+    {
+        public ResolvedHost Resolution;
+
+        public ApiHostExtracts HostExtracts;
+
+        public ApiMemberBlocks HostBlocks;
+
+        public ApiHostRoutines DecodedAsm;
+
+    }
 
     [ApiHost]
     public readonly struct ApiExtraction
@@ -201,6 +214,8 @@ namespace Z0.Asm
 
         AsmRoutineDecoder Decoder;
 
+        ApiDecoder ApiDecoder;
+
         AsmFormatter Formatter;
 
         HexPacks HexPacks;
@@ -213,6 +228,7 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
             Formatter = Wf.AsmFormatter();
             HexPacks = Wf.HexPacks();
+            ApiDecoder = Wf.ApiDecoder();
         }
 
         ResolvedHost Resolve(IApiHost src)
@@ -233,7 +249,7 @@ namespace Z0.Asm
         void Extract(IApiCatalog src, FS.FolderPath dir)
             => Extract(Resolve(src), dir);
 
-        Index<ApiMemberCode> Parse(ReadOnlySpan<ApiMemberExtract> src)
+        ApiMemberBlocks Parse(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             var buffer = alloc<ApiMemberCode>(count);
@@ -258,6 +274,9 @@ namespace Z0.Asm
             }
             return buffer;
         }
+
+        ApiHostRoutines Decode(ApiHostBlocks src)
+            => ApiDecoder.Decode(src);
 
         uint Emit(ReadOnlySpan<ApiMemberCode> src, FS.FilePath dst)
         {
@@ -301,43 +320,52 @@ namespace Z0.Asm
             return count;
         }
 
-        void Extract(ReadOnlySpan<ResolvedPart> src, FS.FolderPath dir)
+        Index<ApiHostDataset> Extract(ReadOnlySpan<ResolvedPart> src, FS.FolderPath dir)
         {
             var count = src.Length;
-            if(count == 0)
-                return;
-
+            var datasets = root.list<ApiHostDataset>();
             for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(src,i);
-                Extract(part,dir);
-            }
+                Extract(skip(src,i),dir,datasets);
+            return datasets.ToArray();
         }
 
-        void Extract(in ResolvedPart src, FS.FolderPath dir)
+        uint Extract(in ResolvedPart src, FS.FolderPath dir, List<ApiHostDataset> datasets)
         {
             var hosts = src.Hosts.View;
-            var count = hosts.Length;
+            var count = (uint)hosts.Length;
             if(count == 0)
-                return;
+                return 0;
 
             var dst = dir + FS.folder(src.Part.Format());
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
-                Extract(host, dst);
+                datasets.Add(Extract(host, dst));
             }
+            return count;
         }
 
-        void Extract(in ResolvedHost src, FS.FolderPath dir)
+        FS.FilePath RawExtractPath(FS.FolderPath dir, ApiHostUri host)
+            => dir + FS.file(host, "extracts-raw", FS.XPack);
+
+        FS.FilePath ParsedExtractPath(FS.FolderPath dir, ApiHostUri host)
+            => dir + FS.file(host, "extracts-parsed", FS.XPack);
+
+        ApiHostDataset Extract(in ResolvedHost src, FS.FolderPath dir)
         {
+            var dst = new ApiHostDataset();
+            dst.Resolution = src;
             var host = src.Host;
             var extracts = Extract(src);
-            Emit(extracts.View, dir + FS.file(host, "extracts", FS.XPack));
+            dst.HostExtracts = extracts;
+            Emit(extracts.View, RawExtractPath(dir,host));
             var parsed = Parse(extracts.View);
-            Emit(parsed, dir + FS.file(host, "parsed", FS.XPack));
-            var decoded = Decode(parsed);
+            dst.HostBlocks = parsed;
+            Emit(parsed.View, ParsedExtractPath(dir,host));
+            var decoded = Decode(parsed.View);
+            //dst.DecodedAsm = decoded;
             Emit(decoded, dir + FS.file(host, FS.Asm));
+            return dst;
         }
 
         void Extract(ApiHosts src, FS.FolderPath dir)

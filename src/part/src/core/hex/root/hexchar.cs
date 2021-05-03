@@ -13,6 +13,26 @@ namespace Z0
 
     partial struct Hex
     {
+        [MethodImpl(Inline), Op]
+        public static char hexchar(UpperCased @case, byte value)
+            => (char)symbol(@case, (HexDigit)value);
+
+        [MethodImpl(Inline), Op]
+        public static char hexchar(LowerCased @case, byte value)
+            => (char)symbol(@case, (HexDigit)value);
+
+        [MethodImpl(Inline)]
+        public static char hexchar<C>(C @case, byte value)
+            where C : unmanaged, ILetterCase
+        {
+            if(typeof(C) == typeof(LowerCased))
+                return hexchar(LowerCase,value);
+            else if(typeof(C) == typeof(UpperCased))
+                return hexchar(UpperCase,value);
+            else
+                throw no<C>();
+        }
+
         /// <summary>
         /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
         /// </summary>
@@ -30,10 +50,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static char hexchar(UpperCased @case, HexDigit value)
             => (char)symbol(@case, value);
-
-        [MethodImpl(Inline), Op]
-        public static char hexchar(UpperCased @case, byte value)
-            => (char)symbol(@case, (HexDigit)value);
 
         [MethodImpl(Inline), Op]
         public static char hexchar(LowerCased @case, byte value, byte pos)

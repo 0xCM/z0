@@ -14,12 +14,12 @@ namespace Z0
     partial struct Hex
     {
         [MethodImpl(Inline), Op]
-        public static HexSymLo symbol(LowerCased casing, byte index)
-            => index < LowerSymbolCount ? skip(LowerSymbols, index) : HexSymLo.None;
+        public static HexSym symbol(LowerCased casing, byte index)
+            => (HexSym)(index < LowerSymbolCount ? skip(LowerSymbols, index) : HexSymLo.None);
 
         [MethodImpl(Inline), Op]
-        public static HexSymUp symbol(UpperCased casing, byte index)
-            => index < UpperSymbolCount ? skip(UpperSymbols, index) : HexSymUp.None;
+        public static HexSym symbol(UpperCased casing, byte index)
+            => (HexSym)(index < UpperSymbolCount ? skip(UpperSymbols, index) : HexSymUp.None);
 
         [MethodImpl(Inline), Op]
         public static HexSym symbol(UpperCased @case, HexDigit src)
@@ -28,5 +28,29 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexSym symbol(LowerCased @case, HexDigit src)
             => (HexSym)code(@case, src);
+
+        [MethodImpl(Inline)]
+        public static HexSym symbol<C>(C @case, HexDigit src)
+            where C : unmanaged, ILetterCase
+        {
+            if(typeof(C) == typeof(LowerCased))
+                return symbol(LowerCase,src);
+            else if(typeof(C) == typeof(UpperCased))
+                return symbol(UpperCase,src);
+            else
+                throw no<C>();
+        }
+
+        [MethodImpl(Inline)]
+        public static HexSym symbol<C>(C @case, byte index)
+            where C : unmanaged, ILetterCase
+        {
+            if(typeof(C) == typeof(LowerCased))
+                return symbol(LowerCase,index);
+            else if(typeof(C) == typeof(UpperCased))
+                return symbol(UpperCase,index);
+            else
+                throw no<C>();
+        }
     }
 }

@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock8<T> SpanBlock<T>(this IDomainSource source, W8 w, T t = default)
+        public static SpanBlock8<T> SpanBlock<T>(this IDomainSource source, W8 w)
             where T : unmanaged
                 => source.Stream<T>().ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -124,16 +124,6 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock16<T> SpanBlock<T>(this IDomainSource source, W16 w, T t = default)
-            where T : unmanaged
-                => source.Stream<T>().ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
-
-        /// <summary>
-        /// Allocates and fills a single 16-bit block
-        /// </summary>
-        /// <param name="source">The data source</param>
-        /// <param name="w">The block width selector</param>
-        /// <typeparam name="T">The primal source value type</typeparam>
         public static SpanBlock16<T> SpanBlock<T>(this IDomainSource source, W16 w)
             where T : unmanaged
                 => source.Stream<T>().ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
@@ -145,7 +135,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock32<T> SpanBlock<T>(this ISource source, W32 w, T t = default)
+        public static SpanBlock32<T> SpanBlock<T>(this ISource source, W32 w)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,1);
 
@@ -156,7 +146,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock64<T> SpanBlock<T>(this ISource source, W64 w, T t = default)
+        public static SpanBlock64<T> SpanBlock<T>(this ISource source, W64 w)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,1);
 
@@ -167,7 +157,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock128<T> SpanBlock<T>(this ISource source, W128 w, T t = default)
+        public static SpanBlock128<T> SpanBlock<T>(this ISource source, W128 w)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,1);
 
@@ -178,7 +168,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock256<T> SpanBlock<T>(this ISource source, W256 w, T t = default)
+        public static SpanBlock256<T> SpanBlock<T>(this ISource source, W256 w)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,1);
 
@@ -189,7 +179,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock512<T> SpanBlock<T>(this ISource source, W512 w, T t = default)
+        public static SpanBlock512<T> SpanBlock<T>(this ISource source, W512 w)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,1);
 

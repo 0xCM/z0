@@ -61,5 +61,10 @@ namespace Z0
         [Op]
         public static HexPacks HexPacks(this IWfRuntime wf)
             => Z0.HexPacks.create(wf);
+
+
+        [Op]
+        public static SymServices SymServices(this IWfRuntime wf)
+            => Z0.SymServices.create(wf);
     }
 }

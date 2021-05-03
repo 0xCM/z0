@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IHexFormatter<T> : ISpanFormatter<T,HexSeqFormat,HexFormatOptions>
-        where T : unmanaged
-    {
+    using api = ByteSpans;
 
+    partial class XTend
+    {
+        public static ByteSpanSpec SpecifyByteSpan(this BinaryCode src, Identifier name, bool @static = true)
+            => api.specify(name, src, @static);
     }
 }

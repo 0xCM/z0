@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Implements a 64-bit PCG generator
     /// </summary>
-    public struct Pcg64 : IRngNav<ulong>
+    public struct Pcg64 : IRngNav<ulong>, IDomainRng<Pcg64,ulong>
     {
         internal const ulong Multiplier = Pcg.DefaultMultiplier;
 
@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => RngMath.contract(Next(),max);
+            => RngMath.contract(Next(), max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)

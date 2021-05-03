@@ -248,13 +248,9 @@ namespace Z0
             dst.SegDelimiter = segsep ?? DataDelimiter;
             dst.DelimitBlocks = delimitblocks;
             dst.BlockDelimiter = blocksep ?? Chars.Null;
-            dst.BlockWidth = null;
+            dst.BlockWidth = 0;
             return dst;
         }
-
-        [MethodImpl(Inline)]
-        public static HexSeqFormat seq(in HexFormatOptions hex, string delimiter = null)
-            => new HexSeqFormat(hex, delimiter ?? hex.SegDelimiter.ToString());
 
         /// <summary>
         /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F

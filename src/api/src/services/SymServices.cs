@@ -2,19 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Part;
     using static memory;
-
-    public static partial class XTend
-    {
-        public static SymServices SymServices(this IWfRuntime wf)
-            => Asm.SymServices.create(wf);
-    }
 
     public class SymServices : AppService<SymServices>
     {
@@ -77,7 +73,7 @@ namespace Z0.Asm
             {
                 ref readonly var block = ref skip(blocks,i);
                 var b = @bytes(block.Data);
-                seek(dst,i) = ByteSpans.spec(string.Format("Block{0:X2}", i), b.ToArray());
+                seek(dst,i) = ByteSpans.specify(string.Format("Block{0:X2}", i), b.ToArray());
             }
             var merge = ByteSpans.merge("CharBytes", buffer);
             var s0 = recover<char>(merge.Segment(16,16));
@@ -132,6 +128,6 @@ namespace Z0.Asm
 
         public ByteSpanSpec NameProp<K>(Sym<K> src)
             where K : unmanaged
-                => ByteSpans.spec(src.Name, EncodeText(src.Name));
+                => ByteSpans.specify(src.Name, EncodeText(src.Name));
     }
 }

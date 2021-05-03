@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    public readonly struct HexFormatter<T> : IHexFormatter<T>
+    public readonly struct HexFormatter<T>
         where T : unmanaged
     {
         readonly ISystemFormatter<T> BaseFormatter;
@@ -20,65 +21,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string FormatItem(T src)
-            => FormatItem(src, DefaultConfig);
+            => FormatItem(src, HexFormatSpecs.options());
 
         [MethodImpl(Inline)]
-        public string FormatItem(T src, in HexFormatOptions hex)
+        public string FormatItem(T src, in HexFormatOptions config)
             => string.Concat(
-                hex.Specifier && hex.Specifier ? HexFormatSpecs.PreSpec : string.Empty,
-                hex.ZeroPad ? BaseFormatter.Format(src, hex.FormatCode).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatCode),
-                hex.Specifier && !hex.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
+                config.Specifier && config.Specifier ? HexFormatSpecs.PreSpec : string.Empty,
+                config.ZeroPad ? BaseFormatter.Format(src, config.CaseIndicator.ToString()).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, config.CaseIndicator.ToString()),
+                config.Specifier && !config.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
                 );
 
-        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in HexSeqFormat config)
-        {
-            Span<string> dst = new string[src.Length];
-            for(var i=0; i<dst.Length; i++)
-                dst[i] = FormatItem(src[i], config.HexFormat);
-            return dst;
-        }
+        public string Format(ReadOnlySpan<T> src, string delimiter)
+            => HexFormat.format(src, delimiter, HexFormatSpecs.options());
 
-        public string Format(ReadOnlySpan<T> src, in HexSeqFormat seq, in HexFormatOptions hex)
-        {
-            var result = string.Empty.Build();
-
-            for(var i = 0; i<src.Length; i++)
-            {
-                var formatted = HexFormat.format(src[i], hex.ZeroPad, hex.Specifier, hex.Uppercase, hex.PreSpec);
-                result.Append(formatted);
-                if(i != src.Length - 1)
-                    result.Append(seq.Delimiter);
-            }
-
-            return result.ToString();
-        }
-
-        public string Format(ReadOnlySpan<T> src, in HexSeqFormat seq)
-        {
-            var result = text.build();
-            var config = seq.HexFormat;
-
-            for(var i=0; i<src.Length; i++)
-            {
-                var formatted = HexFormat.format(src[i], config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec);
-                result.Append(formatted);
-                if(i != src.Length - 1)
-                    result.Append(seq.Delimiter);
-            }
-
-            return result.ToString();
-        }
+        public string Format(ReadOnlySpan<T> src, HexFormatOptions options)
+            => HexFormat.format(src, CharText.Space, options);
 
         public string Format(ReadOnlySpan<T> src)
-            => Format(src, DefaultSeqConfig);
-
-        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src)
-            => FormatItems(src, DefaultSeqConfig);
-
-        static HexFormatOptions DefaultConfig
-            => HexFormatSpecs.options();
-
-        static HexSeqFormat DefaultSeqConfig
-            => HexFormatSpecs.seq(DefaultConfig);
+            => Format(src, CharText.Space);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     }
 
     public interface ITextLine<T> : ITextLine, ITextBlock<T>
-        where T : ITextual, IParseable<T>
+        where T : ITextBlock<T>
     {
         new T Content {get;}
 

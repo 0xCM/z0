@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-
-    using static memory;
-
     partial struct Sources
     {
         /// <summary>

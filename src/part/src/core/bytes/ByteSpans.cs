@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
     using static memory;
@@ -17,8 +16,16 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static ByteSpanProp prop(MemberInfo member, BinaryCode code, MemoryAddress location, ByteSize size)
-            => new ByteSpanProp(member,code,location,size);
+        public static ByteSpanSpec specify(Identifier name, BinaryCode data, bool @static = true)
+            => new ByteSpanSpec(name, data, @static);
+
+        [Op]
+        public static ByteSpanSpec specify(OpUri uri, BinaryCode data, bool @static = true)
+            => new ByteSpanSpec(LegalIdentityBuilder.code(uri.OpId), data, @static);
+
+        [Op]
+        public static string asmcomment(OpUri uri, BinaryCode src)
+            => string.Format("; {0}", specify(uri, src).Format());
 
         [MethodImpl(Inline), Op]
         public static ByteSize size(Index<ByteSpanSpec> src)
@@ -30,9 +37,27 @@ namespace Z0
             return size;
         }
 
-        [MethodImpl(Inline), Op]
-        public static ByteSpanSpec spec(Identifier name, BinaryCode data, bool @static = true)
-            => new ByteSpanSpec(name, data, @static);
+        [Op]
+        public static string format(ByteSpanSpec src)
+        {
+            var dst = text.buffer();
+            render(src,dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static void render(ByteSpanSpec src, ITextBuffer dst)
+        {
+            dst.Append("public");
+            dst.Append(Chars.Space);
+            dst.Append(src.IsStatic ? text.rspace("static") : EmptyString);
+            dst.Append("ReadOnlySpan<byte>");
+            dst.Append(Chars.Space);
+            dst.Append(src.Name);
+            dst.Append(" => ");
+            dst.Append(string.Concat("new byte", text.bracket(src.Data.Length), text.embrace(HexFormat.array<byte>(src.Data))));
+            dst.Append(Chars.Semicolon);
+        }
 
         [Op]
         public static ByteSpanSpec merge(Identifier name, ByteSpanSpecs props)
@@ -50,31 +75,7 @@ namespace Z0
                 for(var j=0; j<c1; j++, k++)
                     seek(dst,k) = skip(src,j);
             }
-            return spec(name, buffer, props.First.IsStatic);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static string property(CodeBlock src, OpIdentity id)
-            => comment(new ByteSpanSpec(LegalIdentityBuilder.code(id), src).Format());
-
-        [MethodImpl(Inline), Op]
-        public static string comment(string text)
-            =>  $"; {text}";
-
-        [Op]
-        public static string format(ByteSpanSpec src)
-        {
-            var dst = text.build();
-            dst.Append("public");
-            dst.Append(Chars.Space);
-            dst.Append(src.IsStatic ? text.rspace("static") : EmptyString);
-            dst.Append("ReadOnlySpan<byte>");
-            dst.Append(Chars.Space);
-            dst.Append(src.Name);
-            dst.Append(" => ");
-            dst.Append(string.Concat("new byte", text.bracket(src.Data.Length), text.embrace(HexFormats.array<byte>(src.Data))));
-            dst.Append(Chars.Semicolon);
-            return dst.ToString();
+            return specify(name, buffer, props.First.IsStatic);
         }
     }
 }

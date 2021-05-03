@@ -18,12 +18,25 @@ namespace Z0.Asm
         public static string[] operands(string instruction)
             => instruction.RightOfFirst(Chars.Space).Split(Chars.Comma).Select(x => x.Trim());
 
-        [MethodImpl(Inline), Op]
-        public ref AsmSourceLine source(string src, out AsmSourceLine dst)
+        public static string Format(in AsmSourceLine src)
         {
-            dst = new AsmSourceLine(src);
-            return ref dst;
+            if(src.Label.IsNonEmpty)
+                return string.Format("{0}:", src.Label.Name);
+            else if(src.Statement.IsNonEmpty)
+            {
+                if(src.Comment.IsNonEmpty)
+                    return string.Format("{0,-46} ; {1}", src.Statement, src.Comment.Content);
+                else
+                    return src.Statement.Format();
+            }
+            else if(src.Comment.IsNonEmpty)
+            {
+                return string.Format("; {0}", src.Comment.Content);
+            }
+            else
+                return EmptyString;
         }
+
 
         [MethodImpl(Inline), Op]
         public static AsmMnemonic mnemonic(string src)

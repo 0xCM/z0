@@ -20,7 +20,7 @@ namespace Z0.Tools
 
         DataList<CultSummaryRecord> Summaries;
 
-        DataList<AsmDocLine> AsmLines;
+        DataList<AsmSourceLine> AsmLines;
 
         Index<char> HexCharBuffer;
 
@@ -154,9 +154,9 @@ namespace Z0.Tools
             {
                 ref readonly var record = ref skip(src,i);
                 if(record.RecordKind == CultRecordKind.Statement)
-                    AsmLines.Add(new AsmDocLine(record.LineNumber, statement(record.Statement), comment(record.Comment)));
+                    AsmLines.Add(new AsmSourceLine(record.LineNumber, statement(record.Statement), comment(record.Comment)));
                 else if(record.RecordKind == CultRecordKind.Label)
-                    AsmLines.Add(new AsmDocLine(record.LineNumber, label(record.Label.Format()), comment(record.Comment)));
+                    AsmLines.Add(new AsmSourceLine(record.LineNumber, label(record.Label.Format()), comment(record.Comment)));
                 else if(record.RecordKind == CultRecordKind.Summary)
                 {
                     var summary = Summarize(record);
@@ -307,7 +307,7 @@ namespace Z0.Tools
             {
                 foreach(var line in AsmLines)
                 {
-                    var lf = line.Format();
+                    var lf =  AsmCore.Format(line);
                     if(lf.StartsWith(summary.Mnemonic.Format(MnemonicCase.Lowercase) + Chars.Space))
                         writer.WriteLine(lf);
                 }

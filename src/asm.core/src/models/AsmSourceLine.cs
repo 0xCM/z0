@@ -9,17 +9,38 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct AsmSourceLine
+    public readonly struct AsmSourceLine
     {
-        CharBlock256 Storage;
+        public uint LineNumber {get;}
+
+        public AsmLabel Label {get;}
+
+        public AsmStatementExpr Statement {get;}
+
+        public AsmComment Comment {get;}
 
         [MethodImpl(Inline)]
-        public AsmSourceLine(string src)
+        public AsmSourceLine(uint number, AsmStatementExpr statement, AsmComment? comment = null)
         {
-            Storage = src;
+            LineNumber = number;
+            Label = AsmLabel.Empty;
+            Statement = statement;
+            Comment = comment ?? AsmComment.Empty;
         }
 
-        public string Format()
-            => Storage.Format();
+        [MethodImpl(Inline)]
+        public AsmSourceLine(uint number, AsmLabel label, AsmComment? comment = null)
+        {
+            LineNumber = number;
+            Label = label;
+            Statement = AsmStatementExpr.Empty;
+            Comment = comment ?? AsmComment.Empty;
+        }
+
+        public static AsmSourceLine Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmSourceLine(0, AsmStatementExpr.Empty);
+        }
     }
 }

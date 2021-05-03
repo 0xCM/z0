@@ -38,9 +38,10 @@ namespace Z0
         /// Formats a span of hex digits as a contiguous block
         /// </summary>
         /// <param name="src">The source digits</param>
-        [MethodImpl(Inline), Op]
-        public static void render(ReadOnlySpan<HexDigit> src, Span<char> dst)
-            => Hex.render(src,dst);
+        [MethodImpl(Inline)]
+        public static void render<C>(C @case, ReadOnlySpan<HexDigit> src, Span<char> dst)
+            where C : unmanaged, ILetterCase
+                => Hex.render(@case, src,dst);
 
         [MethodImpl(Inline), Op]
         public static void render(Base2 @base, ReadOnlySpan<byte> src, Span<char> dst)

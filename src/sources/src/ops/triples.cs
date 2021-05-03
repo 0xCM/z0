@@ -15,11 +15,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Triples<T> triples<T>(ISource src, int count, T t = default)
             where T : struct
-                => triplestream(src, t).Take(count).Array();
+                => triplestream<T>(src).Take(count).Array();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Triples<T> triples<T>(ISource src, Span<Triple<T>> dst, T t = default)
             where T : struct
-                => memory.deposit(triplestream(src, t).Take(dst.Length),dst);
+                => memory.deposit(triplestream<T>(src).Take(dst.Length),dst);
     }
 }

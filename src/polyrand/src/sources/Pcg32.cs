@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Pcg;
 
-    public struct Pcg32 : IRngNav<uint>, IRngDomainSource<ulong>
+    public struct Pcg32 : IRngNav<uint>, IDomainRng<Pcg32,ulong>
     {
         [MethodImpl(Inline)]
         internal Pcg32(ulong s0, ulong? index = null)

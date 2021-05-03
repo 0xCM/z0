@@ -13,6 +13,9 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmBitstrings
     {
+        public static AsmBitstrings service()
+            => new AsmBitstrings();
+
         [Op]
         public static uint render(AsmHexCode src, Span<char> dst)
         {
@@ -50,19 +53,6 @@ namespace Z0.Asm
             return 10;
         }
 
-        // public static AsmBitstrings service()
-        //     => new AsmBitstrings(BitFormatter.create<byte>(BitFormatter.blocked(4)));
-
-        public static AsmBitstrings service()
-            => new AsmBitstrings();
-
-        // readonly BitFormatter<byte> Formatter;
-
-        // [MethodImpl(Inline)]
-        // AsmBitstrings(BitFormatter<byte> formatter)
-        // {
-        //     Formatter = formatter;
-        // }
 
         public string Format(AsmHexCode src)
         {
@@ -70,9 +60,6 @@ namespace Z0.Asm
             var count = render(src, block.Data);
             var chars = slice(block.Data,0,count);
             return text.format(chars);
-            // var bytes = src.Bytes.Replicate();
-            // bytes.Reverse();
-            // return Formatter.Format(bytes);
         }
     }
 }

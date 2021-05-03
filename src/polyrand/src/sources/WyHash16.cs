@@ -9,12 +9,25 @@ namespace Z0
 
     using static Part;
 
+    using G = WyHash16;
+
     /// <summary>
     /// Implements a 16-bit random number generator
     /// </summary>
     /// <remarks>Algorithms take from https://lemire.me/blog/2019/07/03/a-fast-16-bit-random-number-generator/</remarks>
-    public class WyHash16 : IRngDomainSource<ushort>
+    public struct WyHash16 : IDomainRng<WyHash16,ushort>
     {
+        [MethodImpl(Inline), Op]
+        public static ushort hash16(uint input, uint key)
+        {
+            var hash = input * key;
+            return (ushort) (((hash >> 16) ^ hash) & 0xFFFF);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ushort next(ref G rng)
+            => hash16(rng.State += rng.Index, 0x2ab);
+
         [MethodImpl(Inline)]
         internal WyHash16(ushort state, ushort? index = null)
         {
@@ -31,7 +44,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ushort Next()
-            => Hash16(State += Index, 0x2ab);
+            => next(ref this);
+
+            //=> hash16(State += Index, 0x2ab);
 
         public ushort Next(ushort max)
         {
@@ -40,7 +55,7 @@ namespace Z0
             var l = (ushort)m;
             if (l < max)
             {
-                var t = mod(negate(max), max);
+                var t = math.mod(math.negate(max), max);
                 while (l < t)
                 {
                     x = Next();
@@ -53,26 +68,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ushort Next(ushort min, ushort max)
-            => add(min, Next((ushort)(max - min)));
-
-        [MethodImpl(Inline)]
-        ushort Hash16(uint input, uint key)
-        {
-            var hash = input * key;
-            return (ushort) (((hash >> 16) ^ hash) & 0xFFFF);
-        }
-
-        [MethodImpl(Inline)]
-        static ushort mod(ushort a, ushort m)
-            => (ushort)(a % m);
-
-        [MethodImpl(Inline)]
-        static ushort negate(ushort src)
-            => (ushort)(~src + 1);
-
-        [MethodImpl(Inline)]
-        static ushort add(ushort a, ushort b)
-            => (ushort)(a + b);
-
+            => math.add(min, Next((ushort)(max - min)));
     }
 }

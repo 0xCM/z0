@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="index">The stream index</param>
         [MethodImpl(Inline), Op]
         public static Pcg64 pcg64(ulong s0, ulong? index = null)
-            => new Pcg64(s0,index);
+            => new Pcg64(s0, index);
 
         /// <summary>
         /// Creates a 32-bit Pcg RNG
@@ -60,7 +60,7 @@ namespace Z0
             var count = seeds.Length;
             var g = span<Pcg32>(count);
             for(var i=0; i<count; i++)
-                g[i] = nav32(seeds[i], indices[i]);
+                seek(g,i) = nav32(skip(seeds,i), skip(indices,i));
             return g;
         }
 
@@ -68,7 +68,7 @@ namespace Z0
         public static ulong next(ref Pcg64 src)
             => grind64(step(ref src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void retreat(ref Pcg64 src, ulong count)
             => src.Advance(gmath.negate(count));
 
@@ -123,7 +123,7 @@ namespace Z0
 
         public const ulong DefaultIndex = 1442695040888963407;
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static ulong advance(ulong state, ulong delta, ulong multiplier, ulong index)
         {
             ulong factor = 1u;

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     public readonly struct TextBlock<T> : ITextBlock<T>
-        where T : ITextual, IParseable<T>
+        where T : ITextual
     {
         public T Content {get;}
 

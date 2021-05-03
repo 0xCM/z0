@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public ref struct CpuRuntime
     {
@@ -42,7 +43,7 @@ namespace Z0
                 var steps = buffer.Slice(0, ProcessedCount);
                 var log = Buffers.Log();
                 var count = Hex.render(steps, log);
-                var hex = log.Slice(0,count).ToString();
+                var hex =  text.format(slice(log,0,count));
                 Wf.Status(hex);
             }
             catch(Exception error)

@@ -17,7 +17,6 @@ namespace Z0
         /// Produces a non-deterministic seed
         /// </summary>
         /// <typeparam name="T">The seed type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T entropy<T>()
             where T : unmanaged
                 => Entropy.value<T>();
@@ -96,7 +95,7 @@ namespace Z0
         /// <param name="seed">The initial state</param>
         [MethodImpl(Inline), Op]
         public static IPolyrand xorStars256(ulong[] seed = null)
-            => create(new XOrShift256(seed ?? PolySeed256.Default));
+            => create(XOrShift256.create(seed ?? PolySeed256.Default));
 
         /// <summary>
         /// Creates an XOrShift 1024 rng
@@ -107,7 +106,7 @@ namespace Z0
             => create(new XOrShift1024(seed ?? PolySeed1024.Default));
 
         [MethodImpl(Inline), Op]
-        public static IPolyrand create(IRngDomainSource<ulong> src)
+        public static IPolyrand create(IDomainRng<ulong> src)
             => new Polyrand(src);
 
         [MethodImpl(Inline), Op]

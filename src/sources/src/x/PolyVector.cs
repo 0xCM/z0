@@ -281,7 +281,7 @@ namespace Z0
             var len = src.Length;
             var dst = Z0.RowVectors.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
-                dst[i] = gAlg.squeeze(src[i],max[i]);
+                dst[i] = gAlg.squeeze(src[i], max[i]);
             return dst;
         }
     }

@@ -8,32 +8,107 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static HexFormatSpecs;
     using static memory;
 
     partial struct HexFormat
     {
+        [MethodImpl(Inline), Op]
+        public static HexDataFormatter DataFormatter(MemoryAddress? @base = null, ushort bpl = 20, bool labels = true)
+            => new HexDataFormatter(new HexLineConfig(bpl, labels), @base);
+
         /// <summary>
-        /// Renders a sequence of primal numeric T-cells as a sequence of hex-formatted values
+        /// Creates a <see cref='HexFormatter<T>'/> for primitive numeric types
         /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="config">The format configuration</param>
-        /// <param name="dst">The rendered data receiver</param>
-        /// <typeparam name="T">The primal numeric type</typeparam>
-        [Op, Closures(Closure)]
-        public static void render<T>(ReadOnlySpan<T> src, in HexFormatOptions config, ITextBuffer dst)
+        /// <typeparam name="T">The primitive numeric type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static HexFormatter<T> formatter<T>()
+            where T : unmanaged
+                => new HexFormatter<T>(SystemHexFormatters.create<T>());
+
+        /// <summary>
+        /// Formats a sequence of primal numeric calls as data-formatted hex
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string array<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => HexFormat.formatter<T>().Format(src, HexFormatSpecs.HexArray);
+
+        /// <summary>
+        /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
+        /// </summary>
+        /// <param name="value">The field value</param>
+        /// <typeparam name="E">The field value type</typeparam>
+        /// <typeparam name="T">The field data type</typeparam>
+        public static string field<E,T>(E src, Base10 @base, string name)
+            where E : unmanaged, Enum
             where T : unmanaged
         {
-            var count = src.Length;
-            ref readonly var cell = ref first(src);
-            var last = count - 1;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var current = ref skip(cell,i);
-                dst.Append(format(current, config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec));
+            var data = ClrEnums.scalar<E,T>(src);
+            return text.concat(name, Chars.Colon, Numeric.format(data, @base));
+        }
 
-                if(i != last)
-                    dst.Append(config.SegDelimiter);
+        /// <summary>
+        /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
+        /// </summary>
+        /// <param name="value">The field value</param>
+        /// <typeparam name="E">The field value type</typeparam>
+        /// <typeparam name="T">The field data type</typeparam>
+        public static string field<E,T>(E src, Base16 @base, string name)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => text.concat(name, Chars.Colon, formatter<T>().FormatItem(ClrEnums.scalar<E,T>(src)));
+
+        [Op, Closures(Closure)]
+        public static string format<T>(ReadOnlySpan<T> src, string delimiter, in HexFormatOptions config)
+            where T : unmanaged
+        {
+            var result = text.buffer();
+            var count = src.Length;
+            for(var i = 0; i<count; i++)
+            {
+                var formatted = format(skip(src,i), config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec);
+                result.Append(formatted);
+                if(i != count - 1)
+                    result.Append(delimiter);
             }
+
+            return result.Emit();
+        }
+
+        [Op]
+        public static string format(ReadOnlySpan<byte> src, in HexFormatOptions config)
+        {
+            int? blockwidth = null;
+            var dst = text.build();
+            var count = src.Length;
+            var pre = (config.Specifier && config.PreSpec) ? "0x" : EmptyString;
+            var post = (config.Specifier && !config.PreSpec) ? "h" : EmptyString;
+            var spec = CaseSpec(config.Uppercase).ToString();
+            var width = config.BlockWidth == 0 ? ushort.MaxValue : config.BlockWidth;
+            var counter = 0;
+
+            for(var i=0; i<count; i++)
+            {
+                var value = skip(src,i).ToString(spec);
+                var padded = config.ZeroPad ? value.PadLeft(2, Chars.D0) : value;
+                dst.Append(string.Concat(pre, padded, post));
+                if(config.DelimitSegs && i != count - 1)
+                    dst.Append(config.SegDelimiter);
+
+                if(++counter >= width && config.DelimitBlocks)
+                {
+                    if(config.BlockDelimiter == Chars.NL || config.BlockDelimiter == Chars.LineFeed)
+                        dst.AppendLine();
+                    else
+                        dst.Append(config.BlockDelimiter);
+                    counter = 0;
+                }
+            }
+
+            return dst.ToString();
         }
 
         /// <summary>

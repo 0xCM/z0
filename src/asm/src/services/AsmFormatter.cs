@@ -105,7 +105,7 @@ namespace Z0.Asm
             var i = z8;
             seek(dst, i++) = src.Separator;
             seek(dst, i++) = AsmCore.comment($"{src.DisplaySig}::{src.Uri}");
-            seek(dst, i++) = ByteSpans.property(src.CodeBlock, src.Uri.OpId);
+            seek(dst, i++) = ByteSpans.asmcomment(src.Uri, src.CodeBlock);
             seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
             seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
             return i;

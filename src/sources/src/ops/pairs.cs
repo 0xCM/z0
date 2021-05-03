@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct Sources
     {
-
         [Op, Closures(Closure)]
         public static IEnumerable<Pair<T>> pairs<T>(ISource src)
             where T : struct

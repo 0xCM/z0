@@ -30,7 +30,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal element type</typeparam>
     [Free]
-    public interface IRngNav<T> : IRngNav, IRngDomainSource<T>
+    public interface IRngNav<T> : IRngNav, IDomainRng<T>
         where T : unmanaged
     {
 

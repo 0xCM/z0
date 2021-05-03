@@ -25,7 +25,7 @@ namespace Z0
 
     [Free]
     public interface ITextBlock<T> : ITextBlock, IDataType<T>
-        where T : ITextual, IParseable<T>
+        where T : ITextual
     {
         new T Content {get;}
 

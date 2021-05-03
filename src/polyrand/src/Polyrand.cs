@@ -16,12 +16,12 @@ namespace Z0
     /// </summary>
     public class Polyrand : IPolyrand
     {
-        readonly IRngDomainSource<ulong> Points;
+        readonly IDomainRng<ulong> Points;
 
         public Option<IRngNav> Navigator {get;}
 
         [MethodImpl(Inline)]
-        internal Polyrand(IRngDomainSource<ulong> points)
+        internal Polyrand(IDomainRng<ulong> points)
         {
             Points = points;
             Navigator = default;

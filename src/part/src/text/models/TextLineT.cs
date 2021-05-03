@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     public readonly struct TextLine<T> : ITextLine<T>
-        where T : ITextual, IParseable<T>
+        where T : ITextBlock<T>
     {
         public uint LineNumber {get;}
 
@@ -27,5 +27,8 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static implicit operator TextBlock<T>(TextLine<T> src)
+            => src.Content;
     }
 }

@@ -8,93 +8,113 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
+
+    using G = XOrShift256;
 
     /// <summary>
     /// Defines pseudorandom number generator
     /// </summary>
     /// <remarks> Core algorithm taken from http://xoshiro.di.unimi.it/xoshiro256starstar.c</remarks>
-    public class XOrShift256 : IRngDomainSource<ulong>
+    [ApiHost]
+    public struct XOrShift256 : IDomainRng<XOrShift256,ulong>
     {
-        readonly ulong[] State;
+        ulong S0;
 
-        [MethodImpl(Inline)]
-        internal XOrShift256(ulong[] seed)
+        ulong S1;
+
+        ulong S2;
+
+        ulong S3;
+
+        [MethodImpl(Inline), Op]
+        public static G create(ReadOnlySpan<ulong> seed)
+            => new G(seed);
+
+        [MethodImpl(Inline), Op]
+        public static ulong next(ref G rng)
         {
-            this.State = seed;
-            jump(J128);
+            var next = math.rotl(rng.S1 * 5, 7) * 9;
+            var t = rng.S1 << 17;
+            rng.S2 ^= rng.S0;
+            rng.S3 ^= rng.S1;
+            rng.S1 ^= rng.S2;
+            rng.S0 ^= rng.S3;
+            rng.S2 ^= t;
+            rng.S3 = math.rotl(rng.S3, 45);
+            return next;
         }
 
-        void jump(ulong[] J)
+        [MethodImpl(Inline), Op]
+        public static ulong next(ref G rng, ulong max)
+            => RngMath.contract(next(ref rng), max);
+
+        [MethodImpl(Inline), Op]
+        public static ulong next(ref G rng, ulong min, ulong max)
+            => min + next(ref rng, max - min);
+
+        [MethodImpl(Inline), Op]
+        public static void jump(ref G rng, ReadOnlySpan<ulong> J)
         {
+            var count = J.Length;
             var s0 = 0UL;
             var s1 = 0UL;
             var s2 = 0UL;
             var s3 = 0UL;
-            for(var i = 0; i < J.Length; i++)
-                for(var b = 0; b < 64; b++)
+            for(var i = 0; i<count; i++)
+                for(var b = 0; b<64; b++)
                 {
-                    var j = J[i] & 1UL << b;
+                    var j = skip(J,i) & 1UL << b;
                     if (j != 0)
                     {
-                        s0 ^= State[0];
-                        s1 ^= State[1];
-                        s2 ^= State[2];
-                        s3 ^= State[3];
+                        s0 ^= rng.S0;
+                        s1 ^= rng.S1;
+                        s2 ^= rng.S2;
+                        s3 ^= rng.S3;
                     }
-                    Next();
+                    next(ref rng);
                 }
 
-            State[0] = s0;
-            State[1] = s1;
-            State[2] = s2;
-            State[3] = s3;
+            rng.S0 = s0;
+            rng.S1 = s1;
+            rng.S2 = s2;
+            rng.S3 = s3;
+        }
+
+        [MethodImpl(Inline)]
+        internal XOrShift256(ReadOnlySpan<ulong> seed)
+        {
+            S0 = skip(seed, 0);
+            S1 = skip(seed, 1);
+            S2 = skip(seed, 2);
+            S3 = skip(seed, 3);
+            jump(ref this, J128);
         }
 
         [MethodImpl(Inline)]
         public ulong Next()
-        {
-            var next = rotl(State[1] * 5, 7) * 9;
-            var t = State[1] << 17;
-
-            State[2] ^= State[0];
-            State[3] ^= State[1];
-            State[1] ^= State[2];
-            State[0] ^= State[3];
-
-            State[2] ^= t;
-
-            State[3] = rotl(State[3], 45);
-
-            return next;
-        }
+            => next(ref this);
 
         public RngKind RngKind
             => RngKind.XOrShift256;
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => RngMath.contract(Next(), max);
+            => next(ref this,max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)
-            => min + Next(max - min);
+            => next(ref this, min, max);
 
         /* When supplied to the jump function, it is equivalent
         to 2^128 calls to next(); it can be used to generate 2^128
         non-overlapping subsequences for parallel computations. */
-        static readonly ulong[] J128 =
-            { 0x180ec6d33cfd0aba, 0xd5a61266f0c9392c,
-              0xa9582618e03fc9aa, 0x39abdc4529b1661c };
+        static ulong[] J128 => new ulong[]{0x180ec6d33cfd0aba, 0xd5a61266f0c9392c, 0xa9582618e03fc9aa, 0x39abdc4529b1661c};
 
         /* When supplied ot the jump function, t is equivalent to
         2^192 calls to next(); it can be used to generate 2^64 starting points,
         from each of which jump() will generate 2^64 non-overlapping
         subsequences for parallel distributed computations. */
-        static readonly ulong[] J192 =
-            { 0x76e15d3efefdcbbf, 0xc5004e441c522fb3,
-              0x77710069854ee241, 0x39109bb02acbe635 };
-
-        static ulong rotl(ulong x, int k)
-            => (x << k) | (x >> (64 - k));
+        static ulong[] J192 => new ulong[]{0x76e15d3efefdcbbf, 0xc5004e441c522fb3, 0x77710069854ee241, 0x39109bb02acbe635};
     }
 }

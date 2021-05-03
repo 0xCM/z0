@@ -22,7 +22,7 @@ namespace Z0
             => HexFormat.format(src, HexFormatSpecs.HexData);
 
         [Op]
-        public static string FormatHex(this byte[] src, HexFormatOptions config)
+        public static string FormatHex(this byte[] src, in HexFormatOptions config)
             => HexFormat.format(src, config);
 
         /// <summary>

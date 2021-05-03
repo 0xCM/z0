@@ -6,16 +6,16 @@ namespace Z0
 {
     public interface ILetterCase
     {
-        bool IsUpper {get;}    
+        bool IsUpper {get;}
 
-        bool IsLower {get;}    
+        bool IsLower {get;}
 
         LetterCaseKind Kind {get;}
     }
-    
-    public interface ILetterCase<F> : ILetterCase
-        where F : unmanaged, ILetterCase<F>
+
+    public interface ILetterCase<C> : ILetterCase
+        where C : unmanaged, ILetterCase<C>
     {
-        
+
     }
 }

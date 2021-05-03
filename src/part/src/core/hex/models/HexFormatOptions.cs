@@ -5,13 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Defines a common set of hex formatting options
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public struct HexFormatOptions
     {
         /// <summary>
@@ -62,16 +61,6 @@ namespace Z0
         /// <summary>
         /// The width of a block, if applicable
         /// </summary>
-        public uint? BlockWidth;
-
-        /// <summary>
-        /// The hex format string as determined by configuration
-        /// </summary>
-        public string FormatCode
-            => $"{CaseIndicator}";
-
-        [MethodImpl(Inline)]
-        public static implicit operator HexSeqFormat(in HexFormatOptions src)
-            => HexFormatSpecs.seq(src);
+        public ushort BlockWidth;
     }
 }
