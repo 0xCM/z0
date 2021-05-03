@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System.Runtime.CompilerServices;
-    using System;
 
     using static Part;
 
     [Event(Kind)]
-    public readonly struct EmittedTableEvent<T> : IWfEvent<EmittedTableEvent<T>>
+    public class EmittedTableEvent<T> : IWfEvent<EmittedTableEvent<T>>
     {
         public const string EventName = GlobalEvents.EmittedTable;
 
@@ -18,13 +17,16 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public TableId TableId => Tables.tableid(typeof(T));
-
         public Count RowCount {get;}
 
         public FS.FilePath Target {get;}
 
-        public FlairKind Flair => FlairKind.Ran;
+        public EmittedTableEvent()
+        {
+            EventId = WfEventId.Empty;
+            RowCount = 0;
+            Target = FS.FilePath.Empty;
+        }
 
         [MethodImpl(Inline)]
         public EmittedTableEvent(WfStepId step, Count count, FS.FilePath target, CorrelationToken ct)
@@ -41,6 +43,10 @@ namespace Z0
             RowCount = 0;
             Target = target;
         }
+
+        public TableId TableId => Tables.tableid(typeof(T));
+
+        public FlairKind Flair => FlairKind.Ran;
 
         public string Format()
             => text.format(EventId, Msg.EmittedTable.Capture(TableId, RowCount, Target));

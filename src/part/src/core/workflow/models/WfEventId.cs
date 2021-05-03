@@ -16,6 +16,12 @@ namespace Z0
         public static WfEventId define(string name, WfStepId step)
             => new WfEventId(name, step, CorrelationToken.Default);
 
+        public static WfEventId Empty
+        {
+            [MethodImpl(Inline)]
+            get => new WfEventId(EmptyString, Timestamp.Zero);
+        }
+
         public string Identifier {get;}
 
         public Timestamp Ts {get;}

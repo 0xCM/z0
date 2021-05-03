@@ -29,7 +29,7 @@ namespace Z0
     /// <typeparam name="F">The reification type</typeparam>
     [Free]
     public interface IDataEvent<H> : IDataEvent, IAppEvent<H>
-        where H : struct, IDataEvent<H>
+        where H : IDataEvent<H>, new()
     {
 
     }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Struct)]
+    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class)]
     public class EventAttribute : Attribute
     {
         public EventAttribute(EventKind kind)

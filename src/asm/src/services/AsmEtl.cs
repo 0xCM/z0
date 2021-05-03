@@ -37,8 +37,8 @@ namespace Z0.Asm
         public Index<ApiInstruction> ApiInstructions(ApiCodeBlock code, IceInstruction[] src)
             => ToApiInstructions(code,src);
 
-        public ApiInstructionBlock ApiInstructionBlock(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
-            => new ApiInstructionBlock(@base, ApiInstructions(code, src));
+        public ApiHostRoutine ApiInstructionBlock(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
+            => new ApiHostRoutine(@base, ApiInstructions(code, src));
 
         [Op]
         public static Index<ApiInstruction> ToApiInstructions(ApiCodeBlock code, IceInstruction[] src)

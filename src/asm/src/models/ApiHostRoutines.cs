@@ -26,9 +26,9 @@ namespace Z0.Asm
         public MemoryAddress BaseAddress {get;}
 
         /// <summary>
-        /// The decoded instructions
+        /// The decoded members
         /// </summary>
-        public ApiInstructionBlock[] Routines {get;}
+        public Index<ApiHostRoutine> Members {get;}
 
         /// <summary>
         /// The total instruction count
@@ -36,12 +36,12 @@ namespace Z0.Asm
         public uint InstructionCount {get;}
 
         [MethodImpl(Inline)]
-        public ApiHostRoutines(ApiHostUri host, ApiInstructionBlock[] src)
+        public ApiHostRoutines(ApiHostUri host, ApiHostRoutine[] src)
         {
             Uri = host;
-            Routines = src.OrderBy(x => x.BaseAddress).ToArray();
-            BaseAddress = Routines.Length != 0 ? Routines[0].BaseAddress : MemoryAddress.Zero;
-            InstructionCount = (uint)Routines.Sum(i => (long)i.InstructionCount);
+            Members = src.OrderBy(x => x.BaseAddress).ToArray();
+            BaseAddress = Members.Length != 0 ? Members[0].BaseAddress : MemoryAddress.Zero;
+            InstructionCount = (uint)Members.Sum(i => (long)i.InstructionCount);
         }
 
         /// <summary>
@@ -50,13 +50,13 @@ namespace Z0.Asm
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Routines.Length;
+            get => Members.Length;
         }
 
         public uint RoutineCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Routines.Length;
+            get => (uint)Members.Length;
         }
     }
 }

@@ -81,7 +81,7 @@ namespace Z0.Asm
             => (uint)Data.Storage.Sum(i => (long)i.InstructionCount);
 
         public Index<ApiInstruction> Instructions()
-            => Data.Storage.SelectMany(x => x.Routines).SelectMany(x => x.Instructions.Storage).OrderBy(x => x.IP).Array();
+            => Data.Storage.SelectMany(x => x.Members).SelectMany(x => x.Instructions.Storage).OrderBy(x => x.IP).Array();
 
         public static ApiPartRoutines Empty
         {

@@ -37,6 +37,7 @@ namespace Z0
     }
 
     public interface IGroupA<S> : IGroupLike<S>, IMonoidA<S>
+        where S : new()
     {
         /// <summary>
         /// Unary structural negation

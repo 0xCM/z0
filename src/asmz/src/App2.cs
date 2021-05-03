@@ -1399,15 +1399,15 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var id = COM.IUnknownVTable.Identifier;
-            var guid = Guids.define(id);
-            var data = Guids.serialize(guid);
-            var formatted = Hex.format(UpperCase, data);
-            Wf.Row(formatted);
-            Wf.Row(data.FormatHex());
+            // var id = COM.IUnknownVTable.Identifier;
+            // var guid = Guids.define(id);
+            // var data = Guids.serialize(guid);
+            // var formatted = Hex.format(UpperCase, data);
+            // Wf.Row(formatted);
+            // Wf.Row(data.FormatHex());
 
-            // var extractor = ApiExtractor.create(Wf);
-            // extractor.Run();
+            var extractor = ApiExtractor.create(Wf);
+            extractor.Run();
             //CheckBitstrings();
         }
 

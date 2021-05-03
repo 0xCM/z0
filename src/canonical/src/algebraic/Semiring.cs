@@ -4,16 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes semiring operations
     /// </summary>
     /// <typeparam name="T">The individual type</typeparam>
     public interface ISemiringOps<T> : IMonoidAOps<T>, IMonoidMOps<T>, IDistributiveOps<T>
         where T : unmanaged
-    {        
-        T MulAdd(T x, T y, T z);            
+    {
+        T MulAdd(T x, T y, T z);
     }
 
     /// <summary>

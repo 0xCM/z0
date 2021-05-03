@@ -16,6 +16,8 @@ namespace Z0
 
         public const EventKind Kind = EventKind.Processed;
 
+
+
         public WfEventId EventId {get;}
 
         public EventPayload<T> Payload {get;}

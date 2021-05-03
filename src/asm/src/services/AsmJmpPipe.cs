@@ -56,7 +56,7 @@ namespace Z0.Asm
             {
                 ref readonly var host = ref skip(hosts,i);
                 var rCount = host.RoutineCount;
-                var routines = @readonly(host.Routines);
+                var routines = host.Members.View;
                 for(var j=0u; j<rCount; j++)
                 {
                     ref readonly var member = ref skip(routines,j);

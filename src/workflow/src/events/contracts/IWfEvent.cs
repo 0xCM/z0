@@ -21,7 +21,7 @@ namespace Z0
     /// <typeparam name="H">The reifying type</typeparam>
     [Free]
     public interface IWfEvent<H> : IWfEvent, IAppEvent<H>
-        where H : struct, IWfEvent<H>
+        where H : IWfEvent<H>, new()
     {
 
     }
@@ -33,7 +33,7 @@ namespace Z0
     /// <typeparam name="T">The content type</typeparam>
     [Free]
     public interface IWfEvent<H,T> : IWfEvent<H>
-        where H : struct, IWfEvent<H,T>
+        where H : IWfEvent<H,T>, new()
     {
         EventPayload<T> Payload => default;
     }

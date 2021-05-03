@@ -60,6 +60,7 @@ namespace Z0
     [Free]
     public interface IFreeMonoid<F,S> : IMonoid<S>, IConcatenable<F,S>, ICounted, INullary<S>
         where F : IFreeMonoid<F,S>, new()
+        where S : new()
     {
 
     }

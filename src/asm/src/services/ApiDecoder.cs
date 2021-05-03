@@ -121,7 +121,7 @@ namespace Z0.Asm
             var host = src.Host;
             var view = src.Blocks.View;
             var count = view.Length;
-            var instructions = root.list<ApiInstructionBlock>();
+            var instructions = root.list<ApiHostRoutine>();
             var ip = MemoryAddress.Zero;
             var target = root.list<IceInstruction>();
             for(var i=0; i<count; i++)

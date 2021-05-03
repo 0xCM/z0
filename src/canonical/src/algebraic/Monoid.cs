@@ -30,6 +30,7 @@ namespace Z0
     }
 
     public interface IMonoidA<S> : IMonoid<S>, ISemigroupA<S>, INullary<S>
+        where S : new()
     {
 
     }

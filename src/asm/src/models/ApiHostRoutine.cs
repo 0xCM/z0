@@ -8,12 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     /// <summary>
     /// Specifies the asm routine determined by an api member
     /// </summary>
-    public readonly struct ApiInstructionBlock
+    public readonly struct ApiHostRoutine
     {
         public OpIdentity OpId {get;}
 
@@ -24,7 +23,7 @@ namespace Z0.Asm
         public MemoryAddress HostAddress {get;}
 
         [MethodImpl(Inline)]
-        public ApiInstructionBlock(MemoryAddress @base, ApiInstruction[] src)
+        public ApiHostRoutine(MemoryAddress @base, ApiInstruction[] src)
         {
             if(src.Length != 0)
             {

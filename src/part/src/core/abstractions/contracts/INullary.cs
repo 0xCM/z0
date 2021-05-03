@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -34,11 +31,12 @@ namespace Z0
     /// <typeparam name="T">The zero value type</typeparam>
     [Free]
     public interface INullary<T>
+        where T : new()
     {
         /// <summary>
         /// Specifies the zero value
         /// </summary>
-        T Zero => default;
+        T Zero => new T();
     }
 
     [Free]

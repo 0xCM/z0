@@ -77,7 +77,7 @@ namespace Z0.Asm
         [Op]
         void Render(ApiHostRoutines src, StreamWriter dst)
         {
-            var functions = span(src.Routines);
+            var functions = src.Members.View;
             var count = src.RoutineCount;
             var offset = MemoryAddress.Zero;
             for(var i=0; i<count; i++)
@@ -89,7 +89,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        void Render(ApiInstructionBlock src, StreamWriter dst, ref MemoryAddress offset)
+        void Render(ApiHostRoutine src, StreamWriter dst, ref MemoryAddress offset)
         {
             Buffer.Clear();
             Buffer.Add(src.OpId);
