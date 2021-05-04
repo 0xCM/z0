@@ -128,13 +128,7 @@ public enum PartId : ulong
 
     LibM = 113,
 
-    Matrix = 114,
-
     Machines = 115,
-
-    Merge = 116,
-
-    Blocked = 118,
 
     Nats = 119,
 
@@ -170,11 +164,7 @@ public enum PartId : ulong
 
     BitNumbersShell = BitNumbers | Shell,
 
-    DVec = 136,
-
     GVec = 140,
-
-    VSvc = 142,
 
     Circuits = 144,
 
@@ -189,6 +179,8 @@ public enum PartId : ulong
     CpuDsl = 161,
 
     AsmCatalogs = 162,
+
+    Services = 199,
 
     // ~ 200
     // ~ -------------------------------------------------------------------------------
