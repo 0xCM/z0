@@ -16,7 +16,7 @@ namespace Z0
 
         public T Grain {get;}
 
-        public T[] Partitions {get;}
+        public Index<T> Partitions {get;}
 
         public Index<uint> Counts;
 

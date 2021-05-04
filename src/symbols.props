@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <Agents>$(Src)agents/z0.agents.csproj</Agents>
     <Api>$(Src)api/z0.api.csproj</Api>
     <Apps>$(Src)apps/z0.apps.csproj</Apps>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>

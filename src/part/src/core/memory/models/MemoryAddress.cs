@@ -39,8 +39,34 @@ namespace Z0
              get => Location != 0;
         }
 
-        public string Identifier
-            => Location.ToString("x") + HexFormatSpecs.PostSpec;
+
+        public Address32 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Location;
+        }
+
+        public Address32 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (uint)(Location >> 32);
+        }
+
+        [MethodImpl(Inline)]
+        public Address16 Quadrant(N0 n)
+            => (ushort)Location;
+
+        [MethodImpl(Inline)]
+        public Address16 Quadrant(N1 n)
+            => (ushort)((uint)Location >> 16);
+
+        [MethodImpl(Inline)]
+        public Address16 Quadrant(N2 n)
+            => (ushort)(Location >> 32);
+
+        [MethodImpl(Inline)]
+        public Address16 Quadrant(N3 n)
+            => (ushort)(Location >> 48);
 
         public string Format()
             => Location.ToString("x") + HexFormatSpecs.PostSpec;

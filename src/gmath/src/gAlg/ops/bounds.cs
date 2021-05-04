@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
+    using static memory;
+
     partial struct gAlg
     {
         /// <summary>
-        /// Presents an index-identifeid histogram bucket as an interval
+        /// Computes the smallest/greatest bin counts
         /// </summary>
-        /// <param name="src">The histogram to search</param>
-        /// <param name="index">THe bucket index</param>
-        /// <typeparam name="T">The point domain</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ClosedInterval<T> segment<T>(in Histogram<T> src, uint index)
+        public static ClosedInterval<uint> bounds<T>(in Histogram<T> src)
             where T : unmanaged, IComparable<T>
-                => Intervals.closed(point(src, index-1), point(src, index));
+                => (src.Counts.Min(), src.Counts.Max());
     }
 }

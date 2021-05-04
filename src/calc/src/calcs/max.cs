@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
     using static CalcHosts;
     using static ApiClassKind;
 
@@ -38,30 +37,6 @@ namespace Z0
         public static Max<T> max<T>()
             where T : unmanaged
                 => default(Max<T>);
-
-        /// <summary>
-        /// Finds a numeric cell of maximal value
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Max, Closures(AllNumeric)]
-        public static T max<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-        {
-            var count = src.Length;
-            if(count == 0)
-                return default;
-
-            ref readonly var a = ref first(src);
-            var result = a;
-            for(var i=1; i<count; i++)
-            {
-                ref readonly var test = ref skip(a, i);
-                if(gmath.gt(test, result))
-                    result = test;
-            }
-            return result;
-        }
 
         [MethodImpl(Inline), Max, Closures(Closure)]
         public static ref readonly SpanBlock128<T> max<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

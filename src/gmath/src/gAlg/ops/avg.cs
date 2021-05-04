@@ -9,9 +9,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ApiClassKind;
 
-    partial struct Calcs
+    partial struct gAlg
     {
         [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avg<T>(ReadOnlySpan<T> src, bool @checked)

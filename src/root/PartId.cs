@@ -76,6 +76,8 @@ public enum PartId : ulong
 
     Pipes = 50,
 
+    Agents = 51,
+
     Clr = 60,
 
     Cli = 61,

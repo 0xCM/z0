@@ -6,8 +6,11 @@ namespace Z0
 {
     public class AgentRunner
     {
-        public static void run(IWfRuntime wf)
-            => AgentRunner.run(wf.Signal(typeof(AgentRunner)), wf.Args);
+        public static void run(EventSignal signal, params string[] args)
+        {
+            var runner = new AgentRunner(signal, new AgentContext(SystemEventWriter.Log), args);
+            runner.Exec();
+        }
 
         AgentContext AgentContext;
 
@@ -52,10 +55,6 @@ namespace Z0
             }
         }
 
-        public static void run(EventSignal signal, params string[] args)
-        {
-            var runner = new AgentRunner(signal, new AgentContext(SystemEventWriter.Log), args);
-            runner.Exec();
-        }
+
     }
 }

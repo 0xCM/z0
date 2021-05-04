@@ -64,7 +64,7 @@ namespace Z0.Mkl
         public void mean()
         {
             var src = Random.Span<long>(Pow2.T14, Interval.closed(-2000L, 2000L));
-            var expect = Calcs.avg(src);
+            var expect = gAlg.avg(src);
             var converted = Numeric.force<long,double>(src);
             var actual = (long)Observations.Load(converted).Mean()[0];
             Claim.eq(expect,actual);

@@ -69,7 +69,6 @@ namespace Z0
             where T : unmanaged
                 => increments(k, (uint)dst.Length, ref first(dst));
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] increments<T>(ClosedInterval<T> src)
             where T : unmanaged
         {
@@ -81,7 +80,7 @@ namespace Z0
             return dst;
         }
 
-        [Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void increments<T>(ClosedInterval<T> src, Span<T> dst)
             where T : unmanaged
         {

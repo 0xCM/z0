@@ -194,7 +194,7 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var sln = new List<T>();
-            var level0 = domain.Increments(default(T));
+            var level0 = domain.Increments<T>();
             var ones = Numeric.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
