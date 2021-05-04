@@ -52,6 +52,7 @@
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
 
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
+    <Events>$(Src)events/z0.events.csproj</Events>
     <External>$(Src)external/z0.external.csproj</External>
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
 

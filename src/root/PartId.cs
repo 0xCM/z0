@@ -54,6 +54,8 @@ public enum PartId : ulong
 
     CalcShell = Calc | Shell,
 
+    Events = 40,
+
     Tools = 41,
 
     Tooling = 42,

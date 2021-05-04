@@ -12,7 +12,7 @@ namespace Z0
     using api = Histograms;
 
     public struct Histogram<T>
-        where T : unmanaged
+        where T : unmanaged, IComparable<T>
     {
         public ClosedInterval<T> Domain {get;}
 

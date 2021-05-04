@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The point domain</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint count<T>(in Histogram<T> src, uint index)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
                 => (uint)src.Counts[index-1];
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The interval domain</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Bin<T> bin<T>(in ClosedInterval<T> src, uint count)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
                 => new Bin<T>(src, count);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="T">The point domain</typeparam>
         [Op, Closures(Closure)]
         public static Span<Bin<T>> bins<T>(in Histogram<T> src)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             var segments = src.Partitions.Length;
             var dst = span<Bin<T>>(src.Partitions.Length - 1);
@@ -60,7 +60,7 @@ namespace Z0
         /// <typeparam name="T">The point domain</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<Bin<T>> bins<T>(in Histogram<T> src, Span<Bin<T>> dst)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             var segments = src.Partitions.Length;
             for(var i = 1u; i<segments; i++)
@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClosedInterval<uint> bounds<T>(in Histogram<T> src)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
                 => (src.Counts.Min(), src.Counts.Max());
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// <typeparam name="T">The point domain</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClosedInterval<T> segment<T>(in Histogram<T> src, uint index)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
                 => Intervals.closed(point(src, index-1), point(src, index));
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T"></typeparam>
         public static Histogram<T> create<T>()
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             var domain = Intervals.closed(Numeric.minval<T>(), Numeric.maxval<T>());
             var grain = domain.Width;
@@ -100,7 +100,7 @@ namespace Z0
         }
 
         public static Histogram<T> create<T>(in ClosedInterval<T> src, T grain)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             var parts = Intervals.partition(src,grain);
             var counts = sys.alloc<uint>(parts.Length);
@@ -109,7 +109,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly Bin<T> next<T>(in Bin<T> bin)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             root.atomic(ref edit(bin.Counter));
             return ref bin;
@@ -123,7 +123,7 @@ namespace Z0
         /// <typeparam name="T">The point domain</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static uint index<T>(in Histogram<T> src, T point)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             var partitions = src.Partitions.Length;
             for(var i = 1u; i<partitions; i++)
@@ -140,7 +140,7 @@ namespace Z0
         /// <typeparam name="T">The point domain</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static void deposit<T>(ReadOnlySpan<T> src, in Histogram<T> dst)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             ref var counts = ref first(span(dst.Counts));
             ref readonly var points = ref first(src);
@@ -163,7 +163,7 @@ namespace Z0
         /// <typeparam name="T">The point domain</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void deposit<T>(T src, in Histogram<T> dst, Action<T> undeposited = null)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             var deposited = false;
             var segments = dst.Partitions.Length;
@@ -183,17 +183,17 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         internal static ref readonly T point<T>(in T src, uint ix)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
                 => ref skip(src,ix);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         internal static ref readonly T point<T>(in Histogram<T> src, uint ix)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
                 => ref src.Partitions[ix];
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong sum<T>(ReadOnlySpan<Bin<T>> bins)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
         {
             var sum = 0ul;
             var count = bins.Length;
@@ -204,7 +204,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T grain<T>(in ClosedInterval<T> src, ulong width = 100ul)
-            where T : unmanaged
+            where T : unmanaged, IComparable<T>
                 => generic<T>(src.Width/root.min(src.Width, 100ul));
     }
 }

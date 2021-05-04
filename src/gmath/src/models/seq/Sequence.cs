@@ -16,6 +16,22 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static SeqSplitter<T> splitter<T>(T delimiter)
+            where T : unmanaged
+                => new SeqSplitter<T>(delimiter);
+
+        [Op, Closures(Closure)]
+        public static Index<SeqTerm<T>> terms<T>(ReadOnlySpan<T> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<SeqTerm<T>>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = new SeqTerm<T>(i,skip(src,i));
+            return buffer;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Seq<T> empty<T>()
             => Seq<T>.Empty;
 

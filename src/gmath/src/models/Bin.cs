@@ -16,16 +16,19 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The value domain</typeparam>
     public struct Bin<T>
-        where T : unmanaged
+        where T : unmanaged, IComparable<T>
     {
         internal int Counter;
 
-        public ClosedInterval<T> Domain {get;}
+        public T Min {get;}
+
+        public T Max {get;}
 
         [MethodImpl(Inline)]
         public Bin(in ClosedInterval<T> domain, uint count = 0)
         {
-            Domain = domain;
+            Min = domain.Min;
+            Max = domain.Max;
             Counter = (int)count;
         }
 
@@ -36,7 +39,7 @@ namespace Z0
         }
 
         public string Format()
-            => $"{Domain}: {Count}";
+            => string.Format("{0:D6}:[{1},{2}]", Counter, Min, Max);
 
         [MethodImpl(Inline)]
         public Bin<T> Increment()

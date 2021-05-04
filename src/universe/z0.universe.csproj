@@ -31,6 +31,7 @@
     <ProjectReference Include="$(Dynamic)" />
 
     <ProjectReference Include="$(Evaluate)" />
+    <ProjectReference Include="$(Events)" />
 
     <ProjectReference Include="$(Fsm)"/>
     <ProjectReference Include="$(Files)"/>

@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct Seq
+    partial struct gAlg
     {
         [Op, Closures(Closure)]
         public static ref BufferSegments<T> split<T>(SeqSplitter<T> parser, Span<T> src, out BufferSegments<T> dst)

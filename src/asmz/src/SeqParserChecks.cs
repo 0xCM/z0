@@ -46,9 +46,9 @@ namespace Z0
             const char Delimiter = ',';
             const byte SegCount = 4;
 
-            var parser = Seq.splitter(Delimiter);
+            var parser = Sequence.splitter(Delimiter);
             var input = edit(span(Input));
-            Seq.split(parser, input, out var segments);
+            gAlg.split(parser, input, out var segments);
             return segments;
         }
 
@@ -59,9 +59,9 @@ namespace Z0
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            var parser = Seq.splitter<ushort>(Delimiter);
+            var parser = Sequence.splitter<ushort>(Delimiter);
             var input = memory.uint16(edit(span(Input)));
-            Seq.split(parser, input, out var segments);
+            gAlg.split(parser, input, out var segments);
             return segments;
         }
 
@@ -71,9 +71,9 @@ namespace Z0
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            var parser = Seq.splitter(AsciCharCode.Dot);
+            var parser = Sequence.splitter(AsciCharCode.Dot);
             var input = edit(Case2Input);
-            Seq.split(parser, input, out var segments);
+            gAlg.split(parser, input, out var segments);
             return segments;
         }
 
