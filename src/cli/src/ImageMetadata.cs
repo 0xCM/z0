@@ -13,7 +13,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static Images;
+    using static ImageRecords;
 
     [ApiHost]
     public readonly partial struct ImageMetadata

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         /// <summary>
         /// The directory entries make up the rows of a table. Each resource directory entry has the following format.

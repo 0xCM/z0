@@ -15,7 +15,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
-    using static Images;
+    using static ImageRecords;
     using static ProcessMemory;
 
     class App : AppService<App>
@@ -954,7 +954,7 @@ namespace Z0.Asm
         {
             var dst = Db.IndexTable<MemoryRegion>();
             var flow = Wf.EmittingTable<MemoryRegion>(dst);
-            var segments = ProcessMemory.regions();
+            var segments = ProcessContextPipe.regions();
             Tables.emit(segments,dst);
             Wf.EmittedTable(flow, segments.Count);
         }
@@ -1320,7 +1320,7 @@ namespace Z0.Asm
 
         }
 
-        static unsafe uint count(Images.StringHeap src)
+        static unsafe uint count(ImageRecords.StringHeap src)
         {
             var counter = 0u;
             var pFirst = src.BaseAddress.Pointer<char>();
@@ -1397,6 +1397,7 @@ namespace Z0.Asm
             }
         }
 
+
         public void Run()
         {
             // var id = COM.IUnknownVTable.Identifier;
@@ -1405,9 +1406,11 @@ namespace Z0.Asm
             // var formatted = Hex.format(UpperCase, data);
             // Wf.Row(formatted);
             // Wf.Row(data.FormatHex());
-
+            var receivers = new ApiExtractReceivers();
+            receivers.HostResolved += (source, e) => {};
+            receivers.MemberParsed += (source, e) => {};
             var extractor = ApiExtractor.create(Wf);
-            extractor.Run();
+            extractor.Run(receivers);
             //CheckBitstrings();
         }
 

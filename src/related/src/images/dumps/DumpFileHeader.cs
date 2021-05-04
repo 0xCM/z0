@@ -9,7 +9,7 @@ namespace Z0
 
     using W = Windows;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public unsafe struct DumpFileHeader : IRecord<DumpFileHeader>

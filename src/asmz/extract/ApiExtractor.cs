@@ -4,8 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static memory;
+    using System.Collections.Generic;
+    using System.Collections.Concurrent;
+    using System.Diagnostics;
 
+    using static memory;
 
     [ApiHost]
     partial class ApiExtractor : AppService<ApiExtractor>
@@ -18,13 +21,15 @@ namespace Z0.Asm
 
         AsmRoutineDecoder Decoder;
 
-        ApiDecoder ApiDecoder;
-
         AsmFormatter Formatter;
 
         HexPacks HexPacks;
 
-        ApiExtractObserver Observer;
+        ApiExtractReceivers Receivers;
+
+        ConcurrentBag<ApiHostDataset> HostDatasets;
+
+        ExtractPaths Paths;
 
         protected override void OnInit()
         {
@@ -34,8 +39,9 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
             Formatter = Wf.AsmFormatter();
             HexPacks = Wf.HexPacks();
-            ApiDecoder = Wf.ApiDecoder();
-            Observer = new ApiExtractObserver(Wf);
+            Receivers = new ApiExtractReceivers();
+            HostDatasets = new();
+            Paths = new ExtractPaths(Db.AppLogRoot());
         }
 
         void Run3()
@@ -46,27 +52,55 @@ namespace Z0.Asm
             var parts = catalog.Parts.Where(p => selected.Contains(p.Id));
             var count = parts.Length;
             var resolved = @readonly(parts.Select(ResolvePart));
-            var datasets = root.list<ApiHostDataset>();
             var counter = 0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var part = ref skip(resolved,i);
-                counter += ExtractPart(part, datasets);
+                counter += ExtractPart(part);
             }
             Wf.Ran(flow, string.Format("Extracted {0} host routines from {1} parts", counter, selected.Count));
         }
 
-
         public void Run()
         {
-            RootDir().Clear(true);
+            HostDatasets.Clear();
+            Paths.Root.Clear(true);
             Run3();
         }
 
-        public void Run(ApiExtractObserver observer)
+        public void Run(ApiExtractReceivers receivers, FS.FolderPath? dst = null)
         {
-            Observer = observer;
+            Receivers = receivers;
+            if(dst != null)
+            Paths = new ExtractPaths(dst.Value);
             Run();
+            EmitContext();
         }
+
+        void EmitRebase(ApiMembers members, Timestamp ts)
+        {
+            var rebasing = Wf.Running();
+            var dst = Paths.ApiRebasePath(ts);
+            var entries = Wf.ApiData().RebaseMembers(members, dst);
+            Wf.Ran(rebasing);
+        }
+
+        void EmitContext()
+        {
+            var dir = Paths.ContextRoot();
+            var ts = root.timestamp();
+            var process = Process.GetCurrentProcess();
+            var pipe = Wf.ProcessContextPipe();
+            var partpath = pipe.PartitionPath(dir, process, ts);
+            var summaries = pipe.EmitPartitions(process, partpath);
+            var detailpath = pipe.MemoryRegionPath(dir, process, ts);
+            var details = pipe.EmitRegions(process, detailpath);
+
+            var members = ApiMembers.create(HostDatasets.ToArray().SelectMany(x => x.Members));
+            EmitRebase(members,ts);
+
+            //pipe.EmitDump(process, Db.DumpPath(process, ts));
+        }
+
     }
 }

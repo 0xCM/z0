@@ -86,16 +86,6 @@ namespace Z0
             return dst.ToArray();
         }
 
-        public ApiMembers Sort()
-        {
-            Data.Sort();
-            return this;
-        }
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator ApiMembers((MemoryAddress @base, ApiMember[] members) src)
-        //     => new ApiMembers(src.@base, src.members);
-
         [MethodImpl(Inline)]
         public static implicit operator ApiMember[](ApiMembers src)
             => src.Data;

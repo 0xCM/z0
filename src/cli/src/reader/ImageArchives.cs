@@ -5,7 +5,7 @@
 namespace Z0
 {
     using static memory;
-    using static Images;
+    using static ImageRecords;
 
     [ApiHost]
     public readonly struct ImageArchives

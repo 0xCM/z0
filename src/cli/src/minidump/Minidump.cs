@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static Images;
+    using static ImageRecords;
 
     public sealed partial class Minidump : IDisposable
     {

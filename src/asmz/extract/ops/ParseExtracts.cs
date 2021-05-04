@@ -7,10 +7,11 @@ namespace Z0.Asm
     using System;
 
     using static memory;
+    using static ApiExtractReceivers;
 
     partial class ApiExtractor
     {
-        ApiMemberBlocks Parse(ReadOnlySpan<ApiMemberExtract> src)
+        ApiMemberBlocks ParseExtracts(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             var buffer = alloc<ApiMemberCode>(count);
@@ -21,7 +22,7 @@ namespace Z0.Asm
                 ref var output = ref seek(parsed,i);
                 if(Parser.Parse(input, out output))
                 {
-
+                    Receivers.Raise(new MemberParsedEvent(input,output));
                 }
 
             }

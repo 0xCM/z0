@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         /// <summary>
         /// Stores compile-time, constant values for fields, parameters, and propertie

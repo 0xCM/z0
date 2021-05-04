@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection.PortableExecutable;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct CorHeaderRow : IRecord<CorHeaderRow>

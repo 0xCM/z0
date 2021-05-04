@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct SectionHeaderInfo : IRecord<SectionHeaderInfo>

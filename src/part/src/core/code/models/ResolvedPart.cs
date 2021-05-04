@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -21,6 +19,12 @@ namespace Z0
         {
             Part = part;
             Hosts = hosts;
+        }
+
+        public static ResolvedPart Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ResolvedPart(PartId.None, sys.empty<ResolvedHost>());
         }
     }
 }

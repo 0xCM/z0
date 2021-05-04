@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     partial class ApiExtractor
     {
-        Index<AsmRoutine> Decode(ReadOnlySpan<ApiMemberCode> src)
+        Index<AsmRoutine> DecodeMembers(ReadOnlySpan<ApiMemberCode> src)
         {
             var count = src.Length;
             var buffer = alloc<AsmRoutine>(count);

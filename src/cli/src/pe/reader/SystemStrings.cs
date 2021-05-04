@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Images;
+    using static ImageRecords;
 
     partial class PeTableReader
     {

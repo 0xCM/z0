@@ -92,7 +92,6 @@ namespace Z0
             return members;
         }
 
-
         public ApiMembers JitHost(IApiHost src)
         {
             var direct = JitDirect(src);

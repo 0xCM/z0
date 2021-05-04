@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record, StructLayout(LayoutKind.Sequential)]
         public struct MethodSemanticsRow

@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    public class ApiExtractCases : AppService<ApiExtractCases>
+    [ApiHost]
+    public readonly partial struct ImageRecords
     {
 
     }

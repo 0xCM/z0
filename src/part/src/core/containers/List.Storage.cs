@@ -11,6 +11,9 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Reflection;
 
+    using static Part;
+    using static memory;
+
     partial class XTend
     {
         /// <summary>
@@ -20,6 +23,21 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static T[] Storage<T>(this List<T> list)
             => ArrayList<T>.Getter(list);
+
+        public static ReadOnlySpan<T> ViewDeposited<T>(this List<T> src)
+        {
+            var count = src.Count;
+            var storage = @readonly(src.Storage());
+            return slice(storage,0,count);
+        }
+
+        public static Span<T> EditDeposited<T>(this List<T> src)
+        {
+            var count = src.Count;
+            var storage = @span(src.Storage());
+            return slice(storage,0,count);
+        }
+
     }
 
     static class ArrayList<T>

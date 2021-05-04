@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         /// <summary>
         /// Each Resource Data entry describes an actual unit of raw data in the Resource Data area.

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(CliTableKind.GenericParamConstraint), StructLayout(LayoutKind.Sequential)]
         public struct GenericParamConstraintRow : IRecord<GenericParamConstraintRow>

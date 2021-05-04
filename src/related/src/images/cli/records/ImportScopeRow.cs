@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(CliTableKind.ImportScope), StructLayout(LayoutKind.Sequential)]
         public struct ImportScopeRow

@@ -36,7 +36,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static T require<T>(T src)
-            where T : class
         {
             if(src == null)
                 sys.@throw(string.Format("Null <{0}> argurment", typeof(T).Name));

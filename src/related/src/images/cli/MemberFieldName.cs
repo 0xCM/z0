@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct MemberFieldName : IRecord<MemberFieldName>

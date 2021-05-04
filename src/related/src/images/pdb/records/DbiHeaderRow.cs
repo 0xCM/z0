@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    partial struct Images
+    partial struct ImageRecords
     {
 
         [Record]

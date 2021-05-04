@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(CliTableKind.ExportedType), StructLayout(LayoutKind.Sequential)]
         public struct ExportedTypeRow  : IRecord<ExportedTypeRow>

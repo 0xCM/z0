@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.IO;
+    using System.Collections.Generic;
 
     using Z0.Asm;
 
@@ -73,13 +74,13 @@ namespace Z0
         {
             var hosted = src.HostGroups().View;
             var count = hosted.Length;
-            var collected = root.datalist<AsmHostRoutines>();
+            var collected = root.list<AsmHostRoutines>();
             for(var i=0; i<count; i++)
                 CaptureMembers(skip(hosted,i), dst, collected);
-            return collected.Close();
+            return collected.ToArray();
         }
 
-        public void CaptureMembers(ApiHostMembers src, FS.FolderPath path, DataList<AsmHostRoutines> dst)
+        public void CaptureMembers(ApiHostMembers src, FS.FolderPath path, List<AsmHostRoutines> dst)
         {
             var routines = AsmHostRoutines.Empty;
             var flow = Wf.Running(src.Host);

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         public readonly struct HeapKey<K> : IHeapKey<HeapKey<K>>
             where K : struct, IHeap

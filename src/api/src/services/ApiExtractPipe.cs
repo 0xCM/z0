@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
@@ -14,7 +15,7 @@ namespace Z0
         public FS.Files Paths()
             => Db.RawExtractPaths();
 
-        public uint Load(FS.FilePath src, DataList<ApiExtractBlock> dst)
+        public uint Load(FS.FilePath src, List<ApiExtractBlock> dst)
         {
             var lines = src.ReadLines().View;
             var count = lines.Length;
@@ -38,11 +39,11 @@ namespace Z0
 
         public Index<ApiExtractBlock> Load(FS.Files src)
         {
-            var dst = root.datalist<ApiExtractBlock>();
+            var dst = root.list<ApiExtractBlock>();
             var counter = 0u;
             foreach(var file in src)
                 counter += Load(file,dst);
-            return dst.Close();
+            return dst.ToArray();
         }
 
         public Outcome Parse(string src, out ApiExtractBlock dst)

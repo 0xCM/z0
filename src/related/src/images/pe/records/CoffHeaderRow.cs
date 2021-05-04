@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection.PortableExecutable;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         /// <summary>
         /// At the beginning of an object file, or immediately after the signature of an image file,

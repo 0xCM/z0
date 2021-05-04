@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiHostExtracts
+    public readonly struct ApiHostExtracts : IIndex<ApiMemberExtract>
     {
         public ApiHostUri Host {get;}
 
@@ -26,6 +26,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Blocks.View;
+        }
+
+        public ApiMemberExtract[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Blocks.Storage;
         }
 
         public uint BlockCount

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(CliTableKind.AssemblyRef), StructLayout(LayoutKind.Sequential)]
         public struct AssemblyRefRow : IRecord<AssemblyRefRow>

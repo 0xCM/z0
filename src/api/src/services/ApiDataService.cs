@@ -122,7 +122,7 @@ namespace Z0
         {
             var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.HostUri));
             var members = ApiJit.JitHost(src);
-            var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members.Sort());
+            var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members);
             Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.HostUri, members.Count));
             return result;
         }

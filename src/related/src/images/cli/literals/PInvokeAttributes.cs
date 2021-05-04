@@ -5,7 +5,7 @@ namespace Z0
 {
     using System;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Flags]
         public enum PInvokeAttributes : ushort

@@ -7,7 +7,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         /// <summary>
         /// Captures a dependency relationship between two assemblies

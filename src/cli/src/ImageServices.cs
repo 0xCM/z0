@@ -15,9 +15,9 @@ namespace Z0
     using static Part;
     using static memory;
     using static ProcessMemory;
+    using static ImageRecords;
 
-    [ApiHost]
-    public readonly partial struct Images
+    public readonly struct ImageServices
     {
         [MethodImpl(Inline), Op]
         public static DirectoryEntryRow directory(Address32 rva, uint size)
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [Op]
-        public static ImageMap map(Process src)
+        public static ProcessImageMap map(Process src)
         {
             var images = locate(src);
             ref readonly var image = ref images.First;
@@ -54,7 +54,7 @@ namespace Z0
                 seek(address,i) = skip(image,i).BaseAddress;
             var state = new ProcessState();
             fill(src, ref state);
-            return new ImageMap(state, images, addresses.Sort(), modules(src));
+            return new ProcessImageMap(state, images, addresses.Sort(), modules(src));
         }
 
         /// <summary>

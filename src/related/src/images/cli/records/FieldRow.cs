@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct FieldRow : IRecord<FieldRow>

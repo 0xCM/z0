@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         /// <summary>
         /// Captures <see cref='ManifestResource'/> data in usable form

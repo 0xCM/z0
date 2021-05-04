@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static memory;
-    using static Images;
+    using static ImageRecords;
     using static Part;
 
     partial class ImageMetaReader

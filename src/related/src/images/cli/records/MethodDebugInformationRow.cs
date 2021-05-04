@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record, StructLayout(LayoutKind.Sequential)]
         public struct MethodDebugInformationRow

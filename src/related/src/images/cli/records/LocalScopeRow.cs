@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(CliTableKind.LocalScope), StructLayout(LayoutKind.Sequential)]
         public struct LocalScopeRow  : IRecord<LocalScopeRow>

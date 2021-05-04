@@ -27,7 +27,7 @@ namespace Z0
 
         public Index<ProcessPartition> EmitPartitions(Process process, FS.FilePath dst)
         {
-            var summaries = partitions(Images.locate(process));
+            var summaries = partitions(ImageServices.locate(process));
             EmitPartitions(summaries,dst);
             return summaries;
         }

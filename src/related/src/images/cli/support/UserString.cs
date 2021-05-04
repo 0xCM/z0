@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(TableId)]
         public struct UserString : IRecord<UserString>

@@ -14,7 +14,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static Images;
+    using static ImageRecords;
 
     using K = CliTableKind;
 

@@ -35,7 +35,7 @@ namespace Z0
         public static MemoryAddress @base(Name procname)
         {
             var match =  procname.Content;
-            var module = Images.modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
+            var module = ImageServices.modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
             return module.BaseAddress;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
         public static ProcessState state(Process src)
         {
             var dst = new ProcessState();
-            Images.fill(src, ref dst);
+            ImageServices.fill(src, ref dst);
             return dst;
         }
 

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Z0
 {
-    partial struct Images
+    partial struct ImageRecords
     {
         public enum ManifestResourceFlags : uint
         {

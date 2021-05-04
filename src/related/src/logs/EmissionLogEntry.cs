@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.InteropServices;
-
-    using static Part;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct EmissionLogEntry : IRecord<EmissionLogEntry>

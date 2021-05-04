@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Images
+    partial struct ImageRecords
     {
         public interface IMetadataTable
         {

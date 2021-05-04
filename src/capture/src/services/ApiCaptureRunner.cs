@@ -21,10 +21,10 @@ namespace Z0
             var partcount = parts.Length;
             var hosts = Wf.ApiCatalog.PartHosts(parts).View;
             var hostcount = hosts.Length;
-            var routines = root.datalist<AsmHostRoutines>();
+            var routines = root.list<AsmHostRoutines>();
             for(var i=0; i<hostcount; i++)
                 routines.Add(capture.CaptureHost(memory.skip(hosts,i), dst));
-            return routines.Close();
+            return routines.ToArray();
         }
 
         public Index<AsmHostRoutines> Capture(Index<PartId> parts)
@@ -43,7 +43,10 @@ namespace Z0
                 EmitImm(parts);
 
             if((options & CaptureWorkflowOptions.CaptureContext) != 0)
-                EmitContext(members(captured));
+            {
+                var ts = EmitContext();
+                EmitRebase(members(captured), ts);
+            }
 
             return captured;
         }
@@ -58,7 +61,10 @@ namespace Z0
                 EmitImm(hosts);
 
             if((options & CaptureWorkflowOptions.CaptureContext) != 0)
-                EmitContext(AsmHostRoutines.members(captured));
+            {
+                var ts = EmitContext();
+                EmitRebase(AsmHostRoutines.members(captured), ts);
+            }
 
             return captured;
         }
@@ -106,17 +112,30 @@ namespace Z0
             Wf.Ran(rebasing);
         }
 
-        void EmitContext(ApiMembers members)
+        Timestamp EmitContext()
         {
-            var dir = Db.CaptureContextRoot();
             var ts = root.timestamp();
+            var dir = Db.CaptureContextRoot();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();
             var summaries = pipe.EmitPartitions(process, pipe.PartitionPath(dir, process, ts));
             var details = pipe.EmitRegions(process, pipe.MemoryRegionPath(dir, process, ts));
             pipe.EmitDump(process, Db.DumpPath(process, ts));
-            EmitRebase(members, ts);
+            return ts;
         }
+
+        // void EmitContext(ApiMembers members)
+        // {
+        //     var ts = EmitContext();
+        //     // var dir = Db.CaptureContextRoot();
+        //     // var ts = root.timestamp();
+        //     // var process = Process.GetCurrentProcess();
+        //     // var pipe = Wf.ProcessContextPipe();
+        //     // var summaries = pipe.EmitPartitions(process, pipe.PartitionPath(dir, process, ts));
+        //     // var details = pipe.EmitRegions(process, pipe.MemoryRegionPath(dir, process, ts));
+        //     // pipe.EmitDump(process, Db.DumpPath(process, ts));
+        //     EmitRebase(members, ts);
+        // }
 
         const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.CaptureContext | CaptureWorkflowOptions.EmitImm;
     }

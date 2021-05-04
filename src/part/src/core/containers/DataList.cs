@@ -78,15 +78,15 @@ namespace Z0
             get => (uint)Elements.Count;
         }
 
-        public Index<T> Close()
+        public Span<T> Close()
         {
-            var storage = Elements.Storage();
+            var storage = Elements.EditDeposited();
             Closed = true;
             return storage;
         }
 
         public ReadOnlySpan<T> View()
-            => Elements.Storage();
+            => Elements.ViewDeposited();
 
         [MethodImpl(Inline)]
         public Index<T> Emit(bool clear = true)

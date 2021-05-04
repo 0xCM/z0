@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    partial struct Images
+    partial struct ImageRecords
     {
         [Record(CliTableKind.FieldRva), StructLayout(LayoutKind.Sequential)]
         public struct FieldRvaRow : IRecord<FieldRvaRow>

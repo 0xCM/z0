@@ -13,6 +13,31 @@ namespace Z0
     partial struct root
     {
         /// <summary>
+        /// Runs a task that executes a specified worker
+        /// </summary>
+        /// <param name="worker">The worker to execute</param>
+        [MethodImpl(Inline), Op]
+        public static Task run(Action worker)
+            => Task.Run(worker);
+
+        /// <summary>
+        /// Runs a task that computes a result
+        /// </summary>
+        /// <param name="f">The emitter</param>
+        [MethodImpl(Inline)]
+        public static Task<T> run<T>(Func<T> f)
+            => Task.Run(f);
+
+        /// <summary>
+        /// Runs a task that computes a transformation
+        /// </summary>
+        /// <param name="f">The transformer</param>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static Task<T> run<S,T>(Func<S,T> f, S s0)
+            => Task.Factory.StartNew(o => f((S)o), s0);
+
+        /// <summary>
         /// Executes a worker that computes a value within the context of a new task
         /// </summary>
         /// <param name="worker">The worker to execute</param>
@@ -24,7 +49,7 @@ namespace Z0
         /// Executes a worker within the context of a new task
         /// </summary>
         /// <param name="worker">The worker to execute</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Task task(Action worker)
             => Task.Factory.StartNew(worker);
 

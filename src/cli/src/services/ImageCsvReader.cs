@@ -9,7 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Part;
-    using static Images;
+    using static ImageRecords;
 
     public class ImageCsvReader : AppService<ImageCsvReader>
     {
