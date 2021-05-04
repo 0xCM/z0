@@ -9,9 +9,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ApiClassKind;
 
-    partial struct Calcs
+    partial struct gAlg
     {
         [MethodImpl(Inline), Abs, Closures(Floats)]
         public static Span<T> fabs<T>(ReadOnlySpan<T> src, Span<T> dst)

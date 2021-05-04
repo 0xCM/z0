@@ -118,7 +118,7 @@ namespace Z0
             for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
-                var sum =  NumericCast.force<T,double>(Calcs.sum(row.Unsized));
+                var sum =  NumericCast.force<T,double>(gAlg.sum(row.Unsized));
                 if(!radius.Contains(sum))
                     return false;
             }
@@ -130,7 +130,7 @@ namespace Z0
         {
             var length = dst.Length;
             random.Fill(Interval.closed(1.0f,length << 4), length, ref dst[0]);
-            Calcs.fdiv(dst, dst.Avg()*length);
+            gAlg.fdiv(dst, dst.Avg()*length);
         }
 
         [MethodImpl(Inline)]
@@ -138,7 +138,7 @@ namespace Z0
         {
             var length = dst.Length;
             random.Fill(Interval.closed(1.0, length << 4), length, ref dst[0]);
-            Calcs.fdiv(dst, dst.Avg()*length);
+            gAlg.fdiv(dst, dst.Avg()*length);
         }
 
         [MethodImpl(Inline)]
@@ -146,7 +146,7 @@ namespace Z0
         {
             var dst = Z0.SpanBlocks.alloc<float>(n256, (uint)CellCalcs.blockcount<float>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
-            Calcs.fdiv(dst.Storage, dst.Storage.Avg() * length);
+            gAlg.fdiv(dst.Storage, dst.Storage.Avg() * length);
             return dst;
         }
 
@@ -155,7 +155,7 @@ namespace Z0
         {
             var dst = Z0.SpanBlocks.alloc<double>(n256, (uint)CellCalcs.blockcount<double>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
-            Calcs.fdiv(dst.Storage, dst.Storage.Avg() * length);
+            gAlg.fdiv(dst.Storage, dst.Storage.Avg() * length);
             return dst;
         }
     }

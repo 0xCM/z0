@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial struct emath
+    partial struct memory
     {
         [MethodImpl(Inline)]
-        public static @enum<E,T> sub<E,T>(@enum<E,T> a, @enum<E,T> b)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => new @enum<E,T>(gmath.sub(a.Scalar, b.Scalar));
+        public static T @class<T>(object src)
+            where T : class
+                => Unsafe.As<T>(src);
     }
 }

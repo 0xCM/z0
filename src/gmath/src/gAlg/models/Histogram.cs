@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Histograms;
-
     public struct Histogram<T>
         where T : unmanaged, IComparable<T>
     {
@@ -20,7 +18,7 @@ namespace Z0
 
         public T[] Partitions {get;}
 
-        internal readonly uint[] Counts;
+        public Index<uint> Counts;
 
         [MethodImpl(Inline)]
         internal Histogram(in ClosedInterval<T> domain, T grain,  T[] partitions, uint[] counts)
@@ -33,10 +31,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Deposit(ReadOnlySpan<T> points)
-            => api.deposit(points,this);
+            => gAlg.deposit(points, this);
 
         [MethodImpl(Inline)]
         public uint BinCount(uint index)
-            => api.count(this, index);
+            => gAlg.count(this, index);
     }
 }

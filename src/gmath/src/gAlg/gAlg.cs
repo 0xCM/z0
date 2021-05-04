@@ -13,6 +13,8 @@ namespace Z0
     [ApiHost]
     public readonly partial struct gAlg
     {
+        const NumericKind Closure = UnsignedInts;
+
         [MethodImpl(Inline)]
         static IEnumerable<T> range_1<T>(T x0, T x1, T? step = null)
             where T : unmanaged

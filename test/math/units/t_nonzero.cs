@@ -8,8 +8,8 @@ namespace Z0
     {
         public void nonzero_create()
         {
-            Nonzero<uint> a = 0u;
-            Nonzero<byte> b = 5;
+            NonZero<uint> a = 0u;
+            NonZero<byte> b = 5;
             Claim.nonzero(a.Value);
             Claim.eq(b, (byte)5);
 

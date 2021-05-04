@@ -9,19 +9,19 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Nonzero<T> : INonZero<Nonzero<T>,T>, IEquatable<T>
+    public readonly struct NonZero<T> : INonZero<NonZero<T>,T>, IEquatable<T>
         where T : unmanaged
     {
         public readonly T Value {get;}
 
         [MethodImpl(Inline)]
-        public Nonzero(T value)
+        public NonZero(T value)
         {
             Value = gmath.nonz(value) ? value : Numeric.ones<T>();
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(Nonzero<T> src)
+        public bool Equals(NonZero<T> src)
             => gmath.eq(Value, src.Value);
 
         [MethodImpl(Inline)]
@@ -29,11 +29,11 @@ namespace Z0
             => gmath.eq(Value, src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Nonzero<T>(T src)
-            => new Nonzero<T>(src);
+        public static implicit operator NonZero<T>(T src)
+            => new NonZero<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator T(Nonzero<T> src)
+        public static implicit operator T(NonZero<T> src)
             => src.Value;
     }
 }

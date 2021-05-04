@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to contract</param>
         /// <param name="max">The maximum value in the target interval</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T squeeze<T>(T src, T max)
             where T : unmanaged
         {
@@ -33,7 +33,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline), Closures(UnsignedInts)]
+        [MethodImpl(Inline), Closures(Closure)]
         public static void squeeze<T>(in T src, in T max, ref T dst, uint count)
             where T : unmanaged
         {
@@ -41,14 +41,14 @@ namespace Z0
                 seek(dst,i) = squeeze(skip(src,i), skip(max,i));
         }
 
-        [MethodImpl(Inline), Closures(UnsignedInts)]
+        [MethodImpl(Inline), Closures(Closure)]
         public static void squeeze<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> max, Span<T> dst)
             where T : unmanaged
         {
             squeeze(first(src),first(max), ref first(dst), (uint)dst.Length);
         }
 
-        [MethodImpl(Inline), Closures(UnsignedInts)]
+        [MethodImpl(Inline), Closures(Closure)]
         public static Span<T> squeeze<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> max)
             where T : unmanaged
         {

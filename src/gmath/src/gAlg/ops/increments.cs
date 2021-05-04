@@ -64,12 +64,12 @@ namespace Z0
         /// <param name="k">The value of the first term</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The target value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void increments<T>(T k, Span<T> dst)
             where T : unmanaged
                 => increments(k, (uint)dst.Length, ref first(dst));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] increments<T>(ClosedInterval<T> src)
             where T : unmanaged
         {
@@ -81,7 +81,7 @@ namespace Z0
             return dst;
         }
 
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static void increments<T>(ClosedInterval<T> src, Span<T> dst)
             where T : unmanaged
         {

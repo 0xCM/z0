@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct @enum<E> : IEnum<E>, IEquatable<@enum<E>>
         where E : unmanaged, Enum
     {
-        public readonly E Literal;
+        public E Literal {get;}
 
         [MethodImpl(Inline)]
         public @enum(E literal)
@@ -26,11 +26,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(E src)
-            => Literal.Equals(src);
+            => emath.eq(Literal, src);
 
         [MethodImpl(Inline)]
         public bool Equals(@enum<E> src)
-            => Literal.Equals(src.Literal);
+            => emath.eq(Literal, src.Literal);
 
         E IEnum<E>.Literal
             => Literal;
@@ -39,5 +39,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator @enum<E>(E src)
+            => new @enum<E>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator E(@enum<E> src)
+            => src.Literal;
     }
 }

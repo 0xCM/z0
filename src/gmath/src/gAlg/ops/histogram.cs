@@ -1,0 +1,37 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static memory;
+
+    partial struct gAlg
+    {
+        /// <summary>
+        /// Creates a histogram over the T-domain and allocates a bin count commensurate with the number of points in T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        [Op, Closures(Closure)]
+        public static Histogram<T> histogram<T>()
+            where T : unmanaged, IComparable<T>
+        {
+            var domain = Intervals.closed(Numeric.minval<T>(), Numeric.maxval<T>());
+            var grain = domain.Width;
+            return histogram<T>(domain, generic<T>(domain.Width));
+        }
+
+        [Op, Closures(Closure)]
+        public static Histogram<T> histogram<T>(in ClosedInterval<T> src, T grain)
+            where T : unmanaged, IComparable<T>
+        {
+            var parts = Intervals.partition(src,grain);
+            var counts = sys.alloc<uint>(parts.Length);
+            return new Histogram<T>(src, grain, parts, counts);
+        }
+    }
+}

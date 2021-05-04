@@ -9,9 +9,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ApiClassKind;
 
-    partial struct Calcs
+    partial struct gAlg
     {
         /// <summary>
         /// Computes the floating-point quotient of cells in the left and right operands,

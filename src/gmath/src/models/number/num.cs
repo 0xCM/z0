@@ -93,32 +93,32 @@ namespace Z0
                 => from(gmath.srl(a.Value, offset));
 
         [MethodImpl(Inline), Eq, Closures(AllNumeric)]
-        public static Bit32 eq<T>(num<T> a, num<T> b)
+        public static bit eq<T>(num<T> a, num<T> b)
             where T : unmanaged
                 => gmath.eq(a.Value,b.Value);
 
         [MethodImpl(Inline), Neq, Closures(AllNumeric)]
-        public static Bit32 neq<T>(num<T> a, num<T> b)
+        public static bit neq<T>(num<T> a, num<T> b)
             where T : unmanaged
                 => gmath.neq(a.Value,b.Value);
 
         [MethodImpl(Inline), Lt, Closures(AllNumeric)]
-        public static Bit32 lt<T>(num<T> a, num<T> b)
+        public static bit lt<T>(num<T> a, num<T> b)
             where T : unmanaged
                 => gmath.lt(a.Value,b.Value);
 
         [MethodImpl(Inline), Gt, Closures(AllNumeric)]
-        public static Bit32 gt<T>(num<T> a, num<T> b)
+        public static bit gt<T>(num<T> a, num<T> b)
             where T : unmanaged
                 => gmath.gt(a.Value,b.Value);
 
         [MethodImpl(Inline), LtEq, Closures(AllNumeric)]
-        public static Bit32 lteq<T>(num<T> a, num<T> b)
+        public static bit lteq<T>(num<T> a, num<T> b)
             where T : unmanaged
                 => gmath.lteq(a.Value,b.Value);
 
         [MethodImpl(Inline), GtEq, Closures(AllNumeric)]
-        public static Bit32 gteq<T>(num<T> a, num<T> b)
+        public static bit gteq<T>(num<T> a, num<T> b)
             where T : unmanaged
                 => gmath.gteq(a.Value,b.Value);
     }

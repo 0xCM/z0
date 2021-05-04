@@ -12,8 +12,6 @@ namespace Z0
 
     partial struct gAlg
     {
-        const NumericKind Closure = UnsignedInts;
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref Accrue<I> run<I>(Loop<I> loop, ref Accrue<I> dst)
             where I : unmanaged, IComparable<I>

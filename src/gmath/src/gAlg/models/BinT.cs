@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Histograms;
-
     /// <summary>
     /// Represents one or more occurrence of a value within an interval
     /// </summary>
@@ -43,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Bin<T> Increment()
-            => api.next(this);
+            => gAlg.next(ref this);
 
         public override string ToString()
             => Format();

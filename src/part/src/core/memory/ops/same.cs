@@ -7,14 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial struct emath
+    partial struct memory
     {
-        [MethodImpl(Inline)]
-        public static @enum<E,T> sub<E,T>(@enum<E,T> a, @enum<E,T> b)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => new @enum<E,T>(gmath.sub(a.Scalar, b.Scalar));
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bit same<T>(in T a, in T b)
+            => Unsafe.AreSame(ref edit(a), ref edit(b));
     }
 }

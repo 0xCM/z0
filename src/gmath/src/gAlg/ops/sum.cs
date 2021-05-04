@@ -8,14 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static CalcHosts;
     using static memory;
-    using static SFx;
-    using static ApiClassKind;
 
-    partial struct Calcs
+    partial struct gAlg
     {
-       [MethodImpl(Inline), Sum, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ulong sum<T>(ReadOnlySpan<Bin<T>> bins)
+            where T : unmanaged, IComparable<T>
+        {
+            var sum = 0ul;
+            var count = bins.Length;
+            for(var i=0u; i<count; i++)
+                sum += skip(bins,i).Count;
+            return sum;
+        }
+
+        [MethodImpl(Inline), Sum, Closures(Closure)]
         public static T sum<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -24,7 +32,6 @@ namespace Z0
                 var count = src.Length;
                 ref readonly var input = ref first(src);
                 var result = default(T);
-
                 for(var i=0; i<src.Length; i++)
                     result = gmath.add(result, skip(input,i));
                 return result;
@@ -35,5 +42,6 @@ namespace Z0
         public static T sum<T>(Span<T> src)
             where T : unmanaged
                 => sum(src.ReadOnly());
+
     }
 }

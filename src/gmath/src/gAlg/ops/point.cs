@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct emath
+    partial struct gAlg
     {
-        [MethodImpl(Inline)]
-        public static @enum<E,T> sub<E,T>(@enum<E,T> a, @enum<E,T> b)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => new @enum<E,T>(gmath.sub(a.Scalar, b.Scalar));
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T point<T>(in Histogram<T> src, uint ix)
+            where T : unmanaged, IComparable<T>
+                => ref src.Partitions[ix];
     }
 }

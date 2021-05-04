@@ -62,7 +62,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(mspan.avg(memory.int64(src), @checked));
             else
-                return Calcs.favg(src, @checked);
+                return gAlg.favg(src, @checked);
         }
     }
 }

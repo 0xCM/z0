@@ -12,9 +12,9 @@ namespace Z0
     partial struct emath
     {
         [MethodImpl(Inline)]
-        public static @enum<E,T> sub<E,T>(@enum<E,T> a, @enum<E,T> b)
+        public static @enum<E,T> nor<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged
-                => new @enum<E,T>(gmath.sub(a.Scalar, b.Scalar));
+                => new @enum<E,T>(gmath.nor(a.Scalar, b.Scalar));
     }
 }
