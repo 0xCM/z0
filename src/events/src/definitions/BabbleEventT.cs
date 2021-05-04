@@ -16,7 +16,7 @@ namespace Z0
 
         public const EventKind Kind = EventKind.Babble;
 
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         public EventPayload<T> Payload {get;}
 

@@ -11,7 +11,7 @@ namespace Z0
         void Disposed()
         {
             if(Verbosity.IsBabble())
-                Raise(EventFactory.disposed(Host.Id, Ct));
+                Raise(EventFactory.disposed(Host.StepId, Ct));
         }
 
         WfExecFlow<T> Creating<T>(T data)
@@ -20,7 +20,7 @@ namespace Z0
             return Flow(data);
         }
 
-        WfExecToken Created<T>(WfExecFlow<T> flow)
+        ExecToken Created<T>(WfExecFlow<T> flow)
         {
             signal(this).Created(flow.Data);
             return Ran(flow);

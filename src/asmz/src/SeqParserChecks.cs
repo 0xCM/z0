@@ -26,7 +26,7 @@ namespace Z0
             Wf = wf;
         }
 
-        WfExecToken Ran<C,T>(WfExecFlow<string> flow, C @case, T data)
+        ExecToken Ran<C,T>(WfExecFlow<string> flow, C @case, T data)
             => Wf.Ran(flow, Seq.delimit(Chars.Colon, 0, @case, data));
 
         [Op]
@@ -46,7 +46,7 @@ namespace Z0
             const char Delimiter = ',';
             const byte SegCount = 4;
 
-            var parser = Sequence.splitter(Delimiter);
+            var parser = gAlg.splitter(Delimiter);
             var input = edit(span(Input));
             gAlg.split(parser, input, out var segments);
             return segments;
@@ -59,7 +59,7 @@ namespace Z0
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            var parser = Sequence.splitter<ushort>(Delimiter);
+            var parser = gAlg.splitter<ushort>(Delimiter);
             var input = memory.uint16(edit(span(Input)));
             gAlg.split(parser, input, out var segments);
             return segments;
@@ -71,7 +71,7 @@ namespace Z0
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            var parser = Sequence.splitter(AsciCharCode.Dot);
+            var parser = gAlg.splitter(AsciCharCode.Dot);
             var input = edit(Case2Input);
             gAlg.split(parser, input, out var segments);
             return segments;

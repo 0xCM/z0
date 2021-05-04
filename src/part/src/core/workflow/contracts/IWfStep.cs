@@ -12,7 +12,7 @@ namespace Z0
     [Free]
     public interface IWfStep
     {
-        WfStepId Id {get;}
+        WfStepId StepId {get;}
     }
 
     /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
     public interface IWfStep<C> : IWfStep
         where C : IWfStep<C>, new()
     {
-        WfStepId IWfStep.Id
+        WfStepId IWfStep.StepId
             => new WfStepId<C>();
     }
 }

@@ -42,7 +42,7 @@ namespace Z0
 
         LogLevel Verbosity {get;}
 
-        WfExecToken NextExecToken();
+        ExecToken NextExecToken();
 
         WfServices Services {get;}
 
@@ -84,7 +84,7 @@ namespace Z0
         IWfDb Db()
             => new WfDb(this, Env.Db.Value);
 
-        WfEventId Raise<E>(in E e)
+        EventId Raise<E>(in E e)
             where E : IWfEvent
         {
             EventSink.Deposit(e);

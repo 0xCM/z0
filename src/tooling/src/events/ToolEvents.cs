@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RanEvent<T> ran<H,T>(H host, T data, CorrelationToken ct)
             where H : IWfHost<H>, new()
-                => new RanEvent<T>(host.Id, data, ct);
+                => new RanEvent<T>(host.StepId, data, ct);
     }
 
 }

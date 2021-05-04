@@ -16,7 +16,7 @@ namespace Z0
 
         public const EventKind Kind = EventKind.CmdRan;
 
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         public FlairKind Flair => FlairKind.Ran;
 

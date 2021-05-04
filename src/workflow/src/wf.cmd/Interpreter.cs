@@ -32,7 +32,7 @@ namespace Z0
             TermLog = Loggers.term(Name);
             Frequency = new TimeSpan(0, 0, 0, 0, 50);
             CommandQueue = new ConcurrentQueue<string>();
-            ExecLog = new ConcurrentDictionary<ulong,WfExecToken>();
+            ExecLog = new ConcurrentDictionary<ulong,ExecToken>();
             DispatchKeys = new ConcurrentBag<Guid>();
             Tokenizer = WfTokenProvider.create();
             Running = false;
@@ -55,7 +55,7 @@ namespace Z0
 
         Task SpinTask;
 
-        WfExecToken Token;
+        ExecToken Token;
 
         WfTokenProvider Tokenizer;
 
@@ -63,7 +63,7 @@ namespace Z0
 
         readonly ConcurrentBag<Guid> DispatchKeys;
 
-        readonly ConcurrentDictionary<ulong,WfExecToken> ExecLog;
+        readonly ConcurrentDictionary<ulong,ExecToken> ExecLog;
 
         public void Submit(string command)
         {
@@ -187,7 +187,7 @@ namespace Z0
             }
         }
 
-        public WfExecToken WaitForExit()
+        public ExecToken WaitForExit()
         {
             SubmitStop();
             Worker.WaitForExit();

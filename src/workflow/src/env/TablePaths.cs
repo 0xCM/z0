@@ -38,11 +38,11 @@ namespace Z0
                 => TableRoot() + FS.folder(string.Format("{0}.{1}", TableId<T>(), subject));
 
         string TableId(Type t)
-            => Tables.tableid(t).Identifier.Format();
+            => Z0.TableId.identify(t).Identifier.Format();
 
         string TableId<T>()
             where T : struct, IRecord<T>
-                => Tables.tableid<T>().Identifier.Format();
+                => Z0.TableId.identify<T>().Identifier.Format();
 
         FS.FilePath Table(string subject, PartId part)
             => TableDir(subject) + FS.file(string.Format(RP.SlotDot2, subject, part.Format()), DefaultTableExt);

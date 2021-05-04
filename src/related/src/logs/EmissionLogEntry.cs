@@ -11,7 +11,7 @@ namespace Z0
     {
         public const string TableId = "emissions";
 
-        public WfExecToken Token;
+        public ExecToken Token;
 
         [RenderWidth(24)]
         public FS.FileExt TargetExt;

@@ -27,7 +27,7 @@ namespace Z0
             Wf.Db().TableDir<MetaBlob>().Clear();
         }
 
-        public WfExecToken EmitBlobs(FS.FilePath src, FS.FilePath dst)
+        public ExecToken EmitBlobs(FS.FilePath src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<MetaBlob>(dst);
             using var reader = ImageMetadata.reader(src);
@@ -43,7 +43,7 @@ namespace Z0
             return Wf.EmittedTable<MetaBlob>(flow, rows.Length);
         }
 
-        public WfExecToken EmitBlobs(Assembly src)
+        public ExecToken EmitBlobs(Assembly src)
             => EmitBlobs(FS.path(src.Location), Wf.Db().Table<MetaBlob>(src.GetSimpleName()));
     }
 }

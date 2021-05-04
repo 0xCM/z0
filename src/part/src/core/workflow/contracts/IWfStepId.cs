@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IWfStepId : ITextual
@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The step token
         /// </summary>
-        WfToken Token {get;}
+        WfHostId Token {get;}
     }
 
     [Free]
@@ -32,10 +32,10 @@ namespace Z0
         /// <summary>
         /// The step token
         /// </summary>
-        WfToken IWfStepId.Token
+        WfHostId IWfStepId.Token
         {
             [MethodImpl(Inline)]
-            get => new WfToken((ulong)typeof(H).MetadataToken);
+            get => new WfHostId((ulong)typeof(H).MetadataToken);
         }
 
         string IWfStepId.HostName

@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct WfHost : IWfHost<WfHost>
     {
-        public WfStepId Id {get;}
+        public WfStepId StepId {get;}
 
         public Type Type {get;}
 
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfHost(WfStepId id, Type type)
         {
-            Id =id;
+            StepId =id;
             Type = type;
             Name = type.Name;
         }
@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfHost src)
-            => src.Id;
+            => src.StepId;
 
         [MethodImpl(Inline)]
         public static implicit operator WfHost(Type src)

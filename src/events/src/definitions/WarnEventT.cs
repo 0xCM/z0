@@ -16,7 +16,7 @@ namespace Z0
 
         public const EventKind Kind = EventKind.Warn;
 
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         public WfStepId StepId {get;}
 
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WarnEvent(WfStepId step, T content, CorrelationToken ct)
         {
-            EventId = WfEventId.define(EventName, step);
+            EventId = EventId.define(EventName, step);
             Payload = content;
             StepId = step;
         }

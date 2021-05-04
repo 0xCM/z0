@@ -14,14 +14,14 @@ namespace Z0
     {
         readonly IWfRuntime Wf;
 
-        public WfExecToken Token {get;}
+        public ExecToken Token {get;}
 
         public FS.FilePath Target {get;}
 
         public Count EmissionCount {get;}
 
         [MethodImpl(Inline)]
-        internal WfTableFlow(IWfRuntime wf, FS.FilePath dst, in WfExecToken token, uint count = 0)
+        internal WfTableFlow(IWfRuntime wf, FS.FilePath dst, in ExecToken token, uint count = 0)
         {
             Wf = wf;
             Token = token;
@@ -34,7 +34,7 @@ namespace Z0
             => new WfTableFlow<T>(Wf, Target, Token, count);
 
         [MethodImpl(Inline)]
-        public WfTableFlow<T> WithToken(WfExecToken token)
+        public WfTableFlow<T> WithToken(ExecToken token)
             => new WfTableFlow<T>(Wf, Target, token, EmissionCount);
 
         [MethodImpl(Inline)]

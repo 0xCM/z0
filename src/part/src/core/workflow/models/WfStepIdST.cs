@@ -29,7 +29,7 @@ namespace Z0
             => src.Type;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfToken(WfStepId<S,T> src)
+        public static implicit operator WfHostId(WfStepId<S,T> src)
             => src.Token;
 
         /// <summary>
@@ -50,10 +50,10 @@ namespace Z0
         /// <summary>
         /// The step token
         /// </summary>
-        public WfToken Token
+        public WfHostId Token
         {
             [MethodImpl(Inline)]
-            get => new WfToken(alg.hash.calc<S,T>());
+            get => new WfHostId(alg.hash.calc<S,T>());
         }
 
         [MethodImpl(Inline)]

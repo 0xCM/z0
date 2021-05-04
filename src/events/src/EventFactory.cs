@@ -20,6 +20,11 @@ namespace Z0
 
         const string HandlerNotFound = "Handler for {0} not found";
 
+        public static EventFlow<S,T> flow<S,T>(S src, T dst)
+            where S : IWfEvent
+            where T : IWfEvent
+                => new (src,dst);
+
         /// <summary>
         /// Creates a <see cref='BabbleEvent{T}'/> message
         /// </summary>
@@ -157,7 +162,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RanEvent<T> ran<H,T>(H host, T data, CorrelationToken ct)
             where H : IWfHost<H>, new()
-                => new RanEvent<T>(host.Id, data, ct);
+                => new RanEvent<T>(host.StepId, data, ct);
 
         [Op]
         public static RunningEvent running(WfStepId step, CorrelationToken ct)
@@ -170,7 +175,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RunningEvent<T> running<H,T>(H host, T data, CorrelationToken ct)
             where H : IWfHost<H>, new()
-                => new RunningEvent<T>(host.Id, data, ct);
+                => new RunningEvent<T>(host.StepId, data, ct);
 
         [MethodImpl(Inline)]
         public static RowEvent<T> row<T>(T data)

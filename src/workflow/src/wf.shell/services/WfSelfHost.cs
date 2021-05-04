@@ -18,7 +18,7 @@ namespace Z0
 
         Name HostName;
 
-        public override WfStepId Id
+        public override WfStepId StepId
             => HostName;
 
         [MethodImpl(Inline)]

@@ -15,7 +15,7 @@ namespace Z0
         string Identifier
             => Type.Name;
         string ITextual.Format()
-            => Id.Format();
+            => StepId.Format();
     }
 
     public interface IWfHost<H> : IWfHost, IWfStep<H>
@@ -24,7 +24,7 @@ namespace Z0
         Type IWfHost.Type
             => typeof(H);
 
-        WfStepId IWfStep.Id
+        WfStepId IWfStep.StepId
             => typeof(H);
     }
 

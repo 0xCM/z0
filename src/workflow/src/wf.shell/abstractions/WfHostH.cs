@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static H create() => new H();
 
-        public virtual WfStepId Id {get;}
+        public virtual WfStepId StepId {get;}
 
         public Type Type {get;}
 
@@ -29,7 +29,7 @@ namespace Z0
         protected WfHost()
         {
             Type = typeof(H);
-            Id = Type;
+            StepId = Type;
         }
 
         public virtual void Run(IWfRuntime wf)
@@ -40,7 +40,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                wf.Error(Id, e);
+                wf.Error(StepId, e);
             }
         }
 
@@ -49,14 +49,14 @@ namespace Z0
         protected abstract void Execute(IWfRuntime shell);
 
         public virtual string Format()
-            => Id.Format();
+            => StepId.Format();
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfHost<H> src)
-            => src.Id;
+            => src.StepId;
 
         [MethodImpl(Inline)]
         public static implicit operator WfHost(WfHost<H> src)
-            => new WfHost(src.Id, src.Type);
+            => new WfHost(src.StepId, src.Type);
     }
 }

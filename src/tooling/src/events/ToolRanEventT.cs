@@ -16,7 +16,7 @@ namespace Z0
 
         public const EventKind Kind = EventKind.ToolRan;
 
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         public ToolExecSpec Cmd {get;}
 

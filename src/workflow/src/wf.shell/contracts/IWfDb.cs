@@ -11,7 +11,7 @@ namespace Z0
         FS.Files ClearTables<T>()
             where T : struct, IRecord<T>;
 
-        WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
+        ExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
             where T : struct, IRecord<T>;
     }
 }

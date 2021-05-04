@@ -15,7 +15,7 @@ namespace Z0
     public abstract class ApiExtractEvent<E> : IWfEvent<E>
         where E : ApiExtractEvent<E>, new()
     {
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         public FlairKind Flair {get;}
 

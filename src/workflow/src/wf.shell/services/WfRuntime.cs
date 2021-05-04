@@ -80,20 +80,20 @@ namespace Z0
             return this;
         }
 
-        public WfExecToken Ran(WfExecFlow src)
+        public ExecToken Ran(WfExecFlow src)
         {
             var token = Tokens.CloseExecToken(src.Token);
             return token;
         }
 
-        public WfExecToken Ran<T>(WfExecFlow<T> src)
+        public ExecToken Ran<T>(WfExecFlow<T> src)
         {
             var token = Tokens.CloseExecToken(src.Token);
             WfEvents.signal(this).Ran(src.Data);
             return token;
         }
 
-        public WfExecToken Ran<T,D>(WfExecFlow<T> src, D data)
+        public ExecToken Ran<T,D>(WfExecFlow<T> src, D data)
         {
             var token = Tokens.CloseExecToken(src.Token);
             WfEvents.signal(this).Ran(data);
@@ -101,7 +101,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfExecToken NextExecToken()
+        public ExecToken NextExecToken()
             => Tokens.NextExecToken();
 
 

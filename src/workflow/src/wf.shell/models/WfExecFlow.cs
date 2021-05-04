@@ -13,10 +13,10 @@ namespace Z0
     {
         readonly IWfRuntime Wf;
 
-        public WfExecToken Token {get;}
+        public ExecToken Token {get;}
 
         [MethodImpl(Inline)]
-        internal WfExecFlow(IWfRuntime wf, in WfExecToken token)
+        internal WfExecFlow(IWfRuntime wf, in ExecToken token)
         {
             Wf = wf;
             Token = token;
@@ -32,10 +32,10 @@ namespace Z0
 
         public T Data {get;}
 
-        public WfExecToken Token {get;}
+        public ExecToken Token {get;}
 
         [MethodImpl(Inline)]
-        internal WfExecFlow(IWfRuntime wf, T data, in WfExecToken token)
+        internal WfExecFlow(IWfRuntime wf, T data, in ExecToken token)
         {
             Wf = wf;
             Data = data;

@@ -9,7 +9,7 @@ namespace Z0
     [Free]
     public interface IWfEvent : IAppEvent
     {
-        WfEventId EventId {get;}
+        EventId EventId {get;}
 
         WfStepId StepId
             => WfStepId.Empty;

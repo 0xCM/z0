@@ -17,7 +17,7 @@ namespace Z0
         public void Invoke(in DynamicAction action)
             => action.Invoke();
 
-        public WfExecToken Run(in DynamicAction fx)
+        public ExecToken Run(in DynamicAction fx)
         {
             // var flow = Wf.Running(fx.Id);
             // try

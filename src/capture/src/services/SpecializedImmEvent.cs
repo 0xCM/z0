@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public const string EventName = "SpecializedImm";
 
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         readonly ApiHostUri Host;
 
@@ -45,7 +45,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public SpecializedImmEvent(WfStepId step, ApiHostUri uri, bool generic, ImmRefinementKind source, Type refinement, FS.FilePath dst)
         {
-            EventId = WfEventId.define(EventName, step);
+            EventId = EventId.define(EventName, step);
             Host = uri;
             Generic = generic;
             ImmSource = source;

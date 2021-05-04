@@ -195,7 +195,7 @@ namespace Z0.Asm
 
         void Assemble(AsmOc id, ReadOnlySpan<AsmExpr> input)
         {
-            var subject = Tables.tableid<AssembledAsm>();
+            var subject = TableId.identify<AssembledAsm>();
             var casedir = Db.CaseDir(subject,id).Create();
             var casename = CaseName(id);
             var tool = Wf.Nasm();

@@ -35,7 +35,7 @@ namespace Z0
             return masks;
         }
 
-        public WfExecToken Emit(ReadOnlySpan<BitMaskInfo> src, FS.FilePath dst)
+        public ExecToken Emit(ReadOnlySpan<BitMaskInfo> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<BitMaskInfo>(dst);
             var count = src.Length;

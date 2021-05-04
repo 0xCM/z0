@@ -16,7 +16,7 @@ namespace Z0
 
         public const EventKind Kind = EventKind.Error;
 
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         public Option<Exception> Exception {get;}
 

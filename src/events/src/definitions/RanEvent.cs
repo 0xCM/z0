@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [Event(Kind)]
-    public readonly struct RanEvent<T> : IWfEvent<RanEvent<T>,T>
+    public readonly struct RanEvent<T> : ITerminalEvent<RanEvent<T>>
     {
         public const string EventName = GlobalEvents.Ran;
 
@@ -18,7 +18,7 @@ namespace Z0
 
         public static EventLevel Level => FlairKind.Status;
 
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         public WfStepId StepId {get;}
 
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RanEvent(WfStepId step, T data, CorrelationToken ct)
         {
-            EventId = WfEventId.define(EventName, step);
+            EventId = EventId.define(EventName, step);
             StepId = step;
             Payload = data;
         }

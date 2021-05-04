@@ -37,10 +37,10 @@ namespace Z0
         /// <summary>
         /// The step token
         /// </summary>
-        public WfToken Token
+        public WfHostId Token
         {
             [MethodImpl(Inline)]
-            get => WfToken.create(WfPartKind.Step, Effect);
+            get => WfHostId.create(WfPartKind.Step, Effect);
         }
 
         public bool IsEmpty
@@ -99,7 +99,7 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfToken(WfStepId<T> src)
+        public static implicit operator WfHostId(WfStepId<T> src)
             => src.Token;
     }
 }

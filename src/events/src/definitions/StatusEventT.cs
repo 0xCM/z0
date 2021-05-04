@@ -16,7 +16,7 @@ namespace Z0
 
         public const EventKind Kind = EventKind.Status;
 
-        public WfEventId EventId {get;}
+        public EventId EventId {get;}
 
         public EventPayload<T> Payload {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public StatusEvent(WfStepId step, T data, CorrelationToken ct = default)
         {
-            EventId = WfEventId.define(EventName, step);
+            EventId = EventId.define(EventName, step);
             Payload = data;
         }
 

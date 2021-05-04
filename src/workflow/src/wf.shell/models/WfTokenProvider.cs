@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfExecToken Dispense()
-            => new WfExecToken((ulong)root.atomic(ref StartToken));
+        public ExecToken Dispense()
+            => new ExecToken((ulong)root.atomic(ref StartToken));
     }
 }

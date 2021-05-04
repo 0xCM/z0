@@ -94,7 +94,7 @@ namespace Z0
         protected void ShowRecords<T>(ReadOnlySpan<T> src)
             where T : struct, IRecord<T>
         {
-            var id = Tables.tableid<T>();
+            var id = TableId.identify<T>();
             var count = src.Length;
             if(count ==0)
             {

@@ -30,7 +30,7 @@ namespace Z0
             Sink = sink;
         }
 
-        public WfEventId Raise<E>(in E e)
+        public EventId Raise<E>(in E e)
             where E : IWfEvent
         {
             Sink.Deposit(e);
@@ -85,10 +85,10 @@ namespace Z0
                 => Raise(emittedTable<T>(Source, dst, Ct));
 
         public void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => Raise(emittedTable(Source, Tables.tableid(type), count, dst, Ct));
+            => Raise(emittedTable(Source, TableId.identify(type), count, dst, Ct));
 
         public void EmittedTable(Type type, FS.FilePath dst)
-            => Raise(emittedTable(Source, Tables.tableid(type), dst, Ct));
+            => Raise(emittedTable(Source, TableId.identify(type), dst, Ct));
 
         public void EmittingFile(FS.FilePath dst)
             => Raise(emittingFile(Source, dst, Ct));

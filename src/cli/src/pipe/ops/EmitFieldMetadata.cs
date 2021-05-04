@@ -25,7 +25,7 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Error(Host.Id,e);
+                    Wf.Error(Host.StepId,e);
                 }
             }
 

@@ -22,10 +22,10 @@ namespace Z0
             return Flow(data);
         }
 
-        WfExecToken Ran(WfExecFlow src);
+        ExecToken Ran(WfExecFlow src);
 
-        WfExecToken Ran<T>(WfExecFlow<T> src);
+        ExecToken Ran<T>(WfExecFlow<T> src);
 
-        WfExecToken Ran<T,D>(WfExecFlow<T> flow, D data);
+        ExecToken Ran<T,D>(WfExecFlow<T> flow, D data);
     }
 }

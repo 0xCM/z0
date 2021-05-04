@@ -19,11 +19,11 @@ namespace Z0
             => new TokenDispenser();
 
         [MethodImpl(Inline)]
-        public WfExecToken NextExecToken()
-            => new WfExecToken((ulong)root.atomic(ref StartToken));
+        public ExecToken NextExecToken()
+            => new ExecToken((ulong)root.atomic(ref StartToken));
 
         [MethodImpl(Inline)]
-        public WfExecToken CloseExecToken(WfExecToken src)
+        public ExecToken CloseExecToken(ExecToken src)
             => src.Complete((ulong)root.atomic(ref EndToken));
     }
 }

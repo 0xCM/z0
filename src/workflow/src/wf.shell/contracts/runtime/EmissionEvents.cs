@@ -18,7 +18,7 @@ namespace Z0
             return Emissions.LogEmission(TableFlow<T>(dst));
         }
 
-        WfExecToken EmittedTable<T>(WfTableFlow<T> flow, Count count, FS.FilePath? dst = null)
+        ExecToken EmittedTable<T>(WfTableFlow<T> flow, Count count, FS.FilePath? dst = null)
             where T : struct, IRecord<T>
         {
             var completed = Ran(flow);
@@ -40,7 +40,7 @@ namespace Z0
             return Emissions.LogEmission(Flow(dst));
         }
 
-        WfExecToken EmittedFile(WfFileFlow flow, Count count)
+        ExecToken EmittedFile(WfFileFlow flow, Count count)
         {
             var completed = Ran(flow);
             var counted = flow.WithCount(count).WithToken(completed);

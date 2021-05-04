@@ -13,14 +13,14 @@ namespace Z0
     {
         readonly IWfRuntime Wf;
 
-        public WfExecToken Token {get;}
+        public ExecToken Token {get;}
 
         public FS.FilePath Target {get;}
 
         public Count EmissionCount {get;}
 
         [MethodImpl(Inline)]
-        internal WfFileFlow(IWfRuntime wf, FS.FilePath dst, in WfExecToken token, uint count = 0)
+        internal WfFileFlow(IWfRuntime wf, FS.FilePath dst, in ExecToken token, uint count = 0)
         {
             Wf = wf;
             Token = token;
@@ -33,7 +33,7 @@ namespace Z0
             => new WfFileFlow(Wf, Target, Token, count);
 
         [MethodImpl(Inline)]
-        public WfFileFlow WithToken(WfExecToken token)
+        public WfFileFlow WithToken(ExecToken token)
             => new WfFileFlow(Wf, Target, token, EmissionCount);
 
         [MethodImpl(Inline)]

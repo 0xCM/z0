@@ -38,10 +38,10 @@ namespace Z0
         /// <summary>
         /// The step token
         /// </summary>
-        public WfToken Token
+        public WfHostId Token
         {
             [MethodImpl(Inline)]
-            get => WfToken.create(this);
+            get => WfHostId.create(this);
         }
 
         public bool IsEmpty
