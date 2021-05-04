@@ -13,6 +13,21 @@ namespace Z0
 
     partial class ProcessContextPipe
     {
+        public Index<MemoryRegion> LoadRegions()
+        {
+            var paths = Paths.MemoryRegionPaths();
+            if(paths.Length != 0)
+            {
+                var path = paths[paths.Length - 1];
+                var result = LoadRegions(path);
+                if(result)
+                    return result.Data;
+                else
+                    Wf.Error(result.Message);
+            }
+            return sys.empty<MemoryRegion>();
+        }
+
         public Outcome<Index<MemoryRegion>> LoadRegions(FS.FilePath src)
         {
             var tid = Tables.tableid<MemoryRegion>();
@@ -41,7 +56,7 @@ namespace Z0
                 if(line.IsEmpty)
                     continue;
 
-                var result = Images.parse(line.Content, out seek(dst,i));
+                var result = ImageMemory.parse(line.Content, out seek(dst,i));
                 if(!result)
                     return result;
 

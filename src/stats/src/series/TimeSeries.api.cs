@@ -11,59 +11,67 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Threading.Tasks;
 
+    using static Part;
+
     public static class TimeSeries
     {
-        static long LastSeriesId;
+        [MethodImpl(Inline)]
+        public static SeriesEvolution<T> evolution<T>(in ulong[] seed, in Interval<T> domain,
+            in SeriesTerm<T> first, in SeriesTerm<T> final, in Duration time)
+                where T : unmanaged
+                    => new SeriesEvolution<T>(seed, domain, first, final, time);
 
-        static readonly ConcurrentDictionary<long, IPolyrand> States
-            = new ConcurrentDictionary<long, IPolyrand>();
-
-        public static SeriesTerm<T> Term<T>(long index, T value)
+        public static SeriesTerm<T> term<T>(long index, T value)
             where T : unmanaged
                 => new SeriesTerm<T>(index, value);
 
-        public static SeriesTerm<T> NextTerm<T>(TimeSeries<T> series)
+        static long LastSeriesId;
+
+        static readonly ConcurrentDictionary<long, IDomainSource> States
+            = new ConcurrentDictionary<long, IDomainSource>();
+
+        public static SeriesTerm<T> next<T>(TimeSeries<T> series)
             where T : unmanaged
         {
-            if(States.TryGetValue(series.Id, out IPolyrand random))
+            if(States.TryGetValue(series.Id, out IDomainSource source))
             {
-                var term = Term(series.Observed.Index + 1, random.Next<T>(series.Domain));
-                series.Witnessed(term);
-                return term;
+                var _term = term(series.Observed.Index + 1, source.Next<T>(series.Domain));
+                series.Witnessed(_term);
+                return _term;
             }
             else
                 return series.Observed;
         }
 
-        internal static IEnumerable<SeriesTerm<T>> Evolve<T>(TimeSeries<T> series)
+        internal static IEnumerable<SeriesTerm<T>> evolve<T>(TimeSeries<T> series)
             where T : unmanaged
         {
-            if(States.TryGetValue(series.Id, out IPolyrand random))
+            if(States.TryGetValue(series.Id, out IDomainSource source))
             {
                 while(true)
                 {
-                    var term = Term(series.Observed.Index + 1, random.Next<T>(series.Domain));
-                    series.Witnessed(term);
-                    yield return term;
+                    var _term = term(series.Observed.Index + 1, source.Next<T>(series.Domain));
+                    series.Witnessed(_term);
+                    yield return _term;
                 }
             }
         }
 
-        public static TimeSeries<T> Define<T>(Interval<T> domain, ulong[] seed)
+        public static TimeSeries<T> define<T>(Interval<T> domain, ulong[] seed)
             where T : unmanaged
         {
             var id = root.atomic(ref LastSeriesId);
             var rng = Rng.xorShift1024(seed);
             if(!States.TryAdd(id,rng))
                 throw new Exception($"Key {id} already exists");
-            return new TimeSeries<T>(id, domain, Term(0, memory.zero<T>()));
+            return new TimeSeries<T>(id, domain, term(0, memory.zero<T>()));
         }
 
-        public static void EvolveSeries<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)
+        public static void evolve<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)
             where T : unmanaged
         {
             var sw = Time.stopwatch();
-            var series = Define(domain, seed);
+            var series = define(domain, seed);
             var terms = series.Terms().ToSpan(count);
             var elapsed = Duration.init(sw.ElapsedTicks);
             root.require(terms.Length == count,() =>"");
@@ -71,37 +79,36 @@ namespace Z0
             complete(series,elapsed);
         }
 
-        static SeriesEvolution<T> Execute<T>(in ulong[] seed, in Interval<T> domain, int steps)
+        public static Task<SeriesEvolution<T>> evolve<T>(ulong[] seed, Interval<T> domain, int steps)
+            where T : unmanaged
+            => Task.Factory.StartNew(() => run(seed, domain, steps));
+
+        public static async Task evolve<T>(Interval<T> domain, Action<SeriesEvolution<T>> receiver, int count = Pow2.T06, int steps = (int)Pow2.T19)
+            where T : unmanaged
+        {
+            var sw = Time.stopwatch();
+            var variations = from i in gAlg.stream(count)
+                    let seed = PolySeed1024.Entropic
+                    let evolve = TimeSeries.evolve(seed, domain, steps)
+                    let status = evolve.ContinueWith(t => receiver(t.Result))
+                    select evolve;
+
+            await root.task(() => Task.WaitAll(variations.ToArray()));
+        }
+
+        static SeriesEvolution<T> run<T>(in ulong[] seed, in Interval<T> domain, int steps)
             where T : unmanaged
         {
             var sw = Time.stopwatch();
 
-            var series = Define(domain, seed);
+            var series = define(domain, seed);
             var s0 = series.Snapshot();
             var terms = series.Terms().ToSpan(steps);
             root.require(terms.Length == steps, () => "");
             root.require(series.Observed.Observed.Equals(terms[steps - 1].Observed), () => "");
 
             var elapsed = Duration.init(sw.ElapsedTicks);
-            var evolved = SeriesEvolution.define(seed, domain, s0.Observed, series.Observed, elapsed);
-            return evolved;
-        }
-
-        public static Task<SeriesEvolution<T>> Evolve<T>(ulong[] seed, Interval<T> domain, int steps)
-            where T : unmanaged
-            => Task.Factory.StartNew(() => Execute(seed, domain, steps));
-
-        public static async Task Evolve<T>(Interval<T> domain, Action<SeriesEvolution<T>> receiver, int count = Pow2.T06, int steps = (int)Pow2.T19)
-            where T : unmanaged
-        {
-            var sw = Time.stopwatch();
-            var variations = from i in gAlg.stream(count)
-                    let seed = PolySeed1024.Entropic
-                    let evolve = TimeSeries.Evolve(seed, domain, steps)
-                    let status = evolve.ContinueWith(t => receiver(t.Result))
-                    select evolve;
-
-            await root.task(() => Task.WaitAll(variations.ToArray()));
+            return evolution(seed, domain, s0.Observed, series.Observed, elapsed);
         }
     }
 }

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Reflection;
-
     public struct ApiHostDataset
     {
         public ResolvedHost HostResolution;

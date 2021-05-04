@@ -49,5 +49,9 @@ namespace Z0
 
         public FS.FilePath MemoryRegionHashPath(string process, Timestamp ts, Identifier subject)
             => Root + MemoryRegionHashFile(process, ts, subject);
+
+        public FS.Files MemoryRegionPaths()
+            => Root.AllFiles.Where(f => f.FileName.Contains(MemoryRegion.TableId)).Storage.Sort();
+
     }
 }

@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.IO;
     using System.Reflection;
 
@@ -41,7 +39,7 @@ namespace Z0
             var rowsize = ImageContent.RowDataSize;
             var dst = Db.Table(ImageContent.TableId, src.GetSimpleName());
             var flow = Wf.EmittingTable<ImageContent>(dst);
-            var @base = ProcessContextPipe.@base(src);
+            var @base = ImageMemory.@base(src);
             var formatter = HexFormat.DataFormatter(@base, rowsize);
             var path = FS.path(src.Location);
             using var stream = path.Reader();

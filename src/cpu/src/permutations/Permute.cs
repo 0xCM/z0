@@ -10,10 +10,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static BitMasks.Literals;
     using static Part;
     using static memory;
-    using static PermLits;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
@@ -23,37 +21,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        /// <summary>
-        /// Creates a fixed 16-bit permutation over a generic permutation over 16 elements
-        /// </summary>
-        /// <param name="src">The source permutation</param>
-        [MethodImpl(Inline), Op]
-        public static Perm16 perm16(W128 w, Perm<byte> spec)
-            => new Perm16(gcpu.vload(w128, spec.Terms));
-
-        /// <summary>
-        /// Creates a fixed 32-bit permutation over a generic permutation over 32 elements
-        /// </summary>
-        /// <param name="src">The source permutation</param>
-        [MethodImpl(Inline), Op]
-        public static Perm32 perm32(W256 w, Perm<byte> src)
-            => new Perm32(gcpu.vload(w, src.Terms));
-
-        [MethodImpl(Inline), Op]
-        public static Perm16 perm16(Vector128<byte> data)
-            => new Perm16(cpu.vand(data, cpu.vbroadcast(w128, Msb8x8x3)));
-
-        [MethodImpl(Inline), Op]
-        public static Perm32 perm32(Vector256<byte> data)
-            => new Perm32(cpu.vand(data, cpu.vbroadcast(w256, Msb8x8x3)));
-
-        [MethodImpl(Inline), Op]
-        public static Perm8L permid(N8 n)
-            => Perm8Identity;
-
-        [MethodImpl(Inline), Op]
-        public static Perm16L permid(N16 n)
-            => Perm16Identity;
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> shuffles(NatPerm<N16> src)
@@ -74,78 +41,13 @@ namespace Z0
         readonly int[] terms;
 
         /// <summary>
-        /// Shuffles span content as determined by a permutation
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="p">The permutation to apply</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void apply<T>(Permute p, ReadOnlySpan<T> src, Span<T> dst)
-        {
-            var terms = span(p.terms);
-            var count = terms.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = skip(src,(uint)skip(terms,i));
-        }
-
-        /// <summary>
-        /// Applies a sequence of transpositions to source span elements
-        /// </summary>
-        /// <param name="src">The source and target span</param>
-        /// <param name="i">The first index</param>
-        /// <param name="j">The second index</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> apply<T>(Span<T> src, params Swap[] swaps)
-            where T : unmanaged
-        {
-            var len = swaps.Length;
-            ref var srcmem = ref first(src);
-            ref var swapmem = ref memory.first(swaps);
-            for(var k = 0u; k < len; k++)
-            {
-                (var i, var j) = skip(swapmem, k);
-               Swaps.swap(ref seek(srcmem, i), ref seek(srcmem, j));
-            }
-            return src;
-        }
-
-        [MethodImpl(Inline)]
-        public static Span<T> apply<T>(Permute p, ReadOnlySpan<T> src)
-        {
-            var dst = sys.alloc<T>(src.Length);
-            apply(p,src, dst);
-            return dst;
-        }
-
-        /// <summary>
-        /// Applies a transposition sequence to an input sequence
-        /// </summary>
-        /// <param name="src">The input sequence</param>
-        /// <param name="swaps">The transposition sequence</param>
-        /// <param name="dst">The output sequence</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void apply<T>(ReadOnlySpan<T> src, ReadOnlySpan<Swap> swaps, Span<T> dst)
-            where T : unmanaged
-        {
-            var len = swaps.Length;
-            ref readonly var input = ref first(src);
-            ref readonly var exchange = ref first(swaps);
-            for(var k = 0u; k<len; k++)
-            {
-                ref readonly var x = ref skip(exchange, k);
-                Swaps.swap(ref seek(input, x.i), ref seek(input, x.j));
-            }
-        }
-
-        /// <summary>
         /// Creates a generic permutation by application of a sequence of transpositions to the identity permutation
         /// </summary>
         /// <param name="n">The permutation length</param>
         /// <param name="swaps">Pairs of permutation indices (i,j) to be transposed</param>
         /// <typeparam name="T">The integral type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> Build<T>(T n, params (T i, T j)[] swaps)
+        public static Perm<T> build<T>(T n, params (T i, T j)[] swaps)
             where T : unmanaged
                 => new Perm<T>(n, swaps);
 
@@ -156,7 +58,7 @@ namespace Z0
         /// <param name="swaps">Pairs of permutation indices (i,j) to be transposed</param>
         /// <typeparam name="T">The integral type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> Build<T>(T n, params Swap<T>[] swaps)
+        public static Perm<T> build<T>(T n, params Swap<T>[] swaps)
             where T : unmanaged
                 => new Perm<T>(n,swaps);
 
@@ -174,69 +76,6 @@ namespace Z0
         public static Perm<T> Alloc<T>(uint n)
             where T : unmanaged
                 => new Perm<T>(new T[n]);
-
-        /// <summary>
-        /// Defines an untyped permutation determined by values in a source span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        [MethodImpl(Inline), Op]
-        public static Permute Init(ReadOnlySpan<int> src)
-            => new Permute(src.ToArray());
-
-        /// <summary>
-        /// Creates a permutation from the elements in a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> init<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => new Perm<T>(src.ToArray());
-
-        /// <summary>
-        /// Initializes permutation with the identity followed by a sequence of transpostions
-        /// </summary>
-        /// <param name="n">The length of the permutation</param>
-        /// <param name="swaps">The transpositions applied to the identity</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> init<T>(T n, (T i, T j)[] swaps)
-            where T : unmanaged
-                => new Perm<T>(n, swaps);
-
-        /// <summary>
-        ///  Initializes permutation with the identity followed by a sequence of transpostions
-        /// </summary>
-        /// <param name="n">The length of the permutation</param>
-        /// <param name="swaps">The transpositions applied to the identity</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> init<T>(T n, Swap<T>[] swaps)
-            where T : unmanaged
-                => new Perm<T>(n, swaps);
-
-        /// <summary>
-        /// Creates a permutation from the elements in a span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> init<T>(Span<T> src)
-            where T : unmanaged
-                => new Perm<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> init<T>(IEnumerable<T> src)
-            where T : unmanaged
-                => new Perm<T>(src);
-
-        /// <summary>
-        /// Creates a permutation from the elements in a parameter array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> init<T>(params T[] src)
-            where T : unmanaged
-                => new Perm<T>(src);
 
         /// <summary>
         /// Defines an identity permutation on n symbols
@@ -294,125 +133,6 @@ namespace Z0
                 dst |= (ulong)src[i] << offset;
             return (Perm16L)dst;
         }
-
-        /// <summary>
-        /// Defines an identity permutation of natural length and applies a specified sequence of transpostions
-        /// </summary>
-        /// <param name="length">The length of the permutation</param>
-        /// <param name="terms">The ordered sequence of terms that specify the permutation</param>
-        /// <typeparam name="N">The length type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatPerm<N> natural<N>(N n, params NatSwap<N>[] swaps)
-            where N : unmanaged, ITypeNat
-                => new NatPerm<N>(swaps);
-
-        /// <summary>
-        /// Defines an identity permutation of natural length and applies a specified sequence of transpostions
-        /// </summary>
-        /// <param name="length">The length of the permutation</param>
-        /// <param name="terms">The ordered sequence of terms that specify the permutation</param>
-        /// <typeparam name="N">The length type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatPerm<N> natural<N>(params NatSwap<N>[] swaps)
-            where N : unmanaged, ITypeNat
-                => new NatPerm<N>(swaps);
-
-        /// <summary>
-        /// Defines a permutation of natural length
-        /// </summary>
-        /// <param name="n">The length of the permutation</param>
-        /// <param name="terms">The ordered sequence of terms that define the permutation</param>
-        /// <typeparam name="N">The length type</typeparam>
-        public static NatPerm<N> natural<N>(N n, ReadOnlySpan<int> terms)
-            where N : unmanaged, ITypeNat
-                => new NatPerm<N>(terms.ToArray());
-
-        /// <summary>
-        /// Defines a permutation of natural length
-        /// </summary>
-        /// <param name="n">The length of the permutation</param>
-        /// <param name="terms">The ordered sequence of terms that specify the permutation</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The symbol type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatPerm<N> natural<N>(N n, params int[] terms)
-            where N : unmanaged, ITypeNat
-                => new NatPerm<N>(terms);
-
-        /// <summary>
-        /// Reifies a permutation of length 8 from its canonical scalar specification
-        /// </summary>
-        /// <param name="spec">The representative</param>
-        [MethodImpl(Inline), Op]
-        public static ref readonly NatPerm<N4> natural(Perm4L spec, in NatPerm<N4> dst)
-        {
-            uint data = (byte)spec;
-            for(int i=0, offset = 0; i<dst.Length; i++, offset +=2)
-                dst[i] = (int)Bits.bitseg(data, (byte)offset, (byte)(offset + 1));
-            return ref dst;
-        }
-
-        public static NatPerm<N4> natural(Perm4L spec)
-            => natural(spec, NatPerm<N4>.Alloc());
-
-        /// <summary>
-        /// Reifies a permutation of length 8 from its canonical scalar specification
-        /// </summary>
-        /// <param name="spec">The representative</param>
-        [Op]
-        public static NatPerm<N8> natural(Perm8L spec)
-        {
-            uint data = (uint)spec;
-            var dst = NatPerm<N8>.Alloc();
-            for(int i=0, offset = 0; i<dst.Length; i++, offset +=3)
-                dst[i] = (int)Bits.bitseg(data, (byte)offset, (byte)(offset + 2));
-            return dst;
-        }
-
-        /// <summary>
-        /// Reifies a permutation of length 16 from its canonical scalar representative
-        /// </summary>
-        /// <param name="spec">The representative</param>
-        [MethodImpl(Inline), Op]
-        public static ref readonly NatPerm<N16> natural(Perm16L spec, in NatPerm<N16> dst)
-        {
-            ulong data = (ulong)spec;
-            for(int i=0, offset = 0; i<dst.Length; i++, offset +=4)
-                dst[i] = (int)Bits.bitseg(data, (byte)offset, (byte)(offset + 3));
-            return ref dst;
-        }
-
-        /// <summary>
-        /// Reifies a permutation of length 16 from its canonical scalar representative
-        /// </summary>
-        /// <param name="spec">The representative</param>
-        [MethodImpl(Inline), Op]
-        public static NatPerm<N16> natural(Perm16L spec)
-            => natural(spec, NatPerm<N16>.Alloc());
-
-        /// <summary>
-        /// Creates a new identity permutation of natural length
-        /// </summary>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The term type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatPerm<N> natural<N>(N n = default)
-            where N : unmanaged, ITypeNat
-                => NatPerm<N>.Identity.Replicate();
-
-        public static NatPerm<N,T> natural<N,T>(N n, ReadOnlySpan<T> terms)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            if(terms.Length != TypeNats.nat32i(n))
-                AppErrors.ThrowInvariantFailure($"{n} != {terms.Length}");
-            return new NatPerm<N,T>(Permute.init(terms));
-        }
-
-        public static NatPerm<N,T> natural<N,T>(N n, Span<T> terms)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => natural(n, terms.ReadOnly());
 
         [MethodImpl(Inline)]
         public Permute(int n, Swap[] src)

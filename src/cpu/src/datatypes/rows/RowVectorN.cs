@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -15,7 +14,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-         T[] data;
+         Index<T> Data;
 
         /// <summary>
         /// The vector's dimension
@@ -29,34 +28,6 @@ namespace Z0
         public static RowVector<N,T> Zero
             => new RowVector<N,T>(new T[Dim]);
 
-        [MethodImpl(Inline)]
-        public static implicit operator RowVector<T>(RowVector<N,T> src)
-            => new RowVector<T>(src.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(RowVector<N,T> src)
-            => src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator RowVector<N,T>(T[] src)
-            => new RowVector<N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator RowVector<N,T>(RowVector<T> src)
-            => new RowVector<N, T>(src.Data);
-
-        [MethodImpl(Inline)]
-        public static bool operator == (RowVector<N,T> lhs, RowVector<N,T> rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator != (RowVector<N,T> lhs, RowVector<N,T> rhs)
-            => !lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static T operator *(RowVector<N,T> lhs, RowVector<N,T> rhs)
-            => gmath.dot<T>(lhs.Data, rhs.Data);
-
         /// <summary>
         /// Initializes a vector with an array
         /// </summary>
@@ -65,7 +36,7 @@ namespace Z0
         public RowVector(T[] src)
         {
             root.require(src.Length >= Dim, () => $"{src.Length} < {Dim}");
-            data = src;
+            Data = src;
         }
 
         /// <summary>
@@ -74,16 +45,16 @@ namespace Z0
         public ref T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref data[index];
+            get => ref Data[index];
         }
 
         /// <summary>
         /// The vector data
         /// </summary>
-        public T[] Data
+        public T[] Storage
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>
@@ -119,45 +90,62 @@ namespace Z0
             where U:unmanaged
         {
             for(var i=0; i < Length; i++)
-                dst[i] = f(data[i]);
+                dst[i] = f(Data[i]);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public RowVector<N,U> Convert<U>()
             where U : unmanaged
-               => new RowVector<N,U>(NumericArrays.force<T,U>(data));
+               => new RowVector<N,U>(NumericArrays.force<T,U>(Data));
 
         public bool Equals(RowVector<N,T> rhs)
         {
             for(var i = 0; i<Dim; i++)
-                if(gmath.neq(data[i], rhs.data[i]))
+                if(gmath.neq(Data[i], rhs.Data[i]))
                     return false;
             return true;
         }
 
         [MethodImpl(Inline)]
-        public ref RowVector<N,T> CopyTo(ref RowVector<N,T> dst)
-        {
-            data.CopyTo(dst.data);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public RowVector<N,T> Replicate()
-            => new RowVector<N,T>(data.Replicate());
-
-        [MethodImpl(Inline)]
         public string Format()
-            => data.FormatList();
+            => Data.Storage.FormatList();
 
         public override bool Equals(object rhs)
             => rhs is RowVector<N,T> x && Equals(x);
 
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator RowVector<T>(RowVector<N,T> src)
+            => new RowVector<T>(src.Data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T>(RowVector<N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator RowVector<N,T>(T[] src)
+            => new RowVector<N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator RowVector<N,T>(RowVector<T> src)
+            => new RowVector<N,T>(src.Storage);
+
+        [MethodImpl(Inline)]
+        public static bool operator == (RowVector<N,T> lhs, RowVector<N,T> rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator != (RowVector<N,T> lhs, RowVector<N,T> rhs)
+            => !lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static T operator *(RowVector<N,T> lhs, RowVector<N,T> rhs)
+            => gmath.dot<T>(lhs.Storage, rhs.Storage);
     }
 }

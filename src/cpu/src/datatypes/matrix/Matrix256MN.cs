@@ -41,22 +41,6 @@ namespace Z0
         public static int Capacity
             => (int)NatCalc.mul<M,N>();
 
-        public static implicit operator Matrix256<M,N,T>(in SpanBlock256<T> src)
-            => new Matrix256<M,N,T>(src);
-
-        public static implicit operator TableSpan<M,N,T>(in Matrix256<M,N,T> A)
-            => A.Natural;
-
-        public static implicit operator SpanBlock256<T>(in Matrix256<M,N,T> A)
-            => A.Unsized;
-
-        [MethodImpl(Inline)]
-        public static bool operator == (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B)
-            => A.Equals(B);
-
-        [MethodImpl(Inline)]
-        public static bool operator != (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B)
-            => !A.Equals(B);
 
         [MethodImpl(Inline)]
         public Matrix256(in SpanBlock256<T> src)
@@ -264,5 +248,22 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        public static implicit operator Matrix256<M,N,T>(in SpanBlock256<T> src)
+            => new Matrix256<M,N,T>(src);
+
+        public static implicit operator TableSpan<M,N,T>(in Matrix256<M,N,T> A)
+            => A.Natural;
+
+        public static implicit operator SpanBlock256<T>(in Matrix256<M,N,T> A)
+            => A.Unsized;
+
+        [MethodImpl(Inline)]
+        public static bool operator == (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B)
+            => A.Equals(B);
+
+        [MethodImpl(Inline)]
+        public static bool operator != (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B)
+            => !A.Equals(B);
     }
 }

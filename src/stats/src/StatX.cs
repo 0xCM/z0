@@ -34,11 +34,11 @@ namespace Z0
 
         public static IEnumerable<SeriesTerm<T>> Terms<T>(this TimeSeries<T> series)
             where T : unmanaged
-                => TimeSeries.Evolve(series);
+                => TimeSeries.evolve(series);
 
         [MethodImpl(Inline)]
         public static SeriesTerm<T> NextTerm<T>(this TimeSeries<T> series)
             where T : unmanaged
-                => TimeSeries.NextTerm(series);
+                => TimeSeries.next(series);
     }
 }

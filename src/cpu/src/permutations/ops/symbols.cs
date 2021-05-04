@@ -17,7 +17,7 @@ namespace Z0
         {
             const byte Count = 4;
             for(byte i=0; i<Count; i++)
-                if(!Permute.symbol(src, i, out seek(dst, i)))
+                if(!symbol(src, i, out seek(dst, i)))
                     return false;
             return true;
         }
@@ -32,7 +32,7 @@ namespace Z0
         {
             const byte Count = 8;
             for(byte i=0; i<Count; i++)
-                if(!Permute.symbol(src, i, out seek(dst, i)))
+                if(!symbol(src, i, out seek(dst, i)))
                     return false;
             return true;
         }
@@ -47,7 +47,7 @@ namespace Z0
         {
             const byte Count = 16;
             for(byte i=0; i<Count; i++)
-                if(!Permute.symbol(src, i, out seek(dst,i)))
+                if(!symbol(src, i, out seek(dst,i)))
                     return false;
             return true;
         }
@@ -56,7 +56,6 @@ namespace Z0
         /// Extracts the ordered sequence of symbolic literals that define a 16-symbol permutation to a caller-supplied target
         /// </summary>
         /// <param name="src">The canonical literal representation</param>
-        [MethodImpl(Inline)]
         public static Span<SymVal<Perm16L>> symbols(Perm16L src)
         {
             const byte Count = 16;
@@ -70,7 +69,6 @@ namespace Z0
         /// Extracts the ordered sequence of symbolic literals that define a 4-symbol permutation
         /// </summary>
         /// <param name="src">The canonical literal representation</param>
-        [MethodImpl(Inline)]
         public static Span<SymVal<Perm4L>> symbols(Perm4L src)
         {
             const byte Count = 4;
@@ -84,7 +82,6 @@ namespace Z0
         /// Extracts the ordered sequence of symbolic literals that define an 8-symbol permutation
         /// </summary>
         /// <param name="src">The canonical literal representation</param>
-        [MethodImpl(Inline)]
         public static Span<SymVal<Perm8L>> symbols(Perm8L src)
         {
             const byte Length = 8;

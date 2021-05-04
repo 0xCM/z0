@@ -14,7 +14,9 @@ namespace Z0
         {
             public const string TableId = "image.memory.regions";
 
-            public const byte FieldCount = 8;
+            public const byte FieldCount = 9;
+
+            public uint Index;
 
             public Name Identity;
 

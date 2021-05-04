@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.IO;
-    using System.Reflection;
 
     using static memory;
     using static Part;
@@ -27,30 +24,6 @@ namespace Z0
     [ApiHost]
     public partial class ProcessContextPipe : AppService<ProcessContextPipe>
     {
-        [Op]
-        public static MemoryAddress @base(Assembly src)
-            => @base(Path.GetFileNameWithoutExtension(src.Location));
-
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress @base(Name procname)
-        {
-            var match =  procname.Content;
-            var module = Images.modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
-            return module.BaseAddress;
-        }
-
-        /// <summary>
-        /// Captures the current process state
-        /// </summary>
-        /// <param name="src">The source process</param>
-        [MethodImpl(Inline), Op]
-        public static ProcessState state(Process src)
-        {
-            var dst = new ProcessState();
-            Images.fill(src, ref dst);
-            return dst;
-        }
-
         public ProcessContextPaths Paths {get; private set;}
 
         protected override void OnInit()
@@ -105,20 +78,6 @@ namespace Z0
             Tables.emit(buffer, dst);
             Wf.EmittedTable(flow, count);
             return buffer;
-        }
-
-        [Op]
-        public static Index<ProcessPartition> emit(Index<LocatedImage> src, FS.FilePath dst)
-        {
-            var records = partitions(src);
-            var target = records.Edit;
-            var formatter = Tables.formatter<ProcessPartition>(16);
-            var count = records.Length;
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(target,i)));
-            return records;
         }
 
         [MethodImpl(Inline)]

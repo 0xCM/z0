@@ -15,7 +15,82 @@ namespace Z0
     public struct RowVector<T>
         where T : unmanaged
     {
-        T[] data;
+        Index<T> Data;
+
+        /// <summary>
+        /// Initializes a vector from array content
+        /// </summary>
+        /// <param name="src">The source array</param>
+        [MethodImpl(Inline)]
+        public RowVector(T[] src)
+            => Data = src;
+
+        /// <summary>
+        /// Queries/manipulates component values
+        /// </summary>
+        public ref T this[int i]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[i];
+        }
+
+        /// <summary>
+        /// The data wrapped by the vector
+        /// </summary>
+        public T[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// The count of vector components, otherwise known as its dimension
+        /// </summary>
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
+        }
+
+        /// <summary>
+        /// The count of vector components, otherwise known as its dimension
+        /// </summary>
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        /// <summary>
+        /// Formats components as a list
+        /// </summary>
+        /// <param name="sep">The component delimiter</param>
+        public string Format()
+            => Data.Storage.FormatList();
+
+        public RowVector<U> Convert<U>()
+            where U : unmanaged
+               => new RowVector<U>(NumericArrays.force<T,U>(Data));
+
+
+        public bool Equals(RowVector<T> src)
+        {
+            var count = Data.Length;
+
+            if(count != src.Data.Length)
+                return false;
+
+            for(var i = 0; i<count; i++)
+                if(gmath.neq(Data[i], src.Data[i]))
+                    return false;
+            return true;
+        }
+
+        public override bool Equals(object src)
+            => src is RowVector<T> x && Equals(x);
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
 
         /// <summary>
         /// Implicitly converts an array to a vector
@@ -33,7 +108,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(RowVector<T> src)
-            =>  src.data;
+            =>  src.Data;
 
         /// <summary>
         /// Implicitly provies a readonly-view of a vector's underlying data
@@ -42,7 +117,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(RowVector<T> src)
-            =>  src.data;
+            => src.Data;
 
         /// <summary>
         /// Calculates the scalar product between the operands
@@ -51,14 +126,8 @@ namespace Z0
         /// <param name="b">The right vector</param>
         [MethodImpl(Inline)]
         public static T operator &(RowVector<T> a, RowVector<T> b)
-            => gmath.dot<T>(a.data, b.data);
+            => gmath.dot<T>(a.Data, b.Data);
 
-        /// <summary>
-        /// Deems vectors are equal if they have the same number of components
-        /// and corresponding components have identical content
-        /// </summary>
-        /// <param name="a">The left vector</param>
-        /// <param name="b">Teh right vector</param>
         [MethodImpl(Inline)]
         public static bool operator == (RowVector<T> a, RowVector<T> b)
             => a.Equals(b);
@@ -66,87 +135,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator != (RowVector<T> a, RowVector<T> b)
             => !a.Equals(b);
-
-        /// <summary>
-        /// Initializes a vector from array content
-        /// </summary>
-        /// <param name="src">The source array</param>
-        [MethodImpl(Inline)]
-        public RowVector(T[] src)
-            => this.data = src;
-
-        /// <summary>
-        /// Queries/manipulates component values
-        /// </summary>
-        public ref T this[int i]
-        {
-            [MethodImpl(Inline)]
-            get => ref data[i];
-        }
-
-        /// <summary>
-        /// The data wrapped by the vector
-        /// </summary>
-        public T[] Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        /// <summary>
-        /// The count of vector components, otherwise known as its dimension
-        /// </summary>
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => data.Length;
-        }
-
-        /// <summary>
-        /// Formats components as a list
-        /// </summary>
-        /// <param name="sep">The component delimiter</param>
-        [MethodImpl(Inline)]
-        public string Format()
-            => data.FormatList();
-
-        /// <summary>
-        /// Copies vector content into a caller-provided span
-        /// </summary>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public void CopyTo(Span<T> dst)
-        {
-            if(dst.Length < data.Length)
-                AppErrors.ThrowTooShort(dst.Length);
-             data.CopyTo(dst);
-        }
-
-        [MethodImpl(Inline)]
-        public RowVector<U> Convert<U>()
-            where U : unmanaged
-               => new RowVector<U>(NumericArrays.force<T,U>(data));
-
-        [MethodImpl(Inline)]
-        public RowVector<T> Replicate()
-            => new RowVector<T>(data.Replicate());
-
-
-        public bool Equals(RowVector<T> rhs)
-        {
-            if(data.Length != rhs.data.Length)
-                return false;
-
-            for(var i = 0; i<data.Length; i++)
-                if(gmath.neq(data[i], rhs.data[i]))
-                    return false;
-            return true;
-        }
-
-        public override bool Equals(object rhs)
-            => rhs is RowVector<T> x && Equals(rhs);
-
-        public override int GetHashCode()
-            => data.GetHashCode();
     }
 }

@@ -154,7 +154,7 @@ namespace Z0
         {
             CheckRowIndex(row);
             var offset = row * Order;
-            src.Data.AsSpan().CopyTo(data, offset);
+            src.Storage.AsSpan().CopyTo(data, offset);
         }
 
         [MethodImpl(Inline)]
@@ -162,7 +162,7 @@ namespace Z0
         {
              CheckRowIndex(row);
              var offset = row * Order;
-             data.AsSpan().Slice(offset, Order).CopyTo(dst.Data);
+             data.AsSpan().Slice(offset, Order).CopyTo(dst.Storage);
              return ref dst;
         }
 

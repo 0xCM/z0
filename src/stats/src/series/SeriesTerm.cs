@@ -5,19 +5,23 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
 
     public readonly struct SeriesTerm<T>
         where T : unmanaged
     {
+        public long Index {get;}
+
+        public T Observed {get;}
+
+        [MethodImpl(Inline)]
         public SeriesTerm(long index, T observation)
         {
             Index = index;
             Observed = observation;
         }
-
-        public readonly long Index;
-
-        public readonly T Observed;
 
         public string Format()
             => $"({Index}, {Observed})";

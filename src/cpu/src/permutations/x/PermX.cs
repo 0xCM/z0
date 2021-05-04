@@ -125,7 +125,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Swap<T>(this Span<T> src, params Swap[] swaps)
             where T : unmanaged
-                => api.apply(src,swaps);
+        {
+            api.apply(src, swaps);
+            return src;
+        }
 
         /// <summary>
         /// Formats the terms of a permutation

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
     using static memory;
     using static gmath;
 
@@ -53,7 +53,7 @@ namespace Z0
             while (length >= 8)
             {
                 length -= 8;
-                if(test8(src, match, index))
+                if(search(n8, src, match, index))
                     return true;
                 index += 8;
             }
@@ -61,7 +61,7 @@ namespace Z0
             if (length >= 4)
             {
                 length -= 4;
-                if(test4(src, match, index))
+                if(search(n4, src, match, index))
                     return true;
                 index += 4;
             }
@@ -75,26 +75,5 @@ namespace Z0
             }
             return false;
         }
-
-        [MethodImpl(Inline), Op, Closures(UInt32k)]
-        static bit test8<T>(in T src, T match, uint index)
-            where T : unmanaged
-                => eq(match, memory.add(src, index + 0)) ||
-                   eq(match, memory.add(src, index + 1)) ||
-                   eq(match, memory.add(src, index + 2)) ||
-                   eq(match, memory.add(src, index + 3)) ||
-                   eq(match, memory.add(src, index + 4)) ||
-                   eq(match, memory.add(src, index + 5)) ||
-                   eq(match, memory.add(src, index + 6)) ||
-                   eq(match, memory.add(src, index + 7)
-                    );
-
-        [MethodImpl(Inline), Op, Closures(UInt32k)]
-        static bit test4<T>(in T src, T match, uint index)
-            where T : unmanaged
-                => eq(match, memory.add(src, index + 0)) ||
-                   eq(match, memory.add(src, index + 1)) ||
-                   eq(match, memory.add(src, index + 2)) ||
-                   eq(match, memory.add(src, index + 3));
     }
 }

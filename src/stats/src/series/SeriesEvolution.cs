@@ -4,33 +4,32 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public static class SeriesEvolution
-    {
-        public static SeriesEvolution<T> define<T>(in ulong[] Seed, in Interval<T> Domain,
-            in SeriesTerm<T> FirstTerm, in SeriesTerm<T> FinalTerm, in Duration Time)
-                where T : unmanaged
-                    => new SeriesEvolution<T>(Seed, Domain, FirstTerm, FinalTerm, Time);
-    }
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
 
     public readonly struct SeriesEvolution<T>
         where T : unmanaged
     {
-        public SeriesEvolution(in ulong[] Seed, in Interval<T> Domain, in SeriesTerm<T> FirstTerm, in SeriesTerm<T> FinalTerm, in Duration Time)
+        public ulong[] Seed {get;}
+
+        public Interval<T> Domain {get;}
+
+        public SeriesTerm<T> FirstTerm {get;}
+
+        public SeriesTerm<T> FinalTerm {get;}
+
+        public Duration Time {get;}
+
+        [MethodImpl(Inline)]
+        public SeriesEvolution(ulong[] seed, in Interval<T> domain, in SeriesTerm<T> first, in SeriesTerm<T> final, in Duration time)
         {
-            this.Seed = Seed;
-            this.Domain = Domain;
-            this.FirstTerm = FirstTerm;
-            this.FinalTerm = FinalTerm;
-            this.Time = Time;
+            Seed = seed;
+            Domain = domain;
+            FirstTerm = first;
+            FinalTerm = final;
+            Time = time;
         }
-        public readonly ulong[] Seed;
-
-        public readonly Interval<T> Domain;
-
-        public readonly SeriesTerm<T> FirstTerm;
-
-        public readonly SeriesTerm<T> FinalTerm;
-
-        public readonly Duration Time;
     }
 }

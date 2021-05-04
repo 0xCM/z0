@@ -233,7 +233,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolySource random, Interval<T> domain, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(domain, nat32i<N>(), ref vector.Data[0]);
+                => random.Fill<T>(domain, nat32i<N>(), ref vector.Storage[0]);
 
         /// <summary>
         /// Populates a vector of natural length with random values from the source
@@ -247,7 +247,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolySource random, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(memory.nat32i<N>(), ref vector.Data[0]);
+                => random.Fill<T>(memory.nat32i<N>(), ref vector.Storage[0]);
 
         /// <summary>
         /// Effects a component-wise contraction on the source vector on a source vector of unsigned primal type,

@@ -5,46 +5,32 @@
 namespace Z0
 {
     using System;
-    using Windows;
     using System.Diagnostics;
 
     using static ProcessMemory;
 
-
     partial class ProcessContextPipe
     {
-        [Op]
-        public static Index<MemoryRegion> regions()
-            => Images.pages(MemoryNode.snapshot().Describe());
-
-        [Op]
-        public static Index<MemoryRegion> regions(int procid)
-            => Images.pages(MemoryNode.snapshot(procid).Describe());
-
-        [Op]
-        public static Index<MemoryRegion> regions(Process src)
-            => Images.pages(MemoryNode.snapshot(src.Id).Describe());
-
         public Index<MemoryRegion> EmitRegions(Process process, FS.FilePath dst)
         {
-            var _regions = regions(process);
-            EmitRegions(_regions,dst);
-            return _regions;
+            var regions = ImageMemory.regions(process);
+            EmitRegions(regions,dst);
+            return regions;
         }
 
         public Index<MemoryRegion> EmitRegions(Process process, Timestamp ts)
         {
-            var _regions = regions(process);
+            var regions = ImageMemory.regions(process);
             var dst = Paths.MemoryRegionPath(process,ts);
-            EmitRegions(_regions,dst);
-            return _regions;
+            EmitRegions(regions,dst);
+            return regions;
         }
 
         public Index<MemoryRegion> EmitRegions(FS.FilePath dst)
         {
-            var _regions = regions();
-            EmitRegions(_regions,dst);
-            return _regions;
+            var regions = ImageMemory.regions();
+            EmitRegions(regions,dst);
+            return regions;
         }
 
         public Count EmitRegions(Index<MemoryRegion> src, FS.FilePath dst)

@@ -954,7 +954,7 @@ namespace Z0.Asm
         {
             var dst = Db.IndexTable<MemoryRegion>();
             var flow = Wf.EmittingTable<MemoryRegion>(dst);
-            var segments = ProcessContextPipe.regions();
+            var segments = ImageMemory.regions();
             Tables.emit(segments,dst);
             Wf.EmittedTable(flow, segments.Count);
         }
@@ -1402,7 +1402,6 @@ namespace Z0.Asm
             }
         }
 
-
         void RunExtraction()
         {
             var receivers = new ApiExtractReceivers();
@@ -1414,7 +1413,17 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            ListPdbMethods();
+            var pipe = Wf.ProcessContextPipe();
+            var regions = pipe.LoadRegions();
+
+            foreach(var region in regions)
+                Wf.Row(region.BaseAddress);
+
+            //ListPdbMethods();
+            // var map = ImageMemory.map(root.process());
+            // var formatter = Tables.formatter<ProcessModuleRow>();
+            // root.iter(map.Modules, m => Wf.Row(formatter.Format(m)));
+
             // var id = COM.IUnknownVTable.Identifier;
             // var guid = Guids.define(id);
             // var data = Guids.serialize(guid);

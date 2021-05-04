@@ -13,13 +13,13 @@ namespace Z0
 
     partial struct root
     {
-        [MethodImpl(Inline)]
-        public static void project<S,T>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Span<Paired<S,T>> dst)
-        {
-            var count = dst.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = root.paired(skip(a,i), skip(b,i));
-        }
+        [MethodImpl(Inline), Op]
+        public static Process process()
+            => Process.GetCurrentProcess();
 
+
+        [MethodImpl(Inline), Op]
+        public static Process process(int id)
+            => Process.GetProcessById(id);
     }
 }

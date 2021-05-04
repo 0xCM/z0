@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-
     using static ProcessMemory;
 
     public readonly struct ProcessImageMap

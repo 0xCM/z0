@@ -34,38 +34,6 @@ namespace Z0
             => (int)NatCalc.square<N>();
 
         [MethodImpl(Inline)]
-        public static implicit operator Matrix256<N,T>(SpanBlock256<T> src)
-            => new Matrix256<N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Matrix256<N,T>(Matrix256<N,N,T> src)
-            => new Matrix256<N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Matrix256<N,N,T>(Matrix256<N,T> src)
-            => src.ToRectangular();
-
-        [MethodImpl(Inline)]
-        public static implicit operator NatSpan<N,T>(Matrix256<N,T> src)
-            => src.Natural;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(Matrix256<N,T> src)
-            => src.Unsized;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SpanBlock256<T>(Matrix256<N,T> src)
-            => src.Unsized;
-
-        [MethodImpl(Inline)]
-        public static bool operator == (Matrix256<N,T> lhs, in Matrix256<N,T> rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator != (Matrix256<N,T> lhs, in Matrix256<N,T> rhs)
-            => !lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
         public Matrix256(SpanBlock256<T> src)
         {
             var count = src.CellCount;
@@ -208,5 +176,37 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Matrix256<N,T>(SpanBlock256<T> src)
+            => new Matrix256<N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Matrix256<N,T>(Matrix256<N,N,T> src)
+            => new Matrix256<N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Matrix256<N,N,T>(Matrix256<N,T> src)
+            => src.ToRectangular();
+
+        [MethodImpl(Inline)]
+        public static implicit operator NatSpan<N,T>(Matrix256<N,T> src)
+            => src.Natural;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T>(Matrix256<N,T> src)
+            => src.Unsized;
+
+        [MethodImpl(Inline)]
+        public static implicit operator SpanBlock256<T>(Matrix256<N,T> src)
+            => src.Unsized;
+
+        [MethodImpl(Inline)]
+        public static bool operator == (Matrix256<N,T> lhs, in Matrix256<N,T> rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator != (Matrix256<N,T> lhs, in Matrix256<N,T> rhs)
+            => !lhs.Equals(rhs);
     }
 }

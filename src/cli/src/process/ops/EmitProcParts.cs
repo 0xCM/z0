@@ -15,14 +15,14 @@ namespace Z0
     {
         public Index<ProcessPartition> EmitPartitions(Process process, FS.FilePath dst)
         {
-            var summaries = partitions(Images.locate(process));
+            var summaries = ImageMemory.partitions(ImageMemory.locate(process));
             EmitPartitions(summaries,dst);
             return summaries;
         }
 
         public Index<ProcessPartition> EmitPartitions(Process process, Timestamp ts)
         {
-            var summaries = partitions(Images.locate(process));
+            var summaries = ImageMemory.partitions(ImageMemory.locate(process));
             var dst = Paths.ProcessPartitionPath(process,ts);
             EmitPartitions(summaries,dst);
             return summaries;
@@ -34,33 +34,6 @@ namespace Z0
             var count = Tables.emit(src,dst);
             Wf.EmittedTable(flow,count);
             return count;
-        }
-
-        [Op]
-        public static Index<ProcessPartition> partitions(Index<LocatedImage> src)
-        {
-            var count = src.Count;
-            var images = src.View;
-            var buffer = alloc<ProcessPartition>(count);
-            var summaries = span(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var image = ref skip(images, i);
-                ref var dst = ref seek(summaries,i);
-                dst.BaseAddress = image.BaseAddress;
-                dst.EndAddress = image.EndAddress;
-                dst.Size = image.Size;
-                dst.ImageName = image.Name;
-
-                if(i != 0)
-                {
-                    ref readonly var prior = ref skip(images, i - 1);
-                    var gap = (ulong)(image.BaseAddress - prior.EndAddress);
-                    dst.Gap = gap;
-                }
-            }
-
-            return buffer;
         }
     }
 }

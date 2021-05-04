@@ -44,7 +44,7 @@ namespace Z0
 
         public static RowVector<T> alloc<T>(int minlen)
             where T : unmanaged
-            => new RowVector<T>(new T[minlen]);
+                => new RowVector<T>(new T[minlen]);
 
         [MethodImpl(Inline)]
         public static RowVector<N,T> alloc<N,T>(N n = default)
