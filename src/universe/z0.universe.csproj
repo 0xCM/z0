@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Agents)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Part)" />

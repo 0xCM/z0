@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Tables)" />
     <ProjectReference Include="$(Term)" />
     <ProjectReference Include="$(Events)" />
-    <ProjectReference Include="$(Agents)" />
   </ItemGroup>
 
 </Project>
