@@ -118,24 +118,11 @@ namespace Z0
             var dir = Db.CaptureContextRoot();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();
-            var summaries = pipe.EmitPartitions(process, pipe.PartitionPath(dir, process, ts));
-            var details = pipe.EmitRegions(process, pipe.MemoryRegionPath(dir, process, ts));
+            var summaries = pipe.EmitPartitions(process, ts);
+            var details = pipe.EmitRegions(process, ts);
             pipe.EmitDump(process, Db.DumpPath(process, ts));
             return ts;
         }
-
-        // void EmitContext(ApiMembers members)
-        // {
-        //     var ts = EmitContext();
-        //     // var dir = Db.CaptureContextRoot();
-        //     // var ts = root.timestamp();
-        //     // var process = Process.GetCurrentProcess();
-        //     // var pipe = Wf.ProcessContextPipe();
-        //     // var summaries = pipe.EmitPartitions(process, pipe.PartitionPath(dir, process, ts));
-        //     // var details = pipe.EmitRegions(process, pipe.MemoryRegionPath(dir, process, ts));
-        //     // pipe.EmitDump(process, Db.DumpPath(process, ts));
-        //     EmitRebase(members, ts);
-        // }
 
         const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.CaptureContext | CaptureWorkflowOptions.EmitImm;
     }

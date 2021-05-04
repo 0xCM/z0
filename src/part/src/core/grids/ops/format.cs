@@ -4,14 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     partial struct Grids
     {
-
         [Op]
         public static string format(GridPoint src)
         {

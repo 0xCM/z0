@@ -9,7 +9,7 @@ namespace Z0
     [Free]
     public interface IScriptVars
     {
-        Index<IScriptVar> Members();
+        IScriptVar[] Members();
     }
 
     [Free]

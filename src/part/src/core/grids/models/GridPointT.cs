@@ -83,6 +83,10 @@ namespace Z0
             => new GridPoint<T>(src.Left, src.Right);
 
         [MethodImpl(Inline)]
+        public static implicit operator GridPoint<T>((T row, T col) src)
+            => new GridPoint<T>(src.row, src.col);
+
+        [MethodImpl(Inline)]
         public static implicit operator GridPoint(GridPoint<T> src)
             => new GridPoint(u32(src.Row), u32(src.Col));
 

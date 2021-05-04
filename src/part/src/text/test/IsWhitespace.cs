@@ -6,15 +6,15 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct SymbolicTests
     {
-        public readonly struct IsTab : ISymbolicTest<IsTab,char>
+        public readonly struct IsWhitespace : ISymbolicTest<IsWhitespace,char>
         {
             [MethodImpl(Inline)]
             public bit Check(char c)
-                => tab(c);
+                => whitespace(c);
         }
     }
 }

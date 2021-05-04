@@ -6,18 +6,18 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct SymbolicTests
     {
         /// <summary>
-        /// Tests whether a character is one of (0,..9) | (a .. f) | (A .. F)
+        /// Tests whether a character is one of (0,..9)
         /// </summary>
-        public readonly struct IsHexDigit : ISymbolicTest<IsHexDigit,char>
+        public readonly struct IsDecimalDigit : ISymbolicTest<IsDecimalDigit,char>
         {
             [MethodImpl(Inline)]
             public bit Check(char c)
-                => hex(c);
+                => @decimal(c);
         }
     }
 }

@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-    using static memory;
-
-    partial struct AppSymbolics
+    partial struct PdbServices
     {
         [Op]
-        public static ISymMetadataProvider metaprovider(in SymbolSource source)
+        internal static SymMetadataProvider metaprovider(in SymbolSource source)
             => new SymMetadataProvider(source);
     }
 }

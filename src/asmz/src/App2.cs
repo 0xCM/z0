@@ -1305,19 +1305,24 @@ namespace Z0.Asm
         {
             var modules = Wf.AppModules();
             var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Cpu).Single();
-            var source = modules.SymbolSource(catalog.ComponentPath);
+            using var source = modules.SymbolSource(catalog.ComponentPath);
             Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
-            var reader = AppSymbolics.reader(source);
+            var reader = Wf.PdbReader(source);
             var methods = catalog.Methods;
+            var log = Db.AppLog(string.Format("{0}.tokens", catalog.PartId.Format()), FS.Csv);
+            var emitting = Wf.EmittingFile(log);
+            var counter = 0u;
+            using var writer = log.Writer();
             foreach(var info in methods)
             {
                 var method = reader.Method(info.MetadataToken);
                 if(method)
                 {
-                    Wf.Row(method.Payload.Token);
+                    writer.WriteLine(method.Payload.Token.Format());
+                    counter++;
                 }
             }
-
+            Wf.EmittedFile(emitting, counter);
         }
 
         static unsafe uint count(ImageRecords.StringHeap src)
@@ -1398,19 +1403,24 @@ namespace Z0.Asm
         }
 
 
+        void RunExtraction()
+        {
+            var receivers = new ApiExtractReceivers();
+            receivers.HostResolved += (source, e) => {};
+            receivers.MemberParsed += (source, e) => {};
+            var extractor = ApiExtractor.create(Wf);
+            extractor.Run(receivers);
+
+        }
         public void Run()
         {
+            ListPdbMethods();
             // var id = COM.IUnknownVTable.Identifier;
             // var guid = Guids.define(id);
             // var data = Guids.serialize(guid);
             // var formatted = Hex.format(UpperCase, data);
             // Wf.Row(formatted);
             // Wf.Row(data.FormatHex());
-            var receivers = new ApiExtractReceivers();
-            receivers.HostResolved += (source, e) => {};
-            receivers.MemberParsed += (source, e) => {};
-            var extractor = ApiExtractor.create(Wf);
-            extractor.Run(receivers);
             //CheckBitstrings();
         }
 

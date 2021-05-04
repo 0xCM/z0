@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-
     /// <summary>
     /// Represents a parsed expression as described in https://en.wikipedia.org/wiki/Parse_tree
     /// </summary>

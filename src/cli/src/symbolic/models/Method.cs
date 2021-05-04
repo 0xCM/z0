@@ -10,9 +10,9 @@ namespace Z0
 
     using static Part;
 
-    using api = AppSymbolics;
+    using api = PdbServices;
 
-    partial struct AppSymbolics
+    partial struct PdbServices
     {
         public readonly struct Method : IAppSymAdapter<Method, ISymUnmanagedMethod>
         {
@@ -20,7 +20,9 @@ namespace Z0
 
             [MethodImpl(Inline)]
             internal Method(ISymUnmanagedMethod src)
-                => Source = src;
+            {
+                Source = src;
+            }
 
             public bool IsEmpty
             {

@@ -13,21 +13,17 @@ namespace Z0
 
     partial class ProcessContextPipe
     {
-        public FS.FileName PartitionHashFile(string process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("{0}.{1}.{2}.hashes", Tables.tableid<ProcessPartition>(), process, ts.Format()), FS.Csv);
-
-        public FS.FilePath PartitionHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
-            => dst + PartitionHashFile(process, ts, subject);
-
-        public FS.FileName PartitionFile(Process process, Timestamp ts)
-            => FS.file(string.Format("{0}.{1}.{2}", Tables.tableid<ProcessPartition>(), process.ProcessName, ts.Format()), FS.Csv);
-
-        public FS.FilePath PartitionPath(FS.FolderPath dst, Process process, Timestamp ts)
-            => dst + PartitionFile(process,ts);
-
         public Index<ProcessPartition> EmitPartitions(Process process, FS.FilePath dst)
         {
-            var summaries = partitions(ImageServices.locate(process));
+            var summaries = partitions(Images.locate(process));
+            EmitPartitions(summaries,dst);
+            return summaries;
+        }
+
+        public Index<ProcessPartition> EmitPartitions(Process process, Timestamp ts)
+        {
+            var summaries = partitions(Images.locate(process));
+            var dst = Paths.ProcessPartitionPath(process,ts);
             EmitPartitions(summaries,dst);
             return summaries;
         }

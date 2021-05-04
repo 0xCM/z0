@@ -6,23 +6,18 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct SymbolicTests
     {
-        public readonly struct IsSpace : ISymbolicTest<IsSpace,char>
+        /// <summary>
+        /// Tests whether a character is either a <see cref="AsciCharCode.CR"/> or <see cref="AsciCharCode.LF"/>
+        /// </summary>
+        public readonly struct IsNewLine : ISymbolicTest<IsNewLine,char>
         {
             [MethodImpl(Inline)]
-            public static bool check(char c)
-                => (ushort)AsciCharCode.Space == (ushort)c;
-
-            [MethodImpl(Inline)]
             public bit Check(char c)
-                => space(c);
+                => newline(c);
         }
-
-        [MethodImpl(Inline), Op]
-        public static bool space(char c)
-            => (ushort)AsciCharCode.Space == (ushort)c;
     }
 }

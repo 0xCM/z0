@@ -17,7 +17,7 @@ namespace Z0
     using static ProcessMemory;
     using static ImageRecords;
 
-    public readonly struct ImageServices
+    public readonly struct Images
     {
         [MethodImpl(Inline), Op]
         public static DirectoryEntryRow directory(Address32 rva, uint size)

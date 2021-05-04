@@ -5,22 +5,23 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    public readonly struct SymbolRange<T>
-        where T : unmanaged
+    partial struct PdbServices
     {
-        public T Min {get;}
-
-        public T Max {get;}
-
-        [MethodImpl(Inline)]
-        public SymbolRange(T min, T max)
+        public readonly struct Document
         {
-            Min = min;
-            Max = max;
+            public string Name {get;}
+
+            public Guid Type {get;}
+
+            public Document(string name, Guid type)
+            {
+                Name = name;
+                Type = type;
+            }
         }
     }
 }

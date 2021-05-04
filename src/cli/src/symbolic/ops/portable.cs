@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct AppSymbolics
+    partial struct PdbServices
     {
         [MethodImpl(Inline),Op]
         public static bit portable(in byte src)

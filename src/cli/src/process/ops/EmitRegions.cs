@@ -13,34 +13,29 @@ namespace Z0
 
     partial class ProcessContextPipe
     {
-
         [Op]
         public static Index<MemoryRegion> regions()
-            => ImageServices.pages(MemoryNode.snapshot().Describe());
+            => Images.pages(MemoryNode.snapshot().Describe());
 
         [Op]
         public static Index<MemoryRegion> regions(int procid)
-            => ImageServices.pages(MemoryNode.snapshot(procid).Describe());
+            => Images.pages(MemoryNode.snapshot(procid).Describe());
 
         [Op]
         public static Index<MemoryRegion> regions(Process src)
-            => ImageServices.pages(MemoryNode.snapshot(src.Id).Describe());
-
-        public FS.FileName MemoryRegionHashFile(string process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("memory.hash.detail.{0}.{1}", process, ts.Format()), FS.Csv);
-
-        public FS.FileName MemoryRegionFile(Process process, Timestamp ts)
-            => FS.file(string.Format("{0}.{1}.{2}", Tables.tableid<MemoryRegion>(), process.ProcessName, ts.Format()), FS.Csv);
-
-        public FS.FilePath MemoryRegionPath(FS.FolderPath dst, Process process, Timestamp ts)
-            => dst + MemoryRegionFile(process, ts);
-
-        public FS.FilePath MemoryRegionHashPath(FS.FolderPath dst, string process, Timestamp ts, Identifier subject)
-            => dst + MemoryRegionHashFile(process, ts, subject);
+            => Images.pages(MemoryNode.snapshot(src.Id).Describe());
 
         public Index<MemoryRegion> EmitRegions(Process process, FS.FilePath dst)
         {
             var _regions = regions(process);
+            EmitRegions(_regions,dst);
+            return _regions;
+        }
+
+        public Index<MemoryRegion> EmitRegions(Process process, Timestamp ts)
+        {
+            var _regions = regions(process);
+            var dst = Paths.MemoryRegionPath(process,ts);
             EmitRegions(_regions,dst);
             return _regions;
         }

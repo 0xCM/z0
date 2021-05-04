@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using static Part;
-    using static memory;
-
-    partial struct AppSymbolics
+    partial struct PdbServices
     {
+        [Op]
         public static SymbolSource source(FS.FilePath pe, FS.FilePath pdb)
             => new SymbolSource(pe, pdb);
 
@@ -17,6 +14,7 @@ namespace Z0
         public static SymbolSource source(FS.FilePath pe)
             => new SymbolSource(pe, pe.ChangeExtension(FS.Pdb));
 
+        [Op]
         public static SymbolSource source(BinaryCode pe, BinaryCode pdb)
             => new SymbolSource(pe,pdb);
     }

@@ -12,7 +12,7 @@ namespace Z0
     using Microsoft.DiaSymReader;
     using System.Runtime.InteropServices;
 
-    partial struct AppSymbolics
+    partial struct PdbServices
     {
         public sealed class SymMetadataProvider : ISymMetadataProvider
         {

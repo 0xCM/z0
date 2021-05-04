@@ -8,9 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.PortableExecutable;
-    using System.Reflection.Metadata.Ecma335;
-    using System.IO;
 
     using static Part;
     using static memory;
@@ -31,27 +28,27 @@ namespace Z0
 
         [Op]
         public static RowKeys keys(AssemblyFileHandleCollection src)
-            => (src.Map(handle => key(K.File, handle)), K.File);
+            => (src.Array().Select(handle => key(K.File, handle)), K.File);
 
         [Op]
         public static RowKeys keys(AssemblyReferenceHandleCollection src)
-            => (src.Map(handle => key(K.AssemblyRef, handle)), K.CustomAttribute);
+            => (src.Array().Select(handle => key(K.AssemblyRef, handle)), K.CustomAttribute);
 
         [Op]
         public static RowKeys keys(CustomAttributeHandleCollection src)
-            => (src.Map(handle => key(K.CustomAttribute, handle)), K.CustomAttribute);
+            => (src.Array().Select(handle => key(K.CustomAttribute, handle)), K.CustomAttribute);
 
         [Op]
         public static RowKeys keys(CustomDebugInformationHandleCollection src)
-            => (src.Map(handle => key(K.CustomDebugInformation, handle)), K.CustomDebugInformation);
+            => (src.Array().Select(handle => key(K.CustomDebugInformation, handle)), K.CustomDebugInformation);
 
         [Op]
         public static RowKeys keys(DeclarativeSecurityAttributeHandleCollection src)
-            => (src.Map(handle => key(K.DeclSecurity, handle)), K.DeclSecurity);
+            => (src.Array().Select(handle => key(K.DeclSecurity, handle)), K.DeclSecurity);
 
         [Op]
         public static RowKeys keys(DocumentHandleCollection src)
-            => (src.Map(handle => key(K.Document, handle)), K.Document);
+            => (src.Array().Select(handle => key(K.Document, handle)), K.Document);
 
         [Op]
         public static RowKeys keys(ExportedTypeHandleCollection src)

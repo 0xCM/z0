@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static PdbServices;
+
     [ApiHost]
     public static partial class XSvc
     {
@@ -27,5 +29,8 @@ namespace Z0
         public static PdbSymbolStore PdbSymbolStore(this IWfRuntime wf)
             => Cli.symbols(wf);
 
+        [Op]
+        public static PdbReader PdbReader(this IWfRuntime wf, in SymbolSource src)
+            => PdbServices.reader(wf,src);
     }
 }

@@ -10,8 +10,18 @@ namespace Z0
 
     using static Part;
 
-    partial struct AppSymbolics
+    partial struct PdbServices
     {
+
+        public enum PdbKind : byte
+        {
+            None = 0,
+
+            Portable,
+
+            Legacy,
+        }
+
         public class SymbolSource : IDisposable
         {
             public bool IsPortable {get;}
@@ -34,6 +44,8 @@ namespace Z0
 
             public MemoryStream PdbStream {get;}
 
+            public PdbKind PdbKind{get;}
+
             public ByteSize PdbSize
             {
                 [MethodImpl(Inline)]
@@ -49,6 +61,7 @@ namespace Z0
                 PeStream = new MemoryStream(PeData);
                 PdbStream = new MemoryStream(PdbData);
                 IsPortable = portable(PdbData);
+                PdbKind = pdbkind(PdbData);
             }
 
             internal SymbolSource(FS.FilePath pe, FS.FilePath pdb)
@@ -60,6 +73,7 @@ namespace Z0
                 PeStream = new MemoryStream(PeData);
                 PdbStream = new MemoryStream(PdbData);
                 IsPortable = portable(PdbData);
+                PdbKind = pdbkind(PdbData);
             }
 
             public void Dispose()

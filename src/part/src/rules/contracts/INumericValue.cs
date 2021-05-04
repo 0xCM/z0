@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-
     public interface INumericValue
     {
         BinaryCode Content {get;}

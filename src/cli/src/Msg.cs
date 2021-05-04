@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
-    public readonly partial struct AppSymbolics
+    [ApiComplete]
+    partial struct Msg
     {
+        public static MsgPattern<FS.FileUri> CreatingPdbReader => "Creating pdb reader for {0}";
 
+        public static MsgPattern<FS.FileUri> CreatedPdbReader => "Created pdb reader for {0}";
     }
 }

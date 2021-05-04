@@ -35,7 +35,7 @@ namespace Z0
         public static MemoryAddress @base(Name procname)
         {
             var match =  procname.Content;
-            var module = ImageServices.modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
+            var module = Images.modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
             return module.BaseAddress;
         }
 
@@ -47,8 +47,15 @@ namespace Z0
         public static ProcessState state(Process src)
         {
             var dst = new ProcessState();
-            ImageServices.fill(src, ref dst);
+            Images.fill(src, ref dst);
             return dst;
+        }
+
+        public ProcessContextPaths Paths {get; private set;}
+
+        protected override void OnInit()
+        {
+            Paths = Db.CaptureContextRoot();
         }
 
         public MemorySymbols SymbolizeDetails(in ProcessContext src)
@@ -79,12 +86,13 @@ namespace Z0
 
         public void EmitHashes(in ProcessContext src, FS.FolderPath dst)
         {
+            Paths = dst;
             var summaries = SymbolizeSummaries(src);
-            var summarypath = PartitionHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
+            var summarypath = Paths.ProcessPartitionHashPath(src.ProcessName, src.Timestamp, src.Subject);
             EmitHashes(summaries.Addresses, summarypath);
 
             var details = SymbolizeDetails(src);
-            var detailpath = MemoryRegionHashPath(dst, src.ProcessName, src.Timestamp, src.Subject);
+            var detailpath = Paths.MemoryRegionHashPath(src.ProcessName, src.Timestamp, src.Subject);
             EmitHashes(details.Addresses, detailpath);
         }
 
@@ -130,6 +138,8 @@ namespace Z0
 
         public ProcessContext Emit(FS.FolderPath dst, Timestamp ts, Identifier subject = default, PCK flag = PCK.All)
         {
+            Paths = dst;
+
             var selection = flags(flag);
             if(selection.IsEmpty)
             {
@@ -148,12 +158,12 @@ namespace Z0
             context.Subject = subject;
             if(selection.EmitSummary)
             {
-                context.PartitionPath = PartitionPath(dst, process, ts);
+                context.PartitionPath = Paths.ProcessPartitionPath(process, ts);
                 context.Partitions = EmitPartitions(process, context.PartitionPath);
             }
             if(selection.EmitDetail)
             {
-                context.RegionPath = MemoryRegionPath(dst, process, ts);
+                context.RegionPath = Paths.MemoryRegionPath(process, ts);
                 context.Regions = EmitRegions(process, context.RegionPath);
             }
             if(selection.EmitDump)

@@ -6,18 +6,18 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct SymbolicTests
     {
         /// <summary>
-        /// Tests whether a character is either a <see cref="AsciCharCode.CR"/> or <see cref="AsciCharCode.LF"/>
+        /// Tests whether a character is one of (0,..9) | (a .. f) | (A .. F)
         /// </summary>
-        public readonly struct IsNewLine : ISymbolicTest<IsNewLine,char>
+        public readonly struct IsHexDigit : ISymbolicTest<IsHexDigit,char>
         {
             [MethodImpl(Inline)]
             public bit Check(char c)
-                => newline(c);
+                => hex(c);
         }
     }
 }

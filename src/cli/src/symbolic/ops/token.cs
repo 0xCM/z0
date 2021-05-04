@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct AppSymbolics
+    partial struct PdbServices
     {
         [Op]
         public static CliToken token(Method src)

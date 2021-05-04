@@ -7,21 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct SymbolicTests
     {
-        public readonly struct IsInRange : ISymbolicTest<IsOneOf,char>
+        public readonly struct IsOneOf : ISymbolicTest<IsOneOf,char>
         {
-            readonly SymbolRange<char> Range;
+            readonly Index<char> Subjects;
 
             [MethodImpl(Inline), Op]
-            public IsInRange(SymbolRange<char> range)
-                => Range = range;
+            public IsOneOf(char[] subjects)
+                => Subjects = subjects;
 
             [MethodImpl(Inline)]
             public bit Check(char c)
-                => contains(Range,c);
+                => contains(Subjects, c);
         }
     }
 }

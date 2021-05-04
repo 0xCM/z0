@@ -91,16 +91,10 @@ namespace Z0.Asm
             var ts = root.timestamp();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();
-            var partpath = pipe.PartitionPath(dir, process, ts);
-            var summaries = pipe.EmitPartitions(process, partpath);
-            var detailpath = pipe.MemoryRegionPath(dir, process, ts);
-            var details = pipe.EmitRegions(process, detailpath);
-
+            var summaries = pipe.EmitPartitions(process, ts);
+            var details = pipe.EmitRegions(process, ts);
             var members = ApiMembers.create(HostDatasets.ToArray().SelectMany(x => x.Members));
             EmitRebase(members,ts);
-
-            //pipe.EmitDump(process, Db.DumpPath(process, ts));
         }
-
     }
 }

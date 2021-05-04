@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using Microsoft.DiaSymReader;
-
     public interface IAppSymAdapter : INullity
     {
 

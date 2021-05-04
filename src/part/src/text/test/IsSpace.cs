@@ -6,15 +6,23 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct SymbolicTests
     {
-        public readonly struct IsWhitespace : ISymbolicTest<IsWhitespace,char>
+        public readonly struct IsSpace : ISymbolicTest<IsSpace,char>
         {
             [MethodImpl(Inline)]
+            public static bool check(char c)
+                => (ushort)AsciCharCode.Space == (ushort)c;
+
+            [MethodImpl(Inline)]
             public bit Check(char c)
-                => whitespace(c);
+                => space(c);
         }
+
+        [MethodImpl(Inline), Op]
+        public static bool space(char c)
+            => (ushort)AsciCharCode.Space == (ushort)c;
     }
 }
