@@ -13,7 +13,8 @@ namespace Z0.Asm
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
         [MethodImpl(Inline), Op]
-        public static AsmCodeSyntax line(GridPoint<uint> location, dynamic content)
-            => new AsmCodeSyntax(location, content);
+        public static AsmFragment<T> line<T>(GridPoint<uint> location, T content)
+            where T : IAsmSyntaxPart<T>
+                => new AsmFragment<T>(location, content);
     }
 }

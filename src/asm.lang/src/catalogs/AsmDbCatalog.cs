@@ -81,8 +81,6 @@ namespace Z0.Asm
         {
             return src;
         }
-
-
     }
 
     public struct AsmDbEntry
@@ -96,7 +94,6 @@ namespace Z0.Asm
         public Hex8 OpCodeByte;
 
         public AsmSigExpr Sig;
-
     }
 
     public readonly struct AsmDbSourceDocs

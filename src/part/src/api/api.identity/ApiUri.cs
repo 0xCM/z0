@@ -40,30 +40,17 @@ namespace Z0
                 return root.none<byte>();
         }
 
-        /// <summary>
-        /// Builds the *canonical* operation uri
-        /// </summary>
-        /// <param name="scheme"></param>
-        /// <param name="host"></param>
-        /// <param name="group"></param>
-        /// <param name="opid"></param>
-        [Op]
-        static string BuildUriText(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
-            => (opid.IsEmpty
-                ? QueryText(scheme, host.Part, host.Name, group)
-                : FullUriText(scheme, host.Part, host.Name, group, opid)).Trim();
-
         [Op]
         public static OpUri define(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(scheme, host, group, opid, BuildUriText(scheme, host, group, opid));
+            => new OpUri(host, opid, BuildUriText(scheme, host, group, opid));
 
         [Op]
         public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(ApiUriScheme.Hex, host, group, opid, BuildUriText(ApiUriScheme.Hex, host, group, opid));
+            => new OpUri(host, opid, BuildUriText(ApiUriScheme.Hex, host, group, opid));
 
         [MethodImpl(Inline), Op]
         public static OpUri located(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(ApiUriScheme.Located, host, group, opid, BuildUriText(ApiUriScheme.Located, host, group, opid));
+            => new OpUri(host, opid, BuildUriText(ApiUriScheme.Located, host, group, opid));
 
         [Op]
         public static string QueryText(ApiUriScheme scheme, PartId part, string host, string group)
@@ -174,5 +161,19 @@ namespace Z0
         [Op]
         public static string HostUri(Type host)
             => $"{PartName.from(host)}{UriPathSep}{host.Name}";
+
+
+        /// <summary>
+        /// Builds the *canonical* operation uri
+        /// </summary>
+        /// <param name="scheme"></param>
+        /// <param name="host"></param>
+        /// <param name="group"></param>
+        /// <param name="opid"></param>
+        [Op]
+        static string BuildUriText(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+            => (opid.IsEmpty
+                ? QueryText(scheme, host.Part, host.Name, group)
+                : FullUriText(scheme, host.Part, host.Name, group, opid)).Trim();
     }
 }

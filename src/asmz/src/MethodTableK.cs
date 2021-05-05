@@ -10,28 +10,25 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct MethodTable<K>
-        where K : unmanaged
+    public readonly struct MethodTable<T>
     {
-        public Identifier Name {get;}
+        [MethodImpl(Inline)]
+        public static MethodTable<T> create()
+            => new MethodTable<T>(typeof(T));
 
-        readonly Index<MethodEntryPoint<K>> EntryPoints;
+        public Type Type {get;}
 
-        readonly Index<K,uint> EntryIndex;
+        public MemoryAddress Address {get;}
 
         [MethodImpl(Inline)]
-        public MethodTable(Identifier name, Index<MethodEntryPoint<K>> entries, Index<K,uint> index)
+        MethodTable(Type src)
         {
-            Name = name;
-            EntryPoints = entries;
-            EntryIndex = index;
+            Type = src;
+            Address = src.TypeHandle.Value;
         }
 
-        public ref readonly MethodEntryPoint<K> this[K key]
-        {
-            [MethodImpl(Inline)]
-            get => ref EntryPoints[EntryIndex[key]];
-        }
-
+        [MethodImpl(Inline)]
+        public static implicit operator MethodTable(MethodTable<T> src)
+            => src.Type;
     }
 }

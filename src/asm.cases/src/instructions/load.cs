@@ -43,7 +43,7 @@ namespace Z0.Asm
             return cases;
         }
 
-        static ref CallRel32Case load(AsmCaller caller, MemoryAddress ip, MemoryAddress next, MemoryAddress target, AsmHexCode encoding, AsmCodeSyntax line,
+        static ref CallRel32Case load(AsmCaller caller, MemoryAddress ip, MemoryAddress next, MemoryAddress target, AsmHexCode encoding, AsmFragment line,
             ref CallRel32Case dst)
         {
             dst.Caller= caller;

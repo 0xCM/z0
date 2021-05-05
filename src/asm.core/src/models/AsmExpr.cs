@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmExpr : ITextual
+    public readonly struct AsmExpr : IAsmSyntaxPart<AsmExpr>
     {
         public TextBlock Content {get;}
 
@@ -22,7 +22,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmExpr(ReadOnlySpan<char> src)
         {
-            Content =  new string(src);
+            Content = new string(src);
         }
 
         [MethodImpl(Inline)]

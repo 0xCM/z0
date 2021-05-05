@@ -35,6 +35,18 @@ namespace Z0
              get => Location != 0;
         }
 
+        public Address16 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Location;
+        }
+
+        public Address16 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)(Location >> 16);
+        }
+
         public static A Zero
         {
              [MethodImpl(Inline)]

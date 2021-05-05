@@ -25,7 +25,7 @@ namespace Z0.Asm
 
         public struct CallRel32Case
         {
-            public AsmCodeSyntax AsmSource;
+            public AsmFragment AsmSource;
 
             public AsmCaller Caller;
 

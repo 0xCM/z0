@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmFormExpr : ITextual
+    public readonly struct AsmFormExpr : IAsmSyntaxPart<AsmFormExpr>
     {
         public AsmOpCodeExpr OpCode {get;}
 

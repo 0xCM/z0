@@ -20,9 +20,6 @@ namespace Z0
         public static MemoryBin define(uint key, Address32 min, Address32 max)
             => new MemoryBin(key,min,max);
 
-
-
-
     }
 
     public struct Bin<I,T>

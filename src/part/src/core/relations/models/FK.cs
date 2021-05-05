@@ -14,23 +14,31 @@ namespace Z0
         /// <summary>
         /// Represents a foreign key
         /// </summary>
-        public readonly struct FK<T>
+        public readonly struct FK<S,T>
+            where S : unmanaged
+            where T : unmanaged
         {
-            public Type ForeignType => typeof(T);
+            public PK<uint,S> Source {get;}
 
-            public uint Value {get;}
-
-            [MethodImpl(Inline)]
-            public FK(uint value)
-                => Value = value;
+            public PK<uint,T> Target {get;}
 
             [MethodImpl(Inline)]
-            public static implicit operator FK<T>(uint value)
-                => new FK<T>(value);
+            public FK(PK<uint,S> src, PK<uint,T> dst)
+            {
+                Source = src;
+                Target = dst;
+            }
 
             [MethodImpl(Inline)]
-            public static implicit operator FK<T>(int value)
-                => new FK<T>((uint)value);
+            public FK(uint src, uint dst)
+            {
+                Source = src;
+                Target = dst;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator FK<S,T>((uint src, uint dst) x)
+                => new FK<S,T>(x.src,x.dst);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct AsmSourceBlock : ISourceCode<AsmSourceBlock>
+    public readonly struct AsmSourceBlock : ISourceCode<AsmSourceBlock,TextLine>
     {
         public Index<TextLine> Code {get;}
 
@@ -19,10 +19,28 @@ namespace Z0
             Code  = lines;
         }
 
-        public ReadOnlySpan<TextLine> Lines
+        public Span<TextLine> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Code.Edit;
+        }
+
+        public ReadOnlySpan<TextLine> View
         {
             [MethodImpl(Inline)]
             get => Code.View;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Code.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Code.IsNonEmpty;
         }
     }
 }

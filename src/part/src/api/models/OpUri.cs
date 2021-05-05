@@ -17,26 +17,21 @@ namespace Z0
         public string UriText {get;}
 
         /// <summary>
-        /// The uri scheme, constrained to the defining enumeration
-        /// </summary>
-        public ApiUriScheme Scheme {get;}
-
-        /// <summary>
         /// The host fragment, of the form {assembly_short_name}/{hostname}
         /// </summary>
         public ApiHostUri Host {get;}
 
         /// <summary>
-        /// The name assigned to a group of methods; usually agrees with what is called a "method group" in clr-land
-        /// The purpose of the group name is to classify/identify a related set of methods and, again, this typically
-        /// corresponds to the "name" property on a method
-        /// </summary>
-        public string GroupName {get;}
-
-        /// <summary>
         /// Defines host-relative identity in the form, for example, {opname}_{typewidth}X{segwidth}{u | i | f}
         /// </summary>
         public OpIdentity OpId {get;}
+
+        internal OpUri(in ApiHostUri host, in OpIdentity opid, string uritext)
+        {
+            Host = host;
+            OpId = opid;
+            UriText = uritext;
+        }
 
         /// <summary>
         /// The defining part
@@ -44,19 +39,16 @@ namespace Z0
         public PartId Part
             => Host.Part;
 
-        internal OpUri(ApiUriScheme scheme, in ApiHostUri host, string group, in OpIdentity opid, string uritext)
-        {
-            Scheme = scheme;
-            Host = host;
-            OpId = opid;
-            GroupName = group;
-            UriText = uritext;
-        }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Scheme == 0 && Host.IsEmpty && text.blank(GroupName) && OpId.IsEmpty;
+            get => Host.IsEmpty && OpId.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
         }
 
         [MethodImpl(Inline)]
@@ -92,6 +84,6 @@ namespace Z0
         /// Emptiness of nothing
         /// </summary>
         public static OpUri Empty
-            => new OpUri(ApiUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty, EmptyString);
+            => new OpUri(ApiHostUri.Empty, OpIdentity.Empty, EmptyString);
     }
 }

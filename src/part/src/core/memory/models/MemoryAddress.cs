@@ -39,7 +39,6 @@ namespace Z0
              get => Location != 0;
         }
 
-
         public Address32 Lo
         {
             [MethodImpl(Inline)]
@@ -54,19 +53,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Address16 Quadrant(N0 n)
-            => (ushort)Location;
+            => Lo.Lo;
 
         [MethodImpl(Inline)]
         public Address16 Quadrant(N1 n)
-            => (ushort)((uint)Location >> 16);
+            => Lo.Hi;
 
         [MethodImpl(Inline)]
         public Address16 Quadrant(N2 n)
-            => (ushort)(Location >> 32);
+            => Hi.Lo;
 
         [MethodImpl(Inline)]
         public Address16 Quadrant(N3 n)
-            => (ushort)(Location >> 48);
+            => Hi.Hi;
 
         public string Format()
             => Location.ToString("x") + HexFormatSpecs.PostSpec;

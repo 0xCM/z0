@@ -9,23 +9,41 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct BinarySourceBlock : ISourceCode<BinarySourceBlock>
+    public readonly struct BinarySourceBlock : ISourceCode<BinarySourceBlock,byte>
     {
-        public BinaryCode Encoded {get;}
+        public BinaryCode Code {get;}
 
         public BinaryRenderKind Render {get;}
 
         [MethodImpl(Inline)]
         public BinarySourceBlock(BinaryCode encoded, BinaryRenderKind render)
         {
-            Encoded = encoded;
+            Code = encoded;
             Render = render;
         }
 
-        public ReadOnlySpan<TextLine> Lines
+        public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => default;
+            get => Code.Edit;
+        }
+
+        public ReadOnlySpan<byte> View
+        {
+            [MethodImpl(Inline)]
+            get => Code.View;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Code.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Code.IsNonEmpty;
         }
     }
 }

@@ -51,6 +51,12 @@ namespace Z0
             get => (BaseAddress, BaseAddress + (MemoryAddress)Code.Length);
         }
 
+        public ByteSize Size
+        {
+            [MethodImpl(Inline)]
+            get => Code.Size;
+        }
+
         public byte[] Storage
         {
             [MethodImpl(Inline)]

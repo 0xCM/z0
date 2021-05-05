@@ -7,21 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(AsmLang)" />
-    <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(AsmCases)" />
+    <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(Pipes)" />
-
-    <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(CmdSpec)" />
-    <ProjectReference Include="$(Tools)" />
-    <ProjectReference Include="$(Related)" />
     <ProjectReference Include="$(Capture)" />
-
-    <ProjectReference Include="$(AsmLangG)"/>
+    <ProjectReference Include="$(AsmCases)" />
 
   </ItemGroup>
 

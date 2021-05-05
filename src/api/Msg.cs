@@ -46,5 +46,9 @@ namespace Z0
         public static MsgPattern<Count,PartId> JittedPart => "Jitted {0} {1} members";
 
         public static MsgPattern<dynamic,dynamic> JittedParts => "Jitted {0} members from {1} parts";
+
+        public static MsgPattern<Count> LoadingHexFileBlocks => "Loading hex blocks from {0} files";
+
+        public static MsgPattern<Count> LoadedHexBlocks => "Loaded {0} hex blocks";
     }
 }

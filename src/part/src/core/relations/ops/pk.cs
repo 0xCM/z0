@@ -23,8 +23,7 @@ namespace Z0
                 => new PK<I>(value);
 
         [MethodImpl(Inline), Op]
-        public static PK pk(ulong value)
+        public static PK pk(uint value)
             => new PK(value);
-
     }
 }

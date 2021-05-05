@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Tables)" />
+    <ProjectReference Include="$(AsmCore)" />
   </ItemGroup>
 
 </Project>

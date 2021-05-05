@@ -16,7 +16,7 @@ namespace Z0
     {
         public ApiHostUri Host {get;}
 
-        public BinaryResSpec[] Data {get;}
+        public Index<BinaryResSpec> Data {get;}
 
         [MethodImpl(Inline)]
         public ApiHostRes(ApiHostUri host, BinaryResSpec[] src)
@@ -28,7 +28,7 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => Data.Count;
         }
 
         public ref readonly BinaryResSpec this[int index]
@@ -36,5 +36,8 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
+        public static ApiHostRes Empty
+            => new ApiHostRes(ApiHostUri.Empty, sys.empty<BinaryResSpec>());
     }
 }

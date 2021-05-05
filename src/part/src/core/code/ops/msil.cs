@@ -12,15 +12,11 @@ namespace Z0
     partial struct CodeBlocks
     {
         [MethodImpl(Inline), Op]
-        public static MsilSourceBlock msil(Index<TextLine> src)
-            => new MsilSourceBlock(src);
+        public static MsilSourceBlock msil(CliToken id, CliSig sig, BinaryCode encoded)
+            => new MsilSourceBlock(id,sig,encoded);
 
         [MethodImpl(Inline), Op]
-        public static ApiMsilBlock msil(ApiToken id, MsilSourceBlock src)
-            => new ApiMsilBlock(id,src);
-
-        [MethodImpl(Inline), Op]
-        public static ApiMsilBlock msil(ApiToken id, Index<TextLine> src)
-            => msil(id,msil(src));
+        public static MsilSourceBlock msil(in OpMsil src)
+            => msil(src.Token, src.CliSig, src.MsilCode);
     }
 }

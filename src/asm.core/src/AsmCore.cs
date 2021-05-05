@@ -46,18 +46,6 @@ namespace Z0.Asm
         public static AsmLabel label(Identifier name)
             => new AsmLabel(name);
 
-        [Op]
-        public static LocalOffsetVector offsets(W16 w, ReadOnlySpan<AsmRow> src)
-        {
-            var count = src.Length;
-            var buffer = memory.alloc<Address16>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = skip(src,i).LocalOffset;
-            return buffer;
-        }
-
-
         [MethodImpl(Inline), Op]
         public static AsmBlockLabel blocklabel(MemoryAddress address)
             => new AsmBlockLabel(string.Format("_{0}", address));
@@ -112,10 +100,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static MemoryAddress nextip(MemoryAddress @base, Address16 offset, byte currentsize)
             => @base + offset + currentsize;
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AsmRowSet<T> rowset<T>(T key, AsmRow[] src)
-            => new AsmRowSet<T>(key,src);
 
         [MethodImpl(Inline), Op]
         public static AsmCallSite callsite(AsmCaller caller, Address16 offset, uint4 size)

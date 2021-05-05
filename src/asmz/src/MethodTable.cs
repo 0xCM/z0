@@ -6,40 +6,37 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
     using static memory;
 
     public readonly struct MethodTable
     {
-        public Identifier Name {get;}
+        public Type Type {get;}
 
-        readonly Index<MethodEntryPoint> EntryPoints;
+        public MemoryAddress Address {get;}
 
         [MethodImpl(Inline)]
-        public MethodTable(Identifier name, Index<MethodEntryPoint> src)
+        public MethodTable(Type src)
         {
-            Name = name;
-            EntryPoints = src;
+            Type = src;
+            Address = src.TypeHandle.Value;
         }
 
-        public ref MethodEntryPoint this[uint index]
+        public unsafe ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => ref EntryPoints[index];
+            get => *(Address).Pointer<uint>()/size<uint>();
         }
 
-        public ReadOnlySpan<MethodEntryPoint> View
-        {
-            [MethodImpl(Inline)]
-            get => EntryPoints.View;
-        }
+        public string Format()
+            => string.Format("{0}:{1}", Type.Name, Size);
 
-        public Span<MethodEntryPoint> Edit
-        {
-            [MethodImpl(Inline)]
-            get => EntryPoints.Edit;
-        }
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator MethodTable(Type src)
+            => new MethodTable(src);
     }
 }

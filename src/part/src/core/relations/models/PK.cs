@@ -13,14 +13,14 @@ namespace Z0
     {
         public readonly struct PK
         {
-            public ulong Value {get;}
+            public uint Value {get;}
 
             [MethodImpl(Inline)]
-            public PK(ulong value)
+            public PK(uint value)
                 => Value = value;
 
             [MethodImpl(Inline)]
-            public static implicit operator PK(ulong value)
+            public static implicit operator PK(uint value)
                 => new PK(value);
         }
 
@@ -39,7 +39,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator PK(PK<I> src)
-                => memory.unsigned(src.Value);
+                => memory.bw32(src.Value);
         }
 
         public readonly struct PK<I,T>
@@ -62,7 +62,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator PK(PK<I,T> src)
-                => memory.unsigned(src.Value);
+                => memory.bw32(src.Value);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmComment
+    public readonly struct AsmComment : IAsmSyntaxPart<AsmComment>
     {
         public TextBlock Content {get;}
 

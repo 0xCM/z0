@@ -1122,19 +1122,6 @@ namespace Z0.Asm
             Wf.Row(indices.FormatList());
         }
 
-        void LoadRegions()
-        {
-            var ts0 = root.timestamp();
-            var ts1 = ts0.Format();
-            var ts2 = Timestamp.Zero;
-            var outcome = DataParser.parse(ts1, out ts2);
-            if(!outcome)
-                Wf.Error(outcome.Message);
-            else
-                Wf.Status(ts1);
-
-            var pipe = Wf.ProcessContextPipe();
-        }
 
         void RenderMovzx()
         {
@@ -1291,13 +1278,13 @@ namespace Z0.Asm
             }
         }
 
-        public void CollectMethodTables()
+        public void CollectEntryPoints()
         {
             var catalog = Wf.ApiCatalog;
             var jit = Wf.ApiJit();
             var members = jit.JitCatalog(catalog);
             var flow = Wf.Running("Creating method table");
-            var table = MethodTables.create(root.controller().Id(), members);
+            var table = MethodEntryPoints.create(root.controller().Id(), members);
             Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
         }
 
@@ -1412,15 +1399,176 @@ namespace Z0.Asm
 
         }
 
-        public void Run()
+
+        public class AppWorker<W,T> : AppService<W>
+            where W : AppWorker<W,T>, new()
+        {
+            public void Submit(ReadOnlySpan<T> src)
+            {
+                var running = Wf.Running(string.Format("Processing {0} data", typeof(T).Name));
+                var count = Process(src);
+                Complete();
+                Wf.Ran(running, string.Format("Processed {0} {1} individuals", count, typeof(T).Name));
+            }
+
+            protected virtual void Process(uint index, in T src)
+            {
+
+            }
+
+            protected virtual void Complete()
+            {
+
+            }
+
+            protected virtual uint Process(ReadOnlySpan<T> src)
+            {
+                var count = (uint)src.Length;
+                for(var i=0u; i<count; i++)
+                {
+                    Process(i,skip(src,i));
+                }
+
+                return count;
+            }
+        }
+
+
+        [Record(TableId)]
+        public struct AddressBankEntry : IRecord<AddressBankEntry>
+        {
+            public const string TableId = "address.banks";
+
+            public const string RenderPattern = "{0:D4} | {1:D4} | {2:x}:{3:x} | {4}";
+
+            public ushort SelectorIndex;
+
+            public ushort BaseIndex;
+
+            public Address16 Selector;
+
+            public Address32 BaseAddress;
+
+            public uint Size;
+
+            public string Format()
+                => string.Format(RenderPattern, SelectorIndex, BaseIndex, (ushort)Selector, (uint)BaseAddress, (ByteSize)Size);
+        }
+
+        public readonly struct AddressBank
+        {
+            readonly Index<Address16> Selectors;
+
+            readonly Index<List<Paired<Address32,uint>>> Bases;
+
+            internal AddressBank(Index<Address16> selectors, Index<List<Paired<Address32,uint>>> bases)
+            {
+                Selectors = selectors;
+                Bases =  bases;
+            }
+
+            public uint SegmentCount
+            {
+                get => Selectors.Count;
+            }
+
+            public Index<Paired<Address32,uint>> Segment(uint index)
+            {
+                return Bases[index].ToArray();
+            }
+
+            public Address16 Selector(uint index)
+            {
+                return Selectors[index];
+            }
+        }
+
+        public sealed class RegionWorker : AppWorker<RegionWorker,MemoryRegion>
+        {
+            List<Address16> Selectors;
+
+            List<List<Paired<Address32,uint>>> Bases;
+
+            AddressBank _Product;
+
+            protected override void Complete()
+            {
+                _Product = new AddressBank(Selectors.ToArray(), Bases.ToArray());
+            }
+
+            public ref readonly AddressBank Product
+            {
+                get => ref _Product;
+            }
+
+            public RegionWorker()
+            {
+                Selectors = new();
+                Bases = new();
+            }
+
+            int Index(Address16 selector)
+            {
+                var index = Selectors.IndexOf(selector);
+                if(index == NotFound)
+                {
+                    Selectors.Add(selector);
+                    index = Selectors.Count - 1;
+                    Bases.Add(root.list<Paired<Address32,uint>>());
+                }
+                return index;
+            }
+
+            void Add(Address16 selector, Address32 @base, uint size)
+                => Bases[Index(selector)].Add(root.paired(@base, size));
+
+            protected override void Process(uint index, in MemoryRegion src)
+            {
+                Add(src.BaseAddress.Quadrant(n2), src.BaseAddress.Lo, (uint)(src.EndAddress - src.BaseAddress));
+            }
+        }
+
+        void LoadRegions()
         {
             var pipe = Wf.ProcessContextPipe();
             var regions = pipe.LoadRegions();
+            var worker = RegionWorker.create(Wf);
+            worker.Submit(regions);
+            ref readonly var product = ref worker.Product;
+            var count = product.SegmentCount;
+            var records = root.list<AddressBankEntry>();
+            for(ushort i=0; i<count; i++)
+            {
+                var segment = product.Segment(i);
+                var selector = product.Selector(i);
+                var entries = segment.View;
+                for(ushort j=0; j<entries.Length; j++)
+                {
+                    (var @base, var size) = skip(entries,j);
+                    var record = new AddressBankEntry();
+                    record.SelectorIndex = i;
+                    record.Selector = selector;
+                    record.BaseAddress = @base;
+                    record.Size = size;
+                    record.BaseIndex = j;
+                    records.Add(record);
+                    //Wf.Row(string.Format("{0:D4} {1:D4} {2:x}:{3:x} {4}", i, j, (ushort)selector, (uint)@base, (ByteSize)size));
+                }
+            }
+            var dst = Db.AppLog("addresses", FS.Csv);
+            using var writer = dst.Writer();
+            root.iter(records, r => writer.WriteLine(r.Format()));
+        }
 
-            foreach(var region in regions)
-                Wf.Row(region.BaseAddress);
+        public void Run()
+        {
 
+            LoadRegions();
+
+            // MemoryAddress address = 0x22a_f0_2b_50_00;
+            // Wf.Row(string.Format("{0}:{1}", address.Quadrant(n2), address.Lo));
             //ListPdbMethods();
+
             // var map = ImageMemory.map(root.process());
             // var formatter = Tables.formatter<ProcessModuleRow>();
             // root.iter(map.Modules, m => Wf.Row(formatter.Format(m)));

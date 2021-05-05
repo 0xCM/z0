@@ -9,17 +9,16 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiBinaryBlock : IApiSourceBlock<ApiBinaryBlock, BinarySourceBlock>
+    partial struct CodeBlocks
     {
-        public ApiToken Id {get;}
-
-        public BinarySourceBlock SourceCode {get;}
-
-        [MethodImpl(Inline)]
-        public ApiBinaryBlock(ApiToken id, BinarySourceBlock src)
+        public static void render(in BinarySourceBlock src, ITextBuffer dst)
         {
-            Id = id;
-            SourceCode = src;
+            switch(src.Render)
+            {
+                default:
+                    dst.AppendLine(src.Code.Format());
+                    break;
+            }
         }
     }
 }

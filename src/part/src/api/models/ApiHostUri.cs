@@ -26,7 +26,7 @@ namespace Z0
         }
 
         public Name Id
-            =>  IsEmpty ? "__empty__" : string.Format("{0}.{1}", Part.Format(), Name);
+            => IsEmpty ? "__empty__" : string.Format("{0}.{1}", Part.Format(), Name);
 
         [MethodImpl(Inline)]
         ApiHostUri(string name)

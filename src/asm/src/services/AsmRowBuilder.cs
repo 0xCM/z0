@@ -47,7 +47,7 @@ namespace Z0.Asm
         public Index<AsmRow> EmitAsmRows(Index<ApiCodeBlock> src)
         {
             var rows = BuildAsmRows(src);
-            var rowsets = @readonly(rows.GroupBy(x => x.Mnemonic).Select(x => AsmCore.rowset(x.Key, x.Array())).Array());
+            var rowsets = @readonly(rows.GroupBy(x => x.Mnemonic).Select(x => AsmEtl.rowset(x.Key, x.Array())).Array());
             var count = rowsets.Length;
             var etl = Wf.AsmEtl();
             for(var i=0; i<count; i++)

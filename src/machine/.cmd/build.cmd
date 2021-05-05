@@ -1,2 +1,2 @@
 echo off
-call %ZControl%\.cmd\build-machine.cmd
+call %ControlScripts%\build-machine.cmd

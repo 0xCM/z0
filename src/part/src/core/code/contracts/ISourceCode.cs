@@ -8,10 +8,7 @@ namespace Z0
 
     public interface ISourceCode : INullity
     {
-        ReadOnlySpan<TextLine> Lines {get;}
-
-        uint LineCount
-            => (uint)Lines.Length;
+        uint LineCount {get;}
 
         bool INullity.IsEmpty
             => LineCount == 0;
@@ -21,8 +18,17 @@ namespace Z0
 
     }
 
-    public interface ISourceCode<T> : ISourceCode
-        where T : struct, ISourceCode<T>
+    public interface ISourceCode<C> : ISourceCode
+    {
+        ReadOnlySpan<C> View {get;}
+
+        uint ISourceCode.LineCount
+            => (uint)View.Length;
+
+    }
+
+    public interface ISourceCode<T,C> : ISourceCode<C>
+        where T : struct, ISourceCode<T,C>
     {
 
     }

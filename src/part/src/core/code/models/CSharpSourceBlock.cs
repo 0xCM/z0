@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CSharpSourceBlock : ISourceCode<CSharpSourceBlock>
+    public readonly struct CSharpSourceBlock : ISourceCode<CSharpSourceBlock,TextLine>
     {
         public Index<TextLine> Code {get;}
 
@@ -19,10 +19,16 @@ namespace Z0
             Code  = lines;
         }
 
-        public ReadOnlySpan<TextLine> Lines
+        public ReadOnlySpan<TextLine> View
         {
             [MethodImpl(Inline)]
             get => Code.View;
+        }
+
+        public Span<TextLine> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Code.Edit;
         }
     }
 }

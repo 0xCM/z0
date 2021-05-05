@@ -30,6 +30,22 @@ namespace Z0
         public Index<ApiCodeBlock> ReadBlocks()
             => ReadBlocks(Db.ParsedExtractPaths());
 
+        public Index<ApiHostBlocks> ReadBlocks(ReadOnlySpan<ApiHostUri> src)
+        {
+            var count = src.Length;
+            var dst = root.list<ApiHostBlocks>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var host = ref skip(src,i);
+                dst.Add(ReadBlocks(host));
+            }
+            return dst.ToArray();
+        }
+
+        [Op]
+        public ApiHostBlocks ReadBlocks(ApiHostUri host)
+            => new ApiHostBlocks(host,ReadBlocks(Db.ParsedExtractPath(host)));
+
         [Op]
         public Index<ApiCodeBlock> ReadBlocks(FS.FilePath src)
         {
@@ -64,7 +80,7 @@ namespace Z0
             if(count == 0)
                 return Index<ApiCodeBlock>.Empty;
 
-            var flow = Wf.Running(string.Format("Loading api blocks from {0} files", count));
+            var flow = Wf.Running(Msg.LoadingHexFileBlocks.Format(count));
             var view = src.View;
             var blocks = root.list<ApiCodeBlock>(32000);
             var counter = 0;
@@ -83,7 +99,7 @@ namespace Z0
                 counter += rowcount;
             }
 
-            Wf.Ran(flow, string.Format("Loaded {0} api blocks", counter));
+            Wf.Ran(flow, Msg.LoadedHexBlocks.Format(counter));
 
             return blocks.ToArray();
         }

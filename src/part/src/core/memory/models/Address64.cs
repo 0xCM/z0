@@ -35,6 +35,18 @@ namespace Z0
              get => Location != 0;
         }
 
+        public Address32 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Location;
+        }
+
+        public Address32 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (uint)(Location >> 32);
+        }
+
         public static A Zero
         {
              [MethodImpl(Inline)]

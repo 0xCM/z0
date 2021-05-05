@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -50,6 +50,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator LocalOffsetVector(Index<Address16> src)
             => new LocalOffsetVector(src.Storage);
-
     }
 }

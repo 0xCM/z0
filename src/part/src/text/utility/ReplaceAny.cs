@@ -7,12 +7,16 @@ namespace Z0
     using System;
 
     using static memory;
+    using static Part;
 
     partial class XText
     {
         [TextUtility]
         public static string ReplaceAny(this string src, ReadOnlySpan<char> replace, char replacement)
         {
+            if(text.empty(src))
+                return EmptyString;
+
             var length = src.Length;
             var chars = span(src);
             var buffer = alloc<char>(length);

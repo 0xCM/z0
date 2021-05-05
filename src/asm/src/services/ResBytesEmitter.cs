@@ -101,6 +101,12 @@ namespace Z0
 
         ApiHostRes Emit(in ApiHostBlocks src, FS.FilePath target)
         {
+            if(text.empty(src.Host.Name))
+            {
+                Wf.Warn(string.Format("Cannot emit {0} because host name is undefined", target.ToUri()));
+                return ApiHostRes.Empty;
+            }
+
             var resources = ResProvider.Hosted(src);
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
             var typename = text.concat(src.Host.Part.Format(), Chars.Underscore, hostname);

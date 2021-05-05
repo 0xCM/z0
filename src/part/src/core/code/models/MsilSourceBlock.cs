@@ -9,20 +9,65 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct MsilSourceBlock : ISourceCode<MsilSourceBlock>
+    public readonly struct MsilSourceBlock : ISourceCode<MsilSourceBlock,byte>
     {
-        public Index<TextLine> Code {get;}
+        /// <summary>
+        /// The source method token
+        /// </summary>
+        public CliToken Id {get;}
+
+        /// <summary>
+        /// The source method signature
+        /// </summary>
+        public CliSig Sig {get;}
+
+        /// <summary>
+        /// The encoded cil
+        /// </summary>
+        public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public MsilSourceBlock(Index<TextLine> lines)
+        public MsilSourceBlock(CliToken id, CliSig sig, BinaryCode encoded)
         {
-            Code  = lines;
+            Id = id;
+            Sig = sig;
+            Encoded = encoded;
         }
 
-        public ReadOnlySpan<TextLine> Lines
+        public ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => Code.View;
+            get => Encoded.Size;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Id.IsEmpty && Sig.IsEmpty && Encoded.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Id.IsNonEmpty || Sig.IsNonEmpty || Encoded.IsNonEmpty;
+        }
+
+        public bool Complete
+        {
+            [MethodImpl(Inline)]
+            get => Id.IsNonEmpty && Sig.IsNonEmpty && Encoded.IsNonEmpty;
+        }
+
+        public static MsilSourceBlock Empty
+        {
+            [MethodImpl(Inline)]
+            get => new MsilSourceBlock(CliToken.Empty, CliSig.Empty, BinaryCode.Empty);
+        }
+
+        public ReadOnlySpan<byte> View
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.View;
         }
     }
 }

@@ -35,6 +35,18 @@ namespace Z0
              get => Location != 0;
         }
 
+        public Address8 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Location;
+        }
+
+        public Address8 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (byte)(Location >> 8);
+        }
+
 
         [MethodImpl(Inline)]
         public string Format()
@@ -67,6 +79,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator A(T src)
             => new A(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(A src)
+            => src.Location;
 
         [MethodImpl(Inline)]
         public static implicit operator Address<W,T>(A src)

@@ -5,14 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct CodeBlocks
+    partial struct SosModels
     {
-        [MethodImpl(Inline), Op]
-        public static AsmSourceBlock asm(Index<TextLine> src)
-            => new AsmSourceBlock(src);
+        public unsafe struct MethodTableInfo
+        {
+
+        }
+
     }
+
 }
