@@ -2,19 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [Record(TableId)]
-    public struct AsmFormRecord : IRecord<AsmFormRecord>
+    using System.Runtime.InteropServices;
+
+    using Z0.Asm;
+
+    partial struct AsmRecords
     {
-        public const string TableId = "asm.forms";
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct AsmFormRecord : IRecord<AsmFormRecord>
+        {
+            public const string TableId = "asm.forms";
 
-        public uint Seq;
+            public uint Seq;
 
-        public AsmOpCodeExpr OpCode;
+            public AsmOpCodeExpr OpCode;
 
-        public AsmSigExpr Sig;
+            public AsmSigExpr Sig;
 
-        public AsmFormExpr FormExpr;
+            public AsmFormExpr FormExpr;
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public sealed class AsmRowBuilder : AppService<AsmRowBuilder>
     {
-        readonly Dictionary<AsmMnemonic, ArrayBuilder<AsmRow>> Index;
+        readonly Dictionary<AsmMnemonic, ArrayBuilder<AsmDetailRow>> Index;
 
         int Sequence;
 
@@ -26,7 +26,7 @@ namespace Z0.Asm
         {
             Sequence = 0;
             Offset = 0;
-            Index = new Dictionary<AsmMnemonic, ArrayBuilder<AsmRow>>();
+            Index = new Dictionary<AsmMnemonic, ArrayBuilder<AsmDetailRow>>();
         }
 
         protected override void OnInit()
@@ -35,7 +35,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public Index<AsmRow> Resequence(Index<AsmRow> src)
+        public Index<AsmDetailRow> Resequence(Index<AsmDetailRow> src)
         {
             var count = src.Length;
             ref var row = ref src.First;
@@ -44,7 +44,7 @@ namespace Z0.Asm
             return src;
         }
 
-        public Index<AsmRow> EmitAsmRows(Index<ApiCodeBlock> src)
+        public Index<AsmDetailRow> EmitAsmRows(Index<ApiCodeBlock> src)
         {
             var rows = BuildAsmRows(src);
             var rowsets = @readonly(rows.GroupBy(x => x.Mnemonic).Select(x => AsmEtl.rowset(x.Key, x.Array())).Array());
@@ -55,12 +55,12 @@ namespace Z0.Asm
             return rows;
         }
 
-        public Index<AsmRow> BuildAsmRows(Index<ApiCodeBlock> src)
+        public Index<AsmDetailRow> BuildAsmRows(Index<ApiCodeBlock> src)
         {
             var view = src.View;
             var count = view.Length;
             var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(count));
-            var rows = root.list<AsmRow>();
+            var rows = root.list<AsmDetailRow>();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var block = ref skip(view,i);
@@ -71,7 +71,7 @@ namespace Z0.Asm
             return rows.ToArray();
         }
 
-        Index<AsmRow> BuildAsmRows(in ApiCodeBlock src)
+        Index<AsmDetailRow> BuildAsmRows(in ApiCodeBlock src)
         {
             var decoded = Decoder.Decode(src);
             if(decoded)
@@ -79,16 +79,16 @@ namespace Z0.Asm
             else
             {
                 Wf.Error($"Error decoding {src.OpUri}");
-                return sys.empty<AsmRow>();
+                return sys.empty<AsmDetailRow>();
             }
         }
 
-        Index<AsmRow> BuildAsmRows(in CodeBlock code, IceInstruction[] src)
+        Index<AsmDetailRow> BuildAsmRows(in CodeBlock code, IceInstruction[] src)
         {
             var bytes = span(code.Storage);
             var offset = z16;
             var count = src.Length;
-            var buffer = alloc<AsmRow>(count);
+            var buffer = alloc<AsmDetailRow>(count);
             var dst = span(buffer);
             for(var i=0; i<count; i++)
             {
@@ -100,7 +100,7 @@ namespace Z0.Asm
             return buffer;
         }
 
-        void FillAsmRow(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src, ref AsmRow record)
+        void FillAsmRow(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src, ref AsmDetailRow record)
         {
             record.Sequence = (uint)NextSequence;
             record.BlockAddress = code.BaseAddress;

@@ -2,14 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Part;
 
-    [Record(TableId)]
+    using Z0.Asm;
+
+    partial struct AsmRecords
+    {
+
+    }
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AsmApiStatement : IRecord<AsmApiStatement>, IComparable<AsmApiStatement>
     {
         public const string TableId = "asm.statements";

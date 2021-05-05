@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
+
     public enum ApiExtractField : byte
     {
         Base = 0,

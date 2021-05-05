@@ -2,25 +2,32 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [Record(TableId)]
-    public struct AsmCallRow : IRecord<AsmCallRow>
+    using System.Runtime.InteropServices;
+
+    using Z0.Asm;
+
+    partial struct AsmRecords
     {
-        public const string TableId = "asm.calls";
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct AsmCallRow : IRecord<AsmCallRow>
+        {
+            public const string TableId = "asm.calls";
 
-        public const byte FieldCount = 6;
+            public const byte FieldCount = 6;
 
-        public MemoryAddress Source;
+            public MemoryAddress Source;
 
-        public MemoryAddress Target;
+            public MemoryAddress Target;
 
-        public ByteSize InstructionSize;
+            public ByteSize InstructionSize;
 
-        public MemoryAddress TargetOffset;
+            public MemoryAddress TargetOffset;
 
-        public AsmStatementExpr Instruction;
+            public AsmStatementExpr Instruction;
 
-        public BinaryCode Encoded;
+            public BinaryCode Encoded;
+        }
     }
 }

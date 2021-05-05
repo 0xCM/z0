@@ -7,6 +7,11 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.InteropServices;
 
+    partial struct CliRecords
+    {
+
+    }
+
     partial struct ImageRecords
     {
         /// <summary>

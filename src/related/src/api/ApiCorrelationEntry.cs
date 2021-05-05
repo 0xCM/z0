@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
+
     using static Sequential;
 
     [Record(TableId)]

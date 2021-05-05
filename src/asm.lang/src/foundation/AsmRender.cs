@@ -204,7 +204,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public string FormatRow(in AsmRow src, FuncIn<AsmRow,string> semantic)
+        public string FormatRow(in AsmDetailRow src, FuncIn<AsmDetailRow,string> semantic)
             => string.Format(RowPattern(),
                             src.IP,
                             src.Statement,
@@ -235,7 +235,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public string Semantic(in AsmRow row)
+        public string Semantic(in AsmDetailRow row)
         {
             var monic = AsmMnemonicCode.None;
             if(!AsmParser.parse(row.Mnemonic, out monic))

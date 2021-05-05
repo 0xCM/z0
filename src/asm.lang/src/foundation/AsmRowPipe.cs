@@ -15,11 +15,11 @@ namespace Z0.Asm
     public class AsmRowPipe : AppService<AsmRowPipe>
     {
         public FS.Files AsmRowFiles()
-            => Db.TableDir<AsmRow>().AllFiles;
+            => Db.TableDir<AsmDetailRow>().AllFiles;
 
-        public Index<AsmRow> LoadAsmRows()
+        public Index<AsmDetailRow> LoadAsmRows()
         {
-            var records = DataList.create<AsmRow>(Pow2.T18);
+            var records = DataList.create<AsmDetailRow>(Pow2.T18);
             var paths = AsmRowFiles().View;
             var flow = Wf.Running(string.Format("Loading {0} asm recordsets", paths.Length));
             var count = paths.Length;
@@ -36,18 +36,18 @@ namespace Z0.Asm
             return records.Emit();
         }
 
-        public Index<AsmRow> LoadAsmRows(AsmMnemonicCode monic)
+        public Index<AsmDetailRow> LoadAsmRows(AsmMnemonicCode monic)
         {
             var file = AsmRowFiles().FirstOrDefault(f => f.FileName.Contains(monic.ToString()));
             if(file.IsEmpty)
-                return sys.empty<AsmRow>();
+                return sys.empty<AsmDetailRow>();
 
-            var records = DataList.create<AsmRow>(Pow2.T12);
+            var records = DataList.create<AsmDetailRow>(Pow2.T12);
             var count = LoadAsmRows(file, records);
             return records.Emit();
         }
 
-        Outcome<Count> LoadAsmRows(FS.FilePath path, DataList<AsmRow> dst)
+        Outcome<Count> LoadAsmRows(FS.FilePath path, DataList<AsmDetailRow> dst)
         {
             var rowtype = path.FileName.WithoutExtension.Format().RightOfLast(Chars.Dot);
             var flow = Wf.Running(string.Format("Loading {0} rows from {1}", rowtype, path.ToUri()));
@@ -56,16 +56,16 @@ namespace Z0.Asm
             if(result)
             {
                 var kCells = doc.Header.Labels.Count;
-                if(kCells != AsmRow.FieldCount)
-                    return (false,string.Format("Found {0} fields in {1} while {2} were expected", kCells, path.ToUri(), AsmRow.FieldCount));
+                if(kCells != AsmDetailRow.FieldCount)
+                    return (false,string.Format("Found {0} fields in {1} while {2} were expected", kCells, path.ToUri(), AsmDetailRow.FieldCount));
 
                 var rows = doc.Rows;
                 kRows = rows.Length;
                 for(var j=0; j<kRows; j++)
                 {
                     ref readonly var src = ref skip(rows,j);
-                    if(src.CellCount != AsmRow.FieldCount)
-                        return (false, string.Format("Found {0} fields in {1} while {2} were expected", kCells, src, AsmRow.FieldCount));
+                    if(src.CellCount != AsmDetailRow.FieldCount)
+                        return (false, string.Format("Found {0} fields in {1} while {2} were expected", kCells, src, AsmDetailRow.FieldCount));
                     var loaded = LoadAsmRow(src, out var row);
                     if(!loaded)
                     {
@@ -86,7 +86,7 @@ namespace Z0.Asm
             return (true,kRows);
         }
 
-        Outcome LoadAsmRow(TextRow src, out AsmRow dst)
+        Outcome LoadAsmRow(TextRow src, out AsmDetailRow dst)
         {
             var input = src.Cells.View;
             var i = 0;

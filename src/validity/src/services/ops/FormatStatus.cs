@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static TestCaseRecords;
+    using static LogRecords;
 
     partial class TestApp<A>
     {

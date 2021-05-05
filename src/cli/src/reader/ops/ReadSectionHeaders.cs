@@ -6,6 +6,7 @@ namespace Z0
 {
     using static memory;
     using static ImageRecords;
+    using static PeRecords;
 
     partial class ImageMetaReader
     {

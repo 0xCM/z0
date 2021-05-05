@@ -419,7 +419,7 @@ namespace Z0.Asm
 
         void CheckFlags()
         {
-            var flags = Clr.@enum<Windows.MinidumpType>();
+            var flags = Clr.@enum<MinidumpRecords.MinidumpType>();
             var summary = flags.Describe();
             var count = summary.FieldCount;
             var details = summary.LiteralDetails;
@@ -1125,7 +1125,7 @@ namespace Z0.Asm
 
         void RenderMovzx()
         {
-            static string semantic(in AsmRow src)
+            static string semantic(in AsmDetailRow src)
             {
                 return EmptyString;
             }

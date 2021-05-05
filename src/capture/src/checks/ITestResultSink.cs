@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static Part;
+    using static LogRecords;
 
     public interface ITestResultSink : ISink<TestCaseRecord>
     {

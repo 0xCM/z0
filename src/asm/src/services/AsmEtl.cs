@@ -13,11 +13,11 @@ namespace Z0.Asm
     public sealed class AsmEtl : AppService<AsmEtl>
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AsmRowSet<T> rowset<T>(T key, AsmRow[] src)
+        public static AsmRowSet<T> rowset<T>(T key, AsmDetailRow[] src)
             => new AsmRowSet<T>(key,src);
 
         [Op]
-        public static LocalOffsetVector offsets(W16 w, ReadOnlySpan<AsmRow> src)
+        public static LocalOffsetVector offsets(W16 w, ReadOnlySpan<AsmDetailRow> src)
         {
             var count = src.Length;
             var buffer = memory.alloc<Address16>(count);
@@ -32,10 +32,10 @@ namespace Z0.Asm
             var count = src.Count;
             if(count != 0)
             {
-                var dst = Db.Table(AsmRow.TableId, src.Key.ToString());
-                var flow = Wf.EmittingTable<AsmRow>(dst);
+                var dst = Db.Table(AsmDetailRow.TableId, src.Key.ToString());
+                var flow = Wf.EmittingTable<AsmDetailRow>(dst);
                 var records = span(src.Sequenced);
-                var formatter = Tables.formatter<AsmRow>(32);
+                var formatter = Tables.formatter<AsmDetailRow>(32);
                 using var writer = dst.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 for(var i=0; i<count; i++)

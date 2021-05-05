@@ -6,6 +6,8 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
+    using static CliRecords;
+
     partial struct ImageRecords
     {
         [Record(CliTableKind.ImplMap), StructLayout(LayoutKind.Sequential)]

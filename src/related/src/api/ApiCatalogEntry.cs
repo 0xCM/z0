@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
+
     [Record(TableId)]
     public struct ApiCatalogEntry : IRecord<ApiCatalogEntry>
     {

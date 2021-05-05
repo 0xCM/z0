@@ -7,7 +7,8 @@ namespace Z0
     using System.Diagnostics;
     using System.IO;
     using System.Runtime.InteropServices;
-    using Windows;
+
+    using static MinidumpRecords;
 
     public readonly struct DumpEmitter
     {

@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using static Part;
     using static memory;
+    using static AsmRecords;
 
     public class NasmCatalog : AppService<NasmCatalog>
     {

@@ -9,6 +9,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static XedModels;
+    using static AsmRecords;
 
     public ref struct XedSummaryParser
     {

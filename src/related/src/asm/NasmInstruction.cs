@@ -2,23 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct NasmInstruction : IRecord<NasmInstruction>
+    partial struct AsmRecords
     {
-        public const string TableId = "nasm.instructions";
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct NasmInstruction : IRecord<NasmInstruction>
+        {
+            public const string TableId = "nasm.instructions";
 
-        public uint LineNumber;
+            public uint LineNumber;
 
-        public CharBlock16 Mnemonic;
+            public CharBlock16 Mnemonic;
 
-        public TextBlock Operands;
+            public TextBlock Operands;
 
-        public TextBlock Encoding;
+            public TextBlock Encoding;
 
-        public TextBlock Flags;
+            public TextBlock Flags;
+        }
     }
 }

@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
+
     [Record(TableId)]
     public struct ApiCodeDescriptor : IRecord<ApiCodeDescriptor>
     {
@@ -17,7 +19,7 @@ namespace Z0
 
         public ByteSize Size;
 
-        public ApiUri<string> Uri;
+        public OpUri Uri;
 
         public BinaryCode Encoded;
     }

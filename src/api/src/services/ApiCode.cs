@@ -107,7 +107,7 @@ namespace Z0
             dst.Host = src.Uri.Host.Name;
             dst.Base = src.Address;
             dst.Size = src.Data.Length;
-            dst.Uri = src.Uri.UriText;
+            dst.Uri = src.Uri;
             dst.Encoded = src.Data;
             return ref dst;
         }

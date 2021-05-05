@@ -8,6 +8,7 @@ namespace Z0
     using System.Reflection;
 
     using static ImageRecords;
+    using static CliRecords;
 
     partial class ImageMetaPipe
     {

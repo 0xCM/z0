@@ -13,16 +13,16 @@ namespace Z0.Asm
     {
         public T Key {get;}
 
-        readonly Index<AsmRow> Rows;
+        readonly Index<AsmDetailRow> Rows;
 
         [MethodImpl(Inline)]
-        public AsmRowSet(T key, AsmRow[] data)
+        public AsmRowSet(T key, AsmDetailRow[] data)
         {
             Key = key;
             Rows = data;
         }
 
-        public AsmRow[] Sequenced
+        public AsmDetailRow[] Sequenced
         {
             [MethodImpl(Inline)]
             get => Rows.Storage.OrderBy(x => x.Sequence);
@@ -35,7 +35,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmRow[](AsmRowSet<T> src)
+        public static implicit operator AsmDetailRow[](AsmRowSet<T> src)
             => src.Rows.Storage;
     }
 }

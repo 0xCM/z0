@@ -2,11 +2,51 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System.Runtime.InteropServices;
 
-        /* Example:
+    partial struct AsmRecords
+    {
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct StokeAsmImportRow : IRecord<StokeAsmImportRow>
+        {
+            public const string TableId = "stoke.import";
+
+            public ushort Sequence;
+
+            public string OpCode;
+
+            public string Instruction;
+
+            public string EncodingKind;
+
+            public string Properties;
+
+            public string ImplicitRead;
+
+            public string ImplicitWrite;
+
+            public string ImplicitUndef;
+
+            public string Useful;
+
+            public string Protected;
+
+            public string Mode64;
+
+            public string LegacyMode;
+
+            public string Cpuid;
+
+            public string AttMnemonic;
+
+            public string Preferred;
+
+            public string Description;
+        }
+
+       /* Example:
         | OpCode                                     | Instruction                                | EncodingKind                               | Properties                                 | ImplicitRead                               | ImplicitWrite                              | ImplicitUndef                              | Useful                                     | Protected                                  | Mode64                                     | LegacyMode                                 | Cpuid                                      | AttMnemonic                                | Preferred                                  | Description
         | 04 ib                                      | ADD AL, imm8                               | I                                          | RW, R                                      |                                            | E.OF E.SF E.ZF E.AF E.CF E.PF              |                                            |                                            |                                            | V                                          | V                                          |                                            | addb                                       |                                            | Add imm8 to AL.
         | 05 iw                                      | ADD AX, imm16                              | I                                          | RW, R                                      |                                            | E.OF E.SF E.ZF E.AF E.CF E.PF              |                                            |                                            |                                            | V                                          | V                                          |                                            | addw                                       |                                            | Add imm16 to AX.
@@ -31,42 +71,5 @@ namespace Z0.Asm
         | 03 /r                                      | ADD r32, r/m32                             | RM                                         | RW, R                                      |                                            | E.OF E.SF E.ZF E.AF E.CF E.PF              |                                            |                                            |                                            | V                                          | V                                          |                                            | addl                                       |                                            | Add r/m32 to r32.
         | REX.W+ 03 /r                               | ADD r64, r/m64                             | RM                                         | RW, R                                      |                                            | E.OF E.SF E.ZF E.AF E.CF E.PF              |                                            |                                            |                                            | V                                          | NE                                         |                                            | addq                                       |                                            | Add r/m64 to r64.
         */
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct StokeAsmImportRow : IRecord<StokeAsmImportRow>
-    {
-        public const string TableId = "stoke.import";
-
-        public ushort Sequence;
-
-        public string OpCode;
-
-        public string Instruction;
-
-        public string EncodingKind;
-
-        public string Properties;
-
-        public string ImplicitRead;
-
-        public string ImplicitWrite;
-
-        public string ImplicitUndef;
-
-        public string Useful;
-
-        public string Protected;
-
-        public string Mode64;
-
-        public string LegacyMode;
-
-        public string Cpuid;
-
-        public string AttMnemonic;
-
-        public string Preferred;
-
-        public string Description;
     }
-
 }

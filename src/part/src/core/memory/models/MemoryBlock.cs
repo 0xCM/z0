@@ -9,6 +9,9 @@ namespace Z0
 
     using static Part;
 
+    /// <summary>
+    /// Specifies a block of memory along with the base address from which it originated
+    /// </summary>
     public readonly struct MemoryBlock : IComparable<MemoryBlock>
     {
         public MemoryRange Origin {get;}

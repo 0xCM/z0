@@ -1,0 +1,55 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using static Part;
+
+    using Z0.Asm;
+
+    partial struct AsmRecords
+    {
+
+    }
+
+    [Record(TableId)]
+    public struct AsmDetailRow : IRecord<AsmDetailRow>, IComparable<AsmDetailRow>
+    {
+        public const string TableId = "asm.rows";
+
+        public const byte FieldCount = 12;
+
+        public uint Sequence;
+
+        public MemoryAddress BlockAddress;
+
+        public MemoryAddress IP;
+
+        public Address32 GlobalOffset;
+
+        public Address16 LocalOffset;
+
+		public AsmMnemonic Mnemonic;
+
+		public AsmOpCodeExpr OpCode;
+
+        public string Instruction;
+
+        public string Statement;
+
+        public BinaryCode Encoded;
+
+		public string CpuId;
+
+        public string OpCodeId;
+
+        [MethodImpl(Inline)]
+        public int CompareTo(AsmDetailRow src)
+            => Sequence.CompareTo(src.Sequence);
+    }
+}

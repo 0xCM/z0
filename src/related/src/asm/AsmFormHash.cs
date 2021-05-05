@@ -2,17 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [Record(TableId)]
-    public struct AsmFormHash : IRecord<AsmFormHash>
+    using System.Runtime.InteropServices;
+
+    using Z0.Asm;
+
+    partial struct AsmRecords
     {
-        public const string TableId = "asm.forms.hashed";
+        [Record(TableId)]
+        public struct AsmFormHash : IRecord<AsmFormHash>
+        {
+            public const string TableId = "asm.forms.hashed";
 
-        public Hex32 HashCode;
+            public Hex32 HashCode;
 
-        public uint IndexKey;
+            public uint IndexKey;
 
-        public AsmFormExpr Form;
+            public AsmFormExpr Form;
+        }
     }
 }

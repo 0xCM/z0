@@ -8,6 +8,9 @@
   <ItemGroup>
       <ProjectReference Include="$(Part)" />
       <ProjectReference Include="$(Files)" />
+      <ProjectReference Include="$(Related)" />
+      <ProjectReference Include="$(Workflow)" />
+      <ProjectReference Include="$(Tables)" />
   </ItemGroup>
 
 </Project>
