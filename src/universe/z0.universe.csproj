@@ -50,9 +50,10 @@
     <ProjectReference Include="$(Pipes)" />
     <ProjectReference Include="$(Polyrand)" />
 
-    <ProjectReference Include="$(Sys)" />
+    <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(Sources)" />
+    <ProjectReference Include="$(Sys)" />
 
     <ProjectReference Include="$(Tables)" />
     <ProjectReference Include="$(Term)" />
