@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Root;
-
     partial struct ApiIdentity
     {
         /// <summary>
@@ -27,16 +25,6 @@ namespace Z0
         public static TypeIdentity identify(Type src)
             => TypeIdentityDiviner.IdentityProvider(src).Identify(src);
 
-        [Op]
-        static OpIdentity identify(MethodInfo src, NumericKind k)
-        {
-            var t = k.ToSystemType();
-            if(src.IsOpenGeneric() && t.IsNonEmpty())
-                return identify(src.MakeGenericMethod(t));
-            else
-                return identify(src);
-        }
-
         /// <summary>
         /// Assigns host-independent identity to an api member
         /// </summary>
@@ -52,6 +40,16 @@ namespace Z0
                 return constructed(src);
             else
                 return nongeneric(src);
+        }
+
+        [Op]
+        static OpIdentity identify(MethodInfo src, NumericKind k)
+        {
+            var t = k.ToSystemType();
+            if(src.IsOpenGeneric() && t.IsNonEmpty())
+                return identify(src.MakeGenericMethod(t));
+            else
+                return identify(src);
         }
     }
 }

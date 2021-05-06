@@ -35,9 +35,9 @@ namespace Z0
                 => define(api, a0[offset], a1[offset], result[offset]);
 
         [MethodImpl(Inline)]
-        public static ApiCall serialize<T>(in T result)
+        public static ApiCallData serialize<T>(in T result)
             where T : unmanaged, IApiCall<T>
-                => new ApiCall(result.Api, slice(bytes(result),16));
+                => new ApiCallData(result.Api, slice(bytes(result),16));
 
         [MethodImpl(Inline)]
         static ApiCall<A0,R> define<A0,R>(ApiKey api, in A0 a0, in R result)
@@ -95,7 +95,7 @@ namespace Z0
             => define(api, a0, a1, value);
 
         [MethodImpl(Inline), Op]
-        static ApiCall generalize(in ApiCall<Cell128,Cell128,Cell128> result)
+        static ApiCallData generalize(in ApiCall<Cell128,Cell128,Cell128> result)
             => serialize(result);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]

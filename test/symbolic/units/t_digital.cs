@@ -49,7 +49,6 @@ namespace Z0
             var b8 = Digital.bits(n8);
         }
 
-
         public void t_digit_parser()
         {
             ReadOnlySpan<char> input = "0123456789ABCDEF";

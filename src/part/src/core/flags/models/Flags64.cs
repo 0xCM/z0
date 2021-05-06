@@ -22,7 +22,7 @@ namespace Z0
         public Flags64(K value)
             => Data = value;
 
-        public byte DataWidth
+        public BitWidth DataWidth
             => Width;
 
         public bit this[K flag]

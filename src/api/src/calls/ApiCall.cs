@@ -11,20 +11,44 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public ref struct ApiCall
+    public ref struct ApiCallData
     {
         public ApiKey Api {get;}
 
-        public ReadOnlySpan<byte> Data {get;}
+        public ReadOnlySpan<byte> Bytes {get;}
 
         [MethodImpl(Inline)]
-        internal ApiCall(ApiKey api, ReadOnlySpan<byte> src)
+        internal ApiCallData(ApiKey api, ReadOnlySpan<byte> src)
         {
-            Data = src;
+            Bytes = src;
             Api = api;
         }
     }
 
+    /// <summary>
+    /// Rpresents an action invocation
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ApiCall : IApiCall<ApiCall>
+    {
+        public ApiKey Api {get; internal set;}
+    }
+
+    /// <summary>
+    /// Rpresents an emitter invocation
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ApiCall<R> : IApiCall<ApiCall<R>,R>
+        where R : unmanaged
+    {
+        public ApiKey Api {get; internal set;}
+
+        public R Result {get; internal set;}
+    }
+
+    /// <summary>
+    /// Rpresents an unary function invocation
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall<A0,R> : IApiCall<ApiCall<A0,R>,R>
         where A0 : unmanaged
@@ -37,6 +61,9 @@ namespace Z0
         public R Result {get; internal set;}
     }
 
+    /// <summary>
+    /// Rpresents a binary function invocation
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall<A0,A1,R> : IApiCall<ApiCall<A0,A1,R>,R>
         where A0 : unmanaged
@@ -52,6 +79,9 @@ namespace Z0
         public R Result {get; internal set;}
     }
 
+    /// <summary>
+    /// Rpresents a ternary function invocation
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiCall<A0,A1,A2,R> : IApiCall<ApiCall<A0,A1,A2,R>,R>
         where A0 : unmanaged

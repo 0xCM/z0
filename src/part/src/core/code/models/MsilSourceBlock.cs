@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
@@ -26,12 +27,18 @@ namespace Z0
         /// </summary>
         public BinaryCode Encoded {get;}
 
+        /// <summary>
+        /// Applied attributes
+        /// </summary>
+        public MethodImplAttributes Attributes {get;}
+
         [MethodImpl(Inline)]
-        public MsilSourceBlock(CliToken id, CliSig sig, BinaryCode encoded)
+        public MsilSourceBlock(CliToken id, CliSig sig, BinaryCode encoded, MethodImplAttributes attributes = default)
         {
             Id = id;
             Sig = sig;
             Encoded = encoded;
+            Attributes = attributes;
         }
 
         public ByteSize Size

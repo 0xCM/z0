@@ -22,7 +22,7 @@ namespace Z0
             => new ApiCaptureSet(src.OpUri, msil(src.Msil), src.CodeBlock, asm, src.Method.DisplaySig());
 
         [Op]
-        public static ApiCaptureSet captureset(OpIdentity id, MethodInfo method,  CodeBlock hex, AsmSourceBlock asm)
+        public static ApiCaptureSet captureset(OpIdentity id, MethodInfo method, CodeBlock hex, AsmSourceBlock asm)
         {
             var uri = ApiUri.hex(method.DeclaringType.HostUri(), method.Name, id);
             return new ApiCaptureSet(uri,

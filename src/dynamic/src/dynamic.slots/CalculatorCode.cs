@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static CalcManagedDemo;
+    using static CalcDemo.Managed;
     using static ApiClasses;
 
     using BLK = ApiClasses;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CellOpKind : ICellOpKind
+    public readonly struct CellOpKind
     {
         /// <summary>
         /// The operand width
@@ -33,10 +33,6 @@ namespace Z0
             OperatorType = tOp;
             OperandType = tOperand;
         }
-        public string Format()
-            => CellOpKinds.format(this);
 
-        public override string ToString()
-            => Format();
     }
 }

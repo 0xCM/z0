@@ -21,29 +21,28 @@ namespace Z0
         public static MsilCompilation compilation(DynamicMethod src)
         {
             var flags = src.GetMethodImplementationFlags();
-            MemoryAddress address = pointer(src);
-            var msil = new MsilSourceBlock(src.MetadataToken, src.ResolveSignature(), msildata(src));
-            return new MsilCompilation(msil,address);
+            MemoryAddress address = _pointer(src);
+            var msil = CodeBlocks.msil(default, src.ResolveSignature(), msildata(src), flags);
+            return new MsilCompilation(msil, address);
         }
 
         [Op]
-        public static OpMsil msil(DynamicMethod src, OpIdentity id)
+        public static MsilCompilation compilation(DynamicDelegate src)
+            => compilation(src.Target);
+
+        [Op]
+        public static MsilCompilation compilation(MemoryAddress @base, MethodInfo src)
         {
             var flags = src.GetMethodImplementationFlags();
-            var uri = ApiUri.located(src.DeclaringType.HostUri(), src.Name, id);
-            MemoryAddress address = pointer(src);
-            return new OpMsil(src.MetadataToken, address, uri, src.ResolveSignature(), msildata(src), flags);
+            var msil = CodeBlocks.msil(default, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), flags);
+            return new MsilCompilation(msil, @base);
         }
 
-        [MethodImpl(Inline), Op]
-        public static OpMsil msil(DynamicDelegate src, OpIdentity id)
-            => msil(src.Target, id);
-
-        [MethodImpl(Inline), Op]
+        [Op]
         public static OpMsil msil(MemoryAddress @base, OpUri uri, MethodInfo src)
             => new OpMsil(src.MetadataToken, @base, uri, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static RuntimeMethodHandle handle(DynamicMethod src)
         {
             var getMethodDescriptorInfo = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -61,7 +60,7 @@ namespace Z0
         /// <param name="handle">A proxy for the unmanaged pointer</param>
         [MethodImpl(Inline), Op]
         public static DynamicPointer pointer(DynamicDelegate src)
-            => pointer(src, pointer(src.Target));
+            => pointer(src, _pointer(src.Target));
 
         [MethodImpl(Inline), Op]
         public static DynamicPointer pointer(DynamicDelegate src, IntPtr handle)
@@ -82,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="method">The source method</param>
         /// <remarks>See https://stackoverflow.com/questions/45972562/c-sharp-how-to-get-runtimemethodhandle-from-dynamicmethod</remarks>
-        public static IntPtr pointer(DynamicMethod method)
+        static IntPtr _pointer(DynamicMethod method)
         {
             var descriptor = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
             return ((RuntimeMethodHandle)descriptor.Invoke(method, null)).GetFunctionPointer();

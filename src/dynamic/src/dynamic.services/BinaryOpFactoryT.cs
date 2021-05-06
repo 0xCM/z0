@@ -18,8 +18,7 @@ namespace Z0
         {
             var args = paramX<T,T>();
             var callExpr = call(instance, method, args.ToArray());
-            var f = lambda<T,T,T>(args, callExpr).Compile();
-            return f;
+            return lambda<T,T,T>(args, callExpr).Compile();
         }
     }
 }

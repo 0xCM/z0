@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IFlags : ITextual
     {
-        byte DataWidth {get;}
+        BitWidth DataWidth {get;}
     }
 
     public interface IFlags<E> : IFlags

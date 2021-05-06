@@ -12,21 +12,21 @@ namespace Z0
 
     using api = Flags;
 
-    public struct Flags16<E> : IFlags<Flags16<E>,E,Pow2x16>
-        where E : unmanaged
+    public struct Flags16<K> : IFlags<Flags16<K>,K,Pow2x16>
+        where K : unmanaged
     {
         public const byte Width = 16;
 
-        public E Value {get;}
+        public K Value {get;}
 
         [MethodImpl(Inline)]
-        public Flags16(E value)
+        public Flags16(K value)
             => Value = value;
 
-        public byte DataWidth
+        public BitWidth DataWidth
             => Width;
 
-        public bit this[E flag]
+        public bit this[K flag]
         {
             [MethodImpl(Inline)]
             get => api.state(this, flag);
@@ -45,11 +45,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Flags16<E>(E src)
-            => new Flags16<E>(src);
+        public static implicit operator Flags16<K>(K src)
+            => new Flags16<K>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator E(Flags16<E> src)
+        public static implicit operator K(Flags16<K> src)
             => src.Value;
     }
 }

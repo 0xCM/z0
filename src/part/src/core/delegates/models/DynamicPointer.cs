@@ -18,30 +18,13 @@ namespace Z0
     {
         readonly DynamicDelegate Op;
 
-        public IntPtr Handle {get;}
+        public MemoryAddress Address {get;}
 
         [MethodImpl(Inline)]
-        public DynamicPointer(DynamicDelegate op, IntPtr handle)
+        public DynamicPointer(DynamicDelegate op, MemoryAddress address)
         {
             Op = op;
-            Handle = handle;
-        }
-
-        /// <summary>
-        /// Finds the magical function pointer for a dynamic method
-        /// </summary>
-        /// <param name="method">The source method</param>
-        /// <remarks>See https://stackoverflow.com/questions/45972562/c-sharp-how-to-get-runtimemethodhandle-from-dynamicmethod</remarks>
-        static IntPtr pointer(DynamicMethod method)
-        {
-            var descriptor = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
-            return ((RuntimeMethodHandle)descriptor.Invoke(method, null)).GetFunctionPointer();
-        }
-
-        public byte* BytePtr
-        {
-            [MethodImpl(Inline)]
-            get => Handle.ToPointer<byte>();
+            Address = address;
         }
 
         public Delegate Operation

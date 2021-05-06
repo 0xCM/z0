@@ -23,72 +23,72 @@ namespace Z0
         /// <summary>
         /// Specifies a boolean value
         /// </summary>
-        U1 = w1 << I.Width | K.U1 << I.KindId,
+        U1 = L1 << I.Width | K.U1 << I.KindId,
 
         /// <summary>
         /// Specifies a signed 8-bit integer
         /// </summary>
-        I8 = w8 << I.Width | K.I8 << I.KindId | Signed,
+        I8 = L3 << I.Width | K.I8 << I.KindId | Signed,
 
         /// <summary>
         /// Specifies an unsigned 8-bit integer
         /// </summary>
-        U8 = w8 << I.Width | K.U8 << I.KindId,
+        U8 = L3 << I.Width | K.U8 << I.KindId,
 
         /// <summary>
         /// Specifies a signed 16-bit integer
         /// </summary>
-        I16 = w16 << I.Width | K.I16 << I.KindId | Signed,
+        I16 = L4 << I.Width | K.I16 << I.KindId | Signed,
 
         /// <summary>
         /// Specifies a 16-bit unicode character
         /// </summary>
-        C16 = w16 << I.Width | K.C16 << I.KindId,
+        C16 = L4 << I.Width | K.C16 << I.KindId,
 
         /// <summary>
         /// Specifies an unsigned 16-bit integer
         /// </summary>
-        U16 = w16 << I.Width | K.U16 << I.KindId,
+        U16 = L4 << I.Width | K.U16 << I.KindId,
 
         /// <summary>
         /// Specifies a signed 32-bit integer
         /// </summary>
-        I32 = w32 << I.Width | K.I32 << I.KindId | Signed,
+        I32 = L5 << I.Width | K.I32 << I.KindId | Signed,
 
         /// <summary>
         /// Specifies an unsigned 32-bit integer
         /// </summary>
-        U32 = w32 << I.Width | K.U32 <<  I.KindId,
+        U32 = L5 << I.Width | K.U32 <<  I.KindId,
 
         /// <summary>
         /// Specifies an unsigned 64-bit integer
         /// </summary>
-        U64  = w64 << I.Width | K.U64 <<  I.KindId,
+        U64  = L6 << I.Width | K.U64 <<  I.KindId,
 
         /// <summary>
         /// Specifies a signed 64-bit integer
         /// </summary>
-        I64 = w64 << I.Width | K.I64 << I.KindId | Signed,
+        I64 = L6 << I.Width | K.I64 << I.KindId | Signed,
 
         /// <summary>
         /// Specifies a signed 32-bit floating-point number
         /// </summary>
-        F32 = w32 << I.Width | K.F32 << I.KindId,
+        F32 = L5 << I.Width | K.F32 << I.KindId,
 
         /// <summary>
         /// Specifies a signed 64-bit floating-point number
         /// </summary>
-        F64 = w64 << I.Width | K.F64 << I.KindId,
+        F64 = L6 << I.Width | K.F64 << I.KindId,
 
         /// <summary>
         /// Specifies a signed 64-bit floating-point number
         /// </summary>
-        F128 = w128 << I.Width | K.F128 <<  I.KindId,
+        F128 = L7 << I.Width | K.F128 <<  I.KindId,
 
         /// <summary>
         /// Specifies a 16-bit unicode character
         /// </summary>
-        String = w0 << I.Width | K.C16 << I.KindId,
+        String = L0 << I.Width | K.C16 << I.KindId,
 
         /// <summary>
         /// Specifies System.Object
@@ -103,6 +103,6 @@ namespace Z0
         /// <summary>
         /// Specifies System.DateTime
         /// </summary>
-        DateTime = w64 << I.Width | K.DateTime << I.KindId,
+        DateTime = L6 << I.Width | K.DateTime << I.KindId,
     }
 }

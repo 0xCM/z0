@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     readonly struct Pow2Data
     {
@@ -252,5 +255,41 @@ namespace Z0
             0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f,
             0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
         };
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice32iM1(int index)
+            => M1Bytes32i.Slice(index*4,4);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice32uM1(int index)
+            => M1Bytes32u.Slice(index*4,4);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice64iM1(int index)
+            => M1Bytes64i.Slice(index*8,8);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice64uM1(int index)
+            => M1Bytes64u.Slice(index*8,8);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice(int log2IdxFirst, int log2IdxLast)
+            => Pow2Bytes.Slice(log2IdxFirst*8, (log2IdxLast - log2IdxFirst)*8);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice32iM1(int i0, int i1)
+            => M1Bytes32i.Slice(i0*4, (i1 - i0)*4);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice32uM1(int i0, int i1)
+            => M1Bytes32u.Slice(i0*4, (i1 - i0)*4);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice64iM1(int i0, int i1)
+            => M1Bytes64i.Slice(i0*8, (i1 - i0)*8);
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> slice64uM1(int i0, int i1)
+            => M1Bytes64u.Slice(i0*8, (i1 - i0)*8);
     }
 }

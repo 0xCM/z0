@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using P = Pow2x8;
+    using P = Pow2x16;
 
     /// <summary>
-    /// Defines log2 literals for each pow^2 defined by <see cref ='P'/> and requires 3 bits of storage
+    /// Defines log2 literals for each pow^2 defined by <see cref ='P'/> and requires 4 bits of storage
     /// </summary>
-    public enum Log2x8 : byte
+    public enum Log2x16 : byte
     {
         /// <summary>
         /// The exponent of <see cref='P.P2ᐞ00'/>
@@ -50,5 +50,45 @@ namespace Z0
         /// The exponent of <see cref='P.P2ᐞ07'/>
         /// </summary>
         L7 = 7,
-   }
+
+        /// <summary>
+        /// The exponent of <see cref='P.P2ᐞ08'/>
+        /// </summary>
+        L8 = 8,
+
+        /// <summary>
+        /// The exponent of <see cref='P.P2ᐞ09'/>
+        /// </summary>
+        L9 = 9,
+
+        /// <summary>
+        /// The exponent of <see cref='P.P2ᐞ10'/>
+        /// </summary>
+        L10 = 10,
+
+        /// <summary>
+        /// The exponent of <see cref='P.P2ᐞ11'/>
+        /// </summary>
+        L11 = 11,
+
+        /// <summary>
+        /// The exponent of <see cref='P.P2ᐞ12'/>
+        /// </summary>
+        L12 = 12,
+
+        /// <summary>
+        /// The exponent of <see cref='P.P2ᐞ13'/>
+        /// </summary>
+        L13 = 13,
+
+        /// <summary>
+        /// The exponent of <see cref='P.P2ᐞ14'/>
+        /// </summary>
+        L14 = 14,
+
+        /// <summary>
+        /// The exponent of <see cref='P.P2ᐞ15'/>
+        /// </summary>
+        L15 = 15,
+    }
 }

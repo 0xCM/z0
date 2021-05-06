@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct CallPatternsDemo
+    public readonly struct CallPatterns
     {
         public delegate byte Mul(byte x, byte y);
 

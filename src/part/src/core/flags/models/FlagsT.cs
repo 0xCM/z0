@@ -14,16 +14,14 @@ namespace Z0
     public struct Flags<T> : IFlags<T>
         where T : unmanaged
     {
-        public const byte Width = 64;
-
         readonly T Data;
 
         [MethodImpl(Inline)]
         public Flags(T value)
             => Data = value;
 
-        public byte DataWidth
-            => Width;
+        public BitWidth DataWidth
+            => memory.width<T>();
 
         public bit this[T flag]
         {

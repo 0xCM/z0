@@ -7,26 +7,163 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static CalcDemoUtil;
+    using static CalculatorCode;
+    using static ApiClasses;
     using static Part;
     using static memory;
 
-    using M = CalcManagedDemo;
-    using N = CalcNativeDemo;
-    using I = CalcOpDemoIndex;
+    using I = CalcDemo.OpIndex;
     using K = ApiClasses;
 
     [ApiHost]
     public readonly struct CalcDemo
     {
+        public enum OpIndex : byte
+        {
+            Add = 0,
+
+            Sub = 1,
+
+            Mul = 2,
+
+            Div = 3,
+
+            And = 4,
+        }
+
+        public readonly struct Slots
+        {
+            [Size(20), MethodImpl(NotInline)]
+            public static byte add(byte x, byte y)
+                => (byte)(x+y);
+
+            [Size(17), MethodImpl(NotInline)]
+            public static byte sub(byte x, byte y)
+                => (byte)(x-y);
+
+            [Size(18), MethodImpl(NotInline)]
+            public static byte mul(byte x, byte y)
+                => (byte)(x*y);
+
+            [Size(18), MethodImpl(NotInline)]
+            public static byte div(byte x, byte y)
+                => (byte)(x/y);
+
+            [Size(17), MethodImpl(NotInline)]
+            public static byte and(byte x, byte y)
+                => (byte)(x&y);
+        }
+
+        public readonly struct Native
+        {
+            /// <summary>
+            /// Executes the code defined by <see cref="mul_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>
+            /// </summary>
+            /// <param name="f">The function selector</param>
+            /// <param name="x">The left operand</param>
+            /// <param name="y">The right operand</param>
+            public static byte eval(Mul f, byte x, byte y)
+                => BinaryOpDynamics.eval(f, mul_ᐤ8uㆍ8uᐤ, x,y);
+
+            /// <summary>
+            /// Executes the code defined by <see cref="sub_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>
+            /// </summary>
+            /// <param name="f">The function selector</param>
+            /// <param name="x">The left operand</param>
+            /// <param name="y">The right operand</param>
+            public static byte eval(Sub f, byte x, byte y)
+                => BinaryOpDynamics.eval(f,sub_ᐤ8uㆍ8uᐤ, x, y );
+
+            /// <summary>
+            /// Executes the code defined by <see cref="and_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>
+            /// </summary>
+            /// <param name="f">The function selector</param>
+            /// <param name="x">The left operand</param>
+            /// <param name="y">The right operand</param>
+            public static byte eval(And f, byte x, byte y)
+                => BinaryOpDynamics.eval(f, and_ᐤ8uㆍ8uᐤ, x, y);
+        }
+
+        [ApiHost("calc.managed")]
+        public readonly struct Managed
+        {
+            /// <summary>
+            /// Computes the sum of two unsigned 8-bit integers
+            /// </summary>
+            /// <param name="f">The operation selector</param>
+            /// <param name="x">The left operand</param>
+            /// <param name="y">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static byte eval(Add f, byte x, byte y)
+                => (byte)(x+y);
+
+            /// <summary>
+            /// Computes the difference between two unsigned 8-bit integers
+            /// </summary>
+            /// <param name="x">The left operand</param>
+            /// <param name="y">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static byte eval(Sub f, byte x, byte y)
+                => (byte)(x-y);
+
+            /// <summary>
+            /// Computes the product of two unsigned 8-bit integers
+            /// </summary>
+            /// <param name="x">The left operand</param>
+            /// <param name="y">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static byte eval(Mul f, byte x, byte y)
+                => (byte)(x*y);
+
+            /// <summary>
+            /// Computes the quotient between two unsigned 8-bit integers
+            /// </summary>
+            /// <param name="x">The left operand</param>
+            /// <param name="y">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static byte eval(Div f, byte x, byte y)
+                => (byte)(x/y);
+
+            /// <summary>
+            /// Computes the bitwise and between two unsigned 8-bit integers
+            /// </summary>
+            /// <param name="x">The left operand</param>
+            /// <param name="y">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static byte eval(And f, byte x, byte y)
+                => (byte)(x&y);
+        }
+
+        public static string apply<K,T>(K k, T x, T y)
+            where K : IApiClass
+                => $"{k.Format()}({x},{y})";
+
+        public static string success<K,T>(K k, T x, T y, T result)
+            where K : IApiClass
+                => $"{k.Format()}({x},{y}) := {result}";
+
+        public static string failure<K,T>(K k, T x, T y, T expect, T actual)
+            where K : IApiClass
+                => $"{apply(k,x,y)} := {actual} != {expect}";
+
+        public static string describe<K,T>(K k, T x, T y, T result)
+            where K : IApiClass
+            where T : IEquatable<T>
+                => $"{apply(k,x,y)} = {result}";
+
+        public static string describe<K,T>(K k, T x, T y, T expect, T actual)
+            where K : IApiClass
+            where T : IEquatable<T>
+                => expect.Equals(actual) ? success(k, x, y, actual) : failure(k, x, y, expect, actual);
+
         void Display1()
         {
             var x = ScalarCast.uint8(4);
             var y = ScalarCast.uint8(16);
             var f = K.mul();
 
-            var expect = M.eval(f, x, y);
-            var actual = N.eval(f, x, y);
+            var expect = Managed.eval(f, x, y);
+            var actual = Native.eval(f, x, y);
             var message = describe(f, x,y, expect, actual);
 
             term.print(message);
@@ -34,7 +171,7 @@ namespace Z0
 
         void Display2()
         {
-            var slots = ClrDynamic.slots(typeof(CalcSlotsDemo));
+            var slots = ClrDynamic.slots(typeof(Slots));
             for(var i=0; i<slots.Length; i++)
             {
                 ref readonly var slot = ref skip(slots,i);
@@ -73,11 +210,11 @@ namespace Z0
         [Op]
         public static void run(Span<string> dst, ref byte offset)
         {
-            var slots = ClrDynamic.slots<CalcOpDemoIndex>(typeof(CalcSlotsDemo));
-            ref readonly var add = ref slots[CalcOpDemoIndex.Add];
-            ref readonly var sub = ref slots[CalcOpDemoIndex.Sub];
-            ref readonly var mul = ref slots[CalcOpDemoIndex.Mul];
-            ref readonly var div = ref slots[CalcOpDemoIndex.Div];
+            var slots = ClrDynamic.slots<OpIndex>(typeof(Slots));
+            ref readonly var add = ref slots[OpIndex.Add];
+            ref readonly var sub = ref slots[OpIndex.Sub];
+            ref readonly var mul = ref slots[OpIndex.Mul];
+            ref readonly var div = ref slots[OpIndex.Div];
 
             var mulCode = CalculatorCode.mul_ᐤ8uㆍ8uᐤ;
             var divCode = CalculatorCode.div_ᐤ8uㆍ8uᐤ;
@@ -90,25 +227,25 @@ namespace Z0
             for(var i=0u; i<size; i++)
                 seek(mulRef, i) = skip(divCode,i);
 
-            var z1 = CalcSlotsDemo.mul(x,y);
-            seek(dst, offset++) = (CalcDemoUtil.describe(K.mul(), x,y, z1));
+            var z1 = Slots.mul(x,y);
+            seek(dst, offset++) = (describe(K.mul(), x,y, z1));
 
             ref var divRef = ref div.Address.Ref<byte>();
             for(var i=0; i<size; i++)
                 seek(divRef, i) = skip(mulCode,i);
 
-            var z2 = CalcSlotsDemo.div(x,y);
-            seek(dst, offset++) = CalcDemoUtil.describe(K.div(), x,y, z2);
+            var z2 = Slots.div(x,y);
+            seek(dst, offset++) = describe(K.div(), x,y, z2);
         }
 
         [Op]
         public static void run(ITextBuffer dst)
         {
-            var slots = ClrDynamic.slots<CalcOpDemoIndex>(typeof(CalcSlotsDemo));
-            ref readonly var add = ref slots[CalcOpDemoIndex.Add];
-            ref readonly var sub = ref slots[CalcOpDemoIndex.Sub];
-            ref readonly var mul = ref slots[CalcOpDemoIndex.Mul];
-            ref readonly var div = ref slots[CalcOpDemoIndex.Div];
+            var slots = ClrDynamic.slots<OpIndex>(typeof(Slots));
+            ref readonly var add = ref slots[OpIndex.Add];
+            ref readonly var sub = ref slots[OpIndex.Sub];
+            ref readonly var mul = ref slots[OpIndex.Mul];
+            ref readonly var div = ref slots[OpIndex.Div];
 
             var mulCode = CalculatorCode.mul_ᐤ8uㆍ8uᐤ;
             var divCode = CalculatorCode.div_ᐤ8uㆍ8uᐤ;
@@ -121,15 +258,15 @@ namespace Z0
             for(var i=0u; i<size; i++)
                 seek(mulRef, i) = skip(divCode,i);
 
-            var z1 = CalcSlotsDemo.mul(x,y);
-            dst.AppendLine((CalcDemoUtil.describe(K.mul(), x,y, z1)));
+            var z1 = Slots.mul(x,y);
+            dst.AppendLine((describe(K.mul(), x,y, z1)));
 
             ref var divRef = ref div.Address.Ref<byte>();
             for(var i=0; i<size; i++)
                 seek(divRef, i) = skip(mulCode,i);
 
-            var z2 = CalcSlotsDemo.div(x,y);
-            dst.AppendLine(CalcDemoUtil.describe(K.div(), x,y, z2));
+            var z2 = Slots.div(x,y);
+            dst.AppendLine(describe(K.div(), x,y, z2));
         }
 
     }
