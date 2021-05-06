@@ -12,10 +12,7 @@ namespace Z0
 
     public readonly struct CellDelegate
     {
-        /// <summary>
-        /// The operation identity
-        /// </summary>
-        public OpIdentity Id {get;}
+        public Identifier Name {get;}
 
         public MemoryAddress SourceAddress {get;}
 
@@ -24,9 +21,9 @@ namespace Z0
         public Delegate Operation {get;}
 
         [MethodImpl(Inline)]
-        public CellDelegate(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
+        public CellDelegate(Identifier name, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
         {
-            Id = id;
+            Name = name;
             SourceAddress = src;
             Enclosure = enclosure;
             Operation = dynop;

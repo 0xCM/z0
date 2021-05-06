@@ -14,6 +14,14 @@ namespace Z0
     /// </summary>
     public readonly struct MemoryRange : IMemoryRange<MemoryRange>
     {
+        [MethodImpl(Inline)]
+        public static MemoryRange define(MemoryAddress min, MemoryAddress max)
+            => new MemoryRange(min,max);
+
+        [MethodImpl(Inline)]
+        public static MemoryRange define(MemoryAddress min, ByteSize size)
+            => new MemoryRange(min, size);
+
         /// <summary>
         /// The inclusive address at which the range begins
         /// </summary>

@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
+
     partial struct PdbRecords
     {
-        [Record]
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct PdbFileHeader : IRecord<PdbFileHeader>
         {
+            public const string TableId = "pdb.header";
+
             public Cell256 Magic;
 
             public Cell32 PageSize;

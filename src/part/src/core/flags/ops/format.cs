@@ -32,6 +32,11 @@ namespace Z0
             where E : unmanaged
                 => _format(src,enabledOnly);
 
+        [Op, Closures(UnsignedInts)]
+        public static string format<T>(Flags<T> src)
+            where T : unmanaged
+                => BitFormatter.create<T>().Format(src.Value);
+
         const string RenderPattern = "{0,-48}: {1}" + Eol;
 
         [MethodImpl(Inline)]

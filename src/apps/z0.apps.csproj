@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(CmdSpec)" />
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Api)" />
   </ItemGroup>

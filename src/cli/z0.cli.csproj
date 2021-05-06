@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Minidump)" />
     <ProjectReference Include="$(Asci)" />
-    <ProjectReference Include="$(CmdSpec)" />
     <ProjectReference Include="$(Related)" />
 
   </ItemGroup>

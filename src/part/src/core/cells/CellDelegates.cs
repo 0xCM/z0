@@ -22,7 +22,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static CellDelegate define(OpIdentity id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
-            => new CellDelegate(id,src,enclosure,dynop);
+            => new CellDelegate(id.Format(), src,enclosure,dynop);
+
+        [MethodImpl(Inline)]
+        public static CellDelegate define(Identifier id, MemoryAddress src, DynamicMethod enclosure, Delegate dynop)
+            => new CellDelegate(id, src,enclosure,dynop);
 
         [MethodImpl(NotInline), Op]
         public static BinaryOp1 define(BinaryOp<bit> f)

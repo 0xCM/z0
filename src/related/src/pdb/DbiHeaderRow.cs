@@ -4,13 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
 
     partial struct PdbRecords
     {
-
-        [Record]
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct DbiHeaderRow : IRecord<DbiHeaderRow>
         {
+            public const string TableId = "dbi.header";
+
             public Cell32 Signature; // 0..3
 
             public Cell32 Version; // 4..7

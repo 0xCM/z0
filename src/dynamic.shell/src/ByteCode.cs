@@ -11,14 +11,14 @@ namespace Z0
 
     public readonly struct ByteCode
     {
-        public static T execute<T>(string name, ReadOnlySpan<byte> code, T a, T b)
+        public static T execute<T>(Identifier name, ReadOnlySpan<byte> code, T a, T b)
             where T : unmanaged
         {
             var f = BinaryOpFactory.create<T>(name,code);
             return f(a,b);
         }
 
-        public static void execute<T>(string name, ReadOnlySpan<byte> code, uint offset, ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+        public static void execute<T>(Identifier name, ReadOnlySpan<byte> code, uint offset, ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
         {
             seek(dst,offset) = execute(name, code, skip(a,offset), skip(b,offset));

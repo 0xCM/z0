@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System.IO;
+    using System.Runtime.InteropServices;
 
-    [Record(TableId)]
-    public struct MemoryFileInfo
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct MemoryFileInfo : IRecord<MemoryFileInfo>
     {
         public const string TableId = "memoryfile-info";
 

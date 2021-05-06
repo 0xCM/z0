@@ -14,6 +14,9 @@ namespace Z0
 
     public sealed class ApiAssets : AppService<ApiAssets>, IApiAssets
     {
+        public Index<ResEmission> Run(EmitResDataCmd cmd)
+            => EmitEmbedded(cmd.Source, cmd.Target, cmd.Match, cmd.ClearTarget);
+
         public Index<ResEmission> EmitAssetContent()
         {
             var outer = Wf.Running("Emitting reference data");

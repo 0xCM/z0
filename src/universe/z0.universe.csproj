@@ -27,7 +27,6 @@
     <ProjectReference Include="$(CpuDsl)" />
 
     <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(CmdExec)" />
 
     <ProjectReference Include="$(Dynamic)" />
 

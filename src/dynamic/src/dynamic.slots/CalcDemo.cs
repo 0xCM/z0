@@ -70,7 +70,6 @@ namespace Z0
             return ops[I.Add](e,b);
         }
 
-
         [Op]
         public static void run(Span<string> dst, ref byte offset)
         {
@@ -101,5 +100,37 @@ namespace Z0
             var z2 = CalcSlotsDemo.div(x,y);
             seek(dst, offset++) = CalcDemoUtil.describe(K.div(), x,y, z2);
         }
+
+        [Op]
+        public static void run(ITextBuffer dst)
+        {
+            var slots = ClrDynamic.slots<CalcOpDemoIndex>(typeof(CalcSlotsDemo));
+            ref readonly var add = ref slots[CalcOpDemoIndex.Add];
+            ref readonly var sub = ref slots[CalcOpDemoIndex.Sub];
+            ref readonly var mul = ref slots[CalcOpDemoIndex.Mul];
+            ref readonly var div = ref slots[CalcOpDemoIndex.Div];
+
+            var mulCode = CalculatorCode.mul_ᐤ8uㆍ8uᐤ;
+            var divCode = CalculatorCode.div_ᐤ8uㆍ8uᐤ;
+            var size = mulCode.Length;
+
+            var x = ScalarCast.uint8(4);
+            var y = ScalarCast.uint8(4);
+
+            ref var mulRef = ref mul.Address.Ref<byte>();
+            for(var i=0u; i<size; i++)
+                seek(mulRef, i) = skip(divCode,i);
+
+            var z1 = CalcSlotsDemo.mul(x,y);
+            dst.AppendLine((CalcDemoUtil.describe(K.mul(), x,y, z1)));
+
+            ref var divRef = ref div.Address.Ref<byte>();
+            for(var i=0; i<size; i++)
+                seek(divRef, i) = skip(mulCode,i);
+
+            var z2 = CalcSlotsDemo.div(x,y);
+            dst.AppendLine(CalcDemoUtil.describe(K.div(), x,y, z2));
+        }
+
     }
 }

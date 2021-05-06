@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(CmdExec)" />
     <ProjectReference Include="$(Universe)"/>
   </ItemGroup>
 

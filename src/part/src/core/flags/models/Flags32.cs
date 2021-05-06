@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Flags;
 
-    public readonly struct Flags32<E> : IFlags<Flags32<E>,E,Pow2x32>
+    public struct Flags32<E> : IFlags<Flags32<E>,E,Pow2x32>
         where E : unmanaged
     {
         public const byte Width = 32;

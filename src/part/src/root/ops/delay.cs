@@ -28,5 +28,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static async Task delayAsync(TimeSpan duration)
             => await Task.Delay(duration);
+
+        [MethodImpl(Inline), Op]
+        public static void delay(uint ms)
+            => Task.Run(async delegate {await Task.Delay((int)ms);}).Wait();
     }
 }

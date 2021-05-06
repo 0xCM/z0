@@ -14,74 +14,53 @@ namespace Z0
     [ApiHost]
     public readonly struct BinaryOpFactory
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(UnsignedInts)]
         public static unsafe BinaryOp<T> create<T>(OpIdentity id, ReadOnlySpan<byte> code)
-            where T : unmanaged
-                => emit<T>(id, memory.liberate(code));
+            => emit<T>(id.Format(), memory.liberate(code), out var _);
 
-        [MethodImpl(Inline)]
-        public static BinaryOp<T> create<T>(string name, ReadOnlySpan<byte> f)
-            where T : unmanaged
-                => create<T>(name, new BinaryCode(f.ToArray()));
+        public static unsafe BinaryOp<T> create<T>(Identifier name, ReadOnlySpan<byte> f)
+        {
+            var emitted = emit<T>(name, (MemoryAddress)memory.liberate(f), out var method);
+            return emitted;
+        }
+            //=> create<T>(name, new BinaryCode(f.ToArray()));
 
-        [MethodImpl(Inline)]
-        public static BinaryOp<T> create<T>(string name, in BinaryCode code)
-            where T : unmanaged
-                => create<T>(identify<T>(name), code);
+        public static unsafe BinaryOp<T> create<K,T>(K kind, ReadOnlySpan<byte> code, bool generic)
+            where K : unmanaged, IApiClass
+                => emit<T>(identify<K,T>(kind, generic), (MemoryAddress)memory.liberate(code), out var _);
 
-        // [MethodImpl(Inline)]
-        // public static BinaryOp<T> create<T,K>(K kind, in BinaryCode code, bool generic)
-        //     where K : unmanaged, IApiKey
-        //     where T : unmanaged
-        //         => emit<T>(identify<T,K>(kind, generic), memory.liberate(code).Ref);
+        public static unsafe DynamicOp<BinaryOp<T>> dynop<T>(Identifier name, byte* pCode)
+        {
+            var emitted = emit<T>(name, (MemoryAddress)pCode, out var method);
+            return (method,emitted);
+        }
 
-        [MethodImpl(Inline)]
-        public static BinaryOp<T> create<T>(OpIdentity id, in BinaryCode code)
-            => emit<T>(id, memory.liberate(code).Ref);
-
-        // static OpIdentity identify<T,K>(K k, bool generic)
-        //     where K : unmanaged, IApiKey
-        //     where T : unmanaged
-        // {
-        //     var operand = MultiDiviner.Service.Identify(typeof(T));
-        //     return ApiIdentityBuilder.build(k.Id, Numeric.kind<T>(),generic);
-        // }
-
-        static OpIdentity identify<T>(string name)
+        internal static Identifier identify<K,T>(K k, bool generic)
+            where K : unmanaged, IApiClass
         {
             var operand = MultiDiviner.Service.Identify(typeof(T));
-            return ApiUri.opid($"{name}_({operand},{operand})");
+            return ApiIdentityBuilder.build(k.ClassId, Numeric.kind<T>(),generic).Format();
         }
 
-        static BinaryOp<T> emit<T>(OpIdentity id, in SegRef target)
+        static Identifier identify<T>(string group)
+        {
+            var operand = MultiDiviner.Service.Identify(typeof(T));
+            return ApiUri.opid($"{group}_({operand},{operand})").Format();
+        }
+
+        static unsafe BinaryOp<T> emit<T>(Identifier name, MemoryAddress f, out DynamicMethod method)
         {
             var tFunc = typeof(BinaryOp<T>);
             var tOperand = typeof(T);
             var args = sys.array(tOperand, tOperand);
-            var method = new DynamicMethod(id, tOperand, args, tFunc.Module);
-            var g = method.GetILGenerator();
-            var address = target.BaseAddress;
-            g.Emit(OpCodes.Ldarg_0);
-            g.Emit(OpCodes.Ldarg_1);
-            g.Emit(OpCodes.Ldc_I8, address);
-            g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, tOperand, args);
-            g.Emit(OpCodes.Ret);
-            return (BinaryOp<T>)CellDelegates.define(id, address, method, method.CreateDelegate(tFunc));
-        }
-
-        static unsafe BinaryOp<T> emit<T>(OpIdentity id, MemoryAddress f)
-        {
-            var tFunc = typeof(BinaryOp<T>);
-            var tOperand = typeof(T);
-            var args = sys.array(tOperand, tOperand);
-            var method = new DynamicMethod(id, tOperand, args, tFunc.Module);
+            method = new DynamicMethod(name, tOperand, args, tFunc.Module);
             var g = method.GetILGenerator();
             g.Emit(OpCodes.Ldarg_0);
             g.Emit(OpCodes.Ldarg_1);
             g.Emit(OpCodes.Ldc_I8, f);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, tOperand, args);
             g.Emit(OpCodes.Ret);
-            return (BinaryOp<T>)CellDelegates.define(id, f, method, method.CreateDelegate(tFunc));
+            return (BinaryOp<T>)CellDelegates.define(name, f, method, method.CreateDelegate(tFunc));
         }
     }
 }

@@ -51,5 +51,19 @@ namespace Z0
         public static bit state<E>(Flags64<E> src, E flag)
             where E : unmanaged
                 => bit.test(u64(src.Value), (byte)Pow2.log2(u64(flag)));
+
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static bit state<T>(Flags<T> src, T flag)
+            where T : unmanaged
+        {
+            if(size<T>() == 1)
+                return bit.test(u8(src.Value), (byte)Pow2.log2(u8(flag)));
+            else if(size<T>() == 2)
+                return bit.test(u16(src.Value), (byte)Pow2.log2(u16(flag)));
+            else if(size<T>() == 4)
+                return bit.test(u32(src.Value), (byte)Pow2.log2(u32(flag)));
+            else
+                return bit.test(u64(src.Value), (byte)Pow2.log2(u64(flag)));
+        }
     }
 }

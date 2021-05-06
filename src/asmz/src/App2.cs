@@ -1560,10 +1560,74 @@ namespace Z0.Asm
             root.iter(records, r => writer.WriteLine(r.Format()));
         }
 
+        void CheckAlloc()
+        {
+            var count = 0xFF;
+            using var allocation = memory.memalloc<ulong>(count);
+            ref var target = ref allocation.First;
+            for(var i=0u; i<count; i++)
+            {
+                seek(target,i) = i*2;
+            }
+            for(var i=0u; i<count; i++)
+            {
+                if(skip(target,i) != 2*i)
+                    Wf.Error("Good allocation gone bad?");
+            }
+
+
+        }
+
+        unsafe static void Emit(MemoryRange src, FS.FilePath dst)
+        {
+            var bpl = 32;
+            var line = text.build();
+            using var writer = dst.Writer();
+
+            var pSrc = src.Min.Pointer<byte>();
+            var last =  src.Max.Pointer<byte>();
+            var address = src.Min;
+            byte pos = 0;
+            var offset = 0u;
+
+            while(pSrc++ <= last)
+            {
+                address = (MemoryAddress)pSrc;
+
+                if(pos == 0)
+                    line.Append(text.format("0x{0}  ", address.Format()));
+
+                line.Append(text.format("{0} ", HexFormat.format<W8,byte>(*pSrc)));
+
+                pos += 3;
+
+                if(offset != 0 && offset % bpl == 0)
+                {
+                    writer.WriteLine(line.ToString());
+                    line.Clear();
+                    pos = 0;
+                }
+
+                offset++;
+            }
+        }
+
+        Z0.MemoryFile OpenResPack()
+        {
+            var path = Wf.Db().Package("respack") + FS.file("z0.respack", FS.Dll);
+            var map = MemoryFiles.map(path);
+            return map;
+        }
+
         public void Run()
         {
 
-            LoadRegions();
+            using var map = OpenResPack();
+            var @base = map.BaseAddress;
+            var sig = map.View(0, 2).AsUInt16();
+            var info = map.Description;
+            Wf.Row(Tables.format(info));
+            var range = MemoryRange.define(@base, map.Size);
 
             // MemoryAddress address = 0x22a_f0_2b_50_00;
             // Wf.Row(string.Format("{0}:{1}", address.Quadrant(n2), address.Lo));
