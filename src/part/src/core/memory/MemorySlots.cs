@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
     public readonly struct MemorySlots
     {
-       readonly MemSeg[] Data;
+       readonly MemorySeg[] Data;
 
         public static string[] format<E>(MemorySlots<E> src)
             where E : unmanaged
@@ -22,7 +22,6 @@ namespace Z0
             return dst;
         }
 
-        [Op, Closures(UnsignedInts)]
         public static void format<E>(MemorySlots<E> src, Span<string> dst)
             where E : unmanaged
         {
@@ -33,14 +32,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public MemorySlots(MemSeg[] src)
+        public MemorySlots(MemorySeg[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public ref readonly MemSeg Lookup(byte index)
+        public ref readonly MemorySeg Lookup(byte index)
             => ref Data[index];
 
-        public ref readonly MemSeg this[byte index]
+        public ref readonly MemorySeg this[byte index]
         {
             [MethodImpl(Inline)]
             get => ref Lookup(index);
@@ -53,15 +52,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator MemorySlots(MemSeg[] src)
+        public static implicit operator MemorySlots(MemorySeg[] src)
             => new MemorySlots(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemorySlots(Index<MemSeg> src)
+        public static implicit operator MemorySlots(Index<MemorySeg> src)
             => new MemorySlots(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemSeg[](MemorySlots src)
+        public static implicit operator MemorySeg[](MemorySlots src)
             => src.Data;
     }
 }

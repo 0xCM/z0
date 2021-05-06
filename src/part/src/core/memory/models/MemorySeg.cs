@@ -7,31 +7,30 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.IO;
 
     using static System.Runtime.Intrinsics.Vector128;
     using static Part;
     using static memory;
 
     /// <summary>
-    /// Defines a reference to a memory segment
+    /// Defines a reference to a (live) memory segment
     /// </summary>
-    public readonly struct MemSeg : IMemorySegment, ITextual, IEquatable<MemSeg>, IHashed
+    public readonly struct MemorySeg : IMemorySegment, ITextual, IEquatable<MemorySeg>, IHashed
     {
         public const byte StorageSize = 16;
 
         readonly Vector128<ulong> Segment;
 
         [MethodImpl(Inline)]
-        public unsafe MemSeg(byte* src, ByteSize size)
+        public unsafe MemorySeg(byte* src, ByteSize size)
             => Segment = Create((ulong)src, (ulong)size);
 
         [MethodImpl(Inline)]
-        public MemSeg(MemoryAddress src, ByteSize size)
+        public MemorySeg(MemoryAddress src, ByteSize size)
             => Segment = Create((ulong)src, (ulong)size);
 
         [MethodImpl(Inline)]
-        public MemSeg(MemoryRange range)
+        public MemorySeg(MemoryRange range)
             : this(range.Min, range.Size)
         {
 
@@ -130,21 +129,25 @@ namespace Z0
             => alg.hash.calc(Segment);
 
         [MethodImpl(Inline)]
-        public bool Equals(MemSeg src)
+        public bool Equals(MemorySeg src)
             => src.Segment.Equals(Segment);
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<ulong>(in MemSeg src)
+        public unsafe MemorySpan ToSpan()
+            => new MemorySpan(Range, memory.edit(Pointer(), Size));
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<ulong>(in MemorySeg src)
             => src.Segment;
 
         uint IHashed.Hash
             => Hash();
 
-        bool IEquatable<MemSeg>.Equals(MemSeg src)
+        bool IEquatable<MemorySeg>.Equals(MemorySeg src)
             => Equals(src);
 
         public override bool Equals(object src)
-            => src is MemSeg x && Equals(x);
+            => src is MemorySeg x && Equals(x);
 
         public override string ToString()
             => Format();
@@ -152,7 +155,7 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hash();
 
-        public static MemSeg Empty
+        public static MemorySeg Empty
             => default;
     }
 }

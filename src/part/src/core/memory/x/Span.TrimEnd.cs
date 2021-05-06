@@ -23,7 +23,7 @@ namespace Z0
                 if(skip(src,(uint)i) != 0)
                     return slice(src, 0, length);
             }
-            return Span<byte>.Empty;
+            return default;
         }
     }
 }

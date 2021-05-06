@@ -21,12 +21,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> load<T>(MemSeg src)
+        public static ReadOnlySpan<T> load<T>(MemorySeg src)
             where T : struct
                 => src.Load<T>();
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> load(ReadOnlySpan<MemSeg> src, MemorySlot n)
+        public static ReadOnlySpan<byte> load(ReadOnlySpan<MemorySeg> src, MemorySlot n)
             => segment(src,n).Load();
 
         [MethodImpl(Inline)]

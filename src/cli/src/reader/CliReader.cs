@@ -10,7 +10,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.PortableExecutable;
     using System.Reflection.Metadata.Ecma335;
-    using System.IO;
 
     using static Part;
     using static memory;
@@ -45,7 +44,7 @@ namespace Z0
             => new CliReader(src);
 
         [Op]
-        public static CliReader create(MemSeg src)
+        public static CliReader create(MemorySeg src)
             => new CliReader(src);
 
         [Op]
@@ -63,7 +62,7 @@ namespace Z0
 
         readonly MetadataReader MD;
 
-        readonly MemSeg Segment;
+        readonly MemorySeg Segment;
 
         [MethodImpl(Inline)]
         public CliReader(Assembly src)
@@ -73,7 +72,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CliReader(MemSeg src)
+        public CliReader(MemorySeg src)
         {
             Segment = src;
             MD = new MetadataReader(Segment.BaseAddress.Pointer<byte>(), Segment.Size);

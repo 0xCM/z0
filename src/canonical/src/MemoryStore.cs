@@ -15,19 +15,19 @@ namespace Z0
         public static MemoryStore Service => default;
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<byte> Load(MemSeg src)
+        public ReadOnlySpan<byte> Load(MemorySeg src)
             => src.Load();
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<byte> Load(ReadOnlySpan<MemSeg> src, MemorySlot n)
+        public ReadOnlySpan<byte> Load(ReadOnlySpan<MemorySeg> src, MemorySlot n)
             => memory.load(src,n);
 
         [MethodImpl(Inline), Op]
-        public ref readonly byte Cell(ReadOnlySpan<MemSeg> src, MemorySlot n, int i)
+        public ref readonly byte Cell(ReadOnlySpan<MemorySeg> src, MemorySlot n, int i)
             => ref memory.cell(src,n,i);
 
         [MethodImpl(Inline)]
-        public ulong Sib(ReadOnlySpan<MemSeg> refs, in MemorySlot n, int i, byte scale, ushort offset)
+        public ulong Sib(ReadOnlySpan<MemorySeg> refs, in MemorySlot n, int i, byte scale, ushort offset)
             => memory.sib(refs, n, i, scale, offset);
     }
 }

@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     using static memory;
-    using static Cil;
 
     using Z0.Asm;
 
@@ -61,7 +59,7 @@ namespace Z0
                 Process(skip(sources,i), store);
         }
 
-        unsafe void Process(in MemSeg src, Index<MemSeg> store)
+        unsafe void Process(in MemorySeg src, Index<MemorySeg> store)
         {
             var reader = memory.reader(src.BaseAddress.Pointer<byte>(), src.Length);
             var dstA = memory.span<byte>(src.Length);

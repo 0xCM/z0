@@ -11,14 +11,15 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> view<T>(MemoryAddress src, int count)
-            where T : unmanaged
-                => cover<T>(src.Ref<T>(), (uint)count);
-
+        /// <summary>
+        /// Presents a readonly view of a memory segment beginning at a specified base covering a specified <typeparamref name='T'/> cell count
+        /// </summary>
+        /// <param name="src">The base adress</param>
+        /// <param name="count">The number of cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(MemoryAddress src, uint count)
-            where T : unmanaged
+            where T : struct
                 => cover<T>(src.Ref<T>(), count);
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> view<T>(MemSeg src)
+        public static ReadOnlySpan<T> view<T>(MemorySeg src)
             => cover(src.BaseAddress.Ref<T>(), count<T>(src));
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct memory
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint count<T>(MemSeg src)
+        public static uint count<T>(MemorySeg src)
             => (uint)(src.Length/size<T>());
     }
 }

@@ -9,14 +9,14 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ResSegment
+    public readonly struct ResSeg
     {
         public Name Name {get;}
 
-        public MemSeg Segment {get;}
+        public MemorySeg Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResSegment(Name name, in MemSeg segment)
+        public ResSeg(Name name, in MemorySeg segment)
         {
             Name = name;
             Segment = segment;

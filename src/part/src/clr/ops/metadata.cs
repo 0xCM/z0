@@ -18,12 +18,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [MethodImpl(Inline), Op]
-        public static unsafe MemSeg metadata(Assembly src)
+        public static unsafe MemorySeg metadata(Assembly src)
         {
             if(src.TryGetRawMetadata(out var ptr, out var len))
-                return new MemSeg(ptr,len);
+                return new MemorySeg(ptr,len);
             else
-                return MemSeg.Empty;
+                return MemorySeg.Empty;
         }
     }
 }

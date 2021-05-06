@@ -8,26 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Deefines a reference to a <see cref='FieldInfo'/>
     /// </summary>
     public readonly struct FieldRef : INullity
     {
-        public MemSeg Segment {get;}
+        public MemorySeg Segment {get;}
 
         public FieldInfo Field {get;}
 
         [MethodImpl(Inline)]
-        public FieldRef(FieldInfo field, MemSeg seg)
+        public FieldRef(FieldInfo field, MemorySeg seg)
         {
             Segment = seg;
             Field = field;
         }
 
         [MethodImpl(Inline)]
-        public FieldRef(MemSeg seg, FieldInfo field)
+        public FieldRef(MemorySeg seg, FieldInfo field)
         {
             Segment = seg;
             Field = field;
@@ -239,10 +239,10 @@ namespace Z0
         }
 
         public static FieldRef Empty
-            => new FieldRef(EmptyVessels.EmptyField, MemSeg.Empty);
+            => new FieldRef(EmptyVessels.EmptyField, MemorySeg.Empty);
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldRef((FieldInfo field, MemSeg location) src)
+        public static implicit operator FieldRef((FieldInfo field, MemorySeg location) src)
             => new FieldRef(src.location, src.field);
     }
 }

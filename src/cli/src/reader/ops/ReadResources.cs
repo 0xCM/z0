@@ -11,7 +11,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ImageRecords;
 
     partial class ImageMetaReader
     {
@@ -27,7 +26,7 @@ namespace Z0
             => CliReader.Read(src);
 
         [Op]
-        public unsafe bool ResourceSearch(string name, out ResSegment dst)
+        public unsafe bool ResourceSearch(string name, out ResSeg dst)
         {
             dst = default;
 
@@ -42,7 +41,7 @@ namespace Z0
                     var blobReader = directory.GetReader((int)description.Offset, directory.Length - (int)description.Offset);
                     var length = blobReader.ReadUInt32();
                     MemoryAddress address = blobReader.CurrentPointer;
-                    dst = new ResSegment(name, new MemSeg(address,length));
+                    dst = new ResSeg(name, new MemorySeg(address,length));
                     return true;
                 }
             }
@@ -50,11 +49,11 @@ namespace Z0
         }
 
         [Op]
-        public unsafe ReadOnlySpan<ResSegment> ReadResSegments()
+        public unsafe ReadOnlySpan<ResSeg> ReadResSegments()
         {
             var resources = ReadResDescriptions();
             var count = resources.Length;
-            var dst = span<ResSegment>(count);
+            var dst = span<ResSeg>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var res = ref skip(resources, i);
@@ -62,7 +61,7 @@ namespace Z0
                 var blobReader = resdir.GetReader((int)res.Offset, resdir.Length - (int)res.Offset);
                 var length = blobReader.ReadUInt32();
                 MemoryAddress address = blobReader.CurrentPointer;
-                seek(dst,i) = new ResSegment(res.Name, new MemSeg(address,length));
+                seek(dst,i) = new ResSeg(res.Name, new MemorySeg(address,length));
             }
             return dst;
         }

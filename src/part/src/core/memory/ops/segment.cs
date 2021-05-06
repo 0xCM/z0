@@ -12,15 +12,15 @@ namespace Z0
     partial struct memory
     {
         [MethodImpl(Inline), Op]
-        public static MemSeg segment(MemoryAddress min, MemoryAddress max)
-            => new MemSeg(range(min,max));
+        public static MemorySeg segment(MemoryAddress min, MemoryAddress max)
+            => new MemorySeg(range(min,max));
 
         [MethodImpl(Inline), Op]
-        public static unsafe MemSeg segment(byte* pSrc, ByteSize size)
-            => new MemSeg(pSrc,size);
+        public static unsafe MemorySeg segment(byte* pSrc, ByteSize size)
+            => new MemorySeg(pSrc,size);
 
         [MethodImpl(Inline), Op]
-        public static ref readonly MemSeg segment(ReadOnlySpan<MemSeg> refs, MemorySlot n)
+        public static ref readonly MemorySeg segment(ReadOnlySpan<MemorySeg> refs, MemorySlot n)
             => ref cell(refs, n);
 
         /// <summary>

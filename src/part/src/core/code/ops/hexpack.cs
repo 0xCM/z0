@@ -13,8 +13,10 @@ namespace Z0
 
     partial struct CodeBlocks
     {
+        const string HexPackLine = "x{0:x}[{1:D5}:{2:D5}]=<{3}>";
+
         [MethodImpl(Inline), Op]
-        public static uint pack(ReadOnlySpan<byte> src, Span<char> dst)
+        static uint hexchars(ReadOnlySpan<byte> src, Span<char> dst)
         {
             var j = 0u;
             var count = root.min(src.Length, dst.Length);
@@ -28,7 +30,7 @@ namespace Z0
         }
 
         [Op]
-        public static ByteSize pack(ReadOnlySpan<ApiCodeBlock> src, Span<HexPacked> dst, Span<char> buffer)
+        public static ByteSize hexpack(ReadOnlySpan<ApiCodeBlock> src, Span<HexPacked> dst, Span<char> buffer)
         {
             var count = (uint)root.min(src.Length, dst.Length);
             var size = 0ul;
@@ -40,26 +42,22 @@ namespace Z0
                 package.Index = i;
                 package.Address = block.BaseAddress;
                 package.Size = block.Size;
-                package.Data = text.format(slice(buffer,0, pack(block.View, buffer)));
+                package.Data = text.format(slice(buffer,0, hexchars(block.View, buffer)));
                 size += package.Size;
             }
             return size;
         }
 
         [Op]
-        public static ByteSize pack(ReadOnlySpan<ApiCodeBlock> src, Span<HexPacked> dst)
-            => pack(src,dst, alloc<char>(48400));
-
-        [Op]
-        public static HexPack pack(ReadOnlySpan<ApiExtractBlock> src)
+        public static HexPack hexpack(ReadOnlySpan<ApiExtractBlock> src)
         {
             var count = src.Length;
             var buffer = alloc<MemoryBlock>(count);
-            return pack(src, buffer);
+            return hexpack(src, buffer);
         }
 
         [Op]
-        public static HexPack pack(Index<MemoryBlock> src)
+        public static HexPack hexpack(Index<MemoryBlock> src)
         {
             var count = src.Length;
             if(count == 0)
@@ -69,7 +67,7 @@ namespace Z0
         }
 
         [Op]
-        public static HexPack pack(ReadOnlySpan<ApiCodeBlock> src)
+        public static HexPack hexpack(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             if(count == 0)
@@ -81,7 +79,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var code = ref skip(src,i);
-                seek(dst,i) = memory.block(code.Origin, code.Encoded);
+                seek(dst,i) = memory.memblock(code.Origin, code.Encoded);
                 if(code.Length > max)
                     max = code.Length;
             }
@@ -91,7 +89,7 @@ namespace Z0
         }
 
         [Op]
-        public static HexPack pack(ReadOnlySpan<ApiMemberExtract> src)
+        public static HexPack hexpack(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             if(count == 0)
@@ -104,7 +102,7 @@ namespace Z0
             {
                 ref readonly var code = ref skip(src,i);
                 var encoded = code.Block.Encoded;
-                seek(dst,i) = memory.block(code.Origin, encoded);
+                seek(dst,i) = memory.memblock(code.Origin, encoded);
                 if(encoded.Length > max)
                     max = encoded.Length;
             }
@@ -114,7 +112,7 @@ namespace Z0
         }
 
         [Op]
-        public static HexPack pack(ReadOnlySpan<ApiExtractBlock> src, Index<MemoryBlock> buffer)
+        public static HexPack hexpack(ReadOnlySpan<ApiExtractBlock> src, Index<MemoryBlock> buffer)
         {
             var count = src.Length;
             if(count == 0)
@@ -126,7 +124,7 @@ namespace Z0
             {
                 ref readonly var extract = ref skip(src,i);
                 var data = extract.Data;
-                seek(dst,i) = memory.block(extract.Origin, data);
+                seek(dst,i) = memory.memblock(extract.Origin, data);
                 if(data.Length > max)
                     max = data.Length;
             }

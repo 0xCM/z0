@@ -63,11 +63,11 @@ namespace Z0
             => new StringRef(address, (uint)length);
 
         /// <summary>
-        /// Creates a <see cref='StringRef'/> from a specified <see cref='MemSeg'/>
+        /// Creates a <see cref='StringRef'/> from a specified <see cref='MemorySeg'/>
         /// </summary>
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
-        public static StringRef create(MemSeg src)
+        public static StringRef create(MemorySeg src)
             => new StringRef(Create(src.BaseAddress, (ulong)src.Length));
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace Z0
             => src.GetElement(0);
 
         [MethodImpl(Inline)]
-        public StringRef(in MemSeg src)
+        public StringRef(in MemorySeg src)
             => Data = Create((ulong)src.BaseAddress, (ulong)src.Length);
 
         [MethodImpl(Inline)]
@@ -300,7 +300,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static StringRef empty()
-            => new StringRef(MemSeg.Empty);
+            => new StringRef(MemorySeg.Empty);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -310,7 +310,7 @@ namespace Z0
             => Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator StringRef(MemSeg src)
+        public static implicit operator StringRef(MemorySeg src)
             => new StringRef(src);
 
         [MethodImpl(Inline)]

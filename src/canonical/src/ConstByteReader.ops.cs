@@ -14,11 +14,11 @@ namespace Z0
     partial struct ConstBytesReader
     {
         [MethodImpl(Inline), Op]
-        public static MemSeg[] refs(ConstBytes256 src)
+        public static MemorySeg[] refs(ConstBytes256 src)
              => src.SegRefs();
 
         [Op]
-        public static void addresses(Index<MemSeg> src, Span<MemoryAddress> dst)
+        public static void addresses(Index<MemorySeg> src, Span<MemoryAddress> dst)
         {
             var view = src.View;
             var kSegs = view.Length;
@@ -81,7 +81,7 @@ namespace Z0
             => src.SegLeads();
 
         [Op]
-        public static ReadOnlySpan<MemoryAddress> addresses(ConstBytes256 src, Index<MemSeg> store)
+        public static ReadOnlySpan<MemoryAddress> addresses(ConstBytes256 src, Index<MemorySeg> store)
         {
             var sources = store.View;
             var results = sys.alloc<MemoryAddress>(sources.Length);
@@ -90,7 +90,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static MemSeg segment(ConstBytes256 src, byte n)
+        public static MemorySeg segment(ConstBytes256 src, byte n)
         {
             if(n == 0)
                 return segment(src, n0);
@@ -113,16 +113,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe MemSeg segment<N>(ConstBytes256 src, N n = default)
+        public static unsafe MemorySeg segment<N>(ConstBytes256 src, N n = default)
             where N : unmanaged, ITypeNat
         {
             var buffer = span<N>(src, n);
             var pSrc = gptr(memory.first(buffer));
-            return new MemSeg(pSrc, buffer.Length);
+            return new MemorySeg(pSrc, buffer.Length);
          }
 
         [MethodImpl(Inline), Op]
-        public static Index<MemSeg> segments(ConstBytes256 src)
+        public static Index<MemorySeg> segments(ConstBytes256 src)
             => src.SegRefs();
 
         [MethodImpl(Inline), Op]
@@ -185,7 +185,7 @@ namespace Z0
 
             readonly ConstBytesReader Reader;
 
-            readonly MemSeg[] Refs;
+            readonly MemorySeg[] Refs;
 
             readonly MemoryStore Stores;
 

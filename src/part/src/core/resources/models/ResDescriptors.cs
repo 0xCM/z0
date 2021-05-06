@@ -32,7 +32,7 @@ namespace Z0
             {
                 ref readonly var name = ref skip(resnames, i);
                 var stream = (UnmanagedMemoryStream)src.GetManifestResourceStream(name);
-                seek(target,i) = ResDescriptor.define(name, stream.PositionPointer, (uint)stream.Length);
+                seek(target,i) = Resources.descriptor(name, stream.PositionPointer, (uint)stream.Length);
             }
             return buffer;
         }

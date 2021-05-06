@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using static memory;
-
     partial class ApiExtractor
     {
         uint EmitRawExtractData(ApiHostUri host, ReadOnlySpan<ApiMemberExtract> src)
@@ -15,9 +13,8 @@ namespace Z0.Asm
             var count = (uint)src.Length;
             if(count == 0)
                 return 0;
-            var dst = Paths.RawExtractPath(host);
-            var packed = CodeBlocks.pack(src);
-            HexPacks.Emit(packed, dst);
+
+            HexPacks.Emit(CodeBlocks.hexpack(src), Paths.RawExtractPath(host));
             return count;
         }
     }

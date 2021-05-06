@@ -12,19 +12,14 @@ namespace Z0
     partial struct memory
     {
         [MethodImpl(Inline), Op]
-        public static MemoryBlock block(MemoryRange origin, BinaryCode data)
+        public static MemoryBlock memblock(MemoryRange origin, BinaryCode data)
             => new MemoryBlock(origin, data);
 
         [Op]
-        public static unsafe MemoryBlock block(byte* pSrc, ByteSize size)
+        public static unsafe MemoryBlock memblock(byte* pSrc, ByteSize size)
         {
-            var start = address(pSrc);
-            var end = start + size;
-            MemoryRange range = (start,end);
-            var dst = alloc<byte>(size);
-            var read = reader(pSrc,size);
-            read.ReadAll(dst);
-            return block(range, dst);
+            var slice = memspan(pSrc,size);
+            return memblock(slice.Origin, slice.Edit.ToArray());
         }
     }
 }

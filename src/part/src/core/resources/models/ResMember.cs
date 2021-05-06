@@ -17,10 +17,10 @@ namespace Z0
     {
         public MemberInfo Member {get;}
 
-        public MemSeg Segment {get;}
+        public MemorySeg Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResMember(MemberInfo member, MemSeg seg)
+        public ResMember(MemberInfo member, MemorySeg seg)
         {
             Member = member;
             Segment = seg;

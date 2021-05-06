@@ -12,14 +12,22 @@ namespace Z0
 
     public sealed class ApiResProvider : AppService<ApiResProvider>
     {
-        public Index<ApiResAccessor> PackagedCode()
+        public FS.FilePath ResPackPath()
+            => Db.Package("respack") + FS.file("z0.respack", FS.Dll);
+
+        public MemoryFile MapResPack()
+            => MemoryFiles.map(ResPackPath());
+
+        public Index<ApiResAccessor> ResPackAccessors()
         {
-            var package = Db.Package("respack");
-            var path = package + FS.file("z0.respack.dll");
+            var path = ResPackPath();
+            var flow = Wf.Running(Msg.LoadingRespackAccessors.Format(path));
             if(!path.Exists)
                 root.@throw(FS.Msg.DoesNotExist.Format(path));
             var assembly = Assembly.LoadFrom(path.Name);
-            return Resources.accessors(assembly);
+            var loaded = Resources.accessors(assembly);
+            Wf.Ran(flow, Msg.LoadedRespackAccessors.Format(loaded.Count, path));
+            return loaded;
         }
 
         public static ApiHostRes hosted(ApiHostBlocks src)

@@ -158,21 +158,17 @@ namespace Z0.Asm
             Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
-        void EmitByteCode()
+        void EmitPacked(FS.FilePath dst)
         {
-            var package = Db.Package("respack");
-            var path = package + FS.file("z0.respack.dll");
-            var exists = path.Exists ? "Exists" : "Missing";
-            Wf.Status($"{path} | {exists}");
-            var assembly = Assembly.LoadFrom(path.Name);
             var provider = Wf.ApiResProvider();
-            var accessors = provider.PackagedCode().View;
+            var path = provider.ResPackPath();
+            var assembly = Assembly.LoadFrom(path.Name);
+            var accessors = provider.ResPackAccessors().View;
             var count = accessors.Length;
-            var dst = Db.AppLog("respack", FS.Asm);
             var decoder = Wf.AsmDecoder();
             var buffer = text.buffer();
             var sequence = 0u;
-            var segments = root.list<MemSeg>(30000);
+            var segments = root.list<MemorySeg>(30000);
             using var writer = dst.Writer();
             using var hexout = dst.ChangeExtension(FS.Hex).Writer();
             for(var i=0; i<count; i++)
@@ -213,7 +209,6 @@ namespace Z0.Asm
                 hexout.WriteLine();
 
                 segments.Add(Resources.capture(accessor));
-
                 sequence++;
             }
 
@@ -1574,8 +1569,6 @@ namespace Z0.Asm
                 if(skip(target,i) != 2*i)
                     Wf.Error("Good allocation gone bad?");
             }
-
-
         }
 
         unsafe static void Emit(MemoryRange src, FS.FilePath dst)
@@ -1612,22 +1605,28 @@ namespace Z0.Asm
             }
         }
 
-        Z0.MemoryFile OpenResPack()
-        {
-            var path = Wf.Db().Package("respack") + FS.file("z0.respack", FS.Dll);
-            var map = MemoryFiles.map(path);
-            return map;
-        }
+        // Z0.MemoryFile OpenResPack()
+        // {
+        //     var path = Wf.Db().Package("respack") + FS.file("z0.respack", FS.Dll);
+        //     var map = MemoryFiles.map(path);
+        //     return map;
+        // }
 
         public void Run()
         {
 
-            using var map = OpenResPack();
-            var @base = map.BaseAddress;
-            var sig = map.View(0, 2).AsUInt16();
-            var info = map.Description;
-            Wf.Row(Tables.format(info));
-            var range = MemoryRange.define(@base, map.Size);
+            EmitPacked(Db.AppLog("respack", FS.Asm));
+
+            var unpacker = ResPackUnpacker.create(Wf);
+            unpacker.Emit(Db.AppLogDir());
+
+            // var provider = Wf.ApiResProvider();
+            // using var map = provider.MapResPack();
+            // var @base = map.BaseAddress;
+            // var sig = map.View(0, 2).AsUInt16();
+            // var info = map.Description;
+            // Wf.Row(Tables.format(info));
+            // var range = MemoryRange.define(@base, map.Size);
 
             // MemoryAddress address = 0x22a_f0_2b_50_00;
             // Wf.Row(string.Format("{0}:{1}", address.Quadrant(n2), address.Lo));

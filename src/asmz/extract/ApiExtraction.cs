@@ -29,7 +29,7 @@ namespace Z0.Asm
 
             var origin = new MemoryRange(src.Address, size);
             var data = slice(src.Encoded.View,0, size);
-            return memory.block(origin, data.ToArray());
+            return memory.memblock(origin, data.ToArray());
         }
 
         [Op]

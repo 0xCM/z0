@@ -151,11 +151,11 @@ namespace Z0
             => CreateSpan(ref seek(first(src), offset), (int)length);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> slice(ReadOnlySpan<MemSeg> refs, MemorySlot n, int offset)
+        public static ReadOnlySpan<byte> slice(ReadOnlySpan<MemorySeg> refs, MemorySlot n, int offset)
             => slice(load(refs, n),offset);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> slice(ReadOnlySpan<MemSeg> refs, MemorySlot n, int offset, int length)
+        public static ReadOnlySpan<byte> slice(ReadOnlySpan<MemorySeg> refs, MemorySlot n, int offset, int length)
             => slice(load(refs,n), offset, length);
     }
 }
