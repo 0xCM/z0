@@ -14,8 +14,6 @@ public enum PartId : ulong
 
     Part = 2,
 
-    Konst = 3,
-
     Math = 4,
 
     Core = 5,
@@ -84,10 +82,6 @@ public enum PartId : ulong
 
     Canonical = 62,
 
-    CmdSpec = 63,
-
-    CmdExec = 64,
-
     Tables = 65,
 
     Gather = 66 | Shell,
@@ -152,9 +146,9 @@ public enum PartId : ulong
 
     AsmRun = 128,
 
-    External = 130,
-
     Capture = 131,
+
+    CaptureChecks = Capture | Checkers,
 
     Evaluate = 132,
 
@@ -227,9 +221,12 @@ public enum PartId : ulong
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------
 
+    Checkers = byte.MaxValue + 1,
+
     Shell = ushort.MaxValue  + 1,
 
     Svc = Shell << 1,
 
     Test = Shell << 2,
+
 }

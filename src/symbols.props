@@ -34,6 +34,8 @@
 
     <Calc>$(Src)calc/z0.calc.csproj</Calc>
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
+    <CaptureChecks>$(Src)capture.checks/z0.capture.checks.csproj</CaptureChecks>
+
     <Check>$(Src)check/z0.check.csproj</Check>
     <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
     <Cli>$(Src)cli/z0.cli.csproj</Cli>

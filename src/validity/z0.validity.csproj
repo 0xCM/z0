@@ -13,7 +13,7 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Calc)" />
-    <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(CaptureChecks)" />
   </ItemGroup>
 
 </Project>
