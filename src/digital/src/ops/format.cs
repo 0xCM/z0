@@ -27,6 +27,7 @@ namespace Z0
             return text.@string(dst);
         }
 
+
         public static string format<C>(C @case, ReadOnlySpan<HexDigit> src)
             where C : unmanaged, ILetterCase
                 => Hex.format(@case, src);

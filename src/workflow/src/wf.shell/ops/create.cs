@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static TextRules;
-
     partial class WfRuntime
     {
         [Op]
@@ -39,7 +37,7 @@ namespace Z0
             {
                 var fence = text.fence(Chars.LBrace, Chars.RBrace);
                 var enclosed = Rules.enclose(text.join(RP.CommaJoin, partIdList), fence);
-                var content = Format.format(enclosed);
+                var content = text.format(enclosed);
                 var prop = text.prop("Parts", content);
                 var msg = AppMsg.status(prop);
                 term.inform(msg);

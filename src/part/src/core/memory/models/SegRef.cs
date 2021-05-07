@@ -101,21 +101,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(SegRef a, SegRef b)
             => !a.Equals(b);
-
-        // [MethodImpl(Inline)]
-        // static unsafe Span<byte> cover(MemoryAddress location, uint count)
-        //     => cover<byte>((void*)location, count);
-
-        // [MethodImpl(Inline)]
-        // static unsafe Span<T> cover<T>(ulong location, uint count)
-        //     => cover<T>((void*)location, count);
-
-        // [MethodImpl(Inline)]
-        // static unsafe Span<T> cover<T>(void* pSrc, uint count)
-        //     => CreateSpan(ref @as<T>(pSrc), (int)count);
-
-        // [MethodImpl(Inline)]
-        // static unsafe ref T @as<T>(void* pSrc)
-        //     => ref AsRef<T>(pSrc);
     }
 }

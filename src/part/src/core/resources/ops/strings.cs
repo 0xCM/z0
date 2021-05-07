@@ -41,7 +41,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var fv = ref skip(values,i);
-                seek(dst,i) = define(@as<uint,T>(i),address(fv.Right), (uint)fv.Right.Length);
+                seek(dst,i) = define(@as<uint,T>(i), address(fv.Right), (uint)fv.Right.Length*2);
             }
             return buffer;
         }

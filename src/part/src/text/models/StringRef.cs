@@ -36,13 +36,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Creates a <see cref='StringRef'/> from a specified <see cref='string'/> and optional user data
+        /// Creates a <see cref='StringRef'/> from a specified <see cref='string'/>
         /// </summary>
         /// <param name="src">The source string</param>
         /// <param name="user">The user data, if any</param>
         [MethodImpl(Inline), Op]
-        public static unsafe StringRef create(string src, uint user = 0)
-            => new StringRef((ulong)pchar(src), (uint)src.Length, user);
+        public static unsafe StringRef create(string src)
+            => new StringRef((ulong)pchar(src), (uint)src.Length);
 
         /// <summary>
         /// Creates a <see cref='StringRef'/> from a specified <see cref='MemoryAddress'/> and memory size
@@ -50,17 +50,8 @@ namespace Z0
         /// <param name="address">The reference address</param>
         /// <param name="length">The size, in bytes, of the segment</param>
         [MethodImpl(Inline), Op]
-        public static StringRef create(MemoryAddress address, uint length)
-            => new StringRef(address, length);
-
-        /// <summary>
-        /// Creates a <see cref='StringRef'/> from a specified <see cref='MemoryAddress'/> and memory size
-        /// </summary>
-        /// <param name="address">The reference address</param>
-        /// <param name="length">The size, in bytes, of the segment</param>
-        [MethodImpl(Inline), Op]
-        public static StringRef create(MemoryAddress address, int length)
-            => new StringRef(address, (uint)length);
+        public static StringRef create(MemoryAddress address, ByteSize size)
+            => new StringRef(address, size*2);
 
         /// <summary>
         /// Creates a <see cref='StringRef'/> from a specified <see cref='MemorySeg'/>
@@ -68,14 +59,6 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         public static StringRef create(MemorySeg src)
-            => new StringRef(Create(src.BaseAddress, (ulong)src.Length));
-
-        /// <summary>
-        /// Creates a <see cref='StringRef'/> from a specified <see cref='SegRef'/>
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        [MethodImpl(Inline), Op]
-        public static StringRef create(SegRef src)
             => new StringRef(Create(src.BaseAddress, (ulong)src.Length));
 
         /// <summary>
@@ -154,6 +137,14 @@ namespace Z0
         public static unsafe ReadOnlySpan<char> view(in StringRef src)
             => cover<char>(src.BaseAddress.Pointer<char>(), (uint)src.Length);
 
+        /// <summary>
+        /// Reveals the character data identified by a string reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ReadOnlySpan<byte> bytes(in StringRef src)
+            => memory.bytes(view(src));
+
         [Op]
         public static void store(in StringRef src, ref char dst, uint offset = 0)
         {
@@ -172,15 +163,8 @@ namespace Z0
             => memory.cover<char>(src.BaseAddress.Pointer<char>(), (uint)src.Length);
 
         [MethodImpl(Inline), Op]
-        static ref ulong pack(uint length, uint user, out ulong dst)
-        {
-            dst = (ulong)length | ((ulong)user << 32);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        static Vector128<ulong> pack(MemoryAddress address, uint length, uint user)
-            => Create((ulong)address, pack(length*memory.scale<char>(), user, out var dst));
+        static Vector128<ulong> pack(MemoryAddress address, uint length)
+            => Create((ulong)address, (ulong)length);
 
         [MethodImpl(Inline), Op]
         static void unpack(ulong src, out uint length, out uint user)
@@ -189,27 +173,20 @@ namespace Z0
             user  = (uint)(src >> 32);
         }
 
-        [MethodImpl(Inline)]
-        static uint length(Vector128<ulong> src)
-        {
-            unpack(src.GetElement(1), out var size, out var _);
-            return size/memory.scale<char>();
-        }
-
         [MethodImpl(Inline), Op]
         static MemoryAddress location(Vector128<ulong> src)
             => src.GetElement(0);
 
         [MethodImpl(Inline)]
-        public StringRef(in MemorySeg src)
+        StringRef(in MemorySeg src)
             => Data = Create((ulong)src.BaseAddress, (ulong)src.Length);
 
         [MethodImpl(Inline)]
-        public StringRef(MemoryAddress address, uint length, uint user = 0)
-            => Data = pack(address, length, user);
+        StringRef(MemoryAddress address, uint length)
+            => Data = pack(address, length);
 
         [MethodImpl(Inline)]
-        public StringRef(Vector128<ulong> data)
+        StringRef(Vector128<ulong> data)
             => Data = data;
 
         [MethodImpl(Inline)]
@@ -220,6 +197,13 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data;
+        }
+
+        [MethodImpl(Inline)]
+        static uint length(Vector128<ulong> src)
+        {
+            unpack(src.GetElement(1), out var size, out var _);
+            return size/memory.scale<char>();
         }
 
         /// <summary>
@@ -319,6 +303,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe implicit operator StringRef(string src)
-            => new StringRef((ulong)memory.pchar(src), (uint)src.Length);
+            => create(src);
    }
 }

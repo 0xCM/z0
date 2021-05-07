@@ -19,14 +19,11 @@ namespace Z0
 
         Cell128 _Value;
 
-        bool IsString;
-
         [MethodImpl(Inline)]
         public CmdVar(K id)
         {
             Id = id;
             _Value = default;
-            IsString = false;
         }
 
         [MethodImpl(Inline)]
@@ -34,15 +31,6 @@ namespace Z0
         {
             Id = id;
             _Value = value;
-            IsString = false;
-        }
-
-        [MethodImpl(Inline)]
-        public CmdVar(K id, string value)
-        {
-            Id = id;
-            _Value = @ref(value).Storage;
-            IsString = true;
         }
 
         public Cell128 Value
@@ -64,12 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-        {
-            if(IsString)
-                return (new StringRef(_Value)).Format();
-            else
-                return _Value.Format();
-        }
+            => _Value.Format();
 
         public override string ToString()
             => Format();
@@ -81,15 +64,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdVar<K>(Paired<K,Cell128> src)
             => new CmdVar<K>(src.Left, src.Right);
-
-
-        /// <summary>
-        /// Creates a reference to a string
-        /// </summary>
-        /// <param name="src">The source string</param>
-        [MethodImpl(Inline), Op]
-        static unsafe StringRef @ref(string src)
-            => new StringRef((ulong)memory.pchar(src), (uint)src.Length);
-
     }
 }

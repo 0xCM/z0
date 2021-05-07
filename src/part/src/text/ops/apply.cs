@@ -15,6 +15,36 @@ namespace Z0
     partial class text
     {
         [Op]
+        public static Index<string> apply(SeqSplit<char> rule, string src)
+        {
+            var output = root.list<string>();
+            var len = src?.Length ?? 0;
+            var buffer = memory.span<char>(len);
+            var input = memory.span(src);
+            var j = 0;
+            for(var i=0; i<len; i++)
+            {
+                ref readonly var c = ref skip(input,i);
+                if(c == rule.Delimiter)
+                {
+                    if(j != 0)
+                    {
+                        output.Add(text.format(memory.slice(buffer, 0, j)));
+                        buffer.Clear();
+                        j=0;
+                    }
+                }
+                else
+                    seek(buffer,j++) = c;
+            }
+
+            if(j != 0)
+                output.Add(text.format(memory.slice(buffer, 0, j)));
+
+            return output.ToArray();
+        }
+
+        [Op]
         public static unsafe string apply(Replace<char> rule, string src)
         {
             var count = text.length(src);

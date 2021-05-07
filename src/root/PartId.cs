@@ -2,7 +2,6 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-
 /// <summary>
 /// Defines identifiers for assemblies that comprise this ... monstrosity?
 /// </summary>
@@ -12,7 +11,9 @@ public enum PartId : ulong
 
     Root = 1,
 
-    Part = 2,
+    External = 2,
+
+    Part = 3,
 
     Math = 4,
 

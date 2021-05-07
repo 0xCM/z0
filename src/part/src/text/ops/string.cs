@@ -6,16 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Part;
     using static memory;
 
     partial class text
     {
-        [MethodImpl(Inline), Op]
-        public static string @string(ReadOnlySpan<char> src)
-            => sys.@string(src);
-
         /// <summary>
         /// Returns a string of length 1 that corresponds to the specified asci code
         /// </summary>

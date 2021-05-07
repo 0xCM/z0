@@ -6,15 +6,61 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text.Encodings;
     using System.Text;
 
     using static Part;
     using static TextRules;
+    using static Rules;
     using static RP;
 
     partial class text
     {
+        [Op]
+        public static string @string(ReadOnlySpan<char> src)
+            => format(memory.bytes(src));
+
+        /// <summary>
+        /// Creates a string from a span, via UTF8 encoding
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [Op, Doc("https://github.com/microsoft/ClangSharp/blob/6355b742f73915a21d18f74227f5c504b75bd976/sources/ClangSharp/Internals/SpanExtensions.cs")]
+        public static unsafe string format(ReadOnlySpan<byte> src)
+        {
+            if(src.IsEmpty)
+                return EmptyString;
+
+            fixed(byte* pSrc = src)
+                return Encoding.UTF8.GetString(pSrc, src.Length);
+        }
+
+        /// <summary>
+        /// Creates a string from a span, via Unicode encoding
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [Op, Doc("https://github.com/microsoft/ClangSharp/blob/6355b742f73915a21d18f74227f5c504b75bd976/sources/ClangSharp/Internals/SpanExtensions.cs")]
+        public static unsafe string format(ReadOnlySpan<ushort> src)
+        {
+            if(src.IsEmpty)
+                return EmptyString;
+
+            fixed(ushort* pSrc = src)
+                return Encoding.Unicode.GetString((byte*)pSrc, src.Length * 2);
+        }
+
+        /// <summary>
+        /// Creates a string from a span, via UTF32 encoding
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op, Doc("https://github.com/microsoft/ClangSharp/blob/6355b742f73915a21d18f74227f5c504b75bd976/sources/ClangSharp/Internals/SpanExtensions.cs")]
+        public static unsafe string format(ReadOnlySpan<uint> src)
+        {
+            if(src.IsEmpty)
+                return EmptyString;
+
+            fixed(uint* pSrc = src)
+                return Encoding.UTF32.GetString((byte*)pSrc, src.Length * 4);
+        }
+
         [Op, Closures(Closure)]
         public static string format<T>(PropFormat<T> src, char sep = RP.PropertySep)
             => string.Format("{0}{1}{2}",
@@ -53,23 +99,44 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<char> src)
-            => Format.format(src);
+            => new string(src);
 
         [MethodImpl(Inline), Op]
         public static string format(string pattern, ReadOnlySpan<char> a0)
-            => Format.format(pattern, a0);
+            => string.Format(pattern, a0.ToString());
 
         [MethodImpl(Inline), Op]
         public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1)
-            => Format.format(pattern, a0, a1);
+            => string.Format(pattern, a0.ToString(), a1.ToString());
 
         [MethodImpl(Inline), Op]
         public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1, ReadOnlySpan<char> a2)
-            => Format.format(pattern, a0, a1, a2);
+            => string.Format(pattern, a0.ToString(), a1.ToString(), a2.ToString());
 
         [Op]
         public static string format(string pattern, params object[] args)
             => string.Format(pattern, args);
+
+        public static string format<T>(Join<T> rule)
+        {
+            var buffer = text.buffer();
+            render(rule, buffer);
+            return buffer.Emit();
+        }
+
+        public static void render<T>(Join<T> rule, ITextBuffer dst)
+            => string.Join(rule.Delimiter, rule.Terms);
+
+        public static string format<F,C>(Fenced<F,C> rule)
+        {
+            var buffer = text.buffer();
+            render(rule,buffer);
+            return buffer.Emit();
+        }
+
+        public static void render<F,C>(Fenced<F,C> rule, ITextBuffer dst)
+            => dst.AppendFormat("{0}{1}{2}", rule.Fence.Left, rule.Content, rule.Fence.Right);
+
 
         [MethodImpl(Inline)]
         public static string format(object src)

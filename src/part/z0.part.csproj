@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Refs)" />
     <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(External)" />
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Interop)" />
     <ProjectReference Include="$(Sys)" />

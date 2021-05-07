@@ -26,21 +26,21 @@ namespace Z0
         public MemoryAddress Address {get;}
 
         /// <summary>
-        /// The resource value extracted from the accompanying location
+        /// The Size of the resource, in bytes
         /// </summary>
-        public uint Length {get;}
+        public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
-        public StringRes(E id, MemoryAddress address, uint length)
+        public StringRes(E id, MemoryAddress address, ByteSize size)
         {
             Identifier = id;
             Address = address;
-            Length = length;
+            Size = size;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => StringRef.create(Address, Length).Format();
+            => StringRef.create(Address, Size).Format();
 
         public override string ToString()
             => Format();
