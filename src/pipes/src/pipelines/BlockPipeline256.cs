@@ -24,7 +24,7 @@ namespace Z0
         uint Counter;
 
         [MethodImpl(Inline)]
-        public BlockPipeline256(IBlockSource256<S> emitter, IBlockProjector256<S,T> projector, IBlockSink256<T> receiver)
+        public BlockPipeline256(IPipeline pipes, IBlockSource256<S> emitter, IBlockProjector256<S,T> projector, IBlockSink256<T> receiver)
         {
             Emitter = emitter;
             Projector = projector;
@@ -53,7 +53,7 @@ namespace Z0
         uint Counter;
 
         [MethodImpl(Inline)]
-        public BlockPipeline256(A emitter, P projector, B receiver)
+        public BlockPipeline256(IPipeline pipes, A emitter, P projector, B receiver)
         {
             Emitter = emitter;
             Projector = projector;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MsgPattern<T> : IRenderPattern<MsgPattern<T>,T>
+    public readonly struct MsgPattern<T> : IFormatPattern<MsgPattern<T>,T>, IMsgPattern
     {
         public string PatternText {get;}
 

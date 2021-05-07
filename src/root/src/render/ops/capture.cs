@@ -12,7 +12,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static RenderCapture capture<T>(T src, params object[] args)
-            where T : IRenderPattern
+            where T : IFormatPattern
                 => new RenderCapture(src, args);
    }
 }

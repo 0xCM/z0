@@ -22,7 +22,7 @@ namespace Z0
         public IBlockSink128<T> Receiver {get;}
 
         [MethodImpl(Inline)]
-        public BlockPipeline128(IBlockSource128<S> emitter, IBlockProjector128<S,T> projector, IBlockSink128<T> receiver)
+        public BlockPipeline128(IPipeline pipes, IBlockSource128<S> emitter, IBlockProjector128<S,T> projector, IBlockSink128<T> receiver)
         {
             Emitter = emitter;
             Projector = projector;
@@ -48,7 +48,7 @@ namespace Z0
         public B Receiver {get;}
 
         [MethodImpl(Inline)]
-        public BlockPipeline128(A emitter, P projector, B receiver)
+        public BlockPipeline128(IPipeline pipes, A emitter, P projector, B receiver)
         {
             Emitter = emitter;
             Projector = projector;

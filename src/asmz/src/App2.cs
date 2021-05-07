@@ -448,12 +448,12 @@ namespace Z0.Asm
             using var flow = Wf.Running();
             var data = Wf.Polysource.Span<ushort>(2400);
 
-            var input = Pipes.pipe<ushort>();
-            var incount = Pipes.flow(data, input);
-            var output = Pipes.pipe<ushort>();
-            var outcount = Pipes.flow(input,output);
+            // var input = Pipes.pipe<ushort>();
+            // var incount = Pipes.flow(data, input);
+            // var output = Pipes.pipe<ushort>();
+            // var outcount = Pipes.flow(input,output);
 
-            Wf.Ran(flow, $"Ran {incount} -> {outcount} values through pipe");
+            //Wf.Ran(flow, $"Ran {incount} -> {outcount} values through pipe");
         }
 
         void EmitImageHeaders()

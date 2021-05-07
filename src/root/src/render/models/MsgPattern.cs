@@ -11,10 +11,6 @@ namespace Z0
 
     public readonly struct MsgPattern
     {
-        [MethodImpl(Inline)]
-        public static MsgPattern define(string content)
-            => new MsgPattern(content);
-
         public string PatternText {get;}
 
         [MethodImpl(Inline)]
@@ -22,7 +18,6 @@ namespace Z0
         {
             PatternText = src;
         }
-
         public string Format(params object[] src)
         {
             var count = src?.Length ?? 0;

@@ -9,10 +9,10 @@ namespace Z0
     using static SFx;
     using static Part;
 
-    public struct VPipes256<B,M,R,S,T>
-        where R : IBlockSink256<R,T>
-        where M : IVMap256<M,S,T>
-        where B : IBlockSource256<S>
+    public struct VPipeline128<B,M,R,S,T>
+        where R : IBlockSink128<R,T>
+        where M : IVMap128<M,S,T>
+        where B : IBlockSource128<S>
         where S : unmanaged
         where T : unmanaged
     {
@@ -22,17 +22,17 @@ namespace Z0
 
         R Receiver;
 
-        VPipe256<M,S,T> Pipe;
+        VPipe128<M,S,T> Pipe;
 
-        static W256 W => default;
+        static W128 W => default;
 
         [MethodImpl(Inline)]
-        public VPipes256(B blocks, M mapper, R receiver)
+        public VPipeline128(B blocks, M mapper, R receiver)
         {
             Blocks = blocks;
             Mapper = mapper;
             Receiver = receiver;
-            Pipe = VPipes.pipe<M,S,T>(W, mapper);
+            Pipe = Pipes.vpipe<M,S,T>(W, mapper);
         }
 
         [MethodImpl(Inline)]

@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly struct RenderProduct<T> : IRenderProduct<T>
     {
-        public IRenderPattern Pattern {get;}
+        public IFormatPattern Pattern {get;}
 
         public T Product {get;}
 
         [MethodImpl(Inline)]
-        public RenderProduct(IRenderPattern pattern, T product)
+        public RenderProduct(IFormatPattern pattern, T product)
         {
             Pattern = pattern;
             Product = product;

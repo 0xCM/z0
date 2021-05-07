@@ -6,12 +6,18 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
+    public interface IPipe
+    {
+
+    }
+
     /// <summary>
     /// Defines in a fundamental sense what in means to be a pipe: the joining of a source and a sink
     /// </summary>
     /// <typeparam name="T">The subject type</typeparam>
     [Free]
-    public interface IPipe<T> : ISink<T>, ISource<T>
+    public interface IPipe<T> : IPipe, ISink<T>, ISource<T>
     {
 
 
@@ -24,7 +30,7 @@ namespace Z0
     /// <typeparam name="S">The input type</typeparam>
     /// <typeparam name="T">The output type</typeparam>
     [Free]
-    public interface IPipe<S,T> : ISink<S>, ISource<T>
+    public interface IPipe<S,T> : IPipe, ISink<S>, ISource<T>
     {
 
     }

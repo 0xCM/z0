@@ -16,7 +16,7 @@ namespace Z0
         readonly SFx.IProjector<S,T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(PipeBuffer<S> buffer, SFx.IProjector<S,T> projector)
+        internal Pipe(IPipeline pipes, PipeBuffer<S> buffer, SFx.IProjector<S,T> projector)
         {
             Buffer = buffer;
             Projector = projector;

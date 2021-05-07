@@ -9,14 +9,19 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct RenderCapture : ITextual
+    public readonly struct MsgCapture : ITextual
     {
-        readonly IFormatPattern Pattern;
+        [MethodImpl(Inline)]
+        public static MsgCapture close<T>(T src, params object[] args)
+            where T : IMsgPattern
+                => new MsgCapture(src, args);
+
+        readonly IMsgPattern Pattern;
 
         readonly object[] Args;
 
         [MethodImpl(Inline)]
-        internal RenderCapture(IFormatPattern pattern, object[] args)
+        internal MsgCapture(IMsgPattern pattern, object[] args)
         {
             Pattern = pattern;
             Args = args;
@@ -29,7 +34,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public static implicit operator string(RenderCapture src)
+        public static implicit operator string(MsgCapture src)
             => src.Format();
     }
 }

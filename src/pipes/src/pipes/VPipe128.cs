@@ -11,7 +11,7 @@ namespace Z0
 
     using static SFx;
 
-    public struct VPipe128<P,S,T> : IVPipe128<S,T>
+    public struct VPipe128<P,S,T> : ISpanPipe128<S,T>
         where P : IVMap128<S,T>
         where S : unmanaged
         where T : unmanaged

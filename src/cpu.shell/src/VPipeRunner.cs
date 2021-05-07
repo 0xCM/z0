@@ -24,7 +24,7 @@ namespace Z0
 
         [Op]
         public static Paired<uint,ByteSize> run(W128 w, BlockSource01 source, VMap01 mapper, BlockSink01 sink)
-            => VPipes.runner(w128, source, mapper, sink, z8, z8).Run();
+            => Pipes.vpipeline(w128, source, mapper, sink, z8, z8).Run();
 
         [MethodImpl(Inline), Op]
         static EventSignal signal(IWfRuntime wf)

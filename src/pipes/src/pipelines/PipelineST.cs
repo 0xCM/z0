@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed class Pipeline<S,T> : IPipeline<Pipeline<S,T>,S,T>
+    public sealed class Pipeline<S,T> : Pipeline, IPipeline<Pipeline<S,T>,S,T>
     {
         public IEmitter<S> Emitter {get; internal set;}
 
@@ -16,7 +16,13 @@ namespace Z0
 
         uint Counter;
 
-        public void Run()
+        public Pipeline(EventSignal signal)
+            : base(signal)
+        {
+
+        }
+
+        public override void Run()
         {
             if(Connected)
             {

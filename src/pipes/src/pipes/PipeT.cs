@@ -17,7 +17,7 @@ namespace Z0
         readonly IProjector<T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(PipeBuffer<T> buffer, IProjector<T> projector)
+        internal Pipe(IPipeline pipes, PipeBuffer<T> buffer, IProjector<T> projector)
         {
             Buffer = buffer;
             Projector = projector;

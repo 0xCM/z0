@@ -23,7 +23,7 @@ namespace Z0
         static W256 W => default;
 
         [MethodImpl(Inline)]
-        public BlockPipe256(IBlockSource256<S> src, IBlockSink256<T> dst)
+        public BlockPipe256(IPipeline pipes, IBlockSource256<S> src, IBlockSink256<T> dst)
         {
             Source = src;
             Target = dst;
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Run<P>(P projector)
             where P : IBlockProjector256<P,S,T>
-                => api.run(this,projector);
+                => api.flow(this,projector);
 
         [MethodImpl(Inline)]
         public void Deposit(in SpanBlock256<T> src)
@@ -60,7 +60,7 @@ namespace Z0
         readonly B Sink;
 
         [MethodImpl(Inline)]
-        public BlockPipe256(A src, B dst)
+        public BlockPipe256(IPipeline pipes, A src, B dst)
         {
             Source = src;
             Sink = dst;
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Run<P>(P projector)
             where P : IBlockProjector256<P,S,T>
-                => api.run(this, projector);
+                => api.flow(this, projector);
 
         [MethodImpl(Inline)]
         public void Deposit(in SpanBlock256<T> src)

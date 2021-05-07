@@ -17,9 +17,12 @@ namespace Z0
 
         readonly IBlockSink128<T> Target;
 
+        readonly IPipeline Pipes;
+
         [MethodImpl(Inline)]
-        public BlockPipe128(IBlockSource128<S> src, IBlockSink128<T> dst)
+        public BlockPipe128(IPipeline pipes, IBlockSource128<S> src, IBlockSink128<T> dst)
         {
+            Pipes = pipes;
             Source = src;
             Target = dst;
         }
@@ -49,9 +52,12 @@ namespace Z0
 
         readonly B Sink;
 
+        readonly IPipeline Pipes;
+
         [MethodImpl(Inline)]
-        public BlockPipe128(A src, B dst)
+        public BlockPipe128(IPipeline pipes, A src, B dst)
         {
+            Pipes = pipes;
             Source = src;
             Sink = dst;
         }

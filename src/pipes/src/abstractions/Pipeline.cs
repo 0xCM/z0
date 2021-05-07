@@ -4,12 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
-    public interface IPipeRunner
+    public abstract class Pipeline : IPipeline
     {
-        uint Flow<T>(ReadOnlySpan<T> src, Pipe<T> dst);
+        public EventSignal Signal {get;}
 
-        uint Flow<T>(Pipe<T> src, Pipe<T> dst);
+        public abstract void Run();
+
+        protected Pipeline(EventSignal signal)
+        {
+            Signal = signal;
+        }
     }
+
 }

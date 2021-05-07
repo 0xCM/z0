@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public interface IRenderProduct<T>
     {
-        IRenderPattern Pattern {get;}
+        IFormatPattern Pattern {get;}
 
         T Product {get;}
     }

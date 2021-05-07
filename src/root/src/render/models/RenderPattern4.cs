@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct RenderPattern<A0,A1,A2,A3> : IRenderPattern<RenderPattern<A0,A1,A2,A3>,A0,A1,A2,A3>
+    public readonly struct RenderPattern<A0,A1,A2,A3> : IFormatPattern<RenderPattern<A0,A1,A2,A3>,A0,A1,A2,A3>
     {
         public string PatternText {get;}
 

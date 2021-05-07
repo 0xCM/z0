@@ -10,6 +10,8 @@ namespace Z0
     public interface IPipeline
     {
         void Run();
+
+        EventSignal Signal {get;}
     }
 
     [Free]
@@ -29,5 +31,11 @@ namespace Z0
         where C : IPipeline<C,S,T>
     {
 
+    }
+
+    [Free]
+    public interface IPipelinePart
+    {
+        void Init(IPipeline pipes);
     }
 }
