@@ -14,11 +14,23 @@ namespace Z0.Parts
 
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
+
+    using static Part;
+
+    [ApiHost]
     public static partial class XTend
     {
-    }
+        [MethodImpl(Inline), Op]
+        public static EventSignal Signal(this IEventSink sink, WfHost source)
+            => EventSignal.create(sink, source);
 
+        [MethodImpl(Inline), Op]
+        public static EventSignal Signal<T>(this IEventSink sink)
+            => EventSignal.create(sink, typeof(T));
+    }
 
     partial struct Msg
     {
@@ -33,6 +45,5 @@ namespace Z0
         public static MsgPattern<TableId,FS.FileUri> EmittingTable => "Emitting {0} to {1}";
 
         public static MsgPattern<TableId,Count,FS.FileUri> EmittedTable => "Emitted {1} {0} rows to {2}";
-
     }
 }

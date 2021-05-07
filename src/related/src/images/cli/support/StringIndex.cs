@@ -10,39 +10,36 @@ namespace Z0
 
     using static Part;
 
-    partial struct ImageRecords
+    public readonly struct StringIndex : ICliHeapKey<StringIndex>
     {
-        public readonly struct StringIndex : IHeapKey<StringIndex>
+        public CliHeapKind HeapKind => CliHeapKind.String;
+
+        public uint Value {get;}
+
+        [MethodImpl(Inline)]
+        public StringIndex(uint value)
         {
-            public HeapKind HeapKind => HeapKind.String;
-
-            public uint Value {get;}
-
-            [MethodImpl(Inline)]
-            public StringIndex(uint value)
-            {
-                Value = value;
-            }
-
-            [MethodImpl(Inline)]
-            public StringIndex(StringHandle value)
-            {
-                Value = memory.u32(value);
-            }
-
-            public string Format()
-                => Value.ToString("X");
-
-            public override string ToString()
-                => Format();
-
-            [MethodImpl(Inline)]
-            public static implicit operator HeapKey(StringIndex src)
-                => new HeapKey(src.HeapKind, src.Value);
-
-            [MethodImpl(Inline)]
-            public static implicit operator StringIndex(StringHandle src)
-                => new StringIndex(src);
+            Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public StringIndex(StringHandle value)
+        {
+            Value = memory.u32(value);
+        }
+
+        public string Format()
+            => Value.ToString("X");
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliHeapKey(StringIndex src)
+            => new CliHeapKey(src.HeapKind, src.Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator StringIndex(StringHandle src)
+            => new StringIndex(src);
     }
 }

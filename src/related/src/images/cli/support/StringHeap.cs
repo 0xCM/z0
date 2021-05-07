@@ -9,9 +9,9 @@ namespace Z0
 
     using static Part;
 
-    partial struct ImageRecords
+    partial struct CliHeaps
     {
-        public readonly struct StringHeap : IHeap<StringHeap>
+        public readonly struct StringHeap : ICliHeap<StringHeap>
         {
             public MemoryAddress BaseAddress {get;}
 
@@ -24,12 +24,18 @@ namespace Z0
                 Size = size;
             }
 
-            public HeapKind Kind => HeapKind.String;
+            public CliHeapKind Kind => CliHeapKind.String;
 
             public unsafe ReadOnlySpan<byte> Data
             {
                 [MethodImpl(Inline)]
                 get => memory.cover<byte>(BaseAddress, Size);
+            }
+
+            public uint EntryCount
+            {
+                [MethodImpl(Inline)]
+                get => count(this);
             }
 
             public string Format()

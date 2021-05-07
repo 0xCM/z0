@@ -14,9 +14,9 @@ namespace Z0
         [Record(CliTableKind.EncLog), StructLayout(LayoutKind.Sequential)]
         public struct EncLogRow : IRecord<EncLogRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
-            public RowKey Token;
+            public CliRowKey Token;
 
             public byte FuncCode;
         }

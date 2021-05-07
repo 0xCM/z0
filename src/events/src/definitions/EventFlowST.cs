@@ -10,8 +10,8 @@ namespace Z0
     using static Part;
 
     public class EventFlow<S,T> : IDataFlow<S,T>
-        where S : IWfEvent
-        where T : IWfEvent
+        where S : IInitialEvent<S>, new()
+        where T : ITerminalEvent<T>, new()
     {
         public S Source {get;}
 

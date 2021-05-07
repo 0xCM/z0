@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="wf">The workflow source</param>
         [Op]
         public static IFileArchive tables(IWfRuntime wf)
-            => new FileArchive(wf.Db().TableDir<ImageContent>());
+            => new FileArchive(wf.Db().TableDir<ImageContentRecord>());
 
         /// <summary>
         /// Creates an archive over the runtime directory

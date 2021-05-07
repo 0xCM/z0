@@ -9,11 +9,11 @@ namespace Z0
 
     using static Part;
 
-    partial struct ImageRecords
+    partial struct CliHeaps
     {
-        public readonly struct GuidHeap : IHeap<GuidHeap>
+        public readonly struct GuidHeap : ICliHeap<GuidHeap>
         {
-            public HeapKind Kind => HeapKind.Guid;
+            public CliHeapKind Kind => CliHeapKind.Guid;
         }
     }
 }

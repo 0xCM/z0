@@ -16,14 +16,14 @@ namespace Z0
         [Record(CliTableKind.Constant), StructLayout(LayoutKind.Sequential)]
         public struct ConstantRow : IRecord<ConstantRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
             public byte Type;
 
             /// <summary>
             /// An index into one of: <see cref='ParamRow'/>, <see cref='FieldRow'/>, <see cref='PropertyRow'/>
             /// </summary>
-            public RowKey Parent;
+            public CliRowKey Parent;
 
             public BlobIndex Value;
         }

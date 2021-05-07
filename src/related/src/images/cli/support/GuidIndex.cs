@@ -9,38 +9,36 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static Part;
+    using static CliHeaps;
 
-    partial struct ImageRecords
+    public readonly struct GuidIndex : ICliHeapKey<GuidIndex>
     {
-        public readonly struct GuidIndex : IHeapKey<GuidIndex>
+        public CliHeapKind HeapKind => CliHeapKind.Guid;
+
+        public uint Value {get;}
+
+        [MethodImpl(Inline)]
+        public GuidIndex(uint value)
         {
-            public HeapKind HeapKind => HeapKind.Guid;
-
-            public uint Value {get;}
-
-            [MethodImpl(Inline)]
-            public GuidIndex(uint value)
-            {
-                Value = value;
-            }
-
-            [MethodImpl(Inline)]
-            public GuidIndex(GuidHandle value)
-            {
-                Value = memory.u32(value);
-            }
-
-            [MethodImpl(Inline)]
-            public static implicit operator GuidIndex(GuidHandle src)
-                => new GuidIndex(src);
-
-            [MethodImpl(Inline)]
-            public static implicit operator HeapKey(GuidIndex src)
-                => new HeapKey(src.HeapKind, src.Value);
-
-            [MethodImpl(Inline)]
-            public static implicit operator HeapKey<GuidHeap>(GuidIndex src)
-                => new HeapKey<GuidHeap>(src.Value);
+            Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public GuidIndex(GuidHandle value)
+        {
+            Value = memory.u32(value);
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator GuidIndex(GuidHandle src)
+            => new GuidIndex(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliHeapKey(GuidIndex src)
+            => new CliHeapKey(src.HeapKind, src.Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliHeapKey<GuidHeap>(GuidIndex src)
+            => new CliHeapKey<GuidHeap>(src.Value);
     }
 }

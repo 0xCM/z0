@@ -7,3 +7,13 @@
 * A sequence is *aligned* or *blocked* if its cells can be evenly partitioned into a sequence of subsequences each of which have the same number of elements
 
 
+```nomnoml
+[<frame>Decorator pattern|
+  [<abstract>Component||+ operation()]
+  [Client] depends --> [Component]
+  [Decorator|- next: Component]
+  [Decorator] decorates -- [ConcreteComponent]
+  [Component] <:- [Decorator]
+  [Component] <:- [ConcreteComponent]
+]
+```

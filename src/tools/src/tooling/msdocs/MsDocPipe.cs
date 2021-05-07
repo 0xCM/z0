@@ -4,15 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static MsDocs;
 
-    using static Part;
+    public readonly partial struct MsDocs
+    {
+
+    }
 
     public class MsDocPipe : AppService<MsDocPipe>
     {
-
-
-
+        public void Process(FS.FolderPath src, FS.FilePath dst)
+        {
+            Processor.run(src,dst);
+        }
     }
 }

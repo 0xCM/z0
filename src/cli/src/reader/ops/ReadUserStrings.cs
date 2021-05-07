@@ -9,9 +9,10 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static ImageRecords;
     using static Part;
     using static memory;
+    using static ImageRecords;
+    using static CliRecords;
 
     partial class ImageMetaReader
     {

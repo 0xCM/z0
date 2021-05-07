@@ -14,7 +14,7 @@ namespace Z0
         [Record(CliTableKind.Document), StructLayout(LayoutKind.Sequential)]
         public struct DocumentRow : IRecord<DocumentRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
             public BlobIndex Name;
 

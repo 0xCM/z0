@@ -9,7 +9,6 @@ namespace Z0
     using System.IO;
 
     using static Part;
-    using static ImageRecords;
 
     public class ImageCsvReader : AppService<ImageCsvReader>
     {
@@ -23,7 +22,23 @@ namespace Z0
             ByteParser = HexByteParser.Service;
         }
 
-        public void Read(FS.FilePath src, Receiver<ImageContent> dst)
+        public FS.Files ImageContentFiles()
+            => Db.TableDir<ImageContentRecord>().AllFiles;
+
+        public ReadOnlySpan<ImageContentRecord> Load(FS.FilePath src)
+        {
+            var buffer = root.list<ImageContentRecord>();
+
+            void Receive(in ImageContentRecord src)
+            {
+                buffer.Add(src);
+            }
+
+            Read(src, Receive);
+            return buffer.ViewDeposited();
+        }
+
+        public void Read(FS.FilePath src, Receiver<ImageContentRecord> dst)
         {
             CurrentIndex = 0;
 
@@ -33,7 +48,7 @@ namespace Z0
             using var reader = src.Reader();
             var size = src.Size;
             var header = reader.ReadLine();
-            var record = default(ImageContent);
+            var record = default(ImageContentRecord);
             var @continue = true;
             while(@continue)
             {
@@ -44,7 +59,7 @@ namespace Z0
             }
         }
 
-        public bool Read(StreamReader src, ref ImageContent data)
+        public bool Read(StreamReader src, ref ImageContentRecord data)
         {
             var line = src.ReadLine();
             if(line == null)

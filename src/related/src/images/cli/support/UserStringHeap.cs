@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct ImageRecords
+    partial struct CliHeaps
     {
-        public readonly struct UserStringHeap : IHeap<UserStringHeap>
+        public readonly struct UserStringHeap : ICliHeap<UserStringHeap>
         {
-            public HeapKind Kind => HeapKind.String;
+            public CliHeapKind Kind => CliHeapKind.String;
         }
     }
 }

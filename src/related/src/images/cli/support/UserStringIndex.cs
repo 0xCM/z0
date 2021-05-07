@@ -8,24 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static CliHeaps;
 
-    partial struct ImageRecords
+    public readonly struct UserStringIndex : ICliHeapKey<UserStringIndex>
     {
-        public readonly struct UserStringIndex : IHeapKey<UserStringIndex>
+        public CliHeapKind HeapKind => CliHeapKind.UserString;
+
+        public uint Value {get;}
+
+        [MethodImpl(Inline)]
+        public UserStringIndex(uint value)
         {
-            public HeapKind HeapKind => HeapKind.UserString;
-
-            public uint Value {get;}
-
-            [MethodImpl(Inline)]
-            public UserStringIndex(uint value)
-            {
-                Value = value;
-            }
-
-            [MethodImpl(Inline)]
-            public static implicit operator HeapKey(UserStringIndex src)
-                => new HeapKey(src.HeapKind, src.Value);
+            Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliHeapKey(UserStringIndex src)
+            => new CliHeapKey(src.HeapKind, src.Value);
     }
 }

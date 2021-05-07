@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System.Collections.Generic;
     using System.Collections.Concurrent;
     using System.Diagnostics;
 

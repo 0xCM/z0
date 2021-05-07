@@ -14,9 +14,9 @@ namespace Z0
         [Record(CliTableKind.CustomDebugInformation), StructLayout(LayoutKind.Sequential)]
         public struct CustomDebugInformationRow : IRecord<CustomDebugInformationRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
-            public RowKey Parent;
+            public CliRowKey Parent;
 
             public GuidIndex Kind;
 

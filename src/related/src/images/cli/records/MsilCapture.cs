@@ -6,6 +6,11 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
+    partial struct CliRecords
+    {
+
+    }
+
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct MsilCapture : IRecord<MsilCapture>
     {

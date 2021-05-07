@@ -10,18 +10,9 @@ namespace Z0
 
     using static memory;
     using static Part;
-    using static ProcessMemory;
 
     using PCK = ProcessContextFlag;
 
-    partial class XSvc
-    {
-        [Op]
-        public static ProcessContextPipe ProcessContextPipe(this IWfRuntime wf)
-            => Z0.ProcessContextPipe.create(wf);
-    }
-
-    [ApiHost]
     public partial class ProcessContextPipe : AppService<ProcessContextPipe>
     {
         public ProcessContextPaths Paths {get; private set;}
@@ -145,6 +136,51 @@ namespace Z0
             DumpEmitter.emit(process, dst.Format(PathSeparator.BS), DumpTypeOption.Full);
             Wf.EmittedFile(dumping,1);
             return 1;
+        }
+
+        public ReadOnlySpan<AddressBankEntry> LoadContextAddresses()
+        {
+            var regions = LoadRegions();
+            var worker = RegionProcessor.create(Wf);
+            worker.Submit(regions);
+            ref readonly var product = ref worker.Product;
+            var count = product.SegmentCount;
+            var dst = root.datalist<AddressBankEntry>();
+            var total = 0ul;
+            for(ushort i=0; i<count; i++)
+            {
+                var segment = product.Segment(i);
+                var selector = product.Selector(i);
+                for(ushort j=0; j<segment.Length; j++)
+                {
+                    (var @base, var size) = skip(segment, j);
+                    total += size;
+
+                    var record = new AddressBankEntry();
+                    record.Index = (i,j);
+                    record.Selector = selector;
+                    record.Base = @base;
+                    record.Size = size;
+                    record.Target = ((ulong)@base | (ulong)selector << 32);
+                    record.TotalSize = total;
+                    dst.Add(record);
+                }
+            }
+            return dst.Close();
+        }
+
+        public void EmitContextSummary(FS.FilePath dst)
+        {
+            var addresses = LoadContextAddresses();
+            var formatter = Tables.formatter<AddressBankEntry>(14);
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            var count = addresses.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var region = ref skip(addresses,i);
+                writer.WriteLine(formatter.Format(region));
+            }
         }
    }
 }

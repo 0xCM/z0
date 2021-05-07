@@ -32,5 +32,9 @@ namespace Z0
         [Op]
         public static PdbReader PdbReader(this IWfRuntime wf, in SymbolSource src)
             => PdbServices.reader(wf,src);
+
+        [Op]
+        public static ProcessContextPipe ProcessContextPipe(this IWfRuntime wf)
+            => Z0.ProcessContextPipe.create(wf);
     }
 }

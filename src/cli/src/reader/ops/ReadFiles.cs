@@ -10,6 +10,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static CliRecords;
 
     partial class ImageMetaReader
     {
@@ -31,6 +32,5 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 ReadFile(skip(src,i), ref seek(dst,i));
         }
-
     }
 }

@@ -21,8 +21,8 @@ namespace Z0
         const string HandlerNotFound = "Handler for {0} not found";
 
         public static EventFlow<S,T> flow<S,T>(S src, T dst)
-            where S : IWfEvent
-            where T : IWfEvent
+            where S : IInitialEvent<S>, new()
+            where T : ITerminalEvent<T>, new()
                 => new (src,dst);
 
         /// <summary>

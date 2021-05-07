@@ -13,14 +13,14 @@ namespace Z0
         [Record(CliTableKind.CustomAttribute), StructLayout(LayoutKind.Sequential)]
         public struct CustomAttributeRow  : IRecord<CustomAttributeRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
-            public RowKey Parent;
+            public CliRowKey Parent;
 
             /// <summary>
             /// An index into the <see cref='MethodDefRow'/> or <see cref='MemberRefRow'/> table
             /// </summary>
-            public RowKey Type;
+            public CliRowKey Type;
 
             public BlobIndex Value;
         }

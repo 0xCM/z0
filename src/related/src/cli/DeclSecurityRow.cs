@@ -15,11 +15,11 @@ namespace Z0
         [Record(CliTableKind.DeclSecurity), StructLayout(LayoutKind.Sequential)]
         public struct DeclSecurityRow : IRecord<DeclSecurityRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
             public DeclarativeSecurityAction Action;
 
-            public RowKey Parent;
+            public CliRowKey Parent;
 
             public BlobIndex PermissionSet;
         }

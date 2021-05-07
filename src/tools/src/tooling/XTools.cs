@@ -35,5 +35,10 @@ namespace Z0
         [Op]
         public static CultProcessor CultProcessor(this IWfRuntime wf)
             => Tools.CultProcessor.create(wf);
+
+        [Op]
+        public static MsDocPipe MsDocs(this IWfRuntime wf)
+            => Tools.MsDocPipe.create(wf);
+
    }
 }

@@ -7,26 +7,23 @@ namespace Z0
     using System.IO;
     using System.Runtime.InteropServices;
 
-    partial struct ImageRecords
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct MemoryFileRecord : IRecord<MemoryFileRecord>
     {
-        [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct MemoryFile : IRecord<MemoryFile>
-        {
-            public const string TableId = "memoryfile";
+        public const string TableId = "memoryfile";
 
-            public MemoryAddress BaseAddress;
+        public MemoryAddress BaseAddress;
 
-            public ByteSize Size;
+        public ByteSize Size;
 
-            public MemoryAddress EndAddress;
+        public MemoryAddress EndAddress;
 
-            public FS.FilePath Path;
+        public FS.FilePath Path;
 
-            public Timestamp CreateTS;
+        public Timestamp CreateTS;
 
-            public Timestamp UpdateTS;
+        public Timestamp UpdateTS;
 
-            public FileAttributes Attributes;
-        }
+        public FileAttributes Attributes;
     }
 }

@@ -14,9 +14,9 @@ namespace Z0
         [Record(CliTableKind.EncMap), StructLayout(LayoutKind.Sequential)]
         public struct EncMapRow : IRecord<EncMapRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
-            public RowKey Token;
+            public CliRowKey Token;
         }
     }
 }

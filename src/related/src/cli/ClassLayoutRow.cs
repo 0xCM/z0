@@ -13,7 +13,7 @@ namespace Z0
         [Record(CliTableKind.ClassLayout), StructLayout(LayoutKind.Sequential)]
         public struct ClassLayoutRow : IRecord<ClassLayoutRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
             public ushort PackingSize;
 
@@ -22,7 +22,7 @@ namespace Z0
             /// <summary>
             /// An index into the <see cref='TypeDefRow'/> table
             /// </summary>
-            public RowKey Parent;
+            public CliRowKey Parent;
         }
     }
 }

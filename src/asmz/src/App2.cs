@@ -15,7 +15,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
-    using static ImageRecords;
+    using static CliRecords;
     using static ProcessMemory;
 
     class App : AppService<App>
@@ -156,67 +156,6 @@ namespace Z0.Asm
             var op1 = ApiSigs.operand("b", t1);
             var r = ApiSigs.@return(t2);
             Wf.Row(ApiSigs.operation("equals", r, op0, op1));
-        }
-
-        void EmitPacked(FS.FilePath dst)
-        {
-            var provider = Wf.ApiResProvider();
-            var path = provider.ResPackPath();
-            var assembly = Assembly.LoadFrom(path.Name);
-            var accessors = provider.ResPackAccessors().View;
-            var count = accessors.Length;
-            var decoder = Wf.AsmDecoder();
-            var buffer = text.buffer();
-            var sequence = 0u;
-            var segments = root.list<MemorySeg>(30000);
-            using var writer = dst.Writer();
-            using var hexout = dst.ChangeExtension(FS.Hex).Writer();
-            for(var i=0; i<count; i++)
-            {
-                var seqlabel = sequence.ToString("d6") + ": ";
-                ref readonly var accessor = ref skip(accessors,i);
-                var raw = Resources.definition(accessor).ToArray();
-                var bytes = @readonly(raw);
-                var decoded = decoder.Decode(raw, MemoryAddress.Zero).View;
-                var name = accessor.DeclaringType.Name + "/" + accessor.Member.Name;
-                writer.WriteLine(AsmCore.comment(seqlabel + name));
-                AsmFormatter.render(raw,decoded,buffer);
-                writer.Write(buffer.Emit());
-
-                var offset = z16;
-                var mov = AsmHexCode.Empty;
-                var movsize = AsmHexCode.Empty;
-                hexout.Write(seqlabel);
-                for(var j=0; j<decoded.Length; j++)
-                {
-                    ref readonly var fx = ref skip(decoded,j);
-                    var size = (byte)fx.ByteLength;
-                    var code = AsmBytes.hexcode(slice(bytes,offset,size));
-
-                    if(j !=0)
-                        hexout.Write(Chars.Space);
-                    hexout.Write(code.Format());
-                    if(size == 10)
-                        mov = code;
-                    else if(size == 7)
-                        movsize = code;
-                    offset += size;
-                }
-
-                var imm64 = Imm64.from(slice(mov.Bytes,2));
-                var imm32 = Imm32.from(slice(movsize.Bytes,3));
-                hexout.Write(string.Format(" ## {0:X} ## {1:X}", imm64, imm32));
-                hexout.WriteLine();
-
-                segments.Add(Resources.capture(accessor));
-                sequence++;
-            }
-
-            using var proplog = Db.AppLog("respack.props").Writer();
-            foreach(var prop in segments)
-            {
-                proplog.WriteLine(string.Format("{0}[{1}]:{2}", prop.BaseAddress, prop.Size, prop.Buffer.FormatHex()));
-            }
         }
 
         void TestRel32()
@@ -523,11 +462,6 @@ namespace Z0.Asm
             svc.EmitSectionHeaders(WfRuntime.RuntimeArchive(Wf));
         }
 
-        void Receive(in ImageContent src)
-        {
-            Wf.Row(src.Data);
-        }
-
         void ShowLetters()
         {
             using var flow = Wf.Running();
@@ -669,13 +603,6 @@ namespace Z0.Asm
             emitter.DumpImages(src,dst);
         }
 
-        // void EmitImageMaps()
-        // {
-        //     var src = ImageMaps.current();
-        //     var dst = Db.AppLog("imagemap", FS.Extensions.Csv);
-        //     ImageMaps.emit(Wf, src, dst);
-        // }
-
         void ShowThumprintCatalog()
         {
             var pipe = Wf.AsmThumbprints();
@@ -699,7 +626,6 @@ namespace Z0.Asm
                 }
             }
         }
-
 
         public Index<ApiCodeBlock> Jumpers()
         {
@@ -735,6 +661,7 @@ namespace Z0.Asm
         {
             Wf.ImageMetaPipe().EmitImageContent();
         }
+
 
         void ShowRegKinds(RegKind src, ShowLog dst)
         {
@@ -1261,9 +1188,9 @@ namespace Z0.Asm
             var literals = symbolic.DiscoverLiterals();
             Wf.Status($"Creating heap for {literals.Count} literals");
             var heap = SymHeaps.specify(literals);
-
             var count = heap.SymbolCount;
             var dst = Db.AppLog("heap", FS.Csv);
+            var emitting = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             for(ushort i=0; i<count; i++)
             {
@@ -1271,6 +1198,7 @@ namespace Z0.Asm
                 var id = heap.Identifier(i);
                 writer.WriteLine(string.Format("{0:D6} | {1,-32} | {2}", i, id, expr));
             }
+            Wf.EmittedFile(emitting,count);
         }
 
         public void CollectEntryPoints()
@@ -1307,20 +1235,6 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, counter);
         }
 
-        static unsafe uint count(ImageRecords.StringHeap src)
-        {
-            var counter = 0u;
-            var pFirst = src.BaseAddress.Pointer<char>();
-            var pLast = (src.BaseAddress + src.Size).Pointer<char>();
-            var pCurrent = pFirst;
-            while(pCurrent < pLast)
-            {
-                if(*pCurrent++ == 0)
-                    counter++;
-            }
-            return counter;
-        }
-
         public void ListCliTables(Assembly src)
         {
             var reader = CliReader.create(src);
@@ -1328,15 +1242,6 @@ namespace Z0.Asm
             root.iter(reader.TypeDefKeys(), k => Wf.Row(k));
             root.iter(reader.TypeRefKeys(), k => Wf.Row(k));
             root.iter(reader.AssemblyRefKeys(), k => Wf.Row(k));
-        }
-
-
-        public void ShowStringHeap(Assembly src)
-        {
-            var reader = CliReader.create(src);
-            var heap = reader.StringHeap();
-            var data = heap.Data;
-            //??
         }
 
         public void CheckApiKeys()
@@ -1347,28 +1252,6 @@ namespace Z0.Asm
 
         public void EmitApiClasses()
             => Wf.ApiData().EmitApiClasses();
-
-
-        public void ReadImageCsv()
-        {
-            var buffer = root.list<ImageContent>();
-            void Receive(in ImageContent src)
-            {
-                buffer.Add(src);
-            }
-
-            var reader = Wf.ImageCsvReader();
-            var files = Db.TableDir<ImageContent>().AllFiles.View;
-            var count = files.Length;
-            for(var i=0; i<count; i++)
-            {
-                buffer.Clear();
-                ref readonly var path = ref skip(files,i);
-                reader.Read(path, Receive);
-                Wf.Status($"Read {buffer.Count} image content records from {path.ToUri()}");
-            }
-
-        }
 
         public void ReadMethodDefs(Assembly src)
         {
@@ -1391,168 +1274,6 @@ namespace Z0.Asm
             receivers.MemberParsed += (source, e) => {};
             var extractor = ApiExtractor.create(Wf);
             extractor.Run(receivers);
-
-        }
-
-
-        public class AppWorker<W,T> : AppService<W>
-            where W : AppWorker<W,T>, new()
-        {
-            public void Submit(ReadOnlySpan<T> src)
-            {
-                var running = Wf.Running(string.Format("Processing {0} data", typeof(T).Name));
-                var count = Process(src);
-                Complete();
-                Wf.Ran(running, string.Format("Processed {0} {1} individuals", count, typeof(T).Name));
-            }
-
-            protected virtual void Process(uint index, in T src)
-            {
-
-            }
-
-            protected virtual void Complete()
-            {
-
-            }
-
-            protected virtual uint Process(ReadOnlySpan<T> src)
-            {
-                var count = (uint)src.Length;
-                for(var i=0u; i<count; i++)
-                {
-                    Process(i,skip(src,i));
-                }
-
-                return count;
-            }
-        }
-
-
-        [Record(TableId)]
-        public struct AddressBankEntry : IRecord<AddressBankEntry>
-        {
-            public const string TableId = "address.banks";
-
-            public const string RenderPattern = "{0:D4} | {1:D4} | {2:x}:{3:x} | {4}";
-
-            public ushort SelectorIndex;
-
-            public ushort BaseIndex;
-
-            public Address16 Selector;
-
-            public Address32 BaseAddress;
-
-            public uint Size;
-
-            public string Format()
-                => string.Format(RenderPattern, SelectorIndex, BaseIndex, (ushort)Selector, (uint)BaseAddress, (ByteSize)Size);
-        }
-
-        public readonly struct AddressBank
-        {
-            readonly Index<Address16> Selectors;
-
-            readonly Index<List<Paired<Address32,uint>>> Bases;
-
-            internal AddressBank(Index<Address16> selectors, Index<List<Paired<Address32,uint>>> bases)
-            {
-                Selectors = selectors;
-                Bases =  bases;
-            }
-
-            public uint SegmentCount
-            {
-                get => Selectors.Count;
-            }
-
-            public Index<Paired<Address32,uint>> Segment(uint index)
-            {
-                return Bases[index].ToArray();
-            }
-
-            public Address16 Selector(uint index)
-            {
-                return Selectors[index];
-            }
-        }
-
-        public sealed class RegionWorker : AppWorker<RegionWorker,MemoryRegion>
-        {
-            List<Address16> Selectors;
-
-            List<List<Paired<Address32,uint>>> Bases;
-
-            AddressBank _Product;
-
-            protected override void Complete()
-            {
-                _Product = new AddressBank(Selectors.ToArray(), Bases.ToArray());
-            }
-
-            public ref readonly AddressBank Product
-            {
-                get => ref _Product;
-            }
-
-            public RegionWorker()
-            {
-                Selectors = new();
-                Bases = new();
-            }
-
-            int Index(Address16 selector)
-            {
-                var index = Selectors.IndexOf(selector);
-                if(index == NotFound)
-                {
-                    Selectors.Add(selector);
-                    index = Selectors.Count - 1;
-                    Bases.Add(root.list<Paired<Address32,uint>>());
-                }
-                return index;
-            }
-
-            void Add(Address16 selector, Address32 @base, uint size)
-                => Bases[Index(selector)].Add(root.paired(@base, size));
-
-            protected override void Process(uint index, in MemoryRegion src)
-            {
-                Add(src.BaseAddress.Quadrant(n2), src.BaseAddress.Lo, (uint)(src.EndAddress - src.BaseAddress));
-            }
-        }
-
-        void LoadRegions()
-        {
-            var pipe = Wf.ProcessContextPipe();
-            var regions = pipe.LoadRegions();
-            var worker = RegionWorker.create(Wf);
-            worker.Submit(regions);
-            ref readonly var product = ref worker.Product;
-            var count = product.SegmentCount;
-            var records = root.list<AddressBankEntry>();
-            for(ushort i=0; i<count; i++)
-            {
-                var segment = product.Segment(i);
-                var selector = product.Selector(i);
-                var entries = segment.View;
-                for(ushort j=0; j<entries.Length; j++)
-                {
-                    (var @base, var size) = skip(entries,j);
-                    var record = new AddressBankEntry();
-                    record.SelectorIndex = i;
-                    record.Selector = selector;
-                    record.BaseAddress = @base;
-                    record.Size = size;
-                    record.BaseIndex = j;
-                    records.Add(record);
-                    //Wf.Row(string.Format("{0:D4} {1:D4} {2:x}:{3:x} {4}", i, j, (ushort)selector, (uint)@base, (ByteSize)size));
-                }
-            }
-            var dst = Db.AppLog("addresses", FS.Csv);
-            using var writer = dst.Writer();
-            root.iter(records, r => writer.WriteLine(r.Format()));
         }
 
         void CheckAlloc()
@@ -1605,6 +1326,21 @@ namespace Z0.Asm
             }
         }
 
+        public void UnpackRespack()
+        {
+            var unpacker = ResPackUnpacker.create(Wf);
+            unpacker.Emit(Db.AppLogDir());
+        }
+
+        public void ProcessMsDocs()
+        {
+            var src = FS.dir(@"J:\docs\msdocs-sdk-api\sdk-api-src\content\dbghelp");
+            var dst = Db.AppLog("dbghelp", FS.ext("yml"));
+            var tool = Wf.MsDocs();
+            tool.Process(src,dst);
+
+        }
+
         // Z0.MemoryFile OpenResPack()
         // {
         //     var path = Wf.Db().Package("respack") + FS.file("z0.respack", FS.Dll);
@@ -1612,13 +1348,17 @@ namespace Z0.Asm
         //     return map;
         // }
 
+
+        void EmitContextSummary()
+        {
+            var dst = Db.AppLog("context.regions", FS.Csv);
+            Wf.ProcessContextPipe().EmitContextSummary(dst);
+
+        }
         public void Run()
         {
 
-            EmitPacked(Db.AppLog("respack", FS.Asm));
-
-            var unpacker = ResPackUnpacker.create(Wf);
-            unpacker.Emit(Db.AppLogDir());
+            CreateSymbolHeap();
 
             // var provider = Wf.ApiResProvider();
             // using var map = provider.MapResPack();

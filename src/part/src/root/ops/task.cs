@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using static Part;
@@ -19,6 +20,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Task run(Action worker)
             => Task.Run(worker);
+
+        /// <summary>
+        /// Runs a task that executes a specified worker
+        /// </summary>
+        /// <param name="worker">The worker to execute</param>
+        [MethodImpl(Inline), Op]
+        public static Task run(Action worker, CancellationToken ct)
+            => Task.Run(worker, ct);
 
         /// <summary>
         /// Runs a task that computes a result

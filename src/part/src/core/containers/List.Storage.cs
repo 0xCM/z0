@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Collections;
     using System.Reflection.Emit;
     using System.Reflection;
 
@@ -37,7 +36,6 @@ namespace Z0
             var storage = @span(src.Storage());
             return slice(storage,0,count);
         }
-
     }
 
     static class ArrayList<T>

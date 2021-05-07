@@ -12,7 +12,6 @@ namespace Z0
 
     using api = SymHeaps;
 
-
     public class SymHeapSpec
     {
         internal Index<char> Expressions;

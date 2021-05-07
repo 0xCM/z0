@@ -12,13 +12,12 @@ namespace Z0
     using static memory;
     using static Part;
     using static ImageRecords;
-    using static CliRecords;
 
     partial class ImageMetaPipe
     {
         public void ClearImageContent()
         {
-            var dir = Db.TableDir<ImageContent>();
+            var dir = Db.TableDir<ImageContentRecord>();
             var flow = Wf.Running($"Clearing content from <{dir}>");
             var dst = root.list<FS.FilePath>();
             dir.Clear(dst);
@@ -34,12 +33,17 @@ namespace Z0
             Wf.Ran(flow);
         }
 
+        public void LoadImageContent(FS.FilePath src)
+        {
+            Wf.ImageCsvReader().Load(src);
+        }
+
         [Op]
         public MemoryRange EmitImageContent(Assembly src)
         {
-            var rowsize = ImageContent.RowDataSize;
-            var dst = Db.Table(ImageContent.TableId, src.GetSimpleName());
-            var flow = Wf.EmittingTable<ImageContent>(dst);
+            var rowsize = ImageContentRecord.RowDataSize;
+            var dst = Db.Table(ImageContentRecord.TableId, src.GetSimpleName());
+            var flow = Wf.EmittingTable<ImageContentRecord>(dst);
             var @base = ImageMemory.@base(src);
             var formatter = HexFormat.DataFormatter(@base, rowsize);
             var path = FS.path(src.Location);
@@ -62,7 +66,7 @@ namespace Z0
                 k = Read(reader, buffer);
             }
 
-            Wf.EmittedTable<ImageContent>(flow, lines);
+            Wf.EmittedTable<ImageContentRecord>(flow, lines);
             return (@base, @base + offset);
         }
 

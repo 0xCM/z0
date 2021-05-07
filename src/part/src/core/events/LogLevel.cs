@@ -27,11 +27,6 @@ namespace Z0
         Status = ConsoleColor.Cyan,
 
         /// <summary>
-        /// Identifies trace content
-        /// </summary>
-        Trace = ConsoleColor.DarkMagenta,
-
-        /// <summary>
         /// Identifies warning content
         /// </summary>
         Warning = ConsoleColor.Yellow,

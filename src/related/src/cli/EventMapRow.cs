@@ -7,18 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static ImageRecords;
-
     partial struct CliRecords
     {
         [Record(CliTableKind.EventMap), StructLayout(LayoutKind.Sequential)]
         public struct EventMapRow : IRecord<EventMapRow>
         {
-            public RowKey Key;
+            public CliRowKey Key;
 
-            public RowKey Parent;
+            public CliRowKey Parent;
 
-            public RowKey EventList;
+            public CliRowKey EventList;
         }
     }
 }

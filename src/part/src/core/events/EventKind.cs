@@ -10,8 +10,6 @@ namespace Z0
 
         Babble = MsgLevel.Babble,
 
-        Trace = MsgLevel.Trace,
-
         Status = MsgLevel.Status,
 
         Warn = MsgLevel.Warn,
@@ -56,7 +54,7 @@ namespace Z0
 
         Rows,
 
-       ToolRunning,
+        ToolRunning,
 
         ToolRan,
     }

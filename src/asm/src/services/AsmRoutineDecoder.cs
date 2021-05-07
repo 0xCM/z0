@@ -21,6 +21,10 @@ namespace Z0.Asm
         readonly AsmFormatConfig AsmFormat;
 
         [MethodImpl(Inline)]
+        public static AsmRoutineDecoder create(IWfRuntime wf)
+            => new AsmRoutineDecoder(wf);
+
+        [MethodImpl(Inline)]
         public AsmRoutineDecoder(IWfRuntime wf)
             => AsmFormat = AsmFormatConfig.@default(out var _);
 

@@ -13,7 +13,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ImageRecords;
+    using static CliHeaps;
+    using static CliRecords;
 
     [ApiHost]
     public unsafe readonly struct CliReader
@@ -203,35 +204,35 @@ namespace Z0
             => MD.TypeReferences.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
-        public RowKeys AssemblyRefKeys()
+        public CliRowKeys AssemblyRefKeys()
             => Cli.keys(MD.AssemblyReferences);
 
         [MethodImpl(Inline), Op]
-        public RowKeys FieldDefKeys()
+        public CliRowKeys FieldDefKeys()
             => Cli.keys(MD.FieldDefinitions);
 
         [MethodImpl(Inline), Op]
-        public RowKeys MethodDefKeys()
+        public CliRowKeys MethodDefKeys()
             => Cli.keys(MD.MethodDefinitions);
 
         [MethodImpl(Inline), Op]
-        public RowKeys MethodDebugKeys()
+        public CliRowKeys MethodDebugKeys()
             => Cli.keys(MD.MethodDebugInformation);
 
         [MethodImpl(Inline), Op]
-        public RowKeys MemberRefKeys()
+        public CliRowKeys MemberRefKeys()
             => Cli.keys(MD.MemberReferences);
 
         [MethodImpl(Inline), Op]
-        public RowKeys PropertyDefKeys()
+        public CliRowKeys PropertyDefKeys()
             => Cli.keys(MD.PropertyDefinitions);
 
         [MethodImpl(Inline), Op]
-        public RowKeys TypeDefKeys()
+        public CliRowKeys TypeDefKeys()
             => Cli.keys(MD.TypeDefinitions);
 
         [MethodImpl(Inline), Op]
-        public RowKeys TypeRefKeys()
+        public CliRowKeys TypeRefKeys()
             => Cli.keys(MD.TypeReferences);
 
         [MethodImpl(Inline), Op]

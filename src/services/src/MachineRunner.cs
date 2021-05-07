@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
+    using static Msg;
 
     public class MachineRunner : AppService<MachineRunner>
     {
-        static MsgPattern<Count, DelimitedIndex<PartId>> RunningMachine => "Executing machine workflow for {0} parts: {1}";
-
-        static MsgPattern<Count, DelimitedIndex<PartId>> RanMachine => "Executed machine workflow for {0} parts: {1}";
-
         public void Run(WorkflowOptions options)
         {
             var parts = Wf.ApiCatalog.PartIdentities;
@@ -45,7 +42,7 @@ namespace Z0
                 }
 
                 if(options.EmitResBytes)
-                    Emitted(Wf.ResBytesEmitter().Emit(blocks));
+                    Emitted(Wf.ResPackEmitter().Emit(blocks));
 
                 if(options.EmitStatements || options.EmitAsmBitstrings)
                 {
@@ -109,7 +106,6 @@ namespace Z0
         {
 
         }
-
 
         Index<T> Emitted<T>(Index<T> src)
         {
