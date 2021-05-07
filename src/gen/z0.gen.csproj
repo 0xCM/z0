@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(AsmCore)" />
   </ItemGroup>
 

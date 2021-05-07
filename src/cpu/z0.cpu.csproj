@@ -10,7 +10,6 @@
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Bits)" />
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(SpanBlocks)" />
   </ItemGroup>
 

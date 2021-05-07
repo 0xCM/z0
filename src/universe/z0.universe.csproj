@@ -34,7 +34,6 @@
     <ProjectReference Include="$(Events)" />
 
     <ProjectReference Include="$(Fsm)"/>
-    <ProjectReference Include="$(Files)"/>
 
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Gen)" />
