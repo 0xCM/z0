@@ -10,7 +10,7 @@ namespace Z0
 
     partial class ImageMetaReader
     {
-        public Index<SectionHeaderInfo> ReadSectionHeders()
+        public Index<SectionHeaderInfo> ReadSectionHeaderInfo()
         {
             var dst = root.list<SectionHeaderInfo>();
 

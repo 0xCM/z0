@@ -41,7 +41,7 @@ namespace Z0
                     continue;
 
                 using var reader = ImageMetadata.reader(file);
-                var headers = reader.ReadSectionHeders();
+                var headers = reader.ReadSectionHeaderInfo();
                 var count = headers.Length;
                 var view = headers.View;
                 for(var i=0u; i<count; i++)

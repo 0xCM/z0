@@ -9,18 +9,16 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct ModuleRow : IRecord<ModuleRow>
+        [Record(CliTableKind.TypeRef), StructLayout(LayoutKind.Sequential)]
+        public struct TypeRefRow : IRecord<TypeRefRow>
         {
-            public ushort Generation;
+            public CliRowKey Key;
+
+            public CliRowKey ResolutionScope;
 
             public StringIndex Name;
 
-            public GuidIndex ModuleVersionId;
-
-            public GuidIndex EncId;
-
-            public GuidIndex EncBaseId;
+            public StringIndex Namespace;
         }
     }
 }

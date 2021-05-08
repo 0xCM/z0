@@ -5,7 +5,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Part;
     using static memory;
@@ -20,103 +19,103 @@ namespace Z0
         [Flags]
         enum TableMask : ulong
         {
-            Module = 1UL << TableIndex.Module,
+            Module = 1UL << CliTableKind.Module,
 
-            TypeRef = 1UL << TableIndex.TypeRef,
+            TypeRef = 1UL << CliTableKind.TypeRef,
 
-            TypeDef = 1UL << TableIndex.TypeDef,
+            TypeDef = 1UL << CliTableKind.TypeDef,
 
-            FieldPtr = 1UL << TableIndex.FieldPtr,
+            FieldPtr = 1UL << CliTableKind.FieldPtr,
 
-            Field = 1UL << TableIndex.Field,
+            Field = 1UL << CliTableKind.Field,
 
-            MethodPtr = 1UL << TableIndex.MethodPtr,
+            MethodPtr = 1UL << CliTableKind.MethodPtr,
 
-            MethodDef = 1UL << TableIndex.MethodDef,
+            MethodDef = 1UL << CliTableKind.MethodDef,
 
-            ParamPtr = 1UL << TableIndex.ParamPtr,
+            ParamPtr = 1UL << CliTableKind.ParamPtr,
 
-            Param = 1UL << TableIndex.Param,
+            Param = 1UL << CliTableKind.Param,
 
-            InterfaceImpl = 1UL << TableIndex.InterfaceImpl,
+            InterfaceImpl = 1UL << CliTableKind.InterfaceImpl,
 
-            MemberRef = 1UL << TableIndex.MemberRef,
+            MemberRef = 1UL << CliTableKind.MemberRef,
 
-            Constant = 1UL << TableIndex.Constant,
+            Constant = 1UL << CliTableKind.Constant,
 
-            CustomAttribute = 1UL << TableIndex.CustomAttribute,
+            CustomAttribute = 1UL << CliTableKind.CustomAttribute,
 
-            FieldMarshal = 1UL << TableIndex.FieldMarshal,
+            FieldMarshal = 1UL << CliTableKind.FieldMarshal,
 
-            DeclSecurity = 1UL << TableIndex.DeclSecurity,
+            DeclSecurity = 1UL << CliTableKind.DeclSecurity,
 
-            ClassLayout = 1UL << TableIndex.ClassLayout,
+            ClassLayout = 1UL << CliTableKind.ClassLayout,
 
-            FieldLayout = 1UL << TableIndex.FieldLayout,
+            FieldLayout = 1UL << CliTableKind.FieldLayout,
 
-            StandAloneSig = 1UL << TableIndex.StandAloneSig,
+            StandAloneSig = 1UL << CliTableKind.StandAloneSig,
 
-            EventMap = 1UL << TableIndex.EventMap,
+            EventMap = 1UL << CliTableKind.EventMap,
 
-            EventPtr = 1UL << TableIndex.EventPtr,
+            EventPtr = 1UL << CliTableKind.EventPtr,
 
-            Event = 1UL << TableIndex.Event,
+            Event = 1UL << CliTableKind.Event,
 
-            PropertyMap = 1UL << TableIndex.PropertyMap,
+            PropertyMap = 1UL << CliTableKind.PropertyMap,
 
-            PropertyPtr = 1UL << TableIndex.PropertyPtr,
+            PropertyPtr = 1UL << CliTableKind.PropertyPtr,
 
-            Property = 1UL << TableIndex.Property,
+            Property = 1UL << CliTableKind.Property,
 
-            MethodSemantics = 1UL << TableIndex.MethodSemantics,
+            MethodSemantics = 1UL << CliTableKind.MethodSemantics,
 
-            MethodImpl = 1UL << TableIndex.MethodImpl,
+            MethodImpl = 1UL << CliTableKind.MethodImpl,
 
-            ModuleRef = 1UL << TableIndex.ModuleRef,
+            ModuleRef = 1UL << CliTableKind.ModuleRef,
 
-            TypeSpec = 1UL << TableIndex.TypeSpec,
+            TypeSpec = 1UL << CliTableKind.TypeSpec,
 
-            ImplMap = 1UL << TableIndex.ImplMap,
+            ImplMap = 1UL << CliTableKind.ImplMap,
 
-            FieldRva = 1UL << TableIndex.FieldRva,
+            FieldRva = 1UL << CliTableKind.FieldRva,
 
-            EnCLog = 1UL << TableIndex.EncLog,
+            EnCLog = 1UL << CliTableKind.EncLog,
 
-            EnCMap = 1UL << TableIndex.EncMap,
+            EnCMap = 1UL << CliTableKind.EncMap,
 
-            Assembly = 1UL << TableIndex.Assembly,
+            Assembly = 1UL << CliTableKind.Assembly,
 
-            AssemblyRef = 1UL << TableIndex.AssemblyRef,
+            AssemblyRef = 1UL << CliTableKind.AssemblyRef,
 
-            File = 1UL << TableIndex.File,
+            File = 1UL << CliTableKind.File,
 
-            ExportedType = 1UL << TableIndex.ExportedType,
+            ExportedType = 1UL << CliTableKind.ExportedType,
 
-            ManifestResource = 1UL << TableIndex.ManifestResource,
+            ManifestResource = 1UL << CliTableKind.ManifestResource,
 
-            NestedClass = 1UL << TableIndex.NestedClass,
+            NestedClass = 1UL << CliTableKind.NestedClass,
 
-            GenericParam = 1UL << TableIndex.GenericParam,
+            GenericParam = 1UL << CliTableKind.GenericParam,
 
-            MethodSpec = 1UL << TableIndex.MethodSpec,
+            MethodSpec = 1UL << CliTableKind.MethodSpec,
 
-            GenericParamConstraint = 1UL << TableIndex.GenericParamConstraint,
+            GenericParamConstraint = 1UL << CliTableKind.GenericParamConstraint,
 
-            Document = 1UL << TableIndex.Document,
+            Document = 1UL << CliTableKind.Document,
 
-            MethodDebugInformation = 1UL << TableIndex.MethodDebugInformation,
+            MethodDebugInformation = 1UL << CliTableKind.MethodDebugInformation,
 
-            LocalScope = 1UL << TableIndex.LocalScope,
+            LocalScope = 1UL << CliTableKind.LocalScope,
 
-            LocalVariable = 1UL << TableIndex.LocalVariable,
+            LocalVariable = 1UL << CliTableKind.LocalVariable,
 
-            LocalConstant = 1UL << TableIndex.LocalConstant,
+            LocalConstant = 1UL << CliTableKind.LocalConstant,
 
-            ImportScope = 1UL << TableIndex.ImportScope,
+            ImportScope = 1UL << CliTableKind.ImportScope,
 
-            StateMachineMethod = 1UL << TableIndex.StateMachineMethod,
+            StateMachineMethod = 1UL << CliTableKind.StateMachineMethod,
 
-            CustomDebugInformation = 1UL << TableIndex.CustomDebugInformation,
+            CustomDebugInformation = 1UL << CliTableKind.CustomDebugInformation,
 
             PtrTables =
                 FieldPtr
@@ -185,86 +184,85 @@ namespace Z0
                 TypeSystemTables & ~PtrTables & ~EncTables
         }
 
-
         /// <summary>
         /// These constants are all in the byte range and apply to the interpretation of <see cref="Handle.VType"/>,
         /// </summary>
         readonly struct HandleType
         {
-            public const uint Module = (uint)TableIndex.Module;
+            public const uint Module = (byte)CliTableKind.Module;
 
-            public const uint TypeRef = (uint)TableIndex.TypeRef;
+            public const uint TypeRef = (byte)CliTableKind.TypeRef;
 
-            public const uint TypeDef = (uint)TableIndex.TypeDef;
+            public const uint TypeDef = (byte)CliTableKind.TypeDef;
 
-            public const uint FieldDef = (uint)TableIndex.Field;
+            public const uint FieldDef = (byte)CliTableKind.Field;
 
-            public const uint MethodDef = (uint)TableIndex.MethodDef;
+            public const uint MethodDef = (byte)CliTableKind.MethodDef;
 
-            public const uint ParamDef = (uint)TableIndex.Param;
+            public const uint ParamDef = (byte)CliTableKind.Param;
 
-            public const uint InterfaceImpl = (uint)TableIndex.InterfaceImpl;
+            public const uint InterfaceImpl = (byte)CliTableKind.InterfaceImpl;
 
-            public const uint MemberRef = (uint)TableIndex.MemberRef;
+            public const uint MemberRef = (byte)CliTableKind.MemberRef;
 
-            public const uint Constant = (uint)TableIndex.Constant;
+            public const uint Constant = (byte)CliTableKind.Constant;
 
-            public const uint CustomAttribute = (uint)TableIndex.CustomAttribute;
+            public const uint CustomAttribute = (byte)CliTableKind.CustomAttribute;
 
-            public const uint DeclSecurity = (uint)TableIndex.DeclSecurity;
+            public const uint DeclSecurity = (byte)CliTableKind.DeclSecurity;
 
-            public const uint Signature = (uint)TableIndex.StandAloneSig;
+            public const uint Signature = (byte)CliTableKind.StandAloneSig;
 
-            public const uint EventMap = (uint)TableIndex.EventMap;
+            public const uint EventMap = (byte)CliTableKind.EventMap;
 
-            public const uint Event = (uint)TableIndex.Event;
+            public const uint Event = (byte)CliTableKind.Event;
 
-            public const uint PropertyMap = (uint)TableIndex.PropertyMap;
+            public const uint PropertyMap = (byte)CliTableKind.PropertyMap;
 
-            public const uint Property = (uint)TableIndex.Property;
+            public const uint Property = (byte)CliTableKind.Property;
 
-            public const uint MethodSemantics = (uint)TableIndex.MethodSemantics;
+            public const uint MethodSemantics = (byte)CliTableKind.MethodSemantics;
 
-            public const uint MethodImpl = (uint)TableIndex.MethodImpl;
+            public const uint MethodImpl = (byte)CliTableKind.MethodImpl;
 
-            public const uint ModuleRef = (uint)TableIndex.ModuleRef;
+            public const uint ModuleRef = (byte)CliTableKind.ModuleRef;
 
-            public const uint TypeSpec = (uint)TableIndex.TypeSpec;
+            public const uint TypeSpec = (byte)CliTableKind.TypeSpec;
 
-            public const uint Assembly = (uint)TableIndex.Assembly;
+            public const uint Assembly = (byte)CliTableKind.Assembly;
 
-            public const uint AssemblyRef = (uint)TableIndex.AssemblyRef;
+            public const uint AssemblyRef = (byte)CliTableKind.AssemblyRef;
 
-            public const uint File = (uint)TableIndex.File;
+            public const uint File = (byte)CliTableKind.File;
 
-            public const uint ExportedType = (uint)TableIndex.ExportedType;
+            public const uint ExportedType = (byte)CliTableKind.ExportedType;
 
-            public const uint ManifestResource = (uint)TableIndex.ManifestResource;
+            public const uint ManifestResource = (byte)CliTableKind.ManifestResource;
 
-            public const uint NestedClass = (uint)TableIndex.NestedClass;
+            public const uint NestedClass = (byte)CliTableKind.NestedClass;
 
-            public const uint GenericParam = (uint)TableIndex.GenericParam;
+            public const uint GenericParam = (byte)CliTableKind.GenericParam;
 
-            public const uint MethodSpec = (uint)TableIndex.MethodSpec;
+            public const uint MethodSpec = (byte)CliTableKind.MethodSpec;
 
-            public const uint GenericParamConstraint = (uint)TableIndex.GenericParamConstraint;
+            public const uint GenericParamConstraint = (byte)CliTableKind.GenericParamConstraint;
 
             // debug tables:
-            public const uint Document = (uint)TableIndex.Document;
+            public const uint Document = (byte)CliTableKind.Document;
 
-            public const uint MethodDebugInformation = (uint)TableIndex.MethodDebugInformation;
+            public const uint MethodDebugInformation = (byte)CliTableKind.MethodDebugInformation;
 
-            public const uint LocalScope = (uint)TableIndex.LocalScope;
+            public const uint LocalScope = (byte)CliTableKind.LocalScope;
 
-            public const uint LocalVariable = (uint)TableIndex.LocalVariable;
+            public const uint LocalVariable = (byte)CliTableKind.LocalVariable;
 
-            public const uint LocalConstant = (uint)TableIndex.LocalConstant;
+            public const uint LocalConstant = (byte)CliTableKind.LocalConstant;
 
-            public const uint ImportScope = (uint)TableIndex.ImportScope;
+            public const uint ImportScope = (byte)CliTableKind.ImportScope;
 
-            public const uint AsyncMethod = (uint)TableIndex.StateMachineMethod;
+            public const uint AsyncMethod = (byte)CliTableKind.StateMachineMethod;
 
-            public const uint CustomDebugInformation = (uint)TableIndex.CustomDebugInformation;
+            public const uint CustomDebugInformation = (byte)CliTableKind.CustomDebugInformation;
 
             public const uint UserString = 0x70;     // #UserString heap
 
@@ -331,6 +329,7 @@ namespace Z0
 
             // Reserved values that can be used for future strings:
             public const uint ReservedString1 = (2 << HeapHandleType.OffsetBitCount);
+
             public const uint ReservedString2 = (3 << HeapHandleType.OffsetBitCount);
 
             // Virtual string identified by a virtual index
@@ -341,22 +340,22 @@ namespace Z0
 
             // Reserved virtual strings that can be used in future:
             public const uint ReservedVirtualString1 = HeapHandleType.VirtualBit | (2 << HeapHandleType.OffsetBitCount);
+
             public const uint ReservedVirtualString2 = HeapHandleType.VirtualBit | (3 << HeapHandleType.OffsetBitCount);
         }
 
         readonly struct HeapHandleType
         {
             // Heap offset values are limited to 29 bits (max compressed integer)
-            public const int OffsetBitCount = 29;
+            public const byte OffsetBitCount = 29;
 
             public const uint OffsetMask = (1 << OffsetBitCount) - 1;
 
             public const uint VirtualBit = 0x80000000;
 
             public static bool IsValidHeapOffset(uint offset)
-            {
-                return (offset & ~OffsetMask) == 0;
-            }
+                => (offset & ~OffsetMask) == 0;
+
         }
 
         readonly struct TokenTypeIds
@@ -511,6 +510,5 @@ namespace Z0
 
             public const int LargeStreamHeapSize = 0x0001000;
         }
-
     }
 }

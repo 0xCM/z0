@@ -9,16 +9,12 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct ParamRow : IRecord<ParamRow>
+        [Record(CliTableKind.TypeSpec), StructLayout(LayoutKind.Sequential)]
+        public struct TypeSpecRow : IRecord<TypeSpecRow>
         {
             public CliRowKey Key;
 
-            public ushort Flags;
-
-            public ushort Sequence;
-
-            public StringIndex Name;
+            public BlobIndex Signature;
         }
     }
 }

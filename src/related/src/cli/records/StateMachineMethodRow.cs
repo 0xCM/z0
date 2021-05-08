@@ -9,16 +9,14 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct PropertyRow : IRecord<PropertyRow>
+        [Record(CliTableKind.StateMachineMethod), StructLayout(LayoutKind.Sequential)]
+        public struct StateMachineMethodRow : IRecord<StateMachineMethodRow>
         {
             public CliRowKey Key;
 
-            public ushort PropFlags;
+            public CliRowKey MoveNextMethod;
 
-            public StringIndex Name;
-
-            public BlobIndex Type;
+            public CliRowKey KickoffMethod;
         }
     }
 }

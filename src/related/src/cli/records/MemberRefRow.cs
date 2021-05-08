@@ -9,11 +9,9 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        [Record(CliTableKind.MemberRef), StructLayout(LayoutKind.Sequential)]
         public struct MemberRefRow : IRecord<MemberRefRow>
         {
-            public const string TableId = "image.memberrefs";
-
             public CliToken Token;
 
             public MemberRefKind RefKind;

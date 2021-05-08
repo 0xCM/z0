@@ -2,6 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 namespace Z0
 {
+    /// <summary>
+    /// Replicates <see cref='System.Reflection.Metadata.Ecma335.TableIndex'/>
+    /// </summary>
     public enum CliTableKind : byte
     {
         Module = 0x00,

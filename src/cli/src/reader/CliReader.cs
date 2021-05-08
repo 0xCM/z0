@@ -18,35 +18,6 @@ namespace Z0
     [ApiHost]
     public unsafe readonly struct CliReader
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static uint handles<T>(Span<T> dst)
-            where T : unmanaged
-        {
-            var counter = 0u;
-            var max = dst.Length;
-            var handles = new CliHandles<T>(max);
-            for(var i=0; i<max; i++)
-            {
-                if(handles.Next(out seek(dst,i)))
-                    counter++;
-                else
-                    break;
-            }
-            return counter;
-        }
-
-        [Op]
-        public static CliReader create(Assembly src)
-            => new CliReader(src);
-
-        [Op]
-        public static CliReader create(MetadataReader src)
-            => new CliReader(src);
-
-        [Op]
-        public static CliReader create(MemorySeg src)
-            => new CliReader(src);
-
         [Op]
         public static TableIndex? table(Handle handle)
         {

@@ -8,9 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
+    using static Part;
     [ApiHost]
     public readonly partial struct Cli
     {
+        const NumericKind Closure = UnsignedInts;
+
         public static void visualize(FS.FilePath src, FS.FilePath dst)
             => Mdv.run(src.Name,dst.Name);
 

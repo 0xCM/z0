@@ -9,12 +9,16 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct StandaloneSigRow  : IRecord<StandaloneSigRow>
+        [Record(CliTableKind.Property), StructLayout(LayoutKind.Sequential)]
+        public struct PropertyRow : IRecord<PropertyRow>
         {
             public CliRowKey Key;
 
-            public BlobIndex Signature;
+            public ushort PropFlags;
+
+            public StringIndex Name;
+
+            public BlobIndex Type;
         }
     }
 }

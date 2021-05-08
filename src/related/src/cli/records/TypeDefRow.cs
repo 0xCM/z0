@@ -6,20 +6,25 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Reflection;
 
     partial struct CliRecords
     {
-        [Record, StructLayout(LayoutKind.Sequential)]
-        public struct MethodSemanticsRow
+        [Record(CliTableKind.TypeDef), StructLayout(LayoutKind.Sequential)]
+        public struct TypeDefRow : IRecord<TypeDefRow>
         {
             public CliRowKey Key;
 
-            public MethodSemanticsAttributes Semantic;
+            public uint Flags;
 
-            public CliRowKey Method;
+            public StringIndex Name;
 
-            public CliRowKey Association;
+            public StringIndex Namespace;
+
+            public int Extends;
+
+            public int FieldList;
+
+            public int MethodList;
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ImageRecords;
 
     public partial class ImageMetaReader : IDisposable
     {
@@ -38,7 +37,7 @@ namespace Z0
             PeReader = new PEReader(Stream);
             MD = PeReader.GetMetadataReader();
             MetadataBlock = PeReader.GetMetadata();
-            CliReader = new CliReader(MetadataBlock);
+            CliReader = Cli.reader(MetadataBlock);
         }
 
         [MethodImpl(Inline)]

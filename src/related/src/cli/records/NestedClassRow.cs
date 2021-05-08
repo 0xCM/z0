@@ -9,16 +9,14 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct TypeRefRow : IRecord<TypeRefRow>
+        [Record(CliTableKind.NestedClass), StructLayout(LayoutKind.Sequential)]
+        public struct NestedClassRow
         {
             public CliRowKey Key;
 
-            public CliRowKey ResolutionScope;
+            public CliRowKey NestedClass;
 
-            public StringIndex Name;
-
-            public StringIndex Namespace;
+            public CliRowKey EnclosingClass;
         }
     }
 }

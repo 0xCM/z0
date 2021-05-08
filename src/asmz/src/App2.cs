@@ -1237,7 +1237,7 @@ namespace Z0.Asm
 
         public void ListCliTables(Assembly src)
         {
-            var reader = CliReader.create(src);
+            var reader = Cli.reader(src);
             root.iter(reader.MethodDefKeys(), k => Wf.Row(k));
             root.iter(reader.TypeDefKeys(), k => Wf.Row(k));
             root.iter(reader.TypeRefKeys(), k => Wf.Row(k));
@@ -1255,7 +1255,7 @@ namespace Z0.Asm
 
         public void ReadMethodDefs(Assembly src)
         {
-            var reader = CliReader.create(src);
+            var reader = Cli.reader(src);
             var handles = reader.MethodDefHandles();
             var rows = handles.Map(h => reader.Read(h));
             var count = rows.Length;

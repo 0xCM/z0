@@ -16,7 +16,7 @@ namespace Z0
 
     partial class ImageMetaReader
     {
-        public ReadOnlySpan<MemberFieldInfo> ReadFields()
+        public ReadOnlySpan<MemberFieldInfo> ReadFieldInfo()
         {
             var reader = MD;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();

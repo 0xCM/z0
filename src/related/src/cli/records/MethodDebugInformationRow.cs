@@ -4,19 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.InteropServices;
 
     partial struct CliRecords
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct NestedClassRow
+        [Record(CliTableKind.MethodDebugInformation), StructLayout(LayoutKind.Sequential)]
+        public struct MethodDebugInformationRow : IRecord<MethodDebugInformationRow>
         {
             public CliRowKey Key;
 
-            public CliRowKey NestedClass;
+            public int Document;
 
-            public CliRowKey EnclosingClass;
+            public BlobIndex SequencePoints;
         }
     }
 }

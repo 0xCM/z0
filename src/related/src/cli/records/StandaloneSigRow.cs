@@ -4,18 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.InteropServices;
 
     partial struct CliRecords
     {
-        [Record, StructLayout(LayoutKind.Sequential)]
-        public struct MethodDebugInformationRow : IRecord<MethodDebugInformationRow>
+        [Record(CliTableKind.StandAloneSig), StructLayout(LayoutKind.Sequential)]
+        public struct StandaloneSigRow  : IRecord<StandaloneSigRow>
         {
             public CliRowKey Key;
 
-            public int Document;
-
-            public BlobIndex SequencePoints;
+            public BlobIndex Signature;
         }
     }
 }
