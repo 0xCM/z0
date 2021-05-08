@@ -5,7 +5,7 @@
 namespace Z0
 {
     [RecordSet]
-    public readonly partial struct CliRecords
+    public readonly partial struct CliRecords : IRecordSet<CliRecords>
     {
 
     }

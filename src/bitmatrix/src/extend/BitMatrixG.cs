@@ -30,9 +30,6 @@ namespace Z0
             where T : unmanaged
                 => new BitMatrix<T>(A.Content.Replicate());
 
-        [MethodImpl(Inline)]
-        public static void Fill<T>(this RowBits<T> src, T value)
-            where T : unmanaged
-                => src.data.Fill(value);
+
     }
 }

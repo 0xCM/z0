@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [RecordSet]
-    public readonly partial struct AsmRecords
+    public readonly partial struct AsmRecords : IRecordSet<AsmRecords>
     {
 
     }
-
 }

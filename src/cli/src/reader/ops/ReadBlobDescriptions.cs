@@ -16,12 +16,12 @@ namespace Z0
     partial class ImageMetaReader
     {
         [Op]
-        public MetaBlob ReadBlobDescription(BlobHandle handle, Count seq)
+        public CliBlob ReadBlobDescription(BlobHandle handle, Count seq)
         {
             var offset = (Address32)MD.GetHeapOffset(handle);
             var value = MD.GetBlobBytes(handle) ?? sys.empty<byte>();
             var size = (uint)MD.GetHeapSize(HeapIndex.Blob);
-            var row = new MetaBlob();
+            var row = new CliBlob();
             row.Sequence = seq;
             row.HeapSize = (uint)MD.GetHeapSize(HeapIndex.Blob);
             row.Offset = (Address32)MD.GetHeapOffset(handle);
@@ -30,19 +30,19 @@ namespace Z0
             return row;
         }
 
-        public ReadOnlySpan<MetaBlob> ReadBlobDescriptions()
+        public ReadOnlySpan<CliBlob> ReadBlobDescriptions()
         {
             var size = (uint)MD.GetHeapSize(HeapIndex.Blob);
             if (size == 0)
-                return Span<MetaBlob>.Empty;
+                return Span<CliBlob>.Empty;
 
             var handle = MetadataTokens.BlobHandle(1);
             var i=0;
-            var values = new List<MetaBlob>();
+            var values = new List<CliBlob>();
             do
             {
                 var value = MD.GetBlobBytes(handle);
-                var row = new MetaBlob();
+                var row = new CliBlob();
                 row.Sequence = i++;
                 row.HeapSize = size;
                 row.Offset = (Address32)MD.GetHeapOffset(handle);

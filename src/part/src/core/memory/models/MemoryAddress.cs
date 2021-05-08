@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    public unsafe readonly struct MemoryAddress : IAddress<ulong>, IDataTypeComparable<MemoryAddress>
+    public unsafe readonly struct MemoryAddress : IAddress<ulong>, IComparable<MemoryAddress>, IEquatable<MemoryAddress>
     {
         public ulong Location {get;}
 

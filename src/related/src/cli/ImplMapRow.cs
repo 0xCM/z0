@@ -9,7 +9,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.ImplMap), StructLayout(LayoutKind.Sequential)]
-        public struct ImplMapRow
+        public struct ImplMapRow : IRecord<ImplMapRow>
         {
             public CliRowKey Key;
 

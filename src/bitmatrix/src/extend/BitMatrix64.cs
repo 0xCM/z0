@@ -54,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format(this BitMatrix64 src)
-            => src.Content.FormatBitRows(src.Order);
+            => src.Content.FormatGridBits(src.Order);
 
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix

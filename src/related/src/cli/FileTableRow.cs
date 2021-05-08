@@ -8,8 +8,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record, StructLayout(LayoutKind.Sequential)]
-        public struct FileTableRow
+        [Record(CliTableKind.File), StructLayout(LayoutKind.Sequential)]
+        public struct FileTableRow : IRecord<FileTableRow>
         {
             public CliRowKey Key;
 

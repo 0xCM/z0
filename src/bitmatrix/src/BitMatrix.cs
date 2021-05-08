@@ -15,17 +15,6 @@ namespace Z0
         const NumericKind Closure = NumericKind.UnsignedInts;
     }
 
-
-    /// <summary>
-    /// Defines primary api surface for rowbit manipulation
-    /// </summary>
-    [ApiHost]
-    public partial class RowBits
-    {
-
-    }
-
-
     public interface IBitMatrixServices
     {
         IBitMatrixWriter Writer(FS.FilePath dst)

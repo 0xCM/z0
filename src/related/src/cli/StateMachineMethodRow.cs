@@ -9,7 +9,7 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [StructLayout(LayoutKind.Sequential)]
+        [Record, StructLayout(LayoutKind.Sequential)]
         public struct StateMachineMethodRow : IRecord<StateMachineMethodRow>
         {
             public CliRowKey Key;

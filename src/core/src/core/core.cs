@@ -12,6 +12,6 @@ namespace Z0
 
     public readonly partial struct core
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

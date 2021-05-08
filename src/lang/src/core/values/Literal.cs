@@ -7,7 +7,7 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a literal value which, by definition, is a named constant

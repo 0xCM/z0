@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static memory;
-    using static ImageRecords;
+    using static CliRecords;
 
     public sealed class MsilPipe : AppService<MsilPipe>
     {

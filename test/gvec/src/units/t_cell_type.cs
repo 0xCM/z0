@@ -13,8 +13,10 @@ namespace Z0
     {
         public void check_cell_types()
         {
-            root.iter(VK.Types128(), t => check_cell_type(t, w128));
-            root.iter(VK.Types256(), t => check_cell_type(t, w256));
+            var v128 = VK.Types128();
+            var v256 = VK.Types256();
+            root.iter(v128, t => check_cell_type(t, w128));
+            root.iter(v256, t => check_cell_type(t, w256));
         }
 
         void check_cell_type(Type tVector, W128 w)

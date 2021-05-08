@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-
-    using System;
-
-
     [ApiHost("lang.sharp")]
     public readonly partial struct CSharp : ILanguage<CSharp>
     {
@@ -31,7 +27,5 @@ namespace Z0.Lang
             dst.AppendLine("}");
             return dst.Emit();
         }
-
-
    }
 }

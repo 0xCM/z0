@@ -5,7 +5,7 @@
 namespace Z0
 {
     [RecordSet(Docs)]
-    public readonly partial struct MinidumpRecords
+    public readonly partial struct MinidumpRecords : IRecordSet<MinidumpRecords>
     {
         const string Docs = "sdk-api-src/content/minidumpapiset/";
     }

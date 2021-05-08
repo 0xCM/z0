@@ -17,18 +17,9 @@ namespace Z0.Logix
 
         public void check_identities()
         {
-            root.iter(LogicIdentities.All, check_exhaustive);
-        }
-
-        void check_exhaustive(ComparisonExpr t)
-        {
-
-            foreach(var c in bitcombo(t.Vars.Length))
-            {
-                t.SetVars(c);
-                Claim.eq(bit.On, LogicEngine.eval(t));
-                Claim.require(LogicEngine.satisfied(t, c[0], c[1]));
-            }
+            var src = LogicIdentities.All.Array();
+            root.iter(src, expr => Claim.notnull(expr.Vars));
+            root.iter(src, check_exhaustive);
         }
 
         public void identity_bench()
@@ -40,7 +31,19 @@ namespace Z0.Logix
             else
             {
                 evaluator_bench();
+            }
+        }
 
+        void check_exhaustive(ComparisonExpr expr)
+        {
+            var count = expr.VarCount;
+            Claim.gteq(count, 2u);
+
+            foreach(var c in bitcombo(count))
+            {
+                expr.SetVars(c);
+                Claim.eq(bit.On, LogicEngine.eval(expr));
+                Claim.require(LogicEngine.satisfied(expr, c[0], c[1]));
             }
         }
 

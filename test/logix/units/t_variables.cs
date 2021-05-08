@@ -28,7 +28,7 @@ namespace Z0.Logix
             NumericLogixHost.BinaryLogicKinds.ToArray().Iter(check_binop_vars);
         }
 
-        void check_solution()
+        public void check_solution()
         {
             var x = variable<uint>(0u);
             var y = literal(27u);
@@ -39,7 +39,7 @@ namespace Z0.Logix
             Claim.nea(result.IsEmpty());
         }
 
-        void minimize()
+        public void minimize()
         {
             var v1 = variable<uint>(0u);
             var v2 = variable<uint>(1u);
@@ -114,7 +114,7 @@ namespace Z0.Logix
             var op0 = NumericLogixHost.lookup<T>(k0);
             var op1 = NumericLogixHost.lookup<T>(k1);
 
-            for(var i=0; i< RepCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var a = Random.SetNext(v0);
                 var b = Random.SetNext(v1);

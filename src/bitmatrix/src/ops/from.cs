@@ -24,7 +24,7 @@ namespace Z0
             if(src.RowCount != width<T>())
                 AppErrors.Throw($"{width<T>()} != {src.RowCount}");
 
-            return load(src.data);
+            return load(src.Storage);
         }
 
         [MethodImpl(Inline), Op]

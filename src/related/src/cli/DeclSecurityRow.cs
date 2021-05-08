@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    using static ImageRecords;
-
     partial struct CliRecords
     {
         [Record(CliTableKind.DeclSecurity), StructLayout(LayoutKind.Sequential)]

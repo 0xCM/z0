@@ -7,7 +7,7 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
     public interface IKeyword

@@ -13,21 +13,6 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Covers a token-identified buffer with a bytespan
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> edit(BufferToken src)
-            => cover(src.Address.Pointer<byte>(), src.BufferSize);
-
-        /// <summary>
-        /// Covers a token-identified buffer with a span
-        /// </summary>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe Span<T> edit<T>(BufferToken src)
-            where T : unmanaged
-                => cover(src.Address.Pointer<byte>(), src.BufferSize).Recover<T>();
-
-        /// <summary>
         /// Interprets a readonly generic reference as a uint8 reference
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -64,6 +49,17 @@ namespace Z0
             => ref As<T,ulong>(ref AsRef(in src));
 
         /// <summary>
+        /// Covers the content of a readonly span with an editable span
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="count">The number of source cells to read</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        /// <returns>Obviously, this trick could be particularly dangerous</returns>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> edit<T>(ReadOnlySpan<T> src)
+            => cover(edit(first(src)), src.Length);
+
+        /// <summary>
         /// Covers a <see cref='MemoryRange'/> with a <see cref='Span{T}'
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -84,46 +80,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(SegRef src)
             => src.As<T>();
-
-        /// <summary>
-        /// Transforms a readonly T-cell into an editable T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T edit<T>(in T src)
-            => ref AsRef(src);
-
-        /// <summary>
-        /// Covers the content of a readonly span with an editable span
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="count">The number of source cells to read</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        /// <returns>Obviously, this trick could be particularly dangerous</returns>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> edit<T>(ReadOnlySpan<T> src)
-            => cover(edit(first(src)), src.Length);
-
-        /// <summary>
-        /// Transforms a readonly S-cell into an editable T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T edit<S,T>(in S src)
-            => ref As<S,T>(ref AsRef(src));
-
-        /// <summary>
-        /// Transforms a readonly S-cell into an editable T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <param name="dst">The target cell</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T edit<S,T>(in S src, ref T dst)
-            => ref As<S,T>(ref AsRef(src));
     }
 }

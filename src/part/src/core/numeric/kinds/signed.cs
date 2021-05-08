@@ -51,19 +51,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool signed(object src)
             => src is sbyte || src is short || src is int || src is long;
-
-        /// <summary>
-        /// Recognized signed integral kinds
-        /// </summary>
-        [Op]
-        public static Index<Type> SignedTypes()
-            => memory.array(typeof(sbyte), typeof(short), typeof(int), typeof(long));
-
-        /// <summary>
-        /// Recognized signed integral kinds
-        /// </summary>
-        [Op]
-        public static Index<NumericKind> SignedKinds()
-            => memory.array(NK.I8, NK.I16, NK.I32, NK.I64);
     }
 }

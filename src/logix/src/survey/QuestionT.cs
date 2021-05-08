@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a question in the context of a survey
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public readonly struct Question<T> : ITextual<Question<T>>
+    public readonly struct Question<T> : ITextual
         where T : unmanaged
     {
         /// <summary>
@@ -36,10 +36,10 @@ namespace Z0
         /// <summary>
         /// The potential choices/answers
         /// </summary>
-        public QuestionChoice<T>[] Choices {get;}
+        public Index<QuestionChoice<T>> Choices {get;}
 
         [MethodImpl(Inline)]
-        public Question(uint id, string statement, int? select, params QuestionChoice<T>[] choices)
+        public Question(uint id, string statement, int? select, QuestionChoice<T>[] choices)
         {
             QuestionId = id;
             Label = statement;

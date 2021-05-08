@@ -13,7 +13,7 @@ namespace Z0
     /// Defines a response to a survey question
     /// </summary>
     /// <typeparam name="T">The primal survey representation type</typeparam>
-    public readonly struct QuestionResponse<T>
+    public readonly struct QuestionResponse<T> : ITextual
         where T : unmanaged
     {
         public uint QuestionId {get;}
@@ -26,29 +26,12 @@ namespace Z0
             Chosen = chosen;
         }
 
-        public string Format(bool bracket = false, char sep = Chars.Comma)
-        {
-            var sb = text.build();
-            if(bracket)
-                sb.Append(Chars.LBracket);
 
-            for(var i=0; i<Chosen.Length; i++)
-            {
-                var chosen = Chosen[i];
-                sb.Append($"({chosen.ChoiceId}) {chosen.Label}");
-                if(i != Chosen.Length - 1)
-                {
-                    sb.Append(sep);
-                    sb.Append(Chars.Space);
-                }
+        public string Format()
+            => api.format(this, false, Chars.Comma);
 
-            }
-
-            if(bracket)
-                sb.Append(Chars.RBracket);
-            return sb.ToString();
-
-        }
+        public string Format(bool bracket, char sep)
+            => api.format(this, bracket, sep);
 
         public override string ToString()
             => Format();

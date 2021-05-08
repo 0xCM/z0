@@ -5,7 +5,7 @@
 namespace Z0
 {
     [RecordSet]
-    public readonly partial struct ProcessMemory
+    public readonly partial struct ProcessMemory : IRecordSet<ProcessMemory>
     {
 
     }

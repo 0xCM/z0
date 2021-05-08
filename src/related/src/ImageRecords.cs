@@ -5,7 +5,7 @@
 namespace Z0
 {
     [ApiHost, RecordSet]
-    public readonly partial struct ImageRecords
+    public readonly partial struct ImageRecords : IRecordSet<ImageRecords>
     {
 
     }

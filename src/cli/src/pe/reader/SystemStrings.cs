@@ -12,19 +12,19 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public Index<SystemString> SystemStrings()
+        public Index<CliSystemString> SystemStrings()
         {
             var reader = Stream.Reader;
             int size = reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
-                return sys.empty<SystemString>();
+                return sys.empty<CliSystemString>();
 
-            var values = root.list<SystemString>();
+            var values = root.list<CliSystemString>();
             var handle = MetadataTokens.StringHandle(0);
             var i=0;
             do
             {
-                values.Add(new SystemString(seq: i++, size, (Address32)reader.GetHeapOffset(handle), reader.GetString(handle)));
+                values.Add(new CliSystemString(seq: i++, size, (Address32)reader.GetHeapOffset(handle), reader.GetString(handle)));
                 handle = reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);

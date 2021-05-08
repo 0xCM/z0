@@ -122,13 +122,13 @@ namespace Z0
             => (Address32)MD.GetHeapOffset(handle);
 
         [Op]
-        public StringHeap StringHeap()
+        public CliStringHeap StringHeap()
         {
             var size = MD.GetHeapSize(HeapIndex.String);
             var handle = MetadataTokens.StringHandle(0);
             var offset = MD.GetHeapOffset(handle);
             var @base = Segment.BaseAddress + offset;
-            return new StringHeap(@base, size);
+            return new CliStringHeap(@base, size);
         }
 
         [MethodImpl(Inline), Op]

@@ -34,6 +34,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void store(BinaryCode src, ByteSize size, MemoryAddress dst)
-            => src.View.CopyTo(memory.edit(dst, size));
+            => src.View.CopyTo(edit(dst, size));
     }
 }

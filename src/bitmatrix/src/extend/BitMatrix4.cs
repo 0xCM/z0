@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format(this BitMatrix4 src)
-            => src.Bytes.FormatBitRows(src.Order);
+            => src.Bytes.FormatGridBits(src.Order);
 
         /// <summary>
         /// Transposes a copy of the source matrix

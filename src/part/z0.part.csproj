@@ -5,11 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
-    <ProjectReference Include="$(External)" />
     <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(External)" />
     <ProjectReference Include="$(Interop)" />
-    <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Clr)" />
   </ItemGroup>
 

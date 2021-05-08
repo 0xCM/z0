@@ -16,20 +16,20 @@ namespace Z0
 
     partial class ImageMetaReader
     {
-        public Index<UserString> ReadUserStrings()
+        public Index<CliUserString> ReadUserStrings()
         {
             var reader = MD;
             int size = reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
-                return sys.empty<UserString>();
+                return sys.empty<CliUserString>();
 
-            var values = root.list<UserString>();
+            var values = root.list<CliUserString>();
             var handle = MetadataTokens.UserStringHandle(0);
             var i=0;
 
             do
             {
-                values.Add(new UserString(seq: i++, size, CliReader.HeapOffset(handle), CliReader.Read(handle)));
+                values.Add(new CliUserString(seq: i++, size, CliReader.HeapOffset(handle), CliReader.Read(handle)));
                 handle = reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);

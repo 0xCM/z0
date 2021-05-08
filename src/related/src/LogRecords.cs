@@ -5,7 +5,8 @@
 namespace Z0
 {
 
-    public readonly partial struct LogRecords
+    [RecordSet]
+    public readonly partial struct LogRecords : IRecordSet<LogRecords>
     {
 
 

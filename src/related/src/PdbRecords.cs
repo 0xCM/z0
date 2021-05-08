@@ -5,7 +5,7 @@
 namespace Z0
 {
     [RecordSet]
-    public readonly partial struct PdbRecords
+    public readonly partial struct PdbRecords : IRecordSet<PdbRecords>
     {
 
     }

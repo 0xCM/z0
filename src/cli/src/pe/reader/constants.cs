@@ -11,7 +11,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ImageRecords;
     using static CliRecords;
 
     partial class PeTableReader

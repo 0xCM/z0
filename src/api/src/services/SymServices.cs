@@ -14,7 +14,7 @@ namespace Z0
 
     public class SymServices : AppService<SymServices>
     {
-        public static ref SymRecord record<T>(Sym<T> src, ushort count, out SymRecord dst)
+        public static ref SymbolDetial detail<T>(Sym<T> src, ushort count, out SymbolDetial dst)
             where T : unmanaged
         {
             dst.TypeName = src.Type.Name;
@@ -41,22 +41,22 @@ namespace Z0
             return ref dst;
         }
 
-        public Index<SymRecord> EmitSymRecords<E>()
+        public Index<SymbolDetial> EmitSymDetails<E>()
             where E : unmanaged, Enum
         {
-            var dst = Db.Table<SymRecord>(typeof(E).Name);
-            var flow = Wf.EmittingTable<SymRecord>(dst);
+            var dst = Db.Table<SymbolDetial>(typeof(E).Name);
+            var flow = Wf.EmittingTable<SymbolDetial>(dst);
             var symbols  = Symbols<E>().View;
             var count = symbols.Length;
-            var buffer = alloc<SymRecord>(count);
+            var buffer = alloc<SymbolDetial>(count);
             ref var target = ref first(buffer);
-            var formatter = Tables.formatter<SymRecord>(SymRecord.RenderWidths);
+            var formatter = Tables.formatter<SymbolDetial>(SymbolDetial.RenderWidths);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
-                record(symbol, (ushort)count, out seek(target,i));
+                detail(symbol, (ushort)count, out seek(target,i));
                 writer.WriteLine(formatter.Format(skip(target,i)));
             }
             Wf.EmittedTable(flow, count);

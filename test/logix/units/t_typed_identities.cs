@@ -15,6 +15,25 @@ namespace Z0.Logix
 
     public class t_typed_identities : t_logix<t_typed_identities>
     {
+
+        public void check_identity_stream()
+        {
+            Claim.nonzero(TypedIdentities.ScalarIdentities<byte>().Array().Length);
+            Claim.nonzero(TypedIdentities.ScalarIdentities<ushort>().Array().Length);
+            Claim.nonzero(TypedIdentities.ScalarIdentities<uint>().Array().Length);
+            Claim.nonzero(TypedIdentities.ScalarIdentities<ulong>().Array().Length);
+
+            Claim.nonzero(TypedIdentities.Vec128Identities<byte>().Array().Length);
+            Claim.nonzero(TypedIdentities.Vec128Identities<ushort>().Array().Length);
+            Claim.nonzero(TypedIdentities.Vec128Identities<uint>().Array().Length);
+            Claim.nonzero(TypedIdentities.Vec128Identities<ulong>().Array().Length);
+
+            Claim.nonzero(TypedIdentities.Vec256Identities<byte>().Array().Length);
+            Claim.nonzero(TypedIdentities.Vec256Identities<ushort>().Array().Length);
+            Claim.nonzero(TypedIdentities.Vec256Identities<uint>().Array().Length);
+            Claim.nonzero(TypedIdentities.Vec256Identities<ulong>().Array().Length);
+        }
+
         public void check_scalar_identities()
         {
             root.iter(TypedIdentities.ScalarIdentities<byte>(), check_identity);
@@ -50,7 +69,6 @@ namespace Z0.Logix
                 identity.SetVars(x,y);
                 Claim.eq(TL.@true<T>(), LogicEngine.eval(identity));
                 Claim.require(LogicEngine.satisfied(identity, x, y));
-
             }
         }
 

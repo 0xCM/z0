@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Reifies a cell-parametric 256-bit vector kind
         /// </summary>
-        public static Vec256Kind<T> vk256<T>(T t = default)
+        public static Vec256Kind<T> vk256<T>()
             where T : unmanaged
                 => default;
     }

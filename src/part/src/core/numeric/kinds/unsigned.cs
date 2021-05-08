@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
 
@@ -50,19 +49,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool unsigned(object src)
             => src is byte || src is ushort || src is uint || src is ulong;
-
-        /// <summary>
-        /// Recognized unsigned integral types
-        /// </summary>
-        [Op]
-        public static IEnumerable<Type> UnsignedTypes()
-            => root.stream(typeof(byte), typeof(ushort),  typeof(uint), typeof(ulong));
-
-        /// <summary>
-        /// Recognized unsigned integral kinds
-        /// </summary>
-        [Op]
-        public static IEnumerable<NumericKind> UnsignedKinds()
-            => root.stream(NK.U8, NK.U16, NK.U32, NK.U64);
     }
 }

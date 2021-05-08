@@ -45,19 +45,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool floating(object value)
             => value is float || value is double;
-
-        /// <summary>
-        /// recognized floating-point types
-        /// </summary>
-        [Op]
-        public static Index<Type> FloatingTypes()
-            => memory.array(typeof(float), typeof(double));
-
-        /// <summary>
-        /// Recognized floating-point kinds
-        /// </summary>
-        [Op]
-        public static Index<NumericKind> FloatingKinds()
-           => memory.array(NK.F32, NK.F64);
     }
 }

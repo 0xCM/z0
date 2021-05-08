@@ -9,7 +9,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.ImportScope), StructLayout(LayoutKind.Sequential)]
-        public struct ImportScopeRow
+        public struct ImportScopeRow : IRecord<ImportScopeRow>
         {
             public CliRowKey Parent;
 

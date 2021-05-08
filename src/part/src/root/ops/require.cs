@@ -35,10 +35,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static T require<T>(T src)
+        public static T require<T>(T src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(src == null)
-                sys.@throw(string.Format("Null <{0}> argurment", typeof(T).Name));
+                sys.@throw($"{caller} supplied a NULL value: {file}:line {line}");
             return src;
         }
 

@@ -295,7 +295,7 @@ namespace Z0.Asm
             handlers.AddHandler("entry", HandleMethods);
 
             var flow = Wf.EmittingFile(dstPath);
-            using var xml = XmlSource.create(Wf, srcPath);
+            using var xml = XmlSource.create(srcPath);
             xml.Read(handlers);
             Wf.EmittedFile(flow,1);
         }

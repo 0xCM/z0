@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     [RecordSet]
-    public readonly partial struct PeRecords
+    public readonly partial struct PeRecords : IRecordSet<PeRecords>
     {
 
         [MethodImpl(Inline), Op]
