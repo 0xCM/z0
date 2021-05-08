@@ -58,7 +58,7 @@ namespace Z0
         {
             var query = from p in identities
                         let @base = "z0." + p.Format()
-                        from f in root.stream(FS.file(@base, FS.Dll), FS.file(@base,FS.Exe))
+                        from f in root.array(FS.file(@base, FS.Dll), FS.file(@base,FS.Exe))
                         let path = dir + f
                         where path.Exists
                         let part = part(path)

@@ -11,40 +11,8 @@ namespace Z0
     using static Part;
     using static cpu;
 
-    public struct Vector128x3<T>
-        where T : unmanaged
-    {
-        public Vector128<T> A;
-
-        public Vector128<T> B;
-
-        public Vector128<T> C;
-
-        public static implicit operator Vector128x3(Vector128x3<T> src)
-        {
-            var dst = default(Vector128x3);
-            dst.Kind = Numeric.kind<T>();
-            dst.A = v64u(src.A);
-            dst.B = v64u(src.B);
-            dst.C = v64u(src.C);
-            return dst;
-        }
-    }
-
-    public struct Vector128x3
-    {
-        public NumericKind Kind;
-
-        public Vector128<ulong> A;
-
-        public Vector128<ulong> B;
-
-        public Vector128<ulong> C;
-    }
-
     partial class VexExamples
     {
-
         [Op(ExampleGroups.Cover)]
         public void covers()
         {
@@ -85,7 +53,6 @@ namespace Z0
                  7, 7, 7, 7, 8, 8, 8, 8);
             vcover(x6, out Vector256<byte> z6);
             VClaims.veq(y6, z6);
-
         }
     }
 }

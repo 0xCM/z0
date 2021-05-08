@@ -29,12 +29,12 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> define<T>(BCK kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
             where T : unmanaged
                 => new ComparisonExpr<T>(kind,lhs,rhs,vars);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ComparisonExpr define(BCK kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
             => new ComparisonExpr(kind, lhs, rhs, vars);
 
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
             => define(ApiComparisonClass.Eq, lhs,rhs,variables);
 
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> equals<T>(ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
                 => define(ApiComparisonClass.Eq, lhs,rhs, variables);
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> compare<T>(BCK kind, IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(kind, lhs,rhs);
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> compare<T>(BCK kind, T lhs, T rhs)
             where T : unmanaged
                 => binary(kind, literal(lhs), literal(rhs));
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> equals<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => compare(BCK.Eq, lhs,rhs);
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> equals<T>(T lhs, T rhs)
             where T : unmanaged
                 => binary(BCK.Eq, TLS.literal(lhs), TLS.literal(rhs));
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> neq<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => compare(BCK.Neq, lhs,rhs);
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> neq<T>(T lhs, T rhs)
             where T : unmanaged
                 => binary(BCK.Neq, TLS.literal(lhs), TLS.literal(rhs));
@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> lt<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => compare(BCK.Lt, lhs,rhs);
@@ -144,7 +144,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> lt<T>(T lhs, T rhs)
             where T : unmanaged
                 => binary(BCK.Lt, TLS.literal(lhs), TLS.literal(rhs));
@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> lteq<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => compare(BCK.LtEq, lhs,rhs);
@@ -166,7 +166,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> lteq<T>(T lhs, T rhs)
             where T : unmanaged
                 => binary(BCK.LtEq, TLS.literal(lhs), TLS.literal(rhs));
@@ -177,7 +177,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> gt<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => compare(BCK.Gt, lhs,rhs);
@@ -188,7 +188,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> gt<T>(T lhs, T rhs)
             where T : unmanaged
                 => binary(BCK.Gt, TLS.literal(lhs), TLS.literal(rhs));
@@ -199,7 +199,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> gteq<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => compare(BCK.GtEq, lhs,rhs);
@@ -210,7 +210,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> gteq<T>(T lhs, T rhs)
             where T : unmanaged
                 => binary(BCK.GtEq, TLS.literal(lhs), TLS.literal(rhs));

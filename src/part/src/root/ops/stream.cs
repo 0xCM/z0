@@ -24,26 +24,6 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Procduces a nonempty finite value stream
-        /// </summary>
-        /// <param name="head">The first stream element</param>
-        /// <param name="tail">The remaining stream elements</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IEnumerable<T> stream<T>(T head, params T[] tail)
-        {
-            var count = tail.Length + 1;
-            var buffer = sys.alloc<T>(count);
-            var dst = span(buffer);
-            var src = span(tail);
-            seek(dst, 0) = head;
-            for(var i=1u; i<count; i++)
-                seek(dst, i) = skip(src, i);
-
-            return buffer;
-        }
-
-        /// <summary>
         /// Procduces an output stream by concatenating two input streams
         /// </summary>
         /// <param name="head">The first stream</param>
@@ -61,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IEnumerable<T> stream<T>(T head, IEnumerable<T> tail)
-            => stream(head).Concat(tail);
+            => array(head).Concat(tail);
 
         /// <summary>
         /// Procduces an output stream by concatenating three input streams

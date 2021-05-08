@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Collections.Generic;
     using System;
 
     /// <summary>

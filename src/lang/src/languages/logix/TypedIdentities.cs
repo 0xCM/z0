@@ -17,17 +17,17 @@ namespace Z0
 
     public static class TypedIdentities
     {
-        public static IEnumerable<ComparisonExpr<T>> ScalarIdentities<T>()
+        public static Index<ComparisonExpr<T>> ScalarIdentities<T>()
             where T : unmanaged
-                => root.stream(AndOverOr<T>(), AndOverXOr<T>(), OrOverAnd<T>(), NotOverAnd<T>(), NotOverXOr<T>());
+                => root.array(AndOverOr<T>(), AndOverXOr<T>(), OrOverAnd<T>(), NotOverAnd<T>(), NotOverXOr<T>());
 
-        public static IEnumerable<ComparisonExpr<Vector128<T>>> Vec128Identities<T>()
+        public static Index<ComparisonExpr<Vector128<T>>> Vec128Identities<T>()
             where T : unmanaged
-                => root.stream(AndOverOr128<T>(), AndOverXOr128<T>(), OrOverAnd128<T>(), NotOverAnd128<T>(), NotOverXOr128<T>());
+                => root.array(AndOverOr128<T>(), AndOverXOr128<T>(), OrOverAnd128<T>(), NotOverAnd128<T>(), NotOverXOr128<T>());
 
-        public static IEnumerable<ComparisonExpr<Vector256<T>>> Vec256Identities<T>()
+        public static Index<ComparisonExpr<Vector256<T>>> Vec256Identities<T>()
             where T : unmanaged
-                => root.stream(AndOverOr256<T>(), AndOverXOr256<T>(), OrOverAnd256<T>(), NotOverAnd256<T>(), NotOverXOr256<T>());
+                => root.array(AndOverOr256<T>(), AndOverXOr256<T>(), OrOverAnd256<T>(), NotOverAnd256<T>(), NotOverXOr256<T>());
 
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))

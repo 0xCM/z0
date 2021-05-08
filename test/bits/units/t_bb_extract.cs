@@ -110,9 +110,9 @@ namespace Z0
             var bsy = bcy.ToBitString().Format(true);
             var bsx = bcx.ToBitString().Format(true);
             var bsz = bvz.ToBitString().Format(true);
-            ClaimPrimalSeq.ClaimEq(bsx, sLit);
-            ClaimPrimalSeq.ClaimEq(bsx, bsy);
-            ClaimPrimalSeq.ClaimEq(bsx, bsz);
+            ClaimPrimalSeq.eq(bsx, sLit);
+            ClaimPrimalSeq.eq(bsx, bsy);
+            ClaimPrimalSeq.eq(bsx, bsz);
 
 
             Claim.eq(y0, bcx.BitSeg(0,3));
@@ -161,7 +161,7 @@ namespace Z0
             var bvy = BitBlocks.load(ySrc.Slice(0,2).ToArray());
             var bsx = bvx.ToBitString().Format(true);
             var bsz = bvz.ToBitString().Format(true);
-            ClaimPrimalSeq.ClaimEq(bsx, bsz);
+            ClaimPrimalSeq.eq(bsx, bsz);
 
             Claim.eq((byte)0b10110, bvx.TakeScalarBits(0, 4));
             Claim.eq((byte)0b01110, bvx.TakeScalarBits(5, 9));

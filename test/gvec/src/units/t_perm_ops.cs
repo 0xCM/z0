@@ -17,7 +17,7 @@ namespace Z0
             var p = Permute.identity(16);
             for(var i=0; i<16; i++)
                 p.Inc();
-            Claim.ClaimEq(p.Terms, Permute.identity(16).Terms);
+            Claim.eq(p.Terms, Permute.identity(16).Terms);
         }
 
         public void perm_dec()
@@ -26,7 +26,7 @@ namespace Z0
             for(var i=0; i<16; i++)
                 p.Dec();
 
-            Claim.ClaimEq(p.Terms, Permute.identity(16).Terms);
+            Claim.eq(p.Terms, Permute.identity(16).Terms);
         }
 
         public void perm_invert()
@@ -74,7 +74,7 @@ namespace Z0
             Claim.eq(p, p_assembled);
 
             var pformat_actual =  PermSymbolic.bitmap(p);
-            Claim.ClaimEq(pformat_epect, pformat_actual);
+            Claim.eq(pformat_epect, pformat_actual);
 
         }
 

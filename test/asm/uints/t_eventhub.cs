@@ -35,13 +35,13 @@ namespace Z0
                 switch(e.Id)
                 {
                     case E1:
-                        ClaimEq(e.Encoded, D1);
+                        eq(e.Encoded, D1);
                         break;
                     case E2:
-                        ClaimEq(e.Encoded, D2);
+                        eq(e.Encoded, D2);
                         break;
                     case E3:
-                        ClaimEq(e.Encoded, D3);
+                        eq(e.Encoded, D3);
                         break;
                 }
             }

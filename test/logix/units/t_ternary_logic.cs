@@ -124,7 +124,7 @@ namespace Z0
             var f = NumericLogixHost.lookup<T>(id);
             var actual = Numeric.force<T,byte>(gmath.and(f(a,b,c), d));
             var expect = (byte)id;
-            Claim.ClaimEq(expect.FormatHex(), actual.FormatHex());
+            Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
         void check_op_equivalence<T>(TernaryBitLogicKind kind)

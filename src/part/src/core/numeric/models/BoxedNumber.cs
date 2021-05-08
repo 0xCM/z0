@@ -9,6 +9,8 @@ namespace Z0
 
     using static Part;
 
+    using api = BoxedNumbers;
+
     /// <summary>
     /// A numbered box
     /// </summary>
@@ -31,48 +33,7 @@ namespace Z0
         public readonly NumericKind Kind;
 
         [MethodImpl(Inline)]
-        public static BoxedNumber define(object src, NumericKind kind)
-            => new BoxedNumber(src ?? new object(), kind);
-
-        [MethodImpl(Inline)]
-        public static BoxedNumber define<T>(T src)
-            where T : unmanaged
-                => new BoxedNumber(src, Numeric.kind<T>());
-
-        /// <summary>
-        /// Puts an enum value into a (numeric) box
-        /// </summary>
-        /// <param name="e">The enumeration value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static BoxedNumber from<E>(E e)
-            where E : unmanaged, Enum
-                => define(System.Convert.ChangeType(e, ClrEnums.ecode<E>().TypeCode()), ClrEnums.ecode<E>().NumericKind());
-
-        public static BoxedNumber from(Enum e)
-        {
-            var tc = Type.GetTypeCode(e.GetType().GetEnumUnderlyingType());
-            var nk = tc.ToNumericKind();
-            var box = System.Convert.ChangeType(e,tc);
-            return define(box,nk);
-        }
-
-        public static BoxedNumber From(object src)
-        {
-            if(src is null)
-                return Empty;
-            else if(src is Enum e)
-                return from(e);
-
-            var nk = src.GetType().NumericKind();
-            if(nk != 0)
-                return define(src,nk);
-
-            return Empty;
-        }
-
-        [MethodImpl(Inline)]
-        BoxedNumber(object src, NumericKind kind)
+        internal BoxedNumber(object src, NumericKind kind)
         {
             Boxed = src;
             Kind = kind;
@@ -94,10 +55,10 @@ namespace Z0
 
         public T Convert<T>()
             where T : unmanaged
-                => (T)typeof(T).NumericKind().Rebox(Boxed);
+                => api.convert<T>(this);
 
-        public BoxedNumber Convert(NumericKind target)
-            => define(target.Rebox(Boxed), target);
+        public BoxedNumber Convert(NumericKind dst)
+            => api.convert(this, dst);
 
         public BoxedNumber Convert(Type target)
             => Convert(target.NumericKind());
@@ -142,43 +103,43 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(sbyte src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(byte src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(short src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(ushort src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(int src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(uint src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(long src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(ulong src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(float src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BoxedNumber(double src)
-            => define(src);
+            => api.define(src);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(BoxedNumber src)
@@ -317,6 +278,7 @@ namespace Z0
         [MethodImpl(Inline)]
         string IFormattable.ToString(string format, IFormatProvider formatProvider)
             => Formattable.ToString(format, formatProvider);
+
         public TypeIdentity Identity()
             => TypeIdentity.define("nbox");
 

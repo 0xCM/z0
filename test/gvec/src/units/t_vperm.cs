@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
@@ -15,6 +14,26 @@ namespace Z0
 
     public class t_vperm : t_permute<t_vperm>
     {
+        public void vperm4_reverse()
+        {
+            const Perm4L  p = Perm4L.DCBA;
+            const string pbs_expect = "00011011";
+            const string pformat_epect = "[00 01 10 11]: ABCD -> DCBA";
+
+            var pbs_actual = BitString.scalar((byte)p);
+            Claim.eq(pbs_expect, pbs_actual);
+
+            var p_assembled = Permute.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
+            Claim.eq(p, p_assembled);
+
+            var pformat_actual = PermSymbolic.bitmap(p);
+            Claim.eq(pformat_epect, pformat_actual);
+
+            var vIn = cpu.vparts(w128, 0,1,2,3);
+            var vExpect = cpu.vparts(w128, 3,2,1,0);
+            var vActual = cpu.vperm4x32(vIn,p);
+            Claim.veq(vExpect, vActual);
+        }
 
         public void perm_symbols()
         {
@@ -33,16 +52,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            ClaimNumeric.ClaimEq(NatSpans.parts(n4, A, B, C, D), dABCD);
+            Claim.eq(NatSpans.parts(n4, A, B, C, D).Edit, dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            ClaimNumeric.ClaimEq(NatSpans.parts(n4, D, C, B, A), dDCBA);
+            Claim.eq(NatSpans.parts(n4, D, C, B, A).Edit, dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            ClaimNumeric.ClaimEq(NatSpans.parts(n4, A, C, B, D), dACBD);
+            Claim.eq(NatSpans.parts(n4, A, C, B, D).Edit, dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            ClaimNumeric.ClaimEq(NatSpans.parts(n4, C, B, D, A), dCBDA);
+            Claim.eq(NatSpans.parts(n4, C, B, D, A).Edit, dCBDA);
         }
 
         public void vpermlo_4x16_outline()
@@ -284,26 +303,6 @@ namespace Z0
             Claim.veq(a,c);
         }
 
-        public void vperm4_reverse()
-        {
-            const Perm4L  p = Perm4L.DCBA;
-            const string pbs_expect = "00011011";
-            const string pformat_epect = "[00 01 10 11]: ABCD -> DCBA";
-
-            var pbs_actual = BitString.scalar((byte)p);
-            Claim.eq(pbs_expect, pbs_actual);
-
-            var p_assembled = Permute.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
-            Claim.eq(p, p_assembled);
-
-            var pformat_actual = PermSymbolic.bitmap(p);
-            Claim.ClaimEq(pformat_epect, pformat_actual);
-
-            var vIn = cpu.vparts(w128, 0,1,2,3);
-            var vExpect = cpu.vparts(w128, 3,2,1,0);
-            var vActual = cpu.vperm4x32(vIn,p);
-            Claim.veq(vExpect, vActual);
-        }
 
         void perm4_symbol_check(Perm4L perm, params Perm4L[] expect)
         {

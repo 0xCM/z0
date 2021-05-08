@@ -19,13 +19,13 @@ namespace Z0
         /// <summary>
         /// Asserts the equality of two sets
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        bool seteq<T>(ISet<T> lhs, ISet<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs.SetEquals(rhs) ? true : throw failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+        bool seteq<T>(ISet<T> a, ISet<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => a.SetEquals(b) ? true : throw failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
 
         /// <summary>
         /// Asserts that a set contains a specified element

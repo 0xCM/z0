@@ -34,7 +34,7 @@ namespace Z0.Logix
             var y = literal(27u);
             var expr1 = varied(n1, and(x,y),x);
             var expr2 = y;
-            var result = solve(expr1, expr2,(1,0xFF));
+            var result = solve(expr1, expr2,(1,0xA0));
             Notify($"Expression is satisfied by {result.Count} values");
             Claim.nea(result.IsEmpty());
         }
@@ -43,34 +43,34 @@ namespace Z0.Logix
         {
             var v1 = variable<uint>(0u);
             var v2 = variable<uint>(1u);
-            var expr1 = varied(n2, or(v2, xor(v1,and(v1,nand(v2, not(v1))))),v1,v2);
+            var expr1 = varied(n2, or(v2, xor(v1, and(v1, nand(v2, not(v1))))),v1,v2);
             var expr2 = literal(32u);
-            var result = solve(expr1, expr2, (1,0xFF));
+            var result = solve(expr1, expr2, (1,0xA0));
             Notify($"Expression is satisfied by {result.Count} values");
         }
 
         IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
-            var sln = new List<T>();
-            var level0 = domain.Increments(default(T));
-            for(var i=0; i<level0.Length; i++)
+            var dst = new List<T>();
+            var level = domain.Increments<T>();
+            var count = level.Length;
+            for(var i=0; i<count; i++)
             {
-                expr.Var0(level0[i]);
+                expr.Var0(level[i]);
                 var result = LogicEngine.eval(expr.BaseExpr);
                 if(gmath.eq(result.Value, match.Value))
-                    sln.Add(result);
+                    dst.Add(result);
             }
-            return sln;
+            return dst;
         }
 
         IReadOnlyList<T> solve<T>(VariedExpr<N2,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
-
             var sln = new List<T>();
-            var level0 = domain.Increments(default(T));
-            var level1 = domain.Increments(default(T));
+            var level0 = domain.Increments<T>();
+            var level1 = domain.Increments<T>();
             for(var i=0; i<level0.Length; i++)
             {
                 expr.Var0(level0[i]);

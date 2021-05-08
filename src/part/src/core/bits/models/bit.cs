@@ -18,6 +18,14 @@ namespace Z0
 
         public const char One = '1';
 
+        static ReadOnlySpan<byte> _B01 => new byte[2]{0,1};
+
+        public static ReadOnlySpan<bit> Bit01
+        {
+            [MethodImpl(Inline), Op]
+            get => memory.recover<bit>(_B01);
+        }
+
         public static bit[] B01
         {
             [MethodImpl(Inline)]

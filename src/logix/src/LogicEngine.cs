@@ -215,12 +215,12 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var sln = new List<T>();
-            var level0 = domain.Increments(default(T));
-            var level1 = domain.Increments(default(T));
+            var level0 = domain.Increments<T>();
+            var level1 = domain.Increments<T>();
             var ones = Numeric.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
-                expr.SetVar(0,level0[i]);
+                expr.SetVar(0, level0[i]);
                 for(var j=0; j<level1.Length; j++)
                 {
                     expr.SetVar(1,level1[j]);

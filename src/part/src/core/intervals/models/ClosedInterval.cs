@@ -92,7 +92,6 @@ namespace Z0
             right = Max;
         }
 
-        [MethodImpl(Inline)]
         public string Format()
             => text.concat(Chars.LBracket, Min, Chars.Comma, Max, Chars.RBracket);
 

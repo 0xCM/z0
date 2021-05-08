@@ -14,6 +14,6 @@ namespace Z0
         /// <param name="src">The source string</param>
         [TextUtility]
         public static string RemoveBlanks(this string src)
-            => src.RemoveAny(root.stream(Space, LineFeed, NL, Tab));
+            => src.RemoveAny(root.array(Space, LineFeed, NL, Tab));
     }
 }

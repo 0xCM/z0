@@ -29,22 +29,25 @@ namespace Z0
         bool TestEq(ReadOnlySpan<ulong> a, ReadOnlySpan<ulong> b)
             => api.TestEq(a,b);
 
-        void ClaimEq(bool[] lhs, bool[] rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.ClaimEq(lhs, rhs, caller, file, line);
+        void eq(bool[] a, bool[] b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        void ClaimEq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.ClaimEq(lhs, rhs, caller, file, line);
+        void eq(ReadOnlySpan<char> a, ReadOnlySpan<char> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        void ClaimEq(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.ClaimEq(lhs, rhs, caller, file, line);
+        void eq(ReadOnlySpan<sbyte> a, ReadOnlySpan<sbyte> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        void ClaimEq(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.ClaimEq(lhs, rhs, caller, file, line);
+        void eq(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        void ClaimEq(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.ClaimEq(lhs, rhs, caller, file, line);
+        void eq(ReadOnlySpan<int> a, ReadOnlySpan<int> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        void ClaimEq(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-             => api.ClaimEq(lhs, rhs, caller, file, line);
+        void eq(ReadOnlySpan<uint> a, ReadOnlySpan<uint> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
+
+        void eq(ReadOnlySpan<ulong> a, ReadOnlySpan<ulong> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+             => api.eq(a, b, caller, file, line);
    }
 }

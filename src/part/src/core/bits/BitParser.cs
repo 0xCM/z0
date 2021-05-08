@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static AsciCharCode;
     using static Part;
     using static memory;
 
@@ -81,36 +79,31 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static bool matches(ReadOnlySpan<char> left,  ReadOnlySpan<char> right)
+        static bool matches(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
         {
-            var count = left.Length;
-            if(count != right.Length)
+            var count = a.Length;
+            if(count != b.Length)
                 return false;
+
             for(var i=0; i<count; i++)
-                if(skip(left,i) != skip(right, i))
+                if(skip(a,i) != skip(b, i))
                     return false;
+
             return true;
         }
-
-        static string[] OnLabels
-            => new string[]{"on", "1", "enabled", "true", "yes"};
-
-        static ReadOnlySpan<AsciCharCode> Filter
-            => new AsciCharCode[]{LBracket, RBracket, AsciCharCode.Space, Underscore, b};
 
         /// <summary>
         /// Creates a bitspan from the text encoding of a binary number
         /// </summary>
         /// <param name="src">The bit source</param>
-        [Op]
         public static Span<bit> parse(string src)
-            => parse(src, span<bit>(src.Length));
+            => bitstring(src, span<bit>(src.Length));
 
         [Op]
-        public static Span<bit> parse(string src, Span<bit> buffer)
+        public static Span<bit> bitstring(string src, Span<bit> buffer)
         {
             var chars = span(src);
-            var count = chars.Length;
+            var count = root.min(chars.Length, buffer.Length);
             var j=0u;
             for(uint i=0u; i<count; i++)
             {
@@ -120,7 +113,7 @@ namespace Z0
                 else if(c == bit.Zero)
                     seek(buffer, j++) = bit.Off;
             }
-            return slice(buffer,0,j);
+            return slice(buffer,0, j);
         }
     }
 }

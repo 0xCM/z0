@@ -90,8 +90,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator BitFormat(int blockwidth)
-            => BitFormatOptions.bitblock(blockwidth, null, null,false);
+        public static implicit operator BitFormat(int width)
+            => BitFormatOptions.bitblock(width, null, null,false);
 
         public static BitFormat Default
             => new BitFormat(false,false,null,null,null,null,null);

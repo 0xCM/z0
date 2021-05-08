@@ -11,8 +11,6 @@ namespace Z0
         {
             var p = Permute.natural(n32);
             Claim.eq(p.Length,32);
-
-            var g = SubGrid.init(p);
         }
 
         public void bg_permute_16x4()
@@ -33,7 +31,7 @@ namespace Z0
             var g1 = id.ToSubGrid();
             var nP = id.ToNatural();
             var g2 = nP.ToSubGrid();
-            //Claim.yea(g1 == g2);
+            Claim.yea(g1 == g2);
         }
 
         public void perm_8x32_digits()
@@ -53,13 +51,13 @@ namespace Z0
             var v1 = BitVector24.FromEnum(p1);
             var p1F = p1.ToBitString(24).Format(3);
             var v1F = v1.Format(3);
-            ClaimPrimalSeq.ClaimEq(p1F, v1F);
+            Claim.eq(p1F, v1F);
 
             var p2 = Permute.reversed(n8);
             var p2F = p2.ToBitString(24).Format(3);
             var v2 = BitVector24.FromEnum(p2);
             var v2F = v2.Format(3);
-            ClaimPrimalSeq.ClaimEq(p2F, v2F);
+            Claim.eq(p2F, v2F);
             Claim.require(v2.ToSubGrid(n8,n3) == p2.ToSubGrid());
         }
     }

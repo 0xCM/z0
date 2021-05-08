@@ -22,7 +22,6 @@ namespace Z0
         /// <param name="rowlen">The number of bits in each row</param>
         /// <param name="maxbits">The maximum number of bits to format</param>
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
-        [Op]
         public static string grid(Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
         {
             var dst = BitFormatter.chars(src);
@@ -171,7 +170,6 @@ namespace Z0
         public static int bits(ReadOnlySpan<byte> src, Count maxbits, Span<char> dst)
             => _format(first(src), src.Length, maxbits, dst);
 
-        [Op]
         public static Span<char> chars(ReadOnlySpan<byte> src)
         {
             var dst = span<char>(src.Length*8);

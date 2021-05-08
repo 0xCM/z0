@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Numeric
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T one<T>()
             where T : unmanaged
                 => force<T>(1);

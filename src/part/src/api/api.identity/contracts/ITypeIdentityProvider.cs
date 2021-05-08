@@ -36,7 +36,7 @@ namespace Z0
         TypeIdentity Identity();
 
         IEnumerable<Type> ITypeIdentityProvider.Identifiable
-            => root.stream(typeof(S));
+            => root.array(typeof(S));
 
         TypeIdentity IIdentityProvider<Type,TypeIdentity>.Identify(Type src)
             => Identity();

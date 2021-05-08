@@ -72,24 +72,22 @@ namespace Z0
         public static T[] increments<T>(ClosedInterval<T> src)
             where T : unmanaged
         {
-            var min = src.Min;
-            var max = src.Max;
-            var count = src.Width + 1;
-            var dst = sys.alloc<T>(src.Width + 1);
+            var count = (int)src.Width + 1;
+            var dst = sys.alloc<T>(count);
             increments(src,dst);
             return dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
         public static void increments<T>(ClosedInterval<T> src, Span<T> dst)
             where T : unmanaged
         {
             var min = src.Min;
             var max = src.Max;
-            var count = src.Width + 1;
-            var index = 0u;
+            var count = (int)src.Width + 1;
+            var index = 0;
             var current = min;
-            while(lteq(current,max) && index < count)
+            while(lteq(current, max) && index < count)
             {
                 seek(dst, index++) = current;
                 if(lt(current, max))

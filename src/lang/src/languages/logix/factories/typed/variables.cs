@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariableExpr<T> variable<T>(string name, IExpr<T> value)
             where T : unmanaged
                 => new VariableExpr<T>(name, value);
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariableExpr<T> variable<T>(char name, IExpr<T> value)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), value);
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariableExpr<T> variable<T>(AsciLetterLo name, IExpr<T> value)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), value);
@@ -47,17 +47,17 @@ namespace Z0
         /// </summary>
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariableExpr<T> variable<T>(uint name, IExpr<T> init)
             where T : unmanaged
-            => new VariableExpr<T>(name.ToString(), init);
+                => new VariableExpr<T>(name.ToString(), init);
 
         /// <summary>
         /// Defines a variable expression with an initial value specified by a literal
         /// </summary>
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariableExpr<T> variable<T>(string name, T value = default)
             where T : unmanaged
                 => new VariableExpr<T>(name, literal(value));
@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariableExpr<T> variable<T>(char name, T value = default)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), literal(value));
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariableExpr<T> variable<T>(AsciLetterLo name, T value = default)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), literal(value));
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariableExpr<T> variable<T>(uint name, T value = default)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), literal(value));
@@ -98,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="subject">The variable-dependent expression</param>
         /// <param name="variables">The variable sequence</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariedExpr<T> varied<T>(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
             where T : unmanaged
                 => new VariedExpr<T>(baseExpr, variables);
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="baseExpr">The variable-dependent expression </param>
         /// <param name="v0">The variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariedExpr<N1,T> varied<T>(N1 n, IExpr<T> baseExpr, IVarExpr<T> v0)
             where T : unmanaged
                 => varied<N1,T>(n, baseExpr, v0);
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="v0">The first variable</param>
         /// <param name="v1">The second variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariedExpr<N2,T> varied<T>(N2 n, IExpr<T> baseExpr, IVarExpr<T> v0, IVarExpr<T> v1)
             where T : unmanaged
                 => varied<N2,T>(n, baseExpr, v0, v1);
@@ -151,7 +151,7 @@ namespace Z0
         /// <param name="v1">The second variable</param>
         /// <param name="v2">The third variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static VariedExpr<N3,T> varied<T>(N3 n, IExpr<T> baseExpr, IVarExpr<T> v0, IVarExpr<T> v1, IVarExpr<T> v2)
             where T : unmanaged
                 => varied<N3,T>(n, baseExpr, v0, v1, v2);
@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="lhs">The control expression</param>
         /// <param name="rhs">The test subject</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> equals<T>(IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
                 => new ComparisonExpr<T>(ApiComparisonClass.Eq, lhs,rhs,variables);

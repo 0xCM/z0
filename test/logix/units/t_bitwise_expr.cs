@@ -248,7 +248,7 @@ namespace Z0.Logix
             var f = NumericLogixHost.lookup<T>(id);
             var actual = Numeric.force<T,byte>(gmath.and(f(a,b,c), mask));
             var expect = (byte)id;
-            Claim.ClaimEq(expect.FormatHex(), actual.FormatHex());
+            Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
         void check_ternary_ops<T>(TernaryBitLogicKind id)

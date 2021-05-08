@@ -42,6 +42,5 @@ namespace Z0
             Array.Fill(dst, src);
             return dst;
         }
-
     }
 }

@@ -9,14 +9,15 @@ namespace Z0
 
     using static Part;
 
-    partial class XNumeric
+    partial struct Numeric
     {
-        /// <summary>
-        /// Returns 0 in a box
-        /// </summary>
-        /// <param name="kind">The numeric kind of 0 to be put into the box</param>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static NumericIndicator indicator<T>()
+            where T : unmanaged
+                => NumericKinds.indicator(Numeric.kind<T>());
+
         [MethodImpl(Inline), Op]
-        public static BoxedNumber ZBox(this NumericKind kind)
-            => BoxedNumbers.define(Numeric.rebox(byte.MinValue, kind), kind);
-   }
+        public static NumericIndicator indicator(Type src)
+            => NumericKinds.indicator(Numeric.kind(src));
+    }
 }

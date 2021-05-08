@@ -10,7 +10,7 @@ namespace Z0
         {
             var src = 0b00001010110000101001_001_111_011_001u;
             var bsSrc = src.ToBitString().Format(true);
-            ClaimPrimalSeq.ClaimEq("1010110000101001001111011001", bsSrc);
+            ClaimPrimalSeq.eq("1010110000101001001111011001", bsSrc);
 
             var i=-3;
 

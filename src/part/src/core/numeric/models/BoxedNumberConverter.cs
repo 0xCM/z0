@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public BoxedNumber Convert<T>(T src)
-            => BoxedNumber.define(src, Numeric.kind<T>());
+            => BoxedNumbers.define(src, Numeric.kind<T>());
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
         {
@@ -45,7 +45,7 @@ namespace Z0
         public Option<object> ConvertToTarget(object incoming)
         {
             var kind = (incoming?.GetType() ?? typeof(void)).NumericKind();
-            return kind.IsSome() ? BoxedNumber.define(incoming, kind) : root.none<BoxedNumber>();
+            return kind.IsSome() ? BoxedNumbers.define(incoming, kind) : root.none<BoxedNumber>();
         }
     }
 }

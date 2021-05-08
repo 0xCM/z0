@@ -24,7 +24,7 @@ namespace Z0
                 var bits = bit.unpack(a);
                 var s1 = bits.FormatList();
                 var s2 = formatter.Format(a);
-                Claim.ClaimEq(s1,s1);
+                Claim.eq(s1,s1);
             }
         }
     }

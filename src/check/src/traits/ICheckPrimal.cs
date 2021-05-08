@@ -18,58 +18,58 @@ namespace Z0
 
     public interface ICheckPrimal : IClaimValidator
     {
-        bool eq(bit lhs, bit rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(bit a, bit b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(char a, char b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(string lhs, string rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(string a, string b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(byte lhs, byte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(byte a, byte b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(sbyte lhs, sbyte rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(sbyte a, sbyte b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(short lhs, short rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(short a, short b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(ushort lhs, ushort rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(ushort a, ushort b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(int a, int b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(uint lhs, uint rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(uint a, uint b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(long a, long b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(ulong lhs, ulong rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(ulong a, ulong b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(bool lhs, bool rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => api.eq(lhs, rhs, caller, file, line);
+        bool eq(bool a, bool b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => api.eq(a, b, caller, file, line);
 
-        bool eq(uint lhs, uint rhs, AppMsg msg)
-            => lhs == rhs ? true : throw failed(ClaimKind.Eq, msg);
+        bool eq(uint a, uint b, AppMsg msg)
+            => a == b ? true : throw failed(ClaimKind.Eq, msg);
 
-        bool neq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw failed(ClaimKind.NEq, NotEqual(lhs, rhs, caller, file, line));
+        bool neq(char a, char b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => a != b ? true : throw failed(ClaimKind.NEq, NotEqual(a, b, caller, file, line));
 
-        bool neq(string lhs, string rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line));
+        bool neq(string a, string b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => a != b ? true : throw failed(ClaimKind.NEq, Equal(a, b, caller, file, line));
 
-        bool neq(long lhs, long rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs != rhs ? true : throw failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line));
+        bool neq(long a, long b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => a != b ? true : throw failed(ClaimKind.NEq, Equal(a, b, caller, file, line));
 
-        bool eq(int? lhs, int? rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+        bool eq(int? a, int? b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => a == b ? true : throw failed(ClaimKind.Eq, NotEqual(a, b, caller, file, line));
 
-        bool eq(int? lhs, int? rhs, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => lhs == rhs ? true : throw failed(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+        bool eq(int? a, int? b, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => a == b ? true : throw failed(ClaimKind.Eq, NotEqual(a, b, caller, file, line));
     }
 }

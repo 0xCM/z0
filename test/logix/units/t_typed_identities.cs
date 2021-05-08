@@ -18,20 +18,20 @@ namespace Z0.Logix
 
         public void check_identity_stream()
         {
-            Claim.nonzero(TypedIdentities.ScalarIdentities<byte>().Array().Length);
-            Claim.nonzero(TypedIdentities.ScalarIdentities<ushort>().Array().Length);
-            Claim.nonzero(TypedIdentities.ScalarIdentities<uint>().Array().Length);
-            Claim.nonzero(TypedIdentities.ScalarIdentities<ulong>().Array().Length);
+            Claim.nonzero(TypedIdentities.ScalarIdentities<byte>().Length);
+            Claim.nonzero(TypedIdentities.ScalarIdentities<ushort>().Length);
+            Claim.nonzero(TypedIdentities.ScalarIdentities<uint>().Length);
+            Claim.nonzero(TypedIdentities.ScalarIdentities<ulong>().Length);
 
-            Claim.nonzero(TypedIdentities.Vec128Identities<byte>().Array().Length);
-            Claim.nonzero(TypedIdentities.Vec128Identities<ushort>().Array().Length);
-            Claim.nonzero(TypedIdentities.Vec128Identities<uint>().Array().Length);
-            Claim.nonzero(TypedIdentities.Vec128Identities<ulong>().Array().Length);
+            Claim.nonzero(TypedIdentities.Vec128Identities<byte>().Length);
+            Claim.nonzero(TypedIdentities.Vec128Identities<ushort>().Length);
+            Claim.nonzero(TypedIdentities.Vec128Identities<uint>().Length);
+            Claim.nonzero(TypedIdentities.Vec128Identities<ulong>().Length);
 
-            Claim.nonzero(TypedIdentities.Vec256Identities<byte>().Array().Length);
-            Claim.nonzero(TypedIdentities.Vec256Identities<ushort>().Array().Length);
-            Claim.nonzero(TypedIdentities.Vec256Identities<uint>().Array().Length);
-            Claim.nonzero(TypedIdentities.Vec256Identities<ulong>().Array().Length);
+            Claim.nonzero(TypedIdentities.Vec256Identities<byte>().Length);
+            Claim.nonzero(TypedIdentities.Vec256Identities<ushort>().Length);
+            Claim.nonzero(TypedIdentities.Vec256Identities<uint>().Length);
+            Claim.nonzero(TypedIdentities.Vec256Identities<ulong>().Length);
         }
 
         public void check_scalar_identities()

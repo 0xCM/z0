@@ -115,10 +115,10 @@ namespace Z0
             var x1 = (uint4)1;
             var x2 = (uint4)2;
             var x3 = (uint4)3;
-            ClaimPrimalSeq.ClaimEq(x0.Format(), "0000");
-            ClaimPrimalSeq.ClaimEq(x1.Format(), "0001");
-            ClaimPrimalSeq.ClaimEq(x2.Format(), "0010");
-            ClaimPrimalSeq.ClaimEq(x3.Format(), "0011");
+            ClaimPrimalSeq.eq(x0.Format(), "0000");
+            ClaimPrimalSeq.eq(x1.Format(), "0001");
+            ClaimPrimalSeq.eq(x2.Format(), "0010");
+            ClaimPrimalSeq.eq(x3.Format(), "0011");
         }
 
         public void uint4_inc()

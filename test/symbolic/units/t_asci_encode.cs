@@ -85,7 +85,7 @@ namespace Z0
         {
 
             var a2 = Asci.define(C.A, C.Z);
-            Claim.ClaimEq(a2, "AZ");
+            Claim.eq(a2, "AZ");
 
             //var tc = AsciTestCase02.Create(c0);
 

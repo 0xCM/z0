@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines an untyped identified expression, identifier := expression
     /// </summary>
-    public class FormulaExpr : IFormulaExpr
+    public readonly struct FormulaExpr : IFormulaExpr
     {
         /// <summary>
         /// The identifier

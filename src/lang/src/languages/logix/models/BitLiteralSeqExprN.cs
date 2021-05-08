@@ -15,29 +15,34 @@ namespace Z0
    public readonly struct LiteralLogicSeqExpr<N> : ILiteralLogicSeqExpr
         where N : unmanaged, ITypeNat
     {
-        public bit[] Terms {get;}
+        Index<bit> _Terms {get;}
 
         [MethodImpl(Inline)]
         public LiteralLogicSeqExpr(bit[] terms)
-            => Terms = terms;
+            => _Terms = terms;
 
+        public bit[] Terms
+        {
+            [MethodImpl(Inline)]
+            get => _Terms.Storage;
+        }
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => Terms[index];
+            get => _Terms[index];
 
             [MethodImpl(Inline)]
-            set => Terms[index] = value;
+            set => _Terms[index] = value;
         }
 
         public int Length
-            => Terms.Length;
+            => _Terms.Length;
 
         public LogicExprKind ExprKind
             => LogicExprKind.Literal;
 
         public string Format()
-            => BitFormatter.format(Terms);
+            => BitFormatter.format(_Terms);
 
         public override string ToString()
             => Format();

@@ -9,24 +9,12 @@ namespace Z0
 
     using A = CharText;
     using C = AsciChar;
-    using NI = NumericIndicator;
-    using NK = NumericKinds;
 
-    using static Part;
     using static LimitValues;
 
     [LiteralProvider]
     public readonly struct NumericIndicators
     {
-        [MethodImpl(Inline), Op]
-        public static NumericIndicator from(Type t)
-        {
-            if(t == typeof(Bit32) || t == typeof(bit))
-                return NI.Unsigned;
-            else
-                return NK.indicator(Numeric.kind(t));
-        }
-
         [Indicator(C.i)]
         public const string i = A.i;
 

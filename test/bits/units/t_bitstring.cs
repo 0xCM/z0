@@ -223,10 +223,10 @@ namespace Z0
 
         public void bs_tlz()
         {
-            ClaimPrimalSeq.ClaimEq("100", BitString.scalar(0b00000100).Format(true));
-            ClaimPrimalSeq.ClaimEq("101", BitString.scalar(0b00000101).Format(true));
-            ClaimPrimalSeq.ClaimEq("1000101", BitString.scalar(0b01000101).Format(true));
-            ClaimPrimalSeq.ClaimEq("11010101", BitString.scalar(0b11010101).Format(true));
+            ClaimPrimalSeq.eq("100", BitString.scalar(0b00000100).Format(true));
+            ClaimPrimalSeq.eq("101", BitString.scalar(0b00000101).Format(true));
+            ClaimPrimalSeq.eq("1000101", BitString.scalar(0b01000101).Format(true));
+            ClaimPrimalSeq.eq("11010101", BitString.scalar(0b11010101).Format(true));
         }
 
         public void bs_parselit()
@@ -351,7 +351,7 @@ namespace Z0
                 var bs = BitString.scalar(src[i]);
                 var y = bs.TakeScalar<T>();
                 Claim.eq(x,y);
-                ClaimPrimalSeq.ClaimEq(bs.Format(), BitString.scalar(y).Format());
+                ClaimPrimalSeq.eq(bs.Format(), BitString.scalar(y).Format());
             }
         }
 

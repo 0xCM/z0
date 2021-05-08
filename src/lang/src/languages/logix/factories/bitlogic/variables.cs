@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="name">The variable's single-character name</param>
         /// <param name="init">The variable's initial value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static LogicVariable lvar(char name, bit init = default)
             => new LogicVariable((uint)name, init);
 
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="symbol">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static LogicVariable lvar(uint symbol, bit init = default)
             => new LogicVariable(symbol, init);
 
@@ -64,6 +64,7 @@ namespace Z0
         /// Defines a specified number n of logic variable expressions where each variable is respectively named 0,..., n - 1
         /// </summary>
         /// <param name="n">The number of variables to define</param>
+        [Op]
         public static LogicVariable[] lvars(uint n)
         {
             var vars = new LogicVariable[n];
@@ -90,7 +91,7 @@ namespace Z0
         /// </summary>
         /// <param name="expr">The variable-dependent expression</param>
         /// <param name="vars">The variable sequence</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static VariedLogicExpr varied(ILogicExpr expr, params LogicVariable[] vars)
             => new VariedLogicExpr(expr, vars);
 

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a typed identified expression, identifier := expression
     /// </summary>
-    public sealed class FormulaExpr<T> : IFormulaExpr<T>
+    public readonly struct FormulaExpr<T> : IFormulaExpr<T>
         where T : unmanaged
     {
         /// <summary>

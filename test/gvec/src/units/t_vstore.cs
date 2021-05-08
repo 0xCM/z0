@@ -19,7 +19,7 @@ namespace Z0
             var a = memory.span<uint>(4);
             cpu.vstore(dst, ref first(a));
             var b = memory.uint32(src);
-            Claim.ClaimEq(a,b);
+            Claim.eq(a,b);
         }
     }
 }

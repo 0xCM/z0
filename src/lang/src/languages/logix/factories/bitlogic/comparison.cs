@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ComparisonExpr compare(ApiComparisonClass kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
             => Comparisons.define(kind, lhs,rhs,variables);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> compare<T>(ApiComparisonClass kind, ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
                 => Comparisons.define(kind, lhs,rhs, variables);
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
             => Comparisons.define(ApiComparisonClass.Eq, lhs,rhs,variables);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ComparisonExpr<T> equals<T>(ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
                 => Comparisons.define(ApiComparisonClass.Eq, lhs,rhs, variables);

@@ -13,7 +13,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static CliHeaps;
     using static CliRecords;
 
     [ApiHost]

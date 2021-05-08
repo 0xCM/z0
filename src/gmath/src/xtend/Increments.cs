@@ -8,7 +8,7 @@ namespace Z0
 
     partial class XTend
     {
-        public static Span<T> Increments<T>(this Interval<T> src, T t = default)
+        public static Span<T> Increments<T>(this Interval<T> src)
             where T : unmanaged
                 => gAlg.increments(src.ToClosed());
     }
