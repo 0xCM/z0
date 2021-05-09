@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static CliRecords;
-
     partial class ImageMetaPipe
     {
         public void EmitFieldMetadata()

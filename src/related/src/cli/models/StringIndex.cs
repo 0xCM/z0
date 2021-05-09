@@ -24,9 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringIndex(StringHandle value)
-        {
-            Value = memory.u32(value);
-        }
+            => Value = memory.u32(value);
 
         public string Format()
             => Value.ToString("X");

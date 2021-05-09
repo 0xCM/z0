@@ -10,7 +10,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.EncLog), StructLayout(LayoutKind.Sequential)]
-        public struct EncLogRow : IRecord<EncLogRow>
+        public struct EncLogRow : ICliRecord<EncLogRow>
         {
             public CliRowKey Key;
 

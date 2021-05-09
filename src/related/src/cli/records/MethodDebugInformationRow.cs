@@ -9,7 +9,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.MethodDebugInformation), StructLayout(LayoutKind.Sequential)]
-        public struct MethodDebugInformationRow : IRecord<MethodDebugInformationRow>
+        public struct MethodDebugInformationRow : ICliRecord<MethodDebugInformationRow>
         {
             public CliRowKey Key;
 

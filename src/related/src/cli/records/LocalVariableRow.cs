@@ -9,7 +9,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.LocalVariable), StructLayout(LayoutKind.Sequential)]
-        public struct LocalVariableRow : IRecord<LocalVariableRow>
+        public struct LocalVariableRow : ICliRecord<LocalVariableRow>
         {
             public CliRowKey Key;
 

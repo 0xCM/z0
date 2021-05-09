@@ -7,6 +7,8 @@ namespace Z0
     /// </summary>
     public enum CliTableKind : byte
     {
+        Invalid = 0xFF,
+
         Module = 0x00,
 
         TypeRef = 0x01,

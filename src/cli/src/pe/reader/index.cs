@@ -13,17 +13,7 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static CliRowIndex? index(in PeStream state, Handle handle)
-        {
-            if(!handle.IsNil)
-            {
-                var table = index(handle);
-                var token = state.Reader.GetToken(handle);
-                if (table != null)
-                    return new CliRowIndex(token, table.Value);
-            }
-
-            return null;
-        }
+        public static CliRowIndex index(in PeStream state, Handle handle)
+            => new CliToken(state.Reader.GetToken(handle));
     }
 }

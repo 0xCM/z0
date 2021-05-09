@@ -10,7 +10,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.StandAloneSig), StructLayout(LayoutKind.Sequential)]
-        public struct StandaloneSigRow  : IRecord<StandaloneSigRow>
+        public struct StandaloneSigRow  : ICliRecord<StandaloneSigRow>
         {
             public CliRowKey Key;
 

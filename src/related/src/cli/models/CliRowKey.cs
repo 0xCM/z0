@@ -9,8 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CliRowKey<T>
-        where T : struct, IRecord<T>
+    public readonly struct CliRowKey : IEquatable<CliRowKey>, ITextual
     {
         public uint Value {get;}
 
@@ -30,22 +29,15 @@ namespace Z0
             get => (CliTableKind)(Value >> 24);
         }
 
-        public uint Index
+        public uint Row
         {
             [MethodImpl(Inline)]
             get => Value & 0xFFFFFF;
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(CliRowKey<T> src)
-            => Value == src.Value;
-
-        public override bool Equals(object src)
-            => src is CliRowKey<T> k && Equals(k);
-
-        [MethodImpl(Inline)]
         public string Format()
-            => Value.ToString("X");
+            => string.Format("{0:x2}:{1:x6}", (byte)Table, Row);
 
         public override string ToString()
             => Format();
@@ -54,15 +46,27 @@ namespace Z0
             => (int)Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator CliRowKey<T>(uint value)
-            => new CliRowKey<T>(value);
+        public bool Equals(CliRowKey src)
+            => Value == src.Value;
+
+        public override bool Equals(object src)
+            => src is CliRowKey k && Equals(k);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliRowKey<T>(int value)
-            => new CliRowKey<T>((uint)value);
+        public static implicit operator CliRowKey(uint value)
+            => new CliRowKey(value);
 
         [MethodImpl(Inline)]
-        public static implicit operator CliRowKey(CliRowKey<T> src)
-            => new CliRowKey((src.Value));
+        public static implicit operator CliRowKey((CliTableKind table, uint index) src)
+            => new CliRowKey(src.table, src.index);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliRowKey(int value)
+            => new CliRowKey((uint)value);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliToken(CliRowKey src)
+            => src;
     }
 }

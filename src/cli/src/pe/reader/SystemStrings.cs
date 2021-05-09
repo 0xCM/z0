@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Reflection.Metadata.Ecma335;
 
-    using static ImageRecords;
-    using static CliRecords;
-
     partial class PeTableReader
     {
         public Index<CliSystemString> SystemStrings()

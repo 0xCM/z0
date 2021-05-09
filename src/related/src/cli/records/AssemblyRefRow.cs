@@ -8,10 +8,12 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.AssemblyRef), StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyRefRow : IRecord<AssemblyRefRow>
+        public struct AssemblyRefRow : ICliRecord<AssemblyRefRow>
         {
             public CliRowKey Key;
 

@@ -11,7 +11,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static CliRecords;
 
     partial class ImageMetaReader
     {

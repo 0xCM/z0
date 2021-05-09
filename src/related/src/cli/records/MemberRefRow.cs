@@ -10,24 +10,10 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.MemberRef), StructLayout(LayoutKind.Sequential)]
-        public struct MemberRefRow : IRecord<MemberRefRow>
+        public struct MemberRefRow : ICliRecord<MemberRefRow>
         {
-            public CliToken Token;
+            public CliRowKey Key;
 
-            public MemberRefKind RefKind;
-
-            public CliToken Parent;
-
-            public Name Name;
-
-            public CliSig Sig;
-        }
-
-        public enum MemberRefKind : byte
-        {
-            Method,
-
-            Field = 1,
         }
     }
 }

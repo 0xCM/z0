@@ -68,14 +68,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(int token)
+        public CliToken(int token)
             => Data = (uint)token;
 
         [MethodImpl(Inline)]
-        internal CliToken(uint token)
+        public CliToken(uint token)
             => Data = token;
 
-        public ClrTable Table
+        [MethodImpl(Inline)]
+        public CliToken(CliTableKind table, uint row)
+        {
+            Data = (uint)table << 24 | (row & 0xFFFFFF);
+        }
+
+        public CliTableKind Table
         {
             [MethodImpl(Inline)]
             get => (CliTableKind)(Data >> 24);
@@ -101,8 +107,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => IsEmpty ? EmptyString : string.Format("{0:X2} | {1:x6} | {2}", Table.Id, Row, Table.Name);
-            //Data.FormatHex();
+            => IsEmpty ? EmptyString : string.Format("{0:X2}:{1:x6}", (byte)Table, Row);
 
 
         public override string ToString()

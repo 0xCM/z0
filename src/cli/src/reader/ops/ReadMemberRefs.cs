@@ -10,11 +10,10 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static CliRecords;
 
     partial class ImageMetaReader
     {
-        public ref MemberRefRow ReadMemberRef(MemberReferenceHandle handle, ref MemberRefRow dst)
+        public ref MemberRefInfo ReadMemberRef(MemberReferenceHandle handle, ref MemberRefInfo dst)
         {
             var src = MD.GetMemberReference(handle);
             dst.Token = CliTokens.token(handle);
@@ -26,17 +25,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public void ReadMemberRefs(ReadOnlySpan<MemberReferenceHandle> src, Span<MemberRefRow> dst)
+        public void ReadMemberRefs(ReadOnlySpan<MemberReferenceHandle> src, Span<MemberRefInfo> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
                 ReadMemberRef(skip(src,i), ref seek(dst,i));
         }
 
-        public ReadOnlySpan<MemberRefRow> ReadMemberRefs()
+        public ReadOnlySpan<MemberRefInfo> ReadMemberRefs()
         {
             var handles = MemberRefHandles;
-            var dst = alloc<MemberRefRow>(handles.Length);
+            var dst = alloc<MemberRefInfo>(handles.Length);
             ReadMemberRefs(handles,dst);
             return dst;
         }

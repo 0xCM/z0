@@ -6,10 +6,12 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.ClassLayout), StructLayout(LayoutKind.Sequential)]
-        public struct ClassLayoutRow : IRecord<ClassLayoutRow>
+        public struct ClassLayoutRow : ICliRecord<ClassLayoutRow>
         {
             public CliRowKey Key;
 

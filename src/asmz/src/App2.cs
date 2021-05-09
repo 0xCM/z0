@@ -1253,19 +1253,19 @@ namespace Z0.Asm
         public void EmitApiClasses()
             => Wf.ApiData().EmitApiClasses();
 
-        public void ReadMethodDefs(Assembly src)
-        {
-            var reader = Cli.reader(src);
-            var handles = reader.MethodDefHandles();
-            var rows = handles.Map(h => reader.Read(h));
-            var count = rows.Length;
-            var formatter = Tables.formatter<MethodDefRow>();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(rows,i);
-                Wf.Row(formatter.Format(row));
-            }
-        }
+        // public void ReadMethodDefs(Assembly src)
+        // {
+        //     var reader = Cli.reader(src);
+        //     var keys = reader.MethodDefKeys();
+        //     var rows = keys.Map(h => reader.Read(h));
+        //     var count = rows.Length;
+        //     var formatter = Tables.formatter<MethodDefRow>();
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var row = ref skip(rows,i);
+        //         Wf.Row(formatter.Format(row));
+        //     }
+        // }
 
         void RunExtraction()
         {
@@ -1358,7 +1358,9 @@ namespace Z0.Asm
         public void Run()
         {
 
-            CreateSymbolHeap();
+            //CreateSymbolHeap();
+
+            ListCliTables(Parts.Math.Assembly);
 
             // var provider = Wf.ApiResProvider();
             // using var map = provider.MapResPack();

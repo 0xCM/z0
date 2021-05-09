@@ -10,7 +10,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.MethodImpl), StructLayout(LayoutKind.Sequential)]
-        public struct MethodImplRow
+        public struct MethodImplRow : ICliRecord<MethodImplRow>
         {
             public CliRowKey Key;
 

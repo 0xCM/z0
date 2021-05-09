@@ -13,20 +13,13 @@ namespace Z0
 
     using static Part;
     using static memory;
+
     using static CliRecords;
+    using K = CliTableKinds;
 
     [ApiHost]
     public unsafe readonly struct CliReader
     {
-        [Op]
-        public static TableIndex? table(Handle handle)
-        {
-            if(MetadataTokens.TryGetTableIndex(handle.Kind, out var table))
-                return table;
-            else
-                return null;
-        }
-
         [MethodImpl(Inline), Op]
         public static ManifestResourceHandle reshandle(uint row)
             => MetadataTokens.ManifestResourceHandle((int)row);
@@ -102,107 +95,47 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<AssemblyFileHandle> AssemblyFileHandles()
-            => MD.AssemblyFiles.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
         public ReadOnlySpan<AssemblyReferenceHandle> AssemblyRefHandles()
             => MD.AssemblyReferences.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<CustomAttributeHandle> CustomAttributeHandles()
-            => MD.CustomAttributes.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<CustomDebugInformationHandle> CustomDebugInfoHandles()
-            => MD.CustomDebugInformation.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<DocumentHandle> DocumentHandles()
-            => MD.Documents.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<ExportedTypeHandle> ExportedTypeHandles()
-            => MD.ExportedTypes.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<FieldDefinitionHandle> FieldDefHandles()
-            => MD.FieldDefinitions.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<LocalConstantHandle> LocalConstantHandles()
-            => MD.LocalConstants.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<LocalScopeHandle> LocalScopeHandles()
-            => MD.LocalScopes.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<LocalVariableHandle> LocalVarHandles()
-            => MD.LocalVariables.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<MethodDebugInformationHandle> MethodDebugInfoHandles()
-            => MD.MethodDebugInformation.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<MethodDefinitionHandle> MethodDefHandles()
-            => MD.MethodDefinitions.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<MemberReferenceHandle> MemberRefHandles()
-            => MD.MemberReferences.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
         public NamespaceDefinition NamespaceRoot()
             => MD.GetNamespaceDefinitionRoot();
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<PropertyDefinitionHandle> PropertyDefHandles()
-            => MD.PropertyDefinitions.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
         public ReadOnlySpan<ManifestResourceHandle> ResourceHandles()
             => MD.ManifestResources.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<TypeDefinitionHandle> TypeDefHandles()
-            => MD.TypeDefinitions.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<TypeReferenceHandle> TypeRefHandles()
-            => MD.TypeReferences.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public CliRowKeys AssemblyRefKeys()
+        public CliRowKeys<K.AssemblyRef> AssemblyRefKeys()
             => Cli.keys(MD.AssemblyReferences);
 
         [MethodImpl(Inline), Op]
-        public CliRowKeys FieldDefKeys()
+        public CliRowKeys<K.Field> FieldDefKeys()
             => Cli.keys(MD.FieldDefinitions);
 
         [MethodImpl(Inline), Op]
-        public CliRowKeys MethodDefKeys()
+        public CliRowKeys<K.MethodDef> MethodDefKeys()
             => Cli.keys(MD.MethodDefinitions);
 
         [MethodImpl(Inline), Op]
-        public CliRowKeys MethodDebugKeys()
+        public CliRowKeys<K.MethodDebugInformation> MethodDebugKeys()
             => Cli.keys(MD.MethodDebugInformation);
 
         [MethodImpl(Inline), Op]
-        public CliRowKeys MemberRefKeys()
+        public CliRowKeys<K.MemberRef> MemberRefKeys()
             => Cli.keys(MD.MemberReferences);
 
         [MethodImpl(Inline), Op]
-        public CliRowKeys PropertyDefKeys()
+        public CliRowKeys<K.Property> PropertyDefKeys()
             => Cli.keys(MD.PropertyDefinitions);
 
         [MethodImpl(Inline), Op]
-        public CliRowKeys TypeDefKeys()
+        public CliRowKeys<K.TypeDef> TypeDefKeys()
             => Cli.keys(MD.TypeDefinitions);
 
         [MethodImpl(Inline), Op]
-        public CliRowKeys TypeRefKeys()
+        public CliRowKeys<K.TypeRef> TypeRefKeys()
             => Cli.keys(MD.TypeReferences);
 
         [MethodImpl(Inline), Op]
@@ -305,18 +238,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public BinaryCode ReadSig(MethodDefinition src)
             => Read(src.Signature);
-
-        [MethodImpl(Inline), Op]
-        public CliRowIndex RowIndex(Handle handle)
-        {
-            if(!handle.IsNil)
-            {
-                var _table = table(handle);
-                if (_table != null)
-                    return new CliRowIndex(MD.GetToken(handle), _table.Value);
-            }
-
-            return CliRowIndex.Empty;
-        }
     }
 }

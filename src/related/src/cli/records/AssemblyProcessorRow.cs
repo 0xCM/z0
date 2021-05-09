@@ -6,17 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Reflection;
+
+    using static CliTableKinds;
 
     partial struct CliRecords
     {
-        [Record, StructLayout(LayoutKind.Sequential)]
-        public struct StreamHeader : IRecord<StreamHeader>
+        [Record(CliTableKind.AssemblyProcessor), StructLayout(LayoutKind.Sequential)]
+        public struct AssemblyProcessorRow : ICliRecord<AssemblyProcessorRow>
         {
-            public Address32 Offset;
+            public CliRowKey Key;
 
-            public uint StreamSize;
-
-            public string Name;
         }
     }
 }

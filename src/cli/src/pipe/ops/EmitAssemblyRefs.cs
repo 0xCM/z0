@@ -11,16 +11,13 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ImageRecords;
-    using static CliRecords;
-
     partial class ImageMetaPipe
     {
         public FS.FilePath AssemblyRefsPath()
             => Db.IndexTable<AssemblyRefInfo>();
 
         public FS.FilePath MemberRefsPath(Assembly src)
-            => Db.Table<MemberRefRow>(src.GetSimpleName());
+            => Db.Table<MemberRefInfo>(src.GetSimpleName());
 
         public void EmitAssemblyRefs(FS.Files src)
             => EmitAssemblyRefs(src, AssemblyRefsPath());

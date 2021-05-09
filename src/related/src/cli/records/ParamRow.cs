@@ -10,7 +10,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.Param), StructLayout(LayoutKind.Sequential)]
-        public struct ParamRow : IRecord<ParamRow>
+        public struct ParamRow : ICliRecord<ParamRow>
         {
             public CliRowKey Key;
 

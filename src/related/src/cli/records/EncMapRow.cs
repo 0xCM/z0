@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-
     partial struct CliRecords
     {
         [Record(CliTableKind.EncMap), StructLayout(LayoutKind.Sequential)]
-        public struct EncMapRow : IRecord<EncMapRow>
+        public struct EncMapRow : ICliRecord<EncMapRow>
         {
             public CliRowKey Key;
 

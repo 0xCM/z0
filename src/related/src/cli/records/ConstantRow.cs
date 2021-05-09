@@ -6,13 +6,15 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         /// <summary>
         /// Stores compile-time, constant values for fields, parameters, and propertie
         /// </summary>
         [Record(CliTableKind.Constant), StructLayout(LayoutKind.Sequential)]
-        public struct ConstantRow : IRecord<ConstantRow>
+        public struct ConstantRow : ICliRecord<ConstantRow>
         {
             public CliRowKey Key;
 

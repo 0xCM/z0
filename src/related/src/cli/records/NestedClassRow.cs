@@ -10,7 +10,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.NestedClass), StructLayout(LayoutKind.Sequential)]
-        public struct NestedClassRow
+        public struct NestedClassRow : ICliRecord<NestedClassRow>
         {
             public CliRowKey Key;
 

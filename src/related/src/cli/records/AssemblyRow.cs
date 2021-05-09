@@ -11,7 +11,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.Assembly), StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyRow : IRecord<AssemblyRow>
+        public struct AssemblyRow : ICliRecord<AssemblyRow>
         {
             public CliRowKey Key;
 

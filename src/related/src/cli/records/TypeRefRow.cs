@@ -10,7 +10,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.TypeRef), StructLayout(LayoutKind.Sequential)]
-        public struct TypeRefRow : IRecord<TypeRefRow>
+        public struct TypeRefRow : ICliRecord<TypeRefRow>
         {
             public CliRowKey Key;
 

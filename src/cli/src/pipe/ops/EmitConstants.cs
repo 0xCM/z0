@@ -7,16 +7,14 @@ namespace Z0
     using System;
 
     using static memory;
-    using static ImageRecords;
-    using static CliRecords;
 
     partial class ImageMetaPipe
     {
         public void EmitConstants()
         {
-            var target = Wf.Db().IndexTable<ConstantField>();
-            var flow = Wf.EmittingTable<ConstantField>(target);
-            var formatter = Tables.formatter<ConstantField>();
+            var target = Db.IndexTable<ConstantFieldInfo>();
+            var flow = Wf.EmittingTable<ConstantFieldInfo>(target);
+            var formatter = Tables.formatter<ConstantFieldInfo>();
             var counter = 0u;
             using var writer = target.Writer();
             writer.WriteLine(formatter.FormatHeader());

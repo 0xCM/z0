@@ -16,16 +16,16 @@ namespace Z0
     {
         public ReadOnlySpan<AssemblyRefRow> AssemblyRefRows()
         {
-            var handles = CliReader.AssemblyRefHandles();
-            var count = handles.Length;
+            var keys = CliReader.AssemblyRefKeys().View;
+            var count = keys.Length;
             var buffer = alloc<AssemblyRefRow>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
-                ref readonly var handle = ref skip(handles,i);
+                ref readonly var key = ref skip(keys,i);
                 ref var row = ref seek(dst,i);
-                var src = MD.GetAssemblyReference(handle);
-                row.Key = Cli.key(CliTableKind.AssemblyRef, handle);
+                var src = MD.GetAssemblyReference(Cli.handle<AssemblyReferenceHandle>(key));
+                row.Key = Cli.key(CliTableKind.AssemblyRef, key);
                 row.Culture = src.Culture;
                 row.Flags = src.Flags;
                 row.Hash = src.HashValue;

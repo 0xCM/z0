@@ -10,7 +10,7 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.ManifestResource), StructLayout(LayoutKind.Sequential)]
-        public struct ManifestResourceRow : IRecord<ManifestResourceRow>
+        public struct ManifestResourceRow : ICliRecord<ManifestResourceRow>
         {
             public CliRowKey Key;
 

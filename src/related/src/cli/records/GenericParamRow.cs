@@ -9,8 +9,10 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.GenericParam), StructLayout(LayoutKind.Sequential)]
-        public struct GenericParamRow : IRecord<GenericParamRow>
+        public struct GenericParamRow : ICliRecord<GenericParamRow>
         {
+            public CliRowKey Key;
+
             public ushort Number;
 
             public ushort Flags;

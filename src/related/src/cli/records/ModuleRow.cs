@@ -10,8 +10,10 @@ namespace Z0
     partial struct CliRecords
     {
         [Record(CliTableKind.Module), StructLayout(LayoutKind.Sequential)]
-        public struct ModuleRow : IRecord<ModuleRow>
+        public struct ModuleRow : ICliRecord<ModuleRow>
         {
+            public CliRowKey Key;
+
             public ushort Generation;
 
             public StringIndex Name;

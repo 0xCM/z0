@@ -9,8 +9,6 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static Part;
-    using static memory;
-    using static CliRecords;
 
     partial class ImageMetaReader
     {
