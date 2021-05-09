@@ -13,7 +13,7 @@ namespace Z0
         [Record(CliTableKind.ClassLayout), StructLayout(LayoutKind.Sequential)]
         public struct ClassLayoutRow : ICliRecord<ClassLayoutRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<ClassLayout> Key;
 
             public ushort PackingSize;
 

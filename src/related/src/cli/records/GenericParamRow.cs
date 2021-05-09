@@ -6,12 +6,14 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.GenericParam), StructLayout(LayoutKind.Sequential)]
         public struct GenericParamRow : ICliRecord<GenericParamRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<GenericParam> Key;
 
             public ushort Number;
 

@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.ManifestResource), StructLayout(LayoutKind.Sequential)]
         public struct ManifestResourceRow : ICliRecord<ManifestResourceRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<ManifestResource> Key;
 
             public uint Offset;
 

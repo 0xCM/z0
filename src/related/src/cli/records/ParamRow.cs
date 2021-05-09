@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.Param), StructLayout(LayoutKind.Sequential)]
         public struct ParamRow : ICliRecord<ParamRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<Param> Key;
 
             public ushort Flags;
 

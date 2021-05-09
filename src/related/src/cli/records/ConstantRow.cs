@@ -16,7 +16,7 @@ namespace Z0
         [Record(CliTableKind.Constant), StructLayout(LayoutKind.Sequential)]
         public struct ConstantRow : ICliRecord<ConstantRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<Constant> Key;
 
             public byte Type;
 

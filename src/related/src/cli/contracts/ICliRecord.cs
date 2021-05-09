@@ -9,4 +9,12 @@ namespace Z0
     {
 
     }
+
+    public interface ICliRecord<T,K> : ICliRecord<T>
+        where T : unmanaged, ICliRecord<T>
+        where K : unmanaged, ICliTableKind<K>
+    {
+
+    }
+
 }

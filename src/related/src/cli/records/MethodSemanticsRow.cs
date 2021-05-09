@@ -8,12 +8,14 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.MethodSemantics), StructLayout(LayoutKind.Sequential)]
         public struct MethodSemanticsRow : ICliRecord<MethodSemanticsRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<MethodSemantics> Key;
 
             public MethodSemanticsAttributes Semantic;
 

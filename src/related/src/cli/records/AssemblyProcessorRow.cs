@@ -15,7 +15,7 @@ namespace Z0
         [Record(CliTableKind.AssemblyProcessor), StructLayout(LayoutKind.Sequential)]
         public struct AssemblyProcessorRow : ICliRecord<AssemblyProcessorRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<AssemblyProcessor> Key;
 
         }
     }

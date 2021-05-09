@@ -6,12 +6,14 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.FieldLayout), StructLayout(LayoutKind.Sequential)]
         public struct FieldLayoutRow : ICliRecord<FieldLayoutRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<FieldLayout> Key;
 
             public uint Offset;
 

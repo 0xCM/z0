@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.StandAloneSig), StructLayout(LayoutKind.Sequential)]
         public struct StandaloneSigRow  : ICliRecord<StandaloneSigRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<StandAloneSig> Key;
 
             public BlobIndex Signature;
         }

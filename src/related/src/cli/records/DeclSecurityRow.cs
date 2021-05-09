@@ -15,7 +15,7 @@ namespace Z0
         [Record(CliTableKind.DeclSecurity), StructLayout(LayoutKind.Sequential)]
         public struct DeclSecurityRow : ICliRecord<DeclSecurityRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<DeclSecurity> Key;
 
             public DeclarativeSecurityAction Action;
 

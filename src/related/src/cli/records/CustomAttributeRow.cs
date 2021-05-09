@@ -13,7 +13,7 @@ namespace Z0
         [Record(CliTableKind.CustomAttribute), StructLayout(LayoutKind.Sequential)]
         public struct CustomAttributeRow  : ICliRecord<CustomAttributeRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<CustomAttribute> Key;
 
             public CliRowKey Parent;
 

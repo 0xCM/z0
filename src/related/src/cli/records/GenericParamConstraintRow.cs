@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.GenericParamConstraint), StructLayout(LayoutKind.Sequential)]
         public struct GenericParamConstraintRow : ICliRecord<GenericParamConstraintRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<GenericParamConstraint> Key;
 
             /// <summary>
             /// An index into the GenericParam table, specifying to which generic parameter this row refers

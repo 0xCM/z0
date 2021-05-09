@@ -15,8 +15,7 @@ namespace Z0
         [Record(CliTableKind.AssemblyOS), StructLayout(LayoutKind.Sequential)]
         public struct AssemblyOSRow : ICliRecord<AssemblyOSRow>
         {
-            public CliRowKey Key;
-
+            public CliRowKey<AssemblyOS> Key;
         }
     }
 }

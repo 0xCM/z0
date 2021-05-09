@@ -7,12 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.Event), StructLayout(LayoutKind.Sequential)]
         public struct EventRow : ICliRecord<EventRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<Event> Key;
 
             public ushort EventFlags;
 

@@ -13,7 +13,7 @@ namespace Z0
         [Record(CliTableKind.Assembly), StructLayout(LayoutKind.Sequential)]
         public struct AssemblyRow : ICliRecord<AssemblyRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<CliTableKinds.Assembly> Key;
 
             public AssemblyHashAlgorithm HashAlgorithm;
 

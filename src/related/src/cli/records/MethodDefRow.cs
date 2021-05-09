@@ -8,12 +8,14 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
+    using static CliTableKinds;
+
     partial struct CliRecords
     {
         [Record(CliTableKind.MethodDef), StructLayout(LayoutKind.Sequential)]
         public struct MethodDefRow : ICliRecord<MethodDefRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<MethodDef> Key;
 
             public Address32 Rva;
 

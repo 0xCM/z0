@@ -15,7 +15,7 @@ namespace Z0
         [Record(CliTableKind.AssemblyRef), StructLayout(LayoutKind.Sequential)]
         public struct AssemblyRefRow : ICliRecord<AssemblyRefRow>
         {
-            public CliRowKey Key;
+            public CliRowKey<AssemblyRef> Key;
 
             public AssemblyVersion Version;
 
