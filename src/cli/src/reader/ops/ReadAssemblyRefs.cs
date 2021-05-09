@@ -10,8 +10,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static CliRecords;
-    using static CliTableKinds;
 
     partial class ImageMetaReader
     {

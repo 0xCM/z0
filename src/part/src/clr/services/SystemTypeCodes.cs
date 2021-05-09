@@ -17,7 +17,7 @@ namespace Z0
         static internal readonly SystemTypeCodes Data = new SystemTypeCodes(0);
     }
 
-    [ApiHost(ApiNames.ClrTypeCodes, true)]
+    [ApiHost]
     public readonly struct SystemTypeCodes
     {
         [MethodImpl(Inline), Op]
@@ -35,7 +35,7 @@ namespace Z0
         public ref readonly Type this[TypeCode tc]
         {
             [MethodImpl(Inline)]
-            get => ref Types[(int)tc];
+            get => ref memory.skip(Types,(int)tc);
         }
 
         /// <summary>
@@ -248,6 +248,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Type indexed(TC code)
-            => Types[(uint)code];
+            => memory.skip(Types,(uint)code);
     }
 }

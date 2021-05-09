@@ -133,37 +133,11 @@ public readonly struct ApiNames
 
     public const string ClrLiteralKinds = clr + literals + dot + kinds;
 
-    public const string ClrType = clr + dot + type;
-
     public const string ClrTypes = clr + dot + types;
-
-    public const string ClrEnum = clr + dot + @enum;
-
-    public const string ClrEnumLiteral = clr + dot + @enum + dot + literal;
-
-    public const string ClrStruct = clr + dot + @struct;
-
-    public const string ClrAssembly = clr + dot + assembly;
-
-    public const string ClrField = clr + dot + field;
-
-    public const string ClrMethod = clr + dot + method;
-
-    public const string ClrProperty = clr + dot + property;
 
     public const string ClrHandles = clr + dot + handles;
 
-    public const string ClrMember = clr + dot + member;
-
     public const string Clr = clr;
-
-    public const string ClrQuery = clr + dot + query;
-
-    const string ClrMetadata = clr + dot + metadata;
-
-    public const string ClrArtifacts = clr + dot + artifacts;
-
-    public const string ClrRecords = clr + dot + records;
 
     public const string ClrTypeCodes = clr + dot + types + dot + codes;
 
@@ -171,21 +145,16 @@ public readonly struct ApiNames
 
     public const string ClrEnums = clr + dot + enums;
 
-    public const string ClrSigs = clr + dot + sigs;
 
     // ~~ Delegates
     // ~~ -----------------------------------------------------------------------------------------
 
     public const string Delegates = delegates;
 
-    public const string DelegatesX = delegates + dot + extensions;
 
     // ~~ Db
     // ~~ -----------------------------------------------------------------------------------------
 
-    public const string Db = db;
-
-    public const string DbArtifacts = db + dot + artifacts;
 
     const string formatter = nameof(formatter);
 
@@ -194,56 +163,21 @@ public readonly struct ApiNames
 
     public const string BitFormatter = bits + dot + formatter;
 
-    public const string BitStream = bits + dot + stream;
-
     public const string BitParser = bits + dot + parser;
 
     public const string BitFormatOptions = bits + dot + formatters + dot + options;
 
-    public const string BitFieldModels = bits + dot + bitfields + dot + models;
-
-    // ~~ Memory
-    // ~~ -----------------------------------------------------------------------------------------
-
-    public const string MemoryStore = memory + dot + store;
-
     public const string MemoryReader = memory + dot + reader;
 
-    public const string MemoryRefs = memory + dot + refs;
-
-    public const string MemoryView = memory + dot + view;
 
     public const string Pointers = datatypes + dot + pointers;
 
-    // ~~ Primal
-    // ~~ -----------------------------------------------------------------------------------------
-
-    public const string PrimalKinds = primal + dot + kinds;
-
-    // ~~ Resources
-    // ~~ -----------------------------------------------------------------------------------------
 
     public const string Resources = resources;
-
-    public const string TextResources = resources + dot + text;
-
 
     // ~~ Symbolic
     // ~~ -----------------------------------------------------------------------------------------
 
-    public const string Symbolic = symbolic;
-
-    public const string SymbolicX = symbolic + dot + extensions;
-
-    public const string SymbolicHex = symbolic + dot + hex;
-
-    public const string SymbolStores = symbolic + dot + stores;
-
-    public const string SymbolicDigits = symbolic + dot + digits;
-
-    public const string SymbolicTest = symbolic + dot + test;
-
-    public const string SymbolicTests = symbolic + dot + tests;
 
     public const string Asci = symbolic + dot + asci;
 
@@ -252,8 +186,6 @@ public readonly struct ApiNames
 
     // ~~ Wf
     // ~~ -----------------------------------------------------------------------------------------
-
-    public const string Workflow = workflow;
 
     public const string WfShell = workflow + dot + shell;
 
