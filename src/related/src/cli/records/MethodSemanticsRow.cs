@@ -12,8 +12,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.MethodSemantics), StructLayout(LayoutKind.Sequential)]
-        public struct MethodSemanticsRow : ICliRecord<MethodSemanticsRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MethodSemanticsRow : ICliRecord<MethodSemanticsRow,MethodSemantics>
         {
             public CliRowKey<MethodSemantics> Key;
 

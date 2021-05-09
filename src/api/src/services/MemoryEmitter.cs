@@ -16,6 +16,14 @@ namespace Z0
         static string status(MemoryFileInfo file)
             => string.Format("Created memory map: {0} | {1} | {2,-12} | {3}", file.BaseAddress, file.EndAddress, file.Size, file.Path.ToUri());
 
+        public unsafe uint Emit(MemorySeg src, uint bpl, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingFile(dst);
+            var size = memory.emit(src, bpl, dst);
+            Wf.EmittedFile(flow,size);
+            return size;
+        }
+
         public void DumpImages(FS.FolderPath src, FS.FolderPath dst)
         {
             using var mapped = MemoryFiles.map(src);

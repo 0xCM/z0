@@ -11,30 +11,10 @@ namespace Z0
     using static Part;
     using static memory;
     using static CliRecords;
+    using static CliTableKinds;
 
     partial class ImageMetaReader
     {
-        public ReadOnlySpan<AssemblyRefRow> AssemblyRefRows()
-        {
-            var keys = CliReader.AssemblyRefKeys().View;
-            var count = keys.Length;
-            var buffer = alloc<AssemblyRefRow>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var key = ref skip(keys,i);
-                ref var row = ref seek(dst,i);
-                var src = MD.GetAssemblyReference(Cli.handle<AssemblyReferenceHandle>(key));
-                row.Key = Cli.key(CliTableKind.AssemblyRef, key);
-                row.Culture = src.Culture;
-                row.Flags = src.Flags;
-                row.Hash = src.HashValue;
-                row.Token = src.PublicKeyOrToken;
-                row.Version = src.Version;
-            }
-            return buffer;
-        }
-
         [Op]
         public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs()
         {

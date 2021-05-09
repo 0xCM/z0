@@ -10,8 +10,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.CustomAttribute), StructLayout(LayoutKind.Sequential)]
-        public struct CustomAttributeRow  : ICliRecord<CustomAttributeRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct CustomAttributeRow  : ICliRecord<CustomAttributeRow,CustomAttribute>
         {
             public CliRowKey<CustomAttribute> Key;
 

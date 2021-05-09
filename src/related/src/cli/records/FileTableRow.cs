@@ -10,8 +10,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.File), StructLayout(LayoutKind.Sequential)]
-        public struct FileRow : ICliRecord<FileRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct FileRow : ICliRecord<FileRow,File>
         {
             public CliRowKey<File> Key;
 

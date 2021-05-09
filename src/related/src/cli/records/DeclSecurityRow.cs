@@ -12,8 +12,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.DeclSecurity), StructLayout(LayoutKind.Sequential)]
-        public struct DeclSecurityRow : ICliRecord<DeclSecurityRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct DeclSecurityRow : ICliRecord<DeclSecurityRow,DeclSecurity>
         {
             public CliRowKey<DeclSecurity> Key;
 

@@ -13,8 +13,8 @@ namespace Z0
         /// <summary>
         /// Stores compile-time, constant values for fields, parameters, and propertie
         /// </summary>
-        [Record(CliTableKind.Constant), StructLayout(LayoutKind.Sequential)]
-        public struct ConstantRow : ICliRecord<ConstantRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct ConstantRow : ICliRecord<ConstantRow,Constant>
         {
             public CliRowKey<Constant> Key;
 

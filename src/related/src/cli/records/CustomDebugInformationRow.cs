@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.CustomDebugInformation), StructLayout(LayoutKind.Sequential)]
-        public struct CustomDebugInformationRow : ICliRecord<CustomDebugInformationRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct CustomDebugInformationRow : ICliRecord<CustomDebugInformationRow, CustomDebugInformation>
         {
             public CliRowKey<CustomDebugInformation> Key;
 

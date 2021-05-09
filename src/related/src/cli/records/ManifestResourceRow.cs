@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.ManifestResource), StructLayout(LayoutKind.Sequential)]
-        public struct ManifestResourceRow : ICliRecord<ManifestResourceRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct ManifestResourceRow : ICliRecord<ManifestResourceRow,ManifestResource>
         {
             public CliRowKey<ManifestResource> Key;
 

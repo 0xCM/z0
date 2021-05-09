@@ -11,12 +11,10 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.FieldPtr), StructLayout(LayoutKind.Sequential)]
-        public struct FieldPtrRow : ICliRecord<FieldPtrRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct FieldPtrRow : ICliRecord<FieldPtrRow,FieldPtr>
         {
             public CliRowKey<FieldPtr> Key;
-
-
         }
     }
 }

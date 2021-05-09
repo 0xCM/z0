@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.EncLog), StructLayout(LayoutKind.Sequential)]
-        public struct EncLogRow : ICliRecord<EncLogRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct EncLogRow : ICliRecord<EncLogRow,EncLog>
         {
             public CliRowKey<EncLog> Key;
 

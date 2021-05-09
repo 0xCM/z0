@@ -4,19 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Svc = Z0;
+
     [ApiHost]
     public static class XSvcFactory
     {
         [Op]
         public static ApiComments ApiComments(this IWfRuntime wf)
-            => Z0.ApiComments.create(wf);
+            => Svc.ApiComments.create(wf);
 
         [Op]
         public static ApiResProvider ApiResProvider(this IWfRuntime wf)
-            => Z0.ApiResProvider.create(wf);
+            => Svc.ApiResProvider.create(wf);
 
+        [Op]
         public static ApiHexArchive ApiHexArchive(this IWfRuntime wf)
-            => Z0.ApiHexArchive.create(wf);
+            => Svc.ApiHexArchive.create(wf);
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
@@ -24,47 +27,50 @@ namespace Z0
         /// <param name="generics">Metadata for generic operations</param>
         [Op]
         public static ApiIndexBuilder ApiIndexBuilder(this IWfRuntime wf)
-             => Z0.ApiIndexBuilder.create(wf);
+             => Svc.ApiIndexBuilder.create(wf);
 
         [Op]
         public static BitMaskServices ApiBitMasks(this IWfRuntime wf)
-            => BitMaskServices.create(wf);
+            => Svc.BitMaskServices.create(wf);
 
         [Op]
         public static ApiAssets ApiAssets(this IWfRuntime wf)
-            => Z0.ApiAssets.create(wf);
+            => Svc.ApiAssets.create(wf);
 
         [Op]
         public static Symbolism Symbolism(this IWfRuntime wf)
-            => Z0.Symbolism.create(wf);
+            => Svc.Symbolism.create(wf);
 
         [Op]
         public static ApiHex ApiHex(this IWfRuntime wf)
-            => Z0.ApiHex.create(wf);
+            => Svc.ApiHex.create(wf);
 
         [Op]
         public static ApiDataService ApiData(this IWfRuntime wf)
-            => Z0.ApiDataService.create(wf);
+            => Svc.ApiDataService.create(wf);
 
         [Op]
         public static ApiJit ApiJit(this IWfRuntime wf)
-            => Z0.ApiJit.create(wf);
+            => Svc.ApiJit.create(wf);
 
         [Op]
         public static ApiExtractPipe ApiExtractPipe(this IWfRuntime wf)
-            => Z0.ApiExtractPipe.create(wf);
+            => Svc.ApiExtractPipe.create(wf);
 
         [Op]
         public static ApiQuery ApiQuery(this IWfRuntime wf)
-            => Z0.ApiQuery.create(wf);
+            => Svc.ApiQuery.create(wf);
 
         [Op]
         public static HexPacks HexPacks(this IWfRuntime wf)
-            => Z0.HexPacks.create(wf);
-
+            => Svc.HexPacks.create(wf);
 
         [Op]
         public static SymServices SymServices(this IWfRuntime wf)
-            => Z0.SymServices.create(wf);
+            => Svc.SymServices.create(wf);
+
+        [Op]
+        public static MemoryEmitter MemoryEmitter(this IWfRuntime wf)
+            => Svc.MemoryEmitter.create(wf);
     }
 }

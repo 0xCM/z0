@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.GenericParamConstraint), StructLayout(LayoutKind.Sequential)]
-        public struct GenericParamConstraintRow : ICliRecord<GenericParamConstraintRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct GenericParamConstraintRow : ICliRecord<GenericParamConstraintRow,GenericParamConstraint>
         {
             public CliRowKey<GenericParamConstraint> Key;
 

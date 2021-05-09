@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Minidump)" />
     <ProjectReference Include="$(Asci)" />
     <ProjectReference Include="$(Related)" />
-
   </ItemGroup>
 
 </Project>

@@ -10,8 +10,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.FieldMarshal), StructLayout(LayoutKind.Sequential)]
-        public struct FieldMarshalRow : ICliRecord<FieldMarshalRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct FieldMarshalRow : ICliRecord<FieldMarshalRow,FieldMarshal>
         {
             public CliRowKey<FieldMarshal> Key;
 

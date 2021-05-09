@@ -10,8 +10,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.InterfaceImpl), StructLayout(LayoutKind.Sequential)]
-        public struct InterfaceImplRow : ICliRecord<InterfaceImplRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct InterfaceImplRow : ICliRecord<InterfaceImplRow,InterfaceImpl>
         {
             public CliRowKey<InterfaceImpl> Key;
 

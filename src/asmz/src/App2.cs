@@ -1292,38 +1292,17 @@ namespace Z0.Asm
             }
         }
 
-        unsafe static void Emit(MemoryRange src, FS.FilePath dst)
+        public unsafe void EmitRawMetadata(Assembly src, FS.FilePath dst)
         {
-            var bpl = 32;
-            var line = text.build();
-            using var writer = dst.Writer();
+            var emitter = Wf.MemoryEmitter();
+            var segment = Clr.metadata(src);
+            emitter.Emit(segment, 32, dst);
+        }
 
-            var pSrc = src.Min.Pointer<byte>();
-            var last =  src.Max.Pointer<byte>();
-            var address = src.Min;
-            byte pos = 0;
-            var offset = 0u;
-
-            while(pSrc++ <= last)
-            {
-                address = (MemoryAddress)pSrc;
-
-                if(pos == 0)
-                    line.Append(text.format("0x{0}  ", address.Format()));
-
-                line.Append(text.format("{0} ", HexFormat.format<W8,byte>(*pSrc)));
-
-                pos += 3;
-
-                if(offset != 0 && offset % bpl == 0)
-                {
-                    writer.WriteLine(line.ToString());
-                    line.Clear();
-                    pos = 0;
-                }
-
-                offset++;
-            }
+        public unsafe void EmitRawMetadata(Assembly src)
+        {
+            var dst = Db.AppLog(src.GetSimpleName() + ".metadata", FS.Csv);
+            EmitRawMetadata(src, dst);
         }
 
         public void UnpackRespack()
@@ -1360,7 +1339,7 @@ namespace Z0.Asm
 
             //CreateSymbolHeap();
 
-            ListCliTables(Parts.Math.Assembly);
+            EmitRawMetadata(Parts.Math.Assembly);
 
             // var provider = Wf.ApiResProvider();
             // using var map = provider.MapResPack();

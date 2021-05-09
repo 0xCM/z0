@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.ExportedType), StructLayout(LayoutKind.Sequential)]
-        public struct ExportedTypeRow  : ICliRecord<ExportedTypeRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct ExportedTypeRow  : ICliRecord<ExportedTypeRow,ExportedType>
         {
             public CliRowKey<ExportedType> Key;
 

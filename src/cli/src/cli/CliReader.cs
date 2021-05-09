@@ -18,7 +18,7 @@ namespace Z0
     using K = CliTableKinds;
 
     [ApiHost]
-    public unsafe readonly struct CliReader
+    public unsafe readonly partial struct CliReader
     {
         [MethodImpl(Inline), Op]
         public static ManifestResourceHandle reshandle(uint row)
@@ -238,5 +238,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public BinaryCode ReadSig(MethodDefinition src)
             => Read(src.Signature);
+
     }
 }

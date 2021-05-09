@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.EventMap), StructLayout(LayoutKind.Sequential)]
-        public struct EventMapRow : ICliRecord<EventMapRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct EventMapRow : ICliRecord<EventMapRow,EventMap>
         {
             public CliRowKey<EventMap> Key;
 

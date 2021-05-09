@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct CliRecords
     {
-        [Record(CliTableKind.ModuleRef),  StructLayout(LayoutKind.Sequential)]
-        public struct ModuleRefRow : ICliRecord<ModuleRefRow>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct ModuleRefRow : ICliRecord<ModuleRefRow,ModuleRef>
         {
             public CliRowKey<ModuleRef> Key;
 
