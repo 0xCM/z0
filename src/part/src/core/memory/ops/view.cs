@@ -11,6 +11,11 @@ namespace Z0
 
     partial struct memory
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T view<T>(MemoryAddress src)
+            where T : struct
+                => ref first(cover<T>(src, 1));
+
         /// <summary>
         /// Presents a readonly view of a memory segment beginning at a specified base covering a specified <typeparamref name='T'/> cell count
         /// </summary>
@@ -38,7 +43,7 @@ namespace Z0
         /// <param name="size">The segment size, in bytes</param>
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<byte> view(MemoryAddress src, ByteSize size)
-            => cover<byte>(src.Ref<byte>(), size);
+            => cover<byte>(src, size);
 
         /// <summary>
         /// Covers a <see cref='MemoryRange'/> with a readonly span
@@ -48,6 +53,16 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(MemoryRange src)
             => cover(src.Min.Ref<T>(), cells<T>(src));
+
+        /// <summary>
+        /// Creates memory view of specified size beginning at a specified base + offset
+        /// </summary>
+        /// <param name="base">The base address</param>
+        /// <param name="offset">The offset at which the view begins</param>
+        /// <param name="size">The view size</param>
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> view(MemoryAddress @base, ulong offset, ByteSize size)
+            => cover<byte>(@base + offset, size);
 
         /// <summary>
         /// Presents a readonly S-reference as a readonly T-reference

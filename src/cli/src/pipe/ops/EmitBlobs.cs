@@ -10,7 +10,7 @@ namespace Z0
 
     using static memory;
     using static ImageRecords;
-    using static CliRecords;
+    using static CliRows;
 
     partial class ImageMetaPipe
     {

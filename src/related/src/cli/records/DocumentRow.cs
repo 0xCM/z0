@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct DocumentRow : ICliRecord<DocumentRow,Document>
+        public struct DocumentRow : ICliRecord<DocumentRow>
         {
-            public CliRowKey<Document> Key;
-
             public BlobIndex Name;
 
             public GuidIndex HashAlgorithm;

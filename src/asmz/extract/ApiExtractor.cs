@@ -80,7 +80,7 @@ namespace Z0.Asm
         {
             var rebasing = Wf.Running();
             var dst = Paths.ApiRebasePath(ts);
-            var entries = Wf.ApiData().RebaseMembers(members, dst);
+            var entries = Wf.ApiCatalogs().RebaseMembers(members, dst);
             Wf.Ran(rebasing);
         }
 

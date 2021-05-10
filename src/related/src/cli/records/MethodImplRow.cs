@@ -7,15 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static CliTableKinds;
 
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct MethodImplRow : ICliRecord<MethodImplRow,MethodImpl>
+        public struct MethodImplRow : ICliRecord<MethodImplRow>
         {
-            public CliRowKey<MethodImpl> Key;
-
             /// <summary>
             /// An index into the TypeDef table
             /// </summary>

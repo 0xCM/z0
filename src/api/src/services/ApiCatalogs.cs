@@ -14,10 +14,9 @@ namespace Z0
     using static Sequential;
 
     [ApiHost]
-    public class ApiDataService : AppService<ApiDataService>
+    public class ApiCatalogs : AppService<ApiCatalogs>
     {
         ApiJit ApiJit;
-
 
         ApiQuery Query;
 
@@ -27,13 +26,16 @@ namespace Z0
             Query = Wf.ApiQuery();
         }
 
-        public void EmitApiClasses()
+        public ReadOnlySpan<SymLiteral> EmitApiClasses()
+            => EmitApiClasses(Db.IndexTable("api.classes"));
+
+        public ReadOnlySpan<SymLiteral> EmitApiClasses(FS.FilePath dst)
         {
-            var dst = Db.IndexTable("api.classes");
             var flow = Wf.EmittingTable<SymLiteral>(dst);
             var literals = Query.ApiClassLiterals();
             var count = Tables.emit(literals, dst);
             Wf.EmittedTable(flow, count);
+            return literals;
         }
 
         public Index<ApiCatalogEntry> RebaseMembers(ApiMembers src, FS.FilePath dst)
@@ -45,7 +47,7 @@ namespace Z0
             return records;
         }
 
-        public Index<ApiCatalogEntry> Current()
+        public Index<ApiCatalogEntry> Entries()
         {
             var dir = Db.IndexDir<ApiCatalogEntry>();
             var files = dir.Files(FS.Csv).OrderBy(f => f.Name);
@@ -79,31 +81,6 @@ namespace Z0
             return rows.ToArray();
         }
 
-        static Outcome parse(string src, out ApiCatalogEntry dst)
-        {
-            const char Delimiter = FieldDelimiter;
-            const byte FieldCount = ApiCatalogEntry.FieldCount;
-
-            var fields = Tables.fields(src, Delimiter).View;
-            if(fields.Length != FieldCount)
-            {
-                dst = default;
-                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, text.delimit(fields, Delimiter)));
-            }
-
-            var i = 0;
-            DataParser.parse(skip(fields, i++), out dst.Sequence);
-            DataParser.parse(skip(fields, i++), out dst.ProcessBase);
-            DataParser.parse(skip(fields, i++), out dst.MemberBase);
-            DataParser.parse(skip(fields, i++), out dst.MemberOffset);
-            DataParser.parse(skip(fields, i++), out dst.MemberRebase);
-            DataParser.parse(skip(fields, i++), out dst.MaxSize);
-            DataParser.parse(skip(fields, i++), out dst.PartName);
-            DataParser.parse(skip(fields, i++), out dst.HostName);
-            DataParser.parse(skip(fields, i++), out dst.OpUri);
-            return true;
-        }
-
         /// <summary>
         /// Returns a <see cref='ApiHostCatalog'/> for a specified host
         /// </summary>
@@ -127,12 +104,19 @@ namespace Z0
             return result;
         }
 
+
         [Op]
         public static Index<ApiCatalogEntry> rebase(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
         {
+            var dst = alloc<ApiCatalogEntry>(members.Length);
+            rebase(@base, members, dst);
+            return dst;
+        }
+
+        [Op]
+        public static uint rebase(MemoryAddress @base, ReadOnlySpan<ApiMember> members, Span<ApiCatalogEntry> dst)
+        {
             var count = members.Length;
-            var buffer = alloc<ApiCatalogEntry>(count);
-            ref var dst = ref first(buffer);
             var rebase = first(members).BaseAddress;
             for(uint seq=0; seq<count; seq++)
             {
@@ -148,22 +132,22 @@ namespace Z0
                 record.PartName = member.Host.Part.Format();
                 record.OpUri = member.OpUri;
             }
-            return buffer;
+            return (uint)count;
         }
 
         public ApiMemberBlocks Correlate()
             => Correlate(Wf.ApiCatalog.PartCatalogs());
 
-        public ApiMemberBlocks Correlate(Index<IApiPartCatalog> src)
+        public ApiMemberBlocks Correlate(ReadOnlySpan<IApiPartCatalog> src)
         {
-            var flow = Wf.Running(Msg.CorrelatingParts.Format(src.Count));
+            var flow = Wf.Running(Msg.CorrelatingParts.Format(src.Length));
             var hex = Wf.ApiHex();
             var count = src.Length;
             var dst = root.list<ApiMemberCode>();
             var records = root.list<ApiCorrelationEntry>();
             for(var i=0; i<count; i++)
             {
-                var part = src[i];
+                var part = skip(src,i);
                 var inner = Wf.Running(Msg.CorrelatingOperations.Format(part.PartId.Format()));
                 var hosts = part.ApiHosts.View;
                 var kHost = hosts.Length;
@@ -215,6 +199,31 @@ namespace Z0
                 }
             }
             return count;
+        }
+
+        static Outcome parse(string src, out ApiCatalogEntry dst)
+        {
+            const char Delimiter = FieldDelimiter;
+            const byte FieldCount = ApiCatalogEntry.FieldCount;
+
+            var fields = Tables.fields(src, Delimiter).View;
+            if(fields.Length != FieldCount)
+            {
+                dst = default;
+                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, text.delimit(fields, Delimiter)));
+            }
+
+            var i = 0;
+            DataParser.parse(skip(fields, i++), out dst.Sequence);
+            DataParser.parse(skip(fields, i++), out dst.ProcessBase);
+            DataParser.parse(skip(fields, i++), out dst.MemberBase);
+            DataParser.parse(skip(fields, i++), out dst.MemberOffset);
+            DataParser.parse(skip(fields, i++), out dst.MemberRebase);
+            DataParser.parse(skip(fields, i++), out dst.MaxSize);
+            DataParser.parse(skip(fields, i++), out dst.PartName);
+            DataParser.parse(skip(fields, i++), out dst.HostName);
+            DataParser.parse(skip(fields, i++), out dst.OpUri);
+            return true;
         }
 
         static ref ApiCorrelationEntry fill(Seq16x2 seq, ApiMember member, ApiCodeBlock code, out ApiCorrelationEntry dst)

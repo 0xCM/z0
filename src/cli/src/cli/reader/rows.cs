@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
-    using static CliRecords;
+    using static CliRows;
     using static CliTableKinds;
     using static memory;
     using static Part;
@@ -20,7 +20,6 @@ namespace Z0
         {
             var dst = new AssemblyRefRow();
             var src = MD.GetAssemblyReference(Cli.handle<AssemblyReferenceHandle>(key));
-            dst.Key = key;
             dst.Culture = src.Culture;
             dst.Flags = src.Flags;
             dst.Hash = src.HashValue;

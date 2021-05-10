@@ -68,6 +68,11 @@ namespace Z0
         public static Span<T> edit<T>(MemoryRange src)
             => cover(src.Min.Ref<T>(), cells<T>(src));
 
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> edit<T>(SegRef src)
+            => src.As<T>();
+
         /// <summary>
         /// Covers a memory segment with a span
         /// </summary>
@@ -76,9 +81,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
             => cover<byte>(src.Ref<byte>(), size);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> edit<T>(SegRef src)
-            => src.As<T>();
     }
 }

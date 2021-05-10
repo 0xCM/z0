@@ -8,91 +8,118 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DataBlock01<T> : IDataBlock<DataBlock01<T>>
+    public struct DataBlock1<T> : IDataBlock<DataBlock1<T>>
         where T : unmanaged
     {
         T Data;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DataBlock02<T> : IDataBlock<DataBlock02<T>>
+    public struct DataBlock2<T> : IDataBlock<DataBlock2<T>>
         where T : unmanaged
     {
-        DataBlock01<T> A;
+        DataBlock1<T> A;
 
-        DataBlock01<T> B;
+        DataBlock1<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DataBlock03<T> : IDataBlock<DataBlock03<T>>
+    public struct DataBlock3<T> : IDataBlock<DataBlock3<T>>
         where T : unmanaged
     {
-        DataBlock01<T> A;
+        DataBlock1<T> A;
 
-        DataBlock02<T> B;
+        DataBlock2<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DataBlock04<T> : IDataBlock<DataBlock04<T>>
+    public struct DataBlock4<T> : IDataBlock<DataBlock4<T>>
         where T : unmanaged
     {
-        DataBlock02<T> A;
+        DataBlock2<T> A;
 
-        DataBlock02<T> B;
+        DataBlock2<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DataBlock05<T> : IDataBlock<DataBlock05<T>>
+    public struct DataBlock5<T> : IDataBlock<DataBlock5<T>>
         where T : unmanaged
     {
-        DataBlock04<T> A;
+        DataBlock4<T> A;
 
-        DataBlock01<T> B;
+        DataBlock1<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DataBlock06<T> : IDataBlock<DataBlock06<T>>
+    public struct DataBlock6<T> : IDataBlock<DataBlock6<T>>
         where T : unmanaged
     {
-        DataBlock03<T> A;
+        DataBlock3<T> A;
 
-        DataBlock03<T> B;
+        DataBlock3<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DataBlock07<T> : IDataBlock<DataBlock07<T>>
+    public struct DataBlock7<T> : IDataBlock<DataBlock7<T>>
         where T : unmanaged
     {
-        DataBlock06<T> A;
+        DataBlock6<T> A;
 
-        DataBlock01<T> B;
+        DataBlock1<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DataBlock08<T> : IDataBlock<DataBlock08<T>>
+    public struct DataBlock8<T> : IDataBlock<DataBlock8<T>>
         where T : unmanaged
     {
-        DataBlock04<T> A;
+        DataBlock4<T> A;
 
-        DataBlock04<T> B;
+        DataBlock4<T> B;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DataBlock9<T> : IDataBlock<DataBlock9<T>>
+        where T : unmanaged
+    {
+        DataBlock8<T> A;
+
+        DataBlock1<T> B;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DataBlock10<T> : IDataBlock<DataBlock10<T>>
+        where T : unmanaged
+    {
+        DataBlock8<T> A;
+
+        DataBlock2<T> B;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DataBlock11<T> : IDataBlock<DataBlock11<T>>
+        where T : unmanaged
+    {
+        DataBlock10<T> A;
+
+        DataBlock1<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct DataBlock12<T> : IDataBlock<DataBlock12<T>>
         where T : unmanaged
     {
-        DataBlock06<T> A;
+        DataBlock6<T> A;
 
-        DataBlock06<T> B;
+        DataBlock6<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct DataBlock16<T> : IDataBlock<DataBlock16<T>>
         where T : unmanaged
     {
-        DataBlock08<T> A;
+        DataBlock8<T> A;
 
-        DataBlock08<T> B;
+        DataBlock8<T> B;
     }
 
     [StructLayout(LayoutKind.Sequential)]

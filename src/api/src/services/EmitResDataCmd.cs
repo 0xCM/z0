@@ -10,6 +10,7 @@ namespace Z0
     public struct EmitResDataCmd : ICmd<EmitResDataCmd>
     {
         public const string CmdName = "emit-res-data";
+
         public Assembly Source;
 
         public FS.FolderPath Target;

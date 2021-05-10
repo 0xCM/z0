@@ -59,7 +59,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> View(ulong offset, ByteSize size)
-            => api.view(BaseAddress, offset, size);
+            => memory.view(BaseAddress, offset, size);
 
         /// <summary>
         /// Presents file content as a readonly sequence of <see cref='byte'/> cells

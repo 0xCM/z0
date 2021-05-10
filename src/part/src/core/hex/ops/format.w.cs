@@ -18,34 +18,34 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(W) == typeof(W8))
-                return format(w8, Numeric.force<T,byte>(value), postspec);
+                return format(w8, bw8(value), postspec);
             else if(typeof(W) == typeof(W16))
-                return format(w16, Numeric.force<T,ushort>(value), postspec);
+                return format(w16, bw16(value), postspec);
             else if(typeof(W) == typeof(W32))
-                return format(w32, Numeric.force<T,uint>(value), postspec);
+                return format(w32, bw32(value), postspec);
             else
-                return format(w64, Numeric.force<T,ulong>(value), postspec);
+                return format(w64, bw64(value), postspec);
         }
 
         [Op, Closures(Closure)]
         public static string format<T>(W8 w, T src, bool postspec = false)
             where T : unmanaged
-                => format(w, uint8(src), postspec);
+                => format(w, bw8(src), postspec);
 
         [Op, Closures(Closure)]
         public static string format<T>(W16 w, T src, bool postspec = false)
             where T : unmanaged
-                => format(w, uint16(src), postspec);
+                => format(w, bw16(src), postspec);
 
         [Op, Closures(Closure)]
         public static string format<T>(W32 w, T src, bool postspec = false)
             where T : unmanaged
-                => format(w, uint32(src), postspec);
+                => format(w, bw32(src), postspec);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(W64 w, T src, bool postspec = false)
              where T : unmanaged
-                => format(w, uint64(src), postspec);
+                => format(w, bw64(src), postspec);
 
         [Op]
         public static string format(W8 w, byte src, bool postspec = false)

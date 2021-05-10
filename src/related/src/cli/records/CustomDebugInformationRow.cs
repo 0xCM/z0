@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct CustomDebugInformationRow : ICliRecord<CustomDebugInformationRow, CustomDebugInformation>
+        public struct CustomDebugInformationRow : ICliRecord<CustomDebugInformationRow>
         {
-            public CliRowKey<CustomDebugInformation> Key;
-
             public CliRowKey Parent;
 
             public GuidIndex Kind;

@@ -124,8 +124,36 @@ namespace Z0
             => (char*)src.Location;
 
         [MethodImpl(Inline)]
+        public static explicit operator sbyte*(MemoryAddress src)
+            => (sbyte*)src.Location;
+
+        [MethodImpl(Inline)]
         public static explicit operator byte*(MemoryAddress src)
             => (byte*)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator short*(MemoryAddress src)
+            => (short*)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort*(MemoryAddress src)
+            => (ushort*)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator int*(MemoryAddress src)
+            => (int*)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator uint*(MemoryAddress src)
+            => (uint*)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator long*(MemoryAddress src)
+            => (long*)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ulong*(MemoryAddress src)
+            => (ulong*)src.Location;
 
         [MethodImpl(Inline)]
         public static explicit operator void*(MemoryAddress src)

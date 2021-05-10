@@ -11,12 +11,6 @@ namespace Z0
 
     using TC = System.TypeCode;
 
-    readonly struct TypeCodeCache
-    {
-        [FixedAddressValueType]
-        static internal readonly SystemTypeCodes Data = new SystemTypeCodes(0);
-    }
-
     [ApiHost]
     public readonly struct SystemTypeCodes
     {
@@ -249,5 +243,11 @@ namespace Z0
         [MethodImpl(Inline)]
         Type indexed(TC code)
             => memory.skip(Types,(uint)code);
+    }
+
+    readonly struct TypeCodeCache
+    {
+        [FixedAddressValueType]
+        static internal readonly SystemTypeCodes Data = new SystemTypeCodes(0);
     }
 }

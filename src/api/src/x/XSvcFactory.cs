@@ -46,8 +46,8 @@ namespace Z0
             => Svc.ApiHex.create(wf);
 
         [Op]
-        public static ApiDataService ApiData(this IWfRuntime wf)
-            => Svc.ApiDataService.create(wf);
+        public static ApiCatalogs ApiCatalogs(this IWfRuntime wf)
+            => Svc.ApiCatalogs.create(wf);
 
         [Op]
         public static ApiJit ApiJit(this IWfRuntime wf)

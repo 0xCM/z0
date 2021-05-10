@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct EncLogRow : ICliRecord<EncLogRow,EncLog>
+        public struct EncLogRow : ICliRecord<EncLogRow>
         {
-            public CliRowKey<EncLog> Key;
-
             public CliRowKey Token;
 
             public byte FuncCode;

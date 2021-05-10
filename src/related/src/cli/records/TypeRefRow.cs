@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct TypeRefRow : ICliRecord<TypeRefRow,TypeRef>
+        public struct TypeRefRow : ICliRecord<TypeRefRow>
         {
-            public CliRowKey<TypeRef> Key;
-
             public CliRowKey ResolutionScope;
 
             public StringIndex Name;

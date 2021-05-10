@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = TextEncoders;
+    using api = Utf8;
 
     [ApiComplete]
     public readonly struct utf8 : IDataTypeComparable<utf8>
@@ -26,11 +26,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public utf8(string src)
-            => Data = api.GetUtf8Bytes(src);
+            => Data = api.bytes(src);
 
         [MethodImpl(Inline)]
         public utf8(char[] src)
-            => Data = api.GetUtf8Bytes(src);
+            => Data = api.bytes(src);
 
         public ReadOnlySpan<byte> View
         {
@@ -59,7 +59,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.marvin(Data);
+            get => api.hash(this);
         }
 
         [MethodImpl(Inline)]
@@ -68,7 +68,7 @@ namespace Z0
 
         [MethodImpl(Inline), Ignore]
         public string Format()
-            => IsNonEmpty ? api.DecodeUtf8(Data, out string _) : EmptyString;
+            => IsNonEmpty ? api.decode(Data, out string _) : EmptyString;
 
         public override int GetHashCode()
             => (int)Hash;

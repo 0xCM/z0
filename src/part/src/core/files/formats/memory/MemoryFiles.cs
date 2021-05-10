@@ -16,15 +16,15 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         public ReadOnlySpan<byte> Read(MemoryAddress src, ByteSize size)
-            => read(src, size);
+            => memory.view(src, size);
 
         public ReadOnlySpan<T> View<T>(in MemoryFile file, MemoryAddress src, uint count)
             where T : struct
-                => read<T>(file, src, count);
+                => view<T>(file, src, count);
 
         public ref readonly T View<T>(MemoryAddress src)
             where T : struct
-                => ref read<T>(src);
+                => ref memory.view<T>(src);
 
         public MemoryFileInfo Describe(in MemoryFile src)
             => describe(src);
@@ -38,6 +38,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static MemoryFile map(FS.FilePath path)
             => new MemoryFile(path);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe ReadOnlySpan<T> view<T>(in MemoryFile file, MemoryAddress start, uint count)
+            where T : struct
+                => cover<T>(start + file.BaseAddress, count);
 
         /// <summary>
         /// Creates a <see cref='MappedFiles'/> that covers the first level of a specified directory
@@ -53,23 +58,6 @@ namespace Z0
                 return MappedFiles.Empty;
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<byte> read(MemoryAddress src, ByteSize size)
-            => cover<byte>(src, size);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<byte> edit(MemoryAddress src, ByteSize size)
-            => cover<byte>(src, size);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T read<T>(MemoryAddress src)
-            where T : struct
-                => ref first(cover<T>(src, 1));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe ReadOnlySpan<T> read<T>(in MemoryFile file, MemoryAddress start, uint count)
-            where T : struct
-                => cover<T>(start + file.BaseAddress, count);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(MemoryAddress @base, ulong offset, ByteSize size)
@@ -83,7 +71,7 @@ namespace Z0
         /// Presents file content as a readonly sequence of <typeparamref name='T'/> cells
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src)
             => memory.cover<T>(src.BaseAddress, src.Size/memory.size<T>());
 
@@ -93,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="tOffset">The number of cells to advance from the base address</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src, uint tOffset)
             => memory.slice(view<T>(src), tOffset);
 
@@ -103,11 +91,11 @@ namespace Z0
         /// </summary>
         /// <param name="tOffset">The number of cells to advance from the base address</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T one<T>(in MemoryFile src, uint tOffset)
             => ref memory.first(view<T>(src, tOffset));
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src, uint tOffset, uint tCount)
             => memory.slice(view<T>(src), tOffset, tCount);
 

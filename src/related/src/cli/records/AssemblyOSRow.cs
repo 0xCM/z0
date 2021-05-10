@@ -8,14 +8,12 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyOSRow : ICliRecord<AssemblyOSRow,AssemblyOS>
+        public struct AssemblyOSRow : ICliRecord<AssemblyOSRow>
         {
-            public CliRowKey<AssemblyOS> Key;
+
         }
     }
 }

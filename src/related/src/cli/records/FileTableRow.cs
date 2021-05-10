@@ -6,15 +6,11 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct FileRow : ICliRecord<FileRow,File>
+        public struct FileRow : ICliRecord<FileRow>
         {
-            public CliRowKey<File> Key;
-
             public uint Flags;
 
             public StringIndex FileName;

@@ -8,15 +8,11 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct DeclSecurityRow : ICliRecord<DeclSecurityRow,DeclSecurity>
+        public struct DeclSecurityRow : ICliRecord<DeclSecurityRow>
         {
-            public CliRowKey<DeclSecurity> Key;
-
             public DeclarativeSecurityAction Action;
 
             public CliRowKey Parent;

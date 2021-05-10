@@ -5,24 +5,18 @@
 namespace Z0
 {
     using System.Runtime.InteropServices;
+    using System.Reflection.Metadata;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         /// <summary>
         /// Stores compile-time, constant values for fields, parameters, and propertie
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct ConstantRow : ICliRecord<ConstantRow,Constant>
+        public struct ConstantRow : ICliRecord<ConstantRow>
         {
-            public CliRowKey<Constant> Key;
+            public SignatureTypeCode Type;
 
-            public byte Type;
-
-            /// <summary>
-            /// An index into one of: <see cref='ParamRow'/>, <see cref='FieldRow'/>, <see cref='PropertyRow'/>
-            /// </summary>
             public CliRowKey Parent;
 
             public BlobIndex Value;

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.XVex, true)]
+    [ApiHost]
     public static partial class XVex
     {
         /// <summary>

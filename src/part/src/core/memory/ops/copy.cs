@@ -16,6 +16,15 @@ namespace Z0
             where T : unmanaged
                 => reader<T>(src).ReadAll(dst);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint copy<T>(Span<T> src, Span<T> dst)
+        {
+            var count = root.min(src.Length, dst.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+            return (uint)count;
+        }
+
         /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>

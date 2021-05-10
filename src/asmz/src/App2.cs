@@ -15,7 +15,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
-    using static CliRecords;
+    using static CliRows;
     using static ProcessMemory;
 
     class App : AppService<App>
@@ -200,7 +200,7 @@ namespace Z0.Asm
 
         void FilterApiBlocks()
         {
-            var blocks = Wf.ApiData().Correlate();
+            var blocks = Wf.ApiCatalogs().Correlate();
             var f1 = blocks.Filter(ApiClassKind.And);
             root.iter(f1,f => Wf.Row(f.Uri));
         }
@@ -727,7 +727,7 @@ namespace Z0.Asm
 
         void LoadCurrentCatalog()
         {
-            var entries = Wf.ApiData().Current();
+            var entries = Wf.ApiCatalogs().Entries();
         }
 
         void ProcessInstructions()
@@ -1250,8 +1250,8 @@ namespace Z0.Asm
             keys.Run();
         }
 
-        public void EmitApiClasses()
-            => Wf.ApiData().EmitApiClasses();
+        public ReadOnlySpan<SymLiteral> EmitApiClasses()
+            => Wf.ApiCatalogs().EmitApiClasses();
 
         // public void ReadMethodDefs(Assembly src)
         // {
@@ -1305,6 +1305,36 @@ namespace Z0.Asm
             EmitRawMetadata(src, dst);
         }
 
+        public unsafe void ReadMetadataHeader(Assembly src)
+        {
+            var metadata = Clr.metadata(src);
+            var @base = metadata.BaseAddress;
+            var header = first(memory.cover<MetadataHeader>(@base,1));
+            Wf.Row(header.IsValid);
+            Wf.Row(header.Magic);
+            Wf.Row(header.MajorVersion);
+            Wf.Row(header.MinorVersion);
+            Wf.Row(header.VersionSize);
+
+            utf8p ver = @base + size<MetadataHeader>();
+            Wf.Row(ver.Size);
+            Wf.Row(ver);
+
+            var next = MemoryAddress.Zero;
+            next = @base + size<MetadataHeader>() + header.VersionSize;
+
+            var flags = *((ushort*)next);
+
+            Wf.Row(flags);
+
+            next += 2;
+
+            var n = *((ushort*)next);
+
+            Wf.Row(n);
+
+        }
+
         public void UnpackRespack()
         {
             var unpacker = ResPackUnpacker.create(Wf);
@@ -1337,9 +1367,10 @@ namespace Z0.Asm
         public void Run()
         {
 
+            ReadMetadataHeader(Parts.Math.Assembly);
             //CreateSymbolHeap();
 
-            EmitRawMetadata(Parts.Math.Assembly);
+            //EmitRawMetadata(Parts.Math.Assembly);
 
             // var provider = Wf.ApiResProvider();
             // using var map = provider.MapResPack();

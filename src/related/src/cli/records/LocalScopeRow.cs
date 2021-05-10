@@ -6,15 +6,11 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct LocalScopeRow  : ICliRecord<LocalScopeRow,LocalScope>
+        public struct LocalScopeRow  : ICliRecord<LocalScopeRow>
         {
-            public CliRowKey<LocalScope> Key;
-
             public CliRowKey Method;
 
             public CliRowKey ImportScope;

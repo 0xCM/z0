@@ -8,10 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Reflection.Metadata;
-    using System.Reflection.Metadata.Ecma335;
 
     using static memory;
-    using static CliRecords;
     using static Part;
 
     partial class ImageMetaReader

@@ -14,7 +14,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using static CliRecords;
+    using static CliRows;
     using K = CliTableKinds;
 
     [ApiHost]
@@ -171,7 +171,6 @@ namespace Z0
         {
             var src = MD.GetMethodDefinition(handle);
             var dst = new MethodDefRow();
-            dst.Key = Cli.key(handle);
             dst.Attributes = src.Attributes;
             dst.ImplAttributes  = src.ImplAttributes;
             dst.Rva = src.RelativeVirtualAddress;

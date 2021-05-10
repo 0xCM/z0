@@ -9,13 +9,11 @@ namespace Z0
 
     using static CliTableKinds;
 
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct EventRow : ICliRecord<EventRow,Event>
+        public struct EventRow : ICliRecord<EventRow>
         {
-            public CliRowKey<Event> Key;
-
             public ushort EventFlags;
 
             public StringIndex Name;

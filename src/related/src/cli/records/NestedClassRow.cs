@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct NestedClassRow : ICliRecord<NestedClassRow,NestedClass>
+        public struct NestedClassRow : ICliRecord<NestedClassRow>
         {
-            public CliRowKey<NestedClass> Key;
-
             public CliRowKey NestedClass;
 
             public CliRowKey EnclosingClass;

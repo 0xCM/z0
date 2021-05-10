@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiHost(ApiNames.ApiCode, true)]
+    [ApiHost]
     public readonly struct ApiCode
     {
         public static Index<OpMsil> msil(MethodInfo[] src)

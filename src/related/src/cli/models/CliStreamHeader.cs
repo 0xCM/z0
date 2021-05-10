@@ -5,18 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
+    using System.Runtime.InteropServices;
 
-    using static Part;
-
-    public struct ClrDbSnapshot
+    [Record, StructLayout(LayoutKind.Sequential)]
+    public struct CliStreamHeader : IRecord<CliStreamHeader>
     {
-        public Index<Type[]> Types;
+        public Address32 Offset;
 
-        public Index<MethodInfo[]> Methods;
+        public uint StreamSize;
 
-        public Index<FieldInfo[]> Fields;
-
-        public Index<PropertyInfo[]> Properties;
+        public ByteBlock32 Name;
     }
 }

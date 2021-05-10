@@ -7,15 +7,12 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    using static CliTableKinds;
 
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct ExportedTypeRow  : ICliRecord<ExportedTypeRow,ExportedType>
+        public struct ExportedTypeRow  : ICliRecord<ExportedTypeRow>
         {
-            public CliRowKey<ExportedType> Key;
-
             public TypeAttributes Flags;
 
             public CliRowKey TypeDefId;

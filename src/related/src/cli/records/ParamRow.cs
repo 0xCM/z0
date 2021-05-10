@@ -6,17 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Reflection;
 
-    using static CliTableKinds;
-
-    partial struct CliRecords
+    partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct ParamRow : ICliRecord<ParamRow,Param>
+        public struct ParamRow : ICliRecord<ParamRow>
         {
-            public CliRowKey<Param> Key;
-
-            public ushort Flags;
+            public ParameterAttributes Flags;
 
             public ushort Sequence;
 

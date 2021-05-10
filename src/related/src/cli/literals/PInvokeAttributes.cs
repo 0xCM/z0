@@ -5,7 +5,7 @@ namespace Z0
 {
     using System;
 
-    partial struct CliRecords
+    partial struct CliRows
     {
         [Flags]
         public enum PInvokeAttributes : ushort

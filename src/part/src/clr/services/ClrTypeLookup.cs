@@ -14,7 +14,7 @@ namespace Z0
     using V = System.Type;
     using K = CliToken;
 
-    [ApiComplete(ApiNames.ClrTypes, true)]
+    [ApiComplete]
     public readonly struct ClrTypeLookup
     {
         readonly Storage Data;

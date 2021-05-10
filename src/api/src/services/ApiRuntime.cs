@@ -47,7 +47,7 @@ namespace Z0
             var kHost = (uint)hosts.Length;
             var buffer = root.list<ApiRuntimeMember>();
             var flow = Wf.Running(Msg.IndexingHosts.Format(kHost));
-            var catalogs = Wf.ApiData();
+            var catalogs = Wf.ApiCatalogs();
 
             var counter = 0u;
             for(var i=0; i<kHost; i++)

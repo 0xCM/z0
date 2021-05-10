@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
 
     partial struct memory
     {
@@ -54,29 +54,88 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte read<T>(in T src, ref byte dst)
         {
-            dst = read8(src);
+            dst = u8(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ushort read<T>(in T src, ref ushort dst)
         {
-            dst = read16(src);
+            dst = u16(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref uint read<T>(in T src, ref uint dst)
         {
-            dst = read32(src);
+            dst = u32(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ulong read<T>(in T src, ref ulong dst)
         {
-            dst = read64(src);
+            dst = u64(src);
             return ref dst;
         }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static byte read<T>(W8 w, in T src)
+            => u8(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ushort read<T>(W16 w, in T src)
+        {
+            if(size<T>() >= 16)
+                return u16(src);
+            else
+                return u8(src);
+        }
+
+
+        [MethodImpl(Inline), Op]
+        public static uint read(W24 w, ReadOnlySpan<byte> src, uint offset)
+        {
+            var dst = z32;
+            dst = ((uint)read16(w16, src, offset)) << 24;
+            dst |= skip(src, offset + 2);
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint read<T>(W32 w, in T src)
+        {
+            if(size<T>() >= 32)
+                return u32(src);
+            else if(size<T>() >= 16)
+                return u16(src);
+            else
+                return u8(src);
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ulong read64<T>(W64 w, in T src)
+        {
+            if(size<T>() >= 64)
+                return u64(src);
+            else  if(size<T>() >= 32)
+                return u32(src);
+            else  if(size<T>() >= 16)
+                return u16(src);
+            else
+                return u8(src);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ushort read16(W16 w, ReadOnlySpan<byte> src, uint offset)
+            => first(recover<ushort>(slice(src,offset,2)));
+
+        [MethodImpl(Inline), Op]
+        public static uint read(W32 w, ReadOnlySpan<byte> src, uint offset)
+            => first(recover<uint>(slice(src,offset,4)));
+
+        [MethodImpl(Inline), Op]
+        public static uint read(W64 w, ReadOnlySpan<byte> src, uint offset)
+            => first(recover<uint>(slice(src,offset,8)));
     }
 }
