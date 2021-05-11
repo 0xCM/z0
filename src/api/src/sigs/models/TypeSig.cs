@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct ApiSigs
     {
-        public readonly struct TypeSig : ITextual
+        public class TypeSig : ITextual
         {
             public Name TypeName {get;}
 

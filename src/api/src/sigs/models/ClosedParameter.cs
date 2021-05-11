@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Represents a type parameter in a generic artifact definition
         /// </summary>
-        public readonly struct ClosedParameter : IClosedParameter
+        public class ClosedParameter : IClosedParameter
         {
             public ushort Position {get;}
 

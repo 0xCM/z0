@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Represents either a closed or open type parameter
         /// </summary>
-        public readonly struct TypeParameter : ITypeParameter
+        public class TypeParameter : ITypeParameter
         {
             public ushort Position {get;}
 
@@ -49,7 +49,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => !IsClosed;
             }
-
         }
     }
 }

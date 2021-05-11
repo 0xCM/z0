@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an assembly instruction
     /// </summary>
-    public readonly struct AsmInstructionSummary
+    public class AsmInstructionSummary
     {
         /// <summary>
         /// The encoded bytes

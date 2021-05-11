@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct ApiSig : IApiSig, IEquatable<ApiSig>
+    public class ApiSig : IApiSig, IEquatable<ApiSig>
     {
         public Index<Type> Components {get;}
 
