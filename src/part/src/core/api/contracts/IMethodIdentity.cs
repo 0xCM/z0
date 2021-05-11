@@ -9,16 +9,16 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IIdentifiedOperation : IIdentification
+    public interface IMethodIdentity : IIdentification
     {
         IdentityTargetKind IIdentification.TargetKind
             => IdentityTargetKind.Method;
     }
 
     [Free]
-    public interface IIdentifiedOperation<T> : IIdentifiedOperation, IIdentification<T>
-        where T : IIdentifiedOperation<T>, new()
+    public interface IMethodIdentity<T> : IMethodIdentity, IIdentification<T>
+        where T : IMethodIdentity<T>
     {
-        Func<string,T> Factory  => s => new T();
+
     }
 }

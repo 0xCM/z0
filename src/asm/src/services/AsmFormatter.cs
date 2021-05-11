@@ -50,7 +50,6 @@ namespace Z0.Asm
         public void Render(in AsmRoutine src, ITextBuffer dst)
             => format(src, _Config, dst);
 
-
         /// <summary>
         /// Formats the function header
         /// </summary>

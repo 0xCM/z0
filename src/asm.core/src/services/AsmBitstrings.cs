@@ -53,7 +53,6 @@ namespace Z0.Asm
             return 10;
         }
 
-
         public string Format(AsmHexCode src)
         {
             CharBlocks.alloc(n128, out var block);

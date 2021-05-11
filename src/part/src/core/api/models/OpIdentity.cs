@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Specifies host-independent api member identity
     /// </summary>
-    public readonly struct OpIdentity : IIdentifiedOperation<OpIdentity>
+    public class OpIdentity : IMethodIdentity<OpIdentity>
     {
         /// <summary>
         /// Creates a moniker directly from source text

@@ -8,7 +8,6 @@ namespace Z0
 
     [Free]
     public interface IIdentityBuilder<S,T>
-        where T : struct
     {
         S Build(T src);
     }

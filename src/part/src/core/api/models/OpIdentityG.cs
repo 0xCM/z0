@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines identity for a generic operation
     /// </summary>
-    public readonly struct OpIdentityG : IIdentifiedOperation<OpIdentityG>
+    public readonly struct OpIdentityG : IMethodIdentity<OpIdentityG>
     {
         /// <summary>
         /// The operation identifier
@@ -32,7 +32,7 @@ namespace Z0
         public override string ToString()
             => Identified.Format();
 
-        IIdentifiedOperation<OpIdentityG> Identified
+        IMethodIdentity<OpIdentityG> Identified
             => this;
 
         public static OpIdentityG Empty

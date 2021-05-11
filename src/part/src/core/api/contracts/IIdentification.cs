@@ -30,7 +30,7 @@ namespace Z0
     /// </summary>
     [Free]
     public interface IIdentification<T> : IIdentification, IEquatable<T>, IComparable<T>
-        where T : IIdentification<T>, new()
+        where T : IIdentification<T>
     {
         bool IEquatable<T>.Equals(T src)
             => Same(src);
