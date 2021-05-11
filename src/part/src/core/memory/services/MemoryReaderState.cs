@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    unsafe struct MemoryReaderState
+    unsafe struct MemoryReaderState<T>
     {
         public int CellCount {get;}
 
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public void Advance()
-            => ++ Position;
+            => ++Position;
 
         /// <summary>
         /// Advances the stream a specified number if elements, if possible

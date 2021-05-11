@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
+    using Z0.Asm;
+
     partial class ApiExtractor
     {
         uint EmitRawExtractData(ApiHostUri host, ReadOnlySpan<ApiMemberExtract> src)

@@ -9,39 +9,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using Z0.Asm;
-
-    public abstract class ApiExtractEvent<E> : IWfEvent<E>
-        where E : ApiExtractEvent<E>, new()
-    {
-        public EventId EventId {get;}
-
-        public FlairKind Flair {get;}
-
-        protected ApiExtractEvent()
-        {
-            EventId = typeof(E);
-            Flair = FlairKind.Processed;
-        }
-
-        public string Format()
-        {
-            return EmptyString;
-        }
-    }
-
-    public abstract class ApiExtractEvent<E,P> : ApiExtractEvent<E>
-        where E : ApiExtractEvent<E,P>, new()
-    {
-
-        protected ApiExtractEvent()
-        {
-
-        }
-
-        public P Payload {get; protected set;}
-    }
-
     public class ApiExtractReceivers
     {
         public event EventHandler<HostResolvedEvent> HostResolved;
@@ -52,7 +19,7 @@ namespace Z0
 
         public event EventHandler<MemberDecodedEvent> MemberDecoded;
 
-        public event EventHandler<MemberParseErrorEvent> MemberParseError;
+        public event EventHandler<ExtractErrorEvent> ExtractError;
 
         internal void Raise(HostResolvedEvent e)
         {
@@ -69,74 +36,14 @@ namespace Z0
             root.run(() =>  MemberParsed.Invoke(this, e));
         }
 
-        public sealed class HostResolvedEvent : ApiExtractEvent<HostResolvedEvent,ResolvedHost>
+        internal void Raise(MemberDecodedEvent e)
         {
-            public HostResolvedEvent()
-            {
-                Payload = ResolvedHost.Empty;
-            }
-
-            public HostResolvedEvent(in ResolvedHost src)
-            {
-                Payload = src;
-            }
+            root.run(() =>  MemberDecoded.Invoke(this, e));
         }
 
-        public sealed class PartResolvedEvent : ApiExtractEvent<PartResolvedEvent,ResolvedPart>
+        internal void Raise(ExtractErrorEvent e)
         {
-
-            public PartResolvedEvent()
-            {
-                Payload = ResolvedPart.Empty;
-            }
-
-            public PartResolvedEvent(in ResolvedPart src)
-            {
-                Payload = src;
-            }
-
-        }
-
-        public sealed class MemberParsedEvent : ApiExtractEvent<MemberParsedEvent,DataFlow<ApiMemberExtract,ApiMemberCode>>
-        {
-            public MemberParsedEvent()
-            {
-                Payload = Relations.flow(ApiMemberExtract.Empty, ApiMemberCode.Empty);
-
-            }
-
-            public MemberParsedEvent(in ApiMemberExtract src, in ApiMemberCode dst)
-            {
-                Payload = Relations.flow(src,dst);
-            }
-
-        }
-
-        public sealed class MemberDecodedEvent : ApiExtractEvent<MemberDecodedEvent,DataFlow<ApiMemberCode,AsmRoutine>>
-        {
-            public MemberDecodedEvent()
-            {
-                Payload = Relations.flow(ApiMemberCode.Empty, AsmRoutine.Empty);
-            }
-
-            public MemberDecodedEvent(in ApiMemberCode src, in AsmRoutine dst)
-            {
-                Payload = Relations.flow(src,dst);
-
-            }
-        }
-
-        public sealed class MemberParseErrorEvent : ApiExtractEvent<MemberParseErrorEvent,ApiMemberExtract>
-        {
-            public MemberParseErrorEvent()
-            {
-                Payload = ApiMemberExtract.Empty;
-            }
-
-            public MemberParseErrorEvent(in ApiMemberExtract src)
-            {
-                Payload = src;
-            }
+            root.run(() =>  ExtractError.Invoke(this, e));
         }
     }
 }

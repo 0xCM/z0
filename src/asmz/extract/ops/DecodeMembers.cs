@@ -6,7 +6,10 @@ namespace Z0.Asm
 {
     using System;
 
+    using Z0.Asm;
+
     using static memory;
+
 
     partial class ApiExtractor
     {

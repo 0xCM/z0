@@ -46,6 +46,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static int length(ReadOnlySpan<byte> src)
+            => encoding().GetCharCount(src);
+
+        [MethodImpl(Inline), Op]
         public static ref string decode(ReadOnlySpan<byte> src, out string dst)
         {
             dst = encoding().GetString(src);

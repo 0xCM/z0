@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
+    using Z0.Asm;
+
     using static memory;
     using static ApiExtractReceivers;
 

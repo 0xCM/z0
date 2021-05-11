@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
+    using Z0.Asm;
+
     using static memory;
 
     partial class ApiExtractor
@@ -31,7 +33,7 @@ namespace Z0.Asm
             {
                 ref readonly var host = ref skip(hosts,i);
                 var resolved = ResolveHost(host);
-                ExtractHost(resolved);
+                ExtractHostDatast(resolved);
             }
         }
 

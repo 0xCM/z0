@@ -15,12 +15,12 @@ namespace Z0
     {
         readonly byte* Source;
 
-        MemoryReaderState State;
+        MemoryReaderState<byte> State;
 
         [MethodImpl(Inline)]
         internal MemoryReader(byte* pSrc, int length)
         {
-            State = new MemoryReaderState(length,0);
+            State = new MemoryReaderState<byte>(length,0);
             Source = pSrc;
         }
 

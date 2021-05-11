@@ -7,57 +7,75 @@ namespace Z0
     using System;
 
     using static Part;
+    using static memory;
 
     public class t_hex : t_symbolic<t_hex>
     {
-        public void hexdigits_define()
+        public void hex_hexchars_2()
         {
-            byte x0 = 0x3C;
+            const byte Value = 0x3C;
             var @case = UpperCase;
-            var x0c = Hex.chars(@case, x0);
+            var x0c = Hex.chars(@case, Value);
             Claim.eq(2,x0c.Length);
-            Claim.eq(Hex.hexchar(@case, x0, 0), x0c[0]);
-            Claim.eq(Hex.hexchar(@case, x0, 1), x0c[1]);
+            Claim.eq(Hex.hexchar(@case, Value, 0), x0c[0]);
+            Claim.eq(Hex.hexchar(@case, Value, 1), x0c[1]);
+        }
 
-            ushort x1 = 0x4A3C;
-            var x1c = Hex.chars(@case,x1);
-            Claim.eq(4,x1c.Length);
-            Claim.eq(Hex.hexchar(@case, x1,0), x1c[0]);
-            Claim.eq(Hex.hexchar(@case, x1,1), x1c[1]);
-            Claim.eq(Hex.hexchar(@case, x1,2), x1c[2]);
-            Claim.eq(Hex.hexchar(@case, x1,3), x1c[3]);
 
-            uint x2 = 0x10F74A3C;
-            var x2c = Hex.chars(@case,x2);
-            Claim.eq(8,x2c.Length);
-            Claim.eq(Hex.hexchar(@case, x2,0), x2c[0]);
-            Claim.eq(Hex.hexchar(@case, x2,1), x2c[1]);
-            Claim.eq(Hex.hexchar(@case, x2,2), x2c[2]);
-            Claim.eq(Hex.hexchar(@case, x2,3), x2c[3]);
-            Claim.eq(Hex.hexchar(@case, x2,4), x2c[4]);
-            Claim.eq(Hex.hexchar(@case, x2,5), x2c[5]);
-            Claim.eq(Hex.hexchar(@case, x2,6), x2c[6]);
-            Claim.eq(Hex.hexchar(@case, x2,7), x2c[7]);
+        public void hex_hexchars_4()
+        {
+            const ushort Value = 0x4A3C;
+            const byte Length = 4;
+            var @case = UpperCase;
+            var chars = Hex.chars(@case, Value);
+            Claim.eq(Length, chars.Length);
+            for(byte i=0; i<Length; i++)
+                match(@case, chars, Value, i);
+        }
 
-            ulong x3 = 0x3383107810F74A3C;
-            var x3c = Hex.chars(@case, x3);
-            Claim.eq(16,x3c.Length);
-            Claim.eq(Hex.hexchar(@case, x3,0), x3c[0]);
-            Claim.eq(Hex.hexchar(@case, x3,1), x3c[1]);
-            Claim.eq(Hex.hexchar(@case, x3,2), x3c[2]);
-            Claim.eq(Hex.hexchar(@case, x3,3), x3c[3]);
-            Claim.eq(Hex.hexchar(@case, x3,4), x3c[4]);
-            Claim.eq(Hex.hexchar(@case, x3,5), x3c[5]);
-            Claim.eq(Hex.hexchar(@case, x3,6), x3c[6]);
-            Claim.eq(Hex.hexchar(@case, x3,7), x3c[7]);
-            Claim.eq(Hex.hexchar(@case, x3,8), x3c[8]);
-            Claim.eq(Hex.hexchar(@case, x3,9), x3c[9]);
-            Claim.eq(Hex.hexchar(@case, x3,10), x3c[10]);
-            Claim.eq(Hex.hexchar(@case, x3,11), x3c[11]);
-            Claim.eq(Hex.hexchar(@case, x3,12), x3c[12]);
-            Claim.eq(Hex.hexchar(@case, x3,13), x3c[13]);
-            Claim.eq(Hex.hexchar(@case, x3,14), x3c[14]);
-            Claim.eq(Hex.hexchar(@case, x3,15), x3c[15]);
+        public void hex_hexchars_8()
+        {
+            const uint Value = 0x10F74A3C;
+            const byte Length = 8;
+            var @case = UpperCase;
+            var chars = Hex.chars(@case, Value);
+            Claim.eq(Length, chars.Length);
+            for(byte i=0; i<Length; i++)
+                match(@case, chars, Value, i);
+        }
+
+        public void hex_hexchars_16()
+        {
+            const ulong Value = 0x33_83_10_78_10_F7_4A_3C;
+            const byte Length = 16;
+            var @case = UpperCase;
+            var data = memory.bytes(Value);
+            var value = first(uint64(data));
+            Claim.eq(Value,value);
+
+            Claim.eq((byte)0x3C, skip(data,0));
+            Claim.eq((byte)0x4A, skip(data,1));
+            Claim.eq((byte)0xF7, skip(data,2));
+            Claim.eq((byte)0x10, skip(data,3));
+            Claim.eq((byte)0x78, skip(data,4));
+            Claim.eq((byte)0x10, skip(data,5));
+
+            Span<char> buffer = stackalloc char[Length];
+            var count = Hex.chars(@case, data, buffer);
+            Claim.eq(count, Length);
+
+            var chars = Hex.chars(@case, Value);
+            Claim.eq(Length, chars.Length);
+            for(byte i=0; i<Length; i++)
+                match(@case, chars, Value, i);
+
+            for(var i=0; i<count; i++)
+                Claim.eq(skip(buffer,i), skip(chars,i));
+        }
+
+        void match(UpperCased @case, ReadOnlySpan<char> chars, ulong value, byte index)
+        {
+            Claim.eq(Hex.hexchar(@case, value, index), skip(chars, index));
         }
 
         public void hexdigits_parse()

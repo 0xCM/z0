@@ -14,7 +14,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock1 : IDataBlock<ByteBlock1>
     {
-        public const byte Size = 1;
+        public const ushort Size = Pow2.T00;
 
         byte A;
 
@@ -36,7 +36,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock2 : IDataBlock<ByteBlock2>
     {
-        public const byte Size = 2;
+        public const ushort Size = Pow2.T01;
 
         ByteBlock1 A;
 
@@ -63,7 +63,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock3 : IDataBlock<ByteBlock3>
     {
-        public const byte Size = 3;
+        public const ushort Size = 3;
 
         ByteBlock2 A;
 
@@ -85,7 +85,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock4 : IDataBlock<ByteBlock4>
     {
-        public const byte Size = 4;
+        public const ushort Size = Pow2.T02;
 
         ByteBlock2 A;
 
@@ -118,7 +118,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock5 : IDataBlock<ByteBlock5>
     {
-        public const byte Size = 5;
+        public const ushort Size = 5;
 
         ByteBlock4 A;
 
@@ -143,7 +143,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock6 : IDataBlock<ByteBlock6>
     {
-        public const byte Size = 6;
+        public const ushort Size = 6;
 
         ByteBlock5 A;
 
@@ -168,7 +168,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock7 : IDataBlock<ByteBlock7>
     {
-        public const byte Size = 7;
+        public const ushort Size = 7;
 
         ByteBlock6 A;
 
@@ -190,7 +190,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock8 : IDataBlock<ByteBlock8>
     {
-        public const byte Size = 8;
+        public const ushort Size = Pow2.T03;
 
         ByteBlock4 A;
 
@@ -223,7 +223,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock9 : IDataBlock<ByteBlock9>
     {
-        public const byte Size = 9;
+        public const ushort Size = 9;
 
         ByteBlock8 A;
 
@@ -248,7 +248,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock10 : IDataBlock<ByteBlock10>
     {
-        public const byte Size = 10;
+        public const ushort Size = 10;
 
         ByteBlock9 A;
 
@@ -273,7 +273,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock11 : IDataBlock<ByteBlock11>
     {
-        public const byte Size = 11;
+        public const ushort Size = 11;
 
         ByteBlock10 A;
 
@@ -298,7 +298,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock12 : IDataBlock<ByteBlock12>
     {
-        public const byte Size = 12;
+        public const ushort Size = 12;
 
         ByteBlock8 A;
 
@@ -323,7 +323,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock13 : IDataBlock<ByteBlock13>
     {
-        public const byte Size = 13;
+        public const ushort Size = 13;
 
         ByteBlock12 A;
 
@@ -348,7 +348,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock14 : IDataBlock<ByteBlock14>
     {
-        public const byte Size = 14;
+        public const ushort Size = 14;
 
         ByteBlock7 A;
 
@@ -373,7 +373,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock15 : IDataBlock<ByteBlock15>
     {
-        public const byte Size = 15;
+        public const ushort Size = 15;
 
         ByteBlock10 A;
 
@@ -398,7 +398,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock16 : IDataBlock<ByteBlock16>
     {
-        public const byte Size = 16;
+        public const ushort Size = Pow2.T04;
 
         public ulong A;
 
@@ -420,7 +420,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock17 : IDataBlock<ByteBlock17>
     {
-        public const byte Size = 17;
+        public const ushort Size = 17;
 
         ByteBlock16 A;
 
@@ -442,7 +442,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock18 : IDataBlock<ByteBlock18>
     {
-        public const byte Size = 18;
+        public const ushort Size = 18;
 
         ByteBlock16 A;
 
@@ -464,7 +464,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock19 : IDataBlock<ByteBlock19>
     {
-        public const byte Size = 19;
+        public const ushort Size = 19;
 
         ByteBlock16 A;
 
@@ -486,7 +486,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock20 : IDataBlock<ByteBlock20>
     {
-        public const byte Size = 20;
+        public const ushort Size = 20;
 
         ByteBlock16 A;
 
@@ -508,7 +508,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock24 : IDataBlock<ByteBlock24>
     {
-        public const byte Size = 24;
+        public const ushort Size = 24;
 
         ByteBlock16 A;
 
@@ -533,7 +533,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock32 : IDataBlock<ByteBlock32>
     {
-        public const byte Size = 32;
+        public const ushort Size = Pow2.T05;
 
         ByteBlock16 A;
 
@@ -558,12 +558,11 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock64 : IDataBlock<ByteBlock64>
     {
-        public const byte Size = 64;
+        public const ushort Size = Pow2.T06;
 
         ByteBlock32 A;
 
         ByteBlock32 B;
-
 
         [MethodImpl(Inline)]
         public ByteBlock64(ByteBlock32 a, ByteBlock32 b)
@@ -591,7 +590,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock80 : IDataBlock<ByteBlock80>
     {
-        public const byte Size = 80;
+        public const ushort Size = 80;
 
         ByteBlock64 A;
 
@@ -616,11 +615,121 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock128
     {
-        public const byte Size = 128;
+        public const ushort Size = Pow2.T07;
 
-        internal ByteBlock64 A;
+        ByteBlock64 A;
 
-        internal ByteBlock64 B;
+        ByteBlock64 B;
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(this);
+        }
+
+        public ref byte First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Bytes);
+        }
+   }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ByteBlock256
+    {
+        public const ushort Size = Pow2.T08;
+
+        ByteBlock128 A;
+
+        ByteBlock128 B;
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(this);
+        }
+
+        public ref byte First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Bytes);
+        }
+   }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ByteBlock512
+    {
+        public const ushort Size = Pow2.T09;
+
+        ByteBlock256 A;
+
+        ByteBlock256 B;
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(this);
+        }
+
+        public ref byte First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Bytes);
+        }
+   }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ByteBlock1024
+    {
+        public const ushort Size = Pow2.T10;
+
+        ByteBlock512 A;
+
+        ByteBlock512 B;
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(this);
+        }
+
+        public ref byte First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Bytes);
+        }
+   }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ByteBlock2048
+    {
+        public const ushort Size = Pow2.T11;
+
+        ByteBlock1024 A;
+
+        ByteBlock1024 B;
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(this);
+        }
+
+        public ref byte First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Bytes);
+        }
+   }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ByteBlock4096
+    {
+        public const ushort Size = Pow2.T12;
+
+        ByteBlock2048 A;
+
+        ByteBlock2048 B;
 
         public Span<byte> Bytes
         {

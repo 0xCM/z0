@@ -25,30 +25,6 @@ namespace Z0
             root.iter(src, dst, check);
         }
 
-        static unsafe string format(ReadOnlySpan<char> src)
-        {
-            const string Buffer = "                                                                                                                                ";
-            var pDst = pchar(Buffer);
-            var pSrc = memory.gptr(first(src));
-            var count = Math.Min(src.Length, Buffer.Length);
-            for(var i=0; i<count; i++)
-                *pDst++ = *pSrc++;
-
-            return Buffer;
-        }
-
-        public unsafe void check_ref_data()
-        {
-            const string A = "abcdefghijklmnopqrstuvwxyz";
-
-            var src = A;
-            var r = StringRef.view(src);
-            Claim.eq(A.Length, r.Length);
-
-            for(var i=0; i<src.Length; i++)
-                Claim.eq(r[i], src[i]);
-        }
-
         public void test_asci_format()
         {
             //var a0 = AsciFormatter.format((asci2)"01");
@@ -65,8 +41,6 @@ namespace Z0
         {
             var tc = default(AsciTestCase01);
             var result = AsciTestCases.execute(tc);
-            // using var writer = CaseWriter(FileExtensions.Csv);
-            // writer.Write(result.Description);
             Claim.yea(result.Passed);
         }
 

@@ -16,7 +16,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct MetadataHeader
     {
-        const uint RequiredMagic = 0x424A5342;
+        const uint RequiredMagic = 0x42_4A_53_42;
 
         /// <summary>
         /// The value 0x424A5342 identifies the beginning of the metadata header

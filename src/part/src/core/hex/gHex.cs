@@ -160,64 +160,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static char hexchar<T,C>(C @case, T src, byte pos)
-            where T : unmanaged
-            where C : unmanaged, ILetterCase
-        {
-            if(typeof(T) == typeof(byte))
-                return hexchar(@case, uint8(src), pos);
-            else if(typeof(T) == typeof(ushort))
-                return hexchar(@case, uint16(src), pos);
-            else if(typeof(T) == typeof(uint))
-                return hexchar(@case, uint32(src), pos);
-            else if(typeof(T) == typeof(ulong))
-                return hexchar(@case, uint64(src), pos);
-            else
-                return default;
-        }
-
-        [MethodImpl(Inline)]
-        public static char hexchar<C>(C @case, byte src, byte pos)
-            where C : unmanaged, ILetterCase
-        {
-            if(typeof(C) == typeof(LowerCased))
-                return Hex.hexchar(LowerCase, src, pos);
-            else
-                return Hex.hexchar(UpperCase, src, pos);
-        }
-
-        [MethodImpl(Inline)]
-        public static char hexchar<C>(C @case, ushort src, byte pos)
-            where C : unmanaged, ILetterCase
-        {
-            if(typeof(C) == typeof(LowerCased))
-                return Hex.hexchar(LowerCase, src, pos);
-            else
-                return Hex.hexchar(UpperCase, src, pos);
-        }
-
-        [MethodImpl(Inline)]
-        public static char hexchar<C>(C @case, uint src, byte pos)
-            where C : unmanaged, ILetterCase
-        {
-            if(typeof(C) == typeof(LowerCased))
-                return Hex.hexchar(LowerCase, src, pos);
-            else
-                return Hex.hexchar(UpperCase, src, pos);
-        }
-
-        [MethodImpl(Inline)]
-        public static char hexchar<C>(C @case, ulong src, byte pos)
-            where C : unmanaged, ILetterCase
-        {
-            if(typeof(C) == typeof(LowerCased))
-                return Hex.hexchar(LowerCase, src, pos);
-            else
-                return Hex.hexchar(UpperCase, src, pos);
-        }
-
-
-        [MethodImpl(Inline)]
         static ReadOnlySpan<char> chars_u<T>(Base16 @base, UpperCased @case, T value)
             where T : unmanaged
         {

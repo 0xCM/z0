@@ -5,18 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
-    [ApiHost]
+    using Z0.Asm;
     public static partial class XSvc
     {
-
-        [Op]
-        public static ApiResolver ApiResolver(this IWfRuntime wf)
-            => Z0.ApiResolver.create(wf);
-
+        public static ApiExtractor ApiExtracor(this IWfRuntime wf)
+            => Z0.Asm.ApiExtractor.create(wf);
     }
 }

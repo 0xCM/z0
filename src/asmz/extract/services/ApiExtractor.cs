@@ -4,17 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+    using System.Reflection;
     using System.Collections.Concurrent;
     using System.Diagnostics;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
+    using static Part;
     using static memory;
 
     [ApiHost]
-    partial class ApiExtractor : AppService<ApiExtractor>
+    public partial class ApiExtractor : AppService<ApiExtractor>
     {
         ApiExtractParser Parser;
-
-        Z0.ApiExtractor Extractor;
 
         ApiResolver Resolver;
 
@@ -28,19 +31,31 @@ namespace Z0.Asm
 
         ConcurrentBag<ApiHostDataset> HostDatasets;
 
-        ExtractPaths Paths;
+        ApiExtractPaths Paths;
+
+        byte[] Buffer;
+
+        HashSet<string> Exclusions;
+
+        IMultiDiviner Identity {get;}
+
+        public ApiExtractor()
+        {
+            Identity = MultiDiviner.Service;
+            Buffer = ApiExtracts.buffer();
+            Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
+        }
 
         protected override void OnInit()
         {
             Parser = ApiExtracts.parser();
-            Extractor = Wf.ApiExtractor();
             Resolver = Wf.ApiResolver();
             Decoder = Wf.AsmDecoder();
             Formatter = Wf.AsmFormatter();
             HexPacks = Wf.HexPacks();
             Receivers = new ApiExtractReceivers();
             HostDatasets = new();
-            Paths = new ExtractPaths(Db.AppLogRoot());
+            Paths = new ApiExtractPaths(Db.AppLogRoot());
         }
 
         void Run3()
@@ -71,7 +86,7 @@ namespace Z0.Asm
         {
             Receivers = receivers;
             if(dst != null)
-            Paths = new ExtractPaths(dst.Value);
+            Paths = new ApiExtractPaths(dst.Value);
             Run();
             EmitContext();
         }
@@ -95,5 +110,13 @@ namespace Z0.Asm
             var members = ApiMembers.create(HostDatasets.ToArray().SelectMany(x => x.Members));
             EmitRebase(members,ts);
         }
+
+
+        [MethodImpl(Inline)]
+        static ResolvedMethod resolve(MethodInfo method, OpUri uri, MemoryAddress address)
+            => new ResolvedMethod(method, uri, address);
+
+        OpUri MemberUri(ApiHostUri host, MethodInfo method)
+            => ApiUri.define(ApiUriScheme.Located, host, method.Name, Identity.Identify(method));
     }
 }

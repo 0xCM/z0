@@ -22,13 +22,6 @@ namespace Z0
             Dynamic = Dynops.Dynexus;
         }
 
-        public void ListEnvVars()
-        {
-            var src = Resources.strings<uint>(typeof(EnvVarNames)).View;
-            for(var i=0; i<src.Length; i++)
-                Wf.Status(skip(src,i).Format());
-        }
-
         void RunCalc()
         {
             CalcDemo.compute();
@@ -36,7 +29,6 @@ namespace Z0
             CalcDemo.run(dst);
             Wf.Row(dst.Emit());
         }
-
 
         void Test1()
         {

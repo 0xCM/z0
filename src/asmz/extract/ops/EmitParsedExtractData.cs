@@ -6,9 +6,9 @@ namespace Z0.Asm
 {
     using System;
 
-    using static memory;
+    using Z0.Asm;
 
-    using api = ApiExtraction;
+    using static memory;
 
     partial class ApiExtractor
     {
@@ -20,8 +20,8 @@ namespace Z0.Asm
 
             var dst = Paths.ParsedExtractPath(host);
             var blocks = alloc<MemoryBlock>(count);
-            var found = api.terminals(src, blocks);
-            var packed = CodeBlocks.hexpack(blocks);
+            var found = terminals(src, blocks);
+            var packed = Hex.hexpack(blocks);
             HexPacks.Emit(packed, dst);
             Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
             return count;

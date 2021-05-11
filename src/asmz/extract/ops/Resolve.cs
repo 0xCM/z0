@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static ApiExtractReceivers;
+    using Z0.Asm;
 
     partial class ApiExtractor
     {

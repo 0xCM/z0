@@ -19,7 +19,7 @@ namespace Z0
         public void check_caller()
         {
             var c = CallingMember.define();
-            Assert.eq(c.CallerName, nameof(check_caller));
+            Claim.eq(c.CallerName, nameof(check_caller));
         }
 
         [Op]
@@ -42,14 +42,14 @@ namespace Z0
         public void bitstack_basecase()
         {
             var stack = new BitStack(0b101011);
-            Claim.yea(stack.Pop() != 0);
-            Claim.yea(stack.Pop() != 0);
-            Claim.yea(stack.Pop() == 0);
-            Claim.yea(stack.Pop() != 0);
-            Claim.yea(stack.Pop() == 0);
-            Claim.yea(stack.Pop() != 0);
+            Claim.require(stack.Pop() != 0);
+            Claim.require(stack.Pop() != 0);
+            Claim.require(stack.Pop() == 0);
+            Claim.require(stack.Pop() != 0);
+            Claim.require(stack.Pop() == 0);
+            Claim.require(stack.Pop() != 0);
             stack.Push(BitState.On);
-            Claim.yea(stack.Pop() != 0);
+            Claim.require(stack.Pop() != 0);
         }
 
         [Op]

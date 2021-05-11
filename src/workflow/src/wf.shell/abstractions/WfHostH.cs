@@ -19,9 +19,6 @@ namespace Z0
 
         public Type Type {get;}
 
-        public StringRef Name
-            => Identifier;
-
         public virtual string Identifier
             => typeof(H).Name;
 

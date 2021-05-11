@@ -13,22 +13,6 @@ namespace Z0
 
     partial struct CodeBlocks
     {
-        const string HexPackLine = "x{0:x}[{1:D5}:{2:D5}]=<{3}>";
-
-        [MethodImpl(Inline), Op]
-        static uint hexchars(ReadOnlySpan<byte> src, Span<char> dst)
-        {
-            var j = 0u;
-            var count = root.min(src.Length, dst.Length);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var b = ref skip(src,i);
-                seek(dst,j++) = Hex.hexchar(LowerCase, b, 1);
-                seek(dst,j++) = Hex.hexchar(LowerCase, b, 0);
-            }
-            return j;
-        }
-
         [Op]
         public static ByteSize hexpack(ReadOnlySpan<ApiCodeBlock> src, Span<HexPacked> dst, Span<char> buffer)
         {
@@ -42,7 +26,7 @@ namespace Z0
                 package.Index = i;
                 package.Address = block.BaseAddress;
                 package.Size = block.Size;
-                package.Data = text.format(slice(buffer,0, hexchars(block.View, buffer)));
+                package.Data = text.format(slice(buffer,0, Hex.charpack(block.View, buffer)));
                 size += package.Size;
             }
             return size;
@@ -54,16 +38,6 @@ namespace Z0
             var count = src.Length;
             var buffer = alloc<MemoryBlock>(count);
             return hexpack(src, buffer);
-        }
-
-        [Op]
-        public static HexPack hexpack(Index<MemoryBlock> src)
-        {
-            var count = src.Length;
-            if(count == 0)
-                return HexPack.Empty;
-            src.Sort();
-            return new HexPack(src, src.Select(x => x.Size).Max());
         }
 
         [Op]

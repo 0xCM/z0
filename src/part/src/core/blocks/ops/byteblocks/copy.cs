@@ -67,8 +67,23 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ByteBlock128 copy(ReadOnlySpan<byte> src, ref ByteBlock128 dst)
         {
-            copy(src, ref dst.A);
-            copy(slice(src,64), ref dst.B);
+            const ushort Block0 = 0*32;
+            const ushort Block1 = 1*32;
+            const ushort Block2 = 2*32;
+            const ushort Block3 = 3*32;
+
+            var v0 = vload(w256, skip(src,Block0));
+            vstore(v0, ref seek(u8(dst), Block0));
+
+            v0 = vload(w256, skip(src, Block1));
+            vstore(v0, ref seek(u8(dst), Block1));
+
+            v0 = vload(w256, skip(src, Block2));
+            vstore(v0, ref seek(u8(dst), Block2));
+
+            v0 = vload(w256, skip(src, Block3));
+            vstore(v0, ref seek(u8(dst), Block3));
+
             return ref dst;
         }
     }

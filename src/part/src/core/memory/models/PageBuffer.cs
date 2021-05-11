@@ -15,33 +15,20 @@ namespace Z0
     /// </summary>
     public readonly struct PageBuffer
     {
-        readonly Index<byte> Content;
+        readonly ByteBlock4096 Data;
 
-        [MethodImpl(Inline)]
-        public PageBuffer(MemoryRange range, Index<byte> src)
-        {
-            Range = range;
-            Content = src;
-        }
-
-        public MemoryRange Range {get;}
-
-        public ByteSize Size
-        {
-            [MethodImpl(Inline)]
-            get => Content.Length;
-        }
+        public const ushort Size = ByteBlock4096.Size;
 
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => Content.View;
+            get => Data.Bytes;
         }
 
         public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => Content.Edit;
+            get => Data.Bytes;
         }
     }
 }

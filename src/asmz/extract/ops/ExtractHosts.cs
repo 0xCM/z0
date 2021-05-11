@@ -5,27 +5,24 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Reflection;
+    using System.Collections.Concurrent;
+    using System.Diagnostics;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
+    using static ApiExtracts;
 
-    [ApiHost]
-    public class ApiCodeBlockPipe : AppService<ApiCodeBlockPipe>
+    partial class ApiExtractor
     {
-        [Op]
-        public uint Run(ApiHostBlocks src, Action<ApiCodeBlock> receiver)
+        public uint ExtractHosts(ReadOnlySpan<ResolvedHost> src, List<ApiMemberExtract> dst)
         {
-            var blocks = src.Blocks.View;
-            var count = blocks.Length;
             var counter = 0u;
-
+            var count = src.Length;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(blocks,i);
-                receiver(block);
-                counter++;
-            }
-
+                counter += ExtractHost(skip(src,i), dst);
             return counter;
         }
     }

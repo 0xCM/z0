@@ -2,19 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct ExtractPaths
+    public readonly struct ApiExtractPaths
     {
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public ExtractPaths(FS.FolderPath root)
+        public ApiExtractPaths(FS.FolderPath root)
         {
             Root = root;
         }

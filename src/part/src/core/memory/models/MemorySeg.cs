@@ -58,7 +58,13 @@ namespace Z0
             get => (uint)Segment.GetElement(1);
         }
 
-        public Span<byte> Buffer
+        public Span<byte> Edit
+        {
+            [MethodImpl(Inline)]
+            get => memory.cover<byte>(BaseAddress, Length);
+        }
+
+        public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
             get => memory.cover<byte>(BaseAddress, Length);

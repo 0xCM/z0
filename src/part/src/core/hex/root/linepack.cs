@@ -5,20 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Part;
     using static memory;
 
-    partial struct CodeBlocks
+    partial struct Hex
     {
+        const string HexPackLine = "x{0:x}[{1:D5}:{2:D5}]=<{3}>";
+
         [Op]
-        public static string hexline(in MemorySeg src, uint index, Span<char> buffer)
+        public static string linepack(in MemorySeg src, uint index, Span<char> buffer)
         {
             var memspan = src.ToSpan();
-            var count = hexchars(memspan.View, buffer);
-            var content = text.format(slice(buffer,0, count));
+            var count = charpack(memspan.View, buffer);
+            var content = text.format(slice(buffer, 0, count));
             return string.Format(HexPackLine, memspan.BaseAddress, index, memspan.Size, content);
         }
     }

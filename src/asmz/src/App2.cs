@@ -1253,21 +1253,8 @@ namespace Z0.Asm
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
             => Wf.ApiCatalogs().EmitApiClasses();
 
-        // public void ReadMethodDefs(Assembly src)
-        // {
-        //     var reader = Cli.reader(src);
-        //     var keys = reader.MethodDefKeys();
-        //     var rows = keys.Map(h => reader.Read(h));
-        //     var count = rows.Length;
-        //     var formatter = Tables.formatter<MethodDefRow>();
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var row = ref skip(rows,i);
-        //         Wf.Row(formatter.Format(row));
-        //     }
-        // }
 
-        void RunExtraction()
+        void RunExtractor()
         {
             var receivers = new ApiExtractReceivers();
             receivers.HostResolved += (source, e) => {};
@@ -1294,9 +1281,12 @@ namespace Z0.Asm
 
         public unsafe void EmitRawMetadata(Assembly src, FS.FilePath dst)
         {
-            var emitter = Wf.MemoryEmitter();
             var segment = Clr.metadata(src);
-            emitter.Emit(segment, 32, dst);
+            using var writer = dst.Writer();
+            Hex.emit(segment, 64, writer);
+
+            // var emitter = Wf.MemoryEmitter();
+            // emitter.Emit(segment, 32, dst);
         }
 
         public unsafe void EmitRawMetadata(Assembly src)
@@ -1335,6 +1325,13 @@ namespace Z0.Asm
 
         }
 
+        public void ListEnvVars()
+        {
+            var src = Resources.strings<uint>(typeof(EnvVarNames)).View;
+            for(var i=0; i<src.Length; i++)
+                Wf.Status(skip(src,i).Format());
+        }
+
         public void UnpackRespack()
         {
             var unpacker = ResPackUnpacker.create(Wf);
@@ -1364,37 +1361,10 @@ namespace Z0.Asm
             Wf.ProcessContextPipe().EmitContextSummary(dst);
 
         }
+
         public void Run()
         {
-
-            ReadMetadataHeader(Parts.Math.Assembly);
-            //CreateSymbolHeap();
-
-            //EmitRawMetadata(Parts.Math.Assembly);
-
-            // var provider = Wf.ApiResProvider();
-            // using var map = provider.MapResPack();
-            // var @base = map.BaseAddress;
-            // var sig = map.View(0, 2).AsUInt16();
-            // var info = map.Description;
-            // Wf.Row(Tables.format(info));
-            // var range = MemoryRange.define(@base, map.Size);
-
-            // MemoryAddress address = 0x22a_f0_2b_50_00;
-            // Wf.Row(string.Format("{0}:{1}", address.Quadrant(n2), address.Lo));
-            //ListPdbMethods();
-
-            // var map = ImageMemory.map(root.process());
-            // var formatter = Tables.formatter<ProcessModuleRow>();
-            // root.iter(map.Modules, m => Wf.Row(formatter.Format(m)));
-
-            // var id = COM.IUnknownVTable.Identifier;
-            // var guid = Guids.define(id);
-            // var data = Guids.serialize(guid);
-            // var formatted = Hex.format(UpperCase, data);
-            // Wf.Row(formatted);
-            // Wf.Row(data.FormatHex());
-            //CheckBitstrings();
+            RunExtractor();
         }
 
 

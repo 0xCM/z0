@@ -61,7 +61,17 @@ namespace Z0
         {
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            var total = CodeBlocks.emit(src, writer);
+            var total = Hex.emit(src, writer);
+            Wf.EmittedFile(flow, (uint)total);
+            return total;
+        }
+
+        [Op]
+        public ByteSize Emit(in MemoryBlock src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            var total = Hex.emit(Hex.hexpack(src), writer);
             Wf.EmittedFile(flow, (uint)total);
             return total;
         }
