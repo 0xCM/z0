@@ -22,8 +22,8 @@ namespace Z0
     }
 
     [Free]
-    public interface IApiMember<T> : IApiMember, IEquatable<T>, ITextual<T>, INullary<T>, IComparable<T>
-        where T : struct, IApiMember<T>
+    public interface IApiMember<T> : IApiMember, IEquatable<T>, IComparable<T>
+        where T : IApiMember<T>
     {
 
     }

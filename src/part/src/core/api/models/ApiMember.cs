@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Describes a concrete api
     /// </summary>
-    public readonly struct ApiMember : IApiMember<ApiMember>
+    public class ApiMember : IApiMember<ApiMember>
     {
         public OpIdentity Id {get;}
 
