@@ -16,13 +16,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The assembly to search</param>
         [Op]
-        public static ApiRuntimeType[] complete(Assembly src)
+        public static Index<ApiRuntimeType> complete(Assembly src)
         {
             var part = src.Id();
             var types = span(src.GetTypes().Where(t => t.Tagged<ApiCompleteAttribute>()));
             var count = types.Length;
             var buffer = alloc<ApiRuntimeType>(count);
-            var dst = span(buffer);
+            ref var dst = ref first(buffer);
+            //var dst = span(buffer);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var type = ref skip(types,i);

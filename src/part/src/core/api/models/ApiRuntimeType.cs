@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ApiRuntimeType : IApiHost, IComparable<ApiRuntimeType>
+    public class ApiRuntimeType : IApiHost, IComparable<ApiRuntimeType>
     {
         public PartId PartId {get;}
 
@@ -26,7 +26,7 @@ namespace Z0
         Dictionary<string,MethodInfo> Index {get;}
 
         [MethodImpl(Inline)]
-        public ApiRuntimeType(Type type, string name, PartId part, ApiHostUri uri, MethodInfo[] methods, Dictionary<string,MethodInfo> index)
+        public ApiRuntimeType(Type type, string name, PartId part, ApiHostUri uri, Index<MethodInfo> methods, Dictionary<string,MethodInfo> index)
         {
             HostType = type;
             Name = name;

@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         public Index<MethodInfo> Methods {get;}
 
-        public ApiPartCatalog(PartId part, Assembly component, ApiRuntimeType[] apitypes, IApiHost[] apihosts, Type[] svchosts)
+        public ApiPartCatalog(PartId part, Assembly component, Index<ApiRuntimeType> apitypes, IApiHost[] apihosts, Type[] svchosts)
         {
             PartId = part;
             Component = component;
