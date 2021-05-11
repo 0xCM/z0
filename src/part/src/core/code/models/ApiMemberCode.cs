@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Pairs an api member with the executable code derived from that member
     /// </summary>
-    public readonly struct ApiMemberCode
+    public class ApiMemberCode
     {
         /// <summary>
         /// The extraction index
