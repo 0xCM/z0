@@ -5,6 +5,10 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
 
     public class IceInstruction //: IAsmFxInfo
     {
@@ -256,6 +260,13 @@ namespace Z0.Asm
         //     you modify the instruction or create a new one, this property could return the
         //     wrong value.
         public int ByteLength {get; set;}
+
+        public byte InstructionSize
+        {
+            [MethodImpl(Inline)]
+            get => (byte)ByteLength;
+        }
+
         //
         // Summary:
         //     Gets the memory operand's index register or Iced.Intel.Register.None if none.
