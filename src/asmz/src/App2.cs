@@ -1254,31 +1254,6 @@ namespace Z0.Asm
             => Wf.ApiCatalogs().EmitApiClasses();
 
 
-        void OnEvent(PartResolvedEvent e)
-        {
-
-        }
-
-        void OnEvent(HostResolvedEvent e)
-        {
-
-        }
-
-        void OnEvent(MemberParsedEvent e)
-        {
-
-        }
-
-        void OnEvent(MemberDecodedEvent e)
-        {
-
-        }
-
-        void OnEvent(ExtractErrorEvent e)
-        {
-
-        }
-
         void RunExtractor()
         {
             var wf = ApiExtractWorkflow.create(Wf);

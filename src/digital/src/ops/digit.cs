@@ -11,12 +11,8 @@ namespace Z0
     using static memory;
     using static HexConst;
 
-    using X = HexDigit;
-
-
     using DF = DecimalSymFacet;
     using BF = BinarySymFacet;
-    using XF = HexSymFacet;
 
     partial struct Digital
     {

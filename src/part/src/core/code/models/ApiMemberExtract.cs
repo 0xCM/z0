@@ -10,13 +10,21 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiMemberExtract : IComparable<ApiMemberExtract>
+    public class ApiMemberExtract : IComparable<ApiMemberExtract>
     {
         public ApiExtractBlock Block {get;}
 
         public OpUri OpUri {get;}
 
         public ApiMember Member {get;}
+
+        [MethodImpl(Inline)]
+        public ApiMemberExtract(ApiMember member, ApiExtractBlock block)
+        {
+            OpUri = member.OpUri;
+            Member = member;
+            Block = block;
+        }
 
         public bool IsEmpty
         {
@@ -28,14 +36,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Block.IsNonEmpty;
-        }
-
-        [MethodImpl(Inline)]
-        public ApiMemberExtract(ApiMember member, ApiExtractBlock block)
-        {
-            OpUri = member.OpUri;
-            Member = member;
-            Block = block;
         }
 
         public MethodInfo Method

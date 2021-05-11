@@ -26,7 +26,6 @@ namespace Z0
             }
             else
                 return src;
-
         }
 
         [Op]
