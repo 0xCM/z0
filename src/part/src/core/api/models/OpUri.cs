@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct OpUri : IApiUri<OpUri>
+    public class OpUri : IApiUri<OpUri>
     {
         /// <summary>
         /// The full uri in the form {scheme}://{hostpath}/{opid}

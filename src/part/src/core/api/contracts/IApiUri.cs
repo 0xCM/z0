@@ -18,7 +18,7 @@ namespace Z0
 
     [Free]
     public interface IApiUri<T> : IApiUri, IIdentification<T>
-        where T : IApiUri<T>, new()
+        where T : IApiUri<T>
     {
 
     }
