@@ -302,7 +302,7 @@ namespace Z0
         /// <typeparam name="F">The operand type</typeparam>
         BinaryOp<F> LoadFixedinaryOp<F>(BufferTokens buffers, BufferSeqId index, ApiMemberCode src)
             where F : unmanaged, IDataCell
-                => buffers[index].EmitFixedBinaryOp<F>(src.Encoded);
+                => buffers[index].EmitBinaryCellOp<F>(src.Encoded);
 
         /// <summary>
         /// Loads and invokes a fixed binary operator

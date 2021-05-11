@@ -73,10 +73,21 @@ namespace Z0
             }
         }
 
+        void Test4()
+        {
+            Size<byte> a = 31;
+            var b = a.Align(4);
+            Wf.Row(a.Measure);
+            Wf.Row(a.Untyped);
+            Wf.Row(b.Measure);
+
+            Wf.Row(string.Format("Align({0}) = {1}", a, b));
+        }
+
         protected override void Run()
         {
             var flow = Wf.Running();
-            Test1();
+            Test4();
             Wf.Ran(flow);
         }
 

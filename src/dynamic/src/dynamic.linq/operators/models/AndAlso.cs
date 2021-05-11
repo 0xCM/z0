@@ -10,7 +10,7 @@ namespace Z0
 
     using static LinqXPress;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public static class AndAlso<T>
         {

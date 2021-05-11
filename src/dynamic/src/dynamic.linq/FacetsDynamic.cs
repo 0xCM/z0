@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct Dynops
+    public readonly partial struct FacetsDynamic
     {
-        public static IDynexus Dynexus => Z0.Dynexus.service();
+
     }
 }

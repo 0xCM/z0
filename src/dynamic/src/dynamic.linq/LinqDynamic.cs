@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq.Expressions;
     using System.Reflection;
-    using Z0.Dynamics.Operators;
+    using Z0.DynamicModels.Operators;
 
     using static Part;
     using static LinqXPress;
-    using static DynamicOps;
+    using static ModelsDynamic;
 
     [ApiHost]
     public readonly struct LinqDynamic

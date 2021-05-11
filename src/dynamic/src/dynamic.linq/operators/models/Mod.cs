@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics.Operators
+namespace Z0.DynamicModels.Operators
 {
     using System;
     using System.Linq.Expressions;

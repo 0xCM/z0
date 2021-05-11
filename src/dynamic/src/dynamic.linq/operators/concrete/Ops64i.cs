@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static LinqXFunc;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public class Ops64i
         {

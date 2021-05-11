@@ -9,7 +9,7 @@ namespace Z0
 
     using static Z0.LinqXPress;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public static class OrElse<T>
         {

@@ -10,6 +10,7 @@ namespace Z0
 
     partial class Dynop
     {
+        [Op]
         internal static ILGenerator EmitImmLoad(this ILGenerator gTarget, byte imm)
         {
             var code = imm switch {
@@ -23,30 +24,13 @@ namespace Z0
                 7 => OpCodes.Ldc_I4_7,
                 8 => OpCodes.Ldc_I4_8,
                 _ => OpCodes.Ldc_I4_S
-            }; 
+            };
             if(imm <= 8)
                 gTarget.Emit(code);
             else
                 gTarget.Emit(code, imm);
 
             return gTarget;
-        }
-
-        internal static void EmitImmBinaryCall(this ILGenerator gTarget, MethodInfo wrapped, byte imm8)        
-        {
-            gTarget.Emit(OpCodes.Ldarg_0);
-            gTarget.Emit(OpCodes.Ldarg_1);
-            gTarget.EmitImmLoad(imm8);
-            gTarget.EmitCall(OpCodes.Call, wrapped, null);
-            gTarget.Emit(OpCodes.Ret);
-        }
-
-        internal static void EmitImmUnaryCall(this ILGenerator gTarget, MethodInfo wrapped, byte imm8)        
-        {
-            gTarget.Emit(OpCodes.Ldarg_0);
-            gTarget.EmitImmLoad(imm8);
-            gTarget.EmitCall(OpCodes.Call, wrapped, null);
-            gTarget.Emit(OpCodes.Ret);
         }
     }
 }

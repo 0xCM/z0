@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0.DynamicModels
 {
     public interface IBinaryOperator : IOperator
     {
@@ -24,6 +24,6 @@ namespace Z0.Dynamics
     public interface IBinaryPredicate<F,T> : IBinaryOperator<F,T>
         where F : IBinaryOperator<F,T>
     {
-        
+
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     using static LinqXPress;
     using static SFx;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public readonly struct Negate<T> : IFunc<T,T>
         {

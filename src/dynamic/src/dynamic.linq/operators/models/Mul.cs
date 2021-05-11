@@ -13,7 +13,7 @@ namespace Z0
     using static LinqXPress;
     using static LinqXFunc;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public static class Mul<T>
         {
@@ -31,7 +31,7 @@ namespace Z0
                     case TypeCode.SByte:
                         return cast<Func<T,T,T>>(Ops8i.Mul.Compile());
                     case TypeCode.UInt16:
-                        return cast<Func<T,T,T>>(DLinq.mul16u().Compile());
+                        return cast<Func<T,T,T>>(ModelsDynamic.mul16u().Compile());
                     default:
                         return lambda<T,T,T>(Expression.Multiply).Compile();
                 }

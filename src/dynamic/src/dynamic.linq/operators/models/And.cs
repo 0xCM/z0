@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public readonly struct And<T> : IFunc<T,T,T>
         {

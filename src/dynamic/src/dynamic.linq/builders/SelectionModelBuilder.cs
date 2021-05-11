@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0.DynamicModels
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Z0.Dynamics
     using X = System.Linq.Expressions;
     using G = System.Collections.Generic;
 
-    using static DynamicFacet;
+    using static FacetsDynamic;
 
     public class SelectionModelBuilder
     {

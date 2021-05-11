@@ -10,7 +10,7 @@ namespace Z0
     partial struct Settings
     {
         [Op, Closures(Closure)]
-        public static bool parse<T>(string src,  out Setting<T> dst, char delimiter = Chars.Colon)
+        public static Outcome parse<T>(string src,  out Setting<T> dst, char delimiter = Chars.Colon)
         {
             dst = empty<T>();
             if(text.nonempty(src))
@@ -44,7 +44,7 @@ namespace Z0
                         return true;
                     }
                 }
-                else if(DataParser.numeric(input, out T g))
+                else if(DataParser.nparse(input, out T g))
                 {
                     dst = define(name, g);
                     return true;

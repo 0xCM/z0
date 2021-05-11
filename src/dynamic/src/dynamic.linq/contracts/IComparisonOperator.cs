@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0.DynamicModels
 {
     public interface IComparisonOperator : IBinaryOperator
     {
@@ -13,5 +13,5 @@ namespace Z0.Dynamics
         where F : IComparisonOperator<F>
     {
 
-    }    
+    }
 }

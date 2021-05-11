@@ -17,20 +17,6 @@ namespace Z0
     [Datatype]
     public readonly struct ByteSize : IDataTypeComparable<ByteSize>
     {
-        public static Outcome parse(string src, out ByteSize dst)
-        {
-            if(Numeric.parse<ulong>(src, out var x))
-            {
-                dst = x;
-                return true;
-            }
-            else
-            {
-                dst = default;
-                return false;
-            }
-        }
-
         /// <summary>
         /// Specifies a byte count
         /// </summary>
@@ -71,6 +57,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline),Ignore]
+        public ByteSize Align(ulong factor)
+            => api.align(this,factor);
+
+        [MethodImpl(Inline),Ignore]
+        public ByteSize Align(long factor)
+            => api.align(this,factor);
+
+        [MethodImpl(Inline),Ignore]
         public string Format()
             => Content == 0 ? "0" : Content.ToString("#,#");
 
@@ -80,10 +74,11 @@ namespace Z0
         public override int GetHashCode()
             => Content.GetHashCode();
 
+        [MethodImpl(Inline)]
         public bool Equals(ByteSize src)
             => Content == src.Content;
 
-        [MethodImpl(Inline),Ignore]
+        [MethodImpl(Inline)]
         public int CompareTo(ByteSize src)
             => Content.CompareTo(src.Content);
 
@@ -211,9 +206,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ByteSize operator %(ByteSize a, ByteSize b)
             => a.Content % b.Content;
-
-        public static ByteSize Empty
-            => default;
 
         public static ByteSize Zero
             => default;

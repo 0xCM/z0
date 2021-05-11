@@ -2,12 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0.DynamicModels
 {
     using System;
-    using System.Collections.Generic;    
+    using System.Collections.Generic;
     using System.Linq;
-
 
     /// <summary>
     /// Represents the application of an operator to a set of operands

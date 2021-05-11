@@ -11,7 +11,7 @@ namespace Z0
 
     using static LinqXFunc;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         [ApiComplete("dynamic.ops.32u")]
         public readonly struct Ops32u

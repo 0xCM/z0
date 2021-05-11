@@ -13,7 +13,7 @@ namespace Z0
     using static Z0.LinqXPress;
     using static Z0.LinqXFunc;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public static class Add<T>
         {
@@ -36,7 +36,7 @@ namespace Z0
                         case TypeCode.SByte:
                             return cast<Func<T,T,T>>(Ops8i.Add.Compile());
                         case TypeCode.UInt16:
-                            return cast<Func<T,T,T>>(DLinq.add16u().Compile());
+                            return cast<Func<T,T,T>>(ModelsDynamic.add16u().Compile());
                         default:
                             return lambda<T,T,T>(Expression.Add).Compile();
                     }

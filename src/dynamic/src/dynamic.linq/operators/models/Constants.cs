@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public static class Zero<T>
         {

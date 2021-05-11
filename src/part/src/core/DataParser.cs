@@ -14,9 +14,53 @@ namespace Z0
     [ApiHost]
     public readonly struct DataParser
     {
-        [Op]
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out byte dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out short dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out ushort dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out int dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out uint dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out long dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out ulong dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out bool dst)
+            => bool.TryParse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out bit dst)
+            => bit.parse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static Outcome nparse<T>(string src, out T dst)
+            => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Timestamp dst)
             => Time.parse(src,out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out DateTime dst)
+            => DateTime.TryParse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Name dst)
@@ -59,49 +103,23 @@ namespace Z0
         public static Outcome parse(string src, out Address8 dst)
             => AddressParser.parse(src, out dst);
 
-        [MethodImpl(Inline), Op]
-        public static Outcome numeric<T>(string src, out T dst)
-            => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out byte dst)
-            => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out short dst)
-            => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out ushort dst)
-            => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out int dst)
-            => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out uint dst)
-            => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out long dst)
-            => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out ulong dst)
-            => Numeric.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out bit dst)
-            => bit.parse(src, out dst);
-
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out bool dst)
-            => bool.TryParse(src, out dst);
+        [MethodImpl(Inline)]
+        public static Outcome eparse<T>(string src, out T dst)
+            where T : unmanaged
+                => ClrEnums.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out ByteSize dst)
-            => ByteSize.parse(src, out dst);
+            => Sizes.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out BitWidth dst)
+            => Sizes.parse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static Outcome parse<T>(string src, out Size<T> dst)
+            where T : unmanaged
+                => Sizes.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out string dst)
@@ -128,11 +146,6 @@ namespace Z0
         public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
             => Rules.parse(src,bounds, out dst, out outcome);
 
-        [MethodImpl(Inline)]
-        public static Outcome eparse<T>(string src, out T dst)
-            where T : unmanaged
-                => ClrEnums.parse(src, out dst);
-
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out BinaryCode dst)
             => CodeBlocks.parse(src, out dst);
@@ -141,12 +154,16 @@ namespace Z0
         public static Outcome parse(string src, out OpUri dst)
             => ApiUri.parse(src, out dst);
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out CliToken dst)
             => CliTokens.parse(src, out dst);
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out MemoryRange dst)
             => MemoryRangeParser.parse(src, out dst);
+
+        [MethodImpl(Inline)]
+        public static Outcome parse<T>(string src,  out Setting<T> dst, char delimiter = Chars.Colon)
+            => Settings.parse(src, out dst, delimiter);
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct DynamicFacet
+    partial struct FacetsDynamic
     {
         public abstract class SelectionFacet
         {

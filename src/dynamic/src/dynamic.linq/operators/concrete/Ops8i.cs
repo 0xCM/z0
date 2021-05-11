@@ -9,7 +9,7 @@ namespace Z0
 
     using static LinqXFunc;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public readonly struct Ops8i
         {

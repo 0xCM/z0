@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0.DynamicModels
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Z0.Dynamics
     using System.Linq.Expressions;
 
 
-    using static DynamicFacet;
+    using static FacetsDynamic;
 
     /// <summary>
     /// Defines a set of members together with the criteria used to determine a selected collection

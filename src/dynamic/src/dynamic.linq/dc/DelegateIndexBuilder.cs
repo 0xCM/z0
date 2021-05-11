@@ -16,7 +16,6 @@ namespace Z0
     /// <typeparam name="TContract">The contract type</typeparam>
     public class DelegateIndexBuilder<TContract>
     {
-
         readonly DelegateIndex delegates;
 
         internal DelegateIndexBuilder()

@@ -14,11 +14,8 @@ namespace Z0
     /// <summary>
     /// Specifies data size in bits
     /// </summary>
-    [Datatype]
     public readonly struct BitWidth : IDataType<ulong>
     {
-        const NumericKind Closure = UnsignedInts;
-
         /// <summary>
         /// Specifies a bit count
         /// </summary>
@@ -28,7 +25,7 @@ namespace Z0
         /// Computes the bit-size of a parametric type
         /// </summary>
         /// <typeparam name="T">The type to measure</typeparam>
-        [MethodImpl(Inline), Closures(Closure)]
+        [MethodImpl(Inline)]
         public static int measure<T>()
             => Unsafe.SizeOf<T>()*8;
 
@@ -37,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The parametric type from which a bit-width will be determined</typeparam>
-        [MethodImpl(Inline), Closures(Closure)]
+        [MethodImpl(Inline)]
         public static int div<T>(int a, T t = default)
             where T : unmanaged
                 => a / (Unsafe.SizeOf<T>()*8);
@@ -47,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The parametric type from which a bit-width will be determined</typeparam>
-        [MethodImpl(Inline), Closures(Closure)]
+        [MethodImpl(Inline)]
         public static int mod<T>(int a, T t = default)
             where T : unmanaged
                 => a % (Unsafe.SizeOf<T>()*8);

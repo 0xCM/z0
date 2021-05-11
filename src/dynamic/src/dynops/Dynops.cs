@@ -4,8 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly partial struct DynamicFacet
-    {
+    using static Part;
 
+    public readonly struct Dynops
+    {
+        public static IDynexus Dynexus => Z0.Dynexus.service();
+
+        const NumericKind Closure = UInt64k;
     }
 }

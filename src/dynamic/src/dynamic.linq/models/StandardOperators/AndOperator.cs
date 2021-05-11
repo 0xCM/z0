@@ -2,10 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0.DynamicModels
 {
     using System;
-    
+
     /// <summary>
     /// Represents the logical and operator
     /// </summary>

@@ -13,7 +13,7 @@ namespace Z0
     using static memory;
     using static LinqXPress;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public static class LtEq<T>
         {

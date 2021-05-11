@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 
-namespace Z0.Dynamics
+namespace Z0.DynamicModels
 {
     using System;
     using System.Linq;
@@ -12,7 +12,7 @@ namespace Z0.Dynamics
 
     using X = System.Linq.Expressions;
 
-    using static DynamicFacet;
+    using static FacetsDynamic;
 
     public abstract class ModelQueryProvider : IModelQueryProvider
     {

@@ -19,6 +19,11 @@ namespace Z0
 
         const ulong BitsToKbFactor = KbFactor * BitFactor;
 
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static Size<T> size<T>(T src)
+            where T : unmanaged
+                => new Size<T>(src);
+
         [MethodImpl(Inline), Op]
         public static BitWidth bits(ulong src)
             => new BitWidth(src);
@@ -34,6 +39,27 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ByteSize bytes(long src)
             => new ByteSize(src);
+
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static ByteSize untyped<T>(Size<T> src)
+            where T : unmanaged
+                => memory.bw64(src.Measure);
+
+        [MethodImpl(Inline), Op]
+        public static ByteSize align(ByteSize src, ulong factor)
+            => src + (src % factor);
+
+        [MethodImpl(Inline), Op]
+        public static ByteSize align(ByteSize src, long factor)
+            => src + (src % factor);
+
+        [MethodImpl(Inline), Op]
+        public static BitWidth align(BitWidth src, ulong factor)
+            => src + (src % factor);
+
+        [MethodImpl(Inline), Op]
+        public static BitWidth align(BitWidth src, long factor)
+            => src + (src % factor);
 
         [MethodImpl(Inline), Op]
         public static Kb kb(BitWidth src)
@@ -74,5 +100,48 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bit neq(Kb a, Kb b)
             => a.Count != b.Count || a.Rem != b.Rem;
+
+        public static Outcome parse(string src, out ByteSize dst)
+        {
+            if(Numeric.parse<ulong>(src, out var x))
+            {
+                dst = x;
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        public static Outcome parse(string src, out BitWidth dst)
+        {
+            if(Numeric.parse<ulong>(src, out var x))
+            {
+                dst = x;
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        public static Outcome parse<T>(string src, out Size<T> dst)
+            where T : unmanaged
+        {
+            if(Numeric.parse<ulong>(src, out var x))
+            {
+                dst = size<T>(memory.generic<T>(x));
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Provides access to high-level dynamic contract capabilities
     /// </summary>
-    public sealed class DynamicContract
+    public sealed class ContractsDynamic
     {
         /// <summary>
         /// Realizes implementation of a user-defined contract by delegating through a <see cref="IDynamicContractMessenger"/> implementation

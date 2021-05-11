@@ -2,9 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0.DynamicModels
 {
-
     public sealed class ComparisonOperatorApplication<F,T> : OperatorApplication<F>
         where F : BinaryOperator<F>
     {

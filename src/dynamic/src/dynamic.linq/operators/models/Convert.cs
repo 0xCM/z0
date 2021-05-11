@@ -9,7 +9,7 @@ namespace Z0
 
     using static Z0.LinqXFunc;
 
-    partial struct DynamicOps
+    partial struct ModelsDynamic
     {
         public static class Convert<X,Y>
         {
