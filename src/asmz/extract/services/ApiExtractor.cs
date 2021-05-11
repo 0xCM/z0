@@ -29,7 +29,7 @@ namespace Z0
 
         HexPacks HexPacks;
 
-        ApiExtractReceivers Receivers;
+        ApiExtractReceipt Receivers;
 
         ConcurrentBag<ApiHostDataset> HostDatasets;
 
@@ -55,7 +55,7 @@ namespace Z0
             Decoder = Wf.AsmDecoder();
             Formatter = Wf.AsmFormatter();
             HexPacks = Wf.HexPacks();
-            Receivers = new ApiExtractReceivers();
+            Receivers = new ApiExtractReceipt();
             HostDatasets = new();
             Paths = new ApiExtractPaths(Db.AppLogRoot());
         }
@@ -84,7 +84,7 @@ namespace Z0
             Run3();
         }
 
-        public void Run(ApiExtractReceivers receivers, FS.FolderPath? dst = null)
+        public void Run(ApiExtractReceipt receivers, FS.FolderPath? dst = null)
         {
             Receivers = receivers;
             if(dst != null)

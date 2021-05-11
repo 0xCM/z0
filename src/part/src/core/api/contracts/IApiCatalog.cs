@@ -12,12 +12,6 @@ namespace Z0
     [Free]
     public interface IApiCatalog
     {
-        Option<IApiHost> FindHost(ApiHostUri uri);
-
-        Option<Assembly> FindComponent(PartId id);
-
-        bool FindMethod(OpUri uri, out MethodInfo method);
-
         Index<IApiPartCatalog> PartCatalogs(params PartId[] parts);
 
         Index<IApiHost> PartHosts(params PartId[] parts);
@@ -35,5 +29,13 @@ namespace Z0
         IApiHost[] ApiHosts {get;}
 
         ReadOnlySpan<MethodInfo> Methods {get;}
+
+        bool FindPart(PartId id, out IPart dst);
+
+        bool FindComponent(PartId id, out Assembly dst);
+
+        bool FindHost(ApiHostUri uri, out IApiHost host);
+
+        bool FindMethod(OpUri uri, out MethodInfo method);
     }
 }

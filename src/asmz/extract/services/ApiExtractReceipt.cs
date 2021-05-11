@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class ApiExtractReceivers
+    public class ApiExtractReceipt
     {
         public event EventHandler<HostResolvedEvent> HostResolved;
 

@@ -10,12 +10,8 @@ namespace Z0
     [ApiComplete]
     partial struct Msg
     {
+        public const string CaptureAddressMismatch = "The parsed address does not match the extration address";
 
-    }
-
-    [ApiComplete]
-    public readonly partial struct PartMsg
-    {
         public static MsgPattern<Type,Type> ContractMismatch => "The source type {0} does not reify {1}";
     }
 }

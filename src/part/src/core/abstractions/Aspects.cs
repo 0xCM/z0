@@ -36,7 +36,7 @@ namespace Z0
 
             if(!hostType.Reifies(contractType))
             {
-                var msg = PartMsg.ContractMismatch.Format(hostType, contractType);
+                var msg = Msg.ContractMismatch.Format(hostType, contractType);
                 return new Aspects(new Aspect("Error", hostType, src, msg));
             }
 

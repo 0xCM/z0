@@ -81,10 +81,10 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static void eq(bool[] a, bool[] b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq(ReadOnlySpan<bool> a, ReadOnlySpan<bool> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var count = length(a,b);
-            for(var i = 0; i< count; i++)
+            for(var i = 0; i<count; i++)
                 if(a[i] != b[i])
                     throw failed(ClaimKind.Eq, ItemsNotEqual(i, a[i], b[i], caller, file, line));
         }

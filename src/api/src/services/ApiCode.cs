@@ -15,10 +15,10 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiCode
     {
-        public static Index<OpMsil> msil(MethodInfo[] src)
+        public static Index<ApiMsil> msil(MethodInfo[] src)
         {
             var count = src.Length;
-            var buffer = alloc<OpMsil>(count);
+            var buffer = alloc<ApiMsil>(count);
             var methods = @readonly(src);
             var target = span(buffer);
             for(var i=0; i<count; i++)
@@ -33,7 +33,7 @@ namespace Z0
                 {
                     var ilbytes = body.GetILAsByteArray() ?? Array.Empty<byte>();
                     var length = ilbytes.Length;
-                    seek(target,i) = new OpMsil(method.MetadataToken, address, uri, sig, ilbytes, method.MethodImplementationFlags);
+                    seek(target,i) = new ApiMsil(method.MetadataToken, address, uri, sig, ilbytes, method.MethodImplementationFlags);
                 }
             }
 

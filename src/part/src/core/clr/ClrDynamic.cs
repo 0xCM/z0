@@ -17,6 +17,10 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static MethodBase method(RuntimeMethodHandle src)
+            => MethodBase.GetMethodFromHandle(src);
+
         [Op]
         public static MsilCompilation compilation(DynamicMethod src)
         {
@@ -39,19 +43,11 @@ namespace Z0
         }
 
         [Op]
-        public static OpMsil msil(MemoryAddress @base, OpUri uri, MethodInfo src)
-            => new OpMsil(src.MetadataToken, @base, uri, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
-
-        [Op]
         public static RuntimeMethodHandle handle(DynamicMethod src)
         {
             var getMethodDescriptorInfo = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
             return (RuntimeMethodHandle)getMethodDescriptorInfo.Invoke(src, null);
         }
-
-        [MethodImpl(Inline), Op]
-        public static MethodBase method(RuntimeMethodHandle src)
-            => MethodBase.GetMethodFromHandle(src);
 
         /// <summary>
         /// Creates a dynamic pointer from an untyped dynamic delegate
@@ -107,10 +103,14 @@ namespace Z0
             return buffer;
         }
 
+        [Op]
+        public static ApiMsil msil(MemoryAddress @base, OpUri uri, MethodInfo src)
+            => new ApiMsil(src.MetadataToken, @base, uri, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
+
         /// <summary>
         /// See https://stackoverflow.com/questions/4148297/resolving-the-tokens-found-in-the-il-from-a-dynamic-method/35711376#35711376
         /// </summary>
-        [MethodImpl(Inline), Op]
+        [Op]
         static byte[] msildata(DynamicMethod src)
         {
             var resolver = typeof(DynamicMethod).GetField("m_resolver", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(src);

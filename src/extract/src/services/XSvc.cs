@@ -14,9 +14,6 @@ namespace Z0
     public static partial class XSvc
     {
 
-        [Op]
-        public static ApiResolver ApiResolver(this IWfRuntime wf)
-            => Z0.ApiResolver.create(wf);
 
     }
 }

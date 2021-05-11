@@ -25,27 +25,30 @@ namespace Z0
             ApiGlobal = wf.ApiCatalog;
         }
 
-        void ExecuteHost(BufferTokens buffers, ApiHostUri host)
+        void ExecuteHost(BufferTokens buffers, ApiHostUri uri)
         {
-            var src = Wf.Db().ParsedExtractPath(host);
+            var src = Wf.Db().ParsedExtractPath(uri);
             if(!src.Exists)
                 return;
 
             var catalogs = Wf.ApiCatalogs();
-            var flow = Wf.Running($"Running {host.Format()} evaluaton workflow");
-            var catalog = catalogs.HostCatalog(Wf.ApiCatalog.FindHost(host).Require());
+            var flow = Wf.Running($"Running {uri.Format()} evaluaton workflow");
+            if(!Wf.ApiCatalog.FindHost(uri, out var host))
+                return;
+
+            var catalog = catalogs.HostCatalog(host);
             if(catalog.IsEmpty)
                 return;
 
             var hex = Wf.ApiHex();
             var members = Wf.ApiIndexBuilder().CreateMemberIndex(catalog);
-            Wf.Status($"Indexed {members.EntryCount} {host} members");
+            Wf.Status($"Indexed {members.EntryCount} {uri} members");
 
             var blocks = hex.ReadBlocks(src);
-            Wf.Status($"Read {blocks.Count} {host} operations from {src}");
+            Wf.Status($"Read {blocks.Count} {uri} operations from {src}");
 
             var operations = ApiIndex.create(blocks);
-            Wf.Status($"Hydrated {operations.EntryCount} {host} operations from {blocks.Count} blocks");
+            Wf.Status($"Hydrated {operations.EntryCount} {uri} operations from {blocks.Count} blocks");
 
             var identities =  members.Keys.ToHashSet();
             identities.IntersectWith(operations.Keys);

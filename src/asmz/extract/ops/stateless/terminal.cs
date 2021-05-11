@@ -13,7 +13,7 @@ namespace Z0
 
     partial class ApiExtractor
     {
-        public static unsafe ApiMemberExtract trim(in ApiMemberExtract src)
+        public static ApiMemberExtract trim(ApiMemberExtract src)
         {
             var block = src.Block;
             var term = terminal(block);
@@ -21,8 +21,7 @@ namespace Z0
             {
                 var length = term.Offset + term.Modifier;
                 var data = slice(block.View, 0, length).ToArray();
-                block = new ApiExtractBlock(src.BaseAddress, src.OpUri, data);
-                return new ApiMemberExtract(src.Member, block);
+                return src.WithBlock(new ApiExtractBlock(src.BaseAddress, src.OpUri.Format(), data));
             }
             else
                 return src;

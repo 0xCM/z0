@@ -197,7 +197,7 @@ namespace Z0
             => TestNaN(Compare(x, y, fpmode(mode)));
 
         [MethodImpl(Inline)]
-        static bool[] cmpf(Vector256<float> x, Vector256<float> y, FpCmpMode mode)
+        static ReadOnlySpan<bool> cmpf(Vector256<float> x, Vector256<float> y, FpCmpMode mode)
         {
             Span<float> vresult = stackalloc float[8];
             Compare(x,y, fpmode(mode)).StoreTo(ref first(vresult));
@@ -215,7 +215,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool[] cmpf(Vector256<double> x, Vector256<double> y, FpCmpMode mode)
+        static ReadOnlySpan<bool> cmpf(Vector256<double> x, Vector256<double> y, FpCmpMode mode)
         {
             Span<double> vresult = stackalloc double[4];
             Compare(x,y, fpmode(mode)).StoreTo(ref first(vresult));

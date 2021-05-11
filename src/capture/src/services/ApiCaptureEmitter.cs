@@ -158,7 +158,7 @@ namespace Z0
         {
             dst.Base = src.BaseAddress;
             dst.Encoded = src.Storage;
-            dst.Uri = src.Uri.Format();
+            dst.Uri = src.Uri;
             return ref dst;
         }
 
@@ -195,7 +195,5 @@ namespace Z0
                 Wf.Error(e);
             }
         }
-
-        static ReadOnlySpan<byte> X86TableWidths => new byte[3]{16,80,80};
     }
 }

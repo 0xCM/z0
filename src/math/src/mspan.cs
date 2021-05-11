@@ -11,57 +11,57 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly partial struct mspan
+    public readonly struct mspan
     {
-        public static bool[] fcmp(Span<float> lhs, Span<float> rhs, FpCmpMode kind)
+        public static ReadOnlySpan<bool> fcmp(Span<float> a, Span<float> b, FpCmpMode kind)
         {
-            var len =  lhs.Length;
-            var result = sys.alloc<bool>(len);
-            for(var i = 0; i< len; i++)
-                result[i] = fmath.fcmp(lhs[i], rhs[i], kind);
-            return result;
+            var count =  root.min(a.Length,b.Length);
+            var dst = memory.span<bool>(count);
+            for(var i = 0; i<count; i++)
+                seek(dst,i) = fmath.fcmp(a[i], b[i], kind);
+            return dst;
         }
 
-        public static bool[] fcmp(Span<double> lhs, Span<double> rhs, FpCmpMode kind)
+        public static ReadOnlySpan<bool> fcmp(Span<double> a, Span<double> b, FpCmpMode kind)
         {
-            var len =  lhs.Length;
-            var result = sys.alloc<bool>(len);
-            for(var i = 0; i< len; i++)
-                result[i] = fmath.fcmp(lhs[i], rhs[i], kind);
-            return result;
+            var count =  root.min(a.Length,b.Length);
+            var dst = memory.span<bool>(count);
+            for(var i = 0; i< count; i++)
+                seek(dst,i) = fmath.fcmp(a[i], b[i], kind);
+            return dst;
         }
 
         [MethodImpl(Inline), Avg]
         public static sbyte avg(ReadOnlySpan<sbyte> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static byte avg(ReadOnlySpan<byte> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static short avg(ReadOnlySpan<short> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static ushort avg(ReadOnlySpan<ushort> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static int avg(ReadOnlySpan<int> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static uint avg(ReadOnlySpan<uint> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static long avg(ReadOnlySpan<long> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static ulong avg(ReadOnlySpan<ulong> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static sbyte avg(ReadOnlySpan<sbyte> src)
@@ -97,11 +97,11 @@ namespace Z0
 
         [MethodImpl(Inline), Avg]
         public static float avg(ReadOnlySpan<float> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static double avg(ReadOnlySpan<double> src, bool @checked)
-            => @checked? avg_checked(src) : avg_unchecked(src);
+            => @checked ? avg_checked(src) : avg_unchecked(src);
 
         [MethodImpl(Inline), Avg]
         public static float avg(ReadOnlySpan<float> src)
@@ -262,7 +262,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static ulong avg_checked(ReadOnlySpan<ulong> src)
             {checked{ return avg_unchecked(src);}}
-
 
         [MethodImpl(Inline), Op]
         static float avg_checked(ReadOnlySpan<float> src)

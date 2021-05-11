@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The operation uri
         /// </summary>
-        public OpUri Uri {get;}
+        public Name Uri {get;}
 
         /// <summary>
         /// The enExtractd operation data
@@ -27,7 +27,7 @@ namespace Z0
         public readonly BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public ApiExtractBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
+        public ApiExtractBlock(MemoryAddress @base, Name uri, BinaryCode src)
         {
             BaseAddress = @base;
             Uri = uri;
@@ -50,30 +50,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Encoded.View;
-        }
-
-        public OpIdentity OpId
-        {
-             [MethodImpl(Inline)]
-             get => Uri.OpId;
-        }
-
-        /// <summary>
-        /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparsed uri text
-        /// </summary>
-        public readonly string Identifier
-        {
-             [MethodImpl(Inline)]
-             get => Uri.UriText;
-        }
-
-        /// <summary>
-        /// The operation uri
-        /// </summary>
-        public readonly OpUri OpUri
-        {
-            [MethodImpl(Inline)]
-            get => Uri;
         }
 
         public byte[] Data
@@ -112,21 +88,13 @@ namespace Z0
             get => Encoded.IsNonEmpty;
         }
 
-        /// <summary>
-        /// The identifier of the defined operation
-        /// </summary>
-        public OpIdentity Id
-        {
-            [MethodImpl(Inline)]
-            get => Uri.OpId;
-        }
 
         [MethodImpl(Inline)]
         public bool Equals(ApiExtractBlock src)
             => Encoded.Equals(src.Encoded);
 
         public string Format(int uripad)
-            => text.concat(BaseAddress.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
+            => text.concat(BaseAddress.Format(), Space, Uri.Format().PadRight(uripad), Space, Encoded.Format());
 
         public string Format()
             => Format(60);

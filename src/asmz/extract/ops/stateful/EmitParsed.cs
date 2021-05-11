@@ -10,7 +10,7 @@ namespace Z0
 
     partial class ApiExtractor
     {
-        uint EmitParsedExtractData(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)
+        uint EmitParsed(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)
         {
             var count = (uint)src.Length;
             if(count == 0)
@@ -24,6 +24,5 @@ namespace Z0
             Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
             return count;
         }
-
     }
 }

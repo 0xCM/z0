@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -25,21 +26,40 @@ namespace Z0
             BaseAddress = @base;
         }
 
+        public Type HostType
+        {
+            [MethodImpl(Inline)]
+            get => IsEmpty ? typeof(void) : Methods.First.HostType;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Host == null;
+            get => Host.IsEmpty;
+        }
+
+        public Assembly Component
+        {
+            [MethodImpl(Inline)]
+            get => IsEmpty ? typeof(void).Assembly : HostType.Assembly;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Host != null && Methods.IsNonEmpty;
+            get => Host.IsNonEmpty && Methods.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
         public int CompareTo(ResolvedHost src)
             => BaseAddress.CompareTo(src.BaseAddress);
+
+        public string Format()
+            => IsEmpty ? "<empty>" : string.Format("{0}::{1}:{2}", BaseAddress.Format(), Component.Format(), HostType.Format());
+
+
+        public override string ToString()
+            => Format();
 
         public static ResolvedHost Empty
         {

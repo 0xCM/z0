@@ -10,15 +10,9 @@ namespace Z0
 
     using static Part;
 
-     partial struct Msg
-     {
-         public const string CaptureAddressMismatch = "The parsed address does not match the extration address";
-     }
-
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    [ApiComplete]
     public struct ApiCaptureBlock
     {
         public CodeBlock Raw;
@@ -31,7 +25,7 @@ namespace Z0
 
         public ExtractTermCode TermCode;
 
-        public OpMsil Msil;
+        public ApiMsil Msil;
 
         public CliSig CliSig;
 

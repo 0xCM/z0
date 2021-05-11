@@ -208,7 +208,7 @@ namespace Z0.Asm
         void CheckApiHexArchive()
         {
             var part = PartId.Math;
-            var component = Wf.ApiCatalog.FindComponent(part).Require();
+            Wf.ApiCatalog.FindComponent(part, out var component);
             var catalog = ApiQuery.partcat(component);
 
             void accept(in ApiCodeBlock block)
@@ -1153,6 +1153,11 @@ namespace Z0.Asm
 
         }
 
+        void CaptureSelf()
+        {
+            Wf.CaptureRunner().Capture(Assembly.GetExecutingAssembly().Id());
+        }
+
         void CaptureParts(params PartId[] parts)
         {
             var dst = Db.AppLogDir() + FS.folder("capture");
@@ -1172,7 +1177,6 @@ namespace Z0.Asm
                 var records = pipe.LoadMetadata(src);
                 pipe.EmitCode(records,dst);
             }
-
         }
 
         void ToBistring()
@@ -1253,7 +1257,6 @@ namespace Z0.Asm
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
             => Wf.ApiCatalogs().EmitApiClasses();
 
-
         void RunExtractor()
         {
             var wf = ApiExtractWorkflow.create(Wf);
@@ -1266,6 +1269,34 @@ namespace Z0.Asm
             // receivers.ExtractError += (source, e) => OnEvent(e);
             // var extractor = Wf.ApiExtracor();
             // extractor.Run(receivers);
+        }
+
+        ResolvedMethods ResolveParts(params PartId[] src)
+        {
+            var resolver = Wf.ApiResolver();
+            var dst = root.list<ResolvedMethod>();
+            var count = src.Length;
+            var view = @readonly(src);
+            for(var k=0; k<count; k++)
+            {
+                var id = skip(view,k);
+                if(Wf.ApiCatalog.FindPart(id, out var part))
+                {
+                    var resolved = resolver.ResolvePart(part);
+                    var hosts = resolved.Hosts.View;
+                    for(var i=0; i<hosts.Length; i++)
+                    {
+                        ref readonly var host = ref skip(hosts,i);
+                        var methods = host.Methods.View;
+                        for(var j=0; j<methods.Length; j++)
+                        {
+                            ref readonly var method = ref skip(methods,j);
+                            dst.Add(method);
+                        }
+                    }
+                }
+            }
+            return ResolvedMethods.create(dst.ViewDeposited());
         }
 
         void CheckAlloc()
@@ -1359,17 +1390,23 @@ namespace Z0.Asm
         //     return map;
         // }
 
-
         void EmitContextSummary()
         {
             var dst = Db.AppLog("context.regions", FS.Csv);
             Wf.ProcessContextPipe().EmitContextSummary(dst);
-
         }
 
         public void Run()
         {
-            RunExtractor();
+            //CaptureSelf();
+
+            var methods = ResolveParts(PartId.GMath, PartId.Cpu, PartId.Math);
+            var count = methods.Count;
+            for(var i=0u; i<count; i++)
+            {
+                var method = methods[i];
+                Wf.Row(method.Format());
+            }
         }
 
 

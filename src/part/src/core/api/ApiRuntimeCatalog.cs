@@ -17,12 +17,12 @@ namespace Z0
         /// <summary>
         /// The parts included in the datset
         /// </summary>
-        IPart[] _Parts;
+        Index<IPart> _Parts;
 
         /// <summary>
         /// The dataset part identities
         /// </summary>
-        PartId[] _PartIdentities;
+        Index<PartId> _PartIdentities;
 
         /// <summary>
         /// The part components included in the datset
@@ -37,12 +37,47 @@ namespace Z0
         /// <summary>
         /// The hosts provided by the dataset parts
         /// </summary>
-        IApiHost[] _ApiHosts;
+        Index<IApiHost> _ApiHosts;
 
         /// <summary>
         /// The operations provided by the datset hosts
         /// </summary>
-        MethodInfo[] _Operations;
+        Index<MethodInfo> _Operations;
+
+        public ApiRuntimeCatalog(Index<IPart> parts, Index<Assembly> components, ApiPartCatalogs catalogs, Index<IApiHost> hosts, Index<PartId> partIds, Index<MethodInfo> ops)
+        {
+            _Parts = parts;
+            _PartComponents = components;
+            _Catalogs = catalogs;
+            _ApiHosts = hosts;
+            _PartIdentities = partIds;
+            _Operations = ops;
+        }
+
+        public Index<IApiHost> FindHosts(ReadOnlySpan<ApiHostUri> src)
+        {
+            var dst = root.list<IApiHost>();
+            var search = _ApiHosts.View;
+            var kSrc = src.Length;
+            var kSearch = search.Length;
+            for(var i=0; i<kSrc; i++)
+            {
+                var match = skip(src,i);
+                if(match.IsEmpty)
+                    root.@throw("I can't deal with empty uri's");
+
+                for(var j=0; j<kSearch; j++)
+                {
+                    var candidate = skip(search,j);
+                    if(candidate.HostUri == match)
+                    {
+                        dst.Add(candidate);
+                        break;
+                    }
+                }
+            }
+            return dst.ToArray();
+        }
 
         public ReadOnlySpan<IPart> Parts
         {
@@ -74,61 +109,44 @@ namespace Z0
             get => _Operations;
         }
 
-        IPart[] IApiCatalog.Parts
-            => _Parts;
-
-        PartId[] IApiCatalog.PartIdentities
-            => _PartIdentities;
-
-        ApiPartCatalogs IApiCatalog.Catalogs
-            => _Catalogs;
-
-        IApiHost[] IApiCatalog.ApiHosts
-            => _ApiHosts;
-
-
-        public ApiRuntimeCatalog(Index<IPart> parts, Index<Assembly> components, ApiPartCatalogs catalogs, Index<IApiHost> hosts, Index<PartId> partIds, Index<MethodInfo> ops)
+        public bool FindPart(PartId id, out IPart dst)
         {
-            _Parts = parts;
-            _PartComponents = components;
-            _Catalogs = catalogs;
-            _ApiHosts = hosts;
-            _PartIdentities = partIds;
-            _Operations = ops;
-        }
-
-        public Index<IApiHost> FindHosts(ReadOnlySpan<ApiHostUri> src)
-        {
-            var dst = root.list<IApiHost>();
-            var search = _ApiHosts;
-            var kSrc = src.Length;
-            var kSearch = search.Length;
-            for(var i=0; i<kSrc; i++)
+            var count = _Parts.Length;
+            var src = _Parts.View;
+            dst = default;
+            for(var i=0; i<count; i++)
             {
-                var match = skip(src,i);
-                if(match.IsEmpty)
-                    root.@throw("I can't deal with empty uri's");
-
-                for(var j=0; j<kSearch; j++)
+                ref readonly var part = ref skip(src,i);
+                if(part.Id == id)
                 {
-                    var candidate = skip(search,j);
-                    if(candidate.HostUri == match)
-                    {
-                        dst.Add(candidate);
-                        break;
-                    }
+                    dst = part;
+                    return true;
                 }
             }
-            return dst.ToArray();
+            return false;
         }
 
-        public Option<Assembly> FindComponent(PartId id)
-            => _PartComponents.Where(c => c.Id() == id).FirstOrDefault();
+        public bool FindComponent(PartId id, out Assembly dst)
+        {
+            var src = _PartComponents.View;
+            var count = src.Length;
+            dst = default;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var component = ref skip(src,i);
+                if(component.Id() == id)
+                {
+                    dst = component;
+                    return true;
+                }
+            }
+            return false;
+        }
 
-        public Option<IApiHost> FindHost(ApiHostUri uri)
-            => root.option(_ApiHosts.Where(h => h.HostUri == uri).FirstOrDefault());
+        // public Option<IApiHost> FindHost(ApiHostUri uri)
+        //     => root.option(_ApiHosts.Where(h => h.HostUri == uri).FirstOrDefault());
 
-        bool FindHost(ApiHostUri uri, out IApiHost host)
+        public bool FindHost(ApiHostUri uri, out IApiHost host)
         {
             host = _ApiHosts.Where(h => h.HostUri == uri).FirstOrDefault();
             return host != null;
@@ -161,5 +179,18 @@ namespace Z0
                         where parts.Contains(h.PartId)
                         select h;
         }
+
+
+        IPart[] IApiCatalog.Parts
+            => _Parts;
+
+        PartId[] IApiCatalog.PartIdentities
+            => _PartIdentities;
+
+        ApiPartCatalogs IApiCatalog.Catalogs
+            => _Catalogs;
+
+        IApiHost[] IApiCatalog.ApiHosts
+            => _ApiHosts;
     }
 }

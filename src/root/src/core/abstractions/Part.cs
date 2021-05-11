@@ -29,12 +29,6 @@ namespace Z0
         public const string ResolutionProperty = "Resolved";
     }
 
-    public readonly struct PartResolution<P>
-        where P : Part<P>, IPart<P>, new()
-    {
-        public P Resolved => new P();
-    }
-
     public abstract class Part<P> : IPart<P>
         where P : Part<P>, IPart<P>, new()
     {

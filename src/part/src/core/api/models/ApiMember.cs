@@ -27,7 +27,7 @@ namespace Z0
 
         public ApiHostUri Host {get;}
 
-        public OpMsil Cil {get;}
+        public ApiMsil Msil {get;}
 
         public CliSig CliSig {get;}
 
@@ -41,7 +41,7 @@ namespace Z0
             Method = root.require(method != null, method, () => "Unfortunately, the method is null");
             BaseAddress = address;
             Host = OpUri.Host;
-            Cil = ClrDynamic.msil(BaseAddress, uri, method);
+            Msil = ClrDynamic.msil(BaseAddress, uri, method);
             CliSig = address.IsNonZero ? method.ResolveSignature() : CliSig.Empty;
             Metadata = method.Artifact();
         }

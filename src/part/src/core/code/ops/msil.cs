@@ -17,7 +17,7 @@ namespace Z0
             => new MsilSourceBlock(id, sig, encoded);
 
         [MethodImpl(Inline), Op]
-        public static MsilSourceBlock msil(in OpMsil src, MethodImplAttributes attributes = default)
-            => msil(src.Token, src.CliSig, src.MsilCode, attributes);
+        public static MsilSourceBlock msil(in ApiMsil src, MethodImplAttributes attributes = default)
+            => msil(src.Token, src.CliSig, src.Code, attributes);
     }
 }

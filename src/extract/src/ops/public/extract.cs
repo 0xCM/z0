@@ -13,7 +13,7 @@ namespace Z0
     partial struct ApiExtracts
     {
         [Op]
-        public static unsafe ApiMemberExtract[] extract(ReadOnlySpan<ApiMember> src, Span<byte> buffer)
+        public static unsafe Index<ApiMemberExtract> extract(ReadOnlySpan<ApiMember> src, Span<byte> buffer)
         {
             var count = src.Length;
             var dst = memory.alloc<ApiMemberExtract>(count);
@@ -24,19 +24,19 @@ namespace Z0
         }
 
         [Op]
-        public static unsafe ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
+        public static unsafe ApiMemberExtract extract(ApiMember src, Span<byte> buffer)
         {
             var address = src.BaseAddress;
             var length = extract(address, buffer);
-            var extracted = sys.array(buffer.Slice(0,length));
-            return new ApiMemberExtract(src, new ApiExtractBlock(address, src.OpUri, extracted));
+            var extracted = sys.array(slice(buffer,0,length));
+            return new ApiMemberExtract(src, new ApiExtractBlock(address, src.OpUri.Format(), extracted));
         }
 
         [Op]
         public static unsafe ApiMemberExtract extract(in ResolvedMethod src, Span<byte> buffer)
         {
             var size = extract(src.Address, buffer);
-            var block = new ApiExtractBlock(src.Address, src.Uri, slice(buffer,0, size).ToArray());
+            var block = new ApiExtractBlock(src.Address, src.Uri.Format(), slice(buffer,0, size).ToArray());
             return new ApiMemberExtract(src.ToApiMember(), block);
         }
     }

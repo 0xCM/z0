@@ -12,7 +12,7 @@ namespace Z0
 
     public class ApiMemberExtract : IComparable<ApiMemberExtract>
     {
-        public ApiExtractBlock Block {get;}
+        public ApiExtractBlock Block {get; private set;}
 
         public OpUri OpUri {get;}
 
@@ -24,6 +24,12 @@ namespace Z0
             OpUri = member.OpUri;
             Member = member;
             Block = block;
+        }
+
+        public ApiMemberExtract WithBlock(ApiExtractBlock block)
+        {
+            Block = block;
+            return this;
         }
 
         public bool IsEmpty

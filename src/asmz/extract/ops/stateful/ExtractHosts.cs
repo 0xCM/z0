@@ -6,20 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
 
     partial class ApiExtractor
     {
-        // public uint ExtractHosts(ReadOnlySpan<ResolvedHost> src, List<ApiMemberExtract> dst)
-        // {
-        //     var counter = 0u;
-        //     var count = src.Length;
-        //     for(var i=0; i<count; i++)
-        //         counter += ExtractHost(skip(src,i), dst);
-        //     return counter;
-        // }
+        public uint ExtractHosts(ReadOnlySpan<ResolvedHost> src, List<ApiMemberExtract> dst)
+        {
+            var counter = 0u;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                counter += ExtractHost(skip(src,i), dst);
+            return counter;
+        }
 
         uint ExtractHosts(ApiHosts src)
         {

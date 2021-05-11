@@ -6,11 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
 
     partial class XApi
     {
+        public static string Format(this Type src)
+            => src.Name.Replace("`1", EmptyString).Replace("`2", EmptyString);
+
+        public static string Format(this MethodInfo src)
+            => src.ToString().Replace("`1", EmptyString).Replace("`2", EmptyString);
+
+        public static string Format(this Assembly src)
+            => src.GetSimpleName();
+
        [Op]
        public static string Format(this ApiUriScheme src)
             => src.ToString().ToLower();
@@ -61,5 +71,8 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string Format<T>(this ApiBitLogicClass key, T a, T b)
             => string.Format("{0}({1}, {2})", key.Format(), a, b);
+
+
+
     }
 }

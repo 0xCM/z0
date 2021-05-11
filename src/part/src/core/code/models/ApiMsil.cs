@@ -10,14 +10,14 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct OpMsil
+    public class ApiMsil
     {
         public CliToken Token {get;}
 
         /// <summary>
         /// The operation identity
         /// </summary>
-        public OpUri Uri {get;}
+        public Name Uri {get;}
 
         /// <summary>
         /// The code's base address
@@ -32,7 +32,7 @@ namespace Z0
         /// <summary>
         /// The encoded cil
         /// </summary>
-        public BinaryCode MsilCode {get;}
+        public BinaryCode Code {get;}
 
         /// <summary>
         /// The method implementation attributes
@@ -40,14 +40,14 @@ namespace Z0
         public MethodImplAttributes ImplSpec {get;}
 
         [MethodImpl(Inline)]
-        public OpMsil(CliToken id, MemoryAddress @base, OpUri uri, CliSig sig, BinaryCode data, MethodImplAttributes impl)
+        public ApiMsil(CliToken token, MemoryAddress @base, OpUri uri, CliSig sig, BinaryCode data, MethodImplAttributes impl)
         {
-            Token = id;
+            Token = token;
             BaseAddress = @base;
-            Uri = uri;
-            MsilCode = data;
+            Uri = uri.Format();
+            Code = data;
             CliSig = sig;
-            MsilCode = data;
+            Code = data;
             ImplSpec = impl;
         }
     }

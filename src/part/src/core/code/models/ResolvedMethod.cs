@@ -34,11 +34,36 @@ namespace Z0
             Address = address;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Method is null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
+        public Assembly Component
+        {
+            [MethodImpl(Inline)]
+            get => HostType.Assembly;
+        }
+
+        public Type HostType
+        {
+            [MethodImpl(Inline)]
+            get => Method.DeclaringType;
+        }
+
         public ApiMember ToApiMember()
             => new ApiMember(Uri, Method, Address);
 
         public string Format()
-            => Uri.UriText;
+            => IsEmpty ? "<empty>" : string.Format("{0}::{1}:{2}:{3}", Address.Format(), Component.Format(), HostType.Format(), Method.Format());
+
 
         public override string ToString()
             => Format();

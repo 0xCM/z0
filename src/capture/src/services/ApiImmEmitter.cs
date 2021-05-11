@@ -51,12 +51,11 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var uri = ref skip(hosts,i);
-                var host = Wf.ApiCatalog.FindHost(uri);
-                if(host)
+                if(Wf.ApiCatalog.FindHost(uri, out var host))
                 {
                     var dst = Archive(uri);
-                    EmitDirectRefinements(exchange, host.Value, dst);
-                    EmitGenericRefinements(exchange, host.Value, dst);
+                    EmitDirectRefinements(exchange, host, dst);
+                    EmitGenericRefinements(exchange, host, dst);
                 }
             }
         }

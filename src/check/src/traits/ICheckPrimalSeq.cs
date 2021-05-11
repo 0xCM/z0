@@ -29,7 +29,7 @@ namespace Z0
         bool TestEq(ReadOnlySpan<ulong> a, ReadOnlySpan<ulong> b)
             => api.TestEq(a,b);
 
-        void eq(bool[] a, bool[] b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        void eq(ReadOnlySpan<bool> a, ReadOnlySpan<bool> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.eq(a, b, caller, file, line);
 
         void eq(ReadOnlySpan<char> a, ReadOnlySpan<char> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

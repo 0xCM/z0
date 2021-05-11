@@ -14,7 +14,7 @@ namespace Z0
         MemoryAddress BaseAddress
             => MemoryAddress.Zero;
 
-        OpMsil Cil {get;}
+        ApiMsil Msil {get;}
 
         CliSig CliSig {get;}
 

@@ -153,12 +153,13 @@ namespace Z0
                 var kHost = hosts.Length;
                 for(var j=0; j<kHost; j++)
                 {
-                    ref readonly var host = ref skip(hosts,j);
-                    var hexpath = Db.ParsedExtractPath(host.HostUri);
+                    ref readonly var srcHost = ref skip(hosts,j);
+                    var hexpath = Db.ParsedExtractPath(srcHost.HostUri);
                     if(hexpath.Exists)
                     {
                         var blocks = hex.ReadBlocks(hexpath);
-                        var catalog = HostCatalog(Wf.ApiCatalog.FindHost(host.HostUri).Require());
+                        root.require(Wf.ApiCatalog.FindHost(srcHost.HostUri, out var host));
+                        var catalog = HostCatalog(host);
                         Correlate(catalog, blocks, dst, records);
                     }
                 }

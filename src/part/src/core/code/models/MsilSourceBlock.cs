@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The source method token
         /// </summary>
-        public CliToken Id {get;}
+        public CliToken Token {get;}
 
         /// <summary>
         /// The source method signature
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public MsilSourceBlock(CliToken id, CliSig sig, BinaryCode encoded, MethodImplAttributes attributes = default)
         {
-            Id = id;
+            Token = id;
             Sig = sig;
             Encoded = encoded;
             Attributes = attributes;
@@ -50,19 +50,19 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Id.IsEmpty && Sig.IsEmpty && Encoded.IsEmpty;
+            get => Token.IsEmpty && Sig.IsEmpty && Encoded.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Id.IsNonEmpty || Sig.IsNonEmpty || Encoded.IsNonEmpty;
+            get => Token.IsNonEmpty || Sig.IsNonEmpty || Encoded.IsNonEmpty;
         }
 
         public bool Complete
         {
             [MethodImpl(Inline)]
-            get => Id.IsNonEmpty && Sig.IsNonEmpty && Encoded.IsNonEmpty;
+            get => Token.IsNonEmpty && Sig.IsNonEmpty && Encoded.IsNonEmpty;
         }
 
         public static MsilSourceBlock Empty

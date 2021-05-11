@@ -8,7 +8,7 @@ namespace Z0
 
     partial class ApiExtractor
     {
-        uint EmitRawExtractData(ApiHostUri host, ReadOnlySpan<ApiMemberExtract> src)
+        uint EmitRaw(ApiHostUri host, ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = (uint)src.Length;
             if(count == 0)

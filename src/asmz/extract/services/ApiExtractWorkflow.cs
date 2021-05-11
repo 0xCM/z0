@@ -13,7 +13,7 @@ namespace Z0
 
         int HostResolvedCount;
 
-        ApiExtractReceivers Receivers;
+        ApiExtractReceipt Receivers;
 
         public ApiExtractWorkflow()
         {

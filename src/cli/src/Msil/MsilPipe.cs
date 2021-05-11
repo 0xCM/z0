@@ -131,9 +131,9 @@ namespace Z0
                 {
                     ref readonly var code = ref skip(view,i);
                     var member = code.Member;
-                    var cil = member.Cil;
+                    var cil = member.Msil;
                     var sig = code.CliSig.Data;
-                    var bytes = cil.MsilCode;
+                    var bytes = cil.Code;
                     writer.WriteLine(CilPageBreak);
                     writer.WriteLine(string.Format(CilCodeHeader, member.Token, member.BaseAddress, member.OpUri));
                     writer.WriteLine(string.Format(CilSigHeader, sig.Length, sig.Format()));
@@ -151,9 +151,9 @@ namespace Z0
             }
         }
 
-        public void RenderCode(OpMsil src, ITextBuffer dst)
+        public void RenderCode(ApiMsil src, ITextBuffer dst)
         {
-            var bytes = src.MsilCode;
+            var bytes = src.Code;
             var sig = src.CliSig.Data;
             dst.AppendLine(CilPageBreak);
             dst.AppendLine(string.Format(CilCodeHeader, src.Token, src.BaseAddress, src.Uri));
@@ -189,11 +189,11 @@ namespace Z0
 
         static ref MsilCapture fill(in ApiMember src, ref MsilCapture dst)
         {
-            var cil = src.Cil;
+            var cil = src.Msil;
             dst.BaseAddress = cil.BaseAddress;
             dst.Token = src.Token;
             dst.Uri = src.OpUri;
-            dst.Encoded = cil.MsilCode;
+            dst.Encoded = cil.Code;
             return ref dst;
         }
 

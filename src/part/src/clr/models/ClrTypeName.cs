@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = ClrPrimitives;
-
     /// <summary>
     /// Defines a runtime type name
     /// </summary>
@@ -22,32 +20,14 @@ namespace Z0
         public ClrTypeName(Type src)
             => Source = src;
 
-        [MethodImpl(Inline), Ignore]
+        [MethodImpl(Inline)]
         public string Format()
             => Source.Name;
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => api.hash(this);
-        }
-
-        public Count Count
-        {
-            [MethodImpl(Inline)]
-            get => Source.Name.Length;
-        }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Source.Name.Length;
-        }
-
-        public ByteSize Size
-        {
-            [MethodImpl(Inline)]
-            get => Length * sizeof(char);
+            get => alg.hash.calc(FullName);
         }
 
         public Name ShortName

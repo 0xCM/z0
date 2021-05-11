@@ -59,7 +59,7 @@ namespace Z0
                 var address = HexParsers.scalar().Parse(parts[(byte)ApiExtractField.Base]).ValueOrDefault();
                 var uri = ApiUri.parse(parts[(byte)ApiExtractField.Uri].Trim()).ValueOrDefault();
                 var bytes = parts[(byte)ApiExtractField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
-                dst = new ApiExtractBlock(address, uri, bytes);
+                dst = new ApiExtractBlock(address, uri.Format(), bytes);
                 return true;
             }
             catch(Exception e)

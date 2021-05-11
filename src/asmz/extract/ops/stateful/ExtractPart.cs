@@ -32,30 +32,21 @@ namespace Z0
             return counter;
         }
 
-        // uint ExtractPart(IPart src, List<ApiMemberExtract> dst)
-        // {
-        //     var counter = 0u;
-        //     var buffer = root.list<ApiMember>();
-        //     var catalog = ApiQuery.partcat(src);
-        //     var types = catalog.ApiTypes;
-        //     var hosts = catalog.ApiHosts;
+        uint ExtractPart(IPart src, List<ApiMemberExtract> dst)
+        {
+            var counter = 0u;
+            var buffer = root.list<ApiMember>();
+            var catalog = ApiQuery.partcat(src);
+            var types = catalog.ApiTypes;
+            var hosts = catalog.ApiHosts;
 
-        //     foreach(var type in types)
-        //         counter += ExtractType(type, dst);
+            foreach(var type in types)
+                counter += ExtractType(type, dst);
 
-        //     foreach(var host in hosts)
-        //         counter  += ExtractHost(host, dst);
+            foreach(var host in hosts)
+                counter  += ExtractHost(host, dst);
 
-        //     return counter;
-        // }
-
-
-        // public Index<ApiMemberExtract> ExtractResolvedPart(in ResolvedPart src)
-        // {
-        //     var dst = root.list<ApiMemberExtract>();
-        //     ExtractHosts(src.Hosts, dst);
-        //     return dst.ToArray();
-        // }
-
+            return counter;
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    [Record(TableId)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ApiRuntimeMember : IRecord<ApiRuntimeMember>
     {
         public const string TableId ="api.member";
@@ -17,6 +17,6 @@ namespace Z0
 
         public MethodDisplaySig DisplaySig;
 
-        public OpMsil Msil;
+        public ApiMsil Msil;
     }
 }
