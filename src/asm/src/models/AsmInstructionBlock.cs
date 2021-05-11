@@ -26,10 +26,10 @@ namespace Z0.Asm
         internal AsmInstructionBlock(OpUri uri, IceInstruction[] src, BinaryCode code)
         {
             _Instructions = src;
-            Code = new ApiCodeBlock(src[0].IP, uri, code);// new CodeBlock(src[0].IP, code), uri);
+            Code = new ApiCodeBlock(src[0].IP, uri, code);
         }
 
-        public OpUri Uri  => Code.OpUri;
+        public OpUri Uri => Code.OpUri;
 
         public ReadOnlySpan<IceInstruction> Instructions
         {

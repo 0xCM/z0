@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public struct IceInstruction //: IAsmFxInfo
+    public class IceInstruction //: IAsmFxInfo
     {
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
