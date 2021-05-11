@@ -48,7 +48,8 @@ namespace Z0
         internal ApiKey(Vector128<byte> src)
             => Storage = src;
 
-        public DataWidth Width => DataWidth.W128;
+        public DataWidth Width
+            => DataWidth.W128;
 
         public ReadOnlySpan<byte> Data
         {
@@ -62,35 +63,35 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N0 n)
-            => api.part(this, 0);
+            => api.part(this, n);
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N1 n)
-            => api.part(this, 1);
+            => api.part(this, n);
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N2 n)
-            => api.part(this, 2);
+            => api.part(this, n);
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N3 n)
-            => api.part(this, 3);
+            => api.part(this, n);
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N4 n)
-            => api.part(this, 4);
+            => api.part(this, n);
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N5 n)
-            => api.part(this, 5);
+            => api.part(this, n);
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N6 n)
-            => api.part(this, 6);
+            => api.part(this, n);
 
         [MethodImpl(Inline)]
         public ApiKeyPart Part(N7 n)
-            => api.part(this, 7);
+            => api.part(this, n);
 
         [MethodImpl(Inline)]
         public ApiKey Part(N0 n, ApiKeyPart value)

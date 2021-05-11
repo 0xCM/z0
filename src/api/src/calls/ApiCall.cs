@@ -9,21 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    public ref struct ApiCallData
-    {
-        public ApiKey Api {get;}
-
-        public ReadOnlySpan<byte> Bytes {get;}
-
-        [MethodImpl(Inline)]
-        internal ApiCallData(ApiKey api, ReadOnlySpan<byte> src)
-        {
-            Bytes = src;
-            Api = api;
-        }
-    }
+    using api =  ApiCalls;
 
     /// <summary>
     /// Rpresents an action invocation
@@ -32,6 +19,10 @@ namespace Z0
     public struct ApiCall : IApiCall<ApiCall>
     {
         public ApiKey Api {get; internal set;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiCallData(ApiCall src)
+            => api.serialize(src);
     }
 
     /// <summary>
@@ -44,6 +35,10 @@ namespace Z0
         public ApiKey Api {get; internal set;}
 
         public R Result {get; internal set;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiCallData(ApiCall<R> src)
+            => api.serialize(src);
     }
 
     /// <summary>
@@ -59,6 +54,10 @@ namespace Z0
         public A0 Arg0;
 
         public R Result {get; internal set;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiCallData(ApiCall<A0,R> src)
+            => api.serialize(src);
     }
 
     /// <summary>
@@ -77,6 +76,10 @@ namespace Z0
         public A1 Arg1;
 
         public R Result {get; internal set;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiCallData(ApiCall<A0,A1,R> src)
+            => api.serialize(src);
     }
 
     /// <summary>
@@ -98,5 +101,34 @@ namespace Z0
         public A2 Arg2;
 
         public R Result {get; internal set;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiCallData(ApiCall<A0,A1,A2,R> src)
+            => api.serialize(src);
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ApiCall<A0,A1,A2,A3,R> : IApiCall<ApiCall<A0,A1,A2,A3,R>,R>
+        where A0 : unmanaged
+        where A1 : unmanaged
+        where A2 : unmanaged
+        where A3 : unmanaged
+        where R : unmanaged
+    {
+        public ApiKey Api {get; internal set;}
+
+        public A0 Arg0;
+
+        public A1 Arg1;
+
+        public A2 Arg2;
+
+        public A3 Arg3;
+
+        public R Result {get; internal set;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiCallData(ApiCall<A0,A1,A2,A3,R> src)
+            => api.serialize(src);
     }
 }
