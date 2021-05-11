@@ -2,11 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-
-    using Z0.Asm;
 
     partial class ApiExtractor
     {

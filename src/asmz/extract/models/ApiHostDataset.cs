@@ -4,7 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.CompilerServices;
+
     using Z0.Asm;
+
+    using static Part;
 
     public struct ApiHostDataset
     {
@@ -16,16 +20,32 @@ namespace Z0
 
         public Index<AsmRoutine> Routines;
 
+        public uint HostBlockCount
+        {
+            [MethodImpl(Inline)]
+            get=> HostBlocks.Count;
+        }
+
         public ApiHostUri Host
-            => HostResolution.Host;
+        {
+            [MethodImpl(Inline)]
+            get => HostResolution.Host;
+        }
 
         public Index<ResolvedMethod> ResolvedMethods
-            => HostResolution.Methods;
+        {
+            [MethodImpl(Inline)]
+            get => HostResolution.Methods;
+        }
 
         public Index<ApiMember> Members
-            => HostExtracts.Storage.Select(x => x.Member);
+        {
+            get => HostExtracts.Storage.Select(x => x.Member);
+        }
 
         public Index<ApiInstruction> Instructions
-            => Routines.SelectMany(x => x.Instructions);
+        {
+            get => Routines.SelectMany(x => x.Instructions);
+        }
     }
 }

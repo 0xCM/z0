@@ -1254,13 +1254,43 @@ namespace Z0.Asm
             => Wf.ApiCatalogs().EmitApiClasses();
 
 
+        void OnEvent(PartResolvedEvent e)
+        {
+
+        }
+
+        void OnEvent(HostResolvedEvent e)
+        {
+
+        }
+
+        void OnEvent(MemberParsedEvent e)
+        {
+
+        }
+
+        void OnEvent(MemberDecodedEvent e)
+        {
+
+        }
+
+        void OnEvent(ExtractErrorEvent e)
+        {
+
+        }
+
         void RunExtractor()
         {
-            var receivers = new ApiExtractReceivers();
-            receivers.HostResolved += (source, e) => {};
-            receivers.MemberParsed += (source, e) => {};
-            var extractor = ApiExtractor.create(Wf);
-            extractor.Run(receivers);
+            var wf = ApiExtractWorkflow.create(Wf);
+            wf.Run();
+            // var receivers = new ApiExtractReceivers();
+            // receivers.PartResolved += (source, e) => OnEvent(e);
+            // receivers.HostResolved += (source, e) => OnEvent(e);
+            // receivers.MemberParsed += (source, e) => OnEvent(e);
+            // receivers.MemberDecoded += (source, e) => OnEvent(e);
+            // receivers.ExtractError += (source, e) => OnEvent(e);
+            // var extractor = Wf.ApiExtracor();
+            // extractor.Run(receivers);
         }
 
         void CheckAlloc()

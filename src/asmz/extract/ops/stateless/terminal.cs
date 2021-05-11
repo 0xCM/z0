@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -13,91 +13,80 @@ namespace Z0.Asm
 
     partial class ApiExtractor
     {
-        [Op]
-        public static MemoryBlock block(in ApiMemberCode src, ExtractTermInfo term)
+        public static unsafe ApiMemberExtract trim(in ApiMemberExtract src)
         {
-            if(term.IsEmpty)
-                return MemoryBlock.Empty;
-
-            var kind = term.Kind;
-            var size = ByteSize.Zero;
-            var modifier = skip(TermModifiers,(byte)kind);
-            if(kind == ExtractTermKind.Term5A)
-                size = term.Offset + modifier;
+            var block = src.Block;
+            var term = terminal(block);
+            if(term.IsNonEmpty)
+            {
+                var length = term.Offset + term.Modifier;
+                var data = slice(block.View, 0, length).ToArray();
+                block = new ApiExtractBlock(src.BaseAddress, src.OpUri, data);
+                return new ApiMemberExtract(src.Member, block);
+            }
             else
-                size = term.Offset;
+                return src;
 
-            var origin = new MemoryRange(src.Address, size);
-            var data = slice(src.Encoded.View,0, size);
-            return memory.memblock(origin, data.ToArray());
         }
 
         [Op]
-        public static ExtractTermInfo terminal(in ApiMemberCode src)
+        public static ExtractTermInfo terminal(in BinaryCode src)
         {
             const byte MaxSeg = 6;
 
-            var data = src.Encoded.View;
+            var data = src.View;
             var size = data.Length;
             var found = NotFound;
             var max = size + MaxSeg - 1;
             var kind = ExtractTermKind.None;
+            var modifier = z8i;
             for(var offset=0; offset<max; offset++)
             {
                 if(slice(data, offset, 3).SequenceEqual(Term3A))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term3A;
+                    modifier = Term3AModifier;
                     break;
                 }
                 else if(slice(data, offset, 6).SequenceEqual(Term6A))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term6A;
+                    modifier = Term6AModifier;
                     break;
                 }
                 else if(slice(data, offset, 5).SequenceEqual(Term5A))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term5A;
+                    modifier = Term5AModifier;
                     break;
                 }
                 else if(slice(data, offset, 4).SequenceEqual(Term4A))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term4A;
+                    modifier = Term4AModifier;
                     break;
                 }
                 else if(slice(data, offset, 3).SequenceEqual(Term3B))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term3B;
+                    modifier = Term3BModifier;
                     break;
                 }
                 else if(slice(data, offset, 4).SequenceEqual(Term4B))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term4B;
+                    modifier = Term4BModifier;
                     break;
                 }
             }
 
-            return new ExtractTermInfo(kind, found);
-        }
-
-        [Op]
-        public static uint terminals(ReadOnlySpan<ApiMemberCode> src, Span<MemoryBlock> dst)
-        {
-            var count = src.Length;
-            var j = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var extract = ref skip(src,i);
-                var term = terminal(extract);
-                if(term.IsNonEmpty)
-                    seek(dst, j++) = block(extract, term);
-            }
-            return j;
+            return new ExtractTermInfo(kind, found, modifier);
         }
     }
 }

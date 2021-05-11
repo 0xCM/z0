@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Reflection;
@@ -10,6 +10,8 @@ namespace Z0.Asm
     using System.Diagnostics;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+
+    using Z0.Asm;
 
     using static Part;
     using static memory;
@@ -110,13 +112,5 @@ namespace Z0.Asm
             var members = ApiMembers.create(HostDatasets.ToArray().SelectMany(x => x.Members));
             EmitRebase(members,ts);
         }
-
-
-        [MethodImpl(Inline)]
-        static ResolvedMethod resolve(MethodInfo method, OpUri uri, MemoryAddress address)
-            => new ResolvedMethod(method, uri, address);
-
-        OpUri MemberUri(ApiHostUri host, MethodInfo method)
-            => ApiUri.define(ApiUriScheme.Located, host, method.Name, Identity.Identify(method));
     }
 }

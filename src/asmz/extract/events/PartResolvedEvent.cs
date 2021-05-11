@@ -11,7 +11,6 @@ namespace Z0
 
     public sealed class PartResolvedEvent : ApiExtractEvent<PartResolvedEvent,ResolvedPart>
     {
-
         [MethodImpl(Inline)]
         public PartResolvedEvent()
         {

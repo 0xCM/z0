@@ -2,27 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Concurrent;
-    using System.Diagnostics;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
     using static memory;
-    using static ApiExtracts;
 
     partial class ApiExtractor
     {
-        public uint ExtractHosts(ReadOnlySpan<ResolvedHost> src, List<ApiMemberExtract> dst)
+        uint ExtractCatalogs(ReadOnlySpan<IApiPartCatalog> src)
         {
             var counter = 0u;
             var count = src.Length;
+            var dst = root.list<ApiHostDataset>();
             for(var i=0; i<count; i++)
-                counter += ExtractHost(skip(src,i), dst);
+            {
+                counter += ExtractCatalog(skip(src,i));
+            }
             return counter;
         }
     }

@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
 
     using Z0.Asm;
 
     using static memory;
-
 
     partial class ApiExtractor
     {
@@ -25,6 +24,11 @@ namespace Z0.Asm
                 if(decoded)
                 {
                     seek(dst,i) = decoded.Value;
+                    Receivers.Raise(new MemberDecodedEvent(member, decoded.Value));
+                }
+                else
+                {
+
                 }
             }
             return buffer;

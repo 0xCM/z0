@@ -2,11 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-
-    using Z0.Asm;
 
     using static memory;
 
@@ -26,5 +24,6 @@ namespace Z0.Asm
             Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
             return count;
         }
+
     }
 }

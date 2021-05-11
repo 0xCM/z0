@@ -42,13 +42,13 @@ namespace Z0
         // 00 00 00 00 00
         internal static ReadOnlySpan<byte> Term5A => new byte[5]{0, 0, 0, 0, 0};
 
-        internal const sbyte Term5Modifier = -5;
+        internal const sbyte Term5AModifier = -5;
 
         //19 00 00 00 40 00
         internal static ReadOnlySpan<byte> Term6A => new byte[6]{SBB, 0, 0, 0, 0x40, 0};
 
         internal const sbyte Term6AModifier = -6;
 
-        internal static ReadOnlySpan<sbyte> TermModifiers => new sbyte[6]{Term3AModifier,Term3BModifier,Term4AModifier, Term4BModifier,Term5Modifier,Term6AModifier};
+        internal static ReadOnlySpan<sbyte> TermModifiers => new sbyte[6]{Term3AModifier,Term3BModifier,Term4AModifier, Term4BModifier,Term5AModifier,Term6AModifier};
     }
 }

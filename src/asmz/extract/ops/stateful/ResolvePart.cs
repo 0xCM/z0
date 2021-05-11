@@ -6,9 +6,15 @@ namespace Z0
 {
     using System;
 
-    public static partial class XSvc
+    using static memory;
+
+    partial class ApiExtractor
     {
-        public static ApiExtractor ApiExtracor(this IWfRuntime wf)
-            => Z0.ApiExtractor.create(wf);
+        ResolvedPart ResolvePart(IPart src)
+        {
+            var resolved = Resolver.ResolvePart(src);
+            Receivers.Raise(new PartResolvedEvent(resolved));
+            return resolved;
+        }
     }
 }

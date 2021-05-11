@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
 
@@ -24,12 +24,12 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var routine = ref skip(src,i);
-                if(routine.IsNonEmpty)
-                {
-                    var formatted = Formatter.Format(routine);
-                    writer.Write(formatted);
-                    counter++;
-                }
+                if(routine is null || routine.IsEmpty)
+                    continue;
+
+                var formatted = Formatter.Format(routine);
+                writer.Write(formatted);
+                counter++;
             }
             Wf.EmittedFile(flow, counter);
 

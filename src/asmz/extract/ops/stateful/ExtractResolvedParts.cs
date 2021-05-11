@@ -5,10 +5,12 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public static partial class XSvc
+    using static Part;
+    using static memory;
+
+    partial class ApiExtractor
     {
-        public static ApiExtractor ApiExtracor(this IWfRuntime wf)
-            => Z0.ApiExtractor.create(wf);
     }
 }
