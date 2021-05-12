@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-
-    using static Part;
 
     using Z0.Asm;
+
+    using static Part;
+    using static Msg;
 
     [ApiHost]
     public readonly struct Capture
@@ -24,11 +24,11 @@ namespace Z0
             var identities = parts.RuntimeCatalog.PartIdentities;
             using var wf = WfRuntime.create(parts, args);
             var runner = wf.CaptureRunner();
-            var running = wf.Running(Msg.CapturingRoutines.Format(dir));
+            var running = wf.Running(CapturingRoutines.Format(dir));
             var routines = args.Length != 0 ? runner.Capture(identities, CaptureWorkflowOptions.EmitImm) : runner.Capture(identities);
             var total = 0u;
             root.iter(routines, r => total += r.Count);
-            wf.Ran(running, Msg.CapturedRoutines.Format(total,routines.Length));
+            wf.Ran(running, CapturedRoutines.Format(total,routines.Length));
             return routines;
         }
 
@@ -43,12 +43,5 @@ namespace Z0
         [MethodImpl(Inline),Op]
         public static CaptureExchange exchange(byte[] buffer)
             => new CaptureExchange(buffer);
-    }
-
-    partial struct Msg
-    {
-        public static MsgPattern<FS.FolderPath> CapturingRoutines => "Capturing routines from {0}";
-
-        public static MsgPattern<Count,Count> CapturedRoutines => "Captured {0} routines from {1} hosts";
     }
 }

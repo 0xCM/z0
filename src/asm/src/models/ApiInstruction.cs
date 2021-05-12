@@ -52,10 +52,10 @@ namespace Z0.Asm
             Encoded = encoded;
         }
 
-        public byte ByteLength
+        public byte InstructionSize
         {
             [MethodImpl(Inline)]
-            get => (byte)Instruction.ByteLength;
+            get => (byte)Instruction.InstructionSize;
         }
 
         public OpIdentity OpId

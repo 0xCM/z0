@@ -26,7 +26,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="fmt">The format configuration</param>
-        public string Format(AsmRoutine src)
+        public AsmRoutineFormat Format(AsmRoutine src)
             => AsmFormatter.format(src, Config);
 
         public void Render(in AsmRoutine src, ITextBuffer dst)

@@ -120,22 +120,22 @@ namespace Z0.Asm
             return dst;
         }
 
-        public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
+        public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath dst)
         {
             var count = src.Length;
-            var dst = span<AsmRoutineCode>(count);
-            using var writer = target.Writer();
+            var buffer = span<AsmRoutineCode>(count);
+            using var writer = dst.Writer();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var captured = ref skip(src,i);
                 if(Decode(captured, out var routine))
                 {
-                    var asm = Formatter.Format(routine);
-                    seek(dst,i) = new AsmRoutineCode(routine,captured, asm);
+                    var asm = Formatter.Format(routine).Rendered;
+                    seek(buffer,i) = new AsmRoutineCode(routine,captured, asm);
                     writer.Write(asm);
                 }
             }
-            return dst;
+            return buffer;
         }
 
         public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
@@ -145,7 +145,7 @@ namespace Z0.Asm
             {
                 ref readonly var captured = ref skip(src,i);
                 if(Decode(captured, out var routine))
-                    seek(dst,i) = new AsmRoutineCode(routine, captured, Formatter.Format(routine));
+                    seek(dst,i) = new AsmRoutineCode(routine, captured, Formatter.Format(routine).Rendered);
             }
         }
 
@@ -225,7 +225,8 @@ namespace Z0.Asm
 
             var count = decoded.Count;
             var formatter = iformatter(AsmFormat);
-            var instructions = alloc<Asm.IceInstruction>(count);
+            var buffer = alloc<Asm.IceInstruction>(count);
+            ref var dst = ref first(buffer);
             var formatted = formatter.FormatInstructions(decoded, @base);
             var position = 0u;
             for(var i=0; i<count; i++)
@@ -233,10 +234,10 @@ namespace Z0.Asm
                 ref readonly var instruction = ref decoded[i];
                 var size = (uint)instruction.ByteLength;
                 var encoded = slice(code.View, position, size).ToArray();
-                instructions[i] = IceExtractors.extract(instruction, formatted[i], encoded);
+                seek(dst, i) = IceExtractors.extract(instruction, skip(formatted,i), encoded);
                 position += size;
             }
-            return instructions;
+            return buffer;
         }
 
         public Outcome Decode(ApiCodeBlock src, Action<IceInstruction> f, out IceInstructionList dst)
@@ -251,9 +252,9 @@ namespace Z0.Asm
             return outcome;
         }
 
-        Outcome Decode(OpUri uri, CodeBlock src, Action<Asm.IceInstruction> f, out IceInstructionList target)
+        Outcome Decode(OpUri uri, CodeBlock src, Action<Asm.IceInstruction> f, out IceInstructionList dst)
         {
-            target = IceInstructionList.Empty;
+            dst = IceInstructionList.Empty;
             try
             {
                 var decoded = new Iced.InstructionList();
@@ -262,7 +263,7 @@ namespace Z0.Asm
                 var decoder = Iced.Decoder.Create(IntPtr.Size*8, reader);
                 var @base = src.BaseAddress;
                 decoder.IP = @base;
-                var dst = root.list<Asm.IceInstruction>(decoded.Count);
+                var buffer = root.list<Asm.IceInstruction>(decoded.Count);
                 var position = 0u;
                 while (reader.CanReadByte)
                 {
@@ -271,12 +272,12 @@ namespace Z0.Asm
                     var size = (uint)iced.ByteLength;
                     var encoded = slice(src.View, position, size).ToArray();
                     var instruction = IceExtractors.extract(iced, formatter.FormatInstruction(iced, @base), encoded);
-                    dst.Add(instruction);
+                    buffer.Add(instruction);
                     f(instruction);
                     position += size;
 
                 }
-                target = icelist(dst.ToArray(), src);
+                dst = icelist(buffer.ToArray(), src);
                 return true;
             }
             catch(Exception e)

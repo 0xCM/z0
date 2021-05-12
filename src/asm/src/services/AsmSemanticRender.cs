@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static AsmSemanticDefaults;
-    using static Z0.Asm.IceOpKind;
+    using static IceOpKind;
 
     [ApiHost(ApiNames.AsmSemanticRender, true)]
     public readonly struct AsmSemanticRender
@@ -104,7 +104,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref skip(instructions,i);
-                var size = instruction.ByteLength;
+                var size = instruction.InstructionSize;
                 Render(instruction, address, offset, sequence);
                 address += size;
                 offset += size;

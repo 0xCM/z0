@@ -66,7 +66,7 @@ namespace Z0.Asm
                 var target = call.NextIp + offset;
                 dst.Source = call.IP;
                 dst.Target = target;
-                dst.InstructionSize = call.ByteLength;
+                dst.InstructionSize = call.InstructionSize;
                 dst.TargetOffset = target - (call.IP + src.Length);
                 dst.Instruction = call.Statment;
                 dst.Encoded = call.Encoded.Storage;

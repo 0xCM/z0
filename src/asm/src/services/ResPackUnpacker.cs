@@ -40,7 +40,7 @@ namespace Z0.Asm
                 var decoded = decoder.Decode(raw, MemoryAddress.Zero).View;
                 var name = accessor.DeclaringType.Name + "/" + accessor.Member.Name;
                 asmwriter.WriteLine(AsmCore.comment(seqlabel + name));
-                AsmFormatter.render(raw,decoded,buffer);
+                AsmFormatter.render(raw, decoded, buffer);
                 asmwriter.Write(buffer.Emit());
 
                 var offset = z16;

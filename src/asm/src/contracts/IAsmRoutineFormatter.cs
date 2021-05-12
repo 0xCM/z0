@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// Creates a detailed presentation of decoded x86 asm data per the accompanying configuration spec
         /// </summary>
         /// <param name="src">The function to render as asm text</param>
-        string Format(AsmRoutine src);
+        AsmRoutineFormat Format(AsmRoutine src);
 
         /// <summary>
         /// Renders a routine to a caller-supplied buffer

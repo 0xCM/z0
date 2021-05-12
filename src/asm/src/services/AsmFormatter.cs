@@ -34,7 +34,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="fmt">The format configuration</param>
-        public string Format(AsmRoutine src)
+        public AsmRoutineFormat Format(AsmRoutine src)
             => format(src, _Config);
 
         public string Format(AsmInstructionBlock src)
@@ -71,17 +71,17 @@ namespace Z0.Asm
             return slice(dst, 0, count);
         }
 
-        public static void render(ReadOnlySpan<byte> block, ReadOnlySpan<IceInstruction> src, ITextBuffer dst)
+        public static void render(ReadOnlySpan<byte> block, ReadOnlySpan<IceInstruction> instructions, ITextBuffer dst)
         {
             Address16 offset = z16;
-            var count = src.Length;
+            var count = instructions.Length;
             dst.AppendLine(AsmCore.comment(block.FormatHex()));
             for(var i=0; i<count; i++)
             {
-                ref readonly var fx = ref skip(src,i);
-                var size = (byte)fx.ByteLength;
+                ref readonly var instruction = ref skip(instructions,i);
+                var size = instruction.InstructionSize;
                 var code = slice(block, offset, size);
-                dst.AppendLineFormat("{0,-6} {1,-46} ; {2,-2} | {3}", offset, fx.FormattedInstruction, size, code.FormatHex());
+                dst.AppendLineFormat("{0,-6} {1,-46} ; {2,-2} | {3}", offset, instruction.FormattedInstruction, size, code.FormatHex());
                 offset += size;
             }
         }
@@ -116,7 +116,7 @@ namespace Z0.Asm
             => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
 
         [Op]
-        public static void format(MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config, StringBuilder dst)
+        public static void format(MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config, ITextBuffer dst)
         {
             const string AbsolutePattern = "{0} {1} {2}";
             const string RelativePattern = "{0} {1}";
@@ -137,7 +137,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         [Op]
-        public static ReadOnlySpan<AsmInstructionSummary> summarize(in AsmRoutine src)
+        public static ReadOnlySpan<AsmInstructionSummary> summarize(AsmRoutine src)
         {
             var count = src.InstructionCount;
             var buffer = new AsmInstructionSummary[count];
@@ -148,11 +148,11 @@ namespace Z0.Asm
             for(var i=0u; i<count; i++)
             {
                 ref readonly var instruction = ref skip(view,i);
-                var size = (uint)instruction.ByteLength;
+                var size = instruction.InstructionSize;
 
-                if(src.Code.Length < offset + size)
+                if(src.Code.Size < offset + size)
                 {
-                    term.error($"Instruction size mismatch {instruction.IP} {offset} {src.Code.Length} {size}");
+                    term.error($"Instruction size mismatch {instruction.IP} {offset} {src.Code.Size} {size}");
                     continue;
                 }
 
@@ -165,7 +165,7 @@ namespace Z0.Asm
         [Op]
         public static string format(MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config)
         {
-            var dst = text.build();
+            var dst = text.buffer();
             AsmFormatter.format(@base, src, config, dst);
             return dst.ToString();
         }
@@ -176,9 +176,9 @@ namespace Z0.Asm
         /// <param name="src">The source function</param>
         /// <param name="config">An optional format configuration</param>
         [Op]
-        public static ReadOnlySpan<string> instructions(in AsmRoutine src, in AsmFormatConfig config)
+        public static ReadOnlySpan<string> instructions(AsmRoutine src, in AsmFormatConfig config)
         {
-            var summaries = AsmFormatter.summarize(src);
+            var summaries = summarize(src);
             var count = summaries.Length;
             if(count == 0)
                 return default;
@@ -190,29 +190,18 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(in AsmRoutine src, in AsmFormatConfig config)
+        public static AsmRoutineFormat format(AsmRoutine src, in AsmFormatConfig config)
         {
-            var dst = text.build();
+            var dst = text.buffer();
             format(src, config, dst);
-            return dst.ToString();
+            return (src,dst.Emit());
         }
 
         [Op]
-        public static void format(in AsmRoutine src, in AsmFormatConfig config, StringBuilder dst)
+        public static void format(AsmRoutine src, in AsmFormatConfig config, ITextBuffer dst)
         {
-            foreach(var line in AsmFormatter.header(src))
-                dst.AppendLine(line);
-
-            dst.AppendLine(AsmFormatter.instructions(src, config).Join(Eol));
-        }
-
-        [Op]
-        public static void format(in AsmRoutine src, in AsmFormatConfig config, ITextBuffer dst)
-        {
-            foreach(var line in AsmFormatter.header(src))
-                dst.AppendLine(line);
-
-            dst.AppendLine(AsmFormatter.instructions(src, config).Join(Eol));
+            root.iter(header(src), line => dst.Append(line));
+            dst.AppendLine(instructions(src, config).Join(Eol));
         }
     }
 }
