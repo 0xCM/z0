@@ -29,6 +29,18 @@ namespace Z0
             get => (CliTableKind)(Value >> 24);
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Row == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Row != 0;
+        }
+
         public uint Row
         {
             [MethodImpl(Inline)]
@@ -38,6 +50,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => string.Format("{0:x2}:{1:x6}", (byte)Table, Row);
+
+        [MethodImpl(Inline)]
+        public CliRowKey Next()
+            => new CliRowKey(Table, Row + 1);
+
+        [MethodImpl(Inline)]
+        public CliRowKey Prior()
+            => Row > 1 ? new CliRowKey(Table, Row-1) : CliRowKey.Empty;
 
         public override string ToString()
             => Format();
@@ -57,6 +77,14 @@ namespace Z0
             => new CliRowKey(value);
 
         [MethodImpl(Inline)]
+        public static CliRowKey operator ++(CliRowKey src)
+            => src.Next();
+
+        [MethodImpl(Inline)]
+        public static CliRowKey operator --(CliRowKey src)
+            => src.Prior();
+
+        [MethodImpl(Inline)]
         public static implicit operator CliRowKey((CliTableKind table, uint index) src)
             => new CliRowKey(src.table, src.index);
 
@@ -64,9 +92,14 @@ namespace Z0
         public static implicit operator CliRowKey(int value)
             => new CliRowKey((uint)value);
 
-
         [MethodImpl(Inline)]
         public static implicit operator CliToken(CliRowKey src)
             => src;
+
+        public static CliRowKey Empty
+        {
+            [MethodImpl(Inline)]
+            get => new CliRowKey(CliTableKind.Invalid, 0);
+        }
     }
 }

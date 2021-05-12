@@ -103,7 +103,6 @@ namespace Z0.Asm
             var partCount = parts.Length;
             var dst = alloc<ApiPartRoutines>(partCount);
             Decode(parts, dst);
-
             return dst;
         }
 
@@ -128,15 +127,16 @@ namespace Z0.Asm
             {
                 target.Clear();
                 ref readonly var block = ref skip(view,i);
-                var decoded = Decoder.Decode(block, x => target.Add(x));
-                if(decoded)
+                var outcome = Decoder.Decode(block, x => target.Add(x), out var decoded);
+                if(outcome)
                 {
                     if(i == 0)
                         ip = target[0].IP;
+
                      instructions.Add(Etl.ApiInstructionBlock(ip, block, target.ToArray()));
                 }
                 else
-                    Wf.Warn($"Decoder failure for {block.OpUri}");
+                    Wf.Warn(outcome.Message);
             }
 
             return new ApiHostRoutines(host, instructions.ToArray());

@@ -46,9 +46,11 @@ namespace Z0.Asm
         [Op]
         void Traverse(in ApiCodeBlock src, IReceiver<ApiCodeBlock,AsmInstructionBlock> dst)
         {
-            var decoded = Decoder.Decode(src);
-            if(decoded)
-                dst.Deposit(src,decoded.Value);
+            var outcome = Decoder.Decode(src, out var block);
+            if(outcome)
+                dst.Deposit(src, block);
+            else
+                Wf.Error(outcome.Message);
         }
     }
 }

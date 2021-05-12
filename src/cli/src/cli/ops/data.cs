@@ -16,14 +16,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static CliHandleData data(Handle src)
             => @as<Handle,CliHandleData>(src);
-
-        [MethodImpl(Inline)]
-        public static CliHandleData data<K>(CliRowKey<K> src)
-            where K : unmanaged, ICliTableKind<K>
-                => new CliHandleData(src.Table, src.Row);
-
-        [MethodImpl(Inline)]
-        public static CliHandleData data(CliRowKey src)
-            => new CliHandleData(src.Table, src.Row);
     }
 }

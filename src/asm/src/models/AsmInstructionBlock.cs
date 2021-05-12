@@ -26,7 +26,10 @@ namespace Z0.Asm
         internal AsmInstructionBlock(OpUri uri, IceInstruction[] src, BinaryCode code)
         {
             _Instructions = src;
-            Code = new ApiCodeBlock(src[0].IP, uri, code);
+            if(_Instructions.IsNonEmpty)
+                Code = new ApiCodeBlock(_Instructions.First.IP, uri, code);
+            else
+                Code = ApiCodeBlock.Empty;
         }
 
         public OpUri Uri => Code.OpUri;
@@ -102,6 +105,6 @@ namespace Z0.Asm
             => src._Instructions;
 
         public static AsmInstructionBlock Empty
-            => new AsmInstructionBlock(OpUri.Empty, array<IceInstruction>(), BinaryCode.Empty);
+            => new AsmInstructionBlock(OpUri.Empty, sys.empty<IceInstruction>(), BinaryCode.Empty);
     }
 }

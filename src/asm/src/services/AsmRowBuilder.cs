@@ -73,12 +73,12 @@ namespace Z0.Asm
 
         Index<AsmDetailRow> BuildAsmRows(in ApiCodeBlock src)
         {
-            var decoded = Decoder.Decode(src);
-            if(decoded)
-                return BuildAsmRows(src.Code, decoded.Value);
+            var outcome = Decoder.Decode(src, out var block);
+            if(outcome)
+                return BuildAsmRows(src.Code, block);
             else
             {
-                Wf.Error($"Error decoding {src.OpUri}");
+                Wf.Error(outcome.Message);
                 return sys.empty<AsmDetailRow>();
             }
         }

@@ -15,6 +15,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static CliTableKind table(Handle handle)
-            =>  (CliTableKind)(u32(handle) >> 24);
+            => data(handle).Table;
     }
 }

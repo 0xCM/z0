@@ -30,11 +30,14 @@ namespace Z0.Asm
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var code = ref skip(src, i);
-                    var decoded = Decoder.Decode(code);
-                    if(!decoded)
-                        HandleFailure(code);
-
-                    seek(dst, i) = decoded ? new AsmMemberRoutine(code.Member, decoded.Value) : AsmMemberRoutine.Empty;
+                    var outcome = Decoder.Decode(code, out var decoded);
+                    if(!outcome)
+                    {
+                        Wf.Error($"Could not decode {code}");
+                        seek(dst,i) = AsmMemberRoutine.Empty;
+                    }
+                    else
+                        seek(dst, i) = new AsmMemberRoutine(code.Member, decoded);
                 }
 
                 Wf.Ran(flow, Msg.DecodedHostMembers.Format(buffer.Length, uri));
@@ -45,11 +48,6 @@ namespace Z0.Asm
                 Wf.Error($"{uri}: {e}");
                 return sys.empty<AsmMemberRoutine>();
             }
-        }
-
-        void HandleFailure(in ApiMemberCode member)
-        {
-            Wf.Error($"Could not decode {member}");
         }
     }
 }

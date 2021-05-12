@@ -43,8 +43,6 @@ namespace Z0
                 dst |= sll(skip(src, 2), 8);
                 dst |= skip(src, 3);
             }
-            else
-                dst = default;
 
             return length;
         }

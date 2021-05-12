@@ -20,11 +20,11 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var member = ref skip(src,i);
-                var decoded = Decoder.Decode(member);
-                if(decoded)
+                var outcome = Decoder.Decode(member, out var decoded);
+                if(outcome)
                 {
-                    seek(dst,i) = decoded.Value;
-                    Receivers.Raise(new MemberDecodedEvent(member, decoded.Value));
+                    seek(dst,i) = decoded;
+                    Receivers.Raise(new MemberDecodedEvent(member, decoded));
                 }
                 else
                 {

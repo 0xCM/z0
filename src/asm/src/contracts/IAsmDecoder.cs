@@ -19,28 +19,14 @@ namespace Z0.Asm
         /// <param name="src">The source data</param>
         Option<AsmRoutine> Decode(ApiCaptureBlock src);
 
-        bool Decode(ApiCaptureBlock src, out AsmRoutine dst);
+        Outcome Decode(in ApiCodeBlock src, out AsmInstructionBlock dst);
 
-        /// <summary>
-        /// Decodes a function from member capture data
-        /// </summary>
-        /// <param name="src">The source data</param>
-        Option<AsmRoutine> Decode(ApiMemberCode src);
+        Outcome Decode(in CodeBlock src, out IceInstructionList dst);
 
-        /// <summary>
-        /// Decodes an instruction list
-        /// </summary>
-        /// <param name="src">The code source</param>
-        Option<IceInstructionList> Decode(CodeBlock src);
+        Outcome Decode(ApiCodeBlock src, Action<IceInstruction> f, out IceInstructionList dst);
 
-        Option<AsmInstructionBlock> Decode(ApiCodeBlock src);
+        Outcome Decode(in ApiCaptureBlock src, out AsmRoutine dst);
 
-        Option<IceInstructionList> Decode(ApiCodeBlock src, Action<IceInstruction> f);
-
-        Option<IceInstructionList> Decode(OpUri uri, CodeBlock src, Action<IceInstruction> f);
-
-        Option<AsmInstructionBlock> Decode(OpUri uri, BinaryCode code, MemoryAddress @base);
-
-        bool Decode(in ApiCodeBlock src, out AsmInstructionBlock dst);
+        Outcome Decode(in ApiMemberCode src, out AsmRoutine dst);
     }
 }

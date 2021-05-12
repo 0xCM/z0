@@ -224,11 +224,12 @@ namespace Z0.Asm
 
         AsmInstructionBlock Decode(in ApiCodeBlock src)
         {
-            if(Decoder.Decode(src, out var decoded))
+            var outcome = Decoder.Decode(src, out var decoded);
+            if(outcome)
                 return decoded;
             else
             {
-                Wf.Error($"Error decoding {src.OpUri}");
+                Wf.Error(outcome.Message);
                 return AsmInstructionBlock.Empty;
             }
         }

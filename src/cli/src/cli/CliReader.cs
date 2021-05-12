@@ -85,44 +85,25 @@ namespace Z0
         public Address32 HeapOffset(GuidHandle handle)
             => (Address32)MD.GetHeapOffset(handle);
 
-        [Op]
-        public CliStringHeap StringHeap()
-        {
-            var size = MD.GetHeapSize(HeapIndex.String);
-            var handle = MetadataTokens.StringHandle(0);
-            var offset = MD.GetHeapOffset(handle);
-            var @base = Segment.BaseAddress + offset;
-            return new CliStringHeap(@base, size, CliHeapKind.String);
-        }
 
-        [Op]
-        public CliStringHeap UserStringHeap()
-        {
-            var size = MD.GetHeapSize(HeapIndex.UserString);
-            var handle = MetadataTokens.UserStringHandle(0);
-            var offset = MD.GetHeapOffset(handle);
-            var @base = Segment.BaseAddress + offset;
-            return new CliStringHeap(@base, size, CliHeapKind.UserString);
-        }
+        [MethodImpl(Inline), Op]
+        public ByteSize HeapSize(HeapIndex index)
+            => MD.GetHeapSize(index);
 
         [Op]
         public CliGuidHeap GuidHeap()
         {
-            var size = MD.GetHeapSize(HeapIndex.Guid);
-            var handle = MetadataTokens.GuidHandle(0);
-            var offset = MD.GetHeapOffset(handle);
+            var offset = HeapOffset(MetadataTokens.GuidHandle(0));
             var @base = Segment.BaseAddress + offset;
-            return new CliGuidHeap(@base, size);
+            return new CliGuidHeap(@base, HeapSize(HeapIndex.Guid));
         }
 
         [Op]
         public CliBlobHeap BlobHeap()
         {
-            var size = MD.GetHeapSize(HeapIndex.Blob);
-            var handle = MetadataTokens.BlobHandle(0);
-            var offset = MD.GetHeapOffset(handle);
+            var offset = HeapOffset(MetadataTokens.BlobHandle(0));
             var @base = Segment.BaseAddress + offset;
-            return new CliBlobHeap(@base, size);
+            return new CliBlobHeap(@base, HeapSize(HeapIndex.Blob));
         }
 
         [MethodImpl(Inline), Op]
@@ -271,7 +252,7 @@ namespace Z0
 
         public ReadOnlySpan<string> UserStrings()
         {
-            int size = MD.GetHeapSize(HeapIndex.UserString);
+            int size = HeapSize(HeapIndex.UserString);
             if (size == 0)
                 return sys.empty<string>();
 
@@ -289,7 +270,7 @@ namespace Z0
 
         public ReadOnlySpan<string> SystemStrings()
         {
-            int size = MD.GetHeapSize(HeapIndex.String);
+            int size = HeapSize(HeapIndex.String);
             if (size == 0)
                 return sys.empty<string>();
 

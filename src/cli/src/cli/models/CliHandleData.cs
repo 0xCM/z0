@@ -49,6 +49,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CliHandleData(Handle src)
             => api.data(src);
-
     }
 }

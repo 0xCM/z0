@@ -115,52 +115,11 @@ namespace Z0
             }
         }
 
-        unsafe void Test7(CliReader reader)
-        {
-            var heap = reader.StringHeap();
-            var data = heap.Data;
-            var size = heap.Size;
-            var term = 0;
-            var dst = root.list<uint>();
-            for(var i=0u; i<size; i++)
-            {
-                if(skip(data,i) == 0)
-                    dst.Add(i);
-            }
-
-            var offsets = dst.ViewDeposited();
-            var count = offsets.Length;
-            var sizes = alloc<ushort>(count);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var current = ref skip(offsets,i);
-                if(i==0)
-                    seek(sizes,i) = (ushort)(current);
-                else
-                {
-                    ref readonly var prior = ref skip(offsets, i - 1);
-                    seek(sizes,i) = (ushort)((current-prior));
-                }
-            }
-
-            var target = alloc<Paired<uint,ushort>>(count);
-            for(var i=0; i<count; i++)
-                seek(target,i) = (skip(offsets,i), skip(sizes,i));
-
-            Wf.Row(target.FormatList());
-        }
-
-        public void Test7()
-        {
-            Reader(PartId.Cpu, out var reader);
-            Test7(reader);
-
-        }
 
         protected override void Run()
         {
             var flow = Wf.Running();
-            Test7();
+            Test6(PartId.Cpu);
             Wf.Ran(flow);
         }
 
