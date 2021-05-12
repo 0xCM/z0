@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         uint Offset;
 
-        AsmRoutineDecoder Decoder;
+        AsmDecoder Decoder;
 
         public AsmRowBuilder()
         {

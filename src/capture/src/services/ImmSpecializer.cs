@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public class ImmSpecializer : AppService<ImmSpecializer>
     {
-        IAsmDecoder Decoder;
+        AsmDecoder Decoder;
 
         ICaptureCore Core;
 

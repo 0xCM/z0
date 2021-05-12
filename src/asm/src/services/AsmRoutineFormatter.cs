@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     public class AsmRoutineFormatter : IAsmRoutineFormatter
     {
         public AsmFormatConfig Config {get;}
@@ -11,6 +14,11 @@ namespace Z0.Asm
         public AsmRoutineFormatter()
         {
             Config = AsmFormatConfig.@default(out var _);
+        }
+
+        public AsmRoutineFormatter(AsmFormatConfig config)
+        {
+            Config = config;
         }
 
         /// <summary>

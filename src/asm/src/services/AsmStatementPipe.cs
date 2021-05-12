@@ -15,7 +15,7 @@ namespace Z0.Asm
 
     public sealed class AsmStatementPipe : AppService<AsmStatementPipe>
     {
-        AsmRoutineDecoder Decoder;
+        AsmDecoder Decoder;
 
         protected override void OnInit()
         {

@@ -16,17 +16,17 @@ namespace Z0.Asm
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public class AsmRoutineDecoder : IAsmDecoder
+    public class AsmDecoder : AppService<AsmDecoder>
     {
         readonly AsmFormatConfig AsmFormat;
 
-        [MethodImpl(Inline)]
-        public static AsmRoutineDecoder create(IWfRuntime wf)
-            => new AsmRoutineDecoder(wf);
+        IAsmRoutineFormatter Formatter;
 
-        [MethodImpl(Inline)]
-        public AsmRoutineDecoder(IWfRuntime wf)
-            => AsmFormat = AsmFormatConfig.@default(out var _);
+        public AsmDecoder()
+        {
+            AsmFormat = AsmFormatConfig.@default(out var _);
+            Formatter = new AsmRoutineFormatter(AsmFormat);
+        }
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
         {
@@ -35,6 +35,149 @@ namespace Z0.Asm
                 return Option.some(routine);
             else
                 return Option.none<AsmRoutine>();
+        }
+
+        public ApiHostRoutines Decode(ApiHostBlocks src)
+        {
+            var host = src.Host;
+            var flow = Wf.Running(Msg.DecodingHostRoutines.Format(host));
+            var view = src.Blocks.View;
+            var count = view.Length;
+            var instructions = root.list<ApiHostRoutine>();
+            var ip = MemoryAddress.Zero;
+            var target = root.list<IceInstruction>();
+            for(var i=0; i<count; i++)
+            {
+                target.Clear();
+                ref readonly var block = ref skip(view,i);
+                var outcome = Decode(block, x => target.Add(x), out var decoded);
+                if(outcome)
+                {
+                    if(i == 0)
+                        ip = target[0].IP;
+
+                     instructions.Add(AsmEtl.ApiHostRoutine(ip, block, target.ToArray()));
+                }
+                else
+                    Wf.Warn(outcome.Message);
+            }
+
+            var routines = new ApiHostRoutines(host, instructions.ToArray());
+            Wf.Ran(flow, Msg.DecodedHostRoutines.Format(routines.Length, host));
+            return routines;
+        }
+
+        public void Decode(ReadOnlySpan<ApiPartBlocks> src, Span<ApiPartRoutines> dst)
+        {
+            var hostFx = root.list<ApiHostRoutines>();
+            var stats = ApiDecoderStats.init();
+            var partCount = src.Length;
+            var parts = src;
+            var flow = Wf.Running(Msg.DecodingParts.Format(partCount));
+            for(var i=0; i<partCount; i++)
+            {
+                hostFx.Clear();
+
+                ref readonly var part = ref skip(parts,i);
+                var hostBlocks = part.Blocks.View;
+                var kHosts = hostBlocks.Length;
+                if(kHosts == 0)
+                {
+                    seek(dst,i) = ApiPartRoutines.Empty;
+                    continue;
+                }
+
+                var decoding = Wf.Running(Msg.DecodingPartRoutines.Format(kHosts, part.PartId));
+                for(var j = 0; j<kHosts; j++)
+                {
+                    ref readonly var host = ref skip(hostBlocks,j);
+
+                    if(host.IsEmpty)
+                        continue;
+
+                    var routines = Decode(host);
+                    hostFx.Add(routines);
+                    stats.HostCount++;
+                    stats.MemberCount += routines.RoutineCount;
+                    stats.InstructionCount += routines.InstructionCount;
+                }
+
+                seek(dst,i) = new ApiPartRoutines(part.PartId, hostFx.ToArray());
+
+                Wf.Ran(decoding,  Msg.DecodedPartRoutines.Format(hostFx.Count, part.PartId, stats));
+            }
+
+            Wf.Ran(flow, Msg.DecodedMachine.Format(src.Length, parts.Length));
+        }
+
+        public Index<ApiPartRoutines> Decode(Index<ApiCodeBlock> src)
+        {
+            var hosts = src.ToHostBlocks();
+            var parts = hosts.ToPartBlocks().View;
+            var partCount = parts.Length;
+            var dst = alloc<ApiPartRoutines>(partCount);
+            Decode(parts, dst);
+            return dst;
+        }
+
+        public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
+        {
+            var count = src.Length;
+            var dst = span<AsmRoutineCode>(count);
+            using var writer = target.Writer();
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var captured = ref skip(src,i);
+                if(Decode(captured, out var routine))
+                {
+                    var asm = Formatter.Format(routine);
+                    seek(dst,i) = new AsmRoutineCode(routine,captured, asm);
+                    writer.Write(asm);
+                }
+            }
+            return dst;
+        }
+
+        public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var captured = ref skip(src,i);
+                if(Decode(captured, out var routine))
+                    seek(dst,i) = new AsmRoutineCode(routine, captured, Formatter.Format(routine));
+            }
+        }
+
+        public AsmHostRoutines Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
+        {
+            try
+            {
+                var flow = Wf.Running(uri);
+                var count = src.Length;
+                var buffer = alloc<AsmMemberRoutine>(count);
+                ref var dst = ref first(buffer);
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var code = ref skip(src, i);
+                    var outcome = Decode(code, out var decoded);
+                    if(!outcome)
+                    {
+                        Wf.Error($"Could not decode {code}");
+                        seek(dst,i) = AsmMemberRoutine.Empty;
+                    }
+                    else
+                        seek(dst, i) = new AsmMemberRoutine(code.Member, decoded);
+                }
+
+                Wf.Ran(flow, Msg.DecodedHostMembers.Format(buffer.Length, uri));
+                return buffer;
+            }
+            catch(Exception e)
+            {
+                Wf.Error($"{uri}: {e}");
+                return sys.empty<AsmMemberRoutine>();
+            }
         }
 
         public Outcome Decode(in ApiCaptureBlock src, out AsmRoutine dst)

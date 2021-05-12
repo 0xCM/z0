@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public sealed class ApiResCapture : AsmWfService<ApiResCapture>
     {
-        AsmRoutineDecoder Decoder;
+        AsmDecoder Decoder;
 
        IAsmRoutineFormatter Formatter;
 

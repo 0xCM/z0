@@ -23,7 +23,7 @@ namespace Z0
 
         ApiResolver Resolver;
 
-        AsmRoutineDecoder Decoder;
+        AsmDecoder Decoder;
 
         AsmFormatter Formatter;
 

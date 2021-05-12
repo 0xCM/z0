@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public class ApiHostAsmEmitter : AppService<ApiHostAsmEmitter>
     {
-        ApiHostDecoder Decoder;
+        AsmDecoder Decoder;
 
         public ApiHostAsmEmitter()
         {
@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            Decoder = Wf.ApiHostDecoder();
+            Decoder = Wf.AsmDecoder();
         }
 
         public AsmHostRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src)

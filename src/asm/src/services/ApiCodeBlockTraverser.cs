@@ -9,7 +9,7 @@ namespace Z0.Asm
     [ApiHost]
     public class ApiCodeBlockTraverser : AppService<ApiCodeBlockTraverser>
     {
-        IAsmDecoder Decoder;
+        AsmDecoder Decoder;
 
         protected override void OnInit()
         {

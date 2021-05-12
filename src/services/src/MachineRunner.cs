@@ -16,6 +16,7 @@ namespace Z0
             var partCount = parts.Length;
             var flow = Wf.Running(RunningMachine.Format(partCount, partList));
             var hex = Wf.ApiHex();
+            var decoder = Wf.AsmDecoder();
             try
             {
                 var blocks = hex.ReadBlocks().Storage.Sort();
@@ -32,7 +33,7 @@ namespace Z0
 
                 if(options.EmitCallData || options.EmitJmpData)
                 {
-                    var routines = Wf.ApiDecoder().Decode(blocks);
+                    var routines = decoder.Decode(blocks);
 
                     if(options.EmitJmpData)
                         Emitted(Wf.AsmJmpPipe().EmitRows(routines.View));

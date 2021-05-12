@@ -55,16 +55,8 @@ namespace Z0
             => new AsmImmWriter(wf, host, formatter);
 
         [Op]
-        public static AsmRoutineDecoder AsmDecoder(this IWfRuntime wf)
-            => Services.AsmRoutineDecoder.create(wf);
-
-        [Op]
-        public static ApiDecoder ApiDecoder(this IWfRuntime wf)
-            => Services.ApiDecoder.create(wf);
-
-        [Op]
-        public static ApiHostDecoder ApiHostDecoder(this IWfRuntime wf)
-            => Services.ApiHostDecoder.create(wf);
+        public static AsmDecoder AsmDecoder(this IWfRuntime wf)
+            => Services.AsmDecoder.create(wf);
 
         [Op]
         public static AsmBitstringEmitter AsmBitstringEmitter(this IWfRuntime wf)
@@ -77,7 +69,6 @@ namespace Z0
         [Op]
         public static ApiCodeBlockTraverser ApiCodeBlockTraverser(this IWfRuntime src)
             => Services.ApiCodeBlockTraverser.create(src);
-
 
         [Op]
         public static AsmCallPipe AsmCallPipe(this IWfRuntime wf)
