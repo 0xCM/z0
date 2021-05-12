@@ -7,19 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial struct TextRules
+    partial struct TextQuery
     {
-        partial struct Query
-        {
-            /// <summary>
-            /// Tests whether a specified <see cref='string'/> is nonempty
-            /// </summary>
-            /// <param name="src">The source text</param>
-            [MethodImpl(Inline), Op]
-            public static bit nonempty(string src)
-                => !string.IsNullOrEmpty(src);
-        }
+        /// <summary>
+        /// Tests whether a specified <see cref='string'/> is nonempty
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Inline), Op]
+        public static bit nonempty(string src)
+            => !string.IsNullOrEmpty(src);
     }
 }

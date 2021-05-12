@@ -8,12 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// If the test string is null, returns the empty string; otherwise, returns the test string
+        /// </summary>
+        /// <param name="src">The subject string</param>
+        /// <param name="replace">The replacement value if blank</param>
+        [MethodImpl(Inline), Op]
         public static string denullify(string src)
-            => Transform.denullify(src);
+            => src ?? EmptyString;
     }
 }

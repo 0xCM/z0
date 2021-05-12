@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     partial struct TextRules
     {
         partial struct Format
@@ -20,7 +18,7 @@ namespace Z0
             [Op]
             public static string lines(params string[] src)
             {
-                var dst = text.build();
+                var dst = text.buffer();
                 foreach(var item in src)
                     dst.AppendLine(item.Trim());
                 return dst.ToString();

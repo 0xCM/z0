@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
     using static Chars;
     using static memory;
-    using static TextRules;
 
     using C = AsciCharCode;
 
@@ -25,10 +23,10 @@ namespace Z0
             while(i <= imax)
             {
                 ref readonly var c = ref skip(src, i++);
-                if(Query.space(c) && j==0)
+                if(TextQuery.space(c) && j==0)
                     continue;
 
-                if(Query.digit(c))
+                if(TextQuery.digit(c))
                     seek(dst, j++) = C.d9 - (C)c;
                 else
                     break;

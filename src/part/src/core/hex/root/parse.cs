@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
-    using static TextRules;
     using static HexFormatSpecs;
 
     using X = HexDigitFacets;
@@ -77,7 +76,7 @@ namespace Z0
                     return j;
 
                 ref readonly var c = ref skip(src,i);
-                if(Query.whitespace(c) && nonzero(c0, c1))
+                if(TextQuery.whitespace(c) && nonzero(c0, c1))
                 {
                     if(parse(c0, c1, out seek(dst,j)))
                         j++;

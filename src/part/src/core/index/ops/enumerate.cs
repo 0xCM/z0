@@ -14,7 +14,6 @@ namespace Z0
         public static IEnumerable<T> enumerate<T>(ReadOnlySpan<T> src)
             => src.ToArray();
 
-
         [Op, Closures(Closure)]
         public static IEnumerator<T> enumerator<T>(ReadOnlySpan<T> src)
             => enumerate(src).GetEnumerator();

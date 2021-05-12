@@ -143,9 +143,6 @@ namespace Z0
             return false;
         }
 
-        // public Option<IApiHost> FindHost(ApiHostUri uri)
-        //     => root.option(_ApiHosts.Where(h => h.HostUri == uri).FirstOrDefault());
-
         public bool FindHost(ApiHostUri uri, out IApiHost host)
         {
             host = _ApiHosts.Where(h => h.HostUri == uri).FirstOrDefault();

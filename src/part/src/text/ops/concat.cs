@@ -28,12 +28,13 @@ namespace Z0
         [Op]
         public static string concat(ReadOnlySpan<string> src, char? delimiter)
         {
-            var dst = text.build();
+            var dst = text.buffer();
             for(var i=0; i<src.Length; i++)
             {
                 if(i != 0 && delimiter != null)
                     dst.Append(delimiter.Value);
-                dst.Append(src[i]);
+
+                dst.Append(skip(src,i));
             }
             return dst.ToString();
         }
@@ -41,12 +42,14 @@ namespace Z0
         [Op]
         public static string concat(ReadOnlySpan<string> src, string sep)
         {
-            var dst = text.build();
-            for(var i=0; i<src.Length; i++)
+            var dst = text.buffer();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
             {
                 if(i != 0 && sep != null)
                     dst.Append(sep);
-                dst.Append(src[i]);
+
+                dst.Append(skip(src,i));
             }
             return dst.ToString();
         }
@@ -60,7 +63,7 @@ namespace Z0
         [Op]
         public static string concat(ReadOnlySpan<string> src, ReadOnlySpan<byte> widths, char delimiter = FieldDelimiter)
         {
-            var dst = text.build();
+            var dst = text.buffer();
             var count = root.length(src,widths);
             for(var i=0u; i<count; i++)
             {
@@ -75,6 +78,5 @@ namespace Z0
             }
             return dst.ToString();
         }
-
     }
 }

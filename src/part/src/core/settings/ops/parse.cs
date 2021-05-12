@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static TextRules;
+    using static Root;
 
     partial struct Settings
     {
@@ -17,7 +16,7 @@ namespace Z0
             {
                 var name = EmptyString;
                 var input = src;
-                if(Query.contains(src, delimiter))
+                if(TextQuery.contains(src, delimiter))
                 {
                     name = src.LeftOfFirst(delimiter);
                     input = src.RightOfFirst(delimiter);

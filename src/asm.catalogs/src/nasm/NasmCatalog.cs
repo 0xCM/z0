@@ -41,6 +41,7 @@ namespace Z0.Asm
 
             return records.Emit();
         }
+
         public Index<NasmInstruction> EmitInstructionCatalog(FS.FilePath dst)
         {
             var src = ParseInstuctionAssets();
@@ -59,5 +60,4 @@ namespace Z0.Asm
         public Index<NasmInstruction> EmitInstructionCatalog()
             => EmitInstructionCatalog(Db.CatalogTable<NasmInstruction>("asm"));
     }
-
 }

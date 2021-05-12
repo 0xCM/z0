@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
     using static memory;
-    using static Part;
 
     partial class text
     {
@@ -32,9 +32,9 @@ namespace Z0
 
                 if(i != last)
                 {
-                    seek(dst,k++) = Chars.Space;
-                    seek(dst,k++) = sep;
-                    seek(dst,k++) = Chars.Space;
+                    seek(dst, k++) = Chars.Space;
+                    seek(dst, k++) = sep;
+                    seek(dst, k++) = Chars.Space;
                 }
             }
 

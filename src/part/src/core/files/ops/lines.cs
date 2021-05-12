@@ -11,7 +11,7 @@ namespace Z0
     partial struct FS
     {
         [Op]
-        public static TextLines lines(FilePath src)
+        public static Index<TextLine> lines(FilePath src)
         {
             if(!src.Exists)
                 return sys.empty<TextLine>();

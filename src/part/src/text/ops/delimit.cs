@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static TextRules;
     using static memory;
 
     partial class text
@@ -49,12 +48,12 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string delimit<T>(ReadOnlySpan<T> src, char delimiter)
         {
-            var dst = build();
+            var dst = buffer();
             var count = src.Length;
             var last = count - 1;
             for(var i=0; i<count; i++)
             {
-                dst.Append(skip(src,i));
+                dst.AppendItem(skip(src,i));
 
                 if(i != last)
                 {

@@ -8,13 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
-    using static TextRules;
-
     partial class text
     {
         [Op]
-        public static TextLines lines(string src, bool keepblank = false)
+        public static Index<TextLine> lines(string src, bool keepblank = false)
         {
             var lines = root.list<TextLine>();
             var lineNumber = 0u;
@@ -23,7 +20,7 @@ namespace Z0
                 var next = reader.ReadLine();
                 while (next != null)
                 {
-                    if(Query.blank(next))
+                    if(TextQuery.blank(next))
                     {
                         if(keepblank)
                             lines.Add(new TextLine(++lineNumber, next));
@@ -46,7 +43,7 @@ namespace Z0
                 var next = reader.ReadLine();
                 while(next != null)
                 {
-                    if(Query.blank(next))
+                    if(TextQuery.blank(next))
                     {
                         if(keepblank)
                             receiver(new TextLine(++lineNumber, next));

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.IO;
 
-    using static memory;
-
     partial class XFs
     {
         /// <summary>
@@ -23,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         [Op]
-        public static TextLines ReadTextLines(this FS.FilePath src)
+        public static Index<TextLine> ReadTextLines(this FS.FilePath src)
             => FS.lines(src);
     }
 }

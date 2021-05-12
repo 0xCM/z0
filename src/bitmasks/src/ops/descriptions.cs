@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Part;
+    using static Root;
     using static memory;
-    using static TextRules;
     using static TaggedLiterals;
 
     using NBI = NumericBaseIndicator;
@@ -41,7 +40,7 @@ namespace Z0
                 var input = src.Text;
                 var fence = Rules.fence(Chars.LBracket, Chars.RBracket);
                 var content = input;
-                var fenced = Query.fenced(input, fence);
+                var fenced = TextQuery.fenced(input, fence);
                 if(fenced)
                 {
                     if(!text.unfence(input, fence, out content))

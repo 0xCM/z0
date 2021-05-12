@@ -17,11 +17,18 @@ namespace Z0
             => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
 
         /// <summary>
+        /// Canonical return value for search operation that returns a nonnegative value upon success
+        /// </summary>
+        public const int NotFound = -1;
+
+        /// <summary>
         /// Indicates that emitted content should overwrite whatever file content may exist
         /// </summary>
         public const FileWriteMode Overwrite = FileWriteMode.Overwrite;
 
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
+        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
 
         /// <summary>
         /// Specifies the <see cref='CC.StdCall'/> calling convention where the
@@ -79,26 +86,58 @@ namespace Z0
         const string BaseSuffix = "";
 
         public const string EmptyString = "";
+
+        /// <summary>
+        /// Uppercase letter classifier accessor
+        /// </summary>
+        public static UpperCased UpperCase => default;
+
+        /// <summary>
+        /// Lowercase letter classifier accessor
+        /// </summary>
+        public static LowerCased LowerCase => default;
+
+        /// <summary>
+        /// Species the base2 singleton representative
+        /// </summary>
+        public static Base2 base2 => default;
+
+        /// <summary>
+        /// Species the base8 singleton representative
+        /// </summary>
+        public static Base3 base3 => default;
+
+        /// <summary>
+        /// Species the base8 singleton representative
+        /// </summary>
+        public static Base8 base8 => default;
+
+        /// <summary>
+        /// Species the base10 singleton representative
+        /// </summary>
+        public static Base10 base10 => default;
+
+        /// <summary>
+        /// Species the base16 singleton representative
+        /// </summary>
+        public static Base16 base16 => default;
     }
 
     [ApiHost]
     public static partial class XTend
     {
         const NumericKind Closure = Root.UnsignedInts;
-
     }
 
     [ApiHost]
     public static partial class XText
     {
         const NumericKind Closure = Root.UnsignedInts;
-
     }
 
     [ApiHost]
     public static partial class ClrQuery
     {
         const NumericKind Closure = Root.UnsignedInts;
-
     }
 }

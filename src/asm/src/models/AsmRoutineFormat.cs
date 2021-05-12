@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public class AsmRoutineFormat : ITextual
     {
@@ -28,6 +28,10 @@ namespace Z0.Asm
 
         public override string ToString()
             => Rendered;
+
+        // public AsmSourceBlock AsmSource()
+        //     => Rendered.lines
+
 
         [MethodImpl(Inline)]
         public static implicit operator AsmRoutineFormat((AsmRoutine routine, string format) src)

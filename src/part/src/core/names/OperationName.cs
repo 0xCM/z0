@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static TextRules;
+    using static Root;
 
     using api = Names;
 
@@ -27,7 +26,7 @@ namespace Z0
         public bool Parametric
         {
             [MethodImpl(Inline)]
-            get => Query.fenced(Data, Chars.Lt, Chars.Gt);
+            get => TextQuery.fenced(Data, Chars.Lt, Chars.Gt);
         }
 
         public bool IsEmpty

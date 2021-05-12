@@ -7,49 +7,47 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
-    using static TextRules;
+    using static Root;
 
     partial class text
     {
-            /// <summary>
-            /// Extracts a substring
-            /// </summary>
-            /// <param name="src">The source text</param>
-            /// <param name="offset">The index of the first character</param>
-            [MethodImpl(Inline), Op]
-            public static string slice(string src, int offset)
-                => sys.substring(src, offset);
+        /// <summary>
+        /// Extracts a substring
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="offset">The index of the first character</param>
+        [MethodImpl(Inline), Op]
+        public static string slice(string src, int offset)
+            => sys.substring(src, offset);
 
-            /// <summary>
-            /// Extracts a substring
-            /// </summary>
-            /// <param name="src">The source text</param>
-            /// <param name="offset">The index of the first character</param>
-            /// <param name="length">The substring length</param>
-            [MethodImpl(Inline), Op]
-            public static string slice(string src, int offset, int length)
-                => sys.substring(src, offset, length);
+        /// <summary>
+        /// Extracts a substring
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="offset">The index of the first character</param>
+        /// <param name="length">The substring length</param>
+        [MethodImpl(Inline), Op]
+        public static string slice(string src, int offset, int length)
+            => sys.substring(src, offset, length);
 
-            /// <summary>
-            /// Extracts a substring beginning at a specified offset
-            /// </summary>
-            /// <param name="src">The source text</param>
-            /// <param name="offset">The index of the first character</param>
-            /// <param name="length">The substring length</param>
-            [MethodImpl(Inline), Op]
-            public static string slice(string src, uint offset)
-                => sys.substring(src, (int)offset);
+        /// <summary>
+        /// Extracts a substring beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="offset">The index of the first character</param>
+        /// <param name="length">The substring length</param>
+        [MethodImpl(Inline), Op]
+        public static string slice(string src, uint offset)
+            => sys.substring(src, (int)offset);
 
-            /// <summary>
-            /// Extracts a substring of specified length beginning at a specified offset
-            /// </summary>
-            /// <param name="src">The source text</param>
-            /// <param name="offset">The index of the first character</param>
-            /// <param name="length">The substring length</param>
-            [MethodImpl(Inline), Op]
-            public static string slice(string src, uint offset, uint length)
-                => sys.substring(src,(int)offset, (int)length);
+        /// <summary>
+        /// Extracts a substring of specified length beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="offset">The index of the first character</param>
+        /// <param name="length">The substring length</param>
+        [MethodImpl(Inline), Op]
+        public static string slice(string src, uint offset, uint length)
+            => sys.substring(src,(int)offset, (int)length);
     }
 }

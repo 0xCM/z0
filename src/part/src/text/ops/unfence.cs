@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static Rules;
-    using static TextRules;
 
     partial class text
     {
@@ -23,7 +22,7 @@ namespace Z0
         public static bool unfence(string src, Fence<char> fence, out string dst)
         {
             dst = EmptyString;
-            if(!Query.blank(src) && Query.fenced(src, fence, out var location))
+            if(!TextQuery.blank(src) && TextQuery.fenced(src, fence, out var location))
             {
                 dst = text.segment(src, location.Left + 1,  location.Right - 1);
                 return true;

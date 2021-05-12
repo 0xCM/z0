@@ -27,22 +27,22 @@ namespace Z0
         void OnStatusEvent(in string src)
             => term.inform(src);
 
-        public Outcome<TextLines> RunControlScript(FS.FileName name)
+        public Outcome<Index<TextLine>> RunControlScript(FS.FileName name)
             => RunScript(Paths.ControlScript(name), new ScriptId(name.Name));
 
-        public Outcome<TextLines> RunToolCmd(ToolId tool, ScriptId script)
+        public Outcome<Index<TextLine>> RunToolCmd(ToolId tool, ScriptId script)
             => RunToolScript(tool, script, ToolScriptKind.Cmd);
 
         public FS.FilePath ToolCmdPath(ToolId tool, ScriptId script)
             => ScriptFile(tool,script,ToolScriptKind.Cmd);
 
-        public Outcome<TextLines> RunToolPs(ToolId tool, ScriptId script)
+        public Outcome<Index<TextLine>> RunToolPs(ToolId tool, ScriptId script)
             => RunToolScript(tool, script, ToolScriptKind.Ps);
 
-        public Outcome<TextLines> RunToolScript(ToolId tool, ScriptId script, ToolScriptKind kind)
+        public Outcome<Index<TextLine>> RunToolScript(ToolId tool, ScriptId script, ToolScriptKind kind)
             => Run(CmdLine(ScriptFile(tool, script, kind), kind), script);
 
-        public Outcome<TextLines> RunScript(FS.FilePath src)
+        public Outcome<Index<TextLine>> RunScript(FS.FilePath src)
         {
             using var writer = Paths.CmdLog(src.FileName.Format()).Writer();
             try
@@ -61,7 +61,7 @@ namespace Z0
             }
         }
 
-        Outcome<TextLines> Run(CmdLine cmd, ScriptId script)
+        Outcome<Index<TextLine>> Run(CmdLine cmd, ScriptId script)
         {
             using var writer = Paths.CmdLog(script).Writer();
 
@@ -81,7 +81,7 @@ namespace Z0
             }
         }
 
-        Outcome<TextLines> RunScript(FS.FilePath src, ScriptId script)
+        Outcome<Index<TextLine>> RunScript(FS.FilePath src, ScriptId script)
             => Run(new CmdLine(src.Format(PathSeparator.BS)), script);
 
         FS.FilePath ScriptFile(ToolId tool, ScriptId script, ToolScriptKind kind)

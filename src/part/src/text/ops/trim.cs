@@ -6,18 +6,47 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    using static Part;
-    using static TextRules;
+    using static Root;
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string trim(string src)
-            => Transform.trim(src);
+            => src.Trim();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string trim(string src, char match)
-            => Transform.trim(src, match);
+            => src.Trim(match);
+
+        [MethodImpl(Inline), Op]
+        public static string trim(string src, char[] matches)
+            => src.Trim(matches);
+
+        [Op]
+        public static IEnumerable<string> trim(IEnumerable<string> src)
+            => src.Select(s => s.Trim());
+
+        [Op]
+        public static IEnumerable<string> trim(IEnumerable<string> src, char match)
+            => src.Select(s => s.Trim(match));
+
+        [Op]
+        public static IEnumerable<string> trim(IEnumerable<string> src, char[] matches)
+            => src.Select(s => s.Trim(matches));
+
+        [Op]
+        public static string[] trim(string[] src)
+            => src.Select(s => s.Trim());
+
+        [Op]
+        public static string[] trim(string[] src, char match)
+            => src.Select(s => s.Trim(match));
+
+        [Op]
+        public static string[] trim(string[] src, char[] matches)
+            => src.Select(s => s.Trim(matches));
     }
 }

@@ -9,8 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public readonly struct Index<I,T> : IIndex<I,T>
         where I : unmanaged
@@ -21,7 +21,7 @@ namespace Z0
         public Index(T[] src)
             => Data = src;
 
-        public Index(Count count)
+        public Index(uint count)
             => Data = alloc<T>(count);
 
         public Span<T> Edit
@@ -45,7 +45,7 @@ namespace Z0
         public ref T this[I index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[@as<I,uint>(index)];
+            get => ref Data[core.@as<I,uint>(index)];
         }
 
         public int Length
@@ -92,7 +92,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt8k)]
         static Index<I,X> view<X>(IEnumerable<X> src)
-            => new Index<I,X>(src.Array());
+            => new Index<I,X>(src.ToArray());
 
         public Index<I,Y> Select<Y>(Func<T,Y> selector)
              => Index.map(Data.Storage, selector);

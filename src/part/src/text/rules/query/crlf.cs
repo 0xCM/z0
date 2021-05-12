@@ -7,19 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial struct TextRules
+    partial struct TextQuery
     {
-        partial struct Query
-        {
-            /// <summary>
-            /// Tests whether the first <see cref='char'/> is a <see cref='AsciChar.CR'/> and the second <see cref='char'/> is a <see cref='AsciChar.LF'/>
-            /// </summary>
-            /// <param name="c">The character to test</param>
-            [MethodImpl(Inline), Op]
-            public static bit crlf(char a, char b)
-                => cr(a) && lf(b);
-        }
+        /// <summary>
+        /// Tests whether the first <see cref='char'/> is a <see cref='AsciChar.CR'/> and the second <see cref='char'/> is a <see cref='AsciChar.LF'/>
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit crlf(char a, char b)
+            => cr(a) && lf(b);
     }
 }

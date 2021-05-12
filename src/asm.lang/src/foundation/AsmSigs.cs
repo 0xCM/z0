@@ -7,11 +7,9 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
     using static Chars;
     using static memory;
     using static Rules;
-    using static TextRules;
 
     [ApiHost]
     public class AsmSigs : AppService<AsmSigs>
@@ -35,7 +33,7 @@ namespace Z0.Asm
             var s = src.Content;
             return s.Length >= 2
                 && @char(s) == DigitQualifier
-                && Query.test(@char(s,1), Rules.oneof(RegDigits));
+                && TextQuery.test(@char(s,1), Rules.oneof(RegDigits));
         }
 
         [Op]

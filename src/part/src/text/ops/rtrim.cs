@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static TextRules;
+    using static Root;
 
     partial class text
     {
@@ -19,6 +18,6 @@ namespace Z0
         /// <param name="chars">The leading characters to remove</param>
         [Op]
         public static string rtrim(string src, params char[] chars)
-            => Query.blank(src) ? EmptyString : src.TrimEnd(chars);
+            => TextQuery.blank(src) ? EmptyString : src.TrimEnd(chars);
     }
 }

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     partial struct Index
     {
         public static Index<T> sort<T>(Index<T> src)

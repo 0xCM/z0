@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct Index
     {
@@ -24,8 +24,8 @@ namespace Z0
             if(count == 0)
                 return true;
 
-            ref readonly var a = ref memory.first(src);
-            ref readonly var b = ref memory.first(dst);
+            ref readonly var a = ref core.first(src);
+            ref readonly var b = ref core.first(dst);
 
             for(var i=0; i<count; i++)
                 if(!skip(a,i).Equals(skip(b,i)))
@@ -45,8 +45,8 @@ namespace Z0
             if(count == 0)
                 return true;
 
-            ref readonly var a = ref memory.first(src);
-            ref readonly var b = ref memory.first(dst);
+            ref readonly var a = ref core.first(src);
+            ref readonly var b = ref core.first(dst);
 
             for(var i=0; i<count; i++)
                 if(!comparer.Equals(skip(a,i),skip(b,i)))

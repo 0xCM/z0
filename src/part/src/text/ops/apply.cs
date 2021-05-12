@@ -8,12 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
+    using static Root;
     using static memory;
     using static Rules;
 
     partial class text
     {
+        [MethodImpl(Inline), Op]
+        public static Index<string> apply(Ordered<string> rule, Index<string> src)
+            => src.Sort();
+
         [Op]
         public static Index<string> apply(SeqSplit<char> rule, string src)
         {

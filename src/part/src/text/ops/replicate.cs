@@ -8,17 +8,26 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static TextRules;
+    using static Root;
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Creates a stream of replicated characters
+        /// </summary>
+        /// <param name="src">The character to replicate</param>
+        /// <param name="count">The replication count</param>
+        [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> replicate(char src, int count)
-            => Transform.replicate(src,count);
+            => new string(src, count);
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// Repeats a string a specified number of times
+        /// </summary>
+        /// <param name="src">The text content to replicate</param>
+        /// <param name="count">The number of copies to produce</param>
+        [MethodImpl(Inline), Op]
         public static IEnumerable<string> replicate(string src, int count)
-            => Transform.replicate(src,count);
+            => src.Replicate(count);
     }
 }
