@@ -9,32 +9,25 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CliStringHeap : ICliHeap<CliStringHeap>
+    public readonly struct CliGuidHeap : ICliHeap<CliGuidHeap>
     {
         public MemoryAddress BaseAddress {get;}
 
         public ByteSize Size {get;}
 
-        public CliHeapKind HeapKind {get;}
-
         [MethodImpl(Inline)]
-        public CliStringHeap(MemoryAddress @base, ByteSize size, CliHeapKind kind)
+        public CliGuidHeap(MemoryAddress @base, ByteSize size)
         {
             BaseAddress = @base;
             Size = size;
-            HeapKind = kind;
         }
+
+        public CliHeapKind HeapKind => CliHeapKind.Guid;
 
         public unsafe ReadOnlySpan<byte> Data
         {
             [MethodImpl(Inline)]
             get => memory.cover<byte>(BaseAddress, Size);
-        }
-
-        public uint EntryCount
-        {
-            [MethodImpl(Inline)]
-            get => CliHeaps.count(this);
         }
 
         public string Format()

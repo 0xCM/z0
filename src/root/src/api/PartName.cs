@@ -24,9 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public PartName(PartId id)
-        {
-            Id = id;
-        }
+            => Id = id;
 
         public string Name
         {

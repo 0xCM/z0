@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Cli)" />
   </ItemGroup>
 
 </Project>

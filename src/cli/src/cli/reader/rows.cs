@@ -11,8 +11,6 @@ namespace Z0
 
     using static CliRows;
     using static CliTableKinds;
-    using static memory;
-    using static Part;
 
     partial struct CliReader
     {

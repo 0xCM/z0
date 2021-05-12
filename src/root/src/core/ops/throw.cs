@@ -18,14 +18,11 @@ namespace Z0
         public static void @throw(Exception e)
             => throw e;
 
-        [Op]
         public static T @throw<T>(Exception e)
             => throw e;
 
-        [Op]
         public static T @throw<T>([Caller] string caller = null, [Line] int? line = null, [File] string? path = null)
             => throw new Exception();
-
 
         public static NotSupportedException no<T>()
             => new NotSupportedException($"The type {typeof(T).Name} is not supported");

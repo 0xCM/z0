@@ -39,7 +39,7 @@ namespace Z0
         public Span<char> Edit
         {
             [MethodImpl(Inline)]
-            get => memory.edit(View); //memory.edit(Data);
+            get => memory.edit(View);
         }
 
         public bool IsEmpty

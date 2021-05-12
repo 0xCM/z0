@@ -16,7 +16,7 @@ namespace Z0
         public Index<CliUserString> ReadUserStrings()
         {
             var reader = MD;
-            int size = reader.GetHeapSize(HeapIndex.UserString);
+            int size = MD.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
                 return sys.empty<CliUserString>();
 
@@ -27,7 +27,7 @@ namespace Z0
             do
             {
                 values.Add(new CliUserString(seq: i++, size, CliReader.HeapOffset(handle), CliReader.Read(handle)));
-                handle = reader.GetNextHandle(handle);
+                handle = MD.GetNextHandle(handle);
             }
             while (!handle.IsNil);
 

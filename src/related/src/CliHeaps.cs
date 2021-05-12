@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly partial struct CliHeaps
@@ -16,15 +17,37 @@ namespace Z0
         public static unsafe uint count(CliStringHeap src)
         {
             var counter = 0u;
-            var pFirst = src.BaseAddress.Pointer<char>();
+            var pCurrent = src.BaseAddress.Pointer<char>();
             var pLast = (src.BaseAddress + src.Size).Pointer<char>();
-            var pCurrent = pFirst;
             while(pCurrent < pLast)
             {
-                if(*pCurrent++ == 0)
+                if(*pCurrent++ == Chars.Null)
                     counter++;
             }
             return counter;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static unsafe uint terminators(CliStringHeap src, Span<uint> dst)
+        {
+            var counter = 0u;
+            var pCurrent = src.BaseAddress.Pointer<char>();
+            var pLast = (src.BaseAddress + src.Size).Pointer<char>();
+            var pos = 0u;
+            while(pCurrent < pLast)
+            {
+                if(*pCurrent++ == Chars.Null)
+                    seek(dst, counter++) = pos;
+                pos++;
+            }
+            return counter;
+        }
+
+        public static Index<uint> terminators(CliStringHeap src)
+        {
+            var dst = alloc<uint>(count(src));
+            terminators(src,dst);
+            return dst;
         }
     }
 }

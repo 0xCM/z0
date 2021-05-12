@@ -12,20 +12,26 @@ namespace Z0
 
     partial struct ApiSigs
     {
+        [ApiHost("apisigs.modifiers")]
         public readonly struct Modifiers
         {
+            [Op]
             public static In @in()
                 => default;
 
+            [Op]
             public static Out @out()
                 => default;
 
+            [Op]
             public static Ref @ref()
                 => default;
 
+            [Op]
             public static Ptr ptr()
                 => default;
 
+            [Op]
             public static Imm imm()
                 => default;
 
@@ -78,7 +84,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 public static implicit operator Modifier(Ref src)
                     => new Modifier(src.Name,src.Kind);
-
             }
 
             public readonly struct Ptr : ISigModifier<Ptr>

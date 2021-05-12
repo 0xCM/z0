@@ -15,6 +15,7 @@ namespace Z0
     using static memory;
 
     using static CliRows;
+
     using K = CliTableKinds;
 
     [ApiHost]
@@ -91,7 +92,37 @@ namespace Z0
             var handle = MetadataTokens.StringHandle(0);
             var offset = MD.GetHeapOffset(handle);
             var @base = Segment.BaseAddress + offset;
-            return new CliStringHeap(@base, size);
+            return new CliStringHeap(@base, size, CliHeapKind.String);
+        }
+
+        [Op]
+        public CliStringHeap UserStringHeap()
+        {
+            var size = MD.GetHeapSize(HeapIndex.UserString);
+            var handle = MetadataTokens.UserStringHandle(0);
+            var offset = MD.GetHeapOffset(handle);
+            var @base = Segment.BaseAddress + offset;
+            return new CliStringHeap(@base, size, CliHeapKind.UserString);
+        }
+
+        [Op]
+        public CliGuidHeap GuidHeap()
+        {
+            var size = MD.GetHeapSize(HeapIndex.Guid);
+            var handle = MetadataTokens.GuidHandle(0);
+            var offset = MD.GetHeapOffset(handle);
+            var @base = Segment.BaseAddress + offset;
+            return new CliGuidHeap(@base, size);
+        }
+
+        [Op]
+        public CliBlobHeap BlobHeap()
+        {
+            var size = MD.GetHeapSize(HeapIndex.Blob);
+            var handle = MetadataTokens.BlobHandle(0);
+            var offset = MD.GetHeapOffset(handle);
+            var @base = Segment.BaseAddress + offset;
+            return new CliBlobHeap(@base, size);
         }
 
         [MethodImpl(Inline), Op]
@@ -238,5 +269,40 @@ namespace Z0
         public BinaryCode ReadSig(MethodDefinition src)
             => Read(src.Signature);
 
+        public ReadOnlySpan<string> UserStrings()
+        {
+            int size = MD.GetHeapSize(HeapIndex.UserString);
+            if (size == 0)
+                return sys.empty<string>();
+
+            var values = root.list<string>();
+            var handle = MetadataTokens.UserStringHandle(0);
+            do
+            {
+                values.Add(Read(handle));
+                handle = MD.GetNextHandle(handle);
+            }
+            while (!handle.IsNil);
+
+            return values.ViewDeposited();
+        }
+
+        public ReadOnlySpan<string> SystemStrings()
+        {
+            int size = MD.GetHeapSize(HeapIndex.String);
+            if (size == 0)
+                return sys.empty<string>();
+
+            var values = root.list<string>();
+            var handle = MetadataTokens.StringHandle(0);
+            do
+            {
+                values.Add(Read(handle));
+                handle = MD.GetNextHandle(handle);
+            }
+            while (!handle.IsNil);
+
+            return values.ViewDeposited();
+        }
     }
 }

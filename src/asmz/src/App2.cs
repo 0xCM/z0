@@ -1248,11 +1248,6 @@ namespace Z0.Asm
             root.iter(reader.AssemblyRefKeys(), k => Wf.Row(k));
         }
 
-        public void CheckApiKeys()
-        {
-            var keys = ApiKeyChecks.create(Wf);
-            keys.Run();
-        }
 
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
             => Wf.ApiCatalogs().EmitApiClasses();

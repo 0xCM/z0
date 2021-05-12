@@ -92,14 +92,17 @@ namespace Z0
         /// <param name="pad">The right-padded content width</param>
         /// <param name="delimiter">The content delimiter</param>
         [TextUtility]
-        public static void Label<T>(this ITextBuffer dst, string label, char sep, T content, Padding pad, char delimiter = Chars.Pipe)
+        public static void Label<T>(this ITextBuffer dst, string label, char sep, T content, int pad, char delimiter = Chars.Pipe)
             where T : ITextual
         {
             dst.Append(Chars.Space);
             dst.Append(delimiter);
             dst.Append(Chars.Space);
             dst.Label(label, sep);
-            dst.Append($"{content.Format()}".PadRight((int)pad));
+            if(pad <= 0)
+                dst.Append($"{content.Format()}".PadRight(-pad));
+            else
+                dst.Append($"{content.Format()}".PadLeft(pad));
         }
     }
 }

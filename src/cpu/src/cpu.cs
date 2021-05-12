@@ -8,13 +8,13 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiSetKind.Cpu)]
+    [ApiHost]
     public readonly partial struct cpu
     {
         const NumericKind Closure = UnsignedInts;
     }
 
-    [ApiHost(ApiSetKind.Cpu | ApiSetKind.Generic)]
+    [ApiHost]
     public readonly partial struct gcpu
     {
         const NumericKind Closure = UnsignedInts;

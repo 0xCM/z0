@@ -8,7 +8,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiSetKind.Bits | ApiSetKind.Generic)]
+    [ApiHost]
     public partial class gbits
     {
         const NumericKind Closure = UnsignedInts;

@@ -12,10 +12,7 @@ using Z0;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 public class ApiHostAttribute : ApiProviderAttribute
 {
-
     public string HostName {get;}
-
-    public ApiSetKind ApiSet {get;}
 
     public ApiHostAttribute(string name)
         : base(ApiProviderKind.Stateless)
@@ -27,19 +24,6 @@ public class ApiHostAttribute : ApiProviderAttribute
         : base(ApiProviderKind.Stateless, global)
     {
         HostName = name;
-    }
-
-    public ApiHostAttribute(string name, ApiSetKind apiset)
-        : base(ApiProviderKind.Stateless)
-    {
-        HostName = name;
-        ApiSet = apiset;
-    }
-
-    public ApiHostAttribute(ApiSetKind apiset)
-        : this(string.Empty)
-    {
-        ApiSet = apiset;
     }
 
     public ApiHostAttribute()

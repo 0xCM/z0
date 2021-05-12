@@ -13,7 +13,7 @@ namespace Z0
     class App : WfApp<App>
     {
         public static void Main(params string[] args)
-            => run(args, PartId.BitNumbers, PartId.DynamicShell);
+            => run(args, PartId.Dynamic, PartId.DynamicShell, PartId.Cpu, PartId.Math, PartId.GMath, PartId.Part);
 
         readonly IDynexus Dynamic;
 
@@ -84,10 +84,83 @@ namespace Z0
             Wf.Row(string.Format("Align({0}) = {1}", a, b));
         }
 
+        public void Test5()
+        {
+            ApiKeyChecks.create(Wf).Run();
+        }
+
+        public void Test6(PartId part)
+        {
+            Reader(part, out var reader);
+            var strings = reader.SystemStrings();
+            var count = strings.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var s = ref skip(strings,i);
+                Wf.Row(string.Format("{0:D5}:{1}", i, s));
+            }
+        }
+
+        bool Reader(PartId part, out CliReader dst)
+        {
+            if(Wf.ApiCatalog.FindComponent(part, out var component))
+            {
+                dst = Cli.reader(component);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        unsafe void Test7(CliReader reader)
+        {
+            var heap = reader.StringHeap();
+            var data = heap.Data;
+            var size = heap.Size;
+            var term = 0;
+            var dst = root.list<uint>();
+            for(var i=0u; i<size; i++)
+            {
+                if(skip(data,i) == 0)
+                    dst.Add(i);
+            }
+
+            var offsets = dst.ViewDeposited();
+            var count = offsets.Length;
+            var sizes = alloc<ushort>(count);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var current = ref skip(offsets,i);
+                if(i==0)
+                    seek(sizes,i) = (ushort)(current);
+                else
+                {
+                    ref readonly var prior = ref skip(offsets, i - 1);
+                    seek(sizes,i) = (ushort)((current-prior));
+                }
+            }
+
+            var target = alloc<Paired<uint,ushort>>(count);
+            for(var i=0; i<count; i++)
+                seek(target,i) = (skip(offsets,i), skip(sizes,i));
+
+            Wf.Row(target.FormatList());
+        }
+
+        public void Test7()
+        {
+            Reader(PartId.Cpu, out var reader);
+            Test7(reader);
+
+        }
+
         protected override void Run()
         {
             var flow = Wf.Running();
-            Test4();
+            Test7();
             Wf.Ran(flow);
         }
 

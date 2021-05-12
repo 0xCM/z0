@@ -10,11 +10,11 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class ApiSig : IApiSig, IEquatable<ApiSig>
+    public class ApiSig : IEquatable<ApiSig>
     {
-        public Index<Type> Components {get;}
-
         public ApiClassKind Class {get;}
+
+        public Index<Type> Components {get;}
 
         [MethodImpl(Inline)]
         public ApiSig(Index<Type> components)

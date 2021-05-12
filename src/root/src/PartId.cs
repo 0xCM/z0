@@ -19,15 +19,11 @@ public enum PartId : ulong
 
     Core = 5,
 
-    Refs = 8,
-
     Api = 9,
 
     BitMasks = 10,
 
     Term = 11,
-
-    Files = 12,
 
     Sys = 13,
 
@@ -215,9 +211,6 @@ public enum PartId : ulong
 
     GVecTest = GVec | Test,
 
-    ToolsTest = Tools | Test,
-
-    TestDriver = Driver | Test,
 
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------

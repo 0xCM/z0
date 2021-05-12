@@ -9,7 +9,6 @@ namespace Z0
     {
         public static void run(string[] args, params PartId[] parts)
         {
-
             using var wf = WfRuntime.create(ApiQuery.parts((Index<PartId>)parts), args);
             using var app = new A();
             app.Init(wf);
