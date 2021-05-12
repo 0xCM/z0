@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong mod<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
-            where K2 : unmanaged, INatNonZero
+            where K2 : unmanaged, INonZeroNat
                 => value(k1) % value(k2);
 
         /// <summary>

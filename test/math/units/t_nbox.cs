@@ -8,7 +8,7 @@ namespace Z0
     {
         public void convert_1()
         {
-            var x = BoxedNumbers.define((byte)3);
+            var x = BoxedNumber.define((byte)3);
             var y = x.Convert<short>();
             Claim.eq(y, (short)x.Unbox<byte>());
         }
@@ -17,7 +17,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var x = BoxedNumbers.define(Random.Next<byte>());
+                var x = BoxedNumber.define(Random.Next<byte>());
                 var converter = BoxedNumber.Converter;
                 var y = converter.Convert<ushort>(x);
                 Claim.eq(Numeric.force<ushort>((byte)x.Boxed), y);

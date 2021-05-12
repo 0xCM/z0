@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [Datatype]
     public readonly struct Mb
@@ -16,6 +16,7 @@ namespace Z0
 
         public uint Count {get;}
 
+        [MethodImpl(Inline)]
         public Mb(uint src)
         {
             Count = src;

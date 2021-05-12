@@ -24,8 +24,8 @@ namespace Z0
             if(count == 0)
                 return true;
 
-            ref readonly var a = ref core.first(src);
-            ref readonly var b = ref core.first(dst);
+            ref readonly var a = ref first(src);
+            ref readonly var b = ref first(dst);
 
             for(var i=0; i<count; i++)
                 if(!skip(a,i).Equals(skip(b,i)))
@@ -45,8 +45,8 @@ namespace Z0
             if(count == 0)
                 return true;
 
-            ref readonly var a = ref core.first(src);
-            ref readonly var b = ref core.first(dst);
+            ref readonly var a = ref first(src);
+            ref readonly var b = ref first(dst);
 
             for(var i=0; i<count; i++)
                 if(!comparer.Equals(skip(a,i),skip(b,i)))

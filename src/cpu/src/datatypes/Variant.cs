@@ -67,7 +67,7 @@ namespace Z0
         public static unsafe variant scalar(Enum src)
         {
             var kind = src.GetType().GetEnumUnderlyingType().NumericKind();
-            var converted = (ulong)Numeric.rebox(src,NumericKind.U64);
+            var converted = (ulong)NumericBox.rebox(src,NumericKind.U64);
             return define(converted, kind);
         }
 

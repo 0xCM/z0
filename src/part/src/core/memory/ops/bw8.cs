@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
     partial struct memory
@@ -19,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static byte bw8<T>(T src)
             where T : unmanaged
-                => uint8(src);
+                => As<T,byte>(ref src);
     }
 }

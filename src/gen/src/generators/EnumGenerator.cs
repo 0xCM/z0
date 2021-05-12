@@ -32,7 +32,7 @@ namespace Z0
     {
         public override void Generate(in EnumSpec spec, ITextBuffer dst)
         {
-            var kw = Numeric.kind(spec.DataType).Keyword();
+            var kw = NumericKinds.kind(spec.DataType).Keyword();
             var counter = 0ul;
             var names = spec.Names.View;
             var count = names.Length;

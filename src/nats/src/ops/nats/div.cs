@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong divT<K1,K2,T>(K1 k1 = default, K2 k2 = default, T t = default)
             where K1 : unmanaged, ITypeNat
-            where K2 : unmanaged, INatNonZero
+            where K2 : unmanaged, INonZeroNat
             where T : unmanaged
                 => div(k1,k2)/(ulong)bitsize<T>();
     }

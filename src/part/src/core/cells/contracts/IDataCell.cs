@@ -41,7 +41,7 @@ namespace Z0
             => size<T>();
 
         NumericKind NumericKind
-            => Numeric.kind<T>();
+            => NumericKinds.kind<T>();
 
         NumericWidth NumericWidth
             => (NumericWidth)(size<T>()*8);

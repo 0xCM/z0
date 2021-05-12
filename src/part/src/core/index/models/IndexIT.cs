@@ -45,7 +45,7 @@ namespace Z0
         public ref T this[I index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[core.@as<I,uint>(index)];
+            get => ref Data[@as<I,uint>(index)];
         }
 
         public int Length

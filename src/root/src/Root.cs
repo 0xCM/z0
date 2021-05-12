@@ -13,7 +13,7 @@ namespace Z0
     public readonly partial struct Root
     {
         [MethodImpl(Inline)]
-        public static ref T @as<S,T>(in S src)
+        internal static ref T @as<S,T>(in S src)
             => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
 
         /// <summary>

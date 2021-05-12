@@ -42,12 +42,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static OpIdentity NumericOp<T>(string opname, bool generic = true)
             where T : unmanaged
-                => build(opname, TypeWidth.None, Numeric.kind<T>(), generic);
+                => build(opname, TypeWidth.None, NumericKinds.kind<T>(), generic);
 
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{PartName.from(host)}/{host.Name}{UriPathSep}{build(label, default(W).TypeWidth, Numeric.kind<C>(), generic)}";
+                => $"{PartName.from(host)}/{host.Name}{UriPathSep}{build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
 
         /// <summary>
         /// Produces a test case identifier predicated on a parametrically-specialized label
@@ -69,12 +69,12 @@ namespace Z0
         public static OpIdentity kind<K,T>(K kind, T t = default)
             where K : unmanaged
             where T : unmanaged
-                => build(kind.ToString().ToLower(), (TypeWidth)memory.width<T>(), Numeric.kind<T>(), true);
+                => build(kind.ToString().ToLower(), (TypeWidth)memory.width<T>(), NumericKinds.kind<T>(), true);
 
         public static OpIdentity klass<K,T>(K @class, T t = default)
             where K : unmanaged, IApiClass
             where T : unmanaged
-                => build(@class.Format(), (TypeWidth)memory.width<T>(), Numeric.kind<T>(), true);
+                => build(@class.Format(), (TypeWidth)memory.width<T>(), NumericKinds.kind<T>(), true);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]

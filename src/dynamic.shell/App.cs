@@ -10,6 +10,10 @@ namespace Z0
     using static Part;
     using static memory;
 
+
+
+
+
     class App : WfApp<App>
     {
         public static void Main(params string[] args)

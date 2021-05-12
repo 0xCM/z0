@@ -250,18 +250,18 @@ namespace Z0
 
         [Op]
         static string format8(object src)
-            => create<byte>().Format((byte)Numeric.rebox(src, NumericKind.U8));
+            => create<byte>().Format((byte)NumericBox.rebox(src, NumericKind.U8));
 
         [Op]
         static string format16(object src)
-            => create<ushort>().Format((ushort)Numeric.rebox(src, NumericKind.U16));
+            => create<ushort>().Format((ushort)NumericBox.rebox(src, NumericKind.U16));
 
         [Op]
         static string format32(object src)
-            => create<uint>().Format((uint)Numeric.rebox(src, NumericKind.U32));
+            => create<uint>().Format((uint)NumericBox.rebox(src, NumericKind.U32));
 
         [Op]
         static string format64(object src)
-            => create<ulong>().Format((ulong)Numeric.rebox(src, NumericKind.U64));
+            => create<ulong>().Format((ulong)NumericBox.rebox(src, NumericKind.U64));
     }
 }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct Numeric
     {
@@ -133,6 +133,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(char src)
             => NumericCast.force<T>(src);
-
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     /// Captures evidence that k != 0
     /// </summary>
     /// <typeparam name="K">A nonzero natural type</typeparam>
-    public readonly struct NatNonzero<K> : INatNonZero<K>
+    public readonly struct NatNonzero<K> : INonZeroNat<K>
         where K: unmanaged, ITypeNat
     {
         static K k => default;

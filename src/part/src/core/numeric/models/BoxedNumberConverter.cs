@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct BoxedNumberConverter
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The target numeric type</typeparam>
         [MethodImpl(Inline)]
         public T Convert<T>(BoxedNumber src)
-            => (T)Numeric.rebox(src.Boxed, Numeric.kind<T>());
+            => (T)NumericBox.rebox(src.Boxed, NumericKinds.kind<T>());
 
         /// <summary>
         /// Puts a number in a box of kind parametric
@@ -27,14 +27,14 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public BoxedNumber Convert<T>(T src)
-            => BoxedNumbers.define(src, Numeric.kind<T>());
+            => BoxedNumber.define(src, NumericKinds.kind<T>());
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
         {
             try
             {
                 var src = (BoxedNumber)incoming;
-                return Numeric.rebox(src.Boxed, dst.NumericKind());
+                return NumericBox.rebox(src.Boxed, dst.NumericKind());
             }
             catch(Exception)
             {
@@ -45,7 +45,7 @@ namespace Z0
         public Option<object> ConvertToTarget(object incoming)
         {
             var kind = (incoming?.GetType() ?? typeof(void)).NumericKind();
-            return kind.IsSome() ? BoxedNumbers.define(incoming, kind) : root.none<BoxedNumber>();
+            return kind.IsSome() ? BoxedNumber.define(incoming, kind) : root.none<BoxedNumber>();
         }
     }
 }

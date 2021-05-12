@@ -9,8 +9,10 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
+    using static memory;
 
-    public readonly struct PinnedIndex<T> : IDisposable, IIndex<T>
+    public unsafe class PinnedIndex<T> : IDisposable, IIndex<T>
+        where T : unmanaged
     {
         readonly GCHandle Handle;
 
@@ -20,7 +22,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public PinnedIndex(T[] content)
-            : this()
         {
             Handle = GCHandle.Alloc(this);
             Address = Handle.AddrOfPinnedObject();
@@ -67,23 +68,32 @@ namespace Z0
             get => ref Buffer[index];
         }
 
-        public struct PinnedCell
+        public unsafe struct PinnedCell
         {
-            readonly MemoryAddress Enclosure;
+            readonly T* pCell;
 
-            readonly uint Index;
+            [MethodImpl(Inline)]
+            public PinnedCell(MemoryAddress @base, uint index)
+            {
+                pCell = (T*)(@base.Pointer<byte>() + size<T>()*index);
+            }
 
             public ref T Content
             {
                 [MethodImpl(Inline)]
-                get => ref Enclosure.Ref<PinnedIndex<T>>()[Index];
+                get => ref @ref(pCell);
             }
 
-            [MethodImpl(Inline)]
-            public PinnedCell(MemoryAddress enclosure, uint index)
+            public MemoryAddress Address
             {
-                Enclosure = enclosure;
-                Index = index;
+                [MethodImpl(Inline)]
+                get => address(pCell);
+            }
+
+            public ByteSize Size
+            {
+                [MethodImpl(Inline)]
+                get => size<T>();
             }
         }
 

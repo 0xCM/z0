@@ -23,5 +23,4 @@ namespace Z0.Lang
     {
         K Kind {get;}
     }
-
 }

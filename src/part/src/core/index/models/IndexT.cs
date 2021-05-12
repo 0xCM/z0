@@ -84,7 +84,7 @@ namespace Z0
         public ref T First
         {
             [MethodImpl(Inline)]
-            get => ref Index.first(Data);
+            get => ref core.first(Data);
         }
 
         public ref T Last

@@ -8,7 +8,7 @@ namespace Z0
     using System.Text;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines an observation sequence
