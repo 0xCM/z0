@@ -15,7 +15,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
-    using static CliRows;
     using static ProcessMemory;
 
     class App : AppService<App>
@@ -1391,10 +1390,22 @@ namespace Z0.Asm
             Wf.ProcessContextPipe().EmitContextSummary(dst);
         }
 
-        public void Run()
+        void CheckMetadata(PartId id)
         {
-            //CaptureSelf();
+            var tool = Wf.Roslyn();
+            if(Wf.ApiCatalog.FindComponent(id, out var assembly))
+            {
+                var name = string.Format("z0.{0}.compilation", id.Format());
+                var comp = tool.Compilation(MetadataReferences.from(assembly), name);
+                Wf.Row(comp.AssemblyName);
+            }
 
+            // var metadata = MetadataReferences.from(Parts.Math.Assembly);
+            // Wf.Row(metadata.Display);
+        }
+
+        void CheckResolution()
+        {
             var methods = ResolveParts(PartId.GMath, PartId.Cpu, PartId.Math);
             var count = methods.Count;
             for(var i=0u; i<count; i++)
@@ -1402,6 +1413,14 @@ namespace Z0.Asm
                 var method = methods[i];
                 Wf.Row(method.Format());
             }
+
+        }
+
+        public void Run()
+        {
+
+                //CaptureSelf();
+            CheckMetadata(PartId.Math);
         }
 
 

@@ -35,6 +35,8 @@ namespace Z0
 
         public static ToolId nasm => asm.nasm;
 
+        public static ToolId roslyn => msdev.roslyn;
+
         public static ToolId ndisasm => asm.ndisasm;
 
         public static ToolId xed => asm.xed;
@@ -90,6 +92,8 @@ namespace Z0
             public static ToolId cl => "cl";
 
             public static ToolId ildasm => "ildasm";
+
+            public static ToolId roslyn => "roslyn";
 
             public static ToolId pdb2xml => "pdb2xml";
 

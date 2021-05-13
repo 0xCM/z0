@@ -2,18 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
     using Microsoft.CodeAnalysis;
-    using System.Reflection;
+    using Microsoft.CodeAnalysis.CSharp;
+
+    using static Root;
 
     [ApiHost]
-    public readonly partial struct CodeSolutions
+    public sealed partial class Roslyn : AppService<Roslyn>, ITool<Roslyn>
     {
+        public ToolId Id => Toolsets.roslyn;
+
         [Op]
-        public static ReadOnlySpan<string> SymbolKindNames()
-            => SymbolKindText.Kinds;
+        public Compilation Compilation(MetadataReference src, string name)
+            => CSharpCompilation.Create(name, references: new[]{src});
     }
 }

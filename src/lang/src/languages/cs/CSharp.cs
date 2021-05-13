@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    [ApiHost("lang.sharp")]
+    using System;
+
+    [ApiHost]
     public readonly partial struct CSharp : ILanguage<CSharp>
     {
         public Language Specifier => Languages.csharp;
