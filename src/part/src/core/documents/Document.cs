@@ -12,19 +12,19 @@ namespace Z0
     public abstract class Document<D> : Universe<D>, IDocument<D>
         where D : Document<D>, new()
     {
-        public ILocation Source {get;}
+        public ILocatable Source {get;}
 
-        protected Document(ILocation src)
+        protected Document(ILocatable src)
         {
             Source = src;
         }
 
         protected Document()
         {
-            Source = Location.Empty;
+            Source = Locatable.Empty;
         }
 
-        public abstract D Load(ILocation location);
+        public abstract D Load(ILocatable location);
 
         public abstract string Format();
     }
@@ -40,12 +40,12 @@ namespace Z0
         public C Content {get; private set;}
 
         protected Document(C content)
-            : base(Location.Empty)
+            : base(Locatable.Empty)
         {
             Content = content;
         }
 
-        protected Document(ILocation src, C content)
+        protected Document(ILocatable src, C content)
             : base(src)
         {
             Content = content;
@@ -71,7 +71,7 @@ namespace Z0
     public abstract class Document<D,C,L> : Document<D,C>, IDocument<D,C,L>
         where D : Document<D,C,L>, new()
         where C : struct, ITextual
-        where L : struct, ILocation
+        where L : struct, ILocatable
     {
         public static D load(L location)
             => new D().Load(location);
@@ -92,7 +92,7 @@ namespace Z0
 
         public abstract D Load(L src);
 
-        public sealed override D Load(ILocation src)
+        public sealed override D Load(ILocatable src)
             => Load((L)src);
     }
 }

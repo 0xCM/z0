@@ -4,18 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ILocation : ITextual
+    public interface ILocatable : ITextual
     {
         dynamic Locator {get;}
-
     }
 
-    public interface ILocation<T> : ILocation
+    public interface ILocatable<T> : ILocatable
         where T : struct
     {
         new T Locator => (T)this;
 
-        dynamic ILocation.Locator
+        dynamic ILocatable.Locator
             => Locator;
     }
 }

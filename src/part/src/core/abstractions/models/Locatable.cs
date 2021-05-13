@@ -9,18 +9,18 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Location : ILocation
+    public readonly struct Locatable : ILocatable
     {
         public dynamic Locator {get;}
 
         [MethodImpl(Inline)]
-        public Location(dynamic locator)
+        public Locatable(dynamic locator)
             => Locator = locator;
 
-        public static Location Empty
+        public static Locatable Empty
         {
             [MethodImpl(Inline)]
-            get => new Location(0ul);
+            get => new Locatable(0ul);
         }
 
         public string Format()

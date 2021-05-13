@@ -44,6 +44,10 @@
 
     <PackageReference Include="YamlDotNet" Version="11.1.1" />
 
+    <PackageReference Include="NuGet.Packaging.Core" Version="5.9.1" />
+    <PackageReference Include="NuGet.ProjectModel" Version="5.9.1" />
+    <PackageReference Include="NuGet.Versioning" Version="5.9.1" />
+
   </ItemGroup>
 
 </Project>
