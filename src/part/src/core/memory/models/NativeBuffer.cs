@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Represents a native buffer allocation

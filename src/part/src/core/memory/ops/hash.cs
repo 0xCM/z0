@@ -19,7 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint hash(MemoryAddress src)
             => (uint)src;
-            //src.IsNonZero ? alg.hash.marvin(memory.bytes((ulong)src)) : 0u;
 
         [Op]
         public static uint hash(ReadOnlySpan<MemoryAddress> src, Span<AddressHash> dst)

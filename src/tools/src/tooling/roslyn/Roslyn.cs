@@ -5,7 +5,6 @@
 namespace Z0.Tools
 {
     using System;
-    using System.Runtime.CompilerServices;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
@@ -17,7 +16,7 @@ namespace Z0.Tools
         public ToolId Id => Toolsets.roslyn;
 
         [Op]
-        public Compilation Compilation(MetadataReference src, string name)
+        public Compilation<CSharpCompilation> Compilation(MetadataReference src, string name)
             => CSharpCompilation.Create(name, references: new[]{src});
     }
 }

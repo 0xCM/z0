@@ -8,18 +8,21 @@ namespace Z0
 
     public interface ICodeSymbol
     {
-        ISymbol Symbol {get;}
+        ISymbol Source {get;}
     }
 
     public interface ICodeSymbol<T> : ICodeSymbol
-        where T : ICodeSymbol
+        where T : ISymbol
     {
-        new T Symbol {get;}
+        new T Source {get;}
+
+        ISymbol ICodeSymbol.Source
+            => Source;
     }
 
     public interface ICodeSymbol<H,T> : ICodeSymbol<T>
-        where T : ICodeSymbol
-        where H : ICodeSymbols<H,T>, new()
+        where H : new()
+        where T : ISymbol
     {
 
     }

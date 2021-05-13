@@ -88,12 +88,9 @@ namespace Z0
             {
                 var symbol = GetRawAssemblySymbol(metadataReference);
                 if (symbol == null)
-                {
                     return Enumerable.Empty<string>();
-                }
 
-                var references = GetReferencePaths(symbol);
-                return references.ToArray();
+                return GetReferencePaths(symbol).ToArray();
             }
 
             static IEnumerable<string> resolutionPaths = new[]
@@ -110,13 +107,9 @@ namespace Z0
                 {
                     var resolved = Resolve(referenceIdentity.Name);
                     if (!string.IsNullOrEmpty(resolved))
-                    {
                         yield return resolved;
-                    }
                     else
-                    {
                         Log.Message(SymbolIdService.GetAssemblyId(assemblySymbol) + " references an assembly that cannot be resolved: " + referenceIdentity.Name);
-                    }
                 }
             }
 

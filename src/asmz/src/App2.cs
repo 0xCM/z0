@@ -1396,8 +1396,21 @@ namespace Z0.Asm
             if(Wf.ApiCatalog.FindComponent(id, out var assembly))
             {
                 var name = string.Format("z0.{0}.compilation", id.Format());
-                var comp = tool.Compilation(MetadataReferences.from(assembly), name);
-                Wf.Row(comp.AssemblyName);
+                var metadata = MetadataReferences.from(assembly);
+                var comp = tool.Compilation(metadata, name);
+                var symbol = comp.GetAssemblySymbol(metadata);
+                var gns = symbol.GlobalNamespace;
+                var types = gns.GetTypes();
+                root.iter(types, show);
+
+
+                //Wf.Row(symbol.Name);
+            }
+
+            void show(CodeSymbolics.TypeSymbol src)
+            {
+                Wf.Row(src);
+                root.iter(src.GetMembers(), m => Wf.Row(m));
             }
         }
 
@@ -1410,14 +1423,13 @@ namespace Z0.Asm
                 var method = methods[i];
                 Wf.Row(method.Format());
             }
-
         }
 
         public void Run()
         {
 
                 //CaptureSelf();
-            CheckMetadata(PartId.Math);
+            CheckMetadata(PartId.Cpu);
         }
 
 

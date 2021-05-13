@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct memory
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
         public static ref byte u8(in bit src)
-            => ref memory.@as<bit,byte>(src);
+            => ref @as<bit,byte>(src);
 
         /// <summary>
         /// Presents a <see cref='bool'/> to a <see cref='byte'/>

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
     public readonly struct Allocation : IDisposable

@@ -102,10 +102,7 @@ namespace Z0
                             namespaceSymbol = moduleSymbol.GlobalNamespace;
                         }
 
-                        var types = GetTypes(namespaceSymbol)
-                            .OfType<INamedTypeSymbol>()
-                            .Where(t => t.CanBeReferencedByName);
-
+                        var types = GetTypes(namespaceSymbol).OfType<INamedTypeSymbol>().Where(t => t.CanBeReferencedByName);
                         var tempDocument = projectWithReference.AddDocument("temp", SourceText.From(""), null);
                         var metadataAsSourceService = WorkspaceHacks.GetMetadataAsSourceService(tempDocument);
                         if (addSourceToAsync == null)
@@ -188,10 +185,7 @@ namespace Z0
             static Dictionary<string, string> AssemblyNameToXmlDocFileMap
                 => assemblyNameToXmlDocFileMap ?? (assemblyNameToXmlDocFileMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase));
 
-            private static Project AddDocument(
-                Project project,
-                KeyValuePair<INamedTypeSymbol, string> symbolAndText,
-                HashSet<string> existingFileNames)
+            static Project AddDocument(Project project, KeyValuePair<INamedTypeSymbol, string> symbolAndText, HashSet<string> existingFileNames)
             {
                 var symbol = symbolAndText.Key;
                 var text = symbolAndText.Value;
@@ -223,7 +217,7 @@ namespace Z0
                 return project;
             }
 
-            private static string[] GetFolderChain(INamedTypeSymbol symbol)
+            static string[] GetFolderChain(INamedTypeSymbol symbol)
             {
                 var containingNamespace = symbol.ContainingNamespace;
                 var folders = new List<string>();
@@ -244,14 +238,14 @@ namespace Z0
                 return folders.ToArray();
             }
 
-            private static IEnumerable<ISymbol> GetTypes(INamespaceSymbol namespaceSymbol)
+            static IEnumerable<ISymbol> GetTypes(INamespaceSymbol namespaceSymbol)
             {
                 var results = new List<ISymbol>();
                 EnumSymbols(namespaceSymbol, results.Add);
                 return results;
             }
 
-            private static void EnumSymbols(INamespaceSymbol namespaceSymbol, Action<ISymbol> action)
+            static void EnumSymbols(INamespaceSymbol namespaceSymbol, Action<ISymbol> action)
             {
                 foreach (var subNamespace in namespaceSymbol.GetNamespaceMembers())
                 {

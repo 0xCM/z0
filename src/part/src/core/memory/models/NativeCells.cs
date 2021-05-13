@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
     public readonly struct NativeCells
@@ -27,7 +27,6 @@ namespace Z0
                 tokens[i] = new NativeCellToken<F>(IntPtr.Add(@base, (int)size*i), size);
             return tokens;
         }
-
     }
 
     public readonly ref struct NativeCells<F>

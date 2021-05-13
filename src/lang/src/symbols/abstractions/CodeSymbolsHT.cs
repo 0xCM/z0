@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Microsoft.CodeAnalysis;
 
     using static Root;
     using static memory;
 
     public abstract class CodeSymbols<H,T> : ICodeSymbols<H,T>
-        where H : ICodeSymbols<H,T>, new()
-        where T : ICodeSymbol
+        where T : ISymbol
+        where H : new()
     {
         protected Index<T> Data;
 
@@ -25,10 +26,23 @@ namespace Z0
         {
             Data = alloc<T>(count);
         }
+
         public T[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
+        }
+
+        protected Span<T> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
+        protected ReadOnlySpan<T> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
         }
 
         [MethodImpl(Inline)]

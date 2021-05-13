@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     partial struct memory
     {

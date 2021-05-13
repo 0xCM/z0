@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Root;
     using static System.Runtime.InteropServices.MemoryMarshal;
+    using static Root;
 
     partial struct memory
     {

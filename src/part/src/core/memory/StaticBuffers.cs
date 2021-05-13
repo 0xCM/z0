@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
-    [ApiHost(ApiNames.StaticBuffers, true)]
+    [ApiHost]
     public readonly struct StaticBuffers
     {
         const NumericKind Closure = UnsignedInts;

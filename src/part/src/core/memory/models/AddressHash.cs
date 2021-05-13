@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System;
 
-    using static Part;
+    using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AddressHash : IRecord<AddressHash>, IComparable<AddressHash>

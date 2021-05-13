@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Xml;
 
-    using static Part;
+    using static Root;
 
     partial struct XmlParts
     {
