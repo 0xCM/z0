@@ -123,9 +123,6 @@ namespace Z0
 
             public bool HasUnsupportedMetadata => Source.HasUnsupportedMetadata;
 
-            [MethodImpl(Inline)]
-            public static implicit operator TypeSymbol(CodeSymbol<ITypeSymbol> src)
-                => new TypeSymbol(src.Source);
 
             public ISymbol FindImplementationForInterfaceMember(ISymbol interfaceMember)
             {
@@ -161,22 +158,16 @@ namespace Z0
                 => api.materialize(Source.GetMembers().AsSpan());
 
             public ImmutableArray<ISymbol> GetMembers(string name)
-            {
-                return Source.GetMembers(name);
-            }
+                => Source.GetMembers(name);
 
-            public ReadOnlySpan<TypeSymbol> GetTypeMembers()
-                => api.materialize(Source.GetTypeMembers().AsSpan(), default(TypeSymbol));
+            public ReadOnlySpan<NamedTypeSymbol> GetTypeMembers()
+                => api.materialize(Source.GetTypeMembers().AsSpan(), default(NamedTypeSymbol));
 
-            public ImmutableArray<INamedTypeSymbol> GetTypeMembers(string name)
-            {
-                return Source.GetTypeMembers(name);
-            }
+            public ReadOnlySpan<NamedTypeSymbol> GetTypeMembers(string name)
+                => api.materialize(Source.GetTypeMembers(name).AsSpan(), default(NamedTypeSymbol));
 
-            public ImmutableArray<INamedTypeSymbol> GetTypeMembers(string name, int arity)
-            {
-                return Source.GetTypeMembers(name, arity);
-            }
+            public ReadOnlySpan<NamedTypeSymbol> GetTypeMembers(string name, int arity)
+                => api.materialize(Source.GetTypeMembers(name, arity).AsSpan(), default(NamedTypeSymbol));
 
             public ReadOnlySpan<AttributeData> GetAttributes()
                 => Source.GetAttributes().AsSpan();
@@ -210,6 +201,11 @@ namespace Z0
 
             public bool Equals(TypeSymbol src)
                 => Source.Equals(src.Source);
+
+            [MethodImpl(Inline)]
+            public static implicit operator TypeSymbol(CodeSymbol<ITypeSymbol> src)
+                => new TypeSymbol(src.Source);
+
          }
     }
 }

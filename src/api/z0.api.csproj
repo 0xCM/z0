@@ -11,6 +11,10 @@
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Related)" />
     <ProjectReference Include="$(Lang)" />
+    <ProjectReference Include="$(SFuncs)" />
+    <ProjectReference Include="$(Tools)" />
+    <ProjectReference Include="$(Cli)" />
+
   </ItemGroup>
 
 </Project>

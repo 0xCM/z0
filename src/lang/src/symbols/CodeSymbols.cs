@@ -16,8 +16,10 @@ namespace Z0
 
     }
 
+    [ApiHost]
     public readonly struct CodeSymbols
     {
+
         [MethodImpl(Inline), Op]
         public static CodeSymbol from(ISymbol src)
             => new CodeSymbol(src);
@@ -37,6 +39,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static NamedTypeSymbol from(INamedTypeSymbol src)
             => new NamedTypeSymbol(src);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> convert<T>(ReadOnlySpan<CodeSymbol> src)
+            where T : ICodeSymbol
+                => memory.recover<CodeSymbol,T>(src);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> materialize<S,T>(ReadOnlySpan<S> src, T target = default)

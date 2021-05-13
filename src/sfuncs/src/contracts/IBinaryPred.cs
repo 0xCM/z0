@@ -16,7 +16,6 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [Free, SFx]
         public interface IBinaryPred<T> : IFunc
-            where T : unmanaged
         {
             bit Invoke(T x, T y);
         }
@@ -44,7 +43,6 @@ namespace Z0
         public interface IBinaryPred<W,V,T> : IBinaryPred<W,V>
             where W : unmanaged, WType<W>
             where V : struct
-            where T : unmanaged
         {
 
         }

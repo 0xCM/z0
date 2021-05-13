@@ -16,8 +16,15 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [Free, SFx]
         public interface IUnaryPred<T> : IFunc<T,bit>
-            where T : unmanaged
         {
+
+        }
+
+        [Free, SFx]
+        public interface IUnaryPred<H,T> : IUnaryPred<T>
+            where H : IUnaryPred<H,T>
+        {
+
 
         }
 
