@@ -14,6 +14,8 @@ namespace Z0
 
     using static Root;
 
+    using api = CodeSymbols;
+
     partial struct CodeSymbolics
     {
         public readonly struct FunctionPointerTypeSymbol : ICodeSymbol<FunctionPointerTypeSymbol,IFunctionPointerTypeSymbol>
@@ -24,6 +26,18 @@ namespace Z0
             public FunctionPointerTypeSymbol(IFunctionPointerTypeSymbol src)
             {
                 Source = src;
+            }
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
             }
 
             public IMethodSymbol Signature => Source.Signature;
@@ -211,8 +225,11 @@ namespace Z0
                 return Source.ToMinimalDisplayParts(semanticModel, position, format);
             }
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             public bool Equals(FunctionPointerTypeSymbol src)
                 => Source.Equals(src.Source);

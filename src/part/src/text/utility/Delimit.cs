@@ -13,6 +13,8 @@ namespace Z0
 
     partial class XText
     {
+
+
         [MethodImpl(Inline)]
         public static DelimitedIndex<T> Delimit<T>(this T[] src, char delimiter = FieldDelimiter, int pad = 0)
             => new DelimitedIndex<T>(src, delimiter, pad);

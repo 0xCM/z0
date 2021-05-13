@@ -6,9 +6,17 @@ namespace Z0
 {
     using Microsoft.CodeAnalysis;
 
-    public interface ICodeSymbol
+    public interface ICodeSymbol : INullity, ITextual
     {
         ISymbol Source {get;}
+
+        bool INullity.IsEmpty
+            => Source == null;
+
+        bool INullity.IsNonEmpty
+            => Source != null;
+        string ITextual.Format()
+            => Source?.ToDisplayString() ?? "<null>";
     }
 
     public interface ICodeSymbol<T> : ICodeSymbol

@@ -26,6 +26,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public ITypeSymbol PointedAtType => Source.PointedAtType;
 
             public ImmutableArray<CustomModifier> CustomModifiers => Source.CustomModifiers;

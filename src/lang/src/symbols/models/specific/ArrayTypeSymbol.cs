@@ -30,6 +30,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public int Rank => Source.Rank;
 
             public bool IsSZArray => Source.IsSZArray;
@@ -238,8 +250,11 @@ namespace Z0
             public bool Equals(ArrayTypeSymbol src)
                 => Source.Equals(src.Source);
 
+             public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
-         }
+                => Format();
+        }
     }
 }

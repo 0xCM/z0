@@ -1409,8 +1409,19 @@ namespace Z0.Asm
 
             void show(CodeSymbolics.TypeSymbol src)
             {
+
                 Wf.Row(src);
                 root.iter(src.GetMembers(), m => Wf.Row(m));
+            }
+        }
+
+        void CheckMetadata2(PartId id)
+        {
+            if(Wf.ApiCatalog.FindComponent(id, out var assembly))
+            {
+                var symbolic = Wf.SourceSymbolic();
+                var symbols = symbolic.Symbolize(assembly);
+                root.iter(symbols.Methods, m => Wf.Row(m));
             }
         }
 
@@ -1429,7 +1440,7 @@ namespace Z0.Asm
         {
 
                 //CaptureSelf();
-            CheckMetadata(PartId.Cpu);
+            CheckMetadata2(PartId.Cpu);
         }
 
 

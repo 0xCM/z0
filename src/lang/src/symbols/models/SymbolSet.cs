@@ -29,6 +29,8 @@ namespace Z0
                 Metadata = metadata;
             }
 
+            public ReadOnlySpan<CodeSymbol> Untyped {get; private set;}
+
             public ReadOnlySpan<MetadataReference> Metadata {get;}
 
             public ReadOnlySpan<AssemblySymbol> Assemblies {get; private set;}
@@ -36,6 +38,12 @@ namespace Z0
             public ReadOnlySpan<TypeSymbol> Types {get; private set;}
 
             public ReadOnlySpan<MethodSymbol> Methods {get; private set;}
+
+            public SymbolSet Replace(ReadOnlySpan<CodeSymbol> src)
+            {
+                Untyped = src;
+                return this;
+            }
 
             public SymbolSet Replace(ReadOnlySpan<AssemblySymbol> src)
             {

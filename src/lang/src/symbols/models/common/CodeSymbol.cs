@@ -32,6 +32,12 @@ namespace Z0
             get => Source == null;
         }
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source != null;
+        }
+
         /// <inheritdoc cref='ISymbol.Kind'/>
         public SymbolKind Kind
         {
@@ -230,8 +236,11 @@ namespace Z0
         public bool Equals(CodeSymbol src)
             => Source.Equals(src.Source);
 
+        public string Format()
+            => api.format(this);
+
         public override string ToString()
-            => Source.ToDisplayString();
+            => Format();
 
         public static CodeSymbol Empty
         {

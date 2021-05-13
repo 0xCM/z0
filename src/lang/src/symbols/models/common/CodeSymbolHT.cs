@@ -10,6 +10,8 @@ namespace Z0
 
     using static Root;
 
+    using api = CodeSymbols;
+
     public readonly struct CodeSymbol<H,T> : ICodeSymbol<H,T>
         where T : ISymbol
         where H : new()
@@ -25,11 +27,29 @@ namespace Z0
             Index = index;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source == null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source != null;
+        }
+
         public T Source
         {
             [MethodImpl(Inline)]
             get => _Source.Subject(Index);
         }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
 
         ISymbol ICodeSymbol.Source
             => Source;

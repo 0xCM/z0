@@ -28,6 +28,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public NamespaceSymbol GlobalNamespace
                 => api.from(Source.GlobalNamespace);
 
@@ -106,7 +118,6 @@ namespace Z0
             public bool HasUnsupportedMetadata
                 => Source.HasUnsupportedMetadata;
 
-
             public INamespaceSymbol GetModuleNamespace(INamespaceSymbol namespaceSymbol)
                 => Source.GetModuleNamespace(namespaceSymbol);
 
@@ -145,8 +156,11 @@ namespace Z0
             public bool Equals(ModuleSymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator ModuleSymbol(CodeSymbol<IModuleSymbol> src)

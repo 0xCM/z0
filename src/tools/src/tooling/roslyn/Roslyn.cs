@@ -9,6 +9,7 @@ namespace Z0.Tools
     using Microsoft.CodeAnalysis.CSharp;
 
     using static Root;
+    using static LogRecords;
 
     [ApiHost]
     public sealed partial class Roslyn : AppService<Roslyn>, ITool<Roslyn>
@@ -18,5 +19,8 @@ namespace Z0.Tools
         [Op]
         public Compilation<CSharpCompilation> Compilation(MetadataReference src, string name)
             => CSharpCompilation.Create(name, references: new[]{src});
+
+        public Index<CompilerInvocationInfo> CompilerInvocations(FS.FilePath log)
+            => BuildLogParser.parse(log);
     }
 }

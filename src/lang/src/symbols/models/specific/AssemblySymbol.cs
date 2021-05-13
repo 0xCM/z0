@@ -31,6 +31,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public bool IsInteractive
                 => Source.IsInteractive;
 
@@ -181,8 +193,11 @@ namespace Z0
             public bool Equals(AssemblySymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             public ReadOnlySpan<FS.FilePath> GetReferencePaths(FS.FolderPath root)
             {

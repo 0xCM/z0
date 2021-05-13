@@ -21,8 +21,8 @@ namespace Z0
         }
 
         [Free, SFx]
-        public interface IUnaryPred<H,T> : IUnaryPred<T>
-            where H : IUnaryPred<H,T>
+        public interface IUnaryPred<P,T> : IUnaryPred<T>
+            where P : struct, IUnaryPred<P,T>
         {
 
 

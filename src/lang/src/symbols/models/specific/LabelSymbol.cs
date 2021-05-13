@@ -28,6 +28,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public IMethodSymbol ContainingMethod => Source.ContainingMethod;
 
             public SymbolKind Kind => Source.Kind;

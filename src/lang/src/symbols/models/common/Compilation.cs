@@ -9,7 +9,6 @@ namespace Z0
     using Microsoft.CodeAnalysis;
 
     using static Root;
-
     using static CodeSymbolics;
 
     public readonly struct Compilation<T>
@@ -22,6 +21,18 @@ namespace Z0
         {
             Source = src;
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source == null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source != null;
+            }
 
         public AssemblySymbol GetAssemblySymbol(MetadataReference src)
             => new AssemblySymbol((IAssemblySymbol)Source.GetAssemblyOrModuleSymbol(src));

@@ -28,9 +28,23 @@ namespace Z0
                 Source = src;
             }
 
-            public TypeKind TypeKind => Source.TypeKind;
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
 
-            public INamedTypeSymbol BaseType => Source.BaseType;
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
+            public TypeKind TypeKind
+                => Source.TypeKind;
+
+            public INamedTypeSymbol BaseType
+                => Source.BaseType;
 
             public ReadOnlySpan<NamedTypeSymbol> Interfaces
             {
@@ -38,14 +52,17 @@ namespace Z0
                 get => api.materialize(Source.Interfaces.AsSpan(), default(NamedTypeSymbol));
             }
 
-            public ImmutableArray<INamedTypeSymbol> AllInterfaces => Source.AllInterfaces;
+            public ImmutableArray<INamedTypeSymbol> AllInterfaces
+                => Source.AllInterfaces;
 
             public bool IsReferenceType
                 => Source.IsReferenceType;
 
-            public bool IsValueType => Source.IsValueType;
+            public bool IsValueType
+                => Source.IsValueType;
 
-            public bool IsAnonymousType => Source.IsAnonymousType;
+            public bool IsAnonymousType
+                => Source.IsAnonymousType;
 
             public bool IsTupleType
                 => Source.IsTupleType;
@@ -68,21 +85,29 @@ namespace Z0
             public bool IsReadOnly
                 => Source.IsReadOnly;
 
-            public NullableAnnotation NullableAnnotation => Source.NullableAnnotation;
+            public NullableAnnotation NullableAnnotation
+                => Source.NullableAnnotation;
 
-            public bool IsNamespace => Source.IsNamespace;
+            public bool IsNamespace
+                => Source.IsNamespace;
 
-            public bool IsType => Source.IsType;
+            public bool IsType
+                => Source.IsType;
 
-            public SymbolKind Kind => Source.Kind;
+            public SymbolKind Kind
+                => Source.Kind;
 
-            public string Language => Source.Language;
+            public string Language
+                => Source.Language;
 
-            public string Name => Source.Name;
+            public string Name
+                => Source.Name;
 
-            public string MetadataName => Source.MetadataName;
+            public string MetadataName
+                => Source.MetadataName;
 
-            public ISymbol ContainingSymbol => Source.ContainingSymbol;
+            public ISymbol ContainingSymbol
+                => Source.ContainingSymbol;
 
             public IAssemblySymbol ContainingAssembly
                 => Source.ContainingAssembly;
@@ -196,8 +221,11 @@ namespace Z0
             public ReadOnlySpan<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
                 => Source.ToMinimalDisplayParts(semanticModel, position, format).AsSpan();
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             public bool Equals(TypeSymbol src)
                 => Source.Equals(src.Source);

@@ -29,6 +29,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public ReadOnlySpan<TypeSymbol> GetTypes()
             {
                 var dst = root.list<TypeSymbol>();

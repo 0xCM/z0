@@ -14,6 +14,8 @@ namespace Z0
 
     using static Root;
 
+    using api = CodeSymbols;
+
     partial struct CodeSymbolics
     {
         public readonly struct ParameterSymbol : ICodeSymbol<ParameterSymbol,IParameterSymbol>
@@ -24,6 +26,18 @@ namespace Z0
             public ParameterSymbol(IParameterSymbol src)
             {
                 Source = src;
+            }
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
             }
 
             public RefKind RefKind => Source.RefKind;
@@ -129,8 +143,11 @@ namespace Z0
             public bool Equals(ParameterSymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator ParameterSymbol(CodeSymbol<IParameterSymbol> src)

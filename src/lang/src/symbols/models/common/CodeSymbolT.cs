@@ -10,6 +10,8 @@ namespace Z0
 
     using static Root;
 
+    using api = CodeSymbols;
+
     public readonly struct CodeSymbol<T> : ICodeSymbol<T>
         where T : ISymbol
     {
@@ -19,6 +21,18 @@ namespace Z0
         public CodeSymbol(T src)
         {
             Source = src;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source == null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source != null;
         }
 
         public ISymbol Untyped
@@ -50,6 +64,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Untyped.MetadataName;
         }
+
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator CodeSymbol(CodeSymbol<T> src)

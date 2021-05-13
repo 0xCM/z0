@@ -29,6 +29,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public int Arity => Source.Arity;
 
             public bool IsGenericType
@@ -288,8 +300,11 @@ namespace Z0
             public bool Equals(NamedTypeSymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator NamedTypeSymbol(CodeSymbol<INamedTypeSymbol> src)

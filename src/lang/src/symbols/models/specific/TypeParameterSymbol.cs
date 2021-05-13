@@ -14,6 +14,8 @@ namespace Z0
 
     using static Root;
 
+    using api = CodeSymbols;
+
     partial struct CodeSymbolics
     {
         public readonly struct TypeParameterSymbol : ICodeSymbol<TypeParameterSymbol,ITypeParameterSymbol>
@@ -24,6 +26,18 @@ namespace Z0
             public TypeParameterSymbol(ITypeParameterSymbol src)
             {
                 Source = src;
+            }
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
             }
 
             public int Ordinal => Source.Ordinal;
@@ -218,8 +232,11 @@ namespace Z0
             public bool Equals(TypeParameterSymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator TypeParameterSymbol(CodeSymbol<ITypeParameterSymbol> src)

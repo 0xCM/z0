@@ -30,6 +30,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public INamespaceOrTypeSymbol Target => Source.Target;
 
             public SymbolKind Kind => Source.Kind;
@@ -109,8 +121,11 @@ namespace Z0
             public bool Equals(AliasSymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator AliasSymbol(CodeSymbol<IAliasSymbol> src)

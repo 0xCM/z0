@@ -19,6 +19,9 @@ namespace Z0
     [ApiHost]
     public readonly struct CodeSymbols
     {
+        public static string format<T>(T src)
+            where T : ICodeSymbol
+                => src.Source?.ToDisplayString() ?? "<null>";
 
         [MethodImpl(Inline), Op]
         public static CodeSymbol from(ISymbol src)

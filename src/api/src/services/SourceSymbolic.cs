@@ -9,11 +9,10 @@ namespace Z0
     using System.Reflection;
     using Microsoft.CodeAnalysis;
 
-    using static CodeSymbolics;
-
     using static Part;
     using static memory;
     using static SFx;
+    using static CodeSymbolics;
 
     [ApiHost]
     public sealed class SourceSymbolic : AppService<SourceSymbolic>
@@ -31,20 +30,25 @@ namespace Z0
             => new MemberProducer();
 
         /// <summary>
-        /// Computes the maximum number of members supplied by a given element in the source
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op]
-        public static uint MaxMembers(ReadOnlySpan<TypeSymbol> src)
-            => SpanCalcs.max(src,producer());
-
-        /// <summary>
-        /// Computes the maximum number of members supplied by a given element in the source
+        /// Computes the total number of members that can be obtained from specified source elements
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static uint MemberCount(ReadOnlySpan<TypeSymbol> src)
-            => SpanCalcs.count(src,producer());
+        {
+            var count = src.Length;
+            var total = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var symbol = ref skip(src,i);
+                if(symbol.IsNonEmpty)
+                {
+                    var members = symbol.GetMembers();
+                    total += (uint)members.Length;
+                }
+            }
+            return total;
+        }
 
         public SymbolSet Symbolize(Assembly src)
         {
@@ -57,30 +61,51 @@ namespace Z0
             dst.Replace(array(assemlby));
             var gns = assemlby.GlobalNamespace;
             var types = gns.GetTypes();
+            Wf.Status(string.Format("Traversing {0} types", types.Length));
             dst.Replace(types);
             var allocation = span<CodeSymbol>(MemberCount(types));
-            IncludeMethods(types, allocation, dst);
+            Wf.Status(string.Format("Traversing {0} type members", allocation.Length));
+            IncludeMethods(types, allocation, ref dst);
             return dst;
         }
 
         [Op]
-        SymbolSet IncludeMethods(ReadOnlySpan<TypeSymbol> src, Span<CodeSymbol> buffer, SymbolSet dst)
+        void IncludeMethods(ReadOnlySpan<TypeSymbol> src, Span<CodeSymbol> buffer, ref SymbolSet dst)
         {
             var kIn = src.Length;
             var target = buffer;
             var offset = 0u;
             for(var i=0; i<kIn; i++)
             {
-                var count = filter(skip(src,i).GetMembers(), SymbolKind.Method, target);
-                target = slice(buffer,offset,count);
+                var members = skip(src,i).GetMembers();
+                var count = filter(members, SymbolKind.Method, target);
+                target = slice(buffer, offset, count);
                 offset += count;
             }
 
-            dst.Replace(CodeSymbols.convert<MethodSymbol>(slice(buffer, offset)));
-            return dst;
+            var collected = slice(buffer, 0, offset);
+            var kNonEmpty = NonEmpty(collected, collected);
+            collected = slice(buffer, 0, kNonEmpty);
+
+            Wf.Status(string.Format("Collected {0} methods", collected.Length));
+            dst.Replace(CodeSymbols.convert<MethodSymbol>(collected));
         }
 
-        public readonly struct SymbolKindFilter : IUnaryPred<CodeSymbol>
+        [MethodImpl(Inline),Op]
+        static uint NonEmpty(ReadOnlySpan<CodeSymbol> src, Span<CodeSymbol> dst)
+        {
+            var counter = 0u;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var symbol = ref skip(src,i);
+                if(symbol.IsNonEmpty)
+                    seek(dst,counter++) = symbol;
+            }
+            return counter;
+        }
+
+        public readonly struct SymbolKindFilter : IUnaryPred<SymbolKindFilter,CodeSymbol>
         {
             public SymbolKind Kind {get;}
 
@@ -88,12 +113,14 @@ namespace Z0
             public SymbolKindFilter(SymbolKind kind)
                 => Kind = kind;
 
+            [MethodImpl(Inline), Op]
             public bit Invoke(CodeSymbol a)
                 => a.Kind == Kind;
         }
 
-        public readonly struct MemberProducer : IReadOnlySpanFactory<TypeSymbol, CodeSymbol>
+        public readonly struct MemberProducer : IReadOnlySpanFactory<MemberProducer, TypeSymbol, CodeSymbol>
         {
+            [MethodImpl(Inline), Op]
             public ReadOnlySpan<CodeSymbol> Invoke(in TypeSymbol src)
                 => src.GetMembers();
         }

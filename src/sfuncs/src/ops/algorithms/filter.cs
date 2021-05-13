@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="P">The predicate</typeparam>
         [MethodImpl(Inline)]
         public static uint filter<S,T,P>(ReadOnlySpan<S> src, P f, Span<T> dst)
-            where P : IUnaryPred<S>
+            where P : struct, IUnaryPred<P,S>
         {
             var counter = 0u;
             var count = (uint)src.Length;
@@ -31,7 +31,7 @@ namespace Z0
             {
                 ref readonly var item = ref skip(src,i);
                 if(f.Invoke(item))
-                    seek(dst,counter++) = @as<S,T>(item);
+                    seek(dst, counter++) = @as<S,T>(item);
             }
             return counter;
         }

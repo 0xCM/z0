@@ -28,6 +28,18 @@ namespace Z0
                 Source = src;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public MethodKind MethodKind
                 => Source.MethodKind;
 
@@ -253,8 +265,11 @@ namespace Z0
             public bool Equals(MethodSymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator MethodSymbol(CodeSymbol<IMethodSymbol> src)

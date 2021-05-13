@@ -21,6 +21,18 @@ namespace Z0
         {
             public IPropertySymbol Source {get;}
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source == null;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Source != null;
+            }
+
             public bool IsIndexer => Source.IsIndexer;
 
             public bool IsReadOnly => Source.IsReadOnly;
@@ -135,8 +147,11 @@ namespace Z0
             public bool Equals(PropertySymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator PropertySymbol(CodeSymbol<IPropertySymbol> src)

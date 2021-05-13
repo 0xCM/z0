@@ -10,6 +10,7 @@
     <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(Tooling)" />
     <ProjectReference Include="$(Lang)" />
+    <ProjectReference Include="$(Related)" />
   </ItemGroup>
 
   <ItemGroup>
