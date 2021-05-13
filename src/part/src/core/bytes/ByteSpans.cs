@@ -25,7 +25,7 @@ namespace Z0
 
         [Op]
         public static string asmcomment(OpUri uri, BinaryCode src)
-            => string.Format("; {0}", specify(uri, src).Format());
+            => string.Format("; {0}", format(specify(uri, src)));
 
         [MethodImpl(Inline), Op]
         public static ByteSize size(Index<ByteSpanSpec> src)

@@ -215,7 +215,7 @@ namespace Z0
         /// </summary>
         public static HexFormatOptions HexArray
         {
-            get => options(true, true, false, true, true, ListDelimiter);
+            get => options(true, true, false, true, true, ListDelimiter, valdelimiter: ListDelimiter);
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static HexFormatOptions options(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true,
-            bool delimitsegs = true, char? segsep = null, bool delimitblocks = false, char? blocksep = null)
+            bool delimitsegs = true, char? segsep = null, bool delimitblocks = false, char? blocksep = null, char? valdelimiter = null)
         {
             var dst = new HexFormatOptions();
             dst.ZeroPad = zpad;
@@ -249,6 +249,7 @@ namespace Z0
             dst.DelimitBlocks = delimitblocks;
             dst.BlockDelimiter = blocksep ?? Chars.Null;
             dst.BlockWidth = 0;
+            dst.ValueDelimiter = valdelimiter ?? DataDelimiter;
             return dst;
         }
 

@@ -59,6 +59,10 @@ namespace Z0.Asm
             => string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatFixed(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
 
         [Op]
+        public static string format(AsmFormExpr src, byte[] encoded, string sep)
+            => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
+
+        [Op]
         public static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
         {
             var dst = text.buffer();

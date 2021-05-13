@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     public readonly struct HexFormatter<T>
         where T : unmanaged
@@ -31,13 +30,10 @@ namespace Z0
                 config.Specifier && !config.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
                 );
 
-        public string Format(ReadOnlySpan<T> src, string delimiter)
-            => HexFormat.format(src, delimiter, HexFormatSpecs.options());
-
         public string Format(ReadOnlySpan<T> src, HexFormatOptions options)
-            => HexFormat.format(src, CharText.Space, options);
+            => HexFormat.format(src, options);
 
         public string Format(ReadOnlySpan<T> src)
-            => Format(src, CharText.Space);
+            => HexFormat.format(src, HexFormatSpecs.options(valdelimiter: Chars.Space));
     }
 }

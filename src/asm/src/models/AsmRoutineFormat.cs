@@ -29,10 +29,6 @@ namespace Z0.Asm
         public override string ToString()
             => Rendered;
 
-        // public AsmSourceBlock AsmSource()
-        //     => Rendered.lines
-
-
         [MethodImpl(Inline)]
         public static implicit operator AsmRoutineFormat((AsmRoutine routine, string format) src)
             => new AsmRoutineFormat(src.routine, src.format);

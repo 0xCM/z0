@@ -62,7 +62,7 @@ namespace Z0
                 => text.concat(name, Chars.Colon, formatter<T>().FormatItem(ClrEnums.scalar<E,T>(src)));
 
         [Op, Closures(Closure)]
-        public static string format<T>(ReadOnlySpan<T> src, string delimiter, in HexFormatOptions config)
+        public static string format<T>(ReadOnlySpan<T> src, in HexFormatOptions config)
             where T : unmanaged
         {
             var result = text.buffer();
@@ -72,7 +72,7 @@ namespace Z0
                 var formatted = format(skip(src,i), config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec);
                 result.Append(formatted);
                 if(i != count - 1)
-                    result.Append(delimiter);
+                    result.Append(config.ValueDelimiter);
             }
 
             return result.Emit();

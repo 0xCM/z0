@@ -62,5 +62,10 @@ namespace Z0
         /// The width of a block, if applicable
         /// </summary>
         public ushort BlockWidth;
+
+        /// <summary>
+        /// The value delimiter
+        /// </summary>
+        public char ValueDelimiter;
     }
 }

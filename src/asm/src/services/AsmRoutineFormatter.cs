@@ -12,14 +12,10 @@ namespace Z0.Asm
         public AsmFormatConfig Config {get;}
 
         public AsmRoutineFormatter()
-        {
-            Config = AsmFormatConfig.@default(out var _);
-        }
+            => Config = AsmFormatConfig.@default(out var _);
 
-        public AsmRoutineFormatter(AsmFormatConfig config)
-        {
-            Config = config;
-        }
+        public AsmRoutineFormatter(in AsmFormatConfig config)
+            => Config = config;
 
         /// <summary>
         /// Formats the assembly function detail
@@ -28,8 +24,5 @@ namespace Z0.Asm
         /// <param name="fmt">The format configuration</param>
         public AsmRoutineFormat Format(AsmRoutine src)
             => AsmFormatter.format(src, Config);
-
-        public void Render(in AsmRoutine src, ITextBuffer dst)
-            => AsmFormatter.format(src, Config, dst);
    }
 }

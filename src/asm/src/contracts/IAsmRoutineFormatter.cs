@@ -19,12 +19,5 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The function to render as asm text</param>
         AsmRoutineFormat Format(AsmRoutine src);
-
-        /// <summary>
-        /// Renders a routine to a caller-supplied buffer
-        /// </summary>
-        /// <param name="src">The source routine</param>
-        /// <param name="dst">The target buffer</param>
-        void Render(in AsmRoutine src, ITextBuffer dst);
     }
 }
