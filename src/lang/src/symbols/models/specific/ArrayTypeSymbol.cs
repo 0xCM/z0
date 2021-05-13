@@ -15,7 +15,7 @@ namespace Z0
 
     using api = CodeSymbols;
 
-    partial struct CodeSymbolics
+    partial struct CodeSymbolModels
     {
         /// <summary>
         /// Represents an array type

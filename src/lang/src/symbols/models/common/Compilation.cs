@@ -4,14 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
-
+    using System.Collections.Generic;
     using Microsoft.CodeAnalysis;
 
     using static Root;
-    using static CodeSymbolics;
+    using static CodeSymbolModels;
 
-    public readonly struct Compilation<T>
+    using api = CodeSymbols;
+    public readonly struct Compilation<T> : INullity
         where T : Compilation
     {
         public T Source {get;}
@@ -32,10 +34,35 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Source != null;
-            }
+        }
+
+
+        public AssemblySymbol Assembly
+            => api.from(Source.Assembly);
+
+        public CompilationOptions Options
+            => Source.Options;
+
+        public Deferred<SyntaxTree> SyntaxTrees
+            => root.defer(Source.SyntaxTrees);
+
+        public ReadOnlySpan<MetadataReference> ExternalReferences
+            => Source.ExternalReferences.AsSpan();
+
+        public ReadOnlySpan<MetadataReference> DirectiveReferences
+            => Source.DirectiveReferences.AsSpan();
+
+        public Deferred<MetadataReference> References
+            => root.defer(Source.References);
+
+        public Deferred<AssemblyIdentity> ReferencedAssemblyNames
+            => root.defer(Source.ReferencedAssemblyNames);
 
         public AssemblySymbol GetAssemblySymbol(MetadataReference src)
             => new AssemblySymbol((IAssemblySymbol)Source.GetAssemblyOrModuleSymbol(src));
+
+        public MetadataReference GetMetadataReference(IAssemblySymbol src)
+            => Source.GetMetadataReference(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Compilation<T>(T src)

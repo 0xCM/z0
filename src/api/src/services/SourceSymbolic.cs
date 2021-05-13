@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
     using static SFx;
-    using static CodeSymbolics;
+    using static CodeSymbolModels;
 
     [ApiHost]
     public sealed class SourceSymbolic : AppService<SourceSymbolic>
@@ -50,10 +50,10 @@ namespace Z0
             return total;
         }
 
-        public SymbolSet Symbolize(Assembly src)
+        public CodeSymbolSet Symbolize(Assembly src)
         {
             var metadata = MetadataReferences.from(src);
-            var dst = SymbolSet.create(metadata);
+            var dst = CodeSymbols.set(metadata);
             var tool = Wf.Roslyn();
             var name = string.Format("{0}.compilation",src.GetSimpleName());
             var comp = tool.Compilation(metadata, name);
@@ -70,7 +70,7 @@ namespace Z0
         }
 
         [Op]
-        void IncludeMethods(ReadOnlySpan<TypeSymbol> src, Span<CodeSymbol> buffer, ref SymbolSet dst)
+        void IncludeMethods(ReadOnlySpan<TypeSymbol> src, Span<CodeSymbol> buffer, ref CodeSymbolSet dst)
         {
             var kIn = src.Length;
             var target = buffer;
@@ -125,7 +125,7 @@ namespace Z0
                 => src.GetMembers();
         }
 
-        public SymbolSet Symbolize(PartId part)
+        public CodeSymbolSet Symbolize(PartId part)
         {
             var tool = Wf.Roslyn();
             if(Wf.ApiCatalog.FindComponent(part, out var assembly))
@@ -135,7 +135,7 @@ namespace Z0
             else
             {
                 Wf.Error(string.Format("{0} not founc", part.Format()));
-                return SymbolSet.Empty;
+                return CodeSymbolSet.Empty;
             }
         }
     }

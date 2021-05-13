@@ -1407,7 +1407,7 @@ namespace Z0.Asm
                 //Wf.Row(symbol.Name);
             }
 
-            void show(CodeSymbolics.TypeSymbol src)
+            void show(CodeSymbolModels.TypeSymbol src)
             {
 
                 Wf.Row(src);

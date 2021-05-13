@@ -16,7 +16,7 @@ namespace Z0
 
     using api = CodeSymbols;
 
-    partial struct CodeSymbolics
+    partial struct CodeSymbolModels
     {
         public readonly struct TypeParameterSymbol : ICodeSymbol<TypeParameterSymbol,ITypeParameterSymbol>
         {

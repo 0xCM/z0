@@ -11,8 +11,6 @@ namespace Z0
     using static Root;
     using static memory;
 
-    using api = CodeSymbols;
-
     public sealed class CodeSymbolIndex : CodeSymbols<CodeSymbolIndex,ISymbol>, ICodeSymbols<ISymbol>
     {
         public CodeSymbolIndex()

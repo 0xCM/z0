@@ -9,12 +9,7 @@ namespace Z0
     using Microsoft.CodeAnalysis;
 
     using static Root;
-    using static CodeSymbolics;
-
-    public readonly partial struct CodeSymbolics
-    {
-
-    }
+    using static CodeSymbolModels;
 
     [ApiHost]
     public readonly struct CodeSymbols
@@ -22,6 +17,19 @@ namespace Z0
         public static string format<T>(T src)
             where T : ICodeSymbol
                 => src.Source?.ToDisplayString() ?? "<null>";
+
+        [MethodImpl(Inline)]
+        public static CodeSymbolKey<T> symkey<T>(T symbol, ulong key)
+            where T : ICodeSymbol
+                => (symbol,key);
+
+        [MethodImpl(Inline), Op]
+        public static CodeSymbolSet set(params MetadataReference[] metadata)
+            => new CodeSymbolSet(metadata);
+
+        [Op]
+        public static CodeSymbolLookup lookup(CodeSymbolKey[] src)
+            => new CodeSymbolLookup(src);
 
         [MethodImpl(Inline), Op]
         public static CodeSymbol from(ISymbol src)

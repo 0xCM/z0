@@ -100,15 +100,14 @@ namespace Z0
                 return result;
             }
 
-            public static string GetId(string result) => Paths.GetMD5Hash(result, 16);
+            public static string GetId(string result)
+                => Paths.GetMD5Hash(result, 16);
 
-            public static ulong GetIdULong(string content) => Paths.GetMD5HashULong(content, 16);
+            public static ulong GetIdULong(string content)
+                => Paths.GetMD5HashULong(content, 16);
 
             public static string GetId(Document document)
-            {
-                var documentRelativePath = Paths.GetRelativeFilePathInProject(document);
-                return GetId(documentRelativePath);
-            }
+                => GetId(Paths.GetRelativeFilePathInProject(document));
 
             public static string GetAssemblyId(string assemblyName) => assemblyName;
 

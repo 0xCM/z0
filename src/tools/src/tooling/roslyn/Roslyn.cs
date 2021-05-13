@@ -12,7 +12,7 @@ namespace Z0.Tools
     using static LogRecords;
 
     [ApiHost]
-    public sealed partial class Roslyn : AppService<Roslyn>, ITool<Roslyn>
+    public sealed class Roslyn : AppService<Roslyn>, ITool<Roslyn>
     {
         public ToolId Id => Toolsets.roslyn;
 
@@ -22,5 +22,8 @@ namespace Z0.Tools
 
         public Index<CompilerInvocationInfo> CompilerInvocations(FS.FilePath log)
             => BuildLogParser.parse(log);
+
+        public ulong GetKey(ISymbol src)
+            => CodeSolutions.SymbolIdService.GetIdULong(src);
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct CodeSymbolics
+    partial struct CodeSymbolModels
     {
         public readonly struct PointerTypeSymbol : ICodeSymbol<PointerTypeSymbol,IPointerTypeSymbol>
         {
