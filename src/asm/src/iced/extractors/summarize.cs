@@ -13,13 +13,11 @@ namespace Z0.Asm
     partial struct IceExtractors
     {
         [Op]
-        public static AsmInstructionSummary summarize(MemoryAddress @base, IceInstruction src, CodeBlock encoded, AsmStatementExpr statement, uint offset)
-            => new AsmInstructionSummary(@base, offset,  statement,  src.Specifier, operands(@base, src),  code(encoded, offset, src.InstructionSize));
+        public static AsmInstructionInfo summarize(MemoryAddress @base, IceInstruction src, CodeBlock encoded, AsmStatementExpr statement, uint offset)
+            => new AsmInstructionInfo(@base, offset,  statement,  src.Specifier, code(encoded, offset, src.InstructionSize));
 
         [MethodImpl(Inline), Op]
         public static BinaryCode code(CodeBlock encoded, uint offset, byte size)
             => slice(encoded.View, offset, size).ToArray();
-
-        //encoded.Slice((int)offset, src.ByteLength).ToArray()
     }
 }

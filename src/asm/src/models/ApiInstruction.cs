@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an instruction within the context of the defining api member
     /// </summary>
-    public readonly struct ApiInstruction : IComparable<ApiInstruction>
+    public class ApiInstruction : IComparable<ApiInstruction>
     {
         public static LocalOffsetVector offsets(Index<ApiInstruction> src)
         {

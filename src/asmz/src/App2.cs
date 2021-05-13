@@ -1399,9 +1399,6 @@ namespace Z0.Asm
                 var comp = tool.Compilation(MetadataReferences.from(assembly), name);
                 Wf.Row(comp.AssemblyName);
             }
-
-            // var metadata = MetadataReferences.from(Parts.Math.Assembly);
-            // Wf.Row(metadata.Display);
         }
 
         void CheckResolution()

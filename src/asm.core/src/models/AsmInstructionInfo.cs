@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an assembly instruction
     /// </summary>
-    public class AsmInstructionSummary
+    public class AsmInstructionInfo
     {
         /// <summary>
         /// The encoded bytes
@@ -34,18 +34,12 @@ namespace Z0.Asm
         /// </summary>
         public AsmFormExpr AsmForm {get;}
 
-        /// <summary>
-        /// Describes the instruction operands
-        /// </summary>
-        public Index<IceOperandInfo> Operands {get;}
-
         [MethodImpl(Inline)]
-        public AsmInstructionSummary(MemoryAddress @base, uint offset, AsmStatementExpr statment, AsmFormExpr form, IceOperandInfo[] operands, byte[] encoded)
+        public AsmInstructionInfo(MemoryAddress @base, uint offset, AsmStatementExpr statment, AsmFormExpr form, byte[] code)
         {
-            Encoded = new CodeBlock(@base, encoded);
+            Encoded = new CodeBlock(@base, code);
             Offset = offset;
             Statement = statment;
-            Operands = operands;
             AsmForm = form;
         }
     }

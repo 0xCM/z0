@@ -301,7 +301,7 @@ namespace Z0.Asm
         static AsmRoutine routine(OpUri uri, MethodDisplaySig sig, ApiBlockAsm src, bool check = false)
         {
             var count = src.InstructionCount;
-            var info = new AsmInstructionSummary[count];
+            var info = new AsmInstructionInfo[count];
             var offset = 0u;
             var @base = src.BaseAddress;
 

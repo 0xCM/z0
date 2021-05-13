@@ -29,11 +29,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(AsmFormExpr src, byte[] encoded, string sep)
-            => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
-
-        [Op]
-        public static void format(MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config, ITextBuffer dst)
+        public static void format(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config, ITextBuffer dst)
         {
             const string AbsolutePattern = "{0} {1} {2}";
             const string RelativePattern = "{0} {1}";
@@ -46,7 +42,7 @@ namespace Z0.Asm
             else
                 dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatFixed()));
 
-            dst.Append(AsmCore.comment(format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
+            dst.Append(AsmCore.comment(AsmRender.format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
         }
 
         public static void render(ReadOnlySpan<byte> block, ReadOnlySpan<IceInstruction> instructions, ITextBuffer dst)
@@ -113,41 +109,11 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config)
+        public static string format(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config)
         {
             var dst = text.buffer();
             AsmFormatter.format(@base, src, config, dst);
             return dst.ToString();
-        }
-
-        /// <summary>
-        /// Describes the instructions that comprise a function
-        /// </summary>
-        /// <param name="src">The source function</param>
-        [Op]
-        public static ReadOnlySpan<AsmInstructionSummary> summarize(AsmRoutine src)
-        {
-            var count = src.InstructionCount;
-            var buffer = new AsmInstructionSummary[count];
-            var offset = 0u;
-            var @base = src.BaseAddress;
-            var view = src.Instructions.View;
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var instruction = ref skip(view,i);
-                var size = instruction.InstructionSize;
-
-                if(src.Code.Size < offset + size)
-                {
-                    term.error($"Instruction size mismatch {instruction.IP} {offset} {src.Code.Size} {size}");
-                    continue;
-                }
-
-                seek(dst, i) = IceExtractors.summarize(@base, instruction.Instruction, src.Code, instruction.Statment, offset);
-                offset += size;
-            }
-            return dst;
         }
 
         /// <summary>
@@ -165,7 +131,7 @@ namespace Z0.Asm
             return dst.Emit();
         }
 
-        public string Format(in MemoryAddress @base, in AsmInstructionSummary src)
+        public string Format(in MemoryAddress @base, in AsmInstructionInfo src)
             => format(@base, src, _Config);
 
         public void Render(AsmRoutine src, ITextBuffer dst)
@@ -201,7 +167,7 @@ namespace Z0.Asm
         [Op]
         public static ReadOnlySpan<string> instructions(AsmRoutine src, in AsmFormatConfig config)
         {
-            var summaries = summarize(src);
+            var summaries = AsmRoutines.summarize(src);
             var count = summaries.Length;
             if(count == 0)
                 return default;

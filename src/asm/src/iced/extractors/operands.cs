@@ -15,16 +15,16 @@ namespace Z0.Asm
         /// <summary>
         /// Extracts operand instruction data
         /// </summary>
-        /// <param name="fx">The source instruction</param>
+        /// <param name="instruction">The source instruction</param>
         /// <param name="@base">The base address</param>
         [Op]
-        public static IceOperandInfo[] operands(MemoryAddress @base, in IceInstruction fx)
+        public static IceOperandInfo[] operands(MemoryAddress @base, in IceInstruction instruction)
         {
-            var count = fx.OpCount;
+            var count = instruction.OpCount;
             var buffer = alloc<IceOperandInfo>(count);
             var dst = span(buffer);
             for(byte j=0; j<count; j++)
-                seek(dst, j) = operand(@base, fx, j);
+                seek(dst, j) = operand(@base, instruction, j);
             return buffer;
         }
     }

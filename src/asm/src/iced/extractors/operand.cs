@@ -15,18 +15,18 @@ namespace Z0.Asm
         /// Defines an instruction operand
         /// </summary>
         /// <param name="base">The base address</param>
-        /// <param name="fx"></param>
+        /// <param name="src"></param>
         /// <param name="index"></param>
         [MethodImpl(Inline), Op]
-        public static IceOperandInfo operand(MemoryAddress @base, in IceInstruction fx, byte index)
+        public static IceOperandInfo operand(MemoryAddress @base, in IceInstruction src, byte index)
         {
             var dst = new IceOperandInfo();
             dst.Index = index;
-            dst.Kind = opkind(fx, index);
-            dst.Branch = IceOpTest.isBranch(dst.Kind) ? branch(@base, fx, branch(fx,index)) : default;
-            dst.ImmInfo = imminfo(fx, index);
-            dst.Memory = IceOpTest.isMem(dst.Kind) ? meminfo(fx,index) : default;
-            dst.Register = IceOpTest.isRegister(dst.Kind) ? register(fx,index) : default;
+            dst.Kind = opkind(src, index);
+            dst.Branch = IceOpTest.isBranch(dst.Kind) ? branch(@base, src, branch(src,index)) : default;
+            dst.ImmInfo = imminfo(src, index);
+            dst.Memory = IceOpTest.isMem(dst.Kind) ? meminfo(src,index) : default;
+            dst.Register = IceOpTest.isRegister(dst.Kind) ? register(src,index) : default;
             return dst;
         }
     }
