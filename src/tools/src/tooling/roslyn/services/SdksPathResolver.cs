@@ -10,6 +10,7 @@ namespace Z0
     using System.Composition;
     using Microsoft.Extensions.Logging;
 
+    using OmniSharp.Services;
     partial struct CodeProjects
     {
         [Export, Shared]

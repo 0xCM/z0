@@ -53,6 +53,8 @@ public enum PartId : ulong
 
     Tools = 41,
 
+    ToolShell = Tools | Shell,
+
     Tooling = 42,
 
     Fsm = 43,

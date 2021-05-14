@@ -8,8 +8,14 @@ namespace Z0.Tools
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
+
     using static Root;
     using static LogRecords;
+    using static XmlParts;
+    using static CodeSolutions;
+
+    using OmniSharp.Roslyn.CSharp.Services.Documentation;
+    using OmniSharp.Models.TypeLookup;
 
     [ApiHost]
     public sealed class Roslyn : AppService<Roslyn>, ITool<Roslyn>
@@ -25,5 +31,15 @@ namespace Z0.Tools
 
         public ulong GetKey(ISymbol src)
             => CodeSolutions.SymbolIdService.GetIdULong(src);
+
+        public DocumentationComment GetDocs(XmlText xml)
+            => DocumentationConverter.GetStructuredDocumentation(xml.Value, "\n");
+
+        public DocumentationComment GetDocs(ISymbol src)
+            => DocumentationConverter.GetStructuredDocumentation(src);
+
+        public SolutionFile LoadSolution(FS.FilePath src)
+            => SolutionFile.ParseFile(src.Name);
+
     }
 }

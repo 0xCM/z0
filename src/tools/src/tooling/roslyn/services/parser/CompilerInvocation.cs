@@ -14,7 +14,7 @@ namespace Z0
 
     using static LogRecords;
 
-    public readonly partial struct BuildLogParser
+    partial struct BuildLogParser
     {
         public class CompilerInvocation
         {

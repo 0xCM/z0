@@ -13,6 +13,7 @@ namespace Z0
     using Microsoft.Build.Globbing;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
+    using OmniSharp.Services;
 
     partial struct CodeProjects
     {

@@ -1425,6 +1425,14 @@ namespace Z0.Asm
             }
         }
 
+        void CheckSolutionParser()
+        {
+            var src = FS.path(@"C:\Dev\z0\z0.machine.sln");
+            var tool = Wf.Roslyn();
+            var sln = tool.LoadSolution(src);
+            var projects = sln.Projects;
+        }
+
         void CheckResolution()
         {
             var methods = ResolveParts(PartId.GMath, PartId.Cpu, PartId.Math);
@@ -1440,7 +1448,8 @@ namespace Z0.Asm
         {
 
                 //CaptureSelf();
-            CheckMetadata2(PartId.Cpu);
+            //CheckMetadata2(PartId.Cpu);
+            CheckSolutionParser();
         }
 
 

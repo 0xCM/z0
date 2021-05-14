@@ -21,11 +21,7 @@ namespace Z0
 
             public ImmutableArray<GlobalSectionBlock> GlobalSections {get;}
 
-            private SolutionFile(
-                Version formatVersion,
-                Version visualStudioVersion,
-                ImmutableArray<ProjectBlock> projects,
-                ImmutableArray<GlobalSectionBlock> globalSections)
+            SolutionFile(Version formatVersion, Version visualStudioVersion, ImmutableArray<ProjectBlock> projects, ImmutableArray<GlobalSectionBlock> globalSections)
             {
                 FormatVersion = formatVersion;
                 VisualStudioVersion = visualStudioVersion;

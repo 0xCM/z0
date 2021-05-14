@@ -3,7 +3,6 @@
 // License     :  MIT
 // Source      : https://github.com/dotnet/source-indexer
 //-----------------------------------------------------------------------------
-
 namespace Z0
 {
     using System.Collections.Generic;

@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static CalcHosts;
     using static memory;
-    using static ApiClassKind;
 
     partial struct Calcs
     {

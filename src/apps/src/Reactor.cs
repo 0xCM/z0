@@ -9,8 +9,22 @@ namespace Z0
     using static Part;
     using static memory;
 
+    public struct EmitSolutionReport
+    {
+        public FS.FilePath Source;
+
+        public EmitSolutionReport(FS.FilePath src)
+        {
+            Source = src;
+        }
+    }
+
     public sealed class Reactor : AppSingleton<Reactor,int>
     {
+        public static Reactor create(IWfRuntime wf)
+            => init(wf);
+
+
         public static void dispatch(string[] args)
         {
             try
@@ -28,7 +42,7 @@ namespace Z0
                 else
                 {
                     wf.Status("Dispatching");
-                    Reactor.init(wf).Dispatch(args);
+                    Reactor.create(wf).Dispatch(args);
                 }
 
             }
