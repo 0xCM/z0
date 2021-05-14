@@ -5,7 +5,7 @@
 		},
 		{
 			"path": "..\\calc"
-        },
+		},
 		{
 			"path": "..\\tools"
 		},
@@ -57,7 +57,12 @@
 		{
 			"path": "..\\related"
 		},
-
-    ],
+		{
+			"path": "..\\lang"
+		},
+		{
+			"path": "..\\sources"
+		}
+	],
 	"settings": {}
 }

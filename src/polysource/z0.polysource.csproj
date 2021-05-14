@@ -6,7 +6,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Sources)" />
+    <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 
 </Project>

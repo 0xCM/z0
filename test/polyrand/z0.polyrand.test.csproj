@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(PolySource)" />
 
   </ItemGroup>
 

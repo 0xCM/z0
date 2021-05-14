@@ -73,8 +73,8 @@ namespace Z0
             }
 
             Wf.Row(block.Describe());
-
         }
+
 
         void Run128(PageBlock lhs, PageBlock rhs, PageBlock dst)
         {
@@ -120,6 +120,11 @@ namespace Z0
                 Wf.Row(string.Format("{0:D6} {1}([{2}],[{3}]) = {4}", i, "f", a.V32u.FormatHex(), b.V32u.FormatHex(), result.V32u.FormatHex()));
             }
 
+        }
+
+        void CheckMd5()
+        {
+            //var input = Source.
         }
 
         protected override void Run()

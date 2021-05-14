@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(PolySource)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Dynamic)" />

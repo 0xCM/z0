@@ -31,6 +31,8 @@ public enum PartId : ulong
 
     Workflow = 15,
 
+    PolySource = 16,
+
     Digital = 18,
 
     Check = 19,

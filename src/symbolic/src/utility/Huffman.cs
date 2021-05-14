@@ -67,9 +67,6 @@ namespace Z0
                     }
                 }
 
-                ////var final = sorted.OrderBy(t => t.frequency);
-                ////File.WriteAllLines("E:\\1.txt", final.Select(t => t.Item2 + "," + t.Item1));
-
                 Node root = CreateHuffmanTree(nodes);
 
                 var huffman = new Huffman(root);

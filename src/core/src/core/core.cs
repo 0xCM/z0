@@ -10,6 +10,7 @@ namespace Z0
     using static Root;
 
 
+    [ApiHost]
     public readonly partial struct core
     {
         const NumericKind Closure = UnsignedInts;

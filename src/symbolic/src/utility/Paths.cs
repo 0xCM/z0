@@ -42,6 +42,7 @@ namespace Z0
         }
     }
 
+
     partial struct CodeSolutions
     {
         public static class Paths

@@ -85,6 +85,7 @@
     <Part>$(Src)part/z0.part.csproj</Part>
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>
+    <PolySource>$(Src)polysource/z0.polysource.csproj</PolySource>
 
     <Refs>$(Src)refs/z0.refs.csproj</Refs>
     <Related>$(Src)related/Z0.related.csproj</Related>

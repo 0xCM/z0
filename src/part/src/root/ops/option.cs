@@ -4,6 +4,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Security.Cryptography;
 
     using static Root;
 
@@ -28,5 +29,17 @@ namespace Z0
         public static Option<T> option<T>(T? src)
             where T : struct
                 => Option.from(src);
+
+        [Op]
+        public static Cell128 md5(ReadOnlySpan<byte> src)
+        {
+            var storage = default(Cell128);
+            var dst = storage.Bytes;
+            using (var alg = MD5.Create())
+            {
+                alg.TryComputeHash(src,dst, out _);
+                return storage;
+            }
+        }
     }
 }

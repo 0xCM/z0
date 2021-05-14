@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Symbolic)" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(BitPack)" />
-    <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(PolySource)" />
   </ItemGroup>
 
 </Project>

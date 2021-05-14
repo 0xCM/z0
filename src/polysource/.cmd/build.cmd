@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=sources
+set ProjectId=polysource
 call %ControlScripts%\build-lib.cmd
