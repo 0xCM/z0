@@ -9,7 +9,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Part;
+    using static Root;
 
     partial struct root
     {

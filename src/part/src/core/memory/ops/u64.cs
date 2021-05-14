@@ -12,19 +12,19 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Presents a <see cref='bool'/> as a <see cref='ulong'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ulong u64(bool src)
-            => *((byte*)(&src));
-
-        /// <summary>
         /// Presents a <see cref='bit'/> as a <see cref='ulong'/>
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static unsafe ulong u64(bit src)
+            => *((byte*)(&src));
+
+        /// <summary>
+        /// Presents a <see cref='bool'/> as a <see cref='ulong'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong u64(bool src)
             => *((byte*)(&src));
 
         /// <summary>

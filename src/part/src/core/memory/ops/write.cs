@@ -15,9 +15,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void write<T>(in T src, ref byte dst)
             => WriteUnaligned(ref dst, src);
-
-        [MethodImpl(Inline), Op]
-        public static SpanWriter writer(Span<byte> src)
-            => new SpanWriter(src);
     }
 }

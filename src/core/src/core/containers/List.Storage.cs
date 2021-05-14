@@ -10,8 +10,7 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial class XTend
     {

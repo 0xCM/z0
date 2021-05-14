@@ -7,8 +7,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct root
     {

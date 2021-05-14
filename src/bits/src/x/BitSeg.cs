@@ -17,8 +17,8 @@ namespace Z0
         /// <param name="first">The linear index of the first bit</param>
         /// <param name="last">The linear index of the last bit</param>
         [MethodImpl(Inline)]
-        public static T BitSeg<T>(this Span<T> src, int first, int last)
+        public static T BitSeg<T>(this Span<T> src, byte first, byte last)
             where T : unmanaged
-                => gbits.bitseg(src,first,last);
+                => gbits.bitseg(src, first, last);
     }
 }

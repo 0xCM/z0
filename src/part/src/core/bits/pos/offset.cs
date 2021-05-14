@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct BitPos
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The cell width</param>
         /// <param name="index">The linear bit index</param>
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
         public static byte offset(ushort w, uint index)
 			=> ScalarCast.uint8(index % w);
     }

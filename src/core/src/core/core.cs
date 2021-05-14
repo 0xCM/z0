@@ -13,5 +13,9 @@ namespace Z0
     public readonly partial struct core
     {
         const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline)]
+        internal static Span<T> EmptySpan<T>()
+            => Span<T>.Empty;
     }
 }

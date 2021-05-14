@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     partial class XTend
     {
@@ -41,9 +40,9 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IEnumerable<ArraySegment<T>> Partition<T>(this T[] src, int width)
         {
-            var count = Math.DivRem(src.Length,width, out int overflow);            
+            var count = Math.DivRem(src.Length,width, out int overflow);
             for(var i = 0; i < count; i++)
-                yield return new ArraySegment<T>(src, i*width, width);                    
+                yield return new ArraySegment<T>(src, i*width, width);
 
             if(overflow != 0)
             {
@@ -85,6 +84,6 @@ namespace Z0
 
             if (buffer != null && count > 0)
                 yield return buffer.Take(count);
-        }        
+        }
     }
 }

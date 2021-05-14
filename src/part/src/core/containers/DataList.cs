@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections;
 
-    using static Part;
+    using static Root;
 
     public readonly struct DataList
     {

@@ -63,10 +63,10 @@ namespace Z0
 
         public static string FormatBits<T>(this ReadOnlySpan<T> src, BitFormat? config = null)
             where T : unmanaged
-                => BitFormatter.format(src, config);
+                => api.format(src, config);
 
         public static string FormatBits<T>(this Span<T> src, BitFormat? config = null)
             where T : unmanaged
-                => BitFormatter.format(src.ReadOnly(), config);
+                => api.format(src.ReadOnly(), config);
     }
 }

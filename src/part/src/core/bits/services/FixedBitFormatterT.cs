@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a bit formatter that always produces a bitstring with a fixed length for a given T-value, zero padded as necessary

@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public sealed class QueueCache<T>
     {

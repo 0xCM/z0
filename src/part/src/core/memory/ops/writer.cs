@@ -5,11 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
-    partial struct root
+    partial struct memory
     {
+        [MethodImpl(Inline), Op]
+        public static SpanWriter writer(Span<byte> dst)
+            => new SpanWriter(dst);
     }
 }

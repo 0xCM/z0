@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Captures and represents a void pointer
     /// </summary>
-    public unsafe struct Ptr
+    public unsafe struct Ptr : IPtr
     {
         public void* P;
 
@@ -23,7 +23,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)((ulong)P).GetHashCode();
+            get => (uint)P;
         }
 
         public MemoryAddress Address
@@ -69,5 +69,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Ptr(MemoryAddress src)
             => new Ptr(src.Pointer());
+
+        public void* Target
+        {
+            [MethodImpl(Inline)]
+            get => P;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     /// Captures and represents <see cref='ulong'/> pointer
     /// </summary>
     [ApiComplete]
-    public unsafe struct Ptr64
+    public unsafe struct Ptr64 : IPtr<ulong>
     {
         public ulong* P;
 
@@ -26,28 +26,30 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)((ulong)P).GetHashCode();
+            get => (uint)P;
         }
 
         public readonly MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => api.address(P);
+            get => P;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(Ptr64 src)
             => P == src.P;
 
-        [MethodImpl(Inline)]
-        public string Format()
-            => api.format<ulong>(this);
+        public override bool Equals(object src)
+            => src is Ptr64 p && Equals(p);
 
-        public override int GetHashCode()
-            => (int)Hash;
+        public string Format()
+            => Address.Format();
 
         public override string ToString()
             => Format();
+
+        public override int GetHashCode()
+            => (int)Hash;
 
         [MethodImpl(Inline)]
         public static ulong operator !(Ptr64 x)
@@ -92,5 +94,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ulong*(Ptr64 src)
             => src.P;
+
+        public ulong* Target
+        {
+            [MethodImpl(Inline)]
+            get => P;
+        }
     }
 }

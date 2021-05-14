@@ -57,6 +57,18 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source pointer</param>
         [MethodImpl(Inline), Op]
+        public static ref PChar seek(in PChar src, uint count)
+        {
+            ref var dst = ref edit(src);
+            dst.P += count;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Advances the source by a uint
+        /// </summary>
+        /// <param name="src">The source pointer</param>
+        [MethodImpl(Inline), Op]
         public static ref Ptr32 seek(in Ptr32 src, uint count)
         {
             ref var dst = ref edit(src);

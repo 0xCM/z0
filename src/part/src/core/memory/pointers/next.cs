@@ -38,6 +38,18 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source pointer</param>
         [MethodImpl(Inline), Op]
+        public static ref PChar next(in PChar src)
+        {
+            ref var dst = ref edit(src);
+            dst.P++;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Advances the source by a uint
+        /// </summary>
+        /// <param name="src">The source pointer</param>
+        [MethodImpl(Inline), Op]
         public static ref Ptr16 next(in Ptr16 src)
         {
             ref var dst = ref edit(src);

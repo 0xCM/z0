@@ -38,26 +38,29 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write8(a0);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(RexPrefix a0)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write8(a0);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(RexPrefix a0, Hex8 a1)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write8(a0);
             writer.Write8(a1);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
@@ -100,40 +103,44 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex16 a0)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write16(a0);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, Hex8 a2)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write8(a2);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, Hex8 a2, Hex8 a3)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write8(a2);
             writer.Write8(a3);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, Hex16 a2)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write16(a2);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
@@ -148,21 +155,23 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, Hex32 a2)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write32(a2);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, ulong a2)
         {
-            var writer = memory.writer(buffer());
+            var dst = buffer();
+            var writer = memory.writer(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write64(a2);
-            return load(writer);
+            return close(writer, dst);
         }
 
         [MethodImpl(Inline), Op]
@@ -170,9 +179,16 @@ namespace Z0.Asm
             => alloc(n16).Bytes;
 
         [MethodImpl(Inline), Op]
+        static AsmHexCode close(in SpanWriter writer, Span<byte> dst)
+        {
+            seek(dst, AsmHexCode.SizeIndex) = (byte)writer.BytesWritten;
+            return new AsmHexCode(first(recover<Cell128>(dst)));
+        }
+
+        [MethodImpl(Inline), Op]
         static AsmHexCode load(SpanWriter writer)
         {
-            seek(writer.Target,AsmHexCode.SizeIndex) = (byte)writer.BytesWritten;
+            seek(writer.Target, AsmHexCode.SizeIndex) = (byte)writer.BytesWritten;
             return new AsmHexCode(vload<byte>(w128, writer.Target));
         }
     }

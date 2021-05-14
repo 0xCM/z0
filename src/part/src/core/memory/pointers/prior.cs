@@ -22,7 +22,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Advances the source by a uint
+        /// Decrements the source by a uint
         /// </summary>
         /// <param name="src">The source pointer</param>
         [MethodImpl(Inline), Op]
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Advances the source by a uint
+        /// Decrements the source by a uint
         /// </summary>
         /// <param name="src">The source pointer</param>
         [MethodImpl(Inline), Op]
@@ -46,7 +46,19 @@ namespace Z0
         }
 
         /// <summary>
-        /// Advances the source by a uint
+        /// Decrements the source by a uint
+        /// </summary>
+        /// <param name="src">The source pointer</param>
+        [MethodImpl(Inline), Op]
+        public static ref PChar prior(in PChar src)
+        {
+            ref var dst = ref edit(src);
+            dst.P--;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Decrements the source by a uint
         /// </summary>
         /// <param name="src">The source pointer</param>
         [MethodImpl(Inline), Op]
@@ -58,7 +70,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Advances the source by a uint
+        /// Decrements the source by a uint
         /// </summary>
         /// <param name="src">The source pointer</param>
         [MethodImpl(Inline), Op]

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 	using static BitPos;
 
@@ -198,6 +198,6 @@ namespace Z0
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
 		public static ushort CellWidth
-			=> width<T>(w16);
+			=> width<T>(Widths.w16);
 	}
 }

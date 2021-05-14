@@ -65,28 +65,6 @@ namespace Z0
 
     }
 
-    [Free]
-    public interface IConcatenable<T>
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes a reification that defines an intrinsic concatentation operator
-    /// </summary>
-    /// <typeparam name="S">The reifying type</typeparam>
-    [Free]
-    public interface IConcatenable<F,T> : IConcatenable<T>
-        where F : IConcatenable<F,T>, new()
-    {
-        /// <summary>
-        /// Concatenates the intrinsic value with a suplied value
-        /// </summary>
-        /// <param name="rhs">The right value supplied to the concatenation operator</param>
-        F Concat(F rhs);
-    }
-
-
     /// <summary>
     /// Characterizes a reversible structure
     /// </summary>

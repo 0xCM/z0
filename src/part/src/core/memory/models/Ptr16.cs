@@ -15,27 +15,38 @@ namespace Z0
     /// Captures and represents <see cref='ushort'/> pointer
     /// </summary>
     [ApiComplete]
-    public unsafe struct Ptr16
+    public unsafe struct Ptr16 : IPtr<ushort>
     {
         public ushort* P;
 
         [MethodImpl(Inline)]
         public Ptr16(ushort* src)
             => P = src;
+
         public readonly MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => api.address(P);
+            get => P;
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)P;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(Ptr16 src)
             => P == src.P;
 
+        public override bool Equals(object src)
+            => src is Ptr16 p && Equals(p);
 
-        [MethodImpl(Inline)]
+        public override int GetHashCode()
+            => (int)Hash;
+
         public string Format()
-            => api.format<ushort>(this);
+            => Address.Format();
 
         public override string ToString()
             => Format();
@@ -79,5 +90,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort*(Ptr16 src)
             => src.P;
+
+        public ushort* Target
+        {
+            [MethodImpl(Inline)]
+            get => P;
+        }
     }
 }

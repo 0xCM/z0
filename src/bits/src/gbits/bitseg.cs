@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="dst">The right bit position</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), BitSeg, Closures(AllNumeric)]
-        public static T bitseg<T>(T src, byte p0, byte p1)
+        public static T bitseg<T>(T src, byte i0, byte i1)
             where T : unmanaged
-                => bitseg_u(src, p0, p1);
+                => bitseg_u(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits from a source and deposits the result to a caller-supplied target
@@ -81,15 +81,14 @@ namespace Z0
         }
 
         /// <summary>
-        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by
-        /// an inclusive linear index range
+        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive linear index range
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="i0">The sequence-relative index of the first bit</param>
         /// <param name="i1">The sequence-relative index of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), BitSeg, Closures(Closure)]
-        public static T bitseg<T>(Span<T> src, int i0, int i1)
+        public static T bitseg<T>(Span<T> src, byte i0, byte i1)
             where T : unmanaged
                 => bitseg(src, bitpos<T>(i0), bitpos<T>(i1));
 

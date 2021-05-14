@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Captures and represents an <see cref='unmanaged'/> generic pointer
     /// </summary>
-    public unsafe struct Ptr<T>
+    public unsafe struct Ptr<T> : IPtr<T>
         where T : unmanaged
     {
         public T* P;
@@ -26,28 +26,27 @@ namespace Z0
         public readonly MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => api.address<T>(P);
+            get => P;
         }
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)((ulong)api.address<T>(P)).GetHashCode();
+            get => (uint)P;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(Ptr<T> src)
             => P == src.P;
 
-        [MethodImpl(Inline)]
         public string Format()
-            => api.format<T>(this);
-
-        public override int GetHashCode()
-            => (int)Hash;
+            => Address.Format();
 
         public override string ToString()
             => Format();
+
+        public override int GetHashCode()
+            => (int)Hash;
 
         [MethodImpl(Inline)]
         public static T operator !(Ptr<T> x)
@@ -72,5 +71,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T*(Ptr<T> src)
             => src.P;
+
+        public T* Target
+        {
+            [MethodImpl(Inline)]
+            get => P;
+        }
+
     }
 }

@@ -9,11 +9,20 @@ namespace Z0
 
     using static Root;
 
-    unsafe partial struct Pointers
+    public unsafe interface IPtr
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(Ptr<T> src)
-            where T : unmanaged
-                => src.Address.Format();
+        void* Target {get;}
+
+        MemoryAddress Address
+            => Target;
+    }
+
+    public unsafe interface IPtr<T> : IPtr
+        where T : unmanaged
+    {
+        new T* Target {get;}
+
+        void* IPtr.Target
+            => Target;
     }
 }

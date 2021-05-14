@@ -11,13 +11,6 @@ namespace Z0
 
     partial struct memory
     {
-        /// <summary>
-        /// Presents a <see cref='bool'/> as a <see cref='ushort'/>
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ushort u16(bool src)
-            => *((byte*)(&src));
 
         /// <summary>
         /// Presents a <see cref='bit'/> as a <see cref='ushort'/>
@@ -25,6 +18,14 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static unsafe ushort u16(bit src)
+            => *((byte*)(&src));
+
+        /// <summary>
+        /// Presents a <see cref='bool'/> as a <see cref='ushort'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ushort u16(bool src)
             => *((byte*)(&src));
 
         /// <summary>

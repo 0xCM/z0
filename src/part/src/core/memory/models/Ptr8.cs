@@ -15,7 +15,7 @@ namespace Z0
     /// Captures and represents <see cref='byte'/> pointer
     /// </summary>
     [ApiComplete]
-    public unsafe struct Ptr8
+    public unsafe struct Ptr8 : IPtr<byte>
     {
         public byte* P;
 
@@ -26,18 +26,14 @@ namespace Z0
         public readonly MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => api.address(P);
+            get => P;
         }
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)((ulong)P).GetHashCode();
+            get => (uint)P;
         }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => api.format<byte>(this);
 
         [MethodImpl(Inline)]
         public bool Equals(Ptr8 src)
@@ -48,6 +44,9 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
+
+        public string Format()
+            => Address.Format();
 
         public override string ToString()
             => Format();
@@ -115,5 +114,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator byte*(Ptr8 src)
             => src.P;
+
+        public byte* Target
+        {
+            [MethodImpl(Inline)]
+            get => P;
+        }
     }
 }

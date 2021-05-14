@@ -15,7 +15,7 @@ namespace Z0
     /// Captures and represents <see cref='uint'/> pointer
     /// </summary>
     [ApiComplete]
-    public unsafe struct Ptr32
+    public unsafe struct Ptr32 : IPtr<uint>
     {
         public uint* P;
 
@@ -26,29 +26,30 @@ namespace Z0
         public readonly MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => api.address(P);
+            get => P;
         }
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)((ulong)P).GetHashCode();
+            get => (uint)P;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(Ptr32 src)
             => P == src.P;
 
+        public override bool Equals(object src)
+            => src is Ptr32 p && Equals(p);
 
-        [MethodImpl(Inline)]
         public string Format()
-            => api.format<uint>(this);
-
-        public override int GetHashCode()
-            => (int)Hash;
+            => Address.Format();
 
         public override string ToString()
             => Format();
+
+        public override int GetHashCode()
+            => (int)Hash;
 
         [MethodImpl(Inline)]
         public static uint operator !(Ptr32 x)
@@ -89,5 +90,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator uint*(Ptr32 src)
             => src.P;
+
+        public uint* Target
+        {
+            [MethodImpl(Inline)]
+            get => P;
+        }
+
     }
 }

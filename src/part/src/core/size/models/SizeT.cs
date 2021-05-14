@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    //using static memory;
 
     using api = Sizes;
+
     public readonly struct Size<T> : IEquatable<Size<T>>
         where T : unmanaged
     {

@@ -7,21 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
-    unsafe partial struct Pointers
+    partial struct core
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public unsafe static void fix<T>(Span<T> src, PointedReceiver<T> receiver)
-            where T : unmanaged
-        {
-            var count = (uint)src.Length;
-            fixed(T* pSrc = src)
-            {
-                var p = pSrc;
-                for(var i=0u; i<count; i++)
-                    receiver(p++);
-            }
-        }
+        public static ref bool @bool<T>(in T src)
+            => ref As<T,bool>(ref edit(src));
     }
 }

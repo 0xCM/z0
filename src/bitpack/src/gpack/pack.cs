@@ -13,7 +13,7 @@ namespace Z0
     partial struct gpack
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T pack<T>(ReadOnlySpan<byte> src, out T dst, uint offset = 0)
+        public static ref T pack<T>(ReadOnlySpan<byte> src, uint offset, out T dst)
             where T : unmanaged
         {
             dst = default;
