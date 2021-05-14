@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using Microsoft.CodeAnalysis;
 
     using static Root;
     using static CodeSymbolModels;
 
     using api = CodeSymbols;
+
     public readonly struct Compilation<T> : INullity
         where T : Compilation
     {

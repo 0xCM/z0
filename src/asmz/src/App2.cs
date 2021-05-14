@@ -16,6 +16,7 @@ namespace Z0.Asm
     using static memory;
     using static Toolsets;
     using static ProcessMemory;
+    using static CodeSymbolModels;
 
     class App : AppService<App>
     {
@@ -1412,16 +1413,6 @@ namespace Z0.Asm
 
                 Wf.Row(src);
                 root.iter(src.GetMembers(), m => Wf.Row(m));
-            }
-        }
-
-        void CheckMetadata2(PartId id)
-        {
-            if(Wf.ApiCatalog.FindComponent(id, out var assembly))
-            {
-                var symbolic = Wf.SourceSymbolic();
-                var symbols = symbolic.Symbolize(assembly);
-                root.iter(symbols.Methods, m => Wf.Row(m));
             }
         }
 

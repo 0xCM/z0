@@ -5,8 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
     using static Part;
     using static CodeSolutions;
+    using static CodeSymbolModels;
 
     using static memory;
 
@@ -59,11 +62,50 @@ namespace Z0
             }
         }
 
-        public void Run()
+
+        public class SymbolCollector
         {
-            CheckSolutionParser();
+            DataList<MethodSymbol> Symbols;
+
+            public SymbolCollector()
+            {
+                Symbols = new();
+            }
+
+            public void Deposit(ReadOnlySpan<MethodSymbol> src)
+            {
+                var count = src.Length;
+                for(var i=0; i<count; i++)
+                    Symbols.Add(skip(src,i));
+            }
+
+            public ReadOnlySpan<MethodSymbol> Collected
+                => Symbols.View();
         }
 
+
+
+        public void Run()
+        {
+            var assemblies = Wf.ApiCatalog.Components;
+            var flow = Wf.Running(string.Format("Collecting method symbols for {0} assemblies", assemblies.Length));
+            var symbolic = Wf.SourceSymbolic();
+            var collector = new SymbolCollector();
+            symbolic.SymbolizeMethods(assemblies, collector.Deposit);
+            var collected = collector.Collected;
+            var count = collected.Length;
+            Wf.Ran(flow, string.Format("Collected {0} method symbols", count));
+            var dst = Db.AppLog("methods", FS.Cs);
+            var emitting = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var method = ref skip(collected,i);
+                var doc = method.Docs;
+                writer.WriteLine(string.Format("{0}; {1}", method.Format(), doc != null ? "//" + doc.SummaryText : EmptyString));
+            }
+            Wf.EmittedFile(emitting, count);
+        }
     }
 
 

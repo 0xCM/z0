@@ -11,6 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Threading;
     using Microsoft.CodeAnalysis;
+    using OmniSharp.Models.TypeLookup;
 
     using static Root;
 

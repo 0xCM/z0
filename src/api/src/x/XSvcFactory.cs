@@ -73,9 +73,6 @@ namespace Z0
         public static MemoryEmitter MemoryEmitter(this IWfRuntime wf)
             => Svc.MemoryEmitter.create(wf);
 
-        [Op]
-        public static SourceSymbolic SourceSymbolic(this IWfRuntime wf)
-            => Svc.SourceSymbolic.create(wf);
 
     }
 }

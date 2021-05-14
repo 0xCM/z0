@@ -10,6 +10,8 @@ namespace Z0
     {
         ISymbol Source {get;}
 
+        SymbolKind Kind {get;}
+
         bool INullity.IsEmpty
             => Source == null;
 

@@ -11,6 +11,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Delegates;
     using static SFx;
     using static CodeSymbolModels;
 
@@ -50,13 +51,46 @@ namespace Z0
             return total;
         }
 
+        Roslyn Roslyn;
+
+        protected override void OnInit()
+        {
+            Roslyn = Wf.Roslyn();
+        }
+
+
+        public ReadOnlySpan<MethodSymbol> SymbolizeMethods(PartId id)
+        {
+            if(Wf.ApiCatalog.FindComponent(id, out var assembly))
+            {
+                return SymbolizeMethods(assembly);
+            }
+            else
+                return default;
+        }
+
+        public ReadOnlySpan<MethodSymbol> SymbolizeMethods(Assembly src)
+        {
+            var symbols = Symbolize(src);
+            return symbols.Methods;
+        }
+
+        public void SymbolizeMethods(ReadOnlySpan<Assembly> src, SpanReceiver<MethodSymbol> dst)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var a = ref skip(src,i);
+                dst(SymbolizeMethods(a));
+            }
+        }
+
         public CodeSymbolSet Symbolize(Assembly src)
         {
             var metadata = MetadataReferences.from(src);
             var dst = CodeSymbols.set(metadata);
-            var tool = Wf.Roslyn();
             var name = string.Format("{0}.compilation",src.GetSimpleName());
-            var comp = tool.Compilation(metadata, name);
+            var comp = Roslyn.Compilation(metadata, name);
             var assemlby = comp.GetAssemblySymbol(metadata);
             dst.Replace(array(assemlby));
             var gns = assemlby.GlobalNamespace;

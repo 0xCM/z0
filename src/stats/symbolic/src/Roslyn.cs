@@ -2,12 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
-
 
     using static Root;
     using static LogRecords;
@@ -18,10 +17,8 @@ namespace Z0.Tools
     using OmniSharp.Models.TypeLookup;
 
     [ApiHost]
-    public sealed class Roslyn : AppService<Roslyn>, ITool<Roslyn>
+    public sealed class Roslyn : AppService<Roslyn>
     {
-        public ToolId Id => Toolsets.roslyn;
-
         [Op]
         public Compilation<CSharpCompilation> Compilation(MetadataReference src, string name)
             => CSharpCompilation.Create(name, references: new[]{src});
@@ -40,6 +37,7 @@ namespace Z0.Tools
 
         public SolutionFile LoadSolution(FS.FilePath src)
             => SolutionFile.ParseFile(src.Name);
-
     }
+
+
 }

@@ -122,9 +122,7 @@ namespace Z0
                 => Source.GetModuleNamespace(namespaceSymbol);
 
             public ModuleMetadata GetMetadata()
-            {
-                return Source.GetMetadata();
-            }
+                => Source.GetMetadata();
 
             public ReadOnlySpan<AttributeData> GetAttributes()
                 => Source.GetAttributes().AsSpan();

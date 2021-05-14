@@ -5,7 +5,7 @@
 namespace Z0.Tools
 {
     [ApiHost]
-    public static class BuildProjectCmdApi
+    public static class ProjectBuilds
     {
         [Op]
         public static string Format(this BuildProjectCmd src)
@@ -104,8 +104,6 @@ namespace Z0.Tools
                 dst.AppendFormat(OptionValue, "graph", src.Graph);
             }
         }
-
-        const string Quote = "\"";
 
         const string PropertySpec = "/p:{0}={1}";
 

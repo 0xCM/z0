@@ -42,8 +42,5 @@ namespace Z0
         public static MsDocPipe MsDocs(this IWfRuntime wf)
             => Svc.MsDocPipe.create(wf);
 
-        [Op]
-        public static Roslyn Roslyn(this IWfRuntime wf)
-            => Svc.Roslyn.create(wf);
     }
 }

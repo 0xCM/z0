@@ -11,6 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Threading;
     using Microsoft.CodeAnalysis;
+    using OmniSharp.Models.TypeLookup;
 
     using static Root;
 
@@ -18,12 +19,12 @@ namespace Z0
 
     partial struct CodeSymbolModels
     {
-        public readonly struct TypeParameterSymbol : ICodeSymbol<TypeParameterSymbol,ITypeParameterSymbol>
+        public readonly struct TypeSymbol : ICodeSymbol<TypeSymbol,ITypeSymbol>
         {
-            public ITypeParameterSymbol Source {get;}
+            public ITypeSymbol Source {get;}
 
             [MethodImpl(Inline)]
-            public TypeParameterSymbol(ITypeParameterSymbol src)
+            public TypeSymbol(ITypeSymbol src)
             {
                 Source = src;
             }
@@ -40,85 +41,92 @@ namespace Z0
                 get => Source != null;
             }
 
-            public int Ordinal => Source.Ordinal;
+            public DocumentationComment Docs
+                => api.docs(Source);
 
-            public VarianceKind Variance => Source.Variance;
+            public TypeKind TypeKind
+                => Source.TypeKind;
 
-            public TypeParameterKind TypeParameterKind => Source.TypeParameterKind;
+            public INamedTypeSymbol BaseType
+                => Source.BaseType;
 
-            public IMethodSymbol DeclaringMethod => Source.DeclaringMethod;
+            public ReadOnlySpan<NamedTypeSymbol> Interfaces
+            {
+                [MethodImpl(Inline)]
+                get => api.materialize(Source.Interfaces.AsSpan(), default(NamedTypeSymbol));
+            }
 
-            public INamedTypeSymbol DeclaringType => Source.DeclaringType;
+            public ReadOnlySpan<NamedTypeSymbol> AllInterfaces
+            {
+                [MethodImpl(Inline)]
+                get => api.materialize(Source.AllInterfaces.AsSpan(), default(NamedTypeSymbol));
+            }
 
-            public bool HasReferenceTypeConstraint => Source.HasReferenceTypeConstraint;
+            public bool IsReferenceType
+                => Source.IsReferenceType;
 
-            public NullableAnnotation ReferenceTypeConstraintNullableAnnotation => Source.ReferenceTypeConstraintNullableAnnotation;
+            public bool IsValueType
+                => Source.IsValueType;
 
-            public bool HasValueTypeConstraint => Source.HasValueTypeConstraint;
+            public bool IsAnonymousType
+                => Source.IsAnonymousType;
 
-            public bool HasUnmanagedTypeConstraint => Source.HasUnmanagedTypeConstraint;
+            public bool IsTupleType
+                => Source.IsTupleType;
 
-            public bool HasNotNullConstraint => Source.HasNotNullConstraint;
+            public bool IsNativeIntegerType
+                => Source.IsNativeIntegerType;
 
-            public bool HasConstructorConstraint => Source.HasConstructorConstraint;
+            public ITypeSymbol OriginalDefinition
+                => Source.OriginalDefinition;
 
-            public ImmutableArray<ITypeSymbol> ConstraintTypes => Source.ConstraintTypes;
+            public SpecialType SpecialType
+                => Source.SpecialType;
 
-            public ImmutableArray<NullableAnnotation> ConstraintNullableAnnotations => Source.ConstraintNullableAnnotations;
+            public bool IsRefLikeType
+                => Source.IsRefLikeType;
 
-            public ITypeParameterSymbol OriginalDefinition => Source.OriginalDefinition;
+            public bool IsUnmanagedType
+                => Source.IsUnmanagedType;
 
-            public ITypeParameterSymbol ReducedFrom => Source.ReducedFrom;
+            public bool IsReadOnly
+                => Source.IsReadOnly;
 
-            public TypeKind TypeKind => Source.TypeKind;
+            public NullableAnnotation NullableAnnotation
+                => Source.NullableAnnotation;
 
-            public INamedTypeSymbol BaseType => Source.BaseType;
+            public bool IsNamespace
+                => Source.IsNamespace;
 
-            public ImmutableArray<INamedTypeSymbol> Interfaces => Source.Interfaces;
+            public bool IsType
+                => Source.IsType;
 
-            public ImmutableArray<INamedTypeSymbol> AllInterfaces => Source.AllInterfaces;
+            public SymbolKind Kind
+                => Source.Kind;
 
-            public bool IsReferenceType => Source.IsReferenceType;
+            public string Language
+                => Source.Language;
 
-            public bool IsValueType => Source.IsValueType;
+            public string Name
+                => Source.Name;
 
-            public bool IsAnonymousType => Source.IsAnonymousType;
+            public string MetadataName
+                => Source.MetadataName;
 
-            public bool IsTupleType => Source.IsTupleType;
+            public ISymbol ContainingSymbol
+                => Source.ContainingSymbol;
 
-            public bool IsNativeIntegerType => Source.IsNativeIntegerType;
+            public IAssemblySymbol ContainingAssembly
+                => Source.ContainingAssembly;
 
-            public SpecialType SpecialType => Source.SpecialType;
+            public IModuleSymbol ContainingModule
+                => Source.ContainingModule;
 
-            public bool IsRefLikeType => Source.IsRefLikeType;
+            public INamedTypeSymbol ContainingType
+                => Source.ContainingType;
 
-            public bool IsUnmanagedType => Source.IsUnmanagedType;
-
-            public bool IsReadOnly => Source.IsReadOnly;
-
-            public NullableAnnotation NullableAnnotation => Source.NullableAnnotation;
-
-            public bool IsNamespace => Source.IsNamespace;
-
-            public bool IsType => Source.IsType;
-
-            public SymbolKind Kind => Source.Kind;
-
-            public string Language => Source.Language;
-
-            public string Name => Source.Name;
-
-            public string MetadataName => Source.MetadataName;
-
-            public ISymbol ContainingSymbol => Source.ContainingSymbol;
-
-            public IAssemblySymbol ContainingAssembly => Source.ContainingAssembly;
-
-            public IModuleSymbol ContainingModule => Source.ContainingModule;
-
-            public INamedTypeSymbol ContainingType => Source.ContainingType;
-
-            public INamespaceSymbol ContainingNamespace => Source.ContainingNamespace;
+            public INamespaceSymbol ContainingNamespace
+                => Source.ContainingNamespace;
 
             public bool IsDefinition => Source.IsDefinition;
 
@@ -138,7 +146,8 @@ namespace Z0
 
             public bool CanBeReferencedByName => Source.CanBeReferencedByName;
 
-            public ImmutableArray<Location> Locations => Source.Locations;
+            public ImmutableArray<Location> Locations
+                => Source.Locations;
 
             public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => Source.DeclaringSyntaxReferences;
 
@@ -177,30 +186,20 @@ namespace Z0
                 return Source.WithNullableAnnotation(nullableAnnotation);
             }
 
-            public ImmutableArray<ISymbol> GetMembers()
-            {
-                return Source.GetMembers();
-            }
+            public ReadOnlySpan<CodeSymbol> GetMembers()
+                => api.materialize(Source.GetMembers().AsSpan());
 
             public ImmutableArray<ISymbol> GetMembers(string name)
-            {
-                return Source.GetMembers(name);
-            }
+                => Source.GetMembers(name);
 
-            public ImmutableArray<INamedTypeSymbol> GetTypeMembers()
-            {
-                return Source.GetTypeMembers();
-            }
+            public ReadOnlySpan<NamedTypeSymbol> GetTypeMembers()
+                => api.materialize(Source.GetTypeMembers().AsSpan(), default(NamedTypeSymbol));
 
-            public ImmutableArray<INamedTypeSymbol> GetTypeMembers(string name)
-            {
-                return Source.GetTypeMembers(name);
-            }
+            public ReadOnlySpan<NamedTypeSymbol> GetTypeMembers(string name)
+                => api.materialize(Source.GetTypeMembers(name).AsSpan(), default(NamedTypeSymbol));
 
-            public ImmutableArray<INamedTypeSymbol> GetTypeMembers(string name, int arity)
-            {
-                return Source.GetTypeMembers(name, arity);
-            }
+            public ReadOnlySpan<NamedTypeSymbol> GetTypeMembers(string name, int arity)
+                => api.materialize(Source.GetTypeMembers(name, arity).AsSpan(), default(NamedTypeSymbol));
 
             public ReadOnlySpan<AttributeData> GetAttributes()
                 => Source.GetAttributes().AsSpan();
@@ -229,18 +228,18 @@ namespace Z0
             public ReadOnlySpan<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
                 => Source.ToMinimalDisplayParts(semanticModel, position, format).AsSpan();
 
-            public bool Equals(TypeParameterSymbol src)
-                => Source.Equals(src.Source);
-
             public string Format()
                 => api.format(this);
 
             public override string ToString()
                 => Format();
 
+            public bool Equals(TypeSymbol src)
+                => Source.Equals(src.Source);
+
             [MethodImpl(Inline)]
-            public static implicit operator TypeParameterSymbol(CodeSymbol<ITypeParameterSymbol> src)
-                => new TypeParameterSymbol(src.Source);
-        }
+            public static implicit operator TypeSymbol(CodeSymbol<ITypeSymbol> src)
+                => new TypeSymbol(src.Source);
+         }
     }
 }

@@ -45,6 +45,8 @@ namespace Z0
             get => _Source.Subject(Index);
         }
 
+        public SymbolKind Kind => Source.Kind;
+
         public string Format()
             => api.format(this);
 

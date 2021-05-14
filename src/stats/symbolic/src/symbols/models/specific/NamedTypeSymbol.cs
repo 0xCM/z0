@@ -41,13 +41,23 @@ namespace Z0
                 get => Source != null;
             }
 
-            public int Arity => Source.Arity;
+            public int Arity
+            {
+                [MethodImpl(Inline)]
+                get => Source.Arity;
+            }
 
             public bool IsGenericType
-                => Source.IsGenericType;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsGenericType;
+            }
 
             public bool IsUnboundGenericType
-                => Source.IsUnboundGenericType;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsUnboundGenericType;
+            }
 
             public bool IsScriptClass
                 => Source.IsScriptClass;

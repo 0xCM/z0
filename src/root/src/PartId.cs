@@ -81,6 +81,8 @@ public enum PartId : ulong
 
     Canonical = 62,
 
+    Symbolic = 63,
+
     Tables = 65,
 
     Gather = 66 | Shell,

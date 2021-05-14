@@ -24,9 +24,15 @@ namespace Z0
         {
             var path = FS.path(src.Location);
             var xml = path.ChangeExtension(FS.Xml);
-            var doc = xmldoc(xml);
             var props = default(MetadataReferenceProperties);
-            return MetadataReference.CreateFromFile(path.Name, props, doc);
+            if(xml.Exists)
+            {
+                var doc = xmldoc(xml);
+                var reference = MetadataReference.CreateFromFile(path.Name, props, doc);
+                return reference;
+            }
+            else
+                return MetadataReference.CreateFromFile(path.Name, props);
         }
 
         public static XmlDocProvider xmldoc(FS.FilePath src)

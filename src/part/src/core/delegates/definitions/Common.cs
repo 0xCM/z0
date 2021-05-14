@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The stream element type</typeparam>
         [Free]
-        public delegate void SpanReceiver<T>(Span<T> src);
+        public delegate void SpanReceiver<T>(ReadOnlySpan<T> src);
 
         [Free]
         public delegate bool TernaryPredicate<W,T>(T a, T b, T c)

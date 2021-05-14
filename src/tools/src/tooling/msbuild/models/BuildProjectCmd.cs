@@ -4,29 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    /// <summary>
-    /// https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2019
-    /// </summary>
-    public enum BuildLogVerbosity
-    {
-        normal,
-
-        quiet,
-
-        minimial,
-
-        detailed,
-
-        diagnostic
-    }
-
-    public struct BuildCmdVars
-    {
-        public string ProjectId;
-
-        public string SlnId;
-    }
-
     [Cmd(CmdName)]
     public struct BuildProjectCmd : ICmd<BuildProjectCmd>
     {

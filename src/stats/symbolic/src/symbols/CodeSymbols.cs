@@ -7,9 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using Microsoft.CodeAnalysis;
+    using OmniSharp.Roslyn.CSharp.Services.Documentation;
+    using OmniSharp.Models.TypeLookup;
 
     using static Root;
     using static CodeSymbolModels;
+    using static XmlParts;
 
     [ApiHost]
     public readonly struct CodeSymbols
@@ -51,6 +54,10 @@ namespace Z0
         public static NamedTypeSymbol from(INamedTypeSymbol src)
             => new NamedTypeSymbol(src);
 
+        [MethodImpl(Inline), Op]
+        public static TypeSymbol from(ITypeSymbol src)
+            => new TypeSymbol(src);
+
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> convert<T>(ReadOnlySpan<CodeSymbol> src)
             where T : ICodeSymbol
@@ -76,5 +83,13 @@ namespace Z0
         public static CodeSymbol<T> define<T>(T src)
             where T : ISymbol
                 => new CodeSymbol<T>(src);
+
+        [MethodImpl(Inline), Op]
+        public static DocumentationComment docs(XmlText xml)
+            => DocumentationConverter.GetStructuredDocumentation(xml.Value, "\n");
+
+        [MethodImpl(Inline), Op]
+        public static DocumentationComment docs(ISymbol src)
+            => DocumentationConverter.GetStructuredDocumentation(src);
     }
 }

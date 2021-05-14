@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Collections.Immutable;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Threading;
     using Microsoft.CodeAnalysis;
+    using OmniSharp.Models.TypeLookup;
 
     using static Root;
 
@@ -18,15 +18,9 @@ namespace Z0
 
     partial struct CodeSymbolModels
     {
-        public readonly struct FieldSymbol : ICodeSymbol<FieldSymbol,IFieldSymbol>
+        public readonly struct PropertySymbol : ICodeSymbol<PropertySymbol,IPropertySymbol>
         {
-            public IFieldSymbol Source {get;}
-
-            [MethodImpl(Inline)]
-            public FieldSymbol(IFieldSymbol src)
-            {
-                Source = src;
-            }
+            public IPropertySymbol Source {get;}
 
             public bool IsEmpty
             {
@@ -40,30 +34,39 @@ namespace Z0
                 get => Source != null;
             }
 
-            public ISymbol AssociatedSymbol
-                => Source.AssociatedSymbol;
-
-            public bool IsConst => Source.IsConst;
+            public bool IsIndexer => Source.IsIndexer;
 
             public bool IsReadOnly => Source.IsReadOnly;
 
-            public bool IsVolatile => Source.IsVolatile;
+            public bool IsWriteOnly => Source.IsWriteOnly;
 
-            public bool IsFixedSizeBuffer => Source.IsFixedSizeBuffer;
+            public bool IsWithEvents => Source.IsWithEvents;
+
+            public bool ReturnsByRef => Source.ReturnsByRef;
+
+            public bool ReturnsByRefReadonly => Source.ReturnsByRefReadonly;
+
+            public RefKind RefKind => Source.RefKind;
 
             public ITypeSymbol Type => Source.Type;
 
             public NullableAnnotation NullableAnnotation => Source.NullableAnnotation;
 
-            public bool HasConstantValue => Source.HasConstantValue;
+            public ImmutableArray<IParameterSymbol> Parameters => Source.Parameters;
 
-            public object ConstantValue => Source.ConstantValue;
+            public IMethodSymbol GetMethod => Source.GetMethod;
 
-            public ImmutableArray<CustomModifier> CustomModifiers => Source.CustomModifiers;
+            public IMethodSymbol SetMethod => Source.SetMethod;
 
-            public IFieldSymbol OriginalDefinition => Source.OriginalDefinition;
+            public IPropertySymbol OriginalDefinition => Source.OriginalDefinition;
 
-            public IFieldSymbol CorrespondingTupleField => Source.CorrespondingTupleField;
+            public IPropertySymbol OverriddenProperty => Source.OverriddenProperty;
+
+            public ImmutableArray<IPropertySymbol> ExplicitInterfaceImplementations => Source.ExplicitInterfaceImplementations;
+
+            public ImmutableArray<CustomModifier> RefCustomModifiers => Source.RefCustomModifiers;
+
+            public ImmutableArray<CustomModifier> TypeCustomModifiers => Source.TypeCustomModifiers;
 
             public SymbolKind Kind => Source.Kind;
 
@@ -107,63 +110,53 @@ namespace Z0
 
             public Accessibility DeclaredAccessibility => Source.DeclaredAccessibility;
 
-
             public bool HasUnsupportedMetadata => Source.HasUnsupportedMetadata;
 
-            public ImmutableArray<AttributeData> GetAttributes()
+            [MethodImpl(Inline)]
+            public PropertySymbol(IPropertySymbol src)
             {
-                return Source.GetAttributes();
+                Source = src;
             }
+
+            public ReadOnlySpan<AttributeData> GetAttributes()
+                => Source.GetAttributes().AsSpan();
 
             public void Accept(SymbolVisitor visitor)
-            {
-                Source.Accept(visitor);
-            }
+                => Source.Accept(visitor);
 
             public TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-            {
-                return Source.Accept(visitor);
-            }
+                => Source.Accept(visitor);
 
             public string GetDocumentationCommentId()
-            {
-                return Source.GetDocumentationCommentId();
-            }
+                => Source.GetDocumentationCommentId();
 
             public string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default)
-            {
-                return Source.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
-            }
+                => Source.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
 
             public string ToDisplayString(SymbolDisplayFormat format = null)
-            {
-                return Source.ToDisplayString(format);
-            }
+                => Source.ToDisplayString(format);
 
-            public ImmutableArray<SymbolDisplayPart> ToDisplayParts(SymbolDisplayFormat format = null)
-            {
-                return Source.ToDisplayParts(format);
-            }
+            public ReadOnlySpan<SymbolDisplayPart> ToDisplayParts(SymbolDisplayFormat format = null)
+                => Source.ToDisplayParts(format).AsSpan();
 
             public string ToMinimalDisplayString(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
-            {
-                return Source.ToMinimalDisplayString(semanticModel, position, format);
-            }
+                => Source.ToMinimalDisplayString(semanticModel, position, format);
 
-            public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
-            {
-                return Source.ToMinimalDisplayParts(semanticModel, position, format);
-            }
+            public ReadOnlySpan<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
+                => Source.ToMinimalDisplayParts(semanticModel, position, format).AsSpan();
 
-            public bool Equals(FieldSymbol src)
+            public bool Equals(PropertySymbol src)
                 => Source.Equals(src.Source);
 
+            public string Format()
+                => api.format(this);
+
             public override string ToString()
-                => ToDisplayString();
+                => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator FieldSymbol(CodeSymbol<IFieldSymbol> src)
-                => new FieldSymbol(src.Source);
-         }
+            public static implicit operator PropertySymbol(CodeSymbol<IPropertySymbol> src)
+                => new PropertySymbol(src.Source);
+        }
     }
 }

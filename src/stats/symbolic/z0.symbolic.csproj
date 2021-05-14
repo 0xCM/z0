@@ -5,17 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(Res)" />
-    <ProjectReference Include="$(BitNumbers)" />
-    <ProjectReference Include="$(Cpu)" />
-    <ProjectReference Include="$(Related)" />
     <ProjectReference Include="$(Lang)" />
+    <ProjectReference Include="$(Related)" />
     <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Cli)" />
-    <ProjectReference Include="$(Roslyn)" />
-
   </ItemGroup>
+
 
 </Project>

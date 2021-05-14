@@ -90,6 +90,7 @@
     <Related>$(Src)related/Z0.related.csproj</Related>
     <Res>$(Src)res/Z0.res.csproj</Res>
     <Root>$(Src)root/Z0.root.csproj</Root>
+    <Symbolic>$(Src)symbolic/Z0.symbolic.csproj</Symbolic>
 
     <Services>$(Src)services/Z0.services.csproj</Services>
     <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>

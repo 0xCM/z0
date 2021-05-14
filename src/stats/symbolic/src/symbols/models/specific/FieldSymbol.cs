@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Immutable;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Threading;
@@ -17,9 +18,15 @@ namespace Z0
 
     partial struct CodeSymbolModels
     {
-        public readonly struct PropertySymbol : ICodeSymbol<PropertySymbol,IPropertySymbol>
+        public readonly struct FieldSymbol : ICodeSymbol<FieldSymbol,IFieldSymbol>
         {
-            public IPropertySymbol Source {get;}
+            public IFieldSymbol Source {get;}
+
+            [MethodImpl(Inline)]
+            public FieldSymbol(IFieldSymbol src)
+            {
+                Source = src;
+            }
 
             public bool IsEmpty
             {
@@ -33,39 +40,30 @@ namespace Z0
                 get => Source != null;
             }
 
-            public bool IsIndexer => Source.IsIndexer;
+            public ISymbol AssociatedSymbol
+                => Source.AssociatedSymbol;
+
+            public bool IsConst => Source.IsConst;
 
             public bool IsReadOnly => Source.IsReadOnly;
 
-            public bool IsWriteOnly => Source.IsWriteOnly;
+            public bool IsVolatile => Source.IsVolatile;
 
-            public bool IsWithEvents => Source.IsWithEvents;
-
-            public bool ReturnsByRef => Source.ReturnsByRef;
-
-            public bool ReturnsByRefReadonly => Source.ReturnsByRefReadonly;
-
-            public RefKind RefKind => Source.RefKind;
+            public bool IsFixedSizeBuffer => Source.IsFixedSizeBuffer;
 
             public ITypeSymbol Type => Source.Type;
 
             public NullableAnnotation NullableAnnotation => Source.NullableAnnotation;
 
-            public ImmutableArray<IParameterSymbol> Parameters => Source.Parameters;
+            public bool HasConstantValue => Source.HasConstantValue;
 
-            public IMethodSymbol GetMethod => Source.GetMethod;
+            public object ConstantValue => Source.ConstantValue;
 
-            public IMethodSymbol SetMethod => Source.SetMethod;
+            public ImmutableArray<CustomModifier> CustomModifiers => Source.CustomModifiers;
 
-            public IPropertySymbol OriginalDefinition => Source.OriginalDefinition;
+            public IFieldSymbol OriginalDefinition => Source.OriginalDefinition;
 
-            public IPropertySymbol OverriddenProperty => Source.OverriddenProperty;
-
-            public ImmutableArray<IPropertySymbol> ExplicitInterfaceImplementations => Source.ExplicitInterfaceImplementations;
-
-            public ImmutableArray<CustomModifier> RefCustomModifiers => Source.RefCustomModifiers;
-
-            public ImmutableArray<CustomModifier> TypeCustomModifiers => Source.TypeCustomModifiers;
+            public IFieldSymbol CorrespondingTupleField => Source.CorrespondingTupleField;
 
             public SymbolKind Kind => Source.Kind;
 
@@ -109,13 +107,8 @@ namespace Z0
 
             public Accessibility DeclaredAccessibility => Source.DeclaredAccessibility;
 
-            public bool HasUnsupportedMetadata => Source.HasUnsupportedMetadata;
 
-            [MethodImpl(Inline)]
-            public PropertySymbol(IPropertySymbol src)
-            {
-                Source = src;
-            }
+            public bool HasUnsupportedMetadata => Source.HasUnsupportedMetadata;
 
             public ReadOnlySpan<AttributeData> GetAttributes()
                 => Source.GetAttributes().AsSpan();
@@ -144,7 +137,7 @@ namespace Z0
             public ReadOnlySpan<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
                 => Source.ToMinimalDisplayParts(semanticModel, position, format).AsSpan();
 
-            public bool Equals(PropertySymbol src)
+            public bool Equals(FieldSymbol src)
                 => Source.Equals(src.Source);
 
             public string Format()
@@ -154,8 +147,8 @@ namespace Z0
                 => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator PropertySymbol(CodeSymbol<IPropertySymbol> src)
-                => new PropertySymbol(src.Source);
-        }
+            public static implicit operator FieldSymbol(CodeSymbol<IFieldSymbol> src)
+                => new FieldSymbol(src.Source);
+         }
     }
 }

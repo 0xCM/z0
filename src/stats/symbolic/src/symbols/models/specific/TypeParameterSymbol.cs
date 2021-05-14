@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
     using System.Collections.Immutable;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Threading;
     using Microsoft.CodeAnalysis;
+    using OmniSharp.Models.TypeLookup;
 
     using static Root;
 
@@ -17,15 +19,12 @@ namespace Z0
 
     partial struct CodeSymbolModels
     {
-        /// <summary>
-        /// Represents an array type
-        /// </summary>
-        public readonly struct ArrayTypeSymbol : ICodeSymbol<ArrayTypeSymbol,IArrayTypeSymbol>
+        public readonly struct TypeParameterSymbol : ICodeSymbol<TypeParameterSymbol,ITypeParameterSymbol>
         {
-            public IArrayTypeSymbol Source {get;}
+            public ITypeParameterSymbol Source {get;}
 
             [MethodImpl(Inline)]
-            public ArrayTypeSymbol(IArrayTypeSymbol src)
+            public TypeParameterSymbol(ITypeParameterSymbol src)
             {
                 Source = src;
             }
@@ -42,21 +41,35 @@ namespace Z0
                 get => Source != null;
             }
 
-            public int Rank => Source.Rank;
+            public int Ordinal => Source.Ordinal;
 
-            public bool IsSZArray => Source.IsSZArray;
+            public VarianceKind Variance => Source.Variance;
 
-            public ImmutableArray<int> LowerBounds => Source.LowerBounds;
+            public TypeParameterKind TypeParameterKind => Source.TypeParameterKind;
 
-            public ImmutableArray<int> Sizes => Source.Sizes;
+            public IMethodSymbol DeclaringMethod => Source.DeclaringMethod;
 
-            public ITypeSymbol ElementType => Source.ElementType;
+            public INamedTypeSymbol DeclaringType => Source.DeclaringType;
 
-            public NullableAnnotation ElementNullableAnnotation
-                => Source.ElementNullableAnnotation;
+            public bool HasReferenceTypeConstraint => Source.HasReferenceTypeConstraint;
 
-            public ReadOnlySpan<CustomModifier> CustomModifiers
-                => Source.CustomModifiers.AsSpan();
+            public NullableAnnotation ReferenceTypeConstraintNullableAnnotation => Source.ReferenceTypeConstraintNullableAnnotation;
+
+            public bool HasValueTypeConstraint => Source.HasValueTypeConstraint;
+
+            public bool HasUnmanagedTypeConstraint => Source.HasUnmanagedTypeConstraint;
+
+            public bool HasNotNullConstraint => Source.HasNotNullConstraint;
+
+            public bool HasConstructorConstraint => Source.HasConstructorConstraint;
+
+            public ImmutableArray<ITypeSymbol> ConstraintTypes => Source.ConstraintTypes;
+
+            public ImmutableArray<NullableAnnotation> ConstraintNullableAnnotations => Source.ConstraintNullableAnnotations;
+
+            public ITypeParameterSymbol OriginalDefinition => Source.OriginalDefinition;
+
+            public ITypeParameterSymbol ReducedFrom => Source.ReducedFrom;
 
             public TypeKind TypeKind => Source.TypeKind;
 
@@ -76,8 +89,6 @@ namespace Z0
 
             public bool IsNativeIntegerType => Source.IsNativeIntegerType;
 
-            public ITypeSymbol OriginalDefinition => Source.OriginalDefinition;
-
             public SpecialType SpecialType => Source.SpecialType;
 
             public bool IsRefLikeType => Source.IsRefLikeType;
@@ -86,8 +97,7 @@ namespace Z0
 
             public bool IsReadOnly => Source.IsReadOnly;
 
-            public NullableAnnotation NullableAnnotation
-                => Source.NullableAnnotation;
+            public NullableAnnotation NullableAnnotation => Source.NullableAnnotation;
 
             public bool IsNamespace => Source.IsNamespace;
 
@@ -137,15 +147,6 @@ namespace Z0
 
             public bool HasUnsupportedMetadata => Source.HasUnsupportedMetadata;
 
-
-            [MethodImpl(Inline)]
-            public static implicit operator ArrayTypeSymbol(CodeSymbol<IArrayTypeSymbol> src)
-                => new ArrayTypeSymbol(src.Source);
-
-            public bool Equals(IArrayTypeSymbol other)
-            {
-                return Source.Equals(other);
-            }
 
             public ISymbol FindImplementationForInterfaceMember(ISymbol interfaceMember)
             {
@@ -202,59 +203,45 @@ namespace Z0
                 return Source.GetTypeMembers(name, arity);
             }
 
-            public ImmutableArray<AttributeData> GetAttributes()
-            {
-                return Source.GetAttributes();
-            }
+            public ReadOnlySpan<AttributeData> GetAttributes()
+                => Source.GetAttributes().AsSpan();
 
             public void Accept(SymbolVisitor visitor)
-            {
-                Source.Accept(visitor);
-            }
+                => Source.Accept(visitor);
 
             public TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-            {
-                return Source.Accept(visitor);
-            }
+                => Source.Accept(visitor);
 
             public string GetDocumentationCommentId()
-            {
-                return Source.GetDocumentationCommentId();
-            }
+                => Source.GetDocumentationCommentId();
 
             public string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default)
-            {
-                return Source.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
-            }
+                => Source.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
 
             public string ToDisplayString(SymbolDisplayFormat format = null)
-            {
-                return Source.ToDisplayString(format);
-            }
+                => Source.ToDisplayString(format);
 
-            public ImmutableArray<SymbolDisplayPart> ToDisplayParts(SymbolDisplayFormat format = null)
-            {
-                return Source.ToDisplayParts(format);
-            }
+            public ReadOnlySpan<SymbolDisplayPart> ToDisplayParts(SymbolDisplayFormat format = null)
+                => Source.ToDisplayParts(format).AsSpan();
 
             public string ToMinimalDisplayString(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
-            {
-                return Source.ToMinimalDisplayString(semanticModel, position, format);
-            }
+                => Source.ToMinimalDisplayString(semanticModel, position, format);
 
-            public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
-            {
-                return Source.ToMinimalDisplayParts(semanticModel, position, format);
-            }
+            public ReadOnlySpan<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format = null)
+                => Source.ToMinimalDisplayParts(semanticModel, position, format).AsSpan();
 
-            public bool Equals(ArrayTypeSymbol src)
+            public bool Equals(TypeParameterSymbol src)
                 => Source.Equals(src.Source);
 
-             public string Format()
+            public string Format()
                 => api.format(this);
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator TypeParameterSymbol(CodeSymbol<ITypeParameterSymbol> src)
+                => new TypeParameterSymbol(src.Source);
         }
     }
 }

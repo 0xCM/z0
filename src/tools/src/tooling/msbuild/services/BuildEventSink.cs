@@ -9,7 +9,7 @@ namespace Z0
     using Microsoft.Build.Utilities;
     using Microsoft.Build.Framework;
 
-    public class BuildLogger : Logger
+    public class BuildEventSink : Logger
     {
         FS.FilePath LogPath;
 

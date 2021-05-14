@@ -11,6 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Threading;
     using Microsoft.CodeAnalysis;
+    using OmniSharp.Models.TypeLookup;
 
     using static Root;
 
@@ -40,23 +41,80 @@ namespace Z0
                 get => Source != null;
             }
 
+            public DocumentationComment Docs
+                => api.docs(Source);
+
             public MethodKind MethodKind
-                => Source.MethodKind;
+            {
+                [MethodImpl(Inline)]
+                get => Source.MethodKind;
+            }
+
+            public bool IsConstructor
+            {
+                [MethodImpl(Inline)]
+                get => MethodKind == MethodKind.Constructor;
+            }
+
+            public bool IsPropertyGet
+            {
+                [MethodImpl(Inline)]
+                get => MethodKind == MethodKind.PropertyGet;
+            }
+
+            public bool IsPropertySet
+            {
+                [MethodImpl(Inline)]
+                get => MethodKind == MethodKind.PropertySet;
+            }
+
+            public bool IsOperator
+            {
+                [MethodImpl(Inline)]
+                get => MethodKind == MethodKind.UserDefinedOperator || MethodKind == MethodKind.BuiltinOperator;
+            }
+
+            public bool IsIntrinsicOperator
+            {
+                [MethodImpl(Inline)]
+                get => MethodKind == MethodKind.BuiltinOperator;
+            }
+
+            public bool IsLocalFunction
+            {
+                [MethodImpl(Inline)]
+                get => Source.MethodKind == MethodKind.LocalFunction;
+            }
 
             public int Arity
-                => Source.Arity;
+            {
+                [MethodImpl(Inline)]
+                get => Source.Arity;
+            }
 
             public bool IsGenericMethod
-                => Source.IsGenericMethod;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsGenericMethod;
+            }
 
             public bool IsExtensionMethod
-                => Source.IsExtensionMethod;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsExtensionMethod;
+            }
 
             public bool IsAsync
-                => Source.IsAsync;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsAsync;
+            }
 
             public bool IsVararg
-                => Source.IsVararg;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsVararg;
+            }
 
             public bool IsCheckedBuiltin
                 => Source.IsCheckedBuiltin;
@@ -74,10 +132,16 @@ namespace Z0
                 => Source.ReturnsByRefReadonly;
 
             public RefKind RefKind
-                => Source.RefKind;
+            {
+                [MethodImpl(Inline)]
+                get => Source.RefKind;
+            }
 
-            public ITypeSymbol ReturnType
-                => Source.ReturnType;
+            public TypeSymbol ReturnType
+            {
+                [MethodImpl(Inline)]
+                get => api.from(Source.ReturnType);
+            }
 
             public NullableAnnotation ReturnNullableAnnotation
                 => Source.ReturnNullableAnnotation;
