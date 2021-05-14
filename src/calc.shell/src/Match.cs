@@ -37,6 +37,7 @@ namespace Z0
             log.Found = log.MatchingBlock != NotFound;
         }
 
+
         public ref struct Detail
         {
             public SpanBlock128<byte> Searched;

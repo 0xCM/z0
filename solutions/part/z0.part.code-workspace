@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\..\\src\\part"
+		},
+		{
+			"path": "..\\..\\src\\core"
+		},
+		{
+			"path": "..\\..\\src\\root"
+		},
+		{
+			"path": "..\\..\\src\\external"
+		},
+		{
+			"path": "..\\..\\src\\clr"
+		},
+		{
+			"path": "..\\..\\src\\interop"
+		},
+		{
+			"path": "..\\..\\src\\sys"
+		}
+	],
+	"settings": {}
+}
