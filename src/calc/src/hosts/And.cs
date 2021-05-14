@@ -22,6 +22,8 @@ namespace Z0
         public readonly struct And<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
+            public K.And ApiClass => default;
+
             public const BinaryBitLogicKind OpKind = BinaryBitLogicKind.And;
 
             [MethodImpl(Inline)]
@@ -37,6 +39,8 @@ namespace Z0
         public readonly struct VAnd128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
+            public K.And ApiClass => default;
+
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
                 => gcpu.vand(x,y);
@@ -50,6 +54,8 @@ namespace Z0
         public readonly struct VAnd256<T> : IBinaryOp256D<T>
             where T : unmanaged
         {
+            public K.And ApiClass => default;
+
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
                 => gcpu.vand(x,y);
@@ -63,6 +69,8 @@ namespace Z0
         public readonly struct And128<T> : IBlockedBinaryOp128<T>
             where T : unmanaged
         {
+            public K.And ApiClass => default;
+
             [MethodImpl(Inline)]
             public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
                 => ref zip(a, b, dst, Calcs.vand<T>(w128));
@@ -72,6 +80,8 @@ namespace Z0
         public readonly struct And256<T> : IBlockedBinaryOp256<T>
             where T : unmanaged
         {
+            public K.And ApiClass => default;
+
             [MethodImpl(Inline)]
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
                 => ref zip(a, b, dst, Calcs.vand<T>(w256));
@@ -81,6 +91,8 @@ namespace Z0
             where W : unmanaged, ITypeWidth
             where T : unmanaged
         {
+            public K.And ApiClass => default;
+
             [MethodImpl(Inline)]
             public void Invoke(in T a, in T b, ref T dst)
             {

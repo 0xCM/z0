@@ -43,7 +43,6 @@ namespace Z0
             return ref z;
         }
 
-
         [MethodImpl(Inline)]
         public static T Dot<N,T>(Block256<N,T> x, Block256<N,T> y)
             where N : unmanaged, ITypeNat
@@ -54,7 +53,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(mkl.dot(x.As<double>(), y.As<double>()));
             else
-                return Calcs.dot<T>(x.Unsized, y.Unsized);
+                throw no<T>();
         }
     }
 }

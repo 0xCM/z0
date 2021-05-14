@@ -119,7 +119,6 @@ namespace Z0
             return tt;
         }
 
-
         [Op]
         public static BitMatrix<N8,N4,byte> table(TernaryBitLogicKind kind)
         {

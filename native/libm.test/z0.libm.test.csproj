@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(LibM)" />
   </ItemGroup>
 

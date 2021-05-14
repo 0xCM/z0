@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Universe)" />
+    <ProjectReference Include="$(Validity)"/>
+    <ProjectReference Include="$(Bits)"/>
+    <ProjectReference Include="$(BitMatrix)"/>
+    <ProjectReference Include="$(BitGrids)"/>
   </ItemGroup>
 
 </Project>

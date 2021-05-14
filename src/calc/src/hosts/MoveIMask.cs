@@ -11,6 +11,8 @@ namespace Z0
     using static Part;
     using static SFx;
 
+    using K = ApiClasses;
+
     partial struct CalcHosts
     {
         public readonly struct VMoveIMask128<T> : IUnaryScalarImm8Op128<T,ushort>

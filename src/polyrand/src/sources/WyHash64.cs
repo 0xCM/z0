@@ -16,7 +16,7 @@ namespace Z0
     /// Implements a 64-bit random number generator
     /// </summary>
     /// <remarks>Core algorithm taken from https://github.com/lemire/testingRNG/blob/master/source/wyhash.h</remarks>
-    [ApiHost]
+    //[ApiHost]
     public struct WyHash64 : IDomainRng<WyHash64,ulong>
     {
         [MethodImpl(Inline), Op]
