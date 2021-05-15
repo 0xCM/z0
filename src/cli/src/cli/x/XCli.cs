@@ -12,8 +12,7 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
 
     public static partial class XCli
@@ -37,24 +36,5 @@ namespace Z0
         public static T MapValid<S,T>(this CliTableKind src, S input, Func<S,T> f, Func<T> @else)
             => src.IsValid() ? f(input) : @else();
 
-
-        // public static string PeekUtf8(int offset, int byteCount)
-        // {
-        //     CheckBounds(offset, byteCount);
-        //     return Encoding.UTF8.GetString(Pointer + offset, byteCount);
-        // }
-
-
-        // public static MemoryBlock GetMetadataBlock(this MetadataReader reader, HeapIndex heapIndex)
-        // {
-        //     return heapIndex switch
-        //     {
-        //         HeapIndex.UserString => reader.UserStringHeap.Block,
-        //         HeapIndex.String => reader.StringHeap.Block,
-        //         HeapIndex.Blob => reader.BlobHeap.Block,
-        //         HeapIndex.Guid => reader.GuidHeap.Block,
-        //         _ => throw new ArgumentOutOfRangeException("heapIndex"),
-        //     };
-        // }
     }
 }

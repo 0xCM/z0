@@ -11,15 +11,14 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
-    using static memory;
-
+    using static Root;
+    using static core;
     using static CliRows;
 
     using K = CliTableKinds;
 
     [ApiHost]
-    public unsafe readonly partial struct CliReader
+    public unsafe class CliReader
     {
         [MethodImpl(Inline), Op]
         public static ManifestResourceHandle reshandle(uint row)
@@ -66,7 +65,7 @@ namespace Z0
         public ReadOnlySpan<byte> RawData
         {
             [MethodImpl(Inline)]
-            get => view<byte>(Segment);
+            get => memory.view<byte>(Segment);
         }
 
         [MethodImpl(Inline), Op]
@@ -85,10 +84,13 @@ namespace Z0
         public Address32 HeapOffset(GuidHandle handle)
             => (Address32)MD.GetHeapOffset(handle);
 
-
         [MethodImpl(Inline), Op]
         public ByteSize HeapSize(HeapIndex index)
             => MD.GetHeapSize(index);
+
+        [MethodImpl(Inline), Op]
+        public void Read(Index<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
+            => src.Iter(handle => dst(MD.GetCustomAttribute(handle)));
 
         [Op]
         public CliGuidHeap GuidHeap()
@@ -106,6 +108,46 @@ namespace Z0
             return new CliBlobHeap(@base, HeapSize(HeapIndex.Blob));
         }
 
+        [Op]
+        public CliBlob ReadBlobDescription(BlobHandle handle, Count seq)
+        {
+            var offset = (Address32)MD.GetHeapOffset(handle);
+            var value = MD.GetBlobBytes(handle) ?? sys.empty<byte>();
+            var size = (uint)MD.GetHeapSize(HeapIndex.Blob);
+            var row = new CliBlob();
+            row.Sequence = seq;
+            row.HeapSize = (uint)MD.GetHeapSize(HeapIndex.Blob);
+            row.Offset = (Address32)MD.GetHeapOffset(handle);
+            row.Data = value;
+            row.DataSize = (uint)row.Data.Length;
+            return row;
+        }
+
+        public ReadOnlySpan<CliBlob> ReadBlobDescriptions()
+        {
+            var size = (uint)MD.GetHeapSize(HeapIndex.Blob);
+            if (size == 0)
+                return Span<CliBlob>.Empty;
+
+            var handle = MetadataTokens.BlobHandle(1);
+            var i=0;
+            var values = root.list<CliBlob>();
+            do
+            {
+                var value = MD.GetBlobBytes(handle);
+                var row = new CliBlob();
+                row.Sequence = i++;
+                row.HeapSize = size;
+                row.Offset = (Address32)MD.GetHeapOffset(handle);
+                row.Data = MD.GetBlobBytes(handle);
+                row.DataSize = (uint)row.Data.Length;
+                values.Add(row);
+                handle = MD.GetNextHandle(handle);
+            }
+            while (!handle.IsNil);
+
+            return values.ToArray();
+        }
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<AssemblyReferenceHandle> AssemblyRefHandles()
             => MD.AssemblyReferences.ToReadOnlySpan();
@@ -119,56 +161,12 @@ namespace Z0
             => MD.ManifestResources.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
-        public CliRowKeys<K.AssemblyRef> AssemblyRefKeys()
-            => Cli.keys(MD.AssemblyReferences);
-
-        [MethodImpl(Inline), Op]
-        public CliRowKeys<K.Field> FieldDefKeys()
-            => Cli.keys(MD.FieldDefinitions);
-
-        [MethodImpl(Inline), Op]
-        public CliRowKeys<K.MethodDef> MethodDefKeys()
-            => Cli.keys(MD.MethodDefinitions);
-
-        [MethodImpl(Inline), Op]
-        public CliRowKeys<K.MethodDebugInformation> MethodDebugKeys()
-            => Cli.keys(MD.MethodDebugInformation);
-
-        [MethodImpl(Inline), Op]
-        public CliRowKeys<K.MemberRef> MemberRefKeys()
-            => Cli.keys(MD.MemberReferences);
-
-        [MethodImpl(Inline), Op]
-        public CliRowKeys<K.Property> PropertyDefKeys()
-            => Cli.keys(MD.PropertyDefinitions);
-
-        [MethodImpl(Inline), Op]
-        public CliRowKeys<K.TypeDef> TypeDefKeys()
-            => Cli.keys(MD.TypeDefinitions);
-
-        [MethodImpl(Inline), Op]
-        public CliRowKeys<K.TypeRef> TypeRefKeys()
-            => Cli.keys(MD.TypeReferences);
-
-        [MethodImpl(Inline), Op]
         public AssemblyFile Read(AssemblyFileHandle src)
             => MD.GetAssemblyFile(src);
 
         [MethodImpl(Inline), Op]
         public AssemblyReference Read(AssemblyReferenceHandle src)
             => MD.GetAssemblyReference(src);
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<CliRows.AssemblyRefInfo> Describe(ReadOnlySpan<AssemblyReferenceHandle> src)
-        {
-            var count = src.Length;
-            var dst = alloc<CliRows.AssemblyRefInfo>(count);
-            for(var i=0; i<count; i++)
-            {
-                seek(dst,i) = Describe(skip(src,i));
-            }
-            return dst;
-        }
 
         [MethodImpl(Inline), Op]
         public CustomAttribute Read(CustomAttributeHandle src)
@@ -183,12 +181,122 @@ namespace Z0
             => MD.GetFieldDefinition(src);
 
         [MethodImpl(Inline), Op]
+        public MethodDebugInformation Read(MethodDebugInformationHandle src)
+            => MD.GetMethodDebugInformation(src);
+
+        [MethodImpl(Inline), Op]
+        public MethodImplementation Read(MethodImplementationHandle src)
+            => MD.GetMethodImplementation(src);
+
+        [MethodImpl(Inline), Op]
+        public ManifestResource Read(ManifestResourceHandle src)
+            => MD.GetManifestResource(src);
+
+        [MethodImpl(Inline), Op]
         public MemberReference Read(MemberReferenceHandle src)
             => MD.GetMemberReference(src);
 
         [MethodImpl(Inline), Op]
-        public MethodDebugInformation Read(MethodDebugInformationHandle src)
-            => MD.GetMethodDebugInformation(src);
+        public BinaryCode Read(BlobHandle src)
+            => MD.GetBlobBytes(src);
+
+        [MethodImpl(Inline), Op]
+        public string Read(UserStringHandle handle)
+            => MD.GetUserString(handle);
+
+        [MethodImpl(Inline), Op]
+        public string Read(StringHandle src)
+            => MD.GetString(src);
+
+        [MethodImpl(Inline), Op]
+        public void Read(ReadOnlySpan<TypeDefinitionHandle> src, Span<TypeDefinition> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = Read(skip(src,i));
+        }
+
+        [MethodImpl(Inline), Op]
+        public ref FieldDefinition Read(FieldDefinitionHandle src, ref FieldDefinition dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public void Read(ReadOnlySpan<FieldDefinitionHandle> src, Span<FieldDefinition> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                Read(skip(src,i), ref seek(dst,i));
+        }
+
+        [MethodImpl(Inline), Op]
+        public ref MethodImplementation Read(MethodImplementationHandle src, ref MethodImplementation dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public void Read(ReadOnlySpan<MethodImplementationHandle> src, Span<MethodImplementation> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                Read(skip(src,i), ref seek(dst,i));
+        }
+
+        [MethodImpl(Inline), Op]
+        public ref AssemblyFile Read(AssemblyFileHandle src, ref AssemblyFile dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public void Read(ReadOnlySpan<AssemblyFileHandle> src, Span<AssemblyFile> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                Read(skip(src,i), ref seek(dst,i));
+        }
+
+        public AssemblyRefRow Row(AssemblyReferenceHandle handle)
+        {
+            var dst = new AssemblyRefRow();
+            var src = MD.GetAssemblyReference(handle);
+            dst.Culture = src.Culture;
+            dst.Flags = src.Flags;
+            dst.Hash = src.HashValue;
+            dst.Token = src.PublicKeyOrToken;
+            dst.Version = src.Version;
+            dst.Name = src.Name;
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public PropertyDefinition Read(PropertyDefinitionHandle src)
+            => MD.GetPropertyDefinition(src);
+
+        [MethodImpl(Inline), Op]
+        public TypeDefinition Read(TypeDefinitionHandle src)
+            => MD.GetTypeDefinition(src);
+
+        [MethodImpl(Inline), Op]
+        public TypeReference Read(TypeReferenceHandle src)
+            => MD.GetTypeReference(src);
+
+        [MethodImpl(Inline), Op]
+        public NamespaceDefinition Read(NamespaceDefinitionHandle src)
+            => MD.GetNamespaceDefinition(src);
+
+        [MethodImpl(Inline), Op]
+        public BinaryCode ReadSig(FieldDefinition src)
+            => Read(src.Signature);
+
+        [MethodImpl(Inline), Op]
+        public BinaryCode ReadSig(MethodDefinition src)
+            => Read(src.Signature);
 
         [MethodImpl(Inline), Op]
         public MethodDefRow Read(MethodDefinitionHandle handle)
@@ -217,50 +325,6 @@ namespace Z0
             for(var i=0u; i<count; i++)
                  seek(dst,i) = Read(skip(src,i));
         }
-
-        [MethodImpl(Inline), Op]
-        public MethodImplementation Read(MethodImplementationHandle src)
-            => MD.GetMethodImplementation(src);
-
-        [MethodImpl(Inline), Op]
-        public PropertyDefinition Read(PropertyDefinitionHandle src)
-            => MD.GetPropertyDefinition(src);
-
-        [MethodImpl(Inline), Op]
-        public TypeDefinition Read(TypeDefinitionHandle src)
-            => MD.GetTypeDefinition(src);
-
-        [MethodImpl(Inline), Op]
-        public TypeReference Read(TypeReferenceHandle src)
-            => MD.GetTypeReference(src);
-
-        [MethodImpl(Inline), Op]
-        public NamespaceDefinition Read(NamespaceDefinitionHandle src)
-            => MD.GetNamespaceDefinition(src);
-
-        [MethodImpl(Inline), Op]
-        public ManifestResource Read(ManifestResourceHandle src)
-            => MD.GetManifestResource(src);
-
-        [MethodImpl(Inline), Op]
-        public BinaryCode Read(BlobHandle src)
-            => MD.GetBlobBytes(src);
-
-        [MethodImpl(Inline), Op]
-        public string Read(UserStringHandle handle)
-            => MD.GetUserString(handle);
-
-        [MethodImpl(Inline), Op]
-        public string Read(StringHandle src)
-            => MD.GetString(src);
-
-        [MethodImpl(Inline), Op]
-        public BinaryCode ReadSig(FieldDefinition src)
-            => Read(src.Signature);
-
-        [MethodImpl(Inline), Op]
-        public BinaryCode ReadSig(MethodDefinition src)
-            => Read(src.Signature);
 
         public ReadOnlySpan<string> UserStrings()
         {
@@ -297,5 +361,40 @@ namespace Z0
 
             return values.ViewDeposited();
         }
+
+        internal static string format(FieldAttributes src)
+            => src.ToString();
+
+        public ReadOnlySpan<MemberFieldInfo> ReadFieldInfo()
+        {
+            var reader = MD;
+            var handles = reader.FieldDefinitions.ToReadOnlySpan();
+            var count = handles.Length;
+            var dst = memory.span<MemberFieldInfo>(count);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var handle = ref skip(handles,i);
+                var entry = reader.GetFieldDefinition(handle);
+                int offset = entry.GetOffset();
+                ref var field = ref seek(dst,i);
+                var bsig = ReadSig(entry);
+                var name = ReadFieldName(entry.Name, i);
+
+                field.Token = CliTokens.token(handle);
+                field.FieldName = name.Value;
+                field.Attribs = format(entry.Attributes);
+                field.Sig = bsig;
+            }
+            return dst;
+        }
+
+        MemberFieldName ReadFieldName(StringHandle handle, Count seq)
+        {
+            var value = MD.GetString(handle);
+            var offset = MD.GetHeapOffset(handle);
+            var size = MD.GetHeapSize(HeapIndex.String);
+            return new MemberFieldName(seq, size, (Address32)offset, value);
+        }
+
     }
 }

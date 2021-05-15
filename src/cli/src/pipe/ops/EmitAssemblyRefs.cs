@@ -9,8 +9,8 @@ namespace Z0
     using System.Reflection;
     using System.IO;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class ImageMetaPipe
     {
@@ -108,10 +108,7 @@ namespace Z0
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-            {
                 counter += EmitAssemblyRefs(skip(components,i), formatter, writer);
-            }
-
             Wf.EmittedTable(flow, counter);
         }
     }

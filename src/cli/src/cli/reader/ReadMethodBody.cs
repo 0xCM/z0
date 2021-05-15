@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
-    using static Part;
-    using static memory;
-    using static CliRows;
+    using static Root;
 
     partial class ImageMetaReader
     {

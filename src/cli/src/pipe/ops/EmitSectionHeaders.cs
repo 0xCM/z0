@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static memory;
+    using static core;
     using static PeRecords;
 
     partial class ImageMetaPipe

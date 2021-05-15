@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
-    using static ImageRecords;
-    using static CliRows;
+    using static core;
 
     partial class ImageMetaPipe
     {

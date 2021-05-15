@@ -10,25 +10,8 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
     using System.Collections.Generic;
 
-    using static Part;
-
     partial class ImageMetaReader
     {
-        [Op]
-        public CliBlob ReadBlobDescription(BlobHandle handle, Count seq)
-        {
-            var offset = (Address32)MD.GetHeapOffset(handle);
-            var value = MD.GetBlobBytes(handle) ?? sys.empty<byte>();
-            var size = (uint)MD.GetHeapSize(HeapIndex.Blob);
-            var row = new CliBlob();
-            row.Sequence = seq;
-            row.HeapSize = (uint)MD.GetHeapSize(HeapIndex.Blob);
-            row.Offset = (Address32)MD.GetHeapOffset(handle);
-            row.Data = value;
-            row.DataSize = (uint)row.Data.Length;
-            return row;
-        }
-
         public ReadOnlySpan<CliBlob> ReadBlobDescriptions()
         {
             var size = (uint)MD.GetHeapSize(HeapIndex.Blob);

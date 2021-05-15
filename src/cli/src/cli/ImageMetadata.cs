@@ -11,8 +11,7 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     [ApiHost]
     public readonly partial struct ImageMetadata

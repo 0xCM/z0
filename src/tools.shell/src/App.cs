@@ -17,19 +17,6 @@ namespace Z0
 
     using static memory;
 
-    public static partial class XTend
-    {
-        public static ReadOnlySpan<CliRows.AssemblyRefInfo> Dependencies(this Assembly src)
-        {
-            var metadata = Clr.metadata(src);
-            var reader = Cli.reader(metadata);
-            var handles = reader.AssemblyRefHandles();
-            return reader.Describe(handles);
-        }
-
-    }
-
-
     sealed class ToolShell : AppService<ToolShell>
     {
         void EmitPartSymbols()

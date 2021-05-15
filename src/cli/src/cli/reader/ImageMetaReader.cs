@@ -13,8 +13,7 @@ namespace Z0
     using System.IO;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     public partial class ImageMetaReader : IDisposable
     {
@@ -98,15 +97,8 @@ namespace Z0
         public DirectoryEntry VtableFixupsDirectory
             => CorHeader.VtableFixupsDirectory;
 
-        [MethodImpl(Inline), Op]
-        public void ReadAttributes(Index<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
-            => src.Iter(handle => dst(MD.GetCustomAttribute(handle)));
-
         [MethodImpl(Inline)]
         public PEMemoryBlock ReadSectionData(DirectoryEntry src)
             => PeReader.GetSectionData(src.RelativeVirtualAddress);
-
-        internal static string format(FieldAttributes src)
-            => src.ToString();
     }
 }

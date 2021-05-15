@@ -9,15 +9,9 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static Part;
+    using static memory;
 
     partial class ImageMetaReader
     {
-        [MethodImpl(Inline), Op]
-        public void ReadTypeDefs(TypeDefinitionHandle src, Receiver<TypeDefinition> dst)
-            => dst(MD.GetTypeDefinition(src));
-
-        [MethodImpl(Inline), Op]
-        public void ReadTypeDefs(Index<TypeDefinitionHandle> src, Receiver<TypeDefinition> dst)
-            => src.Iter(handle => dst(MD.GetTypeDefinition(handle)));
     }
 }

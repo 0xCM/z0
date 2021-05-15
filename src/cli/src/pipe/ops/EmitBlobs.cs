@@ -8,9 +8,7 @@ namespace Z0
     using System.IO;
     using System.Reflection;
 
-    using static memory;
-    using static ImageRecords;
-    using static CliRows;
+    using static core;
 
     partial class ImageMetaPipe
     {
@@ -32,6 +30,7 @@ namespace Z0
         {
             var flow = Wf.EmittingTable<CliBlob>(dst);
             using var reader = ImageMetadata.reader(src);
+
             var rows = reader.ReadBlobDescriptions();
             var count = (uint)rows.Length;
             var formatter = Tables.formatter<CliBlob>(16);
