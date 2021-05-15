@@ -5,20 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Root;
-
+    /// <summary>
+    /// Defines a symbolized literal
+    /// </summary>
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct SymLiteral<E> : IComparableRecord<SymLiteral<E>>
+    public struct SymLiteral : IRecord<SymLiteral>
     {
-        public const string TableId = "symbolic.literals.typed";
+        public const string TableId = "symbolic.literals";
+
+        public const byte FieldCount = 10;
 
         /// <summary>
         /// The component that defines the literal
         /// </summary>
-        public ClrAssemblyName Component;
+        public Name Component;
 
         /// <summary>
         /// The literal's declaring type
@@ -48,7 +50,7 @@ namespace Z0
         /// <summary>
         /// The encoded literal, possibly an invariant address to a string resource
         /// </summary>
-        public ulong ScalarValue;
+        public Hex64 ScalarValue;
 
         /// <summary>
         /// The symbol, if so attributed, otherwise, the identifier
@@ -61,12 +63,11 @@ namespace Z0
         public TextBlock Description;
 
         /// <summary>
-        /// The typed value
+        /// Indicates whether the literal is occluded
         /// </summary>
-        public E DirectValue;
+        public bool Hidden;
 
-        [MethodImpl(Inline)]
-        public int CompareTo(SymLiteral<E> src)
-            => Identity.CompareTo(src.Identity);
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{14, 14, 10, 20, 80, 12, 12, 22, 48, 10};
     }
 }

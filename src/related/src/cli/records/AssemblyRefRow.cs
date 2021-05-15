@@ -25,5 +25,15 @@ namespace Z0
 
             public BlobIndex Hash;
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct AssemblyRefInfo
+        {
+            public CliToken Token;
+
+            public AssemblyRefRow Row;
+
+            public AssemblyName AssemblyName;
+        }
     }
 }

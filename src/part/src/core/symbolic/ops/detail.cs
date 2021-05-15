@@ -12,7 +12,7 @@ namespace Z0
     partial struct Symbols
     {
         [Op, Closures(Closure)]
-        public static ref SymbolDetial detail<T>(in Sym<T> src, ushort count, out SymbolDetial dst)
+        public static ref SymbolDetail detail<T>(in Sym<T> src, ushort count, out SymbolDetail dst)
             where T : unmanaged
         {
             dst.TypeName = src.Type.Name;
@@ -24,6 +24,7 @@ namespace Z0
             dst.NameSize = (ushort)dst.NameData.Count;
             dst.ExprData = text.utf16(src.Expr.Format()).ToArray();
             dst.ExprSize = (ushort)dst.ExprData.Count;
+            dst.Hidden = src.Hidden;
             return ref dst;
         }
     }

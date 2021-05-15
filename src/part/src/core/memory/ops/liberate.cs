@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using Windows;
+
     using static Windows.Kernel32;
     using static Root;
 
@@ -28,13 +28,6 @@ namespace Z0
             where T : unmanaged
         {
             liberate(src.BaseAddress.Pointer<T>(), (int)src.Length);
-            return ref src;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly BinaryCode liberate(in BinaryCode src)
-        {
-            liberate<byte>(src.Ref);
             return ref src;
         }
 

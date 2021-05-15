@@ -27,8 +27,10 @@ namespace Z0
 
         public TextBlock Description {get;}
 
-        [MethodImpl(Inline)]
-        public Sym(SymIdentity id, SymKey index, Identifier type, ulong kind, Identifier name, SymExpr symbol, TextBlock? description = null)
+        public bool Hidden {get;}
+
+       [MethodImpl(Inline)]
+        public Sym(SymIdentity id, SymKey index, Identifier type, ulong kind, Identifier name, SymExpr symbol, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
             Index = index;
@@ -37,6 +39,7 @@ namespace Z0
             Name = name;
             Expr = symbol;
             Description = description ?? TextBlock.Empty;
+            Hidden = hidden;
         }
 
         public ulong Value

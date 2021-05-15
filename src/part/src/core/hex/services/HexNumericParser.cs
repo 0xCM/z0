@@ -26,6 +26,7 @@ namespace Z0
                 return root.unparsed<ulong>(src);
         }
 
+
         public static Outcome parse64u(string src, out ulong dst)
         {
             var result = parse64u(src);
@@ -120,6 +121,34 @@ namespace Z0
                 return root.parsed(src,value);
             else
                 return root.unparsed<byte>(src);
+        }
+
+        public static Outcome parse(string src, out Hex8 dst)
+        {
+            var outcome = parse8u(src, out var x);
+            dst = x;
+            return outcome;
+        }
+
+        public static Outcome parse(string src, out Hex16 dst)
+        {
+            var outcome = parse16u(src, out var x);
+            dst = x;
+            return outcome;
+        }
+
+        public static Outcome parse(string src, out Hex32 dst)
+        {
+            var outcome = parse32u(src, out var x);
+            dst = x;
+            return outcome;
+        }
+
+        public static Outcome parse(string src, out Hex64 dst)
+        {
+            var outcome = parse64u(src, out var x);
+            dst = x;
+            return outcome;
         }
     }
 }

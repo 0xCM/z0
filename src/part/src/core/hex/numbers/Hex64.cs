@@ -52,7 +52,7 @@ namespace Z0
             => HexFormat.format(Value, W, true);
 
         public override string ToString()
-            => Format();
+            => HexFormat.format<ulong>(Value, false, true, false, false);
 
         public override int GetHashCode()
             => Value.GetHashCode();

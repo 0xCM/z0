@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Collects code derived from members declared by a specific operation host
     /// </summary>
-    public readonly struct ApiHostBlocks : IIndex<ApiCodeBlock>
+    public readonly struct ApiHostBlocks : ISortedIndex<ApiCodeBlock>
     {
         /// <summary>
         /// The defining host

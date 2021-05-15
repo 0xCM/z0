@@ -791,7 +791,7 @@ namespace Z0.Asm
 
         }
 
-        public Index<ApiCodeBlock> LoadApiBlocks()
+        public ApiCodeBlocks LoadApiBlocks()
         {
             return Wf.ApiHex().ReadBlocks();
         }
@@ -1439,9 +1439,6 @@ namespace Z0.Asm
         public void Run()
         {
 
-                //CaptureSelf();
-            //CheckMetadata2(PartId.Cpu);
-            CheckSolutionParser();
         }
 
 
@@ -1463,7 +1460,8 @@ namespace Z0.Asm
 
         void EmitPartSymbols()
         {
-
+            var svc = Wf.Symbolism();
+            svc.EmitLiterals<PartId>();
         }
 
         // void GetMethodInfo()

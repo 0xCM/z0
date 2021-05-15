@@ -17,7 +17,7 @@ namespace Z0
         {
             var dst = new SymLiteral();
             dst.Component = src.Component.SimpleName;
-            dst.Type = src.Name;
+            dst.Type = src.Type;
             dst.Position = src.Position;
             dst.Name = src.Name;
             dst.DataType = src.DataType;
@@ -25,6 +25,7 @@ namespace Z0
             dst.Symbol = src.Symbol;
             dst.Description = src.Description;
             dst.Identity = src.Identity;
+            dst.Hidden = src.Hidden;
             return dst;
         }
     }

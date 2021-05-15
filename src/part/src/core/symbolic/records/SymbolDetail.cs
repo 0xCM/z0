@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct SymbolDetial : IRecord<SymbolDetial>
+    public struct SymbolDetail : IRecord<SymbolDetail>
     {
-        public const string TableId = "symdata";
+        public const string TableId = "symbolic.details";
 
-        public const byte FieldCount = 9;
+        public const byte FieldCount = 10;
 
         public Identifier TypeName;
 
@@ -32,7 +32,9 @@ namespace Z0
 
         public BinaryCode ExprData;
 
+        public bool Hidden;
+
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{24,8,8,20,20,10,10,48,48};
+            => new byte[FieldCount]{24,8,8,20,20,10,10,48,48,5};
     }
 }

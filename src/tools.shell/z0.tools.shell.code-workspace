@@ -19,7 +19,16 @@
 			"path": "..\\part"
 		},
 		{
+			"path": "..\\cli"
+		},
+		{
 			"path": "..\\workflow"
+		},
+		{
+			"path": "..\\sfuncs"
+		},
+		{
+			"path": "..\\related"
 		},
 		{
 			"path": "..\\api"
@@ -28,8 +37,11 @@
 			"path": "..\\gmath"
 		},
 		{
-			"path": "..\\polyrand"
-		}
+			"path": "..\\polysource"
+		},
+		{
+			"path": "..\\core"
+		},
 	],
 	"settings": {}
 }

@@ -9,8 +9,8 @@ namespace alg
 
     using Z0;
 
-    using static Z0.Part;
-    using static Z0.memory;
+    using static Z0.Root;
+    using static Z0.core;
 
     [ApiHost("alg.range")]
     public readonly struct range

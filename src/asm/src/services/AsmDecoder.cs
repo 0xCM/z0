@@ -130,7 +130,7 @@ namespace Z0.Asm
                 ref readonly var captured = ref skip(src,i);
                 if(Decode(captured, out var routine))
                 {
-                    var asm = Formatter.Format(routine).Rendered;
+                    var asm = Formatter.Format(routine).Content;
                     seek(buffer,i) = new AsmRoutineCode(routine,captured, asm);
                     writer.Write(asm);
                 }
@@ -145,7 +145,7 @@ namespace Z0.Asm
             {
                 ref readonly var captured = ref skip(src,i);
                 if(Decode(captured, out var routine))
-                    seek(dst,i) = new AsmRoutineCode(routine, captured, Formatter.Format(routine).Rendered);
+                    seek(dst,i) = new AsmRoutineCode(routine, captured, Formatter.Format(routine).Content);
             }
         }
 

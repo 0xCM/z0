@@ -27,8 +27,10 @@ namespace Z0
 
         public TextBlock Description {get;}
 
+        public bool Hidden {get;}
+
         [MethodImpl(Inline)]
-        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier type, Identifier name, ushort kind, SymExpr expr, TextBlock? description = null)
+        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier type, Identifier name, ushort kind, SymExpr expr, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
             Index = index;
@@ -37,6 +39,7 @@ namespace Z0
             Kind = kind;
             Expr = expr;
             Description = description ?? TextBlock.Empty;
+            Hidden = hidden;
         }
 
         public ushort Value
@@ -53,66 +56,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<ushort>(Sym16 src)
-            => new Sym<ushort>(src.Index.Value, src.Name, src.Kind, src.Expr);
-    }
-
-    public readonly struct Sym16<T> : ISym<W16,T>
-        where T : unmanaged
-    {
-        public SymIdentity Identity {get;}
-
-        public SymKey<ushort> Index {get;}
-
-        public Identifier Type
-            => typeof(T).Name;
-        public Identifier Name {get;}
-
-        public T Kind {get;}
-
-        public SymExpr Expr {get;}
-
-        public TextBlock Description {get;}
-
-        [MethodImpl(Inline)]
-        public Sym16(SymKey<ushort> index, Identifier name, T kind, SymExpr expr, TextBlock? description = null)
-        {
-            Identity = default;
-            Index = index;
-            Name = name;
-            Kind = kind;
-            Expr = expr;
-            Description = description ?? TextBlock.Empty;
-        }
-
-        [MethodImpl(Inline)]
-        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier name, T kind, SymExpr expr, TextBlock? description = null)
-        {
-            Identity = id;
-            Index = index;
-            Name = name;
-            Kind = kind;
-            Expr = expr;
-            Description = description ?? TextBlock.Empty;
-        }
-
-        public ushort Value
-        {
-            [MethodImpl(Inline)]
-            get => memory.bw16(Kind);
-        }
-
-        public string Format()
-            => api.format(this);
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Sym16(Sym16<T> src)
-            => new Sym16(src.Identity, src.Index, src.Type, src.Name, memory.bw16(src.Kind), src.Expr);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Sym<T>(Sym16<T> src)
-            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expr);
+            => new Sym<ushort>(src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }

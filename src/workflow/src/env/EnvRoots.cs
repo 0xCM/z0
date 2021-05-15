@@ -8,6 +8,9 @@ namespace Z0
 
     public partial interface IEnvPaths
     {
+        FS.FolderPath ZDev()
+            => Env.ZDev;
+
         FS.FolderPath DataRoot()
             => Env.DataRoot;
 
@@ -43,6 +46,5 @@ namespace Z0
 
         FS.FileName HostFile(ApiHostUri host, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", host.Part.Format(), host.Name), ext);
-
     }
 }

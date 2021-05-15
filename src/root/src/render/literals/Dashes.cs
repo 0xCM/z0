@@ -64,12 +64,6 @@ namespace Z0
         public const string FieldSep = " | ";
 
         /// <summary>
-        /// Defines the literal '|'
-        /// </summary>
-        [RenderLiteral(Pipe, 1)]
-        public const string Pipe = "|";
-
-        /// <summary>
         /// Defines the literal '.'
         /// </summary>
         [RenderLiteral(Dot, 1)]

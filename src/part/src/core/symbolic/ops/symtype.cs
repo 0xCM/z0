@@ -22,5 +22,16 @@ namespace Z0
             dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
             return ref dst;
         }
+
+        [Op]
+        public static ref SymTypeInfo symtype(Type src, out SymTypeInfo dst)
+        {
+            dst.TypeName = src.Name;
+            dst.DataType = (PrimalCode)ClrEnums.ecode(src);
+            dst.SymCount = (ushort)src.GetFields().Length;
+            dst.TypeNameData = text.utf16(dst.TypeName).ToArray();
+            dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
+            return ref dst;
+        }
     }
 }

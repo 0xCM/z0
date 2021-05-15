@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Globalization;
 
-    using static Part;
     using static HexFormatSpecs;
     using static root;
-    using static memory;
+    using static core;
 
     [ApiHost]
     public readonly struct HexByteParser : IHexParser<byte>

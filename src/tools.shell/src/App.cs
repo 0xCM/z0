@@ -6,6 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Reflection;
+
 
     using static Part;
     using static CodeSolutions;
@@ -13,8 +17,28 @@ namespace Z0
 
     using static memory;
 
+    public static partial class XTend
+    {
+        public static ReadOnlySpan<CliRows.AssemblyRefInfo> Dependencies(this Assembly src)
+        {
+            var metadata = Clr.metadata(src);
+            var reader = Cli.reader(metadata);
+            var handles = reader.AssemblyRefHandles();
+            return reader.Describe(handles);
+        }
+
+    }
+
+
     sealed class ToolShell : AppService<ToolShell>
     {
+        void EmitPartSymbols()
+        {
+            var svc = Wf.Symbolism();
+            svc.EmitLiterals<PartId>();
+
+        }
+
         void CheckSolutionParser()
         {
             var src = FS.path(@"C:\Dev\z0\z0.machine.sln");
@@ -83,7 +107,7 @@ namespace Z0
                 => Symbols.View();
         }
 
-        public void Run()
+        void Symbolize()
         {
             var assemblies = Wf.ApiCatalog.Components;
             var flow = Wf.Running(string.Format("Collecting method symbols for {0} assemblies", assemblies.Length));
@@ -103,6 +127,54 @@ namespace Z0
                 writer.WriteLine(string.Format("{0}; {1}", method.Format(), doc != null ? "//" + doc.SummaryText : EmptyString));
             }
             Wf.EmittedFile(emitting, count);
+
+        }
+
+        void EmitDependencyGraph()
+        {
+            var svc = Wf.ImageMetaPipe();
+            var refs = svc.ReadAssemblyRefs();
+            var dst = Db.AppLog("dependencies", FS.Dot);
+            var flow = Wf.EmittingFile(dst);
+            var count = refs.Length;
+            var parts = Wf.ApiCatalog.ComponentNames.ToHashSet();
+            using var writer = dst.Writer();
+            writer.WriteLine("digraph dependencies{");
+            writer.WriteLine(string.Format("label={0}", text.enquote("Assembly Dependencies")));
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var x = ref skip(refs,i);
+                if(parts.Contains(x.Target.Name))
+                {
+                    var source = x.Source.Name.Replace(Chars.Dot, Chars.Underscore);
+                    var target = x.Target.Name.Replace(Chars.Dot, Chars.Underscore);
+                    var arrow = string.Format("{0}->{1}", source, target);
+                    writer.WriteLine(arrow);
+                }
+            }
+            writer.WriteLine("}");
+            Wf.EmittedFile(flow, count);
+
+        }
+
+
+        void GenSlnScript()
+        {
+            const string Pattern = "dotnet sln add {0}";
+            var src = FS.dir(@"C:\Dev\z0");
+            var dst = Db.AppLog("create-sln", FS.Cmd);
+            var projects = src.Files(FS.CsProj, true);
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            root.iter(projects,project => writer.WriteLine(string.Format(Pattern, project.Format(PathSeparator.BS))));
+            Wf.EmittedFile(flow,projects.Length);
+
+        }
+        public void Run()
+        {
+            var svc = Wf.ApiHex();
+            var hex = svc.ReadHostBlocks();
+
         }
     }
 

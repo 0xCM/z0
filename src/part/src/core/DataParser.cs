@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
     using static Rules;
 
     [ApiHost]
@@ -41,6 +40,22 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out ulong dst)
             => Numeric.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out Hex8 dst)
+            => HexNumericParser.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out Hex16 dst)
+            => HexNumericParser.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out Hex32 dst)
+            => HexNumericParser.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out Hex64 dst)
+            => HexNumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out bool dst)

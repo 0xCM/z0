@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
     using static HexFormatSpecs;
-    using static memory;
+    using static core;
 
     partial struct HexFormat
     {

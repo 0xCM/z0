@@ -44,6 +44,8 @@ namespace Z0
         /// </summary>
         Index<MethodInfo> _Operations;
 
+        Index<string> _ComponentNames;
+
         public ApiRuntimeCatalog(Index<IPart> parts, Index<Assembly> components, ApiPartCatalogs catalogs, Index<IApiHost> hosts, Index<PartId> partIds, Index<MethodInfo> ops)
         {
             _Parts = parts;
@@ -52,6 +54,7 @@ namespace Z0
             _ApiHosts = hosts;
             _PartIdentities = partIds;
             _Operations = ops;
+            _ComponentNames = components.Select(x => x.GetName().Name);
         }
 
         public Index<IApiHost> FindHosts(ReadOnlySpan<ApiHostUri> src)
@@ -83,6 +86,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => _Parts;
+        }
+
+        public ReadOnlySpan<string> ComponentNames
+        {
+            [MethodImpl(Inline)]
+            get => _ComponentNames;
         }
 
         public Index<Assembly> Components

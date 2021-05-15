@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
@@ -72,15 +72,6 @@ namespace Z0
             get => Data;
         }
 
-        /// <summary>
-        /// Returns a reference to the encoded data
-        /// </summary>
-        public SegRef Ref
-        {
-            [MethodImpl(Inline)]
-            get => memory.segref(in memory.first(Data), (uint)Length);
-        }
-
         public int Length
         {
             [MethodImpl(Inline)]
@@ -110,7 +101,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
-
 
         public uint Count
         {

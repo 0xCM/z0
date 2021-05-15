@@ -55,6 +55,9 @@ namespace Z0.Asm
             TermCode = term;
         }
 
+        public ApiCodeBlockHeader AsmHeader()
+            => new ApiCodeBlockHeader("; " + RP.PageBreak160, Code.OpUri, DisplaySig, Code, TermCode);
+
         /// <summary>
         /// The head of the address range
         /// </summary>

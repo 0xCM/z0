@@ -7,7 +7,7 @@ namespace Z0
     [LiteralProvider]
     public readonly struct FileKindNames
     {
-        const string dot = ".";
+        const string sep = ".";
 
         const string x = nameof(x);
 
@@ -131,12 +131,12 @@ namespace Z0
         /// <summary>
         /// Defines the 'x.csv' literal
         /// </summary>
-        public const string xcsv = x + dot + csv;
+        public const string xcsv = x + sep + csv;
 
         /// <summary>
         /// Defines the 'p.csv' literal
         /// </summary>
-        public const string pcsv = p + dot + csv;
+        public const string pcsv = p + sep + csv;
 
         /// <summary>
         /// Defines the 'idx' literal
@@ -181,12 +181,12 @@ namespace Z0
         /// <summary>
         /// Defines the 'deps.json' literal
         /// </summary>
-        public const string djson = deps + dot + json;
+        public const string djson = deps + sep + json;
 
         /// <summary>
         /// Defines the 'config.json' literal
         /// </summary>
-        public const string cjson = config + dot + json;
+        public const string cjson = config + sep + json;
 
         /// <summary>
         /// Defines the 'bat' literal
@@ -222,5 +222,10 @@ namespace Z0
         /// Defines the 'settings' literal
         /// </summary>
         public const string settings = nameof(settings);
+
+        /// <summary>
+        /// Defines the 'dot' literal
+        /// </summary>
+        public const string dot = nameof(dot);
     }
 }

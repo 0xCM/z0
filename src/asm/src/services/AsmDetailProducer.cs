@@ -98,7 +98,6 @@ namespace Z0.Asm
             {
                 Wf.Warn(UnrecognizedMnemonic.Format(name));
             }
-
         }
 
         void SpecifyOperands(in ApiCodeBlock block, in IceInstruction src, ref AsmInstructionDetail dst)

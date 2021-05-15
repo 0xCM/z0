@@ -31,7 +31,8 @@ namespace Z0
             dst.Name = src.Name;
             dst.Position = (ushort)src.Index.Value;
             dst.Symbol = src.Expr.Format();
-            dst.Type = src.Name;
+            dst.Type = src.Type;
+            dst.Hidden = src.Hidden;
             return ref dst;
         }
     }

@@ -11,6 +11,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+
     partial class ImageMetaPipe
     {
         public FS.FilePath AssemblyRefsPath()
@@ -76,6 +77,26 @@ namespace Z0
             return counter;
         }
 
+        public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs()
+        {
+            var components = Wf.ApiCatalog.Components.View;
+            var count = components.Length;
+            var dst = root.list<AssemblyRefInfo>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var component = ref skip(components,i);
+                var path = FS.path(component.Location);
+                if(ImageMetadata.valid(path))
+                {
+                    using var reader = ImageMetadata.reader(path);
+                    var refs = reader.ReadAssemblyRefs();
+                    root.iter(refs,r => dst.Add(r));
+                }
+            }
+            dst.Sort();
+            return dst.ViewDeposited();
+        }
+
         public void EmitAssemblyRefs()
         {
             var components = Wf.ApiCatalog.Components.View;
@@ -93,6 +114,5 @@ namespace Z0
 
             Wf.EmittedTable(flow, counter);
         }
-
     }
 }

@@ -134,7 +134,7 @@ namespace Z0
         {
             if(Numeric.parse<ulong>(src, out var x))
             {
-                dst = size<T>(memory.generic<T>(x));
+                dst = size<T>(core.generic<T>(x));
                 return true;
             }
             else

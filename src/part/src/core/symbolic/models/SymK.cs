@@ -26,6 +26,8 @@ namespace Z0
 
         public TextBlock Description {get;}
 
+        public bool Hidden {get;}
+
         [MethodImpl(Inline)]
         internal Sym(uint index, SymLiteral<K> src)
         {
@@ -35,10 +37,11 @@ namespace Z0
             Name = src.Name;
             Expr = src.Symbol;
             Description = src.Description;
+            Hidden = src.Hidden;
         }
 
         [MethodImpl(Inline)]
-        internal Sym(uint index, string name, K kind, SymExpr symbol, TextBlock? description = null)
+        internal Sym(uint index, string name, K kind, SymExpr symbol, TextBlock? description = null, bool hidden = false)
         {
             Index = index;
             Name = name;
@@ -46,10 +49,11 @@ namespace Z0
             Expr = symbol;
             Identity = default;
             Description = description ?? TextBlock.Empty;
+            Hidden = hidden;
         }
 
         [MethodImpl(Inline)]
-        internal Sym(SymIdentity id, SymKey index, Identifier name, K kind, SymExpr symbol, TextBlock? description = null)
+        internal Sym(SymIdentity id, SymKey index, Identifier name, K kind, SymExpr symbol, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
             Index = index;
@@ -57,11 +61,13 @@ namespace Z0
             Kind = kind;
             Expr = symbol;
             Description = description ?? TextBlock.Empty;
+            Hidden = hidden;
         }
+
         public ulong Value
         {
             [MethodImpl(Inline)]
-            get => memory.bw64(Kind);
+            get => core.bw64(Kind);
         }
 
         public Identifier Type
@@ -76,7 +82,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym(Sym<K> src)
-            => new Sym(src.Identity, src.Index, src.Type, memory.bw64(src.Kind), src.Name, src.Expr);
+            => new Sym(src.Identity, src.Index, src.Type, core.bw64(src.Kind), src.Name, src.Expr, src.Description, src.Hidden);
 
 
         [MethodImpl(Inline)]

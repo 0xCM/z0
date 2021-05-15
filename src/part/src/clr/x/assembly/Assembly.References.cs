@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
 
@@ -23,5 +25,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AssemblyName[] PartReferenceNames(this Assembly src)
             => src.ReferenceNames().Where(n => n.IsPart());
+
+
+
     }
 }

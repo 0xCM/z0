@@ -28,7 +28,7 @@ namespace Z0
         /// Discovers the symbolic literals for parametrically-identified symbol type
         /// </summary>
         /// <typeparam name="E">The defining type</typeparam>
-        public Index<SymLiteral> DiscoverLiterals<E>()
+        public ReadOnlySpan<SymLiteral> DiscoverLiterals<E>()
             where E : unmanaged, Enum
                 => Symbols.records<E>();
 
@@ -36,20 +36,18 @@ namespace Z0
         /// Emits the symbolic literals for parametrically-identified symbol type
         /// </summary>
         /// <typeparam name="E">The defining type</typeparam>
-        public Index<SymLiteral> EmitLiterals<E>()
+        public ReadOnlySpan<SymLiteral> EmitLiterals<E>()
             where E : unmanaged, Enum
         {
             var dst = Db.Table<SymLiteral>(typeof(E).FullName);
             var flow = Wf.EmittingTable<SymLiteral>(dst);
             var rows = Symbols.records<E>();
-            var count = rows.Count;
-            ref var src = ref rows.First;
-
-            var formatter = Tables.formatter<SymLiteral>(24);
+            var count = rows.Length;
+            var formatter = Tables.formatter<SymLiteral>(SymLiteral.RenderWidths);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(src,i)));
+                writer.WriteLine(formatter.Format(skip(rows,i)));
             Wf.EmittedTable<SymLiteral>(flow, count);
             return rows;
         }
@@ -60,7 +58,7 @@ namespace Z0
             var rows = Symbols.literals(src);
             var view = rows.View;
             var count = rows.Length;
-            var formatter = Tables.formatter<SymLiteral>(24);
+            var formatter = Tables.formatter<SymLiteral>(SymLiteral.RenderWidths);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
@@ -122,6 +120,7 @@ namespace Z0
             outcome += DataParser.parse(skip(cells,j), out dst.ScalarValue);
             outcome += DataParser.parse(skip(cells,j), out dst.Symbol);
             outcome += DataParser.parse(skip(cells,j), out dst.Description);
+            outcome += DataParser.parse(skip(cells,j), out dst.Hidden);
             return outcome;
         }
 

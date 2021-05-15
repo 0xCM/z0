@@ -12,7 +12,7 @@ namespace alg
 
     using Z0;
 
-    using static Z0.Part;
+    using static Z0.Root;
 
     partial struct hash
     {

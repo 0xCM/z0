@@ -1,0 +1,16 @@
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    public interface ISortedIndex<T> : IIndex<T>
+    {
+
+    }
+
+    public interface ISortedIndex<I,T> : IIndex<I,T>
+        where I : unmanaged
+    {
+
+    }
+}

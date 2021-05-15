@@ -17,7 +17,7 @@ namespace Z0
 
         void Run()
         {
-            using var context = new PartContext(PartId.Universe);
+            using var context = new PartContext(PartId.Machine);
 
             root.iteri(context.Assemblies,
                 (i,a) => term.inform(string.Format("{0:D3}: Context Assembly {1} loaded from {2}", i, a.GetSimpleName(), FS.path(a.Location).ToUri())));

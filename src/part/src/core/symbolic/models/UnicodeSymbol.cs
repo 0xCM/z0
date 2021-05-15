@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct UnicodeSymbol: IBytes<UnicodeSymbol,N2>
     {
@@ -22,7 +23,7 @@ namespace Z0
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline), Op]
-            get => memory.bytes(this);
+            get => bytes(this);
         }
 
         public char Decoded

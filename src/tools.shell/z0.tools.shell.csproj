@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Symbolic)" />
+
   </ItemGroup>
 
 </Project>

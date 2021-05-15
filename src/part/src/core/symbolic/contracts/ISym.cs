@@ -13,6 +13,9 @@ namespace Z0
         SymExpr Expr {get;}
 
         ulong Kind {get;}
+
+        TextBlock Description {get;}
+        bool Hidden {get;}
     }
 
     public interface ISym<T> : ISym

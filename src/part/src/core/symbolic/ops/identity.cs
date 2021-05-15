@@ -10,7 +10,14 @@ namespace Z0
     partial struct Symbols
     {
         [Op]
-        public static SymIdentity identity(FieldInfo field, ushort index)
-            => text.format(RP.SlotDot4, field.DeclaringType.Assembly.GetSimpleName(), field.DeclaringType.Name, index, field.Name);
+        public static SymIdentity identity(FieldInfo field, ushort index, SymExpr expr)
+            => string.Format("{0:D3}:{1}:{2}::{3}.{4}({5})",
+                index,
+                text.bracket((CliToken)field),
+                field.DeclaringType.Assembly.GetSimpleName(),
+                field.DeclaringType.FullName,
+                field.Name,
+                expr
+                );
     }
 }

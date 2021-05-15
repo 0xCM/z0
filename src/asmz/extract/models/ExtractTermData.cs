@@ -5,14 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
 
     readonly struct ExtractTermData
     {
-
         const byte SBB = 0x19;
 
         const byte RET = 0xc3;

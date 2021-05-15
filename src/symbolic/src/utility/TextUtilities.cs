@@ -112,7 +112,7 @@ namespace Z0
             return result;
         }
 
-        public static string WithThousandSeparators(this object i)
+        internal static string WithThousandSeparators(this object i)
         {
             return string.Format("{0:#,0}", i);
         }

@@ -74,6 +74,7 @@ namespace Z0
                 row.ScalarValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
                 row.Symbol = tag.MapValueOrDefault(a => a.Symbol, f.Name);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
+                row.Hidden = f.Ignored();
             }
         }
     }

@@ -19,7 +19,7 @@ namespace Z0
             var decoder = Wf.AsmDecoder();
             try
             {
-                var blocks = hex.ReadBlocks().Storage.Sort();
+                var blocks = hex.ReadBlocks().Storage;
                 var partitioned = blocks.ToHostBlocks();
 
                 if(options.EmitHexIndex)

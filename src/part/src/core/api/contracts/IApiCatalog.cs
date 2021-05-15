@@ -24,6 +24,8 @@ namespace Z0
 
         Index<Assembly> Components {get;}
 
+        ReadOnlySpan<string> ComponentNames {get;}
+
         ApiPartCatalogs Catalogs {get;}
 
         IApiHost[] ApiHosts {get;}

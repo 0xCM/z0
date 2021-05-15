@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public class AsmRoutineFormatter : IAsmRoutineFormatter
     {
         public AsmFormatConfig Config {get;}

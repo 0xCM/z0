@@ -27,8 +27,10 @@ namespace Z0
 
         public TextBlock Description {get;}
 
+        public bool Hidden {get;}
+
         [MethodImpl(Inline)]
-        public Sym8(SymIdentity id, SymKey<byte> key, Identifier kind, Identifier name, byte value, SymExpr expr, TextBlock? description = null)
+        public Sym8(SymIdentity id, SymKey<byte> key, Identifier kind, Identifier name, byte value, SymExpr expr, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
             Index = key;
@@ -37,6 +39,7 @@ namespace Z0
             Kind = value;
             Expr = expr;
             Description = description ?? TextBlock.Empty;
+            Hidden = hidden;
         }
 
         public byte Value
@@ -53,55 +56,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<byte>(Sym8 src)
-            => new Sym<byte>(src.Index.Value, src.Name, src.Kind, src.Expr);
-    }
-
-    public readonly struct Sym8<T> : ISym<W8,T>
-        where T : unmanaged
-    {
-        public SymIdentity Identity {get;}
-
-        public SymKey<byte> Index {get;}
-
-        public Identifier Name {get;}
-
-        public T Kind {get;}
-
-        public SymExpr Expr {get;}
-
-        public TextBlock Description {get;}
-
-        public Identifier Type
-            => typeof(T).Name;
-
-        [MethodImpl(Inline)]
-        public Sym8(SymIdentity id, SymKey<byte> key, Identifier name, T value, SymExpr expr, TextBlock? description = null)
-        {
-            Identity = id;
-            Index = key;
-            Name = name;
-            Kind = value;
-            Expr = expr;
-            Description = description ?? TextBlock.Empty;
-        }
-
-        public byte Value
-        {
-            [MethodImpl(Inline)]
-            get => memory.bw8(Kind);
-        }
-        public string Format()
-            => api.format(this);
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Sym8(Sym8<T> src)
-            => new Sym8(src.Identity, src.Index, src.Type, src.Name, memory.bw8(src.Kind), src.Expr);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Sym<T>(Sym8<T> src)
-            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expr);
+            => new Sym<byte>(src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }

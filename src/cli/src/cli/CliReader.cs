@@ -159,6 +159,18 @@ namespace Z0
             => MD.GetAssemblyReference(src);
 
         [MethodImpl(Inline), Op]
+        public ReadOnlySpan<CliRows.AssemblyRefInfo> Describe(ReadOnlySpan<AssemblyReferenceHandle> src)
+        {
+            var count = src.Length;
+            var dst = alloc<CliRows.AssemblyRefInfo>(count);
+            for(var i=0; i<count; i++)
+            {
+                seek(dst,i) = Describe(skip(src,i));
+            }
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
         public CustomAttribute Read(CustomAttributeHandle src)
             => MD.GetCustomAttribute(src);
 

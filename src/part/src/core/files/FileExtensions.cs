@@ -197,5 +197,10 @@ namespace Z0
         /// Defines the <see cref='cfg'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Cfg => ext(cfg);
+
+        /// <summary>
+        /// Defines the <see cref='dot'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Dot => ext(dot);
     }
 }

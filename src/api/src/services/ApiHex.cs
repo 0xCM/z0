@@ -27,10 +27,10 @@ namespace Z0
             => new ApiCodeBlock(src.Address, src.Uri, src.Data);
 
         [Op]
-        public Index<ApiCodeBlock> ReadBlocks()
+        public ApiCodeBlocks ReadBlocks()
             => ReadBlocks(Db.ParsedExtractPaths());
 
-        public Index<ApiHostBlocks> ReadBlocks(ReadOnlySpan<ApiHostUri> src)
+        public Index<ApiHostBlocks> ReadHostBlocks(ReadOnlySpan<ApiHostUri> src)
         {
             var count = src.Length;
             var dst = root.list<ApiHostBlocks>();
@@ -40,6 +40,48 @@ namespace Z0
                 dst.Add(ReadBlocks(host));
             }
             return dst.ToArray();
+        }
+
+        static Outcome InferHost(FS.FileName src, out ApiHostUri host)
+        {
+            var components = @readonly(src.Name.Text.Remove(".p.csv").SplitClean(Chars.Dot));
+            var count = components.Length;
+            if(count >= 2)
+            {
+                if(ApiPartIdParser.parse(first(components), out var part))
+                {
+                    host =  new ApiHostUri(part, slice(components,1).Join(Chars.Dot));
+                    return true;
+                }
+            }
+            host = ApiHostUri.Empty;
+            return false;
+        }
+
+        public ReadOnlySpan<ApiHostBlocks> ReadHostBlocks()
+        {
+            var flow = Wf.Running("Loading collected host blocks");
+            var files = Files().View;
+            var count = files.Length;
+            var dst = root.list<ApiHostBlocks>();
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var file = ref skip(files,i);
+                if(InferHost(file.FileName, out var host))
+                {
+                    var blocks = ReadBlocks(host);
+                    dst.Add(blocks);
+                    counter += blocks.Count;
+                }
+                else
+                    Wf.Warn(string.Format("Unable to infer host for {0}", file.ToUri()));
+            }
+
+            var deposited = dst.ViewDeposited();
+            Wf.Ran(flow,string.Format("Loaded {0} blocks from {1} hosts", counter, deposited.Length));
+
+            return deposited;
         }
 
         [Op]
@@ -74,11 +116,11 @@ namespace Z0
         }
 
         [Op]
-        public Index<ApiCodeBlock> ReadBlocks(FS.Files src)
+        public ApiCodeBlocks ReadBlocks(FS.Files src)
         {
             var count = src.Length;
             if(count == 0)
-                return Index<ApiCodeBlock>.Empty;
+                return ApiCodeBlocks.Empty;
 
             var flow = Wf.Running(Msg.LoadingHexFileBlocks.Format(count));
             var view = src.View;
@@ -101,7 +143,7 @@ namespace Z0
 
             Wf.Ran(flow, Msg.LoadedHexBlocks.Format(counter));
 
-            return blocks.ToArray();
+            return new ApiCodeBlocks(blocks.ToArray());
         }
 
         [Op]
@@ -150,7 +192,7 @@ namespace Z0
                 if(ParseRow(input, out var dst))
                     buffer.Add(dst);
                 else
-                    Wf.Error(string.Format("Parse failure for source text {0}", input));
+                    Wf.Error(string.Format("Unable to parse {0}", input));
             }
             return buffer.ToArray();
         }

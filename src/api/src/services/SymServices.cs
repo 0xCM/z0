@@ -14,43 +14,16 @@ namespace Z0
 
     public class SymServices : AppService<SymServices>
     {
-        // public static ref SymbolDetial detail<T>(Sym<T> src, ushort count, out SymbolDetial dst)
-        //     where T : unmanaged
-        // {
-        //     dst.TypeName = src.Type.Name;
-        //     dst.SymCount = count;
-        //     dst.Index = src.Index;
-        //     dst.Name = src.Name;
-        //     dst.Expr = src.Expr;
-        //     dst.NameData = text.utf16(src.Name).ToArray();
-        //     dst.NameSize = (ushort)dst.NameData.Count;
-        //     dst.ExprData = text.utf16(src.Expr.Format()).ToArray();
-        //     dst.ExprSize = (ushort)dst.ExprData.Count;
-        //     return ref dst;
-        // }
-
-        // public static ref SymTypeInfo symtype<T>(out SymTypeInfo dst)
-        //     where T : unmanaged, Enum
-        // {
-        //     var t = typeof(T);
-        //     dst.TypeName = t.Name;
-        //     dst.DataType = (PrimalCode)ClrEnums.ecode(t);
-        //     dst.SymCount = (ushort)t.GetFields().Length;
-        //     dst.TypeNameData = text.utf16(dst.TypeName).ToArray();
-        //     dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
-        //     return ref dst;
-        // }
-
-        public Index<SymbolDetial> EmitSymDetails<E>()
+        public Index<SymbolDetail> EmitSymDetails<E>()
             where E : unmanaged, Enum
         {
-            var dst = Db.Table<SymbolDetial>(typeof(E).Name);
-            var flow = Wf.EmittingTable<SymbolDetial>(dst);
+            var dst = Db.Table<SymbolDetail>(typeof(E).Name);
+            var flow = Wf.EmittingTable<SymbolDetail>(dst);
             var symbols  = SymCache<E>.get().View;
             var count = symbols.Length;
-            var buffer = alloc<SymbolDetial>(count);
+            var buffer = alloc<SymbolDetail>(count);
             ref var target = ref first(buffer);
-            var formatter = Tables.formatter<SymbolDetial>(SymbolDetial.RenderWidths);
+            var formatter = Tables.formatter<SymbolDetail>(SymbolDetail.RenderWidths);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
@@ -102,14 +75,6 @@ namespace Z0
         public Symbols<K> Symbols<K>()
             where K : unmanaged, Enum
                 => SymCache<K>.get().Index;
-
-        // [MethodImpl(Inline), Closures(UnsignedInts)]
-        // public static BinaryCode EncodeText(string src)
-        //     => bytes(span(src)).ToArray();
-
-        // [MethodImpl(Inline), Op]
-        // public static ReadOnlySpan<char> DecodText(ReadOnlySpan<byte> src)
-        //     => recover<char>(src);
 
         public Index<ByteSpanSpec> NameProps<K>(Symbols<K> src)
             where K : unmanaged

@@ -12,6 +12,9 @@ namespace Z0
         public static Index<ApiHostBlocks> ToHostBlocks(this ApiCodeBlock[] src)
             => CodeBlocks.hosted(src);
 
+        public static Index<ApiHostBlocks> ToHostBlocks(this ApiCodeBlocks src)
+            => CodeBlocks.hosted(src.Storage);
+
         public static Index<ApiPartBlocks> ToPartBlocks(this Index<ApiHostBlocks> src)
             => CodeBlocks.parts(src);
     }

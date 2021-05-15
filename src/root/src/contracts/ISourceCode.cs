@@ -24,7 +24,6 @@ namespace Z0
 
         uint ISourceCode.LineCount
             => (uint)View.Length;
-
     }
 
     public interface ISourceCode<T,C> : ISourceCode<C>

@@ -52,7 +52,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool parse(string src, out PartId dst)
+        public static Outcome parse(string src, out PartId dst)
             => ClrEnums.parse(text.remove(src, Chars.Dot), out dst);
     }
 }

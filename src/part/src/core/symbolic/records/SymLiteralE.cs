@@ -4,22 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    /// <summary>
-    /// Defines a symbolized literal
-    /// </summary>
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct SymLiteral : IRecord<SymLiteral>
-    {
-        public const string TableId = "symbolic.literals";
+    using static Root;
 
-        public const byte FieldCount = 9;
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct SymLiteral<E> : IComparableRecord<SymLiteral<E>>
+    {
+        public const string TableId = "symbolic.literals.typed";
 
         /// <summary>
         /// The component that defines the literal
         /// </summary>
-        public Name Component;
+        public ClrAssemblyName Component;
 
         /// <summary>
         /// The literal's declaring type
@@ -49,7 +48,7 @@ namespace Z0
         /// <summary>
         /// The encoded literal, possibly an invariant address to a string resource
         /// </summary>
-        public ulong ScalarValue;
+        public Hex64 ScalarValue;
 
         /// <summary>
         /// The symbol, if so attributed, otherwise, the identifier
@@ -60,5 +59,19 @@ namespace Z0
         /// The meaning of the literal, if available; otherwise empty
         /// </summary>
         public TextBlock Description;
+
+        /// <summary>
+        /// The typed value
+        /// </summary>
+        public E DirectValue;
+
+        /// <summary>
+        /// Indicates whether the literal is occluded
+        /// </summary>
+        public bool Hidden;
+
+        [MethodImpl(Inline)]
+        public int CompareTo(SymLiteral<E> src)
+            => Identity.CompareTo(src.Identity);
     }
 }

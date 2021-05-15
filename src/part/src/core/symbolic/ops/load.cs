@@ -19,16 +19,15 @@ namespace Z0
             where E : unmanaged, Enum
         {
             var src = discover<E>();
-            var view = src.View;
-            var count = view.Length;
+            var count = src.Length;
             var buffer = alloc<Sym<E>>(count);
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = new Sym<E>(i, skip(view,i));
+                seek(dst,i) = new Sym<E>(i, skip(src,i));
             return buffer;
         }
 
-        static Index<SymLiteral<E>> discover<E>()
+        static Span<SymLiteral<E>> discover<E>()
             where E : unmanaged, Enum
         {
             var src = typeof(E);
@@ -36,30 +35,29 @@ namespace Z0
             var fields = @readonly(src.LiteralFields());
             var count = fields.Length;
 
-            var buffer = alloc<SymLiteral<E>>(fields.Length);
-            var dst = span(buffer);
+            var dst = span<SymLiteral<E>>(count);
             var kind = ClrPrimitives.kind(src);
-            for(var i=0u; i<count; i++)
+            var counter = 0u;
+            for(var i=z16; i<count; i++)
             {
                 ref readonly var f = ref skip(fields,i);
+                var tag = f.Tag<SymbolAttribute>();
                 ref var row = ref seek(dst,i);
+                var expr = tag ? tag.Value.Symbol : f.Name;
                 row.Component = component;
                 row.Type = src.Name;
                 row.DataType = kind;
-                row.Position = (ushort)i;
+                row.Position = i;
                 row.Name = f.Name;
-                var tag = f.Tag<SymbolAttribute>();
-                if(tag)
-                    row.Symbol = tag.Value.Symbol;
-                else
-                    row.Symbol = f.Name;
+                row.Symbol = expr;
                 row.DirectValue = (E)f.GetRawConstantValue();
-                row.Identity = identity(f, row.Position);
                 row.ScalarValue = ClrEnums.@ulong(kind, row.DirectValue);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
+                row.Identity = identity(f, i, expr);
+                row.Hidden = f.Ignored();
             }
 
-            return buffer;
+            return dst;
         }
     }
 }

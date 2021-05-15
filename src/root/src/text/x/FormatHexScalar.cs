@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static HexFormatSpecs;
 
-    partial class XHex
+    [ApiHost]
+    public static class XHex
     {
         /// <summary>
         /// Renders a number as a hexadecimal string

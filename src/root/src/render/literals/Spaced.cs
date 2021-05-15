@@ -7,18 +7,6 @@ namespace Z0
     partial struct RP
     {
         /// <summary>
-        /// The " | " character sequence
-        /// </summary>
-        [RenderLiteral(" | ", 3)]
-        public const string SpacedPipe = " | ";
-
-        /// <summary>
-        /// Defines the literal " |"
-        /// </summary>
-        [RenderLiteral(" |")]
-        public const string SpacePipe = Space + Pipe;
-
-        /// <summary>
         /// Defines a string consisting of 2 spaces
         /// </summary>
         [RenderLiteral(Spaced2, 2)]

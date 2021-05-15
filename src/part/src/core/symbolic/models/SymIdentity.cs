@@ -11,9 +11,6 @@ namespace Z0
 
     public readonly struct SymIdentity : IDataTypeComparable<SymIdentity>
     {
-        /// <summary>
-        /// {AssemblyName}.{TypeName}.{FieldIndex}.{FieldName}
-        /// </summary>
         readonly string Data;
 
         [MethodImpl(Inline)]

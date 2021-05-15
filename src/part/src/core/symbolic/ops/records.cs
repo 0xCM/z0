@@ -12,13 +12,12 @@ namespace Z0
 
     partial struct Symbols
     {
-        public static Index<SymLiteral> records<E>()
+        public static ReadOnlySpan<SymLiteral> records<E>()
             where E : unmanaged, Enum
         {
             var symbols = SymCache<E>.get().View;
-            var count = symbols.Length;
-            var dst = alloc<SymLiteral>(count);
-            records<E>(symbols,dst);
+            var dst = alloc<SymLiteral>(symbols.Length);
+            records<E>(symbols, dst);
             return dst;
         }
 
@@ -28,7 +27,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                seek(dst,i) = literal(skip(src,i), out _).Untyped();
+                seek(dst, i) = literal(skip(src,i), out _).Untyped();
         }
     }
 }

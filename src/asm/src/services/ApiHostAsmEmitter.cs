@@ -46,7 +46,7 @@ namespace Z0.Asm
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var item = ref skip(src,i);
-                    AsmFormatter.format(item.Routine, AsmFormatConfig.DefaultStreamFormat, buffer);
+                    AsmFormatter.render(item.Routine, AsmFormatConfig.DefaultStreamFormat, buffer);
                     writer.Write(buffer.Emit());
                 }
             }

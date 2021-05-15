@@ -11,26 +11,23 @@ namespace Z0.Asm
 
     public class AsmRoutineFormat : ITextual
     {
-        public AsmRoutine Routine {get;}
-
-        public string Rendered {get;}
+        public string Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmRoutineFormat(AsmRoutine src, string format)
+        public AsmRoutineFormat(string format)
         {
-            Routine = src;
-            Rendered =  format;
+            Content =  format;
         }
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Rendered;
-
-        public override string ToString()
-            => Rendered;
+        public ReadOnlySpan<byte> Serialize()
+            => text.utf16(Content);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmRoutineFormat((AsmRoutine routine, string format) src)
-            => new AsmRoutineFormat(src.routine, src.format);
+        public string Format()
+            => Content;
+
+        public override string ToString()
+            => Content;
     }
 }
