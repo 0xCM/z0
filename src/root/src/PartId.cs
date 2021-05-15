@@ -2,6 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+
+
 /// <summary>
 /// Defines identifiers for assemblies that comprise this ... monstrosity?
 /// </summary>
@@ -15,9 +17,14 @@ public enum PartId : ulong
 
     Part = 3,
 
+    PartTest = Part | Test,
+
     Math = 4,
 
     Core = 5,
+
+    [Symbol("core.test")]
+    CoreTest = Core | Test,
 
     Api = 9,
 
@@ -49,12 +56,14 @@ public enum PartId : ulong
 
     Sources = 38,
 
+    [Symbol("calc.shell")]
     CalcShell = Calc | Shell,
 
     Events = 40,
 
     Tools = 41,
 
+    [Symbol("tools.shell")]
     ToolShell = Tools | Shell,
 
     Tooling = 42,
@@ -67,6 +76,7 @@ public enum PartId : ulong
 
     Cpu = 46,
 
+    [Symbol("cpu.shell")]
     CpuShell = Cpu | Shell,
 
     Gen = 48,
@@ -111,6 +121,7 @@ public enum PartId : ulong
 
     BitFields = 107,
 
+    [Symbol("bitfields.shell")]
     BitFieldsShell = BitFields | Shell,
 
     BitSuite = 108,
@@ -135,22 +146,28 @@ public enum PartId : ulong
 
     Dynamic = 122,
 
+    [Symbol("dynamic.shell")]
     DynamicShell = Dynamic | Shell,
 
     Asm = 123,
 
+    [Symbol("asm.g")]
     AsmLang = 124,
 
+    [Symbol("asm.lang.g")]
     AsmLangG = 125,
 
+    [Symbol("asm.core")]
     AsmCore = 126,
 
+    [Symbol("asm.cases")]
     AsmCases = 127,
 
     AsmRun = 128,
 
     Capture = 131,
 
+    [Symbol("capture.checks")]
     CaptureChecks = Capture | Checkers,
 
     Evaluate = 132,
@@ -159,6 +176,7 @@ public enum PartId : ulong
 
     BitNumbers = 135,
 
+    [Symbol("bitnumbers.shell")]
     BitNumbersShell = BitNumbers | Shell,
 
     GVec = 140,
@@ -173,8 +191,10 @@ public enum PartId : ulong
 
     Xed = 160,
 
+    [Symbol("cpu.dsl")]
     CpuDsl = 161,
 
+    [Symbol("asm.catalogs")]
     AsmCatalogs = 162,
 
     Services = 199,
@@ -192,29 +212,34 @@ public enum PartId : ulong
 
     AsmZ = 204,
 
-    Universe = 255,
-
     // ~ Test
     // ~ -------------------------------------------------------------------------------
 
+    [Symbol("polyrand.test")]
     PolyrandTest = Polyrand | Test,
 
+    [Symbol("logix.test")]
     LogixTest = Logix | Test,
 
     LibMTest = LibM | Test,
 
+    [Symbol("machines.test")]
     MachinesTest = Machines | Test,
 
+    [Symbol("math.test")]
     MathTest = Math | Test,
 
+    [Symbol("bits.test")]
     BitsTest = BitSuite | Test,
 
     MklApiTest = Mkl | Test,
 
+    [Symbol("asm.test")]
     AsmTest = Asm | Test,
 
     UnsignedTest = Unsigned | Test,
 
+    [Symbol("gvec.test")]
     GVecTest = GVec | Test,
 
 

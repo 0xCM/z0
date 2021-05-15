@@ -82,7 +82,7 @@ namespace Z0
                 var width = (ushort)symsrc.Length;
 
                 seek(widths, i) = width;
-                seek(values, i) = (ushort)literal.EncodedValue;
+                seek(values, i) = (ushort)literal.ScalarValue;
                 seek(id, i) = literal.Name;
                 seek(offsets,i) = offset;
                 symsrc.CopyTo(cover(seek(symdst, offset), width));

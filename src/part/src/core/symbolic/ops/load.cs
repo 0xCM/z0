@@ -11,10 +11,14 @@ namespace Z0
 
     partial struct Symbols
     {
+        /// <summary>
+        /// Symbol cache loader
+        /// </summary>
+        /// <typeparam name="E"></typeparam>
         internal static Symbols<E> load<E>()
             where E : unmanaged, Enum
         {
-            var src = literals<E>();
+            var src = discover<E>();
             var view = src.View;
             var count = view.Length;
             var buffer = alloc<Sym<E>>(count);
@@ -24,7 +28,7 @@ namespace Z0
             return buffer;
         }
 
-        internal static Index<SymLiteral<E>> literals<E>()
+        static Index<SymLiteral<E>> discover<E>()
             where E : unmanaged, Enum
         {
             var src = typeof(E);
@@ -51,7 +55,7 @@ namespace Z0
                     row.Symbol = f.Name;
                 row.DirectValue = (E)f.GetRawConstantValue();
                 row.Identity = identity(f, row.Position);
-                row.EncodedValue = ClrEnums.@ulong(kind, row.DirectValue);
+                row.ScalarValue = ClrEnums.@ulong(kind, row.DirectValue);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
             }
 

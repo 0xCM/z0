@@ -2,9 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [Record(TableId)]
+    using System;
+    using System.Runtime.InteropServices;
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct SymTypeInfo : IRecord<SymTypeInfo>
     {
         public const string TableId = "symtype";

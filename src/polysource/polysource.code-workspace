@@ -3,6 +3,19 @@
 		{
 			"path": "."
 		},
+		{
+			"path": "..\\cpu"
+		},
+		{
+			"path": "..\\gmath"
+		},
+		{
+			"path": "..\\sfuncs"
+		},
+		{
+			"path": "..\\part"
+		},
+
 	],
 	"settings": {}
 }

@@ -6,12 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+    using System.Linq;
 
-    partial class XSource
+    using static Root;
+    using static core;
+
+    partial struct Index
     {
-        public static IEnumerable<Triple<T>> TripleStream<T>(this ISource src)
-            where T : struct
-                => Sources.triplestream<T>(src);
+        [Op, Closures(Closure)]
+        public static PinnedIndex<T> pin<T>(T[] src)
+            where T : unmanaged
+                => new PinnedIndex<T>(src);
     }
+
 }

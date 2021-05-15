@@ -5,8 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.InteropServices;
 
-    [Record(TableId)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct SymbolDetial : IRecord<SymbolDetial>
     {
         public const string TableId = "symdata";

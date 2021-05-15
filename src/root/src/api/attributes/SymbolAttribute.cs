@@ -2,26 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+using System;
+
+public class SymbolAttribute : Attribute
 {
-    using System;
+    public string Symbol {get;}
 
-    public class SymbolAttribute : Attribute
+    public string Description {get;}
+
+    public SymbolAttribute(string symbol)
     {
-        public string Symbol {get;}
+        Symbol = symbol;
+        Description = string.Empty;
+    }
 
-        public string Description {get;}
-
-        public SymbolAttribute(string symbol)
-        {
-            Symbol = symbol;
-            Description = string.Empty;
-        }
-
-        public SymbolAttribute(string symbol, string description)
-        {
-            Symbol = symbol;
-            Description = description;
-        }
+    public SymbolAttribute(string symbol, string description)
+    {
+        Symbol = symbol;
+        Description = description;
     }
 }

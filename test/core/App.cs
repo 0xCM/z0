@@ -4,10 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class XSource
+    public class CoreTestApp : TestApp<CoreTestApp>
     {
-        public static Deferred<Pair<T>> PairStream<T>(this ISource src)
-            where T : struct
-                => Seq.defer(Sources.pairstream<T>(src));
+        static PartId[] Parts => root.array(PartId.Core);
+
+        static void Main(params string[] args)
+            => Run(Parts, args);
     }
 }

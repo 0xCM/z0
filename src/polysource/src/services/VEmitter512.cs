@@ -10,6 +10,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
+
     public readonly struct VEmitter512<T> : IEmitter512<T>
         where T : unmanaged
     {

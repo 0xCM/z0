@@ -1266,6 +1266,7 @@ namespace Z0.Asm
             // extractor.Run(receivers);
         }
 
+
         ResolvedMethods ResolveParts(params PartId[] src)
         {
             var resolver = Wf.ApiResolver();
@@ -1457,6 +1458,11 @@ namespace Z0.Asm
             var bits = text.format(chars);
             Wf.Row(InputBits);
             Wf.Row(bits);
+
+        }
+
+        void EmitPartSymbols()
+        {
 
         }
 

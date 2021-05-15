@@ -71,7 +71,7 @@ namespace Z0
                 row.DataType = kind;
                 row.Position = (ushort)i;
                 row.Name = f.Name;
-                row.EncodedValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
+                row.ScalarValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
                 row.Symbol = tag.MapValueOrDefault(a => a.Symbol, f.Name);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
             }

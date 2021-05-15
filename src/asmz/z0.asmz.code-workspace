@@ -4,6 +4,23 @@
 			"path": "."
 		},
 		{
+			"path": "..\\asm.core"
+		}
+        ,
+		{
+			"path": "..\\asm.lang"
+		},
+		{
+			"path": "..\\asm.catalogs"
+		},
+		{
+			"path": "..\\asm.cases"
+		},
+		{
+			"path": "..\\asm"
+		}
+        ,
+		{
 			"path": "..\\calc"
 		},
 		{
@@ -61,11 +78,12 @@
 			"path": "..\\polysource"
 		},
 		{
-			"path": "..\\asm.core"
-		}
-        ,
-		{
 			"path": "..\\dynamic"
-		}	],
+        },
+		{
+			"path": "..\\root"
+        },
+
+    ],
 	"settings": {}
 }

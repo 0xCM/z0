@@ -17,8 +17,42 @@ namespace Z0
         public Index<SymLiteral> EmitLiterals(FS.FilePath dst)
             => EmitLiterals(Wf.Components, dst);
 
+        /// <summary>
+        /// Discovers all symbolic literals everywhere
+        /// </summary>
+        /// <returns></returns>
         public Index<SymLiteral> DiscoverLiterals()
             => Symbols.literals(Wf.Components);
+
+        /// <summary>
+        /// Discovers the symbolic literals for parametrically-identified symbol type
+        /// </summary>
+        /// <typeparam name="E">The defining type</typeparam>
+        public Index<SymLiteral> DiscoverLiterals<E>()
+            where E : unmanaged, Enum
+                => Symbols.records<E>();
+
+        /// <summary>
+        /// Emits the symbolic literals for parametrically-identified symbol type
+        /// </summary>
+        /// <typeparam name="E">The defining type</typeparam>
+        public Index<SymLiteral> EmitLiterals<E>()
+            where E : unmanaged, Enum
+        {
+            var dst = Db.Table<SymLiteral>(typeof(E).FullName);
+            var flow = Wf.EmittingTable<SymLiteral>(dst);
+            var rows = Symbols.records<E>();
+            var count = rows.Count;
+            ref var src = ref rows.First;
+
+            var formatter = Tables.formatter<SymLiteral>(24);
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+                writer.WriteLine(formatter.Format(skip(src,i)));
+            Wf.EmittedTable<SymLiteral>(flow, count);
+            return rows;
+        }
 
         public Index<SymLiteral> EmitLiterals(Index<Assembly> src, FS.FilePath dst)
         {
@@ -83,8 +117,9 @@ namespace Z0
             outcome += DataParser.parse(skip(cells,j), out dst.Type);
             outcome += DataParser.parse(skip(cells,j), out dst.Position);
             outcome += DataParser.parse(skip(cells,j), out dst.Name);
+            outcome += DataParser.parse(skip(cells,j), out dst.Identity);
             outcome += DataParser.eparse(skip(cells,j), out dst.DataType);
-            outcome += DataParser.parse(skip(cells,j), out dst.EncodedValue);
+            outcome += DataParser.parse(skip(cells,j), out dst.ScalarValue);
             outcome += DataParser.parse(skip(cells,j), out dst.Symbol);
             outcome += DataParser.parse(skip(cells,j), out dst.Description);
             return outcome;

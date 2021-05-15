@@ -7,46 +7,46 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Part;
     using static memory;
 
+    using api = Symbols;
+
     public class SymServices : AppService<SymServices>
     {
-        public static ref SymbolDetial detail<T>(Sym<T> src, ushort count, out SymbolDetial dst)
-            where T : unmanaged
-        {
-            dst.TypeName = src.Type.Name;
-            dst.SymCount = count;
-            dst.Index = src.Index;
-            dst.Name = src.Name;
-            dst.Expr = src.Expr;
-            dst.NameData = EncodeText(src.Name);
-            dst.NameSize = (ushort)dst.NameData.Count;
-            dst.ExprData = EncodeText(src.Expr.Format());
-            dst.ExprSize = (ushort)dst.ExprData.Count;
-            return ref dst;
-        }
+        // public static ref SymbolDetial detail<T>(Sym<T> src, ushort count, out SymbolDetial dst)
+        //     where T : unmanaged
+        // {
+        //     dst.TypeName = src.Type.Name;
+        //     dst.SymCount = count;
+        //     dst.Index = src.Index;
+        //     dst.Name = src.Name;
+        //     dst.Expr = src.Expr;
+        //     dst.NameData = text.utf16(src.Name).ToArray();
+        //     dst.NameSize = (ushort)dst.NameData.Count;
+        //     dst.ExprData = text.utf16(src.Expr.Format()).ToArray();
+        //     dst.ExprSize = (ushort)dst.ExprData.Count;
+        //     return ref dst;
+        // }
 
-        public static ref SymTypeInfo symtype<T>(out SymTypeInfo dst)
-            where T : unmanaged, Enum
-        {
-            var t = typeof(T);
-            dst.TypeName = t.Name;
-            dst.DataType = (PrimalCode)ClrEnums.ecode(t);
-            dst.SymCount = (ushort)t.GetFields().Length;
-            dst.TypeNameData = EncodeText(dst.TypeName);
-            dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
-            return ref dst;
-        }
+        // public static ref SymTypeInfo symtype<T>(out SymTypeInfo dst)
+        //     where T : unmanaged, Enum
+        // {
+        //     var t = typeof(T);
+        //     dst.TypeName = t.Name;
+        //     dst.DataType = (PrimalCode)ClrEnums.ecode(t);
+        //     dst.SymCount = (ushort)t.GetFields().Length;
+        //     dst.TypeNameData = text.utf16(dst.TypeName).ToArray();
+        //     dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
+        //     return ref dst;
+        // }
 
         public Index<SymbolDetial> EmitSymDetails<E>()
             where E : unmanaged, Enum
         {
             var dst = Db.Table<SymbolDetial>(typeof(E).Name);
             var flow = Wf.EmittingTable<SymbolDetial>(dst);
-            var symbols  = Symbols<E>().View;
+            var symbols  = SymCache<E>.get().View;
             var count = symbols.Length;
             var buffer = alloc<SymbolDetial>(count);
             ref var target = ref first(buffer);
@@ -56,7 +56,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
-                detail(symbol, (ushort)count, out seek(target,i));
+                api.detail(symbol, (ushort)count, out seek(target,i));
                 writer.WriteLine(formatter.Format(skip(target,i)));
             }
             Wf.EmittedTable(flow, count);
@@ -103,13 +103,13 @@ namespace Z0
             where K : unmanaged, Enum
                 => SymCache<K>.get().Index;
 
-        [MethodImpl(Inline), Closures(UnsignedInts)]
-        public static BinaryCode EncodeText(string src)
-            => bytes(span(src)).ToArray();
+        // [MethodImpl(Inline), Closures(UnsignedInts)]
+        // public static BinaryCode EncodeText(string src)
+        //     => bytes(span(src)).ToArray();
 
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> DecodText(ReadOnlySpan<byte> src)
-            => recover<char>(src);
+        // [MethodImpl(Inline), Op]
+        // public static ReadOnlySpan<char> DecodText(ReadOnlySpan<byte> src)
+        //     => recover<char>(src);
 
         public Index<ByteSpanSpec> NameProps<K>(Symbols<K> src)
             where K : unmanaged
@@ -128,6 +128,6 @@ namespace Z0
 
         public ByteSpanSpec NameProp<K>(Sym<K> src)
             where K : unmanaged
-                => ByteSpans.specify(src.Name, EncodeText(src.Name));
+                => ByteSpans.specify(src.Name, text.utf16(src.Name).ToArray());
     }
 }

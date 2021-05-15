@@ -10,6 +10,7 @@ namespace Z0
 
     using static Root;
     using static core;
+
     partial struct Index
     {
          public static Y[] map<T,Y>(T[] src, Func<T,Y> selector)

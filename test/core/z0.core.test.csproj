@@ -2,15 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <AssemblyName>zcalc</AssemblyName>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Calc)" />
-    <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Validity)" />
   </ItemGroup>
 
 </Project>

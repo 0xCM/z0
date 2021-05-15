@@ -6,11 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct SymLiteral<E> : IComparableRecord<SymLiteral<E>>
     {
+        public const string TableId = "symbolic.literals.typed";
+
         /// <summary>
         /// The component that defines the literal
         /// </summary>
@@ -32,7 +36,7 @@ namespace Z0
         public Identifier Name;
 
         /// <summary>
-        /// A global identifier
+        /// A unique identifier
         /// </summary>
         public SymIdentity Identity;
 
@@ -44,19 +48,22 @@ namespace Z0
         /// <summary>
         /// The encoded literal, possibly an invariant address to a string resource
         /// </summary>
-        public ulong EncodedValue;
-
-        public E DirectValue;
+        public ulong ScalarValue;
 
         /// <summary>
         /// The symbol, if so attributed, otherwise, the identifier
         /// </summary>
-        public string Symbol;
+        public SymExpr Symbol;
 
         /// <summary>
         /// The meaning of the literal, if available; otherwise empty
         /// </summary>
         public TextBlock Description;
+
+        /// <summary>
+        /// The typed value
+        /// </summary>
+        public E DirectValue;
 
         [MethodImpl(Inline)]
         public int CompareTo(SymLiteral<E> src)

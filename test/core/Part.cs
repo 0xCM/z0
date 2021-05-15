@@ -2,22 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-
-[assembly: PartId(PartId.Universe)]
+[assembly: PartId(PartId.CoreTest)]
 
 namespace Z0.Parts
 {
-    public sealed class Universe : Part<Universe>
+    public sealed class CoreTest : ExecutablePart<CoreTest>
     {
-
-    }
-}
-
-namespace Z0
-{
-    [ApiHost]
-    public static partial class XTend
-    {
-        const NumericKind Closure = NumericKind.UnsignedInts;
+         public override void Execute(params string[] args)
+         {
+            CoreTestApp.Run(args);
+         }
     }
 }

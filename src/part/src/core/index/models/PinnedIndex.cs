@@ -9,98 +9,73 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static memory;
+    using static core;
 
     public unsafe class PinnedIndex<T> : IDisposable, IIndex<T>
         where T : unmanaged
     {
-        readonly GCHandle Handle;
+        readonly GCHandle StorageHandle;
 
-        readonly MemoryAddress Address;
+        public T[] Storage {get;}
 
-        readonly Index<T> Buffer;
+        readonly T* pData;
+
+        public uint Count {get;}
 
         [MethodImpl(Inline)]
         public PinnedIndex(T[] content)
         {
-            Handle = GCHandle.Alloc(this);
-            Address = Handle.AddrOfPinnedObject();
-            Buffer = content;
+            StorageHandle = GCHandle.Alloc(content, GCHandleType.Pinned);
+            pData = (T*)StorageHandle.AddrOfPinnedObject().ToPointer();
+            Storage = content;
+            Count = (uint)content.Length;
         }
 
-        [MethodImpl(Inline)]
-        public PinnedCell Cell(uint index)
-            => new PinnedCell(Address, index);
-
-        public uint Count
+        public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Buffer.Count;
+            get => pData;
+        }
+
+        public ByteSize Size
+        {
+            [MethodImpl(Inline)]
+            get => size<T>() * Count;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Buffer.Length;
-        }
-
-        public T[] Storage
-        {
-            [MethodImpl(Inline)]
-            get => Buffer.Storage;
+            get => (int)Count;
         }
 
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
-            get => Buffer.Edit;
+            get => cover<T>(pData, Count);
         }
 
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Buffer.View;
+            get => cover<T>(pData, Count);
         }
 
+        public ref T First
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(pData,0);
+        }
         public ref T this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref Buffer[index];
-        }
-
-        public unsafe struct PinnedCell
-        {
-            readonly T* pCell;
-
-            [MethodImpl(Inline)]
-            public PinnedCell(MemoryAddress @base, uint index)
-            {
-                pCell = (T*)(@base.Pointer<byte>() + size<T>()*index);
-            }
-
-            public ref T Content
-            {
-                [MethodImpl(Inline)]
-                get => ref @ref(pCell);
-            }
-
-            public MemoryAddress Address
-            {
-                [MethodImpl(Inline)]
-                get => address(pCell);
-            }
-
-            public ByteSize Size
-            {
-                [MethodImpl(Inline)]
-                get => size<T>();
-            }
+            get => ref seek(pData, index);
         }
 
 
         public void Dispose()
         {
-            Handle.Free();
+            StorageHandle.Free();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    partial class XSource
+    public static class PolyBits
     {
         /// <summary>
         /// Produces an interminable stream of random bits

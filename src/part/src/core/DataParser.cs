@@ -77,6 +77,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out SymIdentity dst)
+        {
+            dst = src ?? EmptyString;
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out TextBlock dst)
         {
             dst = src ?? EmptyString;

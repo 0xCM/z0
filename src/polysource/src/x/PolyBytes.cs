@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial class XSource
+    public static class PolyBytes
     {
         /// <summary>
         /// Produces an interminable stream of random bytes
