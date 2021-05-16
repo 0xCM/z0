@@ -5,18 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
+    using System.Reflection.PortableExecutable;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Root;
+    using static core;
+    using static CliRows;
 
-    partial class ImageMetaReader
+    partial class CliReader
     {
-        [MethodImpl(Inline), Op]
-        public ref MethodBodyBlock ReadMethodBody(MethodDefinition src, ref MethodBodyBlock dst)
-        {
-            dst = PeReader.GetMethodBody(src.RelativeVirtualAddress);
-            return ref dst;
-        }
+
     }
 }

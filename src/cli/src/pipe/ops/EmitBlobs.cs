@@ -44,6 +44,6 @@ namespace Z0
         }
 
         public ExecToken EmitBlobs(Assembly src)
-            => EmitBlobs(FS.path(src.Location), Wf.Db().Table<CliBlob>(src.GetSimpleName()));
+            => EmitBlobs(FS.path(src.Location), Db.Table<CliBlob>(src.GetSimpleName()));
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
     using System.Collections.Generic;
 
-    partial class ImageMetaReader
+    partial class PeReader
     {
         public ReadOnlySpan<CliBlob> ReadBlobDescriptions()
         {

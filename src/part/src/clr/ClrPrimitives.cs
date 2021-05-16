@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static Root;
+    using static core;
 
     [ApiHost(ApiNames.ClrPrimitives, true)]
     public readonly partial struct ClrPrimitives

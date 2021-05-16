@@ -159,8 +159,7 @@ namespace Z0
         }
         public void Run()
         {
-            var svc = Wf.ApiHex();
-            var hex = svc.ReadHostBlocks();
+            GenSlnScript();
 
         }
     }

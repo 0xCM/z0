@@ -14,7 +14,6 @@ namespace Z0
 
     using static Root;
 
-
     public static partial class XCli
     {
         [MethodImpl(Inline)]

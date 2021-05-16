@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class ImageMetaReader
+    partial class PeReader
     {
         public Index<MsilMetadata> ReadMsil()
         {
@@ -32,7 +32,7 @@ namespace Z0
                     var rva = definition.RelativeVirtualAddress;
                     if(rva != 0)
                     {
-                        var body = PeReader.GetMethodBody(rva);
+                        var body = PE.GetMethodBody(rva);
                         dst.Add(new MsilMetadata
                         {
                             MethodRva = (Address32)rva,

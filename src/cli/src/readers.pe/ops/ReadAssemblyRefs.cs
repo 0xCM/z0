@@ -10,7 +10,7 @@ namespace Z0
 
     using static core;
 
-    partial class ImageMetaReader
+    partial class PeReader
     {
         [Op]
         public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs()

@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Asci)" />
+    <ProjectReference Include="$(PolySource)" />
   </ItemGroup>
 
 </Project>

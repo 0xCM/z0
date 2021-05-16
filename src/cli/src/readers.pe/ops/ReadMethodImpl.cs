@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class ImageMetaReader
+    partial class PeReader
     {
     }
 }

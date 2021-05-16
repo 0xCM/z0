@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct core
     {
+
         /// <summary>
         /// Subtracts a specified count of <typeparamref name='T'/> measured offsets from a reference
         /// </summary>

@@ -15,10 +15,8 @@ namespace Z0
     using static core;
     using static CliRows;
 
-    using K = CliTableKinds;
-
     [ApiHost]
-    public unsafe class CliReader
+    public unsafe partial class CliReader
     {
         [MethodImpl(Inline), Op]
         public static ManifestResourceHandle reshandle(uint row)
@@ -62,35 +60,16 @@ namespace Z0
             get => Segment.Size;
         }
 
-        public ReadOnlySpan<byte> RawData
+        public ReadOnlySpan<byte> MetaBlock
         {
             [MethodImpl(Inline)]
             get => memory.view<byte>(Segment);
         }
 
-        [MethodImpl(Inline), Op]
-        public Address32 HeapOffset(UserStringHandle handle)
-            => (Address32)MD.GetHeapOffset(handle);
-
-        [MethodImpl(Inline), Op]
-        public Address32 HeapOffset(BlobHandle handle)
-            => (Address32)MD.GetHeapOffset(handle);
-
-        [MethodImpl(Inline), Op]
-        public Address32 HeapOffset(StringHandle handle)
-            => (Address32)MD.GetHeapOffset(handle);
-
-        [MethodImpl(Inline), Op]
-        public Address32 HeapOffset(GuidHandle handle)
-            => (Address32)MD.GetHeapOffset(handle);
 
         [MethodImpl(Inline), Op]
         public ByteSize HeapSize(HeapIndex index)
             => MD.GetHeapSize(index);
-
-        [MethodImpl(Inline), Op]
-        public void Read(Index<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
-            => src.Iter(handle => dst(MD.GetCustomAttribute(handle)));
 
         [Op]
         public CliGuidHeap GuidHeap()
@@ -148,6 +127,7 @@ namespace Z0
 
             return values.ToArray();
         }
+
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<AssemblyReferenceHandle> AssemblyRefHandles()
             => MD.AssemblyReferences.ToReadOnlySpan();
@@ -160,170 +140,25 @@ namespace Z0
         public ReadOnlySpan<ManifestResourceHandle> ResourceHandles()
             => MD.ManifestResources.ToReadOnlySpan();
 
-        [MethodImpl(Inline), Op]
-        public AssemblyFile Read(AssemblyFileHandle src)
-            => MD.GetAssemblyFile(src);
-
-        [MethodImpl(Inline), Op]
-        public AssemblyReference Read(AssemblyReferenceHandle src)
-            => MD.GetAssemblyReference(src);
-
-        [MethodImpl(Inline), Op]
-        public CustomAttribute Read(CustomAttributeHandle src)
-            => MD.GetCustomAttribute(src);
-
-        [MethodImpl(Inline), Op]
-        public ExportedType Read(ExportedTypeHandle src)
-            => MD.GetExportedType(src);
-
-        [MethodImpl(Inline), Op]
-        public FieldDefinition Read(FieldDefinitionHandle src)
-            => MD.GetFieldDefinition(src);
-
-        [MethodImpl(Inline), Op]
-        public MethodDebugInformation Read(MethodDebugInformationHandle src)
-            => MD.GetMethodDebugInformation(src);
-
-        [MethodImpl(Inline), Op]
-        public MethodImplementation Read(MethodImplementationHandle src)
-            => MD.GetMethodImplementation(src);
-
-        [MethodImpl(Inline), Op]
-        public ManifestResource Read(ManifestResourceHandle src)
-            => MD.GetManifestResource(src);
-
-        [MethodImpl(Inline), Op]
-        public MemberReference Read(MemberReferenceHandle src)
-            => MD.GetMemberReference(src);
-
-        [MethodImpl(Inline), Op]
-        public BinaryCode Read(BlobHandle src)
-            => MD.GetBlobBytes(src);
-
-        [MethodImpl(Inline), Op]
-        public string Read(UserStringHandle handle)
-            => MD.GetUserString(handle);
-
-        [MethodImpl(Inline), Op]
-        public string Read(StringHandle src)
-            => MD.GetString(src);
-
-        [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<TypeDefinitionHandle> src, Span<TypeDefinition> dst)
+        public Index<CliUserString> ReadUserStringInfo()
         {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = Read(skip(src,i));
-        }
+            var reader = MD;
+            int size = MD.GetHeapSize(HeapIndex.UserString);
+            if (size == 0)
+                return sys.empty<CliUserString>();
 
-        [MethodImpl(Inline), Op]
-        public ref FieldDefinition Read(FieldDefinitionHandle src, ref FieldDefinition dst)
-        {
-            dst = Read(src);
-            return ref dst;
-        }
+            var values = root.list<CliUserString>();
+            var handle = MetadataTokens.UserStringHandle(0);
+            var i=0;
 
-        [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<FieldDefinitionHandle> src, Span<FieldDefinition> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref MethodImplementation Read(MethodImplementationHandle src, ref MethodImplementation dst)
-        {
-            dst = Read(src);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<MethodImplementationHandle> src, Span<MethodImplementation> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref AssemblyFile Read(AssemblyFileHandle src, ref AssemblyFile dst)
-        {
-            dst = Read(src);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<AssemblyFileHandle> src, Span<AssemblyFile> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
-        }
-
-        public AssemblyRefRow Row(AssemblyReferenceHandle handle)
-        {
-            var dst = new AssemblyRefRow();
-            var src = MD.GetAssemblyReference(handle);
-            dst.Culture = src.Culture;
-            dst.Flags = src.Flags;
-            dst.Hash = src.HashValue;
-            dst.Token = src.PublicKeyOrToken;
-            dst.Version = src.Version;
-            dst.Name = src.Name;
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public PropertyDefinition Read(PropertyDefinitionHandle src)
-            => MD.GetPropertyDefinition(src);
-
-        [MethodImpl(Inline), Op]
-        public TypeDefinition Read(TypeDefinitionHandle src)
-            => MD.GetTypeDefinition(src);
-
-        [MethodImpl(Inline), Op]
-        public TypeReference Read(TypeReferenceHandle src)
-            => MD.GetTypeReference(src);
-
-        [MethodImpl(Inline), Op]
-        public NamespaceDefinition Read(NamespaceDefinitionHandle src)
-            => MD.GetNamespaceDefinition(src);
-
-        [MethodImpl(Inline), Op]
-        public BinaryCode ReadSig(FieldDefinition src)
-            => Read(src.Signature);
-
-        [MethodImpl(Inline), Op]
-        public BinaryCode ReadSig(MethodDefinition src)
-            => Read(src.Signature);
-
-        [MethodImpl(Inline), Op]
-        public MethodDefRow Read(MethodDefinitionHandle handle)
-        {
-            var src = MD.GetMethodDefinition(handle);
-            var dst = new MethodDefRow();
-            dst.Attributes = src.Attributes;
-            dst.ImplAttributes  = src.ImplAttributes;
-            dst.Rva = src.RelativeVirtualAddress;
-            dst.Name = src.Name;
-            dst.Signature = src.Signature;
-            var keys = Cli.keys(src.GetParameters());
-            var count = keys.Count;
-            if(count != 0)
+            do
             {
-                dst.FirstParam = keys.First;
-                dst.ParamCount = (ushort)count;
+                values.Add(new CliUserString(seq: i++, size, HeapOffset(handle), Read(handle)));
+                handle = MD.GetNextHandle(handle);
             }
-            return dst;
-        }
+            while (!handle.IsNil);
 
-        [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<MethodDefinitionHandle> src, Span<MethodDefRow> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                 seek(dst,i) = Read(skip(src,i));
+            return values.ToArray();
         }
 
         public ReadOnlySpan<string> UserStrings()
@@ -396,5 +231,37 @@ namespace Z0
             return new MemberFieldName(seq, size, (Address32)offset, value);
         }
 
+
+        [MethodImpl(Inline), Op]
+        public ref ManifestResource ReadResource(ManifestResourceHandle src, out ManifestResource dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<ManifestResourceInfo> ReadResDescriptions()
+        {
+            var handles = ResourceHandles();
+            return ReadResDescriptions(handles, alloc<ManifestResourceInfo>(handles.Length));
+        }
+
+        [MethodImpl(Inline), Op]
+        public Span<ManifestResourceInfo> ReadResDescriptions(ReadOnlySpan<ManifestResourceHandle> src, Span<ManifestResourceInfo> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                ReadResDescription(ReadResource(skip(src,i), out var _), ref seek(dst,i));
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public ref ManifestResourceInfo ReadResDescription(in ManifestResource src, ref ManifestResourceInfo dst)
+        {
+            dst.Name = Read(src.Name);
+            dst.Offset = (ulong)src.Offset;
+            dst.Attributes = src.Attributes;
+            return ref dst;
+        }
     }
 }

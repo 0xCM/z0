@@ -6,10 +6,11 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+
     using LK = ClrLiteralKind;
 
-    [ApiHost(ApiNames.ClrLiteralKinds, true)]
+    [ApiHost]
     public readonly struct ClrLiteralKinds
     {
         /// <summary>

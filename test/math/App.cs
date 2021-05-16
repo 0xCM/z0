@@ -6,7 +6,7 @@ namespace Z0
 {
     public class MathTestApp : TestApp<MathTestApp>
     {
-        static PartId[] Parts => root.array(PartId.MathSvc, PartId.Math, PartId.GMath);
+        static PartId[] Parts => root.array(PartId.Calc, PartId.Math, PartId.GMath);
 
         // static void Run(IWfShell wf)
         // {

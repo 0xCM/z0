@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using api = ClrLiterals;
 
-    [ApiHost(ApiNames.ClrLiteralFields, true)]
+    [ApiHost]
     public readonly struct ClrLiteralFields
     {
         [MethodImpl(Inline), Op]

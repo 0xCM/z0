@@ -12,18 +12,18 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class ImageMetaReader
+    partial class PeReader
     {
-        [MethodImpl(Inline), Op]
-        public ref ManifestResource ReadResource(ManifestResourceHandle src, out ManifestResource dst)
-        {
-            dst = ReadResource(src);
-            return ref dst;
-        }
+        // [MethodImpl(Inline), Op]
+        // public ref ManifestResource ReadResource(ManifestResourceHandle src, out ManifestResource dst)
+        // {
+        //     dst = ReadResource(src);
+        //     return ref dst;
+        // }
 
-        [MethodImpl(Inline), Op]
-        public ManifestResource ReadResource(ManifestResourceHandle src)
-            => CliReader.Read(src);
+        // [MethodImpl(Inline), Op]
+        // public ManifestResource ReadResource(ManifestResourceHandle src)
+        //     => CliReader.Read(src);
 
         [Op]
         public unsafe bool ResourceSearch(string name, out ResSeg dst)
@@ -31,7 +31,7 @@ namespace Z0
             dst = default;
 
             var directory = ReadSectionData(ResourcesDirectory);
-            var descriptions = ReadResDescriptions();
+            var descriptions = CliReader.ReadResDescriptions();
             var count = descriptions.Length;
             for(var i=0; i<count; i++)
             {
@@ -47,6 +47,5 @@ namespace Z0
             }
             return false;
         }
-
     }
 }

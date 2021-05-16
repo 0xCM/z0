@@ -14,14 +14,15 @@ namespace Z0
     using System.Linq;
 
     using static Root;
+    using static core;
 
-    public partial class ImageMetaReader : IDisposable
+    public partial class PeReader : IDisposable
     {
         readonly FS.FilePath Source;
 
         readonly FileStream Stream;
 
-        public PEReader PeReader {get;}
+        public PEReader PE {get;}
 
         public MetadataReader MD {get;}
 
@@ -29,30 +30,30 @@ namespace Z0
 
         readonly CliReader CliReader;
 
-        public ImageMetaReader(FS.FilePath src)
+        public PeReader(FS.FilePath src)
         {
             Source = src;
             Stream = File.OpenRead(src.Name);
-            PeReader = new PEReader(Stream);
-            MD = PeReader.GetMetadataReader();
-            MetadataBlock = PeReader.GetMetadata();
+            PE = new PEReader(Stream);
+            MD = PE.GetMetadataReader();
+            MetadataBlock = PE.GetMetadata();
             CliReader = Cli.reader(MetadataBlock);
         }
 
         [MethodImpl(Inline)]
         public unsafe ReadOnlySpan<byte> Read(PEMemoryBlock src)
-            => memory.cover<byte>(src.Pointer, (uint)src.Length);
+            => cover<byte>(src.Pointer, src.Length);
 
         public void Dispose()
         {
-            PeReader?.Dispose();
+            PE?.Dispose();
             Stream?.Dispose();
         }
 
         public PEHeaders PeHeaders
         {
             [MethodImpl(Inline)]
-            get => PeReader.PEHeaders;
+            get => PE.PEHeaders;
         }
 
         public CoffHeader CoffHeader
@@ -99,6 +100,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public PEMemoryBlock ReadSectionData(DirectoryEntry src)
-            => PeReader.GetSectionData(src.RelativeVirtualAddress);
+            => PE.GetSectionData(src.RelativeVirtualAddress);
     }
 }

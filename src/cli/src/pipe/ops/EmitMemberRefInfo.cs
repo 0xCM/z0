@@ -8,7 +8,7 @@ namespace Z0
 
     partial class ImageMetaPipe
     {
-        public void EmitMemberRefs()
+        public void EmitMemberRefInfo()
         {
             var components = Wf.ApiCatalog.Components.View;
             var count = components.Length;

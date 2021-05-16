@@ -16,8 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../asm/z0.asm.csproj" />
-    <ProjectReference Include="../respack/z0.respack.csproj" />
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(ResPack)" />
   </ItemGroup>
 
 </Project>

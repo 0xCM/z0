@@ -87,7 +87,7 @@ namespace Z0
 
         public CodeSymbolSet Symbolize(Assembly src)
         {
-            var metadata = MetadataReferences.from(src);
+            var metadata = Cli.MetadataRef(src);
             var dst = CodeSymbols.set(metadata);
             var name = string.Format("{0}.compilation",src.GetSimpleName());
             var comp = Roslyn.Compilation(metadata, name);

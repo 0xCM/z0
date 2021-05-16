@@ -86,6 +86,7 @@
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>
     <PolySource>$(Src)polysource/z0.polysource.csproj</PolySource>
+    <ResPack>$(Src)respack/z0.respack.csproj</ResPack>
 
     <Refs>$(Src)refs/z0.refs.csproj</Refs>
     <Related>$(Src)related/Z0.related.csproj</Related>

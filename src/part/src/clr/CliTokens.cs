@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
+    using static Root;
 
     public readonly struct CliTokens
     {

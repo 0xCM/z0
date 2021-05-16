@@ -11,10 +11,10 @@ namespace Z0
 
     partial class ImageMetaPipe
     {
-        public Index<CliUserString> EmitUserStrings()
-            => EmitUserStrings(Wf.Components);
+        public ReadOnlySpan<CliUserString> EmitUserStringInfo()
+            => EmitUserStringInfo(Wf.Components);
 
-        public Index<CliUserString> EmitUserStrings(ReadOnlySpan<Assembly> src)
+        public ReadOnlySpan<CliUserString> EmitUserStringInfo(ReadOnlySpan<Assembly> src)
         {
             var buffer = DataList.create<CliUserString>();
             var count = src.Length;
@@ -23,10 +23,10 @@ namespace Z0
             return buffer.Emit();
         }
 
-        public void EmitUserStrings(Assembly src, DataList<CliUserString> buffer)
+        void EmitUserStrings(Assembly src, DataList<CliUserString> buffer)
         {
-            using var reader = ImageMetadata.reader(FS.path(src.Location));
-            var records = reader.ReadUserStrings();
+            var reader = Cli.reader(src);
+            var records = reader.ReadUserStringInfo();
             buffer.Add(records);
             Db.EmitTable<CliUserString>(records, src.GetSimpleName());
         }

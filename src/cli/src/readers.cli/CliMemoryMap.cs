@@ -18,24 +18,24 @@ namespace Z0
     {
         readonly MemoryFile Source;
 
-        public PEReader PeReader {get;}
+        public PEReader PE {get;}
 
-        public MetadataReader CliReader {get;}
+        public MetadataReader MD {get;}
 
         public ulong ImageSize {get;}
 
         public Ptr<byte> BasePointer {get;}
 
-        public PEMemoryBlock CliMetadata {get;}
+        public PEMemoryBlock MtadataBlock {get;}
 
         public CliMemoryMap(IWfRuntime wf, FS.FilePath src)
         {
             Source = MemoryFiles.map(src);
             BasePointer = Source.BaseAddress.Pointer<byte>();
-            PeReader = new PEReader(BasePointer, (int)Source.Size);
+            PE = new PEReader(BasePointer, (int)Source.Size);
             ImageSize = Source.Size;
-            CliReader = PeReader.GetMetadataReader();
-            CliMetadata = PeReader.GetMetadata();
+            MD = PE.GetMetadataReader();
+            MtadataBlock = PE.GetMetadata();
         }
 
         public static CliMemoryMap create(IWfRuntime wf, FS.FilePath src)
@@ -44,7 +44,7 @@ namespace Z0
 
         public void Dispose()
         {
-            PeReader.Dispose();
+            PE.Dispose();
             Source.Dispose();
         }
 
@@ -57,7 +57,7 @@ namespace Z0
         public PEHeaders PeHeaders
         {
             [MethodImpl(Inline)]
-            get => PeReader.PEHeaders;
+            get => PE.PEHeaders;
         }
 
         public CoffHeader CoffHeader
@@ -74,7 +74,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public PEMemoryBlock SectonData(DirectoryEntry src)
-            => PeReader.GetSectionData(src.RelativeVirtualAddress);
+            => PE.GetSectionData(src.RelativeVirtualAddress);
 
         [MethodImpl(Inline)]
         public unsafe ReadOnlySpan<byte> Read(PEMemoryBlock src)

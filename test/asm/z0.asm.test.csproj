@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Validity)"/>
     <ProjectReference Include="$(Canonical)"/>
     <ProjectReference Include="$(Asm)"/>
+    <ProjectReference Include="$(PolySource)"/>
   </ItemGroup>
 
 </Project>

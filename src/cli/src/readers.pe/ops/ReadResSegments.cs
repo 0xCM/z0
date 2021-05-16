@@ -12,12 +12,12 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class ImageMetaReader
+    partial class PeReader
     {
         [Op]
         public unsafe ReadOnlySpan<ResSeg> ReadResSegments()
         {
-            var resources = ReadResDescriptions();
+            var resources = CliReader.ReadResDescriptions();
             var count = resources.Length;
             var dst = span<ResSeg>(count);
             for(var i=0u; i<count; i++)

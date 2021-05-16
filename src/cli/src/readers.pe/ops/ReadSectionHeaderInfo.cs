@@ -7,15 +7,15 @@ namespace Z0
     using static memory;
     using static PeRecords;
 
-    partial class ImageMetaReader
+    partial class PeReader
     {
         public Index<SectionHeaderInfo> ReadSectionHeaderInfo()
         {
             var dst = root.list<SectionHeaderInfo>();
 
-            if(PeReader.HasMetadata)
+            if(PE.HasMetadata)
             {
-                var headers = PeReader.PEHeaders;
+                var headers = PE.PEHeaders;
                 var sections = headers.SectionHeaders;
 
                 foreach(var section in sections)

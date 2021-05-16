@@ -1147,8 +1147,6 @@ namespace Z0.Asm
 
         public void EmitImageMetadata()
         {
-            var pipe = Wf.ImageMetaPipe();
-            pipe.EmitMemberRefs();
             //pipe.EmitMetadaSets(WorkflowOptions.@default());
 
         }
@@ -1238,16 +1236,6 @@ namespace Z0.Asm
             }
             Wf.EmittedFile(emitting, counter);
         }
-
-        public void ListCliTables(Assembly src)
-        {
-            var reader = Cli.reader(src);
-            root.iter(reader.MethodDefKeys(), k => Wf.Row(k));
-            root.iter(reader.TypeDefKeys(), k => Wf.Row(k));
-            root.iter(reader.TypeRefKeys(), k => Wf.Row(k));
-            root.iter(reader.AssemblyRefKeys(), k => Wf.Row(k));
-        }
-
 
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
             => Wf.ApiCatalogs().EmitApiClasses();
@@ -1398,7 +1386,7 @@ namespace Z0.Asm
             if(Wf.ApiCatalog.FindComponent(id, out var assembly))
             {
                 var name = string.Format("z0.{0}.compilation", id.Format());
-                var metadata = MetadataReferences.from(assembly);
+                var metadata = Cli.MetadataRef(assembly);
                 var comp = tool.Compilation(metadata, name);
                 var symbol = comp.GetAssemblySymbol(metadata);
                 var gns = symbol.GlobalNamespace;

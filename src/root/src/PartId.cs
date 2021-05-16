@@ -125,6 +125,9 @@ public enum PartId : ulong
     [Symbol("symbolic")]
     Symbolic = 63,
 
+    [Symbol("symbolic")]
+    SymbolicTest = Symbolic | Test,
+
     [Symbol("tables")]
     Tables = 65,
 
