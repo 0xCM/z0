@@ -23,13 +23,13 @@ namespace Z0
             where T : unmanaged
                 => uint32(handle);
 
-        internal static CliRowKeys<K> keys<K,T>(T[] handles, K k = default)
+        internal static CliRowKeys keys<K,T>(T[] handles, K k = default)
             where T : unmanaged
             where K : unmanaged, ICliTableKind<K>
         {
             var count = handles.Length;
             var src = @readonly(handles);
-            var buffer = alloc<CliRowKey<K>>(count);
+            var buffer = alloc<CliRowKey>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
                 seek(dst,i) = key<K,T>(skip(src,i));
@@ -41,79 +41,79 @@ namespace Z0
             => key(src,default(MethodDef));
 
         [Op]
-        public static CliRowKeys<File> keys(AssemblyFileHandleCollection src)
+        public static CliRowKeys keys(AssemblyFileHandleCollection src)
             => keys(src.Array(), default(File));
 
         [Op]
-        public static CliRowKeys<AssemblyRef> keys(AssemblyReferenceHandleCollection src)
+        public static CliRowKeys keys(AssemblyReferenceHandleCollection src)
             => keys(src.Array(), default(AssemblyRef));
 
         [Op]
-        public static CliRowKeys<K.CustomAttribute> keys(CustomAttributeHandleCollection src)
+        public static CliRowKeys keys(CustomAttributeHandleCollection src)
             => keys(src.Array(), default(K.CustomAttribute));
 
         [Op]
-        public static CliRowKeys<K.Document> keys(DocumentHandleCollection src)
+        public static CliRowKeys keys(DocumentHandleCollection src)
             => keys(src.Array(), default(K.Document));
 
         [Op]
-        public static CliRowKeys<K.ExportedType> keys(ExportedTypeHandleCollection src)
+        public static CliRowKeys keys(ExportedTypeHandleCollection src)
             => keys(src.Array(), default(K.ExportedType));
 
         [Op]
-        public static CliRowKeys<K.Event> keys(EventDefinitionHandleCollection src)
+        public static CliRowKeys keys(EventDefinitionHandleCollection src)
             => keys(src.Array(), default(K.Event));
 
         [Op]
-        public static CliRowKeys<Field> keys(FieldDefinitionHandleCollection src)
+        public static CliRowKeys keys(FieldDefinitionHandleCollection src)
             => keys(src.Array(), default(K.Field));
 
         [Op]
-        public static CliRowKeys<K.Param> keys(ParameterHandleCollection src)
+        public static CliRowKeys keys(ParameterHandleCollection src)
             => keys(src.Array(), default(K.Param));
 
         [Op]
-        public static CliRowKeys<GenericParam> keys(GenericParameterHandleCollection src)
+        public static CliRowKeys keys(GenericParameterHandleCollection src)
             => keys(src.Array(), default(GenericParam));
 
         [Op]
-        public static CliRowKeys<GenericParamConstraint> keys(GenericParameterConstraintHandleCollection src)
+        public static CliRowKeys keys(GenericParameterConstraintHandleCollection src)
             => keys(src.Array(), default(GenericParamConstraint));
 
         [Op]
-        public static CliRowKeys<MemberRef> keys(MemberReferenceHandleCollection src)
+        public static CliRowKeys keys(MemberReferenceHandleCollection src)
             => keys(src.Array(), default(MemberRef));
 
         [Op]
-        public static CliRowKeys<K.ManifestResource> keys(ManifestResourceHandleCollection src)
+        public static CliRowKeys keys(ManifestResourceHandleCollection src)
             => keys(src.Array(), default(K.ManifestResource));
 
         [Op]
-        public static CliRowKeys<MethodDef> keys(MethodDefinitionHandleCollection src)
+        public static CliRowKeys keys(MethodDefinitionHandleCollection src)
             => keys(src.Array(), default(MethodDef));
 
         [Op]
-        public static CliRowKeys<Property> keys(PropertyDefinitionHandleCollection src)
+        public static CliRowKeys keys(PropertyDefinitionHandleCollection src)
             => keys(src.Array(), default(Property));
 
         [Op]
-        public static CliRowKeys<TypeDef> keys(TypeDefinitionHandleCollection src)
+        public static CliRowKeys keys(TypeDefinitionHandleCollection src)
             => keys(src.Array(), default(TypeDef));
 
         [Op]
-        public static CliRowKeys<TypeRef> keys(TypeReferenceHandleCollection src)
+        public static CliRowKeys keys(TypeReferenceHandleCollection src)
             => keys(src.Array(), default(TypeRef));
 
         [Op]
-        public static CliRowKeys<K.MethodDebugInformation> keys(MethodDebugInformationHandleCollection src)
+        public static CliRowKeys keys(MethodDebugInformationHandleCollection src)
             => keys(src.Array(), default(K.MethodDebugInformation));
 
         [Op]
-        public static CliRowKeys<K.CustomDebugInformation> keys(CustomDebugInformationHandleCollection src)
+        public static CliRowKeys keys(CustomDebugInformationHandleCollection src)
             => keys(src.Array(), default(K.CustomDebugInformation));
 
         [Op]
-        public static CliRowKeys<K.LocalScope> keys(LocalScopeHandleCollection src)
+        public static CliRowKeys keys(LocalScopeHandleCollection src)
             => keys(src.Array(), default(K.LocalScope));
     }
 }

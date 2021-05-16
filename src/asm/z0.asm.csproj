@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(Extract)" />
     <ProjectReference Include="$(Lang)" />

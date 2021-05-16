@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(BitNumbers)" />
-    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Api)" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Dynamic)" />
   </ItemGroup>

@@ -12,13 +12,25 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Root;
-    using static core;
     using static CliRows;
 
     partial class CliReader
     {
+        public AssemblyRefRow Row(AssemblyReferenceHandle handle)
+        {
+            var dst = new AssemblyRefRow();
+            var src = MD.GetAssemblyReference(handle);
+            dst.Culture = src.Culture;
+            dst.Flags = src.Flags;
+            dst.Hash = src.HashValue;
+            dst.Token = src.PublicKeyOrToken;
+            dst.Version = src.Version;
+            dst.Name = src.Name;
+            return dst;
+        }
+
         [MethodImpl(Inline), Op]
-        public MethodDefRow Read(MethodDefinitionHandle handle)
+        public MethodDefRow Row(MethodDefinitionHandle handle)
         {
             var src = MD.GetMethodDefinition(handle);
             var dst = new MethodDefRow();
@@ -34,19 +46,6 @@ namespace Z0
                 dst.FirstParam = keys.First;
                 dst.ParamCount = (ushort)count;
             }
-            return dst;
-        }
-
-        public AssemblyRefRow Row(AssemblyReferenceHandle handle)
-        {
-            var dst = new AssemblyRefRow();
-            var src = MD.GetAssemblyReference(handle);
-            dst.Culture = src.Culture;
-            dst.Flags = src.Flags;
-            dst.Hash = src.HashValue;
-            dst.Token = src.PublicKeyOrToken;
-            dst.Version = src.Version;
-            dst.Name = src.Name;
             return dst;
         }
     }

@@ -48,7 +48,6 @@ namespace Z0
         public static MetadataReaderProvider PdbReaderProvider(Stream src, MetadataStreamOptions options = MetadataStreamOptions.Default)
             => MetadataReaderProvider.FromPortablePdbStream(src, options);
 
-
         public static MetadataReference MetadataRef(FS.FilePath src)
         {
             var xml = src.ChangeExtension(FS.Xml);
@@ -71,8 +70,6 @@ namespace Z0
             else
                 return MetadataReference.CreateFromFile(path.Name, props);
         }
-
-
         public static XmlDocProvider xmldoc(FS.FilePath src)
             => new XmlDocProvider(src.Name);
 

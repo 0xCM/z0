@@ -2,15 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <AssemblyName>run</AssemblyName>
+    <AssemblyName>cli</AssemblyName>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <!-- <BaseAddress>0x11110000</BaseAddress> -->
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Tools)" />
-    <ProjectReference Include="$(Term)" />
+    <ProjectReference Include="$(Cli)" />
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Api)" />
   </ItemGroup>
 
 </Project>

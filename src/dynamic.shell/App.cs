@@ -92,7 +92,7 @@ namespace Z0
         public void Test6(PartId part)
         {
             Reader(part, out var reader);
-            var strings = reader.SystemStrings();
+            var strings = reader.ReadSystemStrings();
             var count = strings.Length;
             for(var i=0; i<count; i++)
             {

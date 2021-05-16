@@ -14,24 +14,13 @@ namespace Z0
 
     partial class PeReader
     {
-        // [MethodImpl(Inline), Op]
-        // public ref ManifestResource ReadResource(ManifestResourceHandle src, out ManifestResource dst)
-        // {
-        //     dst = ReadResource(src);
-        //     return ref dst;
-        // }
-
-        // [MethodImpl(Inline), Op]
-        // public ManifestResource ReadResource(ManifestResourceHandle src)
-        //     => CliReader.Read(src);
-
         [Op]
         public unsafe bool ResourceSearch(string name, out ResSeg dst)
         {
             dst = default;
 
             var directory = ReadSectionData(ResourcesDirectory);
-            var descriptions = CliReader.ReadResDescriptions();
+            var descriptions = CliReader.ReadResInfo();
             var count = descriptions.Length;
             for(var i=0; i<count; i++)
             {

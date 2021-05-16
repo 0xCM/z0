@@ -86,7 +86,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                 seek(dst,i) = Read(skip(src,i));
+                 seek(dst,i) = Row(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]

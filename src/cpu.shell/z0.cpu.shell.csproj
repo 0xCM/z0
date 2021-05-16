@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Cpu)" />
-    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Pipes)" />
     <ProjectReference Include="$(CpuDsl)" />
   </ItemGroup>

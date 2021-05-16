@@ -17,7 +17,7 @@ namespace Z0
         [Op]
         public unsafe ReadOnlySpan<ResSeg> ReadResSegments()
         {
-            var resources = CliReader.ReadResDescriptions();
+            var resources = CliReader.ReadResInfo();
             var count = resources.Length;
             var dst = span<ResSeg>(count);
             for(var i=0u; i<count; i++)

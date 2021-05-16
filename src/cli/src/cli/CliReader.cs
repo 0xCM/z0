@@ -161,45 +161,6 @@ namespace Z0
             return values.ToArray();
         }
 
-        public ReadOnlySpan<string> UserStrings()
-        {
-            int size = HeapSize(HeapIndex.UserString);
-            if (size == 0)
-                return sys.empty<string>();
-
-            var values = root.list<string>();
-            var handle = MetadataTokens.UserStringHandle(0);
-            do
-            {
-                values.Add(Read(handle));
-                handle = MD.GetNextHandle(handle);
-            }
-            while (!handle.IsNil);
-
-            return values.ViewDeposited();
-        }
-
-        public ReadOnlySpan<string> SystemStrings()
-        {
-            int size = HeapSize(HeapIndex.String);
-            if (size == 0)
-                return sys.empty<string>();
-
-            var values = root.list<string>();
-            var handle = MetadataTokens.StringHandle(0);
-            do
-            {
-                values.Add(Read(handle));
-                handle = MD.GetNextHandle(handle);
-            }
-            while (!handle.IsNil);
-
-            return values.ViewDeposited();
-        }
-
-        internal static string format(FieldAttributes src)
-            => src.ToString();
-
         public ReadOnlySpan<MemberFieldInfo> ReadFieldInfo()
         {
             var reader = MD;
@@ -217,7 +178,7 @@ namespace Z0
 
                 field.Token = CliTokens.token(handle);
                 field.FieldName = name.Value;
-                field.Attribs = format(entry.Attributes);
+                field.Attribs = entry.Attributes.ToString();
                 field.Sig = bsig;
             }
             return dst;
@@ -231,36 +192,10 @@ namespace Z0
             return new MemberFieldName(seq, size, (Address32)offset, value);
         }
 
-
         [MethodImpl(Inline), Op]
         public ref ManifestResource ReadResource(ManifestResourceHandle src, out ManifestResource dst)
         {
             dst = Read(src);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<ManifestResourceInfo> ReadResDescriptions()
-        {
-            var handles = ResourceHandles();
-            return ReadResDescriptions(handles, alloc<ManifestResourceInfo>(handles.Length));
-        }
-
-        [MethodImpl(Inline), Op]
-        public Span<ManifestResourceInfo> ReadResDescriptions(ReadOnlySpan<ManifestResourceHandle> src, Span<ManifestResourceInfo> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                ReadResDescription(ReadResource(skip(src,i), out var _), ref seek(dst,i));
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref ManifestResourceInfo ReadResDescription(in ManifestResource src, ref ManifestResourceInfo dst)
-        {
-            dst.Name = Read(src.Name);
-            dst.Offset = (ulong)src.Offset;
-            dst.Attributes = src.Attributes;
             return ref dst;
         }
     }

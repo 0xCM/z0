@@ -119,13 +119,16 @@ public enum PartId : ulong
     [Symbol("cli")]
     Cli = 61,
 
+    [Symbol("cli.shell")]
+    CliShell = Cli | Shell,
+
     [Symbol("canonical")]
     Canonical = 62,
 
     [Symbol("symbolic")]
     Symbolic = 63,
 
-    [Symbol("symbolic")]
+    [Symbol("symbolic.test")]
     SymbolicTest = Symbolic | Test,
 
     [Symbol("tables")]
