@@ -9,12 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using NK = NumericKind;
-    using TC = System.TypeCode;
-    using NI = NumericIndicator;
-    using NW = NumericWidth;
-    using EK = ClrEnumKind;
-
     partial struct Numeric
     {
         /// <summary>
@@ -22,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static NK kind<T>()
+        public static NumericKind kind<T>()
             => NumericKinds.kind<T>();
     }
 }

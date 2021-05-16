@@ -1413,20 +1413,25 @@ namespace Z0.Asm
             var projects = sln.Projects;
         }
 
-        void CheckResolution()
+        void ResolveMethods()
         {
+            var dst = Db.AppLog("resolved-methods", FS.Log);
+            var running = Wf.EmittingFile(dst);
             var methods = ResolveParts(PartId.GMath, PartId.Cpu, PartId.Math);
             var count = methods.Count;
+            using var writer = dst.Writer();
             for(var i=0u; i<count; i++)
             {
                 var method = methods[i];
-                Wf.Row(method.Format());
+                writer.WriteLine(method.Description);
+
             }
+            Wf.EmittedFile(running, count);
         }
 
         public void Run()
         {
-
+            ResolveMethods();
         }
 
 

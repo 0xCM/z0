@@ -54,5 +54,12 @@ namespace Z0
         public static ref ulong u64<T>(in T src, int offset)
             => ref add(@as<T,ulong>(src), offset);
 
+        [MethodImpl(Inline), Op]
+        public static ulong u64(ReadOnlySpan<byte> src)
+            => first64u(src);
+
+        [MethodImpl(Inline), Op]
+        public static ulong u64(ReadOnlySpan<byte> src, uint offset)
+            => skip64(src, offset);
     }
 }

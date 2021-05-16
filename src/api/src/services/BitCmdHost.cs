@@ -80,6 +80,7 @@ namespace Z0
             ShowBitSeq(w6, log);
         }
 
+
         [MethodImpl(Inline), Op]
         static Span<char> render(byte src, Span<char> dst)
         {

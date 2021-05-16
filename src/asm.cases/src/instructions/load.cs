@@ -20,7 +20,7 @@ namespace Z0.Asm
             root.require(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
             var len = src.Length - 1;
             var bytes = slice(src.View, 1);
-            return Numeric.u32(bytes);
+            return core.u32(bytes);
         }
 
         [Op]

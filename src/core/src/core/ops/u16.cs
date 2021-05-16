@@ -38,5 +38,13 @@ namespace Z0
         public static ref ushort u16<T>(in T src, int offset)
             => ref add(@as<T,ushort>(src), offset);
 
+        [MethodImpl(Inline), Op]
+        public static ushort u16(ReadOnlySpan<byte> src)
+            => first16u(src);
+
+        [MethodImpl(Inline), Op]
+        public static ushort u16(ReadOnlySpan<byte> src, uint offset)
+            => skip16(src, offset);
+
     }
 }

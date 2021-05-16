@@ -4,86 +4,17 @@
 			"path": "."
 		},
 		{
-			"path": "..\\asm.core"
-		}
-        ,
-		{
-			"path": "..\\asm.lang"
-		},
-		{
-			"path": "..\\asm.catalogs"
+			"path": "..\\asm"
 		},
 		{
 			"path": "..\\asm.cases"
 		},
 		{
-			"path": "..\\asm"
+			"path": "..\\asm.core"
+		},
+		{
+			"path": "..\\asm.lang"
 		}
-        ,
-		{
-			"path": "..\\calc"
-		},
-		{
-			"path": "..\\tools"
-		},
-		{
-			"path": "..\\tooling"
-		},
-		{
-			"path": "..\\symbolic"
-		},
-		{
-			"path": "..\\apps"
-		},
-		{
-			"path": "..\\part"
-		},
-		{
-			"path": "..\\workflow"
-		},
-		{
-			"path": "..\\api"
-		},
-		{
-			"path": "..\\gmath"
-		},
-		{
-			"path": "..\\sys"
-		},
-		{
-			"path": "..\\core"
-		},
-		{
-			"path": "..\\cpu"
-		},
-		{
-			"path": "..\\bits"
-		},
-		{
-			"path": "..\\bitpack"
-		},
-		{
-			"path": "..\\check"
-		},
-		{
-			"path": "..\\tables"
-		},
-		{
-			"path": "..\\related"
-		},
-		{
-			"path": "..\\lang"
-		},
-		{
-			"path": "..\\polysource"
-		},
-		{
-			"path": "..\\dynamic"
-        },
-		{
-			"path": "..\\root"
-        },
-
-    ],
+	],
 	"settings": {}
 }

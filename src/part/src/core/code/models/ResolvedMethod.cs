@@ -62,7 +62,7 @@ namespace Z0
             => new ApiMember(Uri, Method, Address);
 
         public string Format()
-            => IsEmpty ? "<empty>" : string.Format("{0}::{1}:{2}:{3}", Address.Format(), Component.Format(), HostType.Format(), Method.Format());
+            => IsEmpty ? "<empty>" : string.Format("{0}::{1}:{2}:{3}", Address.Format(), Component.Format(), HostType.Format(), Method.DisplaySig());
 
 
         public override string ToString()

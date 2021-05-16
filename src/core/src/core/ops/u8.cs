@@ -45,5 +45,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly byte u8(ReadOnlySpan<byte> src)
             => ref first(src);
+
+        [MethodImpl(Inline), Op]
+        public static byte u8(ReadOnlySpan<byte> src, uint offset)
+            => skip(src, offset);
     }
 }

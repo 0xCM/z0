@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
     using static memory;
@@ -24,10 +23,7 @@ namespace Z0
             Data = alloc<Element>(count);
             ref var dst = ref Data.First;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var method = ref skip(src,i);
-                seek(dst,i) = new Element(method.Address, method.Component, method.Format());
-            }
+                seek(dst,i) = new Element(skip(src,i));
             Data.Sort();
         }
 
@@ -63,16 +59,16 @@ namespace Z0
                 Index = index;
             }
 
-            public ref readonly string Description
+            public string Description
             {
                 [MethodImpl(Inline)]
-                get => ref Container.Lookup(Index).Description;
+                get => Container.Lookup(Index).Description;
             }
 
-            public ref readonly MemoryAddress Address
+            public MemoryAddress Address
             {
                 [MethodImpl(Inline)]
-                get => ref Container.Lookup(Index).Address;
+                get => Container.Lookup(Index).Address;
             }
 
             [MethodImpl(Inline), Ignore]
@@ -89,18 +85,27 @@ namespace Z0
 
         internal struct Element : IComparable<Element>
         {
-            public MemoryAddress Address;
+            public ResolvedMethod Method;
 
-            public ClrAssemblyName Component;
+            public MemoryAddress Address
+            {
+                [MethodImpl(Inline)]
+                get => Method.Address;
+            }
 
-            public string Description;
+            public ClrAssemblyName Component
+            {
+                [MethodImpl(Inline)]
+                get => Method.Component;
+            }
+
+            public string Description
+                => Method.Format();
 
             [MethodImpl(Inline)]
-            public Element(MemoryAddress address, ClrAssemblyName component, string desc)
+            public Element(ResolvedMethod method)
             {
-                Address = address;
-                Component = component;
-                Description = desc;
+                Method = method;
             }
 
             [MethodImpl(Inline)]
