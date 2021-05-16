@@ -6,24 +6,25 @@ namespace Z0
 {
     using static PdbServices;
 
+    using Svc = Z0;
     [ApiHost]
     public static partial class XSvc
     {
         [Op]
-        public static ImageMetaPipe ImageMetaPipe(this IWfRuntime wf)
-            => Z0.ImageMetaPipe.create(wf);
+        public static CliPipe CliPipe(this IWfRuntime wf)
+            => Svc.CliPipe.create(wf);
 
         [Op]
         public static MsilPipe MsilPipe(this IWfRuntime wf)
-            => Z0.MsilPipe.create(wf);
+            => Svc.MsilPipe.create(wf);
 
         [Op]
         public static ImageCsvReader ImageCsvReader(this IWfRuntime wf)
-            => Z0.ImageCsvReader.create(wf);
+            => Svc.ImageCsvReader.create(wf);
 
         [Op]
         public static AppModules AppModules(this IWfRuntime wf)
-            => Z0.AppModules.create(wf);
+            => Svc.AppModules.create(wf);
 
         [Op]
         public static PdbSymbolStore PdbSymbolStore(this IWfRuntime wf)
@@ -31,10 +32,10 @@ namespace Z0
 
         [Op]
         public static PdbReader PdbReader(this IWfRuntime wf, in SymbolSource src)
-            => PdbServices.reader(wf,src);
+            => Svc.PdbServices.reader(wf,src);
 
         [Op]
         public static ProcessContextPipe ProcessContextPipe(this IWfRuntime wf)
-            => Z0.ProcessContextPipe.create(wf);
+            => Svc.ProcessContextPipe.create(wf);
     }
 }

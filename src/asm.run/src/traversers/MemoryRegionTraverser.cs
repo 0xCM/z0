@@ -39,7 +39,6 @@ namespace Z0
             return size;
         }
 
-        # if NET5_0_OR_GREATER
         [MethodImpl(Inline), Op]
         public unsafe ByteSize Traverse(delegate* unmanaged<in MemoryRegion,void> dst)
         {
@@ -54,6 +53,5 @@ namespace Z0
             }
             return size;
         }
-        #endif
     }
 }

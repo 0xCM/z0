@@ -10,7 +10,7 @@ namespace Z0
 
     using static core;
 
-    partial class ImageMetaPipe
+    partial class CliPipe
     {
         public void EmitBlobs()
         {

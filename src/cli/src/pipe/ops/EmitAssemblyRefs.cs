@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial class ImageMetaPipe
+    partial class CliPipe
     {
         public FS.FilePath AssemblyRefsPath()
             => Db.IndexTable<AssemblyRefInfo>();

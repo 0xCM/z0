@@ -13,7 +13,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiHost(ApiNames.Cil, true)]
+    [ApiHost]
     public readonly partial struct Cil
     {
         public static ILVisualizer visualizer()

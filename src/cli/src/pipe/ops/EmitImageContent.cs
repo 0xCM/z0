@@ -12,7 +12,7 @@ namespace Z0
     using static memory;
     using static Part;
 
-    partial class ImageMetaPipe
+    partial class CliPipe
     {
         public void ClearImageContent()
         {

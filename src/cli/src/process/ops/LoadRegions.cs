@@ -8,7 +8,6 @@ namespace Z0
     using System.Diagnostics;
 
     using static memory;
-    using static Part;
     using static ProcessMemory;
 
     partial class ProcessContextPipe

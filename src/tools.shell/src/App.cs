@@ -119,7 +119,7 @@ namespace Z0
 
         void EmitDependencyGraph()
         {
-            var svc = Wf.ImageMetaPipe();
+            var svc = Wf.CliPipe();
             var refs = svc.ReadAssemblyRefs();
             var dst = Db.AppLog("dependencies", FS.Dot);
             var flow = Wf.EmittingFile(dst);

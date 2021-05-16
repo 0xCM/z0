@@ -9,7 +9,7 @@ namespace Z0
 
     using static core;
 
-    partial class ImageMetaPipe
+    partial class CliPipe
     {
         public uint EmitMsilMetadata()
             => EmitMsilMetadata(Wf.Components);

@@ -92,7 +92,7 @@ namespace Z0
                 if(options.ProcessCultFiles)
                     Wf.CultProcessor().Run();
 
-                Wf.ImageMetaPipe().EmitMetadaSets(options);
+                Wf.CliPipe().EmitMetadaSets(options);
 
             }
             catch(Exception e)

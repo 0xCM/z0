@@ -18,6 +18,10 @@ namespace Z0
 
     public partial class PeReader : IDisposable
     {
+
+        public static CliRowIndex index(in PeStream state, Handle handle)
+            => new CliToken(state.Reader.GetToken(handle));
+
         readonly FS.FilePath Source;
 
         readonly FileStream Stream;

@@ -26,7 +26,7 @@ namespace Z0
             {
                 var k = ConstantHandle(i);
                 var entry = reader.GetConstant(k);
-                var parent = index(Stream, entry.Parent);
+                var parent = PeReader.index(Stream, entry.Parent);
                 var blob = reader.GetBlobBytes(entry.Value);
                 ref var target = ref seek(dst, i - 1u);
                 target.Sequence = counter++;

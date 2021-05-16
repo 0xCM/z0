@@ -458,7 +458,7 @@ namespace Z0.Asm
 
         void EmitImageHeaders()
         {
-            var svc = ImageMetaPipe.create(Wf);
+            var svc = CliPipe.create(Wf);
             svc.EmitSectionHeaders(WfRuntime.RuntimeArchive(Wf));
         }
 
@@ -659,7 +659,7 @@ namespace Z0.Asm
 
         public void EmitApiImageContent()
         {
-            Wf.ImageMetaPipe().EmitImageContent();
+            Wf.CliPipe().EmitImageContent();
         }
 
 

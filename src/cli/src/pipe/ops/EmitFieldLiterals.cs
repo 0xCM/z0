@@ -8,7 +8,7 @@ namespace Z0
 
     using static core;
 
-    partial class ImageMetaPipe
+    partial class CliPipe
     {
         FS.FolderPath FieldLiteralTarget
             => Wf.Db().TableRoot() + FS.folder(MemberFieldName.TableId);

@@ -4,13 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Reflection;
-    using System.Reflection.Metadata;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
     partial class SRM
     {
         public interface ISrmHeap

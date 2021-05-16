@@ -20,11 +20,9 @@ namespace Z0
         public static MemoryRegionTraverser create(ReadOnlySpan<MemoryRegion> src, bool live)
             => new MemoryRegionTraverser(src, live);
 
-        # if NET5_0_OR_GREATER
         [Op, MethodImpl(Inline)]
-        public static unsafe ByteSize run(RegionTraverser traverser, delegate* unmanaged<in MemoryRegion,void> dst)
+        public static unsafe ByteSize run(MemoryRegionTraverser traverser, delegate* unmanaged<in MemoryRegion,void> dst)
             => traverser.Traverse(dst);
-        # endif
 
         [Op]
         public static unsafe Index<MemoryRegion> filter(ReadOnlySpan<MemoryRegion> src, PageProtection protect)

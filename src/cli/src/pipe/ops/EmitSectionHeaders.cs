@@ -9,7 +9,7 @@ namespace Z0
     using static core;
     using static PeRecords;
 
-    partial class ImageMetaPipe
+    partial class CliPipe
     {
         static ReadOnlySpan<byte> SectionHeaderWidths
             => new byte[9]{60,16,16,12,12,60,16,16,16};
