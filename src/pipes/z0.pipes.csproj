@@ -8,7 +8,7 @@
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(PolySource)" />
+    <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Agents)" />
     <ProjectReference Include="$(Events)" />
   </ItemGroup>

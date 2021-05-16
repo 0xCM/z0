@@ -26,13 +26,13 @@ namespace Z0
             => new ProcessContextPaths(root);
 
         public FS.FileName ProcessPartitionHashFile(string process, Timestamp ts, Identifier subject)
-            => FS.file(string.Format("{0}.{1}.{2}.hashes", TableId.identify<ProcessPartition>(), process, ts.Format()), FS.Csv);
+            => FS.file(string.Format("{0}.{1}.{2}.hashes", Tables.identify<ProcessPartition>(), process, ts.Format()), FS.Csv);
 
         public FS.FilePath ProcessPartitionHashPath(string process, Timestamp ts, Identifier subject)
             => Root + ProcessPartitionHashFile(process, ts, subject);
 
         public FS.FileName ProcessPartitionFile(Process process, Timestamp ts)
-            => FS.file(string.Format("{0}.{1}.{2}", TableId.identify<ProcessPartition>(), process.ProcessName, ts.Format()), FS.Csv);
+            => FS.file(string.Format("{0}.{1}.{2}", Tables.identify<ProcessPartition>(), process.ProcessName, ts.Format()), FS.Csv);
 
         public FS.FilePath ProcessPartitionPath(Process process, Timestamp ts)
             => Root + ProcessPartitionFile(process,ts);
@@ -41,7 +41,7 @@ namespace Z0
             => FS.file(string.Format("memory.hash.detail.{0}.{1}", process, ts.Format()), FS.Csv);
 
         public FS.FileName MemoryRegionFile(Process process, Timestamp ts)
-            => FS.file(string.Format("{0}.{1}.{2}", TableId.identify<MemoryRegion>(), process.ProcessName, ts.Format()), FS.Csv);
+            => FS.file(string.Format("{0}.{1}.{2}", Tables.identify<MemoryRegion>(), process.ProcessName, ts.Format()), FS.Csv);
 
         public FS.FilePath MemoryRegionPath(Process process, Timestamp ts)
             => Root + MemoryRegionFile(process, ts);

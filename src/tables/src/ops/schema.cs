@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial struct Tables
     {
@@ -20,7 +19,7 @@ namespace Z0
             if(count == 0)
                 return RecordSchema.Empty;
 
-            var id = TableId.identify(src);
+            var id = identify(src);
             var specs = sys.alloc<RecordFieldSpec>(count);
             ref var spec = ref first(specs);
             for(ushort i=0; i<count; i++)

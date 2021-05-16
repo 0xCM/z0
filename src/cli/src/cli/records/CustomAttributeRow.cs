@@ -13,9 +13,11 @@ namespace Z0
         {
             public CliRowKey Parent;
 
-            public CliRowKey Type;
+            public CliRowKey Constructor;
 
             public BlobIndex Value;
+
+            public Address32 ValueOffset;
         }
     }
 }

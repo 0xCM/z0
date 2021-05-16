@@ -6,17 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Reflection;
 
     partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct TypeDefRow : ICliRecord<TypeDefRow>
         {
-            public uint Flags;
+            public TypeAttributes Attributes;
 
             public StringIndex Name;
 
             public StringIndex Namespace;
+
+            public TypeLayout Layout;
 
             public int Extends;
 

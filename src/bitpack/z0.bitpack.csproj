@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Cpu)" />
-    <ProjectReference Include="$(PolySource)" />
+    <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 
 </Project>

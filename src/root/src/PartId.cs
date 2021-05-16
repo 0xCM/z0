@@ -54,6 +54,12 @@ public enum PartId : ulong
     [Symbol("polysource")]
     PolySource = 16,
 
+    [Symbol("polyrand")]
+    Polyrand = 15,
+
+    [Symbol("polyrand.test")]
+    PolyrandTest = Polyrand | Test,
+
     [Symbol("digital")]
     Digital = 18,
 
@@ -277,9 +283,6 @@ public enum PartId : ulong
 
     // ~ Test
     // ~ -------------------------------------------------------------------------------
-
-    [Symbol("polyrand.test")]
-    PolyrandTest = PolySource | Test,
 
     [Symbol("logix.test")]
     LogixTest = Logix | Test,

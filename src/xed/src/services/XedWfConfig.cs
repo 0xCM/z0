@@ -11,7 +11,7 @@ namespace Z0
         public XedWfConfig(IWfRuntime wf)
         {
             var db = wf.Db();
-            Source = db.DataSourceDir("xed");
+            Source = db.ExternalDataDir("xed");
             Target = db.TableDir("xed");
         }
 

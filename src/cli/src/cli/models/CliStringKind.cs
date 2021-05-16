@@ -2,13 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.Apps)]
-
-namespace Z0.Parts
-{        
-    public sealed class Apps : Part<Apps>
+namespace Z0
+{
+    public enum CliStringKind : byte
     {
+        None = 0,
 
+        System = 1,
 
+        User = 2
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly partial struct ImageMetadata
+    public readonly struct ImageMetadata
     {
         [Op]
         public static bool valid(FS.FilePath src)

@@ -35,7 +35,7 @@ namespace Z0
             public CliTableKind TableKind => CliTableKind.FieldPtr;
         }
 
-        public readonly struct Field : ICliTableKind<Field,R.FieldRow>
+        public readonly struct Field : ICliTableKind<Field,R.FieldDefRow>
         {
             public CliTableKind TableKind => CliTableKind.Field;
         }

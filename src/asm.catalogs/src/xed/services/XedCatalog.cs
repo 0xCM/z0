@@ -34,11 +34,6 @@ namespace Z0.Asm
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
             Tables.emit(records.View, dst, FormDetail.FieldWidths);
-
-            // using var writer = dst.Writer();
-            // writer.WriteLine(FormDetail.Header);
-            // for(var i=0; i<count; i++)
-            //     writer.WriteLine(skip(src,i).Format());
             Wf.EmittedFile(flow, count);
             return records;
         }
@@ -105,7 +100,7 @@ namespace Z0.Asm
 
 
         public FS.FilePath IDataSourcePath()
-            => Db.DataSource(FS.file("xed-idata", FS.Txt));
+            => Db.ExternalDataPath(FS.file("xed-idata", FS.Txt));
 
         public void EmitSourceAssets()
         {

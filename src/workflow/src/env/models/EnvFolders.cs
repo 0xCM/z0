@@ -112,5 +112,7 @@ namespace Z0
         public const string steps = nameof(steps);
 
         public const string show = nameof(show);
+
+        public const string external = nameof(external);
     }
 }

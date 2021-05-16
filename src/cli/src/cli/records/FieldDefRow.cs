@@ -10,7 +10,7 @@ namespace Z0
     partial struct CliRows
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct FieldRow : ICliRecord<FieldRow>
+        public struct FieldDefRow : ICliRecord<FieldDefRow>
         {
             public FieldAttributes Flags;
 

@@ -2,17 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+[assembly: PartId(PartId.Polyrand)]
+
+namespace Z0.Parts
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
-    public readonly struct DataSource
+    public sealed class Polyrand : Part<Polyrand>
     {
 
+    }
+}
+
+namespace Z0
+{
+    public static partial class XTend
+    {
+    }
+
+    public static partial class XRng
+    {
 
     }
+
+
 }

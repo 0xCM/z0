@@ -9,7 +9,6 @@ namespace Z0
 
     using static EnvFolders;
 
-
     public partial interface IEnvPaths
     {
         Env Env {get;}
@@ -73,15 +72,6 @@ namespace Z0
 
         FS.FolderPath TmpDir<S>(S subject)
             => TmpRoot() + SubjectFolder(subject);
-
-        FS.FolderPath DataSourceRoot()
-            => DbRoot() + FS.folder("sources");
-
-        FS.FilePath DataSource(FS.FileName file)
-            => DataSourceRoot() + file;
-
-        FS.FolderPath DataSourceDir(string id)
-            => DataSourceRoot() + FS.folder(id);
 
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();

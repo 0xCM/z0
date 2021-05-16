@@ -8,8 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.PortableExecutable;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Root;
     using static core;
@@ -17,6 +15,12 @@ namespace Z0
 
     partial class CliReader
     {
-
+        public uint Rows(ReadOnlySpan<MethodDefinitionHandle> src, Span<MethodDefRow> dst)
+        {
+            var count = (uint)root.min(src.Length, dst.Length);
+            for(var i=0; i<count; i++)
+                 Row(skip(src,i), ref seek(dst,i));
+            return count;
+        }
     }
 }

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(PolySource)" />
+    <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitStrings)" />
   </ItemGroup>

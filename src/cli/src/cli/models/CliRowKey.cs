@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
 
     using static Part;
 
@@ -95,6 +96,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CliToken(CliRowKey src)
             => src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliRowKey(Handle src)
+            => Cli.key(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CliRowKey(EntityHandle src)
+            => Cli.key(src);
 
         public static CliRowKey Empty
         {

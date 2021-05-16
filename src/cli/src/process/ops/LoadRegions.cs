@@ -29,7 +29,7 @@ namespace Z0
 
         public Outcome<Index<MemoryRegion>> LoadRegions(FS.FilePath src)
         {
-            var tid = TableId.identify<MemoryRegion>();
+            var tid = Tables.identify<MemoryRegion>();
             var flow = Wf.Running(string.Format("Reading {0} records from {1}", tid, src.ToUri()));
             if(!src.Exists)
                 return (false, FS.Msg.DoesNotExist.Format(src));

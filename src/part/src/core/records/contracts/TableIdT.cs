@@ -18,8 +18,8 @@ namespace Z0
         public TableId(TableId src)
             => Value = src;
 
-        public Name RecordType
-            => Value.RecordType;
+        public Type RecordType
+            => typeof(T);
 
         public Name Identifier
             => Value.Identifier;

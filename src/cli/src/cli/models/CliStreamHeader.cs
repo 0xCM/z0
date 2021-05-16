@@ -12,7 +12,7 @@ namespace Z0
     {
         public Address32 Offset;
 
-        public uint StreamSize;
+        public uint Size;
 
         public ByteBlock32 Name;
     }

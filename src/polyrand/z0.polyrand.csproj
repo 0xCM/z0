@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(PolySource)" />
-    <ProjectReference Include="$(Tools)" />
+    <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 
 </Project>

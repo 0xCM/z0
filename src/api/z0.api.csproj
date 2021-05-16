@@ -15,7 +15,7 @@
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Roslyn)" />
-    <ProjectReference Include="$(PolySource)" />
+    <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 
 </Project>

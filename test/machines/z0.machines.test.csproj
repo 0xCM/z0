@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Agents)" />
 
   </ItemGroup>

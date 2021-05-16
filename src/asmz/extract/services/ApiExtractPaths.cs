@@ -47,6 +47,6 @@ namespace Z0
             => DataRoot() + FS.folder("context");
 
         public FS.FilePath ApiRebasePath(Timestamp ts)
-            => ContextRoot() + FS.file(string.Format("{0}.{1}", TableId.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);
+            => ContextRoot() + FS.file(string.Format("{0}.{1}", Tables.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);
     }
 }

@@ -11,8 +11,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Cli;
-
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct CliHandleData : ITextual, IComparable<CliHandleData>, IEquatable<CliHandleData>
     {
@@ -44,10 +42,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Handle(CliHandleData src)
-            => api.handle(src);
+            => CliReader.handle(src);
 
         [MethodImpl(Inline)]
         public static implicit operator CliHandleData(Handle src)
-            => api.data(src);
+            => CliReader.data(src);
     }
 }

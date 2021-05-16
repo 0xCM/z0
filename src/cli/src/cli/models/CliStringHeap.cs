@@ -37,10 +37,28 @@ namespace Z0
             get => CliHeaps.count(this);
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Size == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Size != 0;
+        }
+
         public string Format()
             => string.Format(memory.range(BaseAddress, Size).Format());
 
         public override string ToString()
             => Format();
+
+        public static CliStringHeap Empty
+        {
+            [MethodImpl(Inline)]
+            get => new CliStringHeap(0,0,0);
+        }
     }
 }

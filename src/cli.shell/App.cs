@@ -9,11 +9,13 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static CliRows;
+    using K = CliTableKinds;
 
     class App : WfApp<App>
     {
         public static void Main(params string[] args)
-            => run(args, PartId.CliShell, PartId.Cli, PartId.Part);
+            => run(args, PartId.CliShell, PartId.Cli, PartId.Part, PartId.Cpu);
 
 
         public App()
@@ -38,10 +40,10 @@ namespace Z0
             ApiKeyChecks.create(Wf).Run();
         }
 
-        public void Test6(PartId part)
+        public void CollectSystemStrings(PartId part)
         {
             Reader(part, out var reader);
-            var strings = reader.ReadSystemStrings();
+            var strings = reader.ReadStrings(CliStringKind.System);
             var count = strings.Length;
             for(var i=0; i<count; i++)
             {
@@ -50,11 +52,14 @@ namespace Z0
             }
         }
 
+        CliReader Reader(Assembly src)
+            => Cli.reader(src);
+
         bool Reader(PartId part, out CliReader dst)
         {
             if(Wf.ApiCatalog.FindComponent(part, out var component))
             {
-                dst = Cli.reader(component);
+                dst = Reader(component);
                 return true;
             }
             else
@@ -64,11 +69,28 @@ namespace Z0
             }
         }
 
+        ReadOnlySpan<Assembly> ApiComponents
+            => Wf.ApiCatalog.Components;
+
+        void ReadMethodDefs()
+        {
+            var components = ApiComponents;
+            var count = components.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var component = ref skip(components,i);
+                var source = Cli.source(component);
+                var provider = MethodDefProvider.create();
+                var rows = provider.Load(source.TableSouce<MethodDefRow>());
+                Wf.Status(string.Format("Read {0} rows", rows.Length));
+            }
+        }
+
 
         protected override void Run()
         {
             var flow = Wf.Running();
-
+            ReadMethodDefs();
             Wf.Ran(flow);
         }
     }

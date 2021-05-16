@@ -16,7 +16,7 @@ namespace Z0
     {
         protected RecordPipe(byte fieldwidth = 32)
         {
-            TableId = TableId.identify<T>();
+            TableId = Tables.identify<T>();
             Fields = Tables.fields<T>();
             FieldCount = Fields.Count;
             Formatter = Tables.formatter<T>(fieldwidth);

@@ -5,28 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
-    using System.Reflection.PortableExecutable;
     using System.Reflection.Metadata.Ecma335;
-
-    using static Root;
-    using static core;
-    using static CliRows;
-
-    public enum CliStringKind : byte
-    {
-        None = 0,
-
-        System = 1,
-
-        User = 2
-    }
 
     partial class CliReader
     {
-        public ReadOnlySpan<string> ReadUserStrings()
+        public ReadOnlySpan<string> ReadStrings(CliStringKind kind)
+            => kind switch {
+                CliStringKind.User => ReadUserStrings(),
+                CliStringKind.System => ReadSystemStrings(),
+                _ => default
+            };
+
+        ReadOnlySpan<string> ReadUserStrings()
         {
             int size = HeapSize(HeapIndex.UserString);
             if (size == 0)
@@ -44,7 +34,7 @@ namespace Z0
             return values.ViewDeposited();
         }
 
-        public ReadOnlySpan<string> ReadSystemStrings()
+        ReadOnlySpan<string> ReadSystemStrings()
         {
             int size = HeapSize(HeapIndex.String);
             if (size == 0)

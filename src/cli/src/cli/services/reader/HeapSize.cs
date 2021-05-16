@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
-    partial struct Cli
+    partial class CliReader
     {
         [MethodImpl(Inline), Op]
-        public static CliHandleData data(Handle src)
-            => @as<Handle,CliHandleData>(src);
+        public ByteSize HeapSize(HeapIndex index)
+            => MD.GetHeapSize(index);
     }
 }

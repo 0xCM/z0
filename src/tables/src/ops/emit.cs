@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     using F = EnumDatasetField;
 
@@ -26,23 +25,6 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
                 writer.WriteLine(EnumDatasets.format(src[i],buffer));
         }
-
-        // public static Count emit<T>(DynamicRows<T> src, FS.FilePath dst, RowFormatSpec spec)
-        //     where T : struct, IRecord<T>
-        // {
-        //     var count = src.Count;
-        //     var data = src.View;
-        //     using var writer = dst.Writer();
-        //     writer.WriteLine(format(spec.Header));
-        //     var buffer = text.buffer();
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         render(skip(data,i), spec, buffer);
-        //         writer.WriteLine(buffer.Emit());
-        //     }
-
-        //     return count;
-        // }
 
         public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, RowFormatSpec spec)
             where T : struct, IRecord<T>

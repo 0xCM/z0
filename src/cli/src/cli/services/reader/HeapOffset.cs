@@ -8,12 +8,9 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.PortableExecutable;
     using System.Reflection.Metadata.Ecma335;
 
     using static Root;
-    using static core;
-    using static CliRows;
 
     partial class CliReader
     {
@@ -32,5 +29,27 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public Address32 HeapOffset(GuidHandle handle)
             => (Address32)MD.GetHeapOffset(handle);
+
+        public ReadOnlySpan<Address32> HeapOffsets(CliHeapKind kind)
+        {
+            switch(kind)
+            {
+                case CliHeapKind.UserString:
+                break;
+
+                case CliHeapKind.Blob:
+                break;
+
+                case CliHeapKind.Guid:
+                break;
+
+                case CliHeapKind.String:
+                break;
+
+            }
+
+            return default;
+        }
+
     }
 }

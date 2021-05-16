@@ -30,14 +30,14 @@ namespace Z0
                     a => new TableId(src, a.TableId),
                     () => new TableId(src, src.Name));
 
-        public Name RecordType {get;}
+        public Type RecordType {get;}
 
         public Name Identifier {get;}
 
         [MethodImpl(Inline)]
         public TableId(Type shape, string name)
         {
-            RecordType = name;
+            RecordType = shape;
             Identifier = name;
         }
 

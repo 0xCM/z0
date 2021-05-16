@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial struct Tables
     {

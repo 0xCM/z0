@@ -13,15 +13,10 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static CliRows;
 
     [ApiHost]
     public unsafe partial class CliReader
     {
-        [MethodImpl(Inline), Op]
-        public static ManifestResourceHandle reshandle(uint row)
-            => MetadataTokens.ManifestResourceHandle((int)row);
-
         readonly MetadataReader MD;
 
         readonly MemorySeg Segment;
@@ -66,27 +61,6 @@ namespace Z0
             get => memory.view<byte>(Segment);
         }
 
-
-        [MethodImpl(Inline), Op]
-        public ByteSize HeapSize(HeapIndex index)
-            => MD.GetHeapSize(index);
-
-        [Op]
-        public CliGuidHeap GuidHeap()
-        {
-            var offset = HeapOffset(MetadataTokens.GuidHandle(0));
-            var @base = Segment.BaseAddress + offset;
-            return new CliGuidHeap(@base, HeapSize(HeapIndex.Guid));
-        }
-
-        [Op]
-        public CliBlobHeap BlobHeap()
-        {
-            var offset = HeapOffset(MetadataTokens.BlobHandle(0));
-            var @base = Segment.BaseAddress + offset;
-            return new CliBlobHeap(@base, HeapSize(HeapIndex.Blob));
-        }
-
         [Op]
         public CliBlob ReadBlobDescription(BlobHandle handle, Count seq)
         {
@@ -127,18 +101,6 @@ namespace Z0
 
             return values.ToArray();
         }
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<AssemblyReferenceHandle> AssemblyRefHandles()
-            => MD.AssemblyReferences.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
-        public NamespaceDefinition NamespaceRoot()
-            => MD.GetNamespaceDefinitionRoot();
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<ManifestResourceHandle> ResourceHandles()
-            => MD.ManifestResources.ToReadOnlySpan();
 
         public Index<CliUserString> ReadUserStringInfo()
         {

@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface ITableId : ITextual
     {
-        Name RecordType {get;}
+        Type RecordType {get;}
 
         Name Identifier {get;}
 

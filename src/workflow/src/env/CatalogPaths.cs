@@ -29,11 +29,11 @@ namespace Z0
 
         FS.FilePath CatalogTable<T>(Identifier catalog)
             where T : struct, IRecord<T>
-                => CatalogTable(catalog, Z0.TableId.identify<T>());
+                => CatalogTable(catalog, Tables.identify<T>());
 
         FS.FilePath CatalogTable<T>(Identifier catalog, Identifier subject)
             where T : struct, IRecord<T>
-                => CatalogTable(catalog, Z0.TableId.identify<T>(), subject);
+                => CatalogTable(catalog, Tables.identify<T>(), subject);
 
         FS.FilePath AsmCatalogTable<T>()
             where T : struct, IRecord<T>

@@ -22,5 +22,4 @@ namespace Z0
 
         public BinaryCode Data;
     }
-
 }

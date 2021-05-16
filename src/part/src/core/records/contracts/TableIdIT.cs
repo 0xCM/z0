@@ -24,8 +24,8 @@ namespace Z0
             Index = index;
         }
 
-        public Name RecordType
-            => Value.RecordType;
+        public Type RecordType
+            => typeof(T);
 
         public Name Identifier
             => Value.Identifier;

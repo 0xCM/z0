@@ -8,8 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.PortableExecutable;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Root;
     using static core;
@@ -54,6 +52,14 @@ namespace Z0
             => MD.GetMemberReference(src);
 
         [MethodImpl(Inline), Op]
+        public NamespaceDefinition Read(NamespaceDefinitionHandle src)
+            => MD.GetNamespaceDefinition(src);
+
+        [MethodImpl(Inline), Op]
+        public Parameter Read(ParameterHandle src)
+            => MD.GetParameter(src);
+
+        [MethodImpl(Inline), Op]
         public PropertyDefinition Read(PropertyDefinitionHandle src)
             => MD.GetPropertyDefinition(src);
 
@@ -64,10 +70,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public TypeReference Read(TypeReferenceHandle src)
             => MD.GetTypeReference(src);
-
-        [MethodImpl(Inline), Op]
-        public NamespaceDefinition Read(NamespaceDefinitionHandle src)
-            => MD.GetNamespaceDefinition(src);
 
         [MethodImpl(Inline), Op]
         public BinaryCode Read(BlobHandle src)
@@ -81,18 +83,10 @@ namespace Z0
         public string Read(StringHandle src)
             => MD.GetString(src);
 
-        [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<MethodDefinitionHandle> src, Span<MethodDefRow> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                 seek(dst,i) = Row(skip(src,i));
-        }
 
         [MethodImpl(Inline), Op]
         public void Read(Index<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
             => src.Iter(handle => dst(MD.GetCustomAttribute(handle)));
-
 
         [MethodImpl(Inline), Op]
         public void Read(ReadOnlySpan<TypeDefinitionHandle> src, Span<TypeDefinition> dst)
