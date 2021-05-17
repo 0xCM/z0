@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static Widths;
 
-    partial struct memory
+    partial struct core
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T read<T>(ReadOnlySpan<byte> src)
@@ -106,7 +107,6 @@ namespace Z0
             else
                 return u8(src);
         }
-
 
         [MethodImpl(Inline), Op]
         public static uint read(W24 w, ReadOnlySpan<byte> src, uint offset)

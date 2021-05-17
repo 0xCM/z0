@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     public readonly struct PageBlockInfo : ITextual, IComparable<PageBlockInfo>
     {

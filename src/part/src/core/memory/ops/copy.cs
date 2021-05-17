@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void copy<T>(MemoryRange src, Span<T> dst)
             where T : unmanaged
-                => reader<T>(src).ReadAll(dst);
+                => MemoryReader.create<T>(src).ReadAll(dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint copy<T>(Span<T> src, Span<T> dst)

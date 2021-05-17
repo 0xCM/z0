@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock1 : IDataBlock<ByteBlock1>

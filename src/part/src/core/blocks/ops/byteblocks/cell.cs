@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class ByteBlocks
     {
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref ByteBlock8 src, int index)
             where T : unmanaged
-                => ref memory.add(first<T>(ref src), index);
+                => ref core.add(first<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref ByteBlock16 src, int index)
             where T : unmanaged
-                => ref memory.add(first<T>(ref src), index);
+                => ref core.add(first<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref ByteBlock32 src, int index)
             where T : unmanaged
-                => ref memory.add(first<T>(ref src), index);
+                => ref core.add(first<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref ByteBlock64 src, int index)
             where T : unmanaged
-                => ref memory.add(first<T>(ref src), index);
+                => ref core.add(first<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -64,6 +64,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref ByteBlock128 src, int index)
             where T : unmanaged
-                => ref memory.add(first<T>(ref src), index);
+                => ref core.add(first<T>(ref src), index);
     }
 }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a stream reader (of sorts) over a sequence of pointer-identified unmanaged values
@@ -22,10 +22,10 @@ namespace Z0
         MemoryReaderState<T> State;
 
         [MethodImpl(Inline)]
-        internal MemoryReader(T* pSrc, int length)
+        internal MemoryReader(T* pSrc, int count)
         {
             Source = pSrc;
-            State = new MemoryReaderState<T>(length, 0);
+            State = new MemoryReaderState<T>(count, 0);
         }
 
         /// <summary>

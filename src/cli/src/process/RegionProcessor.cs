@@ -78,7 +78,7 @@ namespace Z0
             {
                 var selector = src.StartAddress.Quadrant(n2);
                 var @base = src.StartAddress.Lo;
-                var size = (uint)(src.EndAddress - src.StartAddress);
+                var size = (uint)(src.EndAddress - src.StartAddress + 1);
                 var sidx = (ushort)Index(selector);
                 Bases[sidx].Add(root.paired(@base, size));
                 ref var segment = ref _Segments[index];
@@ -87,6 +87,7 @@ namespace Z0
                 segment.SelectorIndex = sidx;
                 segment.Base = @base;
                 segment.Size = size;
+                segment.PageCount = size/PageSize;
                 segment.Target = ((ulong)segment.Selector << 32) + ((uint)segment.Base + size);
                 segment.Type = src.Type;
                 segment.Protection = src.Protection;

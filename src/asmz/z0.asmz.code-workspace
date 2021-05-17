@@ -26,6 +26,15 @@
 		},
 		{
 			"path": "..\\related"
+		},
+		{
+			"path": "..\\core"
+		},
+		{
+			"path": "..\\root"
+		},
+		{
+			"path": "..\\cpu"
 		}
 	],
 	"settings": {}

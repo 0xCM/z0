@@ -17,26 +17,31 @@ namespace Z0
         /// <summary>
         /// 2^0 = 1
         /// </summary>
+        [Symbol("2^0")]
         P2ᐞ00 = K.T00,
 
         /// <summary>
         /// 2^1 = 2
         /// </summary>
+        [Symbol("2^1")]
         P2ᐞ01 = K.T01,
 
         /// <summary>
         /// 2^2 = 4
         /// </summary>
+        [Symbol("2^2")]
         P2ᐞ02 = K.T02,
 
         /// <summary>
         /// 2^3 = 8
         /// </summary>
+        [Symbol("2^3")]
         P2ᐞ03 = K.T03,
 
         /// <summary>
         /// 2^4 = 16
         /// </summary>
+        [Symbol("2^4")]
         P2ᐞ04 = K.T04,
 
         /// <summary>
@@ -70,17 +75,17 @@ namespace Z0
         P2ᐞ10 = K.T10,
 
         /// <summary>
-        /// 2^11 = 2048
+        /// 2^11 = 2,048
         /// </summary>
         P2ᐞ11 = K.T11,
 
         /// <summary>
-        /// 2^12 = 4096
+        /// 2^12 = 4,096
         /// </summary>
         P2ᐞ12 = K.T12,
 
         /// <summary>
-        /// 2^13 = 8192
+        /// 2^13 = 8,192
         /// </summary>
         P2ᐞ13 = K.T13,
 

@@ -9,6 +9,11 @@ namespace Windows
     public enum PageProtection : uint
     {
         /// <summary>
+        /// Unspecified
+        /// </summary>
+        Unknown = 0,
+
+        /// <summary>
         /// Disables all access to the committed region of pages. An attempt to read from, write to, or execute the committed region results in an access violation.
         /// </summary>
         NoAccess = 0x01,

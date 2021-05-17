@@ -19,6 +19,11 @@ namespace Z0
         public const string EmptyString = "";
 
         /// <summary>
+        /// The number of bytes in a page of memory
+        /// </summary>
+        public const ushort PageSize = 0x1000;
+
+        /// <summary>
         /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
         /// </summary>
         public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;

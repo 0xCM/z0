@@ -12,7 +12,7 @@ namespace Z0
     {
         [Op]
         public static Allocation memalloc(ByteSize size)
-            => new Allocation(GCHandle.Alloc(new byte[size]), size);
+            => new Allocation(GCHandle.Alloc(new byte[size], GCHandleType.Pinned), size);
 
         [Op, Closures(Closure)]
         public static Allocation<T> memalloc<T>(ulong count)

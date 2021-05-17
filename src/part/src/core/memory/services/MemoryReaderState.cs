@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     unsafe struct MemoryReaderState<T>
     {
@@ -16,10 +17,26 @@ namespace Z0
         public int Position;
 
         [MethodImpl(Inline)]
-        internal MemoryReaderState(int length, int position)
+        internal MemoryReaderState(int count, int pos)
         {
-            CellCount = length;
-            Position = position;
+            CellCount = count;
+            Position = pos;
+        }
+
+        [MethodImpl(Inline)]
+        internal MemoryReaderState(uint count, uint pos)
+        {
+            CellCount = (int)count;
+            Position = (int)pos;
+        }
+
+        [MethodImpl(Inline)]
+        public MemoryReaderState<S> Covert<S>()
+            where S : unmanaged
+        {
+            var bytes = (uint)CellCount*size<T>();
+            var pos = (uint)Position*size<T>();
+            return new MemoryReaderState<S>(bytes/size<S>(), pos/size<S>());
         }
 
         /// <summary>

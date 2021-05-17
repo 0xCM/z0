@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
     using Windows;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct ProcessSegment : IRecord<ProcessSegment>
+    public struct ProcessSegment : IComparableRecord<ProcessSegment>
     {
         public const string TableId = "process.segments";
 
@@ -21,7 +22,9 @@ namespace Z0
 
         public Address32 Base;
 
-        public uint Size;
+        public ByteSize Size;
+
+        public uint PageCount;
 
         public MemoryAddress Target;
 
@@ -30,5 +33,9 @@ namespace Z0
         public PageProtection Protection;
 
         public utf8 Label;
+
+        public int CompareTo(ProcessSegment src)
+            => Target.CompareTo(src.Target);
+
     }
 }

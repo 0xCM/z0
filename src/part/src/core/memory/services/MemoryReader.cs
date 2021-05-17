@@ -7,20 +7,34 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
-    [ApiHost(ApiNames.MemoryReader, true)]
+    [ApiHost]
     public unsafe struct MemoryReader
     {
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public unsafe static MemoryReader<T> create<T>(MemoryRange src)
+            where T : unmanaged
+                => new MemoryReader<T>(src.Min.Pointer<T>(), src.Size/size<T>());
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public unsafe static MemoryReader<T> create<T>(T* pSrc, int count)
+            where T : unmanaged
+                => new MemoryReader<T>(pSrc, count);
+
+        [MethodImpl(Inline), Op]
+        public unsafe static MemoryReader create(byte* pSrc, ByteSize size)
+            => new MemoryReader(pSrc, size);
+
         readonly byte* Source;
 
         MemoryReaderState<byte> State;
 
         [MethodImpl(Inline)]
-        internal MemoryReader(byte* pSrc, int length)
+        internal MemoryReader(byte* pSrc, int count)
         {
-            State = new MemoryReaderState<byte>(length,0);
+            State = new MemoryReaderState<byte>(count, 0);
             Source = pSrc;
         }
 

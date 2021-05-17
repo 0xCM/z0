@@ -10,12 +10,14 @@ namespace Z0
     using System.Diagnostics;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.IO;
+    using Windows;
 
     using Z0.Asm;
 
-    using static Part;
-    using static memory;
-    using static ProcessMemory;
+    using static Root;
+    using static core;
+    using static TypeLevel;
 
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>
@@ -59,7 +61,6 @@ namespace Z0
             Receivers = new ApiExtractReceipt();
             HostDatasets = new();
             Paths = new ApiExtractPaths(Db.AppLogRoot());
-
         }
 
         void Run3()
@@ -82,13 +83,70 @@ namespace Z0
         FS.FolderPath SegDir
             => Db.TableDir("segments");
 
-        AddressBank LogSegmentBank(uint step)
+        Index<ProcessMemoryRegion> LogRegions(uint step)
         {
             var regions = ImageMemory.regions();
             TableEmit(regions.View, Db.Table<ProcessMemoryRegion>(SegDir, step.ToString()));
+            return regions;
+        }
+
+        AddressBank LogSegments(uint step)
+        {
+            var bank = ImageMemory.bank(Wf, LogRegions(step));
+            TableEmit(bank.Segments, Db.Table<ProcessSegment>(SegDir, step.ToString()));
+            return bank;
+        }
+
+        AddressBank LogSegments(uint step, ReadOnlySpan<ProcessMemoryRegion> regions)
+        {
             var bank = ImageMemory.bank(Wf, regions);
             TableEmit(bank.Segments, Db.Table<ProcessSegment>(SegDir, step.ToString()));
             return bank;
+        }
+
+        static bool readable(PageProtection src, MemState state)
+            => (src == PageProtection.Readonly
+            || src == PageProtection.ExecuteRead
+            || src == PageProtection.ExecuteReadWrite
+            || src == PageProtection.ReadWrite) && state == MemState.Committed;
+
+        unsafe ByteSize Traverse(ReadOnlySpan<ProcessMemoryRegion> src, BinaryWriter dst)
+        {
+            var count = src.Length;
+            var total = ByteSize.Zero;
+            MemoryAddress procbase = root.process().Handle.ToPointer();
+            var flow = Wf.Running(string.Format("Traversing memory regions above the process base address {0}", procbase));
+            var accessible = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var region = ref skip(src,i);
+                var @base = region.StartAddress;
+                if(@base < procbase)
+                    continue;
+
+                var description = string.Format("[{0},{1}]({2})", region.StartAddress, region.StartAddress + region.Size, (ByteSize)region.Size);
+                if(readable(region.Protection, region.State))
+                {
+                    accessible++;
+                    var traversing = Wf.Running(string.Format("Traversing {0}", description));
+                    var reader = MemoryReader.create(@base.Pointer<byte>(), region.Size);
+                    var storage = z8;
+                    var traversed = ByteSize.Zero;
+                    while(reader.Read(ref storage))
+                    {
+                        dst.Write(storage);
+                        traversed++;
+                    }
+
+                    Wf.Ran(traversing, string.Format("Traversed {0} bytes from {1}", traversed, description));
+                    total += traversed;
+                }
+                else
+                    Wf.Babble(string.Format("The region {0} is not accessible", description));
+            }
+
+            Wf.Ran(flow, string.Format("Traversed {0} bytes from {1} accessible regions", total, accessible));
+            return total;
         }
 
         Index<ResolvedMethodInfo> LogResolutions(ReadOnlySpan<ResolvedPart> src)
@@ -116,10 +174,12 @@ namespace Z0
             public utf8 Uri;
         }
 
-        Index<MethodBankEntry> Locate(AddressBank src, ReadOnlySpan<ResolvedMethodInfo> methods)
+        Index<ProcessSegment> Locate(AddressBank src, ReadOnlySpan<ResolvedMethodInfo> methods)
         {
             var count = methods.Length;
             var buffer = sys.alloc<MethodBankEntry>(count);
+            var locations = root.hashset<ProcessSegment>();
+            var segments  = src.Segments;
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
             {
@@ -149,14 +209,14 @@ namespace Z0
                     if(between(match, @base.Left,@base.Left + @base.Right))
                     {
                         entry.SegmentIndex = j;
+                        locations.Add(skip(segments,j));
                     }
                 }
-
             }
 
             TableEmit(buffer, Db.Table<MethodBankEntry>(SegDir));
 
-            return buffer;
+            return locations.Array().Sort();
         }
 
         [MethodImpl(Inline)]
@@ -178,14 +238,59 @@ namespace Z0
             return buffer;
         }
 
+        unsafe void Emit(ReadOnlySpan<ProcessSegment> src)
+        {
+            var count = src.Length;
+            var running = Wf.Running(string.Format("Emitting {0} process segments", count));
+            var total = ByteSize.Zero;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var segment = ref skip(src,i);
+                if(segment.Protection == PageProtection.NoAccess)
+                    continue;
+
+                var description = string.Format("[{0},{1}]({2}/{3} pages)", segment.Target, segment.Target + segment.Size, (ByteSize)segment.Size, segment.PageCount);
+                Wf.Row(description);
+
+                // var reader = MemoryReader.create(segment.Target.Pointer<byte>(), segment.Size);
+                // var storage = z8;
+                // while(reader.Read(ref storage))
+                // {
+                //     total++;
+                // }
+            }
+
+            Wf.Ran(running, total);
+        }
+
+        unsafe ByteSize Emit(in ProcessSegment src)
+        {
+            var total = 0u;
+            var pages = src.PageCount;
+            var buffer = default(PageBlock);
+            var pSrc = src.Target.Pointer<byte>();
+            for(var i=0; i<pages; i++)
+            {
+                MemoryPages.ReadLo(pSrc, ref buffer);
+                MemoryPages.ReadHi(pSrc, ref buffer);
+                pSrc += PageSize;
+                total += PageSize;
+            }
+            return total;
+        }
+
         public void Run()
         {
             SegDir.Clear();
-            var b0 = LogSegmentBank(0);
+            var b0 = LogSegments(0);
             var catalog = ResolveCatalog();
             var descriptions = LogResolutions(catalog);
-            var b1 = LogSegmentBank(1);
-            var entries = Locate(b1, descriptions);
+            var regions = LogRegions(1);
+            var b1 = LogSegments(1, regions);
+            var segments = Locate(b1, descriptions);
+            var path = Db.AppLog("regions", FS.Bin);
+            var writer = path.BinaryWriter();
+            Traverse(regions,writer);
 
             //HostDatasets.Clear();
             // Paths.Root.Clear(true);

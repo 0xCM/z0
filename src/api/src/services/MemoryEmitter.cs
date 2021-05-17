@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static memory;
+    using static Root;
+    using static core;
 
     [Service(typeof(IMemoryEmitter))]
     public class MemoryEmitter : AppService<MemoryEmitter>, IMemoryEmitter
@@ -99,7 +100,7 @@ namespace Z0
             memory.liberate(src);
             var buffer = span<byte>(PageSize);
             var pages = (uint)(src.Size/PageSize);
-            var reader = memory.reader<byte>(src);
+            var reader = MemoryReader.create<byte>(src);
             var offset = 0ul;
             var @base = src.Min;
 
