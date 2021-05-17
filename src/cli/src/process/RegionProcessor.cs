@@ -10,34 +10,7 @@ namespace Z0
 
     using static Part;
     using static ProcessMemory;
-
-    public readonly struct AddressBank
-    {
-        readonly Index<Address16> Selectors;
-
-        readonly Index<List<Paired<Address32,uint>>> Bases;
-
-        internal AddressBank(Index<Address16> selectors, Index<List<Paired<Address32,uint>>> bases)
-        {
-            Selectors = selectors;
-            Bases =  bases;
-        }
-
-        public uint SegmentCount
-        {
-            [MethodImpl(Inline)]
-            get => Selectors.Count;
-        }
-
-        public ReadOnlySpan<Paired<Address32,uint>> Segment(uint index)
-        {
-            return Bases[index].ViewDeposited();
-        }
-
-        [MethodImpl(Inline)]
-        public Address16 Selector(uint index)
-            => Selectors[index];
-    }
+    using static core;
 
     public sealed class RegionProcessor : SpanProcessor<RegionProcessor,MemoryRegion>
     {
@@ -45,23 +18,26 @@ namespace Z0
 
         List<List<Paired<Address32,uint>>> Bases;
 
-        AddressBank _Product;
+        Index<SegmentSelection> _Selection;
 
-        protected override void Complete()
-        {
-            _Product = new AddressBank(Selectors.ToArray(), Bases.ToArray());
-        }
-
-        public ref readonly AddressBank Product
-        {
-            [MethodImpl(Inline)]
-            get => ref _Product;
-        }
+        AddressBank _Bank;
 
         public RegionProcessor()
         {
             Selectors = new();
             Bases = new();
+            _Selection = new();
+        }
+
+        protected override void Complete()
+        {
+            _Bank = new AddressBank(Selectors.ToArray(), Bases.ToArray());
+        }
+
+        public ref readonly AddressBank Bank
+        {
+            [MethodImpl(Inline)]
+            get => ref _Bank;
         }
 
         int Index(Address16 selector)
@@ -76,13 +52,39 @@ namespace Z0
             return index;
         }
 
-        void Add(Address16 selector, Address32 @base, uint size)
-            => Bases[Index(selector)].Add(root.paired(@base, size));
+        public Index<SegmentSelection> Selection
+            => _Selection;
 
-        protected override void Process(uint index, in MemoryRegion src)
+        protected override uint Process(ReadOnlySpan<MemoryRegion> src)
         {
+            var count = (uint)src.Length;
+            _Selection = core.alloc<SegmentSelection>(count);
+            for(var i=0u; i<count; i++)
+                Include(i,skip(src,i));
+            return count;
+        }
+
+        void Add(uint index, utf8 label, Address16 selector, Address32 @base, uint offset)
+        {
+            var sidx = (ushort)Index(selector);
+            Bases[sidx].Add(root.paired(@base, offset));
+            ref var selection = ref _Selection[index];
+            selection.Index = index;
+            selection.Selector = selector;
+            selection.SelectorIndex = sidx;
+            selection.Base = @base;
+            selection.Offset = offset;
+            selection.Target = ((ulong)selection.Selector << 32) + ((ulong)selection.Base + (ulong)selection.Offset);
+            selection.Label = label;
+        }
+
+        void Include(uint index, in MemoryRegion src)
+        {
+            var id = src.Identity.Format();
+            if(text.empty(id))
+                id = src.FullIdentity;
             if(src.Type != 0 && src.Protection != 0)
-                Add(src.BaseAddress.Quadrant(n2), src.BaseAddress.Lo, (uint)(src.EndAddress - src.BaseAddress));
+                Add(index, id, src.BaseAddress.Quadrant(n2), src.BaseAddress.Lo, (uint)(src.EndAddress - src.BaseAddress));
         }
     }
 }

@@ -89,5 +89,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(ulong src)
             => chars(base10, src);
+
+        [MethodImpl(Inline), Op]
+        public static void chars(ReadOnlySpan<BinaryDigit> src, Span<char> dst)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = ((bit)skip(src,i)).ToChar();
+        }
    }
 }

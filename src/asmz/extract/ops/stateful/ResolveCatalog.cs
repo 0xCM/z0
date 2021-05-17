@@ -22,5 +22,8 @@ namespace Z0
 
             return dst.Close();
         }
+
+        ReadOnlySpan<ResolvedPart> ResolveCatalog()
+            => ResolveCatalog(Wf.ApiCatalog);
     }
 }

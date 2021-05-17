@@ -9,7 +9,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Popcnt;
     using static System.Runtime.Intrinsics.X86.Popcnt.X64;
-    using static Part;
+    using static Root;
 
     partial class Bits
     {

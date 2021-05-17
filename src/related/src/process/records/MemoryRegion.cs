@@ -10,6 +10,27 @@ namespace Z0
     partial struct ProcessMemory
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct SegmentSelection : IRecord<SegmentSelection>
+        {
+            public const string TableId = "segments.selection";
+
+            public uint Index;
+
+            public Address16 Selector;
+
+            public ushort SelectorIndex;
+
+            public Address32 Base;
+
+            public Address32 Offset;
+
+            public MemoryAddress Target;
+
+            public utf8 Label;
+
+        }
+
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct MemoryRegion : IRecord<MemoryRegion>
         {
             public const string TableId = "image.memory.regions";

@@ -61,6 +61,7 @@ namespace Z0
             get => memory.view<byte>(Segment);
         }
 
+
         [Op]
         public CliBlob ReadBlobDescription(BlobHandle handle, Count seq)
         {

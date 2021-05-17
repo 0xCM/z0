@@ -143,7 +143,7 @@ namespace Z0
             var regions = LoadRegions();
             var worker = RegionProcessor.create(Wf);
             worker.Submit(regions);
-            ref readonly var product = ref worker.Product;
+            ref readonly var product = ref worker.Bank;
             var count = product.SegmentCount;
             var dst = root.datalist<AddressBankEntry>();
             var total = 0ul;

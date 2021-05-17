@@ -15,6 +15,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static ProcessMemory;
 
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>
@@ -58,6 +59,7 @@ namespace Z0
             Receivers = new ApiExtractReceipt();
             HostDatasets = new();
             Paths = new ApiExtractPaths(Db.AppLogRoot());
+
         }
 
         void Run3()
@@ -77,11 +79,55 @@ namespace Z0
             Wf.Ran(flow, string.Format("Extracted {0} host routines from {1} parts", counter, selected.Count));
         }
 
+        Index<SegmentSelection> LogSegmentSelection(uint step)
+        {
+            var regions = ImageMemory.regions();
+            TableEmit(regions.View, Db.IndexTable<MemoryRegion>(string.Format("regions.{0}", step)));
+            var selection = ImageMemory.selection(Wf,regions);
+            TableEmit(selection.View, Db.IndexTable<SegmentSelection>(step.ToString()));
+            return selection;
+        }
+
+        void LogResolutions(ReadOnlySpan<ResolvedPart> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(src,i);
+                LogResolutions(part);
+            }
+        }
+
+        void LogResolutions(in ResolvedPart src)
+        {
+            var hosts = src.Hosts.View;
+            var count = hosts.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var host = ref skip(hosts,i);
+            }
+        }
+
+        void LogResolutions(in ResolvedHost src)
+        {
+            var methods = src.Methods.View;
+            var count = methods.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var method = ref skip(methods,i);
+
+            }
+        }
         public void Run()
         {
-            HostDatasets.Clear();
-            Paths.Root.Clear(true);
-            Run3();
+            var s0 = LogSegmentSelection(0);
+            var catalog = ResolveCatalog();
+            LogResolutions(catalog);
+            var s1 = LogSegmentSelection(1);
+
+            //HostDatasets.Clear();
+            // Paths.Root.Clear(true);
+            // Run3();
         }
 
         public void Run(ApiExtractReceipt receivers, FS.FolderPath? dst = null)

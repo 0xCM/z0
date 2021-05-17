@@ -12,47 +12,20 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Part;
+    using static core;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free, ApiHost]
     public unsafe partial class SRM
     {
-        readonly struct COR20Constants
-        {
-            public const int SizeOfCorHeader = 72;
-
-            public const uint COR20MetadataSignature = 0x424A5342;
-
-            public const int MinimumSizeofMetadataHeader = 16;
-
-            public const int SizeofStorageHeader = 4;
-
-            public const int MinimumSizeofStreamHeader = 8;
-
-            public const string StringStreamName = "#Strings";
-
-            public const string BlobStreamName = "#Blob";
-
-            public const string GUIDStreamName = "#GUID";
-
-            public const string UserStringStreamName = "#US";
-
-            public const string CompressedMetadataTableStreamName = "#~";
-
-            public const string UncompressedMetadataTableStreamName = "#-";
-
-            public const string MinimalDeltaMetadataTableStreamName = "#JTD";
-
-            public const string StandalonePdbStreamName = "#Pdb";
-
-            public const int LargeStreamHeapSize = 0x0001000;
-        }
+        [MethodImpl(Inline), Op]
+        public static StringHandle StringHandleFromOffset(int heapOffset)
+            => memory.@as<uint,StringHandle>(StringHandleType.String | (uint)heapOffset);
 
         [MethodImpl(Inline), Op]
         public static unsafe MemoryBlock block(byte* pSrc, int length)
             => new MemoryBlock(pSrc,length);
-
 
         bool IsMinimalDelta;
 
@@ -86,6 +59,38 @@ namespace Z0
                 return 4;
             }
             return 2;
+        }
+
+        static MemoryBlock InterfaceImplBlock(int numberOfRows, bool declaredSorted, int typeDefTableRowRefSize, int typeDefOrRefRefSize,
+            MemoryBlock containingBlock, int containingBlockOffset)
+        {
+            var NumberOfRows = numberOfRows;
+            var _IsTypeDefTableRowRefSizeSmall = typeDefTableRowRefSize == 2;
+            var _IsTypeDefOrRefRefSizeSmall = typeDefOrRefRefSize == 2;
+            var _ClassOffset = 0;
+            var _InterfaceOffset = _ClassOffset + typeDefTableRowRefSize;
+            var RowSize = _InterfaceOffset + typeDefOrRefRefSize;
+            var Block = containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
+            return Block;
+        }
+
+        static MemoryBlock TypeDefBlock(int numberOfRows,int fieldRefSize,int methodRefSize,int typeDefOrRefRefSize,int stringHeapRefSize,
+            MemoryBlock containingBlock, int containingBlockOffset)
+        {
+            var NumberOfRows = numberOfRows;
+            var _IsFieldRefSizeSmall = fieldRefSize == 2;
+            var _IsMethodRefSizeSmall = methodRefSize == 2;
+            var _IsTypeDefOrRefRefSizeSmall = typeDefOrRefRefSize == 2;
+            var _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
+            var _FlagsOffset = 0;
+            var _NameOffset = _FlagsOffset + sizeof(uint);
+            var _NamespaceOffset = _NameOffset + stringHeapRefSize;
+            var _ExtendsOffset = _NamespaceOffset + stringHeapRefSize;
+            var _FieldListOffset = _ExtendsOffset + typeDefOrRefRefSize;
+            var _MethodListOffset = _FieldListOffset + fieldRefSize;
+            var RowSize = _MethodListOffset + methodRefSize;
+            var Block = containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
+            return Block;
         }
 
         static MemoryBlock TypeRefTableBlock(int numberOfRows, int resolutionScopeRefSize, int stringHeapRefSize, MemoryBlock containingBlock,int containingBlockOffset)
@@ -157,7 +162,7 @@ namespace Z0
             // reserved (shall be ignored):
             reader.ReadByte();
 
-            ulong presentTables = reader.ReadUInt64();
+            var presentTables = reader.ReadUInt64();
             dst.Tables = (TableMask)reader.ReadUInt64();
 
             // According to ECMA-335, MajorVersion and MinorVersion have fixed values and,
@@ -166,24 +171,10 @@ namespace Z0
             // We will not be checking version values. We will continue checking that the set of
             // present tables is within the set we understand.
 
-            ulong validTables = (ulong)(TableMask.TypeSystemTables | TableMask.DebugTables);
+            var validTables = (ulong)(TableMask.TypeSystemTables | TableMask.DebugTables);
 
             if ((presentTables & ~validTables) != 0)
-            {
                 return false;
-            }
-
-            if (_metadataStreamKind == MetadataStreamKind.Compressed)
-            {
-                // In general Ptr tables and EnC tables are not allowed in a compressed stream.
-                // However when asked for a snapshot of the current metadata after an EnC change has been applied
-                // the CLR includes the EnCLog table into the snapshot. We need to be able to read the image,
-                // so we'll allow the table here but pretend it's empty later.
-                if ((presentTables & (ulong)(TableMask.PtrTables | TableMask.EnCMap)) != 0)
-                {
-                    return false;
-                }
-            }
 
             dst.RowCounts = ReadMetadataTableRowCounts(ref reader, presentTables);
 
@@ -209,9 +200,7 @@ namespace Z0
             for (int i = 0; i < streamHeaders.Length; i++)
             {
                 if (memReader.RemainingBytes < COR20Constants.MinimumSizeofStreamHeader)
-                {
                     return sys.empty<CliStreamHeader>();
-                }
 
                 streamHeaders[i].Offset = memReader.ReadUInt32();
                 streamHeaders[i].Size = memReader.ReadUInt32();
@@ -229,31 +218,32 @@ namespace Z0
 
         static uint[] ReadMetadataTableRowCounts(ref BlobReader memReader, ulong presentTableMask)
         {
-            ulong currentTableBit = 1;
-
-            var rowCounts = new uint[MetadataTokens.TableCount];
-            for (int i = 0; i < rowCounts.Length; i++)
+            var currentTableBit = 1ul;
+            var buffer = new uint[MetadataTokens.TableCount];
+            ref var dst = ref first(buffer);
+            for (int i = 0; i < buffer.Length; i++)
             {
                 if ((presentTableMask & currentTableBit) != 0)
                 {
                     if (memReader.RemainingBytes < sizeof(uint))
-                    {
                         return sys.empty<uint>();
-                    }
 
-                    uint rowCount = memReader.ReadUInt32();
+                    var rowCount = memReader.ReadUInt32();
                     if (rowCount > TokenTypeIds.RIDMask)
-                    {
                         return sys.empty<uint>();
-                    }
 
-                    rowCounts[i] = (uint)rowCount;
+                    seek(dst, i) = (uint)rowCount;
                 }
 
                 currentTableBit <<= 1;
             }
 
-            return rowCounts;
+            return buffer;
+        }
+
+        private bool IsDeclaredSorted(TableMask index)
+        {
+            return (_sortedTables & index) != 0;
         }
 
         void InitializeTableReaders(MemoryBlock metadataTablesMemoryBlock, HeapSizes heapSizes, int[] rowCounts, int[] externalRowCountsOpt)
@@ -267,18 +257,17 @@ namespace Z0
             int eventRefSizeSorted = GetReferenceSize(rowCounts, TableIndex.EventPtr) > SmallIndexSize ? LargeIndexSize : GetReferenceSize(rowCounts, TableIndex.Event);
             int propertyRefSizeSorted = GetReferenceSize(rowCounts, TableIndex.PropertyPtr) > SmallIndexSize ? LargeIndexSize : GetReferenceSize(rowCounts, TableIndex.Property);
 
-
             // Compute the coded token ref sizes
             int typeDefOrRefRefSize = ComputeCodedTokenSize(TypeDefOrRefTag.LargeRowSize, rowCounts, TypeDefOrRefTag.TablesReferenced);
             int hasConstantRefSize = ComputeCodedTokenSize(HasConstantTag.LargeRowSize, rowCounts, HasConstantTag.TablesReferenced);
             int hasCustomAttributeRefSize = ComputeCodedTokenSize(HasCustomAttributeTag.LargeRowSize, rowCounts, HasCustomAttributeTag.TablesReferenced);
-            // int hasFieldMarshalRefSize = ComputeCodedTokenSize(HasFieldMarshalTag.LargeRowSize, rowCounts, HasFieldMarshalTag.TablesReferenced);
+            int hasFieldMarshalRefSize = ComputeCodedTokenSize(HasFieldMarshalTag.LargeRowSize, rowCounts, HasFieldMarshalTag.TablesReferenced);
             // int hasDeclSecurityRefSize = ComputeCodedTokenSize(HasDeclSecurityTag.LargeRowSize, rowCounts, HasDeclSecurityTag.TablesReferenced);
             // int memberRefParentRefSize = ComputeCodedTokenSize(MemberRefParentTag.LargeRowSize, rowCounts, MemberRefParentTag.TablesReferenced);
             // int hasSemanticsRefSize = ComputeCodedTokenSize(HasSemanticsTag.LargeRowSize, rowCounts, HasSemanticsTag.TablesReferenced);
             // int methodDefOrRefRefSize = ComputeCodedTokenSize(MethodDefOrRefTag.LargeRowSize, rowCounts, MethodDefOrRefTag.TablesReferenced);
             // int memberForwardedRefSize = ComputeCodedTokenSize(MemberForwardedTag.LargeRowSize, rowCounts, MemberForwardedTag.TablesReferenced);
-            // int implementationRefSize = ComputeCodedTokenSize(ImplementationTag.LargeRowSize, rowCounts, ImplementationTag.TablesReferenced);
+            int implementationRefSize = ComputeCodedTokenSize(ImplementationTag.LargeRowSize, rowCounts, ImplementationTag.TablesReferenced);
             // int customAttributeTypeRefSize = ComputeCodedTokenSize(CustomAttributeTypeTag.LargeRowSize, rowCounts, CustomAttributeTypeTag.TablesReferenced);
             int resolutionScopeRefSize = ComputeCodedTokenSize(ResolutionScopeTag.LargeRowSize, rowCounts, ResolutionScopeTag.TablesReferenced);
             // int typeOrMethodDefRefSize = ComputeCodedTokenSize(TypeOrMethodDefTag.LargeRowSize, rowCounts, TypeOrMethodDefTag.TablesReferenced);
@@ -291,8 +280,8 @@ namespace Z0
             num += _ModuleTableBlock.Length;
             var _TypeRefTableBlock = SRM.TypeRefTableBlock(rowCounts[1], resolutionScopeRefSize, stringHeapRefSize, metadataTablesMemoryBlock, num);
             num += _TypeRefTableBlock.Length;
-            // var TypeDefTable = new TypeDefTableReader(rowCounts[2], fieldRefSize, methodRefSize, typeDefOrRefRefSize, stringHeapRefSize, metadataTablesMemoryBlock, num);
-            // num += TypeDefTable.Block.Length;
+            var _TypeDefBlock = TypeDefBlock(rowCounts[2], fieldRefSizeSorted, methodRefSizeSorted, typeDefOrRefRefSize, stringHeapRefSize, metadataTablesMemoryBlock, num);
+            num += _TypeDefBlock.Length;
             // var FieldPtrTable = new FieldPtrTableReader(rowCounts[3], GetReferenceSize(rowCounts, TableIndex.Field), metadataTablesMemoryBlock, num);
             // num += FieldPtrTable.Block.Length;
             // var FieldTable = new FieldTableReader(rowCounts[4], stringHeapRefSize, blobHeapRefSize, metadataTablesMemoryBlock, num);
@@ -305,8 +294,8 @@ namespace Z0
             // num += ParamPtrTable.Block.Length;
             // var ParamTable = new ParamTableReader(rowCounts[8], stringHeapRefSize, metadataTablesMemoryBlock, num);
             // num += ParamTable.Block.Length;
-            // var InterfaceImplTable = new InterfaceImplTableReader(rowCounts[9], IsDeclaredSorted(TableMask.InterfaceImpl), GetReferenceSize(rowCounts, TableIndex.TypeDef), typeDefOrRefRefSize, metadataTablesMemoryBlock, num);
-            // num += InterfaceImplTable.Block.Length;
+            var _InterfaceImplBlock = SRM.InterfaceImplBlock(rowCounts[9], IsDeclaredSorted(TableMask.InterfaceImpl), GetReferenceSize(rowCounts, TableIndex.TypeDef), typeDefOrRefRefSize, metadataTablesMemoryBlock, num);
+            num += _InterfaceImplBlock.Length;
             // var MemberRefTable = new MemberRefTableReader(rowCounts[10], memberRefParentRefSize, stringHeapRefSize, blobHeapRefSize, metadataTablesMemoryBlock, num);
             // num += MemberRefTable.Block.Length;
             // var ConstantTable = new ConstantTableReader(rowCounts[11], IsDeclaredSorted(TableMask.Constant), hasConstantRefSize, blobHeapRefSize, metadataTablesMemoryBlock, num);

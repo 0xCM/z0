@@ -22,5 +22,21 @@ namespace Z0
                  Row(skip(src,i), ref seek(dst,i));
             return count;
         }
+
+        public uint Rows(ReadOnlySpan<FieldDefinitionHandle> src, Span<FieldDefRow> dst)
+        {
+            var count = (uint)root.min(src.Length, dst.Length);
+            for(var i=0; i<count; i++)
+                 Row(skip(src,i), ref seek(dst,i));
+            return count;
+        }
+
+        public ReadOnlySpan<FieldDefRow> Rows(ReadOnlySpan<FieldDefinitionHandle> src)
+        {
+            var count = (uint)src.Length;
+            var dst = span<FieldDefRow>(count);
+            Rows(src,dst);
+            return dst;
+        }
     }
 }

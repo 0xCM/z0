@@ -40,7 +40,6 @@ namespace Z0
             public static Index<OpCode> All()
                 => typeof(OpCodeSpecs).StaticProperties().Where(p => p.PropertyType == typeof(OpCode)).Values().Cast<OpCode>();
 
-
             const int NopFlags =
                 ((int)OperandType.InlineNone) |
                 ((int)FlowControl.Next << FlowControlShift) |

@@ -10,9 +10,11 @@ namespace Z0
 
     partial struct CliRows
     {
-        [StructLayout(LayoutKind.Sequential)]
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct MethodDefRow : ICliRecord<MethodDefRow>
         {
+            public const string TableId = "cli.method-def";
+
             public Address32 Rva;
 
             public MethodImplAttributes ImplAttributes;

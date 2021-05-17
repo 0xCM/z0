@@ -11,7 +11,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static CliRows;
 
     partial class CliReader
     {
@@ -72,6 +71,10 @@ namespace Z0
             => MD.GetTypeReference(src);
 
         [MethodImpl(Inline), Op]
+        public InterfaceImplementation Read(InterfaceImplementationHandle src)
+            => MD.GetInterfaceImplementation(src);
+
+        [MethodImpl(Inline), Op]
         public BinaryCode Read(BlobHandle src)
             => MD.GetBlobBytes(src);
 
@@ -83,10 +86,13 @@ namespace Z0
         public string Read(StringHandle src)
             => MD.GetString(src);
 
-
         [MethodImpl(Inline), Op]
-        public void Read(Index<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
-            => src.Iter(handle => dst(MD.GetCustomAttribute(handle)));
+        public void Read(ReadOnlySpan<CustomAttributeHandle> src, Span<CustomAttribute> dst)
+        {
+            var count = root.min(src.Length, dst.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = Read(skip(src,i));
+        }
 
         [MethodImpl(Inline), Op]
         public void Read(ReadOnlySpan<TypeDefinitionHandle> src, Span<TypeDefinition> dst)
@@ -97,25 +103,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public ref FieldDefinition Read(FieldDefinitionHandle src, ref FieldDefinition dst)
-        {
-            dst = Read(src);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
         public void Read(ReadOnlySpan<FieldDefinitionHandle> src, Span<FieldDefinition> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref MethodImplementation Read(MethodImplementationHandle src, ref MethodImplementation dst)
-        {
-            dst = Read(src);
-            return ref dst;
+                seek(dst,i) = Read(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]
@@ -123,14 +115,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref AssemblyFile Read(AssemblyFileHandle src, ref AssemblyFile dst)
-        {
-            dst = Read(src);
-            return ref dst;
+                seek(dst,i) = Read(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]
@@ -138,7 +123,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
+                seek(dst,i) = Read(skip(src,i));
         }
     }
 }

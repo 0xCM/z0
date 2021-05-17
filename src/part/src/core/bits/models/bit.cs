@@ -323,6 +323,14 @@ namespace Z0
             => new bit((byte)src);
 
         [MethodImpl(Inline)]
+        public static implicit operator BinaryDigit(bit src)
+            => (BinaryDigit)((byte)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator bit(BinaryDigit src)
+            => (byte)src;
+
+        [MethodImpl(Inline)]
         public static bool operator ==(bit a, bit b)
             => a.State == b.State;
 

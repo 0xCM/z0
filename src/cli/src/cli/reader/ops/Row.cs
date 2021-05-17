@@ -67,6 +67,16 @@ namespace Z0
             return ref dst;
         }
 
-
+        [MethodImpl(Inline), Op]
+        public ref FieldDefRow Row(FieldDefinitionHandle handle, ref FieldDefRow dst)
+        {
+            var src = MD.GetFieldDefinition(handle);
+            dst.Attributes = src.Attributes;
+            dst.Name = src.Name;
+            dst.Signature = src.Signature;
+            dst.Offset = (uint)src.GetOffset();
+            dst.Marshal = src.GetMarshallingDescriptor();
+            return ref dst;
+        }
     }
 }

@@ -149,6 +149,15 @@ namespace Z0
             Wf.Row(data);
         }
 
+        protected void TableEmit<T>(ReadOnlySpan<T> src, FS.FilePath dst)
+            where T : struct, IRecord<T>
+        {
+            var flow = Wf.EmittingTable<T>(dst);
+            var count = Tables.emit(src,dst);
+            Wf.EmittedTable(flow,count);
+        }
+
+
         protected virtual void OnInit()
         {
 

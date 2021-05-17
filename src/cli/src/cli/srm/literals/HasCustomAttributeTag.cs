@@ -13,29 +13,53 @@ namespace Z0
         internal static class HasCustomAttributeTag
         {
             internal const int NumberOfBits = 5;
+
             internal const int LargeRowSize = 0x00000001 << (16 - NumberOfBits);
+
             internal const uint MethodDef = 0x00000000;
+
             internal const uint Field = 0x00000001;
+
             internal const uint TypeRef = 0x00000002;
+
             internal const uint TypeDef = 0x00000003;
+
             internal const uint Param = 0x00000004;
+
             internal const uint InterfaceImpl = 0x00000005;
+
             internal const uint MemberRef = 0x00000006;
+
             internal const uint Module = 0x00000007;
+
             internal const uint DeclSecurity = 0x00000008;
+
             internal const uint Property = 0x00000009;
+
             internal const uint Event = 0x0000000A;
+
             internal const uint StandAloneSig = 0x0000000B;
+
             internal const uint ModuleRef = 0x0000000C;
+
             internal const uint TypeSpec = 0x0000000D;
+
             internal const uint Assembly = 0x0000000E;
+
             internal const uint AssemblyRef = 0x0000000F;
+
             internal const uint File = 0x00000010;
+
             internal const uint ExportedType = 0x00000011;
+
             internal const uint ManifestResource = 0x00000012;
+
             internal const uint GenericParam = 0x00000013;
+
             internal const uint GenericParamConstraint = 0x00000014;
+
             internal const uint MethodSpec = 0x00000015;
+
             internal const uint TagMask = 0x0000001F;
 
             // Arbitrary value not equal to any of the token types in the array. This includes 0 which is TokenTypeIds.Module.
@@ -79,28 +103,28 @@ namespace Z0
             };
 
             internal const TableMask TablesReferenced =
-            TableMask.MethodDef
-            | TableMask.Field
-            | TableMask.TypeRef
-            | TableMask.TypeDef
-            | TableMask.Param
-            | TableMask.InterfaceImpl
-            | TableMask.MemberRef
-            | TableMask.Module
-            | TableMask.DeclSecurity
-            | TableMask.Property
-            | TableMask.Event
-            | TableMask.StandAloneSig
-            | TableMask.ModuleRef
-            | TableMask.TypeSpec
-            | TableMask.Assembly
-            | TableMask.AssemblyRef
-            | TableMask.File
-            | TableMask.ExportedType
-            | TableMask.ManifestResource
-            | TableMask.GenericParam
-            | TableMask.GenericParamConstraint
-            | TableMask.MethodSpec;
+                TableMask.MethodDef
+                | TableMask.Field
+                | TableMask.TypeRef
+                | TableMask.TypeDef
+                | TableMask.Param
+                | TableMask.InterfaceImpl
+                | TableMask.MemberRef
+                | TableMask.Module
+                | TableMask.DeclSecurity
+                | TableMask.Property
+                | TableMask.Event
+                | TableMask.StandAloneSig
+                | TableMask.ModuleRef
+                | TableMask.TypeSpec
+                | TableMask.Assembly
+                | TableMask.AssemblyRef
+                | TableMask.File
+                | TableMask.ExportedType
+                | TableMask.ManifestResource
+                | TableMask.GenericParam
+                | TableMask.GenericParamConstraint
+                | TableMask.MethodSpec;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static EntityHandle ConvertToHandle(uint hasCustomAttribute)

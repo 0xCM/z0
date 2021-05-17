@@ -25,6 +25,8 @@ namespace Z0
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
         }
 
+
+
         public Index<ResolvedPart> ResolveCatalog(IApiCatalog src)
         {
             var dst = root.list<ResolvedPart>();

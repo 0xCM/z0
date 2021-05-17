@@ -25,7 +25,6 @@ namespace Z0
             Receivers.MemberParsed += (source, e) => OnEvent(e);
             Receivers.MemberDecoded += (source, e) => OnEvent(e);
             Receivers.ExtractError += (source, e) => OnEvent(e);
-
         }
 
         void OnEvent(PartResolvedEvent e)
@@ -56,7 +55,7 @@ namespace Z0
         public void Run()
         {
             var flow = Wf.Running();
-            Wf.ApiExtracor().Run(Receivers);
+            Wf.ApiExtractor().Run(Receivers);
             Wf.Ran(flow, string.Format("Decoded:{0}", MemberDecodedCount));
         }
     }

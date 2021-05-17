@@ -10,8 +10,8 @@ namespace Z0
 
     using Msil;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly partial struct Cil

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
+    using System.Linq;
 
     using static Root;
     using static core;
@@ -45,7 +46,6 @@ namespace Z0
         [Op]
         public ReadOnlySpan<MemberReferenceHandle> MemberRefHandles()
             => MD.MemberReferences.ToReadOnlySpan();
-
 
         [Op]
         public ReadOnlySpan<ManifestResourceHandle> ResourceHandles()

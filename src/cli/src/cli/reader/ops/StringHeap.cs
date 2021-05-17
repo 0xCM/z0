@@ -12,14 +12,6 @@ namespace Z0
     partial class CliReader
     {
         [Op]
-        public CliGuidHeap GuidHeap()
-        {
-            var offset = HeapOffset(MetadataTokens.GuidHandle(0));
-            var @base = Segment.BaseAddress + offset;
-            return new CliGuidHeap(@base, HeapSize(HeapIndex.Guid));
-        }
-
-        [Op]
         public CliStringHeap StringHeap(CliStringKind kind)
             => kind switch
             {
@@ -43,6 +35,5 @@ namespace Z0
             var @base = Segment.BaseAddress + offset;
             return new CliStringHeap(@base, HeapSize(HeapIndex.String), CliHeapKind.String);
         }
-
     }
 }

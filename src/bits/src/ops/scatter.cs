@@ -9,7 +9,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
-    using static Part;
+    using static Root;
 
     using x64 = System.Runtime.Intrinsics.X86.Bmi2.X64;
 

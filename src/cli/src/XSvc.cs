@@ -7,6 +7,7 @@ namespace Z0
     using static PdbServices;
 
     using Svc = Z0;
+
     [ApiHost]
     public static partial class XSvc
     {
@@ -37,5 +38,9 @@ namespace Z0
         [Op]
         public static ProcessContextPipe ProcessContextPipe(this IWfRuntime wf)
             => Svc.ProcessContextPipe.create(wf);
+
+        [Op]
+        public static RegionProcessor RegionProcessor(this IWfRuntime wf)
+            => Svc.RegionProcessor.create(wf);
     }
 }

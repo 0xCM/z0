@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static core;
 
@@ -36,6 +37,16 @@ namespace Z0
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(src,i)));
 
+            return count;
+        }
+
+        public static Count emit<T>(ReadOnlySpan<T> src, StreamWriter dst)
+            where T : struct, IRecord<T>
+        {
+            var count = src.Length;
+            var formatter = Tables.formatter<T>();
+            for(var i=0; i<count; i++)
+                dst.WriteLine(formatter.Format(skip(src,i)));
             return count;
         }
 

@@ -37,6 +37,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
     }
 }

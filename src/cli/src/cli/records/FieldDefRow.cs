@@ -12,11 +12,15 @@ namespace Z0
         [StructLayout(LayoutKind.Sequential)]
         public struct FieldDefRow : ICliRecord<FieldDefRow>
         {
-            public FieldAttributes Flags;
+            public FieldAttributes Attributes;
 
             public StringIndex Name;
 
             public BlobIndex Signature;
+
+            public uint Offset;
+
+            public BlobIndex Marshal;
         }
     }
 }

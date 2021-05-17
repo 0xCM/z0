@@ -19,6 +19,13 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ImageMemory
     {
+        public static Index<SegmentSelection> selection(IWfRuntime wf, ReadOnlySpan<MemoryRegion> src)
+        {
+            var processor = wf.RegionProcessor();
+            processor.Submit(src);
+            return processor.Selection;
+        }
+
         [Op]
         public static ProcessImageMap map(Process src)
         {
@@ -94,7 +101,6 @@ namespace Z0
             dst.State = src.State;
             return ref dst;
         }
-
 
         [Op]
         public static Index<LocatedImage> locate(Process src)

@@ -20,8 +20,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-
-
         [Op]
         public static CliTableSource<T> source<T>(Assembly src)
             where T : struct, IRecord<T>
@@ -105,6 +103,10 @@ namespace Z0
             => @as<CliHandleData,Handle>(src);
 
         [MethodImpl(Inline), Op]
+        public Handle handle(CliToken src)
+            => handle(new CliHandleData(src.Table, src.Row));
+
+        [MethodImpl(Inline), Op]
         public static CliRowKey key(Handle src)
         {
             var dat = data(src);
@@ -132,16 +134,15 @@ namespace Z0
             where T : unmanaged
                 => uint32(handle);
 
-        public static CliRowKeys keys<K,T>(T[] handles, K k = default)
+        public static CliRowKeys keys<K,T>(ReadOnlySpan<T> handles, K k = default)
             where T : unmanaged
             where K : unmanaged, ICliTableKind<K>
         {
             var count = handles.Length;
-            var src = @readonly(handles);
             var buffer = alloc<CliRowKey>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
-                seek(dst,i) = key<K,T>(skip(src,i));
+                seek(dst,i) = key<K,T>(skip(handles,i));
             return buffer;
         }
 

@@ -1,6 +1,9 @@
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// Adapted from https://github.com/microsoft/perfview
-namespace Windows
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Microsoft/.NET Foundation
+// License     :  MIT
+// Source      : https://github.com/microsoft/perfview
+//-----------------------------------------------------------------------------
+namespace Z0
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +13,8 @@ namespace Windows
     using System.Text;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    using Windows;
 
     /// <summary>
     /// A MemoryNode represents a set of memory regions in a process.   MemoryNodes can have children and thus
@@ -118,15 +123,16 @@ namespace Windows
         {
             if(!IsRoot)
             {
-                dst.Add(new MemoryRangeInfo{
-                    BaseAddress = Address,
-                    EndAddress = Address+Size -1,
-                    Size = Size,
-                    Type = MemType,
-                    Protection = Protection,
-                    State = MemState,
-                    Owner = Name
-                });
+                if(MemType != 0 && Protection !=0)
+                    dst.Add(new MemoryRangeInfo{
+                        BaseAddress = Address,
+                        EndAddress = Address+Size -1,
+                        Size = Size,
+                        Type = MemType,
+                        Protection = Protection,
+                        State = MemState,
+                        Owner = Name
+                    });
             }
 
             if(Children != null)

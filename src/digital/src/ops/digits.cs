@@ -250,6 +250,14 @@ namespace Z0
             digits((uint)(src >> 32), slice(dst, 32));
         }
 
+        [MethodImpl(Inline), Op]
+        public static void digits(ReadOnlySpan<bit> src, Span<BinaryDigit> dst)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+        }
+
         /// <summary>
         /// Computes the digits corresponding to each 2-bit segment of the permutation spec
         /// </summary>

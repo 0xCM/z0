@@ -42,10 +42,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Handle(CliHandleData src)
-            => CliReader.handle(src);
+            => Cli.handle(src);
 
         [MethodImpl(Inline)]
         public static implicit operator CliHandleData(Handle src)
-            => CliReader.data(src);
+            => Cli.data(src);
     }
 }

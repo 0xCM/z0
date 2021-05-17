@@ -8,7 +8,7 @@ namespace Z0
 
     public static partial class XSvc
     {
-        public static ApiExtractor ApiExtracor(this IWfRuntime wf)
+        public static ApiExtractor ApiExtractor(this IWfRuntime wf)
             => Z0.ApiExtractor.create(wf);
 
         [Op]
