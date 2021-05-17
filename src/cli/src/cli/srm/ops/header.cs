@@ -36,45 +36,29 @@ namespace Z0
         {
             dst = default;
             if (reader.RemainingBytes < MetadataStreamConstants.SizeOfMetadataTableHeader)
-                return false;
+                return (false, "Insufficient data");
 
-            // reserved (shall be ignored):
+            uint signature = reader.ReadUInt32();
+            if (signature != COR20Constants.COR20MetadataSignature)
+                return (false, "Unmagical");
+
+            // major version
+            reader.ReadUInt16();
+
+            // minor version
+            reader.ReadUInt16();
+
+            // reserved:
             reader.ReadUInt32();
 
-            // major version (shall be ignored):
-            reader.ReadByte();
+            int versionStringSize = reader.ReadInt32();
+            if (reader.RemainingBytes < versionStringSize)
+                return (false, "VersionString");
 
-            // minor version (shall be ignored):
-            reader.ReadByte();
-
-            // heap sizes:
-            dst.HeapSizes = (HeapSizes)reader.ReadByte();
-
-            // reserved (shall be ignored):
-            reader.ReadByte();
-
-            var presentTables = reader.ReadUInt64();
-            dst.Tables = (TableMask)reader.ReadUInt64();
-
-            // According to ECMA-335, MajorVersion and MinorVersion have fixed values and,
-            // based on recommendation in 24.1 Fixed fields: When writing these fields it
-            // is best that they be set to the value indicated, on reading they should be ignored.
-            // We will not be checking version values. We will continue checking that the set of
-            // present tables is within the set we understand.
-
-            var validTables = (ulong)(TableMask.TypeSystemTables | TableMask.DebugTables);
-
-            if ((presentTables & ~validTables) != 0)
-                return false;
-
-            dst.RowCounts = RowCounts(ref reader, presentTables);
-
-            if ((dst.HeapSizes & HeapSizes.ExtraData) == HeapSizes.ExtraData)
-            {
-                // Skip "extra data" used by some obfuscators. Although it is not mentioned in the CLI spec,
-                // it is honored by the native metadata reader.
-                reader.ReadUInt32();
-            }
+            int numberOfBytesRead;
+            var versionBlock = reader.GetMemoryBlockAt(0, versionStringSize);
+            dst.Version = versionBlock.PeekUtf8NullTerminated(0, null, MetadataStringDecoder.DefaultUTF8, out numberOfBytesRead, '\0');
+            reader.Offset += versionStringSize;
             return true;
         }
     }

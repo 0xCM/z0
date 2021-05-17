@@ -155,6 +155,27 @@ namespace Z0.Asm
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
             => Wf.ApiCatalogs().EmitApiClasses();
 
+        void CheckCpuid()
+        {
+            var cpuid = CpuId.request(0u,0u);
+            var result = Cells.cell128(0x00000015, 0x756E6547, 0x6C65746E, 0x49656E69);
+            CpuId.response(result, ref cpuid);
+            Wf.Row(cpuid.Format());
+        }
+
+        public ListFilesCmd EmitFileListCmdSample()
+        {
+            var cmd = new ListFilesCmd();
+            cmd.ListName = "tests";
+            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\windows.x64.Debug");
+            cmd.TargetPath = Db.IndexTable("clrtests");
+            cmd.FileUriMode = true;
+            cmd.WithExt(FS.Cmd);
+            return cmd;
+        }
+
+        CmdResult EmitFileList()
+            => Wf.Router.Dispatch(EmitFileListCmdSample());
 
         void CheckAlloc()
         {

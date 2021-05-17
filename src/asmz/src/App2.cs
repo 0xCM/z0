@@ -68,7 +68,6 @@ namespace Z0.Asm
                 Wf.Row(skip(mov,i).Format());
         }
 
-
         public static MsgPattern<T> DispatchingCmd<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
 
@@ -91,20 +90,6 @@ namespace Z0.Asm
         {
             FunctionWorkflows.run(Wf);
         }
-
-        public ListFilesCmd EmitFileListCmdSample()
-        {
-            var cmd = new ListFilesCmd();
-            cmd.ListName = "tests";
-            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\windows.x64.Debug");
-            cmd.TargetPath = Db.IndexTable("clrtests");
-            cmd.FileUriMode = true;
-            cmd.WithExt(FS.Cmd);
-            return cmd;
-        }
-
-        CmdResult EmitFileList()
-            => Wf.Router.Dispatch(EmitFileListCmdSample());
 
         void ListCommands()
         {
@@ -132,15 +117,6 @@ namespace Z0.Asm
         {
             var thumbprints = Wf.AsmThumbprints().LoadThumbprints().View;
             Wf.AsmBitstringEmitter().EmitBitstrings(thumbprints);
-        }
-
-        void CheckCpuid()
-        {
-            var cpuid = CpuId.request(0u,0u);
-            var result = Cells.cell128(0x00000015, 0x756E6547, 0x6C65746E, 0x49656E69);
-            CpuId.response(result, ref cpuid);
-            Wf.Row(cpuid.Format());
-
         }
 
         void EmitRuntimeMembers()
@@ -210,27 +186,40 @@ namespace Z0.Asm
             // extractor.Run(receivers);
         }
 
-        public unsafe void EmitRawMetadata(Assembly src, FS.FilePath dst)
+
+        void DescribeHeaps()
         {
-            var segment = Clr.metadata(src);
-            using var writer = dst.Writer();
-            Hex.emit(segment, 64, writer);
+            var components = Wf.ApiCatalog.Components.View;
+            var heaps = CliHeaps.strings(components).View;
+            var count = heaps.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var heap = ref skip(heaps,i);
+                Wf.Row(CliHeaps.describe(heap));
+            }
 
-            // var emitter = Wf.MemoryEmitter();
-            // emitter.Emit(segment, 32, dst);
         }
-
-        public unsafe void EmitRawMetadata(Assembly src)
-        {
-            var dst = Db.AppLog(src.GetSimpleName() + ".metadata", FS.Csv);
-            EmitRawMetadata(src, dst);
-        }
-
 
         public void Run()
         {
-            var extractor = Wf.ApiExtractor();
-            extractor.Run();
+
+            var reader = Cli.reader(Parts.Cpu.Assembly);
+            var header = reader.Header();
+            if(header)
+            {
+                var data = header.Data;
+                Wf.Row(data.Version);
+            }
+            else
+            {
+                Wf.Error(header.Message);
+            }
+
+            // var pipe = Wf.CliPipe();
+            // pipe.EmitMetaBlocks();
+
+            // var extractor = Wf.ApiExtractor();
+            // extractor.Run();
         }
 
 

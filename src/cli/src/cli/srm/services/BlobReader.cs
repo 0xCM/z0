@@ -185,21 +185,23 @@ namespace Z0
             }
 
             [MethodImpl(Inline), Op]
-            private void CheckBounds(int offset, int byteCount)
+            bool CheckBounds(int offset, int byteCount)
             {
                 if (unchecked((ulong)(uint)offset + (uint)byteCount) > (ulong)(_endPointer - _currentPointer))
                 {
-                    //Throw.OutOfBounds();
+                    return false;
                 }
+                return true;
             }
 
             [MethodImpl(Inline)]
-            void CheckBounds(int byteCount)
+            bool CheckBounds(int byteCount)
             {
                 if (unchecked((uint)byteCount) > (_endPointer - _currentPointer))
                 {
-                    //Throw.OutOfBounds();
+                    return false;
                 }
+                return true;
             }
 
             [MethodImpl(Inline)]
@@ -248,15 +250,12 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public sbyte ReadSByte()
-            {
-                return *(sbyte*)GetCurrentPointerAndAdvance1();
-            }
+                => *(sbyte*)GetCurrentPointerAndAdvance1();
 
             [MethodImpl(Inline)]
             public byte ReadByte()
-            {
-                return *(byte*)GetCurrentPointerAndAdvance1();
-            }
+                => *(byte*)GetCurrentPointerAndAdvance1();
+
 
             [MethodImpl(Inline)]
             public char ReadChar()
@@ -322,9 +321,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ulong ReadUInt64()
-            {
-                return unchecked((ulong)ReadInt64());
-            }
+                => unchecked((ulong)ReadInt64());
 
             [MethodImpl(Inline)]
             public float ReadSingle()
@@ -393,15 +390,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public DateTime ReadDateTime()
-            {
-                return new DateTime(ReadInt64());
-            }
+                => new DateTime(ReadInt64());
 
             [MethodImpl(Inline)]
             public SignatureHeader ReadSignatureHeader()
-            {
-                return new SignatureHeader(ReadByte());
-            }
+                => new SignatureHeader(ReadByte());
 
             /// <summary>
             /// Finds specified byte in the blob following the current position.
@@ -469,9 +462,7 @@ namespace Z0
             /// <param name="bufferOffset">The offset in the destination buffer where the bytes read will be written.</param>
             /// <exception cref="BadImageFormatException"><paramref name="byteCount"/> bytes not available.</exception>
             public void ReadBytes(int byteCount, byte[] buffer, int bufferOffset)
-            {
-                Marshal.Copy((IntPtr)GetCurrentPointerAndAdvance(byteCount), buffer, bufferOffset, byteCount);
-            }
+                =>  Marshal.Copy((IntPtr)GetCurrentPointerAndAdvance(byteCount), buffer, bufferOffset, byteCount);
 
             public string ReadUtf8NullTerminated()
             {
@@ -595,22 +586,17 @@ namespace Z0
             /// <returns><see cref="SignatureTypeCode.Invalid"/> if the encoding is invalid.</returns>
             public SignatureTypeCode ReadSignatureTypeCode()
             {
-                int value = ReadCompressedIntegerOrInvalid();
-
-                switch (value)
+                var value = ReadCompressedIntegerOrInvalid();
+                if(value == (int)CorElementType.ELEMENT_TYPE_CLASS || value == (int)CorElementType.ELEMENT_TYPE_VALUETYPE)
+                    return SignatureTypeCode.TypeHandle;
+                else
                 {
-                    case (int)CorElementType.ELEMENT_TYPE_CLASS:
-                    case (int)CorElementType.ELEMENT_TYPE_VALUETYPE:
-                        return SignatureTypeCode.TypeHandle;
-
-                    default:
-                        if (value > byte.MaxValue)
-                        {
-                            return SignatureTypeCode.Invalid;
-                        }
-
+                    if (value > byte.MaxValue)
+                        return SignatureTypeCode.Invalid;
+                    else
                         return unchecked((SignatureTypeCode)value);
                 }
+
             }
 
             /// <summary>

@@ -17,6 +17,8 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct CliHeader
     {
+        public utf8 Version;
+
         public HeapSizes HeapSizes;
 
         public Index<uint> RowCounts;

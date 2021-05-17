@@ -5,10 +5,11 @@
 namespace Z0
 {
     using Windows;
+
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct ProcessMemoryRegion : IRecord<ProcessMemoryRegion>
+    public struct ProcessMemoryRegion : IComparableRecord<ProcessMemoryRegion>
     {
         public const string TableId = "image.memory.regions";
 
@@ -31,5 +32,14 @@ namespace Z0
         public MemState State;
 
         public TextBlock FullIdentity;
+
+        public MemoryRange Range
+            => (StartAddress, EndAddress);
+
+        public int CompareTo(ProcessMemoryRegion src)
+            => StartAddress.CompareTo(src.StartAddress);
+        public string Describe()
+            => string.Format("[{0},{1}]({2})", StartAddress, StartAddress + Size, (ByteSize)Size);
+
     }
 }
