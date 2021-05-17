@@ -11,17 +11,17 @@ namespace Z0
     partial struct memory
     {
         [Op]
-        public static Allocation memalloc(ByteSize size)
+        public static Allocation gcalloc(ByteSize size)
             => new Allocation(GCHandle.Alloc(new byte[size], GCHandleType.Pinned), size);
 
         [Op, Closures(Closure)]
-        public static Allocation<T> memalloc<T>(ulong count)
+        public static Allocation<T> gcalloc<T>(ulong count)
             where T : unmanaged
                 => new Allocation<T>(GCHandle.Alloc(new T[count], GCHandleType.Pinned), (uint)count*size<T>());
 
         [Op, Closures(Closure)]
-        public static Allocation<T> memalloc<T>(long count)
+        public static Allocation<T> gcalloc<T>(long count)
             where T : unmanaged
-                => memalloc<T>((ulong)count);
+                => gcalloc<T>((ulong)count);
     }
 }

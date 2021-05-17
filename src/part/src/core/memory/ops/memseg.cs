@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct memory
     {
-
         /// <summary>
         /// Defines a memory <see cref='MemorySeg'/> with a specified base and size
         /// </summary>

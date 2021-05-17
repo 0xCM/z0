@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
 
@@ -18,6 +20,22 @@ namespace Z0
         public static ClrEnum<E> @enum<E>()
             where E : unmanaged, Enum
                 => default;
+
+        /// <summary>
+        /// Constructs a arbitrarily deduplicated value-to-member index
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="V">The numeric value type</typeparam>
+        public static IDictionary<V,E> dictionary<E,V>()
+            where E : unmanaged, Enum
+            where V : unmanaged
+        {
+            var pairs = ClrEnums.details<E,V>();
+            var index = new Dictionary<V,E>();
+            foreach(var pair in pairs)
+                index.TryAdd(pair.PrimalValue, pair.LiteralValue);
+            return index;
+        }
 
         [Op]
         public static ulong @ulong(ClrPrimalKind kind, object src)

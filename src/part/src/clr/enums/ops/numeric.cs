@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     partial struct ClrEnums
     {
         public static Index<T> numeric<E,T>()

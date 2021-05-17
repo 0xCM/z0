@@ -63,7 +63,7 @@ namespace Z0
             where F : unmanaged, Enum
         {
             var dst = text.build();
-            var labels = Enums.literals<F>();
+            var labels = ClrEnums.literals<F>();
             var count = labels.Length;
             for(var i=0; i<count; i++)
                 dst.Delimit(labels[i], labels[i].ToString(), delimiter);

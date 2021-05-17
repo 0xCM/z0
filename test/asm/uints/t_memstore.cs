@@ -61,7 +61,7 @@ namespace Z0
 
         unsafe void Process(in MemorySeg src, Index<MemorySeg> store)
         {
-            var reader = memory.reader(src.BaseAddress.Pointer<byte>(), src.Length);
+            var reader = MemoryReader.create(src.BaseAddress.Pointer<byte>(), src.Length);
             var dstA = memory.span<byte>(src.Length);
             var count = reader.ReadAll(dstA);
             Claim.eq(count,src.Length);

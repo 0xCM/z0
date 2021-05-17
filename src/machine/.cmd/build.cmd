@@ -1,2 +1,3 @@
 echo off
-call %ControlScripts%\build-machine.cmd
+set ProjectId=machine
+call %ControlScripts%\build-app.cmd

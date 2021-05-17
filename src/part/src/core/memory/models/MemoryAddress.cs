@@ -71,7 +71,7 @@ namespace Z0
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
         public string Format(bool postspec)
-            =>  postspec ? Format() : Location.ToString("x");
+            => postspec ? Format() : Location.ToString("x");
 
         public string FormatMinimal()
             => Location.FormatTrimmedAsmHex();

@@ -159,7 +159,7 @@ namespace Z0.Asm
         void CheckAlloc()
         {
             var count = 0xFF;
-            using var allocation = memory.memalloc<ulong>(count);
+            using var allocation = memory.gcalloc<ulong>(count);
             ref var target = ref allocation.First;
             for(var i=0u; i<count; i++)
             {

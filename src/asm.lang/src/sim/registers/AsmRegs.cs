@@ -229,6 +229,6 @@ namespace Z0.Asm
 
         [Op]
         public static Index<Register> list()
-            => Enums.literals<RegKind>().Map(model);
+            => ClrEnums.literals<RegKind>().Map(model);
     }
 }

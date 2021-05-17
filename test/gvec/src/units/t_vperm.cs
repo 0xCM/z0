@@ -224,7 +224,7 @@ namespace Z0
         public void perm4_symbols_random()
         {
             var perms = Random.EnumValues(A, B, C, D);
-            var all = Enums.literals<Perm4L>().ToSet();
+            var all = ClrEnums.literals<Perm4L>().ToSet();
             for(var i=0; i<RepCount; i++)
             {
                 var perm = perms.First();
