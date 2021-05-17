@@ -10,20 +10,18 @@ namespace Z0
     using System.Linq;
     using System.IO;
     using System.Reflection;
-    using Windows;
 
     using static memory;
     using static Part;
-    using static ProcessMemory;
 
     [ApiHost]
     public readonly partial struct ImageMemory
     {
-        public static Index<SegmentSelection> selection(IWfRuntime wf, ReadOnlySpan<MemoryRegion> src)
+        public static AddressBank bank(IWfRuntime wf, ReadOnlySpan<ProcessMemoryRegion> src)
         {
             var processor = wf.RegionProcessor();
             processor.Submit(src);
-            return processor.Selection;
+            return processor.Bank;
         }
 
         [Op]
@@ -36,7 +34,7 @@ namespace Z0
             ref var address = ref addresses.First;
             for(var i=0u; i<count; i++)
                 seek(address, i) = skip(image, i).BaseAddress;
-            var state = new ProcessState();
+            var state = new ProcessMemoryState();
             fill(src, ref state);
             return new ProcessImageMap(state, images, addresses.Sort(), modules(src));
         }
@@ -46,36 +44,36 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source process</param>
         [MethodImpl(Inline), Op]
-        public static ProcessState state(Process src)
+        public static ProcessMemoryState state(Process src)
         {
-            var dst = new ProcessState();
+            var dst = new ProcessMemoryState();
             fill(src, ref dst);
             return dst;
         }
 
         [Op]
-        public static Index<MemoryRegion> regions()
+        public static Index<ProcessMemoryRegion> regions()
             => ImageMemory.pages(MemoryNode.snapshot().Describe());
 
         [Op]
-        public static Index<MemoryRegion> regions(int procid)
+        public static Index<ProcessMemoryRegion> regions(int procid)
             => ImageMemory.pages(MemoryNode.snapshot(procid).Describe());
 
         [Op]
-        public static Index<MemoryRegion> regions(Process src)
+        public static Index<ProcessMemoryRegion> regions(Process src)
             => ImageMemory.pages(MemoryNode.snapshot(src.Id).Describe());
 
-        public static Index<MemoryRegion> pages(ReadOnlySpan<MemoryRangeInfo> src)
+        public static Index<ProcessMemoryRegion> pages(ReadOnlySpan<MemoryRangeInfo> src)
         {
             var count = src.Length;
-            var buffer = memory.alloc<MemoryRegion>(count);
+            var buffer = memory.alloc<ProcessMemoryRegion>(count);
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
                 fill(skip(src,i), i, out seek(dst,i));
             return buffer;
         }
 
-        public static ref MemoryRegion fill(in MemoryRangeInfo src, uint index, out MemoryRegion dst)
+        public static ref ProcessMemoryRegion fill(in MemoryRangeInfo src, uint index, out ProcessMemoryRegion dst)
         {
             var identity = src.Owner;
             dst.Index = index;
@@ -93,7 +91,7 @@ namespace Z0
                 dst.FullIdentity = "unknown";
             }
 
-            dst.BaseAddress = src.BaseAddress;
+            dst.StartAddress = src.StartAddress;
             dst.EndAddress = src.EndAddress;
             dst.Size = src.Size;
             dst.Protection = src.Protection;
@@ -103,28 +101,28 @@ namespace Z0
         }
 
         [Op]
-        public static Index<LocatedImage> locate(Process src)
+        public static Index<LocatedImageInfo> locate(Process src)
             => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
 
         /// <summary>
-        /// Creates a <see cref='LocatedImage'/> description from the main module of the executing <see cref='Process'/>
+        /// Creates a <see cref='LocatedImageInfo'/> description from the main module of the executing <see cref='Process'/>
         /// </summary>
         /// <param name="src">The source module</param>
-        public static LocatedImage locate()
+        public static LocatedImageInfo locate()
             => locate(Process.GetCurrentProcess().MainModule);
 
         /// <summary>
-        /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>
+        /// Creates a <see cref='LocatedImageInfo'/> description from a specified <see cref='ProcessModule'/>
         /// </summary>
         /// <param name="src">The source module</param>
         [Op]
-        public static LocatedImage locate(ProcessModule src)
+        public static LocatedImageInfo locate(ProcessModule src)
         {
             var part = ApiPartIdParser.fromFile(src.FileName);
             var entry = (MemoryAddress)src.EntryPointAddress;
             var @base = src.BaseAddress;
             var size = (uint)src.ModuleMemorySize;
-            return new LocatedImage(FS.path(src.FileName), part, entry, @base, size);
+            return new LocatedImageInfo(FS.path(src.FileName), part, entry, @base, size);
         }
 
         [Op]
@@ -158,7 +156,7 @@ namespace Z0
         }
 
         [Op]
-        public static ref ProcessState fill(Process src, ref ProcessState dst)
+        public static ref ProcessMemoryState fill(Process src, ref ProcessMemoryState dst)
         {
             dst.ImageName = src.ProcessName;
             dst.ProcessId = (uint)src.Id;
@@ -190,15 +188,15 @@ namespace Z0
             return module.BaseAddress;
         }
 
-        public static Outcome parse(string src, out MemoryRegion dst)
+        public static Outcome parse(string src, out ProcessMemoryRegion dst)
         {
             dst = default;
             if(text.empty(src))
                 return false;
 
-            var count = MemoryRegion.FieldCount;
+            var count = ProcessMemoryRegion.FieldCount;
             var parts = text.split(src,Chars.Pipe).View;
-            if(parts.Length != MemoryRegion.FieldCount)
+            if(parts.Length != ProcessMemoryRegion.FieldCount)
                 return (false, Tables.FieldCountMismatch.Format(parts.Length, count));
 
             var buffer = alloc<Outcome>(count);
@@ -208,7 +206,7 @@ namespace Z0
             var j=0;
             seek(outcomes,i++) = DataParser.parse(skip(parts,j++), out dst.Index);
             seek(outcomes,i++) = DataParser.parse(skip(parts,j++), out dst.Identity);
-            seek(outcomes,i++) = DataParser.parse(skip(parts,j++), out dst.BaseAddress);
+            seek(outcomes,i++) = DataParser.parse(skip(parts,j++), out dst.StartAddress);
             seek(outcomes,i++) = DataParser.parse(skip(parts,j++), out dst.EndAddress);
             seek(outcomes,i++) = DataParser.parse(skip(parts,j++), out dst.Size);
             seek(outcomes,i++) = DataParser.eparse(skip(parts,j++), out dst.Type);
@@ -221,7 +219,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<ProcessPartition> partitions(Index<LocatedImage> src)
+        public static Index<ProcessPartition> partitions(Index<LocatedImageInfo> src)
         {
             var count = src.Count;
             var images = src.View;
@@ -248,7 +246,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<ProcessPartition> emit(Index<LocatedImage> src, FS.FilePath dst)
+        public static Index<ProcessPartition> emit(Index<LocatedImageInfo> src, FS.FilePath dst)
         {
             var records = partitions(src);
             var target = records.Edit;

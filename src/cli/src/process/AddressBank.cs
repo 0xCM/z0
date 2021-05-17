@@ -9,32 +9,59 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
+    using static core;
 
     public readonly struct AddressBank
     {
-        readonly Index<Address16> Selectors;
+        readonly Index<Address16> _Selectors;
 
-        readonly Index<List<Paired<Address32,uint>>> Bases;
+        readonly Index<List<Paired<Address32,uint>>> _Bases;
 
-        internal AddressBank(Index<Address16> selectors, Index<List<Paired<Address32,uint>>> bases)
+        readonly Index<ProcessSegment> _Segments;
+
+        internal AddressBank(Index<ProcessSegment> segments, Index<Address16> selectors, Index<List<Paired<Address32,uint>>> bases)
         {
-            Selectors = selectors;
-            Bases =  bases;
+            _Segments = segments;
+            _Selectors = selectors;
+            _Bases =  bases;
+        }
+
+        public ReadOnlySpan<ProcessSegment> Segments
+        {
+            [MethodImpl(Inline)]
+            get => _Segments.View;
         }
 
         public uint SegmentCount
         {
             [MethodImpl(Inline)]
-            get => Selectors.Count;
+            get => _Segments.Count;
         }
 
-        public ReadOnlySpan<Paired<Address32,uint>> Segment(uint index)
+        public ushort SelectorCount
         {
-            return Bases[index].ViewDeposited();
+            [MethodImpl(Inline)]
+            get => (ushort)_Selectors.Count;
         }
+
+        public ReadOnlySpan<Paired<Address32,uint>> Bases(ushort index)
+            => _Bases[index].ViewDeposited();
 
         [MethodImpl(Inline)]
-        public Address16 Selector(uint index)
-            => Selectors[index];
+        public Address16 Selector(ushort index)
+            => _Selectors[index];
+
+        [MethodImpl(Inline)]
+        public int SelectorIndex(Address16 selector)
+        {
+            var count = SelectorCount;
+            var src = _Selectors.View;
+            for(var i=0; i<count; i++)
+            {
+                if(skip(src,i) == selector)
+                    return i;
+            }
+            return NotFound;
+        }
     }
 }

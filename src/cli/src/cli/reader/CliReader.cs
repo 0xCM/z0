@@ -49,18 +49,20 @@ namespace Z0
             MD = src;
         }
 
-        public ByteSize MetadataSize
+        public ByteSize MetaSize
         {
             [MethodImpl(Inline)]
             get => Segment.Size;
         }
 
-        public ReadOnlySpan<byte> MetaBlock
+        public ReadOnlySpan<byte> MetaBytes
         {
             [MethodImpl(Inline)]
             get => memory.view<byte>(Segment);
         }
 
+        public unsafe SRM.MemoryBlock MemoryBlock()
+            => SRM.block(Segment.BaseAddress.Pointer<byte>(), Segment.Length);
 
         [Op]
         public CliBlob ReadBlobDescription(BlobHandle handle, Count seq)
@@ -76,6 +78,11 @@ namespace Z0
             row.DataSize = (uint)row.Data.Length;
             return row;
         }
+
+        // public CliHeader ReadHeader()
+        // {
+        //     SR
+        // }
 
         public ReadOnlySpan<CliBlob> ReadBlobDescriptions()
         {

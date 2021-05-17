@@ -16,14 +16,14 @@ namespace Z0
 
         public MethodInfo Method {get;}
 
-        public MemoryAddress Address {get;}
+        public MemoryAddress EntryPoint {get;}
 
         [MethodImpl(Inline)]
         public ResolvedMethod(OpUri uri, MethodInfo method, MemoryAddress address)
         {
             Uri = uri;
             Method = method;
-            Address = address;
+            EntryPoint = address;
         }
 
         [MethodImpl(Inline)]
@@ -31,7 +31,7 @@ namespace Z0
         {
             Uri = uri;
             Method = method;
-            Address = address;
+            EntryPoint = address;
         }
 
         public bool IsEmpty
@@ -59,10 +59,10 @@ namespace Z0
         }
 
         public ApiMember ToApiMember()
-            => new ApiMember(Uri, Method, Address);
+            => new ApiMember(Uri, Method, EntryPoint);
 
         public string Format()
-            => IsEmpty ? "<empty>" : string.Format("{0}::{1}:{2}:{3}", Address.Format(), Component.Format(), HostType.Format(), Method.DisplaySig());
+            => IsEmpty ? "<empty>" : string.Format("{0}::{1}:{2}:{3}", EntryPoint.Format(), Component.Format(), HostType.Format(), Method.DisplaySig());
 
 
         public override string ToString()
@@ -70,6 +70,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(ResolvedMethod src)
-            => Address.CompareTo(src.Address);
+            => EntryPoint.CompareTo(src.EntryPoint);
     }
 }

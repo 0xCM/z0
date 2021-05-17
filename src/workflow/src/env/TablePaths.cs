@@ -49,7 +49,7 @@ namespace Z0
 
         FS.FilePath Table<T>(PartId part)
             where T : struct, IRecord<T>
-                => TableDir<T>() + FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format(), FS.Csv));
+                => TableDir<T>() + FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format(), DefaultTableExt));
 
         FS.FilePath Table<T>(string subject)
             where T : struct, IRecord<T>
@@ -58,6 +58,14 @@ namespace Z0
         FS.FilePath Table<T>(FS.FolderName subject)
             where T : struct, IRecord<T>
                 => TableDir(subject) + FS.file(TableId<T>(), DefaultTableExt);
+
+        FS.FilePath Table<T>(FS.FolderPath dir, string subject)
+            where T : struct, IRecord<T>
+                => dir + FS.file(string.Format("{0}.{1}", TableId<T>(), subject), DefaultTableExt);
+
+        FS.FilePath Table<T>(FS.FolderPath dir)
+            where T : struct, IRecord<T>
+                => dir + FS.file(TableId<T>(), DefaultTableExt);
 
         FS.FilePath Table<T>(FS.FolderName subject, string discriminator)
             where T : struct, IRecord<T>

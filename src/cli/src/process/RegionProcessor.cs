@@ -9,29 +9,31 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static ProcessMemory;
     using static core;
 
-    public sealed class RegionProcessor : SpanProcessor<RegionProcessor,MemoryRegion>
+    public sealed class RegionProcessor : SpanProcessor<RegionProcessor,ProcessMemoryRegion>
     {
         List<Address16> Selectors;
 
         List<List<Paired<Address32,uint>>> Bases;
 
-        Index<SegmentSelection> _Selection;
+        Index<ProcessSegment> _Segments;
 
         AddressBank _Bank;
+
+        string HostProcessName;
 
         public RegionProcessor()
         {
             Selectors = new();
             Bases = new();
-            _Selection = new();
+            _Segments = new();
+            HostProcessName = root.process().ProcessName;
         }
 
         protected override void Complete()
         {
-            _Bank = new AddressBank(Selectors.ToArray(), Bases.ToArray());
+            _Bank = new AddressBank(_Segments, Selectors.ToArray(), Bases.ToArray());
         }
 
         public ref readonly AddressBank Bank
@@ -40,7 +42,7 @@ namespace Z0
             get => ref _Bank;
         }
 
-        int Index(Address16 selector)
+        ushort Index(Address16 selector)
         {
             var index = Selectors.IndexOf(selector);
             if(index == NotFound)
@@ -49,42 +51,47 @@ namespace Z0
                 index = Selectors.Count - 1;
                 Bases.Add(root.list<Paired<Address32,uint>>());
             }
-            return index;
+            return (ushort)index;
         }
 
-        public Index<SegmentSelection> Selection
-            => _Selection;
+        public Index<ProcessSegment> Segments
+            => _Segments;
 
-        protected override uint Process(ReadOnlySpan<MemoryRegion> src)
+        protected override uint Process(ReadOnlySpan<ProcessMemoryRegion> src)
         {
             var count = (uint)src.Length;
-            _Selection = core.alloc<SegmentSelection>(count);
+            _Segments = core.alloc<ProcessSegment>(count);
             for(var i=0u; i<count; i++)
-                Include(i,skip(src,i));
+                Include(i, skip(src,i));
             return count;
         }
 
-        void Add(uint index, utf8 label, Address16 selector, Address32 @base, uint offset)
-        {
-            var sidx = (ushort)Index(selector);
-            Bases[sidx].Add(root.paired(@base, offset));
-            ref var selection = ref _Selection[index];
-            selection.Index = index;
-            selection.Selector = selector;
-            selection.SelectorIndex = sidx;
-            selection.Base = @base;
-            selection.Offset = offset;
-            selection.Target = ((ulong)selection.Selector << 32) + ((ulong)selection.Base + (ulong)selection.Offset);
-            selection.Label = label;
-        }
-
-        void Include(uint index, in MemoryRegion src)
+        void Include(uint index, in ProcessMemoryRegion src)
         {
             var id = src.Identity.Format();
             if(text.empty(id))
                 id = src.FullIdentity;
+            if(id.StartsWith(HostProcessName))
+                id = string.Format("host::{0}", id);
+
             if(src.Type != 0 && src.Protection != 0)
-                Add(index, id, src.BaseAddress.Quadrant(n2), src.BaseAddress.Lo, (uint)(src.EndAddress - src.BaseAddress));
+            {
+                var selector = src.StartAddress.Quadrant(n2);
+                var @base = src.StartAddress.Lo;
+                var size = (uint)(src.EndAddress - src.StartAddress);
+                var sidx = (ushort)Index(selector);
+                Bases[sidx].Add(root.paired(@base, size));
+                ref var segment = ref _Segments[index];
+                segment.Index = index;
+                segment.Selector = selector;
+                segment.SelectorIndex = sidx;
+                segment.Base = @base;
+                segment.Size = size;
+                segment.Target = ((ulong)segment.Selector << 32) + ((uint)segment.Base + size);
+                segment.Type = src.Type;
+                segment.Protection = src.Protection;
+                segment.Label = id;
+            }
         }
     }
 }

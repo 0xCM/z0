@@ -79,51 +79,113 @@ namespace Z0
             Wf.Ran(flow, string.Format("Extracted {0} host routines from {1} parts", counter, selected.Count));
         }
 
-        Index<SegmentSelection> LogSegmentSelection(uint step)
+        FS.FolderPath SegDir
+            => Db.TableDir("segments");
+
+        AddressBank LogSegmentBank(uint step)
         {
             var regions = ImageMemory.regions();
-            TableEmit(regions.View, Db.IndexTable<MemoryRegion>(string.Format("regions.{0}", step)));
-            var selection = ImageMemory.selection(Wf,regions);
-            TableEmit(selection.View, Db.IndexTable<SegmentSelection>(step.ToString()));
-            return selection;
+            TableEmit(regions.View, Db.Table<ProcessMemoryRegion>(SegDir, step.ToString()));
+            var bank = ImageMemory.bank(Wf, regions);
+            TableEmit(bank.Segments, Db.Table<ProcessSegment>(SegDir, step.ToString()));
+            return bank;
         }
 
-        void LogResolutions(ReadOnlySpan<ResolvedPart> src)
+        Index<ResolvedMethodInfo> LogResolutions(ReadOnlySpan<ResolvedPart> src)
         {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(src,i);
-                LogResolutions(part);
-            }
+            var methods = ApiResolutions.methods(src);
+            var buffer = alloc<ResolvedMethodInfo>(methods.Count);
+            ApiResolutions.describe(methods,buffer);
+            TableEmit(buffer, Db.Table<ResolvedMethodInfo>(SegDir));
+            return buffer;
         }
 
-        void LogResolutions(in ResolvedPart src)
+        [Record(TableId)]
+        public struct MethodBankEntry : IRecord<MethodBankEntry>
         {
-            var hosts = src.Hosts.View;
-            var count = hosts.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var host = ref skip(hosts,i);
-            }
+            public const string TableId = "methods.bank";
+
+            public uint Sequence;
+
+            public Address16 Selector;
+
+            public uint SegmentIndex;
+
+            public MemoryAddress EntryPoint;
+
+            public utf8 Uri;
         }
 
-        void LogResolutions(in ResolvedHost src)
+        Index<MethodBankEntry> Locate(AddressBank src, ReadOnlySpan<ResolvedMethodInfo> methods)
         {
-            var methods = src.Methods.View;
             var count = methods.Length;
-            for(var i=0; i<count; i++)
+            var buffer = sys.alloc<MethodBankEntry>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0u; i<count; i++)
             {
                 ref readonly var method = ref skip(methods,i);
+                ref readonly var address = ref method.EntryPoint;
+                var selector = address.Quadrant(n2);
+                var index = src.SelectorIndex(selector);
+                if(index == NotFound)
+                {
+                    Wf.Error(string.Format("Selector {0} not found", selector));
+                    break;
+                }
+
+                ref var entry = ref seek(dst,i);
+                entry.Sequence = i;
+                entry.EntryPoint = address;
+                entry.Selector = selector;
+                entry.Uri = method.Uri;
+                var bases = src.Bases((ushort)index);
+                var match = address.Lo;
+
+                for(var j=0u; j<bases.Length; j++)
+                {
+                    ref readonly var @base = ref skip(bases,j);
+                    var min = @base.Left;
+                    var max = min + @base.Right;
+                    if(between(match, @base.Left,@base.Left + @base.Right))
+                    {
+                        entry.SegmentIndex = j;
+                    }
+                }
 
             }
+
+            TableEmit(buffer, Db.Table<MethodBankEntry>(SegDir));
+
+            return buffer;
         }
+
+        [MethodImpl(Inline)]
+        public static bool between(Address32 src, Address32 min, Address32 max)
+            => src >= min && src <= max;
+
+        Index<CliBlobHeap> CliBlobs()
+        {
+            var components = Wf.ApiCatalog.Components.View;
+            var count = components.Length;
+            var buffer = alloc<CliBlobHeap>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var component = ref skip(components,i);
+                var reader = Cli.reader(component);
+                seek(dst,i) = reader.BlobHeap();
+            }
+            return buffer;
+        }
+
         public void Run()
         {
-            var s0 = LogSegmentSelection(0);
+            SegDir.Clear();
+            var b0 = LogSegmentBank(0);
             var catalog = ResolveCatalog();
-            LogResolutions(catalog);
-            var s1 = LogSegmentSelection(1);
+            var descriptions = LogResolutions(catalog);
+            var b1 = LogSegmentBank(1);
+            var entries = Locate(b1, descriptions);
 
             //HostDatasets.Clear();
             // Paths.Root.Clear(true);

@@ -149,14 +149,22 @@ namespace Z0
             Wf.Row(data);
         }
 
-        protected void TableEmit<T>(ReadOnlySpan<T> src, FS.FilePath dst)
+        protected uint TableEmit<T>(ReadOnlySpan<T> src, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
             var flow = Wf.EmittingTable<T>(dst);
             var count = Tables.emit(src,dst);
             Wf.EmittedTable(flow,count);
+            return count;
         }
 
+        protected uint TableEmit<T>(Span<T> src, FS.FilePath dst)
+            where T : struct, IRecord<T>
+                => TableEmit(src.ReadOnly(), dst);
+
+        protected uint TableEmit<T>(T[] src, FS.FilePath dst)
+            where T : struct, IRecord<T>
+                => TableEmit(core.@readonly(src), dst);
 
         protected virtual void OnInit()
         {

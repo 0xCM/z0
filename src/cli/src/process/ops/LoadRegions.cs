@@ -12,7 +12,7 @@ namespace Z0
 
     partial class ProcessContextPipe
     {
-        public Index<MemoryRegion> LoadRegions()
+        public Index<ProcessMemoryRegion> LoadRegions()
         {
             var paths = Paths.MemoryRegionPaths();
             if(paths.Length != 0)
@@ -24,12 +24,12 @@ namespace Z0
                 else
                     Wf.Error(result.Message);
             }
-            return sys.empty<MemoryRegion>();
+            return sys.empty<ProcessMemoryRegion>();
         }
 
-        public Outcome<Index<MemoryRegion>> LoadRegions(FS.FilePath src)
+        public Outcome<Index<ProcessMemoryRegion>> LoadRegions(FS.FilePath src)
         {
-            var tid = Tables.identify<MemoryRegion>();
+            var tid = Tables.identify<ProcessMemoryRegion>();
             var flow = Wf.Running(string.Format("Reading {0} records from {1}", tid, src.ToUri()));
             if(!src.Exists)
                 return (false, FS.Msg.DoesNotExist.Format(src));
@@ -42,11 +42,11 @@ namespace Z0
 
             ref readonly var header = ref first(lines);
             var cells = header.Split(Chars.Pipe);
-            if(cells.Length != MemoryRegion.FieldCount)
-                return (false, Tables.FieldCountMismatch.Format(cells.Length, MemoryRegion.FieldCount));
+            if(cells.Length != ProcessMemoryRegion.FieldCount)
+                return (false, Tables.FieldCountMismatch.Format(cells.Length, ProcessMemoryRegion.FieldCount));
 
             var data = slice(lines,1);
-            var buffer = alloc<MemoryRegion>(data.Length);
+            var buffer = alloc<ProcessMemoryRegion>(data.Length);
             ref var dst = ref first(buffer);
             var counter = 0;
             for(var i=0; i<data.Length; i++)

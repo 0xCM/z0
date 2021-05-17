@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Microsoft/.NET Foundation
 // License     :  MIT
+// Source      : https://github.com/dotnet/runtime/src/libraries/System.Reflection.Metadata
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -18,63 +19,6 @@ namespace Z0
     {
         public const int InvalidCompressedInteger = int.MaxValue;
 
-        [MethodImpl(Inline), Op]
-        public static unsafe uint unpack(byte* pSrc, uint length, uint offset, out ByteSize consumed)
-        {
-            byte* ptr = pSrc + offset;
-            var limit = length - offset;
-            consumed = 0;
-
-            if (limit == 0)
-                return uint.MaxValue;
-
-            var lead = (uint)ptr[0];
-            if ((lead & 0x80) == 0)
-            {
-                consumed = 1;
-                return lead;
-            }
-            else if((lead & 0x40) == 0)
-            {
-                if (limit >= 2)
-                {
-                    consumed = 2;
-                    return ((lead & 0x3fu) << 8) | (uint)ptr[1];
-                }
-            }
-            else if ((lead & 0x20) == 0)
-            {
-                if (limit >= 4)
-                {
-                    consumed = 4;
-                    return ((lead & 0x1fu) << 24) | ((uint)ptr[1] << 16) | ((uint)ptr[2] << 8) | (uint)ptr[3];
-                }
-            }
-
-            return uint.MaxValue;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static unsafe uint unpack(MemoryBlock src, uint offset, out ByteSize consumed)
-            => unpack(src.Pointer, (uint)src.Length, offset, out consumed);
-
-        [MethodImpl(Inline), Op]
-        public static bool available(MemoryBlock src, uint offset, ByteSize wanted)
-        {
-            if (unchecked((ulong)(uint)offset + (uint)wanted) > (ulong)src.Length)
-                return false;
-            else
-                return true;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static unsafe MemoryBlock block(MemoryBlock src, uint offset, ByteSize length)
-        {
-            if(available(src, offset, length))
-                return new MemoryBlock(src.Pointer + offset, length);
-            else
-                return MemoryBlock.Empty;
-        }
 
         [ApiHost("srm.memoryblock")]
         public readonly unsafe struct MemoryBlock
@@ -108,6 +52,20 @@ namespace Z0
                 get => new MemoryBlock(memory.gptr(first(Array.Empty<byte>())),0);
             }
 
+            [MethodImpl(Inline)]
+            public static bool create(byte* buffer, int length, out MemoryBlock dst)
+            {
+                dst = default;
+                if (length < 0)
+                    return false;
+
+                if (buffer == null && length != 0)
+                    return false;
+
+                dst = new MemoryBlock(buffer, length);
+                return true;
+            }
+
             public static MemoryBlock CreateChecked(byte* buffer, int length)
             {
                 if (length < 0)
@@ -125,13 +83,11 @@ namespace Z0
 
             [MethodImpl(Inline), Op]
             bool Available(int offset, int byteCount)
-                => available(this,(uint)offset, byteCount);
+                => available(this, (uint)offset, byteCount);
 
             [Op]
             public byte[]? ToArray()
-            {
-                return Pointer == null ? null : PeekBytes(0, Length);
-            }
+                => Pointer == null ? null : PeekBytes(0, Length);
 
             string GetDebuggerDisplay()
             {
@@ -149,10 +105,7 @@ namespace Z0
                 displayedBytes = Math.Min(Length, 64);
                 string result = BitConverter.ToString(PeekBytes(0, displayedBytes));
                 if (displayedBytes < Length)
-                {
                     result += "-...";
-                }
-
                 return result;
             }
 
@@ -192,15 +145,30 @@ namespace Z0
                 return display;
             }
 
-            [Op]
+            [MethodImpl(Inline), Op]
             public MemoryBlock GetMemoryBlockAt(int offset, int length)
                 => block(this, (uint)offset, length);
 
-            [Op]
+            [MethodImpl(Inline), Op]
             public byte PeekByte(int offset)
             {
-                Available(offset, sizeof(byte));
+                //Available(offset, sizeof(byte));
                 return Pointer[offset];
+            }
+
+            [MethodImpl(Inline), Op]
+            public bool PeekByte(int offset, out byte dst)
+            {
+                if(Available(offset, sizeof(byte)))
+                {
+                    dst = Pointer[offset];
+                    return true;
+                }
+                else
+                {
+                    dst = default;
+                    return false;
+                }
             }
 
             [Op]
@@ -215,11 +183,25 @@ namespace Z0
                 return (int)result;
             }
 
+
+            [MethodImpl(Inline), Op]
+            public bool PeekUInt32(int offset, out uint dst)
+            {
+                if(Available(offset, sizeof(uint)))
+                {
+                    dst = PeekUInt32(offset);
+                    return true;
+                }
+                else
+                {
+                    dst = default;
+                    return false;
+                }
+            }
+
             [MethodImpl(Inline), Op]
             public uint PeekUInt32(int offset)
             {
-                Available(offset, sizeof(uint));
-
                 unchecked
                 {
                     byte* ptr = Pointer + offset;
@@ -236,7 +218,7 @@ namespace Z0
             /// <returns>
             /// Value between 0 and 0x1fffffff, or <see cref="BlobReader.InvalidCompressedInteger"/> if the value encoding is invalid.
             /// </returns>
-            [Op]
+            [MethodImpl(Inline), Op]
             public int PeekCompressedInteger(int offset, out int numberOfBytesRead)
             {
                 var result = (int)unpack(this, (uint)offset, out var consumed);
@@ -245,10 +227,23 @@ namespace Z0
             }
 
             [MethodImpl(Inline), Op]
+            public bool PeekUInt16(int offset, out ushort dst)
+            {
+                if(Available(offset, sizeof(ushort)))
+                {
+                    dst = PeekUInt16(offset);
+                    return true;
+                }
+                else
+                {
+                    dst = default;
+                    return false;
+                }
+            }
+
+            [MethodImpl(Inline), Op]
             public ushort PeekUInt16(int offset)
             {
-                Available(offset, sizeof(ushort));
-
                 unchecked
                 {
                     byte* ptr = Pointer + offset;
@@ -265,9 +260,7 @@ namespace Z0
             // The result may be an invalid reference and shall only be used to compare with a valid reference.
             [Op]
             public uint PeekReferenceUnchecked(int offset, bool smallRefSize)
-            {
-                return smallRefSize ? PeekUInt16(offset) : PeekUInt32(offset);
-            }
+                => smallRefSize ? PeekUInt16(offset) : PeekUInt32(offset);
 
             // When reference has at most 24 bits.
             [Op]
@@ -342,9 +335,7 @@ namespace Z0
                     return new string((char*)ptr, 0, byteCount / sizeof(char));
                 }
                 else
-                {
                     return Encoding.Unicode.GetString(ptr, byteCount);
-                }
             }
 
             [Op]
@@ -385,10 +376,6 @@ namespace Z0
             [Op]
             public int GetUtf8NullTerminatedLength(int offset, out int numberOfBytesRead, char terminator = '\0')
             {
-                Available(offset, 0);
-
-                Debug.Assert(terminator <= 0x7f);
-
                 byte* start = Pointer + offset;
                 byte* end = Pointer + Length;
                 byte* current = start;
@@ -495,7 +482,6 @@ namespace Z0
             }
 
             // comparison stops at null terminator, terminator parameter, or end-of-block -- whichever comes first.
-            [Op]
             public FastComparisonResult Utf8NullTerminatedFastCompare(int offset, string text, int textStart, out int firstDifferenceIndex, char terminator, bool ignoreCase)
             {
                 Available(offset, 0);
@@ -923,7 +909,6 @@ namespace Z0
                 return true;
             }
 
-            [Op]
             public int[] BuildPtrTable(int numberOfRows, int rowSize, int referenceOffset, bool isReferenceSmall)
             {
                 int[] ptrTable = new int[numberOfRows];
@@ -939,7 +924,6 @@ namespace Z0
                 return ptrTable;
             }
 
-            [Op]
             public void ReadColumn(uint[] result, int rowSize, int referenceOffset, bool isReferenceSmall)
             {
                 int offset = referenceOffset;

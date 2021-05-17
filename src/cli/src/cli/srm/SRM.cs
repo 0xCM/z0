@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Microsoft/.NET Foundation
 // License     :  MIT
-// Source      : https://github.com/dotnet/runtime/src/libraries/System.Reflection.Metadata/src/System/Reflection/Metadata/MetadataReader.cs
+// Source      : https://github.com/dotnet/runtime/src/libraries/System.Reflection.Metadata
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -23,44 +23,104 @@ namespace Z0
         public static StringHandle StringHandleFromOffset(int heapOffset)
             => memory.@as<uint,StringHandle>(StringHandleType.String | (uint)heapOffset);
 
-        [MethodImpl(Inline), Op]
-        public static unsafe MemoryBlock block(byte* pSrc, int length)
-            => new MemoryBlock(pSrc,length);
+        /// <summary>
+        /// Reads stream headers described in ECMA-335 24.2.2 Stream header
+        /// </summary>
+        [Op]
+        public static CliStreamHeader[] StreamHeaders(ref BlobReader reader)
+        {
+            // storage header:
+            reader.ReadUInt16();
+            int streamCount = reader.ReadInt16();
+
+            var streamHeaders = new CliStreamHeader[streamCount];
+            for (int i = 0; i < streamHeaders.Length; i++)
+            {
+                if (reader.RemainingBytes < COR20Constants.MinimumSizeofStreamHeader)
+                    return sys.empty<CliStreamHeader>();
+
+                streamHeaders[i].Offset = reader.ReadUInt32();
+                streamHeaders[i].Size = reader.ReadUInt32();
+                //streamHeaders[i].Name = memReader.ReadUtf8NullTerminated();
+                // bool aligned = memReader.TryAlign(4);
+
+                // if (!aligned || memReader.RemainingBytes == 0)
+                // {
+                //     return sys.empty<CliStreamHeader>();
+                // }
+            }
+
+            return streamHeaders;
+        }
+
+        [Op]
+        static Index<uint> RowCounts(ref BlobReader reader, ulong presentTableMask)
+        {
+            var currentTableBit = 1ul;
+            var Empty = Index<uint>.Empty;
+            var buffer = new uint[MetadataTokens.TableCount];
+            RowCounts(ref reader, presentTableMask, buffer);
+            return buffer;
+        }
+
+        [Op]
+        static uint RowCounts(ref BlobReader reader, ulong presentTableMask, Span<uint> dst)
+        {
+            var currentTableBit = 1ul;
+            var Empty = Index<uint>.Empty;
+            var count = (uint)dst.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                if ((presentTableMask & currentTableBit) != 0)
+                {
+                    if (reader.RemainingBytes < sizeof(uint))
+                        break;
+
+                    var rowCount = reader.ReadUInt32();
+                    if (rowCount > TokenTypeIds.RIDMask)
+                        break;
+
+                    seek(dst, counter++) = (uint)rowCount;
+                }
+
+                currentTableBit <<= 1;
+            }
+
+            return counter;
+        }
+
 
         bool IsMinimalDelta;
 
-        private int GetReferenceSize(int[] rowCounts, TableIndex index)
+        [MethodImpl(Inline), Op]
+        static int GetReferenceSize(int[] rowCounts, TableIndex index, bool mindelta = false)
         {
-            if ((long)rowCounts[(uint)index] >= 65536L || IsMinimalDelta)
-            {
+            if ((long)skip(rowCounts, (uint)index) >= 65536L || mindelta)
                 return 4;
-            }
             return 2;
         }
 
-        int ComputeCodedTokenSize(int largeRowSize, int[] rowCounts, TableMask tablesReferenced)
+        [MethodImpl(Inline), Op]
+        static int ComputeCodedTokenSize(int largeRowSize, int[] rowCounts, TableMask tablesReferenced, bool mindelta = false)
         {
-            if (IsMinimalDelta)
-            {
+            if (mindelta)
                 return 4;
-            }
-            bool flag = true;
-            ulong num = (ulong)tablesReferenced;
-            for (int i = 0; i < MetadataTokens.TableCount; i++)
+
+            var flag = true;
+            var num = (ulong)tablesReferenced;
+            for (var i = 0; i < MetadataTokens.TableCount; i++)
             {
                 if ((num & 1) != 0L)
-                {
-                    flag = flag && rowCounts[i] < largeRowSize;
-                }
+                    flag = flag && skip(rowCounts,i) < largeRowSize;
                 num >>= 1;
             }
             if (!flag)
-            {
                 return 4;
-            }
             return 2;
         }
 
+        [Op]
         static MemoryBlock InterfaceImplBlock(int numberOfRows, bool declaredSorted, int typeDefTableRowRefSize, int typeDefOrRefRefSize,
             MemoryBlock containingBlock, int containingBlockOffset)
         {
@@ -74,6 +134,7 @@ namespace Z0
             return Block;
         }
 
+        [Op]
         static MemoryBlock TypeDefBlock(int numberOfRows,int fieldRefSize,int methodRefSize,int typeDefOrRefRefSize,int stringHeapRefSize,
             MemoryBlock containingBlock, int containingBlockOffset)
         {
@@ -93,6 +154,7 @@ namespace Z0
             return Block;
         }
 
+        [Op]
         static MemoryBlock TypeRefTableBlock(int numberOfRows, int resolutionScopeRefSize, int stringHeapRefSize, MemoryBlock containingBlock,int containingBlockOffset)
         {
             var NumberOfRows = numberOfRows;
@@ -105,6 +167,7 @@ namespace Z0
             return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
         }
 
+        [Op]
         static MemoryBlock ModuleTableBlock(int numberOfRows, int stringHeapRefSize, int guidHeapRefSize, MemoryBlock containingBlock, int containingBlockOffset)
         {
             var NumberOfRows = numberOfRows;
@@ -124,6 +187,7 @@ namespace Z0
             internal const int SizeOfMetadataTableHeader = 24;
             internal const uint LargeTableRowCount = 0x00010000;
         }
+
         const int SmallIndexSize = 2;
 
         const int LargeIndexSize = 4;
@@ -132,119 +196,9 @@ namespace Z0
 
         CliHeader Header;
 
-        unsafe void Init(MemoryBlock src)
-        {
-            var tableReader = new BlobReader(src.Pointer, src.Length);
-
-            ReadMetadataTableHeader(ref tableReader, out Header);
-        }
-
-        MetadataStreamKind _metadataStreamKind;
-
-        Outcome ReadMetadataTableHeader(ref BlobReader reader, out CliHeader dst)
-        {
-            dst = default;
-            if (reader.RemainingBytes < MetadataStreamConstants.SizeOfMetadataTableHeader)
-                return false;
-
-            // reserved (shall be ignored):
-            reader.ReadUInt32();
-
-            // major version (shall be ignored):
-            reader.ReadByte();
-
-            // minor version (shall be ignored):
-            reader.ReadByte();
-
-            // heap sizes:
-            dst.HeapSizes = (HeapSizes)reader.ReadByte();
-
-            // reserved (shall be ignored):
-            reader.ReadByte();
-
-            var presentTables = reader.ReadUInt64();
-            dst.Tables = (TableMask)reader.ReadUInt64();
-
-            // According to ECMA-335, MajorVersion and MinorVersion have fixed values and,
-            // based on recommendation in 24.1 Fixed fields: When writing these fields it
-            // is best that they be set to the value indicated, on reading they should be ignored.
-            // We will not be checking version values. We will continue checking that the set of
-            // present tables is within the set we understand.
-
-            var validTables = (ulong)(TableMask.TypeSystemTables | TableMask.DebugTables);
-
-            if ((presentTables & ~validTables) != 0)
-                return false;
-
-            dst.RowCounts = ReadMetadataTableRowCounts(ref reader, presentTables);
-
-            if ((dst.HeapSizes & HeapSizes.ExtraData) == HeapSizes.ExtraData)
-            {
-                // Skip "extra data" used by some obfuscators. Although it is not mentioned in the CLI spec,
-                // it is honored by the native metadata reader.
-                reader.ReadUInt32();
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Reads stream headers described in ECMA-335 24.2.2 Stream header
-        /// </summary>
-        static CliStreamHeader[] ReadStreamHeaders(ref BlobReader memReader)
-        {
-            // storage header:
-            memReader.ReadUInt16();
-            int streamCount = memReader.ReadInt16();
-
-            var streamHeaders = new CliStreamHeader[streamCount];
-            for (int i = 0; i < streamHeaders.Length; i++)
-            {
-                if (memReader.RemainingBytes < COR20Constants.MinimumSizeofStreamHeader)
-                    return sys.empty<CliStreamHeader>();
-
-                streamHeaders[i].Offset = memReader.ReadUInt32();
-                streamHeaders[i].Size = memReader.ReadUInt32();
-                //streamHeaders[i].Name = memReader.ReadUtf8NullTerminated();
-                // bool aligned = memReader.TryAlign(4);
-
-                // if (!aligned || memReader.RemainingBytes == 0)
-                // {
-                //     return sys.empty<CliStreamHeader>();
-                // }
-            }
-
-            return streamHeaders;
-        }
-
-        static uint[] ReadMetadataTableRowCounts(ref BlobReader memReader, ulong presentTableMask)
-        {
-            var currentTableBit = 1ul;
-            var buffer = new uint[MetadataTokens.TableCount];
-            ref var dst = ref first(buffer);
-            for (int i = 0; i < buffer.Length; i++)
-            {
-                if ((presentTableMask & currentTableBit) != 0)
-                {
-                    if (memReader.RemainingBytes < sizeof(uint))
-                        return sys.empty<uint>();
-
-                    var rowCount = memReader.ReadUInt32();
-                    if (rowCount > TokenTypeIds.RIDMask)
-                        return sys.empty<uint>();
-
-                    seek(dst, i) = (uint)rowCount;
-                }
-
-                currentTableBit <<= 1;
-            }
-
-            return buffer;
-        }
-
-        private bool IsDeclaredSorted(TableMask index)
-        {
-            return (_sortedTables & index) != 0;
-        }
+        [MethodImpl(Inline), Op]
+        bool IsDeclaredSorted(TableMask index)
+            => (_sortedTables & index) != 0;
 
         void InitializeTableReaders(MemoryBlock metadataTablesMemoryBlock, HeapSizes heapSizes, int[] rowCounts, int[] externalRowCountsOpt)
         {
@@ -390,6 +344,5 @@ namespace Z0
                 throw new Exception();
             }
         }
-
     }
 }

@@ -12,11 +12,10 @@ namespace Z0
     {
         public static unsafe class BlobUtilities
         {
-            public static byte[] ReadBytes(byte* pSrc, int byteCount)
+            static byte[] ReadBytes(byte* pSrc, int byteCount)
             {
                 if (byteCount == 0)
                     return sys.empty<byte>();
-
                 var dst = new byte[byteCount];
                 Marshal.Copy((IntPtr)pSrc, dst, 0, byteCount);
                 return dst;

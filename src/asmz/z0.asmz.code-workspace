@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "..\\part"
+		},
+		{
+			"path": "..\\related"
 		}
 	],
 	"settings": {}

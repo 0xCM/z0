@@ -176,8 +176,8 @@ namespace Z0.Asm
 
         void MapMemory()
         {
-            var dst = Db.IndexTable<MemoryRegion>();
-            var flow = Wf.EmittingTable<MemoryRegion>(dst);
+            var dst = Db.IndexTable<ProcessMemoryRegion>();
+            var flow = Wf.EmittingTable<ProcessMemoryRegion>(dst);
             var segments = ImageMemory.regions();
             Tables.emit(segments,dst);
             Wf.EmittedTable(flow, segments.Count);

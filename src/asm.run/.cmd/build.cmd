@@ -1,8 +1,3 @@
 @echo off
-
-call %~dp0config.cmd
-
-dotnet publish %ProjectPath%
-: -c Release -r win-x64
-
-call %~dp0deploy.cmd
+set ProjectId=asm.run
+call %ControlScripts%\build-app-5.0.cmd

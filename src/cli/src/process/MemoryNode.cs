@@ -125,7 +125,7 @@ namespace Z0
             {
                 if(MemType != 0 && Protection !=0)
                     dst.Add(new MemoryRangeInfo{
-                        BaseAddress = Address,
+                        StartAddress = Address,
                         EndAddress = Address+Size -1,
                         Size = Size,
                         Type = MemType,

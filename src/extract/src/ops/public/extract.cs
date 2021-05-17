@@ -35,8 +35,8 @@ namespace Z0
         [Op]
         public static unsafe ApiMemberExtract extract(in ResolvedMethod src, Span<byte> buffer)
         {
-            var size = extract(src.Address, buffer);
-            var block = new ApiExtractBlock(src.Address, src.Uri.Format(), slice(buffer,0, size).ToArray());
+            var size = extract(src.EntryPoint, buffer);
+            var block = new ApiExtractBlock(src.EntryPoint, src.Uri.Format(), slice(buffer,0, size).ToArray());
             return new ApiMemberExtract(src.ToApiMember(), block);
         }
     }

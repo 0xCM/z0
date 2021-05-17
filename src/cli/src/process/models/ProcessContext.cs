@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ProcessMemory;
-
     public struct ProcessContext
     {
         public int ProcessId;
@@ -20,7 +18,7 @@ namespace Z0
 
         public FS.FilePath PartitionPath;
 
-        public Index<MemoryRegion> Regions;
+        public Index<ProcessMemoryRegion> Regions;
 
         public FS.FilePath RegionPath;
 

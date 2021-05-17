@@ -25,8 +25,6 @@ namespace Z0
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
         }
 
-
-
         public Index<ResolvedPart> ResolveCatalog(IApiCatalog src)
         {
             var dst = root.list<ResolvedPart>();
@@ -56,7 +54,7 @@ namespace Z0
             {
                 dst.Sort();
                 var methods = dst.ToArray();
-                return new ResolvedHost(src.HostUri, first(methods).Address, methods);
+                return new ResolvedHost(src.HostUri, first(methods).EntryPoint, methods);
             }
             else
                 return ResolvedHost.Empty;
@@ -80,7 +78,7 @@ namespace Z0
                 if(count != 0)
                 {
                     var resolved = methods.ToArray().Sort();
-                    var @base = first(resolved).Address;
+                    var @base = first(resolved).EntryPoint;
                     hosts.Add(new ResolvedHost(host, @base, resolved));
                     counter += count;
                 }
@@ -93,7 +91,7 @@ namespace Z0
                 if(count != 0)
                 {
                     var resolved = methods.ToArray().Sort();
-                    var @base = first(resolved).Address;
+                    var @base = first(resolved).EntryPoint;
                     hosts.Add(new ResolvedHost(host.HostUri, @base, resolved));
                     counter += count;
                 }

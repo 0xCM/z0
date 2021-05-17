@@ -12,16 +12,16 @@ namespace Z0
 
     public readonly struct ProcessImageMap
     {
-        public ProcessState Process {get;}
+        public ProcessMemoryState Process {get;}
 
-        public Index<LocatedImage> Images {get;}
+        public Index<LocatedImageInfo> Images {get;}
 
         public Index<MemoryAddress> Locations {get;}
 
         public Index<ProcessModuleRow> Modules {get;}
 
         [MethodImpl(Inline)]
-        public ProcessImageMap(ProcessState state, LocatedImage[] images, Index<MemoryAddress> locations, ProcessModuleRow[] modules)
+        public ProcessImageMap(ProcessMemoryState state, LocatedImageInfo[] images, Index<MemoryAddress> locations, ProcessModuleRow[] modules)
         {
             Process = state;
             Images = images;

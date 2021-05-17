@@ -13,19 +13,19 @@ namespace Z0
 
     public readonly ref struct MemoryRegionTraverser
     {
-        readonly ReadOnlySpan<MemoryRegion> Regions;
+        readonly ReadOnlySpan<ProcessMemoryRegion> Regions;
 
         readonly bool IsLive;
 
         [MethodImpl(Inline)]
-        public MemoryRegionTraverser(ReadOnlySpan<MemoryRegion> src, bool live)
+        public MemoryRegionTraverser(ReadOnlySpan<ProcessMemoryRegion> src, bool live)
         {
             Regions = src;
             IsLive = live;
         }
 
         [MethodImpl(Inline), Op]
-        public ByteSize Traverse(IReceiver<MemoryRegion> dst)
+        public ByteSize Traverse(IReceiver<ProcessMemoryRegion> dst)
         {
             var size = ByteSize.Zero;
             var src = Regions;
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public unsafe ByteSize Traverse(delegate* unmanaged<in MemoryRegion,void> dst)
+        public unsafe ByteSize Traverse(delegate* unmanaged<in ProcessMemoryRegion,void> dst)
         {
             var size = ByteSize.Zero;
             var src = Regions;

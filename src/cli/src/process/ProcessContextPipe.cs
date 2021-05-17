@@ -30,7 +30,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var detail = ref skip(details,i);
-                symbols.Deposit(detail.BaseAddress, detail.Size, detail.Identity.Format());
+                symbols.Deposit(detail.StartAddress, detail.Size, detail.Identity.Format());
             }
             return symbols;
         }
@@ -141,19 +141,19 @@ namespace Z0
         public ReadOnlySpan<AddressBankEntry> LoadContextAddresses()
         {
             var regions = LoadRegions();
-            var worker = RegionProcessor.create(Wf);
+            var worker = Wf.RegionProcessor();
             worker.Submit(regions);
             ref readonly var product = ref worker.Bank;
-            var count = product.SegmentCount;
+            var count = product.SelectorCount;
             var dst = root.datalist<AddressBankEntry>();
             var total = 0ul;
             for(ushort i=0; i<count; i++)
             {
-                var segment = product.Segment(i);
+                var bases = product.Bases(i);
                 var selector = product.Selector(i);
-                for(ushort j=0; j<segment.Length; j++)
+                for(ushort j=0; j<bases.Length; j++)
                 {
-                    (var @base, var size) = skip(segment, j);
+                    (var @base, var size) = skip(bases, j);
                     total += size;
 
                     var record = new AddressBankEntry();

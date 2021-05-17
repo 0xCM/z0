@@ -1,18 +1,22 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Microsoft/.NET Foundation
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
-// Source      : https://github.com/microsoft/perfview
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using Windows;
+    using System.Runtime.InteropServices;
 
-    [Record]
-    public struct MemoryRangeInfo : IRecord<MemoryRangeInfo>
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct ProcessMemoryRegion : IRecord<ProcessMemoryRegion>
     {
-        public const string TableId = "memory.range";
+        public const string TableId = "image.memory.regions";
+
+        public const byte FieldCount = 9;
+
+        public uint Index;
+
+        public Name Identity;
 
         public MemoryAddress StartAddress;
 
@@ -26,6 +30,6 @@ namespace Z0
 
         public MemState State;
 
-        public string Owner;
+        public TextBlock FullIdentity;
     }
 }

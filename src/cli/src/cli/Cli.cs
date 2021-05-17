@@ -20,6 +20,21 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        public static Index<CliBlobHeap> blobs(ReadOnlySpan<Assembly> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<CliBlobHeap>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var component = ref skip(src,i);
+                var reader = Cli.reader(component);
+                seek(dst,i) = reader.BlobHeap();
+            }
+            return buffer;
+
+        }
+
         [Op]
         public static CliTableSource<T> source<T>(Assembly src)
             where T : struct, IRecord<T>

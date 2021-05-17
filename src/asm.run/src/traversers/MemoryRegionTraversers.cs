@@ -17,33 +17,33 @@ namespace Z0
     public readonly struct MemoryRegionTraversers
     {
         [Op, MethodImpl(Inline)]
-        public static MemoryRegionTraverser create(ReadOnlySpan<MemoryRegion> src, bool live)
+        public static MemoryRegionTraverser create(ReadOnlySpan<ProcessMemoryRegion> src, bool live)
             => new MemoryRegionTraverser(src, live);
 
         [Op, MethodImpl(Inline)]
-        public static unsafe ByteSize run(MemoryRegionTraverser traverser, delegate* unmanaged<in MemoryRegion,void> dst)
+        public static unsafe ByteSize run(MemoryRegionTraverser traverser, delegate* unmanaged<in ProcessMemoryRegion,void> dst)
             => traverser.Traverse(dst);
 
         [Op]
-        public static unsafe Index<MemoryRegion> filter(ReadOnlySpan<MemoryRegion> src, PageProtection protect)
+        public static unsafe Index<ProcessMemoryRegion> filter(ReadOnlySpan<ProcessMemoryRegion> src, PageProtection protect)
         {
-            var dst  = alloc<MemoryRegion>((uint)src.Length);
+            var dst  = alloc<ProcessMemoryRegion>((uint)src.Length);
             var traverser = create(src,false);
             var filter = new MemoryRegionFilter(dst,protect);
             var size = traverser.Traverse(filter);
             return filter.Emit();
         }
 
-        unsafe struct MemoryRegionFilter : IReceiver<MemoryRegion>
+        unsafe struct MemoryRegionFilter : IReceiver<ProcessMemoryRegion>
         {
-            readonly Index<MemoryRegion> Accepted;
+            readonly Index<ProcessMemoryRegion> Accepted;
 
             readonly PageProtection Protection;
 
             uint Position;
 
             [MethodImpl(Inline)]
-            public MemoryRegionFilter(Index<MemoryRegion> dst, PageProtection protection)
+            public MemoryRegionFilter(Index<ProcessMemoryRegion> dst, PageProtection protection)
             {
                 Accepted = dst;
                 Protection = protection;
@@ -51,7 +51,7 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public void Deposit(in MemoryRegion src)
+            public void Deposit(in ProcessMemoryRegion src)
             {
                 if((src.Protection & Protection) != 0)
                 {
@@ -59,7 +59,7 @@ namespace Z0
                 }
             }
 
-            public Index<MemoryRegion> Emit()
+            public Index<ProcessMemoryRegion> Emit()
                 => Accepted;
         }
     }

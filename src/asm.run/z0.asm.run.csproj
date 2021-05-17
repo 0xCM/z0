@@ -19,6 +19,7 @@
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(ResPack)" />
+    <ProjectReference Include="$(Cli)" />
   </ItemGroup>
 
 </Project>

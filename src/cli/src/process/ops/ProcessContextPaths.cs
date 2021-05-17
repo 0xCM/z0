@@ -41,7 +41,7 @@ namespace Z0
             => FS.file(string.Format("memory.hash.detail.{0}.{1}", process, ts.Format()), FS.Csv);
 
         public FS.FileName MemoryRegionFile(Process process, Timestamp ts)
-            => FS.file(string.Format("{0}.{1}.{2}", Tables.identify<MemoryRegion>(), process.ProcessName, ts.Format()), FS.Csv);
+            => FS.file(string.Format("{0}.{1}.{2}", Tables.identify<ProcessMemoryRegion>(), process.ProcessName, ts.Format()), FS.Csv);
 
         public FS.FilePath MemoryRegionPath(Process process, Timestamp ts)
             => Root + MemoryRegionFile(process, ts);
@@ -50,7 +50,7 @@ namespace Z0
             => Root + MemoryRegionHashFile(process, ts, subject);
 
         public FS.Files MemoryRegionPaths()
-            => Root.AllFiles.Where(f => f.FileName.Contains(MemoryRegion.TableId)).Storage.Sort();
+            => Root.AllFiles.Where(f => f.FileName.Contains(ProcessMemoryRegion.TableId)).Storage.Sort();
 
     }
 }

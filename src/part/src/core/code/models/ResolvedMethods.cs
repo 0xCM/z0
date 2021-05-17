@@ -90,7 +90,7 @@ namespace Z0
             public MemoryAddress Address
             {
                 [MethodImpl(Inline)]
-                get => Method.Address;
+                get => Method.EntryPoint;
             }
 
             public ClrAssemblyName Component

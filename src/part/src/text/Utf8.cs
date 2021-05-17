@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
 
     [ApiHost]
-    public readonly unsafe struct Utf8
+    public readonly unsafe partial struct Utf8
     {
         [MethodImpl(Inline), Op]
         public static TextEncoding encoding()
@@ -20,12 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool nonempty(utf8p src)
             => memory.address(src.pData) != 0 && (*src.pData != 0);
-
-        public static uint hash(utf8 src)
-            => alg.hash.marvin(src.View);
-
-        public static uint hash(utf8p src)
-            => alg.hash.marvin(src.View);
 
         [MethodImpl(Inline), Op]
         public static ByteSize size(utf8p src)

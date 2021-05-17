@@ -22,7 +22,11 @@ namespace Z0
             Size = size;
         }
 
-        public CliHeapKind HeapKind => CliHeapKind.Blob;
+        public CliHeapKind HeapKind
+        {
+            [MethodImpl(Inline)]
+            get => CliHeapKind.Blob;
+        }
 
         public unsafe ReadOnlySpan<byte> Data
         {
