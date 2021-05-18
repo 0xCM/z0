@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     public struct bits<T> : IBitContainer<bits<T>,T>
         where T : unmanaged
@@ -21,7 +21,7 @@ namespace Z0
         public bits(T src)
         {
             Storage = src;
-            Width = width<T>();
+            Width = (ushort)width<T>();
         }
 
         [MethodImpl(Inline)]

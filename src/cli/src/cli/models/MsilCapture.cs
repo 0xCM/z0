@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
@@ -20,5 +21,8 @@ namespace Z0
         public OpUri Uri;
 
         public BinaryCode Encoded;
+
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{16,16,80,20};
     }
 }

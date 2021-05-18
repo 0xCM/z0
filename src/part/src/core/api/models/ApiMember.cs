@@ -15,44 +15,57 @@ namespace Z0
     /// </summary>
     public class ApiMember : IApiMember<ApiMember>
     {
-        public OpIdentity Id {get;}
-
         public OpUri OpUri {get;}
 
         public MethodInfo Method {get;}
 
         public ApiClassKind ApiClass {get;}
 
-        public MemoryAddress BaseAddress {get;}
-
-        public ApiHostUri Host {get;}
-
         public ApiMsil Msil {get;}
-
-        public CliSig CliSig {get;}
 
         public ClrMethodArtifact Metadata {get;}
 
         public ApiMember(OpUri uri, MethodInfo method, MemoryAddress address)
         {
-            Id = uri.OpId;
+            //Id = uri.OpId;
             OpUri = uri;
             ApiClass = method.KindId();
             Method = root.require(method != null, method, () => "Unfortunately, the method is null");
-            BaseAddress = address;
-            Host = OpUri.Host;
-            Msil = ClrDynamic.msil(BaseAddress, uri, method);
-            CliSig = address.IsNonZero ? method.ResolveSignature() : CliSig.Empty;
+            //BaseAddress = address;
+            //Host = OpUri.Host;
+            Msil = ClrDynamic.msil(address, uri, method);
+            //CliSig = address.IsNonZero ? method.ResolveSignature() : CliSig.Empty;
             Metadata = method.Artifact();
         }
 
-        public ApiMember Zero
-            => Empty;
+        public OpIdentity Id
+        {
+            [MethodImpl(Inline)]
+            get => OpUri.OpId;
+        }
+
+        public MemoryAddress BaseAddress
+        {
+            [MethodImpl(Inline)]
+            get => Msil.BaseAddress;
+        }
+
+        public ApiHostUri Host
+        {
+            [MethodImpl(Inline)]
+            get => OpUri.Host;
+        }
+
+        public CliSig CliSig
+        {
+             [MethodImpl(Inline)]
+             get => Msil.CliSig;
+        }
 
         public CliToken Token
         {
             [MethodImpl(Inline)]
-            get => Method;
+            get => Msil.Token;
         }
 
         [MethodImpl(Inline)]
@@ -65,17 +78,6 @@ namespace Z0
             result &= BaseAddress.Equals(src.BaseAddress);
             result &= Host.Equals(src.Host);
             return result;
-        }
-
-        public ApiMemberInfo Describe()
-        {
-            var dst = new ApiMemberInfo();
-            dst.Address = BaseAddress;
-            dst.Host = Host.UriText;
-            dst.Member = Metadata.DisplaySig.Format();
-            dst.ApiKind = ApiClass;
-            dst.Uri = OpUri.UriText;
-            return dst;
         }
 
         [MethodImpl(Inline)]

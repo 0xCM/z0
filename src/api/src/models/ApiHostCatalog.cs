@@ -79,8 +79,8 @@ namespace Z0
             get => Members.Count != 0;
         }
 
-        public Index<ApiMemberInfo> Describe()
-            => root.map(Members, m => m.Describe());
+        // public Index<ApiMemberInfo> Describe()
+        //     => root.map(Members, m => m.Describe());
 
         public static ApiHostCatalog Empty
         {

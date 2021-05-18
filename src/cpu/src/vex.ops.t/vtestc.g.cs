@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static cpu;
-    using static memory;
+    using static Root;
+    using static Typed;
 
     partial struct gcpu
     {
@@ -56,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(Vector128<T> src)
             where T : unmanaged
-                => vtestc(src, gcpu.vones<T>(n128));
+                => vtestc(src, vones<T>(w128));
 
         /// <summary>
         /// Returns 1 if all source bits are enabled and 0 otherwise
@@ -66,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(Vector256<T> src)
             where T : unmanaged
-                => vtestc(src, gcpu.vones<T>(n256));
+                => vtestc(src, vones<T>(w256));
 
         /// <summary>
         /// Returns 1 if all source bits are enabled and 0 otherwise
@@ -76,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline), TestC, Closures(AllNumeric)]
         public static bit vtestc<T>(Vector512<T> src)
             where T : unmanaged
-                => vtestc(src, gcpu.vones<T>(n512));
+                => vtestc(src, vones<T>(w512));
 
         [MethodImpl(Inline)]
         static bit vtestc_u<T>(Vector128<T> src, Vector128<T> mask)

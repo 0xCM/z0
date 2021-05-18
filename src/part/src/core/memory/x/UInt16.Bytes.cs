@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class XMem
     {
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> Bytes(this ushort src)
-            => memory.bytes(src);
+            => core.bytes(src);
     }
 }

@@ -25,6 +25,59 @@ namespace Z0
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
         }
 
+
+        public ReadOnlySpan<ApiMemberInfo> Describe(in ResolvedPart src)
+        {
+            var buffer = alloc<ApiMemberInfo>(src.MethodCount);
+            Describe(src,buffer);
+            return buffer;
+        }
+
+        public ReadOnlySpan<ApiMemberInfo> ResolveParts(params PartId[] parts)
+        {
+            var count = parts.Length;
+            var buffer = root.list<ResolvedPart>();
+            for(var i=0; i<count; i++)
+                buffer.Add(ResolvePart(skip(parts,i)));
+
+            var kMethods = 0u;
+            root.iter(buffer, p => kMethods += (uint)p.MethodCount);
+            var methods = alloc<ApiMemberInfo>(kMethods);
+            Describe(buffer.ViewDeposited(), methods);
+            return methods;
+        }
+
+        void Describe(ReadOnlySpan<ResolvedPart> src, Span<ApiMemberInfo> dst)
+        {
+            var count = src.Length;
+            var offset = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(src,i);
+                offset += Describe(part, slice(dst,offset));
+            }
+
+            dst.Sort();
+            var path = Db.IndexTable<ApiMemberInfo>();
+            TableEmit(dst, ApiMemberInfo.RenderWidths, path);
+        }
+
+        public uint Describe(in ResolvedPart src, Span<ApiMemberInfo> dst)
+        {
+            var hosts = src.Hosts.View;
+            var count = hosts.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var host = ref skip(hosts,i);
+                var methods = host.Methods.View;
+                var mCount = methods.Length;
+                for(var j=0; j<mCount; j++)
+                    describe(skip(methods,j), ref seek(dst,counter++));
+            }
+            return counter;
+        }
+
         public Index<ResolvedPart> ResolveCatalog(IApiCatalog src)
         {
             var dst = root.list<ResolvedPart>();
@@ -38,6 +91,14 @@ namespace Z0
             foreach(var part in src.Parts)
                 counter += ResolvePart(part, dst);
             return counter;
+        }
+
+        public ResolvedPart ResolvePart(PartId id)
+        {
+            if(Wf.ApiCatalog.FindPart(id, out var part))
+                return ResolvePart(part, out _);
+            else
+                return ResolvedPart.Empty;
         }
 
         public uint ResolvePart(IPart src, List<ResolvedPart> dst)
@@ -156,5 +217,19 @@ namespace Z0
 
         OpUri MemberUri(ApiHostUri host, MethodInfo method)
             => ApiUri.define(ApiUriScheme.Located, host, method.Name, Identity.Identify(method));
+
+
+        [Op]
+        static ref ApiMemberInfo describe(in ResolvedMethod src, ref ApiMemberInfo dst)
+        {
+            var msil = ClrDynamic.msil(src.EntryPoint, src.Uri, src.Method);
+            dst.EntryPoint = src.EntryPoint;
+            dst.ApiKind = src.Method.KindId();
+            dst.MsilCode = msil.Code;
+            dst.CliSig = msil.CliSig;
+            dst.DisplaySig = src.Method.DisplaySig().Format();
+            dst.Token = msil.Token;
+            return ref dst;
+        }
     }
 }

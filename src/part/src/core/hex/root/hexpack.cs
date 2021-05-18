@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial struct Hex
     {

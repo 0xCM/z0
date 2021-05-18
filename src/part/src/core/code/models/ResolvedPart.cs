@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -19,6 +20,11 @@ namespace Z0
         {
             Part = part;
             Hosts = hosts;
+        }
+
+        public uint MethodCount
+        {
+            get => (uint)Hosts.Select(x => (int)x.MethodCount).Storage.Sum();
         }
 
         public static ResolvedPart Empty

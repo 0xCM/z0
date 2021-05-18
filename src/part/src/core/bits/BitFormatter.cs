@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     [ApiHost]
     public readonly struct BitFormatter
@@ -24,13 +24,13 @@ namespace Z0
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
         public static string grid(Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
         {
-            var dst = BitFormatter.chars(src);
+            var dst = chars(src);
             var sb = text.build();
             var limit = maxbits ?? dst.Length;
             for(int i=0, rowidx=0; i<limit; i+= rowlen, rowidx++)
             {
                 var remaining = dst.Length - i;
-                var segment = root.min(remaining, rowlen);
+                var segment = Math.Min(remaining, rowlen);
                 var rowbits = dst.Slice(i, segment);
                 var rowprefix = showrow ? $"{rowidx.ToString().PadRight(3)} | " : string.Empty;
                 var rowformat = rowprefix + new string(rowbits.Intersperse(Chars.Space));
@@ -59,7 +59,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string format<T>(T src, int? digits = null)
             where T : unmanaged
-                => BitFormatter.format(src, digits != null ? limited((uint)digits.Value, digits.Value)  : configure());
+                => format(src, digits != null ? limited((uint)digits.Value, digits.Value)  : configure());
 
         public static BitFormat DefaultConfig
             => configure(false);
@@ -160,7 +160,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string format<T>(T src)
             where T : struct
-                => format(src, BitFormatter.configure());
+                => format(src, configure());
 
         [Op]
         public static string format(ReadOnlySpan<byte> src, in BitFormat config)

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     using DF = DecimalSymFacet;
     using XF = HexSymFacet;
@@ -19,6 +18,7 @@ namespace Z0
         /// Tests whether a character symbol is one of '0'..'9'
         /// </summary>
         /// <param name="src">The symbol to test</param>
+        [MethodImpl(Inline), Op]
         public static bit number(char c)
             => (DF)c >= DF.First && (DF)c <= DF.Last;
 

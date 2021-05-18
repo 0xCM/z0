@@ -25,7 +25,7 @@ namespace Z0
         ClrArtifactKind Kind {get;}
 
         ClrArtifactRef Ref
-            => new ClrArtifactRef(Token, Kind ,Name);
+            => ClrArtifacts.reference(Token, Kind ,Name);
 
         string ITextual.Format()
             => Name;

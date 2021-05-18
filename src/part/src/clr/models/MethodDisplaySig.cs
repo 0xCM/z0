@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct MethodDisplaySig
     {
@@ -60,16 +60,21 @@ namespace Z0
 
         [Op]
         public static MethodDisplaySig from(in ClrMethodArtifact src)
-        {
-            var dst = new TextBuffer(new StringBuilder());
-            format(src, dst);
-            return new MethodDisplaySig(dst.Emit());
-        }
+            => new MethodDisplaySig(format(src));
 
         [Op]
-        static void format(in ClrMethodArtifact src, ITextBuffer dst)
+        public static string format(in ClrTypeSigInfo src)
+            => src.IsArray ? src.DisplayName + "[]" : $"{src.Modifier}{src.DisplayName}";
+
+        [Op]
+        public static string format(in ClrParamInfo src)
+            => string.Format("{0} {1}", format(src.Type), src.Name);
+
+        [Op]
+        public static string format(in ClrMethodArtifact src)
         {
-            dst.Append(src.ReturnType.Format());
+            var dst = text.buffer();
+            dst.Append(format(src.ReturnType));
             dst.Append(Chars.Space);
             dst.Append(src.MethodName);
             dst.Append(Chars.LParen);
@@ -77,7 +82,7 @@ namespace Z0
             var count = parameters.Length;
             for(var i=0; i<count; i++)
             {
-                dst.Append(memory.skip(parameters,i).Format());
+                dst.Append(format(skip(parameters,i)));
                 if(i != count - 1)
                 {
                     dst.Append(Chars.Comma);
@@ -85,6 +90,7 @@ namespace Z0
                 }
             }
             dst.Append(Chars.RParen);
+            return dst.Emit();
         }
 
         readonly TextBlock Content;

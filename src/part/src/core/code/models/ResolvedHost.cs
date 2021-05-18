@@ -50,6 +50,12 @@ namespace Z0
             get => Host.IsNonEmpty && Methods.IsNonEmpty;
         }
 
+        public uint MethodCount
+        {
+            [MethodImpl(Inline)]
+            get => Methods.Count;
+        }
+
         [MethodImpl(Inline)]
         public int CompareTo(ResolvedHost src)
             => BaseAddress.CompareTo(src.BaseAddress);

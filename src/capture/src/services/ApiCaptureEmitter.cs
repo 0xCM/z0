@@ -44,9 +44,9 @@ namespace Z0
                 var parsed = ParseExtracts(host, src);
                 if(parsed.Length != 0)
                 {
-                    EmitApiHex(host, parsed, Wf.Db().ParsedExtractPath(host));
-                    EmitMsilData(host, parsed, Wf.Db().CilDataPath(host));
-                    EmitMsilCode(host, parsed, Wf.Db().CilCodePath(host));
+                    EmitApiHex(host, parsed, Db.ParsedExtractPath(host));
+                    EmitMsilData(host, parsed, Db.CilDataPath(host));
+                    EmitMsilCode(host, parsed, Db.CilCodePath(host));
                     routines = DecodeMembers(host, parsed, src);
                 }
                 Wf.Ran(flow);
@@ -96,13 +96,8 @@ namespace Z0
             return src.Count;
         }
 
-        public Count EmitMsilData(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
-        {
-            if(src.Count != 0)
-                IlPipe.EmitData(src, dst);
-
-            return src.Count;
-        }
+        public Index<MsilCapture> EmitMsilData(ApiHostUri host, Index<ApiMemberCode> src, FS.FilePath dst)
+            => IlPipe.EmitData(src, dst);
 
         public Index<ApiExtractRow> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src, FS.FilePath dst)
         {

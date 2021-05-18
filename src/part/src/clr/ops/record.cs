@@ -17,7 +17,7 @@ namespace Z0
         {
             var data = adapt(src);
             var dst = new ClrFieldRecord();
-            dst.Key = ClrArtifactRef.define(src);
+            dst.Key = ClrArtifacts.reference(src);
             dst.DeclaringType = data.DeclaringType.Token;
             dst.DataType = data.FieldType.Token;
             dst.Attributes = data.Attributes;

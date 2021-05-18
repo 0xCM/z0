@@ -18,7 +18,7 @@ namespace Z0
 
         CliSig CliSig {get;}
 
-        ApiMemberInfo Describe();
+        //ApiMemberInfo Describe();
     }
 
     [Free]

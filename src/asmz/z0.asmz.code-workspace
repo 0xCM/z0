@@ -53,6 +53,9 @@
 		},
 		{
 			"path": "..\\clr"
+		},
+		{
+			"path": "..\\capture"
 		}
 	],
 	"settings": {}

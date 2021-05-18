@@ -165,26 +165,28 @@ namespace Z0
             dst.AppendLine();
         }
 
-        public void EmitData(Index<ApiMemberCode> src, FS.FilePath dst)
+        public Index<MsilCapture> EmitData(Index<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Count;
+            var buffer = alloc<MsilCapture>(count);
             if(count != 0)
             {
+                ref var target = ref first(buffer);
                 var flow = Wf.EmittingTable<MsilCapture>(dst);
                 var view = src.View;
-
-                var formatter = Tables.formatter<MsilCapture>(array<byte>(16,16,80,20));
+                var formatter = Tables.formatter<MsilCapture>(MsilCapture.RenderWidths);
                 using var writer = dst.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 for(var i=0u; i<count; i++)
                 {
-                    var row = new MsilCapture();
+                    ref var row = ref seek(target,i);
                     fill(skip(view,i).Member, ref row);
                     writer.WriteLine(formatter.Format(row));
                 }
 
                 Wf.EmittedTable(flow, count);
             }
+            return buffer;
         }
 
         static ref MsilCapture fill(in ApiMember src, ref MsilCapture dst)

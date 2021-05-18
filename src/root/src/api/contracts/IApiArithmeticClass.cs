@@ -5,7 +5,6 @@
 namespace Z0
 {
     using K = ApiArithmeticClass;
-    using I = IApiArithmeticApClass;
 
     /// <summary>
     /// Characterizes an arithmetic function classifier

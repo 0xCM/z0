@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Projects a source span to target span via a supplied transformation
@@ -79,6 +79,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Select<S,T>(this Span<S> src, Func<S,T> f)
             => src.ReadOnly().Map(f);
-
     }
 }

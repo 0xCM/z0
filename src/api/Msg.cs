@@ -7,6 +7,8 @@ namespace Z0
     [ApiComplete]
     readonly partial struct Msg
     {
+        public static MsgPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
+
         public static MsgPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
 
         public static MsgPattern<Count> AccumulatedDescriptors => "Accumulated {0} descriptors";

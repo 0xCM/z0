@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
-
+    using static Root;
     using static HexDigitKind;
 
     partial struct Hex

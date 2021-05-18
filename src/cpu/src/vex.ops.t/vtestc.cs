@@ -10,7 +10,8 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static Part;
+    using static Root;
+    using static Typed;
 
     partial struct cpu
     {
@@ -242,7 +243,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), TestC]
         public static bit vtestc(Vector128<float> src, Vector128<float> mask)
             => TestC(src, mask);
 
@@ -252,7 +253,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), TestC]
         public static bit vtestc(Vector128<double> src, Vector128<double> mask)
             => TestC(src, mask);
 
@@ -262,7 +263,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), TestC]
         public static bit vtestc(Vector256<float> src, Vector256<float> mask)
             => TestC(src, mask);
 
@@ -272,7 +273,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), TestC]
         public static bit vtestc(Vector256<double> src, Vector256<double> mask)
             => TestC(src, mask);
     }

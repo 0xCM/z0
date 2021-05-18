@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     /// <summary>
     /// Represents a value as an ordered sequence of bits/bytes

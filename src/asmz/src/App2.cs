@@ -106,7 +106,6 @@ namespace Z0.Asm
             Wf.CliPipe().EmitImageContent();
         }
 
-
         public void EmitXedCatalog()
         {
             Wf.XedCatalog().EmitCatalog();
@@ -239,10 +238,15 @@ namespace Z0.Asm
             return runner;
         }
 
+
         public void Run()
         {
-            var builder = Wf.PdbIndexBuilder();
-            builder.IndexParts(PartId.Cpu, PartId.Math, PartId.GMath);
+            var parts = array(PartId.Cpu, PartId.Math, PartId.GMath);
+            var resolver = Wf.ApiResolver();
+            resolver.ResolveParts(parts);
+
+            // var builder = Wf.PdbIndexBuilder();
+            // builder.IndexParts(parts);
 
             //var runner = GenScripts();
 

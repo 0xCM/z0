@@ -17,7 +17,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var count =src.Length;
+            var count = src.Length;
             ref readonly var input = ref first(src);
             ref var output = ref @as<S,T>(first(src));
             for(var i=0; i<count; i++)

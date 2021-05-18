@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format("{0} {1}", Type.Format(), Name);
+            => string.Format("{0} {1}", Type.Format(), Name);
 
         public override string ToString()
             => Format();

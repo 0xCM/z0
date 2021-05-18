@@ -15,7 +15,7 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static TypeLevel;
+    using static Typed;
 
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>

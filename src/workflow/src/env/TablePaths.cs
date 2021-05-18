@@ -49,7 +49,7 @@ namespace Z0
 
         FS.FilePath Table<T>(PartId part)
             where T : struct, IRecord<T>
-                => TableDir<T>() + FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format(), DefaultTableExt));
+                => TableDir<T>() + FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format()), DefaultTableExt);
 
         FS.FilePath Table<T>(string subject)
             where T : struct, IRecord<T>

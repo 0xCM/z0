@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
 
     public struct bits<N,T> : IBitContainer<bits<N,T>,N,T>
         where N : unmanaged, ITypeNat
@@ -25,7 +24,7 @@ namespace Z0
         public ushort Width
         {
             [MethodImpl(Inline)]
-            get => nat16u<N>();
+            get => NatValues.nat16u<N>();
         }
 
         public T Value

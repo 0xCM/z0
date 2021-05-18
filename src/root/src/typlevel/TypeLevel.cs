@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     [ApiComplete]
-    public readonly struct TypeLevel
+    public readonly struct Typed
     {
         public static N0 n0 => default;
 

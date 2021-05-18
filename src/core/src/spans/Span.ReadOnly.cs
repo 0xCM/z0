@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class XMem
+    partial class XTend
     {
         /// <summary>
         /// Presents a mutable span as a readonly span

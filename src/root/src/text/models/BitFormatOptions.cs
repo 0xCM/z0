@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost(ApiNames.BitFormatOptions)]
+    [ApiHost]
     public readonly struct BitFormatOptions
     {
         [MethodImpl(Inline), Op]

@@ -10,7 +10,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static Part;
+    using static Root;
 
     partial struct cpu
     {
@@ -200,7 +200,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), TestZ]
         public static bit vtestz(Vector128<float> src, Vector128<float> mask)
             => TestZ(src,mask);
 
@@ -210,7 +210,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), TestZ]
         public static bit vtestz(Vector128<double> src, Vector128<double> mask)
             => TestZ(src,mask);
     }

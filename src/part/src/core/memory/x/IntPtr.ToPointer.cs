@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial class XMem
+    partial class XTend
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* ToPointer<T>(this IntPtr src)

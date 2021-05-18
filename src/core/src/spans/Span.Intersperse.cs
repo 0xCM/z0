@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
 
-    partial class XCollective
+    using static core;
+
+    partial class XTend
     {
         /// <summary>
         /// Creates a new span by interposing a specified element between each element of an existing span
@@ -24,9 +26,9 @@ namespace Z0
             Span<T> dst = new T[len*2 - 1];
             for(int i=0, j=0; i<len; i++, j+= 2)
             {
-                dst[j] = src[i];
+                seek(dst, j) = skip(src, i);
                 if(i != src.Length - 1)
-                    dst[j + 1] = x;
+                    seek(dst, j + 1) = x;
             }
             return dst;
         }

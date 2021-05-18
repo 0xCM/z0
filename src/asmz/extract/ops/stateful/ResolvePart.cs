@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static memory;
-
     partial class ApiExtractor
     {
         ResolvedPart ResolvePart(IPart src)
@@ -16,5 +12,6 @@ namespace Z0
             Receivers.Raise(new PartResolvedEvent(resolved));
             return resolved;
         }
+
     }
 }

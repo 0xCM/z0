@@ -85,9 +85,4 @@ namespace Z0
             return ref dst;
         }
     }
-
-    partial struct Msg
-    {
-        public static MsgPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
-    }
 }
