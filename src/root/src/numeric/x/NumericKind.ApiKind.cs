@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class XTend
+    partial class XNKind
     {
         [MethodImpl(Inline)]
         public static ScalarKind ApiKind(this NumericKind kind)

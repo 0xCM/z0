@@ -185,7 +185,6 @@ namespace Z0.Asm
             // extractor.Run(receivers);
         }
 
-
         void DescribeHeaps()
         {
             var components = Wf.ApiCatalog.Components.View;
@@ -242,7 +241,10 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var runner = GenScripts();
+            var builder = Wf.PdbIndexBuilder();
+            builder.IndexParts(PartId.Cpu, PartId.Math, PartId.GMath);
+
+            //var runner = GenScripts();
 
             // var pipe = Wf.CliPipe();
             // pipe.EmitMetaBlocks();

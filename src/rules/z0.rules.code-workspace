@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\core"
+		},
+		{
+			"path": "..\\root"
+		},
+		{
+			"path": "..\\sys"
+		}
+	],
+	"settings": {}
+}

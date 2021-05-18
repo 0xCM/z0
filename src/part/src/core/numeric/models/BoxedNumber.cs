@@ -9,8 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using api = NumericBox;
-
     /// <summary>
     /// A numbered box
     /// </summary>
@@ -21,7 +19,6 @@ namespace Z0
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
     {
         public static BoxedNumberConverter Converter => default;
-
 
         [MethodImpl(Inline), Op]
         public static BoxedNumber define(object src, NumericKind kind)

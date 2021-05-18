@@ -22,6 +22,11 @@ namespace Z0
         public static CliRowIndex index(in PeStream state, Handle handle)
             => new CliToken(state.Reader.GetToken(handle));
 
+        [Op]
+        public static PeReader create(FS.FilePath src)
+            => new PeReader(src);
+
+
         readonly FS.FilePath Source;
 
         readonly FileStream Stream;

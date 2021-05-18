@@ -12,35 +12,38 @@ namespace Z0
     {
         Type RuleType => GetType();
 
-        Index<Type> Parameters => Index<Type>.Empty;
+        Index<Type> Parameters
+            => Index<Type>.Empty;
 
-        Index<Operand> Operands => Index<Operand>.Empty;
+        Index<Operand> Operands
+            => Index<Operand>.Empty;
     }
 
     public interface IRule<R> : IRule
         where R : struct, IRule<R>
     {
-        Type IRule.RuleType => typeof(R);
+        Type IRule.RuleType
+            => typeof(R);
     }
 
     public interface IRule<R,T> : IRule<R>
         where R : struct, IRule<R,T>
     {
         Index<Type> IRule.Parameters
-            => root.array(typeof(T));
+            => core.array(typeof(T));
     }
 
     public interface IRule<R,A,B> : IRule<R>
         where R : struct, IRule<R,A,B>
     {
         Index<Type> IRule.Parameters
-            => root.array(typeof(A), typeof(B));
+            => core.array(typeof(A), typeof(B));
     }
 
     public interface IRule<R,A,B,C> : IRule<R>
         where R : struct, IRule<R,A,B,C>
     {
         Index<Type> IRule.Parameters
-            => root.array(typeof(A), typeof(B), typeof(C));
+            => core.array(typeof(A), typeof(B), typeof(C));
     }
 }

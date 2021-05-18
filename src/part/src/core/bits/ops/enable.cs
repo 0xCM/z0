@@ -29,7 +29,6 @@ namespace Z0
         public static byte enable(byte src, byte pos)
             => src |= (byte)(1 << pos);
 
-
         /// <summary>
         /// Enables a specified source bit
         /// </summary>

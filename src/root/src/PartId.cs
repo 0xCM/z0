@@ -33,6 +33,9 @@ public enum PartId : ulong
     [Symbol("core.test")]
     CoreTest = Core | Test,
 
+    [Symbol("rules")]
+    Rules = 6,
+
     [Symbol("api")]
     Api = 9,
 

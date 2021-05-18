@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class XTend
+    partial class XNKind
     {
         /// <summary>
         /// Determines the numeric kind of a type

@@ -20,6 +20,11 @@ namespace Z0
     public static partial class XTend
     {
         const NumericKind Closure = UnsignedInts;
+    }
 
+    [ApiHost]
+    public static partial class ClrQuery
+    {
+        const NumericKind Closure = Root.UnsignedInts;
     }
 }

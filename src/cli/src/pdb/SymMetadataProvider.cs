@@ -20,7 +20,7 @@ namespace Z0
 
             readonly MetadataReader MetadataReader;
 
-            public SymMetadataProvider(SymbolSource source)
+            public SymMetadataProvider(PdbSymbolSource source)
             {
                 _peReader = new PEReader(source.PeStream);
                 MetadataReader = _peReader.GetMetadataReader();

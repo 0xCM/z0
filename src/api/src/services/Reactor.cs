@@ -9,22 +9,8 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public struct EmitSolutionReport
+    public sealed class Reactor : GlobalService<Reactor,int>
     {
-        public FS.FilePath Source;
-
-        public EmitSolutionReport(FS.FilePath src)
-        {
-            Source = src;
-        }
-    }
-
-    public sealed class Reactor : AppSingleton<Reactor,int>
-    {
-        public static Reactor create(IWfRuntime wf)
-            => init(wf);
-
-
         public static void dispatch(string[] args)
         {
             try

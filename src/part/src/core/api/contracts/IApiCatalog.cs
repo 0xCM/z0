@@ -18,6 +18,8 @@ namespace Z0
 
         Index<IApiHost> FindHosts(ReadOnlySpan<ApiHostUri> src);
 
+        ReadOnlySpan<Assembly> FindComponents(params PartId[] parts);
+
         IPart[] Parts {get;}
 
         PartId[] PartIdentities {get;}

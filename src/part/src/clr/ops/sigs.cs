@@ -15,28 +15,28 @@ namespace Z0
 
     partial struct Clr
     {
-        public static Index<CliSig> sigs(MethodInfo[] src)
-        {
-            var count = root.count(src);
-            if(count==0)
-                return default;
+        // public static Index<CliSig> sigs(MethodInfo[] src)
+        // {
+        //     var count = root.count(src);
+        //     if(count==0)
+        //         return default;
 
-            var dst = sys.alloc<CliSig>(count);
-            sigs(src, dst);
-            return dst;
-        }
+        //     var dst = sys.alloc<CliSig>(count);
+        //     sigs(src, dst);
+        //     return dst;
+        // }
 
-        [Op]
-        public static void sigs(MethodInfo[] src, Span<CliSig> dst)
-        {
-            var k = min(count(src), count(dst));
-            if(k != 0)
-            {
-                ref readonly var input = ref first(src);
-                ref var output = ref first(dst);
-                for(var i=0; i<k; i++)
-                    seek(output,i) = sig(skip(input,i));
-            }
-        }
+        // [Op]
+        // public static void sigs(MethodInfo[] src, Span<CliSig> dst)
+        // {
+        //     var k = min(count(src), count(dst));
+        //     if(k != 0)
+        //     {
+        //         ref readonly var input = ref first(src);
+        //         ref var output = ref first(dst);
+        //         for(var i=0; i<k; i++)
+        //             seek(output,i) = sig(skip(input,i));
+        //     }
+        // }
     }
 }

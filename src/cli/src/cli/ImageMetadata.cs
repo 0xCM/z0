@@ -13,34 +13,34 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost]
-    public readonly struct ImageMetadata
-    {
-        [Op]
-        public static bool valid(FS.FilePath src)
-        {
-            using var stream = File.OpenRead(src.Name);
-            using var reader = new PEReader(stream);
-            return reader.HasMetadata;
-        }
+    // [ApiHost]
+    // public readonly struct ImageMetadata
+    // {
+    //     [Op]
+    //     public static bool valid(FS.FilePath src)
+    //     {
+    //         using var stream = File.OpenRead(src.Name);
+    //         using var reader = new PEReader(stream);
+    //         return reader.HasMetadata;
+    //     }
 
-        [Op]
-        public static PeReader reader(FS.FilePath src)
-            => new PeReader(src);
+    //     [Op]
+    //     public static PeReader reader(FS.FilePath src)
+    //         => new PeReader(src);
 
-        [Op]
-        public static bool reader(FS.FilePath src, out PeReader dst)
-        {
-            if(valid(src))
-            {
-                dst = new PeReader(src);
-                return true;
-            }
-            else
-            {
-                dst = default;
-                return false;
-            }
-        }
-    }
+    //     [Op]
+    //     public static bool reader(FS.FilePath src, out PeReader dst)
+    //     {
+    //         if(Cli.valid(src))
+    //         {
+    //             dst = new PeReader(src);
+    //             return true;
+    //         }
+    //         else
+    //         {
+    //             dst = default;
+    //             return false;
+    //         }
+    //     }
+    // }
 }

@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
-    partial struct PdbServices
+    partial struct PdbModel
     {
         public readonly struct SequencePoint : ITextual
         {
@@ -64,6 +63,5 @@ namespace Z0
             public override string ToString()
                 => Format();
         }
-
     }
 }

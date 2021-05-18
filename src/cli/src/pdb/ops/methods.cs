@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using Microsoft.DiaSymReader;
 
-    using static Part;
-    using static memory;
+    using static core;
+    using static PdbModel;
 
     partial struct PdbServices
     {

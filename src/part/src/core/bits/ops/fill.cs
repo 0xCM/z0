@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
+    using static core;
 
     partial struct bit
     {
@@ -16,7 +16,7 @@ namespace Z0
             where T : struct
         {
             var size = size<T>();
-            var count = root.min(size, dst.Length);
+            var count = Math.Min(size, dst.Length);
             if(count == 0)
                 return;
 

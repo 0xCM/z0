@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.NumericArrays, true)]
+    [ApiHost]
     public readonly struct NumericArrays
     {
         const NumericKind Closure = UnsignedInts;

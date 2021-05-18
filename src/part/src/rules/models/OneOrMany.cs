@@ -41,9 +41,9 @@ namespace Z0
             public static implicit operator OneOrMany<T>(T[] src)
                 => new OneOrMany<T>(src);
 
-            [MethodImpl(Inline)]
-            public static implicit operator OneOrMany(OneOrMany<T> src)
-                => new OneOrMany(src.Elements.Dynamify());
+            // [MethodImpl(Inline)]
+            // public static implicit operator OneOrMany(OneOrMany<T> src)
+            //     => new OneOrMany(src.Elements.Dynamify());
 
             public static Marker<string> Indicator => OneOrMany.Indicator;
         }

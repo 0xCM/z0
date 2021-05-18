@@ -8,11 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class text
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DelimitedIndex<T> delimit<T>(Index<T> src, char delimiter = Chars.Comma, int pad = 0)
+            => new DelimitedIndex<T>(src, delimiter, pad);
+
         [Op, Closures(Closure)]
         public static string delimit<T>(T[] src, char delimiter)
             => delimit(@readonly(src), delimiter);

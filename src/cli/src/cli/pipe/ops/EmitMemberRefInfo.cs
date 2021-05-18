@@ -18,7 +18,7 @@ namespace Z0
                 var component = skip(components,i);
                 var dst = MemberRefsPath(component);
                 var flow = Wf.EmittingTable<MemberRefInfo>(dst);
-                using var reader = ImageMetadata.reader(FS.path(component.Location));
+                using var reader = PeReader.create(FS.path(component.Location));
                 var emitted = Tables.emit(reader.ReadMemberRefs(), dst);
                 Wf.EmittedTable(flow,emitted);
                 counter += emitted;

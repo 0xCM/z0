@@ -9,8 +9,8 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class ApiRuntimeCatalog : IApiCatalog
     {
@@ -150,6 +150,22 @@ namespace Z0
                 }
             }
             return false;
+        }
+
+        public ReadOnlySpan<Assembly> FindComponents(params PartId[] parts)
+        {
+            var src = _PartComponents.View;
+            var count = src.Length;
+            var dst = root.list<Assembly>();
+            var match = parts.ToHashSet();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var component = ref skip(src,i);
+                var id = component.Id();
+                if(match.Contains(id))
+                    dst.Add(component);
+            }
+            return dst.ViewDeposited();
         }
 
         public bool FindHost(ApiHostUri uri, out IApiHost host)

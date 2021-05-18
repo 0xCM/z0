@@ -12,7 +12,7 @@ namespace Z0
 
     using api = PdbServices;
 
-    partial struct PdbServices
+    partial struct PdbModel
     {
         public readonly struct Method : IAppSymAdapter<Method, ISymUnmanagedMethod>
         {
@@ -40,6 +40,18 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => api.token(this);
+            }
+
+            public ReadOnlySpan<SequencePoint> SequencePoints
+            {
+                [MethodImpl(Inline)]
+                get => api.points(Source);
+            }
+
+            public ReadOnlySpan<Document> Documents
+            {
+                [MethodImpl(Inline)]
+                get => api.documents(Source);
             }
 
             [MethodImpl(Inline)]

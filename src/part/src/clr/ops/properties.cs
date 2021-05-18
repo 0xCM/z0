@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
-    using static memory;
+    using static core;
 
     partial struct Clr
     {

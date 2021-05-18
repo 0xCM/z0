@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Microsoft.SymbolStore;
 
-    using static memory;
-    using static Part;
+    using static Root;
 
     readonly struct SymbolTracer : ITracer
     {

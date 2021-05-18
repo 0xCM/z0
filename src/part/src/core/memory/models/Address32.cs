@@ -47,11 +47,9 @@ namespace Z0
             get => (ushort)(Location >> 16);
         }
 
-        public static A Zero
-        {
-             [MethodImpl(Inline)]
-             get => default;
-        }
+        [MethodImpl(Inline)]
+        public bool Between(A min, A max)
+            => this >= min && this <= max;
 
         [MethodImpl(Inline)]
         public bool Equals(A src)
@@ -139,5 +137,11 @@ namespace Z0
 
         public static A Empty
             => new A(0);
+
+        public static A Zero
+        {
+             [MethodImpl(Inline)]
+             get => default;
+        }
     }
 }

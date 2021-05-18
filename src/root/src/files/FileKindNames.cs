@@ -129,6 +129,11 @@ namespace Z0
         public const string cmd = nameof(cmd);
 
         /// <summary>
+        /// Defines the 'md' literal
+        /// </summary>
+        public const string md = nameof(md);
+
+        /// <summary>
         /// Defines the 'x.csv' literal
         /// </summary>
         public const string xcsv = x + sep + csv;

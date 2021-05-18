@@ -29,7 +29,7 @@ namespace Z0
         public ExecToken EmitBlobs(FS.FilePath src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<CliBlob>(dst);
-            using var reader = ImageMetadata.reader(src);
+            using var reader = PeReader.create(src);
 
             var rows = reader.ReadBlobDescriptions();
             var count = (uint)rows.Length;

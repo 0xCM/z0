@@ -18,7 +18,7 @@ namespace Z0
         {
             try
             {
-                if(ImageMetadata.valid(src))
+                if(Cli.valid(src))
                 {
                     var flow = Wf.EmittingFile(dst);
                     using var stream = File.OpenRead(src.Name);

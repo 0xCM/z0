@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static PdbServices;
-
     public class AppModules : AppService<AppModules>
     {
-        public SymbolSource SymbolSource(FileModule src)
+        public PdbSymbolSource SymbolSource(FileModule src)
         {
             try
             {
@@ -20,11 +18,11 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(e);
-                return PdbServices.SymbolSource.Empty;
+                return PdbSymbolSource.Empty;
             }
         }
 
-        public SymbolSource SymbolSource(FS.FilePath module)
+        public PdbSymbolSource SymbolSource(FS.FilePath module)
             => PdbServices.source(module);
 
         public ModuleArchive Archive()

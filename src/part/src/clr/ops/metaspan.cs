@@ -10,6 +10,7 @@ namespace Z0
     using System.Reflection.Metadata;
 
     using static Root;
+    using static core;
 
     partial struct Clr
     {
@@ -21,7 +22,7 @@ namespace Z0
         public static unsafe ref ReadOnlySpan<byte> metaspan(Assembly src, out ReadOnlySpan<byte> dst)
         {
             src.TryGetRawMetadata(out var ptr, out var size);
-            dst = memory.cover(ptr, size);
+            dst = cover(ptr, size);
             return ref dst;
         }
 
@@ -33,7 +34,7 @@ namespace Z0
         public static unsafe ReadOnlySpan<byte> metaspan(Assembly src)
         {
             src.TryGetRawMetadata(out var ptr, out var size);
-            return memory.cover(ptr, size);
+            return cover(ptr, size);
         }
     }
 }

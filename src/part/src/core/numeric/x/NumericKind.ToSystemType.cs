@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial class XNumeric
+    partial class XTend
     {
         /// <summary>
         /// Determines the system type represented by a numeric kind

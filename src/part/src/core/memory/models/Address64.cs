@@ -47,11 +47,9 @@ namespace Z0
             get => (uint)(Location >> 32);
         }
 
-        public static A Zero
-        {
-             [MethodImpl(Inline)]
-             get => Empty;
-        }
+        [MethodImpl(Inline)]
+        public bool Between(A min, A max)
+            => this >= min && this <= max;
 
         [MethodImpl(Inline)]
         public bool Equals(A src)
@@ -131,5 +129,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(A x, A y)
             => x.Location != y.Location;
+
+        public static A Zero
+        {
+             [MethodImpl(Inline)]
+             get => Empty;
+        }
     }
 }

@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Sys)" />
   </ItemGroup>
 
 </Project>

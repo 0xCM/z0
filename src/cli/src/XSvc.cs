@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static PdbServices;
-
     using Svc = Z0;
 
     [ApiHost]
@@ -32,7 +30,7 @@ namespace Z0
             => Cli.symbols(wf);
 
         [Op]
-        public static PdbReader PdbReader(this IWfRuntime wf, in SymbolSource src)
+        public static PdbReader PdbReader(this IWfRuntime wf, in PdbSymbolSource src)
             => Svc.PdbServices.reader(wf,src);
 
         [Op]
@@ -42,5 +40,14 @@ namespace Z0
         [Op]
         public static RegionProcessor RegionProcessor(this IWfRuntime wf)
             => Svc.RegionProcessor.create(wf);
+
+        [Op]
+        public static PdbIndex PdbIndex(this IWfRuntime wf)
+            => Svc.PdbIndex.create(wf);
+
+        [Op]
+        public static PdbIndexBuilder PdbIndexBuilder(this IWfRuntime wf)
+            => Svc.PdbIndexBuilder.create(wf);
+
     }
 }

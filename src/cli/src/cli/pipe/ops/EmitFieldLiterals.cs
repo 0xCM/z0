@@ -15,7 +15,7 @@ namespace Z0
 
         Index<Paired<FieldRef,string>> EmitFieldLiterals(ApiPartTypes src)
         {
-            var fields = Clr.fieldrefs(src.Types);
+            var fields = ClrFields.fieldrefs(src.Types);
             if(fields.Length != 0)
                 return Emit(fields, FieldLiteralTarget + FS.file(src.Part.Format(), FS.Csv));
             else

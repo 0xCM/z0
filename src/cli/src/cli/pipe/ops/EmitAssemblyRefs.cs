@@ -34,7 +34,7 @@ namespace Z0
             {
                 ref readonly var source = ref skip(sources,k);
                 Wf.Status(string.Format("Emitting {0} assembly references", source.Name));
-                using var reader = ImageMetadata.reader(source);
+                using var reader = PeReader.create(source);
                 var data = reader.ReadAssemblyRefs();
                 var count = data.Length;
                 for(var i=0; i<count; i++)
@@ -45,10 +45,10 @@ namespace Z0
         public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs(Assembly src)
         {
             var path = FS.path(src.Location);
-            if(ImageMetadata.valid(path))
+            if(Cli.valid(path))
             {
 
-                using var reader = ImageMetadata.reader(path);
+                using var reader = PeReader.create(path);
                 return reader.ReadAssemblyRefs();
             }
             else
@@ -62,9 +62,9 @@ namespace Z0
         {
             var path = FS.path(src.Location);
             var counter = 0u;
-            if(ImageMetadata.valid(path))
+            if(Cli.valid(path))
             {
-                using var reader = ImageMetadata.reader(path);
+                using var reader = PeReader.create(path);
                 var refs = reader.ReadAssemblyRefs();
                 var count = refs.Length;
                 for(var i=0; i<count; i++)
@@ -86,9 +86,9 @@ namespace Z0
             {
                 ref readonly var component = ref skip(components,i);
                 var path = FS.path(component.Location);
-                if(ImageMetadata.valid(path))
+                if(Cli.valid(path))
                 {
-                    using var reader = ImageMetadata.reader(path);
+                    using var reader = PeReader.create(path);
                     var refs = reader.ReadAssemblyRefs();
                     root.iter(refs,r => dst.Add(r));
                 }

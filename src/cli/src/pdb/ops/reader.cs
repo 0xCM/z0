@@ -7,9 +7,11 @@ namespace Z0
     using Microsoft.DiaSymReader;
     using Microsoft.DiaSymReader.PortablePdb;
 
+    using static PdbModel;
+
     partial struct PdbServices
     {
-        public static PdbReader reader(IWfRuntime wf, in SymbolSource src)
+        public static PdbReader reader(IWfRuntime wf, in PdbSymbolSource src)
         {
             var flow = wf.Running(Msg.CreatingPdbReader.Format(src.PdbPath));
             var reader = default(PdbReader);
@@ -34,13 +36,13 @@ namespace Z0
             return reader(wf, source(pe, pdb));
         }
 
-        static object importer(in SymbolSource src)
+        static object importer(in PdbSymbolSource src)
             => SymUnmanagedReaderFactory.CreateSymReaderMetadataImport(metaprovider(src));
 
-        internal static ISymUnmanagedReader5 portable(in SymbolSource src)
+        internal static ISymUnmanagedReader5 portable(in PdbSymbolSource src)
             => (ISymUnmanagedReader5)new SymBinder().GetReaderFromStream(src.PdbStream, importer(src));
 
-        internal static ISymUnmanagedReader5 legacy(in SymbolSource src)
+        internal static ISymUnmanagedReader5 legacy(in PdbSymbolSource src)
             => SymUnmanagedReaderFactory.CreateReader<ISymUnmanagedReader5>(src.PdbStream, metaprovider(src));
     }
 }

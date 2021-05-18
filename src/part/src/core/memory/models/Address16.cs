@@ -47,6 +47,9 @@ namespace Z0
             get => (byte)(Location >> 8);
         }
 
+        [MethodImpl(Inline)]
+        public bool Between(A min, A max)
+            => this >= min && this <= max;
 
         [MethodImpl(Inline)]
         public string Format()

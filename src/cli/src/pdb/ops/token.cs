@@ -9,8 +9,7 @@ namespace Z0
     using Microsoft.DiaSymReader;
     using Microsoft.DiaSymReader.PortablePdb;
 
-    using static Part;
-    using static memory;
+    using static PdbModel;
 
     partial struct PdbServices
     {

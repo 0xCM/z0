@@ -20,134 +20,13 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static Index<CliBlobHeap> blobs(ReadOnlySpan<Assembly> src)
+        [Op]
+        public static bool valid(FS.FilePath src)
         {
-            var count = src.Length;
-            var buffer = alloc<CliBlobHeap>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var component = ref skip(src,i);
-                var reader = Cli.reader(component);
-                seek(dst,i) = reader.BlobHeap();
-            }
-            return buffer;
-
+            using var stream = File.OpenRead(src.Name);
+            using var reader = new PEReader(stream);
+            return reader.HasMetadata;
         }
-
-        [Op]
-        public static CliTableSource<T> source<T>(Assembly src)
-            where T : struct, IRecord<T>
-                => new CliTableSource<T>(src);
-
-        [Op]
-        public static CliTableSource<T> source<T>(MetadataReader src)
-            where T : struct, IRecord<T>
-                => new CliTableSource<T>(src);
-
-        [Op]
-        public static CliTableSource<T> source<T>(MemorySeg src)
-            where T : struct, IRecord<T>
-                => new CliTableSource<T>(src);
-
-        [Op]
-        public static CliTableSource<T> source<T>(PEMemoryBlock src)
-            where T : struct, IRecord<T>
-                => new CliTableSource<T>(src);
-
-        [Op]
-        public static CliDataSource source(Assembly src)
-            => new CliDataSource(src);
-
-        [Op]
-        public static CliDataSource source(MetadataReader src)
-            => new CliDataSource(src);
-
-        [Op]
-        public static CliDataSource source(MemorySeg src)
-            => new CliDataSource(src);
-
-        [Op]
-        public static CliDataSource source(PEMemoryBlock src)
-            => new CliDataSource(src);
-        [Op]
-        public static CliReader reader(Assembly src)
-            => new CliReader(src);
-
-        [Op]
-        public static CliReader reader(MetadataReader src)
-            => new CliReader(src);
-
-        [Op]
-        public static CliReader reader(MemorySeg src)
-            => new CliReader(src);
-
-        [Op]
-        public static CliReader reader(PEMemoryBlock src)
-            => new CliReader(src);
-
-        [MethodImpl(Inline), Op]
-        public static CliToken token(Handle src)
-        {
-            var _data = data(src);
-            return new CliToken(_data.Table, _data.RowId);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static CliTableKind table(Handle handle)
-            => data(handle).Table;
-
-        [MethodImpl(Inline), Op]
-        public static CliHandleData data(Handle src)
-            => @as<Handle,CliHandleData>(src);
-
-        [MethodImpl(Inline), Op]
-        public static CliHandleData data(EntityHandle src)
-        {
-            var row = uint32(src) & 0xFFFFFF;
-            var kind = (CliTableKind)(uint32(src) >> 24);
-            return new CliHandleData(kind,row);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static CliToken token(EntityHandle src)
-            => @as<EntityHandle,CliToken>(src);
-
-        [MethodImpl(Inline), Op]
-        public static Handle handle(CliHandleData src)
-            => @as<CliHandleData,Handle>(src);
-
-        [MethodImpl(Inline), Op]
-        public Handle handle(CliToken src)
-            => handle(new CliHandleData(src.Table, src.Row));
-
-        [MethodImpl(Inline), Op]
-        public static CliRowKey key(Handle src)
-        {
-            var dat = data(src);
-            return new CliRowKey(dat.Table, dat.RowId);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static EntityHandle handle(uint src)
-            => @as<uint,EntityHandle>(src);
-
-        [MethodImpl(Inline), Op]
-        public static CliRowKey key(EntityHandle src)
-        {
-            var dat = data(src);
-            return new CliRowKey(dat.Table, dat.RowId);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint row(EntityHandle src)
-            => uint32(src) & 0xFFFFFF;
-
-        [MethodImpl(Inline)]
-        public static CliRowKey<K> key<K,T>(T handle, K k = default)
-            where K : unmanaged, ICliTableKind<K>
-            where T : unmanaged
-                => uint32(handle);
 
         public static CliRowKeys keys<K,T>(ReadOnlySpan<T> handles, K k = default)
             where T : unmanaged
@@ -163,9 +42,6 @@ namespace Z0
 
         public static void visualize(FS.FilePath src, FS.FilePath dst)
             => Mdv.run(src.Name,dst.Name);
-
-        public static PdbSymbolStore symbols(IWfRuntime wf)
-            => PdbSymbolStore.create(wf);
 
         [MethodImpl(Inline), Op]
         public unsafe static MetadataReaderProvider ReaderProvider(Assembly src)
@@ -212,8 +88,6 @@ namespace Z0
             else
                 return MetadataReference.CreateFromFile(path.Name, props);
         }
-        public static XmlDocProvider xmldoc(FS.FilePath src)
-            => new XmlDocProvider(src.Name);
 
     }
 

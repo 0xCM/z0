@@ -22,4 +22,16 @@ namespace Z0
     {
 
     }
+
+    [ApiHost]
+    public static partial class XText
+    {
+        const NumericKind Closure = Root.UnsignedInts;
+    }
+
+    [ApiHost]
+    public static partial class ClrQuery
+    {
+        const NumericKind Closure = Root.UnsignedInts;
+    }
 }

@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static PdbModel;
+
     partial struct PdbServices
     {
         [Op]
-        internal static SymMetadataProvider metaprovider(in SymbolSource source)
+        internal static SymMetadataProvider metaprovider(in PdbSymbolSource source)
             => new SymMetadataProvider(source);
     }
 }

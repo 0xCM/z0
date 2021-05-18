@@ -4,18 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static PdbModel;
+
     partial struct PdbServices
     {
         [Op]
-        public static SymbolSource source(FS.FilePath pe, FS.FilePath pdb)
-            => new SymbolSource(pe, pdb);
+        public static PdbSymbolSource source(FS.FilePath pe, FS.FilePath pdb)
+            => new PdbSymbolSource(pe, pdb);
 
         [Op]
-        public static SymbolSource source(FS.FilePath pe)
-            => new SymbolSource(pe, pe.ChangeExtension(FS.Pdb));
+        public static PdbSymbolSource source(FS.FilePath pe)
+            => new PdbSymbolSource(pe, pe.ChangeExtension(FS.Pdb));
 
         [Op]
-        public static SymbolSource source(BinaryCode pe, BinaryCode pdb)
-            => new SymbolSource(pe,pdb);
+        public static PdbSymbolSource source(BinaryCode pe, BinaryCode pdb)
+            => new PdbSymbolSource(pe,pdb);
     }
 }

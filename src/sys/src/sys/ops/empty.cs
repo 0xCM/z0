@@ -16,5 +16,13 @@ namespace Z0
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] empty<T>()
             => proxy.empty<T>();
+
+        /// <summary>
+        /// Tests whether a specified <see cref='string'/> is either null or of zero length
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Options), Op]
+        public static bool empty(string src)
+            => string.IsNullOrEmpty(src);
     }
 }

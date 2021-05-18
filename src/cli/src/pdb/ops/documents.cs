@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using Microsoft.DiaSymReader;
 
-    using static Part;
-    using static memory;
+    using static PdbModel;
 
     partial struct PdbServices
     {
         [Op]
-        internal static Index<ISymUnmanagedDocument> documents(ISymUnmanagedMethod src)
-            => src.GetDocumentsForMethod();
+        internal static ReadOnlySpan<Document> documents(ISymUnmanagedMethod src)
+            => src.GetDocumentsForMethod().Select(adapt);
     }
 }

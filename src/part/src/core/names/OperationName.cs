@@ -32,13 +32,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Data);
+            get => sys.empty(Data);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Data);
+            get => sys.nonempty(Data);
         }
 
         public string Content

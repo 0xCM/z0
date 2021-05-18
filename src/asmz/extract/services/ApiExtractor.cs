@@ -10,8 +10,6 @@ namespace Z0
     using System.Diagnostics;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
-    using Windows;
 
     using Z0.Asm;
 
@@ -161,7 +159,7 @@ namespace Z0
                     ref readonly var @base = ref skip(bases,j);
                     var min = @base.Left;
                     var max = min + @base.Right;
-                    if(between(match, @base.Left,@base.Left + @base.Right))
+                    if(match.Between(@base.Left, @base.Left + @base.Right))
                     {
                         entry.SegmentIndex = j;
                         locations.Add(skip(segments,j));
@@ -173,10 +171,6 @@ namespace Z0
 
             return locations.Array().Sort();
         }
-
-        [MethodImpl(Inline)]
-        public static bool between(Address32 src, Address32 min, Address32 max)
-            => src >= min && src <= max;
 
 
         unsafe ByteSize Emit(in ProcessSegment src)

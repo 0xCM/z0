@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct NumericFormatters
@@ -34,7 +35,7 @@ namespace Z0
             var formatter = create<T>();
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                memory.seek(dst, i) = formatter.Format(memory.skip(src,i), NumericBaseKind.Base16);
+                seek(dst, i) = formatter.Format(skip(src,i), NumericBaseKind.Base16);
             return dst;
         }
 

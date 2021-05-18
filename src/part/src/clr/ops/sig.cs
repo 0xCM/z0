@@ -37,24 +37,20 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Determines the <see cref='CliSig'/> for a specified <see cref='Type'/>
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [Op]
-        public static bool sig(Type src, out CliSig dst)
-        {
-            var module = src.Module;
-            try
-            {
-                dst = new CliSig(module.ResolveSignature(src.MetadataToken));
-                return true;
-            }
-            catch(Exception)
-            {
-                dst = CliSig.Empty;
-                return false;
-            }
-        }
+        // [Op]
+        // public static bool sig(Type src, out CliSig dst)
+        // {
+        //     var module = src.Module;
+        //     try
+        //     {
+        //         dst = new CliSig(module.ResolveSignature(src.MetadataToken));
+        //         return true;
+        //     }
+        //     catch(Exception)
+        //     {
+        //         dst = CliSig.Empty;
+        //         return false;
+        //     }
+        // }
     }
 }

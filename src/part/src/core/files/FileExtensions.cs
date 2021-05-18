@@ -202,5 +202,10 @@ namespace Z0
         /// Defines the <see cref='dot'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Dot => ext(dot);
+
+        /// <summary>
+        /// Defines the <see cref='md'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Md => ext(md);
     }
 }
