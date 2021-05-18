@@ -187,27 +187,28 @@ namespace Z0
             var pSrc = src.Target.Pointer<byte>();
             for(var i=0; i<pages; i++)
             {
-                MemoryPages.ReadLo(pSrc, ref buffer);
-                MemoryPages.ReadHi(pSrc, ref buffer);
+                MemoryPages.Read(pSrc, ref buffer);
                 pSrc += PageSize;
                 total += PageSize;
             }
             return total;
         }
 
+        FS.FolderPath BinDir
+            => Db.TableDir("image.bin");
+
         public void Run()
         {
             SegDir.Clear();
+            BinDir.Clear();
             var b0 = LogSegments(0);
             var catalog = ResolveCatalog();
             var descriptions = LogResolutions(catalog);
             var regions = LogRegions(1);
             var b1 = LogSegments(1, regions);
             var segments = Locate(b1, descriptions);
-            var path = Db.AppLog("regions", FS.Bin);
-            var writer = path.BinaryWriter();
             var traverser = SegmentTraverser.create(Wf);
-            traverser.Traverse(regions,writer);
+            traverser.Traverse(regions, BinDir);
 
             //HostDatasets.Clear();
             // Paths.Root.Clear(true);

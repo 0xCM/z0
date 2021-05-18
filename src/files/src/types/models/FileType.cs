@@ -9,23 +9,34 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct FileType
+    using api = FileTypes;
+
+    public readonly struct FileType : IFileType
     {
-        public FileKind Kind {get;}
+        public Type RuntimeType {get;}
+
+        public FileKind FileKind {get;}
 
         public Index<FS.FileExt> Extensions {get;}
 
         [MethodImpl(Inline)]
-        public FileType(FileKind kind, FS.FileExt[] extensions)
+        public FileType(Type rtt, FileKind kind, FS.FileExt[] extensions)
         {
-            Kind = kind;
+            RuntimeType = rtt;
+            FileKind = kind;
             Extensions = extensions;
         }
 
         public string Format()
-            => FS.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
+
+        public static FileType Empty
+        {
+            [MethodImpl(Inline)]
+            get => new FileType(typeof(void), FileKind.None, sys.empty<FS.FileExt>());
+        }
     }
 }

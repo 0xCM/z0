@@ -78,7 +78,7 @@ namespace Z0
             {
                 var selector = src.StartAddress.Quadrant(n2);
                 var @base = src.StartAddress.Lo;
-                var size = (uint)(src.EndAddress - src.StartAddress + 1);
+                var size = (uint)(src.EndAddress - src.StartAddress);
                 var sidx = (ushort)Index(selector);
                 Bases[sidx].Add(root.paired(@base, size));
                 ref var segment = ref _Segments[index];

@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static memory;
+    using Svc = Z0;
 
-    partial struct FS
+    public static partial class XSvc
     {
-
+        public static FilePipe FilePipe(this IWfRuntime wf)
+            => Svc.FilePipe.create(wf);
     }
 }

@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
-    using static ProcessMemory;
 
     class App : AppService<App>
     {
@@ -200,9 +199,8 @@ namespace Z0.Asm
 
         }
 
-        public void Run()
+        void ReadCliHeader()
         {
-
             var reader = Cli.reader(Parts.Cpu.Assembly);
             var header = reader.Header();
             if(header)
@@ -214,6 +212,37 @@ namespace Z0.Asm
             {
                 Wf.Error(header.Message);
             }
+
+        }
+
+        FS.FilePath GenScripts()
+        {
+            var tool = Wf.NDisasm();
+            var srcDir = Db.TableDir("image.bin");
+            var outDir = Db.TableDir("image.bin.asm").Create();
+            var src = srcDir.Files(FS.Bin);
+            var scripts = tool.Scripts(src,outDir);
+            var count = scripts.Length;
+            var jobDir = Db.JobRoot() + FS.folder(tool.Id.Format());
+            jobDir.Clear();
+
+            var paths = span<FS.FilePath>(count);
+            var runner = jobDir + FS.file("run", FS.Cmd);
+            using var writer = runner.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var script = ref skip(scripts,i);
+                ref var path = ref seek(paths,i);
+                path = jobDir + FS.file(script.Id.Format(), FS.Cmd);
+                path.Overwrite(script.Format());
+                writer.WriteLine(string.Format("call {0}", path.Format(PathSeparator.BS)));
+            }
+            return runner;
+        }
+
+        public void Run()
+        {
+            var runner = GenScripts();
 
             // var pipe = Wf.CliPipe();
             // pipe.EmitMetaBlocks();

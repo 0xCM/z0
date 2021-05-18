@@ -14,16 +14,4 @@ namespace Z0
         string ITextual.Format()
             => Path.Name;
     }
-
-    /// <summary>
-    /// Characterizes a classifiable file
-    /// </summary>
-    /// <typeparam name="K">The classifier type</typeparam>
-    [Free]
-    public interface IFile<F,K> : IFile
-        where F : struct, IFile<F,K>
-        where K : struct, IFileType<K>
-    {
-
-    }
 }

@@ -68,6 +68,9 @@ public enum PartId : ulong
 
     Res = 20,
 
+    [Symbol("files")]
+    Files = 21,
+
     [Symbol("lang")]
     Lang = 22,
 

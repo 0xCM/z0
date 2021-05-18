@@ -157,7 +157,7 @@ namespace Z0
             }
         }
 
-        private MemoryNode() { }
+        MemoryNode() { }
 
         void Insert(MemoryNode newNode)
         {

@@ -214,8 +214,7 @@ namespace Z0
             seek(outcomes,i++) = DataParser.eparse(skip(parts,j++), out dst.State);
             seek(outcomes,i++) = DataParser.parse(skip(parts,j++), out dst.FullIdentity);
             return true;
-            // var result = buffer.FirstOrDefault(x => x.Fail);
-            // return result.IsEmpty ? true : result;
+
         }
 
         [Op]

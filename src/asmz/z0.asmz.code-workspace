@@ -35,6 +35,21 @@
 		},
 		{
 			"path": "..\\cpu"
+		},
+		{
+			"path": "..\\workflow"
+		},
+		{
+			"path": "..\\pipes"
+		},
+		{
+			"path": "..\\tools"
+		},
+		{
+			"path": "..\\tooling"
+		},
+		{
+			"path": "..\\files"
 		}
 	],
 	"settings": {}

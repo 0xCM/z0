@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using static Root;
 
-    [ApiHost(ApiNames.Relations, true)]
+    [ApiHost]
     public readonly partial struct Relations
     {
         const NumericKind Closure = UnsignedInts;

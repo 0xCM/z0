@@ -8,7 +8,6 @@ namespace Z0.Tools
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
 
     partial class Nasm
     {

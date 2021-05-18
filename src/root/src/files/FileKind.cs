@@ -14,13 +14,13 @@ namespace Z0
         /// <summary>
         /// Text-formatted x86-encoded assembly
         /// </summary>
-        [Symbol(hex)]
+        [Symbol(hex, "Text-formatted x86-encoded assembly")]
         Hex,
 
         /// <summary>
-        /// Formatted assembly
+        /// Formatted x86 assembly
         /// </summary>
-        [Symbol(asm)]
+        [Symbol(asm,"Formatted x86 assembly")]
         Asm,
 
         /// <summary>
@@ -36,51 +36,51 @@ namespace Z0
         Csv,
 
         /// <summary>
-        ///  A library module, managed or otherwise
+        ///  A library module
         /// </summary>
-        [Symbol(dll)]
+        [Symbol(dll, "A library module")]
         Dll,
 
         /// <summary>
         ///  An executable module
         /// </summary>
-        [Symbol(exe)]
+        [Symbol(exe, "An executable module")]
         Exe,
 
         /// <summary>
         /// Text data
         /// </summary>
-        [Symbol(txt)]
+        [Symbol(txt,"Text data")]
         Txt,
 
         /// <summary>
         ///  Xml data
         /// </summary>
-        [Symbol(xml)]
+        [Symbol(xml, "Xml data")]
         Xml,
 
         /// <summary>
         /// Json data
         /// </summary>
+        [Symbol(json, "Json data")]
         Json,
 
         /// <summary>
         /// Unprocessed x86-encoded data
         /// </summary>
-        [Symbol(xcsv)]
+        [Symbol(xcsv,"Unprocessed x86-encoded data")]
         XCsv,
 
         /// <summary>
         /// Text-formatted x86-encoded/executable data
         /// </summary>
-        [Symbol(pcsv)]
+        [Symbol(pcsv,"Text-formatted x86-encoded/executable data")]
         PCsv,
 
-
-        [Symbol(log)]
+        [Symbol(log,"Text-formatted log data")]
         Log,
 
-        [Symbol(csproj)]
+        [Symbol(csproj, "A CSharp project file")]
         CsProj,
 
         /// <summary>
@@ -109,5 +109,8 @@ namespace Z0
 
         [Symbol(bat, "A windows batch file")]
         Bat,
+
+        [Symbol(cs, "A csharp source file")]
+        Cs,
     }
 }

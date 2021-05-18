@@ -36,6 +36,5 @@ namespace Z0
 
         public int CompareTo(ProcessSegment src)
             => Target.CompareTo(src.Target);
-
     }
 }

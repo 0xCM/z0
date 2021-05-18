@@ -9,9 +9,6 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Root;
-    using static memory;
-
     public abstract class AppWorker<W,S,T> : AppService<W>, IProcessor<S,T>
         where W : AppWorker<W,S,T>, new()
     {

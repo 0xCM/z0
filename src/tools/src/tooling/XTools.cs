@@ -19,12 +19,20 @@ namespace Z0
             => Svc.Nasm.create(wf);
 
         [Op]
+        public static NDisasm NDisasm(this IWfRuntime wf)
+            => Svc.NDisasm.create(wf);
+
+        [Op]
         public static XedTool XedTool(this IWfRuntime wf)
             => Svc.XedTool.create(wf);
 
         [Op]
         public static DumpBin DumpBin(this IWfRuntime wf)
             => Svc.DumpBin.create(wf);
+
+        [Op]
+        public static Robocopy Robocopy(this IWfRuntime wf)
+            => Svc.Robocopy.create(wf);
 
         [Op]
         public static ScriptRunner ScriptRunner(this IWfRuntime wf)

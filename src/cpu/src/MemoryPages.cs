@@ -13,15 +13,22 @@ namespace Z0
     public unsafe readonly struct MemoryPages
     {
         [MethodImpl(Inline), Op]
-        public static void ReadLo(byte* pSrc, ref PageBlock dst)
+        public static void Read(byte* pSrc, ref PageBlock dst)
+        {
+            ReadLo(pSrc, ref dst);
+            ReadHi(pSrc, ref dst);
+        }
+
+        [Op]
+        static void ReadLo(byte* pSrc, ref PageBlock dst)
         {
             var pData = pSrc;
             var offset = z16;
             read2048(ref pData, ref dst, ref offset);
         }
 
-        [MethodImpl(Inline), Op]
-        public static void ReadHi(byte* pSrc, ref PageBlock dst)
+        [Op]
+        static void ReadHi(byte* pSrc, ref PageBlock dst)
         {
             const ushort Half = Root.PageSize/2;
             var pData = pSrc + Half;

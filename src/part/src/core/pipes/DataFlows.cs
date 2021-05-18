@@ -4,14 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Root;
-    using static memory;
 
-    partial struct FS
+    [ApiHost]
+    public readonly struct DataFlows
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

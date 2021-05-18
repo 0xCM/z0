@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
 
-    partial struct FS
+    partial struct FileTypes
     {
-
+        [MethodImpl(Inline), Op]
+        public static FileType type(Type rtt, FileKind kind, params FS.FileExt[] extensions)
+            => new FileType(rtt, kind, extensions);
     }
 }

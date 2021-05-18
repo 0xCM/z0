@@ -227,5 +227,7 @@ namespace Z0
         /// Defines the 'dot' literal
         /// </summary>
         public const string dot = nameof(dot);
+
+        public const string errlog = error + "." + log;
     }
 }

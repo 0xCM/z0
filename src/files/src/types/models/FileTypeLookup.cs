@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    using static Root;
-    using static memory;
-
-    partial struct FS
+    sealed class FileTypeLookup : Dictionary<Type,FileType>
     {
 
     }

@@ -25,6 +25,6 @@ namespace Z0
 
         }
 
-        protected abstract void Run(FS.FolderPath src, FS.FolderPath dst,CancellationToken cancel);
+        protected abstract void Run(FS.FolderPath src, FS.FolderPath dst, CancellationToken cancel);
     }
 }

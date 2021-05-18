@@ -12,8 +12,5 @@ namespace Z0
 
     partial struct FS
     {
-        [Op]
-        public static FileType filetype(FileKind kind, params FS.FileExt[] extensions)
-            => new FileType(kind,extensions);
     }
 }
