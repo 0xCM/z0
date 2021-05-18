@@ -12,7 +12,7 @@ namespace Z0
         protected override void Run()
         {
             var flow = Wf.Running();
-            CheckCredits.create(Wf).Run();
+            //CheckCredits.create(Wf).Run();
             var buffer = text.buffer();
             BitMaskChecker.create(Wf).Run(Rng.@default());
             Wf.Ran(flow);

@@ -25,7 +25,7 @@ namespace Z0
         public unsafe void t_pinned_index()
         {
             var storage = alloc<ulong>(Count);
-            using var pinned = Index.pin(storage);
+            using var pinned = memory.pin(storage);
             var data = pinned.Edit;
             var half = Count/2;
             var left = slice(data, 0, half);

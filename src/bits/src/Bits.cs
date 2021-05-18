@@ -24,5 +24,4 @@ namespace Z0
             where T : unmanaged
                 => new BitEditor<T>(src);
     }
-
 }
