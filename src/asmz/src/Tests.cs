@@ -73,13 +73,13 @@ namespace Z0.Asm
             }
         }
 
-        void CheckSolutionParser()
-        {
-            var src = FS.path(@"C:\Dev\z0\z0.machine.sln");
-            var tool = Wf.Roslyn();
-            var sln = tool.LoadSolution(src);
-            var projects = sln.Projects;
-        }
+        // void CheckSolutionParser()
+        // {
+        //     var src = FS.path(@"C:\Dev\z0\z0.machine.sln");
+        //     var tool = Wf.Roslyn();
+        //     var sln = tool.LoadSolution(src);
+        //     var projects = sln.Projects;
+        // }
 
 
         void ResolveMethods()
@@ -1018,7 +1018,6 @@ namespace Z0.Asm
 
         const string InputBits = "0100 0100 0000 0001 0101 1000 0000 0100";
 
-
         public void CheckBitstrings()
         {
             CharBlocks.alloc(n128, out var block);
@@ -1070,7 +1069,6 @@ namespace Z0.Asm
                 Wf.Status(encoded.FormatHexData());
             }
         }
-
 
         void CheckAssets()
         {
