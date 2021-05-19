@@ -14,7 +14,7 @@ namespace Z0
 
     using D = CellDelegates;
 
-    [ApiHost(ApiNames.CellOps, true)]
+    [ApiHost]
     public readonly partial struct CellOps
     {
         const NumericKind Closure = Integers;

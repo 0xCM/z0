@@ -8,7 +8,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static memory;
+    using static core;
 
     /// <summary>
     /// Characterizes a type that occupies a fixed amount of space at runtime

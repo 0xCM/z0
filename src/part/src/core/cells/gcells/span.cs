@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct gcells
     {
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
         public static Span<T> span<T>(in Cell8 src)
             where T : unmanaged
-                => span<Cell8,T>(ref memory.edit(src));
+                => span<Cell8,T>(ref core.edit(src));
 
         /// <summary>
         /// Presents a 16-bit value as a T-parametric span
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static Span<T> span<T>(in Cell16 src)
             where T : unmanaged
-                => span<Cell16,T>(ref memory.edit(src));
+                => span<Cell16,T>(ref core.edit(src));
 
         /// <summary>
         /// Presents a 32-bit value as a T-parametric span
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
         public static Span<T> span<T>(in Cell32 src)
             where T : unmanaged
-                => span<Cell32,T>(ref memory.edit(src));
+                => span<Cell32,T>(ref core.edit(src));
 
         /// <summary>
         /// Presents a 64-bit value as a T-parametric span
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(in Cell64 src)
             where T : unmanaged
-                => span<Cell64,T>(ref memory.edit(src));
+                => span<Cell64,T>(ref core.edit(src));
 
         /// <summary>
         /// Presents a 128-bit value as a T-parametric span
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(in Cell128 src)
             where T : unmanaged
-                => span<Cell128,T>(ref memory.edit(src));
+                => span<Cell128,T>(ref core.edit(src));
 
         /// <summary>
         /// Presents a 256-bit value as a T-parametric span
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(in Cell256 src)
             where T : unmanaged
-                => span<Cell256,T>(ref memory.edit(src));
+                => span<Cell256,T>(ref core.edit(src));
 
         /// <summary>
         /// Presents a 256-bit value as a T-parametric span
@@ -86,7 +86,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(in Cell512 src)
             where T : unmanaged
-                => span<Cell512,T>(ref memory.edit(src));
+                => span<Cell512,T>(ref core.edit(src));
 
         [MethodImpl(Inline)]
         static unsafe Span<T> span<F,T>(ref F src)

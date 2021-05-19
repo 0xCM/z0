@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
-    [ApiHost(ApiNames.CellCopy, true)]
+    [ApiHost]
     public readonly struct CellCopy
     {
         const NumericKind Closure = UnsignedInts;

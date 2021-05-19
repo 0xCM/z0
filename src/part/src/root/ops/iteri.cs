@@ -72,7 +72,6 @@ namespace Z0
                 f(i, skip(input,i));
         }
 
-
         /// <summary>
         /// Appplies an action for each element in a source span
         /// </summary>

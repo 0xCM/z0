@@ -52,49 +52,49 @@ namespace Z0.Lang
             {
                 public KW Kind=> KW.Abstract;
 
-                public Name Name => Names.Abstract;
+                public string Name => Names.Abstract;
             }
 
             public readonly struct Add : IKeyword<L,KW>
             {
                 public KW Kind=> KW.Add;
 
-                public Name Name => Names.Add;
+                public string Name => Names.Add;
             }
 
             public readonly struct Alias : IKeyword<L,KW>
             {
                 public KW Kind=> KW.Alias;
 
-                public Name Name => Names.Alias;
+                public string Name => Names.Alias;
             }
 
             public readonly struct As : IKeyword<L,KW>
             {
                 public KW Kind=> KW.As;
 
-                public Name Name => Names.As;
+                public string Name => Names.As;
             }
 
             public readonly struct Public : IKeyword<L,KW>
             {
                 public KW Kind=> KW.Public;
 
-                public Name Name => Names.Public;
+                public string Name => Names.Public;
             }
 
             public readonly struct Struct : IKeyword<L,KW>
             {
                 public KW Kind=> KW.Struct;
 
-                public Name Name => Names.Struct;
+                public string Name => Names.Struct;
             }
 
             public readonly struct Unmanaged : IKeyword<L,KW>
             {
                 public KW Kind=> KW.Unmanaged;
 
-                public Name Name => Names.Unmanaged;
+                public string Name => Names.Unmanaged;
             }
         }
     }

@@ -7,11 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static System.Runtime.InteropServices.MemoryMarshal;
+    using static Root;
 
     partial struct core
     {
+
         /// <summary>
         /// Selects a segment [offset, length(src) - 1] from a source span src:ReadOnlySpan[T]
         /// </summary>

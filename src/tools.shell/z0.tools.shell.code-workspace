@@ -13,9 +13,6 @@
 			"path": "..\\symbolic"
 		},
 		{
-			"path": "..\\apps"
-		},
-		{
 			"path": "..\\part"
 		},
 		{
@@ -37,11 +34,11 @@
 			"path": "..\\gmath"
 		},
 		{
-			"path": "..\\polysource"
-		},
-		{
 			"path": "..\\core"
 		},
+		{
+			"path": "..\\agents"
+		}
 	],
 	"settings": {}
 }

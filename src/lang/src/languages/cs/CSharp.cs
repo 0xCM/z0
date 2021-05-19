@@ -9,7 +9,7 @@ namespace Z0.Lang
     {
         public Language Specifier => Languages.csharp;
 
-        public Name Id => Specifier.Id;
+        public string Id => Specifier.Id;
 
         public static string build<T>(Identifier f, SwitchCases<T> src)
             where T : unmanaged

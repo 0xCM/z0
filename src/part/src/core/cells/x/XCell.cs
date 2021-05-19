@@ -6,7 +6,7 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free, ApiHost(ApiNames.XCell, true)]
+    [Free, ApiHost]
     public static partial class XCell
     {
         const NumericKind Closure = Part.Integers;

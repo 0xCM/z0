@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Globalization;
 
-    using static Part;
     using static HexFormatSpecs;
 
     [ApiHost]
@@ -25,7 +24,6 @@ namespace Z0
             else
                 return root.unparsed<ulong>(src);
         }
-
 
         public static Outcome parse64u(string src, out ulong dst)
         {

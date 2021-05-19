@@ -26,17 +26,17 @@ namespace Z0
 
         }
 
-        void CheckSolutionParser()
-        {
-            var src = FS.path(@"C:\Dev\z0\z0.machine.sln");
-            var flow = Wf.Running(string.Format("Processing {0}", src.ToUri()));
-            var tool = Wf.Roslyn();
-            var sln = tool.LoadSolution(src);
-            var projects = sln.Projects.AsSpan();
-            Process(projects);
-            var count = projects.Length;
-            Wf.Ran(flow, string.Format("Processed {0} with {1} projects", src.ToUri(), count));
-        }
+        // void CheckSolutionParser()
+        // {
+        //     var src = FS.path(@"C:\Dev\z0\z0.machine.sln");
+        //     var flow = Wf.Running(string.Format("Processing {0}", src.ToUri()));
+        //     var tool = Wf.Roslyn();
+        //     var sln = tool.LoadSolution(src);
+        //     var projects = sln.Projects.AsSpan();
+        //     Process(projects);
+        //     var count = projects.Length;
+        //     Wf.Ran(flow, string.Format("Processed {0} with {1} projects", src.ToUri(), count));
+        // }
 
         void Process(ReadOnlySpan<ProjectBlock> src)
         {

@@ -9,7 +9,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free, ApiHost(ApiNames.Cells, true)]
+    [Free, ApiHost]
     public partial class Cells
     {
         const NumericKind Closure = UnsignedInts;

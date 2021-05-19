@@ -117,7 +117,7 @@ namespace Z0
         string ITextual.Format()
             => Format();
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public bool Equals(bit b)
             => State == b.State;
 
