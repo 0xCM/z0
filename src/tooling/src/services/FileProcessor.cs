@@ -9,8 +9,6 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Root;
-
     public abstract class FileProcessor<T> : AppWorker<T,FS.FolderPath,FS.FolderPath>
         where T : FileProcessor<T>,new()
     {
@@ -22,7 +20,6 @@ namespace Z0
         public override Task Process(FS.FolderPath src, FS.FolderPath dst, CancellationToken cancel)
         {
             return root.run(() => Run(src,dst,cancel), cancel);
-
         }
 
         protected abstract void Run(FS.FolderPath src, FS.FolderPath dst, CancellationToken cancel);

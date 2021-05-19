@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    [Record(TableId)]
+    using System.Runtime.InteropServices;
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct NasmListEntry : IRecord<NasmListEntry>
     {
         public const string TableId = "nasm.listing";

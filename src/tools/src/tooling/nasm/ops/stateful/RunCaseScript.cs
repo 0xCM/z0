@@ -8,7 +8,7 @@ namespace Z0.Tools
     using System.Linq;
 
     using static Root;
-    using static memory;
+    using static core;
 
     partial class Nasm
     {

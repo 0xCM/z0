@@ -5,8 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+
+    using static FileTypeModels;
 
     using static Root;
     using static core;
@@ -14,6 +14,16 @@ namespace Z0
     [ApiHost]
     public readonly partial struct FileTypes
     {
+        public static AsmFileType Asm => default(AsmFileType);
+
+        public static BinFileType Bin => default(BinFileType);
+
+        public static CsFileType Cs => default(CsFileType);
+
+        public static DllFileType Dll => default(DllFileType);
+
+        public static ExeFileType Exe => default(ExeFileType);
+
         static FileTypes()
         {
             Lookup = new();

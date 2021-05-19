@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
     public interface IFileFlow
     {
         FS.FilePath SourcePath {get;}
@@ -35,5 +30,13 @@ namespace Z0
 
         FileType IFileFlow.TargetType
             => Target.FileType.Untyped;
+    }
+
+    public interface IFileFlow<S,P,T> : IFileFlow<S,T>
+        where S : struct, IFilePath<S>, IFileType<S>
+        where T : struct, IFilePath<T>, IFileType<T>
+        where P : IFileProcessor<S,T>
+    {
+        P Processor {get;}
     }
 }

@@ -4,8 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
+    using System.Runtime.InteropServices;
 
-    [Record(TableId)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct NasmCase : IRecord<NasmCase>
     {
         public const string TableId = "nasm.case";

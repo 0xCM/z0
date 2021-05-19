@@ -6,7 +6,7 @@ namespace Z0.Tools
 {
     using System;
 
-    using static memory;
+    using static core;
 
     partial class Nasm
     {

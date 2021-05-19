@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Captures the content of a command-line
@@ -23,7 +24,7 @@ namespace Z0
         public ReadOnlySpan<CmdLinePart> Parts
         {
             [MethodImpl(Inline)]
-            get => memory.recover<string,CmdLinePart>(Data.Edit);
+            get => recover<string,CmdLinePart>(Data.Edit);
         }
 
         [MethodImpl(Inline)]

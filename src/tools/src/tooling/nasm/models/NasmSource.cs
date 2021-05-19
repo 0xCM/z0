@@ -9,7 +9,7 @@ namespace Z0.Tools
 
     using Z0.Asm;
 
-    using static Part;
+    using static Root;
 
     using api = Nasm;
 

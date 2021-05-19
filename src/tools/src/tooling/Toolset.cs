@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
+
     /// <summary>
     /// Defines a set of related tools
     /// </summary>
@@ -16,6 +18,7 @@ namespace Z0
 
         public Index<ToolId> Members {get;}
 
+        [MethodImpl(Inline)]
         public Toolset(Identifier name, params ToolId[] members)
         {
             Name = name;
@@ -35,6 +38,7 @@ namespace Z0
 
         public Index<ToolId> Members {get;}
 
+        [MethodImpl(Inline)]
         public Toolset(Identifier name, K kind, params ToolId[] members)
         {
             Name = name;

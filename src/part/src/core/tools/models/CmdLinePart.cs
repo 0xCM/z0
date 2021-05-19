@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct CmdLinePart : ITextual
     {
@@ -20,17 +21,19 @@ namespace Z0
         public ReadOnlySpan<char> Chars
         {
             [MethodImpl(Inline)]
-            get => memory.chars(Content);
+            get => chars(Content);
         }
 
         public bool IsEmpty
         {
-            get => text.empty(Content);
+            [MethodImpl(Inline)]
+            get => sys.empty(Content);
         }
 
         public bool IsNonEmpty
         {
-            get => !text.empty(Content);
+            [MethodImpl(Inline)]
+            get => sys.nonempty(Content);
         }
 
         [MethodImpl(Inline)]

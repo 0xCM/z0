@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-
     [ApiHost]
     public sealed partial class NDisasm : ToolService<NDisasm>
     {

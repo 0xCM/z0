@@ -7,7 +7,7 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct NasmOption<T>
     {

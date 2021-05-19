@@ -23,13 +23,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Id);
+            get => sys.empty(Id);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Id);
+            get => sys.nonempty(Id);
         }
 
         [MethodImpl(Inline)]

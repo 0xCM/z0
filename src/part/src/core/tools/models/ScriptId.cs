@@ -35,19 +35,19 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Id);
+            get => sys.empty(Id);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Id);
+            get => sys.nonempty(Id);
         }
 
         public bool IsDiscriminated
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Token);
+            get => sys.nonempty(Token);
         }
 
         [MethodImpl(Inline)]

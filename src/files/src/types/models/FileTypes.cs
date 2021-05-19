@@ -7,21 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static FileTypeModels;
-
-    partial struct FileTypes
-    {
-        public static BinFileType Bin => default(BinFileType);
-
-        public static ExeFileType Exe => default(ExeFileType);
-
-        public static AsmFileType Asm => default(AsmFileType);
-
-        public static DllFileType Dll => default(DllFileType);
-
-        public static DllFileType Cs => default(DllFileType);
-    }
-
     public readonly struct FileTypeModels
     {
         public readonly struct ExeFileType : IFileType<ExeFileType>
