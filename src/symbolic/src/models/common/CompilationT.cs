@@ -36,9 +36,11 @@ namespace Z0
             get => Source != null;
         }
 
-
         public AssemblySymbol Assembly
-            => api.from(Source.Assembly);
+        {
+            [MethodImpl(Inline)]
+            get => api.from(Source.Assembly);
+        }
 
         public CompilationOptions Options
             => Source.Options;

@@ -13,6 +13,9 @@ namespace Z0
 
     public class XmlDocProvider : DocumentationProvider
     {
+       public static XmlDocProvider create(FS.FilePath src)
+            => new XmlDocProvider(src.Name);
+
         readonly Dictionary<string, string> members = new Dictionary<string, string>();
 
         public XmlDocProvider(string filePath)

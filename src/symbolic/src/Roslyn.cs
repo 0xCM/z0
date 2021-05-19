@@ -16,15 +16,13 @@ namespace Z0
     [ApiHost]
     public sealed class Roslyn : AppService<Roslyn>
     {
+        // [Op]
+        // public Compilation<CSharpCompilation> Compilation(MetadataReference src, string name)
+        //     => CSharpCompilation.Create(name, references: new[]{src});
+
         [Op]
-        public Compilation<CSharpCompilation> Compilation(MetadataReference src, string name)
-            => CSharpCompilation.Create(name, references: new[]{src});
-
-        // public Index<CompilerInvocationInfo> CompilerInvocations(FS.FilePath log)
-        //     => BuildLogParser.parse(log);
-
-        // public ulong GetKey(ISymbol src)
-        //     => CodeSolutions.SymbolIdService.GetIdULong(src);
+        public Compilation<CSharpCompilation> Compilation(string name, params MetadataReference[] refs)
+            => CSharpCompilation.Create(name, references: refs);
 
         public DocumentationComment GetDocs(XmlText xml)
             => DocumentationConverter.GetStructuredDocumentation(xml.Value, "\n");
@@ -32,7 +30,5 @@ namespace Z0
         public DocumentationComment GetDocs(ISymbol src)
             => DocumentationConverter.GetStructuredDocumentation(src);
 
-        // public SolutionFile LoadSolution(FS.FilePath src)
-        //     => SolutionFile.ParseFile(src.Name);
     }
 }

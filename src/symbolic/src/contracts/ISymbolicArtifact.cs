@@ -5,9 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    public interface IEnvProvider
+    using static Root;
+
+    public interface ISymbolicArtifact<R,S>
+        where R : IClrRuntimeObject
+        where S : ICodeSymbol
     {
-        ReadOnlySpan<IEnvVar> Provided {get;}
+        R Artifact {get;}
+
+        S Symbol {get;}
     }
 }

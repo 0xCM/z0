@@ -262,9 +262,16 @@ namespace Z0.Asm
 
         }
 
+        void Symbolize()
+        {
+            var svc = Wf.SourceSymbolic();
+            var symbols = svc.Symbolize(Parts.Cpu.Assembly);
+            root.iter(symbols.Methods, m => Wf.Row(m.Format()));
+        }
+
         public void Run()
         {
-            CaptureSelf();
+            Symbolize();
         }
 
 

@@ -12,7 +12,7 @@ namespace Z0
     using api = Names;
 
     [Datatype]
-    public readonly struct Name : IName<string>, IDataTypeComparable<Name>
+    public readonly struct Name : IName, IDataTypeComparable<Name>
     {
         readonly string Data;
 
@@ -23,7 +23,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Data);
+            get => sys.empty(Data);
         }
 
         public string Text
@@ -35,7 +35,7 @@ namespace Z0
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Data);
+            get => sys.nonempty(Data);
         }
 
         public string Content
@@ -60,10 +60,10 @@ namespace Z0
             get => (uint)Content.GetHashCode();
         }
 
-        public Count Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => (uint)Content.Length;
         }
 
         public int Length

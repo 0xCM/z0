@@ -18,18 +18,6 @@ namespace Z0
     [ApiHost]
     public sealed class SourceSymbolic : AppService<SourceSymbolic>
     {
-        [MethodImpl(Inline), Op]
-        public static SymbolKindFilter filter(SymbolKind kind)
-            => new SymbolKindFilter(kind);
-
-        [MethodImpl(Inline), Op]
-        public static uint filter(ReadOnlySpan<CodeSymbol> src, SymbolKind kind, Span<CodeSymbol> dst)
-            => SFx.filter(src, filter(kind), dst);
-
-        [MethodImpl(Inline), Op]
-        public static MemberProducer producer()
-            => new MemberProducer();
-
         /// <summary>
         /// Computes the total number of members that can be obtained from specified source elements
         /// </summary>
@@ -51,28 +39,75 @@ namespace Z0
             return total;
         }
 
-        Roslyn Roslyn;
+        [MethodImpl(Inline), Op]
+        public static SymbolKindFilter filter(SymbolKind kind)
+            => new SymbolKindFilter(kind);
 
-        protected override void OnInit()
+        [MethodImpl(Inline), Op]
+        public static uint filter(ReadOnlySpan<CodeSymbol> src, SymbolKind kind, Span<CodeSymbol> dst)
+            => SFx.filter(src, filter(kind), dst);
+
+        [MethodImpl(Inline), Op]
+        public static MemberProducer producer()
+            => new MemberProducer();
+
+        [MethodImpl(Inline), Op]
+        public static SymbolicAssembly join(Assembly src, AssemblySymbol sym)
+            => (src,sym);
+
+        [MethodImpl(Inline), Op]
+        public static SymbolicMethod join(MethodInfo src, MethodSymbol sym)
+            => (src,sym);
+
+        [MethodImpl(Inline), Op]
+        public static SymbolicType join(Type src, TypeSymbol sym)
+            => (src,sym);
+
+        public CodeSymbolSet Symbolize(Assembly src)
         {
-            Roslyn = Wf.Roslyn();
+            var metadata = Clr.metaref(src);
+            var dst = CodeSymbols.set(metadata);
+            var name = string.Format("{0}.compilation",src.GetSimpleName());
+            var comp = Roslyn.Compilation(name, metadata);
+            var asymbol = comp.GetAssemblySymbol(metadata);
+            dst.Replace(core.array(asymbol));
+            var gns = asymbol.GlobalNamespace;
+            var types = gns.GetTypes();
+            Wf.Status(string.Format("Traversing {0} types", types.Length));
+            dst.Replace(types);
+            var allocation = span<CodeSymbol>(MemberCount(types));
+            Wf.Status(string.Format("Traversing {0} type members", allocation.Length));
+            IncludeMethods(types, allocation, ref dst);
+            return dst;
         }
 
-
-        public ReadOnlySpan<MethodSymbol> SymbolizeMethods(PartId id)
+        public CodeSymbolSet Symbolize(PartId part)
         {
-            if(Wf.ApiCatalog.FindComponent(id, out var assembly))
+            if(Wf.ApiCatalog.FindComponent(part, out var assembly))
             {
-                return SymbolizeMethods(assembly);
+                return Symbolize(assembly);
             }
             else
-                return default;
+            {
+                Wf.Error(string.Format("{0} not found", part.Format()));
+                return CodeSymbolSet.Empty;
+            }
         }
 
         public ReadOnlySpan<MethodSymbol> SymbolizeMethods(Assembly src)
         {
             var symbols = Symbolize(src);
             return symbols.Methods;
+        }
+
+        public ReadOnlySpan<MethodSymbol> SymbolizeMethods(PartId part)
+        {
+            if(Wf.ApiCatalog.FindComponent(part, out var assembly))
+            {
+                return SymbolizeMethods(assembly);
+            }
+            else
+                return default;
         }
 
         public void SymbolizeMethods(ReadOnlySpan<Assembly> src, SpanReceiver<MethodSymbol> dst)
@@ -85,22 +120,11 @@ namespace Z0
             }
         }
 
-        public CodeSymbolSet Symbolize(Assembly src)
+        Roslyn Roslyn;
+
+        protected override void OnInit()
         {
-            var metadata = Cli.MetadataRef(src);
-            var dst = CodeSymbols.set(metadata);
-            var name = string.Format("{0}.compilation",src.GetSimpleName());
-            var comp = Roslyn.Compilation(metadata, name);
-            var asymbol = comp.GetAssemblySymbol(metadata);
-            dst.Replace(core.array(asymbol));
-            var gns = asymbol.GlobalNamespace;
-            var types = gns.GetTypes();
-            Wf.Status(string.Format("Traversing {0} types", types.Length));
-            dst.Replace(types);
-            var allocation = span<CodeSymbol>(MemberCount(types));
-            Wf.Status(string.Format("Traversing {0} type members", allocation.Length));
-            IncludeMethods(types, allocation, ref dst);
-            return dst;
+            Roslyn = Wf.Roslyn();
         }
 
         [Op]
@@ -157,20 +181,6 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public ReadOnlySpan<CodeSymbol> Invoke(in TypeSymbol src)
                 => src.GetMembers();
-        }
-
-        public CodeSymbolSet Symbolize(PartId part)
-        {
-            var tool = Wf.Roslyn();
-            if(Wf.ApiCatalog.FindComponent(part, out var assembly))
-            {
-                return Symbolize(assembly);
-            }
-            else
-            {
-                Wf.Error(string.Format("{0} not founc", part.Format()));
-                return CodeSymbolSet.Empty;
-            }
         }
     }
 }

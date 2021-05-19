@@ -66,28 +66,28 @@ namespace Z0
         public static MetadataReaderProvider PdbReaderProvider(Stream src, MetadataStreamOptions options = MetadataStreamOptions.Default)
             => MetadataReaderProvider.FromPortablePdbStream(src, options);
 
-        public static MetadataReference MetadataRef(FS.FilePath src)
-        {
-            var xml = src.ChangeExtension(FS.Xml);
-            var doc = xmldoc(xml);
-            var props = default(MetadataReferenceProperties);
-            return MetadataReference.CreateFromFile(src.Name, props, doc);
-        }
+        // public static MetadataReference MetadataRef(FS.FilePath src)
+        // {
+        //     var xml = src.ChangeExtension(FS.Xml);
+        //     var doc = XmlDocProvider.create(xml);
+        //     var props = default(MetadataReferenceProperties);
+        //     return MetadataReference.CreateFromFile(src.Name, props, doc);
+        // }
 
-        public static MetadataReference MetadataRef(Assembly src)
-        {
-            var path = FS.path(src.Location);
-            var xml = path.ChangeExtension(FS.Xml);
-            var props = default(MetadataReferenceProperties);
-            if(xml.Exists)
-            {
-                var doc = xmldoc(xml);
-                var reference = MetadataReference.CreateFromFile(path.Name, props, doc);
-                return reference;
-            }
-            else
-                return MetadataReference.CreateFromFile(path.Name, props);
-        }
+        // public static MetadataReference MetadataRef(Assembly src)
+        // {
+        //     var path = FS.path(src.Location);
+        //     var xml = path.ChangeExtension(FS.Xml);
+        //     var props = default(MetadataReferenceProperties);
+        //     if(xml.Exists)
+        //     {
+        //         var doc = XmlDocProvider.create(xml);
+        //         var reference = MetadataReference.CreateFromFile(path.Name, props, doc);
+        //         return reference;
+        //     }
+        //     else
+        //         return MetadataReference.CreateFromFile(path.Name, props);
+        // }
 
     }
 

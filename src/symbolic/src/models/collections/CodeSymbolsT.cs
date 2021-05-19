@@ -11,8 +11,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = CodeSymbols;
-
     public sealed class CodeSymbols<T> : CodeSymbols<CodeSymbols<T>,T>, ICodeSymbols<T>
         where T : ISymbol
     {

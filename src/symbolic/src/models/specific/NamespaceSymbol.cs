@@ -13,6 +13,7 @@ namespace Z0
     using Microsoft.CodeAnalysis;
 
     using static Root;
+    using static core;
 
     using api = CodeSymbols;
 
@@ -62,7 +63,7 @@ namespace Z0
             public ReadOnlySpan<NamespaceSymbol> ConstituentNamespaces
             {
                 [MethodImpl(Inline)]
-                get => memory.recover<INamespaceSymbol,NamespaceSymbol>(_ConstituentNamespaces);
+                get => recover<INamespaceSymbol,NamespaceSymbol>(_ConstituentNamespaces);
             }
 
             public bool IsNamespace
@@ -114,10 +115,16 @@ namespace Z0
             }
 
             public bool IsDefinition
-                => Source.IsDefinition;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsDefinition;
+            }
 
             bool IsStatic
-                => Source.IsStatic;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsStatic;
+            }
 
             bool IsVirtual
                 => Source.IsVirtual;
@@ -156,9 +163,7 @@ namespace Z0
                 => Source.HasUnsupportedMetadata;
 
             public IEnumerable<INamespaceOrTypeSymbol> GetMembers()
-            {
-                return Source.GetMembers();
-            }
+                => Source.GetMembers();
 
             public IEnumerable<INamespaceOrTypeSymbol> GetMembers(string name)
                 => Source.GetMembers(name);

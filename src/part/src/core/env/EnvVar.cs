@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a nonparametric environment variable
@@ -37,13 +37,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsEmpty || text.empty(Value);
+            get => Name.IsEmpty || sys.empty(Value);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsNonEmpty && text.nonempty(Value);
+            get => Name.IsNonEmpty && sys.nonempty(Value);
         }
 
         public EnvVar<T> Transform<T>(Func<string,T> f)

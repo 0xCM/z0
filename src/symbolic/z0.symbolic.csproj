@@ -5,12 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(Lang)" />
-    <ProjectReference Include="$(Related)" />
     <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(Cli)" />
+    <!-- <ProjectReference Include="$(Cli)" /> -->
   </ItemGroup>
 
 

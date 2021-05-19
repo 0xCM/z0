@@ -74,7 +74,7 @@ namespace Z0
         {
             var dst = text.buffer();
             var vars = Provided;
-            var count = vars.Count;
+            var count = vars.Length;
             root.iter(vars, var => dst.AppendLine(var.Format()));
             return dst.Emit();
         }
@@ -83,7 +83,7 @@ namespace Z0
         {
             var dst = text.buffer();
             var vars = Provided;
-            var count = vars.Count;
+            var count = vars.Length;
             root.iter(vars, var => dst.AppendLine(var.Format(vck)));
             return dst.Emit();
         }
@@ -91,7 +91,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public Index<IEnvVar> Provided
+        public ReadOnlySpan<IEnvVar> Provided
             => Members(this);
 
         [Op]

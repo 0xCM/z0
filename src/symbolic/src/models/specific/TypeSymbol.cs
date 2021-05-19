@@ -127,38 +127,45 @@ namespace Z0
             public INamespaceSymbol ContainingNamespace
                 => Source.ContainingNamespace;
 
-            public bool IsDefinition => Source.IsDefinition;
+            public bool IsDefinition
+                => Source.IsDefinition;
 
-            public bool IsStatic => Source.IsStatic;
+            public bool IsStatic
+                => Source.IsStatic;
 
-            public bool IsVirtual => Source.IsVirtual;
+            public bool IsVirtual
+                => Source.IsVirtual;
 
-            public bool IsOverride => Source.IsOverride;
+            public bool IsOverride
+                => Source.IsOverride;
 
-            public bool IsAbstract => Source.IsAbstract;
+            public bool IsAbstract
+                => Source.IsAbstract;
 
             public bool IsSealed => Source.IsSealed;
 
             public bool IsExtern => Source.IsExtern;
 
-            public bool IsImplicitlyDeclared => Source.IsImplicitlyDeclared;
+            public bool IsImplicitlyDeclared
+                => Source.IsImplicitlyDeclared;
 
-            public bool CanBeReferencedByName => Source.CanBeReferencedByName;
+            public bool CanBeReferencedByName
+                => Source.CanBeReferencedByName;
 
             public ImmutableArray<Location> Locations
                 => Source.Locations;
 
-            public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => Source.DeclaringSyntaxReferences;
+            public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
+                => Source.DeclaringSyntaxReferences;
 
-            public Accessibility DeclaredAccessibility => Source.DeclaredAccessibility;
+            public Accessibility DeclaredAccessibility
+                => Source.DeclaredAccessibility;
 
-            public bool HasUnsupportedMetadata => Source.HasUnsupportedMetadata;
-
+            public bool HasUnsupportedMetadata
+                => Source.HasUnsupportedMetadata;
 
             public ISymbol FindImplementationForInterfaceMember(ISymbol interfaceMember)
-            {
-                return Source.FindImplementationForInterfaceMember(interfaceMember);
-            }
+                => Source.FindImplementationForInterfaceMember(interfaceMember);
 
             public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format = null)
             {
@@ -171,19 +178,13 @@ namespace Z0
             }
 
             public string ToMinimalDisplayString(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format = null)
-            {
-                return Source.ToMinimalDisplayString(semanticModel, topLevelNullability, position, format);
-            }
+                => Source.ToMinimalDisplayString(semanticModel, topLevelNullability, position, format);
 
             public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format = null)
-            {
-                return Source.ToMinimalDisplayParts(semanticModel, topLevelNullability, position, format);
-            }
+                => Source.ToMinimalDisplayParts(semanticModel, topLevelNullability, position, format);
 
             public ITypeSymbol WithNullableAnnotation(NullableAnnotation nullableAnnotation)
-            {
-                return Source.WithNullableAnnotation(nullableAnnotation);
-            }
+                => Source.WithNullableAnnotation(nullableAnnotation);
 
             public ReadOnlySpan<CodeSymbol> GetMembers()
                 => api.materialize(Source.GetMembers().AsSpan());

@@ -18,9 +18,6 @@ namespace Z0
         /// </summary>
         Type ContainerType
             => GetType();
-
-        // Index<object> Synonyms
-        //     => GetType().Tag<DatatypeAttribute>().MapValueOrElse(a => a.Synonyms, () => Array.Empty<object>());
     }
 
     [Free]

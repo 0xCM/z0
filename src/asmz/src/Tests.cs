@@ -54,8 +54,8 @@ namespace Z0.Asm
             if(Wf.ApiCatalog.FindComponent(id, out var assembly))
             {
                 var name = string.Format("z0.{0}.compilation", id.Format());
-                var metadata = Cli.MetadataRef(assembly);
-                var comp = tool.Compilation(metadata, name);
+                var metadata = Clr.metaref(assembly);
+                var comp = tool.Compilation(name, metadata);
                 var symbol = comp.GetAssemblySymbol(metadata);
                 var gns = symbol.GlobalNamespace;
                 var types = gns.GetTypes();

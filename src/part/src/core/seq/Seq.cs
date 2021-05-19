@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
-    [ApiHost(ApiNames.Seq, true)]
+    [ApiHost]
     public readonly partial struct Seq
     {
         const NumericKind Closure = UInt64k;

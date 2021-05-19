@@ -42,7 +42,10 @@ namespace Z0
             }
 
             public DocumentationComment Docs
-                => api.docs(Source);
+            {
+                [MethodImpl(Inline)]
+                get => api.docs(Source);
+            }
 
             public MethodKind MethodKind
             {
@@ -117,19 +120,34 @@ namespace Z0
             }
 
             public bool IsCheckedBuiltin
-                => Source.IsCheckedBuiltin;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsCheckedBuiltin;
+            }
 
             public bool HidesBaseMethodsByName
-                => Source.HidesBaseMethodsByName;
+            {
+                [MethodImpl(Inline)]
+                get => Source.HidesBaseMethodsByName;
+            }
 
             public bool ReturnsVoid
-                => Source.ReturnsVoid;
+            {
+                [MethodImpl(Inline)]
+                get => Source.ReturnsVoid;
+            }
 
             public bool ReturnsByRef
-                => Source.ReturnsByRef;
+            {
+                [MethodImpl(Inline)]
+                get => Source.ReturnsByRef;
+            }
 
             public bool ReturnsByRefReadonly
-                => Source.ReturnsByRefReadonly;
+            {
+                [MethodImpl(Inline)]
+                get => Source.ReturnsByRefReadonly;
+            }
 
             public RefKind RefKind
             {
@@ -147,7 +165,9 @@ namespace Z0
                 => Source.ReturnNullableAnnotation;
 
             public ImmutableArray<ITypeSymbol> TypeArguments
-                => Source.TypeArguments;
+            {
+                get => Source.TypeArguments;
+            }
 
             public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations
                 => Source.TypeArgumentNullableAnnotations;
@@ -162,7 +182,10 @@ namespace Z0
                 => Source.ConstructedFrom;
 
             public bool IsReadOnly
-                => Source.IsReadOnly;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsReadOnly;
+            }
 
             public bool IsInitOnly
                 => Source.IsInitOnly;
@@ -210,13 +233,22 @@ namespace Z0
                 => Source.AssociatedAnonymousDelegate;
 
             public bool IsConditional
-                => Source.IsConditional;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsConditional;
+            }
 
             public SymbolKind Kind
-                => Source.Kind;
+            {
+                [MethodImpl(Inline)]
+                get => Source.Kind;
+            }
 
             public string Language
-                => Source.Language;
+            {
+                [MethodImpl(Inline)]
+                get => Source.Language;
+            }
 
             public string Name
                 => Source.Name;
@@ -240,10 +272,16 @@ namespace Z0
                 => Source.ContainingNamespace;
 
             public bool IsDefinition
-                => Source.IsDefinition;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsDefinition;
+            }
 
             public bool IsStatic
-                => Source.IsStatic;
+            {
+                [MethodImpl(Inline)]
+                get => Source.IsStatic;
+            }
 
             public bool IsVirtual
                 => Source.IsVirtual;
@@ -292,9 +330,7 @@ namespace Z0
                 => Source.Construct(typeArguments);
 
             public IMethodSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations)
-            {
-                return Source.Construct(typeArguments, typeArgumentNullableAnnotations);
-            }
+                => Source.Construct(typeArguments, typeArgumentNullableAnnotations);
 
             public DllImportData GetDllImportData()
                 => Source.GetDllImportData();
