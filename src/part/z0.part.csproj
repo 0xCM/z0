@@ -9,6 +9,8 @@
     <ProjectReference Include="$(External)" />
     <ProjectReference Include="$(Interop)" />
     <ProjectReference Include="$(Clr)" />
+    <ProjectReference Include="$(Rules)" />
+    <ProjectReference Include="$(Time)" />
   </ItemGroup>
 
 </Project>

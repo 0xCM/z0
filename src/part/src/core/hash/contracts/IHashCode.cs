@@ -23,9 +23,9 @@ namespace Z0
             => Value.ToString();
 
         ReadOnlySpan<byte> IHashCode.Data
-            => memory.bytes(Value);
+            => core.bytes(Value);
          BitWidth Width
-            => memory.width<T>();
+            => core.width<T>();
      }
 
     [Free]

@@ -10,12 +10,12 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection.Emit;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [ApiHost(ApiNames.CellDelegates, true)]
+    [ApiHost]
     public readonly struct CellDelegates
     {
         const NumericKind Closure = Integers;
@@ -305,7 +305,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryOp128 define<T>(Func<Vector128<T>,Vector128<T>,Vector128<T>> f)
             where T : unmanaged
-                => (Cell128 a, Cell128 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToCell();
+                => (Cell128 a, Cell128 b) => f(a.ToVector<T>(), b.ToVector<T>()).ToCell();
 
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
@@ -314,7 +314,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryOp256 define<T>(Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
             where T : unmanaged
-                => (Cell256 a, Cell256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToCell();
+                => (Cell256 a, Cell256 b) => f(a.ToVector<T>(), b.ToVector<T>()).ToCell();
 
         /// <summary>
         /// Evaluates a 128-bit unary operator over a vector

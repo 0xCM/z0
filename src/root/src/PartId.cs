@@ -86,6 +86,9 @@ public enum PartId : ulong
     [Symbol("calc.shell")]
     CalcShell = Calc | Shell,
 
+    [Symbol("time")]
+    Time = 38,
+
     [Symbol("events")]
     Events = 40,
 

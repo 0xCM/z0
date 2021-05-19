@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Encloses a pointer to the native definition of a dynamic delegate

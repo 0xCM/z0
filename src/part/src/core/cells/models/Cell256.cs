@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
-    using static Part;
+    using static Root;
+    using static core;
 
     using F = Cell256;
 
@@ -32,7 +33,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(this);
+            get => bytes(this);
         }
 
         public Cell128 Lo
@@ -157,7 +158,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
              where T : struct
-               => memory.@as<F,T>(this);
+               => @as<F,T>(this);
        public string Format()
             => Content.ToString();
 

@@ -16,7 +16,7 @@ namespace System
 
     using Z0;
 
-    using static Z0.Part;
+    using static Z0.Root;
 
     /// <summary>
     /// Provides an enumeration of AM or PM to support 12-hour clock values in the <see cref="TimeOfDay"/> type.

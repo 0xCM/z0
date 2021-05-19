@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+      <ProjectReference Include="$(Core)" />
+      <ProjectReference Include="$(External)" />
       <ProjectReference Include="$(Part)" />
+
   </ItemGroup>
 
 </Project>

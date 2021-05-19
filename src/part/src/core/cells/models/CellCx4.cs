@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public struct Cell<A,B,C,D>  : IDataCell<Cell<A,B,C,D>>
         where A : struct, IDataCell<A>
@@ -32,8 +32,7 @@ namespace Z0
             C3 = c3;
         }
 
-       [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.Adjacent4, C0, C1, C2, C3);
+            => string.Format(RP.Adjacent4, C0, C1, C2, C3);
     }
 }

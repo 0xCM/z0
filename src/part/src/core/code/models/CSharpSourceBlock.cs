@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
 
+
     public readonly struct CSharpSourceBlock : ISourceCode<CSharpSourceBlock,TextLine>
     {
         public Index<TextLine> Code {get;}

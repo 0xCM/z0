@@ -14,7 +14,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiHost(ApiNames.CilTables, true)]
+    [ApiHost]
     public readonly partial struct RecordBuilder
     {
         const TypeAttributes Default = BeforeFieldInit | Public | Sealed | AnsiClass;

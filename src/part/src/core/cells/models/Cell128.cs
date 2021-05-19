@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     using F = Cell128;
 
@@ -63,7 +64,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(this);
+            get => bytes(this);
         }
 
         public Vector128<byte> V8u
@@ -137,7 +138,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-                => memory.@as<F,T>(this);
+                => @as<F,T>(this);
 
         [MethodImpl(Inline)]
         public Vector128<T> ToVector<T>()
@@ -172,19 +173,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<byte> x)
-            => memory.@as<Vector128<byte>,Cell128>(x);
+            => @as<Vector128<byte>,Cell128>(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ushort> x)
-            => memory.@as<Vector128<ushort>,Cell128>(x);
+            => @as<Vector128<ushort>,Cell128>(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<uint> x)
-            => memory.@as<Vector128<uint>,Cell128>(x);
+            => @as<Vector128<uint>,Cell128>(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ulong> x)
-            => memory.@as<Vector128<ulong>,Cell128>(x);
+            => @as<Vector128<ulong>,Cell128>(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<byte>(Cell128 x)

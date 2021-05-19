@@ -85,6 +85,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out utf8 dst)
+        {
+            dst = src ?? utf8.Empty;
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Identifier dst)
         {
             dst = src ?? EmptyString;

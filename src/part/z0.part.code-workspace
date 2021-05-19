@@ -8,24 +8,26 @@
 		},
 		{
 			"path": "..\\core"
-		}
-        ,
+		},
 		{
 			"path": "..\\external"
-		}
-        ,
+		},
 		{
 			"path": "..\\sys"
-		}
-        ,
+		},
 		{
 			"path": "..\\interop"
-		}
-        ,
+		},
 		{
 			"path": "..\\clr"
+		},
+		{
+			"path": "..\\time"
+		},
+		{
+			"path": "..\\rules"
 		}
-    ]
+	]
         ,
 	"settings": {}
 }

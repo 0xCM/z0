@@ -89,12 +89,13 @@
     <ResPack>$(Src)respack/z0.respack.csproj</ResPack>
 
     <Refs>$(Src)refs/z0.refs.csproj</Refs>
-    <Related>$(Src)related/Z0.related.csproj</Related>
-    <Res>$(Src)res/Z0.res.csproj</Res>
-    <Root>$(Src)root/Z0.root.csproj</Root>
-    <Symbolic>$(Src)symbolic/Z0.symbolic.csproj</Symbolic>
+    <Related>$(Src)related/z0.related.csproj</Related>
+    <Res>$(Src)res/z0.res.csproj</Res>
+    <Root>$(Src)root/z0.root.csproj</Root>
+    <Rules>$(Src)rules/z0.rules.csproj</Rules>
 
-    <Services>$(Src)services/Z0.services.csproj</Services>
+    <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
+    <Services>$(Src)services/z0.services.csproj</Services>
     <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
     <Sources>$(Src)sources/z0.sources.csproj</Sources>
     <SpanBlocks>$(Src)spanblocks/z0.spanblocks.csproj</SpanBlocks>
@@ -103,10 +104,9 @@
 
     <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Term>$(Src)term/z0.term.csproj</Term>
+    <Time>$(Src)time/z0.time.csproj</Time>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
     <Tooling>$(Src)tooling/z0.tooling.csproj</Tooling>
-
-    <Universe>$(Src)universe/z0.universe.csproj</Universe>
 
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>

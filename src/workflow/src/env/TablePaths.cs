@@ -55,6 +55,13 @@ namespace Z0
             where T : struct, IRecord<T>
                 => Table<T>(subject, FS.Csv);
 
+        FS.FolderPath GenTables()
+            => DbRoot() + FS.folder("generators");
+
+        FS.FilePath GenTable<T>(string subject)
+            where T : struct, IRecord<T>
+                => GenTables() + FS.file(subject, FS.Csv);
+
         FS.FilePath Table<T>(FS.FolderName subject)
             where T : struct, IRecord<T>
                 => TableDir(subject) + FS.file(TableId<T>(), DefaultTableExt);

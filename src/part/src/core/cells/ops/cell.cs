@@ -8,46 +8,46 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class Cells
     {
         [MethodImpl(Inline), Op]
         public static Cell8 cell(ReadOnlySpan<byte> src, W8 n)
-            => memory.first(src);
+            => core.first(src);
 
         [MethodImpl(Inline), Op]
         public static Cell16 cell(ReadOnlySpan<byte> src, W16 w)
-            => memory.first(recover<byte,ushort>(slice(src,2)));
+            => core.first(recover<byte,ushort>(slice(src,2)));
 
         [MethodImpl(Inline), Op]
         public static Cell32 cell(ReadOnlySpan<byte> src, W32 w)
-            => memory.first(recover<byte,uint>(slice(src,4)));
+            => core.first(recover<byte,uint>(slice(src,4)));
 
         [MethodImpl(Inline), Op]
         public static Cell64 cell(ReadOnlySpan<byte> src, W64 w)
-            => memory.first(recover<byte,ulong>(slice(src,8)));
+            => core.first(recover<byte,ulong>(slice(src,8)));
 
         [MethodImpl(Inline), Op]
         public static Cell128 cell(ReadOnlySpan<byte> src, W128 w)
-            => memory.first(recover<byte,Vector128<ulong>>(slice(src,16)));
+            => core.first(recover<byte,Vector128<ulong>>(slice(src,16)));
 
         [MethodImpl(Inline), Op]
         public static Cell128 cell(W128 w, ReadOnlySpan<byte> src)
-            => memory.first(recover<byte,Vector128<ulong>>(slice(src,16)));
+            => core.first(recover<byte,Vector128<ulong>>(slice(src,16)));
 
         [MethodImpl(Inline), Op]
         public static Cell256 cell(ReadOnlySpan<byte> src, W256 w)
-            => memory.first(recover<byte,Vector256<ulong>>(slice(src,32)));
+            => core.first(recover<byte,Vector256<ulong>>(slice(src,32)));
 
         [MethodImpl(Inline), Op]
         public static Cell256 cell(W256 w, ReadOnlySpan<byte> src)
-            => memory.first(recover<byte,Vector256<ulong>>(slice(src,32)));
+            => core.first(recover<byte,Vector256<ulong>>(slice(src,32)));
 
         [MethodImpl(Inline), Op]
         public static Cell512 cell(ReadOnlySpan<byte> src, W512 w)
-            => memory.first(recover<byte,Vector512<ulong>>(slice(src,32)));
+            => core.first(recover<byte,Vector512<ulong>>(slice(src,32)));
 
         [MethodImpl(Inline)]
         public static F fix<T,F>(T src)

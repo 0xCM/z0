@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    //using api = Cells;
+    using static Root;
+    using static core;
 
     [Datatype("m8")]
     public readonly struct Cell8 : IDataCell<Cell8,W8,byte>
@@ -30,7 +29,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(this);
+            get => bytes(this);
         }
 
         public byte Content
@@ -48,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-              => Numeric.force<T>(Data);
+              => NumericCast.force<T>(Data);
 
         [MethodImpl(Inline)]
         public bool Equals(Cell8 src)
@@ -133,7 +132,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(Cell8 x)
             => (ulong)x.Data;
-
 
         public static Cell8 Empty => default;
     }

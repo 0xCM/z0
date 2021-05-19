@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class Cells
     {
@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The source cell</param>
         [MethodImpl(Inline), Op]
         public static byte uint8(Cell8 src)
-            =>  (byte)src;
+            => (byte)src;
     }
 }

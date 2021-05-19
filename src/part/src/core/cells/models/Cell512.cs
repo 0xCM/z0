@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using F = Cell512;
 
@@ -32,7 +32,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(this);
+            get => bytes(this);
         }
 
         public Cell256 Lo
@@ -99,7 +99,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-                => memory.@as<F,T>(this);
+                => @as<F,T>(this);
 
         [MethodImpl(Inline)]
         public Vector512<T> ToVector<T>()

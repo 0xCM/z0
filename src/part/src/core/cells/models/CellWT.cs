@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines the content of a <typeparamref name='T'/> cell of width <typeparamref name='W'/>
@@ -28,7 +28,6 @@ namespace Z0
             get => (uint)Widths.data<W>();
         }
 
-        [MethodImpl(Inline)]
         public string Format()
             => Content.Format();
 

@@ -9,8 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static Option;
+    using static Root;
 
     using api = Time;
 
@@ -68,7 +67,7 @@ namespace Z0
         /// <param name="x">The date to convert to an array</param>
         [MethodImpl(Inline)]
         public static int[] GetItemArray(this Date x)
-            => array(x.Year, x.Month, x.Day);
+            => core.array(x.Year, x.Month, x.Day);
 
         /// <summary>
         /// Returns the instant that is one day less than the specified instant

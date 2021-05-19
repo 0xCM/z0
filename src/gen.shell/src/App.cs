@@ -11,7 +11,11 @@ namespace Z0
         public void Generate(string[] args)
         {
             var flow = Wf.Running("Generating");
-            root.iter(args, arg => Wf.Row(arg));
+            var bitfields = Wf.BitfieldGenerator();
+            var specs = bitfields.LoadSpecs();
+            var formatter = Tables.formatter<BitfieldSpecEntry>();
+            root.iter(specs, spec => Wf.Row(formatter.Format(spec)));
+            //root.iter(args, arg => Wf.Row(arg));
             Wf.Ran(flow);
         }
     }

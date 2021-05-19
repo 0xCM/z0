@@ -12,6 +12,14 @@ namespace Z0
     partial struct core
     {
         /// <summary>
+        /// Converts a string to bytespan
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> bytes(string src)
+            => recover<char,byte>(chars(src));
+
+        /// <summary>
         /// Presents a generic value as a bytespan
         /// </summary>
         /// <param name="src">The source reference</param>

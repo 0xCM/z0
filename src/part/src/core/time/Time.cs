@@ -10,8 +10,8 @@ namespace Z0
     using System.Diagnostics;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static Rules;
 
     [ApiHost]
@@ -144,17 +144,40 @@ namespace Z0
         public static Duration snapshot(Stopwatch sw)
             => Duration.init(sw.ElapsedTicks);
 
-        public static Date[] partition(in ClosedInterval<Date> src, uint width)
+        // public static Date[] partition(in ClosedInterval<Date> src, uint width)
+        // {
+        //     var points = root.list<Date>(new Date[]{src.Min});
+        //     var last = src.Min;
+        //     var finished = false;
+        //     while (!finished)
+        //     {
+        //         var next = last.AddDays((int)width);
+        //         if (next >= src.Max)
+        //         {
+        //             points.Add(src.Max);
+        //             finished = true;
+        //         }
+        //         else
+        //         {
+        //             points.Add(next);
+        //             last = next;
+        //         }
+        //     }
+
+        //     return points.Array();
+        // }
+
+        public static Date[] partition(Date min, Date max, uint width)
         {
-            var points = root.list<Date>(new Date[]{src.Min});
-            var last = src.Min;
+            var points = root.list<Date>(new Date[]{min});
+            var last = min;
             var finished = false;
             while (!finished)
             {
                 var next = last.AddDays((int)width);
-                if (next >= src.Max)
+                if (next >= max)
                 {
-                    points.Add(src.Max);
+                    points.Add(max);
                     finished = true;
                 }
                 else
@@ -228,15 +251,15 @@ namespace Z0
             switch (resolution)
             {
                 case TimeResolution.Date:
-                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day);
+                    return core.array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day);
                 case TimeResolution.Hour:
-                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour);
+                    return core.array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour);
                 case TimeResolution.Minute:
-                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute);
+                    return core.array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute);
                 case TimeResolution.Second:
-                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute, (ushort)x.Second);
+                    return core.array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute, (ushort)x.Second);
                 default:
-                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute, (ushort)x.Second, (ushort)x.Millisecond);
+                    return core.array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute, (ushort)x.Second, (ushort)x.Millisecond);
             }
         }
     }

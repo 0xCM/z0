@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     [Datatype("m64")]
     public readonly struct Cell64 : IDataCell<Cell64,W64,ulong>
@@ -28,7 +29,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(this);
+            get => bytes(this);
         }
 
         public Cell32 Lo
@@ -53,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-                => Numeric.force<T>(Content);
+                => NumericCast.force<T>(Content);
 
         [MethodImpl(Inline)]
         public bool Equals(ulong src)
