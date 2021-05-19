@@ -24,7 +24,8 @@ namespace Z0
 
         ReadOnlySpan<byte> IHashCode.Data
             => core.bytes(Value);
-         BitWidth Width
+
+         uint Width
             => core.width<T>();
      }
 

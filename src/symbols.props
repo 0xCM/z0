@@ -67,12 +67,12 @@
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
     <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
 
+    <Hash>$(Src)hash/z0.hash.csproj</Hash>
+
     <Interop>$(Src)interop/z0.interop.csproj</Interop>
 
     <Lang>$(Src)lang/z0.lang.csproj</Lang>
     <Logix>$(Src)logix/z0.logix.csproj</Logix>
-
-    <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
     <Math>$(Src)math/z0.math.csproj</Math>
     <MathSvc>$(Src)mathsvc/z0.mathsvc.csproj</MathSvc>

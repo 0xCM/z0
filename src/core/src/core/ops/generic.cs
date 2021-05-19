@@ -6,12 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
     partial struct core
     {
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static HashSet<T> hashset<T>()
+            => new HashSet<T>();
+
         /// <summary>
         /// Transforms a <see cref='char'/> value into a <see cref='T'/> value
         /// </summary>

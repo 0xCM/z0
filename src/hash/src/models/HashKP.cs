@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct Hash<K,P> : IHashCode<K,P>
         where K : unmanaged
@@ -18,7 +18,7 @@ namespace Z0
         public P Primitive
         {
             [MethodImpl(Inline)]
-            get => memory.@as<K,P>(Value);
+            get => core.@as<K,P>(Value);
         }
 
         [MethodImpl(Inline)]

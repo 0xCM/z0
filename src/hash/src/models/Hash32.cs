@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct Hash32 : IHashCode<uint,uint>, IDataTypeComparable<Hash32>
     {
@@ -77,7 +77,7 @@ namespace Z0
         public uint Primitive
         {
             [MethodImpl(Inline)]
-            get => memory.u32(Value);
+            get => core.u32(Value);
         }
 
         [MethodImpl(Inline)]

@@ -47,9 +47,9 @@ namespace alg
         public static uint calc<T>(Vector128<T> src)
             where T : unmanaged
         {
-            Cell128 data = src.AsUInt64();
-
-            var input = @readonly(recover<ulong>(data.Bytes));
+            //Cell128 data = src.AsUInt64();
+            var data = core.bytes(src);
+            var input = @readonly(recover<ulong>(data));
             var output = calc(input);
             return output;
         }

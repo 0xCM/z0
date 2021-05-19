@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static ScalarCast;
+    using static core;
 
     [ApiHost]
     public readonly struct Sizes
@@ -43,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static ByteSize untyped<T>(Size<T> src)
             where T : unmanaged
-                => memory.bw64(src.Measure);
+                => bw64(src.Measure);
 
         [MethodImpl(Inline), Op]
         public static ByteSize align(ByteSize src, ulong factor)
@@ -134,7 +135,7 @@ namespace Z0
         {
             if(Numeric.parse<ulong>(src, out var x))
             {
-                dst = size<T>(core.generic<T>(x));
+                dst = size<T>(generic<T>(x));
                 return true;
             }
             else

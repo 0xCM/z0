@@ -58,7 +58,7 @@ public enum PartId : ulong
     PolySource = 16,
 
     [Symbol("polyrand")]
-    Polyrand = 15,
+    Polyrand = 17,
 
     [Symbol("polyrand.test")]
     PolyrandTest = Polyrand | Test,
@@ -76,6 +76,9 @@ public enum PartId : ulong
 
     [Symbol("lang")]
     Lang = 22,
+
+    [Symbol("hash")]
+    Hash = 23,
 
     [Symbol("gmath")]
     GMath = 34,

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct Hash64 : IHashCode<ulong,ulong>
     {
@@ -40,7 +41,7 @@ namespace Z0
         public ulong Primitive
         {
             [MethodImpl(Inline)]
-            get => memory.u64(Value);
+            get => u64(Value);
         }
 
         [MethodImpl(Inline)]

@@ -18,7 +18,7 @@ namespace Z0
         public static uint collisions<S,T>(Index<S> src, IHashFunction<S,T> hash)
             where T : unmanaged
         {
-            var accumulator = root.hashset<T>();
+            var accumulator = hashset<T>();
             var count = src.Count;
             var view = src.View;
             for(var i=0; i<count; i++)
@@ -37,7 +37,7 @@ namespace Z0
             var count = src.Length;
             var buffer = alloc<HashCode<T>>(count);
             ref var dst = ref first(buffer);
-            var accumulator = root.hashset<uint>();
+            var accumulator = hashset<uint>();
             var algorithm = strings();
             for(var i=0; i<count; i++)
             {
@@ -48,7 +48,7 @@ namespace Z0
             }
             var collisions = count - (uint)accumulator.Count;
             if(collisions != 0)
-                root.@throw("Imperfect");
+                @throw("Imperfect");
             return new HashedIndex<T>(buffer, t => algorithm.Compute(t.Format()));
         }
 
@@ -61,7 +61,7 @@ namespace Z0
             var count = src.Length;
             var buffer = alloc<HashCode<T>>(count);
             ref var dst = ref first(buffer);
-            var accumulator = root.hashset<uint>();
+            var accumulator = hashset<uint>();
             var algorithm = strings();
             for(var i=0; i<count; i++)
             {
@@ -72,7 +72,7 @@ namespace Z0
             }
             var collisions = count - (uint)accumulator.Count;
             if(collisions != 0)
-                root.@throw("Imperfect");
+                @throw("Imperfect");
             return new HashedIndex<T>(buffer, t => algorithm.Compute(rep(t)));
         }
     }

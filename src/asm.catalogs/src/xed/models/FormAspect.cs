@@ -35,7 +35,7 @@ namespace Z0
                 => Format();
 
             public override int GetHashCode()
-                => alg.hash.marvin(Value);
+                => (int)alg.hash.marvin(Value);
 
             public override bool Equals(object src)
                 => src is FormAspect c && Equals(c);

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct Hash8 : IHashCode<byte,byte>
     {
@@ -44,7 +45,7 @@ namespace Z0
         public byte Primitive
         {
             [MethodImpl(Inline)]
-            get => memory.u8(Value);
+            get => u8(Value);
         }
 
         [MethodImpl(Inline)]
