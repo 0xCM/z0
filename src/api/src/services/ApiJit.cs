@@ -171,7 +171,6 @@ namespace Z0
             var count = methods.Length;
             var buffer = alloc<ApiMember>(count);
             ref var dst = ref first(buffer);
-
             for(var i=0; i<count; i++)
             {
                 var m = methods[i];

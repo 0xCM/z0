@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.Intrinsics;
 
-    [ApiHost(ApiNames.VexReflex, true)]
+    [ApiHost]
     public readonly struct VexReflex
     {
         /// <summary>

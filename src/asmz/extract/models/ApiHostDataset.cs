@@ -8,7 +8,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Part;
+    using static Root;
 
     public struct ApiHostDataset
     {

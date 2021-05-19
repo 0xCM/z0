@@ -48,8 +48,7 @@ namespace Z0.Asm
         Index<AsmFormHash> HashPerfect(Span<AsmFormExpr> src)
         {
             Wf.Status($"Attempting to find perfect hashes for {src.Length} form expressions");
-
-            var perfect = HashFunctions.perfect(src).Codes;
+            var perfect = HashFunctions.perfect(src, x => x.Format(), HashFunctions.strings()).Codes;
             var count = (uint)perfect.Length;
 
             Wf.Status($"Found {count} distinct hash codes for {src.Length} form expressions");

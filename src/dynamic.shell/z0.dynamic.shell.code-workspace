@@ -1,0 +1,23 @@
+{
+	"folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "..\\dynamic"
+        },
+        {
+            "path": "..\\api"
+        },
+        {
+            "path": "..\\cli"
+        },
+        {
+            "path": "..\\core"
+        },
+        {
+            "path": "..\\part"
+        }
+    ],
+	"settings": {}
+}

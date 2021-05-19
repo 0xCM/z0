@@ -32,28 +32,4 @@ namespace Z0
         public static implicit operator Hash<byte,byte>(Hash8 src)
             => new Hash<byte,byte>(src.Value);
     }
-
-    public readonly struct Hash8<T> : IHashCode<T,byte>
-        where T : unmanaged
-    {
-        public T Value {get;}
-
-        [MethodImpl(Inline)]
-        public Hash8(T value)
-            => Value = value;
-
-        public byte Primitive
-        {
-            [MethodImpl(Inline)]
-            get => u8(Value);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Hash8(Hash8<T> src)
-            => new Hash8(src.Primitive);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Hash<T,byte>(Hash8<T> src)
-            => new Hash<T,byte>(src.Value);
-    }
 }

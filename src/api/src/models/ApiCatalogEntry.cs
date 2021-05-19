@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    [Record(TableId)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ApiCatalogEntry : IRecord<ApiCatalogEntry>
     {
         public const string TableId = "api.catalog";

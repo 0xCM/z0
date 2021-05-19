@@ -18,15 +18,13 @@ namespace Z0
 
         public Address16 Selector;
 
-        public ushort SelectorIndex;
-
         public Address32 Base;
 
         public ByteSize Size;
 
         public uint PageCount;
 
-        public MemoryAddress Target;
+        public MemoryRange Range;
 
         public MemType Type;
 
@@ -35,6 +33,6 @@ namespace Z0
         public utf8 Label;
 
         public int CompareTo(ProcessSegment src)
-            => Target.CompareTo(src.Target);
+            => Range.Min.CompareTo(src.Range.Max);
     }
 }

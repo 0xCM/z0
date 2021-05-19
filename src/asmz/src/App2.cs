@@ -157,7 +157,6 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, segments.Count);
         }
 
-
         void CaptureSelf()
         {
             Wf.CaptureRunner().Capture(Assembly.GetExecutingAssembly().Id());
@@ -170,7 +169,7 @@ namespace Z0.Asm
             Wf.CaptureRunner().Capture(parts, dst);
         }
 
-        void RunExtractor()
+        void RunExtractWorkflow()
         {
             var wf = ApiExtractWorkflow.create(Wf);
             wf.Run();
@@ -213,7 +212,7 @@ namespace Z0.Asm
 
         }
 
-        FS.FilePath GenScripts()
+        FS.FilePath DefineDisassemblyJob()
         {
             var tool = Wf.NDisasm();
             var srcDir = Db.TableDir("image.bin");
@@ -239,22 +238,33 @@ namespace Z0.Asm
         }
 
 
-        public void Run()
+        void ResolveApi(params PartId[] parts)
         {
-            var parts = array(PartId.Cpu, PartId.Math, PartId.GMath);
             var resolver = Wf.ApiResolver();
             resolver.ResolveParts(parts);
+        }
 
-            // var builder = Wf.PdbIndexBuilder();
-            // builder.IndexParts(parts);
+        void RunExtractor(params PartId[] parts)
+        {
+            Wf.ApiExtractor().Run();
+        }
 
-            //var runner = GenScripts();
+        void IndexApiPdbFiles(params PartId[] parts)
+        {
+            var builder = Wf.PdbIndexBuilder();
+            builder.IndexParts(parts);
+        }
 
-            // var pipe = Wf.CliPipe();
-            // pipe.EmitMetaBlocks();
+        void EmitMetadataBlocks()
+        {
+            var pipe = Wf.CliPipe();
+            pipe.EmitMetaBlocks();
 
-            // var extractor = Wf.ApiExtractor();
-            // extractor.Run();
+        }
+
+        public void Run()
+        {
+            CaptureSelf();
         }
 
 

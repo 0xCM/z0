@@ -63,6 +63,9 @@ namespace Z0
             HostName = GetType().Name;
         }
 
+        protected string Worker([Caller] string name = null)
+            => string.Format("{0,-14}",string.Format("worker({0}) >>", name));
+
         protected AppService(IWfRuntime wf)
             : this()
         {

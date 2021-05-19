@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static memory;
+    using static core;
 
     [ApiHost]
     public readonly struct ApiResolutions
@@ -63,11 +63,22 @@ namespace Z0
             return count;
         }
 
-        public static Index<ResolvedMethod> methods(ReadOnlySpan<ResolvedPart> src)
+        public static ReadOnlySpan<ResolvedMethod> methods(ReadOnlySpan<ResolvedPart> src)
         {
-            var dst = alloc<ResolvedMethod>(MethodCount(src));
-            methods(src,dst);
-            return dst;
+            var dst = root.list<ResolvedMethod>();
+            for(var i=0; i<src.Length; i++)
+            {
+                var hosts = skip(src,i).Hosts.View;
+                for(var j=0; j<hosts.Length; j++)
+                {
+                    var methods = skip(hosts,j).Methods.View;
+                    root.iter(methods, m => dst.Add(m));
+                }
+            }
+            return dst.ViewDeposited();
+            // var dst = alloc<ResolvedMethod>(MethodCount(src));
+            // methods(src, dst);
+            // return dst;
         }
     }
 }

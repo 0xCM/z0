@@ -38,8 +38,11 @@ namespace Z0
 
         public int CompareTo(ProcessMemoryRegion src)
             => StartAddress.CompareTo(src.StartAddress);
+
         public string Describe()
             => string.Format("[{0},{1}]({2})", StartAddress, StartAddress + Size, (ByteSize)Size);
 
+        public override string ToString()
+            => Describe();
     }
 }

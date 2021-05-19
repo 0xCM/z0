@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
-
     partial class ApiExtractor
     {
         [Op]

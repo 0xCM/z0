@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
     using static SFx;
 
     public struct VPipe256<P,S,T> : ISpanPipe256<S,T>

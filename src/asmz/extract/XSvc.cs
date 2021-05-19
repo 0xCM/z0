@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+    using Svc = Z0;
     public static partial class XSvc
     {
         public static ApiExtractor ApiExtractor(this IWfRuntime wf)
@@ -21,5 +22,8 @@ namespace Z0
             SpanSorter.sort(src);
             return src;
         }
+
+        public static SegmentTraverser SegmentTraverser(this IWfRuntime wf)
+            => Svc.SegmentTraverser.create(wf);
     }
 }

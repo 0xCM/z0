@@ -12,6 +12,7 @@ namespace Z0
 
     public readonly struct HashFunctions
     {
+        [MethodImpl(Inline), Op]
         public static StringHash strings()
             => default(StringHash);
 
@@ -31,30 +32,27 @@ namespace Z0
             return count - (uint)accumulator.Count;
         }
 
-        public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src)
-            where T : ITextual
+        public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src, Func<T,string> f, StringHash hasher)
         {
             var count = src.Length;
             var buffer = alloc<HashCode<T>>(count);
             ref var dst = ref first(buffer);
             var accumulator = hashset<uint>();
-            var algorithm = strings();
             for(var i=0; i<count; i++)
             {
                 ref readonly var input = ref skip(src,i);
-                var computed = algorithm.Compute(input.Format());
+                var computed = hasher.Compute(f(input));
                 seek(dst,i) = (input,computed);
                 accumulator.Add(computed);
             }
             var collisions = count - (uint)accumulator.Count;
             if(collisions != 0)
                 @throw("Imperfect");
-            return new HashedIndex<T>(buffer, t => algorithm.Compute(t.Format()));
+            return new HashedIndex<T>(buffer, t => hasher.Compute(f(t)));
         }
 
-        public static HashedIndex<T> perfect<T>(Span<T> src)
-            where T : ITextual
-                => perfect(src.ReadOnly());
+        public static HashedIndex<T> perfect<T>(Span<T> src, Func<T,string> f,  StringHash hasher)
+            => perfect(src.ReadOnly(), f, hasher);
 
         public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src, Func<T,string> rep)
         {

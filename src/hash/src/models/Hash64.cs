@@ -28,24 +28,4 @@ namespace Z0
         public static implicit operator Hash64(ulong src)
             => new Hash64(src);
     }
-
-    public readonly struct Hash64<T> : IHashCode<T,ulong>
-        where T : unmanaged
-    {
-        public T Value {get;}
-
-        [MethodImpl(Inline)]
-        public Hash64(T value)
-            => Value = value;
-
-        public ulong Primitive
-        {
-            [MethodImpl(Inline)]
-            get => u64(Value);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Hash64(Hash64<T> src)
-            => new Hash64(src.Primitive);
-    }
 }

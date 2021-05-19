@@ -15,6 +15,8 @@ namespace Z0
     {
         public const string TableId = "methods.resolved";
 
+        public const byte FieldCount = 3;
+
         public MemoryAddress EntryPoint;
 
         public utf8 Uri;
@@ -24,5 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(ResolvedMethodInfo src)
             => EntryPoint.CompareTo(src.EntryPoint);
+
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{16,120,80};
     }
 }

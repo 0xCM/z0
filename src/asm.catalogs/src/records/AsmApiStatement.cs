@@ -8,14 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
     using Z0.Asm;
-
-    partial struct AsmRecords
-    {
-
-    }
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AsmApiStatement : IRecord<AsmApiStatement>, IComparable<AsmApiStatement>

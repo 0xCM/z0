@@ -8,7 +8,7 @@ namespace Z0
 
     using static Sequential;
 
-    [Record(TableId)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ApiCorrelationEntry : IRecord<ApiCorrelationEntry>
     {
         public const string TableId = "api.correlations";

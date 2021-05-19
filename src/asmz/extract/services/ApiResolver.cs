@@ -25,7 +25,6 @@ namespace Z0
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
         }
 
-
         public ReadOnlySpan<ApiMemberInfo> Describe(in ResolvedPart src)
         {
             var buffer = alloc<ApiMemberInfo>(src.MethodCount);
@@ -110,7 +109,7 @@ namespace Z0
         public ResolvedHost ResolveHost(IApiHost src)
         {
             var dst = root.list<ResolvedMethod>();
-            ResolveHost(src,dst);
+            ResolveHost(src, dst);
             if(dst.Count != 0)
             {
                 dst.Sort();
@@ -127,9 +126,9 @@ namespace Z0
         public ResolvedPart ResolvePart(IPart src, out uint counter)
         {
             counter = 0u;
+
             var catalog = ApiQuery.partcat(src);
             var flow = Wf.Running(string.Format("Resolving part {0}", src.Id));
-
             var hosts = root.list<ResolvedHost>();
 
             foreach(var host in catalog.ApiTypes)
@@ -141,7 +140,7 @@ namespace Z0
                     var resolved = methods.ToArray().Sort();
                     var @base = first(resolved).EntryPoint;
                     hosts.Add(new ResolvedHost(host, @base, resolved));
-                    counter += count;
+                    counter += (uint)resolved.Length;
                 }
             }
 
@@ -154,7 +153,7 @@ namespace Z0
                     var resolved = methods.ToArray().Sort();
                     var @base = first(resolved).EntryPoint;
                     hosts.Add(new ResolvedHost(host.HostUri, @base, resolved));
-                    counter += count;
+                    counter += (uint)resolved.Length;
                 }
             }
 
@@ -171,7 +170,7 @@ namespace Z0
 
             foreach(var method in ApiQuery.nongeneric(src))
             {
-                dst.Add(resolve(method, MemberUri(src.HostUri, method), ApiJit.jit(method)));
+                dst.Add(new ResolvedMethod(method, MemberUri(src.HostUri, method), ApiJit.jit(method)));
                 counter++;
             }
 
@@ -182,7 +181,7 @@ namespace Z0
                     try
                     {
                         var constructed = method.MakeGenericMethod(arg);
-                        dst.Add(resolve(constructed, MemberUri(src.HostUri, constructed), ApiJit.jit(constructed)));
+                        dst.Add(new ResolvedMethod(constructed, MemberUri(src.HostUri, constructed), ApiJit.jit(constructed)));
                         counter++;
                     }
                     catch(Exception e)
@@ -199,11 +198,10 @@ namespace Z0
         public uint ResolveType(ApiRuntimeType src, List<ResolvedMethod> dst)
         {
             var flow = Wf.Running(string.Format("Resolving type {0}", src.HostUri));
-
             var counter = 0u;
             foreach(var method in ApiQuery.methods(src, Exclusions))
             {
-                dst.Add(resolve(method, MemberUri(src.HostUri, method), ApiJit.jit(method)));
+                dst.Add(new ResolvedMethod(method, MemberUri(src.HostUri, method), ApiJit.jit(method)));
                 counter++;
             }
 
@@ -211,13 +209,8 @@ namespace Z0
             return counter;
         }
 
-        [MethodImpl(Inline)]
-        static ResolvedMethod resolve(MethodInfo method, OpUri uri, MemoryAddress address)
-            => new ResolvedMethod(method, uri, address);
-
         OpUri MemberUri(ApiHostUri host, MethodInfo method)
             => ApiUri.define(ApiUriScheme.Located, host, method.Name, Identity.Identify(method));
-
 
         [Op]
         static ref ApiMemberInfo describe(in ResolvedMethod src, ref ApiMemberInfo dst)

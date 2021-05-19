@@ -8,8 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial class ApiExtractor
     {

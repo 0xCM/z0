@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
-    using static memory;
+    using static core;
 
     partial class ApiExtractor
     {
@@ -16,9 +15,7 @@ namespace Z0
             var count = src.Length;
             var counter = 0u;
             for(var i=0; i<count; i++)
-            {
                 counter += ExtractPart(skip(src,i));
-            }
             return counter;
         }
     }

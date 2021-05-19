@@ -12,17 +12,13 @@ namespace Z0
     partial class ApiExtractor
     {
         uint ExtractCatalog(IApiCatalog src)
-        {
-            var resolved = ResolveCatalog(src);
-            return ExtractParts(resolved);
-        }
+            => ExtractParts(ResolveCatalog(src));
 
         public uint ExtractCatalog(IApiCatalog catalog, List<ApiMemberExtract> dst)
         {
             var counter = 0u;
             var parts = @readonly(catalog.Parts);
             var count = parts.Length;
-
             var flow = Wf.Running(string.Format("Extracting {0} parts", count));
             for(var i=0; i<count; i++)
                 counter += ExtractPart(skip(parts,i),dst);
@@ -32,8 +28,7 @@ namespace Z0
         }
 
         uint ExtractCatalog(IApiPartCatalog src)
-        {
-            return ExtractHosts(src.ApiHosts);
-        }
+            => ExtractHosts(src.ApiHosts);
+
     }
 }

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
+    using static Root;
     using static SFx;
-    using static Part;
 
     public struct VPipeline128<B,M,R,S,T>
         where R : IBlockSink128<R,T>

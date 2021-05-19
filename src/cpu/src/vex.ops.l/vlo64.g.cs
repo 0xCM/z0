@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
 
     partial struct gcpu
     {
@@ -32,5 +32,4 @@ namespace Z0
             where T : unmanaged
                 => src.Lo;
     }
-
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Z0.Asm;
 
-    using static Part;
+    using static Root;
 
     public sealed class MemberDecodedEvent : ApiExtractEvent<MemberDecodedEvent,DataFlow<ApiMemberCode,AsmRoutine>>
     {

@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-    using static memory;
-
     partial class ApiExtractor
     {
         ApiHostDataset ExtractHostDatast(in ResolvedHost src)
