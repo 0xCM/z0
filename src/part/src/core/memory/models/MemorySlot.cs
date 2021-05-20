@@ -8,9 +8,46 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public struct MemorySlot
     {
+        [MethodImpl(Inline), Op]
+        public static ref MemorySlot advance(ref MemorySlot slot)
+        {
+            if(slot.Index == MemorySlot.LastKey)
+                slot.Index = MemorySlot.FirstKey;
+            else
+                slot.Index += 1;
+            return ref slot;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref MemorySlot<I> advance<I>(ref MemorySlot<I> slot)
+            where I : unmanaged
+        {
+            add(slot.Index, 1);
+            return ref slot;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref MemorySlot retreat(ref MemorySlot slot)
+        {
+            if(slot.Index == MemorySlot.FirstKey)
+                slot.Index = MemorySlot.LastKey;
+            else
+                slot.Index -= 1;
+            return ref slot;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref MemorySlot<I> retreat<I>(ref MemorySlot<I> slot)
+            where I : unmanaged
+        {
+            sub(slot.Index, 1);
+            return ref slot;
+        }
+
         internal Hex8Seq Index;
 
         [MethodImpl(Inline)]
@@ -23,11 +60,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public MemorySlot Advance()
-            => memory.advance(ref this);
+            => advance(ref this);
 
         [MethodImpl(Inline)]
         public MemorySlot Retreat()
-            => memory.retreat(ref this);
+            => retreat(ref this);
 
         [MethodImpl(Inline)]
         public static MemorySlot operator++(MemorySlot src)

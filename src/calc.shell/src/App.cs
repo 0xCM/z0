@@ -122,11 +122,6 @@ namespace Z0
             }
         }
 
-        void CheckMd5()
-        {
-            //var input = Source.
-        }
-
         protected override void Run()
         {
             var flow = Wf.Running("Running checks");

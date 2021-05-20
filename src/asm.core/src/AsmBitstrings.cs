@@ -7,8 +7,9 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     [ApiHost]
     public readonly struct AsmBitstrings
@@ -16,7 +17,7 @@ namespace Z0.Asm
         public static AsmBitstrings service()
             => new AsmBitstrings();
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint render(AsmHexCode src, Span<char> dst)
         {
             var input = src.Bytes;
@@ -27,17 +28,17 @@ namespace Z0.Asm
             return j - 1;
         }
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint Render(ReadOnlySpan<byte> src, Span<char> dst)
         {
             var size = src.Length;
             var j = 0u;
             for(var i=0; i<size; i++)
-                j+= render(skip(src, i), j, dst);
+                j += render(skip(src, i), j, dst);
             return j - 1;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static uint render(byte cell, uint j, Span<char> dst)
         {
             seek(dst,j++) = bit.bitchar(cell,7);
@@ -53,12 +54,15 @@ namespace Z0.Asm
             return 10;
         }
 
-        public string Format(AsmHexCode src)
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> chars(AsmHexCode src)
         {
             CharBlocks.alloc(n128, out var block);
             var count = render(src, block.Data);
-            var chars = slice(block.Data,0,count);
-            return text.format(chars);
+            return slice(block.Data,0,count);
         }
+
+        public string Format(AsmHexCode src)
+            => text.format(chars(src));
     }
 }

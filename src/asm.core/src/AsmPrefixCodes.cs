@@ -20,8 +20,6 @@ namespace Z0.Asm
     using static RepeatPrefixCode;
     using static VexPrefiKind;
 
-    using L = LegacyPrefixCode;
-
     public readonly struct AsmPrefixCodes
     {
         [MethodImpl(Inline), Op]

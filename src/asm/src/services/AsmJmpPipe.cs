@@ -7,29 +7,36 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
-    using static AsmRecords;
+    using static core;
 
     using K = JmpKind;
 
     public sealed class AsmJmpPipe : AppService<AsmJmpPipe>
     {
-        public Index<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> routines)
+        public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src)
         {
-            var dst = root.list<AsmJmpRow>();
-            var count = routines.Length;
-            for(var i=0; i<count; i++)
-                dst.AddRange(EmitJmpRows(routines[i]));
-            var rows = dst.ToArray();
-            return rows;
+            var dst = Db.TableDir<AsmCallRow>();
+            return EmitRows(src,dst);
         }
 
-        public Index<AsmJmpRow> EmitJmpRows(ApiPartRoutines src)
+        public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
         {
-            var collector = Wf.AsmJmpPipe();
-            var rows = collector.Collect(src);
-            Store(rows, Db.Table(AsmJmpRow.TableId, src.Part));
+            var rows = root.list<AsmJmpRow>();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var routines = ref skip(src,i);
+                var path = Db.Table(dst, AsmJmpRow.TableId, routines.Part);
+                rows.AddRange(EmitJmpRows(routines, path));
+            }
+
+            return rows.ViewDeposited();
+        }
+
+        Index<AsmJmpRow> EmitJmpRows(ApiPartRoutines src, FS.FilePath dst)
+        {
+            var rows = Collect(src);
+            Store(rows, dst);
             return rows;
         }
 
@@ -38,7 +45,7 @@ namespace Z0.Asm
             if(src.Length != 0)
             {
                 var flow = Wf.EmittingTable<AsmJmpRow>(dst);
-                var formatter = Tables.formatter<AsmJmpRow>();
+                var formatter = Tables.formatter<AsmJmpRow>(AsmJmpRow.RenderWidths);
                 using var writer = dst.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 var count = src.Length;
@@ -48,7 +55,7 @@ namespace Z0.Asm
             }
         }
 
-        public Index<AsmJmpRow> Collect(ApiPartRoutines src)
+        Index<AsmJmpRow> Collect(ApiPartRoutines src)
         {
             var collection = root.list<AsmJmpRow>();
             var hosts = src.View;
@@ -85,15 +92,16 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static ref AsmJmpRow jmprow(in ApiInstruction src, JmpKind jk, out AsmJmpRow dst)
+        static ref AsmJmpRow jmprow(in ApiInstruction src, JmpKind jk, out AsmJmpRow dst)
         {
+            dst.Block = src.BaseAddress;
             dst.Kind = jk;
-            dst.Base = src.BaseAddress;
             dst.Source = src.IP;
             dst.InstructionSize = src.Encoded.Size;
             dst.CallSite = dst.Source + dst.InstructionSize;
             dst.Target = IceExtractors.branch(dst.Source, src.Instruction, 0).Target.Address;
-            dst.Asm = src.Statment;
+            dst.Instruction = src.Statment;
+            dst.Encoded = src.Encoded;
             return ref dst;
         }
 

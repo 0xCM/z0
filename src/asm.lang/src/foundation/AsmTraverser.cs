@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static AsmRecords;
 
     public sealed class AsmTraverser : AppService<AsmTraverser>
     {

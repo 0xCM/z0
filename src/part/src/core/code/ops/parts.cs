@@ -15,5 +15,10 @@ namespace Z0
         [Op]
         public static Index<ApiPartBlocks> parts(Index<ApiHostBlocks> src)
             => src.GroupBy(x => x.Part).Select(x => new ApiPartBlocks(x.Key, x.ToArray())).Array();
+
+        [Op]
+        public static ReadOnlySpan<ApiPartBlocks> parts(ReadOnlySpan<ApiHostBlocks> src)
+            => src.ToArray().GroupBy(x => x.Part).Select(x => new ApiPartBlocks(x.Key, x.ToArray())).Array();
+
     }
 }

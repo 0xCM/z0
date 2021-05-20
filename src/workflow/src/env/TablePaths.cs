@@ -47,6 +47,9 @@ namespace Z0
         FS.FilePath Table(string subject, PartId part)
             => TableDir(subject) + FS.file(string.Format(RP.SlotDot2, subject, part.Format()), DefaultTableExt);
 
+        FS.FilePath Table(FS.FolderPath dir, string subject, PartId part)
+            => dir + FS.file(string.Format(RP.SlotDot2, subject, part.Format()), DefaultTableExt);
+
         FS.FilePath Table<T>(PartId part)
             where T : struct, IRecord<T>
                 => TableDir<T>() + FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format()), DefaultTableExt);
@@ -145,8 +148,11 @@ namespace Z0
             where T : struct, IRecord<T>
                 => TableDir<T>(subject) + TableFile<T>(host, ext);
 
-        FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
-            => TableRoot()+ FS.folder(id) + FS.file(text.format(EnvFolders.qualified, id, subject), ext ?? DefaultTableExt);
+        FS.FilePath Table<S>(string id, S subject)
+            => TableRoot()+ FS.folder(id) + FS.file(text.format(EnvFolders.qualified, id, subject), DefaultTableExt);
+
+        FS.FilePath Table<S>(FS.FolderPath dir, S subject)
+            => dir + FS.file(subject.ToString(), DefaultTableExt);
 
         FS.FolderPath IndexDir(Type t)
             => IndexRoot() + FS.folder(TableId(t));

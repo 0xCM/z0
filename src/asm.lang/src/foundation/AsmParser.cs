@@ -152,7 +152,6 @@ namespace Z0.Asm
             return true;
         }
 
-
         [Op]
         public static Outcome parse(AsmMnemonic src, out AsmMnemonicCode dst)
             => ClrEnums.parse(src.Format(), out dst);
@@ -169,13 +168,13 @@ namespace Z0.Asm
             var cells = src.Cells.View;
             if(count == AsmApiStatement.FieldCount)
             {
-                DataParser.parse(skip(cells, i++), out dst.BaseAddress);
+                DataParser.parse(skip(cells, i++), out dst.BlockAddress);
                 DataParser.parse(skip(cells, i++), out dst.IP);
                 DataParser.parse(skip(cells, i++), out dst.BlockOffset);
                 dst.Expression = AsmCore.statement(skip(cells,i++));
+                dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
                 sig(skip(cells, i++), out dst.Sig);
                 dst.OpCode = AsmCore.opcode(skip(cells, i++));
-                dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
                 if(!DataParser.parse(skip(cells, i++), out dst.OpUri))
                     return (false, $"Failed to parse uri text <{skip(cells,i)}>");
 

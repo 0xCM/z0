@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-
     using static EnvFolders;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -29,13 +26,11 @@ namespace Z0
         FS.FolderPath StepLogRoot()
             => LogRoot() + FS.folder(steps);
 
-
         FS.FolderPath AppLogRoot()
             => LogRoot() + FS.folder(apps);
 
         FS.FolderPath AppLogDir()
             => AppLogRoot() + FS.folder(AppName);
-
 
         FS.FilePath AppLog(string id)
             => AppLogDir() + FS.file(id, FS.Log);

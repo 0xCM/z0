@@ -22,13 +22,14 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
         }
 
-        public Index<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
+        public ReadOnlySpan<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             var dst = root.list<AsmApiStatement>();
             for(var i=0; i<count; i++)
                 CreateStatements(Decode(skip(src,i)), dst);
-            return dst.ToArray();
+            dst.Sort();
+            return dst.ViewDeposited();
         }
 
         public Index<AsmApiStatement> BuildStatements(in ApiHostBlocks src)
@@ -75,7 +76,7 @@ namespace Z0.Asm
                     if(statement.BlockOffset == 0)
                     {
                         asmwriter.WriteLine(AsmBlockSeparator);
-                        asmwriter.WriteLine(string.Format("; {0}, uri={1}", statement.BaseAddress, statement.OpUri));
+                        asmwriter.WriteLine(string.Format("; {0}, uri={1}", statement.BlockAddress, statement.OpUri));
                         asmwriter.WriteLine(AsmBlockSeparator);
                     }
 
@@ -92,7 +93,7 @@ namespace Z0.Asm
             return buffer.ToArray();
         }
 
-        public Index<AsmApiStatement> EmitStatements(ReadOnlySpan<ApiCodeBlock> src)
+        public ReadOnlySpan<AsmApiStatement> EmitStatements(ReadOnlySpan<ApiCodeBlock> src)
         {
             var statements = BuildStatements(src);
             EmitStatements(statements);
@@ -169,7 +170,7 @@ namespace Z0.Asm
                 if(statement.BlockOffset == 0)
                 {
                     asmWriter.WriteLine(AsmBlockSeparator);
-                    asmWriter.WriteLine(string.Format("; {0}, uri={1}", statement.BaseAddress, statement.OpUri));
+                    asmWriter.WriteLine(string.Format("; {0}, uri={1}", statement.BlockAddress, statement.OpUri));
                     asmWriter.WriteLine(AsmBlockSeparator);
                 }
 
@@ -206,8 +207,8 @@ namespace Z0.Asm
                 var statement = new AsmApiStatement();
                 var size = (ushort)instruction.ByteLength;
                 var specifier = instruction.Specifier;
+                statement.BlockAddress = src.BaseAddress;
                 statement.BlockOffset = offset;
-                statement.BaseAddress = src.BaseAddress;
                 statement.IP = instruction.IP;
                 statement.OpUri = src.Uri;
                 statement.Expression = instruction.FormattedInstruction;

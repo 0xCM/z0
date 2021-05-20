@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Root;
-
     using Z0.Asm;
+
+    using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AsmApiStatement : IRecord<AsmApiStatement>, IComparable<AsmApiStatement>
@@ -19,7 +19,7 @@ namespace Z0
 
         public const byte FieldCount = 8;
 
-        public MemoryAddress BaseAddress;
+        public MemoryAddress BlockAddress;
 
         public MemoryAddress IP;
 
@@ -27,16 +27,19 @@ namespace Z0
 
         public AsmStatementExpr Expression;
 
+        public AsmHexCode Encoded;
+
 		public AsmSigExpr Sig;
 
         public AsmOpCodeExpr OpCode;
-
-        public AsmHexCode Encoded;
 
         public OpUri OpUri;
 
         [MethodImpl(Inline)]
         public int CompareTo(AsmApiStatement src)
             => IP.CompareTo(src.IP);
+
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{16,16,16,40,32,32,32,80};
     }
 }

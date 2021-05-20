@@ -9,8 +9,8 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public sealed class AsmRowBuilder : AppService<AsmRowBuilder>
     {
@@ -44,26 +44,28 @@ namespace Z0.Asm
             return src;
         }
 
-        public Index<AsmDetailRow> EmitAsmRows(Index<ApiCodeBlock> src)
+        public ReadOnlySpan<AsmDetailRow> EmitAsmDetailRows(ReadOnlySpan<ApiCodeBlock> src)
+            => EmitAsmDetailRows(src, Db.TableDir<AsmDetailRow>());
+
+        public ReadOnlySpan<AsmDetailRow> EmitAsmDetailRows(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
         {
             var rows = BuildAsmRows(src);
             var rowsets = @readonly(rows.GroupBy(x => x.Mnemonic).Select(x => AsmEtl.rowset(x.Key, x.Array())).Array());
             var count = rowsets.Length;
             var etl = Wf.AsmEtl();
             for(var i=0; i<count; i++)
-                etl.Emit(skip(rowsets,i));
+                etl.Emit(skip(rowsets,i), dst);
             return rows;
         }
 
-        public Index<AsmDetailRow> BuildAsmRows(Index<ApiCodeBlock> src)
+        public Index<AsmDetailRow> BuildAsmRows(ReadOnlySpan<ApiCodeBlock> src)
         {
-            var view = src.View;
-            var count = view.Length;
+            var count = src.Length;
             var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(count));
             var rows = root.list<AsmDetailRow>();
             for(var i=0u; i<count; i++)
             {
-                ref readonly var block = ref skip(view,i);
+                ref readonly var block = ref skip(src,i);
                 rows.AddRange(BuildAsmRows(block));
             }
 

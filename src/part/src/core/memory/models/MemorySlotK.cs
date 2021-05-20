@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
 
+    using api = MemorySlot;
     public struct MemorySlot<K>
         where K : unmanaged
     {
@@ -20,11 +21,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public MemorySlot<K> Advance()
-            => memory.advance(ref this);
+            => api.advance(ref this);
 
         [MethodImpl(Inline)]
         public MemorySlot<K> Retreat()
-            => memory.retreat(ref this);
+            => api.retreat(ref this);
 
         [MethodImpl(Inline)]
         public static MemorySlot<K> operator++(MemorySlot<K> src)

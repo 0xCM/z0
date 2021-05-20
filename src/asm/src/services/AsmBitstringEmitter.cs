@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class AsmBitstringEmitter : AppService<AsmBitstringEmitter>
     {
@@ -30,7 +30,13 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, count);
         }
 
-        public Index<AsmEncodingInfo> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src)
+        public ReadOnlySpan<AsmEncodingInfo> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src)
+        {
+            var dst = Db.IndexRoot() + IndexFileName;
+            return EmitBitstrings(src,dst);
+        }
+
+        public ReadOnlySpan<AsmEncodingInfo> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src, FS.FilePath dst)
         {
             var collecting = Wf.Running(Msg.CollectingBitstrings.Format(src.Length));
             var bitstrings = AsmBitstrings.service();
@@ -49,7 +55,6 @@ namespace Z0.Asm
 
             var sorted = collected.Array();
             Array.Sort(sorted);
-            var dst = Db.IndexRoot() + IndexFileName;
             var emitting = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             var input = @readonly(sorted);

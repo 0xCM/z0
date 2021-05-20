@@ -17,8 +17,8 @@ namespace Z0
         {
             var memspan = src.ToSpan();
             var count = charpack(memspan.View, buffer);
-            var content = text.format(slice(buffer, 0, count));
-            return string.Format(HexPackLine, memspan.BaseAddress, index, memspan.Size, content);
+            var chars = slice(buffer, 0, count);
+            return string.Format(HexPackLine, memspan.BaseAddress, index, memspan.Size, text.format(chars));
         }
     }
 }

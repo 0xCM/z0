@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static XedModels;
-    using static AsmRecords;
 
     public sealed class XedCatalog : AppService<XedCatalog>
     {
@@ -24,16 +23,16 @@ namespace Z0.Asm
         AsmCatPaths CatPaths
             => new AsmCatPaths(Db);
 
-        public Index<FormDetail> EmitFormDetails()
+        public Index<XedFormDetail> EmitFormDetails()
             => EmitFormDetails(CatPaths.XedFormDetailPath());
 
-        public Index<FormDetail> EmitFormDetails(FS.FilePath dst)
+        public Index<XedFormDetail> EmitFormDetails(FS.FilePath dst)
         {
             var records = LoadFormDetails();
             var src = records.View;
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
-            Tables.emit(records.View, dst, FormDetail.FieldWidths);
+            Tables.emit(records.View, dst, XedFormDetail.FieldWidths);
             Wf.EmittedFile(flow, count);
             return records;
         }
@@ -44,11 +43,11 @@ namespace Z0.Asm
             return Symbols.literals(src);
         }
 
-        public Index<FormDetail> LoadFormDetails()
+        public Index<XedFormDetail> LoadFormDetails()
         {
             var summaries = LoadFormSummaries().View;
             var count = summaries.Length;
-            var buffer = alloc<FormDetail>(count);
+            var buffer = alloc<XedFormDetail>(count);
             var dst = span(buffer);
             for(var i=0; i<count; i++)
                 seek(dst,i) = LoadDetail((ushort)i, skip(summaries,i));
@@ -263,7 +262,7 @@ namespace Z0.Asm
             return count != 0 ? parts.Select(ParseAttribute) : sys.empty<AttributeKind>();
         }
 
-        FormDetail LoadDetail(ushort index, XedFormInfo src)
+        XedFormDetail LoadDetail(ushort index, XedFormInfo src)
         {
             var id = ParseIForm(src.Form);
             var iclass = ParseIClass(src.Class);
@@ -271,7 +270,7 @@ namespace Z0.Asm
             var attributes = ParseAttributes(src.Attributes);
             var isa = ParseIsaKind(src.IsaSet);
             var ext = ParseExtension(src.Extension);
-            return new FormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
+            return new XedFormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
         }
 
         static Outcome ParseSummary(TextLine src, out XedFormInfo dst)

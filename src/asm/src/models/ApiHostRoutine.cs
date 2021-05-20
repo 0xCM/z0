@@ -7,7 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Specifies the asm routine determined by an api member
@@ -27,7 +28,7 @@ namespace Z0.Asm
         {
             if(src.Length != 0)
             {
-                var i = memory.first(src);
+                var i = first(src);
                 OpId = i.OpId;
                 Instructions = src;
                 HostAddress = @base;

@@ -10,8 +10,8 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1;
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct Bytes
@@ -312,12 +312,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe byte read8(in byte src)
-            => *(byte*)memory.gptr(in src);
+            => *(byte*)gptr(in src);
 
         [MethodImpl(Inline)]
         static unsafe ref byte store8(byte src, ref byte dst)
         {
-            *(memory.gptr(dst)) = src;
+            *(gptr(dst)) = src;
             return ref dst;
         }
 

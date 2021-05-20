@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+
     using static Msg;
 
     public class MachineRunner : AppService<MachineRunner>
@@ -29,7 +30,7 @@ namespace Z0
                     Emitted(Wf.HexPacks().Emit(blocks));
 
                 if(options.EmitAsmRows)
-                    Emitted(Wf.AsmRowBuilder().EmitAsmRows(blocks));
+                    Emitted(Wf.AsmRowBuilder().EmitAsmDetailRows(blocks));
 
                 if(options.EmitCallData || options.EmitJmpData)
                 {

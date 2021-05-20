@@ -8,20 +8,18 @@ namespace Z0
 
     using Z0.Asm;
 
-    partial struct AsmRecords
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct AsmFormRecord : IRecord<AsmFormRecord>
     {
-        [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct AsmFormRecord : IRecord<AsmFormRecord>
-        {
-            public const string TableId = "asm.forms";
+        public const string TableId = "asm.forms";
 
-            public uint Seq;
+        public uint Seq;
 
-            public AsmOpCodeExpr OpCode;
+        public AsmOpCodeExpr OpCode;
 
-            public AsmSigExpr Sig;
+        public AsmSigExpr Sig;
 
-            public AsmFormExpr FormExpr;
-        }
+        public AsmFormExpr FormExpr;
     }
+
 }

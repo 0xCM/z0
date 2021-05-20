@@ -2,33 +2,30 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System.Runtime.InteropServices;
 
-    partial struct AsmRecords
+    /// <summary>
+    /// Defines a structure that reflects the content of the xed "idata.txt" file
+    /// </summary>
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct XedFormInfo : IRecord<XedFormInfo>
     {
-        /// <summary>
-        /// Defines a structure that reflects the content of the xed "idata.txt" file
-        /// </summary>
-        [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct XedFormInfo : IRecord<XedFormInfo>
-        {
-            public const string TableId = "xed-form-summary";
+        public const string TableId = "xed-form-summary";
 
-            public const byte FieldCount = 6;
+        public const byte FieldCount = 6;
 
-            public string Class;
+        public string Class;
 
-            public string Extension;
+        public string Extension;
 
-            public string Category;
+        public string Category;
 
-            public string Form;
+        public string Form;
 
-            public string IsaSet;
+        public string IsaSet;
 
-            public string Attributes;
-        }
+        public string Attributes;
     }
 }

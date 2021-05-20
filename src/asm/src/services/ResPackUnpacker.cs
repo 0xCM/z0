@@ -8,8 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class ResPackUnpacker : AppService<ResPackUnpacker>
     {

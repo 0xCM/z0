@@ -281,11 +281,41 @@ namespace Z0.Asm
             return src;
         }
 
-        public void Run()
+        void EmitAsmRows(FS.FolderPath dst)
+        {
+            var calldir = dst + FS.folder(AsmCallRow.TableId);
+            calldir.Clear();
+
+            var jmpdir = dst + FS.folder(AsmJmpRow.TableId);
+            jmpdir.Clear();
+
+            var ddir = dst + FS.folder(AsmDetailRow.TableId);
+            ddir.Clear();
+
+            var hex = Wf.ApiHex();
+            var blocks = hex.ReadBlocks().View;
+            var routines = Wf.AsmDecoder().Decode(blocks);
+            var details = Wf.AsmRowBuilder().EmitAsmDetailRows(blocks, ddir);
+            var statements = Wf.AsmStatementPipe().BuildStatements(blocks);
+            var spath = dst + FS.file(AsmApiStatement.TableId, FS.Csv);
+            TableEmit(statements, AsmApiStatement.RenderWidths, spath);
+            var calls = Wf.AsmCallPipe().EmitRows(routines, calldir);
+            var jumps = Wf.AsmJmpPipe().EmitRows(routines, jmpdir);
+            var bitpath = dst + FS.file("asm.bitstrings", FS.Asm);
+            var bitstrings = Wf.AsmBitstringEmitter().EmitBitstrings(statements,bitpath);
+        }
+
+        void ListFiles()
         {
             var catalog = Wf.FileCatalog(Db.AsmCaptureRoot());
             catalog.Enumerate(path => Wf.Row(path.ToUri()));
 
+        }
+
+        public void Run()
+        {
+            var dir = Db.AppLogDir();
+            EmitAsmRows(dir);
         }
 
 

@@ -18,7 +18,7 @@ namespace Z0.Asm
 
         readonly Span<TextLine> LineBuffer;
 
-        readonly Index<FormDetail> DetailTarget;
+        readonly Index<XedFormDetail> DetailTarget;
 
         readonly Index<XedFormInfo> SummaryTarget;
 
@@ -31,7 +31,7 @@ namespace Z0.Asm
         XedSummaryParser(IEventSink sink, Span<TextLine> buffer, ushort count)
         {
             LineBuffer = buffer;
-            DetailTarget = alloc<FormDetail>(count);
+            DetailTarget = alloc<XedFormDetail>(count);
             SummaryTarget = alloc<XedFormInfo>(count);
             TableSource = Parts.AsmCatalogs.Assets.XedTables();
             SummarySource = Parts.AsmCatalogs.Assets.XedInstructionSummary();

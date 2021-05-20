@@ -6,36 +6,46 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-    using static memory;
-    using static AsmRecords;
+    using static core;
 
     public sealed class AsmCallPipe : AppService<AsmCallPipe>
     {
-        public Index<AsmCallRow> EmitRows(ReadOnlySpan<ApiPartRoutines> routines)
+        public ReadOnlySpan<AsmCallRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src)
         {
-            var dst = root.list<AsmCallRow>();
-            var count = routines.Length;
-            for(var i=0; i<count; i++)
-                dst.AddRange(EmitRows(routines[i]));
-            var rows = dst.ToArray();
-            return rows;
+            var dst = Db.TableDir<AsmCallRow>();
+            return EmitRows(src, dst);
         }
 
-        public Index<AsmCallRow> EmitRows(ApiPartRoutines src)
+        public ReadOnlySpan<AsmCallRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
         {
-            var dst = Db.Table(AsmCallRow.TableId, src.Part);
+            var rows = root.datalist<AsmCallRow>();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var routines = ref skip(src,i);
+                var path = Db.Table(dst, AsmCallRow.TableId, routines.Part);
+                EmitRows(routines, rows, path);
+            }
+            return rows.View();
+        }
+
+        void EmitRows(in ApiPartRoutines src, DataList<AsmCallRow> rows, FS.FilePath dst)
+        {
             var flow = Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();
             var calls = Calls(src.Instructions());
             var view = calls.View;
             var count = view.Length;
-            var formatter = Tables.formatter<AsmCallRow>();
+            var formatter = Tables.formatter<AsmCallRow>(AsmCallRow.RenderWidths);
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(view,i)));
+            {
+                ref readonly var row = ref skip(view,i);
+                writer.WriteLine(formatter.Format(row));
+                rows.Add(row);
+            }
+
             Wf.EmittedTable(flow, count);
-            return calls;
         }
 
         /// <summary>
@@ -61,15 +71,15 @@ namespace Z0.Asm
             {
                 ref readonly var call = ref skip(calls,i);
                 ref var dst = ref seek(row,i);
-                var bytes = span(call.EncodedData.Storage);
-                var offset = ByteReader.read(bytes.Slice(1));
-                var target = call.NextIp + offset;
+                var bytes = @readonly(call.EncodedData.Storage);
+                var offset = ByteReader.read(slice(bytes,1));
+                dst.Block = call.BaseAddress;
                 dst.Source = call.IP;
-                dst.Target = target;
+                dst.Target = call.NextIp + offset;
                 dst.InstructionSize = call.InstructionSize;
-                dst.TargetOffset = target - (call.IP + src.Length);
+                dst.TargetOffset = dst.Target - (dst.Source + dst.InstructionSize);
                 dst.Instruction = call.Statment;
-                dst.Encoded = call.Encoded.Storage;
+                dst.Encoded = call.Encoded;
             }
             return buffer;
         }
@@ -96,6 +106,7 @@ namespace Z0.Asm
                             var cells = row.Cells.View;
                             var record = new AsmCallRow();
                             var k = 0;
+                            DataParser.parse(skip(cells, k++).Text, out record.Block);
                             DataParser.parse(skip(cells, k++).Text, out record.Source);
                             DataParser.parse(skip(cells, k++).Text, out record.Target);
                             DataParser.parse(skip(cells, k++).Text, out record.InstructionSize);

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static RegIndex;
-
     partial struct AsmTokens
     {
         public enum TestReg : byte

@@ -13,7 +13,7 @@ namespace Z0
     partial struct XedModels
     {
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct FormDetail : IRecord<FormDetail>
+        public struct XedFormDetail : IRecord<XedFormDetail>
         {
             public const string TableId = "xed.forms.details";
 
@@ -34,7 +34,7 @@ namespace Z0
             public DelimitedIndex<AttributeKind> Attributes;
 
             [MethodImpl(Inline)]
-            public FormDetail(ushort index, IFormType form, IClass iclass, Category category, Index<AttributeKind> attribs, IsaKind isa, Extension ext)
+            public XedFormDetail(ushort index, IFormType form, IClass iclass, Category category, Index<AttributeKind> attribs, IsaKind isa, Extension ext)
             {
                 Index = index;
                 Form = form;
