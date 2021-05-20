@@ -16,7 +16,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         /// <summary>
-        /// Returns the inded of the block, if any that contains a cell that is equal to a specified match value
+        /// Returns the index of the block, if any that contains a cell that is equal to a specified match value
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="match">The value to match</param>
