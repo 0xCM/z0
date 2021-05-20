@@ -12,21 +12,24 @@ namespace Z0
     [Free]
     public interface IFileType
     {
-        Type RuntimeType {get;}
+        Type Rep {get;}
 
         FileKind FileKind {get;}
 
-        Index<FS.FileExt> Extensions {get;}
+        FS.FileExt FileExt {get;}
+
+        Index<FS.FileExt> Extensions
+            => sys.array(FileExt);
 
         FileType Untyped
-            => api.type(RuntimeType,FileKind, Extensions);
+            => api.type(Rep,FileKind, Extensions);
     }
 
     [Free]
     public interface IFileType<T> : IFileType
         where T : struct, IFileType<T>
     {
-        Type IFileType.RuntimeType
+        Type IFileType.Rep
             => typeof(T);
     }
 }

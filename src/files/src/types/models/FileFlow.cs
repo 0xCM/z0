@@ -9,36 +9,29 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct FileFlow : IFileFlow, IDataFlow<FS.FilePath,FS.FilePath>
+    public readonly struct FileFlow : IDataFlow<TypedFile,TypedFile>
     {
-        public FS.FilePath SourcePath {get;}
+        public TypedFile Source {get;}
 
-        public FileType SourceType {get;}
-
-        public FS.FilePath TargetPath {get;}
-
-        public FileType TargetType {get;}
+        public TypedFile Target {get;}
 
         [MethodImpl(Inline)]
-        public FileFlow(FS.FilePath src, FileType srcType,  FS.FilePath dst, FileType dstType)
+        public FileFlow(FileType srcType, FS.FilePath src,  FileType dstType, FS.FilePath dst)
         {
-            SourcePath = src;
-            SourceType = srcType;
-            TargetPath = dst;
-            TargetType = dstType;
+            Source = (srcType,src);
+            Target = (dstType,dst);
         }
 
-        public FS.FilePath Source
+
+        [MethodImpl(Inline)]
+        public FileFlow(TypedFile src, TypedFile dst)
         {
-            [MethodImpl(Inline)]
-            get => SourcePath;
+            Source = src;
+            Target = dst;
         }
 
-        public FS.FilePath Target
-        {
-            [MethodImpl(Inline)]
-            get => TargetPath;
-        }
-
+        [MethodImpl(Inline)]
+        public static implicit operator FileFlow((TypedFile src, TypedFile dst) x)
+            => new FileFlow(x.src,x.dst);
     }
 }

@@ -207,5 +207,11 @@ namespace Z0
         /// Defines the <see cref='md'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Md => ext(md);
+
+        /// <summary>
+        /// Defines the <see cref='sql'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Sql => ext(sql);
+
     }
 }

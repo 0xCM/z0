@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct FileTypes
+    partial class FileTypes
     {
         [Op]
         public static string format(FileType src)
@@ -31,11 +31,12 @@ namespace Z0
         [Op]
         public static void render(FileType src, ITextBuffer dst)
         {
-            var extensions = text.bracket(src.Extensions.Delimit().Format());
-            var kind = src.FileKind.Format();
-            dst.Append(kind);
-            dst.Append(" | ");
-            dst.Append(text.bracket(src.Extensions.Delimit().Format()));
+            if(src.IsNonEmpty)
+            {
+                dst.Append(src.FileKind.Format());
+                dst.Append(Chars.Colon);
+                dst.Append(string.Join(Chars.Semicolon, src.Extensions));
+            }
         }
 
         [Op]
@@ -44,10 +45,7 @@ namespace Z0
             var count = src.Count;
             var view = src.View;
             for(var i=0; i<count; i++)
-            {
-                render(skip(view,i), dst);
-                dst.AppendLine();
-            }
+                dst.AppendLine(format(skip(src,i)));
         }
     }
 }

@@ -9,21 +9,17 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct File<T> : IFsEntry<File<T>>
-        where T : IFileType
+    partial class FileTypes
     {
-        public FS.FilePath Location {get;}
+        [MethodImpl(Inline), Op]
+        public static FileFlow flow(TypedFile src, TypedFile dst)
+            => (src,dst);
 
         [MethodImpl(Inline)]
-        public File(FS.FilePath location)
-        {
-            Location = location;
-        }
+        public static FileFlow<S,T> flow<S,T>(TypedFile<S> src, TypedFile<T> dst)
+            where S : struct, IFileType<S>
+            where T : struct, IFileType<T>
+                => (src,dst);
 
-        public FS.PathPart Name
-        {
-            [MethodImpl(Inline)]
-            get => Location.Name;
-        }
     }
 }

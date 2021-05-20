@@ -26,13 +26,13 @@ namespace Z0
         /// <summary>
         /// Text-formatted CIL instructions
         /// </summary>
-        [Symbol(cil)]
+        [Symbol(cil, "Msil source text")]
         Cil,
 
         /// <summary>
         ///  Delimited data rows
         /// </summary>
-        [Symbol(csv)]
+        [Symbol(csv,"Delimited data rows")]
         Csv,
 
         /// <summary>
@@ -112,5 +112,15 @@ namespace Z0
 
         [Symbol(cs, "A csharp source file")]
         Cs,
+
+        [Symbol(sql, "A sql script")]
+        Sql,
+
+        [Symbol(xpack, "Based Hex-formatted data")]
+        XPack,
+
+        [Symbol(ildata, "MSIL organized in tabular format")]
+        IlData,
+
     }
 }

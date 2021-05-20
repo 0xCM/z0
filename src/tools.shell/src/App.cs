@@ -10,12 +10,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-
-    using static Part;
-    using static CodeSolutions;
+    using static Root;
     using static CodeSymbolModels;
-
-    using static memory;
+    using static core;
 
     sealed class ToolShell : AppService<ToolShell>
     {
@@ -25,54 +22,6 @@ namespace Z0
             svc.EmitLiterals<PartId>();
 
         }
-
-        // void CheckSolutionParser()
-        // {
-        //     var src = FS.path(@"C:\Dev\z0\z0.machine.sln");
-        //     var flow = Wf.Running(string.Format("Processing {0}", src.ToUri()));
-        //     var tool = Wf.Roslyn();
-        //     var sln = tool.LoadSolution(src);
-        //     var projects = sln.Projects.AsSpan();
-        //     Process(projects);
-        //     var count = projects.Length;
-        //     Wf.Ran(flow, string.Format("Processed {0} with {1} projects", src.ToUri(), count));
-        // }
-
-        void Process(ReadOnlySpan<ProjectBlock> src)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var project = ref skip(src,i);
-                var path = FS.path(project.RelativePath);
-                var sections = project.Sections.AsSpan();
-                Wf.Status(string.Format("Processing {0} from {1} with {2} sections", project.ProjectName, path.Format(PathSeparator.FS), sections.Length));
-                Process(sections);
-            }
-        }
-
-        void Process(ReadOnlySpan<SectionBlock> src)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var section = ref skip(src,i);
-                Wf.Row(section.Name);
-                var props = section.Properties.AsSpan();
-                Process(props);
-            }
-        }
-
-        void Process(ReadOnlySpan<Property> src)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var prop = ref skip(src,i);
-                Wf.Row(string.Format("{0}:{1}", prop.Name, prop.Value));
-            }
-        }
-
 
         public class SymbolCollector
         {

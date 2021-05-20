@@ -233,6 +233,13 @@ namespace Z0
         /// </summary>
         public const string dot = nameof(dot);
 
-        public const string errlog = error + "." + log;
+        /// <summary>
+        /// Defines the 'sql' literal
+        /// </summary>
+        public const string sql = nameof(sql);
+
+        public const string errlog = error + sep + log;
+
+        public const string ildata = il + sep + csv;
     }
 }

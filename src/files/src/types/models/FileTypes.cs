@@ -7,41 +7,80 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct FileTypeModels
+    partial class FileTypes
     {
+        public static AsmFileType Asm => default(AsmFileType);
+
+        public static BinFileType Bin => default(BinFileType);
+
+        public static CsFileType Cs => default(CsFileType);
+
+        public static DllFileType Dll => default(DllFileType);
+
+        public static ExeFileType Exe => default(ExeFileType);
+
+        public static SqlFileType Sql => default(SqlFileType);
+
+        public static XPackType XPack => default(XPackType);
+
+        public static IlDataType IlData => default(IlDataType);
+
         public readonly struct ExeFileType : IFileType<ExeFileType>
         {
             public FileKind FileKind => FileKind.Exe;
 
-            public Index<FS.FileExt> Extensions => sys.array(FS.Exe);
+            public FS.FileExt FileExt => FS.Exe;
         }
 
         public readonly struct DllFileType : IFileType<DllFileType>
         {
             public FileKind FileKind => FileKind.Dll;
 
-            public Index<FS.FileExt> Extensions => sys.array(FS.Dll);
+            public FS.FileExt FileExt => FS.Dll;
         }
 
         public readonly struct AsmFileType : IFileType<AsmFileType>
         {
             public FileKind FileKind => FileKind.Asm;
 
-            public Index<FS.FileExt> Extensions => sys.array(FS.Asm);
+            public FS.FileExt FileExt => FS.Asm;
         }
 
         public readonly struct BinFileType : IFileType<BinFileType>
         {
             public FileKind FileKind => FileKind.Bin;
 
-            public Index<FS.FileExt> Extensions => sys.array(FS.Bin);
+            public FS.FileExt FileExt => FS.Bin;
+
         }
 
         public readonly struct CsFileType : IFileType<CsFileType>
         {
             public FileKind FileKind => FileKind.Cs;
 
-            public Index<FS.FileExt> Extensions => sys.array(FS.Cs);
+            public FS.FileExt FileExt => FS.Cs;
         }
+
+        public readonly struct SqlFileType : IFileType<SqlFileType>
+        {
+            public FileKind FileKind => FileKind.Sql;
+
+            public FS.FileExt FileExt => FS.Sql;
+        }
+
+        public readonly struct XPackType : IFileType<XPackType>
+        {
+            public FileKind FileKind => FileKind.XPack;
+
+            public FS.FileExt FileExt => FS.XPack;
+        }
+
+        public readonly struct IlDataType : IFileType<IlDataType>
+        {
+            public FileKind FileKind => FileKind.IlData;
+
+            public FS.FileExt FileExt => FS.IlData;
+        }
+
     }
 }

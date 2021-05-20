@@ -14,8 +14,8 @@ namespace Z0.Tools
     {
         partial struct Commands
         {
-            public static Command import(FS.FilePath src, Identifier? id = null)
-                => string.Format(".import {0} {1}", src.Format(PathSeparator.FS), identifier(id,src.FileName));
+            public static Command import(FS.FilePath src)
+                => string.Format(".import {0} {1}", src.Format(PathSeparator.FS), identifier(null, src.FileName));
 
             public static Index<Command> import(FS.Files src)
             {

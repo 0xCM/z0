@@ -7,16 +7,8 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
-
     public readonly partial struct Sqlite
     {
-        public readonly partial struct Commands
-        {
-
-        }
-
         public static void render(Command src, ITextBuffer dst)
             => dst.AppendLine(src.Content);
 

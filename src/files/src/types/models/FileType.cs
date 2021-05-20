@@ -13,18 +13,36 @@ namespace Z0
 
     public readonly struct FileType : IFileType
     {
-        public Type RuntimeType {get;}
+        public Type Rep {get;}
 
         public FileKind FileKind {get;}
 
         public Index<FS.FileExt> Extensions {get;}
 
         [MethodImpl(Inline)]
-        public FileType(Type rtt, FileKind kind, FS.FileExt[] extensions)
+        public FileType(Type rtt, FileKind kind, Index<FS.FileExt> extensions)
         {
-            RuntimeType = rtt;
+            Rep = rtt;
             FileKind = kind;
             Extensions = extensions;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Extensions.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Extensions.IsNonEmpty;
+        }
+
+        public FS.FileExt FileExt
+        {
+            [MethodImpl(Inline)]
+            get => IsNonEmpty ? Extensions.First : FS.FileExt.Empty;
         }
 
         public string Format()

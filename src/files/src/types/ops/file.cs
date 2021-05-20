@@ -9,11 +9,15 @@ namespace Z0
 
     using static Root;
 
-    partial struct FileTypes
+    partial class FileTypes
     {
         [MethodImpl(Inline)]
-        public static FilePath<K> path<K>(FS.FilePath src, K kind)
+        public static TypedFile<K> file<K>(FS.FilePath src)
             where K : struct, IFileType<K>
-                => new FilePath<K>(src,kind);
+                => new TypedFile<K>(src);
+
+        [MethodImpl(Inline), Op]
+        public static TypedFile file(FileType type, FS.FilePath path)
+            => new TypedFile(type,path);
     }
 }

@@ -38,6 +38,9 @@
 		},
 		{
 			"path": "..\\agents"
+		},
+		{
+			"path": "..\\files"
 		}
 	],
 	"settings": {}
