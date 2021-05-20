@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
 
     using static Root;
 
@@ -42,7 +43,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this IEnumerable<T> src)
-            => memory.span(src);
+            => src.ToArray();
 
         /// <summary>
         /// Constructs a span from an array

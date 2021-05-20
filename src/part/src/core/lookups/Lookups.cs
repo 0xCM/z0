@@ -8,11 +8,10 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.Lookups)]
+    [ApiHost]
     public partial struct Lookups
     {
         const NumericKind Closure = UnsignedInts;
-
     }
 
     partial class XTend

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
 
     public readonly struct CmdId : ITextual, IEquatable<CmdId>, INullity, IHashed
     {
@@ -66,13 +65,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Data);
+            get => sys.empty(Data);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Data);
+            get => sys.nonempty(Data);
         }
 
         public uint Hash
@@ -87,7 +86,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(CmdId src)
-            => text.equals(Data, src.Data);
+            => string.Equals(Data, src.Data);
 
         public override bool Equals(object obj)
             => obj is CmdId x ? Equals(x) : false;

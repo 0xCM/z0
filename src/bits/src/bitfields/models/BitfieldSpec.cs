@@ -33,11 +33,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly ushort SegOffset(ushort index)
+        public ref readonly byte SegOffset(byte index)
             => ref _Entries[index].Offset;
 
         [MethodImpl(Inline)]
-        public ref readonly byte SegWidth(ushort index)
+        public ref readonly byte SegWidth(byte index)
             => ref _Entries[index].Width;
 
         public uint SegCount

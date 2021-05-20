@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    [ApiHost(ApiNames.AsmSemanticArchive, true)]
+    [ApiHost]
     public readonly struct AsmSemanticArchive : ISemanticArchive<AsmSemanticArchive>
     {
         [MethodImpl(Inline), Op]

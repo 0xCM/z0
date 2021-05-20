@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct Structs
@@ -25,8 +25,8 @@ namespace Z0
         public static bool empty2<T>(in T src)
             where T : struct
         {
-            var x = memory.bytes(src);
-            var y = memory.bytes(default(T));
+            var x = bytes(src);
+            var y = bytes(default(T));
             var length = y.Length;
 
             if(x.Length != length)
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to evaluate</param>
         /// <typeparam name="T">The structure type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool empty<T>(in T src)
             where T : struct
         {

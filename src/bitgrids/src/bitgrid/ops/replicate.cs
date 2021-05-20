@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BitGrid
     {
-        [MethodImpl(Inline), Replicate, NumericClosures(UnsignedInts)]
+        [MethodImpl(Inline), Replicate, NumericClosures(Closure)]
         public static BitGrid<T> replicate<T>(BitGrid<T> src)
             where T : unmanaged
                 => new BitGrid<T>(src.Data.Replicate(), src.RowCount, src.ColCount);

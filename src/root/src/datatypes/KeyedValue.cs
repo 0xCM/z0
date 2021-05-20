@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
@@ -23,7 +23,6 @@ namespace Z0
         /// The value identified by the key
         /// </summary>
         public V Value;
-
 
         [MethodImpl(Inline)]
         public KeyedValue(K key, V value)

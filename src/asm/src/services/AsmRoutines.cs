@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    using static memory;
+    using static core;
 
     [ApiHost]
     public sealed class AsmRoutines : AppService<AsmRoutines>

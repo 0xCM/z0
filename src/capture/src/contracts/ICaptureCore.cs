@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Reflection;
-
     /// <summary>
     /// Defines supported x86-encoding capture operations
     /// </summary>

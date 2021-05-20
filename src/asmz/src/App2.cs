@@ -312,10 +312,32 @@ namespace Z0.Asm
 
         }
 
+        static string format(BitfieldSpec src)
+        {
+            var formatter = Tables.formatter<BitfieldSpecEntry>();
+            var entries = src.Entries;
+            var count = entries.Length;
+            var dst = text.buffer();
+            dst.AppendLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                dst.AppendLine(formatter.Format(skip(entries,i)));
+            }
+            return dst.Emit();
+        }
+
         public void Run()
         {
-            var dir = Db.AppLogDir();
-            EmitAsmRows(dir);
+            const uint Value = 0xFFFFFFFF;
+            var spec = BitfieldSpecs.specify("test", (0,3), (3,2), (5,3), (8,12));
+            Wf.Row(format(spec));
+            var parts = BitfieldSpecs.chop(spec,Value);
+            root.iter(parts, part => Wf.Row(part.FormatHex()));
+
+
+            //CaptureSelf();
+            // var dir = Db.AppLogDir();
+            // EmitAsmRows(dir);
         }
 
 

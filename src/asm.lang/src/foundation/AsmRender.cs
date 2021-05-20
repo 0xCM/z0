@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
 
     using static Part;
     using static Chars;
     using static memory;
+
 
     [ApiHost]
     public class AsmRender : AppService<AsmRender>
@@ -53,6 +55,37 @@ namespace Z0.Asm
         {
 
         }
+
+        [Op]
+        public static byte format(in ApiCodeBlockHeader src, Span<string> dst)
+        {
+            var i = z8;
+            seek(dst, i++) = src.Separator;
+            seek(dst, i++) = AsmCore.comment($"{src.DisplaySig}::{src.Uri}");
+            seek(dst, i++) = ByteSpans.asmcomment(src.Uri, src.CodeBlock);
+            seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
+            seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
+            seek(dst, i++) = src.Separator;
+            return i;
+        }
+
+        [Op]
+        public static void render(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config, ITextBuffer dst)
+        {
+            const string AbsolutePattern = "{0} {1} {2}";
+            const string RelativePattern = "{0} {1}";
+
+            var label = asm.label(w16, src.Offset);
+            var address = @base + src.Offset;
+
+            if(config.AbsoluteLabels)
+                dst.Append(string.Format(AbsolutePattern, address.Format(), label.Format(), src.Statement.FormatFixed()));
+            else
+                dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatFixed()));
+
+            dst.Append(AsmCore.comment(AsmRender.format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
+        }
+
 
         [Op]
         public static string format(AsmThumbprint src)
@@ -244,7 +277,6 @@ namespace Z0.Asm
             var monic = AsmMnemonicCode.None;
             if(!AsmParser.parse(row.Mnemonic, out monic))
                 return string.Format("The mnemonic {0} is not known", row.Mnemonic);
-
 
             var encoded = row.Encoded;
             var ip = row.IP;

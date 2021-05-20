@@ -8,9 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Reflection.Emit;
 
-    using static Part;
-    using static memory;
-
     /// <summary>
     /// Taken from https://github.com/dotnet/runtime/src/libraries/System.Linq.Expressions/tests/ILReader/DynamicMethodILProvider.cs
     /// </summary>

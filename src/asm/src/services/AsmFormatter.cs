@@ -63,7 +63,7 @@ namespace Z0.Asm
         public static string format(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config)
         {
             var dst = text.buffer();
-            AsmFormatter.format(@base, src, config, dst);
+            AsmRender.render(@base, src, config, dst);
             return dst.ToString();
         }
 
@@ -72,23 +72,10 @@ namespace Z0.Asm
         {
             const string Separator = "; " + RP.PageBreak160;
             var buffer = span<string>(8);
-            var count = format(src.AsmHeader(), buffer);
+            var count = AsmRender.format(src.AsmHeader(), buffer);
             for(var i=0; i<count; i++)
                 dst.AppendLine(skip(buffer,i));
             dst.AppendLine(instructions(src, config).Join(Eol));
-        }
-
-        [Op]
-        public static byte format(in ApiCodeBlockHeader src, Span<string> dst)
-        {
-            var i = z8;
-            seek(dst, i++) = src.Separator;
-            seek(dst, i++) = AsmCore.comment($"{src.DisplaySig}::{src.Uri}");
-            seek(dst, i++) = ByteSpans.asmcomment(src.Uri, src.CodeBlock);
-            seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
-            seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
-            seek(dst, i++) = src.Separator;
-            return i;
         }
 
         /// <summary>
@@ -109,52 +96,5 @@ namespace Z0.Asm
                 seek(dst,i)= format(src.BaseAddress, skip(summaries,i), config);
             return dst;
         }
-
-        [Op]
-        static void format(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config, ITextBuffer dst)
-        {
-            const string AbsolutePattern = "{0} {1} {2}";
-            const string RelativePattern = "{0} {1}";
-
-            var label = asm.label(w16, src.Offset);
-            var address = @base + src.Offset;
-
-            if(config.AbsoluteLabels)
-                dst.Append(string.Format(AbsolutePattern, address.Format(), label.Format(), src.Statement.FormatFixed()));
-            else
-                dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatFixed()));
-
-            dst.Append(AsmCore.comment(AsmRender.format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
-        }
-
-        // public string Format(AsmInstructionBlock src)
-        // {
-        //     var dst = text.buffer();
-        //     render(src.Code.Encoded, src.Instructions, dst);
-        //     return dst.Emit();
-        // }
-
-        // public string Format(in MemoryAddress @base, in AsmInstructionInfo src)
-        //     => format(@base, src, _Config);
-
-        // public void Render(AsmRoutine src, ITextBuffer dst)
-        //     => format(src, _Config, dst);
-
-        // [Op]
-        // public ReadOnlySpan<string> HeaderLines(AsmRoutine src)
-        // {
-        //     var dst = HeaderBuffer.Edit;
-        //     const string Separator = "; " + RP.PageBreak160;
-        //     var count = AsmHeader(new ApiCodeBlockHeader(Separator, src.Code.OpUri, src.DisplaySig, src.Code, src.TermCode), dst);
-        //     return slice(dst, 0, count);
-        // }
-
-        // public ReadOnlySpan<string> HeaderLines(in ApiCodeBlock code, in MethodDisplaySig sig)
-        // {
-        //     var dst = HeaderBuffer.Edit;
-        //     const string Separator = "; " + RP.PageBreak160;
-        //     var count = AsmHeader(new ApiCodeBlockHeader(Separator, code.OpUri, sig, code, default), dst);
-        //     return slice(dst, 0, count);
-        // }
     }
 }

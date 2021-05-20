@@ -15,7 +15,7 @@ namespace Z0.Asm
     using static AsmSemanticDefaults;
     using static IceOpKind;
 
-    [ApiHost(ApiNames.AsmSemanticRender, true)]
+    [ApiHost]
     public readonly struct AsmSemanticRender
     {
         [MethodImpl(Inline), Op]

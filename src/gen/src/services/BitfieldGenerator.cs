@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static core;
-    using static Typed;
 
     partial struct Msg
     {
@@ -118,7 +117,7 @@ namespace Z0
                 {
                     i1 = i-1;
 
-                    dst.Add(new BitfieldSpec(core.segment(src,i0,i1).ToArray()));
+                    dst.Add(new BitfieldSpec(core.segment(src, i0, i1).ToArray()));
 
                     current = bf;
 
@@ -128,7 +127,7 @@ namespace Z0
                 if(i == count - 1 && current.IsNonEmpty)
                 {
                     i1 = i-1;
-                    dst.Add(new BitfieldSpec(core.segment(src,i0,i1).ToArray()));
+                    dst.Add(new BitfieldSpec(core.segment(src, i0, i1).ToArray()));
                     break;
                 }
             }

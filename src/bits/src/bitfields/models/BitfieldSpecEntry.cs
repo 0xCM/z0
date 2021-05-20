@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The segment index
         /// </summary>
-        public ushort Index;
+        public byte Index;
 
         /// <summary>
         /// The field name
@@ -34,7 +34,7 @@ namespace Z0
         /// <summary>
         /// The 0-based bit index at which the field begins
         /// </summary>
-        public ushort Offset;
+        public byte Offset;
 
         /// <summary>
         /// The segment width
