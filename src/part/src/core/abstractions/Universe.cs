@@ -37,19 +37,19 @@ namespace Z0
             StoreLocation = LocateStore();
         }
 
-        public UIntPtr StoreLocation {get;}
+        public MemoryAddress StoreLocation {get;}
 
-        public unsafe ref S Deposited
+        public unsafe ref S Buffer
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.AsRef<S>(StoreLocation.ToPointer());
+            get => ref LocateStore().Ref<S>();
         }
 
         protected IUniversal Context {get; private set;}
 
         protected virtual void Init() { }
 
-        static unsafe UIntPtr LocateStore()
-            => new UIntPtr(Unsafe.AsPointer(ref Storage));
+        static unsafe MemoryAddress LocateStore()
+            => new MemoryAddress(Unsafe.AsPointer(ref Storage));
     }
 }

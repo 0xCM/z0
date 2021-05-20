@@ -25,6 +25,10 @@ namespace Z0
             => new WorkerLog(config);
 
         [MethodImpl(Inline), Op]
+        public static IWorkerLog worker(PartId control, FS.FolderPath root)
+            => worker(configure(control, root));
+
+        [MethodImpl(Inline), Op]
         public static IWfEventLog events(WfLogConfig config)
             => new WfEventLog(config);
 

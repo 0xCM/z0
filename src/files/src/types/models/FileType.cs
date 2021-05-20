@@ -17,36 +17,35 @@ namespace Z0
 
         public FileKind FileKind {get;}
 
-        public Index<FS.FileExt> Extensions {get;}
+        public FS.FileExt FileExt {get;}
 
         [MethodImpl(Inline)]
-        public FileType(Type rtt, FileKind kind, Index<FS.FileExt> extensions)
+        public FileType(Type rtt, FileKind kind, FS.FileExt ext)
         {
             Rep = rtt;
             FileKind = kind;
-            Extensions = extensions;
+            FileExt = ext;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Extensions.IsEmpty;
+            get => FileExt.IsEmpty || FileKind == 0;
+        }
+
+        public string Description
+        {
+            get => api.describe(this);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Extensions.IsNonEmpty;
-        }
-
-        public FS.FileExt FileExt
-        {
-            [MethodImpl(Inline)]
-            get => IsNonEmpty ? Extensions.First : FS.FileExt.Empty;
+            get => FileExt.IsNonEmpty && FileKind != 0;
         }
 
         public string Format()
-            => api.format(this);
+            => FileKind.Format();
 
         public override string ToString()
             => Format();
@@ -54,7 +53,10 @@ namespace Z0
         public static FileType Empty
         {
             [MethodImpl(Inline)]
-            get => new FileType(typeof(void), FileKind.None, sys.empty<FS.FileExt>());
+            get => new FileType(typeof(void), FileKind.None, FS.FileExt.Empty);
         }
+
+        public string Wildcard()
+            => api.wildcard(this);
     }
 }

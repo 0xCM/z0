@@ -12,7 +12,7 @@ namespace Z0
     partial class FileTypes
     {
         [MethodImpl(Inline), Op]
-        public static FileType type(Type rep, FileKind kind, params FS.FileExt[] ext)
+        public static FileType type(Type rep, FileKind kind, FS.FileExt ext)
             => new FileType(rep, kind, ext);
 
         [MethodImpl(Inline), Op]
@@ -22,6 +22,6 @@ namespace Z0
 
         public static TypedFile untyped<T>(TypedFile<T> src)
             where T : struct, IFileType<T>
-                => new TypedFile(new FileType(src.Type.Rep, src.Type.FileKind, src.Type.Extensions), src.Location);
+                => new TypedFile(new FileType(src.Type.Rep, src.Type.FileKind, src.Type.FileExt), src.Location);
     }
 }

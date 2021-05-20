@@ -25,6 +25,10 @@ namespace Z0
 
         public static IlDataType IlData => default(IlDataType);
 
+        public static CppType Cpp => default(CppType);
+
+        public static LogType Log => default(LogType);
+
         public readonly struct ExeFileType : IFileType<ExeFileType>
         {
             public FileKind FileKind => FileKind.Exe;
@@ -51,7 +55,6 @@ namespace Z0
             public FileKind FileKind => FileKind.Bin;
 
             public FS.FileExt FileExt => FS.Bin;
-
         }
 
         public readonly struct CsFileType : IFileType<CsFileType>
@@ -82,5 +85,18 @@ namespace Z0
             public FS.FileExt FileExt => FS.IlData;
         }
 
+        public readonly struct CppType : IFileType<CppType>
+        {
+            public FileKind FileKind => FileKind.Cpp;
+
+            public FS.FileExt FileExt => FS.Cpp;
+        }
+
+        public readonly struct LogType : IFileType<LogType>
+        {
+            public FileKind FileKind => FileKind.Log;
+
+            public FS.FileExt FileExt => FS.Log;
+        }
     }
 }

@@ -116,11 +116,14 @@ namespace Z0
         [Symbol(sql, "A sql script")]
         Sql,
 
-        [Symbol(xpack, "Based Hex-formatted data")]
+        [Symbol(xpack, "Text-formatted hex with base addresses")]
         XPack,
 
         [Symbol(ildata, "MSIL organized in tabular format")]
         IlData,
+
+        [Symbol(cpp, "A cpp source file")]
+        Cpp,
 
     }
 }

@@ -11,13 +11,16 @@ namespace Z0
     using static Root;
     using static core;
 
-
     [ApiHost]
     public partial class FileTypes
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<FileType> supported()
-            => slice(_Types.View,0,FileTypeCount);
+        public static unsafe FixedCells<FileType> supported()
+            => FixedCells.define<FileType>(memory.@address(_Types), FileTypeCount);
+
+        [MethodImpl(Inline), Op]
+        public static IReadOnlyCollection<string> keys()
+            => Lookup.Keys;
 
         static FileTypes()
         {
@@ -35,13 +38,16 @@ namespace Z0
                 if(prop.PropertyType.Reifies<IFileType>())
                 {
                     var value = (IFileType)prop.GetValue(null);
-                    _Types[counter++] = type(value.Rep, value.FileKind, value.Extensions);
-                    Lookup[value.FileExt] = _Types[counter];
+                    _Types[counter++] = type(value.Rep, value.FileKind, value.FileExt);
+                    Lookup[key(value.FileExt)] = _Types[counter];
                 }
             }
 
             FileTypeCount = counter;
         }
+
+        static string key(FS.FileExt src)
+            => src.Name.Format().ToLower();
 
         static FileTypeLookup Lookup;
 
@@ -51,10 +57,9 @@ namespace Z0
         static Index<FileType> _Types;
 
         static uint FileTypeCount;
-
     }
 
-    sealed class FileTypeLookup : Dictionary<FS.FileExt,FileType>
+    sealed class FileTypeLookup : Dictionary<string,FileType>
     {
 
     }

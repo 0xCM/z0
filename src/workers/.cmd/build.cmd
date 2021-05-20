@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=workers
-call %ControlScripts%\build-app.cmd
+call %ControlScripts%\clean-platform.cmd
+call %ControlScripts%\build-workers.cmd

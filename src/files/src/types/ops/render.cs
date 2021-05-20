@@ -35,7 +35,7 @@ namespace Z0
             {
                 dst.Append(src.FileKind.Format());
                 dst.Append(Chars.Colon);
-                dst.Append(string.Join(Chars.Semicolon, src.Extensions));
+                dst.Append(string.Join(Chars.Semicolon, src.FileExt));
             }
         }
 

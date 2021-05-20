@@ -269,9 +269,23 @@ namespace Z0.Asm
             root.iter(symbols.Methods, m => Wf.Row(m.Format()));
         }
 
+        ReadOnlySpan<FileType> ListFileTypes()
+        {
+            var src = FileTypes.supported().View;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var type = ref skip(src,i);
+                Wf.Row(type);
+            }
+            return src;
+        }
+
         public void Run()
         {
-            Symbolize();
+            var catalog = Wf.FileCatalog(Db.AsmCaptureRoot());
+            catalog.Enumerate(path => Wf.Row(path.ToUri()));
+
         }
 
 

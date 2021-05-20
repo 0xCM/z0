@@ -29,9 +29,22 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public RelativePath(PathPart name)
-                => Name = name;
+            {
+                if(name.IsNonEmpty)
+                {
+                    ref readonly var c = ref core.first(name.Text);
+                    if(c == (char)PathSeparator.BS || c == (char)PathSeparator.FS)
+                        Name = text.slice(name.Text,1);
+                    else
+                        Name = name;
+                }
+                else
+                {
+                    Name = PathPart.Empty;
+                }
+            }
 
-           [MethodImpl(Inline)]
+            [MethodImpl(Inline)]
             public RelativePath Replace(char src, char dst)
                 => new RelativePath(Name.Replace(src,dst));
 
@@ -45,6 +58,10 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+           [MethodImpl(Inline)]
+            public string Format(PathSeparator sep, bool quote = false)
+                => quote ? text.enquote(Name.Format(sep)) : Name.Format(sep);
 
             [MethodImpl(Inline)]
             public static RelativePath operator +(RelativePath a, RelativePath b)

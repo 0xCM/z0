@@ -13,14 +13,22 @@ namespace Z0.Parts
 
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
+    using Svc = Z0;
 
     [ApiHost]
     public static partial class XTend
     {
     }
 
+    [ApiHost]
+    public static class XSvc
+    {
+        [Op]
+        public static FileCatalog FileCatalog(this IWfRuntime wf)
+            => Svc.FileCatalog.create(wf);
+
+        [Op]
+        public static FileCatalog FileCatalog(this IWfRuntime wf, FS.FolderPath root)
+            => wf.FileCatalog().Scoped(root);
+    }
 }

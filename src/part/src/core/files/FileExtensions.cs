@@ -213,5 +213,10 @@ namespace Z0
         /// </summary>
         public static FileExt Sql => ext(sql);
 
+        /// <summary>
+        /// Defines the <see cref='cpp'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Cpp => ext(cpp);
+
     }
 }

@@ -130,6 +130,9 @@ namespace Z0
             public bool IsNot(FileExt x1, FileExt x2)
                 => !Is(x1,x2);
 
+            public RelativeFilePath Relative(FS.FolderPath src)
+                => FS.relative(src,this);
+
             public FilePath WithoutExtension
                 => FolderPath + FileName.WithoutExtension;
 
@@ -167,7 +170,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(PathSeparator sep, bool quote = false)
-                => quote ? Z0.text.enquote(Name.Format(sep)) : Name.Format(sep);
+                => quote ? text.enquote(Name.Format(sep)) : Name.Format(sep);
 
             [MethodImpl(Inline)]
             public FileUri ToUri()
@@ -179,10 +182,9 @@ namespace Z0
             public int CompareTo(FilePath src)
                 => Name.CompareTo(src.Name);
 
-
             [MethodImpl(Inline)]
             public static FilePath operator +(FilePath a, FileExt b)
-                => new FilePath(Z0.text.format("{0}.{1}", a.Name, b.Name));
+                => new FilePath(text.format("{0}.{1}", a.Name, b.Name));
 
             public static FilePath Empty
             {

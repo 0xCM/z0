@@ -93,6 +93,19 @@ namespace Z0
 
         }
 
+        void CalcRelativePaths()
+        {
+            var @base = Db.DbRoot();
+            var files = Db.AsmCapturePaths().View;
+            var relative = files.Map(f => f.Relative(@base));
+            var count = relative.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(relative,i);
+                var link = Markdown.relative(path.File.Format(), path.Format());
+                Wf.Row(link);
+            }
+        }
 
         void GenSlnScript()
         {
@@ -108,7 +121,7 @@ namespace Z0
         }
         public void Run()
         {
-            GenSlnScript();
+            CalcRelativePaths();
 
         }
     }

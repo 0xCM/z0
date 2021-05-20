@@ -17,7 +17,7 @@ namespace Z0
 
     }
 
-    public interface IUniversal<U,S> : IUniversal<U>, IMemoryStore<S>
+    public interface IUniversal<U,S> : IUniversal<U>
         where S : struct
     {
 

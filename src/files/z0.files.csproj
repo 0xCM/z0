@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(Workflow)" />
   </ItemGroup>
 
 </Project>

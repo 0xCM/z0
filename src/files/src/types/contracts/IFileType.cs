@@ -18,11 +18,8 @@ namespace Z0
 
         FS.FileExt FileExt {get;}
 
-        Index<FS.FileExt> Extensions
-            => sys.array(FileExt);
-
         FileType Untyped
-            => api.type(Rep,FileKind, Extensions);
+            => api.type(Rep, FileKind, FileExt);
     }
 
     [Free]

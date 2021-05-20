@@ -34,9 +34,9 @@ namespace Z0
         public FS.FilePath ErrorLog {get;}
 
         [MethodImpl(Inline)]
-        public WfLogConfig(PartId control, FS.FolderPath dbRoot)
+        public WfLogConfig(PartId control, FS.FolderPath root)
         {
-            LogRoot = dbRoot + FS.folder("logs");
+            LogRoot = root + FS.folder("logs");
             ControlId = control;
             var app = ControlId.Format();
             StatusLog = LogRoot + FS.file(app, FS.StatusLog);

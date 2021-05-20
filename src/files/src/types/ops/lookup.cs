@@ -4,17 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Root;
-    using static core;
-
     partial class FileTypes
     {
+
         [Op]
         public static FileType lookup(FS.FileExt ext)
         {
-            if(Lookup.TryGetValue(ext, out var value))
+            if(Lookup.TryGetValue(key(ext), out var value))
                 return value;
             else
                 return EmptyType;
@@ -22,6 +18,6 @@ namespace Z0
 
         [Op]
         public static bool lookup(FS.FileExt ext, out FileType type)
-            => Lookup.TryGetValue(ext, out type);
+            => Lookup.TryGetValue(key(ext), out type);
     }
 }
