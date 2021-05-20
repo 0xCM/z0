@@ -2,11 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    [ApiHost]
-    public static partial class XHex
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    partial class IntrinsicsCatalog
     {
-        const NumericKind Closure = NumericKind.UnsignedInts;
+
     }
 }

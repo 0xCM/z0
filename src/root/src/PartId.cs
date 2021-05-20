@@ -80,6 +80,9 @@ public enum PartId : ulong
     [Symbol("hash")]
     Hash = 23,
 
+    [Symbol("blocks")]
+    Blocks = 24,
+
     [Symbol("gmath")]
     GMath = 34,
 
@@ -259,6 +262,9 @@ public enum PartId : ulong
 
     [Symbol("circuits")]
     Circuits = 144,
+
+    [Symbol("workers")]
+    Workers = 145,
 
     [Symbol("apps")]
     Apps = 150,

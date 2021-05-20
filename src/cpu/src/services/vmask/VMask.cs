@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
     using static BitMasks;
     using static BitMasks.Literals;
-    using static memory;
+    using static core;
+    using static Typed;
 
     [ApiHost]
     public readonly struct VMask

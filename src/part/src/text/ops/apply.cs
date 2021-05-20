@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
-    using static memory;
+    using static core;
     using static Rules;
 
     partial class text
@@ -23,8 +23,8 @@ namespace Z0
         {
             var output = root.list<string>();
             var len = src?.Length ?? 0;
-            var buffer = memory.span<char>(len);
-            var input = memory.span(src);
+            var buffer = span<char>(len);
+            var input = span(src);
             var j = 0;
             for(var i=0; i<len; i++)
             {
@@ -33,7 +33,7 @@ namespace Z0
                 {
                     if(j != 0)
                     {
-                        output.Add(text.format(memory.slice(buffer, 0, j)));
+                        output.Add(format(core.slice(buffer, 0, j)));
                         buffer.Clear();
                         j=0;
                     }
@@ -43,7 +43,7 @@ namespace Z0
             }
 
             if(j != 0)
-                output.Add(text.format(memory.slice(buffer, 0, j)));
+                output.Add(format(core.slice(buffer, 0, j)));
 
             return output.ToArray();
         }
@@ -116,6 +116,6 @@ namespace Z0
         /// <param name="src">The source string</param>
         [Op]
         public static Pair<string> apply(Fork<char> rule, string src)
-            => root.pair(text.before(src, rule.Criterion), text.after(src, rule.Criterion));
+            => root.pair(before(src, rule.Criterion), after(src, rule.Criterion));
     }
 }

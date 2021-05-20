@@ -20,7 +20,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format("[{0,10}] {1}]", ChangeKind, File.ToUri());
+            => string.Format("[{0}] {1}", FS.symbol(ChangeKind), File.ToUri());
 
 
         public override string ToString()

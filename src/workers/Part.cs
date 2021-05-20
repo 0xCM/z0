@@ -2,16 +2,31 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
+[assembly: PartId(PartId.Workers)]
+
+namespace Z0.Parts
+{
+    public sealed partial class Workers : Part<Workers>
+    {
+
+    }
+}
+
 namespace Z0
 {
     using System;
-    using System.Reflection;
+
+    using static Root;
+
+    [ApiHost]
+    public static partial class XTend
+    {
+        const NumericKind Closure = UnsignedInts;
+    }
 
     [ApiComplete]
     partial struct Msg
     {
-        public const string CaptureAddressMismatch = "The parsed address does not match the extration address";
 
-        public static MsgPattern<Type,Type> ContractMismatch => "The source type {0} does not reify {1}";
     }
 }

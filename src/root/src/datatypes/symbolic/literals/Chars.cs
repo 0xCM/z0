@@ -249,5 +249,13 @@ namespace Z0
         /// The asci null character '\0'
         /// </summary>
         public const char Null = (char)0;
+
+        public const char A = 'A';
+
+        public const char B = 'B';
+
+        public const char C = 'C';
+
+        public const char D = 'D';
     }
 }

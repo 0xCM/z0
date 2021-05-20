@@ -16,7 +16,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     [ApiHost]
     public static partial class ByteBlocks
@@ -32,23 +31,12 @@ namespace Z0
             => LoadDquVector256(gptr(src));
 
         [MethodImpl(Inline)]
-        internal static unsafe Vector512<byte> vload(W512 w, in byte src)
-            => (vload(n256, in src), vload(n256, add(src, 32)));
-
-        [MethodImpl(Inline)]
         internal static unsafe void vstore(Vector256<byte> src, ref byte dst)
             => Store(refptr(ref dst),src);
 
         [MethodImpl(Inline)]
         internal static unsafe void vstore(Vector128<byte> src, ref byte dst)
             => Store(refptr(ref dst), src);
-
-        [MethodImpl(Inline)]
-        internal static unsafe void vstore(Vector512<byte> src, ref byte dst)
-        {
-            vstore(src.Lo, ref dst);
-            vstore(src.Hi, ref Unsafe.Add(ref dst, 32));
-        }
 
         [MethodImpl(Inline)]
         internal static unsafe Vector128<byte> vbroadcast(W128 w, byte src)

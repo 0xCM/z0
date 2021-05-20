@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial class XHex
+    partial class XTend
     {
         [Op]
         public static string FormatHex(this byte[] src)

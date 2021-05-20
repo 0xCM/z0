@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
     using static gcpu;
-    using static memory;
+    using static core;
 
     /// <summary>
     /// Generates the data presented by VData

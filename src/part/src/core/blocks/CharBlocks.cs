@@ -35,7 +35,7 @@ namespace Z0
         public static ref T copy<T>(ReadOnlySpan<char> src, ref T dst)
             where T : unmanaged
         {
-            var count = (uint)root.min(src.Length, size<T>()/2);
+            var count = (uint)core.min(src.Length, size<T>()/2);
             copy(first(src), ref @as<T,char>(dst), count);
             return ref dst;
         }
@@ -51,6 +51,6 @@ namespace Z0
         static void copy<S,T>(in S src, ref T dst, uint srcCount, uint dstOffset = 0)
             where S: unmanaged
             where T :unmanaged
-                => copy(memory.u8(src), ref memory.uint8(ref seek(dst, dstOffset)), srcCount*size<S>());
+                => copy(core.u8(src), ref core.uint8(ref seek(dst, dstOffset)), srcCount*size<S>());
     }
 }

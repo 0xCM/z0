@@ -16,7 +16,7 @@ namespace Z0
         /// Computes the bit-width of a parametrically-identified type
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
-        public static uint width<T>()
+        public static BitWidth width<T>()
             => (uint)SizeOf<T>()*8;
 
         /// <summary>

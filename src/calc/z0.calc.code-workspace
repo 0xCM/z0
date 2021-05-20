@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\calc.shell"
+		},
+		{
+			"path": "..\\bitpack"
+		},
+		{
+			"path": "..\\polyrand"
+		},
+		{
+			"path": "..\\bits"
+		},
+		{
+			"path": "..\\dynamic"
+		},
+		{
+			"path": "..\\bitmasks"
+		},
+		{
+			"path": "..\\core"
+		}
+	],
+	"settings": {}
+}

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(Api)" />

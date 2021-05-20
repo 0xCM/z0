@@ -24,8 +24,10 @@ namespace Z0
 
         ByteSize Size => size<T>();
 
-        MemoryRange Range => (BaseAddress, BaseAddress + Size);
+        MemoryRange Range
+            => (BaseAddress, BaseAddress + Size);
     }
+
 
     public struct PageBank<N,T> : IPageBank<N,T>
         where T : unmanaged, IPageBlock<T>

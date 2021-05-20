@@ -12,7 +12,6 @@ namespace Z0
     [ApiHost]
     public static partial class XCalc
     {
-
         /// <summary>
         /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
         /// </summary>

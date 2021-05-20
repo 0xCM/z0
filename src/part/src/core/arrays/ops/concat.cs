@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct Arrays
     {
@@ -77,16 +77,17 @@ namespace Z0
         public static T[] concat<T>(T[][] src)
         {
             var totalLen = src.Sum(x => x.Length);
-            var dst = new T[totalLen];
-            var idx = 0;
+            var buffer = new T[totalLen];
+            ref var dst = ref first(buffer);
+            var counter = 0;
             for(var i=0; i< src.Length; i++)
             {
-                var arr = src[i];
+                ref readonly var arr = ref skip(src,i);
                 var len = arr.Length;
                 for(var j = 0; j<len; j++)
-                    dst[idx++] = arr[j];
+                    seek(dst, counter++) = skip(arr,j);
             }
-            return dst;
+            return buffer;
         }
     }
 }

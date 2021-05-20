@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class XHex
+    partial class XTend
     {
         [Op]
         public static string FormatHexBytes(this ushort src)

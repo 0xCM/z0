@@ -8,8 +8,9 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Part;
+    using static Root;
     using static core;
+    using static Typed;
 
     class App : WfApp<App>
     {
@@ -119,7 +120,6 @@ namespace Z0
                 ref readonly var result = ref skip(target,i);
                 Wf.Row(string.Format("{0:D6} {1}([{2}],[{3}]) = {4}", i, "f", a.V32u.FormatHex(), b.V32u.FormatHex(), result.V32u.FormatHex()));
             }
-
         }
 
         void CheckMd5()

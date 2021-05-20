@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), EffWidth, Closures(Closure)]
-        public static int effective<T>(T src)
+        public static byte effective<T>(T src)
             where T : unmanaged
         {
             if(size<T>() == 1)

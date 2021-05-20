@@ -8,7 +8,7 @@ namespace Z0
     using System.Text;
 
     using static Part;
-    using static memory;
+    using static core;
 
     public interface ITextBuffer : IRenderBuffer<string,string>
     {
@@ -69,7 +69,7 @@ namespace Z0
 
         void AppendPadded<T,W>(T value, W width, string delimiter = EmptyString)
         {
-            if(text.nonempty(delimiter))
+            if(sys.nonempty(delimiter))
                 Append(delimiter);
 
             Append(string.Format(RP.pad(-i16(width)), value));

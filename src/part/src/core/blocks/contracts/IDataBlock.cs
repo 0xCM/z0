@@ -6,16 +6,18 @@ namespace Z0
 {
     using System;
 
+    using static core;
+
     public interface IDataBlock<T>
         where T : unmanaged, IDataBlock<T>
     {
         Span<T> Data
-            => memory.recover<byte,T>(memory.bytes((T)this));
+            => recover<byte,T>(bytes((T)this));
 
         ByteSize Size
-            => memory.size<T>();
+            => size<T>();
 
         Span<byte> Bytes
-            => memory.bytes((T)this);
+            => bytes((T)this);
     }
 }

@@ -60,8 +60,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ByteBlock64 copy(ReadOnlySpan<byte> src, ref ByteBlock64 dst)
         {
-            var vSrc = vload(w512, core.first(src));
-            vstore(vSrc, ref u8(dst));
+            ref var lo = ref @as<ByteBlock64,ByteBlock32>(dst);
+            ref var hi = ref seek(lo,1);
+            copy(src, ref lo);
+            copy(slice(src,32), ref hi);
             return ref dst;
         }
 

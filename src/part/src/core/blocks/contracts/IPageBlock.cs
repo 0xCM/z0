@@ -5,8 +5,7 @@
 namespace Z0
 {
     using static core;
-
-    using api = PageBlocks;
+    using static Root;
 
     public interface IPageBlock<T>
         where T : unmanaged, IPageBlock<T>
@@ -15,6 +14,6 @@ namespace Z0
             => size<T>();
 
         uint PageCount
-            => api.PageCount<T>();
+            => size<T>()/PageSize;
     }
 }

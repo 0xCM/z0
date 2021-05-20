@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
+    using static core;
 
     [ApiHost]
     public class Vmx128x2
