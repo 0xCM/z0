@@ -125,7 +125,7 @@ namespace Z0.Asm
 
         void LoadCurrentCatalog()
         {
-            var entries = Wf.ApiCatalogs().Entries();
+            var entries = Wf.ApiCatalogs().LoadCatalog().View;
         }
 
 
@@ -173,14 +173,6 @@ namespace Z0.Asm
         {
             var wf = ApiExtractWorkflow.create(Wf);
             wf.Run();
-            // var receivers = new ApiExtractReceivers();
-            // receivers.PartResolved += (source, e) => OnEvent(e);
-            // receivers.HostResolved += (source, e) => OnEvent(e);
-            // receivers.MemberParsed += (source, e) => OnEvent(e);
-            // receivers.MemberDecoded += (source, e) => OnEvent(e);
-            // receivers.ExtractError += (source, e) => OnEvent(e);
-            // var extractor = Wf.ApiExtracor();
-            // extractor.Run(receivers);
         }
 
         void DescribeHeaps()
@@ -311,15 +303,76 @@ namespace Z0.Asm
             return dst.Emit();
         }
 
+        void CheckHeap()
+        {
+            const string Seg0 = "This";
+            const string Seg1 = "is";
+            const string Seg2 = "a";
+            const string Seg3 = "HeapString";
+            const string segments = "This" + "is" + "a" + "HeapString";
+
+            var s0 = (uint)Seg0.Length;
+            var s1 = (uint)Seg1.Length;
+            var s2 = (uint)Seg2.Length;
+            var s3 = (uint)Seg3.Length;
+
+            var offsets = array<uint>(
+                0,
+                s0,
+                s0 + s1,
+                s0 + s1 + s2
+                );
+
+            var heap = Heaps.cover(text.span(segments), offsets);
+            for(var i=0u; i<offsets.Length; i++)
+            {
+                var seg = text.format(heap.Segment(i));
+                Wf.Row(seg);
+            }
+        }
+
+
+        void EmitTableReport(FS.FilePath dst)
+        {
+            using var writer = dst.Writer();
+            var emitting = Wf.EmittingFile(dst);
+            var tables = Tables.discover(Wf.ApiCatalog.Components);
+            var count = tables.Length;
+            for(var i=0; i<count; i++)
+            {
+                if(i != 0)
+                    writer.WriteLine();
+
+                var table = skip(tables,i);
+                writer.WriteLine(string.Format("{0,-8} | {1,-22} | {2}", i, table.Id.Identifier, table.Id.RecordType.FullName));
+                writer.WriteLine(RP.PageBreak80);
+
+                var fields = table.Fields.View;
+                for(var j=0; j<fields.Length; j++)
+                {
+                    ref readonly var field = ref skip(fields,j);
+                    writer.WriteLine(string.Format("{0,-8} | {1,-22} | {2}", field.FieldIndex, field.Name, field.DataType));
+                }
+            }
+
+            Wf.EmittedFile(emitting, count);
+        }
+
+        void EmitTableReport()
+        {
+            EmitTableReport(Db.ReportRoot() + FS.file("tabledefs", "rpt"));
+
+        }
+
+        void CorrelateApi()
+        {
+            var dst = Db.AppTablePath<ApiCorrelationEntry>();
+            Wf.ApiCatalogs().Correlate(dst);
+
+        }
         public void Run()
         {
-            const uint Value = 0xFFFFFFFF;
-            var spec = BitfieldSpecs.specify("test", (0,3), (3,2), (5,3), (8,12));
-            Wf.Row(format(spec));
-            var parts = BitfieldSpecs.chop(spec,Value);
-            root.iter(parts, part => Wf.Row(part.FormatHex()));
-
-
+            RunExtractWorkflow();
             //CaptureSelf();
             // var dir = Db.AppLogDir();
             // EmitAsmRows(dir);

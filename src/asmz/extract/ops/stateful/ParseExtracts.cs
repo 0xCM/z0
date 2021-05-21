@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static memory;
+    using static core;
 
     partial class ApiExtractor
     {
@@ -20,9 +20,9 @@ namespace Z0
                 ref readonly var input = ref skip(src,i);
                 ref var output = ref seek(parsed,i);
                 if(Parser.Parse(input, out output))
-                {
                     Receivers.Raise(new MemberParsedEvent(input,output));
-                }
+                else
+                    Wf.Error(string.Format("Extract parse failure for {0}", input.Member.OpUri));
 
             }
             return buffer;

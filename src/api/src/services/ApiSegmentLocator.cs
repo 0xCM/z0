@@ -5,14 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
     using static Typed;
 
-    partial class ApiExtractor
+    public class ApiSegmentLocator : AppService<ApiSegmentLocator>
     {
-        ReadOnlySpan<ProcessSegment> LocateSegments(AddressBank src, ReadOnlySpan<ResolvedMethodInfo> methods)
+        public ReadOnlySpan<ProcessSegment> LocateSegments(AddressBank src, ReadOnlySpan<ResolvedMethodInfo> methods, FS.FolderPath dir)
         {
             var count = methods.Length;
             var flow = Wf.Running(Msg.LocatingSegments.Format(count));
@@ -64,9 +65,10 @@ namespace Z0
                 }
             }
 
-            var located = TableEmit(@readonly(buffer), MethodSegment.RenderWidths, Db.Table<MethodSegment>(SegDir));
+            var located = TableEmit(@readonly(buffer), MethodSegment.RenderWidths, Db.Table<MethodSegment>(dir));
             Wf.Ran(flow, Msg.LocatedSegments.Format(located, count));
             return locations.Array().Sort();
         }
     }
+
 }

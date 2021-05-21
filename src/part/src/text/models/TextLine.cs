@@ -64,7 +64,7 @@ namespace Z0
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Content);
+            get => sys.nonempty(Content);
         }
 
         public bool IsEmpty

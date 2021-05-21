@@ -42,6 +42,8 @@ namespace Z0
 
         IMultiDiviner Identity {get;}
 
+        ApiCatalogs Catalogs;
+
         public ApiExtractor()
         {
             Identity = MultiDiviner.Service;
@@ -58,28 +60,91 @@ namespace Z0
             HexPacks = Wf.HexPacks();
             Receivers = new ApiExtractReceipt();
             HostDatasets = new();
+            Catalogs = Wf.ApiCatalogs();
             Paths = new ApiExtractPaths(Db.AppLogRoot());
         }
 
-        void Run3()
+        void EmitProcessContext()
         {
-            var selected = root.hashset(PartId.Cpu, PartId.Math, PartId.GMath);
-            var flow = Wf.Running(string.Format("Exracting parts {0}", selected.Delimit(Chars.Comma)));
-            var catalog = Wf.ApiCatalog;
-            var parts = catalog.Parts.Where(p => selected.Contains(p.Id));
+            var flow = Wf.Running("Emitting process context");
+            var dir = Paths.ContextRoot();
+            var ts = root.timestamp();
+            var process = Process.GetCurrentProcess();
+            var pipe = Wf.ProcessContextPipe();
+            var procparts = pipe.EmitPartitions(process, ts, dir);
+            var regions = pipe.EmitRegions(process, ts, dir);
+            var members = ApiMembers.create(HostDatasets.ToArray().SelectMany(x => x.Members));
+            var rebasing = Wf.Running();
+            var entries = Catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
+            Wf.Ran(rebasing);
+            Wf.Ran(flow);
+        }
+
+        void CheckExtracts(ReadOnlySpan<ResolvedPart> src)
+        {
+            var count = src.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(src,i);
+                var hosts = part.Hosts.View;
+                for(var j=0; j<hosts.Length; j++)
+                {
+                    ref readonly var host = ref skip(hosts,j);
+                    var methods = host.Methods.View;
+                    var flow = Wf.Running(string.Format("Extracting {0}", host.Host));
+                    for(var k=0; k<methods.Length; k++)
+                    {
+                        ref readonly var method = ref skip(methods,k);
+                        Buffer.Clear();
+                        var block = Extract(method, Buffer);
+                        counter++;
+                    }
+                    Wf.Ran(flow, methods.Length);
+                }
+
+            }
+        }
+        void RunWorkflow()
+        {
+            var parts = Wf.ApiCatalog.Parts;
+            var flow = Wf.Running(string.Format("Running extract workflow for {0}", parts.FormatList()));
             var count = parts.Length;
-            var resolved = @readonly(parts.Select(ResolvePart));
+            var resolved = parts.Map(Resolver.ResolvePart);
             var counter = 0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var part = ref skip(resolved,i);
                 counter += ExtractPart(part);
             }
-            Wf.Ran(flow, string.Format("Extracted {0} host routines from {1} parts", counter, selected.Count));
+            Wf.Ran(flow, Msg.RanExtractWorkflow.Format(counter, parts.Length));
+
+            EmitProcessContext();
+
+        }
+
+        void RunWorkflow(params PartId[] selected)
+        {
+            var flow = Wf.Running(string.Format("Exracting parts {0}", selected.Delimit(Chars.Comma)));
+            var parts = Wf.ApiCatalog.FindParts(selected);
+            var count = parts.Length;
+            var resolved = parts.Map(Resolver.ResolvePart);
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(resolved,i);
+                counter += ExtractPart(part);
+            }
+            Wf.Ran(flow, string.Format("Extracted {0} host routines from {1} parts", counter, selected.Length));
+
+            EmitProcessContext();
         }
 
         FS.FolderPath SegDir
             => Db.TableDir("segments");
+
+        FS.FolderPath BinDir
+            => Db.TableDir("image.bin");
 
         unsafe ByteSize Emit(in ProcessSegment src)
         {
@@ -96,17 +161,15 @@ namespace Z0
             return total;
         }
 
-        FS.FolderPath BinDir
-            => Db.TableDir("image.bin");
-
         void RunExtractor(ReadOnlySpan<PartId> src)
         {
             var s0 = LogSegments(0);
-            var resolved = ResolveParts(src);
-            var methods = LogResolutions(resolved);
+            var resolved = Resolver.ResolveParts(src);
+            var methods = Resolver.LogResolutions(resolved, SegDir);
             var regions = LogRegions(1);
             var s1 = LogSegments(1, regions);
-            var segments = LocateSegments(s1, methods);
+            var locator = Wf.ApiSegmentLocator();
+            var segments = locator.LocateSegments(s1, methods, SegDir);
             Wf.SegmentTraverser().Traverse(segments, BinDir);
         }
 
@@ -139,8 +202,7 @@ namespace Z0
             Receivers = receivers;
             if(dst != null)
             Paths = new ApiExtractPaths(dst.Value);
-            Run();
-            EmitContext();
+            RunWorkflow();
         }
     }
 }

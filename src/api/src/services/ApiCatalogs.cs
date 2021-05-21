@@ -11,7 +11,13 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static Sequential;
+
+    partial struct Msg
+    {
+        public static MsgPattern<FS.FileUri> LoadingApiCatalog => "Loading api catalog from {0}";
+
+        public static MsgPattern<Count,FS.FileUri> LoadedApiCatalog => "Loaded {0} catalog entries from {1}";
+    }
 
     [ApiHost]
     public class ApiCatalogs : AppService<ApiCatalogs>
@@ -47,24 +53,22 @@ namespace Z0
             return records;
         }
 
-        public Index<ApiCatalogEntry> Entries()
+        public Index<ApiCatalogEntry> LoadCatalog()
         {
-            var dir = Db.IndexDir<ApiCatalogEntry>();
-            var files = dir.Files(FS.Csv).OrderBy(f => f.Name);
-            var parser = Tables.parser<ApiCatalogEntry>(parse);
+            var dir = Db.CaptureContextRoot();
+            var files = dir.Files(FS.Csv).Where(f => f.FileName.StartsWith(ApiCatalogEntry.TableId)).OrderBy(f => f.Name);
             var rows = root.list<ApiCatalogEntry>();
             if(files.Length != 0)
             {
                 var src = files[files.Length - 1];
-                var flow = Wf.Running(string.Format("Loading api catalog from {0}", src.ToUri()));
+                var flow = Wf.Running(Msg.LoadingApiCatalog.Format(src));
 
                 using var reader = src.Reader();
-                var index = uint.MaxValue;
                 reader.ReadLine();
                 var line = reader.ReadLine();
                 while(line != null)
                 {
-                    var outcome = parser.ParseRow(line, out var row);
+                    var outcome = parse(line, out var row);
                     if(outcome)
                         rows.Add(row);
                     else
@@ -75,7 +79,7 @@ namespace Z0
                     line = reader.ReadLine();
                 }
 
-                Wf.Ran(flow, text.format("Loaded {0} api catalog entries from {1}", rows.Count, src.ToUri()));
+                Wf.Ran(flow, Msg.LoadedApiCatalog.Format(rows.Count, src));
             }
 
             return rows.ToArray();
@@ -103,7 +107,6 @@ namespace Z0
             Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.HostUri, members.Count));
             return result;
         }
-
 
         [Op]
         public static Index<ApiCatalogEntry> rebase(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
@@ -135,10 +138,16 @@ namespace Z0
             return (uint)count;
         }
 
-        public ApiMemberBlocks Correlate()
+        public ReadOnlySpan<ApiMemberCode> Correlate()
             => Correlate(Wf.ApiCatalog.PartCatalogs());
 
-        public ApiMemberBlocks Correlate(ReadOnlySpan<IApiPartCatalog> src)
+        public ReadOnlySpan<ApiMemberCode> Correlate(FS.FilePath dst)
+            => Correlate(Wf.ApiCatalog.PartCatalogs(), dst);
+
+        public ReadOnlySpan<ApiMemberCode> Correlate(ReadOnlySpan<IApiPartCatalog> src)
+            => Correlate(src,Db.IndexTable<ApiCorrelationEntry>());
+
+        public ReadOnlySpan<ApiMemberCode> Correlate(ReadOnlySpan<IApiPartCatalog> src, FS.FilePath path)
         {
             var flow = Wf.Running(Msg.CorrelatingParts.Format(src.Length));
             var hex = Wf.ApiHex();
@@ -166,7 +175,6 @@ namespace Z0
                 Wf.Ran(inner);
             }
 
-            var path = Db.IndexTable<ApiCorrelationEntry>();
             var emitting = Wf.EmittingTable<ApiCorrelationEntry>(path);
             var output = @readonly(records.OrderBy(x => x.RuntimeAddress).Array());
             Tables.emit(output, path);
@@ -190,7 +198,7 @@ namespace Z0
             if(count > 0)
             {
                 var view = @readonly(correlated);
-                var seq = Sequential.create(0, (ushort)(part));
+                var seq = Sequential.create(0, (byte)(part));
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var pair = ref skip(view,i);
@@ -229,7 +237,7 @@ namespace Z0
 
         static ref ApiCorrelationEntry fill(Seq16x2 seq, ApiMember member, ApiCodeBlock code, out ApiCorrelationEntry dst)
         {
-            dst.Sequence = seq;
+            dst.Key = seq;
             dst.CaptureAddress = code.BaseAddress;
             dst.RuntimeAddress = member.BaseAddress;
             dst.Id = code.OpUri;

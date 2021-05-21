@@ -210,6 +210,14 @@ namespace Z0
             return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? FS.Csv);
         }
 
+        FS.FilePath AppTablePath<T>(FS.FileExt? ext = null)
+            where T : struct, IRecord<T>
+        {
+            var id = TableId<T>();
+            var dir = AppTableDir<T>();
+            return dir + FS.file(id, ext ?? FS.Csv);
+        }
+
         FS.FilePath AppTablePath(Type t, string subject, FS.FileExt? ext = null)
         {
             var id = TableId(t);

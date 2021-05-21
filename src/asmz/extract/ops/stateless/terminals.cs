@@ -19,8 +19,8 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var extract = ref skip(src,i);
-                var term = terminal(extract);
-                if(term.IsNonEmpty)
+                var term = terminal(extract.Encoded.View);
+                if(term.TerminalFound)
                     seek(dst, j++) = block(extract, term);
             }
             return j;

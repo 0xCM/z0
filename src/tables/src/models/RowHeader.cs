@@ -46,6 +46,7 @@ namespace Z0
                 }
             }
         }
+
         public Index<HeaderCell> Cells {get;}
 
         public string Delimiter {get;}

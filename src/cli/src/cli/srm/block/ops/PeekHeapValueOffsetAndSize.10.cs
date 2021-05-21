@@ -15,7 +15,7 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public static bool create(byte* buffer, int length, out MemoryBlock dst)
             {
                 dst = default;

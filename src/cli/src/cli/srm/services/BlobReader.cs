@@ -21,7 +21,7 @@ namespace Z0
         [ApiComplete("srm.blobreader")]
         public unsafe struct BlobReader
         {
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public static BlobReader create(MemoryBlock src)
                 => new BlobReader(src);
 
@@ -49,7 +49,6 @@ namespace Z0
                 (byte)'T',
                 (byte)'>'
             };
-
 
             internal const int InvalidCompressedInteger = int.MaxValue;
 
@@ -163,7 +162,7 @@ namespace Z0
             /// <summary>
             /// Repositions the reader to the start of the underlying memory block.
             /// </summary>
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public void Reset()
             {
                 _currentPointer = _block.Pointer;
@@ -172,7 +171,7 @@ namespace Z0
             /// <summary>
             /// Repositions the reader forward by the number of bytes required to satisfy the given alignment.
             /// </summary>
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public bool Align(byte alignment)
             {
                 int remainder = this.Offset & (alignment - 1);
@@ -188,13 +187,14 @@ namespace Z0
                 return true;
             }
 
+            [MethodImpl(Inline)]
             internal MemoryBlock GetMemoryBlockAt(int offset, int length)
             {
-                CheckBounds(offset, length);
+                //CheckBounds(offset, length);
                 return new MemoryBlock(_currentPointer + offset, length);
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             bool CheckBounds(int offset, int byteCount)
             {
                 if (unchecked((ulong)(uint)offset + (uint)byteCount) > (ulong)(_endPointer - _currentPointer))
@@ -266,7 +266,6 @@ namespace Z0
             public byte ReadByte()
                 => *(byte*)GetCurrentPointerAndAdvance1();
 
-
             [MethodImpl(Inline)]
             public char ReadChar()
             {
@@ -297,7 +296,7 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             internal bool TryAlign(byte alignment)
             {
                 int remainder = Offset & (alignment - 1);
@@ -319,7 +318,7 @@ namespace Z0
                 return true;
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public int ReadInt32()
             {
                 unchecked
@@ -329,7 +328,7 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public uint ReadUInt32()
             {
                 unchecked
@@ -351,25 +350,25 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public ulong ReadUInt64()
                 => unchecked((ulong)ReadInt64());
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public float ReadSingle()
             {
                 int val = ReadInt32();
                 return *(float*)&val;
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public double ReadDouble()
             {
                 long val = ReadInt64();
                 return *(double*)&val;
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public Guid ReadGuid()
             {
                 const int size = 16;
@@ -400,7 +399,7 @@ namespace Z0
             /// - bytes 1..12: 96-bit unsigned integer in little endian encoding.
             /// </remarks>
             /// <exception cref="BadImageFormatException">The data at the current position was not a valid <see cref="decimal"/> number.</exception>
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public decimal ReadDecimal()
             {
                 byte* ptr = GetCurrentPointerAndAdvance(13);
@@ -420,11 +419,11 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public DateTime ReadDateTime()
                 => new DateTime(ReadInt64());
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public SignatureHeader ReadSignatureHeader()
                 => new SignatureHeader(ReadByte());
 
@@ -437,7 +436,7 @@ namespace Z0
             /// <remarks>
             /// Doesn't change the current position.
             /// </remarks>
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public int IndexOf(byte value)
             {
                 int start = Offset;
@@ -451,10 +450,10 @@ namespace Z0
             /// <param name="byteCount">The number of bytes to read.</param>
             /// <returns>The string.</returns>
             /// <exception cref="BadImageFormatException"><paramref name="byteCount"/> bytes not available.</exception>
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public string ReadUTF8(int byteCount)
             {
-                string s = _block.PeekUtf8(this.Offset, byteCount);
+                string s = _block.PeekUtf8(Offset, byteCount);
                 _currentPointer += byteCount;
                 return s;
             }
@@ -465,7 +464,7 @@ namespace Z0
             /// <param name="byteCount">The number of bytes to read.</param>
             /// <returns>The string.</returns>
             /// <exception cref="BadImageFormatException"><paramref name="byteCount"/> bytes not available.</exception>
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public string ReadUTF16(int byteCount)
             {
                 string s = _block.PeekUtf16(this.Offset, byteCount);
@@ -504,7 +503,7 @@ namespace Z0
                 return value;
             }
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             int ReadCompressedIntegerOrInvalid()
             {
                 int bytesRead;
@@ -519,7 +518,7 @@ namespace Z0
             /// </summary>
             /// <param name="value">The value of the compressed integer that was read.</param>
             /// <returns>true if the value was read successfully. false if the data at the current position was not a valid compressed integer.</returns>
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline)]
             public bool TryReadCompressedInteger(out int value)
             {
                 value = ReadCompressedIntegerOrInvalid();
@@ -532,6 +531,7 @@ namespace Z0
             /// </summary>
             /// <returns>The value of the compressed integer that was read.</returns>
             /// <exception cref="BadImageFormatException">The data at the current position was not a valid compressed integer.</exception>
+            [MethodImpl(Inline)]
             public int ReadCompressedInteger()
             {
                 int value;
@@ -588,6 +588,7 @@ namespace Z0
             /// </summary>
             /// <returns>The value of the compressed integer that was read.</returns>
             /// <exception cref="BadImageFormatException">The data at the current position was not a valid compressed integer.</exception>
+            [MethodImpl(Inline)]
             public int ReadCompressedSignedInteger()
             {
                 int value;
@@ -602,6 +603,7 @@ namespace Z0
             /// Reads type code encoded in a serialized custom attribute value.
             /// </summary>
             /// <returns><see cref="SerializationTypeCode.Invalid"/> if the encoding is invalid.</returns>
+            [MethodImpl(Inline)]
             public SerializationTypeCode ReadSerializationTypeCode()
             {
                 int value = ReadCompressedIntegerOrInvalid();
@@ -643,9 +645,7 @@ namespace Z0
             {
                 int length;
                 if (TryReadCompressedInteger(out length))
-                {
                     return ReadUTF8(length);
-                }
 
                 if (ReadByte() != 0xFF)
                 {
@@ -659,22 +659,19 @@ namespace Z0
             /// Reads a type handle encoded in a signature as TypeDefOrRefOrSpecEncoded (see ECMA-335 II.23.2.8).
             /// </summary>
             /// <returns>The handle or nil if the encoding is invalid.</returns>
+            [MethodImpl(Inline)]
             public EntityHandle ReadTypeHandle()
             {
                 uint value = (uint)ReadCompressedIntegerOrInvalid();
                 uint tokenType = s_corEncodeTokenArray[value & 0x3];
 
                 if (value == InvalidCompressedInteger || tokenType == 0)
-                {
                     return default(EntityHandle);
-                }
 
                 return Cli.handle(tokenType | (value >> 2));
             }
 
             private static readonly uint[] s_corEncodeTokenArray = new uint[] { TokenTypeIds.TypeDef, TokenTypeIds.TypeRef, TokenTypeIds.TypeSpec, 0 };
-
-
 
             /// <summary>
             /// Reads a #Blob heap handle encoded as a compressed integer.
@@ -682,6 +679,7 @@ namespace Z0
             /// <remarks>
             /// Blobs that contain references to other blobs are used in Portable PDB format, for example <see cref="Document.Name"/>.
             /// </remarks>
+            [MethodImpl(Inline)]
             public BlobHandle ReadBlobHandle()
                 => BlobHeap.HandleFromOffset(ReadCompressedInteger());
 

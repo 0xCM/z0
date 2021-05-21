@@ -27,6 +27,7 @@ namespace Z0
         public int CompareTo(ResolvedMethodInfo src)
             => EntryPoint.CompareTo(src.EntryPoint);
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{16,120,80};
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{16,120,80};
     }
 }

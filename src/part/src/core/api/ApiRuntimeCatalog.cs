@@ -202,6 +202,11 @@ namespace Z0
                         select h;
         }
 
+        public ReadOnlySpan<IPart> FindParts(params PartId[] parts)
+        {
+            var selected = root.hashset(parts);
+            return _Parts.Where(p => selected.Contains(p.Id));
+       }
 
         IPart[] IApiCatalog.Parts
             => _Parts;

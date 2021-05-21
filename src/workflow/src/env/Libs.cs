@@ -27,6 +27,5 @@ namespace Z0
 
         FS.FilePath AppDataFile(FS.FileName file)
             => AppLogDir() + file;
-
     }
 }

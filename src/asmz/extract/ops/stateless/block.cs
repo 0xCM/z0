@@ -15,7 +15,7 @@ namespace Z0
         [Op]
         public static MemoryBlock block(in ApiMemberCode src, ExtractTermInfo term)
         {
-            if(term.IsEmpty)
+            if(!term.TerminalFound)
                 return MemoryBlock.Empty;
 
             var kind = term.Kind;

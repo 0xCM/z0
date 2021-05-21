@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct ApiExtracts
     {
@@ -16,7 +16,7 @@ namespace Z0
         public static unsafe Index<ApiMemberExtract> extract(ReadOnlySpan<ApiMember> src, Span<byte> buffer)
         {
             var count = src.Length;
-            var dst = memory.alloc<ApiMemberExtract>(count);
+            var dst = alloc<ApiMemberExtract>(count);
             ref var target = ref first(dst);
             for(var i=0u; i<count; i++)
                 seek(target, i) = extract(skip(src, i), sys.clear(buffer));

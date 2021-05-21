@@ -14,6 +14,9 @@ namespace Z0
         FS.FolderPath EtlLogRoot()
             => LogRoot() + FS.folder(etl);
 
+        FS.FolderPath EtlTableRoot()
+            => EtlDir(tables);
+
         FS.FilePath EtlLog(string name)
             => EtlLogRoot() + FS.file(name, FS.Log);
 
@@ -22,9 +25,6 @@ namespace Z0
 
         FS.FilePath EtlFile(string subject, FS.FileName file)
             => EtlDir(subject) + file;
-
-        FS.FolderPath EtlTableRoot()
-            => EtlDir(tables);
 
         FS.FilePath EtlTable<T>(string id)
             where T : struct, IRecord<T>

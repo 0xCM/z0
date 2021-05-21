@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static memory;
+    using static core;
 
     partial class ApiExtractor
     {
@@ -16,9 +16,7 @@ namespace Z0
             var count = src.Length;
             var dst = root.list<ApiHostDataset>();
             for(var i=0; i<count; i++)
-            {
                 counter += ExtractCatalog(skip(src,i));
-            }
             return counter;
         }
     }

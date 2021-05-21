@@ -20,6 +20,8 @@ namespace Z0
 
         ReadOnlySpan<Assembly> FindComponents(params PartId[] parts);
 
+        ReadOnlySpan<IPart> FindParts(params PartId[] parts);
+
         IPart[] Parts {get;}
 
         PartId[] PartIdentities {get;}

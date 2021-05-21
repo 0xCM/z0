@@ -16,10 +16,6 @@ namespace Z0
     [ApiHost]
     public sealed class Roslyn : AppService<Roslyn>
     {
-        // [Op]
-        // public Compilation<CSharpCompilation> Compilation(MetadataReference src, string name)
-        //     => CSharpCompilation.Create(name, references: new[]{src});
-
         [Op]
         public Compilation<CSharpCompilation> Compilation(string name, params MetadataReference[] refs)
             => CSharpCompilation.Create(name, references: refs);

@@ -19,7 +19,7 @@ namespace Z0
             [Op]
             public string PeekUtf16(int offset, int byteCount)
             {
-                Available(offset, byteCount);
+                //Available(offset, byteCount);
 
                 byte* ptr = Pointer + offset;
                 if (BitConverter.IsLittleEndian)

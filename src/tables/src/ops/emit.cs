@@ -21,10 +21,9 @@ namespace Z0
             using var writer = dst.Writer();
             writer.WriteLine(EnumDatasets.header<F>());
             var buffer = text.buffer();
-
             var dataset = EnumDatasets.create<E,T>();
             for(var i=0; i<src.Length; i++)
-                writer.WriteLine(EnumDatasets.format(src[i],buffer));
+                writer.WriteLine(EnumDatasets.format(skip(src,i),buffer));
         }
 
         public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, RowFormatSpec spec)

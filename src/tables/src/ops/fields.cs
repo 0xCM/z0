@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
-    using static core;
 
     partial struct Tables
     {
@@ -31,37 +30,6 @@ namespace Z0
         /// <param name="src">The record type</typeparam>
         [Op]
         public static RecordFields fields(Type src)
-        {
-            var fields = src.DeclaredPublicInstanceFields();
-            var count = fields.Length;
-            var dst = sys.alloc<RecordField>(count);
-            map(fields,dst);
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        static ref RecordField map(FieldInfo src, ushort index, ref RecordField dst)
-        {
-            dst.FieldIndex = index;
-            dst.Definition = src;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        static ref RecordField<T> map<T>(FieldInfo src, ushort index, ref RecordField<T> dst)
-            where T : struct, IRecord<T>
-        {
-            dst.FieldIndex = index;
-            dst.Definition = src;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        static void map(ReadOnlySpan<FieldInfo> src, Span<RecordField> dst)
-        {
-            var count = (ushort)src.Length;
-            for(var i=z16; i<count; i++)
-                map(skip(src, i), i, ref seek(dst, i));
-        }
+            => RecordFields.discover(src);
     }
 }

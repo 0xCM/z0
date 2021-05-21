@@ -5,9 +5,11 @@
 namespace Z0.Tools
 {
     using System;
+    using System.Runtime.InteropServices;
 
     using Z0.Asm;
-    [Record(TableId)]
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct CultSummaryRecord : IRecord<CultSummaryRecord>
     {
         public const string TableId = "cult.summary";
@@ -26,6 +28,7 @@ namespace Z0.Tools
 
         public string Rcp;
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{12,46,46,46,6,6};
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{12,46,46,46,6,6};
     }
 }

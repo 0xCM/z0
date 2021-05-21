@@ -107,7 +107,7 @@ namespace Z0
         void EmitRebase(ApiMembers members, Timestamp ts)
         {
             var rebasing = Wf.Running();
-            var dst = Db.CaptureContextRoot() + FS.file(string.Format("{0}.{1}", Tables.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);
+            var dst = Db.ContextTable<ApiCatalogEntry>(ts);
             var entries = Wf.ApiCatalogs().RebaseMembers(members, dst);
             Wf.Ran(rebasing);
         }

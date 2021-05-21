@@ -1,9 +1,15 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+    using static Typed;
 
     public class ApiExtractWorkflow : AppService<ApiExtractWorkflow>
     {
@@ -55,8 +61,9 @@ namespace Z0
         public void Run()
         {
             var flow = Wf.Running();
-            Wf.ApiExtractor().Run(Receivers);
+            Wf.ApiExtractor().Run(Receivers, Db.AppLogDir() + FS.folder("extract-wf"));
             Wf.Ran(flow, string.Format("Decoded:{0}", MemberDecodedCount));
         }
+
     }
 }

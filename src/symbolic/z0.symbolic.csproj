@@ -8,8 +8,16 @@
     <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(SFuncs)" />
-    <!-- <ProjectReference Include="$(Cli)" /> -->
   </ItemGroup>
 
+
+  <ItemGroup>
+    <PackageReference Include="OmniSharp.Abstractions" Version="1.37.6" />
+    <PackageReference Include="OmniSharp.Shared" Version="1.37.6" />
+    <PackageReference Include="OmniSharp.Roslyn" Version="1.37.6" />
+    <PackageReference Include="OmniSharp.Roslyn.CSharp" Version="1.37.6" />
+    <PackageReference Include="OmniSharp.MSBuild" Version="1.37.6" />
+    <PackageReference Include="OmniSharp.Host" Version="1.37.6" />
+  </ItemGroup>
 
 </Project>

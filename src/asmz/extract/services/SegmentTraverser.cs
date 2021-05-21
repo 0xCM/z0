@@ -41,6 +41,7 @@ namespace Z0
 
             return total;
         }
+
         public ByteSize Traverse(ReadOnlySpan<ProcessMemoryRegion> src, FS.FolderPath outdir)
         {
             var count = src.Length;

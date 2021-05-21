@@ -27,13 +27,19 @@ namespace Z0
             if(count == 0)
                 return default;
 
-            var counter =0u;
             var hosts = src.View;
+            var resolved = span<ResolvedHost>(count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
-                var resolved = ResolveHost(host);
-                var dataset = ExtractHostDatast(resolved);
+                seek(resolved,i) = Resolver.ResolveHost(host);
+            }
+
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var host = ref skip(resolved, i);
+                var dataset = ExtractHostDatast(host);
                 HostDatasets.Add(dataset);
                 counter += dataset.HostBlockCount;
             }

@@ -9,12 +9,11 @@ namespace Z0.Tools
 
     using Z0.Asm;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static Asm.AsmCore;
 
-    [DataProcessor(Toolsets.asm.cult)]
-    public class CultProcessor : AppService<CultProcessor>, IDataProcessor<FS.FilePath,uint>
+    public class CultProcessor : AppService<CultProcessor>
     {
         public uint BatchSize => Pow2.T16;
 
@@ -348,9 +347,7 @@ namespace Z0.Tools
             }
         }
 
-
-
-        string[] NonLabels = array("In", " ", "VendorName", "ModelId", "FamilyId", "SteppingId", "Codename", "CpuDetect");
+        string[] NonLabels = sys.array("In", " ", "VendorName", "ModelId", "FamilyId", "SteppingId", "Codename", "CpuDetect");
 
         const byte HexBufferLength = 128;
 

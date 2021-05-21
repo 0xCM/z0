@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct TableId : ITableId
     {
@@ -39,6 +39,18 @@ namespace Z0
         {
             RecordType = shape;
             Identifier = name;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => RecordType == null | Identifier.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
         }
 
         [MethodImpl(Inline)]

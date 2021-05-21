@@ -47,6 +47,8 @@ namespace Z0
 
         public const string refdata = nameof(refdata);
 
+        public const string reports = nameof(reports);
+
         public const string events = nameof(events);
 
         public const string etl = nameof(etl);

@@ -9,17 +9,18 @@ namespace Z0
 
     using static core;
 
-    partial class ApiExtractor
+    partial struct CodeBlocks
     {
-        public ReadOnlySpan<ApiMemberExtract> ExtractResolvedParts(ReadOnlySpan<ResolvedPart> src)
+        public static ReadOnlySpan<ApiMemberCode> filter(ReadOnlySpan<ApiMemberCode> src, ApiClassKind kind)
         {
             var count = src.Length;
-            var counter = 0u;
-            var flow = Wf.Running(string.Format("Extracting {0} parts", count));
-            var dst = root.list<ApiMemberExtract>();
+            var dst = root.list<ApiMemberCode>();
             for(var i=0; i<count; i++)
-                counter += ExtractHosts(skip(src,i).Hosts, dst);
-            Wf.Ran(flow, string.Format("Extracted {0} methods from {1} parts", counter, count));
+            {
+                ref readonly var code = ref skip(src,i);
+                if(code.KindId == kind)
+                    dst.Add(code);
+            }
             return dst.ViewDeposited();
         }
     }

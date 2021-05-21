@@ -13,15 +13,6 @@ namespace Z0.Parts
     {
         public readonly struct Imports
         {
-            public Assembly MsBuildFramework
-                => typeof(Microsoft.Build.Framework.BuildEngineResult).Assembly;
-
-            public Assembly MsBuildTasks
-                => typeof(Microsoft.Build.Tasks.AssignCulture).Assembly;
-
-            public Assembly MsBuildUtilities
-                => typeof(Microsoft.Build.Utilities.MuxLogger).Assembly;
-
             public Assembly Dia2Lib
                 => typeof(Dia2Lib._FILETIME).Assembly;
 

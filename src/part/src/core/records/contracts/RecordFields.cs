@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static memory;
-
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct RecordFields : IIndex<RecordField>
     {
@@ -29,28 +28,15 @@ namespace Z0
         [Op]
         public static RecordFields discover(Type src)
         {
-            var fields = src.DeclaredPublicInstanceFields();
+            var fields = @readonly(src.DeclaredPublicInstanceFields());
             var count = fields.Length;
-            var dst = sys.alloc<RecordField>(count);
-            map(fields,dst);
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        static ref RecordField map(FieldInfo src, ushort index, ref RecordField dst)
-        {
-            dst.FieldIndex = index;
-            dst.Definition = src;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        static void map(ReadOnlySpan<FieldInfo> src, Span<RecordField> dst)
-        {
-            var count = (ushort)src.Length;
+            var buffer = sys.alloc<RecordField>(count);
+            ref var dst = ref first(buffer);
             for(var i=z16; i<count; i++)
-                map(skip(src, i), i, ref seek(dst, i));
+                seek(dst, i) = new RecordField(i, skip(fields, i));
+            return buffer;
         }
+
         readonly Index<RecordField> Data;
 
         [MethodImpl(Inline)]

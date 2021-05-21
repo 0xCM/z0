@@ -54,13 +54,12 @@ namespace Z0.Asm
             if(Wf.ApiCatalog.FindComponent(id, out var assembly))
             {
                 var name = string.Format("z0.{0}.compilation", id.Format());
-                var metadata = Clr.metaref(assembly);
+                var metadata = Cli.metaref(assembly);
                 var comp = tool.Compilation(name, metadata);
                 var symbol = comp.GetAssemblySymbol(metadata);
                 var gns = symbol.GlobalNamespace;
                 var types = gns.GetTypes();
                 root.iter(types, show);
-
 
                 //Wf.Row(symbol.Name);
             }
@@ -512,49 +511,6 @@ namespace Z0.Asm
             var @case = tool.DefineCase(id, dir);
             return tool.CreateScript(@case, dst);
         }
-
-        void CheckHeap()
-        {
-            const string segments = "A" + "BB" + "CCC" + "DDDD";
-            var entries = array<uint>(0,   1,    3,     6);
-            var heap = Heaps.cover(text.span(segments), entries);
-            for(var i=0u; i<entries.Length; i++)
-            {
-                var seg = text.format(heap.Segment(i));
-                Wf.Row(seg);
-
-            }
-        }
-
-    //    public unsafe void ReadMetadataHeader(Assembly src)
-    //     {
-    //         var metadata = Clr.metadata(src);
-    //         var @base = metadata.BaseAddress;
-    //         var header = first(memory.cover<MetadataHeader>(@base,1));
-    //         Wf.Row(header.IsValid);
-    //         Wf.Row(header.Magic);
-    //         Wf.Row(header.MajorVersion);
-    //         Wf.Row(header.MinorVersion);
-    //         Wf.Row(header.VersionSize);
-
-    //         utf8p ver = @base + size<MetadataHeader>();
-    //         Wf.Row(ver.Size);
-    //         Wf.Row(ver);
-
-    //         var next = MemoryAddress.Zero;
-    //         next = @base + size<MetadataHeader>() + header.VersionSize;
-
-    //         var flags = *((ushort*)next);
-
-    //         Wf.Row(flags);
-
-    //         next += 2;
-
-    //         var n = *((ushort*)next);
-
-    //         Wf.Row(n);
-
-    //     }
 
         public void CheckClrKeys()
         {
@@ -1242,7 +1198,7 @@ namespace Z0.Asm
         void FilterApiBlocks()
         {
             var blocks = Wf.ApiCatalogs().Correlate();
-            var f1 = blocks.Filter(ApiClassKind.And);
+            var f1 = CodeBlocks.filter(blocks,ApiClassKind.And);
             root.iter(f1,f => Wf.Row(f.Uri));
         }
 

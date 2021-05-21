@@ -14,6 +14,16 @@ namespace Z0
 
     using api = SpanSorter;
 
+    partial class XTend
+    {
+        public static Span<T> Sort<T>(this Span<T> src)
+            where T : IComparable<T>
+        {
+            SpanSorter.sort(src);
+            return src;
+        }
+    }
+
     public interface ISpanSorter<T>
         where T : IComparable<T>
     {
@@ -45,7 +55,6 @@ namespace Z0
                 seek(src,i) = skip(src,i - 1);
             seek(src,i) = item;
         }
-
     }
 
     public readonly struct SpanSorter<T> : ISpanSorter<T>

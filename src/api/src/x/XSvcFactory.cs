@@ -73,6 +73,8 @@ namespace Z0
         public static MemoryEmitter MemoryEmitter(this IWfRuntime wf)
             => Svc.MemoryEmitter.create(wf);
 
-
+        [Op]
+        public static ApiResolver ApiResolver(this IWfRuntime wf)
+            => Svc.ApiResolver.create(wf);
     }
 }

@@ -17,20 +17,18 @@ namespace Z0
         {
 
             // #String, #Blob heaps
-            [Op]
+            [MethodImpl(Inline), Op]
             public int PeekHeapReference(int offset, bool smallRefSize)
             {
                 if (smallRefSize)
-                {
                     return PeekUInt16(offset);
-                }
 
-                uint value = PeekUInt32(offset);
+                var value = PeekUInt32(offset);
 
-                if (!HeapHandleType.IsValidHeapOffset(value))
-                {
+                //if (!HeapHandleType.IsValidHeapOffset(value))
+                //{
                     //Throw.ReferenceOverflow();
-                }
+                //}
 
                 return (int)value;
             }

@@ -10,14 +10,82 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
+    [ApiHost]
     public class ApiResolver : AppService<ApiResolver>
     {
         HashSet<string> Exclusions;
 
         IMultiDiviner Identity {get;}
+
+        [Op]
+        public static uint MethodCount(ReadOnlySpan<ResolvedPart> src)
+        {
+            var counter = 0u;
+            var k0 = (uint)src.Length;
+            for(var i0=0u; i0<k0; i0++)
+            {
+                ref readonly var part = ref skip(src,i0);
+                var hosts = part.Hosts.View;
+                var k1 = (uint)hosts.Length;
+                for(var i1=0u; i1<k1; i1++)
+                    counter += skip(hosts, i1).Methods.Count;
+            }
+            return counter;
+        }
+
+        [Op]
+        public static uint methods(ReadOnlySpan<ResolvedPart> src, Span<ResolvedMethod> dst)
+        {
+            var k0 = src.Length;
+            var counter = 0u;
+            for(var i0=0; i0<k0; i0++)
+            {
+                ref readonly var part = ref skip(src,i0);
+                var hosts = part.Hosts.View;
+                var k1 = (uint)hosts.Length;
+                for(var i1=0u; i1<k1; i1++)
+                {
+                    var methods = skip(hosts,i1).Methods.View;
+                    var k2 = methods.Length;
+                    for(var i2=0; i2<k2; i2++)
+                        seek(dst, counter++) = skip(methods,i2);
+                }
+            }
+            return counter;
+        }
+
+        public static uint describe(ReadOnlySpan<ResolvedMethod> src, Span<ResolvedMethodInfo> dst)
+        {
+            var count = (uint)src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var method = ref skip(src,i);
+                ref var info = ref seek(dst,i);
+                info.EntryPoint = method.EntryPoint;
+                info.Uri = method.Uri.Format();
+                info.DisplaySig = method.Method.DisplaySig().Format();
+            }
+            dst.Sort();
+            return count;
+        }
+
+        public static ReadOnlySpan<ResolvedMethod> methods(ReadOnlySpan<ResolvedPart> src)
+        {
+            var dst = root.list<ResolvedMethod>();
+            for(var i=0; i<src.Length; i++)
+            {
+                var hosts = skip(src,i).Hosts.View;
+                for(var j=0; j<hosts.Length; j++)
+                {
+                    var methods = skip(hosts,j).Methods.View;
+                    root.iter(methods, m => dst.Add(m));
+                }
+            }
+            return dst.ViewDeposited();
+        }
 
         public ApiResolver()
         {
@@ -77,13 +145,6 @@ namespace Z0
             return counter;
         }
 
-        public Index<ResolvedPart> ResolveCatalog(IApiCatalog src)
-        {
-            var dst = root.list<ResolvedPart>();
-            ResolveCatalog(src,dst);
-            return dst.ToArray();
-        }
-
         public uint ResolveCatalog(IApiCatalog src, List<ResolvedPart> dst)
         {
             var counter = 0u;
@@ -122,6 +183,40 @@ namespace Z0
 
         public ResolvedPart ResolvePart(IPart src)
             => ResolvePart(src, out var counter);
+
+        public ReadOnlySpan<ResolvedPart> ResolveCatalog(IApiCatalog src)
+        {
+            var dst = root.datalist<ResolvedPart>();
+            var parts = @readonly(src.Parts);
+            var count = parts.Length;
+            for(var i=0; i<count; i++)
+                dst.Add(ResolvePart(skip(parts,i)));
+            return dst.Close();
+        }
+
+        public ReadOnlySpan<ResolvedMethodInfo> LogResolutions(ReadOnlySpan<ResolvedPart> src, FS.FolderPath dir)
+        {
+            var _methods = methods(src);
+            var count = _methods.Length;
+            Wf.Status(string.Format("{0} Resolved {1} methods from {2} parts", Worker(), count, src.Length));
+            var buffer = span<ResolvedMethodInfo>(count);
+            describe(_methods, buffer);
+            Wf.Status(string.Format("{0} Collected descriptions for {1} method resolutions", Worker(), count));
+            TableEmit(buffer, ResolvedMethodInfo.RenderWidths, Db.Table<ResolvedMethodInfo>(dir));
+            return buffer;
+        }
+
+        public ReadOnlySpan<ResolvedPart> ResolveParts(ReadOnlySpan<PartId> src)
+        {
+            var flow = Wf.Running(string.Format("{0} Resolving parts [{1}]", Worker(), src.Delimit(Chars.Comma).Format()));
+            var count = src.Length;
+            var buffer = alloc<ResolvedPart>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                seek(dst, i) = ResolvePart(skip(src, i));
+            Wf.Ran(flow);
+            return buffer;
+        }
 
         public ResolvedPart ResolvePart(IPart src, out uint counter)
         {

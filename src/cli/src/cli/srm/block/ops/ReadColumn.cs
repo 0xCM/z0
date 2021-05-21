@@ -15,6 +15,7 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
+            [MethodImpl(Inline), Op]
             public void ReadColumn(uint[] result, int rowSize, int referenceOffset, bool isReferenceSmall)
             {
                 int offset = referenceOffset;
@@ -23,14 +24,11 @@ namespace Z0
                 int i = 0;
                 while (offset < totalSize)
                 {
-                    result[i] = PeekReferenceUnchecked(offset, isReferenceSmall);
+                    seek(result,i) = PeekReferenceUnchecked(offset, isReferenceSmall);
                     offset += rowSize;
                     i++;
                 }
-
-                //Debug.Assert(i == result.Length);
             }
-
         }
     }
 }

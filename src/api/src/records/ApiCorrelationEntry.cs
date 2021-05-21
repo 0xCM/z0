@@ -6,14 +6,12 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    using static Sequential;
-
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ApiCorrelationEntry : IRecord<ApiCorrelationEntry>
     {
         public const string TableId = "api.correlations";
 
-        public Seq16x2 Sequence;
+        public Seq16x2 Key;
 
         public MemoryAddress CaptureAddress;
 

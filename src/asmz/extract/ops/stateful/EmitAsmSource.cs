@@ -8,7 +8,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static memory;
+    using static core;
 
     partial class ApiExtractor
     {

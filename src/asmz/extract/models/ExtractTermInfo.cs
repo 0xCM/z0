@@ -25,16 +25,10 @@ namespace Z0
             Modifier = modifier;
         }
 
-        public bool IsEmpty
+        public bool TerminalFound
         {
             [MethodImpl(Inline)]
-            get => Kind == ExtractTermKind.None;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Kind != ExtractTermKind.None && Offset > 0;
+            get => (sbyte)Kind >= 0;
         }
 
         public static ExtractTermInfo Empty

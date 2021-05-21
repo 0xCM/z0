@@ -16,8 +16,8 @@ namespace Z0
         public static ApiMemberExtract trim(ApiMemberExtract src)
         {
             var block = src.Block;
-            var term = terminal(block);
-            if(term.IsNonEmpty)
+            var term = terminal(block.View);
+            if(term.TerminalFound)
             {
                 var length = term.Offset + term.Modifier;
                 var data = slice(block.View, 0, length).ToArray();
@@ -28,54 +28,53 @@ namespace Z0
         }
 
         [Op]
-        public static ExtractTermInfo terminal(in BinaryCode src)
+        public static ExtractTermInfo terminal(ReadOnlySpan<byte> src)
         {
             const byte MaxSeg = 6;
 
-            var data = src.View;
-            var size = data.Length;
+            var size = src.Length;
             var found = NotFound;
             var max = size + MaxSeg - 1;
             var kind = ExtractTermKind.None;
             var modifier = z8i;
             for(var offset=0; offset<max; offset++)
             {
-                if(slice(data, offset, 3).SequenceEqual(Term3A))
+                if(slice(src, offset, 3).SequenceEqual(Term3A))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term3A;
                     modifier = Term3AModifier;
                     break;
                 }
-                else if(slice(data, offset, 6).SequenceEqual(Term6A))
+                else if(slice(src, offset, 6).SequenceEqual(Term6A))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term6A;
                     modifier = Term6AModifier;
                     break;
                 }
-                else if(slice(data, offset, 5).SequenceEqual(Term5A))
+                else if(slice(src, offset, 5).SequenceEqual(Term5A))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term5A;
                     modifier = Term5AModifier;
                     break;
                 }
-                else if(slice(data, offset, 4).SequenceEqual(Term4A))
+                else if(slice(src, offset, 4).SequenceEqual(Term4A))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term4A;
                     modifier = Term4AModifier;
                     break;
                 }
-                else if(slice(data, offset, 3).SequenceEqual(Term3B))
+                else if(slice(src, offset, 3).SequenceEqual(Term3B))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term3B;
                     modifier = Term3BModifier;
                     break;
                 }
-                else if(slice(data, offset, 4).SequenceEqual(Term4B))
+                else if(slice(src, offset, 4).SequenceEqual(Term4B))
                 {
                     found = offset;
                     kind = ExtractTermKind.Term4B;

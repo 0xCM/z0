@@ -57,10 +57,10 @@ namespace Z0
                 var apidata = Wf.ApiCatalogs();
 
                 if(options.CorrelateMembers)
-                    apidata.Correlate();
+                    Emitted(apidata.Correlate());
 
                 if(options.EmitApiClasses)
-                    apidata.EmitApiClasses();
+                    Emitted(apidata.EmitApiClasses());
 
                 if(options.EmitAsmCatalogs)
                 {
@@ -80,7 +80,7 @@ namespace Z0
                     Emitted(Wf.ApiBitMasks().Emit());
 
                 if(options.CollectApiDocs)
-                    Wf.ApiComments().Collect();
+                    Emitted(Wf.ApiComments().Collect());
 
                 var assets = Wf.ApiAssets();
 
@@ -108,6 +108,12 @@ namespace Z0
         {
 
         }
+
+        void Emitted<T>(in T src)
+        {
+
+        }
+
 
         Index<T> Emitted<T>(Index<T> src)
         {

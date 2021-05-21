@@ -63,9 +63,24 @@ namespace Z0
         public static SymbolicType join(Type src, TypeSymbol sym)
             => (src,sym);
 
+        public static MetadataReference metaref(Assembly src)
+        {
+            var path = FS.path(src.Location);
+            var xml = path.ChangeExtension(FS.Xml);
+            var props = default(MetadataReferenceProperties);
+            if(xml.Exists)
+            {
+                var doc = XmlDocProvider.create(xml);
+                var reference = MetadataReference.CreateFromFile(path.Name, props, doc);
+                return reference;
+            }
+            else
+                return MetadataReference.CreateFromFile(path.Name, props);
+        }
+
         public CodeSymbolSet Symbolize(Assembly src)
         {
-            var metadata = Clr.metaref(src);
+            var metadata = metaref(src);
             var dst = CodeSymbols.set(metadata);
             var name = string.Format("{0}.compilation",src.GetSimpleName());
             var comp = Roslyn.Compilation(name, metadata);

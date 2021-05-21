@@ -5,7 +5,6 @@
 namespace Z0
 {
     using static EnvFolders;
-    using static Part;
 
     partial interface IEnvPaths
     {
@@ -35,5 +34,9 @@ namespace Z0
 
         FS.FilePath AsmCapturePath(FS.FolderPath root, ApiHostUri host)
             => root + PartFolder(host.Part) +  ApiFiles.filename(host, FS.Asm);
+
+        FS.FilePath ContextTable<T>(Timestamp ts)
+            where T : struct, IRecord<T>
+                => CaptureContextRoot() + FS.file(string.Format("{0}.{1}", Tables.identify<T>(), ts.Format()), FS.Csv);
     }
 }

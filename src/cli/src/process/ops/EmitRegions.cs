@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Diagnostics;
 
-    using static ProcessMemory;
-
     partial class ProcessContextPipe
     {
         public Index<ProcessMemoryRegion> EmitRegions(Process process, FS.FilePath dst)
@@ -22,6 +20,14 @@ namespace Z0
         {
             var regions = ImageMemory.regions(process);
             var dst = Paths.MemoryRegionPath(process,ts);
+            EmitRegions(regions,dst);
+            return regions;
+        }
+
+        public Index<ProcessMemoryRegion> EmitRegions(Process process, Timestamp ts, FS.FolderPath dir)
+        {
+            var regions = ImageMemory.regions(process);
+            var dst = Paths.MemoryRegionPath(process, ts, dir);
             EmitRegions(regions,dst);
             return regions;
         }
@@ -40,7 +46,5 @@ namespace Z0
             Wf.EmittedTable(flow,count);
             return count;
         }
-
-
     }
 }

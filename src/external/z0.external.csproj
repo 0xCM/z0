@@ -10,8 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="Iced" Version="1.4.0" />
-    <PackageReference Include="Microsoft.Build.Runtime" Version="16.9.0" />
-    <PackageReference Include="MSBuild.StructuredLogger" Version="2.1.404" />
 
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.9.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Scripting" Version="3.9.0" />
@@ -44,12 +42,6 @@
     <PackageReference Include="NuGet.ProjectModel" Version="5.9.1" />
     <PackageReference Include="NuGet.Versioning" Version="5.9.1" />
 
-    <PackageReference Include="OmniSharp.Abstractions" Version="1.37.6" />
-    <PackageReference Include="OmniSharp.Shared" Version="1.37.6" />
-    <PackageReference Include="OmniSharp.Roslyn" Version="1.37.6" />
-    <PackageReference Include="OmniSharp.Roslyn.CSharp" Version="1.37.6" />
-    <PackageReference Include="OmniSharp.MSBuild" Version="1.37.6" />
-    <PackageReference Include="OmniSharp.Host" Version="1.37.6" />
 
     <PackageReference Include="System.IO.Pipes" Version="4.3.0" />
     <PackageReference Include="System.IO.Pipes.AccessControl" Version="4.5.1" />

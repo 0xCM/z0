@@ -9,7 +9,6 @@ namespace Z0
     using System.Diagnostics;
 
     using static Part;
-    using static ProcessMemory;
 
     public readonly struct ProcessContextPaths
     {
@@ -37,6 +36,9 @@ namespace Z0
         public FS.FilePath ProcessPartitionPath(Process process, Timestamp ts)
             => Root + ProcessPartitionFile(process,ts);
 
+        public FS.FilePath ProcessPartitionPath(FS.FolderPath dir, Process process, Timestamp ts)
+            => dir + ProcessPartitionFile(process,ts);
+
         public FS.FileName MemoryRegionHashFile(string process, Timestamp ts, Identifier subject)
             => FS.file(string.Format("memory.hash.detail.{0}.{1}", process, ts.Format()), FS.Csv);
 
@@ -46,11 +48,13 @@ namespace Z0
         public FS.FilePath MemoryRegionPath(Process process, Timestamp ts)
             => Root + MemoryRegionFile(process, ts);
 
+        public FS.FilePath MemoryRegionPath(Process process, Timestamp ts, FS.FolderPath dir)
+            => dir + MemoryRegionFile(process, ts);
+
         public FS.FilePath MemoryRegionHashPath(string process, Timestamp ts, Identifier subject)
             => Root + MemoryRegionHashFile(process, ts, subject);
 
         public FS.Files MemoryRegionPaths()
             => Root.AllFiles.Where(f => f.FileName.Contains(ProcessMemoryRegion.TableId)).Storage.Sort();
-
     }
 }

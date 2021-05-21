@@ -56,5 +56,11 @@ namespace Z0
         public static MsgPattern<FS.FileUri> LoadingRespackAccessors => "Loading respack accessors from {0}";
 
         public static MsgPattern<Count,FS.FileUri> LoadedRespackAccessors => "Loaded {0} respack accessors from {1}";
+
+        public static MsgPattern<Count> LocatingSegments => "Locating segments for {0} methods";
+
+        public static MsgPattern<Count,Count> LocatedSegments => "Computed {0} segment entries for {0} methods";
+
+        public static MsgPattern<Address16> SegSelectorNotFound => "Selector {0} not found";
     }
 }

@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     public sealed partial class CliPipe : AppService<CliPipe>
     {
         public void EmitMetadaSets(WorkflowOptions options)
@@ -25,7 +27,7 @@ namespace Z0
 
             if(options.EmitCliStrings)
             {
-                EmitUserStringInfo();
+                Emitted(EmitUserStringInfo());
                 EmitSystemStringInfo();
             }
 
@@ -37,6 +39,11 @@ namespace Z0
 
             if(options.EmitImageContent)
                 EmitImageContent();
+        }
+
+        void Emitted<T>(ReadOnlySpan<T> src)
+        {
+
         }
     }
 }

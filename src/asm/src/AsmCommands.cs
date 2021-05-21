@@ -35,11 +35,6 @@ namespace Z0.Asm
                 Show(skip(forms,i), writer);
         }
 
-        public void ShowEncodingKindNames()
-            => root.iter(Catalog.EncodingKindNames(), Wf.Row);
-
-        public void ExportStokeImports()
-            => Catalog.ExportImport();
 
         public void CheckDigitParser()
         {
@@ -56,10 +51,5 @@ namespace Z0.Asm
             }
         }
 
-        public void CorrelateApiCode()
-        {
-            var catalogs = Wf.ApiCatalog.PartCatalogs();
-            var blocks = Wf.ApiCatalogs().Correlate(catalogs);
-        }
     }
 }

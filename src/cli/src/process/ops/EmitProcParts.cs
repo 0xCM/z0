@@ -7,24 +7,28 @@ namespace Z0
     using System;
     using System.Diagnostics;
 
-    using static memory;
-    using static Part;
-    using static ProcessMemory;
-
     partial class ProcessContextPipe
     {
         public Index<ProcessPartition> EmitPartitions(Process process, FS.FilePath dst)
         {
             var summaries = ImageMemory.partitions(ImageMemory.locate(process));
-            EmitPartitions(summaries,dst);
+            EmitPartitions(summaries, dst);
             return summaries;
         }
 
         public Index<ProcessPartition> EmitPartitions(Process process, Timestamp ts)
         {
             var summaries = ImageMemory.partitions(ImageMemory.locate(process));
-            var dst = Paths.ProcessPartitionPath(process,ts);
+            var dst = Paths.ProcessPartitionPath(process, ts);
             EmitPartitions(summaries,dst);
+            return summaries;
+        }
+
+        public Index<ProcessPartition> EmitPartitions(Process process, Timestamp ts, FS.FolderPath dir)
+        {
+            var summaries = ImageMemory.partitions(ImageMemory.locate(process));
+            var dst = Paths.ProcessPartitionPath(dir, process, ts);
+            EmitPartitions(summaries, dst);
             return summaries;
         }
 

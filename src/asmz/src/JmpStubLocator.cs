@@ -9,24 +9,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    [Record(TableId)]
-    public struct JmpStub : IRecord<JmpStub>
-    {
-        public const string TableId = "jmp.stub";
-
-        public OpIdentity Method;
-
-        public MemoryAddress StubAddress;
-
-        public MemoryAddress TargetAddress;
-
-        public AsmHexCode StubCode;
-
-        public Address32 Displacement;
-
-        public Address32 Offset;
-    }
-
     public class JmpStubLocator : AppService<JmpStubLocator>
     {
         unsafe ReadOnlySpan<JmpStub> JmpStubs()

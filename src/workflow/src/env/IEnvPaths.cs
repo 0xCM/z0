@@ -13,12 +13,6 @@ namespace Z0
     {
         Env Env {get;}
 
-        FS.FolderPath SettingsRoot()
-            => DbRoot() + FS.folder(settings);
-
-        FS.FolderPath ControlScripts()
-            => ControlRoot() + FS.folder(".cmd");
-
         FS.FilePath ControlScript(FS.FileName src)
             => ControlScripts() + src;
 
@@ -45,24 +39,6 @@ namespace Z0
 
         FS.FilePath SourceFile(PartId id, FS.FileName name)
             => PartDir(id) + FS.folder(src) + name;
-
-        FS.FolderPath SourceBuildRoot()
-            => ZRoot() + FS.folder(build);
-
-        FS.FolderPath BinaryRoot()
-            => DbRoot() + FS.folder(bin);
-
-        FS.FolderPath RepoArchiveDir()
-            => BinaryRoot() + FS.folder(source);
-
-        FS.Files RepoArchives()
-            => RepoArchiveDir().Files(FS.Zip);
-
-        FS.FolderPath EventRoot()
-            => DbRoot() + FS.folder(events);
-
-        FS.FolderPath RefDataRoot()
-            => DbRoot() + FS.folder(refdata);
 
         FS.FilePath TmpFile(FS.FileName file)
             => TmpRoot() + file;

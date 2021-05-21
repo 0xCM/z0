@@ -15,10 +15,10 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
-            [Op]
+            [MethodImpl(Inline), Op]
             public Guid PeekGuid(int offset)
             {
-                Available(offset, sizeof(Guid));
+                //Available(offset, sizeof(Guid));
 
                 byte* ptr = Pointer + offset;
                 if (BitConverter.IsLittleEndian)

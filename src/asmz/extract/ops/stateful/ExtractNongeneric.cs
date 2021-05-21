@@ -21,7 +21,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var method = ref skip(methods,i);
-                var resolved = resolve(method, MemberUri(src.HostUri, method), ApiJit.jit(method));
+                var resolved = new ResolvedMethod(method, MemberUri(src.HostUri, method), ApiJit.jit(method));
                 dst.Add(ApiExtracts.extract(resolved, Buffer));
                 counter++;
             }

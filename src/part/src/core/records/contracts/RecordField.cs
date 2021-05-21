@@ -8,22 +8,41 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Describes a column in a table
     /// </summary>
-    public struct RecordField
+    public readonly struct RecordField
     {
-        /// <summary>
-        /// The defining field
-        /// </summary>
-        public FieldInfo Definition;
-
         /// <summary>
         /// The 0-based, declaration order of the field
         /// </summary>
-        public ushort FieldIndex;
+        public ushort FieldIndex {get;}
+
+        /// <summary>
+        /// The defining field
+        /// </summary>
+        public FieldInfo Definition {get;}
+
+        [MethodImpl(Inline)]
+        public RecordField(ushort index, FieldInfo def)
+        {
+            FieldIndex = index;
+            Definition = def;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Definition == null;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Definition != null;
+        }
 
         /// <summary>
         /// The field name
@@ -31,7 +50,7 @@ namespace Z0
         public string Name
         {
             [MethodImpl(Inline)]
-            get => Definition.Name;
+            get => Definition?.Name ?? EmptyString;
         }
 
         /// <summary>
@@ -40,16 +59,14 @@ namespace Z0
         public Type DataType
         {
             [MethodImpl(Inline)]
-            get => Definition.FieldType;
+            get => Definition?.FieldType ?? typeof(void);
         }
 
-        /// <summary>
-        /// The declaring record type
-        /// </summary>
-        public Type RecordType
-        {
-            [MethodImpl(Inline)]
-            get => Definition.DeclaringType;
-        }
+        public string Format()
+            => string.Format("{0:D2} {1}", FieldIndex, Name);
+
+        public override string ToString()
+            => Format();
+
     }
 }

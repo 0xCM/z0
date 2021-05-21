@@ -19,14 +19,11 @@ namespace Z0
             Root = root;
         }
 
-        public FS.FolderPath DataRoot()
-            => Root + FS.folder("data");
-
         public FS.FolderPath PartDir(PartId part)
             => Root + FS.folder(part);
 
         public FS.FolderPath ExtractStore()
-            => DataRoot() + FS.folder("extracts");
+            => Root + FS.folder("extracts");
 
         public FS.FolderPath AsmSourceRoot()
             => Root + FS.folder("asm");
@@ -44,7 +41,7 @@ namespace Z0
             =>  AsmSourceDir(host.Part) + FS.file(host, FS.Asm);
 
         public FS.FolderPath ContextRoot()
-            => DataRoot() + FS.folder("context");
+            => Root + FS.folder("context");
 
         public FS.FilePath ApiRebasePath(Timestamp ts)
             => ContextRoot() + FS.file(string.Format("{0}.{1}", Tables.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);

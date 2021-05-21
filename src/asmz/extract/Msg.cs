@@ -20,11 +20,16 @@ namespace Z0
 
         public static MsgPattern<ByteSize,ProcessMemoryRegion> TraversedRegion => "Traversed {0} bytes from {0}";
 
-        public static MsgPattern<Count> LocatingSegments => "Locating segments for {0} methods";
+        public static MsgPattern<Count> ExtractingParts => "Extracting {0} parts";
 
-        public static MsgPattern<Count,Count> LocatedSegments => "Computed {0} segment entries for {0} methods";
+        public static MsgPattern<Count,Count> ExtractedParts => "Extracted {0} methods from {1} parts";
 
-        public static MsgPattern<Address16> SegSelectorNotFound => "Selector {0} not found";
+        public static MsgPattern<DelimitedIndex<IPart>> RunningExtractWorkflow => "Running extract workflow for {0}";
 
+        public static MsgPattern<Count,Count> RanExtractWorkflow = "Extracted {0} host routines from {1} parts" ;
+
+        public static MsgPattern<ApiHostUri> ExtractingHost => "Extracting {0} members";
+
+        public static MsgPattern<Count,ApiHostUri> ExtractedHost => "Extracted {0} members from {1}";
     }
 }

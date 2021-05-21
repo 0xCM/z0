@@ -29,9 +29,6 @@ namespace Z0
         FS.FolderPath TmpRoot()
             => Env.Tmp.Value + FS.folder(tmp);
 
-        FS.FolderPath ControlRoot()
-            => Env.Control;
-
         FS.FolderPath RuntimeRoot()
             => Env.ZBin;
 
@@ -40,6 +37,33 @@ namespace Z0
 
         FS.FolderPath NtSymbolDir()
             => Env.DefaultSymbolCache;
+
+        FS.FolderPath SourceBuildRoot()
+            => ZRoot() + FS.folder(build);
+
+        FS.FolderPath BinaryRoot()
+            => DbRoot() + FS.folder(bin);
+
+        FS.FolderPath RepoArchiveDir()
+            => BinaryRoot() + FS.folder(source);
+
+        FS.Files RepoArchives()
+            => RepoArchiveDir().Files(FS.Zip);
+
+        FS.FolderPath EventRoot()
+            => DbRoot() + FS.folder(events);
+
+        FS.FolderPath RefDataRoot()
+            => DbRoot() + FS.folder(refdata);
+
+        FS.FolderPath ReportRoot()
+            => DbRoot() + FS.folder(reports);
+
+        FS.FolderPath SettingsRoot()
+            => DbRoot() + FS.folder(settings);
+
+        FS.FolderPath ControlScripts()
+            => ControlRoot() + FS.folder(".cmd");
 
         FS.FolderName PartFolder(PartId part)
             => FS.folder(part.Format());
