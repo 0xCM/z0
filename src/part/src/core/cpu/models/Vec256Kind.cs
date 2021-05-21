@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
 
     public readonly struct Vec256Kind<T> : IVectorKind<Vec256Kind<T>,W256,T>
         where T : unmanaged
@@ -19,7 +19,7 @@ namespace Z0
             => VectorWidth.W256;
 
         public NumericKind CellKind
-            => Numeric.kind<T>();
+            => NumericKinds.kind<T>();
 
         public NumericWidth CellWidth
             => (NumericWidth)Widths.bits<T>();

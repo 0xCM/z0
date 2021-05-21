@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Part;
+    using static Root;
 
     partial class IntrinsicsCatalog
     {

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class text
     {
@@ -39,7 +39,7 @@ namespace Z0
         [Op]
         public static string remove(string src, params char[] matches)
         {
-            var index = root.hashset(matches);
+            var index = hashset(matches);
             if (!src.ContainsAny(index))
                 return src;
 
@@ -53,7 +53,7 @@ namespace Z0
                 if (!index.Contains(c))
                     seek(dst,j++) = c;
             }
-            return new string(memory.slice(dst,0,j));
+            return new string(core.slice(dst,0,j));
         }
 
         /// <summary>

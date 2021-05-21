@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     public struct ApiCodePack
     {
         public Index<ApiCodeBlock> Blocks {get;}

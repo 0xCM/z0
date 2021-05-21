@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Root;
-    using static memory;
+    using static core;
     using static Rules;
 
     [ApiHost("text.rules")]

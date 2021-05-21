@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-
     partial class IntrinsicsCatalog
     {
         public class Instructions : List<Instruction>

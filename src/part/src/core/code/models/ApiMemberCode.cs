@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Pairs an api member with the executable code derived from that member

@@ -14,10 +14,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool begins(string src, char match)
-            => text.length(src) != 0 && @char(src) == match;
+            => length(src) != 0 && @char(src) == match;
 
         [MethodImpl(Inline), Op]
         public static bool begins(string src, string match)
-            => text.length(src) != 0 && src.StartsWith(match);
+            => length(src) != 0 && src.StartsWith(match);
     }
 }

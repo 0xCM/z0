@@ -10,8 +10,8 @@ namespace Z0.Asm
     using System.IO;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public sealed class AsmStatementPipe : AppService<AsmStatementPipe>
     {

@@ -21,7 +21,7 @@ namespace Z0
         [Op]
         public static Index<string> apply(SeqSplit<char> rule, string src)
         {
-            var output = root.list<string>();
+            var output = core.list<string>();
             var len = src?.Length ?? 0;
             var buffer = span<char>(len);
             var input = span(src);
@@ -51,7 +51,7 @@ namespace Z0
         [Op]
         public static unsafe string apply(Replace<char> rule, string src)
         {
-            var count = text.length(src);
+            var count = length(src);
             var dst = span<char>(count);
             var input = span(src);
             apply(rule, src, dst);
@@ -102,7 +102,7 @@ namespace Z0
         public static HashSet<string> apply(Distinct<string> rule, ReadOnlySpan<string> src)
         {
             var count = src.Length;
-            var dst = root.hashset<string>(count);
+            var dst = core.hashset<string>(count);
             for(var i=0; i<count; i++)
                 dst.Add(skip(src,i));
             return dst;
@@ -116,6 +116,6 @@ namespace Z0
         /// <param name="src">The source string</param>
         [Op]
         public static Pair<string> apply(Fork<char> rule, string src)
-            => root.pair(before(src, rule.Criterion), after(src, rule.Criterion));
+            => core.pair(before(src, rule.Criterion), after(src, rule.Criterion));
     }
 }

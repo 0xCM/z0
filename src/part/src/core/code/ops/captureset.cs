@@ -24,10 +24,7 @@ namespace Z0
         public static ApiCaptureSet captureset(OpIdentity id, MethodInfo method, CodeBlock hex, AsmSourceBlock asm)
         {
             var uri = ApiUri.hex(method.DeclaringType.HostUri(), method.Name, id);
-            return new ApiCaptureSet(uri,
-                msil(ClrDynamic.msil(hex.BaseAddress, uri, method)),
-                hex,
-                asm, method.DisplaySig());
+            return new ApiCaptureSet(uri, msil(ClrDynamic.msil(hex.BaseAddress, uri, method)), hex, asm, method.DisplaySig());
         }
     }
 }

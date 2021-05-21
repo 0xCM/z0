@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
-    using static memory;
-
     partial class text
     {
         [Op]

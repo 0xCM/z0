@@ -78,6 +78,5 @@ namespace Z0
             => new Count(src.Value--);
 
         public static Count Zero => default;
-
     }
 }

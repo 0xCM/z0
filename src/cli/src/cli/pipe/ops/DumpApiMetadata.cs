@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.IO;
 
-    using static memory;
+    using static core;
 
     partial class CliPipe
     {

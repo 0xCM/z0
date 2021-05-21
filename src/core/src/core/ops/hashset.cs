@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct root
+    partial struct core
     {
         /// <summary>
         /// Constructs an array from a parameter array
@@ -18,10 +18,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static HashSet<T> hashset<T>(params T[] src)
             => new HashSet<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static HashSet<T> hashset<T>()
-            => new HashSet<T>();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static HashSet<T> hashset<T>(IEnumerable<T> members)

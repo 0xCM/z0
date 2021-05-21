@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public enum LaneIndex : byte
     {
         L0 = 0,

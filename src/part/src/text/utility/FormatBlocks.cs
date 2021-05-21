@@ -25,7 +25,7 @@ namespace Z0
                 ? new Func<string,uint,string>((s,n) => s.PadRight((int)n))
                 : new Func<string,uint,string>((s,n) => s.PadLeft((int)n));
 
-            var padlen = cellpad ?? memory.size<T>()*4;
+            var padlen = cellpad ?? core.size<T>()*4;
             var filler = padchar ?? ' ';
             var pad = PadFunc(padright);
             var sb = text.build();

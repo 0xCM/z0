@@ -9,15 +9,16 @@ namespace Z0
 
     using static Root;
 
-    partial class text
+    partial struct core
     {
         /// <summary>
-        /// If the test string is null, returns the empty string; otherwise, returns the test string
+        /// Creates an homogenous pair
         /// </summary>
-        /// <param name="src">The subject string</param>
-        /// <param name="replace">The replacement value if blank</param>
-        [MethodImpl(Inline), Op]
-        public static string denullify(string src)
-            => src ?? EmptyString;
+        /// <param name="a">The first member</param>
+        /// <param name="b">The second member</param>
+        /// <typeparam name="T">The member type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Pair<T> pair<T>(T a, T b)
+            => new Pair<T>(a,b);
     }
 }

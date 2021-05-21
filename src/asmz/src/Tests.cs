@@ -347,12 +347,6 @@ namespace Z0.Asm
             }
         }
 
-        void ToBistring()
-        {
-            const ushort Input = 0b1100_1110_1100_0011;
-            var step1 = cpu.vunpack1x16(Input,0);
-            var step2 = cpu.vinflate256x16u(step1);
-        }
 
         void CreateSymbolHeap()
         {

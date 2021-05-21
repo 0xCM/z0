@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
-    [ApiHost(ApiNames.Utf8Data)]
+    [ApiHost]
     public readonly struct Utf8Data
     {
         const NumericKind Closure = UInt8x16x32k;
