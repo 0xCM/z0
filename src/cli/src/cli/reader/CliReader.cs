@@ -64,8 +64,8 @@ namespace Z0
         public unsafe SRM.MemoryBlock MemoryBlock()
             => SRM.block(Segment.BaseAddress.Pointer<byte>(), Segment.Length);
 
-        public unsafe Outcome<CliHeader> Header()
-            => SRM.header(MemoryBlock());
+        public unsafe Outcome<CliMetadataHeader> Version()
+            => SRM.ReadMetadataHeader(MemoryBlock());
 
         [Op]
         public CliBlob ReadBlobDescription(BlobHandle handle, Count seq)

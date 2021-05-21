@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Microsoft/.NET Foundation
 // License     :  MIT
-// Source      : https://github.com/dotnet/runtime/src/libraries/System.Reflection.Metadata/src/System/Reflection/Metadata/MetadataReader.cs
+// Source      : https://github.com/dotnet/runtime/src/libraries/System.Reflection.Metadata
 //-----------------------------------------------------------------------------
 namespace Z0
 {

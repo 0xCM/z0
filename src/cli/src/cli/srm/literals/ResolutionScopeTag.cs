@@ -10,6 +10,7 @@ namespace Z0
 
     public unsafe partial class SRM
     {
+
         internal static class ResolutionScopeTag
         {
             internal const int NumberOfBits = 2;

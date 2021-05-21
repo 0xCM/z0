@@ -10,7 +10,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection;
     using System.Reflection.PortableExecutable;
-    using Microsoft.CodeAnalysis;
 
     using static Part;
     using static core;
@@ -19,6 +18,19 @@ namespace Z0
     public readonly partial struct Cli
     {
         const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline)]
+        public static T row<T>()
+            where T : unmanaged, ICliRecord<T>
+                => new T();
+
+        [MethodImpl(Inline)]
+        public static ref T row<T>(out T dst)
+            where T : unmanaged, ICliRecord<T>
+        {
+            dst = row<T>();
+            return ref dst;
+        }
 
         [Op]
         public static bool valid(FS.FilePath src)

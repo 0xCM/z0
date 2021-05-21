@@ -526,35 +526,35 @@ namespace Z0.Asm
             }
         }
 
-       public unsafe void ReadMetadataHeader(Assembly src)
-        {
-            var metadata = Clr.metadata(src);
-            var @base = metadata.BaseAddress;
-            var header = first(memory.cover<MetadataHeader>(@base,1));
-            Wf.Row(header.IsValid);
-            Wf.Row(header.Magic);
-            Wf.Row(header.MajorVersion);
-            Wf.Row(header.MinorVersion);
-            Wf.Row(header.VersionSize);
+    //    public unsafe void ReadMetadataHeader(Assembly src)
+    //     {
+    //         var metadata = Clr.metadata(src);
+    //         var @base = metadata.BaseAddress;
+    //         var header = first(memory.cover<MetadataHeader>(@base,1));
+    //         Wf.Row(header.IsValid);
+    //         Wf.Row(header.Magic);
+    //         Wf.Row(header.MajorVersion);
+    //         Wf.Row(header.MinorVersion);
+    //         Wf.Row(header.VersionSize);
 
-            utf8p ver = @base + size<MetadataHeader>();
-            Wf.Row(ver.Size);
-            Wf.Row(ver);
+    //         utf8p ver = @base + size<MetadataHeader>();
+    //         Wf.Row(ver.Size);
+    //         Wf.Row(ver);
 
-            var next = MemoryAddress.Zero;
-            next = @base + size<MetadataHeader>() + header.VersionSize;
+    //         var next = MemoryAddress.Zero;
+    //         next = @base + size<MetadataHeader>() + header.VersionSize;
 
-            var flags = *((ushort*)next);
+    //         var flags = *((ushort*)next);
 
-            Wf.Row(flags);
+    //         Wf.Row(flags);
 
-            next += 2;
+    //         next += 2;
 
-            var n = *((ushort*)next);
+    //         var n = *((ushort*)next);
 
-            Wf.Row(n);
+    //         Wf.Row(n);
 
-        }
+    //     }
 
         public void CheckClrKeys()
         {

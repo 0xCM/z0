@@ -196,21 +196,6 @@ namespace Z0.Asm
 
         }
 
-        void ReadCliHeader()
-        {
-            var reader = Cli.reader(Parts.Cpu.Assembly);
-            var header = reader.Header();
-            if(header)
-            {
-                var data = header.Data;
-                Wf.Row(data.Version);
-            }
-            else
-            {
-                Wf.Error(header.Message);
-            }
-
-        }
 
         FS.FilePath DefineDisassemblyJob()
         {

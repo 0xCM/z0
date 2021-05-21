@@ -8,8 +8,10 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
 
+
     public unsafe partial class SRM
     {
+
         internal static class HasCustomAttributeTag
         {
             internal const int NumberOfBits = 5;

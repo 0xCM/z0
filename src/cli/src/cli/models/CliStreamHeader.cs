@@ -14,6 +14,6 @@ namespace Z0
 
         public uint Size;
 
-        public ByteBlock32 Name;
+        public utf8 Name;
     }
 }

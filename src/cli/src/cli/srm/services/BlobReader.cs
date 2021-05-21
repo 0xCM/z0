@@ -21,7 +21,7 @@ namespace Z0
         [ApiComplete("srm.blobreader")]
         public unsafe struct BlobReader
         {
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public static BlobReader create(MemoryBlock src)
                 => new BlobReader(src);
 
@@ -39,6 +39,17 @@ namespace Z0
                     return false;
                 }
             }
+
+            internal static readonly byte[] WinRTPrefix = new[] {
+                (byte)'<',
+                (byte)'W',
+                (byte)'i',
+                (byte)'n',
+                (byte)'R',
+                (byte)'T',
+                (byte)'>'
+            };
+
 
             internal const int InvalidCompressedInteger = int.MaxValue;
 
@@ -62,7 +73,6 @@ namespace Z0
             {
 
             }
-
 
             [MethodImpl(Inline)]
             public BlobReader(MemoryBlock block)
@@ -642,8 +652,6 @@ namespace Z0
             private static readonly uint[] s_corEncodeTokenArray = new uint[] { TokenTypeIds.TypeDef, TokenTypeIds.TypeRef, TokenTypeIds.TypeSpec, 0 };
 
 
-            internal static BlobHandle FromOffset(int heapOffset)
-                => core.@as<int, BlobHandle>(heapOffset);
 
             /// <summary>
             /// Reads a #Blob heap handle encoded as a compressed integer.
@@ -652,7 +660,7 @@ namespace Z0
             /// Blobs that contain references to other blobs are used in Portable PDB format, for example <see cref="Document.Name"/>.
             /// </remarks>
             public BlobHandle ReadBlobHandle()
-                => FromOffset(ReadCompressedInteger());
+                => BlobHeap.HandleFromOffset(ReadCompressedInteger());
 
             /// <summary>
             /// Reads a constant value (see ECMA-335 Partition II section 22.9) from the current position.
