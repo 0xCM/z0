@@ -8,9 +8,6 @@ namespace Z0
     using System;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
-    using System.Runtime.InteropServices;
-    using System.Text;
 
     using static Part;
     using static memory;
@@ -18,7 +15,6 @@ namespace Z0
     partial class SRM
     {
         public const int InvalidCompressedInteger = int.MaxValue;
-
 
         [ApiHost("srm.memoryblock")]
         public readonly unsafe partial struct MemoryBlock
@@ -56,6 +52,12 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => this;
+            }
+
+            public MemoryAddress BaseAddress
+            {
+                [MethodImpl(Inline)]
+                get => IsNonEmpty ? Pointer : MemoryAddress.Zero;
             }
 
             [MethodImpl(Inline), Op]

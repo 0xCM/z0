@@ -100,6 +100,7 @@ namespace Z0
                 return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
             }
 
+            [Op]
             public static MemoryBlock<MethodImplRow> MethodImplBlock(int numberOfRows,bool declaredSorted, int typeDefTableRowRefSize, int methodDefOrRefRefSize,
                 MemoryBlock containingBlock, int containingBlockOffset)
             {
@@ -110,6 +111,49 @@ namespace Z0
                 var _MethodBodyOffset = _ClassOffset + typeDefTableRowRefSize;
                 var _MethodDeclarationOffset = _MethodBodyOffset + methodDefOrRefRefSize;
                 var RowSize = _MethodDeclarationOffset + methodDefOrRefRefSize;
+                return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
+            }
+
+            [Op]
+            public static MemoryBlock<FieldDefRow> FieldBlock(int numberOfRows, int stringHeapRefSize, int blobHeapRefSize,
+                MemoryBlock containingBlock,int containingBlockOffset)
+            {
+                var NumberOfRows = numberOfRows;
+                var _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
+                var _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
+                var _FlagsOffset = 0;
+                var _NameOffset = _FlagsOffset + sizeof(ushort);
+                var _SignatureOffset = _NameOffset + stringHeapRefSize;
+                var RowSize = _SignatureOffset + blobHeapRefSize;
+                return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
+            }
+
+            [Op]
+            public static MemoryBlock<MethodPtrRow> MethodPtrBlock(int numberOfRows, int methodTableRowRefSize,
+                MemoryBlock containingBlock, int containingBlockOffset)
+            {
+                var NumberOfRows = numberOfRows;
+                var _IsMethodTableRowRefSizeSmall = methodTableRowRefSize == 2;
+                var _MethodOffset = 0;
+                var RowSize = _MethodOffset + methodTableRowRefSize;
+                return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
+            }
+
+            [Op]
+            public static MemoryBlock<MethodDefRow> MethodDefBlock(int numberOfRows, int paramRefSize, int stringHeapRefSize, int blobHeapRefSize,
+                MemoryBlock containingBlock, int containingBlockOffset)
+            {
+                var NumberOfRows = numberOfRows;
+                var _IsParamRefSizeSmall = paramRefSize == 2;
+                var _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
+                var _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
+                var _RvaOffset = 0;
+                var _ImplFlagsOffset = _RvaOffset + sizeof(uint);
+                var _FlagsOffset = _ImplFlagsOffset + sizeof(ushort);
+                var _NameOffset = _FlagsOffset + sizeof(ushort);
+                var _SignatureOffset = _NameOffset + stringHeapRefSize;
+                var _ParamListOffset = _SignatureOffset + blobHeapRefSize;
+                var RowSize = _ParamListOffset + paramRefSize;
                 return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
             }
         }

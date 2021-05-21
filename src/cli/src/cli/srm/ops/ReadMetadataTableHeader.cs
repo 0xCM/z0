@@ -23,10 +23,7 @@ namespace Z0
             sortedTables = default;
 
             if (reader.RemainingBytes < MetadataStreamConstants.SizeOfMetadataTableHeader)
-            {
                 return (false, BadImageFormat);
-                //throw new BadImageFormatException(SR.MetadataTableHeaderTooSmall);
-            }
 
             // reserved (shall be ignored):
             reader.ReadUInt32();

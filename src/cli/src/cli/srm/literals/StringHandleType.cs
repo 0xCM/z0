@@ -23,6 +23,7 @@ namespace Z0
 
             // Reserved values that can be used for future strings:
             public const uint ReservedString1 = (2 << HeapHandleType.OffsetBitCount);
+
             public const uint ReservedString2 = (3 << HeapHandleType.OffsetBitCount);
 
             // Virtual string identified by a virtual index
@@ -33,6 +34,7 @@ namespace Z0
 
             // Reserved virtual strings that can be used in future:
             public const uint ReservedVirtualString1 = HeapHandleType.VirtualBit | (2 << HeapHandleType.OffsetBitCount);
+
             public const uint ReservedVirtualString2 = HeapHandleType.VirtualBit | (3 << HeapHandleType.OffsetBitCount);
         }
     }

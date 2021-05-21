@@ -52,12 +52,7 @@ namespace Z0
             /// </summary>
             /// <returns>Returns row number [0..RowCount).</returns>
             [Op]
-            public int BinarySearchForSlot(
-                int rowCount,
-                int rowSize,
-                int referenceListOffset,
-                uint referenceValue,
-                bool isReferenceSmall)
+            public int BinarySearchForSlot(int rowCount, int rowSize, int referenceListOffset, uint referenceValue, bool isReferenceSmall)
             {
                 int startRowNumber = 0;
                 int endRowNumber = rowCount - 1;

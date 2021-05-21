@@ -7,15 +7,16 @@ namespace Z0
     using System;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
-    using System.Runtime.InteropServices;
-    using System.Text;
 
     using static Part;
     using static memory;
 
     partial class SRM
     {
+        [MethodImpl(Inline), Op]
+        public static unsafe uint unpack(MemoryBlock src, uint offset, out ByteSize consumed)
+            => unpack(src.Pointer, (uint)src.Length, offset, out consumed);
+
         [MethodImpl(Inline), Op]
         public static unsafe uint unpack(byte* pSrc, uint length, uint offset, out ByteSize consumed)
         {
@@ -51,9 +52,5 @@ namespace Z0
 
             return uint.MaxValue;
         }
-
-        [MethodImpl(Inline), Op]
-        public static unsafe uint unpack(MemoryBlock src, uint offset, out ByteSize consumed)
-            => unpack(src.Pointer, (uint)src.Length, offset, out consumed);
     }
 }

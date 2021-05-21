@@ -48,30 +48,48 @@ namespace Z0
             public const uint ModuleRef = HandleType.ModuleRef << RowIdBitCount;
 
             public const uint TypeSpec = HandleType.TypeSpec << RowIdBitCount;
+
             public const uint Assembly = HandleType.Assembly << RowIdBitCount;
+
             public const uint AssemblyRef = HandleType.AssemblyRef << RowIdBitCount;
+
             public const uint File = HandleType.File << RowIdBitCount;
+
             public const uint ExportedType = HandleType.ExportedType << RowIdBitCount;
+
             public const uint ManifestResource = HandleType.ManifestResource << RowIdBitCount;
+
             public const uint NestedClass = HandleType.NestedClass << RowIdBitCount;
+
             public const uint GenericParam = HandleType.GenericParam << RowIdBitCount;
+
             public const uint MethodSpec = HandleType.MethodSpec << RowIdBitCount;
+
             public const uint GenericParamConstraint = HandleType.GenericParamConstraint << RowIdBitCount;
 
             // debug tables:
             public const uint Document = HandleType.Document << RowIdBitCount;
+
             public const uint MethodDebugInformation = HandleType.MethodDebugInformation << RowIdBitCount;
+
             public const uint LocalScope = HandleType.LocalScope << RowIdBitCount;
+
             public const uint LocalVariable = HandleType.LocalVariable << RowIdBitCount;
+
             public const uint LocalConstant = HandleType.LocalConstant << RowIdBitCount;
+
             public const uint ImportScope = HandleType.ImportScope << RowIdBitCount;
+
             public const uint AsyncMethod = HandleType.AsyncMethod << RowIdBitCount;
+
             public const uint CustomDebugInformation = HandleType.CustomDebugInformation << RowIdBitCount;
 
             public const uint UserString = HandleType.UserString << RowIdBitCount;
 
             public const int RowIdBitCount = 24;
+
             public const uint RIDMask = (1 << RowIdBitCount) - 1;
+
             public const uint TypeMask = HandleType.TypeMask << RowIdBitCount;
 
             /// <summary>
@@ -95,24 +113,16 @@ namespace Z0
             /// metadata table, or starting byte offset within the User String heap.
             /// </summary>
             public static bool IsEntityOrUserStringToken(uint vToken)
-            {
-                return (vToken & TypeMask) <= UserString;
-            }
+                => (vToken & TypeMask) <= UserString;
 
             public static bool IsEntityToken(uint vToken)
-            {
-                return (vToken & TypeMask) < UserString;
-            }
+                => (vToken & TypeMask) < UserString;
 
             public static bool IsValidRowId(uint rowId)
-            {
-                return (rowId & ~RIDMask) == 0;
-            }
+                => (rowId & ~RIDMask) == 0;
 
             public static bool IsValidRowId(int rowId)
-            {
-                return (rowId & ~RIDMask) == 0;
-            }
+                => (rowId & ~RIDMask) == 0;
         }
     }
 }

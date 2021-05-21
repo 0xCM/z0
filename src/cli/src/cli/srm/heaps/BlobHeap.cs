@@ -47,7 +47,14 @@ namespace Z0
             private static byte[][]? s_virtualValues;
 
             internal readonly MemoryBlock Block;
-            private VirtualHeap? _lazyVirtualHeap;
+
+            public MemoryAddress BaseAddress
+            {
+                [MethodImpl(Inline), Op]
+                get => Block.BaseAddress;
+            }
+
+            VirtualHeap? _lazyVirtualHeap;
 
             internal BlobHeap(MemoryBlock block, MetadataKind metadataKind)
             {

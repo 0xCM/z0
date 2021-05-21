@@ -20,18 +20,23 @@ namespace Z0
 
             internal readonly MemoryBlock Block;
 
+            [MethodImpl(Inline), Op]
             public UserStringHeap(MemoryBlock block)
             {
-                this.Block = block;
+                Block = block;
+            }
+
+            public MemoryAddress BaseAddress
+            {
+                [MethodImpl(Inline)]
+                get => Block.BaseAddress;
             }
 
             public string GetString(UserStringHandle handle)
             {
                 int offset, size;
                 if (!Block.PeekHeapValueOffsetAndSize(handle.GetHeapOffset(), out offset, out size))
-                {
-                    return string.Empty;
-                }
+                    return EmptyString;
 
                 // Spec: Furthermore, there is an additional terminal byte (so all byte counts are odd, not even).
                 // The size in the blob header is the length of the string in bytes + 1.
@@ -42,15 +47,11 @@ namespace Z0
             {
                 int offset, size;
                 if (!Block.PeekHeapValueOffsetAndSize(handle.GetHeapOffset(), out offset, out size))
-                {
                     return default(UserStringHandle);
-                }
 
-                int nextIndex = offset + size;
+                var nextIndex = offset + size;
                 if (nextIndex >= Block.Length)
-                {
                     return default(UserStringHandle);
-                }
 
                 return HandleFromOffset(nextIndex);
             }

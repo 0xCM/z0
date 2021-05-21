@@ -15,7 +15,6 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
-
             /// <summary>
             /// Decodes a compressed integer value starting at offset.
             /// See Metadata Specification section II.23.2: Blobs and signatures.
@@ -32,7 +31,6 @@ namespace Z0
                 numberOfBytesRead = (int)consumed;
                 return result;
             }
-
         }
     }
 }

@@ -297,7 +297,29 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
+            internal bool TryAlign(byte alignment)
+            {
+                int remainder = Offset & (alignment - 1);
+
+                Debug.Assert((alignment & (alignment - 1)) == 0, "Alignment must be a power of two.");
+                Debug.Assert(remainder >= 0 && remainder < alignment);
+
+                if (remainder != 0)
+                {
+                    int bytesToSkip = alignment - remainder;
+                    if (bytesToSkip > RemainingBytes)
+                    {
+                        return false;
+                    }
+
+                    _currentPointer += bytesToSkip;
+                }
+
+                return true;
+            }
+
+            [MethodImpl(Inline), Op]
             public int ReadInt32()
             {
                 unchecked
@@ -307,7 +329,7 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public uint ReadUInt32()
             {
                 unchecked
@@ -329,25 +351,25 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public ulong ReadUInt64()
                 => unchecked((ulong)ReadInt64());
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public float ReadSingle()
             {
                 int val = ReadInt32();
                 return *(float*)&val;
             }
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public double ReadDouble()
             {
                 long val = ReadInt64();
                 return *(double*)&val;
             }
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public Guid ReadGuid()
             {
                 const int size = 16;
@@ -378,7 +400,7 @@ namespace Z0
             /// - bytes 1..12: 96-bit unsigned integer in little endian encoding.
             /// </remarks>
             /// <exception cref="BadImageFormatException">The data at the current position was not a valid <see cref="decimal"/> number.</exception>
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public decimal ReadDecimal()
             {
                 byte* ptr = GetCurrentPointerAndAdvance(13);
@@ -398,11 +420,11 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public DateTime ReadDateTime()
                 => new DateTime(ReadInt64());
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public SignatureHeader ReadSignatureHeader()
                 => new SignatureHeader(ReadByte());
 
@@ -415,7 +437,7 @@ namespace Z0
             /// <remarks>
             /// Doesn't change the current position.
             /// </remarks>
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public int IndexOf(byte value)
             {
                 int start = Offset;
@@ -429,7 +451,7 @@ namespace Z0
             /// <param name="byteCount">The number of bytes to read.</param>
             /// <returns>The string.</returns>
             /// <exception cref="BadImageFormatException"><paramref name="byteCount"/> bytes not available.</exception>
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public string ReadUTF8(int byteCount)
             {
                 string s = _block.PeekUtf8(this.Offset, byteCount);
@@ -443,7 +465,7 @@ namespace Z0
             /// <param name="byteCount">The number of bytes to read.</param>
             /// <returns>The string.</returns>
             /// <exception cref="BadImageFormatException"><paramref name="byteCount"/> bytes not available.</exception>
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             public string ReadUTF16(int byteCount)
             {
                 string s = _block.PeekUtf16(this.Offset, byteCount);
@@ -482,7 +504,7 @@ namespace Z0
                 return value;
             }
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Op]
             int ReadCompressedIntegerOrInvalid()
             {
                 int bytesRead;
@@ -497,6 +519,7 @@ namespace Z0
             /// </summary>
             /// <param name="value">The value of the compressed integer that was read.</param>
             /// <returns>true if the value was read successfully. false if the data at the current position was not a valid compressed integer.</returns>
+            [MethodImpl(Inline), Op]
             public bool TryReadCompressedInteger(out int value)
             {
                 value = ReadCompressedIntegerOrInvalid();

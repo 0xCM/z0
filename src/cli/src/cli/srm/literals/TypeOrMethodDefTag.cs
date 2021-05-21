@@ -13,11 +13,17 @@ namespace Z0
         internal static class TypeOrMethodDefTag
         {
             internal const int NumberOfBits = 1;
+
             internal const int LargeRowSize = 0x00000001 << (16 - NumberOfBits);
+
             internal const uint TypeDef = 0x00000000;
+
             internal const uint MethodDef = 0x00000001;
+
             internal const uint TagMask = 0x0000001;
+
             internal const uint TagToTokenTypeByteVector = TokenTypeIds.TypeDef >> 24 | TokenTypeIds.MethodDef >> 16;
+
             internal const TableMask TablesReferenced =
             TableMask.TypeDef
             | TableMask.MethodDef;

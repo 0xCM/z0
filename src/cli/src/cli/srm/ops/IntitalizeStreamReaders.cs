@@ -25,7 +25,7 @@ namespace Z0
             public string Name;
         }
 
-        public static Outcome InitializeStreamReaders(MetadataKind metadataKind, in MemoryBlock metadataRoot, StreamHeader[] streamHeaders,
+        public static Outcome InitializeStreamReaders(MetadataReaderState state, MetadataKind metadataKind, in MemoryBlock metadataRoot, StreamHeader[] streamHeaders,
             out MetadataStreamKind metadataStreamKind, out MemoryBlock metadataTableStream, out MemoryBlock standalonePdbStream)
         {
             metadataTableStream = default;
@@ -43,7 +43,8 @@ namespace Z0
                             return (false,BadImageFormat);
                         }
 
-                        var StringHeap = new StringHeap(metadataRoot.GetMemoryBlockAt((int)streamHeader.Offset, streamHeader.Size), metadataKind);
+                        //var StringHeap = new StringHeap(metadataRoot.GetMemoryBlockAt((int)streamHeader.Offset, streamHeader.Size), metadataKind);
+                        state.StringHeap = new NonVirtualStringHeap(metadataRoot.GetMemoryBlockAt((int)streamHeader.Offset, streamHeader.Size));
                         break;
 
                     case COR20Constants.BlobStreamName:
@@ -53,6 +54,7 @@ namespace Z0
                         }
 
                         var BlobHeap = new BlobHeap(metadataRoot.GetMemoryBlockAt((int)streamHeader.Offset, streamHeader.Size), metadataKind);
+                        state.BlobHeap = BlobHeap;
                         break;
 
                     case COR20Constants.GUIDStreamName:
@@ -62,6 +64,7 @@ namespace Z0
                         }
 
                         var GuidHeap = new GuidHeap(metadataRoot.GetMemoryBlockAt((int)streamHeader.Offset, streamHeader.Size));
+                        state.GuidHeap = GuidHeap;
                         break;
 
                     case COR20Constants.UserStringStreamName:
@@ -71,6 +74,7 @@ namespace Z0
                         }
 
                         var UserStringHeap = new UserStringHeap(metadataRoot.GetMemoryBlockAt((int)streamHeader.Offset, streamHeader.Size));
+                        state.UserStringHeap = UserStringHeap;
                         break;
 
                     case COR20Constants.CompressedMetadataTableStreamName:

@@ -15,7 +15,6 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
-
            [Op]
             public bool PeekHeapValueOffsetAndSize(int index, out int offset, out int size)
             {

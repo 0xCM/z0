@@ -15,13 +15,9 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
-
             [MethodImpl(Inline), Op]
             public byte PeekByte(int offset)
-            {
-                //Available(offset, sizeof(byte));
-                return Pointer[offset];
-            }
+                => Pointer[offset];
 
             [MethodImpl(Inline), Op]
             public bool PeekByte(int offset, out byte dst)

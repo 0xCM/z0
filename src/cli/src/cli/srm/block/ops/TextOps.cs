@@ -17,6 +17,65 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
+
+            [MethodImpl(Inline), Op]
+            public int Utf8NullTerminatedOffsetOfAsciiChar(int startOffset, char asciiChar)
+            {
+                //Available(startOffset, 0);
+
+                Debug.Assert(asciiChar != 0 && asciiChar <= 0x7f);
+
+                for (int i = startOffset; i < Length; i++)
+                {
+                    byte b = Pointer[i];
+
+                    if (b == 0)
+                        break;
+
+                    if (b == asciiChar)
+                        return i;
+                }
+
+                return -1;
+            }
+
+            /// <summary>
+            /// Get number of bytes from offset to given terminator, null terminator, or end-of-block (whichever comes first).
+            /// Returned length does not include the terminator, but numberOfBytesRead out parameter does.
+            /// </summary>
+            /// <param name="offset">Offset in to the block where the UTF8 bytes start.</param>
+            /// <param name="terminator">A character in the ASCII range that marks the end of the string.
+            /// If a value other than '\0' is passed we still stop at the null terminator if encountered first.</param>
+            /// <param name="numberOfBytesRead">The number of bytes read, which includes the terminator if we did not hit the end of the block.</param>
+            /// <returns>Length (byte count) not including terminator.</returns>
+            [MethodImpl(Inline), Op]
+            public int GetUtf8NullTerminatedLength(int offset, out int numberOfBytesRead, char terminator = '\0')
+            {
+                byte* start = Pointer + offset;
+                byte* end = Pointer + Length;
+                byte* current = start;
+
+                while (current < end)
+                {
+                    byte b = *current;
+                    if (b == 0 || b == terminator)
+                        break;
+
+                    current++;
+                }
+
+                int length = (int)(current - start);
+                numberOfBytesRead = length;
+                if (current < end)
+                {
+                    // we also read the terminator
+                    numberOfBytesRead++;
+                }
+
+                return length;
+            }
+
+
             public int CompareUtf8NullTerminatedStringWithAsciiString(int offset, string asciiString)
             {
                 // Assumes stringAscii only contains ASCII characters and no nil characters.
@@ -68,69 +127,6 @@ namespace Z0
                 Available(offset, 0);
                 int length = GetUtf8NullTerminatedLength(offset, out numberOfBytesRead, terminator);
                 return EncodingHelper.DecodeUtf8(Pointer + offset, length, prefix, utf8Decoder);
-            }
-
-            /// <summary>
-            /// Get number of bytes from offset to given terminator, null terminator, or end-of-block (whichever comes first).
-            /// Returned length does not include the terminator, but numberOfBytesRead out parameter does.
-            /// </summary>
-            /// <param name="offset">Offset in to the block where the UTF8 bytes start.</param>
-            /// <param name="terminator">A character in the ASCII range that marks the end of the string.
-            /// If a value other than '\0' is passed we still stop at the null terminator if encountered first.</param>
-            /// <param name="numberOfBytesRead">The number of bytes read, which includes the terminator if we did not hit the end of the block.</param>
-            /// <returns>Length (byte count) not including terminator.</returns>
-            [Op]
-            public int GetUtf8NullTerminatedLength(int offset, out int numberOfBytesRead, char terminator = '\0')
-            {
-                byte* start = Pointer + offset;
-                byte* end = Pointer + Length;
-                byte* current = start;
-
-                while (current < end)
-                {
-                    byte b = *current;
-                    if (b == 0 || b == terminator)
-                    {
-                        break;
-                    }
-
-                    current++;
-                }
-
-                int length = (int)(current - start);
-                numberOfBytesRead = length;
-                if (current < end)
-                {
-                    // we also read the terminator
-                    numberOfBytesRead++;
-                }
-
-                return length;
-            }
-
-            [Op]
-            public int Utf8NullTerminatedOffsetOfAsciiChar(int startOffset, char asciiChar)
-            {
-                Available(startOffset, 0);
-
-                Debug.Assert(asciiChar != 0 && asciiChar <= 0x7f);
-
-                for (int i = startOffset; i < Length; i++)
-                {
-                    byte b = Pointer[i];
-
-                    if (b == 0)
-                    {
-                        break;
-                    }
-
-                    if (b == asciiChar)
-                    {
-                        return i;
-                    }
-                }
-
-                return -1;
             }
 
             // comparison stops at null terminator, terminator parameter, or end-of-block -- whichever comes first.

@@ -14,7 +14,7 @@ namespace Z0
     /// Describes the length-invariant leading bytes of the metadata root as specified in II.24.2.1
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct CliMetadataHeader
+    public struct CliMetadataHeader : ITextual
     {
         const uint RequiredMagic = 0x42_4A_53_42;
 
@@ -50,5 +50,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Magic == RequiredMagic;
         }
+
+        public string Format()
+            => IsValid ? VersionText : "Invalid";
+
+        public override string ToString()
+            => Format();
+
     }
 }

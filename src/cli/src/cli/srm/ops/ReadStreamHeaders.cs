@@ -36,11 +36,11 @@ namespace Z0
                 streamHeaders[i].Size = reader.ReadInt32();
                 streamHeaders[i].Name = reader.ReadUtf8NullTerminated();
 
-                // bool aligned = memReader.TryAlign(4);
-                // if (!aligned || memReader.RemainingBytes == 0)
-                // {
-                //     return sys.empty<CliStreamHeader>();
-                // }
+                bool aligned = reader.TryAlign(4);
+                if (!aligned || reader.RemainingBytes == 0)
+                {
+                    return sys.empty<StreamHeader>();
+                }
             }
 
             return streamHeaders;

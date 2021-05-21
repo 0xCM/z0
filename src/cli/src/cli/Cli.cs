@@ -10,6 +10,7 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection;
     using System.Reflection.PortableExecutable;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Part;
     using static core;
@@ -18,6 +19,22 @@ namespace Z0
     public readonly partial struct Cli
     {
         const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op]
+        public static MetadataReaderState state(Assembly src)
+            => SRM.initialize(src);
+
+        public static Index<byte,CliTableKind> TableKinds()
+        {
+            const byte MaxTableId = (byte)CliTableKind.CustomDebugInformation;
+            var values = ClrEnums.literals<CliTableKind,byte>().Where(x => x < MaxTableId).Sort().View;
+            var src = recover<CliTableKind>(values);
+            var buffer = alloc<CliTableKind>(MaxTableId + 1);
+            ref var dst = ref first(buffer);
+            for(byte i=0; i<values.Length; i++)
+                seek(dst,skip(values,i)) = (CliTableKind)i;
+            return buffer;
+        }
 
         [MethodImpl(Inline)]
         public static T row<T>()

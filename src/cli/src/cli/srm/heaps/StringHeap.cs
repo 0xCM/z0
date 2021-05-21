@@ -18,10 +18,45 @@ namespace Z0
     {
         public struct StringHeap
         {
+            internal readonly MemoryBlock Block;
+
+            public MemoryAddress Baseaddress
+            {
+                [MethodImpl(Inline)]
+                get => Block.BaseAddress;
+            }
+
+            [MethodImpl(Inline), Op]
+            public static uint GetHeapOffset(StringHandle src)
+                => (core.uint32(src) & HeapHandleType.OffsetMask);
+
             [MethodImpl(Inline), Op]
             public static StringHandle HandleFromOffset(int heapOffset)
                 => core.@as<uint,StringHandle>(StringHandleType.String | (uint)heapOffset);
 
+            [MethodImpl(Inline), Op]
+            public BlobReader GetBlobReader(StringHandle handle)
+                => new BlobReader(GetMemoryBlock(handle));
+
+            [MethodImpl(Inline), Op]
+            public MemoryBlock GetMemoryBlock(StringHandle handle)
+                => handle.IsVirtual() ? GetVirtualHandleMemoryBlock(handle) : GetNonVirtualStringMemoryBlock(handle);
+
+            [MethodImpl(Inline), Op]
+            public int IndexOf(int offset, AsciCharCode match)
+                => Block.Utf8NullTerminatedOffsetOfAsciiChar(offset, (char)match);
+
+            public StringHandle GetNextHandle(StringHandle handle)
+            {
+                if (handle.IsVirtual())
+                    return default(StringHandle);
+
+                var terminator = Block.IndexOf(0, handle.GetHeapOffset());
+                if (terminator == -1 || terminator == Block.Length - 1)
+                    return default(StringHandle);
+
+                return HandleFromOffset(terminator + 1);
+            }
 
             internal enum VirtualIndex
             {
@@ -103,12 +138,11 @@ namespace Z0
             }
 
 
+            static string[]? s_virtualValues;
 
 
-            private static string[]? s_virtualValues;
+            VirtualHeap? _lazyVirtualHeap;
 
-            internal readonly MemoryBlock Block;
-            private VirtualHeap? _lazyVirtualHeap;
 
             internal StringHeap(MemoryBlock block, MetadataKind metadataKind)
             {
@@ -199,11 +233,11 @@ namespace Z0
                     AssertFilled();
                 }
 
-                this.Block = TrimEnd(block);
+                Block = TrimEnd(block);
             }
 
             [Conditional("DEBUG")]
-            private static void AssertFilled()
+            static void AssertFilled()
             {
                 for (int i = 0; i < s_virtualValues!.Length; i++)
                 {
@@ -215,45 +249,31 @@ namespace Z0
             // See StgStringPool::InitOnMem in ndp\clr\src\Utilcode\StgPool.cpp.
 
             // This is especially important for EnC.
-            private static MemoryBlock TrimEnd(MemoryBlock block)
+            static MemoryBlock TrimEnd(MemoryBlock block)
             {
                 if (block.Length == 0)
-                {
                     return block;
-                }
 
                 int i = block.Length - 1;
                 while (i >= 0 && block.PeekByte(i) == 0)
-                {
                     i--;
-                }
 
                 // this shouldn't happen in valid metadata:
                 if (i == block.Length - 1)
-                {
                     return block;
-                }
 
                 // +1 for terminating \0
                 return block.GetMemoryBlockAt(0, i + 2);
             }
 
-            internal string GetString(StringHandle handle, MetadataStringDecoder utf8Decoder)
-            {
-                return handle.IsVirtual() ? GetVirtualHandleString(handle, utf8Decoder) : GetNonVirtualString(handle, utf8Decoder, prefixOpt: null);
-            }
+            public string GetString(StringHandle handle, MetadataStringDecoder utf8Decoder)
+                => handle.IsVirtual() ? GetVirtualHandleString(handle, utf8Decoder) : GetNonVirtualString(handle, utf8Decoder, prefixOpt: null);
 
-            internal MemoryBlock GetMemoryBlock(StringHandle handle)
-            {
-                return handle.IsVirtual() ? GetVirtualHandleMemoryBlock(handle) : GetNonVirtualStringMemoryBlock(handle);
-            }
 
             internal static string GetVirtualString(VirtualIndex index)
-            {
-                return s_virtualValues![(int)index];
-            }
+                => s_virtualValues![(int)index];
 
-            private string GetNonVirtualString(StringHandle handle, MetadataStringDecoder utf8Decoder, byte[]? prefixOpt)
+            string GetNonVirtualString(StringHandle handle, MetadataStringDecoder utf8Decoder, byte[]? prefixOpt)
             {
                 Debug.Assert(handle.StringKind() != StringKind.Virtual);
 
@@ -262,7 +282,7 @@ namespace Z0
                 return Block.PeekUtf8NullTerminated(handle.GetHeapOffset(), prefixOpt, utf8Decoder, out bytesRead, otherTerminator);
             }
 
-            private unsafe MemoryBlock GetNonVirtualStringMemoryBlock(StringHandle handle)
+            unsafe MemoryBlock GetNonVirtualStringMemoryBlock(StringHandle handle)
             {
                 Debug.Assert(handle.StringKind() != StringKind.Virtual);
 
@@ -270,11 +290,10 @@ namespace Z0
                 char otherTerminator = handle.StringKind() == StringKind.DotTerminated ? '.' : '\0';
                 int offset = handle.GetHeapOffset();
                 int length = Block.GetUtf8NullTerminatedLength(offset, out bytesRead, otherTerminator);
-
                 return new MemoryBlock(Block.Pointer + offset, length);
             }
 
-            private unsafe byte[] GetNonVirtualStringBytes(StringHandle handle, byte[] prefix)
+            unsafe byte[] GetNonVirtualStringBytes(StringHandle handle, byte[] prefix)
             {
                 Debug.Assert(handle.StringKind() != StringKind.Virtual);
 
@@ -285,7 +304,7 @@ namespace Z0
                 return bytes;
             }
 
-            private string GetVirtualHandleString(StringHandle handle, MetadataStringDecoder utf8Decoder)
+            string GetVirtualHandleString(StringHandle handle, MetadataStringDecoder utf8Decoder)
             {
                 Debug.Assert(handle.IsVirtual());
 
@@ -297,7 +316,7 @@ namespace Z0
                 };
             }
 
-            private MemoryBlock GetVirtualHandleMemoryBlock(StringHandle handle)
+            MemoryBlock GetVirtualHandleMemoryBlock(StringHandle handle)
             {
                 Debug.Assert(handle.IsVirtual());
                 var heap = VirtualHeap.GetOrCreateVirtualHeap(ref _lazyVirtualHeap);
@@ -319,74 +338,53 @@ namespace Z0
                 }
             }
 
-            internal BlobReader GetBlobReader(StringHandle handle)
+            internal bool Equals(StringHandle handle, string value, MetadataStringDecoder utf8Decoder, bool ignoreCase)
             {
-                return new BlobReader(GetMemoryBlock(handle));
+                Debug.Assert(value != null);
+
+                if (handle.IsVirtual())
+                {
+                    // TODO: This can allocate unnecessarily for <WinRT> prefixed handles.
+                    return string.Equals(GetString(handle, utf8Decoder), value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                }
+
+                if (handle.IsNil)
+                {
+                    return value.Length == 0;
+                }
+
+                char otherTerminator = handle.StringKind() == StringKind.DotTerminated ? '.' : '\0';
+                return this.Block.Utf8NullTerminatedEquals(handle.GetHeapOffset(), value, utf8Decoder, otherTerminator, ignoreCase);
             }
 
-            // internal StringHandle GetNextHandle(StringHandle handle)
-            // {
-            //     if (handle.IsVirtual)
-            //     {
-            //         return default(StringHandle);
-            //     }
+            internal bool StartsWith(StringHandle handle, string value, MetadataStringDecoder utf8Decoder, bool ignoreCase)
+            {
+                Debug.Assert(value != null);
 
-            //     int terminator = this.Block.IndexOf(0, handle.GetHeapOffset());
-            //     if (terminator == -1 || terminator == Block.Length - 1)
-            //     {
-            //         return default(StringHandle);
-            //     }
+                if (handle.IsVirtual())
+                {
+                    // TODO: This can allocate unnecessarily for <WinRT> prefixed handles.
+                    return GetString(handle, utf8Decoder).StartsWith(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                }
 
-            //     return StringHandle.FromOffset(terminator + 1);
-            // }
+                if (handle.IsNil)
+                {
+                    return value.Length == 0;
+                }
 
-            // internal bool Equals(StringHandle handle, string value, MetadataStringDecoder utf8Decoder, bool ignoreCase)
-            // {
-            //     Debug.Assert(value != null);
+                char otherTerminator = handle.StringKind() == StringKind.DotTerminated ? '.' : '\0';
+                return this.Block.Utf8NullTerminatedStartsWith(handle.GetHeapOffset(), value, utf8Decoder, otherTerminator, ignoreCase);
+            }
 
-            //     if (handle.IsVirtual)
-            //     {
-            //         // TODO: This can allocate unnecessarily for <WinRT> prefixed handles.
-            //         return string.Equals(GetString(handle, utf8Decoder), value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
-            //     }
-
-            //     if (handle.IsNil)
-            //     {
-            //         return value.Length == 0;
-            //     }
-
-            //     char otherTerminator = handle.StringKind == StringKind.DotTerminated ? '.' : '\0';
-            //     return this.Block.Utf8NullTerminatedEquals(handle.GetHeapOffset(), value, utf8Decoder, otherTerminator, ignoreCase);
-            // }
-
-            // internal bool StartsWith(StringHandle handle, string value, MetadataStringDecoder utf8Decoder, bool ignoreCase)
-            // {
-            //     Debug.Assert(value != null);
-
-            //     if (handle.IsVirtual)
-            //     {
-            //         // TODO: This can allocate unnecessarily for <WinRT> prefixed handles.
-            //         return GetString(handle, utf8Decoder).StartsWith(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
-            //     }
-
-            //     if (handle.IsNil)
-            //     {
-            //         return value.Length == 0;
-            //     }
-
-            //     char otherTerminator = handle.StringKind == StringKind.DotTerminated ? '.' : '\0';
-            //     return this.Block.Utf8NullTerminatedStartsWith(handle.GetHeapOffset(), value, utf8Decoder, otherTerminator, ignoreCase);
-            // }
-
-            // /// <summary>
-            // /// Returns true if the given raw (non-virtual) handle represents the same string as given ASCII string.
-            // /// </summary>
-            // internal bool EqualsRaw(StringHandle rawHandle, string asciiString)
-            // {
-            //     Debug.Assert(!rawHandle.IsVirtual);
-            //     Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
-            //     return this.Block.CompareUtf8NullTerminatedStringWithAsciiString(rawHandle.GetHeapOffset(), asciiString) == 0;
-            // }
+            /// <summary>
+            /// Returns true if the given raw (non-virtual) handle represents the same string as given ASCII string.
+            /// </summary>
+            public bool EqualsRaw(StringHandle rawHandle, string asciiString)
+            {
+                // Debug.Assert(!rawHandle.IsVirtual);
+                // Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
+                return Block.CompareUtf8NullTerminatedStringWithAsciiString(rawHandle.GetHeapOffset(), asciiString) == 0;
+            }
 
             /// <summary>
             /// Returns the heap index of the given ASCII character or -1 if not found prior null terminator or end of heap.
@@ -394,28 +392,28 @@ namespace Z0
             internal int IndexOfRaw(int startIndex, char asciiChar)
             {
                 Debug.Assert(asciiChar != 0 && asciiChar <= 0x7f);
-                return this.Block.Utf8NullTerminatedOffsetOfAsciiChar(startIndex, asciiChar);
+                return Block.Utf8NullTerminatedOffsetOfAsciiChar(startIndex, asciiChar);
             }
 
-            // /// <summary>
-            // /// Returns true if the given raw (non-virtual) handle represents a string that starts with given ASCII prefix.
-            // /// </summary>
-            // internal bool StartsWithRaw(StringHandle rawHandle, string asciiPrefix)
-            // {
-            //     Debug.Assert(!rawHandle.IsVirtual);
-            //     Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
-            //     return this.Block.Utf8NullTerminatedStringStartsWithAsciiPrefix(rawHandle.GetHeapOffset(), asciiPrefix);
-            // }
+            /// <summary>
+            /// Returns true if the given raw (non-virtual) handle represents a string that starts with given ASCII prefix.
+            /// </summary>
+            public bool StartsWithRaw(StringHandle rawHandle, string asciiPrefix)
+            {
+                // Debug.Assert(!rawHandle.IsVirtual);
+                // Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
+                return Block.Utf8NullTerminatedStringStartsWithAsciiPrefix(rawHandle.GetHeapOffset(), asciiPrefix);
+            }
 
-            // /// <summary>
-            // /// Equivalent to Array.BinarySearch, searches for given raw (non-virtual) handle in given array of ASCII strings.
-            // /// </summary>
-            // internal int BinarySearchRaw(string[] asciiKeys, StringHandle rawHandle)
-            // {
-            //     Debug.Assert(!rawHandle.IsVirtual);
-            //     Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
-            //     return this.Block.BinarySearch(asciiKeys, rawHandle.GetHeapOffset());
-            // }
+            /// <summary>
+            /// Equivalent to Array.BinarySearch, searches for given raw (non-virtual) handle in given array of ASCII strings.
+            /// </summary>
+            public int BinarySearchRaw(string[] asciiKeys, StringHandle rawHandle)
+            {
+                // Debug.Assert(!rawHandle.IsVirtual);
+                // Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
+                return Block.BinarySearch(asciiKeys, rawHandle.GetHeapOffset());
+            }
         }
     }
 }

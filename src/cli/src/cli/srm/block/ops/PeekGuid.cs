@@ -15,7 +15,6 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
-
             [Op]
             public Guid PeekGuid(int offset)
             {
@@ -23,9 +22,7 @@ namespace Z0
 
                 byte* ptr = Pointer + offset;
                 if (BitConverter.IsLittleEndian)
-                {
                     return *(Guid*)ptr;
-                }
                 else
                 {
                     unchecked

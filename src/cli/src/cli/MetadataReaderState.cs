@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
-    using System.Runtime.InteropServices;
-    using System.Linq;
 
     using static Part;
     using static core;
@@ -20,6 +17,9 @@ namespace Z0
 
     public sealed class MetadataReaderState
     {
+        public static byte MaxTableCount
+            => (byte)MetadataTokens.TableCount;
+
         public SRM.MemoryBlock RootBlock {get; internal set;}
 
         public CliMetadataHeader MetadataHeader {get; internal set;}
@@ -35,14 +35,17 @@ namespace Z0
         public int[] ExternalTableRowCount {get; internal set;}
             = sys.empty<int>();
 
-        public int[] TableRowCounts {get; internal set;}
-            = sys.empty<int>();
+        public int[] TableRowCounts {get;}
+            = sys.alloc<int>(MaxTableCount);
 
         public SRM.MemoryBlock PdbBlock {get; internal set;}
             = SRM.MemoryBlock.Empty;
 
         public SRM.DebugMetadataHeader DebugHeader {get; internal set;}
             = SRM.DebugMetadataHeader.Empty;
+
+        public Index<CliTableKind, SRM.MemoryBlock> TableBlocks {get;}
+            = sys.alloc<SRM.MemoryBlock>(MaxTableCount);
 
         public SRM.HeapSizes HeapSizes {get; internal set;}
 
@@ -54,5 +57,12 @@ namespace Z0
 
         public PointerTableRefSizes PointerTableRefSizes {get; internal set;}
 
+        public NonVirtualStringHeap StringHeap {get; internal set;}
+
+        public BlobHeap BlobHeap {get; internal set;}
+
+        public GuidHeap GuidHeap {get; internal set;}
+
+        public UserStringHeap UserStringHeap {get; internal set;}
     }
 }

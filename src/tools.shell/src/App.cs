@@ -14,6 +14,7 @@ namespace Z0
     using static CodeSymbolModels;
     using static core;
 
+
     sealed class ToolShell : AppService<ToolShell>
     {
         void EmitPartSymbols()

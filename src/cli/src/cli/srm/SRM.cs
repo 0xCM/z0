@@ -37,20 +37,32 @@ namespace Z0
         public static bool IsDeclaredSorted(TableMask sorted, TableMask index)
             => (sorted & index) != 0;
 
-        public static MetadataReaderState CreateReaderState(byte* metadata, int length, MetadataReaderOptions options)
+        [MethodImpl(Inline), Op]
+        public static MetadataReaderState initialize(MemorySeg src)
+            => initialize(src.BaseAddress.Pointer<byte>(), src.Size);
+
+        [MethodImpl(Inline), Op]
+        public static MetadataReaderState initialize(Assembly src)
+            => initialize(Clr.metadata(src));
+
+        public static MetadataReaderState initialize(byte* metadata, int length, MetadataReaderOptions options = MetadataReaderOptions.Default)
         {
             var state = new MetadataReaderState();
             var utf8Decoder = MetadataStringDecoder.DefaultUTF8;
-            var Block = block(metadata,length);
+            var Block = block(metadata, length);
             state.RootBlock = Block;
+
             var headerReader = new BlobReader(Block);
             ReadMetadataHeader(ref headerReader, out var header);
+            state.MetadataHeader = header;
+
             var _metadataKind = GetMetadataKind(header.VersionText);
-            var streamHeaders = ReadStreamHeaders(ref headerReader);
             state.MetadataKind = _metadataKind;
+
+            var streamHeaders = ReadStreamHeaders(ref headerReader);
             state.StreamHeaders = streamHeaders;
 
-            InitializeStreamReaders(_metadataKind, Block, streamHeaders, out var _streamKind, out var metadataTableStream, out var pdbStream);
+            InitializeStreamReaders(state, _metadataKind, Block, streamHeaders, out var _streamKind, out var metadataTableStream, out var pdbStream);
             state.StreamKind = _streamKind;
             state.MetadataBlock = metadataTableStream;
             state.PdbBlock = pdbStream;
@@ -67,9 +79,8 @@ namespace Z0
             var tableReader = new BlobReader(metadataTableStream);
             ReadMetadataTableHeader(_streamKind, ref tableReader, out var heapSizes, out var metadataTableRowCounts, out var _sortedTables);
             state.HeapSizes = heapSizes;
-            state.TableRowCounts = metadataTableRowCounts;
+            metadataTableRowCounts.CopyTo(state.TableRowCounts);
             state.SortedTables = _sortedTables;
-
 
             var metadataTableBlock = tableReader.GetMemoryBlockAt(0, tableReader.RemainingBytes);
             state.MetadataTableBlock = metadataTableBlock;
@@ -91,7 +102,6 @@ namespace Z0
             var propertyRefSizeSorted = GetReferenceSize(rowCounts, TableIndex.PropertyPtr) > SmallIndexSize ? LargeIndexSize : GetReferenceSize(rowCounts, TableIndex.Property);
 
             state.PointerTableRefSizes = _PointerTableRefSizes(fieldRefSizeSorted, methodRefSizeSorted, paramRefSizeSorted,eventRefSizeSorted,propertyRefSizeSorted);
-
 
             // Compute the coded token ref sizes
             var typeDefOrRefRefSize = ComputeCodedTokenSize(TypeDefOrRefTag.LargeRowSize, rowCounts, TypeDefOrRefTag.TablesReferenced);
@@ -129,23 +139,34 @@ namespace Z0
             var blobHeapRefSize = (((state.HeapSizes & HeapSizes.BlobHeapLarge) == HeapSizes.BlobHeapLarge) ? 4 : 2);
 
             var num = 0;
+
             var _ModuleTableBlock = BlockFactories.ModuleTableBlock(rowCounts[0], stringHeapRefSize, guidHeapRefSize, state.MetadataTableBlock, num);
             num += _ModuleTableBlock.Length;
+            state.TableBlocks[CliTableKind.Module] = _ModuleTableBlock;
+
             var _TypeRefTableBlock = BlockFactories.TypeRefTableBlock(rowCounts[1], resolutionScopeRefSize, stringHeapRefSize, state.MetadataTableBlock, num);
             num += _TypeRefTableBlock.Length;
+            state.TableBlocks[CliTableKind.TypeRef] = _TypeRefTableBlock;
+
             var _TypeDefBlock = BlockFactories.TypeDefBlock(rowCounts[2], fieldRefSizeSorted, methodRefSizeSorted, typeDefOrRefRefSize, stringHeapRefSize, state.MetadataTableBlock, num);
             num += _TypeDefBlock.Length;
+            state.TableBlocks[CliTableKind.TypeDef] = _TypeDefBlock;
+
             var _FieldPtrBlock = BlockFactories.FieldPtrBlock(rowCounts[3], GetReferenceSize(rowCounts, TableIndex.Field), state.MetadataTableBlock, num);
             num += _FieldPtrBlock.Length;
+            state.TableBlocks[CliTableKind.FieldPtr] = _FieldPtrBlock;
 
-            // var FieldTable = new FieldTableReader(rowCounts[4], stringHeapRefSize, blobHeapRefSize, state.MetadataTableBlock, num);
-            // num += FieldTable.Block.Length;
+            var _FieldBlock = BlockFactories.FieldBlock(rowCounts[4], stringHeapRefSize, blobHeapRefSize, state.MetadataTableBlock, num);
+            num += _FieldBlock.Length;
+            state.TableBlocks[CliTableKind.Field] = _FieldBlock;
 
-            // var MethodPtrTable = new MethodPtrTableReader(rowCounts[5], GetReferenceSize(rowCounts, TableIndex.MethodDef), state.MetadataTableBlock, num);
-            // num += MethodPtrTable.Block.Length;
+            var _MethodPtrBlock = BlockFactories.MethodPtrBlock(rowCounts[5], GetReferenceSize(rowCounts, TableIndex.MethodDef), state.MetadataTableBlock, num);
+            num += _MethodPtrBlock.Length;
+            state.TableBlocks[CliTableKind.MethodPtr] = _MethodPtrBlock;
 
-            // var MethodDefTable = new MethodTableReader(rowCounts[6], paramRefSize, stringHeapRefSize, blobHeapRefSize, state.MetadataTableBlock, num);
-            // num += MethodDefTable.Block.Length;
+            var _MethodDefBlock = BlockFactories.MethodDefBlock(rowCounts[6], paramRefSizeSorted, stringHeapRefSize, blobHeapRefSize, state.MetadataTableBlock, num);
+            num += _MethodDefBlock.Length;
+            state.TableBlocks[CliTableKind.MethodDef] = _MethodDefBlock;
 
             // var ParamPtrTable = new ParamPtrTableReader(rowCounts[7], GetReferenceSize(rowCounts, TableIndex.Param), state.MetadataTableBlock, num);
             // num += ParamPtrTable.Block.Length;
@@ -156,6 +177,7 @@ namespace Z0
             var _InterfaceImplBlock = BlockFactories.InterfaceImplBlock(rowCounts[9], IsDeclaredSorted(state.SortedTables, TableMask.InterfaceImpl),
                 GetReferenceSize(rowCounts, TableIndex.TypeDef), typeDefOrRefRefSize, state.MetadataTableBlock, num);
             num += _InterfaceImplBlock.Length;
+            state.TableBlocks[CliTableKind.InterfaceImpl] = _InterfaceImplBlock;
 
             // var MemberRefTable = new MemberRefTableReader(rowCounts[10], memberRefParentRefSize, stringHeapRefSize, blobHeapRefSize, state.MetadataTableBlock, num);
             // num += MemberRefTable.Block.Length;
@@ -196,6 +218,8 @@ namespace Z0
             var _MethodImplTableBlock = BlockFactories.MethodImplBlock(rowCounts[25], IsDeclaredSorted(state.SortedTables, TableMask.MethodImpl),
                 GetReferenceSize(rowCounts, TableIndex.TypeDef), methodDefOrRefRefSize, state.MetadataTableBlock, num);
             num += _MethodImplTableBlock.Length;
+            state.TableBlocks[CliTableKind.MethodImpl] = _MethodImplTableBlock;
+
             // var ModuleRefTable = new ModuleRefTableReader(rowCounts[26], stringHeapRefSize, state.MetadataTableBlock, num);
             // num += ModuleRefTable.Block.Length;
             // var TypeSpecTable = new TypeSpecTableReader(rowCounts[27], blobHeapRefSize, state.MetadataTableBlock, num);

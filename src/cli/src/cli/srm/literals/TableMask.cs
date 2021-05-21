@@ -79,15 +79,7 @@ namespace Z0
 
             Assembly = 1UL << TableIndex.Assembly,
 
-            // AssemblyProcessor = 1UL << TableIndices.AssemblyProcessor,
-
-            // AssemblyOS = 1UL << TableIndices.AssemblyOS,
-
             AssemblyRef = 1UL << TableIndex.AssemblyRef,
-
-            // AssemblyRefProcessor = 1UL << TableIndices.AssemblyRefProcessor,
-
-            // AssemblyRefOS = 1UL << TableIndices.AssemblyRefOS,
 
             File = 1UL << TableIndex.File,
 

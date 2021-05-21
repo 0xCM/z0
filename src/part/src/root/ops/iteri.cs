@@ -21,10 +21,13 @@ namespace Z0
         /// over intergers over which iteration will occur</param>
         /// <param name="f">The action to be applied to each  value</param>
         [MethodImpl(Inline), Op]
-        public static void iteri(int min, int max, Action<int> f)
+        public static void iter<T>(Pair<T> src, Action<T> f)
+            where T : unmanaged
         {
-            for(var i = min; i< max; i++)
-                f(i);
+            var min = bw64(src.Left);
+            var max = bw64(src.Right);
+            for(var i=min; i<max; i++)
+                f(@as<T>(i));
         }
 
         /// <summary>

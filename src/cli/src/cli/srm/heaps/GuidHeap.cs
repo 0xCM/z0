@@ -7,6 +7,9 @@ namespace Z0
 {
     using System;
     using System.Reflection.Metadata;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     partial class SRM
     {
@@ -14,9 +17,16 @@ namespace Z0
         {
             internal readonly MemoryBlock Block;
 
+            [MethodImpl(Inline)]
             public GuidHeap(MemoryBlock block)
             {
                 Block = block;
+            }
+
+            public MemoryAddress BaseAddress
+            {
+                [MethodImpl(Inline)]
+                get => Block.BaseAddress;
             }
 
             public Guid GetGuid(GuidHandle handle)
