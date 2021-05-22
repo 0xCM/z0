@@ -45,6 +45,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint u32(ReadOnlySpan<byte> src, uint offset)
             => skip32(src, offset);
-
     }
 }

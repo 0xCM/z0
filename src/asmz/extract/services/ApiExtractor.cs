@@ -17,6 +17,13 @@ namespace Z0
     using static core;
     using static Typed;
 
+    public struct ApiExtractOptions
+    {
+        public bool EmitContext;
+
+        public bool Analyze;
+    }
+
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>
     {
@@ -46,11 +53,14 @@ namespace Z0
 
         ApiCatalogs Catalogs;
 
+        ApiExtractOptions Options;
+
         public ApiExtractor()
         {
             Identity = MultiDiviner.Service;
             Buffer = ApiExtracts.buffer();
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
+            Options.Analyze = true;
         }
 
         protected override void OnInit()
@@ -124,25 +134,10 @@ namespace Z0
             var resolved = parts.Map(Resolver.ResolvePart);
             ExtractParts(resolved,false);
             SealCollected();
-            EmitProcessContext();
-            Analyze();
-        }
-
-        void RunWorkflow(params PartId[] selected)
-        {
-            var flow = Wf.Running(string.Format("Exracting parts {0}", selected.Delimit(Chars.Comma)));
-            var parts = Wf.ApiCatalog.FindParts(selected);
-            var count = parts.Length;
-            var resolved = parts.Map(Resolver.ResolvePart);
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(resolved,i);
-                counter += ExtractPart(part);
-            }
-            Wf.Ran(flow, string.Format("Extracted {0} host routines from {1} parts", counter, selected.Length));
-
-            EmitProcessContext();
+            if(Options.EmitContext)
+                EmitProcessContext();
+            if(Options.Analyze)
+                Analyze();
         }
 
         FS.FolderPath SegDir

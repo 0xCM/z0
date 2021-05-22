@@ -38,6 +38,19 @@ namespace Z0.Asm
             return dst.ViewDeposited();
         }
 
+        public static ReadOnlySpan<ApiInstruction> filter(ReadOnlySpan<ApiInstruction> src, byte opcode)
+        {
+            var dst = core.list<ApiInstruction>();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(src,i);
+                if(instruction.Encoded.StartsWith(opcode))
+                    dst.Add(instruction);
+            }
+            return dst.ViewDeposited();
+
+        }
         public static LocalOffsetVector offsets(Index<ApiInstruction> src)
         {
             var offsets = src.View;

@@ -74,7 +74,7 @@ namespace Z0.Asm
         [Op]
         public Index<AsmCallRow> Calls(ReadOnlySpan<ApiInstruction> src)
         {
-            var calls = AsmEtl.filter(src, IceMnemonic.Call);
+            var calls = AsmEtl.filter(src, 0xE8);
             var count = calls.Length;
             var buffer = alloc<AsmCallRow>(count);
             ref var row = ref first(span(buffer));
@@ -82,14 +82,13 @@ namespace Z0.Asm
             {
                 ref readonly var call = ref skip(calls,i);
                 ref var dst = ref seek(row,i);
-                var bytes = @readonly(call.EncodedData.Storage);
-                var offset = ByteReader.read(slice(bytes,1));
+                asm.rel32dx(call.Encoded, out var offset);
                 dst.SourcePart = call.Part;
                 dst.Block = call.BaseAddress;
-                dst.Source = call.IP;
-                dst.Target = call.NextIp + offset;
                 dst.InstructionSize = call.InstructionSize;
-                dst.TargetOffset = dst.Target - (dst.Source + dst.InstructionSize);
+                dst.Source = call.IP;
+                dst.TargetOffset = (uint)offset;
+                dst.Target =  (call.IP + call.InstructionSize) + offset;
                 dst.Instruction = call.Statment;
                 dst.Encoded = call.Encoded;
             }

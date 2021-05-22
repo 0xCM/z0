@@ -347,8 +347,44 @@ namespace Z0.Asm
             Wf.ApiCatalogs().Correlate(dst);
 
         }
+
+        [Op]
+        static Address32 rel32dx(BinaryCode src)
+        {
+            var opcode = src.First;
+            root.require(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
+            var bytes = slice(src.View, 1);
+            return core.u32(bytes);
+        }
+
+        void TestRel32()
+        {
+            var @base = 0x7fff328f9430;
+            var ip = @base + 0x36;
+            var sz = 5;
+            var nip = ip + sz;
+            var code = new byte[]{0xe8, 0x25, 0xe4, 0xb2, 0x5f};
+            const string Statement = "0036h call 7fff92427890h; e8 25 e4 b2 5f";
+            var dx = rel32dx(code);
+            Wf.Row(dx);
+
+            // var builder = new AsmStatementBuilder();
+            // var cases = AsmCases.loadRel32(builder.call()).View;
+            // var count = cases.Length;
+            // var errors = text.buffer();
+            // for(var i=0; i<count; i++)
+            // {
+            //     ref readonly var c = ref skip(cases,i);
+            //     Wf.Row(c.Format());
+            //     Wf.Row(RP.PageBreak40);
+            //     if(!c.Validate(errors))
+            //         Wf.Error(errors.Emit());
+            // }
+        }
+
         public void Run()
         {
+            //TestRel32();
             RunExtractWorkflow();
             //CaptureSelf();
             // var dir = Db.AppLogDir();

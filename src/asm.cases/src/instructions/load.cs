@@ -7,22 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static AsmInstructions;
 
     partial class AsmCases
     {
-        [Op]
-        static Address32 rel32dx(BinaryCode src)
-        {
-            var opcode = src[0];
-            root.require(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
-            var len = src.Length - 1;
-            var bytes = slice(src.View, 1);
-            return core.u32(bytes);
-        }
-
         [Op]
         public static Index<CallRel32Case> loadRel32(Call call)
         {
@@ -43,10 +33,9 @@ namespace Z0.Asm
             return cases;
         }
 
-        static ref CallRel32Case load(AsmCaller caller, MemoryAddress ip, MemoryAddress next, MemoryAddress target, AsmHexCode encoding, AsmFragment line,
-            ref CallRel32Case dst)
+        static ref CallRel32Case load(AsmCaller caller, MemoryAddress ip, MemoryAddress next, MemoryAddress target, AsmHexCode encoding, AsmFragment line, ref CallRel32Case dst)
         {
-            dst.Caller= caller;
+            dst.Caller = caller;
             dst.Ip = ip;
             dst.NextIp = next;
             dst.Target = target;

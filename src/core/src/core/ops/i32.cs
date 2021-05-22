@@ -45,5 +45,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref int i32<T>(in T src, int offset)
             => ref add(@as<T,int>(src), offset);
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly int i32(ReadOnlySpan<byte> src)
+            => ref first32i(src);
+
+        [MethodImpl(Inline), Op]
+        public static ref int i32(Span<byte> src)
+            => ref first32i(src);
     }
 }

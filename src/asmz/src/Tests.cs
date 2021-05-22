@@ -947,23 +947,6 @@ namespace Z0.Asm
             Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
-        void TestRel32()
-        {
-            var builder = new AsmStatementBuilder();
-            var cases = AsmCases.loadRel32(builder.call()).View;
-            var count = cases.Length;
-            var errors = text.buffer();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var c = ref skip(cases,i);
-                Wf.Row(c.Format());
-                Wf.Row(RP.PageBreak40);
-                if(!c.Validate(errors))
-                    Wf.Error(errors.Emit());
-            }
-        }
-
-
         ReadOnlySpan<byte> Input => new byte[]{0x44, 0x01, 0x58,0x04};
 
         const string InputBits = "0100 0100 0000 0001 0101 1000 0000 0100";
