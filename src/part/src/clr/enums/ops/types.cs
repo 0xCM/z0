@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         /// <summary>
         /// Queries the source assemblies for enum types

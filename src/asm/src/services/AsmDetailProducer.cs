@@ -90,7 +90,7 @@ namespace Z0.Asm
         void AssignMnemonicCode(in IceInstruction src, ref AsmInstructionDetail dst)
         {
             var name = src.AsmMnemonic.Format();
-            if(ClrEnums.parse<AsmMnemonicCode>(name, out var code))
+            if(Enums.parse<AsmMnemonicCode>(name, out var code))
             {
                 dst.Mnemonic = code;
             }

@@ -221,10 +221,10 @@ namespace Z0.Asm
             resolver.ResolveParts(parts);
         }
 
-        void RunExtractor(params PartId[] parts)
-        {
-            Wf.ApiExtractor().Run();
-        }
+        // void RunExtractor(params PartId[] parts)
+        // {
+        //     Wf.ApiExtractor().Run();
+        // }
 
         void IndexApiPdbFiles(params PartId[] parts)
         {

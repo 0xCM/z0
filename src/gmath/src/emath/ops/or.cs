@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ClrEnums;
+    using static Enums;
 
     partial struct emath
     {

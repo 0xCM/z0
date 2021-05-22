@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         /// <summary>
         /// Gets the names of the (unique) enumeration literals

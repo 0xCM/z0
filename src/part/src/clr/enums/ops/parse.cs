@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         public static Outcome parse<E>(string src, out E dst)
             where E : unmanaged

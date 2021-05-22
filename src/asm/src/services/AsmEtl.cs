@@ -51,14 +51,14 @@ namespace Z0.Asm
             return dst.ViewDeposited();
 
         }
-        public static LocalOffsetVector offsets(Index<ApiInstruction> src)
+
+        public static LocalOffsetVector offsets(ReadOnlySpan<ApiInstruction> src)
         {
-            var offsets = src.View;
             var count = src.Length;
             var buffer = alloc<Address16>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
-                seek(dst,i) = (Address16)skip(offsets,i).Offset;
+                seek(dst,i) = (Address16)skip(src, i).Offset;
             return buffer;
         }
 

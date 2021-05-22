@@ -13,6 +13,25 @@ namespace Z0
     using static Root;
     using static core;
 
+
+    partial class XApi
+    {
+        [Op]
+        public static ApiMemberInfo Describe(this ResolvedMethod src)
+        {
+            var dst = new ApiMemberInfo();
+            var msil = ClrDynamic.msil(src.EntryPoint, src.Uri, src.Method);
+            dst.EntryPoint = src.EntryPoint;
+            dst.ApiKind = src.Method.KindId();
+            dst.CliSig = msil.CliSig;
+            dst.DisplaySig = src.Method.DisplaySig().Format();
+            dst.Token = msil.Token;
+            dst.Uri = src.Uri.Format();
+            dst.MsilCode = msil.Code;
+            return dst;
+        }
+
+    }
     [ApiHost]
     public class ApiResolver : AppService<ApiResolver>
     {
@@ -57,17 +76,11 @@ namespace Z0
             return counter;
         }
 
-        public static uint describe(ReadOnlySpan<ResolvedMethod> src, Span<ResolvedMethodInfo> dst)
+        public static uint describe(ReadOnlySpan<ResolvedMethod> src, Span<ApiMemberInfo> dst)
         {
             var count = (uint)src.Length;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var method = ref skip(src,i);
-                ref var info = ref seek(dst,i);
-                info.EntryPoint = method.EntryPoint;
-                info.Uri = method.Uri.Format();
-                info.DisplaySig = method.Method.DisplaySig().Format();
-            }
+                seek(dst,i) = skip(src,i).Describe();
             dst.Sort();
             return count;
         }
@@ -140,7 +153,7 @@ namespace Z0
                 var methods = host.Methods.View;
                 var mCount = methods.Length;
                 for(var j=0; j<mCount; j++)
-                    describe(skip(methods,j), ref seek(dst,counter++));
+                    seek(dst,counter++) = skip(methods,j).Describe();
             }
             return counter;
         }
@@ -194,15 +207,15 @@ namespace Z0
             return dst.Close();
         }
 
-        public ReadOnlySpan<ResolvedMethodInfo> LogResolutions(ReadOnlySpan<ResolvedPart> src, FS.FolderPath dir)
+        public ReadOnlySpan<ApiMemberInfo> LogResolutions(ReadOnlySpan<ResolvedPart> src, FS.FolderPath dir)
         {
             var _methods = methods(src);
             var count = _methods.Length;
             Wf.Status(string.Format("{0} Resolved {1} methods from {2} parts", Worker(), count, src.Length));
-            var buffer = span<ResolvedMethodInfo>(count);
+            var buffer = span<ApiMemberInfo>(count);
             describe(_methods, buffer);
             Wf.Status(string.Format("{0} Collected descriptions for {1} method resolutions", Worker(), count));
-            TableEmit(buffer, ResolvedMethodInfo.RenderWidths, Db.Table<ResolvedMethodInfo>(dir));
+            TableEmit(buffer, ApiMemberInfo.RenderWidths, Db.Table<ApiMemberInfo>(dir));
             return buffer;
         }
 
@@ -313,10 +326,11 @@ namespace Z0
             var msil = ClrDynamic.msil(src.EntryPoint, src.Uri, src.Method);
             dst.EntryPoint = src.EntryPoint;
             dst.ApiKind = src.Method.KindId();
-            dst.MsilCode = msil.Code;
             dst.CliSig = msil.CliSig;
             dst.DisplaySig = src.Method.DisplaySig().Format();
             dst.Token = msil.Token;
+            dst.Uri = src.Uri.Format();
+            dst.MsilCode = msil.Code;
             return ref dst;
         }
     }

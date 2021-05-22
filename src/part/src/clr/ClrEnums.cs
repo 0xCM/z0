@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Root;
 
     using PK = ClrPrimalKind;
 
-    [ApiHost(ApiNames.ClrEnums, true)]
-    public readonly partial struct ClrEnums
+    [ApiHost]
+    public readonly partial struct Enums
     {
         [MethodImpl(Inline)]
         public static ClrEnum<E> @enum<E>()
@@ -30,7 +29,7 @@ namespace Z0
             where E : unmanaged, Enum
             where V : unmanaged
         {
-            var pairs = ClrEnums.details<E,V>();
+            var pairs = Enums.details<E,V>();
             var index = new Dictionary<V,E>();
             foreach(var pair in pairs)
                 index.TryAdd(pair.PrimalValue, pair.LiteralValue);

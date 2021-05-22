@@ -14,7 +14,7 @@ namespace Z0
         public Index<ClrEnumRecord> EmitEnumRecords(ClrAssembly src, FS.FilePath dst)
         {
 
-            var records = ClrEnums.records(src);
+            var records = Enums.records(src);
             if(records.Length != 0)
             {
                 var t = default(ClrEnumRecord);

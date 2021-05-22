@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RefinedLiteral<E> refined<E>(E e)
             where E : unmanaged, Enum, IEquatable<E>
-                => new RefinedLiteral<E>(e, ClrEnums.@base<E>());
+                => new RefinedLiteral<E>(e, Enums.@base<E>());
 
         /// <summary>
         /// Creates a <see cref='RefinedLiteral{E,T}'/>

@@ -19,7 +19,7 @@ namespace Z0
         {
             public F[] Fields
             {
-                get => ClrEnums.literals<F>();
+                get => Enums.literals<F>();
             }
 
             public string[] Labels

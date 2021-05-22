@@ -14,7 +14,7 @@ namespace Z0
     {
         public const string TableId = "api.members";
 
-        public const byte FieldCount = 6;
+        public const byte FieldCount = 7;
 
         public MemoryAddress EntryPoint;
 
@@ -26,6 +26,8 @@ namespace Z0
 
         public utf8 DisplaySig;
 
+        public utf8 Uri;
+
         public BinaryCode MsilCode;
 
         [MethodImpl(Inline)]
@@ -33,6 +35,6 @@ namespace Z0
             => EntryPoint.CompareTo(src.EntryPoint);
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{16,16,16,80,120,60};
+            => new byte[FieldCount]{16,16,16,80,120,120,60};
     }
 }

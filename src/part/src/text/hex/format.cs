@@ -14,7 +14,7 @@ namespace Z0
     partial struct HexFormat
     {
         [MethodImpl(Inline), Op]
-        public static HexDataFormatter DataFormatter(MemoryAddress? @base = null, ushort bpl = 20, bool labels = true)
+        public static HexDataFormatter DataFormatter(ulong? @base = null, ushort bpl = 20, bool labels = true)
             => new HexDataFormatter(new HexLineConfig(bpl, labels), @base);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var data = ClrEnums.scalar<E,T>(src);
+            var data = Enums.scalar<E,T>(src);
             return text.concat(name, Chars.Colon, Numeric.format(data, @base));
         }
 
@@ -59,7 +59,7 @@ namespace Z0
         public static string field<E,T>(E src, Base16 @base, string name)
             where E : unmanaged, Enum
             where T : unmanaged
-                => text.concat(name, Chars.Colon, formatter<T>().FormatItem(ClrEnums.scalar<E,T>(src)));
+                => text.concat(name, Chars.Colon, formatter<T>().FormatItem(Enums.scalar<E,T>(src)));
 
         [Op, Closures(Closure)]
         public static string format<T>(ReadOnlySpan<T> src, in HexFormatOptions config)

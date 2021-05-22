@@ -14,7 +14,7 @@ namespace Z0
         {
             var t = typeof(T);
             dst.TypeName = t.Name;
-            dst.DataType = (PrimalCode)ClrEnums.ecode(t);
+            dst.DataType = (PrimalCode)Enums.ecode(t);
             dst.SymCount = (ushort)t.GetFields().Length;
             dst.TypeNameData = text.utf16(dst.TypeName).ToArray();
             dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
@@ -25,7 +25,7 @@ namespace Z0
         public static ref SymTypeInfo symtype(Type src, out SymTypeInfo dst)
         {
             dst.TypeName = src.Name;
-            dst.DataType = (PrimalCode)ClrEnums.ecode(src);
+            dst.DataType = (PrimalCode)Enums.ecode(src);
             dst.SymCount = (ushort)src.GetFields().Length;
             dst.TypeNameData = text.utf16(dst.TypeName).ToArray();
             dst.TypeNameSize = (ushort)dst.TypeNameData.Length;

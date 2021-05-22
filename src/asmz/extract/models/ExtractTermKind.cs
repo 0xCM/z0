@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public enum ExtractTermKind : sbyte
     {
         None = -1,

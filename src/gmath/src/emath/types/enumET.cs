@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public @enum(T scalar)
-            => Literal = ClrEnums.literal<E,T>(scalar);
+            => Literal = Enums.literal<E,T>(scalar);
 
         public T Scalar
         {

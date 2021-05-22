@@ -51,7 +51,7 @@ namespace Z0
         static EnumLiteralDetails<E> Data<E>()
             where E : unmanaged, Enum
         {
-            var type = ClrEnums.@base<E>();
+            var type = Enums.@base<E>();
             var fields = typeof(E).LiteralFields().ToArray();
             var indices = new List<EnumLiteralDetail<E>>(fields.Length);
             for(var i=0u; i< fields.Length; i++)

@@ -55,6 +55,9 @@ namespace Z0
 
         ApiExtractOptions Options;
 
+        Index<IPart> SelectedParts;
+
+
         public ApiExtractor()
         {
             Identity = MultiDiviner.Service;
@@ -74,6 +77,7 @@ namespace Z0
             HostDatasets = new();
             Catalogs = Wf.ApiCatalogs();
             Paths = new ApiExtractPaths(Db.AppLogRoot());
+            SelectedParts = Wf.ApiCatalog.Parts;
         }
 
         void SealCollected()
@@ -130,12 +134,17 @@ namespace Z0
 
         void RunWorkflow()
         {
-            var parts = Wf.ApiCatalog.Parts;
-            var resolved = parts.Map(Resolver.ResolvePart);
-            ExtractParts(resolved,false);
+            Paths.ExtractRoot().Clear();
+            Paths.AsmSourceRoot().Clear(true);
+
+            var resolved = SelectedParts.Map(Resolver.ResolvePart);
+            ExtractParts(resolved, false);
+
             SealCollected();
+
             if(Options.EmitContext)
                 EmitProcessContext();
+
             if(Options.Analyze)
                 Analyze();
         }
@@ -173,26 +182,26 @@ namespace Z0
             Wf.SegmentTraverser().Traverse(segments, BinDir);
         }
 
-        void RunExtractor()
-        {
-            RunExtractor(Wf.ApiCatalog.PartIdentities);
-        }
+        // void RunExtractor()
+        // {
+        //     RunExtractor(Wf.ApiCatalog.PartIdentities);
+        // }
 
-        public void Run(params PartId[] parts)
-        {
-            var flow = Wf.Running(nameof(ApiExtractor));
+        // public void Run(params PartId[] parts)
+        // {
+        //     var flow = Wf.Running(nameof(ApiExtractor));
 
-            Wf.Babble("Clearing output directories");
-            SegDir.Clear();
-            BinDir.Clear();
+        //     Wf.Babble("Clearing output directories");
+        //     SegDir.Clear();
+        //     BinDir.Clear();
 
-            if(parts.Length != 0)
-                RunExtractor(@readonly(parts));
-            else
-                RunExtractor();
+        //     if(parts.Length != 0)
+        //         RunExtractor(@readonly(parts));
+        //     else
+        //         RunExtractor();
 
-            Wf.Ran(flow,nameof(ApiExtractor));
-        }
+        //     Wf.Ran(flow,nameof(ApiExtractor));
+        // }
 
         internal void Run(ApiExtractChannel receivers, FS.FolderPath? dst = null)
         {

@@ -74,11 +74,11 @@ namespace Z0.Asm
 
         [Op]
         public static Index<RegClass> classes()
-            => ClrEnums.literals<RegClass>();
+            => Enums.literals<RegClass>();
 
         [Op]
         public static Index<RegWidth> widths()
-            => ClrEnums.literals<RegWidth>();
+            => Enums.literals<RegWidth>();
 
         [Op]
         public static AsmRegQuery query()
@@ -229,6 +229,6 @@ namespace Z0.Asm
 
         [Op]
         public static Index<Register> list()
-            => ClrEnums.literals<RegKind>().Map(model);
+            => Enums.literals<RegKind>().Map(model);
     }
 }

@@ -156,6 +156,62 @@ namespace Z0
                 var RowSize = _ParamListOffset + paramRefSize;
                 return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
             }
+
+            [Op]
+            public static MemoryBlock<MemberRefRow> MemberRefBlock(int numberOfRows, int memberRefParentRefSize, int stringHeapRefSize, int blobHeapRefSize,
+                MemoryBlock containingBlock,int containingBlockOffset)
+            {
+                var NumberOfRows = numberOfRows;
+                var _IsMemberRefParentRefSizeSmall = memberRefParentRefSize == 2;
+                var _IsStringHeapRefSizeSmall = stringHeapRefSize == 2;
+                var _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
+                var _ClassOffset = 0;
+                var _NameOffset = _ClassOffset + memberRefParentRefSize;
+                var _SignatureOffset = _NameOffset + stringHeapRefSize;
+                var RowSize = _SignatureOffset + blobHeapRefSize;
+                return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
+            }
+
+            [Op]
+            public static MemoryBlock<ConstantRow> ConstantBlock(int numberOfRows, int hasConstantRefSize, int blobHeapRefSize,
+                MemoryBlock containingBlock,int containingBlockOffset)
+            {
+                var NumberOfRows = numberOfRows;
+                var _IsHasConstantRefSizeSmall = hasConstantRefSize == 2;
+                var _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
+                var _TypeOffset = 0;
+                var _ParentOffset = _TypeOffset + sizeof(byte) + 1; // Alignment here (+1)...
+                var _ValueOffset = _ParentOffset + hasConstantRefSize;
+                var RowSize = _ValueOffset + blobHeapRefSize;
+                return containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
+            }
+
+            public static MemoryBlock CustomAttributeBlock(int numberOfRows, bool declaredSorted, int hasCustomAttributeRefSize, int customAttributeTypeRefSize,
+                int blobHeapRefSize, MemoryBlock containingBlock, int containingBlockOffset)
+            {
+                var NumberOfRows = numberOfRows;
+                var _IsHasCustomAttributeRefSizeSmall = hasCustomAttributeRefSize == 2;
+                var _IsCustomAttributeTypeRefSizeSmall = customAttributeTypeRefSize == 2;
+                var _IsBlobHeapRefSizeSmall = blobHeapRefSize == 2;
+                var _ParentOffset = 0;
+                var _TypeOffset = _ParentOffset + hasCustomAttributeRefSize;
+                var _ValueOffset = _TypeOffset + customAttributeTypeRefSize;
+                var RowSize = _ValueOffset + blobHeapRefSize;
+                var Block = containingBlock.GetMemoryBlockAt(containingBlockOffset, RowSize * numberOfRows);
+                int[]? PtrTable = null;
+
+                bool CheckSorted()
+                {
+                    return Block.IsOrderedByReferenceAscending(RowSize, _ParentOffset, _IsHasCustomAttributeRefSizeSmall);
+                }
+
+                if (!declaredSorted && !CheckSorted())
+                {
+                    PtrTable = Block.BuildPtrTable(numberOfRows, RowSize, _ParentOffset, _IsHasCustomAttributeRefSizeSmall);
+                }
+                return Block;
+            }
+
         }
     }
 }

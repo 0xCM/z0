@@ -49,7 +49,7 @@ namespace Z0
             var available = Enum.GetNames(typeof(E)).Where(n => !excluded.Contains(n)).ToArray();
             var names = available.Mapi((index, name) => (index, name)).ToDictionary();
             var stream = src.Stream(Z0.Interval.closed(0, names.Count));
-            var query = from item in stream select ClrEnums.parse<E>(names[item]).Value;
+            var query = from item in stream select Enums.parse<E>(names[item]).Value;
             return query;
         }
     }

@@ -44,8 +44,7 @@ namespace Z0
         }
 
         public Index<ApiInstruction> Instructions
-        {
-            get => Routines.SelectMany(x => x.Instructions);
-        }
+            => Routines.SelectMany(x => x.Instructions);
+
     }
 }

@@ -303,7 +303,5 @@ namespace Z0.Asm
                 return e;
             }
         }
-
-
     }
 }

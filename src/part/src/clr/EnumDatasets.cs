@@ -28,10 +28,10 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var src = ClrEnums.details<E,T>();
+            var src = Enums.details<E,T>();
             var count = src.Length;
             var token = CliTokens.token<E>();
-            var datatype = ClrEnums.@base<E>();
+            var datatype = Enums.@base<E>();
             var description = string.Empty;
             var indices = sys.alloc<uint>(count);
             var names = sys.alloc<string>(count);
@@ -57,7 +57,7 @@ namespace Z0
             where F : unmanaged, Enum
         {
             var dst = text.build();
-            var labels = ClrEnums.literals<F>();
+            var labels = Enums.literals<F>();
             for(var i=0; i<labels.Length; i++)
                 dst.Delimit(labels[i], labels[i].ToString(), delimiter);
             return dst.ToString();
@@ -66,7 +66,7 @@ namespace Z0
         public static string header(Type src, char delimiter = FieldDelimiter)
         {
             var dst = text.build();
-            var labels = ClrEnums.literals<F>();
+            var labels = Enums.literals<F>();
             for(var i=0; i<labels.Length; i++)
                 dst.Delimit(labels[i], labels[i].ToString(), delimiter);
             return dst.ToString();

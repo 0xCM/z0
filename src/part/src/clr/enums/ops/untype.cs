@@ -12,7 +12,7 @@ namespace Z0
 
     using NK = NumericKind;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         const NumericKind Closure = Integers;
 

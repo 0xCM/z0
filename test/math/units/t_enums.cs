@@ -23,7 +23,7 @@ namespace Z0
 
         public void check_enum_values()
         {
-            var values = ClrEnums.details<Choices32i,int>();
+            var values = Enums.details<Choices32i,int>();
             Claim.eq(Enum.GetValues(typeof(Choices32i)).Length, values.Length);
 
             for(var i = 0; i<values.Length; i++)
@@ -32,7 +32,7 @@ namespace Z0
                 if(ival == byte.MaxValue)
                     break;
 
-                var member = ClrEnums.literal<Choices32i,int>(ival);
+                var member = Enums.literal<Choices32i,int>(ival);
                 Claim.eq(member, values[i].LiteralValue);
 
                 var expect = (int)Math.Pow(2,i);

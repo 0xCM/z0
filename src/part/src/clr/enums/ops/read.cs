@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         [MethodImpl(Inline)]
         public static unsafe E read<E,T>(in T scalar, E e = default)

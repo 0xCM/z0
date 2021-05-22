@@ -36,7 +36,7 @@ namespace Z0
         [Op]
         public static Index<SymLiteral> literals(Index<Assembly> src)
         {
-            var kvTypes = ClrEnums.types(src).View;
+            var kvTypes = Enums.types(src).View;
             var partCount = kvTypes.Length;
             var dst = root.list<SymLiteral>();
             for(var i=0; i<partCount; i++)
@@ -71,7 +71,7 @@ namespace Z0
                 row.DataType = kind;
                 row.Position = (ushort)i;
                 row.Name = f.Name;
-                row.ScalarValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
+                row.ScalarValue = Enums.unbox(kind, f.GetRawConstantValue());
                 row.Symbol = tag.MapValueOrDefault(a => a.Symbol, f.Name);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
                 row.Hidden = f.Ignored();

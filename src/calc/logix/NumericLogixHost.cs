@@ -25,13 +25,13 @@ namespace Z0
         /// Advertises the supported unary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<ULK> UnaryLogicKinds
-            => ClrEnums.literals<ULK>();
+            => Enums.literals<ULK>();
 
         /// <summary>
         /// Advertises the supported binary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<BLK> BinaryLogicKinds
-            => ClrEnums.literals<BLK>();
+            => Enums.literals<BLK>();
 
         /// <summary>
         /// Advertises the supported ternary bitlogic operators
@@ -43,19 +43,19 @@ namespace Z0
         /// Advertises the supported unary arithmetic operators
         /// </summary>
         public static ReadOnlySpan<UAR> UnaryAritmeticKinds
-            => ClrEnums.literals<UAR>();
+            => Enums.literals<UAR>();
 
         /// <summary>
         /// Advertises the supported binary arithmetic operators
         /// </summary>
         public static ReadOnlySpan<BAR> BinaryArithmeticKinds
-            => ClrEnums.literals<BAR>();
+            => Enums.literals<BAR>();
 
         /// <summary>
         /// Advertises the supported comparison operators
         /// </summary>
         public static ReadOnlySpan<BCK> BinaryComparisonKinds
-            => ClrEnums.literals<BCK>();
+            => Enums.literals<BCK>();
 
         [Op, Closures(Integers)]
         public static bit eval<T>(BCK kind, T a, T b)

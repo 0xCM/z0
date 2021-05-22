@@ -27,14 +27,10 @@ namespace Z0
 
         public ApiMember(OpUri uri, MethodInfo method, MemoryAddress address)
         {
-            //Id = uri.OpId;
             OpUri = uri;
             ApiClass = method.KindId();
             Method = root.require(method != null, method, () => "Unfortunately, the method is null");
-            //BaseAddress = address;
-            //Host = OpUri.Host;
             Msil = ClrDynamic.msil(address, uri, method);
-            //CliSig = address.IsNonZero ? method.ResolveSignature() : CliSig.Empty;
             Metadata = method.Artifact();
         }
 

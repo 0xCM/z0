@@ -53,7 +53,6 @@ namespace Z0
             return dst;
         }
 
-
         [MethodImpl(Inline), Op]
         public static MetadataReaderState state(Assembly src)
             => SRM.initialize(src);
@@ -82,7 +81,7 @@ namespace Z0
         public static Index<byte,CliTableKind> TableKinds()
         {
             const byte MaxTableId = (byte)CliTableKind.CustomDebugInformation;
-            var values = ClrEnums.literals<CliTableKind,byte>().Where(x => x < MaxTableId).Sort().View;
+            var values = Enums.literals<CliTableKind,byte>().Where(x => x < MaxTableId).Sort().View;
             var src = recover<CliTableKind>(values);
             var buffer = alloc<CliTableKind>(MaxTableId + 1);
             ref var dst = ref first(buffer);

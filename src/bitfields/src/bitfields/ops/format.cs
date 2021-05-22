@@ -61,7 +61,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var data = ClrEnums.scalar<E,T>(src);
+            var data = Enums.scalar<E,T>(src);
             var limit = (uint)gbits.effwidth(data);
             var config = BitFormatter.limited(limit,zpad);
             var formatter = BitFormatter.create<T>(config);

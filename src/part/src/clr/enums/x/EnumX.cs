@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    using api = ClrEnums;
+    using api = Enums;
 
     partial class XTend
     {

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static ClrEnums;
+    using static Enums;
 
     partial struct emath
     {
@@ -28,7 +28,7 @@ namespace Z0
         public static T sll<T,E>(T src, E offset)
             where T : unmanaged
             where E : unmanaged, Enum
-                => gmath.sll(src, ClrEnums.scalar<E,byte>(offset));
+                => gmath.sll(src, Enums.scalar<E,byte>(offset));
 
 
         [MethodImpl(Inline)]
@@ -54,7 +54,7 @@ namespace Z0
             where E : unmanaged, Enum
             where S : unmanaged
             where T : unmanaged
-                => Numeric.force<S,T>(gmath.sll(ClrEnums.scalar<E,S>(src), count));
+                => Numeric.force<S,T>(gmath.sll(Enums.scalar<E,S>(src), count));
 
         /// <summary>
         /// Converts a source enume value src:E to a parametrically-identified numeric type S,

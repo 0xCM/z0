@@ -10,8 +10,8 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines an *unbased* sequence of instructions

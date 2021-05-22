@@ -46,13 +46,13 @@ namespace Z0
         /// Advertises the supported unary operators
         /// </summary>
         public ReadOnlySpan<ULK> UnaryOpKinds
-            => ClrEnums.literals<ULK>();
+            => Enums.literals<ULK>();
 
         /// <summary>
         /// Advertises the supported binary operators
         /// </summary>
         public ReadOnlySpan<BLK> BinaryOpKinds
-            => ClrEnums.literals<BLK>();
+            => Enums.literals<BLK>();
 
         /// <summary>
         /// Advertises the supported ternary operators

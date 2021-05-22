@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         /// <summary>
         /// Determines whether an enum defines a name-identified literal

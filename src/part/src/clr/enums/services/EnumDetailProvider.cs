@@ -66,7 +66,7 @@ namespace Z0
             _EnumType = typeof(E);
             _FieldDefs = _EnumType.LiteralFields();
             _FieldCount = _FieldDefs.Count;
-            _EnumKind = ClrEnums.@base<E>();
+            _EnumKind = Enums.@base<E>();
             _Values = values();
             _EnumFields = fields();
             _Details = details();
@@ -93,13 +93,13 @@ namespace Z0
             var buffer = alloc<ClrEnumField<E>>(_FieldCount);
             ref var dst = ref first(buffer);
             for(var i=0u; i<_FieldCount; i++)
-                seek(dst,i) = ClrEnums.field(i, skip(defs,i),  skip(values,i));
+                seek(dst,i) = Enums.field(i, skip(defs,i),  skip(values,i));
             return buffer;
         }
 
         Index<EnumLiteralDetail<E>> details()
         {
-            var type = ClrEnums.@base<E>();
+            var type = Enums.@base<E>();
             var fields = _FieldDefs.View;
             var values = _Values.View;
 

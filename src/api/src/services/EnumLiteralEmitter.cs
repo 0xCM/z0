@@ -31,7 +31,7 @@ namespace Z0
         static EnumDataset<E,T> EmitInfoset<E,T>(FS.FilePath dst)
             where E : unmanaged, Enum
             where T : unmanaged
-                => emit(@readonly(ClrEnums.describe<E,T>()),dst);
+                => emit(@readonly(Enums.describe<E,T>()),dst);
 
         static EnumDataset<E,T> EmitDataset<E,T>(FS.FilePath dst)
             where E : unmanaged, Enum
@@ -63,7 +63,7 @@ namespace Z0
             where F : unmanaged, Enum
         {
             var dst = text.build();
-            var labels = ClrEnums.literals<F>();
+            var labels = Enums.literals<F>();
             var count = labels.Length;
             for(var i=0; i<count; i++)
                 dst.Delimit(labels[i], labels[i].ToString(), delimiter);

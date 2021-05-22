@@ -51,7 +51,7 @@ namespace Z0
                 row.Name = f.Name;
                 row.Symbol = expr;
                 row.DirectValue = (E)f.GetRawConstantValue();
-                row.ScalarValue = ClrEnums.@ulong(kind, row.DirectValue);
+                row.ScalarValue = Enums.@ulong(kind, row.DirectValue);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
                 row.Identity = identity(f, i, expr);
                 row.Hidden = f.Ignored();

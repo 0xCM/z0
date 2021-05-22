@@ -70,7 +70,7 @@ namespace Z0
         public ClrEnumKind PrimalKind
         {
             [MethodImpl(Inline)]
-            get => ClrEnums.@base<E>();
+            get => Enums.@base<E>();
         }
 
         public CliToken Token

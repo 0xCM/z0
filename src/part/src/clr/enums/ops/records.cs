@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         [Op]
         public static ClrEnumRecord[] records(Assembly src)

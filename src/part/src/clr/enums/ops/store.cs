@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static Typed;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         [MethodImpl(Inline)]
         public static ref T store<E,T>(in E e, out T dst)

@@ -28,6 +28,6 @@ namespace Z0
             where I : unmanaged, Enum
             where W : unmanaged, Enum
                 => new BitFieldIndexEntry<I,W>(
-                    ClrEnums.literal<I,U>(Numeric.force<int,U>(i)), indices[i].Name, (W)widths[i].GetRawConstantValue());
+                    Enums.literal<I,U>(Numeric.force<int,U>(i)), indices[i].Name, (W)widths[i].GetRawConstantValue());
     }
 }

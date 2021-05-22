@@ -29,10 +29,10 @@ namespace Z0
         {
             Storage = data;
             Key = typeof(K);
-            Keys = ClrEnums.literals<K>();
-            _KeyIndex = ClrEnums.details<K>().Storage;
-            _KeyNames = ClrEnums.names<K>();
-            _KeyKind = ClrEnums.@base<K>();
+            Keys = Enums.literals<K>();
+            _KeyIndex = Enums.details<K>().Storage;
+            _KeyNames = Enums.names<K>();
+            _KeyKind = Enums.@base<K>();
         }
 
         public ReadOnlySpan<T> View
@@ -50,7 +50,7 @@ namespace Z0
         public ref T this[K index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[ClrEnums.scalar<K,ushort>(index)];
+            get => ref Storage[Enums.scalar<K,ushort>(index)];
         }
 
         public uint EntryCount

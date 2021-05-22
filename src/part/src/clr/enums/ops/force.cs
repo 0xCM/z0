@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte force8u<E>(E src)

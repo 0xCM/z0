@@ -39,7 +39,7 @@ namespace Z0
 
         public void Run()
         {
-            Records = ClrEnums.records(Source);
+            Records = Enums.records(Source);
             if(Records.Length != 0)
             {
                 var t = default(ClrEnumRecord);

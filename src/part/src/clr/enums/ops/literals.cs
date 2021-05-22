@@ -9,7 +9,7 @@ namespace Z0
 
     using static core;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         public static Index<E> literals<E>()
             where E : unmanaged, Enum

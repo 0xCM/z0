@@ -6,7 +6,7 @@ namespace Z0
 {
     using EC = ClrPrimalKind;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         [Op]
         public static ulong unbox(EC ec, object src)

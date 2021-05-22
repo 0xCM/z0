@@ -28,16 +28,16 @@ namespace Z0
             => typeof(K);
 
         ClrEnumKind ISemanticIndex.KeyKind
-            => ClrEnums.@base<K>();
+            => Enums.@base<K>();
 
         ReadOnlySpan<string> ISemanticIndex.KeyNames
-            => ClrEnums.names<K>();
+            => Enums.names<K>();
 
         ReadOnlySpan<K> KeyValues
-            => ClrEnums.literals<K>();
+            => Enums.literals<K>();
 
         ReadOnlySpan<EnumLiteralDetail<K>> KeyIndex
-            => ClrEnums.details<K>().View;
+            => Enums.details<K>().View;
     }
 
     [Free]

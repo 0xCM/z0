@@ -13,7 +13,7 @@ namespace Z0
 
     public class ApiSegmentLocator : AppService<ApiSegmentLocator>
     {
-        public ReadOnlySpan<ProcessSegment> LocateSegments(AddressBank src, ReadOnlySpan<ResolvedMethodInfo> methods, FS.FolderPath dir)
+        public ReadOnlySpan<ProcessSegment> LocateSegments(AddressBank src, ReadOnlySpan<ApiMemberInfo> methods, FS.FolderPath dir)
         {
             var count = methods.Length;
             var flow = Wf.Running(Msg.LocatingSegments.Format(count));

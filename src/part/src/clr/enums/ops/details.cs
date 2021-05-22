@@ -10,12 +10,12 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         public static EnumLiteralDetails<E> details<E>()
             where E : unmanaged, Enum
         {
-            var type = ClrEnums.@base<E>();
+            var type = Enums.@base<E>();
             var fields = @readonly(typeof(E).LiteralFields());
             var count = fields.Length;
             var buffer = alloc<EnumLiteralDetail<E>>(count);

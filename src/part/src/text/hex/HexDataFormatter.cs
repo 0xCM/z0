@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct HexDataFormatter : IHexDataFormatter
     {
         [MethodImpl(Inline), Op]
-        public static HexDataFormatter create(MemoryAddress? @base = null, ushort bpl = 20, bool labels = true)
+        public static HexDataFormatter create(ulong? @base = null, ushort bpl = 20, bool labels = true)
             => new HexDataFormatter(new HexLineConfig(bpl, labels), @base);
 
         public readonly HexLineConfig LineConfig;
@@ -22,13 +22,13 @@ namespace Z0
 
         readonly HexFormatOptions DataConfig;
 
-        readonly MemoryAddress BaseAddress;
+        readonly ulong BaseAddress;
 
         [MethodImpl(Inline)]
-        public HexDataFormatter(HexLineConfig config, MemoryAddress? @base = null)
+        public HexDataFormatter(HexLineConfig config, ulong? @base = null)
         {
             LineConfig = config;
-            BaseAddress = @base ?? MemoryAddress.Zero;
+            BaseAddress = @base ?? 0;
             LabelConfig = HexFormatSpecs.options(zpad:true, specifier: true, uppercase: false, prespec:false);
             DataConfig = HexFormatSpecs.HexData;
         }
@@ -41,7 +41,7 @@ namespace Z0
 
             if(LineConfig.LineLabels)
             {
-                line.Append(_offset.Format());
+                line.Append(_offset.ToString("x") + HexFormatSpecs.PostSpec);
 
                 if(delimiter != Space)
                     line.Append(Space);
@@ -94,7 +94,7 @@ namespace Z0
         {
             const char delimiter = Chars.Space;
 
-            var dst = root.list<string>();
+            var dst = core.list<string>();
             var line = text.buffer();
             var count = src.Length;
 

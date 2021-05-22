@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         [MethodImpl(Inline)]
         public static ClrEnumField<E> field<E>(uint index, FieldInfo src, E value)

@@ -53,6 +53,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Outcome parse(string src, out PartId dst)
-            => ClrEnums.parse(text.remove(src, Chars.Dot), out dst);
+            => Enums.parse(text.remove(src, Chars.Dot), out dst);
     }
 }

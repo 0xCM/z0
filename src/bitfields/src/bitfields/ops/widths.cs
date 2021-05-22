@@ -17,7 +17,7 @@ namespace Z0
         public static Vector256<byte> widths<F>(W256 w)
             where F : unmanaged, Enum
         {
-            Span<F> values = ClrEnums.literals<F>();
+            Span<F> values = Enums.literals<F>();
             var widths = values.Bytes();
             var count = root.min(widths.Length, 32);
             var data = default(Vector256<byte>);

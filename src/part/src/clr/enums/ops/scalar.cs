@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static memory;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         /// <summary>
         /// Reads a T-value from an E-enum value of primal T-kind.

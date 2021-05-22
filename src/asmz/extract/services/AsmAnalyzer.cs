@@ -52,6 +52,7 @@ namespace Z0
                 ref readonly var routine = ref skip(routines,i);
                 seek(target,i) = routine.Code;
             }
+
             var blocks = @readonly(buffer);
             EmitCalls(routines,dst);
             var statements  = EmitStatements(blocks, dst);

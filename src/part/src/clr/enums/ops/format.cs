@@ -11,7 +11,7 @@ namespace Z0
 
     using NK = ClrEnumCode;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
 
         public static string format<E>(E src, Base2 n, int? digits = null)

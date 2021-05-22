@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         public static Index<T> numeric<E,T>()
             where E : unmanaged, Enum

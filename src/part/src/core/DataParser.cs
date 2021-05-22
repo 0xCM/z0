@@ -135,7 +135,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Outcome eparse<T>(string src, out T dst)
             where T : unmanaged
-                => ClrEnums.parse(src, out dst);
+                => Enums.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out ByteSize dst)

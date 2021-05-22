@@ -54,7 +54,7 @@ namespace Z0.Asm
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
         public IceOpCodeId Thaw(Iced.Code src)
-            => ClrEnums.parse(src.ToString(), IceOpCodeId.INVALID);
+            => Enums.parse(src.ToString(), IceOpCodeId.INVALID);
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure

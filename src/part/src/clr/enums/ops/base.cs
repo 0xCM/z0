@@ -9,7 +9,7 @@ namespace Z0
     using NK = NumericKind;
     using BK = ClrEnumKind;
 
-    partial struct ClrEnums
+    partial struct Enums
     {
         /// <summary>
         /// Determines the integral type refined by a parametrically-identified enum type

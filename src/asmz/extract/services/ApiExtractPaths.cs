@@ -34,11 +34,14 @@ namespace Z0
         public FS.FolderPath AsmSourceDir(PartId part)
             => AsmSourceRoot() + FS.folder(part);
 
+        public FS.FolderPath ExtractRoot()
+            => Paths.CaptureRoot(Root) + FS.folder("extracts");
+
         public FS.FilePath RawExtractPath(ApiHostUri host)
-            => Paths.CaptureRoot(Root) + FS.file(host, "extracts-raw", FS.XPack);
+            => ExtractRoot() + FS.file(host, "extracts-raw", FS.XPack);
 
         public FS.FilePath ParsedExtractPath(ApiHostUri host)
-            => Paths.CaptureRoot(Root) + FS.file(host, "extracts-parsed", FS.XPack);
+            => ExtractRoot() + FS.file(host, "extracts-parsed", FS.XPack);
 
         public FS.FilePath AsmPath(ApiHostUri host)
             =>  AsmSourceDir(host.Part) + FS.file(host, FS.Asm);

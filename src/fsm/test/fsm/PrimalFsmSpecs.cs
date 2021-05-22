@@ -36,6 +36,6 @@ namespace Z0
                 => new PrimalFsmSpec<S,E,R>(states, events, results);
 
         public static PrimalFsmSpec<M.State,M.Event,M.Result> model()
-            => modelG(ClrEnums.literals<M.State>(), ClrEnums.literals<M.Event>(), ClrEnums.literals<M.Result>());
+            => modelG(Enums.literals<M.State>(), Enums.literals<M.Event>(), Enums.literals<M.Result>());
     }
 }
