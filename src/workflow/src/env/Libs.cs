@@ -13,6 +13,9 @@ namespace Z0
         FS.FolderPath LibRoot()
             => Env.Libs;
 
+        FS.FolderPath LibRoot(FS.FolderPath root)
+            => root;
+
         FS.FolderPath LibDir(string name)
             => LibRoot() + FS.folder(name);
 

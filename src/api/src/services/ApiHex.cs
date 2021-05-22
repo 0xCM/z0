@@ -14,31 +14,47 @@ namespace Z0
     [ApiHost]
     public class ApiHex : AppService<ApiHex>
     {
-        [Op]
-        public FS.Files Files(FS.FolderPath src)
-            => src.Files(FS.PCsv);
+        public FS.FolderPath HexRoot()
+            => Db.ParsedExtractRoot();
+
+        public FS.FolderPath HexRoot(FS.FolderPath root)
+            => Db.ParsedExtractRoot(root);
 
         [Op]
         public FS.Files Files()
-            => Db.ParsedExtractRoot().Files(FS.PCsv);
+            => HexRoot().Files(FS.PCsv);
 
-        [MethodImpl(Inline), Op]
-        public static ApiCodeBlock block(ApiHexRow src)
-            => new ApiCodeBlock(src.Address, src.Uri, src.Data);
+        [Op]
+        public FS.Files Files(FS.FolderPath root)
+            => HexRoot(root).Files(FS.PCsv);
 
         [Op]
         public ApiCodeBlocks ReadBlocks()
             => ReadBlocks(Db.ParsedExtractPaths());
+
+        [Op]
+        public ApiCodeBlocks ReadBlocks(FS.FolderPath root)
+            => ReadBlocks(Db.ParsedExtractPaths(root));
+
+        [MethodImpl(Inline), Op]
+        public static ApiCodeBlock block(ApiHexRow src)
+            => new ApiCodeBlock(src.Address, src.Uri, src.Data);
 
         public Index<ApiHostBlocks> ReadHostBlocks(ReadOnlySpan<ApiHostUri> src)
         {
             var count = src.Length;
             var dst = root.list<ApiHostBlocks>();
             for(var i=0; i<count; i++)
-            {
-                ref readonly var host = ref skip(src,i);
-                dst.Add(ReadBlocks(host));
-            }
+                dst.Add(ReadBlocks(skip(src,i)));
+            return dst.ToArray();
+        }
+
+        public Index<ApiHostBlocks> ReadHostBlocks(FS.FolderPath root, ReadOnlySpan<ApiHostUri> src)
+        {
+            var count = src.Length;
+            var dst = core.list<ApiHostBlocks>();
+            for(var i=0; i<count; i++)
+                dst.Add(ReadBlocks(root, skip(src,i)));
             return dst.ToArray();
         }
 
@@ -59,18 +75,21 @@ namespace Z0
         }
 
         public ReadOnlySpan<ApiHostBlocks> ReadHostBlocks()
+            => ReadHostBlocks(HexRoot());
+
+        public ReadOnlySpan<ApiHostBlocks> ReadHostBlocks(FS.FolderPath root)
         {
             var flow = Wf.Running("Loading collected host blocks");
-            var files = Files().View;
+            var files = Files(root).View;
             var count = files.Length;
-            var dst = root.list<ApiHostBlocks>();
+            var dst = core.list<ApiHostBlocks>();
             var counter = 0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var file = ref skip(files,i);
                 if(InferHost(file.FileName, out var host))
                 {
-                    var blocks = ReadBlocks(host);
+                    var blocks = ReadBlocks(root, host);
                     dst.Add(blocks);
                     counter += blocks.Count;
                 }
@@ -86,7 +105,11 @@ namespace Z0
 
         [Op]
         public ApiHostBlocks ReadBlocks(ApiHostUri host)
-            => new ApiHostBlocks(host,ReadBlocks(Db.ParsedExtractPath(host)));
+            => new ApiHostBlocks(host, ReadBlocks(Db.ParsedExtractPath(host)));
+
+        [Op]
+        public ApiHostBlocks ReadBlocks(FS.FolderPath root, ApiHostUri host)
+            => new ApiHostBlocks(host, ReadBlocks(Db.ParsedExtractPath(root,host)));
 
         [Op]
         public Index<ApiCodeBlock> ReadBlocks(FS.FilePath src)
@@ -109,9 +132,7 @@ namespace Z0
             var rows = new DataList<ApiHexRow>(1600);
             var count = ReadRows(src, rows);
             for(var i=0; i<count; i++)
-            {
                 dst.Add(block(rows[i]));
-            }
             return count;
         }
 

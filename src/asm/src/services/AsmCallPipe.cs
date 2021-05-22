@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Linq;
 
     using static core;
 
@@ -14,6 +15,28 @@ namespace Z0.Asm
         {
             var dst = Db.TableDir<AsmCallRow>();
             return EmitRows(src, dst);
+        }
+
+        public ReadOnlySpan<AsmCallRow> EmitRows(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
+        {
+            var instructions = core.list<ApiInstruction>();
+            root.iter(src, routine => instructions.AddRange(routine.Instructions));
+            var calls = Calls(instructions.ViewDeposited());
+            var groups = @readonly(calls.GroupBy(x => x.SourcePart).Select(x => root.paired(x.Key, x.ToArray())).Array());
+            var formatter = Tables.formatter<AsmCallRow>(AsmCallRow.RenderWidths);
+            var flow = Wf.Running(string.Format("Emitting calls from {0} routines to {1}", src.Length, dst));
+            var counter = 0u;
+            for(var i=0; i<groups.Length; i++)
+            {
+                (var part, var pcalls) = skip(groups,i);
+                var path = Db.Table(dst, AsmCallRow.TableId, part);
+                var emitting = Wf.EmittingTable<AsmCallRow>(path);
+                var count = TableEmit(@readonly(pcalls), path);
+                Wf.EmittedTable(emitting,count);
+                counter += count;
+            }
+            Wf.Ran(flow, string.Format("Emitted {0} call rows", counter));
+            return calls;
         }
 
         public ReadOnlySpan<AsmCallRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
@@ -48,22 +71,10 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
-        /// <summary>
-        /// Filters a set of instructions predicated on s specified mnemonic
-        /// </summary>
-        /// <param name="src">The data sourde</param>
-        /// <param name="mnemonic">The mnemonic of interest</param>
         [Op]
-        static Index<ApiInstruction> filter(Index<ApiInstruction> src, IceMnemonic mnemonic)
-            => from a in src.Storage
-                let i = a.Instruction
-                where i.Mnemonic == mnemonic
-                select a;
-
-        [Op]
-        public Index<AsmCallRow> Calls(Index<ApiInstruction> src)
+        public Index<AsmCallRow> Calls(ReadOnlySpan<ApiInstruction> src)
         {
-            var calls = filter(src, IceMnemonic.Call).View;
+            var calls = AsmEtl.filter(src, IceMnemonic.Call);
             var count = calls.Length;
             var buffer = alloc<AsmCallRow>(count);
             ref var row = ref first(span(buffer));
@@ -73,6 +84,7 @@ namespace Z0.Asm
                 ref var dst = ref seek(row,i);
                 var bytes = @readonly(call.EncodedData.Storage);
                 var offset = ByteReader.read(slice(bytes,1));
+                dst.SourcePart = call.Part;
                 dst.Block = call.BaseAddress;
                 dst.Source = call.IP;
                 dst.Target = call.NextIp + offset;
@@ -106,6 +118,7 @@ namespace Z0.Asm
                             var cells = row.Cells.View;
                             var record = new AsmCallRow();
                             var k = 0;
+                            DataParser.eparse(skip(cells, k++).Text, out record.SourcePart);
                             DataParser.parse(skip(cells, k++).Text, out record.Block);
                             DataParser.parse(skip(cells, k++).Text, out record.Source);
                             DataParser.parse(skip(cells, k++).Text, out record.Target);

@@ -13,11 +13,20 @@ namespace Z0
         FS.FolderPath TableRoot()
             => DbRoot() + FS.folder(tables);
 
+        FS.FolderPath TableRoot(FS.FolderPath root)
+            => DbRoot(root) + FS.folder(tables);
+
         FS.FolderPath TableDir(string subject)
             => TableRoot() + FS.folder(subject);
 
         FS.FolderPath TableDir(FS.FolderName subject)
             => TableRoot() + subject;
+
+        FS.FolderPath TableDir(FS.FolderPath root, FS.FolderName subject)
+            => TableRoot(root) + subject;
+
+        FS.FolderPath TableDir(FS.FolderPath root, string subject)
+            => TableRoot(root) + FS.folder(subject);
 
         FS.FolderPath TableDir(Type t)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => TableDir(a.TableId), () => TableDir(t.Name));

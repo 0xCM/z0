@@ -11,6 +11,9 @@ namespace Z0
         FS.FolderPath CacheRoot()
             => Env.CacheRoot.Value;
 
+        FS.FolderPath CacheRoot(FS.FolderPath root)
+            => root;
+
         FS.FolderPath SymbolCacheRoot()
             => CacheRoot() + FS.folder(symbols);
 
@@ -38,13 +41,33 @@ namespace Z0
         FS.FolderPath ProcessContextRoot()
             => CacheRoot() + FS.folder(context);
 
+        FS.FolderPath ProcessContextRoot(FS.FolderPath root)
+            => CacheRoot(root) + FS.folder(context);
+
+        FS.FilePath ContextTable<T>(Timestamp ts)
+            where T : struct, IRecord<T>
+                => CaptureContextRoot() + FS.file(string.Format("{0}.{1}", Tables.identify<T>(), ts.Format()), FS.Csv);
+
+        FS.FilePath ContextTable<T>(FS.FolderPath root, Timestamp ts)
+            where T : struct, IRecord<T>
+                => CaptureContextRoot(root) + FS.file(string.Format("{0}.{1}", Tables.identify<T>(), ts.Format()), FS.Csv);
+
         FS.FolderPath ImageDumpRoot()
             => CacheRoot() + FS.folder(dumps) + FS.folder(images);
+
+        FS.FolderPath ImageDumpRoot(FS.FolderPath root)
+            => CacheRoot(root) + FS.folder(dumps) + FS.folder(images);
 
         FS.FolderPath DotNetImageDumpRoot()
             => ImageDumpRoot() + FS.folder(dotnet);
 
+        FS.FolderPath DotNetImageDumpRoot(FS.FolderPath root)
+            => ImageDumpRoot(root) + FS.folder(dotnet);
+
         FS.FolderPath DotNetImageDumpDir(byte major, byte minor, byte revision)
             => DotNetImageDumpRoot() + VersionFolderName(major, minor, revision);
+
+        FS.FolderPath DotNetImageDumpDir(FS.FolderPath root, byte major, byte minor, byte revision)
+            => DotNetImageDumpRoot(root) + VersionFolderName(major, minor, revision);
     }
 }

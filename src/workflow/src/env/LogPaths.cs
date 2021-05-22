@@ -14,23 +14,42 @@ namespace Z0
         FS.FolderPath LogRoot()
             => DbRoot() + FS.folder(logs);
 
+        FS.FolderPath LogRoot(FS.FolderPath root)
+            => DbRoot(root) + FS.folder(logs);
+
         FS.FolderPath CmdLogRoot()
             => LogRoot() + FS.folder(commands);
 
-        FS.FolderPath ShowLogRoot()
-            => LogRoot() + FS.folder(show);
+        FS.FolderPath CmdLogRoot(FS.FolderPath root)
+            => LogRoot(root) + FS.folder(commands);
 
         FS.FolderPath BuildLogRoot()
             => LogRoot() + FS.folder(build);
 
-        FS.FolderPath StepLogRoot()
-            => LogRoot() + FS.folder(steps);
+        FS.FolderPath BuildLogRoot(FS.FolderPath root)
+            => LogRoot(root) + FS.folder(build);
+
+        FS.FilePath BuildLogPath(FS.FileName src)
+            => BuildLogRoot() + src;
+
+        FS.FilePath BuildLogPath(FS.FolderPath root, FS.FileName src)
+            => BuildLogRoot(root) + src;
 
         FS.FolderPath AppLogRoot()
             => LogRoot() + FS.folder(apps);
 
+        FS.FolderPath AppLogRoot(FS.FolderPath root)
+            => LogRoot(root) + FS.folder(apps);
+
         FS.FolderPath AppLogDir()
             => AppLogRoot() + FS.folder(AppName);
+
+        FS.FolderPath AppLogDir(FS.FolderPath root)
+            => AppLogRoot(root) + FS.folder(AppName);
+
+        FS.FolderPath StepLogRoot()
+            => LogRoot() + FS.folder(steps);
+
 
         FS.FilePath AppLog(string id)
             => AppLogDir() + FS.file(id, FS.Log);
@@ -42,6 +61,9 @@ namespace Z0
             => CmdLogRoot() + (id.IsDiscriminated
                 ? FS.file(string.Format("{0}-{1}", id.Id, id.Token), X.Log)
                 : FS.file(id.Format(), X.Log));
+
+        FS.FolderPath ShowLogRoot()
+            => LogRoot() + FS.folder(show);
 
         FS.FilePath ShowLog([Caller]string name = null, FS.FileExt? ext = null)
             => ShowLogRoot() + FS.file(name, ext ?? X.Log);
@@ -61,7 +83,6 @@ namespace Z0
         StepLog StepLog<T>(WfStepId step, T subject, FS.FileExt ext)
             => new StepLog(StepLogPath(step,subject,ext));
 
-        FS.FilePath BuildLogPath(FS.FileName src)
-            => BuildLogRoot() + src;
+
     }
 }

@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src)
         {
-            var dst = Db.TableDir<AsmCallRow>();
+            var dst = Db.TableDir<AsmJmpRow>();
             return EmitRows(src,dst);
         }
 
@@ -28,6 +28,18 @@ namespace Z0.Asm
                 ref readonly var routines = ref skip(src,i);
                 var path = Db.Table(dst, AsmJmpRow.TableId, routines.Part);
                 rows.AddRange(EmitJmpRows(routines, path));
+            }
+
+            return rows.ViewDeposited();
+        }
+
+        public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
+        {
+            var rows = root.list<AsmJmpRow>();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var routines = ref skip(src,i);
             }
 
             return rows.ViewDeposited();
@@ -91,9 +103,42 @@ namespace Z0.Asm
             return collection.ToArray();
         }
 
+        ReadOnlySpan<AsmJmpRow> Collect(ReadOnlySpan<AsmRoutine> src)
+        {
+            var dst = root.list<AsmJmpRow>();
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var routine = ref skip(src,i);
+                for(var j=0; j<routine.InstructionCount; j++)
+                {
+                    var instructions = skip(routine,j).Instructions.View;
+                    for(var k=0; k<instructions.Length; k++)
+                    {
+                        ref readonly var instruction = ref skip(instructions, k);
+                        var fc = instruction.Instruction.FlowControl;
+                        switch(fc)
+                        {
+                            case IceFlowControl.ConditionalBranch:
+                            case IceFlowControl.IndirectBranch:
+                            case IceFlowControl.UnconditionalBranch:
+                                classify(instruction.Mnemonic, out var kind);
+                                jmprow(instruction, kind, out var row);
+                                dst.Add(row);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return dst.ViewDeposited();
+        }
+
+
         [Op]
         static ref AsmJmpRow jmprow(in ApiInstruction src, JmpKind jk, out AsmJmpRow dst)
         {
+            dst.SourcePart = src.Part;
             dst.Block = src.BaseAddress;
             dst.Kind = jk;
             dst.Source = src.IP;

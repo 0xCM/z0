@@ -13,6 +13,42 @@ namespace Z0.Asm
     [ApiHost]
     public sealed class AsmEtl : AppService<AsmEtl>
     {
+        public static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)
+        {
+            var code = new ApiCodeBlock(member.OpUri, member.Encoded);
+            return new AsmRoutine(member.OpUri, member.Method.Artifact().DisplaySig, code, member.TermCode, ToApiInstructions(code, asm));
+        }
+
+        /// <summary>
+        /// Filters a set of instructions predicated on s specified mnemonic
+        /// </summary>
+        /// <param name="src">The data sourde</param>
+        /// <param name="mnemonic">The mnemonic of interest</param>
+        [Op]
+        public static ReadOnlySpan<ApiInstruction> filter(ReadOnlySpan<ApiInstruction> src, IceMnemonic mnemonic)
+        {
+            var dst = core.list<ApiInstruction>();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(src,i);
+                if(instruction.Mnemonic == mnemonic)
+                    dst.Add(instruction);
+            }
+            return dst.ViewDeposited();
+        }
+
+        public static LocalOffsetVector offsets(Index<ApiInstruction> src)
+        {
+            var offsets = src.View;
+            var count = src.Length;
+            var buffer = alloc<Address16>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = (Address16)skip(offsets,i).Offset;
+            return buffer;
+        }
+
         [Op]
         public static ReadOnlySpan<ApiInstruction> instructions(ReadOnlySpan<ApiPartRoutines> src)
         {
@@ -91,7 +127,7 @@ namespace Z0.Asm
             => ToApiInstructions(code, src);
 
         public static ApiHostRoutine ApiHostRoutine(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
-            => new ApiHostRoutine(@base, ToApiInstructions(code, src));
+            => new ApiHostRoutine(@base,ToApiInstructions(code, src));
 
         [Op]
         public static Index<ApiInstruction> ToApiInstructions(ApiCodeBlock code, IceInstruction[] src)

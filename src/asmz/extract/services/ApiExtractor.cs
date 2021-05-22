@@ -34,6 +34,8 @@ namespace Z0
 
         ConcurrentBag<ApiHostDataset> HostDatasets;
 
+        Index<ApiHostDataset> CollectedData;
+
         ApiExtractPaths Paths;
 
         byte[] Buffer;
@@ -64,6 +66,11 @@ namespace Z0
             Paths = new ApiExtractPaths(Db.AppLogRoot());
         }
 
+        void SealCollected()
+        {
+            CollectedData = HostDatasets.Array();
+        }
+
         void EmitProcessContext()
         {
             var flow = Wf.Running("Emitting process context");
@@ -73,7 +80,7 @@ namespace Z0
             var pipe = Wf.ProcessContextPipe();
             var procparts = pipe.EmitPartitions(process, ts, dir);
             var regions = pipe.EmitRegions(process, ts, dir);
-            var members = ApiMembers.create(HostDatasets.ToArray().SelectMany(x => x.Members));
+            var members = ApiMembers.create(CollectedData.SelectMany(x => x.Members));
             var rebasing = Wf.Running();
             var entries = Catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
             Wf.Ran(rebasing);
@@ -105,6 +112,7 @@ namespace Z0
 
             }
         }
+
         void RunWorkflow()
         {
             var parts = Wf.ApiCatalog.Parts;
@@ -119,8 +127,10 @@ namespace Z0
             }
             Wf.Ran(flow, Msg.RanExtractWorkflow.Format(counter, parts.Length));
 
+            SealCollected();
             EmitProcessContext();
 
+            Wf.AsmAnalyzer().Analyze(CollectedData.SelectMany(x => x.Routines), Paths.AsmTableRoot());
         }
 
         void RunWorkflow(params PartId[] selected)
@@ -192,9 +202,6 @@ namespace Z0
                 RunExtractor();
 
             Wf.Ran(flow,nameof(ApiExtractor));
-            //HostDatasets.Clear();
-            // Paths.Root.Clear(true);
-            // Run3();
         }
 
         public void Run(ApiExtractReceipt receivers, FS.FolderPath? dst = null)

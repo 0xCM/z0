@@ -17,12 +17,6 @@ namespace Z0.Asm
 
     readonly struct AsmDecoderApi
     {
-        public static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)
-        {
-            var code = new ApiCodeBlock(member.OpUri, member.Encoded);
-            return new AsmRoutine(member.OpUri, member.Method.Artifact().DisplaySig, code, member.TermCode, AsmEtl.ToApiInstructions(code, asm));
-        }
-
         public static AsmRoutine routine(OpUri uri, MethodDisplaySig sig, ApiBlockAsm src, bool check = false)
         {
             var count = src.InstructionCount;

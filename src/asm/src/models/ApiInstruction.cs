@@ -8,36 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     /// <summary>
     /// Describes an instruction within the context of the defining api member
     /// </summary>
     public class ApiInstruction : IComparable<ApiInstruction>
     {
-        public static LocalOffsetVector offsets(Index<ApiInstruction> src)
-        {
-            var offsets = src.View;
-            var count = src.Length;
-            var buffer = alloc<Address16>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = (Address16)skip(offsets,i).Offset;
-            return buffer;
-        }
-
-        /// <summary>
-        /// Filters a set of instructions predicated on s specified mnemonic
-        /// </summary>
-        /// <param name="src">The data sourde</param>
-        /// <param name="mnemonic">The mnemonic of interest</param>
-        [Op]
-        public static Index<ApiInstruction> filter(Index<ApiInstruction> src, AsmMnemonicCode mnemonic)
-            => from a in src.Storage
-                let i = a.Instruction
-                where i.AsmMnemonic == mnemonic.ToString()
-                select a;
-
         public MemoryAddress BaseAddress {get;}
 
         public ApiCodeBlock Encoded {get;}
@@ -58,11 +34,35 @@ namespace Z0.Asm
             get => (byte)Instruction.InstructionSize;
         }
 
+        public PartId Part
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.OpUri.Part;
+        }
+
+        public OpUri Uri
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.OpUri;
+        }
+
         public OpIdentity OpId
-            => Encoded.OpId;
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.OpId;
+        }
 
         public BinaryCode EncodedData
-            => Encoded.Data;
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Data;
+        }
+
+        public AsmHexCode AmsHex
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Data;
+        }
 
         public MemoryAddress Offset
         {
@@ -77,25 +77,45 @@ namespace Z0.Asm
         }
 
         public AsmFormExpr AsmForm
-            => Instruction.Specifier;
+        {
+            [MethodImpl(Inline)]
+            get => Instruction.Specifier;
+        }
 
         public MemoryAddress IP
-            => Instruction.IP;
+        {
+            [MethodImpl(Inline)]
+            get => Instruction.IP;
+        }
 
         public MemoryAddress NextIp
-            => Instruction.NextIP;
+        {
+            [MethodImpl(Inline)]
+            get => Instruction.NextIP;
+        }
 
         public IceMnemonic Mnemonic
-            => Instruction.Mnemonic;
+        {
+            [MethodImpl(Inline)]
+            get => Instruction.Mnemonic;
+        }
 
-        /// <summary>
-        /// The encoded byte count
-        /// </summary>
-        public int Size
-            => Instruction.ByteLength;
+        public AsmMnemonic MnemonicExpr
+        {
+            [MethodImpl(Inline)]
+            get => Mnemonic.ToString();
+        }
 
-        public AsmOpCodeExpr OpCode
-            => AsmCore.opcode(Instruction.OpCode.OpCodeString);
+        // public AsmMnemonicCode MnemonicCode
+        // {
+        //     get => MnemonicExpr;
+        // }
+
+       public AsmOpCodeExpr OpCode
+       {
+            [MethodImpl(Inline)]
+            get => AsmCore.opcode(Instruction.OpCode.OpCodeString);
+       }
 
         [MethodImpl(Inline)]
         public int CompareTo(ApiInstruction src)

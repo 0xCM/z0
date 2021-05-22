@@ -14,17 +14,32 @@ namespace Z0
         FS.FolderPath DataRoot()
             => Env.DataRoot;
 
+        FS.FolderPath DataRoot(FS.FolderPath root)
+            => root;
+
         FS.FolderPath DbRoot()
             => Env.Db;
+
+        FS.FolderPath DbRoot(FS.FolderPath root)
+            => root;
 
         FS.FolderPath PackageRoot()
             => Env.Packages;
 
+        FS.FolderPath PackageRoot(FS.FolderPath root)
+            => root;
+
         FS.FolderPath DevRoot()
             => Env.DevRoot;
 
+        FS.FolderPath DevRoot(FS.FolderPath root)
+            => root;
+
         FS.FolderPath ArchiveRoot()
             => Env.Archives;
+
+        FS.FolderPath ArchiveRoot(FS.FolderPath root)
+            => root;
 
         FS.FolderPath TmpRoot()
             => Env.Tmp.Value + FS.folder(tmp);
@@ -67,6 +82,9 @@ namespace Z0
 
         FS.FolderName PartFolder(PartId part)
             => FS.folder(part.Format());
+
+        FS.FolderPath PartDir(FS.FolderPath parent, PartId part)
+            => parent + FS.folder(part.Format());
 
         FS.FileName HostFile(ApiHostUri host, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", host.Part.Format(), host.Name), ext);

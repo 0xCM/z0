@@ -14,7 +14,12 @@ namespace Z0
     {
         public const string TableId = "asm.calls";
 
-        public const byte FieldCount = 7;
+        public const byte FieldCount = 8;
+
+        /// <summary>
+        /// The invoking part
+        /// </summary>
+        public PartId SourcePart;
 
         /// <summary>
         /// The block base address
@@ -52,6 +57,6 @@ namespace Z0
         public BinaryCode Encoded;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{16,16,16,16,16,36,16};
+            => new byte[FieldCount]{16,16,16,16,16,16,36,16};
     }
 }

@@ -16,5 +16,8 @@ namespace Z0
 
         public static ApiSegmentLocator ApiSegmentLocator(this IWfRuntime wf)
             => Svc.ApiSegmentLocator.create(wf);
+
+        public static AsmAnalyzer AsmAnalyzer(this IWfRuntime wf)
+            => Svc.AsmAnalyzer.create(wf);
     }
 }

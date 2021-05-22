@@ -11,6 +11,9 @@ namespace Z0
         FS.FolderPath IndexRoot()
             => TableRoot() + FS.folder(indices);
 
+        FS.FolderPath IndexRoot(FS.FolderPath root)
+            => TableRoot(root) + FS.folder(indices);
+
         FS.FilePath IndexFile(string id)
             => IndexRoot() + FS.file(id, FS.Idx);
 

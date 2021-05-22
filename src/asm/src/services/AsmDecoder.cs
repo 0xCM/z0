@@ -254,7 +254,7 @@ namespace Z0.Asm
             dst = AsmRoutine.Empty;
             var outcome = Decode(src.Encoded, out var block);
             if(outcome)
-                dst = api.routine(src, block);
+                dst = AsmEtl.routine(src, block);
             return outcome;
         }
 

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static core;
@@ -20,7 +19,6 @@ namespace Z0
                 return 0;
 
             var counter = 0u;
-            var dst = Paths.PartDir(src.Part);
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
@@ -30,6 +28,5 @@ namespace Z0
             }
             return counter;
         }
-
     }
 }
