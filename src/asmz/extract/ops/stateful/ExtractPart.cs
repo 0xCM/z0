@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using static core;
 
     partial class ApiExtractor
     {
-        uint ExtractPart(in ResolvedPart src)
+        uint ExtractPart(ResolvedPart src)
         {
             var hosts = src.Hosts.View;
             var count = (uint)hosts.Length;
@@ -28,5 +30,8 @@ namespace Z0
             }
             return counter;
         }
+
+        public Task<uint> BeginExtractPart(ResolvedPart src)
+            => root.run(() => ExtractPart(src));
     }
 }

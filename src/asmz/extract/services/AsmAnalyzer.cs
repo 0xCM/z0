@@ -10,6 +10,7 @@ namespace Z0
     using static core;
 
     using Asm;
+
     public sealed class AsmAnalyzer : AppService<AsmAnalyzer>
     {
         ApiHex ApiHex;

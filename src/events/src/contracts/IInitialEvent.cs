@@ -11,7 +11,5 @@ namespace Z0
         where T : IInitialEvent<T>, IWfEvent<T>, new()
     {
 
-
     }
-
 }

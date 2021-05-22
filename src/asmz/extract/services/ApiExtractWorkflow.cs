@@ -19,41 +19,37 @@ namespace Z0
 
         int HostResolvedCount;
 
-        ApiExtractReceipt Receivers;
+        ApiExtractChannel EventChannel;
 
         public ApiExtractWorkflow()
         {
             MemberDecodedCount = 0;
             MemberParsedCount = 0;
-            Receivers = new();
-            Receivers.PartResolved += (source, e) => OnEvent(e);
-            Receivers.HostResolved += (source, e) => OnEvent(e);
-            Receivers.MemberParsed += (source, e) => OnEvent(e);
-            Receivers.MemberDecoded += (source, e) => OnEvent(e);
-            Receivers.ExtractError += (source, e) => OnEvent(e);
+            EventChannel = new();
+            EventChannel.Enlist(this);
         }
 
-        void OnEvent(PartResolvedEvent e)
+        internal void Deposit(PartResolvedEvent e)
         {
 
         }
 
-        void OnEvent(HostResolvedEvent e)
+        internal void Deposit(HostResolvedEvent e)
         {
             root.atomic(ref HostResolvedCount);
         }
 
-        void OnEvent(MemberParsedEvent e)
+        internal void Deposit(MemberParsedEvent e)
         {
             root.atomic(ref MemberParsedCount);
         }
 
-        void OnEvent(MemberDecodedEvent e)
+        internal void Deposit(MemberDecodedEvent e)
         {
             root.atomic(ref MemberDecodedCount);
         }
 
-        void OnEvent(ExtractErrorEvent e)
+        internal void Deposit(ExtractErrorEvent e)
         {
 
         }
@@ -61,9 +57,8 @@ namespace Z0
         public void Run()
         {
             var flow = Wf.Running();
-            Wf.ApiExtractor().Run(Receivers, Db.AppLogDir() + FS.folder("extract-wf"));
+            Wf.ApiExtractor().Run(EventChannel, Db.AppLogDir() + FS.folder("extract-wf"));
             Wf.Ran(flow, string.Format("Decoded:{0}", MemberDecodedCount));
         }
-
     }
 }

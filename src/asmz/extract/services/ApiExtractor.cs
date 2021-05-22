@@ -30,7 +30,7 @@ namespace Z0
 
         HexPacks HexPacks;
 
-        ApiExtractReceipt Receivers;
+        ApiExtractChannel Receivers;
 
         ConcurrentBag<ApiHostDataset> HostDatasets;
 
@@ -60,7 +60,7 @@ namespace Z0
             Decoder = Wf.AsmDecoder();
             Formatter = Wf.AsmFormatter();
             HexPacks = Wf.HexPacks();
-            Receivers = new ApiExtractReceipt();
+            Receivers = new ApiExtractChannel();
             HostDatasets = new();
             Catalogs = Wf.ApiCatalogs();
             Paths = new ApiExtractPaths(Db.AppLogRoot());
@@ -113,24 +113,19 @@ namespace Z0
             }
         }
 
+        void Analyze()
+        {
+            Wf.AsmAnalyzer().Analyze(CollectedData.SelectMany(x => x.Routines), Paths.AsmTableRoot());
+        }
+
         void RunWorkflow()
         {
             var parts = Wf.ApiCatalog.Parts;
-            var flow = Wf.Running(string.Format("Running extract workflow for {0}", parts.FormatList()));
-            var count = parts.Length;
             var resolved = parts.Map(Resolver.ResolvePart);
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(resolved,i);
-                counter += ExtractPart(part);
-            }
-            Wf.Ran(flow, Msg.RanExtractWorkflow.Format(counter, parts.Length));
-
+            ExtractParts(resolved,false);
             SealCollected();
             EmitProcessContext();
-
-            Wf.AsmAnalyzer().Analyze(CollectedData.SelectMany(x => x.Routines), Paths.AsmTableRoot());
+            Analyze();
         }
 
         void RunWorkflow(params PartId[] selected)
@@ -204,7 +199,7 @@ namespace Z0
             Wf.Ran(flow,nameof(ApiExtractor));
         }
 
-        public void Run(ApiExtractReceipt receivers, FS.FolderPath? dst = null)
+        internal void Run(ApiExtractChannel receivers, FS.FolderPath? dst = null)
         {
             Receivers = receivers;
             if(dst != null)

@@ -6,21 +6,38 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
 
     using static core;
 
     partial class ApiExtractor
     {
-        public ReadOnlySpan<ApiMemberExtract> ExtractParts(ReadOnlySpan<ResolvedPart> src)
+        public uint ExtractParts(ReadOnlySpan<ResolvedPart> src)
         {
             var count = src.Length;
             var counter = 0u;
-            var flow = Wf.Running(Msg.ExtractingParts.Format(count));
-            var dst = root.list<ApiMemberExtract>();
             for(var i=0; i<count; i++)
-                counter += ExtractHosts(skip(src,i).Hosts, dst);
-            Wf.Ran(flow, Msg.ExtractedParts.Format(counter,count));
-            return dst.ViewDeposited();
+                counter += ExtractPart(skip(src,i));
+            return counter;
+        }
+
+        uint ExtractParts(ResolvedPart[] src, bool pll)
+        {
+            var flow = Wf.Running(string.Format("Extracting data for {0} resolved parts", src.Length));
+            var counter = 0u;
+            if(pll)
+            {
+                var tasks = src.Select(BeginExtractPart);
+                Task.WaitAll(tasks);
+                root.iter(tasks, t => counter += t.Result);
+            }
+            else
+            {
+                counter = ExtractParts(src);
+            }
+            Wf.Ran(flow, string.Format("Extracted data for {0} members", counter));
+
+            return counter;
         }
     }
 }
