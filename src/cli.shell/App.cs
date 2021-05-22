@@ -108,26 +108,26 @@ namespace Z0
 
         }
 
-        void ReadMethodDefs()
-        {
-            var components = ApiComponents;
-            var count = components.Length;
-            var dst = Db.TableDir("cli") + FS.file(Tables.identify<MethodDefRow>().Format(), FS.Csv);
-            var flow = Wf.EmittingTable<MethodDefRow>(dst);
-            var writer = dst.Writer();
-            var counter = 0u;
-            var formatter = Tables.formatter<MethodDefRow>();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var component = ref skip(components,i);
-                var source = Cli.source(component);
-                var provider = MethodDefProvider.create();
-                var rows = provider.Load(source.TableSouce<MethodDefRow>());
-                counter += Tables.emit(rows,writer);
-            }
-            Wf.EmittedTable(flow,counter);
-        }
+        // void ReadMethodDefs()
+        // {
+        //     var components = ApiComponents;
+        //     var count = components.Length;
+        //     var dst = Db.TableDir("cli") + FS.file(Tables.identify<MethodDefRow>().Format(), FS.Csv);
+        //     var flow = Wf.EmittingTable<MethodDefRow>(dst);
+        //     var writer = dst.Writer();
+        //     var counter = 0u;
+        //     var formatter = Tables.formatter<MethodDefRow>();
+        //     writer.WriteLine(formatter.FormatHeader());
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var component = ref skip(components,i);
+        //         var source = Cli.source(component);
+        //         var provider = MethodDefProvider.create();
+        //         var rows = provider.Load(source.TableSouce<MethodDefRow>());
+        //         counter += Tables.emit(rows,writer);
+        //     }
+        //     Wf.EmittedTable(flow,counter);
+        // }
 
 
         protected override void Run()

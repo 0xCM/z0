@@ -47,10 +47,13 @@
 		},
 		{
 			"path": "..\\calc"
-		}
-        ,
+		},
 		{
 			"path": "..\\calc.shell"
-		}	],
+		},
+		{
+			"path": "..\\rules"
+		}
+	],
 	"settings": {}
 }

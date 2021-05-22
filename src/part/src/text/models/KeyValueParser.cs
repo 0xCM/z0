@@ -34,7 +34,6 @@ namespace Z0
             var parts = src.SplitClean(Delimiter);
             if(parts.Length == 2)
             {
-
                 if(KeyParser.Parse(parts[0], out var key) && ValueParser.Parse(parts[1], out var value))
                 {
                     dst = (key,value);

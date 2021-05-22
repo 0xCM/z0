@@ -9,10 +9,10 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct TextQuery
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Interspersal<T> interspersed<T>(Index<T> terms, Intersperse<T> rule)
-            => new Interspersal<T>(terms, rule);
+        [MethodImpl(Inline), Op]
+        public static bit @decimal(char c)
+            => (DecimalSymFacet)c >= DecimalSymFacet.First && (DecimalSymFacet)c <= DecimalSymFacet.Last;
     }
 }

@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
-    using static memory;
-
     [ApiHost]
     public readonly struct TextDocs
     {

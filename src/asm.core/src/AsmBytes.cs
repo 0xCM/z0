@@ -18,7 +18,6 @@ namespace Z0.Asm
         public static ref ModRm modrm(in AsmHexCode src, uint4 offset)
             => ref @as<byte,ModRm>(skip(src.Bytes, offset));
 
-        [Op]
         public static uint Serialize(AsmHexVector src, Span<byte> dst)
         {
             var j=0u;
@@ -32,7 +31,6 @@ namespace Z0.Asm
             return j;
         }
 
-        [Op]
         public static bool parse(string src, out AsmHexCode dst)
         {
             var storage = Cells.alloc(w128);

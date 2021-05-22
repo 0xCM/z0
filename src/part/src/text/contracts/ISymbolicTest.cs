@@ -4,14 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ISymbolicTest<S>
+    public interface ISymbolicQuery<S>
         where S : unmanaged
     {
         bit Check(S s);
     }
 
-    public interface ISymbolicTest<H,S> : ISymbolicTest<S>, IKeyed<string>
-        where H : struct, ISymbolicTest<H,S>
+    public interface ISymbolicQuery<H,S> : ISymbolicQuery<S>, IKeyed<string>
+        where H : struct, ISymbolicQuery<H,S>
         where S : unmanaged
     {
         string IKeyed<string>.Key

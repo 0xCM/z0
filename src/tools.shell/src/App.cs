@@ -120,9 +120,24 @@ namespace Z0
             Wf.EmittedFile(flow,projects.Length);
 
         }
+
+        public void Parse()
+        {
+            const char Delimiter = ':';
+            var input = "a:x:b: y: d";
+
+            var parser = TextParsers.CreateCharSeqParser(Delimiter);
+            var result = parser.Parse(input, out var output);
+            if(result)
+            {
+                root.iter(output, x => Wf.Row(new string(x)));
+            }
+
+        }
+
         public void Run()
         {
-            CalcRelativePaths();
+            Parse();
 
         }
     }

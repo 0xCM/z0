@@ -66,13 +66,13 @@ namespace Z0.Asm
                         return true;
                     }
                     else
-                        return (false, Msg.FenceNotFound.Format(OpCodeFence, src));
+                        return (false, TextParsers.FenceNotFound.Format(OpCodeFence, src));
                 }
                 else
                     return (false, Msg.CouldNotParseSigExpr.Format(sigexpr));
             }
             else
-                return (false, Msg.FenceNotFound.Format(SigFence,src));
+                return (false, TextParsers.FenceNotFound.Format(SigFence,src));
         }
 
 

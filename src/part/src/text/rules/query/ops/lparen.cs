@@ -9,10 +9,17 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    using AC = AsciChar;
+    using CC = AsciCharCode;
+
+    partial struct TextQuery
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Interspersal<T> interspersed<T>(Index<T> terms, Intersperse<T> rule)
-            => new Interspersal<T>(terms, rule);
+        [MethodImpl(Inline), Op]
+        public static bit lparen(char c)
+            => AC.LParen == (AC)c;
+
+        [MethodImpl(Inline), Op]
+        public static bit lparen(CC c)
+            => AC.LParen == (AC)c;
     }
 }

@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.IO;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public readonly struct TextDoc : IIndex<TextRow>
     {

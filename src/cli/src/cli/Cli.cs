@@ -79,6 +79,18 @@ namespace Z0
             return reader.HasMetadata;
         }
 
+        public static Index<byte,CliTableKind> TableKinds()
+        {
+            const byte MaxTableId = (byte)CliTableKind.CustomDebugInformation;
+            var values = ClrEnums.literals<CliTableKind,byte>().Where(x => x < MaxTableId).Sort().View;
+            var src = recover<CliTableKind>(values);
+            var buffer = alloc<CliTableKind>(MaxTableId + 1);
+            ref var dst = ref first(buffer);
+            for(byte i=0; i<values.Length; i++)
+                seek(dst,skip(values,i)) = (CliTableKind)i;
+            return buffer;
+        }
+
         public static CliRowKeys keys<K,T>(ReadOnlySpan<T> handles, K k = default)
             where T : unmanaged
             where K : unmanaged, ICliTableKind<K>

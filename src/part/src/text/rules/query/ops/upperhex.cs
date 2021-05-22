@@ -9,10 +9,13 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    using XF = HexSymFacet;
+
+    partial struct TextQuery
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Interspersal<T> interspersed<T>(Index<T> terms, Intersperse<T> rule)
-            => new Interspersal<T>(terms, rule);
+        [MethodImpl(Inline), Op]
+        public static bit upperhex(char src)
+            => ((XF)src >= XF.FirstNumber && (XF)src <= XF.LastNumber)
+            || ((XF)src >= XF.FirstLetterUp && (XF)src <= XF.LastLetterUp);
     }
 }
