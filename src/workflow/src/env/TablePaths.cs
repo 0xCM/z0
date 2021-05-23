@@ -31,9 +31,16 @@ namespace Z0
         FS.FolderPath TableDir(Type t)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => TableDir(a.TableId), () => TableDir(t.Name));
 
+        FS.FolderPath TableDir(FS.FolderPath root, Type t)
+            => t.Tag<RecordAttribute>().MapValueOrElse(a => TableDir(root, a.TableId), () => TableDir(root, t.Name));
+
         FS.FolderPath TableDir<T>()
             where T : struct, IRecord<T>
                 => TableDir(typeof(T));
+
+        FS.FolderPath TableDir<T>(FS.FolderPath root)
+            where T : struct, IRecord<T>
+                => TableDir(root, typeof(T));
 
         FS.FolderName TableFolder<T>()
             where T : struct, IRecord<T>

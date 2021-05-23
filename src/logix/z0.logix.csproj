@@ -11,8 +11,9 @@
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(BitMatrix)" />
     <ProjectReference Include="$(Calc)" />
-     <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Lang)" />
+    <ProjectReference Include="$(Bit)" />
   </ItemGroup>
 
 </Project>

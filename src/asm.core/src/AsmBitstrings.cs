@@ -41,18 +41,19 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         static uint render(byte cell, uint j, Span<char> dst)
         {
-            seek(dst,j++) = bit.bitchar(cell,7);
-            seek(dst,j++) = bit.bitchar(cell,6);
-            seek(dst,j++) = bit.bitchar(cell,5);
-            seek(dst,j++) = bit.bitchar(cell,4);
-            seek(dst,j++) = Chars.Space;
-            seek(dst,j++) = bit.bitchar(cell,3);
-            seek(dst,j++) = bit.bitchar(cell,2);
-            seek(dst,j++) = bit.bitchar(cell,1);
-            seek(dst,j++) = bit.bitchar(cell,0);
-            seek(dst,j++) = Chars.Space;
+            seek(dst, j++) = bit.bitchar(cell, 7);
+            seek(dst, j++) = bit.bitchar(cell, 6);
+            seek(dst, j++) = bit.bitchar(cell, 5);
+            seek(dst, j++) = bit.bitchar(cell, 4);
+            seek(dst, j++) = Chars.Space;
+            seek(dst, j++) = bit.bitchar(cell, 3);
+            seek(dst, j++) = bit.bitchar(cell, 2);
+            seek(dst, j++) = bit.bitchar(cell, 1);
+            seek(dst, j++) = bit.bitchar(cell, 0);
+            seek(dst, j++) = Chars.Space;
             return 10;
         }
+
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(AsmHexCode src)

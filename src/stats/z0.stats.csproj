@@ -9,6 +9,7 @@
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(Bit)" />
 
   </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly struct EventFactory

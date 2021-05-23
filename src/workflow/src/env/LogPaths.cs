@@ -44,12 +44,14 @@ namespace Z0
         FS.FolderPath AppLogDir()
             => AppLogRoot() + FS.folder(AppName);
 
+        FS.FolderPath AppLogDir(string id)
+            => AppLogDir() + FS.folder(id);
+
         FS.FolderPath AppLogDir(FS.FolderPath root)
             => AppLogRoot(root) + FS.folder(AppName);
 
         FS.FolderPath StepLogRoot()
             => LogRoot() + FS.folder(steps);
-
 
         FS.FilePath AppLog(string id)
             => AppLogDir() + FS.file(id, FS.Log);

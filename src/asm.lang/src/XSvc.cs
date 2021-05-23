@@ -25,7 +25,6 @@ namespace Z0
         public static AsmDbCatalog AsmDbCatalog(this IWfRuntime wf)
             => Asm.AsmDbCatalog.create(wf);
 
-
         [Op]
         public static AsmSigs AsmSigs(this IWfRuntime wf)
             => Asm.AsmSigs.create(wf);
@@ -33,10 +32,6 @@ namespace Z0
         [Op]
         public static AsmRender AsmRender(this IWfRuntime wf)
             => Asm.AsmRender.create(wf);
-
-        [Op]
-        public static AsmTraverser AsmTraverser(this IWfRuntime wf)
-            => Asm.AsmTraverser.create(wf);
 
         [Op]
         public static AsmThumbprints AsmThumbprints(this IWfRuntime wf)

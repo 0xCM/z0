@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
-    [ApiHost(ApiNames.BitSeq, true)]
+    [ApiHost]
     public readonly partial struct BitSeq
     {
         [MethodImpl(Inline), Op]

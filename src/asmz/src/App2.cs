@@ -367,19 +367,6 @@ namespace Z0.Asm
             const string Statement = "0036h call 7fff92427890h; e8 25 e4 b2 5f";
             var dx = rel32dx(code);
             Wf.Row(dx);
-
-            // var builder = new AsmStatementBuilder();
-            // var cases = AsmCases.loadRel32(builder.call()).View;
-            // var count = cases.Length;
-            // var errors = text.buffer();
-            // for(var i=0; i<count; i++)
-            // {
-            //     ref readonly var c = ref skip(cases,i);
-            //     Wf.Row(c.Format());
-            //     Wf.Row(RP.PageBreak40);
-            //     if(!c.Validate(errors))
-            //         Wf.Error(errors.Emit());
-            // }
         }
 
         void TestBitfields()
@@ -391,8 +378,20 @@ namespace Z0.Asm
             Wf.Row(formatter.Format(input).ToString());
         }
 
+        void StatementRountTrip()
+        {
+            var blocks = Wf.ApiHex().ReadBlocks().View;
+            var pipe = Wf.AsmStatementPipe();
+            var root = Db.AppLogDir("statements");
+            pipe.EmitStatements(blocks, root);
+            var parsed = pipe.ParseStatements(root);
+        }
+
+
         public void Run()
         {
+
+            //StatementRountTrip();
             //TestBitfields();
             //TestRel32();
             RunExtractWorkflow();

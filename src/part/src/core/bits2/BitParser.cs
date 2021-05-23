@@ -91,29 +91,5 @@ namespace Z0
 
             return true;
         }
-
-        /// <summary>
-        /// Creates a bitspan from the text encoding of a binary number
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        public static Span<bit> parse(string src)
-            => bitstring(src, span<bit>(src.Length));
-
-        [Op]
-        public static Span<bit> bitstring(string src, Span<bit> buffer)
-        {
-            var chars = span(src);
-            var count = root.min(chars.Length, buffer.Length);
-            var j=0u;
-            for(uint i=0u; i<count; i++)
-            {
-                ref readonly var c = ref skip(chars, i);
-                if(c == bit.One)
-                    seek(buffer, j++) = bit.On;
-                else if(c == bit.Zero)
-                    seek(buffer, j++) = bit.Off;
-            }
-            return slice(buffer,0, j);
-        }
     }
 }

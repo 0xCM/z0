@@ -86,10 +86,13 @@ namespace Z0.Asm
             dst.Append(AsmCore.comment(AsmRender.format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
         }
 
-
         [Op]
         public static string format(AsmThumbprint src)
             => string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatFixed(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
+
+        [Op]
+        public static string comment(AsmThumbprint src)
+            => string.Format("; ({0})<{1}>[{2}] => {3}",  src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
 
         [Op]
         public static string format(AsmFormExpr src, byte[] encoded, string sep)

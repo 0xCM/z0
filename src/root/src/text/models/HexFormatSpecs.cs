@@ -11,6 +11,15 @@ namespace Z0
 
     public static class HexFormatSpecs
     {
+
+        [MethodImpl(Inline)]
+        public static bool HasPreSpec(string src)
+            => src.TrimStart().StartsWith(PreSpec);
+
+        [MethodImpl(Inline)]
+        public static bool HasPostSpec(string src)
+            => src.TrimEnd().EndsWith(PostSpec);
+
         /// <summary>
         /// The asci code of the '0' digit
         /// </summary>

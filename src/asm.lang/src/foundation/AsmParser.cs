@@ -7,9 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static Rules;
     using static Chars;
 
@@ -38,7 +37,6 @@ namespace Z0.Asm
             return false;
         }
 
-
         [Op]
         public static AsmSigExpr sig(string src)
         {
@@ -56,25 +54,23 @@ namespace Z0.Asm
         public static Outcome form(string src, out AsmFormExpr dst)
         {
             dst = AsmFormExpr.Empty;
-            if(text.unfence(src, SigFence, out var sigexpr))
-            {
-                if(AsmParser.sig(sigexpr, out var sig))
-                {
-                    if(text.unfence(src, OpCodeFence, out var opcode))
-                    {
-                        dst = new AsmFormExpr(AsmCore.opcode(opcode), sig);
-                        return true;
-                    }
-                    else
-                        return (false, TextParsers.FenceNotFound.Format(OpCodeFence, src));
-                }
-                else
-                    return (false, Msg.CouldNotParseSigExpr.Format(sigexpr));
-            }
-            else
-                return (false, TextParsers.FenceNotFound.Format(SigFence,src));
-        }
+            var result = Outcome.Success;
 
+            result = text.unfence(src, SigFence, out var sigexpr);
+            if(result.Fail)
+                return (false, TextParsers.FenceNotFound.Format(SigFence,src));
+
+            result = AsmParser.sig(sigexpr, out var sig);
+            if(result.Fail)
+                return (false, Msg.CouldNotParseSigExpr.Format(sigexpr));
+
+            result = text.unfence(src, OpCodeFence, out var opcode);
+            if(result.Fail)
+                return (false, TextParsers.FenceNotFound.Format(OpCodeFence, src));
+
+            dst = new AsmFormExpr(AsmCore.opcode(opcode), sig);
+            return true;
+        }
 
         [Op]
         public static Outcome sig(string src, out AsmSigExpr dst)
@@ -163,17 +159,18 @@ namespace Z0.Asm
         [Op]
         public static Outcome parse(TextRow src, out AsmApiStatement dst)
         {
+            var result = Outcome.Success;
             var count = src.CellCount;
-            var i=0;
             var cells = src.Cells.View;
+            var i=0;
             if(count == AsmApiStatement.FieldCount)
             {
-                DataParser.parse(skip(cells, i++), out dst.BlockAddress);
-                DataParser.parse(skip(cells, i++), out dst.IP);
-                DataParser.parse(skip(cells, i++), out dst.BlockOffset);
-                dst.Expression = AsmCore.statement(skip(cells,i++));
+                result += DataParser.parse(skip(cells, i++), out dst.BlockAddress);
+                result += DataParser.parse(skip(cells, i++), out dst.IP);
+                result += DataParser.parse(skip(cells, i++), out dst.BlockOffset);
+                dst.Expression = AsmCore.statement(skip(cells, i++));
                 dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
-                sig(skip(cells, i++), out dst.Sig);
+                result += sig(skip(cells, i++), out dst.Sig);
                 dst.OpCode = AsmCore.opcode(skip(cells, i++));
                 if(!DataParser.parse(skip(cells, i++), out dst.OpUri))
                     return (false, $"Failed to parse uri text <{skip(cells,i)}>");
@@ -191,44 +188,42 @@ namespace Z0.Asm
         public static Outcome thumbprint(string src, out AsmThumbprint thumbprint)
         {
             thumbprint = AsmThumbprint.Empty;
-            var outcome = Outcome.Empty;
+            var result = Outcome.Success;
             var a = src.LeftOfFirst(Semicolon);
             var offset = HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space)).ValueOrDefault();
             AsmStatementExpr statement = a.RightOfFirst(Semicolon);
 
             var parts = @readonly(src.RightOfFirst(Semicolon).SplitClean(Implication));
-            if(parts.Length == 2)
-            {
-                var lhs = skip(parts,0);
-                var rhs = skip(parts,1);
-                if(text.unfence(lhs, SigFence, out var sigexpr))
-                {
-                    if(AsmParser.sig(sigexpr, out var sig, out outcome))
-                    {
-                        AsmParser.code(sig.Mnemonic, out var monic);
+            if(parts.Length != 2)
+                return (false, $"Could not dichotomize {src} ");
 
-                        if(text.unfence(lhs, OpCodeFence, out var opcode))
+            var lhs = skip(parts,0);
+            var rhs = skip(parts,1);
+            if(text.unfence(lhs, SigFence, out var sigexpr))
+            {
+                result = AsmParser.sig(sigexpr, out var sig);
+                if(result.Fail)
+                    return (false, $"Could not parse sig expression from ${sigexpr}");
+
+                    AsmParser.code(sig.Mnemonic, out var monic);
+
+                    if(text.unfence(lhs, OpCodeFence, out var opcode))
+                    {
+                        if(AsmBytes.hexcode(rhs, out var encoded))
                         {
-                            if(AsmBytes.hexcode(rhs, out var encoded))
-                            {
-                                thumbprint = new AsmThumbprint(statement, sig, AsmCore.opcode(opcode), encoded);
-                                return true;
-                            }
-                            else
-                                return (false, "Could not parse the encoded bytes");
+                            thumbprint = new AsmThumbprint(statement, sig, AsmCore.opcode(opcode), encoded);
+                            return true;
                         }
                         else
-                            return (false, Msg.OpCodeFenceNotFound.Format(OpCodeFence));
-
+                            return (false, "Could not parse the encoded bytes");
                     }
                     else
-                        return (false, $"Could not parse sig expression from ${sigexpr}");
-                }
-                else
-                    return (false, $"Could not locate the signature fence {SigFence}");
+                        return (false, Msg.OpCodeFenceNotFound.Format(OpCodeFence));
             }
             else
-                return (false, $"Could not dichotomize {src} ");
+                return (false, $"Could not locate the signature fence {SigFence}");
+
         }
+
     }
 }

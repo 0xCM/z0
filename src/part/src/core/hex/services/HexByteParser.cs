@@ -8,9 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Globalization;
 
+
     using static HexFormatSpecs;
     using static root;
     using static core;
+    using static Root;
 
     [ApiHost]
     public readonly struct HexByteParser : IHexParser<byte>
@@ -23,12 +25,12 @@ namespace Z0
         {
             try
             {
-                var s0 = text.trim(src);
+                var s0 = src.Trim();
                 var len = s0.Length;
-                if(HexFormat.HasPreSpec(s0))
-                    s0 = text.slice(s0, len - PreSpec.Length);
-                else if(HexFormat.HasPostSpec(s0))
-                    s0 = text.slice(s0, 0, len - PostSpec.Length);
+                if(HexFormatSpecs.HasPreSpec(s0))
+                    s0 = sys.substring(s0, len - PreSpec.Length);
+                else if(HexFormatSpecs.HasPostSpec(s0))
+                    s0 = sys.substring(s0, 0, len - PostSpec.Length);
                 var blocks = text.split(s0, Chars.Space).View;
                 var count = blocks.Length;
                 var buffer = alloc<byte>(count);
@@ -50,11 +52,11 @@ namespace Z0
         {
             try
             {
-                return parsed(src, ParseByte(src));
+                return ParseResult.parsed(src, ParseByte(src));
             }
             catch(Exception e)
             {
-                return unparsed<byte>(src, e);
+                return ParseResult.unparsed<byte>(src, e);
             }
         }
 

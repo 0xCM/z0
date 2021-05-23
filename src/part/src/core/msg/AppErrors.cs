@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    [ApiHost(ApiNames.AppErrors, true)]
+    [ApiHost]
     public static partial class AppErrors
     {
         const string Delimiter = " | ";

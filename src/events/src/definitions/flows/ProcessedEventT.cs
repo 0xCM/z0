@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [Event(Kind)]
     public class ProcessedEvent<T> : ITerminalEvent<ProcessedEvent<T>>

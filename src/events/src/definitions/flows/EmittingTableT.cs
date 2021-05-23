@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System;
 
-    using static Part;
+    using static Root;
 
     [Event(Kind)]
     public readonly struct EmittingTableEvent<T> : IInitialEvent<EmittingTableEvent<T>>

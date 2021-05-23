@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static AsmInstructions;
 
     using REP = RepeatPrefixCode;
@@ -22,7 +22,7 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static bit IsCallRel32(ReadOnlySpan<byte> src, uint offset)
-            => skip(src,offset) == 0xE8 && (offset + 4) <= src.Length;
+            => (offset + 4) <= src.Length && skip(src, offset) == 0xE8;
 
         public static bit TestRel8(AsmHexCode src, Jmp jmp)
         {

@@ -11,12 +11,12 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a message that encapsulates application diagnostic/status/error message content
     /// </summary>
-    [ApiHost(ApiNames.AppMsg, true)]
+    [ApiHost]
     public class AppMsg : IAppMsg
     {
         public AppMsgData Data {get;}

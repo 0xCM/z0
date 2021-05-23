@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static XedSourceMarkers;
 
     using M = XedSourceMarkers;
@@ -97,7 +97,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 var part = src.Parts[i];
-                if(HexFormat.HasPreSpec(part))
+                if(HexFormatSpecs.HasPreSpec(part))
                     seek8(dst, pos++) = parser.ParseByte(part);
             }
 

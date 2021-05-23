@@ -14,7 +14,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    [ApiHost(ApiNames.AppErrorMsg, true)]
+    [ApiHost]
     public static class AppErrorMsg
     {
         [Op, MethodImpl(Inline)]

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(Bit)" />
   </ItemGroup>
 
 </Project>

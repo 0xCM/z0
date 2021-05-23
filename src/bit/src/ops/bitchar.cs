@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct bit
     {
@@ -28,6 +29,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static char bitchar(byte src, byte pos)
             => bit.test(src, pos).ToChar();
+
+        [MethodImpl(Inline), Op]
+        public static byte bitchars(byte src, byte offset, out char hi, out char lo)
+        {
+            hi = bitchar(src, offset);
+            lo =bitchar(src, Bytes.sub(offset, 1));
+            return 2;
+        }
 
         /// <summary>
         /// Tests the state of an index-identified source bit and returns the corresponding '0' or '1' character

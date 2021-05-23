@@ -156,8 +156,6 @@ namespace Z0
             return false;
         }
 
-
-
         public Index<TextRow> RowData {get;}
 
         public TextDocFormat Format {get;}

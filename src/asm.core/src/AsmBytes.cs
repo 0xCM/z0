@@ -102,7 +102,7 @@ namespace Z0.Asm
         public static AsmHexCode hexcode(ReadOnlySpan<byte> src)
         {
             var cell = Cells.alloc(w128);
-            var count = (byte)root.min(src.Length, 15);
+            var count = (byte)min(src.Length, 15);
             var dst = bytes(cell);
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(src,i);

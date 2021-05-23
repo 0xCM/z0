@@ -219,7 +219,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ParseResult(ParseResult<S,T> src)
             => ParseResult.define(src.Source.ToString(), typeof(T), src.Succeeded, src.Value);
-
-
    }
 }

@@ -12,6 +12,89 @@ namespace Z0
     public readonly struct ParseResult : IParseResult
     {
         /// <summary>
+        /// Defines a successful parse result
+        /// </summary>
+        /// <param name="source">The input vaue</param>
+        /// <param name="value">The parsed value</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        public static ParseResult<S,T> parsed<S,T>(S source, T value)
+            => ParseResult<S,T>.Success(source, value);
+
+        public static ParseResult<T> parsed<T>(char source, T value)
+            => ParseResult<T>.Success(source.ToString(), value);
+
+        /// <summary>
+        /// Defines a parse success result
+        /// </summary>
+        /// <param name="src">The parsed thing</param>
+        /// <param name="value">The value that was successfully hydrated from the source/param>
+        /// <typeparam name="T">The target type</typeparam>
+        public static ParseResult<T> parsed<T>(object src, T value)
+            => ParseResult.win(src?.ToString() ?? EmptyString, value);
+
+        /// <summary>
+        /// Defines a parse result that signals failure
+        /// </summary>
+        /// <param name="source">The input value</param>
+        /// <param name="target">The (invalid) target value</param>
+        /// <typeparam name="S">The input type</typeparam>
+        /// <typeparam name="T">The parse target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ParseResult<S,T> unparsed<S,T>(S source, T target = default)
+            => ParseResult<S,T>.Fail(source);
+
+        /// <summary>
+        /// Defines a parse result that signals failure
+        /// </summary>
+        /// <param name="source">The input value</param>
+        /// <param name="target">The (invalid) target value</param>
+        /// <param name="reason">The failure reason</param>
+        /// <typeparam name="S">The input type</typeparam>
+        /// <typeparam name="T">The parse target type</typeparam>
+        public static ParseResult<S,T> unparsed<S,T>(S source, T target, string reason)
+            => ParseResult<S,T>.Fail(source, reason);
+
+        /// <summary>
+        /// Defines a parse result that signals failure
+        /// </summary>
+        /// <param name="source">The input value</param>
+        /// <param name="target">The (invalid) target value</param>
+        /// <param name="reason">The failure reason, if available</param>
+        /// <typeparam name="S">The input type</typeparam>
+        /// <typeparam name="T">The parse target type</typeparam>
+        public static ParseResult<string,T> unparsed<T>(string source, T target = default)
+            => ParseResult<string,T>.Fail(string.IsNullOrEmpty(source) ? EmptyString : source, string.IsNullOrWhiteSpace(source) ? $"There was no source text to parse" : EmptyString);
+
+        /// <summary>
+        /// Defines a parse result that signals failure
+        /// </summary>
+        /// <param name="source">The input value</param>
+        /// <param name="error">The excaption that occurred</param>
+        /// <param name="target">The default (and invalid) target value</param>
+        /// <typeparam name="T">The parse target type</typeparam>
+        public static ParseResult<string,T> unparsed<T>(string source, Exception error, T target = default)
+            => ParseResult<string,T>.Fail(string.IsNullOrEmpty(source) ? EmptyString : source, error?.ToString() ?? EmptyString);
+
+        /// <summary>
+        /// Defines a parse result that signals failure
+        /// </summary>
+        /// <param name="source">The input value</param>
+        /// <param name="reason">The failure reason</param>
+        /// <typeparam name="T">The parse target type</typeparam>
+        public static ParseResult<string,T> unparsed<T>(string source, string reason)
+            => ParseResult<string,T>.Fail(string.IsNullOrEmpty(source) ? EmptyString : source, reason);
+
+        /// <summary>
+        /// Defines a parse result that signals failure
+        /// </summary>
+        /// <param name="source">The input value</param>
+        /// <param name="reason">The failure reason, if available</param>
+        /// <typeparam name="T">The parse target type</typeparam>
+        public static ParseResult<T> unparsed<T>(char source, object reason = null)
+            => ParseResult<T>.Fail(source.ToString(), reason);
+
+        /// <summary>
         /// The content that was parsed...or not
         /// </summary>
         public object Source {get;}

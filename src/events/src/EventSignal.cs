@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static EventFactory;
-    using static Part;
+    using static Root;
 
     public class EventSignal
     {
