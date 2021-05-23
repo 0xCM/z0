@@ -2,24 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly ref struct AsmBitfield
+    public readonly partial struct AsmCoreModels
     {
-        public byte FieldCount {get;}
-
-        public ReadOnlySpan<byte> Widths {get;}
-
-        [MethodImpl(Inline)]
-        public AsmBitfield(ReadOnlySpan<byte> widths)
+        public readonly struct Decoded
         {
-            FieldCount = (byte)widths.Length;
-            Widths = widths;
+            public AsmHexCode Data {get;}
+
+            [MethodImpl(Inline)]
+            public Decoded(AsmHexCode data)
+            {
+                Data = data;
+            }
         }
     }
 }

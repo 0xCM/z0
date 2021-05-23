@@ -11,8 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    using static Part;
-    using static memory;
+
+    using static Root;
+    using static core;
 
     partial struct gcpu
     {
@@ -23,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vmask256<T>(uint src)
             where T : unmanaged
-                => generic<T>(v8u(cpu.vmask256x8u(src)));
+                => generic<T>(v8u(BitMasks.vmask256x8u(src)));
 
         /// <summary>
         /// Distributes each bit of the source to a specified bit of each byte in a 256-bit target vector

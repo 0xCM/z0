@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct gcpu
     {
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, ushort spec)
             where T : unmanaged
-                => vblend(x,y, cpu.vmask128x8u(spec));
+                => vblend(x,y, BitMasks.vmask128x8u(spec));
 
         /// <summary>
         /// Forms a vector z[i] = testbit(spec,i) ? x[i] : y[i] where i = 0,...31
@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, uint spec)
             where T : unmanaged
-                => vblend(x,y, cpu.vmask256x8u(spec));
+                => vblend(x,y, BitMasks.vmask256x8u(spec));
 
         [MethodImpl(Inline)]
         static Vector256<T> vblend_u<T>(Vector256<T> x, Vector256<T> y, Vector256<byte> spec)

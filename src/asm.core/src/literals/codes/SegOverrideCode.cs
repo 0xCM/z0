@@ -9,27 +9,26 @@ namespace Z0.Asm
     /// <summary>
     /// The segment override codes as specified by Intel Vol II, 2.1.1
     /// </summary>
-    [PrefixCodes]
     public enum SegOverrideCode : byte
     {
         None = 0,
 
-        [PrefixCode("CS segment override")]
+        [Symbol("cs", "CS segment override")]
         CS = x2e,
 
-        [PrefixCode("SS segment override")]
+        [Symbol("ss", "SS segment override")]
         SS = x36,
 
-        [PrefixCode("DS segment override")]
+        [Symbol("ds","DS segment override")]
         DS = x3e,
 
-        [PrefixCode("ES segment override")]
+        [Symbol("es", "ES segment override")]
         ES = x26,
 
-        [PrefixCode("FS segment override")]
+        [Symbol("fs", "FS segment override")]
         FS = x64,
 
-        [PrefixCode("GS segment override")]
+        [Symbol("gs", "GS segment override")]
         GS = x65,
     }
 }

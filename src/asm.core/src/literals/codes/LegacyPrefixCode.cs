@@ -7,103 +7,66 @@ namespace Z0.Asm
     /// <summary>
     /// Unifies the legacy prefix codes
     /// </summary>
+    [SymbolSource]
     public enum LegacyPrefixCode : byte
     {
         None = 0,
 
-        /// <summary>
-        /// 26
-        /// </summary>
+        [Symbol("ES", "Seg override prefix, x26")]
         ES = SegOverrideCode.ES,
 
-        /// <summary>
-        /// 2E
-        /// </summary>
+        [Symbol("CS", "Seg override prefix, x2E")]
         CS = SegOverrideCode.CS,
 
-        /// <summary>
-        /// 2E
-        /// </summary>
+        [Symbol("BT", "Branch hint prefix, x2E")]
         BT = BranchHintCode.BT,
 
-        /// <summary>
-        /// 3E
-        /// </summary>
+        [Symbol("DS", "Seg override prefix, x3E")]
         DS = SegOverrideCode.DS,
 
-        /// <summary>
-        /// 3E
-        /// </summary>
+        [Symbol("BNT", "Branch hint prefix, x3E")]
         BNT = BranchHintCode.BNT,
 
-        /// <summary>
-        /// 66
-        /// </summary>
+        [Symbol("OPSZ", "Seg override prefix, x66")]
         OPSZ = SizeOverrideCode.OPSZ,
 
-        /// <summary>
-        /// 64
-        /// </summary>
+        [Symbol("FS", "Seg override prefix, x64")]
         FS = SegOverrideCode.FS,
 
-        /// <summary>
-        /// 65
-        /// </summary>
+        [Symbol("GS", "Seg override prefix, x65")]
         GS = SegOverrideCode.GS,
 
-        /// <summary>
-        /// 66
-        /// </summary>
+        [Symbol("x66", "Mandatory prefix, x66")]
         x66 = MandatoryPrefixCode.x66,
 
-        /// <summary>
-        /// 67
-        /// </summary>
+        [Symbol("ADSZ", "Address size override,  x67")]
         ADSZ = SizeOverrideCode.ADSZ,
 
-        /// <summary>
-        /// E6
-        /// </summary>
+        [Symbol("SS", "Seg override prefix, x36")]
         SS = SegOverrideCode.SS,
 
-        /// <summary>
-        /// F0
-        /// </summary>
+        [Symbol("LOCK", "Lock prefix, xF0")]
         LOCK = LockPrefixCode.LOCK,
 
-        /// <summary>
-        /// F2
-        /// </summary>
+        [Symbol("F2", "Mandatory prefix, xF2")]
         F2 = MandatoryPrefixCode.F2,
 
-        /// <summary>
-        /// F3
-        /// </summary>
+        [Symbol("F3", "Mandatory prefix, xF3")]
         F3 = MandatoryPrefixCode.F3,
 
-        /// <summary>
-        /// F2
-        /// </summary>
+        [Symbol("REPNZ", "Repeat prefix, xF2")]
         REPNZ = RepeatPrefixCode.REPNZ,
 
-        /// <summary>
-        /// F2
-        /// </summary>
+        [Symbol("REPNE", "Repeat prefix, xF2")]
         REPNE = RepeatPrefixCode.REPNE,
 
-        /// <summary>
-        /// F3
-        /// </summary>
+        [Symbol("REPE", "Repeat prefix, xF3")]
         REPE = RepeatPrefixCode.REPE,
 
-        /// <summary>
-        /// F3
-        /// </summary>
+        [Symbol("REPZ", "Repeat prefix, xF3")]
         REPZ = RepeatPrefixCode.REPZ,
 
-        /// <summary>
-        /// F3
-        /// </summary>
+        [Symbol("BND", "BND prefix, xF2")]
         BND = BndPrefixCode.BND,
     }
 }

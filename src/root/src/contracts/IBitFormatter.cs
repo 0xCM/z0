@@ -9,7 +9,6 @@ namespace Z0
     public interface IBitFormatter
     {
         string Format(ReadOnlySpan<byte> src);
-
     }
 
     public interface ITargetedBitFormatter : IBitFormatter

@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Rules)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Hash)" />
+    <ProjectReference Include="$(Bit)" />
   </ItemGroup>
 
 </Project>

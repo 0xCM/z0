@@ -36,6 +36,9 @@ public enum PartId : ulong
     [Symbol("rules")]
     Rules = 6,
 
+    [Symbol("bit")]
+    Bit = 7,
+
     [Symbol("api")]
     Api = 9,
 

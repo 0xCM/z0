@@ -4,12 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Hex8Seq;
+    using System;
 
-    public enum BndPrefixCode : byte
+    [Flags, SymbolSource]
+    public enum AsmBitSize : byte
     {
         None = 0,
 
-        BND = xf2
+        [Symbol("b16")]
+        Bits16 = 16,
+
+        [Symbol("b32")]
+        Bits32 = 32,
+
+        [Symbol("b64")]
+        Bits64 = 64,
     }
 }

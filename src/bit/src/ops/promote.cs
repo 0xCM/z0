@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static T promote<T>(bit src)
             where T : unmanaged
-                => src ? Numeric.maxval<T>() : default;
+                => src ? Limits.maxval<T>() : default;
     }
 }

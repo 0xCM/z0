@@ -17,10 +17,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static ModRm modrm(uint3 rm, uint3 reg, uint2 mod)
-            => modrm(BitFields.join((rm,0), (reg,3), (mod,6)));
+            => modrm(BitFields.join((rm, 0), (reg, 3), (mod, 6)));
 
         [MethodImpl(Inline), Op]
         public static ModRm modrm(uint3 r1, uint3 r2)
-            => modrm(r1,r2,uint2.Max);
+            => modrm(r1, r2, uint2.Max);
     }
 }

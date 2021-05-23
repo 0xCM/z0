@@ -5,8 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+
+    using static core;
 
     partial class XText
     {
@@ -18,26 +19,62 @@ namespace Z0
         [TextUtility]
         public static IEnumerable<string> Partition(this string src, int maxlen)
         {
-            var count = src.Length;
-            Span<char> buffer = stackalloc char[maxlen];
+            var dst = list<string>();
+            src.Partition(maxlen, x => dst.Add(x));
+            return dst;
+            // var count = src.Length;
+            // var buffer = span<char>(maxlen);
+            // var chars = span(src);
 
+            // for(int i=0, j=0; i<count; i++, j++)
+            // {
+            //     if(j < maxlen)
+            //         seek(buffer, j) = skip(chars,i);
+            //     else
+            //     {
+            //         yield return new string(buffer);
+
+            //         buffer = new char[maxlen];
+
+            //         j = 0;
+            //         seek(buffer, j) = skip(chars, i);
+            //     }
+            // }
+
+            // var trim = buffer.Trim();
+            // if(trim.Length != 0)
+            //     yield return new string(trim);
+        }
+
+        /// <summary>
+        /// Partitions a string into parts of a specified maximum width
+        /// </summary>
+        /// <param name="src">The source string</param>
+        /// <param name="maxlen">The maximum length of a partition</param>
+        [TextUtility]
+        public static void Partition(this string src, int maxlen, Action<string> dst)
+        {
+            var count = src.Length;
+            var buffer = span<char>(maxlen);
+            var chars = span(src);
             for(int i=0, j=0; i<count; i++, j++)
             {
                 if(j < maxlen)
-                    buffer[j] = src[i];
+                    seek(buffer, j) = skip(chars, i);
                 else
                 {
-                    yield return new string(buffer);
+                    dst(new string(buffer));
 
-                    buffer = new char[maxlen];
+                    buffer = span<char>(maxlen);
+
                     j = 0;
-                    buffer[j] = src[i];
+                    seek(buffer, j) = skip(chars, i);
                 }
             }
 
             var trim = buffer.Trim();
             if(trim.Length != 0)
-                yield return new string(trim);
+                dst(new string(trim));
         }
     }
 }

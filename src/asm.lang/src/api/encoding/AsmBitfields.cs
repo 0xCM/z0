@@ -7,24 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly struct AsmBitfields
     {
         [MethodImpl(Inline), Op]
-        public static BitfieldFormatter formatter(AsmBitfield src)
-            => new BitfieldFormatter(src);
+        public static AsmFieldFormatter formatter(AsmBitfield src)
+            => new AsmFieldFormatter(src);
 
         [MethodImpl(Inline), Op]
-        public static AsmBitfield define(ReadOnlySpan<byte> ix, ReadOnlySpan<byte> w)
-            => new AsmBitfield(ix,w);
+        public static AsmBitfield define(ReadOnlySpan<byte> widths)
+            => new AsmBitfield(widths);
 
         [MethodImpl(Inline), Op]
         public static AsmBitfield modrm()
-            => define(ModRmIndices,ModRmWidths);
-
-        static ReadOnlySpan<byte> ModRmIndices => new byte[3]{0,3,5};
+            => define(ModRmWidths);
 
         static ReadOnlySpan<byte> ModRmWidths => new byte[3]{3,3,2};
     }

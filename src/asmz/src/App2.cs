@@ -382,8 +382,18 @@ namespace Z0.Asm
             // }
         }
 
+        void TestBitfields()
+        {
+            var bf = AsmBitfields.define(new byte[]{4,2,3});
+            var formatter = AsmBitfields.formatter(bf);
+            ushort input = 0b111_01_0011;
+            Wf.Row("111 01 0011");
+            Wf.Row(formatter.Format(input).ToString());
+        }
+
         public void Run()
         {
+            //TestBitfields();
             //TestRel32();
             RunExtractWorkflow();
             //CaptureSelf();

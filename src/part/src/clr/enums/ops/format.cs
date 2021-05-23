@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct Enums
     {
-
         public static string format<E>(E src, Base2 n, int? digits = null)
             where E : unmanaged, Enum
                 => ecode<E>() switch {

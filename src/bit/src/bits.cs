@@ -14,14 +14,14 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bits<T> init<T>(T src = default)
-            where T : unmanaged
-                => new bits<T>(src);
+    //     [MethodImpl(Inline), Op, Closures(Closure)]
+    //     public static bits<T> init<T>(T src = default)
+    //         where T : unmanaged
+    //             => new bits<T>(src);
 
-       [MethodImpl(Inline), Op, Closures(Closure)]
-       public static bits<T> init<T>(T src, ushort width)
-            where T : unmanaged
-                => new bits<T>(src,width);
+    //    [MethodImpl(Inline), Op, Closures(Closure)]
+    //    public static bits<T> init<T>(T src, ushort width)
+    //         where T : unmanaged
+    //             => new bits<T>(src,width);
      }
 }

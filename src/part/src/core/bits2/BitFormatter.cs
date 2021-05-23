@@ -167,7 +167,7 @@ namespace Z0
             => _format(src,config);
 
         [Op]
-        public static int bits(ReadOnlySpan<byte> src, Count maxbits, Span<char> dst)
+        static int bits(ReadOnlySpan<byte> src, Count maxbits, Span<char> dst)
             => _format(first(src), src.Length, maxbits, dst);
 
         public static Span<char> chars(ReadOnlySpan<byte> src)
@@ -243,6 +243,7 @@ namespace Z0
             {
                 if(k>=maxbits)
                     break;
+
                 seek(dst, (uint)k) = @char(@bool(bit.test(src, j)));
             }
             return k;

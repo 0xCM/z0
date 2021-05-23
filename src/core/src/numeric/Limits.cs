@@ -4,11 +4,142 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+
     /// <summary>
     /// Defines literals that specify numeric type limits
     /// </summary>
+    [ApiHost]
     public readonly struct Limits
     {
+        /// <summary>
+        /// Returns the maximim value supported by a parametrically-identified primal type
+        /// </summary>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static T maxval<T>(T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
+            || typeof(T) == typeof(long))
+                return maxval_i<T>();
+            else if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
+            || typeof(T) == typeof(ulong))
+                return maxval_u<T>();
+            else
+                return maxval_f<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static T maxval_i<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return NumericCast.force<T>(sbyte.MaxValue);
+            else if(typeof(T) == typeof(short))
+                return NumericCast.force<T>(short.MaxValue);
+            else if(typeof(T) == typeof(int))
+                return NumericCast.force<T>(int.MaxValue);
+            else
+                return NumericCast.force<T>(long.MaxValue);
+        }
+
+        [MethodImpl(Inline)]
+        static T maxval_u<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return NumericCast.force<T>(byte.MaxValue);
+            else if(typeof(T) == typeof(ushort))
+                return NumericCast.force<T>(ushort.MaxValue);
+            else if(typeof(T) == typeof(uint))
+                return NumericCast.force<T>(uint.MaxValue);
+            else
+                return NumericCast.force<T>(ulong.MaxValue);
+        }
+
+        [MethodImpl(Inline)]
+        static T maxval_f<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return NumericCast.force<T>(float.MaxValue);
+            else if(typeof(T) == typeof(double))
+                return NumericCast.force<T>(double.MaxValue);
+            else
+                throw no<T>();
+        }
+
+        /// <summary>
+        /// Returns the minimum value supported by a parametrically-identified primal type
+        /// </summary>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static T minval<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
+            || typeof(T) == typeof(long))
+                return minval_i<T>();
+            else if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
+            || typeof(T) == typeof(ulong))
+                return minval_u<T>();
+            else
+                return minval_f<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static T minval_i<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return NumericCast.force<T>(sbyte.MinValue);
+            else if(typeof(T) == typeof(short))
+                return NumericCast.force<T>(short.MinValue);
+            else if(typeof(T) == typeof(int))
+                return NumericCast.force<T>(int.MinValue);
+            else
+                return NumericCast.force<T>(long.MinValue);
+        }
+
+        [MethodImpl(Inline)]
+        static T minval_u<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return NumericCast.force<T>(byte.MinValue);
+            else if(typeof(T) == typeof(ushort))
+                return NumericCast.force<T>(ushort.MinValue);
+            else if(typeof(T) == typeof(uint))
+                return NumericCast.force<T>(uint.MinValue);
+            else
+                return NumericCast.force<T>(ulong.MinValue);
+        }
+
+        [MethodImpl(Inline)]
+        static T minval_f<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return NumericCast.force<T>(float.MinValue);
+            else if(typeof(T) == typeof(double))
+                return NumericCast.force<T>(double.MinValue);
+            else
+                throw no<T>();
+        }
+
         /// <summary>
         /// The minimum representable <see cref='BitSeq1'/> value
         /// </summary>
@@ -138,7 +269,7 @@ namespace Z0
         /// The maximum representable <see cref='int'/> value
         /// </summary>
         public const Limits32i Max32i = Limits32i.Max;
-        
+
         /// <summary>
         /// The minimum representable <see cref='uint'/> value
         /// </summary>
@@ -173,7 +304,7 @@ namespace Z0
         /// The minimum representable <see cref='float'/> value
         /// </summary>
         public const float Min32f = float.MinValue;
-        
+
         /// <summary>
         /// The maximum representable <see cref='float'/> value
         /// </summary>
@@ -183,7 +314,7 @@ namespace Z0
         /// The minimum representable <see cref='double'/> value
         /// </summary>
         public const double Min64f = double.MinValue;
-        
+
         /// <summary>
         /// The maximum representable <see cref='double'/> value
         /// </summary>
@@ -193,7 +324,7 @@ namespace Z0
         /// The minimum representable <see cref='decimal'/> value
         /// </summary>
         public const decimal Min128f = decimal.MinValue;
-        
+
         /// <summary>
         /// The maximum representable <see cref='decimal'/> value
         /// </summary>

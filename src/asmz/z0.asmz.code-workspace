@@ -68,6 +68,15 @@
         },
         {
             "path": "..\\tables"
+        },
+        {
+            "path": "..\\bits"
+        },
+        {
+            "path": "..\\bitfields"
+        },
+        {
+            "path": "..\\bitmasks"
         }
     ],
 	"settings": {}

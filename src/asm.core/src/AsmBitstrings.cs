@@ -24,7 +24,7 @@ namespace Z0.Asm
             var size = (int)src.Size;
             var j = 0u;
             for(var i=0; i<size; i++)
-                j+= render(skip(input, i), j, dst);
+                j += render(skip(input, i), j, dst);
             return j - 1;
         }
 
@@ -59,7 +59,7 @@ namespace Z0.Asm
         {
             CharBlocks.alloc(n128, out var block);
             var count = render(src, block.Data);
-            return slice(block.Data,0,count);
+            return slice(block.Data, 0, count);
         }
 
         public string Format(AsmHexCode src)
