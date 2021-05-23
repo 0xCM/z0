@@ -388,6 +388,13 @@ namespace Z0.Asm
         }
 
 
+        public void ParseDump()
+        {
+            using var clrmd = ClrMdSvc.create(Wf);
+            clrmd.ParseDump();
+
+        }
+
         public void Run()
         {
 

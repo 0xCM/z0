@@ -84,7 +84,5 @@ namespace Z0
 
         StepLog StepLog<T>(WfStepId step, T subject, FS.FileExt ext)
             => new StepLog(StepLogPath(step,subject,ext));
-
-
     }
 }

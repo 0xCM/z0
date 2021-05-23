@@ -88,6 +88,9 @@ namespace Z0
         protected StreamWriter OpenShowLog(string name, FS.FileExt? ext = null)
             => Db.ShowLog(NameShowLog(name, ext ?? FS.Csv)).Writer();
 
+        protected StreamWriter OpenAppLog(string name, FS.FileExt ext)
+            => Db.AppLog(name,ext).Writer();
+
         protected void Show(string name, FS.FileExt ext, Action<ShowLog> f)
         {
             using var log = ShowLog(NameShowLog(name,ext));
@@ -191,6 +194,7 @@ namespace Z0
         {
 
         }
+
         protected virtual void Disposing() { }
 
         public void Dispose()

@@ -13,11 +13,23 @@ namespace Z0
         FS.FolderPath DumpRoot()
             => FS.dir("j:/dumps");
 
+        FS.FolderPath DumpRoot(FS.FolderPath root)
+            => root;
+
+        DumpPaths DumpPaths()
+            => new DumpPaths(DumpRoot(), TableRoot() + FS.folder("dumps.tables"));
+
+        FS.Files Dumps()
+            => DumpRoot().Files(FS.Dmp);
+
+        FS.Files Dumps(FS.FolderPath root)
+            => DumpRoot(root).Files(FS.Dmp);
+
         FS.FilePath DumpPath(string id)
             => DumpRoot() + FS.file(id, FS.Dmp);
 
         FS.FileName DumpFile(Process process, Timestamp ts)
-            => FS.file(string.Format("{0}.{1}", process.ProcessName, ts.Format()), FS.Dmp);
+            => FS.file(ProcDumpIdentity.create(process,ts).Format(), FS.Dmp);
 
         FS.FilePath DumpPath(Process process, Timestamp ts)
             => DumpRoot() + DumpFile(process, ts);

@@ -38,6 +38,12 @@ namespace Z0
         public int CompareTo(Timestamp src)
             => Ticks.CompareTo(src.Ticks);
 
+        public bool IsNonZero
+        {
+            [MethodImpl(Inline)]
+            get => Ticks != 0;
+        }
+
         public uint Hashed
         {
             [MethodImpl(Inline)]

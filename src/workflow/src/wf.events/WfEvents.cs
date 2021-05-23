@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.WfEvents, true)]
+    [ApiHost]
     readonly struct WfEvents
     {
         const string HandlerNotFound = "Handler for {0} not found";

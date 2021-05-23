@@ -20,4 +20,28 @@ namespace Z0
     {
 
     }
+
+    [Free]
+    public interface IEventEmitter : IDisposable
+    {
+        ReadOnlySpan<IWfEvent> Emit();
+    }
+
+    [Free]
+    public interface IEventEmitter<E>
+        where E : IWfEvent, new()
+    {
+        ReadOnlySpan<E> Emit();
+    }
+
+    public interface IEmissionSink : IEventSink, IEventEmitter
+    {
+
+    }
+
+    public interface IEmissionSink<S> : IEmissionSink
+        where S : IEmissionSink<S>
+    {
+
+    }
 }

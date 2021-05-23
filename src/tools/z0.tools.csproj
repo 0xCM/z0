@@ -17,6 +17,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Runtime" Version="16.9.0" />
     <PackageReference Include="MSBuild.StructuredLogger" Version="2.1.404" />
+    <PackageReference Include="Microsoft.Diagnostics.Runtime" Version="2.0.227301" />
+    <PackageReference Include="Microsoft.Diagnostics.Runtime.Utilities" Version="2.0.227301" />
   </ItemGroup>
 
   <ItemGroup>

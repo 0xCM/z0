@@ -14,6 +14,9 @@ namespace Z0
     [ApiHost]
     public static partial class XTools
     {
+        public static DumpParser DumpParser(this IWfRuntime wf)
+            => Z0.DumpParser.create(wf);
+
         [Op]
         public static Nasm Nasm(this IWfRuntime wf)
             => Svc.Nasm.create(wf);

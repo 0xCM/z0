@@ -13,8 +13,13 @@ namespace Z0
     public class EventSignal
     {
         [MethodImpl(Inline)]
-        public static EventSignal create(IEventSink sink, WfHost source, CorrelationToken ct = default)
-            => new EventSignal(sink, source, ct);
+        public static EventSignal create(IEventSink sink, WfHost host, CorrelationToken ct = default)
+            => new EventSignal(sink, host, ct);
+
+        [MethodImpl(Inline)]
+        public static EventSignal create(IEventSink sink, Type host, CorrelationToken ct = default)
+            => new EventSignal(sink, host, ct);
+
 
         readonly IEventSink Sink;
 

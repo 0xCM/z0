@@ -38,12 +38,20 @@ namespace Z0
             => iter(@readonly(src),  action);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void iter<T>(ReadOnlySpan<T> src, Action<T> action)
+        public static void iter<T>(ReadOnlySpan<T> src, Action<T> action, bool pll = false)
         {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                action(skip(src,i));
+            if(pll)
+            {
+                src.ToArray().AsParallel().ForAll(item => action(item));
+            }
+            else
+            {
+                var count = src.Length;
+                for(var i=0u; i<count; i++)
+                    action(skip(src,i));
+            }
         }
+
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void iter<T>(Span<T> src, Action<T> action)

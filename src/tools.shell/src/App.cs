@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Reflection;
 
     using static Root;
     using static CodeSymbolModels;
@@ -64,7 +60,6 @@ namespace Z0
                 writer.WriteLine(string.Format("{0}; {1}", method.Format(), doc != null ? "//" + doc.SummaryText : EmptyString));
             }
             Wf.EmittedFile(emitting, count);
-
         }
 
         void EmitDependencyGraph()
@@ -91,7 +86,6 @@ namespace Z0
             }
             writer.WriteLine("}");
             Wf.EmittedFile(flow, count);
-
         }
 
         void CalcRelativePaths()
@@ -118,7 +112,6 @@ namespace Z0
             using var writer = dst.Writer();
             root.iter(projects,project => writer.WriteLine(string.Format(Pattern, project.Format(PathSeparator.BS))));
             Wf.EmittedFile(flow,projects.Length);
-
         }
 
         public void Parse()
@@ -132,13 +125,12 @@ namespace Z0
             {
                 root.iter(output, x => Wf.Row(new string(x)));
             }
-
         }
 
         public void Run()
         {
-            Parse();
-
+            using var clrmd = ClrMdSvc.create(Wf);
+            clrmd.ParseDump();
         }
     }
 
@@ -165,7 +157,7 @@ namespace Z0
         {
             try
             {
-                var shell = ToolShell.create(Wf);
+                using var shell = ToolShell.create(Wf);
                 shell.Run();
 
             }

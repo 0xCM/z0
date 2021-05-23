@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static memory;
+    using static core;
 
     /// <summary>
     /// A buffer that contains 256 <typeparamref name='T'/> cells
