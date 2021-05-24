@@ -83,6 +83,9 @@
         },
         {
             "path": "..\\gmath"
+        },
+        {
+            "path": "..\\bitnumbers"
         }
     ],
 	"settings": {}

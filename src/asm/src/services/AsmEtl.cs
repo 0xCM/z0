@@ -52,13 +52,13 @@ namespace Z0.Asm
 
         }
 
-        public static LocalOffsetVector offsets(ReadOnlySpan<ApiInstruction> src)
+        public static HexVector16 offsets(ReadOnlySpan<ApiInstruction> src)
         {
             var count = src.Length;
-            var buffer = alloc<Address16>(count);
+            var buffer = alloc<Hex16>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
-                seek(dst,i) = (Address16)skip(src, i).Offset;
+                seek(dst,i) = (Hex16)skip(src, i).Offset;
             return buffer;
         }
 
@@ -95,10 +95,10 @@ namespace Z0.Asm
             => new AsmRowSet<T>(key,src);
 
         [Op]
-        public static LocalOffsetVector offsets(W16 w, ReadOnlySpan<AsmDetailRow> src)
+        public static HexVector16 offsets(W16 w, ReadOnlySpan<AsmDetailRow> src)
         {
             var count = src.Length;
-            var buffer = memory.alloc<Address16>(count);
+            var buffer = memory.alloc<Hex16>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(src,i).LocalOffset;

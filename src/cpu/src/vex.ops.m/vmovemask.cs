@@ -120,7 +120,5 @@ namespace Z0
         [MethodImpl(Inline), MoveMask]
         public static uint vmovemask(Vector256<byte> src, [Imm] byte offset, [Imm] byte index)
             => vmovemask(vsllx(src, offset), index);
-
-
     }
 }

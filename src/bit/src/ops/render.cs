@@ -204,6 +204,7 @@ namespace Z0
                 return EmptyString;
         }
 
+
         [Op]
         static string format8(object src)
             => bit.formatter<byte>().Format((byte)NumericBox.rebox(src, NumericKind.U8));

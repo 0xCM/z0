@@ -11,6 +11,7 @@ namespace Z0
         Hex8Seq Value {get;}
     }
 
+
     public interface IHexType<H> : IHexType
         where H : unmanaged, IHexType<H>
     {
