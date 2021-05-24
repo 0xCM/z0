@@ -199,7 +199,7 @@ namespace Z0.Asm
             var casedir = Db.CaseDir(subject,id).Create();
             var casename = CaseName(id);
             var tool = Wf.Nasm();
-            var source = tool.Source(input);
+            var source = tool.SourceDoc(input);
             var target = casedir + FS.file(casename, FS.Asm);
             var emitting = Wf.EmittingFile(target);
             source.Save(target);

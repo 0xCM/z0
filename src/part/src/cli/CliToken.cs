@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Identifies a metadata element
     /// </summary>
-    public readonly struct CliToken : ITextual, IEquatable<CliToken>, INullity
+    public readonly struct CliToken : ITextual, IEquatable<CliToken>, INullity, IComparable<CliToken>
     {
         readonly uint Data;
 
@@ -109,6 +109,10 @@ namespace Z0
         public string Format()
             => IsEmpty ? EmptyString : string.Format("{0:X2}:{1:x6}", (byte)Table, Row);
 
+
+        [MethodImpl(Inline)]
+        public int CompareTo(CliToken src)
+            => Data.CompareTo(src.Data);
 
         public override string ToString()
             => Format();

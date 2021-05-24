@@ -309,6 +309,7 @@ namespace Z0.Asm
         }
 
 
+
         void EmitTableReport(FS.FilePath dst)
         {
             using var writer = dst.Writer();
@@ -395,13 +396,32 @@ namespace Z0.Asm
 
         }
 
+        PeRecords.CoffHeaderRow ReadCoffHeader(FS.FilePath src)
+        {
+            using var reader = PeReader.create(src);
+            var header = reader.ReadCoffHeader();
+            return header;
+        }
+
+        void ShowCoffHeader(FS.FilePath src)
+        {
+            var header = ReadCoffHeader(src);
+            var formatter = header.Formatter();
+            var id = formatter.TableId;
+            using var log = ShowLog(string.Format("{0}.{1}", formatter.TableId, src.FileName), FS.Log);
+            log.Show(formatter.Format(header, RecordFormatKind.KeyValuePairs));
+        }
+
+
         public void Run()
         {
-
+            // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");
+            // ShowCoffHeader(src);
+            //ParseDump();
             //StatementRountTrip();
             //TestBitfields();
             //TestRel32();
-            RunExtractWorkflow();
+            //RunExtractWorkflow();
             //CaptureSelf();
             // var dir = Db.AppLogDir();
             // EmitAsmRows(dir);

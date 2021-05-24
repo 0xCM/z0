@@ -16,7 +16,7 @@ namespace Z0.Tools
         /// <param name="expr">The sequence of expressions that comprise the document</param>
         /// <param name="x64">The bitness</param>
         [Op]
-        public NasmSource Source(ReadOnlySpan<AsmExpr> expr, bool x64 = true)
+        public NasmSource SourceDoc(ReadOnlySpan<AsmExpr> expr, bool x64 = true)
             => source(expr.ToArray(), x64);
     }
 }

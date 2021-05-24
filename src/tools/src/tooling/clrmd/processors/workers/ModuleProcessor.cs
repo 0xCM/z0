@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
+    using System.Linq;
 
     using static Root;
     using static DiagnosticRecords;
@@ -21,7 +22,9 @@ namespace Z0
 
             readonly bool Pll;
 
-            readonly ConcurrentBag<ModuleInfo> Storage;
+            readonly ConcurrentBag<ModuleInfo> _Modules;
+
+            readonly ConcurrentBag<MethodTableToken> _MethodTables;
 
             readonly object Locker;
 
@@ -30,7 +33,8 @@ namespace Z0
             {
                 Events = sink;
                 Pll = pll;
-                Storage = new();
+                _Modules = new();
+                _MethodTables = new();
                 Locker = new();
             }
 
@@ -55,18 +59,24 @@ namespace Z0
                     dst.Pdb = new PdbInfo(pdb.Guid, pdb.Revision, FS.path(pdb.Path));
                 else
                     dst.Pdb = PdbInfo.Empty;
-                Storage.Add(dst);
+
+                _Modules.Add(dst);
+
+                src.EnumerateTypeDefToMethodTableMap()
+                    .Iter(x => _MethodTables.Add(new MethodTableToken(x.MethodTable, x.Token)));
             }
 
-            public Index<ModuleInfo> Processed()
+            public ModuleProcessPresult Processed()
             {
-                var data = Index<ModuleInfo>.Empty;
+                var result = new ModuleProcessPresult();
                 lock(Locker)
                 {
-                    data = Storage.ToArray();
-                    Storage.Clear();
+                    result._Modules = _Modules.ToArray();
+                    result._MethodTables = _MethodTables.ToArray().Sort();
+                    _Modules.Clear();
+                    _MethodTables.Clear();
                 }
-                return data;
+                return result;
             }
         }
     }

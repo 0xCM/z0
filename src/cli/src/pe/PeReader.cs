@@ -15,10 +15,10 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static PeRecords;
 
     public partial class PeReader : IDisposable
     {
-
         public static CliRowIndex index(in PeStream state, Handle handle)
             => new CliToken(state.Reader.GetToken(handle));
 
@@ -26,27 +26,47 @@ namespace Z0
         public static PeReader create(FS.FilePath src)
             => new PeReader(src);
 
-
         readonly FS.FilePath Source;
 
         readonly FileStream Stream;
 
         public PEReader PE {get;}
 
-        public MetadataReader MD {get;}
+        public MetadataReader MD
+        {
+            [MethodImpl(Inline)]
+            get
+            {
+                if(_MD == null)
+                    _MD = PE.GetMetadataReader();
+                return _MD;
+            }
+        }
 
-        public PEMemoryBlock MetadataBlock {get;}
 
-        readonly CliReader CliReader;
+        MetadataReader _MD;
+
+        PEMemoryBlock? _MetadataBlock;
+
+        PEMemoryBlock MetadataBlock
+        {
+            [MethodImpl(Inline)]
+            get
+            {
+                if(!_MetadataBlock.HasValue)
+                    _MetadataBlock = PE.GetMetadata();
+                return _MetadataBlock.Value;
+            }
+        }
+
+        CliReader CliReader()
+            => Cli.reader(MetadataBlock);
 
         public PeReader(FS.FilePath src)
         {
             Source = src;
             Stream = File.OpenRead(src.Name);
             PE = new PEReader(Stream);
-            MD = PE.GetMetadataReader();
-            MetadataBlock = PE.GetMetadata();
-            CliReader = Cli.reader(MetadataBlock);
         }
 
         [MethodImpl(Inline)]
@@ -59,17 +79,27 @@ namespace Z0
             Stream?.Dispose();
         }
 
+        public CoffHeaderRow ReadCoffHeader()
+        {
+            var src = PeHeaders.CoffHeader;
+            var dst = new CoffHeaderRow();
+            dst.Characteristics = src.Characteristics;
+            dst.Machine = src.Machine;
+            dst.NumberOfSections = (ushort)src.NumberOfSections;
+            dst.NumberOfSymbols = (uint)src.NumberOfSymbols;
+            dst.PointerToSymbolTable = src.PointerToSymbolTable;
+            dst.SizeOfOptionalHeader = (ushort)src.SizeOfOptionalHeader;
+            dst.TimeDateStamp = (uint)src.TimeDateStamp;
+            return dst;
+        }
+
+
         public PEHeaders PeHeaders
         {
             [MethodImpl(Inline)]
             get => PE.PEHeaders;
         }
 
-        public CoffHeader CoffHeader
-        {
-            [MethodImpl(Inline)]
-            get => PeHeaders.CoffHeader;
-        }
 
         public CorHeader CorHeader
         {
@@ -77,11 +107,8 @@ namespace Z0
             get => PeHeaders.CorHeader;
         }
 
-        public ReadOnlySpan<SectionHeader> SectionHeaders
-        {
-            [MethodImpl(Inline)]
-            get => PeHeaders.SectionHeaders.ToReadOnlySpan();
-        }
+        ReadOnlySpan<SectionHeader> SectionHeaders
+            => PeHeaders.SectionHeaders.ToReadOnlySpan();
 
         public ReadOnlySpan<MemberReferenceHandle> MemberRefHandles
             => MD.MemberReferences.ToArray();
@@ -107,7 +134,6 @@ namespace Z0
         public DirectoryEntry VtableFixupsDirectory
             => CorHeader.VtableFixupsDirectory;
 
-        [MethodImpl(Inline)]
         public PEMemoryBlock ReadSectionData(DirectoryEntry src)
             => PE.GetSectionData(src.RelativeVirtualAddress);
     }

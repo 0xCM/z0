@@ -4,9 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
+    using System;
+
     /// <summary>
     /// Classfies, to a degree, the lines found in a <see cref='NasmListing'/>
     /// </summary>
+    [Flags]
     public enum NasmListLineKind : byte
     {
         None = 0,

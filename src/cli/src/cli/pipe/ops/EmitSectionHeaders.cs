@@ -40,11 +40,10 @@ namespace Z0
                     continue;
 
                 using var reader = PeReader.create(file);
-                var headers = reader.ReadSectionHeaderInfo();
+                var headers = reader.ReadSectionHeaders();
                 var count = headers.Length;
-                var view = headers.View;
                 for(var i=0u; i<count; i++)
-                    writer.WriteLine(formatter.Format(skip(view,i)));
+                    writer.WriteLine(formatter.Format(skip(headers,i)));
 
                 total += count;
             }

@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
-    using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial class PeReader
     {
@@ -20,7 +16,7 @@ namespace Z0
             dst = default;
 
             var directory = ReadSectionData(ResourcesDirectory);
-            var descriptions = CliReader.ReadResInfo();
+            var descriptions = CliReader().ReadResInfo();
             var count = descriptions.Length;
             for(var i=0; i<count; i++)
             {

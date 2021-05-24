@@ -15,7 +15,7 @@ namespace Z0.Tools
         public void ShowListings()
         {
             using var log = ShowLog(Id.Format() + "." + "listings", FS.Log);
-            log.Title(NasmFileKind.Listing);
+            log.Title("List");
 
             var listings = Listings();
             foreach(var path in listings)

@@ -40,20 +40,17 @@ namespace Z0
                 Wf.Warn(string.Format("No *.{0} files were found in {1}", FS.Dmp, DumpPaths.InputRoot.Format(PathSeparator.FS)));
         }
 
-        void Emit(ProcDumpIdentity id, ReadOnlySpan<DR.ModuleInfo> src)
+        uint Emit(ProcDumpIdentity id, ReadOnlySpan<DR.ModuleInfo> src, FS.FolderPath dir)
+            => TableEmit(src, DR.ModuleInfo.RenderWidths, Db.Table<DR.ModuleInfo>(dir));
+
+        uint Emit(ProcDumpIdentity id, ReadOnlySpan<DR.MethodTableToken> src, FS.FolderPath dir)
+            => TableEmit(src, Db.Table<DR.MethodTableToken>(dir));
+
+        void Emit(ProcDumpIdentity id, DP.ModuleProcessPresult src)
         {
-            var outdir = DumpPaths.OutputDir(id);
-            var count = src.Length;
-            var dst = Db.Table<DR.ModuleInfo>(outdir);
-            var emitting = Wf.EmittingTable<DR.ModuleInfo>(dst);
-            using var log = dst.Writer();
-            var formatter = Tables.formatter<DR.ModuleInfo>(DR.ModuleInfo.RenderWidths);
-            log.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(src,i);
-                log.WriteLine(formatter.Format(row));
-            }
+            var dst = DumpPaths.OutputDir(id);
+            Emit(id, src.Modules, dst);
+            Emit(id, src.MethodTables, dst);
         }
 
         public void ParseDump(FS.FilePath src)

@@ -9,15 +9,14 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial class PeReader
     {
         [Op]
         public unsafe ReadOnlySpan<ResSeg> ReadResSegments()
         {
-            var resources = CliReader.ReadResInfo();
+            var resources = CliReader().ReadResInfo();
             var count = resources.Length;
             var dst = span<ResSeg>(count);
             for(var i=0u; i<count; i++)

@@ -4,19 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static memory;
+    using System;
+
     using static PeRecords;
 
     partial class PeReader
     {
-        public Index<SectionHeaderInfo> ReadSectionHeaderInfo()
+        public ReadOnlySpan<SectionHeaderInfo> ReadSectionHeaders()
         {
             var dst = root.list<SectionHeaderInfo>();
 
             if(PE.HasMetadata)
             {
-                var headers = PE.PEHeaders;
-                var sections = headers.SectionHeaders;
+                var headers = PeHeaders;
+                var sections = SectionHeaders;
 
                 foreach(var section in sections)
                 {
@@ -33,8 +34,7 @@ namespace Z0
                     dst.Add(record);
                 }
             }
-            return dst.ToArray();
+            return dst.ViewDeposited();
         }
-
     }
 }

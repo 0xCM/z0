@@ -4,18 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using static Pow2x64;
-
-    public enum NasmFileKind : ulong
+    public enum NasmPathIndex : byte
     {
-        None = 0,
+        AsmSource = 0,
 
-        Asm = P2ᐞ08,
-
-        Obj = P2ᐞ09,
-
-        Bin = P2ᐞ10,
-
-        Listing = P2ᐞ12,
+        BinTarget = 1,
     }
 }

@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using CSym = AsciControl;
-    using MSym = AsciMath;
-    using PKSym = AsciSymSymbol;
-
     /// <summary>
     /// All of the asci symbols belong to us
     /// </summary>
@@ -477,46 +473,46 @@ namespace Z0
         /// <summary>
         /// The '*' character
         /// </summary>
-        Mul = MSym.Mul,
+        Mul = '*',
 
         /// <summary>
         /// The '~' character
         /// </summary>
-        Tilde = MSym.Complement,
+        Tilde = '~',
 
         /// <summary>
         /// The '_' character
         /// </summary>
-        US = PKSym.US,
+        US = '_',
 
         /// <summary>
         /// The tab control character
         /// </summary>
-        Tab = CSym.Tab,
+        Tab = '\t',
 
         /// <summary>
         /// The vertical tab control character
         /// </summary>
-        VTab = CSym.VTab,
+        VTab = '\v',
 
         /// <summary>
         /// The line-feed character
         /// </summary>
-        LF = CSym.LF,
+        LF = '\n',
 
         /// <summary>
         /// The carriage-return character
         /// </summary>
-        CR = CSym.CR,
-
-        /// <summary>
-        /// The delete control symbol
-        /// </summary>
-        Del = CSym.Del,
+        CR = '\r',
 
         /// <summary>
         /// The form-feed control character
         /// </summary>
-        FF = CSym.FF,
+        FF = '\f',
+
+        /// <summary>
+        /// The delete control symbol
+        /// </summary>
+        Del = (byte)sbyte.MaxValue,
     }
 }

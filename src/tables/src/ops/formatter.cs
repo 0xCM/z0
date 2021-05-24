@@ -56,4 +56,47 @@ namespace Z0
             return fx;
         }
     }
+
+    partial class XTend
+    {
+        public static IRecordFormatter<T> RecordFormatter<T>(this ReadOnlySpan<T> src)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>();
+
+        public static IRecordFormatter<T> RecordFormatter<T>(this Span<T> src)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>();
+
+        public static IRecordFormatter<T> RecordFormatter<T>(this Index<T> src)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>();
+
+        public static IRecordFormatter<T> RecordFormatter<T>(this T[] src)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>();
+
+        public static IRecordFormatter<T> Formatter<T>(this T src)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>();
+
+        public static IRecordFormatter<T> RecordFormatter<T>(this ReadOnlySpan<T> src, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>(widths);
+
+        public static IRecordFormatter<T> RecordFormatter<T>(this Span<T> src, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>(widths);
+
+        public static IRecordFormatter<T> RecordFormatter<T>(this Index<T> src, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>(widths);
+
+        public static IRecordFormatter<T> RecordFormatter<T>(this T[] src, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>(widths);
+
+        public static IRecordFormatter<T> Formatter<T>(this T src, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => Tables.formatter<T>(widths);
+    }
 }

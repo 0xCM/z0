@@ -4,28 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    public enum NasmOptionKind : byte
+    using System;
+
+    using static Pow2x32;
+
+    [Flags]
+    public enum NasmOptionKind : uint
     {
         None = 0,
 
-        [Format("{0}")]
-        Input,
+        [Symbol("-o", "Specifies output file name")]
+        o = P2ᐞ00,
 
-        [Format("-o {0}")]
-        OutFile,
+        [Symbol("-f", "Selects output file format")]
+        f = P2ᐞ01,
 
-        [Format("-f {0}")]
-        Format,
+        [Symbol("-l", "")]
+        l = P2ᐞ02,
 
-        [Format("-l {0}")]
-        ListFile,
-    }
+        [Symbol("-X", "Selects error reporting format")]
+        X = P2ᐞ03,
 
-    public enum NasmFlag : byte
-    {
-        None = 0,
-
-        [Symbol("-g")]
-        GenDebugInfo,
+        [Symbol("-@", "Specifies a response file")]
+        Response,
     }
 }

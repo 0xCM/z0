@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct root
+    partial struct core
     {
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each

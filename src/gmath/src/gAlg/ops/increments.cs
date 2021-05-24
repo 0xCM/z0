@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     using static gmath;
-    using static memory;
+    using static core;
     using static Numeric;
 
     partial struct gAlg

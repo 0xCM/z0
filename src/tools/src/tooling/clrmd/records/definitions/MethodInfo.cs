@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+    using static Part;
+
     using ClrMd = Microsoft.Diagnostics.Runtime;
 
     partial struct DiagnosticRecords
@@ -54,7 +56,6 @@ namespace Z0
 
             // Total number of rejit versions that have been jitted
             public readonly uint JittedRejitVersions;
-
         }
     }
 }

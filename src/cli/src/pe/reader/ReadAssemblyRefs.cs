@@ -15,7 +15,7 @@ namespace Z0
         [Op]
         public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs()
         {
-            var src = CliReader.AssemblyRefHandles();
+            var src = CliReader().AssemblyRefHandles();
             var dst = alloc<AssemblyRefInfo>(src.Length);
             ReadAssemblyRefs(src, dst);
             return dst;
@@ -37,7 +37,7 @@ namespace Z0
         {
             dst.Source = MD.GetAssemblyDefinition().GetAssemblyName();
             dst.Target = src.GetAssemblyName();
-            dst.Token = CliReader.Read(src.PublicKeyOrToken);
+            dst.Token = CliReader().Read(src.PublicKeyOrToken);
             return ref dst;
         }
     }

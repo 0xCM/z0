@@ -9,17 +9,8 @@ namespace Z0.Tools
 
     using static Root;
 
-    public readonly struct NasmOption<T>
+    public readonly struct NasmCmd
     {
-        public NasmOptionKind Kind {get;}
-
-        public T Value {get;}
-
-        [MethodImpl(Inline)]
-        public NasmOption(NasmOptionKind kind, T value)
-        {
-            Kind = kind;
-            Value = value;
-        }
+        public Index<NasmPathIndex,FS.FilePath> Paths {get;}
     }
 }

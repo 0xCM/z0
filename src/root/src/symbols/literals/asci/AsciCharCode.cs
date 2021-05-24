@@ -17,16 +17,19 @@ namespace Z0
         /// <summary>
         /// The tab character code 9
         /// </summary>
+        [Symbol(AC.Tab)]
         Tab = (byte)AC.Tab,
 
         /// <summary>
         /// The vertical tab
         /// </summary>
+        [Symbol(AC.VTab)]
         VTab = (byte)AC.VTab,
 
         /// <summary>
         /// The line-feed character code 10
         /// </summary>
+        [Symbol(AC.LF)]
         LF = (byte)AC.LF,
 
         /// <summary>
