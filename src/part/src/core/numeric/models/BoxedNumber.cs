@@ -242,7 +242,7 @@ namespace Z0
             => Convert<ulong>().FormatHex(false,true);
 
         public string Format(Base2 @base)
-            => BitFormatter.format(Boxed, Kind.ToTypeCode());
+            => bit.format(Boxed, Kind.ToTypeCode());
 
         public override string ToString()
             => Boxed.ToString();

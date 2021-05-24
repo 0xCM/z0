@@ -47,6 +47,18 @@ namespace Z0
         public bool Equals(H src)
             => Value == src.Value;
 
+        public Hex4 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (byte)((byte)Value & 0xF);
+        }
+
+        public Hex4 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (byte)((byte)Value >> 4);
+        }
+
         public uint Hash
         {
             [MethodImpl(Inline)]

@@ -266,11 +266,11 @@ namespace Z0
             => new U((byte)src,false);
 
         static BitFormat FormatConfig5
-            => BitFormatter.limited(U.Width,U.Width);
+            => BitFormat.limited(U.Width,U.Width);
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => BitFormatter.format(src.data, FormatConfig5);
+            => bit.format(src.data, FormatConfig5);
 
         [MethodImpl(Inline), False]
         public static U @false(U a, U b)
@@ -280,25 +280,13 @@ namespace Z0
         public static U @true(U a, U b)
             => U.Max;
 
-        // [MethodImpl(Inline), And]
-        // public static U and(U a, U b)
-        //     => a & b;
-
         [MethodImpl(Inline), Nand]
         public static U nand(U a, U b)
             => ~(a & b);
 
-        // [MethodImpl(Inline), Or]
-        // public static U or(U a, U b)
-        //     => a | b;
-
         [MethodImpl(Inline), Nor]
         public static U nor(U a, U b)
             => ~(a | b);
-
-        // [MethodImpl(Inline), Xor]
-        // public static U xor(U a, U b)
-        //     => a ^ b;
 
         [MethodImpl(Inline), Xnor]
         public static U xnor(U a, U b)

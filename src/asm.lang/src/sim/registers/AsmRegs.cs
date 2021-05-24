@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static RegFacets;
 
     [ApiHost]
@@ -38,39 +38,22 @@ namespace Z0.Asm
         [Op, Closures(UInt8k)]
         public static string format<T>(IReg8<T> src)
             where T : unmanaged
-        {
-            var data = bw8(src.Content);
-            return data.FormatHex(specifier:false);
-        }
+                => bw8(src.Content).FormatHex(specifier:false);
 
         [Op, Closures(UInt16k)]
         public static string format<T>(IReg16<T> src)
             where T : unmanaged
-        {
-            var data = bw16(src.Content);
-            return data.FormatHex(specifier:false);
-        }
+                => bw16(src.Content).FormatHex(specifier:false);
 
         [Op, Closures(UInt32k)]
         public static string format<T>(IReg32<T> src)
             where T : unmanaged
-        {
-            var data = bw32(src.Content);
-            return data.FormatHex(specifier:false);
-        }
+                => bw32(src.Content).FormatHex(specifier:false);
 
         [Op, Closures(UInt64k)]
         public static string format<T>(IReg64<T> src)
             where T : unmanaged
-        {
-            var data = bw64(src.Content);
-            return data.FormatHex(specifier:false);
-        }
-
-        public static RegLayout layout(RegIndex index)
-        {
-            return default;
-        }
+                => bw64(src.Content).FormatHex(specifier:false);
 
         [Op]
         public static Index<RegClass> classes()

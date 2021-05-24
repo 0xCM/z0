@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public FixedBitFormatter(uint width)
         {
-            Config = BitFormatter.limited(width, width);
+            Config = BitFormat.limited(width, width);
             _Formatter = new BitFormatter<T>(Config);
         }
 

@@ -6,8 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial class AsmGen
     {

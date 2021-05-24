@@ -14,6 +14,26 @@ namespace Z0
     /// </summary>
     public struct BitFormat
     {
+        [MethodImpl(Inline), Op]
+        public static BitFormat configure(bool tlz)
+            => BitFormatOptions.bits(tlz);
+
+        [MethodImpl(Inline), Op]
+        public static BitFormat configure()
+            => BitFormatOptions.bits(false);
+
+        [MethodImpl(Inline), Op]
+        public static BitFormat limited(uint maxbits, int? zpad = null)
+            => BitFormatOptions.bitmax(maxbits, zpad);
+
+        [MethodImpl(Inline), Op]
+        public static BitFormat limited(uint maxbits, uint zpad)
+            => BitFormatOptions.bitmax(maxbits, (int)zpad);
+
+        [MethodImpl(Inline), Op]
+        public static BitFormat blocked(int width, char? sep = null, uint? maxbits = null, bool specifier = false)
+            => BitFormatOptions.bitblock(width, sep, maxbits, specifier);
+
         /// <summary>
         /// Indicates whether leading zeros should be trimmed
         /// </summary>

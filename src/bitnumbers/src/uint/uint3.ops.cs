@@ -285,11 +285,11 @@ namespace Z0
             => (byte)(U.MaxLiteral & x);
 
         static BitFormat FormatConfig3
-            => BitFormatter.limited(U.Width, U.Width);
+            => BitFormat.limited(U.Width, U.Width);
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => BitFormatter.format(src.data, FormatConfig3);
+            => bit.format(src.data, FormatConfig3);
 
         /// <summary>
         /// Promotes a triad to an quartet

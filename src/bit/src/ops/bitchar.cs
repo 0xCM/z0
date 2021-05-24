@@ -37,6 +37,13 @@ namespace Z0
             lo =bitchar(src, Bytes.sub(offset, 1));
             return 2;
         }
+        public static Span<char> bitchars(ReadOnlySpan<byte> src)
+        {
+            var dst = span<char>(src.Length*8);
+            var input = span(src);
+            bit.render(src, dst);
+            return dst;
+        }
 
         /// <summary>
         /// Tests the state of an index-identified source bit and returns the corresponding '0' or '1' character

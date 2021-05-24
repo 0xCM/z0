@@ -11,7 +11,6 @@ namespace Z0
 
     public static class HexFormatSpecs
     {
-
         [MethodImpl(Inline)]
         public static bool HasPreSpec(string src)
             => src.TrimStart().StartsWith(PreSpec);

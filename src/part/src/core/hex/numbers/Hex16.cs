@@ -36,6 +36,18 @@ namespace Z0
              get => Value != 0;
         }
 
+        public Hex8 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Value;
+        }
+
+        public Hex8 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (byte)(Value >> 8);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(H src)
             => Value == src.Value;

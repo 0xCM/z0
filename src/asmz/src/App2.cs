@@ -308,8 +308,6 @@ namespace Z0.Asm
             }
         }
 
-
-
         void EmitTableReport(FS.FilePath dst)
         {
             using var writer = dst.Writer();
@@ -413,15 +411,50 @@ namespace Z0.Asm
         }
 
 
+        void CheckCpuid()
+        {
+            var descriptor = Parts.AsmCases.Assets.CpuIdRows();
+            var content = text.utf8(descriptor.ResBytes);
+            var pipe = Wf.AsmRowPipe();
+            using var reader = content.Reader();
+            var rows = pipe.LoadCpuIdRows(reader);
+            var formatter = rows.RecordFormatter(CpuIdRow.RenderWidths);
+            Wf.Row(formatter.FormatHeader());
+            core.iter(rows, row => Wf.Row(formatter.Format(row)));
+
+            var count = rows.Length;
+            var j = 0u;
+            var buffer = text.buffer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                buffer.AppendFormat("eax: {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(n8));
+                var ebx = row.Ebx.FormatBitstring(n8);
+                buffer.AppendFormat("ebx: {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(n8));
+                var ecx = row.Ecx.FormatBitstring(n8);
+                buffer.AppendFormat("ebx: {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(n8));
+                var edx = row.Edx.FormatBitstring(n8);
+                buffer.AppendFormat("edx: {0} [{1}]", row.Edx, row.Edx.FormatBitstring(n8));
+                Wf.Row(buffer.Emit());
+            }
+
+            // var cpuid = CpuId.request(0u,0u);
+            // var result = Cells.cell128(0x00000015, 0x756E6547, 0x6C65746E, 0x49656E69);
+            // CpuId.response(result, ref cpuid);
+            // Wf.Row(cpuid.Format());
+        }
+
+
         public void Run()
         {
+            //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");
             // ShowCoffHeader(src);
             //ParseDump();
             //StatementRountTrip();
             //TestBitfields();
             //TestRel32();
-            //RunExtractWorkflow();
+            RunExtractWorkflow();
             //CaptureSelf();
             // var dir = Db.AppLogDir();
             // EmitAsmRows(dir);

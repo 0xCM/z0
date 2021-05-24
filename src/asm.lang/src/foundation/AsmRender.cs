@@ -211,7 +211,7 @@ namespace Z0.Asm
 
         public void RenderRows(AsmMnemonicCode code, FS.FilePath dst)
         {
-            var rows = @readonly(Wf.AsmRowPipe().LoadAsmRows(code).OrderBy(x => x.Statement).Array());
+            var rows = @readonly(Wf.AsmRowPipe().LoadDetails(code).OrderBy(x => x.Statement).Array());
             var count = rows.Length;
             if(count == 0)
                 return;

@@ -157,7 +157,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref U inc(in U a)
         {
-            ref var b = ref memory.edit(a);
+            ref var b = ref core.edit(a);
             b.data++;
 
             if(b.data > Mask)
@@ -169,7 +169,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref U dec(in U a)
         {
-            ref var b = ref memory.edit(a);
+            ref var b = ref core.edit(a);
             b.data--;
 
             if(b.data > Mask)
@@ -183,11 +183,11 @@ namespace Z0
             => a.data == b.data;
 
         static BitFormat FormatConfig24
-            => BitFormatter.limited(U.Width,U.Width);
+            => BitFormat.limited(U.Width,U.Width);
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => BitFormatter.format(src.data, FormatConfig24);
+            => bit.format(src.data, FormatConfig24);
 
     }
 }

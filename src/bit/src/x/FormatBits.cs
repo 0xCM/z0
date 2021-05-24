@@ -6,32 +6,32 @@ namespace Z0
 {
     using System;
 
-    using api = BitFormatter;
+    using api = bit;
 
     partial class XTend
     {
         public static string FormatBits(this byte src, BitFormat? config = null)
-            => api.format(src, config ?? BitFormatter.configure());
+            => api.format(src, config ?? BitFormat.configure());
 
         public static string FormatBits(this sbyte src, BitFormat? config = null)
-            => api.format(src, config ?? BitFormatter.configure());
+            => api.format(src, config ?? BitFormat.configure());
 
         public static string FormatBits(this short src, BitFormat? config = null)
-            => api.format(src, config ?? BitFormatter.configure());
+            => api.format(src, config ?? BitFormat.configure());
 
         public static string FormatBits(this ushort src, BitFormat? config = null)
-            => api.format(src, config ?? BitFormatter.configure());
+            => api.format(src, config ?? BitFormat.configure());
         public static string FormatBits(this uint src, BitFormat? config = null)
-            => api.format(src, config ?? BitFormatter.configure());
+            => api.format(src, config ?? BitFormat.configure());
 
         public static string FormatBits(this int src, BitFormat? config = null)
-            => api.format(src, config ?? BitFormatter.configure());
+            => api.format(src, config ?? BitFormat.configure());
 
         public static string FormatBits(this ulong src, BitFormat? config = null)
-            => api.format(src, config ?? BitFormatter.configure());
+            => api.format(src, config ?? BitFormat.configure());
 
         public static string FormatBits(this long src, BitFormat? config = null)
-            => api.format(src, config ?? BitFormatter.configure());
+            => api.format(src, config ?? BitFormat.configure());
 
         public static string Format(this byte src, NumericBaseKind @base)
             => @base switch{
@@ -63,10 +63,10 @@ namespace Z0
 
         public static string FormatBits<T>(this ReadOnlySpan<T> src, BitFormat? config = null)
             where T : unmanaged
-                => api.format(src, config);
+                => bit.format(src, config);
 
         public static string FormatBits<T>(this Span<T> src, BitFormat? config = null)
             where T : unmanaged
-                => api.format(src.ReadOnly(), config);
+                => bit.format(src.ReadOnly(), config);
     }
 }

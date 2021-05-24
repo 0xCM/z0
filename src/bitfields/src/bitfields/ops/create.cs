@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="spec">The bitfield definition</param>
         /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitfieldCover<T> create<T>(in BitfieldSegSpecs spec, T state = default)
+        public static BitfieldCover<T> create<T>(in BitfieldParts spec, T state = default)
             where T : unmanaged
                 => new BitfieldCover<T>(spec, state);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <typeparam name="E">A index-defining enumeration</typeparam>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline)]
-        public static BitfieldCover<S,E,T> create<S,E,T>(in BitfieldSegSpecs spec, T state = default)
+        public static BitfieldCover<S,E,T> create<S,E,T>(in BitfieldParts spec, T state = default)
             where S : unmanaged
             where E : unmanaged, Enum
             where T : unmanaged

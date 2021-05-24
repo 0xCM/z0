@@ -9,8 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using api = BitFormatter;
-
     /// <summary>
     /// Configurable bit data type formatter
     /// </summary>
@@ -24,10 +22,10 @@ namespace Z0
             => Config = config;
 
         public string Format(ReadOnlySpan<byte> src)
-            => api.format(src, Config);
+            => bit.format(src, Config);
 
         [MethodImpl(Inline)]
         public string Format(T src)
-            => api.format(src, Config);
+            => bit.format(core.bytes(src).ReadOnly(), Config);
     }
 }

@@ -154,13 +154,6 @@ namespace Z0.Asm
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
             => Wf.ApiCatalogs().EmitApiClasses();
 
-        void CheckCpuid()
-        {
-            var cpuid = CpuId.request(0u,0u);
-            var result = Cells.cell128(0x00000015, 0x756E6547, 0x6C65746E, 0x49656E69);
-            CpuId.response(result, ref cpuid);
-            Wf.Row(cpuid.Format());
-        }
 
         public ListFilesCmd EmitFileListCmdSample()
         {
@@ -321,7 +314,7 @@ namespace Z0.Asm
 
             var render = Wf.AsmRender();
             var code = AsmMnemonicCode.MOVZX;
-            var rows = @readonly(Wf.AsmRowPipe().LoadAsmRows(code).OrderBy(x => x.Statement).Array());
+            var rows = @readonly(Wf.AsmRowPipe().LoadDetails(code).OrderBy(x => x.Statement).Array());
             var count = rows.Length;
             var dst = Db.AppLog(code.ToString(),FS.Asm);
             using var writer = dst.Writer();

@@ -21,25 +21,20 @@ namespace Z0
         /// <summary>
         /// The accumulated width of the defined segments
         /// </summary>
-        uint SegmentWidth {get;}
-
-        /// <summary>
-        /// The width of the containing datatype
-        /// </summary>
-        uint StorageWidth {get;}
+        uint TotalWidth {get;}
 
         /// <summary>
         /// The defined segments
         /// </summary>
-        ReadOnlySpan<BitfieldPart> Segments {get;}
+        ReadOnlySpan<BitfieldPart> Parts {get;}
     }
 
     public interface IBitfieldModel<T> : IBitfieldModel
         where T : unmanaged
     {
-         new ReadOnlySpan<BitFieldPart<T>> Segments {get;}
+         new ReadOnlySpan<BitFieldPart<T>> Parts {get;}
 
-         ReadOnlySpan<BitfieldPart> IBitfieldModel.Segments
-            =>  Segments.Map(s => (BitfieldPart)s);
+         ReadOnlySpan<BitfieldPart> IBitfieldModel.Parts
+            =>  Parts.Map(s => (BitfieldPart)s);
     }
 }

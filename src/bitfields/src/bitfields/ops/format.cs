@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
 
     partial struct BitFields
     {
@@ -31,7 +30,7 @@ namespace Z0
             for(var i=last; i>=0; i--)
             {
                 ref readonly var seg = ref src.Segment((byte)i);
-                dst.AppendFormat("{0}:{1}", seg.Name, BitFormatter.format(src.Extract((byte)i), seg.Width));
+                dst.AppendFormat("{0}:{1}", seg.Name, bit.format(src.Extract((byte)i), seg.Width));
 
                 if(i != 0)
                     dst.Append(RP.SpacedPipe);
@@ -63,8 +62,8 @@ namespace Z0
         {
             var data = Enums.scalar<E,T>(src);
             var limit = (uint)gbits.effwidth(data);
-            var config = BitFormatter.limited(limit,zpad);
-            var formatter = BitFormatter.create<T>(config);
+            var config = BitFormat.limited(limit,zpad);
+            var formatter = bit.formatter<T>(config);
             return text.concat(name, Chars.Colon, formatter.Format(data));
         }
    }

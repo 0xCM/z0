@@ -21,32 +21,26 @@ namespace Z0
         public uint SegmentCount {get;}
 
         /// <summary>
-        /// The width of the containing datatype
-        /// </summary>
-        public uint StorageWidth {get;}
-
-        /// <summary>
         /// The accumulated width of the defined segments
         /// </summary>
-        public uint SegmentWidth {get;}
+        public uint TotalWidth {get;}
 
-        readonly Index<BitFieldPart<T>> _Segments;
+        readonly Index<BitFieldPart<T>> _Parts;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(Name name, uint count, uint width, Index<BitFieldPart<T>> segments)
+        public BitFieldModel(Name name, uint count, uint width, Index<BitFieldPart<T>> parts)
         {
             Name = name;
-            StorageWidth = width;
             SegmentCount = count;
-            _Segments = segments;
-            SegmentWidth = 0;
-            SegmentWidth = BitfieldSpecs.width(this);
+            _Parts = parts;
+            TotalWidth = 0;
+            TotalWidth = BitfieldSpecs.width(this);
         }
 
-        public ReadOnlySpan<BitFieldPart<T>> Segments
+        public ReadOnlySpan<BitFieldPart<T>> Parts
         {
             [MethodImpl(Inline)]
-            get => _Segments.View;
+            get => _Parts.View;
         }
 
         [MethodImpl(Inline)]
@@ -59,6 +53,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly BitFieldPart<T> Segment(int index)
-            => ref _Segments[index];
+            => ref _Parts[index];
     }
 }

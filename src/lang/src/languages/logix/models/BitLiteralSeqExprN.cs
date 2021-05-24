@@ -42,7 +42,7 @@ namespace Z0
             => LogicExprKind.Literal;
 
         public string Format()
-            => BitFormatter.format(_Terms);
+            => bit.format(_Terms);
 
         public override string ToString()
             => Format();

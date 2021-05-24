@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void store<T>(in BitfieldSegSpecs spec, T src, Span<T> dst)
+        public static void store<T>(in BitfieldParts spec, T src, Span<T> dst)
             where T : unmanaged
         {
             var count = spec.FieldCount;
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T store<T>(in BitfieldSegSpecs spec, ReadOnlySpan<T> src, ref T dst)
+        public static ref T store<T>(in BitfieldParts spec, ReadOnlySpan<T> src, ref T dst)
             where T : unmanaged
         {
             var count = spec.FieldCount;
@@ -75,7 +75,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void store<S,T>(in BitfieldSegSpecs spec, in S src, Span<T> dst)
+        public static void store<S,T>(in BitfieldParts spec, in S src, Span<T> dst)
             where S : unmanaged
             where T : unmanaged
         {
@@ -100,7 +100,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T store2<T>(in BitfieldSegSpecs spec, ReadOnlySpan<T> src, ref T data)
+        public static ref T store2<T>(in BitfieldParts spec, ReadOnlySpan<T> src, ref T data)
             where T : unmanaged
         {
             for(var i=0; i<spec.FieldCount; i++)

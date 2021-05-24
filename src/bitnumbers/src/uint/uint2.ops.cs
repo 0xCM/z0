@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(U src)
-            => BitFormatter.format(src.data, BitFormatter.limited(U.Width, U.Width));
+            => bit.format(src.data, BitFormat.limited(U.Width, U.Width));
 
         [MethodImpl(Inline), Op]
         public static void render(U src, uint offset, Span<char> dst)

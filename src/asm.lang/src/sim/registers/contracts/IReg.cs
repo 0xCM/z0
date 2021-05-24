@@ -24,7 +24,7 @@ namespace Z0.Asm
         where T : unmanaged
     {
         RegWidth Width
-            => (RegWidth)(ushort)memory.width<T>();
+            => (RegWidth)(ushort)core.width<T>();
 
         string ITextual.Format()
             => api.format(this);

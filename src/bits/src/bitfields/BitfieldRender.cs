@@ -62,6 +62,5 @@ namespace Z0
             for(byte j=0; j<width; j++)
                 seek(dst, counter++) = bit.bitchar(seg, j);
         }
-
     }
 }

@@ -79,8 +79,8 @@ namespace Z0.Asm
             => new AsmSigExpr(mnemonic,formatted);
 
         [MethodImpl(Inline), Op]
-        public static AsmExprSet pack(AsmOpCodeExpr oc, AsmSigExpr sig, AsmStatementExpr statement)
-            => new AsmExprSet(new AsmFormExpr(oc, sig), statement);
+        public static AsmExprSet pack(AsmOpCodeExpr opcode, AsmSigExpr sig, AsmStatementExpr statement)
+            => new AsmExprSet(new AsmFormExpr(opcode, sig), statement);
 
         /// <summary>
         /// Defines an IP offset relative to a specified base address, instruction size and target address

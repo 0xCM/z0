@@ -24,7 +24,7 @@ namespace Z0
             if(c <= 16)
             {
                 var data = slice(bytes(src), 0, c);
-                return HexFormat.format(data, HexFormatSpecs.HexData);
+                return data.HexCoreFormat(HexFormatSpecs.HexData);
             }
             return "!!FormatError!!";
         }

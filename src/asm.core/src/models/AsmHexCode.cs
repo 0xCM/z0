@@ -100,7 +100,6 @@ namespace Z0.Asm
         public static bool operator ==(AsmHexCode a, AsmHexCode b)
             => a.Equals(b);
 
-
         [MethodImpl(Inline)]
         public static bool operator !=(AsmHexCode a, AsmHexCode b)
             => !a.Equals(b);

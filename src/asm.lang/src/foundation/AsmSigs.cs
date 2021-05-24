@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Chars;
-    using static memory;
+    using static core;
     using static Rules;
 
     [ApiHost]

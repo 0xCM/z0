@@ -80,6 +80,8 @@ namespace Z0.Asm
                 get => new G(Content, RegKind);
             }
 
+            public string Name => nameof(eax);
+
             [MethodImpl(Inline)]
             public static implicit operator G(eax src)
                 => src.Generalized;
@@ -103,6 +105,8 @@ namespace Z0.Asm
                 => Content = value;
 
             public K RegKind => K.ECX;
+
+            public string Name => nameof(ecx);
 
             public G Generalized
             {
@@ -133,6 +137,8 @@ namespace Z0.Asm
 
             public K RegKind => K.EDX;
 
+            public string Name => nameof(edx);
+
             public G Generalized
             {
                 [MethodImpl(Inline)]
@@ -150,8 +156,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator T(edx src)
                 => src.Content;
-
-
         }
 
         public struct ebx : IReg32<ebx,T>
@@ -163,6 +167,8 @@ namespace Z0.Asm
                 => Content = value;
 
             public K RegKind => K.EBX;
+
+            public string Name => nameof(ebx);
 
             public G Generalized
             {
@@ -197,6 +203,8 @@ namespace Z0.Asm
                 => Content = value;
 
             public K RegKind => K.ESI;
+
+            public string Name => nameof(esi);
 
             public G Generalized
             {

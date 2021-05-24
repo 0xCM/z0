@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Globalization;
 
-
     using static HexFormatSpecs;
-    using static root;
     using static core;
     using static Root;
 
@@ -36,7 +34,7 @@ namespace Z0
                 var buffer = alloc<byte>(count);
                 ref var target = ref first(buffer);
                 for(var i=0; i<count; i++)
-                    seek(target,count-1-i) = byte.Parse(skip(blocks,i), NumberStyles.HexNumber);
+                    seek(target,count-1-i) = byte.Parse(skip(blocks, i), NumberStyles.HexNumber);
                 dst = buffer;
 
                 return true;
@@ -64,16 +62,36 @@ namespace Z0
         /// Parses a single hex digit
         /// </summary>
         /// <param name="c">The source character</param>
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(char c, out byte dst)
+        {
+            dst = 0xFF;
+            var result = Outcome.Success;
+            if(Hex.scalar(c))
+                dst = (byte)((byte)c - MinScalarCode);
+            else if(Hex.upper(c))
+                dst = (byte)((byte)c - MinCharCodeU + 0xA);
+            else if(Hex.lower(c))
+                dst = (byte)((byte)c - MinCharCodeL + 0xA);
+            else
+                result = false;
+            return result;
+        }
+
+        /// <summary>
+        /// Parses a single hex digit
+        /// </summary>
+        /// <param name="c">The source character</param>
         [Op]
         public ParseResult<byte> Parse(char c)
         {
             var u = Char.ToUpperInvariant(c);
             if(Hex.scalar(c))
-                return parsed(c, (byte)((byte)u - MinScalarCode));
+                return ParseResult.parsed(c, (byte)((byte)u - MinScalarCode));
             else if(Hex.upper(c))
-                return parsed(c, (byte)((byte)u - MinCharCodeU + 0xA));
+                return ParseResult.parsed(c, (byte)((byte)u - MinCharCodeU + 0xA));
             else
-                return unparsed<byte>(c);
+                return ParseResult.unparsed<byte>(c);
         }
 
         /// <summary>
@@ -84,11 +102,11 @@ namespace Z0
         {
             try
             {
-                return parsed(src, src.SplitClean(Chars.Space).Select(x => byte.Parse(x, NumberStyles.HexNumber)));
+                return ParseResult.parsed(src, src.SplitClean(Chars.Space).Select(x => byte.Parse(x, NumberStyles.HexNumber)));
             }
             catch(Exception e)
             {
-                return unparsed<byte[]>(src,e);
+                return ParseResult.unparsed<byte[]>(src,e);
             }
         }
 

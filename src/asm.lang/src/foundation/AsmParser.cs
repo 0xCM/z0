@@ -222,8 +222,6 @@ namespace Z0.Asm
             }
             else
                 return (false, $"Could not locate the signature fence {SigFence}");
-
         }
-
     }
 }

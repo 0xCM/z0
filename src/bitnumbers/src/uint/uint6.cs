@@ -127,7 +127,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(N2 b)
-            => BitFormatter.format(data,Width);
+            => bit.format(data,Width);
 
         [MethodImpl(Inline)]
         public string Format(N16 b)

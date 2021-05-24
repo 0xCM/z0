@@ -16,7 +16,7 @@ namespace Z0
         public static uint charpack(ReadOnlySpan<byte> src, Span<char> dst)
         {
             var j = 0u;
-            var count = root.min(src.Length, dst.Length);
+            var count = min(src.Length, dst.Length);
             for(var i=0; i<count; i++)
             {
                 ref readonly var b = ref skip(src,i);

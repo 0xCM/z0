@@ -25,12 +25,12 @@ namespace Z0
         /// <summary>
         /// The bitfield definition upon which the reader is predicated
         /// </summary>
-        readonly BitfieldSegSpecs Spec;
+        readonly BitfieldParts Spec;
 
         readonly ReadOnlySpan<BitfieldPart> Segments;
 
         [MethodImpl(Inline)]
-        public BitfieldCover(in BitfieldSegSpecs spec, T state)
+        public BitfieldCover(in BitfieldParts spec, T state)
         {
             Spec = spec;
             Segments = spec.Segments;

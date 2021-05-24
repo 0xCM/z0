@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The bitfield definition upon which the reader is predicated
         /// </summary>
-        readonly BitfieldSegSpecs Untyped;
+        readonly BitfieldParts Untyped;
 
         public uint TotalWidth {get;}
 
@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BitfieldSpec(in BitfieldSegSpecs untyped, uint bitcount)
+        public BitfieldSpec(in BitfieldParts untyped, uint bitcount)
         {
             TotalWidth = bitcount;
             Untyped = untyped;

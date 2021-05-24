@@ -254,11 +254,11 @@ namespace Z0
             => new U(src,false);
 
         static BitFormat FormatConfig7
-            => BitFormatter.limited(U.Width,U.Width);
+            => BitFormat.limited(U.Width,U.Width);
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => BitFormatter.format(src.data, FormatConfig7);
+            => bit.format(src.data, FormatConfig7);
 
         /// <summary>
         /// Promotes a <see cref='U2'/> to a <see cref='Z0.uint7'/>, as indicated by the <see cref='W7'/> selector

@@ -39,8 +39,8 @@ namespace Z0
             => Untyped == other.Untyped;
 
         public string Format(BitFormat config)
-            => BitFormatter.create<T>(config).Format(Content);
+            => bit.formatter<T>(config).Format(Content);
         public string Format()
-            => BitFormatter.create<T>().Format(Content);
+            => bit.formatter<T>().Format(Content);
     }
 }

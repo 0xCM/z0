@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The bitfield spec</param>
         [MethodImpl(Inline), Op]
-        public static uint width(in BitfieldSegSpecs spec)
+        public static uint width(in BitfieldParts spec)
         {
             var total = 0u;
             var count = spec.FieldCount;
@@ -41,7 +41,7 @@ namespace Z0
         {
             var total = 0u;
             var count = src.SegmentCount;
-            var segments = src.Segments;
+            var segments = src.Parts;
             for(byte i=0; i<count; i++)
                 total += skip(segments, i).Width;
             return total;
@@ -57,7 +57,7 @@ namespace Z0
         {
             var total = 0u;
             var count = src.SegmentCount;
-            var segments = src.Segments;
+            var segments = src.Parts;
             for(byte i=0; i<count; i++)
                 total += skip(segments, i).Width;
             return total;

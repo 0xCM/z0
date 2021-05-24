@@ -36,6 +36,18 @@ namespace Z0
              get => Value != 0;
         }
 
+        public Hex32 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Value;
+        }
+
+        public Hex32 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (uint)(Value >> 32);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(H src)
             => Value == src.Value;

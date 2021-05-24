@@ -219,11 +219,11 @@ namespace Z0
             => new U(src.data);
 
         static BitFormat FormatConfig8
-            => BitFormatter.limited(U.Width,U.Width);
+            => BitFormat.limited(U.Width,U.Width);
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => BitFormatter.format(src.data, FormatConfig8);
+            => bit.format(src.data, FormatConfig8);
 
         [MethodImpl(Inline), Op]
         public static Span<bit> bits(U src)

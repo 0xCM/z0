@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class BitMasks
     {
@@ -21,7 +21,7 @@ namespace Z0
             where T : unmanaged
         {
             Span<char> dst = stackalloc char[len];
-            var bs =  BitFormatter.format(spec);
+            var bs =  bit.format(spec);
             for(var i=0; i<len; i++)
                 seek(dst,i) = blendsymbol(bs[i]);
             return new string(dst);

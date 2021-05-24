@@ -90,7 +90,6 @@ namespace Z0
                 return Hex.hexchar(UpperCase, src, pos);
         }
 
-
         /// <summary>
         /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
         /// </summary>

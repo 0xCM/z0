@@ -38,7 +38,7 @@ namespace Z0
         }
 
         public string Format()
-            => BitFormatter.format(Storage, Width);
+            => bit.format(Storage, Width);
 
         public override string ToString()
             => Format();

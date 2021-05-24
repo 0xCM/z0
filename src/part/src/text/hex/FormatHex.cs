@@ -11,19 +11,19 @@ namespace Z0
     {
         [Op]
         public static string FormatHex(this byte[] src)
-            => HexFormat.format(src, HexFormatSpecs.HexData);
+            => src.HexCoreFormat(HexFormatSpecs.HexData);
 
         [Op]
         public static string FormatHex(this ReadOnlySpan<byte> src)
-            => HexFormat.format(src, HexFormatSpecs.HexData);
+            => src.HexCoreFormat(HexFormatSpecs.HexData);
 
         [Op]
         public static string FormatHex(this Span<byte> src)
-            => HexFormat.format(src, HexFormatSpecs.HexData);
+            => src.HexCoreFormat(HexFormatSpecs.HexData);
 
         [Op]
         public static string FormatHex(this byte[] src, in HexFormatOptions config)
-            => HexFormat.format(src, config);
+            => src.HexCoreFormat(config);
 
         /// <summary>
         /// Formats a span of numeric cell type as a sequence of hex values

@@ -36,6 +36,18 @@ namespace Z0
              get => Value != 0;
         }
 
+        public Hex16 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Value;
+        }
+
+        public Hex16 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)(Value >> 16);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(H src)
             => Value == src.Value;

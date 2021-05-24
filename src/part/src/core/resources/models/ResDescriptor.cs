@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+
+    using api = Resources;
 
     /// <summary>
     /// Describes an embedded resource
@@ -32,6 +34,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => new MemorySeg(Address, Size);
+        }
+
+        public ReadOnlySpan<byte> ResBytes
+        {
+            [MethodImpl(Inline)]
+            get => api.view(this);
         }
 
         [MethodImpl(Inline)]

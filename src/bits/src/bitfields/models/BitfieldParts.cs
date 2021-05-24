@@ -14,12 +14,12 @@ namespace Z0
     /// <summary>
     /// Defines a partition over a contiguous sequence of bits
     /// </summary>
-    public readonly struct BitfieldSegSpecs :  ITextual
+    public readonly struct BitfieldParts :  ITextual
     {
         readonly Index<BitfieldPart> Data;
 
         [MethodImpl(Inline)]
-        public BitfieldSegSpecs(BitfieldPart[] src)
+        public BitfieldParts(BitfieldPart[] src)
             => Data = src;
 
         [MethodImpl(Inline)]

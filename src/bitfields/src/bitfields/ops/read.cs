@@ -31,7 +31,7 @@ namespace Z0
         public static T read<S,T>(in BitfieldPart segment, in S src)
             where S : unmanaged
             where T : unmanaged
-                => memory.@as<S,T>(gbits.bitslice(src, (byte)segment.FirstIndex, (byte)segment.Width));
+                => @as<S,T>(gbits.bitslice(src, (byte)segment.FirstIndex, (byte)segment.Width));
 
         [MethodImpl(Inline)]
         public static T read<S,T>(in BitfieldPart segment, in S src, bool offset)

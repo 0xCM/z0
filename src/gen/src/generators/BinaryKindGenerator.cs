@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
 
-    using static Part;
+    using static Root;
     using static Chars;
 
     public class BinaryKindGenerator : CodeGenerator
@@ -21,11 +21,11 @@ namespace Z0
         {
             MaxValue = max;
             MaxBitCount = effwidth(MaxValue);
-            Formatter = BitFormatter.create<byte>(BitFormatter.limited(MaxBitCount, MaxBitCount));
+            Formatter = bit.formatter<byte>(BitFormat.limited(MaxBitCount, MaxBitCount));
         }
 
         BitFormatter<byte> Formatter {get;}
-            = BitFormatter.create<byte>();
+            = bit.formatter<byte>();
 
         public string Namespace {get;}
             = "Z0";

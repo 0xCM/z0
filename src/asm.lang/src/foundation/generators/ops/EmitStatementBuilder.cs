@@ -6,9 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-    using static memory;
-
     using T = AsmGenTarget;
 
     partial class AsmGen

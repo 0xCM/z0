@@ -268,10 +268,9 @@ namespace Z0
         internal static U wrap6(byte src)
             => new U(src,false);
 
-
         [MethodImpl(Inline)]
         public static string format(U src)
-            => BitFormatter.format(src.data, BitFormatter.limited(U.Width,U.Width));
+            => bit.format(src.data, BitFormat.limited(U.Width,U.Width));
 
         [MethodImpl(Inline), Op]
         public static Span<bit> bits(uint6 src)

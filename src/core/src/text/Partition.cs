@@ -22,28 +22,6 @@ namespace Z0
             var dst = list<string>();
             src.Partition(maxlen, x => dst.Add(x));
             return dst;
-            // var count = src.Length;
-            // var buffer = span<char>(maxlen);
-            // var chars = span(src);
-
-            // for(int i=0, j=0; i<count; i++, j++)
-            // {
-            //     if(j < maxlen)
-            //         seek(buffer, j) = skip(chars,i);
-            //     else
-            //     {
-            //         yield return new string(buffer);
-
-            //         buffer = new char[maxlen];
-
-            //         j = 0;
-            //         seek(buffer, j) = skip(chars, i);
-            //     }
-            // }
-
-            // var trim = buffer.Trim();
-            // if(trim.Length != 0)
-            //     yield return new string(trim);
         }
 
         /// <summary>

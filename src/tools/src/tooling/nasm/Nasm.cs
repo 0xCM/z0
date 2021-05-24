@@ -12,7 +12,7 @@ namespace Z0.Tools
         public Nasm()
             : base(Toolsets.nasm)
         {
-            BitFormat = BitFormatter.create<byte>(4);
+            BitFormat = bit.formatter<byte>(4);
         }
    }
 }

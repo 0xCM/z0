@@ -35,7 +35,7 @@ namespace Z0
         [Op, Closures(UnsignedInts)]
         public static string format<T>(Flags<T> src)
             where T : unmanaged
-                => BitFormatter.create<T>().Format(src.Value);
+                => bit.formatter<T>().Format(src.Value);
 
         const string RenderPattern = "{0,-48}: {1}" + Eol;
 

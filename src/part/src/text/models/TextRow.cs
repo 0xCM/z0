@@ -14,6 +14,9 @@ namespace Z0
     /// </summary>
     public readonly struct TextRow
     {
+        public static TextRow parse(string src, char delimiter)
+            => text.nonempty(src) ? src.SplitClean(delimiter).Select(x => new TextBlock(x)) : Empty;
+
         readonly Index<TextBlock> Data;
 
         [MethodImpl(Inline)]
@@ -64,5 +67,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new TextRow(sys.empty<TextBlock>());
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator TextRow(TextBlock[] src)
+            => new TextRow(src);
     }
 }
