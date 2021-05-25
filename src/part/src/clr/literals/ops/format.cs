@@ -7,17 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
-    using PK = PrimalCode;
 
     partial struct ClrLiterals
     {
         [MethodImpl(Inline)]
         static string hex<T>(T src)
             where T : unmanaged
-                => HexFormat.format(src, false, false);
+                => HexFormatter.format(src, false, false);
         [Op]
         public static string format(object data, PrimalCode code)
             => code switch {

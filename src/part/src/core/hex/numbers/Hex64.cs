@@ -61,10 +61,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Value, W, true);
+            => HexFormatter.format(Value, W, true);
 
         public override string ToString()
-            => HexFormat.format<ulong>(Value, false, true, false, false);
+            => HexFormatter.format<ulong>(Value, false, true, false, false);
 
         public override int GetHashCode()
             => Value.GetHashCode();

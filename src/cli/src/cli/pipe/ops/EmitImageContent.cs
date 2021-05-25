@@ -44,7 +44,7 @@ namespace Z0
             var dst = Db.Table(ImageContentRecord.TableId, src.GetSimpleName());
             var flow = Wf.EmittingTable<ImageContentRecord>(dst);
             var @base = ImageMemory.@base(src);
-            var formatter = HexFormat.DataFormatter(@base, rowsize);
+            var formatter = HexDataFormatter.create(@base, rowsize);
             var path = FS.path(src.Location);
             using var stream = path.Reader();
             using var reader = stream.BinaryReader();

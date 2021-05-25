@@ -55,7 +55,7 @@ namespace Z0
             dst.Append(Chars.Space);
             dst.Append(src.Name);
             dst.Append(" => ");
-            dst.Append(string.Concat("new byte", text.bracket(src.Data.Length), text.embrace(HexFormat.array<byte>(src.Data))));
+            dst.Append(string.Concat("new byte", text.bracket(src.Data.Length), text.embrace(HexFormatter.array<byte>(src.Data))));
             dst.Append(Chars.Semicolon);
         }
 

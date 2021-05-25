@@ -31,7 +31,7 @@ namespace Z0
         public ImmKind Kind => ImmKind.Imm16;
 
         public string Format()
-            => HexFormat.format(W, Content);
+            => HexFormatter.format(W, Content);
 
         public override string ToString()
             => Format();
@@ -59,7 +59,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Address16 ToAddress()
             => Content;
-
 
         [MethodImpl(Inline)]
         public static bool operator <(I a, I b)

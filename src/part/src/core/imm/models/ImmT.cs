@@ -96,13 +96,13 @@ namespace Z0
         public string Format()
         {
             if(width<T>() == 8)
-                return HexFormat.format(w8, Content, true);
+                return HexFormatter.format(w8, Content, true);
             else if(width<T>() == 16)
-                return HexFormat.format(w16, Content, true);
+                return HexFormatter.format(w16, Content, true);
             else if(width<T>() == 32)
-                return HexFormat.format(w32, Content, true);
+                return HexFormatter.format(w32, Content, true);
             else
-                return HexFormat.format(w64, Content, true);
+                return HexFormatter.format(w64, Content, true);
         }
 
         public override string ToString()

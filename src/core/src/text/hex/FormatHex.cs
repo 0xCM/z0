@@ -36,7 +36,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string FormatHex<T>(this Span<T> src, char sep, bool specifier)
             where T : unmanaged
-                => HexFormat.format(src.ReadOnly(), sep, specifier);
+                => HexFormatter.format(src.ReadOnly(), sep, specifier);
 
         /// <summary>
         /// Formats a span of numeric cell type as a sequence of hex values
@@ -46,7 +46,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string FormatHex<T>(this Span<T> src)
             where T : unmanaged
-                => HexFormat.format(src.ReadOnly(), Chars.Space, false);
+                => HexFormatter.format(src.ReadOnly(), Chars.Space, false);
 
         /// <summary>
         /// Formats a span of numeric cell type as a sequence of hex values
@@ -56,7 +56,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string FormatHex<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
-                => HexFormat.format(src, Chars.Space, false);
+                => HexFormatter.format(src, Chars.Space, false);
 
         /// <summary>
         /// Formats a (hopefully finite) stream of values (hopefully numeric) as a sequence of hex values

@@ -30,7 +30,7 @@ namespace Z0.Asm
                     return format(src as IReg64<T>);
                 default:
                     var data = bytes(src.Content);
-                    var formatter = HexFormat.formatter<byte>();
+                    var formatter = HexFormatter.formatter<byte>();
                     return formatter.Format(data);
             }
         }
@@ -128,7 +128,7 @@ namespace Z0.Asm
             const string Pattern = "[{0,-12} | {1,-8} | {2}]";
             var index = BitFields.format<RegIndex,byte>(src.Code, src.Name, 5);
             var @class = BitFields.format<RegClass,byte>(src.Class, src.Class.ToString(), 4);
-            var width = HexFormat.field<RegWidth,ushort>(src.Width, base10, "Width");
+            var width = Enums.field<RegWidth,ushort>(src.Width, base10, "Width");
             return string.Format(Pattern, index, @class, width);
         }
 

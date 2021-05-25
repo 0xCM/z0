@@ -6,39 +6,66 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Root;
     using static core;
+    using static Typed;
 
-    partial struct HexFormat
+    public readonly struct HexFormatter
     {
-        [MethodImpl(Inline), Op]
-        public static HexDataFormatter DataFormatter(ulong? @base = null, ushort bpl = 20, bool labels = true)
-            => new HexDataFormatter(new HexLineConfig(bpl, labels), @base);
+        const NumericKind Closure = AllNumeric;
 
-        /// <summary>
-        /// Renders a sequence of primal numeric T-cells as a sequence of hex-formatted values
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="config">The format configuration</param>
-        /// <param name="dst">The rendered data receiver</param>
-        /// <typeparam name="T">The primal numeric type</typeparam>
-        [Op, Closures(Closure)]
-        public static void format<T>(ReadOnlySpan<T> src, in HexFormatOptions config, ITextBuffer dst)
+        [MethodImpl(Inline), Op]
+        public static string format<W,T>(T value, W w = default, bool postspec = false)
+            where W : unmanaged, IDataWidth
             where T : unmanaged
         {
-            var count = src.Length;
-            ref readonly var cell = ref first(src);
-            var last = count - 1;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var current = ref skip(cell,i);
-                dst.Append(HexFormat.format(current, config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec));
-
-                if(i != last)
-                    dst.Append(config.SegDelimiter);
-            }
+            if(typeof(W) == typeof(W8))
+                return HexFormatter.format(w8, bw8(value), postspec);
+            else if(typeof(W) == typeof(W16))
+                return HexFormatter.format(w16, bw16(value), postspec);
+            else if(typeof(W) == typeof(W32))
+                return HexFormatter.format(w32, bw32(value), postspec);
+            else
+                return HexFormatter.format(w64, bw64(value), postspec);
         }
+
+
+        [Op, Closures(Closure)]
+        public static string format<T>(W8 w, T src, bool postspec = false)
+            where T : unmanaged
+                => HexFormatter.format(w, bw8(src), postspec);
+
+        [Op, Closures(Closure)]
+        public static string format<T>(W16 w, T src, bool postspec = false)
+            where T : unmanaged
+                => HexFormatter.format(w, bw16(src), postspec);
+
+        [Op, Closures(Closure)]
+        public static string format<T>(W32 w, T src, bool postspec = false)
+            where T : unmanaged
+                => HexFormatter.format(w, bw32(src), postspec);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(W64 w, T src, bool postspec = false)
+             where T : unmanaged
+                => HexFormatter.format(w, bw64(src), postspec);
+        [Op]
+        public static string format(W8 w, byte src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex8Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
+        [Op]
+        public static string format(W16 w, ushort src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex16Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
+        [Op]
+        public static string format(W32 w, uint src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex32Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
+        [Op]
+        public static string format(W64 w, ulong src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex64Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
 
         /// <summary>
         /// Creates a <see cref='HexFormatter<T>'/> for primitive numeric types
@@ -50,6 +77,30 @@ namespace Z0
                 => new HexFormatter<T>(SystemHexFormatters.create<T>());
 
         /// <summary>
+        /// Renders a sequence of primal numeric T-cells as a sequence of hex-formatted values
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="config">The format configuration</param>
+        /// <param name="dst">The rendered data receiver</param>
+        /// <typeparam name="T">The primal numeric type</typeparam>
+        [Op, Closures(Closure)]
+        public static void format<T>(ReadOnlySpan<T> src, in HexFormatOptions config, StringBuilder dst)
+            where T : unmanaged
+        {
+            var count = src.Length;
+            ref readonly var cell = ref first(src);
+            var last = count - 1;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var current = ref skip(cell,i);
+                dst.Append(HexFormatter.format(current, config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec));
+
+                if(i != last)
+                    dst.Append(config.SegDelimiter);
+            }
+        }
+
+        /// <summary>
         /// Formats a sequence of primal numeric calls as data-formatted hex
         /// </summary>
         /// <param name="src">The source data</param>
@@ -57,38 +108,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string array<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => HexFormat.formatter<T>().Format(src, HexFormatSpecs.HexArray);
-
-        /// <summary>
-        /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
-        /// </summary>
-        /// <param name="value">The field value</param>
-        /// <typeparam name="E">The field value type</typeparam>
-        /// <typeparam name="T">The field data type</typeparam>
-        public static string field<E,T>(E src, Base10 @base, string name)
-            where E : unmanaged, Enum
-            where T : unmanaged
-        {
-            var data = Enums.scalar<E,T>(src);
-            return text.concat(name, Chars.Colon, Numeric.format(data, @base));
-        }
-
-        /// <summary>
-        /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
-        /// </summary>
-        /// <param name="value">The field value</param>
-        /// <typeparam name="E">The field value type</typeparam>
-        /// <typeparam name="T">The field data type</typeparam>
-        public static string field<E,T>(E src, Base16 @base, string name)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => text.concat(name, Chars.Colon, formatter<T>().FormatItem(Enums.scalar<E,T>(src)));
+                => formatter<T>().Format(src, HexFormatSpecs.HexArray);
 
         [Op, Closures(Closure)]
         public static string format<T>(ReadOnlySpan<T> src, in HexFormatOptions config)
             where T : unmanaged
         {
-            var result = text.buffer();
+            var result = new StringBuilder();
             var count = src.Length;
             for(var i = 0; i<count; i++)
             {
@@ -98,7 +124,7 @@ namespace Z0
                     result.Append(config.ValueDelimiter);
             }
 
-            return result.Emit();
+            return result.ToString();
         }
 
         /// <summary>
@@ -113,16 +139,16 @@ namespace Z0
         public static string format<T>(ReadOnlySpan<T> src,  char sep = Chars.Space, bool specifier = false)
             where T : unmanaged
         {
-            var builder = text.build();
+            var result = new StringBuilder();
             var count = src.Length;
             for(var i = 0; i<count; i++)
             {
-                builder.Append(format(src[i], true, specifier));
+                result.Append(format(skip(src,i), true, specifier));
                 if(i != count - 1)
-                    builder.Append(sep);
+                    result.Append(sep);
             }
 
-            return builder.ToString();
+            return result.ToString();
         }
 
         /// <summary>
@@ -182,5 +208,33 @@ namespace Z0
             else
                 throw no<T>();
         }
+    }
+
+    public readonly struct HexFormatter<T>
+        where T : unmanaged
+    {
+        readonly ISystemFormatter<T> BaseFormatter;
+
+        [MethodImpl(Inline)]
+        public HexFormatter(ISystemFormatter<T> formatter)
+            => BaseFormatter = formatter;
+
+        [MethodImpl(Inline)]
+        public string FormatItem(T src)
+            => FormatItem(src, HexFormatSpecs.options());
+
+        [MethodImpl(Inline)]
+        public string FormatItem(T src, in HexFormatOptions config)
+            => string.Concat(
+                config.Specifier && config.Specifier ? HexFormatSpecs.PreSpec : string.Empty,
+                config.ZeroPad ? BaseFormatter.Format(src, config.CaseIndicator.ToString()).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, config.CaseIndicator.ToString()),
+                config.Specifier && !config.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
+                );
+
+        public string Format(ReadOnlySpan<T> src, HexFormatOptions options)
+            => HexFormatter.format(src, options);
+
+        public string Format(ReadOnlySpan<T> src)
+            => HexFormatter.format(src, HexFormatSpecs.options(valdelimiter: Chars.Space));
     }
 }

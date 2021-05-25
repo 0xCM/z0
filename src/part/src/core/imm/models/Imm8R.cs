@@ -28,7 +28,7 @@ namespace Z0
         public ImmKind Kind => ImmKind.Imm8;
 
         public string Format()
-            => HexFormat.format(W, Content);
+            => HexFormatter.format(W, Content);
 
         public override string ToString()
             => Format();

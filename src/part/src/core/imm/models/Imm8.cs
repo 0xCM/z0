@@ -35,7 +35,7 @@ namespace Z0
         }
 
         public string Format()
-            => HexFormat.format(W, Content);
+            => HexFormatter.format(W, Content);
 
         public override string ToString()
             => Format();

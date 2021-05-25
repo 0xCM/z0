@@ -10,7 +10,7 @@ namespace Z0
 
     using AES = System.Runtime.Intrinsics.X86.Aes;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Surfaces AES intrinsics

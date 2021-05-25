@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Text;
 
-    using static Root;
-    using static core;
     using static HexFormatSpecs;
 
     [ApiHost]
