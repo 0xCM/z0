@@ -16,7 +16,7 @@ namespace Z0
         public ByteSize MaxBlockSize {get;}
 
         [MethodImpl(Inline)]
-        internal HexPack(Index<MemoryBlock> src, ByteSize max)
+        public HexPack(Index<MemoryBlock> src, ByteSize max)
         {
             _Blocks = src;
             MaxBlockSize = max;

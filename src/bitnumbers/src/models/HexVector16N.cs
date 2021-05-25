@@ -12,43 +12,43 @@ namespace Z0
     using static core;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly ref struct HexVector8<N>
+    public readonly ref struct HexVector16<N>
         where N : unmanaged, ITypeNat
     {
-        readonly Span<Hex8> Data;
+        readonly Span<Hex16> Data;
 
         [MethodImpl(Inline)]
-        internal HexVector8(Span<Hex8> data)
+        internal HexVector16(Span<Hex16> data)
         {
             Data = data;
         }
 
-        public ByteSize CellSize => 1;
+        public static ByteSize CellSize => 2;
 
-        public BitWidth CellWidth => 8;
+        public static BitWidth CellWidth => 16;
 
-        public uint CellCount
+        public static uint CellCount
         {
             [MethodImpl(Inline)]
             get => (uint)TypeNats.value<N>();
         }
 
-        public ref Hex8 this[uint index]
-        {
-            [MethodImpl(Inline)]
-            get => ref seek(Data, index);
-        }
-
-        public ByteSize VectorSize
+        public static ByteSize VectorSize
         {
             [MethodImpl(Inline)]
             get => CellCount*CellSize;
         }
 
-        public BitWidth VectorWidth
+        public static BitWidth VectorWidth
         {
             [MethodImpl(Inline)]
             get => CellCount*CellWidth;
+        }
+
+        public ref Hex16 this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(Data, index);
         }
 
         public Span<byte> Bytes
@@ -56,5 +56,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => bytes(Data);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator HexVector16(HexVector16<N> src)
+            => new HexVector16(src.Data);
     }
 }

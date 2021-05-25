@@ -19,6 +19,8 @@ namespace Z0
 
         Index<byte> _Data;
 
+        Index<char> _Buffer;
+
         ReadOnlySpan<byte> Source
         {
             [MethodImpl(Inline)]
@@ -27,27 +29,57 @@ namespace Z0
 
         uint SourceCount;
 
+        [MethodImpl(Inline)]
+        string FormatBuffer(uint offset, uint length)
+            => text.format(slice(_Buffer.View,offset,length));
+
+        Span<char> RentBuffer()
+            => _Buffer.Clear();
+
         public BitFormatChecks()
         {
             Formatter = new();
+            _Buffer = alloc<char>(Pow2.T08);
         }
 
         public void Run(IPolySource src)
         {
             SourceCount = Pow2.T12;
             _Data = src.Bytes(SourceCount).Array();
+            var data = _Data.Edit;
 
-            var outcome = Check(w3);
-            var formatter = Tables.formatter<FormatCheck<W3,uint3>>();
-            var target = Db.AppTablePath<FormatCheck<W3,uint3>>("checks");
-            using var writer = target.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            root.iter(outcome, o => writer.WriteLine(formatter.Format(o)));
+            var ComponentCount = n4;
+            var ComponentWidth = w8;
+            var ComponentSize = 1;
+            var VectorSize = ComponentSize*4;
+
+            var SampleCount = 4;
+
+            for(var i=0; i<SampleCount; i++)
+            {
+                var segment = slice(data, i*VectorSize, VectorSize);
+                var v = HexVector.create(ComponentCount, ComponentWidth, segment);
+                Check(v);
+            }
+
+            // var outcome = Check(w3);
+            // var formatter = Tables.formatter<FormatCheck<W3,uint3>>();
+            // var target = Db.AppTablePath<FormatCheck<W3,uint3>>("checks");
+            // using var writer = target.Writer();
+            // writer.WriteLine(formatter.FormatHeader());
+            // root.iter(outcome, o => writer.WriteLine(formatter.Format(o)));
         }
 
-        public void Check(W1 w)
+        public void Check(HexVector8<N4> src)
         {
+            var offset = 0u;
+            var buffer = RentBuffer();
 
+            //seek(buffer,offset++) = Chars.Lt;
+            offset += BitRender.render(src, offset, buffer);
+            //seek(buffer, offset++) = Chars.Gt;
+
+            Wf.Row(FormatBuffer(0, offset));
         }
 
         public void Check(W2 w)

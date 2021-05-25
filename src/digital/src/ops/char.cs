@@ -25,10 +25,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static char @char(UpperCased @case, HexDigit src)
-            => Hex.hexchar(@case,src);
+            => HexRender.hexchar(@case,src);
 
         [MethodImpl(Inline), Op]
         public static char @char(LowerCased @case, HexDigit src)
-            => Hex.hexchar(@case,src);
+            => HexRender.hexchar(@case,src);
     }
 }

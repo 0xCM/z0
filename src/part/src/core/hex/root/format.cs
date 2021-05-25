@@ -13,6 +13,45 @@ namespace Z0
 
     partial struct Hex
     {
+        [MethodImpl(Inline)]
+        static uint render<C>(C @case, ReadOnlySpan<byte> src, Span<char> dst)
+            where C : unmanaged, ILetterCase
+        {
+            var size = src.Length;
+            var j=0u;
+            for(var i=0; i<size; i++)
+            {
+                ref readonly var b = ref skip(src,i);
+                seek(dst,j++) = hexchar(@case, b, 0);
+                seek(dst,j++) = hexchar(@case, b, 1);
+            }
+            return j;
+        }
+
+        [MethodImpl(Inline)]
+        static char hexchar<C>(C @case, byte src, byte pos)
+            where C : unmanaged, ILetterCase
+        {
+            if(typeof(C) == typeof(LowerCased))
+                return hexchar(LowerCase, src, pos);
+            else
+                return hexchar(UpperCase, src, pos);
+        }
+
+        /// <summary>
+        /// Formats a span of hex digits as a contiguous block
+        /// </summary>
+        /// <param name="src">The source digits</param>
+        [MethodImpl(Inline)]
+        static uint render<C>(C @case, ReadOnlySpan<HexDigit> src, Span<char> dst)
+            where C : unmanaged, ILetterCase
+        {
+            var count = (uint)src.Length;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = (char)symbol(@case, skip(src,i));
+            return count;
+        }
+
         [Op]
         public static string format(ReadOnlySpan<byte> src, Span<char> buffer, bool lower = true)
             => lower ? format(LowerCase, src, buffer) : format(UpperCase, src, buffer);

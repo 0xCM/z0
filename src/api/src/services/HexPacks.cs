@@ -19,7 +19,7 @@ namespace Z0
             var packs = alloc<HexPacked>(count);
             var chars = alloc<char>(BufferLength);
             ref var dst = ref first(packs);
-            var size = CodeBlocks.hexpack(blocks, packs, chars);
+            var size = HexPacking.hexpack(blocks, packs, chars);
             if(validate)
             {
                 var buffer = span<HexDigit>(BufferLength);
@@ -61,7 +61,7 @@ namespace Z0
         {
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            var total = Hex.emit(src, writer);
+            var total = HexPacking.emit(src, writer);
             Wf.EmittedFile(flow, (uint)total);
             return total;
         }
@@ -71,7 +71,7 @@ namespace Z0
         {
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            var total = Hex.emit(Hex.hexpack(src), writer);
+            var total = HexPacking.emit(HexPacking.hexpack(src), writer);
             Wf.EmittedFile(flow, (uint)total);
             return total;
         }

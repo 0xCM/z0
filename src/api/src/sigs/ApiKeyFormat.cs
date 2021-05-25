@@ -19,7 +19,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var data = span16u(src.Data);
-            var chars = Hex.chars(LowerCase,skip(data, n.NatValue));
+            var chars = HexRender.render(LowerCase,skip(data, n.NatValue));
             seek(dst,offset + 0) = skip(chars,3);
             seek(dst,offset + 1) = skip(chars,2);
             seek(dst,offset + 2) = skip(chars,1);

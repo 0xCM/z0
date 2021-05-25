@@ -12,43 +12,49 @@ namespace Z0
     using static core;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly ref struct HexVector8
+    public readonly ref struct HexVector8<N>
+        where N : unmanaged, ITypeNat
     {
         readonly Span<Hex8> Data;
 
         [MethodImpl(Inline)]
-        public HexVector8(Hex8[] data)
+        internal HexVector8(Span<Hex8> data)
         {
             Data = data;
         }
 
+        public static ByteSize CellSize => 1;
 
-        public ByteSize CellSize => 1;
+        public static BitWidth CellWidth => 8;
 
-        public BitWidth CellWidth => 8;
-
-        public uint CellCount
+        public static uint CellCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => (uint)TypeNats.value<N>();
         }
 
-        public ByteSize VectorSize
+        public static ByteSize VectorSize
         {
             [MethodImpl(Inline)]
-            get => CellSize * CellCount;
+            get => CellCount*CellSize;
         }
 
-        public Span<Hex8> Cells
+        public static BitWidth VectorWidth
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => CellCount*CellWidth;
         }
 
-        public ref Hex8 First
+        public ref Hex8 this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref first(Data);
+            get => ref seek(Data, index);
+        }
+
+        public ref Hex8 this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(Data, index);
         }
 
         public Span<byte> Bytes
@@ -57,11 +63,8 @@ namespace Z0
             get => bytes(Data);
         }
 
-        public ref Hex8 this[uint index]
-        {
-            [MethodImpl(Inline)]
-            get => ref seek(Data,index);
-        }
-
+        [MethodImpl(Inline)]
+        public static implicit operator HexVector8(HexVector8<N> src)
+            => new HexVector8(src.Data);
     }
 }

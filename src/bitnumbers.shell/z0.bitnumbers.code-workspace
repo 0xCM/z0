@@ -14,6 +14,9 @@
 		},
 		{
 			"path": "..\\bit"
+		},
+		{
+			"path": "..\\part"
 		}
 	],
 	"settings": {}

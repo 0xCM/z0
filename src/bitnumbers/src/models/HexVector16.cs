@@ -15,7 +15,7 @@ namespace Z0
         readonly Span<Hex16> Data;
 
         [MethodImpl(Inline)]
-        public HexVector16(Index<Hex16> src)
+        public HexVector16(Span<Hex16> src)
         {
             Data = src;
         }
