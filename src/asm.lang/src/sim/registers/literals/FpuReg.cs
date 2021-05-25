@@ -24,5 +24,4 @@ namespace Z0.Asm
 
         ST7 = r7,
     }
-
 }

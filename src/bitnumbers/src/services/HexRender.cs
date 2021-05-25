@@ -463,19 +463,19 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render(Hex1Seq src)
-            => render(gHex.hexstring<Hex1Seq>(), src);
+            => render(Hex.hexstring<Hex1Seq>(), src);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render(Hex2Seq src)
-            => render(gHex.hexstring<Hex2Seq>(), src);
+            => render(Hex.hexstring<Hex2Seq>(), src);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render(Hex3Seq src)
-            => render(gHex.hexstring<Hex3Seq>(), src);
+            => render(Hex.hexstring<Hex3Seq>(), src);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render(Hex4Seq src)
-            => render(gHex.hexstring<Hex4Seq>(), src);
+            => render(Hex.hexstring<Hex4Seq>(), src);
 
         [MethodImpl(Inline), Op]
         public static uint render(UpperCased @case, byte src, uint offset, Span<char> dst)

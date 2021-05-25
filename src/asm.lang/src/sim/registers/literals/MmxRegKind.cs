@@ -27,5 +27,4 @@ namespace Z0.Asm
 
         MM7 = r7 | MMX << ClassField | W64 << WidthField,
     }
-
 }

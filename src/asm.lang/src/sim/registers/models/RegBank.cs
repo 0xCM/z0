@@ -7,49 +7,51 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static Typed;
     using static AsmRegBanks;
 
-    public readonly ref struct AsmRegBank
+    [ApiComplete]
+    public readonly ref struct RegBank
     {
         readonly V512Bank V;
 
         readonly Gp64Bank Gp;
 
         [MethodImpl(Inline)]
-        internal AsmRegBank(V512Bank v, Gp64Bank gp)
+        internal RegBank(V512Bank v, Gp64Bank gp)
         {
             V = v;
             Gp = gp;
         }
 
         [MethodImpl(Inline)]
-        public ref Cell512 r512(RegIndex i)
-            => ref V.r512(i);
+        public ref Cell512 r512(RegIndex r)
+            => ref V.r512(r);
 
         [MethodImpl(Inline)]
-        public ref Cell256 r256(RegIndex i)
-            => ref V.r256(i);
+        public ref Cell256 r256(RegIndex r)
+            => ref V.r256(r);
 
         [MethodImpl(Inline)]
-        public ref Cell128 r128(RegIndex i)
-            => ref V.r128(i);
+        public ref Cell128 r128(RegIndex r)
+            => ref V.r128(r);
 
         [MethodImpl(Inline)]
-        public ref Cell32 r32(RegIndex i)
-            => ref Gp.r32(i);
+        public ref Cell32 r32(RegIndex r)
+            => ref Gp.r32(r);
 
         [MethodImpl(Inline)]
-        public ref Cell64 r64(RegIndex i)
-            => ref Gp.r64(i);
+        public ref Cell64 r64(RegIndex r)
+            => ref Gp.r64(r);
 
         [MethodImpl(Inline)]
-        public ref Cell16 r16(RegIndex i)
-            => ref Gp.r16(i);
+        public ref Cell16 r16(RegIndex r)
+            => ref Gp.r16(r);
 
         [MethodImpl(Inline)]
-        public ref Cell8 r8(RegIndex i)
-            => ref Gp.r8(i);
+        public ref Cell8 r8(RegIndex r)
+            => ref Gp.r8(r);
 
         [MethodImpl(Inline)]
         public ref Cell8 r(W8 w, RegIndex i)
@@ -120,6 +122,5 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => ref r(w512, i);
         }
-
     }
 }

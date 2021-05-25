@@ -31,7 +31,7 @@ namespace Z0
         public ImmKind Kind => ImmKind.Imm16;
 
         public string Format()
-            => HexFormatter.format(W, Content);
+            => HexFormat.format(W, Content);
 
         public override string ToString()
             => Format();

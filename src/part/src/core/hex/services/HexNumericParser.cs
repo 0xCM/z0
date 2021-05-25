@@ -20,9 +20,9 @@ namespace Z0
         public static ParseResult<ulong> parse64u(string src)
         {
             if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
-                return root.parsed(src,value);
+                return ParseResult.parsed(src,value);
             else
-                return root.unparsed<ulong>(src);
+                return ParseResult.unparsed<ulong>(src);
         }
 
         public static Outcome parse64u(string src, out ulong dst)
@@ -92,9 +92,9 @@ namespace Z0
         public static ParseResult<uint> parse32u(string src)
         {
             if(uint.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out uint value))
-                return root.parsed(src,value);
+                return ParseResult.parsed(src,value);
             else
-                return root.unparsed<uint>(src);
+                return ParseResult.unparsed<uint>(src);
         }
 
         /// <summary>
@@ -104,9 +104,9 @@ namespace Z0
         public static ParseResult<ushort> parse16u(string src)
         {
             if(ushort.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ushort value))
-                return root.parsed(src,value);
+                return ParseResult.parsed(src,value);
             else
-                return root.unparsed<ushort>(src);
+                return ParseResult.unparsed<ushort>(src);
         }
 
         /// <summary>
@@ -116,9 +116,9 @@ namespace Z0
         public static ParseResult<byte> parse8u(string src)
         {
             if(byte.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out byte value))
-                return root.parsed(src,value);
+                return ParseResult.parsed(src,value);
             else
-                return root.unparsed<byte>(src);
+                return ParseResult.unparsed<byte>(src);
         }
 
         public static Outcome parse(string src, out Hex8 dst)

@@ -31,13 +31,13 @@ namespace Z0
             where K : unmanaged, Enum
         {
             if(typeof(K) == typeof(Hex1Seq))
-                return gHex.generic<K>(init(n1));
+                return Hex.generic<K>(init(n1));
             else if(typeof(K) == typeof(Hex2Seq))
-                return gHex.generic<K>(init(n2));
+                return Hex.generic<K>(init(n2));
             else if(typeof(K) == typeof(Hex3Seq))
-                return gHex.generic<K>(init(n3));
+                return Hex.generic<K>(init(n3));
             else if(typeof(K) == typeof(Hex4Seq))
-                return gHex.generic<K>(init(n4));
+                return Hex.generic<K>(init(n4));
             else
                 return HexStrings<K>.Empty;
         }

@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
+    using static core;
 
-    public class HexPacks : AppService<HexPacks>
+    public class ApiHexPacks : AppService<ApiHexPacks>
     {
         [Op]
         public Index<HexPacked> Records(Index<ApiCodeBlock> src, bool validate = false)
@@ -19,7 +18,7 @@ namespace Z0
             var packs = alloc<HexPacked>(count);
             var chars = alloc<char>(BufferLength);
             ref var dst = ref first(packs);
-            var size = HexPacking.hexpack(blocks, packs, chars);
+            var size = HexPacks.hexpack(blocks, packs, chars);
             if(validate)
             {
                 var buffer = span<HexDigit>(BufferLength);
@@ -61,7 +60,7 @@ namespace Z0
         {
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            var total = HexPacking.emit(src, writer);
+            var total = HexPacks.emit(src, writer);
             Wf.EmittedFile(flow, (uint)total);
             return total;
         }
@@ -71,7 +70,7 @@ namespace Z0
         {
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            var total = HexPacking.emit(HexPacking.hexpack(src), writer);
+            var total = HexPacks.emit(HexPacks.hexpack(src), writer);
             Wf.EmittedFile(flow, (uint)total);
             return total;
         }

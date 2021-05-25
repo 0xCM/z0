@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Globalization;
 
+    using static System.StringSplitOptions;
+
     using static HexFormatSpecs;
     using static core;
-    using static Root;
 
     [ApiHost]
     public readonly struct HexByteParser : IHexParser<byte>
@@ -19,7 +20,11 @@ namespace Z0
             => default(HexByteParser);
 
         [Op]
-        public static bool parse(string src, out BinaryCode dst)
+        static Index<string> split(string src, char sep, bool clean = true)
+            => src.Split(sep,  clean ? RemoveEmptyEntries : None);
+
+        [Op]
+        public static bool parse(string src, out byte[] dst)
         {
             try
             {
@@ -29,12 +34,12 @@ namespace Z0
                     s0 = sys.substring(s0, len - PreSpec.Length);
                 else if(HexFormatSpecs.HasPostSpec(s0))
                     s0 = sys.substring(s0, 0, len - PostSpec.Length);
-                var blocks = text.split(s0, Chars.Space).View;
+                var blocks = split(s0, Chars.Space).View;
                 var count = blocks.Length;
                 var buffer = alloc<byte>(count);
                 ref var target = ref first(buffer);
                 for(var i=0; i<count; i++)
-                    seek(target,count-1-i) = byte.Parse(skip(blocks, i), NumberStyles.HexNumber);
+                    seek(target, count-1-i) = byte.Parse(skip(blocks, i), NumberStyles.HexNumber);
                 dst = buffer;
 
                 return true;
@@ -58,25 +63,6 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Parses a single hex digit
-        /// </summary>
-        /// <param name="c">The source character</param>
-        [MethodImpl(Inline), Op]
-        public static Outcome parse(char c, out byte dst)
-        {
-            dst = 0xFF;
-            var result = Outcome.Success;
-            if(Hex.scalar(c))
-                dst = (byte)((byte)c - MinScalarCode);
-            else if(Hex.upper(c))
-                dst = (byte)((byte)c - MinCharCodeU + 0xA);
-            else if(Hex.lower(c))
-                dst = (byte)((byte)c - MinCharCodeL + 0xA);
-            else
-                result = false;
-            return result;
-        }
 
         /// <summary>
         /// Parses a single hex digit

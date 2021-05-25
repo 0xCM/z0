@@ -27,5 +27,4 @@ namespace Z0.Asm
 
         ST7 = r7 | ST << ClassField | W80 << WidthField,
     }
-
 }

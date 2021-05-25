@@ -32,6 +32,6 @@ namespace Z0
         where T : unmanaged
     {
         public virtual T Body
-            => memory.first<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());
+            => core.first<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());
     }
 }

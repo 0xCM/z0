@@ -9,8 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static core;
 
     partial class ApiQuery
     {

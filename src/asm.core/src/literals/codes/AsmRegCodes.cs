@@ -556,7 +556,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Specifies the accessible control registers
+        /// Defines accessible control register indices
         /// </summary>
         [SymbolSource]
         public enum ControlReg : byte
@@ -578,7 +578,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Classifies the accessible debug registers
+        /// Defines accessible debug register indices
         /// </summary>
         [SymbolSource]
         public enum DebugReg : uint
@@ -600,6 +600,105 @@ namespace Z0.Asm
 
             [Symbol("dr7")]
             DR7 = r7,
+        }
+
+        /// <summary>
+        /// Defines mask register indices
+        /// </summary>
+        [SymbolSource]
+        public enum MaskReg : byte
+        {
+            [Symbol("k0")]
+            K0 = r0,
+
+            [Symbol("k1")]
+            K1 = r1,
+
+            [Symbol("k2")]
+            K2 = r2,
+
+            [Symbol("k3")]
+            K3 = r3,
+
+            [Symbol("k4")]
+            K4 = r4,
+
+            [Symbol("k5")]
+            K5 = r5,
+
+            [Symbol("k6")]
+            K6 = r6,
+
+            [Symbol("k7")]
+            K7 = r7
+        }
+
+        [SymbolSource]
+        public enum FpuReg : byte
+        {
+            [Symbol("ST(0)")]
+            ST0 = r0,
+
+            [Symbol("ST(1)")]
+            ST1 = r1,
+
+            [Symbol("ST(2)")]
+            ST2 = r2,
+
+            [Symbol("ST(3)")]
+            ST3 = r3,
+
+            [Symbol("ST(4)")]
+            ST4 = r4,
+
+            [Symbol("ST(5)")]
+            ST5 = r5,
+
+            [Symbol("ST(6)")]
+            ST6 = r6,
+
+            [Symbol("ST(7)")]
+            ST7 = r7,
+        }
+
+        [SymbolSource]
+        public enum SegReg : uint
+        {
+            /// <summary>
+            /// Code segment register
+            /// </summary>
+            [Symbol("cs", "Code segment register")]
+            CS = r0,
+
+            /// <summary>
+            /// Data segment register
+            /// </summary>
+            [Symbol("ds", "Data segment register")]
+            DS = r1,
+
+            /// <summary>
+            /// Stack segment register
+            /// </summary>
+            [Symbol("ss", "Stack segment register")]
+            SS = r2,
+
+            /// <summary>
+            /// Extra segment (1)
+            /// </summary>
+            [Symbol("es", "Extra segment (1)")]
+            ES = r3,
+
+            /// <summary>
+            /// Extra segment (2)
+            /// </summary>
+            [Symbol("fs","Extra segment (2)")]
+            FS = r4,
+
+            /// <summary>
+            /// Extra segment (3)
+            /// </summary>
+            [Symbol("gs","Extra segment (3)")]
+            GS = r5,
         }
     }
 }

@@ -9,10 +9,9 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static Root;
 
-    [ApiHost(ApiNames.ApiQuery, true)]
+    [ApiHost]
     public partial class ApiQuery : AppService<ApiQuery>
     {
         const NumericKind Closure = UnsignedInts;

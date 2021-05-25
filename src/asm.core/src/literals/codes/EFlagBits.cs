@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines the bitfield index of the flags defined by <see cref='EFlagKind'/>
     /// </summary>
-    public enum EFlag : byte
+    public enum EFlagBits : byte
     {
         /// <summary>
         /// Carry Flag (Status Flag): Set if an arithmetic operation generates a carry or a borrow

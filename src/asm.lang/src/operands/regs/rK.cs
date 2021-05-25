@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using I = RegIndex;
     using G = AsmOps.rK;
@@ -96,6 +96,5 @@ namespace Z0.Asm
             public static implicit operator K(k3 src)
                 => (K)src.Index;
         }
-
     }
 }

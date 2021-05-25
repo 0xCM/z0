@@ -88,7 +88,7 @@ namespace Z0.Asm
             {
                 ref readonly var seg = ref skip(src,i);
                 buffer.Clear();
-                writer.WriteLine(HexPacking.linepack(seg,i, buffer));
+                writer.WriteLine(HexPacks.linepack(seg,i, buffer));
             }
             Wf.EmittedFile(flow, count);
         }

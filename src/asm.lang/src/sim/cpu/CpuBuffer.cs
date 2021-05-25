@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiComplete]
     public ref struct CpuBuffer
@@ -71,19 +71,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Clear(W16 w, byte index)
         {
-            first(memory.uint16(Data)) = z16;
+            first(uint16(Data)) = z16;
         }
 
         [MethodImpl(Inline), Op]
         public void Clear(W32 w, byte index)
         {
-            first(memory.uint32(Data)) = z32;
+            first(uint32(Data)) = z32;
         }
 
         [MethodImpl(Inline), Op]
         public void Clear(W64 w, byte index)
         {
-            first(memory.uint64(Data)) = z64;
+            first(uint64(Data)) = z64;
         }
 
         [MethodImpl(Inline), Op]

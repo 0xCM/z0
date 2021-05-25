@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static memory;
-
     partial class ApiQuery
     {
         [Op]

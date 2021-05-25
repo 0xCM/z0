@@ -15,7 +15,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     public struct ApiExtractOptions
     {
@@ -35,7 +34,7 @@ namespace Z0
 
         AsmFormatter Formatter;
 
-        HexPacks HexPacks;
+        ApiHexPacks HexPacks;
 
         ApiExtractChannel Receivers;
 
@@ -72,7 +71,7 @@ namespace Z0
             Resolver = Wf.ApiResolver();
             Decoder = Wf.AsmDecoder();
             Formatter = Wf.AsmFormatter();
-            HexPacks = Wf.HexPacks();
+            HexPacks = Wf.ApiHexPacks();
             Receivers = new ApiExtractChannel();
             HostDatasets = new();
             Catalogs = Wf.ApiCatalogs();

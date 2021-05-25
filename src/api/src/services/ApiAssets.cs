@@ -9,8 +9,7 @@ namespace Z0
     using System.IO;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     public sealed class ApiAssets : AppService<ApiAssets>, IApiAssets
     {
@@ -53,7 +52,6 @@ namespace Z0
             var entries = root.list<DocLibEntry>();
             Emit(root.array(Parts.Res.Assembly), dst, entries);
             Wf.EmittedTable(emitting, entries.Count);
-
             Wf.Ran(flow);
             return entries.ToArray();
         }
@@ -65,12 +63,24 @@ namespace Z0
                 entries.AddRange(Emit(skip(src,i),dst));
         }
 
+        static Index<DocLibEntry> entries(Assembly src)
+        {
+            var names = @readonly(src.GetManifestResourceNames());
+            var count = names.Length;
+            var buffer = alloc<DocLibEntry>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                seek(dst,i) =new DocLibEntry(skip(names,i), Path.GetExtension(skip(names,i)));
+            }
+            return buffer;
+        }
+
         Index<DocLibEntry> Emit(Assembly src, StreamWriter dst)
         {
-            var provider = ResEntryProvider.create(src);
-            var entries = provider.Entries;
-            Emit(entries, dst);
-            return entries;
+            var _entries = entries(src);
+            Emit(_entries, dst);
+            return _entries;
         }
 
         uint Emit(ReadOnlySpan<DocLibEntry> entries, StreamWriter dst)

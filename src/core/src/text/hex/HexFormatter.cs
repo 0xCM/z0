@@ -10,54 +10,31 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
+    [ApiHost]
     public readonly struct HexFormatter
     {
         const NumericKind Closure = AllNumeric;
 
-        [MethodImpl(Inline), Op]
-        public static string format<W,T>(T value, W w = default, bool postspec = false)
-            where W : unmanaged, IDataWidth
-            where T : unmanaged
-        {
-            if(typeof(W) == typeof(W8))
-                return HexFormatter.format(w8, bw8(value), postspec);
-            else if(typeof(W) == typeof(W16))
-                return HexFormatter.format(w16, bw16(value), postspec);
-            else if(typeof(W) == typeof(W32))
-                return HexFormatter.format(w32, bw32(value), postspec);
-            else
-                return HexFormatter.format(w64, bw64(value), postspec);
-        }
-
-
         [Op, Closures(Closure)]
         public static string format<T>(W8 w, T src, bool postspec = false)
             where T : unmanaged
-                => HexFormatter.format(w, bw8(src), postspec);
+                => HexFormat.format(w, bw8(src), postspec);
 
         [Op, Closures(Closure)]
         public static string format<T>(W16 w, T src, bool postspec = false)
             where T : unmanaged
-                => HexFormatter.format(w, bw16(src), postspec);
+                => HexFormat.format(w, bw16(src), postspec);
 
         [Op, Closures(Closure)]
         public static string format<T>(W32 w, T src, bool postspec = false)
             where T : unmanaged
-                => HexFormatter.format(w, bw32(src), postspec);
+                => HexFormat.format(w, bw32(src), postspec);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(W64 w, T src, bool postspec = false)
              where T : unmanaged
-                => HexFormatter.format(w, bw64(src), postspec);
-        [Op]
-        public static string format(W8 w, byte src, bool postspec = false)
-            => src.ToString(HexFormatSpecs.Hex8Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
-
-        [Op]
-        public static string format(W16 w, ushort src, bool postspec = false)
-            => src.ToString(HexFormatSpecs.Hex16Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+                => HexFormat.format(w, bw64(src), postspec);
 
         [Op]
         public static string format(W32 w, uint src, bool postspec = false)
@@ -208,33 +185,5 @@ namespace Z0
             else
                 throw no<T>();
         }
-    }
-
-    public readonly struct HexFormatter<T>
-        where T : unmanaged
-    {
-        readonly ISystemFormatter<T> BaseFormatter;
-
-        [MethodImpl(Inline)]
-        public HexFormatter(ISystemFormatter<T> formatter)
-            => BaseFormatter = formatter;
-
-        [MethodImpl(Inline)]
-        public string FormatItem(T src)
-            => FormatItem(src, HexFormatSpecs.options());
-
-        [MethodImpl(Inline)]
-        public string FormatItem(T src, in HexFormatOptions config)
-            => string.Concat(
-                config.Specifier && config.Specifier ? HexFormatSpecs.PreSpec : string.Empty,
-                config.ZeroPad ? BaseFormatter.Format(src, config.CaseIndicator.ToString()).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, config.CaseIndicator.ToString()),
-                config.Specifier && !config.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
-                );
-
-        public string Format(ReadOnlySpan<T> src, HexFormatOptions options)
-            => HexFormatter.format(src, options);
-
-        public string Format(ReadOnlySpan<T> src)
-            => HexFormatter.format(src, HexFormatSpecs.options(valdelimiter: Chars.Space));
     }
 }

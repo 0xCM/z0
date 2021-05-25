@@ -9,9 +9,35 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static Typed;
 
     partial struct Hex
     {
+        [Op, Closures(Closure)]
+        public static Index<HexCodeLo> digits<T>(in T src, LowerCased @case)
+            where T : struct
+        {
+            var count = size<T>();
+            var dst = alloc<HexCodeLo>(count*2);
+            digits(src,dst);
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void digits<T>(in T src, Span<HexCodeLo> dst)
+            where T : struct
+        {
+            var count = size<T>();
+            ref readonly var bytes = ref @as<T,byte>(src);
+            var j = count*2 - 1;
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var d = ref skip(bytes,i);
+                seek(dst, j--) = Hex.code(n4, LowerCase, d);
+                seek(dst, j--) = Hex.code(n4, LowerCase, Bytes.srl(d, 4));
+            }
+        }
         [Op]
         public static Outcome<uint> digits(ReadOnlySpan<char> src, Span<HexDigit> dst)
         {
@@ -19,7 +45,7 @@ namespace Z0
             var count = root.min(src.Length, dst.Length);
             for(var i=0; i<src.Length; i++)
             {
-                if(!Hex.parse((AsciChar)skip(src,i), out seek(dst,i)))
+                if(!parse((AsciChar)skip(src,i), out seek(dst,i)))
                     return false;
             }
             return j;

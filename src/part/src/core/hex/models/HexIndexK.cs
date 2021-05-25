@@ -24,11 +24,11 @@ namespace Z0
             get => ref Data[index];
         }
 
-        public SegRef<K> Ref
-        {
-            [MethodImpl(Inline)]
-            get => memory.segref(core.first(Data), Data.Length);
-        }
+        // public SegRef<K> Ref
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => memory.segref(core.first(Data), Data.Length);
+        // }
 
         public Span<K> Span
         {

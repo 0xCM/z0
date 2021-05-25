@@ -7,11 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static gbits;
 
     using K = EFlagKind;
-    using I = EFlag;
+    using I = EFlagBits;
 
     partial struct AsmRegs
     {

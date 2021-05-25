@@ -5,6 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+    using static Typed;
 
     /// <summary>
     /// Defines operations over character digits
@@ -27,9 +32,19 @@ namespace Z0
             return text.@string(dst);
         }
 
-
         public static string format<C>(C @case, ReadOnlySpan<HexDigit> src)
             where C : unmanaged, ILetterCase
-                => Hex.format(@case, src);
+        {
+            Span<char> buffer = stackalloc char[src.Length];
+            return format(@case, src, buffer);
+        }
+
+        [MethodImpl(Inline)]
+        public static string format<C>(C @case, ReadOnlySpan<HexDigit> src, Span<char> buffer)
+            where C : unmanaged, ILetterCase
+        {
+            var count = Hex.render(@case, src, buffer);
+            return new string(slice(buffer,0,count));
+        }
     }
 }

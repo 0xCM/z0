@@ -32,7 +32,6 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => index(RegKind);
             }
-
         }
 
         public struct Xmm<R> : IReg128<Xmm<R>,Cell128>

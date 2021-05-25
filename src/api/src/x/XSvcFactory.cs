@@ -62,8 +62,8 @@ namespace Z0
             => Svc.ApiQuery.create(wf);
 
         [Op]
-        public static HexPacks HexPacks(this IWfRuntime wf)
-            => Svc.HexPacks.create(wf);
+        public static ApiHexPacks ApiHexPacks(this IWfRuntime wf)
+            => Svc.ApiHexPacks.create(wf);
 
         [Op]
         public static SymServices SymServices(this IWfRuntime wf)

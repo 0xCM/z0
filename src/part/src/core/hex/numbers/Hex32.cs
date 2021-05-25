@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using H = Hex32;
     using W = W32;
@@ -61,7 +61,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormatter.format(Value, W, true);
+            => HexFormat.format(Value, W, true);
 
         public override string ToString()
             => Format();

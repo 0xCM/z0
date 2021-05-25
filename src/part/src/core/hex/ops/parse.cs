@@ -30,17 +30,17 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool parse(char c, out byte dst)
         {
-            if(Hex.scalar(c))
+            if(scalar(c))
             {
                 dst = (byte)((byte)c - MinScalarCode);
                 return true;
             }
-            else if(Hex.upper(c))
+            else if(upper(c))
             {
                 dst = (byte)((byte)c - MinCharCodeU + 0xA);
                 return true;
             }
-            else if(Hex.lower(c))
+            else if(lower(c))
             {
                 dst = (byte)((byte)c - MinCharCodeL + 0xa);
                 return true;

@@ -11,14 +11,11 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
-    using static HexFormatSpecs;
 
     [ApiHost]
-    public readonly struct HexPacking
+    public readonly struct HexPacks
     {
         const string HexPackLine = "x{0:x}[{1:D5}:{2:D5}]=<{3}>";
-
 
         [Op]
         public static HexPack hexpack(MemoryBlock src)

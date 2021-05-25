@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static memory;
+    using static core;
 
     [ApiHost]
     public sealed class RenderPatternEmitter : AppService<RenderPatternEmitter>
