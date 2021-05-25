@@ -13,11 +13,11 @@ namespace Z0
     public static partial class XRes
     {
         [MethodImpl(Inline), Op]
-        public static string Utf8(this ResDescriptor src)
+        public static string Utf8(this Asset src)
             => Resources.utf8(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> Bytes(this ResDescriptor src)
+        public static ReadOnlySpan<byte> Bytes(this Asset src)
             => memory.view(src.Address, src.Size);
     }
 }

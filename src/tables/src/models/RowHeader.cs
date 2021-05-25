@@ -97,6 +97,12 @@ namespace Z0
             get => (uint)Cells.Length;
         }
 
+        public uint CellCount
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Cells.Length;
+        }
+
         public string Format()
             => api.format(this);
 

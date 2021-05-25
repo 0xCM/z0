@@ -7,21 +7,24 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static core;
     using static XedModels;
 
     public sealed class XedCatalog : AppService<XedCatalog>
     {
+        AsmCatPaths CatPaths;
+
+        protected override void OnInit()
+        {
+            CatPaths = Wf.AsmCatalogs().Paths();
+        }
+
         public void EmitCatalog()
         {
             EmitSourceAssets();
             EmitFormDetails();
             EmitSymCatalog();
         }
-
-        AsmCatPaths CatPaths
-            => new AsmCatPaths(Db);
 
         public Index<XedFormDetail> EmitFormDetails()
             => EmitFormDetails(CatPaths.XedFormDetailPath());
@@ -205,7 +208,7 @@ namespace Z0.Asm
 
         const char FieldDelimiter = Chars.Space;
 
-        static Parts.AsmCatalogs.PartAssets Assets => Parts.AsmCatalogs.Assets;
+        static AsmCatalogAssets Assets => Parts.AsmCatalogs.Assets;
 
         IFormType ParseIForm(string src)
         {

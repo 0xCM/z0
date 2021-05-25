@@ -38,5 +38,14 @@ namespace Z0
         public static HexVector16<N4> create(N4 n, W16 w)
             => create(n, w, bytes(0u));
 
+        /// <summary>
+        /// Creates a vector with specified component count and width, initialized wtih a specified value
+        /// </summary>
+        /// <param name="n">The component count</param>
+        /// <param name="w">The component width</param>
+        /// <param name="src">The initial value</param>
+        [MethodImpl(Inline), Op]
+        public static HexVector8<N4> create(N4 n, W8 w, uint src)
+            => create(n,w,bytes(src));
     }
 }

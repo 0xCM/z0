@@ -14,6 +14,6 @@ namespace Z0
 
         Index<ResEmission> EmitEmbedded(Assembly src, FS.FolderPath root, utf8 match = default,  bool clear = true);
 
-        ResEmission Emit(in ResDescriptor src, FS.FolderPath root);
+        ResEmission Emit(in Asset src, FS.FolderPath root);
     }
 }

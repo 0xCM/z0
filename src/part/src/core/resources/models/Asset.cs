@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Describes an embedded resource
     /// </summary>
-    public readonly struct ResDescriptor : IDataTypeComparable<ResDescriptor>, IAddressable
+    public readonly struct Asset : IDataTypeComparable<Asset>, IAddressable
     {
         public Name Name {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
         public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
-        public ResDescriptor(Name name, MemoryAddress address, ByteSize size)
+        public Asset(Name name, MemoryAddress address, ByteSize size)
         {
             Name = name;
             Address = address;
@@ -42,16 +42,22 @@ namespace Z0
             get => api.view(this);
         }
 
+        public AssetCatalogEntry CatalogEntry
+        {
+            [MethodImpl(Inline)]
+            get => api.entry(this);
+        }
+
         [MethodImpl(Inline)]
         public bool NameLike(string match)
             => Name.Format().Contains(match);
 
         [MethodImpl(Inline)]
-        public int CompareTo(ResDescriptor src)
+        public int CompareTo(Asset src)
             => Address.CompareTo(src.Address);
 
         [MethodImpl(Inline)]
-        public bool Equals(ResDescriptor src)
+        public bool Equals(Asset src)
             => Address.Equals(src.Address);
 
         [MethodImpl(Inline)]
@@ -61,7 +67,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public static ResDescriptor Empty
-            => new ResDescriptor(Name.Empty, 0, 0);
+        public static Asset Empty
+            => new Asset(Name.Empty, 0, 0);
     }
 }

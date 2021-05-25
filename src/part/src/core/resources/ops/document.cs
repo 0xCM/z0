@@ -7,7 +7,7 @@ namespace Z0
     partial struct Resources
     {
         [Op]
-        public static bool document(ResDescriptor src, TextDocFormat format, out TextDoc dst)
+        public static bool document(Asset src, TextDocFormat format, out TextDoc dst)
         {
             var content = Resources.utf8(src);
             var result = TextDoc.parse(content,format);

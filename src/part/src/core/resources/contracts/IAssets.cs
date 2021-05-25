@@ -11,8 +11,8 @@ namespace Z0
     {
         Assembly DataSource {get;}
 
-        ResDescriptors Descriptors {get;}
+        ReadOnlySpan<Asset> Descriptors {get;}
 
-        ref readonly ResDescriptor Asset(ResourceName id);
+        ref readonly Asset Asset(ResourceName id);
     }
 }

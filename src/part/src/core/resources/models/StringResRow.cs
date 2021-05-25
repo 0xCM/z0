@@ -11,7 +11,7 @@ namespace Z0
 
         public CliToken Id;
 
-        public MemoryAddress Address;
+        public StringAddress Address;
 
         public uint Length;
     }

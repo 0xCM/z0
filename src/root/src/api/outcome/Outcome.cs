@@ -124,7 +124,6 @@ namespace Z0
         public static bool operator false(Outcome src)
             => src.Ok == false;
 
-
         public static Outcome Success
         {
             [MethodImpl(Inline)]

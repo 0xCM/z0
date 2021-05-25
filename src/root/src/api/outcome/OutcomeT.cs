@@ -24,6 +24,8 @@ namespace Z0
 
         public ulong MessageCode {get;}
 
+        public bool Fail => !Ok;
+
         [MethodImpl(Inline)]
         public Outcome(Outcome src)
         {

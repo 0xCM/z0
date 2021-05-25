@@ -996,15 +996,6 @@ namespace Z0.Asm
             }
         }
 
-        void CheckAssets()
-        {
-            var assets = Parts.AsmLang.AssetSet;
-            foreach(var descriptor in assets.Descriptors)
-            {
-                Wf.Row(descriptor.Format());
-            }
-        }
-
         void EmitCpuIntrinsics()
         {
             Wf.IntrinsicsCatalog().Emit();

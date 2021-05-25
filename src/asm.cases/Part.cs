@@ -7,14 +7,7 @@ namespace Z0.Parts
 {
     public sealed class AsmCases : Part<AsmCases>
     {
-        public static Assets Assets => new Assets();
-    }
-
-    public sealed class Assets : Assets<Assets>
-    {
-        public ResDescriptor AndAsm() => Asset("and.asm");
-
-        public ResDescriptor CpuIdRows() => Asset("CpuId.csv");
+        public static AsmCaseAssets Assets => new AsmCaseAssets();
     }
 }
 

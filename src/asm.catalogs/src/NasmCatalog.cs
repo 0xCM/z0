@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static AsmRecords;
 
     public class NasmCatalog : AppService<NasmCatalog>

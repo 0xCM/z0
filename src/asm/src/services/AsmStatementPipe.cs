@@ -260,7 +260,7 @@ namespace Z0.Asm
         void ParseStatements(FS.FilePath src, ConcurrentBag<AsmApiStatement> dst)
         {
             var flow = Wf.Running(FS.Msg.ParsingFile.Format(src));
-            if(TextDocs.parse(src, out var doc))
+            if(TextDoc.parse(src, out var doc))
             {
                 if(doc.Header.Labels.Length == StatementFieldCount)
                 {

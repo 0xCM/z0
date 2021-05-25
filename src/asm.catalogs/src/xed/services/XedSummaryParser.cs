@@ -21,9 +21,9 @@ namespace Z0.Asm
 
         readonly Index<XedFormInfo> SummaryTarget;
 
-        readonly ResDescriptor TableSource;
+        readonly Asset TableSource;
 
-        readonly ResDescriptor SummarySource;
+        readonly Asset SummarySource;
 
         readonly EventSignal Wf;
 

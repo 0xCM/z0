@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The resource address
         /// </summary>
-        public MemoryAddress Address {get;}
+        public StringAddress Address {get;}
 
         /// <summary>
         /// The Size of the resource, in bytes
@@ -31,7 +31,7 @@ namespace Z0
         public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
-        public StringRes(E id, MemoryAddress address, ByteSize size)
+        public StringRes(E id, StringAddress address, ByteSize size)
         {
             Identifier = id;
             Address = address;
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => StringRef.create(Address, Size).Format();
+            => Address.Format();
 
         public override string ToString()
             => Format();

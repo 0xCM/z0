@@ -8,8 +8,8 @@ namespace Z0.Asm
     using System.Xml;
     using System.IO;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static XedModels;
 
     public partial class IntrinsicsCatalog : AppService<IntrinsicsCatalog>

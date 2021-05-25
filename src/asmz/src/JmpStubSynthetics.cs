@@ -14,7 +14,6 @@ namespace Z0
     using static core;
     using static Z0.Asm.AsmOp;
 
-
     public class JmpStubSynthetics : AppService<JmpStubSynthetics>
     {
         Index<MemoryRange> Trampolines;

@@ -7,20 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static core;
+    using static Root;
 
     /// <summary>
     /// Identifies a resource of parametric type along with a reference to the memory segment it occupies
     /// </summary>
-    public readonly struct ResDescriptor<T> : IDataTypeComparable<ResDescriptor<T>>, IAddressable
+    public readonly struct Asset<T> : IDataTypeComparable<Asset<T>>, IAddressable
     {
         public Name Name {get;}
 
         public MemorySeg Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResDescriptor(Name name, MemorySeg seg)
+        public Asset(Name name, MemorySeg seg)
         {
             Name = name;
             Segment = seg;
@@ -51,11 +51,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public int CompareTo(ResDescriptor<T> src)
+        public int CompareTo(Asset<T> src)
             => Address.CompareTo(src.Address);
 
         [MethodImpl(Inline)]
-        public bool Equals(ResDescriptor<T> src)
+        public bool Equals(Asset<T> src)
             => Address.Equals(src.Address);
 
         [MethodImpl(Inline)]
@@ -65,7 +65,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public static ResDescriptor<T> Empty
-            => new ResDescriptor<T>(Name.Empty, MemorySeg.Empty);
+        public static Asset<T> Empty
+            => new Asset<T>(Name.Empty, MemorySeg.Empty);
     }
 }

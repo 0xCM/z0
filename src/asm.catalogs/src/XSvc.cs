@@ -6,23 +6,28 @@ namespace Z0
 {
     using Z0.Asm;
 
+    using Svc = Z0.Asm;
     [ApiHost]
     public static class XSvc
     {
         [Op]
         public static IntrinsicsCatalog IntrinsicsCatalog(this IWfRuntime wf)
-            => Asm.IntrinsicsCatalog.create(wf);
+            => Svc.IntrinsicsCatalog.create(wf);
 
         [Op]
         public static XedCatalog XedCatalog(this IWfRuntime wf)
-            => Asm.XedCatalog.create(wf);
+            => Svc.XedCatalog.create(wf);
 
         [Op]
         public static NasmCatalog NasmCatalog(this IWfRuntime wf)
-            => Asm.NasmCatalog.create(wf);
+            => Svc.NasmCatalog.create(wf);
 
         [Op]
         public static XedFormPipe XedFormPipe(this IWfRuntime wf)
-            => Asm.XedFormPipe.create(wf);
+            => Svc.XedFormPipe.create(wf);
+
+        [Op]
+        public static AsmCatalogs AsmCatalogs(this IWfRuntime wf)
+            => Svc.AsmCatalogs.create(wf);
     }
 }

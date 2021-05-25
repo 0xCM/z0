@@ -12,32 +12,32 @@ namespace Z0
     partial struct Resources
     {
         /// <summary>
-        /// Reveals the data represented by a <see cref='ResDescriptor'/>
+        /// Reveals the data represented by a <see cref='Asset'/>
         /// </summary>
         /// <param name="src">The source descriptor</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> view(in ResDescriptor src)
+        public static ReadOnlySpan<byte> view(in Asset src)
             => memory.view(src.Address, src.Size);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<T> view<T>(in ResDescriptor<T> id)
+        public static ReadOnlySpan<T> view<T>(in Asset<T> id)
             where T : unmanaged
                 => memory.view<T>(id.Address, id.CellCount);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> view(in ResDescriptor<byte> id)
+        public static ReadOnlySpan<byte> view(in Asset<byte> id)
             => memory.view<byte>(id.Address, id.CellCount);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> view(in ResDescriptor<char> id)
+        public static ReadOnlySpan<char> view(in Asset<char> id)
             => memory.view<char>(id.Address, id.CellCount);
 
         [MethodImpl(Inline), Op]
-        public unsafe static ReadOnlySpan<char> view(in ResDescriptor<char> res, uint i0, uint i1)
+        public unsafe static ReadOnlySpan<char> view(in Asset<char> res, uint i0, uint i1)
             => memory.section((char*)res.Address, i0, i1);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> view(in ResDescriptor<byte> res, uint i0, uint i1)
+        public static ReadOnlySpan<byte> view(in Asset<byte> res, uint i0, uint i1)
             => memory.view<byte>(res.Address, (i1 - i0 + 1));
 
         [MethodImpl(Inline), Op]

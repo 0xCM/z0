@@ -113,7 +113,7 @@ namespace Z0
             return buffer;
         }
 
-        public ResEmission Emit(in ResDescriptor src, FS.FolderPath root)
+        public ResEmission Emit(in Asset src, FS.FolderPath root)
         {
             var invalid = Path.GetInvalidPathChars();
             var name =  src.Name.ToString().ReplaceAny(invalid, Chars.Underscore);

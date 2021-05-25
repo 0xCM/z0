@@ -66,6 +66,42 @@ namespace Z0
             }
         }
 
+        public static Outcome parse(string src, out TextDoc dst, TextDocFormat? format = null)
+        {
+            using var stream = src.ToStream();
+            using var reader = stream.CreateReader();
+            var result = parse(reader, format);
+            if(result)
+            {
+                dst = result.Value;
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return (false,result.Message?.ToString());
+            }
+        }
+
+        public static Outcome parse(FS.FilePath src, out TextDoc dst)
+        {
+            dst = TextDoc.Empty;
+            if(!src.Exists)
+                return (false, $"No such file {src}");
+
+            using var reader = src.Reader();
+            var attempt =  TextDoc.parse(reader);
+            if(attempt)
+            {
+                dst = attempt.Value;
+                return true;
+            }
+            else
+            {
+                return (false, attempt.Message?.ToString());
+            }
+        }
+
         /// <summary>
         /// Attempts to parse a text document and returns the result if successful
         /// </summary>

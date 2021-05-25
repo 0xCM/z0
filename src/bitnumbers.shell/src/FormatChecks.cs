@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         string FormatBuffer(uint offset, uint length)
-            => text.format(slice(_Buffer.View,offset,length));
+            => text.format(slice(_Buffer.View, offset, length));
 
         Span<char> RentBuffer()
             => _Buffer.Clear();
@@ -48,19 +48,20 @@ namespace Z0
             _Data = src.Bytes(SourceCount).Array();
             var data = _Data.Edit;
 
-            var ComponentCount = n4;
-            var ComponentWidth = w8;
-            var ComponentSize = 1;
-            var VectorSize = ComponentSize*4;
+            var n = n4;
+            var w = w8;
+            var cSize = w/8;
+            var vSize = cSize*4;
 
-            var SampleCount = 4;
+            var SampleCount = 24;
 
             for(var i=0; i<SampleCount; i++)
             {
-                var segment = slice(data, i*VectorSize, VectorSize);
-                var v = HexVector.create(ComponentCount, ComponentWidth, segment);
-                Check(v);
+                var segment = slice(data, i*vSize, vSize);
+                var vector = HexVector.create(n, w, segment);
+                Check(vector);
             }
+
 
             // var outcome = Check(w3);
             // var formatter = Tables.formatter<FormatCheck<W3,uint3>>();
@@ -74,10 +75,13 @@ namespace Z0
         {
             var offset = 0u;
             var buffer = RentBuffer();
-
-            //seek(buffer,offset++) = Chars.Lt;
             offset += BitRender.render(src, offset, buffer);
-            //seek(buffer, offset++) = Chars.Gt;
+
+            seek(buffer, offset++) = Chars.Space;
+            seek(buffer, offset++) = Chars.Eq;
+            seek(buffer, offset++) = Chars.Space;
+
+            offset += HexRender.render(src, offset, buffer);
 
             Wf.Row(FormatBuffer(0, offset));
         }

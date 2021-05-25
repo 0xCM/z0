@@ -12,25 +12,25 @@ namespace Z0
     /// <summary>
     /// Defines a link between an identified resource and an emission target
     /// </summary>
-    public readonly struct ResEmission : IDataFlow<ResDescriptor,FS.FilePath>
+    public readonly struct ResEmission : IDataFlow<Asset,FS.FilePath>
     {
-        public ResDescriptor Source {get;}
+        public Asset Source {get;}
 
         public FS.FilePath Target {get;}
 
         [MethodImpl(Inline)]
-        public ResEmission(ResDescriptor src, FS.FilePath dst)
+        public ResEmission(Asset src, FS.FilePath dst)
         {
             Source = src;
             Target = dst;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ResEmission(Arrow<ResDescriptor,FS.FilePath> link)
+        public static implicit operator ResEmission(Arrow<Asset,FS.FilePath> link)
             => new ResEmission(link.Source, link.Target);
 
         [MethodImpl(Inline)]
-        public static implicit operator Arrow<ResDescriptor,FS.FilePath>(ResEmission src)
+        public static implicit operator Arrow<Asset,FS.FilePath>(ResEmission src)
             => new ResEmission(src.Source, src.Target);
     }
 }

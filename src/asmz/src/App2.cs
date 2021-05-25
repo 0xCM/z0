@@ -444,9 +444,49 @@ namespace Z0.Asm
             // Wf.Row(cpuid.Format());
         }
 
+        void EmitAssetCatalog()
+        {
+            var catalogs = Wf.AsmCatalogs();
+            var assets = catalogs.Assets();
+            var host = catalogs.AssetHost;
+            var descriptors = assets.Descriptors;
+            var count = descriptors.Length;
+            var dst = Db.Table<AssetCatalogEntry>(host.GetSimpleName());
+            var flow = Wf.EmittingTable<AssetCatalogEntry>(dst);
+            using var writer = dst.Writer();
+            var formatter = Tables.formatter<AssetCatalogEntry>(AssetCatalogEntry.RenderWidths);
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var descriptor = ref skip(descriptors,i);
+                var entry = descriptor.CatalogEntry;
+                writer.WriteLine(formatter.Format(entry));
+            }
+            Wf.EmittedTable(flow,count);
+        }
+
+
+        void EmitCatalogAssets()
+        {
+            const byte fieldCount = 4;
+            var delimiter = Tables.DefaultDelimiter;
+            var widths = new byte[fieldCount]{14,14,14,64};
+            var dst = Db.AppLog("assets.features", FS.Csv);
+            var assets = Wf.AsmCatalogs().Assets();
+            var features = assets.FeatureMnemonics();
+            var emitting = Wf.EmittingFile(dst);
+            var result = Tables.normalize(features, delimiter, widths, dst);
+            if(result.Fail)
+                Wf.Error(result.Message);
+            else
+                Wf.EmittedFile(emitting, result.Data);
+        }
+
 
         public void Run()
         {
+            //Wf.AsmCatalogs().EmitAssetCatalog();
+            EmitCatalogAssets();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");
             // ShowCoffHeader(src);
@@ -454,7 +494,7 @@ namespace Z0.Asm
             //StatementRountTrip();
             //TestBitfields();
             //TestRel32();
-            RunExtractWorkflow();
+            //RunExtractWorkflow();
             //CaptureSelf();
             // var dir = Db.AppLogDir();
             // EmitAsmRows(dir);

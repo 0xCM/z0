@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    partial struct Resources
+    public sealed class AsmCaseAssets : Assets<AsmCaseAssets>
     {
-        [MethodImpl(Inline), Op]
-        public static string utf8(in Asset src)
-            => text.utf8(view(src));
+        public Asset AndAsm() => Asset("and.asm");
+
+        public Asset CpuIdRows() => Asset("CpuId.csv");
     }
 }

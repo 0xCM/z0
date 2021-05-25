@@ -52,7 +52,7 @@ namespace Z0.Asm
         {
             var rowtype = path.FileName.WithoutExtension.Format().RightOfLast(Chars.Dot);
             var flow = Wf.Running(string.Format("Loading {0} rows from {1}", rowtype, path.ToUri()));
-            var result = TextDocs.parse(path, out var doc);
+            var result = TextDoc.parse(path, out var doc);
             var kRows = 0;
             if(result)
             {

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial struct Resources
     {
@@ -23,7 +22,7 @@ namespace Z0
             {
                 ref readonly var fv = ref skip(values,i);
                 ref var target = ref seek(dst,i);
-                target.Address = address(fv.Right);
+                target.Address = fv.Right;
                 target.Source = fv.Left;
                 target.Value = fv.Right;
             }
@@ -41,7 +40,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var fv = ref skip(values,i);
-                seek(dst,i) = define(@as<uint,T>(i), address(fv.Right), (uint)fv.Right.Length*2);
+                seek(dst,i) = define(@as<uint,T>(i), fv.Right, (uint)fv.Right.Length*2);
             }
             return buffer;
         }

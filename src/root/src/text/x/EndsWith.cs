@@ -8,11 +8,31 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.IO;
 
     using static Root;
 
     partial class XText
     {
+        /// <summary>
+        /// Turns a string into a stream
+        /// </summary>
+        /// <param name="s"></param>
+        /// <remarks>https://stackoverflow.com/questions/1879395/how-do-i-generate-a-stream-from-a-string</remarks>
+        [TextUtility]
+        public static Stream ToStream(this string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
+        public static StreamReader CreateReader(this Stream src)
+            => new StreamReader(src);
+
         /// <summary>
         /// Determines whether a string ends with a specific character
         /// </summary>

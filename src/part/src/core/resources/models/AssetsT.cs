@@ -5,7 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
+
+    using static Root;
 
     public abstract class Assets<T> : IAssets
         where T : Assets<T>, new()
@@ -16,14 +19,14 @@ namespace Z0
         public Assembly DataSource
             => typeof(T).Assembly;
 
-        ResDescriptors _Descriptors;
+        ComponentAssets _Descriptors;
 
         protected Assets()
         {
-            _Descriptors = ResDescriptors.from(DataSource);
+            _Descriptors = ComponentAssets.from(DataSource);
         }
 
-        public ref readonly ResDescriptor Asset(ResourceName id)
+        public ref readonly Asset Asset(ResourceName id)
         {
             var matches = _Descriptors.Filter(id);
             if(matches.ResourceCount == 0)
@@ -35,7 +38,10 @@ namespace Z0
             return ref matches[0];
         }
 
-        public ResDescriptors Descriptors
-            => _Descriptors;
+        public ReadOnlySpan<Asset> Descriptors
+        {
+            [MethodImpl(Inline)]
+            get => _Descriptors.View;
+        }
     }
 }

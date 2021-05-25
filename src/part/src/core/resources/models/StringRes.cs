@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The resource address
         /// </summary>
-        public MemoryAddress Address;
+        public StringAddress Address;
 
         /// <summary>
         /// The resource value extracted from the accompanying location
@@ -33,7 +33,7 @@ namespace Z0
         public string Value;
 
         [MethodImpl(Inline)]
-        public StringRes(FieldInfo src, MemoryAddress address, string value)
+        public StringRes(FieldInfo src, StringAddress address, string value)
         {
             Source = src;
             Address = address;
@@ -42,6 +42,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPattern, Source.Name, Address, Value);
+            => Address.Format();
     }
 }

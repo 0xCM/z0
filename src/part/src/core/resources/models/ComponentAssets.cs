@@ -9,24 +9,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
-    public readonly struct ResDescriptors : IIndex<ResDescriptor>
+    public readonly struct ComponentAssets : IIndex<Asset>
     {
         [Op]
-        public static ResDescriptors from(Assembly src)
-            => new ResDescriptors(src, collect(src));
+        public static ComponentAssets from(Assembly src)
+            => new ComponentAssets(src, collect(src));
 
         [Op]
-        static unsafe Index<ResDescriptor> collect(Assembly src)
+        static unsafe Index<Asset> collect(Assembly src)
         {
             var resnames = @readonly(src.GetManifestResourceNames());
             var count = resnames.Length;
             if(count == 0)
-                return sys.empty<ResDescriptor>();
+                return sys.empty<Asset>();
 
-            var buffer = alloc<ResDescriptor>(count);
+            var buffer = alloc<Asset>(count);
             var target = span(buffer);
             for(var i=0u; i<count; i++)
             {
@@ -37,12 +37,12 @@ namespace Z0
             return buffer;
         }
 
-        readonly Index<ResDescriptor> Data;
+        readonly Index<Asset> Data;
 
         public Assembly Source {get;}
 
         [MethodImpl(Inline)]
-        public ResDescriptors(Assembly src, Index<ResDescriptor> descriptors)
+        public ComponentAssets(Assembly src, Index<Asset> descriptors)
         {
             Data = descriptors;
             Source = src;
@@ -54,30 +54,30 @@ namespace Z0
             get => Data.Count;
         }
 
-        public ResDescriptor[] Storage
+        public Asset[] Storage
         {
             get => Data.Storage;
         }
 
-        public ReadOnlySpan<ResDescriptor> View
+        public ReadOnlySpan<Asset> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public ref readonly ResDescriptor this[uint index]
+        public ref readonly Asset this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
         [MethodImpl(Inline)]
-        public ref readonly ResDescriptor Descriptor(uint index)
+        public ref readonly Asset Descriptor(uint index)
             => ref Data[index];
 
         [MethodImpl(Inline)]
-        public ResDescriptors Filter(string match)
-            => new ResDescriptors(Source, Data.Storage.Where(x => x.NameLike(match)));
+        public ComponentAssets Filter(string match)
+            => new ComponentAssets(Source, Data.Storage.Where(x => x.NameLike(match)));
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Content(uint index)

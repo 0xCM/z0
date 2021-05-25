@@ -21,6 +21,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var counter = 0u;
+            var @case = LowerCase;
             var count = (int)HexVector8<N>.CellCount;
             seek(dst, counter + offset) = Chars.Lt;
             counter++;
@@ -30,9 +31,11 @@ namespace Z0
                 if(i != count-1)
                     counter += separate(counter + offset, dst);
 
-
+                counter += render(@case, cell, counter + offset, dst);
             }
 
+            seek(dst, counter + offset) = Chars.Gt;
+            counter++;
             return counter;
         }
 

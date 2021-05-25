@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Part;
 
-    [ApiHost(ApiNames.Resources)]
+    [ApiHost]
     public readonly partial struct Resources
     {
         const NumericKind Closure = UnsignedInts;

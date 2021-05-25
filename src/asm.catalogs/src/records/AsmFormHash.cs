@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct AsmRecords
     {
-        [Record(TableId)]
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct AsmFormHash : IRecord<AsmFormHash>
         {
             public const string TableId = "asm.forms.hashed";
