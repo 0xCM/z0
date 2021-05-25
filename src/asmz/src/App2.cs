@@ -483,10 +483,17 @@ namespace Z0.Asm
         }
 
 
+        void ShowMemory()
+        {
+            var info = WinMem.basic();
+            var formatter = info.Formatter();
+            Wf.Row(formatter.Format(info,RecordFormatKind.KeyValuePairs));
+        }
+
         public void Run()
         {
             //Wf.AsmCatalogs().EmitAssetCatalog();
-            EmitCatalogAssets();
+            ShowMemory();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");
             // ShowCoffHeader(src);

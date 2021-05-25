@@ -15,8 +15,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
-    using static ProcessMemory;
-    using static CodeSymbolModels;
 
     public class Tests : AppService<Tests>
     {
@@ -1144,17 +1142,6 @@ namespace Z0.Asm
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
-        void ShowMemory()
-        {
-            var info = WinMem.basic();
-            var buffer = text.buffer();
-            buffer.AppendLine(text.prop(nameof(info.BaseAddress), info.BaseAddress));
-            buffer.AppendLine(text.prop(nameof(info.AllocationBase), info.AllocationBase));
-            buffer.AppendLine(text.prop(nameof(info.RegionSize), info.RegionSize));
-            buffer.AppendLine(text.prop(nameof(info.StackSize), info.StackSize));
-            buffer.AppendLine(text.prop(nameof(info.AllocProtect), info.AllocProtect));
-            Wf.Row(buffer.Emit());
-        }
 
         void FilterApiBlocks()
         {
@@ -1181,21 +1168,6 @@ namespace Z0.Asm
             archive.CodeBlocks(part, accept);
         }
 
-        void SplitFiles()
-        {
-            var limit = new Mb(15);
-            var root = Db.ToolOutDir(dia2dump);
-            var descriptions = Db.ToolOutFiles(dia2dump).Descriptions().Where(f => f.Size.Mb >= limit).Array();
-            var splitter = TextFileSplitter.create(Wf);
-            foreach(var description in descriptions)
-            {
-                var path = description.Path;
-                var target = root + FS.folder(path.FileName.WithoutExtension.Name);
-                target.Delete();
-                var spec = new FileSplitSpec(path, 50000, target);
-                splitter.Run(spec);
-            }
-        }
 
         public void ListEnvVars()
         {

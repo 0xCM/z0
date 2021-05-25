@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static AsmX;
+    using static AsmRegCodes;
     using static AsmTokens;
     using static Part;
     using static memory;

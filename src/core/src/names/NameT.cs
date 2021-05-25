@@ -23,6 +23,7 @@ namespace Z0
 
         public string Text
             => Format();
+
         public uint Hash
         {
             [MethodImpl(Inline)]

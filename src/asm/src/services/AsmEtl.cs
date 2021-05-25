@@ -13,6 +13,19 @@ namespace Z0.Asm
     [ApiHost]
     public sealed class AsmEtl : AppService<AsmEtl>
     {
+        [Op]
+        public static unsafe uint allocTest()
+        {
+            const ushort BufferSize = 32;
+            byte* p = stackalloc byte[BufferSize];
+            p[0] = 0x10;
+            p[1] = 0x20;
+            p[3] = 0x30;
+            p[4] = 0x40;
+            uint result = (uint)(p[0] | p[1] | p[2] | p[3]);
+            return result;
+        }
+
         public static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)
         {
             var code = new ApiCodeBlock(member.OpUri, member.Encoded);

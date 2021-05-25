@@ -8,47 +8,47 @@ namespace Z0
     {
         [Op]
         public static string FormatAsmHex(this sbyte src, int? digits = null)
-            => HexFormat.asmhex(src, digits);
+            => HexMemoryFormat.asmhex(src, digits);
 
         [Op]
         public static string FormatAsmHex(this byte src, int? digits = null)
-            => HexFormat.asmhex(src, digits);
+            => HexMemoryFormat.asmhex(src, digits);
 
         [Op]
         public static string FormatAsmHex(this short src, int? digits = null)
-            => HexFormat.asmhex(src, digits);
+            => HexMemoryFormat.asmhex(src, digits);
 
         [Op]
         public static string FormatAsmHex(this ushort src, int? digits = null)
-            => HexFormat.asmhex(src, digits);
+            => HexMemoryFormat.asmhex(src, digits);
 
         [Op]
         public static string FormatAsmHex(this int src, int? digits = null)
-            => HexFormat.asmhex(src, digits);
+            => HexMemoryFormat.asmhex(src, digits);
 
         [Op]
         public static string FormatAsmHex(this uint src, int? digits = null)
-            => HexFormat.asmhex(src, digits);
+            => HexMemoryFormat.asmhex(src, digits);
 
         [Op]
         public static string FormatAsmHex(this ulong src, int? digits = null)
-            => HexFormat.asmhex(src, digits);
+            => HexMemoryFormat.asmhex(src, digits);
 
         [Op]
         public static string FormatAsmHex(this long src, int? digits = null)
-            => HexFormat.asmhex(src,digits);
+            => HexMemoryFormat.asmhex(src,digits);
 
         [Op]
         public static string FormatAsmHex(this ushort src, NumericWidth width)
-            => HexFormat.asmhex(src, width);
+            => HexMemoryFormat.asmhex(src, width);
 
         [Op]
         public static string FormatAsmHex(this uint src, NumericWidth width)
-            => HexFormat.asmhex(src, width);
+            => HexMemoryFormat.asmhex(src, width);
 
         [Op]
         public static string FormatAsmHex(this ulong src, NumericWidth width)
-            => HexFormat.asmhex(src, width);
+            => HexMemoryFormat.asmhex(src, width);
 
         [Op]
         public static string FormatTrimmedAsmHex(this ushort src)

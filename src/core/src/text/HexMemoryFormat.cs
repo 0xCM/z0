@@ -4,9 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Text;
+
+    using static Root;
+    using static core;
     using static HexFormatSpecs;
 
-    partial struct HexFormat
+    [ApiHost]
+    public readonly struct HexMemoryFormat
     {
         [Op]
         public static string asmhex(sbyte src, int? digits = null)
@@ -69,5 +75,29 @@ namespace Z0
                     _ => asmhex(src,12),
             };
         }
+
+        [Op]
+        public static string bytes(ushort src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(short src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(int src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(uint src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(long src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(ulong src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
     }
 }

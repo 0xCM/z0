@@ -7,6 +7,7 @@ namespace Z0.Asm
     using static AsmMnemonicCode;
 
     using static AsmTokens;
+    using static AsmRegCodes;
 
     partial struct AsmX
     {

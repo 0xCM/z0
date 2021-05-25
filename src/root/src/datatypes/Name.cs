@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using api = Names;
 
     [Datatype]
     public readonly struct Name : IName, IDataTypeComparable<Name>
@@ -23,7 +22,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => sys.empty(Data);
+            get => string.IsNullOrEmpty(Data);
         }
 
         public string Text
@@ -35,7 +34,7 @@ namespace Z0
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => sys.nonempty(Data);
+            get => !IsEmpty;
         }
 
         public string Content
@@ -74,7 +73,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(Name src)
-            => api.compare(this, src);
+            => Content.CompareTo(src.Content);
 
         [MethodImpl(Inline)]
         public bool Equals(Name src)

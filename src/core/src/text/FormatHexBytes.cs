@@ -8,26 +8,26 @@ namespace Z0
     {
         [Op]
         public static string FormatHexBytes(this ushort src)
-            => HexFormat.bytes(src);
+            => HexMemoryFormat.bytes(src);
 
         [Op]
         public static string FormatHexBytes(this short src)
-            => HexFormat.bytes(src);
+            => HexMemoryFormat.bytes(src);
 
         [Op]
         public static string FormatHexBytes(this int src)
-            => HexFormat.bytes(src);
+            => HexMemoryFormat.bytes(src);
 
         [Op]
         public static string FormatHexBytes(this uint src)
-            => HexFormat.bytes(src);
+            => HexMemoryFormat.bytes(src);
 
         [Op]
         public static string FormatHexBytes(this long src)
-            => HexFormat.bytes(src);
+            => HexMemoryFormat.bytes(src);
 
         [Op]
         public static string FormatHexBytes(this ulong src)
-            => HexFormat.bytes(src);
+            => HexMemoryFormat.bytes(src);
     }
 }

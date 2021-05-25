@@ -13,8 +13,6 @@ namespace Z0
     {
         [Op]
         TableId TableId {get;}
-
-        RecordFields Fields();
     }
 
     [Free]
@@ -23,9 +21,6 @@ namespace Z0
     {
         TableId IRecord.TableId
             => TableId.identify(typeof(T));
-
-        RecordFields IRecord.Fields()
-            => RecordFields.discover<T>();
     }
 
     [Free]

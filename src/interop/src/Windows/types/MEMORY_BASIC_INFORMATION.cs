@@ -15,6 +15,8 @@ namespace Windows
 
         public PageProtection AllocationProtect;
 
+        public ushort PartitionId;
+
         public ulong RegionSize;
 
         public MemState State;

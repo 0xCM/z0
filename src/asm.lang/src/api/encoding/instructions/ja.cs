@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static AsmInstructions;
     using static Hex8Seq;
-    using static AsmOps;
     using static AsmHexCodes;
 
     partial struct AsmEncoder

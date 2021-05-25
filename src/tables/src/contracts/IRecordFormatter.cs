@@ -16,8 +16,6 @@ namespace Z0
 
         TableId TableId {get;}
 
-        RecordFields Fields();
-
         RowFormatSpec FormatSpec {get;}
 
         string FormatHeader()
@@ -33,9 +31,6 @@ namespace Z0
 
         TableId IRecordFormatter.TableId
             => default(T).TableId;
-
-        RecordFields IRecordFormatter.Fields()
-            => default(T).Fields();
 
         string IRecordFormatter.Format(IRecord src)
             => Format((T)src);

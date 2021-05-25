@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    [Record(TableId)]
+    using System.Runtime.InteropServices;
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AssembledAsm : IRecord<AssembledAsm>
     {
         public const string TableId = "asm.assembled";

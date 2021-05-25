@@ -36,7 +36,6 @@ namespace Z0.Asm
                 return EmptyString;
         }
 
-
         [MethodImpl(Inline), Op]
         public static AsmMnemonic mnemonic(string src)
             => new AsmMnemonic(src);
