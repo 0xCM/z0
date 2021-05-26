@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.Text;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct Flags
     {
@@ -30,7 +32,7 @@ namespace Z0
         [Op, Closures(UnsignedInts)]
         public static string format<E>(Flags64<E> src, bool enabledOnly = true)
             where E : unmanaged
-                => _format(src,enabledOnly);
+                => _format(src, enabledOnly);
 
         [Op, Closures(UnsignedInts)]
         public static string format<T>(Flags<T> src)
@@ -40,7 +42,7 @@ namespace Z0
         const string RenderPattern = "{0,-48}: {1}" + Eol;
 
         [MethodImpl(Inline)]
-        static void render(ClrField field, bit state, ITextBuffer dst, bit enabledOnly)
+        static void render(FieldInfo field, bit state, StringBuilder dst, bit enabledOnly)
         {
             if(enabledOnly)
                 if(state)
@@ -55,16 +57,24 @@ namespace Z0
             where W : unmanaged
             where F : IFlags<F,E,W>
         {
-            var fields = Clr.fields<E>();
-            var count = root.min(fields.Length, src.DataWidth);
-            var buffer = text.buffer();
-            for(byte i=0; i<count; i++)
+            var type = typeof(E);
+            var buffer = new StringBuilder();
+            if(type.IsEnum)
             {
-                var field = skip(fields, i);
-                var state = src[@as<ulong,W>(Pow2.pow(i))];
-                render(skip(fields,i), state, buffer, enabledOnly);
+                var fields = type.GetFields(ReflectionFlags.BF_All);
+                var count = min(fields.Length, src.DataWidth);
+                for(byte i=0; i<count; i++)
+                {
+                    var field = skip(fields, i);
+                    var state = src[@as<ulong,W>(Pow2.pow(i))];
+                    render(skip(fields,i), state, buffer, enabledOnly);
+                }
             }
-            return buffer.Emit();
+            else
+            {
+                buffer.Append(bit.formatter<E>().Format(src.Value));
+            }
+            return buffer.ToString();
         }
     }
 }

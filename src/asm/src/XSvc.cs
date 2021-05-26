@@ -8,7 +8,7 @@ namespace Z0
 
     using Services = Z0.Asm;
 
-    public static class XSvc
+    public static partial class XSvc
     {
         [Op]
         public static AsmFormatter AsmFormatter(this IWfRuntime wf)

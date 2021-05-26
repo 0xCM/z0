@@ -53,6 +53,12 @@
 		},
 		{
 			"path": "..\\rules"
+		},
+		{
+			"path": "..\\bitnumbers"
+		},
+		{
+			"path": "..\\bits"
 		}
 	],
 	"settings": {}

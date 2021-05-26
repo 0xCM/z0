@@ -35,4 +35,6 @@ public readonly partial struct EnvVarNames
     public const string Libs = "ZLibs";
 
     public const string ZData = "ZData";
+
+    public const string VendorDocs = "VendorDocRoot";
 }

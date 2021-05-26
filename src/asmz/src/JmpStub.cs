@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+
     [Record(TableId)]
     public struct JmpStub : IRecord<JmpStub>
     {

@@ -15,28 +15,35 @@ namespace Z0.Asm
     public readonly struct AsmRegBanks
     {
         [Op]
-        public static V512Bank create(W512 w, byte count)
-            => new V512Bank(new Cell512[count]);
+        public static ZmmBank create(W512 w, byte count)
+            => new ZmmBank(new Cell512[count]);
 
         [Op]
-        public static V256Bank create(W256 w, byte count)
-            => new V256Bank(new Cell256[count]);
+        public static YmmBank create(W256 w, byte count)
+            => new YmmBank(new Cell256[count]);
 
         [Op]
-        public static V128Bank create(W128 w, byte count)
-            => new V128Bank(new Cell128[count]);
+        public static XmmBank create(W128 w, byte count)
+            => new XmmBank(new Cell128[count]);
 
         [Op]
         public static Gp64Bank create(W64 w, byte count)
             => new Gp64Bank(new Cell64[count]);
 
+        [MethodImpl(Inline), Op]
+        public static Gp64Bank create(Span<Cell64> src)
+            => new Gp64Bank(src);
+
+        [MethodImpl(Inline), Op]
+        public static ZmmBank create(Span<Cell512> src)
+            => new ZmmBank(src);
 
         public readonly ref struct Gp64Bank
         {
             readonly Span<Cell64> Data;
 
             [MethodImpl(Inline)]
-            internal Gp64Bank(Cell64[] src)
+            internal Gp64Bank(Span<Cell64> src)
                 => Data = src;
 
             [MethodImpl(Inline)]
@@ -56,12 +63,12 @@ namespace Z0.Asm
                 => ref seek(Data,(byte)i);
         }
 
-        public readonly ref struct V128Bank
+        public readonly ref struct XmmBank
         {
             readonly Span<Cell128> Data;
 
             [MethodImpl(Inline)]
-            internal V128Bank(Cell128[] src)
+            internal XmmBank(Span<Cell128> src)
                 => Data = src;
 
             [MethodImpl(Inline)]
@@ -69,12 +76,12 @@ namespace Z0.Asm
                 => ref seek(Data, (byte)i);
         }
 
-        public readonly ref struct V256Bank
+        public readonly ref struct YmmBank
         {
             readonly Span<Cell256> Data;
 
             [MethodImpl(Inline)]
-            internal V256Bank(Cell256[] src)
+            internal YmmBank(Span<Cell256> src)
                 => Data = src;
 
             [MethodImpl(Inline)]
@@ -86,12 +93,12 @@ namespace Z0.Asm
                 => ref seek(Data,(byte)i);
         }
 
-        public readonly ref struct V512Bank
+        public readonly ref struct ZmmBank
         {
             readonly Span<Cell512> Data;
 
             [MethodImpl(Inline)]
-            internal V512Bank(Cell512[] src)
+            internal ZmmBank(Span<Cell512> src)
                 => Data = src;
 
             [MethodImpl(Inline)]

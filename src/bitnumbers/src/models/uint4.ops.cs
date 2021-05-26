@@ -172,22 +172,6 @@ namespace Z0
         public static U uint4(ulong src)
             => new U((byte)((byte)src & U.MaxLiteral));
 
-        /// <summary>
-        /// Creates a 4-bit unsigned integer from a 4-term bit sequence
-        /// </summary>
-        /// <param name="x0">The term at index 0</param>
-        /// <param name="x1">The term at index 1</param>
-        /// <param name="x2">The term at index 2</param>
-        /// <param name="x3">The term at index 3</param>
-        [MethodImpl(Inline), Op]
-        public static U uint4(bit x0, bit x1 = default, bit x2 = default, bit x3 = default)
-             => wrap4(Bytes.or(
-                 Bytes.sll((byte)x0, 0),
-                 Bytes.sll((byte)x1, 1),
-                 Bytes.sll((byte)x2, 2),
-                 Bytes.sll((byte)x3, 3)
-                 ));
-
         [MethodImpl(Inline), Op]
         public static U add(U x, U y)
         {

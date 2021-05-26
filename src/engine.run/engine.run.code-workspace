@@ -1,0 +1,41 @@
+{
+	"folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "..\\engine"
+        },
+        {
+            "path": "..\\calc"
+        },
+        {
+            "path": "..\\asm.lang"
+        },
+        {
+            "path": "..\\asm.core"
+        },
+        {
+            "path": "..\\core"
+        },
+        {
+            "path": "..\\part"
+        },
+        {
+            "path": "..\\bit"
+        },
+        {
+            "path": "..\\bits"
+        },
+        {
+            "path": "..\\cpu"
+        },
+        {
+            "path": "..\\asm.catalogs"
+        },
+        {
+            "path": "..\\agents"
+        }
+    ],
+	"settings": {}
+}

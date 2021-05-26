@@ -8,9 +8,6 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Part;
-    using static memory;
-
     class CpuShell : WfApp<CpuShell>
     {
         public static void Main(params string[] args)

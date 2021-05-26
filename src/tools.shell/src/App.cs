@@ -5,11 +5,33 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Root;
     using static CodeSymbolModels;
     using static core;
 
+
+
+    public class IntelDocParser : AppService<IntelDocParser>
+    {
+        public void Parse(FS.FilePath src, FS.FolderPath dst)
+        {
+            using var reader = src.Reader();
+            var counter = 1u;
+            var data = reader.ReadLine();
+            while(text.nonempty(data))
+            {
+                var line = new TextLine(counter++, data);
+                Parse(line);
+            }
+        }
+
+        void Parse(in TextLine src)
+        {
+
+        }
+    }
 
     sealed class ToolShell : AppService<ToolShell>
     {
@@ -97,7 +119,8 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(relative,i);
-                var link = Markdown.relative(path.File.Format(), path.Format());
+                //var link = Markdown.relative(path.File.Format(), path.Format());
+                var link = Markdown.link(path);
                 Wf.Row(link);
             }
         }

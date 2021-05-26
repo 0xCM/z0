@@ -211,6 +211,41 @@ namespace Z0.Asm
                 get => ref @as<Cell64,Cell8>(Data[(byte)r]);
             }
         }
+
+       public sealed class MaskRegBank : RegBank<Cell64>, IRegBank<Cell64>
+        {
+            readonly Index<Cell64> Data;
+
+            public MaskRegBank()
+            {
+                Data = core.alloc<Cell64>(8);
+            }
+
+            public MaskRegBank(uint count)
+            {
+                Data = core.alloc<Cell64>(count);
+            }
+
+            [MethodImpl(Inline)]
+            public MaskRegBank(Index<Cell64> src)
+            {
+                Data = src;
+            }
+
+            public ref Cell64 this[RegIndex r]
+            {
+                [MethodImpl(Inline)]
+                get => ref Data[(byte)r];
+            }
+
+            public ref Cell64 this[W64 w, RegIndex r]
+            {
+                [MethodImpl(Inline)]
+                get => ref Data[(byte)r];
+            }
+
+        }
+
     }
 
     /*

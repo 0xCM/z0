@@ -62,15 +62,15 @@ namespace Z0
         }
 
         [Op]
-        public static int parse(ReadOnlySpan<char> src, Span<byte> dst)
+        public static uint parse(ReadOnlySpan<char> src, Span<byte> dst)
         {
             var input = src;
             var maxbytes = dst.Length;
-            var j=0;
+            var j=0u;
             var count = src.Length;
             var c0 = Zero;
             var c1 = Zero;
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
                 if(j == maxbytes)
                     return j;

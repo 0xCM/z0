@@ -7,12 +7,12 @@ namespace Z0.Asm
     using System;
 
     using static CodeGenerator;
-    using static memory;
+    using static core;
 
     public sealed class ResPackEmitter : AppService<ResPackEmitter>
     {
         FS.FolderPath SourceDir
-            => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");
+            => Db.PartSrcDir("respack") + FS.folder("content") + FS.folder("bytes");
 
         ApiResProvider ResProvider;
 

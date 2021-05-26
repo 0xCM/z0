@@ -6,20 +6,20 @@ namespace Z0
 {
     using System;
 
-    struct Machine
+    struct App
     {
         public static void run(string[] args)
             => app(shell(args)).Run();
 
-        static Machine app(IWfRuntime wf)
-            => new Machine(wf);
+        static App app(IWfRuntime wf)
+            => new App(wf);
 
         static IWfRuntime shell(string[] args)
             => WfRuntime.create(ApiQuery.parts(root.controller(), args), args).WithSource(Rng.@default());
 
         IWfRuntime Wf;
 
-        Machine(IWfRuntime wf)
+        App(IWfRuntime wf)
         {
             Wf = wf;
         }

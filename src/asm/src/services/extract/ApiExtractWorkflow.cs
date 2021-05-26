@@ -7,10 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static core;
-    using static Typed;
-
     public class ApiExtractWorkflow : AppService<ApiExtractWorkflow>
     {
         int MemberDecodedCount;
@@ -56,9 +52,16 @@ namespace Z0
 
         public void Run()
         {
+            var dst = Db.AppLogDir() + FS.folder("extract-wf");
+            Run(dst);
+        }
+
+        public void Run(FS.FolderPath root)
+        {
             var flow = Wf.Running();
-            Wf.ApiExtractor().Run(EventChannel, Db.AppLogDir() + FS.folder("extract-wf"));
+            Wf.ApiExtractor().Run(EventChannel, root);
             Wf.Ran(flow, string.Format("Decoded:{0}", MemberDecodedCount));
         }
+
     }
 }

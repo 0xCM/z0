@@ -11,18 +11,27 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static Rules;
 
     [ApiHost]
     public readonly struct HexPacks
     {
+        const char SegSep = Chars.Colon;
+
+        const char DataSep = Chars.Eq;
+
         const string HexPackLine = "x{0:x}[{1:D5}:{2:D5}]=<{3}>";
 
+        static Fence<char> SegFence = ('[',']');
+
+        static Fence<char> DataFence = ('<', '>');
+
         [Op]
-        public static HexPack hexpack(MemoryBlock src)
+        public static HexPack pack(MemoryBlock src)
             => new HexPack(core.array(src), src.Size);
 
         [Op]
-        public static HexPack hexpack(Index<MemoryBlock> src)
+        public static HexPack pack(Index<MemoryBlock> src)
         {
             var count = src.Length;
             if(count == 0)
@@ -32,7 +41,7 @@ namespace Z0
         }
 
         [Op]
-        public static ByteSize hexpack(ReadOnlySpan<ApiCodeBlock> src, Span<HexPacked> dst, Span<char> buffer)
+        public static ByteSize pack(ReadOnlySpan<ApiCodeBlock> src, Span<HexPacked> dst, Span<char> buffer)
         {
             var count = (uint)root.min(src.Length, dst.Length);
             var size = 0ul;
@@ -51,15 +60,15 @@ namespace Z0
         }
 
         [Op]
-        public static HexPack hexpack(ReadOnlySpan<ApiExtractBlock> src)
+        public static HexPack pack(ReadOnlySpan<ApiExtractBlock> src)
         {
             var count = src.Length;
             var buffer = alloc<MemoryBlock>(count);
-            return hexpack(src, buffer);
+            return pack(src, buffer);
         }
 
         [Op]
-        public static HexPack hexpack(ReadOnlySpan<ApiCodeBlock> src)
+        public static HexPack pack(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             if(count == 0)
@@ -81,7 +90,7 @@ namespace Z0
         }
 
         [Op]
-        public static HexPack hexpack(ReadOnlySpan<ApiMemberExtract> src)
+        public static HexPack pack(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             if(count == 0)
@@ -104,7 +113,7 @@ namespace Z0
         }
 
         [Op]
-        public static HexPack hexpack(ReadOnlySpan<ApiExtractBlock> src, Index<MemoryBlock> buffer)
+        public static HexPack pack(ReadOnlySpan<ApiExtractBlock> src, Index<MemoryBlock> buffer)
         {
             var count = src.Length;
             if(count == 0)
@@ -124,6 +133,7 @@ namespace Z0
             buffer.Sort();
             return new HexPack(buffer, max);
         }
+
         [MethodImpl(Inline), Op]
         public static uint charpack(ReadOnlySpan<byte> src, Span<char> dst)
         {
@@ -156,6 +166,137 @@ namespace Z0
                 total += size;
             }
             return total;
+        }
+
+        public static Outcome<HexPack> load(FS.FilePath src)
+        {
+            var result = default(Outcome<HexPack>);
+            var unpacked = default(Outcome<ByteSize>);
+            var size  = ByteSize.Zero;
+            var lines = list<MemoryBlock>();
+            var counter = z16;
+            using var reader = src.Reader();
+            var data = reader.ReadLine();
+            while(result.Ok && text.nonempty(data))
+            {
+                unpacked = unpack(counter++, data, out var block);
+                if(unpacked.Fail)
+                    result = (false, unpacked.Message);
+                else
+                {
+                    lines.Add(block);
+                    size += unpacked.Data;
+                    data = reader.ReadLine();
+                }
+            }
+
+            return result;
+        }
+
+        public static Outcome<ByteSize> unpack(ushort index, string src, out MemoryBlock dst)
+        {
+            var count = src.Length;
+            var line = index + 1;
+            dst = default;
+            if(count == 0)
+            {
+                dst = MemoryBlock.Empty;
+                return ByteSize.Zero;
+            }
+
+            if(first(src) != 'x')
+                return(false,$"Line {line} does not begin with the required character 'x'");
+
+            var i = src.IndexOf('h');
+            if(i == NotFound)
+                return(false, $"Line {line} does not contain address terminator 'h'");
+
+            var parsed = DataParser.parse(text.slice(src, 1, i-1), out MemoryAddress @base);
+            if(parsed.Fail)
+                return parsed;
+
+            if(!text.unfence(src, SegFence, out var seg))
+                return (false, $"Line {line} does not contain segment fence");
+
+            if(!text.unfence(src, DataFence, out var data))
+                return (false, $"Line {line} does not contain data fence");
+
+            var segparts = text.split(src,SegSep);
+            if(segparts.Length != 2)
+                return (false, $"Line {line} segement specifier does not have the required 2 components");
+
+            DataParser.parse(segparts[0], out ushort segidx);
+            if(segidx != index)
+                return (false, $"Line {line} number does not correspond to the segement index");
+
+            DataParser.parse(segparts[1], out ByteSize segsize);
+
+            DataParser.parse(data, out BinaryCode code);
+            if(code.IsEmpty)
+                return (false, $"Line {line} contains no data");
+
+            dst = new MemoryBlock(@base, segsize, code);
+
+            return segsize;
+        }
+
+        static Outcome<ByteSize> unpack_fast(uint index, ReadOnlySpan<char> src, out MemoryBlock dst)
+        {
+            var result = Outcome.Success;
+            var count = src.Length;
+            if(count == 0)
+            {
+                dst = MemoryBlock.Empty;
+                return ByteSize.Zero;
+            }
+
+            dst = default;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(src,i);
+                var origin =new MemoryRange(MemoryAddress.Zero,ByteSize.Zero);
+
+                if(i==0)
+                {
+                    if(c != 'x')
+                    {
+                        result = (false,$"Line {index + 1} does not begin with the required character 'x'");
+                        return result;
+                    }
+                }
+                else
+                {
+                    if(i==1)
+                    {
+                        var buffer = CharBlock16.Null.Data;
+                        var max = buffer.Length;
+                        var j=0;
+                        while(j < max)
+                        {
+                            ref readonly var a = ref skip(src, i++);
+                            if(a != 'h')
+                                seek(buffer, j++) = a;
+                            else
+                                break;
+                        }
+
+                        var @base = 0ul;
+                        var size = Hex.parse(slice(buffer,0,j), bytes(@base));
+                        if(size != 0)
+                        {
+                            origin = new MemoryRange(@base, ByteSize.Zero);
+                        }
+
+
+                        //var number = slice(address,0,j);
+
+                    }
+                }
+            }
+
+
+            return result;
+
         }
 
         [Op]

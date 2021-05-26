@@ -7,35 +7,32 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     using api = Flags;
 
-    public struct Flags16<K> : IFlags<Flags16<K>,K,Pow2x16>
-        where K : unmanaged
+    public struct Flags<T> : IFlags<T>
+        where T : unmanaged
     {
-        public const byte Width = 16;
-
-        public K Value {get;}
+        readonly T Data;
 
         [MethodImpl(Inline)]
-        public Flags16(K value)
-            => Value = value;
+        public Flags(T value)
+            => Data = value;
 
         public BitWidth DataWidth
-            => Width;
+            => core.width<T>();
 
-        public bit this[K flag]
+        public bit this[T flag]
         {
             [MethodImpl(Inline)]
             get => api.state(this, flag);
         }
 
-        public bit this[Pow2x16 flag]
+        public T Value
         {
             [MethodImpl(Inline)]
-            get => api.state(this, flag);
+            get => Data;
         }
 
         public string Format()
@@ -45,11 +42,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Flags16<K>(K src)
-            => new Flags16<K>(src);
+        public static implicit operator Flags<T>(T src)
+            => new Flags<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator K(Flags16<K> src)
-            => src.Value;
+        public static implicit operator T(Flags<T> src)
+            => src.Data;
     }
 }

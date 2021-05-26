@@ -9,19 +9,11 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Diagnostics;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
     using static Root;
     using static core;
-
-    public struct ApiExtractOptions
-    {
-        public bool EmitContext;
-
-        public bool Analyze;
-    }
 
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>

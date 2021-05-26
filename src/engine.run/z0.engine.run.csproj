@@ -11,6 +11,8 @@
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(Engine)" />
+    <ProjectReference Include="$(Workflow)" />
+    <ProjectReference Include="$(Calc)" />
 
   </ItemGroup>
 

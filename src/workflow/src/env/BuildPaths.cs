@@ -8,7 +8,7 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        FS.FolderPath BuildArchiveRoot()
-            => BinaryRoot() + FS.folder(builds);
+        FS.FolderPath ZBuildDir()
+            => ZRoot() + FS.folder(build);
     }
 }

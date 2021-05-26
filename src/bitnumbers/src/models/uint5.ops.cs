@@ -165,27 +165,9 @@ namespace Z0
         public static U uint5(ulong src)
             => new U((byte)((byte)src & U.MaxLiteral));
 
-        /// <summary>
-        /// Creates a 5-bit unsigned integer from a 5-term bit sequence
-        /// </summary>
-        /// <param name="x0">The term at index 0</param>
-        /// <param name="x1">The term at index 1</param>
-        /// <param name="x2">The term at index 2</param>
-        /// <param name="x3">The term at index 3</param>
-        /// <param name="x4">The term at index 4</param>
-        [MethodImpl(Inline), Op]
-        public static U uint5(bit x0, bit x1 = default, bit x2 = default, bit x3 = default, bit x4 = default)
-             => wrap5(Bytes.or(
-                 Bytes.sll((byte)x0, 0),
-                 Bytes.sll((byte)x1, 1),
-                 Bytes.sll((byte)x2, 2),
-                 Bytes.sll((byte)x3, 3),
-                 Bytes.sll((byte)x4, 4)
-                 ));
-
         [MethodImpl(Inline), Op]
         public static U inc(U x)
-            => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
+            => !x.IsMax ? new U(core.add(x.data, 1), false) : U.Min;
 
         [MethodImpl(Inline), Op]
         public static U add(U x, U y)

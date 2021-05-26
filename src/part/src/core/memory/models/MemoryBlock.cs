@@ -25,6 +25,13 @@ namespace Z0
             Data = data;
         }
 
+        [MethodImpl(Inline)]
+        public MemoryBlock(MemoryAddress @base, ByteSize size, BinaryCode data)
+        {
+            Origin = new MemoryRange(@base,size);
+            Data = data;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

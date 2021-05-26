@@ -9,7 +9,7 @@ namespace Z0
     public class ApiHexPacks : AppService<ApiHexPacks>
     {
         [Op]
-        public Index<HexPacked> Records(Index<ApiCodeBlock> src, bool validate = false)
+        public Index<HexPacked> Pack(Index<ApiCodeBlock> src, bool validate = false)
         {
             const ushort BufferLength = 48400;
 
@@ -18,7 +18,7 @@ namespace Z0
             var packs = alloc<HexPacked>(count);
             var chars = alloc<char>(BufferLength);
             ref var dst = ref first(packs);
-            var size = HexPacks.hexpack(blocks, packs, chars);
+            var size = HexPacks.pack(blocks, packs, chars);
             if(validate)
             {
                 var buffer = span<HexDigit>(BufferLength);
@@ -44,7 +44,7 @@ namespace Z0
         public Index<HexPacked> Emit(Index<ApiCodeBlock> blocks, FS.FilePath? dst = null, bool validate = false)
         {
             var _dst = dst ?? Db.TableRoot() + FS.file("apihex", FS.ext("xpack"));
-            var result = Records(blocks,validate);
+            var result = Pack(blocks,validate);
             var packed = result.View;
             var emitting = Wf.EmittingFile(_dst);
             using var writer = _dst.Writer();
@@ -70,7 +70,7 @@ namespace Z0
         {
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            var total = HexPacks.emit(HexPacks.hexpack(src), writer);
+            var total = HexPacks.emit(HexPacks.pack(src), writer);
             Wf.EmittedFile(flow, (uint)total);
             return total;
         }

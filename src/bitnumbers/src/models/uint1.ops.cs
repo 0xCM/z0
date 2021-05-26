@@ -25,15 +25,6 @@ namespace Z0
                 => ref @as<U,S>(src);
 
         /// <summary>
-        /// (a,b) -> [ab]
-        /// </summary>
-        /// <param name="a">Source bit 0</param>
-        /// <param name="b">Source bit 1</param>
-        [MethodImpl(Inline), Op]
-        public static uint3 join(U a, U b, U c)
-            => (uint3)a | ((uint3)b << 1) | ((uint3)c << 2);
-
-        /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
         /// </summary>
         /// <param name="src">The input value</param>
@@ -61,15 +52,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref uint1 cut(in byte src, W dst)
             => ref @as<byte,uint1>(src);
-
-        /// <summary>
-        /// (a,b) -> [ab]
-        /// </summary>
-        /// <param name="a">Source bit 0</param>
-        /// <param name="b">Source bit 1</param>
-        [MethodImpl(Inline), Op]
-        public static uint2 join(U a, U b)
-            =>(uint2)a | ((uint2)b << 1);
 
         /// <summary>
         /// Converts a source integral value to an enum value

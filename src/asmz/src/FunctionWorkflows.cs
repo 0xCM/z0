@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public ref struct FunctionWorkflows
@@ -45,8 +45,8 @@ namespace Z0
         public FunctionWorkflows(IWfRuntime wf)
         {
             Wf = wf;
-            Left = array<byte>(1, 2, 4, 8);
-            Right = array<byte>(16, 32, 64, 128);
+            Left = core.array<byte>(1, 2, 4, 8);
+            Right = core.array<byte>(16, 32, 64, 128);
             Target = alloc<byte>(FunctionCount);
         }
 

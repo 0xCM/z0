@@ -172,7 +172,8 @@ namespace Z0.Asm
         void RunExtractWorkflow()
         {
             var wf = ApiExtractWorkflow.create(Wf);
-            wf.Run();
+            var dst = Db.ZSrc("engine.run", "assets");
+            wf.Run(dst);
         }
 
         void DescribeHeaps()
@@ -490,10 +491,24 @@ namespace Z0.Asm
             Wf.Row(formatter.Format(info,RecordFormatKind.KeyValuePairs));
         }
 
+        public void ListVendorManuals(string vendor, FS.FileExt ext)
+        {
+            var files = Db.VendorManuals(vendor,ext).View;
+            var count = files.Length;
+            using var log = ShowLog(FS.Md);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var file = ref skip(files,i);
+                var link = Markdown.item(0, Markdown.link(file), Markdown.ListStyle.Bullet);
+                log.Show(link);
+            }
+        }
+
         public void Run()
         {
+            ListVendorManuals("intel", FS.Txt);
+
             //Wf.AsmCatalogs().EmitAssetCatalog();
-            ShowMemory();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");
             // ShowCoffHeader(src);

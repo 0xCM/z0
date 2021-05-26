@@ -17,6 +17,14 @@ namespace Z0
     partial struct BitNumbers
     {
         [MethodImpl(Inline), Op]
+        public static uint4 lo(uint8T src)
+            => Bytes.and(src.data, 0xF);
+
+        [MethodImpl(Inline), Op]
+        public static uint4 hi(uint8T src)
+            => Bytes.srl(src.data, 4);
+
+        [MethodImpl(Inline), Op]
         public static void render(U src, uint offset, Span<char> dst)
             => render(src, 8, offset, dst);
 
@@ -30,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static U inc(U x)
-            => !x.IsMax ? new U(memory.add(x.data, 1)) : U.Min;
+            => !x.IsMax ? new U(core.add(x.data, 1)) : U.Min;
 
         [MethodImpl(Inline), Op]
         public static U dec(U x)
@@ -176,47 +184,6 @@ namespace Z0
                 return src;
         }
 
-        /// <summary>
-        /// Promotes a <see cref='U2'/> to a <see cref='uint8T'/>, as indicated by the <see cref='W8'/> selector,
-        /// and shifts the result <see cref='N2'/> bits leftward
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        /// <param name="n">The leftward shift count</param>
-        [MethodImpl(Inline), Op]
-        public static uint8T extend(W8 w, N2 n, uint2 src)
-            => (uint8T)src << 2;
-
-        /// <summary>
-        /// Promotes a <see cref='U2'/> to a <see cref='uint8T'/>, as indicated by the <see cref='W8'/> selector,
-        /// and shifts the result <see cref='N3'/> bits leftward
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        /// <param name="n">The leftward shift count</param>
-        [MethodImpl(Inline), Op]
-        public static uint8T extend(W8 w, N3 n, uint2 src)
-            => (uint8T)src << 3;
-
-        /// <summary>
-        /// Promotes a <see cref='U2'/> to a <see cref='uint8T'/> as indicated by the <see cref='W8'/> selector
-        /// and shifts the result <see cref='N4'/> bits bits leftward
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        /// <param name="n">The leftward shift count</param>
-        [MethodImpl(Inline), Op]
-        public static uint8T extend(W8 w, N4 n, uint2 src)
-            => (uint8T)src << 4;
-
-        /// <summary>
-        /// Promotes a <see cref='U2'/> to a <see cref='Z0.uint8T'/>, as indicated by the <see cref='W8'/> selector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint8T extend(W8 w, uint2 src)
-            => new U(src.data);
 
         static BitFormat FormatConfig8
             => BitFormat.limited(U.Width,U.Width);
@@ -226,7 +193,7 @@ namespace Z0
             => bit.format(src.data, FormatConfig8);
 
         [MethodImpl(Inline), Op]
-        public static Span<bit> bits(U src)
+        public static Span<bit> bits(uint8T src)
         {
             var storage = 0ul;
             var dst = slice(@recover<byte,bit>(@bytes(storage)),0, U.BitCount);
@@ -248,6 +215,5 @@ namespace Z0
                 seek(dst,7) = bit.On;
             return dst;
         }
-
     }
 }

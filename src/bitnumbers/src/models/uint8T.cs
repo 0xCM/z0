@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static BitNumbers;
+    using static Typed;
 
     using S = uint8T;
     using W = W8;
@@ -94,6 +95,26 @@ namespace Z0
             get => data;
         }
 
+        public uint4 Lo
+        {
+            [MethodImpl(Inline)]
+            get => lo(this);
+        }
+
+        public uint4 Hi
+        {
+            [MethodImpl(Inline)]
+            get => hi(this);
+        }
+
+        [MethodImpl(Inline)]
+        public uint8T WithLo(uint4 src)
+            => movlo(src, this);
+
+        [MethodImpl(Inline)]
+        public uint8T WithHi(uint4 src)
+            => movhi(src, this);
+
         [MethodImpl(Inline)]
         public bool Equals(S y)
             => data == y.data;
@@ -155,18 +176,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(S src)
             => src.data;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator uint16_t(S src)
-        //     => (ushort)src.data;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator uint32_t(S src)
-        //     => (uint)src.data;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator uint64_t(S src)
-        //     => (ulong)src.data;
 
         [MethodImpl(Inline)]
         public static explicit operator int(S src)

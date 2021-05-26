@@ -14,12 +14,12 @@ namespace Z0.Asm
     [ApiComplete]
     public readonly ref struct RegBank
     {
-        readonly V512Bank V;
+        readonly ZmmBank V;
 
         readonly Gp64Bank Gp;
 
         [MethodImpl(Inline)]
-        internal RegBank(V512Bank v, Gp64Bank gp)
+        internal RegBank(ZmmBank v, Gp64Bank gp)
         {
             V = v;
             Gp = gp;

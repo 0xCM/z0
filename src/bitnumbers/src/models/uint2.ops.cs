@@ -33,14 +33,6 @@ namespace Z0
             where S : unmanaged
                 => ref @as<U,S>(src);
 
-        /// <summary>
-        /// Promotes a <see cref='U'/> to a <see cref='Z0.uint3'/>, as indicated by the <see cref='W3'/> selector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint3 extend(U src, W w)
-            => wrap3(src.Content);
 
         /// <summary>
         /// Promotes a <see cref='U2'/> to a <see cref='U3'/>, as indicated by the <see cref='W3'/> selector
@@ -54,33 +46,6 @@ namespace Z0
             => (uint3)src << 1;
 
         /// <summary>
-        /// Promotes a <see cref='U2'/> to a <see cref='U4'/>, as indicated by the <see cref='W4'/> selector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint4 extend(W4 w, U src)
-            => src;
-
-        /// <summary>
-        /// Promotes a <see cref='U2'/> to a <see cref='U5'/>, as indicated by the <see cref='W5'/> selector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint5 extend(W5 w, U src)
-            => src;
-
-        /// <summary>
-        /// Promotes a <see cref='U2'/> to a <see cref='Z0.uint6'/>, as indicated by the <see cref='W6'/> selector
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint6 extend(W6 w, U src)
-            => src;
-
-        /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
         /// </summary>
         /// <param name="src">The input value</param>
@@ -88,37 +53,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static U reduce(byte src, W w)
             => new U(src);
-
-        /// <summary>
-        /// (a,b) -> [bbaa]
-        /// </summary>
-        /// <param name="a">Source bits 0-1</param>
-        /// <param name="b">Source bits 2-3</param>
-        [MethodImpl(Inline), Op]
-        public static uint4 join(U a, U b)
-            => (uint4)a | ((uint4)b << 2);
-
-        /// <summary>
-        /// (a,b) -> [bbaa]
-        /// </summary>
-        /// <param name="a">Source bits 0-1</param>
-        /// <param name="b">Source bits 2-3</param>
-        /// <param name="c">Source bits 4-5</param>
-        /// <param name="d">Source bits 6-7</param>
-        [MethodImpl(Inline), Op]
-        public static uint6 join(U a, U b, U c)
-            => (uint6)a | ((uint6)b << 2) | ((uint6)c << 4);
-
-        /// <summary>
-        /// (a,b,c,d) -> [dd cc bb aa]
-        /// </summary>
-        /// <param name="a">Source bits 0-1</param>
-        /// <param name="b">Source bits 2-3</param>
-        /// <param name="c">Source bits 4-5</param>
-        /// <param name="d">Source bits 6-7</param>
-        [MethodImpl(Inline), Op]
-        public static uint8T join(U a, U b, U c, U d)
-            => (uint8T)a | ((uint8T)b << 2) | ((uint8T)c << 4) | ((uint8T)d << 6);
 
         /// <summary>
         /// Reinterprets an input reference as a mutable <see cref='U'/> reference cell
@@ -141,7 +75,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static U inc(U x)
-            => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
+            => !x.IsMax ? new U(core.add(x.data, 1), false) : U.Min;
 
         /// <summary>
         /// Converts a source integral value to an enum value

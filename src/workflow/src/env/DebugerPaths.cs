@@ -10,5 +10,11 @@ namespace Z0
     {
         FS.FilePath CdbLogPath()
             => Env.CdbLogPath.Value;
+
+        FS.FolderPath SymbolRoot()
+            => Env.SymCacheRoot;
+
+        FS.FolderPath NtSymbolDir()
+            => Env.DefaultSymbolCache;
     }
 }

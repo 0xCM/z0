@@ -7,20 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using api = Flags;
 
-    public struct Flags8<K> : IFlags<Flags8<K>,K,Pow2x8>
+    public struct Flags64<K> : IFlags<Flags64<K>,K,Pow2x64>
         where K : unmanaged
     {
-        public const byte Width = 8;
+        public const byte Width = 64;
 
-        public K Value {get;}
+        readonly K Data;
 
         [MethodImpl(Inline)]
-        public Flags8(K value)
-            => Value = value;
+        public Flags64(K value)
+            => Data = value;
 
         public BitWidth DataWidth
             => Width;
@@ -31,7 +31,7 @@ namespace Z0
             get => api.state(this, flag);
         }
 
-        public bit this[Pow2x8 flag]
+        public bit this[Pow2x64 flag]
         {
             [MethodImpl(Inline)]
             get => api.state(this, flag);
@@ -43,12 +43,18 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        [MethodImpl(Inline)]
-        public static implicit operator Flags8<K>(K src)
-            => new Flags8<K>(src);
+        public K Value
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator K(Flags8<K> src)
-            => src.Value;
+        public static implicit operator Flags64<K>(K src)
+            => new Flags64<K>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator K(Flags64<K> src)
+            => src.Data;
     }
 }

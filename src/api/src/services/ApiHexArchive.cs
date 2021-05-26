@@ -8,8 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     public class ApiHexArchive : AppService<ApiHexArchive>
     {

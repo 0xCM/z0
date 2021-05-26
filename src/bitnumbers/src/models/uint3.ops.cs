@@ -41,20 +41,9 @@ namespace Z0
             where S : unmanaged
                 => ref @as<U,S>(src);
 
-        /// <summary>
-        /// (a:3, b:3, c:2) -> [cc bbb aaa]
-        /// </summary>
-        /// <param name="a">Source bits 0-1</param>
-        /// <param name="b">Source bits 2-3</param>
-        /// <param name="c">Source bits 4-5</param>
-        /// <param name="d">Source bits 6-7</param>
-        [MethodImpl(Inline), Op]
-        public static uint8T join(U a, U b, U c)
-            => (uint8T)a | ((uint8T)b << 3) | ((uint8T)c << 6);
-
         [MethodImpl(Inline), Op]
         public static U inc(U x)
-            => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
+            => !x.IsMax ? new U(core.add(x.data, 1), false) : U.Min;
 
         [MethodImpl(Inline), Op]
         public static U dec(U x)
@@ -290,41 +279,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format(U src)
             => bit.format(src.data, FormatConfig3);
-
-        /// <summary>
-        /// Promotes a triad to an quartet
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint4 extend(U src, W4 w)
-            => src;
-
-        /// <summary>
-        /// Promotes a triad to an quintet
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint5 extend(U src, W5 w)
-            => src;
-
-        /// <summary>
-        /// Promotes a triad to an quintet
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint6 extend(U src, W6 w)
-            => src;
-
-        /// <summary>
-        /// Promotes a triad to an octet
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint8T extend(U src, W8 w)
-            => src;
     }
 }
