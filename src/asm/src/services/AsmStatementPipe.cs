@@ -195,6 +195,26 @@ namespace Z0.Asm
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
 
+        public uint CreateStatements(in AsmRoutine src, Span<AsmApiStatement> dst)
+        {
+            var instructions = src.Instructions.View;
+            var count = (uint)instructions.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(instructions,i);
+                ref var target = ref seek(dst,i);
+                target.BlockAddress = src.BaseAddress;
+                target.BlockOffset = (Address16)instruction.Offset;
+                target.Encoded = instruction.AsmHex;
+                target.Expression = instruction.Statment;
+                target.IP = instruction.IP;
+                target.OpCode = instruction.OpCode;
+                target.OpUri = src.Uri;
+                target.Sig = instruction.AsmSig;
+            }
+            return count;
+        }
+
         uint CreateStatements(in AsmInstructionBlock src, List<AsmApiStatement> dst)
         {
             var instructions = src.Instructions;

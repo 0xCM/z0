@@ -7,10 +7,9 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-
-    public class IceInstruction //: IAsmFxInfo
+    public class IceInstruction
     {
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()

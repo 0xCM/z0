@@ -222,11 +222,6 @@ namespace Z0.Asm
             resolver.ResolveParts(parts);
         }
 
-        // void RunExtractor(params PartId[] parts)
-        // {
-        //     Wf.ApiExtractor().Run();
-        // }
-
         void IndexApiPdbFiles(params PartId[] parts)
         {
             var builder = Wf.PdbIndexBuilder();
@@ -506,8 +501,9 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ListVendorManuals("intel", FS.Txt);
+            //ListVendorManuals("intel", FS.Txt);
 
+            RunExtractWorkflow();
             //Wf.AsmCatalogs().EmitAssetCatalog();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");

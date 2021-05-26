@@ -48,6 +48,7 @@ namespace Z0
 
         Index<IPart> SelectedParts;
 
+        Index<AsmRoutine> Routines;
 
         public ApiExtractor()
         {
@@ -55,6 +56,9 @@ namespace Z0
             Buffer = ApiExtracts.buffer();
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
             Options.Analyze = true;
+            Options.EmitStatements = true;
+            Routines = sys.empty<AsmRoutine>();
+
         }
 
         protected override void OnInit()
@@ -74,7 +78,9 @@ namespace Z0
         void SealCollected()
         {
             CollectedData = HostDatasets.Array();
+            Routines = CollectedData.SelectMany(x => x.Routines);
         }
+
 
         void EmitProcessContext()
         {
@@ -114,13 +120,43 @@ namespace Z0
                     }
                     Wf.Ran(flow, methods.Length);
                 }
-
             }
         }
 
         void Analyze()
         {
-            Wf.AsmAnalyzer().Analyze(CollectedData.SelectMany(x => x.Routines), Paths.AsmTableRoot());
+            Wf.AsmAnalyzer().Analyze(Routines, Paths.AsmTableRoot());
+        }
+
+        uint CountStatements()
+        {
+            var routines = Routines.View;
+            var count = routines.Length;
+            var total = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var routine = ref skip(routines,i);
+                total += (uint)routine.InstructionCount;
+            }
+            return total;
+
+        }
+
+        void EmitStatements()
+        {
+            var pipe = Wf.AsmStatementPipe();
+            var total = CountStatements();
+            var running = Wf.Running(string.Format("Building {0} statements", total));
+            var buffer = span<AsmApiStatement>(total);
+            var routines = Routines.View;
+            var count = routines.Length;
+            var offset = 0u;
+            for(var i=0; i<count; i++)
+                offset += pipe.CreateStatements(skip(routines,i), slice(buffer, offset));
+
+            Wf.Ran(running, string.Format("Built {0} statements", total));
+
+            pipe.EmitStatements(buffer, Paths.RootDir());
         }
 
         void RunWorkflow()
@@ -138,6 +174,9 @@ namespace Z0
 
             if(Options.Analyze)
                 Analyze();
+
+            if(Options.EmitStatements)
+                EmitStatements();
         }
 
         FS.FolderPath SegDir
@@ -173,26 +212,6 @@ namespace Z0
             Wf.SegmentTraverser().Traverse(segments, BinDir);
         }
 
-        // void RunExtractor()
-        // {
-        //     RunExtractor(Wf.ApiCatalog.PartIdentities);
-        // }
-
-        // public void Run(params PartId[] parts)
-        // {
-        //     var flow = Wf.Running(nameof(ApiExtractor));
-
-        //     Wf.Babble("Clearing output directories");
-        //     SegDir.Clear();
-        //     BinDir.Clear();
-
-        //     if(parts.Length != 0)
-        //         RunExtractor(@readonly(parts));
-        //     else
-        //         RunExtractor();
-
-        //     Wf.Ran(flow,nameof(ApiExtractor));
-        // }
 
         internal void Run(ApiExtractChannel receivers, FS.FolderPath? dst = null)
         {

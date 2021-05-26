@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Root;
 
@@ -13,13 +14,13 @@ namespace Z0
     {
         readonly Index<MemoryBlock> _Blocks;
 
-        public ByteSize MaxBlockSize {get;}
+        public ByteSize MaxBlockSize
+            => _Blocks.Select(x => x.Size).Max();
 
         [MethodImpl(Inline)]
-        public HexPack(Index<MemoryBlock> src, ByteSize max)
+        public HexPack(Index<MemoryBlock> src)
         {
             _Blocks = src;
-            MaxBlockSize = max;
         }
 
         public ReadOnlySpan<MemoryBlock> Blocks
@@ -37,7 +38,7 @@ namespace Z0
         public static HexPack Empty
         {
             [MethodImpl(Inline)]
-            get => new HexPack(Index<MemoryBlock>.Empty, 0);
+            get => new HexPack(Index<MemoryBlock>.Empty);
         }
     }
 }

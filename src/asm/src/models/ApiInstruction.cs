@@ -58,7 +58,7 @@ namespace Z0.Asm
             get => Encoded.Data;
         }
 
-        public AsmHexCode AmsHex
+        public AsmHexCode AsmHex
         {
             [MethodImpl(Inline)]
             get => Encoded.Data;
@@ -80,6 +80,12 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => Instruction.Specifier;
+        }
+
+        public AsmSigExpr AsmSig
+        {
+            [MethodImpl(Inline)]
+            get => AsmForm.Sig;
         }
 
         public MemoryAddress IP
@@ -114,7 +120,8 @@ namespace Z0.Asm
        public AsmOpCodeExpr OpCode
        {
             [MethodImpl(Inline)]
-            get => AsmCore.opcode(Instruction.OpCode.OpCodeString);
+            get => AsmForm.OpCode;
+            //AsmCore.opcode(Instruction.OpCode.OpCodeString);
        }
 
         [MethodImpl(Inline)]

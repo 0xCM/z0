@@ -27,6 +27,9 @@ public enum PartId : ulong
     [Symbol("math")]
     Math = 4,
 
+    [Symbol("math.test")]
+    MathTest = Math | Test,
+
     [Symbol("core")]
     Core = 5,
 
@@ -236,6 +239,9 @@ public enum PartId : ulong
     [Symbol("asm")]
     Asm = 123,
 
+    [Symbol("asm.test")]
+    AsmTest = Asm | Test,
+
     [Symbol("asm.g")]
     AsmLang = 124,
 
@@ -317,14 +323,8 @@ public enum PartId : ulong
     [Symbol("machines.test")]
     MachinesTest = Machines | Test,
 
-    [Symbol("math.test")]
-    MathTest = Math | Test,
-
     [Symbol("mkl.test")]
     MklApiTest = Mkl | Test,
-
-    [Symbol("asm.test")]
-    AsmTest = Asm | Test,
 
     [Symbol("gvec.test")]
     GVecTest = Cpu | Test,

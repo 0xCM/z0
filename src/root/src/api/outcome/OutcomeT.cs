@@ -20,7 +20,7 @@ namespace Z0
 
         public T Data {get;}
 
-        public string Message {get;}
+        readonly string _Message;
 
         public ulong MessageCode {get;}
 
@@ -31,7 +31,7 @@ namespace Z0
         {
             Ok = src.Ok;
             Data = default;
-            Message = src.Message;
+            _Message = src.Message;
             MessageCode = src.MessageCode;
         }
 
@@ -40,7 +40,7 @@ namespace Z0
         {
             Ok = src.Ok;
             Data = data;
-            Message = src.Message;
+            _Message = src.Message;
             MessageCode = src.MessageCode;
         }
 
@@ -49,7 +49,7 @@ namespace Z0
         {
             Ok = ok;
             Data = data;
-            Message = EmptyString;
+            _Message = EmptyString;
             MessageCode = api.u8(Ok);
         }
 
@@ -57,7 +57,7 @@ namespace Z0
         {
             Ok = ok;
             Data = default;
-            Message = message;
+            _Message = message;
             MessageCode = 0;
         }
 
@@ -66,7 +66,7 @@ namespace Z0
         {
             Ok = ok;
             Data = data;
-            Message = message ?? EmptyString;
+            _Message = message ?? EmptyString;
             MessageCode = api.u8(Ok);
         }
 
@@ -75,7 +75,7 @@ namespace Z0
         {
             Ok = false;
             Data = default;
-            Message = EmptyString;
+            _Message = EmptyString;
             MessageCode = code;
         }
 
@@ -84,15 +84,20 @@ namespace Z0
         {
             Ok = false;
             Data = data;
-            Message = e.ToString();
+            _Message = e.ToString();
             MessageCode = api.u8(Ok);
         }
+
+        public string Message
+            => _Message ?? "<null>";
+
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => MessageCode == ulong.MaxValue;
         }
+
 
         /// <summary>
         /// Extracts the enclosed data, if <see cref='Ok'/> is true
@@ -165,6 +170,10 @@ namespace Z0
             => src.Ok;
 
         [MethodImpl(Inline)]
+        public static implicit operator Outcome(Outcome<T> src)
+            => new Outcome(src.Ok, src.Message);
+
+        [MethodImpl(Inline)]
         public static implicit operator Outcome<T>(Exception error)
             => new Outcome<T>(error);
 
@@ -184,6 +193,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => new Outcome<T>(ulong.MaxValue);
+        }
+
+        public static Outcome<T> Success
+        {
+            [MethodImpl(Inline)]
+            get => new Outcome<T>(true);
         }
     }
 }

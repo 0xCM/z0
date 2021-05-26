@@ -9,5 +9,7 @@ namespace Z0
         public bool EmitContext;
 
         public bool Analyze;
+
+        public bool EmitStatements;
     }
 }

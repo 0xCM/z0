@@ -28,7 +28,7 @@ namespace Z0
 
         [Op]
         public static HexPack pack(MemoryBlock src)
-            => new HexPack(core.array(src), src.Size);
+            => new HexPack(core.array(src));
 
         [Op]
         public static HexPack pack(Index<MemoryBlock> src)
@@ -37,7 +37,7 @@ namespace Z0
             if(count == 0)
                 return HexPack.Empty;
             src.Sort();
-            return new HexPack(src, src.Select(x => x.Size).Max());
+            return new HexPack(src);
         }
 
         [Op]
@@ -75,18 +75,15 @@ namespace Z0
                 return HexPack.Empty;
             var buffer = alloc<MemoryBlock>(count);
 
-            var max = ByteSize.Zero;
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
                 ref readonly var code = ref skip(src,i);
                 seek(dst,i) = memory.memblock(code.Origin, code.Encoded);
-                if(code.Length > max)
-                    max = code.Length;
             }
 
             buffer.Sort();
-            return new HexPack(buffer, max);
+            return new HexPack(buffer);
         }
 
         [Op]
@@ -97,19 +94,16 @@ namespace Z0
                 return HexPack.Empty;
             var buffer = alloc<MemoryBlock>(count);
 
-            var max = ByteSize.Zero;
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
                 ref readonly var code = ref skip(src,i);
                 var encoded = code.Block.Encoded;
                 seek(dst,i) = memory.memblock(code.Origin, encoded);
-                if(encoded.Length > max)
-                    max = encoded.Length;
             }
 
             buffer.Sort();
-            return new HexPack(buffer, max);
+            return new HexPack(buffer);
         }
 
         [Op]
@@ -119,19 +113,16 @@ namespace Z0
             if(count == 0)
                 return HexPack.Empty;
 
-            var max = ByteSize.Zero;
             ref var dst = ref buffer.First;
             for(var i=0; i<count; i++)
             {
                 ref readonly var extract = ref skip(src,i);
                 var data = extract.Data;
                 seek(dst,i) = memory.memblock(extract.Origin, data);
-                if(data.Length > max)
-                    max = data.Length;
             }
 
             buffer.Sort();
-            return new HexPack(buffer, max);
+            return new HexPack(buffer);
         }
 
         [MethodImpl(Inline), Op]
@@ -151,9 +142,10 @@ namespace Z0
         [Op]
         public static ByteSize emit(in HexPack src, StreamWriter dst)
         {
+            var max = src.MaxBlockSize;
             var blocks = src.Blocks;
             var count = blocks.Length;
-            var buffer = span<char>(src.MaxBlockSize*2);
+            var buffer = span<char>(max*2);
             var total = 0u;
             for(var i=0u; i<count;i++)
             {
@@ -170,8 +162,8 @@ namespace Z0
 
         public static Outcome<HexPack> load(FS.FilePath src)
         {
-            var result = default(Outcome<HexPack>);
-            var unpacked = default(Outcome<ByteSize>);
+            var result = Outcome<HexPack>.Success;
+            var unpacked = Outcome<ByteSize>.Success;
             var size  = ByteSize.Zero;
             var lines = list<MemoryBlock>();
             var counter = z16;
@@ -190,113 +182,94 @@ namespace Z0
                 }
             }
 
-            return result;
+            if(result.Fail)
+                return result;
+            else
+                return new HexPack(lines.ToArray());
         }
 
         public static Outcome<ByteSize> unpack(ushort index, string src, out MemoryBlock dst)
         {
             var count = src.Length;
             var line = index + 1;
+            var result = Outcome.Success;
             dst = default;
             if(count == 0)
             {
                 dst = MemoryBlock.Empty;
-                return ByteSize.Zero;
+                return (false, "The input, it is empty");
             }
 
             if(first(src) != 'x')
-                return(false,$"Line {line} does not begin with the required character 'x'");
+                return(false, $"Line {src} does not begin with the required character 'x'");
 
             var i = src.IndexOf('h');
             if(i == NotFound)
-                return(false, $"Line {line} does not contain address terminator 'h'");
+                return(false, $"Line {src} does not contain address terminator 'h'");
 
-            var parsed = DataParser.parse(text.slice(src, 1, i-1), out MemoryAddress @base);
-            if(parsed.Fail)
-                return parsed;
+            result = DataParser.parse(text.slice(src, 1, i-1), out MemoryAddress @base);
+            if(result.Fail)
+                return (false, $"{result.Message} | Could not parse address from '{src}'");
 
             if(!text.unfence(src, SegFence, out var seg))
-                return (false, $"Line {line} does not contain segment fence");
+                return (false, $"Line {src} does not contain segment fence");
 
             if(!text.unfence(src, DataFence, out var data))
-                return (false, $"Line {line} does not contain data fence");
+                return (false, $"Line {src} does not contain data fence");
 
-            var segparts = text.split(src,SegSep);
+            var segparts = text.split(seg, SegSep);
             if(segparts.Length != 2)
-                return (false, $"Line {line} segement specifier does not have the required 2 components");
+                return (false, $"Line {src} segement specifier does not have the required 2 components");
 
-            DataParser.parse(segparts[0], out ushort segidx);
+            var segLeft = segparts[0];
+            DataParser.parse(segLeft, out ushort segidx);
             if(segidx != index)
-                return (false, $"Line {line} number does not correspond to the segement index");
+                return (false, $"Line {line} number does not correspond to the segement index {segidx}");
 
-            DataParser.parse(segparts[1], out ByteSize segsize);
+            var segRight = segparts[1];
+            result = DataParser.parse(segRight, out ByteSize segsize);
+            if(result.Fail)
+                return (false, $"{result.Message} | Could not parse segment size from {segRight}");
 
-            DataParser.parse(data, out BinaryCode code);
+            result = parse(data, out BinaryCode code);
+
+            if(result.Fail)
+                return (false, $"{result.Message} | Could not parse code from {data}");
+
             if(code.IsEmpty)
-                return (false, $"Line {line} contains no data");
+                return (false, $"Line {src} contains no data");
+
+            if(segsize != code.Length)
+                return (false, $"Expected {segsize} bytes but parsed {code.Length}");
+
 
             dst = new MemoryBlock(@base, segsize, code);
 
             return segsize;
         }
 
-        static Outcome<ByteSize> unpack_fast(uint index, ReadOnlySpan<char> src, out MemoryBlock dst)
+        public static Outcome parse(string src, out BinaryCode dst)
         {
             var result = Outcome.Success;
-            var count = src.Length;
-            if(count == 0)
+            var count = text.length(src);
+            if(count % 2 != 0)
+                return (false, $"An even number of nibbles was not provided in the source text {src}");
+            var size = count/2;
+            var buffer = alloc<byte>(size);
+            var input = span(src);
+            ref var output = ref first(buffer);
+            for(int i=0, j=0; i<count; i+=2, j++)
             {
-                dst = MemoryBlock.Empty;
-                return ByteSize.Zero;
-            }
-
-            dst = default;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var c = ref skip(src,i);
-                var origin =new MemoryRange(MemoryAddress.Zero,ByteSize.Zero);
-
-                if(i==0)
+                result = Hex.parse(skip(input,i), skip(input, i+1), out seek(output, j));
+                if(result.Fail)
                 {
-                    if(c != 'x')
-                    {
-                        result = (false,$"Line {index + 1} does not begin with the required character 'x'");
-                        return result;
-                    }
-                }
-                else
-                {
-                    if(i==1)
-                    {
-                        var buffer = CharBlock16.Null.Data;
-                        var max = buffer.Length;
-                        var j=0;
-                        while(j < max)
-                        {
-                            ref readonly var a = ref skip(src, i++);
-                            if(a != 'h')
-                                seek(buffer, j++) = a;
-                            else
-                                break;
-                        }
-
-                        var @base = 0ul;
-                        var size = Hex.parse(slice(buffer,0,j), bytes(@base));
-                        if(size != 0)
-                        {
-                            origin = new MemoryRange(@base, ByteSize.Zero);
-                        }
-
-
-                        //var number = slice(address,0,j);
-
-                    }
+                    dst = BinaryCode.Empty;
+                    return result;
                 }
             }
 
-
-            return result;
-
+            dst = buffer;
+            return true;
         }
 
         [Op]

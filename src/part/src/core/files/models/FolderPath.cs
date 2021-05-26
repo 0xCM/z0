@@ -95,15 +95,14 @@ namespace Z0
                 ? files(Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(path))
                 : FS.Files.Empty;
 
+            public FS.Files Files(string pattern, FS.FileExt ext, bool recurse)
+                => Exists ? Files(ext,recurse).Where(f => f.Name.Contains(pattern)) : FS.Files.Empty;
+
             public FS.Files Files(FileExt[] ext, bool recurse)
-                => Exists
-                ? new FS.Files(EnumerateFiles(recurse).Array())
-                : FS.Files.Empty;
+                => Exists ? new FS.Files(EnumerateFiles(recurse).Array()) : FS.Files.Empty;
 
             public FS.Files Files(bool recurse)
-                => Exists
-                ? files(Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(path))
-                : FS.Files.Empty;
+                => Exists ? files(Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(path)) : FS.Files.Empty;
 
             /// <summary>
             /// Nonrecursively enumerates part-owned folder files

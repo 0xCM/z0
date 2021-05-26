@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static ApiUriDelimiters;
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly struct ApiUri
@@ -63,12 +62,15 @@ namespace Z0
         public static ApiUriScheme scheme(string src)
             => Enum.TryParse(typeof(ApiUriScheme), src, true, out var result) ? (ApiUriScheme)result : ApiUriScheme.None;
 
-        public static ParseResult<ApiHostUri> fromFilename(string filename)
-            => host(Path.GetFileNameWithoutExtension(filename).Replace(Chars.Dot, ApiUriDelimiters.UriPathSep));
+        public static ParseResult<ApiHostUri> host(FS.FileName src)
+            => host(src.WithoutExtension.Name.Replace(Chars.Dot, ApiUriDelimiters.UriPathSep));
+
+        public static ParseResult<ApiHostUri> host(FS.FilePath src)
+            => host(src.FileName.WithoutExtension.Name.Replace(Chars.Dot, ApiUriDelimiters.UriPathSep));
 
         public static ParseResult<ApiHostUri> host(string src)
         {
-            var failure = root.unparsed<ApiHostUri>(src);
+            var failure = ParseResult.unparsed<ApiHostUri>(src);
             if(text.blank(src))
                 return failure;
 
@@ -85,7 +87,7 @@ namespace Z0
             if(text.blank(host))
                 return failure.WithReason("Host unspecified");
 
-            return root.parsed(src, new ApiHostUri(owner, host));
+            return ParseResult.parsed(src, new ApiHostUri(owner, host));
         }
 
         [Op]

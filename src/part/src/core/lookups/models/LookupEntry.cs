@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines an entry in a <see cref='LookupEntries{T,K}'/>
     /// </summary>
     public readonly struct LookupEntry<K,V>
-        where K : unmanaged
     {
         public K Key {get;}
 

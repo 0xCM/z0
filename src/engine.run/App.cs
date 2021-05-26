@@ -8,6 +8,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
+
     using static Root;
     using static core;
     using static Typed;
@@ -22,18 +23,58 @@ namespace Z0
         protected override void OnInit()
         {
             AssetRoot = Db.ZSrc("engine.run", "assets");
-
         }
 
         public App()
         {
+
         }
 
-        public void Run()
+        void Configure()
         {
             var settings = new EngineSettings();
             settings.Affinity = 0b10101101u;
             Wf.Row(settings.Affinity);
+        }
+
+
+        static void load(FS.FilePath src, Lookup<FS.FilePath,HexPack> success, Lookup<FS.FilePath,Outcome> fail)
+        {
+            var pack = HexPacks.load(src);
+            if(pack.Fail)
+                fail.Add(src, pack);
+            else
+            {
+                success.Add(src,pack.Data);
+            }
+        }
+
+        static Lookup<FS.FilePath,HexPack> load(FS.Files src)
+        {
+            var lookup = new Lookup<FS.FilePath,HexPack>();
+            var errors = new Lookup<FS.FilePath,Outcome>();
+            core.iter(src, path => load(path,lookup,errors), true);
+            return lookup.Seal();
+        }
+
+        public void Run()
+        {
+            var input = AssetRoot.Files("-parsed", FS.XPack, true);
+            var incount = input.Length;
+            var packs = load(input);
+            var entries = packs.Entries;
+            var outcount = entries.Length;
+
+            for(var i=0; i<outcount; i++)
+            {
+                ref readonly var entry = ref skip(entries,i);
+                var path = entry.Key;
+                var blocks = entry.Value.Blocks;
+                var count = blocks.Length;
+                var host = path.FileName.Format().Remove(".extracts.parsed.xpack").Replace(".","/");
+                Wf.Row(string.Format("Loaded {0} {1} blocks from {2}", count, host, path.ToUri()));
+            }
+
         }
 
         Task<uint> RunMachine(uint cycles)
