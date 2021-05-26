@@ -4,10 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct PdbServices
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IPeFile : IFile
     {
-        [Op]
-        internal static SymMetadataProvider metaprovider(in PdbSymbolSource source)
-            => new SymMetadataProvider(source);
+
+    }
+
+    [Free]
+    public interface IPeFile<T> : IPeFile
+        where T : struct, IPeFile<T>
+    {
+
     }
 }

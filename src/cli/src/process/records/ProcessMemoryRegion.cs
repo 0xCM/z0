@@ -4,9 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Windows;
-
     using System.Runtime.InteropServices;
+    using Windows;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ProcessMemoryRegion : IComparableRecord<ProcessMemoryRegion>

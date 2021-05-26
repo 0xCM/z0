@@ -13,7 +13,7 @@ namespace Z0
 
         static CmdResult run(IWfRuntime wf, ListFilesCmd cmd)
         {
-            var archive = Archives.create(cmd.SourceDir);
+            var archive = FileArchives.create(cmd.SourceDir);
             var files = cmd.SourceDir.EnumerateFiles(true).Where(f => cmd.Extensions.Contains(f.Ext));
             var counter = 0;
             var flow = wf.EmittingFile(cmd.TargetPath);

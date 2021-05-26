@@ -5,11 +5,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using System.Runtime.InteropServices;
 
     using Windows;
 
-    [Record]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct MemoryRangeInfo : IRecord<MemoryRangeInfo>
     {
         public const string TableId = "memory.range";

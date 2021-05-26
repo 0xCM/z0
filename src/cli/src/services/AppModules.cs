@@ -12,8 +12,7 @@ namespace Z0
         {
             try
             {
-                var pdb = src.Path.ChangeExtension(FS.Pdb);
-                return PdbServices.source(src.Path, pdb);
+                return PdbServices.source(src.Path, src.Path.ChangeExtension(FS.Pdb));
             }
             catch(Exception e)
             {

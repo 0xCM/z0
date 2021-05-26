@@ -18,7 +18,7 @@ namespace Z0
         public Index<FS.FileExt> ExtFilter {get;}
 
         [MethodImpl(Inline)]
-        internal FilteredArchive(FS.FolderPath root, string filter)
+        public FilteredArchive(FS.FolderPath root, string filter)
         {
             Root = root;
             TextFilter = filter;
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal FilteredArchive(FS.FolderPath root, FS.FileExt[] ext)
+        public FilteredArchive(FS.FolderPath root, FS.FileExt[] ext)
         {
             Root = root;
             TextFilter = EmptyString;

@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct PdbReaderStats
+    public enum PdbKind : byte
     {
-        public uint SeqPointCount;
+        None = 0,
 
-        public uint MethodCount;
+        Portable,
 
-        public uint DocCount;
+        Legacy,
     }
 }

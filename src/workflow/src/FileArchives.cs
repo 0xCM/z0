@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
-    public readonly partial struct Archives
+    public readonly partial struct FileArchives
     {
         [Op]
         public static FS.Files match(FS.FolderPath root, uint max, params FS.FileExt[] ext)

@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
+    using static Root;
     using static core;
+    using static Typed;
 
     public sealed class RegionProcessor : SpanProcessor<RegionProcessor,ProcessMemoryRegion>
     {

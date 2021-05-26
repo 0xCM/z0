@@ -18,6 +18,5 @@ namespace Z0
         public static MsgPattern<Count> IndexingPdbFiles => "Indexing component pdb files from {0} components";
 
         public static MsgPattern<Count> IndexedPdbMethods => "Indexed {0} pdb methods";
-
     }
 }

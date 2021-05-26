@@ -7,8 +7,6 @@ namespace Z0
     using Microsoft.DiaSymReader;
     using Microsoft.DiaSymReader.PortablePdb;
 
-    using static PdbModel;
-
     partial struct PdbServices
     {
         public static PdbReader reader(IWfRuntime wf, in PdbSymbolSource src)
@@ -16,13 +14,9 @@ namespace Z0
             var flow = wf.Running(Msg.CreatingPdbReader.Format(src.PdbPath));
             var reader = default(PdbReader);
             if(src.IsPortable)
-            {
                 reader = new PdbReader(wf, src, portable(src));
-            }
             else
-            {
                 reader = new PdbReader(wf, src, legacy(src));
-            }
             wf.Ran(flow, Msg.CreatedPdbReader.Format(src.PdbPath));
             return reader;
         }

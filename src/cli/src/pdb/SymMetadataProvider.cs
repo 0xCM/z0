@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
     using System.Reflection.PortableExecutable;
-    using Microsoft.DiaSymReader;
     using System.Runtime.InteropServices;
 
     partial struct PdbServices

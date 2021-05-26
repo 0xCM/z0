@@ -5,13 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using Microsoft.DiaSymReader;
 
+    using static Part;
     using static PdbModel;
 
-    partial struct PdbServices
+    public struct PdbMethodInfo : IRecord<PdbMethodInfo>
     {
-        public static Index<SequencePoint> points(ISymUnmanagedMethod src)
-            => src.GetSequencePoints().Array().Select(adapt);
+        public CliToken Token;
+
+        public SequencePoint[] SequencePoints;
     }
 }

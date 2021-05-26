@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Microsoft.DiaSymReader;
 
-    using static Part;
+    using static Root;
 
     using api = PdbServices;
 
@@ -52,6 +52,14 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => api.documents(Source);
+            }
+
+            public PdbMethodInfo Describe()
+            {
+                var dst = new PdbMethodInfo();
+                dst.Token = Token;
+                dst.SequencePoints = api.points(Source);
+                return dst;
             }
 
             [MethodImpl(Inline)]

@@ -18,7 +18,7 @@ namespace Z0
             => Root = root;
 
         public ListedFiles List()
-            => Archives.list(Root.EnumerateFiles(true).Array());
+            => new ListedFiles(Root.EnumerateFiles(true).Array().Mapi((i,x) => new ListedFile(i,x)));
 
         public Deferred<FS.FilePath> Enumerate()
             => Root.EnumerateFiles(true);

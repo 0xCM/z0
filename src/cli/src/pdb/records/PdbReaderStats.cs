@@ -4,19 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-    [Free]
-    public interface IPeFile : IFile
+    public struct PdbReaderStats : IRecord<PdbReaderStats>
     {
+        public uint SeqPointCount;
 
+        public uint MethodCount;
+
+        public uint DocCount;
     }
-
-    [Free]
-    public interface IPeFile<T> : IPeFile
-        where T : struct, IPeFile<T>
-    {
-
-    }
-
 }

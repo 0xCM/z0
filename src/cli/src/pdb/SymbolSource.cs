@@ -8,17 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
+    using static Root;
     using static PdbServices;
-
-    public enum PdbKind : byte
-    {
-        None = 0,
-
-        Portable,
-
-        Legacy,
-    }
 
     public class PdbSymbolSource : IDisposable
     {

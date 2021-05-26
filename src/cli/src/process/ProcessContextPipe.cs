@@ -8,8 +8,8 @@ namespace Z0
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static Root;
+    using static core;
 
     using PCK = ProcessContextFlag;
 

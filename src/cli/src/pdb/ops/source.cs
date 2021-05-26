@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static PdbModel;
-
     partial struct PdbServices
     {
         [Op]

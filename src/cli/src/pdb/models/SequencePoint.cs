@@ -15,9 +15,9 @@ namespace Z0
         {
             public uint Offset {get;}
 
-            public GridPoint<uint>  UpperLeft {get;}
+            public GridPoint<uint> UpperLeft {get;}
 
-            public GridPoint<uint>  LowerRight {get;}
+            public GridPoint<uint> LowerRight {get;}
 
             [MethodImpl(Inline)]
             public SequencePoint(uint offset, GridPoint<uint> x, GridPoint<uint> y)
