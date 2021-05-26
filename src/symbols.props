@@ -55,6 +55,7 @@
     <Dynamic>$(Src)dynamic/z0.dynamic.csproj</Dynamic>
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
 
+    <Engine>$(Src)engine/z0.engine.csproj</Engine>
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
     <Events>$(Src)events/z0.events.csproj</Events>
     <External>$(Src)external/z0.external.csproj</External>

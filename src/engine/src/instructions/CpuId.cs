@@ -44,7 +44,7 @@ namespace Z0.Asm
             => response(src, ref this);
 
         public string Format()
-            => AsmRender.format(this);
+            => Engine.format(this);
 
         public override string ToString()
             => Format();

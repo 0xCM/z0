@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\asm.core"
+		},
+		{
+			"path": "..\\asm.lang"
+		},
+		{
+			"path": "..\\engine"
+		}
+	],
+	"settings": {}
+}

@@ -173,6 +173,12 @@ public enum PartId : ulong
     [Symbol("bits")]
     Bits = 70,
 
+    [Symbol("engine")]
+    Engine = 71,
+
+    [Symbol("engine.run")]
+    EngineRun = Engine | Shell,
+
     [Symbol("bits.test")]
     BitsTest = Bits | Test,
 

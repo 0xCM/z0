@@ -142,16 +142,6 @@ namespace Z0.Asm
             return dst.ToString();
         }
 
-        [Op]
-        public static string format(in AsmComment src)
-            => src.Content.IsNonEmpty ? string.Format("; {0}",src.Content) : EmptyString;
-
-        [Op]
-        public static string format(in CpuId src)
-        {
-            const string FormatPattern = "fx:{0} subfx:{1} => eax:{2} ebx:{3} ecx:{4} edx:{5}";
-            return text.format(FormatPattern, src.Fx, src.SubFx, src.Eax, src.Ebx, src.Ecx, src.Edx);
-        }
 
         [Op]
         public static string format(in AsmBranchInfo src)

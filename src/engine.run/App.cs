@@ -2,21 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.AsmZ)]
-namespace Z0.Parts
+namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public sealed class AsmZ : Part<AsmZ>
+    using static Part;
+
+
+    class App
     {
 
-    }
-}
+        public static void Main(params string[] args)
+        {
 
-namespace Z0
-{
-    public static partial class XTend
-    {
-
+        }
     }
 }

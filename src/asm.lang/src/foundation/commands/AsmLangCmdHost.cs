@@ -17,23 +17,6 @@ namespace Z0.Asm
         {
         }
 
-        [Action(K.ShowRegBits)]
-        void ShowRegBits()
-        {
-            const string FormatPattern = "{0,-8} | {1,-10} | {2,-5} | {3,-10} | {4}";
-
-            var query = AsmRegs.query();
-            var classes = AsmRegs.classes();
-
-            using var log = ShowLog("register-bits", FS.Log);
-
-            foreach(var k in classes)
-            {
-                var registers = query.Where(k);
-                foreach(var r in registers)
-                    log.Show(r);
-            }
-        }
 
         // [Action(K.ShowModeSymbols)]
         // void ShowModeSymbols()

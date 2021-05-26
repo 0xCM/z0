@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.AsmZ)]
+[assembly: PartId(PartId.Engine)]
 namespace Z0.Parts
 {
     using System;
 
-    public sealed class AsmZ : Part<AsmZ>
+    public sealed class Engine : Part<Engine>
     {
 
     }

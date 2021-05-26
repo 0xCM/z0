@@ -103,16 +103,6 @@ namespace Z0.Asm
         public static RegWidth width(RegKind src)
             => (RegWidth)Bits.bitslice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
 
-        /// <summary>
-        /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegKind'/>
-        /// </summary>
-        /// <param name="i">The register index</param>
-        /// <param name="k">The register class</param>
-        /// <param name="w">The register width</param>
-        [MethodImpl(Inline), Op]
-        public static RegKind kind(RegIndex i, RegClass k, RegWidth w)
-            => (RegKind)((uint)i  << IndexField | (uint)k << ClassField | (uint)w << WidthField);
-
         [MethodImpl(Inline)]
         public static void split(RegKind src, out RegIndex c, out RegClass k, out RegWidth w)
         {
@@ -120,6 +110,7 @@ namespace Z0.Asm
             k = AsmRegs.@class(src);
             w = AsmRegs.width(src);
         }
+
 
         [Op]
         public static string format(Register src)
