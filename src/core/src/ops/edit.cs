@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static System.Runtime.CompilerServices.Unsafe;
+    using static Root;
 
     partial struct core
     {
@@ -88,5 +88,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(ReadOnlySpan<T> src)
             => cover(edit(first(src)), src.Length);
+
+        /// <summary>
+        /// Covers a memory segment with a span
+        /// </summary>
+        /// <param name="src">The base address</param>
+        /// <param name="size">The segment size, in bytes</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
+            => cover<byte>(src.Ref<byte>(), size);
     }
 }

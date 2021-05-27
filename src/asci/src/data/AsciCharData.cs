@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
-
-    using F = AsciCodeFacets;
+    using static core;
 
     [ApiComplete]
     public readonly partial struct AsciCharData

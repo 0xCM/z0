@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Numeric;
 
     public readonly struct Address<W,T> : IAddress<W,T>
         where W : unmanaged, INumericWidth
@@ -25,7 +24,7 @@ namespace Z0
         ulong Location64
         {
             [MethodImpl(Inline)]
-            get => force<T,ulong>(Location);
+            get => NumericCast.force<T,ulong>(Location);
         }
 
         public bool NonZero
@@ -35,11 +34,11 @@ namespace Z0
         }
 
         public string Identifier
-            => force<T,ulong>(Location).ToString("x") + "h";
+            => NumericCast.force<T,ulong>(Location).ToString("x") + "h";
 
         [MethodImpl(Inline)]
         public Address(ulong absolute)
-            => Location = Numeric.force<ulong,T>(absolute);
+            => Location = NumericCast.force<ulong,T>(absolute);
 
         public string Format()
             => Identifier;

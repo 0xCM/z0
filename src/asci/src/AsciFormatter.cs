@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static core;
+    using static Root;
+    using static Typed;
 
     [ApiHost]
     public unsafe readonly struct AsciFormatter
@@ -44,7 +45,6 @@ namespace Z0
         {
             buffer<A,N>(src, out var target, out var pSrc);
             var pDst = pchar(target);
-
             var len = nat64u(n);
             for(var i=0u; i<len; i++)
                 *pDst++ = (char)*pSrc++;

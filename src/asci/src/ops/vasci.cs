@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
+    using static core;
 
     partial struct Asci
     {
@@ -29,6 +28,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(sbyte offset, sbyte count)
             => slice(recover<char>(AsciCharData.CharBytes), offset, count);
-
     }
 }

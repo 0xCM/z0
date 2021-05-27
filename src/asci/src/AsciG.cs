@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     public readonly partial struct AsciG
     {
@@ -158,13 +159,13 @@ namespace Z0
             where A : unmanaged, IByteSeq
         {
             if(typeof(A) == typeof(asci2))
-                return recover<AsciCharCode>(cast(n2,src).View);
+                return recover<AsciCharCode>(cast(n2, src).View);
             else if(typeof(A) == typeof(asci4))
-                return recover<AsciCharCode>(cast(n4,src).View);
+                return recover<AsciCharCode>(cast(n4, src).View);
             else if(typeof(A) == typeof(asci8))
-                return recover<AsciCharCode>(cast(n8,src).View);
+                return recover<AsciCharCode>(cast(n8, src).View);
             else if(typeof(A) == typeof(asci16))
-                return recover<AsciCharCode>(cast(n16,src).View);
+                return recover<AsciCharCode>(cast(n16, src).View);
             else
                 return codes(n32, src);
         }
@@ -174,9 +175,9 @@ namespace Z0
             where A : unmanaged, IByteSeq
         {
             if(typeof(A) == typeof(asci32))
-                return recover<AsciCharCode>(cast(n32,src).View);
+                return recover<AsciCharCode>(cast(n32, src).View);
             else if(typeof(A) == typeof(asci64))
-                return recover<AsciCharCode>(cast(n64,src).View);
+                return recover<AsciCharCode>(cast(n64, src).View);
             else
                 return ReadOnlySpan<AsciCharCode>.Empty;
         }

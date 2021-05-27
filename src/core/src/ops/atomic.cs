@@ -28,15 +28,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to increment in-place</param>
         [MethodImpl(Inline), Op]
-        public static int atomic(ref int src)
+        public static long inc(ref long src)
             => Interlocked.Increment(ref src);
 
         /// <summary>
-        /// Atomically increments a value in-place
+        /// Atomically decrements a value in-place
         /// </summary>
         /// <param name="src">The value to increment in-place</param>
         [MethodImpl(Inline), Op]
-        public static long atomic(ref long src)
-            => Interlocked.Increment(ref src);
+        public static long dec(ref long src)
+            => Interlocked.Decrement(ref src);
+
+        /// <summary>
+        /// Atomically add a source value to a target
+        /// </summary>
+        /// <param name="src">The value to increment in-place</param>
+        [MethodImpl(Inline), Op]
+        public static long add(ref long dst, long src)
+            => Interlocked.Add(ref dst, src);
     }
 }

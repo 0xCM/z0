@@ -56,6 +56,12 @@ namespace Z0
                     Name = name;
             }
 
+            public FS.FolderName FolderName
+            {
+                [MethodImpl(Inline)]
+                get => FS.folder(Path.GetDirectoryName(Name));
+            }
+
             [MethodImpl(Inline)]
             public static FolderPath operator +(FolderPath a, FolderName b)
                 => new FolderPath(Z0.text.format(FolderJoinPattern, a.Name, b.Name));

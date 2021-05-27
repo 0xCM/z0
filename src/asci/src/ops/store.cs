@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
+    using static core;
 
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static void store(ReadOnlySpan<byte> src, char fill, Span<char> dst)
         {
-            var count = root.length(src,dst);
+            var count = core.length(src,dst);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var next = ref skip(src,i);

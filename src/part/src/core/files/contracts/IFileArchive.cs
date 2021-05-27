@@ -14,7 +14,10 @@ namespace Z0
     {
         FS.FolderPath Root {get;}
 
-        Deferred<FS.FilePath> ArchiveFiles()
+        Deferred<FS.FilePath> Files()
             => Root.EnumerateFiles(true);
+
+        Deferred<FS.FilePath> Files(FS.FileExt ext)
+            => Root.EnumerateFiles(ext, true);
     }
 }

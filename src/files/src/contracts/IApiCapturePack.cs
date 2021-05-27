@@ -9,13 +9,8 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost]
-    public sealed class ApiCapturePacks : AppService<ApiCapturePacks>
+    public interface IApiCapturePack : IFileArchive
     {
-        public ApiCapturePack Create(Timestamp ts)
-            => new ApiCapturePack(Db.CapturePacks() + FS.folder(ts.Format()));
 
-        public ApiCapturePack Create()
-            => Create(root.now());
     }
 }

@@ -7,11 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static System.Runtime.InteropServices.MemoryMarshal;
+    using static Root;
 
     partial struct core
     {
+        /// <summary>
+        /// Creates a <see cref='Span{T}'/> over a <typeparamref name='T'/> measured memory segment
+        /// </summary>
+        /// <param name="base">The segment base address</param>
+        /// <param name="count">The number of cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> cover<T>(MemoryAddress @base, uint count)
+            => cover<T>(@base.Pointer(), count);
+
         /// <summary>
         /// Creates a span over a memory segment
         /// </summary>

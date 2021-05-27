@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     public readonly struct ModuleMemory : ITextual
     {
@@ -29,7 +29,7 @@ namespace Z0
         public MemorySeg Segment
         {
             [MethodImpl(Inline)]
-            get => memseg(BaseAddress, MemorySize);
+            get => memory.memseg(BaseAddress, MemorySize);
         }
 
         public MemoryAddress LastAddress

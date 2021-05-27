@@ -80,6 +80,5 @@ namespace Z0
         [Op]
         public static ApiCapturePacks ApiCapturePacks(this IWfRuntime wf)
             => Svc.ApiCapturePacks.create(wf);
-
     }
 }

@@ -9,6 +9,6 @@ namespace Z0
         [Op]
         public static AsciSequence subseq<T>(T src, int i0, int i1)
             where T : unmanaged, IAsciSeq
-                => new AsciSequence(memory.segment(src.View, i0, i1).ToArray());
+                => new AsciSequence(core.segment(src.View, i0, i1).ToArray());
     }
 }

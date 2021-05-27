@@ -9,17 +9,16 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
-    public readonly struct Allocation<T> : IDisposable
-        where T : unmanaged
+    public readonly struct Allocation : IDisposable
     {
         readonly GCHandle _Handle;
 
         readonly uint _Size;
 
         [MethodImpl(Inline)]
-        internal Allocation(GCHandle handle, uint size)
+        public Allocation(GCHandle handle, uint size)
         {
             _Handle = handle;
             _Size = size;
@@ -31,22 +30,22 @@ namespace Z0
             get => _Handle.AddrOfPinnedObject();
         }
 
-        public ref T First
+        public ref byte First
         {
             [MethodImpl(Inline)]
-            get => ref  @ref<T>(Address);
+            get => ref  @ref<byte>(Address);
         }
 
-        public Span<T> Edit
+        public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => cover<T>(Address, _Size);
+            get => cover<byte>(Address, _Size);
         }
 
-        public ReadOnlySpan<T> View
+        public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => cover<T>(Address, _Size);
+            get => cover<byte>(Address, _Size);
         }
 
         public ByteSize Size
@@ -58,7 +57,7 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => Size/size<T>();
+            get => Size;
         }
 
         public void Dispose()

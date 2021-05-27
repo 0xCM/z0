@@ -9,9 +9,12 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct InputFile : IFsEntry<InputFile>
+   public readonly struct InputFile<T> : IFsEntry<InputFile<T>,T>
+        where T : unmanaged
     {
         public FS.FilePath Path {get;}
+
+        public T Kind {get;}
 
         public FS.PathPart Name
         {
@@ -20,15 +23,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public InputFile(FS.FilePath src)
-            => Path = src;
+        public InputFile(FS.FilePath src, T kind)
+        {
+            Path = src;
+            Kind = kind;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator InputFile(FS.FilePath src)
-            => new InputFile(src);
+        public static implicit operator FS.FilePath(InputFile<T> src)
+            => src.Path;
 
         [MethodImpl(Inline)]
-        public static implicit operator FS.FilePath(InputFile src)
+        public static implicit operator InputFile(InputFile<T> src)
             => src.Path;
     }
 }

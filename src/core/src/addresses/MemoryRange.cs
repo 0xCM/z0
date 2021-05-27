@@ -87,7 +87,7 @@ namespace Z0
             => this == src ? 0 : this < src ? -1 : 1;
 
         public string Format()
-            => text.bracket(string.Concat(Min.Format(), Chars.Comma, Chars.Space, Max.Format()));
+            => string.Format("[{0}]", string.Concat(Min.Format(), Chars.Comma, Chars.Space, Max.Format()));
 
         public override string ToString()
             => Format();

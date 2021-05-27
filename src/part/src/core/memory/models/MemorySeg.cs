@@ -10,13 +10,31 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.Vector128;
     using static Root;
-    using static memory;
+    using static core;
 
     /// <summary>
     /// Defines a reference to a (live) memory segment
     /// </summary>
     public readonly struct MemorySeg : IMemorySegment, ITextual, IEquatable<MemorySeg>, IHashed
     {
+
+        /// <summary>
+        /// Computes the whole number of T-cells identified by a reference
+        /// </summary>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        static uint count<T>(MemorySeg src)
+            => (uint)(src.Length/size<T>());
+
+        /// <summary>
+        /// Covers a memory reference with a readonly span
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<T> view<T>(MemorySeg src)
+            => cover(src.BaseAddress.Ref<T>(), count<T>(src));
+
         public const byte StorageSize = 16;
 
         readonly Vector128<ulong> Segment;
@@ -61,13 +79,13 @@ namespace Z0
         public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => memory.cover<byte>(BaseAddress, Length);
+            get => cover<byte>(BaseAddress, Length);
         }
 
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => memory.cover<byte>(BaseAddress, Length);
+            get => cover<byte>(BaseAddress, Length);
         }
 
         public MemoryAddress LastAddress
@@ -100,11 +118,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe ref byte Cell(int offset)
-            => ref memory.@ref<byte>((void*)(BaseAddress + offset));
+            => ref @ref<byte>((void*)(BaseAddress + offset));
 
         [MethodImpl(Inline)]
         public unsafe byte* Pointer(uint offset = 0)
             => BaseAddress.Pointer<byte>() + offset;
+
         public ref byte this[int index]
         {
             [MethodImpl(Inline)]
@@ -140,7 +159,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe MemorySpan ToSpan()
-            => new MemorySpan(Range, memory.edit(Pointer(), Size));
+            => new MemorySpan(Range, edit(Pointer(), Size));
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ulong>(in MemorySeg src)

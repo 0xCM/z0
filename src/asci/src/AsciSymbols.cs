@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static Root;
+    using static core;
     using static AsciCharData;
 
-    [ApiHost(ApiNames.AsciSymbols, true)]
+    [ApiHost]
     public readonly struct AsciSymbols
     {
         [MethodImpl(Inline), Op]

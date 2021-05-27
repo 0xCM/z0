@@ -127,7 +127,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format("{0}: {1}", Ok ? "Success" : "Fail", Ok ? (object)Data : (object) Message);
+            => Ok ? string.Format("{0}",Data) : string.Format("Error: {0}", Message);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public Outcome<T> OnSuccess(Action<T> f)

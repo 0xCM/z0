@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    [ApiHost(ApiNames.Asci, true)]
+    [ApiHost]
     public readonly partial struct Asci
     {
         static AsciSymbols AsciStrings => default;
