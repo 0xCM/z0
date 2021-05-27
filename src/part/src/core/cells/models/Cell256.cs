@@ -48,6 +48,18 @@ namespace Z0
             get => Vector256.GetUpper(Content);
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Empty.Equals(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
         public int BitWidth => 256;
 
         public int Size => 32;

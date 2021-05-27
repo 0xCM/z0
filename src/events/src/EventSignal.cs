@@ -20,7 +20,6 @@ namespace Z0
         public static EventSignal create(IEventSink sink, Type host, CorrelationToken ct = default)
             => new EventSignal(sink, host, ct);
 
-
         readonly IEventSink Sink;
 
         readonly CorrelationToken Ct;
@@ -43,10 +42,11 @@ namespace Z0
         }
 
         public void TableEmitting(Type type, FS.FilePath dst)
-            => Raise(emittingTable(Source, type, dst, Ct));
+            => Raise(emittingTable(Source, type, dst));
 
         public void EmittingTable<T>(FS.FilePath dst)
-            => Raise(emittingTable<T>(Source, dst, Ct));
+            where T : struct, IRecord<T>
+                => Raise(emittingTable<T>(Source, dst));
 
         public void Ran<T>(T data)
             => Raise(ran(Source, data, Ct));
@@ -82,18 +82,18 @@ namespace Z0
             => Raise(created(Source, data, Ct));
 
         public void EmittedTable<T>(Count count, FS.FilePath dst)
-            where T : struct
-                => Raise(emittedTable<T>(Source, count, dst, Ct));
+            where T : struct, IRecord<T>
+                => Raise(emittedTable<T>(Source, count, dst));
 
         public void EmittedTable<T>(FS.FilePath dst)
-            where T : struct
-                => Raise(emittedTable<T>(Source, dst, Ct));
+            where T : struct, IRecord<T>
+                => Raise(emittedTable<T>(Source, dst));
 
         public void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => Raise(emittedTable(Source, TableId.identify(type), count, dst, Ct));
+            => Raise(emittedTable(Source, TableId.identify(type), count, dst));
 
         public void EmittedTable(Type type, FS.FilePath dst)
-            => Raise(emittedTable(Source, TableId.identify(type), dst, Ct));
+            => Raise(emittedTable(Source, TableId.identify(type), dst));
 
         public void EmittingFile(FS.FilePath dst)
             => Raise(emittingFile(Source, dst, Ct));

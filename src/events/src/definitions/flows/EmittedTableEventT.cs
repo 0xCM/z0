@@ -10,6 +10,7 @@ namespace Z0
 
     [Event(Kind)]
     public class EmittedTableEvent<T> : ITerminalEvent<EmittedTableEvent<T>>
+        where  T : struct, IRecord<T>
     {
         public const string EventName = GlobalEvents.EmittedTable;
 
@@ -21,6 +22,9 @@ namespace Z0
 
         public FS.FilePath Target {get;}
 
+        public TableId Table
+            => TableId.identify<T>();
+
         public EmittedTableEvent()
         {
             EventId = EventId.Empty;
@@ -29,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EmittedTableEvent(WfStepId step, Count count, FS.FilePath target, CorrelationToken ct)
+        public EmittedTableEvent(WfStepId step, Count count, FS.FilePath target)
         {
             EventId = EventId.define(EventName, step);
             RowCount = count;
@@ -37,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EmittedTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
+        public EmittedTableEvent(WfStepId step, FS.FilePath target)
         {
             EventId = EventId.define(EventName, step);
             RowCount = 0;
@@ -54,5 +58,8 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static implicit operator EmittedTableEvent(EmittedTableEvent<T> src)
+            => new EmittedTableEvent(src.EventId, src.TableId, src.RowCount, src.Target);
     }
 }

@@ -8,14 +8,13 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.IO;
 
-    using static Part;
+    using static Root;
 
-
-    class EmissonLogger : IEmissionLogger
+    class WfEmissionLog : IWfEmissionLog
     {
         readonly FileStream Emissions;
 
-        internal EmissonLogger(FS.FilePath dst)
+        internal WfEmissionLog(FS.FilePath dst)
         {
             dst.EnsureParentExists().Delete();
             Emissions = dst.Stream();

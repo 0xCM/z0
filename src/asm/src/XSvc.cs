@@ -43,16 +43,12 @@ namespace Z0
             => Services.AsmJmpPipe.create(wf);
 
         [Op]
-        public static IAsmWriter AsmWriter(this IWfRuntime wf, FS.FilePath dst)
-            => new AsmWriter(dst, wf.AsmFormatter());
-
-        [Op]
-        public static AsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host)
-            => new AsmImmWriter(wf, host, wf.AsmFormatter());
-
-        [Op]
         public static AsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host, AsmFormatter formatter)
             => new AsmImmWriter(wf, host, formatter);
+
+        [Op]
+        public static AsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host, AsmFormatter formatter, FS.FolderPath root)
+            => new AsmImmWriter(wf, host, formatter, root);
 
         [Op]
         public static AsmDecoder AsmDecoder(this IWfRuntime wf)

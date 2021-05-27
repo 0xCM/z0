@@ -4,12 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct ApiExtractOptions
+    using System.Runtime.InteropServices;
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct ApiExtractSettings : IRecord<ApiExtractSettings>
     {
-        public bool EmitContext;
+        public const string TableId = "settings.apiextract";
 
-        public bool Analyze;
+        public Setting<bool> EmitContext;
 
-        public bool EmitStatements;
+        public Setting<bool> Analyze;
+
+        public Setting<bool> EmitStatements;
+
+        public static ApiExtractSettings Default()
+        {
+            var dst = new ApiExtractSettings();
+            dst.Analyze = false;
+            dst.EmitContext = false;
+            dst.EmitStatements = true;
+            return dst;
+        }
     }
 }

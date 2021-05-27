@@ -5,11 +5,12 @@
 namespace Z0
 {
     using static Root;
+    using static core;
 
     partial struct Settings
     {
         [Op, Closures(Closure)]
-        public static Outcome parse<T>(string src,  out Setting<T> dst, char delimiter = Chars.Colon)
+        public static Outcome parse<T>(string src, out Setting<T> dst, char delimiter = Chars.Colon)
         {
             dst = empty<T>();
             if(text.nonempty(src))
@@ -24,14 +25,14 @@ namespace Z0
 
                 if(typeof(T) == typeof(string))
                 {
-                    dst = define(name, root.generic<T>(input));
+                    dst = define(name, generic<T>(input));
                     return true;
                 }
                 else if (typeof(T) == typeof(bool))
                 {
                     if(DataParser.parse(input, out bool value))
                     {
-                        dst = define(name, memory.generic<T>(value));
+                        dst = define(name, generic<T>(value));
                         return true;
                     }
                 }
@@ -39,11 +40,11 @@ namespace Z0
                 {
                     if(DataParser.parse(input, out bit u1))
                     {
-                        dst = define(name, memory.generic<T>(u1));
+                        dst = define(name, generic<T>(u1));
                         return true;
                     }
                 }
-                else if(DataParser.nparse(input, out T g))
+                else if(DataParser.numeric(input, out T g))
                 {
                     dst = define(name, g);
                     return true;
@@ -58,7 +59,7 @@ namespace Z0
                 }
                 else if(src.Length == 1 && typeof(T) == typeof(char))
                 {
-                    dst = define(name, memory.generic<T>(name[0]));
+                    dst = define(name, generic<T>(name[0]));
                     return true;
                 }
             }

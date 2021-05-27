@@ -99,6 +99,12 @@ namespace Z0
         IWfDb Db()
             => new WfDb(this, Env.Db.Value);
 
+        /// <summary>
+        /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
+        /// </summary>
+        IWfDb Db(FS.FolderPath root)
+            => new WfDb(this, root);
+
         EventId Raise<E>(in E e)
             where E : IWfEvent
         {
@@ -147,7 +153,7 @@ namespace Z0
             return Ran(flow);
         }
 
-        IEmissionLogger Emissions
+        IWfEmissionLog Emissions
             => Services.EmissionLog;
 
         WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)

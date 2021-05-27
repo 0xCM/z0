@@ -38,6 +38,11 @@ namespace Z0.Asm
         public ref byte Cell(byte index)
             => ref seek(Bytes,index);
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
         public ref byte this[byte index]
         {
             [MethodImpl(Inline)]

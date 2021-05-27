@@ -32,6 +32,16 @@ namespace Z0.Asm
             Formatter = formatter;
         }
 
+        [MethodImpl(Inline)]
+        public AsmImmWriter(IWfRuntime wf, in ApiHostUri host, IAsmRoutineFormatter formatter, FS.FolderPath root)
+        {
+            Wf = wf;
+            Uri = host;
+            Db = Wf.Db(root);
+            ImmRoot = Db.ImmCaptureRoot();
+            Formatter = formatter;
+        }
+
         public Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
         {
             var dst = Db.AsmImmPath(Uri.Part, Uri, id, refined);

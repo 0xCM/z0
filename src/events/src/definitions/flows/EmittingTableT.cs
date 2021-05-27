@@ -11,6 +11,7 @@ namespace Z0
 
     [Event(Kind)]
     public readonly struct EmittingTableEvent<T> : IInitialEvent<EmittingTableEvent<T>>
+        where  T : struct, IRecord<T>
     {
         public const string EventName = GlobalEvents.EmittingTable;
 
@@ -18,22 +19,23 @@ namespace Z0
 
         public EventId EventId {get;}
 
-        public TableId TableId => TableId.identify(typeof(T));
-
         public FS.FilePath Target {get;}
 
         public FlairKind Flair => FlairKind.Running;
 
+        public TableId Table => TableId.identify<T>();
+
         [MethodImpl(Inline)]
-        public EmittingTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
+        public EmittingTableEvent(WfStepId step, FS.FilePath target)
         {
             EventId = EventId.define(EventName, step);
             Target = target;
         }
 
+
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(EventId, Msg.EmittingTable.Capture(TableId, Target));
+            => text.format(EventId, Msg.EmittingTable.Capture(Table, Target));
 
         public override string ToString()
             => Format();

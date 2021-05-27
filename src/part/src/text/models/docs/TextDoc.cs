@@ -14,6 +14,18 @@ namespace Z0
 
     public readonly struct TextDoc : IIndex<TextRow>
     {
+        public static ReadOnlySpan<TextDoc> load(ReadOnlySpan<FS.FilePath> src)
+        {
+            var dst = bag<TextDoc>();
+            root.iter(src, path => {
+                using var reader = path.Reader();
+                var attempt = TextDoc.parse(reader);
+                if(attempt)
+                    dst.Add(attempt.Value);
+            },true);
+            return dst.ToArray();
+        }
+
         [MethodImpl(Inline), Op]
         static bool skipline(TextLine src, in TextDocFormat spec)
             => src.IsEmpty || src.StartsWith(spec.CommentPrefix) || src.StartsWith(spec.RowBlockSep);

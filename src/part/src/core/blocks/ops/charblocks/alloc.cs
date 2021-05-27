@@ -177,6 +177,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static ref char alloc(N256 n, out CharBlock256 dst)
+        {
+            dst = default;
+            return ref c16(dst);
+        }
+
+
+        [MethodImpl(Inline), Op]
         public static void alloc(out CharBlock64 a, out CharBlock64 b)
         {
             a = default;

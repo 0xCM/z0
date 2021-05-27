@@ -14,7 +14,7 @@ namespace Z0.Tools
     {
         public ref AssembledAsm Assembled(in NasmEncoding src, out AssembledAsm dst)
         {
-            dst.Bitstring = new AsmBitstring(FormatBitstring(src.Encoded));
+            dst.Bitstring = FormatBitstring(src.Encoded);
             dst.Encoding = src.Encoded;
             dst.Expression = src.SourceText;
             dst.SourceLine = src.LineNumber;

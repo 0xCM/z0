@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using Microsoft.Diagnostics.Runtime;
 
-    using static core;
-
     using DP = DiagnosticProcessors;
     using DR = DiagnosticRecords;
 

@@ -12,10 +12,10 @@ namespace Z0
 
     public static class XEvents
     {
-        public static EventSignal Signal<T>(this IWfRuntime wf)
-            => wf.EventSink.Signal<T>();
+        // public static EventSignal Signal<T>(this IWfRuntime wf)
+        //     => wf.EventSink.Signal<T>();
 
-        public static EventSignal Signal(this IWfRuntime wf, WfHost source)
-            => wf.EventSink.Signal(source);
+        // public static EventSignal Signal(this IWfRuntime wf, WfHost source)
+        //     => wf.EventSink.Signal(source);
     }
 }

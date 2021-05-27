@@ -19,80 +19,103 @@ namespace Z0.Asm
     {
         AsmDecoder Decoder;
 
+        AsmBitstrings Bitstrings;
+
+        AsmThumbprints Thumbprints;
+
+        ApiHex ApiHex;
+
         protected override void OnInit()
         {
             Decoder = Wf.AsmDecoder();
+            Bitstrings = AsmBitstrings.service();
+            Thumbprints = Wf.AsmThumbprints();
+            ApiHex = Wf.ApiHex();
         }
 
         public ReadOnlySpan<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
-            var dst = root.list<AsmApiStatement>();
+            var dst = list<AsmApiStatement>();
             for(var i=0; i<count; i++)
                 CreateStatements(Decode(skip(src,i)), dst);
             dst.Sort();
             return dst.ViewDeposited();
         }
 
-        public Index<AsmApiStatement> BuildStatements(in ApiHostBlocks src)
+        public uint BuildStatements(in ApiHostBlocks src, List<AsmApiStatement> dst)
         {
-            var dst = root.list<AsmApiStatement>();
             var blocks = src.Blocks.View;
             var count = blocks.Length;
             var counter = 0u;
             for(var i=0; i<count; i++)
                 counter += CreateStatements(Decode(skip(blocks,i)), dst);
-            return dst.ToArray();
+            return counter;
         }
 
-        public Index<AsmHostStatements> EmitHostStatements(bool clear = true)
+        public ReadOnlySpan<AsmApiStatement> EmitStatements()
+            => EmitStatements(Db.AsmStatementRoot());
+
+        public ReadOnlySpan<AsmApiStatement> EmitStatements(FS.FolderPath root)
         {
-            var hex = Wf.ApiHex();
-            var blocks = hex.ReadBlocks().ToHostBlocks();
-            return EmitStatements(blocks, clear);
+            var blocks = ApiHex.ReadBlocks().ToHostBlocks();
+            return EmitStatements(blocks, root);
         }
 
-        public Index<AsmHostStatements> EmitStatements(ReadOnlySpan<ApiHostBlocks> src, bool clear = true)
+        public ReadOnlySpan<AsmApiStatement> EmitStatements(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath root)
         {
-            if(clear)
-                Db.AsmStatementRoot().Delete();
+            root.Delete();
 
             var count = src.Length;
-            var buffer = root.list<AsmHostStatements>();
+            var flow = Wf.Running(string.Format("Emitting statements for {0} host block sets", count));
+            var dst = list<AsmApiStatement>();
+            var buffer = list<AsmApiStatement>();
+            var counter = 0u;
             for(var i=0; i<count; i++)
             {
+                buffer.Clear();
+
                 ref readonly var blocks = ref skip(src,i);
                 if(blocks.Length == 0)
                     continue;
+
+                counter += BuildStatements(blocks, buffer);
+
                 var host = blocks.Host;
-                var statements = BuildStatements(blocks);
-                var scount = statements.Length;
-                var sview = statements.View;
-                var csvdst = Db.AsmStatementPath(host, FS.Csv);
-                var asmdst = Db.AsmStatementPath(host, FS.Asm);
-                var emittingAsm = Wf.EmittingFile(asmdst);
-                using var asmwriter = asmdst.Writer();
-                for(var j=0; j<scount;j++)
-                {
-                    ref readonly var statement = ref skip(sview,j);
-                    if(statement.BlockOffset == 0)
-                    {
-                        asmwriter.WriteLine(AsmBlockSeparator);
-                        asmwriter.WriteLine(string.Format("; {0}, uri={1}", statement.BlockAddress, statement.OpUri));
-                        asmwriter.WriteLine(AsmBlockSeparator);
-                    }
-
-                    asmwriter.WriteLine(string.Format("{0} {1,-36} ; {2}", statement.BlockOffset, statement.Expression, AsmThumbprints.from(statement)));
-                }
-
-                Wf.EmittedFile(emittingAsm, scount);
-
-                var emittingCsv = Wf.EmittingTable<AsmApiStatement>(csvdst);
-                var csvCount= Tables.emit(statements, csvdst);
-                Wf.EmittedTable(emittingCsv, csvCount);
-                buffer.Add(new AsmHostStatements(host, statements));
+                EmitHostAsm(host, buffer.ViewDeposited());
+                EmitRecords(host, buffer.ViewDeposited());
+                dst.AddRange(buffer);
             }
-            return buffer.ToArray();
+
+            Wf.Ran(flow, string.Format("Emitted {0} total statements", counter));
+            return dst.ViewDeposited();
+        }
+
+        void EmitHostAsm(ApiHostUri host, ReadOnlySpan<AsmApiStatement> src)
+        {
+            var dst = Db.AsmStatementPath(host, FS.Asm);
+            var flow = Wf.EmittingFile(dst);
+            var count = src.Length;
+            using var asmwriter = dst.Writer();
+
+            for(var j=0; j<count;j++)
+            {
+                ref readonly var statement = ref skip(src,j);
+                if(statement.BlockOffset == 0)
+                    EmitAsmBlockHeader(statement,asmwriter);
+
+                asmwriter.WriteLine(Format(statement));
+            }
+
+            Wf.EmittedFile(flow, count);
+        }
+
+
+        void EmitRecords(ApiHostUri host, ReadOnlySpan<AsmApiStatement> src)
+        {
+            var dst = Db.AsmStatementPath(host, FS.Csv);
+            var flow = Wf.EmittingTable<AsmApiStatement>(dst);
+            Wf.EmittedTable(flow, Tables.emit(src, AsmApiStatement.RenderWidths, dst));
         }
 
         public ReadOnlySpan<AsmApiStatement> EmitStatements(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
@@ -102,20 +125,12 @@ namespace Z0.Asm
             return statements;
         }
 
-        void ClearTarget()
-        {
-            var dir = Db.TableDir<AsmApiStatement>();
-            var flow = Wf.Running(Msg.ObliteratingDirectory.Format(dir));
-            dir.Delete();
-            Wf.Ran(flow, Msg.ObliteratedDirectory.Format(dir));
-        }
-
         public void EmitStatements(ReadOnlySpan<AsmApiStatement> src, FS.FolderPath? root = null)
         {
             ClearTarget();
 
             var thumbprints = hashset<AsmThumbprint>();
-            var formatter = Tables.formatter<AsmApiStatement>();
+            var formatter = Tables.formatter<AsmApiStatement>(AsmApiStatement.RenderWidths);
             var statements = src;
             var count = statements.Length;
             var host = ApiHostUri.Empty;
@@ -136,12 +151,12 @@ namespace Z0.Asm
                 if(i == 0)
                 {
                     host = uri.Host;
-                    tablePath = root == null ? Db.AsmStatementPath(host, FS.Csv) : Db.AsmStatementPath(root.Value, host,FS.Csv);
+                    tablePath = TablePath(host,root);
                     tableWriter = tablePath.Writer();
                     tableWriter.WriteLine(formatter.FormatHeader());
 
                     tableFlow = Wf.EmittingTable<AsmApiStatement>(tablePath);
-                    asmPath = root == null ? Db.AsmStatementPath(host, FS.Asm) : Db.AsmStatementPath(root.Value, host, FS.Asm);
+                    asmPath = AsmPath(host,root);
                     asmWriter = asmPath.Writer();
                     asmFlow = Wf.EmittingFile(asmPath);
                 }
@@ -169,23 +184,15 @@ namespace Z0.Asm
                 }
 
                 if(statement.BlockOffset == 0)
-                {
-                    asmWriter.WriteLine(AsmBlockSeparator);
-                    asmWriter.WriteLine(string.Format("; {0}, uri={1}", statement.BlockAddress, statement.OpUri));
-                    asmWriter.WriteLine(AsmBlockSeparator);
-                }
+                    EmitAsmBlockHeader(statement,asmWriter);
 
                 tableWriter.WriteLine(formatter.Format(statement));
-
-                var thumbprint = AsmRender.comment(AsmThumbprints.from(statement));
-                asmWriter.WriteLine(string.Format("{0} {1,-36} {2}", statement.BlockOffset, statement.Expression, thumbprint));
+                asmWriter.WriteLine(Format(statement));
 
                 counter++;
             }
 
-            var tpDefaultPath = Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Asm);
-            var tpPath = root == null ? tpDefaultPath : Db.TableDir<AsmApiStatement>(root.Value) + FS.file("thumbprints", FS.Asm);
-            Wf.AsmThumbprints().EmitThumbprints(thumbprints.OrderBy(x => x.Statement.Content).ToArray(),tpPath);
+            Thumbprints.EmitThumbprints(thumbprints.OrderBy(x => x.Statement.Content).ToArray(),ThumbprintPath(root));
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow,counter);
 
@@ -193,9 +200,10 @@ namespace Z0.Asm
             Wf.EmittedFile(asmFlow,counter);
         }
 
-        const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
+        public ReadOnlySpan<AsmApiStatement> ParseRecords()
+            => ParseStatements(Db.TableDir<AsmApiStatement>());
 
-        public uint CreateStatements(in AsmRoutine src, Span<AsmApiStatement> dst)
+        public uint CreateRecords(in AsmRoutine src, Span<AsmApiStatement> dst)
         {
             var instructions = src.Instructions.View;
             var count = (uint)instructions.Length;
@@ -204,13 +212,14 @@ namespace Z0.Asm
                 ref readonly var instruction = ref skip(instructions,i);
                 ref var target = ref seek(dst,i);
                 target.BlockAddress = src.BaseAddress;
-                target.BlockOffset = (Address16)instruction.Offset;
-                target.Encoded = instruction.AsmHex;
-                target.Expression = instruction.Statment;
                 target.IP = instruction.IP;
-                target.OpCode = instruction.OpCode;
-                target.OpUri = src.Uri;
+                target.BlockOffset = (Address16)instruction.Offset;
+                target.Expression = instruction.Statment;
+                target.Encoded = instruction.AsmHex;
                 target.Sig = instruction.AsmSig;
+                target.OpCode = instruction.OpCode;
+                target.Bitstring = instruction.AsmHex;
+                target.OpUri = src.Uri;
             }
             return count;
         }
@@ -261,22 +270,6 @@ namespace Z0.Asm
 
         const byte StatementFieldCount = AsmApiStatement.FieldCount;
 
-        public ReadOnlySpan<AsmApiStatement> ParseStatements()
-            => ParseStatements(Db.TableDir<AsmApiStatement>());
-
-
-        static ReadOnlySpan<TextDoc> LoadDocs(FS.FilePath[] src)
-        {
-            var dst = bag<TextDoc>();
-            root.iter(src, path => {
-                using var reader = path.Reader();
-                var attempt = TextDoc.parse(reader);
-                if(attempt)
-                    dst.Add(attempt.Value);
-            },true);
-            return dst.ToArray();
-        }
-
         void ParseStatements(FS.FilePath src, ConcurrentBag<AsmApiStatement> dst)
         {
             var flow = Wf.Running(FS.Msg.ParsingFile.Format(src));
@@ -304,49 +297,104 @@ namespace Z0.Asm
                 Wf.Error(Msg.CouldNotParseDocument.Format(src));
         }
 
-        uint ParseStatements(TextDoc doc, ConcurrentBag<AsmApiStatement> dst)
+        static Outcome<uint> ParseStatements(TextDoc doc, ConcurrentBag<AsmApiStatement> dst)
         {
             var counter = 0u;
-            if(doc.Header.Labels.Length == StatementFieldCount)
+            if(doc.Header.Labels.Length != StatementFieldCount)
+                return (false, Msg.UnexpectedFieldCount.Format(StatementFieldCount, doc.Header.Labels.Length));
+
+            var count = doc.RowCount;
+            var rows = doc.RowData.View;
+            for(var i=0; i<count; i++)
             {
-                var count = doc.RowCount;
-                var rows = doc.RowData.View;
-                for(var i=0; i<count; i++)
+                ref readonly var row = ref skip(rows,i);
+                var result = AsmParser.parse(row, out var statement);
+                if(result)
                 {
-                    ref readonly var row = ref skip(rows,i);
-                    var result = AsmParser.parse(row, out var statement);
-                    if(result)
-                    {
-                        dst.Add(statement);
-                        counter++;
-                    }
-                    else
-                        Wf.Error(Msg.CouldNotParseStatementRow.Format(row,result.Message));
+                    dst.Add(statement);
+                    counter++;
                 }
+                else
+                    return (false, Msg.CouldNotParseStatementRow.Format(row,result.Message));
             }
-            else
-                Wf.Error(Msg.UnexpectedFieldCount.Format(StatementFieldCount, doc.Header.Labels.Length));
             return counter;
         }
 
         public ReadOnlySpan<AsmApiStatement> ParseStatements(FS.FolderPath dir)
         {
             var files = dir.EnumerateFiles(FS.Csv, true).Array();
-            var flow = Wf.Running(string.Format("Parsing statements from {0} files", files.Length));
+            var flow = Wf.Running(ParsingStatements.Format(files.Length,dir));
             var dst = bag<AsmApiStatement>();
-            var docs = LoadDocs(files);
+            var docs = TextDoc.load(files);
             var counter = 0u;
             foreach(var doc in docs)
             {
-                var parsing = Wf.Running(string.Format("Parsing {0} rows", doc.RowCount));
+                var parsing = Wf.Running(ParsingStatementRows.Format(doc.RowCount));
                 var count = ParseStatements(doc, dst);
-                Wf.Ran(parsing,string.Format("Parsed {0} statements", count));
-                counter += count;
+                if(count.Fail)
+                    Wf.Error(count.Message);
+                else
+                {
+                    var scount = count.Data;
+                    Wf.Ran(parsing, ParsedStatementRows.Format(scount));
+                    counter += scount;
+                }
             }
 
-            Wf.Ran(flow, string.Format("Parsed {0} total statements", counter));
+            Wf.Ran(flow, ParsedStatements.Format(counter));
 
             return dst.ToArray();
         }
+
+        void ClearTarget()
+        {
+            var dir = Db.TableDir<AsmApiStatement>();
+            var flow = Wf.Running(Msg.ObliteratingDirectory.Format(dir));
+            dir.Delete();
+            Wf.Ran(flow, Msg.ObliteratedDirectory.Format(dir));
+        }
+
+        string Format(in AsmApiStatement src)
+            => string.Format("{0} {1,-36} ; {2} => {3}",
+                        src.BlockOffset,
+                        src.Expression,
+                        FormatThumbprint(src),
+                        FormatBitstring(src));
+
+        string FormatBitstring(in AsmApiStatement src)
+            => Bitstrings.Format(src.Encoded);
+
+        string FormatThumbprint(in AsmApiStatement src)
+            => AsmThumbprints.from(src).Format();
+
+        FS.FilePath ThumbprintPath(FS.FolderPath? root = null)
+        {
+            var tpDefaultPath = Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Asm);
+            var tpPath = root == null ? tpDefaultPath : Db.TableDir<AsmApiStatement>(root.Value) + FS.file("thumbprints", FS.Asm);
+            return tpPath;
+        }
+
+        static void EmitAsmBlockHeader(in AsmApiStatement first, StreamWriter dst)
+        {
+            dst.WriteLine(AsmBlockSeparator);
+            dst.WriteLine(string.Format("; {0}, uri={1}", first.BlockAddress, first.OpUri));
+            dst.WriteLine(AsmBlockSeparator);
+        }
+
+        FS.FilePath AsmPath(ApiHostUri host, FS.FolderPath? root = null)
+            => root == null ? Db.AsmStatementPath(host, FS.Asm) : Db.AsmStatementPath(root.Value, host, FS.Asm);
+
+        FS.FilePath TablePath(ApiHostUri host, FS.FolderPath? root = null)
+            => root == null ? Db.AsmStatementPath(host, FS.Csv) : Db.AsmStatementPath(root.Value, host,FS.Csv);
+
+        const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
+
+        public static MsgPattern<Count,FS.FolderPath> ParsingStatements => "Parsing statements from {0} files from {1}";
+
+        public static MsgPattern<Count> ParsedStatements => "Parsed {0} total statements";
+
+        public static MsgPattern<Count> ParsingStatementRows => "Parsing {0} rows";
+
+        public static MsgPattern<Count> ParsedStatementRows => "Parsing {0} rows";
     }
 }

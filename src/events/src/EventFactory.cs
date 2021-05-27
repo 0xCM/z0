@@ -134,30 +134,32 @@ namespace Z0
             => new EmittedFileEvent(step, path, ct);
 
         [Op, Closures(Closure)]
-        public static EmittingTableEvent<T> emittingTable<T>(WfStepId step, FS.FilePath dst, CorrelationToken ct)
-            => new EmittingTableEvent<T>(step, dst, ct);
-
-        [Op]
-        public static EmittingTableEvent emittingTable(WfStepId step, Type src, FS.FilePath dst, CorrelationToken ct)
-            => new EmittingTableEvent(step, src, dst, ct);
-
-        [Op]
-        public static EmittedTableEvent emittedTable(WfStepId step, TableId table, uint count, FS.FilePath dst, CorrelationToken ct)
-            => new EmittedTableEvent(step, table, count, dst, ct);
-
-        [Op]
-        public static EmittedTableEvent emittedTable(WfStepId step, TableId table, FS.FilePath dst, CorrelationToken ct)
-            => new EmittedTableEvent(step, table, dst, ct);
+        public static EmittingTableEvent<T> emittingTable<T>(WfStepId step, FS.FilePath dst)
+            where  T : struct, IRecord<T>
+                => new EmittingTableEvent<T>(step, dst);
 
         [Op, Closures(Closure)]
-        public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, Count count, FS.FilePath dst, CorrelationToken ct)
-            where T : struct
-                => new EmittedTableEvent<T>(step, count, dst, ct);
+        public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
+            where  T : struct, IRecord<T>
+                => new EmittedTableEvent<T>(step, count, dst);
+
+        [Op]
+        public static EmittingTableEvent emittingTable(WfStepId step, Type src, FS.FilePath dst)
+            => new EmittingTableEvent(step, src, dst);
+
+        [Op]
+        public static EmittedTableEvent emittedTable(WfStepId step, TableId table, uint count, FS.FilePath dst)
+            => new EmittedTableEvent(step, table, count, dst);
+
+        [Op]
+        public static EmittedTableEvent emittedTable(WfStepId step, TableId table, FS.FilePath dst)
+            => new EmittedTableEvent(step, table, dst);
+
 
         [Op, Closures(Closure)]
-        public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, FS.FilePath dst, CorrelationToken ct)
-            where T : struct
-                => new EmittedTableEvent<T>(step, dst, ct);
+        public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, FS.FilePath dst)
+            where  T : struct, IRecord<T>
+                => new EmittedTableEvent<T>(step, dst);
 
         [MethodImpl(Inline)]
         public static RanEvent<T> ran<H,T>(H host, T data, CorrelationToken ct)
@@ -169,7 +171,7 @@ namespace Z0
             => new RunningEvent(step, ct);
 
         [MethodImpl(Inline)]
-        public static RunningEvent<T> running<T>(WfHost host, string operation, T    data, CorrelationToken ct)
+        public static RunningEvent<T> running<T>(WfHost host, string operation, T data, CorrelationToken ct)
             => new RunningEvent<T>(host, operation, data, ct);
 
         [MethodImpl(Inline)]

@@ -11,7 +11,7 @@ namespace Z0
     partial class XApi
     {
         [Op]
-        public static Imm8R[] RefinedImmValues(this ParameterInfo param)
+        public static Index<Imm8R> RefinedImmValues(this ParameterInfo param)
         {
             if(param.IsRefinedImmediate())
                 return param.ParameterType.GetEnumValues().Cast<byte>().Array().ToImm8Values(ImmRefinementKind.Refined);
@@ -20,8 +20,7 @@ namespace Z0
         }
 
         [Op]
-        public static Imm8R[] ToImm8Values(this byte[] src, ImmRefinementKind kind)
+        public static Index<Imm8R> ToImm8Values(this byte[] src, ImmRefinementKind kind)
             => src.Map(x => new Imm8R(x));
-
     }
 }

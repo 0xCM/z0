@@ -15,7 +15,7 @@ namespace Z0
 
         ConcurrentDictionary<Type,IService> Lookup {get;}
 
-        public IEmissionLogger EmissionLog {get;}
+        public IWfEmissionLog EmissionLog {get;}
 
         public Env Env {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
             Wf = wf;
             Env = env;
             Lookup = new ConcurrentDictionary<Type, IService>();
-            EmissionLog = new EmissonLogger(target(env));
+            EmissionLog = new WfEmissionLog(target(env));
         }
 
 

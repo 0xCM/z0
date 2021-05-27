@@ -52,10 +52,7 @@ namespace Z0
         public void Dispose()
         {
             if(Storage.Count != 0)
-            {
                 term.warn("Sink disposed while events remain enqueued");
-            }
         }
     }
-
 }

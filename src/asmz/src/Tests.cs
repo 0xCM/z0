@@ -7,10 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
     using System.IO;
     using Z0.Tools;
-    using System.Runtime.InteropServices;
 
     using static Part;
     using static memory;
@@ -429,10 +427,10 @@ namespace Z0.Asm
         }
 
 
-        public Index<AsmHostStatements> EmitHostStatements()
+        public ReadOnlySpan<AsmApiStatement> EmitHostStatements()
         {
             var pipe = Wf.AsmStatementPipe();
-            return pipe.EmitHostStatements();
+            return pipe.EmitStatements();
         }
 
         public void CheckMemoryLookup()

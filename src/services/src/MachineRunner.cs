@@ -49,9 +49,10 @@ namespace Z0
                 if(options.EmitStatements || options.EmitAsmBitstrings)
                 {
                     var pipe = Wf.AsmStatementPipe();
-                    var statements = Emitted(pipe.EmitStatements(partitioned));
+                    var statements = pipe.EmitStatements(partitioned, Db.AsmStatementRoot());
+                    Emitted(statements);
                     if(options.EmitAsmBitstrings)
-                        Emitted(Wf.AsmBitstringEmitter().EmitBitstrings(statements.SelectMany(x => x.ApiStatements)));
+                        Emitted(Wf.AsmBitstringEmitter().EmitBitstrings(statements));
                 }
 
                 var apidata = Wf.ApiCatalogs();

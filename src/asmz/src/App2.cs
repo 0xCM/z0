@@ -187,7 +187,6 @@ namespace Z0.Asm
                 ref readonly var heap = ref skip(heaps,i);
                 Wf.Row(CliHeaps.describe(heap));
             }
-
         }
 
 
@@ -334,7 +333,6 @@ namespace Z0.Asm
         void EmitTableReport()
         {
             EmitTableReport(Db.ReportRoot() + FS.file("tabledefs", "rpt"));
-
         }
 
         void CorrelateApi()

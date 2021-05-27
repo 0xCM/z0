@@ -26,7 +26,16 @@ namespace Z0
         public FlairKind Flair => FlairKind.Ran;
 
         [MethodImpl(Inline)]
-        public EmittedTableEvent(WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)
+        internal EmittedTableEvent(EventId eid, TableId table, Count count, FS.FilePath dst)
+        {
+            EventId = eid;
+            TableId = table;
+            RowCount = count;
+            Target = dst;
+        }
+
+        [MethodImpl(Inline)]
+        public EmittedTableEvent(WfStepId step, TableId dataset, uint count, FS.FilePath target)
         {
             EventId = EventId.define(EventName, step);
             TableId = dataset;
@@ -35,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EmittedTableEvent(WfStepId step, TableId dataset, FS.FilePath target, CorrelationToken ct)
+        public EmittedTableEvent(WfStepId step, TableId dataset, FS.FilePath target)
         {
             EventId = EventId.define(EventName, step);
             TableId = dataset;

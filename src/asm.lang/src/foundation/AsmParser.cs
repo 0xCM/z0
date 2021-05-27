@@ -172,6 +172,7 @@ namespace Z0.Asm
                 dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
                 result += sig(skip(cells, i++), out dst.Sig);
                 dst.OpCode = AsmCore.opcode(skip(cells, i++));
+                dst.Bitstring = dst.Encoded;
                 if(!DataParser.parse(skip(cells, i++), out dst.OpUri))
                     return (false, $"Failed to parse uri text <{skip(cells,i)}>");
 

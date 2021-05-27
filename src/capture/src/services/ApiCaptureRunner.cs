@@ -8,6 +8,7 @@ namespace Z0
     using System.Diagnostics;
 
     using Z0.Asm;
+    using static core;
 
     public class ApiCaptureRunner : AppService<ApiCaptureRunner>
     {
@@ -23,8 +24,22 @@ namespace Z0
             var hostcount = hosts.Length;
             var routines = root.list<AsmHostRoutines>();
             for(var i=0; i<hostcount; i++)
-                routines.Add(capture.CaptureHost(memory.skip(hosts,i), dst));
+                routines.Add(capture.CaptureHost(skip(hosts,i), dst));
             return routines.ToArray();
+        }
+
+        public void EmitImm(Index<PartId> parts, FS.FolderPath root)
+        {
+            var flow = Wf.Running();
+            Wf.ImmEmitter().Emit(parts, root);
+            Wf.Ran(flow);
+        }
+
+        public void EmitImm(ReadOnlySpan<ApiHostUri> hosts, FS.FolderPath root, Delegates.SpanReceiver<AsmRoutine> receiver = null)
+        {
+            var flow = Wf.Running();
+            Wf.ImmEmitter().Emit(hosts, root, receiver);
+            Wf.Ran(flow);
         }
 
         public Index<AsmHostRoutines> Capture(Index<PartId> parts)
@@ -70,7 +85,7 @@ namespace Z0
         }
 
         public Index<AsmHostRoutines> Capture(PartId part, CaptureWorkflowOptions? options = null)
-            => Capture(root.array(part), CaptureWorkflowOptions.EmitImm);
+            => Capture(array(part), CaptureWorkflowOptions.EmitImm);
 
         Index<AsmHostRoutines> CaptureParts(Index<PartId> parts)
         {

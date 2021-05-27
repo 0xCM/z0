@@ -66,7 +66,7 @@ namespace Z0
             => bit.parse(src, out dst);
 
         [MethodImpl(Inline)]
-        public static Outcome nparse<T>(string src, out T dst)
+        public static Outcome numeric<T>(string src, out T dst)
             => Numeric.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
@@ -192,7 +192,7 @@ namespace Z0
             => MemoryRangeParser.parse(src, out dst);
 
         [MethodImpl(Inline)]
-        public static Outcome parse<T>(string src,  out Setting<T> dst, char delimiter = Chars.Colon)
+        public static Outcome parse<T>(string src, out Setting<T> dst, char delimiter = Chars.Colon)
             => Settings.parse(src, out dst, delimiter);
     }
 }

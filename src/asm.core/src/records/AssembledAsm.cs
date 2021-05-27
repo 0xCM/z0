@@ -19,6 +19,6 @@ namespace Z0.Asm
 
         public BinaryCode Encoding;
 
-        public AsmBitstring Bitstring;
+        public TextBlock Bitstring;
     }
 }

@@ -44,7 +44,7 @@ namespace Z0
 
         ApiCatalogs Catalogs;
 
-        ApiExtractOptions Options;
+        ApiExtractSettings Options;
 
         Index<IPart> SelectedParts;
 
@@ -55,10 +55,8 @@ namespace Z0
             Identity = MultiDiviner.Service;
             Buffer = ApiExtracts.buffer();
             Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
-            Options.Analyze = true;
-            Options.EmitStatements = true;
+            Options = ApiExtractSettings.Default();
             Routines = sys.empty<AsmRoutine>();
-
         }
 
         protected override void OnInit()
@@ -80,7 +78,6 @@ namespace Z0
             CollectedData = HostDatasets.Array();
             Routines = CollectedData.SelectMany(x => x.Routines);
         }
-
 
         void EmitProcessContext()
         {
@@ -146,15 +143,15 @@ namespace Z0
         {
             var pipe = Wf.AsmStatementPipe();
             var total = CountStatements();
-            var running = Wf.Running(string.Format("Building {0} statements", total));
+            var running = Wf.Running(CreatingStatements.Format(total));
             var buffer = span<AsmApiStatement>(total);
             var routines = Routines.View;
             var count = routines.Length;
             var offset = 0u;
             for(var i=0; i<count; i++)
-                offset += pipe.CreateStatements(skip(routines,i), slice(buffer, offset));
+                offset += pipe.CreateRecords(skip(routines,i), slice(buffer, offset));
 
-            Wf.Ran(running, string.Format("Built {0} statements", total));
+            Wf.Ran(running, CreatedStatements.Format(total));
 
             pipe.EmitStatements(buffer, Paths.RootDir());
         }
@@ -226,5 +223,11 @@ namespace Z0
             Paths = new ApiExtractPaths(dst.Root);
             RunWorkflow();
         }
+
+        public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";
+
+        public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
+
+
     }
 }

@@ -135,6 +135,18 @@ namespace Z0
         public bool Equals(Vector128<ulong> src)
             => Data.Equals(src);
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Empty.Equals(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct

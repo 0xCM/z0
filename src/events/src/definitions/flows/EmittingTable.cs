@@ -25,7 +25,7 @@ namespace Z0
         public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
-        public EmittingTableEvent(WfStepId step, Type type, FS.FilePath target, CorrelationToken ct)
+        public EmittingTableEvent(WfStepId step, Type type, FS.FilePath target)
         {
             EventId = EventId.define(EventName, step);
             TableId = Z0.TableId.identify(type);

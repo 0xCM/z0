@@ -133,5 +133,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T generic<T>(decimal src)
             => As<decimal,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(string src)
+            => As<string,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(Type src)
+            => As<Type,T>(ref src);
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
     {
         public const string TableId = "asm.statements";
 
-        public const byte FieldCount = 8;
+        public const byte FieldCount = 9;
 
         public MemoryAddress BlockAddress;
 
@@ -33,6 +33,8 @@ namespace Z0
 
         public AsmOpCodeExpr OpCode;
 
+        public AsmBitstring Bitstring;
+
         public OpUri OpUri;
 
         [MethodImpl(Inline)]
@@ -40,6 +42,6 @@ namespace Z0
             => IP.CompareTo(src.IP);
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{16,16,16,40,32,32,32,80};
+            => new byte[FieldCount]{16,16,16,64,32,64,32,128,80};
     }
 }

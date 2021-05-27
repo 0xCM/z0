@@ -7,23 +7,40 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    public readonly struct AsmBitstring : ITextual
+    using api = AsmBitstrings;
+
+    public readonly struct AsmBitstring
     {
-        public TextBlock Content {get;}
+        readonly AsmHexCode Code {get;}
 
         [MethodImpl(Inline)]
-        public AsmBitstring(TextBlock content)
+        internal AsmBitstring(AsmHexCode src)
         {
-            Content = content;
+            Code = src;
         }
 
-        [MethodImpl(Inline)]
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Code.IsEmpty;
+        }
+
+        public ReadOnlySpan<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => api.chars(Code);
+        }
+
         public string Format()
-            => Content;
+            => api.format(Code);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmBitstring(AsmHexCode src)
+            => new AsmBitstring(src);
     }
 }
