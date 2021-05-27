@@ -235,6 +235,7 @@ namespace Z0
         {
             counter = 0u;
 
+            var location = FS.path(src.Owner.Location);
             var catalog = ApiQuery.partcat(src);
             var flow = Wf.Running(string.Format("Resolving part {0}", src.Id));
             var hosts = root.list<ResolvedHost>();
@@ -265,7 +266,7 @@ namespace Z0
                 }
             }
 
-            var result = new ResolvedPart(src.Id, hosts.ToArray());
+            var result = new ResolvedPart(src.Id, location, hosts.ToArray());
             Wf.Ran(flow, string.Format("Resolved {0} members from {1}", counter, src.Id));
             return result;
         }

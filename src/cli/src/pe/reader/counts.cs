@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
+    using static Root;
 
     using I = System.Reflection.Metadata.Ecma335.TableIndex;
 

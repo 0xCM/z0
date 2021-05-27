@@ -9,14 +9,13 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial class PeReader
     {
-        public Index<MsilMetadata> ReadMsil()
+        public ReadOnlySpan<MsilMetadata> ReadMsil()
         {
-            var dst = sys.list<MsilMetadata>();
+            var dst = list<MsilMetadata>();
             var types = @readonly(MD.TypeDefinitions.ToArray());
             var typeCount = types.Length;
             for(var k=0u; k<typeCount; k++)
@@ -47,7 +46,7 @@ namespace Z0
                     }
                  }
             }
-            return dst.ToArray();
+            return dst.ViewDeposited();
         }
     }
 }

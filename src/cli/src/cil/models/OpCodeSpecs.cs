@@ -10,9 +10,6 @@ namespace Z0
         [ApiComplete]
         public readonly struct OpCodeSpecs
         {
-            //
-            // Use packed bitfield for flags to avoid code bloat
-            //
             public const int OperandTypeMask = 0x1F;              // 000000000000000000000000000XXXXX
 
             public const int FlowControlShift = 5;                // 00000000000000000000000XXXX00000

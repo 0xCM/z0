@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct StringIndex : ICliHeapKey<StringIndex>
     {
@@ -24,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringIndex(StringHandle value)
-            => Value = memory.u32(value);
+            => Value = u32(value);
 
         public string Format()
             => Value.ToString("X");
@@ -39,5 +40,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator StringIndex(StringHandle src)
             => new StringIndex(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator StringHandle(StringIndex src)
+            => @as<StringIndex,StringHandle>(src);
     }
 }

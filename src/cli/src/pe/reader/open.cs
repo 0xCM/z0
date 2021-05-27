@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.IO;
 
-    using static Part;
+    using static Root;
 
     partial class PeTableReader
     {

@@ -82,10 +82,7 @@ namespace Z0
                 if(outcome)
                     dst.Add(row);
                 else
-                {
                     Wf.Warn(line);
-                    //return Index<MsilMetadata>.Empty;
-                }
             }
 
             Wf.Ran(flow, dst.Count);
@@ -115,6 +112,7 @@ namespace Z0
                 writer.WriteLine();
 
             }
+
             Wf.EmittedFile(flow, count);
         }
 

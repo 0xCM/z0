@@ -72,7 +72,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => P;
         }
-
     }
-
 }

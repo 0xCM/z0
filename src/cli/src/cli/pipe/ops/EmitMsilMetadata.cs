@@ -34,22 +34,22 @@ namespace Z0
         public FS.FilePath MsilPath(Assembly src)
             => Db.Table<MsilMetadata>(src.GetSimpleName());
 
-        public Index<MsilMetadata> EmitMsilMetadata(Assembly src)
+        public ReadOnlySpan<MsilMetadata> EmitMsilMetadata(Assembly src)
         {
-            var methods = Index<MsilMetadata>.Empty;
+            var methods = ReadOnlySpan<MsilMetadata>.Empty;
             var srcPath = FS.path(src.Location);
             if(Cli.valid(srcPath))
             {
                 var processing = Wf.Running(srcPath);
                 using var reader = PeReader.create(srcPath);
                 methods = reader.ReadMsil();
-                var view = methods.View;
+                var view = methods;
                 var count = (uint)methods.Length;
                 if(count != 0)
                 {
                     var dst = MsilPath(src);
                     var flow = Wf.EmittingTable<MsilMetadata>(dst);
-                    Tables.emit(methods,dst);
+                    Tables.emit(methods, dst);
                     Wf.EmittedTable<MsilMetadata>(flow, count);
                 }
 

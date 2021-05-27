@@ -9,8 +9,8 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static PeRecords;
 
     partial class PeTableReader

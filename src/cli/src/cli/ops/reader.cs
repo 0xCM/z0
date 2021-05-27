@@ -10,10 +10,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection;
     using System.Reflection.PortableExecutable;
-    using Microsoft.CodeAnalysis;
-
-    using static Part;
-    using static core;
 
     partial struct Cli
     {

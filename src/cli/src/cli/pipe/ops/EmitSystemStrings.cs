@@ -5,30 +5,31 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
 
     using static core;
 
     partial class CliPipe
     {
-        public Index<CliSystemString> EmitSystemStringInfo()
+        public ReadOnlySpan<CliSystemString> EmitSystemStringInfo()
             => EmitSystemStringInfo(Wf.Components);
 
-        public Index<CliSystemString> EmitSystemStringInfo(ReadOnlySpan<Assembly> src)
+        public ReadOnlySpan<CliSystemString> EmitSystemStringInfo(ReadOnlySpan<Assembly> src)
         {
             var count = src.Length;
-            var dst = DataList.create<CliSystemString>(16404);
+            var dst = list<CliSystemString>(16404);
             for(var i=0; i<count; i++)
                 EmitSystemStringInfo(skip(src,i), dst);
-            return dst.Emit();
+            return dst.ViewDeposited();
         }
 
-        public uint EmitSystemStringInfo(Assembly src, DataList<CliSystemString> dst)
+        public uint EmitSystemStringInfo(Assembly src, List<CliSystemString> dst)
         {
             var srcPath = FS.path(src.Location);
             using var reader = PeTableReader.open(srcPath);
             var records = reader.SystemStrings();
-            dst.Add(records);
+            dst.AddRange(records);
             Db.EmitTable<CliSystemString>(records, src.GetSimpleName());
             return records.Count;
         }

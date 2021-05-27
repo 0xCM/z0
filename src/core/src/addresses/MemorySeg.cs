@@ -17,7 +17,6 @@ namespace Z0
     /// </summary>
     public readonly struct MemorySeg : IMemorySegment, ITextual, IEquatable<MemorySeg>, IHashed
     {
-
         /// <summary>
         /// Computes the whole number of T-cells identified by a reference
         /// </summary>

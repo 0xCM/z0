@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe Span<T> Content<T>()
             where T : unmanaged
-                => memory.cover<byte>((byte*)Handle.ToPointer(), (uint)BufferSize).Recover<T>();
+                => core.cover<byte>((byte*)Handle.ToPointer(), (uint)BufferSize).Recover<T>();
 
         /// <summary>
         /// Fills a token-identified buffer with data from a source span and returns the target memory to the caller as a span
@@ -68,7 +68,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = this;
-            var srcBytes = memory.bytes(src);
+            var srcBytes = core.bytes(src);
             var dstBytes = dst.Content<byte>();
             if(srcBytes.Length <= dst.Size)
             {

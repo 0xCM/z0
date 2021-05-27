@@ -12,6 +12,8 @@ namespace System.Reflection.Metadata
     using System.Reflection.Metadata.Ecma335;
     using System.Text;
     using System.Globalization;
+    using System.Reflection.Metadata;
+
 
     [Flags]
     public enum MetadataVisualizerOptions

@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.IO;
 
-    using static Root;
     using static core;
 
     partial class CliPipe
@@ -42,22 +41,6 @@ namespace Z0
             }
         }
 
-        public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs(Assembly src)
-        {
-            var path = FS.path(src.Location);
-            if(Cli.valid(path))
-            {
-
-                using var reader = PeReader.create(path);
-                return reader.ReadAssemblyRefs();
-            }
-            else
-            {
-                return Index<AssemblyRefInfo>.Empty;
-            }
-
-        }
-
         uint EmitAssemblyRefs(Assembly src, IRecordFormatter formatter, StreamWriter dst)
         {
             var path = FS.path(src.Location);
@@ -75,26 +58,6 @@ namespace Z0
 
             }
             return counter;
-        }
-
-        public ReadOnlySpan<AssemblyRefInfo> ReadAssemblyRefs()
-        {
-            var components = Wf.ApiCatalog.Components.View;
-            var count = components.Length;
-            var dst = root.list<AssemblyRefInfo>();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var component = ref skip(components,i);
-                var path = FS.path(component.Location);
-                if(Cli.valid(path))
-                {
-                    using var reader = PeReader.create(path);
-                    var refs = reader.ReadAssemblyRefs();
-                    root.iter(refs,r => dst.Add(r));
-                }
-            }
-            dst.Sort();
-            return dst.ViewDeposited();
         }
 
         public void EmitAssemblyRefs()

@@ -13,12 +13,15 @@ namespace Z0
     {
         public PartId Part {get;}
 
+        public FS.FilePath Location {get;}
+
         public Index<ResolvedHost> Hosts {get;}
 
         [MethodImpl(Inline)]
-        public ResolvedPart(PartId part, Index<ResolvedHost> hosts)
+        public ResolvedPart(PartId part, FS.FilePath location, Index<ResolvedHost> hosts)
         {
             Part = part;
+            Location = location;
             Hosts = hosts;
         }
 
@@ -30,7 +33,7 @@ namespace Z0
         public static ResolvedPart Empty
         {
             [MethodImpl(Inline)]
-            get => new ResolvedPart(PartId.None, sys.empty<ResolvedHost>());
+            get => new ResolvedPart(0, FS.FilePath.Empty, sys.empty<ResolvedHost>());
         }
     }
 }

@@ -10,6 +10,7 @@ namespace System.Reflection.Metadata
     using System.Reflection.Emit;
     using System.Reflection;
     using System.Reflection.Metadata.Ecma335;
+    using System.Reflection.Metadata;
 
     public class ILVisualizer
     {
@@ -226,13 +227,11 @@ namespace System.Reflection.Metadata
         /// Dumps all instructions in the stream into provided string builder.
         /// The blockOffset specifies the relative position of the block within method body (if known).
         /// </summary>
-        public void DumpILBlock(ReadOnlySpan<byte> ilBytes, int length, StringBuilder dst,
-            IReadOnlyList<HandlerSpan> spans = null, int blockOffset = 0, IReadOnlyDictionary<int, string> markers = null)
+        public void DumpILBlock(ReadOnlySpan<byte> ilBytes, int length, StringBuilder dst, IReadOnlyList<HandlerSpan> spans = null,
+            int blockOffset = 0, IReadOnlyDictionary<int, string> markers = null)
         {
             if (ilBytes == null)
-            {
                 return;
-            }
 
             int spanIndex = 0;
             int curIndex = DumpILBlock(ilBytes, length, dst, spans, blockOffset, 0, spanIndex, IndentString, markers, out spanIndex);
@@ -240,17 +239,8 @@ namespace System.Reflection.Metadata
             Debug.Assert(spans == null || spanIndex == spans.Count);
         }
 
-        int DumpILBlock(
-            ReadOnlySpan<byte> ilBytes,
-            int length,
-            StringBuilder sb,
-            IReadOnlyList<HandlerSpan> spans,
-            int blockOffset,
-            int curIndex,
-            int spanIndex,
-            string indent,
-            IReadOnlyDictionary<int, string> markers,
-            out int nextSpanIndex)
+        int DumpILBlock(ReadOnlySpan<byte> ilBytes, int length, StringBuilder sb, IReadOnlyList<HandlerSpan> spans, int blockOffset,
+            int curIndex, int spanIndex, string indent, IReadOnlyDictionary<int, string> markers, out int nextSpanIndex)
         {
             int lastSpanIndex = spanIndex - 1;
 
@@ -426,15 +416,10 @@ namespace System.Reflection.Metadata
         }
 
         static bool StartsSpan(IReadOnlyList<HandlerSpan> spans, int spanIndex, int curIndex)
-        {
-            return spans != null && spanIndex < spans.Count && spans[spanIndex].StartOffset == (uint)curIndex;
-        }
+            => spans != null && spanIndex < spans.Count && spans[spanIndex].StartOffset == (uint)curIndex;
 
         static bool EndsSpan(IReadOnlyList<HandlerSpan> spans, int spanIndex, int curIndex)
-        {
-            return spans != null && spanIndex >= 0 && spans[spanIndex].EndOffset == (uint)curIndex;
-        }
-
+            => spans != null && spanIndex >= 0 && spans[spanIndex].EndOffset == (uint)curIndex;
 
         public static IReadOnlyList<HandlerSpan> GetHandlerSpans(ImmutableArray<ExceptionRegion> entries)
         {

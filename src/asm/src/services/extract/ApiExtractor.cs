@@ -9,11 +9,31 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
     using static Root;
     using static core;
+
+
+    public class ApiCollection
+    {
+        internal Index<ResolvedPart> _ResolvedParts;
+
+        internal ApiCollection()
+        {
+            _ResolvedParts = new();
+        }
+
+        public ReadOnlySpan<ResolvedPart> ResolvedParts
+        {
+
+            [MethodImpl(Inline)]
+            get => _ResolvedParts.View;
+        }
+
+    }
 
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>
@@ -30,9 +50,9 @@ namespace Z0
 
         ApiExtractChannel Receivers;
 
-        ConcurrentBag<ApiHostDataset> HostDatasets;
+        ConcurrentBag<ApiHostDataset> DatasetReceiver;
 
-        Index<ApiHostDataset> CollectedData;
+        Index<ApiHostDataset> CollectedDatasets;
 
         ApiExtractPaths Paths;
 
@@ -48,6 +68,8 @@ namespace Z0
 
         Index<IPart> SelectedParts;
 
+        Index<ResolvedPart> ResolvedParts;
+
         Index<AsmRoutine> Routines;
 
         IApiPack Pack;
@@ -59,6 +81,7 @@ namespace Z0
             Exclusions = root.hashset(core.array("ToString","GetHashCode", "Equals", "ToString"));
             Options = ApiExtractSettings.Default();
             Routines = sys.empty<AsmRoutine>();
+            ResolvedParts = sys.empty<ResolvedPart>();
         }
 
         protected override void OnInit()
@@ -69,7 +92,7 @@ namespace Z0
             Formatter = Wf.AsmFormatter();
             HexPacks = Wf.ApiHexPacks();
             Receivers = new ApiExtractChannel();
-            HostDatasets = new();
+            DatasetReceiver = new();
             Catalogs = Wf.ApiCatalogs();
             Paths = new ApiExtractPaths(Db.AppLogRoot());
             SelectedParts = Wf.ApiCatalog.Parts;
@@ -77,8 +100,8 @@ namespace Z0
 
         void SealCollected()
         {
-            CollectedData = HostDatasets.Array();
-            Routines = CollectedData.SelectMany(x => x.Routines);
+            CollectedDatasets = DatasetReceiver.Array();
+            Routines = CollectedDatasets.SelectMany(x => x.Routines);
         }
 
         void EmitProcessContext()
@@ -92,7 +115,7 @@ namespace Z0
             var regions = pipe.EmitRegions(process, ts, dir);
             pipe.EmitDump(process, Pack.DumpPath(process, ts));
 
-            var members = ApiMembers.create(CollectedData.SelectMany(x => x.Members));
+            var members = ApiMembers.create(CollectedDatasets.SelectMany(x => x.Members));
             var rebasing = Wf.Running();
             var entries = Catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
             Wf.Ran(rebasing);
@@ -165,8 +188,8 @@ namespace Z0
             Paths.ExtractRoot().Clear();
             Paths.AsmSourceRoot().Clear(true);
 
-            var resolved = SelectedParts.Map(Resolver.ResolvePart);
-            ExtractParts(resolved, false);
+            ResolvedParts = SelectedParts.Map(Resolver.ResolvePart);
+            ExtractParts(ResolvedParts, false);
 
             SealCollected();
 
@@ -213,20 +236,30 @@ namespace Z0
             Wf.SegmentTraverser().Traverse(segments, BinDir);
         }
 
-        internal void Run(ApiExtractChannel receivers, FS.FolderPath? dst = null)
+        internal ApiCollection Run(ApiExtractChannel receivers, FS.FolderPath? dst = null)
         {
             Receivers = receivers;
             if(dst != null)
                 Paths = new ApiExtractPaths(dst.Value);
             RunWorkflow();
+            return CollectAll();
         }
 
-        internal void Run(ApiExtractChannel receivers, IApiPack dst)
+        ApiCollection CollectAll()
+        {
+            var collection = new ApiCollection();
+            collection._ResolvedParts = ResolvedParts;
+            return collection;
+
+        }
+
+        internal ApiCollection Run(ApiExtractChannel receivers, IApiPack dst)
         {
             Pack = dst;
             Receivers = receivers;
             Paths = new ApiExtractPaths(dst.Root);
             RunWorkflow();
+            return CollectAll();
         }
 
         public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";

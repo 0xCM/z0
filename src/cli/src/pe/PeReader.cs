@@ -43,7 +43,6 @@ namespace Z0
             }
         }
 
-
         MetadataReader _MD;
 
         PEMemoryBlock? _MetadataBlock;

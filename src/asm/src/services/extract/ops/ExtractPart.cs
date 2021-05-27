@@ -26,7 +26,7 @@ namespace Z0
                 ref readonly var host = ref skip(hosts,i);
                 var extracted = ExtractHostDatast(host);
                 counter += extracted.Routines.Count;
-                HostDatasets.Add(extracted);
+                DatasetReceiver.Add(extracted);
             }
             return counter;
         }

@@ -5,17 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
-    public interface ICilOpCode
-    {
-        string Name {get;}
+    using static Root;
+    using static core;
+    using static CliRows;
 
-        ILOpCode Id {get;}
-    }
-
-    public interface ICilOpCode<K> : ICilOpCode
-        where K : unmanaged, ICilOpCode<K>
+    partial class CliReader
     {
 
     }

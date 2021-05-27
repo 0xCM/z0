@@ -16,11 +16,6 @@ namespace Z0.Asm
 
     public class Tests : AppService<Tests>
     {
-       public void UnpackRespack()
-        {
-            var unpacker = ResPackUnpacker.create(Wf);
-            unpacker.Emit(Db.AppLogDir());
-        }
 
         public void ProcessMsDocs()
         {
@@ -28,36 +23,20 @@ namespace Z0.Asm
             var dst = Db.AppLog("dbghelp", FS.ext("yml"));
             var tool = Wf.MsDocs();
             tool.Process(src,dst);
-
         }
 
-        // Z0.MemoryFile OpenResPack()
-        // {
-        //     var path = Wf.Db().Package("respack") + FS.file("z0.respack", FS.Dll);
-        //     var map = MemoryFiles.map(path);
-        //     return map;
-        // }
-
-        void EmitContextSummary()
-        {
-            var dst = Db.AppLog("context.regions", FS.Csv);
-            Wf.ProcessContextPipe().EmitContextSummary(dst);
-        }
-
-        void CheckMetadata(PartId id)
+        void CheckMetadata(PartId part)
         {
             var tool = Wf.Roslyn();
-            if(Wf.ApiCatalog.FindComponent(id, out var assembly))
+            if(Wf.ApiCatalog.FindComponent(part, out var assembly))
             {
-                var name = string.Format("z0.{0}.compilation", id.Format());
+                var name = string.Format("z0.{0}.compilation", part.Format());
                 var metadata = Cli.metaref(assembly);
                 var comp = tool.Compilation(name, metadata);
                 var symbol = comp.GetAssemblySymbol(metadata);
                 var gns = symbol.GlobalNamespace;
                 var types = gns.GetTypes();
                 root.iter(types, show);
-
-                //Wf.Row(symbol.Name);
             }
 
             void show(CodeSymbolModels.TypeSymbol src)
@@ -66,60 +45,6 @@ namespace Z0.Asm
                 Wf.Row(src);
                 root.iter(src.GetMembers(), m => Wf.Row(m));
             }
-        }
-
-        // void CheckSolutionParser()
-        // {
-        //     var src = FS.path(@"C:\Dev\z0\z0.machine.sln");
-        //     var tool = Wf.Roslyn();
-        //     var sln = tool.LoadSolution(src);
-        //     var projects = sln.Projects;
-        // }
-
-
-        void ResolveMethods()
-        {
-            var dst = Db.AppLog("resolved-methods", FS.Log);
-            var running = Wf.EmittingFile(dst);
-            var methods = ResolveParts(PartId.GMath, PartId.Cpu, PartId.Math);
-            var count = methods.Count;
-            using var writer = dst.Writer();
-            for(var i=0u; i<count; i++)
-            {
-                var method = methods[i];
-                writer.WriteLine(method.Description);
-
-            }
-            Wf.EmittedFile(running, count);
-        }
-
-
-        ResolvedMethods ResolveParts(params PartId[] src)
-        {
-            var resolver = Wf.ApiResolver();
-            var dst = root.list<ResolvedMethod>();
-            var count = src.Length;
-            var view = @readonly(src);
-            for(var k=0; k<count; k++)
-            {
-                var id = skip(view,k);
-                if(Wf.ApiCatalog.FindPart(id, out var part))
-                {
-                    var resolved = resolver.ResolvePart(part);
-                    var hosts = resolved.Hosts.View;
-                    for(var i=0; i<hosts.Length; i++)
-                    {
-                        ref readonly var host = ref skip(hosts,i);
-                        var methods = host.Methods.View;
-                        for(var j=0; j<methods.Length; j++)
-                        {
-                            ref readonly var method = ref skip(methods,j);
-                            dst.Add(method);
-                        }
-                    }
-                }
-            }
-            return ResolvedMethods.create(dst.ViewDeposited());
         }
 
 
@@ -150,7 +75,6 @@ namespace Z0.Asm
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
             => Wf.ApiCatalogs().EmitApiClasses();
 
-
         public ListFilesCmd EmitFileListCmdSample()
         {
             var cmd = new ListFilesCmd();
@@ -164,22 +88,6 @@ namespace Z0.Asm
 
         CmdResult EmitFileList()
             => Wf.Router.Dispatch(EmitFileListCmdSample());
-
-        void CheckAlloc()
-        {
-            var count = 0xFF;
-            using var allocation = memory.gcalloc<ulong>(count);
-            ref var target = ref allocation.First;
-            for(var i=0u; i<count; i++)
-            {
-                seek(target,i) = i*2;
-            }
-            for(var i=0u; i<count; i++)
-            {
-                if(skip(target,i) != 2*i)
-                    Wf.Error("Good allocation gone bad?");
-            }
-        }
 
 
         void RenderJmp()
@@ -200,7 +108,6 @@ namespace Z0.Asm
             var b = "B:true";
             Settings.parse(b, out Setting<bool> _b);
             Wf.Row(_b);
-
         }
 
         const byte FieldCount = 2;
@@ -230,13 +137,6 @@ namespace Z0.Asm
         }
 
 
-        public void RunOldXedWf()
-        {
-            var xed = XedWf.create(Wf);
-            xed.Run();
-
-        }
-
         public void EmitFormAspects()
         {
             var catalog = Wf.XedCatalog();
@@ -262,7 +162,6 @@ namespace Z0.Asm
             }
         }
 
-
         void CollectMemStats()
         {
             var dst = Db.ProcessContextRoot();
@@ -274,7 +173,8 @@ namespace Z0.Asm
             var postjit = pipe.Emit(dst, ts, "postjit", flags);
         }
 
-        static ReadOnlySpan<byte> x7ffaa76f0ae0 => new byte[32]{0x0f,0x1f,0x44,0x00,0x00,0x48,0x8b,0xd1,0x48,0xb9,0x50,0x0f,0x24,0xa5,0xfa,0x7f,0x00,0x00,0x48,0xb8,0x30,0xdd,0x99,0xa6,0xfa,0x7f,0x00,0x00,0x48,0xff,0xe0,0};
+        static ReadOnlySpan<byte> x7ffaa76f0ae0
+            => new byte[32]{0x0f,0x1f,0x44,0x00,0x00,0x48,0x8b,0xd1,0x48,0xb9,0x50,0x0f,0x24,0xa5,0xfa,0x7f,0x00,0x00,0x48,0xb8,0x30,0xdd,0x99,0xa6,0xfa,0x7f,0x00,0x00,0x48,0xff,0xe0,0};
 
         void CheckV()
         {
@@ -282,7 +182,7 @@ namespace Z0.Asm
             var mask = cpu.vindices(cpu.vload(w256,x7ffaa76f0ae0), 0x48);
             var bits = recover<bit>(Cells.alloc(w256).Bytes);
             var buffer = Cells.alloc(w256).Bytes;
-            BitPack.unpack1x32(mask,bits);
+            BitPack.unpack1x32(mask, bits);
             var j=z8;
             for(byte i=0; i<count; i++)
             {
@@ -332,7 +232,7 @@ namespace Z0.Asm
                 var src = skip(files,i);
                 var dst = Db.AppLogDir() + src.FileName.ChangeExtension(FS.Il);
                 var records = pipe.LoadMetadata(src);
-                pipe.EmitCode(records,dst);
+                pipe.EmitCode(records, dst);
             }
         }
 

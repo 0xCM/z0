@@ -7,12 +7,13 @@ namespace Z0
     using System;
 
     using static PeRecords;
+    using static core;
 
     partial class PeReader
     {
         public ReadOnlySpan<SectionHeaderInfo> ReadSectionHeaders()
         {
-            var dst = root.list<SectionHeaderInfo>();
+            var dst = list<SectionHeaderInfo>();
 
             if(PE.HasMetadata)
             {

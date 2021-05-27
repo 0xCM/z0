@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct BlobIndex : ICliHeapKey<BlobIndex>
     {
@@ -25,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BlobIndex(BlobHandle src)
         {
-            Value = memory.u32(src);
+            Value = u32(src);
         }
 
         public string Format()
@@ -33,6 +34,10 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BlobHandle(BlobIndex src)
+            => @as<BlobIndex,BlobHandle>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BlobIndex(BlobHandle src)

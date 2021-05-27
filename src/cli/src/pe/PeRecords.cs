@@ -12,7 +12,6 @@ namespace Z0
     [RecordSet]
     public readonly partial struct PeRecords : IRecordSet<PeRecords>
     {
-
         [MethodImpl(Inline), Op]
         public static DirectoryEntryRow directory(Address32 rva, uint size)
         {

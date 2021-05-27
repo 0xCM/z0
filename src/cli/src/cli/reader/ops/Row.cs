@@ -11,6 +11,7 @@ namespace Z0
 
     using static Root;
     using static CliRows;
+    using static core;
 
     partial class CliReader
     {
@@ -33,8 +34,15 @@ namespace Z0
             dst.Namespace = src.Namespace;
             dst.Attributes = src.Attributes;
             dst.Layout = src.GetLayout();
-
             return ref dst;
+        }
+
+        public uint Rows(ReadOnlySpan<MethodDefinitionHandle> src, Span<MethodDefRow> dst)
+        {
+            var count = (uint)min(src.Length, dst.Length);
+            for(var i=0; i<count; i++)
+                 Row(skip(src,i), ref seek(dst,i));
+            return count;
         }
 
         [MethodImpl(Inline), Op]

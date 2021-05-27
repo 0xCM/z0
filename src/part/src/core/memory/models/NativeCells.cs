@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     public readonly struct NativeCells
     {

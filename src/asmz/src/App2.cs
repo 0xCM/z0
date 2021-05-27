@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Reflection;
     using System.Collections.Generic;
+    using System.IO;
 
     using static Part;
     using static memory;
@@ -169,14 +170,6 @@ namespace Z0.Asm
             Wf.CaptureRunner().Capture(parts, dst);
         }
 
-        void RunExtractWorkflow()
-        {
-            var extract = ApiExtractWorkflow.create(Wf);
-            var packs = Wf.ApiPacks();
-            var dst = packs.Create(root.now());
-            extract.Run(dst);
-        }
-
         void DescribeHeaps()
         {
             var components = Wf.ApiCatalog.Components.View;
@@ -189,6 +182,76 @@ namespace Z0.Asm
             }
         }
 
+        void RunExtractWorkflow()
+        {
+            var extract = ApiExtractWorkflow.create(Wf);
+            var pdb = false;
+            var packs = Wf.ApiPacks();
+            var dst = packs.Create(root.now());
+            var collection = extract.Run(dst);
+            if(pdb)
+                IndexPdbSymbols(collection.ResolvedParts, dst.Root + FS.file("symbols", FS.Log));
+        }
+
+        public void RunOldXedWf()
+        {
+            var xed = XedWf.create(Wf);
+            xed.Run();
+
+        }
+
+        public void UnpackRespack()
+        {
+            var unpacker = ResPackUnpacker.create(Wf);
+            unpacker.Emit(Db.AppLogDir());
+        }
+
+        public MemoryFile OpenResPack()
+        {
+            var path = Wf.Db().Package("respack") + FS.file("z0.respack", FS.Dll);
+            return MemoryFiles.map(path);
+        }
+
+        void IndexPdbSymbols(ReadOnlySpan<ResolvedPart> parts, FS.FilePath dst)
+        {
+            var count = parts.Length;
+            var emitting = Wf.EmittingFile(dst);
+            var counter = 0u;
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+                counter += IndexPdbMethods(skip(parts,i),writer);
+            Wf.EmittedFile(emitting, counter);
+        }
+
+        uint IndexPdbMethods(ResolvedPart src, StreamWriter dst)
+        {
+            var modules = Wf.AppModules();
+            var hosts = src.Hosts.View;
+            using var symbols = modules.SymbolSource(src.Location);
+            var reader = Wf.PdbReader(symbols);
+            var flow = Wf.Running(string.Format("Indexing symbols for {0} from {1}", symbols.PePath, symbols.PdbPath));
+            var counter = 0u;
+            var buffer = core.list<PdbModel.Method>();
+            for(var i=0; i<hosts.Length; i++)
+            {
+                ref readonly var host = ref skip(hosts,i);
+                var methods = host.Methods.View;
+                for(var j=0; j<methods.Length; j++)
+                {
+                    ref readonly var method = ref skip(methods,j);
+                    var pdbMethod = reader.Method(method.Method.MetadataToken);
+                    if(pdbMethod)
+                    {
+                        var data = pdbMethod.Payload;
+                        dst.WriteLine(data.Token.Format());
+                        buffer.Add(data);
+                        counter++;
+                    }
+                }
+            }
+            Wf.Ran(flow);
+            return counter;
+        }
 
         FS.FilePath DefineDisassemblyJob()
         {
@@ -478,6 +541,20 @@ namespace Z0.Asm
         }
 
 
+        void EmitMethodDefs()
+        {
+            var pipe = Wf.CliPipe();
+            var dst = Db.IndexTable<MethodDefInfo>();
+            pipe.EmitMethodDefs(Wf.ApiCatalog.Components, dst);
+        }
+
+        void EmitFieldDefs()
+        {
+            var pipe = Wf.CliPipe();
+            var dst = Db.IndexTable<FieldDefInfo>();
+            pipe.EmitFieldDefs(Wf.ApiCatalog.Components, dst);
+        }
+
         void ShowMemory()
         {
             var info = WinMem.basic();
@@ -498,11 +575,23 @@ namespace Z0.Asm
             }
         }
 
+        void CheckCil()
+        {
+            var cil = Cil.init();
+            var codes = cil.OpCodes;
+            var formatter = codes.RecordFormatter();
+            for(var i=0; i<codes.Length; i++)
+            {
+                Wf.Row(formatter.Format(skip(codes,i)));
+            }
+        }
+
         public void Run()
         {
             //ListVendorManuals("intel", FS.Txt);
-
-            RunExtractWorkflow();
+            EmitMethodDefs();
+            EmitFieldDefs();
+            //RunExtractWorkflow();
             //Wf.AsmCatalogs().EmitAssetCatalog();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");

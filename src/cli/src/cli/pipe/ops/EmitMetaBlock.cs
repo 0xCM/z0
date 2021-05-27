@@ -29,9 +29,7 @@ namespace Z0
         }
 
         public ByteSize EmitMetaBlock(Assembly src, uint bpl = 64)
-        {
-            return EmitMetaBlock(src, bpl, MetaBlockPath(src));
-        }
+            => EmitMetaBlock(src, bpl, MetaBlockPath(src));
 
         public ByteSize EmitMetaBlocks(uint bpl = 64)
         {
@@ -40,9 +38,7 @@ namespace Z0
             var flow = Wf.Running(string.Format("Emitting {0} component metadata blocks", count));
             var size = ByteSize.Zero;
             for(var i=0; i<count; i++)
-            {
                 size += EmitMetaBlock(skip(components,i), bpl);
-            }
             Wf.Ran(flow, string.Format("Emitting {0} component metadata bytes", size));
             return size;
         }

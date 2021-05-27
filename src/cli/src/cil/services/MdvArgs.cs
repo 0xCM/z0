@@ -6,6 +6,7 @@ namespace System.Reflection.Metadata
     using System.Collections.Immutable;
     using System.IO;
     using System.Linq;
+    using System.Reflection.Metadata;
 
     public sealed class MdvArgs
     {

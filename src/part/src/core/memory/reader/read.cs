@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
+    using static core;
 
     partial struct ByteReader
     {
@@ -240,7 +240,6 @@ namespace Z0
             seek8(dst, i++) = skip(src,i);
             return dst;
         }
-
 
         /// <summary>
         /// Reads 7 bytes from a data source reference

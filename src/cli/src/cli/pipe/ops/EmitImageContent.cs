@@ -9,8 +9,8 @@ namespace Z0
     using System.IO;
     using System.Reflection;
 
-    using static memory;
-    using static Part;
+    using static Root;
+    using static core;
 
     partial class CliPipe
     {

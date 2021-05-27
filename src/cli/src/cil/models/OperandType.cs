@@ -5,7 +5,6 @@ namespace Z0
 {
     partial struct Cil
     {
-
         public enum OperandType : byte
         {
             InlineBrTarget = 0,
