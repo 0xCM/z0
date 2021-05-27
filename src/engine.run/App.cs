@@ -97,7 +97,7 @@ namespace Z0
             var flow = Wf.Running();
             var clock = Time.counter(true);
             var count = Run(jobs, cycles);
-            var time = clock.Elapsed;
+            var time = clock.Elapsed();
             Wf.Ran(flow, string.Format("Processed {0:##,#} items in {1} ms", count, time.Ms));
 
         }

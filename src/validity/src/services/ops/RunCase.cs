@@ -33,11 +33,11 @@ namespace Z0
                 finished = root.now();
 
                 messages.AddRange(unit.Dequeue());
-                messages.Add(PostCase(casename, clock.Time, started, finished));
+                messages.Add(PostCase(casename, clock.Span(), started, finished));
                 outcomes.AddRange(unit.TakeOutcomes().Array());
 
                 if(outcomes.Count == 0)
-                    outcomes.Add(TestCaseRecord.define(casename, true, started, finished, clock.Time));
+                    outcomes.Add(TestCaseRecord.define(casename, true, started, finished, clock.Span()));
 
                 if(DiagnosticMode)
                     term.print($"Executed case {unit.HostType.Name}/{method.Name}");
@@ -50,7 +50,7 @@ namespace Z0
                 var message = format(e);
                 messages.AddRange(unit.Dequeue());
                 messages.AddRange(FormatErrors(e, method));
-                outcomes.Add(TestCaseRecord.define(casename, false, started, finished, clock.Time, message));
+                outcomes.Add(TestCaseRecord.define(casename, false, started, finished, clock.Span(), message));
             }
             finally
             {

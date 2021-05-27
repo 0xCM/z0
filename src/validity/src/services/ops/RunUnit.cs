@@ -33,7 +33,7 @@ namespace Z0
                 clock.Stop();
 
                 var hosturi = ApiUri.HostUri(host);
-                term.print(PostUnit(hosturi, clock.Time, tsStart, Time.now()));
+                term.print(PostUnit(hosturi, clock.Span(), tsStart, Time.now()));
 
             }
             catch(Exception e)

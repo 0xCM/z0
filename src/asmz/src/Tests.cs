@@ -1137,7 +1137,7 @@ namespace Z0.Asm
             var traverser = Wf.ApiCodeBlockTraverser();
             var receiver  = new AsmDetailProducer(Wf,750000);
             traverser.Traverse(blocks, receiver);
-            var duration = clock.Elapsed.Ms;
+            var duration = clock.Elapsed().Ms;
             var productions = receiver.Productions;
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }

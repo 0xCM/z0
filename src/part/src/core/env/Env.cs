@@ -37,6 +37,7 @@ namespace Z0
             dst.Libs = dir(N.Libs);
             dst.DataRoot = dir(N.ZData);
             dst.VendorDocs = dir(N.VendorDocs);
+            dst.CapturePacks = dir(N.CapturePacks);
         }
 
         public EnvDirVar ZDev;
@@ -73,6 +74,8 @@ namespace Z0
 
         public EnvDirVar VendorDocs;
 
+        public EnvDirVar CapturePacks;
+
         public string Format()
         {
             var dst = text.buffer();
@@ -102,7 +105,7 @@ namespace Z0
         {
             var value = Environment.GetEnvironmentVariable(name);
             if(text.blank(value))
-                root.@throw($"The environment variable '{name}' is undefined");
+                core.@throw($"The environment variable '{name}' is undefined");
             return (name, FS.dir(value));
         }
 
@@ -111,7 +114,7 @@ namespace Z0
         {
             var value = Environment.GetEnvironmentVariable(name);
             if(text.blank(value))
-                root.@throw($"The environment variable '{name}' is undefined");
+                core.@throw($"The environment variable '{name}' is undefined");
             return (name, FS.path(value));
         }
 

@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct Timestamp : IDataTypeComparable<Timestamp>
     {
-        readonly ulong Ticks;
+        public const string FormatPattern = "yyyy-MM-dd.HH.mm.ss.fff";
 
-        const string Pattern = "yyyy-MM-dd.HH.mm.ss.fff";
+        readonly ulong Ticks;
 
         [MethodImpl(Inline)]
         public Timestamp(ulong ticks)
@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => new DateTime((long)Ticks).ToString(Pattern);
+            => new DateTime((long)Ticks).ToString(FormatPattern);
 
         public override string ToString()
             => Format();
@@ -58,6 +58,10 @@ namespace Z0
             => src.Ticks;
 
         [MethodImpl(Inline)]
+        public static implicit operator Timestamp(DateTime src)
+            => new Timestamp((ulong)src.Ticks);
+
+        [MethodImpl(Inline)]
         public static bool operator <(Timestamp a, Timestamp b)
             => a.Ticks < b.Ticks;
 
@@ -80,10 +84,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(Timestamp a, Timestamp b)
             => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Timestamp(DateTime src)
-            => new Timestamp((ulong)src.Ticks);
 
         public static Timestamp Zero => default;
     }

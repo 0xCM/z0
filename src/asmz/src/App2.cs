@@ -171,9 +171,10 @@ namespace Z0.Asm
 
         void RunExtractWorkflow()
         {
-            var wf = ApiExtractWorkflow.create(Wf);
-            var dst = Db.ZSrc("engine.run", "assets");
-            wf.Run(dst);
+            var extract = ApiExtractWorkflow.create(Wf);
+            var packs = Wf.ApiCapturePacks();
+            var dst = packs.Create(root.now());
+            extract.Run(dst);
         }
 
         void DescribeHeaps()

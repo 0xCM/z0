@@ -44,7 +44,7 @@ namespace Z0
             }
 
             IAppPaths _paths = new AppPaths(dbRoot);
-            status.PathConfigTime = clock.Elapsed;
+            status.PathConfigTime = clock.Elapsed();
 
             clock.Restart();
 
@@ -57,7 +57,7 @@ namespace Z0
             ctx.Paths = _paths;
             ctx.Settings = JsonSettings.Load(jsonConfigPath);
             ctx.Controller = control;
-            status.InitConfigTime = clock.Elapsed;
+            status.InitConfigTime = clock.Elapsed();
 
             clock.Restart();
 
@@ -82,7 +82,7 @@ namespace Z0
             if(verbose)
                 term.inform(AppMsg.status($"Enlisted {reactors.Count} routers"));
 
-            status.ShellCreateTime = clock.Elapsed;
+            status.ShellCreateTime = clock.Elapsed();
             status.FinishTS = root.now();
 
             return wf;

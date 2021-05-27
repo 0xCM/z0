@@ -39,6 +39,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator FS.FolderPath(EnvDirVar src)
             => src.Value;
-
     }
 }

@@ -76,5 +76,10 @@ namespace Z0
         [Op]
         public static ApiResolver ApiResolver(this IWfRuntime wf)
             => Svc.ApiResolver.create(wf);
+
+        [Op]
+        public static ApiCapturePacks ApiCapturePacks(this IWfRuntime wf)
+            => Svc.ApiCapturePacks.create(wf);
+
     }
 }

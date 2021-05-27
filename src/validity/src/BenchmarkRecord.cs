@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BenchmarkRecord Capture(OpIdentity op, long opcount, in SystemCounter clock)
-            => new BenchmarkRecord(op, opcount, clock.Elapsed);
+            => new BenchmarkRecord(op, opcount, clock.Elapsed());
 
         [MethodImpl(Inline)]
         public static implicit operator BenchmarkRecord(in (OpIdentity op, long opcount, SystemCounter clock)  src)

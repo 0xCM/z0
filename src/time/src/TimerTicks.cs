@@ -13,6 +13,7 @@ namespace Z0
     /// <summary>
     /// Captures and explores the relationship between hardware ticks and measured time
     /// </summary>
+    [ApiHost]
     public readonly struct TimerTicks
     {
         readonly ulong TicksPerSecond;
@@ -23,11 +24,23 @@ namespace Z0
             get => new TimerTicks((ulong)Stopwatch.Frequency);
         }
 
+        [MethodImpl(Inline), Op]
+        public static TimerTicks @default()
+            => Default;
+
+        [MethodImpl(Inline), Op]
+        public static ulong nsPerTick(TimerTicks src)
+            => src.NsPerTick;
+
+        [MethodImpl(Inline), Op]
+        public static double ticksPerMs(TimerTicks src)
+            => src.TicksPerMs;
+
         /// <summary>
         /// Computes the number of milliseconds accounted for by a specified number of ticks
         /// </summary>
         /// <param name="ticks">The tick count</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double ms(long ticks)
             => ((double)ticks)/Default.TicksPerMs;
 
@@ -35,12 +48,12 @@ namespace Z0
         /// Computes the number of nanoseconds accounted for by a specified number of ticks
         /// </summary>
         /// <param name="ticks">The tick count</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong ns(long ticks)
             => Default.NsPerTick * (ulong)ticks;
 
         [MethodImpl(Inline)]
-        internal TimerTicks(ulong frequency)
+        TimerTicks(ulong frequency)
             => TicksPerSecond = frequency;
 
         /// <summary>

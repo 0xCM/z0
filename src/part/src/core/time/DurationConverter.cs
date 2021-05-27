@@ -11,18 +11,11 @@ namespace Z0
 
     public readonly struct DurationConverter
     {
-        [MethodImpl(Inline)]
-        public T Convert<T>(Duration src)
-            => Numeric.force<T>(src.Ticks);
 
-        [MethodImpl(Inline)]
-        public Duration Convert<T>(T src)
-            => Numeric.force<T,long>(src);
-
-        public Option<object> ConvertFromTarget(object incoming, Type dst)
+        public static Option<object> ConvertFromTarget(object incoming, Type dst)
             => Option.Try(() => NumericBox.rebox(((Duration)incoming).Ticks, dst.NumericKind()));
 
-        public Option<object> ConvertToTarget(object incoming)
+        public static Option<object> ConvertToTarget(object incoming)
             => Option.Try(() => (Duration)(long)NumericBox.rebox(incoming, NumericKind.I64));
     }
 }

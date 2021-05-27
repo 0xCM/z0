@@ -37,7 +37,7 @@ namespace Z0
         public ulong Ns
         {
             [MethodImpl(Inline)]
-            get => Z0.TimerTicks.ns(Ticks);
+            get => TimerTicks.ns(Ticks);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         public double Ms
         {
             [MethodImpl(Inline)]
-            get => Z0.TimerTicks.ms(Ticks);
+            get => TimerTicks.ms(Ticks);
         }
 
         public TimeSpan TimeSpan

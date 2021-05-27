@@ -212,12 +212,18 @@ namespace Z0
             Wf.SegmentTraverser().Traverse(segments, BinDir);
         }
 
-
         internal void Run(ApiExtractChannel receivers, FS.FolderPath? dst = null)
         {
             Receivers = receivers;
             if(dst != null)
-            Paths = new ApiExtractPaths(dst.Value);
+                Paths = new ApiExtractPaths(dst.Value);
+            RunWorkflow();
+        }
+
+        internal void Run(ApiExtractChannel receivers, ApiCapturePack dst)
+        {
+            Receivers = receivers;
+            Paths = new ApiExtractPaths(dst.Root);
             RunWorkflow();
         }
     }

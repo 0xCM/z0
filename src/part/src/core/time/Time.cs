@@ -17,6 +17,16 @@ namespace Z0
     [ApiHost]
     public readonly struct Time
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T numeric<T>(Duration src)
+            => NumericCast.force<T>(src.Ticks);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Duration duration<T>(T src)
+            => NumericCast.force<T,long>(src);
+
         [Op]
         public static Outcome parse(string src, out Timestamp dst)
         {
@@ -67,8 +77,6 @@ namespace Z0
 
             return true;
         }
-
-        //"yyyy-MM-dd.HH.mm.ss.fff";
 
         [MethodImpl(Inline), Op]
         public static DateRange range(Date min, Date max)
@@ -144,32 +152,9 @@ namespace Z0
         public static Duration snapshot(Stopwatch sw)
             => Duration.init(sw.ElapsedTicks);
 
-        // public static Date[] partition(in ClosedInterval<Date> src, uint width)
-        // {
-        //     var points = root.list<Date>(new Date[]{src.Min});
-        //     var last = src.Min;
-        //     var finished = false;
-        //     while (!finished)
-        //     {
-        //         var next = last.AddDays((int)width);
-        //         if (next >= src.Max)
-        //         {
-        //             points.Add(src.Max);
-        //             finished = true;
-        //         }
-        //         else
-        //         {
-        //             points.Add(next);
-        //             last = next;
-        //         }
-        //     }
-
-        //     return points.Array();
-        // }
-
         public static Date[] partition(Date min, Date max, uint width)
         {
-            var points = root.list<Date>(new Date[]{min});
+            var points = core.list<Date>(new Date[]{min});
             var last = min;
             var finished = false;
             while (!finished)
