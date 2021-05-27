@@ -6,11 +6,9 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct ApiExtractSettings : IRecord<ApiExtractSettings>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ApiExtractSettings :  ISettingsSet<ApiExtractSettings>
     {
-        public const string TableId = "settings.apiextract";
-
         public Setting<bool> EmitContext;
 
         public Setting<bool> Analyze;
@@ -20,8 +18,8 @@ namespace Z0
         public static ApiExtractSettings Default()
         {
             var dst = new ApiExtractSettings();
-            dst.Analyze = false;
-            dst.EmitContext = false;
+            dst.Analyze = true;
+            dst.EmitContext = true;
             dst.EmitStatements = true;
             return dst;
         }

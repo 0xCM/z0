@@ -8,6 +8,7 @@ namespace Z0
     using System.Diagnostics;
 
     using Z0.Asm;
+
     using static core;
 
     public class ApiCaptureRunner : AppService<ApiCaptureRunner>

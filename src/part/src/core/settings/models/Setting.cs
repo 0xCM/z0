@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+
+    using api = Settings;
 
     public readonly struct Setting : ITextual
     {
@@ -23,7 +25,7 @@ namespace Z0
         }
 
         public string Format(bool json)
-            => new SettingValue(Name, Value).Format(json);
+            => api.format(this,json);
 
         public string Format()
             => Format(false);

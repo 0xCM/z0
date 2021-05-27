@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.IO;
 
-    using static Part;
-
     public class StepLog : IDisposable
     {
         public static StepLog create(IEnvPaths paths, WfStepId step, FS.FileExt ext)

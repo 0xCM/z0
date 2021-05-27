@@ -63,7 +63,7 @@ namespace Z0
             Wf.Ran(flow, string.Format("Decoded:{0}", MemberDecodedCount));
         }
 
-        public void Run(ApiCapturePack dst)
+        public void Run(IApiPack dst)
         {
             var flow = Wf.Running();
             Wf.ApiExtractor().Run(EventChannel, dst);

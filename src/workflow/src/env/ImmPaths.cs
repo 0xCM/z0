@@ -5,7 +5,7 @@
 namespace Z0
 {
     using static EnvFolders;
-    using static Part;
+    using static Root;
 
     partial interface IEnvPaths
     {

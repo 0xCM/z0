@@ -50,11 +50,13 @@ namespace Z0
 
         Index<AsmRoutine> Routines;
 
+        IApiPack Pack;
+
         public ApiExtractor()
         {
             Identity = MultiDiviner.Service;
             Buffer = ApiExtracts.buffer();
-            Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
+            Exclusions = root.hashset(core.array("ToString","GetHashCode", "Equals", "ToString"));
             Options = ApiExtractSettings.Default();
             Routines = sys.empty<AsmRoutine>();
         }
@@ -82,12 +84,14 @@ namespace Z0
         void EmitProcessContext()
         {
             var flow = Wf.Running("Emitting process context");
-            var dir = Paths.ContextRoot();
-            var ts = root.timestamp();
+            var ts = Pack.Timestamp;
+            var dir = Pack.ContextRoot();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();
             var procparts = pipe.EmitPartitions(process, ts, dir);
             var regions = pipe.EmitRegions(process, ts, dir);
+            pipe.EmitDump(process, Pack.DumpPath(process, ts));
+
             var members = ApiMembers.create(CollectedData.SelectMany(x => x.Members));
             var rebasing = Wf.Running();
             var entries = Catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
@@ -217,8 +221,9 @@ namespace Z0
             RunWorkflow();
         }
 
-        internal void Run(ApiExtractChannel receivers, ApiCapturePack dst)
+        internal void Run(ApiExtractChannel receivers, IApiPack dst)
         {
+            Pack = dst;
             Receivers = receivers;
             Paths = new ApiExtractPaths(dst.Root);
             RunWorkflow();
@@ -227,7 +232,5 @@ namespace Z0
         public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";
 
         public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
-
-
     }
 }

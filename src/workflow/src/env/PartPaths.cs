@@ -6,7 +6,7 @@ namespace Z0
 {
     using static EnvFolders;
 
-    public partial interface IEnvPaths
+    partial interface IEnvPaths
     {
        FS.FolderName PartFolder(PartId part)
             => FS.folder(part.Format());

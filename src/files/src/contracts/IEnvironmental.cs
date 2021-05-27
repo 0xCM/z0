@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
-    using static Root;
+    using static EnvFolders;
 
-    public interface IApiCapturePack : IFileArchive
+    public interface IEnvionmental
     {
-
+        Env Env {get;}
     }
 }

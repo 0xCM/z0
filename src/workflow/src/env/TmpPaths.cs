@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
 
     using static EnvFolders;
 
-    public partial interface IEnvPaths
+    partial interface IEnvPaths
     {
         FS.FolderPath TmpRoot()
             => Env.Tmp.Value + FS.folder(tmp);

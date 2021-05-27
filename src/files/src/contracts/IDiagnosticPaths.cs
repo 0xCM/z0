@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static EnvFolders;
-
-    partial interface IEnvPaths
+    public interface IDiagnosticPaths : IEnvionmental
     {
         FS.FilePath CdbLogPath()
             => Env.CdbLogPath.Value;

@@ -4,13 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICaptureArchive : IApiPartPaths
-    {
-
-    }
-
-    public interface ICaptureArchive<T> : ICaptureArchive
-        where T : struct, ICaptureArchive<T>
+    public partial interface IEnvPaths
     {
 
     }

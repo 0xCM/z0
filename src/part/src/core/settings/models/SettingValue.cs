@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using api = Settings;
 
     /// <summary>
     /// Defines a nonparametric kvp application setting
@@ -32,15 +33,10 @@ namespace Z0
         }
 
         public string Format(bool json)
-        {
-            if(json)
-                return string.Concat(Name.Enquote(), Chars.Colon, Chars.Space, Value.Enquote());
-            else
-                return Settings.format(text.ifempty(Name, "<anonymous>"), Value);
-        }
+            => api.format(this, json);
 
         public string Format()
-            => Format(true);
+            => Format(false);
 
 
         public override string ToString()

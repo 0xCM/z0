@@ -9,17 +9,26 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ApiCapturePack : IApiCapturePack
+    public readonly struct ApiPack : IApiPack
     {
         public FS.FolderPath Root {get;}
 
+        readonly Env _Env;
+
         [MethodImpl(Inline)]
-        public ApiCapturePack(FS.FolderPath root)
+        public ApiPack(FS.FolderPath root)
         {
             Root = root;
+            _Env = Env.create();
         }
 
-        public Outcome<Timestamp> Timestamp()
+        public Env Env
+            => _Env;
+
+        public Timestamp Timestamp
+            => ParseTimestamp().Data;
+
+        public Outcome<Timestamp> ParseTimestamp()
         {
             if(Root.IsEmpty)
                 return default;
@@ -37,7 +46,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format("{0}: {1}", Timestamp(), Root);
+            => string.Format("{0}: {1}", ParseTimestamp(), Root);
 
         public override string ToString()
             => Format();

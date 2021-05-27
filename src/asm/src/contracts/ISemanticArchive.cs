@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface ISemanticArchive : IPartFilePaths
+    public interface ISemanticArchive : IFileArchive
     {
         FS.FolderPath SemanticDir(PartId part);
 

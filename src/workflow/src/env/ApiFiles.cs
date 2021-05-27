@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public partial interface IEnvPaths
+    partial interface IEnvPaths
     {
         FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)
             => id.ToFileName(ext);

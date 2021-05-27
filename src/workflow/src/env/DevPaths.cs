@@ -9,7 +9,7 @@ namespace Z0
 
     using static EnvFolders;
 
-    public partial interface IEnvPaths
+    partial interface IEnvPaths
     {
         FS.FolderPath DevRoot()
             => Env.DevRoot;

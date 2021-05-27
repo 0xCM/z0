@@ -30,9 +30,6 @@ namespace Z0
         FS.FilePath ParsedExtractPath(ApiHostUri host)
             => ParsedExtractPath(ApiFiles.filename(host, PCsv));
 
-        // FS.FilePath ParsedExtractPath(FS.FolderPath root, ApiHostUri host)
-        //     => ParsedExtractPath(root, ApiFiles.filename(host, PCsv));
-
         FS.FilePath ParsedExtractPath(FS.FolderPath root, ApiHostUri host)
             => root + PartFolder(host.Part) + HostFile(host, PCsv);
 

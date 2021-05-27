@@ -6,8 +6,10 @@ namespace Z0
 {
     using System;
 
-    public interface IWfDb : IEnvPaths, IFileArchive
+    public interface IWfDb : IEnvPaths
     {
+        FS.FolderPath Root {get;}
+
         FS.Files ClearTables<T>()
             where T : struct, IRecord<T>;
 

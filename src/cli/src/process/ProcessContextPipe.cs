@@ -132,7 +132,7 @@ namespace Z0
 
         public Count EmitDump(Process process, FS.FilePath dst)
         {
-            var dumping = Wf.EmittingFile(dst);
+            var dumping = Wf.EmittingFile(dst.CreateParentIfMissing());
             DumpEmitter.emit(process, dst.Format(PathSeparator.BS), DumpTypeOption.Full);
             Wf.EmittedFile(dumping,1);
             return 1;

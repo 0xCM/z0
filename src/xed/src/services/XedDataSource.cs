@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct XedDataSource : IPartFilePaths
+    public readonly struct XedDataSource : IFileArchive
     {
         public FS.FolderPath Root {get;}
 

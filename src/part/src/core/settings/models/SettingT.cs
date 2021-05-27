@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a value-parametric application setting
@@ -65,7 +65,7 @@ namespace Z0
         public static Setting<T> Empty
         {
             [MethodImpl(Inline)]
-            get => new Setting<T>(String.Empty, root.empty<T>());
+            get => new Setting<T>(String.Empty, core.empty<T>());
         }
     }
 }

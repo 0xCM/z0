@@ -176,7 +176,7 @@ namespace Z0
 
         public Index<LineCount> CountLines()
         {
-            var service = Wf.ApiCapturePacks();
+            var service = Wf.ApiPacks();
             var pack = service.List().Last;
             var files = pack.Files(FS.Csv).Yield();
             var counting = Wf.Running(string.Format("Counting lines in {0} files from {1}", files.Length, pack.Root));

@@ -172,7 +172,7 @@ namespace Z0.Asm
         void RunExtractWorkflow()
         {
             var extract = ApiExtractWorkflow.create(Wf);
-            var packs = Wf.ApiCapturePacks();
+            var packs = Wf.ApiPacks();
             var dst = packs.Create(root.now());
             extract.Run(dst);
         }
