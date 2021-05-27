@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
     partial class FileTypes
     {
         public static string describe<T>(T src)

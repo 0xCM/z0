@@ -6,24 +6,30 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static CodeSymbolModels;
     using static core;
 
-
-
-    public class IntelDocParser : AppService<IntelDocParser>
+    public class TextDocParser
     {
+        List<TextLine> Lines;
+
+        TextDocParser()
+        {
+            Lines = new();
+        }
+
         public void Parse(FS.FilePath src, FS.FolderPath dst)
         {
+
             using var reader = src.Reader();
             var counter = 1u;
             var data = reader.ReadLine();
             while(text.nonempty(data))
             {
-                var line = new TextLine(counter++, data);
-                Parse(line);
+                Parse(new TextLine(counter++, data));
             }
         }
 

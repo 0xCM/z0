@@ -1,4 +1,0 @@
-| Opcode           | Instruction        | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                 |
-| 0F 4F /r         | CMOVG r16, r/m16   | RM    | Valid       | Valid           | Move if greater (ZF=0 and SF=OF).           |
-| 0F 4F /r         | CMOVG r32, r/m32   | RM    | Valid       | Valid           | Move if greater (ZF=0 and SF=OF).           |
-| REX.W + 0F 4F /r | CMOVG r64, r/m64   | RM    | V/N.E.      | NA              | Move if greater (ZF=0 and SF=OF).           |

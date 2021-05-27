@@ -1,4 +1,0 @@
-| Opcode           | Instruction        | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                 |
-| 0F 44 /r         | CMOVE r16, r/m16   | RM    | Valid       | Valid           | Move if equal (ZF=1).                       |
-| 0F 44 /r         | CMOVE r32, r/m32   | RM    | Valid       | Valid           | Move if equal (ZF=1).                       |
-| REX.W + 0F 44 /r | CMOVE r64, r/m64   | RM    | Valid       | N.E.            | Move if equal (ZF=1).                       |

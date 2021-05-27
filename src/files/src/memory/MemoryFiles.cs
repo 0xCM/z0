@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct MemoryFiles : IMemoryFileReader
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ReadOnlySpan<T> view<T>(in MemoryFile file, MemoryAddress start, uint count)
             where T : struct
-                => cover<T>(start + file.BaseAddress, count);
+                => memory.cover<T>(start + file.BaseAddress, count);
 
         /// <summary>
         /// Creates a <see cref='MappedFiles'/> that covers the first level of a specified directory
@@ -57,7 +57,6 @@ namespace Z0
             else
                 return MappedFiles.Empty;
         }
-
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(MemoryAddress @base, ulong offset, ByteSize size)

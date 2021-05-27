@@ -1,4 +1,0 @@
-| Opcode           | Instruction        | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                 |
-| 0F 43 /r         | CMOVAE r16, r/m16  | RM    | Valid       | Valid           | Move if above or equal (CF=0).              |
-| 0F 43 /r         | CMOVAE r32, r/m32  | RM    | Valid       | Valid           | Move if above or equal (CF=0).              |
-| REX.W + 0F 43 /r | CMOVAE r64, r/m64  | RM    | Valid       | N.E.            | Move if above or equal (CF=0).              |

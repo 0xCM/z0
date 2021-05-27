@@ -2,18 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public interface IReg16<T> : IReg<W16,T>
-        where T : unmanaged
+    [ApiHost]
+    public static class XSvc
     {
-
-    }
-
-    public interface IReg16<H,T> : IReg16<T>
-        where H : struct, IReg16<H,T>
-        where T : unmanaged
-    {
-
+        [Op]
+        public static FileCatalog Catalog(this FS.FolderPath root)
+            => new FileCatalog(root);
     }
 }

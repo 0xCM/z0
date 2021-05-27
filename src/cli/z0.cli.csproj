@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Related)" />
     <ProjectReference Include="$(Minidump)" />
     <ProjectReference Include="$(Interop)" />
+    <ProjectReference Include="$(Files)" />
   </ItemGroup>
 
 </Project>

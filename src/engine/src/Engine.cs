@@ -12,6 +12,8 @@ namespace Z0.Asm
     using static AsmRegs;
     using static core;
 
+    using Fx = AsmInstructions;
+
     using H = HeapRegBanks;
 
     readonly struct EngineCore
@@ -89,6 +91,12 @@ namespace Z0.Asm
 
         }
 
+        [MethodImpl(Inline), Op]
+        public rax Exec(Fx.Imul fx, RegVec<rcx,rdx> args)
+        {
+            var dst = math.mul(uint64(args.r0), uint64(args.r1));
+            return dst;
+        }
 
         public void Submit(BinaryCode src)
         {

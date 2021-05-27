@@ -1,4 +1,7 @@
-## Instructions
+# CMP
+
+## OpCodes
+------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                        |
 | 3C ib            | CMP AL, imm8      | I     | Valid       | Valid           | Compare imm8 with AL.                              |
 | 3D iw            | CMP AX, imm16     | I     | Valid       | Valid           | Compare imm16 with AX.                             |
@@ -24,13 +27,39 @@
 | REX.W + 3B / r   | CMP r64, r/m64    | RM    | Valid       | N.E.            | Compare r/m64 with r64.                            |
 
 ## Encoding
+------------------------------------------------------------------------------------------------------------------------
 | Op/En | Operand 1         | Operand 2     | Operand 3 | Operand 4 |
 | RM    | ModRM:reg (r)     | ModRM:r/m (r) | NA        | NA        |
 | MR    | ModRM:r/m (r)     | ModRM:reg (r) | NA        | NA        |
 | MI    | ModRM:r/m (r)     | imm8/16/32    | NA        | NA        |
 | I     | AL/AX/EAX/RAX (r) | imm8/16/32    | NA        | NA        |
 
+## Description
+------------------------------------------------------------------------------------------------------------------------
+Compares the first source operand with the second source operand and sets the status flags in the EFLAGS register according to the
+results. The comparison is performed by subtracting the second operand from the first operand and then setting the status flags in
+the same manner as the SUB instruction. When an immediate value is used as an operand, it is sign-extended to the length of the first
+operand.
+
+The condition codes used by the Jcc, CMOVcc, and SETcc instructions are based on the results of a CMP instruction. Appendix B,
+“EFLAGS Condition Codes,” in the Intel® 64 and IA-32 Architectures Software Developer’s Manual, Volume 1, shows the relationship
+of the status flags and the condition codes.
+
+In 64-bit mode, the instruction’s default operation size is 32 bits. Use of the REX.R prefix permits access to additional registers
+(R8-R15). Use of the REX.W prefix promotes operation to 64 bits. See the summary chart at the beginning of this section for encoding
+data and limits.
+
+## Operation
+------------------------------------------------------------------------------------------------------------------------
+temp ← SRC1 − SignExtend(SRC2);
+ModifyStatusFlags; (* Modify status flags in the same manner as the SUB instruction*)
+
+## Flags Affected
+------------------------------------------------------------------------------------------------------------------------
+The CF, OF, SF, ZF, AF, and PF flags are set according to the result.
+
 ## Layout
+------------------------------------------------------------------------------------------------------------------------
 | register1 with register2           | 0100 0R0B 0011 100w : 11 reg1 reg2            |
 | qwordregister1 with qwordregister2 | 0100 1R0B 0011 1001 : 11 qwordreg1 qwordreg2  |
 | register2 with register1           | 0100 0R0B 0011 101w : 11 reg1 reg2            |

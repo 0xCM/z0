@@ -6,7 +6,6 @@ namespace Z0
 {
     partial class FileTypes
     {
-
         [Op]
         public static FileType lookup(FS.FileExt ext)
         {

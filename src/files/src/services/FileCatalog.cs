@@ -5,25 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static core;
-
-    public sealed class FileCatalog : AppService<FileCatalog>
+    public sealed class FileCatalog
     {
         FS.FolderPath Root;
 
-        protected override void OnInit()
+        public FileCatalog(FS.FolderPath root)
         {
-            Root = Db.Root;
+            Root = root;
         }
+
         public FileCatalog Scoped(FS.FolderPath root)
         {
-            var dst = create(Wf);
-            dst.Root = root;
-            return dst;
+            Root = root;
+            return this;
         }
 
         public ReadOnlySpan<FS.FilePath> Files

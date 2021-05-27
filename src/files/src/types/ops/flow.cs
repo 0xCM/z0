@@ -20,6 +20,5 @@ namespace Z0
             where S : struct, IFileType<S>
             where T : struct, IFileType<T>
                 => (src,dst);
-
     }
 }

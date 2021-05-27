@@ -4,16 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IReg16<T> : IReg<W16,T>
-        where T : unmanaged
+    [ApiHost]
+    public readonly partial struct RegVecs
     {
 
     }
 
-    public interface IReg16<H,T> : IReg16<T>
-        where H : struct, IReg16<H,T>
-        where T : unmanaged
+    public readonly partial struct RegVecsG
     {
-
     }
 }

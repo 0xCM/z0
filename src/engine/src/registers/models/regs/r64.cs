@@ -101,6 +101,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(rax src)
                 => new G(src.Content, src.RegKind);
+
+            [MethodImpl(Inline)]
+            public static implicit operator rax(T src)
+                => new rax(src);
         }
 
         /// <summary>

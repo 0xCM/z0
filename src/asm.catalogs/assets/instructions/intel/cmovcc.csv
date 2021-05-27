@@ -1,3 +1,7 @@
+# CMOVcc — Conditional Move
+
+## OpCodes
+----------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction        | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                 |
 | 0F 4D /r         | CMOVGE r16, r/m16  | RM    | Valid       | Valid           | Move if greater or equal (SF=OF).           |
 | 0F 4D /r         | CMOVGE r32, r/m32  | RM    | Valid       | Valid           | Move if greater or equal (SF=OF).           |
@@ -68,3 +72,46 @@
 | 0F 44 /r         | CMOVZ r16, r/m16   | RM    | Valid       | Valid           | Move if zero (ZF=1).                        |
 | 0F 44 /r         | CMOVZ r32, r/m32   | RM    | Valid       | Valid           | Move if zero (ZF=1).                        |
 | REX.W + 0F 44 /r | CMOVZ r64, r/m64   | RM    | Valid       | N.E.            | Move if zero (ZF=1).                        |
+
+## Encoding
+----------------------------------------------------------------------------------------------------------------------------
+| Op/En | Operand 1        | Operand 2     | Operand 3 | Operand 4 |
+| RM    | ModRM:reg (r, w) | ModRM:r/m (r) | NA        | NA        |
+
+## Description
+----------------------------------------------------------------------------------------------------------------------------
+The CMOVcc instructions check the state of one or more of the status flags in the EFLAGS register (CF, OF, PF, SF, and ZF) and perform a
+move operation if the flags are in a specified state (or condition). A condition code (cc) is associated with each instruction to indicate
+the condition being tested for. If the condition is not satisfied, a move is not performed and execution continues with the instruction
+following the CMOVcc instruction.
+
+These instructions can move 16-bit, 32-bit or 64-bit values from memory to a general-purpose register or from one general-purpose register to another.
+Conditional moves of 8-bit register operands are not supported.
+
+The condition for each CMOVcc mnemonic is given in the description column of the above table. The terms “less” and “greater” are used for comparisons
+of signed integers and the terms “above” and “below” are used for unsigned integers.
+
+Because a particular state of the status flags can sometimes be interpreted in two ways, two mnemonics are defined for some opcodes. For example,
+the CMOVA (conditional move if above) instruction and the CMOVNBE (conditional move if not below or equal) instruction are alternate mnemonics
+for the opcode 0F 47H.
+
+The CMOVcc instructions were introduced in P6 family processors; however, these instructions may not be supported by all IA-32 processors.
+Software can determine if the CMOVcc instructions are supported by checking the processor’s feature information with the CPUID instruction
+(see “CPUID—CPU Identification” in this chapter).
+
+In 64-bit mode, the instruction’s default operation size is 32 bits. Use of the REX.R prefix permits access to additional registers (R8-R15).
+Use of the REX.W prefix promotes operation to 64 bits. See the summary chart at the beginning of this section for encoding data and limits.
+
+## Operation
+----------------------------------------------------------------------------------------------------------------------------
+temp ← SRC
+IF condition TRUE
+    THEN
+        DEST ← temp;
+    FI;
+ELSE
+    IF (OperandSize = 32 and IA-32e mode active)
+        THEN
+            DEST[63:32] ← 0;
+    FI;
+FI;

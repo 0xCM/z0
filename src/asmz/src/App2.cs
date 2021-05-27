@@ -257,7 +257,7 @@ namespace Z0.Asm
 
         void ListFiles()
         {
-            var catalog = Wf.FileCatalog(Db.AsmCaptureRoot());
+            var catalog = Db.AsmCaptureRoot().Catalog();
             catalog.Enumerate(path => Wf.Row(path.ToUri()));
 
         }

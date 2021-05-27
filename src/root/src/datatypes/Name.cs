@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
 
-
     [Datatype]
     public readonly struct Name : IName, IDataTypeComparable<Name>
     {

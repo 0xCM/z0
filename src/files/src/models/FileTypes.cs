@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     partial class FileTypes
     {
         public static AsmFileType Asm => default(AsmFileType);

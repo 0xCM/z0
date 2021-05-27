@@ -9,8 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using api = FileTypes;
-
     public readonly struct TypedFile : ITypedFile<TypedFile,FileType>
     {
         public FileType Type {get;}
