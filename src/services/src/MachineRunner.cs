@@ -32,12 +32,12 @@ namespace Z0
                 if(options.EmitAsmRows)
                     Emitted(Wf.AsmRowBuilder().EmitAsmDetailRows(blocks));
 
-                if(options.EmitCallData || options.EmitJmpData)
+                if(options.EmitCallData)
                 {
                     var routines = decoder.Decode(blocks);
 
-                    if(options.EmitJmpData)
-                        Emitted(Wf.AsmJmpPipe().EmitRows(routines.View));
+                    // if(options.EmitJmpData)
+                    //     Emitted(Wf.AsmJmpPipe().EmitRows(routines.View));
 
                     if(options.EmitCallData)
                         Emitted(Wf.AsmCallPipe().EmitRows(routines.View));

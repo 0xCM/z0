@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -27,6 +28,8 @@ namespace Z0
 
         AsmBitstringEmitter Bitstrings;
 
+        AsmAnalyzerSettings Settings;
+
         public AsmAnalyzer()
         {
         }
@@ -40,38 +43,85 @@ namespace Z0
             Calls = Wf.AsmCallPipe();
             Jumps = Wf.AsmJmpPipe();
             Bitstrings = Wf.AsmBitstringEmitter();
+            AsmAnalyzerSettings.@default(out Settings);
+        }
+
+        ReadOnlySpan<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
+        {
+            var count = src.Length;
+            var dst = core.list<AsmApiStatement>();
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                var outcome = Decoder.Decode(block.Code, out var instructions);
+                if(outcome.Fail)
+                {
+                    Wf.Error(outcome.Message);
+                    continue;
+                }
+
+                counter += BuildStatements(block.OpUri, instructions, dst);
+            }
+            return dst.ViewDeposited();
+        }
+
+        uint BuildStatements(in OpUri uri, IceInstructions src, List<AsmApiStatement> dst)
+        {
+            var count = (uint)src.Count;
+            if(count == 0)
+                return  count;
+
+            var offseq = AsmOffsetSeq.Zero;
+            var view = src.View;
+            var code = src.Encoded.View;
+            ref readonly var i0 = ref first(view);
+            var @base = i0.MemoryAddress64;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(view,i);
+                var statement = new AsmApiStatement();
+                var size = (uint)instruction.ByteLength;
+                var recoded = new ApiCodeBlock(instruction.IP, uri, slice(code, offseq.Offset, size).ToArray());
+                var apifx = new ApiInstruction(@base, instruction, recoded);
+                offseq = offseq.AccrueOffset(size);
+
+                statement.BlockAddress = @base;
+                statement.OpUri = uri;
+                statement.IP = instruction.IP;
+                dst.Add(statement);
+            }
+            return (uint)count;
+        }
+
+        ReadOnlySpan<ApiCodeBlock> ColectBlocks(ReadOnlySpan<AsmRoutine> src)
+        {
+            var count = src.Length;
+            var flow = Wf.Running(CollectingBlocks.Format(count));
+            var dst = span<ApiCodeBlock>(count);
+            var size = AsmEtl.blocks(src,dst);
+            Wf.Ran(flow, CollectedBlocks.Format(size));
+            return dst;
         }
 
         public void Analyze(ReadOnlySpan<AsmRoutine> routines, FS.FolderPath dst)
         {
-            var count = routines.Length;
-            var buffer = alloc<ApiCodeBlock>(count);
-            ref readonly var target = ref first(buffer);
-            for(var i=0; i<count; i++)
+            var blocks = ColectBlocks(routines);
+
+            if(Settings.EmitCalls)
+                EmitCalls(routines, dst);
+
+            if(Settings.EmitJumps)
+                EmitJumps(routines, dst);
+
+            if(Settings.EmitStatements)
             {
-                ref readonly var routine = ref skip(routines,i);
-                seek(target,i) = routine.Code;
+                var statements = EmitStatements(blocks, dst);
+                EmitBitstrings(statements, dst);
             }
 
-            var blocks = @readonly(buffer);
-            EmitCalls(routines,dst);
-            var statements  = EmitStatements(blocks, dst);
-            EmitBitstrings(statements, dst);
-            EmitDetails(blocks, dst);
-        }
-
-        public void AnalyzeCaptured(FS.FolderPath root, FS.FolderPath dst)
-        {
-            var blocks = LoadBlocks(root);
-            var routines = LoadRoutines(blocks);
-
-            EmitCalls(routines, dst);
-            EmitJumps(routines, dst);
-
-            var statements  = EmitStatements(blocks, dst);
-            EmitBitstrings(statements, dst);
-
-            EmitDetails(blocks, dst);
+            if(Settings.EmitAsmDetails)
+                EmitDetails(blocks, dst);
         }
 
         void EmitDetails(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
@@ -98,29 +148,18 @@ namespace Z0
             Emitted(bitstrings, target);
         }
 
-        void EmitCalls(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
-        {
-            var target = CallTarget(dst);
-            target.Clear();
-            var calls = Calls.EmitRows(src, target);
-            Emitted(calls, target);
-        }
-
         void EmitCalls(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
         {
             var target = CallTarget(dst);
-            target.Clear();
             var calls = Calls.EmitRows(src, target);
             Emitted(calls, target);
         }
 
-        void EmitJumps(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
+        void EmitJumps(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
         {
             var target = JmpTarget(dst);
-            target.Clear();
-            var jumps = Jumps.EmitRows(src, target);
-            Emitted(jumps, target);
-
+            var rows = Jumps.EmitRows(src, target);
+            Emitted(rows, target);
         }
 
         void Emitted(ReadOnlySpan<AsmDetailRow> rows, FS.FolderPath dst)
@@ -138,12 +177,12 @@ namespace Z0
 
         }
 
-        void Emitted(ReadOnlySpan<AsmCallRow> rows, FS.FolderPath dst)
+        void Emitted(ReadOnlySpan<AsmCallRow> rows, FS.FilePath dst)
         {
 
         }
 
-        void Emitted(ReadOnlySpan<AsmJmpRow> rows, FS.FolderPath dst)
+        void Emitted(ReadOnlySpan<AsmJmpRow> rows, FS.FilePath dst)
         {
 
         }
@@ -177,16 +216,21 @@ namespace Z0
         FS.FilePath BsTarget(FS.FolderPath dst)
             => dst + FS.file("asm.bitstrings", FS.Asm);
 
-        FS.FolderPath CallTarget(FS.FolderPath dst)
-            => dst + FS.folder(AsmCallRow.TableId);
+        FS.FilePath CallTarget(FS.FolderPath dst)
+            => dst + FS.file(AsmCallRow.TableId, FS.Csv);
 
-        FS.FolderPath JmpTarget(FS.FolderPath dst)
-            => dst + FS.folder(AsmJmpRow.TableId);
+        FS.FilePath JmpTarget(FS.FolderPath dst)
+            => dst + FS.file(AsmJmpRow.TableId, FS.Csv);
 
         FS.FolderPath AsmDetailTarget(FS.FolderPath dst)
             => dst + FS.folder(AsmDetailRow.TableId);
 
         FS.FilePath StatementTarget(FS.FolderPath dst)
             => dst + FS.file(AsmApiStatement.TableId, FS.Csv);
+
+
+        static MsgPattern<Count> CollectingBlocks => "Collecting code blocks from {0} routines";
+
+        static MsgPattern<ByteSize> CollectedBlocks => "Collecting {0} code block bytes";
     }
 }

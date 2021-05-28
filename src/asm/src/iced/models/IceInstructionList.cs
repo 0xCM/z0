@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a contiguous *based* instruction sequence

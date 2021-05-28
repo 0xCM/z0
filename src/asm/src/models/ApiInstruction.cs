@@ -112,16 +112,10 @@ namespace Z0.Asm
             get => Mnemonic.ToString();
         }
 
-        // public AsmMnemonicCode MnemonicCode
-        // {
-        //     get => MnemonicExpr;
-        // }
-
        public AsmOpCodeExpr OpCode
        {
             [MethodImpl(Inline)]
             get => AsmForm.OpCode;
-            //AsmCore.opcode(Instruction.OpCode.OpCodeString);
        }
 
         [MethodImpl(Inline)]

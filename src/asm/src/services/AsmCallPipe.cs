@@ -39,6 +39,17 @@ namespace Z0.Asm
             return calls;
         }
 
+        public ReadOnlySpan<AsmCallRow> EmitRows(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
+        {
+            var instructions = list<ApiInstruction>();
+            root.iter(src, routine => instructions.AddRange(routine.Instructions));
+            instructions.Sort();
+            var calls = Calls(instructions.ViewDeposited());
+            var count = calls.Length;
+            TableEmit(calls.View, AsmCallRow.RenderWidths, dst);
+            return calls;
+        }
+
         public ReadOnlySpan<AsmCallRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
         {
             var rows = root.datalist<AsmCallRow>();

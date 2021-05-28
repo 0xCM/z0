@@ -16,7 +16,6 @@ namespace Z0
     using static Root;
     using static core;
 
-
     public class ApiCollection
     {
         internal Index<ResolvedPart> _ResolvedParts;
@@ -101,7 +100,7 @@ namespace Z0
         void SealCollected()
         {
             CollectedDatasets = DatasetReceiver.Array();
-            Routines = CollectedDatasets.SelectMany(x => x.Routines);
+            Routines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
         }
 
         void EmitProcessContext()

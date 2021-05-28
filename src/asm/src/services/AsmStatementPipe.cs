@@ -110,7 +110,6 @@ namespace Z0.Asm
             Wf.EmittedFile(flow, count);
         }
 
-
         void EmitRecords(ApiHostUri host, ReadOnlySpan<AsmApiStatement> src)
         {
             var dst = Db.AsmStatementPath(host, FS.Csv);
@@ -248,7 +247,7 @@ namespace Z0.Asm
                 AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
                 statement.Encoded = AsmBytes.hexcode(bytes.Slice(offset, size));
                 statement.OpCode = opcode;
-
+                statement.Bitstring = statement.Encoded;
                 dst.Add(statement);
 
                 offset += size;

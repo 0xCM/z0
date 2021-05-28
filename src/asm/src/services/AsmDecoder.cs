@@ -24,7 +24,6 @@ namespace Z0.Asm
         {
             AsmFormat = AsmFormatConfig.@default(out var _);
             Formatter = new AsmRoutineFormatter(AsmFormat);
-
         }
 
         protected override void OnInit()
@@ -32,6 +31,35 @@ namespace Z0.Asm
             IceFormatter = api.iformatter(AsmFormat);
         }
 
+        public Outcome Decode(in CodeBlock src, out IceInstructions dst)
+        {
+            try
+            {
+                var decoded = new Iced.InstructionList();
+                var decoder = api.decoder(src, src.BaseAddress, out var reader);
+                var @base = src.BaseAddress;
+                var buffer = list<Asm.IceInstruction>();
+                var pos = 0u;
+                while(reader.CanReadByte)
+                {
+                    ref var iced = ref decoded.AllocUninitializedElement();
+                    decoder.Decode(out iced);
+                    var size = (uint)iced.ByteLength;
+                    var encoded = slice(src.View, pos, size).ToArray();
+                    var instruction = IceExtractors.extract(iced, IceFormatter.FormatInstruction(iced, @base), encoded);
+                    buffer.Add(instruction);
+                    pos += size;
+
+                }
+                dst = new IceInstructions(buffer,src);
+                return true;
+            }
+            catch(Exception e)
+            {
+                dst = IceInstructions.Empty;
+                return e;
+            }
+        }
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
         {
             var outcome = Decode(src, out var routine);
@@ -47,9 +75,9 @@ namespace Z0.Asm
             var flow = Wf.Running(Msg.DecodingHostRoutines.Format(host));
             var view = src.Blocks.View;
             var count = view.Length;
-            var instructions = root.list<ApiHostRoutine>();
+            var instructions = core.list<ApiHostRoutine>();
             var ip = MemoryAddress.Zero;
-            var target = root.list<IceInstruction>();
+            var target = core.list<IceInstruction>();
             for(var i=0; i<count; i++)
             {
                 target.Clear();
@@ -134,34 +162,34 @@ namespace Z0.Asm
             return dst;
         }
 
-        public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath dst)
-        {
-            var count = src.Length;
-            var buffer = span<AsmRoutineCode>(count);
-            using var writer = dst.Writer();
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var captured = ref skip(src,i);
-                if(Decode(captured, out var routine))
-                {
-                    var asm = Formatter.Format(routine).Content;
-                    seek(buffer,i) = new AsmRoutineCode(routine,captured, asm);
-                    writer.Write(asm);
-                }
-            }
-            return buffer;
-        }
+        // public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath dst)
+        // {
+        //     var count = src.Length;
+        //     var buffer = span<AsmRoutineCode>(count);
+        //     using var writer = dst.Writer();
+        //     for(var i=0u; i<count; i++)
+        //     {
+        //         ref readonly var captured = ref skip(src,i);
+        //         if(Decode(captured, out var routine))
+        //         {
+        //             var asm = Formatter.Format(routine).Content;
+        //             seek(buffer,i) = new AsmRoutineCode(routine,captured, asm);
+        //             writer.Write(asm);
+        //         }
+        //     }
+        //     return buffer;
+        // }
 
-        public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var captured = ref skip(src,i);
-                if(Decode(captured, out var routine))
-                    seek(dst,i) = new AsmRoutineCode(routine, captured, Formatter.Format(routine).Content);
-            }
-        }
+        // public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
+        // {
+        //     var count = src.Length;
+        //     for(var i=0u; i<count; i++)
+        //     {
+        //         ref readonly var captured = ref skip(src,i);
+        //         if(Decode(captured, out var routine))
+        //             seek(dst,i) = new AsmRoutineCode(routine, captured, Formatter.Format(routine).Content);
+        //     }
+        // }
 
         public AsmHostRoutines Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
@@ -207,20 +235,20 @@ namespace Z0.Asm
             return outcome;
         }
 
-        public Outcome Decode(in CodeBlock src, out IceInstructionList dst)
-        {
-            var outcome = Decode(OpUri.Empty, src.Code, src.BaseAddress, out var block);
-            if(outcome)
-            {
-                dst = api.icelist(block,src);
-                return true;
-            }
-            else
-            {
-                dst = IceInstructionList.Empty;
-                return outcome;
-            }
-        }
+        // public Outcome Decode(in CodeBlock src, out IceInstructionList dst)
+        // {
+        //     var outcome = Decode(OpUri.Empty, src.Code, src.BaseAddress, out var block);
+        //     if(outcome)
+        //     {
+        //         dst = api.icelist(block,src);
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         dst = IceInstructionList.Empty;
+        //         return outcome;
+        //     }
+        // }
 
         public Outcome Decode(in ApiCodeBlock src, out AsmInstructionBlock dst)
             => Decode(src.OpUri, src.Encoded, src.BaseAddress, out dst);
@@ -228,10 +256,7 @@ namespace Z0.Asm
         public Index<IceInstruction> Decode(BinaryCode code, MemoryAddress @base)
         {
             var decoded = new Iced.InstructionList();
-            // var reader = new Iced.ByteArrayCodeReader(code);
-            // var _decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
             var decoder = api.decoder(code, @base, out var reader);
-            //decoder.IP = @base;
             while (reader.CanReadByte)
             {
                 ref var instruction = ref decoded.AllocUninitializedElement();
@@ -310,5 +335,7 @@ namespace Z0.Asm
                 return e;
             }
         }
+
+
     }
 }

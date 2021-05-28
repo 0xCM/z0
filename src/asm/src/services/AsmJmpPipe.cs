@@ -13,44 +13,39 @@ namespace Z0.Asm
 
     public sealed class AsmJmpPipe : AppService<AsmJmpPipe>
     {
-        public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src)
-        {
-            var dst = Db.TableDir<AsmJmpRow>();
-            return EmitRows(src,dst);
-        }
+        // public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src)
+        // {
+        //     var dst = Db.TableDir<AsmJmpRow>();
+        //     return EmitRows(src,dst);
+        // }
 
-        public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
-        {
-            var rows = root.list<AsmJmpRow>();
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var routines = ref skip(src,i);
-                var path = Db.Table(dst, AsmJmpRow.TableId, routines.Part);
-                rows.AddRange(EmitJmpRows(routines, path));
-            }
+        // public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
+        // {
+        //     var rows = list<AsmJmpRow>();
+        //     var count = src.Length;
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var routines = ref skip(src,i);
+        //         var path = Db.Table(dst, AsmJmpRow.TableId, routines.Part);
+        //         rows.AddRange(EmitJmpRows(routines, path));
+        //     }
 
-            return rows.ViewDeposited();
-        }
+        //     return rows.ViewDeposited();
+        // }
 
-        public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
-        {
-            var rows = root.list<AsmJmpRow>();
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var routines = ref skip(src,i);
-            }
-
-            return rows.ViewDeposited();
-        }
-
-        Index<AsmJmpRow> EmitJmpRows(ApiPartRoutines src, FS.FilePath dst)
+        public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
         {
             var rows = Collect(src);
             Store(rows, dst);
             return rows;
         }
+
+        // Index<AsmJmpRow> EmitJmpRows(ApiPartRoutines src, FS.FilePath dst)
+        // {
+        //     var rows = Collect(src);
+        //     Store(rows, dst);
+        //     return rows;
+        // }
 
         void Store(ReadOnlySpan<AsmJmpRow> src, FS.FilePath dst)
         {
@@ -67,73 +62,68 @@ namespace Z0.Asm
             }
         }
 
-        Index<AsmJmpRow> Collect(ApiPartRoutines src)
-        {
-            var collection = root.list<AsmJmpRow>();
-            var hosts = src.View;
-            uint kHost = src.HostCount;
-            for(var i=0u; i<kHost; i++)
-            {
-                ref readonly var host = ref skip(hosts,i);
-                var rCount = host.RoutineCount;
-                var routines = host.Members.View;
-                for(var j=0u; j<rCount; j++)
-                {
-                    ref readonly var member = ref skip(routines,j);
-                    var instructions = member.Instructions.View;
-                    var iCount = instructions.Length;
-                    for(var k=0u; k<iCount; k++)
-                    {
-                        ref readonly var fx = ref skip(instructions, k);
-                        var fc = fx.Instruction.FlowControl;
-                        switch(fc)
-                        {
-                            case IceFlowControl.ConditionalBranch:
-                            case IceFlowControl.IndirectBranch:
-                            case IceFlowControl.UnconditionalBranch:
-                                classify(fx.Mnemonic, out var kind);
-                                jmprow(fx, kind, out var dst);
-                                collection.Add(dst);
-                            break;
-                        }
-                    }
-                }
-            }
+        // Index<AsmJmpRow> Collect(ApiPartRoutines src)
+        // {
+        //     var collection = root.list<AsmJmpRow>();
+        //     var hosts = src.View;
+        //     uint kHost = src.HostCount;
+        //     for(var i=0u; i<kHost; i++)
+        //     {
+        //         ref readonly var host = ref skip(hosts,i);
+        //         var rCount = host.RoutineCount;
+        //         var routines = host.Members.View;
+        //         for(var j=0u; j<rCount; j++)
+        //         {
+        //             ref readonly var member = ref skip(routines,j);
+        //             var instructions = member.Instructions.View;
+        //             var iCount = instructions.Length;
+        //             for(var k=0u; k<iCount; k++)
+        //             {
+        //                 ref readonly var fx = ref skip(instructions, k);
+        //                 var fc = fx.Instruction.FlowControl;
+        //                 switch(fc)
+        //                 {
+        //                     case IceFlowControl.ConditionalBranch:
+        //                     case IceFlowControl.IndirectBranch:
+        //                     case IceFlowControl.UnconditionalBranch:
+        //                         classify(fx.Mnemonic, out var kind);
+        //                         jmprow(fx, kind, out var dst);
+        //                         collection.Add(dst);
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
 
-            return collection.ToArray();
-        }
+        //     return collection.ToArray();
+        // }
 
         ReadOnlySpan<AsmJmpRow> Collect(ReadOnlySpan<AsmRoutine> src)
         {
-            var dst = root.list<AsmJmpRow>();
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
+            var dst = list<AsmJmpRow>();
+            for(var i=0u; i<src.Length; i++)
             {
-                ref readonly var routine = ref skip(src,i);
-                for(var j=0; j<routine.InstructionCount; j++)
+                var routine = root.require(skip(src, i));
+                var count = routine.InstructionCount;
+                var instructions = routine.Instructions.View;
+                for(var j=0; j<count; j++)
                 {
-                    var instructions = skip(routine,j).Instructions.View;
-                    for(var k=0; k<instructions.Length; k++)
+                    ref readonly var instruction = ref skip(instructions, j);
+                    switch(instruction.Instruction.FlowControl)
                     {
-                        ref readonly var instruction = ref skip(instructions, k);
-                        var fc = instruction.Instruction.FlowControl;
-                        switch(fc)
-                        {
-                            case IceFlowControl.ConditionalBranch:
-                            case IceFlowControl.IndirectBranch:
-                            case IceFlowControl.UnconditionalBranch:
-                                classify(instruction.Mnemonic, out var kind);
-                                jmprow(instruction, kind, out var row);
-                                dst.Add(row);
-                            break;
-                        }
+                        case IceFlowControl.ConditionalBranch:
+                        case IceFlowControl.IndirectBranch:
+                        case IceFlowControl.UnconditionalBranch:
+                            classify(instruction.Mnemonic, out var kind);
+                            jmprow(instruction, kind, out var row);
+                            dst.Add(row);
+                        break;
                     }
                 }
             }
 
             return dst.ViewDeposited();
         }
-
 
         [Op]
         static ref AsmJmpRow jmprow(in ApiInstruction src, JmpKind jk, out AsmJmpRow dst)

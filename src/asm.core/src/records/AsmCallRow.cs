@@ -5,12 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
+    using static Part;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct AsmCallRow : IRecord<AsmCallRow>
+    public struct AsmCallRow : IComparableRecord<AsmCallRow>
     {
         public const string TableId = "asm.calls";
 
@@ -58,5 +61,9 @@ namespace Z0
 
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{16,16,16,16,16,16,36,16};
+
+        [MethodImpl(Inline)]
+        public int CompareTo(AsmCallRow src)
+            => Target.CompareTo(src.Target);
     }
 }

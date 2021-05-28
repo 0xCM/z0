@@ -14,6 +14,20 @@ namespace Z0.Asm
     public sealed class AsmEtl : AppService<AsmEtl>
     {
         [Op]
+        public static ByteSize blocks(ReadOnlySpan<AsmRoutine> src, Span<ApiCodeBlock> dst)
+        {
+            var size = ByteSize.Zero;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                var routine = skip(src,i);
+                seek(dst, i) = routine.Code;
+                size += skip(dst,i).Size;
+            }
+            return size;
+        }
+
+        [Op]
         public static unsafe uint allocTest()
         {
             const ushort BufferSize = 32;
@@ -148,12 +162,12 @@ namespace Z0.Asm
             return count;
         }
 
-        [Op]
-        public Index<ApiInstruction> ApiInstructions(ApiCodeBlock code, IceInstruction[] src)
-            => ToApiInstructions(code, src);
+        // [Op]
+        // public Index<ApiInstruction> ApiInstructions(ApiCodeBlock code, IceInstruction[] src)
+        //     => ToApiInstructions(code, src);
 
         public static ApiHostRoutine ApiHostRoutine(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
-            => new ApiHostRoutine(@base,ToApiInstructions(code, src));
+            => new ApiHostRoutine(@base, ToApiInstructions(code, src));
 
         [Op]
         public static Index<ApiInstruction> ToApiInstructions(ApiCodeBlock code, IceInstruction[] src)
@@ -163,12 +177,12 @@ namespace Z0.Asm
             var count = src.Length;
             var buffer = alloc<ApiInstruction>(count);
             ref var dst = ref first(buffer);
+            var data = span(code.Storage);
 
-            for(ushort i=0; i<count; i++)
+            for(var i=0; i<count; i++)
             {
-                var fx = src[i];
+                var fx = skip(src, i);
                 var len = fx.ByteLength;
-                var data = span(code.Storage);
                 var recoded = new ApiCodeBlock(fx.IP, code.OpUri, data.Slice((int)offseq.Offset, len).ToArray());
                 seek(dst, i) = new ApiInstruction(@base, fx, recoded);
                 offseq = offseq.AccrueOffset((uint)len);
