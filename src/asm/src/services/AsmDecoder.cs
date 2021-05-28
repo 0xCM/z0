@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using api = AsmDecoderApi;
     using Iced = Iced.Intel;
@@ -18,10 +18,18 @@ namespace Z0.Asm
 
         IAsmRoutineFormatter Formatter;
 
+        IceInstructionFormatter IceFormatter;
+
         public AsmDecoder()
         {
             AsmFormat = AsmFormatConfig.@default(out var _);
             Formatter = new AsmRoutineFormatter(AsmFormat);
+
+        }
+
+        protected override void OnInit()
+        {
+            IceFormatter = api.iformatter(AsmFormat);
         }
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
@@ -220,9 +228,10 @@ namespace Z0.Asm
         public Index<IceInstruction> Decode(BinaryCode code, MemoryAddress @base)
         {
             var decoded = new Iced.InstructionList();
-            var reader = new Iced.ByteArrayCodeReader(code);
-            var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
-            decoder.IP = @base;
+            // var reader = new Iced.ByteArrayCodeReader(code);
+            // var _decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
+            var decoder = api.decoder(code, @base, out var reader);
+            //decoder.IP = @base;
             while (reader.CanReadByte)
             {
                 ref var instruction = ref decoded.AllocUninitializedElement();
@@ -230,10 +239,9 @@ namespace Z0.Asm
             }
 
             var count = decoded.Count;
-            var formatter = api.iformatter(AsmFormat);
             var buffer = alloc<Asm.IceInstruction>(count);
             ref var dst = ref first(buffer);
-            var formatted = formatter.FormatInstructions(decoded, @base);
+            var formatted = IceFormatter.FormatInstructions(decoded, @base);
             var position = 0u;
             for(var i=0; i<count; i++)
             {
@@ -277,11 +285,10 @@ namespace Z0.Asm
             {
                 var decoded = new Iced.InstructionList();
                 var reader = new Iced.ByteArrayCodeReader(src.Code);
-                var formatter = api.iformatter(AsmFormat);
                 var decoder = Iced.Decoder.Create(IntPtr.Size*8, reader);
                 var @base = src.BaseAddress;
                 decoder.IP = @base;
-                var buffer = root.list<Asm.IceInstruction>(decoded.Count);
+                var buffer = core.list<Asm.IceInstruction>(decoded.Count);
                 var position = 0u;
                 while (reader.CanReadByte)
                 {
@@ -289,7 +296,7 @@ namespace Z0.Asm
                     decoder.Decode(out iced);
                     var size = (uint)iced.ByteLength;
                     var encoded = slice(src.View, position, size).ToArray();
-                    var instruction = IceExtractors.extract(iced, formatter.FormatInstruction(iced, @base), encoded);
+                    var instruction = IceExtractors.extract(iced, IceFormatter.FormatInstruction(iced, @base), encoded);
                     buffer.Add(instruction);
                     f(instruction);
                     position += size;

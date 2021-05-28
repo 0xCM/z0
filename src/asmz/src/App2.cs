@@ -617,11 +617,11 @@ namespace Z0.Asm
 
         public void Run()
         {
-            EmitSymbolicliterals();
+            //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);
             //EmitMethodDefs();
             //EmitFieldDefs();
-            //RunExtractWorkflow();
+            RunExtractWorkflow();
             //Wf.AsmCatalogs().EmitAssetCatalog();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");

@@ -10,13 +10,21 @@ namespace Z0.Asm
 
     using static Root;
 
-    using Iced = Iced.Intel;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+    using Iced = Iced.Intel;
 
     readonly struct AsmDecoderApi
     {
+        public static Iced.Decoder decoder(BinaryCode code, MemoryAddress @base, out Iced.ByteArrayCodeReader reader)
+        {
+            reader = new Iced.ByteArrayCodeReader(code);
+            var decoder =  Iced.Decoder.Create(64, reader);
+            decoder.IP = @base;
+            return decoder;
+        }
+
         public static AsmRoutine routine(OpUri uri, MethodDisplaySig sig, ApiBlockAsm src, bool check = false)
         {
             var count = src.InstructionCount;
@@ -44,7 +52,7 @@ namespace Z0.Asm
             => new IceInstructionList(src, data);
 
         [MethodImpl(Inline), Op]
-        public static IIceInstructionFormatter iformatter(in AsmFormatConfig config)
+        public static IceInstructionFormatter iformatter(in AsmFormatConfig config)
             => new IceInstructionFormatter(config);
 
         static void CheckInstructionSize(in IceInstruction instruction, uint offset, in ApiBlockAsm src)

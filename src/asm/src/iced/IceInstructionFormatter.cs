@@ -29,6 +29,8 @@ namespace Z0.Asm
                 UpperCaseHex = false,
                 RipRelativeAddresses = true,
                 SignedMemoryDisplacements = true,
+                ShowSymbolAddress = true,
+                SignedImmediateOperands = true,
             };
 
         [MethodImpl(Inline)]
@@ -43,7 +45,7 @@ namespace Z0.Asm
             var sb = text.build();
             var writer = new StringWriter(sb);
             var output = new AsmOutput(writer, @base);
-            MasmFormatter.Format(in src, output);
+            MasmFormatter.Format(src, output);
             return sb.ToString();
         }
 
@@ -60,8 +62,8 @@ namespace Z0.Asm
             for(var i= 0u; i <count; i++)
             {
                 ref readonly var instruction = ref src[(int)i];
-                MasmFormatter.Format(in instruction, output);
-                memory.seek(dst, i) = sb.ToString();
+                MasmFormatter.Format(instruction, output);
+                core.seek(dst, i) = sb.ToString();
                 sb.Clear();
             }
             return dst;

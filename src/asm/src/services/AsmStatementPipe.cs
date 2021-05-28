@@ -151,12 +151,12 @@ namespace Z0.Asm
                 if(i == 0)
                 {
                     host = uri.Host;
-                    tablePath = TablePath(host,root);
+                    tablePath = TablePath(host, root);
                     tableWriter = tablePath.Writer();
                     tableWriter.WriteLine(formatter.FormatHeader());
 
                     tableFlow = Wf.EmittingTable<AsmApiStatement>(tablePath);
-                    asmPath = AsmPath(host,root);
+                    asmPath = AsmPath(host, root);
                     asmWriter = asmPath.Writer();
                     asmFlow = Wf.EmittingFile(asmPath);
                 }
@@ -209,7 +209,7 @@ namespace Z0.Asm
             var count = (uint)instructions.Length;
             for(var i=0u; i<count; i++)
             {
-                ref readonly var instruction = ref skip(instructions,i);
+                ref readonly var instruction = ref skip(instructions, i);
                 ref var target = ref seek(dst,i);
                 target.BlockAddress = src.BaseAddress;
                 target.IP = instruction.IP;
