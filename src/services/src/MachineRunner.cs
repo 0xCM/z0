@@ -49,7 +49,7 @@ namespace Z0
                 if(options.EmitStatements || options.EmitAsmBitstrings)
                 {
                     var pipe = Wf.AsmStatementPipe();
-                    var statements = pipe.EmitStatements(partitioned, Db.AsmStatementRoot());
+                    var statements = pipe.EmitHostStatements(partitioned, Db.AsmStatementRoot());
                     Emitted(statements);
                     if(options.EmitAsmBitstrings)
                         Emitted(Wf.AsmBitstringEmitter().EmitBitstrings(statements));

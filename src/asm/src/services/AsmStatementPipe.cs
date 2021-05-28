@@ -33,36 +33,91 @@ namespace Z0.Asm
             ApiHex = Wf.ApiHex();
         }
 
-        public ReadOnlySpan<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
+        public ReadOnlySpan<AsmApiStatement> BuildHostStatements(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             var dst = list<AsmApiStatement>();
             for(var i=0; i<count; i++)
-                CreateStatements(Decode(skip(src,i)), dst);
+                CreateHostStatements(Decode(skip(src,i)), dst);
             dst.Sort();
             return dst.ViewDeposited();
         }
 
-        public uint BuildStatements(in ApiHostBlocks src, List<AsmApiStatement> dst)
+        public ReadOnlySpan<AsmIndex> BuildStatementIndex(SortedSpan<ApiCodeBlock> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return default;
+
+            var dst = list<AsmIndex>();
+            var counter = 0u;
+            var @base = src[0].BaseAddress;
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var code = ref src[i];
+                var decoded = Decode(code);
+                var instructions = decoded.Instructions;
+                var icount = instructions.Length;
+                if(icount == 0)
+                    continue;
+
+                var bytes = code.View;
+                var i0 = first(instructions);
+                var blockBase = (MemoryAddress)i0.IP;
+                var blockOffset = z16;
+                for(var j=0; j<icount; j++)
+                {
+                    var instruction = skip(instructions,j);
+                    var opcode = AsmCore.opcode(instruction.OpCode.ToString());
+                    if(!opcode.IsValid)
+                        break;
+
+                    var statement = new AsmIndex();
+                    var size = (ushort)instruction.ByteLength;
+                    var specifier = instruction.Specifier;
+                    var ip = (MemoryAddress)instruction.IP;
+                    statement.Sequence = counter++;
+                    statement.GlobalOffset = (Address32)(ip - @base);
+                    statement.BlockAddress = blockBase;
+                    statement.BlockOffset = blockOffset;
+                    statement.IP = ip;
+                    statement.OpUri = code.OpUri;
+                    statement.Expression = instruction.FormattedInstruction;
+                    AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
+                    statement.Encoded = AsmBytes.hexcode(slice(bytes, blockOffset, size));
+                    statement.OpCode = opcode;
+                    statement.Bitstring = statement.Encoded;
+                    dst.Add(statement);
+
+                    blockOffset += size;
+                }
+            }
+
+            return dst.ViewDeposited();
+
+        }
+
+        public uint BuildHostStatements(in ApiHostBlocks src, List<AsmApiStatement> dst)
         {
             var blocks = src.Blocks.View;
             var count = blocks.Length;
             var counter = 0u;
             for(var i=0; i<count; i++)
-                counter += CreateStatements(Decode(skip(blocks,i)), dst);
+                counter += CreateHostStatements(Decode(skip(blocks,i)), dst);
             return counter;
         }
 
-        public ReadOnlySpan<AsmApiStatement> EmitStatements()
-            => EmitStatements(Db.AsmStatementRoot());
+        public ReadOnlySpan<AsmApiStatement> EmitHostStatements()
+            => EmitHostStatements(Db.AsmStatementRoot());
 
-        public ReadOnlySpan<AsmApiStatement> EmitStatements(FS.FolderPath root)
+        public ReadOnlySpan<AsmApiStatement> EmitHostStatements(FS.FolderPath root)
         {
             var blocks = ApiHex.ReadBlocks().ToHostBlocks();
-            return EmitStatements(blocks, root);
+            return EmitHostStatements(blocks, root);
         }
 
-        public ReadOnlySpan<AsmApiStatement> EmitStatements(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath root)
+        public ReadOnlySpan<AsmApiStatement> EmitHostStatements(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath root)
         {
             root.Delete();
 
@@ -79,11 +134,11 @@ namespace Z0.Asm
                 if(blocks.Length == 0)
                     continue;
 
-                counter += BuildStatements(blocks, buffer);
+                counter += BuildHostStatements(blocks, buffer);
 
                 var host = blocks.Host;
                 EmitHostAsm(host, buffer.ViewDeposited());
-                EmitRecords(host, buffer.ViewDeposited());
+                EmitHostData(host, buffer.ViewDeposited());
                 dst.AddRange(buffer);
             }
 
@@ -110,21 +165,21 @@ namespace Z0.Asm
             Wf.EmittedFile(flow, count);
         }
 
-        void EmitRecords(ApiHostUri host, ReadOnlySpan<AsmApiStatement> src)
+        void EmitHostData(ApiHostUri host, ReadOnlySpan<AsmApiStatement> src)
         {
             var dst = Db.AsmStatementPath(host, FS.Csv);
             var flow = Wf.EmittingTable<AsmApiStatement>(dst);
             Wf.EmittedTable(flow, Tables.emit(src, AsmApiStatement.RenderWidths, dst));
         }
 
-        public ReadOnlySpan<AsmApiStatement> EmitStatements(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
+        public ReadOnlySpan<AsmApiStatement> EmitHostStatements(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
         {
-            var statements = BuildStatements(src);
-            EmitStatements(statements, dst);
+            var statements = BuildHostStatements(src);
+            EmitHostStatements(statements, dst);
             return statements;
         }
 
-        public void EmitStatements(ReadOnlySpan<AsmApiStatement> src, FS.FolderPath? root = null)
+        public void EmitHostStatements(ReadOnlySpan<AsmApiStatement> src, FS.FolderPath? root = null)
         {
             ClearTarget();
 
@@ -202,7 +257,7 @@ namespace Z0.Asm
         public ReadOnlySpan<AsmApiStatement> ParseRecords()
             => ParseStatements(Db.TableDir<AsmApiStatement>());
 
-        public uint CreateRecords(in AsmRoutine src, Span<AsmApiStatement> dst)
+        public uint CreateRoutineStatements(in AsmRoutine src, Span<AsmApiStatement> dst)
         {
             var instructions = src.Instructions.View;
             var count = (uint)instructions.Length;
@@ -223,7 +278,7 @@ namespace Z0.Asm
             return count;
         }
 
-        uint CreateStatements(in AsmInstructionBlock src, List<AsmApiStatement> dst)
+        uint CreateHostStatements(in AsmInstructionBlock src, List<AsmApiStatement> dst)
         {
             var instructions = src.Instructions;
             var count = (uint)instructions.Length;
@@ -269,31 +324,14 @@ namespace Z0.Asm
 
         const byte StatementFieldCount = AsmApiStatement.FieldCount;
 
-        void ParseStatements(FS.FilePath src, ConcurrentBag<AsmApiStatement> dst)
+        static Outcome<uint> ParseStatements(FS.FilePath src, ConcurrentBag<AsmApiStatement> dst)
         {
-            var flow = Wf.Running(FS.Msg.ParsingFile.Format(src));
-            if(TextDoc.parse(src, out var doc))
-            {
-                if(doc.Header.Labels.Length == StatementFieldCount)
-                {
-                    var count = doc.RowCount;
-                    var rows = doc.RowData.View;
-                    for(var i=0; i<count; i++)
-                    {
-                        ref readonly var row = ref skip(rows,i);
-                        var result = AsmParser.parse(row, out var statement);
-                        if(result)
-                            dst.Add(statement);
-                        else
-                            Wf.Error(Msg.CouldNotParseStatementRow.Format(row,result.Message));
-                    }
-                    Wf.Ran(flow, FS.Msg.ParsedFile.Format(src));
-                }
-                else
-                    Wf.Error(Msg.UnexpectedFieldCount.Format(StatementFieldCount, doc.Header.Labels.Length));
-            }
-            else
-                Wf.Error(Msg.CouldNotParseDocument.Format(src));
+            var outcome = Outcome.Success;
+
+            if(!TextDoc.parse(src, out var doc))
+               return(false, Msg.CouldNotParseDocument.Format(src));
+
+            return ParseStatements(doc, dst);
         }
 
         static Outcome<uint> ParseStatements(TextDoc doc, ConcurrentBag<AsmApiStatement> dst)

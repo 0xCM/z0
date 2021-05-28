@@ -440,7 +440,7 @@ namespace Z0.Asm
             var blocks = Wf.ApiHex().ReadBlocks().View;
             var pipe = Wf.AsmStatementPipe();
             var root = Db.AppLogDir("statements");
-            pipe.EmitStatements(blocks, root);
+            pipe.EmitHostStatements(blocks, root);
             var parsed = pipe.ParseStatements(root);
         }
 

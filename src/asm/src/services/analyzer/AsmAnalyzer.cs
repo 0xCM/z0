@@ -59,7 +59,7 @@ namespace Z0
 
         }
 
-        void EmitStatements(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
+        void EmitHostStatements(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
         {
             var pipe = Wf.AsmStatementPipe();
             var total = CountStatements(src);
@@ -68,19 +68,18 @@ namespace Z0
             var count = src.Length;
             var offset = 0u;
             for(var i=0; i<count; i++)
-                offset += pipe.CreateRecords(skip(src,i), slice(buffer, offset));
-
+                offset += pipe.CreateRoutineStatements(skip(src,i), slice(buffer, offset));
             Wf.Ran(running, CreatedStatements.Format(total));
 
-            pipe.EmitStatements(buffer, dst);
+            pipe.EmitHostStatements(buffer, dst);
         }
 
-        ReadOnlySpan<ApiCodeBlock> ColectBlocks(ReadOnlySpan<AsmRoutine> src)
+        Index<ApiCodeBlock> ColectBlocks(ReadOnlySpan<AsmRoutine> src)
         {
             var count = src.Length;
             var flow = Wf.Running(CollectingBlocks.Format(count));
-            var dst = span<ApiCodeBlock>(count);
-            var size = AsmEtl.blocks(src,dst);
+            var dst = alloc<ApiCodeBlock>(count);
+            var size = AsmEtl.blocks(src, dst);
             Wf.Ran(flow, CollectedBlocks.Format(size));
             return dst;
         }
@@ -95,13 +94,14 @@ namespace Z0
             if(Settings.EmitJumps)
                 EmitJumps(src, dst);
 
-            if(Settings.EmitStatements)
-                EmitStatements(src, dst);
+            if(Settings.EmitHostStatements)
+                EmitHostStatements(src, dst);
 
             if(Settings.EmitStatementIndex)
             {
-                var statements = EmitStatementIndex(blocks, dst);
-                EmitBitstrings(statements, dst);
+                var statements = EmitStatementIndex(blocks.ToSortedSpan(), dst);
+                if(Settings.EmitBitstringIndex)
+                    EmitBitstrings(statements, dst);
             }
 
             if(Settings.EmitAsmDetails)
@@ -116,20 +116,19 @@ namespace Z0
             Emitted(rows, dst);
         }
 
-        ReadOnlySpan<AsmApiStatement> EmitStatementIndex(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
+        ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, FS.FolderPath dst)
         {
             var target = StatementTarget(dst);
-            var rows = Statements.BuildStatements(src);
-            TableEmit(rows, AsmApiStatement.RenderWidths, target);
-            Emitted(rows, target);
+            var rows = Statements.BuildStatementIndex(src);
+            TableEmit(rows, AsmIndex.RenderWidths, target);
             return rows;
         }
 
-        void EmitBitstrings(ReadOnlySpan<AsmApiStatement> src, FS.FolderPath dst)
+        void EmitBitstrings(ReadOnlySpan<AsmIndex> src, FS.FolderPath dst)
         {
             var target = BsTarget(dst);
-            var bitstrings = Bitstrings.EmitBitstrings(src, target);
-            Emitted(bitstrings, target);
+            var distinct = Bitstrings.CollectDistinct(src);
+             Bitstrings.EmitBitstrings(distinct, target);
         }
 
         void EmitCalls(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)

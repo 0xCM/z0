@@ -36,6 +36,53 @@ namespace Z0.Asm
             return EmitBitstrings(src,dst);
         }
 
+        static AsmEncodingInfo encoding(in AsmIndex src)
+        {
+            var bitstrings = AsmBitstrings.service();
+            var content = bitstrings.Format(src.Encoded);
+            return new AsmEncodingInfo(src.Expression, src.Sig, src.OpCode, src.Encoded, content);
+        }
+
+        public SortedSpan<AsmEncodingInfo> CollectDistinct(ReadOnlySpan<AsmIndex> src)
+        {
+            var collecting = Wf.Running(Msg.CollectingBitstrings.Format(src.Length));
+            var dst = Db.IndexRoot() + IndexFileName;
+            var collected = root.hashset<AsmEncodingInfo>();
+            var count = src.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var statement = ref skip(src,i);
+                var info = encoding(statement);
+                if(collected.Add(info))
+                    counter++;
+            }
+
+            Wf.Ran(collecting, Msg.CollectedBitstrings.Format(counter));
+
+            return collected.Array().ToSortedSpan();
+        }
+
+        public void EmitBitstrings(SortedSpan<AsmEncodingInfo> src, FS.FilePath dst)
+        {
+            var emitting = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            var input = src.View;
+            var count = input.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var bitstring = ref skip(input,i);
+                var line1 = string.Format(AsmLinePattern, bitstring.Statement, bitstring.Sig, bitstring.OpCode, bitstring.Encoded.Size, bitstring.Encoded);
+                var line2 = string.Format(BitLinePattern, Chars.Space, bitstring.Format());
+                writer.WriteLine(line1);
+                writer.WriteLine(line2);
+            }
+
+            Wf.EmittedFile(emitting, count);
+
+            //return EmitBitstrings(src,dst);
+        }
+
         public ReadOnlySpan<AsmEncodingInfo> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src, FS.FilePath dst)
         {
             var collecting = Wf.Running(Msg.CollectingBitstrings.Format(src.Length));

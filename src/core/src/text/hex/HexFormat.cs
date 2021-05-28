@@ -141,6 +141,5 @@ namespace Z0
             else
                 return format(w64, bw64(value), postspec);
         }
-
     }
 }

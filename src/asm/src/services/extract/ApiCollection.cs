@@ -24,6 +24,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => _ResolvedParts.View;
         }
-
     }
 }

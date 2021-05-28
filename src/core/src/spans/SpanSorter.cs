@@ -6,7 +6,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -22,6 +21,19 @@ namespace Z0
             SpanSorter.sort(src);
             return src;
         }
+
+        public static SortedSpan<T> ToSortedSpan<T>(this T[] src)
+            where T : IComparable<T>
+                => new SortedSpan<T>(src);
+
+        public static SortedSpan<T> ToSortedSpan<T>(this Index<T> src)
+            where T : IComparable<T>
+                => new SortedSpan<T>(src);
+
+        public static SortedSpan<T> ToSorted<T>(this Span<T> src)
+            where T : IComparable<T>
+                => new SortedSpan<T>(src);
+
     }
 
     public interface ISpanSorter<T>

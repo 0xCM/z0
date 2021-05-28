@@ -13,39 +13,12 @@ namespace Z0.Asm
 
     public sealed class AsmJmpPipe : AppService<AsmJmpPipe>
     {
-        // public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src)
-        // {
-        //     var dst = Db.TableDir<AsmJmpRow>();
-        //     return EmitRows(src,dst);
-        // }
-
-        // public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
-        // {
-        //     var rows = list<AsmJmpRow>();
-        //     var count = src.Length;
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var routines = ref skip(src,i);
-        //         var path = Db.Table(dst, AsmJmpRow.TableId, routines.Part);
-        //         rows.AddRange(EmitJmpRows(routines, path));
-        //     }
-
-        //     return rows.ViewDeposited();
-        // }
-
         public ReadOnlySpan<AsmJmpRow> EmitRows(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
         {
             var rows = Collect(src);
             Store(rows, dst);
             return rows;
         }
-
-        // Index<AsmJmpRow> EmitJmpRows(ApiPartRoutines src, FS.FilePath dst)
-        // {
-        //     var rows = Collect(src);
-        //     Store(rows, dst);
-        //     return rows;
-        // }
 
         void Store(ReadOnlySpan<AsmJmpRow> src, FS.FilePath dst)
         {
@@ -61,42 +34,6 @@ namespace Z0.Asm
                 Wf.EmittedTable<AsmJmpRow>(flow, count, dst);
             }
         }
-
-        // Index<AsmJmpRow> Collect(ApiPartRoutines src)
-        // {
-        //     var collection = root.list<AsmJmpRow>();
-        //     var hosts = src.View;
-        //     uint kHost = src.HostCount;
-        //     for(var i=0u; i<kHost; i++)
-        //     {
-        //         ref readonly var host = ref skip(hosts,i);
-        //         var rCount = host.RoutineCount;
-        //         var routines = host.Members.View;
-        //         for(var j=0u; j<rCount; j++)
-        //         {
-        //             ref readonly var member = ref skip(routines,j);
-        //             var instructions = member.Instructions.View;
-        //             var iCount = instructions.Length;
-        //             for(var k=0u; k<iCount; k++)
-        //             {
-        //                 ref readonly var fx = ref skip(instructions, k);
-        //                 var fc = fx.Instruction.FlowControl;
-        //                 switch(fc)
-        //                 {
-        //                     case IceFlowControl.ConditionalBranch:
-        //                     case IceFlowControl.IndirectBranch:
-        //                     case IceFlowControl.UnconditionalBranch:
-        //                         classify(fx.Mnemonic, out var kind);
-        //                         jmprow(fx, kind, out var dst);
-        //                         collection.Add(dst);
-        //                     break;
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        //     return collection.ToArray();
-        // }
 
         ReadOnlySpan<AsmJmpRow> Collect(ReadOnlySpan<AsmRoutine> src)
         {

@@ -14,7 +14,9 @@ namespace Z0
 
         public Setting<bool> EmitStatementIndex;
 
-        public Setting<bool> EmitStatements;
+        public Setting<bool> EmitHostStatements;
+
+        public Setting<bool> EmitBitstringIndex;
 
         public static ref AsmAnalyzerSettings @default(out AsmAnalyzerSettings dst)
         {
@@ -22,7 +24,8 @@ namespace Z0
             dst.EmitJumps = true;
             dst.EmitAsmDetails = true;
             dst.EmitStatementIndex = true;
-            dst.EmitStatements = true;
+            dst.EmitHostStatements = true;
+            dst.EmitBitstringIndex = true;
             return ref dst;
         }
     }

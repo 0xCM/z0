@@ -9,8 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static memory;
-    using static Part;
+    using static core;
 
     [Service(typeof(IApiIndexBuilder))]
     public class ApiIndexBuilder : AppService<ApiIndexBuilder>, IApiIndexBuilder
