@@ -20,14 +20,32 @@ namespace Z0
 
         FS.FolderPath AssetRoot;
 
+        EventQueue Queue;
+
+        Index<IWfEvent> EventBuffer;
+
         protected override void OnInit()
         {
             AssetRoot = Db.ZSrc("engine.run", "assets");
+            Configure();
         }
 
         public App()
         {
+            Queue = EventQueue.allocate();
+            EventBuffer = alloc<IWfEvent>(Pow2.T08);
+        }
 
+        void EmptyQueue()
+        {
+            while(Queue.Emit(out var e))
+                Wf.Raise(e);
+        }
+
+        public void Run()
+        {
+            CheckStack();
+            EmptyQueue();
         }
 
         void Configure()
@@ -35,6 +53,17 @@ namespace Z0
             var settings = new EngineSettings();
             settings.Affinity = 0b10101101u;
             Wf.Row(settings.Affinity);
+        }
+
+        public void CheckStack()
+        {
+            var stack = StackMachines.create(Pow2.T08);
+            stack.Push(2);
+            Queue.Status(stack.state());
+            stack.Push(4);
+            Queue.Status(stack.state());
+            stack.Push(6);
+            Queue.Status(stack.state());
         }
 
 
@@ -57,7 +86,7 @@ namespace Z0
             return lookup.Seal();
         }
 
-        public void Run()
+        void LoadBlocks()
         {
             var input = AssetRoot.Files("-parsed", FS.XPack, true);
             var incount = input.Length;
@@ -76,6 +105,7 @@ namespace Z0
             }
 
         }
+
 
         Task<uint> RunMachine(uint cycles)
             => Task.Factory.StartNew(() => new Vmx128x2(1024, Rng.@default()).Run(cycles));
@@ -128,7 +158,6 @@ namespace Z0
             Wf.Row(block.Describe());
         }
 
-
         void Run128(PageBlock lhs, PageBlock rhs, PageBlock dst)
         {
             var provider = PageBanks.service();
@@ -147,6 +176,12 @@ namespace Z0
                 b = cpu.vbroadcast(w,i + Pow2.T12);
                 seek(target,i) = f.Invoke(a,b);
             }
+        }
+
+        protected override void Disposing()
+        {
+            EmptyQueue();
+            Queue.Dispose();
         }
 
         void Test2()
@@ -181,6 +216,6 @@ namespace Z0
             => App.create(wf);
 
         static IWfRuntime shell(string[] args)
-            => WfRuntime.create(ApiQuery.parts(root.controller(), args), args).WithSource(Rng.@default());
+            => WfRuntime.create(ApiQuery.parts(core.controller(), args), args).WithSource(Rng.@default());
     }
 }

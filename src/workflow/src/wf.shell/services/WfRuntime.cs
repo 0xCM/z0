@@ -57,7 +57,7 @@ namespace Z0
             Env = Z0.Env.create();
             Context = config.Shell;
             Id = config.ControlId;
-            Ct = root.correlate(config.ControlId);
+            Ct = CorrelationToken.create(config.ControlId);
             EventSink = Loggers.events(config.LogConfig);
             EventBroker = new WfBroker(EventSink, Ct);
             Host = new WfHost(typeof(WfRuntime), typeof(WfRuntime));

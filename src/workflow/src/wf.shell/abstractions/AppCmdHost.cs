@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     [WfCmdHost]
     public abstract class AppCmdHost<H,K> : AppService<H>
@@ -48,7 +47,7 @@ namespace Z0
             var count = GetType().DeclaredInstanceMethods().Tagged<ActionAttribute>(out var methods);
             if(count != 0)
             {
-                var view = methods.View;
+                var view = @readonly(methods);
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var method = ref skip(view,i);

@@ -5,17 +5,16 @@
 namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
     [Free]
     public interface IDataEvent : IAppEvent
     {
-        string Id {get;}
+        ulong Id {get;}
 
         BinaryCode Encoded {get;}
         string ITextual.Format()
         {
-            var dst = text.build();
-            dst.Append(Id);
+            var dst = text.buffer();
+            dst.Append(Id.FormatAsmHex());
             dst.Append(Chars.Space);
             dst.Append(Chars.Pipe);
             dst.AppendLine(Encoded.Format());

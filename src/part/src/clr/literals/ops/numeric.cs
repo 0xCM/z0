@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using NBK = NumericBaseKind;
 
@@ -34,12 +34,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] numeric<T>(Type src)
             where T : unmanaged
-                => root.map(search<T>(src),numeric<T>);
+                => map(search<T>(src),numeric<T>);
 
         public static Index<NumericLiteral> numeric(Type src, Base2 b)
         {
             var fields = span(src.LiteralFields());
-            var dst = root.list<NumericLiteral>();
+            var dst = list<NumericLiteral>();
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);

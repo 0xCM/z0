@@ -9,7 +9,7 @@ namespace Z0
 
     using R = System.Reflection;
 
-    using static Part;
+    using static Root;
 
     public readonly struct ClrParameter : IClrRuntimeObject<ClrParameter,R.ParameterInfo>
     {

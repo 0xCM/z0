@@ -21,7 +21,7 @@ namespace Z0
         public static T[] Sort<T>(this T[] src)
             where T : IComparable<T>
         {
-            Array.Sort(src);
+            System.Array.Sort(src);
             return src;
         }
 

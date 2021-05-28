@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static memory;
+    using static core;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         T Next();
 
-        bool Next(out T dst)
+        bool Emit(out T dst)
         {
             dst = Next();
             return true;

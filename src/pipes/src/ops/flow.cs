@@ -30,7 +30,7 @@ namespace Z0
         public static uint flow<T>(Pipe<T> src, Pipe<T> dst)
         {
             var count = 0u;
-            while(src.Next(out var cell))
+            while(src.Emit(out var cell))
             {
                 dst.Deposit(cell);
                 count++;

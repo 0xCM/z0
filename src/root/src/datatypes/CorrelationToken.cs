@@ -15,6 +15,10 @@ namespace Z0
     /// </summary>
     public readonly struct CorrelationToken : IComparable<CorrelationToken>, IEquatable<CorrelationToken>
     {
+        [MethodImpl(Inline)]
+        public static CorrelationToken create(PartId src)
+            => new CorrelationToken(src);
+
         PartId Value {get;}
 
         [MethodImpl(Inline)]

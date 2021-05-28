@@ -28,7 +28,7 @@ namespace Z0
             => Buffer.Enqueue(src);
 
         [MethodImpl(Inline)]
-        public bool Next(out T dst)
+        public bool Emit(out T dst)
         {
             if(Buffer.TryDequeue(out var src))
             {
@@ -41,7 +41,7 @@ namespace Z0
 
         T ISource<T>.Next()
         {
-            if(Next(out var dst))
+            if(Emit(out var dst))
                 return dst;
             else
                 return default;

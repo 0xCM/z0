@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using F = AsciFormatter;
 
@@ -40,5 +41,20 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(AsciSymbol src)
             => src.Text;
+
+        [Op]
+        public static string format(ReadOnlySpan<AsciCharCode> src, Span<char> buffer)
+        {
+            var count = decode(src, buffer);
+            return new string(slice(buffer,0, count));
+        }
+
+        [Op]
+        public static string format(in BinaryCode src)
+        {
+            var dst = span<char>(src.Length);
+            decode(src, dst);
+            return new string(dst);
+        }
     }
 }

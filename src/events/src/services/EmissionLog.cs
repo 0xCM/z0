@@ -21,7 +21,7 @@ namespace Z0
 
         internal EmissionLog(FS.FilePath dst)
         {
-            dst.EnsureParentExists().Delete();
+            dst.CreateParentIfMissing().Delete();
             Emissions = dst.Stream();
             TargetPath = dst;
         }

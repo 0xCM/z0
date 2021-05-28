@@ -14,6 +14,18 @@ namespace Z0
 
     public sealed class PdbSymbolStore : AppService<PdbSymbolStore>
     {
+        public FS.Files EmitDefaultSymbolPaths(FS.FilePath dst)
+        {
+            var symbols = Wf.PdbSymbolStore();
+            var src = Db.DefaultSymbolCache();
+            var paths = symbols.SymbolPaths(src);
+            var buffer = text.buffer();
+            FS.render(paths.View, buffer);
+            using var writer = dst.Writer();
+            writer.Write(buffer.Emit());
+            return paths;
+        }
+
         public DirectorySymbolStore DirectoryStore(FS.FolderPath dir)
             => new DirectorySymbolStore(tracer(Wf), null, dir.Name);
 

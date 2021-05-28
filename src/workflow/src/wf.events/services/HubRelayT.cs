@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a sink that forwards deposits to a receiver
     /// </summary>
     public readonly struct HubRelay<E> : IDataEventSink
-        where E : struct, IDataEvent
+        where E : struct, IWfEvent
     {
         readonly EventReceiver<E> Receiver;
 
@@ -25,7 +25,7 @@ namespace Z0
         public void Deposit(in E e)
             => Receiver(e);
 
-        public void Deposit(IDataEvent e)
+        public void Deposit(IWfEvent e)
             => Receiver((E)e);
     }
 }

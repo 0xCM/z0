@@ -40,7 +40,6 @@ namespace Z0
             Target = t;
         }
 
-
         public string Format()
             => IdentityText;
 

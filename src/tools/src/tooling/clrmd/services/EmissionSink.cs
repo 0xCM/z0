@@ -36,18 +36,6 @@ namespace Z0
             Storage.TryAdd(src.EventId,src);
         }
 
-        public ReadOnlySpan<IWfEvent> Emit()
-        {
-            var events = Index<IWfEvent>.Empty;
-
-            lock(Locker)
-            {
-                events = Storage.Values.ToArray();
-                Storage.Clear();
-            }
-
-            return events.OrderBy(x => x.EventId).Array();
-        }
 
         public void Dispose()
         {

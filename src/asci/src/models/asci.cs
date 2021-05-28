@@ -24,7 +24,7 @@ namespace Z0
             var len = text.length(src);
             if(len != 0)
             {
-                var buffer = sys.alloc<byte>(len);
+                var buffer = alloc<byte>(len);
                 Asci.encode(src, buffer);
                 Data = buffer;
             }

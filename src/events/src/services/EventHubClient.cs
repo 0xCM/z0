@@ -29,11 +29,11 @@ namespace Z0
             Connect();
         }
 
-        public void Deposit(IDataEvent e)
+        public void Deposit(IWfEvent e)
             => Sink.Deposit(e);
 
         public void Deposit<S>(in S e)
-            where S : struct, IDataEvent
+            where S : struct, IWfEvent
                 => Sink.Deposit(e);
 
         [MethodImpl(Inline)]

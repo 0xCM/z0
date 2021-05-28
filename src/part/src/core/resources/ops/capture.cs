@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct Resources
     {
@@ -23,7 +23,7 @@ namespace Z0
         [Op]
         public static MemorySeg capture(ApiResAccessor accessor)
         {
-            var definition = Resources.definition(accessor);
+            var def = definition(accessor);
             var address = MemoryAddress.Zero;
             var size = ByteSize.Zero;
             for(var i=0; i<MemberSegCount; i++)
@@ -31,16 +31,16 @@ namespace Z0
                 if(i == 1)
                 {
                     // MOV r64,imm64 : REX.W B8+ro io => [48 b8] [lo lo lo lo hi hi hi hi]
-                    var start = skip(MemberSegments,i) + 2;
-                    var width = skip(MemberSegments,i+1) - start;
-                    address = Imm64.from(slice(definition, start,width));
+                    var start = skip(MemberSegments, i) + 2;
+                    var width = skip(MemberSegments, i+1) - start;
+                    address = Imm64.from(slice(def, start,width));
                 }
                 else if(i==3)
                 {
                     // MOV r/m32, imm32 : C7 /0 id => [c7 41 08] [lo lo hi hi]
-                    var start = skip(MemberSegments,i) + 3;
-                    var width = skip(MemberSegments,i+1) - start;
-                    size = (uint)Imm32.from(slice(definition,start,width));
+                    var start = skip(MemberSegments, i) + 3;
+                    var width = skip(MemberSegments, i+1) - start;
+                    size = (uint)Imm32.from(slice(def,start,width));
                 }
             }
 
@@ -49,6 +49,7 @@ namespace Z0
 
         const byte MemberSegCount = 6;
 
-        static ReadOnlySpan<byte> MemberSegments => new byte[MemberSegCount]{0,5,0xf,0x12,0x18,0x1c};
+        static ReadOnlySpan<byte> MemberSegments
+            => new byte[MemberSegCount]{0,5,0xf,0x12,0x18,0x1c};
     }
 }

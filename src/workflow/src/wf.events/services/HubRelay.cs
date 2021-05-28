@@ -21,12 +21,12 @@ namespace Z0
             => Receiver = receiver;
 
         [MethodImpl(Inline)]
-        public void Deposit(IDataEvent e)
+        public void Deposit(IWfEvent e)
             => Receiver(e);
 
         [MethodImpl(Inline)]
         public void Deposit<S>(in S e)
-            where S : struct, IDataEvent
+            where S : struct, IWfEvent
                 => Receiver(e);
     }
 }

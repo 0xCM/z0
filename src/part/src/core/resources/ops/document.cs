@@ -9,7 +9,7 @@ namespace Z0
         [Op]
         public static bool document(Asset src, TextDocFormat format, out TextDoc dst)
         {
-            var content = Resources.utf8(src);
+            var content = utf8(src);
             var result = TextDoc.parse(content,format);
             if(result)
             {

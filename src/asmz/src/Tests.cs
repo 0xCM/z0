@@ -236,7 +236,6 @@ namespace Z0.Asm
             }
         }
 
-
         void CreateSymbolHeap()
         {
             var symbolic = Wf.Symbolism();
@@ -266,31 +265,15 @@ namespace Z0.Asm
             Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
         }
 
-        static uint decode(ReadOnlySpan<AsciCharCode> src, Span<char> dst)
-        {
-            var count = (uint)src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var code = ref skip(src,i);
-                seek(dst,i) = Asci.decode(code);
-            }
-            return count;
-        }
-
-        void ShowChars(ReadOnlySpan<AsciCharCode> src, Span<char> buffer)
-        {
-            var count = decode(src,buffer);
-            var decoded = slice(buffer,0,count);
-            var @string = text.format(decoded);
-            Wf.Row(@string);
-        }
-
         public void CheckAsciTables()
         {
-            var chars = span<char>(128);
-            ShowChars(AsciTables.letters(LowerCase).Codes, chars);
-            ShowChars(AsciTables.letters(UpperCase).Codes, chars);
-            ShowChars(AsciTables.digits().Codes, chars);
+            var buffer = span<char>(128);
+            Wf.Row(Asci.format(AsciTables.letters(LowerCase).Codes, buffer));
+            buffer.Clear();
+            Wf.Row(Asci.format(AsciTables.letters(UpperCase).Codes, buffer));
+            buffer.Clear();
+            Wf.Row(Asci.format(AsciTables.digits().Codes, buffer));
+            buffer.Clear();
         }
 
         void CheckMullo(IDomainSource Source)
@@ -324,13 +307,6 @@ namespace Z0.Asm
                 ref readonly var expect = ref skip(expected,i);
                 Wf.Row(call.Format() + " ?=? " + expect.ToString());
             }
-        }
-
-
-        public ReadOnlySpan<AsmApiStatement> EmitHostStatements()
-        {
-            var pipe = Wf.AsmStatementPipe();
-            return pipe.EmitStatements();
         }
 
         public void CheckMemoryLookup()
@@ -385,7 +361,6 @@ namespace Z0.Asm
             Wf.Status(string.Format("Found: {0}", found));
         }
 
-
         ToolScript<XedCase> CreateXedCase(AsmOc id)
         {
             var tool = Wf.XedTool();
@@ -401,38 +376,41 @@ namespace Z0.Asm
             var unique = root.hashset<Type>();
             var count = unique.Include(types).Where(x => x).Count();
             Wf.Row($"{types.Length} ?=? {count}");
-
             var fields = Wf.ApiCatalog.Components.Storage.DeclaredStaticFields();
             root.iter(fields, f => Wf.Row(f.Name + ": " + f.FieldType.Name));
 
         }
 
-        public void t_digit_parser()
+        public bool parse32u(ReadOnlySpan<char> input, out uint dst)
         {
-            ReadOnlySpan<char> input = "754d91";
-            Span<uint4> output = new uint4[256];
-            var count = input.Length;
-            var dst = EmptyString;
+            const byte MaxDigitCount = 8;
+            var storage = 0ul;
+            var output = recover<uint4>(bytes(storage));
+            dst = 0;
+            var count = core.min(input.Length, MaxDigitCount);
             var j=0;
-
+            var outcome = true;
             for(var i=count-1; i>=0; i--)
             {
                 ref readonly var c = ref skip(input,i);
                 if(DigitParser.digit(@base16, c, out var d))
-                    seek(output,j++) = d;
+                    seek(output, j++) = d;
                 else
-                    Wf.Error(c.ToString());
+                    return false;
             }
 
-             var value = 0u;
-             value = ((uint)skip(output,0) << 0);
-             value |= ((uint)skip(output,1) << 4);
-             value |= ((uint)skip(output,2) << 8);
-             value |= ((uint)skip(output,3) << 12);
-             value |= ((uint)skip(output,4) << 16);
-             value |= ((uint)skip(output,5) << 20);
+            for(var k=0; k<j; k++)
+                dst |= ((uint)skip(output, k) << k*4);
+            return true;
 
-            Wf.Row(value.ToString("x"));
+            // value = ((uint)skip(output,0) << 0);
+            // value |= ((uint)skip(output,1) << 4);
+            // value |= ((uint)skip(output,2) << 8);
+            // value |= ((uint)skip(output,3) << 12);
+            // value |= ((uint)skip(output,4) << 16);
+            // value |= ((uint)skip(output,5) << 20);
+
+            //Wf.Row(value.ToString("x"));
         }
 
 
@@ -471,7 +449,6 @@ namespace Z0.Asm
             log.Show("Register");
             root.iter(converter.Kinds, k => ShowRegKinds(k,log));
         }
-
 
         void CheckBitSpans()
         {
@@ -657,7 +634,6 @@ namespace Z0.Asm
             }
         }
 
-
         void EmitMsil()
         {
             var pipe = Wf.MsilPipe();
@@ -667,25 +643,6 @@ namespace Z0.Asm
             root.iter(methods, m => pipe.RenderCode(m,buffer));
             using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Il)).Writer();
             writer.Write(buffer.Emit());
-        }
-
-        FS.Files EmitPdbSymbolPaths()
-        {
-            var symbols = Wf.PdbSymbolStore();
-            var src = Db.DefaultSymbolCache();
-            var paths = symbols.SymbolPaths(src);
-            var view = paths.View;
-            var count = view.Length;
-            var dst = Db.AppDataFile(FS.file("pdbsymbols", FS.Csv));
-            using var writer = dst.Writer();
-            writer.WriteLine(string.Format("{0,-6} | {1}", "Seq", "Path"));
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(view,i);
-                var row = string.Format("{0,-6} | {1}", i.Format(4), path.ToUri());
-                writer.WriteLine(row);
-            }
-            return paths;
         }
 
         static string FormatAttributes(IXmlElement src)
@@ -749,25 +706,6 @@ namespace Z0.Asm
         }
 
 
-
-        public static void EmitByteResProps(Type[] types, FS.FilePath dst)
-        {
-            var summary = dst.Writer();
-            var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
-            summary.WriteLine(header);
-            //var types = array(typeof(HexCharData), typeof(CpuBytes));
-            var mod = types[0].Module;
-            var props = types.StaticProperties().Where(p => p.GetGetMethod() != null && p.PropertyType == typeof(ReadOnlySpan<byte>));
-
-            foreach(var p in props)
-            {
-                var m = p.GetGetMethod();
-                var body = m.GetMethodBody();
-                var cil = body.GetILAsByteArray();
-                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHex());
-                summary.WriteLine(line);
-            }
-        }
 
 
         MemoryAddress GetKernel32Proc(string name = "CreateDirectoryA")

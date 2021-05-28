@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     partial struct Resources
     {
-
         [Op]
         static MemoryAddress fptr(MethodInfo src)
             => src.MethodHandle.GetFunctionPointer();
@@ -41,8 +41,8 @@ namespace Z0
         public static unsafe ApiRes load(ApiResAccessor src)
         {
             var data = description(src);
-            var address = slice(data,8,8).TakeUInt64();
-            var size = slice(data,22,4).TakeUInt32();
+            var address = slice(data, 8, 8).TakeUInt64();
+            var size = slice(data, 22, 4).TakeUInt32();
             return new ApiRes(src, address, size);
         }
 

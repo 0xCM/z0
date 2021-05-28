@@ -9,10 +9,10 @@ namespace Z0
     [Free]
     public interface IDataEventSink : ISink
     {
-       void Deposit(IDataEvent e);
+       void Deposit(IWfEvent e);
 
        void Deposit<S>(in S e)
-            where S : struct, IDataEvent
-                => Deposit((IDataEvent)e);
+            where S : struct, IWfEvent
+                => Deposit((IWfEvent)e);
     }
 }

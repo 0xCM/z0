@@ -26,7 +26,7 @@ namespace Z0
         {
             if(Connected)
             {
-                while(Emitter.Next(out var src))
+                while(Emitter.Emit(out var src))
                 {
                     Receiver.Deposit(Projector.Project(src));
                     Counter++;

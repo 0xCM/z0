@@ -13,6 +13,8 @@ namespace Z0.Asm
     [ApiComplete]
     public readonly ref struct StackMachine
     {
+        public const byte CellSize = 8;
+
         readonly Span<StackState> State;
 
         readonly Span<ulong> Storage;
@@ -23,13 +25,31 @@ namespace Z0.Asm
             State = new StackState[1]{new StackState(capacity)};
         }
 
+        /// <summary>
+        /// Specifies the size of the stack, in bytes
+        /// </summary>
+        public ByteSize StackSize
+        {
+            [MethodImpl(Inline)]
+            get => Capacity * CellSize;
+        }
+
+        /// <summary>
+        /// Presents a view of the current state
+        /// </summary>
+        [MethodImpl(Inline)]
+        public ref readonly StackState state()
+            => ref first(State);
+
         [MethodImpl(Inline)]
         public bool Push(ulong src)
         {
-            if(Input < Capacity)
+            if(Index < Capacity - 1)
             {
-                seek(Storage, Input++) = src;
-                Output--;
+                seek(Storage, Index) = src;
+                Index++;
+                Count++;
+                Current = src;
                 return true;
             }
             else
@@ -39,34 +59,26 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public bool Pop(out ulong dst)
         {
-            if(Output != Capacity)
+            if(Count > 0)
             {
-                dst = skip(Storage, Output++);
+                dst = Current;
+                Current = seek(Storage, 0);
+                Count--;
+                Index--;
                 return true;
             }
             else
             {
                 dst = default;
                 return false;
+
             }
         }
 
-        ref uint Input
+        ref ulong Current
         {
             [MethodImpl(Inline)]
-            get => ref first(State).Input;
-        }
-
-        ref uint Output
-        {
-            [MethodImpl(Inline)]
-            get => ref first(State).Output;
-        }
-
-        ref uint Capacity
-        {
-            [MethodImpl(Inline)]
-            get => ref first(State).Capacity;
+            get => ref first(State).Current;
         }
 
         ref uint Index
@@ -75,8 +87,22 @@ namespace Z0.Asm
             get => ref first(State).Index;
         }
 
-        [MethodImpl(Inline)]
-        public ref readonly StackState state()
-            => ref first(State);
+        /// <summary>
+        /// Specifies the buffer cell count
+        /// </summary>
+        ref readonly uint Capacity
+        {
+            [MethodImpl(Inline)]
+            get => ref first(State).Capacity;
+        }
+
+        /// <summary>
+        /// Tracks the number of contented cells
+        /// </summary>
+        ref uint Count
+        {
+            [MethodImpl(Inline)]
+            get => ref first(State).Count;
+        }
     }
 }

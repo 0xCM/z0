@@ -28,11 +28,13 @@ namespace Z0
                 seek(dst,i) = (char)skip(view,i);
         }
 
-        public static string format(in BinaryCode src)
+        [MethodImpl(Inline), Op]
+        public static uint decode(ReadOnlySpan<AsciCharCode> src, Span<char> dst)
         {
-            var dst = span<char>(src.Length);
-            decode(src, dst);
-            return sys.@string(dst);
+            var count = (uint)src.Length;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = decode(skip(src,i));
+            return count;
         }
 
         [MethodImpl(Inline), Op]

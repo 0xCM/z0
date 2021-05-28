@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     using TC = System.TypeCode;
 
@@ -29,7 +30,7 @@ namespace Z0
         public ref readonly Type this[TypeCode tc]
         {
             [MethodImpl(Inline)]
-            get => ref memory.skip(Types,(int)tc);
+            get => ref skip(Types,(int)tc);
         }
 
         /// <summary>
@@ -242,7 +243,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Type indexed(TC code)
-            => memory.skip(Types,(uint)code);
+            => skip(Types,(uint)code);
     }
 
     readonly struct TypeCodeCache

@@ -37,20 +37,5 @@ namespace Z0
             }
         }
 
-        // [Op]
-        // public static bool sig(Type src, out CliSig dst)
-        // {
-        //     var module = src.Module;
-        //     try
-        //     {
-        //         dst = new CliSig(module.ResolveSignature(src.MetadataToken));
-        //         return true;
-        //     }
-        //     catch(Exception)
-        //     {
-        //         dst = CliSig.Empty;
-        //         return false;
-        //     }
-        // }
     }
 }

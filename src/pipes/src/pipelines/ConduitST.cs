@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Flow()
         {
-            while(Source.Next(out var dst))
+            while(Source.Emit(out var dst))
                 Target.Deposit(dst);
         }
     }

@@ -35,7 +35,6 @@ namespace Z0.Asm
                 Show(skip(forms,i), writer);
         }
 
-
         public void CheckDigitParser()
         {
             var cases = DigitParserCases.positive();

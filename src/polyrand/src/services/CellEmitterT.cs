@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static Typed;
+    using static core;
 
     public struct CellEmitter<F> : ICellValues<F>, IEmitter<F>
         where F : struct, IDataCell
@@ -23,7 +24,7 @@ namespace Z0
         public F Next()
             => select(w8);
 
-        public bool Next(out F dst)
+        public bool Emit(out F dst)
         {
             dst = Next();
             return true;

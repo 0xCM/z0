@@ -9,36 +9,32 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IEventSink : ISink<IWfEvent>, IDisposable
-    {
-
-    }
-
-    [Free]
     public interface IEventSink<E> : ISink<E>
-        where E : IWfEvent<E>, new()
+        where E : IWfEvent
     {
 
     }
 
     [Free]
-    public interface IEventEmitter : IDisposable
+    public interface IEventSink : IEventSink<IWfEvent>, IDisposable
     {
-        ReadOnlySpan<IWfEvent> Emit();
+
     }
 
     [Free]
-    public interface IEventEmitter<E>
-        where E : IWfEvent, new()
-    {
-        ReadOnlySpan<E> Emit();
-    }
-
-    public interface IEmissionSink : IEventSink, IEventEmitter
+    public interface IEventEmitter : IEmitter<IWfEvent>
     {
 
     }
 
+
+    [Free]
+    public interface IEmissionSink : IEventSink, IDisposable
+    {
+
+    }
+
+    [Free]
     public interface IEmissionSink<S> : IEmissionSink
         where S : IEmissionSink<S>
     {

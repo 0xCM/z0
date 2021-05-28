@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <typeparam name="T">The content type</typeparam>
         [Op, Closures(Closure)]
-        public static BabbleEvent<T> babble<T>(WfStepId step, T content, CorrelationToken ct)
+        public static BabbleEvent<T> babble<T>(WfStepId step, T content, CorrelationToken ct = default)
             => new BabbleEvent<T>(step, content, ct);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
             => new StatusEvent<T>(host, content);
 
         [Op, Closures(Closure)]
-        public static WarnEvent<T> warn<T>(WfStepId step, T body, CorrelationToken ct)
+        public static WarnEvent<T> warn<T>(WfStepId step, T body, CorrelationToken ct = default)
             => new WarnEvent<T>(step, body, ct);
 
         [Op, Closures(Closure)]

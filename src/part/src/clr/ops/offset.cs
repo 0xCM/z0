@@ -8,8 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.InteropServices;
 
-    using static Root;
-
     partial struct Clr
     {
         [Op]

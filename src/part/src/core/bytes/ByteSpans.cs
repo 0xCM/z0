@@ -15,6 +15,27 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        public static uint cilbytes(Type[] types, FS.FilePath dst)
+        {
+            var counter = 0u;
+            var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
+            using var writer = dst.Writer();
+            writer.WriteLine(header);
+            var props = types.StaticProperties().Where(p => p.GetGetMethod() != null && p.PropertyType == typeof(ReadOnlySpan<byte>));
+
+            foreach(var p in props)
+            {
+                var m = p.GetGetMethod();
+                var body = m.GetMethodBody();
+                var cil = body.GetILAsByteArray();
+                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHex());
+                writer.WriteLine(line);
+                counter++;
+            }
+            return counter;
+        }
+
+
         [MethodImpl(Inline), Op]
         public static ByteSpanSpec specify(Identifier name, BinaryCode data, bool @static = true)
             => new ByteSpanSpec(name, data, @static);

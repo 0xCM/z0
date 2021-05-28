@@ -9,6 +9,6 @@ namespace Z0
     [Free]
     public interface IEmitter<T>
     {
-        bool Next(out T dst);
+        bool Emit(out T dst);
     }
 }

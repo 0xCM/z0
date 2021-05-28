@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe TypeCode typecode(in SystemTypeCodes src, byte index)
-            => (TypeCode)(*(memory.address(src) + index).Pointer<byte>());
+            => (TypeCode)(*(core.address(src) + index).Pointer<byte>());
 
         [MethodImpl(Inline), Op]
         public static TypeCode typecode(ClrPrimalKind f)
