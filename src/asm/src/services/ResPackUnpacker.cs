@@ -63,8 +63,8 @@ namespace Z0.Asm
                     offset += size;
                 }
 
-                var imm64 = Imm64.from(slice(mov.Bytes,2));
-                var imm32 = Imm32.from(slice(movsize.Bytes,3));
+                var imm64 = Imm64.from(slice(mov.Bytes, 2));
+                var imm32 = Imm32.from(slice(movsize.Bytes, 3));
                 hexwriter.Write(string.Format(" ## {0:X} ## {1:X}", imm64, imm32));
                 hexwriter.WriteLine();
 

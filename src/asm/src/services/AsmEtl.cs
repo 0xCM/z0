@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -13,6 +14,62 @@ namespace Z0.Asm
     [ApiHost]
     public sealed class AsmEtl : AppService<AsmEtl>
     {
+        AsmDecoder Decoder;
+
+        protected override void OnInit()
+        {
+            Decoder = Wf.AsmDecoder();
+        }
+
+        ReadOnlySpan<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
+        {
+            var count = src.Length;
+            var dst = core.list<AsmApiStatement>();
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                var outcome = Decoder.Decode(block.Code, out var instructions);
+                if(outcome.Fail)
+                {
+                    Wf.Error(outcome.Message);
+                    continue;
+                }
+
+                counter += BuildStatements(block.OpUri, instructions, dst);
+            }
+            return dst.ViewDeposited();
+        }
+
+        uint BuildStatements(in OpUri uri, IceInstructions src, List<AsmApiStatement> dst)
+        {
+            var count = (uint)src.Count;
+            if(count == 0)
+                return  count;
+
+            var offseq = AsmOffsetSeq.Zero;
+            var view = src.View;
+            var code = src.Encoded.View;
+            ref readonly var i0 = ref first(view);
+            var @base = i0.MemoryAddress64;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(view,i);
+                var statement = new AsmApiStatement();
+                var size = (uint)instruction.ByteLength;
+                var recoded = new ApiCodeBlock(instruction.IP, uri, slice(code, offseq.Offset, size).ToArray());
+                var apifx = new ApiInstruction(@base, instruction, recoded);
+                offseq = offseq.AccrueOffset(size);
+
+                statement.BlockAddress = @base;
+                statement.OpUri = uri;
+                statement.IP = instruction.IP;
+                dst.Add(statement);
+            }
+            return (uint)count;
+        }
+
+
         [Op]
         public static ByteSize blocks(ReadOnlySpan<AsmRoutine> src, Span<ApiCodeBlock> dst)
         {

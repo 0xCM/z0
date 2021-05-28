@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Root;
     using static core;
@@ -111,7 +112,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BinaryCode src)
-            => equals(this,src);
+            => equals(this, src);
 
         public string Format()
             => Data.FormatHex();
@@ -178,5 +179,23 @@ namespace Z0
         /// </summary>
         public static BinaryCode Empty
             => new BinaryCode(Array.Empty<byte>());
+
+
+        public readonly struct EncodedStream : IDisposable
+        {
+            readonly BinaryCode Store;
+
+            readonly MemoryStream Stream;
+
+            [MethodImpl(Inline)]
+            public EncodedStream(BinaryCode src)
+            {
+                Store = src;
+                Stream =  new MemoryStream(src.Storage);
+            }
+
+            public void Dispose()
+                => Stream?.Dispose();
+        }
     }
 }

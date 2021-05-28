@@ -79,7 +79,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var code = ref skip(src,i);
-                seek(dst,i) = memory.memblock(code.Origin, code.Encoded);
+                seek(dst,i) = new MemoryBlock(code.Origin, code.Encoded);
             }
 
             buffer.Sort();
@@ -99,7 +99,7 @@ namespace Z0
             {
                 ref readonly var code = ref skip(src,i);
                 var encoded = code.Block.Encoded;
-                seek(dst,i) = memory.memblock(code.Origin, encoded);
+                seek(dst,i) = new MemoryBlock(code.Origin, encoded);
             }
 
             buffer.Sort();
@@ -118,7 +118,7 @@ namespace Z0
             {
                 ref readonly var extract = ref skip(src,i);
                 var data = extract.Data;
-                seek(dst,i) = memory.memblock(extract.Origin, data);
+                seek(dst,i) = new MemoryBlock(extract.Origin, data);
             }
 
             buffer.Sort();

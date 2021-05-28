@@ -37,13 +37,13 @@ namespace Z0
         public void SegRefs(Span<MemorySeg> dst)
         {
             var i=0u;
-            seek(dst,i++) = memseg(Seg6x0);
-            seek(dst,i++) = memseg(Seg6x1);
-            seek(dst,i++) = memseg(Seg6x2);
-            seek(dst,i++) = memseg(Seg6x3);
-            seek(dst,i++) = memseg(Seg7x0);
-            seek(dst,i++) = memseg(Seg7x1);
-            seek(dst,i) = memseg(Seg8x0);
+            seek(dst,i++) = MemorySegs.define(Seg6x0);
+            seek(dst,i++) = MemorySegs.define(Seg6x1);
+            seek(dst,i++) = MemorySegs.define(Seg6x2);
+            seek(dst,i++) = MemorySegs.define(Seg6x3);
+            seek(dst,i++) = MemorySegs.define(Seg7x0);
+            seek(dst,i++) = MemorySegs.define(Seg7x1);
+            seek(dst,i) = MemorySegs.define(Seg8x0);
         }
 
         public ReadOnlySpan<byte> SegLeads()

@@ -29,7 +29,7 @@ namespace Z0
         public MemorySeg Segment
         {
             [MethodImpl(Inline)]
-            get => memory.memseg(BaseAddress, MemorySize);
+            get => MemorySegs.define(BaseAddress, MemorySize);
         }
 
         public MemoryAddress LastAddress

@@ -12,13 +12,16 @@ namespace Z0
 
         public Setting<bool> EmitAsmDetails;
 
+        public Setting<bool> EmitStatementIndex;
+
         public Setting<bool> EmitStatements;
 
         public static ref AsmAnalyzerSettings @default(out AsmAnalyzerSettings dst)
         {
             dst.EmitCalls = true;
             dst.EmitJumps = true;
-            dst.EmitAsmDetails = false;
+            dst.EmitAsmDetails = true;
+            dst.EmitStatementIndex = true;
             dst.EmitStatements = true;
             return ref dst;
         }

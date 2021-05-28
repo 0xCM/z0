@@ -9,10 +9,21 @@ namespace Z0
 
     using static Root;
 
-    partial struct memory
+    public class ApiCollection
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe MemorySpan memspan(byte* pSrc, ByteSize size)
-            => new MemorySpan((address(pSrc), address(pSrc) + size), cover(pSrc,size));
+        internal Index<ResolvedPart> _ResolvedParts;
+
+        internal ApiCollection()
+        {
+            _ResolvedParts = new();
+        }
+
+        public ReadOnlySpan<ResolvedPart> ResolvedParts
+        {
+
+            [MethodImpl(Inline)]
+            get => _ResolvedParts.View;
+        }
+
     }
 }

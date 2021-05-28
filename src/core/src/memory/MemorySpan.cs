@@ -8,12 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Specifies a block of memory along with the base address from which it originated
     /// </summary>
     public readonly ref struct MemorySpan
     {
+        [MethodImpl(Inline), Op]
+        public static unsafe MemorySpan create(byte* pSrc, ByteSize size)
+            => new MemorySpan((address(pSrc), address(pSrc) + size), cover(pSrc,size));
+
         public MemoryRange Origin {get;}
 
         readonly Span<byte> Data;

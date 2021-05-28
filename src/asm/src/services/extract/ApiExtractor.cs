@@ -9,30 +9,11 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Diagnostics;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
     using static Root;
     using static core;
-
-    public class ApiCollection
-    {
-        internal Index<ResolvedPart> _ResolvedParts;
-
-        internal ApiCollection()
-        {
-            _ResolvedParts = new();
-        }
-
-        public ReadOnlySpan<ResolvedPart> ResolvedParts
-        {
-
-            [MethodImpl(Inline)]
-            get => _ResolvedParts.View;
-        }
-
-    }
 
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>
@@ -113,7 +94,6 @@ namespace Z0
             var procparts = pipe.EmitPartitions(process, ts, dir);
             var regions = pipe.EmitRegions(process, ts, dir);
             pipe.EmitDump(process, Pack.DumpPath(process, ts));
-
             var members = ApiMembers.create(CollectedDatasets.SelectMany(x => x.Members));
             var rebasing = Wf.Running();
             var entries = Catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
@@ -148,39 +128,9 @@ namespace Z0
 
         void Analyze()
         {
-            Wf.AsmAnalyzer().Analyze(Routines, Paths.AsmTableRoot());
+            Wf.AsmAnalyzer().Analyze(Routines, Paths.RootDir());
         }
 
-        uint CountStatements()
-        {
-            var routines = Routines.View;
-            var count = routines.Length;
-            var total = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var routine = ref skip(routines,i);
-                total += (uint)routine.InstructionCount;
-            }
-            return total;
-
-        }
-
-        void EmitStatements()
-        {
-            var pipe = Wf.AsmStatementPipe();
-            var total = CountStatements();
-            var running = Wf.Running(CreatingStatements.Format(total));
-            var buffer = span<AsmApiStatement>(total);
-            var routines = Routines.View;
-            var count = routines.Length;
-            var offset = 0u;
-            for(var i=0; i<count; i++)
-                offset += pipe.CreateRecords(skip(routines,i), slice(buffer, offset));
-
-            Wf.Ran(running, CreatedStatements.Format(total));
-
-            pipe.EmitStatements(buffer, Paths.RootDir());
-        }
 
         void RunWorkflow()
         {
@@ -197,9 +147,6 @@ namespace Z0
 
             if(Options.Analyze)
                 Analyze();
-
-            if(Options.EmitStatements)
-                EmitStatements();
         }
 
         FS.FolderPath SegDir
