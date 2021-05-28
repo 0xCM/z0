@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Tables)" />
-    <ProjectReference Include="$(AsmCore)" />
+    <ProjectReference Include="$(Core)" />
   </ItemGroup>
 
 </Project>

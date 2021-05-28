@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
+// Copyright   :  (c) Microsoft
 // License     :  MIT
+// Source      : https://github.com/microsoft/clrmd
 //-----------------------------------------------------------------------------
 namespace Z0
 {

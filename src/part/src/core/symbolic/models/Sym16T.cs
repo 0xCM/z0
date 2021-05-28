@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static core;
 
     using api = Symbols;
@@ -74,6 +74,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym16<T> src)
-            => new Sym<T>(src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
+            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }

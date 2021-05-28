@@ -56,6 +56,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<byte>(Sym8 src)
-            => new Sym<byte>(src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
+            => api.symbol(src.Identity, src.Index, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }

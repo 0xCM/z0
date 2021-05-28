@@ -24,6 +24,6 @@ namespace Z0
             => Value.ToString();
 
         uint ISymKey.Value
-            => memory.bw32(Value);
+            => core.bw32(Value);
     }
 }

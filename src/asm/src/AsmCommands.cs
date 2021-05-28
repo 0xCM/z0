@@ -21,10 +21,13 @@ namespace Z0.Asm
             => Wf.ResPackEmitter().Emit();
 
         public void EmitApiClasses()
-            => Wf.Symbolism().EmitApiClasses();
-
-        public void EmitSymbolicLiterals()
-            => Wf.Symbolism().EmitLiterals();
+        {
+            var dst = Db.IndexTable("api.classes");
+            var flow = Wf.EmittingTable<SymLiteral>(dst);
+            var literals = Wf.ApiQuery().ApiClassLiterals();
+            var count = Tables.emit(literals, dst);
+            Wf.EmittedTable(flow, count);
+        }
 
         public void ShowStanfordForms()
         {

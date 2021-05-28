@@ -27,7 +27,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                seek(dst, i) = literal(skip(src,i), out _).Untyped();
+                seek(dst, i) = untyped(literal(skip(src,i), out _));
         }
     }
 }

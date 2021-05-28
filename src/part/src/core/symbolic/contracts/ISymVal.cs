@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static memory;
+    using static core;
 
     /// <summary>
     /// Characterizes a sequence of bits with external semantics
@@ -50,7 +50,7 @@ namespace Z0
         /// The bit-width value determined by <typeparamref name='N' />
         /// </summary>
         ushort SymWidth
-            => (ushort)nat64u<N>();
+            => (ushort)Typed.nat64u<N>();
 
         /// <summary>
         /// The maximum number of symbols that can be packed into a storage cell

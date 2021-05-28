@@ -91,7 +91,6 @@
     <ResPack>$(Src)respack/z0.respack.csproj</ResPack>
 
     <Refs>$(Src)refs/z0.refs.csproj</Refs>
-    <Related>$(Src)related/z0.related.csproj</Related>
     <Res>$(Src)res/z0.res.csproj</Res>
     <Root>$(Src)root/z0.root.csproj</Root>
     <Rules>$(Src)rules/z0.rules.csproj</Rules>
@@ -103,6 +102,7 @@
     <SpanBlocks>$(Src)spanblocks/z0.spanblocks.csproj</SpanBlocks>
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
+    <SymCore>$(Src)symcore/z0.symcore.csproj</SymCore>
 
     <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Term>$(Src)term/z0.term.csproj</Term>

@@ -12,11 +12,9 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static Toolsets;
 
     public class Tests : AppService<Tests>
     {
-
         public void ProcessMsDocs()
         {
             var src = FS.dir(@"J:\docs\msdocs-sdk-api\sdk-api-src\content\dbghelp");
@@ -240,7 +238,7 @@ namespace Z0.Asm
         {
             var symbolic = Wf.Symbolism();
             var literals = symbolic.DiscoverLiterals();
-            Wf.Status($"Creating heap for {literals.Count} literals");
+            Wf.Status($"Creating heap for {literals.Length} literals");
             var heap = SymHeaps.specify(literals);
             var count = heap.SymbolCount;
             var dst = Db.AppLog("heap", FS.Csv);
@@ -705,9 +703,6 @@ namespace Z0.Asm
             //Wf.Ran(flow, $"Ran {incount} -> {outcount} values through pipe");
         }
 
-
-
-
         MemoryAddress GetKernel32Proc(string name = "CreateDirectoryA")
         {
             var flow = Wf.Running();
@@ -725,7 +720,8 @@ namespace Z0.Asm
             return address;
         }
 
-        public static ReadOnlySpan<byte> TestCase01 => new byte[44]{0x0f,0x1f,0x44,0x00,0x00,0x49,0xb8,0x68,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x4d,0x8b,0x00,0x48,0xba,0x28,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x48,0x8b,0x12,0x48,0xb8,0x90,0x2c,0x8b,0x64,0xfe,0x7f,0x00,0x00,0x48,0xff,0xe0};
+        public static ReadOnlySpan<byte> TestCase01
+            => new byte[44]{0x0f,0x1f,0x44,0x00,0x00,0x49,0xb8,0x68,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x4d,0x8b,0x00,0x48,0xba,0x28,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x48,0x8b,0x12,0x48,0xb8,0x90,0x2c,0x8b,0x64,0xfe,0x7f,0x00,0x00,0x48,0xff,0xe0};
 
         public static bool TestJmpRax(ReadOnlySpan<byte> src, int offset, out byte delta)
         {
@@ -805,19 +801,6 @@ namespace Z0.Asm
         }
 
 
-        void ShowSymbols()
-        {
-            var symbols = Symbols.symbolic<AsmMnemonicCode>().View;
-            var count = symbols.Length;
-            var expressions = alloc<SymExpr>(count);
-            Symbols.expressions(symbols, expressions);
-
-            for(var i=0; i<count; i++)
-            {
-                Wf.Row(skip(expressions,i));
-            }
-        }
-
         void CheckEntryPoints()
         {
             const ulong Target = 0x7ffa77aa1460;
@@ -829,17 +812,6 @@ namespace Z0.Asm
                 Wf.Status(encoded.FormatHexData());
             }
         }
-
-        void EmitCpuIntrinsics()
-        {
-            Wf.IntrinsicsCatalog().Emit();
-        }
-
-        void EmitXedSources()
-        {
-            Wf.XedCatalog().EmitSourceAssets();
-        }
-
 
         public Index<ApiCodeBlock> Jumpers()
         {
@@ -893,29 +865,6 @@ namespace Z0.Asm
                     log.Show(string.Format("{0,-64} | {1}", id, components));
                 }
             }
-        }
-
-        void DumpImages()
-        {
-            var emitter = MemoryEmitter.create(Wf);
-            var src = Db.DotNetSymbolDir(3,1,12);
-            var dst = Db.DotNetImageDumpDir(3,1,12);
-            dst.Clear();
-            emitter.DumpImages(src,dst);
-        }
-
-        void DumpImages(byte major, byte minor, byte revision)
-        {
-            var emitter = MemoryEmitter.create(Wf);
-            var src = Db.DotNetSymbolDir(major,minor,revision);
-            if(!src.Exists)
-            {
-                Wf.Error($"The specified source directory does not exist: {src}");
-                return;
-            }
-            var dst = Db.DotNetImageDumpDir(major,minor,revision);
-            dst.Clear();
-            emitter.DumpImages(src,dst);
         }
 
         void ShowPartComponents()

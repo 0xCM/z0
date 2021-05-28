@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=related
+set ProjectId=symcore
 call %ControlScripts%\build-lib.cmd

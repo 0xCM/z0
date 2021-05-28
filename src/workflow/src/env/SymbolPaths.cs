@@ -4,10 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [RecordSet]
-    public readonly partial struct LogRecords : IRecordSet<LogRecords>
+    using SP = SymbolPaths;
+
+    partial interface IEnvPaths
     {
+        SymbolPaths SymbolPaths()
+            => SP.create(Env);
 
-
+        SymbolPaths SymbolPaths(FS.FolderPath root)
+            => SP.create(root);
     }
 }

@@ -562,6 +562,17 @@ namespace Z0.Asm
             Wf.Row(formatter.Format(info,RecordFormatKind.KeyValuePairs));
         }
 
+        void EmitCpuIntrinsics()
+        {
+            Wf.IntrinsicsCatalog().Emit();
+        }
+
+        void EmitXedSources()
+        {
+            Wf.XedCatalog().EmitSourceAssets();
+        }
+
+
         public void ListVendorManuals(string vendor, FS.FileExt ext)
         {
             var files = Db.VendorManuals(vendor,ext).View;
@@ -573,6 +584,24 @@ namespace Z0.Asm
                 var link = Markdown.item(0, Markdown.link(file), Markdown.ListStyle.Bullet);
                 log.Show(link);
             }
+        }
+
+        ReadOnlySpan<SymExpr> SymExpr<E>()
+            where E : unmanaged, Enum
+        {
+            var symbols = Symbols.symbolic<E>().View;
+            var count = symbols.Length;
+            var expressions = alloc<SymExpr>(count);
+            Symbols.expressions(symbols, expressions);
+            return expressions;
+        }
+
+
+        void EmitSymbolicliterals()
+        {
+            var service = Wf.Symbolism();
+            var dst = Db.AppTablePath<SymLiteral>();
+            service.EmitLiterals(dst);
         }
 
         void CheckCil()
@@ -588,9 +617,10 @@ namespace Z0.Asm
 
         public void Run()
         {
+            EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);
-            EmitMethodDefs();
-            EmitFieldDefs();
+            //EmitMethodDefs();
+            //EmitFieldDefs();
             //RunExtractWorkflow();
             //Wf.AsmCatalogs().EmitAssetCatalog();
             //CheckCpuid();

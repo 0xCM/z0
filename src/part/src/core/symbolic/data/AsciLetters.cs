@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static AsciCharCode;
-    using static memory;
+    using static core;
 
     using Facets = AsciCodeFacets;
 

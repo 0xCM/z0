@@ -8,9 +8,13 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
     using System.Threading;
 
-    public static class ProcessExtensions
+    using static Root;
+
+    public static class ProcessRunner
     {
         static Thread s_backgroundWatcher;
 
@@ -18,7 +22,43 @@ namespace Z0
 
         static bool IsMono => Type.GetType("Mono.Runtime") != null;
 
-        public static void OnExit(this Process process, Action action)
+        [MethodImpl(Inline)]
+        public static ProcessExitStatus status(int code, bool started = true, bool timedOut = false)
+            => new ProcessExitStatus(code,started,timedOut);
+
+        public static string RunAndCaptureOutput(FS.FilePath path, string args, FS.FolderPath? workingDirectory = null)
+        {
+            var startInfo = new ProcessStartInfo(path.Format(), args)
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WorkingDirectory = (workingDirectory ?? FS.FolderPath.Empty).Format(),
+            };
+
+            var process = new Process
+            {
+                StartInfo = startInfo
+            };
+
+            try
+            {
+                process.Start();
+            }
+            catch
+            {
+                Console.WriteLine($"Failed to launch '{path.ToString()}' with args, '{args}'");
+                return null;
+            }
+
+            var output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+
+            return output.Trim();
+        }
+
+        public static void ExitAction(Process process, Action action)
         {
             var gate = new object();
 
@@ -77,14 +117,12 @@ namespace Z0
             }
         }
 
-        public static void KillChildrenAndThis(this Process process)
+        static void KillChildrenAndThis(this Process process)
         {
             if (IsMono)
             {
                 foreach (var childProcess in GetChildProcesses(process.Id))
-                {
                     childProcess.Kill();
-                }
             }
 
             process.Kill();
@@ -95,9 +133,7 @@ namespace Z0
             foreach (var entry in GetAllProcessIds())
             {
                 if (entry.parentId == processId)
-                {
                     yield return Process.GetProcessById(entry.id);
-                }
             }
         }
 
@@ -135,6 +171,83 @@ namespace Z0
             ps.WaitForExit();
 
             return entries;
+        }
+
+        public static ProcessExitStatus Run(string fileName, string arguments, string workingDirectory = null, Action<string> outputDataReceived = null,
+            Action<string> errorDataReceived = null, Action<IDictionary<string, string>> updateEnvironment = null)
+        {
+            var startInfo = new ProcessStartInfo(fileName, arguments)
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WorkingDirectory = workingDirectory ?? string.Empty,
+            };
+
+            updateEnvironment(startInfo.Environment);
+
+            var process = new Process
+            {
+                StartInfo = startInfo
+            };
+
+            try
+            {
+                process.Start();
+            }
+            catch
+            {
+                Console.WriteLine($"Failed to launch '{fileName}' with args, '{arguments}'");
+                return status(process.ExitCode, started: false);
+            }
+
+            if (process.HasExited)
+            {
+                return status(process.ExitCode);
+            }
+
+            var lastSignal = DateTime.UtcNow;
+            var watchDog = Task.Factory.StartNew(async () =>
+            {
+                var delay = TimeSpan.FromSeconds(10);
+                var timeout = TimeSpan.FromSeconds(60);
+                while (!process.HasExited)
+                {
+                    if (DateTime.UtcNow - lastSignal > timeout)
+                    {
+                        process.KillChildrenAndThis();
+                    }
+
+                    await Task.Delay(delay);
+                }
+            });
+
+            process.OutputDataReceived += (_, e) =>
+            {
+                lastSignal = DateTime.UtcNow;
+
+                if (outputDataReceived != null && !string.IsNullOrEmpty(e.Data))
+                {
+                    outputDataReceived(e.Data);
+                }
+            };
+
+            process.ErrorDataReceived += (_, e) =>
+            {
+                lastSignal = DateTime.UtcNow;
+
+                if (errorDataReceived != null && !string.IsNullOrEmpty(e.Data))
+                {
+                    errorDataReceived(e.Data);
+                }
+            };
+
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+            process.WaitForExit();
+
+            return status(process.ExitCode);
         }
     }
 }

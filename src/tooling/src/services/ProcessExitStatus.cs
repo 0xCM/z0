@@ -5,7 +5,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct ProcessExitStatus
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+
+    public readonly struct ProcessExitStatus
     {
         public static ProcessExitStatus Empty {get;}
             = new ProcessExitStatus();
@@ -16,9 +21,17 @@ namespace Z0
 
         public bool TimedOut {get;}
 
-        public bool Succeeded => this.Code == 0;
+        public bool Succeeded
+        {
+            [MethodImpl(Inline)]
+            get => Code == 0;
+        }
 
-        public bool Failed => this.Code != 0 || !Started || TimedOut;
+        public bool Failed
+        {
+            [MethodImpl(Inline)]
+            get => Code != 0 || !Started || TimedOut;
+        }
 
         public ProcessExitStatus(int code, bool started = true, bool timedOut = false)
         {

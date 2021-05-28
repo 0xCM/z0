@@ -13,6 +13,9 @@ namespace Z0
     {
         public readonly struct FolderName : IFsEntry<FolderName>
         {
+            public static FS.FolderName version(byte major, byte minor, byte revision)
+                => FS.folder(string.Format("{0}.{1}.{2}", major, minor, revision));
+
             [MethodImpl(Inline)]
             public static FolderName operator +(FolderName a, FolderName b)
                 => folder(Z0.text.format("{0}/{1}", a.Name, b.Name));

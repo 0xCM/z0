@@ -4,11 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using static Root;
 
     public readonly struct TestCaseRecords
     {
         const string Delimiter = "| ";
+
+        const int WidthOffset = 16;
 
         public const uint CasePad = (uint)TestCaseField.CaseName >> WidthOffset;
 

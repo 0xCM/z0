@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a text document format scheme
@@ -77,25 +77,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static TextDocFormat Structured(char Delimiter, bool SplitClean = true)
-            => define(
-                Delimiter: Delimiter,
-                SplitClean: SplitClean
-                );
+            => define(Delimiter: Delimiter, SplitClean: SplitClean);
 
         public static TextDocFormat Unstructured()
             => define(false, false);
 
         [MethodImpl(Inline)]
-        static TextDocFormat define(
-            bool HasHeader = true,
-            bool Delimited = true,
-            char Delimiter = DefaultDelimiter,
-            char CommentPrefix = DefaultCommentPrefix,
-            uint? ColWidth = null,
-            uint? FirstLine = null,
-            uint? LastLine = null,
-            bool SplitClean = true
-            )
+        static TextDocFormat define(bool HasHeader = true, bool Delimited = true, char Delimiter = DefaultDelimiter, char CommentPrefix = DefaultCommentPrefix,
+            uint? ColWidth = null, uint? FirstLine = null, uint? LastLine = null, bool SplitClean = true)
         {
             var dst = default(TextDocFormat);
             dst.RowBlockSep = DefaultRowBlockSep;

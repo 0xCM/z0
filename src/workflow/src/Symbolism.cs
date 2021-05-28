@@ -8,20 +8,21 @@ namespace Z0
     using System.Reflection;
 
     using static core;
+    using static Root;
 
     public sealed class Symbolism : AppService<Symbolism>
     {
-        public Index<SymLiteral> EmitLiterals()
+        public ReadOnlySpan<SymLiteral> EmitLiterals()
             => EmitLiterals(Db.IndexTable<SymLiteral>());
 
-        public Index<SymLiteral> EmitLiterals(FS.FilePath dst)
+        public ReadOnlySpan<SymLiteral> EmitLiterals(FS.FilePath dst)
             => EmitLiterals(Wf.Components, dst);
 
         /// <summary>
         /// Discovers all symbolic literals everywhere
         /// </summary>
         /// <returns></returns>
-        public Index<SymLiteral> DiscoverLiterals()
+        public ReadOnlySpan<SymLiteral> DiscoverLiterals()
             => Symbols.literals(Wf.Components);
 
         /// <summary>
@@ -52,30 +53,24 @@ namespace Z0
             return rows;
         }
 
-        public Index<SymLiteral> EmitLiterals(Index<Assembly> src, FS.FilePath dst)
+        public ReadOnlySpan<SymLiteral> EmitLiterals(Index<Assembly> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<SymLiteral>(dst);
             var rows = Symbols.literals(src);
-            var view = rows.View;
-            var count = rows.Length;
-            var formatter = Tables.formatter<SymLiteral>(SymLiteral.RenderWidths);
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(view,i)));
-            Wf.EmittedTable<SymLiteral>(flow, count);
+            TableEmit(rows.View, SymLiteral.RenderWidths, dst);
             return rows;
         }
 
-        public void EmitSymbols<K>(string subject)
+        public void EmitSymbols<K>(FS.FolderPath dir)
             where K : unmanaged, Enum
         {
-            EmitSymbols(Symbols.symbolic<K>().View, Db.AsmCatalogPath(subject, FS.file(typeof(K).Name.ToLower(), FS.Csv)));
+            EmitSymbols(Symbols.symbolic<K>().View, dir);
         }
 
-        public void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
+        public void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FolderPath dir)
             where K : unmanaged
         {
+            var dst  = dir + FS.file(typeof(K).Name.ToLower(), FS.Csv);
             var count = src.Length;
             if(count != 0)
             {
@@ -88,49 +83,13 @@ namespace Z0
             }
         }
 
-        public void EmitApiClasses()
-        {
-            var dst = Db.IndexTable("api.classes");
-            var flow = Wf.EmittingTable<SymLiteral>(dst);
-            var literals = Wf.ApiQuery().ApiClassLiterals();
-            var count = Tables.emit(literals, dst);
-            Wf.EmittedTable(flow, count);
-        }
-
-        Outcome FieldCountMismatch(int actual)
-            => (false, Tables.FieldCountMismatch.Format(SymLiteral.FieldCount, actual));
-
-        Outcome Parse(TextLine src, out SymLiteral dst)
-        {
-            var outcome = Outcome.Success;
-            var j=0;
-            var cells = src.Split(Chars.Pipe);
-            if(cells.Length != SymLiteral.FieldCount)
-            {
-                dst = default;
-                return FieldCountMismatch(cells.Length);
-            }
-
-            outcome += DataParser.parse(skip(cells,j), out dst.Component);
-            outcome += DataParser.parse(skip(cells,j), out dst.Type);
-            outcome += DataParser.parse(skip(cells,j), out dst.Position);
-            outcome += DataParser.parse(skip(cells,j), out dst.Name);
-            outcome += DataParser.parse(skip(cells,j), out dst.Identity);
-            outcome += DataParser.eparse(skip(cells,j), out dst.DataType);
-            outcome += DataParser.parse(skip(cells,j), out dst.ScalarValue);
-            outcome += DataParser.parse(skip(cells,j), out dst.Symbol);
-            outcome += DataParser.parse(skip(cells,j), out dst.Description);
-            outcome += DataParser.parse(skip(cells,j), out dst.Hidden);
-            return outcome;
-        }
-
         public Index<SymLiteral> LoadLiterals(FS.FilePath src)
         {
-            using var reader = src.TableReader<SymLiteral>(Parse);
+            using var reader = src.TableReader<SymLiteral>(Symbols.parse);
             var header = reader.Header.Split(Chars.Tab);
             if(header.Length != SymLiteral.FieldCount)
             {
-                Wf.Error(FieldCountMismatch(header.Length).Message);
+                Wf.Error(AppMsg.FieldCountMismatch.Format(SymLiteral.FieldCount,header.Length));
                 return Index<SymLiteral>.Empty;
             }
 

@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Gmath)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(Related)" />
   </ItemGroup>
 
 </Project>

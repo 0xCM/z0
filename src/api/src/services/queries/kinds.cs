@@ -31,6 +31,5 @@ namespace Z0
 
         public static Index<ApiClassifier> Classifiers()
             => ClassLiterals().GroupBy(x => x.Type).Select(x => new ApiClassifier(x.Key, x.ToArray())).Array();
-
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
         new T Kind {get;}
 
         ulong Value
-            => memory.bw64(Kind);
+            => core.bw64(Kind);
 
         ulong ISym.Kind
             => Value;

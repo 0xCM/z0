@@ -21,6 +21,9 @@ namespace Z0
     {
         public AppMsgData Data {get;}
 
+        public static MsgPattern<Count,Count> FieldCountMismatch
+            => "The target requires {0} fields but {1} were found in the source";
+
         public static StatusMsg<T> status<T>(T data)
             => new StatusMsg<T>(data);
 

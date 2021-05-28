@@ -52,5 +52,9 @@ namespace Z0
         [Op]
         public static MsDocPipe MsDocs(this IWfRuntime wf)
             => Svc.MsDocPipe.create(wf);
+
+        [Op]
+        public static DotNet DotNet(this IWfRuntime wf)
+            => Svc.DotNet.create(wf);
     }
 }

@@ -24,10 +24,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var symbol = ref skip(src,i);
-                seek(dst,i) = symbol.Expr;
-            }
+                seek(dst,i) = skip(src,i).Expr;
             return (uint)count;
         }
     }

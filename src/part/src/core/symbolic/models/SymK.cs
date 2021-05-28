@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using api = Symbols;
 
@@ -38,18 +38,6 @@ namespace Z0
             Expr = src.Symbol;
             Description = src.Description;
             Hidden = src.Hidden;
-        }
-
-        [MethodImpl(Inline)]
-        internal Sym(uint index, string name, K kind, SymExpr symbol, TextBlock? description = null, bool hidden = false)
-        {
-            Index = index;
-            Name = name;
-            Kind = kind;
-            Expr = symbol;
-            Identity = default;
-            Description = description ?? TextBlock.Empty;
-            Hidden = hidden;
         }
 
         [MethodImpl(Inline)]

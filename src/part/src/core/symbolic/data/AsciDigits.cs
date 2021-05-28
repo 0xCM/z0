@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static AsciCharCode;
-    using static memory;
+    using static core;
 
     using Facets = AsciCodeFacets;
 
@@ -18,7 +18,8 @@ namespace Z0
             d0,d1,d2,d3,d4,d5,d6,d7,d8,d9
             };
 
-        public static ReadOnlySpan<char> DigitChars => span("0123456789");
+        public static ReadOnlySpan<char> DigitChars
+            => span("0123456789");
 
     }
 }

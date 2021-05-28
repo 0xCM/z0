@@ -2,13 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
-    partial struct DotNet
+    [ApiHost, RecordSet]
+    public readonly struct ImageRecords : IRecordSet<ImageRecords>
     {
-        public readonly struct TargetFrameworks
-        {
-            public const string NetCoreApp31 = "netcoreapp3.1";
-        }
+
     }
 }

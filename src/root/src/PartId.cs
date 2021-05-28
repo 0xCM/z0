@@ -179,6 +179,9 @@ public enum PartId : ulong
     [Symbol("engine")]
     Engine = 71,
 
+    [Symbol("symcore")]
+    SymCore = 72,
+
     [Symbol("engine.run")]
     EngineRun = Engine | Shell,
 

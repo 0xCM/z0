@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     /// <summary>
     /// Defines an S-symbol value, of bit-width N, covered by a T-storage cell

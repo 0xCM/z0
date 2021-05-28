@@ -25,6 +25,5 @@ namespace Z0
 
         public DocumentationComment GetDocs(ISymbol src)
             => DocumentationConverter.GetStructuredDocumentation(src);
-
     }
 }

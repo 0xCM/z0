@@ -61,6 +61,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym8<T> src)
-            => new Sym<T>(src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
+            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }

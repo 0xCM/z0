@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 
-[assembly: PartId(PartId.Related)]
+[assembly: PartId(PartId.SymCore)]
 
 namespace Z0.Parts
 {
-    public sealed class Related : Part<Related>
+    public sealed class SymCore : Part<SymCore>
     {
 
     }

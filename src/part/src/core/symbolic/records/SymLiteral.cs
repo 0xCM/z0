@@ -38,9 +38,9 @@ namespace Z0
         public Identifier Name;
 
         /// <summary>
-        /// A unique identifier
+        /// The symbol, if so attributed, otherwise, the identifier
         /// </summary>
-        public SymIdentity Identity;
+        public SymExpr Symbol;
 
         /// <summary>
         /// The literal's primitive classifier
@@ -53,9 +53,9 @@ namespace Z0
         public Hex64 ScalarValue;
 
         /// <summary>
-        /// The symbol, if so attributed, otherwise, the identifier
+        /// Indicates whether the literal is occluded
         /// </summary>
-        public SymExpr Symbol;
+        public bool Hidden;
 
         /// <summary>
         /// The meaning of the literal, if available; otherwise empty
@@ -63,11 +63,11 @@ namespace Z0
         public TextBlock Description;
 
         /// <summary>
-        /// Indicates whether the literal is occluded
+        /// A unique identifier
         /// </summary>
-        public bool Hidden;
+        public SymIdentity Identity;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{14, 14, 10, 20, 80, 12, 12, 22, 48, 10};
+            => new byte[FieldCount]{24, 32, 10, 32, 16, 12, 22, 10, 48, 80};
     }
 }

@@ -7,10 +7,10 @@
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Asci)" />
-    <ProjectReference Include="$(Related)" />
     <ProjectReference Include="$(Minidump)" />
     <ProjectReference Include="$(Interop)" />
     <ProjectReference Include="$(Files)" />
+    <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 
 </Project>

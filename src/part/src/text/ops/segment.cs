@@ -22,8 +22,8 @@ namespace Z0
         {
             var length = i1 - i0 + 1;
             if(length < 0  || length - i0 > src.Length)
-                root.@throw($"Cannot select the segment [{i0},{i1}] from the source string {src}");
-            return text.substring(src, i0, length);
+                core.@throw($"Cannot select the segment [{i0},{i1}] from the source string {src}");
+            return sys.substring(src, i0, length);
         }
 
         /// <summary>

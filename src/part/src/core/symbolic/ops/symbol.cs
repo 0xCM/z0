@@ -12,7 +12,7 @@ namespace Z0
     partial struct Symbols
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Sym<T> symbol<T>(SymIdentity id, SymKey<byte> index, Identifier name, T value, SymExpr expr, TextBlock description, bool hidden = false)
+        public static Sym<T> symbol<T>(SymIdentity id, SymKey<T> index, Identifier name, T value, SymExpr expr, TextBlock description, bool hidden = false)
             where T : unmanaged
                 => new Sym<T>(id, index, name, value, expr, description, hidden);
 
