@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static Chars;
 
     [ApiHost]
-    public readonly partial struct AsmParser
+    public class AsmParser : AppService<AsmParser>
     {
         const string Implication = " => ";
 

@@ -42,6 +42,9 @@ public enum PartId : ulong
     [Symbol("bit")]
     Bit = 7,
 
+    [Symbol("hex")]
+    Hex = 8,
+
     [Symbol("api")]
     Api = 9,
 

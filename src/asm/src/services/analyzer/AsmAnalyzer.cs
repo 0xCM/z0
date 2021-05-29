@@ -68,7 +68,7 @@ namespace Z0
             var count = src.Length;
             var offset = 0u;
             for(var i=0; i<count; i++)
-                offset += pipe.CreateRoutineStatements(skip(src,i), slice(buffer, offset));
+                offset += pipe.CreateStatementData(skip(src,i), slice(buffer, offset));
             Wf.Ran(running, CreatedStatements.Format(total));
 
             pipe.EmitHostStatements(buffer, dst);

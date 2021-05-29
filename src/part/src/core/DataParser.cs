@@ -15,31 +15,31 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out byte dst)
-            => Numeric.parse(src, out dst);
+            => NumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out short dst)
-            => Numeric.parse(src, out dst);
+            => NumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out ushort dst)
-            => Numeric.parse(src, out dst);
+            => NumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out int dst)
-            => Numeric.parse(src, out dst);
+            => NumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out uint dst)
-            => Numeric.parse(src, out dst);
+            => NumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out long dst)
-            => Numeric.parse(src, out dst);
+            => NumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out ulong dst)
-            => Numeric.parse(src, out dst);
+            => NumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Hex8 dst)

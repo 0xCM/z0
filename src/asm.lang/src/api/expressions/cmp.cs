@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Part;
     using static AsmMnemonicCode;
     using static AsmOps;
 

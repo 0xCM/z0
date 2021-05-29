@@ -7,23 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public abstract class RecordPipe<H,T> : AppService<H>
         where H : RecordPipe<H,T>, new()
         where T : struct, IRecord<T>
     {
+
         protected RecordPipe(byte fieldwidth = 32)
         {
+            FieldDelimiter = Chars.Pipe;
             TableId = Tables.identify<T>();
             Fields = Tables.fields<T>();
             FieldCount = Fields.Count;
             Formatter = Tables.formatter<T>(fieldwidth);
+            Parser = Tables.parser<T>(Parse, FieldDelimiter);
         }
 
         protected char FieldDelimiter {get;}
-            = Chars.Pipe;
 
         protected RecordFields Fields {get;}
 
@@ -33,11 +35,19 @@ namespace Z0
 
         protected IRecordFormatter<T> Formatter {get;}
 
+        protected IRecordParser<T> Parser {get;}
+
         public static T NewRecord() => new T();
 
         [MethodImpl(Inline)]
         protected ref readonly string NextCell(ReadOnlySpan<string> src, ref uint i)
             => ref skip(src, i++);
+
+        protected virtual Outcome Parse(string src, out T dst)
+        {
+            dst = default;
+            return false;
+        }
 
         public string Format(in T src)
             => Formatter.Format(src);

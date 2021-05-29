@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct RowParser<T> : IRowParser<T>
+    public readonly struct RecordParser<T> : IRecordParser<T>
         where T : struct, IRecord<T>
     {
         public char FieldDelimiter {get;}
@@ -17,7 +17,7 @@ namespace Z0
         readonly ParseFunction<T> F;
 
         [MethodImpl(Inline)]
-        public RowParser(ParseFunction<T> f, char Delimiter)
+        public RecordParser(ParseFunction<T> f, char Delimiter)
         {
             FieldDelimiter = Delimiter;
             F = f;

@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRowParser
+    public interface IRecordParser
     {
         char FieldDelimiter => Chars.Pipe;
     }
 
-    public interface IRowParser<T> : IRowParser
+    public interface IRecordParser<T> : IRecordParser
         where T : struct, IRecord<T>
     {
         Outcome ParseHeader(string src, out RowHeader dst);

@@ -2,11 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+
+[assembly: PartId(PartId.Hex)]
+
+namespace Z0.Parts
 {
-    [ApiHost]
-    public readonly partial struct AsciCodes
+    public sealed class Hex : Part<Hex>
     {
 
     }
 }
+
+namespace Z0
+{
+    [ApiHost]
+    public static partial class XTend
+    {
+
+    }
+}
+

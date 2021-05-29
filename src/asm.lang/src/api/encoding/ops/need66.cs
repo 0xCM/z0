@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static OperandSize;
     using static AsmRefs;
 
-    partial struct AsmEncoder
+    partial class AsmEncoder
     {
         /// <summary>
         /// Determines whether a 66h prefix is required to indicate an operand-size override

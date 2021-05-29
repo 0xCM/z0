@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static AsmRecords;
 
     public sealed class StanfordAsmCatalog : AppService<StanfordAsmCatalog>

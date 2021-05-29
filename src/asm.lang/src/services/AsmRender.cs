@@ -8,10 +8,10 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Part;
+    using static Root;
+    using static Typed;
     using static Chars;
-    using static memory;
-
+    using static core;
 
     [ApiHost]
     public class AsmRender : AppService<AsmRender>

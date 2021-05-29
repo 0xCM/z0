@@ -7,11 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static AsmInstructions;
     using static AsmOps;
 
-    partial struct AsmEncoder
+    partial class AsmEncoder
     {
         /// <summary>
         /// | 0F B6 /r | MOVZX r16, r8 | Move byte to word with zero-extension.

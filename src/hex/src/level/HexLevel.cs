@@ -8,17 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    using K = AsciWhitespaceCode;
-
-    partial struct AsciCodes
+    [ApiHost]
+    public readonly partial struct HexLevel
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCharCode> whitespace()
-            => recover<K,AsciCharCode>(Whitespace);
-
-        static ReadOnlySpan<K> Whitespace
-            => new K[]{K.CR, K.FF, K.NL, K.Space, K.Tab, K.VTab};
+        public static IntPtr locate()
+            => typeof(HexLevel).TypeHandle.Value;
     }
 }

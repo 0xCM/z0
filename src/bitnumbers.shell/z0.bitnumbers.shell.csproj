@@ -10,6 +10,7 @@
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Bit)" />
+    <ProjectReference Include="$(Hex)" />
   </ItemGroup>
 
 </Project>

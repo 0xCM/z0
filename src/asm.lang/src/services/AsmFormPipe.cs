@@ -8,8 +8,8 @@ namespace Z0.Asm
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static AsmRecords;
 
     public class AsmFormPipe : RecordPipe<AsmFormPipe,AsmFormRecord>
@@ -166,7 +166,7 @@ namespace Z0.Asm
             }
         }
 
-        public Outcome Parse(string src, out AsmFormRecord dst)
+        public new Outcome Parse(string src, out AsmFormRecord dst)
         {
             var parts = Cells(src);
             var count = parts.Length;

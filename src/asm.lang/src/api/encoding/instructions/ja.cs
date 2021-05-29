@@ -7,12 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static AsmInstructions;
     using static Hex8Seq;
     using static AsmHexCodes;
 
-    partial struct AsmEncoder
+    partial class AsmEncoder
     {
         /// <summary>
         /// (JA rel8) 77 cb

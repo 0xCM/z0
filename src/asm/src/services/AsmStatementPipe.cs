@@ -255,9 +255,9 @@ namespace Z0.Asm
         }
 
         public ReadOnlySpan<AsmApiStatement> ParseRecords()
-            => ParseStatements(Db.TableDir<AsmApiStatement>());
+            => ParseStatementData(Db.TableDir<AsmApiStatement>());
 
-        public uint CreateRoutineStatements(in AsmRoutine src, Span<AsmApiStatement> dst)
+        public uint CreateStatementData(in AsmRoutine src, Span<AsmApiStatement> dst)
         {
             var instructions = src.Instructions.View;
             var count = (uint)instructions.Length;
@@ -322,42 +322,7 @@ namespace Z0.Asm
             }
         }
 
-        const byte StatementFieldCount = AsmApiStatement.FieldCount;
-
-        static Outcome<uint> ParseStatements(FS.FilePath src, ConcurrentBag<AsmApiStatement> dst)
-        {
-            var outcome = Outcome.Success;
-
-            if(!TextDoc.parse(src, out var doc))
-               return(false, Msg.CouldNotParseDocument.Format(src));
-
-            return ParseStatements(doc, dst);
-        }
-
-        static Outcome<uint> ParseStatements(TextDoc doc, ConcurrentBag<AsmApiStatement> dst)
-        {
-            var counter = 0u;
-            if(doc.Header.Labels.Length != StatementFieldCount)
-                return (false, Msg.UnexpectedFieldCount.Format(StatementFieldCount, doc.Header.Labels.Length));
-
-            var count = doc.RowCount;
-            var rows = doc.RowData.View;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(rows,i);
-                var result = AsmParser.parse(row, out var statement);
-                if(result)
-                {
-                    dst.Add(statement);
-                    counter++;
-                }
-                else
-                    return (false, Msg.CouldNotParseStatementRow.Format(row,result.Message));
-            }
-            return counter;
-        }
-
-        public ReadOnlySpan<AsmApiStatement> ParseStatements(FS.FolderPath dir)
+        public ReadOnlySpan<AsmApiStatement> ParseStatementData(FS.FolderPath dir)
         {
             var files = dir.EnumerateFiles(FS.Csv, true).Array();
             var flow = Wf.Running(ParsingStatements.Format(files.Length,dir));
@@ -367,7 +332,7 @@ namespace Z0.Asm
             foreach(var doc in docs)
             {
                 var parsing = Wf.Running(ParsingStatementRows.Format(doc.RowCount));
-                var count = ParseStatements(doc, dst);
+                var count = ParseStatementData(doc, dst);
                 if(count.Fail)
                     Wf.Error(count.Message);
                 else
@@ -395,14 +360,44 @@ namespace Z0.Asm
             => string.Format("{0} {1,-36} ; {2} => {3}",
                         src.BlockOffset,
                         src.Expression,
-                        FormatThumbprint(src),
-                        FormatBitstring(src));
+                        string.Format("({0})<{1}>[{2}] => {3}", src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format()),
+                        Bitstrings.Format(src.Encoded)
+                        );
 
-        string FormatBitstring(in AsmApiStatement src)
-            => Bitstrings.Format(src.Encoded);
+        const byte StatementFieldCount = AsmApiStatement.FieldCount;
 
-        string FormatThumbprint(in AsmApiStatement src)
-            => AsmThumbprints.from(src).Format();
+        static Outcome<uint> ParseStatementData(FS.FilePath src, ConcurrentBag<AsmApiStatement> dst)
+        {
+            var outcome = Outcome.Success;
+
+            if(!TextDoc.parse(src, out var doc))
+               return(false, Msg.CouldNotParseDocument.Format(src));
+
+            return ParseStatementData(doc, dst);
+        }
+
+        static Outcome<uint> ParseStatementData(TextDoc doc, ConcurrentBag<AsmApiStatement> dst)
+        {
+            var counter = 0u;
+            if(doc.Header.Labels.Length != StatementFieldCount)
+                return (false, Msg.UnexpectedFieldCount.Format(StatementFieldCount, doc.Header.Labels.Length));
+
+            var count = doc.RowCount;
+            var rows = doc.RowData.View;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                var result = AsmParser.parse(row, out var statement);
+                if(result)
+                {
+                    dst.Add(statement);
+                    counter++;
+                }
+                else
+                    return (false, Msg.CouldNotParseStatementRow.Format(row,result.Message));
+            }
+            return counter;
+        }
 
         FS.FilePath ThumbprintPath(FS.FolderPath? root = null)
         {

@@ -89,7 +89,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator H(bool src)
-            => new H(memory.@byte(src));
+            => new H(core.@byte(src));
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)

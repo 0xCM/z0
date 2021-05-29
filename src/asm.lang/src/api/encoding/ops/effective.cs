@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmEncoder
+    partial class AsmEncoder
     {
         /// <summary>
         /// Effective address computation with vsib addressing

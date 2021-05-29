@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmRegs;
-    using static Typed;
 
     using G = RegVecsG;
 
@@ -26,11 +25,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public ref RegVec<rcx,rdx> assign(rcx r0, rdx r1, ref RegVec<rcx,rdx> dst)
-            => ref G.assign(r0,r1,ref dst);
+            => ref G.assign(r0, r1, ref dst);
 
         [MethodImpl(Inline), Op]
         public ref RegVec<ecx,edx> assign(ecx r0, edx r1, ref RegVec<ecx,edx> dst)
-            => ref G.assign(r0,r1,ref dst);
+            => ref G.assign(r0, r1,ref dst);
     }
 
     partial struct RegVecsG

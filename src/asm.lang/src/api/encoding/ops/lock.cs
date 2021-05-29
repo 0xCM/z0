@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmEncoder
+    partial class AsmEncoder
     {
         [MethodImpl(Inline), Op]
         public static AsmHexCode @lock(LockPrefixCode code, uint4 index)

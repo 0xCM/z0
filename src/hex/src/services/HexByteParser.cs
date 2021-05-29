@@ -9,7 +9,6 @@ namespace Z0
     using System.Globalization;
 
     using static System.StringSplitOptions;
-
     using static HexFormatSpecs;
     using static core;
 

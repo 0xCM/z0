@@ -70,6 +70,7 @@
     <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
 
     <Hash>$(Src)hash/z0.hash.csproj</Hash>
+    <Hex>$(Src)hex/z0.hex.csproj</Hex>
 
     <Interop>$(Src)interop/z0.interop.csproj</Interop>
 

@@ -42,7 +42,7 @@ namespace Z0
         public static Outcome<uint> digits(ReadOnlySpan<char> src, Span<HexDigit> dst)
         {
             var j=0u;
-            var count = root.min(src.Length, dst.Length);
+            var count = min(src.Length, dst.Length);
             for(var i=0; i<src.Length; i++)
             {
                 if(!parse((AsciChar)skip(src,i), out seek(dst,i)))

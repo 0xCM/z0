@@ -470,38 +470,6 @@ namespace Z0.Asm
             Wf.Row($"8: {bits.View(w8, 0)}");
         }
 
-
-        /// <summary>
-        /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
-        /// </summary>
-        void ShowModRmBits2()
-        {
-            void emit(ShowLog dst)
-            {
-                var f0 = BitSeq.bits(n3);
-                var f1 = BitSeq.bits(n3);
-                var f2 = BitSeq.bits(n2);
-                var i=0;
-
-                for(var c=0u; c<f2.Length; c++)
-                for(var b=0u; b<f1.Length; b++)
-                for(var a=0u; a<f0.Length; a++,i++)
-                {
-                    var m1 = AsmEncoder.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
-                    var m2 = AsmEncoder.modrm((byte)i);
-                    AsmEncoder.render(m1, dst.Buffer);
-                    dst.Buffer.Append(" ^ ");
-                    AsmEncoder.render(m2, dst.Buffer);
-                    dst.Buffer.Append(" = ");
-                    dst.Buffer.Append((m1^m2).Encoded.FormatBits());
-                    dst.ShowBuffer();
-                }
-
-           }
-
-            Show("modrm", FS.Log, emit);
-        }
-
         void ShowOptions()
         {
             const string @case = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";

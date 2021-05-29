@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static AsmOps;
 
 //| FF /4       | JMP r/m64    | M     | Valid       | N.E.            | Jump near, absolute indirect, RIP = 64-Bit offset from register or memory                     |

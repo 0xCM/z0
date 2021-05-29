@@ -76,7 +76,7 @@ namespace Z0
                     return j;
 
                 ref readonly var c = ref skip(src,i);
-                if(TextQuery.whitespace(c) && nonzero(c0, c1))
+                if(whitespace(c) && nonzero(c0, c1))
                 {
                     if(parse(c0, c1, out seek(dst,j)))
                         j++;
@@ -194,5 +194,23 @@ namespace Z0
 
             return true;
         }
+
+        [MethodImpl(Inline)]
+        static bit contains(ReadOnlySpan<AsciCharCode> src, AsciCharCode match)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                if(match == skip(src,i))
+                    return 1;
+            return 0;
+        }
+
+        [MethodImpl(Inline)]
+        static bit whitespace(AsciCharCode src)
+            => contains(AsciCodes.whitespace(), src);
+
+        [MethodImpl(Inline)]
+        static bit whitespace(char src)
+            => whitespace((AsciCharCode)src);
     }
 }

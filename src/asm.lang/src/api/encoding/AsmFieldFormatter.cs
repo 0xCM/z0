@@ -61,6 +61,5 @@ namespace Z0
             result.Reverse();
             return result;
         }
-
     }
 }

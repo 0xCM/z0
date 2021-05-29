@@ -70,7 +70,7 @@ namespace Z0
         public static ReadOnlySpan<HSU> UpperSymbols
         {
             [MethodImpl(Inline)]
-            get => memory.recover<HSU>(UpperSymData);
+            get => recover<HSU>(UpperSymData);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         public static ReadOnlySpan<HSL> LowerSymbols
         {
             [MethodImpl(Inline)]
-            get => memory.recover<HSL>(LowerSymData);
+            get => recover<HSL>(LowerSymData);
         }
 
         public static byte LowerSymbolCount

@@ -8,9 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static AsmRegCodes;
-    using static AsmTokens;
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class AsmCaseAttribute : Attribute
     {

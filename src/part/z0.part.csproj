@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Hash)" />
     <ProjectReference Include="$(Bit)" />
+    <ProjectReference Include="$(Hex)" />
   </ItemGroup>
 
 </Project>

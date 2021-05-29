@@ -12,8 +12,8 @@ namespace Z0
     partial struct Tables
     {
         [MethodImpl(Inline)]
-        public static RowParser<T> parser<T>(ParseFunction<T> f, char delimiter = FieldDelimiter)
+        public static RecordParser<T> parser<T>(ParseFunction<T> f, char delimiter = FieldDelimiter)
             where T : struct, IRecord<T>
-                => new RowParser<T>(f, delimiter);
+                => new RecordParser<T>(f, delimiter);
     }
 }

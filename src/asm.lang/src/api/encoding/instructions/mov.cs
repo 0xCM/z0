@@ -7,12 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static AsmInstructions;
     using static AsmOps;
     using static AsmHexCodes;
 
-    partial struct AsmEncoder
+    partial class AsmEncoder
     {
         // REX.W + B8+ rd io | MOV r64, imm64           | OI    | Valid       | N.E.            | Move imm64 to r64.                                             |
 
