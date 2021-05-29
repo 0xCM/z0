@@ -17,7 +17,7 @@ namespace Z0
     {
         static T Zero => default;
 
-        static T One => Numeric.one<T>();
+        static T One => NumericLiterals.one<T>();
 
         public BernoulliDist(IPolyrand random, BernoulliSpec<T> spec)
             : base(random, spec)

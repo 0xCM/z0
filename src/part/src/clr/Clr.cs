@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public readonly partial struct Clr
@@ -37,5 +38,19 @@ namespace Z0
         public static CliToken token(ParameterInfo src)
             => new CliToken(src);
 
+        [Op]
+        public static Index<NumericLiteral> numericlits(Type src, Base2 b)
+        {
+            var fields = span(src.LiteralFields());
+            var dst = list<NumericLiteral>();
+            for(var i=0u; i<fields.Length; i++)
+            {
+                ref readonly var field = ref skip(fields,i);
+                var tc = Type.GetTypeCode(field.FieldType);
+                var vRaw = field.GetRawConstantValue();
+                dst.Add(NumericLiterals.literal(field.Name, vRaw, BitFormatter.format(vRaw, tc), b));
+            }
+            return dst.ToArray();
+        }
     }
 }

@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class gbits
     {
         [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>()
             where T:unmanaged
-                => Numeric.ones<T>();
+                => NumericLiterals.ones<T>();
 
         [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>(T a)

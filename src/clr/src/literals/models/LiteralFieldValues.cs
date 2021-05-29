@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
+    using static core;
 
     public readonly struct LiteralFieldValues<F>
         where F : unmanaged
@@ -68,6 +69,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public RenderWidth Width(F f)
-            => memory.@as<F,byte>(f);
+            => @as<F,byte>(f);
     }
 }

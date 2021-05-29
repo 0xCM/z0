@@ -67,7 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Outcome numeric<T>(string src, out T dst)
-            => Numeric.parse(src, out dst);
+            => NumericParser.parse(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Timestamp dst)

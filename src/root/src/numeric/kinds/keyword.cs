@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using NK = NumericKind;
 
-    partial struct Numeric
+    partial class NumericKinds
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string keyword<T>()

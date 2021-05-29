@@ -58,17 +58,17 @@ namespace Z0
                 return (false, $"The time segment has {seg1.Length} segments and should have 4");
 
             var fffBounds = bounded(0,999);
-            if(!Numeric.parse(skip(seg0,0), out int yyyy))
+            if(!NumericParser.parse(skip(seg0,0), out int yyyy))
                 return (false, "Attempt to parse year failed");
-            if(!Numeric.parse(skip(seg0,1), out int MM))
+            if(!NumericParser.parse(skip(seg0,1), out int MM))
                 return (false, "Attempt to parse month failed");
-            if(!Numeric.parse(skip(seg0,2), out int dd))
+            if(!NumericParser.parse(skip(seg0,2), out int dd))
                 return (false, "Attempt to parse day failed");
-            if(!Numeric.parse(skip(seg1,0), out int HH))
+            if(!NumericParser.parse(skip(seg1,0), out int HH))
                 return (false, "Attempt to parse hour failed");
-            if(!Numeric.parse(skip(seg1,1), out int mm))
+            if(!NumericParser.parse(skip(seg1,1), out int mm))
                 return (false, "Attempt to parse minutes failed");
-            if(!Numeric.parse(skip(seg1,2), out int ss))
+            if(!NumericParser.parse(skip(seg1,2), out int ss))
                 return (false, "Attempt to parse seconds failed");
             if(!Rules.parse(skip(seg1,3), fffBounds, out int fff, out outcome))
                 return outcome;

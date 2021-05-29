@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
-    using static Numeric;
+    using static NumericCast;
+    using static NumericLiterals;
 
     partial class gmath
     {

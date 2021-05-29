@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     using NK = NumericKind;
     using ID = ScalarKind;
@@ -106,7 +106,7 @@ namespace Z0
         [Op]
         public static Type[] NumericClosureTypes(MethodInfo m)
             => from k in NumericClosureKinds(m)
-               let t = Numeric.type(k)
+               let t = NumericKinds.type(k)
                where t != typeof(void)
                select t;
 

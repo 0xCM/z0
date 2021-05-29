@@ -41,28 +41,28 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         public static Interval<T> U01
-            => new Interval<T>(Numeric.zero<T>(), Numeric.one<T>(), K.Closed);
+            => new Interval<T>(NumericLiterals.zero<T>(), NumericLiterals.one<T>(), K.Closed);
 
         /// <summary>
         /// Defines a closed interval that subsumes all points representable by the primal type
         /// </summary>
         public static Interval<T> Full
-            => new Interval<T>(Numeric.minval<T>(), Numeric.maxval<T>(), K.Closed);
+            => new Interval<T>(Limits.minval<T>(), Limits.maxval<T>(), K.Closed);
 
         /// <summary>
         /// Defines an open interval that subsumes all points representable by the primal type and all points represented
         /// by increasing the size of the primal type without altering other characteristics
         /// </summary>
         public static Interval<T> Unbound
-            => new Interval<T>(Numeric.minval<T>(), Numeric.maxval<T>(), K.Open);
+            => new Interval<T>(Limits.minval<T>(), Limits.maxval<T>(), K.Open);
 
         [MethodImpl(Inline)]
         public static Interval<T> LeftUnbound(T right)
-            => new Interval<T>(Numeric.minval<T>(), right, K.LeftOpen);
+            => new Interval<T>(Limits.minval<T>(), right, K.LeftOpen);
 
         [MethodImpl(Inline)]
         public static Interval<T> RightUnbound(T left)
-            => new Interval<T>(left, Numeric.maxval<T>(), K.RightOpen);
+            => new Interval<T>(left, Limits.maxval<T>(), K.RightOpen);
 
         [MethodImpl(Inline)]
         public static implicit operator Interval<T>((T left, T right) x)
@@ -103,7 +103,7 @@ namespace Z0
         public ulong Width
         {
             [MethodImpl(Inline)]
-            get => Numeric.force<T,ulong>(Right) - Numeric.force<T,ulong>(Left);
+            get => NumericCast.force<T,ulong>(Right) - NumericCast.force<T,ulong>(Left);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace Z0
         public bool LeftUnbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.LeftOpen && Left.Equals(Numeric.minval<T>());
+            get => Kind == K.LeftOpen && Left.Equals(Limits.minval<T>());
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Z0
         public bool RightUnbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.RightOpen && Right.Equals(Numeric.maxval<T>());
+            get => Kind == K.RightOpen && Right.Equals(Limits.maxval<T>());
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Z0
         public bool Unbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.Open && Left.Equals(Numeric.minval<T>()) && Right.Equals(Numeric.maxval<T>());
+            get => Kind == K.Open && Left.Equals(Limits.minval<T>()) && Right.Equals(Limits.maxval<T>());
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval<U> Convert<U>()
             where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new Interval<U>(Numeric.force<T,U>(Left), Numeric.force<T,U>(Right),Kind);
+                => new Interval<U>(NumericCast.force<T,U>(Left), NumericCast.force<T,U>(Right),Kind);
 
         /// <summary>
         /// Creates a view of the data in the inverval as seen through the
@@ -284,7 +284,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Interval<T> New(T left, T right, K kind)
-            => new Interval<T>(left,right, kind);
+            => new Interval<T>(left, right, kind);
 
         [MethodImpl(Inline)]
         public string Format()

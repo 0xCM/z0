@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static gmath;
 
     partial class BitGrid
@@ -22,8 +22,8 @@ namespace Z0
             where T : unmanaged
         {
             var points = mul(rows, cols);
-            var module = mod(points, Numeric.force<T>(8));
-            var remains = nonz(module) ? Numeric.one<T>() : Numeric.zero<T>();
+            var module = mod(points, NumericCast.force<T>(8));
+            var remains = nonz(module) ? NumericLiterals.one<T>() : NumericLiterals.zero<T>();
             return add(gmath.srl(points, 3), remains);
         }
 

@@ -168,7 +168,7 @@ namespace Z0
         public static ClosedInterval<T> Full
         {
             [MethodImpl(Inline)]
-            get => new ClosedInterval<T>(Numeric.minval<T>(), Numeric.maxval<T>());
+            get => new ClosedInterval<T>(Limits.minval<T>(), Limits.maxval<T>());
         }
     }
 }

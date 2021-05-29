@@ -22,15 +22,15 @@ namespace Z0
 
         public static string sig<T>(ULK kind)
              where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, Numeric.keyword<T>());
+                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
         public static string sig<T>(BLK kind)
             where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, Numeric.keyword<T>());
+                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
         public static string sig<T>(TLK kind)
             where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, Numeric.keyword<T>());
+                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
         public static string sig<T>(ApiBitShiftClass kind)
             where T : unmanaged

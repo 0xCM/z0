@@ -12,7 +12,7 @@ namespace Z0
     using NK = NumericKind;
     using TC = System.TypeCode;
 
-    partial struct Numeric
+    partial class NumericKinds
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static TypeCode typecode<T>()
@@ -68,7 +68,6 @@ namespace Z0
             else
                 return TC.Object;
         }
-
 
         [MethodImpl(Inline)]
         static unsafe (NK,Type) where_u<T>()

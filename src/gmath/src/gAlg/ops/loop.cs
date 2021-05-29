@@ -32,7 +32,7 @@ namespace Z0
             dst.UpperBound = bounds.Right;
             dst.LowerInclusive = bounds.LeftClosed;
             dst.UpperInclusive = bounds.RightClosed;
-            dst.Step = step ?? Numeric.one<I>();
+            dst.Step = step ?? NumericLiterals.one<I>();
             return dst;
        }
 

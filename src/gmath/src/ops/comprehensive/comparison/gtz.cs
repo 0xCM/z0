@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class gmath
     {
@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Gtz, Closures(Integers)]
         public static T gtz<T>(T a, T b)
             where T : unmanaged
-                => gmath.mul(Numeric.force<T>((uint)gt(a,b)), Numeric.ones<T>());
+                => gmath.mul(NumericCast.force<T>((uint)gt(a,b)), NumericLiterals.ones<T>());
     }
 }

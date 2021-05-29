@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     public readonly struct EnumValues<E,T> : IIndex<EnumValue<E,T>>
         where E : unmanaged, Enum

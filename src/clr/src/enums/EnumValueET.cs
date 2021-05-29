@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
      /// <summary>
     /// Captures an <typeparamname name='E'/> parametric enum value and the integral <typeparamref name='E'/> value along with the <see cref='FieldInfo'/>
     /// that defines the corresponding enum literal
     /// </summary>
-    [Datatype]
     public readonly struct EnumValue<E,T>
         where E : unmanaged, Enum
     {

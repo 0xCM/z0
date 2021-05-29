@@ -18,7 +18,7 @@ namespace Z0
                 => from f in src.LiteralFields()
                    where f.FieldType == typeof(T) && f.Tagged<BinaryLiteralAttribute>()
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
-                   select Numeric.binary(@base, f.Name, (T)f.GetRawConstantValue(), a.Text);
+                   select NumericLiterals.binary(@base, f.Name, (T)f.GetRawConstantValue(), a.Text);
 
         /// <summary>
         /// Selects the binary literals declared by a type
@@ -28,6 +28,6 @@ namespace Z0
             => from f in src.LiteralFields()
                where f.Tagged<BinaryLiteralAttribute>()
                let a = f.Tag<BinaryLiteralAttribute>().Require()
-               select Numeric.binary(@base, f.Name, f.GetRawConstantValue(), a.Text);
+               select NumericLiterals.binary(@base, f.Name, f.GetRawConstantValue(), a.Text);
     }
 }

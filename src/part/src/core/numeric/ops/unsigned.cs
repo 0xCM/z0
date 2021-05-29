@@ -16,17 +16,8 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The test type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static bit usigned<T>()
+        public static bit unsigned<T>()
             where T : unmanaged
                 => typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint) || typeof(T) == typeof(ulong);
-
-
-        [MethodImpl(Inline), Op]
-        public static byte u8(byte src)
-            => src;
-
-        [MethodImpl(Inline), Op]
-        public static ushort u16(ushort src)
-            => src;
     }
 }

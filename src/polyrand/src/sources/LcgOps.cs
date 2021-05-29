@@ -64,11 +64,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static T min<T>(in Lcg<T> g)
             where T : unmanaged
-                => gmath.nonz(g.Inc) ? zero<T>() : one<T>();
+                => gmath.nonz(g.Inc) ? zero<T>() : NumericLiterals.one<T>();
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static T max<T>(in Lcg<T> g)
             where T : unmanaged
-                => gmath.sub(g.Mod,one<T>());
+                => gmath.sub(g.Mod, NumericLiterals.one<T>());
     }
 }

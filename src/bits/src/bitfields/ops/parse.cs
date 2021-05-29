@@ -24,7 +24,7 @@ namespace Z0
                 var parts = text.split(fenced, SegmentDelimiter).View;
                 if(parts.Length == 2)
                 {
-                    if(Numeric.parse(skip(parts,0), out T max) && Numeric.parse(skip(parts,1), out T min))
+                    if(NumericParser.parse(skip(parts,0), out T max) && NumericParser.parse(skip(parts,1), out T min))
                     {
                         dst = part<T>("0b", min, max);
                         return true;

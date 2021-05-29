@@ -36,18 +36,5 @@ namespace Z0
             where T : unmanaged
                 => map(search<T>(src),numeric<T>);
 
-        public static Index<NumericLiteral> numeric(Type src, Base2 b)
-        {
-            var fields = span(src.LiteralFields());
-            var dst = list<NumericLiteral>();
-            for(var i=0u; i<fields.Length; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                var tc = Type.GetTypeCode(field.FieldType);
-                var vRaw = field.GetRawConstantValue();
-                dst.Add(Numeric.literal(field.Name, vRaw, BitFormatter.format(vRaw, tc), b));
-            }
-            return dst.ToArray();
-        }
     }
 }

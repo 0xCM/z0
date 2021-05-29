@@ -14,6 +14,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T zero<T>()
             where T : unmanaged
-                => Numeric.zero<T>();
+                => NumericLiterals.zero<T>();
     }
 }

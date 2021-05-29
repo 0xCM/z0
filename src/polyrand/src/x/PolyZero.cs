@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T NonZ<T>(this IDomainSource src, T max)
             where T : unmanaged
-                => src.NonZStream<T>((Numeric.minval<T>(),max)).First();
+                => src.NonZStream<T>((Limits.minval<T>(),max)).First();
 
         /// <summary>
         /// Queries the source for the next nonzero value
@@ -63,6 +63,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T NonZ<T>(this IDomainSource src)
             where T : unmanaged
-                => src.NonZStream<T>((Numeric.minval<T>(), Numeric.maxval<T>())).First();
+                => src.NonZStream<T>((Limits.minval<T>(), Limits.maxval<T>())).First();
     }
 }

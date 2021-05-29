@@ -10,7 +10,8 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Numeric
+    [ApiHost]
+    public readonly struct NumericReader
     {
         [MethodImpl(Inline), Op]
         public static byte read8u(ReadOnlySpan<byte> src)

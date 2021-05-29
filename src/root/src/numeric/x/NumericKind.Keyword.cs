@@ -16,13 +16,13 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static string Keyword(this NumericKind k)
-            => Numeric.keyword(k);
+            => NumericKinds.keyword(k);
 
         /// <summary>
         /// Specifies the keyword not used in C# to designate a kind-identified primal type
         /// </summary>
         [MethodImpl(Inline), Op]
         public static string KeywordNot(this NumericKind k)
-            => Numeric.nonkeyword(k);
+            => NumericKinds.nonkeyword(k);
     }
 }

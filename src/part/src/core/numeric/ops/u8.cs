@@ -11,9 +11,13 @@ namespace Z0
 
     partial struct Numeric
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T one<T>()
-            where T : unmanaged
-                => force<T>(1);
-   }
+
+        [MethodImpl(Inline), Op]
+        public static byte u8(byte src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static ushort u16(ushort src)
+            => src;
+    }
 }

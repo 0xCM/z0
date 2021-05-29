@@ -48,7 +48,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.Tuple3, Key, First, Second);
+            => string.Format(RP.Tuple3, Key, First, Second);
 
 
         [MethodImpl(Inline)]

@@ -9,6 +9,8 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
+    using static core;
+
 
     /// <summary>
     /// Deefines a reference to a <see cref='FieldInfo'/>
@@ -48,13 +50,13 @@ namespace Z0
         public MemoryAddress NameAddress
         {
             [MethodImpl(Inline)]
-            get => memory.address(Field.Name);
+            get => address(Field.Name);
         }
 
         public SegRef<char> NameRef
         {
             [MethodImpl(Inline)]
-            get => memory.segref<char>(NameAddress, FieldName.Length);
+            get => segref<char>(NameAddress, FieldName.Length);
         }
 
         public object ReflectedValue

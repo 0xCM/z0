@@ -9,14 +9,14 @@ namespace Z0
 
     using static Root;
 
-    partial struct Numeric
+    partial class XTend
     {
         /// <summary>
-        /// Determines the width of the represented kind in bytes
+        /// Determines the system type represented by a numeric kind
         /// </summary>
-        /// <param name="k">The kind to examine</param>
+        /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static ByteSize size(NumericKind k)
-            => ((int)(ushort)k)/8;
+        public static Type ToSystemType(this NumericKind src)
+            => NumericKinds.type(src);
     }
 }

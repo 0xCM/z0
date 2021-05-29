@@ -15,6 +15,11 @@ namespace Z0
     [ApiHost]
     public readonly struct NumericParser
     {
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static NumericParser<T> create<T>()
+            where T : unmanaged
+                => default(NumericParser<T>);
+
         [MethodImpl(Inline), ParseFunction, NumericClosures(AllNumeric)]
         public static bool parse<T>(string src, out T dst)
             => parse_u(src, out dst);

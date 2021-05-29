@@ -39,7 +39,7 @@ namespace Z0
         {
             var dst = zero<T>();
             var len = width<T>();
-            var one = Numeric.one<T>();
+            var one = NumericLiterals.one<T>();
             for(var i=0; i < len; i++)
                 dst[i] = gmath.sll(one,(byte)i);
             return dst;

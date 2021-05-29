@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
+    using static core;
 
     partial struct Grids
     {
@@ -15,7 +15,7 @@ namespace Z0
         public static bool Parse(string s, out GridDim dst)
         {
             var parts = @readonly(s.Split('x'));
-            var parser = Numeric.parser<uint>();
+            var parser = NumericParser.create<uint>();
             dst = default;
             if(parts.Length == 2)
             {

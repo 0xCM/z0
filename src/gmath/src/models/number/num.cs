@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly struct num
@@ -20,17 +20,17 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static num<T> zero<T>()
             where T : unmanaged
-                => new num<T>(Numeric.zero<T>());
+                => new num<T>(NumericLiterals.zero<T>());
 
         [MethodImpl(Inline), One, Closures(AllNumeric)]
         public static num<T> one<T>()
             where T : unmanaged
-                => new num<T>(Numeric.one<T>());
+                => new num<T>(NumericLiterals.one<T>());
 
         [MethodImpl(Inline), Ones, Closures(AllNumeric)]
         public static num<T> ones<T>()
             where T : unmanaged
-                => new num<T>(Numeric.ones<T>());
+                => new num<T>(NumericLiterals.ones<T>());
 
         [MethodImpl(Inline), Add, Closures(AllNumeric)]
         public static num<T> add<T>(num<T> a, num<T> b)

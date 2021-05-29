@@ -70,7 +70,7 @@ namespace Z0
                 var k = 0u;
                 for(var i=0; i<src.Length; i++)
                 for(byte j=0; j<srcsize; j++)
-                    seek(dst,k++) = BitMasks.testbit(skip(src,i), j) == bit.On ? one<T>() : zero<T>();
+                    seek(dst,k++) = BitMasks.testbit(skip(src,i), j) == bit.On ? NumericLiterals.one<T>() : zero<T>();
                 return dst;
             }
         }
