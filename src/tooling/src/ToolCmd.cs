@@ -9,8 +9,8 @@ namespace Z0
     using System.Diagnostics;
     using System.Threading.Tasks;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly partial struct ToolCmd

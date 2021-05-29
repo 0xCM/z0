@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines an identifiable association between two heterogenous literal values
@@ -53,6 +53,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.Tuple3, Key, First, Second);
+            => string.Format(RP.Tuple3, Key, First, Second);
     }
 }

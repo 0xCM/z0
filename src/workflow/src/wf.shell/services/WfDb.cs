@@ -10,7 +10,7 @@ namespace Z0
     {
         public FS.FolderPath Root {get; private set;}
 
-        public Env Env {get; private set;}
+        public EnvData Env {get; private set;}
 
         public WfDb()
         {
@@ -27,8 +27,8 @@ namespace Z0
         protected override void OnInit()
         {
             base.OnInit();
-            Env = Env.create();
-            Root = Env.Db.Value;
+            Env = Z0.Env.load().Data;
+            Root = Env.Db;
         }
 
         IEnvPaths Paths => this;

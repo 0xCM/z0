@@ -15,7 +15,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Command represents a running of a command lineNumber process.  It is basically

@@ -13,16 +13,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static IEnvPaths create()
-            => new EnvPaths(Env.create());
+            => new EnvPaths(Z0.Env.load().Data);
+
+        public EnvData Env {get;}
 
         [MethodImpl(Inline)]
-        public static IEnvPaths create(Env env)
-            => new EnvPaths(env);
-
-        public Env Env {get;}
-
-        [MethodImpl(Inline)]
-        public EnvPaths(Env env)
+        public EnvPaths(EnvData env)
         {
             Env = env;
         }

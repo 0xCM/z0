@@ -35,5 +35,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ScriptVar(EnvPathVar src)
             => new EnvPathVar(src.Symbol, src.Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FS.FilePath(EnvPathVar src)
+            => src.Value;
     }
 }

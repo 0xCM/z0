@@ -2,18 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
-    public readonly struct AsmTasks
+    public readonly struct Spans
     {
         [MethodImpl(Inline), Op]
-        public static AsmEncodingTask encoding(Identifier id, AsmStatementExpr expr)
-            => new AsmEncodingTask(id,expr);
+        public static SpanWriter writer(Span<byte> dst)
+            => new SpanWriter(dst);
     }
 }

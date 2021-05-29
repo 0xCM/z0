@@ -11,6 +11,9 @@ namespace Z0
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Defines a natural sequence of 4-bit cells
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public readonly ref struct HexVector4
     {
@@ -41,6 +44,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => bytes(Data);
         }
-
     }
 }

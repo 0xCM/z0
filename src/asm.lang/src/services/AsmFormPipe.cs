@@ -166,7 +166,7 @@ namespace Z0.Asm
             }
         }
 
-        public new Outcome Parse(string src, out AsmFormRecord dst)
+        protected override Outcome ParseRow(string src, out AsmFormRecord dst)
         {
             var parts = Cells(src);
             var count = parts.Length;

@@ -11,7 +11,7 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        Env Env {get;}
+        EnvData Env {get;}
 
         FS.FilePath ControlScript(FS.FileName src)
             => ControlScripts() + src;

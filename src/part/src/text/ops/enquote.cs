@@ -11,13 +11,8 @@ namespace Z0
 
     partial class text
     {
-        [ Op]
+        [Op]
         public static string enquote(string src)
-        {
-            if(!string.IsNullOrWhiteSpace(src))
-                return concat(Chars.Quote, src, Chars.Quote);
-            else
-                return EmptyString;
-        }
+            => RP.enquote(src);
    }
 }

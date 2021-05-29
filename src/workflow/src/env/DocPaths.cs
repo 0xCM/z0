@@ -11,29 +11,8 @@ namespace Z0
         FS.FolderPath ListRoot()
             => DbRoot() + FS.folder(lists);
 
-        FS.FolderPath VendorDocs()
-            => Env.VendorDocs;
-
-        FS.FolderPath VendorDocs(FS.FolderPath root)
-            => root;
-
-        FS.FolderPath VendorManualRoot()
-            => VendorDocs() + FS.folder(manuals);
-
-        FS.FolderPath VendorManualDir(FS.FolderPath root)
-            => VendorDocs(root) + FS.folder(manuals);
-
-        FS.FolderPath VendorManualDir(string vendor)
-            => VendorManualRoot() + FS.folder(vendor);
-
-        FS.FolderPath VendorManualDir(FS.FolderPath root, string vendor)
-            => VendorManualDir(root) + FS.folder(vendor);
-
-        FS.Files VendorManuals(string vendor, FS.FileExt ext)
-            => VendorManualDir(vendor).Files(ext, true);
-
-        FS.Files VendorManuals(FS.FolderPath root, string vendor, FS.FileExt ext)
-            => VendorManualDir(root, vendor).Files(ext, true);
+        VendorDocArchive VendorDocs()
+            => new VendorDocArchive(Env.VendorDocs);
 
         FS.FilePath List(string name, FS.FileExt ext)
             => ListRoot() + FS.file(name, ext);

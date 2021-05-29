@@ -7,14 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
+    using static Root;
     using static RegFacets;
 
     [Datatype]
     public readonly struct Register : IDataTypeEquatable<Register>
     {
-
         /// <summary>
         /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegKind'/>
         /// </summary>
@@ -49,8 +47,6 @@ namespace Z0.Asm
         public static RegWidth width(RegKind src)
             => (RegWidth)Bits.bitslice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
 
-
-
         public RegKind Kind {get;}
 
         [MethodImpl(Inline)]
@@ -84,10 +80,8 @@ namespace Z0.Asm
             => obj is Register x && Equals(x);
 
         public string Format()
-            => "<not-implemented>";
+            => Kind.ToString();
 
-        // public string Format()
-        //     => api.format(this);
 
         public override string ToString()
             => Format();

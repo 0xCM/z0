@@ -573,18 +573,6 @@ namespace Z0.Asm
         }
 
 
-        public void ListVendorManuals(string vendor, FS.FileExt ext)
-        {
-            var files = Db.VendorManuals(vendor,ext).View;
-            var count = files.Length;
-            using var log = ShowLog(FS.Md);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var file = ref skip(files,i);
-                var link = Markdown.item(0, Markdown.link(file), Markdown.ListStyle.Bullet);
-                log.Show(link);
-            }
-        }
 
         ReadOnlySpan<SymExpr> SymExpr<E>()
             where E : unmanaged, Enum

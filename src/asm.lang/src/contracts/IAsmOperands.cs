@@ -4,8 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Part;
+    using static Typed;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IAsmOps
     {
         /// <summary>
@@ -14,6 +17,12 @@ namespace Z0.Asm
         byte Count {get;}
     }
 
+    /// <summary>
+    /// Characterizes a operand sequence reification of length 1
+    /// </summary>
+    /// <typeparam name="F">The reifying type</typeparam>
+    /// <typeparam name="A">The operand type</typeparam>
+    [Free]
     public interface IAsmOps<F,A> : IAsmOps
         where F : struct, IAsmOps<F,A>
         where A : unmanaged, IAsmOp
@@ -43,7 +52,8 @@ namespace Z0.Asm
         B Second => this[n1];
     }
 
-    public interface IAsmOps<F,A,B,C> : IAsmOps
+   [Free]
+   public interface IAsmOps<F,A,B,C> : IAsmOps
         where F : struct, IAsmOps<F,A,B,C>
         where A : unmanaged, IAsmOp
         where B : unmanaged, IAsmOp
@@ -65,6 +75,7 @@ namespace Z0.Asm
         C Third => this[n2];
     }
 
+    [Free]
     public interface IAsmOps<F,A,B,C,D> : IAsmOps
         where F : struct, IAsmOps<F,A,B,C,D>
         where A : unmanaged, IAsmOp

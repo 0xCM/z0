@@ -14,9 +14,8 @@ namespace Z0
         public PartId AppId
             => Assembly.GetEntryAssembly().Id();
 
-        public static Env create()
+        public static Env load()
             => new Env();
-
         Env()
         {
             var dst = this;
@@ -38,6 +37,7 @@ namespace Z0
             dst.DataRoot = dir(N.ZData);
             dst.VendorDocs = dir(N.VendorDocs);
             dst.CapturePacks = dir(N.CapturePacks);
+            dst.CpuCount = number(N.CpuCount);
         }
 
         public EnvDirVar ZDev;
@@ -76,6 +76,11 @@ namespace Z0
 
         public EnvDirVar CapturePacks;
 
+        public EnvVar<ulong> CpuCount;
+
+        public EnvData Data
+            => new EnvData(AppId, this);
+
         public string Format()
         {
             var dst = text.buffer();
@@ -107,6 +112,18 @@ namespace Z0
             if(text.blank(value))
                 core.@throw($"The environment variable '{name}' is undefined");
             return (name, FS.dir(value));
+        }
+
+        static EnvVar<ulong> number(string name)
+        {
+            var value = Environment.GetEnvironmentVariable(name);
+            if(text.blank(value))
+                return (name,0ul);
+
+            if(ulong.TryParse(name,out var n))
+                return (name,n);
+
+            return (name,0);
         }
 
         [Op]

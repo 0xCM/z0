@@ -23,13 +23,13 @@ namespace Z0
             where T : struct
         {
             if(size<T>() == 1)
-                return @as<T>(Cells.cell(src, w8));
+                return @as<T>(Cells.cell(w8,src));
             else if(size<T>() == 2)
-                return @as<T>(Cells.cell(src, w16));
+                return @as<T>(Cells.cell(w16, src));
             else if(size<T>() == 4)
-                return @as<T>(Cells.cell(src, w32));
+                return @as<T>(Cells.cell(w32, src));
             else if(size<T>() == 16)
-                return @as<T>(Cells.cell(src, w64));
+                return @as<T>(Cells.cell(w64, src));
             else
                 return load128x512<T>(src);
         }
@@ -39,11 +39,11 @@ namespace Z0
             where T : struct
         {
             if(size<T>() == 16)
-                return @as<Cell128,Cell<T>>(Cells.cell(src, w128));
+                return @as<Cell128,Cell<T>>(Cells.cell(w128, src));
             else if(size<T>() == 32)
-                return @as<Cell256,Cell<T>>(Cells.cell(src, w256));
+                return @as<Cell256,Cell<T>>(Cells.cell(w256, src));
             else if(size<T>() == 64)
-                return @as<Cell512,Cell<T>>(Cells.cell(src, w512));
+                return @as<Cell512,Cell<T>>(Cells.cell(w512, src));
             else
                 throw no<T>();
         }

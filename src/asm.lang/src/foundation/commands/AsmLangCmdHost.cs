@@ -31,14 +31,6 @@ namespace Z0.Asm
         // void ShowMnemonicSymbols()
         //     => root.use(OpenShowLog("sigops.mnemonics"), log => root.iter(SigSymbols.Mnemonics.Storage, symbol => Show(symbol, log)));
 
-        [Action(K.ShowRexBits)]
-        void ShowRexBits()
-        {
-            var bits = AsmEncoder.RexPrefixBits();
-            using var log = OpenShowLog("rexbits");
-            var count = bits.Length;
-            for(var i=0; i<count; i++)
-                Show(AsmEncoder.describe(skip(bits,i)), log);
-        }
+
     }
 }

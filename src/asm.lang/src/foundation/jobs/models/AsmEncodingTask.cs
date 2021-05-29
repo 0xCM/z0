@@ -36,5 +36,4 @@ namespace Z0.Asm
         public static implicit operator AsmEncodingTask((Identifier id, AsmStatementExpr expr) src)
             => new AsmEncodingTask(src.id, src.expr);
     }
-
 }

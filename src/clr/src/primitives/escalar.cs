@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct ClrLiterals
+    partial struct ClrPrimitives
     {
         /// <summary>
         /// Presents a kinded value as a scalar value
@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe T scalar<E,T>(E kind)
+        public static unsafe T escalar<E,T>(E kind)
             where E : unmanaged, Enum, IEquatable<E>
             where T : unmanaged, IEquatable<T>
                 => Unsafe.Read<T>((T*)(&kind));

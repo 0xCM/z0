@@ -6,6 +6,9 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    /// <summary>
+    /// Characterizes an operand representation of a 512-bit register
+    /// </summary>
     [Free]
     public interface IRegOp512 : IRegOp
     {
@@ -19,6 +22,5 @@ namespace Z0.Asm
     {
         RegClass IRegOp.Class
             => RegClass.ZMM;
-
     }
 }

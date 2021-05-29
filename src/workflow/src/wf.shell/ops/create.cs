@@ -21,7 +21,7 @@ namespace Z0
                 term.inform(AppMsg.status("Creating shell"));
 
             var clock = Time.counter(true);
-            var dbRoot = Env.create().Db.Value;
+            var dbRoot = Z0.Env.load().Db.Value;
 
             if(verbose)
                 term.inform(AppMsg.status(text.prop("DbRoot", dbRoot)));

@@ -11,7 +11,7 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// CommandOptions is a helper class for the Command class.  It stores options

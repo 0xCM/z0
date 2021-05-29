@@ -50,5 +50,9 @@ namespace Z0
         public static AsmParser AsmParser(this IWfRuntime wf)
             => Svc.AsmParser.create(wf);
 
+        [Op]
+        public static AsmJumps AsmJumps(this IWfRuntime wf)
+            => Svc.AsmJumps.create(wf);
+
     }
 }

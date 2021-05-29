@@ -42,5 +42,7 @@ namespace Z0
         public const string VendorDocs = "VendorDocRoot";
 
         public const string CapturePacks = "CapturePacks";
+
+        public const string CpuCount = "NUMBER_OF_PROCESSORS";
     }
 }

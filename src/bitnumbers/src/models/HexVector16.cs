@@ -10,6 +10,9 @@ namespace Z0
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Defines a natural sequence of 16-bit cells
+    /// </summary>
     public readonly ref struct HexVector16
     {
         readonly Span<Hex16> Data;

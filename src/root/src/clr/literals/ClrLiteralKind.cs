@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using PK = ClrPrimalKind;
-
     /// <summary>
     /// Defines a <see cref='ClrPrimalKind'/> subset that corresponds to primal types that can be used as compile-time literals
     /// </summary>

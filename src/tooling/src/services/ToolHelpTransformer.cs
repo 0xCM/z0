@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
-
     public class ToolHelpTransformer : TextDocTransformer<ToolHelpTransformer,ToolHelp>
     {
         public override ToolHelp Processing(in TextDoc src)

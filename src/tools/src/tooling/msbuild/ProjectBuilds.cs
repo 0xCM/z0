@@ -29,11 +29,11 @@ namespace Z0.Tools
 
         [Op]
         static FS.FilePath ProjectPath(this WfCmdBuilder src, in BuildCmdVars vars)
-            => src.Env.ZDev.Value + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.CsProj);
+            => src.Env.ZDev + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.CsProj);
 
         [Op]
         static FS.FilePath SolutionPath(this WfCmdBuilder src, in BuildCmdVars vars)
-            => src.Env.ZDev.Value + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Sln);
+            => src.Env.ZDev + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Sln);
 
         [Op]
         static FS.FilePath LogPath(this WfCmdBuilder src, in BuildCmdVars vars)

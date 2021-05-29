@@ -28,7 +28,7 @@ namespace Z0
                 }
             }
 
-            return slice(dst,0, counter);
+            return slice(dst, 0, counter);
         }
     }
 }

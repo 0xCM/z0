@@ -10,7 +10,7 @@ namespace Z0
 
     using static WfEvents;
     using static Root;
-    using static memory;
+    using static core;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -54,7 +54,7 @@ namespace Z0
 
         IWfRuntime WithSource(IPolySource source);
 
-        Env Env {get;}
+        EnvData Env {get;}
 
         ExecToken Ran(WfExecFlow src);
 
@@ -97,7 +97,7 @@ namespace Z0
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
         /// </summary>
         IWfDb Db()
-            => new WfDb(this, Env.Db.Value);
+            => new WfDb(this, Env.Db);
 
         /// <summary>
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location

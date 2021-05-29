@@ -6,24 +6,39 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static memory;
-    using static Part;
+    using static Typed;
     using static AsmTokens;
+    using static core;
 
+    /// <summary>
+    /// Characterizes a register operand representation
+    /// </summary>
     [Free]
     public interface IRegOp : IAsmOp, ITextual
     {
+        /// <summary>
+        /// The register index code
+        /// </summary>
+        RegIndex Index {get;}
+
+        /// <summary>
+        /// The register classifier
+        /// </summary>
+        RegClass Class {get;}
+
         BitWidth ISized.Width
             => (uint)Width;
 
-        RegIndex Index {get;}
-
-        RegClass Class {get;}
-
+        /// <summary>
+        /// The width of the represented register operand
+        /// </summary>
         new RegWidth Width {get;}
-
     }
 
+    /// <summary>
+    /// Characterizes a parametric register operand representation
+    /// </summary>
+    /// <typeparam name="T">The represented storage type</typeparam>
     [Free]
     public interface IRegOp<T> : IRegOp
         where T : unmanaged

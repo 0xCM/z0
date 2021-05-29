@@ -36,11 +36,15 @@ namespace Z0.Asm
 
         public static RegDigit rd7 => RegDigitCode.rd7;
 
+        [MethodImpl(Inline)]
+        static SpanWriter write(Span<byte> dst)
+            => Spans.writer(dst);
+
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write8(a0);
             return close(writer, dst);
         }
@@ -49,7 +53,7 @@ namespace Z0.Asm
         public static AsmHexCode asmhex(RexPrefix a0)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write8(a0);
             return close(writer, dst);
         }
@@ -58,7 +62,7 @@ namespace Z0.Asm
         public static AsmHexCode asmhex(RexPrefix a0, Hex8 a1)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             return close(writer, dst);
@@ -67,7 +71,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(RexPrefix a0, Hex8 a1, RegDigit rd)
         {
-            var writer = memory.writer(buffer());
+            var writer = write(buffer());
             writer.Write8(a0);
             writer.Write8(a1);
             return load(writer);
@@ -76,7 +80,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(RexPrefix a0, Hex8 a1, Imm64 a2)
         {
-            var writer = memory.writer(buffer());
+            var writer = write(buffer());
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write64(a2);
@@ -86,7 +90,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1)
         {
-            var writer = memory.writer(buffer());
+            var writer = write(buffer());
             writer.Write8(a0);
             writer.Write8(a1);
             return load(writer);
@@ -95,7 +99,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0, Imm8 a1)
         {
-            var writer = memory.writer(buffer());
+            var writer = write(buffer());
             writer.Write8(a0);
             writer.Write8(a1);
             return load(writer);
@@ -105,7 +109,7 @@ namespace Z0.Asm
         public static AsmHexCode asmhex(Hex16 a0)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write16(a0);
             return close(writer, dst);
         }
@@ -114,7 +118,7 @@ namespace Z0.Asm
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, Hex8 a2)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write8(a2);
@@ -125,7 +129,7 @@ namespace Z0.Asm
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, Hex8 a2, Hex8 a3)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write8(a2);
@@ -137,7 +141,7 @@ namespace Z0.Asm
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, Hex16 a2)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write16(a2);
@@ -147,7 +151,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode asmhex(Hex8 a0, Hex32 a1)
         {
-            var writer = memory.writer(buffer());
+            var writer = write(buffer());
             writer.Write8(a0);
             writer.Write32(a1);
             return load(writer);
@@ -157,7 +161,7 @@ namespace Z0.Asm
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, Hex32 a2)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write32(a2);
@@ -168,7 +172,7 @@ namespace Z0.Asm
         public static AsmHexCode asmhex(Hex8 a0, Hex8 a1, ulong a2)
         {
             var dst = buffer();
-            var writer = memory.writer(dst);
+            var writer = write(dst);
             writer.Write8(a0);
             writer.Write8(a1);
             writer.Write64(a2);

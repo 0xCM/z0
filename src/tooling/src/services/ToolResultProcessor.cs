@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     class ToolResultProcessor : IToolResultProcessor
     {
         readonly IEnvPaths Paths;

@@ -29,10 +29,8 @@ namespace Z0.Asm
 
     public struct EngineSettings
     {
-
         public Flags<ulong> Affinity;
     }
-
 
     public class Engine : AppService<Engine>
     {
@@ -73,21 +71,24 @@ namespace Z0.Asm
                 ZmmRegs(i) = new H.ZmmRegBank(alloc<Cell512>(32));
                 MaskRegs(i) = new H.MaskRegBank(alloc<Cell64>(8));
             }
-
         }
 
         public Engine()
         {
         }
 
-        [MethodImpl(Inline), Op]
         public void Configure(in EngineSettings src)
         {
             Settings = src;
+            Allocate();
         }
 
         protected override void OnInit()
         {
+            var config = new EngineSettings();
+            var cpucount = Env.CpuCount;
+
+
 
         }
 
@@ -98,7 +99,12 @@ namespace Z0.Asm
             return dst;
         }
 
-        public void Submit(BinaryCode src)
+        public void Run(BinaryCode src)
+        {
+
+        }
+
+        public void Run(params AsmHexCode[] src)
         {
 
         }
@@ -133,7 +139,7 @@ namespace Z0.Asm
             var query = AsmRegs.query();
             var classes = AsmRegs.classes();
 
-            using var log = ShowLog("register-bits", FS.Log);
+            using var log = ShowLog("regbits", FS.Log);
 
             foreach(var k in classes)
             {
@@ -141,6 +147,15 @@ namespace Z0.Asm
                 foreach(var r in registers)
                     log.Show(r);
             }
+        }
+
+        void ShowRexBits()
+        {
+            var bits = AsmEncoder.RexPrefixBits();
+            using var log = OpenShowLog("rexbits");
+            var count = bits.Length;
+            for(var i=0; i<count; i++)
+                Show(AsmEncoder.describe(skip(bits,i)), log);
         }
     }
 }

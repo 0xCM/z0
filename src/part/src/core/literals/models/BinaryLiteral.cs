@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a base2 literal via text and a boxed value; for the literal to be valid,
@@ -41,13 +42,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.blank(Name) && (text.blank(Text) || (Data == null));
+            get => blank(Name) && (blank(Text) || (Data == null));
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Name) && text.nonempty(Text) && Data != null;
+            get => nonempty(Name) && nonempty(Text) && Data != null;
         }
 
         public BinaryLiteral Zero
@@ -58,7 +59,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-             => $"{Name}({Data}:{kind(this).Keyword()}) := " + text.enquote(Text);
+             => $"{Name}({Data}:{kind(this).Keyword()}) := " + RP.enquote(Text);
 
         public override string ToString()
             => Format();

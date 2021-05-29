@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using api = ClrLiterals;
 
@@ -34,7 +34,7 @@ namespace Z0
         public ClrEnumKind ScalarKind
         {
             [MethodImpl(Inline)]
-            get => ClrLiterals.kind<E>();
+            get => ClrPrimitives.ekind<E>();
         }
 
 

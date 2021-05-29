@@ -34,6 +34,6 @@ namespace Z0
             get => _Db;
         }
 
-        public Env Env => Wf.Env;
+        public EnvData Env => Wf.Env;
     }
 }

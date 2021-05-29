@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     using NBK = NumericBaseKind;
 
@@ -37,7 +38,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Text);
+            get => blank(Text);
         }
 
         public bool IsNonEmpty

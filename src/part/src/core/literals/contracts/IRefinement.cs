@@ -14,7 +14,7 @@ namespace Z0
         where E : unmanaged, Enum, IEquatable<E>
     {
         ClrEnumKind Kind
-            => ClrLiterals.kind<E>();
+            => ClrPrimitives.ekind<E>();
     }
 
     public interface IRefinement<E,T> : IRefinement<E>

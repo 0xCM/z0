@@ -8,7 +8,6 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-
     using static Root;
     using static core;
     using static Typed;
@@ -44,8 +43,8 @@ namespace Z0
 
         public void Run()
         {
-            CheckStack();
-            EmptyQueue();
+            var engine = Engine.create(Wf);
+            engine.Run(AsmHexCode.Empty);
         }
 
         void Configure()
@@ -66,16 +65,13 @@ namespace Z0
             Queue.Status(stack.state());
         }
 
-
         static void load(FS.FilePath src, Lookup<FS.FilePath,HexPack> success, Lookup<FS.FilePath,Outcome> fail)
         {
             var pack = HexPacks.load(src);
             if(pack.Fail)
                 fail.Add(src, pack);
             else
-            {
-                success.Add(src,pack.Data);
-            }
+                success.Add(src, pack.Data);
         }
 
         static Lookup<FS.FilePath,HexPack> load(FS.Files src)
@@ -103,9 +99,7 @@ namespace Z0
                 var host = path.FileName.Format().Remove(".extracts.parsed.xpack").Replace(".","/");
                 Wf.Row(string.Format("Loaded {0} {1} blocks from {2}", count, host, path.ToUri()));
             }
-
         }
-
 
         Task<uint> RunMachine(uint cycles)
             => Task.Factory.StartNew(() => new Vmx128x2(1024, Rng.@default()).Run(cycles));

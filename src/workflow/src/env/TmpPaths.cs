@@ -10,7 +10,7 @@ namespace Z0
     partial interface IEnvPaths
     {
         FS.FolderPath TmpRoot()
-            => Env.Tmp.Value + FS.folder(tmp);
+            => Env.Tmp + FS.folder(tmp);
 
         FS.FilePath TmpFile(FS.FileName file)
             => TmpRoot() + file;

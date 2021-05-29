@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Covers a value that can be interpreted as a compile-time literal constant
@@ -40,7 +41,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data == null || text.empty(Text);
+            get => Data == null || empty(Text);
         }
 
         public bool IsNonEmpty
@@ -58,7 +59,7 @@ namespace Z0
         public bool IsAnonymous
         {
             [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Name);
+            get => blank(Name);
         }
 
         public Type SystemType

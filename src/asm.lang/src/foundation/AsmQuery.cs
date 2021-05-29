@@ -18,7 +18,7 @@ namespace Z0.Asm
     using R = RexPrefixCode;
 
     [ApiHost]
-    public readonly partial struct AsmQuery
+    public readonly struct AsmQuery
     {
         [MethodImpl(Inline), Op]
         public static bit IsCallRel32(ReadOnlySpan<byte> src, uint offset)

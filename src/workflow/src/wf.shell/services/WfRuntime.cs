@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.WfShell, true)]
+    [ApiHost]
     public partial class WfRuntime : IWfRuntime
     {
         public IWfContext Context {get;}
@@ -46,7 +46,7 @@ namespace Z0
 
         public WfServices Services {get;}
 
-        public Env Env {get;}
+        public EnvData Env {get;}
 
         TokenDispenser Tokens;
 
@@ -54,7 +54,7 @@ namespace Z0
         public WfRuntime(IWfInit config)
         {
             Tokens = TokenDispenser.acquire();
-            Env = Z0.Env.create();
+            Env = Z0.Env.load().Data;
             Context = config.Shell;
             Id = config.ControlId;
             Ct = CorrelationToken.create(config.ControlId);

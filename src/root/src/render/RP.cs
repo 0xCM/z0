@@ -11,6 +11,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct RP
     {
+
         [MethodImpl(Inline), Op]
         public static string pad(int pad)
             => "{0," + pad.ToString() + "}";

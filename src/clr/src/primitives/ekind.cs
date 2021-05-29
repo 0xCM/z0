@@ -9,24 +9,24 @@ namespace Z0
 
     using static Root;
 
-    partial struct ClrLiterals
+    partial struct ClrPrimitives
     {
-        [MethodImpl(Inline)]
-        public static unsafe E kind<E,T>(T v)
-            where E : unmanaged, Enum, IEquatable<E>
-            where T : unmanaged, IEquatable<T>
-                => Unsafe.Read<E>((E*)&v);
-
         [Op]
-        public static ClrEnumKind kind(Type e)
+        public static ClrEnumKind ekind(Type e)
         {
             var tc = Type.GetTypeCode(e.GetEnumUnderlyingType());
-            return (ClrEnumKind)ClrPrimitives.kind(tc);
+            return (ClrEnumKind)kind(tc);
         }
 
         [MethodImpl(Inline)]
-        public static ClrEnumKind kind<E>(E e = default)
+        public static ClrEnumKind ekind<E>(E e = default)
             where E : unmanaged, Enum, IEquatable<E>
-                => kind(typeof(E));
+                => ekind(typeof(E));
+
+        [MethodImpl(Inline)]
+        public static unsafe E ekind<E,T>(T v)
+            where E : unmanaged, Enum, IEquatable<E>
+            where T : unmanaged, IEquatable<T>
+                => Unsafe.Read<E>((E*)&v);
     }
 }

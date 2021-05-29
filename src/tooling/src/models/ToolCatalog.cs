@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     public class ToolCatalog : AppService<ToolCatalog>
     {

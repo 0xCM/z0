@@ -9,10 +9,14 @@ namespace Z0
 
     using static Root;
 
-    partial struct memory
+    partial struct core
     {
+        /// <summary>
+        /// Tests whether the source string is either empty, null or consists only of whitespace
+        /// </summary>
+        /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline), Op]
-        public static SpanWriter writer(Span<byte> dst)
-            => new SpanWriter(dst);
+        public static bool blank(string src)
+            => string.IsNullOrWhiteSpace(src);
     }
 }

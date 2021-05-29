@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct BinaryLiteral<T> : ILiteral<BinaryLiteral<T>,T>
         where T : unmanaged
@@ -29,13 +30,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Name) && (text.empty(Text) || Data.Equals(default));
+            get => empty(Name) && (empty(Text) || Data.Equals(default));
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Name) && text.nonempty(Text) && !Data.Equals(default);
+            get => nonempty(Name) && nonempty(Text) && !Data.Equals(default);
         }
 
         public BinaryLiteral<T> Zero
@@ -45,7 +46,7 @@ namespace Z0
         }
 
         public string Format()
-            => $"{Name}({Data}:{Numeric.kind<T>().Keyword()}) := " + text.enquote(Text);
+            => $"{Name}({Data}:{NumericKinds.kind<T>().Keyword()}) := " + RP.enquote(Text);
 
         public override string ToString()
             => Format();

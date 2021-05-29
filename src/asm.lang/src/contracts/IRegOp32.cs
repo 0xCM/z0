@@ -6,12 +6,14 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    /// <summary>
+    /// Characterizes an operand representation of a 32-bit register
+    /// </summary>
     [Free]
     public interface IRegOp32 : IRegOp
     {
         RegWidth IRegOp.Width
             => RegWidth.W32;
-
     }
 
     [Free]

@@ -11,6 +11,9 @@ namespace Z0
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Defines a natural sequence of 16-bit cells
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public readonly ref struct HexVector16<N>
         where N : unmanaged, ITypeNat

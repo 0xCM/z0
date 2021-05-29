@@ -7,14 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static Numeric;
-    using static memory;
+    using static Root;
+    using static NumericCast;
     using static BitMasks.Literals;
 
     partial class BitMasks
     {
-
         /// <summary>
         /// [00000001 ... 00000001]
         /// Enables the least significant bit of each 8-bit segment

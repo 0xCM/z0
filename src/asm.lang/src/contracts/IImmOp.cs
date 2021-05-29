@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static AsmTokens;
-
     [Free]
     public interface IImmOp : IAsmOp
     {
@@ -19,7 +17,7 @@ namespace Z0.Asm
         where T : unmanaged
     {
         BitWidth ISized.Width
-            => memory.size<T>();
+            => core.size<T>();
     }
 
     public interface IImmOp8 : IImmOp

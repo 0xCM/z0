@@ -8,6 +8,9 @@ namespace Z0.Asm
 
     using static AsmTokens;
 
+    /// <summary>
+    /// Characterizes a memory operand representation
+    /// </summary>
     [Free]
     public interface IMemOp : IAsmOp
     {

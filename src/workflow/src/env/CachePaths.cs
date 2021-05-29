@@ -9,7 +9,7 @@ namespace Z0
     partial interface IEnvPaths
     {
         FS.FolderPath CacheRoot()
-            => Env.CacheRoot.Value;
+            => Env.CacheRoot;
 
         FS.FolderPath CacheRoot(FS.FolderPath root)
             => root;

@@ -11,6 +11,8 @@ namespace Z0
     using static Part;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     [WfService]
     public abstract class AppService<H> : IAppService<H>
@@ -39,6 +41,9 @@ namespace Z0
 
         public IWfDb Db {get; private set;}
 
+        protected EnvData Env
+            => Wf.Env;
+
         public virtual Type ContractType
             => typeof(H);
 
@@ -52,7 +57,7 @@ namespace Z0
             var flow = wf.Creating(typeof(H).Name);
             Host = new WfSelfHost(typeof(H));
             Wf = wf.WithHost(Host);
-            Db = new WfDb(wf, wf.Env.Db.Value);
+            Db = new WfDb(wf, wf.Env.Db);
             OnInit();
             Initialized();
             wf.Created(flow);
@@ -128,7 +133,7 @@ namespace Z0
             var count = src.Count;
             var symbols = src.View;
             for(var i=0; i<count; i++)
-                dst.Show(memory.skip(symbols,i).Format());
+                dst.Show(core.skip(symbols,i).Format());
         }
 
         protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, Func<T,string> render, string title = EmptyString)
@@ -142,9 +147,33 @@ namespace Z0
                     log.Show(title);
 
                 for(var i=0; i<count; i++)
-                    log.Show(render(memory.skip(src,i)));
+                    log.Show(render(core.skip(src,i)));
             }
         }
+
+        protected void Babble<T>(T content)
+            => Wf.Babble(content);
+
+        protected void Babble(string pattern, params object[] args)
+            => Wf.Babble(string.Format(pattern,args));
+
+        protected void Status<T>(T content)
+            => Wf.Status(content);
+
+        protected void Status(string pattern, params object[] args)
+            => Wf.Status(string.Format(pattern,args));
+
+        protected void Warn<T>(T content)
+            => Wf.Warn(content);
+
+        protected void Warn(string pattern, params object[] args)
+            => Wf.Warn(string.Format(pattern,args));
+
+        protected void RowMsg<T>(T content)
+            => Wf.Row(content);
+
+        protected void RowMsg(string pattern, params object[] args)
+            => Wf.Row(string.Format(pattern,args));
 
         protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, string title = EmptyString)
             => ShowSpan(src, file, item => text.format("{0}", item), title);

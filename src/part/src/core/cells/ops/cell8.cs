@@ -12,14 +12,6 @@ namespace Z0
     partial class Cells
     {
         /// <summary>
-        /// Creates a <see cref='Cell8'/> from a specified <see cref='byte'/> value
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op]
-        public static Cell8 cell8(byte src)
-            => src;
-
-        /// <summary>
         /// Creates a <see cref='Cell8'/> from a specified <see cref='sbyte'/> value
         /// </summary>
         /// <param name="src">The data source</param>

@@ -10,6 +10,8 @@
     <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(Cli)" />
+    <ProjectReference Include="$(Lang)" />
+
   </ItemGroup>
 
   <ItemGroup>

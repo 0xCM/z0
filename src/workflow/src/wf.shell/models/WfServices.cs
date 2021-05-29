@@ -17,9 +17,9 @@ namespace Z0
 
         public IWfEmissionLog EmissionLog {get;}
 
-        public Env Env {get;}
+        public EnvData Env {get;}
 
-        internal WfServices(IWfRuntime wf, Env env, Assembly[] components)
+        internal WfServices(IWfRuntime wf, EnvData env, Assembly[] components)
         {
             Wf = wf;
             Env = env;
@@ -33,7 +33,7 @@ namespace Z0
             EmissionLog?.Dispose();
         }
 
-        static FS.FilePath target(Env env)
-            => env.Logs.Value + FS.folder("emissions") + FS.file(env.AppId.Format() + ".emissions", FS.Log);
+        static FS.FilePath target(EnvData env)
+            => env.Logs + FS.folder("emissions") + FS.file(env.AppId.Format() + ".emissions", FS.Log);
     }
 }
