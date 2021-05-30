@@ -22,6 +22,10 @@ namespace Z0.Asm
 
         DR3 = r3 | Debug << ClassField | W64 << WidthField,
 
+        DR4 = r4 | Debug << ClassField | W64 << WidthField,
+
+        DR5 = r5 | Debug << ClassField | W64 << WidthField,
+
         DR6 = r6 | Debug << ClassField | W64 << WidthField,
 
         DR7 = r7 | Debug << ClassField | W64 << WidthField,

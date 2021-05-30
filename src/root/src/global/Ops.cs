@@ -18,7 +18,8 @@ namespace Z0
         public static uint hash(PartId src)
             => (uint)src;
 
-        public static T[] array<T>(params T[] src)
+        [MethodImpl(Inline), Op]
+        internal static T[] array<T>(params T[] src)
             => src;
 
         /// <summary>

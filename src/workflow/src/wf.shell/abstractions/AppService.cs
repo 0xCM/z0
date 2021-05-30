@@ -174,6 +174,22 @@ namespace Z0
         protected void RowMsg(string pattern, params object[] args)
             => Wf.Row(string.Format(pattern,args));
 
+        protected WfExecFlow<T> Running<T>(T msg, [Caller] string operation = null)
+            where T : IMsgPattern
+                => Wf.Running(msg, string.Format("{0}/{1}", HostName, operation));
+
+        protected WfExecFlow<string> Running([Caller] string operation = null)
+            => Wf.Running(string.Format("{0}/{1}", HostName, operation));
+
+        protected ExecToken Ran<T>(WfExecFlow<T> flow, [Caller] string operation = null)
+            where T : IMsgPattern
+                => Wf.Ran(flow.WithMsg(string.Format("{0}/{1}", HostName, operation)));
+
+        protected ExecToken Ran<T,D>(WfExecFlow<T> flow, D data, [Caller] string operation = null)
+            where T : IMsgPattern
+                => Wf.Ran(flow.WithMsg(string.Format("{0} | {1}/{2}", data, HostName, operation)));
+
+
         protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, string title = EmptyString)
             => ShowSpan(src, file, item => text.format("{0}", item), title);
 

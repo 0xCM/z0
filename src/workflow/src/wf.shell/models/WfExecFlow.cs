@@ -42,6 +42,10 @@ namespace Z0
             Token = token;
         }
 
+        [MethodImpl(Inline)]
+        internal WfExecFlow<string> WithMsg(string  msg)
+            => new WfExecFlow<string>(Wf, msg, Token);
+
         public void Dispose()
             => Wf.Ran(this);
     }

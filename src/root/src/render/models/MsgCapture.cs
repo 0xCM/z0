@@ -9,16 +9,20 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MsgCapture : ITextual
+    public readonly struct MsgCapture : IMsgCapture
     {
-        [MethodImpl(Inline)]
-        public static MsgCapture close<T>(T src, params object[] args)
-            where T : IMsgPattern
-                => new MsgCapture(src, args);
-
         readonly IMsgPattern Pattern;
 
         readonly object[] Args;
+
+        public string PatternText
+            => Pattern.PatternText;
+
+        public byte ArgCount
+            => Pattern.ArgCount;
+
+        public ReadOnlySpan<Type> ArgTypes
+            => Pattern.ArgTypes;
 
         [MethodImpl(Inline)]
         internal MsgCapture(IMsgPattern pattern, object[] args)

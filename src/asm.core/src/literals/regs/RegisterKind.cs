@@ -25,6 +25,7 @@ namespace Z0.Asm
     using B = BndRegKind;
     using ST = FpuRegKind;
     using MM = MmxRegKind;
+    using TR = TestRegKind;
 
     /// <summary>
     /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
@@ -431,6 +432,9 @@ namespace Z0.Asm
         [Symbol("CR0")]
         CR0 = C.CR0,
 
+        [Symbol("CR1")]
+        CR1 = C.CR1,
+
         [Symbol("CR2")]
         CR2 = C.CR2,
 
@@ -440,8 +444,14 @@ namespace Z0.Asm
         [Symbol("CR4")]
         CR4 = C.CR4,
 
-        [Symbol("CR8")]
-        CR8 = C.CR8,
+        [Symbol("CR5")]
+        CR5 = C.CR5,
+
+        [Symbol("CR6")]
+        CR6 = C.CR6,
+
+        [Symbol("CR7")]
+        CR7 = C.CR7,
 
         // ~ Debug registers
         // ~ ------------------------------------------------------------------
@@ -458,11 +468,44 @@ namespace Z0.Asm
         [Symbol("DR3")]
         DR3 = D.DR3,
 
+        [Symbol("DR4")]
+        DR4 = D.DR4,
+
+        [Symbol("DR5")]
+        DR5 = D.DR5,
+
         [Symbol("DR6")]
         DR6 = D.DR6,
 
         [Symbol("DR7")]
         DR7 = D.DR7,
+
+        // ~ Test registers
+        // ~ ------------------------------------------------------------------
+
+        [Symbol("DR0")]
+        TR0 = TR.TR0,
+
+        [Symbol("TR1")]
+        TR1 = TR.TR1,
+
+        [Symbol("TR2")]
+        TR2 = TR.TR2,
+
+        [Symbol("TR3")]
+        TR3 = TR.TR3,
+
+        [Symbol("TR4")]
+        TR4 = TR.TR4,
+
+        [Symbol("TR5")]
+        TR5 = TR.TR5,
+
+        [Symbol("TR6")]
+        TR6 = TR.TR6,
+
+        [Symbol("TR7")]
+        TR7 = TR.TR7,
 
         // ~ BND registers
         // ~ ------------------------------------------------------------------

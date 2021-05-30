@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     /// <summary>
     /// Taken from, and corresponds to, the the Iced-defined Iced.Intel.FormatterTextKind
     /// </summary>

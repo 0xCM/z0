@@ -35,6 +35,14 @@ namespace Z0.Asm
             => new Gp64Bank(src);
 
         [MethodImpl(Inline), Op]
+        public static XmmBank create(Span<Cell128> src)
+            => new XmmBank(src);
+
+        [MethodImpl(Inline), Op]
+        public static YmmBank create(Span<Cell256> src)
+            => new YmmBank(src);
+
+        [MethodImpl(Inline), Op]
         public static ZmmBank create(Span<Cell512> src)
             => new ZmmBank(src);
 
@@ -61,6 +69,13 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public ref Cell64 r64(RegIndex i)
                 => ref seek(Data,(byte)i);
+
+            internal Span<Cell64> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
+
         }
 
         public readonly ref struct XmmBank
@@ -74,6 +89,13 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public ref Cell128 r128(RegIndex i)
                 => ref seek(Data, (byte)i);
+
+            internal Span<Cell128> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
+
         }
 
         public readonly ref struct YmmBank
@@ -91,6 +113,13 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public ref Cell256 r256(RegIndex i)
                 => ref seek(Data,(byte)i);
+
+            internal Span<Cell256> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
+
         }
 
         public readonly ref struct ZmmBank
@@ -112,6 +141,12 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public ref Cell512 r512(RegIndex i)
                 => ref seek(Data, (byte)i);
+
+            internal Span<Cell512> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
         }
     }
 }

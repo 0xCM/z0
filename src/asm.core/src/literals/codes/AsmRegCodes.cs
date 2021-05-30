@@ -561,20 +561,29 @@ namespace Z0.Asm
         [SymbolSource]
         public enum ControlReg : byte
         {
-            [Symbol("cr0")]
+            [Symbol("CR0")]
             CR0 = r0,
 
-            [Symbol("cr2")]
+            [Symbol("CR0")]
+            CR1 = r1,
+
+            [Symbol("CR2")]
             CR2 = r2,
 
-            [Symbol("cr3")]
+            [Symbol("CR3")]
             CR3 = r3,
 
-            [Symbol("cr4")]
+            [Symbol("CR4")]
             CR4 = r4,
 
-            [Symbol("cr8")]
-            CR8 = r8,
+            [Symbol("CR5")]
+            CR5 = r5,
+
+            [Symbol("CR6")]
+            CR6 = r6,
+
+            [Symbol("CR7")]
+            CR7 = r7,
         }
 
         /// <summary>
@@ -583,22 +592,28 @@ namespace Z0.Asm
         [SymbolSource]
         public enum DebugReg : uint
         {
-            [Symbol("dr0")]
+            [Symbol("DR0")]
             DR0 = r0,
 
-            [Symbol("dr1")]
+            [Symbol("DR1")]
             DR1 = r1,
 
-            [Symbol("dr2")]
+            [Symbol("DR2")]
             DR2 = r2,
 
-            [Symbol("dr3")]
+            [Symbol("DR3")]
             DR3 = r3,
 
-            [Symbol("dr6")]
+            [Symbol("DR4")]
+            DR4 = r4,
+
+            [Symbol("DR5")]
+            DR5 = r5,
+
+            [Symbol("DR6")]
             DR6 = r6,
 
-            [Symbol("dr7")]
+            [Symbol("DR7")]
             DR7 = r7,
         }
 
@@ -631,6 +646,34 @@ namespace Z0.Asm
 
             [Symbol("k7")]
             K7 = r7
+        }
+
+        [SymbolSource]
+        public enum TestReg : byte
+        {
+            [Symbol("TR0")]
+            TR0 = r0,
+
+            [Symbol("TR1")]
+            TR1 = r1,
+
+            [Symbol("TR2")]
+            TR2 = r2,
+
+            [Symbol("TR3")]
+            TR3 = r3,
+
+            [Symbol("TR4")]
+            TR4 = r4,
+
+            [Symbol("TR5")]
+            TR5 = r5,
+
+            [Symbol("TR6")]
+            TR6 = r6,
+
+            [Symbol("TR7")]
+            TR7 = r7
         }
 
         [SymbolSource]

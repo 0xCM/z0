@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    //using static memory;
+    using static core;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;

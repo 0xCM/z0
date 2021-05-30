@@ -9,14 +9,12 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmTokens;
-    using static AsmRegCodes;
 
     [ApiHost]
     public partial struct AsmX
     {
         public static AsmX create()
-            => new AsmX(new char[64]);
+            => new AsmX(new char[128]);
 
         readonly AsmSymbols S;
 
@@ -30,28 +28,10 @@ namespace Z0.Asm
 
         byte Position;
 
-        readonly Symbols<AsmMnemonicCode> Codes;
-
-        readonly Symbols<Gp8> Gp8Sym;
-
-        readonly Symbols<Gp16> Gp16Sym;
-
-        readonly Symbols<Gp32> Gp32Sym;
-
-        readonly Symbols<Gp64> Gp64Sym;
-
-        readonly Symbols<KReg> KRegSym;
-
         AsmX(Index<char> buffer)
         {
             Buffer = buffer;
             S = AsmSymbols.create();
-            Codes = Symbols.symbolic<AsmMnemonicCode>();
-            Gp8Sym = Symbols.symbolic<Gp8>();
-            Gp16Sym = Symbols.symbolic<Gp16>();
-            Gp32Sym = Symbols.symbolic<Gp32>();
-            Gp64Sym = Symbols.symbolic<Gp64>();
-            KRegSym = Symbols.symbolic<KReg>();
             Position = 0;
         }
 

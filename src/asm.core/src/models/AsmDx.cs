@@ -8,44 +8,45 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    /// <summary>
-    /// Defines a displacement
-    /// </summary>
-    public readonly struct AsmDx<T>
-        where T : unmanaged
+    public readonly struct AsmDx
     {
-        public T Data {get;}
+        /// <summary>
+        /// The size of the displacement in bytes
+        /// </summary>
+        public AsmDisplacementSize Size {get;}
+
+        /// <summary>
+        /// The displacement value
+        /// </summary>
+        public ulong Value {get;}
 
         [MethodImpl(Inline)]
-        public AsmDx(T src)
+        public AsmDx(ulong value, AsmDisplacementSize size)
         {
-            Data = src;
+            Value = value;
+            Size = size;
         }
 
-        public bool IsZero
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => bw8(Data) == 0;
+            get => Value == 0 && Size == 0;
         }
 
-        public bool IsNonZero
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !IsZero;
+            get => Value != 0 && Size != 0;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator AsmDx<T>(uint src)
-            => new AsmDx<T>(generic<T>(src));
+        public bool NonZero
+        {
+            [MethodImpl(Inline)]
+            get => Value != 0;
+        }
 
-        [MethodImpl(Inline)]
-        public static implicit operator AsmDx<T>(ushort src)
-            => new AsmDx<T>(generic<T>(src));
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmDx<T>(byte src)
-            => new AsmDx<T>(generic<T>(src));
+        public static AsmDx Empty
+            => default;
     }
 }

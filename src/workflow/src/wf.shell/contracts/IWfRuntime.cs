@@ -122,19 +122,14 @@ namespace Z0
             => signal(this).Warn(content);
 
         void Error(WfStepId step, Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
-        {
-            signal(this).Error(step, e, EventFactory.originate("WorkflowError", caller, file, line));
-        }
+            => signal(this).Error(step, e, EventFactory.originate("WorkflowError", caller, file, line));
 
         void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
-        {
-            signal(this).Error(e, EventFactory.originate("WorkflowError", caller, file, line));
-        }
+            => signal(this).Error(e, EventFactory.originate("WorkflowError", caller, file, line));
 
         void Error<T>(T data, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
-        {
-            signal(this).Error(data, EventFactory.originate("WorkflowError", caller, file, line));
-        }
+            => signal(this).Error(data, EventFactory.originate("WorkflowError", caller, file, line));
+
         void Disposed()
         {
             if(Verbosity.IsBabble())

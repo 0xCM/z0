@@ -18,13 +18,19 @@ namespace Z0.Asm
 
     readonly struct EngineCore
     {
-        public byte CpuCore {get;}
+        public byte CoreNumber {get;}
 
         [MethodImpl(Inline)]
         public EngineCore(byte number)
         {
-            CpuCore = number;
+            CoreNumber = number;
         }
+
+        public string Format()
+            => string.Format("Core {0}", CoreNumber);
+
+        public override string ToString()
+            => Format();
     }
 
     public struct EngineSettings
@@ -58,8 +64,9 @@ namespace Z0.Asm
         ref H.MaskRegBank MaskRegs(byte index)
             => ref MaskRegData[index];
 
-        void Allocate()
+        void Allocate(in EngineSettings src)
         {
+            var flow = Running(AllocatingCores.Capture(Bits.pop(Settings.Affinity)));
             Cores = alloc<EngineCore>(CoreCount);
             GpRegData = alloc<H.GpRegBank>(CoreCount);
             ZmmRegData = alloc<H.ZmmRegBank>(CoreCount);
@@ -71,6 +78,7 @@ namespace Z0.Asm
                 ZmmRegs(i) = new H.ZmmRegBank(alloc<Cell512>(32));
                 MaskRegs(i) = new H.MaskRegBank(alloc<Cell64>(8));
             }
+            Ran(flow);
         }
 
         public Engine()
@@ -80,17 +88,15 @@ namespace Z0.Asm
         public void Configure(in EngineSettings src)
         {
             Settings = src;
-            Status("Affinity:{0}", Settings.Affinity.FormatBits());
-            Allocate();
+            Allocate(src);
         }
 
         protected override void OnInit()
         {
             var config = new EngineSettings();
-            var a = 0ul;
             //config.Affinity = Bits.enable(a, 0,(byte)Env.CpuCount);
-            //config.Affinity = BitMasks.lo<ulong>((byte)Env.CpuCount);
-            config.Affinity = 0xFF_FF_FF;
+            config.Affinity = BitMasks.lo<ulong>((byte)(Env.CpuCount - 1));
+            //config.Affinity = Bits.enable(0ul, 0,(byte)Env.CpuCount);
             Configure(config);
         }
 
@@ -159,5 +165,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 Show(AsmEncoder.describe(skip(bits,i)), log);
         }
+
+        public static MsgPattern<Count> AllocatingCores => "Allocating {0} cores";
     }
 }

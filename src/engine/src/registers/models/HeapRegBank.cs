@@ -75,6 +75,12 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => ref @as<Cell512,Cell128>(this[r]);
             }
+
+            internal Span<Cell512> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data.Edit;
+            }
         }
 
         public class YmmRegBank : RegBank<Cell256>, IRegBank<Cell256>
@@ -120,6 +126,12 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => ref @as<Cell256,Cell128>(this[r]);
             }
+
+            internal Span<Cell256> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data.Edit;
+            }
         }
 
         public class XmmRegBank : RegBank<Cell128>, IRegBank<Cell128>
@@ -159,6 +171,13 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => ref this[r];
             }
+
+            internal Span<Cell128> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data.Edit;
+            }
+
         }
 
         public sealed class GpRegBank : RegBank<Cell64>, IRegBank<Cell64>
@@ -210,9 +229,16 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => ref @as<Cell64,Cell8>(Data[(byte)r]);
             }
+
+            internal Span<Cell64> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data.Edit;
+            }
+
         }
 
-       public sealed class MaskRegBank : RegBank<Cell64>, IRegBank<Cell64>
+        public sealed class MaskRegBank : RegBank<Cell64>, IRegBank<Cell64>
         {
             readonly Index<Cell64> Data;
 
@@ -244,7 +270,15 @@ namespace Z0.Asm
                 get => ref Data[(byte)r];
             }
 
+            internal Span<Cell64> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Data.Edit;
+            }
+
         }
+
+
 
     }
 

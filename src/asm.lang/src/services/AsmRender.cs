@@ -147,7 +147,7 @@ namespace Z0.Asm
             => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
 
         [Op]
-        public static string format(in AsmDisplacement src)
+        public static string format(in AsmDx src)
             => (src.Size switch{
                 AsmDisplacementSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
                 AsmDisplacementSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),

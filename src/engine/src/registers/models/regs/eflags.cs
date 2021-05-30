@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static gbits;
 
-    using K = EFlagKind;
+    using K = FlagRegSlot;
     using I = EFlagBits;
 
     partial struct AsmRegs

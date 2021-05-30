@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MsgPattern<A0,A1> : IFormatPattern<MsgPattern<A0,A1>,A0,A1>, IMsgPattern
+    public readonly struct MsgPattern<A0,A1> : IMsgPattern<MsgPattern<A0,A1>,A0,A1>
     {
         public string PatternText {get;}
 
@@ -20,8 +20,8 @@ namespace Z0
         public string Format(in A0 a0, in A1 a1)
             => string.Format(PatternText, $"<{a0}>", $"<{a1}>");
 
-        public RenderCapture Capture(in A0 a0, in A1 a1)
-            => RP.capture(this, $"<{a0}>", $"<{a1}>");
+        public MsgCapture Capture(in A0 a0, in A1 a1)
+            => RP.msgcap(this, $"<{a0}>", $"<{a1}>");
 
         [MethodImpl(Inline)]
         public static implicit operator MsgPattern<A0,A1>(string src)

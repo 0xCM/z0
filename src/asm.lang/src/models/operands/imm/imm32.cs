@@ -9,9 +9,18 @@ namespace Z0.Asm
 
     using static Root;
 
-    [ApiHost]
-    public class AsmJumps : AppService<AsmJumps>
+    partial struct AsmOps
     {
+        public readonly struct imm32 : IImmOp32<Imm32>
+        {
+            public Imm32 Content {get;}
 
+            [MethodImpl(Inline)]
+            public imm32(uint value)
+                => Content = value;
+
+            public AsmOpClass OpClass
+                => AsmOpClass.Imm;
+        }
     }
 }

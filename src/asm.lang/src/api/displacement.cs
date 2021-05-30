@@ -9,9 +9,10 @@ namespace Z0.Asm
 
     using static Root;
 
-    [ApiHost]
-    public class AsmJumps : AppService<AsmJumps>
+    partial struct asm
     {
-
+        [MethodImpl(Inline), Op]
+        public static AsmDx dispacement(ulong value, AsmDisplacementSize size)
+            => new AsmDx(value, (AsmDisplacementSize)size);
     }
 }

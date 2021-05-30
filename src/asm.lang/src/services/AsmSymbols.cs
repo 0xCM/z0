@@ -37,6 +37,8 @@ namespace Z0.Asm
 
         readonly Symbols<JccCode> JccSym;
 
+        readonly Symbols<ControlReg> CrSym;
+
         public static AsmSymbols create()
             => new AsmSymbols();
 
@@ -53,6 +55,7 @@ namespace Z0.Asm
             ZmmSym = Symbols.symbolic<ZmmReg>();
             MmxSym = Symbols.symbolic<MmxReg>();
             JccSym = Symbols.symbolic<JccCode>();
+            CrSym = Symbols.symbolic<ControlReg>();
         }
 
         [MethodImpl(Inline), Op]
@@ -94,6 +97,10 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public ref readonly Sym<JccCode> Symbol(JccCode key)
             => ref JccSym[key];
+
+        [MethodImpl(Inline), Op]
+        public ref readonly Sym<ControlReg> Symbol(ControlReg key)
+            => ref CrSym[key];
 
         public ref readonly Sym<AsmMnemonicCode> this[AsmMnemonicCode key]
         {
@@ -195,6 +202,10 @@ namespace Z0.Asm
         public Symbols<JccCode> JccCodes()
             => JccSym;
 
+        [MethodImpl(Inline), Op]
+        public Symbols<ControlReg> ControlRegs()
+            => CrSym;
+
         [MethodImpl(Inline)]
         public ReadOnlySpan<Sym<K>> Regs<K>()
             where K : unmanaged
@@ -229,7 +240,20 @@ namespace Z0.Asm
             else if(typeof(K) == typeof(MmxReg))
                 return recover<Sym<MmxReg>,Sym<K>>(MmxSym.View);
             else
-                throw no<K>();
+                return RegsCR<K>();
         }
+
+        [MethodImpl(Inline)]
+        ReadOnlySpan<Sym<K>> RegsCR<K>()
+            where K : unmanaged
+        {
+            if(typeof(K) == typeof(ControlReg))
+                return recover<Sym<ControlReg>,Sym<K>>(CrSym.View);
+            else
+                throw no<K>();
+
+
+        }
+
     }
 }
