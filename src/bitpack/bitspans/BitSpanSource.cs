@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Part;
+    using static Root;
     using static BitSpanSource;
 
     public readonly struct BitSpanSource

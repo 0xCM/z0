@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Typed;
+    using static core;
     using static cpu;
 
     public class t_vand : t_inx<t_vand>

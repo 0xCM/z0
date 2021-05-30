@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Typed;
+    using static Root;
 
     public class t_vperm : t_permute<t_vperm>
     {

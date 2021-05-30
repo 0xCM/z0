@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
 
-    using static Part;
+    using static Typed;
 
     public sealed class t_perm_ops : t_permute<t_perm_ops>
     {
@@ -71,11 +70,10 @@ namespace Z0
             Claim.eq(pbs_expect, pbs_actual);
 
             var p_assembled = Permute.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
-            Claim.eq(p, p_assembled);
+            Claim.eq(p.ToString(), p_assembled.ToString());
 
             var pformat_actual =  PermSymbolic.bitmap(p);
             Claim.eq(pformat_epect, pformat_actual);
-
         }
 
         void perm_comp_check<N>(N n = default)

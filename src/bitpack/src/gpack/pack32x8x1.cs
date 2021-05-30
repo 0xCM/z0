@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static memory;
-    using static Part;
+    using static Root;
+    using static Typed;
+    using static core;
 
     partial struct gpack
     {

@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-    using static memory;
-
     public class t_vadd : t_inx<t_vadd>
     {
         public void vadd_check()

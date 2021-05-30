@@ -17,14 +17,14 @@ namespace Z0
     public interface ICheckGeneric : IClaimValidator
     {
         [MethodImpl(Inline)]
-        void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        void eq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => api.eq(lhs,rhs,caller,file,line);
+                => api.eq(a, b, caller, file, line);
 
         [MethodImpl(Inline)]
-        void NumEq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        void NumEq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => api.eq(lhs,rhs,caller,file,line);
+                => api.eq(a,b,caller,file,line);
 
         [MethodImpl(Inline)]
         void neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -42,14 +42,14 @@ namespace Z0
                 => api.zero(x, caller, file, line);
 
         [MethodImpl(Inline)]
-        bool gt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        bool gt<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => api.gt(lhs, rhs, caller, file, line);
+                => api.gt(a, b, caller, file, line);
 
         [MethodImpl(Inline)]
-        bool gteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        bool gteq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => api.gteq(lhs, rhs, caller, file, line);
+                => api.gteq(a, b, caller, file, line);
 
         [MethodImpl(Inline)]
         bool lt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

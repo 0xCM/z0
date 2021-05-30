@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         public static void eq(ReadOnlySpan<char> a, ReadOnlySpan<char> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => require(TestEq(a,b), "a != b", caller, file, line);
+            => require(TestEq(a,b), string.Format("Equality fail, {0} != {1}", a.ToString(), b.ToString()), caller, file, line);
 
         /// <summary>
         /// Asserts content equality for two byte spans

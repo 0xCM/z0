@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_vbyteswap : t_inx<t_vbyteswap>
     {
         public void vbyteswap_outline()

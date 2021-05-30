@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-
-    using static Part;
-    using static memory;
+    using static Typed;
 
     public class t_veq : t_inx<t_veq>
     {

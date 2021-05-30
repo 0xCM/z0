@@ -10,8 +10,7 @@ namespace Z0
 
     using static HexConst;
     using static LimitValues;
-    using static Part;
-    using static memory;
+    using static Typed;
     using static cpu;
 
     using M = BitMasks.Literals;

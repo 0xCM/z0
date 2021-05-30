@@ -7,14 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
-
-
-    public class t_blocks_svc : AppService<t_blocks_svc>
-    {
-
-    }
+    using static Typed;
+    using static core;
 
     public class t_blocks : t_inx<t_blocks>
     {
@@ -40,7 +34,6 @@ namespace Z0
             Claim.eq(8, size<double>());
             Claim.eq(8, size<long>());
         }
-
 
         public void check_blocklength_128()
         {

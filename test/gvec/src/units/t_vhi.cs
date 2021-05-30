@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public class t_vhi : t_inx<t_vhi>
     {
         public void vhi_128x8u()

@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Typed;
 
 
     public class t_vcnonimpl : t_inx<t_vcnonimpl>

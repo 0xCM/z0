@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.Intrinsics;
-
-    using static Part;
-    using static memory;
-
     public class t_vdec : t_inx<t_vdec>
     {
         public void vdec_check()

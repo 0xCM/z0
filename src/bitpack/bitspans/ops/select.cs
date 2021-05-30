@@ -15,10 +15,10 @@ namespace Z0
         public static ref readonly BitSpan select(in BitSpan a, in BitSpan b, in BitSpan c, in BitSpan z)
         {
             var tmp = alloc(z.BitCount);
-            not(a,tmp);
-            and(a,b,z);
-            and(tmp,c, tmp);
-            or(z,tmp,z);
+            not(a, tmp);
+            and(a, b, z);
+            and(tmp, c, tmp);
+            or(z, tmp, z);
             return ref z;
         }
 

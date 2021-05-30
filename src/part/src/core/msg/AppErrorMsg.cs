@@ -17,10 +17,6 @@ namespace Z0
     [ApiHost]
     public static class AppErrorMsg
     {
-        [Op, MethodImpl(Inline)]
-        static AppMsg Fail(string msg, string caller, string file, int? line)
-            => AppMsg.define($"{msg}; caller:{caller}; line:{line ?? 0}; file:{file}", LogLevel.Error);
-
         [Op]
         public static AppMsg FeatureUnsupported(object feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Fail($"Unsupported: {feature}", caller, file, line);
@@ -30,8 +26,8 @@ namespace Z0
             where T : Enum
                 => Fail($"fail(unsupported): {src} => {dst}", caller, file, line);
 
-        public static AppMsg NotEqual<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail($"Equality fail, {lhs} != {rhs}", caller, file, line);
+        public static AppMsg NotEqual<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Fail($"Equality fail, {a} != {b}", caller, file, line);
 
         public static AppMsg neq<T>(T a, T b)
             => AppMsg.colorize($"Equality fail, {a} != {b}", FlairKind.Error);
@@ -40,28 +36,28 @@ namespace Z0
             => AppMsg.colorize($"Inequality fail, {a} == {b}", FlairKind.Error);
 
         [Op]
-        public static AppMsg NotClose(float lhs, float rhs, float err, float tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail($"fail(relerr): relerr({lhs},{rhs}) = {err} > {tolerance}", caller, file, line) ;
+        public static AppMsg NotClose(float a, float b, float err, float tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Fail($"fail(relerr): relerr({a},{b}) = {err} > {tolerance}", caller, file, line) ;
 
         [Op]
-        public static AppMsg NotClose(double lhs, double rhs, double err, double tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail($"fail(relerr): relerr({lhs},{rhs}) = {err} > {tolerance}",  caller, file, line) ;
+        public static AppMsg NotClose(double a, double b, double err, double tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Fail($"fail(relerr): relerr({a},{b}) = {err} > {tolerance}",  caller, file, line) ;
 
         [Op]
         public static AppMsg Equal<T>(T a,T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Fail($"fail(neq): {a} == {b}", caller, file, line) ;
 
         [Op]
-        public static AppMsg NotLessThan(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail($"fail(nlt): !({lhs} < {rhs})", caller, file, line) ;
+        public static AppMsg NotLessThan(object a, object b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Fail($"fail(nlt): !({a} < {b})", caller, file, line) ;
 
         [Op]
-        public static AppMsg NotGreaterThan(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail($"fail(ngt): !({lhs} > {rhs})", caller, file, line) ;
+        public static AppMsg NotGreaterThan(object a, object b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Fail($"fail(ngt): !({a} > {b})", caller, file, line) ;
 
         [Op]
-        public static AppMsg NotGreaterThanOrEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail($"fail(ngteq): !({lhs} >= {rhs})", caller, file, line) ;
+        public static AppMsg NotGreaterThanOrEqual(object a, object b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Fail($"fail(ngteq): !({a} >= {b})", caller, file, line) ;
 
         [Op]
         public static AppMsg NotLessThanOrEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -130,5 +126,9 @@ namespace Z0
         [Op]
         public static AppMsg FileDoesNotExist(string path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Fail($"fail: The file {path} does not exist", caller, file, line);
+
+        [Op, MethodImpl(Inline)]
+        static AppMsg Fail(string msg, string caller, string file, int? line)
+            => AppMsg.define($"{msg}; caller:{caller}; line:{line ?? 0}; file:{file}", LogLevel.Error);
     }
 }

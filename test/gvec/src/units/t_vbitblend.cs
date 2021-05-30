@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
     using static cpu;
 
     public class t_vbitblend : t_inx<t_vbitblend>
@@ -61,7 +59,7 @@ namespace Z0
                 var blended = gcpu.vblendbits(x,y,mask);
 
                 for(byte i = 0; i<count; i++)
-                    Claim.eq(vcell(blended,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(mask,i)));
+                    Claim.eq(vcell(blended,i), gmath.blend(vcell(x,i), vcell(y,i), vcell(mask,i)));
 
                 vcheckmask(x,y,mask,blended);
             }

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     partial class BitSpans
     {
@@ -19,6 +18,6 @@ namespace Z0
         /// <param name="maxbits">The maximum length of the target bitstring</param>
         [MethodImpl(Inline), Op]
         public static BitSpan truncate(in BitSpan src, uint maxbits)
-            => src.Length <= maxbits ? src : load(memory.slice(src.Storage, 0, maxbits));
+            => src.Length <= maxbits ? src : load(core.slice(src.Storage, 0, maxbits));
     }
 }

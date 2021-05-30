@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-    using static memory;
-
     public class t_bv_half_adder : UnitTest<t_bv_half_adder>
     {
         public void create()

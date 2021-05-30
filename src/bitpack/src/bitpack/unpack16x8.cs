@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static Typed;
+    using static core;
     using static cpu;
 
     partial struct BitPack
@@ -19,6 +20,6 @@ namespace Z0
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ushort> unpack16x8(ulong src)
-            => recover<ushort>(memory.bytes(vlo(vinflate256x16u(vbytes(w128, src)))));
+            => recover<ushort>(bytes(vlo(vinflate256x16u(vbytes(w128, src)))));
     }
 }

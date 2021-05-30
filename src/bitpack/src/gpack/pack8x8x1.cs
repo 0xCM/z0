@@ -10,8 +10,8 @@ namespace Z0
     using static BitMasks;
     using static BitMasks.Literals;
     using static Numeric;
-    using static memory;
-    using static Part;
+    using static Root;
+    using static core;
 
     partial struct gpack
     {

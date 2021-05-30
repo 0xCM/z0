@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Typed;
+    using static core;
 
     public class t_bitpack : t_inx<t_bitpack>
     {
@@ -76,7 +76,6 @@ namespace Z0
             }
         }
 
-
         public void pack_32x4_2()
         {
             var block1 = SpanBlocks.alloc<ushort>(w16,1);
@@ -89,7 +88,6 @@ namespace Z0
             var val2 = block2.BlockLead(0);
             Trace(val2.ToBitString());
         }
-
 
         public void unpack_64x32()
         {

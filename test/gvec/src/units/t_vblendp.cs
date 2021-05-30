@@ -241,7 +241,7 @@ namespace Z0
             var maskspec = BitMasks.Specs.jsb(n8,n2,t);
 
             var source = gcpu.vinc(w,t);
-            var blendspec = vbroadcast(w256, BitMasks.create(maskspec), Numeric.maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.create(maskspec), Limits.maxval(t));
             var target = gcpu.vblendp(source, blendspec);
 
             var descrition = format(maskspec, BitMasks.create(maskspec.As(z64)), source,target);
@@ -254,7 +254,7 @@ namespace Z0
             var w = w512;
             var t = z8;
             var maskspec = BitMasks.Specs.jsb(n8,n2,t);
-            var blendspec = vbroadcast(w256, BitMasks.create(maskspec), Numeric.maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.create(maskspec), Limits.maxval(t));
             var maskbits = BitMasks.create(maskspec.As(z64));
 
             for(var samples=0; samples< RepCount; samples++)
@@ -277,7 +277,7 @@ namespace Z0
 
             var spec = pattern.LoadVector();
             var x = gcpu.vinc(w, t);
-            var y = gcpu.vadd(x, gmath.add(x.LastCell(), Numeric.one<byte>()));
+            var y = gcpu.vadd(x, gmath.add(x.LastCell(), NumericLiterals.one<byte>()));
             var z = gcpu.vblendp(x,y,spec);
 
             var dst = SpanBlocks.alloc<byte>(w,2);
@@ -341,7 +341,7 @@ namespace Z0
             Claim.eq(nat64u(pn), NatCalc.divT(w,t) * 2);
 
             var left = gcpu.vinc(w, t);
-            var right = gcpu.vadd(left, gmath.add(left.LastCell(), Numeric.one<T>()));
+            var right = gcpu.vadd(left, gmath.add(left.LastCell(), NumericLiterals.one<T>()));
             var blend = gcpu.vblendp(left,right,spec);
 
 
@@ -448,7 +448,7 @@ namespace Z0
         {
             var spec = memory.@as(gcpu.vbroadcast(w, pattern), t);
             var a = gcpu.vinc(w, t);
-            var b = gcpu.vadd(a, gmath.add(a.LastCell(), Numeric.one<T>()));
+            var b = gcpu.vadd(a, gmath.add(a.LastCell(), NumericLiterals.one<T>()));
             var c = gcpu.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc<T>(w,2);
@@ -458,13 +458,13 @@ namespace Z0
             var perm = Permute.init(dst.Storage);
             for(var i=0; i< perm.Length; i++)
             {
-                var identity = gmath.eq(Numeric.force<T>(i), perm[i]);
+                var identity = gmath.eq(NumericCast.force<T>(i), perm[i]);
                 if(!identity)
                 {
                     var j = perm[i];
                     var k = perm[j];
 
-                    Claim.require(gmath.eq(Numeric.force<T>(i),k));
+                    Claim.require(gmath.eq(NumericCast.force<T>(i),k));
                 }
             }
         }
@@ -476,7 +476,7 @@ namespace Z0
         {
             var spec = memory.@as(gcpu.vbroadcast(w, pattern),t);
             var a = gcpu.vinc(w, t);
-            var b = gcpu.vadd(a, gmath.add(a.LastCell(), Numeric.one<T>()));
+            var b = gcpu.vadd(a, gmath.add(a.LastCell(), NumericLiterals.one<T>()));
             var c = gcpu.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc<T>(w,2);
@@ -486,13 +486,13 @@ namespace Z0
             var perm = Permute.init(dst.Storage);
             for(var i=0; i< perm.Length; i++)
             {
-                var identity = gmath.eq(Numeric.force<T>(i), perm[i]);
+                var identity = gmath.eq(NumericCast.force<T>(i), perm[i]);
                 if(!identity)
                 {
                     var j = perm[i];
                     var k = perm[j];
 
-                    Claim.require(gmath.eq(Numeric.force<T>(i),k));
+                    Claim.require(gmath.eq(NumericCast.force<T>(i),k));
                 }
             }
         }

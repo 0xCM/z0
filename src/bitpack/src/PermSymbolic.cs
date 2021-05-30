@@ -9,8 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     [ApiHost]
     public readonly struct PermSymbolic
@@ -29,20 +30,20 @@ namespace Z0
             if(bracketed)
                 seek(chars,i++) = Chars.LBracket;
 
-            seek(chars,i++) = skip(bits,j + 1).ToChar();
-            seek(chars,i++) = skip(bits,j + 0).ToChar();
+            seek(chars,i++) = skip(bits,j + 7).ToChar();
+            seek(chars,i++) = skip(bits,j + 6).ToChar();
+            seek(chars,i++) = Chars.Space;
+
+            seek(chars,i++) = skip(bits,j + 5).ToChar();
+            seek(chars,i++) = skip(bits,j + 4).ToChar();
             seek(chars,i++) = Chars.Space;
 
             seek(chars,i++) = skip(bits,j + 3).ToChar();
             seek(chars,i++) = skip(bits,j + 2).ToChar();
-
             seek(chars,i++) = Chars.Space;
-            seek(chars,i++) = skip(bits,j + 5).ToChar();
-            seek(chars,i++) = skip(bits,j + 4).ToChar();
 
-            seek(chars,i++) = Chars.Space;
-            seek(chars,i++) = skip(bits,j + 7).ToChar();
-            seek(chars,i++) = skip(bits,j + 6).ToChar();
+            seek(chars,i++) = skip(bits,j + 1).ToChar();
+            seek(chars,i++) = skip(bits,j + 0).ToChar();
 
             if(bracketed)
                 seek(chars,i++) = Chars.RBracket;
@@ -66,7 +67,7 @@ namespace Z0
             var bitbuffer = cover(@as<byte>(storage),BitCount);
             BitPack.unpack1x8((byte)src, bitbuffer);
             var bits = recover<bit>(bitbuffer);
-            var block = bitblock(src,true);
+            var block = bitblock(src, true);
             var codomain = CharBlocks.alloc(n).Data;
             letters(n, @readonly(bits), codomain);
             return string.Format(Pattern, text.format(block), Domain, text.format(codomain));

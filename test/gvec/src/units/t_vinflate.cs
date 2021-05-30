@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Typed;
     using static cpu;
 
     public class t_vinflate : t_inx<t_vinflate>

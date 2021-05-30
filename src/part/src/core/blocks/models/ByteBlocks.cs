@@ -25,6 +25,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
+        [MethodImpl(Inline)]
         public static implicit operator ByteBlock1(byte src)
             => @as<uint,ByteBlock1>(src);
 
@@ -41,6 +46,11 @@ namespace Z0
         ByteBlock1 A;
 
         ByteBlock1 B;
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
 
         public Span<byte> Bytes
         {
@@ -80,6 +90,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -102,6 +117,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
 
         [MethodImpl(Inline)]
         public static implicit operator ByteBlock4(uint src)
@@ -135,6 +155,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
     }
 
     /// <summary>
@@ -160,6 +186,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     /// <summary>
@@ -185,6 +216,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -207,6 +244,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
 
         [MethodImpl(Inline)]
         public static implicit operator ByteBlock8(ulong src)
@@ -240,6 +282,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     /// <summary>
@@ -265,6 +312,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     /// <summary>
@@ -290,6 +342,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
     }
 
     /// <summary>
@@ -315,6 +373,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     /// <summary>
@@ -340,6 +403,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
     }
 
     /// <summary>
@@ -365,6 +434,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
     }
 
     /// <summary>
@@ -390,6 +465,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     /// <summary>
@@ -415,6 +495,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -437,6 +522,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -459,6 +549,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -481,6 +576,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -503,6 +603,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -525,6 +630,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
     }
 
     /// <summary>
@@ -550,6 +661,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     /// <summary>
@@ -582,6 +698,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
     }
 
     /// <summary>
@@ -607,13 +729,18 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
     }
 
     /// <summary>
     /// Covers 128 bytes = 1024 bits of stack-allocated storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct ByteBlock128
+    public struct ByteBlock128 : IDataBlock<ByteBlock128>
     {
         public const ushort Size = Pow2.T07;
 
@@ -632,10 +759,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
    }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ByteBlock256
+    public struct ByteBlock256 : IDataBlock<ByteBlock256>
     {
         public const ushort Size = Pow2.T08;
 
@@ -654,10 +786,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
    }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ByteBlock512
+    public struct ByteBlock512 : IDataBlock<ByteBlock512>
     {
         public const ushort Size = Pow2.T09;
 
@@ -676,10 +813,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
    }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ByteBlock1024
+    public struct ByteBlock1024 : IDataBlock<ByteBlock1024>
     {
         public const ushort Size = Pow2.T10;
 
@@ -698,10 +840,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
    }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ByteBlock2048
+    public struct ByteBlock2048 : IDataBlock<ByteBlock2048>
     {
         public const ushort Size = Pow2.T11;
 
@@ -720,10 +867,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
    }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ByteBlock4096
+    public struct ByteBlock4096 : IDataBlock<ByteBlock4096>
     {
         public const ushort Size = Pow2.T12;
 
@@ -742,5 +894,16 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(Bytes);
         }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+   }
+
+   partial class XTend
+   {
+
+
    }
 }

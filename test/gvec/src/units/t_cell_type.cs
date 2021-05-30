@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Typed;
+    using static core;
 
     public class t_cell_type : t_vectors<t_cell_type>
     {
@@ -15,8 +16,8 @@ namespace Z0
         {
             var v128 = VK.Types128();
             var v256 = VK.Types256();
-            root.iter(v128, t => check_cell_type(t, w128));
-            root.iter(v256, t => check_cell_type(t, w256));
+            iter(v128, t => check_cell_type(t, w128));
+            iter(v256, t => check_cell_type(t, w256));
         }
 
         void check_cell_type(Type tVector, W128 w)
