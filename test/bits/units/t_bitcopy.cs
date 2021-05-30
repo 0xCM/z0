@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var zed = zero<T>();
-            var lit = Numeric.ones<T>();
+            var lit = NumericLiterals.ones<T>();
             var min = byte.MinValue;
             var max = (byte)memory.width<T>();
 

@@ -18,26 +18,6 @@ namespace Z0
 
         const BindingFlags BF = ReflectionFlags.BF_All;
 
-        [MethodImpl(Inline), Op]
-        public static CliToken token(Type src)
-            => new CliToken(src);
-
-        [MethodImpl(Inline), Op]
-        public static CliToken token(FieldInfo src)
-            => new CliToken(src);
-
-        [MethodImpl(Inline), Op]
-        public static CliToken token(PropertyInfo src)
-            => new CliToken(src);
-
-        [MethodImpl(Inline), Op]
-        public static CliToken token(MethodInfo src)
-            => new CliToken(src);
-
-        [MethodImpl(Inline), Op]
-        public static CliToken token(ParameterInfo src)
-            => new CliToken(src);
-
         [Op]
         public static Index<NumericLiteral> numericlits(Type src, Base2 b)
         {

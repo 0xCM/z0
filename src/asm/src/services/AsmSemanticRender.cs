@@ -238,14 +238,14 @@ namespace Z0.Asm
             }
 
             if(src.Dx.NonZero)
-                dst.Append(text.concat(Chars.Space, Chars.Plus, Chars.Space, AsmRender.format(src.Dx)));
+                dst.Append(string.Concat(Chars.Space, Chars.Plus, Chars.Space, AsmRender.format(src.Dx)));
 
             return dst.ToString();
         }
 
         [Op]
         static string FormatSegKind(Name name)
-            => name.IsEmpty ? EmptyString : text.concat("seg:", Chars.LBracket, name, Chars.RBracket);
+            => name.IsEmpty ? EmptyString : string.Concat("seg:", Chars.LBracket, name, Chars.RBracket);
 
         /// <summary>
         /// If operand kind represents a memory segment, returns the mnemonic/name for the segment; otheriwise returns empty

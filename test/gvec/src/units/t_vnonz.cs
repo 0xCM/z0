@@ -43,9 +43,9 @@ namespace Z0
         protected void vnonz_check<T>(W128 w, T t = default)
             where T : unmanaged
         {
-            var min = Numeric.one<T>();
-            var max = Numeric.maxval(t);
-            var domain = Interval.closed(Numeric.one<T>(), Numeric.maxval<T>());
+            var min = NumericLiterals.one<T>();
+            var max = Limits.maxval(t);
+            var domain = Interval.closed(NumericLiterals.one<T>(), Limits.maxval<T>());
             var f = Calcs.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero(w,t)));
@@ -57,9 +57,9 @@ namespace Z0
         protected void vnonz_check<T>(W256 w, T t = default)
             where T : unmanaged
         {
-            var min = Numeric.one<T>();
-            var max = Numeric.maxval(t);
-            var domain = Interval.closed(Numeric.one<T>(), Numeric.maxval<T>());
+            var min = NumericLiterals.one<T>();
+            var max = Limits.maxval(t);
+            var domain = Interval.closed(NumericLiterals.one<T>(), Limits.maxval<T>());
             var f = Calcs.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero<T>(w)));

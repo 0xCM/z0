@@ -39,7 +39,7 @@ namespace Z0
         protected void testbit_check<T>(T t = default)
             where T : unmanaged
         {
-            var src = Numeric.ones<T>();
+            var src = NumericLiterals.ones<T>();
             for(var i=0; i<width<T>(); i++)
                 Claim.require(gbits.testbit(src,i));
         }

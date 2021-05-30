@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
-    using static gcpu;
+    using static Root;
+    using static Typed;
+    using static core;
 
     public class t_vpop : t_inx<t_vpop>
     {

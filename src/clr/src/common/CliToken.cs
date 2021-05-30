@@ -8,12 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Root;
+
+    using api = CliTokens;
 
     /// <summary>
     /// Identifies a metadata element
     /// </summary>
+    [ApiHost]
     public readonly struct CliToken : ITextual, IEquatable<CliToken>, INullity, IComparable<CliToken>
     {
         readonly uint Data;
@@ -173,11 +177,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CliToken(Handle src)
-            => CliTokens.token(src);
+            => api.token(src);
 
         [MethodImpl(Inline)]
         public static implicit operator CliToken(EntityHandle src)
-            => CliTokens.token(src);
+            => api.token(src);
 
         public static CliToken Empty
             => default;

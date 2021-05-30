@@ -9,8 +9,8 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Bmi1;
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class BitMasks
     {
@@ -83,9 +83,9 @@ namespace Z0
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T lo<T>(byte n, T t = default)
+        public static T lo<T>(byte n)
             where T : unmanaged
-                => Numeric.force<ulong,T>(lo64(n));
+                => NumericCast.force<ulong,T>(lo64(n));
 
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1

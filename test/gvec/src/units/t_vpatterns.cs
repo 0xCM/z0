@@ -68,18 +68,18 @@ namespace Z0
 
         void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(Calcs.vunits(w,t), gcpu.vbroadcast(w, Numeric.one<T>()));
+                => CheckSVF.CheckPattern(Calcs.vunits(w,t), gcpu.vbroadcast(w, NumericLiterals.one<T>()));
 
         void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(Calcs.vunits(w,t), gcpu.vbroadcast(w, Numeric.one<T>()));
+                => CheckSVF.CheckPattern(Calcs.vunits(w,t), gcpu.vbroadcast(w, NumericLiterals.one<T>()));
 
         void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(Calcs.vones(w,t), gcpu.vbroadcast(w, Numeric.ones<T>()));
+                => CheckSVF.CheckPattern(Calcs.vones(w,t), gcpu.vbroadcast(w, NumericLiterals.ones<T>()));
 
         void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(Calcs.vones(w,t), gcpu.vbroadcast(w, Numeric.ones<T>()));
+                => CheckSVF.CheckPattern(Calcs.vones(w,t), gcpu.vbroadcast(w, NumericLiterals.ones<T>()));
    }
 }

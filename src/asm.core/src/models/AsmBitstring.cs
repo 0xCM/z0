@@ -27,12 +27,6 @@ namespace Z0.Asm
             get => Code.IsEmpty;
         }
 
-        public ReadOnlySpan<char> Data
-        {
-            [MethodImpl(Inline)]
-            get => api.chars(Code);
-        }
-
         public string Format()
             => api.format(Code);
 

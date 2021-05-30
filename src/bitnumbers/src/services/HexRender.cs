@@ -17,27 +17,27 @@ namespace Z0
     {
         const NumericKind Closure = Integers;
 
-        public static uint render<N>(HexVector8<N> src, in uint offset, Span<char> dst)
-            where N : unmanaged, ITypeNat
-        {
-            var counter = 0u;
-            var @case = LowerCase;
-            var count = (int)HexVector8<N>.CellCount;
-            seek(dst, counter + offset) = Chars.Lt;
-            counter++;
-            for(int i=count-1; i>=0; i--)
-            {
-                ref readonly var cell = ref src[i];
-                if(i != count-1)
-                    counter += separate(counter + offset, dst);
+        // public static uint render<N>(HexVector8<N> src, in uint offset, Span<char> dst)
+        //     where N : unmanaged, ITypeNat
+        // {
+        //     var counter = 0u;
+        //     var @case = LowerCase;
+        //     var count = (int)HexVector8<N>.CellCount;
+        //     seek(dst, counter + offset) = Chars.Lt;
+        //     counter++;
+        //     for(int i=count-1; i>=0; i--)
+        //     {
+        //         ref readonly var cell = ref src[i];
+        //         if(i != count-1)
+        //             counter += separate(counter + offset, dst);
 
-                counter += render(@case, cell, counter + offset, dst);
-            }
+        //         counter += render(@case, cell, counter + offset, dst);
+        //     }
 
-            seek(dst, counter + offset) = Chars.Gt;
-            counter++;
-            return counter;
-        }
+        //     seek(dst, counter + offset) = Chars.Gt;
+        //     counter++;
+        //     return counter;
+        // }
 
         [MethodImpl(Inline), Op]
         public static char hexchar(UpperCased @case, byte value)
@@ -628,14 +628,6 @@ namespace Z0
             for(byte i=0; i<count; i++)
                 CharStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
             return CharStacks.span(ref storage);
-        }
-
-
-        [MethodImpl(Inline), Op]
-        static uint separate(uint offset, Span<char> dst)
-        {
-            seek(dst,offset) = Chars.Space;
-            return 1;
         }
     }
 }

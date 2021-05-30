@@ -57,13 +57,15 @@ namespace Z0
         public static string format8x8x3(byte[,] src)
         {
             var dst = text.build();
-            var config = BitFormatter.limited(3);
+            var config = BitFormat.limited(3);
+            var formatter = bit.formatter<byte>(config);
             for(var i=0; i<7; i++)
             {
                 for(var j=0; j<7; j++)
                 {
                     ref readonly var cell = ref src[i,j];
-                    var cellFmt = BitFormatter.format(cell, config);
+
+                    var cellFmt = formatter.Format(cell);
 
                     dst.Append(cellFmt);
 

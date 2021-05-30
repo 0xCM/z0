@@ -26,6 +26,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(T src)
-            => bit.format(core.bytes(src).ReadOnly(), Config);
+            => bit.format(src, Config);
     }
 }

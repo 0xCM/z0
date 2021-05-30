@@ -24,7 +24,7 @@ namespace Z0
             Wf = wf;
             Env = env;
             Lookup = new ConcurrentDictionary<Type, IService>();
-            EmissionLog = new WfEmissionLog(target(env));
+            EmissionLog = WfEmissionLog.create(wf.AppName, env);
         }
 
 
@@ -32,8 +32,5 @@ namespace Z0
         {
             EmissionLog?.Dispose();
         }
-
-        static FS.FilePath target(EnvData env)
-            => env.Logs + FS.folder("emissions") + FS.file(env.AppId.Format() + ".emissions", FS.Log);
     }
 }

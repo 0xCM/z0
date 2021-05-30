@@ -12,6 +12,7 @@ namespace Z0
     using static core;
     using static Typed;
 
+
     partial struct bit
     {
         [MethodImpl(Inline), Closures(Closure)]
@@ -59,9 +60,10 @@ namespace Z0
             return k;
         }
 
+
         [MethodImpl(Inline), Op]
         public static uint render(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
-            => bit.render(n8, first(src), src.Length, maxbits, dst);
+            => render(n8, first(src), src.Length, maxbits, dst);
 
         [MethodImpl(Inline), Op]
         public static byte render(N4 n, byte src, uint j, Span<char> dst)
@@ -110,13 +112,14 @@ namespace Z0
             return new string(dst);
         }
 
+
         [Op]
         public static string format(ReadOnlySpan<bit> src, BitFormat? fmt = null)
         {
             var options = fmt ?? BitFormat.configure();
             var bitcount = min((uint)options.MaxBitCount,(uint)src.Length);
             var blocked = options.BlockWidth != 0;
-            var blocks = (uint)(blocked ? src.Length / options.BlockWidth : 0);
+            var blocks = (uint)(blocked ? src.Length/options.BlockWidth : 0);
             bitcount += blocks; // space for block separators
 
             Span<char> buffer = stackalloc char[(int)bitcount];
@@ -124,7 +127,7 @@ namespace Z0
             var digits = 0;
             for(uint i = 0, j=bitcount-1; i<bitcount; i++, j--)
             {
-                if(blocked && digits % options.BlockWidth == 0)
+                if(blocked && (digits % options.BlockWidth) == 0)
                     seek(dst, j--) = options.BlockSep;
 
                 seek(dst, j) = skip(src,i).ToChar();

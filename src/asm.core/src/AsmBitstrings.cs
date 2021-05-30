@@ -11,16 +11,6 @@ namespace Z0.Asm
     using static core;
     using static Typed;
 
-    public static partial class XTend
-    {
-        public static string FormatBitstring(this Hex32 src, N8 n)
-        {
-            Span<char> buffer = stackalloc char[64];
-            var count = BitRender.render(src, n, 0,buffer);
-            return new string(slice(buffer,0,count));
-        }
-    }
-
     [ApiHost]
     public readonly struct AsmBitstrings
     {
@@ -36,13 +26,20 @@ namespace Z0.Asm
             var j = 0u;
 
             for(var i=0; i<length; i++)
-                j += BitRender.render(skip(input, i), n4, j, dst);
+                j += render(skip(input, i), j, dst);
 
             return j - 1;
         }
 
+        public string Format(AsmHexCode src)
+            => format(src);
+
+        [Op]
+        public static string format(AsmHexCode src)
+            => src.IsEmpty ? EmptyString : new string(chars(src));
+
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(AsmHexCode src)
+        static ReadOnlySpan<char> chars(AsmHexCode src)
         {
             if(src.IsEmpty)
                 return default;
@@ -56,10 +53,27 @@ namespace Z0.Asm
             return slice(dst, 0, count);
         }
 
-        public static string format(AsmHexCode src)
-            => src.IsEmpty ? EmptyString : text.format(chars(src));
+        [MethodImpl(Inline), Op]
+        static uint render(byte src, uint offset, Span<char> dst)
+        {
+            seek(dst, offset++) = bit.bitchar(src, 7);
+            seek(dst, offset++) = bit.bitchar(src, 6);
+            seek(dst, offset++) = bit.bitchar(src, 5);
+            seek(dst, offset++) = bit.bitchar(src, 4);
+            offset += separate(offset, dst);
+            seek(dst, offset++) = bit.bitchar(src, 3);
+            seek(dst, offset++) = bit.bitchar(src, 2);
+            seek(dst, offset++) = bit.bitchar(src, 1);
+            seek(dst, offset++) = bit.bitchar(src, 0);
+            offset += separate(offset, dst);
+            return 10;
+        }
 
-        public string Format(AsmHexCode src)
-            => format(src);
+        [MethodImpl(Inline), Op]
+        static uint separate(uint offset, Span<char> dst)
+        {
+            seek(dst,offset) = Chars.Space;
+            return 1;
+        }
     }
 }

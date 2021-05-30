@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Validity)"/>
     <ProjectReference Include="$(Calcs)" />
     <ProjectReference Include="$(Circuits)" />
+    <ProjectReference Include="$(Bit)" />
   </ItemGroup>
 
 </Project>

@@ -272,7 +272,7 @@ namespace Z0
                 if(expect != result1)
                 {
                     Trace(input.FormatBits());
-                    var config = BitFormatter.configure(true);
+                    var config = BitFormat.configure(true);
                     for(var i=0; i<dst.Length; i++)
                         Trace(dst[i].FormatBits(config));
                 }

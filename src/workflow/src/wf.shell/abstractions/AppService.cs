@@ -41,8 +41,7 @@ namespace Z0
 
         public IWfDb Db {get; private set;}
 
-        protected EnvData Env
-            => Wf.Env;
+        public EnvData Env => Wf.Env;
 
         public virtual Type ContractType
             => typeof(H);

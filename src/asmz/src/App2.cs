@@ -483,16 +483,17 @@ namespace Z0.Asm
             var count = rows.Length;
             var j = 0u;
             var buffer = text.buffer();
+            var w = n8;
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                buffer.AppendFormat("eax: {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(n8));
-                var ebx = row.Ebx.FormatBitstring(n8);
-                buffer.AppendFormat("ebx: {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(n8));
-                var ecx = row.Ecx.FormatBitstring(n8);
-                buffer.AppendFormat("ebx: {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(n8));
-                var edx = row.Edx.FormatBitstring(n8);
-                buffer.AppendFormat("edx: {0} [{1}]", row.Edx, row.Edx.FormatBitstring(n8));
+                buffer.AppendFormat("eax: {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
+                var ebx = row.Ebx.FormatBitstring(w);
+                buffer.AppendFormat("ebx: {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
+                var ecx = row.Ecx.FormatBitstring(w);
+                buffer.AppendFormat("ebx: {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
+                var edx = row.Edx.FormatBitstring(w);
+                buffer.AppendFormat("edx: {0} [{1}]", row.Edx, row.Edx.FormatBitstring(w));
                 Wf.Row(buffer.Emit());
             }
 
@@ -522,7 +523,6 @@ namespace Z0.Asm
             }
             Wf.EmittedTable(flow,count);
         }
-
 
         void EmitCatalogAssets()
         {
@@ -572,8 +572,6 @@ namespace Z0.Asm
             Wf.XedCatalog().EmitSourceAssets();
         }
 
-
-
         ReadOnlySpan<SymExpr> SymExpr<E>()
             where E : unmanaged, Enum
         {
@@ -602,6 +600,7 @@ namespace Z0.Asm
                 Wf.Row(formatter.Format(skip(codes,i)));
             }
         }
+
 
         public void Run()
         {

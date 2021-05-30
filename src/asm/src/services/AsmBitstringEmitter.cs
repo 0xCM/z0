@@ -79,8 +79,6 @@ namespace Z0.Asm
             }
 
             Wf.EmittedFile(emitting, count);
-
-            //return EmitBitstrings(src,dst);
         }
 
         public ReadOnlySpan<AsmEncodingInfo> EmitBitstrings(ReadOnlySpan<AsmApiStatement> src, FS.FilePath dst)

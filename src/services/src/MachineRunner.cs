@@ -52,7 +52,7 @@ namespace Z0
                     var statements = pipe.EmitHostStatements(partitioned, Db.AsmStatementRoot());
                     Emitted(statements);
                     if(options.EmitAsmBitstrings)
-                        Emitted(Wf.AsmBitstringEmitter().EmitBitstrings(statements));
+                        Wf.AsmBitstringEmitter().EmitBitstrings(statements);
                 }
 
                 var apidata = Wf.ApiCatalogs();

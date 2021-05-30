@@ -7,12 +7,23 @@ namespace Windows
     using System.Runtime.InteropServices;
     using System.IO;
 
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+
+    [Flags]
+    public enum SymLinkKind : uint
+    {
+        File = 0,
+
+        Directory = 1
+
+    }
 
     partial struct Kernel32
     {
-        [DllImport(LibName, SetLastError = true), Free]
-        public static extern bool ReadFile(IntPtr hFile, UIntPtr lpBuffer, uint nNumberOfBytesToRead, out uint lpNumberOfBytesRead, IntPtr lpOverlapped);
+        public static bool CreateSymLink(string name, string target, SymLinkKind kind)
+            => CreateSymbolicLinkW(name,target, kind);
 
         public static IntPtr CreateFile(string fileName, FileMode mode)
             => CreateFile(fileName, mode, (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite));
@@ -33,16 +44,18 @@ namespace Windows
             => SetFilePointerEx(file, distanceToMove, lpNewFilePointer: IntPtr.Zero, seekOrigin);
 
         [DllImport(LibName, SetLastError = true), Free]
+        static extern bool ReadFile(IntPtr hFile, UIntPtr lpBuffer, uint nNumberOfBytesToRead, out uint lpNumberOfBytesRead, IntPtr lpOverlapped);
+
+        [DllImport(LibName, SetLastError = true, CharSet = CharSet.Unicode), Free]
+        static extern bool CreateSymbolicLinkW(string linkName, string targtPath, SymLinkKind linkKind);
+
+        [DllImport(LibName, SetLastError = true), Free]
         static extern bool ReadFile(IntPtr hFile, IntPtr lpBuffer, uint nNumberOfBytesToRead, out uint lpNumberOfBytesRead, IntPtr lpOverlapped);
 
-        [DllImport(LibName, CharSet = CharSet.Auto, SetLastError = true), Free]
-        static extern IntPtr CreateFile([MarshalAs(UnmanagedType.LPTStr)] string filename,
-                                                [MarshalAs(UnmanagedType.U4)] FileAccess access,
-                                                [MarshalAs(UnmanagedType.U4)] FileShare share,
-                                                IntPtr securityAttributes,
-                                                [MarshalAs(UnmanagedType.U4)] FileMode creationDisposition,
-                                                [MarshalAs(UnmanagedType.U4)] FileAttributes flagsAndAttributes,
-                                                IntPtr templateFile);
+        [DllImport(LibName, CharSet = CharSet.Unicode, SetLastError = true), Free]
+        static extern IntPtr CreateFile([MarshalAs(UnmanagedType.LPTStr)] string filename, [MarshalAs(UnmanagedType.U4)] FileAccess access,
+                [MarshalAs(UnmanagedType.U4)] FileShare share, IntPtr securityAttributes, [MarshalAs(UnmanagedType.U4)] FileMode creationDisposition,
+                [MarshalAs(UnmanagedType.U4)] FileAttributes flagsAndAttributes, IntPtr templateFile);
 
         [DllImport(LibName), Free]
         static extern bool SetFilePointerEx(IntPtr hFile, long liDistanceToMove, IntPtr lpNewFilePointer, [MarshalAs(UnmanagedType.U4)] SeekOrigin dwMoveMethod);

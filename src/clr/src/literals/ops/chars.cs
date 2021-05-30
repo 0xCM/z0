@@ -15,6 +15,7 @@ namespace Z0
         public static Span<char> chars(Type src)
         {
             var fields = @readonly(src.Fields());
+            var token = typeof(char).MetadataToken;
             var count = fields.Length;
             var dst = span<char>(count);
             var counter = 0u;

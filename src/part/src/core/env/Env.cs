@@ -79,7 +79,7 @@ namespace Z0
         public EnvVar<ulong> CpuCount;
 
         public EnvData Data
-            => new EnvData(AppId, this);
+            => new EnvData(this);
 
         public string Format()
         {
@@ -120,7 +120,7 @@ namespace Z0
             if(text.blank(value))
                 return (name,0ul);
 
-            if(ulong.TryParse(name,out var n))
+            if(ulong.TryParse(value, out var n))
                 return (name,n);
 
             return (name,0);

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Part;
     using static Rules;
@@ -185,7 +186,32 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out CliToken dst)
-            => CliTokens.parse(src, out dst);
+        {
+            var i = text.index(src,Chars.Colon);
+            var outcome = Outcome.Empty;
+            dst = CliToken.Empty;
+            if(i != NotFound)
+            {
+                outcome = HexNumericParser.parse8u(src.LeftOfIndex(i), out var table);
+                if(!outcome)
+                    return outcome;
+
+                outcome = HexNumericParser.parse32u(text.right(src,i), out var row);
+                if(!outcome)
+                    return outcome;
+
+                dst = CliTokens.token((TableIndex)table, row);
+                return true;
+            }
+            else
+            {
+                outcome = HexNumericParser.parse32u(src, out var token);
+                if(!outcome)
+                    return outcome;
+                dst = token;
+                return true;
+            }
+        }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out MemoryRange dst)

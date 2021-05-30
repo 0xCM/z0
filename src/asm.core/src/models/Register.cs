@@ -55,7 +55,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public Register(RegIndex c, RegClass k, RegWidth w)
-            => Kind = kind(c,k,w);
+            => Kind = kind(c, k, w);
 
         public RegIndex Code
             => index(Kind);
@@ -68,6 +68,18 @@ namespace Z0.Asm
 
         public Identifier Name
             => Kind.ToString();
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Kind == RegKind.None;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Kind != RegKind.None;
+        }
 
         [MethodImpl(Inline)]
         public bool Equals(Register src)

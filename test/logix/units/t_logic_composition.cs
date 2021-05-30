@@ -19,8 +19,6 @@ namespace Z0.Logix
             var c = and(a,b);
             var result = eval(c);
             Claim.nea(result);
-
         }
-
     }
 }

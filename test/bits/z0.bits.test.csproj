@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)"/>
     <ProjectReference Include="$(Bits)"/>
+    <ProjectReference Include="$(Bit)"/>
     <ProjectReference Include="$(BitMatrix)"/>
     <ProjectReference Include="$(BitGrids)"/>
   </ItemGroup>

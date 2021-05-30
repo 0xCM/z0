@@ -29,7 +29,7 @@ namespace Z0.Asm
 
     public struct EngineSettings
     {
-        public Flags<ulong> Affinity;
+        public ulong Affinity;
     }
 
     public class Engine : AppService<Engine>
@@ -80,16 +80,18 @@ namespace Z0.Asm
         public void Configure(in EngineSettings src)
         {
             Settings = src;
+            Status("Affinity:{0}", Settings.Affinity.FormatBits());
             Allocate();
         }
 
         protected override void OnInit()
         {
             var config = new EngineSettings();
-            var cpucount = Env.CpuCount;
-
-
-
+            var a = 0ul;
+            //config.Affinity = Bits.enable(a, 0,(byte)Env.CpuCount);
+            //config.Affinity = BitMasks.lo<ulong>((byte)Env.CpuCount);
+            config.Affinity = 0xFF_FF_FF;
+            Configure(config);
         }
 
         [MethodImpl(Inline), Op]

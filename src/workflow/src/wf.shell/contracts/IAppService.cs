@@ -13,6 +13,8 @@ namespace Z0
     {
         IWfRuntime Wf {get;}
 
+        EnvData Env => Wf.Env;
+
         IWfDb Db => Wf.Db();
 
         void Init(IWfRuntime wf);

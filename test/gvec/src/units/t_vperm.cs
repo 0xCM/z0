@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
 
     public class t_vperm : t_permute<t_vperm>
     {

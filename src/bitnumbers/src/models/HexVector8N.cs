@@ -33,7 +33,7 @@ namespace Z0
         public static uint CellCount
         {
             [MethodImpl(Inline)]
-            get => (uint)TypeNats.value<N>();
+            get => (uint)NatValues.value<N>();
         }
 
         public static ByteSize VectorSize
@@ -65,6 +65,16 @@ namespace Z0
             [MethodImpl(Inline)]
             get => bytes(Data);
         }
+
+        [MethodImpl(Inline), Op]
+        public uint Bitstring(uint offset, Span<char> dst)
+            => HexVector.bitstring<N>(this, offset, dst);
+
+        public string Format()
+            => string.Format("<{0}>", Bytes.FormatHex());
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator HexVector8(HexVector8<N> src)

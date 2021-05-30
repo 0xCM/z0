@@ -87,13 +87,12 @@ namespace Z0.Asm
         CmdResult EmitFileList()
             => Wf.Router.Dispatch(EmitFileListCmdSample());
 
-
         void RenderJmp()
         {
             var code = AsmMnemonicCode.JMP;
-            var render = Wf.AsmRender();
+            var pipe = Wf.AsmRowPipe();
             var dst = Db.AppLog(code.ToString(), FS.Asm);
-            render.RenderRows(code, dst);
+            pipe.RenderRows(code, dst);
         }
 
         void CheckSettingsParser()
@@ -206,16 +205,16 @@ namespace Z0.Asm
                 return EmptyString;
             }
 
-            var render = Wf.AsmRender();
+            var pipe = Wf.AsmRowPipe();
             var code = AsmMnemonicCode.MOVZX;
-            var rows = @readonly(Wf.AsmRowPipe().LoadDetails(code).OrderBy(x => x.Statement).Array());
+            var rows = @readonly(pipe.LoadDetails(code).OrderBy(x => x.Statement).Array());
             var count = rows.Length;
             var dst = Db.AppLog(code.ToString(),FS.Asm);
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                writer.WriteLine(render.FormatRow(row, semantic));
+                writer.WriteLine(pipe.FormatRow(row, semantic));
             }
         }
 

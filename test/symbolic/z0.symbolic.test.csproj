@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Asci)" />
     <ProjectReference Include="$(Polyrand)"/>
+    <ProjectReference Include="$(Hex)"/>
   </ItemGroup>
 
 </Project>

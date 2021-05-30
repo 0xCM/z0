@@ -13,12 +13,12 @@ namespace Z0
 
     partial struct FS
     {
-        /// <summary>
-        /// Creates a reader initialized with the source file; caller-disposal required
-        /// </summary>
-        /// <param name="src">The file path</param>
-        [MethodImpl(Inline), Op]
-        public static StreamReader reader(FS.FilePath src)
-            => new StreamReader(src.Name.Format());
+        [Op]
+        public static Outcome symlink(string name, FS.FolderPath target)
+            => Kernel32.CreateSymLink(name, target.Name, SymLinkKind.Directory);
+
+        [Op]
+        public static Outcome symlink(string name, FS.FilePath target)
+            => Kernel32.CreateSymLink(name, target.Name, SymLinkKind.File);
     }
 }

@@ -9,7 +9,6 @@
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(Agents)" />
-
   </ItemGroup>
 
 </Project>

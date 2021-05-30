@@ -25,7 +25,7 @@ namespace Z0
             {
                 var a = Random.Next<T>();
                 var b0 = gbits.lsboff(a);
-                var b1 = gmath.and(gmath.sub(a, Numeric.one<T>()), a);
+                var b1 = gmath.and(gmath.sub(a, NumericLiterals.one<T>()), a);
                 Claim.eq(b0, b1);
             }
         }

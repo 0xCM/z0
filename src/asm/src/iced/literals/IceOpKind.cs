@@ -140,7 +140,6 @@ namespace Z0.Asm
 
 		/// <summary>
 		/// Memory operand.
-		///
 		/// This operand kind uses <see cref="IceInstruction.MemoryDisplSize"/>, <see cref="IceInstruction.MemorySize"/>,
 		/// <see cref="IceInstruction.MemoryIndexScale"/>, <see cref="IceInstruction.MemoryDisplacement"/>,
 		/// <see cref="IceInstruction.MemoryBase"/>, <see cref="IceInstruction.MemoryIndex"/>, <see cref="IceInstruction.MemorySegment"/>,

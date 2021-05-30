@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static char @char(FieldInfo f)
-            => sys.constant<char>(f);
+            => (char)f.GetRawConstantValue();
     }
 }

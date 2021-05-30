@@ -17,7 +17,7 @@ namespace Z0
         void check_singletons<T>()
             where T : unmanaged
         {
-            var formatter = BitFormatter.create<T>();
+            var formatter = bit.formatter<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Next<T>();
