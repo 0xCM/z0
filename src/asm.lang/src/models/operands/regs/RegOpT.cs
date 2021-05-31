@@ -11,38 +11,37 @@ namespace Z0.Asm
 
     partial struct AsmOps
     {
-        public readonly struct RegOp : IRegOp
+        public readonly struct RegOp<T> : IRegOp<T>
+            where T : unmanaged, IRegOp
         {
-            readonly ushort Data;
+            readonly T Data;
 
             [MethodImpl(Inline)]
-            public RegOp(RegWidth width, RegClass @class, RegIndex index)
+            public RegOp(T src)
             {
-                Data = math.or(math.srl((ushort)width,3), math.sll((ushort)@class,5) , math.sll((ushort)index, 10));
-            }
-
-            public AsmOpClass OpClass
-                => AsmOpClass.R;
-
-            public RegWidth Width
-            {
-                [MethodImpl(Inline)]
-                get => (RegWidth)math.sll(Data,3);
-            }
-
-            public RegClass RegClass
-            {
-                get => default;
+                Data = src;
             }
 
             public RegIndex Index
             {
-                get => default;
+                [MethodImpl(Inline)]
+                get => Data.Index;
+            }
+
+            public RegClass RegClass
+            {
+                [MethodImpl(Inline)]
+                get => Data.RegClass;
+            }
+
+            public RegWidth Width
+            {
+                [MethodImpl(Inline)]
+                get => Data.Width;
             }
 
             public string Format()
                 => string.Format("{0}/{1}/{2}", Index, RegClass, Width);
-
 
             public override string ToString()
                 =>  Format();

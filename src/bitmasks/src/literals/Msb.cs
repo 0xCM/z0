@@ -81,25 +81,25 @@ namespace Z0
             /// [10 10101010]
             /// </summary>
             [BitMask ("[10 10101010]")]
-            public const ushort Msb10x2x1 = (ushort) Msb8x2x1 | 1 << 8;
+            public const ushort Msb10x2x1 = (ushort)Msb8x2x1 | 1 << 9;
 
             /// <summary>
             /// [1010 10101010]
             /// </summary>
             [BitMask ("[1010 10101010]")]
-            public const ushort Msb12x2x1 = Msb10x2x1 | 1 << 10;
+            public const ushort Msb12x2x1 = Msb10x2x1 | 1 << 11;
 
             /// <summary>
             /// [101010 10101010]
             /// </summary>
             [BitMask ("[101010 10101010]")]
-            public const ushort Msb14x2x1 = Msb12x2x1 | 1 << 12;
+            public const ushort Msb14x2x1 = Msb12x2x1 | 1 << 13;
 
             /// <summary>
             /// [10101010 10101010]
             /// </summary>
             [BitMask ("[10101010 10101010]")]
-            public const ushort Msb16x2x1 = (ushort) Msb8x2x1 | (ushort) Msb8x2x1 << 8;
+            public const ushort Msb16x2x1 = (ushort)Msb8x2x1 | (ushort)Msb8x2x1 << 8;
 
             /// <summary>
             /// [10 10101010 10101010]
@@ -111,7 +111,7 @@ namespace Z0
             /// [10101010 10101010 10101010 10101010]
             /// </summary>
             [BitMask ("[10101010 10101010 10101010 10101010]")]
-            public const uint Msb32x2x1 = (uint) Msb16x2x1 | (uint) Msb16x2x1 << 16;
+            public const uint Msb32x2x1 = (uint)Msb16x2x1 | (uint)Msb16x2x1 << 16;
 
             /// <summary>
             /// [10101010 10101010 10101010 10101010 10101010 10101010 10101010 10101010]

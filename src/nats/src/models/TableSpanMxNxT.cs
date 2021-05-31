@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     /// <summary>
     /// Defines a tabular span of dimension MxN
@@ -29,13 +30,13 @@ namespace Z0
         /// The number of rows in the structure
         /// </summary>
         public static int RowCount
-            => TypeNats.nat32i<M>();
+            => nat32i<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
         public static int ColCount
-            => TypeNats.nat32i<N>();
+            => nat32i<N>();
 
         /// <summary>
         /// The number of cells in each row

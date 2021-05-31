@@ -12,11 +12,14 @@ namespace Z0
 
     using api = BitFields;
     using S = System.UInt32;
+    using W = W32;
 
     public struct Bitfield32<T>
         where T : unmanaged
     {
-        public const byte Width = 32;
+        public const byte Width = Bitfield32.Width;
+
+        static W w => default;
 
         S _State;
 
@@ -51,6 +54,18 @@ namespace Z0
             get => api.hi(this);
         }
 
+        public ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(_State);
+        }
+
+        public override string ToString()
+            => Format();
+
+        public string Format()
+            => api.format(this);
+
         [MethodImpl(Inline)]
         internal void Overwrite(S src)
             => _State = src;
@@ -64,6 +79,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Bitfield32<T>(T src)
             => new Bitfield32<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Bitfield32(Bitfield32<T> src)
+            => api.create(w, src.State);
 
         [MethodImpl(Inline)]
         public static implicit operator Bitfield32<T>(S src)

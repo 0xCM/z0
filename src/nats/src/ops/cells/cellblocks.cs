@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct CellCalcs
     {
@@ -18,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cellblocks<T>(W8 w, int blocks)
             where T : unmanaged
-                => blocks * (int)memory.cells<T>(w);
+                => blocks * (int)cells<T>(w);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -27,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cellblocks<T>(W16 w, int blocks)
             where T : unmanaged
-                => blocks * (int)memory.cells<T>(w);
+                => blocks * (int)cells<T>(w);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -36,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cellblocks<T>(W32 w, int blocks)
             where T : unmanaged
-                => blocks * (int)memory.cells<T>(w);
+                => blocks * (int)cells<T>(w);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -45,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cellblocks<T>(W64 w, int blocks)
             where T : unmanaged
-                => blocks * (int)memory.cells<T>(w);
+                => blocks * (int)cells<T>(w);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -54,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cellblocks<T>(W128 w, int blocks)
             where T : unmanaged
-                => blocks * (int)memory.cells<T>(w);
+                => blocks * (int)cells<T>(w);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -63,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cellblocks<T>(W256 w, int blocks)
             where T : unmanaged
-                => blocks * (int)memory.cells<T>(w);
+                => blocks * (int)cells<T>(w);
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks
@@ -72,6 +73,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cellblocks<T>(W512 w, int blocks)
             where T : unmanaged
-                => blocks * (int)memory.cells<T>(w);
+                => blocks * (int)cells<T>(w);
     }
 }

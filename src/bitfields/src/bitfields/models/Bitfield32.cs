@@ -34,6 +34,18 @@ namespace Z0
             return this;
         }
 
+        public ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(_State);
+        }
+
+        public override string ToString()
+            => Format();
+
+        public string Format()
+            => api.format(this);
+
         [MethodImpl(Inline)]
         internal void Overwrite(S src)
             => _State = src;

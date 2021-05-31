@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static TypeNats;
+    using static Typed;
 
     /// <summary>
     /// Captures evidence that k1 - 1 = k2

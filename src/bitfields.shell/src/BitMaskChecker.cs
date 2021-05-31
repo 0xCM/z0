@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static BitChecks;
-    using static memory;
+    using static core;
     using static BitMasks;
+    using static Typed;
 
     [ApiHost]
     public class BitMaskChecker : AppService<BitMaskChecker>
@@ -116,10 +117,16 @@ namespace Z0
             Check(Part.base2);
             CheckLoMasks(ref index, ref results);
             CheckHiMasks();
-            Counts = (SuccessCount,FailureCount);
+            EmitReport(log);
+            Counts = (SuccessCount, FailureCount);
             Wf.Ran(flow, Counts);
         }
 
+        void EmitReport(ITextBuffer src)
+        {
+            Wf.Row(src.Emit());
+
+        }
         [Op]
         void CheckHiMasks()
         {
@@ -181,9 +188,8 @@ namespace Z0
 
         [Op]
         void Check(Base2 @base, W8 w)
-        {
-            Check(@base, z8);
-        }
+            =>  Check(@base, z8);
+
 
         [Op]
         void Check(Base2 @base, W16 w)
@@ -236,7 +242,7 @@ namespace Z0
                 var normalized = BitString.normalize(m.Text);
                 var bs = BitString.scalar(m.Data);
                 var expr = text.format("{0} {1} {2}", normalized, sym, bs);
-                var description = text.format(RP.PSx3, title, m.Name, expr);
+                var description = text.format("{0,-12} | {1,-14} | {2}", title, m.Name, expr);
                 Log.AppendLine(description);
             }
         }

@@ -13,17 +13,6 @@ namespace Z0
 
     partial class TypeNats
     {
-        // /// <summary>
-        // /// Constructs an natural dimension of order 2
-        // /// </summary>
-        // /// <typeparam name="M">The type of the first axis</typeparam>
-        // /// <typeparam name="N">The type of the second axis</typeparam>
-        // [MethodImpl(Inline)]
-        // public static Dim<M,N> dim<M,N>(M m = default, N n = default)
-        //     where M : unmanaged, ITypeNat
-        //     where N : unmanaged, ITypeNat
-        //         => default;
-
         /// <summary>
         /// Constructs the canonical sequence representatives for the natural numbers within an inclusive range
         /// </summary>

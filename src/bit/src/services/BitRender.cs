@@ -93,16 +93,20 @@ namespace Z0
             return counter;
         }
 
-        public static uint render(N8 n, N4 w, ReadOnlySpan<byte> src, Span<char> dst)
+        [MethodImpl(Inline), Op]
+        public static uint render(N4 w, ReadOnlySpan<byte> src, Span<char> dst)
         {
             var size = src.Length;
             var j = 0u;
-            for(var i=0; i<size; i++)
+
+            for(var i=size-1; i >= 0; i--)
             {
                 ref readonly var input = ref skip(src,i);
-                j+= render(w, w, hi(skip(src,i)), j, dst);
+                j+= render(w, hi(input), j, dst);
                 j+= separate(j, dst);
-                j+= render(w, w, lo(skip(src,i)), j, dst);
+                j+= render(w, lo(input), j, dst);
+                if(i != 0)
+                    j += separate(j, dst);
             }
             return j - 1;
         }
@@ -124,8 +128,48 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N4 n, N4 w, byte src, uint offset, Span<char> dst)
+        public static uint render(N2 n, byte src, uint offset, Span<char> dst)
         {
+            seek(dst, offset++) = bit.bitchar(src, 1);
+            seek(dst, offset++) = bit.bitchar(src, 0);
+            return n;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N3 n, byte src, uint offset, Span<char> dst)
+        {
+            seek(dst, offset++) = bit.bitchar(src, 2);
+            seek(dst, offset++) = bit.bitchar(src, 1);
+            seek(dst, offset++) = bit.bitchar(src, 0);
+            return n;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N4 n, byte src, uint offset, Span<char> dst)
+        {
+            seek(dst, offset++) = bit.bitchar(src, 3);
+            seek(dst, offset++) = bit.bitchar(src, 2);
+            seek(dst, offset++) = bit.bitchar(src, 1);
+            seek(dst, offset++) = bit.bitchar(src, 0);
+            return n;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N5 n, byte src, uint offset, Span<char> dst)
+        {
+            seek(dst, offset++) = bit.bitchar(src, 4);
+            seek(dst, offset++) = bit.bitchar(src, 3);
+            seek(dst, offset++) = bit.bitchar(src, 2);
+            seek(dst, offset++) = bit.bitchar(src, 1);
+            seek(dst, offset++) = bit.bitchar(src, 0);
+            return n;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N6 n, byte src, uint offset, Span<char> dst)
+        {
+            seek(dst, offset++) = bit.bitchar(src, 5);
+            seek(dst, offset++) = bit.bitchar(src, 4);
             seek(dst, offset++) = bit.bitchar(src, 3);
             seek(dst, offset++) = bit.bitchar(src, 2);
             seek(dst, offset++) = bit.bitchar(src, 1);

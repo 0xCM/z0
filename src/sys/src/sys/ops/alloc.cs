@@ -26,14 +26,6 @@ namespace Z0
             => proxy.alloc<T>(count);
 
         /// <summary>
-        /// Allocates a specified number of bytes
-        /// </summary>
-        /// <param name="count">The number of bytes to allocate</param>
-        [MethodImpl(Options),  Op]
-        public static byte[] alloc(int count)
-            => proxy.alloc<byte>(count);
-
-        /// <summary>
         /// Allocates a specified number <typeparamref name='T'/> measured cells
         /// </summary>
         /// <param name="count">The number of cells to allocate</param>

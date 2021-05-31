@@ -12,11 +12,14 @@ namespace Z0
 
     using api = BitFields;
     using S = System.UInt16;
+    using W = W16;
 
     public struct Bitfield16<T>
         where T : unmanaged
     {
         public const byte Width = 16;
+
+        static W w => default;
 
         S _State;
 
@@ -49,6 +52,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => api.hi(this);
+        }
+
+        public ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(_State);
         }
 
         [MethodImpl(Inline)]

@@ -33,6 +33,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint bitcover<T>(uint bitcount)
             where T : unmanaged
-                => bitcover(bitcount, (uint)Unsafe.SizeOf<T>()*8);
+                => bitcover(bitcount, (uint)core.width<T>());
     }
 }

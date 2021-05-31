@@ -81,7 +81,6 @@ namespace Z0
             where T : unmanaged
                 => count % blocklength<T>(w) == 0;
 
-
         /// <summary>
         /// Computes the minimum number of w-cells required to evenly cover a grid of bit-dimensions mxn
         /// </summary>

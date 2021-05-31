@@ -601,7 +601,7 @@ namespace Z0
             if(minlen != null && dstLen < minlen)
                 dstLen = minlen.Value;
 
-            Span<byte> dst = sys.alloc((int)dstLen);
+            Span<byte> dst = core.alloc<byte>((int)dstLen);
             for(int i=0, j=0; j < dstLen; i+=8, j++)
             {
                 ref var x = ref dst[j];

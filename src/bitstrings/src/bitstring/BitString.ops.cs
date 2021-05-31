@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct BitString
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="len">The length of the bitstring</param>
         [MethodImpl(Inline)]
         public static BitString alloc(int len)
-            => new BitString(sys.alloc(len));
+            => new BitString(core.alloc<byte>(len));
 
         /// <summary>
         /// Loads a bitstring from a bitseq
@@ -110,7 +110,7 @@ namespace Z0
             var cellbits = width<T>();
             var bitcount = maxbits ?? cellbits*src.Length;
             var k = 0u;
-            var buffer = sys.alloc(bitcount);
+            var buffer = core.alloc<byte>(bitcount);
             var dst = span(buffer);
 
             for(int i=0; i<src.Length; i++)
@@ -165,9 +165,9 @@ namespace Z0
             src = src.RemoveBlanks();
             var len = src.Length;
             var lastix = len - 1;
-            Span<byte> dst = sys.alloc(len);
+            Span<byte> dst = core.alloc<byte>(len);
             for(var i=0; i<= lastix; i++)
-                dst[lastix - i] = src[i] == Bit32.Zero ? (byte)0 : (byte)1;
+                dst[lastix - i] = src[i] == bit.Zero ? (byte)0 : (byte)1;
             return new BitString(dst);
         }
 

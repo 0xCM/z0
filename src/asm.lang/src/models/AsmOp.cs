@@ -63,6 +63,15 @@ namespace Z0.Asm
         public static RegOp reg(RegWidth width, RegClass @class, RegIndex index)
             => new RegOp(width,@class,index);
 
+        [MethodImpl(Inline)]
+        public static RegOp<T> reg<T>(T src)
+            where T : unmanaged, IRegOp
+                => new RegOp<T>(src);
+
+        public static RegMem<T> mem<T>(T @base, T index, MemoryScale scale, Hex32 dx)
+            where T : unmanaged, IRegOp
+                => new RegMem<T>(@base, index, scale, dx);
+
         public static R.al al => default;
 
         public static R.cl cl => default;

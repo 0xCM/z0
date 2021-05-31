@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     partial struct CellCalcs
     {
@@ -65,8 +65,8 @@ namespace Z0
         public static ulong cellcover<T>(W32 w, ulong cellcount)
             where T : unmanaged
         {
-            var blockcount = cellcount / (ulong)memory.cells<T>(w);
-            return cellcount % (ulong)memory.cells<T>(w) == 0 ? blockcount : blockcount + 1ul;
+            var blockcount = cellcount / (ulong)cells<T>(w);
+            return cellcount % (ulong)cells<T>(w) == 0 ? blockcount : blockcount + 1ul;
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace Z0
         public static ulong cellcover<T>(W128 w, ulong cellcount)
             where T : unmanaged
         {
-            var blockcount = cellcount / (ulong)memory.cells<T>(w);
-            return cellcount % (ulong)memory.cells<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)cells<T>(w);
+            return cellcount % (ulong)cells<T>(w) == 0 ? blockcount : blockcount + 1;
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace Z0
         public static ulong cellcover<T>(W256 w, ulong cellcount)
             where T : unmanaged
         {
-            var blockcount = cellcount / (ulong)memory.cells<T>(w);
-            return cellcount % (ulong)memory.cells<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)cells<T>(w);
+            return cellcount % (ulong)cells<T>(w) == 0 ? blockcount : blockcount + 1;
         }
 
         /// <summary>
@@ -125,8 +125,8 @@ namespace Z0
         public static ulong cellcover<T>(W512 w, ulong cellcount)
             where T : unmanaged
         {
-            var blockcount = cellcount / (ulong)memory.cells<T>(w);
-            return cellcount % (ulong)memory.cells<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)cells<T>(w);
+            return cellcount % (ulong)cells<T>(w) == 0 ? blockcount : blockcount + 1;
         }
 
         /// <summary>

@@ -32,6 +32,19 @@ namespace Z0
         public T Read(byte i0, byte i1)
             => api.read(this, i0, i1);
 
+        [MethodImpl(Inline)]
+        public Bitfield8<T> Store(byte i0, byte i1, T src)
+        {
+            api.store(i0, i1, src, ref this);
+            return this;
+        }
+
+        public ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(_State);
+        }
+
         internal S State
         {
             [MethodImpl(Inline)]
@@ -41,13 +54,6 @@ namespace Z0
         [MethodImpl(Inline)]
         internal void Overwrite(S src)
             => _State = src;
-
-        [MethodImpl(Inline)]
-        public Bitfield8<T> Store(byte i0, byte i1, T src)
-        {
-            api.store(i0, i1, src, ref this);
-            return this;
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator Bitfield8<T>(T src)

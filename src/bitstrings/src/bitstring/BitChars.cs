@@ -9,549 +9,172 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static Typed;
 
     [ApiHost]
-    static class BitStringStore
+    public readonly struct BitChars
     {
-        const NumericKind Closure = UnsignedInts;
-
-        /// <summary>
-        /// Constructs a bitsequence via the bitstore and populates a caller-supplied target with the result
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void storeseq<T>(T src, Span<byte> dst, int offset = 0)
-            where T : unmanaged
-                => bitseq(src, dst, offset);
-
-        /// <summary>
-        /// Returns a sequence of eight characters that represent the bits in a source byte
-        /// </summary>
-        /// <param name="value">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ReadOnlySpan<char> bitchars(byte value)
-            => cover(bitcharP(value), 8);
-
-        /// <summary>
-        /// Selects an identified bit sequence
-        /// </summary>
-        /// <param name="index">A value from 0 - 255 indicating the byte of interest</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ReadOnlySpan<byte> select(byte value)
-            => new ReadOnlySpan<byte>(bitseqP(value), 8);
+        const NumericKind Closure = AllNumeric;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<byte> bitseq<T>(T src, int count)
-            where T : unmanaged
-                => slice(bitseq(src), 0, min(width<T>(), count));
-
-        /// <summary>
-        /// Constructs a span of bytes where each byte, ordered from lo to hi,
-        /// represents a single bit in the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        public static ReadOnlySpan<byte> bitseq<T>(T src)
-            where T : unmanaged
-        {
-            var dst = alloc<byte>(width<T>());
-            bitseq(src, dst);
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void bitseq<T>(T src, Span<byte> dst, int offset = 0)
+        public static uint chars<T>(T src, Span<char> dst, uint offset = 0)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte)
             || typeof(T) == typeof(ushort)
             || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
-                bitseq_u(src,dst,offset);
+                return bitchars_u(src, dst, offset);
             else if(typeof(T) == typeof(sbyte)
             || typeof(T) == typeof(short)
             || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
-                bitseq_i(src,dst,offset);
+                return bitchars_i(src, dst, offset);
             else
-                bitseq_f(src,dst,offset);
+                return bitchars_f(src, dst, offset);
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void bitchars<T>(T src, Span<char> dst, int offset = 0)
+        [MethodImpl(Inline)]
+        static uint bitchars_u<T>(T src, Span<char> dst, uint offset)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte)
-            || typeof(T) == typeof(ushort)
-            || typeof(T) == typeof(uint)
-            || typeof(T) == typeof(ulong))
-                bitchars_u(src, dst, offset);
-            else if(typeof(T) == typeof(sbyte)
-            || typeof(T) == typeof(short)
-            || typeof(T) == typeof(int)
-            || typeof(T) == typeof(long))
-                bitchars_i(src, dst, offset);
+            if(typeof(T) == typeof(byte))
+                return bitchars(uint8(src),dst,offset);
+            else if(typeof(T) == typeof(ushort))
+                return bitchars(uint16(src),dst,offset);
+            else if(typeof(T) == typeof(uint))
+                return bitchars(uint32(src),dst,offset);
             else
-                bitchars_f(src, dst, offset);
+                return bitchars(uint64(src),dst,offset);
+        }
+
+        [MethodImpl(Inline)]
+        static uint bitchars_i<T>(T src, Span<char> dst, uint offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return bitchars(int8(src),dst,offset);
+            else if(typeof(T) == typeof(short))
+                return bitchars(int16(src),dst,offset);
+            else if(typeof(T) == typeof(int))
+                return bitchars(int32(src),dst,offset);
+            else
+                return bitchars(int64(src),dst,offset);
+        }
+
+        [MethodImpl(Inline)]
+        static uint bitchars_f<T>(T src, Span<char> dst, uint offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return bitchars(float32(src),dst,offset);
+            else if(typeof(T) == typeof(double))
+                return bitchars(float64(src),dst,offset);
+            else
+                throw no<T>();
         }
 
         const int seglen = 8;
 
         [MethodImpl(Inline), Op]
         static unsafe char* bitcharP(byte value)
-            => (char*)gptr(skip(first(BitChars), 16*value));
+            => (char*)gptr(skip(first(Data), 16*value));
 
         [MethodImpl(Inline), Op]
-        static unsafe byte* bitseqP(byte value)
-            => gptr(skip(first(BitSeqData), 8*value));
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitchars(byte src, Span<char> dst, int offset)
+        static unsafe uint bitchars(byte src, Span<char> dst, uint offset)
         {
-            memory.copy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
+            var pSrc = bitcharP((byte)(src >> seglen*0));
+            var start = offset + seglen*0;
+            var end =  start + seglen;
+            var k =0u;
+            for(var j=start; j<end; j++)
+                seek(dst,j) = pSrc[k++];
+            return k;
         }
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(ushort src, Span<char> dst, int offset)
+        static unsafe uint bitchars(ushort src, Span<char> dst, uint offset)
         {
-            memory.copy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
-            memory.copy(bitcharP((byte)(src >> seglen*1)), dst, offset + seglen*1,  seglen);
+            var counter = 0u;
+            for(var i=0; i<2; i++)
+            {
+                var pSrc = bitcharP((byte)(src >> seglen*i));
+                var start = offset + seglen*i;
+                var end =  start + seglen;
+                var k =0u;
+                for(var j=start; j<end; j++)
+                {
+                    seek(dst,j) = pSrc[k++];
+                    counter++;
+                }
+            }
+            return counter;
         }
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(uint src, Span<char> dst, int offset)
+        static unsafe uint bitchars(uint src, Span<char> dst, uint offset)
         {
+            var counter = 0u;
             for(var i=0; i<4; i++)
-                memory.copy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
+            {
+                var pSrc = bitcharP((byte)(src >> seglen*i));
+                var start = offset + seglen*i;
+                var end =  start + seglen;
+                var k = 0u;
+                for(var j=start; j<end; j++)
+                {
+                    seek(dst,j) = pSrc[k++];
+                    counter++;
+                }
+            }
+
+            return counter;
         }
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(ulong src, Span<char> dst, int offset)
+        static unsafe uint bitchars(ulong src, Span<char> dst, uint offset)
         {
+            var counter = 0u;
             for(var i=0; i<8; i++)
-                memory.copy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
+            {
+                var pSrc = bitcharP((byte)(src >> seglen*i));
+                var start = offset + seglen*i;
+                var end =  start + seglen;
+                var k = 0u;
+                for(var j=start; j<end; j++)
+                {
+                    seek(dst,j) = pSrc[k++];
+                    counter++;
+                }
+            }
+            return counter;
         }
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(sbyte src, Span<char> dst, int offset)
+        static unsafe uint bitchars(sbyte src, Span<char> dst, uint offset)
             => bitchars((byte)src, dst, offset);
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(short src, Span<char> dst, int offset)
+        static unsafe uint bitchars(short src, Span<char> dst, uint offset)
             => bitchars((ushort)src, dst, offset);
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(int src, Span<char> dst, int offset)
+        static unsafe uint bitchars(int src, Span<char> dst, uint offset)
             => bitchars((uint)src, dst, offset);
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(long src, Span<char> dst, int offset)
+        static unsafe uint bitchars(long src, Span<char> dst, uint offset)
             => bitchars((ulong)src, dst, offset);
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(float src, Span<char> dst, int offset)
+        static unsafe uint bitchars(float src, Span<char> dst, uint offset)
             => bitchars(Numeric.force<uint>(src), dst, offset);
 
         [MethodImpl(Inline), Op]
-        static unsafe void bitchars(double src, Span<char> dst, int offset)
+        static unsafe uint bitchars(double src, Span<char> dst, uint offset)
             => bitchars(Numeric.force<ulong>(src), dst, offset);
 
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(byte src, Span<byte> dst, int offset)
-        {
-            memory.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
-        }
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(ushort src, Span<byte> dst, int offset)
-        {
-            ref var target = ref first(dst);
-            memory.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
-            memory.copy(bitseqP((byte)(src >> seglen*1)), dst, offset + seglen*1, seglen);
-        }
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(uint src, Span<byte> dst, int offset)
-        {
-            for(var i=0; i<4; i++)
-                memory.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
-        }
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(ulong src, Span<byte> dst, int offset)
-        {
-            for(var i=0; i<8; i++)
-                memory.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
-        }
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(short src, Span<byte> dst, int offset)
-            => bitseq((ushort)src, dst, offset);
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(sbyte src, Span<byte> dst, int offset)
-            => bitseq((byte)src, dst, offset);
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(int src, Span<byte> dst, int offset)
-            => bitseq((uint)src,dst,offset);
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(long src, Span<byte> dst, int offset)
-            => bitseq((ulong)src,dst,offset);
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(float src, Span<byte> dst, int offset)
-            => bitseq(NumericCast.force<uint>(src), dst, offset);
-
-        [MethodImpl(Inline), Op]
-        static unsafe void bitseq(double src, Span<byte> dst, int offset)
-            => bitseq(NumericCast.force<ulong>(src), dst, offset);
-
-        [MethodImpl(Inline)]
-        static void bitseq_i<T>(T src, Span<byte> dst, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                bitseq(int8(src),dst,offset);
-            else if(typeof(T) == typeof(short))
-                bitseq(int16(src),dst,offset);
-            else if(typeof(T) == typeof(int))
-                bitseq(int32(src),dst,offset);
-            else
-                bitseq(int64(src),dst,offset);
-        }
-
-        [MethodImpl(Inline)]
-        static void bitseq_u<T>(T src, Span<byte> dst, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                bitseq(uint8(src),dst,offset);
-            else if(typeof(T) == typeof(ushort))
-                bitseq(uint16(src),dst,offset);
-            else if(typeof(T) == typeof(uint))
-                bitseq(uint32(src),dst,offset);
-            else
-                bitseq(uint64(src),dst,offset);
-        }
-
-        [MethodImpl(Inline)]
-        static void bitseq_f<T>(T src, Span<byte> dst, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                bitseq(float32(src),dst,offset);
-            else if(typeof(T) == typeof(double))
-                bitseq(float64(src),dst,offset);
-            else
-                throw no<T>();
-        }
-
-        [MethodImpl(Inline)]
-        static void bitchars_u<T>(T src, Span<char> dst, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                bitchars(uint8(src),dst,offset);
-            else if(typeof(T) == typeof(ushort))
-                bitchars(uint16(src),dst,offset);
-            else if(typeof(T) == typeof(uint))
-                bitchars(uint32(src),dst,offset);
-            else
-                bitchars(uint64(src),dst,offset);
-        }
-
-        [MethodImpl(Inline)]
-        static void bitchars_i<T>(T src, Span<char> dst, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                bitchars(int8(src),dst,offset);
-            else if(typeof(T) == typeof(short))
-                bitchars(int16(src),dst,offset);
-            else if(typeof(T) == typeof(int))
-                bitchars(int32(src),dst,offset);
-            else
-                bitchars(int64(src),dst,offset);
-        }
-
-        [MethodImpl(Inline)]
-        static void bitchars_f<T>(T src, Span<char> dst, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                bitchars(float32(src),dst,offset);
-            else if(typeof(T) == typeof(double))
-                bitchars(float64(src),dst,offset);
-            else
-                throw no<T>();
-        }
-
-        static ReadOnlySpan<byte> BitSeqData
-            => new byte[]
-            {
-                0,0,0,0,0,0,0,0,
-                1,0,0,0,0,0,0,0,
-                0,1,0,0,0,0,0,0,
-                1,1,0,0,0,0,0,0,
-                0,0,1,0,0,0,0,0,
-                1,0,1,0,0,0,0,0,
-                0,1,1,0,0,0,0,0,
-                1,1,1,0,0,0,0,0,
-                0,0,0,1,0,0,0,0,
-                1,0,0,1,0,0,0,0,
-                0,1,0,1,0,0,0,0,
-                1,1,0,1,0,0,0,0,
-                0,0,1,1,0,0,0,0,
-                1,0,1,1,0,0,0,0,
-                0,1,1,1,0,0,0,0,
-                1,1,1,1,0,0,0,0,
-                0,0,0,0,1,0,0,0,
-                1,0,0,0,1,0,0,0,
-                0,1,0,0,1,0,0,0,
-                1,1,0,0,1,0,0,0,
-                0,0,1,0,1,0,0,0,
-                1,0,1,0,1,0,0,0,
-                0,1,1,0,1,0,0,0,
-                1,1,1,0,1,0,0,0,
-                0,0,0,1,1,0,0,0,
-                1,0,0,1,1,0,0,0,
-                0,1,0,1,1,0,0,0,
-                1,1,0,1,1,0,0,0,
-                0,0,1,1,1,0,0,0,
-                1,0,1,1,1,0,0,0,
-                0,1,1,1,1,0,0,0,
-                1,1,1,1,1,0,0,0,
-                0,0,0,0,0,1,0,0,
-                1,0,0,0,0,1,0,0,
-                0,1,0,0,0,1,0,0,
-                1,1,0,0,0,1,0,0,
-                0,0,1,0,0,1,0,0,
-                1,0,1,0,0,1,0,0,
-                0,1,1,0,0,1,0,0,
-                1,1,1,0,0,1,0,0,
-                0,0,0,1,0,1,0,0,
-                1,0,0,1,0,1,0,0,
-                0,1,0,1,0,1,0,0,
-                1,1,0,1,0,1,0,0,
-                0,0,1,1,0,1,0,0,
-                1,0,1,1,0,1,0,0,
-                0,1,1,1,0,1,0,0,
-                1,1,1,1,0,1,0,0,
-                0,0,0,0,1,1,0,0,
-                1,0,0,0,1,1,0,0,
-                0,1,0,0,1,1,0,0,
-                1,1,0,0,1,1,0,0,
-                0,0,1,0,1,1,0,0,
-                1,0,1,0,1,1,0,0,
-                0,1,1,0,1,1,0,0,
-                1,1,1,0,1,1,0,0,
-                0,0,0,1,1,1,0,0,
-                1,0,0,1,1,1,0,0,
-                0,1,0,1,1,1,0,0,
-                1,1,0,1,1,1,0,0,
-                0,0,1,1,1,1,0,0,
-                1,0,1,1,1,1,0,0,
-                0,1,1,1,1,1,0,0,
-                1,1,1,1,1,1,0,0,
-                0,0,0,0,0,0,1,0,
-                1,0,0,0,0,0,1,0,
-                0,1,0,0,0,0,1,0,
-                1,1,0,0,0,0,1,0,
-                0,0,1,0,0,0,1,0,
-                1,0,1,0,0,0,1,0,
-                0,1,1,0,0,0,1,0,
-                1,1,1,0,0,0,1,0,
-                0,0,0,1,0,0,1,0,
-                1,0,0,1,0,0,1,0,
-                0,1,0,1,0,0,1,0,
-                1,1,0,1,0,0,1,0,
-                0,0,1,1,0,0,1,0,
-                1,0,1,1,0,0,1,0,
-                0,1,1,1,0,0,1,0,
-                1,1,1,1,0,0,1,0,
-                0,0,0,0,1,0,1,0,
-                1,0,0,0,1,0,1,0,
-                0,1,0,0,1,0,1,0,
-                1,1,0,0,1,0,1,0,
-                0,0,1,0,1,0,1,0,
-                1,0,1,0,1,0,1,0,
-                0,1,1,0,1,0,1,0,
-                1,1,1,0,1,0,1,0,
-                0,0,0,1,1,0,1,0,
-                1,0,0,1,1,0,1,0,
-                0,1,0,1,1,0,1,0,
-                1,1,0,1,1,0,1,0,
-                0,0,1,1,1,0,1,0,
-                1,0,1,1,1,0,1,0,
-                0,1,1,1,1,0,1,0,
-                1,1,1,1,1,0,1,0,
-                0,0,0,0,0,1,1,0,
-                1,0,0,0,0,1,1,0,
-                0,1,0,0,0,1,1,0,
-                1,1,0,0,0,1,1,0,
-                0,0,1,0,0,1,1,0,
-                1,0,1,0,0,1,1,0,
-                0,1,1,0,0,1,1,0,
-                1,1,1,0,0,1,1,0,
-                0,0,0,1,0,1,1,0,
-                1,0,0,1,0,1,1,0,
-                0,1,0,1,0,1,1,0,
-                1,1,0,1,0,1,1,0,
-                0,0,1,1,0,1,1,0,
-                1,0,1,1,0,1,1,0,
-                0,1,1,1,0,1,1,0,
-                1,1,1,1,0,1,1,0,
-                0,0,0,0,1,1,1,0,
-                1,0,0,0,1,1,1,0,
-                0,1,0,0,1,1,1,0,
-                1,1,0,0,1,1,1,0,
-                0,0,1,0,1,1,1,0,
-                1,0,1,0,1,1,1,0,
-                0,1,1,0,1,1,1,0,
-                1,1,1,0,1,1,1,0,
-                0,0,0,1,1,1,1,0,
-                1,0,0,1,1,1,1,0,
-                0,1,0,1,1,1,1,0,
-                1,1,0,1,1,1,1,0,
-                0,0,1,1,1,1,1,0,
-                1,0,1,1,1,1,1,0,
-                0,1,1,1,1,1,1,0,
-                1,1,1,1,1,1,1,0,
-                0,0,0,0,0,0,0,1,
-                1,0,0,0,0,0,0,1,
-                0,1,0,0,0,0,0,1,
-                1,1,0,0,0,0,0,1,
-                0,0,1,0,0,0,0,1,
-                1,0,1,0,0,0,0,1,
-                0,1,1,0,0,0,0,1,
-                1,1,1,0,0,0,0,1,
-                0,0,0,1,0,0,0,1,
-                1,0,0,1,0,0,0,1,
-                0,1,0,1,0,0,0,1,
-                1,1,0,1,0,0,0,1,
-                0,0,1,1,0,0,0,1,
-                1,0,1,1,0,0,0,1,
-                0,1,1,1,0,0,0,1,
-                1,1,1,1,0,0,0,1,
-                0,0,0,0,1,0,0,1,
-                1,0,0,0,1,0,0,1,
-                0,1,0,0,1,0,0,1,
-                1,1,0,0,1,0,0,1,
-                0,0,1,0,1,0,0,1,
-                1,0,1,0,1,0,0,1,
-                0,1,1,0,1,0,0,1,
-                1,1,1,0,1,0,0,1,
-                0,0,0,1,1,0,0,1,
-                1,0,0,1,1,0,0,1,
-                0,1,0,1,1,0,0,1,
-                1,1,0,1,1,0,0,1,
-                0,0,1,1,1,0,0,1,
-                1,0,1,1,1,0,0,1,
-                0,1,1,1,1,0,0,1,
-                1,1,1,1,1,0,0,1,
-                0,0,0,0,0,1,0,1,
-                1,0,0,0,0,1,0,1,
-                0,1,0,0,0,1,0,1,
-                1,1,0,0,0,1,0,1,
-                0,0,1,0,0,1,0,1,
-                1,0,1,0,0,1,0,1,
-                0,1,1,0,0,1,0,1,
-                1,1,1,0,0,1,0,1,
-                0,0,0,1,0,1,0,1,
-                1,0,0,1,0,1,0,1,
-                0,1,0,1,0,1,0,1,
-                1,1,0,1,0,1,0,1,
-                0,0,1,1,0,1,0,1,
-                1,0,1,1,0,1,0,1,
-                0,1,1,1,0,1,0,1,
-                1,1,1,1,0,1,0,1,
-                0,0,0,0,1,1,0,1,
-                1,0,0,0,1,1,0,1,
-                0,1,0,0,1,1,0,1,
-                1,1,0,0,1,1,0,1,
-                0,0,1,0,1,1,0,1,
-                1,0,1,0,1,1,0,1,
-                0,1,1,0,1,1,0,1,
-                1,1,1,0,1,1,0,1,
-                0,0,0,1,1,1,0,1,
-                1,0,0,1,1,1,0,1,
-                0,1,0,1,1,1,0,1,
-                1,1,0,1,1,1,0,1,
-                0,0,1,1,1,1,0,1,
-                1,0,1,1,1,1,0,1,
-                0,1,1,1,1,1,0,1,
-                1,1,1,1,1,1,0,1,
-                0,0,0,0,0,0,1,1,
-                1,0,0,0,0,0,1,1,
-                0,1,0,0,0,0,1,1,
-                1,1,0,0,0,0,1,1,
-                0,0,1,0,0,0,1,1,
-                1,0,1,0,0,0,1,1,
-                0,1,1,0,0,0,1,1,
-                1,1,1,0,0,0,1,1,
-                0,0,0,1,0,0,1,1,
-                1,0,0,1,0,0,1,1,
-                0,1,0,1,0,0,1,1,
-                1,1,0,1,0,0,1,1,
-                0,0,1,1,0,0,1,1,
-                1,0,1,1,0,0,1,1,
-                0,1,1,1,0,0,1,1,
-                1,1,1,1,0,0,1,1,
-                0,0,0,0,1,0,1,1,
-                1,0,0,0,1,0,1,1,
-                0,1,0,0,1,0,1,1,
-                1,1,0,0,1,0,1,1,
-                0,0,1,0,1,0,1,1,
-                1,0,1,0,1,0,1,1,
-                0,1,1,0,1,0,1,1,
-                1,1,1,0,1,0,1,1,
-                0,0,0,1,1,0,1,1,
-                1,0,0,1,1,0,1,1,
-                0,1,0,1,1,0,1,1,
-                1,1,0,1,1,0,1,1,
-                0,0,1,1,1,0,1,1,
-                1,0,1,1,1,0,1,1,
-                0,1,1,1,1,0,1,1,
-                1,1,1,1,1,0,1,1,
-                0,0,0,0,0,1,1,1,
-                1,0,0,0,0,1,1,1,
-                0,1,0,0,0,1,1,1,
-                1,1,0,0,0,1,1,1,
-                0,0,1,0,0,1,1,1,
-                1,0,1,0,0,1,1,1,
-                0,1,1,0,0,1,1,1,
-                1,1,1,0,0,1,1,1,
-                0,0,0,1,0,1,1,1,
-                1,0,0,1,0,1,1,1,
-                0,1,0,1,0,1,1,1,
-                1,1,0,1,0,1,1,1,
-                0,0,1,1,0,1,1,1,
-                1,0,1,1,0,1,1,1,
-                0,1,1,1,0,1,1,1,
-                1,1,1,1,0,1,1,1,
-                0,0,0,0,1,1,1,1,
-                1,0,0,0,1,1,1,1,
-                0,1,0,0,1,1,1,1,
-                1,1,0,0,1,1,1,1,
-                0,0,1,0,1,1,1,1,
-                1,0,1,0,1,1,1,1,
-                0,1,1,0,1,1,1,1,
-                1,1,1,0,1,1,1,1,
-                0,0,0,1,1,1,1,1,
-                1,0,0,1,1,1,1,1,
-                0,1,0,1,1,1,1,1,
-                1,1,0,1,1,1,1,1,
-                0,0,1,1,1,1,1,1,
-                1,0,1,1,1,1,1,1,
-                0,1,1,1,1,1,1,1,
-                1,1,1,1,1,1,1,1,
-
-            };
-
-        static ReadOnlySpan<byte> BitChars => new byte[]
+        internal static ReadOnlySpan<byte> Data => new byte[]
         {
             0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00,
             0x31, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00, 0x30, 0x00,
