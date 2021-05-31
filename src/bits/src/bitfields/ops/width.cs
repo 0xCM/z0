@@ -13,35 +13,24 @@ namespace Z0
     partial struct BitfieldSpecs
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint width<T>(BitFieldPart<T> src)
+        public static uint width<T>(BitfieldSectionSpec<T> src)
             where T : unmanaged
                 => bw32(src.LastIndex) - bw32(src.FirstIndex) + 1u;
 
-        /// <summary>
-        /// Computes the aggregate width of the segments that comprise the bitfield
-        /// </summary>
-        /// <param name="spec">The bitfield spec</param>
         [MethodImpl(Inline), Op]
-        public static uint width(in BitfieldParts spec)
-        {
-            var total = 0u;
-            var count = spec.FieldCount;
-            var segments = spec.Segments;
-            for(byte i=0; i<count; i++)
-                total += skip(segments, i).Width;
-            return total;
-        }
+        public static byte width(BitfieldSegSpec src)
+            => (byte)(src.FirstIndex - src.LastIndex + 1);
 
         /// <summary>
         /// Computes the aggregate width of the segments that comprise the bitfield
         /// </summary>
         /// <param name="src">The bitfield spec</param>
         [MethodImpl(Inline), Op]
-        public static uint width(in BitFieldModel src)
+        public static uint width(in BitfieldModel src)
         {
             var total = 0u;
-            var count = src.SegmentCount;
-            var segments = src.Parts;
+            var count = src.SectionCount;
+            var segments = src.Sections;
             for(byte i=0; i<count; i++)
                 total += skip(segments, i).Width;
             return total;
@@ -56,8 +45,8 @@ namespace Z0
             where T : unmanaged
         {
             var total = 0u;
-            var count = src.SegmentCount;
-            var segments = src.Parts;
+            var count = src.SectionCount;
+            var segments = src.Sections;
             for(byte i=0; i<count; i++)
                 total += skip(segments, i).Width;
             return total;

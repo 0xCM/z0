@@ -8,37 +8,42 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static EnvFolders;
 
-    public readonly struct ApiExtractPaths
+    public readonly struct ApiPackArchive : IFileArchive
     {
-        readonly FS.FolderPath Root;
-
-        readonly IEnvPaths Paths;
+        public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public ApiExtractPaths(FS.FolderPath root)
+        public static ApiPackArchive create(FS.FolderPath root)
+            => new ApiPackArchive(root);
+
+        [MethodImpl(Inline)]
+        public ApiPackArchive(FS.FolderPath root)
         {
             Root = root;
-            Paths = EnvPaths.create();
         }
 
         public FS.FolderPath RootDir()
             => Root;
 
         public FS.FolderPath AsmTableRoot()
-            => Root + FS.folder("tables");
+            => Root + FS.folder(tables);
 
         public FS.FolderPath PartDir(PartId part)
             => Root + FS.folder(part);
 
+        public FS.FolderPath CaptureRoot()
+            => Root + FS.folder(capture);
+
         public FS.FolderPath AsmSourceRoot()
-            => Paths.CaptureRoot(Root) + FS.folder("asm");
+            => CaptureRoot() + FS.folder(asm);
 
         public FS.FolderPath AsmSourceDir(PartId part)
             => AsmSourceRoot() + FS.folder(part);
 
         public FS.FolderPath ExtractRoot()
-            => Paths.CaptureRoot(Root) + FS.folder("extracts");
+            => CaptureRoot() + FS.folder(extracts);
 
         public FS.FilePath RawExtractPath(ApiHostUri host)
             => ExtractRoot() + FS.file(host, "extracts.raw", FS.XPack);
@@ -50,7 +55,7 @@ namespace Z0
             =>  AsmSourceDir(host.Part) + FS.file(host, FS.Asm);
 
         public FS.FolderPath ContextRoot()
-            => Paths.CaptureRoot(Root) + FS.folder("context");
+            => CaptureRoot() + FS.folder(context);
 
         public FS.FilePath ApiRebasePath(Timestamp ts)
             => ContextRoot() + FS.file(string.Format("{0}.{1}", Tables.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);

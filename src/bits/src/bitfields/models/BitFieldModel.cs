@@ -9,51 +9,83 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct BitFieldModel : IBitfieldModel
+    public readonly struct BitfieldModel : IBitfieldModel
     {
         /// <summary>
         /// The bitfield name
         /// </summary>
-        public Name Name {get;}
+        public StringAddress Name {get;}
 
         /// <summary>
         /// The number of defined segments
         /// </summary>
-        public uint SegmentCount {get;}
+        public uint SectionCount {get;}
 
         /// <summary>
         /// The accumulated width of the defined segments
         /// </summary>
         public uint TotalWidth {get;}
 
-        readonly Index<BitfieldPart> _Parts;
+        readonly Index<BitfieldSectionSpec> _Sections;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(Name name, uint count, uint width, Index<BitfieldPart> parts)
+        public BitfieldModel(StringAddress name, Index<BitfieldSectionSpec> sections)
         {
             Name = name;
-            SegmentCount = count;
-            _Parts = parts;
-            TotalWidth = width;
+            SectionCount = sections.Count;
+            _Sections = sections;
+            TotalWidth = 0;
             TotalWidth = BitfieldSpecs.width(this);
         }
 
-        public ReadOnlySpan<BitfieldPart> Parts
+        public Span<BitfieldSectionSpec> Sections
         {
             [MethodImpl(Inline)]
-            get => _Parts.Edit;
+            get => _Sections.Edit;
         }
 
         [MethodImpl(Inline)]
-        public uint Width(int index)
-            => Segment(index).Width;
+        public ref BitfieldSectionSpec Section(uint i)
+            => ref _Sections[i];
 
         [MethodImpl(Inline)]
-        public uint Position(int index)
-            => Segment(index).FirstIndex;
+        public ref BitfieldSegSpec Segment(uint i, uint j)
+            => ref _Sections[i][j];
+
+        public ref BitfieldSectionSpec this[uint i]
+        {
+            [MethodImpl(Inline)]
+            get => ref Section(i);
+        }
+
+        public ref BitfieldSegSpec this[uint i, uint j]
+        {
+            [MethodImpl(Inline)]
+            get => ref Segment(i,j);
+        }
 
         [MethodImpl(Inline)]
-        public ref BitfieldPart Segment(int index)
-            => ref _Parts[index];
+        public uint SectionWidth(uint i)
+            => this[i].Width;
+
+        [MethodImpl(Inline)]
+        public uint SectionStart(uint i)
+            => this[i].FirstIndex;
+
+        [MethodImpl(Inline)]
+        public uint SectionEnd(uint i)
+            => this[i].LastIndex;
+
+        [MethodImpl(Inline)]
+        public uint SegWidth(uint i, uint j)
+            => this[i,j].Width;
+
+        [MethodImpl(Inline)]
+        public uint SegStart(uint i, uint j)
+            => this[i,j].FirstIndex;
+
+        [MethodImpl(Inline)]
+        public uint SegEnd(uint i, uint j)
+            => this[i,j].LastIndex;
     }
 }

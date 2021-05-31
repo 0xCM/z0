@@ -11,30 +11,30 @@ namespace Z0
         /// <summary>
         /// The bitfield name
         /// </summary>
-        Name Name {get;}
+        StringAddress Name {get;}
 
         /// <summary>
-        /// The number of defined segments
+        /// The number of defined sections
         /// </summary>
-        uint SegmentCount {get;}
+        uint SectionCount {get;}
 
         /// <summary>
-        /// The accumulated width of the defined segments
+        /// The accumulated section widths
         /// </summary>
         uint TotalWidth {get;}
 
         /// <summary>
         /// The defined segments
         /// </summary>
-        ReadOnlySpan<BitfieldPart> Parts {get;}
+        Span<BitfieldSectionSpec> Sections {get;}
     }
 
     public interface IBitfieldModel<T> : IBitfieldModel
         where T : unmanaged
     {
-         new ReadOnlySpan<BitFieldPart<T>> Parts {get;}
+         new Span<BitfieldSectionSpec<T>> Sections {get;}
 
-         ReadOnlySpan<BitfieldPart> IBitfieldModel.Parts
-            =>  Parts.Map(s => (BitfieldPart)s);
+         Span<BitfieldSectionSpec> IBitfieldModel.Sections
+            =>  Sections.Map(s => (BitfieldSectionSpec)s);
     }
 }

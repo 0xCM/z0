@@ -15,6 +15,9 @@ namespace Z0
         public static IWfEmissionLog create(string name, EnvData env)
             => new WfEmissionLog(env.Logs + FS.folder("emissions") + FS.file(name + ".emissions", FS.Log));
 
+        public static IWfEmissionLog create(string name, FS.FolderPath dir)
+            => new WfEmissionLog(dir  + FS.file(name + ".emissions", FS.Log));
+
         readonly FileStream Emissions;
 
         internal WfEmissionLog(FS.FilePath dst)

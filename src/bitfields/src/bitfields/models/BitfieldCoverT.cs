@@ -19,71 +19,64 @@ namespace Z0
     public struct BitfieldCover<T>
         where T : unmanaged
     {
-        /// <summary>
-        /// The bitfield definition upon which the reader is predicated
-        /// </summary>
-        public readonly BitfieldParts Spec;
+        //public readonly BitfieldSectionSpecs Spec;
 
         T _State;
 
-        [MethodImpl(Inline)]
-        public BitfieldCover(in BitfieldParts spec, T state)
-        {
-            Spec = spec;
-            _State = state;
-        }
+        // [MethodImpl(Inline)]
+        // public BitfieldCover(in BitfieldSectionSpecs spec, T state)
+        // {
+        //     Spec = spec;
+        //     _State = state;
+        // }
 
-        [MethodImpl(Inline)]
-        public T State()
-            => _State;
+        // [MethodImpl(Inline)]
+        // public T State()
+        //     => _State;
 
-        [MethodImpl(Inline)]
-        public BitfieldCover<T> State(in T src)
-        {
-            _State = src;
-            return this;
-        }
+        // [MethodImpl(Inline)]
+        // public BitfieldCover<T> State(in T src)
+        // {
+        //     _State = src;
+        //     return this;
+        // }
 
-        [MethodImpl(Inline)]
-        public T Extract(in BitfieldPart seg)
-            => api.read(seg, _State);
+        // [MethodImpl(Inline)]
+        // public T Extract(in BitfieldSectionSpec seg)
+        //     => api.read(seg, _State);
 
-        [MethodImpl(Inline)]
-        public T Extract(byte index)
-            => api.read(Segment(index), _State);
+        // [MethodImpl(Inline)]
+        // public T Extract(byte index)
+        //     => api.read(Segment(index), _State);
 
-        [MethodImpl(Inline)]
-        public BitfieldCover<T> Deposit(in BitfieldPart seg, in T src)
-        {
-            api.store<T>(seg, src, ref _State);
-            return this;
-        }
+        // [MethodImpl(Inline)]
+        // public BitfieldCover<T> Deposit(in BitfieldSectionSpec seg, in T src)
+        // {
+        //     api.store<T>(seg, src, ref _State);
+        //     return this;
+        // }
 
-        [MethodImpl(Inline)]
-        public BitfieldCover<T> Deposit(byte index, in T src)
-        {
-            api.store<T>(Segment(index), src, ref _State);
-            return this;
-        }
+        // [MethodImpl(Inline)]
+        // public BitfieldCover<T> Deposit(byte index, in T src)
+        // {
+        //     api.store<T>(Segment(index), src, ref _State);
+        //     return this;
+        // }
 
-        /// <summary>
-        /// Fetches an index-identified segment
-        /// </summary>
-        /// <param name="index">The segment index</param>
-        [MethodImpl(Inline)]
-        public ref readonly BitfieldPart Segment(byte index)
-            => ref skip(Spec.Segments, index);
+        // [MethodImpl(Inline)]
+        // public ref readonly BitfieldSectionSpec Segment(byte index)
+        //     => ref skip(Spec.Segments, index);
 
-        public T this[byte index]
-        {
-            [MethodImpl(Inline)]
-            get => Extract(index);
+        // public T this[byte index]
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => Extract(index);
 
-            [MethodImpl(Inline)]
-            set => Deposit(index, value);
-        }
+        //     [MethodImpl(Inline)]
+        //     set => Deposit(index, value);
+        // }
 
-        public string Format()
-            => api.format(this);
+        // public string Format()
+        //     => api.format(this);
     }
 }

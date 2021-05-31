@@ -44,9 +44,9 @@ namespace Z0
 
         public LogLevel Verbosity {get; private set;}
 
-        public WfServices Services {get;}
-
         public EnvData Env {get;}
+
+        public IWfEmissionLog Emissions {get; private set;}
 
         TokenDispenser Tokens;
 
@@ -71,7 +71,13 @@ namespace Z0
             Controller = config.Control;
             AppName = config.Shell.AppName;
             Router = new WfCmdRouter(this);
-            Services = new WfServices(this, Env, ApiCatalog.Components);
+            Emissions = WfEmissionLog.create(config.Shell.AppName, Env);
+        }
+
+        public void RedirectEmissions(IWfEmissionLog dst)
+        {
+            Emissions?.Dispose();
+            Emissions = dst;
         }
 
         public IWfRuntime WithSource(IPolySource random)
@@ -109,7 +115,7 @@ namespace Z0
         {
             EventBroker.Dispose();
             EventSink.Dispose();
-            Services.Dispose();
+            Emissions?.Dispose();
         }
         string ITextual.Format()
             => AppName;

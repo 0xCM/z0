@@ -13,46 +13,52 @@ namespace Z0
     public readonly struct BitFieldModel<T> : IBitfieldModel<T>
         where T : unmanaged
     {
-        public Name Name {get;}
+        public StringAddress Name {get;}
 
         /// <summary>
         /// The number of defined segments
         /// </summary>
-        public uint SegmentCount {get;}
+        public uint SectionCount {get;}
 
         /// <summary>
         /// The accumulated width of the defined segments
         /// </summary>
         public uint TotalWidth {get;}
 
-        readonly Index<BitFieldPart<T>> _Parts;
+        readonly Index<BitfieldSectionSpec<T>> _Sections;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(Name name, uint count, uint width, Index<BitFieldPart<T>> parts)
+        public BitFieldModel(StringAddress name, Index<BitfieldSectionSpec<T>> sections)
         {
             Name = name;
-            SegmentCount = count;
-            _Parts = parts;
+            SectionCount = sections.Count;
+            _Sections = sections;
             TotalWidth = 0;
             TotalWidth = BitfieldSpecs.width(this);
         }
 
-        public ReadOnlySpan<BitFieldPart<T>> Parts
+        public ref BitfieldSectionSpec<T> this[uint i]
         {
             [MethodImpl(Inline)]
-            get => _Parts.View;
+            get => ref _Sections[i];
+        }
+
+        public Span<BitfieldSectionSpec<T>> Sections
+        {
+            [MethodImpl(Inline)]
+            get => _Sections.Edit;
         }
 
         [MethodImpl(Inline)]
         public uint Width(int index)
-            => Segment(index).Width;
+            => Section(index).Width;
 
         [MethodImpl(Inline)]
         public uint Position(int index)
-            => bw32(Segment(index).FirstIndex);
+            => bw32(Section(index).FirstIndex);
 
         [MethodImpl(Inline)]
-        public ref readonly BitFieldPart<T> Segment(int index)
-            => ref _Parts[index];
+        public ref BitfieldSectionSpec<T> Section(int index)
+            => ref _Sections[index];
     }
 }

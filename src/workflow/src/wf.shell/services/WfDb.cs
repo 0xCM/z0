@@ -10,8 +10,6 @@ namespace Z0
     {
         public FS.FolderPath Root {get; private set;}
 
-        public EnvData Env {get; private set;}
-
         public WfDb()
         {
 
@@ -20,14 +18,12 @@ namespace Z0
         internal WfDb(IWfRuntime wf, FS.FolderPath root)
             : base(wf)
         {
-            Env = wf.Env;
             Root = root;
         }
 
         protected override void OnInit()
         {
             base.OnInit();
-            Env = Z0.Env.load().Data;
             Root = Env.Db;
         }
 

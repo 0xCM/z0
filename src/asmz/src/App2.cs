@@ -187,10 +187,10 @@ namespace Z0.Asm
             var extract = ApiExtractWorkflow.create(Wf);
             var pdb = false;
             var packs = Wf.ApiPacks();
-            var dst = packs.Create(root.now());
-            var collection = extract.Run(dst);
+            var pack = packs.Create(ApiPackSettings.init(Db.CapturePackRoot(), core.now()));
+            var collection = extract.Run(pack);
             if(pdb)
-                IndexPdbSymbols(collection.ResolvedParts, dst.Root + FS.file("symbols", FS.Log));
+                IndexPdbSymbols(collection.ResolvedParts, pack.Root + FS.file("symbols", FS.Log));
         }
 
         public void RunOldXedWf()
@@ -325,19 +325,6 @@ namespace Z0.Asm
 
         }
 
-        static string format(BitfieldSpec src)
-        {
-            var formatter = Tables.formatter<BitfieldSpecEntry>();
-            var entries = src.Entries;
-            var count = entries.Length;
-            var dst = text.buffer();
-            dst.AppendLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                dst.AppendLine(formatter.Format(skip(entries,i)));
-            }
-            return dst.Emit();
-        }
 
         void CheckHeap()
         {

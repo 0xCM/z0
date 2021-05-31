@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct @enum<E> : IEnum<E>, IEquatable<@enum<E>>
         where E : unmanaged, Enum
@@ -21,7 +21,7 @@ namespace Z0
         public DataWidth Width
         {
             [MethodImpl(Inline)]
-            get => memory.width<E>();
+            get => core.width<E>();
         }
 
         [MethodImpl(Inline)]

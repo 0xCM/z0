@@ -50,8 +50,6 @@ namespace Z0
 
         ExecToken NextExecToken();
 
-        WfServices Services {get;}
-
         IWfRuntime WithSource(IPolySource source);
 
         EnvData Env {get;}
@@ -61,6 +59,10 @@ namespace Z0
         ExecToken Ran<T>(WfExecFlow<T> src);
 
         ExecToken Ran<T,D>(WfExecFlow<T> flow, D data);
+
+        IWfEmissionLog Emissions {get;}
+
+        void RedirectEmissions(IWfEmissionLog dst);
 
         IRuntimeArchive RuntimeArchive()
             => WfRuntime.RuntimeArchive(this);
@@ -148,8 +150,6 @@ namespace Z0
             return Ran(flow);
         }
 
-        IWfEmissionLog Emissions
-            => Services.EmissionLog;
 
         WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)
             where T : struct, IRecord<T>

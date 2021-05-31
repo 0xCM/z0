@@ -13,30 +13,31 @@ namespace Z0
     partial struct BitFields
     {
         [MethodImpl(Inline), Op, Closures(UInt8k)]
-        public static T read<T>(in Bitfield8<T> src, byte i0, byte i1)
+        public static T read<T>(Bitfield8<T> src, byte i0, byte i1)
             where T : unmanaged
-                => @as<T>(Bits.bitseg((byte)src, i0, i1));
+                => @as<T>(Bits.bitseg(src.State, i0, i1));
 
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source value per the segment specification
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The value from which the segment will be extracted</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T read<T>(in BitfieldPart seg, T src)
+        [MethodImpl(Inline), Op, Closures(UInt8x16k)]
+        public static T read<T>(Bitfield16<T> src, byte i0, byte i1)
             where T : unmanaged
-                => gbits.bitslice(src, (byte)seg.FirstIndex, (byte)seg.Width);
+                => @as<T>(Bits.bitseg(src.State, i0, i1));
 
-        [MethodImpl(Inline)]
-        public static T read<S,T>(in BitfieldPart segment, in S src)
-            where S : unmanaged
+        [MethodImpl(Inline), Op, Closures(UInt8x16x32k)]
+        public static T read<T>(Bitfield32<T> src, byte i0, byte i1)
             where T : unmanaged
-                => @as<S,T>(gbits.bitslice(src, (byte)segment.FirstIndex, (byte)segment.Width));
+                => @as<T>(Bits.bitseg(src.State, i0, i1));
 
-        [MethodImpl(Inline)]
-        public static T read<S,T>(in BitfieldPart segment, in S src, bool offset)
-            where S : unmanaged
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T read<T>(Bitfield64<T> src, byte i0, byte i1)
             where T : unmanaged
-                => offset ? gmath.sll(read<S,T>(segment, src), (byte)segment.FirstIndex) : read<S,T>(segment,src);
+                => @as<T>(Bits.bitseg(src.State, i0, i1));
+
+        [MethodImpl(Inline), Op]
+        public static uint read(Bitfield32 src, byte i0, byte i1)
+            => Bits.bitseg(src.State, i0, i1);
+
+        [MethodImpl(Inline), Op]
+        public static ulong read(Bitfield64 src, byte i0, byte i1)
+            => Bits.bitseg(src.State, i0, i1);
     }
 }

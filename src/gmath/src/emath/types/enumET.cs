@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Enums;
 
     /// <summary>
     /// Defines a model of an enum literal that is parametric in both the declaring enum
@@ -26,12 +27,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public @enum(T scalar)
-            => Literal = Enums.literal<E,T>(scalar);
+            => Literal = literal<E,T>(scalar);
 
         public T Scalar
         {
             [MethodImpl(Inline)]
-            get => memory.@as<E,T>(Literal);
+            get => @as<E,T>(Literal);
         }
 
         public DataWidth Width
@@ -84,11 +85,43 @@ namespace Z0
             => emath.neq(a,b);
 
         [MethodImpl(Inline)]
+        public static bool operator ==(@enum<E,T> a,T b)
+            => emath.eq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(@enum<E,T> a, T b)
+            => emath.neq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(T a, @enum<E,T> b)
+            => emath.eq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(T a, @enum<E,T> b)
+            => emath.neq(a,b);
+
+        [MethodImpl(Inline)]
         public static bool operator <(@enum<E,T> a, @enum<E,T> b)
             => emath.lt(a,b);
 
         [MethodImpl(Inline)]
         public static bool operator >(@enum<E,T> a, @enum<E,T> b)
+            => emath.gt(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator <(@enum<E,T> a, T b)
+            => emath.lt(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator >(@enum<E,T> a, T b)
+            => emath.gt(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator <(T a, @enum<E,T> b)
+            => emath.lt(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool operator >(T a, @enum<E,T> b)
             => emath.gt(a,b);
 
         [MethodImpl(Inline)]
@@ -104,7 +137,23 @@ namespace Z0
             => emath.add(a,b);
 
         [MethodImpl(Inline)]
+        public static @enum<E,T> operator +(T a, @enum<E,T> b)
+            => emath.add(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator +(@enum<E,T> a, T b)
+            => emath.add(a,b);
+
+        [MethodImpl(Inline)]
         public static @enum<E,T> operator -(@enum<E,T> a, @enum<E,T> b)
+            => emath.sub(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator -(@enum<E,T> a, T b)
+            => emath.sub(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator -(T a, @enum<E,T> b)
             => emath.sub(a,b);
 
         [MethodImpl(Inline)]
@@ -112,11 +161,35 @@ namespace Z0
             => emath.mul(a,b);
 
         [MethodImpl(Inline)]
+        public static @enum<E,T> operator *(@enum<E,T> a, T b)
+            => emath.mul(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator *(T a, @enum<E,T> b)
+            => emath.mul(a,b);
+
+        [MethodImpl(Inline)]
         public static @enum<E,T> operator /(@enum<E,T> a, @enum<E,T> b)
             => emath.div(a,b);
 
         [MethodImpl(Inline)]
+        public static @enum<E,T> operator /(@enum<E,T> a, T b)
+            => emath.div(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator /(T a, @enum<E,T> b)
+            => emath.div(a,b);
+
+        [MethodImpl(Inline)]
         public static @enum<E,T> operator %(@enum<E,T> a, @enum<E,T> b)
+            => emath.mod(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator %(@enum<E,T> a, T b)
+            => emath.mod(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator %(T a, @enum<E,T> b)
             => emath.mod(a,b);
 
         [MethodImpl(Inline)]
@@ -128,11 +201,35 @@ namespace Z0
             => emath.and(a,b);
 
         [MethodImpl(Inline)]
+        public static @enum<E,T> operator &(@enum<E,T> a, T b)
+            => emath.and(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator &(T a, @enum<E,T> b)
+            => emath.and(a,b);
+
+        [MethodImpl(Inline)]
         public static @enum<E,T> operator |(@enum<E,T> a, @enum<E,T> b)
             => emath.or(a,b);
 
         [MethodImpl(Inline)]
+        public static @enum<E,T> operator |(@enum<E,T> a, T b)
+            => emath.or(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator |(T a, @enum<E,T> b)
+            => emath.or(a,b);
+
+        [MethodImpl(Inline)]
         public static @enum<E,T> operator ^(@enum<E,T> a, @enum<E,T> b)
+            => emath.xor(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator ^(@enum<E,T> a, T b)
+            => emath.xor(a,b);
+
+        [MethodImpl(Inline)]
+        public static @enum<E,T> operator ^(T a, @enum<E,T> b)
             => emath.xor(a,b);
 
         [MethodImpl(Inline)]

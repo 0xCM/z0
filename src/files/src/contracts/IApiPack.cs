@@ -8,9 +8,14 @@ namespace Z0
 
     using static EnvFolders;
 
-    public interface IApiPack : IFileArchive, IDiagnosticPaths
+    public interface IApiPack : IFileArchive
     {
         Timestamp Timestamp {get;}
+
+        ApiPackSettings Settings {get;}
+
+        FS.FolderPath IFileArchive.Root
+            => Settings.ExtractRoot;
 
         FS.FolderPath DumpRoot()
             => Root + FS.folder(dumps);
@@ -31,7 +36,7 @@ namespace Z0
             => Root + FS.folder(part);
 
         FS.FolderPath AsmSourceRoot()
-            => Root + FS.folder(capture) + FS.folder("asm");
+            => Root + FS.folder(capture) + FS.folder(asm);
 
         FS.FolderPath AsmSourceDir(PartId part)
             => AsmSourceRoot() + FS.folder(part);
@@ -40,7 +45,7 @@ namespace Z0
             => Root + FS.folder(capture);
 
         FS.FolderPath ExtractRoot()
-            => CaptureRoot() + FS.folder("extracts");
+            => CaptureRoot() + FS.folder(extracts);
 
         FS.FilePath RawExtractPath(ApiHostUri host)
             => ExtractRoot() + FS.file(host, "extracts.raw", FS.XPack);
@@ -52,7 +57,7 @@ namespace Z0
             =>  AsmSourceDir(host.Part) + FS.file(host, FS.Asm);
 
         FS.FolderPath ContextRoot()
-            => CaptureRoot() + FS.folder("context");
+            => CaptureRoot() + FS.folder(context);
 
         FS.FilePath ApiRebasePath(Timestamp ts)
             => ContextRoot() + FS.file(string.Format("{0}.{1}", TableId.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);

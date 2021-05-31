@@ -10,11 +10,11 @@ namespace Z0
     {
         public void Generate(string[] args)
         {
-            var flow = Wf.Running("Generating");
-            var bitfields = Wf.BitfieldGenerator();
-            var specs = bitfields.LoadSpecs();
+            // var flow = Wf.Running("Generating");
+            // var bitfields = Wf.BitfieldGenerator();
+            // var specs = bitfields.LoadSpecs();
 
-            Wf.Ran(flow);
+            //  Wf.Ran(flow);
         }
     }
 

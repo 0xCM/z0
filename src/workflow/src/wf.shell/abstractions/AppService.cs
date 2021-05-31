@@ -77,6 +77,9 @@ namespace Z0
             Wf = wf;
         }
 
+        protected void RedirectEmissions(string name, FS.FolderPath dst)
+            => Wf.RedirectEmissions(WfEmissionLog.create(name,dst));
+
         FS.FileName NameShowLog(string src, FS.FileExt ext)
             => FS.file(root.controller().Id().PartName() + "." + HostName + "." + src, ext);
 

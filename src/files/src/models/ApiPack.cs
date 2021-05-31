@@ -11,24 +11,24 @@ namespace Z0
 
     public readonly struct ApiPack : IApiPack
     {
-        public FS.FolderPath Root {get;}
+        public ApiPackSettings Settings {get;}
 
-        readonly Env _Env;
+        FS.FolderPath Root
+            => Settings.ExtractRoot;
 
         [MethodImpl(Inline)]
-        public ApiPack(FS.FolderPath root)
+        public ApiPack(ApiPackSettings settings)
         {
-            Root = root;
-            _Env = Env.load();
+            Settings = settings;
         }
-
-        public Env Env
-            => _Env;
 
         public Timestamp Timestamp
             => ParseTimestamp().Data;
 
-        public Outcome<Timestamp> ParseTimestamp()
+        public bool IsTimestamped
+            => ParseTimestamp().Ok;
+
+        Outcome<Timestamp> ParseTimestamp()
         {
             if(Root.IsEmpty)
                 return default;

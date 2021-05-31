@@ -34,7 +34,7 @@ namespace Z0
 
         Index<ApiHostDataset> CollectedDatasets;
 
-        ApiExtractPaths Paths;
+        ApiPackArchive Paths;
 
         byte[] Buffer;
 
@@ -44,22 +44,17 @@ namespace Z0
 
         ApiCatalogs Catalogs;
 
-        ApiExtractSettings Options;
-
         Index<IPart> SelectedParts;
 
         Index<ResolvedPart> ResolvedParts;
 
         Index<AsmRoutine> Routines;
 
-        IApiPack Pack;
-
         public ApiExtractor()
         {
             Identity = MultiDiviner.Service;
             Buffer = ApiExtracts.buffer();
             Exclusions = root.hashset(core.array("ToString","GetHashCode", "Equals", "ToString"));
-            Options = ApiExtractSettings.Default();
             Routines = sys.empty<AsmRoutine>();
             ResolvedParts = sys.empty<ResolvedPart>();
         }
@@ -74,7 +69,6 @@ namespace Z0
             Receivers = new ApiExtractChannel();
             DatasetReceiver = new();
             Catalogs = Wf.ApiCatalogs();
-            Paths = new ApiExtractPaths(Db.AppLogRoot());
             SelectedParts = Wf.ApiCatalog.Parts;
         }
 
@@ -84,16 +78,19 @@ namespace Z0
             Routines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
         }
 
-        void EmitProcessContext()
+        void EmitProcessContext(IApiPack pack)
         {
             var flow = Wf.Running("Emitting process context");
-            var ts = Pack.Timestamp;
-            var dir = Pack.ContextRoot();
+            var ts = pack.Timestamp;
+            if(!ts.IsNonZero)
+                ts = now();
+
+            var dir = pack.ContextRoot();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();
             var procparts = pipe.EmitPartitions(process, ts, dir);
             var regions = pipe.EmitRegions(process, ts, dir);
-            pipe.EmitDump(process, Pack.DumpPath(process, ts));
+            pipe.EmitDump(process, pack.DumpPath(process, ts));
             var members = ApiMembers.create(CollectedDatasets.SelectMany(x => x.Members));
             var rebasing = Wf.Running();
             var entries = Catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
@@ -132,7 +129,7 @@ namespace Z0
         }
 
 
-        void RunWorkflow()
+        void RunWorkflow(IApiPack pack)
         {
             Paths.ExtractRoot().Clear();
             Paths.AsmSourceRoot().Clear(true);
@@ -142,10 +139,10 @@ namespace Z0
 
             SealCollected();
 
-            if(Options.EmitContext)
-                EmitProcessContext();
+            if(pack.Settings.EmitContext)
+                EmitProcessContext(pack);
 
-            if(Options.Analyze)
+            if(pack.Settings.Analyze)
                 Analyze();
         }
 
@@ -182,15 +179,6 @@ namespace Z0
             Wf.SegmentTraverser().Traverse(segments, BinDir);
         }
 
-        internal ApiCollection Run(ApiExtractChannel receivers, FS.FolderPath? dst = null)
-        {
-            Receivers = receivers;
-            if(dst != null)
-                Paths = new ApiExtractPaths(dst.Value);
-            RunWorkflow();
-            return CollectAll();
-        }
-
         ApiCollection CollectAll()
         {
             var collection = new ApiCollection();
@@ -199,12 +187,12 @@ namespace Z0
 
         }
 
-        internal ApiCollection Run(ApiExtractChannel receivers, IApiPack dst)
+        internal ApiCollection Run(ApiExtractChannel receivers, IApiPack pack)
         {
-            Pack = dst;
             Receivers = receivers;
-            Paths = new ApiExtractPaths(dst.Root);
-            RunWorkflow();
+            Paths = ApiPackArchive.create(pack.Root);
+            RedirectEmissions("extractor", pack.Root);
+            RunWorkflow(pack);
             return CollectAll();
         }
 

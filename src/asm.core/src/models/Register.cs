@@ -108,7 +108,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator @enum<RegKind,uint>(Register src)
-            => @enum.e32u(src.Kind);
+            => emath.e32u(src.Kind);
 
         [MethodImpl(Inline)]
         public static implicit operator Register(@enum<RegKind,uint> src)

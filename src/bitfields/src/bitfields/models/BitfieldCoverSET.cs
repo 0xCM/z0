@@ -22,125 +22,67 @@ namespace Z0
         where E : unmanaged
         where T : unmanaged
     {
-        /// <summary>
-        /// The bitfield definition upon which the reader is predicated
-        /// </summary>
-        readonly BitfieldParts Spec;
+        //readonly BitfieldSectionSpecs Spec;
 
-        readonly ReadOnlySpan<BitfieldPart> Segments;
+        // readonly ReadOnlySpan<BitfieldSectionSpec> Segments;
 
-        [MethodImpl(Inline)]
-        public BitfieldCover(in BitfieldParts spec, T state)
-        {
-            Spec = spec;
-            Segments = spec.Segments;
-        }
+        // [MethodImpl(Inline)]
+        // public BitfieldCover(in BitfieldSectionSpecs spec, T state)
+        // {
+        //     Spec = spec;
+        //     Segments = spec.Segments;
+        // }
 
-        /// <summary>
-        /// Fetches an index-identified segment
-        /// </summary>
-        /// <param name="index">The segment index</param>
-        [MethodImpl(Inline)]
-        public ref readonly BitfieldPart Segment(E index)
-            => ref skip(Segments, @as<E,uint>(index));
+        // [MethodImpl(Inline)]
+        // public ref readonly BitfieldSectionSpec Segment(E index)
+        //     => ref skip(Segments, @as<E,uint>(index));
 
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source value per the segment specification
-        /// </summary>
-        /// <param name="part">The segment spec</param>
-        /// <param name="src">The value from which the segment will be extracted</param>
-        [MethodImpl(Inline)]
-        public T Read(in BitfieldPart part, in S src)
-            => api.read<S,T>(part, src);
+        // [MethodImpl(Inline)]
+        // public T Read(in BitfieldSectionSpec part, in S src)
+        //     => api.read<S,T>(part, src);
 
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source value per the segment specification
-        /// </summary>
-        /// <param name="index">The segment index</param>
-        /// <param name="src">The value from which the segment will be extracted</param>
-        [MethodImpl(Inline)]
-        public T Read(E index, in S src)
-            => api.read<S,T>(Segment(index), src);
+        // [MethodImpl(Inline)]
+        // public T Read(E index, in S src)
+        //     => api.read<S,T>(Segment(index), src);
 
-        /// <summary>
-        /// Extracts all segments from the source value and deposits the result in a caller-suppled span
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public void Read(in S src, Span<T> dst)
-            => api.store<S,T>(Spec, src, dst);
+        // [MethodImpl(Inline)]
+        // public void Read(in S src, Span<T> dst)
+        //     => api.store<S,T>(Spec, src, dst);
 
-        /// <summary>
-        /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The offset amount</param>
-        [MethodImpl(Inline)]
-        public T Read(in BitfieldPart segment, in S src, bool offset)
-            => api.read<S,T>(segment, src, offset);
+        // [MethodImpl(Inline)]
+        // public T Read(in BitfieldSectionSpec segment, in S src, bool offset)
+        //     => api.read<S,T>(segment, src, offset);
 
-        /// <summary>
-        /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
-        /// </summary>
-        /// <param name="index">The segment index</param>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The offset amount</param>
-        [MethodImpl(Inline)]
-        public T Read(E index, in S src, bool offset)
-            => api.read<S,T>(Segment(index), src, offset);
+        // [MethodImpl(Inline)]
+        // public T Read(E index, in S src, bool offset)
+        //     => api.read<S,T>(Segment(index), src, offset);
 
-        /// <summary>
-        /// Overwrites an identified target segment with the bits from the corresponding source segment
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target value</param>
-        [MethodImpl(Inline)]
-        public ref T Store(in BitfieldPart segment, in S src, ref T dst)
-        {
-            api.store<S,T>(segment, src, ref dst);
-            return ref dst;
-        }
+        // [MethodImpl(Inline)]
+        // public ref T Store(in BitfieldSectionSpec segment, in S src, ref T dst)
+        // {
+        //     api.store<S,T>(segment, src, ref dst);
+        //     return ref dst;
+        // }
 
-        /// <summary>
-        /// Overwrites an identified target segment with the bits from the corresponding source segment
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target value</param>
-        [MethodImpl(Inline)]
-        public ref S Store(in BitfieldPart segment, in S src, ref S dst)
-        {
-            api.store<S,T>(segment, src, ref dst);
-            return ref dst;
-        }
+        // [MethodImpl(Inline)]
+        // public ref S Store(in BitfieldSectionSpec segment, in S src, ref S dst)
+        // {
+        //     api.store<S,T>(segment, src, ref dst);
+        //     return ref dst;
+        // }
 
-        /// <summary>
-        /// Overwrites an identified target segment with the bits from the corresponding source segment
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target value</param>
-        [MethodImpl(Inline)]
-        public ref S Store(E index, in S src, ref S dst)
-        {
-            api.store<S,T>(Segment(index), src, ref dst);
-            return ref dst;
-        }
+        // [MethodImpl(Inline)]
+        // public ref S Store(E index, in S src, ref S dst)
+        // {
+        //     api.store<S,T>(Segment(index), src, ref dst);
+        //     return ref dst;
+        // }
 
-        /// <summary>
-        /// Overwrites an index-identified target segment with the bits from the corresponding source segment
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target value</param>
-        [MethodImpl(Inline)]
-        public ref T Store(E index, in S src, ref T dst)
-        {
-            api.store<S,T>(Segment(index), src, ref dst);
-            return ref dst;
-        }
+        // [MethodImpl(Inline)]
+        // public ref T Store(E index, in S src, ref T dst)
+        // {
+        //     api.store<S,T>(Segment(index), src, ref dst);
+        //     return ref dst;
+        // }
     }
 }

@@ -50,21 +50,6 @@ namespace Z0
 
         }
 
-        public ApiCollection Run()
-        {
-            var dst = Db.AppLogDir() + FS.folder("extract-wf");
-            return Run(dst);
-        }
-
-        public ApiCollection Run(FS.FolderPath root)
-        {
-            var flow = Wf.Running();
-            var collected = Wf.ApiExtractor().Run(EventChannel, root);
-            Wf.Ran(flow, string.Format("Decoded:{0}", MemberDecodedCount));
-            return collected;
-
-        }
-
         public ApiCollection Run(IApiPack dst)
         {
             var flow = Wf.Running();

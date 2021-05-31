@@ -11,25 +11,7 @@ namespace Z0
 
     partial struct BitfieldSpecs
     {
-        [Op]
-        public static BitFieldModel model(Name name, ReadOnlySpan<string> names, ReadOnlySpan<byte> widths)
-        {
-            var count = (uint)names.Length;
-            var fieldWidths = span(widths);
-            var posbuffer = alloc<uint>(count);
-            var positions = span(posbuffer);
-            var sBuffer = alloc<BitfieldPart>(count);
-            var segments = span(sBuffer);
-            uint totalWidth = 0;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var w = ref skip(widths,i);
-                ref readonly var segname = ref skip(names,i);
-                seek(positions,i) = totalWidth;
-                seek(segments,i) = part(segname, (byte)totalWidth, (byte)(totalWidth + w));
-                totalWidth += skip(fieldWidths, i);
-            }
-            return new BitFieldModel(name, count, totalWidth, sBuffer);
-        }
+        public static BitfieldModel model(StringAddress name, Index<BitfieldSectionSpec> sections)
+            => new BitfieldModel(name,sections);
     }
 }

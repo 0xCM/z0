@@ -94,9 +94,7 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             var config = new EngineSettings();
-            //config.Affinity = Bits.enable(a, 0,(byte)Env.CpuCount);
             config.Affinity = BitMasks.lo<ulong>((byte)(Env.CpuCount - 1));
-            //config.Affinity = Bits.enable(0ul, 0,(byte)Env.CpuCount);
             Configure(config);
         }
 

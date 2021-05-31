@@ -11,34 +11,6 @@ namespace Z0
 
     partial struct BitFields
     {
-        public static string format<T>(in BitfieldCover<T> src)
-            where T : unmanaged
-        {
-            var dst = text.buffer();
-            render(src,dst);
-            return dst.Emit();
-        }
-
-        [Op, Closures(UInt64k)]
-        public static void render<T>(in BitfieldCover<T> src, ITextBuffer dst)
-            where T : unmanaged
-        {
-            var count = src.Spec.FieldCount;
-            var last = count - 1;
-            dst.Append(Chars.LBracket);
-
-            for(var i=last; i>=0; i--)
-            {
-                ref readonly var seg = ref src.Segment((byte)i);
-                dst.AppendFormat("{0}:{1}", seg.Name, bit.format(src.Extract((byte)i), seg.Width));
-
-                if(i != 0)
-                    dst.Append(RP.SpacedPipe);
-
-            }
-            dst.Append(Chars.RBracket);
-        }
-
         /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
         /// </summary>
