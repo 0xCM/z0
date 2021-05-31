@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a row of text parttioned into a sequence of cells
@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct TextRow
     {
         public static TextRow parse(string src, char delimiter)
-            => text.nonempty(src) ? src.SplitClean(delimiter).Select(x => new TextBlock(x)) : Empty;
+            => !string.IsNullOrEmpty(src) ? src.SplitClean(delimiter).Select(x => new TextBlock(x)) : Empty;
 
         readonly Index<TextBlock> Data;
 

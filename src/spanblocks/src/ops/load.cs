@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static CellCalcs;
 
     partial struct SpanBlocks
@@ -19,28 +19,28 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static SpanBlock8<byte> load(W8 w, byte src)
-            => new SpanBlock8<byte>(memory.cover(src,1));
+            => new SpanBlock8<byte>(cover(src,1));
 
         /// <summary>
         /// Creates a 16-bit blocked container from 1 16-bit cell
         /// </summary>
         [MethodImpl(Inline), Op]
         public static SpanBlock16<ushort> load(W16 w, ushort src)
-            => new SpanBlock16<ushort>(memory.cover(src,1));
+            => new SpanBlock16<ushort>(cover(src,1));
 
         /// <summary>
         /// Creates a 16-bit blocked container from 1 64-bit cell
         /// </summary>
         [MethodImpl(Inline), Op]
         public static SpanBlock16<ulong> load(W16 n, ulong src)
-            => new SpanBlock16<ulong>(memory.cover(src,1));
+            => new SpanBlock16<ulong>(cover(src,1));
 
         /// <summary>
         /// Creates a 32-bit blocked container from 1 64-bit cell
         /// </summary>
         [MethodImpl(Inline), Op]
         public static SpanBlock32<ulong> load(W32 n, ulong src)
-            => new SpanBlock32<ulong>(memory.cover(src,1));
+            => new SpanBlock32<ulong>(cover(src,1));
 
         /// <summary>
         /// Creates a 32-bit blocked container from 4 8-bit cells

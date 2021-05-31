@@ -24,6 +24,7 @@
     <BitPack>$(Src)bitpack/z0.bitpack.csproj</BitPack>
     <BitFields>$(Src)bitfields/z0.bitfields.csproj</BitFields>
     <BitNumbers>$(Src)bitnumbers/z0.bitnumbers.csproj</BitNumbers>
+    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
 
     <BitVectors>$(Src)bitvectors/z0.bitvectors.csproj</BitVectors>
     <BitGrids>$(Src)bitgrids/z0.bitgrids.csproj</BitGrids>

@@ -42,7 +42,7 @@ namespace Z0
                 var buffer =  Buffers.Run();
                 var steps = buffer.Slice(0, ProcessedCount);
                 var log = Buffers.Log();
-                var count = HexRender.render(steps, log);
+                var count = Hex.render(steps, log);
                 var hex =  text.format(slice(log,0,count));
                 Wf.Status(hex);
             }

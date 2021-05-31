@@ -2,14 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tools
 {
+    using System;
+    using System.Runtime.CompilerServices;
 
+    using static core;
     using static Root;
 
-    [ApiHost]
-    public static partial class XSb
+    partial struct IntelSdm
     {
-        const NumericKind Closure = UnsignedInts;
+        public readonly struct Placeholder
+        {
+            const string Marker = ". . .";
+        }
     }
 }

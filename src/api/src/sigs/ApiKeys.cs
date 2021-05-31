@@ -109,14 +109,14 @@ namespace Z0
         public static ReadOnlySpan<char> render(ApiKeyPart src)
         {
             ushort data = src;
-            return HexRender.render(LowerCase, data);
+            return Hex.render(LowerCase, data);
         }
 
         [MethodImpl(Inline), Op]
         public static void render(ApiKeyPart src, Span<char> dst)
         {
             ushort data = src;
-            HexRender.render(LowerCase, data, 0, dst);
+            Hex.render(LowerCase, data, 0, dst);
         }
 
         [MethodImpl(Inline), Op]

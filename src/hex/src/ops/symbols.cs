@@ -9,10 +9,26 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static HexCharData;
+    //using static HexCharData;
+    using static HexFormatSpecs;
 
     partial struct Hex
     {
+        /// <summary>
+        /// Presents the source value as a sequence of hex symbols
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="case">The case selector</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<HexSym> symbols<C>(C @case, byte src)
+            where C : unmanaged, ILetterCase
+        {
+            if(typeof(C) == typeof(LowerCased))
+                return recover<char,HexSym>(span(src.ToString(LC)));
+            else
+                return recover<char,HexSym>(span(src.ToString(UC)));
+        }
+
         [MethodImpl(Inline)]
         public static void symbols<T,C>(in T src, C @case, Span<HexSym> dst)
             where T : unmanaged

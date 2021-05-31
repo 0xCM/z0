@@ -9,19 +9,23 @@ namespace Z0
 
     using static Root;
 
-    [Datatype]
-    public readonly struct VersionExpr
+    /// <summary>
+    /// Defines a segment of a number-identified line
+    /// </summary>
+    public readonly struct LineSpan
     {
-        public string Value {get;}
+        public uint LineNumber {get;}
+
+        public ushort MinCol {get;}
+
+        public ushort MaxCol {get;}
 
         [MethodImpl(Inline)]
-        public VersionExpr(string src)
+        public LineSpan(uint line, ushort min, ushort max)
         {
-            Value = src;
+            LineNumber = line;
+            MinCol = min;
+            MaxCol = max;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator VersionExpr(string src)
-            => new VersionExpr(src);
     }
 }

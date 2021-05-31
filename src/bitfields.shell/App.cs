@@ -11,7 +11,6 @@ namespace Z0
     using static core;
     using static Typed;
 
-
     class BitFieldsShell : WfApp<BitFieldsShell>
     {
         public static void Main(params string[] args)
