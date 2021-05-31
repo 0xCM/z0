@@ -13,8 +13,7 @@ namespace Z0.Asm
 
     readonly partial struct RegConversionData
     {
-        [FixedAddressValueType]
-        internal static Index<R> IceRegisters = new R[]{
+        internal static ReadOnlySpan<R> IceRegisters => new R[]{
             None,
             AL, // 1,
             CL, // 2,

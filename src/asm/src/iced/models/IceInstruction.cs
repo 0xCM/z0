@@ -12,6 +12,11 @@ namespace Z0.Asm
     public class IceInstruction
     {
         /// <summary>
+        /// The encoded bytes
+        /// </summary>
+        public BinaryCode Decoded {get;set;}
+
+        /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
         /// </summary>
         public AsmFormExpr Specifier {get;set;}

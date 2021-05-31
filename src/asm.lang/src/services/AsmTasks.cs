@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Root;
 
-
     [ApiHost]
     public readonly struct AsmTasks
     {

@@ -16,11 +16,12 @@ namespace Z0.Asm
         [Op]
         public static RegKindConverter create()
         {
-            var pIce = pvoid(RegConversionData.IceRegisters);
+            var pIce = gptr(RegConversionData.IceRegisters);
             var pKind = pvoid(RegConversionData.Kinds);
             return new RegKindConverter(pIce, pKind);
         }
 
+        [MethodImpl(Inline), Op]
         RegKindConverter(void* pIce, void* pKind)
         {
             IceSource = pIce;
@@ -37,7 +38,7 @@ namespace Z0.Asm
             get => @ref<Index<IceRegister>>(IceSource).View;
         }
 
-        public ReadOnlySpan<RegKind> Kinds
+        ReadOnlySpan<RegKind> Kinds
         {
             [MethodImpl(Inline)]
             get => @ref<Index<RegKind>>(KindSource).View;
@@ -50,7 +51,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public IceRegister convert(RegKind src)
             => skip(Ice, (int)src);
-
     }
 
     readonly partial struct RegConversionData

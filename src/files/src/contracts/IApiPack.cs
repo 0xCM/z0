@@ -44,14 +44,14 @@ namespace Z0
         FS.FolderPath CaptureRoot()
             => Root + FS.folder(capture);
 
-        FS.FolderPath ExtractRoot()
+        FS.FolderPath HexPackRoot()
             => CaptureRoot() + FS.folder(extracts);
 
         FS.FilePath RawExtractPath(ApiHostUri host)
-            => ExtractRoot() + FS.file(host, "extracts.raw", FS.XPack);
+            => HexPackRoot() + FS.file(host, "extracts.raw", FS.XPack);
 
         FS.FilePath ParsedExtractPath(ApiHostUri host)
-            => ExtractRoot() + FS.file(host, "extracts.parsed", FS.XPack);
+            => HexPackRoot() + FS.file(host, "extracts.parsed", FS.XPack);
 
         FS.FilePath AsmPath(ApiHostUri host)
             =>  AsmSourceDir(host.Part) + FS.file(host, FS.Asm);

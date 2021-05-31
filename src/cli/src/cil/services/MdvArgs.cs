@@ -1,4 +1,7 @@
-// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
+//-----------------------------------------------------------------------------
+// Copyright   :  Microsoft
+// License     :  Apache
+//-----------------------------------------------------------------------------
 namespace System.Reflection.Metadata
 {
     using System;
@@ -6,7 +9,6 @@ namespace System.Reflection.Metadata
     using System.Collections.Immutable;
     using System.IO;
     using System.Linq;
-    using System.Reflection.Metadata;
 
     public sealed class MdvArgs
     {

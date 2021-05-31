@@ -192,7 +192,7 @@ namespace Z0
             var correlated = (
                 from m in members
                 join t in targets on m.Id equals t.OpId orderby m.Id
-                select root.paired(m, t)).Array();
+                select core.paired(m, t)).Array();
 
             var count = correlated.Length;
             if(count > 0)

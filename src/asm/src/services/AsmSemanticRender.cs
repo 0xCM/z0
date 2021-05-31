@@ -117,16 +117,16 @@ namespace Z0.Asm
         [Op]
         string Format(MemoryAddress @base, IceInstruction src, byte i)
         {
-            var kind = IceExtractors.opkind(src, i);
+            var kind = IceConverters.opkind(src, i);
             var desc = EmptyString;
             if(IceOpTest.isRegister(kind))
-                desc = format(IceExtractors.register(src,i));
+                desc = format(IceConverters.register(src,i));
             else if(IceOpTest.isMem(kind))
-                desc = format(IceExtractors.meminfo(src, i));
+                desc = format(IceConverters.meminfo(src, i));
             else if (IceOpTest.isBranch(kind))
-                desc = AsmRender.format(IceExtractors.branch(@base, src, i));
+                desc = AsmRender.format(IceConverters.branch(@base, src, i));
             else if(IceOpTest.isImm(kind))
-                desc = AsmRender.format(IceExtractors.imminfo(src, i));
+                desc = AsmRender.format(IceConverters.imminfo(src, i));
             else
                 desc = kind.ToString();
 
@@ -151,7 +151,7 @@ namespace Z0.Asm
             var summaries = root.list<string>();
             for(byte i =0; i<opcount; i++)
             {
-                var kind = IceExtractors.opkind(fx, i);
+                var kind = IceConverters.opkind(fx, i);
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(SubColPad);
                 var kindLabel = Render(kind).PadRight(OpKindPad);
                 var col02 = text.concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
@@ -295,7 +295,7 @@ namespace Z0.Asm
 
         [Op]
         static string format(IceMemorySize src)
-            => IceExtractors.identify(src).Format();
+            => IceConverters.identify(src).Format();
 
         static StringBuilder Render(IceMemoryInfo src, StringBuilder builder)
         {

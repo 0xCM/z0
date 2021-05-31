@@ -439,13 +439,6 @@ namespace Z0.Asm
                 dst.Show(src);
         }
 
-        public void ShowRegKinds()
-        {
-            var converter = RegKindConverter.create();
-            using var log = ShowLog("registers", FS.Csv);
-            log.Show("Register");
-            root.iter(converter.Kinds, k => ShowRegKinds(k,log));
-        }
 
         void CheckBitSpans()
         {
@@ -877,22 +870,6 @@ namespace Z0.Asm
             Wf.XedCatalog().EmitFormSummaries(parsed);
         }
 
-        public ApiCodeBlocks LoadApiBlocks()
-        {
-            return Wf.ApiHex().ReadBlocks();
-        }
-
-        void ProcessInstructions()
-        {
-            var blocks = LoadApiBlocks();
-            var clock = Time.counter(true);
-            var traverser = Wf.ApiCodeBlockTraverser();
-            var receiver  = new AsmDetailProducer(Wf,750000);
-            traverser.Traverse(blocks, receiver);
-            var duration = clock.Elapsed().Ms;
-            var productions = receiver.Productions;
-            Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
-        }
 
 
         void FilterApiBlocks()

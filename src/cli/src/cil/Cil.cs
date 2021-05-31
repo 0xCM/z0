@@ -23,25 +23,11 @@ namespace Z0
         public static string format(CliSig src)
             => DefaultMsilFormatProvider.Instance.SigByteArrayToString(src);
 
-        readonly Index<CilOpCode> Data;
-
-        public ReadOnlySpan<CilOpCode> OpCodes
+        public static ReadOnlySpan<CilOpCode> opcodes()
         {
-            [MethodImpl(Inline)]
-            get => Data.View;
+            var buffer = span<CilOpCode>(300);
+            var count = OpCodeLoader.load(ref first(buffer));
+            return slice(buffer,0,count);
         }
-
-        [Op]
-        public static Cil init()
-        {
-            var buffer = sys.alloc<CilOpCode>(300);
-            ref var dst = ref first(span(buffer));
-            OpCodeLoader.load(ref dst);
-            return new Cil(buffer);
-        }
-
-        [MethodImpl(Inline)]
-        Cil(CilOpCode[] src)
-            => Data = src;
     }
 }

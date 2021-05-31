@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    using static memory;
+    using static core;
 
     public sealed class AsmCommands : AppService<AsmCommands>
     {
@@ -52,6 +52,5 @@ namespace Z0.Asm
                     Wf.Error(result.Format());
             }
         }
-
     }
 }

@@ -75,8 +75,14 @@ namespace Z0
             get => Origin.Size;
         }
 
+        [MethodImpl(Inline)]
         public int CompareTo(MemoryBlock src)
             => Origin.Min.CompareTo(src.Origin.Min);
+
+        [MethodImpl(Inline)]
+        public MemoryBlock<T> Keyed<T>(MemoryKey<T> key)
+            where T : IEquatable<T>
+                => new MemoryBlock<T>(this, key);
 
         public static MemoryBlock Empty
         {

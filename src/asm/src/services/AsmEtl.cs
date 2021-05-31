@@ -16,6 +16,25 @@ namespace Z0.Asm
     {
         AsmDecoder Decoder;
 
+        [Op]
+        public static AsmInstructionInfo summarize(MemoryAddress @base, IceInstruction src, CodeBlock encoded, AsmStatementExpr statement, uint offset)
+            => new AsmInstructionInfo(@base, offset,  statement,  src.Specifier, code(encoded, offset, src.InstructionSize));
+
+        [MethodImpl(Inline), Op]
+        public static BinaryCode code(CodeBlock encoded, uint offset, byte size)
+            => slice(encoded.View, offset, size).ToArray();
+
+
+        public static uint size(in ApiBlockAsm src)
+        {
+            var result = 0u;
+            var instructions = src.Instructions;
+            var count = instructions.Length;
+            for(var i=0; i<count; i++)
+                result += (uint)skip(instructions,i).ByteLength;
+            return result;
+        }
+
         protected override void OnInit()
         {
             Decoder = Wf.AsmDecoder();

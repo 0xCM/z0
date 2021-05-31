@@ -12,9 +12,6 @@ namespace Z0
     [ApiHost]
     public readonly struct AsmBitfields
     {
-        [MethodImpl(Inline), Op]
-        public static AsmFieldFormatter formatter(AsmBitfield src)
-            => new AsmFieldFormatter(src);
 
         [MethodImpl(Inline), Op]
         public static AsmBitfield define(ReadOnlySpan<byte> widths)

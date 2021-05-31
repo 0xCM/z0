@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public struct AsmInstructionDetail
     {
@@ -110,16 +110,16 @@ namespace Z0.Asm
         [Op]
         void SpecifyOperand(in ApiCodeBlock block, in IceInstruction src, byte index, ref AsmInstructionDetail dst)
         {
-            var kind = IceExtractors.opkind(src, index);
+            var kind = IceConverters.opkind(src, index);
             var desc = EmptyString;
             if(IceOpTest.isRegister(kind))
-                SpecifyOperand(block, IceExtractors.register(src,index), ref dst);
+                SpecifyOperand(block, IceConverters.register(src,index), ref dst);
             else if(IceOpTest.isMem(kind))
-                SpecifyOperand(block, IceExtractors.meminfo(src, index), ref dst);
+                SpecifyOperand(block, IceConverters.meminfo(src, index), ref dst);
             else if (IceOpTest.isBranch(kind))
-                SpecifyOperand(block, IceExtractors.branch(block.BaseAddress, src, index), ref dst);
+                SpecifyOperand(block, IceConverters.branch(block.BaseAddress, src, index), ref dst);
             else if(IceOpTest.isImm(kind))
-                SpecifyOperand(block, IceExtractors.imminfo(src, index), ref dst);
+                SpecifyOperand(block, IceConverters.imminfo(src, index), ref dst);
             else
                 SpecifyMysteryOperand(block, src,index, ref dst);
         }
@@ -128,6 +128,8 @@ namespace Z0.Asm
         void SpecifyOperand(in ApiCodeBlock block, in IceRegister src, ref AsmInstructionDetail dst)
         {
             dst.Register = RegConverter.convert(src);
+            if(dst.Register.ToString() != src.ToString())
+                Wf.Warn(string.Format("Register conversion failed: {0} != {1}", dst.Register, src));
         }
 
         void SpecifyOperand(in ApiCodeBlock block,  in IceMemoryInfo src, ref AsmInstructionDetail dst)

@@ -43,4 +43,3 @@ namespace Z0.Asm
 		g = 16,
 	}
 }
-

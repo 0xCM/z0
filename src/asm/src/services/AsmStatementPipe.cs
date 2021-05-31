@@ -200,7 +200,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(statements,i);
-                thumbprints.Add(AsmThumbprints.from(statement));
+                thumbprints.Add(asm.thumbprint(statement));
                 var uri = statement.OpUri;
                 if(i == 0)
                 {

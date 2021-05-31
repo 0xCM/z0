@@ -4,10 +4,42 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
+    using static Root;
     using static core;
 
     public class ApiHexPacks : AppService<ApiHexPacks>
     {
+        public Lookup<FS.FilePath,HexPack> LoadParsed(FS.FolderPath root)
+            => Load(root.Files(".parsed", FS.XPack, true));
+
+        public Lookup<FS.FilePath,HexPack> Load(FS.Files src)
+        {
+            var flow = Wf.Running(string.Format("Loading {0} packs", src.Length));
+            var lookup = new Lookup<FS.FilePath,HexPack>();
+            var errors = new Lookup<FS.FilePath,Outcome>();
+            iter(src, path => load(path, lookup, errors), true);
+            var result = lookup.Seal();
+            var count = result.EntryCount;
+            var entries = result.Entries;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var entry = ref skip(entries,i);
+                var path = entry.Key;
+                var blocks = entry.Value.Blocks;
+                var blockCount = (uint)blocks.Length;
+                var host = path.FileName.Format().Remove(".extracts.parsed.xpack").Replace(".","/");
+                Wf.Babble(string.Format("Loaded {0} blocks from {1}", blockCount, path.FileName));
+                counter += blockCount;
+            }
+
+            Wf.Ran(flow, string.Format("Loaded {0} total blocks", counter));
+
+            return result;
+        }
+
         [Op]
         public Index<HexPacked> Pack(Index<ApiCodeBlock> src, bool validate = false)
         {
@@ -73,6 +105,15 @@ namespace Z0
             var total = HexPacks.emit(HexPacks.pack(src), writer);
             Wf.EmittedFile(flow, (uint)total);
             return total;
+        }
+
+        static void load(FS.FilePath src, Lookup<FS.FilePath,HexPack> success, Lookup<FS.FilePath,Outcome> fail)
+        {
+            var pack = HexPacks.load(src);
+            if(pack.Fail)
+                fail.Add(src, pack);
+            else
+                success.Add(src, pack.Data);
         }
     }
 }

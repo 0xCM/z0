@@ -95,7 +95,7 @@ namespace Z0.Asm
             => AsmCore.form(src.OpCode, sig(src));
 
         static AsmThumbprint thumbprint(in ApiInstruction src)
-            => AsmThumbprints.define(src.Statment, form(src), AsmBytes.hexcode(src.EncodedData));
+            => asm.thumbprint(src.Statment, form(src), AsmBytes.hexcode(src.EncodedData));
 
         static string format(MemoryAddress @base, CodeBlock code)
             => string.Format("{0}[{1}] => {2}", @base.Format(), code.Length, code.Format());

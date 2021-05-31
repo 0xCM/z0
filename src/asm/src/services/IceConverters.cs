@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using Iced = Iced.Intel;
     using NI = NumericIndicator;
@@ -18,13 +18,13 @@ namespace Z0.Asm
     using FIX = CellWidth;
 
     [ApiHost]
-    public readonly partial struct IceExtractors
+    public readonly partial struct IceConverters
     {
         public static IceUsedMemory[] UsedMemory(Iced.InstructionInfo src)
-            => src.GetUsedMemory().Map(x => Deicer.Thaw(x));
+            => src.GetUsedMemory().Map(x => Thaw(x));
 
         public static IceUsedRegister[] UsedRegisters(Iced.InstructionInfo src)
-            => src.GetUsedRegisters().Map(x => Deicer.Thaw(x));
+            => src.GetUsedRegisters().Map(x => Thaw(x));
 
         [MethodImpl(Inline)]
         public static Func<IceOpAccess[]> OpAccessDefer(Iced.InstructionInfo src)
@@ -41,40 +41,41 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static IceOpAccess[] access(Iced.InstructionInfo src)
-            => root.array(
-                    Deicer.Thaw(src.Op0Access),
-                    Deicer.Thaw(src.Op0Access),
-                    Deicer.Thaw(src.Op2Access),
-                    Deicer.Thaw(src.Op3Access),
-                    Deicer.Thaw(src.Op4Access)).Where(x => x != 0);
+            => core.array(
+                    Thaw(src.Op0Access),
+                    Thaw(src.Op0Access),
+                    Thaw(src.Op2Access),
+                    Thaw(src.Op3Access),
+                    Thaw(src.Op4Access)).Where(x => x != 0);
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
         [Op]
-        public static IceInstruction extract(Iced.Instruction src, string formatted, BinaryCode encoded)
+        public static IceInstruction extract(Iced.Instruction src, string formatted, BinaryCode decoded)
         {
             var info = src.GetInfo();
-            root.require(src.ByteLength == encoded.Length, () => $"The instruction byte length {src.ByteLength} does not match the encoded length {encoded.Length}");
+            root.require(src.ByteLength == decoded.Length, () => $"The instruction byte length {src.ByteLength} does not match the encoded length {decoded.Length}");
             return new IceInstruction
             {
+                Decoded = decoded,
                 UsedMemory = UsedMemory(info),
                 UsedRegisters = UsedRegisters(info),
                 Access = OpAccessDefer(info),
                 Specifier = form(src),
                 ByteLength = src.ByteLength,
-                ConditionCode = Deicer.Thaw(src.ConditionCode),
-                CodeSize = Deicer.Thaw(src.CodeSize),
+                ConditionCode = Thaw(src.ConditionCode),
+                CodeSize = Thaw(src.CodeSize),
                 FormattedInstruction = formatted,
-                Code = Deicer.Thaw(src.Code),
-                CpuidFeatures = src.CpuidFeatures.Map(x => Deicer.Thaw(x)),
+                Code = Thaw(src.Code),
+                CpuidFeatures = src.CpuidFeatures.Map(x => Thaw(x)),
                 DeclareDataCount = src.DeclareDataCount,
-                Encoding = Deicer.Thaw(src.Encoding),
+                Encoding = Thaw(src.Encoding),
                 FarBranch16 = src.FarBranch16,
                 FarBranch32 = src.FarBranch32,
                 FarBranchSelector = src.FarBranchSelector,
-                FlowControl = Deicer.Thaw(src.FlowControl),
+                FlowControl = Thaw(src.FlowControl),
                 IP = src.IP,
                 IP16 = src.IP16,
                 IP32 = src.IP32,
@@ -117,16 +118,16 @@ namespace Z0.Asm
                 HasRepnePrefix = src.HasRepnePrefix,
                 HasXacquirePrefix = src.HasXacquirePrefix,
                 HasXreleasePrefix = src.HasXreleasePrefix,
-                MemorySize = Deicer.Thaw(src.MemorySize),
-                MemoryIndex = Deicer.Thaw(src.MemoryIndex),
+                MemorySize = Thaw(src.MemorySize),
+                MemoryIndex = Thaw(src.MemoryIndex),
                 MemoryIndexScale = src.MemoryIndexScale,
                 MemoryDisplacement = src.MemoryDisplacement,
                 MemoryAddress64 = src.MemoryAddress64,
                 MemoryDisplSize = src.MemoryDisplSize,
-                MemorySegment = Deicer.Thaw(src.MemorySegment),
-                MemoryBase =  Deicer.Thaw(src.MemoryBase),
+                MemorySegment = Thaw(src.MemorySegment),
+                MemoryBase =  Thaw(src.MemoryBase),
                 MergingMasking = src.MergingMasking,
-                Mnemonic = Deicer.Thaw(src.Mnemonic),
+                Mnemonic = Thaw(src.Mnemonic),
                 NearBranch16 = src.NearBranch16,
                 NearBranch32 = src.NearBranch32,
                 NearBranch64 = src.NearBranch64,
@@ -136,25 +137,25 @@ namespace Z0.Asm
                 NextIP32 = src.NextIP32,
                 OpCode = extract(src.OpCode),
                 OpCount = src.OpCount,
-                OpMask = Deicer.Thaw(src.OpMask),
-                Op0Kind = Deicer.Thaw(src.Op0Kind),
-                Op1Kind = Deicer.Thaw(src.Op1Kind),
-                Op2Kind = Deicer.Thaw(src.Op2Kind),
-                Op3Kind = Deicer.Thaw(src.Op3Kind),
-                Op4Kind = Deicer.Thaw(src.Op4Kind),
-                Op0Register = Deicer.Thaw(src.Op0Register),
-                Op1Register = Deicer.Thaw(src.Op1Register),
-                Op2Register = Deicer.Thaw(src.Op2Register),
-                Op3Register = Deicer.Thaw(src.Op3Register),
-                Op4Register = Deicer.Thaw(src.Op4Register),
-                RflagsRead = Deicer.Thaw(src.RflagsRead),
-                RflagsWritten = Deicer.Thaw(src.RflagsWritten),
-                RflagsCleared = Deicer.Thaw(src.RflagsCleared),
-                RflagsSet = Deicer.Thaw(src.RflagsSet),
-                RflagsUndefined = Deicer.Thaw(src.RflagsUndefined),
-                RflagsModified = Deicer.Thaw(src.RflagsModified),
-                RoundingControl = Deicer.Thaw(src.RoundingControl),
-                SegmentPrefix = Deicer.Thaw(src.SegmentPrefix),
+                OpMask = Thaw(src.OpMask),
+                Op0Kind = Thaw(src.Op0Kind),
+                Op1Kind = Thaw(src.Op1Kind),
+                Op2Kind = Thaw(src.Op2Kind),
+                Op3Kind = Thaw(src.Op3Kind),
+                Op4Kind = Thaw(src.Op4Kind),
+                Op0Register = Thaw(src.Op0Register),
+                Op1Register = Thaw(src.Op1Register),
+                Op2Register = Thaw(src.Op2Register),
+                Op3Register = Thaw(src.Op3Register),
+                Op4Register = Thaw(src.Op4Register),
+                RflagsRead = Thaw(src.RflagsRead),
+                RflagsWritten = Thaw(src.RflagsWritten),
+                RflagsCleared = Thaw(src.RflagsCleared),
+                RflagsSet = Thaw(src.RflagsSet),
+                RflagsUndefined = Thaw(src.RflagsUndefined),
+                RflagsModified = Thaw(src.RflagsModified),
+                RoundingControl = Thaw(src.RoundingControl),
+                SegmentPrefix = Thaw(src.SegmentPrefix),
                 SuppressAllExceptions = src.SuppressAllExceptions,
                 StackPointerIncrement = src.StackPointerIncrement,
                 ZeroingMasking = src.ZeroingMasking,
@@ -224,8 +225,8 @@ namespace Z0.Asm
                 CanUseRepPrefix = src.CanUseRepPrefix,
                 CanUseRepnePrefix = src.CanUseRepnePrefix,
                 CanUseRoundingControl = src.CanUseRoundingControl,
-                Code = Deicer.Thaw(src.Code),
-                Encoding = Deicer.Thaw(src.Encoding),
+                Code = Thaw(src.Code),
+                Encoding = Thaw(src.Encoding),
                 Fwait = src.Fwait,
                 IsInstruction = src.IsInstruction,
                 IsGroup = src.IsGroup,
@@ -234,7 +235,7 @@ namespace Z0.Asm
                 IsWIG32 = src.IsWIG32,
                 GroupIndex = src.GroupIndex,
                 L = src.L,
-                MandatoryPrefix = Deicer.Thaw(src.MandatoryPrefix),
+                MandatoryPrefix = Thaw(src.MandatoryPrefix),
                 Mode16 = src.Mode16,
                 Mode32 = src.Mode32,
                 Mode64 = src.Mode64,
@@ -243,17 +244,176 @@ namespace Z0.Asm
                 OpCount = src.OpCount,
                 OpCodeString = AsmOpCodes.conform(src.ToOpCodeString()).Format(),
                 InstructionString = src.ToInstructionString(),
-                Op0Kind = Deicer.Thaw(src.Op0Kind),
-                Op1Kind = Deicer.Thaw(src.Op1Kind),
-                Op2Kind = Deicer.Thaw(src.Op2Kind),
-                Op3Kind = Deicer.Thaw(src.Op3Kind),
-                Op4Kind = Deicer.Thaw(src.Op4Kind),
+                Op0Kind = Thaw(src.Op0Kind),
+                Op1Kind = Thaw(src.Op1Kind),
+                Op2Kind = Thaw(src.Op2Kind),
+                Op3Kind = Thaw(src.Op3Kind),
+                Op4Kind = Thaw(src.Op4Kind),
                 RequireNonZeroOpMaskRegister = src.RequireNonZeroOpMaskRegister,
-                Table = Deicer.Thaw(src.Table),
-                TupleType = Deicer.Thaw(src.TupleType),
+                Table = Thaw(src.Table),
+                TupleType = Thaw(src.TupleType),
                 W = src.W,
             };
 
-        static IceConverters Deicer => IceConverters.Service;
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceUsedMemory Thaw(Iced.UsedMemory src)
+            => new IceUsedMemory(
+                Access : Thaw(src.Access),
+                Base  : Thaw(src.Base),
+                Displacement : src.Displacement,
+                Index : Thaw(src.Index),
+                MemorySize : Thaw(src.MemorySize),
+                Scale : src.Scale,
+                Segment : Thaw(src.Segment),
+                Formatted : src.ToString()
+            );
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceUsedRegister Thaw(Iced.UsedRegister src)
+            => new IceUsedRegister(Thaw(src.Register), Thaw(src.Access));
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceOpAccess Thaw(Iced.OpAccess src)
+            => (IceOpAccess)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceOpCodeId Thaw(Iced.Code src)
+            => Enums.parse(src.ToString(), IceOpCodeId.INVALID);
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceCodeSize Thaw(Iced.CodeSize src)
+            => (IceCodeSize)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceConditionCode Thaw(Iced.ConditionCode src)
+            => (IceConditionCode)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceCpuidFeature Thaw(Iced.CpuidFeature src)
+            => (IceCpuidFeature)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceEncodingKind Thaw(Iced.EncodingKind src)
+            => (IceEncodingKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceFlowControl Thaw(Iced.FlowControl src)
+            => (IceFlowControl)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceMandatoryPrefix Thaw(Iced.MandatoryPrefix src)
+            => (IceMandatoryPrefix)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceMemorySize Thaw(Iced.MemorySize src)
+            => (IceMemorySize)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceMnemonic Thaw(Iced.Mnemonic src)
+            => (IceMnemonic)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceOpCodeOperandKind Thaw(Iced.OpCodeOperandKind src)
+            => (IceOpCodeOperandKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceOpCodeTableKind Thaw(Iced.OpCodeTableKind src)
+            => (IceOpCodeTableKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceOpKind Thaw(Iced.OpKind src)
+            => (IceOpKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceRegister Thaw(Iced.Register src)
+            => (IceRegister)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceRflagsBits Thaw(Iced.RflagsBits src)
+            => (IceRflagsBits)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceRoundingControl Thaw(Iced.RoundingControl src)
+            => (IceRoundingControl)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline), Op]
+        static IceTupleType Thaw(Iced.TupleType src)
+            => (IceTupleType)src;
     }
 }

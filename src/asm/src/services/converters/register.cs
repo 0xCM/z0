@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct IceExtractors
+    partial struct IceConverters
     {
         /// <summary>
         /// Extracts register information, should it exist, from an index-identified register operand

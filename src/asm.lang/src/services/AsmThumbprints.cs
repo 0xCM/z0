@@ -13,12 +13,6 @@ namespace Z0.Asm
 
     public sealed class AsmThumbprints : AppService<AsmThumbprints>
     {
-        public static AsmThumbprint from(AsmApiStatement src)
-            => AsmThumbprints.define(src.Expression, src.Sig, src.OpCode, src.Encoded);
-
-        FS.FilePath DefaultPath()
-            => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Asm);
-
         public Index<AsmThumbprint> LoadThumbprints()
             => LoadThumbprints(DefaultPath());
 
@@ -73,21 +67,12 @@ namespace Z0.Asm
         public void EmitThumbprints(Index<AsmApiStatement> src)
         {
             var distinct = root.hashset<AsmThumbprint>();
-            root.iter(src, s => distinct.Add(AsmThumbprints.from(s)));
+            root.iter(src, s => distinct.Add(asm.thumbprint(s)));
             Wf.Status(Msg.CollectedThumbprints.Format(distinct.Count, src.Count));
             EmitThumbprints(distinct.ToArray());
         }
 
-        [MethodImpl(Inline),Op]
-        public static AsmThumbprint from(in AsmApiStatement src)
-            => define(src.Expression, src.Sig, src.OpCode, src.Encoded);
-
-        [MethodImpl(Inline),Op]
-        public static AsmThumbprint define(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
-            => new AsmThumbprint(statement, sig, opcode, encoded);
-
-        [MethodImpl(Inline),Op]
-        public static AsmThumbprint define(AsmStatementExpr statement, AsmFormExpr form, AsmHexCode encoded)
-            => new AsmThumbprint(statement, form.Sig, form.OpCode, encoded);
+        FS.FilePath DefaultPath()
+            => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Asm);
     }
 }

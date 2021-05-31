@@ -12,21 +12,21 @@ namespace Z0.Asm
 		/// <summary>
 		/// Unknown size
 		/// </summary>
-		Unknown				= 0,
+		Unknown	= 0,
 
 		/// <summary>
 		/// 16-bit code
 		/// </summary>
-		Code16				= 1,
+		Code16 = 1,
 
 		/// <summary>
 		/// 32-bit code
 		/// </summary>
-		Code32				= 2,
+		Code32 = 2,
 
 		/// <summary>
 		/// 64-bit code
 		/// </summary>
-		Code64				= 3,
+		Code64 = 3,
 	}
 }

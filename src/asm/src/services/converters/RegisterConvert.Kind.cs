@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static RegKind;
 
-    using R = Asm.RegKind;
-
     partial struct RegConversionData
     {
         [FixedAddressValueType]

@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Asm.IceOpKind;
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly struct IceOpTest

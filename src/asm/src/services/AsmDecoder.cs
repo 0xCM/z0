@@ -5,12 +5,15 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
 
-    using api = AsmDecoderApi;
     using Iced = Iced.Intel;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     public class AsmDecoder : AppService<AsmDecoder>
     {
@@ -28,7 +31,7 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            IceFormatter = api.iformatter(AsmFormat);
+            IceFormatter = formatter(AsmFormat);
         }
 
         public Outcome Decode(in CodeBlock src, out IceInstructions dst)
@@ -36,7 +39,7 @@ namespace Z0.Asm
             try
             {
                 var decoded = new Iced.InstructionList();
-                var decoder = api.decoder(src, src.BaseAddress, out var reader);
+                var decoder = idecoder(src, src.BaseAddress, out var reader);
                 var @base = src.BaseAddress;
                 var buffer = list<Asm.IceInstruction>();
                 var pos = 0u;
@@ -46,7 +49,7 @@ namespace Z0.Asm
                     decoder.Decode(out iced);
                     var size = (uint)iced.ByteLength;
                     var encoded = slice(src.View, pos, size).ToArray();
-                    var instruction = IceExtractors.extract(iced, IceFormatter.FormatInstruction(iced, @base), encoded);
+                    var instruction = extract(iced, IceFormatter.FormatInstruction(iced, @base), encoded);
                     buffer.Add(instruction);
                     pos += size;
 
@@ -60,6 +63,7 @@ namespace Z0.Asm
                 return e;
             }
         }
+
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
         {
             var outcome = Decode(src, out var routine);
@@ -162,35 +166,6 @@ namespace Z0.Asm
             return dst;
         }
 
-        // public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath dst)
-        // {
-        //     var count = src.Length;
-        //     var buffer = span<AsmRoutineCode>(count);
-        //     using var writer = dst.Writer();
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var captured = ref skip(src,i);
-        //         if(Decode(captured, out var routine))
-        //         {
-        //             var asm = Formatter.Format(routine).Content;
-        //             seek(buffer,i) = new AsmRoutineCode(routine,captured, asm);
-        //             writer.Write(asm);
-        //         }
-        //     }
-        //     return buffer;
-        // }
-
-        // public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
-        // {
-        //     var count = src.Length;
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var captured = ref skip(src,i);
-        //         if(Decode(captured, out var routine))
-        //             seek(dst,i) = new AsmRoutineCode(routine, captured, Formatter.Format(routine).Content);
-        //     }
-        // }
-
         public AsmHostRoutines Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
             try
@@ -229,26 +204,11 @@ namespace Z0.Asm
             if(outcome)
             {
                 var asm = new ApiBlockAsm(src.CodeBlock, instructions.InstructionStorage, src.TermCode);
-                dst = api.routine(src.OpUri, src.Method.Artifact().DisplaySig, asm);
+                dst = routine(src.OpUri, src.Method.Artifact().DisplaySig, asm);
                 return true;
             }
             return outcome;
         }
-
-        // public Outcome Decode(in CodeBlock src, out IceInstructionList dst)
-        // {
-        //     var outcome = Decode(OpUri.Empty, src.Code, src.BaseAddress, out var block);
-        //     if(outcome)
-        //     {
-        //         dst = api.icelist(block,src);
-        //         return true;
-        //     }
-        //     else
-        //     {
-        //         dst = IceInstructionList.Empty;
-        //         return outcome;
-        //     }
-        // }
 
         public Outcome Decode(in ApiCodeBlock src, out AsmInstructionBlock dst)
             => Decode(src.OpUri, src.Encoded, src.BaseAddress, out dst);
@@ -256,7 +216,7 @@ namespace Z0.Asm
         public Index<IceInstruction> Decode(BinaryCode code, MemoryAddress @base)
         {
             var decoded = new Iced.InstructionList();
-            var decoder = api.decoder(code, @base, out var reader);
+            var decoder = idecoder(code, @base, out var reader);
             while (reader.CanReadByte)
             {
                 ref var instruction = ref decoded.AllocUninitializedElement();
@@ -273,14 +233,11 @@ namespace Z0.Asm
                 ref readonly var instruction = ref decoded[i];
                 var size = (uint)instruction.ByteLength;
                 var encoded = slice(code.View, position, size).ToArray();
-                seek(dst, i) = IceExtractors.extract(instruction, skip(formatted,i), encoded);
+                seek(dst, i) = extract(instruction, skip(formatted,i), encoded);
                 position += size;
             }
             return buffer;
         }
-
-        public Outcome Decode(ApiCodeBlock src, Action<IceInstruction> f, out IceInstructionList dst)
-            => Decode(src.OpUri, new CodeBlock(src.BaseAddress, src.Data), f, out dst);
 
         public Outcome Decode(in ApiMemberCode src, out AsmRoutine dst)
         {
@@ -290,6 +247,9 @@ namespace Z0.Asm
                 dst = AsmEtl.routine(src, block);
             return outcome;
         }
+
+        Outcome Decode(ApiCodeBlock src, Action<IceInstruction> f, out IceInstructionList dst)
+            => Decode(src.OpUri, new CodeBlock(src.BaseAddress, src.Data), f, out dst);
 
         Outcome Decode(OpUri uri, BinaryCode code, MemoryAddress @base, out AsmInstructionBlock dst)
         {
@@ -313,7 +273,7 @@ namespace Z0.Asm
                 var decoder = Iced.Decoder.Create(IntPtr.Size*8, reader);
                 var @base = src.BaseAddress;
                 decoder.IP = @base;
-                var buffer = core.list<Asm.IceInstruction>(decoded.Count);
+                var buffer = list<Asm.IceInstruction>(decoded.Count);
                 var position = 0u;
                 while (reader.CanReadByte)
                 {
@@ -321,13 +281,13 @@ namespace Z0.Asm
                     decoder.Decode(out iced);
                     var size = (uint)iced.ByteLength;
                     var encoded = slice(src.View, position, size).ToArray();
-                    var instruction = IceExtractors.extract(iced, IceFormatter.FormatInstruction(iced, @base), encoded);
+                    var instruction = extract(iced, IceFormatter.FormatInstruction(iced, @base), encoded);
                     buffer.Add(instruction);
                     f(instruction);
                     position += size;
 
                 }
-                dst = api.icelist(buffer.ToArray(), src);
+                dst = icelist(buffer.ToArray(), src);
                 return true;
             }
             catch(Exception e)
@@ -336,6 +296,79 @@ namespace Z0.Asm
             }
         }
 
+        static IceInstruction extract(Iced.Instruction src, string formatted, BinaryCode decoded)
+            => IceConverters.extract(src,formatted, decoded);
 
+        [MethodImpl(Inline), Op]
+        static IceInstructionList icelist(IceInstruction[] src, CodeBlock data)
+            => new IceInstructionList(src, data);
+
+        [MethodImpl(Inline), Op]
+        static IceInstructionFormatter formatter(in AsmFormatConfig config)
+            => new IceInstructionFormatter(config);
+
+        static Iced.Decoder idecoder(BinaryCode code, MemoryAddress @base, out Iced.ByteArrayCodeReader reader)
+        {
+            reader = new Iced.ByteArrayCodeReader(code);
+            var decoder =  Iced.Decoder.Create(64, reader);
+            decoder.IP = @base;
+            return decoder;
+        }
+
+        static AsmRoutine routine(OpUri uri, MethodDisplaySig sig, ApiBlockAsm src, bool check = false)
+        {
+            var count = src.InstructionCount;
+            var buffer = new AsmInstructionInfo[count];
+            var offset = 0u;
+            var @base = src.BaseAddress;
+            var instructions = src.Instructions;
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                var instruction = skip(instructions,i);
+                if(check)
+                    CheckInstructionSize(instruction, offset, src);
+                seek(dst, i) = AsmEtl.summarize(@base, instruction, src.Encoded.Code, instruction.FormattedInstruction, offset);
+                offset += (uint)instruction.ByteLength;
+            }
+
+            if(check)
+                CheckBlockLength(src);
+
+            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, AsmEtl.ToApiInstructions(src.Encoded, src.Decoded));
+        }
+
+        static void CheckInstructionSize(in IceInstruction instruction, uint offset, in ApiBlockAsm src)
+        {
+            if(src.Encoded.Length < offset + instruction.ByteLength)
+                core.@throw(SizeMismatch(instruction, offset, src));
+        }
+
+        static void CheckBlockLength(in ApiBlockAsm src)
+        {
+            var length = AsmEtl.size(src);
+            if(length != src.Encoded.Length)
+                core.@throw(BadBlockLength(src,length));
+        }
+
+        static AppException BadBlockLength(in ApiBlockAsm src, uint computedLength)
+            => new AppException(InstructionBlockSizeMismatch(src.BaseAddress, src.Encoded.Length, computedLength));
+
+        static AppException SizeMismatch(in IceInstruction instruction, uint offset, in ApiBlockAsm src)
+            => new AppException(InstructionSizeMismatch(instruction.IP, offset, (uint)src.Encoded.Length, (uint)instruction.ByteLength));
+
+        static AppMsg InstructionSizeMismatch(MemoryAddress ip, uint offset, uint actual, uint reported,
+            [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+                => AppMsg.error(text.concat(
+                    $"The encoded instruction length does not match the reported instruction length:",
+                    $"address = {ip}, datalen = {reported}, offset = {offset}, bytelen = {reported}"),
+                        caller, file, line);
+
+        static AppMsg InstructionBlockSizeMismatch(MemoryAddress @base, int actual, uint reported,
+            [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+                => AppMsg.error(text.concat(
+                    $"The encoded instruction block length does not match the reported total instruction length:",
+                    $"@base = {@base}, block length = {reported}, reported length = {reported}"),
+                        caller, file, line);
     }
 }

@@ -71,7 +71,7 @@ namespace Z0.Asm
             dst.Source = src.IP;
             dst.InstructionSize = src.Encoded.Size;
             dst.CallSite = dst.Source + dst.InstructionSize;
-            dst.Target = IceExtractors.branch(dst.Source, src.Instruction, 0).Target.Address;
+            dst.Target = IceConverters.branch(dst.Source, src.Instruction, 0).Target.Address;
             dst.Instruction = src.Statment;
             dst.Encoded = src.Encoded;
             return ref dst;

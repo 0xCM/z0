@@ -10,12 +10,14 @@ namespace Z0
 
     using static Root;
 
+    using api = HexPacks;
+
     public readonly struct HexPack
     {
         readonly Index<MemoryBlock> _Blocks;
 
         public ByteSize MaxBlockSize
-            => _Blocks.Select(x => x.Size).Max();
+            => api.max(_Blocks.View).Size;
 
         [MethodImpl(Inline)]
         public HexPack(Index<MemoryBlock> src)

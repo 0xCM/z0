@@ -13,7 +13,7 @@ namespace Z0.Asm
     using BTK = AsmBranchTargetKind;
     using BTW = AsmBranchTargetWidth;
 
-    partial struct IceExtractors
+    partial struct IceConverters
     {
         [MethodImpl(Inline), Op]
         public static AsmBranchInfo branch(MemoryAddress @base, in IceInstruction src, in AsmBranchTarget target)

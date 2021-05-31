@@ -11,10 +11,12 @@ namespace Z0
     using static Root;
     using static Cil;
 
-    [Record, StructLayout(LayoutKind.Sequential)]
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct CilOpCode : IRecord<CilOpCode>
     {
-        public const string TableId ="msil.opcodes";
+        public const string TableId ="cil.opcodes";
+
+        public const byte FieldCount = 7;
 
         public ILOpCode OpCode;
 
@@ -31,10 +33,10 @@ namespace Z0
         public StackBehaviour Sb2;
 
         [MethodImpl(Inline)]
-        public CilOpCode(ILOpCode id, string name, OpCodeType type, OperandType optype, byte opcount, StackBehaviour sb1, StackBehaviour sb2)
+        public CilOpCode(ILOpCode id, StringAddress name, OpCodeType type, OperandType optype, byte opcount, StackBehaviour sb1, StackBehaviour sb2)
         {
             OpCode = id;
-            Name =  name;
+            Name = name;
             CodeType = type;
             ArgType =  optype;
             ArgCount = opcount;

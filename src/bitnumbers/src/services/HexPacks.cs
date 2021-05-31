@@ -43,7 +43,7 @@ namespace Z0
         [Op]
         public static ByteSize pack(ReadOnlySpan<ApiCodeBlock> src, Span<HexPacked> dst, Span<char> buffer)
         {
-            var count = (uint)root.min(src.Length, dst.Length);
+            var count = (uint)min(src.Length, dst.Length);
             var size = 0ul;
             for(var i=0u; i<count; i++)
             {
@@ -139,13 +139,29 @@ namespace Z0
             return j;
         }
 
+        [MethodImpl(Inline), Op]
+        public static MemoryBlock max(ReadOnlySpan<MemoryBlock> src)
+        {
+            var max = MemoryBlock.Empty;
+            var count = src.Length;
+            if(count == 0)
+                return max;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                if(block.Size > max.Size)
+                    max = block;
+            }
+            return max;
+        }
+
         [Op]
         public static ByteSize emit(in HexPack src, StreamWriter dst)
         {
-            var max = src.MaxBlockSize;
             var blocks = src.Blocks;
+            var maxsz = max(blocks).Size;
             var count = blocks.Length;
-            var buffer = span<char>(max*2);
+            var buffer = span<char>(maxsz*2);
             var total = 0u;
             for(var i=0u; i<count;i++)
             {

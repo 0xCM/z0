@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using W = NumericWidth;
 
-    partial struct IceExtractors
+    partial struct IceConverters
     {
         [Op]
         public static AsmImmInfo imminfo(in IceInstruction src, byte index)

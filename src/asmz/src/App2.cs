@@ -193,6 +193,15 @@ namespace Z0.Asm
                 IndexPdbSymbols(collection.ResolvedParts, pack.Root + FS.file("symbols", FS.Log));
         }
 
+        public void LoadHexPacks()
+        {
+            var svc = Wf.ApiPacks();
+            var pack = svc.List().Last;
+            var hex = Wf.ApiHexPacks();
+            var packs = hex.LoadParsed(pack.HexPackRoot());
+
+        }
+
         public void RunOldXedWf()
         {
             var xed = XedWf.create(Wf);
@@ -413,14 +422,6 @@ namespace Z0.Asm
             Wf.Row(dx);
         }
 
-        void TestBitfields()
-        {
-            var bf = AsmBitfields.define(new byte[]{4,2,3});
-            var formatter = AsmBitfields.formatter(bf);
-            ushort input = 0b111_01_0011;
-            Wf.Row("111 01 0011");
-            Wf.Row(formatter.Format(input).ToString());
-        }
 
         void StatementRountTrip()
         {
@@ -436,7 +437,6 @@ namespace Z0.Asm
         {
             using var clrmd = ClrMdSvc.create(Wf);
             clrmd.ParseDump();
-
         }
 
         PeRecords.CoffHeaderRow ReadCoffHeader(FS.FilePath src)
@@ -559,17 +559,6 @@ namespace Z0.Asm
             Wf.XedCatalog().EmitSourceAssets();
         }
 
-        ReadOnlySpan<SymExpr> SymExpr<E>()
-            where E : unmanaged, Enum
-        {
-            var symbols = Symbols.symbolic<E>().View;
-            var count = symbols.Length;
-            var expressions = alloc<SymExpr>(count);
-            Symbols.expressions(symbols, expressions);
-            return expressions;
-        }
-
-
         void EmitSymbolicliterals()
         {
             var service = Wf.Symbolism();
@@ -577,15 +566,35 @@ namespace Z0.Asm
             service.EmitLiterals(dst);
         }
 
-        void CheckCil()
+        ReadOnlySpan<CilOpCode> EmitCilOpCodes(FS.FilePath dst)
         {
-            var cil = Cil.init();
-            var codes = cil.OpCodes;
-            var formatter = codes.RecordFormatter();
-            for(var i=0; i<codes.Length; i++)
-            {
-                Wf.Row(formatter.Format(skip(codes,i)));
-            }
+            var codes = Cil.opcodes();
+            TableEmit(codes,dst);
+            return codes;
+        }
+
+        ReadOnlySpan<CilOpCode> EmitCilOpCodes()
+        {
+            var dst = Db.IndexTable<CilOpCode>();
+            return EmitCilOpCodes(dst);
+        }
+
+
+        public ApiCodeBlocks LoadApiBlocks()
+        {
+            return Wf.ApiHex().ReadBlocks();
+        }
+
+        void ProcessInstructions()
+        {
+            var blocks = LoadApiBlocks();
+            var clock = Time.counter(true);
+            var traverser = Wf.ApiCodeBlockTraverser();
+            var receiver  = new AsmDetailProducer(Wf,750000);
+            traverser.Traverse(blocks, receiver);
+            var duration = clock.Elapsed().Ms;
+            var productions = receiver.Productions;
+            Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
 
@@ -595,7 +604,9 @@ namespace Z0.Asm
             //ListVendorManuals("intel", FS.Txt);
             //EmitMethodDefs();
             //EmitFieldDefs();
-            RunExtractWorkflow();
+            EmitCilOpCodes();
+            //LoadHexPacks();
+            //RunExtractWorkflow();
             //Wf.AsmCatalogs().EmitAssetCatalog();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");

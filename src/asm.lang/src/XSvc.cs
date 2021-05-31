@@ -7,6 +7,7 @@ namespace Z0
     using Z0.Asm;
 
     using Svc = Z0.Asm;
+
     [ApiHost]
     public static class XSvc
     {
@@ -25,10 +26,6 @@ namespace Z0
         [Op]
         public static AsmSigs AsmSigs(this IWfRuntime wf)
             => Svc.AsmSigs.create(wf);
-
-        [Op]
-        public static AsmRender AsmRender(this IWfRuntime wf)
-            => Svc.AsmRender.create(wf);
 
         [Op]
         public static AsmThumbprints AsmThumbprints(this IWfRuntime wf)

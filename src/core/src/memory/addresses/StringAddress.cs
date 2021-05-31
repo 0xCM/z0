@@ -16,7 +16,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static StringAddress create(string src)
-            => new StringAddress(text.length(src) == 0 ? memory.address(Empty) : text.intern(src));
+            => new StringAddress(src?.Length == 0 ? address(Empty) : address(string.Intern(src)));
+
+        [MethodImpl(Inline)]
+        public static StringAddress resource(string src)
+            => new StringAddress(address(src));
 
         public MemoryAddress Address {get;}
 

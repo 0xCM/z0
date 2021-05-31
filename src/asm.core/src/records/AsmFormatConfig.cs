@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public struct AsmFormatConfig
+    public struct AsmFormatConfig : IRecord<AsmFormatConfig>
     {
         public bool EmitCaptureTermCode;
 
@@ -25,10 +25,6 @@ namespace Z0.Asm
         public bool AbsoluteLabels;
 
         public HexFormatOptions HeaderEncodingFormat;
-
-        const string SectionSep = "; " + RP.PageBreak160;
-
-        const string FieldSep = RP.FieldSep;
 
         public static AsmFormatConfig DefaultStreamFormat
             => @default(out var _);

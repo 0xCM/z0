@@ -1,4 +1,7 @@
-// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
+//-----------------------------------------------------------------------------
+// Copyright   :  Microsoft
+// License     :  Apache
+//-----------------------------------------------------------------------------
 namespace System.Reflection.Metadata
 {
     using System.Collections.Immutable;
@@ -10,7 +13,6 @@ namespace System.Reflection.Metadata
     using System.Reflection.Emit;
     using System.Reflection;
     using System.Reflection.Metadata.Ecma335;
-    using System.Reflection.Metadata;
 
     public class ILVisualizer
     {

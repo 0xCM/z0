@@ -22,7 +22,7 @@ namespace Z0.Asm
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        public IceInstruction[] Decoded {get;}
+        public Index<IceInstruction> Decoded {get;}
 
         /// <summary>
         /// The reason capture was terminated
@@ -41,6 +41,12 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => Encoded.BaseAddress;
+        }
+
+        public ReadOnlySpan<IceInstruction> Instructions
+        {
+            [MethodImpl(Inline)]
+            get => Decoded.View;
         }
 
         /// <summary>

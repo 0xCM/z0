@@ -9,9 +9,6 @@ namespace Z0
 
     using static Root;
 
-    /// <summary>
-    /// Defines an entry in a <see cref='LookupEntries{T,K}'/>
-    /// </summary>
     public readonly struct LookupEntry<K,V>
     {
         public K Key {get;}
@@ -35,6 +32,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Paired<K,V>(LookupEntry<K,V> src)
-            => root.paired(src.Key,src.Value);
+            => core.paired(src.Key,src.Value);
     }
 }
