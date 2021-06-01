@@ -283,5 +283,17 @@ namespace alg
         [MethodImpl(Inline)]
         public static ulong combine(Type t1, Type t2, Type t3)
             => combine(t1,t2) ^ combine(t1, t3);
+
+        [MethodImpl(Inline)]
+        public static unsafe int i32(float src)
+            => (*((int*)(&src)));
+
+        [MethodImpl(Inline)]
+        static unsafe ulong u64(double src)
+            => (*((ulong*)(&src)));
+
+        [MethodImpl(Inline)]
+        static unsafe ulong u64(decimal src)
+            => (*((ulong*)(&src)));
     }
 }

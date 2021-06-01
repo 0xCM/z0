@@ -52,7 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public AppMsgData<S> Cast<S>()
-            => new AppMsgData<S>(memory.@as<object,S>(Content), Pattern, Kind, Flair, Source);
+            => new AppMsgData<S>(core.@as<object,S>(Content), Pattern, Kind, Flair, Source);
 
         public static AppMsgData Empty
             => new AppMsgData(EmptyString, "{0}", 0, 0, AppMsgSource.Empty);

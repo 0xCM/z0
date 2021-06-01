@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Threading.Tasks;
 
     using static Part;
-    using static AsmRegs;
+    using static Regs;
     using static core;
 
     using Fx = AsmInstructions;

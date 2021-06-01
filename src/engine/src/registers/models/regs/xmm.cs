@@ -12,7 +12,7 @@ namespace Z0.Asm
     using K = RegKind;
     using T = Cell128;
 
-    partial struct AsmRegs
+    partial struct Regs
     {
         public struct xmm : IReg128<xmm,T>
         {
@@ -30,7 +30,7 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => index(RegKind);
+                get => AsmRegs.index(RegKind);
             }
         }
 

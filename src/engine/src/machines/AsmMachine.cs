@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmMem;
-    using static AsmRegs;
+    using static Regs;
     using static Typed;
 
     [ApiComplete]
@@ -17,7 +17,7 @@ namespace Z0.Asm
     {
         [Op]
         public static AsmMachine create()
-            => new AsmMachine(new RegBank(AsmRegBanks.create(w512,32), AsmRegBanks.create(w64, 16)));
+            => new AsmMachine(new RegBank(RegBanks.create(w512,32), RegBanks.create(w64, 16)));
 
         readonly RegBank Regs;
 

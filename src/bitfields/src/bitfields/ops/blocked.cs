@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static Typed;
 
-    partial struct BitFields
+    partial struct CpuBits
     {
        public static BlockedBits<T> blocked<T>(uint bitcount)
             where T : unmanaged

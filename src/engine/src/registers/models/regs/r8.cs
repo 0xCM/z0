@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     using K = RegKind;
     using T = System.Byte;
-    using G = AsmRegs.r8;
+    using G = Regs.r8;
 
-    partial struct AsmRegs
+    partial struct Regs
     {
         public struct R8<R> : IReg8<R8<R>,T>
             where R : unmanaged, IReg8<R>
@@ -39,7 +39,7 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => index(RegKind);
+                get => AsmRegs.index(RegKind);
             }
 
             [MethodImpl(Inline)]
@@ -66,7 +66,7 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => index(RegKind);
+                get => AsmRegs.index(RegKind);
             }
         }
 

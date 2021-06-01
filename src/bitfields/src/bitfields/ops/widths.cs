@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct BitFields
+    partial struct CpuBits
     {
         [MethodImpl(Inline)]
         public static Vector256<byte> widths<F>(W256 w)
@@ -22,7 +22,7 @@ namespace Z0
             var count = root.min(widths.Length, 32);
             var data = default(Vector256<byte>);
             for(var i=0; i<count; i++)
-                data = data.WithElement(i,skip(widths,i));
+                data = data.WithElement(i, skip(widths,i));
             return data;
         }
     }

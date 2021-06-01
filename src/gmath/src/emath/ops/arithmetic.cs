@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct emath
     {
@@ -106,5 +107,14 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.sub(a, b.Scalar);
+
+        [MethodImpl(Inline)]
+        public static E inc<E>(E src)
+            => @as<ulong,E>(++u64(src));
+
+        [MethodImpl(Inline)]
+        public static E dec<E>(E src)
+            => @as<ulong,E>(--u64(src));
+
     }
 }

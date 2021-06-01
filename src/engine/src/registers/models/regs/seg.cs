@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmRegs
+    partial struct Regs
     {
         /// <summary>
         /// Represents a segment register

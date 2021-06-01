@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\asm.core"
+		},
+		{
+			"path": "..\\gmath"
+		}
+	],
+	"settings": {}
+}

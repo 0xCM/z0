@@ -57,31 +57,23 @@ namespace Z0
             where T : unmanaged
                 => gmath.eq(@as<E,T>(e), s);
 
-        /// <summary>
-        /// Determines equality between an enum literal and an integral scalar value
-        /// </summary>
-        /// <param name="s">The scalar value</param>
-        /// <param name="e">The enum literal value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static bit same<E,T>(T s, E e)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.eq(@as<E,T>(e), s);
 
-        /// <summary>
-        /// Determines whether an integral value is greater or equal to a value represented by an enum literal
-        /// </summary>
-        /// <param name="e">The enum literal value</param>
-        /// <param name="s">The scalar value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static bit between<E,T>(T s, E e0, E e1)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.between(s, @as<E,T>(e0), @as<E,T>(e1));
+
+        [MethodImpl(Inline)]
+        public static bit gt<E,T>(E e, T s)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => gmath.gt(@as<E,T>(e), s);
 
         [MethodImpl(Inline)]
         public static bit gt<E,T>(@enum<E,T> a, @enum<E,T> b)
@@ -107,26 +99,12 @@ namespace Z0
             where T : unmanaged
                 => gmath.lteq(a.Scalar, b.Scalar);
 
-        /// <summary>
-        /// Determines whether the value represented by an enum literal is greater than or equal to a specified integral scalar value
-        /// </summary>
-        /// <param name="e">The enum literal value</param>
-        /// <param name="s">The scalar value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static bit gteq<E,T>(E e, T s)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.gt(@as<E,T>(e), s);
 
-        /// <summary>
-        /// Determines whether an integral value is greater or equal to a value represented by an enum literal
-        /// </summary>
-        /// <param name="e">The enum literal value</param>
-        /// <param name="s">The scalar value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static bit gteq<E,T>(T s, E e)
             where E : unmanaged, Enum
@@ -134,68 +112,40 @@ namespace Z0
                 => gmath.gt(s, @as<E,T>(e));
 
         [MethodImpl(Inline)]
-        public static bit lt<E,T>(@enum<E,T> a, @enum<E,T> b)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => gmath.lt(a.Scalar, b.Scalar);
-
-        /// <summary>
-        /// Determines whether the value represented by an enum literal is less than a specified integral scalar value
-        /// </summary>
-        /// <param name="e">The enum literal value</param>
-        /// <param name="s">The scalar value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
         public static bit lt<E,T>(E e, T s)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lt(@as<E,T>(e), s);
 
-        /// <summary>
-        /// Determines whether an integral value is less than a value represented by an enum literal
-        /// </summary>
-        /// <param name="e">The enum literal value</param>
-        /// <param name="s">The scalar value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit lt<E,T>(T s, E e)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => gmath.lt(s, @as<E,T>(e));
+        // [MethodImpl(Inline)]
+        // public static bit lt<E,T>(T s, E e)
+        //     where E : unmanaged, Enum
+        //     where T : unmanaged
+        //         => gmath.lt(s, @as<E,T>(e));
 
         [MethodImpl(Inline)]
-        public static bit lteq<E,T>(@enum<E,T> a, @enum<E,T> b)
+        public static bit lt<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged
-                => gmath.lteq(a.Scalar, b.Scalar);
+                => gmath.lt(a.Scalar, b.Scalar);
 
-        /// <summary>
-        /// Determines whether the value represented by an enum literal is less than or equal to a specified integral scalar value
-        /// </summary>
-        /// <param name="e">The enum literal value</param>
-        /// <param name="s">The scalar value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static bit lteq<E,T>(E e, T s)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lteq(@as<E,T>(e), s);
 
-        /// <summary>
-        /// Determines whether an integral value is less than or equal to a value represented by an enum literal
-        /// </summary>
-        /// <param name="e">The enum literal value</param>
-        /// <param name="s">The scalar value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static bit lteq<E,T>(T s, E e)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lteq(s, @as<E,T>(e));
+
+        [MethodImpl(Inline)]
+        public static bit lteq<E,T>(@enum<E,T> a, @enum<E,T> b)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => gmath.lteq(a.Scalar, b.Scalar);
 
         [MethodImpl(Inline)]
         public static bit neq<E,T>(@enum<E,T> a, @enum<E,T> b)

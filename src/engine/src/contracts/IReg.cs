@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using api = AsmRegs;
+    using api = Regs;
 
     /// <summary>
     /// Characterizes a register representation

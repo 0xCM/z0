@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static Typed;
-    using static AsmRegBanks;
+    using static RegBanks;
 
     [ApiComplete]
     public readonly ref struct RegBank

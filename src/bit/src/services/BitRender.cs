@@ -111,6 +111,7 @@ namespace Z0
             return j - 1;
         }
 
+
         [MethodImpl(Inline), Op]
         public static uint render(N8 n, N4 w, byte src, uint offset, Span<char> dst)
         {
@@ -128,14 +129,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N2 n, byte src, uint offset, Span<char> dst)
-        {
-            seek(dst, offset++) = bit.bitchar(src, 1);
-            seek(dst, offset++) = bit.bitchar(src, 0);
-            return n;
-        }
-
-        [MethodImpl(Inline), Op]
         public static uint render(N3 n, byte src, uint offset, Span<char> dst)
         {
             seek(dst, offset++) = bit.bitchar(src, 2);
@@ -143,6 +136,15 @@ namespace Z0
             seek(dst, offset++) = bit.bitchar(src, 0);
             return n;
         }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N2 n, byte src, uint offset, Span<char> dst)
+        {
+            seek(dst, offset++) = bit.bitchar(src, 1);
+            seek(dst, offset++) = bit.bitchar(src, 0);
+            return n;
+        }
+
 
         [MethodImpl(Inline), Op]
         public static uint render(N4 n, byte src, uint offset, Span<char> dst)

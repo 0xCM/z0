@@ -13,7 +13,7 @@ namespace Z0.Asm
     using K = FlagRegSlot;
     using I = EFlagBits;
 
-    partial struct AsmRegs
+    partial struct Regs
     {
         [ApiComplete("regs.eflags")]
         public struct eflags : IReg<eflags,W32,K>

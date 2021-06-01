@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct BitFields
+    partial struct CpuBits
     {
          [MethodImpl(Inline), Op]
          public static byte join(Pair<byte> a, Pair<byte> b)
@@ -28,13 +28,5 @@ namespace Z0
              return dst;
          }
 
-         [MethodImpl(Inline), Op, Closures(Closure)]
-         public static T join<T>(BitfieldSeg<T> a, BitfieldSeg<T> b)
-            where T : unmanaged
-        {
-            var dst = gmath.sll(a.State, a.FirstIndex);
-            dst = gmath.or(dst, gmath.sll(b.State, b.FirstIndex));
-            return dst;
-        }
     }
 }

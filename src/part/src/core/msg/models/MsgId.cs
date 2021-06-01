@@ -25,7 +25,7 @@ namespace Z0
         }
 
         public string Format()
-            => text.format(RenderPattern, Ts, Level);
+            => string.Format(RenderPattern, Ts, Level);
 
         public override string ToString()
             => Format();

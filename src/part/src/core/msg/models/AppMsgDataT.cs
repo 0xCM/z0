@@ -37,7 +37,7 @@ namespace Z0
         public readonly AppMsgSource Origin;
 
         [MethodImpl(Inline)]
-        internal AppMsgData(T content, string pattern, LogLevel kind, FlairKind color, AppMsgSource origin)
+        public AppMsgData(T content, string pattern, LogLevel kind, FlairKind color, AppMsgSource origin)
         {
             Content = content;
             Pattern = pattern;

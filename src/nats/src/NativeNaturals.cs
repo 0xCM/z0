@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections.Concurrent;
 
-    using static Part;
+    using static Root;
 
     public static class NativeNaturals
     {

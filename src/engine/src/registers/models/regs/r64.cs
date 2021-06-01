@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     using K = RegKind;
     using T = System.UInt64;
-    using G = AsmRegs.r64;
+    using G = Regs.r64;
 
-    partial struct AsmRegs
+    partial struct Regs
     {
         /// <summary>
         /// Defines an operand that specifies a 64-bit gp register
@@ -34,7 +34,7 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => index(RegKind);
+                get => AsmRegs.index(RegKind);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => index(RegKind);
+                get => AsmRegs.index(RegKind);
             }
 
             [MethodImpl(Inline)]

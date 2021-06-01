@@ -12,7 +12,7 @@ namespace Z0.Asm
     using K = RegKind;
     using T = Cell256;
 
-    partial struct AsmRegs
+    partial struct Regs
     {
         public readonly struct ymm : IYmmReg
         {

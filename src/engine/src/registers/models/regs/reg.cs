@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmRegs
+    partial struct Regs
     {
         public readonly struct reg<T>
             where T : unmanaged, IReg

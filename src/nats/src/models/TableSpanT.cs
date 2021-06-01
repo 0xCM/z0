@@ -99,10 +99,10 @@ namespace Z0
                 f(skip(src,i));
         }
 
-        public string Format()
-            => Seq.delimit(Chars.Comma, 0, View).Format();
+        // public string Format()
+        //     => Seq.delimit(Chars.Comma, 0, View).Format();
 
-        public override string ToString()
-            => Format();
+        // public override string ToString()
+        //     => Format();
     }
 }

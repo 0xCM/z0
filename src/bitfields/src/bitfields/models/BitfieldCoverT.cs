@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = BitFields;
+    using api = CpuBits;
 
     /// <summary>
     /// Defines the (stateful) bitfield api surface

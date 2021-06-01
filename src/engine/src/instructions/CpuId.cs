@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmRegs;
+    using static Regs;
     using static Typed;
 
     [StructLayout(LayoutKind.Sequential)]
