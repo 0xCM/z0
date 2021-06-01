@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct GridMetrics : IDataType<GridMetrics>

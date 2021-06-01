@@ -29,8 +29,8 @@ namespace Z0
             => new ClrTypeLookup(src);
 
         [MethodImpl(Inline), Op]
-        public static ClrStruct @struct(Type src)
-            => new ClrStruct(src);
+        public static ClrStructAdapter @struct(Type src)
+            => new ClrStructAdapter(src);
 
         /// <summary>
         /// Collects the <typeparamref name='T'/> literals defined by a source <see cref='Type'/>
@@ -61,7 +61,7 @@ namespace Z0
         }
 
         [Op]
-        public static Span<ClrField> literals(ReadOnlySpan<ClrField> src, Span<ClrField> dst)
+        public static Span<ClrFieldAdapter> literals(ReadOnlySpan<ClrFieldAdapter> src, Span<ClrFieldAdapter> dst)
         {
             var k = 0u;
             var count = src.Length;
@@ -72,41 +72,41 @@ namespace Z0
         }
 
         [Op]
-        public static Span<ClrField> literals(Type src, Span<ClrField> dst)
+        public static Span<ClrFieldAdapter> literals(Type src, Span<ClrFieldAdapter> dst)
             => literals(fields(src), dst);
 
         /// <summary>
-        /// Returns a <see cref='ClrField'/> readonly span of the fields defined by the source
+        /// Returns a <see cref='ClrFieldAdapter'/> readonly span of the fields defined by the source
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrField> fields(Type src)
+        public static ReadOnlySpan<ClrFieldAdapter> fields(Type src)
             => adapt(src.GetFields(BF));
 
         /// <summary>
-        /// Returns a <see cref='ClrField'/> readonly span of the fields defined by a parametrically-identified source type
+        /// Returns a <see cref='ClrFieldAdapter'/> readonly span of the fields defined by a parametrically-identified source type
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
         [Op, Closures(Closure)]
-        public static ReadOnlySpan<ClrField> fields<T>()
+        public static ReadOnlySpan<ClrFieldAdapter> fields<T>()
             => adapt(typeof(T).GetFields(BF));
 
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrType> adapt(Type[] src)
-            => adapt<Type,ClrType>(src);
+        public static ReadOnlySpan<ClrTypeAdapter> adapt(Type[] src)
+            => adapt<Type,ClrTypeAdapter>(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrModule> adapt(R.Module[] src)
-            => adapt<Module,ClrModule>(src);
+        public static ReadOnlySpan<ClrModuleAdapter> adapt(R.Module[] src)
+            => adapt<Module,ClrModuleAdapter>(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrMethod> adapt(R.MethodInfo[] src)
-            => adapt<MethodInfo,ClrMethod>(src);
+        public static ReadOnlySpan<ClrMethodAdapter> adapt(R.MethodInfo[] src)
+            => adapt<MethodInfo,ClrMethodAdapter>(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrField> adapt(R.FieldInfo[] src)
-            => adapt<FieldInfo,ClrField>(src);
+        public static ReadOnlySpan<ClrFieldAdapter> adapt(R.FieldInfo[] src)
+            => adapt<FieldInfo,ClrFieldAdapter>(src);
 
         [MethodImpl(Inline), Op]
         internal static ReadOnlySpan<V> adapt<S,V>(S[] src)

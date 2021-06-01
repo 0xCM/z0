@@ -7,10 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    using ClrMd = Microsoft.Diagnostics.Runtime;
-
     partial struct DiagnosticRecords
     {
         /// <summary>

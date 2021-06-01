@@ -67,13 +67,13 @@ namespace Z0.Asm
             set => Data = bit.set(Data, (byte)RFI.B, value);
         }
 
-        public RexPrefixCode Code
+        public byte Code
         {
             [MethodImpl(Inline)]
-            get => (RexPrefixCode)Data;
+            get => Data;
 
             [MethodImpl(Inline)]
-            set => Data = (byte)value;
+            set => Data = value;
         }
 
         public bool IsEmpty
@@ -88,16 +88,6 @@ namespace Z0.Asm
             get => Data != 0;
         }
 
-        public string FormatBits()
-        {
-            var bs = Data.FormatBits();
-            var chars = text.span(bs);
-            var lo = memory.slice(chars,0,4);
-            var hi = memory.slice(chars,4,4);
-            return text.format("[{0} {1}]", lo, hi);
-        }
-
-
         public string Format()
             => Data.FormatAsmHex();
 
@@ -109,7 +99,7 @@ namespace Z0.Asm
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator RexPrefix(RexPrefixCode src)
+        public static implicit operator RexPrefix(RexPrefixKind src)
             => new RexPrefix((byte)src);
 
         [MethodImpl(Inline)]

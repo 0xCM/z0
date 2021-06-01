@@ -13,7 +13,7 @@ namespace Z0
     partial struct Clr
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrType> nested(Type src)
-            => recover<Type,ClrType>(src.GetNestedTypes());
+        public static ReadOnlySpan<ClrTypeAdapter> nested(Type src)
+            => recover<Type,ClrTypeAdapter>(src.GetNestedTypes());
     }
 }

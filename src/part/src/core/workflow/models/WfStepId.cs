@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
 
-    [Datatype]
     public readonly struct WfStepId : IWfStepId
     {
         public CliToken HostKey {get;}

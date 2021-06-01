@@ -19,11 +19,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static WfHostId create(WfPartKind kind, Type src)
-            => new WfHostId((((uint)src.MetadataToken & Lo24u) | ((uint)kind << 24) ) | alg.hash.calc(src.AssemblyQualifiedName));
+            => new WfHostId((((uint)src.MetadataToken & Lo24u) | ((uint)kind << 24) ) | (uint)src.AssemblyQualifiedName.GetHashCode());
 
         [MethodImpl(Inline), Op]
         public static WfHostId create(WfStepId step)
-            => new WfHostId((((uint)step.HostKey & Lo24u) | (1u << 24) ) | alg.hash.calc(step.HostName));
+            => new WfHostId((((uint)step.HostKey & Lo24u) | (1u << 24) ) | (uint)(step.HostName?.GetHashCode() ?? 0));
 
         public ulong Value {get;}
 
@@ -37,7 +37,7 @@ namespace Z0
             get => (WfPartKind)((uint)Value >> 24);
         }
 
-        public Address32 Offset
+        public uint Offset
         {
             [MethodImpl(Inline)]
             get => (uint)Value & Lo24u;
@@ -84,7 +84,7 @@ namespace Z0
         public override bool Equals(object src)
             => src is WfHostId t && Equals(t);
         public string Format()
-            => text.format("{0}:{1} {2}", Kind.ToString(), Offset, Id.FormatAsmHex());
+            => string.Format("{0}:{1} {2}", Kind.ToString(), Offset, Id.FormatAsmHex());
 
         public override int GetHashCode()
             => (int)Hash;

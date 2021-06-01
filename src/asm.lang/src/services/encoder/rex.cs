@@ -9,8 +9,14 @@ namespace Z0.Asm
 
     using static Root;
 
+    using K = RexPrefixKind;
+
     partial class AsmEncoder
     {
+        [MethodImpl(Inline), Op]
+        public static Hex8 rex()
+            => (byte)K.Base;
+
         [MethodImpl(Inline), Op]
         public static AsmHexCode rex(uint4 wrxb, uint4 index)
         {
@@ -21,6 +27,10 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
+        public static Hex8 rex(uint4 wrxb)
+            => math.or((byte)K.Base, (byte)wrxb);
+
+        [MethodImpl(Inline), Op]
         public static byte rex(bit b, bit x, bit r, bit w)
         {
             var bx = math.slor((byte)b, 0, (byte)x, 1);
@@ -29,12 +39,27 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static Hex8 rex()
-            => (byte)RexPrefixCode.Rex40;
-
+        public static bit test(K src, K match)
+            => (src & match) == match;
 
         [MethodImpl(Inline), Op]
-        public static Hex8 rex(uint4 wrxb)
-            => math.or((byte)RexPrefixCode.Rex40, (byte)wrxb);
+        public static Hex8 rex(K kind)
+        {
+            var dst = rex();
+
+            if(test(kind, K.W))
+                dst |= (byte)K.W;
+
+            if(test(kind, K.R))
+                dst |= (byte)K.R;
+
+            if(test(kind, K.X))
+                dst |= (byte)K.X;
+
+            if(test(kind, K.W))
+                dst |= (byte)K.W;
+
+            return dst;
+        }
     }
 }

@@ -72,12 +72,6 @@ namespace Z0
             SelectedParts = Wf.ApiCatalog.Parts;
         }
 
-        void SealCollected()
-        {
-            CollectedDatasets = DatasetReceiver.Array();
-            Routines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
-        }
-
         void EmitProcessContext(IApiPack pack)
         {
             var flow = Wf.Running("Emitting process context");
@@ -128,6 +122,24 @@ namespace Z0
             Wf.AsmAnalyzer().Analyze(Routines, Paths.RootDir());
         }
 
+        void EmitCaptureIndex()
+        {
+            var dst = Paths.RootDir() + FS.file(Tables.identify<CaptureIndexEntry>().Format(), FS.Csv);
+            var src = Routines.View;
+            var count = src.Length;
+            var buffer = span<CaptureIndexEntry>(count);
+            for(var i=0u; i<count; i++)
+            {
+                ref var entry = ref seek(buffer,i);
+                ref readonly var routine = ref skip(src,i);
+                entry.Sequence = i;
+                entry.BaseAddress = routine.BaseAddress;
+                entry.Host = routine.Uri.Host;
+                entry.DisplaySig = routine.DisplaySig.Format();
+                entry.Uri = routine.Uri;
+            }
+            TableEmit(buffer, CaptureIndexEntry.RenderWidths, dst);
+        }
 
         void RunWorkflow(IApiPack pack)
         {
@@ -137,7 +149,10 @@ namespace Z0
             ResolvedParts = SelectedParts.Map(Resolver.ResolvePart);
             ExtractParts(ResolvedParts, false);
 
-            SealCollected();
+            CollectedDatasets = DatasetReceiver.Array();
+            Routines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
+            Routines.Sort();
+            EmitCaptureIndex();
 
             if(pack.Settings.EmitContext)
                 EmitProcessContext(pack);
@@ -199,5 +214,10 @@ namespace Z0
         public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";
 
         public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
+
+        public static MsgPattern<Count> ExtractingResolved => "Extracting data for {0} resolved parts";
+
+        public static MsgPattern<Count> ExtractedResolved => "Extracted data for {0} members";
+
     }
 }

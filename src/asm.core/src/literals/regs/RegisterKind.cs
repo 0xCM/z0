@@ -26,6 +26,7 @@ namespace Z0.Asm
     using ST = FpuRegKind;
     using MM = MmxRegKind;
     using TR = TestRegKind;
+    using SPTR = SysPtrRegKind;
 
     /// <summary>
     /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
@@ -584,5 +585,13 @@ namespace Z0.Asm
         EIP = I.EIP,
 
         RIP = I.RIP,
+
+        // ~ System pointer registers
+
+        GDTR = SPTR.GDTR,
+
+        LDTR = SPTR.LDTR,
+
+        IDTR = SPTR.IDTR,
     }
 }

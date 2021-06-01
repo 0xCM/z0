@@ -37,7 +37,6 @@ namespace Z0.Asm
             get => Data.Select(x => x.Member);
         }
 
-
         public ApiHostUri Host
         {
             [MethodImpl(Inline)]

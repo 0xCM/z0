@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [Op]
-        static void render(TypedReference src, ReadOnlySpan<ClrField> fields, ITextBuffer dst)
+        static void render(TypedReference src, ReadOnlySpan<ClrFieldAdapter> fields, ITextBuffer dst)
         {
             var count = fields.Length;
             for(var i=0; i<count; i++)

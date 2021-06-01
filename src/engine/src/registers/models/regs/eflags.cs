@@ -10,13 +10,13 @@ namespace Z0.Asm
     using static Root;
     using static gbits;
 
-    using K = FlagRegSlot;
-    using I = EFlagBits;
+    using K = RFlagBits;
+    using I = RFlagIndex;
 
     partial struct Regs
     {
-        [ApiComplete("regs.eflags")]
-        public struct eflags : IReg<eflags,W32,K>
+        [ApiComplete("regs.rflags")]
+        public struct rflags : IReg<rflags,W32,K>
         {
             K Data;
 
@@ -28,7 +28,7 @@ namespace Z0.Asm
             }
 
             [Ignore]
-            public RegKind RegKind => RegKind.EFLAGS;
+            public RegKind RegKind => RegKind.RFLAGS;
 
             public bit CF
             {

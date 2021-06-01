@@ -45,10 +45,10 @@ namespace Z0.Asm
             root.iter(pack, line => Wf.Row(line));
         }
 
-        public Index<ApiHostRes> Emit(Index<ApiCodeBlock> blocks)
+        public Index<ApiHostRes> Emit(ReadOnlySpan<ApiCodeBlock> blocks)
             => Emit(blocks, SourceDir);
 
-        public Index<ApiHostRes> Emit(Index<ApiCodeBlock> blocks, FS.FolderPath dst)
+        public Index<ApiHostRes> Emit(ReadOnlySpan<ApiCodeBlock> blocks, FS.FolderPath dst)
         {
             return Emit(blocks.ToHostBlocks(), dst);
         }

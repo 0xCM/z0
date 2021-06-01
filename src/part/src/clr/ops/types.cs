@@ -13,7 +13,7 @@ namespace Z0
     partial struct Clr
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrType> types(Assembly src)
+        public static ReadOnlySpan<ClrTypeAdapter> types(Assembly src)
             => adapt(types(src, out var _));
 
         [MethodImpl(Inline), Op]

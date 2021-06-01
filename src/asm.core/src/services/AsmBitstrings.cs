@@ -56,15 +56,15 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         static uint render(byte src, uint offset, Span<char> dst)
         {
-            seek(dst, offset++) = bit.bitchar(src, 7);
-            seek(dst, offset++) = bit.bitchar(src, 6);
-            seek(dst, offset++) = bit.bitchar(src, 5);
-            seek(dst, offset++) = bit.bitchar(src, 4);
+            seek(dst, offset++) = BitRender.bitchar(src, 7);
+            seek(dst, offset++) = BitRender.bitchar(src, 6);
+            seek(dst, offset++) = BitRender.bitchar(src, 5);
+            seek(dst, offset++) = BitRender.bitchar(src, 4);
             offset += separate(offset, dst);
-            seek(dst, offset++) = bit.bitchar(src, 3);
-            seek(dst, offset++) = bit.bitchar(src, 2);
-            seek(dst, offset++) = bit.bitchar(src, 1);
-            seek(dst, offset++) = bit.bitchar(src, 0);
+            seek(dst, offset++) = BitRender.bitchar(src, 3);
+            seek(dst, offset++) = BitRender.bitchar(src, 2);
+            seek(dst, offset++) = BitRender.bitchar(src, 1);
+            seek(dst, offset++) = BitRender.bitchar(src, 0);
             offset += separate(offset, dst);
             return 10;
         }

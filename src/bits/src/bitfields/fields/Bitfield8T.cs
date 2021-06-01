@@ -45,6 +45,12 @@ namespace Z0
             get => bytes(_State);
         }
 
+        public override string ToString()
+            => Format();
+
+        public string Format()
+            => api.format(this);
+
         internal S State
         {
             [MethodImpl(Inline)]
@@ -66,5 +72,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator S(Bitfield8<T> src)
             => src._State;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Bitfield8(Bitfield8<T> src)
+            => new Bitfield8(src.State);
     }
 }

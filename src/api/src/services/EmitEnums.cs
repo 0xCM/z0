@@ -14,7 +14,7 @@ namespace Z0
     {
         readonly IWfRuntime Wf;
 
-        public readonly ClrAssembly Source;
+        public readonly ClrAssemblyAdapter Source;
 
         public readonly FS.FilePath Target;
 
@@ -24,7 +24,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public EmitEnumsStep(IWfRuntime wf, WfHost host, ClrAssembly src)
+        public EmitEnumsStep(IWfRuntime wf, WfHost host, ClrAssemblyAdapter src)
         {
             Wf = wf;
             Host = host;

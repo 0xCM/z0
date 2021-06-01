@@ -12,14 +12,14 @@ namespace Z0
 
     partial struct CodeSymbolModels
     {
-        public readonly struct SymbolicAssembly : ISymbolicArtifact<ClrAssembly,AssemblySymbol>
+        public readonly struct SymbolicAssembly : ISymbolicArtifact<ClrAssemblyAdapter,AssemblySymbol>
         {
-            public ClrAssembly Artifact {get;}
+            public ClrAssemblyAdapter Artifact {get;}
 
             public AssemblySymbol Symbol {get;}
 
             [MethodImpl(Inline)]
-            public SymbolicAssembly(ClrAssembly a, AssemblySymbol s)
+            public SymbolicAssembly(ClrAssemblyAdapter a, AssemblySymbol s)
             {
                 Artifact = a;
                 Symbol = s;

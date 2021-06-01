@@ -10,13 +10,13 @@ namespace Z0
     using System.Diagnostics;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct Runtime
     {
-        public static ClrAssembly EntryAssembly
+        public static ClrAssemblyAdapter EntryAssembly
         {
             [MethodImpl(Inline), Op]
             get => Assembly.GetEntryAssembly();

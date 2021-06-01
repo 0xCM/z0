@@ -34,7 +34,7 @@ namespace Z0
             get => ClrArtifactKind.EnumField;
         }
 
-        public ClrType RefinedType
+        public ClrTypeAdapter RefinedType
         {
             [MethodImpl(Inline)]
             get => DeclaringType.Definition.GetEnumUnderlyingType();
@@ -58,7 +58,7 @@ namespace Z0
             get => Definition.Attributes;
         }
 
-        public ClrType DeclaringType
+        public ClrTypeAdapter DeclaringType
         {
             [MethodImpl(Inline)]
             get => Definition.DeclaringType;

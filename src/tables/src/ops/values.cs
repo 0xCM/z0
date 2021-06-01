@@ -79,7 +79,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static void values<T>(in T src, ReadOnlySpan<ClrField> fields, Span<FieldValue> dst)
+        public static void values<T>(in T src, ReadOnlySpan<ClrFieldAdapter> fields, Span<FieldValue> dst)
             where T : struct
         {
             ref var target = ref first(dst);

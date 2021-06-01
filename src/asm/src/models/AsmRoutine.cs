@@ -7,22 +7,17 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Describes the assembly encoding of a member api
     /// </summary>
-    public class AsmRoutine
+    public class AsmRoutine : IComparable<AsmRoutine>
     {
         /// <summary>
         /// The defining operation uri
         /// </summary>
         public OpUri Uri {get;}
-
-        /// <summary>
-        /// The function identifier
-        /// </summary>
-        public OpIdentity OpId {get;}
 
         /// <summary>
         /// The source member signature
@@ -48,7 +43,6 @@ namespace Z0.Asm
         public AsmRoutine(OpUri uri, MethodDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, Index<ApiInstruction> instructions)
         {
             Uri = uri;
-            OpId = uri.OpId;
             DisplaySig = sig;
             Instructions = instructions;
             Code = code;
@@ -57,6 +51,10 @@ namespace Z0.Asm
 
         public ApiCodeBlockHeader AsmHeader()
             => new ApiCodeBlockHeader("; " + RP.PageBreak160, Code.OpUri, DisplaySig, Code, TermCode);
+
+        [MethodImpl(Inline)]
+        public int CompareTo(AsmRoutine other)
+            => Code.BaseAddress.CompareTo(other.BaseAddress);
 
         /// <summary>
         /// The head of the address range

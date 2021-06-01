@@ -15,6 +15,67 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmRender
     {
+        const char Open = Chars.LBracket;
+
+        const string Sep = " | ";
+
+        const char Close = Chars.RBracket;
+
+        [Op]
+        public static string bits(RexPrefix src)
+            => text.format(BitRender.render(n8, n4, src.Code));
+
+        const string RexFieldPattern = "[W:{0} | R:{1} | X:{2} | B:{3}]";
+
+        [Op]
+        public static string bitfield(RexPrefix src)
+            => string.Format(RexFieldPattern, src.W, src.R, src.X, src.B);
+
+        public static string describe(RexPrefix src)
+            => $"{src.Code.FormatAsmHex()} | [{bits(src)}] => {bitfield(src)}";
+
+        public static string bitfield(Vsib src)
+        {
+            var dst = text.buffer();
+            dst.Append(Open);
+
+            dst.Append(src.SS.ToString());
+
+            dst.Append(Sep);
+
+            dst.Append(src.Index.ToString());
+
+            dst.Append(Sep);
+
+            dst.Append(src.Base.ToString());
+
+            dst.Append(Close);
+            return dst.Emit();
+        }
+
+        public static void bitfield(ModRm src, ITextBuffer dst)
+        {
+            dst.Append(Open);
+
+            dst.Append("ModRM.mod");
+            dst.Append(Chars.Colon);
+            dst.Append(src.Mod.Format());
+
+            dst.Append(Sep);
+
+            dst.Append("ModRM.reg");
+            dst.Append(Chars.Colon);
+            dst.Append(src.Reg.Format());
+
+            dst.Append(Sep);
+
+            dst.Append("ModRM.r/m");
+            dst.Append(Chars.Colon);
+            dst.Append(src.Rm.Format());
+
+            dst.Append(Close);
+        }
+
         [Op]
         public static byte format(in ApiCodeBlockHeader src, Span<string> dst)
         {

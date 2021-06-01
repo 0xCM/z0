@@ -8,15 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static math;
-    using static memory;
+    using static core;
 
     [ApiHost]
     public readonly struct mspan
     {
         public static ReadOnlySpan<bool> fcmp(Span<float> a, Span<float> b, FpCmpMode kind)
         {
-            var count =  root.min(a.Length,b.Length);
-            var dst = memory.span<bool>(count);
+            var count =  core.min(a.Length,b.Length);
+            var dst = span<bool>(count);
             for(var i = 0; i<count; i++)
                 seek(dst,i) = fmath.fcmp(a[i], b[i], kind);
             return dst;
@@ -24,8 +24,8 @@ namespace Z0
 
         public static ReadOnlySpan<bool> fcmp(Span<double> a, Span<double> b, FpCmpMode kind)
         {
-            var count =  root.min(a.Length,b.Length);
-            var dst = memory.span<bool>(count);
+            var count = core.min(a.Length,b.Length);
+            var dst = span<bool>(count);
             for(var i = 0; i< count; i++)
                 seek(dst,i) = fmath.fcmp(a[i], b[i], kind);
             return dst;

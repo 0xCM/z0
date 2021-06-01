@@ -12,14 +12,14 @@ namespace Z0
 
     partial struct CodeSymbolModels
     {
-        public readonly struct SymbolicMethod : ISymbolicArtifact<ClrMethod,MethodSymbol>
+        public readonly struct SymbolicMethod : ISymbolicArtifact<ClrMethodAdapter,MethodSymbol>
         {
-            public ClrMethod Artifact {get;}
+            public ClrMethodAdapter Artifact {get;}
 
             public MethodSymbol Symbol {get;}
 
             [MethodImpl(Inline)]
-            public SymbolicMethod(ClrMethod src, MethodSymbol sym)
+            public SymbolicMethod(ClrMethodAdapter src, MethodSymbol sym)
             {
                 Artifact = src;
                 Symbol = sym;

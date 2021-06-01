@@ -55,7 +55,7 @@ namespace Z0
             get => _FieldCount;
         }
 
-        public ClrType EnumType
+        public ClrTypeAdapter EnumType
         {
             [MethodImpl(Inline)]
             get => _EnumType;

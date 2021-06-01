@@ -14,11 +14,7 @@ namespace Z0
     partial class XTend
     {
         public static string FormatBitstring(this Hex32 src, N8 n)
-        {
-            Span<char> buffer = stackalloc char[64];
-            var count = HexVector.bitstring(src, n, 0,buffer);
-            return new string(slice(buffer,0,count));
-        }
+            => BitRender.format(n32,n8, src);
     }
 
     [ApiHost]
@@ -50,17 +46,17 @@ namespace Z0
 
         public static HexVector8<N> alloc<N>(W8 w, N n = default)
             where N : unmanaged, ITypeNat
-                => new HexVector8<N>(new Hex8[NatValues.value<N>()]);
+                => new HexVector8<N>(new Hex8[value<N>()]);
 
         [MethodImpl(Inline)]
         public static HexVector8<N> create<N>(W8 w, Span<Hex8> src, N n = default, uint offset = 0)
             where N : unmanaged, ITypeNat
-                => new HexVector8<N>(slice(src, offset, NatValues.value<N>()));
+                => new HexVector8<N>(slice(src, offset, value<N>()));
 
         [MethodImpl(Inline)]
         public static HexVector8<N> create<N>(W8 w, Span<byte> src, N n = default, uint offset = 0)
             where N : unmanaged, ITypeNat
-                => new HexVector8<N>(recover<Hex8>(slice(src, offset, NatValues.value<N>())));
+                => new HexVector8<N>(recover<Hex8>(slice(src, offset, value<N>())));
 
         /// <summary>
         /// Creates a vector with specified component count and width, initialized wtih a specified value
@@ -74,11 +70,10 @@ namespace Z0
 
         public static uint bitstring<N>(HexVector8<N> src, uint offset, Span<char> dst)
             where N : unmanaged, ITypeNat
-                => BitRender.render<N>(n8,n8, src.Bytes, offset, dst);
+                => BitRender.render<N>(n8, n8, src.Bytes, offset, dst);
 
         [Op]
         public static uint bitstring(Hex32 src, N8 n, uint offset, Span<char> dst)
             => BitRender.render(n32, n, src.Value, offset, dst);
-
     }
 }

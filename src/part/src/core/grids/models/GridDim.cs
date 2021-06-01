@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
     using static CharText;
 
     /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
             => Format();
 
         public override int GetHashCode()
-            => (int)alg.hash.combine(RowCount, ColCount);
+            => (int)FastHash.combine(RowCount, ColCount);
 
         public override bool Equals(object obj)
             => obj is GridDim d && Equals(d);
@@ -74,10 +74,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator GridDim((uint rows, uint cols) src)
             => new GridDim(src.rows,src.cols);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Pair<uint>(GridDim src)
-            => root.pair(src.RowCount, src.ColCount);
 
         public static GridDim Empty
             => default;

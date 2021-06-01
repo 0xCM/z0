@@ -9,8 +9,10 @@ namespace Z0
 
     using static Root;
 
+
     partial struct bit
     {
+
         /// <summary>
         /// Enables a specified source bit
         /// </summary>

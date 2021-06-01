@@ -16,9 +16,13 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmHexCodes
     {
-        public static RexPrefix RexW => RexPrefixCode.Rex48;
+        public static RexPrefixKind RexW => RexPrefixKind.W;
 
-        public static RexPrefix Rex40 => RexPrefixCode.Rex40;
+        public static RexPrefixKind RexR => RexPrefixKind.R;
+
+        public static RexPrefixKind RexX => RexPrefixKind.X;
+
+        public static RexPrefixKind RexB => RexPrefixKind.B;
 
         public static RegDigit rd0 => RegDigitCode.rd0;
 

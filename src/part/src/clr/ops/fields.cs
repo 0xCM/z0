@@ -13,11 +13,11 @@ namespace Z0
     partial struct Clr
     {
         /// <summary>
-        /// Returns a <see cref='ClrField'/> readonly span of the fields defined by the source
+        /// Returns a <see cref='ClrFieldAdapter'/> readonly span of the fields defined by the source
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrField> fields(Type src)
+        public static ReadOnlySpan<ClrFieldAdapter> fields(Type src)
             => adapt(fields(src, out var _));
 
         [MethodImpl(Inline), Op]
@@ -25,11 +25,11 @@ namespace Z0
             => dst = src.GetFields(BF);
 
         /// <summary>
-        /// Returns a <see cref='ClrField'/> readonly span of the fields defined by a parametrically-identified source type
+        /// Returns a <see cref='ClrFieldAdapter'/> readonly span of the fields defined by a parametrically-identified source type
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrField> fields<T>()
+        public static ReadOnlySpan<ClrFieldAdapter> fields<T>()
             => adapt(typeof(T).GetFields(BF));
     }
 }

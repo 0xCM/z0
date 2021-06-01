@@ -6,15 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Typed;
     using static core;
     using static math;
 
     partial struct Bitfields
     {
+        [MethodImpl(Inline), Op]
+        public static ref Bitfield8 store(byte i0, byte i1, byte src, ref Bitfield8 dst)
+        {
+            dst.Overwrite(or(dst.State, sll(src, u8(i1 - i0 + 1))));
+            return ref dst;
+        }
+
         [MethodImpl(Inline), Op]
         public static ref Bitfield16 store(byte i0, byte i1, ushort src, ref Bitfield16 dst)
         {

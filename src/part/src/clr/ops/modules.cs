@@ -13,11 +13,11 @@ namespace Z0
     partial struct Clr
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrModule> modules(Assembly src)
+        public static ReadOnlySpan<ClrModuleAdapter> modules(Assembly src)
             => adapt(src.Modules());
 
         [MethodImpl(Inline), Op]
-        public static ClrModule manifest(Assembly src)
+        public static ClrModuleAdapter manifest(Assembly src)
             => adapt(src.ManifestModule);
     }
 }

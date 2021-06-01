@@ -6,15 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Typed;
     using static core;
-    using static math;
 
     partial struct Bitfields
     {
+        [MethodImpl(Inline), Op]
+        public static byte read(Bitfield8 src, byte i0, byte i1)
+            => Bits.bitseg(src.State, i0, i1);
+
         [MethodImpl(Inline), Op]
         public static ushort read(Bitfield16 src, byte i0, byte i1)
             => Bits.bitseg(src.State, i0, i1);

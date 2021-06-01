@@ -10,13 +10,13 @@ namespace Z0
     using System.Reflection.Emit;
 
     using static System.Reflection.TypeAttributes;
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static GenSpecs;
 
     partial struct RecordBuilder
     {
-        [ApiHost(ApiNames.CilTableBuilder, true)]
+        [ApiHost]
         public ref partial struct CliBuilder
         {
             readonly Span<FieldSpec> Fields;
@@ -67,7 +67,7 @@ namespace Z0
             }
 
             [MethodImpl(Inline),Op]
-            public  CliBuilder WithField(in FieldSpec src)
+            public CliBuilder WithField(in FieldSpec src)
             {
                 seek(Fields, Index++) = src;
                 return this;
@@ -82,7 +82,7 @@ namespace Z0
                 => WithField(new FieldSpec(name, type.Name, Index));
 
             [MethodImpl(Inline), Op]
-            public CliBuilder WithField(ClrField src)
+            public CliBuilder WithField(ClrFieldAdapter src)
                 =>  WithField(new FieldSpec(src.Name.Format(), src.FieldType.Name.Format(), Index));
 
             [MethodImpl(Inline), Op]

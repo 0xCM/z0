@@ -91,11 +91,6 @@ namespace Z0.Asm
             FunctionWorkflows.run(Wf);
         }
 
-        void ListCommands()
-        {
-            root.iter(Wf.Router.SupportedCommands, c => Wf.Status($"{c} enabled"));
-        }
-
         void EmitImageHeaders()
         {
             var svc = CliPipe.create(Wf);
@@ -128,7 +123,6 @@ namespace Z0.Asm
         {
             var entries = Wf.ApiCatalogs().LoadCatalog().View;
         }
-
 
         static ReadOnlySpan<byte> mul_ᐤ8uㆍ8uᐤ
             => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x0f,0xaf,0xc2,0x0f,0xb6,0xc0,0xc3};
@@ -302,9 +296,7 @@ namespace Z0.Asm
 
         void EmitMetadataBlocks()
         {
-            var pipe = Wf.CliPipe();
-            pipe.EmitMetaBlocks();
-
+            Wf.CliPipe().EmitMetaBlocks();
         }
 
         void Symbolize()
@@ -422,7 +414,6 @@ namespace Z0.Asm
             Wf.Row(dx);
         }
 
-
         void StatementRountTrip()
         {
             var blocks = Wf.ApiHex().ReadBlocks().View;
@@ -431,7 +422,6 @@ namespace Z0.Asm
             pipe.EmitHostStatements(blocks, root);
             var parsed = pipe.ParseStatementData(root);
         }
-
 
         public void ParseDump()
         {
@@ -454,7 +444,6 @@ namespace Z0.Asm
             using var log = ShowLog(string.Format("{0}.{1}", formatter.TableId, src.FileName), FS.Log);
             log.Show(formatter.Format(header, RecordFormatKind.KeyValuePairs));
         }
-
 
         void CheckCpuid()
         {
@@ -527,7 +516,6 @@ namespace Z0.Asm
                 Wf.EmittedFile(emitting, result.Data);
         }
 
-
         void EmitMethodDefs()
         {
             var pipe = Wf.CliPipe();
@@ -598,22 +586,89 @@ namespace Z0.Asm
         }
 
 
+        void EmitResPack()
+        {
+            var blocks = LoadApiBlocks();
+            var dst = Db.AppLogDir("Respack");
+            var resources = Wf.ResPackEmitter().Emit(blocks.View,dst);
+        }
+
         void ShowRegOps()
         {
             var reg = AsmOp.reg(RegWidth.W32, RegClass.GP, RegIndex.r2);
             Wf.Row(string.Format("{0}{1}/{2}", reg.Width, reg.Index, reg.RegClass));
         }
 
+        void ShowRexBits()
+        {
+            var bits = AsmEncoder.RexPrefixBits();
+            using var log = OpenShowLog("rexbits");
+            var count = bits.Length;
+            for(var i=0; i<count; i++)
+                Show(AsmRender.describe(skip(bits,i)), log);
+        }
+
+        void ShowModRmTable()
+        {
+            using var dst = ShowLog(FS.Log);
+            var f0 = BitSeq.bits(n3);
+            var f1 = BitSeq.bits(n3);
+            var f2 = BitSeq.bits(n2);
+            var i=0;
+            for(var c=0u; c<f2.Length; c++)
+            for(var b=0u; b<f1.Length; b++)
+            for(var a=0u; a<f0.Length; a++,i++)
+            {
+                var modrm = asm.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
+                AsmRender.bitfield(modrm, dst.Buffer);
+                dst.Buffer.Append(" = ");
+                dst.Buffer.Append(modrm.Encoded.FormatBits());
+                dst.ShowBuffer();
+            }
+        }
+
+        /// <summary>
+        /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
+        /// </summary>
+        public void CheckModRmBits()
+        {
+            void emit(ShowLog dst)
+            {
+                var f0 = BitSeq.bits(n3);
+                var f1 = BitSeq.bits(n3);
+                var f2 = BitSeq.bits(n2);
+                var i=0;
+
+                for(var c=0u; c<f2.Length; c++)
+                for(var b=0u; b<f1.Length; b++)
+                for(var a=0u; a<f0.Length; a++,i++)
+                {
+                    var m1 = asm.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
+                    var m2 = asm.modrm((byte)i);
+                    AsmRender.bitfield(m1, dst.Buffer);
+                    dst.Buffer.Append(" ^ ");
+                    AsmRender.bitfield(m2, dst.Buffer);
+                    dst.Buffer.Append(" = ");
+                    dst.Buffer.Append((m1^m2).Encoded.FormatBits());
+                    dst.ShowBuffer();
+                }
+           }
+
+            Show("modrm", FS.Log, emit);
+        }
+
+
         public void Run()
         {
+            //ShowModRmTable();
             //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);
             //EmitMethodDefs();
             //EmitFieldDefs();
             //EmitCilOpCodes();
             //LoadHexPacks();
-            ShowRegOps();
-            //RunExtractWorkflow();
+            //CheckCpuid();
+            RunExtractWorkflow();
             //Wf.AsmCatalogs().EmitAssetCatalog();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");
@@ -627,6 +682,7 @@ namespace Z0.Asm
             // var dir = Db.AppLogDir();
             // EmitAsmRows(dir);
         }
+
 
 
         public static void Main(params string[] args)

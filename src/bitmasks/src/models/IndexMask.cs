@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static memory;
+    using static Typed;
 
     /// <summary>
     /// Defines a specification for producing an index-oriented mask
@@ -25,7 +25,7 @@ namespace Z0
             => M;
 
         public string Format()
-            => text.format(RenderPattern, nat64u<N>(), Numeric.kind<T>().Format());
+            => text.format(RenderPattern, nat64u<N>(), NumericKinds.kind<T>().Format());
 
         public override string ToString()
             => Format();

@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
         public static string grid(Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
         {
-            var dst = bit.bitchars(src);
+            var dst = BitRender.render(src);
             var sb = text.build();
             var limit = maxbits ?? dst.Length;
             for(int i=0, rowidx=0; i<limit; i+= rowlen, rowidx++)

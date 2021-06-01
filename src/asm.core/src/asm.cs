@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Root;
 
@@ -15,21 +14,20 @@ namespace Z0.Asm
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static asm Service => new asm(2);
+        [MethodImpl(Inline), Op]
+        public static Vsib vsib(byte src)
+            => new Vsib(src);
 
-        readonly object[] state;
+        [MethodImpl(Inline), Op]
+        public static ModRm modrm(byte src)
+            => new ModRm(src);
 
-        ref object this[byte index]
-        {
-            [MethodImpl(Inline)]
-            get => ref state[index];
-        }
+        [MethodImpl(Inline), Op]
+        public static ModRm modrm(uint3 rm, uint3 reg, uint2 mod)
+            => new ModRm(Bits.join((rm, 0), (reg, 3), (mod, 6)));
 
-        public asm(int i)
-        {
-            state = new object[i];
-            state[0] = HexFormatSpecs.options(zpad:false, specifier:false);
-            state[1] = new StringBuilder(1024);
-        }
+        [MethodImpl(Inline), Op]
+        public static ModRm modrm(uint3 r1, uint3 r2)
+            => modrm(r1, r2, uint2.Max);
     }
 }

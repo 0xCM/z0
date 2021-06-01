@@ -41,11 +41,11 @@ namespace Z0
         }
 
         [Op]
-        public Index<HexPacked> Pack(Index<ApiCodeBlock> src, bool validate = false)
+        public Index<HexPacked> Pack(SortedSpan<ApiCodeBlock> src, bool validate = false)
         {
             const ushort BufferLength = 48400;
 
-            var blocks = src.Sort().View;
+            var blocks = src.View;
             var count = blocks.Length;
             var packs = alloc<HexPacked>(count);
             var chars = alloc<char>(BufferLength);
@@ -73,10 +73,10 @@ namespace Z0
         }
 
         [Op]
-        public Index<HexPacked> Emit(Index<ApiCodeBlock> blocks, FS.FilePath? dst = null, bool validate = false)
+        public Index<HexPacked> Emit(SortedSpan<ApiCodeBlock> blocks, FS.FilePath? dst = null, bool validate = false)
         {
             var _dst = dst ?? Db.TableRoot() + FS.file("apihex", FS.ext("xpack"));
-            var result = Pack(blocks,validate);
+            var result = Pack(blocks, validate);
             var packed = result.View;
             var emitting = Wf.EmittingFile(_dst);
             using var writer = _dst.Writer();

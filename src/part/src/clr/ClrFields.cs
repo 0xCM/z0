@@ -18,19 +18,19 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         /// <summary>
-        /// Returns a <see cref='ClrField'/> readonly span of the declared instance fields defined by the source
+        /// Returns a <see cref='ClrFieldAdapter'/> readonly span of the declared instance fields defined by the source
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrField> instance(Type src, bool declared = true)
+        public static ReadOnlySpan<ClrFieldAdapter> instance(Type src, bool declared = true)
             => ClrModels.adapt(src.GetFields(declared ? BF_DeclaredInstance : BF_All));
 
         /// <summary>
-        /// Returns a <see cref='ClrField'/> readonly span of the fields defined by the source
+        /// Returns a <see cref='ClrFieldAdapter'/> readonly span of the fields defined by the source
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrField> all(Type src)
+        public static ReadOnlySpan<ClrFieldAdapter> all(Type src)
             => ClrModels.fields(src);
 
         [Op]

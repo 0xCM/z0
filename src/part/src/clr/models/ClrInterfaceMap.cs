@@ -58,8 +58,8 @@ namespace Z0
             var count = OperationCount;
             for(var i=0u; i<count; i++)
             {
-                ClrMethod spec = Specs[i];
-                ClrMethod impl = Impl[i];
+                ClrMethodAdapter spec = Specs[i];
+                ClrMethodAdapter impl = Impl[i];
                 dst.AppendLine($"   {spec.DeclaringType}::{spec.Name} --> {impl.DeclaringType}::{impl.Name}");
                 dst.AppendLineFormat("       Spec(MethodHandle) {0} --> Impl(MethodHandle) {1}", spec.HandleAddress, impl.HandleAddress);
                 dst.AppendLineFormat("       Spec(FunctionPtr) {0} --> Impl(FunctionPtr)  {1}", spec.PointerAddress, impl.PointerAddress);

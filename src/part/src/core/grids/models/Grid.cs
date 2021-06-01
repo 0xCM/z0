@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class Grid<T>
     {
@@ -52,6 +52,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint linear(GridDim dim, GridPoint point)
             => point.Row*dim.ColCount+ point.Col;
-
     }
 }

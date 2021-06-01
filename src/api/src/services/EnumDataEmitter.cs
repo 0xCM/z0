@@ -11,7 +11,7 @@ namespace Z0
 
     public sealed class EnumDataEmitter : AppService<EnumDataEmitter>
     {
-        public Index<ClrEnumRecord> EmitEnumRecords(ClrAssembly src, FS.FilePath dst)
+        public Index<ClrEnumRecord> EmitEnumRecords(ClrAssemblyAdapter src, FS.FilePath dst)
         {
 
             var records = Enums.records(src);

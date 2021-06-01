@@ -40,6 +40,18 @@ namespace Z0
             get => bytes(_State);
         }
 
+        public Bitfield8 Lo
+        {
+            [MethodImpl(Inline)]
+            get => api.lo(this);
+        }
+
+        public Bitfield8 Hi
+        {
+            [MethodImpl(Inline)]
+            get => api.hi(this);
+        }
+
         public override string ToString()
             => Format();
 

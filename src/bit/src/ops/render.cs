@@ -12,106 +12,12 @@ namespace Z0
     using static core;
     using static Typed;
 
-
     partial struct bit
     {
         [MethodImpl(Inline), Closures(Closure)]
         public static BitFormatter<T> formatter<T>(BitFormat? config = null)
             where T : struct
                 => new BitFormatter<T>(config ?? BitFormat.configure());
-
-        [MethodImpl(Inline), Op]
-        public static uint render(ReadOnlySpan<byte> src, Span<char> dst)
-            => render(src, (uint)dst.Length, dst);
-
-        [MethodImpl(Inline), Op]
-        public static uint render(ReadOnlySpan<bit> src, Span<char> dst, uint offset)
-        {
-            var j = 0u;
-            var k = min(src.Length + offset, dst.Length);
-            for(uint i=offset; i<k; i++, j++)
-                seek(dst,i) = skip(src,j).ToChar();
-            return j;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint render(N8 n, byte src, uint maxbits, uint j, Span<char> dst)
-        {
-            for(byte i=0; i<8; i++, j++)
-            {
-                if(j>=maxbits)
-                    break;
-
-                seek(dst, (uint)j) = bit.test(src, i).ToChar();
-            }
-            return j;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint render(N8 n, in byte src, int length, uint maxbits, Span<char> dst)
-        {
-            var k=0u;
-            for(var i=0u; i<length; i++)
-            {
-                k += render(n, skip(src,i), maxbits, k, dst);
-                if(k >= maxbits)
-                    break;
-            }
-            return k;
-        }
-
-
-        [MethodImpl(Inline), Op]
-        public static uint render(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
-            => render(n8, first(src), src.Length, maxbits, dst);
-
-        [MethodImpl(Inline), Op]
-        public static byte render(N4 n, byte src, uint j, Span<char> dst)
-        {
-            var counter = z8;
-            counter += bit.bitchars(src, 7, out seek(dst, j++), out seek(dst,j++));
-            counter += bit.bitchars(src, 5, out seek(dst, j++), out seek(dst,j++));
-            seek(dst, j++) = Chars.Space;
-            counter++;
-
-            counter += bitchars(src, 3, out seek(dst, j++), out seek(dst,j++));
-            counter += bitchars(src, 1, out seek(dst, j++), out seek(dst,j++));
-            seek(dst, j++) = Chars.Space;
-            counter++;
-            return counter;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static byte render(N2 n, byte src, uint j, Span<char> dst)
-        {
-            var counter = z8;
-
-            counter += bitchars(src, 7, out seek(dst, j++), out seek(dst,j++));
-            seek(dst, j++) = Chars.Space;
-            counter++;
-
-            counter += bitchars(src, 5, out seek(dst, j++), out seek(dst,j++));
-            seek(dst, j++) = Chars.Space;
-            counter++;
-
-            counter += bitchars(src, 3, out seek(dst, j++), out seek(dst,j++));
-            seek(dst, j++) = Chars.Space;
-            counter++;
-
-            counter += bitchars(src, 1, out seek(dst, j++), out seek(dst,j++));
-            seek(dst, j++) = Chars.Space;
-            counter++;
-
-            return counter;
-        }
-
-        public static string bitformat(N2 n, byte src)
-        {
-            Span<char> dst = stackalloc char[12];
-            render(n2, src,0, dst);
-            return new string(dst);
-        }
-
 
         [Op]
         public static string format(ReadOnlySpan<bit> src, BitFormat? fmt = null)
@@ -147,7 +53,7 @@ namespace Z0
             var dst = span<char>(count);
             dst.Fill(Chars.D0);
 
-            bit.render(src, config.MaxBitCount, dst);
+            BitRender.render(src, config.MaxBitCount, dst);
 
             dst.Reverse();
 
@@ -206,7 +112,6 @@ namespace Z0
             else
                 return EmptyString;
         }
-
 
         [Op]
         static string format8(object src)

@@ -31,7 +31,7 @@ namespace Z0
             get => ClrArtifactKind.ValueParam;
         }
 
-        public ClrType DataType
+        public ClrTypeAdapter DataType
         {
             get => Definition.ParameterType;
         }

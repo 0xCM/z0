@@ -68,10 +68,13 @@ namespace Z0.Asm
             get => (byte)Data == 0;
         }
 
-
         [MethodImpl(Inline)]
         public static ModRm operator ^(ModRm a, ModRm b)
             => new ModRm(Bytes.xor(a.Data, b.Data));
+
+        [MethodImpl(Inline)]
+        public static ModRm operator |(ModRm a, ModRm b)
+            => new ModRm(Bytes.or(a.Data, b.Data));
 
         public static ModRm Empty => default;
     }

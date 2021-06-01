@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-
     [AttributeUsage(AttributeTargets.Enum)]
     public class PrefixCodesAttribute : Attribute
     {

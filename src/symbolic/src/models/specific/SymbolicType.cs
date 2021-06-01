@@ -12,14 +12,14 @@ namespace Z0
 
     partial struct CodeSymbolModels
     {
-        public readonly struct SymbolicType : ISymbolicArtifact<ClrType,TypeSymbol>
+        public readonly struct SymbolicType : ISymbolicArtifact<ClrTypeAdapter,TypeSymbol>
         {
-            public ClrType Artifact {get;}
+            public ClrTypeAdapter Artifact {get;}
 
             public TypeSymbol Symbol {get;}
 
             [MethodImpl(Inline)]
-            public SymbolicType(ClrType src, TypeSymbol sym)
+            public SymbolicType(ClrTypeAdapter src, TypeSymbol sym)
             {
                 Artifact = src;
                 Symbol = sym;

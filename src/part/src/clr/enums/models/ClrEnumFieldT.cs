@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using R = System.Reflection;
 
@@ -35,7 +35,7 @@ namespace Z0
             get => ClrArtifactKind.EnumField;
         }
 
-        public ClrType RefinedType
+        public ClrTypeAdapter RefinedType
         {
             [MethodImpl(Inline)]
             get => DeclaringType.Definition.GetEnumUnderlyingType();
@@ -59,7 +59,7 @@ namespace Z0
             get => Definition.Attributes;
         }
 
-        public ClrType DeclaringType
+        public ClrTypeAdapter DeclaringType
         {
             [MethodImpl(Inline)]
             get => Definition.DeclaringType;

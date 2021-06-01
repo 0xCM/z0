@@ -192,7 +192,6 @@ namespace Z0
             where T : IMsgPattern
                 => Wf.Ran(flow.WithMsg(string.Format("{0} | {1}/{2}", data, HostName, operation)));
 
-
         protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, string title = EmptyString)
             => ShowSpan(src, file, item => text.format("{0}", item), title);
 

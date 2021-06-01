@@ -34,6 +34,18 @@ namespace Z0
             return this;
         }
 
+        public Bitfield16 Lo
+        {
+            [MethodImpl(Inline)]
+            get => api.lo(this);
+        }
+
+        public Bitfield16 Hi
+        {
+            [MethodImpl(Inline)]
+            get => api.hi(this);
+        }
+
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]

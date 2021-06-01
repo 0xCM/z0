@@ -1,0 +1,86 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+    using static Typed;
+    using static bit;
+
+    partial struct BitRender
+    {
+        public static uint render<N>(N8 n, N8 w, ReadOnlySpan<byte> src, uint offset, Span<char> dst)
+            where N : unmanaged, ITypeNat
+        {
+            var counter = 0u;
+            var count = (int)value<N>();
+            seek(dst, counter + offset) = Chars.Lt;
+            counter++;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var cell = ref src[i];
+                if(i != 0)
+                    counter += separate(counter + offset, dst);
+
+                counter += render(n8, cell, counter + offset, dst);
+            }
+            seek(dst, counter + offset) = Chars.Gt;
+            counter++;
+            return counter;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N8 n, byte src, uint offset, Span<char> dst)
+        {
+            seek(dst, offset++) = bitchar(src, 7);
+            seek(dst, offset++) = bitchar(src, 6);
+            seek(dst, offset++) = bitchar(src, 5);
+            seek(dst, offset++) = bitchar(src, 4);
+            seek(dst, offset++) = bitchar(src, 3);
+            seek(dst, offset++) = bitchar(src, 2);
+            seek(dst, offset++) = bitchar(src, 1);
+            seek(dst, offset++) = bitchar(src, 0);
+            return n;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N8 n, N8 w, byte src, uint maxbits, uint j, Span<char> dst)
+        {
+            for(byte i=0; i<8; i++, j++)
+            {
+                if(j>=maxbits)
+                    break;
+
+                seek(dst, (uint)j) = bit.test(src, i).ToChar();
+            }
+            return j;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N8 n, N8 w, ReadOnlySpan<byte> src, int count, uint maxbits, Span<char> dst)
+        {
+            var k=0u;
+            for(var i=0u; i<count; i++)
+            {
+                k += render(n, w, skip(src,i), maxbits, k, dst);
+                if(k >= maxbits)
+                    break;
+            }
+            return k;
+        }
+
+
+        [MethodImpl(Inline), Op]
+        public static uint render(ReadOnlySpan<byte> src, Span<char> dst)
+            => render(src, (uint)dst.Length, dst);
+
+        [MethodImpl(Inline), Op]
+        public static uint render(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
+            => render(n8, n8, src, src.Length, maxbits, dst);
+    }
+}

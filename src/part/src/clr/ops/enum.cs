@@ -12,7 +12,7 @@ namespace Z0
     partial struct Clr
     {
         [MethodImpl(Inline)]
-        public static ClrEnum<E> @enum<E>()
+        public static ClrEnumAdapter<E> @enum<E>()
             where E : unmanaged, Enum
                 => default;
     }

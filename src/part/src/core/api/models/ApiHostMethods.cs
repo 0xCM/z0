@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a catalog over <see cref='ApiMember'/> values for a specified <see cref='IApiHost'/>
@@ -50,10 +50,10 @@ namespace Z0
             get => !IsEmpty;
         }
 
-        public ReadOnlySpan<ClrMethod> View
+        public ReadOnlySpan<ClrMethodAdapter> View
         {
             [MethodImpl(Inline)]
-            get => memory.recover<MethodInfo,ClrMethod>(memory.@readonly(Storage));
+            get => memory.recover<MethodInfo,ClrMethodAdapter>(memory.@readonly(Storage));
         }
 
         public static ApiHostMethods Empty

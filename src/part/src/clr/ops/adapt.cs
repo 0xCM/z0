@@ -14,27 +14,27 @@ namespace Z0
     partial struct Clr
     {
         /// <summary>
-        /// Defines a <see cref='ClrAssembly'/> over an <see cref='Assembly'/>
+        /// Defines a <see cref='ClrAssemblyAdapter'/> over an <see cref='Assembly'/>
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
-        public static ClrAssembly adapt(Assembly src)
+        public static ClrAssemblyAdapter adapt(Assembly src)
             => src;
 
         /// <summary>
-        /// Defines a <see cref='ClrModule'/> over a <see cref='Module'/>
+        /// Defines a <see cref='ClrModuleAdapter'/> over a <see cref='Module'/>
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
-        public static ClrModule adapt(Module src)
+        public static ClrModuleAdapter adapt(Module src)
             => src;
 
         /// <summary>
-        /// Defines a <see cref='ClrField'/> over a <see cref='FieldInfo'/>
+        /// Defines a <see cref='ClrFieldAdapter'/> over a <see cref='FieldInfo'/>
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
-        public static ClrField adapt(FieldInfo src)
+        public static ClrFieldAdapter adapt(FieldInfo src)
             => src;
 
         /// <summary>
@@ -46,32 +46,32 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Defines a <see cref='ClrMethod'/> over the source
+        /// Defines a <see cref='ClrMethodAdapter'/> over the source
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
-        public static ClrMethod adapt(MethodInfo src)
+        public static ClrMethodAdapter adapt(MethodInfo src)
             => src;
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrAssembly> adapt(Assembly[] src)
-            => adapt<Assembly,ClrAssembly>(src);
+        public static ReadOnlySpan<ClrAssemblyAdapter> adapt(Assembly[] src)
+            => adapt<Assembly,ClrAssemblyAdapter>(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrType> adapt(Type[] src)
-            => adapt<Type,ClrType>(src);
+        public static ReadOnlySpan<ClrTypeAdapter> adapt(Type[] src)
+            => adapt<Type,ClrTypeAdapter>(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrModule> adapt(Module[] src)
-            => adapt<Module,ClrModule>(src);
+        public static ReadOnlySpan<ClrModuleAdapter> adapt(Module[] src)
+            => adapt<Module,ClrModuleAdapter>(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrMethod> adapt(MethodInfo[] src)
-            => adapt<MethodInfo,ClrMethod>(src);
+        public static ReadOnlySpan<ClrMethodAdapter> adapt(MethodInfo[] src)
+            => adapt<MethodInfo,ClrMethodAdapter>(src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrField> adapt(FieldInfo[] src)
-            => adapt<FieldInfo,ClrField>(src);
+        public static ReadOnlySpan<ClrFieldAdapter> adapt(FieldInfo[] src)
+            => adapt<FieldInfo,ClrFieldAdapter>(src);
 
         [MethodImpl(Inline), Op]
         internal static ReadOnlySpan<V> adapt<S,V>(S[] src)

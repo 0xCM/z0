@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static Typed;
 
     /// <summary>
     /// Defines a specification for producing joint lsb/msb mask compositions
@@ -36,19 +36,19 @@ namespace Z0
         NumericKind IMaskSpec.K
         {
             [MethodImpl(Inline)]
-            get => Numeric.kind<T>();
+            get => NumericKinds.kind<T>();
         }
 
         uint IBitFrequency.F
         {
             [MethodImpl(Inline)]
-            get => (uint)TypeNats.value<F>();
+            get => (uint)value<F>();
         }
 
         uint IBitDensity.D
         {
             [MethodImpl(Inline)]
-            get => (uint)TypeNats.value<D>();
+            get => (uint)value<D>();
         }
 
         [MethodImpl(Inline)]

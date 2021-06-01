@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
-    using System.Linq;
 
     using static Root;
     using static DiagnosticRecords;

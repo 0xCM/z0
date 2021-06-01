@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static BitMasks.Literals;
+    using static Typed;
 
     partial class Bits
     {

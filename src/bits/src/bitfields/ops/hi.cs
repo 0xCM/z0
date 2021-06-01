@@ -6,15 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Root;
     using static Typed;
     using static core;
-    using static math;
 
     partial struct Bitfields
     {
+        [MethodImpl(Inline), Op]
+        public static Bitfield8 hi(Bitfield16 src)
+            => create((byte)(math.srl(src.State, Bitfield8.Width)));
+
         [MethodImpl(Inline), Op]
         public static Bitfield16 hi(Bitfield32 src)
             => create((ushort)(math.srl(src.State, Bitfield16.Width)));
@@ -26,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt8x16x32k)]
         public static Bitfield8<T> hi<T>(Bitfield16<T> src)
             where T : unmanaged
-                => create(w8, to<T>((byte)(math.srl(src.State, 8))));
+                => create(w8, to<T>((byte)(math.srl(src.State, Bitfield8.Width))));
 
         [MethodImpl(Inline), Op, Closures(UInt8x16x32k)]
         public static Bitfield16<T> hi<T>(Bitfield32<T> src)

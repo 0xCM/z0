@@ -18,8 +18,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ClrProperty> properties(Type src)
-            => recover<PropertyInfo,ClrProperty>(properties(src, out var _));
+        public static ReadOnlySpan<ClrPropertyAdapter> properties(Type src)
+            => recover<PropertyInfo,ClrPropertyAdapter>(properties(src, out var _));
 
         [MethodImpl(Inline), Op]
         public static PropertyInfo[] properties(Type src, out PropertyInfo[] dst)

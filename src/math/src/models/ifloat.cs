@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     // This "Do It Yourself Floating Point" class implements a floating-point number
     // with a uint64 significand and an int exponent. Normalized DiyFp numbers will

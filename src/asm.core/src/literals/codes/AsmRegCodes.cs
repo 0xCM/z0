@@ -705,7 +705,7 @@ namespace Z0.Asm
         }
 
         [SymbolSource]
-        public enum SegReg : uint
+        public enum SegReg : byte
         {
             /// <summary>
             /// Code segment register
@@ -742,6 +742,18 @@ namespace Z0.Asm
             /// </summary>
             [Symbol("gs","Extra segment (3)")]
             GS = r5,
+        }
+
+        public enum SysPtrReg : byte
+        {
+            [Symbol("GDTR","The global descriptor table register")]
+            GDTR = r0,
+
+            [Symbol("LDTR","The localal descriptor table register")]
+            LDTR = r1,
+
+            [Symbol("IDTR","The interrupt descriptor table register")]
+            IDTR = r2,
         }
     }
 }

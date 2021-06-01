@@ -30,7 +30,9 @@ namespace Z0
                                    MinidumpType.MiniDumpWithFullMemoryInfo |
                                    MinidumpType.MiniDumpWithThreadInfo |
                                     MinidumpType.MiniDumpWithTokenInformation |
-                                    MinidumpType.MiniDumpWithModuleHeaders
+                                    MinidumpType.MiniDumpWithModuleHeaders |
+                                    MinidumpType.MiniDumpWithAvxXStateContext |
+                                    MinidumpType.MiniDumpWithIptTrace
                                     ;
                         break;
                     case DumpTypeOption.Heap:

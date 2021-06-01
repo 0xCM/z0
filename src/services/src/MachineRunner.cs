@@ -22,12 +22,13 @@ namespace Z0
             {
                 var blocks = hex.ReadBlocks().Storage;
                 var partitioned = blocks.ToHostBlocks();
+                var sorted = blocks.ToSortedSpan();
 
                 if(options.EmitHexIndex)
                     Emitted(hex.EmitIndex(blocks));
 
                 if(options.EmitHexPack)
-                    Emitted(Wf.ApiHexPacks().Emit(blocks));
+                    Emitted(Wf.ApiHexPacks().Emit(sorted));
 
                 if(options.EmitAsmRows)
                     Emitted(Wf.AsmRowBuilder().EmitAsmDetailRows(blocks));
@@ -35,9 +36,6 @@ namespace Z0
                 if(options.EmitCallData)
                 {
                     var routines = decoder.Decode(blocks);
-
-                    // if(options.EmitJmpData)
-                    //     Emitted(Wf.AsmJmpPipe().EmitRows(routines.View));
 
                     if(options.EmitCallData)
                         Emitted(Wf.AsmCallPipe().EmitRows(routines.View));

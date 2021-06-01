@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public struct CheckHiMaskResult<T>
     {
         public byte Count;

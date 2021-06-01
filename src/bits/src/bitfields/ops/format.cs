@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
 
-    using static core;
-
     partial struct Bitfields
     {
+        [Op]
+        public static string format(Bitfield8 src)
+            => text.format(render(src));
+
         [Op]
         public static string format(Bitfield16 src)
             => text.format(render(src));
@@ -21,35 +23,6 @@ namespace Z0
         [Op]
         public static string format(Bitfield64 src)
             => text.format(render(src));
-
-        // {
-
-            // var bytes = src.Bytes;
-            // var buffer = CharBlock32.Null.Data;
-            // var count = render(src,buffer);
-            // var chars = slice(buffer,0,count);
-            // return text.format(chars);
-        //}
-
-        // [Op]
-        // public static string format(Bitfield32 src)
-        // {
-        //     var bytes = src.Bytes;
-        //     var buffer = CharBlock64.Null.Data;
-        //     var count = render(src,buffer);
-        //     var chars = slice(buffer,0,count);
-        //     return text.format(chars);
-        // }
-
-        // [Op]
-        // public static string format(Bitfield64 src)
-        // {
-        //     var bytes = src.Bytes;
-        //     var buffer = CharBlock128.Null.Data;
-        //     var count = render(src, buffer);
-        //     var chars = slice(buffer, 0, count);
-        //     return text.format(chars);
-        // }
 
         /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}

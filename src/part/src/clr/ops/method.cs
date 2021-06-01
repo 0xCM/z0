@@ -13,7 +13,7 @@ namespace Z0
     partial struct Clr
     {
         [MethodImpl(Inline), Op]
-        public static ClrMethod method(Delegate src)
+        public static ClrMethodAdapter method(Delegate src)
             => src.Method;
 
         [MethodImpl(Inline), Op]

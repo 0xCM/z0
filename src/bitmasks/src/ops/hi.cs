@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static Numeric;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
+    using static NumericCast;
 
     partial class BitMasks
     {

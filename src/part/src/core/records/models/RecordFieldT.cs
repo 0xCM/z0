@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The defining field
         /// </summary>
-        public ClrField Definition;
+        public ClrFieldAdapter Definition;
 
         /// <summary>
         /// The 0-based, declaration order of the field
@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// The field datatype
         /// </summary>
-        public ClrType DataType
+        public ClrTypeAdapter DataType
         {
             [MethodImpl(Inline)]
             get => Definition.FieldType;
@@ -46,7 +46,7 @@ namespace Z0
         /// <summary>
         /// The declaring record type
         /// </summary>
-        public ClrType RecordType
+        public ClrTypeAdapter RecordType
         {
             [MethodImpl(Inline)]
             get => Definition.DeclaringType;

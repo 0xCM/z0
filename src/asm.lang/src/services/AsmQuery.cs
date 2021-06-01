@@ -15,11 +15,14 @@ namespace Z0.Asm
     using L = LockPrefixCode;
     using SZ = SizeOverrideCode;
     using SG = SegOverrideCode;
-    using R = RexPrefixCode;
 
     [ApiHost]
     public readonly struct AsmQuery
     {
+        const byte MinRexCode = 0x40;
+
+        const byte MaxRexCode = 0x4F;
+
         [MethodImpl(Inline), Op]
         public static bit IsCallRel32(ReadOnlySpan<byte> src, uint offset)
             => (offset + 4) <= src.Length && skip(src, offset) == 0xE8;
@@ -36,7 +39,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit IsRexPrefix(byte src)
-            => emath.between(src, R.Rex40, R.Rex4F);
+            => math.between(src, MinRexCode, MaxRexCode);
 
         [MethodImpl(Inline), Op]
         public static bit HasRexPrefix(AsmOpCode src)
