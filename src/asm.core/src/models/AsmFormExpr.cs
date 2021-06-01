@@ -42,7 +42,7 @@ namespace Z0.Asm
             => src is AsmFormExpr x && Equals(x);
 
         public override int GetHashCode()
-            => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
+            => (int)FastHash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
         public string Format()
             => string.Format("({0})<{1}>", Sig, OpCode);

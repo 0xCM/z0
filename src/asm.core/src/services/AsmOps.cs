@@ -2,18 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IChronic
-    {
-        Timestamp Ts 
-            => DateTime.Now;
-    }
+    using static Root;
+    using static AsmOps;
 
-    public interface IChronic<F> : IChronic
-        where F : struct, IChronic
+    [ApiHost]
+    public readonly partial struct AsmOps
     {
 
     }

@@ -1,0 +1,53 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static Typed;
+    using static core;
+    using static math;
+
+    partial struct Bitfields
+    {
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> render(Bitfield16 src)
+        {
+            var buffer = CharBlock32.Null.Data;
+            var count = render(src, buffer);
+            return slice(buffer, 0, count);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> render(Bitfield32 src)
+        {
+            var buffer = CharBlock64.Null.Data;
+            var count = render(src, buffer);
+            return slice(buffer, 0, count);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> render(Bitfield64 src)
+        {
+            var buffer = CharBlock128.Null.Data;
+            var count = render(src, buffer);
+            return slice(buffer, 0, count);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(Bitfield16 src, Span<char> dst)
+            => BitRender.render(n4, src.Bytes, dst);
+
+        [MethodImpl(Inline), Op]
+        public static uint render(Bitfield32 src, Span<char> dst)
+            => BitRender.render(n4, src.Bytes, dst);
+
+        [MethodImpl(Inline), Op]
+        public static uint render(Bitfield64 src, Span<char> dst)
+            => BitRender.render(n4, src.Bytes, dst);
+    }
+}

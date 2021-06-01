@@ -13,6 +13,10 @@ namespace Z0
     {
         public const string FormatPattern = "yyyy-MM-dd.HH.mm.ss.fff";
 
+        [MethodImpl(Inline)]
+        public static Timestamp now()
+            => DateTime.Now;
+
         readonly ulong Ticks;
 
         [MethodImpl(Inline)]
@@ -47,7 +51,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Ticks);
+            get => FastHash.calc(Ticks);
         }
 
         public override int GetHashCode()

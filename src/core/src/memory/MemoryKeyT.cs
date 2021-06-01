@@ -52,7 +52,7 @@ namespace Z0
         public uint Hash32
         {
             [MethodImpl(Inline)]
-            get => alg.hash.combine((uint)Min, (uint)Max);
+            get => FastHash.combine((uint)Min, (uint)Max);
         }
 
         public override int GetHashCode()

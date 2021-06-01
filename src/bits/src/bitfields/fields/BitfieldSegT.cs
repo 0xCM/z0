@@ -14,9 +14,9 @@ namespace Z0
     public struct BitfieldSeg<T>
         where T : unmanaged
     {
-        public byte FirstIndex {get;}
+        public ushort FirstIndex {get;}
 
-        public byte LastIndex {get;}
+        public ushort LastIndex {get;}
 
         public T State;
 
@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BitfieldSeg(byte i0, byte i1, T state)
+        public BitfieldSeg(ushort i0, ushort i1, T state)
         {
             FirstIndex = i0;
             LastIndex = i1;

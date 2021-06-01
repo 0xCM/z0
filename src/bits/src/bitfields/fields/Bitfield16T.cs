@@ -60,6 +60,12 @@ namespace Z0
             get => bytes(_State);
         }
 
+        public override string ToString()
+            => Format();
+
+        public string Format()
+            => api.format(this);
+
         [MethodImpl(Inline)]
         internal void Overwrite(S src)
             => _State = src;
@@ -81,5 +87,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator S(Bitfield16<T> src)
             => src._State;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Bitfield16(Bitfield16<T> src)
+            => api.create(w, src.State);
+
     }
 }

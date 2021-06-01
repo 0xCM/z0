@@ -34,7 +34,7 @@ namespace Z0
             => Count == src.Count;
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Count);
+            => (int)FastHash.calc(Count);
 
         public override bool Equals(object obj)
             => obj is Mb x && Equals(x);

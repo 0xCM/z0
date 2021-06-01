@@ -12,10 +12,37 @@ namespace Z0.Asm
 
     using R = AsmOps;
 
-
-    [ApiComplete]
+    [ApiHost]
     public readonly struct AsmOp
     {
+        [MethodImpl(Inline), Op]
+        public static RegOp reg(RegWidth width, RegClass @class, RegIndex index)
+            => new RegOp(math.or(
+                (byte)encode(width),
+                math.sll((ushort)@class,5),
+                math.sll((ushort)index, 10)
+                ));
+
+        [MethodImpl(Inline), Op]
+        public static RegWidthCode encode(RegWidth width)
+            => (RegWidthCode)Pow2.log((ushort)width);
+
+        [MethodImpl(Inline), Op]
+        public static RegWidth decode(RegWidthCode width)
+            => (RegWidth)Pow2.pow((byte)width);
+
+        [MethodImpl(Inline), Op]
+        public static RegWidth width(RegOp src)
+            => decode((RegWidthCode)(src.Bitfield & 0b111));
+
+        [MethodImpl(Inline), Op]
+        public static RegIndex index(RegOp src)
+            =>(RegIndex)Bits.bitseg(src.Bitfield,10,15);
+
+        [MethodImpl(Inline), Op]
+        public static RegClass regclass(RegOp src)
+            => (RegClass)Bits.bitseg(src.Bitfield, 5, 9);
+
         [MethodImpl(Inline), Op]
         public m8 m8()
             => default;
@@ -59,10 +86,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static imm64 imm64(ulong value)
             => new imm64(value);
-
-        [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidth width, RegClass @class, RegIndex index)
-            => new RegOp(width,@class,index);
 
         [MethodImpl(Inline)]
         public static RegOp<T> reg<T>(T src)

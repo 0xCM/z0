@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Part;
+    using static Root;
     using static Msg;
 
     [ApiHost]

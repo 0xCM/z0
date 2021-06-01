@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct emath
     {
+
         [MethodImpl(Inline)]
         public static @enum<E,T> add<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum

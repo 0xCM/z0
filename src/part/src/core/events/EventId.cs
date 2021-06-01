@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static root;
 
     public readonly struct EventId : IWfEventId<EventId>
     {
@@ -31,71 +30,71 @@ namespace Z0
         [MethodImpl(Inline)]
         EventId(Type type)
         {
-            Ts = timestamp();
+            Ts = Timestamp.now();
             Identifier = text.format(PatternBase, Ts, type.Name);
         }
 
         [MethodImpl(Inline)]
         EventId(string name, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase, Ts, name);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase, Ts, name);
         }
 
         [MethodImpl(Inline)]
         EventId(string name, CorrelationToken ct, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase, Ts, name);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase, Ts, name);
         }
 
         [MethodImpl(Inline)]
         EventId(string name, string label, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase + " | {2} | {3}", Ts, name, label, step);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase + " | {2} | {3}", Ts, name, label, step);
         }
 
         [MethodImpl(Inline)]
         EventId(string name, string label, CorrelationToken ct, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase + " | {2}", Ts, name, label);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase + " | {2}", Ts, name, label);
         }
 
         [MethodImpl(Inline)]
         EventId(string name, CmdId cmd, CorrelationToken ct, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase + " | {2}", Ts, name, cmd);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase + " | {2}", Ts, name, cmd);
         }
 
         [MethodImpl(Inline)]
         EventId(string name, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase + " | {2,-24}", Ts, name, step);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase + " | {2,-24}", Ts, name, step);
         }
 
         [MethodImpl(Inline)]
         EventId(string name, WfStepId step, EventLevel level, CorrelationToken ct, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase + " | {2} | {3}", Ts, name, level, step);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase + " | {2} | {3}", Ts, name, level, step);
         }
 
         [MethodImpl(Inline)]
         EventId(EventKind kind, WfStepId step, EventLevel level, CorrelationToken ct, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase + " | {2} | {3}", Ts, kind, level, step);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase + " | {2} | {3}", Ts, kind, level, step);
         }
 
         [MethodImpl(Inline)]
         EventId(Type type, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
-            Ts = ts ?? timestamp();
-            Identifier = text.format(PatternBase + " | {2}", Ts, type.Name, step);
+            Ts = ts ?? Timestamp.now();
+            Identifier = string.Format(PatternBase + " | {2}", Ts, type.Name, step);
         }
 
         /// <summary>
@@ -119,7 +118,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => alg.hash.combine(Ts.Hashed, alg.hash.calc(Name));
+            get => FastHash.combine(Ts.Hashed, (uint)(Identifier?.GetHashCode() ?? 0));
         }
 
         public override int GetHashCode()

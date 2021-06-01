@@ -47,7 +47,6 @@ namespace alg
         public static uint calc<T>(Vector128<T> src)
             where T : unmanaged
         {
-            //Cell128 data = src.AsUInt64();
             var data = core.bytes(src);
             var input = @readonly(recover<ulong>(data));
             var output = calc(input);
@@ -65,15 +64,6 @@ namespace alg
                 => calc<byte>(bytes(src));
 
         /// <summary>
-        /// Computes calc codes for unmanaged system primitives
-        /// </summary>
-        /// <param name="src">The primal value</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static uint calc<T>(T src)
-            => calc_u(src);
-
-        /// <summary>
         /// Computes a combined calc code for a pair
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
@@ -83,7 +73,7 @@ namespace alg
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint calc<T>(T a, T b, T c, T d)
-            => combine(combine(calc(a), calc(b)), combine(calc(c), calc(d)));
+            => FastHash.combine(FastHash.combine(calc(a), calc(b)), FastHash.combine(calc(c), calc(d)));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint calc<T>(ReadOnlySpan<T> src)
@@ -110,17 +100,26 @@ namespace alg
         public static uint calc<T>(T[] src)
             => calc(span(src));
 
+        /// <summary>
+        /// Computes calc codes for unmanaged system primitives
+        /// </summary>
+        /// <param name="src">The primal value</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static uint calc<T>(T src)
+            => calc_u(src);
+
         [MethodImpl(Inline)]
         static uint calc_u<T>(T src)
         {
             if(typeof(T) == typeof(byte))
-                return calc(uint8(src));
+                return FastHash.calc(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                return calc(uint16(src));
+                return FastHash.calc(uint16(src));
             else if(typeof(T) == typeof(uint))
-                return calc(uint32(src));
+                return FastHash.calc(uint32(src));
             else if(typeof(T) == typeof(ulong))
-                return calc(uint64(src));
+                return FastHash.calc(uint64(src));
             else
                 return calc_i(src);
         }
@@ -129,13 +128,13 @@ namespace alg
         static uint calc_i<T>(T src)
         {
             if(typeof(T) == typeof(sbyte))
-                return calc(int8(src));
+                return FastHash.calc(int8(src));
             else if(typeof(T) == typeof(short))
-                return calc(int16(src));
+                return FastHash.calc(int16(src));
             else if(typeof(T) == typeof(int))
-                return calc(int32(src));
+                return FastHash.calc(int32(src));
             else if(typeof(T) == typeof(long))
-                return calc(int64(src));
+                return FastHash.calc(int64(src));
             else
                 return calc_f(src);
         }
@@ -144,11 +143,11 @@ namespace alg
         static uint calc_f<T>(T src)
         {
             if(typeof(T) == typeof(float))
-                return calc(float32(src));
+                return FastHash.calc(float32(src));
             else if(typeof(T) == typeof(double))
-                return calc(float64(src));
+                return FastHash.calc(float64(src));
             else if(typeof(T) == typeof(decimal))
-                return calc(float128(src));
+                return FastHash.calc(float128(src));
             else
                 return calc_x(src);
         }
@@ -157,9 +156,9 @@ namespace alg
         static uint calc_x<T>(T src)
         {
             if(typeof(T) == typeof(char))
-                return calc(c16(src));
+                return FastHash.calc(c16(src));
             else if(typeof(T) == typeof(bool))
-                return calc(@bool(src));
+                return FastHash.calc(@bool(src));
             else
                 return fallback(src);
         }
@@ -168,13 +167,13 @@ namespace alg
         static uint calc_u<T>(T x, T y)
         {
             if(typeof(T) == typeof(byte))
-                return combine(uint8(x), uint8(y));
+                return FastHash.combine(uint8(x), uint8(y));
             else if(typeof(T) == typeof(ushort))
-                return combine(uint16(x), uint16(y));
+                return FastHash.combine(uint16(x), uint16(y));
             else if(typeof(T) == typeof(uint))
-                return combine(uint32(x), uint32(y));
+                return FastHash.combine(uint32(x), uint32(y));
             else if(typeof(T) == typeof(ulong))
-                return combine(uint64(x), uint64(y));
+                return FastHash.combine(uint64(x), uint64(y));
             else
                 return calc_i(x,y);
         }
@@ -183,13 +182,13 @@ namespace alg
         static uint calc_i<T>(T x, T y)
         {
             if(typeof(T) == typeof(sbyte))
-                return combine(int8(x), int8(y));
+                return FastHash.combine(int8(x), int8(y));
             else if(typeof(T) == typeof(short))
-                return combine(int16(x), int16(y));
+                return FastHash.combine(int16(x), int16(y));
             else if(typeof(T) == typeof(int))
-                return combine(int32(x), int32(y));
+                return FastHash.combine(int32(x), int32(y));
             else if(typeof(T) == typeof(long))
-                return combine(int64(x), int64(y));
+                return FastHash.combine(int64(x), int64(y));
             else
                 return calc_f(x,y);
         }
@@ -198,11 +197,11 @@ namespace alg
         static uint calc_f<T>(T x, T y)
         {
             if(typeof(T) == typeof(float))
-                return combine(float32(x), float32(y));
+                return FastHash.combine(float32(x), float32(y));
             else if(typeof(T) == typeof(double))
-                return combine(float64(x), float64(y));
+                return FastHash.combine(float64(x), float64(y));
             else if(typeof(T) == typeof(decimal))
-                return combine(float128(x), float128(y));
+                return FastHash.combine(float128(x), float128(y));
             else
                 return fallback(x,y);
         }

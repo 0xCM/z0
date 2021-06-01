@@ -8,17 +8,27 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using api = AsmOp;
 
     partial struct AsmOps
     {
+        /// <summary>
+        /// [0000 0000 00000 000]
+        /// </summary>
         public readonly struct RegOp : IRegOp
         {
             readonly ushort Data;
 
             [MethodImpl(Inline)]
-            public RegOp(RegWidth width, RegClass @class, RegIndex index)
+            internal RegOp(ushort src)
             {
-                Data = math.or(math.srl((ushort)width,3), math.sll((ushort)@class,5) , math.sll((ushort)index, 10));
+                Data = src;
+            }
+
+            internal ushort Bitfield
+            {
+                [MethodImpl(Inline)]
+                get => Data;
             }
 
             public AsmOpClass OpClass
@@ -27,17 +37,19 @@ namespace Z0.Asm
             public RegWidth Width
             {
                 [MethodImpl(Inline)]
-                get => (RegWidth)math.sll(Data,3);
+                get => api.width(this);
             }
 
             public RegClass RegClass
             {
-                get => default;
+                [MethodImpl(Inline)]
+                get => api.regclass(this);
             }
 
             public RegIndex Index
             {
-                get => default;
+                [MethodImpl(Inline)]
+                get => api.index(this);
             }
 
             public string Format()

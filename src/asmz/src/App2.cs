@@ -598,14 +598,21 @@ namespace Z0.Asm
         }
 
 
+        void ShowRegOps()
+        {
+            var reg = AsmOp.reg(RegWidth.W32, RegClass.GP, RegIndex.r2);
+            Wf.Row(string.Format("{0}{1}/{2}", reg.Width, reg.Index, reg.RegClass));
+        }
+
         public void Run()
         {
             //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);
             //EmitMethodDefs();
             //EmitFieldDefs();
-            EmitCilOpCodes();
+            //EmitCilOpCodes();
             //LoadHexPacks();
+            ShowRegOps();
             //RunExtractWorkflow();
             //Wf.AsmCatalogs().EmitAssetCatalog();
             //CheckCpuid();

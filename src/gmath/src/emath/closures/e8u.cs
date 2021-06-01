@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct EClosures
     {
+
         [MethodImpl(Inline), Add, Closures(UInt8k)]
         public static @enum<E8u,T> add<T>(@enum<E8u,T> a, @enum<E8u,T> b)
             where T : unmanaged

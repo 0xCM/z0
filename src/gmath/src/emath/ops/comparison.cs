@@ -100,19 +100,19 @@ namespace Z0
                 => gmath.lteq(a.Scalar, b.Scalar);
 
         [MethodImpl(Inline)]
-        public static bit gteq<E,T>(E e, T s)
+        public static bit gteq<E,T>(in E e, T s)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.gt(@as<E,T>(e), s);
 
         [MethodImpl(Inline)]
-        public static bit gteq<E,T>(T s, E e)
+        public static bit gteq<E,T>(T s, in E e)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.gt(s, @as<E,T>(e));
 
         [MethodImpl(Inline)]
-        public static bit lt<E,T>(E e, T s)
+        public static bit lt<E,T>(in E e, T s)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lt(@as<E,T>(e), s);
@@ -130,7 +130,7 @@ namespace Z0
                 => gmath.lt(a.Scalar, b.Scalar);
 
         [MethodImpl(Inline)]
-        public static bit lteq<E,T>(E e, T s)
+        public static bit lteq<E,T>(in E e, T s)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.lteq(@as<E,T>(e), s);
@@ -158,6 +158,5 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.nonz(a.Scalar);
-
     }
 }

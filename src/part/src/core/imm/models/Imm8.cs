@@ -31,7 +31,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Content);
+            get => FastHash.calc(Content);
         }
 
         public string Format()

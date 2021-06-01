@@ -18,6 +18,7 @@ namespace Z0
         {
             if(args.Length != 0)
             {
+                term.inform(string.Format("Parsing {0}", args.Delimited()));
                 var identifiers = ApiPartIdParser.parse(args);
                 if(identifiers.Length != 0)
                     return new ApiParts(identifiers);

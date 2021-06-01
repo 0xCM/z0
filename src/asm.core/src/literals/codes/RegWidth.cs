@@ -18,25 +18,25 @@ namespace Z0.Asm
         None = 0,
 
         /// <summary>
-        /// Specifies the width of an 8-bit register
+        /// Specifies the width of an 8-bit register := 2^3
         ///</summary>
         [Symbol("w8")]
         W8 = W.W8,
 
         /// <summary>
-        /// Specifies the width of a 16-bit register
+        /// Specifies the width of a 16-bit register := 2^4 bits
         ///</summary>
         [Symbol("w16")]
         W16 = W.W16,
 
         /// <summary>
-        /// Specifies the width of a 32-bit register
+        /// Specifies the width of a 32-bit register := 2^5 bits
         ///</summary>
         [Symbol("w32")]
         W32 = W.W32,
 
         /// <summary>
-        /// Specifies the width of a 64-bit register
+        /// Specifies the width of a 64-bit register := 2^6 bits
         ///</summary>
         [Symbol("w64")]
         W64 = W.W64,
@@ -48,19 +48,19 @@ namespace Z0.Asm
         W80 = W.W80,
 
         /// <summary>
-        /// Specifies the width of a 128-bit register
+        /// Specifies the width of a 128-bit register := 2^7 bits
         ///</summary>
         [Symbol("w128")]
         W128 = W.W128,
 
         /// <summary>
-        /// Specifies the width of a 256-bit register
+        /// Specifies the width of a 256-bit register := 2^8 bits
         ///</summary>
         [Symbol("w256")]
         W256 = 256,
 
         /// <summary>
-        /// Specifies the width of a 512-bit register
+        /// Specifies the width of a 512-bit register := 2^9 bits
         ///</summary>
         [Symbol("w512")]
         W512 = W.W512,

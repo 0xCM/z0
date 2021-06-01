@@ -65,7 +65,7 @@ namespace Z0
         }
 
         public override int GetHashCode()
-            => (int)alg.hash.combine((ulong)Min, (ulong)Max);
+            => (int)FastHash.combine((ulong)Min, (ulong)Max);
 
         [MethodImpl(Inline)]
         public bool Equals(MemoryRange src)

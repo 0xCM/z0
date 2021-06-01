@@ -10,6 +10,15 @@ namespace Z0
     using static Root;
     using static FormatFunctions;
 
+
+    partial class XTend
+    {
+
+        public static DelimitedIndex<T> Delimited<T>(this T[] src, char delimiter = Chars.Comma)
+            => new DelimitedIndex<T>(src, delimiter);
+    }
+
+
     public readonly struct DelimitedIndex<T> : IIndex<T>, ITextual
     {
         public Index<T> Data {get;}

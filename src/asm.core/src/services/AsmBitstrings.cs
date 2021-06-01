@@ -36,7 +36,7 @@ namespace Z0.Asm
 
         [Op]
         public static string format(AsmHexCode src)
-            => src.IsEmpty ? EmptyString : new string(chars(src));
+            => src.IsEmpty ? EmptyString : text.format(chars(src));
 
         [MethodImpl(Inline), Op]
         static ReadOnlySpan<char> chars(AsmHexCode src)

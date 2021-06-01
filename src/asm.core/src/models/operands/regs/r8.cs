@@ -12,6 +12,7 @@ namespace Z0.Asm
     using I = RegIndex;
     using G = AsmOps.r8;
     using K = AsmRegCodes.Gp8;
+    using api = AsmRegs;
 
     partial struct AsmOps
     {
@@ -42,7 +43,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => new RegOp(src.Width, src.RegClass, src.Index);
+                => AsmOp.reg(src.Width, src.RegClass, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)
@@ -66,11 +67,11 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static G operator ++(G src)
-                => next(src);
+                => api.next(src);
 
             [MethodImpl(Inline)]
             public static G operator --(G src)
-                => prior(src);
+                => api.prior(src);
         }
 
         public readonly struct al : IRegOp8<al>

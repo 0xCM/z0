@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static RegFacets;
 
     [ApiHost]
-    public readonly struct AsmRegs
+    public readonly partial struct AsmRegs
     {
         [Op]
         public static AsmRegQuery query()
@@ -22,22 +22,6 @@ namespace Z0.Asm
         [Op]
         public static Index<RegClass> classes()
             => Enums.literals<RegClass>();
-
-        [MethodImpl(Inline)]
-        public static ushort bitfield(RegWidth width, RegClass @class, RegIndex index)
-            => math.or(math.srl((ushort)width,3), math.sll((ushort)@class,5) , math.sll((ushort)index, 10));
-
-        [MethodImpl(Inline), Op]
-        public static Register model(RegKind kind)
-            => kind;
-
-        [MethodImpl(Inline), Op]
-        public static Register model(@enum<RegKind,uint> src)
-            => new Register(src.Literal);
-
-        [MethodImpl(Inline), Op]
-        public static Register model(RegIndex c, RegClass k, RegWidth w)
-            => new Register(c, k, w);
 
         [Op]
         public static string format(Register src)
@@ -86,7 +70,7 @@ namespace Z0.Asm
         public static uint filter(RegClass @class, ReadOnlySpan<Register> src, Span<Register> dst)
         {
             var k=0u;
-            var j = root.min(src.Length, dst.Length);
+            var j = min(src.Length, dst.Length);
             for(var i=0; i<j; i++)
             {
                 ref readonly var candidate = ref skip(src,i);
@@ -104,7 +88,7 @@ namespace Z0.Asm
         public static uint filter(RegWidth width, ReadOnlySpan<Register> src, Span<Register> dst)
         {
             var k=0u;
-            var j = root.min(src.Length, dst.Length);
+            var j = min(src.Length, dst.Length);
             for(var i=0; i<j; i++)
             {
                 ref readonly var candidate = ref skip(src,i);
@@ -122,7 +106,7 @@ namespace Z0.Asm
         public static uint filter(RegClass @class, RegWidth width, ReadOnlySpan<Register> src, Span<Register> dst)
         {
             var k=0u;
-            var j = root.min(src.Length, dst.Length);
+            var j = min(src.Length, dst.Length);
             for(var i=0; i<j; i++)
             {
                 ref readonly var candidate = ref skip(src,i);
@@ -162,6 +146,6 @@ namespace Z0.Asm
 
         [Op]
         public static Index<Register> list()
-            => Enums.literals<RegKind>().Map(model);
+            => Enums.literals<RegKind>().Map(from);
     }
 }

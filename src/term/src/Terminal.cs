@@ -10,7 +10,7 @@ namespace Z0
     using System.Text;
     using System.IO;
 
-    using static Part;
+    using static Root;
 
     public readonly partial struct term
     {
@@ -199,7 +199,7 @@ namespace Z0
             else
             {
                 var rendered = src.Format();
-                if(text.blank(rendered))
+                if(string.IsNullOrWhiteSpace(rendered))
                 {
                     var current = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Red;

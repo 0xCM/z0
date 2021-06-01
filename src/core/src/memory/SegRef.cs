@@ -64,7 +64,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.combine(Address,Size);
+            get => FastHash.combine(Address,Size);
         }
 
         public ref byte this[int index]
