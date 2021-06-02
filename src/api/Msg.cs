@@ -62,5 +62,9 @@ namespace Z0
         public static MsgPattern<Count,Count> LocatedSegments => "Computed {0} segment entries for {0} methods";
 
         public static MsgPattern<Address16> SegSelectorNotFound => "Selector {0} not found";
+
+        public static MsgPattern<FS.FileUri> LoadingApiCatalog => "Loading api catalog from {0}";
+
+        public static MsgPattern<Count,FS.FileUri> LoadedApiCatalog => "Loaded {0} catalog entries from {1}";
     }
 }

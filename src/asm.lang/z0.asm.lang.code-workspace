@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "..\\gmath"
+		},
+		{
+			"path": "..\\processors"
 		}
 	],
 	"settings": {}

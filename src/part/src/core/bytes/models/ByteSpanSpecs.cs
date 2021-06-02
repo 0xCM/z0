@@ -8,11 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-
-    using api = ByteSpans;
+    using static core;
 
     public readonly struct ByteSpanSpecs
     {
+        [MethodImpl(Inline), Op]
+        public static ByteSize size(ReadOnlySpan<ByteSpanSpec> src)
+        {
+            var size = ByteSize.Zero;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                size += skip(src,i).DataSize;
+            return size;
+        }
+
         readonly Index<ByteSpanSpec> Data;
 
         [MethodImpl(Inline)]
@@ -48,8 +57,7 @@ namespace Z0
         public ByteSize TotalSize
         {
             [MethodImpl(Inline)]
-            get => api.size(Data);
-
+            get => size(Data);
         }
 
         [MethodImpl(Inline)]

@@ -35,7 +35,15 @@ namespace Z0
             => new Outcome<T>(ok, data, message);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Outcome<T> success<T>(T data, string message = EmptyString)
+        public static Outcome<T> ok<T>()
+            => new Outcome<T>(true, default, EmptyString);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Outcome<T> ok<T>(T data)
+            => new Outcome<T>(true, data, EmptyString);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Outcome<T> ok<T>(T data, string message)
             => new Outcome<T>(true, data, message);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -45,6 +53,5 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static unsafe byte u8(bool src)
             => *((byte*)(&src));
-
     }
 }

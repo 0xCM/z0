@@ -41,49 +41,96 @@ namespace Z0
             return e.EventId;
         }
 
-        public void TableEmitting(Type type, FS.FilePath dst)
-            => Raise(emittingTable(Source, type, dst));
+        public EmittingTableEvent TableEmitting(Type type, FS.FilePath dst)
+        {
+            var e = emittingTable(Source, type, dst);
+            Raise(e);
+            return e;
+        }
 
-        public void EmittingTable<T>(FS.FilePath dst)
+        public EmittingTableEvent<T> EmittingTable<T>(FS.FilePath dst)
             where T : struct, IRecord<T>
-                => Raise(emittingTable<T>(Source, dst));
+        {
+            var e = emittingTable<T>(Source, dst);
+            Raise(e);
+            return e;
+        }
 
-        public void Ran<T>(T data)
-            => Raise(ran(Source, data, Ct));
+        public RanEvent<T> Ran<T>(T data)
+        {
+            var e = ran(Source, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Ran(CmdResult cmd)
-            => Raise(new RanCmdEvent(cmd, Ct));
+        public RanCmdEvent Ran(CmdResult cmd)
+        {
+            var e = new RanCmdEvent(cmd);
+            Raise(e);
+            return e;
+        }
 
-        public void Running()
-            => Raise(running(Source, Ct));
+        public RunningEvent Running()
+        {
+            var e = running(Source);
+            Raise(e);
+            return e;
+        }
 
-        public void Running(WfHost host)
-            => Raise(running(host, Ct));
+        public RunningEvent Running(WfHost host)
+        {
+            var e = running(host);
+            Raise(e);
+            return e;
+        }
 
-        public void Running<T>(WfHost host, T data)
-            => Raise(running(host, data, Ct));
+        public RunningEvent<T> Running<T>(WfHost host, T data)
+        {
+            var e = running(host, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Running<T>(T data)
-            => Raise(running(Source, data, Ct));
+        public RunningEvent<T> Running<T>(T data)
+        {
+            var e = running(Source, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Running<T>(string operation, T data)
-            => Raise(running(Source, operation, data, Ct));
+        public RunningEvent<T> Running<T>(string operation, T data)
+        {
+            var e = running(Source, operation, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Processed<T>(T data)
-            => Raise(processed(Source, data, Ct));
+        public ProcessingFileEvent Processing(FS.FilePath src)
+        {
+            var e = processingFile(Source,src);
+             Raise(e);
+             return e;
+        }
 
-        public void Processed<T>(ApiHostUri uri, T data)
-            => Raise(processed(Source, Seq.delimit(Chars.Pipe, 0, uri, data), Ct));
+        public ProcessedFileEvent Processed(FS.FilePath src)
+        {
+            var e = processedFile(Source,src);
+             Raise(e);
+             return e;
+        }
 
         public void Creating<T>(T data)
-            => Raise(creating(Source, data, Ct));
+            => Raise(creating(Source, data));
 
         public void Created<T>(T data)
-            => Raise(created(Source, data, Ct));
+            => Raise(created(Source, data));
 
         public void EmittedTable<T>(Count count, FS.FilePath dst)
             where T : struct, IRecord<T>
-                => Raise(emittedTable<T>(Source, count, dst));
+        {
+            var e = emittedTable<T>(Source, count, dst);
+            Raise(e);
+        }
 
         public void EmittedTable<T>(FS.FilePath dst)
             where T : struct, IRecord<T>
@@ -96,54 +143,84 @@ namespace Z0
             => Raise(emittedTable(Source, TableId.identify(type), dst));
 
         public void EmittingFile(FS.FilePath dst)
-            => Raise(emittingFile(Source, dst, Ct));
+            => Raise(emittingFile(Source, dst));
 
         public void EmittedFile(FS.FilePath dst)
-            => Raise(emittedFile(Source, dst, Ct));
+            => Raise(emittedFile(Source, dst));
 
         public void EmittedFile(Count count, FS.FilePath dst)
-            => Raise(emittedFile(Source, dst, count, Ct));
+            => Raise(emittedFile(Source, dst, count));
 
         public void EmittingFile<T>(T payload, FS.FilePath dst)
-            => Raise(emittingFile<T>(Source, payload, dst, Ct));
+            => Raise(emittingFile<T>(Source, payload, dst));
 
         public void EmittedFile<T>(T payload, Count count, FS.FilePath dst)
-            => Raise(emittedFile(Source, payload, count, dst, Ct));
+            => Raise(emittedFile(Source, payload, count, dst));
 
         public void EmittedFile<T>(T payload, FS.FilePath dst)
-            => Raise(emittedFile(Source, payload, dst, Ct));
+            => Raise(emittedFile(Source, payload, dst));
 
-        public void Status<T>(WfStepId step, T data)
-            => Raise(status(step, data));
+        public StatusEvent<T> Status<T>(WfStepId step, T data)
+        {
+            var e = status(step, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Status<T>(T data)
-            => Status(Source, data);
+        public StatusEvent<T> Status<T>(T data)
+        {
+            var e = status(Source, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Babble<T>(WfStepId step, T data)
-            => Raise(babble(step, data, Ct));
+        public BabbleEvent<T> Babble<T>(WfStepId step, T data)
+        {
+            var e = babble(step, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Babble<T>(T data)
-            => Babble(Source, data);
+        public BabbleEvent<T> Babble<T>(T data)
+        {
+            var e = babble(Source, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Error<T>(T body)
-            => Raise(error(Source.Identifier, body));
+        public ErrorEvent<T> Error<T>(T body)
+        {
+            var e = error(Source.Identifier, body);
+            Raise(e);
+            return e;
+        }
 
-        public void Error<T>(WfStepId step, T body, EventOrigin source)
-            => Raise(error(step, body, source));
+        public ErrorEvent<T> Error<T>(WfStepId step, T body, EventOrigin source)
+        {
+            var e = error(step, body, source);
+            Raise(e);
+            return e;
+        }
 
-        public void Error(WfStepId step, Exception e, EventOrigin source)
-            => Raise(error(step, e, source));
+        public ErrorEvent<Exception> Error(WfStepId step, Exception e, EventOrigin source)
+        {
+            var ev = error(step, e, source);
+            Raise(ev);
+            return ev;
+        }
 
         public void Error(Exception e, EventOrigin source)
-            => Raise(error(Source, e, source));
+        {
+            Raise(error(Source, e, source));
+        }
 
         public void Error<T>(T body, EventOrigin source)
             => Error(Source, body, source);
 
         public void Warn<T>(WfStepId step, T content)
-            => Raise(warn(step, content, Ct));
+            => Raise(warn(step, content));
 
         public void Warn<T>(T content)
-            => Warn(Source,content);
+            => Warn(Source, content);
     }
 }

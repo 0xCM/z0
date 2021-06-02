@@ -13,15 +13,15 @@ namespace Z0
     partial struct Tables
     {
         [Op]
-        internal static string slot(byte index, RenderWidth width, string delimiter = DefaultDelimiter)
+        static string slot(byte index, RenderWidth width, string delimiter = DefaultDelimiter)
             => delimiter + RP.slot(index, (short)(-(short)width));
 
         [Op]
-        internal static string pattern(Index<CellFormatSpec> cells, string delimiter = DefaultDelimiter)
+        public static string pattern(Index<CellFormatSpec> cells, string delimiter = DefaultDelimiter)
         {
             var count = cells.Count;
             var view = cells.View;
-            var parts = sys.alloc<string>(count);
+            var parts = alloc<string>(count);
             for(var i=0u; i<count; i++)
             {
                 var cell = skip(view,i);

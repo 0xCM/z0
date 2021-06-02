@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// The terms in the sequence
         /// </summary>
-        T[] Terms {get;}
+        Index<T> Terms {get;}
 
         /// <summary>
         /// Sequence value accessor/manipulator

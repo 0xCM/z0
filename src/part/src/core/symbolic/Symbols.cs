@@ -42,7 +42,7 @@ namespace Z0
             if(cells.Length != SymLiteral.FieldCount)
             {
                 dst = default;
-                return (false, AppMsg.FieldCountMismatch.Format(SymLiteral.FieldCount,cells.Length));
+                return (false, AppMsg.FieldCountMismatch.Format(SymLiteral.FieldCount, cells.Length));
             }
 
             outcome += DataParser.parse(skip(cells,j), out dst.Component);
@@ -57,7 +57,6 @@ namespace Z0
             outcome += DataParser.parse(skip(cells,j), out dst.Identity);
             return outcome;
         }
-
 
         [Op]
         public static Index<SymLiteral> literals(Type src)

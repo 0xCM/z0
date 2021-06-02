@@ -30,7 +30,7 @@ namespace Z0
             Source = default;
             Index = 0;
             Fields = fields;
-            Row = Tables.row<T>(Fields.Count);
+            Row = new DynamicRow<T>(0, default(T), new dynamic[Fields.Length]);
         }
 
         [MethodImpl(Inline)]

@@ -35,7 +35,7 @@ namespace Z0
         public Count EmitPartitions(Index<ProcessPartition> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<ProcessPartition>(dst);
-            var count = Tables.emit(src,dst);
+            var count = Tables.emit(src.View,dst);
             Wf.EmittedTable(flow,count);
             return count;
         }

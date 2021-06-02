@@ -6,8 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static core;
     using static XedModels;
 
     public ref struct XedSummaryParser
@@ -87,7 +86,7 @@ namespace Z0.Asm
 
         static Outcome ParseSummaryHeader(TextLine src, Span<string> dst)
         {
-            var parts = @readonly(src.Split(FieldDelimiter));
+            var parts = src.Split(FieldDelimiter);
             var count = parts.Length;
             if(count != XedFormInfo.FieldCount)
                 return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
@@ -101,7 +100,7 @@ namespace Z0.Asm
         static Outcome ParseSummary(TextLine src, out XedFormInfo dst)
         {
             dst = default;
-            var parts = @readonly(src.Split(FieldDelimiter));
+            var parts = src.Split(FieldDelimiter);
             var count = parts.Length;
             if(count != XedFormInfo.FieldCount)
                 return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");

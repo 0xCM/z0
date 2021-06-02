@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
+    using System.Text;
 
-    using static Part;
+    using static Root;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -205,7 +206,8 @@ namespace Z0
             where T : struct, IRecord<T>
         {
             var flow = Wf.EmittingTable<T>(dst);
-            var count = Tables.emit(src,dst);
+            var spec = Tables.rowspec<T>();
+            var count = Tables.emit(src, spec, dst);
             Wf.EmittedTable(flow,count);
             return count;
         }
@@ -214,22 +216,21 @@ namespace Z0
             where T : struct, IRecord<T>
         {
             var flow = Wf.EmittingTable<T>(dst);
-            var count = Tables.emit(src, widths, dst);
+            var spec = Tables.rowspec<T>(widths, z16);
+            var count = Tables.emit(src, spec, dst);
             Wf.EmittedTable(flow,count);
             return count;
         }
 
-        protected uint TableEmit<T>(Span<T> src, ReadOnlySpan<byte> widths,  FS.FilePath dst)
+        protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
             where T : struct, IRecord<T>
-                => TableEmit(src.ReadOnly(), widths, dst);
-
-        protected uint TableEmit<T>(Span<T> src, FS.FilePath dst)
-            where T : struct, IRecord<T>
-                => TableEmit(src.ReadOnly(), dst);
-
-        protected uint TableEmit<T>(T[] src, FS.FilePath dst)
-            where T : struct, IRecord<T>
-                => TableEmit(core.@readonly(src), dst);
+        {
+            var flow = Wf.EmittingTable<T>(dst);
+            var spec = Tables.rowspec<T>(widths, rowpad);
+            var count = Tables.emit(src, spec, encoding, dst);
+            Wf.EmittedTable(flow,count);
+            return count;
+        }
 
         protected virtual void OnInit()
         {

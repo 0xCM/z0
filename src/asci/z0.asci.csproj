@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(Processors)" />
   </ItemGroup>
 
 </Project>

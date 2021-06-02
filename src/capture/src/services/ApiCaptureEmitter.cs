@@ -144,7 +144,7 @@ namespace Z0
                 if(code.IsNonEmpty)
                     row(code, ref seek(records,i));
             }
-            Tables.emit(records,dst);
+            Tables.emit(@readonly(records), dst);
             return buffer;
         }
 

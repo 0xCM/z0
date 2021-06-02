@@ -128,7 +128,7 @@ namespace Z0
         {
             var records = sort(src).Map(p => BuildSummaryRow(p));
             var target = SummaryPath;
-            Tables.emit(records,  target);
+            Tables.emit(@readonly(records), target);
             return records;
         }
 

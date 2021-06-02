@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct LiteralLogicSeqExpr : ILiteralLogicSeqExpr
     {
-        public bit[] Terms {get;}
+        public Index<bit> Terms {get;}
 
         [MethodImpl(Inline)]
         public LiteralLogicSeqExpr(bit[] src)
@@ -42,7 +42,7 @@ namespace Z0
         }
 
         public string Format()
-            => BitFormatter.format(Terms);
+            => BitRender.format(Terms);
 
         public override string ToString()
             => Format();

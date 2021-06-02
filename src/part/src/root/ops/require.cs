@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static Typed;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -19,7 +20,7 @@ namespace Z0
         public static void require(bool invariant, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(!invariant)
-                sys.@throw(AppErrors.InvariantFailure("The invariant, it failed", caller, file, line));
+                sys.@throw("The invariant, it failed", caller, line, file);
         }
 
         /// <summary>
@@ -42,13 +43,6 @@ namespace Z0
             return src;
         }
 
-        /// <summary>
-        /// Insists upon invariant satisfaction and returns a specified value if the invariant holds
-        /// </summary>
-        /// <param name="invariant">It must be so, or the operation will not go</param>
-        /// <param name="src">The vale to return upon success</param>
-        /// <param name="f">A function that emits a message to throw upon invariant failure</param>
-        /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T require<T>(bool invariant, T src, in Func<string> f)
         {
@@ -93,7 +87,7 @@ namespace Z0
         {
             const string Pattern = "The natural value {0} and the operand value {1} are different";
 
-            if(memory.nat64u<N>() == src)
+            if(nat64u<N>() == src)
                 return src;
             else
             {
@@ -108,7 +102,7 @@ namespace Z0
         {
             const string Pattern = "The natural value {0} and the operand value {1} are different";
 
-            if(memory.nat32i<N>() == src)
+            if(nat32i<N>() == src)
                 return src;
             else
             {

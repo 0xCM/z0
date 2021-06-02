@@ -15,7 +15,6 @@ namespace Z0
             where T : IFormatPattern
                 => new RenderCapture(src, args);
 
-
         [MethodImpl(Inline)]
         public static MsgCapture msgcap<T>(T src, params object[] args)
             where T : IMsgPattern

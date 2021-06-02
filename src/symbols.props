@@ -89,9 +89,9 @@
     <Part>$(Src)part/z0.part.csproj</Part>
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>
-    <PolySource>$(Src)polysource/z0.polysource.csproj</PolySource>
-    <ResPack>$(Src)respack/z0.respack.csproj</ResPack>
+    <Processors>$(Src)processors/z0.processors.csproj</Processors>
 
+    <ResPack>$(Src)respack/z0.respack.csproj</ResPack>
     <Refs>$(Src)refs/z0.refs.csproj</Refs>
     <Res>$(Src)res/z0.res.csproj</Res>
     <Root>$(Src)root/z0.root.csproj</Root>

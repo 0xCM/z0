@@ -66,7 +66,7 @@ namespace Z0
             var count = (uint)addresses.Length;
             var buffer = alloc<AddressHash>(count);
             memory.hash(addresses,buffer);
-            Tables.emit(buffer, dst);
+            Tables.emit(@readonly(buffer), dst);
             Wf.EmittedTable(flow, count);
             return buffer;
         }

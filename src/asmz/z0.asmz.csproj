@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(AsmCases)" />
     <ProjectReference Include="$(Symbolic)" />
+    <ProjectReference Include="$(Processors)" />
   </ItemGroup>
 
 </Project>

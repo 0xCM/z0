@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool nonempty(utf8p src)
-            => memory.address(src.pData) != 0 && (*src.pData != 0);
+            => core.address(src.pData) != 0 && (*src.pData != 0);
 
         [MethodImpl(Inline), Op]
         public static ByteSize size(utf8p src)

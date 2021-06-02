@@ -33,6 +33,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(EventId, Payload);
+            => string.Format(RP.PSx2, EventId, Payload);
     }
 }

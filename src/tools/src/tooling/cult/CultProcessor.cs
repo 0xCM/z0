@@ -25,8 +25,6 @@ namespace Z0.Tools
 
         FS.FolderPath DetailRoot;
 
-        AsmBitstrings AsmBits;
-
         IHexParser<byte> HexParser;
 
         FS.FolderPath CatalogRoot;
@@ -40,7 +38,6 @@ namespace Z0.Tools
             Summaries = new();
             AsmLines = new();
             HexCharBuffer = sys.alloc<char>(HexBufferLength);
-            AsmBits = AsmBitstrings.service();
             HexParser = HexParsers.bytes();
             Tool = Toolsets.cult;
             InputFile = FS.FilePath.Empty;
@@ -221,7 +218,7 @@ namespace Z0.Tools
             var bitstring = "<error>";
             var formatted = FormatBytes(comment, out var count);
             if(HexByteParser.ParseData(formatted, out var parsed))
-                bitstring = AsmBits.Format(AsmBytes.hexcode(parsed));
+                bitstring = AsmBitstrings.format(AsmBytes.hexcode(parsed));
 
             if(count != 0)
                 comment = string.Format(StatementCommentPattern, comment, count, formatted, bitstring);

@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly unsafe struct Utf16
@@ -56,7 +57,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool nonempty(utf16p src)
-            => memory.address(src.pData) != 0 && (*src.pData != 0);
+            => address(src.pData) != 0 && (*src.pData != 0);
 
         [MethodImpl(Inline), Op]
         public static uint hash(utf16p src)

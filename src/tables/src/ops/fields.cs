@@ -5,15 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Root;
 
     partial struct Tables
     {
-        public static Index<string> fields(string src, char delimiter)
-            => text.split(text.trim(src), delimiter);
+        public static ReadOnlySpan<string> fields(string src, char delimiter)
+            => src.Trim().SplitClean(delimiter);
 
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a parametrically-identified record type

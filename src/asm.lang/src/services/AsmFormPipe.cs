@@ -15,7 +15,6 @@ namespace Z0.Asm
     public class AsmFormPipe : RecordPipe<AsmFormPipe,AsmFormRecord>
     {
         public AsmFormPipe()
-            : base(42)
         {
 
         }
@@ -65,7 +64,7 @@ namespace Z0.Asm
                 record.IndexKey = (hash.Hash % count);
             }
             var emitting = Wf.EmittingTable<AsmFormHash>(dst);
-            var ecount = Tables.emit(buffer, dst, 36);
+            var ecount = Tables.emit(@readonly(buffer), dst);
             Wf.EmittedTable(emitting, ecount);
             return buffer;
         }

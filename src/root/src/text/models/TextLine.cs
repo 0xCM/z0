@@ -109,10 +109,10 @@ namespace Z0
         public bool StartsWith(string match)
             => IsNonEmpty && Content.StartsWith(match);
 
-        public string[] Split(in TextDocFormat spec)
+        public ReadOnlySpan<string> Split(in TextDocFormat spec)
             => IsNonEmpty ? spec.SplitClean ? Content.SplitClean(spec.Delimiter) : Content.Split(spec.Delimiter) : Array.Empty<string>();
 
-        public string[] Split(char delimiter, bool clean = true)
+        public ReadOnlySpan<string> Split(char delimiter, bool clean = true)
         {
             if(string.IsNullOrWhiteSpace(Content))
                 return Array.Empty<string>();

@@ -15,10 +15,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint render(N4 n, byte src, uint offset, Span<char> dst)
         {
-            seek(dst, offset++) = bitchar(src, 3);
-            seek(dst, offset++) = bitchar(src, 2);
-            seek(dst, offset++) = bitchar(src, 1);
-            seek(dst, offset++) = bitchar(src, 0);
+            var i = offset;
+            seek(dst, i++) = bitchar(src, 3);
+            seek(dst, i++) = bitchar(src, 2);
+            seek(dst, i++) = bitchar(src, 1);
+            seek(dst, i++) = bitchar(src, 0);
             return n;
         }
     }

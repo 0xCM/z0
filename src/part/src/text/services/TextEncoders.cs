@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public unsafe readonly struct TextEncoders
@@ -118,7 +118,6 @@ namespace Z0
             return ref dst;
         }
 
-
         [MethodImpl(Inline), Op]
         public static ref byte[] Encode(Encoding e, string src, out byte[] dst)
         {
@@ -136,10 +135,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static TextEncoding utf8()
             => new TextEncoding(Encoding.UTF8);
-
-        [MethodImpl(Inline), Op]
-        public static TextEncoding utf7()
-            => new TextEncoding(Encoding.UTF7);
 
         [MethodImpl(Inline), Op]
         public static TextEncoding utf16()

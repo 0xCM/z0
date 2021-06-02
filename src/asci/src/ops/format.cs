@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in BinaryCode src)
+        public static string format(ReadOnlySpan<byte> src)
         {
             var dst = span<char>(src.Length);
             decode(src, dst);

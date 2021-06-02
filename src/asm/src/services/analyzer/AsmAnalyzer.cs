@@ -78,7 +78,7 @@ namespace Z0
         {
             var rows = Statements.BuildStatementIndex(src);
             var formatter = Tables.formatter<AsmIndex>(AsmIndex.RenderWidths);
-            TableEmit(rows, AsmIndex.RenderWidths, dst.StatementIndexPath());
+            Statements.EmitIndex(rows, dst.StatementIndexPath());
             return rows;
         }
 

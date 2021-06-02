@@ -22,6 +22,22 @@ namespace Z0
             => (HexSym)(index < UpperSymbolCount ? skip(UpperSymbols, index) : HexSymUp.None);
 
         [MethodImpl(Inline), Op]
+        public static HexSym symbol(LowerCased casing, Hex3Seq src)
+            => symbol(casing, (HexDigit)src);
+
+        [MethodImpl(Inline), Op]
+        public static HexSym symbol(UpperCased casing, Hex3Seq src)
+            => symbol(casing, (HexDigit)src);
+
+        [MethodImpl(Inline), Op]
+        public static HexSym symbol(LowerCased casing, Hex4Seq src)
+            => symbol(casing, (HexDigit)src);
+
+        [MethodImpl(Inline), Op]
+        public static HexSym symbol(UpperCased casing, Hex4Seq src)
+            => symbol(casing, (HexDigit)src);
+
+        [MethodImpl(Inline), Op]
         public static HexSym symbol(UpperCased @case, HexDigit src)
             => (HexSym)code(@case, src);
 

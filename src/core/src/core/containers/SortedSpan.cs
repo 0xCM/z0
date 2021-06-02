@@ -46,13 +46,13 @@ namespace Z0
         public ref readonly T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Data,index);
+            get => ref skip(Data,index);
         }
 
         public ref readonly T this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Data,index);
+            get => ref skip(Data,index);
         }
 
         [MethodImpl(Inline)]

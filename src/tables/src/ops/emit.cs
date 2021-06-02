@@ -5,74 +5,80 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.IO;
+    using System.Text;
 
+    using static Part;
     using static core;
-
-    using F = EnumDatasetField;
 
     partial struct Tables
     {
-        public static void emit<E,T>(ReadOnlySpan<EnumLiteralInfo<E,T>> src, FS.FilePath dst)
-            where E : unmanaged, Enum
-            where T : unmanaged
-        {
-            using var writer = dst.Writer();
-            writer.WriteLine(EnumDatasets.header<F>());
-            var buffer = text.buffer();
-            var dataset = EnumDatasets.create<E,T>();
-            for(var i=0; i<src.Length; i++)
-                writer.WriteLine(EnumDatasets.format(skip(src,i),buffer));
-        }
-
-        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, RowFormatSpec spec)
+        public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, StreamWriter dst)
             where T : struct, IRecord<T>
         {
-            var count = src.Length;
             var formatter = Tables.formatter<T>(spec);
-            using var writer = dst.Writer();
-            writer.WriteLine(format(spec.Header));
+            var count = src.Length;
+            dst.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(src,i)));
-
+            dst.WriteLine(formatter.Format(skip(src,i)));
             return count;
         }
 
         public static Count emit<T>(ReadOnlySpan<T> src, StreamWriter dst)
             where T : struct, IRecord<T>
+                => emit(src,Tables.rowspec<T>(DefaultFieldWidth),dst);
+
+        public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, Encoding encoding, FS.FilePath dst)
+            where T : struct, IRecord<T>
+        {
+            // var count = src.Length;
+            // var formatter = Tables.formatter<T>(spec);
+            using var writer = dst.Writer(encoding);
+            return emit(src, spec, writer);
+            // writer.WriteLine(spec.Header.Format());
+            // for(var i=0; i<count; i++)
+            //     writer.WriteLine(formatter.Format(skip(src,i)));
+            // return count;
+        }
+
+        public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, FS.FilePath dst)
+            where T : struct, IRecord<T>
+                => emit(src, spec, Encoding.UTF8, dst);
+
+        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => emit(src, rowspec<T>(widths, z16), Encoding.UTF8, dst);
+
+        public static Count emit<T>(ReadOnlySpan<T> src, Encoding encoding, FS.FilePath dst)
+            where T : struct, IRecord<T>
         {
             var count = src.Length;
             var formatter = Tables.formatter<T>();
-            for(var i=0; i<count; i++)
-                dst.WriteLine(formatter.Format(skip(src,i)));
-            return count;
+            using var writer = dst.Writer(encoding);
+            return emit(src, writer);
         }
 
         public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst)
             where T : struct, IRecord<T>
-        {
-            var count = src.Length;
-            var formatter = Tables.formatter<T>();
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(src,i)));
-
-            return count;
-        }
+                => emit(src, Encoding.UTF8, dst);
 
         public static Count emit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
             where T : struct, IRecord<T>
-        {
-            var count = src.Length;
-            var formatter = Tables.formatter<T>(widths);
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(src,i)));
+                => emit(src, widths, z16, Encoding.UTF8, dst);
 
-            return count;
+        public static Count emit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
+            where T : struct, IRecord<T>
+        {
+            var spec = Tables.rowspec<T>(widths, rowpad);
+            return emit(src, Tables.rowspec<T>(widths, rowpad), dst);
+            // var count = src.Length;
+            // var formatter = Tables.formatter<T>(spec);
+            // using var writer = dst.Writer(encoding);
+            // writer.WriteLine(formatter.FormatHeader());
+            // for(var i=0; i<count; i++)
+            //     writer.WriteLine(formatter.Format(skip(src,i)));
+
+            // return count;
         }
 
         public static Count emit<T>(ReadOnlySpan<T> src, ITextBuffer dst)
@@ -83,49 +89,7 @@ namespace Z0
             dst.AppendLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
                 dst.AppendLine(formatter.Format(skip(src,i)));
-
             return count;
         }
-
-        public static Count emit<T>(T[] src, FS.FilePath dst, byte? fieldwidth = null, bool append = false)
-            where T : struct, IRecord<T>
-                => emit(@readonly(src), dst, fieldwidth, append);
-
-        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, byte? fieldwidth = null, bool append = false)
-            where T : struct, IRecord<T>
-        {
-            var count = src.Length;
-            var formatter = Tables.formatter<T>(fieldwidth ?? DefaultFieldWidth);
-            var header = (dst.Exists && append) ? false : true;
-
-            using var writer = dst.Writer(append);
-            if(header)
-                writer.WriteLine(formatter.FormatHeader());
-
-            for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(src,i)));
-
-            return count;
-        }
-
-        public static Count emit<T>(Span<T> src, FS.FilePath dst, byte? fieldwidth = null)
-            where T : struct, IRecord<T>
-                => emit(src.ReadOnly(), dst, fieldwidth);
-
-        public static Count emit<T>(Index<T> src, FS.FilePath dst, byte? fieldwidth = null)
-            where T : struct, IRecord<T>
-                => emit(src.View, dst, fieldwidth);
-
-        public static Count emit<T>(Span<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
-            where T : struct, IRecord<T>
-                => emit(src.ReadOnly(), dst, rowspec<T>(widths));
-
-        public static Count emit<T>(Index<T> src, FS.FilePath dst, RowFormatSpec spec)
-            where T : struct, IRecord<T>
-                => emit(src.View, dst, spec);
-
-        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
-            where T : struct, IRecord<T>
-                => emit(src, dst, rowspec<T>(widths));
     }
 }

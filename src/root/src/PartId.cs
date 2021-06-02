@@ -63,8 +63,8 @@ public enum PartId : ulong
     [Symbol("workflow")]
     Workflow = 15,
 
-    [Symbol("polysource")]
-    PolySource = 16,
+    [Symbol("processors")]
+    Processors = 16,
 
     [Symbol("polyrand")]
     Polyrand = 17,

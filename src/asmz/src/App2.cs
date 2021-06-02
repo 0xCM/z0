@@ -8,9 +8,10 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Collections.Generic;
     using System.IO;
+    using System.Text;
 
     using static Part;
-    using static memory;
+    using static core;
     using static Toolsets;
 
     class App : AppService<App>
@@ -142,7 +143,7 @@ namespace Z0.Asm
             var dst = Db.IndexTable<ProcessMemoryRegion>();
             var flow = Wf.EmittingTable<ProcessMemoryRegion>(dst);
             var segments = ImageMemory.regions();
-            Tables.emit(segments,dst);
+            Tables.emit(segments.View, dst);
             Wf.EmittedTable(flow, segments.Count);
         }
 
@@ -651,40 +652,80 @@ namespace Z0.Asm
             Show("modrm", FS.Log, emit);
         }
 
-
-        void ParseStatmentIndex(ApiPackArchive src)
+        static uint render(Hex4 src, uint offset, Span<char> dst)
         {
+            var i= offset;
+            seek(dst, i++) = Hex.hexchar(LowerCase, src);
+            seek(dst, i++) = Chars.Space;
+            seek(dst, i++) = Chars.Space;
+            seek(dst, i++) = Chars.Space;
+            seek(dst, i++) = Chars.Space;
+            return 5;
+        }
 
+        static uint render(Hex8 src, uint offset, Span<char> dst)
+        {
+            var counter = 0u;
+            counter += render(src.Hi, offset + counter, dst);
+            counter += render(src.Lo, offset + counter, dst);
+            return counter;
+        }
+
+        static uint render(AsmHexCode src, Span<char> dst)
+        {
+            var count = src.Size;
+            var bytes = src.Bytes;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var b = ref skip(bytes,i);
+                counter += render((Hex8)b,counter,dst);
+            }
+            return counter;
+        }
+
+        static string format(AsmHexCode src)
+        {
+            Span<char> dst = stackalloc char[256];
+            var count = render(src, dst);
+            return text.format(slice(dst,0,count));
+        }
+
+        void ProcessStatementIndex()
+        {
             var counter = 0u;
 
+            var dst = Db.AppLog("statements.out", FS.Asm);
+            using var writer = dst.Writer();
             void Receive(in AsmIndex src)
             {
                 counter++;
 
-                if(counter % 100000 == 0)
-                    Wf.Status(string.Format("Traversed {0} rows", counter));
+                if(counter < Pow2.T17)
+                {
+                    writer.WriteLine(format(src.Encoded));
+                    var chars = AsmBitstrings.render(src.Encoded);
+                    writer.WriteLine(text.format(chars));
+                }
 
+                // var count = AsmBitstrings.store(chars, out var cell);
+                // var stored = AsmBitstrings.literal(cell, count);
+                // Wf.Row(string.Format("Stored Bits:  {0}", stored));
             }
 
-            var path = src.StatementIndexPath();
-            if(path.Exists)
-            {
-                var pipe = Wf.AsmStatementPipe();
-                pipe.TraverseIndex(path,Receive);
-            }
-
-        }
-
-        void TraverseStatementIndex()
-        {
+            //var processor = AsmIndexProcessor.create(Wf.EventSink, Receive);
+            var processor = AsmIndexProcessor.create(DevNull.BlackHole, Receive);
             var packs = Wf.ApiPacks();
             var current = packs.Latest();
-            ParseStatmentIndex(ApiPackArchive.create(current.Root));
-
+            var archive = ApiPackArchive.create(current.Root);
+            var path = archive.StatementIndexPath();
+            processor.ProcessFile(path);
         }
+
         public void Run()
         {
             RunExtractWorkflow();
+            //ProcessStatementIndex();
             //ShowModRmTable();
             //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);
@@ -701,12 +742,10 @@ namespace Z0.Asm
             //StatementRountTrip();
             //TestBitfields();
             //TestRel32();
-            //RunExtractWorkflow();
             //CaptureSelf();
             // var dir = Db.AppLogDir();
             // EmitAsmRows(dir);
         }
-
 
 
         public static void Main(params string[] args)

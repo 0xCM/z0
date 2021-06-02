@@ -12,13 +12,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Msg
-    {
-        public static MsgPattern<FS.FileUri> LoadingApiCatalog => "Loading api catalog from {0}";
-
-        public static MsgPattern<Count,FS.FileUri> LoadedApiCatalog => "Loaded {0} catalog entries from {1}";
-    }
-
     [ApiHost]
     public class ApiCatalogs : AppService<ApiCatalogs>
     {
@@ -48,7 +41,7 @@ namespace Z0
         {
             var flow = Wf.EmittingTable<ApiCatalogEntry>(dst);
             var records = rebase(src.BaseAddress, src.View);
-            var count = Tables.emit<ApiCatalogEntry>(records, dst, 16);
+            var count = Tables.emit<ApiCatalogEntry>(records.View, dst);
             Wf.EmittedTable<ApiCatalogEntry>(flow, count, dst);
             return records;
         }
@@ -184,7 +177,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        int Correlate(ApiHostCatalog src, Index<ApiCodeBlock> blocks, List<ApiMemberCode> dst, List<ApiCorrelationEntry> records)
+        int Correlate(ApiHostCatalog src, Index<ApiCodeBlock> blocks, List<ApiMemberCode> dst, List<ApiCorrelationEntry> entries)
         {
             var part = src.Host.PartId;
             var members = src.Members.OrderBy(x => x.Id).Array();
@@ -192,7 +185,7 @@ namespace Z0
             var correlated = (
                 from m in members
                 join t in targets on m.Id equals t.OpId orderby m.Id
-                select core.paired(m, t)).Array();
+                select paired(m, t)).Array();
 
             var count = correlated.Length;
             if(count > 0)
@@ -202,9 +195,15 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var pair = ref skip(view,i);
-                    fill(seq++, pair.Left, pair.Right, out var record);
-                    records.Add(record);
-                    dst.Add(new ApiMemberCode(pair.Left, pair.Right, i));
+                    ref readonly var right = ref pair.Right;
+                    ref readonly var left = ref pair.Left;
+                    var entry = new ApiCorrelationEntry();
+                    entry.Key = seq++;
+                    entry.CaptureAddress = right.BaseAddress;
+                    entry.RuntimeAddress = left.BaseAddress;
+                    entry.Id = right.OpUri;
+                    entries.Add(entry);
+                    dst.Add(new ApiMemberCode(left, right, i));
                 }
             }
             return count;
@@ -215,7 +214,7 @@ namespace Z0
             const char Delimiter = FieldDelimiter;
             const byte FieldCount = ApiCatalogEntry.FieldCount;
 
-            var fields = Tables.fields(src, Delimiter).View;
+            var fields = Tables.fields(src, Delimiter);
             if(fields.Length != FieldCount)
             {
                 dst = default;
@@ -233,15 +232,6 @@ namespace Z0
             DataParser.parse(skip(fields, i++), out dst.HostName);
             DataParser.parse(skip(fields, i++), out dst.OpUri);
             return true;
-        }
-
-        static ref ApiCorrelationEntry fill(Seq16x2 seq, ApiMember member, ApiCodeBlock code, out ApiCorrelationEntry dst)
-        {
-            dst.Key = seq;
-            dst.CaptureAddress = code.BaseAddress;
-            dst.RuntimeAddress = member.BaseAddress;
-            dst.Id = code.OpUri;
-            return ref dst;
         }
     }
 }

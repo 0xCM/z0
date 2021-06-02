@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public readonly partial struct asm
@@ -45,5 +46,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmOpCodeExpr opcode(string src)
             => new AsmOpCodeExpr(src);
+
     }
 }

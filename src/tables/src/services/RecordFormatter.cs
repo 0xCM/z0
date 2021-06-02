@@ -25,7 +25,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         string Format(in DynamicRow<T> src)
-            => string.Format(FormatSpec.Pattern, src.Cells);
+        {
+            var content = string.Format(FormatSpec.Pattern, src.Cells);
+            var pad = FormatSpec.RowPad;
+            if(pad == 0)
+                return content;
+            else
+                return content.PadRight(pad);
+        }
 
         public string Format(in T src)
             => Format(Adapter.Adapt(src).Adapted);

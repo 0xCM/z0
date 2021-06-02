@@ -496,7 +496,7 @@ namespace Z0
 
         public string Format(BitFormat? config = null)
         {
-            var style = config ?? BitFormatter.DefaultConfig;
+            var style = config ?? BitFormat.Default;
             var sep = style.BlockSep;
             var rowWidth = style.RowWidth;
             var specifier = style.SpecifierPrefix;

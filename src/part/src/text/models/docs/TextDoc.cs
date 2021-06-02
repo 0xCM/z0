@@ -68,7 +68,7 @@ namespace Z0
                     var buffer = memory.alloc<TextBlock>(count);
                     ref var target= ref first(buffer);
                     for(var i=0u; i<count; i++)
-                        seek(target, i) = new TextBlock(parts[i].Trim());
+                        seek(target, i) = new TextBlock(skip(parts,i).Trim());
                     dst= new TextRow(buffer);
                 }
                 else
@@ -188,7 +188,7 @@ namespace Z0
             {
                 for(var i=0; i<count; i++)
                 {
-                    var part = parts[i].Trim();
+                    var part = skip(parts,i).Trim();
                     if(text.nonempty(part))
                         buffer.Add(part);
                 }

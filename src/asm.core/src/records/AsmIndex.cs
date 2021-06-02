@@ -19,7 +19,7 @@ namespace Z0
 
         public const byte FieldCount = 11;
 
-        public const ushort RowPad = 1024;
+        public const ushort RowPad = 680;
 
         public uint Sequence;
 

@@ -138,7 +138,7 @@ namespace Z0
                 entry.DisplaySig = routine.DisplaySig.Format();
                 entry.Uri = routine.Uri;
             }
-            TableEmit(buffer, CaptureIndexEntry.RenderWidths, dst);
+            TableEmit(@readonly(buffer), CaptureIndexEntry.RenderWidths, dst);
         }
 
         void RunWorkflow(IApiPack pack)
@@ -152,7 +152,6 @@ namespace Z0
             CollectedDatasets = DatasetReceiver.Array();
             Routines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
             Routines.Sort();
-            EmitCaptureIndex();
 
             if(pack.Settings.EmitContext)
                 EmitProcessContext(pack);
@@ -218,6 +217,5 @@ namespace Z0
         public static MsgPattern<Count> ExtractingResolved => "Extracting data for {0} resolved parts";
 
         public static MsgPattern<Count> ExtractedResolved => "Extracted data for {0} members";
-
     }
 }

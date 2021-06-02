@@ -61,7 +61,7 @@ namespace Z0
         public TextBlock Text
         {
             [MethodImpl(Inline)]
-            get => Asci.format(Data);
+            get => Asci.format(Data.View);
         }
 
         public int Capacity

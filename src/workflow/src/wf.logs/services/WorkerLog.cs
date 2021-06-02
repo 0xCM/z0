@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
+    using static Root;
 
     struct WorkerLog : IWorkerLog
     {
@@ -49,7 +49,7 @@ namespace Z0
         {
             try
             {
-                Error.AppendLine(content);
+                Error.AppendLines(content);
                 FS.write("[error] ", Status);
                 FS.write(RP.PageBreak40 + Eol, Status);
                 FS.write(content + Eol, Status);

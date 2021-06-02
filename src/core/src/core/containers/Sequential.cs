@@ -25,7 +25,6 @@ namespace Z0
         {
             ref var dst = ref @edit(src);
             ref var value = ref dst.Lo;
-
             if(size<T>() == 1)
                 uint8(ref value) = (byte)(uint8(value) + 1);
             else if(size<T>() == 2)
@@ -36,7 +35,6 @@ namespace Z0
                 uint64(ref value) = uint64(value) + 1ul;
             else
                 throw no<T>();
-
             return ref dst;
         }
    }

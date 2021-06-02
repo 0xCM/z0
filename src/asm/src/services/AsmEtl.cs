@@ -26,8 +26,7 @@ namespace Z0.Asm
 
         public static AsmEncodingInfo encoding(in AsmIndex src)
         {
-            var bitstrings = AsmBitstrings.service();
-            var content = bitstrings.Format(src.Encoded);
+            var content = AsmBitstrings.format(src.Encoded);
             return new AsmEncodingInfo(src.Expression, src.Sig, src.OpCode, src.Encoded, content);
         }
 

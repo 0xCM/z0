@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="right">The text on the right</param>
         [MethodImpl(Inline), Op]
         public static string enclose(object content, string left, string right)
-            => concat(left, $"{content}", right);
+            => string.Concat(left, $"{content}", right);
 
         /// <summary>
         /// Encloses text within a bounding string
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="sep">The left and right boundary</param>
         [MethodImpl(Inline), Op]
         public static string enclose(object content, string sep)
-            => concat(sep,$"{content}",sep);
+            => string.Concat(sep,$"{content}",sep);
 
         /// <summary>
         /// Encloses a character within uniform left/right bounding string
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="sep">The boundary delimiter</param>
         [MethodImpl(Inline), Op]
         public static string enclose(char content, string sep)
-            => concat(sep,content,sep);
+            => string.Concat(sep,content,sep);
 
         /// <summary>
         /// Encloses a character within (possibly distinct) left and right boundaries
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="right">The text on the right</param>
         [MethodImpl(Inline), Op]
         public static string enclose(char content, string left, string right)
-            => concat(left, content, right);
+            => string.Concat(left, content, right);
 
         /// <summary>
         /// Encloses text within (possibly distinct) left and right boundaries
@@ -62,6 +62,6 @@ namespace Z0
         /// <param name="right">The right delimiter</param>
         [MethodImpl(Inline), Op]
         public static string enclose(object content, char left, char right)
-            => concat(left, $"{content}", right);
+            => string.Concat(left, $"{content}", right);
     }
 }

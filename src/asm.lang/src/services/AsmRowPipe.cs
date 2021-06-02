@@ -13,11 +13,9 @@ namespace Z0.Asm
 
     public class AsmRowPipe : AppService<AsmRowPipe>
     {
-        AsmBitstrings Bitstrings;
 
         public AsmRowPipe()
         {
-            Bitstrings = AsmBitstrings.service();
         }
 
         public FS.Files AsmDetailFiles()
@@ -211,7 +209,6 @@ namespace Z0.Asm
             if(count == 0)
                 return;
 
-            var bitstrings = AsmBitstrings.service();
             using var writer = dst.Writer();
 
             switch(code)
@@ -229,7 +226,7 @@ namespace Z0.Asm
                             row.Instruction,
                             row.OpCode,
                             row.Encoded,
-                            bitstrings.Format(row.Encoded),
+                            AsmBitstrings.format(row.Encoded),
                             Semantic(row)
                         );
                         writer.WriteLine(rendered);
@@ -249,7 +246,7 @@ namespace Z0.Asm
                             src.Instruction,
                             src.OpCode,
                             src.Encoded,
-                            Bitstrings.Format(src.Encoded),
+                            AsmBitstrings.format(src.Encoded),
                             Semantic(src)
                         );
 

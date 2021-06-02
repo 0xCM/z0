@@ -14,14 +14,13 @@ namespace Z0
         where H : RecordPipe<H,T>, new()
         where T : struct, IRecord<T>
     {
-
-        protected RecordPipe(byte fieldwidth = 32)
+        protected RecordPipe()
         {
             FieldDelimiter = Chars.Pipe;
             TableId = Tables.identify<T>();
             Fields = Tables.fields<T>();
             FieldCount = Fields.Count;
-            Formatter = Tables.formatter<T>(fieldwidth);
+            Formatter = Tables.formatter<T>();
             Parser = Tables.parser<T>(ParseRow, FieldDelimiter);
         }
 

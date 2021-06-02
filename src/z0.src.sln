@@ -179,6 +179,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.hex", "hex\z0.hex.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.blocks", "blocks\z0.blocks.csproj", "{A67549A3-3602-486D-9697-D1264E4E32DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.processors", "processors\z0.processors.csproj", "{BCA82B9C-626F-4F4A-8F82-B5252B640672}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1248,5 +1250,17 @@ Global
 		{A67549A3-3602-486D-9697-D1264E4E32DD}.Release|x64.Build.0 = Release|Any CPU
 		{A67549A3-3602-486D-9697-D1264E4E32DD}.Release|x86.ActiveCfg = Release|Any CPU
 		{A67549A3-3602-486D-9697-D1264E4E32DD}.Release|x86.Build.0 = Release|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Debug|x64.Build.0 = Debug|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Debug|x86.Build.0 = Debug|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|x64.ActiveCfg = Release|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|x64.Build.0 = Release|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|x86.ActiveCfg = Release|Any CPU
+		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

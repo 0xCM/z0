@@ -183,7 +183,6 @@ namespace Z0
             return ref c16(dst);
         }
 
-
         [MethodImpl(Inline), Op]
         public static void alloc(out CharBlock64 a, out CharBlock64 b)
         {

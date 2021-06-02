@@ -233,5 +233,73 @@ namespace Z0.Asm
             else
                 return (false, $"Could not locate the signature fence {SigFence}");
         }
+
+        public static Outcome parse(uint line, string src, out AsmIndex dst)
+            => parse(new TextLine(line, src), out dst);
+
+        public static Outcome parse(uint line, ReadOnlySpan<char> src, out AsmIndex dst)
+            => parse(text.line(line, text.format(src)), out dst);
+
+        static MsgPattern<Count,Count,TextLine> FieldCountMismatch => "Expected {0} fields but found {1} in '{2}'";
+
+        public static Outcome parse(TextLine src, out AsmIndex dst)
+        {
+            const string ErrorPattern = "Error parsing line {0}, cell {1} from '{2}'";
+            var parts = src.Split(Chars.Pipe);
+            var count = parts.Length;
+            var outcome = Outcome.Success;
+            if(count != AsmIndex.FieldCount)
+            {
+                dst = default;
+                return (false, FieldCountMismatch.Format(AsmIndex.FieldCount, count, src));
+            }
+            dst = default;
+            var i=0u;
+
+            outcome += DataParser.parse(skip(parts,i++), out dst.Sequence);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            outcome += DataParser.parse(skip(parts,i++), out dst.GlobalOffset);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            outcome += DataParser.parse(skip(parts,i++), out dst.BlockAddress);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            outcome += DataParser.parse(skip(parts,i++), out dst.IP);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            outcome += DataParser.parse(skip(parts,i++), out dst.BlockOffset);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            outcome += AsmParser.parse(skip(parts,i++), out dst.Expression);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            outcome += AsmBytes.parse(skip(parts,i++), out dst.Encoded);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            outcome += AsmParser.parse(skip(parts,i++), out dst.Sig);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            outcome += AsmParser.parse(skip(parts,i++), out dst.OpCode);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            var bitstring = skip(parts,i++);
+            dst.Bitstring = dst.Encoded;
+
+            outcome += DataParser.parse(skip(parts,i++), out dst.OpUri);
+            if(outcome.Fail)
+                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+
+            return true;
+        }
     }
 }

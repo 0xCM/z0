@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
     using static bit;
 
     partial struct BitRender
@@ -27,22 +26,23 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 2);
             seek(dst, i++) = bitchar(src, 1);
             seek(dst, i++) = bitchar(src, 0);
-            return slice(dst,0,i);
+            return slice(dst, 0, i);
         }
 
         [MethodImpl(Inline), Op]
         public static uint render(N8 n, N4 w, byte src, uint offset, Span<char> dst)
         {
-            seek(dst, offset++) = bitchar(src, 7);
-            seek(dst, offset++) = bitchar(src, 6);
-            seek(dst, offset++) = bitchar(src, 5);
-            seek(dst, offset++) = bitchar(src, 4);
-            offset += separate(offset, dst);
-            seek(dst, offset++) = bitchar(src, 3);
-            seek(dst, offset++) = bitchar(src, 2);
-            seek(dst, offset++) = bitchar(src, 1);
-            seek(dst, offset++) = bitchar(src, 0);
-            offset += separate(offset, dst);
+            var i=offset;
+            seek(dst, i++) = bitchar(src, 7);
+            seek(dst, i++) = bitchar(src, 6);
+            seek(dst, i++) = bitchar(src, 5);
+            seek(dst, i++) = bitchar(src, 4);
+            i += separate(i, dst);
+            seek(dst, i++) = bitchar(src, 3);
+            seek(dst, i++) = bitchar(src, 2);
+            seek(dst, i++) = bitchar(src, 1);
+            seek(dst, i++) = bitchar(src, 0);
+            i += separate(i, dst);
             return n + 2u;
         }
 

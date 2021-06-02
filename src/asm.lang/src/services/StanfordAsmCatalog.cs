@@ -53,7 +53,7 @@ namespace Z0.Asm
         {
             var dst = Wf.Db().Table<StokeAsmExportRow>(TargetFolder);
             var flow = Wf.EmittingTable<StokeAsmExportRow>(dst);
-            var count = Tables.emit(src, dst, 32);
+            var count = Tables.emit(src.View, dst);
             Wf.EmittedTable(flow,count);
         }
 
@@ -206,7 +206,7 @@ namespace Z0.Asm
             var dst = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
             var flow = Wf.EmittingTable<StokeAsmImportRow>(dst);
             var imports = ImportedStokeRows();
-            var count = Tables.emit(imports, dst, 42);
+            var count = Tables.emit(imports, dst);
             Wf.EmittedTable(flow, count);
             return imports;
         }

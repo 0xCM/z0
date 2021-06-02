@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Root;
     using static core;
@@ -57,7 +58,7 @@ namespace Z0
         /// <param name="src">The source header</param>
         public static string format(RowHeader src)
         {
-            var dst = text.buffer();
+            var dst = new StringBuilder();
             for(var i=0; i<src.Count; i++)
             {
                 if(i != 0)
@@ -65,7 +66,7 @@ namespace Z0
 
                 dst.Append(src[i].Format());
             }
-            return dst.Emit();
+            return dst.ToString();
         }
    }
 }

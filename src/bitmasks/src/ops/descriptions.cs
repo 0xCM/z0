@@ -28,7 +28,7 @@ namespace Z0
                 else if(IsBinaryLiteral(field))
                     dst.Add(BitMasks.describe(binaryliteral(field,vRaw)));
                 else
-                    dst.Add(BitMasks.describe(NumericLiterals.literal(base2, field.Name, vRaw, BitFormatter.format(vRaw, tc))));
+                    dst.Add(BitMasks.describe(NumericLiterals.literal(base2, field.Name, vRaw, BitRender.format(vRaw, tc))));
             }
             return dst.ToArray();
         }

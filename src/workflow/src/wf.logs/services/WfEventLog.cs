@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
+    using static Root;
 
     struct WfEventLog : IWfEventLog
     {
@@ -56,7 +56,7 @@ namespace Z0
                 Display(e);
 
                 if(e.IsError)
-                    Error.AppendLine(e.Format());
+                    Error.AppendLines(e.Format());
 
                 FS.write(format(e), Status);
             }
@@ -73,7 +73,7 @@ namespace Z0
             try
             {
                 if(e.IsError)
-                    Error.AppendLine(e.Format());
+                    Error.AppendLines(e.Format());
                 FS.write(format(e), Status);
             }
             catch(Exception error)
@@ -103,7 +103,7 @@ namespace Z0
             {
                 if(e is IErrorEvent error)
                 {
-                    Error.AppendLine(e.Format());
+                    Error.AppendLines(e.Format());
                     FS.write(summary(error), Status);
                 }
                 else

@@ -16,16 +16,20 @@ namespace Z0
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
+        public static char decode(byte src)
+            => (char)src;
+
+        [MethodImpl(Inline), Op]
         public static char decode(AsciCharCode src)
             => (char)src;
 
         [MethodImpl(Inline), Op]
-        public static void decode(in BinaryCode src, Span<char> dst)
+        public static uint decode(ReadOnlySpan<byte> src, Span<char> dst)
         {
-            var count = src.Length;
-            var view = src.View;
+            var count = min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = (char)skip(view,i);
+                seek(dst,i) = (char)skip(src,i);
+            return (uint)count;
         }
 
         [MethodImpl(Inline), Op]

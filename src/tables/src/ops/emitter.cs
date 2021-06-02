@@ -23,10 +23,10 @@ namespace Z0
         /// </summary>
         /// <param name="formatter">The record formatter</param>
         /// <typeparam name="T">The record type</typeparam>
-        public static IRecordEmitter<T> emitter<E,T>(FS.FilePath dst)
+        public static IRecordEmitter<T> emitter<E,T>(FS.FilePath dst, ushort rowpad = 0)
             where T : struct, IRecord<T>
             where E : unmanaged, Enum
-                => emitter<T>(formatter<E,T>(), dst);
+                => emitter<T>(formatter<E,T>(rowpad), dst);
 
         /// <summary>
         /// Defines a <typeparamref name='T'/> record emitter

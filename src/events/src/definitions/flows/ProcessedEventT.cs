@@ -28,7 +28,7 @@ namespace Z0
 
 
         [MethodImpl (Inline)]
-        public ProcessedEvent(WfStepId step, T payload, CorrelationToken ct)
+        public ProcessedEvent(WfStepId step, T payload, CorrelationToken ct = default)
         {
             EventId = EventId.define(EventName, step);
             Payload = payload;

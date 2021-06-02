@@ -10,6 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
+    using api = Sequential;
     [Datatype]
     public struct Sequential<T> : IDataType<T>
         where T : unmanaged
@@ -33,6 +34,9 @@ namespace Z0
             Lo = src;
             Hi = hi;
         }
+
+        public Sequential<T> Next()
+            => api.next(this);
 
         public void IncLo()
         {

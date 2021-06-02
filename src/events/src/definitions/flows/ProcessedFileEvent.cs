@@ -31,6 +31,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.PSx2, EventId, SourcePath.ToUri());
+            => string.Format(RP.PSx2, EventId, SourcePath.ToUri());
     }
 }
