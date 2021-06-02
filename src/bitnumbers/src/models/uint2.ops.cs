@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(U src)
-            => bit.format(src.data, BitFormat.limited(U.Width, U.Width));
+            => BitRender.format(src.data, BitFormat.limited(U.Width, U.Width));
 
         [MethodImpl(Inline), Op]
         public static void render(U src, uint offset, Span<char> dst)
@@ -32,7 +32,6 @@ namespace Z0
         public static ref S edit<S>(in U src)
             where S : unmanaged
                 => ref @as<U,S>(src);
-
 
         /// <summary>
         /// Promotes a <see cref='U2'/> to a <see cref='U3'/>, as indicated by the <see cref='W3'/> selector

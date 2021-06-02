@@ -258,7 +258,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => bit.format(src.data, FormatConfig7);
+            => BitRender.format(src.data, FormatConfig7);
 
         /// <summary>
         /// Promotes a <see cref='U2'/> to a <see cref='Z0.uint7'/>, as indicated by the <see cref='W7'/> selector

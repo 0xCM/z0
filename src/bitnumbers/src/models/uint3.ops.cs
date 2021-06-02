@@ -278,6 +278,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => bit.format(src.data, FormatConfig3);
+            => BitRender.format(src.data, FormatConfig3);
     }
 }

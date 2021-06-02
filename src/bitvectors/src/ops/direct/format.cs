@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class BitVector
     {
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="fmt">Optional formatting style</param>
         [MethodImpl(Inline), Op]
         public static string format(BitVector8 x, BitFormat? fmt = null)
-            => bit.formatter<byte>(fmt).Format(x);
+            => BitRender.formatter<byte>(fmt).Format(x);
 
         /// <summary>
         /// Formats the bitvector as a bitstring
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="fmt">Optional formatting style</param>
         [MethodImpl(Inline), Op]
         public static string format(BitVector16 x, BitFormat? fmt = null)
-            => bit.formatter<ushort>(fmt).Format(x);
+            => BitRender.formatter<ushort>(fmt).Format(x);
 
         /// <summary>
         /// Formats the bitvector as a bitstring
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="fmt">Optional formatting style</param>
         [MethodImpl(Inline), Op]
         public static string format(BitVector24 x, BitFormat? fmt = null)
-            => bit.formatter<uint>(fmt).Format(x);
+            => BitRender.formatter<uint>(fmt).Format(x);
 
         /// <summary>
         /// Formats the bitvector as a bitstring
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="fmt">Optional formatting style</param>
         [MethodImpl(Inline), Op]
         public static string format(BitVector32 x, BitFormat? fmt = null)
-            => bit.formatter<uint>(fmt).Format(x);
+            => BitRender.formatter<uint>(fmt).Format(x);
 
         /// <summary>
         /// Formats the bitvector as a bitstring
@@ -63,6 +63,6 @@ namespace Z0
         /// <param name="fmt">Optional formatting style</param>
         [MethodImpl(Inline), Op]
         public static string format(BitVector64 x, BitFormat? fmt = null)
-            => bit.formatter<ulong>(fmt).Format(x);
+            => BitRender.formatter<ulong>(fmt).Format(x);
     }
 }

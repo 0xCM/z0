@@ -290,16 +290,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The operand</param>
         [MethodImpl(Inline), Op]
-        public static SignKind signum(float src)
-            => (SignKind)MathF.Sign(src);
+        public static PolarityKind signum(float src)
+            => (PolarityKind)MathF.Sign(src);
 
         /// <summary>
         /// Computes the sign of the operand
         /// </summary>
         /// <param name="src">The operand</param>
         [MethodImpl(Inline), Op]
-        public static SignKind signum(double src)
-            => (SignKind)Math.Sign(src);
+        public static PolarityKind signum(double src)
+            => (PolarityKind)Math.Sign(src);
 
         [MethodImpl(Inline), Square]
         public static float square(float src)

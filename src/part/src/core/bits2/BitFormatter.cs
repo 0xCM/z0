@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Root;
     using static core;
@@ -14,44 +12,6 @@ namespace Z0
     [ApiHost]
     public readonly struct BitFormatter
     {
-        const NumericKind Closure = UnsignedInts;
-
-        /// <summary>
-        /// Formats a span as a bitgrid
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="rowlen">The number of bits in each row</param>
-        /// <param name="maxbits">The maximum number of bits to format</param>
-        /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
-        public static string grid(Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
-        {
-            var dst = BitRender.render(src);
-            var sb = text.build();
-            var limit = maxbits ?? dst.Length;
-            for(int i=0, rowidx=0; i<limit; i+= rowlen, rowidx++)
-            {
-                var remaining = dst.Length - i;
-                var segment = Math.Min(remaining, rowlen);
-                var rowbits = dst.Slice(i, segment);
-                var rowprefix = showrow ? $"{rowidx.ToString().PadRight(3)} | " : string.Empty;
-                var rowformat = rowprefix + new string(rowbits.Intersperse(Chars.Space));
-                sb.AppendLine(rowformat);
-            }
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Formats the content of a generic span of primal cells as a bitmatrix
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="rowlen">The number of bits in each row</param>
-        /// <param name="maxbits">The maximum number of bits to format</param>
-        /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        public static string grid<T>(Span<T> src, int rowlen, int? maxbits = null, bool showrow = false)
-            where T : unmanaged
-                => grid(src.Bytes(),rowlen, maxbits, showrow);
-
         public static BitFormat DefaultConfig
             => BitFormat.configure(false);
 
@@ -96,18 +56,18 @@ namespace Z0
 
         [Op]
         static string format8(object src)
-            => bit.formatter<byte>().Format((byte)NumericBox.rebox(src, NumericKind.U8));
+            => BitRender.formatter<byte>().Format((byte)NumericBox.rebox(src, NumericKind.U8));
 
         [Op]
         static string format16(object src)
-            => bit.formatter<ushort>().Format((ushort)NumericBox.rebox(src, NumericKind.U16));
+            => BitRender.formatter<ushort>().Format((ushort)NumericBox.rebox(src, NumericKind.U16));
 
         [Op]
         static string format32(object src)
-            => bit.formatter<uint>().Format((uint)NumericBox.rebox(src, NumericKind.U32));
+            => BitRender.formatter<uint>().Format((uint)NumericBox.rebox(src, NumericKind.U32));
 
         [Op]
         static string format64(object src)
-            => bit.formatter<ulong>().Format((ulong)NumericBox.rebox(src, NumericKind.U64));
+            => BitRender.formatter<ulong>().Format((ulong)NumericBox.rebox(src, NumericKind.U64));
     }
 }

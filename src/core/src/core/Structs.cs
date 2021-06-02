@@ -100,7 +100,7 @@ namespace Z0
         public static bool neq<T>(in T x, in T y)
             where T : struct
         {
-            var count = memory.size<T>();
+            var count = size<T>();
             ref readonly var bx = ref @as<T,byte>(x);
             ref readonly var by = ref @as<T,byte>(y);
             for(var i=0; i<count; i++)

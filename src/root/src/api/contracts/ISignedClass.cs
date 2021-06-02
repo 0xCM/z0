@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// Specifies the literal classifier the type-level classifier represents
         /// </summary>
-        SignKind Kind {get;}
+        PolarityKind Kind {get;}
     }
 
     /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// <summary>
         /// Default implementation of <see cref="ISignedClass.Kind"/>
         /// </summary>
-        SignKind ISignedClass.Kind
+        PolarityKind ISignedClass.Kind
             => SignType.Kind;
     }
 }

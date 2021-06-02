@@ -9,20 +9,47 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Sign
+    partial class XTend
     {
-        public SignKind Kind {get;}
+        [MethodImpl(Inline)]
+        public static bool IsLeft(this Sign src)
+            => src.Kind == PolarityKind.Left;
 
         [MethodImpl(Inline)]
-        public Sign(SignKind kind)
+        public static bool IsRight(this Sign src)
+            => src.Kind == PolarityKind.Right;
+    }
+
+    public readonly struct Sign
+    {
+        public PolarityKind Kind {get;}
+
+        [MethodImpl(Inline)]
+        public Sign(PolarityKind kind)
             => Kind = kind;
 
         [MethodImpl(Inline)]
-        public static implicit operator Sign(SignKind src)
+        public static implicit operator Sign(PolarityKind src)
             => new Sign(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator SignKind(Sign src)
+        public static implicit operator Sign(sbyte src)
+            => new Sign(src < 0 ? PolarityKind.Left : PolarityKind.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Sign(short src)
+            => new Sign(src < 0 ? PolarityKind.Left : PolarityKind.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Sign(int src)
+            => new Sign(src < 0 ? PolarityKind.Left : PolarityKind.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Sign(long src)
+            => new Sign(src < 0 ? PolarityKind.Left : PolarityKind.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator PolarityKind(Sign src)
             => src.Kind;
     }
 
@@ -46,7 +73,7 @@ namespace Z0
         /// however, accessing that implementation requires a boxing conversion along with polymorphic
         /// dispatch
         /// </remarks>
-        public SignKind Kind
+        public PolarityKind Kind
             => SignType.Kind;
     }
 

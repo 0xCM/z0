@@ -120,6 +120,10 @@ namespace Z0
         public static explicit operator long(Cell64 x)
             => (long)x.Content;
 
+        [MethodImpl(Inline)]
+        public static implicit operator Cell64((uint lo, uint hi) src)
+            => new Cell64((((ulong)src.lo | ((ulong)src.hi << 32))));
+
         public static Cell64 Empty => default;
    }
 }

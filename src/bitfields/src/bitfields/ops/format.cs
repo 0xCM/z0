@@ -14,6 +14,19 @@ namespace Z0
     partial struct CpuBits
     {
         /// <summary>
+        /// Reads a T-value from the value of an E-enum of primal T-kind
+        /// </summary>
+        /// <param name="eVal">The enum value</param>
+        /// <param name="tVal">The primal output value</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        static ref T scalar<E,T>(in E eVal)
+            where E : unmanaged
+            where T : unmanaged
+                => ref @as<E,T>(eVal);
+
+        /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
         /// </summary>
         /// <param name="value">The field value</param>
@@ -23,11 +36,9 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var data = Enums.scalar<E,T>(src);
-            var limit = (uint)gbits.effwidth(data);
-            var config = BitFormat.limited(limit,zpad);
-            var formatter = bit.formatter<T>(config);
-            return text.concat(name, Chars.Colon, formatter.Format(data));
+            var data = scalar<E,T>(src);
+            var formatter = BitRender.formatter<T>(BitFormat.limited((uint)gbits.effwidth(data), zpad));
+            return string.Concat(name, Chars.Colon, formatter.Format(data));
         }
    }
 }

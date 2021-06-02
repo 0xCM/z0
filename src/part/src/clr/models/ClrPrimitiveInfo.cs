@@ -15,12 +15,12 @@ namespace Z0
 
         public TypeWidth Width {get;}
 
-        public SignKind Sign {get;}
+        public PolarityKind Sign {get;}
 
         public PrimalCode TypeCode {get;}
 
         [MethodImpl(Inline)]
-        public ClrPrimitiveInfo(ClrPrimalKind kind, TypeWidth width, SignKind sign, PrimalCode tc)
+        public ClrPrimitiveInfo(ClrPrimalKind kind, TypeWidth width, PolarityKind sign, PrimalCode tc)
         {
             Kind = kind;
             Width = width;

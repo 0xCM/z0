@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ref F from<T,F>(in T src)
-            where F : unmanaged, IDataCell
+            where F : unmanaged
             where T : struct
                 => ref Unsafe.As<T,F>(ref edit(src));
     }

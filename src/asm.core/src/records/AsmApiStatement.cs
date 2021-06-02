@@ -37,6 +37,9 @@ namespace Z0
 
         public OpUri OpUri;
 
+        public bool IsValid()
+            => Expression.IsValid;
+
         [MethodImpl(Inline)]
         public int CompareTo(AsmApiStatement src)
             => IP.CompareTo(src.IP);

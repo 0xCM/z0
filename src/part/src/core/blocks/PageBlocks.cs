@@ -24,9 +24,9 @@ namespace Z0
             => new PageBlockInfo(src.Range);
 
         [MethodImpl(Inline)]
-        public static CellBuffer<T> cells<T>(PageBlock src)
+        public static MemoryCells<T> cells<T>(PageBlock src)
             where T : unmanaged, IDataCell
-                => new CellBuffer<T>(src.Range);
+                => new MemoryCells<T>(src.Range);
 
         [MethodImpl(Inline)]
         public static void alloc(out PageBlock16x4 dst)

@@ -48,7 +48,7 @@ namespace Z0
             var data = Enums.scalar<E,T>(src);
             var limit = (uint)gbits.effwidth(data);
             var config = BitFormat.limited(limit,zpad);
-            var formatter = bit.formatter<T>(config);
+            var formatter = BitRender.formatter<T>(config);
             return string.Concat(name, Chars.Colon, formatter.Format(data));
         }
     }

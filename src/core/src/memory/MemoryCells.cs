@@ -10,15 +10,15 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = Cells;
+    using api = Spans;
 
-    public readonly struct CellBuffer<T>
-        where T : unmanaged, IDataCell
+    public readonly struct MemoryCells<T>
+        where T : unmanaged
     {
         readonly MemoryRange Range;
 
         [MethodImpl(Inline)]
-        public CellBuffer(MemoryRange range)
+        public MemoryCells(MemoryRange range)
         {
             Range = range;
         }

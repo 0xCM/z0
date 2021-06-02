@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
+    using static Typed;
 
     public struct bits<N,T> : IBitContainer<bits<N,T>,N,T>
         where N : unmanaged, ITypeNat
@@ -24,7 +26,7 @@ namespace Z0
         public ushort Width
         {
             [MethodImpl(Inline)]
-            get => NatValues.nat16u<N>();
+            get => nat16u<N>();
         }
 
         public T Value
@@ -34,7 +36,7 @@ namespace Z0
         }
 
         public string Format()
-            => bit.format(Storage, Width);
+            => BitRender.format(Storage, Width);
 
         public override string ToString()
             => Format();

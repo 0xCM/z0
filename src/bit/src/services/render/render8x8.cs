@@ -10,7 +10,6 @@ namespace Z0
     using static Root;
     using static core;
     using static Typed;
-    using static bit;
 
     partial struct BitRender
     {
@@ -73,14 +72,5 @@ namespace Z0
             }
             return k;
         }
-
-
-        [MethodImpl(Inline), Op]
-        public static uint render(ReadOnlySpan<byte> src, Span<char> dst)
-            => render(src, (uint)dst.Length, dst);
-
-        [MethodImpl(Inline), Op]
-        public static uint render(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
-            => render(n8, n8, src, src.Length, maxbits, dst);
     }
 }

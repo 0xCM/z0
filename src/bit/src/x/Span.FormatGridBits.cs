@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
         [Op]
         public static string FormatGridBits(this Span<byte> src, int wRow, int? maxbits = null, bool showrow = false)
-            => BitFormatter.grid(src, wRow, maxbits, showrow);
+            => BitRender.grid(src, wRow, maxbits, showrow);
 
         /// <summary>
         /// Formats the content of a generic span of primal cells as a bitmatrix
@@ -30,6 +30,6 @@ namespace Z0
         /// <typeparam name="T">The primal cell type</typeparam>
         public static string FormatGridBits<T>(this Span<T> src, int wRow, int? maxbits = null, bool showrow = false)
             where T : unmanaged
-                => BitFormatter.grid(src, wRow, maxbits, showrow);
+                => BitRender.grid(src, wRow, maxbits, showrow);
     }
 }

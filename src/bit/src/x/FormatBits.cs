@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using api = bit;
+    using api = BitRender;
 
     partial class XTend
     {
@@ -63,10 +63,10 @@ namespace Z0
 
         public static string FormatBits<T>(this ReadOnlySpan<T> src, BitFormat? config = null)
             where T : unmanaged
-                => bit.format(src, config);
+                => api.format(src, config);
 
         public static string FormatBits<T>(this Span<T> src, BitFormat? config = null)
             where T : unmanaged
-                => bit.format(src.ReadOnly(), config);
+                => api.format(src.ReadOnly(), config);
     }
 }

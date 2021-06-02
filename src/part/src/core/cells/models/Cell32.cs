@@ -119,6 +119,10 @@ namespace Z0
         public static explicit operator ulong(Cell32 x)
             => (ulong)x.Content;
 
+        [MethodImpl(Inline)]
+        public static implicit operator Cell32((ushort lo, ushort hi) src)
+            => new Cell32((((uint)src.lo | ((uint)src.hi << 16))));
+
        public static Cell32 Empty => default;
     }
 }

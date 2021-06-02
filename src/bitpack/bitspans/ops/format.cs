@@ -8,6 +8,6 @@ namespace Z0
     {
         [Op]
         public static string format(in BitSpan src, BitFormat? fmt = null)
-            => bit.format(src.Storage, fmt);
+            => BitRender.format(src.Storage, fmt);
     }
 }

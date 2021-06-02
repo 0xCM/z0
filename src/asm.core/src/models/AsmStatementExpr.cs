@@ -65,6 +65,22 @@ namespace Z0.Asm
             get => Content.IsNonEmpty;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Content.IsEmpty;
+        }
+
+        public bool IsValid
+        {
+            get => IsNonEmpty && !Content.Text.StartsWith("(bad)");
+        }
+
+        public bool IsInvalid
+        {
+            get => IsEmpty || Content.Text.StartsWith("(bad)");
+        }
+
         public int CompareTo(AsmStatementExpr src)
             => Content.CompareTo(src.Content);
 

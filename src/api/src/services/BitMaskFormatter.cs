@@ -38,6 +38,6 @@ namespace Z0
             => Formatter.FormatHeader();
 
         static string format(Base2 @base, BitMaskInfo src)
-            => bit.format(src.Data, src.TypeCode);
+            => BitRender.format(src.Data, src.TypeCode);
     }
 }

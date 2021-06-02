@@ -22,10 +22,10 @@ namespace Z0
             => Config = config;
 
         public string Format(ReadOnlySpan<byte> src)
-            => bit.format(src, Config);
+            => BitRender.format(src, Config);
 
         [MethodImpl(Inline)]
         public string Format(T src)
-            => bit.format(src, Config);
+            => BitRender.format(src, Config);
     }
 }

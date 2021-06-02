@@ -58,7 +58,7 @@ namespace Z0
             => api.describe(this);
 
         [MethodImpl(Inline)]
-        public CellBuffer<T> Cells<T>()
+        public MemoryCells<T> Cells<T>()
             where T : unmanaged, IDataCell
                 => api.cells<T>(this);
     }

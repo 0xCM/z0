@@ -64,9 +64,38 @@ namespace Z0
 
         }
 
+        void CheckNibbleSpan()
+        {
+            var m0 =  Cells.cell64(BitMasks.Literals.Even64);
+            var m1 = Cells.cell64(BitMasks.Literals.Lsb63x3x1);
+            var storage = Cells.join(m0,m1);
+            var bytes = storage.Bytes;
+            var bits = BitRender.render(bytes);
+            Wf.Row(text.format(bits));
+
+            var nibbles = BitNumbers.nibbles(bytes);
+            var count = nibbles.Count;
+            Wf.Row(string.Format("{0}:{1}", "Count", count));
+            if(count != 32)
+                return;
+
+            var dst = text.buffer();
+            dst.Append("[");
+            for(var i=0; i<count; i++)
+            {
+                var cell = nibbles[i];
+                dst.Append(cell.Format());
+                if(i != count - 1)
+                    dst.Append(" | ");
+            }
+            dst.Append("]");
+
+            Wf.Row(dst.Emit());
+        }
+
         public void Run(IPolySource src)
         {
-            Check2();
+            CheckNibbleSpan();
 
         }
 

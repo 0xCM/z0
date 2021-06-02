@@ -11,7 +11,6 @@ namespace Z0
         string Format();
     }
 
-
     public interface ILexical : ITextual
     {
         int CompareTo(ILexical src)

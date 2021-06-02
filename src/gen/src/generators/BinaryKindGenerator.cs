@@ -21,11 +21,11 @@ namespace Z0
         {
             MaxValue = max;
             MaxBitCount = effwidth(MaxValue);
-            Formatter = bit.formatter<byte>(BitFormat.limited(MaxBitCount, MaxBitCount));
+            Formatter = BitRender.formatter<byte>(BitFormat.limited(MaxBitCount, MaxBitCount));
         }
 
         BitFormatter<byte> Formatter {get;}
-            = bit.formatter<byte>();
+            = BitRender.formatter<byte>();
 
         public string Namespace {get;}
             = "Z0";

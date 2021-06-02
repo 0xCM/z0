@@ -8,12 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial class gbits
+    partial class BitMasks
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitMask<T> bitmask<T>(T invariant)
-            where T : unmanaged
+        [MethodImpl(Inline),Op, Closures(Closure)]
+        public static BitMask<T> mask<T>(T invariant)
+            where T : unmanaged, IDataCell
                 => new BitMask<T>(invariant);
     }
 }

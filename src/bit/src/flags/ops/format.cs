@@ -37,7 +37,7 @@ namespace Z0
         [Op, Closures(UnsignedInts)]
         public static string format<T>(Flags<T> src)
             where T : unmanaged
-                => bit.formatter<T>().Format(src.Value);
+                => BitRender.formatter<T>().Format(src.Value);
 
         const string RenderPattern = "{0,-48}: {1}" + Eol;
 
@@ -72,7 +72,7 @@ namespace Z0
             }
             else
             {
-                buffer.Append(bit.formatter<E>().Format(src.Value));
+                buffer.Append(BitRender.formatter<E>().Format(src.Value));
             }
             return buffer.ToString();
         }

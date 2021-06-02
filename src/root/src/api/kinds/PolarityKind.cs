@@ -7,16 +7,16 @@ namespace Z0
     /// <summary>
     /// Defines polarity classifiers
     /// </summary>
-    public enum SignKind : sbyte
+    public enum PolarityKind : sbyte
     {
         /// <summary>
-        /// Indicates a value is greater than or equal to zero
+        /// Indicates negative polarity
         /// </summary>
-        Unsigned = 0,
+        Left = -1,
 
         /// <summary>
-        /// Indicates a value is less than zero
+        /// Indicates nonnegative polarity
         /// </summary>
-        Signed = -1,
+        Right = 0,
     }
 }

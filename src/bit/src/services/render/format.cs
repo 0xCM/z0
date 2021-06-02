@@ -10,16 +10,41 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
-    partial struct bit
+    partial struct BitRender
     {
-        [MethodImpl(Inline), Closures(Closure)]
-        public static BitFormatter<T> formatter<T>(BitFormat? config = null)
-            where T : struct
-                => new BitFormatter<T>(config ?? BitFormat.configure());
-
         [Op]
+        public static string format(N32 n, N8 w, uint src)
+        {
+            var buffer = CharBlock64.Null.Data;
+            var count = render(n, w, src, 0, buffer);
+            return new string(slice(buffer,0,count));
+        }
+
+        public static string format(ReadOnlySpan<byte> src, in BitFormat config)
+        {
+            var count = src.Length*8;
+            var dst = span<char>(count);
+            dst.Fill(Chars.D0);
+
+            BitRender.render(src, config.MaxBitCount, dst);
+
+            dst.Reverse();
+
+            var bs = new string(dst);
+
+            if(config.TrimLeadingZeros)
+                bs = bs.TrimStart(Chars.D0);
+
+            if(config.ZPad != 0)
+                bs = bs.PadLeft(config.ZPad, Chars.D0);
+
+            if(config.BlockWidth != 0)
+                bs = string.Join(config.BlockSep, bs.Partition(config.BlockWidth));
+
+            return config.SpecifierPrefix ? "0b" + bs : bs;
+        }
+
         public static string format(ReadOnlySpan<bit> src, BitFormat? fmt = null)
         {
             var options = fmt ?? BitFormat.configure();
@@ -46,31 +71,6 @@ namespace Z0
                 return new string(buffer);
         }
 
-        [Op]
-        public static string format(ReadOnlySpan<byte> src, in BitFormat config)
-        {
-            var count = src.Length*8;
-            var dst = span<char>(count);
-            dst.Fill(Chars.D0);
-
-            BitRender.render(src, config.MaxBitCount, dst);
-
-            dst.Reverse();
-
-            var bs = new string(dst);
-
-            if(config.TrimLeadingZeros)
-                bs = bs.TrimStart(Chars.D0);
-
-            if(config.ZPad != 0)
-                bs = bs.PadLeft(config.ZPad, Chars.D0);
-
-            if(config.BlockWidth != 0)
-                bs = string.Join(config.BlockSep, bs.Partition(config.BlockWidth));
-
-            return config.SpecifierPrefix ? "0b" + bs : bs;
-        }
-
         [Op, Closures(Closure)]
         public static string format<T>(T src)
             where T : struct
@@ -79,7 +79,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string format<T>(T src, in BitFormat config)
             where T : struct
-                => format(bytes(src), config);
+                => BitRender.format(bytes(src), config);
 
         [Op, Closures(Closure)]
         public static string format<T>(ReadOnlySpan<T> src, BitFormat? config = null)
@@ -115,18 +115,18 @@ namespace Z0
 
         [Op]
         static string format8(object src)
-            => bit.formatter<byte>().Format((byte)NumericBox.rebox(src, NumericKind.U8));
+            => BitRender.formatter<byte>().Format((byte)NumericBox.rebox(src, NumericKind.U8));
 
         [Op]
         static string format16(object src)
-            => bit.formatter<ushort>().Format((ushort)NumericBox.rebox(src, NumericKind.U16));
+            => BitRender.formatter<ushort>().Format((ushort)NumericBox.rebox(src, NumericKind.U16));
 
         [Op]
         static string format32(object src)
-            => bit.formatter<uint>().Format((uint)NumericBox.rebox(src, NumericKind.U32));
+            => BitRender.formatter<uint>().Format((uint)NumericBox.rebox(src, NumericKind.U32));
 
         [Op]
         static string format64(object src)
-            => bit.formatter<ulong>().Format((ulong)NumericBox.rebox(src, NumericKind.U64));
+            => BitRender.formatter<ulong>().Format((ulong)NumericBox.rebox(src, NumericKind.U64));
     }
 }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a 32-bit bitvector
@@ -31,7 +31,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(Content);
+            get => bytes(Content);
         }
 
         [MethodImpl(Inline)]
@@ -39,8 +39,8 @@ namespace Z0
             => Untyped == other.Untyped;
 
         public string Format(BitFormat config)
-            => bit.formatter<T>(config).Format(Content);
+            => BitRender.formatter<T>(config).Format(Content);
         public string Format()
-            => bit.formatter<T>().Format(Content);
+            => BitRender.formatter<T>().Format(Content);
     }
 }

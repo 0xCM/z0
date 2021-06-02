@@ -9,24 +9,24 @@ namespace Z0
     /// Characterizes operations over an integer type
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface IIntegerOps<T> : IRealNumberOps<T>, IStepwiseOps<T>, IBitwiseOps<T> 
+    public interface IIntegerOps<T> : IRealNumberOps<T>, IStepwiseOps<T>, IBitwiseOps<T>
         where T : unmanaged
-    { 
+    {
 
     }
 
-    public interface IFiniteIntOps<T> : IIntegerOps<T>, IBoundRealOps<T> 
+    public interface IFiniteIntOps<T> : IIntegerOps<T>, IBoundRealOps<T>
         where T : unmanaged
-    { 
+    {
 
     }
 
     /// <summary>
     /// Characterizes operations over unbound integers
     /// </summary>
-    public interface IInfiniteIntOps<T> : IIntegerOps<T>, IInfiniteOps<T> 
+    public interface IInfiniteIntOps<T> : IIntegerOps<T>, IInfiniteOps<T>
         where T : unmanaged
-    { 
+    {
 
     }
 
@@ -39,16 +39,16 @@ namespace Z0
         /// <summary>
         /// Determines the sign of the supplied value
         /// </summary>
-        SignKind Sign(T x);
+        PolarityKind Sign(T x);
     }
 
     /// <summary>
     /// Characterizes operations over a signed interal type
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface ISignedIntOps<T> : IIntegerOps<T>, ISignableOps<T>, ISubtractiveOps<T> 
+    public interface ISignedIntOps<T> : IIntegerOps<T>, ISignableOps<T>, ISubtractiveOps<T>
         where T : unmanaged
-    { 
+    {
 
     }
 
@@ -56,17 +56,17 @@ namespace Z0
     /// Characterizes operations over a signed, finite interal type
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface IFiniteSignedIntOps<T> : ISignedIntOps<T>, IBoundRealOps<T> 
+    public interface IFiniteSignedIntOps<T> : ISignedIntOps<T>, IBoundRealOps<T>
         where T : unmanaged
-    { 
+    {
 
-    } 
+    }
 
     /// <summary>
     /// Characterizes operations over an unbound signed integral type
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface IInfiniteSignedIntOps<T> : IInfiniteIntOps<T>, ISignedIntOps<T> 
+    public interface IInfiniteSignedIntOps<T> : IInfiniteIntOps<T>, ISignedIntOps<T>
         where T : unmanaged
     {
 

@@ -252,7 +252,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => bit.format(src.data, FormatConfig5);
+            => BitRender.format(src.data, FormatConfig5);
 
         [MethodImpl(Inline), False]
         public static U @false(U a, U b)

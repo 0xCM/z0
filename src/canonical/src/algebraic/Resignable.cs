@@ -14,6 +14,6 @@ namespace Z0
         /// <summary>
         /// Aligns the value with a specified sign
         /// </summary>
-        T Resign(T x, SignKind s);
+        T Resign(T x, PolarityKind s);
     }
 }
