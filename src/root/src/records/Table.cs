@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct Table<T> : ITable<T>
         where T : struct, IRecord<T>
     {
-        readonly Index<T> Data;
+        readonly T[] Data;
 
         [MethodImpl(Inline)]
         public Table(T[] rows)
@@ -23,13 +23,13 @@ namespace Z0
         public Span<T> Rows
         {
             [MethodImpl(Inline)]
-            get => Data.Edit;
+            get => Data;
         }
 
         public uint RowCount
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => (uint)Data.Length;
         }
     }
 }

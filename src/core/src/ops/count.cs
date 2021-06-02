@@ -53,5 +53,13 @@ namespace Z0
                     count++;
             return count;
         }
+
+        /// <summary>
+        /// Computes the whole number of T-cells identified by a reference
+        /// </summary>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint count<T>(MemorySeg src)
+            => (uint)(src.Length/size<T>());
     }
 }

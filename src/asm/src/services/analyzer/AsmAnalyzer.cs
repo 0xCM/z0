@@ -49,36 +49,36 @@ namespace Z0
         public void Analyze(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
         {
             var blocks = CollectBlocks(src);
-            var root = dst.RootDir();
 
             if(Settings.EmitCalls)
-                EmitCalls(src, root);
+                EmitCalls(src, dst);
 
             if(Settings.EmitJumps)
-                EmitJumps(src, root);
+                EmitJumps(src, dst);
 
             if(Settings.EmitHostStatements)
-                EmitHostStatements(src, root);
+                EmitHostStatements(src, dst);
 
             if(Settings.EmitStatementIndex)
-                EmitStatementIndex(blocks, StatementIndexPath(root));
+                EmitStatementIndex(blocks, dst);
 
             if(Settings.EmitAsmDetails)
-                EmitDetails(blocks, root);
+                EmitDetails(blocks, dst);
         }
 
-        void EmitDetails(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
+        void EmitDetails(ReadOnlySpan<ApiCodeBlock> src, ApiPackArchive dst)
         {
-            var target = AsmDetailTarget(dst);
+            var target = dst.AsmDetailDir();
             target.Clear();
             var rows = AsmRows.EmitAsmDetailRows(src, target);
-            Emitted(rows, dst);
+            Emitted(rows, target);
         }
 
-        ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, FS.FilePath dst)
+        ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, ApiPackArchive dst)
         {
             var rows = Statements.BuildStatementIndex(src);
-            TableEmit(rows, AsmIndex.RenderWidths, dst);
+            var formatter = Tables.formatter<AsmIndex>(AsmIndex.RenderWidths);
+            TableEmit(rows, AsmIndex.RenderWidths, dst.StatementIndexPath());
             return rows;
         }
 
@@ -98,16 +98,16 @@ namespace Z0
             Thumbprints.Emit(distinct, target);
         }
 
-        void EmitCalls(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
+        void EmitCalls(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
         {
-            var target = CallTarget(dst);
+            var target = dst.AsmCallsPath();
             var calls = Calls.EmitRows(src, target);
             Emitted(calls, target);
         }
 
-        void EmitJumps(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
+        void EmitJumps(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
         {
-            var target = JmpTarget(dst);
+            var target = dst.JmpTarget();
             var rows = Jumps.EmitRows(src, target);
             Emitted(rows, target);
         }
@@ -132,7 +132,7 @@ namespace Z0
             return total;
         }
 
-        void EmitHostStatements(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
+        void EmitHostStatements(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
         {
             var pipe = Wf.AsmStatementPipe();
             var total = CountStatements(src);
@@ -144,7 +144,7 @@ namespace Z0
                 offset += pipe.CreateStatementData(skip(src,i), slice(buffer, offset));
             Wf.Ran(running, CreatedStatements.Format(total));
 
-            pipe.EmitHostStatements(buffer, dst);
+            pipe.EmitHostStatements(buffer, dst.RootDir());
         }
 
         SortedSpan<ApiCodeBlock> CollectBlocks(ReadOnlySpan<AsmRoutine> src)
@@ -167,11 +167,11 @@ namespace Z0
         FS.FilePath StatementIndexPath(FS.FolderPath dir)
             => dir + FS.file("asm.statements", FS.Csv);
 
-        FS.FolderPath TableDir(FS.FolderPath root)
-            => root + FS.folder("tables");
-
         FS.FilePath ThumbprintPath(FS.FolderPath dst)
             => dst + FS.file("asm.thumbprints", FS.Asm);
+
+        FS.FolderPath TableDir(FS.FolderPath root)
+            => root + FS.folder("tables");
 
         FS.FilePath CallTarget(FS.FolderPath root)
             => TableDir(root) + FS.file(AsmCallRow.TableId, FS.Csv);

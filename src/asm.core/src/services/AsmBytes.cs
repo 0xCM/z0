@@ -21,7 +21,7 @@ namespace Z0.Asm
         public static bool parse(string src, out AsmHexCode dst)
         {
             var storage = Cells.alloc(w128);
-            var size = Hex.parse(span(src),storage.Bytes);
+            var size = Hex.parse(span(src.Trim()),storage.Bytes);
             if(size == 0 || size > 15)
             {
                 dst = AsmHexCode.Empty;

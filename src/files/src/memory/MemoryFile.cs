@@ -36,6 +36,12 @@ namespace Z0
             Size = (ulong)Path.Info.Length;
         }
 
+        public void Dispose()
+        {
+            Accessor?.Dispose();
+            File?.Dispose();
+        }
+
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
@@ -59,7 +65,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> View(ulong offset, ByteSize size)
-            => memory.view(BaseAddress, offset, size);
+            => core.view(BaseAddress, offset, size);
 
         /// <summary>
         /// Presents file content as a readonly sequence of <see cref='byte'/> cells
@@ -107,11 +113,6 @@ namespace Z0
         MemoryMappedViewStream Stream(MemoryAddress src, ByteSize size)
             => File.CreateViewStream(src, (int)size);
 
-        public void Dispose()
-        {
-            Accessor?.Dispose();
-            File?.Dispose();
-        }
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryFile src)

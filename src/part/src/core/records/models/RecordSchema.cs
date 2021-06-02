@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct RecordSchema
     {
         public TableId Id {get;}
 
-        public Index<RecordFieldSpec> Fields {get;}
+        public Index<RecordFieldSpec> Fields{get;}
 
         [MethodImpl(Inline)]
         public RecordSchema(TableId id, RecordFieldSpec[] fields)

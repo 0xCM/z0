@@ -8,8 +8,7 @@ namespace Z0
     using System.Text;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
+    using static Root;
 
     readonly struct DatasetFormatter<F> : IDatasetFormatter<F>
         where F : unmanaged, Enum
@@ -84,6 +83,9 @@ namespace Z0
         /// <typeparam name="F">The field specifier type</typeparam>
         [MethodImpl(Inline)]
         static int width(F field)
-            => text.width(field);
+        {
+            var w = core.@as<F,uint>(field) >> 16;
+            return (int)w;
+        }
     }
 }

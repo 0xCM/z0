@@ -8,17 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
-    [Service]
-    public readonly struct TextBuffer : ITextBuffer<TextBuffer>
+    class TextBuffer : ITextBuffer<TextBuffer>
     {
         readonly StringBuilder Target;
 
         [MethodImpl(Inline)]
         public TextBuffer(StringBuilder dst)
             => Target = dst;
+
+        [MethodImpl(Inline)]
+        public TextBuffer(uint capacity)
+            => Target = new StringBuilder((int)capacity);
 
         [MethodImpl(Inline)]
         public StringBuilder ToStringBuilder()
@@ -58,8 +60,53 @@ namespace Z0
             => Target.Append(src);
 
         [MethodImpl(Inline)]
-        public void Append(params string[] src)
-            => root.iter(src, Append);
+        public void AppendFormat(string pattern, params object[] args)
+            => Target.AppendFormat(pattern, args);
+
+        [MethodImpl(Inline)]
+        public void AppendLineFormat(string pattern, params object[] args)
+            => AppendLine(string.Format(pattern, args));
+
+        [MethodImpl(Inline)]
+        public void AppendLine<T>(T src)
+        {
+            if(src != null)
+                AppendLine(src.ToString());
+        }
+
+        [MethodImpl(Inline)]
+        public void AppendItem<T>(T src)
+            => Append(src?.ToString() ?? "!<null>!");
+
+        [MethodImpl(Inline)]
+        public void IndentLine<T>(uint margin, T src)
+            => AppendLine(string.Format("{0}{1}", new string(Chars.Space, (int)margin), src));
+
+        public void AppendPadded<T,W>(T value, W width, string delimiter = EmptyString)
+        {
+            if(sys.nonempty(delimiter))
+                Append(delimiter);
+
+            Append(string.Format(RP.pad(-core.i16(width)), value));
+        }
+
+        public void AppendDelimited<F,T>(F field, T value, char c = FieldDelimiter)
+            where F : unmanaged
+        {
+            var shift = core.width<F>()/2;
+            var width = core.uint32(field) >> shift;
+            Append(text.rspace(c));
+            Append($"{value}".PadRight((int)width));
+        }
+
+        public void AppendDelimited(string delimiter, params object[] src)
+        {
+            var count = src.Length;
+            var terms = core.@readonly(src);
+            var sep = string.Format("{0} ", delimiter);
+            for(var i=0; i<src.Length; i++)
+                Append(string.Format("{0}{1}", sep, core.skip(terms,i)));
+        }
 
         [MethodImpl(Inline)]
         public void Append(char[] src)

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -36,11 +34,5 @@ namespace Z0
     public interface IRenderBuffer<S,T> : IRenderBuffer<T>
     {
         void Append(S src);
-
-        void Append(params S[] src)
-        {
-            foreach(var item in src)
-                Append(item);
-        }
     }
 }

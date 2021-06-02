@@ -33,6 +33,12 @@ namespace Z0
             Col = col;
         }
 
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => FastHash.combine(Row,Col);
+        }
+
         public string Format()
             => string.Format("({0},{1})", Row, Col);
 
@@ -40,7 +46,7 @@ namespace Z0
             => Format();
 
         public override int GetHashCode()
-            => (int)alg.hash.combine(Row,Col);
+            => (int)Hash;
 
         public bool Equals(CellIndex src)
             => Row == src.Row && Col == src.Col;

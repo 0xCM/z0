@@ -23,14 +23,14 @@ namespace Z0
         public HeaderCell(uint index, string name, RenderWidth width)
         {
             Index = index;
-            Name = name ?? Null.Indicator;
+            Name = name ?? "!null!";
             Width = width;
             CellFormat = new CellFormatSpec("{0}", width);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.rpad(Name, Width);
+            => RP.rpad(Name, Width);
 
         [MethodImpl(Inline)]
         public int CompareTo(HeaderCell src)

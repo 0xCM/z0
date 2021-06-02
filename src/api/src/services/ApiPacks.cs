@@ -19,6 +19,9 @@ namespace Z0
         public IApiPack Create(FS.FolderPath root)
             => new ApiPack(ApiPackSettings.init(root));
 
+        public IApiPack Latest()
+            => List().Last;
+
         public Index<IApiPack> List()
             => Db.CapturePackRoot().SubDirs(false).Select(x => (IApiPack)(Create(x)));
     }

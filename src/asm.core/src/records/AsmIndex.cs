@@ -19,6 +19,8 @@ namespace Z0
 
         public const byte FieldCount = 11;
 
+        public const ushort RowPad = 1024;
+
         public uint Sequence;
 
         public Address32 GlobalOffset;

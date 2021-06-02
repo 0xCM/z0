@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Identifies a rectangular region within a table
@@ -46,10 +46,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get =>alg.hash.combine(
-                alg.hash.calc(Min),
-                alg.hash.calc(Max)
-                );
+            get => FastHash.combine(Min.Hash, Max.Hash);
         }
 
         public override int GetHashCode()

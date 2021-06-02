@@ -20,8 +20,8 @@ namespace Z0
         FS.FolderPath DumpRoot()
             => Root + FS.folder(dumps);
 
-        FS.Files Dumps()
-            => DumpRoot().Files(FS.Dmp);
+        // FS.Files Dumps()
+        //     => DumpRoot().Files(FS.Dmp);
 
         FS.FileName DumpFile(Process process, Timestamp ts)
             => FS.file(ProcDumpIdentity.create(process,ts).Format(), FS.Dmp);
@@ -29,17 +29,26 @@ namespace Z0
         FS.FilePath DumpPath(Process process, Timestamp ts)
             => DumpRoot() + DumpFile(process, ts);
 
-        FS.FolderPath AsmTableRoot()
-            => Root + FS.folder("tables");
+        // FS.FolderPath AsmTableRoot()
+        //     => Root + FS.folder("tables");
 
-        FS.FolderPath PartDir(PartId part)
-            => Root + FS.folder(part);
+        // FS.FolderPath PartDir(PartId part)
+        //     => Root + FS.folder(part);
 
-        FS.FolderPath AsmSourceRoot()
-            => Root + FS.folder(capture) + FS.folder(asm);
+        // FS.FilePath RawExtractPath(ApiHostUri host)
+        //     => HexPackRoot() + FS.file(host, "extracts.raw", FS.XPack);
 
-        FS.FolderPath AsmSourceDir(PartId part)
-            => AsmSourceRoot() + FS.folder(part);
+        // FS.FilePath ParsedExtractPath(ApiHostUri host)
+        //     => HexPackRoot() + FS.file(host, "extracts.parsed", FS.XPack);
+
+        // FS.FilePath AsmPath(ApiHostUri host)
+        //     =>  AsmSourceDir(host.Part) + FS.file(host, FS.Asm);
+
+        // FS.FolderPath AsmSourceRoot()
+        //     => Root + FS.folder(capture) + FS.folder(asm);
+
+        // FS.FolderPath AsmSourceDir(PartId part)
+        //     => AsmSourceRoot() + FS.folder(part);
 
         FS.FolderPath CaptureRoot()
             => Root + FS.folder(capture);
@@ -47,19 +56,7 @@ namespace Z0
         FS.FolderPath HexPackRoot()
             => CaptureRoot() + FS.folder(extracts);
 
-        FS.FilePath RawExtractPath(ApiHostUri host)
-            => HexPackRoot() + FS.file(host, "extracts.raw", FS.XPack);
-
-        FS.FilePath ParsedExtractPath(ApiHostUri host)
-            => HexPackRoot() + FS.file(host, "extracts.parsed", FS.XPack);
-
-        FS.FilePath AsmPath(ApiHostUri host)
-            =>  AsmSourceDir(host.Part) + FS.file(host, FS.Asm);
-
         FS.FolderPath ContextRoot()
             => CaptureRoot() + FS.folder(context);
-
-        FS.FilePath ApiRebasePath(Timestamp ts)
-            => ContextRoot() + FS.file(string.Format("{0}.{1}", TableId.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);
     }
 }

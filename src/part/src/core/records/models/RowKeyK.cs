@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct RowKey<K> : IRowKey<RowKey<K>,K>
         where K : unmanaged

@@ -90,10 +90,16 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Outcome sig(string src, out AsmSigExpr dst, out Outcome result)
+        public static Outcome parse(string src, out AsmSigExpr dst)
         {
-            result = sig(src, out dst);
-            return result;
+            return sig(src, out dst);
+        }
+
+        [Op]
+        public static Outcome parse(string src, out AsmStatementExpr dst)
+        {
+            dst = new AsmStatementExpr(src.Trim());
+            return true;
         }
 
         [MethodImpl(Inline), Op]

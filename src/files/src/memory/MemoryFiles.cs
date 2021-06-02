@@ -15,7 +15,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         public ReadOnlySpan<byte> Read(MemoryAddress src, ByteSize size)
-            => memory.view(src, size);
+            => core.view(src, size);
 
         public ReadOnlySpan<T> View<T>(in MemoryFile file, MemoryAddress src, uint count)
             where T : struct
@@ -23,7 +23,7 @@ namespace Z0
 
         public ref readonly T View<T>(MemoryAddress src)
             where T : struct
-                => ref memory.view<T>(src);
+                => ref core.view<T>(src);
 
         public MemoryFileInfo Describe(in MemoryFile src)
             => describe(src);
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ReadOnlySpan<T> view<T>(in MemoryFile file, MemoryAddress start, uint count)
             where T : struct
-                => memory.cover<T>(start + file.BaseAddress, count);
+                => core.cover<T>(start + file.BaseAddress, count);
 
         /// <summary>
         /// Creates a <see cref='MappedFiles'/> that covers the first level of a specified directory
@@ -59,11 +59,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(MemoryAddress @base, ulong offset, ByteSize size)
-            => memory.cover<byte>(@base + offset, size);
+            => core.cover<byte>(@base + offset, size);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(in MemoryFile src)
-            => memory.cover<byte>(src.BaseAddress, src.Size);
+            => core.cover<byte>(src.BaseAddress, src.Size);
 
         /// <summary>
         /// Presents file content as a readonly sequence of <typeparamref name='T'/> cells
@@ -71,7 +71,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src)
-            => memory.cover<T>(src.BaseAddress, src.Size/memory.size<T>());
+            => core.cover<T>(src.BaseAddress, src.Size/core.size<T>());
 
         /// <summary>
         /// Presents file content segment as a readonly sequence of <typeparamref name='T'/> cells beginning
@@ -81,7 +81,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src, uint tOffset)
-            => memory.slice(view<T>(src), tOffset);
+            => core.slice(view<T>(src), tOffset);
 
         /// <summary>
         /// Presents file content segment as a readonly sequence of <typeparamref name='T'/> cells beginning
@@ -91,11 +91,11 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T one<T>(in MemoryFile src, uint tOffset)
-            => ref memory.first(view<T>(src, tOffset));
+            => ref core.first(view<T>(src, tOffset));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src, uint tOffset, uint tCount)
-            => memory.slice(view<T>(src), tOffset, tCount);
+            => core.slice(view<T>(src), tOffset, tCount);
 
         [Op]
         public static MemoryFileInfo describe(MemoryFile src)

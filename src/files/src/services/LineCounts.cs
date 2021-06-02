@@ -31,8 +31,10 @@ namespace Z0
         [Op]
         public static LineCount count(FS.FilePath src)
         {
-            using var file = MemoryFiles.map(src);
-            return (src, count(file.View()));
+            var file = MemoryFiles.map(src);
+            var counted = count(file.View());
+            file.Dispose();
+            return (src, counted);
         }
 
         [Op]

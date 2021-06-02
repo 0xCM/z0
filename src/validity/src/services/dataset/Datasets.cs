@@ -12,15 +12,13 @@ namespace Z0
     [ApiHost]
     readonly partial struct Datasets
     {
-        /// <summary>
-        /// Computes the field width from a field specifier
-        /// </summary>
-        /// <param name="field">The field specifier</param>
-        /// <typeparam name="F">The field specifier type</typeparam>
         [MethodImpl(Inline)]
-        public static int width<F>(F field)
-            where F : unmanaged, Enum
-                => text.width(field);
+        public static int width<E>(E field)
+            where E : unmanaged, Enum
+        {
+            var w = core.@as<E,uint>(field) >> 16;
+            return (int)w;
+        }
 
         [Op]
         internal static string render(object content)

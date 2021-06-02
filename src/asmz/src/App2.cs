@@ -652,8 +652,39 @@ namespace Z0.Asm
         }
 
 
+        void ParseStatmentIndex(ApiPackArchive src)
+        {
+
+            var counter = 0u;
+
+            void Receive(in AsmIndex src)
+            {
+                counter++;
+
+                if(counter % 100000 == 0)
+                    Wf.Status(string.Format("Traversed {0} rows", counter));
+
+            }
+
+            var path = src.StatementIndexPath();
+            if(path.Exists)
+            {
+                var pipe = Wf.AsmStatementPipe();
+                pipe.TraverseIndex(path,Receive);
+            }
+
+        }
+
+        void TraverseStatementIndex()
+        {
+            var packs = Wf.ApiPacks();
+            var current = packs.Latest();
+            ParseStatmentIndex(ApiPackArchive.create(current.Root));
+
+        }
         public void Run()
         {
+            RunExtractWorkflow();
             //ShowModRmTable();
             //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);
@@ -662,7 +693,6 @@ namespace Z0.Asm
             //EmitCilOpCodes();
             //LoadHexPacks();
             //CheckCpuid();
-            RunExtractWorkflow();
             //Wf.AsmCatalogs().EmitAssetCatalog();
             //CheckCpuid();
             // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");

@@ -60,7 +60,25 @@ namespace Z0
         public FS.FolderPath ContextRoot()
             => CaptureRoot() + FS.folder(context);
 
-        FS.FilePath ThumbprintPath()
+        public FS.FilePath StatementIndexPath()
+            => RootDir() + FS.file("asm.statements", FS.Csv);
+
+        public FS.FilePath ThumbprintPath(FS.FolderPath dst)
+            => dst + FS.file("asm.thumbprints", FS.Asm);
+
+        public FS.FolderPath TableDir()
+            => RootDir() + FS.folder("tables");
+
+        public FS.FilePath AsmCallsPath()
+            => TableDir() + FS.file(AsmCallRow.TableId, FS.Csv);
+
+        public FS.FilePath JmpTarget()
+            => TableDir() + FS.file(AsmJmpRow.TableId, FS.Csv);
+
+        public FS.FolderPath AsmDetailDir()
+            => TableDir() + FS.folder(AsmDetailRow.TableId);
+
+        public FS.FilePath ThumbprintPath()
             => IndexRoot() + FS.file("thumbprints", FS.Asm);
 
         public FS.FilePath ApiRebasePath(Timestamp ts)
