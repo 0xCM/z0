@@ -22,25 +22,8 @@ namespace Z0.Asm
         void RenderInstructionContracts(uint margin, ITextBuffer dst)
         {
             var target = TargetIdentifier(AsmGenTarget.InstructionContracts);
-            var content = InstructionContractPattern.Replace(text.embrace("TargetName"), target);
+            var content = InstructionContractPattern.Replace(RP.embrace("TargetName"), target);
             dst.AppendLine(content);
         }
-
-        const string InstructionContractPattern = @"namespace Z0.Asm
-{
-    public interface {TargetName}
-    {
-        AsmMnemonicCode Mnemonic {get;}
-
-        AsmHexCode Encoded {get;}
-    }
-
-    public interface {TargetName}<T> : {TargetName}
-        where T : struct, {TargetName}<T>
-    {
-
-    }
-}";
-
     }
 }

@@ -11,12 +11,6 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        const string InstructionContractName = nameof(ITypedInstruction);
-
-        const string InlineAttributeSpec = "[MethodImpl(Inline)]";
-
-        const string InlineOpAttributeSpec = "[MethodImpl(Inline), Op]";
-
         readonly struct InstructionModel
         {
             public AsmMnemonic Monic {get;}
@@ -56,7 +50,7 @@ namespace Z0.Asm
                 dst.IndentLine(margin, string.Format("public struct {0} : {1}<{0}>", TypeName, InstructionContractName));
                 dst.IndentLine(margin, Open);
                 margin += Indent;
-                dst.IndentLine(margin, string.Format("public AsmHexCode Content;"));
+                dst.IndentLine(margin, string.Format(FieldDeclPattern, "AsmHexCode", "Content"));
                 dst.AppendLine();
                 dst.IndentLine(margin, InlineAttributeSpec);
                 dst.IndentLine(margin, string.Format("public {0}(AsmHexCode encoded)", TypeName));
@@ -71,7 +65,7 @@ namespace Z0.Asm
                 dst.IndentLine(margin, "public AsmHexCode Encoded => Content;");
 
                 dst.AppendLine();
-                dst.IndentLine(margin, string.Format("public static implicit operator AsmMnemonicCode({0} src) => src.Mnemonic;", TypeName));
+                dst.IndentLine(margin, string.Format(ImplicitOperatorDeclPattern, "AsmMnemonicCode", TypeName, string.Format(QualifiedAccessPattern, "src", "Mnemonic")));
                 dst.AppendLine();
                 dst.IndentLine(margin, string.Format("public static implicit operator AsmMnemonic({0} src) => AsmMnemonics.{1};", TypeName, Monic.Name));
                 dst.AppendLine();

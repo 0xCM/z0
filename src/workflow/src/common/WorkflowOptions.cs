@@ -44,8 +44,6 @@ namespace Z0
 
         public Setting<bool> CorrelateMembers;
 
-        public Setting<bool> EmitAsmBitstrings;
-
         public Setting<bool> EmitAssetContent;
 
         public Setting<bool> EmitApiBitMasks;
@@ -81,7 +79,6 @@ namespace Z0
             dst.EmitStatements = true;
             dst.EmitApiMetadata = true;
             dst.CorrelateMembers = true;
-            dst.EmitAsmBitstrings = true;
             dst.EmitAssetIndex = true;
             dst.EmitAssetContent = false;
             dst.EmitSymbolicLiterals = true;

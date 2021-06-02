@@ -29,5 +29,21 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static ModRm modrm(uint3 r1, uint3 r2)
             => modrm(r1, r2, uint2.Max);
+
+        [MethodImpl(Inline), Op]
+        public static AsmStatementExpr statement(string src)
+            => new AsmStatementExpr(src.Trim());
+
+        [MethodImpl(Inline), Op]
+        public static AsmExpr expression(string src)
+            => new AsmExpr(src);
+
+        [MethodImpl(Inline), Op]
+        public static AsmComment comment(string src)
+            => new AsmComment(src);
+
+        [MethodImpl(Inline), Op]
+        public static AsmOpCodeExpr opcode(string src)
+            => new AsmOpCodeExpr(src);
     }
 }

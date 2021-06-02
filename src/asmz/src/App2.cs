@@ -107,12 +107,6 @@ namespace Z0.Asm
             Wf.XedCatalog().EmitCatalog();
         }
 
-        public void EmitBitstrings()
-        {
-            var thumbprints = Wf.AsmThumbprints().LoadThumbprints().View;
-            Wf.AsmBitstringEmitter().EmitBitstrings(thumbprints);
-        }
-
         void EmitRuntimeMembers()
         {
             var service = ApiRuntime.create(Wf);

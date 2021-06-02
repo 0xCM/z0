@@ -24,6 +24,32 @@ namespace Z0.Asm
         public static BinaryCode code(CodeBlock encoded, uint offset, byte size)
             => slice(encoded.View, offset, size).ToArray();
 
+        public static AsmEncodingInfo encoding(in AsmIndex src)
+        {
+            var bitstrings = AsmBitstrings.service();
+            var content = bitstrings.Format(src.Encoded);
+            return new AsmEncodingInfo(src.Expression, src.Sig, src.OpCode, src.Encoded, content);
+        }
+
+        public SortedSpan<AsmEncodingInfo> CollectDistinctEncodings(ReadOnlySpan<AsmIndex> src)
+        {
+            var collecting = Wf.Running(Msg.CollectingBitstrings.Format(src.Length));
+            var collected = root.hashset<AsmEncodingInfo>();
+            var count = src.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var statement = ref skip(src,i);
+                var info = AsmEtl.encoding(statement);
+                if(collected.Add(info))
+                    counter++;
+            }
+
+            Wf.Ran(collecting, Msg.CollectedBitstrings.Format(counter));
+
+            return collected.Array().ToSortedSpan();
+        }
+
 
         public static uint size(in ApiBlockAsm src)
         {

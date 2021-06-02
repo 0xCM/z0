@@ -44,13 +44,11 @@ namespace Z0
                 if(options.EmitResBytes)
                     Emitted(Wf.ResPackEmitter().Emit(blocks));
 
-                if(options.EmitStatements || options.EmitAsmBitstrings)
+                if(options.EmitStatements)
                 {
                     var pipe = Wf.AsmStatementPipe();
                     var statements = pipe.EmitHostStatements(partitioned, Db.AsmStatementRoot());
                     Emitted(statements);
-                    if(options.EmitAsmBitstrings)
-                        Wf.AsmBitstringEmitter().EmitBitstrings(statements);
                 }
 
                 var apidata = Wf.ApiCatalogs();

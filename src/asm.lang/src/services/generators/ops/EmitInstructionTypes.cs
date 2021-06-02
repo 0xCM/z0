@@ -16,14 +16,14 @@ namespace Z0.Asm
             var flow = Wf.EmittingFile(dst);
             var buffer = text.buffer();
             var margin = 0u;
-            buffer.AppendLine("namespace Z0.Asm");
+            buffer.AppendLine(string.Format(NamespaceDeclPattern, TargetNamespaceName));
             buffer.AppendLine(Open);
             margin += Indent;
-            buffer.IndentLine(margin, "using System.Runtime.CompilerServices;");
-            buffer.IndentLine(margin, "using static Part;");
+            buffer.IndentLine(margin, UsingCompilerServices);
+            buffer.IndentLine(margin, UsingRoot);
             buffer.AppendLine();
 
-            buffer.IndentLine(margin, "public readonly struct AsmInstructions");
+            buffer.IndentLine(margin, string.Format(ReadOnlyStructDeclPattern, InstructionContainerName));
             buffer.IndentLine(margin, Open);
             margin += Indent;
             var model = InstructionModel.Empty;

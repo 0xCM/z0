@@ -9,21 +9,12 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Report<T> : IReport<T>
+    public abstract class Report<T>
         where T : struct, IRecord<T>
     {
-        public Index<T> Rows {get;}
+        protected Index<T> Rows {get; set;}
 
-        public FS.FilePath Location {get;}
-
-        [MethodImpl(Inline)]
-        public Report(T[] data, FS.FilePath location)
-        {
-            Rows = data;
-            Location = location;
-        }
-
-        public T[] Storage
+        T[] Storage
         {
             [MethodImpl(Inline)]
             get => Rows.Storage;

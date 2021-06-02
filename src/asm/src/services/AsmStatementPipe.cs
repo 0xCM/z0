@@ -246,7 +246,7 @@ namespace Z0.Asm
                 counter++;
             }
 
-            Thumbprints.EmitThumbprints(thumbprints.OrderBy(x => x.Statement.Content).ToArray(),ThumbprintPath(root));
+            Thumbprints.Emit(thumbprints.ToArray().ToSortedSpan(), ThumbprintPath(root));
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow,counter);
 

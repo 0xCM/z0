@@ -234,5 +234,16 @@ namespace Z0
         public unsafe static ref readonly T skip<T>(T* pSrc, ulong count)
             where T : unmanaged
                 => ref @ref(pSrc + size<T>()*count);
+
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T skip<T>(SortedSpan<T> src, ulong count)
+            where T : IComparable<T>
+                => ref skip(src.View, count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T skip<T>(SortedSpan<T> src, long count)
+            where T : IComparable<T>
+                => ref skip(src.View, count);
     }
 }

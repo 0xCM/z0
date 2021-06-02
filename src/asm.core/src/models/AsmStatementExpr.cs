@@ -14,6 +14,8 @@ namespace Z0.Asm
     {
         public TextBlock Content {get;}
 
+        const sbyte DefaultPadding = -46;
+
         [MethodImpl(Inline)]
         public AsmStatementExpr(TextBlock content)
             => Content = content;
@@ -25,8 +27,8 @@ namespace Z0.Asm
         public string Format()
             => Content.Format();
 
-        public string FormatFixed()
-            => string.Format("{0,-46}", Content);
+        public string FormatPadded(sbyte padding = DefaultPadding)
+            => string.Format(RP.pad(padding), Content);
 
         [MethodImpl(Inline)]
         public bool Equals(AsmStatementExpr src)

@@ -4,13 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     using T = AsmGenTarget;
 
     [ApiHost]
     public sealed partial class AsmGen : AppService<AsmGen>
     {
+        const string InstructionContractName = nameof(ITypedInstruction);
+
+        const string InlineAttributeSpec = "[MethodImpl(Inline)]";
+
+        const string InlineOpAttributeSpec = "[MethodImpl(Inline), Op]";
+
+
         [Op]
-        public void GenerateModelsInPlace(Index<AsmMnemonic> src)
+        public void GenerateModelsInPlace(ReadOnlySpan<AsmMnemonic> src)
         {
             var flow = Wf.Running();
             EmitInstructionContracts(GetTargetPath(T.InstructionContracts));
@@ -28,7 +37,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public void GenerateModels(Index<AsmMnemonic> src, FS.FolderPath dst)
+        public void GenerateModels(ReadOnlySpan<AsmMnemonic> src, FS.FolderPath dst)
         {
             var flow = Wf.Running();
             EmitInstructionContracts(GetTargetPath(T.InstructionContracts, dst));
@@ -43,7 +52,7 @@ namespace Z0.Asm
         [Op]
         public void GenerateModels(FS.FolderPath dst)
         {
-            GenerateModels(Wf.StanfordCatalog().Mnemonics(),dst);
+            GenerateModels(Wf.StanfordCatalog().Mnemonics(), dst);
         }
 
         const byte Indent = 4;
@@ -51,5 +60,66 @@ namespace Z0.Asm
         const string Open = "{";
 
         const string Close = "}";
+
+        const string EnumDeclPattern = "public enum {0} : {1}";
+
+        const string ReadOnlyStructDeclPattern = "public readonly struct {0}";
+
+        const string MonicSymbolPattern = "[Symbol(\"{0}\")]";
+
+        const string NamespaceUsingPattern = "using {0}";
+
+        const string NamespaceDeclPattern = "namespace {0}";
+
+        const string TargetNamespaceName = "Z0.Asm";
+
+        const string MonicEnumType = "ushort";
+
+        const string MonicContainerName = "AsmMnemonics";
+
+        const string ZeroEnumMemberName = "None";
+
+        const string InstructionContainerName = "AsmInstructions";
+
+        const string StatementFactoryDefaultPattern = "public {0} {1}() => default;";
+
+        const string ImplicitOperatorDeclPattern = "public static implicit operator {0}({1} src) => {2};";
+
+        const string StatementFactoryArgPattern = "public {0} {1}(AsmHexCode encoded) => new {0}(encoded);";
+
+        const string MonicPropertyPattern = "public static AsmMnemonic {0} => nameof({0});";
+
+        const string UsingCompilerServices = "using System.Runtime.CompilerServices;";
+
+        const string UsingRoot = "using static Root;";
+
+        const string UsingTypePattern = "using static {0}";
+
+        const string ClassDeclPattern = "public class {0}";
+
+        const string QualifiedAccessPattern = "{0}.{1}";
+
+        const string AsmNamespaceDecl = "namespace Z0.Asm";
+
+        const string ItemAssignPattern = "{0} = {1},";
+
+        const string FieldDeclPattern = "public {0} {1};";
+
+        const string InstructionContractPattern = @"namespace Z0.Asm
+{
+    public interface {TargetName}
+    {
+        AsmMnemonicCode Mnemonic {get;}
+
+        AsmHexCode Encoded {get;}
+    }
+
+    public interface {TargetName}<T> : {TargetName}
+        where T : struct, {TargetName}<T>
+    {
+
+    }
+}";
+
     }
 }

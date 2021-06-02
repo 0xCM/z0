@@ -36,6 +36,9 @@ namespace Z0
         public FS.FolderPath CaptureRoot()
             => Root + FS.folder(capture);
 
+        public FS.FolderPath IndexRoot()
+            => Root;
+
         public FS.FolderPath AsmSourceRoot()
             => CaptureRoot() + FS.folder(asm);
 
@@ -56,6 +59,9 @@ namespace Z0
 
         public FS.FolderPath ContextRoot()
             => CaptureRoot() + FS.folder(context);
+
+        FS.FilePath ThumbprintPath()
+            => IndexRoot() + FS.file("thumbprints", FS.Asm);
 
         public FS.FilePath ApiRebasePath(Timestamp ts)
             => ContextRoot() + FS.file(string.Format("{0}.{1}", Tables.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);

@@ -17,29 +17,20 @@ namespace Z0.Asm
         public static AsmBitstrings service()
             => new AsmBitstrings();
 
-        [MethodImpl(Inline), Op]
-        public static uint render(AsmHexCode src, Span<char> dst)
-        {
-            var input = src.Bytes;
-            var size = (int)src.Size;
-            var length = min(size, dst.Length);
-            var j = 0u;
-
-            for(var i=0; i<length; i++)
-                j += render(skip(input, i), j, dst);
-
-            return j - 1;
-        }
 
         public string Format(AsmHexCode src)
             => format(src);
 
         [Op]
         public static string format(AsmHexCode src)
-            => src.IsEmpty ? EmptyString : text.format(chars(src));
+            => src.IsEmpty ? EmptyString : text.format(render(src));
 
         [MethodImpl(Inline), Op]
-        static ReadOnlySpan<char> chars(AsmHexCode src)
+        public static uint render(AsmHexCode src, Span<char> dst)
+            => render(src, 0u, dst);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> render(AsmHexCode src)
         {
             if(src.IsEmpty)
                 return default;
@@ -51,6 +42,19 @@ namespace Z0.Asm
                 return EmptyString;
 
             return slice(dst, 0, count);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(AsmHexCode src, uint offset, Span<char> dst)
+        {
+            var input = src.Bytes;
+            var size = (int)src.Size;
+            var length = min(size, dst.Length);
+
+            for(var i=0; i<length; i++)
+                offset += render(skip(input, i), offset, dst);
+
+            return offset - 1;
         }
 
         [MethodImpl(Inline), Op]

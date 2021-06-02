@@ -195,12 +195,15 @@ namespace Z0.Asm
             AsmStatementExpr statement = a.RightOfFirst(Semicolon);
 
             var parts = @readonly(src.RightOfFirst(Semicolon).SplitClean(Implication));
-            if(parts.Length != 2)
-                return (false, $"Could not dichotomize {src} ");
+            if(parts.Length < 2)
+                return (false, $"Could not partition {src} ");
 
-            var lhs = skip(parts,0);
-            var rhs = skip(parts,1);
-            if(text.unfence(lhs, SigFence, out var sigexpr))
+            var A = skip(parts,0);
+            var B = skip(parts,1);
+
+            // For thumbprints that include a bitstring such as 0001 0000 0000 1111
+            var C = parts.Length > 2 ? skip(parts,2) : EmptyString;
+            if(text.unfence(A, SigFence, out var sigexpr))
             {
                 result = AsmParser.sig(sigexpr, out var sig);
                 if(result.Fail)
@@ -208,9 +211,9 @@ namespace Z0.Asm
 
                     AsmParser.code(sig.Mnemonic, out var monic);
 
-                    if(text.unfence(lhs, OpCodeFence, out var opcode))
+                    if(text.unfence(A, OpCodeFence, out var opcode))
                     {
-                        if(AsmBytes.hexcode(rhs, out var encoded))
+                        if(AsmBytes.hexcode(B, out var encoded))
                         {
                             thumbprint = new AsmThumbprint(statement, sig, AsmCore.opcode(opcode), encoded);
                             return true;

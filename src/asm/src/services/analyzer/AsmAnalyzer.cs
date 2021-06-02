@@ -26,9 +26,9 @@ namespace Z0
 
         AsmJmpPipe Jumps;
 
-        AsmBitstringEmitter Bitstrings;
-
         AsmAnalyzerSettings Settings;
+
+        AsmThumbprints Thumbprints;
 
         public AsmAnalyzer()
         {
@@ -42,7 +42,7 @@ namespace Z0
             Statements = Wf.AsmStatementPipe();
             Calls = Wf.AsmCallPipe();
             Jumps = Wf.AsmJmpPipe();
-            Bitstrings = Wf.AsmBitstringEmitter();
+            Thumbprints = Wf.AsmThumbprints();
             AsmAnalyzerSettings.@default(out Settings);
         }
 
@@ -56,7 +56,6 @@ namespace Z0
                 total += (uint)routine.InstructionCount;
             }
             return total;
-
         }
 
         void EmitHostStatements(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
@@ -84,28 +83,25 @@ namespace Z0
             return dst;
         }
 
-        public void Analyze(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
+        public void Analyze(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
         {
             var blocks = ColectBlocks(src);
+            var root = dst.RootDir();
 
             if(Settings.EmitCalls)
-                EmitCalls(src, dst);
+                EmitCalls(src, root);
 
             if(Settings.EmitJumps)
-                EmitJumps(src, dst);
+                EmitJumps(src, root);
 
             if(Settings.EmitHostStatements)
-                EmitHostStatements(src, dst);
+                EmitHostStatements(src, root);
 
             if(Settings.EmitStatementIndex)
-            {
-                var statements = EmitStatementIndex(blocks.ToSortedSpan(), dst);
-                if(Settings.EmitBitstringIndex)
-                    EmitBitstrings(statements, dst);
-            }
+                EmitStatementIndex(blocks.ToSortedSpan(), StatementIndexPath(root));
 
             if(Settings.EmitAsmDetails)
-                EmitDetails(blocks, dst);
+                EmitDetails(blocks, root);
         }
 
         void EmitDetails(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
@@ -116,19 +112,19 @@ namespace Z0
             Emitted(rows, dst);
         }
 
-        ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, FS.FolderPath dst)
+        ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, FS.FilePath dst)
         {
-            var target = StatementTarget(dst);
             var rows = Statements.BuildStatementIndex(src);
-            TableEmit(rows, AsmIndex.RenderWidths, target);
+            TableEmit(rows, AsmIndex.RenderWidths, dst);
             return rows;
         }
 
-        void EmitBitstrings(ReadOnlySpan<AsmIndex> src, FS.FolderPath dst)
+        void EmitThumbprints(ReadOnlySpan<AsmIndex> src, FS.FolderPath dst)
         {
-            var target = BsTarget(dst);
-            var distinct = Bitstrings.CollectDistinct(src);
-             Bitstrings.EmitBitstrings(distinct, target);
+            var target = ThumbprintPath(dst);
+            var etl = Wf.AsmEtl();
+            var distinct = etl.CollectDistinctEncodings(src);
+            Thumbprints.Emit(distinct, target);
         }
 
         void EmitCalls(ReadOnlySpan<AsmRoutine> src, FS.FolderPath dst)
@@ -196,11 +192,14 @@ namespace Z0
         }
 
 
+        FS.FilePath StatementIndexPath(FS.FolderPath dir)
+            => dir + FS.file("asm.statements", FS.Csv);
+
         FS.FolderPath TableDir(FS.FolderPath root)
             => root + FS.folder("tables");
 
-        FS.FilePath BsTarget(FS.FolderPath dst)
-            => dst + FS.file("asm.bitstrings", FS.Asm);
+        FS.FilePath ThumbprintPath(FS.FolderPath dst)
+            => dst + FS.file("asm.thumbprints", FS.Asm);
 
         FS.FilePath CallTarget(FS.FolderPath root)
             => TableDir(root) + FS.file(AsmCallRow.TableId, FS.Csv);
@@ -210,10 +209,6 @@ namespace Z0
 
         FS.FolderPath AsmDetailTarget(FS.FolderPath root)
             => TableDir(root) + FS.folder(AsmDetailRow.TableId);
-
-        FS.FilePath StatementTarget(FS.FolderPath root)
-            => TableDir(root)+ FS.file(AsmApiStatement.TableId, FS.Csv);
-
 
         static MsgPattern<Count> CollectingBlocks => "Collecting code blocks from {0} routines";
 

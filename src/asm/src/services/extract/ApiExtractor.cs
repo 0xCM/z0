@@ -119,7 +119,7 @@ namespace Z0
 
         void Analyze()
         {
-            Wf.AsmAnalyzer().Analyze(Routines, Paths.RootDir());
+            Wf.AsmAnalyzer().Analyze(Routines, Paths);
         }
 
         void EmitCaptureIndex()

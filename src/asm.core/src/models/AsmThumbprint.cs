@@ -37,7 +37,6 @@ namespace Z0.Asm
         public int CompareTo(AsmThumbprint src)
             => cmp(this, src);
 
-
         public bool Equals(AsmThumbprint src)
             => eq(this, src);
 

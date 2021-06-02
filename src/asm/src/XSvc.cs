@@ -55,10 +55,6 @@ namespace Z0
             => Services.AsmDecoder.create(wf);
 
         [Op]
-        public static AsmBitstringEmitter AsmBitstringEmitter(this IWfRuntime wf)
-            => Services.AsmBitstringEmitter.create(wf);
-
-        [Op]
         public static AsmStatementPipe AsmStatementPipe(this IWfRuntime wf)
             => Services.AsmStatementPipe.create(wf);
 
@@ -69,9 +65,5 @@ namespace Z0
         [Op]
         public static AsmCallPipe AsmCallPipe(this IWfRuntime wf)
             => Services.AsmCallPipe.create(wf);
-
-        [Op]
-        public static AsmCommands AsmCommands(this IWfRuntime wf)
-            => Services.AsmCommands.create(wf);
     }
 }

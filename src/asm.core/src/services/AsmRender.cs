@@ -21,6 +21,8 @@ namespace Z0.Asm
 
         const char Close = Chars.RBracket;
 
+        const string To = " => ";
+
         [Op]
         public static string bits(RexPrefix src)
             => text.format(BitRender.render(n8, n4, src.Code));
@@ -81,10 +83,10 @@ namespace Z0.Asm
         {
             var i = z8;
             seek(dst, i++) = src.Separator;
-            seek(dst, i++) = AsmCore.comment($"{src.DisplaySig}::{src.Uri}");
+            seek(dst, i++) = asm.comment($"{src.DisplaySig}::{src.Uri}");
             seek(dst, i++) = ByteSpans.asmcomment(src.Uri, src.CodeBlock);
-            seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
-            seek(dst, i++) = AsmCore.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
+            seek(dst, i++) = asm.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
+            seek(dst, i++) = asm.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
             seek(dst, i++) = src.Separator;
             return i;
         }
@@ -99,24 +101,93 @@ namespace Z0.Asm
             var address = @base + src.Offset;
 
             if(config.AbsoluteLabels)
-                dst.Append(string.Format(AbsolutePattern, address.Format(), label.Format(), src.Statement.FormatFixed()));
+                dst.Append(string.Format(AbsolutePattern, address.Format(), label.Format(), src.Statement.FormatPadded()));
             else
-                dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatFixed()));
+                dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatPadded()));
 
-            dst.Append(AsmCore.comment(AsmRender.format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
+            dst.Append(asm.comment(AsmRender.format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
         }
 
         [Op]
-        public static string format(AsmThumbprint src)
-            => string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatFixed(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
+        public static string format(in AsmThumbprint src)
+            => string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatPadded(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
 
         [Op]
-        public static string comment(AsmThumbprint src)
+        public static string comment(in AsmThumbprint src)
             => string.Format("; ({0})<{1}>[{2}] => {3}",  src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
 
         [Op]
         public static string format(AsmFormExpr src, byte[] encoded, string sep)
-            => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
+            => string.Format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
+
+        [Op]
+        public static string thumbprint(in AsmThumbprint src, bool bitstring)
+        {
+            var common = format(src);
+            if(bitstring)
+            {
+                return string.Format("{0} => {1}", common, AsmBitstrings.format(src.Encoded));
+            }
+            else
+                return common;
+        }
+
+        [Op]
+        public static uint render(in AsmEncodingInfo src, bool expression, bool asmsig, bool opcode, bool hex, bool bits, Span<char> dst)
+        {
+            var counter = 0u;
+            const byte ExprPadWidth = 46;
+            const sbyte ExprPad = -ExprPadWidth;
+
+            if(expression)
+            {
+                var content = span(string.Format("{0} ; ", src.Statement.FormatPadded(ExprPad)));
+                for(var i=0; i<content.Length; i++)
+                    seek(dst,counter++) = skip(content,i);
+            }
+
+            if(asmsig)
+            {
+                var content = span(string.Format("({0})",src.Sig.Format()));
+                for(var i=0; i<content.Length; i++)
+                    seek(dst,counter++) = skip(content,i);
+            }
+
+            if(opcode)
+            {
+                var content = span(string.Format("<{0}>", src.OpCode.Format()));
+                for(var i=0; i<content.Length; i++)
+                    seek(dst,counter++) = skip(content,i);
+
+            }
+
+            if(hex)
+            {
+                var content = span(string.Format("[{0}] => {1}", src.Encoded.Size,  src.Encoded.Format()));
+                for(var i=0; i<content.Length; i++)
+                    seek(dst,counter++) = skip(content,i);
+            }
+
+            if(bits)
+            {
+                var _to = span(To);
+                for(var i=0; i<To.Length; i++)
+                    seek(dst,counter++) = skip(_to,i);
+
+                counter += AsmBitstrings.render(src.Encoded, counter, dst);
+            }
+
+            return counter;
+        }
+
+        [Op]
+        public static string thumbprint(in AsmEncodingInfo src)
+        {
+            var bits = AsmBitstrings.format(src.Encoded);
+            var statement = string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatPadded(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
+            return string.Format("{0} => {1}", statement, AsmBitstrings.format(src.Encoded));
+        }
+
 
         [Op]
         public static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
