@@ -696,21 +696,19 @@ namespace Z0.Asm
             var counter = 0u;
 
             var dst = Db.AppLog("statements.out", FS.Asm);
-            using var writer = dst.Writer();
+            using var writer = dst.Writer(Encoding.ASCII);
             void Receive(in AsmIndex src)
             {
                 counter++;
 
                 if(counter < Pow2.T17)
                 {
-                    writer.WriteLine(format(src.Encoded));
+                    writer.WriteLine(string.Format("{0,-46} ; {1}", src.Expression, src.Encoded));
+                    writer.WriteLine(asm.comment(format(src.Encoded)));
                     var chars = AsmBitstrings.render(src.Encoded);
-                    writer.WriteLine(text.format(chars));
+                    writer.WriteLine(asm.comment(text.format(chars)));
+                    writer.WriteLine();
                 }
-
-                // var count = AsmBitstrings.store(chars, out var cell);
-                // var stored = AsmBitstrings.literal(cell, count);
-                // Wf.Row(string.Format("Stored Bits:  {0}", stored));
             }
 
             //var processor = AsmIndexProcessor.create(Wf.EventSink, Receive);
@@ -724,8 +722,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            RunExtractWorkflow();
-            //ProcessStatementIndex();
+            //RunExtractWorkflow();
+            ProcessStatementIndex();
             //ShowModRmTable();
             //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);
