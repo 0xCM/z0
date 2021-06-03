@@ -20,6 +20,6 @@ namespace Z0
             => api.kind<T>();
 
         TableId IRecord.TableId
-            => new TableId(typeof(T), TableKind.ToString());
+            => TableId.identify<T>(TableKind.ToString());
     }
 }

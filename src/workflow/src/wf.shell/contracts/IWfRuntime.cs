@@ -132,6 +132,38 @@ namespace Z0
         void Error<T>(T data, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
             => signal(this).Error(data, EventFactory.originate("WorkflowError", caller, file, line));
 
+        /// <summary>
+        /// If outcome indicates failure, raises an eror and returns false; otherwise returns true
+        /// </summary>
+        /// <param name="outcome">The outcome to test</param>
+        bool Check(Outcome outcome)
+        {
+            if(outcome.Fail)
+            {
+                Error(outcome.Message);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        bool Check<T>(Outcome<T> outcome, out T payload)
+        {
+            if(outcome.Fail)
+            {
+                Error(outcome.Message);
+                payload = default;
+                return false;
+            }
+            else
+            {
+                payload = outcome.Data;
+                return true;
+            }
+        }
+
         void Disposed()
         {
             if(Verbosity.IsBabble())

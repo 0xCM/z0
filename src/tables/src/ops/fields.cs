@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The record type</typeparam>
         [Op, Closures(Closure)]
-        public static RecordFields fields<T>()
+        public static RecordField[] fields<T>()
             where T : struct
                 => fields(typeof(T));
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The record type</typeparam>
         [Op]
-        public static RecordFields fields(Type src)
+        public static RecordField[] fields(Type src)
             => RecordFields.discover(src);
     }
 }

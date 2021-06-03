@@ -192,8 +192,26 @@ namespace Z0
             public override string ToString()
                 => Format();
 
+            public bool Equals(FolderPath src)
+                => Name.Equals(src.Name);
+
+            public override bool Equals(object src)
+                => src is FolderPath x && Equals(x);
+
             public static FolderPath Empty
                 => new FolderPath(PathPart.Empty);
+
+            [MethodImpl(Inline)]
+            public static bool operator ==(FolderPath a, FolderPath b)
+                => a.Equals(b);
+
+            [MethodImpl(Inline)]
+            public static bool operator !=(FolderPath a, FolderPath b)
+                => !a.Equals(b);
+
+
+            public override int GetHashCode()
+                => Name.GetHashCode();
 
             [MethodImpl(Inline)]
             static SearchOption option(bool recurse)

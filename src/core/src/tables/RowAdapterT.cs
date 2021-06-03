@@ -8,6 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
+
+    public readonly struct RowAdapter
+    {
+        public static void load<T>(in RecordField[] fields, uint index, in T src, ref DynamicRow<T> dst)
+            where T : struct
+        {
+            dst = dst.UpdateSource(index, src);
+            var tr = __makeref(edit(src));
+            var count = fields.Length;
+            var fv = @readonly(fields);
+            var target = dst.Edit;
+            for(var i=0u; i<count; i++)
+                seek(target, i) = skip(fv, i).Definition.GetValueDirect(tr);
+        }
+    }
 
     /// <summary>
     /// Defines a row over a specified record type
@@ -37,7 +53,7 @@ namespace Z0
         public RowAdapter<T> Adapt(in T src)
         {
             Source = src;
-            Tables.load(Fields, Index++, Source, ref Row);
+            RowAdapter.load(Fields.Storage, Index++, Source, ref Row);
             return this;
         }
 

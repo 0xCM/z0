@@ -8,7 +8,7 @@ namespace Z0
     using System.IO;
     using System.Text;
 
-    using static Part;
+    using static Root;
     using static core;
 
     partial struct Tables
@@ -31,14 +31,8 @@ namespace Z0
         public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, Encoding encoding, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
-            // var count = src.Length;
-            // var formatter = Tables.formatter<T>(spec);
             using var writer = dst.Writer(encoding);
             return emit(src, spec, writer);
-            // writer.WriteLine(spec.Header.Format());
-            // for(var i=0; i<count; i++)
-            //     writer.WriteLine(formatter.Format(skip(src,i)));
-            // return count;
         }
 
         public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, FS.FilePath dst)
@@ -52,8 +46,6 @@ namespace Z0
         public static Count emit<T>(ReadOnlySpan<T> src, Encoding encoding, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
-            var count = src.Length;
-            var formatter = Tables.formatter<T>();
             using var writer = dst.Writer(encoding);
             return emit(src, writer);
         }
@@ -68,18 +60,7 @@ namespace Z0
 
         public static Count emit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
             where T : struct, IRecord<T>
-        {
-            var spec = Tables.rowspec<T>(widths, rowpad);
-            return emit(src, Tables.rowspec<T>(widths, rowpad), dst);
-            // var count = src.Length;
-            // var formatter = Tables.formatter<T>(spec);
-            // using var writer = dst.Writer(encoding);
-            // writer.WriteLine(formatter.FormatHeader());
-            // for(var i=0; i<count; i++)
-            //     writer.WriteLine(formatter.Format(skip(src,i)));
-
-            // return count;
-        }
+                => emit(src, Tables.rowspec<T>(widths, rowpad), dst);
 
         public static Count emit<T>(ReadOnlySpan<T> src, ITextBuffer dst)
             where T : struct, IRecord<T>

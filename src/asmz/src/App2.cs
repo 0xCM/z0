@@ -171,16 +171,17 @@ namespace Z0.Asm
             }
         }
 
-        void RunExtractWorkflow()
-        {
-            var extract = ApiExtractWorkflow.create(Wf);
-            var pdb = false;
-            var packs = Wf.ApiPacks();
-            var pack = packs.Create(ApiPackSettings.init(Db.CapturePackRoot(), core.now()));
-            var collection = extract.Run(pack);
-            if(pdb)
-                IndexPdbSymbols(collection.ResolvedParts, pack.Root + FS.file("symbols", FS.Log));
-        }
+        // void RunExtractWorkflow()
+        // {
+        //     var extract = ApiExtractWorkflow.create(Wf);
+        //     var pdb = false;
+        //     var packs = Wf.ApiPacks();
+        //     var pack = packs.Create(ApiPackSettings.init(Db.CapturePackRoot(), core.now()));
+        //     var collection = extract.Run(pack);
+        //     packs.LinkCurrent();
+        //     if(pdb)
+        //         IndexPdbSymbols(collection.ResolvedParts, pack.Root + FS.file("symbols", FS.Log));
+        // }
 
         public void LoadHexPacks()
         {
@@ -208,47 +209,6 @@ namespace Z0.Asm
         {
             var path = Wf.Db().Package("respack") + FS.file("z0.respack", FS.Dll);
             return MemoryFiles.map(path);
-        }
-
-        void IndexPdbSymbols(ReadOnlySpan<ResolvedPart> parts, FS.FilePath dst)
-        {
-            var count = parts.Length;
-            var emitting = Wf.EmittingFile(dst);
-            var counter = 0u;
-            using var writer = dst.Writer();
-            for(var i=0; i<count; i++)
-                counter += IndexPdbMethods(skip(parts,i),writer);
-            Wf.EmittedFile(emitting, counter);
-        }
-
-        uint IndexPdbMethods(ResolvedPart src, StreamWriter dst)
-        {
-            var modules = Wf.AppModules();
-            var hosts = src.Hosts.View;
-            using var symbols = modules.SymbolSource(src.Location);
-            var reader = Wf.PdbReader(symbols);
-            var flow = Wf.Running(string.Format("Indexing symbols for {0} from {1}", symbols.PePath, symbols.PdbPath));
-            var counter = 0u;
-            var buffer = core.list<PdbModel.Method>();
-            for(var i=0; i<hosts.Length; i++)
-            {
-                ref readonly var host = ref skip(hosts,i);
-                var methods = host.Methods.View;
-                for(var j=0; j<methods.Length; j++)
-                {
-                    ref readonly var method = ref skip(methods,j);
-                    var pdbMethod = reader.Method(method.Method.MetadataToken);
-                    if(pdbMethod)
-                    {
-                        var data = pdbMethod.Payload;
-                        dst.WriteLine(data.Token.Format());
-                        buffer.Add(data);
-                        counter++;
-                    }
-                }
-            }
-            Wf.Ran(flow);
-            return counter;
         }
 
         FS.FilePath DefineDisassemblyJob()
@@ -362,10 +322,10 @@ namespace Z0.Asm
                     writer.WriteLine();
 
                 var table = skip(tables,i);
-                writer.WriteLine(string.Format("{0,-8} | {1,-22} | {2}", i, table.Id.Identifier, table.Id.RecordType.FullName));
+                writer.WriteLine(string.Format("{0,-8} | {1,-22} | {2}", i, table.Id.Identifier, table.Id.Identity));
                 writer.WriteLine(RP.PageBreak80);
 
-                var fields = table.Fields.View;
+                var fields = @readonly(table.Fields);
                 for(var j=0; j<fields.Length; j++)
                 {
                     ref readonly var field = ref skip(fields,j);
@@ -580,6 +540,11 @@ namespace Z0.Asm
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
+        void RunExtractWorkflow()
+        {
+           ApiExtractWorkflow.run(Wf);
+
+        }
 
         void EmitResPack()
         {
@@ -697,6 +662,7 @@ namespace Z0.Asm
 
             var dst = Db.AppLog("statements.out", FS.Asm);
             using var writer = dst.Writer(Encoding.ASCII);
+
             void Receive(in AsmIndex src)
             {
                 counter++;
@@ -714,16 +680,49 @@ namespace Z0.Asm
             //var processor = AsmIndexProcessor.create(Wf.EventSink, Receive);
             var processor = AsmIndexProcessor.create(DevNull.BlackHole, Receive);
             var packs = Wf.ApiPacks();
-            var current = packs.Latest();
+            var current = packs.Current();
             var archive = ApiPackArchive.create(current.Root);
             var path = archive.StatementIndexPath();
             processor.ProcessFile(path);
         }
 
+        void CheckRowFormat()
+        {
+            var counter = 0u;
+
+            void Receive(in AsmIndex src)
+            {
+                counter++;
+            }
+
+            var packs = Wf.ApiPacks();
+            var current = packs.Current();
+            var archive = ApiPackArchive.create(current.Root);
+            var processor = AsmIndexProcessor.create(DevNull.BlackHole, Receive);
+            var path = archive.StatementIndexPath();
+            processor.ProcessFile(path);
+        }
+
+        // void CheckSymLink()
+        // {
+        //     var packs = Wf.ApiPacks();
+        //     var current = packs.Current();
+        //     var archive = ApiPackArchive.create(current.Root);
+        //     var link = packs.PackRoot + FS.folder("current");
+        //     var target = archive.Root;
+        //     var outcome = FS.symlink(link,target);
+        //     if(Wf.Check(outcome))
+        //     {
+        //         Wf.Status(string.Format("Created symlink {0} -> {1}", link, target));
+        //     }
+        // }
+
         public void Run()
         {
+            ApiExtractWorkflow.run(Wf);
+            //CheckRowFormat();
             //RunExtractWorkflow();
-            ProcessStatementIndex();
+            //ProcessStatementIndex();
             //ShowModRmTable();
             //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);

@@ -33,8 +33,7 @@ namespace Z0
 
             public bool LenthMatch;
 
-            public TableId TableId
-                => new TableId(typeof(FormatCheck<W,T>), string.Format("uint{0}.format-check",default(T).Width));
+            public TableId TableId {get;}
         }
 
         /// <summary>

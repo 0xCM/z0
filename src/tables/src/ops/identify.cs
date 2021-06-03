@@ -17,17 +17,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableId identify<T>()
             where T : struct, IRecord<T>
-                => identify(typeof(T));
-
-        /// <summary>
-        /// Computes the <see cref='TableId'/> of a specified record type
-        /// </summary>
-        /// <param name="src">The record type</typeparam>
-        [Op]
-        public static TableId identify(Type src)
-            => src.Tag<RecordAttribute>().MapValueOrElse(
-                    a => new TableId(src, a.TableId),
-                    () => new TableId(src, src.Name));
-
+                => TableId.identify<T>();
     }
 }

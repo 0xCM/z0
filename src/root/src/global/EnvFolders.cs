@@ -118,5 +118,7 @@ namespace Z0
         public const string external = nameof(external);
 
         public const string manuals = nameof(manuals);
+
+        public const string current = nameof(current);
     }
 }

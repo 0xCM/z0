@@ -19,7 +19,7 @@ namespace Z0
             if(count == 0)
                 return RecordSchema.Empty;
 
-            var id = identify(src);
+            var id = TableId.identify(src);
             var specs = sys.alloc<RecordFieldSpec>(count);
             ref var spec = ref first(specs);
             for(ushort i=0; i<count; i++)

@@ -23,5 +23,8 @@ namespace Z0
         public static FS.FolderName folder(PartId part)
             => folder(part.Format());
 
+        [MethodImpl(Inline), Op]
+        public static FolderName folder(Timestamp ts)
+            => new FolderName(ts.Format());
     }
 }

@@ -24,11 +24,11 @@ namespace Z0
             Index = index;
         }
 
-        public Type RecordType
-            => typeof(T);
-
         public Name Identifier
             => Value.Identifier;
+
+        public Name Identity
+            => Value.Identity;
 
         [MethodImpl(Inline)]
         public string Format()

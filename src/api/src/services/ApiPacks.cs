@@ -16,13 +16,26 @@ namespace Z0
         public IApiPack Create()
             => Create(core.now());
 
+        public FS.FolderPath PackRoot
+            => Db.CapturePackRoot();
+
         public IApiPack Create(FS.FolderPath root)
             => new ApiPack(ApiPackSettings.init(root));
 
-        public IApiPack Latest()
-            => List().Last;
+        public IApiPack Current()
+            => Archives.Current();
+
+        public ApiPackArchives Archives
+            => ApiPackArchives.create(PackRoot);
+
+        public void CreateLink(Timestamp ts)
+        {
+            var outcome = Archives.Link(ts);
+            if(Wf.Check(outcome, out var data))
+                Wf.Status(string.Format("Created symlink {0} -> {1}", data.Source, data.Target));
+        }
 
         public Index<IApiPack> List()
-            => Db.CapturePackRoot().SubDirs(false).Select(x => (IApiPack)(Create(x)));
+            => PackRoot.SubDirs(false).Select(x => (IApiPack)(Create(x)));
     }
 }

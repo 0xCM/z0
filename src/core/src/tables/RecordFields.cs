@@ -16,7 +16,7 @@ namespace Z0
         /// Discerns a <see cref='RecordFields'/> for a parametrically-identified record type
         /// </summary>
         /// <typeparam name="T">The record type</typeparam>
-        public static RecordFields discover<T>()
+        public static RecordField[] discover<T>()
             where T : struct
                 => discover(typeof(T));
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The record type</typeparam>
         [Op]
-        public static RecordFields discover(Type src)
+        public static RecordField[] discover(Type src)
         {
             var fields = @readonly(src.DeclaredPublicInstanceFields());
             var count = fields.Length;

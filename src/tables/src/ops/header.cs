@@ -69,7 +69,7 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         public static RowHeader header(Type record, byte fieldwidth, string delimiter = DefaultDelimiter)
         {
-            var _fields = fields(record).View;
+            var _fields = @readonly(fields(record));
             var count = _fields.Length;
             var buffer = alloc<HeaderCell>(count);
             var cells = span(buffer);
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="widths">The cell render widths</param>
         public static RowHeader header(Type record, ReadOnlySpan<byte> widths, string delimiter = DefaultDelimiter)
         {
-            var _fields = fields(record).View;
+            var _fields = @readonly(fields(record));
             var count = _fields.Length;
             if(count != widths.Length)
                 sys.@throw(FieldCountMismatch.Format(count, widths.Length));

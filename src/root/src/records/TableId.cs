@@ -20,6 +20,11 @@ namespace Z0
             where T : struct, IRecord<T>
                 => identify(typeof(T));
 
+        [MethodImpl(Inline)]
+        public static TableId identify<T>(string name)
+            where T : struct, IRecord<T>
+                => identify(typeof(T), name);
+
         /// <summary>
         /// Computes the <see cref='TableId'/> of a specified record type
         /// </summary>
@@ -27,24 +32,32 @@ namespace Z0
         [Op]
         public static TableId identify(Type src)
             => src.Tag<RecordAttribute>().MapValueOrElse(
-                    a => new TableId(src, a.TableId),
-                    () => new TableId(src, src.Name));
+                    a => new TableId(a.TableId, src.FullName),
+                    () => new TableId(src.Name, src.FullName));
 
-        public Type RecordType {get;}
+        [MethodImpl(Inline)]
+        public static TableId identify(Type src, string name)
+            => new TableId(name, src.FullName);
+
+        [MethodImpl(Inline)]
+        public static TableId identify(string identity, string name)
+            => new TableId(name, identity);
 
         public Name Identifier {get;}
 
+        public Name Identity {get;}
+
         [MethodImpl(Inline)]
-        public TableId(Type shape, string name)
+        TableId(string name, string identity)
         {
-            RecordType = shape;
             Identifier = name;
+            Identity = identity;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => RecordType == null | Identifier.IsEmpty;
+            get => Identifier.IsEmpty;
         }
 
         public bool IsNonEmpty

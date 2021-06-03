@@ -54,7 +54,7 @@ namespace Z0
                 => TableRoot() + FS.folder(string.Format("{0}.{1}", TableId<T>(), subject));
 
         string TableId(Type t)
-            => Tables.identify(t).Identifier.Format();
+            => Z0.TableId.identify(t).Identifier.Format();
 
         string TableId<T>()
             where T : struct, IRecord<T>
