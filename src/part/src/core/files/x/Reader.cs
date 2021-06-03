@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.IO;
 
+    using System.Text;
+
     partial class XFs
     {
         /// <summary>
@@ -15,6 +17,10 @@ namespace Z0
         /// <param name="src">The file path</param>
         [Op]
         public static StreamReader Reader(this FS.FilePath src)
-            => FS.reader(src);
+            => FS.reader(src, Encoding.UTF8);
+
+        [Op]
+        public static StreamReader Reader(this FS.FilePath src, Encoding encoding)
+            => FS.reader(src, encoding);
     }
 }

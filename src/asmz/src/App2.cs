@@ -652,32 +652,25 @@ namespace Z0.Asm
             return counter;
         }
 
-        static string format(AsmHexCode src)
-        {
-            Span<char> dst = stackalloc char[256];
-            var count = render(src, dst);
-            return text.format(slice(dst,0,count));
-        }
-
         void ProcessStatementIndex()
         {
             var counter = 0u;
 
-            var dst = Db.AppLog("statements.out", FS.Asm);
+            var totalSize = ByteSize.Zero;
+
+            var dst = Db.AppLog("statements.bitstrings", FS.Csv);
+            var pattern = "{0,-12} | {1,-8} | {2}";
             using var writer = dst.Writer(Encoding.ASCII);
+            writer.WriteLine(pattern, "Sequence", "Size", "Bitstring");
 
             void Receive(in AsmIndex src)
             {
-                counter++;
-
-                if(counter < Pow2.T17)
-                {
-                    writer.WriteLine(string.Format("{0,-46} ; {1}", src.Expression, src.Encoded));
-                    writer.WriteLine(asm.comment(format(src.Encoded)));
-                    var chars = AsmBitstrings.render(src.Encoded);
-                    writer.WriteLine(asm.comment(text.format(chars)));
-                    writer.WriteLine();
-                }
+                ref readonly var encoded = ref src.Encoded;
+                ref readonly var seq = ref src.Sequence;
+                var size = encoded.Size;
+                var bitstring = AsmBitstrings.format(encoded);
+                var content = string.Format(pattern, seq, size, bitstring);
+                writer.WriteLine(content);
             }
 
             var processor = AsmIndexProcessor.create(Wf.EventSink, Receive);
@@ -686,8 +679,6 @@ namespace Z0.Asm
             var archive = ApiPackArchive.create(current.Root);
             var path = archive.StatementIndexPath();
             processor.ProcessFile(path);
-
-            Wf.Row(string.Format("Counted {0} lines", counter));
         }
 
         void CheckRowFormat()
@@ -726,8 +717,8 @@ namespace Z0.Asm
             //ApiExtractWorkflow.run(Wf);
             //CheckCpuid();
             //CheckRowFormat();
-            //RunExtractWorkflow();
-            ProcessStatementIndex();
+            RunExtractWorkflow();
+            //ProcessStatementIndex();
             //ShowModRmTable();
             //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct MemoryFiles : IMemoryFileReader
@@ -41,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ReadOnlySpan<T> view<T>(in MemoryFile file, MemoryAddress start, uint count)
             where T : struct
-                => core.cover<T>(start + file.BaseAddress, count);
+                => cover<T>(start + file.BaseAddress, count);
 
         /// <summary>
         /// Creates a <see cref='MappedFiles'/> that covers the first level of a specified directory
@@ -59,11 +60,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(MemoryAddress @base, ulong offset, ByteSize size)
-            => core.cover<byte>(@base + offset, size);
+            => cover<byte>(@base + offset, size);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(in MemoryFile src)
-            => core.cover<byte>(src.BaseAddress, src.Size);
+            => cover<byte>(src.BaseAddress, src.Size);
 
         /// <summary>
         /// Presents file content as a readonly sequence of <typeparamref name='T'/> cells
@@ -71,7 +72,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src)
-            => core.cover<T>(src.BaseAddress, src.Size/core.size<T>());
+            => cover<T>(src.BaseAddress, src.Size/core.size<T>());
 
         /// <summary>
         /// Presents file content segment as a readonly sequence of <typeparamref name='T'/> cells beginning
@@ -81,7 +82,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src, uint tOffset)
-            => core.slice(view<T>(src), tOffset);
+            => slice(view<T>(src), tOffset);
 
         /// <summary>
         /// Presents file content segment as a readonly sequence of <typeparamref name='T'/> cells beginning
@@ -91,11 +92,11 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T one<T>(in MemoryFile src, uint tOffset)
-            => ref core.first(view<T>(src, tOffset));
+            => ref first(view<T>(src, tOffset));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in MemoryFile src, uint tOffset, uint tCount)
-            => core.slice(view<T>(src), tOffset, tCount);
+            => slice(view<T>(src), tOffset, tCount);
 
         [Op]
         public static MemoryFileInfo describe(MemoryFile src)

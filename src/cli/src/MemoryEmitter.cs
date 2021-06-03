@@ -34,11 +34,11 @@ namespace Z0
 
                 if(restart)
                 {
-                    line.Append(text.format("0x{0} ", current.Format()));
+                    line.Append(string.Format("0x{0} ", current.Format()));
                     restart = false;
                 }
 
-                line.Append(text.format("{0} ", HexFormat.format<W8,byte>(*pSrc)));
+                line.Append(string.Format("{0} ", HexFormat.format<W8,byte>(*pSrc)));
 
                 if(offset % bpl == 0)
                 {

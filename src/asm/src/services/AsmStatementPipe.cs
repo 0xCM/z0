@@ -79,10 +79,7 @@ namespace Z0.Asm
         }
 
         public uint EmitIndex(SortedReadOnlySpan<AsmIndex> src, FS.FilePath dst)
-        {
-            var formatter = Tables.formatter<AsmIndex>(AsmIndex.RenderWidths);
-            return TableEmit(src.View, AsmIndex.RenderWidths, AsmIndex.RowPad, Encoding.ASCII, dst);
-        }
+            => TableEmit(src.View, AsmIndex.RenderWidths, AsmIndex.RowPad, Encoding.ASCII, dst);
 
         public SortedReadOnlySpan<AsmIndex> BuildStatementIndex(SortedSpan<ApiCodeBlock> src)
         {

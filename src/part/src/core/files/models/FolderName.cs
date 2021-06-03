@@ -18,7 +18,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static FolderName operator +(FolderName a, FolderName b)
-                => folder(Z0.text.format("{0}/{1}", a.Name, b.Name));
+                => folder(string.Format("{0}/{1}", a.Name, b.Name));
 
             public PathPart Name {get;}
 

@@ -9,34 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    public enum AsmCellKind : byte
-    {
-        None = 0,
-
-        Sequence,
-
-        GlobalOffset,
-
-        BlockAddress,
-
-        IP,
-
-        BlockOffset,
-
-        Expression,
-
-        EncodedBytes,
-
-        FormSig,
-
-        OpCode,
-
-        EncodedBits,
-
-        OpUri,
-    }
-
-    public readonly struct AsmTableCell<T>
+    public readonly struct AsmCell<T>
     {
         public byte Position {get;}
 
@@ -45,7 +18,7 @@ namespace Z0.Asm
         public AsmCellKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public AsmTableCell(byte pos, T data, AsmCellKind kind)
+        public AsmCell(byte pos, T data, AsmCellKind kind)
         {
             Content = data;
             Position = pos;

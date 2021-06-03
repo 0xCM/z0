@@ -40,14 +40,5 @@ namespace Z0
             Wf.Row(fmt);
 
         }
-
-        void Render<T>(T src)
-            where T : unmanaged
-        {
-            var buffer = CharBlock128.Null.Data;
-            var count = BitChars.chars(src,buffer);
-            var fmt = text.format(slice(buffer,0,count));
-            Wf.Row(fmt);
-        }
     }
 }

@@ -10,6 +10,7 @@ namespace Z0
     using System.IO.MemoryMappedFiles;
 
     using static Root;
+    using static core;
 
     using api = MemoryFiles;
 
@@ -89,7 +90,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public ref readonly T One<T>(uint tOffset)
-            => ref memory.first(View<T>(tOffset));
+            => ref first(View<T>(tOffset));
 
         /// <summary>
         /// Presents file content segment as a readonly sequence of <typeparamref name='T'/> cells beginning
@@ -112,7 +113,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         MemoryMappedViewStream Stream(MemoryAddress src, ByteSize size)
             => File.CreateViewStream(src, (int)size);
-
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryFile src)

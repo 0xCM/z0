@@ -16,14 +16,8 @@ namespace Z0
 
         public const byte FieldCount = 9;
 
-        /// <summary>
-        /// The invoking part
-        /// </summary>
         public PartId SourcePart;
 
-        /// <summary>
-        /// The block base address
-        /// </summary>
         public MemoryAddress Block;
 
         public MemoryAddress Source;
@@ -38,9 +32,6 @@ namespace Z0
 
         public AsmStatementExpr Instruction;
 
-        /// <summary>
-        /// The statement encoding
-        /// </summary>
         public BinaryCode Encoded;
 
         public static ReadOnlySpan<byte> RenderWidths

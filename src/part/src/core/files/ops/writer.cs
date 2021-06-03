@@ -17,24 +17,24 @@ namespace Z0
         public static string SearchPattern(FS.FileExt[] src)
             => string.Join(";*.", src.Select(e => e.Name));
 
+        [MethodImpl(Inline), Op]
+        public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode, Encoding encoding)
+            => new StreamWriter(dst.EnsureParentExists().Name.Format(), mode == FileWriteMode.Append, encoding);
+
         /// <summary>
         /// Creates an overwriting and caller-disposed stream writer that targets a specified path
         /// </summary>
         /// <param name="dst">The file path</param>
         [MethodImpl(Inline), Op]
         public static StreamWriter writer(FS.FilePath dst)
-            => new StreamWriter(dst.EnsureParentExists().Name.Format(), false);
+            => writer(dst, FileWriteMode.Overwrite, Encoding.UTF8);
 
         [MethodImpl(Inline), Op]
         public static StreamWriter writer(FS.FilePath dst, Encoding encoding)
-            => new StreamWriter(dst.EnsureParentExists().Name.Format(), false, encoding);
+            => writer(dst, FileWriteMode.Overwrite, Encoding.UTF8);
 
         [MethodImpl(Inline), Op]
         public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode)
-            => new StreamWriter(dst.EnsureParentExists().Name.Format(), mode == FileWriteMode.Append);
-
-        [MethodImpl(Inline), Op]
-        public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode, Encoding encoding)
-            => new StreamWriter(dst.EnsureParentExists().Name.Format(), mode == FileWriteMode.Append, encoding);
+            => writer(dst, mode, Encoding.UTF8);
     }
 }

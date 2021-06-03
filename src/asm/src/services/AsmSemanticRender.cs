@@ -179,13 +179,13 @@ namespace Z0.Asm
 
         [Op]
         static string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSeq seq)
-            => text.concat(FormatAddress(src, AddressPad),
+            => string.Concat(FormatAddress(src, AddressPad),
                 text.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
 
         [Op]
         static string format(IceRegister src)
-            => text.format("{0}",src);
+            => string.Format("{0}",src);
 
         [Op, MethodImpl(NotInline)]
         static string format(IceOpKind src)

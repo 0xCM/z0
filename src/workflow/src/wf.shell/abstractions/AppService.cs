@@ -194,7 +194,7 @@ namespace Z0
                 => Wf.Ran(flow.WithMsg(string.Format("{0} | {1}/{2}", data, HostName, operation)));
 
         protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, string title = EmptyString)
-            => ShowSpan(src, file, item => text.format("{0}", item), title);
+            => ShowSpan(src, file, item => string.Format("{0}", item), title);
 
         protected void Show<T>(T data, StreamWriter dst)
         {
@@ -228,7 +228,7 @@ namespace Z0
             var flow = Wf.EmittingTable<T>(dst);
             var spec = Tables.rowspec<T>(widths, rowpad);
             var count = Tables.emit(src, spec, encoding, dst);
-            Wf.EmittedTable(flow,count);
+            Wf.EmittedTable(flow, count);
             return count;
         }
 

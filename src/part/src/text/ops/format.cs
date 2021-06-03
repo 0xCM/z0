@@ -79,38 +79,23 @@ namespace Z0
             => string.Format("<{0}>", src);
 
         public static string msg<T>(string pattern, T a)
-            => format(pattern, msgarg(a));
-
-        public static string msg<A,B>(string pattern, A a, B b)
-            => format(pattern, msgarg(a), msgarg(b));
-
-        public static string msg<A,B,C>(string pattern, A a, B b, C c)
-            => format(pattern, msgarg(a), msgarg(b), msgarg(c));
-
-        public static string msg<A,B,C,D>(string pattern, A a, B b, C c, D d)
-            => format(pattern, msgarg(a), msgarg(b), msgarg(c), msgarg(d));
-
-        public static string msg<A,B,C,D,E>(string pattern, A a, B b, C c, D d, E e)
-            => format(pattern, msgarg(a), msgarg(b), msgarg(c), msgarg(d), msgarg(e));
-
-        public static string msg<A,B,C,D,E,F>(string pattern, A a, B b, C c, D d, E e, F f)
-            => format(pattern, msgarg(a), msgarg(b), msgarg(c), msgarg(d), msgarg(e), msgarg(f));
+            => string.Format(pattern, msgarg(a));
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<char> src)
             => new string(src);
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(string pattern, ReadOnlySpan<char> a0)
-            => string.Format(pattern, a0.ToString());
+            => string.Format(pattern, format(a0));
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1)
-            => string.Format(pattern, a0.ToString(), a1.ToString());
+            => string.Format(pattern, format(a0), format(a1));
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1, ReadOnlySpan<char> a2)
-            => string.Format(pattern, a0.ToString(), a1.ToString(), a2.ToString());
+            => string.Format(pattern, format(a0), format(a1), format(a2));
 
         [Op]
         public static string format(string pattern, params object[] args)
@@ -125,7 +110,6 @@ namespace Z0
 
         public static void render<F,C>(Fenced<F,C> rule, ITextBuffer dst)
             => dst.AppendFormat("{0}{1}{2}", rule.Fence.Left, rule.Content, rule.Fence.Right);
-
 
         [Op]
         public static string format(object src)

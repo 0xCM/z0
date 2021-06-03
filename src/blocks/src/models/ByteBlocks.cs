@@ -820,6 +820,29 @@ namespace Z0
                 => recover<T>(Bytes);
    }
 
+    [StructLayout(LayoutKind.Sequential, Size = Size)]
+    public struct ByteBlock682
+    {
+        public const ushort Size = 682;
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(this);
+        }
+
+        public ref byte First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Bytes);
+        }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+    }
+
     [StructLayout(LayoutKind.Sequential)]
     public struct ByteBlock1024 : IDataBlock<ByteBlock1024>
     {

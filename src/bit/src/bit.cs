@@ -135,6 +135,10 @@ namespace Z0
             => State ? '1' : '0';
 
         [MethodImpl(Inline)]
+        public BitChar ToBitChar()
+            => BitChars.from(this);
+
+        [MethodImpl(Inline)]
         public string Format()
             => State ? "1" : "0";
 
