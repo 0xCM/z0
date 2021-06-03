@@ -4,7 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "..\\root"
+			"path": "..\\bit"
+		},
+		{
+			"path": "..\\clr"
 		},
 		{
 			"path": "..\\core"
@@ -13,23 +16,26 @@
 			"path": "..\\external"
 		},
 		{
-			"path": "..\\sys"
+			"path": "..\\hash"
 		},
 		{
 			"path": "..\\interop"
 		},
 		{
-			"path": "..\\clr"
+			"path": "..\\rules"
+		},
+		{
+			"path": "..\\resources"
+		},
+		{
+			"path": "..\\root"
+		},
+		{
+			"path": "..\\sys"
 		},
 		{
 			"path": "..\\time"
 		},
-		{
-			"path": "..\\rules"
-		},
-		{
-			"path": "..\\hash"
-		}
 	]
         ,
 	"settings": {}

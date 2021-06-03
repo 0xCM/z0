@@ -181,6 +181,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.blocks", "blocks\z0.bloc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.processors", "processors\z0.processors.csproj", "{BCA82B9C-626F-4F4A-8F82-B5252B640672}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.resources", "resources\z0.resources.csproj", "{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1262,5 +1264,17 @@ Global
 		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|x64.Build.0 = Release|Any CPU
 		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|x86.ActiveCfg = Release|Any CPU
 		{BCA82B9C-626F-4F4A-8F82-B5252B640672}.Release|x86.Build.0 = Release|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Debug|x64.Build.0 = Debug|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Debug|x86.Build.0 = Debug|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Release|x64.ActiveCfg = Release|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Release|x64.Build.0 = Release|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{144ABECA-75D1-4B01-ACB2-B35A35FB63F3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

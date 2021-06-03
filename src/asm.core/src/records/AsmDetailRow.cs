@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Root;
-
     using Z0.Asm;
+
+    using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AsmDetailRow : IRecord<AsmDetailRow>, IComparable<AsmDetailRow>

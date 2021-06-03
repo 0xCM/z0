@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     partial struct sys
     {
         /// <summary>
@@ -15,6 +15,13 @@ namespace Z0
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Options), Op]
         public static bool nonempty(string src)
-            => proxy.nonempty(src);
+            => !string.IsNullOrWhiteSpace(src);
+
+        /// Tests whether a specified <see cref='char'/> has a nozero value
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Options), Op]
+        public static bool nonempty(char src)
+            => src != Chars.Null;
     }
 }

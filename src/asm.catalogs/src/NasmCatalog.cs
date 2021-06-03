@@ -4,12 +4,30 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+    using System.Runtime.InteropServices;
+
     using static Root;
     using static core;
-    using static AsmRecords;
 
     public class NasmCatalog : AppService<NasmCatalog>
     {
+        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        public struct NasmInstruction : IRecord<NasmInstruction>
+        {
+            public const string TableId = "nasm.instructions";
+
+            public uint LineNumber;
+
+            public CharBlock16 Mnemonic;
+
+            public TextBlock Operands;
+
+            public TextBlock Encoding;
+
+            public TextBlock Flags;
+        }
+
         public Index<NasmInstruction> ParseInstuctionAssets()
         {
             var lines = text.lines(Parts.AsmCatalogs.Assets.NasmInstructions().Utf8()).View;

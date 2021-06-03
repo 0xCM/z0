@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
-    using static Part;
+    using static Root;
 
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
         public static string utf8(in Asset src)
-            => text.utf8(view(src));
+            => Encoding.UTF8.GetString(view(src));
     }
 }

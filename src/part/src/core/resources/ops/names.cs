@@ -13,10 +13,8 @@ namespace Z0
     partial struct Resources
     {
         [Op]
-        public static string[] names(Assembly src, utf8? match)
-            => match != null && match.Value.IsNonEmpty
-            ? src.ManifestResourceNames().Where(n => n.Contains(match.Value))
-            : src.ManifestResourceNames();
+        public static string[] names(Assembly src, string match)
+            => minicore.nonempty(match) ? src.ManifestResourceNames().Where(n => n.Contains(match)) : src.ManifestResourceNames();
 
         [MethodImpl(Inline), Op]
         public static string[] names(Assembly src)

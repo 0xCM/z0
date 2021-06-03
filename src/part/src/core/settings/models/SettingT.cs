@@ -65,7 +65,7 @@ namespace Z0
         public static Setting<T> Empty
         {
             [MethodImpl(Inline)]
-            get => new Setting<T>(String.Empty, core.empty<T>());
+            get => new Setting<T>(String.Empty, core.EmptyType<T>());
         }
     }
 }

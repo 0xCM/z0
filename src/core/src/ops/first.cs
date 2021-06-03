@@ -61,5 +61,85 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly char first(ReadOnlySpan<char> src)
             => ref GetReference(src);
+
+        /// <summary>
+        /// Presents the span head as a readonly reference to an unsigned 8-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly byte first<T>(W8 w, ReadOnlySpan<T> src)
+            where T : unmanaged
+                => ref As<T,byte>(ref GetReference(src));
+
+        /// <summary>
+        /// Presents the span head as a readonly reference to an unsigned 16-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly ushort first<T>(W16 w, ReadOnlySpan<T> src)
+            where T : unmanaged
+                => ref As<T,ushort>(ref GetReference(src));
+
+        /// <summary>
+        /// Presents the span head as a readonly reference to an unsigned 32-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly uint first<T>(W32 w, ReadOnlySpan<T> src)
+            where T : unmanaged
+                => ref As<T,uint>(ref GetReference(src));
+
+        /// <summary>
+        /// Presents the span head as a readonly reference to an unsigned 64-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly ulong first<T>(W64 w, ReadOnlySpan<T> src)
+            where T : unmanaged
+                => ref As<T,ulong>(ref GetReference(src));
+
+        /// <summary>
+        /// Presents the span head as a reference to an unsigned 8-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref byte first<T>(W8 w, Span<T> src)
+            where T : unmanaged
+                => ref As<T,byte>(ref GetReference(src));
+
+        /// <summary>
+        /// Presents the span head as a reference to an unsigned 16-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ushort first<T>(W16 w, Span<T> src)
+            where T : unmanaged
+                => ref As<T,ushort>(ref GetReference(src));
+
+        /// <summary>
+        /// Presents the span head as a reference to an unsigned 32-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref uint first<T>(W32 w, Span<T> src)
+            where T : unmanaged
+                => ref As<T,uint>(ref GetReference(src));
+
+        /// <summary>
+        /// Presents the span head as a reference to an unsigned 64-bit integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ulong first<T>(W64 w, Span<T> src)
+            where T : unmanaged
+                => ref As<T,ulong>(ref GetReference(src));
     }
 }

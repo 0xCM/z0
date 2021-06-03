@@ -104,6 +104,9 @@ public enum PartId : ulong
     [Symbol("time")]
     Time = 38,
 
+    [Symbol("resources")]
+    Resources = 39,
+
     [Symbol("events")]
     Events = 40,
 

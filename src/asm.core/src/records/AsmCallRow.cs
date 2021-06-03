@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    using static Part;
+
+    using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AsmCallRow : IComparableRecord<AsmCallRow>

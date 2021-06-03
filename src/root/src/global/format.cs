@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
 
     partial struct Root
@@ -12,7 +13,6 @@ namespace Z0
         [Op]
         public static string name(Assembly src)
             => src.GetName().Name;
-
 
         [Op]
         public static string format(PartId src)

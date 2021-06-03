@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(AsmLang)"/>
+    <ProjectReference Include="$(AsmLang)"/>
   </ItemGroup>
 
-   <ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="assets/**/*.*" />
-   </ItemGroup>
+  </ItemGroup>
 
 </Project>

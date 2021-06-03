@@ -400,6 +400,27 @@ namespace Z0.Asm
             log.Show(formatter.Format(header, RecordFormatKind.KeyValuePairs));
         }
 
+
+        void FormatBits(ReadOnlySpan<CpuIdRow> src, ITextBuffer dst)
+        {
+            var count = src.Length;
+            var j = 0u;
+            var w = n8;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(src,i);
+                dst.AppendFormat("eax: {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
+                var ebx = row.Ebx.FormatBitstring(w);
+                dst.AppendFormat("ebx: {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
+                var ecx = row.Ecx.FormatBitstring(w);
+                dst.AppendFormat("ebx: {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
+                var edx = row.Edx.FormatBitstring(w);
+                dst.AppendFormat("edx: {0} [{1}]", row.Edx, row.Edx.FormatBitstring(w));
+                Wf.Row(dst.Emit());
+            }
+
+        }
+
         void CheckCpuid()
         {
             var descriptor = Parts.AsmCases.Assets.CpuIdRows();
@@ -411,27 +432,9 @@ namespace Z0.Asm
             Wf.Row(formatter.FormatHeader());
             core.iter(rows, row => Wf.Row(formatter.Format(row)));
 
-            var count = rows.Length;
-            var j = 0u;
-            var buffer = text.buffer();
-            var w = n8;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(rows,i);
-                buffer.AppendFormat("eax: {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
-                var ebx = row.Ebx.FormatBitstring(w);
-                buffer.AppendFormat("ebx: {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
-                var ecx = row.Ecx.FormatBitstring(w);
-                buffer.AppendFormat("ebx: {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
-                var edx = row.Edx.FormatBitstring(w);
-                buffer.AppendFormat("edx: {0} [{1}]", row.Edx, row.Edx.FormatBitstring(w));
-                Wf.Row(buffer.Emit());
-            }
+            // var buffer = text.buffer();
+            // FormatBits(rows, buffer);
 
-            // var cpuid = CpuId.request(0u,0u);
-            // var result = Cells.cell128(0x00000015, 0x756E6547, 0x6C65746E, 0x49656E69);
-            // CpuId.response(result, ref cpuid);
-            // Wf.Row(cpuid.Format());
         }
 
         void EmitAssetCatalog()
@@ -719,7 +722,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ApiExtractWorkflow.run(Wf);
+            //ApiExtractWorkflow.run(Wf);
+            CheckCpuid();
             //CheckRowFormat();
             //RunExtractWorkflow();
             //ProcessStatementIndex();

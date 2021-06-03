@@ -8,18 +8,15 @@ namespace Z0
 
     using Z0.Asm;
 
-    partial struct AsmRecords
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
+    public struct AsmFormHash : IRecord<AsmFormHash>
     {
-        [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct AsmFormHash : IRecord<AsmFormHash>
-        {
-            public const string TableId = "asm.forms.hashed";
+        public const string TableId = "asm.forms.hashed";
 
-            public Hex32 HashCode;
+        public Hex32 HashCode;
 
-            public uint IndexKey;
+        public uint IndexKey;
 
-            public AsmFormExpr Form;
-        }
+        public AsmFormExpr Form;
     }
 }

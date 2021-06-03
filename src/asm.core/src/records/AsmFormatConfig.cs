@@ -4,8 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System.Runtime.InteropServices;
+
+    [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct AsmFormatConfig : IRecord<AsmFormatConfig>
     {
+        public const string TableId = "asm.format-config";
+
         public bool EmitCaptureTermCode;
 
         public bool EmitFileHeader;

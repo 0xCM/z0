@@ -9,9 +9,8 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmRecords;
 
-    public sealed class StanfordAsmCatalog : AppService<StanfordAsmCatalog>
+    public sealed partial class StanfordAsmCatalog : AppService<StanfordAsmCatalog>
     {
         readonly TextDocFormat SourceFormat;
 

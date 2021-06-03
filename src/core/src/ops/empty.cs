@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static T empty<T>()
+        public static T EmptyType<T>()
         {
             if(typeof(T) == typeof(string))
                 return generic<T>(EmptyString);

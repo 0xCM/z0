@@ -14,6 +14,23 @@ namespace Z0
 
     public readonly struct TextDoc : IIndex<TextRow>
     {
+        [Op]
+        public static bool resource(Asset src, TextDocFormat format, out TextDoc dst)
+        {
+            var content = Resources.utf8(src);
+            var result = TextDoc.parse(content,format);
+            if(result)
+            {
+                dst = result.Value;
+                return true;
+            }
+            else
+            {
+                dst = TextDoc.Empty;
+                return false;
+            }
+        }
+
         public static ReadOnlySpan<TextDoc> load(ReadOnlySpan<FS.FilePath> src)
         {
             var dst = bag<TextDoc>();
