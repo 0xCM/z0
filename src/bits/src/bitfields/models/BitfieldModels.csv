@@ -1,2 +1,0 @@
-Sequence | BitfieldName | SectionName   | FirstSectionIndex | LastSectionIndex | SegmentName | FirstSegmentIndex | LastSegmentIndex
-0        | Bitfield1    | Sec{0}        | 0                 | 64               | Sec0/Seg{0} | 0                 | 3

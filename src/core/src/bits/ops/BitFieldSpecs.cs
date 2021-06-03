@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using System;
+
+    using static Root;
 
     [ApiHost]
-    public readonly partial struct DataLayouts
+    public readonly partial struct BitfieldSpecs
     {
         const NumericKind Closure = UnsignedInts;
     }

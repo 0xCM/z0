@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct DataLayouts
     {
@@ -26,7 +26,6 @@ namespace Z0
                 total += width(skip(item,i).Partitions);
             return total;
         }
-
 
         /// <summary>
         /// Computes the aggregate width of a <see cref='LayoutPart'/> sequence

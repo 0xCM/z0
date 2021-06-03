@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct DataLayouts
     {
         [MethodImpl(Inline), Op]
-        public static DataLayout define(LayoutIdentity id, LayoutPart[] segments)
-            => new DataLayout(id, segments);
+        public static LayoutIdentity identify(uint index, ulong kind)
+            => new LayoutIdentity(index, kind);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DataLayout<T> define<T>(LayoutIdentity<T> id, LayoutPart<T>[] segments)
+        public static LayoutIdentity<T> identify<T>(uint index, T kind)
             where T : unmanaged
-                => new DataLayout<T>(id, segments);
+                => new LayoutIdentity<T>(index, kind);
     }
 }

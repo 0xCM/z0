@@ -10,9 +10,8 @@ namespace Z0
     using System.Reflection.Emit;
 
     using static System.Reflection.TypeAttributes;
-    using static GenSpecs;
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly partial struct RecordBuilder

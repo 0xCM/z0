@@ -6,21 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
     using api = DataLayouts;
 
-    public readonly struct DataLayout<T,R> : IDataLayout<DataLayout<T,R>,LayoutPart<T,R>,T>
-        where T : unmanaged
-        where R : unmanaged
+    [StructLayout(LayoutKind.Sequential)]
+    public readonly struct DataLayout : IDataLayout<DataLayout>
     {
-        public LayoutIdentity<T> Id {get;}
+        public LayoutIdentity Id {get;}
 
-        readonly Index<LayoutPart<T,R>> Data;
+        readonly Index<LayoutPart> Data;
 
         [MethodImpl(Inline)]
-        public DataLayout(LayoutIdentity<T> id, LayoutPart<T,R>[] parts)
+        public DataLayout(LayoutIdentity id, LayoutPart[] parts)
         {
             Id = id;
             Data = parts;
@@ -38,25 +38,19 @@ namespace Z0
             get => Data.Count;
         }
 
-        public LayoutPart<T,R>[] Storage
-        {
-            [MethodImpl(Inline)]
-            get => Data.Storage;
-        }
-
-        public ReadOnlySpan<LayoutPart<T,R>> Partitions
+        public ReadOnlySpan<LayoutPart> Partitions
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public ref LayoutPart<T,R> FirstPartition
+        public ref LayoutPart FirstPartition
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
 
-        public ref LayoutPart<T,R> this[uint index]
+        public ref LayoutPart this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
@@ -74,9 +68,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator DataLayout(DataLayout<T,R> src)
-            => api.untyped(src);
     }
 }

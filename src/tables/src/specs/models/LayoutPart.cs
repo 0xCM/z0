@@ -8,21 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
     using api = DataLayouts;
 
-    /// <summary>
-    /// Defines a <typeparamref name='T'/> kinded segment partition
-    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct LayoutPart<T,R>
-        where T : unmanaged
-        where R : unmanaged
+    public readonly struct LayoutPart : IDataLayout<LayoutPart>
     {
-        public LayoutIdentity<T> Id {get;}
+        /// <summary>
+        /// Defines enclosure-relative partition identity
+        /// </summary>
+        public LayoutIdentity Id {get;}
 
-        readonly PartitionSegment<R> Range;
+        readonly PartitionSegment<ulong> Range;
 
         /// <summary>
         /// The enclosure-relative partition index
@@ -30,33 +28,30 @@ namespace Z0
         public uint Index => Id.Index;
 
         [MethodImpl(Inline)]
-        public LayoutPart(LayoutIdentity<T> id, R start, R end)
+        public LayoutPart(LayoutIdentity id, ulong start, ulong end)
         {
             Id = id;
-            Range = new PartitionSegment<R>(start,end);
+            Range = new PartitionSegment<ulong>(start,end);
         }
 
         /// <summary>
-        /// The inclusive lower index
+        /// The bit position at which partition begins
         /// </summary>
-        public R Left
+        public ulong Left
         {
             [MethodImpl(Inline)]
             get => Range.Min;
         }
 
         /// <summary>
-        /// The inclusive upper index
+        /// The bit position at which partition ends
         /// </summary>
-        public R Right
+        public ulong Right
         {
             [MethodImpl(Inline)]
             get => Range.Max;
         }
 
-        /// <summary>
-        /// The partition width determined by <see cref='Right'/> - <see cref='Left'/>
-        /// </summary>
         public BitWidth Width
         {
             [MethodImpl(Inline)]
@@ -69,6 +64,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
     }
 }
