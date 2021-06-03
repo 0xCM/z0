@@ -680,13 +680,14 @@ namespace Z0.Asm
                 }
             }
 
-            //var processor = AsmIndexProcessor.create(Wf.EventSink, Receive);
-            var processor = AsmIndexProcessor.create(DevNull.BlackHole, Receive);
+            var processor = AsmIndexProcessor.create(Wf.EventSink, Receive);
             var packs = Wf.ApiPacks();
             var current = packs.Current();
             var archive = ApiPackArchive.create(current.Root);
             var path = archive.StatementIndexPath();
             processor.ProcessFile(path);
+
+            Wf.Row(string.Format("Counted {0} lines", counter));
         }
 
         void CheckRowFormat()
@@ -723,10 +724,10 @@ namespace Z0.Asm
         public void Run()
         {
             //ApiExtractWorkflow.run(Wf);
-            CheckCpuid();
+            //CheckCpuid();
             //CheckRowFormat();
             //RunExtractWorkflow();
-            //ProcessStatementIndex();
+            ProcessStatementIndex();
             //ShowModRmTable();
             //EmitSymbolicliterals();
             //ListVendorManuals("intel", FS.Txt);

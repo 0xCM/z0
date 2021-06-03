@@ -31,5 +31,7 @@ namespace Z0
         }
 
         protected abstract Outcome<T> Process(uint number, ReadOnlySpan<char> chars);
+
+        protected static MsgPattern<Count,FS.FileUri> ProcessedLines => "Processed {0} lines from {1}";
     }
 }
