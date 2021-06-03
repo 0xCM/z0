@@ -54,6 +54,9 @@ public enum PartId : ulong
     [Symbol("term")]
     Term = 11,
 
+    [Symbol("cells")]
+    Cells = 12,
+
     [Symbol("sys")]
     Sys = 13,
 
@@ -121,6 +124,9 @@ public enum PartId : ulong
 
     [Symbol("fsm")]
     Fsm = 43,
+
+    [Symbol("apicore")]
+    ApiCore= 44,
 
     [Symbol("interop")]
     Interop = 45,

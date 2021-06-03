@@ -15,7 +15,7 @@ namespace Z0
     partial struct Resources
     {
         [Op]
-        static unsafe Index<Asset> collect(Assembly src, string match = null)
+        public static unsafe Index<Asset> collect(Assembly src, string match = null)
         {
             require(src != null, () => "Argument NULL");
             var resnames = @readonly(names(src, match));

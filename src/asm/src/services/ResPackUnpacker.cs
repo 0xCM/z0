@@ -68,7 +68,7 @@ namespace Z0.Asm
                 hexwriter.Write(string.Format(" ## {0:X} ## {1:X}", imm64, imm32));
                 hexwriter.WriteLine();
 
-                segments.Add(Resources.capture(accessor));
+                segments.Add(ResourceCapture.capture(accessor));
                 sequence++;
             }
 

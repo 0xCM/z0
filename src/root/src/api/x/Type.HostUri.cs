@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     partial class XApi
     {
@@ -14,7 +17,7 @@ namespace Z0
             if(host != null)
             {
                 var tag = host.Tag<ApiHostAttribute>();
-                var name = text.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name).ToLower();
+                var name = minicore.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name).ToLower();
                 var owner = host.Assembly.Id();
                 return new ApiHostUri(owner, name);
             }

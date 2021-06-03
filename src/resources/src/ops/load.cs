@@ -5,8 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Root;
     using static core;
@@ -29,8 +30,8 @@ namespace Z0
         public static ReadOnlySpan<byte> definition(ApiResAccessor src)
         {
             const byte size = 29;
-            var cell = Cells.alloc(w256);
-            var storage = cell.Bytes;
+            var block = ByteBlocks.alloc(w32);
+            var storage = block.Bytes;
             var data = cover<byte>(jit(src.Member), size);
             for(var i=0; i<size; i++)
                 seek(storage,i) = skip(data,i);
@@ -49,5 +50,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<byte> description(ApiResAccessor src, byte size = 29)
             => cover<byte>(jit(src.Member), size);
+
     }
 }

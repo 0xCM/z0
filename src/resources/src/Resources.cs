@@ -11,7 +11,7 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    partial struct Resources
+    public partial struct Resources
     {
         const NumericKind Closure = UnsignedInts;
     }

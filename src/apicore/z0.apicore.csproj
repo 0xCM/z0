@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Clr)" />
-    <ProjectReference Include="$(Blocks)" />
+    <ProjectReference Include="$(Bit)" />
   </ItemGroup>
 
 </Project>

@@ -2,14 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
     using static core;
 
-    partial struct Resources
+    public readonly struct ResourceCapture
     {
         /// <remarks>
         /// Each method is 29 bytes in length and similar to:
@@ -23,7 +25,7 @@ namespace Z0
         [Op]
         public static MemorySeg capture(ApiResAccessor accessor)
         {
-            var def = definition(accessor);
+            var def = Resources.definition(accessor);
             var address = MemoryAddress.Zero;
             var size = ByteSize.Zero;
             for(var i=0; i<MemberSegCount; i++)

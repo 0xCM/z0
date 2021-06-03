@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static BinaryRes binary(PartId owner, string id, ReadOnlySpan<byte> src)
-            => new BinaryRes(owner, id, src.Length, memory.address(src));
+            => new BinaryRes(owner, id, src.Length, core.address(src));
 
         [MethodImpl(Inline), Op]
         public static BinaryRes binary(PartId owner, string id, ByteSize size, MemoryAddress address)

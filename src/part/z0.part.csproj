@@ -16,6 +16,7 @@
     <ProjectReference Include="$(Hex)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Resources)" />
+    <ProjectReference Include="$(ApiCore)" />
   </ItemGroup>
 
 </Project>
