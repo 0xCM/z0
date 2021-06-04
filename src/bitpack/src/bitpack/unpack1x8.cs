@@ -16,17 +16,19 @@ namespace Z0
     partial struct BitPack
     {
         /// <summary>
-        /// Unpacks 8 source bits to 8 32-bit targets
+        /// Distributes 32 packed source bits to the least significant bit of 32 corresponding target bytes
         /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target reference</param>
+        /// <param name="src">The packed source bits</param>
+        /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack1x8(byte src, ref uint dst)
+        public static ref byte unpack1x8x32(uint src, ref byte dst)
         {
-            var buffer = z64;
-            ref var tmp = ref uint8(ref buffer);
-            unpack1x8(src, ref tmp);
-            vinflate8x256x32u(tmp).StoreTo(ref dst);
+            var m = lsb<ulong>(n8,n1);
+            seek64(dst, 0) = scatter((ulong)(byte)src, m);
+            seek64(dst, 1) = scatter((ulong)((byte)(src >> 8)), m);
+            seek64(dst, 2) = scatter((ulong)((byte)(src >> 16)), m);
+            seek64(dst, 3) = scatter((ulong)((byte)(src >> 24)), m);
+            return ref dst;
         }
 
         /// <summary>
@@ -53,22 +55,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack1x8(byte src, Span<byte> dst)
             => seek64(first(dst), 0) = scatter((ulong)(byte)src, lsb<ulong>(n8,n1));
-
-        /// <summary>
-        /// Distributes 32 packed source bits to the least significant bit of 32 corresponding target bytes
-        /// </summary>
-        /// <param name="src">The packed source bits</param>
-        /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op]
-        public static ref byte unpack1x8x32(uint src, ref byte dst)
-        {
-            var m = lsb<ulong>(n8,n1);
-            seek64(dst, 0) = scatter((ulong)(byte)src, m);
-            seek64(dst, 1) = scatter((ulong)((byte)(src >> 8)), m);
-            seek64(dst, 2) = scatter((ulong)((byte)(src >> 16)), m);
-            seek64(dst, 3) = scatter((ulong)((byte)(src >> 24)), m);
-            return ref dst;
-        }
 
         [MethodImpl(Inline), Unpack]
         public static ref ulong unpack1x8x32(uint src, ref ulong dst)

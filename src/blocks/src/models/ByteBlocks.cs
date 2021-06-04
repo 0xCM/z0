@@ -440,6 +440,7 @@ namespace Z0
             where T : unmanaged
                 => recover<T>(Bytes);
 
+        public static ByteBlock14 Empty => default;
     }
 
     /// <summary>
@@ -500,6 +501,9 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static ByteBlock16 Empty => default;
+
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -608,6 +612,9 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static ByteBlock20 Empty => default;
+
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -635,6 +642,9 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static ByteBlock24 Empty => default;
+
 
     }
 
@@ -666,6 +676,9 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static ByteBlock32 Empty => default;
+
     }
 
     /// <summary>
@@ -704,6 +717,8 @@ namespace Z0
             where T : unmanaged
                 => recover<T>(Bytes);
 
+        public static ByteBlock64 Empty => default;
+
     }
 
     /// <summary>
@@ -734,6 +749,9 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static ByteBlock80 Empty => default;
+
     }
 
     /// <summary>
@@ -795,7 +813,6 @@ namespace Z0
                 => recover<T>(Bytes);
 
         public static ByteBlock256 Empty => default;
-
    }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -823,6 +840,9 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static ByteBlock512 Empty => default;
+
    }
 
     [StructLayout(LayoutKind.Sequential, Size = Size)]
@@ -846,6 +866,9 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+         public static ByteBlock682 Empty => default;
+
     }
 
     [StructLayout(LayoutKind.Sequential)]

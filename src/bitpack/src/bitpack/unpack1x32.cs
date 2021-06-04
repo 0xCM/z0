@@ -15,6 +15,20 @@ namespace Z0
     partial struct BitPack
     {
         /// <summary>
+        /// Distributes 8 source bits to the least bit of 8 32-bit targets
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The target reference</param>
+        [MethodImpl(Inline), Op]
+        public static void unpack1x32(byte src, ref uint dst)
+        {
+            var buffer = z64;
+            ref var tmp = ref uint8(ref buffer);
+            unpack1x8(src, ref tmp);
+            vinflate8x256x32u(tmp).StoreTo(ref dst);
+        }
+
+        /// <summary>
         /// Distributes 32 packed source bits to 32 corresponding target bits
         /// </summary>
         /// <param name="src">The packed source bits</param>

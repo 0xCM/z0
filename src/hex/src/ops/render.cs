@@ -129,6 +129,7 @@ namespace Z0
                 ref readonly var b = ref skip(src,i);
                 seek(dst,j++) = hexchar(@case, b, 0);
                 seek(dst,j++) = hexchar(@case, b, 1);
+                seek(dst,j++) = Chars.Space;
             }
             return j;
         }

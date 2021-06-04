@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
     using static Typed;
-    using static SFx;
+    using Masks = BitMasks.Literals;
 
     class App : WfApp<App>
     {
@@ -51,6 +51,33 @@ namespace Z0
 
         }
 
+        void CheckBitPacks()
+        {
+            var buffer = span<char>(Pow2.T12);
+            var src = (uint)Masks.Hi32x16;
+            var dst = ByteBlock32.Empty.Bytes;
+            BitPack.unpack1x32(src, dst);
+            var count = Hex.render(UpperCase, dst, buffer);
+            var hex = text.format(slice(buffer,0,count));
+            Wf.Row(hex);
+
+            buffer.Clear();
+            var k=0;
+            for(var i=0; i<32; i++)
+            {
+                ref readonly var a = ref skip(dst,i);
+                for(byte j=0; j<7; j++)
+                {
+                    seek(buffer,k++) = bit.test(a,j).ToChar();
+                }
+                seek(buffer,k++) = Chars.Space;
+            }
+
+            // count = BitRender.render(dst, buffer);
+            var bitstring = text.format(slice(buffer,0,k));
+            Wf.Row(bitstring);
+        }
+
         void RunChecks()
         {
             var checker = BitLogicChecker.create(Wf, Rng.@default());
@@ -76,7 +103,6 @@ namespace Z0
 
             Wf.Row(block.Describe());
         }
-
 
         void Run128(PageBlock lhs, PageBlock rhs, PageBlock dst)
         {
@@ -126,9 +152,8 @@ namespace Z0
         protected override void Run()
         {
             var flow = Wf.Running("Running checks");
-            Test2();
+            CheckBitPacks();
             Wf.Ran(flow, "Ran checks");
         }
-
     }
 }
