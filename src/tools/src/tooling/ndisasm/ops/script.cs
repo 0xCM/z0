@@ -16,7 +16,7 @@ namespace Z0.Tools
         public static CmdScript script(Identifier id, FS.FilePath src, FS.FilePath dst)
         {
             const string Pattern = "{0} -b 64 -p intel {1} > {2}";
-            var body = ToolCmd.expr(string.Format(Pattern, Toolsets.ndisasm, src.Format(PathSeparator.BS), dst.Format(PathSeparator.BS)));
+            var body = ScriptExpr.define(string.Format(Pattern, Toolsets.ndisasm, src.Format(PathSeparator.BS), dst.Format(PathSeparator.BS)));
             return ToolCmd.script(id, body);
         }
 

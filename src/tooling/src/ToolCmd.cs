@@ -17,23 +17,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static string format(IToolCmd src)
-        {
-            var count = src.Args.Count;
-            var buffer = text.buffer();
-            buffer.AppendFormat("{0}{1}", src.CmdId.Format(), Chars.LParen);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var arg = ref src.Args[i];
-                buffer.AppendFormat(RP.Assign, arg.Name, arg.Value);
-                if(i != count - 1)
-                    buffer.Append(", ");
-            }
-
-            buffer.Append(Chars.RParen);
-            return buffer.Emit();
-        }
-
 
         [MethodImpl(Inline), Formatter, Closures(Closure)]
         public static string format<K>(in ToolOptionSpec<K> src)

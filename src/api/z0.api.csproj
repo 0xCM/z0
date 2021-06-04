@@ -15,6 +15,7 @@
     <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Roslyn)" />
     <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(Commands)" />
   </ItemGroup>
 
 </Project>

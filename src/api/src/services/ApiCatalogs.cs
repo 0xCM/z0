@@ -218,7 +218,7 @@ namespace Z0
             if(fields.Length != FieldCount)
             {
                 dst = default;
-                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, text.delimit(fields, Delimiter)));
+                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, TextTools.delimit(fields, Delimiter)));
             }
 
             var i = 0;

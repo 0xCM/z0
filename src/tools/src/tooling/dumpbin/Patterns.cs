@@ -75,7 +75,7 @@ namespace Z0.Tools
                     pattern = ToolCmd.pattern("dumpbin.loadconfig", string.Format("dumpbin /LOADCONFIG /OUT:{1} {0}", src.Format(PS), output.Format(PS)));
                     break;
             }
-            return ToolCmd.expr(pattern);
+            return ScriptExpr.define(pattern);
         }
     }
 }

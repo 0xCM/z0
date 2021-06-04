@@ -187,6 +187,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.cells", "cells\z0.cells.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.apicore", "apicore\z0.apicore.csproj", "{22EB126D-80D3-4166-A6E2-2366E0B62408}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.commands", "commands\z0.commands.csproj", "{DDB51B2C-930E-4700-938A-4E89B82C4AC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1304,5 +1306,17 @@ Global
 		{22EB126D-80D3-4166-A6E2-2366E0B62408}.Release|x64.Build.0 = Release|Any CPU
 		{22EB126D-80D3-4166-A6E2-2366E0B62408}.Release|x86.ActiveCfg = Release|Any CPU
 		{22EB126D-80D3-4166-A6E2-2366E0B62408}.Release|x86.Build.0 = Release|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Debug|x64.Build.0 = Debug|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Debug|x86.Build.0 = Debug|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|x64.ActiveCfg = Release|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|x64.Build.0 = Release|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|x86.ActiveCfg = Release|Any CPU
+		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

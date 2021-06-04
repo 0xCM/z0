@@ -9,8 +9,6 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
-    using static Part;
-
     public static class XCmd
     {
         public static CmdResult<C,P> Success<C,P>(this C cmd, P payload)

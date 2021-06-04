@@ -29,14 +29,10 @@ namespace Z0
 
         [Op]
         public static ITextBuffer buffer()
-            => TextBuffers.create();
+            => TextTools.buffer();
 
         [Op]
         public static ITextBuffer buffer(uint capacity)
-            => TextBuffers.create(capacity);
-
-        [Op]
-        public static ITextBuffer buffer(StringBuilder dst)
-            => TextBuffers.create(dst);
+            => TextTools.buffer(capacity);
     }
 }

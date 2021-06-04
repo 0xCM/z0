@@ -10,6 +10,7 @@ namespace Z0
 
     using static Root;
     using static Rules;
+    using static core;
 
     [ApiHost]
     public readonly struct DataParser
@@ -219,6 +220,59 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Outcome parse<T>(string src, out Setting<T> dst, char delimiter = Chars.Colon)
-            => Settings.parse(src, out dst, delimiter);
-    }
+        {
+            dst = Settings.empty<T>();
+            if(nonempty(src))
+            {
+                var name = EmptyString;
+                var input = src;
+                if(TextQuery.contains(src, delimiter))
+                {
+                    name = src.LeftOfFirst(delimiter);
+                    input = src.RightOfFirst(delimiter);
+                }
+
+                if(typeof(T) == typeof(string))
+                {
+                    dst = Settings.define(name, generic<T>(input));
+                    return true;
+                }
+                else if (typeof(T) == typeof(bool))
+                {
+                    if(DataParser.parse(input, out bool value))
+                    {
+                        dst = Settings.define(name, generic<T>(value));
+                        return true;
+                    }
+                }
+                else if(typeof(T) == typeof(bit))
+                {
+                    if(DataParser.parse(input, out bit u1))
+                    {
+                        dst = Settings.define(name, generic<T>(u1));
+                        return true;
+                    }
+                }
+                else if(DataParser.numeric(input, out T g))
+                {
+                    dst = Settings.define(name, g);
+                    return true;
+                }
+                else if(typeof(T).IsEnum)
+                {
+                    if(Enums.parse(typeof(T), src, out object o))
+                    {
+                        dst = Settings.define(name, (T)o);
+                        return true;
+                    }
+                }
+                else if(src.Length == 1 && typeof(T) == typeof(char))
+                {
+                    dst = Settings.define(name, generic<T>(name[0]));
+                    return true;
+                }
+            }
+            return false;
+        }
+     }
 }

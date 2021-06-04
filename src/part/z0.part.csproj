@@ -18,6 +18,7 @@
     <ProjectReference Include="$(Resources)" />
     <ProjectReference Include="$(ApiCore)" />
     <ProjectReference Include="$(Cells)" />
+    <ProjectReference Include="$(Commands)" />
   </ItemGroup>
 
 </Project>

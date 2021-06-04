@@ -98,12 +98,12 @@ namespace Z0.Asm
         void CheckSettingsParser()
         {
             var a = "A:603";
-            Settings.parse(a, out Setting<ushort> _a);
+            DataParser.parse(a, out Setting<ushort> _a);
             Wf.Row(_a);
 
 
             var b = "B:true";
-            Settings.parse(b, out Setting<bool> _b);
+            DataParser.parse(b, out Setting<bool> _b);
             Wf.Row(_b);
         }
 
@@ -581,9 +581,13 @@ namespace Z0.Asm
             }
         }
 
+        [Op]
+        public static CmdTypeInfo[] cmdtypes(IWfRuntime wf)
+            => wf.Components.Types().Tagged<CmdAttribute>().Select(Cmd.cmdtype).ToArray();
+
         public void ShowCommands()
         {
-            var models = @readonly(Cmd.cmdtypes(Wf));
+            var models = @readonly(cmdtypes(Wf));
             var count = models.Length;
             for(var i=0; i<count; i++)
             {

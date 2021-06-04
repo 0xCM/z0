@@ -81,6 +81,7 @@ public enum PartId : ulong
     [Symbol("check")]
     Check = 19,
 
+    [Symbol("res")]
     Res = 20,
 
     [Symbol("files")]
@@ -94,6 +95,12 @@ public enum PartId : ulong
 
     [Symbol("blocks")]
     Blocks = 24,
+
+    [Symbol("commands")]
+    Commands = 25,
+
+
+
 
     [Symbol("gmath")]
     GMath = 34,

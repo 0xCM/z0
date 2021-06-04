@@ -26,7 +26,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Concat(Seq.left(Kind), text.delimit(Data, Delimiter, 0), Seq.right(Kind));
+            => string.Concat(Seq.left(Kind), TextTools.delimit(Data, Delimiter, 0), Seq.right(Kind));
 
         public override string ToString()
             => Format();

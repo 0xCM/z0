@@ -25,7 +25,7 @@ namespace Z0
         {
             Data = src;
             Delimiter = delimiter;
-            Render = text.delimit;
+            Render = TextTools.delimit;
             CellPad = pad;
         }
 

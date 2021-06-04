@@ -84,7 +84,7 @@ namespace Z0
             for(var i=0; i<kSrc; i++)
             {
                 ref readonly var match = ref skip(matches,i);
-                if(ToolCmd.prefix(src) == match)
+                if(ArgPrefix.define(src) == match)
                 {
                     dst = match;
                     return true;

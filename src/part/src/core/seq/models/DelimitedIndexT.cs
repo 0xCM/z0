@@ -10,10 +10,8 @@ namespace Z0
     using static Root;
     using static FormatFunctions;
 
-
     partial class XTend
     {
-
         public static DelimitedIndex<T> Delimited<T>(this T[] src, char delimiter = Chars.Comma)
             => new DelimitedIndex<T>(src, delimiter);
     }
@@ -34,7 +32,7 @@ namespace Z0
         {
             Data = src;
             Delimiter = delimiter;
-            Render = text.delimit;
+            Render = TextTools.delimit;
             CellPad = pad;
         }
 
@@ -43,7 +41,7 @@ namespace Z0
         {
             Data = src;
             Delimiter = delimiter;
-            Render = text.delimit;
+            Render = TextTools.delimit;
             CellPad = pad;
         }
 

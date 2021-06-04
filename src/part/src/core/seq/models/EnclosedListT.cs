@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct EnclosedList<T> : ITextual
     {
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Concat(Seq.left(Kind), text.delimit(Data, Delimiter), Seq.right(Kind));
+            => string.Concat(Seq.left(Kind), TextTools.delimit(Data.View, Delimiter), Seq.right(Kind));
 
         public override string ToString()
             => Format();
