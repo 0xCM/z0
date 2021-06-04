@@ -22,6 +22,11 @@ namespace Z0
         public static ref T first<T>(Span<T> src)
             => ref GetReference<T>(src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T first<T>(Span<byte> src)
+            where T : struct
+                => ref first(recover<T>(src));
+
         /// <summary>
         /// Returns a reference to the location of the first element
         /// </summary>
@@ -39,10 +44,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T first<T>(ReadOnlySpan<T> src)
             => ref GetReference<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T first<T>(Span<byte> src)
-            => ref @as<byte,T>(first(src));
 
         /// <summary>
         /// Reads the first T-cell from a bytespan

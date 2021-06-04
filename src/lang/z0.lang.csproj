@@ -8,6 +8,7 @@
       <ProjectReference Include="$(Core)" />
       <ProjectReference Include="$(External)" />
       <ProjectReference Include="$(Part)" />
+      <ProjectReference Include="$(Cells)" />
 
   </ItemGroup>
 
