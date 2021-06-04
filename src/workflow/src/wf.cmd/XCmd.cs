@@ -11,20 +11,10 @@ namespace Z0
 
     public static class XCmd
     {
-        public static CmdResult<C,P> Success<C,P>(this C cmd, P payload)
-            where C : struct, ICmd<C>
-                => new CmdResult<C,P>(cmd,true,payload);
 
-        public static  CmdResult<C,P> ToResult<C,P>(this C spec, Outcome<P> outcome)
-            where C : struct, ICmd<C>
-                => Cmd.result(spec, outcome.Ok, outcome.Data, outcome.Message);
         public static Task<CmdResult> Dispatch<T>(this T cmd, IWfRuntime wf)
             where T : struct, ICmd
                 => wf.Dispatch(cmd);
-
-        public static Task Continue<T>(this Task<T> src, Action<T> @continue)
-            where T : struct, ICmd
-                => src.ContinueWith(t => @continue(t.Result));
 
         public static CmdResult RunTask<T>(this T cmd, IWfRuntime wf)
             where T : struct, ICmd
@@ -51,6 +41,6 @@ namespace Z0
 
         public static string Format<C>(this C src)
             where C : struct, ICmd<C>
-                => CmdFormat.format(src);
+                => CmdRender.format(src);
     }
 }

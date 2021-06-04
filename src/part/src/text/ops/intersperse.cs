@@ -20,8 +20,7 @@ namespace Z0
         [Op]
         public static string intersperse(string src, char c)
         {
-            var dst = text.build();
-
+            var dst = TextTools.buffer();
             var input = span(src);
             var count = input.Length;
             for(var i=0u; i< count; i++)
@@ -30,7 +29,7 @@ namespace Z0
                 dst.Append(c);
             }
 
-            return dst.ToString();
+            return dst.Emit();
         }
 
         /// <summary>
@@ -41,13 +40,13 @@ namespace Z0
         [Op]
         public static string intersperse(string src, string sep)
         {
-            var dst = text.build();
+            var dst = TextTools.buffer();
             foreach(var item in src)
             {
                 dst.Append(item);
                 dst.Append(sep);
             }
-            return dst.ToString();
+            return dst.Emit();
         }
 
         [Op]
@@ -55,7 +54,7 @@ namespace Z0
         {
             var count = src.Length;
             var j=0;
-            var buffer = text.buffer();
+            var buffer = TextTools.buffer();
             for(var i=0; i<count; i++)
             {
                 buffer.Append(src[i]);
@@ -73,7 +72,7 @@ namespace Z0
         /// <param name="delimiter">The delimiter to use</param>
         public static string intersperse(ReadOnlySpan<string> fields, char delimiter = FieldDelimiter)
         {
-            var dst = build();
+            var dst = TextTools.buffer();
             var count = fields.Length;
             for(byte i=0; i<count; i++)
             {

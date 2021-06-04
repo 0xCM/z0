@@ -13,12 +13,6 @@ namespace Z0
 
     partial struct TextQuery
     {
-        [MethodImpl(Inline)]
-        public static bool test<T,S>(S symbol, T test = default)
-            where S : unmanaged
-            where T : unmanaged, ISymbolicQuery<T,S>
-                => test.Check(symbol);
-
         [MethodImpl(Inline), Op]
         public static bool test(char src, OneOf<char> match)
             => contains(match.Elements, src);
@@ -30,7 +24,7 @@ namespace Z0
             var elements = match.Elements.View;
             for(var i=0; i<count; i++)
             {
-                if(text.equals(skip(elements,i), src))
+                if(string.Equals(skip(elements,i), src))
                 {
                     index = i;
                     return true;

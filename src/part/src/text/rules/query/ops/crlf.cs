@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bit crlf(char a, char b)
+        public static bool crlf(char a, char b)
             => cr(a) && lf(b);
     }
 }

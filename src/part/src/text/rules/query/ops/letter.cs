@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit letter(C src)
+        public static bool letter(C src)
             => lowercase(src) || uppercase(src);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit letter(char src)
+        public static bool letter(char src)
             => letter((C)src);
     }
 }

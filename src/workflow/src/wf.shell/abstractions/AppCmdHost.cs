@@ -18,7 +18,7 @@ namespace Z0
 
         public CmdResult Run(K kind)
         {
-            if(WfCmd.find(kind, out var cmd))
+            if(Cmd.find(kind, out var cmd))
                 return Wf.Router.Dispatch(cmd.Enclosed);
             else
                 return Cmd.fail(cmd.Enclosed);
@@ -51,7 +51,7 @@ namespace Z0
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var method = ref skip(view,i);
-                    index.Include(WfCmd.assign((K)method.Tag.Key, (Action)method.Method.CreateDelegate(typeof(Action),this)));
+                    index.Include(Cmd.assign((K)method.Tag.Key, (Action)method.Method.CreateDelegate(typeof(Action),this)));
                 }
             }
         }

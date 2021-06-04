@@ -11,7 +11,7 @@ namespace Z0
 
     using C = AsciCharCode;
 
-    partial class text
+    partial struct TextQuery
     {
         /// <summary>
         /// Determines whether a specified <see cref='C'/> code is between a specified <see cref='C'/> minimum and <see cref='C'/> maximum
@@ -42,7 +42,7 @@ namespace Z0
             {
                 var i2 = src.IndexOf(right, i1 + 1);
                 if(i2 != -1)
-                    result = substring(src,i1 + 1, i2 - i1 - 1);
+                    result = sys.substring(src,i1 + 1, i2 - i1 - 1);
             }
             return result;
         }

@@ -29,7 +29,7 @@ namespace Z0
             get => api.state(this, flag);
         }
 
-        public T Value
+        public T State
         {
             [MethodImpl(Inline)]
             get => Data;

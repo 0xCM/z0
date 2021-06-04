@@ -12,15 +12,14 @@ namespace Z0
     using AC = AsciChar;
     using CC = AsciCharCode;
 
-
     partial struct TextQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit lbrace(char src)
+        public static bool lbrace(char src)
             => AC.LBrace == (AC)src;
 
         [MethodImpl(Inline), Op]
-        public static bit lbrace(CC src)
+        public static bool lbrace(CC src)
             => AC.LBrace == (AC)src;
     }
 }

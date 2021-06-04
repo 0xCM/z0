@@ -17,7 +17,7 @@ namespace Z0
         ToolCmdArgs Args {get;}
 
         string ITextual.Format()
-            => Cmd.format(this);
+            => CmdRender.format(this);
     }
 
     [Free]

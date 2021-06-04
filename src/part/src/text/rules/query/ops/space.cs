@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit space(CC src)
+        public static bool space(CC src)
             => src == CC.Space;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit space(char src)
+        public static bool space(char src)
             => space((CC)src);
     }
 }

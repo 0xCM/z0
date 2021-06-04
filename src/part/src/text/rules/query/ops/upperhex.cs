@@ -14,7 +14,7 @@ namespace Z0
     partial struct TextQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit upperhex(char src)
+        public static bool upperhex(char src)
             => ((XF)src >= XF.FirstNumber && (XF)src <= XF.LastNumber)
             || ((XF)src >= XF.FirstLetterUp && (XF)src <= XF.LastLetterUp);
     }

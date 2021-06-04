@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     using static Rules;
-    using static memory;
+    using static core;
     using static TextRules;
 
     partial struct TextQuery
@@ -21,9 +21,9 @@ namespace Z0
         /// <param name="left">The left boundary</param>
         /// <param name="right">The right boundary</param>
         [Op]
-        public static bit fenced(string src, char left, char right)
+        public static bool fenced(string src, char left, char right)
         {
-            if(text.nonempty(src))
+            if(nonempty(src))
             {
                 var leftIndex = -1;
                 var rightIndex = -1;
@@ -38,7 +38,7 @@ namespace Z0
         [Op]
         public static bool fenced(string src, Fence<char> fence, out Pair<int> location)
         {
-            location = root.pair((int)NotFound,(int)NotFound);
+            location = pair((int)NotFound,(int)NotFound);
             if(text.nonempty(src))
             {
                 var chars = span(src);
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="right">The right marker</param>
         /// <param name="compare">Th comparison type</param>
         [Op]
-        public static bit fenced(string src, string left, string right)
+        public static bool fenced(string src, string left, string right)
             => src.StartsWith(left, InvariantCulture) && src.EndsWith(right, InvariantCulture);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="fence">The fence definition</param>
         [Op]
-        public static bit fenced(string src, Fence<char> fence)
+        public static bool fenced(string src, Fence<char> fence)
             => fenced(src, fence.Left, fence.Right);
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="fence">The fence definition</param>
         [Op]
-        public static bit fenced(string src, Fence<string> fence)
+        public static bool fenced(string src, Fence<string> fence)
             => fenced(src, fence.Left, fence.Right);
     }
 }

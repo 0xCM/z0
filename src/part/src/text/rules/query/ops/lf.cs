@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bit lf(char c)
+        public static bool lf(char c)
             => (ushort)AsciChar.LF == (ushort)c;
     }
 }

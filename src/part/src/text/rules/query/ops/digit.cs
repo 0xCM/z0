@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit digit(C src)
+        public static bool digit(C src)
             => contains(C.d0, C.d9, src);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit digit(char src)
+        public static bool digit(char src)
             => digit((C)src);
     }
 }

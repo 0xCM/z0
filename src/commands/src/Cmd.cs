@@ -8,14 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
+    using static Root;
+    using static core;
+
     [ApiHost]
-    public readonly struct WfCmd
+    public readonly partial struct Cmd
     {
+        const NumericKind Closure = UnsignedInts;
+
         [Op]
         public static void assign(string name, Action handler)
         {
             if(!_Lookup.TryAdd(name, handler))
-                root.@throw(string.Format("{0}:Unable to include {1}", nameof(WfCmd), name));
+                @throw(string.Format("{0}:Unable to include {1}", nameof(Cmd), name));
         }
 
         public static CmdExec<K> assign<K>(K kind, Action handler)

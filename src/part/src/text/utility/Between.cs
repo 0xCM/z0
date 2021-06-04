@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-
     partial class XText
     {
         [TextUtility]
         public static string Between(this string src, char left, char right)
-            => text.between(src, left, right);
+            => TextQuery.between(src, left, right);
     }
 }

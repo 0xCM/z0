@@ -10,7 +10,6 @@ namespace Z0
     using System.Text;
     using System.Threading.Tasks;
 
-
     public interface ITextWriter
     {
         IFormatProvider FormatProvider {get;}

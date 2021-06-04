@@ -16,14 +16,21 @@ namespace Z0
     {
         public const byte Width = 8;
 
-        public K Value {get;}
+        K Data;
+
 
         [MethodImpl(Inline)]
         public Flags8(K value)
-            => Value = value;
+            => Data = value;
 
         public BitWidth DataWidth
             => Width;
+
+        public K State
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public bit this[K flag]
         {
@@ -37,6 +44,10 @@ namespace Z0
             get => api.state(this, flag);
         }
 
+        [MethodImpl(Inline)]
+        internal void Update(K state)
+            => Data = state;
+
         public string Format()
             => api.format(this);
 
@@ -49,6 +60,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator K(Flags8<K> src)
-            => src.Value;
+            => src.Data;
     }
 }

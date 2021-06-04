@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit hex(char src)
+        public static bool hex(char src)
             => lowerhex(src) || upperhex(src);
     }
 }

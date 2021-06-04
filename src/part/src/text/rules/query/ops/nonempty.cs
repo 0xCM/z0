@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static bit nonempty(string src)
+        public static bool nonempty(string src)
             => !string.IsNullOrEmpty(src);
     }
 }

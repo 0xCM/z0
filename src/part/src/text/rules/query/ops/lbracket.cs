@@ -15,11 +15,11 @@ namespace Z0
     partial struct TextQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit lbracket(char src)
+        public static bool lbracket(char src)
             => AC.LBracket == (AC)src;
 
         [MethodImpl(Inline), Op]
-        public static bit lbracket(CC src)
+        public static bool lbracket(CC src)
             => AC.LBracket == (AC)src;
     }
 }

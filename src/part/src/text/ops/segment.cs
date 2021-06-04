@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial class text
     {
@@ -22,7 +23,7 @@ namespace Z0
         {
             var length = i1 - i0 + 1;
             if(length < 0  || length - i0 > src.Length)
-                core.@throw($"Cannot select the segment [{i0},{i1}] from the source string {src}");
+                @throw($"Cannot select the segment [{i0},{i1}] from the source string {src}");
             return sys.substring(src, i0, length);
         }
 

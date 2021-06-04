@@ -16,7 +16,7 @@ namespace Z0
             => string.Format(RP.SSx5,
                 FieldDelimiter,
                 Chars.LBrace,
-                text.concat(src.Select(x => TextTools.delimit(src, FieldDelimiter))),
+                string.Concat(src.Select(x => TextTools.delimit(src, FieldDelimiter))),
                 Chars.RBrace,
                 FieldDelimiter
                 );

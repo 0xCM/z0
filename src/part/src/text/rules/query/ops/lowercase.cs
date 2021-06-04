@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit lowercase(C src)
+        public static bool lowercase(C src)
             => contains(F.MinLowerCode, F.MaxLowerCode, src);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit lowercase(char src)
+        public static bool lowercase(char src)
             => lowercase((C)src);
     }
 }

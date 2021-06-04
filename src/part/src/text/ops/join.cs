@@ -27,7 +27,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string join<T>(string sep, ReadOnlySpan<T> src)
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
@@ -35,7 +35,7 @@ namespace Z0
                     dst.Append(sep);
                 dst.AppendItem(skip(src,i));
             }
-            return dst.ToString();
+            return dst.Emit();
         }
 
         [Op, Closures(Closure)]

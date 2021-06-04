@@ -9,14 +9,12 @@ namespace Z0
 
     using static Root;
 
-    using C = AsciCharCode;
     using XF = HexSymFacet;
-    using AC = AsciChar;
 
     partial struct TextQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit lowerhex(char src)
+        public static bool lowerhex(char src)
             => ((XF)src >= XF.FirstNumber && (XF)src <= XF.LastNumber)
             || ((XF)src >= XF.FirstLetterLo && (XF)src <= XF.LastLetterLo);
 

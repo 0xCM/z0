@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => CmdRender.format(this);
 
         public override string ToString()
             => Format();

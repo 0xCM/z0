@@ -17,11 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="code">The asci code</param>
         [MethodImpl(Inline), Op]
-        public static string @string(AsciCharCode code)
-        {
-            const string buffer = " ";
-            edit16c(buffer) = (char)code;
-            return buffer;
-        }
+        public static unsafe string @string(AsciCharCode code)
+            => new string(gptr<char>((char)code));
+
     }
 }

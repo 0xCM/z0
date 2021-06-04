@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static TextRules;
+    using static core;
 
     partial struct TextQuery
     {
@@ -17,9 +18,9 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="match">The match text</param>
         [Op]
-        public static bit tail(string src, string match)
+        public static bool tail(string src, string match)
         {
-            if(text.nonempty(src) && text.nonempty(match))
+            if(nonempty(src) && nonempty(match))
                 return src.EndsWith(match, InvariantCulture);
             return false;
         }
@@ -30,9 +31,9 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="match">The match text</param>
         [Op]
-        public unsafe static bit tail(string src, char match)
+        public unsafe static bool tail(string src, char match)
         {
-            var len = text.length(src);
+            var len = src?.Length ?? 0;
             if(len != 0)
                 return src[len - 1] == match;
             else

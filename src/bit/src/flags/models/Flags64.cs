@@ -43,7 +43,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public K Value
+        public K State
         {
             [MethodImpl(Inline)]
             get => Data;

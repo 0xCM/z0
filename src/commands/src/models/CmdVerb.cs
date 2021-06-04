@@ -9,11 +9,17 @@ namespace Z0
 
     using static Root;
 
-    partial struct TextQuery
+    public readonly struct CmdVerb
     {
-        [MethodImpl(Inline), Op]
-        public static bool newline(char c)
-            => (ushort)AsciCharCode.LF == (ushort)c
-            || (ushort)AsciCharCode.CR == (ushort)c;
+        public StringAddress Name {get;}
+
+        public StringAddress Symbol {get;}
+
+        [MethodImpl(Inline)]
+        public CmdVerb(StringAddress name, StringAddress symbol)
+        {
+            Name = name;
+            Symbol = symbol;
+        }
     }
 }

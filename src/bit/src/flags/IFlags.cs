@@ -12,7 +12,7 @@ namespace Z0
     public interface IFlags<E> : IFlags
         where E : unmanaged
     {
-        E Value {get;}
+        E State {get;}
 
         bit this[E flag] {get;}
     }

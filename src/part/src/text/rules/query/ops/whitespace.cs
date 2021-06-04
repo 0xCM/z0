@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit whitespace(C src)
+        public static bool whitespace(C src)
             => contains(AsciCodes.whitespace(), src);
 
         /// <summary>
@@ -26,11 +26,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit whitespace(char src)
+        public static bool whitespace(char src)
             => whitespace((C)src);
 
         [MethodImpl(Inline), Op]
-        public static bit whitespace2(char c)
+        public static bool whitespace2(char c)
             => space(c) || tab(c) || newline(c) || vtab(c);
     }
 }

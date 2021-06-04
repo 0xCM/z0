@@ -9,10 +9,15 @@ namespace Z0
 
     using static Root;
 
-    partial class text
+    public struct CmdFlags<K>
+        where K : unmanaged
     {
-        [MethodImpl(Inline), Op]
-        public static JsonDoc json(TextBlock content)
-            => new JsonDoc(content);
+        Flags<K> State;
+
+        public bit this[K flag]
+        {
+            [MethodImpl(Inline)]
+            get => State[flag];
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     partial struct TextQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit @decimal(char c)
+        public static bool @decimal(char c)
             => (DecimalSymFacet)c >= DecimalSymFacet.First && (DecimalSymFacet)c <= DecimalSymFacet.Last;
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
             [Op]
             public static string lines(params string[] src)
             {
-                var dst = text.buffer();
+                var dst = TextTools.buffer();
                 foreach(var item in src)
                     dst.AppendLine(item.Trim());
                 return dst.ToString();

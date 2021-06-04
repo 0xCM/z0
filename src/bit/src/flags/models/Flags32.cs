@@ -16,11 +16,11 @@ namespace Z0
     {
         public const byte Width = 32;
 
-        public K Value {get;}
+        public K State {get;}
 
         [MethodImpl(Inline)]
         public Flags32(K value)
-            => Value = value;
+            => State = value;
         public BitWidth DataWidth
             => Width;
 
@@ -48,6 +48,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator K(Flags32<K> src)
-            => src.Value;
+            => src.State;
     }
 }

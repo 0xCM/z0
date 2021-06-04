@@ -15,11 +15,11 @@ namespace Z0
     partial struct TextQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit lparen(char c)
+        public static bool lparen(char c)
             => AC.LParen == (AC)c;
 
         [MethodImpl(Inline), Op]
-        public static bit lparen(CC c)
+        public static bool lparen(CC c)
             => AC.LParen == (AC)c;
     }
 }

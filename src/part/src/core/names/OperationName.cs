@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Names;
 
@@ -32,13 +33,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => sys.empty(Data);
+            get => empty(Data);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => sys.nonempty(Data);
+            get => nonempty(Data);
         }
 
         public string Content

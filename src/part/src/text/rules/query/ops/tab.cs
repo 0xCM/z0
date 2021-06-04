@@ -15,11 +15,11 @@ namespace Z0
     partial struct TextQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit tab(char c)
+        public static bool tab(char c)
             => AC.Tab == (AC)c;
 
         [MethodImpl(Inline), Op]
-        public static bit tab(CC c)
+        public static bool tab(CC c)
             => AC.Tab == (AC)c;
     }
 }

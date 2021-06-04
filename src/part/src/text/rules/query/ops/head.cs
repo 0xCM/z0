@@ -17,9 +17,9 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="match">The match text</param>
         [Op]
-        public static bit head(string src, string match)
+        public static bool head(string src, string match)
         {
-            if(text.nonempty(src) && text.nonempty(match))
+            if(nonempty(src) && nonempty(match))
                 return src.StartsWith(match, InvariantCulture);
             return false;
         }
@@ -30,9 +30,9 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="match">The match text</param>
         [Op]
-        public static bit head(string src, char match)
+        public static bool head(string src, char match)
         {
-            if(text.nonempty(src))
+            if(nonempty(src))
                 return src[0] == match;
             return false;
         }
