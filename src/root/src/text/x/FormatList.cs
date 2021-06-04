@@ -6,8 +6,10 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
 
-    partial class XText
+
+    partial class XTend
     {
         [TextUtility, Closures(Closure)]
         public static string FormatList<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma, int offset = 0, int pad = 0, bool bracketed = true)
@@ -16,7 +18,7 @@ namespace Z0
             if(count == 0)
                 return string.Empty;
 
-            var sb = text.build();
+            var sb = new StringBuilder();
             for(var i = offset; i<count; i++)
             {
                 var item =$"{src[i]}";
@@ -30,9 +32,12 @@ namespace Z0
             return bracketed ? $"[{sb.ToString()}]" : sb.ToString();
         }
 
+        static ReadOnlySpan<T> RO<T>(Span<T> src)
+            => src;
+
         [TextUtility]
         public static string FormatList<T>(this Span<T> src, char sep = Chars.Comma, int offset = 0, int pad = 0, bool bracketed = true)
-            => src.ReadOnly().FormatList(sep, offset, pad, bracketed);
+            => RO(src).FormatList(sep, offset, pad, bracketed);
 
         [TextUtility]
         public static string FormatList<T>(this T[] src, char sep = Chars.Comma, int offset = 0, int pad = 0, bool bracketed = true)

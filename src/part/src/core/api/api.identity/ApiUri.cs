@@ -22,8 +22,8 @@ namespace Z0
         public static PrimalIdentity primal(Type src)
             => src.IsSystemDefined() ?
                (NumericKinds.test(src)
-               ? new PrimalIdentity(src.NumericKind(), MethodDisplaySig.keyword(src))
-               : new PrimalIdentity(MethodDisplaySig.keyword(src))
+               ? new PrimalIdentity(src.NumericKind(), CsKeywords.keyword(src))
+               : new PrimalIdentity(CsKeywords.keyword(src))
                ) : PrimalIdentity.Empty;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
             if(src.HasImm && byte.TryParse(src.IdentityText.RightOfLast(IDI.Imm), out var immval))
                 return immval;
             else
-                return root.none<byte>();
+                return Option.none<byte>();
         }
 
         [Op]
@@ -71,20 +71,20 @@ namespace Z0
         public static ParseResult<ApiHostUri> host(string src)
         {
             var failure = ParseResult.unparsed<ApiHostUri>(src);
-            if(text.blank(src))
+            if(minicore.blank(src))
                 return failure;
 
             var parts = src.SplitClean(ApiUriDelimiters.UriPathSep);
             var count = parts.Length;
             if(count != 2)
-                return failure.WithReason(text.concat("Component count ", count," != ", 2));
+                return failure.WithReason(string.Concat("Component count ", count," != ", 2));
 
             Enum.TryParse(parts[0], true, out PartId owner);
             if(owner == 0)
                 return failure.WithReason("Invalid part");
 
             var host = parts[1];
-            if(text.blank(host))
+            if(minicore.blank(host))
                 return failure.WithReason("Host unspecified");
 
             return ParseResult.parsed(src, new ApiHostUri(owner, host));
@@ -163,7 +163,6 @@ namespace Z0
         [Op]
         public static string HostUri(Type host)
             => $"{PartName.from(host)}{UriPathSep}{host.Name}";
-
 
         /// <summary>
         /// Builds the *canonical* operation uri

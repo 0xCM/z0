@@ -122,6 +122,6 @@ namespace Z0
         public static OpIdentity build<W,T>(string opname, W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => build(opname, w.TypeWidth, Numeric.kind<T>(), true);
+                => build(opname, w.TypeWidth, NumericKinds.kind<T>(), true);
     }
 }

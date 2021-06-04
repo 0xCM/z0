@@ -131,7 +131,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Cell128 f128V(W128 w)
-            => Source.ConstPair<ulong>();
+            => Source.Cell(w128);
 
         [MethodImpl(Inline)]
         public Cell256 Fixed(W256 w)

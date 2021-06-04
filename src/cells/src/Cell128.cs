@@ -180,10 +180,6 @@ namespace Z0
             => new Cell128(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Cell128(in ConstPair<ulong> x)
-            => new Cell128(x.Left, x.Right);
-
-        [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<byte> x)
             => @as<Vector128<byte>,Cell128>(x);
 

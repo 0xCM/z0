@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static ApiUriDelimiters;
 
-    [ApiHost(ApiNames.SFx, true)]
+    [ApiHost]
     public readonly partial struct SFx
     {
         [Op]

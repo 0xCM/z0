@@ -51,7 +51,7 @@ namespace Z0
         where T : unmanaged
     {
         NumericKind IVectorKind.CellKind
-            => Numeric.kind<T>();
+            => NumericKinds.kind<T>();
 
         /// <summary>
         /// The reified vector type as determined by kind facets

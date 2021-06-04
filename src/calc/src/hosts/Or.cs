@@ -10,14 +10,13 @@ namespace Z0
 
     using static Part;
     using static SFx;
-    using static ApiClasses;
 
-    using K = ApiClasses;
+    using K = ApiClasses.Or;
 
     partial struct CalcHosts
     {
         [Closures(Integers), Or]
-        public readonly struct Or<T> : IBinaryOp<T>, IBinarySpanOp<T>, IClassified<Or,T>
+        public readonly struct Or<T> : IBinaryOp<T>, IBinarySpanOp<T>, IClassified<K,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -30,7 +29,7 @@ namespace Z0
         }
 
         [Closures(Integers), Or]
-        public readonly struct VOr128<T> : IBinaryOp128D<T>, IClassified<Or,T>
+        public readonly struct VOr128<T> : IBinaryOp128D<T>, IClassified<K,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -43,7 +42,7 @@ namespace Z0
         }
 
         [Closures(Integers), Or]
-        public readonly struct VOr256<T> : IBinaryOp256D<T>, IClassified<Or,T>
+        public readonly struct VOr256<T> : IBinaryOp256D<T>, IClassified<K,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -56,7 +55,7 @@ namespace Z0
         }
 
         [Closures(Integers), Or]
-        public readonly struct Or128<T> : IBlockedBinaryOp128<T>, IClassified<Or,T>
+        public readonly struct Or128<T> : IBlockedBinaryOp128<T>, IClassified<K,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -65,7 +64,7 @@ namespace Z0
         }
 
         [Closures(Integers), Or]
-        public readonly struct Or256<T> : IBlockedBinaryOp256<T>, IClassified<Or,T>
+        public readonly struct Or256<T> : IBlockedBinaryOp256<T>, IClassified<K,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

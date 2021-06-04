@@ -13,11 +13,20 @@ namespace Z0
     using static core;
 
     using D = CellDelegates;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [ApiHost]
     public readonly partial struct CellOps
     {
         const NumericKind Closure = Integers;
+
+
+        [Free]
+        public interface IBinaryCellOp<T>
+            where T : unmanaged, IDataCell<T>
+        {
+
+        }
 
         /// <summary>
         /// Applies a unary operator to an input sequence and deposits the result to a caller-supplied target

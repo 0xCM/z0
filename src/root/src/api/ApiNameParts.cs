@@ -2,20 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using static CsKeywords;
+using static Z0.CsKeywords;
 
 public readonly struct ApiNameParts
 {
-    public const string @static = Static;
-
-    public const string @fixed = Fixed;
-
-    public const string @enum = Enum;
-
-    public const string @struct = Struct;
-
-    public const string @case = Case;
-
     public const string api = nameof(api);
 
     public const string asm = nameof(asm);

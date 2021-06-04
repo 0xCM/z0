@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Root;
 
-    [ApiHost(ApiNames.LinqXPress, true)]
+    [ApiHost]
     public partial class LinqXPress
     {
         const NumericKind Closure = UnsignedInts;

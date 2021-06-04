@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Specifies host-independent api member identity
@@ -54,9 +54,9 @@ namespace Z0
 
         public OpIdentity(string data, string name, string suffix, bool generic, bool imm, string[] components)
         {
-            IdentityText = text.trim(Safe(data));
-            Name = text.trim(name);
-            Suffix = text.trim(suffix);
+            IdentityText = Safe(data).Trim();
+            Name = name.Trim();
+            Suffix = suffix.Trim();
             IsGeneric = generic;
             HasImm = imm;
             Components = components;
@@ -70,26 +70,26 @@ namespace Z0
             Suffix = EmptyString;
             IsGeneric = false;
             HasImm = false;
-            Components = sys.empty<string>();
+            Components = Array.Empty<string>();
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(IdentityText);
+            get => minicore.empty(IdentityText);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(IdentityText);
+            get => minicore.nonempty(IdentityText);
         }
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(IdentityText);
+            => IdentityText.GetHashCode();
 
         public bool Equals(OpIdentity src)
-            => text.equals(IdentityText, src.IdentityText);
+            => string.Equals(IdentityText, src.IdentityText, NoCase);
 
         public override bool Equals(object src)
             => src is OpIdentity x && Equals(x);

@@ -38,7 +38,7 @@ namespace Z0
 
                 if(src.IsSystemDefined())
                 {
-                    var kw = MethodDisplaySig.keyword(src);
+                    var kw = CsKeywords.keyword(src);
                     return string.IsNullOrWhiteSpace(kw) ? src.Name : kw;
                 }
 

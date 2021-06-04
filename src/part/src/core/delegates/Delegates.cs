@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq.Expressions;
 
-    using static Part;
+    using static Root;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -27,7 +27,7 @@ namespace Z0
             var args = src.ParameterTypes();
             return src.IsAction()
                 ? Expression.GetActionType(args)
-                : Expression.GetFuncType(Arrays.concat(args, memory.array(src.ReturnType)));
+                : Expression.GetFuncType(Arrays.concat(args, core.array(src.ReturnType)));
         }
 
         /// <summary>

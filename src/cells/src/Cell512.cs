@@ -77,7 +77,7 @@ namespace Z0
                 => new Cell512(src.As<ulong>());
 
         public string Format()
-            => Arrays.from(X0,X1).FormatList();
+            => sys.array(X0, X1).FormatList();
 
         [MethodImpl(Inline)]
         public bool Equals(Cell512 src)
