@@ -58,5 +58,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(string src)
             => create(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator StringAddress(Name src)
+            => create(src.Content);
+
     }
 }

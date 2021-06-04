@@ -18,8 +18,27 @@ namespace Z0
         {
             dst = default;
             var buffer = bytes(dst);
-            BitPack.pack(src, offset, ref first(buffer));
+            pack(src, offset, ref first(buffer));
             return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void pack(ReadOnlySpan<byte> src, uint offset, ref byte dst)
+        {
+            const byte M = 8;
+            var count = src.Length;
+            var kIn = (uint)(count - offset);
+            var kOut = kIn/M + (kIn % M == 0 ? 0 : 1);
+            for(int i=0, j=0; j<kOut; i+=M, j++)
+            {
+                ref var b = ref seek(dst, j);
+                for(var k=0; k<M; k++)
+                {
+                    var srcIx = i + k + offset;
+                    if(srcIx < kIn && skip(src, srcIx) != 0)
+                        b |= (byte)(1 << k);
+                }
+            }
         }
 
         /// <summary>
@@ -32,7 +51,7 @@ namespace Z0
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static T pack<S,T>(ReadOnlySpan<S> src, N8 mod, uint offset, T t = default)
+        public static T pack<S,T>(ReadOnlySpan<S> src, N8 mod, uint offset)
             where S : unmanaged
             where T : unmanaged
                 => pack_u<S,T>(src, mod, offset);
@@ -47,7 +66,7 @@ namespace Z0
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static T pack<S,T>(Span<S> src, N8 mod, uint offset, T t = default)
+        public static T pack<S,T>(Span<S> src, N8 mod, uint offset)
             where S : unmanaged
             where T : unmanaged
                 => pack_u<S,T>(src.ReadOnly(), mod, offset);

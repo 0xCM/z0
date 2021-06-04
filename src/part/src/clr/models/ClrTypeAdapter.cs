@@ -33,10 +33,10 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
-        public ClrTypeName Name
+        public string Name
         {
             [MethodImpl(Inline)]
-            get => Definition;
+            get => Definition.Name;
         }
 
         public ReadOnlySpan<ClrTypeAdapter> NestedTypes

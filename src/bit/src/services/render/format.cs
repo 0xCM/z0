@@ -79,7 +79,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string format<T>(T src, in BitFormat config)
             where T : struct
-                => BitRender.format(bytes(src), config);
+                => format(bytes(src), config);
 
         [Op, Closures(Closure)]
         public static string format<T>(ReadOnlySpan<T> src, BitFormat? config = null)
@@ -111,6 +111,19 @@ namespace Z0
                 return format64(src);
             else
                 return EmptyString;
+        }
+
+        /// <summary>
+        /// Formats a named bitfield segment
+        /// </summary>
+        /// <param name="value">The field value</param>
+        /// <typeparam name="T">The field value type</typeparam>
+        [Op, Closures(Closure)]
+        public static string format<T>(T src, string name, int? zpad = null)
+            where T : unmanaged
+        {
+            var config = BitFormat.limited((uint)Widths.effective(src), zpad);
+            return string.Concat(name, Chars.Colon, formatter<T>(config).Format(src));
         }
 
         [Op]

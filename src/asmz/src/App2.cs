@@ -171,25 +171,12 @@ namespace Z0.Asm
             }
         }
 
-        // void RunExtractWorkflow()
-        // {
-        //     var extract = ApiExtractWorkflow.create(Wf);
-        //     var pdb = false;
-        //     var packs = Wf.ApiPacks();
-        //     var pack = packs.Create(ApiPackSettings.init(Db.CapturePackRoot(), core.now()));
-        //     var collection = extract.Run(pack);
-        //     packs.LinkCurrent();
-        //     if(pdb)
-        //         IndexPdbSymbols(collection.ResolvedParts, pack.Root + FS.file("symbols", FS.Log));
-        // }
-
         public void LoadHexPacks()
         {
             var svc = Wf.ApiPacks();
             var pack = svc.List().Last;
             var hex = Wf.ApiHexPacks();
             var packs = hex.LoadParsed(pack.HexPackRoot());
-
         }
 
         public void RunOldXedWf()
@@ -668,7 +655,8 @@ namespace Z0.Asm
                 ref readonly var encoded = ref src.Encoded;
                 ref readonly var seq = ref src.Sequence;
                 var size = encoded.Size;
-                var bitstring = AsmBitstrings.format(encoded);
+                //var bitstring = AsmBitstrings.format(encoded);
+                var bitstring = AsmBitstrings.bitchars(encoded).Format();
                 var content = string.Format(pattern, seq, size, bitstring);
                 writer.WriteLine(content);
             }
@@ -698,26 +686,14 @@ namespace Z0.Asm
             processor.ProcessFile(path);
         }
 
-        // void CheckSymLink()
-        // {
-        //     var packs = Wf.ApiPacks();
-        //     var current = packs.Current();
-        //     var archive = ApiPackArchive.create(current.Root);
-        //     var link = packs.PackRoot + FS.folder("current");
-        //     var target = archive.Root;
-        //     var outcome = FS.symlink(link,target);
-        //     if(Wf.Check(outcome))
-        //     {
-        //         Wf.Status(string.Format("Created symlink {0} -> {1}", link, target));
-        //     }
-        // }
 
         public void Run()
         {
-            //ApiExtractWorkflow.run(Wf);
+            //CaptureParts(PartId.AsmCore);
+            ApiExtractWorkflow.run(Wf);
             //CheckCpuid();
             //CheckRowFormat();
-            RunExtractWorkflow();
+            //RunExtractWorkflow();
             //ProcessStatementIndex();
             //ShowModRmTable();
             //EmitSymbolicliterals();

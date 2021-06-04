@@ -90,10 +90,10 @@ namespace Z0
             for(var i=0u; i<cells; i++)
             {
                 ref var a = ref seek(left,i);
-                a = cpu.vbroadcast(w,i);
+                a = cpu.vbroadcast(w, i);
                 ref var b = ref seek(right,i);
-                b = cpu.vbroadcast(w,i + Pow2.T12);
-                seek(target,i) = f.Invoke(a,b);
+                b = cpu.vbroadcast(w, i + Pow2.T12);
+                seek(target, i) = f.Invoke(a,b);
             }
         }
 

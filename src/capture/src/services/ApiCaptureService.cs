@@ -97,7 +97,7 @@ namespace Z0
 
         public Index<AsmHostRoutines> CaptureCatalog(IApiCatalog catalog)
         {
-            var dst = root.list<AsmHostRoutines>();
+            var dst = list<AsmHostRoutines>();
             using var flow = Wf.Running();
             var catalogs = catalog.Catalogs.View;
             var count = catalogs.Length;
@@ -105,40 +105,6 @@ namespace Z0
                 dst.AddRange(CaptureCatalog(skip(catalogs,i)));
             Wf.Ran(flow, count);
             return dst.ToArray();
-        }
-
-        Index<AsmHostRoutines> RunCapture()
-        {
-            var dst = root.list<AsmHostRoutines>();
-            using var flow = Wf.Running();
-            var catalogs = Wf.ApiCatalog.Catalogs.View;
-            var count = catalogs.Length;
-            for(var i=0; i<count; i++)
-                dst.AddRange(CaptureCatalog(skip(catalogs,i)));
-            Wf.Ran(flow, count);
-            return dst.ToArray();
-        }
-
-        Index<AsmHostRoutines> RunCapture(Index<PartId> parts)
-        {
-            var dst = root.list<AsmHostRoutines>();
-            using var flow = Wf.Running();
-            var catalogs = Wf.ApiCatalog.PartCatalogs(parts).View;
-            var count = catalogs.Length;
-            for(var i=0; i<count; i++)
-                dst.AddRange(CaptureCatalog(skip(catalogs,i)));
-            Wf.Ran(flow, count);
-            return dst.ToArray();
-        }
-
-        void ClearArchive()
-        {
-            Wf.ApiCaptureArchive().Clear();
-        }
-
-        void ClearArchive(Index<PartId> parts)
-        {
-            Wf.ApiCaptureArchive().Clear(parts);
         }
 
         /// <summary>
@@ -150,7 +116,7 @@ namespace Z0
             if(src.IsEmpty)
                 return sys.empty<AsmHostRoutines>();
 
-            var dst = root.list<AsmHostRoutines>();
+            var dst = list<AsmHostRoutines>();
             dst.Add(CaptureTypes(src.ApiTypes));
             dst.AddRange(CaptureHosts(src.OperationHosts));
             return dst.ToArray();
@@ -158,7 +124,7 @@ namespace Z0
 
         public Index<AsmHostRoutines> CaptureHosts(ReadOnlySpan<ApiHostUri> src)
         {
-            var dst = root.list<AsmHostRoutines>();
+            var dst = list<AsmHostRoutines>();
             try
             {
                 var hosts = Wf.ApiCatalog.FindHosts(src);
@@ -185,7 +151,7 @@ namespace Z0
         public Index<AsmHostRoutines> CaptureHosts(ReadOnlySpan<IApiHost> src)
         {
             var count = src.Length;
-            var collected = root.list<AsmHostRoutines>();
+            var collected = list<AsmHostRoutines>();
             for(var i=0; i<count; i++)
                 collected.Add(CaptureHost(skip(src, i)));
             return collected.ToArray();
@@ -194,7 +160,7 @@ namespace Z0
         public Index<AsmHostRoutines> CaptureHosts(ReadOnlySpan<IApiHost> src, FS.FolderPath dst)
         {
             var count = src.Length;
-            var collected = root.list<AsmHostRoutines>();
+            var collected = list<AsmHostRoutines>();
             for(var i=0; i<count; i++)
                 collected.Add(CaptureHost(skip(src, i), dst));
             return collected.ToArray();
@@ -202,7 +168,7 @@ namespace Z0
 
         public AsmHostRoutines CaptureHost(IApiHost src)
         {
-            src = root.require(src);
+            src = require(src);
             var routines = AsmHostRoutines.Empty;
             var flow = Wf.Running(src.HostName);
             try
@@ -219,7 +185,7 @@ namespace Z0
 
         public AsmHostRoutines CaptureHost(IApiHost src, FS.FolderPath dst)
         {
-            src = root.require(src);
+            src = require(src);
             var routines = AsmHostRoutines.Empty;
             var flow = Wf.Running(src.HostName);
             try
@@ -236,7 +202,7 @@ namespace Z0
 
         public AsmHostRoutines CaptureTypes(Index<ApiRuntimeType> src)
         {
-            var dst = root.list<AsmMemberRoutine>();
+            var dst = list<AsmMemberRoutine>();
             var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
             var count = extracted.Length;
             for(var i=0; i<count; i++)
@@ -258,6 +224,40 @@ namespace Z0
                 Wf.Error(e);
                 return sys.empty<ApiMemberExtract>();
             }
+        }
+
+        Index<AsmHostRoutines> RunCapture()
+        {
+            var dst = list<AsmHostRoutines>();
+            using var flow = Wf.Running();
+            var catalogs = Wf.ApiCatalog.Catalogs.View;
+            var count = catalogs.Length;
+            for(var i=0; i<count; i++)
+                dst.AddRange(CaptureCatalog(skip(catalogs,i)));
+            Wf.Ran(flow, count);
+            return dst.ToArray();
+        }
+
+        Index<AsmHostRoutines> RunCapture(Index<PartId> parts)
+        {
+            var dst = list<AsmHostRoutines>();
+            using var flow = Wf.Running();
+            var catalogs = Wf.ApiCatalog.PartCatalogs(parts).View;
+            var count = catalogs.Length;
+            for(var i=0; i<count; i++)
+                dst.AddRange(CaptureCatalog(skip(catalogs,i)));
+            Wf.Ran(flow, count);
+            return dst.ToArray();
+        }
+
+        void ClearArchive()
+        {
+            Wf.ApiCaptureArchive().Clear();
+        }
+
+        void ClearArchive(Index<PartId> parts)
+        {
+            Wf.ApiCaptureArchive().Clear(parts);
         }
     }
 }

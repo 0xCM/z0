@@ -26,9 +26,9 @@ namespace Z0
                 if(IsMultiLiteral(field))
                     dst.AddRange(descriptions(polymorphic(field), vRaw));
                 else if(IsBinaryLiteral(field))
-                    dst.Add(BitMasks.describe(binaryliteral(field,vRaw)));
+                    dst.Add(describe(binaryliteral(field,vRaw)));
                 else
-                    dst.Add(BitMasks.describe(NumericLiterals.literal(base2, field.Name, vRaw, BitRender.format(vRaw, tc))));
+                    dst.Add(describe(NumericLiterals.literal(base2, field.Name, vRaw, BitRender.format(vRaw, tc))));
             }
             return dst.ToArray();
         }
@@ -47,28 +47,28 @@ namespace Z0
                         return sys.empty<BitMaskInfo>();
                 }
 
-                var components = content.SplitClean(FieldDelimiter);
+                var components = @readonly(content.SplitClean(FieldDelimiter));
                 var count = components.Length;
                 var dst = alloc<BitMaskInfo>(count);
                 for(var i=0; i<count; i++)
                 {
-                    var component = components[i];
+                    ref readonly var component = ref skip(components,i);
                     var length = component.Length;
                     if(length > 0)
                     {
-                        var nbi = NumericBases.indicator(component[0]);
+                        var nbi = NumericBases.indicator(first(component));
 
                         if(nbi != 0)
-                            dst[i] = describe(NumericLiterals.literal(src.Name, value, component.Substring(1), NumericBases.kind(nbi)));
+                            seek(dst, i) = describe(NumericLiterals.literal(src.Name, value, component.Substring(1), NumericBases.kind(nbi)));
                         else
                         {
                             nbi = NumericBases.indicator(component[length - 1]);
                             nbi = nbi != 0 ? nbi : NBI.Base2;
-                            dst[i] = BitMasks.describe(NumericLiterals.literal(src.Name, value, component.Substring(0, length - 1), NumericBases.kind(nbi)));
+                            seek(dst, i) = describe(NumericLiterals.literal(src.Name, value, component.Substring(0, length - 1), NumericBases.kind(nbi)));
                         }
                     }
                     else
-                        dst[i] = describe(NumericLiteral.Empty);
+                        seek(dst, i) = describe(NumericLiteral.Empty);
                 }
             }
 

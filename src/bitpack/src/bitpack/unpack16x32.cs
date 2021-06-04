@@ -15,16 +15,27 @@ namespace Z0
     partial struct BitPack
     {
         /// <summary>
-        /// Projects 32 8-bit integers partitioned from a 256-bit source onto 32 16-bit integers
+        /// Unpacks 32 8-bit segments onto 32 16-bit targets
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ushort> unpack16x32(in Cell256 src)
         {
-            var storage = recover<ushort>(ByteBlocks.alloc(n64).Bytes);
-            cpu.vstore(vinflatelo256x16u(src), ref seek(storage,0));
-            cpu.vstore(vinflatehi256x16u(src), ref seek(storage,16));
-            return storage;
+            var dst = recover<ushort>(ByteBlocks.alloc(n64).Bytes);
+            unpack16x32(src,dst);
+            return dst;
+        }
+
+        /// <summary>
+        /// Unpacks 32 8-bit segments onto 32 16-bit targets
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static void unpack16x32(in Cell256 src, Span<ushort> dst)
+        {
+            vstore(vinflatelo256x16u(src), ref seek(dst,0));
+            vstore(vinflatehi256x16u(src), ref seek(dst,16));
         }
     }
 }

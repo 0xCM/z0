@@ -23,7 +23,7 @@ namespace Z0
         public static ref byte pack1x8(in uint src, ref byte dst)
         {
             var v0 = vload(w256, src);
-            dst = (byte)cpu.vpacklsb(vpack128x8u(v0));
+            dst = (byte)vpacklsb(vpack128x8u(v0));
             return ref dst;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         public static byte pack1x8(Span<uint> src)
         {
             var v0 = vload(w256, first(src));
-            return (byte)cpu.vpacklsb(vpack128x8u(v0));
+            return (byte)vpacklsb(vpack128x8u(v0));
         }
 
         /// <summary>
@@ -44,14 +44,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static byte pack1x8(in uint src)
+        public static byte pack1x8(uint src)
         {
             var buffer = z8;
             return pack1x8(src, ref buffer);
         }
 
         /// <summary>
-        /// Packs the least significant bit from <see cref='n8'/> <see cref='w32'/> <see cref='uint'/> source values to a <see cref='w8'/> bit <see cref='byte'/> target
+        /// Packs the least significant bit from 8 32-bit source values to a an 8-bit target
         /// </summary>
         /// <param name="src">The intput sequence</param>
         /// <param name="dst">The target</param>

@@ -57,10 +57,10 @@ namespace Z0
             ref var target = ref ByteBlocks.first<uint>(ref storage);
 
             unpack1x8x32(src, ref tmp);
-            cpu.vinflate8x256x32u(tmp, 0, ref target);
-            cpu.vinflate8x256x32u(tmp, 1, ref target);
-            cpu.vinflate8x256x32u(tmp, 2, ref target);
-            cpu.vinflate8x256x32u(tmp, 3, ref target);
+            vinflate8x256x32u(tmp, 0, ref target);
+            vinflate8x256x32u(tmp, 1, ref target);
+            vinflate8x256x32u(tmp, 2, ref target);
+            vinflate8x256x32u(tmp, 3, ref target);
             return ByteBlocks.span<uint>(ref storage);
         }
 

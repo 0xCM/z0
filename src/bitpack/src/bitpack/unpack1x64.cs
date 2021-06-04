@@ -15,7 +15,20 @@ namespace Z0
     partial struct BitPack
     {
         /// <summary>
-        /// Sends each source bit to a corresponding target cell
+        /// Distributes each packed source bit to the least significant bit of 64 corresponding target bytes
+        /// </summary>
+        /// <param name="src">The packed source bits</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline), Op]
+        public static ref byte unpack1x64(ulong src, ref byte dst)
+        {
+            unpack1x8x32((uint)src, ref dst);
+            unpack1x8x32((uint)(src >> 32), ref seek(dst, 32));
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Distributes 64 packed source bit to the least significant bit of 64 corresponding target bytes
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
@@ -65,6 +78,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static void unpack1x64_2(ulong src, Span<uint> dst)
+        {
+            var buffer = ByteBlocks.alloc(n64);
+            ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
+            ref var target = ref first(dst);
+            unpack1x64(src, ref tmp);
+            vinflate8x256x32u(tmp, 0, ref target);
+            vinflate8x256x32u(tmp, 1, ref target);
+            vinflate8x256x32u(tmp, 2, ref target);
+            vinflate8x256x32u(tmp, 3, ref target);
+            vinflate8x256x32u(tmp, 4, ref target);
+            vinflate8x256x32u(tmp, 5, ref target);
+            vinflate8x256x32u(tmp, 6, ref target);
+            vinflate8x256x32u(tmp, 7, ref target);
+        }
+
+        [MethodImpl(Inline), Op]
         public static void unpack1x8x64(ulong src, Span<uint> dst)
         {
             var buffer = ByteBlocks.alloc(n64);
@@ -82,19 +112,6 @@ namespace Z0
             vinflate8x256x32u(tmp, 1, ref target, 5);
             vinflate8x256x32u(tmp, 2, ref target, 6);
             vinflate8x256x32u(tmp, 3, ref target, 7);
-        }
-
-        /// <summary>
-        /// Distributes each packed source bit to the least significant bit of 64 corresponding target bytes
-        /// </summary>
-        /// <param name="src">The packed source bits</param>
-        /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op]
-        public static ref byte unpack1x64(ulong src, ref byte dst)
-        {
-            unpack1x8x32((uint)src, ref dst);
-            unpack1x8x32((uint)(src >> 32), ref seek(dst, 32));
-            return ref dst;
         }
 
         [MethodImpl(Inline), Unpack]

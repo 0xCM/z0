@@ -38,10 +38,10 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
-        public ClrMemberName Name
+        public string Name
         {
             [MethodImpl(Inline)]
-            get => Definition;
+            get => Definition.Name;
         }
 
         public ClrTypeAdapter FieldType

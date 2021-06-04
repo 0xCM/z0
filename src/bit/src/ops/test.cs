@@ -9,6 +9,7 @@ namespace Z0
 
     using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
+    using static core;
 
     partial struct bit
     {
@@ -114,5 +115,31 @@ namespace Z0
             ref var hi = ref Add(ref lo, 1);
             return pos < 64 ? test(lo,pos) : test(hi,pos);
         }
+
+        /// <summary>
+        /// Returns 1 if an index-identified bit is enabled, false otherwise
+        /// </summary>
+        /// <param name="src">The value to test</param>
+        /// <param name="pos">The bit index to check</param>
+        [MethodImpl(Inline), TestBit, Closures(AllNumeric)]
+        public static bit gtest<T>(T src, byte pos)
+            where T : unmanaged
+        {
+            if(size<T>() == 1)
+                 return bit.test(core.u8(src), pos);
+            else if(size<T>() == 2)
+                 return bit.test(core.u16(src), pos);
+            else if(size<T>() == 4)
+                 return bit.test(core.u32(src), pos);
+            else
+                return bit.test(core.u64(src), pos);
+        }
+
+        [MethodImpl(Inline)]
+        public static bit gtest<T,I>(T src, I index)
+            where T : unmanaged
+            where I : unmanaged
+                => gtest<T>(src, core.u8(index));
+
     }
 }

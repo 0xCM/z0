@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Text;
 
     using static core;
     using static Root;

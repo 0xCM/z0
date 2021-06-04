@@ -14,7 +14,6 @@ namespace Z0
             where T : unmanaged
                 => gpack.unpack(src);
 
-
         [Op, Closures(Closure)]
         public static BitSpan create<T>(ReadOnlySpan<T> src)
             where T : unmanaged

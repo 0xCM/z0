@@ -42,10 +42,6 @@ namespace Z0
 
         IMultiDiviner Identity {get;}
 
-        ApiCatalogs Catalogs;
-
-        Index<IPart> SelectedParts;
-
         Index<ResolvedPart> ResolvedParts;
 
         Index<AsmRoutine> Routines;
@@ -54,9 +50,9 @@ namespace Z0
         {
             Identity = MultiDiviner.Service;
             Buffer = ApiExtracts.buffer();
-            Exclusions = root.hashset(core.array("ToString","GetHashCode", "Equals", "ToString"));
-            Routines = sys.empty<AsmRoutine>();
-            ResolvedParts = sys.empty<ResolvedPart>();
+            Exclusions = hashset("ToString","GetHashCode", "Equals", "ToString");
+            Routines = array<AsmRoutine>();
+            ResolvedParts = array<ResolvedPart>();
         }
 
         protected override void OnInit()
@@ -68,8 +64,6 @@ namespace Z0
             HexPacks = Wf.ApiHexPacks();
             Receivers = new ApiExtractChannel();
             DatasetReceiver = new();
-            Catalogs = Wf.ApiCatalogs();
-            SelectedParts = Wf.ApiCatalog.Parts;
         }
 
         void EmitProcessContext(IApiPack pack)
@@ -87,7 +81,8 @@ namespace Z0
             pipe.EmitDump(process, pack.DumpPath(process, ts));
             var members = ApiMembers.create(CollectedDatasets.SelectMany(x => x.Members));
             var rebasing = Wf.Running();
-            var entries = Catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
+            var catalogs = Wf.ApiCatalogs();
+            var entries = catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
             Wf.Ran(rebasing);
             Wf.Ran(flow);
         }
@@ -145,8 +140,9 @@ namespace Z0
         {
             Paths.ExtractRoot().Clear();
             Paths.AsmSourceRoot().Clear(true);
+            var parts = Wf.ApiCatalog.Parts;
 
-            ResolvedParts = SelectedParts.Map(Resolver.ResolvePart);
+            ResolvedParts = parts.Map(Resolver.ResolvePart);
             ExtractParts(ResolvedParts, false);
 
             CollectedDatasets = DatasetReceiver.Array();

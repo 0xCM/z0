@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static core;
+    using api = CpuBits;
 
     public struct Bitfield256<E,T>
         where E : unmanaged
@@ -17,7 +17,7 @@ namespace Z0
     {
         public Vector256<T> State;
 
-        readonly Vector256<byte> Widths;
+        internal readonly Vector256<byte> Widths;
 
         [MethodImpl(Inline)]
         public Bitfield256(Vector256<byte> widths, Vector256<T> state)
@@ -34,22 +34,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public byte SegWidth(E index)
-            => cpu.vcell(Widths, bw8(index));
+            => api.segwidth(this, index);
 
         [MethodImpl(Inline)]
         public T Mask(E index)
-            => BitMasks.lo<T>(SegWidth(index));
+            => api.mask(this, index);
 
         [MethodImpl(Inline)]
         public T Read(E index)
-            => gmath.and(cpu.vcell(State, bw8(index)), Mask(index));
+            => api.read(this, index);
 
         [MethodImpl(Inline)]
         public void Write(T src, E index)
-        {
-            var mask = Mask(index);
-            var conformed = gmath.and(src,mask);
-            State = cpu.vcell(State, bw8(index), conformed);
-        }
+            => api.write(src, index, ref this);
     }
 }

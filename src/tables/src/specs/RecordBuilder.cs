@@ -34,17 +34,13 @@ namespace Z0
             return dst.ToString();
         }
 
-        [Op]
-        public static string format(in FieldSpec src)
-            => string.Format(RP.PSx4, src.FieldName, src.Position, src.Offset, src.DataType);
-
         [MethodImpl(Inline), Op]
-        public static RecordSpec table(Name type, params FieldSpec[] Fields)
+        public static RecordSpec table(Name type, params MemberFieldSpec[] Fields)
             => new RecordSpec(type, Fields);
 
         [MethodImpl(Inline), Op]
-        public static FieldSpec field(Name name, Name type, ushort position, ushort offset = default)
-            => new FieldSpec(name, type, position, offset);
+        public static MemberFieldSpec field(Name name, Name type, ushort position, ushort offset = default)
+            => new MemberFieldSpec(name, type, position, offset);
 
         [Op]
         public static TypeBuilder type(ModuleBuilder mb, Name fullName, TypeAttributes attributes, Type parent)
@@ -55,9 +51,9 @@ namespace Z0
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         [Op]
-        public static FieldBuilder field(TypeBuilder tb, Name name, Name type, Address16? offset = null)
+        public static FieldBuilder field(TypeBuilder tb, StringAddress name, StringAddress type, Address16? offset = null)
         {
-            var fb = tb.DefineField(name, Type.GetType(type), FieldAttributes.Public);
+            var fb = tb.DefineField(name.Format(), Type.GetType(type.Format()), FieldAttributes.Public);
             if(offset != null)
                 fb.SetOffset(offset.Value);
             return fb;
@@ -76,7 +72,7 @@ namespace Z0
             Name name = src.Name;
             var declared = src.DeclaredInstanceFields();
             var count = declared.Length;
-            var buffer = alloc<FieldSpec>(count);
+            var buffer = alloc<MemberFieldSpec>(count);
             var fields = @readonly(declared);
             var fieldOffsets = span(Clr.offsets(src, declared));
             var dst = span(buffer);

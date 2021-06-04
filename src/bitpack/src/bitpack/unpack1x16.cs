@@ -10,6 +10,7 @@ namespace Z0
     using static Root;
     using static Typed;
     using static core;
+    using static cpu;
     using static BitMasks;
     using static BitMasks.Literals;
 
@@ -29,9 +30,9 @@ namespace Z0
             ref var lead = ref first(dst);
 
             unpack1x8((byte)src, ref tmp);
-            cpu.vinflate8x256x32u(tmp).StoreTo(ref lead);
+            vinflate8x256x32u(tmp).StoreTo(ref lead);
             unpack1x8((byte)(src >> 8), ref tmp);
-            cpu.vinflate8x256x32u(tmp).StoreTo(ref lead, 8);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 8);
         }
 
         /// <summary>

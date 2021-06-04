@@ -24,7 +24,7 @@ namespace Z0
         {
             var v0 = vload(w256, skip(src, 0*8));
             var v1 = vload(w256, skip(src, 1*8));
-            dst = cpu.vpacklsb(vpack128x8u(v0, v1));
+            dst = vpacklsb(vpack128x8u(v0, v1));
             return ref dst;
         }
 
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Packs the least significant bit from <see cref='n16'/>  source values of bit-width <see cref='w32'/> to a <see cref='w16'/> bit target
+        /// Packs the least significant bit from 16 32-bit source values to a 16-bit target
         /// </summary>
         /// <param name="src">The intput sequence</param>
         /// <param name="dst">The target</param>
@@ -66,7 +66,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Packs the least significant bit from <see cref='n16'/>  source values of bit-width <see cref='w32'/> to a <see cref='w16'/> bit target
+        /// Packs the least significant bit from 16 32-bit source values to a 16-bit target
         /// </summary>
         /// <param name="src">The intput sequence</param>
         /// <param name="dst">The target</param>

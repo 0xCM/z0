@@ -64,7 +64,7 @@ namespace Z0
             v1 = vload(w, skip(src,3*8));
 
             var y = vpack256x16u(v0, v1);
-            var packed = (ulong)cpu.vpacklsb(vpack256x8u(x,y));
+            var packed = (ulong)vpacklsb(vpack256x8u(x,y));
 
             v0 = vload(w, skip(src,4*8));
             v1 = vload(w, skip(src,5*8));
@@ -74,7 +74,7 @@ namespace Z0
             v1 = vload(w, skip(src,7*8));
             y = vpack256x16u(v0,v1);
 
-            packed |= (ulong)cpu.vpacklsb(vpack256x8u(x,y)) << 32;
+            packed |= (ulong)vpacklsb(vpack256x8u(x,y)) << 32;
 
             dst = packed;
             return ref dst;

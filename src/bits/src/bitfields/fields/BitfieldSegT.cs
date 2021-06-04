@@ -21,7 +21,7 @@ namespace Z0
         public T State;
 
         [MethodImpl(Inline)]
-        public BitfieldSeg(BitfieldSegSpec spec, T state)
+        public BitfieldSeg(BitfieldSeg spec, T state)
         {
             State = state;
             FirstIndex = spec.FirstIndex;
@@ -37,7 +37,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator BitfieldSeg<T>(BitfieldSegSpec part)
+        public static implicit operator BitfieldSeg<T>(BitfieldSeg part)
             => new BitfieldSeg<T>(part, default);
     }
 }

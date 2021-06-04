@@ -25,7 +25,7 @@ namespace Z0
         SectionSep = CC.Pipe,
 
         [Symbol(" ")]
-        SegmentSep = CC.Space,
+        SegSep = CC.Space,
 
         [Symbol("[")]
         LeftFence = CC.LBracket,
@@ -45,7 +45,7 @@ namespace Z0
 
         SectionSep = 2,
 
-        SegmentSep = 3,
+        SegSep = 3,
 
         LeftFence = 4,
 
@@ -64,7 +64,7 @@ namespace Z0
 
             public const string SectionSep = "|";
 
-            public const string SegmentSep = " ";
+            public const string SegSep = " ";
 
             public const string LeftFence = "[";
 
@@ -72,7 +72,7 @@ namespace Z0
 
             public const string Space = " ";
 
-            public const string CharText = Off + On + SectionSep + SegmentSep + LeftFence + RightFence + Space;
+            public const string CharText = Off + On + SectionSep + SegSep + LeftFence + RightFence + Space;
 
             public ReadOnlySpan<char> Chars
             {
@@ -81,7 +81,7 @@ namespace Z0
             }
 
             public static ReadOnlySpan<BitCharKind> Kinds
-                => new BitCharKind[7]{K.On, K.Off, K.SectionSep, K.SegmentSep, K.LeftFence, K.RightFence, K.Space};
+                => new BitCharKind[7]{K.On, K.Off, K.SectionSep, K.SegSep, K.LeftFence, K.RightFence, K.Space};
         }
     }
 }

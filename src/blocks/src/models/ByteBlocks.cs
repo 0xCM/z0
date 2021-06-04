@@ -764,6 +764,8 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static ByteBlock128 Empty => default;
    }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -791,6 +793,9 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static ByteBlock256 Empty => default;
+
    }
 
     [StructLayout(LayoutKind.Sequential)]

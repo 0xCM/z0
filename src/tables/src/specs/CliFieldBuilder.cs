@@ -16,16 +16,16 @@ namespace Z0
     [ApiHost]
     public ref struct CliFieldBuilder
     {
-        readonly Span<FieldSpec> Fields;
+        readonly Span<MemberFieldSpec> Fields;
 
         ushort Index;
 
         [Op]
-        public static  CliFieldBuilder create(ushort? capacity = null)
-            => new  CliFieldBuilder(capacity ?? 20);
+        public static CliFieldBuilder create(ushort? capacity = null)
+            => new CliFieldBuilder(capacity ?? 20);
 
         [Op]
-        public static FieldBuilder field(TypeBuilder tb, Name name, string type, Address16? offset = null)
+        public static FieldBuilder field(TypeBuilder tb, string name, string type, Address16? offset = null)
         {
             var fb = tb.DefineField(name, Type.GetType(type), FieldAttributes.Public);
             if(offset != null)
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ModuleBuilder module(Name name)
+        public static ModuleBuilder module(string name)
         {
             var ab = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(name), AssemblyBuilderAccess.Run);
             return ab.DefineDynamicModule("Primary");
@@ -60,11 +60,11 @@ namespace Z0
         public CliFieldBuilder(uint capacity)
         {
             Index = 0;
-            Fields = span<FieldSpec>(capacity);
+            Fields = span<MemberFieldSpec>(capacity);
         }
 
         [MethodImpl(Inline),Op]
-        public CliFieldBuilder WithField(in FieldSpec src)
+        public CliFieldBuilder WithField(in MemberFieldSpec src)
         {
             seek(Fields, Index++) = src;
             return this;
@@ -72,15 +72,15 @@ namespace Z0
 
         [MethodImpl(Inline),Op]
         public CliFieldBuilder WithField(PropertyInfo src)
-            => WithField(new FieldSpec(src.Name, src.PropertyType.Name, Index));
+            => WithField(new MemberFieldSpec(src.Name, src.PropertyType.Name, Index));
 
         [MethodImpl(Inline),Op]
-        public CliFieldBuilder WithField(Name name, Type type)
-            => WithField(new FieldSpec(name, type.Name, Index));
+        public CliFieldBuilder WithField(string name, Type type)
+            => WithField(new MemberFieldSpec(name, type.Name, Index));
 
         [MethodImpl(Inline), Op]
         public CliFieldBuilder WithField(ClrFieldAdapter src)
-            =>  WithField(new FieldSpec(src.Name.Format(), src.FieldType.Name.Format(), Index));
+            =>  WithField(new MemberFieldSpec(src.Name, src.FieldType.Name, Index));
 
         [MethodImpl(Inline), Op]
         public CliFieldBuilder WithFields(params PropertyInfo[] src)

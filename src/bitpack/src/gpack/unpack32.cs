@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
+    using static NumericLiterals;
 
     partial struct gpack
     {
@@ -23,7 +23,7 @@ namespace Z0
             var k = 0;
             for(var i=0; i<src.Length; i++)
             for(byte j=0; j<srcsize; j++, k++)
-                seek(target, k) = BitMasks.testbit(skip(src,i), j);
+                seek(target, k) = bit.gtest(skip(src,i), j);
             return dst;
         }
 
@@ -62,7 +62,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(Bit32))
-                return MemoryMarshal.Cast<Bit32,T>(unpack32(src, MemoryMarshal.Cast<T,Bit32>(dst)));
+                return recover<Bit32,T>(unpack32(src, recover<T,Bit32>(dst)));
             else
             {
                 var srcsize = width<S>();
@@ -70,7 +70,7 @@ namespace Z0
                 var k = 0u;
                 for(var i=0; i<src.Length; i++)
                 for(byte j=0; j<srcsize; j++)
-                    seek(dst,k++) = BitMasks.testbit(skip(src,i), j) == bit.On ? NumericLiterals.one<T>() : NumericLiterals.zero<T>();
+                    seek(dst,k++) = bit.gtest(skip(src,i), j) == bit.On ? one<T>() : zero<T>();
                 return dst;
             }
         }

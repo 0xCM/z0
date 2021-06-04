@@ -15,7 +15,7 @@ namespace Z0
     partial struct BitPack
     {
         /// <summary>
-        /// Packs the least significant bit from 32 32-bit unsigned integers to a 32-bit target
+        /// Packs the least significant bit from 32 32-bit source values to a 32-bit target
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="dst">The target value</param>
@@ -30,7 +30,7 @@ namespace Z0
             v1 = vload(w256, skip(src,3*8));
             var y = vpack256x16u(v0,v1);
 
-            dst = cpu.vpacklsb(vpack256x8u(x, y));
+            dst = vpacklsb(vpack256x8u(x, y));
             return ref dst;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Packs the least significant bit from <see cref='n32'/> <see cref='w32'/> <see cref='uint'/> source values to a <see cref='w32'/> bit <see cref='uint'/> target
+        /// Packs the least significant bit from 32 32-bit source values to a 32-bit target
         /// </summary>
         /// <param name="src">The intput sequence</param>
         /// <param name="dst">The target</param>

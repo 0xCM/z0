@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vmask256x8u(uint src)
-            => vconcat(BitMasks.vmask128x8u((ushort)src), BitMasks.vmask128x8u((ushort)(src >> 16)));
+            => vconcat(vmask128x8u((ushort)src), vmask128x8u((ushort)(src >> 16)));
 
         [MethodImpl(Inline), Op]
         public static ulong maskpart(uint src, byte offset)

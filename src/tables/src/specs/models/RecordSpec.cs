@@ -13,16 +13,16 @@ namespace Z0
     {
         public Name TypeName {get;}
 
-        readonly Index<FieldSpec> FieldSpecs;
+        readonly Index<MemberFieldSpec> FieldSpecs;
 
         [MethodImpl(Inline)]
-        public RecordSpec(Name name, FieldSpec[] cells)
+        public RecordSpec(Name name, MemberFieldSpec[] cells)
         {
             TypeName = name;
             FieldSpecs = cells;
         }
 
-        public ReadOnlySpan<FieldSpec> Fields
+        public ReadOnlySpan<MemberFieldSpec> Fields
         {
             [MethodImpl(Inline)]
             get => FieldSpecs.View;

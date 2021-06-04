@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static cpu;
+    using static Typed;
 
     [ApiHost]
     public readonly struct BitSpan32Scalars
@@ -63,22 +64,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan32 from(ulong src)
         {
-            var buffer = ByteBlocks.alloc(n64);
-            ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
-
-            Span<uint> storage = new uint[64];
-            ref var target = ref first(storage);
-
-            BitPack.unpack1x64(src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target);
-            vinflate8x256x32u(tmp, 1, ref target);
-            vinflate8x256x32u(tmp, 2, ref target);
-            vinflate8x256x32u(tmp, 3, ref target);
-            vinflate8x256x32u(tmp, 4, ref target);
-            vinflate8x256x32u(tmp, 5, ref target);
-            vinflate8x256x32u(tmp, 6, ref target);
-            vinflate8x256x32u(tmp, 7, ref target);
-            return BitSpans32.load(storage.Recover<Bit32>());
+            Span<uint> dst = new uint[64];
+            BitPack.unpack1x64_2(src, dst);
+            return BitSpans32.load(dst.Recover<Bit32>());
         }
 
         [MethodImpl(Inline), Op]

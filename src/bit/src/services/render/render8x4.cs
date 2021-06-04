@@ -47,6 +47,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint render(N8 n, N4 w, byte src, uint offset, Span<BitChar> dst)
+        {
+            var i=offset;
+            seek(dst, i++) = bit.test(src, 7);
+            seek(dst, i++) = bit.test(src, 6);
+            seek(dst, i++) = bit.test(src, 5);
+            seek(dst, i++) = bit.test(src, 4);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 3);
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            seek(dst, i++) = BitChars.SegSep;
+            return n + 2u;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint render(N4 w, ReadOnlySpan<byte> src, Span<char> dst)
         {
             var size = src.Length;

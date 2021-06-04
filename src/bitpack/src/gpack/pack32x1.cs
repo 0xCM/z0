@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
     using static core;
+    using static NumericCast;
 
     partial struct gpack
     {
@@ -39,13 +39,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return Numeric.force<T>(BitPack.pack1x8(src));
+                return force<T>(BitPack.pack1x8(src));
             else if(typeof(T) == typeof(short))
-                return Numeric.force<T>(BitPack.pack1x16(src));
+                return force<T>(BitPack.pack1x16(src));
             else if(typeof(T) == typeof(int))
-                return Numeric.force<T>(BitPack.pack1x32(src));
+                return force<T>(BitPack.pack1x32(src));
             else if(typeof(T) == typeof(long))
-                return Numeric.force<T>(BitPack.pack1x64(src));
+                return force<T>(BitPack.pack1x64(src));
             else
                 throw no<T>();
         }
