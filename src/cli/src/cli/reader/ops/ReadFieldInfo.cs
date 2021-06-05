@@ -21,20 +21,18 @@ namespace Z0
             var reader = MD;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = memory.span<MemberFieldInfo>(count);
+            var dst = span<MemberFieldInfo>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var handle = ref skip(handles,i);
                 var entry = reader.GetFieldDefinition(handle);
-                int offset = entry.GetOffset();
                 ref var field = ref seek(dst,i);
-                var bsig = ReadSig(entry);
-                var name = ReadFieldName(entry.Name, i);
-
                 field.Token = CliTokens.token(handle);
-                field.FieldName = name.Value;
-                field.Attribs = entry.Attributes.ToString();
-                field.Sig = bsig;
+                field.Offset = (uint)entry.GetOffset();
+                field.Rva = entry.GetRelativeVirtualAddress();
+                field.FieldName = MD.GetString(entry.Name);
+                field.Attribs = entry.Attributes;
+                field.Sig = ReadSig(entry);
             }
             return dst;
         }

@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     [ApiHost]
     public readonly partial struct asm
@@ -16,36 +15,32 @@ namespace Z0.Asm
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static Vsib vsib(byte src)
-            => new Vsib(src);
+        public static AsmBlockLabel blocklabel(MemoryAddress address)
+            => new AsmBlockLabel(string.Format("_{0}", address));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static AsmSigOp sigop<K>(Sym<K> sym)
+            where K : unmanaged
+                => new AsmSigOp(sym.Name, sym.Expr);
 
         [MethodImpl(Inline), Op]
-        public static ModRm modrm(byte src)
-            => new ModRm(src);
+        public static AsmExprSet pack(AsmOpCodeExpr opcode, AsmSigExpr sig, AsmStatementExpr statement)
+            => new AsmExprSet(new AsmFormExpr(opcode, sig), statement);
 
         [MethodImpl(Inline), Op]
-        public static ModRm modrm(uint3 rm, uint3 reg, uint2 mod)
-            => new ModRm(Bits.join((rm, 0), (reg, 3), (mod, 6)));
+        public static AsmCallSite callsite(AsmCaller caller, Address16 offset, uint4 size)
+            => new AsmCallSite(caller, offset, size);
 
         [MethodImpl(Inline), Op]
-        public static ModRm modrm(uint3 r1, uint3 r2)
-            => modrm(r1, r2, uint2.Max);
+        public static AsmCaller caller(MemoryAddress @base, AsmSymbol symbol)
+            => new AsmCaller(@base, symbol);
 
         [MethodImpl(Inline), Op]
-        public static AsmStatementExpr statement(string src)
-            => new AsmStatementExpr(src.Trim());
+        public static AsmCallee callee(MemoryAddress @base, AsmSymbol symbol)
+            => new AsmCallee(@base, symbol);
 
         [MethodImpl(Inline), Op]
-        public static AsmExpr expression(string src)
-            => new AsmExpr(src);
-
-        [MethodImpl(Inline), Op]
-        public static AsmComment comment(string src)
-            => new AsmComment(src);
-
-        [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpr opcode(string src)
-            => new AsmOpCodeExpr(src);
-
+        public static AsmBranchInfo branch(MemoryAddress @base, MemoryAddress ip, byte fxSize, in AsmBranchTarget target)
+            => new AsmBranchInfo(@base, ip, target, offset(ip, fxSize, target.Address));
     }
 }

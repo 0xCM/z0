@@ -39,7 +39,7 @@ namespace Z0.Asm
                 var bytes = @readonly(raw);
                 var decoded = decoder.Decode(raw, MemoryAddress.Zero).View;
                 var name = accessor.DeclaringType.Name + "/" + accessor.Member.Name;
-                asmwriter.WriteLine(AsmCore.comment(seqlabel + name));
+                asmwriter.WriteLine(asm.comment(seqlabel + name));
                 AsmFormatter.render(raw, decoded, buffer);
                 asmwriter.Write(buffer.Emit());
 

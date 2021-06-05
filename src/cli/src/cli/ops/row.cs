@@ -9,15 +9,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
     using System.Reflection;
-    using System.Reflection.PortableExecutable;
-    using Microsoft.CodeAnalysis;
 
     using static Root;
     using static core;
 
     partial struct Cli
     {
-       [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op]
         public static uint row(Type src)
             => u32(src.MetadataToken) & 0xFFFFFF;
 

@@ -56,5 +56,9 @@ namespace Z0
         [Op]
         public static DotNet DotNet(this IWfRuntime wf)
             => Svc.DotNet.create(wf);
+
+        [Op]
+        public static LlvmAssetCatalog LlvmAssets(this IWfRuntime wf)
+            => Svc.LlvmAssetCatalog.create(wf);
     }
 }

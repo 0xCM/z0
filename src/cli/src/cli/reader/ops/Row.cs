@@ -37,34 +37,6 @@ namespace Z0
             return ref dst;
         }
 
-        public uint Rows(ReadOnlySpan<MethodDefinitionHandle> src, Span<MethodDefRow> dst)
-        {
-            var count = (uint)min(src.Length, dst.Length);
-            for(var i=0; i<count; i++)
-                 Row(skip(src,i), ref seek(dst,i));
-            return count;
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref MethodDefRow Row(MethodDefinitionHandle handle, ref MethodDefRow dst)
-        {
-            var src = MD.GetMethodDefinition(handle);
-            dst.Attributes = src.Attributes;
-            dst.ImplAttributes  = src.ImplAttributes;
-            dst.Rva = src.RelativeVirtualAddress;
-            dst.Name = src.Name;
-            dst.Signature = src.Signature;
-            var keys = Keys(src.GetParameters());
-            var count = keys.Count;
-            if(count != 0)
-            {
-                dst.FirstParam = keys.First;
-                dst.ParamCount = (ushort)count;
-            }
-
-            return ref dst;
-        }
-
         [MethodImpl(Inline), Op]
         public ref CustomAttributeRow Row(CustomAttribute src, ref CustomAttributeRow dst)
         {

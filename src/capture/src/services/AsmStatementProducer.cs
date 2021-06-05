@@ -69,9 +69,9 @@ namespace Z0.Asm
 
         static void FormatHeader(in AsmMemberRoutine src, ITextBuffer dst)
         {
-            dst.AppendLine(AsmCore.comment(src.Member.OpUri.Format()));
-            dst.AppendLine(AsmCore.comment(format(src.Base, src.CodeBlock.Code)));
-            dst.AppendLine(AsmCore.blocklabel(src.Base));
+            dst.AppendLine(asm.comment(src.Member.OpUri.Format()));
+            dst.AppendLine(asm.comment(format(src.Base, src.CodeBlock.Code)));
+            dst.AppendLine(asm.blocklabel(src.Base));
         }
 
         static uint produce(in AsmMemberRoutine src, ITextBuffer dst)
@@ -92,7 +92,7 @@ namespace Z0.Asm
             => AsmParser.sig(src.Instruction.OpCode.InstructionString);
 
         static AsmFormExpr form(in ApiInstruction src)
-            => AsmCore.form(src.OpCode, sig(src));
+            => asm.form(src.OpCode, sig(src));
 
         static AsmThumbprint thumbprint(in ApiInstruction src)
             => asm.thumbprint(src.Statment, form(src), AsmBytes.hexcode(src.EncodedData));
@@ -107,7 +107,7 @@ namespace Z0.Asm
             => src.Statment.Replace(" ptr", EmptyString);
 
         static void produce(in ApiInstruction src, ITextBuffer dst)
-            => dst.Append(string.Format("{0} {1}", string.Format("{0,-46}", statement(src)), AsmCore.comment(describe(src))));
+            => dst.Append(string.Format("{0} {1}", string.Format("{0,-46}", statement(src)), asm.comment(describe(src))));
 
         const string PageBreak = "----------------------------------------------------------------------------------------------------------------------------------------------------------------";
     }

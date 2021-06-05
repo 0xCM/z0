@@ -68,7 +68,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false, TextParsers.FenceNotFound.Format(OpCodeFence, src));
 
-            dst = new AsmFormExpr(AsmCore.opcode(opcode), sig);
+            dst = new AsmFormExpr(asm.opcode(opcode), sig);
             return true;
         }
 
@@ -81,7 +81,7 @@ namespace Z0.Asm
                 {
                     var i = text.index(src, Chars.Space);
                     var operands = i > 0 ? src.Substring(i).Split(Chars.Comma).Map(sigop) : sys.empty<AsmSigOperandExpr>();
-                    dst = AsmCore.sig(monic, AsmRender.format(monic, operands));
+                    dst = asm.sig(monic, AsmRender.format(monic, operands));
                     return true;
                 }
             }
@@ -150,17 +150,13 @@ namespace Z0.Asm
 
         public static Outcome parse(string src, out AsmOpCodeExpr dst)
         {
-            dst = AsmCore.opcode(src);
+            dst = asm.opcode(src);
             return true;
         }
 
         [Op]
         public static Outcome parse(AsmMnemonic src, out AsmMnemonicCode dst)
             => Enums.parse(src.Format(), out dst);
-
-        [MethodImpl(Inline), Op]
-        public static AsmStatementExpr statement(string src)
-            => new AsmStatementExpr(src.Trim());
 
         [Op]
         public static Outcome parse(TextRow src, out AsmApiStatement dst)
@@ -174,10 +170,10 @@ namespace Z0.Asm
                 result += DataParser.parse(skip(cells, i++), out dst.BlockAddress);
                 result += DataParser.parse(skip(cells, i++), out dst.IP);
                 result += DataParser.parse(skip(cells, i++), out dst.BlockOffset);
-                dst.Expression = AsmCore.statement(skip(cells, i++));
+                dst.Expression = asm.statement(skip(cells, i++));
                 dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
                 result += sig(skip(cells, i++), out dst.Sig);
-                dst.OpCode = AsmCore.opcode(skip(cells, i++));
+                dst.OpCode = asm.opcode(skip(cells, i++));
                 dst.Bitstring = dst.Encoded;
                 if(!DataParser.parse(skip(cells, i++), out dst.OpUri))
                     return (false, $"Failed to parse uri text <{skip(cells,i)}>");
@@ -221,7 +217,7 @@ namespace Z0.Asm
                     {
                         if(AsmBytes.hexcode(B, out var encoded))
                         {
-                            thumbprint = new AsmThumbprint(statement, sig, AsmCore.opcode(opcode), encoded);
+                            thumbprint = new AsmThumbprint(statement, sig, asm.opcode(opcode), encoded);
                             return true;
                         }
                         else

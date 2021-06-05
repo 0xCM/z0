@@ -61,7 +61,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out bool dst)
-            => bool.TryParse(src, out dst);
+            => BitParser.semantic(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out bit dst)
@@ -163,6 +163,20 @@ namespace Z0
         public static Outcome parse(string src, out SymExpr dst)
         {
             dst = src ?? EmptyString;
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out StringAddress dst)
+        {
+            dst = src ?? EmptyString;
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Outcome resource(string src, out StringAddress dst)
+        {
+            dst = StringAddress.resource(src);
             return true;
         }
 

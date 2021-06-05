@@ -12,6 +12,10 @@ namespace Z0.Asm
     /// <summary>
     /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W8'/>
     /// </summary>
+    /// <remarks>
+    /// al, cl, dl, bl, spl, bpl, sil, dil, r8b, r9b, r10b, r11b, r12b, r13b, r14b, r15b
+    /// ah, ch, dh, bh
+    /// </remarks/>
     public enum Gp8Kind : uint
     {
         AL = r0 | (GP << ClassField) | (W8 << WidthField),
@@ -38,20 +42,20 @@ namespace Z0.Asm
 
         DIL = r7 | (GP << ClassField) | (W8 << WidthField),
 
-        R8L = r8 | (GP << ClassField) | (W8 << WidthField),
+        R8B = r8 | (GP << ClassField) | (W8 << WidthField),
 
-        R9L = r9 | (GP << ClassField) | (W8 << WidthField),
+        R9B = r9 | (GP << ClassField) | (W8 << WidthField),
 
-        R10L = r10 | (GP << ClassField) | (W8 << WidthField),
+        R10B = r10 | (GP << ClassField) | (W8 << WidthField),
 
-        R11L = r11 | (GP << ClassField) | (W8 << WidthField),
+        R11B = r11 | (GP << ClassField) | (W8 << WidthField),
 
-        R12L = r12 | (GP << ClassField) | (W8 << WidthField),
+        R12B = r12 | (GP << ClassField) | (W8 << WidthField),
 
-        R13L = r13 | (GP << ClassField) | (W8 << WidthField),
+        R13B = r13 | (GP << ClassField) | (W8 << WidthField),
 
-        R14L = r14 | (GP << ClassField) | (W8 << WidthField),
+        R14B = r14 | (GP << ClassField) | (W8 << WidthField),
 
-        R15L = r15 | (GP << ClassField) | (W8 << WidthField),
+        R15B = r15 | (GP << ClassField) | (W8 << WidthField),
     }
 }

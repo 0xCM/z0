@@ -16,19 +16,19 @@ namespace Z0.Asm
         [Op]
         public static Index<CallRel32Case> loadRel32(Call call)
         {
-            var caller = AsmCore.caller(0x7ffe6818a0e0ul, "canonical/abi2/Run");
+            var caller = asm.caller(0x7ffe6818a0e0ul, "canonical/abi2/Run");
             var cases = alloc<CallRel32Case>(4);
             var buffer = span(cases);
             var index = 0u;
             var location = GridPoint.Zero;
 
-            var l0 = AsmSourceDocs.line(location++, AsmCore.comment("7ffe6818a108h 0028h call 7ffe65135260h | E8 cd | e8 53 b1 fa fc"));
+            var l0 = AsmSourceDocs.line(location++, asm.comment("7ffe6818a108h 0028h call 7ffe65135260h | E8 cd | e8 53 b1 fa fc"));
             load(caller, 0x7ffe6818a108, 0x7ffe6818a10d, 0x7ffe65135260, "e8 53 b1 fa fc", l0, ref seek(buffer, index++));
-            var l1 = AsmSourceDocs.line(location++, AsmCore.comment("7ffe6818a120h 0040h call 7ffe65135268h | E8 cd | e8 43 b1 fa fc"));
+            var l1 = AsmSourceDocs.line(location++, asm.comment("7ffe6818a120h 0040h call 7ffe65135268h | E8 cd | e8 43 b1 fa fc"));
             load(caller, 0x7ffe6818a120, 0x7ffe6818a125, 0x7ffe65135268, "e8 43 b1 fa fc", l1, ref seek(buffer, index++));
-            var l2 = AsmSourceDocs.line(location++, AsmCore.comment("7ffe6818a13bh 005bh call 7ffe65135270h | E8 cd |  e8 30 b1 fa fc"));
+            var l2 = AsmSourceDocs.line(location++, asm.comment("7ffe6818a13bh 005bh call 7ffe65135270h | E8 cd |  e8 30 b1 fa fc"));
             load(caller, 0x7ffe6818a13b, 0x7ffe6818a140, 0x7ffe65135270, "e8 30 b1 fa fc", l2, ref seek(buffer, index++));
-            var l3 = AsmSourceDocs.line(location++, AsmCore.comment("7ffe6818a154h 0074h call 7ffe65135278h | E8 cd | e8 1f b1 fa fc"));
+            var l3 = AsmSourceDocs.line(location++, asm.comment("7ffe6818a154h 0074h call 7ffe65135278h | E8 cd | e8 1f b1 fa fc"));
             load(caller, 0x7ffe6818a154, 0x7ffe6818a159, 0x7ffe65135278, "e8 1f b1 fa fc", l3, ref seek(buffer, index++));
             return cases;
         }

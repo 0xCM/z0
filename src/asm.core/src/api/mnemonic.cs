@@ -2,19 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Root;
 
-    partial class CliReader
+    partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public ByteSize HeapSize(HeapIndex index)
-            => MD.GetHeapSize(index);
+        public static AsmMnemonic mnemonic(string src)
+            => new AsmMnemonic(src);
     }
 }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Llvm
+namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,7 +11,7 @@ namespace Z0.Llvm
     using static Root;
     using static core;
 
-    using static LLVM;
+    using static LlvmValues;
 
     public interface IValueType<T>
         where T : unmanaged, IValueType<T>
@@ -21,7 +21,6 @@ namespace Z0.Llvm
         BitWidth Width => width<T>();
 
         ByteSize Size => size<T>();
-
     }
 
     public struct ValueTypeInfo
@@ -42,7 +41,7 @@ namespace Z0.Llvm
         ///  1 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v1i64 : IValueType<v1i64>
+        public struct v1i64
         {
             public const ushort Width = 64;
 
@@ -61,7 +60,7 @@ namespace Z0.Llvm
         ///  2 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v2i64 : IValueType<v2i64>
+        public struct v2i64
         {
             public const ushort Width = 128;
 
@@ -80,7 +79,7 @@ namespace Z0.Llvm
         ///  4 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v4i64 : IValueType<v4i64>
+        public struct v4i64
         {
             public const ushort Width = 256;
 
@@ -99,7 +98,7 @@ namespace Z0.Llvm
         ///  4 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v8i64 : IValueType<v8i64>
+        public struct v8i64
         {
             public const ushort Width = 512;
 
@@ -118,7 +117,7 @@ namespace Z0.Llvm
         ///  16 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v16i64 : IValueType<v16i64>
+        public struct v16i64
         {
             public const ushort Width = 1024;
 
@@ -137,7 +136,7 @@ namespace Z0.Llvm
         ///  32 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v32i64 : IValueType<v32i64>
+        public struct v32i64
         {
             public const ushort Width = 2048;
 
@@ -156,7 +155,7 @@ namespace Z0.Llvm
         ///  64 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v64i64 : IValueType<v64i64>
+        public struct v64i64
         {
             public const ushort Width = 4096;
 
@@ -175,7 +174,7 @@ namespace Z0.Llvm
         ///  128 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v128i64 : IValueType<v128i64>
+        public struct v128i64
         {
             public const ushort Width = 8192;
 
@@ -194,7 +193,7 @@ namespace Z0.Llvm
         ///  256 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v256i64 : IValueType<v256i64>
+        public struct v256i64
         {
             public const ushort Width = 16384;
 

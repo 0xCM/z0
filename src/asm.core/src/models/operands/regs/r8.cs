@@ -153,7 +153,6 @@ namespace Z0.Asm
 
         public struct spl : IRegOp8<spl>
         {
-
             public I Index => I.r6;
 
             [MethodImpl(Inline)]
@@ -167,7 +166,6 @@ namespace Z0.Asm
 
         public struct bpl : IRegOp8<bpl>
         {
-
             public I Index => I.r7;
 
 

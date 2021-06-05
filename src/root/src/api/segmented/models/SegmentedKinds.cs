@@ -4,10 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using BK = SegKind;
+    using SK = SegKind;
 
-    partial class SegmentedKinds
+    [ApiHost]
+    public partial class SegmentedKinds
     {
+        const NumericKind Closure = NumericKind.All;
+
         public readonly struct Seg16x8u : ISegmetedKind<Seg16x8u,W16,byte>
         {
 
@@ -257,27 +260,27 @@ namespace Z0
 
         public readonly struct Seg8 : ISegmentedKind<Seg8>
         {
-            public BK Class => BK.Seg8;
+            public SK Class => SK.Seg8;
 
             public TypeWidth SegWidth => TypeWidth.W8;
 
-            public static implicit operator BK(Seg8 src)
+            public static implicit operator SK(Seg8 src)
                 => src.Class;
         }
 
         public readonly struct Seg16 : ISegmentedKind<Seg16>
         {
-            public BK Class => BK.Seg16;
+            public SK Class => SK.Seg16;
 
             public TypeWidth SegWidth => TypeWidth.W16;
 
-            public static implicit operator BK(Seg16 src)
+            public static implicit operator SK(Seg16 src)
                 => src.Class;
         }
 
         public readonly struct Seg32 : ISegmentedKind<Seg32>
         {
-            public BK Class => BK.Seg32;
+            public SK Class => SK.Seg32;
 
             public TypeWidth SegWidth => TypeWidth.W32;
 
@@ -287,41 +290,41 @@ namespace Z0
 
         public readonly struct Seg64 : ISegmentedKind<Seg64>
         {
-            public BK Class => BK.Seg64;
+            public SK Class => SK.Seg64;
 
             public TypeWidth SegWidth => TypeWidth.W64;
 
-            public static implicit operator BK(Seg64 src)
+            public static implicit operator SK(Seg64 src)
                 => src.Class;
         }
 
         public readonly struct Seg128 : ISegmentedKind<Seg128>
         {
-            public BK Class => BK.Seg128;
+            public SK Class => SK.Seg128;
 
             public TypeWidth SegWidth => TypeWidth.W128;
 
-            public static implicit operator BK(Seg128 src)
+            public static implicit operator SK(Seg128 src)
                 => src.Class;
         }
 
         public readonly struct Seg256 : ISegmentedKind<Seg256>
         {
-            public BK Class => BK.Seg256;
+            public SK Class => SK.Seg256;
 
             public TypeWidth SegWidth => TypeWidth.W256;
 
-            public static implicit operator BK(Seg256 src)
+            public static implicit operator SK(Seg256 src)
                 => src.Class;
         }
 
         public readonly struct Seg512 : ISegmentedKind<Seg512>
         {
-            public BK Class => BK.Seg512;
+            public SK Class => SK.Seg512;
 
             public TypeWidth SegWidth => TypeWidth.W512;
 
-            public static implicit operator BK(Seg512 src)
+            public static implicit operator SK(Seg512 src)
                 => src.Class;
         }
     }

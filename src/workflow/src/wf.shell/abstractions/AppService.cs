@@ -212,6 +212,12 @@ namespace Z0
             return count;
         }
 
+        protected void TableShow<T>(ReadOnlySpan<T> src)
+            where T : struct, IRecord<T>
+        {
+            Tables.emit(src, x => Wf.Row(x));
+        }
+
         protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
             where T : struct, IRecord<T>
         {

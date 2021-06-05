@@ -35,6 +35,15 @@ namespace Z0
             return emit(src, spec, writer);
         }
 
+        public static void emit<T>(ReadOnlySpan<T> src, Action<string> dst)
+            where T : struct, IRecord<T>
+        {
+            var f = formatter<T>(rowspec<T>());
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                dst(f.Format(skip(src,i)));
+        }
+
         public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, FS.FilePath dst)
             where T : struct, IRecord<T>
                 => emit(src, spec, Encoding.UTF8, dst);

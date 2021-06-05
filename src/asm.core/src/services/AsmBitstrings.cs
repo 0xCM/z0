@@ -43,13 +43,28 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
+        public static uint encode(N3 n, AsmHexCode src, uint offset, Span<BitChar> dst)
+        {
+            var input = src.Bytes;
+            var size = (int)src.Size;
+            var length = min(size, dst.Length);
+            for(var i=0; i<length; i++)
+                offset += BitRender.render(n8, n3, skip(input, i), offset, dst);
+            return offset - 1;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint encode(N3 n, AsmHexCode src, Span<BitChar> dst)
+            => encode(n, src, 0u, dst);
+
+        [MethodImpl(Inline), Op]
         public static uint encode(AsmHexCode src, uint offset, Span<BitChar> dst)
         {
             var input = src.Bytes;
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render(n8, n4, skip(input, i), offset, dst);
+                offset += BitRender.render(n8, w4, skip(input, i), offset, dst);
             return offset - 1;
         }
 
@@ -61,7 +76,15 @@ namespace Z0.Asm
         public static ReadOnlySpan<BitChar> bitchars(AsmHexCode src)
         {
             var dst = recover<BitChar>(ByteBlock128.Empty.Bytes);
-            var size = encode(src,dst);
+            var size = encode(src, dst);
+            return slice(dst,0,size);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<BitChar> bitchars(N3 n, AsmHexCode src)
+        {
+            var dst = recover<BitChar>(ByteBlock128.Empty.Bytes);
+            var size = encode(n, src, dst);
             return slice(dst,0,size);
         }
 

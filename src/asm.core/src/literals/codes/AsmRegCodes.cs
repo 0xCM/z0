@@ -621,7 +621,7 @@ namespace Z0.Asm
         /// Defines mask register indices
         /// </summary>
         [SymbolSource]
-        public enum MaskReg : byte
+        public enum KReg : byte
         {
             [Symbol("k0")]
             K0 = r0,
@@ -754,6 +754,37 @@ namespace Z0.Asm
 
             [Symbol("IDTR","The interrupt descriptor table register")]
             IDTR = r2,
+        }
+
+        /// <summary>
+        /// Specifies the MMX registers
+        /// </summary>
+        [SymbolSource]
+        public enum MmxReg : byte
+        {
+            [Symbol("mmx0")]
+            MM0 = r0,
+
+            [Symbol("mmx1")]
+            MM1 = r1,
+
+            [Symbol("mmx2")]
+            MM2 = r2,
+
+            [Symbol("mmx3")]
+            MM3 = r3,
+
+            [Symbol("mmx4")]
+            MM4 = r4,
+
+            [Symbol("mmx5")]
+            MM5 = r5,
+
+            [Symbol("mmx6")]
+            MM6 = r6,
+
+            [Symbol("mmx7")]
+            MM7 = r7,
         }
     }
 }

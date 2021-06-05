@@ -24,6 +24,10 @@ namespace Z0.Asm
         const string To = " => ";
 
         [Op]
+        public static string format(in AsmHexCode src)
+            => src.Data.FormatHexData(src.Size);
+
+        [Op]
         public static string bits(RexPrefix src)
             => text.format(BitRender.render(n8, n4, src.Code));
 
@@ -89,6 +93,25 @@ namespace Z0.Asm
             seek(dst, i++) = asm.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
             seek(dst, i++) = src.Separator;
             return i;
+        }
+
+        public static string format(in AsmSourceLine src)
+        {
+            if(src.Label.IsNonEmpty)
+                return string.Format("{0}:", src.Label.Name);
+            else if(src.Statement.IsNonEmpty)
+            {
+                if(src.Comment.IsNonEmpty)
+                    return string.Format("{0,-46} ; {1}", src.Statement, src.Comment.Content);
+                else
+                    return src.Statement.Format();
+            }
+            else if(src.Comment.IsNonEmpty)
+            {
+                return string.Format("; {0}", src.Comment.Content);
+            }
+            else
+                return EmptyString;
         }
 
         [Op]

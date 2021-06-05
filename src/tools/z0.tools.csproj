@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="assets/**/*.*" />
+    <EmbeddedResource Include="src/tooling/llvm/assets/**/*.*" />
   </ItemGroup>
 
 </Project>

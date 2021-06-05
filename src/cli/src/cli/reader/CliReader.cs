@@ -12,11 +12,12 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Root;
-    using static core;
 
     [ApiHost]
     public unsafe partial class CliReader
     {
+        const byte TableCount = (byte)TableIndex.CustomDebugInformation + 1;
+
         readonly MetadataReader MD;
 
         readonly MemorySeg Segment;
@@ -58,7 +59,7 @@ namespace Z0
         public ReadOnlySpan<byte> MetaBytes
         {
             [MethodImpl(Inline)]
-            get => memory.view<byte>(Segment);
+            get => core.view<byte>(Segment);
         }
 
         public unsafe SRM.MemoryBlock MemoryBlock()
@@ -66,74 +67,5 @@ namespace Z0
 
         public unsafe Outcome<CliMetadataHeader> Version()
             => SRM.ReadMetadataHeader(MemoryBlock());
-
-        [Op]
-        public CliBlob ReadBlobDescription(BlobHandle handle, Count seq)
-        {
-            var offset = (Address32)MD.GetHeapOffset(handle);
-            var value = MD.GetBlobBytes(handle) ?? sys.empty<byte>();
-            var size = (uint)MD.GetHeapSize(HeapIndex.Blob);
-            var row = new CliBlob();
-            row.Sequence = seq;
-            row.HeapSize = (uint)MD.GetHeapSize(HeapIndex.Blob);
-            row.Offset = (Address32)MD.GetHeapOffset(handle);
-            row.Data = value;
-            row.DataSize = (uint)row.Data.Length;
-            return row;
-        }
-
-        public ReadOnlySpan<CliBlob> ReadBlobDescriptions()
-        {
-            var size = (uint)MD.GetHeapSize(HeapIndex.Blob);
-            if (size == 0)
-                return Span<CliBlob>.Empty;
-
-            var handle = MetadataTokens.BlobHandle(1);
-            var i=0;
-            var values = root.list<CliBlob>();
-            do
-            {
-                var value = MD.GetBlobBytes(handle);
-                var row = new CliBlob();
-                row.Sequence = i++;
-                row.HeapSize = size;
-                row.Offset = (Address32)MD.GetHeapOffset(handle);
-                row.Data = MD.GetBlobBytes(handle);
-                row.DataSize = (uint)row.Data.Length;
-                values.Add(row);
-                handle = MD.GetNextHandle(handle);
-            }
-            while (!handle.IsNil);
-
-            return values.ToArray();
-        }
-
-        public Index<CliUserString> ReadUserStringInfo()
-        {
-            var reader = MD;
-            int size = MD.GetHeapSize(HeapIndex.UserString);
-            if (size == 0)
-                return sys.empty<CliUserString>();
-
-            var values = root.list<CliUserString>();
-            var handle = MetadataTokens.UserStringHandle(0);
-            var i=0;
-
-            do
-            {
-                values.Add(new CliUserString(seq: i++, size, HeapOffset(handle), Read(handle)));
-                handle = MD.GetNextHandle(handle);
-            }
-            while (!handle.IsNil);
-
-            return values.ToArray();
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref ManifestResource ReadResource(ManifestResourceHandle src, out ManifestResource dst)
-        {
-            dst = Read(src);
-            return ref dst;
-        }
     }
 }

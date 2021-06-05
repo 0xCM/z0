@@ -2,13 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    [ApiHost]
-    public partial class SegmentedKinds
+    using static Root;
+
+    partial struct asm
     {
-        const NumericKind Closure = NumericKind.All;
+        [MethodImpl(Inline), Op]
+        public static AsmExpr expression(string src)
+            => new AsmExpr(src);
     }
 }

@@ -202,7 +202,7 @@ namespace Z0.Asm
             public r8b(T value)
                 => Content = value;
 
-            public K RegKind => K.R8L;
+            public K RegKind => K.R8B;
 
 
             [MethodImpl(Inline)]
@@ -218,7 +218,7 @@ namespace Z0.Asm
             public r9b(T value)
                 => Content = value;
 
-            public K RegKind => K.R9L;
+            public K RegKind => K.R9B;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r9b src)
@@ -233,7 +233,7 @@ namespace Z0.Asm
             public r10b(T value)
                 => Content = value;
 
-            public K RegKind => K.R10L;
+            public K RegKind => K.R10B;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r10b src)
@@ -254,7 +254,7 @@ namespace Z0.Asm
             public r11b(T value)
                 => Content = value;
 
-            public K RegKind => K.R11L;
+            public K RegKind => K.R11B;
 
         }
 
@@ -272,7 +272,7 @@ namespace Z0.Asm
             public r12b(T value)
                 => Content = value;
 
-            public K RegKind => K.R12L;
+            public K RegKind => K.R12B;
 
         }
 
@@ -290,7 +290,7 @@ namespace Z0.Asm
             public r13b(T value)
                 => Content = value;
 
-            public K RegKind => K.R13L;
+            public K RegKind => K.R13B;
 
 
         }
@@ -309,7 +309,7 @@ namespace Z0.Asm
             public r14b(T value)
                 => Content = value;
 
-            public K RegKind => K.R14L;
+            public K RegKind => K.R14B;
 
         }
 
@@ -327,7 +327,7 @@ namespace Z0.Asm
             public r15b(T value)
                 => Content = value;
 
-            public K RegKind => K.R15L;
+            public K RegKind => K.R15B;
        }
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static memory;
+    using static core;
 
     [ApiHost]
     public class ApiCodeBlockTraverser : AppService<ApiCodeBlockTraverser>

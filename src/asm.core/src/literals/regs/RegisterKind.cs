@@ -86,21 +86,21 @@ namespace Z0.Asm
 
         DIL = G8.DIL,
 
-        R8L = G8.R8L,
+        R8B = G8.R8B,
 
-        R9L = G8.R9L,
+        R9B = G8.R9B,
 
-        R10L = G8.R10L,
+        R10B = G8.R10B,
 
-        R11L = G8.R11L,
+        R11B = G8.R11B,
 
-        R12L = G8.R12L,
+        R12B = G8.R12B,
 
-        R13L = G8.R13L,
+        R13B = G8.R13B,
 
-        R14L = G8.R14L,
+        R14B = G8.R14B,
 
-        R15L = G8.R15L,
+        R15B = G8.R15B,
 
         // ~ 16-bit general-purpose registers
         // ~ ------------------------------------------------------------------

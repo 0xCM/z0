@@ -76,7 +76,7 @@ namespace Z0.Asm
             => src is AsmHexCode x && Equals(x);
 
         public string Format()
-            => api.format(this);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();

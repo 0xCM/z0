@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static Typed;
-    using static core;
 
     partial struct CpuBits
     {

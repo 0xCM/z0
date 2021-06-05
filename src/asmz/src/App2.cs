@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Reflection;
     using System.Collections.Generic;
-    using System.IO;
+    using System.Reflection.Metadata.Ecma335;
     using System.Text;
 
     using static Part;
@@ -461,18 +461,27 @@ namespace Z0.Asm
                 Wf.EmittedFile(emitting, result.Data);
         }
 
-        void EmitMethodDefs()
+        void EmitMethodDefs(CliPipe pipe)
         {
-            var pipe = Wf.CliPipe();
-            var dst = Db.IndexTable<MethodDefInfo>();
-            pipe.EmitMethodDefs(Wf.ApiCatalog.Components, dst);
+            pipe.EmitMethodDefs(Wf.ApiCatalog.Components, Db.IndexTable<MethodDefInfo>());
         }
 
-        void EmitFieldDefs()
+        void EmitFieldDefs(CliPipe pipe)
+        {
+            pipe.EmitFieldDefs(Wf.ApiCatalog.Components, Db.IndexTable<FieldDefInfo>());
+        }
+
+        void EmitRowStats(CliPipe pipe)
+        {
+            pipe.EmitRowStats(Wf.ApiCatalog.Components, Db.IndexTable<CliRowStats>());
+        }
+
+        void EmitCliMetadata()
         {
             var pipe = Wf.CliPipe();
-            var dst = Db.IndexTable<FieldDefInfo>();
-            pipe.EmitFieldDefs(Wf.ApiCatalog.Components, dst);
+            EmitRowStats(pipe);
+            EmitMethodDefs(pipe);
+            EmitFieldDefs(pipe);
         }
 
         void ShowMemory()
@@ -639,6 +648,26 @@ namespace Z0.Asm
             return counter;
         }
 
+        void CompareBitstrings()
+        {
+            var buffer = Cells.alloc(n128).Bytes;
+            var count = Hex.parse("80C116",buffer);
+            var data = slice(buffer,0,count);
+            Wf.Row(data.FormatHex());
+
+            // AsmBytes.parse("80C116", out var a);
+            // var bsA = AsmBitstrings.bitchars(a).Format();
+            // var xA = a.Format();
+
+            // AsmBytes.parse("80C216", out var b);
+            // var bsB = AsmBitstrings.bitchars(b).Format();
+            // var xB = b.Format();
+
+            // Wf.Row(string.Format("{0,-14} | [{1}]", xA, bsA));
+            // Wf.Row(string.Format("{0,-14} | [{1}]", xB, bsB));
+        }
+
+
         void ProcessStatementIndex()
         {
             var counter = 0u;
@@ -646,18 +675,17 @@ namespace Z0.Asm
             var totalSize = ByteSize.Zero;
 
             var dst = Db.AppLog("statements.bitstrings", FS.Csv);
-            var pattern = "{0,-12} | {1,-8} | {2}";
+            var pattern = "{0,-12} | {1,-8} | {2,-32} | {3}";
             using var writer = dst.Writer(Encoding.ASCII);
-            writer.WriteLine(pattern, "Sequence", "Size", "Bitstring");
+            writer.WriteLine(pattern, "Sequence", "Size", "Data", "Bitstring");
 
             void Receive(in AsmIndex src)
             {
                 ref readonly var encoded = ref src.Encoded;
                 ref readonly var seq = ref src.Sequence;
                 var size = encoded.Size;
-                //var bitstring = AsmBitstrings.format(encoded);
-                var bitstring = AsmBitstrings.bitchars(encoded).Format();
-                var content = string.Format(pattern, seq, size, bitstring);
+                var bitstring = AsmBitstrings.bitchars(n3, encoded).Format();
+                var content = string.Format(pattern, seq, size, encoded.Format(), bitstring);
                 writer.WriteLine(content);
             }
 
@@ -689,8 +717,11 @@ namespace Z0.Asm
 
         public void Run()
         {
+            ProcessStatementIndex();
+            //CompareBitstrings();
+            //EmitCliMetadata();
             //CaptureParts(PartId.AsmCore);
-            ApiExtractWorkflow.run(Wf);
+            //ApiExtractWorkflow.run(Wf);
             //CheckCpuid();
             //CheckRowFormat();
             //RunExtractWorkflow();

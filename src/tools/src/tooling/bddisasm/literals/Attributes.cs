@@ -10,37 +10,37 @@ namespace Z0.Tools
         [SymbolSource]
         public enum Attributes : byte
         {
-            [Symbol("","Mod r/m is present")]
+            [Symbol("modrm","Mod r/m is present")]
             MODRM,
 
-            [Symbol("","Instruction invalid in 64 bit mode")]
+            [Symbol("ii64","Instruction invalid in 64 bit mode")]
             II64,
 
-            [Symbol("","Operand size forced to 64 bit")]
+            [Symbol("f64","Operand size forced to 64 bit")]
             F64,
 
-            [Symbol("","Operand size defaults to 64 bit")]
+            [Symbol("d64","Operand size defaults to 64 bit")]
             D64,
 
-            [Symbol("","Instruction valid only in 64 bit mode")]
+            [Symbol("o64","Instruction valid only in 64 bit mode")]
             O64,
 
             [Symbol("","Instruction has condition byte")]
             SSECONDB,
 
-            [Symbol("","Instruction has predicated encoded in lower 4 bit of the opcode")]
+            [Symbol("cond","Instruction has predicated encoded in lower 4 bit of the opcode")]
             COND,
 
-            [Symbol("","Instruction uses VSIB addressing")]
+            [Symbol("vsib","Instruction uses VSIB addressing")]
             VSIB,
 
-            [Symbol("","Instruction uses MIB addressing")]
+            [Symbol("mib","Instruction uses MIB addressing")]
             MIB,
 
-            [Symbol("","*vex.L is ignored")]
+            [Symbol("LIG","*vex.L is ignored")]
             LIG,
 
-            [Symbol("","*vex.W is ignored")]
+            [Symbol("WIG","*vex.W is ignored")]
             WIG,
 
             [Symbol("3DNOW","Instruction uses 3dnow encoding")]

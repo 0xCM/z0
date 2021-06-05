@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.InteropServices;
     using System.Reflection;
 
@@ -12,16 +13,19 @@ namespace Z0
     {
         public const string TableId = "image.fields";
 
+        public const byte FieldCount = 5;
+
         public string Component;
 
         public CliToken Token;
 
         public string Name;
 
-        public uint Offset;
-
         public CliSig CliSig;
 
         public FieldAttributes Attributes;
+
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{24,16,48,48,12};
     }
 }

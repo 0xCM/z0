@@ -27,7 +27,7 @@ namespace Z0
 
             if(options.EmitCliStrings)
             {
-                Emitted(EmitUserStringInfo());
+                EmitUserStrings();
                 EmitSystemStringInfo();
             }
 

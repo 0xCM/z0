@@ -62,7 +62,6 @@ namespace Z0
             where T : unmanaged
                 => kind_u(w,t);
 
-
         [MethodImpl(Inline)]
         static SegKind kind_u<T>(W16 w, T t = default)
             where T : unmanaged

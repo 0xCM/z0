@@ -1,3 +1,7 @@
+# ADD
+
+## OpCodes
+----------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction      | Op/En | 64-bit Mode | Compat/Leg Mode | Description                                   |
 | 04 ib            | ADD AL, imm8     | I     | Valid       | Valid           | Add imm8 to AL.                               |
 | 05 iw            | ADD AX, imm16    | I     | Valid       | Valid           | Add imm16 to AX.                              |

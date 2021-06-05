@@ -11,24 +11,27 @@ namespace Z0
 
     partial class CliPipe
     {
-        public ReadOnlySpan<CliUserString> EmitUserStringInfo()
-            => EmitUserStringInfo(Wf.Components);
+        public uint EmitUserStrings()
+            => EmitUserStrings(Wf.Components);
 
-        public ReadOnlySpan<CliUserString> EmitUserStringInfo(ReadOnlySpan<Assembly> src)
+        public uint EmitUserStrings(ReadOnlySpan<Assembly> src)
         {
-            var buffer = DataList.create<CliUserString>();
             var count = src.Length;
+            var counter = 0u;
             for(var i=0; i<count; i++)
-                EmitUserStrings(skip(src,i), buffer);
-            return buffer.Emit();
+            {
+                var emitted = EmitUserStrings(skip(src,i));
+                counter += (uint)emitted.Length;
+            }
+            return counter;
         }
 
-        void EmitUserStrings(Assembly src, DataList<CliUserString> buffer)
+        public ReadOnlySpan<CliUserString> EmitUserStrings(Assembly src)
         {
             var reader = Cli.reader(src);
             var records = reader.ReadUserStringInfo();
-            buffer.Add(records);
             Db.EmitTable<CliUserString>(records, src.GetSimpleName());
+            return records;
         }
     }
 }

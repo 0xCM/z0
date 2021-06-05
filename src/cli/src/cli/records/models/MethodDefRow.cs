@@ -13,6 +13,8 @@ namespace Z0
         [CliRecord(CliTableKind.MethodDef), StructLayout(LayoutKind.Sequential)]
         public struct MethodDefRow : ICliRecord<MethodDefRow>
         {
+            public CliToken Key;
+
             public Address32 Rva;
 
             public MethodImplAttributes ImplAttributes;

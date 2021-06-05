@@ -537,7 +537,7 @@ namespace Z0.Asm
             const ulong Displacement = 0xfc632176;
             var instruction = array<byte>(0xe8, 0x76, 0x21, 0x63, 0xfc);
             MemoryAddress Encoded =  0x7ffc52e94420;
-            MemoryAddress nextIp = AsmCore.nextip(FunctionBase,  InstructionOffset, InstructionSize);
+            MemoryAddress nextIp = asm.nextip(FunctionBase,  InstructionOffset, InstructionSize);
             MemoryAddress target = nextIp + Displacement;
         }
 
@@ -548,7 +548,7 @@ namespace Z0.Asm
             const uint Displacement = 0xfc632176;
 
             MemoryAddress client = FunctionBase + InstructionOffset;
-            var call = AsmCore.call(client,Displacement);
+            var call = asm.call(client,Displacement);
             Wf.Status(AsmRender.format(call));
         }
 

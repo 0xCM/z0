@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
 
     using static Root;
-    using static core;
-    using static CliRows;
 
-    partial class CliReader
+    partial struct Hex
     {
-
+        [MethodImpl(Inline), Op]
+        public static bit specifier(char src)
+            => src == Chars.X || src == Chars.x || src == Chars.h;
     }
 }

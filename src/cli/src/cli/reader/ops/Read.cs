@@ -63,10 +63,6 @@ namespace Z0
             => MD.GetPropertyDefinition(src);
 
         [MethodImpl(Inline), Op]
-        public TypeDefinition Read(TypeDefinitionHandle src)
-            => MD.GetTypeDefinition(src);
-
-        [MethodImpl(Inline), Op]
         public TypeReference Read(TypeReferenceHandle src)
             => MD.GetTypeReference(src);
 
@@ -89,16 +85,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public void Read(ReadOnlySpan<CustomAttributeHandle> src, Span<CustomAttribute> dst)
         {
-            var count = root.min(src.Length, dst.Length);
+            var count = min(src.Length, dst.Length);
             for(var i=0; i<count; i++)
-                seek(dst,i) = Read(skip(src,i));
-        }
-
-        [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<TypeDefinitionHandle> src, Span<TypeDefinition> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
                 seek(dst,i) = Read(skip(src,i));
         }
 

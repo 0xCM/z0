@@ -16,20 +16,24 @@ namespace Z0
     partial class CliReader
     {
         [MethodImpl(Inline), Op]
-        public static Handle handle(CliHandleData src)
-            => @as<CliHandleData,Handle>(src);
+        public uint ConstantRowCount()
+            => (uint)MD.GetTableRowCount(TableIndex.Constant);
 
         [MethodImpl(Inline), Op]
-        public static ManifestResourceHandle ResourceHandle(uint row)
-            => MetadataTokens.ManifestResourceHandle((int)row);
+        public uint ConstantRowSize()
+            => (uint)MD.GetTableRowSize(TableIndex.Constant);
+
+        [MethodImpl(Inline), Op]
+        public uint ConstantTableSize()
+            => ConstantRowCount()* ConstantRowSize();
+
+        [MethodImpl(Inline), Op]
+        public static Handle handle(CliHandleData src)
+            => @as<CliHandleData,Handle>(src);
 
         [Op]
         public ReadOnlySpan<AssemblyReferenceHandle> AssemblyRefHandles()
             => MD.AssemblyReferences.ToReadOnlySpan();
-
-        [Op]
-        public ReadOnlySpan<TypeDefinitionHandle> TypeDefHandles()
-            => MD.TypeDefinitions.ToReadOnlySpan();
 
         [Op]
         public ReadOnlySpan<TypeReferenceHandle> TypeRefHandles()
@@ -46,10 +50,6 @@ namespace Z0
         [Op]
         public ReadOnlySpan<MemberReferenceHandle> MemberRefHandles()
             => MD.MemberReferences.ToReadOnlySpan();
-
-        [Op]
-        public ReadOnlySpan<ManifestResourceHandle> ResourceHandles()
-            => MD.ManifestResources.ToReadOnlySpan();
 
         [Op]
         public ReadOnlySpan<AssemblyFileHandle> AssemblyFileHandles()

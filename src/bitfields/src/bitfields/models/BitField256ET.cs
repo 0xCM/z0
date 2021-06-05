@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
+
     using api = CpuBits;
 
     public struct Bitfield256<E,T>

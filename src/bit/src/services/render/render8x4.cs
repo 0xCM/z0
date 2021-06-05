@@ -64,6 +64,119 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint render(N3 n, byte src, uint offset, Span<BitChar> dst)
+        {
+            var i=offset;
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            return n;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N6 n, N3 w, byte src, uint offset, Span<BitChar> dst)
+        {
+            var i= offset;
+            seek(dst, i++) = bit.test(src, 5);
+            seek(dst, i++) = bit.test(src, 4);
+            seek(dst, i++) = bit.test(src, 3);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            seek(dst, i++) = BitChars.SegSep;
+            return n + 2u;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N8 n, N3 w, byte src, uint offset, Span<BitChar> dst)
+        {
+            var i= offset;
+            seek(dst, i++) = bit.test(src, 7);
+            seek(dst, i++) = bit.test(src, 6);
+            seek(dst, i++) = bit.test(src, 5);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 4);
+            seek(dst, i++) = bit.test(src, 3);
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            seek(dst, i++) = BitChars.SegSep;
+            return n + 3u;
+        }
+
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N9 n, N3 w, ushort src, uint offset, Span<BitChar> dst)
+        {
+            var i=offset;
+            seek(dst, i++) = bit.test(src, 8);
+            seek(dst, i++) = bit.test(src, 7);
+            seek(dst, i++) = bit.test(src, 6);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 5);
+            seek(dst, i++) = bit.test(src, 4);
+            seek(dst, i++) = bit.test(src, 3);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            seek(dst, i++) = BitChars.SegSep;
+            return n + 3u;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N12 n, N3 w, ushort src, uint offset, Span<BitChar> dst)
+        {
+            var i=offset;
+            seek(dst, i++) = bit.test(src, 11);
+            seek(dst, i++) = bit.test(src, 10);
+            seek(dst, i++) = bit.test(src, 9);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 8);
+            seek(dst, i++) = bit.test(src, 7);
+            seek(dst, i++) = bit.test(src, 6);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 5);
+            seek(dst, i++) = bit.test(src, 4);
+            seek(dst, i++) = bit.test(src, 3);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            seek(dst, i++) = BitChars.SegSep;
+            return n + 4u;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N15 n, N3 w, ushort src, uint offset, Span<BitChar> dst)
+        {
+            var i=offset;
+            seek(dst, i++) = bit.test(src, 14);
+            seek(dst, i++) = bit.test(src, 13);
+            seek(dst, i++) = bit.test(src, 12);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 11);
+            seek(dst, i++) = bit.test(src, 10);
+            seek(dst, i++) = bit.test(src, 9);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 8);
+            seek(dst, i++) = bit.test(src, 7);
+            seek(dst, i++) = bit.test(src, 6);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 5);
+            seek(dst, i++) = bit.test(src, 4);
+            seek(dst, i++) = bit.test(src, 3);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            seek(dst, i++) = BitChars.SegSep;
+            return n + 4u;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint render(N4 w, ReadOnlySpan<byte> src, Span<char> dst)
         {
             var size = src.Length;

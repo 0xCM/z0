@@ -11,7 +11,6 @@ namespace Z0.Tools
 
     using static Root;
     using static core;
-    using static Asm.AsmCore;
 
     public class CultProcessor : AppService<CultProcessor>
     {
@@ -150,9 +149,9 @@ namespace Z0.Tools
             {
                 ref readonly var record = ref skip(src,i);
                 if(record.RecordKind == CultRecordKind.Statement)
-                    AsmLines.Add(new AsmSourceLine(record.LineNumber, statement(record.Statement), comment(record.Comment)));
+                    AsmLines.Add(new AsmSourceLine(record.LineNumber, asm.statement(record.Statement), asm.comment(record.Comment)));
                 else if(record.RecordKind == CultRecordKind.Label)
-                    AsmLines.Add(new AsmSourceLine(record.LineNumber, label(record.Label.Format()), comment(record.Comment)));
+                    AsmLines.Add(new AsmSourceLine(record.LineNumber, asm.label(record.Label.Format()), asm.comment(record.Comment)));
                 else if(record.RecordKind == CultRecordKind.Summary)
                 {
                     var summary = Summarize(record);
@@ -296,14 +295,14 @@ namespace Z0.Tools
             var path = DetailPath(summary.Mnemonic);
             using var writer = path.Writer(true);
             writer.WriteLine();
-            writer.WriteLine(comment(summary.Id));
-            writer.WriteLine(comment(PageBreak));
+            writer.WriteLine(asm.comment(summary.Id));
+            writer.WriteLine(asm.comment(PageBreak));
 
             if(AsmLines.IsNonEmpty)
             {
                 foreach(var line in AsmLines)
                 {
-                    var lf =  AsmCore.Format(line);
+                    var lf =  AsmRender.format(line);
                     if(lf.StartsWith(summary.Mnemonic.Format(MnemonicCase.Lowercase) + Chars.Space))
                         writer.WriteLine(lf);
                 }
@@ -311,12 +310,15 @@ namespace Z0.Tools
             }
         }
 
+        static string[] operands(string instruction)
+            => instruction.RightOfFirst(Chars.Space).Split(Chars.Comma).Select(x => x.Trim());
+
         static FS.FileName DetailFile(AsmMnemonic src)
             => FS.file(string.Format("cult.{0}", src.Format(MnemonicCase.Lowercase)), FS.Asm);
 
         static Identifier identify(in CultSummaryRecord src)
         {
-            var individuals = AsmCore.operands(src.Instruction);
+            var individuals = operands(src.Instruction);
             var joined = individuals.Length != 0 ? individuals.Join(Chars.Underscore) : EmptyString;
             if(text.nonempty(joined))
                 return string.Format("{0}_{1}", src.Mnemonic, joined);

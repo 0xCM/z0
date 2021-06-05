@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Llvm
+namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -13,11 +13,16 @@ namespace Z0.Llvm
     using static ValueTypes;
 
     [ApiHost]
-    public readonly partial struct LLVM
+    public readonly partial struct LlvmValues
     {
         [MethodImpl(Inline), Op]
         internal static StringAddress name(string src)
             => StringAddress.resource(src);
+
+        [MethodImpl(Inline)]
+        internal static ushort width<T>(T src = default)
+            where T : unmanaged
+                => core.width<T>();
 
         [MethodImpl(Inline)]
         public static ref ValueTypeInfo describe<T>(out ValueTypeInfo dst)
@@ -30,8 +35,12 @@ namespace Z0.Llvm
         }
 
         [MethodImpl(Inline), Op]
-        public static ValueTypeInfo describe(v128i64 src)
-            => describe<v128i64>(out var _);
+        public static ref ValueTypeInfo describe(v128i64 src, out ValueTypeInfo dst)
+        {
+            dst.Name = src.Name;
+            dst.Width = width(src);
+            return ref dst;
+        }
 
         [MethodImpl(Inline), Op]
         public static ref v1i64 v1i64(Span<byte> src)

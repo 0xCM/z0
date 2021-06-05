@@ -107,7 +107,7 @@ namespace Z0.Asm
                 for(var j=0; j<icount; j++)
                 {
                     var instruction = skip(instructions,j);
-                    var opcode = AsmCore.opcode(instruction.OpCode.ToString());
+                    var opcode = asm.opcode(instruction.OpCode.ToString());
                     if(!opcode.IsValid)
                         break;
 
@@ -326,7 +326,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref skip(instructions,i);
-                var opcode = AsmCore.opcode(instruction.OpCode.ToString());
+                var opcode = asm.opcode(instruction.OpCode.ToString());
                 if(!opcode.IsValid)
                     break;
 
@@ -366,7 +366,7 @@ namespace Z0.Asm
             var files = dir.EnumerateFiles(FS.Csv, true).Array();
             var flow = Wf.Running(ParsingStatements.Format(files.Length,dir));
             var dst = bag<AsmApiStatement>();
-            var docs = TextDoc.load(files);
+            var docs = TextDocs.load(files);
             var counter = 0u;
             foreach(var doc in docs)
             {

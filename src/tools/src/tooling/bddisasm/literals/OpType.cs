@@ -34,6 +34,14 @@ namespace Z0.Tools
             public const string K = "K";
 
             public const string L = "L";
+
+            public const string M = "M";
+
+            public const string N = "N";
+
+            public const string O = "O";
+
+            public const string P = "P";
         }
 
         [SymbolSource]

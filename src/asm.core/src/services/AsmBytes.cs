@@ -21,7 +21,7 @@ namespace Z0.Asm
         public static bool parse(string src, out AsmHexCode dst)
         {
             var storage = Cells.alloc(w128);
-            var size = Hex.parse(span(src.Trim()),storage.Bytes);
+            var size = Hex.parse(span(src.Trim()), storage.Bytes);
             if(size == 0 || size > 15)
             {
                 dst = AsmHexCode.Empty;
@@ -80,10 +80,6 @@ namespace Z0.Asm
         public static AsmHexCode hexcode<T>(T src)
             where T : unmanaged
                 => hexcode(bytes(src));
-
-        [Op]
-        public static string format(in AsmHexCode src)
-            => src.Data.FormatHexData(size(src));
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode hexcode(ReadOnlySpan<byte> src)

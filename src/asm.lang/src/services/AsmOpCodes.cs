@@ -10,6 +10,6 @@ namespace Z0.Asm
     public readonly partial struct AsmOpCodes
     {
         public static AsmOpCodeExpr conform(string src)
-            => AsmCore.opcode(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
+            => asm.opcode(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
     }
 }

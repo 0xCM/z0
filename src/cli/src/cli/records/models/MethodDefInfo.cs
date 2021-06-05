@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.InteropServices;
     using System.Reflection;
 
@@ -11,6 +12,8 @@ namespace Z0
     public struct MethodDefInfo : IRecord<MethodDefInfo>
     {
         public const string TableId = "image.methods";
+
+        public const byte FieldCount = 7;
 
         public string Component;
 
@@ -25,5 +28,8 @@ namespace Z0
         public MethodImplAttributes ImplAttributes;
 
         public MethodAttributes Attributes;
+
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{16,16,48,16,56,24,24};
     }
 }

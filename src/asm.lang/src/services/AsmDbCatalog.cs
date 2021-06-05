@@ -17,8 +17,8 @@ namespace Z0.Asm
         public AsmDbSourceDocs SourceDocs()
         {
             var assets = Parts.AsmCatalogs.Assets;
-            if(TextDoc.resource(assets.AsmDbInstructions(), TextDocFormat.Structured(), out var instructions)
-            && (TextDoc.resource(assets.AsmDbOperands(), TextDocFormat.Structured(), out var operands)))
+            if(TextDocs.resource(assets.AsmDbInstructions(), TextDocFormat.Structured(), out var instructions)
+            && (TextDocs.resource(assets.AsmDbOperands(), TextDocFormat.Structured(), out var operands)))
                 return new AsmDbSourceDocs(instructions,operands);
             else
                 return AsmDbSourceDocs.Empty;
@@ -56,7 +56,7 @@ namespace Z0.Asm
                     var modrm = row.Cell(IF.ModRM);
 
                     DataParser.parse(index, out entry.Index);
-                    entry.Mnemonic = AsmCore.mnemonic(monic);
+                    entry.Mnemonic = asm.mnemonic(monic);
                     entry.X64 = SupportsX64(arch);
                     if(DataParser.parse(ocb, out byte _ocb))
                         entry.OpCodeByte = _ocb;

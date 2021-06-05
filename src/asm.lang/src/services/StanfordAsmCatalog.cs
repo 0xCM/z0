@@ -228,9 +228,9 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(imported, i);
-                var oc = AsmCore.opcode(row.OpCode);
+                var oc = asm.opcode(row.OpCode);
                 if(AsmParser.sig(row.Instruction, out var sig))
-                    seek(buffer, k++) = AsmCore.form(oc, sig);
+                    seek(buffer, k++) = asm.form(oc, sig);
                 else
                 {
                     seek(buffer, k++) = AsmFormExpr.Empty;
@@ -243,7 +243,7 @@ namespace Z0.Asm
 
         bool parse(ushort seq, in TextLine src, ref StokeAsmImportRow dst)
         {
-            if(TextDoc.row(src, SourceFormat, out var row))
+            if(TextDocs.row(src, SourceFormat, out var row))
             {
                 if(row.CellCount == 15)
                 {
