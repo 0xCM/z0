@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     partial class XTend
     {
-        public static ParseFunction<MemoryAddress> Parser(this MemoryAddress src)
+        public static ParserDelegate<MemoryAddress> Parser(this MemoryAddress src)
             => AddressParser.parse;
 
-        public static ParseFunction<MemoryAddress> Parser(this Address32 src)
+        public static ParserDelegate<MemoryAddress> Parser(this Address32 src)
             => AddressParser.parse;
     }
 }

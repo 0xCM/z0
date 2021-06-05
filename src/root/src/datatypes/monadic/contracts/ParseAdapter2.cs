@@ -8,12 +8,12 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ParseAdapter<S,T>
+    public readonly struct ParseAdapter2<S,T>
     {
-        readonly IParser<S,T> Parser;
+        readonly IParser2<S,T> Parser;
 
         [MethodImpl(Inline)]
-        public ParseAdapter(IParser<S,T> parser)
+        public ParseAdapter2(IParser2<S,T> parser)
             => Parser = parser;
 
         public T Succeed(S src, T @default)

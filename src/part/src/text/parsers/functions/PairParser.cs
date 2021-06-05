@@ -10,10 +10,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct TextParsers
+    partial struct ParseComposer
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static PairParser<T> CreatePairParser<T>(string delimiter, TextParser<T> fx, bool clean = true)
+        public static PairParser<T> CreatePairParser<T>(string delimiter, ParseFunction<T> fx, bool clean = true)
             => new PairParser<T>(delimiter, fx, clean);
 
         [Op, Closures(Closure)]
@@ -22,14 +22,14 @@ namespace Z0
 
         public readonly struct PairParser<T> : IParseFunction<Pair<T>>
         {
-            readonly TextParser<T> ItemParser;
+            readonly ParseFunction<T> ItemParser;
 
             readonly string Delimiter;
 
             readonly bool SplitClean;
 
             [MethodImpl(Inline)]
-            public PairParser(string delimiter, TextParser<T> fx, bool clean = true)
+            public PairParser(string delimiter, ParseFunction<T> fx, bool clean = true)
             {
                 Delimiter = delimiter;
                 ItemParser = fx;

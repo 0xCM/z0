@@ -29,7 +29,6 @@ namespace Z0
         }
     }
 
-
     public interface IParseFunction<T,K> : IParseFunction<T>
         where K : unmanaged
     {

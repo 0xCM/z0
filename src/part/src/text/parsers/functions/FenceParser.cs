@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static Rules;
 
-    partial struct TextParsers
+    partial struct ParseComposer
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static FenceParser CreateFenceParser(Fence<char> fence)

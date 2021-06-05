@@ -80,5 +80,9 @@ namespace Z0
         [Op]
         public static ApiPacks ApiPacks(this IWfRuntime wf)
             => Svc.ApiPacks.create(wf);
+
+        [Op]
+        public static ApiTypeCatalog ApiTypes(this IWfRuntime wf)
+            => Svc.ApiTypeCatalog.create(wf);
     }
 }

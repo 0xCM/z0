@@ -58,12 +58,6 @@ namespace Z0
         public const double Min64f = double.MinValue;
 
         /// <summary>
-        /// The minimum representable <see cref='decimal'/> value
-        /// </summary>
-        public const decimal Min128f = decimal.MinValue;
-
-
-        /// <summary>
         /// The maximum representable <see cref='sbyte'/> value
         /// </summary>
         public const sbyte Max8i = (sbyte)Limits.Max8i;
@@ -133,9 +127,5 @@ namespace Z0
         /// </summary>
         public const double Max64f = double.MaxValue;
 
-        /// <summary>
-        /// The maximum representable <see cref='decimal'/> value
-        /// </summary>
-        public const decimal Mak128f = decimal.MaxValue;
     }
 }

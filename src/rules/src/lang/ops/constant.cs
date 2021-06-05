@@ -29,7 +29,7 @@ namespace Z0.Lang
         /// <param name="map">The source transformer</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The constant type</typeparam>
-        public static ConstExpr<S,T> constexpr<S,T>(string name, S src, ITransformer<S,T> map)
+        public static ConstExpr<S,T> constexpr<S,T>(string name, S src, ITransformer2<S,T> map)
             => map.Transform(src, out var dst)
             ? new ConstExpr<S,T>(name, src, dst, (ConstantKind)ClrLiteralKinds.kind<T>())
             : @throw<ConstExpr<S,T>>(new Exception(Msg.TransformFailed<S,T>(src)));

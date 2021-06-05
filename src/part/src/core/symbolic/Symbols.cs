@@ -70,7 +70,7 @@ namespace Z0
         [Op]
         public static Index<SymLiteral> literals(Index<Type> src)
         {
-            var dst = root.list<SymLiteral>();
+            var dst = list<SymLiteral>();
             var kTypes = src.Count;
             for(var i=0; i<kTypes; i++)
                 dst.AddRange(literals(src[i]));
@@ -83,7 +83,7 @@ namespace Z0
         {
             var kvTypes = Enums.types(src).View;
             var partCount = kvTypes.Length;
-            var dst = root.list<SymLiteral>();
+            var dst = list<SymLiteral>();
             for(var i=0; i<partCount; i++)
             {
                 var types = skip(kvTypes,i).View;

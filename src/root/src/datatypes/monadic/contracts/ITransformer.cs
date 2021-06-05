@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
 
-    public interface ITransformer
+    public interface ITransformer2
     {
         Type SourceType {get;}
 
         Type TargetType {get;}
     }
 
-    public interface ITransformer<S,T> : ITransformer
+    public interface ITransformer2<S,T> : ITransformer2
     {
-        Type ITransformer.SourceType
+        Type ITransformer2.SourceType
             => typeof(S);
 
-        Type ITransformer.TargetType
+        Type ITransformer2.TargetType
             => typeof(T);
 
         bool Transform(in S src, out T dst);

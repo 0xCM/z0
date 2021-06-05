@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static core;
 
     using NK = NumericKind;
     using BK = ClrEnumKind;
@@ -37,7 +33,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         [Op]
         public static ClrEnumKind ebase(Type et)
-            => ebase(et.NumericKind());
+            => ebase(et.GetEnumUnderlyingType().NumericKind());
 
         [Op]
         public static ClrEnumKind ebase(NumericKind src)

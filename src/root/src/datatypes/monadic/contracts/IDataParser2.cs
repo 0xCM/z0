@@ -4,13 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IDataParser<T> : ITextParser<T>
+    public interface IDataParser2<T> : ITextParser2<T>
         where T : unmanaged
     {
         ParseResult<T[]> ParseData(string text);
 
         T Succeed(string src)
-            => new ParseAdapter<string,T>(this).Succeed(src, default(T));
+            => new ParseAdapter2<string,T>(this).Succeed(src, default(T));
 
         T[] ParseData(string text, T[] @default)
             => ParseData(text).ValueOrDefault(@default);

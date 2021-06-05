@@ -61,11 +61,6 @@ namespace Z0
         public const double z64f = 0;
 
         /// <summary>
-        /// The zero-value for a 128-bit float
-        /// </summary>
-        public const decimal z128f = 0;
-
-        /// <summary>
         /// Zero, presented as a character, expressed with an impressively-short identifier
         /// </summary>
         public const char z16c = (char)0;

@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T apply<P,S,T>(P parser, S src)
             where T : struct
-            where P : IParser<S,T>
+            where P : IParser2<S,T>
                 => parser.Parse(src).ValueOrDefault(default(T));
     }
 }

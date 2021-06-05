@@ -24,7 +24,7 @@ namespace Z0.Tools
 
         FS.FolderPath DetailRoot;
 
-        IHexParser<byte> HexParser;
+        IHexParser2<byte> HexParser;
 
         FS.FolderPath CatalogRoot;
 

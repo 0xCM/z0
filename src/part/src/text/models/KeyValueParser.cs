@@ -9,7 +9,7 @@ namespace Z0
 
     public readonly struct KeyValueParser
     {
-        public static KeyValueParser<K,V> create<K,V>(ITextParser<K> kp, ITextParser<V> vp, string delimiter = CharText.Eq)
+        public static KeyValueParser<K,V> create<K,V>(ITextParser2<K> kp, ITextParser2<V> vp, string delimiter = CharText.Eq)
             => new KeyValueParser<K,V>(kp, vp, delimiter);
     }
 
@@ -17,11 +17,11 @@ namespace Z0
     {
         public string Delimiter {get;}
 
-        public ITextParser<K> KeyParser {get;}
+        public ITextParser2<K> KeyParser {get;}
 
-        public ITextParser<V> ValueParser {get;}
+        public ITextParser2<V> ValueParser {get;}
 
-        public KeyValueParser(ITextParser<K> kp, ITextParser<V> vp, string delimiter)
+        public KeyValueParser(ITextParser2<K> kp, ITextParser2<V> vp, string delimiter)
         {
             Delimiter = delimiter;
             KeyParser = kp;

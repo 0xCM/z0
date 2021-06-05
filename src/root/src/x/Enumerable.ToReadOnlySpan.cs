@@ -53,5 +53,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this T[] src)
             => src;
+
+        /// <summary>
+        /// Constructs a span from an array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> ReadOnly<T>(this T[] src)
+            => src;
     }
 }

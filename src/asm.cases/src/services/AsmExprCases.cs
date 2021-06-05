@@ -11,16 +11,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public class AsmCaseAttribute : Attribute
-    {
-        public AsmCaseAttribute(AsmOc id)
-        {
-            Id = id;
-        }
-
-        public AsmOc Id {get;}
-    }
-
     public class AsmExprCases : AppService<AsmExprCases>
     {
         readonly AsmX asmx;
@@ -114,7 +104,6 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-        [AsmCase(AsmOc.cmp_r8_imm8)]
         void case_cmp_r8_imm8(AsmOc id)
         {
             const byte a1 = 0x3C;
@@ -122,7 +111,6 @@ namespace Z0.Asm
             Generate(id, (byte)regs.Count, i => asmx.cmp(regs[i], a1));
         }
 
-        [AsmCase(AsmOc.cmp_r16_r16)]
         void case_cmp_r16_r16(AsmOc id)
         {
             var left = Gp16Regs();
@@ -133,7 +121,6 @@ namespace Z0.Asm
             Assemble(id);
         }
 
-        [AsmCase(AsmOc.cmp_r32_r32)]
         void case_cmp_r32_r32(AsmOc id)
         {
             var left = Gp32Regs();

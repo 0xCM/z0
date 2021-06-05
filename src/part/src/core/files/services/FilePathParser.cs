@@ -11,10 +11,10 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost(ApiNames.FilePathParser, true)]
-    public readonly struct FilePathParser : ITextParser<FS.FilePath>
+    [ApiHost]
+    public readonly struct FilePathParser : ITextParser2<FS.FilePath>
     {
-        public static IParser service()
+        public static IParser2 service()
             => default(FilePathParser);
 
         [MethodImpl(Inline), Op]

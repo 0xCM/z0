@@ -8,10 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Root;
-    using static core;
-    using static Typed;
-
     partial struct BitRender
     {
         /// <summary>

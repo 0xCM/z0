@@ -10,10 +10,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct TextParsers
+    partial struct ParseComposer
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SeqParser<T> CreateSeqParser<T>(string delimiter, TextParser<T> fx, bool clean = true)
+        public static SeqParser<T> CreateSeqParser<T>(string delimiter, ParseFunction<T> fx, bool clean = true)
             => new SeqParser<T>(delimiter, fx, clean);
 
         [Op, Closures(Closure)]
@@ -22,14 +22,14 @@ namespace Z0
 
         public readonly struct SeqParser<T> : IParseFunction<T[]>
         {
-            readonly TextParser<T> TermParser;
+            readonly ParseFunction<T> TermParser;
 
             readonly string Delimiter;
 
             readonly bool SplitClean;
 
             [MethodImpl(Inline)]
-            public SeqParser(string delimiter, TextParser<T> tp, bool clean = true)
+            public SeqParser(string delimiter, ParseFunction<T> tp, bool clean = true)
             {
                 Delimiter = delimiter;
                 TermParser = tp;

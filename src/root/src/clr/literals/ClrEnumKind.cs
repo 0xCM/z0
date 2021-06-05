@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using PK = ClrPrimalKind;
-
     /// <summary>
     /// Restricts the numeric kind classifier to reflect the numeric kinds
     /// that an Enum type may refine

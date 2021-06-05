@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct TextParsers
+    partial struct ParseComposer
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static PairSeqParser<T> CreatePairSeqParser<T>(PairParser<T> pFx, SeqParser<string> sFx)

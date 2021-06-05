@@ -10,24 +10,30 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Represents a native executable
+    /// Identifies and represents a native static library
     /// </summary>
-    public readonly struct NativeExeFile : IFileModule<NativeExeFile>
+    public readonly struct NativeLibFile : IFileModule<NativeLibFile>
     {
         public FS.FilePath Path {get;}
 
         [MethodImpl(Inline)]
-        public NativeExeFile(FS.FilePath path)
+        public NativeLibFile(FS.FilePath path)
             => Path = path;
 
         public FileModuleKind ModuleKind
-            => FileModuleKind.NativeExe;
+            => FileModuleKind.NativeLib;
 
         public FS.FileExt DefaultExt
-            => FS.Exe;
+            =>  FS.Lib;
 
         [MethodImpl(Inline)]
-        public static implicit operator FileModule(NativeExeFile src)
+        public static implicit operator FileModule(NativeLibFile src)
             => new FileModule(src.Path, src.ModuleKind);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImagePath(NativeLibFile src)
+            => src.Path;
+
+
     }
 }

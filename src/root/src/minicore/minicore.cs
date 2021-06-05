@@ -12,7 +12,6 @@ namespace Z0
 
     public readonly partial struct minicore
     {
-
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

@@ -17,7 +17,6 @@ namespace Z0.Asm
 
         const string InlineOpAttributeSpec = "[MethodImpl(Inline), Op]";
 
-
         [Op]
         public void GenerateModelsInPlace(ReadOnlySpan<AsmMnemonic> src)
         {

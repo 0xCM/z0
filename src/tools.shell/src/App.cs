@@ -148,7 +148,7 @@ namespace Z0
             const char Delimiter = ':';
             var input = "a:x:b: y: d";
 
-            var parser = TextParsers.CreateCharSeqParser(Delimiter);
+            var parser = ParseComposer.CreateCharSeqParser(Delimiter);
             var result = parser.Parse(input, out var output);
             if(result)
             {

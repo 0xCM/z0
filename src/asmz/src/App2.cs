@@ -36,15 +36,6 @@ namespace Z0.Asm
 
         StanfordAsmCatalog Catalog;
 
-        public void GenerateInstructionModels()
-        {
-            Wf.AsmCodeGenerator().GenerateModelsInPlace();
-        }
-
-        public void GenerateInstructionModelPreview()
-        {
-            Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
-        }
 
         void EmitFormHashes()
         {
@@ -552,6 +543,16 @@ namespace Z0.Asm
             var resources = Wf.ResPackEmitter().Emit(blocks.View,dst);
         }
 
+        public void GenerateInstructionModels()
+        {
+            Wf.AsmCodeGenerator().GenerateModelsInPlace();
+        }
+
+        public void GenerateInstructionModelPreview()
+        {
+            Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
+        }
+
         void ShowRegOps()
         {
             var reg = AsmOp.reg(RegWidth.W32, RegClass.GP, RegIndex.r2);
@@ -714,14 +715,54 @@ namespace Z0.Asm
             processor.ProcessFile(path);
         }
 
+        void ListPdbMethods()
+        {
+            var modules = Wf.AppModules();
+            var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Cpu).Single();
+            using var source = modules.SymbolSource(catalog.ComponentPath);
+            Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
+            var reader = Wf.PdbReader(source);
+            var methods = catalog.Methods;
+            var log = Db.AppLog(string.Format("{0}.tokens", catalog.PartId.Format()), FS.Csv);
+            var emitting = Wf.EmittingFile(log);
+            var counter = 0u;
+            using var writer = log.Writer();
+            foreach(var info in methods)
+            {
+                var method = reader.Method(info.MetadataToken);
+                if(method)
+                {
+                    writer.WriteLine(method.Payload.Token.Format());
+                    counter++;
+                }
+            }
+            Wf.EmittedFile(emitting, counter);
+        }
 
+        void CheckProvidedLiterals()
+        {
+            var service = Wf.ApiTypes();
+            var providers = service.LiteralProviders();
+            var count = providers.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var provider = ref skip(providers,i);
+                Wf.Row(provider.Name);
+                var literals = service.Literals(provider);
+                for(var j=0; j<literals.Length; j++)
+                {
+                    ref readonly var literal = ref skip(literals,j);
+                    Wf.Row(literal.Format());
+                }
+            }
+        }
         public void Run()
         {
-            ProcessStatementIndex();
+            CheckProvidedLiterals();
+            //ListPdbMethods();
             //CompareBitstrings();
             //EmitCliMetadata();
             //CaptureParts(PartId.AsmCore);
-            //ApiExtractWorkflow.run(Wf);
             //CheckCpuid();
             //CheckRowFormat();
             //RunExtractWorkflow();

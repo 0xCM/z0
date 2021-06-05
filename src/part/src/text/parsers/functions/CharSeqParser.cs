@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static TextQuery;
 
-    partial struct TextParsers
+    partial struct ParseComposer
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static CharSeqParser CreateCharSeqParser(char delimiter, bool skipWs = true)

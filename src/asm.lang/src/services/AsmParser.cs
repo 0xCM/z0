@@ -58,7 +58,7 @@ namespace Z0.Asm
 
             result = text.unfence(src, SigFence, out var sigexpr);
             if(result.Fail)
-                return (false, TextParsers.FenceNotFound.Format(SigFence,src));
+                return (false, ParseComposer.FenceNotFound.Format(SigFence,src));
 
             result = AsmParser.sig(sigexpr, out var sig);
             if(result.Fail)
@@ -66,7 +66,7 @@ namespace Z0.Asm
 
             result = text.unfence(src, OpCodeFence, out var opcode);
             if(result.Fail)
-                return (false, TextParsers.FenceNotFound.Format(OpCodeFence, src));
+                return (false, ParseComposer.FenceNotFound.Format(OpCodeFence, src));
 
             dst = new AsmFormExpr(asm.opcode(opcode), sig);
             return true;

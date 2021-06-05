@@ -67,7 +67,7 @@ namespace Z0
         /// <summary>
         /// The zero-value for a 128-bit float
         /// </summary>
-        public const decimal z128f = Z.z128f;
+        public const decimal z128f = 0;
 
         /// <summary>
         /// The zero-value for a bool

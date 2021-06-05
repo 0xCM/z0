@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct HexScalarParser : ITextParser<ulong>
+    public readonly struct HexScalarParser : ITextParser2<ulong>
     {
         public static ParseResult<ulong> parse(string src)
             => HexNumericParser.parse64u(src);

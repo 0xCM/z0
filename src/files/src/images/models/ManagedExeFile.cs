@@ -38,11 +38,15 @@ namespace Z0
         public FileModuleKind ModuleKind
             => FileModuleKind.ManagedExe;
 
+        public Assembly Load()
+            => Assembly.LoadFrom(Path.Name);
+
         [MethodImpl(Inline)]
         public static implicit operator FileModule(ManagedExeFile src)
             => new FileModule(src.Path, src.ModuleKind);
 
-        public Assembly Load()
-            => Assembly.LoadFrom(Path.Name);
+        [MethodImpl(Inline)]
+        public static implicit operator ImagePath(ManagedExeFile src)
+            => src.Path;
     }
 }

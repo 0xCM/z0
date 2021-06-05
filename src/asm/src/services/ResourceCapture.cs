@@ -5,10 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    using static Root;
     using static core;
 
     public readonly struct ResourceCapture

@@ -39,36 +39,12 @@ namespace Z0.Asm
 
             void show(CodeSymbolModels.TypeSymbol src)
             {
-
                 Wf.Row(src);
                 root.iter(src.GetMembers(), m => Wf.Row(m));
             }
         }
 
 
-        void ListPdbMethods()
-        {
-            var modules = Wf.AppModules();
-            var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Cpu).Single();
-            using var source = modules.SymbolSource(catalog.ComponentPath);
-            Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
-            var reader = Wf.PdbReader(source);
-            var methods = catalog.Methods;
-            var log = Db.AppLog(string.Format("{0}.tokens", catalog.PartId.Format()), FS.Csv);
-            var emitting = Wf.EmittingFile(log);
-            var counter = 0u;
-            using var writer = log.Writer();
-            foreach(var info in methods)
-            {
-                var method = reader.Method(info.MetadataToken);
-                if(method)
-                {
-                    writer.WriteLine(method.Payload.Token.Format());
-                    counter++;
-                }
-            }
-            Wf.EmittedFile(emitting, counter);
-        }
 
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
             => Wf.ApiCatalogs().EmitApiClasses();

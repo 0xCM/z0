@@ -90,7 +90,6 @@ namespace Z0.Asm
             var count = summaries.Length;
             if(count == 0)
                 return default;
-
             var dst = span<string>(count);
             for(var i=0u; i< count; i++)
                 seek(dst,i)= format(src.BaseAddress, skip(summaries,i), config);

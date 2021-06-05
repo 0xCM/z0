@@ -15,10 +15,10 @@ namespace Z0
 
         readonly TextFormatFunction<K> Formatter;
 
-        readonly ITextParser<K> Parser;
+        readonly ITextParser2<K> Parser;
 
         [MethodImpl(Inline)]
-        public SettingKey(K key, TextFormatFunction<K> render, ITextParser<K> parse)
+        public SettingKey(K key, TextFormatFunction<K> render, ITextParser2<K> parse)
         {
             Key = key;
             Formatter = render;

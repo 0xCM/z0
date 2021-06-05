@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MemoryAddressParser : ITextParser<MemoryAddress>
+    public readonly struct MemoryAddressParser : ITextParser2<MemoryAddress>
     {
         public static ParseResult<MemoryAddress> parse(string src)
             => HexNumericParser.parse64u(src).TryMap(x => new MemoryAddress(x));

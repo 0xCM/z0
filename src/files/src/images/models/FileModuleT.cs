@@ -30,8 +30,14 @@ namespace Z0
                 FileModuleKind.Lib => FS.Lib,
                 _ =>  FS.FileExt.Empty
             };
+
         [MethodImpl(Inline)]
         public static implicit operator FileModule(FileModule<T> src)
             => new FileModule(src.Path,src.ModuleKind);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImagePath(FileModule<T> src)
+            => src.Path;
+
     }
 }

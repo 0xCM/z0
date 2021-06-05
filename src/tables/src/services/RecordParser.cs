@@ -14,10 +14,10 @@ namespace Z0
     {
         public char FieldDelimiter {get;}
 
-        readonly ParseFunction<T> F;
+        readonly ParserDelegate<T> F;
 
         [MethodImpl(Inline)]
-        public RecordParser(ParseFunction<T> f, char Delimiter)
+        public RecordParser(ParserDelegate<T> f, char Delimiter)
         {
             FieldDelimiter = Delimiter;
             F = f;

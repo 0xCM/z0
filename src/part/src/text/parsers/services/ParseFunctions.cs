@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public class ParseFunctions
@@ -17,7 +17,7 @@ namespace Z0
 
         public ParseFunctions()
         {
-            _Parsers = root.dict<Type,IParseFunction>();
+            _Parsers = new Dictionary<Type,IParseFunction>();
         }
 
         public ParseFunctions(Index<IParseFunction> src)
@@ -40,10 +40,6 @@ namespace Z0
             dst = default;
             return false;
         }
-
-        [MethodImpl(Inline)]
-        public void Include<T>(ParseFunction<T> parser)
-            => _Parsers[typeof(T)] = TextParsers.CreateTextParser(parser);
 
         [MethodImpl(Inline)]
         public void Include(IParseFunction parser)

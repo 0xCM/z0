@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public delegate Outcome ParseFunction<T>(string src, out T dst);
+    public delegate Outcome ParserDelegate<T>(string src, out T dst);
 
-    public delegate Outcome ParseFunction<S,T>(in S src, out T dst);
+    public delegate Outcome ParserDelegate(string src, out dynamic dst);
 }

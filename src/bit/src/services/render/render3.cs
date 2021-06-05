@@ -20,5 +20,15 @@ namespace Z0
             seek(dst, offset++) = bitchar(src, 0);
             return n;
         }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(N3 n, byte src, uint offset, Span<BitChar> dst)
+        {
+            var i=offset;
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            return n;
+        }
     }
 }

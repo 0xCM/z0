@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static Rules;
 
     [ApiHost]
-    public readonly partial struct TextParsers
+    public readonly partial struct ParseComposer
     {
         const NumericKind Closure = AllNumeric;
 

@@ -51,5 +51,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (ModuleKind & FileModuleKind.Native) != 0;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImagePath(FileModule src)
+            => src.Path;
     }
 }

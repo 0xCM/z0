@@ -13,7 +13,7 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly struct HexByteParser : IHexParser<byte>
+    public readonly struct HexByteParser : IHexParser2<byte>
     {
         public static HexByteParser Service
             => default(HexByteParser);
@@ -120,7 +120,7 @@ namespace Z0
         public byte ParseByte(string src)
             => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
 
-        ParseResult<char,byte> IParser<char,byte>.Parse(char src)
+        ParseResult<char,byte> IParser2<char,byte>.Parse(char src)
         {
             var result = Parse(src);
             return Parser.lift<char,byte>(result);
