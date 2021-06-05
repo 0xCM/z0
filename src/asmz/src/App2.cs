@@ -758,7 +758,7 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            CheckProvidedLiterals();
+            GenerateInstructionModels();
             //ListPdbMethods();
             //CompareBitstrings();
             //EmitCliMetadata();

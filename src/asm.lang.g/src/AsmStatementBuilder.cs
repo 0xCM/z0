@@ -1,12 +1,12 @@
-//-----------------------------------------------------------------------------
-// Generated   :  2021-04-09.14.40.58.9274
+﻿//-----------------------------------------------------------------------------
+// Generated   :  2021-06-05.17.41.55.011
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
     using System.Runtime.CompilerServices;
-    using static Part;
+    using static Root;
     using static AsmInstructions;
 
     public class AsmStatementBuilder

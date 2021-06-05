@@ -92,7 +92,7 @@ namespace Z0.Asm
 
         const string UsingRoot = "using static Root;";
 
-        const string UsingTypePattern = "using static {0}";
+        const string UsingTypePattern = "using static {0};";
 
         const string ClassDeclPattern = "public class {0}";
 
