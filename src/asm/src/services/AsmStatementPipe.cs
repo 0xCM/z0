@@ -409,7 +409,7 @@ namespace Z0.Asm
         {
             var outcome = Outcome.Success;
 
-            if(!TextDoc.parse(src, out var doc))
+            if(!TextDocs.load(src, out var doc))
                return(false, Msg.CouldNotParseDocument.Format(src));
 
             return ParseStatementData(doc, dst);

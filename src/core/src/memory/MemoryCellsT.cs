@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = Spans;
-
     public readonly struct MemoryCells<T>
         where T : unmanaged
     {
@@ -61,6 +59,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Copy(uint offset, uint cells, Span<T> dst)
-            => api.copy(this,offset,cells,dst);
+            => core.copy(this, offset, cells, dst);
     }
 }

@@ -4,14 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmSyntaxPart : ITextual
+    using System;
+    using System.Runtime.CompilerServices;
+
+
+    [ApiHost]
+    public readonly partial struct AsmData
     {
-        TextBlock Content {get;}
+
+
     }
 
-    public interface IAsmSyntaxPart<T> : IAsmSyntaxPart
-        where T : IAsmSyntaxPart<T>
-    {
-
-    }
 }

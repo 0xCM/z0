@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref readonly TextBlock Cell<T>(T index)
             where T : unmanaged
-                =>  ref Data[memory.bw32(index)];
+                =>  ref Data[core.bw32(index)];
 
         static string ColSep(char? delimiter)
             => string.Concat(Chars.Space, delimiter ?? Chars.Pipe, Chars.Space);

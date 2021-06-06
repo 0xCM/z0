@@ -84,6 +84,10 @@ namespace Z0
         public TextBlock Replace(TextBlock match, TextBlock value)
             => Data?.Replace(match,value) ?? EmptyString;
 
+        [MethodImpl(Inline)]
+        public bool StartsWith(TextBlock match)
+            => Text.StartsWith(match);
+
         public bool Equals(TextBlock src)
             => string.Equals(Data, src.Data);
 

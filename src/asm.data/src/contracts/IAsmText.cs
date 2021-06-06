@@ -4,13 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmSyntaxPart : ITextual
+    using System;
+
+    public interface IAsmText
     {
-        TextBlock Content {get;}
+        StringAddress Source {get;}
+
+        AsmTextKind Kind {get;}
+
+        uint Render(ref uint i, Span<char> dst);
     }
 
-    public interface IAsmSyntaxPart<T> : IAsmSyntaxPart
-        where T : IAsmSyntaxPart<T>
+    public interface IAsmText<T> : IAsmText
+        where T : unmanaged
     {
 
     }

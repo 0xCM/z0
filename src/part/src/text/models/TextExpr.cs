@@ -13,7 +13,7 @@ namespace Z0
     {
         public Type ExprType {get;}
 
-        public string Content {get;}
+        public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
         public TextExpr(Type type, string src)
@@ -30,7 +30,7 @@ namespace Z0
 
         public Type ExprType => typeof(T);
 
-        public string Content
+        public TextBlock Content
         {
             [MethodImpl(Inline)]
             get => Source.Content;

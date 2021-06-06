@@ -29,6 +29,5 @@ namespace Z0
         public Asset CpuidBits() => Asset("cpuid-bits.csv");
 
         public Asset FeatureMnemonics() => Asset("feature-mnemonics.csv");
-
     }
 }

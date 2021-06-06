@@ -28,6 +28,12 @@ namespace Z0.Asm
             get => OpCode.IsEmpty || Sig.IsEmpty;
         }
 
+        public TextBlock Content
+        {
+            [MethodImpl(Inline)]
+            get => string.Format("({0})<{1}>", Sig, OpCode);
+        }
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
@@ -45,12 +51,13 @@ namespace Z0.Asm
             => (int)FastHash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
         public string Format()
-            => string.Format("({0})<{1}>", Sig, OpCode);
+            => Content;
 
         public override string ToString()
             => Format();
 
         public static AsmFormExpr Empty
             => new AsmFormExpr(AsmOpCodeExpr.Empty, AsmSigExpr.Empty);
+
     }
 }

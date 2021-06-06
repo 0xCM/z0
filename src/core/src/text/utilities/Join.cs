@@ -25,26 +25,15 @@ namespace Z0
 
         [TextUtility]
         public static string Join(this Span<string> src, string sep)
-        {
-            var dst = text.build();
-            for(var i=0; i<src.Length; i++)
-            {
-                ref var cell = ref src[i];
-                if(i != src.Length - 1)
-                    dst.Append($"{cell}{sep}");
-                else
-                    dst.Append(cell);
-            }
-            return dst.ToString();
-        }
+            => TextTools.join(src,sep);
 
         [TextUtility]
         public static string Join(this ReadOnlySpan<string> src, char sep)
-            => text.concat(src, sep);
+            => TextTools.concat(src, sep);
 
         [TextUtility]
         public static string Join(this ReadOnlySpan<string> src, string sep)
-            => text.concat(src, sep);
+            => TextTools.concat(src, sep);
 
         /// <summary>
         /// Sequentially concatenates each indexed cell to the next, separated by a specified character

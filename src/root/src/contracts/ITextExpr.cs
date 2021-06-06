@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     public interface ITextExpr : ITextual
     {
         Type ExprType {get;}
 
-        string Content {get;}
+        TextBlock Content {get;}
 
         string ITextual.Format()
             => Content;

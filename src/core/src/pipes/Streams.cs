@@ -9,10 +9,10 @@ namespace Z0
     using System.IO;
     using System.Text;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
-    public readonly partial struct Streams
+    public readonly struct Streams
     {
         /// Allocates a caller-disposed reader for the source
         /// </summary>

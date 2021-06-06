@@ -6,33 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.IO;
 
     using static Root;
     using static core;
 
     public readonly struct TextDoc : IIndex<TextRow>
     {
-        public static Outcome parse(FS.FilePath src, out TextDoc dst)
-        {
-            dst = TextDoc.Empty;
-            if(!src.Exists)
-                return (false, $"No such file {src}");
-
-            using var reader = src.Reader();
-            var attempt =  TextDocs.parse(reader);
-            if(attempt)
-            {
-                dst = attempt.Value;
-                return true;
-            }
-            else
-            {
-                return (false, attempt.Message?.ToString());
-            }
-        }
-
         public Index<TextRow> RowData {get;}
 
         public TextDocFormat Format {get;}
@@ -102,30 +81,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => LineCount != 0;
-        }
-
-        public IEnumerable<TextRows> Partition(int offset, Func<TextRow,bool> f)
-        {
-            var part = root.list<TextRow>();
-            for(var i=offset; i<RowCount; i++)
-            {
-                var row = this[i];
-                if(f(row))
-                {
-                    yield return new TextRows(part.ToArray());
-                    part.Clear();
-                }
-                else
-                    part.Add(row);
-            }
-        }
-
-        public void Parse<T>(Span<T> dst, Func<TextRow,T> parser)
-        {
-            var rows = RowData.View;
-            var count = rows.Length;
-            for(var i=0; i<count; i++)
-               seek(dst,i) = parser(skip(rows,i));
         }
 
         public static TextDoc Empty

@@ -15,6 +15,49 @@ namespace Z0
     [ApiHost]
     public readonly struct TextDocs
     {
+        public IEnumerable<TextRows> partition(TextDoc src, int offset, Func<TextRow,bool> f)
+        {
+            var part = list<TextRow>();
+            for(var i=offset; i<src.RowCount; i++)
+            {
+                var row = src[i];
+                if(f(row))
+                {
+                    yield return new TextRows(part.ToArray());
+                    part.Clear();
+                }
+                else
+                    part.Add(row);
+            }
+        }
+
+        public void Parse<T>(TextDoc src, Span<T> dst, Func<TextRow,T> parser)
+        {
+            var rows = src.RowData.View;
+            var count = rows.Length;
+            for(var i=0; i<count; i++)
+               seek(dst,i) = parser(skip(rows,i));
+        }
+
+        public static Outcome load(FS.FilePath src, out TextDoc dst)
+        {
+            dst = TextDoc.Empty;
+            if(!src.Exists)
+                return (false, $"No such file {src}");
+
+            using var reader = src.Reader();
+            var attempt =  TextDocs.parse(reader);
+            if(attempt)
+            {
+                dst = attempt.Value;
+                return true;
+            }
+            else
+            {
+                return (false, attempt.Message?.ToString());
+            }
+        }
+
         [Op]
         public static Outcome resource(Asset src, TextDocFormat format, out TextDoc dst)
         {
@@ -177,11 +220,11 @@ namespace Z0
                 }
 
                 var doc = new TextDoc(fmt, docheader ? docheader.Value : TextDocHeader.Empty, counter, rows.ToArray());
-                return root.parsed(string.Empty, doc);
+                return ParseResult.parsed(string.Empty, doc);
             }
             catch(Exception e)
             {
-                return root.unparsed<TextDoc>(EmptyString,e);
+                return ParseResult.unparsed<TextDoc>(EmptyString,e);
             }
         }
 
@@ -220,7 +263,7 @@ namespace Z0
         public static ParseResult<string,TextDoc> parse(FS.FilePath src, TextDocFormat? format = null)
         {
             using var reader = src.Reader();
-            return parse(reader, format).Select(doc => root.parsed(src.Name.Format(), doc)).Value;
+            return parse(reader, format).Select(doc => ParseResult.parsed(src.Name.Format(), doc)).Value;
         }
 
         public static ParseResult<T> parse<T>(string data, Func<TextDoc,ParseResult<T>> pfx)

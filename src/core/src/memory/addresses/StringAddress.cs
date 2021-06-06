@@ -24,6 +24,15 @@ namespace Z0
         public static StringAddress resource(string src)
             => api.resource(src);
 
+        [MethodImpl(Inline)]
+        public static StringAddress resource<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => new StringAddress(core.address(src));
+
+        [MethodImpl(Inline)]
+        public static StringAddress resource(ReadOnlySpan<char> src)
+            => new StringAddress(core.address(src));
+
         public MemoryAddress Address {get;}
 
         [MethodImpl(Inline)]

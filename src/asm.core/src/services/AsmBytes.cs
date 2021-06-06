@@ -228,28 +228,6 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmHexCode code(Hex8 a0, Hex8 a1, Hex32 a2)
-        {
-            var dst = buffer();
-            var writer = write(dst);
-            writer.Write8(a0);
-            writer.Write8(a1);
-            writer.Write32(a2);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode code(Hex8 a0, Hex8 a1, ulong a2)
-        {
-            var dst = buffer();
-            var writer = write(dst);
-            writer.Write8(a0);
-            writer.Write8(a1);
-            writer.Write64(a2);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
         static Span<byte> buffer()
             => ByteBlocks.alloc(n16).Bytes;
 

@@ -8,6 +8,7 @@
       <ProjectReference Include="$(Part)" />
       <ProjectReference Include="$(BitNumbers)" />
       <ProjectReference Include="$(BitMasks)" />
+      <ProjectReference Include="$(AsmData)" />
   </ItemGroup>
 
    <ItemGroup>

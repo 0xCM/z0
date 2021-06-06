@@ -17,7 +17,7 @@ namespace Z0.Asm
         public AsmOpCodeExpr(string src)
             => _Data = src;
 
-        public string Content
+        public TextBlock Content
         {
             [MethodImpl(Inline)]
             get => _Data.Text;

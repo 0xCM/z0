@@ -17,10 +17,10 @@ namespace Z0.Asm
         public AsmSigOperandExpr(string src)
             => Data = src;
 
-        public string Content
+        public TextBlock Content
         {
             [MethodImpl(Inline)]
-            get => Data.Text;
+            get => Data;
         }
 
         public int Length
