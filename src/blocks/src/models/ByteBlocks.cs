@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack =1)]
     public struct ByteBlock1 : IDataBlock<ByteBlock1>
     {
         public const ushort Size = Pow2.T00;
@@ -38,7 +38,7 @@ namespace Z0
             => @as<ByteBlock1,byte>(src);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock2 : IDataBlock<ByteBlock2>
     {
         public const ushort Size = Pow2.T01;
@@ -70,7 +70,7 @@ namespace Z0
     /// <summary>
     /// 3 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock3 : IDataBlock<ByteBlock3>
     {
         public const ushort Size = 3;
@@ -97,7 +97,7 @@ namespace Z0
                 => recover<T>(Bytes);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock4 : IDataBlock<ByteBlock4>
     {
         public const ushort Size = Pow2.T02;
@@ -135,7 +135,7 @@ namespace Z0
     /// <summary>
     /// 5 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock5 : IDataBlock<ByteBlock5>
     {
         public const ushort Size = 5;
@@ -160,13 +160,12 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
-
     }
 
     /// <summary>
     /// 6 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock6 : IDataBlock<ByteBlock6>
     {
         public const ushort Size = 6;
@@ -196,7 +195,7 @@ namespace Z0
     /// <summary>
     /// 7 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock7 : IDataBlock<ByteBlock7>
     {
         public const ushort Size = 7;
@@ -224,7 +223,7 @@ namespace Z0
 
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock8 : IDataBlock<ByteBlock8>
     {
         public const ushort Size = Pow2.T03;
@@ -262,7 +261,7 @@ namespace Z0
     /// <summary>
     /// 9 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock9 : IDataBlock<ByteBlock9>
     {
         public const ushort Size = 9;
@@ -292,7 +291,7 @@ namespace Z0
     /// <summary>
     /// 10 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock10 : IDataBlock<ByteBlock10>
     {
         public const ushort Size = 10;
@@ -322,7 +321,7 @@ namespace Z0
     /// <summary>
     /// 11 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock11 : IDataBlock<ByteBlock11>
     {
         public const ushort Size = 11;
@@ -347,13 +346,12 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
-
     }
 
     /// <summary>
     /// 12 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock12 : IDataBlock<ByteBlock12>
     {
         public const ushort Size = 12;
@@ -383,7 +381,7 @@ namespace Z0
     /// <summary>
     /// 13 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock13 : IDataBlock<ByteBlock13>
     {
         public const ushort Size = 13;
@@ -414,7 +412,7 @@ namespace Z0
     /// <summary>
     /// 14 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock14 : IDataBlock<ByteBlock14>
     {
         public const ushort Size = 14;
@@ -446,7 +444,7 @@ namespace Z0
     /// <summary>
     /// 15 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock15 : IDataBlock<ByteBlock15>
     {
         public const ushort Size = 15;
@@ -476,7 +474,7 @@ namespace Z0
     /// <summary>
     /// Defines 16 bytes = 512 bits of stack-allocated storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock16 : IDataBlock<ByteBlock16>
     {
         public const ushort Size = Pow2.T04;
@@ -506,7 +504,7 @@ namespace Z0
 
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock17 : IDataBlock<ByteBlock17>
     {
         public const ushort Size = 17;
@@ -533,7 +531,7 @@ namespace Z0
                 => recover<T>(Bytes);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock18 : IDataBlock<ByteBlock18>
     {
         public const ushort Size = 18;
@@ -560,7 +558,7 @@ namespace Z0
                 => recover<T>(Bytes);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock19 : IDataBlock<ByteBlock19>
     {
         public const ushort Size = 19;
@@ -587,7 +585,7 @@ namespace Z0
                 => recover<T>(Bytes);
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock20 : IDataBlock<ByteBlock20>
     {
         public const ushort Size = 20;
@@ -614,10 +612,9 @@ namespace Z0
                 => recover<T>(Bytes);
 
         public static ByteBlock20 Empty => default;
-
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock24 : IDataBlock<ByteBlock24>
     {
         public const ushort Size = 24;
@@ -644,14 +641,37 @@ namespace Z0
                 => recover<T>(Bytes);
 
         public static ByteBlock24 Empty => default;
+    }
 
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack =1)]
+    public struct ByteBlock30 : IDataBlock<ByteBlock30>
+    {
+        public const ushort Size = 30;
 
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => bytes(this);
+        }
+
+        public ref byte First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Bytes);
+        }
+
+        [MethodImpl(Inline)]
+        public Span<T> Storage<T>()
+            where T : unmanaged
+                => recover<T>(Bytes);
+
+        public static ByteBlock30 Empty => default;
     }
 
     /// <summary>
     /// Covers 32 bytes = 256 bits of stack-allocated storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock32 : IDataBlock<ByteBlock32>
     {
         public const ushort Size = Pow2.T05;
@@ -678,13 +698,12 @@ namespace Z0
                 => recover<T>(Bytes);
 
         public static ByteBlock32 Empty => default;
-
     }
 
     /// <summary>
     /// Covers 64 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock64 : IDataBlock<ByteBlock64>
     {
         public const ushort Size = Pow2.T06;
@@ -718,13 +737,12 @@ namespace Z0
                 => recover<T>(Bytes);
 
         public static ByteBlock64 Empty => default;
-
     }
 
     /// <summary>
     /// Covers 80 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock80 : IDataBlock<ByteBlock80>
     {
         public const ushort Size = 80;
@@ -751,13 +769,12 @@ namespace Z0
                 => recover<T>(Bytes);
 
         public static ByteBlock80 Empty => default;
-
     }
 
     /// <summary>
     /// Covers 128 bytes = 1024 bits of stack-allocated storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock128 : IDataBlock<ByteBlock128>
     {
         public const ushort Size = Pow2.T07;
@@ -786,7 +803,7 @@ namespace Z0
         public static ByteBlock128 Empty => default;
    }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock256 : IDataBlock<ByteBlock256>
     {
         public const ushort Size = Pow2.T08;
@@ -815,7 +832,7 @@ namespace Z0
         public static ByteBlock256 Empty => default;
    }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock512 : IDataBlock<ByteBlock512>
     {
         public const ushort Size = Pow2.T09;
@@ -845,7 +862,7 @@ namespace Z0
 
    }
 
-    [StructLayout(LayoutKind.Sequential, Size = Size)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock682
     {
         public const ushort Size = 682;
@@ -871,7 +888,7 @@ namespace Z0
 
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock1024 : IDataBlock<ByteBlock1024>
     {
         public const ushort Size = Pow2.T10;
@@ -898,7 +915,7 @@ namespace Z0
                 => recover<T>(Bytes);
    }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock2048 : IDataBlock<ByteBlock2048>
     {
         public const ushort Size = Pow2.T11;
@@ -925,7 +942,7 @@ namespace Z0
                 => recover<T>(Bytes);
    }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock4096 : IDataBlock<ByteBlock4096>
     {
         public const ushort Size = Pow2.T12;
@@ -950,11 +967,5 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
-   }
-
-   partial class XTend
-   {
-
-
    }
 }

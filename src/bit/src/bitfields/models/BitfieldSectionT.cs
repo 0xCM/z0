@@ -35,10 +35,10 @@ namespace Z0
         /// <summary>
         /// The segments within the section
         /// </summary>
-        public Index<BitfieldSeg> Segments {get;}
+        public BitfieldSegs Segments {get;}
 
         [MethodImpl(Inline)]
-        public BitfieldSection(StringAddress name, T min, T max, Index<BitfieldSeg> segments)
+        public BitfieldSection(StringAddress name, T min, T max, BitfieldSegs segments)
         {
             Name = name;
             FirstIndex = min;

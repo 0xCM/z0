@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
+    using static Typed;
 
     partial struct gcpu
     {
@@ -21,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T eraser<T>(byte start, byte count)
             where T : unmanaged
-                => gmath.xor(Numeric.maxval<T>(), gmath.sll(BitMasks.lo<T>((byte)(count - 1)), start));
+                => gmath.xor(Limits.maxval<T>(), gmath.sll(BitMasks.lo<T>((byte)(count - 1)), start));
 
         /// <summary>
         /// Clears a sequence of bits from each component

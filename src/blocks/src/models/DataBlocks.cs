@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock1<T> : IDataBlock<DataBlock1<T>>
         where T : unmanaged
     {
         T Data;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock2<T> : IDataBlock<DataBlock2<T>>
         where T : unmanaged
     {
@@ -23,7 +23,7 @@ namespace Z0
         DataBlock1<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock3<T> : IDataBlock<DataBlock3<T>>
         where T : unmanaged
     {
@@ -32,7 +32,7 @@ namespace Z0
         DataBlock2<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock4<T> : IDataBlock<DataBlock4<T>>
         where T : unmanaged
     {
@@ -41,7 +41,7 @@ namespace Z0
         DataBlock2<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock5<T> : IDataBlock<DataBlock5<T>>
         where T : unmanaged
     {
@@ -50,7 +50,7 @@ namespace Z0
         DataBlock1<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock6<T> : IDataBlock<DataBlock6<T>>
         where T : unmanaged
     {
@@ -59,7 +59,7 @@ namespace Z0
         DataBlock3<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock7<T> : IDataBlock<DataBlock7<T>>
         where T : unmanaged
     {
@@ -68,7 +68,7 @@ namespace Z0
         DataBlock1<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock8<T> : IDataBlock<DataBlock8<T>>
         where T : unmanaged
     {
@@ -77,7 +77,7 @@ namespace Z0
         DataBlock4<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock9<T> : IDataBlock<DataBlock9<T>>
         where T : unmanaged
     {
@@ -86,7 +86,7 @@ namespace Z0
         DataBlock1<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock10<T> : IDataBlock<DataBlock10<T>>
         where T : unmanaged
     {
@@ -95,7 +95,7 @@ namespace Z0
         DataBlock2<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock11<T> : IDataBlock<DataBlock11<T>>
         where T : unmanaged
     {
@@ -104,7 +104,7 @@ namespace Z0
         DataBlock1<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock12<T> : IDataBlock<DataBlock12<T>>
         where T : unmanaged
     {
@@ -113,7 +113,7 @@ namespace Z0
         DataBlock6<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock16<T> : IDataBlock<DataBlock16<T>>
         where T : unmanaged
     {
@@ -122,7 +122,7 @@ namespace Z0
         DataBlock8<T> B;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct DataBlock32<T> : IDataBlock<DataBlock32<T>>
         where T : unmanaged
     {

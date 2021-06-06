@@ -533,9 +533,43 @@ namespace Z0.Asm
         void RunExtractWorkflow()
         {
            ApiExtractWorkflow.run(Wf);
-
         }
 
+
+
+        [Record(TableId)]
+        public struct PartSelection : IRecord<PartSelection>
+        {
+            public const string TableId = "selected-parts";
+
+            public string Part;
+
+            public bool Selected;
+        }
+
+        public void EmitPartSelection()
+        {
+            var selected = Wf.ApiCatalog.PartIdentities;
+            var count = selected.Length;
+            var symbols = Symbols.index<PartId>();
+            var buffer = alloc<PartSelection>(count);
+            var counter = 0u;
+            var dst = Db.SettingsPath(PartSelection.TableId);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(selected,i);
+                if(symbols.Contains(part))
+                {
+                    ref readonly var symbol = ref symbols[part];
+                    ref var row = ref seek(buffer,i);
+                    row.Part = symbol.Expr.Text;
+                    row.Selected = true;
+                    counter++;
+                }
+            }
+            TableEmit(slice(buffer.ReadOnly(),0,counter),dst);
+
+        }
         void EmitResPack()
         {
             var blocks = LoadApiBlocks();
@@ -617,36 +651,27 @@ namespace Z0.Asm
             Show("modrm", FS.Log, emit);
         }
 
-        static uint render(Hex4 src, uint offset, Span<char> dst)
+        static uint render(Hex8 src, ref uint i, Span<char> dst)
         {
-            var i= offset;
-            seek(dst, i++) = Hex.hexchar(LowerCase, src);
-            seek(dst, i++) = Chars.Space;
-            seek(dst, i++) = Chars.Space;
-            seek(dst, i++) = Chars.Space;
-            seek(dst, i++) = Chars.Space;
-            return 5;
+            var i0 = i;
+            seek(dst, i++) = Hex.hexchar(LowerCase, src.Hi);
+            seek(dst, i++) = Hex.hexchar(LowerCase, src.Lo);
+            return i - i0;
         }
 
-        static uint render(Hex8 src, uint offset, Span<char> dst)
+        static uint render(AsmHexCode src, ref uint i, Span<char> dst)
         {
-            var counter = 0u;
-            counter += render(src.Hi, offset + counter, dst);
-            counter += render(src.Lo, offset + counter, dst);
-            return counter;
-        }
-
-        static uint render(AsmHexCode src, Span<char> dst)
-        {
+            var i0 = i;
             var count = src.Size;
             var bytes = src.Bytes;
-            var counter = 0u;
-            for(var i=0; i<count; i++)
+            for(var j=0; j<count; j++)
             {
-                ref readonly var b = ref skip(bytes,i);
-                counter += render((Hex8)b,counter,dst);
+                ref readonly var b = ref skip(bytes, j);
+                render((Hex8)b, ref i, dst);
+                if(j != count - 1)
+                    seek(dst, i++) = Chars.Space;
             }
-            return counter;
+            return i - i0;
         }
 
         void CompareBitstrings()
@@ -756,9 +781,46 @@ namespace Z0.Asm
                 }
             }
         }
+
+        public void ShowAsmBitfields()
+        {
+            var modrm = AsmBitfields.modrm();
+            var dst = span<char>(128);
+            var offset = 0u;
+            modrm.Render(ref offset, dst, SegRenderStyle.Intel);
+            Wf.Row(slice(dst,0,offset));
+        }
+
+        void CheckCodeFactory()
+        {
+            // 4080C416                add spl,22
+            var buffer = span<char>(20);
+            var caseA = "40 80 c4 16";
+            var caseB = "4080C416";
+            HexNumericParser.parse64u(caseB, out var caseC);
+            var code1 = asm.code(caseB);
+            var code2 = asm.code(caseA);
+            var code3 = asm.code(caseC);
+            var i=0u;
+            var dst = CharBlock32.Null.Data;
+            var count = render(code1,ref i, dst);
+            Wf.Row(code1.Format());
+            Wf.Row(code2.Format());
+            Wf.Row(code3.Format());
+
+        }
+
         public void Run()
         {
-            GenerateInstructionModels();
+            var src = FS.path(@"C:\Dev\awb\.build\dis\avx512f.asm");
+            var dir = Db.AppLogDir();
+            var parser = Wf.DisassemblyParser();
+            parser.ParseDisassembly(src,dir);
+
+            //Wf.Row(text.format(slice(dst,0,count)));
+
+            //GenerateInstructionModels();
+            //EmitPartSelection();
             //ListPdbMethods();
             //CompareBitstrings();
             //EmitCliMetadata();

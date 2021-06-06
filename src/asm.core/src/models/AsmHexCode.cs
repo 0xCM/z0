@@ -31,7 +31,7 @@ namespace Z0.Asm
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => api.hexbytes(this);
+            get => api.data(this);
         }
 
         [MethodImpl(Inline)]
@@ -99,7 +99,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmHexCode(string src)
-            => api.hexcode(src);
+            => api.parse(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(AsmHexCode a, AsmHexCode b)

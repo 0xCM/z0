@@ -9,6 +9,8 @@ namespace Z0
 
     using static Root;
 
+    using api = BitfieldSpecs;
+
     /// <summary>
     /// Defines a section within a bitfield that comprises one or more segments
     /// </summary>
@@ -29,10 +31,10 @@ namespace Z0
         /// </summary>
         public uint LastIndex {get;}
 
-        public Index<BitfieldSeg> Segments {get;}
+        public BitfieldSegs Segments {get;}
 
         [MethodImpl(Inline)]
-        public BitfieldSection(StringAddress name, uint min, uint max, Index<BitfieldSeg> segments)
+        public BitfieldSection(StringAddress name, uint min, uint max, BitfieldSegs segments)
         {
             Name = name;
             FirstIndex = min;
@@ -52,6 +54,9 @@ namespace Z0
             get => (byte)(LastIndex - FirstIndex + 1);
         }
 
+        [MethodImpl(Inline)]
+        public uint Render(ref uint offset, Span<char> dst, SegRenderStyle style = default)
+            => api.render(this, ref offset, dst, style);
 
         [MethodImpl(Inline)]
         public static implicit operator BitfieldSection<uint>(BitfieldSection src)

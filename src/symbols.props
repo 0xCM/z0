@@ -15,6 +15,7 @@
     <AsmCases>$(Src)asm.cases/z0.asm.cases.csproj</AsmCases>
     <AsmCore>$(Src)asm.core/z0.asm.core.csproj</AsmCore>
     <AsmCatalogs>$(Src)asm.catalogs/z0.asm.catalogs.csproj</AsmCatalogs>
+    <AsmData>$(Src)asm.data/z0.asm.data.csproj</AsmData>
 
     <Asci>$(Src)asci/z0.asci.csproj</Asci>
 

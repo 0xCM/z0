@@ -46,7 +46,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public uint CoutLines(ReadOnlySpan<byte> src)
-            => text.CountLines(src);
+            => TextTools.CountLines(src);
 
         public string FileHeader {get; protected set;}
 
@@ -65,7 +65,7 @@ namespace Z0.Asm
             {
                 ref readonly var a0 = ref skip(data, pos);
                 ref readonly var a1 = ref skip(data, pos + 1);
-                if(Asci.eol(a0,a1))
+                if(TextTools.eol(a0,a1))
                 {
                     var line = slice(data, eol, pos - eol);
                     var decoded = Asci.decode(line, buffer);
@@ -89,7 +89,6 @@ namespace Z0.Asm
             }
 
             Status(ProcessedLines.Format(lines, src.Path));
-
         }
 
         protected void ProcessFile(MemoryFile src)

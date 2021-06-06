@@ -2,22 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct Symbols
+    partial struct asm
     {
-        internal static SymCache<E> cache<E>()
-            where E : unmanaged, Enum
-                => SymCache<E>.get();
-
-        [MethodImpl(Inline)]
-        public static Symbols<E> symbolic<E>()
-            where E : unmanaged, Enum
-                => cache<E>();
+        [MethodImpl(Inline), Op]
+        public static AsmExprSet pack(AsmOpCodeExpr opcode, AsmSigExpr sig, AsmStatementExpr statement)
+            => new AsmExprSet(new AsmFormExpr(opcode, sig), statement);
     }
 }

@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     using api = Symbols;
 
@@ -19,7 +20,7 @@ namespace Z0
         {
             var dst = Db.Table<SymbolDetail>(typeof(E).Name);
             var flow = Wf.EmittingTable<SymbolDetail>(dst);
-            var symbols  = SymCache<E>.get().View;
+            var symbols  = Symbols<E>().View;
             var count = symbols.Length;
             var buffer = alloc<SymbolDetail>(count);
             ref var target = ref first(buffer);
@@ -74,7 +75,7 @@ namespace Z0
 
         public Symbols<K> Symbols<K>()
             where K : unmanaged, Enum
-                => SymCache<K>.get().Index;
+                => Z0.Symbols.index<K>();
 
         public Index<ByteSpanSpec> NameProps<K>(Symbols<K> src)
             where K : unmanaged

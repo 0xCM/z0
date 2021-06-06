@@ -14,7 +14,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode @lock(LockPrefixCode code, uint4 index)
         {
-            var dst = AsmBytes.hexcode();
+            var dst = AsmBytes.code();
             dst.Cell(index) = (byte)code;
             return dst;
         }

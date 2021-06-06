@@ -143,7 +143,7 @@ namespace Z0.Asm
                 buffer[i]= asmx.mov(regs[i], Imm64);
 
             var expr = asm.expression("mov rcx,7ffa9930f380h");
-            AsmExprEncoding expect = (expr,  AsmBytes.hexcode("48 b9 80 f3 30 99 fa 7f 00 00"));
+            AsmExprEncoding expect = (expr,  AsmBytes.parse("48 b9 80 f3 30 99 fa 7f 00 00"));
             var mov = AsmEncoder.mov(AsmOp.rcx, Imm64);
             AsmExprEncoding actual = (expr, mov);
             Wf.Row(expect.Equals(actual));

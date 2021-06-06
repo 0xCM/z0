@@ -15,7 +15,7 @@ namespace Z0
         public static ReadOnlySpan<SymLiteral> records<E>()
             where E : unmanaged, Enum
         {
-            var symbols = SymCache<E>.get().View;
+            var symbols = index<E>().View;
             var dst = alloc<SymLiteral>(symbols.Length);
             records<E>(symbols, dst);
             return dst;

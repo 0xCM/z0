@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static AsmInstructions;
     using static Hex8Seq;
     using static AsmOps;
-    using static AsmHexCodes;
 
     partial class AsmEncoder
     {
@@ -21,7 +20,7 @@ namespace Z0.Asm
         /// <param name="r"></param>
         /// <param name="imm8"></param>
         public static And and(al r, Imm8 imm8)
-            => asmhex(x24, imm8);
+            => AsmBytes.code(x24, imm8);
 
         /// <summary>
         /// (AND r/m8, imm8)[80 /4 ib]
@@ -30,6 +29,6 @@ namespace Z0.Asm
         /// <param name="imm8"></param>
         [MethodImpl(Inline), Op]
         public static And and(r8b r, Imm8 imm8)
-            => asmhex(x24, imm8);
+            => AsmBytes.code(x24, imm8);
     }
 }

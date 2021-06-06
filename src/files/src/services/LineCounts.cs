@@ -13,26 +13,11 @@ namespace Z0
     [ApiHost]
     public readonly struct LineCounts
     {
-        [MethodImpl(Inline)]
-        static bit match(byte a, byte b)
-            => a == b;
-
-        [MethodImpl(Inline), Op]
-        public static uint count(ReadOnlySpan<byte> src)
-        {
-            const byte CR = (byte)AsciControlCode.CR;
-            var size = src.Length;
-            var counter = 0u;
-            for(var i=0; i<size; i++)
-                counter += (uint)match(skip(src,i),CR);
-            return counter;
-        }
-
         [Op]
         public static LineCount count(FS.FilePath src)
         {
             var file = MemoryFiles.map(src);
-            var counted = count(file.View());
+            var counted = TextTools.CountLines(file.View());
             file.Dispose();
             return (src, counted);
         }

@@ -26,14 +26,14 @@ namespace Z0
         /// </summary>
         public uint TotalWidth {get;}
 
-        readonly Index<BitfieldSection> _Sections;
+        readonly Index<BitfieldSection> Data;
 
         [MethodImpl(Inline)]
         public BitfieldModel(StringAddress name, Index<BitfieldSection> sections)
         {
             Name = name;
             SectionCount = sections.Count;
-            _Sections = sections;
+            Data = sections;
             TotalWidth = 0;
             TotalWidth = BitfieldSpecs.width(this);
         }
@@ -41,16 +41,16 @@ namespace Z0
         public Span<BitfieldSection> Sections
         {
             [MethodImpl(Inline)]
-            get => _Sections.Edit;
+            get => Data.Edit;
         }
 
         [MethodImpl(Inline)]
         public ref BitfieldSection Section(uint i)
-            => ref _Sections[i];
+            => ref Data[i];
 
         [MethodImpl(Inline)]
         public ref BitfieldSeg Segment(uint i, uint j)
-            => ref _Sections[i][j];
+            => ref Data[i][j];
 
         public ref BitfieldSection this[uint i]
         {
@@ -82,10 +82,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint SegStart(uint i, uint j)
-            => this[i,j].FirstIndex;
+            => this[i,j].Min;
 
         [MethodImpl(Inline)]
         public uint SegEnd(uint i, uint j)
-            => this[i,j].LastIndex;
+            => this[i,j].Max;
     }
 }

@@ -10,17 +10,19 @@ namespace Z0
     using static Root;
     using static core;
 
+    using api = TextTools;
+
     public readonly struct StringAddress : IAddressable
     {
-        const string Empty = "<empty>";
+        internal const string Empty = "<empty>";
 
         [MethodImpl(Inline)]
         public static StringAddress create(string src)
-            => new StringAddress(src?.Length == 0 ? address(Empty) : address(string.Intern(src)));
+            => api.address(src);
 
         [MethodImpl(Inline)]
         public static StringAddress resource(string src)
-            => new StringAddress(address(src));
+            => api.resource(src);
 
         public MemoryAddress Address {get;}
 
@@ -30,26 +32,26 @@ namespace Z0
             Address = location;
         }
 
-        unsafe ref char FirstChar
+        public uint Length
         {
             [MethodImpl(Inline)]
-            get => ref @ref(Address.Pointer<char>());
+            get => api.length(this);
         }
 
-        public uint Length()
-        {
-            ref var start = ref FirstChar;
-            var counter = 0u;
-            while(start != 0)
-                counter++;
-            return counter;
-        }
+        [MethodImpl(Inline)]
+        public uint Render(ref uint i, Span<char> dst)
+            => api.render(this, ref i, dst);
 
+        [MethodImpl(Inline)]
         public unsafe string Format()
-            => new string(gptr(FirstChar));
+            => api.format(this);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public bool Equals(StringAddress src)
+            => Address.Equals(src.Address);
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(StringAddress src)
@@ -74,6 +76,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(Name src)
             => create(src.Content);
-
     }
 }

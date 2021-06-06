@@ -19,7 +19,7 @@ namespace Z0
 
         public void Run()
         {
-            var kinds = Symbols.symbolic<ApiClassKind>().View;
+            var kinds = Symbols.index<ApiClassKind>().View;
             var catalog = Wf.ApiCatalog;
             var hosts = @readonly(catalog.ApiHosts);
             var parts = @readonly(catalog.Parts);

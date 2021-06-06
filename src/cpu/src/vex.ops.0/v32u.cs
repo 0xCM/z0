@@ -55,17 +55,4 @@ namespace Z0
             where T : unmanaged
                 => gcpu.v32u(x);
     }
-
-    partial struct z
-    {
-        [MethodImpl(Inline)]
-        public static Vector128<uint> v32u<T>(Vector128<T> x)
-            where T : unmanaged
-                => gcpu.v32u(x);
-
-        [MethodImpl(Inline)]
-        public static Vector256<uint> v32u<T>(Vector256<T> x)
-            where T : unmanaged
-                => gcpu.v32u(x);
-    }
 }

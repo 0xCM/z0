@@ -7,16 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
     using static core;
 
-    partial class text
+    partial struct TextTools
     {
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint count(string src, params char[] matches)
         {
             var count = 0u;
             var tests = @readonly(matches);
-            var input = span(src);
+            var input = src.ToSpan();
             var mcount = tests.Length;
             for(var i=0; i<count; i++)
             {

@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmTokens;
     using static AsmRegCodes;
 
     [ApiHost]
@@ -44,18 +43,18 @@ namespace Z0.Asm
 
         AsmSymbols()
         {
-            Mnemonics = Symbols.symbolic<AsmMnemonicCode>();
-            Gp8Sym = Symbols.symbolic<Gp8>();
-            Gp16Sym = Symbols.symbolic<Gp16>();
-            Gp32Sym = Symbols.symbolic<Gp32>();
-            Gp64Sym = Symbols.symbolic<Gp64>();
-            KRegSym = Symbols.symbolic<KReg>();
-            XmmSym = Symbols.symbolic<XmmReg>();
-            YmmSym = Symbols.symbolic<YmmReg>();
-            ZmmSym = Symbols.symbolic<ZmmReg>();
-            MmxSym = Symbols.symbolic<MmxReg>();
-            JccSym = Symbols.symbolic<JccCode>();
-            CrSym = Symbols.symbolic<ControlReg>();
+            Mnemonics = Symbols.index<AsmMnemonicCode>();
+            Gp8Sym = Symbols.index<Gp8>();
+            Gp16Sym = Symbols.index<Gp16>();
+            Gp32Sym = Symbols.index<Gp32>();
+            Gp64Sym = Symbols.index<Gp64>();
+            KRegSym = Symbols.index<KReg>();
+            XmmSym = Symbols.index<XmmReg>();
+            YmmSym = Symbols.index<YmmReg>();
+            ZmmSym = Symbols.index<ZmmReg>();
+            MmxSym = Symbols.index<MmxReg>();
+            JccSym = Symbols.index<JccCode>();
+            CrSym = Symbols.index<ControlReg>();
         }
 
         [MethodImpl(Inline), Op]

@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The source character</param>
         [MethodImpl(Inline), Op]
-        public static bool parse(char c, out byte dst)
+        public static bool parse(AsciCharCode c, out byte dst)
         {
             if(scalar(c))
             {
@@ -42,6 +42,14 @@ namespace Z0
             dst = byte.MaxValue;
             return false;
         }
+
+        /// <summary>
+        /// Parses a nibble
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline), Op]
+        public static bool parse(char c, out byte dst)
+            => parse((AsciCharCode)c, out dst);
 
         [MethodImpl(Inline), Op]
         public static bool parse(char c0, char c1, out byte dst)
@@ -85,53 +93,38 @@ namespace Z0
             return (true,counter);
         }
 
-        // [Op]
-        // public static uint parse(ReadOnlySpan<char> src, Span<byte> dst)
-        // {
-        //     var input = src;
-        //     var maxbytes = dst.Length;
-        //     var j=0u;
-        //     var count = src.Length;
-        //     var c0 = Zero;
-        //     var c1 = Zero;
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         if(j == maxbytes)
-        //             return j;
+        [Op]
+        public static Outcome<uint> parse(ReadOnlySpan<AsciCharCode> src, Span<byte> dst)
+        {
+            var counter = 0u;
+            var count = src.Length;
+            ref var target = ref first(dst);
+            var hi = byte.MaxValue;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(src,i);
+                if(whitespace(c) || specifier(c))
+                    continue;
 
-        //         ref readonly var c = ref skip(src,i);
-        //         if(whitespace(c) && nonzero(c0, c1))
-        //         {
-        //             if(parse(c0, c1, out seek(dst,j)))
-        //                 j++;
-
-        //             c0 = Zero;
-        //             c1 = Zero;
-        //         }
-        //         else
-        //         {
-        //             if(c0 == Zero)
-        //                 c0 = c;
-        //             else if(c1 == Zero)
-        //                 c1 = c;
-        //             else
-        //             {
-        //                 if(parse(c0, c1, out seek(dst,j)))
-        //                     j++;
-        //                 c0 = Zero;
-        //                 c1 = Zero;
-        //             }
-        //         }
-        //     }
-
-        //     if(nonzero(c0, c1) && parse(c0, c1, out seek(dst,j)))
-        //         j++;
-
-        //     return j;
-        // }
+                if(parse(c, out HexDigit d))
+                {
+                    if(hi == byte.MaxValue)
+                        hi = (byte)d;
+                    else
+                    {
+                        var lo = (byte)d;
+                        seek(target, counter++) = Bytes.or(Bytes.sll(hi,4), lo);
+                        hi = byte.MaxValue;
+                    }
+                }
+                else
+                    return false;
+            }
+            return (true,counter);
+        }
 
         [MethodImpl(Inline), Op]
-        public static bool parse(char c, out HexDigit dst)
+        public static bool parse(AsciCharCode c, out HexDigit dst)
         {
             if(scalar(c))
             {
@@ -151,6 +144,10 @@ namespace Z0
             dst = (HexDigit)byte.MaxValue;
             return false;
         }
+
+        [MethodImpl(Inline), Op]
+        public static bool parse(char c, out HexDigit dst)
+            => parse((AsciCharCode)c, out dst);
 
         [Op]
         public static bool parse(AsciChar src, out HexDigit dst)

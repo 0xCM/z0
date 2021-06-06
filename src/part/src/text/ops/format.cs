@@ -16,7 +16,7 @@ namespace Z0
     {
         [Op]
         public static string @string(ReadOnlySpan<char> src)
-            => format(memory.bytes(src));
+            => format(core.bytes(src));
 
         /// <summary>
         /// Creates a string from a span, via UTF8 encoding
@@ -30,6 +30,19 @@ namespace Z0
 
             fixed(byte* pSrc = src)
                 return Encoding.UTF8.GetString(pSrc, src.Length);
+        }
+
+        /// <summary>
+        /// Creates a string from a span, via a specified encoding
+        /// </summary>
+        /// <param name="src">The data source</param>
+        public static unsafe string format(ReadOnlySpan<byte> src, Encoding encoding)
+        {
+            if(src.IsEmpty)
+                return EmptyString;
+
+            fixed(byte* pSrc = src)
+                return encoding.GetString(pSrc, src.Length);
         }
 
         /// <summary>

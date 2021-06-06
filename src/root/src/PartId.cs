@@ -99,8 +99,8 @@ public enum PartId : ulong
     [Symbol("commands")]
     Commands = 25,
 
-
-
+    [Symbol("asm.data")]
+    AsmData = 26,
 
     [Symbol("gmath")]
     GMath = 34,

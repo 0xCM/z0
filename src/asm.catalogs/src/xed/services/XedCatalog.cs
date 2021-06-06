@@ -185,7 +185,7 @@ namespace Z0.Asm
         void EmitSymbols<K>()
             where K : unmanaged, Enum
         {
-            EmitSymbols(Symbols.symbolic<K>().View, Db.AsmCatalogPath(Subject,
+            EmitSymbols(Symbols.index<K>().View, Db.AsmCatalogPath(Subject,
                 FS.file(string.Format("{0}.{1}", Subject,  typeof(K).Name.ToLower()), FS.Csv)));
         }
 

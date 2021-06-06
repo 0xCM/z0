@@ -21,6 +21,6 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         [MethodImpl(Inline), Op]
         public static Jmp jmp(r64 dst)
-            => asmhex(RexW, xff, rd4);
+            => AsmBytes.code(RexW, xff, rd4);
     }
 }

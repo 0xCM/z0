@@ -8,7 +8,7 @@ namespace Z0
     {
         StringAddress Name {get;}
 
-        Index<BitfieldSeg> Segments {get;}
+        BitfieldSegs Segments {get;}
     }
 
     public interface IBitfieldSection<T> : IBitfieldSection

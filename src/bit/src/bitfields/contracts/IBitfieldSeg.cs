@@ -6,25 +6,26 @@ namespace Z0
 {
     using static core;
 
-    public interface IBitfieldSeg
+    public interface IBitfieldSeg : ITextual
     {
         StringAddress Name {get;}
 
-        byte FirstIndex {get;}
+        byte Min {get;}
 
-        byte LastIndex {get;}
+        byte Max {get;}
     }
 
     public interface IBitfieldSeg<T> : IBitfieldSeg
         where T : unmanaged
     {
-        new T FirstIndex {get;}
+        new T Min {get;}
 
-        byte IBitfieldSeg.FirstIndex
-            => u8(FirstIndex);
-        new T LastIndex {get;}
+        byte IBitfieldSeg.Min
+            => u8(Min);
 
-        byte IBitfieldSeg.LastIndex
-            => u8(LastIndex);
+        new T Max {get;}
+
+        byte IBitfieldSeg.Max
+            => u8(Max);
     }
 }

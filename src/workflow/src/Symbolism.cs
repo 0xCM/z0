@@ -64,7 +64,7 @@ namespace Z0
         public void EmitSymbols<K>(FS.FolderPath dir)
             where K : unmanaged, Enum
         {
-            EmitSymbols(Symbols.symbolic<K>().View, dir);
+            EmitSymbols(Symbols.index<K>().View, dir);
         }
 
         public void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FolderPath dir)

@@ -13,7 +13,7 @@ namespace Z0
 
     using api = CharBlocks;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=2)]
     public struct CharBlock9 : ICharBlock<CharBlock9>
     {
         CharBlock8 A;

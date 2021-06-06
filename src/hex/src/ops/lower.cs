@@ -18,7 +18,15 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool lower(char c)
+        public static bool lower(AsciCharCode c)
             => (HexCode)c >= X.MinLetterCodeL && (HexCode)c <= X.MaxLetterCodeL;
+
+        /// <summary>
+        /// Determines whether a character corresponds to one of the lowercase hex code characters
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool lower(char c)
+            => lower((AsciCharCode)c);
     }
 }

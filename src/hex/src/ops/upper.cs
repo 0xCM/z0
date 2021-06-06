@@ -18,7 +18,15 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool upper(char c)
+        public static bool upper(AsciCharCode c)
             => (HexCode)c >= X.MinLetterCodeU && (HexCode)c <= X.MaxLetterCodeU;
+
+        /// <summary>
+        /// Determines whether a character corresponds to one of the uppercase hex code characters
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool upper(char c)
+            => upper((AsciCharCode)c);
     }
 }

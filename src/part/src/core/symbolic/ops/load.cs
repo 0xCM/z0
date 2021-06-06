@@ -14,7 +14,6 @@ namespace Z0
         /// <summary>
         /// Symbol cache loader
         /// </summary>
-        /// <typeparam name="E"></typeparam>
         internal static Symbols<E> load<E>()
             where E : unmanaged, Enum
         {
@@ -24,7 +23,7 @@ namespace Z0
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = new Sym<E>(i, skip(src,i));
-            return buffer;
+            return new Symbols<E>(buffer);
         }
 
         static Span<SymLiteral<E>> discover<E>()
@@ -34,7 +33,6 @@ namespace Z0
             ClrAssemblyName component = src.Assembly;
             var fields = @readonly(src.LiteralFields());
             var count = fields.Length;
-
             var dst = span<SymLiteral<E>>(count);
             var kind = ClrPrimitives.kind(src);
             var counter = 0u;

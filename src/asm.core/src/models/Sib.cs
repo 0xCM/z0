@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
+    // SIB=[Scale:[6,7] | Index:[3,5] | Base:[0,2]]
     public readonly struct Sib
     {
         readonly byte Data;

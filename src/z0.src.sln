@@ -189,6 +189,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.apicore", "apicore\z0.ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.commands", "commands\z0.commands.csproj", "{DDB51B2C-930E-4700-938A-4E89B82C4AC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.asm.data", "asm.data\z0.asm.data.csproj", "{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1318,5 +1320,17 @@ Global
 		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|x64.Build.0 = Release|Any CPU
 		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|x86.ActiveCfg = Release|Any CPU
 		{DDB51B2C-930E-4700-938A-4E89B82C4AC6}.Release|x86.Build.0 = Release|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Debug|x64.Build.0 = Debug|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Debug|x86.Build.0 = Debug|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Release|x64.ActiveCfg = Release|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Release|x64.Build.0 = Release|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Release|x86.ActiveCfg = Release|Any CPU
+		{12360FD2-FC26-46BC-B2DD-ABFF848D54AE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

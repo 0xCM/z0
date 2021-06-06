@@ -18,8 +18,8 @@ namespace Z0
                 => bw32(src.LastIndex) - bw32(src.FirstIndex) + 1u;
 
         [MethodImpl(Inline), Op]
-        public static byte width(BitfieldSeg src)
-            => (byte)(src.FirstIndex - src.LastIndex + 1);
+        public static byte width(in BitfieldSeg src)
+            => (byte)(src.Min - src.Max + 1);
 
         /// <summary>
         /// Computes the aggregate width of the segments that comprise the bitfield
@@ -34,6 +34,16 @@ namespace Z0
             for(byte i=0; i<count; i++)
                 total += skip(segments, i).Width;
             return total;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint width(ReadOnlySpan<BitfieldSeg> src)
+        {
+            var count = src.Length;
+            var w = 0u;
+            for(var i=0; i<count; i++)
+                w += width(skip(src,i));
+            return w;
         }
 
         /// <summary>

@@ -24,8 +24,8 @@ namespace Z0
         public BitfieldSeg(BitfieldSeg spec, T state)
         {
             State = state;
-            FirstIndex = spec.FirstIndex;
-            LastIndex = spec.LastIndex;
+            FirstIndex = spec.Min;
+            LastIndex = spec.Max;
         }
 
         [MethodImpl(Inline)]

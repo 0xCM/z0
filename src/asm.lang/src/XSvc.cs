@@ -51,5 +51,9 @@ namespace Z0
         public static AsmJumps AsmJumps(this IWfRuntime wf)
             => Svc.AsmJumps.create(wf);
 
+       [Op]
+        public static DisassemblyParser DisassemblyParser(this IWfRuntime wf)
+            => Svc.DisassemblyParser.create(wf);
+
     }
 }

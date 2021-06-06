@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
+    using static Typed;
     using static CpuBytes;
 
     partial struct cpu
@@ -36,7 +37,7 @@ namespace Z0
 
         /// <summary>
         /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation
-        /// of each  unsigned 16,32, or 64-bit integer component value
+        /// of each unsigned 16,32, or 64-bit integer component value
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="n">The integer width representative where n = 16 | 32 | 64</param>

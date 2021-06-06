@@ -12,7 +12,7 @@ namespace Z0
         public static string describe<T>(T src)
             where T : struct, IFileType
         {
-            var symbols = SymCache<FileKind>.get();
+            var symbols = Symbols.index<FileKind>();
             ref readonly var symbol = ref symbols[src.FileKind];
             return string.Format("{0}: {1}", wildcard(src), symbol.Description);
         }

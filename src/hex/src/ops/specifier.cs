@@ -12,7 +12,11 @@ namespace Z0
     partial struct Hex
     {
         [MethodImpl(Inline), Op]
-        public static bit specifier(char src)
-            => src == Chars.X || src == Chars.x || src == Chars.h;
+        public static bit specifier(AsciCharCode c)
+            => c == AsciCharCode.X || c == AsciCharCode.x || c == AsciCharCode.h;
+
+        [MethodImpl(Inline), Op]
+        public static bit specifier(char c)
+            => specifier((AsciCharCode)c);
     }
 }

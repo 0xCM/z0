@@ -128,6 +128,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public byte Cell(W8 w, byte index)
+            => V8u.GetElement(index);
+
+        [MethodImpl(Inline)]
+        public ushort Cell(W16 w, byte index)
+            => V16u.GetElement(index);
+
+        // [MethodImpl(Inline)]
+        // public ushort Cell(W16 w, byte index, ushort value)
+        //     => V16u.PutElement(index,value);
+
+        [MethodImpl(Inline)]
+        public uint Cell(W32 w, byte index)
+            => V32u.GetElement(index);
+
+        [MethodImpl(Inline)]
         public bool Equals(Cell128 src)
             => Data.Equals(src.Data);
 

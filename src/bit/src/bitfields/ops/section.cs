@@ -13,8 +13,12 @@ namespace Z0
     partial struct BitfieldSpecs
     {
         [MethodImpl(Inline), Op]
-        public static BitfieldSection section(StringAddress name, uint min, uint max, Index<BitfieldSeg> segments)
+        public static BitfieldSection section(StringAddress name, uint min, uint max, BitfieldSegs segments)
             => new BitfieldSection(name, min, max, segments);
+
+        [MethodImpl(Inline), Op]
+        public static BitfieldSection section(StringAddress name, BitfieldSegs segments)
+            => new BitfieldSection(name, 0, segments.Width, segments);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitfieldSection untyped<T>(BitfieldSection<T> src)

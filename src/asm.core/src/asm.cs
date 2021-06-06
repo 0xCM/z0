@@ -24,22 +24,6 @@ namespace Z0.Asm
                 => new AsmSigOp(sym.Name, sym.Expr);
 
         [MethodImpl(Inline), Op]
-        public static AsmExprSet pack(AsmOpCodeExpr opcode, AsmSigExpr sig, AsmStatementExpr statement)
-            => new AsmExprSet(new AsmFormExpr(opcode, sig), statement);
-
-        [MethodImpl(Inline), Op]
-        public static AsmCallSite callsite(AsmCaller caller, Address16 offset, uint4 size)
-            => new AsmCallSite(caller, offset, size);
-
-        [MethodImpl(Inline), Op]
-        public static AsmCaller caller(MemoryAddress @base, AsmSymbol symbol)
-            => new AsmCaller(@base, symbol);
-
-        [MethodImpl(Inline), Op]
-        public static AsmCallee callee(MemoryAddress @base, AsmSymbol symbol)
-            => new AsmCallee(@base, symbol);
-
-        [MethodImpl(Inline), Op]
         public static AsmBranchInfo branch(MemoryAddress @base, MemoryAddress ip, byte fxSize, in AsmBranchTarget target)
             => new AsmBranchInfo(@base, ip, target, offset(ip, fxSize, target.Address));
     }

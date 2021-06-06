@@ -14,7 +14,7 @@ namespace Z0
         where K : unmanaged, Enum
     {
         [MethodImpl(Inline)]
-        public static SymCache<K> get()
+        internal static SymCache<K> get()
             => new SymCache<K>();
 
         static SymCache()

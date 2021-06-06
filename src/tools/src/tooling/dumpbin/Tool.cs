@@ -88,7 +88,7 @@ namespace Z0.Tools
             Id = id;
             Args =  alloc<ToolCmdArg<Flag,object>>(MaxVarCount);
             ArgIndex = 0;
-            CmdSymbols = Symbols.symbolic<CmdId>();
+            CmdSymbols = Symbols.index<CmdId>();
         }
 
         public DumpBin With<T>(Flag option, T value)

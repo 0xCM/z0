@@ -20,7 +20,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode rex(uint4 wrxb, uint4 index)
         {
-            var dst = AsmBytes.hexcode();
+            var dst = AsmBytes.code();
             dst.Cell(index) = rex(wrxb);
             dst.Cell(15) = 1;
             return dst;

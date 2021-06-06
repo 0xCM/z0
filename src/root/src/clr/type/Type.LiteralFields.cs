@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static FieldInfo[] LiteralFields(this Type src)
-            => src.GetFields(BF_Declared).Where(f => f.IsLiteral);
+            => src.GetFields(BF_Declared).Where(f => f.IsLiteral && f.Untagged<IgnoreAttribute>());
 
         /// <summary>
         /// Queries the source <see cref='Type'/> for <see cref='FieldInfo'/> members determined by the

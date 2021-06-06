@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static AsmInstructions;
     using static Hex8Seq;
-    using static AsmHexCodes;
 
     partial class AsmEncoder
     {
@@ -20,7 +19,7 @@ namespace Z0.Asm
         /// <param name="cb"></param>
         [MethodImpl(Inline), Op]
         public static Ja ja(Address8 cb)
-            => asmhex(x77, cb);
+            => AsmBytes.code(x77, cb);
 
         /// <summary>
         /// (JA rel32) 0F 87 cd
@@ -28,6 +27,6 @@ namespace Z0.Asm
         /// <param name="cb"></param>
         [MethodImpl(Inline), Op]
         public static Ja ja(Address32 cd)
-            => asmhex(x77, cd);
+            => AsmBytes.code(x77, cd);
     }
 }

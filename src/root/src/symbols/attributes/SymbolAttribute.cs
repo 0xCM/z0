@@ -22,7 +22,6 @@ public class SymbolAttribute : Attribute
         Description = string.Empty;
     }
 
-
     public SymbolAttribute(string symbol, string description)
     {
         _Symbol = symbol;
@@ -52,5 +51,4 @@ public class SymbolAttribute : Attribute
         _Symbol = symbol;
         Description = description;
     }
-
 }

@@ -9,6 +9,6 @@ namespace Z0
     {
         [Op]
         public static string Format(this FileKind src)
-            => SymCache<FileKind>.get()[src].Expr.Format();
+            => Symbols.index<FileKind>()[src].Expr.Format();
     }
 }

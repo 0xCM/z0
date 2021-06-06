@@ -38,6 +38,7 @@ namespace Z0
                 seek(dst, j--) = Hex.code(n4, LowerCase, Bytes.srl(d, 4));
             }
         }
+
         [Op]
         public static Outcome<uint> digits(ReadOnlySpan<char> src, Span<HexDigit> dst)
         {

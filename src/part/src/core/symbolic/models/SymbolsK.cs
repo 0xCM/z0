@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -17,11 +18,14 @@ namespace Z0
 
         readonly Index<K> _Kinds;
 
+        readonly HashSet<K> _Set;
+
         [MethodImpl(Inline)]
-        Symbols(Index<Sym<K>> src)
+        internal Symbols(Index<Sym<K>> src)
         {
             Data = src;
             _Kinds = src.Select(x => x.Kind);
+            _Set = hashset(_Kinds.Storage);
         }
 
         public ref readonly Sym<K> this[uint index]
@@ -67,6 +71,10 @@ namespace Z0
             }
         }
 
+        [MethodImpl(Inline)]
+        public bool Contains(K kind)
+            => _Set.Contains(kind);
+
         public ReadOnlySpan<K> Kinds
         {
             [MethodImpl(Inline)]
@@ -103,16 +111,16 @@ namespace Z0
             get => Data.View;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator Symbols<K>(Sym<K>[] src)
-            => new Symbols<K>(src);
+        // [MethodImpl(Inline)]
+        // public static implicit operator Symbols<K>(Sym<K>[] src)
+        //     => new Symbols<K>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<K>[](Symbols<K> src)
             => src.Data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Index<K,Sym<K>>(Symbols<K> src)
-            => new Index<K, Sym<K>>(src.Data);
+        // [MethodImpl(Inline)]
+        // public static implicit operator Index<K,Sym<K>>(Symbols<K> src)
+        //     => new Index<K,Sym<K>>(src.Data);
     }
 }

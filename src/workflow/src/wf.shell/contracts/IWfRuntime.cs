@@ -236,6 +236,10 @@ namespace Z0
        void Row<T>(T data)
             => Raise(EventFactory.row(data));
 
+
+        void Row(ReadOnlySpan<char> src)
+            => Row<string>(text.format(src));
+
         void Row<T>(uint index, T data)
             => Row(string.Format("{0:D4}: {1}", index, data));
 

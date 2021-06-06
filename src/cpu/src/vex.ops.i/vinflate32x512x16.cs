@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct cpu
     {
