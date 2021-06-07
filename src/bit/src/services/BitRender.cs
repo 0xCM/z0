@@ -15,13 +15,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op]
-        public static uint render(N2 n, byte src, uint offset, Span<char> dst)
-        {
-            seek(dst, offset++) = bitchar(src, 1);
-            seek(dst, offset++) = bitchar(src, 0);
-            return n;
-        }
 
         [MethodImpl(Inline), Op]
         static uint separate(uint offset, Span<char> dst)

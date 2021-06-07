@@ -47,6 +47,9 @@ namespace Z0
         public int CompareTo(AsmIndex src)
             => IP.CompareTo(src.IP);
 
+        public override int GetHashCode()
+            => (int)Sequence;
+
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{12,16,16,16,16,64,32,64,32,128,80};
     }

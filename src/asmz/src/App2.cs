@@ -635,20 +635,26 @@ namespace Z0.Asm
 
         public void ShowModRmTable()
         {
-            using var dst = ShowLog(FS.Log);
             var f0 = BitSeq.bits(n3);
             var f1 = BitSeq.bits(n3);
             var f2 = BitSeq.bits(n2);
             var i=0;
+            var buffer = span<char>(256);
             for(var c=0u; c<f2.Length; c++)
             for(var b=0u; b<f1.Length; b++)
             for(var a=0u; a<f0.Length; a++,i++)
             {
+                buffer.Clear();
                 var modrm = asm.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
-                AsmRender.bitfield(modrm, dst.Buffer);
-                dst.Buffer.Append(" = ");
-                dst.Buffer.Append(modrm.Encoded.FormatBits());
-                dst.ShowBuffer();
+                var k = AsmRender.bitfield(modrm, buffer);
+                seek(buffer, k++) = Chars.Space;
+                seek(buffer, k++) = Chars.Eq;
+                seek(buffer, k++) = Chars.Space;
+
+                var bits = modrm.Encoded.FormatBits();
+                TextTools.copy(bits, ref k, buffer);
+                var content = text.format(slice(buffer,0,k));
+                Wf.Row(content);
             }
         }
 
@@ -689,17 +695,6 @@ namespace Z0.Asm
             var count = Hex.parse("80C116",buffer);
             var data = slice(buffer,0,count);
             Wf.Row(data.FormatHex());
-
-            // AsmBytes.parse("80C116", out var a);
-            // var bsA = AsmBitstrings.bitchars(a).Format();
-            // var xA = a.Format();
-
-            // AsmBytes.parse("80C216", out var b);
-            // var bsB = AsmBitstrings.bitchars(b).Format();
-            // var xB = b.Format();
-
-            // Wf.Row(string.Format("{0,-14} | [{1}]", xA, bsA));
-            // Wf.Row(string.Format("{0,-14} | [{1}]", xB, bsB));
         }
 
         void ProcessStatementIndex()
@@ -707,15 +702,15 @@ namespace Z0.Asm
             var counter = 0u;
 
             var totalSize = ByteSize.Zero;
-
             var dst = Db.AppLog("statements.bitstrings", FS.Csv);
-            using var receiver = new AsmIndexReceiver(dst);
-            var processor = AsmIndexProcessor.create(Wf.EventSink, receiver.Deposit);
+            using var worker = new AsmIndexWorker(dst);
+            var processor = AsmIndexProcessor.create(Wf.EventSink, worker.Deposit);
             var packs = Wf.ApiPacks();
             var current = packs.Current();
             var archive = ApiPackArchive.create(current.Root);
             var path = archive.StatementIndexPath();
             processor.ProcessFile(path);
+
         }
 
         void CheckRowFormat()
@@ -834,7 +829,6 @@ namespace Z0.Asm
             var dir = Db.AppLogDir();
             var parser = Wf.DisassemblyParser();
             parser.ParseDisassembly(src,dir);
-
         }
 
         public void RunAsmCases()
@@ -844,7 +838,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            RunExtractWorkflow();
+            ProcessStatementIndex();
+            //ParseDisassembly();
             //CheckCodeFactory();
             //EmitSymbolicliterals();
             //GenerateInstructionModels();

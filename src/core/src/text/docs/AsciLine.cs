@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     public ref struct AsciLine
     {
@@ -16,10 +15,10 @@ namespace Z0
 
         public uint StartPos {get;}
 
-        public ReadOnlySpan<byte> Content {get;}
+        public ReadOnlySpan<AsciCharCode> Content {get;}
 
         [MethodImpl(Inline)]
-        public AsciLine(uint number, uint start, ReadOnlySpan<byte> src)
+        public AsciLine(uint number, uint start, ReadOnlySpan<AsciCharCode> src)
         {
             LineNumber = number;
             StartPos = start;

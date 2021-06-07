@@ -24,6 +24,12 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
         }
 
+        public AsmSigExpr(AsmMnemonic mnemonic)
+        {
+            Data = EmptyString;
+            Mnemonic = mnemonic;
+        }
+
         public TextBlock Content
         {
             [MethodImpl(Inline)]

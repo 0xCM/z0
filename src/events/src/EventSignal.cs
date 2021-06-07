@@ -41,7 +41,6 @@ namespace Z0
             return e.EventId;
         }
 
-
         public RanEvent<T> Ran<T>(T data)
         {
             var e = ran(Source, data);

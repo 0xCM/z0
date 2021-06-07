@@ -263,9 +263,6 @@ namespace Z0.Asm
             return count;
         }
 
-        // [Op]
-        // public Index<ApiInstruction> ApiInstructions(ApiCodeBlock code, IceInstruction[] src)
-        //     => ToApiInstructions(code, src);
 
         public static ApiHostRoutine ApiHostRoutine(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
             => new ApiHostRoutine(@base, ToApiInstructions(code, src));

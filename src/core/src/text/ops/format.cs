@@ -25,12 +25,8 @@ namespace Z0
             return new string(chars);
         }
 
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCharCode> codes(ReadOnlySpan<byte> src)
-            => recover<AsciCharCode>(src);
-
         [Op]
         public static string format(in AsciLine src, Span<char> buffer)
-            => format(codes(src.Content), buffer);
+            => format(src.Content, buffer);
     }
 }

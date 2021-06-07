@@ -99,6 +99,8 @@ namespace Z0.Asm
             var lastpos = filesize - 2;
             var header = EmptyString;
 
+            Status($"Processing {filesize} source bytes");
+
             for(var pos=0u; pos<filesize - 1; pos++)
             {
                 ref readonly var a0 = ref skip(data, pos);
@@ -114,7 +116,10 @@ namespace Z0.Asm
                         outcome = ProcessLine(pos, chars);
 
                     if(outcome.Fail)
+                    {
+                        Error(outcome.Message);
                         break;
+                    }
 
                     lines++;
 

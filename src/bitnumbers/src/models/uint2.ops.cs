@@ -20,14 +20,6 @@ namespace Z0
         public static string format(U src)
             => BitRender.format(src.data, BitFormat.limited(U.Width, U.Width));
 
-        [MethodImpl(Inline), Op]
-        public static void render(U src, uint offset, Span<char> dst)
-            => render(src, 2, offset, dst);
-
-        [MethodImpl(Inline), Op]
-        public static void render(U src, Span<char> dst)
-            => render(src, 2, 0, dst);
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref S edit<S>(in U src)
             where S : unmanaged

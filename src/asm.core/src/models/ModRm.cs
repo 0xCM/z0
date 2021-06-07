@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
 
     /// <summary>
-    /// ModRM = [ModRM.mod:[7:6] | ModRM.reg:[5:3] | ModRM.r/m:[2:0]]
+    /// ModRM[mod[7:6] | reg[5:3] | r/m[2:0]]
     /// </summary>
     public readonly struct ModRm
     {

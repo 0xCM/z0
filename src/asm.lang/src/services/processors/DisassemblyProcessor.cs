@@ -10,28 +10,31 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-
+    using static Typed;
 
     [ApiHost]
-    public class DisassemblyProcessor : AppService<DisassemblyProcessor>
+    public class DisassemblyProcessor : AsciTextProcessor<AsmDisassembly>
     {
-        [MethodImpl(Inline), Op]
-        public static DisassemblyLine line(ReadOnlySpan<byte> src, uint number, uint start, uint length)
-            => new DisassemblyLine(number, start, slice(src, start, length));
-
-        [Op]
-        public static Outcome parse(ref DisassemblyLine src)
+        public DisassemblyProcessor(IEventSink sink)
+            : base(sink)
         {
-            var offset = 0ul;
-            var outcome = Hex.parse(TextTools.codes(slice(src.Content,0,16)), bytes(offset));
-            if(outcome)
-                src.Offset = offset;
+
+        }
+
+        protected override Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
+        {
+            var outcome = Outcome.Success;
+            dst = default;
+            var data = src.Content;
+            var space1 = TextTools.next(data, 0, AsciCharCode.Space);
+            Hex.parse(slice(data,0,space1), out var offset);
+            dst = new AsmDisassembly(src.LineNumber, offset, EmptyString, default);
             return outcome;
         }
 
         public void ParseDisassembly(FS.FilePath src, FS.FolderPath dir)
         {
-            var flow = Wf.Running(string.Format("Parsing {0}", src.ToUri()));
+            var flow = Running(string.Format("Parsing {0}", src.ToUri()));
             using var map = MemoryFiles.map(src);
             var size = map.Size;
             var data = map.View();
@@ -41,7 +44,7 @@ namespace Z0.Asm
             using var writer = dst.Writer(Encoding.ASCII);
             Span<char> buffer = alloc<char>(max);
             var pos = 0u;
-            var emitting = Wf.EmittingFile(dst);
+            var emitting = Emitting(dst);
             var length = 0u;
             var counter = 0u;
             var number = 0u;
@@ -51,16 +54,16 @@ namespace Z0.Asm
                 ref readonly var a1 = ref skip(data, pos + 1);
                 if(TextTools.eol(a0,a1))
                 {
-                    var _line = line(data, number++, counter, length + 1);
-                    var outcome = parse(ref _line);
+                    var _line = TextTools.line(data, number, counter, length + 1);
+                    var outcome = ProcessLine(ref _line, out var encoding);
                     if(outcome.Fail)
                     {
-                        Wf.Error(outcome.Message);
+                        Error(outcome.Message);
                         break;
                     }
                     else
                     {
-                        Wf.Row(_line.Offset);
+                        Babble(string.Format("{0}", encoding.Offset));
                     }
                     buffer.Clear();
                     writer.Write(_line.Format(buffer));
@@ -72,8 +75,8 @@ namespace Z0.Asm
                     length++;
             }
 
-            Wf.EmittedFile(emitting, number);
-            Wf.Ran(flow, string.Format("Parsed {0} lines from {1}", number, src.ToUri()));
+            Emitted(emitting, number);
+            Ran(flow, string.Format("Parsed {0} lines from {1}", number, src.ToUri()));
         }
     }
 }

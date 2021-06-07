@@ -11,7 +11,6 @@ namespace Z0
 
     using T = Z0;
 
-
     partial struct BitNumbers
     {
         /// <summary>

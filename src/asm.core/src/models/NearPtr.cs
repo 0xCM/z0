@@ -36,5 +36,4 @@ namespace Z0.Asm
         public static implicit operator EffectiveAddress(NearPtr src)
             => new NearPtr(src.Address);
     }
-
 }

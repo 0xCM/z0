@@ -93,6 +93,12 @@ namespace Z0
             return (true,counter);
         }
 
+        public static Outcome parse(ReadOnlySpan<AsciCharCode> src, out ulong dst)
+        {
+            dst = 0;
+            return parse(src, bytes(dst));
+        }
+
         [Op]
         public static Outcome<uint> parse(ReadOnlySpan<AsciCharCode> src, Span<byte> dst)
         {
@@ -100,7 +106,8 @@ namespace Z0
             var count = src.Length;
             ref var target = ref first(dst);
             var hi = byte.MaxValue;
-            for(var i=0; i<count; i++)
+            var lo = byte.MaxValue;
+            for(var i=count-1; i>=0; i--)
             {
                 ref readonly var c = ref skip(src,i);
                 if(whitespace(c) || specifier(c))
@@ -108,19 +115,20 @@ namespace Z0
 
                 if(parse(c, out HexDigit d))
                 {
-                    if(hi == byte.MaxValue)
-                        hi = (byte)d;
+                    if(lo == byte.MaxValue)
+                        lo = (byte)d;
                     else
                     {
-                        var lo = (byte)d;
+                        hi = (byte)d;
                         seek(target, counter++) = Bytes.or(Bytes.sll(hi,4), lo);
                         hi = byte.MaxValue;
+                        lo = byte.MaxValue;
                     }
                 }
                 else
                     return false;
             }
-            return (true,counter);
+            return (true, counter);
         }
 
         [MethodImpl(Inline), Op]

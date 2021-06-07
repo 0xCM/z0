@@ -73,26 +73,41 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Outcome sig(string src, out AsmSigExpr dst)
+        public static Outcome mnemonic(string sig, out AsmMnemonic dst)
         {
-            if(text.nonempty(src))
+            dst = AsmMnemonic.Empty;
+            if(text.empty(sig))
+                return false;
+
+            var trimmed = sig.Trim();
+            var i = text.index(trimmed, Chars.Space);
+            if(i == NotFound)
+                return false;
+            else
             {
-                if(AsmParser.mnemonic(src, out var monic))
-                {
-                    var i = text.index(src, Chars.Space);
-                    var operands = i > 0 ? src.Substring(i).Split(Chars.Comma).Map(sigop) : sys.empty<AsmSigOperandExpr>();
-                    dst = asm.sig(monic, AsmRender.format(monic, operands));
-                    return true;
-                }
+                dst = text.substring(trimmed,0,i);
+                return true;
             }
-            dst = AsmSigExpr.Empty;
-            return false;
         }
 
         [Op]
-        public static Outcome parse(string src, out AsmSigExpr dst)
+        public static Outcome sig(string src, out AsmSigExpr dst)
         {
-            return sig(src, out dst);
+            if(text.empty(src))
+                return false;
+
+            var trimmed = src.Trim();
+            var i = text.index(trimmed, Chars.Space);
+            if(i == NotFound)
+            {
+                dst = new AsmSigExpr(asm.mnemonic(src));
+            }
+            else
+            {
+                dst = new AsmSigExpr(asm.mnemonic(text.slice(trimmed,0,i)), text.slice(trimmed, i + 1));
+            }
+
+            return true;
         }
 
         [Op]
@@ -100,52 +115,6 @@ namespace Z0.Asm
         {
             dst = new AsmStatementExpr(src.Trim());
             return true;
-        }
-
-        [MethodImpl(Inline), Op]
-        static AsmSigOperandExpr sigop(string src)
-            => new AsmSigOperandExpr(src.Trim());
-
-        [Op]
-        public static Outcome mnemonic(string sig, out AsmMnemonic dst)
-        {
-            dst = AsmMnemonic.Empty;
-            if(text.empty(sig))
-                return false;
-
-            if(MnemonicText(sig, out var candidate))
-            {
-                dst = new AsmMnemonic(candidate);
-                return true;
-            }
-            else
-                return false;
-        }
-
-        [Op]
-        static bool MnemonicText(string sig, out string dst)
-        {
-            const char MnemonicTerminator = Chars.Space;
-
-            if(text.empty(sig))
-            {
-                dst = EmptyString;
-                return false;
-            }
-            else
-            {
-                var i = text.index(sig, MnemonicTerminator);
-                if(i > 0)
-                {
-                    dst = text.segment(sig, 0, i - 1).ToUpper();
-                    return true;
-                }
-                else
-                {
-                    dst = sig;
-                    return true;
-                }
-            }
         }
 
         public static Outcome parse(string src, out AsmOpCodeExpr dst)
@@ -156,7 +125,15 @@ namespace Z0.Asm
 
         [Op]
         public static Outcome parse(AsmMnemonic src, out AsmMnemonicCode dst)
-            => Enums.parse(src.Format(), out dst);
+        {
+            if(Enums.parse(src.Format(), out dst))
+                return true;
+            else
+            {
+                dst = 0;
+                return false;
+            }
+        }
 
         [Op]
         public static Outcome parse(TextRow src, out AsmApiStatement dst)
@@ -240,8 +217,8 @@ namespace Z0.Asm
 
         public static Outcome parse(TextLine src, out AsmIndex dst)
         {
-            const string ErrorPattern = "Error parsing line {0}, cell {1} from '{2}'";
-            var parts = src.Split(Chars.Pipe);
+            const string ErrorPattern = "Error parsing {0} on line {1}";
+            var parts = src.Split(Chars.Pipe).Map(x => x.Trim());
             var count = parts.Length;
             var outcome = Outcome.Success;
             if(count != AsmIndex.FieldCount)
@@ -254,46 +231,44 @@ namespace Z0.Asm
 
             outcome += DataParser.parse(skip(parts,i++), out dst.Sequence);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.Sequence), src.LineNumber));
 
             outcome += DataParser.parse(skip(parts,i++), out dst.GlobalOffset);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.GlobalOffset), src.LineNumber));
 
             outcome += DataParser.parse(skip(parts,i++), out dst.BlockAddress);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.BlockAddress), src.LineNumber));
 
             outcome += DataParser.parse(skip(parts,i++), out dst.IP);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.IP), src.LineNumber));
 
             outcome += DataParser.parse(skip(parts,i++), out dst.BlockOffset);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.BlockOffset), src.LineNumber));
 
             outcome += AsmParser.parse(skip(parts,i++), out dst.Expression);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.Expression), src.LineNumber));
 
             outcome += AsmBytes.parse(skip(parts,i++), out dst.Encoded);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.Encoded), src.LineNumber));
 
-            outcome += AsmParser.parse(skip(parts,i++), out dst.Sig);
+            outcome += AsmParser.sig(skip(parts,i++), out dst.Sig);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.Sig), src.LineNumber));
 
-            outcome += AsmParser.parse(skip(parts,i++), out dst.OpCode);
-            if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+            dst.OpCode = asm.opcode(skip(parts, i++));
 
             var bitstring = skip(parts,i++);
             dst.Bitstring = dst.Encoded;
 
             outcome += DataParser.parse(skip(parts,i++), out dst.OpUri);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, src, i-1, skip(parts,i-1)));
+                return (false, string.Format(ErrorPattern, nameof(dst.OpUri), src.LineNumber));
 
             return true;
         }

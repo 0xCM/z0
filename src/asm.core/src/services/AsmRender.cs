@@ -12,6 +12,8 @@ namespace Z0.Asm
     using static Chars;
     using static core;
 
+    using C = AsciCharCode;
+
     [ApiHost]
     public readonly struct AsmRender
     {
@@ -104,6 +106,46 @@ namespace Z0.Asm
 
             dst.Append(Close);
         }
+
+        public static uint bitfield(ModRm src, Span<char> dst)
+        {
+            const string ModRM = "ModRM";
+            const string Mod = "mod";
+            const string Reg = "reg";
+            const string Rm = "r/m";
+            var i=0u;
+            copy(ModRM, ref i, dst);
+            seek(dst, i++) = Open;
+
+            copy(Mod, ref i, dst);
+            seek(dst, i++) = Open;
+            BitRender.render(n2, src.Mod, ref i, dst);
+            seek(dst, i++) = Close;
+
+            seek(dst, i++) = Chars.Space;
+            seek(dst, i++) = Chars.Pipe;
+            seek(dst, i++) = Chars.Space;
+
+            copy(Reg, ref i, dst);
+            seek(dst, i++) = Open;
+            BitRender.render(n3, src.Reg, ref i, dst);
+            seek(dst, i++) = Close;
+
+            seek(dst, i++) = Chars.Space;
+            seek(dst, i++) = Chars.Pipe;
+            seek(dst, i++) = Chars.Space;
+
+            copy(Rm, ref i, dst);
+            seek(dst, i++) = Open;
+            BitRender.render(n3, src.Rm, ref i, dst);
+            seek(dst, i++) = Close;
+
+            seek(dst, i++) = Close;
+            return i;
+        }
+
+        static void copy(ReadOnlySpan<char> src,ref uint i, Span<char> dst)
+            => TextTools.copy(src, ref i, dst);
 
         [Op]
         public static byte format(in ApiCodeBlockHeader src, Span<string> dst)

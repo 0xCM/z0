@@ -14,4 +14,14 @@ namespace Z0
 
 
     }
+
+    public interface IProcessWorker
+    {
+
+    }
+
+    public interface IProcessWorker<S,T> : IProcessWorker
+    {
+
+    }
 }

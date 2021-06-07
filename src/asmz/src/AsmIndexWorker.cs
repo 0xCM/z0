@@ -8,12 +8,13 @@ namespace Z0.Asm
     using System.Text;
     using System.IO;
 
-    using static Part;
+    using static Root;
+    using static Typed;
     using static core;
 
-    public struct AsmIndexReceiver : IReceiver<AsmIndex>, IDisposable
+    public class AsmIndexWorker : IReceiver<AsmIndex>, IDisposable
     {
-        const string RenderPattern = "{0,-12} | {1,-8} | {2,-32} | {3,-32} | {4}";
+        const string RenderPattern = "{0,-12} | {1,-22} | {2,-8} | {3,-32} | {4}";
 
         public FS.FilePath Target {get;}
 
@@ -21,12 +22,12 @@ namespace Z0.Asm
 
         readonly StreamWriter Writer;
 
-        public AsmIndexReceiver(FS.FilePath dst)
+        public AsmIndexWorker(FS.FilePath dst)
         {
             Target = dst;
             _Buffer = alloc<char>(256);
             Writer = dst.Writer(Encoding.ASCII);
-            Writer.WriteLine(RenderPattern, "Sequence", "Size", "Hex0", "Hex1", "Bitstring");
+            Writer.WriteLine(RenderPattern, "Sequence", "Mnemonic", "Size", "Hex", "Bitstring");
         }
 
         Span<char> GetBuffer()
@@ -35,19 +36,23 @@ namespace Z0.Asm
             return _Buffer;
         }
 
-        public void Deposit(in AsmIndex src)
+        string Format(in AsmIndex src)
         {
             ref readonly var encoded = ref src.Encoded;
             ref readonly var seq = ref src.Sequence;
             var size = encoded.Size;
             var bitstring = AsmBitstrings.bitchars(n3, encoded).Format();
-            var hex1 = encoded.Format();
             var i=0u;
             var buffer = GetBuffer();
-            var count = AsmRender.render(encoded,ref i, buffer);
-            var hex2 = text.format(slice(buffer,0,count));
-            var content = string.Format(RenderPattern, seq, size, hex1, hex2, bitstring);
-            Writer.WriteLine(content);
+            var count = AsmRender.render(encoded, ref i, buffer);
+            var hex = text.format(slice(buffer,0,count));
+            var content = string.Format(RenderPattern, seq, src.Sig.Mnemonic, size, hex, bitstring);
+            return content;
+        }
+
+        public void Deposit(in AsmIndex src)
+        {
+            Writer.WriteLine(Format(src));
         }
 
         public void Dispose()

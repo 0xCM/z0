@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public abstract class ProcessService : IProcessService
     {
         WfHost Host {get;}
@@ -42,6 +39,21 @@ namespace Z0
             return Signal.Processing(src);
         }
 
+        protected RunningEvent Running()
+        {
+            return Signal.Running();
+        }
+
+        protected RunningEvent<T> Running<T>(T data)
+        {
+            return Signal.Running(data);
+        }
+
+        protected RanEvent<T> Ran<T>(RunningEvent<T> e, T data)
+        {
+            return Signal.Ran(data);
+        }
+
         protected ProcessedFileEvent Processed(ProcessingFileEvent e)
         {
             return Signal.Processed(e.SourcePath);
@@ -55,6 +67,11 @@ namespace Z0
         protected EmittedFileEvent Emitted(FS.FilePath src)
         {
             return Signal.EmittedFile(src);
+        }
+
+        protected EmittedFileEvent Emitted(EmittingFileEvent e, Count metric)
+        {
+            return Signal.EmittedFile(metric, e.Target);
         }
 
         protected EmittedFileEvent Emitted(Count metric, FS.FilePath src)

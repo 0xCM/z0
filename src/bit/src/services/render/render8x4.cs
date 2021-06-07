@@ -72,9 +72,9 @@ namespace Z0
             for(var i=size-1; i >= 0; i--)
             {
                 ref readonly var input = ref skip(src,i);
-                j+= render(w, hi(input), j, dst);
+                render(w, hi(input), ref j, dst);
                 j+= separate(j, dst);
-                j+= render(w, lo(input), j, dst);
+                render(w, lo(input), ref j, dst);
                 if(i != 0)
                     j += separate(j, dst);
             }

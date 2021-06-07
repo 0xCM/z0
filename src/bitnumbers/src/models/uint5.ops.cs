@@ -16,14 +16,6 @@ namespace Z0
 
     partial struct BitNumbers
     {
-        [MethodImpl(Inline), Op]
-        public static void render(U src, uint offset, Span<char> dst)
-            => render(src, 5, offset, dst);
-
-        [MethodImpl(Inline), Op]
-        public static void render(U src, Span<char> dst)
-            => render(src, 5, 0, dst);
-
         /// <summary>
         /// Reinterprets an input reference as a mutable <see cref='Z0.uint4'/> reference cell
         /// </summary>

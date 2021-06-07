@@ -53,7 +53,7 @@ namespace Z0
             => Text.GetHashCode();
 
         public bool Equals(SymExpr src)
-            => Text.Equals(src.Text);
+            => Text.Equals(src.Text, NoCase);
 
         public override bool Equals(object src)
             => src is SymExpr e && Equals(e);

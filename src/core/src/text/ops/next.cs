@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="a0"></param>
         /// <param name="a1"></param>
         [MethodImpl(Inline), Op]
-        public static uint next(ReadOnlySpan<byte> src, ref uint i, out byte a0, out byte a1)
+        public static uint next(ReadOnlySpan<C> src, ref uint i, out C a0, out C a1)
         {
             a0 = skip(src,i++);
             a1 = skip(src,i++);
@@ -30,19 +30,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static int next(ReadOnlySpan<byte> src, uint offset, C a0)
+        public static int next(ReadOnlySpan<C> src, uint offset, C a0)
         {
             var i = 0;
             while(i < src.Length)
             {
-                if((C)skip(src,i++) == a0)
+                if(skip(src,i++) == a0)
                     return (int)i;
             }
             return NotFound;
         }
 
         [MethodImpl(Inline), Op]
-        public static int next(ReadOnlySpan<byte> src, uint offset, C a0, C a1)
+        public static int next(ReadOnlySpan<C> src, uint offset, C a0, C a1)
         {
             var i=0;
             var max = src.Length - 1;
@@ -50,7 +50,7 @@ namespace Z0
             {
                 ref readonly var b0 = ref skip(src,i);
                 ref readonly var b1 = ref skip(src,i+1);
-                if((C)b0 == a0 && (C)b1 == a1)
+                if(b0 == a0 && b1 == a1)
                     return i;
 
                 i++;

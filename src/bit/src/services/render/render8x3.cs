@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct BitRender
     {
-       [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op]
         public static uint render(N8 n, N3 w, byte src, uint offset, Span<BitChar> dst)
         {
             var i= offset;

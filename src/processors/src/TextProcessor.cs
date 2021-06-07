@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public abstract class TextProcessor<T> : ProcessService<T>, ITextProcessor<T>
     {
