@@ -46,6 +46,8 @@
     <Clr>$(Src)clr/z0.clr.csproj</Clr>
     <Core>$(Src)core/z0.core.csproj</Core>
     <Commands>$(Src)commands/z0.commands.csproj</Commands>
+    <Containers>$(Src)containers/z0.containers.csproj</Containers>
+
     <Cpu>$(Src)cpu/z0.cpu.csproj</Cpu>
     <CpuDsl>$(Src)cpu.dsl/z0.cpu.dsl.csproj</CpuDsl>
 

@@ -36,7 +36,7 @@ namespace Z0
             if(verbose)
             {
                 var fence = text.fence(Chars.LBrace, Chars.RBrace);
-                var enclosed = Rules.enclose(text.join(RP.CommaJoin, partIdList), fence);
+                var enclosed = Rules.fenced(text.join(RP.CommaJoin, partIdList), fence);
                 var content = text.format(enclosed);
                 var prop = text.prop("Parts", content);
                 var msg = AppMsg.status(prop);

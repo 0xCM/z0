@@ -9,6 +9,7 @@ namespace Z0.Tools
 
     partial class BdDisasm
     {
+        [LiteralProvider]
         internal readonly struct OpTypeSymbols
         {
             public const string A = "A";

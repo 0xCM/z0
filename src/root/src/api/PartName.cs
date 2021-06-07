@@ -26,6 +26,18 @@ namespace Z0
         public PartName(PartId id)
             => Id = id;
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Id == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Id != 0;
+        }
+
         public string Name
         {
             [MethodImpl(Inline)]

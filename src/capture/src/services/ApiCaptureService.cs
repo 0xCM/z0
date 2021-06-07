@@ -203,7 +203,7 @@ namespace Z0
         public AsmHostRoutines CaptureTypes(Index<ApiRuntimeType> src)
         {
             var dst = list<AsmMemberRoutine>();
-            var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
+            var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
             var count = extracted.Length;
             for(var i=0; i<count; i++)
             {

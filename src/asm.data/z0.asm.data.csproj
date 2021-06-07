@@ -8,6 +8,7 @@
       <ProjectReference Include="$(Root)" />
       <ProjectReference Include="$(Core)" />
       <ProjectReference Include="$(Resources)" />
+      <ProjectReference Include="$(Part)" />
   </ItemGroup>
 
   <ItemGroup>

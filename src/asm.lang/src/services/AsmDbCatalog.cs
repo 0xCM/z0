@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         public AsmDbSourceDocs SourceDocs()
         {
-            var assets = Parts.AsmCatalogs.Assets;
+            var assets = AsmData.Assets;
             if(TextDocs.resource(assets.AsmDbInstructions(), TextDocFormat.Structured(), out var instructions)
             && (TextDocs.resource(assets.AsmDbOperands(), TextDocFormat.Structured(), out var operands)))
                 return new AsmDbSourceDocs(instructions,operands);

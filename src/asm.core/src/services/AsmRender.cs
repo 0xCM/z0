@@ -23,6 +23,29 @@ namespace Z0.Asm
 
         const string To = " => ";
 
+        static uint render(Hex8 src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            seek(dst, i++) = Hex.hexchar(LowerCase, src.Hi);
+            seek(dst, i++) = Hex.hexchar(LowerCase, src.Lo);
+            return i - i0;
+        }
+
+        public static uint render(AsmHexCode src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            var count = src.Size;
+            var bytes = src.Bytes;
+            for(var j=0; j<count; j++)
+            {
+                ref readonly var b = ref skip(bytes, j);
+                render((Hex8)b, ref i, dst);
+                if(j != count - 1)
+                    seek(dst, i++) = Chars.Space;
+            }
+            return i - i0;
+        }
+
         [Op]
         public static string format(in AsmHexCode src)
             => src.Data.FormatHexData(src.Size);

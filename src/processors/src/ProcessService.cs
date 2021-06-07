@@ -22,16 +22,6 @@ namespace Z0
             Signal = EventSignal.create(sink, Host);
         }
 
-        protected ProcessingFileEvent Processing(FS.FilePath src)
-        {
-            return Signal.Processing(src);
-        }
-
-        protected ProcessedFileEvent Processed(ProcessingFileEvent e)
-        {
-            return Signal.Processed(e.SourcePath);
-        }
-
         protected BabbleEvent<T> Babble<T>(T src)
         {
             return Signal.Babble(src);
@@ -45,6 +35,31 @@ namespace Z0
         protected ErrorEvent<T> Error<T>(T src)
         {
             return Signal.Error(src);
+        }
+
+        protected ProcessingFileEvent Processing(FS.FilePath src)
+        {
+            return Signal.Processing(src);
+        }
+
+        protected ProcessedFileEvent Processed(ProcessingFileEvent e)
+        {
+            return Signal.Processed(e.SourcePath);
+        }
+
+        protected EmittingFileEvent Emitting(FS.FilePath src)
+        {
+            return Signal.EmittingFile(src);
+        }
+
+        protected EmittedFileEvent Emitted(FS.FilePath src)
+        {
+            return Signal.EmittedFile(src);
+        }
+
+        protected EmittedFileEvent Emitted(Count metric, FS.FilePath src)
+        {
+            return Signal.EmittedFile(metric, src);
         }
     }
 }

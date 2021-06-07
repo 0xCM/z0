@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public readonly struct ApiMemberIndex : IApiOpIndex<ApiMember>
     {
@@ -53,7 +54,7 @@ namespace Z0
             => Duplicates;
 
         IEnumerable<KeyedValue<OpIdentity,ApiMember>> KeyedValues
-            => Data.Select(x => root.kv(x.Key, x.Value));
+            => Data.Select(x => kvp(x.Key, x.Value));
 
         public IEnumerator<KeyedValue<OpIdentity, ApiMember>> GetEnumerator()
             => KeyedValues.GetEnumerator();

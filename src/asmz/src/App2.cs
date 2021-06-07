@@ -8,13 +8,12 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Collections.Generic;
     using System.Reflection.Metadata.Ecma335;
-    using System.Text;
 
     using static Part;
     using static core;
     using static Toolsets;
 
-    class App : AppService<App>
+    partial class App : AppService<App>
     {
         public App()
         {
@@ -23,19 +22,8 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            Catalog = StanfordAsmCatalog.create(Wf);
-
-            Forms = root.hashset<AsmFormExpr>();
-            Sigs = Wf.AsmSigs();
 
         }
-
-        HashSet<AsmFormExpr> Forms;
-
-        AsmSigs Sigs;
-
-        StanfordAsmCatalog Catalog;
-
 
         void EmitFormHashes()
         {
@@ -110,10 +98,6 @@ namespace Z0.Asm
             var entries = Wf.ApiCatalogs().LoadCatalog().View;
         }
 
-        static ReadOnlySpan<byte> mul_ᐤ8uㆍ8uᐤ
-            => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x0f,0xaf,0xc2,0x0f,0xb6,0xc0,0xc3};
-
-
         public void ProccessCultFiles()
         {
             Wf.CultProcessor().Run();
@@ -174,7 +158,6 @@ namespace Z0.Asm
         {
             var xed = XedWf.create(Wf);
             xed.Run();
-
         }
 
         public void UnpackRespack()
@@ -214,7 +197,6 @@ namespace Z0.Asm
             return runner;
         }
 
-
         void ResolveApi(params PartId[] parts)
         {
             var resolver = Wf.ApiResolver();
@@ -230,13 +212,6 @@ namespace Z0.Asm
         void EmitMetadataBlocks()
         {
             Wf.CliPipe().EmitMetaBlocks();
-        }
-
-        void Symbolize()
-        {
-            var svc = Wf.SourceSymbolic();
-            var symbols = svc.Symbolize(Parts.Cpu.Assembly);
-            root.iter(symbols.Methods, m => Wf.Row(m.Format()));
         }
 
         ReadOnlySpan<FileType> ListFileTypes()
@@ -258,7 +233,6 @@ namespace Z0.Asm
             catalog.Enumerate(path => Wf.Row(path.ToUri()));
 
         }
-
 
         void CheckHeap()
         {
@@ -418,8 +392,8 @@ namespace Z0.Asm
         void EmitAssetCatalog()
         {
             var catalogs = Wf.AsmCatalogs();
-            var assets = catalogs.Assets();
-            var host = catalogs.AssetHost;
+            var assets = AsmData.Assets;
+            var host = assets.DataSource;
             var descriptors = assets.Descriptors;
             var count = descriptors.Length;
             var dst = Db.Table<AssetCatalogEntry>(host.GetSimpleName());
@@ -442,7 +416,7 @@ namespace Z0.Asm
             var delimiter = Tables.DefaultDelimiter;
             var widths = new byte[fieldCount]{14,14,14,64};
             var dst = Db.AppLog("assets.features", FS.Csv);
-            var assets = Wf.AsmCatalogs().Assets();
+            var assets = AsmData.Assets;
             var features = assets.FeatureMnemonics();
             var emitting = Wf.EmittingFile(dst);
             var result = Tables.normalize(features, delimiter, widths, dst);
@@ -482,31 +456,31 @@ namespace Z0.Asm
             Wf.Row(formatter.Format(info,RecordFormatKind.KeyValuePairs));
         }
 
-        void EmitCpuIntrinsics()
+        public void EmitCpuIntrinsics()
         {
             Wf.IntrinsicsCatalog().Emit();
         }
 
-        void EmitXedSources()
+        public void EmitXedSources()
         {
             Wf.XedCatalog().EmitSourceAssets();
         }
 
-        void EmitSymbolicliterals()
+        public void EmitSymbolicliterals()
         {
             var service = Wf.Symbolism();
             var dst = Db.AppTablePath<SymLiteral>();
             service.EmitLiterals(dst);
         }
 
-        ReadOnlySpan<CilOpCode> EmitCilOpCodes(FS.FilePath dst)
+        public ReadOnlySpan<CilOpCode> EmitCilOpCodes(FS.FilePath dst)
         {
             var codes = Cil.opcodes();
             TableEmit(codes,dst);
             return codes;
         }
 
-        ReadOnlySpan<CilOpCode> EmitCilOpCodes()
+        public ReadOnlySpan<CilOpCode> EmitCilOpCodes()
         {
             var dst = Db.IndexTable<CilOpCode>();
             return EmitCilOpCodes(dst);
@@ -516,6 +490,87 @@ namespace Z0.Asm
         public ApiCodeBlocks LoadApiBlocks()
         {
             return Wf.ApiHex().ReadBlocks();
+        }
+
+
+        void EmitDependencyGraph()
+        {
+            var svc = Wf.CliPipe();
+            var refs = svc.ReadAssemblyRefs();
+            var dst = Db.AppLog("dependencies", FS.Dot);
+            var flow = Wf.EmittingFile(dst);
+            var count = refs.Length;
+            var parts = Wf.ApiCatalog.ComponentNames.ToHashSet();
+            using var writer = dst.Writer();
+            writer.WriteLine("digraph dependencies{");
+            writer.WriteLine(string.Format("label={0}", text.enquote("Assembly Dependencies")));
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var x = ref skip(refs,i);
+                if(parts.Contains(x.Target.Name))
+                {
+                    var source = x.Source.Name.Replace(Chars.Dot, Chars.Underscore);
+                    var target = x.Target.Name.Replace(Chars.Dot, Chars.Underscore);
+                    var arrow = string.Format("{0}->{1}", source, target);
+                    writer.WriteLine(arrow);
+                }
+            }
+            writer.WriteLine("}");
+            Wf.EmittedFile(flow, count);
+        }
+
+        void CalcRelativePaths()
+        {
+            var @base = Db.DbRoot();
+            var files = Db.AsmCapturePaths().View;
+            var relative = files.Map(f => f.Relative(@base));
+            var count = relative.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(relative,i);
+                var link = Markdown.link(path);
+                Wf.Row(link);
+            }
+        }
+
+        void ParseDump2()
+        {
+            using var clrmd = ClrMdSvc.create(Wf);
+            clrmd.ParseDump();
+        }
+
+        void GenSlnScript()
+        {
+            const string Pattern = "dotnet sln add {0}";
+            var src = FS.dir(@"C:\Dev\z0");
+            var dst = Db.AppLog("create-sln", FS.Cmd);
+            var projects = src.Files(FS.CsProj, true);
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            root.iter(projects,project => writer.WriteLine(string.Format(Pattern, project.Format(PathSeparator.BS))));
+            Wf.EmittedFile(flow,projects.Length);
+        }
+
+        void Symbolize()
+        {
+            var assemblies = Wf.ApiCatalog.Components;
+            var flow = Wf.Running(string.Format("Collecting method symbols for {0} assemblies", assemblies.Length));
+            var symbolic = Wf.SourceSymbolic();
+            var collector = new MethodSymbolCollector();
+            symbolic.SymbolizeMethods(assemblies, collector.Deposit);
+            var collected = collector.Collected;
+            var count = collected.Length;
+            Wf.Ran(flow, string.Format("Collected {0} method symbols", count));
+            var dst = Db.AppLog("methods", FS.Cs);
+            var emitting = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var method = ref skip(collected,i);
+                var doc = method.Docs;
+                writer.WriteLine(string.Format("{0}; {1}", method.Format(), doc != null ? "//" + doc.SummaryText : EmptyString));
+            }
+            Wf.EmittedFile(emitting, count);
         }
 
         void ProcessInstructions()
@@ -536,7 +591,6 @@ namespace Z0.Asm
         }
 
 
-
         [Record(TableId)]
         public struct PartSelection : IRecord<PartSelection>
         {
@@ -547,34 +601,11 @@ namespace Z0.Asm
             public bool Selected;
         }
 
-        public void EmitPartSelection()
-        {
-            var selected = Wf.ApiCatalog.PartIdentities;
-            var count = selected.Length;
-            var symbols = Symbols.index<PartId>();
-            var buffer = alloc<PartSelection>(count);
-            var counter = 0u;
-            var dst = Db.SettingsPath(PartSelection.TableId);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(selected,i);
-                if(symbols.Contains(part))
-                {
-                    ref readonly var symbol = ref symbols[part];
-                    ref var row = ref seek(buffer,i);
-                    row.Part = symbol.Expr.Text;
-                    row.Selected = true;
-                    counter++;
-                }
-            }
-            TableEmit(slice(buffer.ReadOnly(),0,counter),dst);
-
-        }
-        void EmitResPack()
+        ReadOnlySpan<ApiHostRes> EmitResPack()
         {
             var blocks = LoadApiBlocks();
             var dst = Db.AppLogDir("Respack");
-            var resources = Wf.ResPackEmitter().Emit(blocks.View,dst);
+            return Wf.ResPackEmitter().Emit(blocks.View,dst);
         }
 
         public void GenerateInstructionModels()
@@ -593,7 +624,7 @@ namespace Z0.Asm
             Wf.Row(string.Format("{0}{1}/{2}", reg.Width, reg.Index, reg.RegClass));
         }
 
-        void ShowRexBits()
+        public void ShowRexTable()
         {
             var bits = AsmEncoder.RexPrefixBits();
             using var log = OpenShowLog("rexbits");
@@ -602,7 +633,7 @@ namespace Z0.Asm
                 Show(AsmRender.describe(skip(bits,i)), log);
         }
 
-        void ShowModRmTable()
+        public void ShowModRmTable()
         {
             using var dst = ShowLog(FS.Log);
             var f0 = BitSeq.bits(n3);
@@ -651,28 +682,6 @@ namespace Z0.Asm
             Show("modrm", FS.Log, emit);
         }
 
-        static uint render(Hex8 src, ref uint i, Span<char> dst)
-        {
-            var i0 = i;
-            seek(dst, i++) = Hex.hexchar(LowerCase, src.Hi);
-            seek(dst, i++) = Hex.hexchar(LowerCase, src.Lo);
-            return i - i0;
-        }
-
-        static uint render(AsmHexCode src, ref uint i, Span<char> dst)
-        {
-            var i0 = i;
-            var count = src.Size;
-            var bytes = src.Bytes;
-            for(var j=0; j<count; j++)
-            {
-                ref readonly var b = ref skip(bytes, j);
-                render((Hex8)b, ref i, dst);
-                if(j != count - 1)
-                    seek(dst, i++) = Chars.Space;
-            }
-            return i - i0;
-        }
 
         void CompareBitstrings()
         {
@@ -693,7 +702,6 @@ namespace Z0.Asm
             // Wf.Row(string.Format("{0,-14} | [{1}]", xB, bsB));
         }
 
-
         void ProcessStatementIndex()
         {
             var counter = 0u;
@@ -701,21 +709,8 @@ namespace Z0.Asm
             var totalSize = ByteSize.Zero;
 
             var dst = Db.AppLog("statements.bitstrings", FS.Csv);
-            var pattern = "{0,-12} | {1,-8} | {2,-32} | {3}";
-            using var writer = dst.Writer(Encoding.ASCII);
-            writer.WriteLine(pattern, "Sequence", "Size", "Data", "Bitstring");
-
-            void Receive(in AsmIndex src)
-            {
-                ref readonly var encoded = ref src.Encoded;
-                ref readonly var seq = ref src.Sequence;
-                var size = encoded.Size;
-                var bitstring = AsmBitstrings.bitchars(n3, encoded).Format();
-                var content = string.Format(pattern, seq, size, encoded.Format(), bitstring);
-                writer.WriteLine(content);
-            }
-
-            var processor = AsmIndexProcessor.create(Wf.EventSink, Receive);
+            using var receiver = new AsmIndexReceiver(dst);
+            var processor = AsmIndexProcessor.create(Wf.EventSink, receiver.Deposit);
             var packs = Wf.ApiPacks();
             var current = packs.Current();
             var archive = ApiPackArchive.create(current.Root);
@@ -849,8 +844,9 @@ namespace Z0.Asm
 
         public void Run()
         {
+            RunExtractWorkflow();
             //CheckCodeFactory();
-            RunAsmCases();
+            //EmitSymbolicliterals();
             //GenerateInstructionModels();
             //EmitPartSelection();
             //ListPdbMethods();

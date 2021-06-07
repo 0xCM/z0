@@ -14,11 +14,8 @@ namespace Z0.Asm
     [ApiHost]
     public sealed class AsmCatalogs : AppService<AsmCatalogs>
     {
-        readonly AsmCatalogAssets _Assets;
-
         public AsmCatalogs()
         {
-            _Assets = new AsmCatalogAssets();
         }
 
         [MethodImpl(Inline), Op]
@@ -29,18 +26,10 @@ namespace Z0.Asm
         public AsmCatPaths Paths(IEnvPaths src)
             => new AsmCatPaths(src);
 
-        [MethodImpl(Inline), Op]
-        public AsmCatalogAssets Assets()
-            => _Assets;
-
-        public Assembly AssetHost
-            => Assembly.GetExecutingAssembly();
-
-
         public void EmitAssetCatalog(FS.FolderPath root)
         {
-            var assets = Assets();
-            var host = AssetHost;
+            var assets = AsmData.Assets;
+            var host = assets.DataSource;
             var descriptors = assets.Descriptors;
             var count = descriptors.Length;
             var dst = Db.TableDir<AssetCatalogEntry>(root) + Db.TableFile<AssetCatalogEntry>(host.GetSimpleName());

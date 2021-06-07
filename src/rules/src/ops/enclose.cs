@@ -12,23 +12,23 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Fenced<T> enclose<T>(Index<T> content, T left, T right)
+        public static Fenced<T> fenced<T>(DelimitedIndex<T> content, T left, T right)
             => new Fenced<T>(content, fence(left, right));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Fenced<T> enclose<T>(Index<T> content, Pair<T> pair)
+        public static Fenced<T> fenced<T>(DelimitedIndex<T> content, Pair<T> pair)
             => new Fenced<T>(content, fence(pair.Left, pair.Right));
 
         [MethodImpl(Inline)]
-        public static Fenced<C,F> enclose<C,F>(C content, Fence<F> fence)
+        public static Fenced<C,F> fenced<C,F>(C content, Fence<F> fence)
             => new Fenced<C,F>(content, fence);
 
         [MethodImpl(Inline)]
-        public static Fenced<C,F> enclose<C,F>(C content, Pair<F> pair)
-            => enclose(content, fence(pair.Left, pair.Right));
+        public static Fenced<C,F> fenced<C,F>(C content, Pair<F> pair)
+            => fenced(content, fence(pair.Left, pair.Right));
 
         [MethodImpl(Inline)]
-        public static Fenced<C,F> enclose<C,F>(C content, F left, F right)
+        public static Fenced<C,F> fenced<C,F>(C content, F left, F right)
             => new Fenced<C,F>(content, fence(left, right));
     }
 }

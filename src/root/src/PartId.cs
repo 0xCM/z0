@@ -102,6 +102,9 @@ public enum PartId : ulong
     [Symbol("asm.data")]
     AsmData = 26,
 
+    [Symbol("containers")]
+    Containers = 27,
+
     [Symbol("gmath")]
     GMath = 34,
 
@@ -146,9 +149,6 @@ public enum PartId : ulong
 
     [Symbol("gen")]
     Gen = 48,
-
-    [Symbol("gen.shell")]
-    GenApp = 203,
 
     [Symbol("sfuncs")]
     SFuncs = 49,
@@ -332,6 +332,9 @@ public enum PartId : ulong
 
     [Symbol("contral")]
     Control = 202,
+
+    [Symbol("gen.shell")]
+    GenApp = 203,
 
     [Symbol("asmz")]
     AsmZ = 204,

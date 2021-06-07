@@ -26,6 +26,12 @@ namespace Z0
                 Fence = fence;
                 Content = content;
             }
+
+            public string Format()
+                => Fence.Format(Content);
+
+            public override string ToString()
+                => Format();
         }
 
         /// <summary>
@@ -33,16 +39,22 @@ namespace Z0
         /// </summary>
         public readonly struct Fenced<T> : IRule<Fenced<T>,T>
         {
-            public Index<T> Content {get;}
+            public DelimitedIndex<T> Content {get;}
 
             public Fence<T> Fence {get;}
 
             [MethodImpl(Inline)]
-            public Fenced(Index<T> content, Fence<T> fence)
+            public Fenced(DelimitedIndex<T> content, Fence<T> fence)
             {
                 Content = content;
                 Fence = fence;
             }
+
+            public string Format()
+                => Fence.Format(Content);
+
+            public override string ToString()
+                => Format();
         }
 
         /// <summary>
@@ -60,6 +72,12 @@ namespace Z0
                 Content = content;
                 Fence = fence;
             }
+
+            public string Format()
+                => Fence.Format(Content);
+
+            public override string ToString()
+                => Format();
         }
     }
 }

@@ -10,7 +10,6 @@
     <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 
-
   <ItemGroup>
     <PackageReference Include="OmniSharp.Abstractions" Version="1.37.6" />
     <PackageReference Include="OmniSharp.Shared" Version="1.37.6" />

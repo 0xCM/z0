@@ -8,7 +8,7 @@ namespace Z0.Tools
     partial class BdDisasm
     {
         [SymbolSource]
-        public enum Decorators
+        public enum Decorators : byte
         {
             [Symbol("{K}")]
             ND_OPD_MASK,

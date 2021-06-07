@@ -15,6 +15,5 @@ namespace Z0.Tools
                 Root = root;
             }
         }
-
     }
 }

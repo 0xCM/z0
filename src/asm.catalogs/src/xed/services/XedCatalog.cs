@@ -108,7 +108,7 @@ namespace Z0.Asm
         {
             var dst = IDataSourcePath();
             var flow = Wf.EmittingFile(dst);
-            var data = Assets.XedInstructionSummary().Utf8();
+            var data = AsmData.Assets.XedInstructionSummary().Utf8();
             dst.Overwrite(data);
             Wf.EmittedFile(flow, data.Length);
         }
@@ -207,8 +207,6 @@ namespace Z0.Asm
         const char CommentMarker = Chars.Hash;
 
         const char FieldDelimiter = Chars.Space;
-
-        static AsmCatalogAssets Assets => Parts.AsmCatalogs.Assets;
 
         IFormType ParseIForm(string src)
         {

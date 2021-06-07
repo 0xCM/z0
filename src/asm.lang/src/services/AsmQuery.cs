@@ -43,7 +43,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit HasRexPrefix(AsmOpCode src)
-            => IsRexPrefix(src.Byte0);
+            => IsRexPrefix(src.Lead);
 
         [MethodImpl(Inline), Op]
         public static bit HasRexPrefix(AsmHexCode src)
@@ -55,19 +55,19 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit HasRepeatPrefix(AsmOpCode src)
-            => emath.oneof(src.Byte0, REP.REPE, REP.REPNE);
+            => emath.oneof(src.Lead, REP.REPE, REP.REPNE);
 
         [MethodImpl(Inline), Op]
         public static bit HasLockPrefix(AsmOpCode src)
-            => emath.same(L.LOCK, src.Byte0);
+            => emath.same(L.LOCK, src.Lead);
 
         [MethodImpl(Inline), Op]
         public static bit HasSegOverride(AsmOpCode src)
-            => emath.oneof(src.Byte0, SegOverrideCodes);
+            => emath.oneof(src.Lead, SegOverrideCodes);
 
         [MethodImpl(Inline), Op]
         public static bit HasSizeOverride(AsmOpCode src)
-            => emath.oneof(src.Byte0, SZ.ADSZ, SZ.OPSZ);
+            => emath.oneof(src.Lead, SZ.ADSZ, SZ.OPSZ);
 
         static ReadOnlySpan<SG> SegOverrideCodes
             => new SG[]{SG.CS, SG.DS, SG.ES, SG.FS, SG.GS, SG.SS};

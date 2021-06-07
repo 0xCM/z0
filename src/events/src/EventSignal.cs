@@ -41,20 +41,6 @@ namespace Z0
             return e.EventId;
         }
 
-        public EmittingTableEvent TableEmitting(Type type, FS.FilePath dst)
-        {
-            var e = emittingTable(Source, type, dst);
-            Raise(e);
-            return e;
-        }
-
-        public EmittingTableEvent<T> EmittingTable<T>(FS.FilePath dst)
-            where T : struct, IRecord<T>
-        {
-            var e = emittingTable<T>(Source, dst);
-            Raise(e);
-            return e;
-        }
 
         public RanEvent<T> Ran<T>(T data)
         {
@@ -125,40 +111,86 @@ namespace Z0
         public void Created<T>(T data)
             => Raise(created(Source, data));
 
-        public void EmittedTable<T>(Count count, FS.FilePath dst)
+        public EmittingTableEvent EmittingTable(Type type, FS.FilePath dst)
+        {
+            var e = emittingTable(Source, type, dst);
+            Raise(e);
+            return e;
+        }
+
+        public EmittingTableEvent<T> EmittingTable<T>(FS.FilePath dst)
+            where T : struct, IRecord<T>
+        {
+            var e = emittingTable<T>(Source, dst);
+            Raise(e);
+            return e;
+        }
+
+        public EmittedTableEvent<T> EmittedTable<T>(Count count, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
             var e = emittedTable<T>(Source, count, dst);
             Raise(e);
+            return e;
         }
 
-        public void EmittedTable<T>(FS.FilePath dst)
+        public EmittedTableEvent<T> EmittedTable<T>(FS.FilePath dst)
             where T : struct, IRecord<T>
-                => Raise(emittedTable<T>(Source, dst));
+        {
+            var e = emittedTable<T>(Source, dst);
+            Raise(e);
+            return e;
+        }
 
         public void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => Raise(emittedTable(Source, TableId.identify(type), count, dst));
+        {
+            Raise(emittedTable(Source, TableId.identify(type), count, dst));
+        }
 
         public void EmittedTable(Type type, FS.FilePath dst)
             => Raise(emittedTable(Source, TableId.identify(type), dst));
 
-        public void EmittingFile(FS.FilePath dst)
-            => Raise(emittingFile(Source, dst));
+        public EmittingFileEvent EmittingFile(FS.FilePath dst)
+        {
+            var e = emittingFile(Source, dst);
+            Raise(e);
+            return e;
+        }
 
-        public void EmittedFile(FS.FilePath dst)
-            => Raise(emittedFile(Source, dst));
+        public EmittedFileEvent EmittedFile(FS.FilePath dst)
+        {
+            var e = emittedFile(Source, dst);
+            Raise(e);
+            return e;
+        }
 
-        public void EmittedFile(Count count, FS.FilePath dst)
-            => Raise(emittedFile(Source, dst, count));
+        public EmittedFileEvent EmittedFile(Count count, FS.FilePath dst)
+        {
+            var e = emittedFile(Source, dst, count);
+            Raise(e);
+            return e;
+        }
 
-        public void EmittingFile<T>(T payload, FS.FilePath dst)
-            => Raise(emittingFile<T>(Source, payload, dst));
+        public EmittingFileEvent<T> EmittingFile<T>(T payload, FS.FilePath dst)
+        {
+            var e = emittingFile<T>(Source, payload, dst);
+            Raise(e);
+            return e;
+        }
 
-        public void EmittedFile<T>(T payload, Count count, FS.FilePath dst)
-            => Raise(emittedFile(Source, payload, count, dst));
+        public EmittedFileEvent<T> EmittedFile<T>(T payload, Count count, FS.FilePath dst)
+        {
+            var e = emittedFile(Source, payload, count, dst);
+            Raise(e);
+            return e;
+        }
 
-        public void EmittedFile<T>(T payload, FS.FilePath dst)
-            => Raise(emittedFile(Source, payload, dst));
+        public EmittedFileEvent<T> EmittedFile<T>(T payload, FS.FilePath dst)
+        {
+            var e = emittedFile(Source, payload, dst);
+            Raise(e);
+            return e;
+        }
 
         public StatusEvent<T> Status<T>(WfStepId step, T data)
         {

@@ -18,19 +18,31 @@ namespace Z0.Asm
         public AsmOpCode(uint data)
             => Data = data;
 
-        public ref byte Byte0
+        public byte Size
+        {
+            [MethodImpl(Inline)]
+            get => Bits.effsize(Data);
+        }
+
+        public ref byte Lead
         {
             [MethodImpl(Inline)]
             get => ref seek(Bytes,0);
         }
 
-        public ref byte Byte1
+        public ref byte this[N0 n]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(Bytes, 0);
+        }
+
+        public ref byte this[N1 n]
         {
             [MethodImpl(Inline)]
             get => ref seek(Bytes, 1);
         }
 
-        public ref byte Byte2
+        public ref byte this[N2 n]
         {
             [MethodImpl(Inline)]
             get => ref seek(Bytes, 2);
@@ -48,7 +60,7 @@ namespace Z0.Asm
             get => Data != 0;
         }
 
-        public Span<byte> Bytes
+        Span<byte> Bytes
         {
             [MethodImpl(Inline)]
             get => slice(bytes(Data),0, 3);

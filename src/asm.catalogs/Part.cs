@@ -7,11 +7,6 @@ namespace Z0.Parts
 {
     public sealed partial class AsmCatalogs : Part<AsmCatalogs>
     {
-        public static AsmCatalogAssets Assets = new AsmCatalogAssets();
-
-        public static IAssets AssetSet
-            => Assets;
-
         public AsmCatalogs()
         {
         }

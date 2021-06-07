@@ -79,7 +79,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<SymLiteral> literals(Index<Assembly> src)
+        public static ReadOnlySpan<SymLiteral> literals(Index<Assembly> src)
         {
             var kvTypes = Enums.types(src).View;
             var partCount = kvTypes.Length;
@@ -97,7 +97,7 @@ namespace Z0
                         dst.Add(syms[k]);
                 }
             }
-            return dst.ToArray();
+            return dst.ViewDeposited();
         }
 
         [Op]

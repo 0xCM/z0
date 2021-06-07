@@ -24,10 +24,6 @@ namespace Z0
             => Svc.AsmDbCatalog.create(wf);
 
         [Op]
-        public static AsmSigs AsmSigs(this IWfRuntime wf)
-            => Svc.AsmSigs.create(wf);
-
-        [Op]
         public static AsmThumbprints AsmThumbprints(this IWfRuntime wf)
             => Svc.AsmThumbprints.create(wf);
 
@@ -52,8 +48,8 @@ namespace Z0
             => Svc.AsmJumps.create(wf);
 
        [Op]
-        public static DisassemblyParser DisassemblyParser(this IWfRuntime wf)
-            => Svc.DisassemblyParser.create(wf);
+        public static DisassemblyProcessor DisassemblyParser(this IWfRuntime wf)
+            => Svc.DisassemblyProcessor.create(wf);
 
     }
 }

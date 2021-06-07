@@ -25,7 +25,7 @@ namespace Z0.Asm
 
         public bool ParseTableAsset()
         {
-            var descriptor = Parts.AsmCatalogs.Assets.XedTables();
+            var descriptor = AsmData.Assets.XedTables();
             using var reader = descriptor.Utf8().Reader();
             var counter = 0u;
             var line = TextLine.Empty;

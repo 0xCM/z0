@@ -7,7 +7,7 @@ namespace Z0.Tools
 {
     partial class BdDisasm
     {
-        public enum ExtType
+        public enum ExtType : byte
         {
             [Symbol("0")]
             None,

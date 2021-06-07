@@ -25,14 +25,8 @@ namespace Z0
             get => (PartId)Class;
         }
 
-        public PartName ClassName
-        {
-            [MethodImpl(Inline)]
-            get => ClassId;
-        }
-
         public string Format()
-            => ClassName.Format();
+            => ClassId.Format();
 
         public bool Equals(PartKind src)
             => Class == src.Class;

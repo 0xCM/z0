@@ -21,6 +21,16 @@ namespace Z0.Asm
 
         Rule = P2ᐞ03,
 
+        Statement = P2ᐞ04,
+
+        Comment = P2ᐞ05,
+
+        Encoding = P2ᐞ06,
+
         EncodingRule = P2ᐞ31 | Rule,
+
+        HexEncoding = P2ᐞ32 | Encoding,
+
+        BitstringEncoding = P2ᐞ33 | Encoding,
     }
 }

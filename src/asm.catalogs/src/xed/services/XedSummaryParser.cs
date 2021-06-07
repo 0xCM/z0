@@ -31,8 +31,8 @@ namespace Z0.Asm
             LineBuffer = buffer;
             DetailTarget = alloc<XedFormDetail>(count);
             SummaryTarget = alloc<XedFormInfo>(count);
-            TableSource = Parts.AsmCatalogs.Assets.XedTables();
-            SummarySource = Parts.AsmCatalogs.Assets.XedInstructionSummary();
+            TableSource = AsmData.Assets.XedTables();
+            SummarySource = AsmData.Assets.XedInstructionSummary();
             Wf = EventSignal.create(sink, typeof(XedSummaryParser));
         }
 

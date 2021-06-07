@@ -16,7 +16,7 @@ namespace Z0
         public static unsafe string format(StringAddress src)
             => new string(gptr(firstchar(src)));
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<AsciCharCode> src, Span<char> buffer)
         {
             var i=0u;
@@ -28,5 +28,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(ReadOnlySpan<byte> src)
             => recover<AsciCharCode>(src);
+
+        [Op]
+        public static string format(in AsciLine src, Span<char> buffer)
+            => format(codes(src.Content), buffer);
     }
 }

@@ -30,6 +30,9 @@ namespace Z0
             public string Format()
                 => string.Format("{0}..{1}", Left, Right);
 
+            public string Format<T>(T content)
+                => string.Format("{0}{1}{2}", Left, content, Right);
+
             public override string ToString()
                 => Format();
 
@@ -39,70 +42,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator Fence(Pair<dynamic> src)
-                => new Fence(src.Left, src.Right);
-        }
-
-        public readonly struct Fence<T> : IRule<Fence<T>,T>
-        {
-            public T Left {get;}
-
-            public T Right {get;}
-
-            [MethodImpl(Inline)]
-            public Fence(T left, T right)
-            {
-                Left = left;
-                Right = right;
-            }
-
-            public string Format()
-                => string.Format("{0}..{1}", Left, Right);
-
-            public override string ToString()
-                => Format();
-
-            [MethodImpl(Inline)]
-            public static implicit operator Fence<T>((T left, T right) src)
-                => new Fence<T>(src.left, src.right);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Fence<T>(Pair<T> src)
-                => new Fence<T>(src.Left, src.Right);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Fence(Fence<T> src)
-                => new Fence(src.Left, src.Right);
-        }
-
-        public readonly struct Fence<A,B> : IRule<Fence<A,B>,A,B>
-        {
-            public A Left {get;}
-
-            public B Right {get;}
-
-            [MethodImpl(Inline)]
-            public Fence(A left, B right)
-            {
-                Left = left;
-                Right = right;
-            }
-
-            public string Format()
-                => string.Format("{0}..{1}", Left, Right);
-
-            public override string ToString()
-                => Format();
-
-            [MethodImpl(Inline)]
-            public static implicit operator Fence<A,B>((A left, B right) src)
-                => new Fence<A,B>(src.left, src.right);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Fence<A,B>(Paired<A,B> src)
-                => new Fence<A,B>(src.Left, src.Right);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Fence(Fence<A,B> src)
                 => new Fence(src.Left, src.Right);
         }
     }

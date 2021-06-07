@@ -8,19 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsciControlCode;
     using static core;
-
-    using CC = AsciControlCode;
 
     partial struct TextTools
     {
         [MethodImpl(Inline), Op]
-        public static bool eol(byte a0, byte a1)
-            => (CC)a0 == CR || (CC)a1 == LF;
-
-        [MethodImpl(Inline), Op]
-        public static uint CountLines(ReadOnlySpan<byte> src)
+        public static uint linecount(ReadOnlySpan<byte> src)
         {
             var size = src.Length;
             var counter = 0u;
