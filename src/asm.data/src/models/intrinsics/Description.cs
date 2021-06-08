@@ -9,18 +9,18 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial class IntrinsicsCatalog
+    partial class IntrinsicsModels
     {
-        public struct InstructionType
+        public struct Description : ITextual
         {
-            public const string ElementType = "type";
+            public const string ElementName = "description";
 
             public string Content;
 
             [MethodImpl(Inline)]
-            public InstructionType(string src)
+            public Description(string src)
             {
-                Content = src;
+                Content = src.Replace("\r\n", " ");
             }
 
             public string Format()
@@ -30,8 +30,8 @@ namespace Z0.Asm
                 => Content;
 
             [MethodImpl(Inline)]
-            public static implicit operator InstructionType(string src)
-                => new InstructionType(src);
+            public static implicit operator Description(string src)
+                => new Description(src);
         }
     }
 }

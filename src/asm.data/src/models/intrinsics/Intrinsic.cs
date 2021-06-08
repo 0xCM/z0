@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class IntrinsicsCatalog
+    partial class IntrinsicsModels
     {
         public struct Intrinsic
         {
@@ -35,7 +35,7 @@ namespace Z0.Asm
             public Header header;
 
             public string Format()
-                => IntrinsicsCatalog.format(this);
+                => IntrinsicsModels.format(this);
 
             public override string ToString()
                 => Format();

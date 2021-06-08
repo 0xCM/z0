@@ -9,20 +9,25 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial class IntrinsicsCatalog
+    partial class IntrinsicsModels
     {
-        public struct Description : ITextual
+        public struct CpuId : ITextual
         {
-            public const string ElementName = "description";
+            public const string ElementName = "CPUID";
 
             public string Content;
 
             [MethodImpl(Inline)]
-            public Description(string src)
+            public CpuId(string src)
             {
-                Content = src.Replace("\r\n", " ");
+                Content = src;
             }
 
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => text.nonempty(Content);
+            }
             public string Format()
                 => Content;
 
@@ -30,8 +35,8 @@ namespace Z0.Asm
                 => Content;
 
             [MethodImpl(Inline)]
-            public static implicit operator Description(string src)
-                => new Description(src);
+            public static implicit operator CpuId(string src)
+                => new CpuId(src);
         }
     }
 }

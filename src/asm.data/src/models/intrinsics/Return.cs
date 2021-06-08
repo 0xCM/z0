@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static Root;
 
-    partial class IntrinsicsCatalog
+    partial class IntrinsicsModels
     {
         public struct Return : ITextual
         {

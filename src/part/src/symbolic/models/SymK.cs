@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Symbols;
 
@@ -55,7 +56,7 @@ namespace Z0
         public ulong Value
         {
             [MethodImpl(Inline)]
-            get => core.bw64(Kind);
+            get => bw64(Kind);
         }
 
         public Identifier Type
@@ -70,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Sym(Sym<K> src)
-            => new Sym(src.Identity, src.Index, src.Type, core.bw64(src.Kind), src.Name, src.Expr, src.Description, src.Hidden);
+            => new Sym(src.Identity, src.Index, src.Type, bw64(src.Kind), src.Name, src.Expr, src.Description, src.Hidden);
 
 
         [MethodImpl(Inline)]

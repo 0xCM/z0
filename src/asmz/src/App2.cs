@@ -899,9 +899,78 @@ namespace Z0.Asm
             var opcode = AsmCases.PINSRB.OpCodeSig();
         }
 
+
+        Index<AsciCharCode> IndexIdentifiers()
+        {
+            var symbols = Symbols.index<XedModels.IFormType>().View;
+            // var count = symbols.Length;
+            // var identifiers = alloc<string>(count);
+            // Symbols.identifiers(symbols, identifiers);
+            // var size = TextTools.charcount(identifiers) + count;
+            // Wf.Status(string.Format("{0} {1}", count, size));
+            // var dst = alloc<AsciCharCode>(size);
+            // TextTools.pack(identifiers,dst);
+            // return dst;
+
+            var count = symbols.Length;
+            var size = ByteSize.Zero;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var s = ref skip(symbols,i);
+                var id = s.Kind;
+                var name = s.Name;
+                size += ((uint)name.Length + 1);
+            }
+
+            var buffer = alloc<AsciCharCode>(size);
+
+            Wf.Status(string.Format("Allocated {0} bytes for {1} symbols", size, count));
+
+            ref var dst = ref first(buffer);
+            var k=0;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var s = ref skip(symbols,i);
+                var name = @span(s.Name);
+                for(var j=0; j<name.Length; j++)
+                    seek(dst,k++) = (AsciCharCode)skip(name,j);
+                seek(dst,k++) = AsciCharCode.Null;
+            }
+            return buffer;
+        }
+
+        public void Emit(ReadOnlySpan<AsciCharCode> src, FS.FilePath dst)
+        {
+            var emitting = Wf.EmittingFile(dst);
+            using var writer = dst.AsciWriter();
+            var i=0;
+            var lines = 0u;
+            var count = src.Length;
+            while(i++<count)
+            {
+                ref readonly var c = ref skip(src,i);
+                if(c == AsciCharCode.Null)
+                {
+                    writer.WriteLine();
+                    lines++;
+                }
+                else
+                    writer.Write((char)c);
+            }
+            Wf.EmittedFile(emitting, lines);
+        }
+
+        void CheckIdentifierIndex()
+        {
+            var src = IndexIdentifiers();
+            var dst = Db.AppLog("iformst");
+            Emit(src,dst);
+        }
+
         public void Run()
         {
-            RunExtractWorkflow();
+            CheckIdentifierIndex();
+            //RunExtractWorkflow();
             //ProcessStatementIndex();
             //ParseDisassembly();
             //CheckCodeFactory();

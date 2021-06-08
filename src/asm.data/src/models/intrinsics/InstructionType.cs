@@ -9,26 +9,29 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial class IntrinsicsCatalog
+    partial class IntrinsicsModels
     {
-        public readonly struct DataType : ITextual
+        public struct InstructionType
         {
-            public string Name {get;}
+            public const string ElementType = "type";
+
+            public string Content;
 
             [MethodImpl(Inline)]
-            public DataType(string src)
+            public InstructionType(string src)
             {
-                Name = src;
+                Content = src;
             }
+
             public string Format()
-                => Name;
+                => Content;
 
             public override string ToString()
-                => Name;
+                => Content;
 
             [MethodImpl(Inline)]
-            public static implicit operator DataType(string src)
-                => new DataType(src);
+            public static implicit operator InstructionType(string src)
+                => new InstructionType(src);
         }
     }
 }

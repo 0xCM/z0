@@ -11,8 +11,9 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static XedModels;
+    using static IntrinsicsModels;
 
-    public partial class IntrinsicsCatalog : AppService<IntrinsicsCatalog>
+    public class IntrinsicsCatalog  : AppService<IntrinsicsCatalog>
     {
         const string DocName = "intrinsics";
 
@@ -28,10 +29,9 @@ namespace Z0.Asm
         public Index<Intrinsic> Emit(FS.FolderPath dst)
         {
             var refpath = dst + FS.file(DocName, FS.Xml);
-            var src = IntrinsicsCatalog.doc();
+            var src = doc();
             refpath.Overwrite(src.Content);
-            var intrinsics = Wf.IntrinsicsCatalog();
-            var parsed = intrinsics.Parse(src);
+            var parsed = Parse(src);
             var elements = parsed.View;
             var count = elements.Length;
             var logpath = dst + FS.file(DocName, FS.Log);
@@ -167,54 +167,22 @@ namespace Z0.Asm
             return dst;
         }
 
-        public static void render(Operation src, ITextBuffer dst)
-        {
-            if(src.Content != null)
-                root.iter(src.Content, x => dst.AppendLine("  " + x.Content));
-        }
+        // public static void render(Operation src, ITextBuffer dst)
+        // {
+        //     if(src.Content != null)
+        //         root.iter(src.Content, x => dst.AppendLine("  " + x.Content));
+        // }
 
-        public static string format(Instruction src)
-             => string.Format("# Instruction: {0} {1}\r\n", src.name, src.form) + string.Format("# Iform: {0}", src.xed);
+        // public static string sig(Intrinsic src)
+        //     => string.Format("{0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray()));
 
-        public static void render(Instructions src, ITextBuffer dst)
-            => root.iter(src, x => dst.AppendLine(format(x)));
+        // public static void body(Intrinsic src, ITextBuffer dst)
+        // {
+        //     dst.AppendLine("{");
+        //     render(src.operation, dst);
+        //     dst.AppendLine("}");
+        // }
 
-        public static string sig(Intrinsic src)
-            => string.Format("{0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray()));
-
-        public static void body(Intrinsic src, ITextBuffer dst)
-        {
-            dst.AppendLine("{");
-            render(src.operation, dst);
-            dst.AppendLine("}");
-        }
-
-        public static void overview(Intrinsic src, ITextBuffer dst)
-        {
-            dst.AppendLine(string.Format("# Intrinsic: {0}", sig(src)));
-
-            var classes = root.list<string>(3);
-            if(text.nonempty(src.tech))
-                classes.Add(src.tech);
-            if(src.CPUID.IsNonEmpty)
-                classes.Add(src.CPUID.Content);
-            if(src.category.IsNonEmpty)
-                classes.Add(src.category.Content);
-            if(classes.Count != 0)
-                dst.AppendLineFormat("# Classification: {0}", string.Join(", ", classes));
-
-            render(src.instructions, dst);
-            dst.AppendLineFormat("# Description: {0}", src.description);
-
-        }
-
-        public static string format(Intrinsic src)
-        {
-            var dst = text.buffer();
-            overview(src, dst);
-            body(src, dst);
-            return dst.Emit();
-        }
 
         public Index<Intrinsic> Parse(XmlDoc src)
         {
@@ -252,7 +220,7 @@ namespace Z0.Asm
                             read(reader, ref entries[i].CPUID);
                         break;
 
-                        case Category.ElementName:
+                        case IntrinsicsModels.Category.ElementName:
                             read(reader, ref entries[i].category);
                         break;
 
@@ -286,7 +254,7 @@ namespace Z0.Asm
         static void read(XmlReader reader, ref CpuId dst)
             => dst.Content = reader.ReadInnerXml();
 
-        static void read(XmlReader reader, ref Category dst)
+        static void read(XmlReader reader, ref IntrinsicsModels.Category dst)
             => dst.Content = reader.ReadInnerXml();
 
         static void read(XmlReader reader, ref Header dst)

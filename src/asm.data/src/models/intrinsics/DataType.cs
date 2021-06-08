@@ -9,34 +9,26 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial class IntrinsicsCatalog
+    partial class IntrinsicsModels
     {
-        public struct CpuId : ITextual
+        public readonly struct DataType : ITextual
         {
-            public const string ElementName = "CPUID";
-
-            public string Content;
+            public string Name {get;}
 
             [MethodImpl(Inline)]
-            public CpuId(string src)
+            public DataType(string src)
             {
-                Content = src;
-            }
-
-            public bool IsNonEmpty
-            {
-                [MethodImpl(Inline)]
-                get => text.nonempty(Content);
+                Name = src;
             }
             public string Format()
-                => Content;
+                => Name;
 
             public override string ToString()
-                => Content;
+                => Name;
 
             [MethodImpl(Inline)]
-            public static implicit operator CpuId(string src)
-                => new CpuId(src);
+            public static implicit operator DataType(string src)
+                => new DataType(src);
         }
     }
 }

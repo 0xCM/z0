@@ -8,21 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Root;
-
-    partial class IntrinsicsCatalog
+    partial class IntrinsicsModels
     {
-        public struct Operation
+        public class Parameters : List<Parameter>
         {
-            public const string ElementName = "operation";
 
-            public List<TextLine> Content;
-
-            [MethodImpl(Inline)]
-            public Operation(List<TextLine> src)
-            {
-                Content = src;
-            }
         }
     }
 }

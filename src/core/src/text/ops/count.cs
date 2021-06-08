@@ -28,5 +28,34 @@ namespace Z0
             }
             return count;
         }
+
+        [MethodImpl(Inline), Op]
+        public static uint pack(ReadOnlySpan<string> src, Span<AsciCharCode> dst)
+        {
+            var count = src.Length;
+            var max = dst.Length;
+            var k=0u;
+            for(var i=0; i<count; i++)
+            {
+                var s = span(skip(src,i));
+                var length = s.Length;
+
+                for(var j=0; j<length && k<max; j++)
+                    seek(dst,k++) = (AsciCharCode)skip(s,j);
+                if(k < max)
+                    seek(dst,k++) = AsciCharCode.Null;
+            }
+            return k;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint charcount(ReadOnlySpan<string> src)
+        {
+            var counter = 0u;
+            var count = src.Length;
+            for(var i=0; i<counter; i++)
+                counter += (uint)skip(src,i).Length;
+            return counter;
+        }
     }
 }

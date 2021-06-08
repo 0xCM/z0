@@ -33,7 +33,7 @@ namespace Z0
         /// <summary>
         /// The literal name
         /// </summary>
-        public Identifier Name;
+        public string Name;
 
         /// <summary>
         /// The symbol, if so attributed, otherwise, the identifier
