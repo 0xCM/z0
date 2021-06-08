@@ -17,7 +17,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op, Closures(UInt8x16k)]
         public static AsmText<T> asmtext<T>(ReadOnlySpan<T> src, AsmTextKind kind = default)
             where T : unmanaged
-                =>  new AsmText<T>(StringAddress.resource(src), kind);
+                =>  new AsmText<T>(TextTools.address(src), kind);
 
         [MethodImpl(Inline), Op]
         public static AsmText<byte> asmtext(StringAddress src, AsmTextKind kind = default)
@@ -25,7 +25,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static AsmText<byte> asmtext(string src, AsmTextKind kind = default)
-            => asmtext(StringAddress.resource(src), kind);
+            => asmtext(TextTools.address(src), kind);
 
         public static string format<T>(T src)
             where T : unmanaged, IAsmText

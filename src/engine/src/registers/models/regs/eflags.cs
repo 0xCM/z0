@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static gbits;
 
     using K = RFlagBits;
-    using I = RFlagIndex;
+    using I = AsmCodes.RFlagIndex;
 
     partial struct Regs
     {

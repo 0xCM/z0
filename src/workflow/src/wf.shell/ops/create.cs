@@ -37,7 +37,7 @@ namespace Z0
             {
                 var fence = text.fence(Chars.LBrace, Chars.RBrace);
                 var enclosed = Rules.fenced(text.join(RP.CommaJoin, partIdList), fence);
-                var content = text.format(enclosed);
+                var content = Rules.format(enclosed);
                 var prop = text.prop("Parts", content);
                 var msg = AppMsg.status(prop);
                 term.inform(msg);

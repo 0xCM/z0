@@ -21,6 +21,9 @@ namespace Z0
             Root = root;
         }
 
+        public VendorManualArchive Manuals()
+            => VendorManualArchive.create(VendorManualRoot());
+
         public FS.FolderPath VendorManualRoot()
             => Root + FS.folder(manuals);
 

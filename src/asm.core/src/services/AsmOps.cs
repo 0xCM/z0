@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmOps;
 
     [ApiHost]
     public readonly partial struct AsmOps

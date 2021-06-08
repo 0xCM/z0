@@ -19,20 +19,6 @@ namespace Z0
             Wf.Status(output);
         }
 
-        public void ShowVendorManuals(string vendor, FS.FileExt ext)
-        {
-            var docs = Db.VendorDocs();
-            var files = docs.VendorManuals(vendor,ext).View;
-            var count = files.Length;
-            using var log = ShowLog(FS.Md);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var file = ref skip(files,i);
-                var link = Markdown.item(0, Markdown.link(file), Markdown.ListStyle.Bullet);
-                log.Show(link);
-            }
-        }
-
         public void RunCmd(FS.FilePath target, string args)
         {
             var cmd = new CmdLine($"cmd /c {target.Format(PathSeparator.BS)} {args}");

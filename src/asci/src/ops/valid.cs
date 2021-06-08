@@ -8,40 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static BitMasks.Literals;
 
     partial struct Asci
     {
         /// <summary>
-        /// Tests whether a byte represents an asci character
+        /// Tests whether a byte represents corresponds to an valid asci character
         /// </summary>
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(byte src)
-            => (Msb8x8x1 & src) == 0;
+            => src <= AsciCodeFacets.MaxCodeValue;
 
         /// <summary>
-        /// Tests whether the data source contains only asci data
+        /// Tests whether a byte represents corresponds to an invalid asci character
         /// </summary>
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
-        public static bool valid(ushort src)
-            => (Msb16x8x1 & src) == 0;
+        public static bool invalid(byte src)
+            => !valid(src);
 
-        /// <summary>
-        /// Tests whether the data source contains only asci data
-        /// </summary>
-        /// <param name="src">The data to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool valid(uint src)
-            => (Msb32x8x1 & src) == 0;
-
-        /// <summary>
-        /// Tests whether the data source contains only asci data
-        /// </summary>
-        /// <param name="src">The data to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool valid(ulong src)
-            => (Msb64x8x1 & src) == 0;
     }
 }

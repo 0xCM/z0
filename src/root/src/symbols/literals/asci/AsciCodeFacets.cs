@@ -12,6 +12,26 @@ namespace Z0
     public readonly struct AsciCodeFacets
     {
         /// <summary>
+        /// The numeric value of the firt asci code
+        /// </summary>
+        public const byte MinCodeValue = 0;
+
+        /// <summary>
+        /// The numeric value of the last asci code
+        /// </summary>
+        public const byte MaxCodeValue = 127;
+
+        /// <summary>
+        /// The first asci code
+        /// </summary>
+        public const C MinCode = MinCodeValue;
+
+        /// <summary>
+        /// The last asci code
+        /// </summary>
+        public const C MaxCode = (C)MaxCodeValue;
+
+        /// <summary>
         /// The first digit code
         /// </summary>
         public const C MinDigitCode = (C)C.d0;

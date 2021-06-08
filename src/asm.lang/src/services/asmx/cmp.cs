@@ -9,27 +9,27 @@ namespace Z0.Asm
 
     partial struct AsmX
     {
-        [Op, AsmSig(AsmOc.cmp_r8_imm8)]
+        [Op, AsmSig(AsmOcPrototype.cmp_r8_imm8)]
         public AsmExpr cmp(r8 a0, Imm8 a1)
             => Produce(S[CMP], S[a0], a1);
 
-        [Op, AsmSig(AsmOc.cmp_r16_imm16)]
+        [Op, AsmSig(AsmOcPrototype.cmp_r16_imm16)]
         public AsmExpr cmp(r16 a0, Imm16 a1)
             => Produce(S[CMP], S[a0], a1);
 
-        [Op, AsmSig(AsmOc.cmp_r32_imm32)]
+        [Op, AsmSig(AsmOcPrototype.cmp_r32_imm32)]
         public AsmExpr cmp(r32 a0, Imm32 a1)
             => Produce(S[CMP], S[a0], a1);
 
-        [Op, AsmSig(AsmOc.cmp_r16_r16)]
+        [Op, AsmSig(AsmOcPrototype.cmp_r16_r16)]
         public AsmExpr cmp(r16 a0, r16 a1)
             => Produce(S[CMP], S[a0], S[a1]);
 
-        [Op, AsmSig(AsmOc.cmp_r32_r32)]
+        [Op, AsmSig(AsmOcPrototype.cmp_r32_r32)]
         public AsmExpr cmp(r32 a0, r32 a1)
             => Produce(S[CMP], S[a0], S[a1]);
 
-        [Op, AsmSig(AsmOc.cmp_r64_r64)]
+        [Op, AsmSig(AsmOcPrototype.cmp_r64_r64)]
         public AsmExpr cmp(r64 a0, r64 a1)
             => Produce(S[CMP], S[a0], S[a1]);
     }

@@ -4,21 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
-    using Z0.Asm;
-
     public sealed partial class XedTool : ToolService<XedTool>
     {
         const string SummaryFlags = "-isa-set -64";
 
         const string DetailFlags = "-v 4 -isa-set -64";
 
-        static string format(AsmOc id)
+        static string format(string id)
             => id.ToString();
 
         public XedTool()
@@ -27,7 +19,7 @@ namespace Z0.Tools
 
         }
 
-        public XedCase DefineCase(AsmOc id, FS.FolderPath dst)
+        public XedCase DefineCase(string id, FS.FolderPath dst)
         {
             var @case = new XedCase();
             @case.CaseId = format(id);

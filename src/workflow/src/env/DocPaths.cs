@@ -14,6 +14,9 @@ namespace Z0
         VendorDocArchive VendorDocs()
             => new VendorDocArchive(Env.VendorDocs);
 
+        VendorManualArchive VendorManuals()
+            => VendorDocs().Manuals();
+
         FS.FilePath List(string name, FS.FileExt ext)
             => ListRoot() + FS.file(name, ext);
 

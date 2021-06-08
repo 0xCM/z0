@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static AsmInstructions;
     using static AsmOps;
 
-    partial class AsmEncoder
+    partial class AsmEncoderPrototype
     {
         /// <summary>
         /// | 0F B6 /r | MOVZX r16, r8 | Move byte to word with zero-extension.

@@ -9,7 +9,6 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Bmi1;
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
-
     using static Root;
     using static core;
 
@@ -17,6 +16,17 @@ namespace Z0
     public readonly struct Bytes
     {
         const NumericKind Closure = UnsignedInts;
+
+        /// <summary>
+        /// Determines whether cell[i] == a0 && cell[i+i] == a1
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="i">The start index</param>
+        /// <param name="a0">The first value to match</param>
+        /// <param name="a1">The second value to match</param>
+        [MethodImpl(Inline), Op]
+        public static bool match(ReadOnlySpan<byte> src, uint i, byte a0, byte a1)
+            => skip(src,i) == a0 && skip(src, i + 1) == a1;
 
         /// <summary>
         /// Joins three operands via the bitwise or operator

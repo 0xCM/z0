@@ -9,7 +9,6 @@ namespace Z0
     using System.Text;
 
     using static Root;
-    using static Rules;
     using static RP;
 
     partial class text
@@ -59,34 +58,6 @@ namespace Z0
                 return Encoding.Unicode.GetString((byte*)pSrc, src.Length * 2);
         }
 
-        /// <summary>
-        /// Creates a string from a span, via UTF32 encoding
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op, Doc("https://github.com/microsoft/ClangSharp/blob/6355b742f73915a21d18f74227f5c504b75bd976/sources/ClangSharp/Internals/SpanExtensions.cs")]
-        public static unsafe string format(ReadOnlySpan<uint> src)
-        {
-            if(src.IsEmpty)
-                return EmptyString;
-
-            fixed(uint* pSrc = src)
-                return Encoding.UTF32.GetString((byte*)pSrc, src.Length * 4);
-        }
-
-        [Op, Closures(Closure)]
-        public static string format<T>(PropFormat<T> src, char sep = RP.PropertySep)
-            => string.Format("{0}{1}{2}",
-                string.Format(RP.pad(src.Pad), src.Name),
-                string.Format("{0} ",sep),
-                    src.Value);
-
-        [Op]
-        public static string format(PropFormat src, char sep = RP.PropertySep)
-            => string.Format("{0}{1}{2}",
-                string.Format(RP.pad(src.Pad), src.Name),
-                string.Format("{0} ", sep),
-                    src.Value);
-
         [MethodImpl(Inline)]
         static string msgarg<T>(T src)
             => string.Format("<{0}>", src);
@@ -113,16 +84,6 @@ namespace Z0
         [Op]
         public static string format(string pattern, params object[] args)
             => string.Format(pattern, args);
-
-        public static string format<F,C>(Fenced<F,C> rule)
-        {
-            var buffer = text.buffer();
-            render(rule,buffer);
-            return buffer.Emit();
-        }
-
-        public static void render<F,C>(Fenced<F,C> rule, ITextBuffer dst)
-            => dst.AppendFormat("{0}{1}{2}", rule.Fence.Left, rule.Content, rule.Fence.Right);
 
         [Op]
         public static string format(object src)

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static AsmTokens;
+    using static AsmKeywords;
 
     /// <summary>
     /// Characterizes a memory operand representation

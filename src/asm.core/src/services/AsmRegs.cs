@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         [Op]
         public static AsmRegQuery query()
-            => new AsmRegQuery(list());
+            => new AsmRegQuery(Symbols.index<RegKind>());
 
         [Op]
         public static Index<RegClass> classes()

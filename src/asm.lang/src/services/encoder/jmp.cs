@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static AsmOps;
     using static AsmHexCodes;
 
-    partial class AsmEncoder
+    partial class AsmEncoderPrototype
     {
         /// <summary>
         /// | FF /4       | JMP r/m64    | M     | Valid
@@ -21,6 +21,6 @@ namespace Z0.Asm
         /// <param name="dst"></param>
         [MethodImpl(Inline), Op]
         public static Jmp jmp(r64 dst)
-            => AsmBytes.code(RexW, xff, rd4);
+            => AsmBytes.code(RexW, xff, RegDigit.r4);
     }
 }

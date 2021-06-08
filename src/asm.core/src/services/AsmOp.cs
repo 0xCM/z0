@@ -24,16 +24,16 @@ namespace Z0.Asm
                 ));
 
         [MethodImpl(Inline), Op]
-        public static RegWidthCode encode(RegWidth width)
-            => (RegWidthCode)Pow2.log((ushort)width);
+        public static RegWidthIndex encode(RegWidth width)
+            => (RegWidthIndex)Pow2.log((ushort)width);
 
         [MethodImpl(Inline), Op]
-        public static RegWidth decode(RegWidthCode width)
+        public static RegWidth decode(RegWidthIndex width)
             => (RegWidth)Pow2.pow((byte)width);
 
         [MethodImpl(Inline), Op]
         public static RegWidth width(RegOp src)
-            => decode((RegWidthCode)(src.Bitfield & 0b111));
+            => decode((RegWidthIndex)(src.Bitfield & 0b111));
 
         [MethodImpl(Inline), Op]
         public static RegIndex index(RegOp src)

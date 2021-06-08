@@ -10,6 +10,12 @@ namespace Z0
     using static Root;
     using static core;
 
+    partial class XTend
+    {
+        public static MemoryFile MemoryMap(this FS.FilePath src)
+            => MemoryFiles.map(src);
+    }
+
     [ApiHost]
     public readonly struct MemoryFiles : IMemoryFileReader
     {

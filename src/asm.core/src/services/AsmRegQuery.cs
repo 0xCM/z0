@@ -12,39 +12,48 @@ namespace Z0.Asm
 
     using api = AsmRegs;
 
+    [ApiHost]
     public readonly struct AsmRegQuery
     {
-        readonly Index<Register> Source;
+        readonly Symbols<RegKind> Symbols;
 
         readonly Index<Register> Cache;
 
-        readonly uint Count;
-
-        [MethodImpl(Inline)]
-        public AsmRegQuery(Index<Register> src)
+        public uint RegCount
         {
-            Source = src;
-            Count = src.Count;
+            [MethodImpl(Inline)]
+            get => Symbols.Count;
+        }
+
+        internal AsmRegQuery(Symbols<RegKind> src)
+        {
+            Symbols = src;
             Cache = alloc<Register>(src.Count);
         }
 
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<Register> Where(RegClass criteria)
+        public ReadOnlySpan<Register> Source
+        {
+            [MethodImpl(Inline)]
+            get => recover<RegKind,Register>(Symbols.Kinds);
+        }
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<Register> Where(RegClass @class)
         {
             var target = Cache.Edit;
-            var count = api.filter(criteria, Source, target);
+            var count = api.filter(@class, Source, target);
             return slice(target, 0, count);
         }
 
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<Register> Where(RegWidth criteria)
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<Register> Where(RegWidth width)
         {
             var target = Cache.Edit;
-            var count = api.filter(criteria, Source, target);
+            var count = api.filter(width, Source, target);
             return slice(target, 0, count);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public ReadOnlySpan<Register> Where(RegClass @class, RegWidth width)
         {
             var target = Cache.Edit;

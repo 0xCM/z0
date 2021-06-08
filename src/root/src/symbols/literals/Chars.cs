@@ -266,10 +266,29 @@ namespace Z0
 
         public const char H = 'H';
 
+        /// <summary>
+        /// The 'h' character
+        /// </summary>
         public const char h = 'h';
 
+        /// <summary>
+        /// The 'X' character
+        /// </summary>
         public const char X = 'X';
 
+        /// <summary>
+        /// The 'x' character
+        /// </summary>
         public const char x = 'x';
+
+        /// <summary>
+        /// The '•' character
+        /// </summary>
+        public const char Bullet = '•';
+    }
+
+    public readonly struct CharValues
+    {
+        public const ushort Bullet = '•';
     }
 }

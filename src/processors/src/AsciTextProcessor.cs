@@ -34,10 +34,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public uint LineCount(ReadOnlySpan<byte> src)
-            => TextTools.linecount(src);
+            => TextLines.count(src);
 
         public uint MaxLineLength(ReadOnlySpan<byte> src)
-            => TextTools.MaxLineLength(src);
+            => TextLines.maxlength(src);
 
         public string FileHeader {get; protected set;}
 
@@ -68,9 +68,9 @@ namespace Z0.Asm
             {
                 ref readonly var a0 = ref skip(src, pos);
                 ref readonly var a1 = ref skip(src, pos + 1);
-                if(TextTools.eol(a0,a1))
+                if(TextLines.eol(a0,a1))
                 {
-                    var _line = TextTools.line(src, number++, counter, length + 1);
+                    var _line = TextLines.asci(src, number++, counter, length + 1);
                     var outcome = ProcessLine(ref _line, out var content);
                     if(outcome.Fail)
                     {
@@ -105,7 +105,7 @@ namespace Z0.Asm
             {
                 ref readonly var a0 = ref skip(data, pos);
                 ref readonly var a1 = ref skip(data, pos + 1);
-                if(TextTools.eol(a0,a1))
+                if(TextLines.eol(a0,a1))
                 {
                     var line = slice(data, eol, pos - eol);
                     var decoded = TextTools.asci(line, buffer);

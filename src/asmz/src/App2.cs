@@ -626,7 +626,7 @@ namespace Z0.Asm
 
         public void ShowRexTable()
         {
-            var bits = AsmEncoder.RexPrefixBits();
+            var bits = AsmEncoderPrototype.RexPrefixBits();
             using var log = OpenShowLog("rexbits");
             var count = bits.Length;
             for(var i=0; i<count; i++)
@@ -710,6 +710,69 @@ namespace Z0.Asm
             var archive = ApiPackArchive.create(current.Root);
             var path = archive.StatementIndexPath();
             processor.ProcessFile(path);
+
+        }
+
+        public void ShowVendorManuals(string vendor, FS.FileExt ext)
+        {
+            var docs = Db.VendorManuals();
+            var files = docs.VendorDocs(vendor,ext).View;
+            var count = files.Length;
+            using var log = ShowLog(FS.Md);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var file = ref skip(files,i);
+                var link = Markdown.item(0, Markdown.link(file), Markdown.ListStyle.Bullet);
+                log.Show(link);
+            }
+        }
+
+
+        /// <summary>
+        /// Tests whether a 2-byte sequence represents the character '•'
+        /// </summary>
+        /// <param name="b0">The first byte</param>
+        /// <param name="b1">The second byte</param>
+        public static bool bullet(byte b0, byte b1)
+            => b0 == 0x20 && b1 == 0x22;
+
+
+        void ProcessManuals()
+        {
+            const char c = '•';
+
+            Wf.Row(string.Format("{0}:{1:x4}", c, (ushort)c));
+
+            var docs = Db.VendorManuals();
+            var files = docs.VendorDocs(VendorNames.Intel, FS.Txt).View;
+            var count = files.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var file = ref skip(files,i);
+                if(file.Size == 0)
+                    continue;
+
+                var flow = Wf.Running(string.Format("Processing {0}", file.ToUri()));
+
+                var positions = list<uint>();
+                using var map = file.MemoryMap();
+                var data = map.View();
+                var size = data.Length;
+                var unicodes = hashset<byte>();
+                for(var j=0u; j<size - 1; j++)
+                {
+                    ref readonly var b0 = ref skip(data, j);
+                    ref readonly var b1 = ref skip(data, j+1);
+                    if(TextQuery.bullet(b0,b1))
+                    {
+                        positions.Add(j);
+                    }
+                }
+                Wf.Ran(flow);
+
+
+            }
+
 
         }
 
@@ -838,7 +901,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ProcessStatementIndex();
+            RunExtractWorkflow();
+            //ProcessStatementIndex();
             //ParseDisassembly();
             //CheckCodeFactory();
             //EmitSymbolicliterals();

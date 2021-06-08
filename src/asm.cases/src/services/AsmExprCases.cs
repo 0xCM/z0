@@ -63,7 +63,7 @@ namespace Z0.Asm
         Symbols<Gp64> Gp64Regs()
             => asmx.SymbolSet.Gp64Regs();
 
-        void case_and_r8_r8(AsmOc id)
+        void case_and_r8_r8(AsmOcPrototype id)
         {
             var casename = CaseName(id);
             var flow = Wf.Running(casename);
@@ -88,7 +88,7 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-        void case_move_r64_imm64(AsmOc id)
+        void case_move_r64_imm64(AsmOcPrototype id)
         {
             const ulong a1 = 0x7ffa9930f380;
             var casename = CaseName(id);
@@ -104,14 +104,14 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-        void case_cmp_r8_imm8(AsmOc id)
+        void case_cmp_r8_imm8(AsmOcPrototype id)
         {
             const byte a1 = 0x3C;
             var regs = Gp8Regs();
             Generate(id, (byte)regs.Count, i => asmx.cmp(regs[i], a1));
         }
 
-        void case_cmp_r16_r16(AsmOc id)
+        void case_cmp_r16_r16(AsmOcPrototype id)
         {
             var left = Gp16Regs();
             var right = Gp16Regs();
@@ -121,7 +121,7 @@ namespace Z0.Asm
             Assemble(id);
         }
 
-        void case_cmp_r32_r32(AsmOc id)
+        void case_cmp_r32_r32(AsmOcPrototype id)
         {
             var left = Gp32Regs();
             var right = Gp32Regs();
@@ -131,7 +131,7 @@ namespace Z0.Asm
             Assemble(id);
         }
 
-        void case_move_r64_imm64_example(AsmOc id)
+        void case_move_r64_imm64_example(AsmOcPrototype id)
         {
             const ulong Imm64 = 0x7ffa9930f380;
 
@@ -144,22 +144,22 @@ namespace Z0.Asm
 
             var expr = asm.expression("mov rcx,7ffa9930f380h");
             AsmExprEncoding expect = (expr,  AsmBytes.parse("48 b9 80 f3 30 99 fa 7f 00 00"));
-            var mov = AsmEncoder.mov(AsmOp.rcx, Imm64);
+            var mov = AsmEncoderPrototype.mov(AsmOp.rcx, Imm64);
             AsmExprEncoding actual = (expr, mov);
             Wf.Row(expect.Equals(actual));
         }
 
-        string CaseName(AsmOc id)
+        string CaseName(AsmOcPrototype id)
             => id.ToString();
 
-        void Enqueue(AsmOc id, byte count, Func<byte,AsmExpr> f)
+        void Enqueue(AsmOcPrototype id, byte count, Func<byte,AsmExpr> f)
         {
             var buffer = Buffer(false);
             for(byte i=0; i<count; i++)
                 buffer[Position++] = f(i);
         }
 
-        void Generate(AsmOc id, byte count, Func<byte,AsmExpr> f)
+        void Generate(AsmOcPrototype id, byte count, Func<byte,AsmExpr> f)
         {
             var casename = CaseName(id);
             var flow = Wf.Running(casename);
@@ -172,14 +172,14 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-        void Assemble(AsmOc id)
+        void Assemble(AsmOcPrototype id)
         {
             var buffer = Buffer(false).View;
             Assemble(id, slice(buffer, 0, Position));
             Clear();
         }
 
-        void Assemble(AsmOc id, ReadOnlySpan<AsmExpr> input)
+        void Assemble(AsmOcPrototype id, ReadOnlySpan<AsmExpr> input)
         {
             var subject = Tables.identify<AssembledAsm>();
             var casedir = Db.CaseDir(subject,id).Create();
@@ -204,7 +204,7 @@ namespace Z0.Asm
             SaveTable(id, assembled, tablepath);
         }
 
-        void SaveTable(AsmOc id, ReadOnlySpan<AssembledAsm> src, FS.FilePath dst)
+        void SaveTable(AsmOcPrototype id, ReadOnlySpan<AssembledAsm> src, FS.FilePath dst)
         {
             var count = src.Length;
             var formatter = Tables.formatter<AssembledAsm>();
@@ -218,10 +218,10 @@ namespace Z0.Asm
 
         public void Create()
         {
-            case_and_r8_r8(AsmOc.and_r8_r8);
-            case_cmp_r8_imm8(AsmOc.cmp_r8_imm8);
-            case_cmp_r16_r16(AsmOc.cmp_r16_r16);
-            case_cmp_r32_r32(AsmOc.cmp_r32_r32);
+            case_and_r8_r8(AsmOcPrototype.and_r8_r8);
+            case_cmp_r8_imm8(AsmOcPrototype.cmp_r8_imm8);
+            case_cmp_r16_r16(AsmOcPrototype.cmp_r16_r16);
+            case_cmp_r32_r32(AsmOcPrototype.cmp_r32_r32);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Hex8Seq;
     using static AsmOps;
 
-    partial class AsmEncoder
+    partial class AsmEncoderPrototype
     {
         /// <summary>
         /// (AND AL, imm8)[24 ib]

@@ -14,24 +14,7 @@ namespace Z0
 
     public readonly struct StringAddress : IAddressable
     {
-        internal const string Empty = "<empty>";
-
-        [MethodImpl(Inline)]
-        public static StringAddress create(string src)
-            => api.address(src);
-
-        [MethodImpl(Inline)]
-        public static StringAddress resource(string src)
-            => api.resource(src);
-
-        [MethodImpl(Inline)]
-        public static StringAddress resource<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => new StringAddress(core.address(src));
-
-        [MethodImpl(Inline)]
-        public static StringAddress resource(ReadOnlySpan<char> src)
-            => new StringAddress(core.address(src));
+        internal const string EmptyMarker = "<empty>";
 
         public MemoryAddress Address {get;}
 
@@ -80,10 +63,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(string src)
-            => create(src);
+            => api.intern(src);
 
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(Name src)
-            => create(src.Content);
+            => api.intern(src.Content);
     }
 }

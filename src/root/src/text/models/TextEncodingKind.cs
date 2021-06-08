@@ -9,8 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using K = TextEncodingKind;
-
     public enum TextEncodingKind : byte
     {
         None = 0,
@@ -47,29 +45,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator TextEncodingKind<T>(T src)
             => default;
-    }
-
-    public readonly struct TextEncodings
-    {
-        public readonly struct AsciEncoding : ITextEncodingKind<AsciEncoding>
-        {
-            public TextEncodingKind Kind => K.Asci;
-
-        }
-
-        public readonly struct Utf8Encoding : ITextEncodingKind<Utf8Encoding>
-        {
-            public TextEncodingKind Kind => K.Utf8;
-        }
-
-        public readonly struct Utf16Encoding : ITextEncodingKind<Utf16Encoding>
-        {
-            public TextEncodingKind Kind => K.Utf16;
-        }
-
-        public readonly struct Utf32Encoding : ITextEncodingKind<Utf32Encoding>
-        {
-            public TextEncodingKind Kind => K.Utf32;
-        }
     }
 }

@@ -42,11 +42,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText(ReadOnlySpan<char> src)
-            => new AsmText(StringAddress.resource(src));
+            => new AsmText(TextTools.address(src));
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText(ReadOnlySpan<byte> src)
-            => new AsmText(StringAddress.resource(src));
+            => new AsmText(TextTools.address(src));
     }
 
 }

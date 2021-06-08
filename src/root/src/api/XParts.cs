@@ -25,7 +25,6 @@ namespace Z0
             return src;
         }
 
-
         [MethodImpl(Inline), Op]
         public static PartId Id(this Assembly src)
             => Root.id(src);

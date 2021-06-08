@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static StringAddress name(FieldInfo src)
-            => StringAddress.resource(src.Name);
+            => TextTools.address(src.Name);
     }
 }

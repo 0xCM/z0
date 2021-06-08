@@ -334,12 +334,12 @@ namespace Z0.Asm
             Wf.Status(string.Format("Found: {0}", found));
         }
 
-        ToolScript<XedCase> CreateXedCase(AsmOc id)
+        ToolScript<XedCase> CreateXedCase(AsmOcPrototype id)
         {
             var tool = Wf.XedTool();
             var dir = Db.CaseDir("asm.assembled", id);
             var dst = dir + FS.file(string.Format("{0}.{1}", id, tool.Id), FS.Cmd);
-            var @case = tool.DefineCase(id, dir);
+            var @case = tool.DefineCase(id.ToString(), dir);
             return tool.CreateScript(@case, dst);
         }
 

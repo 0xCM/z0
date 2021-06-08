@@ -24,8 +24,8 @@ namespace Z0
     [ApiComplete]
     partial struct Msg
     {
-       public static MsgPattern<Count,AsmOc> DefiningExpressions => "Defining {0} expressions of kind {1}";
+       public static MsgPattern<Count,AsmOcPrototype> DefiningExpressions => "Defining {0} expressions of kind {1}";
 
-        public static MsgPattern<Count,AsmOc> DefinedExpressions => "Defining {0} expressions of kind {1}";
+        public static MsgPattern<Count,AsmOcPrototype> DefinedExpressions => "Defining {0} expressions of kind {1}";
     }
 }

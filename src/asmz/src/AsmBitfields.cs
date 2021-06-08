@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static StringAddress location(string src)
-            => StringAddress.resource(src);
+            => TextTools.address(src);
 
         [Op]
         public static BitfieldSection modrm()

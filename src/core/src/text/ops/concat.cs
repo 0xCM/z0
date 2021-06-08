@@ -63,7 +63,7 @@ namespace Z0
         [Op]
         public static string concat(ReadOnlySpan<string> src, ReadOnlySpan<byte> widths, char delimiter = FieldDelimiter)
         {
-            var dst = TextTools.buffer();
+            var dst = buffer();
             var count = min(src.Length,widths.Length);
             for(var i=0u; i<count; i++)
             {

@@ -17,7 +17,7 @@ namespace Z0.Tools
     {
         [MethodImpl(Inline), Op]
         internal static StringAddress name(string src)
-            => StringAddress.resource(src);
+            => TextTools.address(src);
 
         [MethodImpl(Inline)]
         internal static ushort width<T>(T src = default)

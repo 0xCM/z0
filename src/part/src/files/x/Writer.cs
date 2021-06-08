@@ -27,6 +27,18 @@ namespace Z0
             => FS.writer(dst, FileWriteMode.Overwrite, encoding);
 
         [Op]
+        public static StreamWriter AsciWriter(this FS.FilePath dst)
+            => FS.writer(dst, FileWriteMode.Overwrite, Encoding.ASCII);
+
+        [Op]
+        public static StreamWriter Utf8Writer(this FS.FilePath dst)
+            => FS.writer(dst, FileWriteMode.Overwrite, Encoding.UTF8);
+
+        [Op]
+        public static StreamWriter Utf16Writer(this FS.FilePath dst)
+            => FS.writer(dst, FileWriteMode.Overwrite, Encoding.Unicode);
+
+        [Op]
         public static StreamWriter Writer(this FS.FilePath dst, FileWriteMode mode)
             => FS.writer(dst, mode, Encoding.UTF8);
 

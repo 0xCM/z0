@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static AsmOps;
     using static AsmHexCodes;
 
-    partial class AsmEncoder
+    partial class AsmEncoderPrototype
     {
         // REX.W + B8+ rd io | MOV r64, imm64           | OI    | Valid       | N.E.            | Move imm64 to r64.                                             |
         [MethodImpl(Inline), Op]

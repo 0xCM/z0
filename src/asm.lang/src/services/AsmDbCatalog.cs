@@ -43,7 +43,7 @@ namespace Z0.Asm
                     var monic = row.Cell(IF.Mnemonic);
                     var ocb = row.Cell(IF.OpCodeByte);
                     var arch = row.Cell(IF.Arch);
-                    var opcode = ConformOpCode(row.Cell(IF.OpCode));
+                    var opcode = row.Cell(IF.OpCode);
                     var sig = ConformSig(row.Cell(IF.Sig));
                     var encrule = row.Cell(IF.Encoding);
                     var prefix = row.Cell(IF.Prefix);
@@ -55,13 +55,12 @@ namespace Z0.Asm
                     var modr = row.Cell(IF.ModR);
                     var modrm = row.Cell(IF.ModRM);
 
-                    DataParser.parse(index, out entry.Index);
-                    entry.Mnemonic = asm.mnemonic(monic);
-                    entry.X64 = SupportsX64(arch);
-                    if(DataParser.parse(ocb, out byte _ocb))
-                        entry.OpCodeByte = _ocb;
-                    AsmParser.sig(sig, out entry.Sig);
-
+                    //DataParser.parse(index, out entry.Index);
+                    //entry.Mnemonic = asm.mnemonic(monic);
+                    //entry.X64 = SupportsX64(arch);
+                    //if(DataParser.parse(ocb, out byte _ocb))
+                    //    entry.OpCodeByte = _ocb;
+                    //AsmParser.sig(sig, out entry.Sig);
 
                     var summary = string.Format(pattern, index, monic, ocb, arch, sig, opcode, encrule, prefix);
                     log.Show(summary);
@@ -83,17 +82,17 @@ namespace Z0.Asm
         }
     }
 
-    public struct AsmDbEntry
+    public ref struct AsmDbEntry
     {
-        public ushort Index;
+        public ReadOnlySpan<byte> Index;
 
-        public AsmMnemonic Mnemonic;
+        public ReadOnlySpan<byte> Mnemonic;
 
-        public bool X64;
+        public ReadOnlySpan<byte> X64;
 
-        public Hex8 OpCodeByte;
+        public ReadOnlySpan<byte> OpCodeByte;
 
-        public AsmSigExpr Sig;
+        public ReadOnlySpan<byte> Sig;
     }
 
     public readonly struct AsmDbSourceDocs
@@ -109,96 +108,61 @@ namespace Z0.Asm
             /// <summary>
             ///
             /// </summary>
+            [Symbol("Index","A 0-based monotonic surrogate key")]
             Index = 0,
 
-            /// <summary>
-            /// The instruction mnemonic
-            /// </summary>
+            [Symbol("Mnemonic","The instruction mnemonic")]
             Mnemonic,
 
-            /// <summary>
-            /// The instruction form
-            /// </summary>
+            [Symbol("Sig","The instruction form expression")]
             Sig,
 
-            /// <summary>
-            ///
-            /// </summary>
+            [Symbol("Arch","The architectures supported by the instruction; one of:ANY,X86,X64")]
             Arch,
 
-            /// <summary>
-            ///
-            /// </summary>
+            [Symbol("","The opcode expression")]
             OpCode,
 
-            /// <summary>
-            ///
-            /// </summary>
+            [Symbol("","The encoding type code")]
             Encoding,
 
-            /// <summary>
-            /// The instruction prefix
-            /// </summary>
+            [Symbol("","The instruction prefix")]
             Prefix,
 
-            /// <summary>
-            /// The primaryh opcode byte
-            /// </summary>
+            [Symbol("","The primaryh opcode byte")]
             OpCodeByte,
 
-            /// <summary>
-            /// Opcode L field, one of {128, 256, 512}, if any
-            /// </summary>
+            [Symbol("","Opcode L field, one of {128, 256, 512}, if any")]
             L,
 
-            /// <summary>
-            /// Opcode w field
-            /// </summary>
+            [Symbol("","Opcode w field")]
             W,
 
-            /// <summary>
-            /// Opcode pp segment
-            /// </summary>
+            [Symbol("","Opcode pp segment")]
             PP,
 
-            /// <summary>
-            ///
-            /// </summary>
+            [Symbol("","")]
             MM,
 
-            /// <summary>
-            /// Indicates whether the instruction requires a size override prefix
-            /// </summary>
+            [Symbol("","Indicates whether the instruction requires a size override prefix")]
             x67,
 
-            /// <summary>
-            /// Instruction specific payload in ModRM byte (R part), one of {/0, /1, /2, /3, /4, /5, /6, /7}, if any
-            /// </summary>
+            [Symbol("","Instruction specific payload in ModRM byte (R part), one of {/0, /1, /2, /3, /4, /5, /6, /7}, if any")]
             ModR,
 
-            /// <summary>
-            /// Instruction specific payload in ModRM byte (RM part), specified as another opcode byte.
-            /// </summary>
+            [Symbol("","Instruction specific payload in ModRM byte (RM part), specified as another opcode byte")]
             ModRM,
 
-            /// <summary>
-            /// AVX VSIB register type (xmm/ymm/zmm).
-            /// </summary>
+            [Symbol("","AVX VSIB register type (xmm/ymm/zmm)")]
             VsibReg,
 
-            /// <summary>
-            /// AVX VSIB register size (32/64).
-            /// </summary>
+            [Symbol("","AVX VSIB register size (32/64).")]
             VsibSize,
 
-            /// <summary>
-            /// AVX-512 merging {k}.
-            /// </summary>
+            [Symbol("","AVX-512 merging {k}")]
             KMask,
 
-            /// <summary>
-            /// AVX-512 zeroing {kz}, implies {k}.
-            /// </summary>
+            [Symbol("","AVX-512 zeroing {kz}, implies {k}")]
             ZMask,
         }
 
@@ -235,7 +199,6 @@ namespace Z0.Asm
 
     this.tupleType = "";       // AVX-512 tuple-type.
     this.elementSize = -1;     // Instruction's element size.
-
 
 */
 

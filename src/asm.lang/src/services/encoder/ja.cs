@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static AsmInstructions;
     using static Hex8Seq;
 
-    partial class AsmEncoder
+    partial class AsmEncoderPrototype
     {
         /// <summary>
         /// (JA rel8) 77 cb

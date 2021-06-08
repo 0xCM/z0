@@ -38,8 +38,8 @@ namespace Z0.Asm
             using var map = MemoryFiles.map(src);
             var size = map.Size;
             var data = map.View();
-            var lines = TextTools.linecount(data);
-            var max = TextTools.MaxLineLength(data);
+            var lines = TextLines.count(data);
+            var max = TextLines.maxlength(data);
             var dst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Asm);
             using var writer = dst.Writer(Encoding.ASCII);
             Span<char> buffer = alloc<char>(max);
@@ -52,9 +52,9 @@ namespace Z0.Asm
             {
                 ref readonly var a0 = ref skip(data, pos);
                 ref readonly var a1 = ref skip(data, pos + 1);
-                if(TextTools.eol(a0,a1))
+                if(TextLines.eol(a0,a1))
                 {
-                    var _line = TextTools.line(data, number, counter, length + 1);
+                    var _line = TextLines.asci(data, number, counter, length + 1);
                     var outcome = ProcessLine(ref _line, out var encoding);
                     if(outcome.Fail)
                     {

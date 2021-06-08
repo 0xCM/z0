@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmTokens
+    partial struct AsmKeywords
     {
         /// <summary>
         /// Specifies instruction pointer registers

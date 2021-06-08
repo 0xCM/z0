@@ -55,7 +55,7 @@ namespace Z0.Tools
 
                 var j=0;
                 cell = skip(cells,j++);
-                if(!DataParser.resource(cell, out dst.Name))
+                if(!DataParser.parse(cell, out dst.Name))
                 {
                     Wf.Error(string.Format("Failed to parse field '{0}' from input '{1}'", nameof(dst.Name), cell));
                     Wf.Row(cells.Delimit().Format());
@@ -71,7 +71,7 @@ namespace Z0.Tools
                 }
 
                 cell = skip(cells,j++);
-                if(!DataParser.resource(cell, out dst.Description))
+                if(!DataParser.parse(cell, out dst.Description))
                 {
                     Wf.Error(string.Format("Failed to parse field '{0}' from input '{1}'", nameof(dst.Description), cell));
                     Wf.Row(cells.Delimit().Format());

@@ -36,8 +36,8 @@ namespace Z0
             => AsmGen.create(wf);
 
         [Op]
-        public static AsmEncoder AsmEncoder(this IWfRuntime wf)
-            => Svc.AsmEncoder.create(wf);
+        public static AsmEncoderPrototype AsmEncoder(this IWfRuntime wf)
+            => Svc.AsmEncoderPrototype.create(wf);
 
         [Op]
         public static AsmParser AsmParser(this IWfRuntime wf)

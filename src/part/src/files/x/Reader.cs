@@ -22,5 +22,18 @@ namespace Z0
         [Op]
         public static StreamReader Reader(this FS.FilePath src, Encoding encoding)
             => FS.reader(src, encoding);
+
+        [Op]
+        public static StreamReader AsciReader(this FS.FilePath src)
+            => FS.reader(src, Encoding.ASCII);
+
+        [Op]
+        public static StreamReader Utf8Reader(this FS.FilePath src)
+            => FS.reader(src, Encoding.UTF8);
+
+        [Op]
+        public static StreamReader Utf16Reader(this FS.FilePath src)
+            => FS.reader(src, Encoding.Unicode);
+
     }
 }
