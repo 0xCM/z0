@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using T = AsmOpCodeTokens;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [ApiHost]
-    public readonly struct AsmHexCodes
+    [Free, ApiHost]
+    public static partial class XCell
     {
-        public static RexPrefixKind RexW => RexPrefixKind.W;
-
+        const NumericKind Closure = Root.Integers;
     }
 }

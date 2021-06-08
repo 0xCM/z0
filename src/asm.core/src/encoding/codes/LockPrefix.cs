@@ -4,12 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using T = AsmOpCodeTokens;
+    using static Hex8Seq;
 
-    [ApiHost]
-    public readonly struct AsmHexCodes
+    partial struct AsmCodes
     {
-        public static RexPrefixKind RexW => RexPrefixKind.W;
-
+        /// <summary>
+        /// Defines the lock prefix code
+        /// </summary>
+        public enum LockPrefix : byte
+        {
+            LOCK = xf0,
+        }
     }
 }

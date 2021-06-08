@@ -13,28 +13,34 @@ namespace Z0.Asm
 
     public readonly struct AsmBitstring
     {
-        readonly AsmHexCode Code {get;}
+        readonly StringAddress Address {get;}
 
         [MethodImpl(Inline)]
-        internal AsmBitstring(AsmHexCode src)
+        internal AsmBitstring(StringAddress src)
         {
-            Code = src;
+            Address = src;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Code.IsEmpty;
+            get => Address.IsNonZero;
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => Address.Hash;
         }
 
         public string Format()
-            => api.format(Code);
+            => Address.Format();
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator AsmBitstring(AsmHexCode src)
-            => new AsmBitstring(src);
+            => new AsmBitstring(api.format(src));
     }
 }

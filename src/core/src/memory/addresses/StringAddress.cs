@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     using api = TextTools;
 
@@ -28,6 +27,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => api.length(this);
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => Address.Hash;
+        }
+
+        public bool IsNonZero
+        {
+            [MethodImpl(Inline)]
+            get => Address.IsNonZero;
         }
 
         [MethodImpl(Inline)]

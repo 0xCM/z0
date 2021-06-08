@@ -44,6 +44,6 @@ namespace Z0
             => default;
 
         public static Rational<T> Zero
-            => (default(T), Numeric.force<T>(1));
+            => (default(T), NumericCast.force<T>(1));
     }
 }

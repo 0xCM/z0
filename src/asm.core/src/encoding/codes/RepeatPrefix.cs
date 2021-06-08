@@ -4,12 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using T = AsmOpCodeTokens;
+    using static Hex8Seq;
 
-    [ApiHost]
-    public readonly struct AsmHexCodes
+    partial struct AsmCodes
     {
-        public static RexPrefixKind RexW => RexPrefixKind.W;
+        public enum RepeatPrefix : byte
+        {
+            None = 0,
 
+            REPNE = xf2,
+
+            REPNZ = xf2,
+
+            REPE = xf3,
+
+            REPZ = xf3,
+        }
     }
 }

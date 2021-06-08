@@ -24,11 +24,9 @@ namespace Z0.Asm
         public static BinaryCode code(CodeBlock encoded, uint offset, byte size)
             => slice(encoded.View, offset, size).ToArray();
 
+        [Op]
         public static AsmEncodingInfo encoding(in AsmIndex src)
-        {
-            var content = AsmBitstrings.format(src.Encoded);
-            return new AsmEncodingInfo(src.Expression, src.Sig, src.OpCode, src.Encoded, content);
-        }
+            => new AsmEncodingInfo(src.Expression, src.Sig, src.OpCode, src.Encoded, AsmBitstrings.bitstring(src.Encoded));
 
         public SortedSpan<AsmEncodingInfo> CollectDistinctEncodings(ReadOnlySpan<AsmIndex> src)
         {

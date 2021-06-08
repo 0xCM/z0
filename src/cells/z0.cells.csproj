@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Bit)" />
+    <ProjectReference Include="$(Containers)" />
   </ItemGroup>
 
 </Project>

@@ -8,11 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmCodes;
 
     partial class AsmEncoderPrototype
     {
         [MethodImpl(Inline), Op]
-        public static AsmHexCode @lock(LockPrefixCode code, uint4 index)
+        public static AsmHexCode @lock(LockPrefix code, uint4 index)
         {
             var dst = AsmBytes.code();
             dst.Cell(index) = (byte)code;

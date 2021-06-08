@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using T = AsmOpCodeTokens;
+    using static Root;
 
     [ApiHost]
-    public readonly struct AsmHexCodes
+    public readonly partial struct gcells
     {
-        public static RexPrefixKind RexW => RexPrefixKind.W;
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

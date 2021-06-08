@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static gbits;
 
-    using K = RFlagBits;
+    using K = AsmCodes.RFlagBits;
     using I = AsmCodes.RFlagIndex;
 
     partial struct Regs

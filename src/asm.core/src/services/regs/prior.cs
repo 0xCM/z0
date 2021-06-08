@@ -30,7 +30,6 @@ namespace Z0.Asm
                 return RegIndex.r15;
         }
 
-
         [MethodImpl(Inline), Op]
         public static r32 prior(r32 src)
         {

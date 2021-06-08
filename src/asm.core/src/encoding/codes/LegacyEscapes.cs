@@ -4,12 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using T = AsmOpCodeTokens;
-
-    [ApiHost]
-    public readonly struct AsmHexCodes
+    partial struct AsmCodes
     {
-        public static RexPrefixKind RexW => RexPrefixKind.W;
+        public enum LegacyEscapes : ushort
+        {
+            None = 0,
 
+            x0F = 0x0F,
+
+            x0F38 = 0x0F38,
+
+            x0F3A = 0x0F3A,
+        }
     }
 }

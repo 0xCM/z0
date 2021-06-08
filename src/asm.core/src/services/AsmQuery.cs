@@ -10,10 +10,10 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using REP = AsmCodes.RepeatPrefixCode;
-    using L = LockPrefixCode;
-    using SZ = SizeOverrideCode;
-    using SG = SegOverrideCode;
+    using REP = AsmCodes.RepeatPrefix;
+    using L = AsmCodes.LockPrefix;
+    using SZ = AsmCodes.SizeOverride;
+    using SG = AsmCodes.SegOverride;
 
     [ApiHost]
     public readonly partial struct AsmQuery

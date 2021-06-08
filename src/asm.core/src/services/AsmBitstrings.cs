@@ -19,6 +19,10 @@ namespace Z0.Asm
             => src.IsEmpty ? EmptyString : text.format(render(src));
 
         [Op]
+        public static AsmBitstring bitstring(AsmHexCode src)
+            => new AsmBitstring(format(src));
+
+        [Op]
         public static string format(AsmHexCode src, Span<char> buffer)
         {
             if(src.IsEmpty)
