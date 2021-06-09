@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static Typed;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     [ApiHost]
     public struct SeqParserChecks
@@ -67,18 +67,18 @@ namespace Z0
         }
 
         [Op]
-        BufferSegments<AsciCharCode> test(N2 n)
+        BufferSegments<AsciCode> test(N2 n)
         {
             const char Delimiter = '.';
             const byte SegCount = 6;
 
-            var parser = gAlg.splitter(AsciCharCode.Dot);
+            var parser = gAlg.splitter(AsciCode.Dot);
             var input = edit(Case2Input);
             gAlg.split(parser, input, out var segments);
             return segments;
         }
 
-        static ReadOnlySpan<AsciCharCode> Case2Input
-            => new AsciCharCode[]{C.d9,C.d0,C.Dot, C.d3,C.d3,C.Dot, C.d3,C.d9,C.d1,C.Dot, C.d3,C.d8,C.d5,C.Dot, C.d9};
+        static ReadOnlySpan<AsciCode> Case2Input
+            => new AsciCode[]{C.d9,C.d0,C.Dot, C.d3,C.d3,C.Dot, C.d3,C.d9,C.d1,C.Dot, C.d3,C.d8,C.d5,C.Dot, C.d9};
     }
 }

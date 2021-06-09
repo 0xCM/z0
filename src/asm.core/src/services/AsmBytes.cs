@@ -21,10 +21,10 @@ namespace Z0.Asm
             => ref @as<byte,ModRm>(skip(src.Bytes, offset));
 
         [Op]
-        public static bool parse(string src, out AsmHexCode dst)
+        public static bool parse(ReadOnlySpan<char> src, out AsmHexCode dst)
         {
             var storage = Cells.alloc(w128);
-            var size = Hex.parse(span(src.Trim()), storage.Bytes);
+            var size = Hex.parse(src, storage.Bytes);
             if(size == 0 || size > 15)
             {
                 dst = AsmHexCode.Empty;
@@ -42,7 +42,7 @@ namespace Z0.Asm
         public static AsmHexCode parse(string src)
         {
             var dst = AsmHexCode.Empty;
-            parse(src, out dst);
+            parse(src.Trim(), out dst);
             return dst;
         }
 

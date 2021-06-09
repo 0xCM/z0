@@ -12,7 +12,7 @@ namespace Z0.Tools
 
     partial class Nasm
     {
-        public ref AssembledAsm Assembled(in NasmEncoding src, out AssembledAsm dst)
+        public ref AsmAssembly Assembled(in NasmEncoding src, out AsmAssembly dst)
         {
             dst.Bitstring = FormatBitstring(src.Encoded);
             dst.Encoding = src.Encoded;
@@ -22,9 +22,9 @@ namespace Z0.Tools
             return ref dst;
         }
 
-        public Index<AssembledAsm> Assembled(ReadOnlySpan<NasmCodeBlock> blocks)
+        public Index<AsmAssembly> Assembled(ReadOnlySpan<NasmCodeBlock> blocks)
         {
-            var dst = root.list<AssembledAsm>();
+            var dst = root.list<AsmAssembly>();
             var count = blocks.Length;
             for(var i=0; i<count; i++)
             {

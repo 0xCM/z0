@@ -4,8 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public partial interface IEnvPaths
-    {
+    using static EnvFolders;
 
+    partial interface IEnvPaths
+    {
+        FS.FolderPath ZBuildDir()
+            => ZRoot() + FS.folder(dotbuild);
     }
 }

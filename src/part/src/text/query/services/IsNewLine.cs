@@ -17,7 +17,7 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Tests whether a character is either a <see cref="AsciCharCode.CR"/> or <see cref="AsciCharCode.LF"/>
+        /// Tests whether a character is either a <see cref="AsciCode.CR"/> or <see cref="AsciCode.LF"/>
         /// </summary>
         public readonly struct IsNewLine : ISymbolicQuery<IsNewLine,char>
         {

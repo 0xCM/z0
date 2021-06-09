@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsciCharCode;
+    using static AsciCode;
 
-    using CC = AsciCharCode;
+    using CC = AsciCode;
 
     partial struct TextQuery
     {

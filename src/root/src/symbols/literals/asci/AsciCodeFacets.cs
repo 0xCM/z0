@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     /// <summary>
-    /// Defines <see cref='AsciCharCode'/> attributges
+    /// Defines <see cref='AsciCode'/> attributges
     /// </summary>
     public readonly struct AsciCodeFacets
     {

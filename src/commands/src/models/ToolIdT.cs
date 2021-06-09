@@ -9,24 +9,25 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Tool<T> : ITool<Tool<T>>
+    public readonly struct ToolId<T>
+        where T : ITool
     {
         public ToolId Id {get;}
 
         [MethodImpl(Inline)]
-        public Tool(string name)
+        public ToolId(string name)
             => Id = name;
 
         [MethodImpl(Inline)]
-        public Tool(ToolId id)
+        public ToolId(ToolId id)
             => Id = id;
 
         [MethodImpl(Inline)]
-        public static implicit operator Tool<T>(string id)
-            => new Tool<T>(id);
+        public static implicit operator ToolId<T>(string id)
+            => new ToolId<T>(id);
 
         [MethodImpl(Inline)]
-        public static implicit operator Tool<T>(ToolId id)
-            => new Tool<T>(id);
+        public static implicit operator ToolId<T>(ToolId id)
+            => new ToolId<T>(id);
     }
 }

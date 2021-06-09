@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static core;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     sealed class LlvmMnemonicProcessor : LlvmTextProcessor<MnemonicIndexEntry>
     {

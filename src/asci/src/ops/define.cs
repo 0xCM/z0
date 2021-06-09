@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The first asci code</param>
         /// <param name="b">The second asci code</param>
         [MethodImpl(Inline), Op]
-        public static asci2 define(AsciCharCode a, AsciCharCode b)
+        public static asci2 define(AsciCode a, AsciCode b)
             => new asci2(pack(a,b));
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="b">The second asci code</param>
         /// <param name="c">The third asci code</param>
         [MethodImpl(Inline), Op]
-        public static asci4 define(AsciCharCode a, AsciCharCode b, AsciCharCode c)
+        public static asci4 define(AsciCode a, AsciCode b, AsciCode c)
             => new asci4(pack(a, b, c, out var _ ));
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="c">The third asci code</param>
         /// <param name="d">The fourth asci code</param>
         [MethodImpl(Inline), Op]
-        public static asci4 define(AsciCharCode c0, AsciCharCode c1, AsciCharCode c2, AsciCharCode c3)
+        public static asci4 define(AsciCode c0, AsciCode c1, AsciCode c2, AsciCode c3)
             => new asci4(pack(c0,c1,c2,c3, out var dst));
     }
 }

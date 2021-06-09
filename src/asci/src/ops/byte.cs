@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte @byte(in AsciCharCode src)
-            => ref @as<AsciCharCode,byte>(src);
+        public static ref byte @byte(in AsciCode src)
+            => ref @as<AsciCode,byte>(src);
 
         /// <summary>
         /// Presents the leading source cell as a byte reference

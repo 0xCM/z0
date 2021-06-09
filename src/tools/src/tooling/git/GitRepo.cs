@@ -2,13 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tools
 {
-    using static EnvFolders;
-
-    partial interface IEnvPaths
+    public readonly struct GitRepo : IFileArchive
     {
-        FS.FolderPath ZBuildDir()
-            => ZRoot() + FS.folder(build);
+        public FS.FolderPath Root {get;}
+
+        public GitRepo(FS.FolderPath root)
+        {
+            Root = root;
+        }
     }
+
 }

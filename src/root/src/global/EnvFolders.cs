@@ -13,11 +13,15 @@ namespace Z0
 
         public const string builds = nameof(builds);
 
-        public const string build = ".build";
+        public const string build = "build";
 
         public const string cil = nameof(cil);
 
         public const string cildata = nameof(cil) + delimiter + data;
+
+        public const string dot = ".";
+
+        public const string dotbuild = dot + build;
 
         public const string docs = nameof(docs);
 

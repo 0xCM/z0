@@ -19,4 +19,11 @@ namespace Z0
 
     }
 
+    [Free]
+    public interface ITool<T,C> : ITool<T>
+        where T : ITool<T>, new()
+        where C : IToolCmd
+    {
+        CmdLine CmdLine(in C src);
+    }
 }

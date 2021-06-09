@@ -12,22 +12,22 @@ namespace Z0
     [Datatype]
     public readonly struct ArgQualifier : IDataType<ArgQualifier>
     {
-        readonly AsciCharCode Code;
+        readonly AsciCode Code;
 
         [MethodImpl(Inline)]
-        public ArgQualifier(AsciCharCode code)
+        public ArgQualifier(AsciCode code)
             => Code = code;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Code == AsciCharCode.Null;
+            get => Code == AsciCode.Null;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Code != AsciCharCode.Null;
+            get => Code != AsciCode.Null;
         }
 
         [MethodImpl(Inline)]
@@ -43,22 +43,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ArgQualifier(char src)
-            => new ArgQualifier((AsciCharCode)src);
+            => new ArgQualifier((AsciCode)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArgQualifier(AsciCharCode src)
+        public static implicit operator ArgQualifier(AsciCode src)
             => new ArgQualifier(src);
 
         public static ArgQualifier Empty
-            => new ArgQualifier(AsciCharCode.Null);
+            => new ArgQualifier(AsciCode.Null);
 
         public static ArgQualifier Space
-            => new ArgQualifier(AsciCharCode.Space);
+            => new ArgQualifier(AsciCode.Space);
 
         public static ArgQualifier Colon
-            => new ArgQualifier(AsciCharCode.Colon);
+            => new ArgQualifier(AsciCode.Colon);
 
         public static ArgQualifier Eq
-            => new ArgQualifier(AsciCharCode.Eq);
+            => new ArgQualifier(AsciCode.Eq);
     }
 }

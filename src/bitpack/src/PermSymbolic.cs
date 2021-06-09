@@ -105,8 +105,8 @@ namespace Z0
             return dst;
         }
 
-        static ReadOnlySpan<AsciCharCode> Perm4Codes
-            => new AsciCharCode[4]{AsciCharCode.A, AsciCharCode.B, AsciCharCode.C, AsciCharCode.D,};
+        static ReadOnlySpan<AsciCode> Perm4Codes
+            => new AsciCode[4]{AsciCode.A, AsciCode.B, AsciCode.C, AsciCode.D,};
 
         [MethodImpl(Inline), Op]
         public static char letter(N4 n, bit x, bit y)

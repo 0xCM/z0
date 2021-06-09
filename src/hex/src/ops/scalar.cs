@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool scalar(AsciCharCode c)
+        public static bool scalar(AsciCode c)
             => (HexCode)c >= X.MinScalarCode && (HexCode)c <= X.MaxScalarCode;
 
         /// <summary>
@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool scalar(char c)
-            => scalar((AsciCharCode)c);
+            => scalar((AsciCode)c);
     }
 }

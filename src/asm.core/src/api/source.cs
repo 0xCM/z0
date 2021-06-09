@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmExpr expression(string src)
-            => new AsmExpr(src);
+        public static AsmSourceBlock source(string content, Bitness b = Bitness.b64)
+            => new AsmSourceBlock(b,content);
     }
 }

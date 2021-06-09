@@ -12,16 +12,16 @@ namespace Z0
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
-        public static AsciSymbol symbol(AsciCharCode src)
+        public static AsciSymbol symbol(AsciCode src)
             => src;
 
         [MethodImpl(Inline), Op]
         public static AsciSymbol symbol(AsciLetterLo src)
-            => (AsciCharCode)src;
+            => (AsciCode)src;
 
         [MethodImpl(Inline), Op]
         public static AsciSymbol symbol(AsciLetterUp src)
-            => (AsciCharCode)src;
+            => (AsciCode)src;
 
         [MethodImpl(Inline), Op]
         public static ref readonly AsciSymbol symbol(in byte src)

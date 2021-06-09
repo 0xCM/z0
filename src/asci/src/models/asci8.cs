@@ -59,10 +59,10 @@ namespace Z0
             get => Null;
         }
 
-        public AsciCharCode this[int index]
+        public AsciCode this[int index]
         {
             [MethodImpl(Inline)]
-            get => (AsciCharCode)(Storage >> index*8);
+            get => (AsciCode)(Storage >> index*8);
         }
 
         /// <summary>

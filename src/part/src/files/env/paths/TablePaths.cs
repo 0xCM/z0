@@ -58,7 +58,7 @@ namespace Z0
 
         string TableId<T>()
             where T : struct, IRecord<T>
-                => Tables.identify<T>().Identifier.Format();
+                => Z0.TableId.identify<T>().Identifier.Format();
 
         FS.FilePath Table(string subject, PartId part)
             => TableDir(subject) + FS.file(string.Format(RP.SlotDot2, subject, part.Format()), DefaultTableExt);

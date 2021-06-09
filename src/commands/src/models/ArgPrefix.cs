@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using ACC = AsciCharCode;
+    using ACC = AsciCode;
 
     [Datatype]
     public readonly struct ArgPrefix : IDataTypeEquatable<ArgPrefix>
@@ -56,19 +56,19 @@ namespace Z0
                 return new ArgPrefix((ACC)skip(src, 0), (ACC)skip(src, 1));
         }
 
-        internal readonly AsciCharCode C0;
+        internal readonly AsciCode C0;
 
-        internal readonly AsciCharCode C1;
+        internal readonly AsciCode C1;
 
         [MethodImpl(Inline)]
-        internal ArgPrefix(AsciCharCode c0)
+        internal ArgPrefix(AsciCode c0)
         {
             C0 = c0;
-            C1 = AsciCharCode.Null;
+            C1 = AsciCode.Null;
         }
 
         [MethodImpl(Inline)]
-        internal ArgPrefix(AsciCharCode c0, AsciCharCode c1)
+        internal ArgPrefix(AsciCode c0, AsciCode c1)
         {
             C0 = c0;
             C1 = c1;
@@ -77,13 +77,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => C0 == AsciCharCode.Null;
+            get => C0 == AsciCode.Null;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => C0 != AsciCharCode.Null;
+            get => C0 != AsciCode.Null;
         }
 
         public uint Hash
@@ -95,7 +95,7 @@ namespace Z0
         public byte Length
         {
             [MethodImpl(Inline)]
-            get => IsEmpty ? z8 : (C1 == AsciCharCode.Null ? (byte)1 : (byte)2);
+            get => IsEmpty ? z8 : (C1 == AsciCode.Null ? (byte)1 : (byte)2);
         }
 
         public bool Equals(ArgPrefix src)
@@ -134,16 +134,16 @@ namespace Z0
             => default;
 
         public static ArgPrefix DoubleDash
-            => new ArgPrefix(AsciCharCode.Dash, AsciCharCode.Dash);
+            => new ArgPrefix(AsciCode.Dash, AsciCode.Dash);
 
         public static ArgPrefix Dash
-            => new ArgPrefix(AsciCharCode.Dash);
+            => new ArgPrefix(AsciCode.Dash);
 
         public static ArgPrefix FSlash
-            => new ArgPrefix(AsciCharCode.FSlash);
+            => new ArgPrefix(AsciCode.FSlash);
 
         public static ArgPrefix Space
-            => new ArgPrefix(AsciCharCode.Space);
+            => new ArgPrefix(AsciCode.Space);
 
         public static ArgPrefix Default
             => DoubleDash;

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     using AC = AsciChar;
-    using CC = AsciCharCode;
+    using CC = AsciCode;
 
     partial struct TextQuery
     {

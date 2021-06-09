@@ -6,17 +6,12 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
-
-
     readonly struct WorkflowCommandDispatcher
     {
         public static void dispatch(string[] args)
         {
 
         }
-
 
     }
 
@@ -28,7 +23,7 @@ namespace Z0
             {
                 var count = args.Length;
                 var paths = EnvPaths.create();
-                var handlers = Toolsets.ResultHandlers(paths);
+                var handlers = paths.ResultHandlers();
 
                 for(var i=1; i<count; i++)
                 {

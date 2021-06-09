@@ -32,7 +32,7 @@ namespace Z0
 
         readonly sbyte Max {get;}
 
-        public AsciTable(AsciTableKind kind, AsciCharCode min, AsciCharCode max)
+        public AsciTable(AsciTableKind kind, AsciCode min, AsciCode max)
         {
             Kind = kind;
             Min = (sbyte)min;
@@ -40,7 +40,7 @@ namespace Z0
             Count = (sbyte)((sbyte)(Max - Min) + 1);
         }
 
-        public ReadOnlySpan<AsciCharCode> Codes
+        public ReadOnlySpan<AsciCode> Codes
         {
             [MethodImpl(Inline), Op]
             get => AsciSymbols.codes(Min, Count);
@@ -49,7 +49,7 @@ namespace Z0
         public ReadOnlySpan<AsciSymbol> Symbols
         {
             [MethodImpl(Inline), Op]
-            get => recover<AsciCharCode,AsciSymbol>(Codes);
+            get => recover<AsciCode,AsciSymbol>(Codes);
         }
 
         public ReadOnlySpan<char> Chars

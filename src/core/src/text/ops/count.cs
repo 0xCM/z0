@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint pack(ReadOnlySpan<string> src, Span<AsciCharCode> dst)
+        public static uint pack(ReadOnlySpan<string> src, Span<AsciCode> dst)
         {
             var count = src.Length;
             var max = dst.Length;
@@ -41,9 +41,9 @@ namespace Z0
                 var length = s.Length;
 
                 for(var j=0; j<length && k<max; j++)
-                    seek(dst,k++) = (AsciCharCode)skip(s,j);
+                    seek(dst,k++) = (AsciCode)skip(s,j);
                 if(k < max)
-                    seek(dst,k++) = AsciCharCode.Null;
+                    seek(dst,k++) = AsciCode.Null;
             }
             return k;
         }

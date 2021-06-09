@@ -8,7 +8,7 @@ namespace Z0.Tools
 
     partial class Nasm
     {
-        public Index<AssembledAsm> LoadAssembledAsm(FS.FolderPath src, Identifier listname)
+        public Index<AsmAssembly> LoadAssembledAsm(FS.FolderPath src, Identifier listname)
             => Assembled(LoadListedBlocks(ListPath(src, listname)));
     }
 }

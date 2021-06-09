@@ -22,20 +22,19 @@ namespace Z0
 
     [Free]
     public interface IToolCmd<C> : IToolCmd
-        where C : struct, IToolCmd<C>
+        where C : struct, IToolCmd
     {
         CmdId IToolCmd.CmdId
             => CmdId.from<C>();
 
         ToolCmdArgs IToolCmd.Args
             => ToolArgs.args((C)this);
-
     }
 
     [Free]
     public interface IToolCmd<C,T> : IToolCmd<C>
         where C : struct, IToolCmd<C>
-        where T : struct, ITool<T>
+        where T : ITool
     {
 
     }

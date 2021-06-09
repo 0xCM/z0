@@ -7,7 +7,7 @@ namespace Z0
     using AC = AsciChar;
 
     [CodeProvider(typeof(AC))]
-    public enum AsciCharCode : byte
+    public enum AsciCode : byte
     {
         /// <summary>
         /// The asci code for null

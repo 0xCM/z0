@@ -43,7 +43,7 @@ namespace Z0
             => src.Text;
 
         [Op]
-        public static string format(ReadOnlySpan<AsciCharCode> src, Span<char> buffer)
+        public static string format(ReadOnlySpan<AsciCode> src, Span<char> buffer)
         {
             var count = decode(src, buffer);
             return new string(slice(buffer,0, count));

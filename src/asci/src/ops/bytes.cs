@@ -18,8 +18,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static Span<byte> bytes(Span<AsciCharCode> src)
-            => recover<AsciCharCode,byte>(src);
+        public static Span<byte> bytes(Span<AsciCode> src)
+            => recover<AsciCode,byte>(src);
 
         /// <summary>
         /// Presents a span of asci symbols as a bytespan

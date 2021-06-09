@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// Evidence of absence
         /// </summary>
-        public const byte AsciNone = (byte)AsciCharCode.Null;
+        public const byte AsciNone = (byte)AsciCode.Null;
 
         /// <summary>
         /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field

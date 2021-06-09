@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(ReadOnlySpan<AsciCharCode> src, ref uint i, Span<char> dst)
+        public static uint render(ReadOnlySpan<AsciCode> src, ref uint i, Span<char> dst)
         {
             var count = (uint)src.Length;
             for(var j=0; j<count; j++)

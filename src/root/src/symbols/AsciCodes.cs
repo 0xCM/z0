@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using K = AsciCharCode;
+    using K = AsciCode;
 
     [ApiHost]
     public readonly struct AsciCodes

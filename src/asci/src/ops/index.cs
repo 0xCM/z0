@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int index(in asci4 src, AsciCharCode match)
+        public static int index(in asci4 src, AsciCode match)
             => search(@byte(edit(src)), src.Capacity, (byte)match);
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int index(in asci8 src, AsciCharCode match)
+        public static int index(in asci8 src, AsciCode match)
             => search(@byte(edit(src)), src.Capacity, (byte)match);
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int index(in asci32 src, AsciCharCode match)
+        public static int index(in asci32 src, AsciCode match)
             => search(@byte(edit(src)), src.Capacity, (byte)match);
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int index(in asci64 src, AsciCharCode match)
+        public static int index(in asci64 src, AsciCode match)
             => search(@byte(edit(src)), src.Capacity, (byte)match);
 
         [MethodImpl(Inline), Op]

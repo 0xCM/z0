@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool lower(AsciCharCode c)
+        public static bool lower(AsciCode c)
             => (HexCode)c >= X.MinLetterCodeL && (HexCode)c <= X.MaxLetterCodeL;
 
         /// <summary>
@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool lower(char c)
-            => lower((AsciCharCode)c);
+            => lower((AsciCode)c);
     }
 }

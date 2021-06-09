@@ -11,8 +11,6 @@ namespace Z0.Asm
 
     public readonly struct AsmDisassembly
     {
-        public uint LineNumber {get;}
-
         public Hex64 Offset {get;}
 
         public AsmStatementExpr Statement {get;}
@@ -20,9 +18,8 @@ namespace Z0.Asm
         public AsmHexCode Code {get;}
 
         [MethodImpl(Inline)]
-        public AsmDisassembly(uint line, Hex64 offset, AsmStatementExpr expr, AsmHexCode code)
+        public AsmDisassembly(Hex64 offset, AsmStatementExpr expr, AsmHexCode code)
         {
-            LineNumber = line;
             Offset = offset;
             Statement = expr;
             Code = code;

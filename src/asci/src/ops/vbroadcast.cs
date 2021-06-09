@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="w">The vector target width</param>
         /// <param name="src">The code to broadcast</param>
         [MethodImpl(Inline), Op]
-        public Vector128<byte> vbroadcast(W128 w, AsciCharCode src)
+        public Vector128<byte> vbroadcast(W128 w, AsciCode src)
             => cpu.vbroadcast(w,(byte)src);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="w">The vector target width</param>
         /// <param name="src">The code to broadcast</param>
         [MethodImpl(Inline), Op]
-        public Vector256<byte> vbroadcast(W256 w, AsciCharCode src)
+        public Vector256<byte> vbroadcast(W256 w, AsciCode src)
             => cpu.vbroadcast(w,(byte)src);
 
         /// <summary>

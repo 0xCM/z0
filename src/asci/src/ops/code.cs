@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     partial struct Asci
     {

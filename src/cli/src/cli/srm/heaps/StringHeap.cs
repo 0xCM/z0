@@ -43,7 +43,7 @@ namespace Z0
                 => handle.IsVirtual() ? GetVirtualHandleMemoryBlock(handle) : GetNonVirtualStringMemoryBlock(handle);
 
             [MethodImpl(Inline), Op]
-            public int IndexOf(int offset, AsciCharCode match)
+            public int IndexOf(int offset, AsciCode match)
                 => Block.Utf8NullTerminatedOffsetOfAsciiChar(offset, (char)match);
 
             public StringHandle GetNextHandle(StringHandle handle)

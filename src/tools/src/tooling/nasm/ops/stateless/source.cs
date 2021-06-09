@@ -11,10 +11,10 @@ namespace Z0.Tools
 
     using static Root;
 
-    partial class Nasm
-    {
-        [MethodImpl(Inline), Op]
-        public static NasmSource source(Index<AsmExpr> expr, bool x64 = true)
-            => new NasmSource(expr,x64);
-    }
+    // partial class Nasm
+    // {
+    //     [MethodImpl(Inline), Op]
+    //     public static NasmSource source(Index<AsmExpr> expr, bool x64 = true)
+    //         => new NasmSource(expr,x64);
+    // }
 }

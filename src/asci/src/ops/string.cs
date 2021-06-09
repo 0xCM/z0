@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="code">The asci code</param>
         [MethodImpl(Inline), Op]
-        public static string @string(AsciCharCode code)
+        public static string @string(AsciCode code)
         {
             const string buffer = " ";
             edit16c(buffer) = (char)code;

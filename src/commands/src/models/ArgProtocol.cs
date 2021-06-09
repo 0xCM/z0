@@ -26,7 +26,7 @@ namespace Z0
         public ArgProtocol(ArgPrefix delimiter)
         {
             Prefix = delimiter;
-            Qualifier = AsciCharCode.Space;
+            Qualifier = AsciCode.Space;
         }
 
         public bool IsEmpty

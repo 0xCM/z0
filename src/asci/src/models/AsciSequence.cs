@@ -37,10 +37,10 @@ namespace Z0
             get => Data.Storage;
         }
 
-        public ReadOnlySpan<AsciCharCode> Codes
+        public ReadOnlySpan<AsciCode> Codes
         {
             [MethodImpl(Inline)]
-            get => memory.recover<byte,AsciCharCode>(View);
+            get => memory.recover<byte,AsciCode>(View);
         }
 
         public ReadOnlySpan<byte> View

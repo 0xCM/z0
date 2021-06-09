@@ -20,7 +20,7 @@ namespace Z0
             => (char)src;
 
         [MethodImpl(Inline), Op]
-        public static char decode(AsciCharCode src)
+        public static char decode(AsciCode src)
             => (char)src;
 
         [MethodImpl(Inline), Op]
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint decode(ReadOnlySpan<AsciCharCode> src, Span<char> dst)
+        public static uint decode(ReadOnlySpan<AsciCode> src, Span<char> dst)
         {
             var count = (uint)src.Length;
             for(var i=0; i<count; i++)

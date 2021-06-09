@@ -53,10 +53,16 @@ namespace Z0
         Receiver<string> _ErrorReceiver;
 
         static void OnStaus(in string src)
-            => term.inform(src);
+        {
+            if(text.nonempty(src))
+                term.inform(src);
+        }
 
         static void OnError(in string src)
-             => term.error(src);
+        {
+             if(text.nonempty(src))
+                term.error(src);
+        }
 
         /// <summary>
         /// CommanOptions holds a set of options that can be passed to the constructor

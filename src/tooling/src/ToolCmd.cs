@@ -146,7 +146,6 @@ namespace Z0
                 process.StartInfo.WorkingDirectory = spec.WorkingDir.Name;
 
             root.iter(spec.EnvVars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
-
             process.OutputDataReceived += (s,d) => status(d.Data ?? EmptyString);
             process.ErrorDataReceived += (s,d) => error(d.Data ?? EmptyString);
             process.Start();
@@ -172,12 +171,12 @@ namespace Z0
             => ref process.Status(ref dst);
 
         [MethodImpl(Inline), Factory]
-        public ArgQualifier qualifier(AsciCharCode src)
+        public ArgQualifier qualifier(AsciCode src)
             => new ArgQualifier(src);
 
         [MethodImpl(Inline), Factory]
-        public ArgProtocol protocol(ArgPrefix prefix, AsciCharCode? qualifier = null)
-            => new ArgProtocol(prefix, qualifier ?? AsciCharCode.Space);
+        public ArgProtocol protocol(ArgPrefix prefix, AsciCode? qualifier = null)
+            => new ArgProtocol(prefix, qualifier ?? AsciCode.Space);
 
         [Op]
         public static ToolCmdSpec specify(FS.FilePath path, params ToolCmdArg[] args)

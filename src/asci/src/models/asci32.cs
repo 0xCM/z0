@@ -93,10 +93,10 @@ namespace Z0
             get => Asci.decode(this);
         }
 
-        public AsciCharCode this[int index]
+        public AsciCode this[int index]
         {
             [MethodImpl(Inline)]
-            get => (AsciCharCode)Storage.GetElement(index);
+            get => (AsciCode)Storage.GetElement(index);
         }
 
         public asci2 this[byte index, N2 size]

@@ -15,10 +15,10 @@ namespace Z0
 
         public uint StartPos {get;}
 
-        public ReadOnlySpan<AsciCharCode> Content {get;}
+        public ReadOnlySpan<AsciCode> Content {get;}
 
         [MethodImpl(Inline)]
-        public AsciLine(uint number, uint start, ReadOnlySpan<AsciCharCode> src)
+        public AsciLine(uint number, uint start, ReadOnlySpan<AsciCode> src)
         {
             LineNumber = number;
             StartPos = start;

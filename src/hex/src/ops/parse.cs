@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The source character</param>
         [MethodImpl(Inline), Op]
-        public static bool parse(AsciCharCode c, out byte dst)
+        public static bool parse(AsciCode c, out byte dst)
         {
             if(scalar(c))
             {
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="c">The source character</param>
         [MethodImpl(Inline), Op]
         public static bool parse(char c, out byte dst)
-            => parse((AsciCharCode)c, out dst);
+            => parse((AsciCode)c, out dst);
 
         [MethodImpl(Inline), Op]
         public static bool parse(char c0, char c1, out byte dst)
@@ -93,14 +93,20 @@ namespace Z0
             return (true,counter);
         }
 
-        public static Outcome parse(ReadOnlySpan<AsciCharCode> src, out ulong dst)
+        public static Outcome parse(ReadOnlySpan<AsciCode> src, out ulong dst)
+        {
+            dst = 0;
+            return parse(src, bytes(dst));
+        }
+
+        public static Outcome parse(ReadOnlySpan<char> src, out ulong dst)
         {
             dst = 0;
             return parse(src, bytes(dst));
         }
 
         [Op]
-        public static Outcome<uint> parse(ReadOnlySpan<AsciCharCode> src, Span<byte> dst)
+        public static Outcome<uint> parse(ReadOnlySpan<AsciCode> src, Span<byte> dst)
         {
             var counter = 0u;
             var count = src.Length;
@@ -132,7 +138,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static bool parse(AsciCharCode c, out HexDigit dst)
+        public static bool parse(AsciCode c, out HexDigit dst)
         {
             if(scalar(c))
             {
@@ -155,7 +161,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool parse(char c, out HexDigit dst)
-            => parse((AsciCharCode)c, out dst);
+            => parse((AsciCode)c, out dst);
 
         [Op]
         public static bool parse(AsciChar src, out HexDigit dst)
@@ -225,7 +231,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit contains(ReadOnlySpan<AsciCharCode> src, AsciCharCode match)
+        static bit contains(ReadOnlySpan<AsciCode> src, AsciCode match)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -235,11 +241,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit whitespace(AsciCharCode src)
+        static bit whitespace(AsciCode src)
             => contains(AsciCodes.whitespace(), src);
 
         [MethodImpl(Inline)]
         static bit whitespace(char src)
-            => whitespace((AsciCharCode)src);
+            => whitespace((AsciCode)src);
     }
 }

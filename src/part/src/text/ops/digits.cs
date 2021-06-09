@@ -10,7 +10,7 @@ namespace Z0
     using static Chars;
     using static core;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     partial class text
     {

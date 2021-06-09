@@ -13,7 +13,7 @@ namespace Z0
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
-        public static bool eq(ReadOnlySpan<char> x, ReadOnlySpan<AsciCharCode> y)
+        public static bool eq(ReadOnlySpan<char> x, ReadOnlySpan<AsciCode> y)
         {
             var count = x.Length;
             if(count != y.Length)
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static bool eq(ReadOnlySpan<AsciCharCode> x, ReadOnlySpan<char> y)
+        public static bool eq(ReadOnlySpan<AsciCode> x, ReadOnlySpan<char> y)
             => eq(y,x);
     }
 }

@@ -260,21 +260,40 @@ namespace Z0
 
         public const char E = 'E';
 
+        /// <summary>
+        /// The 'F' character
+        /// </summary>
         public const char F = 'F';
 
+        /// <summary>
+        /// The 'G' character
+        /// </summary>
         public const char G = 'G';
 
-        public const char H = 'H';
-
         /// <summary>
-        /// The 'h' character
+        /// The 'H' character
         /// </summary>
-        public const char h = 'h';
+        public const char H = 'H';
 
         /// <summary>
         /// The 'X' character
         /// </summary>
         public const char X = 'X';
+
+        /// <summary>
+        /// The 'f' character
+        /// </summary>
+        public const char f = 'f';
+
+        /// <summary>
+        /// The 'g' character
+        /// </summary>
+        public const char g = 'g';
+
+        /// <summary>
+        /// The 'h' character
+        /// </summary>
+        public const char h = 'h';
 
         /// <summary>
         /// The 'x' character

@@ -26,9 +26,9 @@ namespace Z0.Asm
             var outcome = Outcome.Success;
             dst = default;
             var data = src.Content;
-            var space1 = TextTools.next(data, 0, AsciCharCode.Space);
-            Hex.parse(slice(data,0,space1), out var offset);
-            dst = new AsmDisassembly(src.LineNumber, offset, EmptyString, default);
+            var space1 = TextTools.next(data, 0, AsciCode.Space);
+            Hex.parse(slice(data,0, space1), out var offset);
+            dst = new AsmDisassembly(offset, EmptyString, default);
             return outcome;
         }
 

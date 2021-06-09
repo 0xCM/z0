@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static EnvFolders;
-
-    partial interface IEnvPaths
+    public partial interface IEnvPaths
     {
         EnvData Env {get;}
 

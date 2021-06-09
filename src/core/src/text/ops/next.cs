@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     partial struct TextTools
     {
@@ -24,13 +24,25 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint next(ReadOnlySpan<C> src, ref uint i, out C a0, out C a1)
         {
-            a0 = skip(src,i++);
-            a1 = skip(src,i++);
+            a0 = skip(src, i++);
+            a1 = skip(src, i++);
             return 2;
         }
 
         [MethodImpl(Inline), Op]
         public static int next(ReadOnlySpan<C> src, uint offset, C a0)
+        {
+            var i = 0;
+            while(i < src.Length)
+            {
+                if(skip(src,i++) == a0)
+                    return (int)i;
+            }
+            return NotFound;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static int next(ReadOnlySpan<char> src, uint offset, char a0)
         {
             var i = 0;
             while(i < src.Length)

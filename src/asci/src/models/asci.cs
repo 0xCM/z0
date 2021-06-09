@@ -40,10 +40,10 @@ namespace Z0
             get => recover<byte,AsciSymbol>(Data.Edit);
         }
 
-        public Span<AsciCharCode> Codes
+        public Span<AsciCode> Codes
         {
             [MethodImpl(Inline)]
-            get => recover<byte,AsciCharCode>(Data.Edit);
+            get => recover<byte,AsciCode>(Data.Edit);
         }
 
         public int Length

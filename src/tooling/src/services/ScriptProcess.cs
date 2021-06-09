@@ -58,11 +58,17 @@ namespace Z0
             dst.Id = Process.Id;
             dst.StartTime = Process.StartTime;
             dst.HasExited = Process.HasExited;
-            dst.ExitTime = Process.ExitTime;
-            dst.Duration = dst.ExitTime - dst.StartTime;
-            dst.ExitCode = Process.ExitCode;
+            if(Finished)
+            {
+                dst.ExitTime = Process.ExitTime;
+                dst.Duration = dst.ExitTime - dst.StartTime;
+                dst.ExitCode = Process.ExitCode;
+            }
             return ref dst;
         }
+
+        public bool Finished
+            => Process.HasExited;
 
         /// <summary>
         /// Gets the time the process started.
@@ -75,6 +81,9 @@ namespace Z0
         /// </summary>
         public bool HasExited
             => Process.HasExited;
+
+        public bool Running
+            => !Process.HasExited;
 
         /// <summary>
         /// Gets the time the processed Exited.  (HasExited should be <see langword="true"/> before calling)

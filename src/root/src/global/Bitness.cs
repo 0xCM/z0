@@ -4,17 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-
-
-    public interface IWfRoot
+    public enum Bitness : byte
     {
+        None = 0,
 
-    }
+        b16 = 16,
 
-    public interface IWfEvents
-    {
+        b32 = 32,
 
+        b64 = 64
     }
 }

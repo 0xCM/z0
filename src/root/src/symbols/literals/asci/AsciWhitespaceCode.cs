@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     [CodeProvider]
     public enum AsciWhitespaceCode : byte
@@ -26,7 +26,7 @@ namespace Z0
 
     public readonly struct AsciWhitespaceCodes
     {
-        public static ReadOnlySpan<AsciCharCode> Data
-            => new AsciCharCode[6]{C.Space, C.LF, C.CR, C.FF, C.Tab, C.VTab};
+        public static ReadOnlySpan<AsciCode> Data
+            => new AsciCode[6]{C.Space, C.LF, C.CR, C.FF, C.Tab, C.VTab};
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Chars;
     using static core;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     [ApiHost]
     public readonly struct AsmRender

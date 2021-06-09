@@ -13,18 +13,18 @@ namespace Z0
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)
+        public static ReadOnlySpan<AsciCode> codes(sbyte offset, sbyte count)
             => AsciSymbols.codes(offset, (sbyte)(count));
 
         [MethodImpl(Inline), Op]
-        public static void codes(in char src, int count, ref AsciCharCode dst)
+        public static void codes(in char src, int count, ref AsciCode dst)
         {
             for(var i=0u; i<count; i++)
-                seek(dst,i) = (AsciCharCode)skip(src,i);
+                seek(dst,i) = (AsciCode)skip(src,i);
         }
 
         [MethodImpl(Inline), Op]
-        public static void codes(ReadOnlySpan<char> src, Span<AsciCharCode> dst)
+        public static void codes(ReadOnlySpan<char> src, Span<AsciCode> dst)
         {
             var count = root.min(src.Length, dst.Length);
             codes(first(src), count, ref first(dst));

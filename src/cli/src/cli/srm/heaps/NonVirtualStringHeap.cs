@@ -110,7 +110,7 @@ namespace Z0
                 => GetString(handle, MetadataStringDecoder.DefaultUTF8, prefixOpt: null);
 
             [MethodImpl(Inline), Op]
-            public int IndexOf(int offset, AsciCharCode match)
+            public int IndexOf(int offset, AsciCode match)
                 => Block.Utf8NullTerminatedOffsetOfAsciiChar(offset, (char)match);
 
             [MethodImpl(Inline), Op]

@@ -4,19 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static core;
-
     public readonly struct Toolsets
     {
-        public static Index<IToolResultHandler> ResultHandlers(IEnvPaths paths)
-        {
-            var buffer = sys.alloc<IToolResultHandler>(2);
-            ref var dst = ref first(buffer);
-            seek(dst,0) = new MsBuildResultHandler(paths);
-            seek(dst,1) = new RobocopyResultHandler(paths);
-            return buffer;
-        }
-
         public static ToolId robocopy => windows.robocopy;
 
         public static ToolId cmd => windows.cmd;
@@ -43,6 +32,8 @@ namespace Z0
 
         public static ToolId cult => asm.cult;
 
+        public static ToolId bddiasm => asm.bddisasm;
+
         public readonly struct clang
         {
             public static ToolId name => "clang";
@@ -60,7 +51,9 @@ namespace Z0
 
             public static ToolId xed => "xed";
 
-            public const string cult = "cult";
+            public static ToolId bddisasm => "bddisasm";
+
+            public static ToolId cult => "cult";
         }
 
         public readonly struct llvm

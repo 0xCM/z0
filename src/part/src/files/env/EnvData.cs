@@ -75,5 +75,9 @@ namespace Z0
 
         public ulong CpuCount
             => Source.CpuCount;
+
+        public FS.FolderPath AsmWorkspace
+            => Source.AsmWorkspace;
+
     }
 }

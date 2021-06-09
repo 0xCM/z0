@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     partial class XText
     {

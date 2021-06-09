@@ -16,10 +16,10 @@ namespace Z0
 
         FS.FilePath ContextTable<T>(Timestamp ts)
             where T : struct, IRecord<T>
-                => CaptureContextRoot() + FS.file(string.Format("{0}.{1}", Tables.identify<T>(), ts.Format()), FS.Csv);
+                => CaptureContextRoot() + FS.file(string.Format("{0}.{1}", Z0.TableId.identify<T>(), ts.Format()), FS.Csv);
 
         FS.FilePath ContextTable<T>(FS.FolderPath root, Timestamp ts)
             where T : struct, IRecord<T>
-                => CaptureContextRoot(root) + FS.file(string.Format("{0}.{1}", Tables.identify<T>(), ts.Format()), FS.Csv);
+                => CaptureContextRoot(root) + FS.file(string.Format("{0}.{1}", Z0.TableId.identify<T>(), ts.Format()), FS.Csv);
     }
 }

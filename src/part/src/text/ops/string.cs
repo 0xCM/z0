@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="code">The asci code</param>
         [MethodImpl(Inline), Op]
-        public static unsafe string @string(AsciCharCode code)
+        public static unsafe string @string(AsciCode code)
             => new string(gptr<char>((char)code));
 
     }

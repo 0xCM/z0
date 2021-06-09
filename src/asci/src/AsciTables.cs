@@ -15,11 +15,11 @@ namespace Z0
     public readonly struct AsciTables
     {
         [MethodImpl(Inline), Op]
-        static AsciTable table(AsciTableKind kind, AsciCharCode min, AsciCharCode max)
+        static AsciTable table(AsciTableKind kind, AsciCode min, AsciCode max)
             => new AsciTable(kind,min,max);
 
         [MethodImpl(Inline), Op]
-        public static AsciTable segment(AsciCharCode min, AsciCharCode max)
+        public static AsciTable segment(AsciCode min, AsciCode max)
             => new AsciTable(AsciTableKind.None, min,max);
 
         [MethodImpl(Inline), Op]

@@ -17,7 +17,7 @@ namespace Z0
             => new string(gptr(firstchar(src)));
 
         [MethodImpl(Inline), Op]
-        public static string format(ReadOnlySpan<AsciCharCode> src, Span<char> buffer)
+        public static string format(ReadOnlySpan<AsciCode> src, Span<char> buffer)
         {
             var i=0u;
             var count = render(src, ref i, buffer);

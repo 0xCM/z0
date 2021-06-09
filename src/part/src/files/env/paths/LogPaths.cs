@@ -24,10 +24,10 @@ namespace Z0
             => LogRoot(root) + FS.folder(commands);
 
         FS.FolderPath BuildLogRoot()
-            => LogRoot() + FS.folder(build);
+            => LogRoot() + FS.folder(dotbuild);
 
         FS.FolderPath BuildLogRoot(FS.FolderPath root)
-            => LogRoot(root) + FS.folder(build);
+            => LogRoot(root) + FS.folder(dotbuild);
 
         FS.FilePath BuildLogPath(FS.FileName src)
             => BuildLogRoot() + src;

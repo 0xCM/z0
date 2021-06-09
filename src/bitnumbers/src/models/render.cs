@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static Typed;
 
-    using C = AsciCharCode;
+    using C = AsciCode;
 
     partial struct BitNumbers
     {

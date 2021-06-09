@@ -36,6 +36,6 @@ namespace Z0
         /// <summary>
         /// Evidence of absence
         /// </summary>
-        public const byte AsciNone = (byte)AsciCharCode.Null;
+        public const byte AsciNone = (byte)AsciCode.Null;
     }
 }

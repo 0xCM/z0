@@ -20,14 +20,14 @@ namespace Z0
     [ApiHost]
     public readonly struct AsciSymbol : IAsciSeq<C,N>
     {
-        public AsciCharCode Code {get;}
+        public AsciCode Code {get;}
 
         /// <summary>
         /// Returns a string of length 1 that corresponds to the specified asci code
         /// </summary>
         /// <param name="code">The asci code</param>
         [MethodImpl(Inline), Op]
-        static string @string(AsciCharCode code)
+        static string @string(AsciCode code)
         {
             const string buffer = " ";
             edit16c(buffer) = (char)code;
@@ -35,7 +35,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(AsciCharCode src)
+        public static ReadOnlySpan<char> decode(AsciCode src)
         {
             var storage = 0u;
             ref var dst = ref @as<uint,char>(storage);
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public AsciSymbol(AsciCharCode code)
+        public AsciSymbol(AsciCode code)
             => Code = code;
 
         public TextBlock Text
@@ -120,19 +120,19 @@ namespace Z0
             => Code.CompareTo(src.Code);
 
         public static C Empty
-            => new C(AsciCharCode.Null);
+            => new C(AsciCode.Null);
 
         [MethodImpl(Inline)]
-        public static implicit operator C(AsciCharCode src)
+        public static implicit operator C(AsciCode src)
             => new AsciSymbol(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsciCharCode(C src)
+        public static implicit operator AsciCode(C src)
             => src.Code;
 
         [MethodImpl(Inline)]
         public static implicit operator C(char src)
-            => new AsciSymbol((AsciCharCode)src);
+            => new AsciSymbol((AsciCode)src);
 
         [MethodImpl(Inline)]
         public static implicit operator char(C src)
@@ -140,7 +140,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator C(AsciChar src)
-            => new AsciSymbol((AsciCharCode)src);
+            => new AsciSymbol((AsciCode)src);
 
         [MethodImpl(Inline)]
         public static implicit operator AsciChar(C src)
@@ -148,7 +148,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator C(byte src)
-            => new AsciSymbol((AsciCharCode)src);
+            => new AsciSymbol((AsciCode)src);
 
         [MethodImpl(Inline)]
         public static implicit operator byte(C src)

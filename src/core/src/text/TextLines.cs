@@ -10,9 +10,9 @@ namespace Z0
     using static Root;
     using static core;
 
-    using CC = AsciCharCode;
+    using CC = AsciCode;
 
-    using static AsciCharCode;
+    using static AsciCode;
 
     [ApiHost]
     public readonly struct TextLines
@@ -36,10 +36,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AsciLine asci(ReadOnlySpan<byte> src, uint number, uint offset, uint chars)
-            => new AsciLine(number, offset, core.recover<AsciCharCode>(core.slice(src, offset, chars)));
+            => new AsciLine(number, offset, core.recover<AsciCode>(core.slice(src, offset, chars)));
 
         [MethodImpl(Inline), Op]
-        public static AsciLine asci(ReadOnlySpan<AsciCharCode> src, uint number, uint start, uint chars)
+        public static AsciLine asci(ReadOnlySpan<AsciCode> src, uint number, uint start, uint chars)
             => new AsciLine(number, start, core.slice(src, start, chars));
 
         [MethodImpl(Inline), Op]

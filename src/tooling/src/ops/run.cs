@@ -29,12 +29,22 @@ namespace Z0
         public static ScriptProcess run(CmdLine command, Receiver<string> status, Receiver<string> error)
         {
             var options = new ScriptProcessOptions();
-            options.WithReceivers(status,error);
+            options.WithReceivers(status, error);
             return new ScriptProcess(command,options);
         }
 
         [MethodImpl(Inline), Op]
-        public static ScriptProcess run(CmdLine command, TextWriter output)
-            => new ScriptProcess(command, new ScriptProcessOptions(output));
+        public static ScriptProcess run(CmdLine command, TextWriter dst)
+            => new ScriptProcess(command, new ScriptProcessOptions(dst));
+
+
+        [MethodImpl(Inline), Op]
+        public static ScriptProcess run(CmdLine command, TextWriter dst, Receiver<string> status, Receiver<string> error)
+        {
+            var options = new ScriptProcessOptions(dst);
+            options.WithReceivers(status, error);
+            return new ScriptProcess(command, options);
+        }
+
     }
 }

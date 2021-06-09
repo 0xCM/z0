@@ -12,6 +12,10 @@ namespace Z0
     partial struct Hex
     {
         [MethodImpl(Inline), Op]
+        public static HexString hexString(ReadOnlySpan<AsciCode> src)
+            => new HexString(src);
+
+        [MethodImpl(Inline), Op]
         public static HexString<Hex1Seq> hexstring(N1 n)
             => hexstring<Hex1Seq>();
 

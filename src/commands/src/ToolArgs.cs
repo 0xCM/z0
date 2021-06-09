@@ -16,7 +16,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         public static ToolCmdArgs args<T>(T src)
-            where T : struct, IToolCmd<T>
+            where T : struct, IToolCmd
                 => typeof(T).DeclaredInstanceFields().Select(f => new ToolCmdArg(f.Name, f.GetValue(src)?.ToString() ?? EmptyString));
 
         [Op]

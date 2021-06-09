@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="b">The second asci character</param>
         [MethodImpl(Inline), Op]
         public static asci2 encode(char a, char b)
-            => new asci2(pack((AsciCharCode)a, (AsciCharCode)b));
+            => new asci2(pack((AsciCode)a, (AsciCode)b));
 
         /// <summary>
         /// Encodes a 3-character asci sequence
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="c">The third asci character</param>
         [MethodImpl(Inline), Op]
         public static asci4 encode(char a, char b, char c)
-            => new asci4(pack((AsciCharCode)a, (AsciCharCode)b, (AsciCharCode)c, out var _ ));
+            => new asci4(pack((AsciCode)a, (AsciCode)b, (AsciCode)c, out var _ ));
 
         /// <summary>
         /// Encodes a 4-character asci sequence
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="b">The second asci character</param>
         [MethodImpl(Inline), Op]
         public static asci4 encode(char a, char b, char c, char d)
-            => new asci4(pack((AsciCharCode)a, (AsciCharCode)b, (AsciCharCode)c, (AsciCharCode)d, out var _ ));
+            => new asci4(pack((AsciCode)a, (AsciCode)b, (AsciCode)c, (AsciCode)d, out var _ ));
 
         /// <summary>
         /// Converts 16 source characters to 16 asci codes
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="count">The number of source characters to convert</param>
         /// <param name="dst">The receiving buffer</param>
         [MethodImpl(Inline), Op]
-        public static void encode(in char src, uint offset, N16 count, ref AsciCharCode dst)
+        public static void encode(in char src, uint offset, N16 count, ref AsciCode dst)
             => cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, memory.skip(src, offset))), ref @byte(dst));
 
         /// <summary>
@@ -90,8 +90,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The character to encode</param>
         [MethodImpl(Inline), Op]
-        public static AsciCharCode encode(char src)
-            => (AsciCharCode)src;
+        public static AsciCode encode(char src)
+            => (AsciCode)src;
 
         [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, ref byte dst)
@@ -138,7 +138,7 @@ namespace Z0
         public static ref readonly asci2 encode(in char src, Hex1Seq count, out asci2 dst)
         {
             dst = asci2.Null;
-            ref var codes = ref Unsafe.As<asci2,AsciCharCode>(ref dst);
+            ref var codes = ref Unsafe.As<asci2,AsciCode>(ref dst);
             Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
@@ -153,7 +153,7 @@ namespace Z0
         public static ref readonly asci4 encode(in char src, Hex2Seq count, out asci4 dst)
         {
             dst = asci4.Null;
-            ref var codes = ref Unsafe.As<asci4,AsciCharCode>(ref dst);
+            ref var codes = ref Unsafe.As<asci4,AsciCode>(ref dst);
             Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
@@ -168,7 +168,7 @@ namespace Z0
         public static ref readonly asci8 encode(in char src, Hex3Seq count, out asci8 dst)
         {
             dst = asci8.Null;
-            ref var codes = ref Unsafe.As<asci8,AsciCharCode>(ref dst);
+            ref var codes = ref Unsafe.As<asci8,AsciCode>(ref dst);
             Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
@@ -183,7 +183,7 @@ namespace Z0
         public static ref readonly asci16 encode(in char src, Hex4Seq count, out asci16 dst)
         {
             dst = asci16.Null;
-            ref var codes = ref Unsafe.As<asci16,AsciCharCode>(ref dst);
+            ref var codes = ref Unsafe.As<asci16,AsciCode>(ref dst);
             Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
@@ -198,7 +198,7 @@ namespace Z0
         public static ref readonly asci32 encode(in char src, Hex5Seq count, out asci32 dst)
         {
             dst = asci32.Null;
-            ref var codes = ref Unsafe.As<asci32,AsciCharCode>(ref dst);
+            ref var codes = ref Unsafe.As<asci32,AsciCode>(ref dst);
             Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
@@ -213,7 +213,7 @@ namespace Z0
         public static ref readonly asci64 encode(in char src, Hex6Seq count, out asci64 dst)
         {
             dst = asci64.Null;
-            ref var codes = ref Unsafe.As<asci64,AsciCharCode>(ref dst);
+            ref var codes = ref Unsafe.As<asci64,AsciCode>(ref dst);
             Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
@@ -224,11 +224,11 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The data target</param>
         [MethodImpl(Inline), Op]
-        public static int encode(ReadOnlySpan<char> src, Span<AsciCharCode> dst)
+        public static int encode(ReadOnlySpan<char> src, Span<AsciCode> dst)
         {
             var count = Math.Min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = (AsciCharCode)skip(src,i);
+                seek(dst,i) = (AsciCode)skip(src,i);
             return count;
         }
 
@@ -240,12 +240,12 @@ namespace Z0
         /// <param name="count"></param>
         /// <param name="dst">The data target</param>
         [MethodImpl(Inline), Op]
-        public static uint encode(ReadOnlySpan<char> src, uint offset, uint count, Span<AsciCharCode> dst)
+        public static uint encode(ReadOnlySpan<char> src, uint offset, uint count, Span<AsciCode> dst)
         {
             ref readonly var input = ref skip(src, offset);
             ref var target = ref memory.first(dst);
             for(var i=0u; i<count; i++)
-                seek(target, i) = (AsciCharCode)skip(input,i);
+                seek(target, i) = (AsciCode)skip(input,i);
             return count;
         }
 
@@ -265,7 +265,7 @@ namespace Z0
         public static ref readonly asci2 encode(ReadOnlySpan<char> src, out asci2 dst)
         {
             dst = default;
-            codes(src, span<asci2,AsciCharCode>(ref dst));
+            codes(src, span<asci2,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -278,7 +278,7 @@ namespace Z0
         public static ref readonly asci4 encode(ReadOnlySpan<char> src, out asci4 dst)
         {
             dst = default;
-            codes(src, span<asci4,AsciCharCode>(ref dst));
+            codes(src, span<asci4,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -291,7 +291,7 @@ namespace Z0
         public static ref readonly asci8 encode(ReadOnlySpan<char> src, out asci8 dst)
         {
             dst = default;
-            codes(src, span<asci8,AsciCharCode>(ref dst));
+            codes(src, span<asci8,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -304,7 +304,7 @@ namespace Z0
         public static ref readonly asci16 encode(ReadOnlySpan<char> src, out asci16 dst)
         {
             dst = asci16.Spaced;
-            codes(src, span<asci16,AsciCharCode>(ref dst));
+            codes(src, span<asci16,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -317,7 +317,7 @@ namespace Z0
         public static ref readonly asci32 encode(ReadOnlySpan<char> src, out asci32 dst)
         {
             dst = asci32.Spaced;
-            codes(src, span<asci32,AsciCharCode>(ref dst));
+            codes(src, span<asci32,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -330,7 +330,7 @@ namespace Z0
         public static ref readonly asci64 encode(ReadOnlySpan<char> src, out asci64 dst)
         {
             dst = asci64.Spaced;
-            codes(src, span<asci64,AsciCharCode>(ref dst));
+            codes(src, span<asci64,AsciCode>(ref dst));
             return ref dst;
         }
 

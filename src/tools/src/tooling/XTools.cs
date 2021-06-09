@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static core;
+
     using Z0.Tools;
 
     using Svc = Tools;
@@ -60,5 +62,19 @@ namespace Z0
         [Op]
         public static LlvmAssetCatalog LlvmAssets(this IWfRuntime wf)
             => Svc.LlvmAssetCatalog.create(wf);
+
+        [Op]
+        public static BdDisasm BdDisasm(this IEnvContext ctx)
+            => Svc.BdDisasm.create(ctx);
+
+        public static Index<IToolResultHandler> ResultHandlers(this IEnvPaths paths)
+        {
+            var buffer = sys.alloc<IToolResultHandler>(2);
+            ref var dst = ref first(buffer);
+            seek(dst,0) = new MsBuildResultHandler(paths);
+            seek(dst,1) = new RobocopyResultHandler(paths);
+            return buffer;
+        }
+
     }
 }

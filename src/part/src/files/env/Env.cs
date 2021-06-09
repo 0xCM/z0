@@ -16,6 +16,7 @@ namespace Z0
 
         public static Env load()
             => new Env();
+
         Env()
         {
             var dst = this;
@@ -38,6 +39,7 @@ namespace Z0
             dst.VendorDocs = dir(N.VendorDocs);
             dst.CapturePacks = dir(N.CapturePacks);
             dst.CpuCount = number(N.CpuCount);
+            dst.AsmWorkspace = dir(N.AsmWorkspace);
         }
 
         public EnvDirVar ZDev;
@@ -77,6 +79,8 @@ namespace Z0
         public EnvDirVar CapturePacks;
 
         public EnvVar<ulong> CpuCount;
+
+        public EnvDirVar AsmWorkspace;
 
         public EnvData Data
             => new EnvData(this);

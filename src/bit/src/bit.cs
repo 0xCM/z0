@@ -135,8 +135,8 @@ namespace Z0
             => State ? '1' : '0';
 
         [MethodImpl(Inline)]
-        public AsciCharCode ToCharCode()
-            => State ? AsciCharCode.d1 : AsciCharCode.d0;
+        public AsciCode ToCharCode()
+            => State ? AsciCode.d1 : AsciCode.d0;
 
         [MethodImpl(Inline)]
         public BitChar ToBitChar()

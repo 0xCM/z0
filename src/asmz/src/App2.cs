@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
+    using System.Threading;
     using System.Collections.Generic;
     using System.Reflection.Metadata.Ecma335;
 
@@ -769,11 +770,7 @@ namespace Z0.Asm
                     }
                 }
                 Wf.Ran(flow);
-
-
             }
-
-
         }
 
         void CheckRowFormat()
@@ -900,18 +897,9 @@ namespace Z0.Asm
         }
 
 
-        Index<AsciCharCode> IndexIdentifiers()
+        Index<AsciCode> IndexIdentifiers()
         {
             var symbols = Symbols.index<XedModels.IFormType>().View;
-            // var count = symbols.Length;
-            // var identifiers = alloc<string>(count);
-            // Symbols.identifiers(symbols, identifiers);
-            // var size = TextTools.charcount(identifiers) + count;
-            // Wf.Status(string.Format("{0} {1}", count, size));
-            // var dst = alloc<AsciCharCode>(size);
-            // TextTools.pack(identifiers,dst);
-            // return dst;
-
             var count = symbols.Length;
             var size = ByteSize.Zero;
             for(var i=0; i<count; i++)
@@ -922,7 +910,7 @@ namespace Z0.Asm
                 size += ((uint)name.Length + 1);
             }
 
-            var buffer = alloc<AsciCharCode>(size);
+            var buffer = alloc<AsciCode>(size);
 
             Wf.Status(string.Format("Allocated {0} bytes for {1} symbols", size, count));
 
@@ -933,13 +921,13 @@ namespace Z0.Asm
                 ref readonly var s = ref skip(symbols,i);
                 var name = @span(s.Name);
                 for(var j=0; j<name.Length; j++)
-                    seek(dst,k++) = (AsciCharCode)skip(name,j);
-                seek(dst,k++) = AsciCharCode.Null;
+                    seek(dst,k++) = (AsciCode)skip(name,j);
+                seek(dst,k++) = AsciCode.Null;
             }
             return buffer;
         }
 
-        public void Emit(ReadOnlySpan<AsciCharCode> src, FS.FilePath dst)
+        public void Emit(ReadOnlySpan<AsciCode> src, FS.FilePath dst)
         {
             var emitting = Wf.EmittingFile(dst);
             using var writer = dst.AsciWriter();
@@ -949,7 +937,7 @@ namespace Z0.Asm
             while(i++<count)
             {
                 ref readonly var c = ref skip(src,i);
-                if(c == AsciCharCode.Null)
+                if(c == AsciCode.Null)
                 {
                     writer.WriteLine();
                     lines++;
@@ -960,16 +948,64 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, lines);
         }
 
-        void CheckIdentifierIndex()
+        void Run(AsmToolchainSpec spec)
         {
-            var src = IndexIdentifiers();
-            var dst = Db.AppLog("iformst");
-            Emit(src,dst);
+            var stdout = list<string>();
+            var counter = 0u;
+            void OnStatus(in string data)
+            {
+                if(nonempty(data))
+                {
+                    stdout.Add(data);
+                }
+            }
+
+            void OnError(in string data)
+            {
+                if(nonempty(data))
+                {
+                    Wf.Error(data);
+                }
+            }
+
+            var tool = Wf.BdDisasm();
+            var cmd = tool.Cmd(spec);
+            var cmdline = tool.CmdLine(cmd);
+            var flow = Wf.Running(cmdline.Format());
+            using var writer = cmd.OutputFile.Writer();
+            var process = ToolCmd.run(cmdline, writer, OnStatus, OnError);
+
+            process.Wait();
+            stdout.Sort();
+            var collected = stdout.ViewDeposited();
+            var count = collected.Length;
+            var buffer = alloc<TextLine>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                seek(dst,i) = new TextLine(i + 1,skip(collected,i));
+            }
+
+            iter(buffer, line => Wf.Row(line));
+
+            Wf.Ran(flow);
+
+        }
+
+        public void CheckTools()
+        {
+
+            var workspace = Wf.AsmWorkspace();
+            var src = "and";
+            var spec = workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, src);
+            Run(spec);
+
+
         }
 
         public void Run()
         {
-            CheckIdentifierIndex();
+            CheckTools();
             //RunExtractWorkflow();
             //ProcessStatementIndex();
             //ParseDisassembly();

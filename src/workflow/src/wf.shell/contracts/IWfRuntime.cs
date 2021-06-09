@@ -16,7 +16,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface IWfRuntime : IDisposable, ITextual
+    public interface IWfRuntime : IDisposable, ITextual, IEnvContext
     {
         IAppPaths Paths {get;}
 
@@ -52,7 +52,7 @@ namespace Z0
 
         IWfRuntime WithSource(IPolySource source);
 
-        EnvData Env {get;}
+        //EnvData Env {get;}
 
         ExecToken Ran(WfExecFlow src);
 

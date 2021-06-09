@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
 
-    using static AsciCharCode;
+    using static AsciCode;
     using static core;
 
     using Facets = AsciCodeFacets;
 
     partial struct AsciCharData
     {
-        public static ReadOnlySpan<AsciCharCode> LowerLetterCodes => new AsciCharCode[Facets.LowerCount]{
+        public static ReadOnlySpan<AsciCode> LowerLetterCodes => new AsciCode[Facets.LowerCount]{
             a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
             };
 
-        public static ReadOnlySpan<AsciCharCode> UpperLetterCodes => new AsciCharCode[Facets.UpperCount]{
+        public static ReadOnlySpan<AsciCode> UpperLetterCodes => new AsciCode[Facets.UpperCount]{
             A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
             };
 

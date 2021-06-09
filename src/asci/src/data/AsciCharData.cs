@@ -57,10 +57,10 @@ namespace Z0
             120, 121,122, 123, 124, 125, 126, 127,
         };
 
-        public static ReadOnlySpan<AsciCharCode> Codes
+        public static ReadOnlySpan<AsciCode> Codes
         {
             [MethodImpl(Inline)]
-            get => recover<AsciCharCode>(CodeBytes);
+            get => recover<AsciCode>(CodeBytes);
         }
 
         public static ReadOnlySpan<char> Chars

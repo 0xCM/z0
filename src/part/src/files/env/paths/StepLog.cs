@@ -23,12 +23,12 @@ namespace Z0
 
         StreamWriter Writer;
 
-        internal StepLog(FS.FilePath dst)
+        public StepLog(FS.FilePath dst)
         {
             Writer = dst.Writer();
         }
 
-        internal StepLog(StreamWriter writer)
+        public StepLog(StreamWriter writer)
         {
             Writer = writer;
         }

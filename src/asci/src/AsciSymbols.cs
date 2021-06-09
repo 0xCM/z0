@@ -19,8 +19,8 @@ namespace Z0
             => text.slice(AsciCharString, offset, count);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCharCode> codes(in asci16 src)
-            => recover<AsciCharCode>(bytes(src));
+        public static ReadOnlySpan<AsciCode> codes(in asci16 src)
+            => recover<AsciCode>(bytes(src));
 
         /// <summary>
         /// Returns the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -28,8 +28,8 @@ namespace Z0
         /// <param name="offset">The zero-based offset</param>
         /// <param name="count">Tne number of codes to select</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)
-            => recover<AsciCharCode>(slice(AsciCharData.CodeBytes, offset, count));
+        public static ReadOnlySpan<AsciCode> codes(sbyte offset, sbyte count)
+            => recover<AsciCode>(slice(AsciCharData.CodeBytes, offset, count));
 
         /// <summary>
         /// Returns the asci characters corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count

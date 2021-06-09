@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool newline(char c)
-            => (ushort)AsciCharCode.LF == (ushort)c
-            || (ushort)AsciCharCode.CR == (ushort)c;
+            => (ushort)AsciCode.LF == (ushort)c
+            || (ushort)AsciCode.CR == (ushort)c;
     }
 }
