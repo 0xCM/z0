@@ -13,9 +13,11 @@ namespace Z0
     {
         IWfRuntime Wf {get;}
 
-        EnvData Env => Wf.Env;
+        IWfDb Db
+            => Wf.Db();
 
-        IWfDb Db => Wf.Db();
+        EnvData IEnvProvider.Env
+            => Wf.Env;
 
         void Init(IWfRuntime wf);
 
@@ -32,13 +34,5 @@ namespace Z0
         where H : IAppService<H>, new()
     {
 
-    }
-
-    [Free]
-    public interface IAppService<H,C> : IAppService<H>, IService<H,C>
-        where H : IAppService<H,C>, new()
-    {
-        Type IService.ContractType
-            => typeof(C);
     }
 }

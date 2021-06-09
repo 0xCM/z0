@@ -16,10 +16,8 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface IWfRuntime : IDisposable, ITextual, IEnvContext
+    public interface IWfRuntime : IDisposable, ITextual, IServiceContext
     {
-        IAppPaths Paths {get;}
-
         IJsonSettings Settings {get;}
 
         IApiParts ApiParts {get;}
@@ -36,7 +34,7 @@ namespace Z0
 
         IWfContext Context {get;}
 
-        IEventSink EventSink {get;}
+        //IEventSink EventSink {get;}
 
         IEventBroker EventBroker {get;}
 

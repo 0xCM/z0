@@ -23,7 +23,7 @@ namespace Z0
         public TextRow(params TextBlock[] src)
             => Data = src;
 
-        public readonly Index<TextBlock> Cells
+        public readonly ReadOnlySpan<TextBlock> Cells
         {
             [MethodImpl(Inline)]
             get => Data;

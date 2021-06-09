@@ -11,8 +11,8 @@ namespace Z0
     using static Part;
     using static core;
 
-    [ApiHost, RecordSet]
-    public readonly partial struct CliRows : IRecordSet<CliRows>
+    [ApiHost, RecordGroup]
+    public readonly partial struct CliRows
     {
         [MethodImpl(Inline)]
         public static T create<T>()

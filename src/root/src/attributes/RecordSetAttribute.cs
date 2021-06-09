@@ -7,16 +7,16 @@ namespace Z0
     using System;
 
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class)]
-    public class RecordSetAttribute : Attribute
+    public class RecordGroupAttribute : Attribute
     {
         public string Docs {get;}
 
-        public RecordSetAttribute()
+        public RecordGroupAttribute()
         {
             Docs = string.Empty;
         }
 
-        public RecordSetAttribute(string docs)
+        public RecordGroupAttribute(string docs)
         {
             Docs = string.Empty;
         }

@@ -140,7 +140,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var count = src.CellCount;
-            var cells = src.Cells.View;
+            var cells = src.Cells;
             var i=0;
             if(count == AsmApiStatement.FieldCount)
             {

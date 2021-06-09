@@ -64,7 +64,7 @@ namespace Z0
             => Svc.LlvmAssetCatalog.create(wf);
 
         [Op]
-        public static BdDisasm BdDisasm(this IEnvContext ctx)
+        public static BdDisasm BdDisasm(this IServiceContext ctx)
             => Svc.BdDisasm.create(ctx);
 
         public static Index<IToolResultHandler> ResultHandlers(this IEnvPaths paths)
@@ -75,6 +75,5 @@ namespace Z0
             seek(dst,1) = new RobocopyResultHandler(paths);
             return buffer;
         }
-
     }
 }

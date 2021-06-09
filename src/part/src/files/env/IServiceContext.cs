@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class AsciLineProcessor<T> : TextProcessor<T>
+    public interface IServiceContext : IEnvProvider
     {
-        protected AsciLineProcessor(IEventSink sink)
-            : base(sink)
-        {
-        }
+        IEventSink EventSink {get;}
+
+        IAppPaths AppPaths {get;}
     }
 }

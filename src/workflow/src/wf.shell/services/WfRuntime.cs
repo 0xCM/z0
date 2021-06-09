@@ -26,7 +26,7 @@ namespace Z0
 
         public string[] Args {get;}
 
-        public IAppPaths Paths {get;}
+        public IAppPaths AppPaths {get;}
 
         public IJsonSettings Settings {get;}
 
@@ -63,7 +63,7 @@ namespace Z0
             Host = new WfHost(typeof(WfRuntime), typeof(WfRuntime));
             Polysource = default;
             Verbosity = LogLevel.Status;
-            Paths = config.Shell.Paths;
+            AppPaths = config.Shell.Paths;
             Args = config.Shell.Args;
             Settings = config.Shell.Settings;
             ApiParts = config.ApiParts;

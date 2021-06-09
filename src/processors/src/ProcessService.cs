@@ -4,79 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class ProcessService : IProcessService
+    public abstract class ProcessService<H,T> : Service<H>
+        where H : ProcessService<H,T>,  new()
     {
-        WfHost Host {get;}
-
-        IEventSink Sink {get;}
-
-        EventSignal Signal {get;}
-
-        protected ProcessService(IEventSink sink)
+        public static H create(IServiceContext context, Receiver<T> receiver)
         {
-            Sink = sink;
-            Host = GetType();
-            Signal = EventSignal.create(sink, Host);
+            var service = create(context);
+            service.Receiver = receiver;
+            return service;
         }
 
-        protected BabbleEvent<T> Babble<T>(T src)
+        protected ProcessService()
         {
-            return Signal.Babble(src);
+
         }
 
-        protected StatusEvent<T> Status<T>(T src)
-        {
-            return Signal.Status(src);
-        }
-
-        protected ErrorEvent<T> Error<T>(T src)
-        {
-            return Signal.Error(src);
-        }
-
-        protected ProcessingFileEvent Processing(FS.FilePath src)
-        {
-            return Signal.Processing(src);
-        }
-
-        protected RunningEvent Running()
-        {
-            return Signal.Running();
-        }
-
-        protected RunningEvent<T> Running<T>(T data)
-        {
-            return Signal.Running(data);
-        }
-
-        protected RanEvent<T> Ran<T>(RunningEvent<T> e, T data)
-        {
-            return Signal.Ran(data);
-        }
-
-        protected ProcessedFileEvent Processed(ProcessingFileEvent e)
-        {
-            return Signal.Processed(e.SourcePath);
-        }
-
-        protected EmittingFileEvent Emitting(FS.FilePath src)
-        {
-            return Signal.EmittingFile(src);
-        }
-
-        protected EmittedFileEvent Emitted(FS.FilePath src)
-        {
-            return Signal.EmittedFile(src);
-        }
-
-        protected EmittedFileEvent Emitted(EmittingFileEvent e, Count metric)
-        {
-            return Signal.EmittedFile(metric, e.Target);
-        }
-
-        protected EmittedFileEvent Emitted(Count metric, FS.FilePath src)
-        {
-            return Signal.EmittedFile(metric, src);
-        }
+        protected Receiver<T> Receiver {get; private set;}
     }
 }

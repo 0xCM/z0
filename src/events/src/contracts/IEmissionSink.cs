@@ -4,16 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    /// <summary>
-    /// Characterizes a reified event
-    /// </summary>
-    /// <typeparam name="H">The reifying type</typeparam>
     [Free]
-    public interface IWfEvent<H> : IWfEvent, IAppEvent<H>
-        where H : IWfEvent<H>, new()
+    public interface IEmissionSink : IEventSink, IDisposable
+    {
+
+    }
+
+    [Free]
+    public interface IEmissionSink<S> : IEmissionSink
+        where S : IEmissionSink<S>
     {
 
     }

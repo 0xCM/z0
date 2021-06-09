@@ -4,13 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     [Free]
-    public interface IRecordSet<T>
-        where T : struct, IRecordSet<T>
+    public interface IWfEvent : IAppEvent
     {
+        EventId EventId {get;}
 
+        WfStepId StepId
+            => WfStepId.Empty;
     }
 }

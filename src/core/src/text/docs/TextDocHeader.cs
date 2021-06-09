@@ -26,6 +26,12 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        public uint CellCount
+        {
+            [MethodImpl(Inline)]
+            get => Labels.Count;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

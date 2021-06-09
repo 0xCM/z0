@@ -6,8 +6,18 @@ namespace Z0
 {
     using System;
 
-    public interface IEnvContext
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IEventSink<E> : ISink<E>
+        where E : IWfEvent
     {
-        EnvData Env {get;}
+
+    }
+
+    [Free]
+    public interface IEventSink : IEventSink<IWfEvent>, IDisposable
+    {
+
     }
 }

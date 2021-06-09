@@ -32,7 +32,7 @@ namespace Z0.Tools
         protected override void Initialized()
         {
             Workspace = AsmWorkspace.create(Env.AsmWorkspace);
-            BuildDir = Workspace.External + FS.folder(Id.Format()) + FS.folder(src) + FS.folder(build);
+            BuildDir = Workspace.External() + FS.folder(Id.Format()) + FS.folder(src) + FS.folder(build);
             ToolPath = BuildDir + FS.file(Id.Format(), FS.Exe);
         }
 

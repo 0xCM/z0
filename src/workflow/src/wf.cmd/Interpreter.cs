@@ -9,9 +9,9 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Threading.Tasks;
 
-    using static Part;
+    using static Root;
 
-    public abstract class Interpreter<H> : IAppService<H,IInterpreter>, IInterpreter
+    public abstract class Interpreter<H> : IAppService<H>, IInterpreter
         where H : Interpreter<H>, new()
     {
         public IWfRuntime Wf {get; private set;}

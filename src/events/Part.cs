@@ -23,13 +23,6 @@ namespace Z0
     [ApiHost]
     public static partial class XTend
     {
-        // [MethodImpl(Inline), Op]
-        // public static EventSignal Signal(this IEventSink sink, WfHost source)
-        //     => EventSignal.create(sink, source);
-
-        // [MethodImpl(Inline), Op]
-        // public static EventSignal Signal<T>(this IEventSink sink)
-        //     => EventSignal.create(sink, typeof(T));
     }
 
     partial struct Msg

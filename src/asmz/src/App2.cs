@@ -684,7 +684,7 @@ namespace Z0.Asm
             var totalSize = ByteSize.Zero;
             var dst = Db.AppLog("statements.bitstrings", FS.Csv);
             using var worker = new AsmIndexWorker(dst);
-            var processor = AsmIndexProcessor.create(Wf.EventSink, worker.Deposit);
+            var processor = AsmIndexProcessor.create(Wf, worker.Deposit);
             var packs = Wf.ApiPacks();
             var current = packs.Current();
             var archive = ApiPackArchive.create(current.Root);
@@ -763,7 +763,7 @@ namespace Z0.Asm
             var packs = Wf.ApiPacks();
             var current = packs.Current();
             var archive = ApiPackArchive.create(current.Root);
-            var processor = AsmIndexProcessor.create(DevNull.BlackHole, Receive);
+            var processor = AsmIndexProcessor.create(Wf, Receive);
             var path = archive.StatementIndexPath();
             processor.ProcessFile(path);
         }

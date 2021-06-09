@@ -136,7 +136,7 @@ namespace Z0.Asm
 
         Outcome LoadRow(TextRow src, out CpuIdRow dst)
         {
-            var input = src.Cells.View;
+            var input = src.Cells;
             var i = 0;
             var outcome = Outcome.Success;
             outcome += DataParser.parse(skip(input,i++), out dst.Leaf);
@@ -150,7 +150,7 @@ namespace Z0.Asm
 
         Outcome LoadRow(TextRow src, out AsmDetailRow dst)
         {
-            var input = src.Cells.View;
+            var input = src.Cells;
             var i = 0;
             var outcome = Outcome.Empty;
             dst = default;

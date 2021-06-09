@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    public abstract class TextProcessor<T> : ProcessService<T>, ITextProcessor<T>
+    public abstract class TextProcessor<H,T> : ProcessService<H,T>, ITextProcessor<T>
+        where H : TextProcessor<H,T>, new()
     {
         public Outcome<T> ProcessLine(uint number, ReadOnlySpan<char> chars)
         {
@@ -18,16 +19,6 @@ namespace Z0
 
         public abstract void ProcessFile(FS.FilePath src);
 
-        protected TextProcessor(IEventSink sink)
-            : base(sink)
-        {
-        }
-
-        protected TextProcessor(IEventSink sink, Receiver<T> receiver)
-            : base(sink, receiver)
-        {
-
-        }
 
         protected abstract Outcome<T> Process(uint number, ReadOnlySpan<char> chars);
 

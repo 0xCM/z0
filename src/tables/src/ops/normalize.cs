@@ -37,7 +37,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                var cells = row.Cells.View;
+                var cells = row.Cells;
                 if(row.CellCount != fieldCount)
                     return (false, Tables.FieldCountMismatch.Format(fieldCount, row.CellCount));
 

@@ -109,7 +109,7 @@ namespace Z0.Asm
         {
             var paths = Db.TableDir<AsmCallRow>().AllFiles.View;
             var flow = Wf.Running(string.Format("Loading {0} call recordsets", paths.Length));
-            var dst = root.list<AsmCallRow>();
+            var dst = list<AsmCallRow>();
             var count = paths.Length;
             for(var i=0; i<count; i++)
             {
@@ -124,7 +124,7 @@ namespace Z0.Asm
                         ref readonly var row = ref skip(rows,j);
                         if(row.CellCount == AsmCallRow.FieldCount)
                         {
-                            var cells = row.Cells.View;
+                            var cells = row.Cells;
                             var record = new AsmCallRow();
                             var k = 0;
                             DataParser.eparse(skip(cells, k++).Text, out record.SourcePart);

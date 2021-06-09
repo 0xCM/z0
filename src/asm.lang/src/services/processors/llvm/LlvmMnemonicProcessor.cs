@@ -8,18 +8,13 @@ namespace Z0.Asm
 
     using C = AsciCode;
 
-    sealed class LlvmMnemonicProcessor : LlvmTextProcessor<MnemonicIndexEntry>
+    sealed class LlvmMnemonicProcessor //: LlvmTextProcessor<MnemonicIndexEntry>
     {
-        public LlvmMnemonicProcessor(IEventSink sink)
-            : base(sink)
-        {
-
-        }
 
         //EG:
         //  /* 0 */ "prefetcht0\t\0"
         //  /* 12 */ "sha1msg1\t\0"
-        protected override Outcome ProcessLine(ref AsciLine src, out MnemonicIndexEntry dst)
+        public static Outcome ProcessLine(ref AsciLine src, out MnemonicIndexEntry dst)
         {
             dst = default;
             var i = src.StartPos;
@@ -38,6 +33,5 @@ namespace Z0.Asm
 
             return true;
         }
-
     }
 }

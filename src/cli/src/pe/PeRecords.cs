@@ -9,8 +9,8 @@ namespace Z0
 
     using static Root;
 
-    [RecordSet]
-    public readonly partial struct PeRecords : IRecordSet<PeRecords>
+    [RecordGroup]
+    public readonly partial struct PeRecords
     {
         [MethodImpl(Inline), Op]
         public static DirectoryEntryRow directory(Address32 rva, uint size)

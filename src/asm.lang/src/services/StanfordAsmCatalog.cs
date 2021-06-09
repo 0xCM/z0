@@ -84,7 +84,7 @@ namespace Z0.Asm
         void Fill(in TextRow src, ref StokeAsmImportRow dst, ushort? seq = null)
         {
             var i = 0;
-            var cells = src.Cells.View;
+            var cells = src.Cells;
             if(seq == null)
                 ScalarParser.parse(skip(cells,i++), out dst.Sequence);
             else

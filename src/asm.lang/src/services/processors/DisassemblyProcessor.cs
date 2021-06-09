@@ -13,13 +13,8 @@ namespace Z0.Asm
     using static Typed;
 
     [ApiHost]
-    public class DisassemblyProcessor : AsciTextProcessor<AsmDisassembly>
+    public class DisassemblyProcessor : AsciTextProcessor<DisassemblyProcessor,AsmDisassembly>
     {
-        public DisassemblyProcessor(IEventSink sink)
-            : base(sink)
-        {
-
-        }
 
         protected override Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
         {

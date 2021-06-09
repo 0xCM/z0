@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IEnvProvider
+    public readonly struct DevNull : IEventSink
     {
-        EnvData Env {get;}
+        public static IEventSink BlackHole => default(DevNull);
 
-        IEnvPaths EnvPaths
-            => new EnvPaths(Env);
+        public void Deposit(IWfEvent src){ }
+
+        public void Dispose(){ }
     }
 }

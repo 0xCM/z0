@@ -18,7 +18,7 @@ namespace Z0.Asm
             => JsonSettings.Load(src);
 
         public static ICheckContext context(IWfRuntime wf)
-            => new CheckContext(wf.Paths, Rng.@default(), json(wf.Paths.AppConfigPath), MsgExchange.Create());
+            => new CheckContext(wf.AppPaths, Rng.@default(), json(wf.AppPaths.AppConfigPath), MsgExchange.Create());
 
         public IAsmContext Context {get;}
 

@@ -6,17 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
-    public sealed class AsmIndexProcessor : AsciTextProcessor<AsmIndex>
+    public sealed class AsmIndexProcessor : AsciTextProcessor<AsmIndexProcessor,AsmIndex>
     {
-        public static ITextProcessor<AsmIndex> create(IEventSink sink, Receiver<AsmIndex> receiver)
-            => new AsmIndexProcessor(sink, receiver);
-
-        AsmIndexProcessor(IEventSink sink, Receiver<AsmIndex> receiver)
-            : base(sink, receiver)
-        {
-
-        }
-
         protected override Outcome<AsmIndex> Process(uint number, ReadOnlySpan<char> chars)
         {
             var outcome = AsmParser.parse(number, chars, out AsmIndex record);

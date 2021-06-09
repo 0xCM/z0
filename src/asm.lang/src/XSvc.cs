@@ -49,7 +49,7 @@ namespace Z0
 
         [Op]
         public static DisassemblyProcessor DisassemblyParser(this IWfRuntime wf)
-            => new DisassemblyProcessor(wf.EventSink);
+            => Svc.DisassemblyProcessor.create(wf);
 
         [Op]
         public static AsmToolchain AsmToolchain(this IWfRuntime context)

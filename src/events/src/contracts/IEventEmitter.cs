@@ -2,15 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public class AsmBuilder : EnvService<AsmBuilder>
-    {
-        readonly AsmRegQuery RegQuery;
 
-        public AsmBuilder()
-        {
-            RegQuery = AsmRegs.query();
-        }
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IEventEmitter : IEmitter<IWfEvent>
+    {
+
     }
 }

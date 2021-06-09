@@ -9,7 +9,7 @@ namespace Z0
 
     using N = EnvVarNames;
 
-    public class Env : IEnvProvider
+    public class Env
     {
         public PartId AppId
             => Assembly.GetEntryAssembly().Id();

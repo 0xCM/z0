@@ -50,7 +50,7 @@ namespace Z0.Tools
                     break;
                 }
 
-                var cells = src.Cells.View;
+                var cells = src.Cells;
                 var cell = TextBlock.Empty;
 
                 var j=0;

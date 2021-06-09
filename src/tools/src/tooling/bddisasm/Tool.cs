@@ -8,7 +8,7 @@ namespace Z0
 
     using static core;
 
-    public abstract class Tool<T> : EnvService<T>, ITool<T>
+    public abstract class Tool<T> : Service<T>, ITool<T>
         where T : Tool<T>,new()
     {
         public ToolId Id {get;}

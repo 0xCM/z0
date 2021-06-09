@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost, RecordSet]
-    public readonly struct ImageRecords : IRecordSet<ImageRecords>
+    [ApiHost, RecordGroup]
+    public readonly struct ImageRecords
     {
 
     }

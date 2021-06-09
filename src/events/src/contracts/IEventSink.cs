@@ -8,45 +8,15 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    /// <summary>
+    /// Characterizes a reified event with parametric content
+    /// </summary>
+    /// <typeparam name="H">The event type</typeparam>
+    /// <typeparam name="T">The content type</typeparam>
     [Free]
-    public interface IEventSink<E> : ISink<E>
-        where E : IWfEvent
+    public interface IWfEvent<H,T> : IWfEvent<H>
+        where H : IWfEvent<H,T>, new()
     {
-
-    }
-
-    [Free]
-    public interface IEventSink : IEventSink<IWfEvent>, IDisposable
-    {
-
-    }
-
-    public readonly struct DevNull : IEventSink
-    {
-        public static IEventSink BlackHole => default(DevNull);
-
-        public void Deposit(IWfEvent src){ }
-
-        public void Dispose(){ }
-    }
-
-    [Free]
-    public interface IEventEmitter : IEmitter<IWfEvent>
-    {
-
-    }
-
-
-    [Free]
-    public interface IEmissionSink : IEventSink, IDisposable
-    {
-
-    }
-
-    [Free]
-    public interface IEmissionSink<S> : IEmissionSink
-        where S : IEmissionSink<S>
-    {
-
+        EventPayload<T> Payload => default;
     }
 }

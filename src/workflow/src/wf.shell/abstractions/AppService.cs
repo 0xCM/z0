@@ -12,9 +12,6 @@ namespace Z0
     using static Root;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
     [WfService]
     public abstract class AppService<H> : IAppService<H>
         where H : AppService<H>, new()
