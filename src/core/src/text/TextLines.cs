@@ -26,6 +26,16 @@ namespace Z0
             => (CC)a0 == CR || (CC)a1 == LF;
 
         [MethodImpl(Inline), Op]
+        public static uint lines(ReadOnlySpan<string> src, Span<TextLine> dst)
+        {
+            var count = (uint)src.Length;
+            var counter = 1u;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = new TextLine(counter++, skip(src,i));
+            return count;
+        }
+
+        [MethodImpl(Inline), Op]
         public static void convert(in AsciLine src, Span<char> buffer, out Utf16Line dst)
         {
             var count = src.Length;

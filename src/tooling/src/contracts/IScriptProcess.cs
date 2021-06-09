@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// Gets a value indicating whether the process has exited.
         /// </summary>
-        bool HasExited {get;}
+        bool Finished {get;}
 
         /// <summary>
         /// Gets the time the processed Exited.  (HasExited should be <see langword="true"/> before calling)

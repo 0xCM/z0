@@ -108,7 +108,7 @@ namespace Z0.Asm
 
         public Index<AsmMnemonic> Mnemonics()
         {
-            var dst = root.hashset<AsmMnemonic>();
+            var dst = hashset<AsmMnemonic>();
             var rows = ImportedStokeRows();
             var count = rows.Length;
             for(var i=0; i<count; i++)
@@ -124,7 +124,7 @@ namespace Z0.Asm
         {
             var rows = ImportedStokeRows();
             var count = rows.Length;
-            var dst = root.hashset<Name>();
+            var dst = hashset<Name>();
             project(rows, (i,n) => dst.Add(n.EncodingKind));
             return dst.Index().Sort();
         }

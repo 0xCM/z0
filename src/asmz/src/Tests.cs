@@ -110,30 +110,6 @@ namespace Z0.Asm
         }
 
 
-        public void EmitFormAspects()
-        {
-            var catalog = Wf.XedCatalog();
-            catalog.EmitCatalog();
-            var pipe = Wf.XedFormPipe();
-            var aspects = pipe.EmitFormAspects();
-            var aix = aspects.Select(x => (x.Value, x.Index)).ToDictionary();
-            var parts = pipe.ComputePartitions();
-            var count = parts.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(parts,i);
-                var pa = part.Aspects.View;
-                var ka = pa.Length;
-                for(var j=0; j<ka; j++)
-                {
-                    ref readonly var a = ref skip(pa,j);
-                    if(!aix.TryGetValue(a, out var index))
-                    {
-                        Wf.Error(string.Format("Index for {0} not found", a));
-                    }
-                }
-            }
-        }
 
         void CollectMemStats()
         {
@@ -849,8 +825,6 @@ namespace Z0.Asm
             Wf.Status($"Parsed {parsed.Length} summaries");
             Wf.XedCatalog().EmitFormSummaries(parsed);
         }
-
-
 
         void FilterApiBlocks()
         {

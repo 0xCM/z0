@@ -15,7 +15,7 @@ namespace Z0.Asm
 
         public MemoryAddress Offset;
 
-        public AsmExpr Expression;
+        public AsmStatementExpr Statement;
 
         public BinaryCode Encoding;
 

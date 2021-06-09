@@ -12,22 +12,56 @@ namespace Z0.Asm
 
     public sealed class XedCatalog : AppService<XedCatalog>
     {
-        AsmCatPaths CatPaths;
+        AsmCatalogArchive Archive;
 
         protected override void OnInit()
         {
-            CatPaths = Wf.AsmCatalogs().Paths();
+            Archive = new AsmCatalogArchive(Db.AsmCatalogRoot());
+        }
+
+        public ReadOnlySpan<AsmMnemonic> Mnemonics()
+        {
+            var set = hashset<string>();
+            iter(IClasses().Storage, c => set.Add(c.Expr.Text));
+            var distinct = set.Array();
+            Array.Sort(distinct);
+            return distinct.Select(x => new AsmMnemonic(x));
+        }
+
+        public void EmitFormAspects()
+        {
+            var pipe = Wf.XedFormPipe();
+            var aspects = pipe.EmitFormAspects();
+            var aix = aspects.Select(x => (x.Value, x.Index)).ToDictionary();
+            var parts = pipe.ComputePartitions();
+            var count = parts.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(parts,i);
+                var pa = part.Aspects.View;
+                var ka = pa.Length;
+                for(var j=0; j<ka; j++)
+                {
+                    ref readonly var a = ref skip(pa,j);
+                    if(!aix.TryGetValue(a, out var index))
+                    {
+                        Wf.Error(string.Format("Index for {0} not found", a));
+                    }
+                }
+            }
         }
 
         public void EmitCatalog()
         {
             EmitSourceAssets();
+            EmitFormSummaries();
             EmitFormDetails();
             EmitSymCatalog();
+            EmitFormAspects();
         }
 
         public Index<XedFormDetail> EmitFormDetails()
-            => EmitFormDetails(CatPaths.XedFormDetailPath());
+            => EmitFormDetails(Archive.XedFormDetailPath());
 
         public Index<XedFormDetail> EmitFormDetails(FS.FilePath dst)
         {
@@ -62,7 +96,7 @@ namespace Z0.Asm
         public FS.FilePath EmitSymIndex()
         {
             var src = SymLiterals();
-            var dst = CatPaths.XedSymIndexPath();
+            var dst = Archive.XedSymIndexPath();
             EmitSymIndex(dst);
             return dst;
         }
@@ -75,6 +109,60 @@ namespace Z0.Asm
             Wf.EmittedTable(emitting,count);
             return src;
         }
+
+        public Symbols<AddressWidth> AddressWidths()
+            => Symbols.index<AddressWidth>();
+
+        public Symbols<AttributeKind> AttributeKinds()
+            => Symbols.index<AttributeKind>();
+
+        public Symbols<Category> Categories()
+            => Symbols.index<Category>();
+
+        public Symbols<ChipCode> ChipCodes()
+            => Symbols.index<ChipCode>();
+
+        public Symbols<CpuidBit> CpuidBits()
+            => Symbols.index<CpuidBit>();
+
+        public ReadOnlySpan<EFlag> EFlags()
+            => Symbols.index<EFlag>().Kinds;
+
+        public ReadOnlySpan<Extension> Extensions()
+            => Symbols.index<Extension>().Kinds;
+
+        public ReadOnlySpan<EncodingGroup> EncodingGroups()
+            => Symbols.index<EncodingGroup>().Kinds;
+
+        public Symbols<IClass> IClasses()
+            => Symbols.index<IClass>();
+
+        public ReadOnlySpan<IFormType> IFormTypes()
+            => Symbols.index<IFormType>().Kinds;
+
+        public ReadOnlySpan<IsaKind> IsaKinds()
+            => Symbols.index<IsaKind>().Kinds;
+
+        public ReadOnlySpan<MachineMode> MachineModes()
+            => Symbols.index<MachineMode>().Kinds;
+
+        public ReadOnlySpan<OperandKind> OperandKinds()
+            => Symbols.index<OperandKind>().Kinds;
+
+        public ReadOnlySpan<RegClass> RegClasses()
+            => Symbols.index<RegClass>().Kinds;
+
+        public ReadOnlySpan<RegRole> RegRoles()
+            => Symbols.index<RegRole>().Kinds;
+
+        public ReadOnlySpan<RegId> Registers()
+            => Symbols.index<RegId>().Kinds;
+
+        public ReadOnlySpan<Nonterminal> Nonterminals()
+            => Symbols.index<Nonterminal>().Kinds;
+
+        public ReadOnlySpan<SizeIndicator> SizeIndicators()
+            => Symbols.index<SizeIndicator>().Kinds;
 
         public void EmitSymCatalog()
         {
@@ -99,7 +187,6 @@ namespace Z0.Asm
             EmitSymbols<RegRole>();
             EmitSymbols<SizeIndicator>();
         }
-
 
         public FS.FilePath IDataSourcePath()
             => Db.ExternalDataPath(FS.file("xed-idata", FS.Txt));
@@ -134,9 +221,9 @@ namespace Z0.Asm
             var flow = Wf.Running("Loading xed instruction summaries");
             using var reader = src.Reader();
             var counter = 0u;
-            var header = memory.alloc<string>(XedFormInfo.FieldCount);
+            var header = alloc<string>(XedFormInfo.FieldCount);
             var succeeded = true;
-            var records = root.list<XedFormInfo>();
+            var records = list<XedFormInfo>();
             while(!reader.EndOfStream)
             {
                 var line = reader.ReadLine(counter);

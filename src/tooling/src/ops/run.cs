@@ -37,7 +37,6 @@ namespace Z0
         public static ScriptProcess run(CmdLine command, TextWriter dst)
             => new ScriptProcess(command, new ScriptProcessOptions(dst));
 
-
         [MethodImpl(Inline), Op]
         public static ScriptProcess run(CmdLine command, TextWriter dst, Receiver<string> status, Receiver<string> error)
         {
@@ -45,6 +44,5 @@ namespace Z0
             options.WithReceivers(status, error);
             return new ScriptProcess(command, options);
         }
-
     }
 }

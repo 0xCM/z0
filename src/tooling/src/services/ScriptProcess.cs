@@ -67,6 +67,9 @@ namespace Z0
             return ref dst;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the process has exited.
+        /// </summary>
         public bool Finished
             => Process.HasExited;
 
@@ -75,15 +78,6 @@ namespace Z0
         /// </summary>
         public DateTime StartTime
             => Process.StartTime;
-
-        /// <summary>
-        /// Gets a value indicating whether the process has exited.
-        /// </summary>
-        public bool HasExited
-            => Process.HasExited;
-
-        public bool Running
-            => !Process.HasExited;
 
         /// <summary>
         /// Gets the time the processed Exited.  (HasExited should be <see langword="true"/> before calling)

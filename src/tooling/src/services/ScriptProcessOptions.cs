@@ -12,6 +12,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// CommandOptions is a helper class for the Command class.  It stores options
@@ -54,13 +55,13 @@ namespace Z0
 
         static void OnStaus(in string src)
         {
-            if(text.nonempty(src))
+            if(nonempty(src))
                 term.inform(src);
         }
 
         static void OnError(in string src)
         {
-             if(text.nonempty(src))
+             if(nonempty(src))
                 term.error(src);
         }
 
@@ -81,7 +82,6 @@ namespace Z0
         {
             OutputStream = output;
         }
-
 
         public ScriptProcessOptions WithReceivers(Receiver<string> status, Receiver<string> error)
         {

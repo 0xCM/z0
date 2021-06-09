@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct root
+    partial struct core
     {
         /// <summary>
         /// Applies an action to the sequence of integers min,min+1,...,max - 1

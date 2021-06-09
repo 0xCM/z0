@@ -78,6 +78,5 @@ namespace Z0
 
         public FS.FolderPath AsmWorkspace
             => Source.AsmWorkspace;
-
     }
 }

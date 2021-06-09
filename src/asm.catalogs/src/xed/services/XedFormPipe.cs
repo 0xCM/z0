@@ -22,35 +22,7 @@ namespace Z0.Asm
 
         readonly Symbols<IFormType> FormTypes;
 
-        readonly Symbols<AddressWidth> AddressWidths;
-
-        readonly Symbols<AttributeKind> Attributes;
-
-        readonly Symbols<Category> Categories;
-
-        readonly Symbols<ChipCode> ChipCodes;
-
-        readonly Symbols<IsaKind> IsaKinds;
-
-        readonly Symbols<EncodingGroup> EncodingGroups;
-
         readonly Symbols<IClass> IClasses;
-
-        readonly Symbols<Extension> Extensions;
-
-        readonly Symbols<EFlag> EFlags;
-
-        readonly Symbols<OperandKind> OpKinds;
-
-        readonly Symbols<OperandVisibility> OpVisibility;
-
-        readonly Symbols<OperandWidthType> OpWidths;
-
-        readonly Symbols<RegId> Registers;
-
-        readonly Symbols<RegRole> RegRoles;
-
-        readonly Symbols<RegClass> RegClasses;
 
         Index<FormPartiton> Partitions;
 
@@ -60,37 +32,21 @@ namespace Z0.Asm
         {
             Wf = wf;
             Paths = wf.Db();
-            Attributes = Symbols.index<AttributeKind>();
-            Categories = Symbols.index<Category>();
-            ChipCodes = Symbols.index<ChipCode>();
             FormTypes = Symbols.index<IFormType>();
-            IsaKinds = Symbols.index<IsaKind>();
             IClasses = Symbols.index<IClass>();
-            Extensions = Symbols.index<Extension>();
-            EFlags = Symbols.index<EFlag>();
-            Registers = Symbols.index<RegId>();
-            RegRoles = Symbols.index<RegRole>();
-            OpKinds = Symbols.index<OperandKind>();
-            OpVisibility = Symbols.index<OperandVisibility>();
-            RegClasses = Symbols.index<RegClass>();
-            AddressWidths = Symbols.index<AddressWidth>();
-            OpWidths = Symbols.index<OperandWidthType>();
-            EncodingGroups = Symbols.index<EncodingGroup>();
             Aspects = Index<FormAspect>.Empty;
             Partitions = Index<FormPartiton>.Empty;
         }
 
-        AsmCatPaths CatPaths
-            => new AsmCatPaths(Paths);
-
         public Index<XedFormAspect> EmitFormAspects()
         {
-            var duplicates = root.dict<Hash32,uint>();
+            var duplicates = dict<Hash32,uint>();
             var pipe = Wf.XedFormPipe();
             var aspects = pipe.ComputeFormAspects();
             var count = (uint)aspects.Length;
             var buffer = alloc<XedFormAspect>(count);
-            var path = CatPaths.XedFormAspectPath();
+            var paths = new AsmCatalogArchive(Paths.AsmCatalogRoot());
+            var path = paths.XedFormAspectPath();
             var formatter = Tables.formatter<XedFormAspect>();
             var emitting = Wf.EmittingTable<XedFormAspect>(path);
             using var writer = path.Writer();
@@ -111,9 +67,7 @@ namespace Z0.Asm
 
             var perfect = !duplicates.Values.Any(x => x > 0);
             if(perfect)
-            {
                 Wf.Status($"Hash Perfect");
-            }
             else
                 Wf.Warn("Hash Imperfect");
 
@@ -129,7 +83,7 @@ namespace Z0.Asm
             {
                 var count = FormTypes.Count;
                 var forms = FormTypes.View;
-                var distinct = root.hashset<FormAspect>();
+                var distinct = hashset<FormAspect>();
                 var counter = 0u;
                 for(ushort i=0; i<count; i++)
                 {
@@ -146,7 +100,7 @@ namespace Z0.Asm
                     }
                 }
 
-                Aspects = root.index(distinct.ToArray()).Sort();
+                Aspects = index(distinct.ToArray()).Sort();
                 return Aspects;
             }
         }
@@ -203,24 +157,6 @@ namespace Z0.Asm
         bool Match(SymExpr src, out IClass dst)
             => IClasses.MatchKind(src, out dst);
 
-        bool Match(SymExpr src, out OperandKind dst)
-            => OpKinds.MatchKind(src, out dst);
-
-        bool Match(SymExpr src, out EncodingGroup dst)
-            => EncodingGroups.MatchKind(src, out dst);
-
-        bool Match(SymExpr src, out AttributeKind dst)
-            => Attributes.MatchKind(src, out dst);
-
-        bool Match(SymExpr src, out AddressWidth dst)
-            => AddressWidths.MatchKind(src, out dst);
-
-        bool Match(SymExpr src, out OperandWidthType dst)
-            => OpWidths.MatchKind(src, out dst);
-
-        bool Match(SymExpr src, out RegId dst)
-            => Registers.MatchKind(src, out dst);
-
         void Complete(ref FormPartiton partition)
         {
             var count = partition.AspectCount;
@@ -238,16 +174,5 @@ namespace Z0.Asm
                 partition.Complete = true;
             }
         }
-    }
-}
-
-namespace Z0
-{
-
-    partial struct Msg
-    {
-        public static MsgPattern<Count> PartitioningIForms => "Partitioning {0} IForm identifiers";
-
-        public static MsgPattern<Count> PartitionedIForms => "Partitoned {0} IForm identifiers";
     }
 }

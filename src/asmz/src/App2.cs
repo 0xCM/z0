@@ -6,9 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
-    using System.Threading;
-    using System.Collections.Generic;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Part;
     using static core;
@@ -87,6 +84,9 @@ namespace Z0.Asm
         {
             Wf.XedCatalog().EmitCatalog();
         }
+
+        public ReadOnlySpan<AsmMnemonic> LoadMnemonics()
+            => Wf.XedCatalog().Mnemonics();
 
         void EmitRuntimeMembers()
         {
@@ -390,25 +390,10 @@ namespace Z0.Asm
 
         }
 
-        void EmitAssetCatalog()
+        void EmitAsmAsssetCatalog()
         {
             var catalogs = Wf.AsmCatalogs();
-            var assets = AsmData.Assets;
-            var host = assets.DataSource;
-            var descriptors = assets.Descriptors;
-            var count = descriptors.Length;
-            var dst = Db.Table<AssetCatalogEntry>(host.GetSimpleName());
-            var flow = Wf.EmittingTable<AssetCatalogEntry>(dst);
-            using var writer = dst.Writer();
-            var formatter = Tables.formatter<AssetCatalogEntry>(AssetCatalogEntry.RenderWidths);
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var descriptor = ref skip(descriptors,i);
-                var entry = descriptor.CatalogEntry;
-                writer.WriteLine(formatter.Format(entry));
-            }
-            Wf.EmittedTable(flow,count);
+            catalogs.EmitAssets();
         }
 
         void EmitCatalogAssets()
@@ -462,11 +447,6 @@ namespace Z0.Asm
             Wf.IntrinsicsCatalog().Emit();
         }
 
-        public void EmitXedSources()
-        {
-            Wf.XedCatalog().EmitSourceAssets();
-        }
-
         public void EmitSymbolicliterals()
         {
             var service = Wf.Symbolism();
@@ -492,7 +472,6 @@ namespace Z0.Asm
         {
             return Wf.ApiHex().ReadBlocks();
         }
-
 
         void EmitDependencyGraph()
         {
@@ -711,7 +690,6 @@ namespace Z0.Asm
             var archive = ApiPackArchive.create(current.Root);
             var path = archive.StatementIndexPath();
             processor.ProcessFile(path);
-
         }
 
         public void ShowVendorManuals(string vendor, FS.FileExt ext)
@@ -948,64 +926,22 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, lines);
         }
 
-        void Run(AsmToolchainSpec spec)
-        {
-            var stdout = list<string>();
-            var counter = 0u;
-            void OnStatus(in string data)
-            {
-                if(nonempty(data))
-                {
-                    stdout.Add(data);
-                }
-            }
-
-            void OnError(in string data)
-            {
-                if(nonempty(data))
-                {
-                    Wf.Error(data);
-                }
-            }
-
-            var tool = Wf.BdDisasm();
-            var cmd = tool.Cmd(spec);
-            var cmdline = tool.CmdLine(cmd);
-            var flow = Wf.Running(cmdline.Format());
-            using var writer = cmd.OutputFile.Writer();
-            var process = ToolCmd.run(cmdline, writer, OnStatus, OnError);
-
-            process.Wait();
-            stdout.Sort();
-            var collected = stdout.ViewDeposited();
-            var count = collected.Length;
-            var buffer = alloc<TextLine>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                seek(dst,i) = new TextLine(i + 1,skip(collected,i));
-            }
-
-            iter(buffer, line => Wf.Row(line));
-
-            Wf.Ran(flow);
-
-        }
 
         public void CheckTools()
         {
-
             var workspace = Wf.AsmWorkspace();
+            var toolchain = Wf.AsmToolchain();
             var src = "and";
             var spec = workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, src);
-            Run(spec);
-
-
+            toolchain.Run(spec);
         }
 
         public void Run()
         {
-            CheckTools();
+            GenerateInstructionModels();
+            //iteri(LoadMnemonics(), (i,m) => Wf.Row(string.Format("{0:D3} {1}", i, m)));
+            //EmitXedCatalog();
+            //CheckTools();
             //RunExtractWorkflow();
             //ProcessStatementIndex();
             //ParseDisassembly();

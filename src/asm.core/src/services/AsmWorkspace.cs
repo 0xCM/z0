@@ -2,19 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
-
-    partial class XTend
-    {
-        public static AsmWorkspace AsmWorkspace(this IEnvContext context)
-            => Z0.AsmWorkspace.create(context.Env.AsmWorkspace);
-    }
-
 
     public readonly struct AsmWorkspace : IFileArchive
     {
@@ -22,14 +15,14 @@ namespace Z0
         public static AsmWorkspace create(FS.FolderPath root)
             => new AsmWorkspace(root);
 
+        public FS.FolderPath Root {get;}
+
+
         [MethodImpl(Inline)]
         AsmWorkspace(FS.FolderPath root)
         {
             Root = root;
         }
-
-        public FS.FolderPath Root {get;}
-
 
         public FS.FolderPath Builds
             => Root + FS.folder(".build");

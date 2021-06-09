@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Root;
     using static core;
 
     [ApiHost]
@@ -18,15 +13,13 @@ namespace Z0.Asm
         {
         }
 
-        [MethodImpl(Inline), Op]
-        public AsmCatPaths Paths()
-            => new AsmCatPaths(Db);
+        public AsmCatalogArchive Archive()
+            => new AsmCatalogArchive(Db.AsmCatalogRoot());
 
-        [MethodImpl(Inline), Op]
-        public AsmCatPaths Paths(IEnvPaths src)
-            => new AsmCatPaths(src);
+        public AsmCatalogArchive Archive(FS.FolderPath root)
+            => new AsmCatalogArchive(root);
 
-        public void EmitAssetCatalog(FS.FolderPath root)
+        public void EmitAssets(FS.FolderPath root)
         {
             var assets = AsmData.Assets;
             var host = assets.DataSource;
@@ -46,7 +39,7 @@ namespace Z0.Asm
             Wf.EmittedTable(flow,count);
         }
 
-        public void EmitAssetCatalog()
-            => EmitAssetCatalog(Db.Root);
+        public void EmitAssets()
+            => EmitAssets(Db.Root);
     }
 }

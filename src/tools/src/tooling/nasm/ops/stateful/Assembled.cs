@@ -16,7 +16,7 @@ namespace Z0.Tools
         {
             dst.Bitstring = FormatBitstring(src.Encoded);
             dst.Encoding = src.Encoded;
-            dst.Expression = src.SourceText;
+            dst.Statement = asm.statement(src.SourceText);
             dst.SourceLine = src.LineNumber;
             dst.Offset = src.Offset;
             return ref dst;
@@ -24,7 +24,7 @@ namespace Z0.Tools
 
         public Index<AsmAssembly> Assembled(ReadOnlySpan<NasmCodeBlock> blocks)
         {
-            var dst = root.list<AsmAssembly>();
+            var dst = list<AsmAssembly>();
             var count = blocks.Length;
             for(var i=0; i<count; i++)
             {

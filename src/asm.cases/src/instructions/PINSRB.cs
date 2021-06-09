@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static core;
     using static AsmTextBuilder;
 
-
     partial class AsmCases
     {
         [ApiComplete]
@@ -29,6 +28,5 @@ namespace Z0.Asm
             public static AsmText<byte> EncodingRule()
                 => asmtext("ModRM:reg (w) | ModRM:r/m (r) | imm8", AsmTextKind.EncodingRule);
         }
-
     }
 }

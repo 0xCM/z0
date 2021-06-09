@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
-    using static core;
 
     [ApiHost]
     public readonly struct AsmTextBuilder

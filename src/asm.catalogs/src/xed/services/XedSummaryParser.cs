@@ -7,16 +7,11 @@ namespace Z0.Asm
     using System;
 
     using static core;
-    using static XedModels;
 
     public ref struct XedSummaryParser
     {
         public static XedSummaryParser create(IEventSink sink)
             => new XedSummaryParser(sink, alloc<TextLine>(16), 8200);
-
-        readonly Span<TextLine> LineBuffer;
-
-        readonly Index<XedFormDetail> DetailTarget;
 
         readonly Index<XedFormInfo> SummaryTarget;
 
@@ -28,8 +23,6 @@ namespace Z0.Asm
 
         XedSummaryParser(IEventSink sink, Span<TextLine> buffer, ushort count)
         {
-            LineBuffer = buffer;
-            DetailTarget = alloc<XedFormDetail>(count);
             SummaryTarget = alloc<XedFormInfo>(count);
             TableSource = AsmData.Assets.XedTables();
             SummarySource = AsmData.Assets.XedInstructionSummary();

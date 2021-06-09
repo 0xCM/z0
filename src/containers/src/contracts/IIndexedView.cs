@@ -8,6 +8,8 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using static core;
+
     [Free]
     public interface IIndexedView<T> : INullity, IMeasured, ITextual
     {
@@ -17,10 +19,10 @@ namespace Z0
             => Storage;
 
         ref readonly T this[long index]
-            => ref memory.skip(View, index);
+            => ref skip(View, index);
 
         ref readonly T this[ulong index]
-            => ref memory.skip(View, index);
+            => ref skip(View, index);
 
         int IMeasured.Length
             => View.Length;
@@ -42,16 +44,16 @@ namespace Z0
         where I : unmanaged
     {
         ref readonly T this[I index]
-            => ref memory.skip(View, memory.@as<I,uint>(index));
+            => ref skip(View, @as<I,uint>(index));
 
         int IMeasured.Length
             => View.Length;
 
         I IMeasured<I>.Length
-            => memory.@as<uint,I>((uint)View.Length);
+            => @as<uint,I>((uint)View.Length);
 
         I ICounted<I>.Count
-            => memory.@as<uint,I>((uint)View.Length);
+            => @as<uint,I>((uint)View.Length);
     }
 
     [Free]

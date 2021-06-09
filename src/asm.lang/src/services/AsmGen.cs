@@ -32,7 +32,7 @@ namespace Z0.Asm
         [Op]
         public void GenerateModelsInPlace()
         {
-            GenerateModelsInPlace(Wf.StanfordCatalog().Mnemonics());
+            GenerateModelsInPlace(Wf.XedCatalog().Mnemonics());
         }
 
         [Op]
@@ -51,7 +51,7 @@ namespace Z0.Asm
         [Op]
         public void GenerateModels(FS.FolderPath dst)
         {
-            GenerateModels(Wf.StanfordCatalog().Mnemonics(), dst);
+            GenerateModels(Wf.XedCatalog().Mnemonics(), dst);
         }
 
         const byte Indent = 4;
