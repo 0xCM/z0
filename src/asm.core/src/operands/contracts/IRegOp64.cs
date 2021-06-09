@@ -11,7 +11,6 @@ namespace Z0.Asm
     {
         RegWidth IRegOp.Width
             => RegWidth.W64;
-
     }
 
     [Free]

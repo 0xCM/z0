@@ -12,8 +12,6 @@ namespace Z0.Asm
     using static Chars;
     using static core;
 
-    using C = AsciCode;
-
     [ApiHost]
     public readonly struct AsmRender
     {
@@ -295,18 +293,6 @@ namespace Z0.Asm
                 dst.Append(Chars.Space);
                 dst.Append(text.join(Chars.Comma, operands));
             }
-        }
-
-        [Op]
-        public static string format(ModRm src)
-        {
-            var dst = text.buffer();
-            dst.Append(src.Rm.Format());
-            dst.Append(Chars.Space);
-            dst.Append(src.Reg.Format());
-            dst.Append(Chars.Space);
-            dst.Append(src.Mod.Format());
-            return dst.ToString();
         }
 
         [Op]

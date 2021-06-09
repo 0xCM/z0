@@ -58,6 +58,24 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
+        public static uint modrm(byte src, ref uint i, Span<BitChar> dst)
+        {
+            var i0 = i;
+            seek(dst, i++) = bit.test(src, 7);
+            seek(dst, i++) = bit.test(src, 6);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 5);
+            seek(dst, i++) = bit.test(src, 4);
+            seek(dst, i++) = bit.test(src, 3);
+            seek(dst, i++) = BitChars.SegSep;
+            seek(dst, i++) = bit.test(src, 2);
+            seek(dst, i++) = bit.test(src, 1);
+            seek(dst, i++) = bit.test(src, 0);
+            seek(dst, i++) = BitChars.SegSep;
+            return i - i0;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint encode(N3 n, AsmHexCode src, Span<BitChar> dst)
             => encode(n, src, 0u, dst);
 
@@ -89,7 +107,7 @@ namespace Z0.Asm
         {
             var dst = recover<BitChar>(ByteBlock128.Empty.Bytes);
             var size = encode(n, src, dst);
-            return slice(dst,0,size);
+            return slice(dst, 0, size);
         }
 
         [MethodImpl(Inline), Op]

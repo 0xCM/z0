@@ -13,20 +13,20 @@ namespace Z0.Asm
 
     partial class AsmEncoderPrototype
     {
-        /// <summary>
-        /// (JA rel8) 77 cb
-        /// </summary>
-        /// <param name="cb"></param>
-        [MethodImpl(Inline), Op]
-        public static Ja ja(Address8 cb)
-            => AsmBytes.code(x77, cb);
+        // /// <summary>
+        // /// (JA rel8) 77 cb
+        // /// </summary>
+        // /// <param name="cb"></param>
+        // [MethodImpl(Inline), Op]
+        // public static Ja ja(Address8 cb)
+        //     => AsmBytes.code(x77, cb);
 
-        /// <summary>
-        /// (JA rel32) 0F 87 cd
-        /// </summary>
-        /// <param name="cb"></param>
-        [MethodImpl(Inline), Op]
-        public static Ja ja(Address32 cd)
-            => AsmBytes.code(x77, cd);
+        // /// <summary>
+        // /// (JA rel32) 0F 87 cd
+        // /// </summary>
+        // /// <param name="cb"></param>
+        // [MethodImpl(Inline), Op]
+        // public static Ja ja(Address32 cd)
+        //     => AsmBytes.code(x77, cd);
     }
 }

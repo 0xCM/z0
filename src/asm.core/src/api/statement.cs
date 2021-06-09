@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmStatementExpr statement(string src)
-            => new AsmStatementExpr(src.Trim());
+        public static AsmExpr statement(string src)
+            => new AsmExpr(src.Trim());
     }
 }

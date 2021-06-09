@@ -87,7 +87,6 @@ namespace Z0.Asm
             where B : unmanaged
                 => Produce<A,B,ulong>(a,b,c);
 
-
         [MethodImpl(Inline), Op]
         AsmExpr Produce<A,B,T>(Sym<A> a, Sym<B> b, Imm<T> c)
             where A : unmanaged

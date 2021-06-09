@@ -21,6 +21,13 @@ namespace Z0.Asm
 
             public AsmOpClass OpClass
                 => AsmOpClass.Imm;
+
+            public string Format()
+                => Content.Format();
+
+            public override string ToString()
+                => Format();
+
         }
     }
 }

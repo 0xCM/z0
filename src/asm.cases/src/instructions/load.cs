@@ -14,7 +14,7 @@ namespace Z0.Asm
     partial class AsmCases
     {
         [Op]
-        public static Index<CallRel32Case> loadRel32(Call call)
+        public static Index<CallRel32Case> loadRel32(Call_near call)
         {
             var caller = asm.caller(0x7ffe6818a0e0ul, "canonical/abi2/Run");
             var cases = alloc<CallRel32Case>(4);

@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public sealed class AsmStatementProducer : AppService<AsmStatementProducer>
     {
@@ -103,7 +103,7 @@ namespace Z0.Asm
         static string describe(in ApiInstruction src)
             => string.Format("{0} {1}", (Address16)src.Offset, thumbprint(src));
 
-        static AsmStatementExpr statement(ApiInstruction src)
+        static AsmExpr statement(ApiInstruction src)
             => src.Statment.Replace(" ptr", EmptyString);
 
         static void produce(in ApiInstruction src, ITextBuffer dst)

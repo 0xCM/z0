@@ -13,10 +13,10 @@ namespace Z0.Asm
     {
         public Identifier Id {get;}
 
-        public AsmStatementExpr Statement {get;}
+        public AsmExpr Statement {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncodingTask(Identifier id, AsmStatementExpr statement)
+        public AsmEncodingTask(Identifier id, AsmExpr statement)
         {
             Id =id;
             Statement = statement;
@@ -30,10 +30,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmEncodingTask((string id, string expr) src)
-            => new AsmEncodingTask(src.id, new AsmStatementExpr(src.expr));
+            => new AsmEncodingTask(src.id, new AsmExpr(src.expr));
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmEncodingTask((Identifier id, AsmStatementExpr expr) src)
+        public static implicit operator AsmEncodingTask((Identifier id, AsmExpr expr) src)
             => new AsmEncodingTask(src.id, src.expr);
     }
 }

@@ -48,5 +48,4 @@ namespace Z0.Asm
         public static implicit operator AsmText(ReadOnlySpan<byte> src)
             => new AsmText(TextTools.address(src));
     }
-
 }

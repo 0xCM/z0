@@ -7,7 +7,7 @@ namespace Z0.Asm
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IImmOp : IAsmOp
+    public interface IImmOp : IAsmOp, ITextual
     {
         AsmOpClass Class => AsmOpClass.Imm;
     }

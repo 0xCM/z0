@@ -13,10 +13,10 @@ namespace Z0.Asm
     {
         public AsmFormExpr Form {get;}
 
-        public AsmStatementExpr Statement {get;}
+        public AsmExpr Statement {get;}
 
         [MethodImpl(Inline)]
-        public AsmExprSet(AsmFormExpr form, AsmStatementExpr statement)
+        public AsmExprSet(AsmFormExpr form, AsmExpr statement)
         {
             Form = form;
             Statement = statement;

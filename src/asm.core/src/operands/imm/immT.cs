@@ -22,6 +22,12 @@ namespace Z0.Asm
                 Content = src;
             }
 
+            public string Format()
+                => Hex.format(UpperCase,Content);
+
+            public override string ToString()
+                => Format();
+
             public AsmOpClass OpClass => AsmOpClass.Imm;
 
             [MethodImpl(Inline)]

@@ -70,7 +70,7 @@ namespace Z0.Asm
             get => IP - BaseAddress;
         }
 
-        public AsmStatementExpr Statment
+        public AsmExpr Statment
         {
             [MethodImpl(Inline)]
             get => Instruction.FormattedInstruction;

@@ -936,9 +936,19 @@ namespace Z0.Asm
             toolchain.Run(spec);
         }
 
+        public static AsmExpr expression<R,I>(AsmMnemonic monic, R r, I imm)
+            where R : IRegOp
+            where I : IImmOp
+        {
+
+            return string.Format("{0} {1},{2}", monic.Format(MnemonicCase.Lowercase), r.Format(), imm);
+        }
+
         public void Run()
         {
-            GenerateInstructionModels();
+            // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));
+            // Wf.Row(xpr);
+            //GenerateInstructionModels();
             //iteri(LoadMnemonics(), (i,m) => Wf.Row(string.Format("{0:D3} {1}", i, m)));
             //EmitXedCatalog();
             //CheckTools();

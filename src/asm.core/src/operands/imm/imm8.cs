@@ -18,6 +18,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public imm8(byte value)
                 => Content = value;
+            public string Format()
+                => Content.Format();
+
+            public override string ToString()
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator Imm8(imm8 src)

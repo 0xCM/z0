@@ -19,6 +19,12 @@ namespace Z0.Asm
             public imm64(ulong value)
                 => Content = value;
 
+            public string Format()
+                => Content.Format();
+
+            public override string ToString()
+                => Format();
+
             [MethodImpl(Inline)]
             public static implicit operator imm64(ulong src)
                 => new imm64(src);

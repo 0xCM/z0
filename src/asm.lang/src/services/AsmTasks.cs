@@ -13,7 +13,7 @@ namespace Z0.Asm
     public readonly struct AsmTasks
     {
         [MethodImpl(Inline), Op]
-        public static AsmEncodingTask encoding(Identifier id, AsmStatementExpr expr)
+        public static AsmEncodingTask encoding(Identifier id, AsmExpr expr)
             => new AsmEncodingTask(id,expr);
     }
 }

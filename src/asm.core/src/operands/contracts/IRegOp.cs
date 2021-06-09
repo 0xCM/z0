@@ -32,6 +32,9 @@ namespace Z0.Asm
         /// The width of the represented register operand
         /// </summary>
         new RegWidth Width {get;}
+
+        string ITextual.Format()
+            => GetType().Name;
     }
 
     /// <summary>
@@ -48,7 +51,7 @@ namespace Z0.Asm
         BitWidth ISized.Width
             => width<T>();
 
-        string ITextual.Format()
-            => ToString();
+        // string ITextual.Format()
+        //     => ToString();
     }
 }

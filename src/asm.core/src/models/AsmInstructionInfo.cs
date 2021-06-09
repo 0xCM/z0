@@ -27,7 +27,7 @@ namespace Z0.Asm
         /// <summary>
         /// The instruction content, suitable for display
         /// </summary>
-        public AsmStatementExpr Statement {get;}
+        public AsmExpr Statement {get;}
 
         /// <summary>
         /// The instruction string paired with the op code
@@ -35,7 +35,7 @@ namespace Z0.Asm
         public AsmFormExpr AsmForm {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionInfo(MemoryAddress @base, uint offset, AsmStatementExpr statment, AsmFormExpr form, byte[] code)
+        public AsmInstructionInfo(MemoryAddress @base, uint offset, AsmExpr statment, AsmFormExpr form, byte[] code)
         {
             Encoded = new CodeBlock(@base, code);
             Offset = offset;

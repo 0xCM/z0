@@ -13,12 +13,12 @@ namespace Z0.Asm
     {
         public Hex64 Offset {get;}
 
-        public AsmStatementExpr Statement {get;}
+        public AsmExpr Statement {get;}
 
         public AsmHexCode Code {get;}
 
         [MethodImpl(Inline)]
-        public AsmDisassembly(Hex64 offset, AsmStatementExpr expr, AsmHexCode code)
+        public AsmDisassembly(Hex64 offset, AsmExpr expr, AsmHexCode code)
         {
             Offset = offset;
             Statement = expr;

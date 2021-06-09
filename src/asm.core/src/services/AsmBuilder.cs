@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmOps;
-
-    partial struct AsmX
+    public class AsmBuilder : EnvService<AsmBuilder>
     {
-        [Op, AsmSig(AsmOcPrototype.vlddqu_xmm_m128)]
-        public AsmExpr vlddqu(xmm a0, mem<xmm> a1)
-            => default;
+        readonly AsmRegQuery RegQuery;
+
+        public AsmBuilder()
+        {
+            RegQuery = AsmRegs.query();
+        }
     }
 }

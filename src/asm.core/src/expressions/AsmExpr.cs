@@ -8,49 +8,93 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    public readonly struct AsmExpr : IAsmSyntaxPart<AsmExpr>
+    public readonly struct AsmExpr : IEquatable<AsmExpr>
     {
         public TextBlock Content {get;}
 
-        [MethodImpl(Inline)]
-        public AsmExpr(string src)
-        {
-            Content = src.ToLower();
-        }
+        const sbyte DefaultPadding = -46;
 
         [MethodImpl(Inline)]
-        public AsmExpr(ReadOnlySpan<char> src)
-        {
-            Content = new string(src);
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Content;
-
-        [MethodImpl(Inline)]
-        public string Format(byte width)
-            => string.Format(RP.slot(0,(short)-width), Content);
+        public AsmExpr(TextBlock content)
+            => Content = content;
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Content.Format();
+
+        public string FormatPadded(sbyte padding = DefaultPadding)
+            => string.Format(RP.pad(padding), Content);
+
+        [MethodImpl(Inline)]
+        public bool Equals(AsmExpr src)
+            => Content.Equals(src.Content);
+
+        public override int GetHashCode()
+            => Content.GetHashCode();
+
+        public override bool Equals(object src)
+            => src is AsmExpr x && Equals(x);
+
+        public BinaryCode Serialize()
+        {
+            var count = Content.Length;
+            if(count != 0)
+            {
+                var buffer = alloc<byte>(Content.Length);
+                ref var dst = ref first(buffer);
+                var src = Content.View;
+                for(var i=0; i<count; i++)
+                    seek(dst,i) = (byte)skip(src,i);
+                return buffer;
+            }
+            else
+                return BinaryCode.Empty;
+        }
+
+        public AsmExpr Replace(string src, string dst)
+            => new AsmExpr(Content.Replace(src,dst));
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Content.IsNonEmpty;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Content.IsEmpty;
+        }
+
+        public bool IsValid
+        {
+            get => IsNonEmpty && !Content.Text.StartsWith("(bad)");
+        }
+
+        public bool IsInvalid
+        {
+            get => IsEmpty || Content.Text.StartsWith("(bad)");
+        }
+
+        public int CompareTo(AsmExpr src)
+            => Content.CompareTo(src.Content);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmExpr(string src)
             => new AsmExpr(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmExpr(TextBlock src)
-            => new AsmExpr(src);
-
-        [MethodImpl(Inline)]
         public static implicit operator AsmExpr(ReadOnlySpan<char> src)
-            => new AsmExpr(src);
+            => new AsmExpr(new string(src));
 
         [MethodImpl(Inline)]
         public static implicit operator AsmExpr(Span<char> src)
-            => new AsmExpr(src);
+            => new AsmExpr(new string(src));
 
         public static AsmExpr Empty
         {

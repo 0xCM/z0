@@ -18,7 +18,6 @@ namespace Z0.Asm
     {
         const NumericKind Closure = UnsignedInts;
 
-
         // 3 bits
         internal enum ScaleFactor : byte
         {

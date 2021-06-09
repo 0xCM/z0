@@ -29,18 +29,26 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<char> render<T>(Base16 @base, UpperCased @case, T value)
+        public static string format<T>(UpperCased @case, T value)
             where T : unmanaged
-                => chars_u(@base, @case, value);
+                => new string(render<T>(@case, value));
+
+        // public string format<T>(LowerCased @case, T value)
+        //     where T : unmanaged
+        //         => new string(render<T>(@case, value));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void render<T>(Base16 @base, UpperCased @case, T value, uint offset, Span<char> dst)
+        public static ReadOnlySpan<char> render<T>(UpperCased @case, T value)
             where T : unmanaged
-                => chars_u(@base, @case, value, offset, dst);
+                => chars_u(@case, value);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void render<T>(UpperCased @case, T value, uint offset, Span<char> dst)
+            where T : unmanaged
+                => chars_u(@case, value, offset, dst);
 
         [MethodImpl(Inline)]
-        static ReadOnlySpan<char> chars_u<T>(Base16 @base, UpperCased @case, T value)
+        static ReadOnlySpan<char> chars_u<T>(UpperCased @case, T value)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -52,11 +60,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return render(@case, uint64(value));
             else
-                return chars_i(@base, @case, value);
+                return chars_i(@case, value);
         }
 
         [MethodImpl(Inline)]
-        static ReadOnlySpan<char> chars_i<T>(Base16 @base, UpperCased @case, T value)
+        static ReadOnlySpan<char> chars_i<T>(UpperCased @case, T value)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -72,7 +80,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void chars_u<T>(Base16 @base, UpperCased @case, T value, uint offset, Span<char> dst)
+        static void chars_u<T>(UpperCased @case, T value, uint offset, Span<char> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -84,11 +92,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 render(@case, uint64(value), offset, dst);
             else
-                chars_i(@base, @case, value, offset, dst);
+                chars_i(@case, value, offset, dst);
         }
 
         [MethodImpl(Inline)]
-        static void chars_i<T>(Base16 @base, UpperCased @case, T value, uint offset, Span<char> dst)
+        static void chars_i<T>(UpperCased @case, T value, uint offset, Span<char> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

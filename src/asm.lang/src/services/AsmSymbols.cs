@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmRegCodes;
-
     using static AsmCodes;
 
     [ApiHost]
@@ -252,8 +251,6 @@ namespace Z0.Asm
                 return recover<Sym<ControlReg>,Sym<K>>(CrSym.View);
             else
                 throw no<K>();
-
-
         }
 
     }

@@ -17,7 +17,7 @@ namespace Z0.Asm
         AsmDecoder Decoder;
 
         [Op]
-        public static AsmInstructionInfo summarize(MemoryAddress @base, IceInstruction src, CodeBlock encoded, AsmStatementExpr statement, uint offset)
+        public static AsmInstructionInfo summarize(MemoryAddress @base, IceInstruction src, CodeBlock encoded, AsmExpr statement, uint offset)
             => new AsmInstructionInfo(@base, offset,  statement,  src.Specifier, code(encoded, offset, src.InstructionSize));
 
         [MethodImpl(Inline), Op]

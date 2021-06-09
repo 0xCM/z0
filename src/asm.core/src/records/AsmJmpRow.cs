@@ -30,7 +30,7 @@ namespace Z0
 
         public JmpKind Kind;
 
-        public AsmStatementExpr Instruction;
+        public AsmExpr Instruction;
 
         public BinaryCode Encoded;
 

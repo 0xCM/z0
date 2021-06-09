@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using T = AsmOpCodeTokens;
-
     [ApiHost]
     public readonly struct AsmHexCodes
     {
         public static RexPrefixKind RexW => RexPrefixKind.W;
-
     }
 }

@@ -111,9 +111,9 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Outcome parse(string src, out AsmStatementExpr dst)
+        public static Outcome parse(string src, out AsmExpr dst)
         {
-            dst = new AsmStatementExpr(src.Trim());
+            dst = new AsmExpr(src.Trim());
             return true;
         }
 
@@ -171,7 +171,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var a = src.LeftOfFirst(Semicolon);
             var offset = HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space)).ValueOrDefault();
-            AsmStatementExpr statement = a.RightOfFirst(Semicolon);
+            AsmExpr statement = a.RightOfFirst(Semicolon);
 
             var parts = @readonly(src.RightOfFirst(Semicolon).SplitClean(Implication));
             if(parts.Length < 2)

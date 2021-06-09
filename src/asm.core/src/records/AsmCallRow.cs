@@ -52,7 +52,7 @@ namespace Z0
         /// <summary>
         /// The call statement
         /// </summary>
-        public AsmStatementExpr Instruction;
+        public AsmExpr Instruction;
 
         /// <summary>
         /// The statement encoding

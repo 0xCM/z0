@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public class AsmEncodingInfo : IEquatable<AsmEncodingInfo>, IComparable<AsmEncodingInfo>
     {
-        public AsmStatementExpr Statement {get;}
+        public AsmExpr Statement {get;}
 
 		public AsmSigExpr Sig {get;}
 
@@ -22,7 +22,7 @@ namespace Z0.Asm
         public AsmBitstring Bits {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncodingInfo(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode hex, AsmBitstring bits)
+        public AsmEncodingInfo(AsmExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode hex, AsmBitstring bits)
         {
             Statement = statement;
             Sig = sig;
