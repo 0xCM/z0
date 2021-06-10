@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Text;
+    using System.Runtime.CompilerServices;
     using System.IO;
 
     using static Root;
@@ -14,7 +15,7 @@ namespace Z0.Asm
 
     public class AsmIndexWorker : IReceiver<AsmIndex>, IDisposable
     {
-        const string RenderPattern = "{0,-12} | {1,-22} | {2,-8} | {3,-32} | {4}";
+        const string RenderPattern = "{0,-12} | {1,-32} | {2,-22} | {3,-36} | {4,-8} | {5,-32} | {6}";
 
         public FS.FilePath Target {get;}
 
@@ -27,7 +28,7 @@ namespace Z0.Asm
             Target = dst;
             _Buffer = alloc<char>(256);
             Writer = dst.Writer(Encoding.ASCII);
-            Writer.WriteLine(RenderPattern, "Sequence", "Mnemonic", "Size", "Hex", "Bitstring");
+            Writer.WriteLine(RenderPattern, "Sequence", "Sig", "OpCode", "Statement", "Size", "Hex", "Bitstring");
         }
 
         Span<char> GetBuffer()
@@ -46,13 +47,24 @@ namespace Z0.Asm
             var buffer = GetBuffer();
             var count = AsmRender.render(encoded, ref i, buffer);
             var hex = text.format(slice(buffer,0,count));
-            var content = string.Format(RenderPattern, seq, src.Sig.Mnemonic, size, hex, bitstring);
+            var content = string.Format(RenderPattern, seq, src.Sig, src.OpCode, src.Expression, size, hex, bitstring);
             return content;
         }
 
+
+        [MethodImpl(Inline), Op]
+        public static bit HasRex(in AsmOpCodeExpr src)
+            => src.Data.Contains("REX", StringComparison.InvariantCultureIgnoreCase);
+
+
         public void Deposit(in AsmIndex src)
         {
-            Writer.WriteLine(Format(src));
+            var opcode = src.OpCode;
+            if(HasRex(opcode))
+            {
+                Writer.WriteLine(Format(src));
+            }
+
         }
 
         public void Dispose()

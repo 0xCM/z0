@@ -16,6 +16,30 @@ namespace Z0.Asm
     {
         AsmDecoder Decoder;
 
+
+        public static SortedSpan<ApiCodeBlock> blocks(ReadOnlySpan<AsmRoutine> src)
+        {
+            var count = src.Length;
+            var dst = alloc<ApiCodeBlock>(count);
+            var size = blocks(src, dst);
+            return dst.ToSortedSpan();
+        }
+
+        [Op]
+        public static ByteSize blocks(ReadOnlySpan<AsmRoutine> src, Span<ApiCodeBlock> dst)
+        {
+            var size = ByteSize.Zero;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                var routine = skip(src,i);
+                seek(dst, i) = routine.Code;
+                size += skip(dst,i).Size;
+            }
+            return size;
+        }
+
+
         [Op]
         public static AsmInstructionInfo summarize(MemoryAddress @base, IceInstruction src, CodeBlock encoded, AsmExpr statement, uint offset)
             => new AsmInstructionInfo(@base, offset,  statement,  src.Specifier, code(encoded, offset, src.InstructionSize));
@@ -46,7 +70,6 @@ namespace Z0.Asm
 
             return collected.Array().ToSortedSpan();
         }
-
 
         public static uint size(in ApiBlockAsm src)
         {
@@ -109,34 +132,6 @@ namespace Z0.Asm
                 dst.Add(statement);
             }
             return (uint)count;
-        }
-
-
-        [Op]
-        public static ByteSize blocks(ReadOnlySpan<AsmRoutine> src, Span<ApiCodeBlock> dst)
-        {
-            var size = ByteSize.Zero;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                var routine = skip(src,i);
-                seek(dst, i) = routine.Code;
-                size += skip(dst,i).Size;
-            }
-            return size;
-        }
-
-        [Op]
-        public static unsafe uint allocTest()
-        {
-            const ushort BufferSize = 32;
-            byte* p = stackalloc byte[BufferSize];
-            p[0] = 0x10;
-            p[1] = 0x20;
-            p[3] = 0x30;
-            p[4] = 0x40;
-            uint result = (uint)(p[0] | p[1] | p[2] | p[3]);
-            return result;
         }
 
         public static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)

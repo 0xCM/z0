@@ -406,7 +406,6 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
-
     }
 
     /// <summary>
@@ -472,7 +471,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Defines 16 bytes = 512 bits of stack-allocated storage
+    /// Defines 16 bytes of storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock16 : IDataBlock<ByteBlock16>
@@ -501,9 +500,7 @@ namespace Z0
                 => recover<T>(Bytes);
 
         public static ByteBlock16 Empty => default;
-
     }
-
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock17 : IDataBlock<ByteBlock17>
     {

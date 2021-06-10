@@ -18,8 +18,6 @@ namespace Z0.Tools
     {
         public AsmWorkspace Workspace {get; private set;}
 
-        public FS.FolderPath BuildDir {get; private set;}
-
         public FS.FilePath ToolPath {get; set;}
 
         public BdDisasm()
@@ -28,16 +26,11 @@ namespace Z0.Tools
 
         }
 
-
         protected override void Initialized()
         {
             Workspace = AsmWorkspace.create(Env.AsmWorkspace);
-            BuildDir = Workspace.External() + FS.folder(Id.Format()) + FS.folder(src) + FS.folder(build);
-            ToolPath = BuildDir + FS.file(Id.Format(), FS.Exe);
+            ToolPath = Workspace.External() + FS.folder(Id.Format()) + FS.folder(src) + FS.folder(build) + FS.file(Id.Format(), FS.Exe);
         }
-
-        public AsmToolchainSpec Spec(string src)
-            => Workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, src);
 
         public BdDisasmCmd Cmd(in AsmToolchainSpec spec, bool bitfields = false , bool details = false, Bitness mode = Bitness.b64)
         {

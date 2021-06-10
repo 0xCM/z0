@@ -51,6 +51,6 @@ namespace Z0
             => (int)Sequence;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{12,16,16,16,16,64,32,64,32,128,80};
+            => new byte[FieldCount]{12,16,16,16,16,42,32,42,32,128,80};
     }
 }

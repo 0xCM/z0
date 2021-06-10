@@ -13,28 +13,28 @@ namespace Z0.Asm
 
     public readonly struct AsmBitstring
     {
-        readonly StringAddress Address {get;}
+        readonly TextBlock Data {get;}
 
         [MethodImpl(Inline)]
-        internal AsmBitstring(StringAddress src)
+        internal AsmBitstring(string src)
         {
-            Address = src;
+            Data = src;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Address.IsNonZero;
+            get => Data.IsEmpty;
         }
 
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => Address.Hash;
+            get => Data.Hash;
         }
 
         public string Format()
-            => Address.Format();
+            => Data;
 
         public override string ToString()
             => Format();

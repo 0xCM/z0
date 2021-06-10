@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     partial struct Math128
     {
@@ -46,7 +46,7 @@ namespace Z0
         {
             var lo = x.Left + y.Left;
             var carry = x.Left > lo;
-            var hi = x.Right + y.Right + @uint(carry);
+            var hi = x.Right + y.Right + uint32(carry);
             return (lo,hi);
         }
 

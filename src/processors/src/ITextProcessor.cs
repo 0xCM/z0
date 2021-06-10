@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
 
-    public interface ITextProcessor : IProcessService
+    public interface ITextProcessor
     {
         void ProcessFile(FS.FilePath src);
     }
 
-    public interface ITextProcessor<T> : ITextProcessor, IProcessService<T>
+    public interface ITextProcessor<T> : ITextProcessor
     {
         Outcome<T> ProcessLine(uint number, ReadOnlySpan<char> chars);
     }

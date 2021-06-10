@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
     using static LimitValues;
     using static Root;
-    using static memory;
+    using static core;
 
     partial struct Math128
     {

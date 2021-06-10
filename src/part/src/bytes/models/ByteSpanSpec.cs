@@ -12,7 +12,7 @@ namespace Z0
 
     using api = ByteSpans;
 
-    public readonly struct ByteSpanSpec : ITextual
+    public readonly struct ByteSpanSpec : IByteSpanSpec
     {
         public Identifier Name {get;}
 
@@ -20,18 +20,27 @@ namespace Z0
 
         public bool IsStatic {get;}
 
+        public string CellType {get;}
+
         [MethodImpl(Inline)]
         public ByteSpanSpec(string name, byte[] data, bool isStatic = true)
         {
             Name = name;
             Data = data;
             IsStatic = isStatic;
+            CellType = "byte";
         }
 
         public ref byte FirstByte
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
+        }
+
+        public uint CellCount
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
         }
 
         public ByteSize DataSize

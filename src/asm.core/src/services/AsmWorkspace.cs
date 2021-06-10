@@ -49,7 +49,7 @@ namespace Z0.Asm
             => DocExtracts() + FS.folder(docid);
 
         public FS.FilePath DocExtract(string docid, string part, FS.FileExt ext)
-            => DocExtractDir(docid) + FS.file(part, ext);
+            => DocExtractDir(docid) + FS.file(string.Format("{0}.{1}",docid, part), ext);
 
         public FS.FolderPath Disassembly()
             => Builds() + FS.folder("dis");

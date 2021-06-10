@@ -12,6 +12,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
+
     public abstract class AsciTextProcessor<H,T> : TextProcessor<H,T>
         where H : AsciTextProcessor<H,T>, new()
     {

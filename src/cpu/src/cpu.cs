@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly partial struct cpu

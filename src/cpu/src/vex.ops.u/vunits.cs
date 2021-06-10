@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
+    using static Typed;
+    using static core;
     using static CpuBytes;
-    using static memory;
 
     partial struct gcpu
     {

@@ -134,19 +134,9 @@ namespace Z0.Asm
             [Symbol("m64int", "A quadword integer operand in memory. These symbols designate integers that are used as operands for x87 FPU integer instructions")]
             m64Int,
 
-            /// <summary>
-            /// A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand.
-            /// All memory addressing modes are allowed. Ussed by the BOUND instruction to provide an operand containing an
-            /// upper and lower bounds for array indices, E.G. BOUND r16, m16&16
-            /// </summary>
             [Symbol("m16&16", "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand.")]
             m16x16,
 
-            /// <summary>
-            /// A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand.
-            /// All memory addressing modes are allowed. The operand is used by the BOUND instruction to provide an operand containing an
-            /// upper and lower bounds for array indices.
-            /// </summary>
             [Symbol("m16&32", "A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand.")]
             m16x32,
         }

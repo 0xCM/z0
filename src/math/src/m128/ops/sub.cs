@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     partial struct Math128
     {
@@ -49,7 +49,7 @@ namespace Z0
         {
             c = a - b;
             var borrow = a < c;
-            seek(c, 1) = skip(in a, 1) - skip(in b, 1) - @uint(borrow);
+            seek(c, 1) = skip(in a, 1) - skip(in b, 1) - uint32(borrow);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         {
             var lo = x.Left - y.Left;
             var borrow = x.Left < lo;
-            var hi = x.Right - y.Right - @uint(borrow);
+            var hi = x.Right - y.Right - uint32(borrow);
             return (lo, hi);
         }
     }

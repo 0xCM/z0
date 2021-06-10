@@ -75,9 +75,9 @@ namespace Z0
 
         ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, ApiPackArchive dst)
         {
-            var rows = Statements.BuildStatementIndex(src);
-            var formatter = Tables.formatter<AsmIndex>(AsmIndex.RenderWidths);
-            Statements.EmitIndex(rows, dst.StatementIndexPath());
+            var pipe = Wf.AsmIndexPipe();
+            var rows = pipe.BuildIndex(src);
+            pipe.EmitIndex(rows, dst.StatementIndexPath());
             return rows;
         }
 
@@ -85,7 +85,6 @@ namespace Z0
         {
             var root = dst.RootDir();
             var blocks = CollectBlocks(root);
-
             EmitThumbprints(src, root);
         }
 
@@ -109,14 +108,6 @@ namespace Z0
             var target = dst.JmpTarget();
             var rows = Jumps.EmitRows(src, target);
             Emitted(rows, target);
-        }
-
-        ReadOnlySpan<ApiPartRoutines> Routines(ReadOnlySpan<ApiCodeBlock> src)
-        {
-            var routines = Decoder.Decode(src);
-            Loaded(routines);
-            return routines;
-
         }
 
         uint CountStatements(ReadOnlySpan<AsmRoutine> src)
@@ -150,10 +141,11 @@ namespace Z0
         {
             var count = src.Length;
             var flow = Wf.Running(CollectingBlocks.Format(count));
-            var dst = alloc<ApiCodeBlock>(count);
-            var size = AsmEtl.blocks(src, dst);
-            Wf.Ran(flow, CollectedBlocks.Format(size));
-            return dst.ToSortedSpan();
+            var blocks = AsmEtl.blocks(src);
+            // var dst = alloc<ApiCodeBlock>(count);
+            // var size = AsmEtl.blocks(src, dst);
+            Wf.Ran(flow, CollectedBlocks.Format(count));
+            return blocks;
         }
 
         SortedSpan<ApiCodeBlock> CollectBlocks(FS.FolderPath root)
@@ -219,7 +211,7 @@ namespace Z0
 
         static MsgPattern<Count> CollectingBlocks => "Collecting code blocks from {0} routines";
 
-        static MsgPattern<ByteSize> CollectedBlocks => "Collecting {0} code block bytes";
+        static MsgPattern<ByteSize> CollectedBlocks => "Collecting {0} code blocks";
 
         public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";
 

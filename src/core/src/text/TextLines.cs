@@ -26,6 +26,14 @@ namespace Z0
             => (CC)a0 == CR || (CC)a1 == LF;
 
         [MethodImpl(Inline), Op]
+        public static LineRange range(uint min, uint max, TextLine[] data)
+            => new LineRange(min, max, data);
+
+        [MethodImpl(Inline), Op]
+        public static TextLine line(uint number, string content)
+            => new TextLine(number, content);
+
+        [MethodImpl(Inline), Op]
         public static uint lines(ReadOnlySpan<string> src, Span<TextLine> dst)
         {
             var count = (uint)src.Length;

@@ -15,6 +15,20 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        public static void asci(string data, Identifier name, ITextBuffer dst)
+        {
+            var payload = text.buffer();
+            var src = span(data);
+            var count = src.Length;
+            var buffer = alloc<AsciCode>(count);
+            ref var target = ref first(buffer);
+            for(var i=0; i<count; i++)
+                seek(target,i) = (AsciCode)skip(src,i);
+
+            var spec = new ByteSpanSpec<AsciCode>(name, buffer, true, nameof(AsciCode));
+            render(spec, dst);
+        }
+
         public static uint cilbytes(Type[] types, FS.FilePath dst)
         {
             var counter = 0u;
@@ -56,16 +70,61 @@ namespace Z0
         }
 
         [Op]
+        public static string format<T>(ByteSpanSpec<T> src)
+            where T : unmanaged, Enum
+        {
+            var dst = text.buffer();
+            render(src,dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static void render<T>(ByteSpanSpec<T> spec, ITextBuffer dst)
+            where T : unmanaged, Enum
+        {
+            var payload = text.buffer();
+            var src = spec.Data.View;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var cell = ref skip(src,i);
+                if(i != count - 1)
+                    payload.Append(string.Format("{0}, ", cell));
+                else
+                    payload.Append(cell.ToString());
+            }
+
+            dst.Append("public");
+            dst.Append(Chars.Space);
+            dst.Append(spec.IsStatic ? RP.rspace("static") : EmptyString);
+            dst.Append(string.Format("ReadOnlySpan<{0}>", spec.CellType));
+            dst.Append(Chars.Space);
+            dst.Append(spec.Name);
+            dst.Append(" => ");
+            dst.Append(string.Concat(string.Format("new {0}", spec.CellType), RP.bracket(spec.Data.Length), RP.embrace(payload.Emit())));
+            dst.Append(Chars.Semicolon);
+        }
+
+
+        [Op]
         public static void render(ByteSpanSpec src, ITextBuffer dst)
+        {
+            var payload = HexFormatter.array<byte>(src.Data);
+            render(src, payload, dst);
+        }
+
+
+        [Op]
+        public static void render(ByteSpanSpec src, string payload, ITextBuffer dst)
         {
             dst.Append("public");
             dst.Append(Chars.Space);
             dst.Append(src.IsStatic ? RP.rspace("static") : EmptyString);
-            dst.Append("ReadOnlySpan<byte>");
+            dst.Append(string.Format("ReadOnlySpan<{0}>", src.CellType));
             dst.Append(Chars.Space);
             dst.Append(src.Name);
             dst.Append(" => ");
-            dst.Append(string.Concat("new byte", RP.bracket(src.Data.Length), RP.embrace(HexFormatter.array<byte>(src.Data))));
+            dst.Append(string.Concat(string.Format("new {0}", src.CellType), RP.bracket(src.Data.Length), RP.embrace(payload)));
             dst.Append(Chars.Semicolon);
         }
 

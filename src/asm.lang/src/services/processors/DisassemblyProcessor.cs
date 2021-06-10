@@ -22,8 +22,25 @@ namespace Z0.Asm
             dst = default;
             var data = src.Content;
             var space1 = TextTools.next(data, 0, AsciCode.Space);
+            if(space1 == NotFound)
+                return false;
             Hex.parse(slice(data,0, space1), out var offset);
-            dst = new AsmDisassembly(offset, EmptyString, default);
+            var space2 = TextTools.next(data, (uint)space1 + 1, AsciCode.Space);
+            if(space2 == NotFound)
+                return false;
+
+            var buffer = Cells.alloc(n128).Bytes;
+            var chars = slice(data,(uint)space1, 16);
+            var result  = Hex.parse(chars, buffer);
+            if(result.Fail)
+                return (false,result.Message);
+
+            var i=0u;
+            var statement = slice(src.Content,space1 + 16);
+            var sbuffer = span<char>(statement.Length);
+            var len = TextTools.render(slice(src.Content,space1 + 16),ref i, sbuffer);
+
+            dst = new AsmDisassembly(offset, new string(slice(sbuffer,0,len)), AsmBytes.hexcode(slice(buffer,0,result.Data)));
             return outcome;
         }
 
@@ -58,7 +75,7 @@ namespace Z0.Asm
                     }
                     else
                     {
-                        Babble(string.Format("{0}", encoding.Offset));
+                        Babble(string.Format("{0} {1} {2}", encoding.Offset, encoding.Code, encoding.Statement));
                     }
                     buffer.Clear();
                     writer.Write(_line.Format(buffer));

@@ -24,7 +24,7 @@ namespace Z0
         {
             var x = vshuf16x8(a, vadd(spec, K0V));
             var y = vshuf16x8(vswaphl(a), vadd(spec, K1V));
-            return cpu.vor(x,y);
+            return vor(x,y);
         }
 
         const byte M70 = 0b01110000;

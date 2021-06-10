@@ -10,7 +10,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static Part;
+    using static Root;
 
     partial struct cpu
     {

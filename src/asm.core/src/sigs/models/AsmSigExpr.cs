@@ -14,66 +14,63 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSigExpr : ITextExpr<AsmSigExpr>, IComparable<AsmSigExpr>
     {
-        readonly TextBlock Data;
+        public TextBlock Operands {get;}
 
         public AsmMnemonic Mnemonic {get;}
 
-        public AsmSigExpr(AsmMnemonic mnemonic, TextBlock formatted)
+        public TextBlock Content {get;}
+
+        public AsmSigExpr(AsmMnemonic mnemonic, TextBlock operands)
         {
-            Data = formatted;
             Mnemonic = mnemonic;
+            Operands = operands;
+            Content = string.Format("{0} {1}", Mnemonic.Format(MnemonicCase.Lowercase), Operands);
         }
 
         public AsmSigExpr(AsmMnemonic mnemonic)
         {
-            Data = EmptyString;
             Mnemonic = mnemonic;
-        }
-
-        public TextBlock Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
+            Operands = EmptyString;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Content.Length;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.IsEmpty;
+            get => Content.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
+            get => Content.IsNonEmpty;
         }
 
 
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Content.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data;
+            => Content;
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(AsmSigExpr src)
-            => Data.Equals(src.Data);
+            => Content.Equals(src.Content);
 
         public override bool Equals(object src)
             => src is AsmSigExpr x && Equals(x);
 
         public int CompareTo(AsmSigExpr src)
-            => Data.CompareTo(src.Data);
+            => Content.CompareTo(src.Content);
 
         [MethodImpl(Inline)]
         public static implicit operator TextBlock(AsmSigExpr src)

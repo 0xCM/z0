@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    using T = AsmOpCodeTokens;
+    using T = AsmOpCodeSymbols;
 
     /// <summary>
     /// Represents a register digit 0..7 that occurs within an op code expression

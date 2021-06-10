@@ -38,6 +38,24 @@ namespace Z0
             get => Data;
         }
 
+        public uint RecordCount
+        {
+            [MethodImpl(Inline)]
+            get => Data == null ? 0 : (uint)Data.Length;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => RecordCount == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => RecordCount != 0;
+        }
+
         public static implicit operator RecordSet<T>(T[] src)
             => new RecordSet<T>(src);
 

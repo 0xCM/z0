@@ -14,7 +14,6 @@ namespace Z0
     /// </summary>
     public struct BitFormat
     {
-
         [MethodImpl(Inline), Op]
         public static BitFormat configure(bool tlz)
             => BitFormatOptions.bits(tlz);

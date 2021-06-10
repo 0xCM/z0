@@ -14,9 +14,6 @@ namespace Z0
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
-        /// <remarks>
-        /// math::add:i8->i8->i8
-        /// </remarks>
         [MethodImpl(Inline), Add]
         public static sbyte add(sbyte a, sbyte b)
             => (sbyte)(a + b);

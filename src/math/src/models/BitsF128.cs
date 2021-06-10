@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitsF128(decimal src)
         {
-            Data = memory.@as<decimal,Vector128<ulong>>(src);
+            Data = core.@as<decimal,Vector128<ulong>>(src);
         }
     }
 }

@@ -94,19 +94,14 @@ namespace Z0.Asm
         public static Outcome sig(string src, out AsmSigExpr dst)
         {
             if(text.empty(src))
-                return false;
+                return true;
 
             var trimmed = src.Trim();
             var i = text.index(trimmed, Chars.Space);
             if(i == NotFound)
-            {
                 dst = new AsmSigExpr(asm.mnemonic(src));
-            }
             else
-            {
                 dst = new AsmSigExpr(asm.mnemonic(text.slice(trimmed,0,i)), text.slice(trimmed, i + 1));
-            }
-
             return true;
         }
 

@@ -23,6 +23,10 @@ namespace Z0.Asm
         const byte MaxRexCode = 0x4F;
 
         [MethodImpl(Inline), Op]
+        public static bit HasRexPrefix(in AsmOpCodeExpr src)
+            => src.Data.Contains("REX", StringComparison.InvariantCultureIgnoreCase);
+
+        [MethodImpl(Inline), Op]
         public static bit IsCallRel32(ReadOnlySpan<byte> src, uint offset)
             => (offset + 4) <= src.Length && skip(src, offset) == 0xE8;
 
@@ -38,9 +42,9 @@ namespace Z0.Asm
         public static bit HasRexPrefix(AsmHexCode src)
             => IsRexPrefix(skip(src.Bytes,0));
 
-        [MethodImpl(Inline), Op]
-        public static bit HasRexPrefix(AsmOpCodeExpr src)
-            => src.Content.StartsWith("REX");
+        // [MethodImpl(Inline), Op]
+        // public static bit HasRexPrefix(AsmOpCodeExpr src)
+        //     => src.Content.StartsWith("REX");
 
         [MethodImpl(Inline), Op]
         public static bit HasRepeatPrefix(AsmOpCode src)

@@ -71,8 +71,8 @@ namespace Z0
             if(parts.Length != 2)
                 return false;
 
-            data.Address = root.succeed(HexNumericParser.parse64u(parts[0]));
-            data.Data = root.succeed(ByteParser.ParseData(parts[1]));
+            DataParser.parse(parts[0], out data.Address);
+            DataParser.parse(parts[1], out data.Data);
 
             return true;
         }

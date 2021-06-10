@@ -93,10 +93,40 @@ namespace Z0
             return (true,counter);
         }
 
+        [MethodImpl(Inline), Op]
+        public static byte combine(HexDigit lo, HexDigit hi)
+            => (byte)((byte)hi << 4 | (byte)lo);
+
         public static Outcome parse(ReadOnlySpan<AsciCode> src, out ulong dst)
         {
             dst = 0;
-            return parse(src, bytes(dst));
+            var counter = 0u;
+            var count = src.Length;
+            var target = bytes(dst);
+            var hi = byte.MaxValue;
+            var lo = byte.MaxValue;
+            for(var i=count-1; i>=0; i--)
+            {
+                ref readonly var c = ref skip(src,i);
+                if(whitespace(c) || specifier(c))
+                    continue;
+
+                if(parse(c, out HexDigit d))
+                {
+                    if(lo == byte.MaxValue)
+                        lo = (byte)d;
+                    else
+                    {
+                        hi = (byte)d;
+                        seek(target, counter++) = Bytes.or(Bytes.sll(hi,4), lo);
+                        hi = byte.MaxValue;
+                        lo = byte.MaxValue;
+                    }
+                }
+                else
+                    return false;
+            }
+            return true;
         }
 
         public static Outcome parse(ReadOnlySpan<char> src, out ulong dst)
@@ -113,7 +143,7 @@ namespace Z0
             ref var target = ref first(dst);
             var hi = byte.MaxValue;
             var lo = byte.MaxValue;
-            for(var i=count-1; i>=0; i--)
+            for(var i=0; i<count; i++)
             {
                 ref readonly var c = ref skip(src,i);
                 if(whitespace(c) || specifier(c))
@@ -121,11 +151,11 @@ namespace Z0
 
                 if(parse(c, out HexDigit d))
                 {
-                    if(lo == byte.MaxValue)
-                        lo = (byte)d;
+                    if(hi == byte.MaxValue)
+                        hi = (byte)d;
                     else
                     {
-                        hi = (byte)d;
+                        lo = (byte)d;
                         seek(target, counter++) = Bytes.or(Bytes.sll(hi,4), lo);
                         hi = byte.MaxValue;
                         lo = byte.MaxValue;
