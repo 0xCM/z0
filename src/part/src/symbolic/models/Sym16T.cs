@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Symbols;
 
-    public readonly struct Sym16<T> : ISym<W16,T>
+    public class Sym16<T> : ISym<W16,T>
         where T : unmanaged
     {
         public SymIdentity Identity {get;}
@@ -28,6 +28,17 @@ namespace Z0
         public TextBlock Description {get;}
 
         public bool Hidden {get;}
+
+        Sym16()
+        {
+            Identity = SymIdentity.Empty;
+            Index = default;
+            Name = Identifier.Empty;
+            Kind = default;
+            Expr = SymExpr.Empty;
+            Description = TextBlock.Empty;
+            Hidden = true;
+        }
 
         [MethodImpl(Inline)]
         public Sym16(SymKey<ushort> index, Identifier name, T kind, SymExpr expr, TextBlock? description = null, bool hidden = false)

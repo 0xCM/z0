@@ -11,20 +11,6 @@ namespace Z0.Asm
 
     public readonly struct AsmSig
     {
-        public static void render(in AsmSig src, ITextBuffer dst)
-        {
-            var operands = src.Operands.View;
-            var count = operands.Length;
-            var monic = src.Mnemonic;
-            dst.AppendFormat("{0} ", monic.Format(MnemonicCase.Lowercase));
-            for(var i=0; i<count; i++)
-            {
-                dst.Append(core.skip(operands,i).Symbol.Format());
-                if(i != count - 1)
-                    dst.Append(Chars.Comma);
-            }
-        }
-
         public AsmMnemonic Mnemonic {get;}
 
         public Index<AsmSigOp> Operands {get;}
@@ -49,11 +35,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-        {
-            var dst = text.buffer();
-            render(this,dst);
-            return dst.Emit();
-        }
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();

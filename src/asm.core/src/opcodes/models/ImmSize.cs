@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    using T = AsmOpCodeSymbols;
+    using T = AsmOpCodeTokens;
 
     public readonly struct ImmSize
     {

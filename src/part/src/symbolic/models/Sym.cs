@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Symbols;
 
-    public readonly struct Sym : ISym
+    public class Sym : ISym
     {
         public SymIdentity Identity {get;}
 
@@ -28,6 +28,17 @@ namespace Z0
         public TextBlock Description {get;}
 
         public bool Hidden {get;}
+
+        Sym()
+        {
+            Identity = SymIdentity.Empty;
+            Index = default;
+            Name = Identifier.Empty;
+            Kind = default;
+            Expr = SymExpr.Empty;
+            Description = TextBlock.Empty;
+            Hidden = true;
+        }
 
        [MethodImpl(Inline)]
         public Sym(SymIdentity id, SymKey index, Identifier type, ulong kind, Identifier name, SymExpr symbol, TextBlock? description = null, bool hidden = false)
@@ -57,7 +68,7 @@ namespace Z0
         public static Sym Empty
         {
             [MethodImpl(Inline)]
-            get => new Sym(SymIdentity.Empty, default, Identifier.Empty, 0ul, Identifier.Empty, SymExpr.Empty);
+            get => new Sym();
         }
     }
 }

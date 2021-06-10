@@ -124,5 +124,8 @@ namespace Z0
         public const string manuals = nameof(manuals);
 
         public const string current = nameof(current);
+
+        public const string codegen = nameof(codegen);
+
     }
 }

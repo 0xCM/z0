@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using static AsciCode;
 
-    public readonly struct AsmOpCodeSymbols
+    public readonly struct AsmOpCodeTokens
     {
         [Flags]
         public enum TokenKind : byte
@@ -50,15 +50,27 @@ namespace Z0.Asm
             ct,
         }
 
-        public const string PrefixText = "66F2F30F0F38VEXREXREX.WLZLIGWIGW0W1";
+        [SymbolSource]
+        public enum SegOverride : byte
+        {
+            [Symbol("cs", "CS segment override")]
+            CS,
 
-        public const byte PrefixCount = 13;
+            [Symbol("ss", "SS segment override")]
+            SS,
 
-        public static ReadOnlySpan<byte> PrefixIndexList => new byte[PrefixCount]{0,2,4,6,8,12,15,18,22,24,25,28,31};
+            [Symbol("ds", "DS segment override")]
+            DS,
 
-        public static ReadOnlySpan<byte> PrefixSymbolLengths => new byte[PrefixCount]{2,2,2,2,4,3,3,5,2,3,3,2,2};
+            [Symbol("es", "ES segment override")]
+            ES,
 
-        public static ReadOnlySpan<AsciCode> PrefixData => new AsciCode[35]{d6, d6, F, d2, F, d3, d0, F, d0, F, d3, d8, V, E, X, R, E, X, R, E, X, Dot, W, L, Z, L, I, G, W, I, G, W, d0, W, d1};
+            [Symbol("fs", "FS segment override")]
+            FS,
+
+            [Symbol("gs", "GS segment override")]
+            GS,
+        }
 
         [SymbolSource]
         public enum Prefix : byte
@@ -103,11 +115,7 @@ namespace Z0.Asm
             W1 = 12,
         }
 
-        /// <summary>
-        /// Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only
-        /// the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode.
-        /// </summary>
-        [SymbolSource]
+        [SymbolSource("Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode.")]
         public enum RegDigit : byte
         {
             [Symbol("/0", "Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode")]
@@ -135,10 +143,7 @@ namespace Z0.Asm
             r7,
         }
 
-        /// <summary>
-        /// Specifies symbols that modify the op code value
-        /// </summary>
-        [SymbolSource]
+        [SymbolSource("Defines symbols that modify the op code value")]
         public enum OpCodeMod : byte
         {
             [Symbol("+rb", "For an 8-bit register, indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
@@ -154,10 +159,7 @@ namespace Z0.Asm
             ro,
         }
 
-        /// <summary>
-        /// Specifies the size of an immediate operand in the context of an opcode specification
-        /// </summary>
-        [SymbolSource]
+        [SymbolSource("Specifies the size of an immediate operand in the context of an opcode specification")]
         public enum ImmSize : byte
         {
             [Symbol("ib", "Indicates a 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.")]
@@ -173,14 +175,26 @@ namespace Z0.Asm
             io,
         }
 
-        internal static ReadOnlySpan<Offset> Offsets
+        public const string PrefixText = "66F2F30F0F38VEXREXREX.WLZLIGWIGW0W1";
+
+        public const byte PrefixCount = 13;
+
+        public static ReadOnlySpan<byte> PrefixIndexList
+            => new byte[PrefixCount]{0,2,4,6,8,12,15,18,22,24,25,28,31};
+
+        public static ReadOnlySpan<byte> PrefixSymbolLengths
+            => new byte[PrefixCount]{2,2,2,2,4,3,3,5,2,3,3,2,2};
+
+        public static ReadOnlySpan<AsciCode> PrefixData
+            => new AsciCode[35]{d6, d6, F, d2, F, d3, d0, F, d0, F, d3, d8, V, E, X, R, E, X, R, E, X, Dot, W, L, Z, L, I, G, W, I, G, W, d0, W, d1};
+
+        public static ReadOnlySpan<Offset> OffsetKinds
             => new Offset[]{Offset.cb, Offset.cw, Offset.cd, Offset.cp, Offset.co, Offset.ct};
 
-        internal static ReadOnlySpan<RegDigit> RegDigits
+        public static ReadOnlySpan<RegDigit> RegDigitKinds
             => new RegDigit[]{RegDigit.r0, RegDigit.r1,RegDigit.r2,RegDigit.r3,RegDigit.r4,RegDigit.r5,RegDigit.r6,RegDigit.r7,};
 
-        internal static ReadOnlySpan<Prefix> Prefixes
-            => new Prefix[]{Prefix.x66,Prefix.F2,Prefix.F3,Prefix.x0F,Prefix.x0F38, Prefix.Rex,
-                    Prefix.RexW, Prefix.VEX, Prefix.LZ,Prefix.LIG, Prefix.WIG, Prefix.W0, Prefix.W1};
+        public static ReadOnlySpan<Prefix> PrefixKinds
+            => new Prefix[]{Prefix.x66,Prefix.F2,Prefix.F3,Prefix.x0F,Prefix.x0F38, Prefix.Rex, Prefix.RexW, Prefix.VEX, Prefix.LZ,Prefix.LIG, Prefix.WIG, Prefix.W0, Prefix.W1};
     }
 }

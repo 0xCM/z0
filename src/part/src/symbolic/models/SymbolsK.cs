@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly struct Symbols<K>
+    public class Symbols<K>
         where K : unmanaged
     {
         readonly Index<Sym<K>> Data;
@@ -19,6 +19,13 @@ namespace Z0
         readonly Index<K> _Kinds;
 
         readonly HashSet<K> _Set;
+
+        Symbols()
+        {
+            Data = array<Sym<K>>();
+            _Kinds = array<K>();
+            _Set = new();
+        }
 
         [MethodImpl(Inline)]
         internal Symbols(Index<Sym<K>> src)
@@ -111,16 +118,8 @@ namespace Z0
             get => Data.View;
         }
 
-        // [MethodImpl(Inline)]
-        // public static implicit operator Symbols<K>(Sym<K>[] src)
-        //     => new Symbols<K>(src);
-
         [MethodImpl(Inline)]
         public static implicit operator Sym<K>[](Symbols<K> src)
             => src.Data;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator Index<K,Sym<K>>(Symbols<K> src)
-        //     => new Index<K,Sym<K>>(src.Data);
     }
 }

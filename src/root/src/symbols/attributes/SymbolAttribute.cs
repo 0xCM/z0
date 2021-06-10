@@ -16,39 +16,33 @@ public class SymbolAttribute : Attribute
 
     public string Description {get;}
 
-    public SymbolAttribute(string symbol)
-    {
-        _Symbol = symbol;
-        Description = string.Empty;
-    }
-
-    public SymbolAttribute(string symbol, string description)
-    {
-        _Symbol = symbol;
-        Description = description;
-    }
-
-    public SymbolAttribute(char symbol)
-    {
-        _Symbol = symbol;
-        Description = string.Empty;
-    }
-
-    public SymbolAttribute(char symbol, string description)
-    {
-        _Symbol = symbol;
-        Description = description;
-    }
+    public string Expansion {get;}
 
     public SymbolAttribute(object symbol)
     {
         _Symbol = symbol;
         Description = string.Empty;
+        Expansion = string.Empty;
     }
 
     public SymbolAttribute(object symbol, string description)
     {
         _Symbol = symbol;
         Description = description;
+        Expansion = string.Empty;
     }
+
+    public SymbolAttribute(object symbol, string description, string expansion)
+    {
+        _Symbol = symbol;
+        Description = description;
+        Expansion = expansion;
+    }
+
+    // public SymbolAttribute(object symbol)
+    // {
+    //     _Symbol = symbol;
+    //     Description = string.Empty;
+    // }
+
 }

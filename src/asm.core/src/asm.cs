@@ -18,10 +18,6 @@ namespace Z0.Asm
         public static AsmBlockLabel blocklabel(MemoryAddress address)
             => new AsmBlockLabel(string.Format("_{0}", address));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static AsmSigOp sigop<K>(Sym<K> sym)
-            where K : unmanaged
-                => new AsmSigOp(sym.Name, sym.Expr);
 
         [MethodImpl(Inline), Op]
         public static AsmBranchInfo branch(MemoryAddress @base, MemoryAddress ip, byte fxSize, in AsmBranchTarget target)

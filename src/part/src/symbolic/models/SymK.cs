@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Symbols;
 
-    public readonly struct Sym<K> : ISym<K>
+    public class Sym<K> : ISym<K>
         where K : unmanaged
     {
         public SymIdentity Identity {get;}
@@ -28,6 +28,17 @@ namespace Z0
         public TextBlock Description {get;}
 
         public bool Hidden {get;}
+
+        Sym()
+        {
+            Identity = SymIdentity.Empty;
+            Index = default;
+            Name = Identifier.Empty;
+            Kind = default;
+            Expr = SymExpr.Empty;
+            Description = TextBlock.Empty;
+            Hidden = true;
+        }
 
         [MethodImpl(Inline)]
         internal Sym(uint index, SymLiteral<K> src)
@@ -73,7 +84,6 @@ namespace Z0
         public static implicit operator Sym(Sym<K> src)
             => new Sym(src.Identity, src.Index, src.Type, bw64(src.Kind), src.Name, src.Expr, src.Description, src.Hidden);
 
-
         [MethodImpl(Inline)]
         public static implicit operator K(Sym<K> src)
             => src.Kind;
@@ -81,7 +91,7 @@ namespace Z0
         public static Sym<K> Empty
         {
             [MethodImpl(Inline)]
-            get => new Sym<K>(SymIdentity.Empty, default, EmptyString, default, SymExpr.Empty);
+            get => new Sym<K>();
         }
     }
 }

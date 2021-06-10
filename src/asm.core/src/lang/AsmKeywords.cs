@@ -67,6 +67,5 @@ namespace Z0.Asm
             [Symbol("rip")]
             RIP,
         }
-
     }
 }

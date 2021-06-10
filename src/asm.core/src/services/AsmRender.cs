@@ -31,6 +31,27 @@ namespace Z0.Asm
             return i - i0;
         }
 
+        public static string format(in AsmSig src)
+        {
+            var dst = text.buffer();
+            render(src, dst);
+            return dst.Emit();
+        }
+
+        public static void render(in AsmSig src, ITextBuffer dst)
+        {
+            var operands = src.Operands.View;
+            var count = operands.Length;
+            var monic = src.Mnemonic;
+            dst.AppendFormat("{0} ", monic.Format(MnemonicCase.Lowercase));
+            for(var i=0; i<count; i++)
+            {
+                dst.Append(core.skip(operands,i).Symbol.Format());
+                if(i != count - 1)
+                    dst.Append(Chars.Comma);
+            }
+        }
+
         public static uint render(AsmHexCode src, ref uint i, Span<char> dst)
         {
             var i0 = i;

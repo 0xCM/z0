@@ -8,7 +8,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
+    [ApiHost]
+    public readonly struct AsmSigs
+    {
+        const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static AsmSigOp operand<K>(Sym<K> sym)
+            where K : unmanaged
+                => new AsmSigOp(sym.Name, sym.Expr);
+    }
 }
