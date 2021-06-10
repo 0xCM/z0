@@ -8,7 +8,7 @@ namespace Z0
     partial struct XedModels
     {
         [SymbolSource(xed)]
-        public enum FormFacets
+        public enum FormFacets : ushort
         {
             AAA_FIRST=1,
             AAA_LAST=1,

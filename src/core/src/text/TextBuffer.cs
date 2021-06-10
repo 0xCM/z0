@@ -114,5 +114,9 @@ namespace Z0
 
         public override string ToString()
             => Target.ToString();
+
+        public void IndentLineFormat(uint margin, string pattern, params object[] args)
+            => IndentLine(margin,string.Format(pattern, args));
+
     }
 }

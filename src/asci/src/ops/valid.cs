@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(byte src)
-            => src <= AsciCodeFacets.MaxCodeValue;
+            => src <= AsciFacets.MaxCodeValue;
 
         /// <summary>
         /// Tests whether a byte represents corresponds to an invalid asci character

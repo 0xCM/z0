@@ -5,11 +5,12 @@
 namespace Z0
 {
     using C = AsciCode;
+    using S = AsciLetter;
 
     /// <summary>
     /// Defines <see cref='AsciCode'/> attributges
     /// </summary>
-    public readonly struct AsciCodeFacets
+    public readonly struct AsciFacets
     {
         /// <summary>
         /// The numeric value of the firt asci code
@@ -75,5 +76,15 @@ namespace Z0
         /// The code of the last uppercase letter
         /// </summary>
         public const C MaxUpperCode = C.Z;
+
+        /// <summary>
+        /// The first uppercase letter symbol
+        /// </summary>
+        public const S FirstUpperSym = S.A;
+
+        /// <summary>
+        /// The last uppercase letter symbol
+        /// </summary>
+        public const S LastUpperSym = S.Z;
     }
 }

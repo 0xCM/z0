@@ -15,19 +15,20 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static void asci(string data, Identifier name, ITextBuffer dst)
-        {
-            var payload = text.buffer();
-            var src = span(data);
-            var count = src.Length;
-            var buffer = alloc<AsciCode>(count);
-            ref var target = ref first(buffer);
-            for(var i=0; i<count; i++)
-                seek(target,i) = (AsciCode)skip(src,i);
+        // public static void asci(string data, Identifier name, ITextBuffer dst)
+        // {
+        //     var payload = text.buffer();
+        //     var src = span(data);
 
-            var spec = new ByteSpanSpec<AsciCode>(name, buffer, true, nameof(AsciCode));
-            render(spec, dst);
-        }
+        //     var count = src.Length;
+        //     var buffer = alloc<AsciCode>(count);
+        //     ref var target = ref first(buffer);
+        //     for(var i=0; i<count; i++)
+        //         seek(target,i) = (AsciCode)skip(src,i);
+
+        //     var spec = new ByteSpanSpec<AsciCode>(name, buffer, true, nameof(AsciCode));
+        //     render(spec, dst);
+        // }
 
         public static uint cilbytes(Type[] types, FS.FilePath dst)
         {
@@ -52,6 +53,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ByteSpanSpec specify(Identifier name, BinaryCode data, bool @static = true)
             => new ByteSpanSpec(name, data, @static);
+
+        [MethodImpl(Inline), Op]
+        public static ByteSpanSpec<E> specify<E>(Identifier name, ReadOnlySpan<Sym<E>> literals, bool @static = true)
+            where E : unmanaged, Enum
+                => new ByteSpanSpec<E>(name, literals, @static);
 
         [Op]
         public static ByteSpanSpec specify(OpUri uri, BinaryCode data, bool @static = true)
@@ -83,7 +89,7 @@ namespace Z0
             where T : unmanaged, Enum
         {
             var payload = text.buffer();
-            var src = spec.Data.View;
+            var src = spec.Data;
             var count = src.Length;
             for(var i=0; i<count; i++)
             {

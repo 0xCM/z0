@@ -974,13 +974,30 @@ namespace Z0.Asm
         void CheckAsciSpans()
         {
             const string Input = "66F2F30F0F38VEXREXREX.WLZLIGWIGW0W1";
+            var lookups = Wf.AsciLookups();
             var dst = text.buffer();
-            ByteSpans.asci(Input, "PrefixData", dst);
+            lookups.AsciCodeSpan(8, Input, "PrefixData", dst);
             Wf.Row(dst.Emit());
         }
+
+        void CheckAsciLookups()
+        {
+            var lookups = Wf.AsciLookups();
+            var buffer = text.buffer();
+            lookups.Emit<XedModels.IFormType>(buffer);
+            var dst = Db.AppLog("Lookups", FS.Cs);
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            writer.Write(buffer.Emit());
+            Wf.EmittedFile(flow,0);
+
+            CheckAsciSpans();
+        }
+
         public void Run()
         {
-            CheckAsciSpans();
+            //EmitXedCatalog();
+            CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));
             // Wf.Row(xpr);
             //GenerateInstructionModels();

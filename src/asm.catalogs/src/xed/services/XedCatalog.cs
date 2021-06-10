@@ -19,6 +19,15 @@ namespace Z0.Asm
             Archive = new AsmCatalogArchive(Db.AsmCatalogRoot());
         }
 
+        public void EmitCatalog()
+        {
+            EmitSourceAssets();
+            EmitFormSummaries();
+            EmitFormDetails();
+            EmitSymCatalog();
+            EmitFormAspects();
+        }
+
         public ReadOnlySpan<AsmMnemonic> Mnemonics()
         {
             var set = hashset<string>();
@@ -44,21 +53,11 @@ namespace Z0.Asm
                 {
                     ref readonly var a = ref skip(pa,j);
                     if(!aix.TryGetValue(a, out var index))
-                    {
                         Wf.Error(string.Format("Index for {0} not found", a));
-                    }
                 }
             }
         }
 
-        public void EmitCatalog()
-        {
-            EmitSourceAssets();
-            EmitFormSummaries();
-            EmitFormDetails();
-            EmitSymCatalog();
-            EmitFormAspects();
-        }
 
         public Index<XedFormDetail> EmitFormDetails()
             => EmitFormDetails(Archive.XedFormDetailPath());

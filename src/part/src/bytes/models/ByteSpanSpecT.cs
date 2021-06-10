@@ -9,19 +9,19 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ByteSpanSpec<T> : IByteSpanSpec
+    public readonly ref struct ByteSpanSpec<T>
         where T : unmanaged
     {
         public Identifier Name {get;}
 
-        public Index<T> Data {get;}
+        public ReadOnlySpan<Sym<T>> Data {get;}
 
         public bool IsStatic {get;}
 
         public string CellType {get;}
 
         [MethodImpl(Inline)]
-        public ByteSpanSpec(string name, T[] data, bool isStatic = true, string type = null)
+        public ByteSpanSpec(string name, ReadOnlySpan<Sym<T>> data, bool isStatic = true, string type = null)
         {
             Name = name;
             Data = data;
@@ -32,7 +32,7 @@ namespace Z0
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => (uint)Data.Length;
         }
     }
 }

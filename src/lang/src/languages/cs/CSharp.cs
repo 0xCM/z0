@@ -4,6 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
+    using static CSharpModels;
+
+    public readonly partial struct CSharpModels
+    {
+
+    }
     [ApiHost]
     public readonly partial struct CSharp : ILanguage<CSharp>
     {
@@ -27,5 +33,9 @@ namespace Z0.Lang
             dst.AppendLine("}");
             return dst.Emit();
         }
+
+        [Op]
+        public static SummaryComment comment(string content)
+            => new SummaryComment(content);
    }
 }

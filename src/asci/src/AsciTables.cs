@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using F = AsciCodeFacets;
+    using F = AsciFacets;
 
     [ApiHost]
     public readonly struct AsciTables
