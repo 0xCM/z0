@@ -14,6 +14,8 @@ namespace Z0.Asm
 
         const string MonicContainerName = "AsmMnemonics";
 
+        const string ApiCompleteAttribute = "[ApiComplete]";
+
         void EmitMonicExpressions(ReadOnlySpan<string> monics, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);

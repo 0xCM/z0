@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Generated   :  2021-06-10.20.22.20.286
+// Generated   :  2021-06-10.20.36.31.581
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -8,6 +8,8 @@ namespace Z0.Asm
     [ApiComplete]
     public readonly struct AsmMnemonics
     {
+        public static AsmMnemonic None => nameof(None);
+
         public static AsmMnemonic AAA => nameof(AAA);
 
         public static AsmMnemonic AAD => nameof(AAD);
@@ -18,13 +20,11 @@ namespace Z0.Asm
 
         public static AsmMnemonic ADC => nameof(ADC);
 
-        public static AsmMnemonic ADC_LOCK => nameof(ADC_LOCK);
-
         public static AsmMnemonic ADCX => nameof(ADCX);
 
-        public static AsmMnemonic ADD => nameof(ADD);
+        public static AsmMnemonic ADC_LOCK => nameof(ADC_LOCK);
 
-        public static AsmMnemonic ADD_LOCK => nameof(ADD_LOCK);
+        public static AsmMnemonic ADD => nameof(ADD);
 
         public static AsmMnemonic ADDPD => nameof(ADDPD);
 
@@ -37,6 +37,8 @@ namespace Z0.Asm
         public static AsmMnemonic ADDSUBPD => nameof(ADDSUBPD);
 
         public static AsmMnemonic ADDSUBPS => nameof(ADDSUBPS);
+
+        public static AsmMnemonic ADD_LOCK => nameof(ADD_LOCK);
 
         public static AsmMnemonic ADOX => nameof(ADOX);
 
@@ -70,8 +72,6 @@ namespace Z0.Asm
 
         public static AsmMnemonic AND => nameof(AND);
 
-        public static AsmMnemonic AND_LOCK => nameof(AND_LOCK);
-
         public static AsmMnemonic ANDN => nameof(ANDN);
 
         public static AsmMnemonic ANDNPD => nameof(ANDNPD);
@@ -81,6 +81,8 @@ namespace Z0.Asm
         public static AsmMnemonic ANDPD => nameof(ANDPD);
 
         public static AsmMnemonic ANDPS => nameof(ANDPS);
+
+        public static AsmMnemonic AND_LOCK => nameof(AND_LOCK);
 
         public static AsmMnemonic ARPL => nameof(ARPL);
 
@@ -244,8 +246,6 @@ namespace Z0.Asm
 
         public static AsmMnemonic CMPXCHG => nameof(CMPXCHG);
 
-        public static AsmMnemonic CMPXCHG_LOCK => nameof(CMPXCHG_LOCK);
-
         public static AsmMnemonic CMPXCHG16B => nameof(CMPXCHG16B);
 
         public static AsmMnemonic CMPXCHG16B_LOCK => nameof(CMPXCHG16B_LOCK);
@@ -253,6 +253,8 @@ namespace Z0.Asm
         public static AsmMnemonic CMPXCHG8B => nameof(CMPXCHG8B);
 
         public static AsmMnemonic CMPXCHG8B_LOCK => nameof(CMPXCHG8B_LOCK);
+
+        public static AsmMnemonic CMPXCHG_LOCK => nameof(CMPXCHG_LOCK);
 
         public static AsmMnemonic COMISD => nameof(COMISD);
 
@@ -582,11 +584,11 @@ namespace Z0.Asm
 
         public static AsmMnemonic INC => nameof(INC);
 
-        public static AsmMnemonic INC_LOCK => nameof(INC_LOCK);
-
         public static AsmMnemonic INCSSPD => nameof(INCSSPD);
 
         public static AsmMnemonic INCSSPQ => nameof(INCSSPQ);
+
+        public static AsmMnemonic INC_LOCK => nameof(INC_LOCK);
 
         public static AsmMnemonic INSB => nameof(INSB);
 
@@ -862,10 +864,6 @@ namespace Z0.Asm
 
         public static AsmMnemonic MOV => nameof(MOV);
 
-        public static AsmMnemonic MOV_CR => nameof(MOV_CR);
-
-        public static AsmMnemonic MOV_DR => nameof(MOV_DR);
-
         public static AsmMnemonic MOVAPD => nameof(MOVAPD);
 
         public static AsmMnemonic MOVAPS => nameof(MOVAPS);
@@ -948,6 +946,10 @@ namespace Z0.Asm
 
         public static AsmMnemonic MOVZX => nameof(MOVZX);
 
+        public static AsmMnemonic MOV_CR => nameof(MOV_CR);
+
+        public static AsmMnemonic MOV_DR => nameof(MOV_DR);
+
         public static AsmMnemonic MPSADBW => nameof(MPSADBW);
 
         public static AsmMnemonic MUL => nameof(MUL);
@@ -969,8 +971,6 @@ namespace Z0.Asm
         public static AsmMnemonic NEG => nameof(NEG);
 
         public static AsmMnemonic NEG_LOCK => nameof(NEG_LOCK);
-
-        public static AsmMnemonic None => nameof(None);
 
         public static AsmMnemonic NOP => nameof(NOP);
 
@@ -996,11 +996,11 @@ namespace Z0.Asm
 
         public static AsmMnemonic OR => nameof(OR);
 
-        public static AsmMnemonic OR_LOCK => nameof(OR_LOCK);
-
         public static AsmMnemonic ORPD => nameof(ORPD);
 
         public static AsmMnemonic ORPS => nameof(ORPS);
+
+        public static AsmMnemonic OR_LOCK => nameof(OR_LOCK);
 
         public static AsmMnemonic OUT => nameof(OUT);
 
@@ -1256,10 +1256,6 @@ namespace Z0.Asm
 
         public static AsmMnemonic POR => nameof(POR);
 
-        public static AsmMnemonic PREFETCH_EXCLUSIVE => nameof(PREFETCH_EXCLUSIVE);
-
-        public static AsmMnemonic PREFETCH_RESERVED => nameof(PREFETCH_RESERVED);
-
         public static AsmMnemonic PREFETCHNTA => nameof(PREFETCHNTA);
 
         public static AsmMnemonic PREFETCHT0 => nameof(PREFETCHT0);
@@ -1271,6 +1267,10 @@ namespace Z0.Asm
         public static AsmMnemonic PREFETCHW => nameof(PREFETCHW);
 
         public static AsmMnemonic PREFETCHWT1 => nameof(PREFETCHWT1);
+
+        public static AsmMnemonic PREFETCH_EXCLUSIVE => nameof(PREFETCH_EXCLUSIVE);
+
+        public static AsmMnemonic PREFETCH_RESERVED => nameof(PREFETCH_RESERVED);
 
         public static AsmMnemonic PSADBW => nameof(PSADBW);
 
@@ -1400,6 +1400,38 @@ namespace Z0.Asm
 
         public static AsmMnemonic RDTSCP => nameof(RDTSCP);
 
+        public static AsmMnemonic REPE_CMPSB => nameof(REPE_CMPSB);
+
+        public static AsmMnemonic REPE_CMPSD => nameof(REPE_CMPSD);
+
+        public static AsmMnemonic REPE_CMPSQ => nameof(REPE_CMPSQ);
+
+        public static AsmMnemonic REPE_CMPSW => nameof(REPE_CMPSW);
+
+        public static AsmMnemonic REPE_SCASB => nameof(REPE_SCASB);
+
+        public static AsmMnemonic REPE_SCASD => nameof(REPE_SCASD);
+
+        public static AsmMnemonic REPE_SCASQ => nameof(REPE_SCASQ);
+
+        public static AsmMnemonic REPE_SCASW => nameof(REPE_SCASW);
+
+        public static AsmMnemonic REPNE_CMPSB => nameof(REPNE_CMPSB);
+
+        public static AsmMnemonic REPNE_CMPSD => nameof(REPNE_CMPSD);
+
+        public static AsmMnemonic REPNE_CMPSQ => nameof(REPNE_CMPSQ);
+
+        public static AsmMnemonic REPNE_CMPSW => nameof(REPNE_CMPSW);
+
+        public static AsmMnemonic REPNE_SCASB => nameof(REPNE_SCASB);
+
+        public static AsmMnemonic REPNE_SCASD => nameof(REPNE_SCASD);
+
+        public static AsmMnemonic REPNE_SCASQ => nameof(REPNE_SCASQ);
+
+        public static AsmMnemonic REPNE_SCASW => nameof(REPNE_SCASW);
+
         public static AsmMnemonic REP_INSB => nameof(REP_INSB);
 
         public static AsmMnemonic REP_INSD => nameof(REP_INSD);
@@ -1453,38 +1485,6 @@ namespace Z0.Asm
         public static AsmMnemonic REP_XSHA256 => nameof(REP_XSHA256);
 
         public static AsmMnemonic REP_XSTORE => nameof(REP_XSTORE);
-
-        public static AsmMnemonic REPE_CMPSB => nameof(REPE_CMPSB);
-
-        public static AsmMnemonic REPE_CMPSD => nameof(REPE_CMPSD);
-
-        public static AsmMnemonic REPE_CMPSQ => nameof(REPE_CMPSQ);
-
-        public static AsmMnemonic REPE_CMPSW => nameof(REPE_CMPSW);
-
-        public static AsmMnemonic REPE_SCASB => nameof(REPE_SCASB);
-
-        public static AsmMnemonic REPE_SCASD => nameof(REPE_SCASD);
-
-        public static AsmMnemonic REPE_SCASQ => nameof(REPE_SCASQ);
-
-        public static AsmMnemonic REPE_SCASW => nameof(REPE_SCASW);
-
-        public static AsmMnemonic REPNE_CMPSB => nameof(REPNE_CMPSB);
-
-        public static AsmMnemonic REPNE_CMPSD => nameof(REPNE_CMPSD);
-
-        public static AsmMnemonic REPNE_CMPSQ => nameof(REPNE_CMPSQ);
-
-        public static AsmMnemonic REPNE_CMPSW => nameof(REPNE_CMPSW);
-
-        public static AsmMnemonic REPNE_SCASB => nameof(REPNE_SCASB);
-
-        public static AsmMnemonic REPNE_SCASD => nameof(REPNE_SCASD);
-
-        public static AsmMnemonic REPNE_SCASQ => nameof(REPNE_SCASQ);
-
-        public static AsmMnemonic REPNE_SCASW => nameof(REPNE_SCASW);
 
         public static AsmMnemonic RET_FAR => nameof(RET_FAR);
 
@@ -1662,8 +1662,6 @@ namespace Z0.Asm
 
         public static AsmMnemonic SUB => nameof(SUB);
 
-        public static AsmMnemonic SUB_LOCK => nameof(SUB_LOCK);
-
         public static AsmMnemonic SUBPD => nameof(SUBPD);
 
         public static AsmMnemonic SUBPS => nameof(SUBPS);
@@ -1671,6 +1669,8 @@ namespace Z0.Asm
         public static AsmMnemonic SUBSD => nameof(SUBSD);
 
         public static AsmMnemonic SUBSS => nameof(SUBSS);
+
+        public static AsmMnemonic SUB_LOCK => nameof(SUB_LOCK);
 
         public static AsmMnemonic SWAPGS => nameof(SWAPGS);
 
@@ -1684,9 +1684,9 @@ namespace Z0.Asm
 
         public static AsmMnemonic SYSRET => nameof(SYSRET);
 
-        public static AsmMnemonic SYSRET_AMD => nameof(SYSRET_AMD);
-
         public static AsmMnemonic SYSRET64 => nameof(SYSRET64);
+
+        public static AsmMnemonic SYSRET_AMD => nameof(SYSRET_AMD);
 
         public static AsmMnemonic T1MSKC => nameof(T1MSKC);
 
@@ -3244,11 +3244,11 @@ namespace Z0.Asm
 
         public static AsmMnemonic XOR => nameof(XOR);
 
-        public static AsmMnemonic XOR_LOCK => nameof(XOR_LOCK);
-
         public static AsmMnemonic XORPD => nameof(XORPD);
 
         public static AsmMnemonic XORPS => nameof(XORPS);
+
+        public static AsmMnemonic XOR_LOCK => nameof(XOR_LOCK);
 
         public static AsmMnemonic XRESLDTRK => nameof(XRESLDTRK);
 

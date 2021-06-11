@@ -47,7 +47,6 @@ namespace Z0.Asm
             0100 100B : 1000 0001 : 11 010 qwordreg : imm32
             immediate to qwordregister
             0100 1R0B : 1000 0011 : 11 010 qwordreg : imm8
-
         */
     }
 }

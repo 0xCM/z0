@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Generated   :  2021-06-10.20.22.20.291
+// Generated   :  2021-06-10.20.36.31.586
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -7,6 +7,9 @@ namespace Z0.Asm
 {
     public enum AsmMnemonicCode : ushort
     {
+        [Symbol("none")]
+        None = 0,
+
         [Symbol("aaa")]
         AAA = 1,
 
@@ -22,35 +25,35 @@ namespace Z0.Asm
         [Symbol("adc")]
         ADC = 5,
 
-        [Symbol("adc_lock")]
-        ADC_LOCK = 6,
-
         [Symbol("adcx")]
-        ADCX = 7,
+        ADCX = 6,
+
+        [Symbol("adc_lock")]
+        ADC_LOCK = 7,
 
         [Symbol("add")]
         ADD = 8,
 
-        [Symbol("add_lock")]
-        ADD_LOCK = 9,
-
         [Symbol("addpd")]
-        ADDPD = 10,
+        ADDPD = 9,
 
         [Symbol("addps")]
-        ADDPS = 11,
+        ADDPS = 10,
 
         [Symbol("addsd")]
-        ADDSD = 12,
+        ADDSD = 11,
 
         [Symbol("addss")]
-        ADDSS = 13,
+        ADDSS = 12,
 
         [Symbol("addsubpd")]
-        ADDSUBPD = 14,
+        ADDSUBPD = 13,
 
         [Symbol("addsubps")]
-        ADDSUBPS = 15,
+        ADDSUBPS = 14,
+
+        [Symbol("add_lock")]
+        ADD_LOCK = 15,
 
         [Symbol("adox")]
         ADOX = 16,
@@ -100,23 +103,23 @@ namespace Z0.Asm
         [Symbol("and")]
         AND = 31,
 
-        [Symbol("and_lock")]
-        AND_LOCK = 32,
-
         [Symbol("andn")]
-        ANDN = 33,
+        ANDN = 32,
 
         [Symbol("andnpd")]
-        ANDNPD = 34,
+        ANDNPD = 33,
 
         [Symbol("andnps")]
-        ANDNPS = 35,
+        ANDNPS = 34,
 
         [Symbol("andpd")]
-        ANDPD = 36,
+        ANDPD = 35,
 
         [Symbol("andps")]
-        ANDPS = 37,
+        ANDPS = 36,
+
+        [Symbol("and_lock")]
+        AND_LOCK = 37,
 
         [Symbol("arpl")]
         ARPL = 38,
@@ -361,20 +364,20 @@ namespace Z0.Asm
         [Symbol("cmpxchg")]
         CMPXCHG = 118,
 
-        [Symbol("cmpxchg_lock")]
-        CMPXCHG_LOCK = 119,
-
         [Symbol("cmpxchg16b")]
-        CMPXCHG16B = 120,
+        CMPXCHG16B = 119,
 
         [Symbol("cmpxchg16b_lock")]
-        CMPXCHG16B_LOCK = 121,
+        CMPXCHG16B_LOCK = 120,
 
         [Symbol("cmpxchg8b")]
-        CMPXCHG8B = 122,
+        CMPXCHG8B = 121,
 
         [Symbol("cmpxchg8b_lock")]
-        CMPXCHG8B_LOCK = 123,
+        CMPXCHG8B_LOCK = 122,
+
+        [Symbol("cmpxchg_lock")]
+        CMPXCHG_LOCK = 123,
 
         [Symbol("comisd")]
         COMISD = 124,
@@ -868,14 +871,14 @@ namespace Z0.Asm
         [Symbol("inc")]
         INC = 287,
 
-        [Symbol("inc_lock")]
-        INC_LOCK = 288,
-
         [Symbol("incsspd")]
-        INCSSPD = 289,
+        INCSSPD = 288,
 
         [Symbol("incsspq")]
-        INCSSPQ = 290,
+        INCSSPQ = 289,
+
+        [Symbol("inc_lock")]
+        INC_LOCK = 290,
 
         [Symbol("insb")]
         INSB = 291,
@@ -1288,134 +1291,134 @@ namespace Z0.Asm
         [Symbol("mov")]
         MOV = 427,
 
-        [Symbol("mov_cr")]
-        MOV_CR = 428,
-
-        [Symbol("mov_dr")]
-        MOV_DR = 429,
-
         [Symbol("movapd")]
-        MOVAPD = 430,
+        MOVAPD = 428,
 
         [Symbol("movaps")]
-        MOVAPS = 431,
+        MOVAPS = 429,
 
         [Symbol("movbe")]
-        MOVBE = 432,
+        MOVBE = 430,
 
         [Symbol("movd")]
-        MOVD = 433,
+        MOVD = 431,
 
         [Symbol("movddup")]
-        MOVDDUP = 434,
+        MOVDDUP = 432,
 
         [Symbol("movdir64b")]
-        MOVDIR64B = 435,
+        MOVDIR64B = 433,
 
         [Symbol("movdiri")]
-        MOVDIRI = 436,
+        MOVDIRI = 434,
 
         [Symbol("movdq2q")]
-        MOVDQ2Q = 437,
+        MOVDQ2Q = 435,
 
         [Symbol("movdqa")]
-        MOVDQA = 438,
+        MOVDQA = 436,
 
         [Symbol("movdqu")]
-        MOVDQU = 439,
+        MOVDQU = 437,
 
         [Symbol("movhlps")]
-        MOVHLPS = 440,
+        MOVHLPS = 438,
 
         [Symbol("movhpd")]
-        MOVHPD = 441,
+        MOVHPD = 439,
 
         [Symbol("movhps")]
-        MOVHPS = 442,
+        MOVHPS = 440,
 
         [Symbol("movlhps")]
-        MOVLHPS = 443,
+        MOVLHPS = 441,
 
         [Symbol("movlpd")]
-        MOVLPD = 444,
+        MOVLPD = 442,
 
         [Symbol("movlps")]
-        MOVLPS = 445,
+        MOVLPS = 443,
 
         [Symbol("movmskpd")]
-        MOVMSKPD = 446,
+        MOVMSKPD = 444,
 
         [Symbol("movmskps")]
-        MOVMSKPS = 447,
+        MOVMSKPS = 445,
 
         [Symbol("movntdq")]
-        MOVNTDQ = 448,
+        MOVNTDQ = 446,
 
         [Symbol("movntdqa")]
-        MOVNTDQA = 449,
+        MOVNTDQA = 447,
 
         [Symbol("movnti")]
-        MOVNTI = 450,
+        MOVNTI = 448,
 
         [Symbol("movntpd")]
-        MOVNTPD = 451,
+        MOVNTPD = 449,
 
         [Symbol("movntps")]
-        MOVNTPS = 452,
+        MOVNTPS = 450,
 
         [Symbol("movntq")]
-        MOVNTQ = 453,
+        MOVNTQ = 451,
 
         [Symbol("movntsd")]
-        MOVNTSD = 454,
+        MOVNTSD = 452,
 
         [Symbol("movntss")]
-        MOVNTSS = 455,
+        MOVNTSS = 453,
 
         [Symbol("movq")]
-        MOVQ = 456,
+        MOVQ = 454,
 
         [Symbol("movq2dq")]
-        MOVQ2DQ = 457,
+        MOVQ2DQ = 455,
 
         [Symbol("movsb")]
-        MOVSB = 458,
+        MOVSB = 456,
 
         [Symbol("movsd")]
-        MOVSD = 459,
+        MOVSD = 457,
 
         [Symbol("movsd_xmm")]
-        MOVSD_XMM = 460,
+        MOVSD_XMM = 458,
 
         [Symbol("movshdup")]
-        MOVSHDUP = 461,
+        MOVSHDUP = 459,
 
         [Symbol("movsldup")]
-        MOVSLDUP = 462,
+        MOVSLDUP = 460,
 
         [Symbol("movsq")]
-        MOVSQ = 463,
+        MOVSQ = 461,
 
         [Symbol("movss")]
-        MOVSS = 464,
+        MOVSS = 462,
 
         [Symbol("movsw")]
-        MOVSW = 465,
+        MOVSW = 463,
 
         [Symbol("movsx")]
-        MOVSX = 466,
+        MOVSX = 464,
 
         [Symbol("movsxd")]
-        MOVSXD = 467,
+        MOVSXD = 465,
 
         [Symbol("movupd")]
-        MOVUPD = 468,
+        MOVUPD = 466,
 
         [Symbol("movups")]
-        MOVUPS = 469,
+        MOVUPS = 467,
 
         [Symbol("movzx")]
-        MOVZX = 470,
+        MOVZX = 468,
+
+        [Symbol("mov_cr")]
+        MOV_CR = 469,
+
+        [Symbol("mov_dr")]
+        MOV_DR = 470,
 
         [Symbol("mpsadbw")]
         MPSADBW = 471,
@@ -1450,3476 +1453,3473 @@ namespace Z0.Asm
         [Symbol("neg_lock")]
         NEG_LOCK = 481,
 
-        [Symbol("none")]
-        None = 482,
-
         [Symbol("nop")]
-        NOP = 483,
+        NOP = 482,
 
         [Symbol("nop2")]
-        NOP2 = 484,
+        NOP2 = 483,
 
         [Symbol("nop3")]
-        NOP3 = 485,
+        NOP3 = 484,
 
         [Symbol("nop4")]
-        NOP4 = 486,
+        NOP4 = 485,
 
         [Symbol("nop5")]
-        NOP5 = 487,
+        NOP5 = 486,
 
         [Symbol("nop6")]
-        NOP6 = 488,
+        NOP6 = 487,
 
         [Symbol("nop7")]
-        NOP7 = 489,
+        NOP7 = 488,
 
         [Symbol("nop8")]
-        NOP8 = 490,
+        NOP8 = 489,
 
         [Symbol("nop9")]
-        NOP9 = 491,
+        NOP9 = 490,
 
         [Symbol("not")]
-        NOT = 492,
+        NOT = 491,
 
         [Symbol("not_lock")]
-        NOT_LOCK = 493,
+        NOT_LOCK = 492,
 
         [Symbol("or")]
-        OR = 494,
-
-        [Symbol("or_lock")]
-        OR_LOCK = 495,
+        OR = 493,
 
         [Symbol("orpd")]
-        ORPD = 496,
+        ORPD = 494,
 
         [Symbol("orps")]
-        ORPS = 497,
+        ORPS = 495,
+
+        [Symbol("or_lock")]
+        OR_LOCK = 496,
 
         [Symbol("out")]
-        OUT = 498,
+        OUT = 497,
 
         [Symbol("outsb")]
-        OUTSB = 499,
+        OUTSB = 498,
 
         [Symbol("outsd")]
-        OUTSD = 500,
+        OUTSD = 499,
 
         [Symbol("outsw")]
-        OUTSW = 501,
+        OUTSW = 500,
 
         [Symbol("pabsb")]
-        PABSB = 502,
+        PABSB = 501,
 
         [Symbol("pabsd")]
-        PABSD = 503,
+        PABSD = 502,
 
         [Symbol("pabsw")]
-        PABSW = 504,
+        PABSW = 503,
 
         [Symbol("packssdw")]
-        PACKSSDW = 505,
+        PACKSSDW = 504,
 
         [Symbol("packsswb")]
-        PACKSSWB = 506,
+        PACKSSWB = 505,
 
         [Symbol("packusdw")]
-        PACKUSDW = 507,
+        PACKUSDW = 506,
 
         [Symbol("packuswb")]
-        PACKUSWB = 508,
+        PACKUSWB = 507,
 
         [Symbol("paddb")]
-        PADDB = 509,
+        PADDB = 508,
 
         [Symbol("paddd")]
-        PADDD = 510,
+        PADDD = 509,
 
         [Symbol("paddq")]
-        PADDQ = 511,
+        PADDQ = 510,
 
         [Symbol("paddsb")]
-        PADDSB = 512,
+        PADDSB = 511,
 
         [Symbol("paddsw")]
-        PADDSW = 513,
+        PADDSW = 512,
 
         [Symbol("paddusb")]
-        PADDUSB = 514,
+        PADDUSB = 513,
 
         [Symbol("paddusw")]
-        PADDUSW = 515,
+        PADDUSW = 514,
 
         [Symbol("paddw")]
-        PADDW = 516,
+        PADDW = 515,
 
         [Symbol("palignr")]
-        PALIGNR = 517,
+        PALIGNR = 516,
 
         [Symbol("pand")]
-        PAND = 518,
+        PAND = 517,
 
         [Symbol("pandn")]
-        PANDN = 519,
+        PANDN = 518,
 
         [Symbol("pause")]
-        PAUSE = 520,
+        PAUSE = 519,
 
         [Symbol("pavgb")]
-        PAVGB = 521,
+        PAVGB = 520,
 
         [Symbol("pavgusb")]
-        PAVGUSB = 522,
+        PAVGUSB = 521,
 
         [Symbol("pavgw")]
-        PAVGW = 523,
+        PAVGW = 522,
 
         [Symbol("pblendvb")]
-        PBLENDVB = 524,
+        PBLENDVB = 523,
 
         [Symbol("pblendw")]
-        PBLENDW = 525,
+        PBLENDW = 524,
 
         [Symbol("pclmulqdq")]
-        PCLMULQDQ = 526,
+        PCLMULQDQ = 525,
 
         [Symbol("pcmpeqb")]
-        PCMPEQB = 527,
+        PCMPEQB = 526,
 
         [Symbol("pcmpeqd")]
-        PCMPEQD = 528,
+        PCMPEQD = 527,
 
         [Symbol("pcmpeqq")]
-        PCMPEQQ = 529,
+        PCMPEQQ = 528,
 
         [Symbol("pcmpeqw")]
-        PCMPEQW = 530,
+        PCMPEQW = 529,
 
         [Symbol("pcmpestri")]
-        PCMPESTRI = 531,
+        PCMPESTRI = 530,
 
         [Symbol("pcmpestri64")]
-        PCMPESTRI64 = 532,
+        PCMPESTRI64 = 531,
 
         [Symbol("pcmpestrm")]
-        PCMPESTRM = 533,
+        PCMPESTRM = 532,
 
         [Symbol("pcmpestrm64")]
-        PCMPESTRM64 = 534,
+        PCMPESTRM64 = 533,
 
         [Symbol("pcmpgtb")]
-        PCMPGTB = 535,
+        PCMPGTB = 534,
 
         [Symbol("pcmpgtd")]
-        PCMPGTD = 536,
+        PCMPGTD = 535,
 
         [Symbol("pcmpgtq")]
-        PCMPGTQ = 537,
+        PCMPGTQ = 536,
 
         [Symbol("pcmpgtw")]
-        PCMPGTW = 538,
+        PCMPGTW = 537,
 
         [Symbol("pcmpistri")]
-        PCMPISTRI = 539,
+        PCMPISTRI = 538,
 
         [Symbol("pcmpistri64")]
-        PCMPISTRI64 = 540,
+        PCMPISTRI64 = 539,
 
         [Symbol("pcmpistrm")]
-        PCMPISTRM = 541,
+        PCMPISTRM = 540,
 
         [Symbol("pconfig")]
-        PCONFIG = 542,
+        PCONFIG = 541,
 
         [Symbol("pdep")]
-        PDEP = 543,
+        PDEP = 542,
 
         [Symbol("pext")]
-        PEXT = 544,
+        PEXT = 543,
 
         [Symbol("pextrb")]
-        PEXTRB = 545,
+        PEXTRB = 544,
 
         [Symbol("pextrd")]
-        PEXTRD = 546,
+        PEXTRD = 545,
 
         [Symbol("pextrq")]
-        PEXTRQ = 547,
+        PEXTRQ = 546,
 
         [Symbol("pextrw")]
-        PEXTRW = 548,
+        PEXTRW = 547,
 
         [Symbol("pextrw_sse4")]
-        PEXTRW_SSE4 = 549,
+        PEXTRW_SSE4 = 548,
 
         [Symbol("pf2id")]
-        PF2ID = 550,
+        PF2ID = 549,
 
         [Symbol("pf2iw")]
-        PF2IW = 551,
+        PF2IW = 550,
 
         [Symbol("pfacc")]
-        PFACC = 552,
+        PFACC = 551,
 
         [Symbol("pfadd")]
-        PFADD = 553,
+        PFADD = 552,
 
         [Symbol("pfcmpeq")]
-        PFCMPEQ = 554,
+        PFCMPEQ = 553,
 
         [Symbol("pfcmpge")]
-        PFCMPGE = 555,
+        PFCMPGE = 554,
 
         [Symbol("pfcmpgt")]
-        PFCMPGT = 556,
+        PFCMPGT = 555,
 
         [Symbol("pfmax")]
-        PFMAX = 557,
+        PFMAX = 556,
 
         [Symbol("pfmin")]
-        PFMIN = 558,
+        PFMIN = 557,
 
         [Symbol("pfmul")]
-        PFMUL = 559,
+        PFMUL = 558,
 
         [Symbol("pfnacc")]
-        PFNACC = 560,
+        PFNACC = 559,
 
         [Symbol("pfpnacc")]
-        PFPNACC = 561,
+        PFPNACC = 560,
 
         [Symbol("pfrcp")]
-        PFRCP = 562,
+        PFRCP = 561,
 
         [Symbol("pfrcpit1")]
-        PFRCPIT1 = 563,
+        PFRCPIT1 = 562,
 
         [Symbol("pfrcpit2")]
-        PFRCPIT2 = 564,
+        PFRCPIT2 = 563,
 
         [Symbol("pfrsqit1")]
-        PFRSQIT1 = 565,
+        PFRSQIT1 = 564,
 
         [Symbol("pfrsqrt")]
-        PFRSQRT = 566,
+        PFRSQRT = 565,
 
         [Symbol("pfsub")]
-        PFSUB = 567,
+        PFSUB = 566,
 
         [Symbol("pfsubr")]
-        PFSUBR = 568,
+        PFSUBR = 567,
 
         [Symbol("phaddd")]
-        PHADDD = 569,
+        PHADDD = 568,
 
         [Symbol("phaddsw")]
-        PHADDSW = 570,
+        PHADDSW = 569,
 
         [Symbol("phaddw")]
-        PHADDW = 571,
+        PHADDW = 570,
 
         [Symbol("phminposuw")]
-        PHMINPOSUW = 572,
+        PHMINPOSUW = 571,
 
         [Symbol("phsubd")]
-        PHSUBD = 573,
+        PHSUBD = 572,
 
         [Symbol("phsubsw")]
-        PHSUBSW = 574,
+        PHSUBSW = 573,
 
         [Symbol("phsubw")]
-        PHSUBW = 575,
+        PHSUBW = 574,
 
         [Symbol("pi2fd")]
-        PI2FD = 576,
+        PI2FD = 575,
 
         [Symbol("pi2fw")]
-        PI2FW = 577,
+        PI2FW = 576,
 
         [Symbol("pinsrb")]
-        PINSRB = 578,
+        PINSRB = 577,
 
         [Symbol("pinsrd")]
-        PINSRD = 579,
+        PINSRD = 578,
 
         [Symbol("pinsrq")]
-        PINSRQ = 580,
+        PINSRQ = 579,
 
         [Symbol("pinsrw")]
-        PINSRW = 581,
+        PINSRW = 580,
 
         [Symbol("pmaddubsw")]
-        PMADDUBSW = 582,
+        PMADDUBSW = 581,
 
         [Symbol("pmaddwd")]
-        PMADDWD = 583,
+        PMADDWD = 582,
 
         [Symbol("pmaxsb")]
-        PMAXSB = 584,
+        PMAXSB = 583,
 
         [Symbol("pmaxsd")]
-        PMAXSD = 585,
+        PMAXSD = 584,
 
         [Symbol("pmaxsw")]
-        PMAXSW = 586,
+        PMAXSW = 585,
 
         [Symbol("pmaxub")]
-        PMAXUB = 587,
+        PMAXUB = 586,
 
         [Symbol("pmaxud")]
-        PMAXUD = 588,
+        PMAXUD = 587,
 
         [Symbol("pmaxuw")]
-        PMAXUW = 589,
+        PMAXUW = 588,
 
         [Symbol("pminsb")]
-        PMINSB = 590,
+        PMINSB = 589,
 
         [Symbol("pminsd")]
-        PMINSD = 591,
+        PMINSD = 590,
 
         [Symbol("pminsw")]
-        PMINSW = 592,
+        PMINSW = 591,
 
         [Symbol("pminub")]
-        PMINUB = 593,
+        PMINUB = 592,
 
         [Symbol("pminud")]
-        PMINUD = 594,
+        PMINUD = 593,
 
         [Symbol("pminuw")]
-        PMINUW = 595,
+        PMINUW = 594,
 
         [Symbol("pmovmskb")]
-        PMOVMSKB = 596,
+        PMOVMSKB = 595,
 
         [Symbol("pmovsxbd")]
-        PMOVSXBD = 597,
+        PMOVSXBD = 596,
 
         [Symbol("pmovsxbq")]
-        PMOVSXBQ = 598,
+        PMOVSXBQ = 597,
 
         [Symbol("pmovsxbw")]
-        PMOVSXBW = 599,
+        PMOVSXBW = 598,
 
         [Symbol("pmovsxdq")]
-        PMOVSXDQ = 600,
+        PMOVSXDQ = 599,
 
         [Symbol("pmovsxwd")]
-        PMOVSXWD = 601,
+        PMOVSXWD = 600,
 
         [Symbol("pmovsxwq")]
-        PMOVSXWQ = 602,
+        PMOVSXWQ = 601,
 
         [Symbol("pmovzxbd")]
-        PMOVZXBD = 603,
+        PMOVZXBD = 602,
 
         [Symbol("pmovzxbq")]
-        PMOVZXBQ = 604,
+        PMOVZXBQ = 603,
 
         [Symbol("pmovzxbw")]
-        PMOVZXBW = 605,
+        PMOVZXBW = 604,
 
         [Symbol("pmovzxdq")]
-        PMOVZXDQ = 606,
+        PMOVZXDQ = 605,
 
         [Symbol("pmovzxwd")]
-        PMOVZXWD = 607,
+        PMOVZXWD = 606,
 
         [Symbol("pmovzxwq")]
-        PMOVZXWQ = 608,
+        PMOVZXWQ = 607,
 
         [Symbol("pmuldq")]
-        PMULDQ = 609,
+        PMULDQ = 608,
 
         [Symbol("pmulhrsw")]
-        PMULHRSW = 610,
+        PMULHRSW = 609,
 
         [Symbol("pmulhrw")]
-        PMULHRW = 611,
+        PMULHRW = 610,
 
         [Symbol("pmulhuw")]
-        PMULHUW = 612,
+        PMULHUW = 611,
 
         [Symbol("pmulhw")]
-        PMULHW = 613,
+        PMULHW = 612,
 
         [Symbol("pmulld")]
-        PMULLD = 614,
+        PMULLD = 613,
 
         [Symbol("pmullw")]
-        PMULLW = 615,
+        PMULLW = 614,
 
         [Symbol("pmuludq")]
-        PMULUDQ = 616,
+        PMULUDQ = 615,
 
         [Symbol("pop")]
-        POP = 617,
+        POP = 616,
 
         [Symbol("popa")]
-        POPA = 618,
+        POPA = 617,
 
         [Symbol("popad")]
-        POPAD = 619,
+        POPAD = 618,
 
         [Symbol("popcnt")]
-        POPCNT = 620,
+        POPCNT = 619,
 
         [Symbol("popf")]
-        POPF = 621,
+        POPF = 620,
 
         [Symbol("popfd")]
-        POPFD = 622,
+        POPFD = 621,
 
         [Symbol("popfq")]
-        POPFQ = 623,
+        POPFQ = 622,
 
         [Symbol("por")]
-        POR = 624,
-
-        [Symbol("prefetch_exclusive")]
-        PREFETCH_EXCLUSIVE = 625,
-
-        [Symbol("prefetch_reserved")]
-        PREFETCH_RESERVED = 626,
+        POR = 623,
 
         [Symbol("prefetchnta")]
-        PREFETCHNTA = 627,
+        PREFETCHNTA = 624,
 
         [Symbol("prefetcht0")]
-        PREFETCHT0 = 628,
+        PREFETCHT0 = 625,
 
         [Symbol("prefetcht1")]
-        PREFETCHT1 = 629,
+        PREFETCHT1 = 626,
 
         [Symbol("prefetcht2")]
-        PREFETCHT2 = 630,
+        PREFETCHT2 = 627,
 
         [Symbol("prefetchw")]
-        PREFETCHW = 631,
+        PREFETCHW = 628,
 
         [Symbol("prefetchwt1")]
-        PREFETCHWT1 = 632,
+        PREFETCHWT1 = 629,
+
+        [Symbol("prefetch_exclusive")]
+        PREFETCH_EXCLUSIVE = 630,
+
+        [Symbol("prefetch_reserved")]
+        PREFETCH_RESERVED = 631,
 
         [Symbol("psadbw")]
-        PSADBW = 633,
+        PSADBW = 632,
 
         [Symbol("pshufb")]
-        PSHUFB = 634,
+        PSHUFB = 633,
 
         [Symbol("pshufd")]
-        PSHUFD = 635,
+        PSHUFD = 634,
 
         [Symbol("pshufhw")]
-        PSHUFHW = 636,
+        PSHUFHW = 635,
 
         [Symbol("pshuflw")]
-        PSHUFLW = 637,
+        PSHUFLW = 636,
 
         [Symbol("pshufw")]
-        PSHUFW = 638,
+        PSHUFW = 637,
 
         [Symbol("psignb")]
-        PSIGNB = 639,
+        PSIGNB = 638,
 
         [Symbol("psignd")]
-        PSIGND = 640,
+        PSIGND = 639,
 
         [Symbol("psignw")]
-        PSIGNW = 641,
+        PSIGNW = 640,
 
         [Symbol("pslld")]
-        PSLLD = 642,
+        PSLLD = 641,
 
         [Symbol("pslldq")]
-        PSLLDQ = 643,
+        PSLLDQ = 642,
 
         [Symbol("psllq")]
-        PSLLQ = 644,
+        PSLLQ = 643,
 
         [Symbol("psllw")]
-        PSLLW = 645,
+        PSLLW = 644,
 
         [Symbol("psmash")]
-        PSMASH = 646,
+        PSMASH = 645,
 
         [Symbol("psrad")]
-        PSRAD = 647,
+        PSRAD = 646,
 
         [Symbol("psraw")]
-        PSRAW = 648,
+        PSRAW = 647,
 
         [Symbol("psrld")]
-        PSRLD = 649,
+        PSRLD = 648,
 
         [Symbol("psrldq")]
-        PSRLDQ = 650,
+        PSRLDQ = 649,
 
         [Symbol("psrlq")]
-        PSRLQ = 651,
+        PSRLQ = 650,
 
         [Symbol("psrlw")]
-        PSRLW = 652,
+        PSRLW = 651,
 
         [Symbol("psubb")]
-        PSUBB = 653,
+        PSUBB = 652,
 
         [Symbol("psubd")]
-        PSUBD = 654,
+        PSUBD = 653,
 
         [Symbol("psubq")]
-        PSUBQ = 655,
+        PSUBQ = 654,
 
         [Symbol("psubsb")]
-        PSUBSB = 656,
+        PSUBSB = 655,
 
         [Symbol("psubsw")]
-        PSUBSW = 657,
+        PSUBSW = 656,
 
         [Symbol("psubusb")]
-        PSUBUSB = 658,
+        PSUBUSB = 657,
 
         [Symbol("psubusw")]
-        PSUBUSW = 659,
+        PSUBUSW = 658,
 
         [Symbol("psubw")]
-        PSUBW = 660,
+        PSUBW = 659,
 
         [Symbol("pswapd")]
-        PSWAPD = 661,
+        PSWAPD = 660,
 
         [Symbol("ptest")]
-        PTEST = 662,
+        PTEST = 661,
 
         [Symbol("ptwrite")]
-        PTWRITE = 663,
+        PTWRITE = 662,
 
         [Symbol("punpckhbw")]
-        PUNPCKHBW = 664,
+        PUNPCKHBW = 663,
 
         [Symbol("punpckhdq")]
-        PUNPCKHDQ = 665,
+        PUNPCKHDQ = 664,
 
         [Symbol("punpckhqdq")]
-        PUNPCKHQDQ = 666,
+        PUNPCKHQDQ = 665,
 
         [Symbol("punpckhwd")]
-        PUNPCKHWD = 667,
+        PUNPCKHWD = 666,
 
         [Symbol("punpcklbw")]
-        PUNPCKLBW = 668,
+        PUNPCKLBW = 667,
 
         [Symbol("punpckldq")]
-        PUNPCKLDQ = 669,
+        PUNPCKLDQ = 668,
 
         [Symbol("punpcklqdq")]
-        PUNPCKLQDQ = 670,
+        PUNPCKLQDQ = 669,
 
         [Symbol("punpcklwd")]
-        PUNPCKLWD = 671,
+        PUNPCKLWD = 670,
 
         [Symbol("push")]
-        PUSH = 672,
+        PUSH = 671,
 
         [Symbol("pusha")]
-        PUSHA = 673,
+        PUSHA = 672,
 
         [Symbol("pushad")]
-        PUSHAD = 674,
+        PUSHAD = 673,
 
         [Symbol("pushf")]
-        PUSHF = 675,
+        PUSHF = 674,
 
         [Symbol("pushfd")]
-        PUSHFD = 676,
+        PUSHFD = 675,
 
         [Symbol("pushfq")]
-        PUSHFQ = 677,
+        PUSHFQ = 676,
 
         [Symbol("pvalidate")]
-        PVALIDATE = 678,
+        PVALIDATE = 677,
 
         [Symbol("pxor")]
-        PXOR = 679,
+        PXOR = 678,
 
         [Symbol("rcl")]
-        RCL = 680,
+        RCL = 679,
 
         [Symbol("rcpps")]
-        RCPPS = 681,
+        RCPPS = 680,
 
         [Symbol("rcpss")]
-        RCPSS = 682,
+        RCPSS = 681,
 
         [Symbol("rcr")]
-        RCR = 683,
+        RCR = 682,
 
         [Symbol("rdfsbase")]
-        RDFSBASE = 684,
+        RDFSBASE = 683,
 
         [Symbol("rdgsbase")]
-        RDGSBASE = 685,
+        RDGSBASE = 684,
 
         [Symbol("rdmsr")]
-        RDMSR = 686,
+        RDMSR = 685,
 
         [Symbol("rdpid")]
-        RDPID = 687,
+        RDPID = 686,
 
         [Symbol("rdpkru")]
-        RDPKRU = 688,
+        RDPKRU = 687,
 
         [Symbol("rdpmc")]
-        RDPMC = 689,
+        RDPMC = 688,
 
         [Symbol("rdpru")]
-        RDPRU = 690,
+        RDPRU = 689,
 
         [Symbol("rdrand")]
-        RDRAND = 691,
+        RDRAND = 690,
 
         [Symbol("rdseed")]
-        RDSEED = 692,
+        RDSEED = 691,
 
         [Symbol("rdsspd")]
-        RDSSPD = 693,
+        RDSSPD = 692,
 
         [Symbol("rdsspq")]
-        RDSSPQ = 694,
+        RDSSPQ = 693,
 
         [Symbol("rdtsc")]
-        RDTSC = 695,
+        RDTSC = 694,
 
         [Symbol("rdtscp")]
-        RDTSCP = 696,
-
-        [Symbol("rep_insb")]
-        REP_INSB = 697,
-
-        [Symbol("rep_insd")]
-        REP_INSD = 698,
-
-        [Symbol("rep_insw")]
-        REP_INSW = 699,
-
-        [Symbol("rep_lodsb")]
-        REP_LODSB = 700,
-
-        [Symbol("rep_lodsd")]
-        REP_LODSD = 701,
-
-        [Symbol("rep_lodsq")]
-        REP_LODSQ = 702,
-
-        [Symbol("rep_lodsw")]
-        REP_LODSW = 703,
-
-        [Symbol("rep_montmul")]
-        REP_MONTMUL = 704,
-
-        [Symbol("rep_movsb")]
-        REP_MOVSB = 705,
-
-        [Symbol("rep_movsd")]
-        REP_MOVSD = 706,
-
-        [Symbol("rep_movsq")]
-        REP_MOVSQ = 707,
-
-        [Symbol("rep_movsw")]
-        REP_MOVSW = 708,
-
-        [Symbol("rep_outsb")]
-        REP_OUTSB = 709,
-
-        [Symbol("rep_outsd")]
-        REP_OUTSD = 710,
-
-        [Symbol("rep_outsw")]
-        REP_OUTSW = 711,
-
-        [Symbol("rep_stosb")]
-        REP_STOSB = 712,
-
-        [Symbol("rep_stosd")]
-        REP_STOSD = 713,
-
-        [Symbol("rep_stosq")]
-        REP_STOSQ = 714,
-
-        [Symbol("rep_stosw")]
-        REP_STOSW = 715,
-
-        [Symbol("rep_xcryptcbc")]
-        REP_XCRYPTCBC = 716,
-
-        [Symbol("rep_xcryptcfb")]
-        REP_XCRYPTCFB = 717,
-
-        [Symbol("rep_xcryptctr")]
-        REP_XCRYPTCTR = 718,
-
-        [Symbol("rep_xcryptecb")]
-        REP_XCRYPTECB = 719,
-
-        [Symbol("rep_xcryptofb")]
-        REP_XCRYPTOFB = 720,
-
-        [Symbol("rep_xsha1")]
-        REP_XSHA1 = 721,
-
-        [Symbol("rep_xsha256")]
-        REP_XSHA256 = 722,
-
-        [Symbol("rep_xstore")]
-        REP_XSTORE = 723,
+        RDTSCP = 695,
 
         [Symbol("repe_cmpsb")]
-        REPE_CMPSB = 724,
+        REPE_CMPSB = 696,
 
         [Symbol("repe_cmpsd")]
-        REPE_CMPSD = 725,
+        REPE_CMPSD = 697,
 
         [Symbol("repe_cmpsq")]
-        REPE_CMPSQ = 726,
+        REPE_CMPSQ = 698,
 
         [Symbol("repe_cmpsw")]
-        REPE_CMPSW = 727,
+        REPE_CMPSW = 699,
 
         [Symbol("repe_scasb")]
-        REPE_SCASB = 728,
+        REPE_SCASB = 700,
 
         [Symbol("repe_scasd")]
-        REPE_SCASD = 729,
+        REPE_SCASD = 701,
 
         [Symbol("repe_scasq")]
-        REPE_SCASQ = 730,
+        REPE_SCASQ = 702,
 
         [Symbol("repe_scasw")]
-        REPE_SCASW = 731,
+        REPE_SCASW = 703,
 
         [Symbol("repne_cmpsb")]
-        REPNE_CMPSB = 732,
+        REPNE_CMPSB = 704,
 
         [Symbol("repne_cmpsd")]
-        REPNE_CMPSD = 733,
+        REPNE_CMPSD = 705,
 
         [Symbol("repne_cmpsq")]
-        REPNE_CMPSQ = 734,
+        REPNE_CMPSQ = 706,
 
         [Symbol("repne_cmpsw")]
-        REPNE_CMPSW = 735,
+        REPNE_CMPSW = 707,
 
         [Symbol("repne_scasb")]
-        REPNE_SCASB = 736,
+        REPNE_SCASB = 708,
 
         [Symbol("repne_scasd")]
-        REPNE_SCASD = 737,
+        REPNE_SCASD = 709,
 
         [Symbol("repne_scasq")]
-        REPNE_SCASQ = 738,
+        REPNE_SCASQ = 710,
 
         [Symbol("repne_scasw")]
-        REPNE_SCASW = 739,
+        REPNE_SCASW = 711,
+
+        [Symbol("rep_insb")]
+        REP_INSB = 712,
+
+        [Symbol("rep_insd")]
+        REP_INSD = 713,
+
+        [Symbol("rep_insw")]
+        REP_INSW = 714,
+
+        [Symbol("rep_lodsb")]
+        REP_LODSB = 715,
+
+        [Symbol("rep_lodsd")]
+        REP_LODSD = 716,
+
+        [Symbol("rep_lodsq")]
+        REP_LODSQ = 717,
+
+        [Symbol("rep_lodsw")]
+        REP_LODSW = 718,
+
+        [Symbol("rep_montmul")]
+        REP_MONTMUL = 719,
+
+        [Symbol("rep_movsb")]
+        REP_MOVSB = 720,
+
+        [Symbol("rep_movsd")]
+        REP_MOVSD = 721,
+
+        [Symbol("rep_movsq")]
+        REP_MOVSQ = 722,
+
+        [Symbol("rep_movsw")]
+        REP_MOVSW = 723,
+
+        [Symbol("rep_outsb")]
+        REP_OUTSB = 724,
+
+        [Symbol("rep_outsd")]
+        REP_OUTSD = 725,
+
+        [Symbol("rep_outsw")]
+        REP_OUTSW = 726,
+
+        [Symbol("rep_stosb")]
+        REP_STOSB = 727,
+
+        [Symbol("rep_stosd")]
+        REP_STOSD = 728,
+
+        [Symbol("rep_stosq")]
+        REP_STOSQ = 729,
+
+        [Symbol("rep_stosw")]
+        REP_STOSW = 730,
+
+        [Symbol("rep_xcryptcbc")]
+        REP_XCRYPTCBC = 731,
+
+        [Symbol("rep_xcryptcfb")]
+        REP_XCRYPTCFB = 732,
+
+        [Symbol("rep_xcryptctr")]
+        REP_XCRYPTCTR = 733,
+
+        [Symbol("rep_xcryptecb")]
+        REP_XCRYPTECB = 734,
+
+        [Symbol("rep_xcryptofb")]
+        REP_XCRYPTOFB = 735,
+
+        [Symbol("rep_xsha1")]
+        REP_XSHA1 = 736,
+
+        [Symbol("rep_xsha256")]
+        REP_XSHA256 = 737,
+
+        [Symbol("rep_xstore")]
+        REP_XSTORE = 738,
 
         [Symbol("ret_far")]
-        RET_FAR = 740,
+        RET_FAR = 739,
 
         [Symbol("ret_near")]
-        RET_NEAR = 741,
+        RET_NEAR = 740,
 
         [Symbol("rmpadjust")]
-        RMPADJUST = 742,
+        RMPADJUST = 741,
 
         [Symbol("rmpupdate")]
-        RMPUPDATE = 743,
+        RMPUPDATE = 742,
 
         [Symbol("rol")]
-        ROL = 744,
+        ROL = 743,
 
         [Symbol("ror")]
-        ROR = 745,
+        ROR = 744,
 
         [Symbol("rorx")]
-        RORX = 746,
+        RORX = 745,
 
         [Symbol("roundpd")]
-        ROUNDPD = 747,
+        ROUNDPD = 746,
 
         [Symbol("roundps")]
-        ROUNDPS = 748,
+        ROUNDPS = 747,
 
         [Symbol("roundsd")]
-        ROUNDSD = 749,
+        ROUNDSD = 748,
 
         [Symbol("roundss")]
-        ROUNDSS = 750,
+        ROUNDSS = 749,
 
         [Symbol("rsm")]
-        RSM = 751,
+        RSM = 750,
 
         [Symbol("rsqrtps")]
-        RSQRTPS = 752,
+        RSQRTPS = 751,
 
         [Symbol("rsqrtss")]
-        RSQRTSS = 753,
+        RSQRTSS = 752,
 
         [Symbol("rstorssp")]
-        RSTORSSP = 754,
+        RSTORSSP = 753,
 
         [Symbol("sahf")]
-        SAHF = 755,
+        SAHF = 754,
 
         [Symbol("salc")]
-        SALC = 756,
+        SALC = 755,
 
         [Symbol("sar")]
-        SAR = 757,
+        SAR = 756,
 
         [Symbol("sarx")]
-        SARX = 758,
+        SARX = 757,
 
         [Symbol("saveprevssp")]
-        SAVEPREVSSP = 759,
+        SAVEPREVSSP = 758,
 
         [Symbol("sbb")]
-        SBB = 760,
+        SBB = 759,
 
         [Symbol("sbb_lock")]
-        SBB_LOCK = 761,
+        SBB_LOCK = 760,
 
         [Symbol("scasb")]
-        SCASB = 762,
+        SCASB = 761,
 
         [Symbol("scasd")]
-        SCASD = 763,
+        SCASD = 762,
 
         [Symbol("scasq")]
-        SCASQ = 764,
+        SCASQ = 763,
 
         [Symbol("scasw")]
-        SCASW = 765,
+        SCASW = 764,
 
         [Symbol("seamcall")]
-        SEAMCALL = 766,
+        SEAMCALL = 765,
 
         [Symbol("seamops")]
-        SEAMOPS = 767,
+        SEAMOPS = 766,
 
         [Symbol("seamret")]
-        SEAMRET = 768,
+        SEAMRET = 767,
 
         [Symbol("senduipi")]
-        SENDUIPI = 769,
+        SENDUIPI = 768,
 
         [Symbol("serialize")]
-        SERIALIZE = 770,
+        SERIALIZE = 769,
 
         [Symbol("setb")]
-        SETB = 771,
+        SETB = 770,
 
         [Symbol("setbe")]
-        SETBE = 772,
+        SETBE = 771,
 
         [Symbol("setl")]
-        SETL = 773,
+        SETL = 772,
 
         [Symbol("setle")]
-        SETLE = 774,
+        SETLE = 773,
 
         [Symbol("setnb")]
-        SETNB = 775,
+        SETNB = 774,
 
         [Symbol("setnbe")]
-        SETNBE = 776,
+        SETNBE = 775,
 
         [Symbol("setnl")]
-        SETNL = 777,
+        SETNL = 776,
 
         [Symbol("setnle")]
-        SETNLE = 778,
+        SETNLE = 777,
 
         [Symbol("setno")]
-        SETNO = 779,
+        SETNO = 778,
 
         [Symbol("setnp")]
-        SETNP = 780,
+        SETNP = 779,
 
         [Symbol("setns")]
-        SETNS = 781,
+        SETNS = 780,
 
         [Symbol("setnz")]
-        SETNZ = 782,
+        SETNZ = 781,
 
         [Symbol("seto")]
-        SETO = 783,
+        SETO = 782,
 
         [Symbol("setp")]
-        SETP = 784,
+        SETP = 783,
 
         [Symbol("sets")]
-        SETS = 785,
+        SETS = 784,
 
         [Symbol("setssbsy")]
-        SETSSBSY = 786,
+        SETSSBSY = 785,
 
         [Symbol("setz")]
-        SETZ = 787,
+        SETZ = 786,
 
         [Symbol("sfence")]
-        SFENCE = 788,
+        SFENCE = 787,
 
         [Symbol("sgdt")]
-        SGDT = 789,
+        SGDT = 788,
 
         [Symbol("sha1msg1")]
-        SHA1MSG1 = 790,
+        SHA1MSG1 = 789,
 
         [Symbol("sha1msg2")]
-        SHA1MSG2 = 791,
+        SHA1MSG2 = 790,
 
         [Symbol("sha1nexte")]
-        SHA1NEXTE = 792,
+        SHA1NEXTE = 791,
 
         [Symbol("sha1rnds4")]
-        SHA1RNDS4 = 793,
+        SHA1RNDS4 = 792,
 
         [Symbol("sha256msg1")]
-        SHA256MSG1 = 794,
+        SHA256MSG1 = 793,
 
         [Symbol("sha256msg2")]
-        SHA256MSG2 = 795,
+        SHA256MSG2 = 794,
 
         [Symbol("sha256rnds2")]
-        SHA256RNDS2 = 796,
+        SHA256RNDS2 = 795,
 
         [Symbol("shl")]
-        SHL = 797,
+        SHL = 796,
 
         [Symbol("shld")]
-        SHLD = 798,
+        SHLD = 797,
 
         [Symbol("shlx")]
-        SHLX = 799,
+        SHLX = 798,
 
         [Symbol("shr")]
-        SHR = 800,
+        SHR = 799,
 
         [Symbol("shrd")]
-        SHRD = 801,
+        SHRD = 800,
 
         [Symbol("shrx")]
-        SHRX = 802,
+        SHRX = 801,
 
         [Symbol("shufpd")]
-        SHUFPD = 803,
+        SHUFPD = 802,
 
         [Symbol("shufps")]
-        SHUFPS = 804,
+        SHUFPS = 803,
 
         [Symbol("sidt")]
-        SIDT = 805,
+        SIDT = 804,
 
         [Symbol("skinit")]
-        SKINIT = 806,
+        SKINIT = 805,
 
         [Symbol("sldt")]
-        SLDT = 807,
+        SLDT = 806,
 
         [Symbol("slwpcb")]
-        SLWPCB = 808,
+        SLWPCB = 807,
 
         [Symbol("smsw")]
-        SMSW = 809,
+        SMSW = 808,
 
         [Symbol("sqrtpd")]
-        SQRTPD = 810,
+        SQRTPD = 809,
 
         [Symbol("sqrtps")]
-        SQRTPS = 811,
+        SQRTPS = 810,
 
         [Symbol("sqrtsd")]
-        SQRTSD = 812,
+        SQRTSD = 811,
 
         [Symbol("sqrtss")]
-        SQRTSS = 813,
+        SQRTSS = 812,
 
         [Symbol("stac")]
-        STAC = 814,
+        STAC = 813,
 
         [Symbol("stc")]
-        STC = 815,
+        STC = 814,
 
         [Symbol("std")]
-        STD = 816,
+        STD = 815,
 
         [Symbol("stgi")]
-        STGI = 817,
+        STGI = 816,
 
         [Symbol("sti")]
-        STI = 818,
+        STI = 817,
 
         [Symbol("stmxcsr")]
-        STMXCSR = 819,
+        STMXCSR = 818,
 
         [Symbol("stosb")]
-        STOSB = 820,
+        STOSB = 819,
 
         [Symbol("stosd")]
-        STOSD = 821,
+        STOSD = 820,
 
         [Symbol("stosq")]
-        STOSQ = 822,
+        STOSQ = 821,
 
         [Symbol("stosw")]
-        STOSW = 823,
+        STOSW = 822,
 
         [Symbol("str")]
-        STR = 824,
+        STR = 823,
 
         [Symbol("sttilecfg")]
-        STTILECFG = 825,
+        STTILECFG = 824,
 
         [Symbol("stui")]
-        STUI = 826,
+        STUI = 825,
 
         [Symbol("sub")]
-        SUB = 827,
-
-        [Symbol("sub_lock")]
-        SUB_LOCK = 828,
+        SUB = 826,
 
         [Symbol("subpd")]
-        SUBPD = 829,
+        SUBPD = 827,
 
         [Symbol("subps")]
-        SUBPS = 830,
+        SUBPS = 828,
 
         [Symbol("subsd")]
-        SUBSD = 831,
+        SUBSD = 829,
 
         [Symbol("subss")]
-        SUBSS = 832,
+        SUBSS = 830,
+
+        [Symbol("sub_lock")]
+        SUB_LOCK = 831,
 
         [Symbol("swapgs")]
-        SWAPGS = 833,
+        SWAPGS = 832,
 
         [Symbol("syscall")]
-        SYSCALL = 834,
+        SYSCALL = 833,
 
         [Symbol("syscall_amd")]
-        SYSCALL_AMD = 835,
+        SYSCALL_AMD = 834,
 
         [Symbol("sysenter")]
-        SYSENTER = 836,
+        SYSENTER = 835,
 
         [Symbol("sysexit")]
-        SYSEXIT = 837,
+        SYSEXIT = 836,
 
         [Symbol("sysret")]
-        SYSRET = 838,
+        SYSRET = 837,
+
+        [Symbol("sysret64")]
+        SYSRET64 = 838,
 
         [Symbol("sysret_amd")]
         SYSRET_AMD = 839,
 
-        [Symbol("sysret64")]
-        SYSRET64 = 840,
-
         [Symbol("t1mskc")]
-        T1MSKC = 841,
+        T1MSKC = 840,
 
         [Symbol("tdcall")]
-        TDCALL = 842,
+        TDCALL = 841,
 
         [Symbol("tdpbf16ps")]
-        TDPBF16PS = 843,
+        TDPBF16PS = 842,
 
         [Symbol("tdpbssd")]
-        TDPBSSD = 844,
+        TDPBSSD = 843,
 
         [Symbol("tdpbsud")]
-        TDPBSUD = 845,
+        TDPBSUD = 844,
 
         [Symbol("tdpbusd")]
-        TDPBUSD = 846,
+        TDPBUSD = 845,
 
         [Symbol("tdpbuud")]
-        TDPBUUD = 847,
+        TDPBUUD = 846,
 
         [Symbol("test")]
-        TEST = 848,
+        TEST = 847,
 
         [Symbol("testui")]
-        TESTUI = 849,
+        TESTUI = 848,
 
         [Symbol("tileloadd")]
-        TILELOADD = 850,
+        TILELOADD = 849,
 
         [Symbol("tileloaddt1")]
-        TILELOADDT1 = 851,
+        TILELOADDT1 = 850,
 
         [Symbol("tilerelease")]
-        TILERELEASE = 852,
+        TILERELEASE = 851,
 
         [Symbol("tilestored")]
-        TILESTORED = 853,
+        TILESTORED = 852,
 
         [Symbol("tilezero")]
-        TILEZERO = 854,
+        TILEZERO = 853,
 
         [Symbol("tlbsync")]
-        TLBSYNC = 855,
+        TLBSYNC = 854,
 
         [Symbol("tpause")]
-        TPAUSE = 856,
+        TPAUSE = 855,
 
         [Symbol("tzcnt")]
-        TZCNT = 857,
+        TZCNT = 856,
 
         [Symbol("tzmsk")]
-        TZMSK = 858,
+        TZMSK = 857,
 
         [Symbol("ucomisd")]
-        UCOMISD = 859,
+        UCOMISD = 858,
 
         [Symbol("ucomiss")]
-        UCOMISS = 860,
+        UCOMISS = 859,
 
         [Symbol("ud0")]
-        UD0 = 861,
+        UD0 = 860,
 
         [Symbol("ud1")]
-        UD1 = 862,
+        UD1 = 861,
 
         [Symbol("ud2")]
-        UD2 = 863,
+        UD2 = 862,
 
         [Symbol("uiret")]
-        UIRET = 864,
+        UIRET = 863,
 
         [Symbol("umonitor")]
-        UMONITOR = 865,
+        UMONITOR = 864,
 
         [Symbol("umwait")]
-        UMWAIT = 866,
+        UMWAIT = 865,
 
         [Symbol("unpckhpd")]
-        UNPCKHPD = 867,
+        UNPCKHPD = 866,
 
         [Symbol("unpckhps")]
-        UNPCKHPS = 868,
+        UNPCKHPS = 867,
 
         [Symbol("unpcklpd")]
-        UNPCKLPD = 869,
+        UNPCKLPD = 868,
 
         [Symbol("unpcklps")]
-        UNPCKLPS = 870,
+        UNPCKLPS = 869,
 
         [Symbol("v4fmaddps")]
-        V4FMADDPS = 871,
+        V4FMADDPS = 870,
 
         [Symbol("v4fmaddss")]
-        V4FMADDSS = 872,
+        V4FMADDSS = 871,
 
         [Symbol("v4fnmaddps")]
-        V4FNMADDPS = 873,
+        V4FNMADDPS = 872,
 
         [Symbol("v4fnmaddss")]
-        V4FNMADDSS = 874,
+        V4FNMADDSS = 873,
 
         [Symbol("vaddpd")]
-        VADDPD = 875,
+        VADDPD = 874,
 
         [Symbol("vaddps")]
-        VADDPS = 876,
+        VADDPS = 875,
 
         [Symbol("vaddsd")]
-        VADDSD = 877,
+        VADDSD = 876,
 
         [Symbol("vaddss")]
-        VADDSS = 878,
+        VADDSS = 877,
 
         [Symbol("vaddsubpd")]
-        VADDSUBPD = 879,
+        VADDSUBPD = 878,
 
         [Symbol("vaddsubps")]
-        VADDSUBPS = 880,
+        VADDSUBPS = 879,
 
         [Symbol("vaesdec")]
-        VAESDEC = 881,
+        VAESDEC = 880,
 
         [Symbol("vaesdeclast")]
-        VAESDECLAST = 882,
+        VAESDECLAST = 881,
 
         [Symbol("vaesenc")]
-        VAESENC = 883,
+        VAESENC = 882,
 
         [Symbol("vaesenclast")]
-        VAESENCLAST = 884,
+        VAESENCLAST = 883,
 
         [Symbol("vaesimc")]
-        VAESIMC = 885,
+        VAESIMC = 884,
 
         [Symbol("vaeskeygenassist")]
-        VAESKEYGENASSIST = 886,
+        VAESKEYGENASSIST = 885,
 
         [Symbol("valignd")]
-        VALIGND = 887,
+        VALIGND = 886,
 
         [Symbol("valignq")]
-        VALIGNQ = 888,
+        VALIGNQ = 887,
 
         [Symbol("vandnpd")]
-        VANDNPD = 889,
+        VANDNPD = 888,
 
         [Symbol("vandnps")]
-        VANDNPS = 890,
+        VANDNPS = 889,
 
         [Symbol("vandpd")]
-        VANDPD = 891,
+        VANDPD = 890,
 
         [Symbol("vandps")]
-        VANDPS = 892,
+        VANDPS = 891,
 
         [Symbol("vblendmpd")]
-        VBLENDMPD = 893,
+        VBLENDMPD = 892,
 
         [Symbol("vblendmps")]
-        VBLENDMPS = 894,
+        VBLENDMPS = 893,
 
         [Symbol("vblendpd")]
-        VBLENDPD = 895,
+        VBLENDPD = 894,
 
         [Symbol("vblendps")]
-        VBLENDPS = 896,
+        VBLENDPS = 895,
 
         [Symbol("vblendvpd")]
-        VBLENDVPD = 897,
+        VBLENDVPD = 896,
 
         [Symbol("vblendvps")]
-        VBLENDVPS = 898,
+        VBLENDVPS = 897,
 
         [Symbol("vbroadcastf128")]
-        VBROADCASTF128 = 899,
+        VBROADCASTF128 = 898,
 
         [Symbol("vbroadcastf32x2")]
-        VBROADCASTF32X2 = 900,
+        VBROADCASTF32X2 = 899,
 
         [Symbol("vbroadcastf32x4")]
-        VBROADCASTF32X4 = 901,
+        VBROADCASTF32X4 = 900,
 
         [Symbol("vbroadcastf32x8")]
-        VBROADCASTF32X8 = 902,
+        VBROADCASTF32X8 = 901,
 
         [Symbol("vbroadcastf64x2")]
-        VBROADCASTF64X2 = 903,
+        VBROADCASTF64X2 = 902,
 
         [Symbol("vbroadcastf64x4")]
-        VBROADCASTF64X4 = 904,
+        VBROADCASTF64X4 = 903,
 
         [Symbol("vbroadcasti128")]
-        VBROADCASTI128 = 905,
+        VBROADCASTI128 = 904,
 
         [Symbol("vbroadcasti32x2")]
-        VBROADCASTI32X2 = 906,
+        VBROADCASTI32X2 = 905,
 
         [Symbol("vbroadcasti32x4")]
-        VBROADCASTI32X4 = 907,
+        VBROADCASTI32X4 = 906,
 
         [Symbol("vbroadcasti32x8")]
-        VBROADCASTI32X8 = 908,
+        VBROADCASTI32X8 = 907,
 
         [Symbol("vbroadcasti64x2")]
-        VBROADCASTI64X2 = 909,
+        VBROADCASTI64X2 = 908,
 
         [Symbol("vbroadcasti64x4")]
-        VBROADCASTI64X4 = 910,
+        VBROADCASTI64X4 = 909,
 
         [Symbol("vbroadcastsd")]
-        VBROADCASTSD = 911,
+        VBROADCASTSD = 910,
 
         [Symbol("vbroadcastss")]
-        VBROADCASTSS = 912,
+        VBROADCASTSS = 911,
 
         [Symbol("vcmppd")]
-        VCMPPD = 913,
+        VCMPPD = 912,
 
         [Symbol("vcmpps")]
-        VCMPPS = 914,
+        VCMPPS = 913,
 
         [Symbol("vcmpsd")]
-        VCMPSD = 915,
+        VCMPSD = 914,
 
         [Symbol("vcmpss")]
-        VCMPSS = 916,
+        VCMPSS = 915,
 
         [Symbol("vcomisd")]
-        VCOMISD = 917,
+        VCOMISD = 916,
 
         [Symbol("vcomiss")]
-        VCOMISS = 918,
+        VCOMISS = 917,
 
         [Symbol("vcompresspd")]
-        VCOMPRESSPD = 919,
+        VCOMPRESSPD = 918,
 
         [Symbol("vcompressps")]
-        VCOMPRESSPS = 920,
+        VCOMPRESSPS = 919,
 
         [Symbol("vcvtdq2pd")]
-        VCVTDQ2PD = 921,
+        VCVTDQ2PD = 920,
 
         [Symbol("vcvtdq2ps")]
-        VCVTDQ2PS = 922,
+        VCVTDQ2PS = 921,
 
         [Symbol("vcvtne2ps2bf16")]
-        VCVTNE2PS2BF16 = 923,
+        VCVTNE2PS2BF16 = 922,
 
         [Symbol("vcvtneps2bf16")]
-        VCVTNEPS2BF16 = 924,
+        VCVTNEPS2BF16 = 923,
 
         [Symbol("vcvtpd2dq")]
-        VCVTPD2DQ = 925,
+        VCVTPD2DQ = 924,
 
         [Symbol("vcvtpd2ps")]
-        VCVTPD2PS = 926,
+        VCVTPD2PS = 925,
 
         [Symbol("vcvtpd2qq")]
-        VCVTPD2QQ = 927,
+        VCVTPD2QQ = 926,
 
         [Symbol("vcvtpd2udq")]
-        VCVTPD2UDQ = 928,
+        VCVTPD2UDQ = 927,
 
         [Symbol("vcvtpd2uqq")]
-        VCVTPD2UQQ = 929,
+        VCVTPD2UQQ = 928,
 
         [Symbol("vcvtph2ps")]
-        VCVTPH2PS = 930,
+        VCVTPH2PS = 929,
 
         [Symbol("vcvtps2dq")]
-        VCVTPS2DQ = 931,
+        VCVTPS2DQ = 930,
 
         [Symbol("vcvtps2pd")]
-        VCVTPS2PD = 932,
+        VCVTPS2PD = 931,
 
         [Symbol("vcvtps2ph")]
-        VCVTPS2PH = 933,
+        VCVTPS2PH = 932,
 
         [Symbol("vcvtps2qq")]
-        VCVTPS2QQ = 934,
+        VCVTPS2QQ = 933,
 
         [Symbol("vcvtps2udq")]
-        VCVTPS2UDQ = 935,
+        VCVTPS2UDQ = 934,
 
         [Symbol("vcvtps2uqq")]
-        VCVTPS2UQQ = 936,
+        VCVTPS2UQQ = 935,
 
         [Symbol("vcvtqq2pd")]
-        VCVTQQ2PD = 937,
+        VCVTQQ2PD = 936,
 
         [Symbol("vcvtqq2ps")]
-        VCVTQQ2PS = 938,
+        VCVTQQ2PS = 937,
 
         [Symbol("vcvtsd2si")]
-        VCVTSD2SI = 939,
+        VCVTSD2SI = 938,
 
         [Symbol("vcvtsd2ss")]
-        VCVTSD2SS = 940,
+        VCVTSD2SS = 939,
 
         [Symbol("vcvtsd2usi")]
-        VCVTSD2USI = 941,
+        VCVTSD2USI = 940,
 
         [Symbol("vcvtsi2sd")]
-        VCVTSI2SD = 942,
+        VCVTSI2SD = 941,
 
         [Symbol("vcvtsi2ss")]
-        VCVTSI2SS = 943,
+        VCVTSI2SS = 942,
 
         [Symbol("vcvtss2sd")]
-        VCVTSS2SD = 944,
+        VCVTSS2SD = 943,
 
         [Symbol("vcvtss2si")]
-        VCVTSS2SI = 945,
+        VCVTSS2SI = 944,
 
         [Symbol("vcvtss2usi")]
-        VCVTSS2USI = 946,
+        VCVTSS2USI = 945,
 
         [Symbol("vcvttpd2dq")]
-        VCVTTPD2DQ = 947,
+        VCVTTPD2DQ = 946,
 
         [Symbol("vcvttpd2qq")]
-        VCVTTPD2QQ = 948,
+        VCVTTPD2QQ = 947,
 
         [Symbol("vcvttpd2udq")]
-        VCVTTPD2UDQ = 949,
+        VCVTTPD2UDQ = 948,
 
         [Symbol("vcvttpd2uqq")]
-        VCVTTPD2UQQ = 950,
+        VCVTTPD2UQQ = 949,
 
         [Symbol("vcvttps2dq")]
-        VCVTTPS2DQ = 951,
+        VCVTTPS2DQ = 950,
 
         [Symbol("vcvttps2qq")]
-        VCVTTPS2QQ = 952,
+        VCVTTPS2QQ = 951,
 
         [Symbol("vcvttps2udq")]
-        VCVTTPS2UDQ = 953,
+        VCVTTPS2UDQ = 952,
 
         [Symbol("vcvttps2uqq")]
-        VCVTTPS2UQQ = 954,
+        VCVTTPS2UQQ = 953,
 
         [Symbol("vcvttsd2si")]
-        VCVTTSD2SI = 955,
+        VCVTTSD2SI = 954,
 
         [Symbol("vcvttsd2usi")]
-        VCVTTSD2USI = 956,
+        VCVTTSD2USI = 955,
 
         [Symbol("vcvttss2si")]
-        VCVTTSS2SI = 957,
+        VCVTTSS2SI = 956,
 
         [Symbol("vcvttss2usi")]
-        VCVTTSS2USI = 958,
+        VCVTTSS2USI = 957,
 
         [Symbol("vcvtudq2pd")]
-        VCVTUDQ2PD = 959,
+        VCVTUDQ2PD = 958,
 
         [Symbol("vcvtudq2ps")]
-        VCVTUDQ2PS = 960,
+        VCVTUDQ2PS = 959,
 
         [Symbol("vcvtuqq2pd")]
-        VCVTUQQ2PD = 961,
+        VCVTUQQ2PD = 960,
 
         [Symbol("vcvtuqq2ps")]
-        VCVTUQQ2PS = 962,
+        VCVTUQQ2PS = 961,
 
         [Symbol("vcvtusi2sd")]
-        VCVTUSI2SD = 963,
+        VCVTUSI2SD = 962,
 
         [Symbol("vcvtusi2ss")]
-        VCVTUSI2SS = 964,
+        VCVTUSI2SS = 963,
 
         [Symbol("vdbpsadbw")]
-        VDBPSADBW = 965,
+        VDBPSADBW = 964,
 
         [Symbol("vdivpd")]
-        VDIVPD = 966,
+        VDIVPD = 965,
 
         [Symbol("vdivps")]
-        VDIVPS = 967,
+        VDIVPS = 966,
 
         [Symbol("vdivsd")]
-        VDIVSD = 968,
+        VDIVSD = 967,
 
         [Symbol("vdivss")]
-        VDIVSS = 969,
+        VDIVSS = 968,
 
         [Symbol("vdpbf16ps")]
-        VDPBF16PS = 970,
+        VDPBF16PS = 969,
 
         [Symbol("vdppd")]
-        VDPPD = 971,
+        VDPPD = 970,
 
         [Symbol("vdpps")]
-        VDPPS = 972,
+        VDPPS = 971,
 
         [Symbol("verr")]
-        VERR = 973,
+        VERR = 972,
 
         [Symbol("verw")]
-        VERW = 974,
+        VERW = 973,
 
         [Symbol("vexp2pd")]
-        VEXP2PD = 975,
+        VEXP2PD = 974,
 
         [Symbol("vexp2ps")]
-        VEXP2PS = 976,
+        VEXP2PS = 975,
 
         [Symbol("vexpandpd")]
-        VEXPANDPD = 977,
+        VEXPANDPD = 976,
 
         [Symbol("vexpandps")]
-        VEXPANDPS = 978,
+        VEXPANDPS = 977,
 
         [Symbol("vextractf128")]
-        VEXTRACTF128 = 979,
+        VEXTRACTF128 = 978,
 
         [Symbol("vextractf32x4")]
-        VEXTRACTF32X4 = 980,
+        VEXTRACTF32X4 = 979,
 
         [Symbol("vextractf32x8")]
-        VEXTRACTF32X8 = 981,
+        VEXTRACTF32X8 = 980,
 
         [Symbol("vextractf64x2")]
-        VEXTRACTF64X2 = 982,
+        VEXTRACTF64X2 = 981,
 
         [Symbol("vextractf64x4")]
-        VEXTRACTF64X4 = 983,
+        VEXTRACTF64X4 = 982,
 
         [Symbol("vextracti128")]
-        VEXTRACTI128 = 984,
+        VEXTRACTI128 = 983,
 
         [Symbol("vextracti32x4")]
-        VEXTRACTI32X4 = 985,
+        VEXTRACTI32X4 = 984,
 
         [Symbol("vextracti32x8")]
-        VEXTRACTI32X8 = 986,
+        VEXTRACTI32X8 = 985,
 
         [Symbol("vextracti64x2")]
-        VEXTRACTI64X2 = 987,
+        VEXTRACTI64X2 = 986,
 
         [Symbol("vextracti64x4")]
-        VEXTRACTI64X4 = 988,
+        VEXTRACTI64X4 = 987,
 
         [Symbol("vextractps")]
-        VEXTRACTPS = 989,
+        VEXTRACTPS = 988,
 
         [Symbol("vfixupimmpd")]
-        VFIXUPIMMPD = 990,
+        VFIXUPIMMPD = 989,
 
         [Symbol("vfixupimmps")]
-        VFIXUPIMMPS = 991,
+        VFIXUPIMMPS = 990,
 
         [Symbol("vfixupimmsd")]
-        VFIXUPIMMSD = 992,
+        VFIXUPIMMSD = 991,
 
         [Symbol("vfixupimmss")]
-        VFIXUPIMMSS = 993,
+        VFIXUPIMMSS = 992,
 
         [Symbol("vfmadd132pd")]
-        VFMADD132PD = 994,
+        VFMADD132PD = 993,
 
         [Symbol("vfmadd132ps")]
-        VFMADD132PS = 995,
+        VFMADD132PS = 994,
 
         [Symbol("vfmadd132sd")]
-        VFMADD132SD = 996,
+        VFMADD132SD = 995,
 
         [Symbol("vfmadd132ss")]
-        VFMADD132SS = 997,
+        VFMADD132SS = 996,
 
         [Symbol("vfmadd213pd")]
-        VFMADD213PD = 998,
+        VFMADD213PD = 997,
 
         [Symbol("vfmadd213ps")]
-        VFMADD213PS = 999,
+        VFMADD213PS = 998,
 
         [Symbol("vfmadd213sd")]
-        VFMADD213SD = 1000,
+        VFMADD213SD = 999,
 
         [Symbol("vfmadd213ss")]
-        VFMADD213SS = 1001,
+        VFMADD213SS = 1000,
 
         [Symbol("vfmadd231pd")]
-        VFMADD231PD = 1002,
+        VFMADD231PD = 1001,
 
         [Symbol("vfmadd231ps")]
-        VFMADD231PS = 1003,
+        VFMADD231PS = 1002,
 
         [Symbol("vfmadd231sd")]
-        VFMADD231SD = 1004,
+        VFMADD231SD = 1003,
 
         [Symbol("vfmadd231ss")]
-        VFMADD231SS = 1005,
+        VFMADD231SS = 1004,
 
         [Symbol("vfmaddpd")]
-        VFMADDPD = 1006,
+        VFMADDPD = 1005,
 
         [Symbol("vfmaddps")]
-        VFMADDPS = 1007,
+        VFMADDPS = 1006,
 
         [Symbol("vfmaddsd")]
-        VFMADDSD = 1008,
+        VFMADDSD = 1007,
 
         [Symbol("vfmaddss")]
-        VFMADDSS = 1009,
+        VFMADDSS = 1008,
 
         [Symbol("vfmaddsub132pd")]
-        VFMADDSUB132PD = 1010,
+        VFMADDSUB132PD = 1009,
 
         [Symbol("vfmaddsub132ps")]
-        VFMADDSUB132PS = 1011,
+        VFMADDSUB132PS = 1010,
 
         [Symbol("vfmaddsub213pd")]
-        VFMADDSUB213PD = 1012,
+        VFMADDSUB213PD = 1011,
 
         [Symbol("vfmaddsub213ps")]
-        VFMADDSUB213PS = 1013,
+        VFMADDSUB213PS = 1012,
 
         [Symbol("vfmaddsub231pd")]
-        VFMADDSUB231PD = 1014,
+        VFMADDSUB231PD = 1013,
 
         [Symbol("vfmaddsub231ps")]
-        VFMADDSUB231PS = 1015,
+        VFMADDSUB231PS = 1014,
 
         [Symbol("vfmaddsubpd")]
-        VFMADDSUBPD = 1016,
+        VFMADDSUBPD = 1015,
 
         [Symbol("vfmaddsubps")]
-        VFMADDSUBPS = 1017,
+        VFMADDSUBPS = 1016,
 
         [Symbol("vfmsub132pd")]
-        VFMSUB132PD = 1018,
+        VFMSUB132PD = 1017,
 
         [Symbol("vfmsub132ps")]
-        VFMSUB132PS = 1019,
+        VFMSUB132PS = 1018,
 
         [Symbol("vfmsub132sd")]
-        VFMSUB132SD = 1020,
+        VFMSUB132SD = 1019,
 
         [Symbol("vfmsub132ss")]
-        VFMSUB132SS = 1021,
+        VFMSUB132SS = 1020,
 
         [Symbol("vfmsub213pd")]
-        VFMSUB213PD = 1022,
+        VFMSUB213PD = 1021,
 
         [Symbol("vfmsub213ps")]
-        VFMSUB213PS = 1023,
+        VFMSUB213PS = 1022,
 
         [Symbol("vfmsub213sd")]
-        VFMSUB213SD = 1024,
+        VFMSUB213SD = 1023,
 
         [Symbol("vfmsub213ss")]
-        VFMSUB213SS = 1025,
+        VFMSUB213SS = 1024,
 
         [Symbol("vfmsub231pd")]
-        VFMSUB231PD = 1026,
+        VFMSUB231PD = 1025,
 
         [Symbol("vfmsub231ps")]
-        VFMSUB231PS = 1027,
+        VFMSUB231PS = 1026,
 
         [Symbol("vfmsub231sd")]
-        VFMSUB231SD = 1028,
+        VFMSUB231SD = 1027,
 
         [Symbol("vfmsub231ss")]
-        VFMSUB231SS = 1029,
+        VFMSUB231SS = 1028,
 
         [Symbol("vfmsubadd132pd")]
-        VFMSUBADD132PD = 1030,
+        VFMSUBADD132PD = 1029,
 
         [Symbol("vfmsubadd132ps")]
-        VFMSUBADD132PS = 1031,
+        VFMSUBADD132PS = 1030,
 
         [Symbol("vfmsubadd213pd")]
-        VFMSUBADD213PD = 1032,
+        VFMSUBADD213PD = 1031,
 
         [Symbol("vfmsubadd213ps")]
-        VFMSUBADD213PS = 1033,
+        VFMSUBADD213PS = 1032,
 
         [Symbol("vfmsubadd231pd")]
-        VFMSUBADD231PD = 1034,
+        VFMSUBADD231PD = 1033,
 
         [Symbol("vfmsubadd231ps")]
-        VFMSUBADD231PS = 1035,
+        VFMSUBADD231PS = 1034,
 
         [Symbol("vfmsubaddpd")]
-        VFMSUBADDPD = 1036,
+        VFMSUBADDPD = 1035,
 
         [Symbol("vfmsubaddps")]
-        VFMSUBADDPS = 1037,
+        VFMSUBADDPS = 1036,
 
         [Symbol("vfmsubpd")]
-        VFMSUBPD = 1038,
+        VFMSUBPD = 1037,
 
         [Symbol("vfmsubps")]
-        VFMSUBPS = 1039,
+        VFMSUBPS = 1038,
 
         [Symbol("vfmsubsd")]
-        VFMSUBSD = 1040,
+        VFMSUBSD = 1039,
 
         [Symbol("vfmsubss")]
-        VFMSUBSS = 1041,
+        VFMSUBSS = 1040,
 
         [Symbol("vfnmadd132pd")]
-        VFNMADD132PD = 1042,
+        VFNMADD132PD = 1041,
 
         [Symbol("vfnmadd132ps")]
-        VFNMADD132PS = 1043,
+        VFNMADD132PS = 1042,
 
         [Symbol("vfnmadd132sd")]
-        VFNMADD132SD = 1044,
+        VFNMADD132SD = 1043,
 
         [Symbol("vfnmadd132ss")]
-        VFNMADD132SS = 1045,
+        VFNMADD132SS = 1044,
 
         [Symbol("vfnmadd213pd")]
-        VFNMADD213PD = 1046,
+        VFNMADD213PD = 1045,
 
         [Symbol("vfnmadd213ps")]
-        VFNMADD213PS = 1047,
+        VFNMADD213PS = 1046,
 
         [Symbol("vfnmadd213sd")]
-        VFNMADD213SD = 1048,
+        VFNMADD213SD = 1047,
 
         [Symbol("vfnmadd213ss")]
-        VFNMADD213SS = 1049,
+        VFNMADD213SS = 1048,
 
         [Symbol("vfnmadd231pd")]
-        VFNMADD231PD = 1050,
+        VFNMADD231PD = 1049,
 
         [Symbol("vfnmadd231ps")]
-        VFNMADD231PS = 1051,
+        VFNMADD231PS = 1050,
 
         [Symbol("vfnmadd231sd")]
-        VFNMADD231SD = 1052,
+        VFNMADD231SD = 1051,
 
         [Symbol("vfnmadd231ss")]
-        VFNMADD231SS = 1053,
+        VFNMADD231SS = 1052,
 
         [Symbol("vfnmaddpd")]
-        VFNMADDPD = 1054,
+        VFNMADDPD = 1053,
 
         [Symbol("vfnmaddps")]
-        VFNMADDPS = 1055,
+        VFNMADDPS = 1054,
 
         [Symbol("vfnmaddsd")]
-        VFNMADDSD = 1056,
+        VFNMADDSD = 1055,
 
         [Symbol("vfnmaddss")]
-        VFNMADDSS = 1057,
+        VFNMADDSS = 1056,
 
         [Symbol("vfnmsub132pd")]
-        VFNMSUB132PD = 1058,
+        VFNMSUB132PD = 1057,
 
         [Symbol("vfnmsub132ps")]
-        VFNMSUB132PS = 1059,
+        VFNMSUB132PS = 1058,
 
         [Symbol("vfnmsub132sd")]
-        VFNMSUB132SD = 1060,
+        VFNMSUB132SD = 1059,
 
         [Symbol("vfnmsub132ss")]
-        VFNMSUB132SS = 1061,
+        VFNMSUB132SS = 1060,
 
         [Symbol("vfnmsub213pd")]
-        VFNMSUB213PD = 1062,
+        VFNMSUB213PD = 1061,
 
         [Symbol("vfnmsub213ps")]
-        VFNMSUB213PS = 1063,
+        VFNMSUB213PS = 1062,
 
         [Symbol("vfnmsub213sd")]
-        VFNMSUB213SD = 1064,
+        VFNMSUB213SD = 1063,
 
         [Symbol("vfnmsub213ss")]
-        VFNMSUB213SS = 1065,
+        VFNMSUB213SS = 1064,
 
         [Symbol("vfnmsub231pd")]
-        VFNMSUB231PD = 1066,
+        VFNMSUB231PD = 1065,
 
         [Symbol("vfnmsub231ps")]
-        VFNMSUB231PS = 1067,
+        VFNMSUB231PS = 1066,
 
         [Symbol("vfnmsub231sd")]
-        VFNMSUB231SD = 1068,
+        VFNMSUB231SD = 1067,
 
         [Symbol("vfnmsub231ss")]
-        VFNMSUB231SS = 1069,
+        VFNMSUB231SS = 1068,
 
         [Symbol("vfnmsubpd")]
-        VFNMSUBPD = 1070,
+        VFNMSUBPD = 1069,
 
         [Symbol("vfnmsubps")]
-        VFNMSUBPS = 1071,
+        VFNMSUBPS = 1070,
 
         [Symbol("vfnmsubsd")]
-        VFNMSUBSD = 1072,
+        VFNMSUBSD = 1071,
 
         [Symbol("vfnmsubss")]
-        VFNMSUBSS = 1073,
+        VFNMSUBSS = 1072,
 
         [Symbol("vfpclasspd")]
-        VFPCLASSPD = 1074,
+        VFPCLASSPD = 1073,
 
         [Symbol("vfpclassps")]
-        VFPCLASSPS = 1075,
+        VFPCLASSPS = 1074,
 
         [Symbol("vfpclasssd")]
-        VFPCLASSSD = 1076,
+        VFPCLASSSD = 1075,
 
         [Symbol("vfpclassss")]
-        VFPCLASSSS = 1077,
+        VFPCLASSSS = 1076,
 
         [Symbol("vfrczpd")]
-        VFRCZPD = 1078,
+        VFRCZPD = 1077,
 
         [Symbol("vfrczps")]
-        VFRCZPS = 1079,
+        VFRCZPS = 1078,
 
         [Symbol("vfrczsd")]
-        VFRCZSD = 1080,
+        VFRCZSD = 1079,
 
         [Symbol("vfrczss")]
-        VFRCZSS = 1081,
+        VFRCZSS = 1080,
 
         [Symbol("vgatherdpd")]
-        VGATHERDPD = 1082,
+        VGATHERDPD = 1081,
 
         [Symbol("vgatherdps")]
-        VGATHERDPS = 1083,
+        VGATHERDPS = 1082,
 
         [Symbol("vgatherpf0dpd")]
-        VGATHERPF0DPD = 1084,
+        VGATHERPF0DPD = 1083,
 
         [Symbol("vgatherpf0dps")]
-        VGATHERPF0DPS = 1085,
+        VGATHERPF0DPS = 1084,
 
         [Symbol("vgatherpf0qpd")]
-        VGATHERPF0QPD = 1086,
+        VGATHERPF0QPD = 1085,
 
         [Symbol("vgatherpf0qps")]
-        VGATHERPF0QPS = 1087,
+        VGATHERPF0QPS = 1086,
 
         [Symbol("vgatherpf1dpd")]
-        VGATHERPF1DPD = 1088,
+        VGATHERPF1DPD = 1087,
 
         [Symbol("vgatherpf1dps")]
-        VGATHERPF1DPS = 1089,
+        VGATHERPF1DPS = 1088,
 
         [Symbol("vgatherpf1qpd")]
-        VGATHERPF1QPD = 1090,
+        VGATHERPF1QPD = 1089,
 
         [Symbol("vgatherpf1qps")]
-        VGATHERPF1QPS = 1091,
+        VGATHERPF1QPS = 1090,
 
         [Symbol("vgatherqpd")]
-        VGATHERQPD = 1092,
+        VGATHERQPD = 1091,
 
         [Symbol("vgatherqps")]
-        VGATHERQPS = 1093,
+        VGATHERQPS = 1092,
 
         [Symbol("vgetexppd")]
-        VGETEXPPD = 1094,
+        VGETEXPPD = 1093,
 
         [Symbol("vgetexpps")]
-        VGETEXPPS = 1095,
+        VGETEXPPS = 1094,
 
         [Symbol("vgetexpsd")]
-        VGETEXPSD = 1096,
+        VGETEXPSD = 1095,
 
         [Symbol("vgetexpss")]
-        VGETEXPSS = 1097,
+        VGETEXPSS = 1096,
 
         [Symbol("vgetmantpd")]
-        VGETMANTPD = 1098,
+        VGETMANTPD = 1097,
 
         [Symbol("vgetmantps")]
-        VGETMANTPS = 1099,
+        VGETMANTPS = 1098,
 
         [Symbol("vgetmantsd")]
-        VGETMANTSD = 1100,
+        VGETMANTSD = 1099,
 
         [Symbol("vgetmantss")]
-        VGETMANTSS = 1101,
+        VGETMANTSS = 1100,
 
         [Symbol("vgf2p8affineinvqb")]
-        VGF2P8AFFINEINVQB = 1102,
+        VGF2P8AFFINEINVQB = 1101,
 
         [Symbol("vgf2p8affineqb")]
-        VGF2P8AFFINEQB = 1103,
+        VGF2P8AFFINEQB = 1102,
 
         [Symbol("vgf2p8mulb")]
-        VGF2P8MULB = 1104,
+        VGF2P8MULB = 1103,
 
         [Symbol("vhaddpd")]
-        VHADDPD = 1105,
+        VHADDPD = 1104,
 
         [Symbol("vhaddps")]
-        VHADDPS = 1106,
+        VHADDPS = 1105,
 
         [Symbol("vhsubpd")]
-        VHSUBPD = 1107,
+        VHSUBPD = 1106,
 
         [Symbol("vhsubps")]
-        VHSUBPS = 1108,
+        VHSUBPS = 1107,
 
         [Symbol("vinsertf128")]
-        VINSERTF128 = 1109,
+        VINSERTF128 = 1108,
 
         [Symbol("vinsertf32x4")]
-        VINSERTF32X4 = 1110,
+        VINSERTF32X4 = 1109,
 
         [Symbol("vinsertf32x8")]
-        VINSERTF32X8 = 1111,
+        VINSERTF32X8 = 1110,
 
         [Symbol("vinsertf64x2")]
-        VINSERTF64X2 = 1112,
+        VINSERTF64X2 = 1111,
 
         [Symbol("vinsertf64x4")]
-        VINSERTF64X4 = 1113,
+        VINSERTF64X4 = 1112,
 
         [Symbol("vinserti128")]
-        VINSERTI128 = 1114,
+        VINSERTI128 = 1113,
 
         [Symbol("vinserti32x4")]
-        VINSERTI32X4 = 1115,
+        VINSERTI32X4 = 1114,
 
         [Symbol("vinserti32x8")]
-        VINSERTI32X8 = 1116,
+        VINSERTI32X8 = 1115,
 
         [Symbol("vinserti64x2")]
-        VINSERTI64X2 = 1117,
+        VINSERTI64X2 = 1116,
 
         [Symbol("vinserti64x4")]
-        VINSERTI64X4 = 1118,
+        VINSERTI64X4 = 1117,
 
         [Symbol("vinsertps")]
-        VINSERTPS = 1119,
+        VINSERTPS = 1118,
 
         [Symbol("vlddqu")]
-        VLDDQU = 1120,
+        VLDDQU = 1119,
 
         [Symbol("vldmxcsr")]
-        VLDMXCSR = 1121,
+        VLDMXCSR = 1120,
 
         [Symbol("vmaskmovdqu")]
-        VMASKMOVDQU = 1122,
+        VMASKMOVDQU = 1121,
 
         [Symbol("vmaskmovpd")]
-        VMASKMOVPD = 1123,
+        VMASKMOVPD = 1122,
 
         [Symbol("vmaskmovps")]
-        VMASKMOVPS = 1124,
+        VMASKMOVPS = 1123,
 
         [Symbol("vmaxpd")]
-        VMAXPD = 1125,
+        VMAXPD = 1124,
 
         [Symbol("vmaxps")]
-        VMAXPS = 1126,
+        VMAXPS = 1125,
 
         [Symbol("vmaxsd")]
-        VMAXSD = 1127,
+        VMAXSD = 1126,
 
         [Symbol("vmaxss")]
-        VMAXSS = 1128,
+        VMAXSS = 1127,
 
         [Symbol("vmcall")]
-        VMCALL = 1129,
+        VMCALL = 1128,
 
         [Symbol("vmclear")]
-        VMCLEAR = 1130,
+        VMCLEAR = 1129,
 
         [Symbol("vmfunc")]
-        VMFUNC = 1131,
+        VMFUNC = 1130,
 
         [Symbol("vminpd")]
-        VMINPD = 1132,
+        VMINPD = 1131,
 
         [Symbol("vminps")]
-        VMINPS = 1133,
+        VMINPS = 1132,
 
         [Symbol("vminsd")]
-        VMINSD = 1134,
+        VMINSD = 1133,
 
         [Symbol("vminss")]
-        VMINSS = 1135,
+        VMINSS = 1134,
 
         [Symbol("vmlaunch")]
-        VMLAUNCH = 1136,
+        VMLAUNCH = 1135,
 
         [Symbol("vmload")]
-        VMLOAD = 1137,
+        VMLOAD = 1136,
 
         [Symbol("vmmcall")]
-        VMMCALL = 1138,
+        VMMCALL = 1137,
 
         [Symbol("vmovapd")]
-        VMOVAPD = 1139,
+        VMOVAPD = 1138,
 
         [Symbol("vmovaps")]
-        VMOVAPS = 1140,
+        VMOVAPS = 1139,
 
         [Symbol("vmovd")]
-        VMOVD = 1141,
+        VMOVD = 1140,
 
         [Symbol("vmovddup")]
-        VMOVDDUP = 1142,
+        VMOVDDUP = 1141,
 
         [Symbol("vmovdqa")]
-        VMOVDQA = 1143,
+        VMOVDQA = 1142,
 
         [Symbol("vmovdqa32")]
-        VMOVDQA32 = 1144,
+        VMOVDQA32 = 1143,
 
         [Symbol("vmovdqa64")]
-        VMOVDQA64 = 1145,
+        VMOVDQA64 = 1144,
 
         [Symbol("vmovdqu")]
-        VMOVDQU = 1146,
+        VMOVDQU = 1145,
 
         [Symbol("vmovdqu16")]
-        VMOVDQU16 = 1147,
+        VMOVDQU16 = 1146,
 
         [Symbol("vmovdqu32")]
-        VMOVDQU32 = 1148,
+        VMOVDQU32 = 1147,
 
         [Symbol("vmovdqu64")]
-        VMOVDQU64 = 1149,
+        VMOVDQU64 = 1148,
 
         [Symbol("vmovdqu8")]
-        VMOVDQU8 = 1150,
+        VMOVDQU8 = 1149,
 
         [Symbol("vmovhlps")]
-        VMOVHLPS = 1151,
+        VMOVHLPS = 1150,
 
         [Symbol("vmovhpd")]
-        VMOVHPD = 1152,
+        VMOVHPD = 1151,
 
         [Symbol("vmovhps")]
-        VMOVHPS = 1153,
+        VMOVHPS = 1152,
 
         [Symbol("vmovlhps")]
-        VMOVLHPS = 1154,
+        VMOVLHPS = 1153,
 
         [Symbol("vmovlpd")]
-        VMOVLPD = 1155,
+        VMOVLPD = 1154,
 
         [Symbol("vmovlps")]
-        VMOVLPS = 1156,
+        VMOVLPS = 1155,
 
         [Symbol("vmovmskpd")]
-        VMOVMSKPD = 1157,
+        VMOVMSKPD = 1156,
 
         [Symbol("vmovmskps")]
-        VMOVMSKPS = 1158,
+        VMOVMSKPS = 1157,
 
         [Symbol("vmovntdq")]
-        VMOVNTDQ = 1159,
+        VMOVNTDQ = 1158,
 
         [Symbol("vmovntdqa")]
-        VMOVNTDQA = 1160,
+        VMOVNTDQA = 1159,
 
         [Symbol("vmovntpd")]
-        VMOVNTPD = 1161,
+        VMOVNTPD = 1160,
 
         [Symbol("vmovntps")]
-        VMOVNTPS = 1162,
+        VMOVNTPS = 1161,
 
         [Symbol("vmovq")]
-        VMOVQ = 1163,
+        VMOVQ = 1162,
 
         [Symbol("vmovsd")]
-        VMOVSD = 1164,
+        VMOVSD = 1163,
 
         [Symbol("vmovshdup")]
-        VMOVSHDUP = 1165,
+        VMOVSHDUP = 1164,
 
         [Symbol("vmovsldup")]
-        VMOVSLDUP = 1166,
+        VMOVSLDUP = 1165,
 
         [Symbol("vmovss")]
-        VMOVSS = 1167,
+        VMOVSS = 1166,
 
         [Symbol("vmovupd")]
-        VMOVUPD = 1168,
+        VMOVUPD = 1167,
 
         [Symbol("vmovups")]
-        VMOVUPS = 1169,
+        VMOVUPS = 1168,
 
         [Symbol("vmpsadbw")]
-        VMPSADBW = 1170,
+        VMPSADBW = 1169,
 
         [Symbol("vmptrld")]
-        VMPTRLD = 1171,
+        VMPTRLD = 1170,
 
         [Symbol("vmptrst")]
-        VMPTRST = 1172,
+        VMPTRST = 1171,
 
         [Symbol("vmread")]
-        VMREAD = 1173,
+        VMREAD = 1172,
 
         [Symbol("vmresume")]
-        VMRESUME = 1174,
+        VMRESUME = 1173,
 
         [Symbol("vmrun")]
-        VMRUN = 1175,
+        VMRUN = 1174,
 
         [Symbol("vmsave")]
-        VMSAVE = 1176,
+        VMSAVE = 1175,
 
         [Symbol("vmulpd")]
-        VMULPD = 1177,
+        VMULPD = 1176,
 
         [Symbol("vmulps")]
-        VMULPS = 1178,
+        VMULPS = 1177,
 
         [Symbol("vmulsd")]
-        VMULSD = 1179,
+        VMULSD = 1178,
 
         [Symbol("vmulss")]
-        VMULSS = 1180,
+        VMULSS = 1179,
 
         [Symbol("vmwrite")]
-        VMWRITE = 1181,
+        VMWRITE = 1180,
 
         [Symbol("vmxoff")]
-        VMXOFF = 1182,
+        VMXOFF = 1181,
 
         [Symbol("vmxon")]
-        VMXON = 1183,
+        VMXON = 1182,
 
         [Symbol("vorpd")]
-        VORPD = 1184,
+        VORPD = 1183,
 
         [Symbol("vorps")]
-        VORPS = 1185,
+        VORPS = 1184,
 
         [Symbol("vp2intersectd")]
-        VP2INTERSECTD = 1186,
+        VP2INTERSECTD = 1185,
 
         [Symbol("vp2intersectq")]
-        VP2INTERSECTQ = 1187,
+        VP2INTERSECTQ = 1186,
 
         [Symbol("vp4dpwssd")]
-        VP4DPWSSD = 1188,
+        VP4DPWSSD = 1187,
 
         [Symbol("vp4dpwssds")]
-        VP4DPWSSDS = 1189,
+        VP4DPWSSDS = 1188,
 
         [Symbol("vpabsb")]
-        VPABSB = 1190,
+        VPABSB = 1189,
 
         [Symbol("vpabsd")]
-        VPABSD = 1191,
+        VPABSD = 1190,
 
         [Symbol("vpabsq")]
-        VPABSQ = 1192,
+        VPABSQ = 1191,
 
         [Symbol("vpabsw")]
-        VPABSW = 1193,
+        VPABSW = 1192,
 
         [Symbol("vpackssdw")]
-        VPACKSSDW = 1194,
+        VPACKSSDW = 1193,
 
         [Symbol("vpacksswb")]
-        VPACKSSWB = 1195,
+        VPACKSSWB = 1194,
 
         [Symbol("vpackusdw")]
-        VPACKUSDW = 1196,
+        VPACKUSDW = 1195,
 
         [Symbol("vpackuswb")]
-        VPACKUSWB = 1197,
+        VPACKUSWB = 1196,
 
         [Symbol("vpaddb")]
-        VPADDB = 1198,
+        VPADDB = 1197,
 
         [Symbol("vpaddd")]
-        VPADDD = 1199,
+        VPADDD = 1198,
 
         [Symbol("vpaddq")]
-        VPADDQ = 1200,
+        VPADDQ = 1199,
 
         [Symbol("vpaddsb")]
-        VPADDSB = 1201,
+        VPADDSB = 1200,
 
         [Symbol("vpaddsw")]
-        VPADDSW = 1202,
+        VPADDSW = 1201,
 
         [Symbol("vpaddusb")]
-        VPADDUSB = 1203,
+        VPADDUSB = 1202,
 
         [Symbol("vpaddusw")]
-        VPADDUSW = 1204,
+        VPADDUSW = 1203,
 
         [Symbol("vpaddw")]
-        VPADDW = 1205,
+        VPADDW = 1204,
 
         [Symbol("vpalignr")]
-        VPALIGNR = 1206,
+        VPALIGNR = 1205,
 
         [Symbol("vpand")]
-        VPAND = 1207,
+        VPAND = 1206,
 
         [Symbol("vpandd")]
-        VPANDD = 1208,
+        VPANDD = 1207,
 
         [Symbol("vpandn")]
-        VPANDN = 1209,
+        VPANDN = 1208,
 
         [Symbol("vpandnd")]
-        VPANDND = 1210,
+        VPANDND = 1209,
 
         [Symbol("vpandnq")]
-        VPANDNQ = 1211,
+        VPANDNQ = 1210,
 
         [Symbol("vpandq")]
-        VPANDQ = 1212,
+        VPANDQ = 1211,
 
         [Symbol("vpavgb")]
-        VPAVGB = 1213,
+        VPAVGB = 1212,
 
         [Symbol("vpavgw")]
-        VPAVGW = 1214,
+        VPAVGW = 1213,
 
         [Symbol("vpblendd")]
-        VPBLENDD = 1215,
+        VPBLENDD = 1214,
 
         [Symbol("vpblendmb")]
-        VPBLENDMB = 1216,
+        VPBLENDMB = 1215,
 
         [Symbol("vpblendmd")]
-        VPBLENDMD = 1217,
+        VPBLENDMD = 1216,
 
         [Symbol("vpblendmq")]
-        VPBLENDMQ = 1218,
+        VPBLENDMQ = 1217,
 
         [Symbol("vpblendmw")]
-        VPBLENDMW = 1219,
+        VPBLENDMW = 1218,
 
         [Symbol("vpblendvb")]
-        VPBLENDVB = 1220,
+        VPBLENDVB = 1219,
 
         [Symbol("vpblendw")]
-        VPBLENDW = 1221,
+        VPBLENDW = 1220,
 
         [Symbol("vpbroadcastb")]
-        VPBROADCASTB = 1222,
+        VPBROADCASTB = 1221,
 
         [Symbol("vpbroadcastd")]
-        VPBROADCASTD = 1223,
+        VPBROADCASTD = 1222,
 
         [Symbol("vpbroadcastmb2q")]
-        VPBROADCASTMB2Q = 1224,
+        VPBROADCASTMB2Q = 1223,
 
         [Symbol("vpbroadcastmw2d")]
-        VPBROADCASTMW2D = 1225,
+        VPBROADCASTMW2D = 1224,
 
         [Symbol("vpbroadcastq")]
-        VPBROADCASTQ = 1226,
+        VPBROADCASTQ = 1225,
 
         [Symbol("vpbroadcastw")]
-        VPBROADCASTW = 1227,
+        VPBROADCASTW = 1226,
 
         [Symbol("vpclmulqdq")]
-        VPCLMULQDQ = 1228,
+        VPCLMULQDQ = 1227,
 
         [Symbol("vpcmov")]
-        VPCMOV = 1229,
+        VPCMOV = 1228,
 
         [Symbol("vpcmpb")]
-        VPCMPB = 1230,
+        VPCMPB = 1229,
 
         [Symbol("vpcmpd")]
-        VPCMPD = 1231,
+        VPCMPD = 1230,
 
         [Symbol("vpcmpeqb")]
-        VPCMPEQB = 1232,
+        VPCMPEQB = 1231,
 
         [Symbol("vpcmpeqd")]
-        VPCMPEQD = 1233,
+        VPCMPEQD = 1232,
 
         [Symbol("vpcmpeqq")]
-        VPCMPEQQ = 1234,
+        VPCMPEQQ = 1233,
 
         [Symbol("vpcmpeqw")]
-        VPCMPEQW = 1235,
+        VPCMPEQW = 1234,
 
         [Symbol("vpcmpestri")]
-        VPCMPESTRI = 1236,
+        VPCMPESTRI = 1235,
 
         [Symbol("vpcmpestri64")]
-        VPCMPESTRI64 = 1237,
+        VPCMPESTRI64 = 1236,
 
         [Symbol("vpcmpestrm")]
-        VPCMPESTRM = 1238,
+        VPCMPESTRM = 1237,
 
         [Symbol("vpcmpestrm64")]
-        VPCMPESTRM64 = 1239,
+        VPCMPESTRM64 = 1238,
 
         [Symbol("vpcmpgtb")]
-        VPCMPGTB = 1240,
+        VPCMPGTB = 1239,
 
         [Symbol("vpcmpgtd")]
-        VPCMPGTD = 1241,
+        VPCMPGTD = 1240,
 
         [Symbol("vpcmpgtq")]
-        VPCMPGTQ = 1242,
+        VPCMPGTQ = 1241,
 
         [Symbol("vpcmpgtw")]
-        VPCMPGTW = 1243,
+        VPCMPGTW = 1242,
 
         [Symbol("vpcmpistri")]
-        VPCMPISTRI = 1244,
+        VPCMPISTRI = 1243,
 
         [Symbol("vpcmpistri64")]
-        VPCMPISTRI64 = 1245,
+        VPCMPISTRI64 = 1244,
 
         [Symbol("vpcmpistrm")]
-        VPCMPISTRM = 1246,
+        VPCMPISTRM = 1245,
 
         [Symbol("vpcmpq")]
-        VPCMPQ = 1247,
+        VPCMPQ = 1246,
 
         [Symbol("vpcmpub")]
-        VPCMPUB = 1248,
+        VPCMPUB = 1247,
 
         [Symbol("vpcmpud")]
-        VPCMPUD = 1249,
+        VPCMPUD = 1248,
 
         [Symbol("vpcmpuq")]
-        VPCMPUQ = 1250,
+        VPCMPUQ = 1249,
 
         [Symbol("vpcmpuw")]
-        VPCMPUW = 1251,
+        VPCMPUW = 1250,
 
         [Symbol("vpcmpw")]
-        VPCMPW = 1252,
+        VPCMPW = 1251,
 
         [Symbol("vpcomb")]
-        VPCOMB = 1253,
+        VPCOMB = 1252,
 
         [Symbol("vpcomd")]
-        VPCOMD = 1254,
+        VPCOMD = 1253,
 
         [Symbol("vpcompressb")]
-        VPCOMPRESSB = 1255,
+        VPCOMPRESSB = 1254,
 
         [Symbol("vpcompressd")]
-        VPCOMPRESSD = 1256,
+        VPCOMPRESSD = 1255,
 
         [Symbol("vpcompressq")]
-        VPCOMPRESSQ = 1257,
+        VPCOMPRESSQ = 1256,
 
         [Symbol("vpcompressw")]
-        VPCOMPRESSW = 1258,
+        VPCOMPRESSW = 1257,
 
         [Symbol("vpcomq")]
-        VPCOMQ = 1259,
+        VPCOMQ = 1258,
 
         [Symbol("vpcomub")]
-        VPCOMUB = 1260,
+        VPCOMUB = 1259,
 
         [Symbol("vpcomud")]
-        VPCOMUD = 1261,
+        VPCOMUD = 1260,
 
         [Symbol("vpcomuq")]
-        VPCOMUQ = 1262,
+        VPCOMUQ = 1261,
 
         [Symbol("vpcomuw")]
-        VPCOMUW = 1263,
+        VPCOMUW = 1262,
 
         [Symbol("vpcomw")]
-        VPCOMW = 1264,
+        VPCOMW = 1263,
 
         [Symbol("vpconflictd")]
-        VPCONFLICTD = 1265,
+        VPCONFLICTD = 1264,
 
         [Symbol("vpconflictq")]
-        VPCONFLICTQ = 1266,
+        VPCONFLICTQ = 1265,
 
         [Symbol("vpdpbusd")]
-        VPDPBUSD = 1267,
+        VPDPBUSD = 1266,
 
         [Symbol("vpdpbusds")]
-        VPDPBUSDS = 1268,
+        VPDPBUSDS = 1267,
 
         [Symbol("vpdpwssd")]
-        VPDPWSSD = 1269,
+        VPDPWSSD = 1268,
 
         [Symbol("vpdpwssds")]
-        VPDPWSSDS = 1270,
+        VPDPWSSDS = 1269,
 
         [Symbol("vperm2f128")]
-        VPERM2F128 = 1271,
+        VPERM2F128 = 1270,
 
         [Symbol("vperm2i128")]
-        VPERM2I128 = 1272,
+        VPERM2I128 = 1271,
 
         [Symbol("vpermb")]
-        VPERMB = 1273,
+        VPERMB = 1272,
 
         [Symbol("vpermd")]
-        VPERMD = 1274,
+        VPERMD = 1273,
 
         [Symbol("vpermi2b")]
-        VPERMI2B = 1275,
+        VPERMI2B = 1274,
 
         [Symbol("vpermi2d")]
-        VPERMI2D = 1276,
+        VPERMI2D = 1275,
 
         [Symbol("vpermi2pd")]
-        VPERMI2PD = 1277,
+        VPERMI2PD = 1276,
 
         [Symbol("vpermi2ps")]
-        VPERMI2PS = 1278,
+        VPERMI2PS = 1277,
 
         [Symbol("vpermi2q")]
-        VPERMI2Q = 1279,
+        VPERMI2Q = 1278,
 
         [Symbol("vpermi2w")]
-        VPERMI2W = 1280,
+        VPERMI2W = 1279,
 
         [Symbol("vpermil2pd")]
-        VPERMIL2PD = 1281,
+        VPERMIL2PD = 1280,
 
         [Symbol("vpermil2ps")]
-        VPERMIL2PS = 1282,
+        VPERMIL2PS = 1281,
 
         [Symbol("vpermilpd")]
-        VPERMILPD = 1283,
+        VPERMILPD = 1282,
 
         [Symbol("vpermilps")]
-        VPERMILPS = 1284,
+        VPERMILPS = 1283,
 
         [Symbol("vpermpd")]
-        VPERMPD = 1285,
+        VPERMPD = 1284,
 
         [Symbol("vpermps")]
-        VPERMPS = 1286,
+        VPERMPS = 1285,
 
         [Symbol("vpermq")]
-        VPERMQ = 1287,
+        VPERMQ = 1286,
 
         [Symbol("vpermt2b")]
-        VPERMT2B = 1288,
+        VPERMT2B = 1287,
 
         [Symbol("vpermt2d")]
-        VPERMT2D = 1289,
+        VPERMT2D = 1288,
 
         [Symbol("vpermt2pd")]
-        VPERMT2PD = 1290,
+        VPERMT2PD = 1289,
 
         [Symbol("vpermt2ps")]
-        VPERMT2PS = 1291,
+        VPERMT2PS = 1290,
 
         [Symbol("vpermt2q")]
-        VPERMT2Q = 1292,
+        VPERMT2Q = 1291,
 
         [Symbol("vpermt2w")]
-        VPERMT2W = 1293,
+        VPERMT2W = 1292,
 
         [Symbol("vpermw")]
-        VPERMW = 1294,
+        VPERMW = 1293,
 
         [Symbol("vpexpandb")]
-        VPEXPANDB = 1295,
+        VPEXPANDB = 1294,
 
         [Symbol("vpexpandd")]
-        VPEXPANDD = 1296,
+        VPEXPANDD = 1295,
 
         [Symbol("vpexpandq")]
-        VPEXPANDQ = 1297,
+        VPEXPANDQ = 1296,
 
         [Symbol("vpexpandw")]
-        VPEXPANDW = 1298,
+        VPEXPANDW = 1297,
 
         [Symbol("vpextrb")]
-        VPEXTRB = 1299,
+        VPEXTRB = 1298,
 
         [Symbol("vpextrd")]
-        VPEXTRD = 1300,
+        VPEXTRD = 1299,
 
         [Symbol("vpextrq")]
-        VPEXTRQ = 1301,
+        VPEXTRQ = 1300,
 
         [Symbol("vpextrw")]
-        VPEXTRW = 1302,
+        VPEXTRW = 1301,
 
         [Symbol("vpextrw_c5")]
-        VPEXTRW_C5 = 1303,
+        VPEXTRW_C5 = 1302,
 
         [Symbol("vpgatherdd")]
-        VPGATHERDD = 1304,
+        VPGATHERDD = 1303,
 
         [Symbol("vpgatherdq")]
-        VPGATHERDQ = 1305,
+        VPGATHERDQ = 1304,
 
         [Symbol("vpgatherqd")]
-        VPGATHERQD = 1306,
+        VPGATHERQD = 1305,
 
         [Symbol("vpgatherqq")]
-        VPGATHERQQ = 1307,
+        VPGATHERQQ = 1306,
 
         [Symbol("vphaddbd")]
-        VPHADDBD = 1308,
+        VPHADDBD = 1307,
 
         [Symbol("vphaddbq")]
-        VPHADDBQ = 1309,
+        VPHADDBQ = 1308,
 
         [Symbol("vphaddbw")]
-        VPHADDBW = 1310,
+        VPHADDBW = 1309,
 
         [Symbol("vphaddd")]
-        VPHADDD = 1311,
+        VPHADDD = 1310,
 
         [Symbol("vphadddq")]
-        VPHADDDQ = 1312,
+        VPHADDDQ = 1311,
 
         [Symbol("vphaddsw")]
-        VPHADDSW = 1313,
+        VPHADDSW = 1312,
 
         [Symbol("vphaddubd")]
-        VPHADDUBD = 1314,
+        VPHADDUBD = 1313,
 
         [Symbol("vphaddubq")]
-        VPHADDUBQ = 1315,
+        VPHADDUBQ = 1314,
 
         [Symbol("vphaddubw")]
-        VPHADDUBW = 1316,
+        VPHADDUBW = 1315,
 
         [Symbol("vphaddudq")]
-        VPHADDUDQ = 1317,
+        VPHADDUDQ = 1316,
 
         [Symbol("vphadduwd")]
-        VPHADDUWD = 1318,
+        VPHADDUWD = 1317,
 
         [Symbol("vphadduwq")]
-        VPHADDUWQ = 1319,
+        VPHADDUWQ = 1318,
 
         [Symbol("vphaddw")]
-        VPHADDW = 1320,
+        VPHADDW = 1319,
 
         [Symbol("vphaddwd")]
-        VPHADDWD = 1321,
+        VPHADDWD = 1320,
 
         [Symbol("vphaddwq")]
-        VPHADDWQ = 1322,
+        VPHADDWQ = 1321,
 
         [Symbol("vphminposuw")]
-        VPHMINPOSUW = 1323,
+        VPHMINPOSUW = 1322,
 
         [Symbol("vphsubbw")]
-        VPHSUBBW = 1324,
+        VPHSUBBW = 1323,
 
         [Symbol("vphsubd")]
-        VPHSUBD = 1325,
+        VPHSUBD = 1324,
 
         [Symbol("vphsubdq")]
-        VPHSUBDQ = 1326,
+        VPHSUBDQ = 1325,
 
         [Symbol("vphsubsw")]
-        VPHSUBSW = 1327,
+        VPHSUBSW = 1326,
 
         [Symbol("vphsubw")]
-        VPHSUBW = 1328,
+        VPHSUBW = 1327,
 
         [Symbol("vphsubwd")]
-        VPHSUBWD = 1329,
+        VPHSUBWD = 1328,
 
         [Symbol("vpinsrb")]
-        VPINSRB = 1330,
+        VPINSRB = 1329,
 
         [Symbol("vpinsrd")]
-        VPINSRD = 1331,
+        VPINSRD = 1330,
 
         [Symbol("vpinsrq")]
-        VPINSRQ = 1332,
+        VPINSRQ = 1331,
 
         [Symbol("vpinsrw")]
-        VPINSRW = 1333,
+        VPINSRW = 1332,
 
         [Symbol("vplzcntd")]
-        VPLZCNTD = 1334,
+        VPLZCNTD = 1333,
 
         [Symbol("vplzcntq")]
-        VPLZCNTQ = 1335,
+        VPLZCNTQ = 1334,
 
         [Symbol("vpmacsdd")]
-        VPMACSDD = 1336,
+        VPMACSDD = 1335,
 
         [Symbol("vpmacsdqh")]
-        VPMACSDQH = 1337,
+        VPMACSDQH = 1336,
 
         [Symbol("vpmacsdql")]
-        VPMACSDQL = 1338,
+        VPMACSDQL = 1337,
 
         [Symbol("vpmacssdd")]
-        VPMACSSDD = 1339,
+        VPMACSSDD = 1338,
 
         [Symbol("vpmacssdqh")]
-        VPMACSSDQH = 1340,
+        VPMACSSDQH = 1339,
 
         [Symbol("vpmacssdql")]
-        VPMACSSDQL = 1341,
+        VPMACSSDQL = 1340,
 
         [Symbol("vpmacsswd")]
-        VPMACSSWD = 1342,
+        VPMACSSWD = 1341,
 
         [Symbol("vpmacssww")]
-        VPMACSSWW = 1343,
+        VPMACSSWW = 1342,
 
         [Symbol("vpmacswd")]
-        VPMACSWD = 1344,
+        VPMACSWD = 1343,
 
         [Symbol("vpmacsww")]
-        VPMACSWW = 1345,
+        VPMACSWW = 1344,
 
         [Symbol("vpmadcsswd")]
-        VPMADCSSWD = 1346,
+        VPMADCSSWD = 1345,
 
         [Symbol("vpmadcswd")]
-        VPMADCSWD = 1347,
+        VPMADCSWD = 1346,
 
         [Symbol("vpmadd52huq")]
-        VPMADD52HUQ = 1348,
+        VPMADD52HUQ = 1347,
 
         [Symbol("vpmadd52luq")]
-        VPMADD52LUQ = 1349,
+        VPMADD52LUQ = 1348,
 
         [Symbol("vpmaddubsw")]
-        VPMADDUBSW = 1350,
+        VPMADDUBSW = 1349,
 
         [Symbol("vpmaddwd")]
-        VPMADDWD = 1351,
+        VPMADDWD = 1350,
 
         [Symbol("vpmaskmovd")]
-        VPMASKMOVD = 1352,
+        VPMASKMOVD = 1351,
 
         [Symbol("vpmaskmovq")]
-        VPMASKMOVQ = 1353,
+        VPMASKMOVQ = 1352,
 
         [Symbol("vpmaxsb")]
-        VPMAXSB = 1354,
+        VPMAXSB = 1353,
 
         [Symbol("vpmaxsd")]
-        VPMAXSD = 1355,
+        VPMAXSD = 1354,
 
         [Symbol("vpmaxsq")]
-        VPMAXSQ = 1356,
+        VPMAXSQ = 1355,
 
         [Symbol("vpmaxsw")]
-        VPMAXSW = 1357,
+        VPMAXSW = 1356,
 
         [Symbol("vpmaxub")]
-        VPMAXUB = 1358,
+        VPMAXUB = 1357,
 
         [Symbol("vpmaxud")]
-        VPMAXUD = 1359,
+        VPMAXUD = 1358,
 
         [Symbol("vpmaxuq")]
-        VPMAXUQ = 1360,
+        VPMAXUQ = 1359,
 
         [Symbol("vpmaxuw")]
-        VPMAXUW = 1361,
+        VPMAXUW = 1360,
 
         [Symbol("vpminsb")]
-        VPMINSB = 1362,
+        VPMINSB = 1361,
 
         [Symbol("vpminsd")]
-        VPMINSD = 1363,
+        VPMINSD = 1362,
 
         [Symbol("vpminsq")]
-        VPMINSQ = 1364,
+        VPMINSQ = 1363,
 
         [Symbol("vpminsw")]
-        VPMINSW = 1365,
+        VPMINSW = 1364,
 
         [Symbol("vpminub")]
-        VPMINUB = 1366,
+        VPMINUB = 1365,
 
         [Symbol("vpminud")]
-        VPMINUD = 1367,
+        VPMINUD = 1366,
 
         [Symbol("vpminuq")]
-        VPMINUQ = 1368,
+        VPMINUQ = 1367,
 
         [Symbol("vpminuw")]
-        VPMINUW = 1369,
+        VPMINUW = 1368,
 
         [Symbol("vpmovb2m")]
-        VPMOVB2M = 1370,
+        VPMOVB2M = 1369,
 
         [Symbol("vpmovd2m")]
-        VPMOVD2M = 1371,
+        VPMOVD2M = 1370,
 
         [Symbol("vpmovdb")]
-        VPMOVDB = 1372,
+        VPMOVDB = 1371,
 
         [Symbol("vpmovdw")]
-        VPMOVDW = 1373,
+        VPMOVDW = 1372,
 
         [Symbol("vpmovm2b")]
-        VPMOVM2B = 1374,
+        VPMOVM2B = 1373,
 
         [Symbol("vpmovm2d")]
-        VPMOVM2D = 1375,
+        VPMOVM2D = 1374,
 
         [Symbol("vpmovm2q")]
-        VPMOVM2Q = 1376,
+        VPMOVM2Q = 1375,
 
         [Symbol("vpmovm2w")]
-        VPMOVM2W = 1377,
+        VPMOVM2W = 1376,
 
         [Symbol("vpmovmskb")]
-        VPMOVMSKB = 1378,
+        VPMOVMSKB = 1377,
 
         [Symbol("vpmovq2m")]
-        VPMOVQ2M = 1379,
+        VPMOVQ2M = 1378,
 
         [Symbol("vpmovqb")]
-        VPMOVQB = 1380,
+        VPMOVQB = 1379,
 
         [Symbol("vpmovqd")]
-        VPMOVQD = 1381,
+        VPMOVQD = 1380,
 
         [Symbol("vpmovqw")]
-        VPMOVQW = 1382,
+        VPMOVQW = 1381,
 
         [Symbol("vpmovsdb")]
-        VPMOVSDB = 1383,
+        VPMOVSDB = 1382,
 
         [Symbol("vpmovsdw")]
-        VPMOVSDW = 1384,
+        VPMOVSDW = 1383,
 
         [Symbol("vpmovsqb")]
-        VPMOVSQB = 1385,
+        VPMOVSQB = 1384,
 
         [Symbol("vpmovsqd")]
-        VPMOVSQD = 1386,
+        VPMOVSQD = 1385,
 
         [Symbol("vpmovsqw")]
-        VPMOVSQW = 1387,
+        VPMOVSQW = 1386,
 
         [Symbol("vpmovswb")]
-        VPMOVSWB = 1388,
+        VPMOVSWB = 1387,
 
         [Symbol("vpmovsxbd")]
-        VPMOVSXBD = 1389,
+        VPMOVSXBD = 1388,
 
         [Symbol("vpmovsxbq")]
-        VPMOVSXBQ = 1390,
+        VPMOVSXBQ = 1389,
 
         [Symbol("vpmovsxbw")]
-        VPMOVSXBW = 1391,
+        VPMOVSXBW = 1390,
 
         [Symbol("vpmovsxdq")]
-        VPMOVSXDQ = 1392,
+        VPMOVSXDQ = 1391,
 
         [Symbol("vpmovsxwd")]
-        VPMOVSXWD = 1393,
+        VPMOVSXWD = 1392,
 
         [Symbol("vpmovsxwq")]
-        VPMOVSXWQ = 1394,
+        VPMOVSXWQ = 1393,
 
         [Symbol("vpmovusdb")]
-        VPMOVUSDB = 1395,
+        VPMOVUSDB = 1394,
 
         [Symbol("vpmovusdw")]
-        VPMOVUSDW = 1396,
+        VPMOVUSDW = 1395,
 
         [Symbol("vpmovusqb")]
-        VPMOVUSQB = 1397,
+        VPMOVUSQB = 1396,
 
         [Symbol("vpmovusqd")]
-        VPMOVUSQD = 1398,
+        VPMOVUSQD = 1397,
 
         [Symbol("vpmovusqw")]
-        VPMOVUSQW = 1399,
+        VPMOVUSQW = 1398,
 
         [Symbol("vpmovuswb")]
-        VPMOVUSWB = 1400,
+        VPMOVUSWB = 1399,
 
         [Symbol("vpmovw2m")]
-        VPMOVW2M = 1401,
+        VPMOVW2M = 1400,
 
         [Symbol("vpmovwb")]
-        VPMOVWB = 1402,
+        VPMOVWB = 1401,
 
         [Symbol("vpmovzxbd")]
-        VPMOVZXBD = 1403,
+        VPMOVZXBD = 1402,
 
         [Symbol("vpmovzxbq")]
-        VPMOVZXBQ = 1404,
+        VPMOVZXBQ = 1403,
 
         [Symbol("vpmovzxbw")]
-        VPMOVZXBW = 1405,
+        VPMOVZXBW = 1404,
 
         [Symbol("vpmovzxdq")]
-        VPMOVZXDQ = 1406,
+        VPMOVZXDQ = 1405,
 
         [Symbol("vpmovzxwd")]
-        VPMOVZXWD = 1407,
+        VPMOVZXWD = 1406,
 
         [Symbol("vpmovzxwq")]
-        VPMOVZXWQ = 1408,
+        VPMOVZXWQ = 1407,
 
         [Symbol("vpmuldq")]
-        VPMULDQ = 1409,
+        VPMULDQ = 1408,
 
         [Symbol("vpmulhrsw")]
-        VPMULHRSW = 1410,
+        VPMULHRSW = 1409,
 
         [Symbol("vpmulhuw")]
-        VPMULHUW = 1411,
+        VPMULHUW = 1410,
 
         [Symbol("vpmulhw")]
-        VPMULHW = 1412,
+        VPMULHW = 1411,
 
         [Symbol("vpmulld")]
-        VPMULLD = 1413,
+        VPMULLD = 1412,
 
         [Symbol("vpmullq")]
-        VPMULLQ = 1414,
+        VPMULLQ = 1413,
 
         [Symbol("vpmullw")]
-        VPMULLW = 1415,
+        VPMULLW = 1414,
 
         [Symbol("vpmultishiftqb")]
-        VPMULTISHIFTQB = 1416,
+        VPMULTISHIFTQB = 1415,
 
         [Symbol("vpmuludq")]
-        VPMULUDQ = 1417,
+        VPMULUDQ = 1416,
 
         [Symbol("vpopcntb")]
-        VPOPCNTB = 1418,
+        VPOPCNTB = 1417,
 
         [Symbol("vpopcntd")]
-        VPOPCNTD = 1419,
+        VPOPCNTD = 1418,
 
         [Symbol("vpopcntq")]
-        VPOPCNTQ = 1420,
+        VPOPCNTQ = 1419,
 
         [Symbol("vpopcntw")]
-        VPOPCNTW = 1421,
+        VPOPCNTW = 1420,
 
         [Symbol("vpor")]
-        VPOR = 1422,
+        VPOR = 1421,
 
         [Symbol("vpord")]
-        VPORD = 1423,
+        VPORD = 1422,
 
         [Symbol("vporq")]
-        VPORQ = 1424,
+        VPORQ = 1423,
 
         [Symbol("vpperm")]
-        VPPERM = 1425,
+        VPPERM = 1424,
 
         [Symbol("vprold")]
-        VPROLD = 1426,
+        VPROLD = 1425,
 
         [Symbol("vprolq")]
-        VPROLQ = 1427,
+        VPROLQ = 1426,
 
         [Symbol("vprolvd")]
-        VPROLVD = 1428,
+        VPROLVD = 1427,
 
         [Symbol("vprolvq")]
-        VPROLVQ = 1429,
+        VPROLVQ = 1428,
 
         [Symbol("vprord")]
-        VPRORD = 1430,
+        VPRORD = 1429,
 
         [Symbol("vprorq")]
-        VPRORQ = 1431,
+        VPRORQ = 1430,
 
         [Symbol("vprorvd")]
-        VPRORVD = 1432,
+        VPRORVD = 1431,
 
         [Symbol("vprorvq")]
-        VPRORVQ = 1433,
+        VPRORVQ = 1432,
 
         [Symbol("vprotb")]
-        VPROTB = 1434,
+        VPROTB = 1433,
 
         [Symbol("vprotd")]
-        VPROTD = 1435,
+        VPROTD = 1434,
 
         [Symbol("vprotq")]
-        VPROTQ = 1436,
+        VPROTQ = 1435,
 
         [Symbol("vprotw")]
-        VPROTW = 1437,
+        VPROTW = 1436,
 
         [Symbol("vpsadbw")]
-        VPSADBW = 1438,
+        VPSADBW = 1437,
 
         [Symbol("vpscatterdd")]
-        VPSCATTERDD = 1439,
+        VPSCATTERDD = 1438,
 
         [Symbol("vpscatterdq")]
-        VPSCATTERDQ = 1440,
+        VPSCATTERDQ = 1439,
 
         [Symbol("vpscatterqd")]
-        VPSCATTERQD = 1441,
+        VPSCATTERQD = 1440,
 
         [Symbol("vpscatterqq")]
-        VPSCATTERQQ = 1442,
+        VPSCATTERQQ = 1441,
 
         [Symbol("vpshab")]
-        VPSHAB = 1443,
+        VPSHAB = 1442,
 
         [Symbol("vpshad")]
-        VPSHAD = 1444,
+        VPSHAD = 1443,
 
         [Symbol("vpshaq")]
-        VPSHAQ = 1445,
+        VPSHAQ = 1444,
 
         [Symbol("vpshaw")]
-        VPSHAW = 1446,
+        VPSHAW = 1445,
 
         [Symbol("vpshlb")]
-        VPSHLB = 1447,
+        VPSHLB = 1446,
 
         [Symbol("vpshld")]
-        VPSHLD = 1448,
+        VPSHLD = 1447,
 
         [Symbol("vpshldd")]
-        VPSHLDD = 1449,
+        VPSHLDD = 1448,
 
         [Symbol("vpshldq")]
-        VPSHLDQ = 1450,
+        VPSHLDQ = 1449,
 
         [Symbol("vpshldvd")]
-        VPSHLDVD = 1451,
+        VPSHLDVD = 1450,
 
         [Symbol("vpshldvq")]
-        VPSHLDVQ = 1452,
+        VPSHLDVQ = 1451,
 
         [Symbol("vpshldvw")]
-        VPSHLDVW = 1453,
+        VPSHLDVW = 1452,
 
         [Symbol("vpshldw")]
-        VPSHLDW = 1454,
+        VPSHLDW = 1453,
 
         [Symbol("vpshlq")]
-        VPSHLQ = 1455,
+        VPSHLQ = 1454,
 
         [Symbol("vpshlw")]
-        VPSHLW = 1456,
+        VPSHLW = 1455,
 
         [Symbol("vpshrdd")]
-        VPSHRDD = 1457,
+        VPSHRDD = 1456,
 
         [Symbol("vpshrdq")]
-        VPSHRDQ = 1458,
+        VPSHRDQ = 1457,
 
         [Symbol("vpshrdvd")]
-        VPSHRDVD = 1459,
+        VPSHRDVD = 1458,
 
         [Symbol("vpshrdvq")]
-        VPSHRDVQ = 1460,
+        VPSHRDVQ = 1459,
 
         [Symbol("vpshrdvw")]
-        VPSHRDVW = 1461,
+        VPSHRDVW = 1460,
 
         [Symbol("vpshrdw")]
-        VPSHRDW = 1462,
+        VPSHRDW = 1461,
 
         [Symbol("vpshufb")]
-        VPSHUFB = 1463,
+        VPSHUFB = 1462,
 
         [Symbol("vpshufbitqmb")]
-        VPSHUFBITQMB = 1464,
+        VPSHUFBITQMB = 1463,
 
         [Symbol("vpshufd")]
-        VPSHUFD = 1465,
+        VPSHUFD = 1464,
 
         [Symbol("vpshufhw")]
-        VPSHUFHW = 1466,
+        VPSHUFHW = 1465,
 
         [Symbol("vpshuflw")]
-        VPSHUFLW = 1467,
+        VPSHUFLW = 1466,
 
         [Symbol("vpsignb")]
-        VPSIGNB = 1468,
+        VPSIGNB = 1467,
 
         [Symbol("vpsignd")]
-        VPSIGND = 1469,
+        VPSIGND = 1468,
 
         [Symbol("vpsignw")]
-        VPSIGNW = 1470,
+        VPSIGNW = 1469,
 
         [Symbol("vpslld")]
-        VPSLLD = 1471,
+        VPSLLD = 1470,
 
         [Symbol("vpslldq")]
-        VPSLLDQ = 1472,
+        VPSLLDQ = 1471,
 
         [Symbol("vpsllq")]
-        VPSLLQ = 1473,
+        VPSLLQ = 1472,
 
         [Symbol("vpsllvd")]
-        VPSLLVD = 1474,
+        VPSLLVD = 1473,
 
         [Symbol("vpsllvq")]
-        VPSLLVQ = 1475,
+        VPSLLVQ = 1474,
 
         [Symbol("vpsllvw")]
-        VPSLLVW = 1476,
+        VPSLLVW = 1475,
 
         [Symbol("vpsllw")]
-        VPSLLW = 1477,
+        VPSLLW = 1476,
 
         [Symbol("vpsrad")]
-        VPSRAD = 1478,
+        VPSRAD = 1477,
 
         [Symbol("vpsraq")]
-        VPSRAQ = 1479,
+        VPSRAQ = 1478,
 
         [Symbol("vpsravd")]
-        VPSRAVD = 1480,
+        VPSRAVD = 1479,
 
         [Symbol("vpsravq")]
-        VPSRAVQ = 1481,
+        VPSRAVQ = 1480,
 
         [Symbol("vpsravw")]
-        VPSRAVW = 1482,
+        VPSRAVW = 1481,
 
         [Symbol("vpsraw")]
-        VPSRAW = 1483,
+        VPSRAW = 1482,
 
         [Symbol("vpsrld")]
-        VPSRLD = 1484,
+        VPSRLD = 1483,
 
         [Symbol("vpsrldq")]
-        VPSRLDQ = 1485,
+        VPSRLDQ = 1484,
 
         [Symbol("vpsrlq")]
-        VPSRLQ = 1486,
+        VPSRLQ = 1485,
 
         [Symbol("vpsrlvd")]
-        VPSRLVD = 1487,
+        VPSRLVD = 1486,
 
         [Symbol("vpsrlvq")]
-        VPSRLVQ = 1488,
+        VPSRLVQ = 1487,
 
         [Symbol("vpsrlvw")]
-        VPSRLVW = 1489,
+        VPSRLVW = 1488,
 
         [Symbol("vpsrlw")]
-        VPSRLW = 1490,
+        VPSRLW = 1489,
 
         [Symbol("vpsubb")]
-        VPSUBB = 1491,
+        VPSUBB = 1490,
 
         [Symbol("vpsubd")]
-        VPSUBD = 1492,
+        VPSUBD = 1491,
 
         [Symbol("vpsubq")]
-        VPSUBQ = 1493,
+        VPSUBQ = 1492,
 
         [Symbol("vpsubsb")]
-        VPSUBSB = 1494,
+        VPSUBSB = 1493,
 
         [Symbol("vpsubsw")]
-        VPSUBSW = 1495,
+        VPSUBSW = 1494,
 
         [Symbol("vpsubusb")]
-        VPSUBUSB = 1496,
+        VPSUBUSB = 1495,
 
         [Symbol("vpsubusw")]
-        VPSUBUSW = 1497,
+        VPSUBUSW = 1496,
 
         [Symbol("vpsubw")]
-        VPSUBW = 1498,
+        VPSUBW = 1497,
 
         [Symbol("vpternlogd")]
-        VPTERNLOGD = 1499,
+        VPTERNLOGD = 1498,
 
         [Symbol("vpternlogq")]
-        VPTERNLOGQ = 1500,
+        VPTERNLOGQ = 1499,
 
         [Symbol("vptest")]
-        VPTEST = 1501,
+        VPTEST = 1500,
 
         [Symbol("vptestmb")]
-        VPTESTMB = 1502,
+        VPTESTMB = 1501,
 
         [Symbol("vptestmd")]
-        VPTESTMD = 1503,
+        VPTESTMD = 1502,
 
         [Symbol("vptestmq")]
-        VPTESTMQ = 1504,
+        VPTESTMQ = 1503,
 
         [Symbol("vptestmw")]
-        VPTESTMW = 1505,
+        VPTESTMW = 1504,
 
         [Symbol("vptestnmb")]
-        VPTESTNMB = 1506,
+        VPTESTNMB = 1505,
 
         [Symbol("vptestnmd")]
-        VPTESTNMD = 1507,
+        VPTESTNMD = 1506,
 
         [Symbol("vptestnmq")]
-        VPTESTNMQ = 1508,
+        VPTESTNMQ = 1507,
 
         [Symbol("vptestnmw")]
-        VPTESTNMW = 1509,
+        VPTESTNMW = 1508,
 
         [Symbol("vpunpckhbw")]
-        VPUNPCKHBW = 1510,
+        VPUNPCKHBW = 1509,
 
         [Symbol("vpunpckhdq")]
-        VPUNPCKHDQ = 1511,
+        VPUNPCKHDQ = 1510,
 
         [Symbol("vpunpckhqdq")]
-        VPUNPCKHQDQ = 1512,
+        VPUNPCKHQDQ = 1511,
 
         [Symbol("vpunpckhwd")]
-        VPUNPCKHWD = 1513,
+        VPUNPCKHWD = 1512,
 
         [Symbol("vpunpcklbw")]
-        VPUNPCKLBW = 1514,
+        VPUNPCKLBW = 1513,
 
         [Symbol("vpunpckldq")]
-        VPUNPCKLDQ = 1515,
+        VPUNPCKLDQ = 1514,
 
         [Symbol("vpunpcklqdq")]
-        VPUNPCKLQDQ = 1516,
+        VPUNPCKLQDQ = 1515,
 
         [Symbol("vpunpcklwd")]
-        VPUNPCKLWD = 1517,
+        VPUNPCKLWD = 1516,
 
         [Symbol("vpxor")]
-        VPXOR = 1518,
+        VPXOR = 1517,
 
         [Symbol("vpxord")]
-        VPXORD = 1519,
+        VPXORD = 1518,
 
         [Symbol("vpxorq")]
-        VPXORQ = 1520,
+        VPXORQ = 1519,
 
         [Symbol("vrangepd")]
-        VRANGEPD = 1521,
+        VRANGEPD = 1520,
 
         [Symbol("vrangeps")]
-        VRANGEPS = 1522,
+        VRANGEPS = 1521,
 
         [Symbol("vrangesd")]
-        VRANGESD = 1523,
+        VRANGESD = 1522,
 
         [Symbol("vrangess")]
-        VRANGESS = 1524,
+        VRANGESS = 1523,
 
         [Symbol("vrcp14pd")]
-        VRCP14PD = 1525,
+        VRCP14PD = 1524,
 
         [Symbol("vrcp14ps")]
-        VRCP14PS = 1526,
+        VRCP14PS = 1525,
 
         [Symbol("vrcp14sd")]
-        VRCP14SD = 1527,
+        VRCP14SD = 1526,
 
         [Symbol("vrcp14ss")]
-        VRCP14SS = 1528,
+        VRCP14SS = 1527,
 
         [Symbol("vrcp28pd")]
-        VRCP28PD = 1529,
+        VRCP28PD = 1528,
 
         [Symbol("vrcp28ps")]
-        VRCP28PS = 1530,
+        VRCP28PS = 1529,
 
         [Symbol("vrcp28sd")]
-        VRCP28SD = 1531,
+        VRCP28SD = 1530,
 
         [Symbol("vrcp28ss")]
-        VRCP28SS = 1532,
+        VRCP28SS = 1531,
 
         [Symbol("vrcpps")]
-        VRCPPS = 1533,
+        VRCPPS = 1532,
 
         [Symbol("vrcpss")]
-        VRCPSS = 1534,
+        VRCPSS = 1533,
 
         [Symbol("vreducepd")]
-        VREDUCEPD = 1535,
+        VREDUCEPD = 1534,
 
         [Symbol("vreduceps")]
-        VREDUCEPS = 1536,
+        VREDUCEPS = 1535,
 
         [Symbol("vreducesd")]
-        VREDUCESD = 1537,
+        VREDUCESD = 1536,
 
         [Symbol("vreducess")]
-        VREDUCESS = 1538,
+        VREDUCESS = 1537,
 
         [Symbol("vrndscalepd")]
-        VRNDSCALEPD = 1539,
+        VRNDSCALEPD = 1538,
 
         [Symbol("vrndscaleps")]
-        VRNDSCALEPS = 1540,
+        VRNDSCALEPS = 1539,
 
         [Symbol("vrndscalesd")]
-        VRNDSCALESD = 1541,
+        VRNDSCALESD = 1540,
 
         [Symbol("vrndscaless")]
-        VRNDSCALESS = 1542,
+        VRNDSCALESS = 1541,
 
         [Symbol("vroundpd")]
-        VROUNDPD = 1543,
+        VROUNDPD = 1542,
 
         [Symbol("vroundps")]
-        VROUNDPS = 1544,
+        VROUNDPS = 1543,
 
         [Symbol("vroundsd")]
-        VROUNDSD = 1545,
+        VROUNDSD = 1544,
 
         [Symbol("vroundss")]
-        VROUNDSS = 1546,
+        VROUNDSS = 1545,
 
         [Symbol("vrsqrt14pd")]
-        VRSQRT14PD = 1547,
+        VRSQRT14PD = 1546,
 
         [Symbol("vrsqrt14ps")]
-        VRSQRT14PS = 1548,
+        VRSQRT14PS = 1547,
 
         [Symbol("vrsqrt14sd")]
-        VRSQRT14SD = 1549,
+        VRSQRT14SD = 1548,
 
         [Symbol("vrsqrt14ss")]
-        VRSQRT14SS = 1550,
+        VRSQRT14SS = 1549,
 
         [Symbol("vrsqrt28pd")]
-        VRSQRT28PD = 1551,
+        VRSQRT28PD = 1550,
 
         [Symbol("vrsqrt28ps")]
-        VRSQRT28PS = 1552,
+        VRSQRT28PS = 1551,
 
         [Symbol("vrsqrt28sd")]
-        VRSQRT28SD = 1553,
+        VRSQRT28SD = 1552,
 
         [Symbol("vrsqrt28ss")]
-        VRSQRT28SS = 1554,
+        VRSQRT28SS = 1553,
 
         [Symbol("vrsqrtps")]
-        VRSQRTPS = 1555,
+        VRSQRTPS = 1554,
 
         [Symbol("vrsqrtss")]
-        VRSQRTSS = 1556,
+        VRSQRTSS = 1555,
 
         [Symbol("vscalefpd")]
-        VSCALEFPD = 1557,
+        VSCALEFPD = 1556,
 
         [Symbol("vscalefps")]
-        VSCALEFPS = 1558,
+        VSCALEFPS = 1557,
 
         [Symbol("vscalefsd")]
-        VSCALEFSD = 1559,
+        VSCALEFSD = 1558,
 
         [Symbol("vscalefss")]
-        VSCALEFSS = 1560,
+        VSCALEFSS = 1559,
 
         [Symbol("vscatterdpd")]
-        VSCATTERDPD = 1561,
+        VSCATTERDPD = 1560,
 
         [Symbol("vscatterdps")]
-        VSCATTERDPS = 1562,
+        VSCATTERDPS = 1561,
 
         [Symbol("vscatterpf0dpd")]
-        VSCATTERPF0DPD = 1563,
+        VSCATTERPF0DPD = 1562,
 
         [Symbol("vscatterpf0dps")]
-        VSCATTERPF0DPS = 1564,
+        VSCATTERPF0DPS = 1563,
 
         [Symbol("vscatterpf0qpd")]
-        VSCATTERPF0QPD = 1565,
+        VSCATTERPF0QPD = 1564,
 
         [Symbol("vscatterpf0qps")]
-        VSCATTERPF0QPS = 1566,
+        VSCATTERPF0QPS = 1565,
 
         [Symbol("vscatterpf1dpd")]
-        VSCATTERPF1DPD = 1567,
+        VSCATTERPF1DPD = 1566,
 
         [Symbol("vscatterpf1dps")]
-        VSCATTERPF1DPS = 1568,
+        VSCATTERPF1DPS = 1567,
 
         [Symbol("vscatterpf1qpd")]
-        VSCATTERPF1QPD = 1569,
+        VSCATTERPF1QPD = 1568,
 
         [Symbol("vscatterpf1qps")]
-        VSCATTERPF1QPS = 1570,
+        VSCATTERPF1QPS = 1569,
 
         [Symbol("vscatterqpd")]
-        VSCATTERQPD = 1571,
+        VSCATTERQPD = 1570,
 
         [Symbol("vscatterqps")]
-        VSCATTERQPS = 1572,
+        VSCATTERQPS = 1571,
 
         [Symbol("vshuff32x4")]
-        VSHUFF32X4 = 1573,
+        VSHUFF32X4 = 1572,
 
         [Symbol("vshuff64x2")]
-        VSHUFF64X2 = 1574,
+        VSHUFF64X2 = 1573,
 
         [Symbol("vshufi32x4")]
-        VSHUFI32X4 = 1575,
+        VSHUFI32X4 = 1574,
 
         [Symbol("vshufi64x2")]
-        VSHUFI64X2 = 1576,
+        VSHUFI64X2 = 1575,
 
         [Symbol("vshufpd")]
-        VSHUFPD = 1577,
+        VSHUFPD = 1576,
 
         [Symbol("vshufps")]
-        VSHUFPS = 1578,
+        VSHUFPS = 1577,
 
         [Symbol("vsqrtpd")]
-        VSQRTPD = 1579,
+        VSQRTPD = 1578,
 
         [Symbol("vsqrtps")]
-        VSQRTPS = 1580,
+        VSQRTPS = 1579,
 
         [Symbol("vsqrtsd")]
-        VSQRTSD = 1581,
+        VSQRTSD = 1580,
 
         [Symbol("vsqrtss")]
-        VSQRTSS = 1582,
+        VSQRTSS = 1581,
 
         [Symbol("vstmxcsr")]
-        VSTMXCSR = 1583,
+        VSTMXCSR = 1582,
 
         [Symbol("vsubpd")]
-        VSUBPD = 1584,
+        VSUBPD = 1583,
 
         [Symbol("vsubps")]
-        VSUBPS = 1585,
+        VSUBPS = 1584,
 
         [Symbol("vsubsd")]
-        VSUBSD = 1586,
+        VSUBSD = 1585,
 
         [Symbol("vsubss")]
-        VSUBSS = 1587,
+        VSUBSS = 1586,
 
         [Symbol("vtestpd")]
-        VTESTPD = 1588,
+        VTESTPD = 1587,
 
         [Symbol("vtestps")]
-        VTESTPS = 1589,
+        VTESTPS = 1588,
 
         [Symbol("vucomisd")]
-        VUCOMISD = 1590,
+        VUCOMISD = 1589,
 
         [Symbol("vucomiss")]
-        VUCOMISS = 1591,
+        VUCOMISS = 1590,
 
         [Symbol("vunpckhpd")]
-        VUNPCKHPD = 1592,
+        VUNPCKHPD = 1591,
 
         [Symbol("vunpckhps")]
-        VUNPCKHPS = 1593,
+        VUNPCKHPS = 1592,
 
         [Symbol("vunpcklpd")]
-        VUNPCKLPD = 1594,
+        VUNPCKLPD = 1593,
 
         [Symbol("vunpcklps")]
-        VUNPCKLPS = 1595,
+        VUNPCKLPS = 1594,
 
         [Symbol("vxorpd")]
-        VXORPD = 1596,
+        VXORPD = 1595,
 
         [Symbol("vxorps")]
-        VXORPS = 1597,
+        VXORPS = 1596,
 
         [Symbol("vzeroall")]
-        VZEROALL = 1598,
+        VZEROALL = 1597,
 
         [Symbol("vzeroupper")]
-        VZEROUPPER = 1599,
+        VZEROUPPER = 1598,
 
         [Symbol("wbinvd")]
-        WBINVD = 1600,
+        WBINVD = 1599,
 
         [Symbol("wbnoinvd")]
-        WBNOINVD = 1601,
+        WBNOINVD = 1600,
 
         [Symbol("wrfsbase")]
-        WRFSBASE = 1602,
+        WRFSBASE = 1601,
 
         [Symbol("wrgsbase")]
-        WRGSBASE = 1603,
+        WRGSBASE = 1602,
 
         [Symbol("wrmsr")]
-        WRMSR = 1604,
+        WRMSR = 1603,
 
         [Symbol("wrpkru")]
-        WRPKRU = 1605,
+        WRPKRU = 1604,
 
         [Symbol("wrssd")]
-        WRSSD = 1606,
+        WRSSD = 1605,
 
         [Symbol("wrssq")]
-        WRSSQ = 1607,
+        WRSSQ = 1606,
 
         [Symbol("wrussd")]
-        WRUSSD = 1608,
+        WRUSSD = 1607,
 
         [Symbol("wrussq")]
-        WRUSSQ = 1609,
+        WRUSSQ = 1608,
 
         [Symbol("xabort")]
-        XABORT = 1610,
+        XABORT = 1609,
 
         [Symbol("xadd")]
-        XADD = 1611,
+        XADD = 1610,
 
         [Symbol("xadd_lock")]
-        XADD_LOCK = 1612,
+        XADD_LOCK = 1611,
 
         [Symbol("xbegin")]
-        XBEGIN = 1613,
+        XBEGIN = 1612,
 
         [Symbol("xchg")]
-        XCHG = 1614,
+        XCHG = 1613,
 
         [Symbol("xend")]
-        XEND = 1615,
+        XEND = 1614,
 
         [Symbol("xgetbv")]
-        XGETBV = 1616,
+        XGETBV = 1615,
 
         [Symbol("xlat")]
-        XLAT = 1617,
+        XLAT = 1616,
 
         [Symbol("xor")]
-        XOR = 1618,
-
-        [Symbol("xor_lock")]
-        XOR_LOCK = 1619,
+        XOR = 1617,
 
         [Symbol("xorpd")]
-        XORPD = 1620,
+        XORPD = 1618,
 
         [Symbol("xorps")]
-        XORPS = 1621,
+        XORPS = 1619,
+
+        [Symbol("xor_lock")]
+        XOR_LOCK = 1620,
 
         [Symbol("xresldtrk")]
-        XRESLDTRK = 1622,
+        XRESLDTRK = 1621,
 
         [Symbol("xrstor")]
-        XRSTOR = 1623,
+        XRSTOR = 1622,
 
         [Symbol("xrstor64")]
-        XRSTOR64 = 1624,
+        XRSTOR64 = 1623,
 
         [Symbol("xrstors")]
-        XRSTORS = 1625,
+        XRSTORS = 1624,
 
         [Symbol("xrstors64")]
-        XRSTORS64 = 1626,
+        XRSTORS64 = 1625,
 
         [Symbol("xsave")]
-        XSAVE = 1627,
+        XSAVE = 1626,
 
         [Symbol("xsave64")]
-        XSAVE64 = 1628,
+        XSAVE64 = 1627,
 
         [Symbol("xsavec")]
-        XSAVEC = 1629,
+        XSAVEC = 1628,
 
         [Symbol("xsavec64")]
-        XSAVEC64 = 1630,
+        XSAVEC64 = 1629,
 
         [Symbol("xsaveopt")]
-        XSAVEOPT = 1631,
+        XSAVEOPT = 1630,
 
         [Symbol("xsaveopt64")]
-        XSAVEOPT64 = 1632,
+        XSAVEOPT64 = 1631,
 
         [Symbol("xsaves")]
-        XSAVES = 1633,
+        XSAVES = 1632,
 
         [Symbol("xsaves64")]
-        XSAVES64 = 1634,
+        XSAVES64 = 1633,
 
         [Symbol("xsetbv")]
-        XSETBV = 1635,
+        XSETBV = 1634,
 
         [Symbol("xstore")]
-        XSTORE = 1636,
+        XSTORE = 1635,
 
         [Symbol("xsusldtrk")]
-        XSUSLDTRK = 1637,
+        XSUSLDTRK = 1636,
 
         [Symbol("xtest")]
-        XTEST = 1638,
+        XTEST = 1637,
 
     }
 }

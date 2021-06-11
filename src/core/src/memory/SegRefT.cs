@@ -70,6 +70,12 @@ namespace Z0
             get => BaseAddress == 0 || Length == 0;
         }
 
+        public ref T First
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(0);
+        }
+
         [MethodImpl(Inline)]
         public unsafe ref T Cell(int index)
             => ref @ref<T>((void*)(BaseAddress + (ulong)index*CellSize));

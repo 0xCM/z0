@@ -744,7 +744,8 @@ namespace Z0.Asm
             GS = r5,
         }
 
-        public enum SysPtrReg : byte
+        [SymbolSource]
+        public enum TableReg : byte
         {
             [Symbol("GDTR","The global descriptor table register")]
             GDTR = r0,

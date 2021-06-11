@@ -12,7 +12,6 @@ namespace Z0.Asm
     {
         public static AssetData Assets => AssetData.create();
 
-
         public sealed class AssetData : Assets<AssetData>
         {
             public Asset AsmDbInstructions() => Asset("asmdb.instructions.csv");

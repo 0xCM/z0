@@ -15,6 +15,46 @@ namespace Z0
         Null = 0,
 
         /// <summary>
+        /// Start of heading
+        /// </summary>
+        SOH = 1,
+
+        /// <summary>
+        /// Start of text
+        /// </summary>
+        SOT = 2,
+
+        /// <summary>
+        /// End of text
+        /// </summary>
+        EOT = 3,
+
+        /// <summary>
+        /// End of transmission
+        /// </summary>
+        EOTR = 4,
+
+        /// <summary>
+        /// Enquiry
+        /// </summary>
+        ENQ = 5,
+
+        /// <summary>
+        /// Acknowledgement
+        /// </summary>
+        ACK = 6,
+
+        /// <summary>
+        /// Hell's bells, asci code 7
+        /// </summary>
+        Bell = 7,
+
+        /// <summary>
+        /// The backspace control symbol '\b', asci code 8
+        /// </summary>
+        BS = (byte)'\b',
+
+        /// <summary>
         /// The tab character code 9
         /// </summary>
         [Symbol(AC.Tab)]

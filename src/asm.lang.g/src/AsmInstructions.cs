@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Generated   :  2021-06-10.20.22.20.322
+// Generated   :  2021-06-10.20.36.31.618
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -10,6 +10,34 @@ namespace Z0.Asm
 
     public readonly struct AsmInstructions
     {
+        public struct None : ITypedInstruction<None>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public None(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.None;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(None src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(None src) => AsmMnemonics.None;
+
+            public static implicit operator AsmHexCode(None src) => src.Encoded;
+
+            public static implicit operator None(AsmHexCode src) => new None(src);
+        }
+
+        public None none() => default;
+
+        [MethodImpl(Inline), Op]
+        public None none(AsmHexCode encoded) => new None(encoded);
+
         public struct Aaa : ITypedInstruction<Aaa>
         {
             public AsmHexCode Content;
@@ -150,34 +178,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Adc adc(AsmHexCode encoded) => new Adc(encoded);
 
-        public struct Adc_lock : ITypedInstruction<Adc_lock>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Adc_lock(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADC_LOCK;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Adc_lock src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Adc_lock src) => AsmMnemonics.ADC_LOCK;
-
-            public static implicit operator AsmHexCode(Adc_lock src) => src.Encoded;
-
-            public static implicit operator Adc_lock(AsmHexCode src) => new Adc_lock(src);
-        }
-
-        public Adc_lock adc_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Adc_lock adc_lock(AsmHexCode encoded) => new Adc_lock(encoded);
-
         public struct Adcx : ITypedInstruction<Adcx>
         {
             public AsmHexCode Content;
@@ -206,6 +206,34 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Adcx adcx(AsmHexCode encoded) => new Adcx(encoded);
 
+        public struct Adc_lock : ITypedInstruction<Adc_lock>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Adc_lock(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADC_LOCK;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Adc_lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Adc_lock src) => AsmMnemonics.ADC_LOCK;
+
+            public static implicit operator AsmHexCode(Adc_lock src) => src.Encoded;
+
+            public static implicit operator Adc_lock(AsmHexCode src) => new Adc_lock(src);
+        }
+
+        public Adc_lock adc_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Adc_lock adc_lock(AsmHexCode encoded) => new Adc_lock(encoded);
+
         public struct Add : ITypedInstruction<Add>
         {
             public AsmHexCode Content;
@@ -233,34 +261,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Add add(AsmHexCode encoded) => new Add(encoded);
-
-        public struct Add_lock : ITypedInstruction<Add_lock>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Add_lock(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADD_LOCK;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Add_lock src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Add_lock src) => AsmMnemonics.ADD_LOCK;
-
-            public static implicit operator AsmHexCode(Add_lock src) => src.Encoded;
-
-            public static implicit operator Add_lock(AsmHexCode src) => new Add_lock(src);
-        }
-
-        public Add_lock add_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Add_lock add_lock(AsmHexCode encoded) => new Add_lock(encoded);
 
         public struct Addpd : ITypedInstruction<Addpd>
         {
@@ -429,6 +429,34 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Addsubps addsubps(AsmHexCode encoded) => new Addsubps(encoded);
+
+        public struct Add_lock : ITypedInstruction<Add_lock>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Add_lock(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADD_LOCK;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Add_lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Add_lock src) => AsmMnemonics.ADD_LOCK;
+
+            public static implicit operator AsmHexCode(Add_lock src) => src.Encoded;
+
+            public static implicit operator Add_lock(AsmHexCode src) => new Add_lock(src);
+        }
+
+        public Add_lock add_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Add_lock add_lock(AsmHexCode encoded) => new Add_lock(encoded);
 
         public struct Adox : ITypedInstruction<Adox>
         {
@@ -878,34 +906,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public And and(AsmHexCode encoded) => new And(encoded);
 
-        public struct And_lock : ITypedInstruction<And_lock>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public And_lock(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AND_LOCK;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(And_lock src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(And_lock src) => AsmMnemonics.AND_LOCK;
-
-            public static implicit operator AsmHexCode(And_lock src) => src.Encoded;
-
-            public static implicit operator And_lock(AsmHexCode src) => new And_lock(src);
-        }
-
-        public And_lock and_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public And_lock and_lock(AsmHexCode encoded) => new And_lock(encoded);
-
         public struct Andn : ITypedInstruction<Andn>
         {
             public AsmHexCode Content;
@@ -1045,6 +1045,34 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Andps andps(AsmHexCode encoded) => new Andps(encoded);
+
+        public struct And_lock : ITypedInstruction<And_lock>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public And_lock(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AND_LOCK;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(And_lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(And_lock src) => AsmMnemonics.AND_LOCK;
+
+            public static implicit operator AsmHexCode(And_lock src) => src.Encoded;
+
+            public static implicit operator And_lock(AsmHexCode src) => new And_lock(src);
+        }
+
+        public And_lock and_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public And_lock and_lock(AsmHexCode encoded) => new And_lock(encoded);
 
         public struct Arpl : ITypedInstruction<Arpl>
         {
@@ -3314,34 +3342,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Cmpxchg cmpxchg(AsmHexCode encoded) => new Cmpxchg(encoded);
 
-        public struct Cmpxchg_lock : ITypedInstruction<Cmpxchg_lock>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Cmpxchg_lock(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPXCHG_LOCK;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Cmpxchg_lock src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Cmpxchg_lock src) => AsmMnemonics.CMPXCHG_LOCK;
-
-            public static implicit operator AsmHexCode(Cmpxchg_lock src) => src.Encoded;
-
-            public static implicit operator Cmpxchg_lock(AsmHexCode src) => new Cmpxchg_lock(src);
-        }
-
-        public Cmpxchg_lock cmpxchg_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Cmpxchg_lock cmpxchg_lock(AsmHexCode encoded) => new Cmpxchg_lock(encoded);
-
         public struct Cmpxchg16b : ITypedInstruction<Cmpxchg16b>
         {
             public AsmHexCode Content;
@@ -3453,6 +3453,34 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Cmpxchg8b_lock cmpxchg8b_lock(AsmHexCode encoded) => new Cmpxchg8b_lock(encoded);
+
+        public struct Cmpxchg_lock : ITypedInstruction<Cmpxchg_lock>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Cmpxchg_lock(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPXCHG_LOCK;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Cmpxchg_lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cmpxchg_lock src) => AsmMnemonics.CMPXCHG_LOCK;
+
+            public static implicit operator AsmHexCode(Cmpxchg_lock src) => src.Encoded;
+
+            public static implicit operator Cmpxchg_lock(AsmHexCode src) => new Cmpxchg_lock(src);
+        }
+
+        public Cmpxchg_lock cmpxchg_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Cmpxchg_lock cmpxchg_lock(AsmHexCode encoded) => new Cmpxchg_lock(encoded);
 
         public struct Comisd : ITypedInstruction<Comisd>
         {
@@ -8046,34 +8074,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Inc inc(AsmHexCode encoded) => new Inc(encoded);
 
-        public struct Inc_lock : ITypedInstruction<Inc_lock>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Inc_lock(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INC_LOCK;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Inc_lock src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Inc_lock src) => AsmMnemonics.INC_LOCK;
-
-            public static implicit operator AsmHexCode(Inc_lock src) => src.Encoded;
-
-            public static implicit operator Inc_lock(AsmHexCode src) => new Inc_lock(src);
-        }
-
-        public Inc_lock inc_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Inc_lock inc_lock(AsmHexCode encoded) => new Inc_lock(encoded);
-
         public struct Incsspd : ITypedInstruction<Incsspd>
         {
             public AsmHexCode Content;
@@ -8129,6 +8129,34 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Incsspq incsspq(AsmHexCode encoded) => new Incsspq(encoded);
+
+        public struct Inc_lock : ITypedInstruction<Inc_lock>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Inc_lock(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INC_LOCK;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Inc_lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Inc_lock src) => AsmMnemonics.INC_LOCK;
+
+            public static implicit operator AsmHexCode(Inc_lock src) => src.Encoded;
+
+            public static implicit operator Inc_lock(AsmHexCode src) => new Inc_lock(src);
+        }
+
+        public Inc_lock inc_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Inc_lock inc_lock(AsmHexCode encoded) => new Inc_lock(encoded);
 
         public struct Insb : ITypedInstruction<Insb>
         {
@@ -11966,62 +11994,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Mov mov(AsmHexCode encoded) => new Mov(encoded);
 
-        public struct Mov_cr : ITypedInstruction<Mov_cr>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Mov_cr(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOV_CR;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Mov_cr src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Mov_cr src) => AsmMnemonics.MOV_CR;
-
-            public static implicit operator AsmHexCode(Mov_cr src) => src.Encoded;
-
-            public static implicit operator Mov_cr(AsmHexCode src) => new Mov_cr(src);
-        }
-
-        public Mov_cr mov_cr() => default;
-
-        [MethodImpl(Inline), Op]
-        public Mov_cr mov_cr(AsmHexCode encoded) => new Mov_cr(encoded);
-
-        public struct Mov_dr : ITypedInstruction<Mov_dr>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Mov_dr(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOV_DR;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Mov_dr src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Mov_dr src) => AsmMnemonics.MOV_DR;
-
-            public static implicit operator AsmHexCode(Mov_dr src) => src.Encoded;
-
-            public static implicit operator Mov_dr(AsmHexCode src) => new Mov_dr(src);
-        }
-
-        public Mov_dr mov_dr() => default;
-
-        [MethodImpl(Inline), Op]
-        public Mov_dr mov_dr(AsmHexCode encoded) => new Mov_dr(encoded);
-
         public struct Movapd : ITypedInstruction<Movapd>
         {
             public AsmHexCode Content;
@@ -13170,6 +13142,62 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Movzx movzx(AsmHexCode encoded) => new Movzx(encoded);
 
+        public struct Mov_cr : ITypedInstruction<Mov_cr>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Mov_cr(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOV_CR;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Mov_cr src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Mov_cr src) => AsmMnemonics.MOV_CR;
+
+            public static implicit operator AsmHexCode(Mov_cr src) => src.Encoded;
+
+            public static implicit operator Mov_cr(AsmHexCode src) => new Mov_cr(src);
+        }
+
+        public Mov_cr mov_cr() => default;
+
+        [MethodImpl(Inline), Op]
+        public Mov_cr mov_cr(AsmHexCode encoded) => new Mov_cr(encoded);
+
+        public struct Mov_dr : ITypedInstruction<Mov_dr>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Mov_dr(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOV_DR;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Mov_dr src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Mov_dr src) => AsmMnemonics.MOV_DR;
+
+            public static implicit operator AsmHexCode(Mov_dr src) => src.Encoded;
+
+            public static implicit operator Mov_dr(AsmHexCode src) => new Mov_dr(src);
+        }
+
+        public Mov_dr mov_dr() => default;
+
+        [MethodImpl(Inline), Op]
+        public Mov_dr mov_dr(AsmHexCode encoded) => new Mov_dr(encoded);
+
         public struct Mpsadbw : ITypedInstruction<Mpsadbw>
         {
             public AsmHexCode Content;
@@ -13477,34 +13505,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Neg_lock neg_lock(AsmHexCode encoded) => new Neg_lock(encoded);
-
-        public struct None : ITypedInstruction<None>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public None(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.None;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(None src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(None src) => AsmMnemonics.None;
-
-            public static implicit operator AsmHexCode(None src) => src.Encoded;
-
-            public static implicit operator None(AsmHexCode src) => new None(src);
-        }
-
-        public None none() => default;
-
-        [MethodImpl(Inline), Op]
-        public None none(AsmHexCode encoded) => new None(encoded);
 
         public struct Nop : ITypedInstruction<Nop>
         {
@@ -13842,34 +13842,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Or or(AsmHexCode encoded) => new Or(encoded);
 
-        public struct Or_lock : ITypedInstruction<Or_lock>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Or_lock(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.OR_LOCK;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Or_lock src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Or_lock src) => AsmMnemonics.OR_LOCK;
-
-            public static implicit operator AsmHexCode(Or_lock src) => src.Encoded;
-
-            public static implicit operator Or_lock(AsmHexCode src) => new Or_lock(src);
-        }
-
-        public Or_lock or_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Or_lock or_lock(AsmHexCode encoded) => new Or_lock(encoded);
-
         public struct Orpd : ITypedInstruction<Orpd>
         {
             public AsmHexCode Content;
@@ -13925,6 +13897,34 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Orps orps(AsmHexCode encoded) => new Orps(encoded);
+
+        public struct Or_lock : ITypedInstruction<Or_lock>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Or_lock(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.OR_LOCK;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Or_lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Or_lock src) => AsmMnemonics.OR_LOCK;
+
+            public static implicit operator AsmHexCode(Or_lock src) => src.Encoded;
+
+            public static implicit operator Or_lock(AsmHexCode src) => new Or_lock(src);
+        }
+
+        public Or_lock or_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Or_lock or_lock(AsmHexCode encoded) => new Or_lock(encoded);
 
         public struct Out : ITypedInstruction<Out>
         {
@@ -17482,62 +17482,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Por por(AsmHexCode encoded) => new Por(encoded);
 
-        public struct Prefetch_exclusive : ITypedInstruction<Prefetch_exclusive>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Prefetch_exclusive(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PREFETCH_EXCLUSIVE;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Prefetch_exclusive src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Prefetch_exclusive src) => AsmMnemonics.PREFETCH_EXCLUSIVE;
-
-            public static implicit operator AsmHexCode(Prefetch_exclusive src) => src.Encoded;
-
-            public static implicit operator Prefetch_exclusive(AsmHexCode src) => new Prefetch_exclusive(src);
-        }
-
-        public Prefetch_exclusive prefetch_exclusive() => default;
-
-        [MethodImpl(Inline), Op]
-        public Prefetch_exclusive prefetch_exclusive(AsmHexCode encoded) => new Prefetch_exclusive(encoded);
-
-        public struct Prefetch_reserved : ITypedInstruction<Prefetch_reserved>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Prefetch_reserved(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PREFETCH_RESERVED;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Prefetch_reserved src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Prefetch_reserved src) => AsmMnemonics.PREFETCH_RESERVED;
-
-            public static implicit operator AsmHexCode(Prefetch_reserved src) => src.Encoded;
-
-            public static implicit operator Prefetch_reserved(AsmHexCode src) => new Prefetch_reserved(src);
-        }
-
-        public Prefetch_reserved prefetch_reserved() => default;
-
-        [MethodImpl(Inline), Op]
-        public Prefetch_reserved prefetch_reserved(AsmHexCode encoded) => new Prefetch_reserved(encoded);
-
         public struct Prefetchnta : ITypedInstruction<Prefetchnta>
         {
             public AsmHexCode Content;
@@ -17705,6 +17649,62 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Prefetchwt1 prefetchwt1(AsmHexCode encoded) => new Prefetchwt1(encoded);
+
+        public struct Prefetch_exclusive : ITypedInstruction<Prefetch_exclusive>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Prefetch_exclusive(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PREFETCH_EXCLUSIVE;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Prefetch_exclusive src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Prefetch_exclusive src) => AsmMnemonics.PREFETCH_EXCLUSIVE;
+
+            public static implicit operator AsmHexCode(Prefetch_exclusive src) => src.Encoded;
+
+            public static implicit operator Prefetch_exclusive(AsmHexCode src) => new Prefetch_exclusive(src);
+        }
+
+        public Prefetch_exclusive prefetch_exclusive() => default;
+
+        [MethodImpl(Inline), Op]
+        public Prefetch_exclusive prefetch_exclusive(AsmHexCode encoded) => new Prefetch_exclusive(encoded);
+
+        public struct Prefetch_reserved : ITypedInstruction<Prefetch_reserved>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Prefetch_reserved(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PREFETCH_RESERVED;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Prefetch_reserved src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Prefetch_reserved src) => AsmMnemonics.PREFETCH_RESERVED;
+
+            public static implicit operator AsmHexCode(Prefetch_reserved src) => src.Encoded;
+
+            public static implicit operator Prefetch_reserved(AsmHexCode src) => new Prefetch_reserved(src);
+        }
+
+        public Prefetch_reserved prefetch_reserved() => default;
+
+        [MethodImpl(Inline), Op]
+        public Prefetch_reserved prefetch_reserved(AsmHexCode encoded) => new Prefetch_reserved(encoded);
 
         public struct Psadbw : ITypedInstruction<Psadbw>
         {
@@ -19498,6 +19498,454 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Rdtscp rdtscp(AsmHexCode encoded) => new Rdtscp(encoded);
 
+        public struct Repe_cmpsb : ITypedInstruction<Repe_cmpsb>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repe_cmpsb(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPSB;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repe_cmpsb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repe_cmpsb src) => AsmMnemonics.REPE_CMPSB;
+
+            public static implicit operator AsmHexCode(Repe_cmpsb src) => src.Encoded;
+
+            public static implicit operator Repe_cmpsb(AsmHexCode src) => new Repe_cmpsb(src);
+        }
+
+        public Repe_cmpsb repe_cmpsb() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_cmpsb repe_cmpsb(AsmHexCode encoded) => new Repe_cmpsb(encoded);
+
+        public struct Repe_cmpsd : ITypedInstruction<Repe_cmpsd>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repe_cmpsd(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPSD;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repe_cmpsd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repe_cmpsd src) => AsmMnemonics.REPE_CMPSD;
+
+            public static implicit operator AsmHexCode(Repe_cmpsd src) => src.Encoded;
+
+            public static implicit operator Repe_cmpsd(AsmHexCode src) => new Repe_cmpsd(src);
+        }
+
+        public Repe_cmpsd repe_cmpsd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_cmpsd repe_cmpsd(AsmHexCode encoded) => new Repe_cmpsd(encoded);
+
+        public struct Repe_cmpsq : ITypedInstruction<Repe_cmpsq>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repe_cmpsq(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPSQ;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repe_cmpsq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repe_cmpsq src) => AsmMnemonics.REPE_CMPSQ;
+
+            public static implicit operator AsmHexCode(Repe_cmpsq src) => src.Encoded;
+
+            public static implicit operator Repe_cmpsq(AsmHexCode src) => new Repe_cmpsq(src);
+        }
+
+        public Repe_cmpsq repe_cmpsq() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_cmpsq repe_cmpsq(AsmHexCode encoded) => new Repe_cmpsq(encoded);
+
+        public struct Repe_cmpsw : ITypedInstruction<Repe_cmpsw>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repe_cmpsw(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPSW;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repe_cmpsw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repe_cmpsw src) => AsmMnemonics.REPE_CMPSW;
+
+            public static implicit operator AsmHexCode(Repe_cmpsw src) => src.Encoded;
+
+            public static implicit operator Repe_cmpsw(AsmHexCode src) => new Repe_cmpsw(src);
+        }
+
+        public Repe_cmpsw repe_cmpsw() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_cmpsw repe_cmpsw(AsmHexCode encoded) => new Repe_cmpsw(encoded);
+
+        public struct Repe_scasb : ITypedInstruction<Repe_scasb>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repe_scasb(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCASB;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repe_scasb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repe_scasb src) => AsmMnemonics.REPE_SCASB;
+
+            public static implicit operator AsmHexCode(Repe_scasb src) => src.Encoded;
+
+            public static implicit operator Repe_scasb(AsmHexCode src) => new Repe_scasb(src);
+        }
+
+        public Repe_scasb repe_scasb() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_scasb repe_scasb(AsmHexCode encoded) => new Repe_scasb(encoded);
+
+        public struct Repe_scasd : ITypedInstruction<Repe_scasd>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repe_scasd(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCASD;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repe_scasd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repe_scasd src) => AsmMnemonics.REPE_SCASD;
+
+            public static implicit operator AsmHexCode(Repe_scasd src) => src.Encoded;
+
+            public static implicit operator Repe_scasd(AsmHexCode src) => new Repe_scasd(src);
+        }
+
+        public Repe_scasd repe_scasd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_scasd repe_scasd(AsmHexCode encoded) => new Repe_scasd(encoded);
+
+        public struct Repe_scasq : ITypedInstruction<Repe_scasq>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repe_scasq(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCASQ;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repe_scasq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repe_scasq src) => AsmMnemonics.REPE_SCASQ;
+
+            public static implicit operator AsmHexCode(Repe_scasq src) => src.Encoded;
+
+            public static implicit operator Repe_scasq(AsmHexCode src) => new Repe_scasq(src);
+        }
+
+        public Repe_scasq repe_scasq() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_scasq repe_scasq(AsmHexCode encoded) => new Repe_scasq(encoded);
+
+        public struct Repe_scasw : ITypedInstruction<Repe_scasw>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repe_scasw(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCASW;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repe_scasw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repe_scasw src) => AsmMnemonics.REPE_SCASW;
+
+            public static implicit operator AsmHexCode(Repe_scasw src) => src.Encoded;
+
+            public static implicit operator Repe_scasw(AsmHexCode src) => new Repe_scasw(src);
+        }
+
+        public Repe_scasw repe_scasw() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_scasw repe_scasw(AsmHexCode encoded) => new Repe_scasw(encoded);
+
+        public struct Repne_cmpsb : ITypedInstruction<Repne_cmpsb>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repne_cmpsb(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPSB;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repne_cmpsb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repne_cmpsb src) => AsmMnemonics.REPNE_CMPSB;
+
+            public static implicit operator AsmHexCode(Repne_cmpsb src) => src.Encoded;
+
+            public static implicit operator Repne_cmpsb(AsmHexCode src) => new Repne_cmpsb(src);
+        }
+
+        public Repne_cmpsb repne_cmpsb() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_cmpsb repne_cmpsb(AsmHexCode encoded) => new Repne_cmpsb(encoded);
+
+        public struct Repne_cmpsd : ITypedInstruction<Repne_cmpsd>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repne_cmpsd(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPSD;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repne_cmpsd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repne_cmpsd src) => AsmMnemonics.REPNE_CMPSD;
+
+            public static implicit operator AsmHexCode(Repne_cmpsd src) => src.Encoded;
+
+            public static implicit operator Repne_cmpsd(AsmHexCode src) => new Repne_cmpsd(src);
+        }
+
+        public Repne_cmpsd repne_cmpsd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_cmpsd repne_cmpsd(AsmHexCode encoded) => new Repne_cmpsd(encoded);
+
+        public struct Repne_cmpsq : ITypedInstruction<Repne_cmpsq>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repne_cmpsq(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPSQ;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repne_cmpsq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repne_cmpsq src) => AsmMnemonics.REPNE_CMPSQ;
+
+            public static implicit operator AsmHexCode(Repne_cmpsq src) => src.Encoded;
+
+            public static implicit operator Repne_cmpsq(AsmHexCode src) => new Repne_cmpsq(src);
+        }
+
+        public Repne_cmpsq repne_cmpsq() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_cmpsq repne_cmpsq(AsmHexCode encoded) => new Repne_cmpsq(encoded);
+
+        public struct Repne_cmpsw : ITypedInstruction<Repne_cmpsw>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repne_cmpsw(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPSW;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repne_cmpsw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repne_cmpsw src) => AsmMnemonics.REPNE_CMPSW;
+
+            public static implicit operator AsmHexCode(Repne_cmpsw src) => src.Encoded;
+
+            public static implicit operator Repne_cmpsw(AsmHexCode src) => new Repne_cmpsw(src);
+        }
+
+        public Repne_cmpsw repne_cmpsw() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_cmpsw repne_cmpsw(AsmHexCode encoded) => new Repne_cmpsw(encoded);
+
+        public struct Repne_scasb : ITypedInstruction<Repne_scasb>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repne_scasb(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCASB;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repne_scasb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repne_scasb src) => AsmMnemonics.REPNE_SCASB;
+
+            public static implicit operator AsmHexCode(Repne_scasb src) => src.Encoded;
+
+            public static implicit operator Repne_scasb(AsmHexCode src) => new Repne_scasb(src);
+        }
+
+        public Repne_scasb repne_scasb() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_scasb repne_scasb(AsmHexCode encoded) => new Repne_scasb(encoded);
+
+        public struct Repne_scasd : ITypedInstruction<Repne_scasd>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repne_scasd(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCASD;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repne_scasd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repne_scasd src) => AsmMnemonics.REPNE_SCASD;
+
+            public static implicit operator AsmHexCode(Repne_scasd src) => src.Encoded;
+
+            public static implicit operator Repne_scasd(AsmHexCode src) => new Repne_scasd(src);
+        }
+
+        public Repne_scasd repne_scasd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_scasd repne_scasd(AsmHexCode encoded) => new Repne_scasd(encoded);
+
+        public struct Repne_scasq : ITypedInstruction<Repne_scasq>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repne_scasq(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCASQ;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repne_scasq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repne_scasq src) => AsmMnemonics.REPNE_SCASQ;
+
+            public static implicit operator AsmHexCode(Repne_scasq src) => src.Encoded;
+
+            public static implicit operator Repne_scasq(AsmHexCode src) => new Repne_scasq(src);
+        }
+
+        public Repne_scasq repne_scasq() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_scasq repne_scasq(AsmHexCode encoded) => new Repne_scasq(encoded);
+
+        public struct Repne_scasw : ITypedInstruction<Repne_scasw>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Repne_scasw(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCASW;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Repne_scasw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Repne_scasw src) => AsmMnemonics.REPNE_SCASW;
+
+            public static implicit operator AsmHexCode(Repne_scasw src) => src.Encoded;
+
+            public static implicit operator Repne_scasw(AsmHexCode src) => new Repne_scasw(src);
+        }
+
+        public Repne_scasw repne_scasw() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_scasw repne_scasw(AsmHexCode encoded) => new Repne_scasw(encoded);
+
         public struct Rep_insb : ITypedInstruction<Rep_insb>
         {
             public AsmHexCode Content;
@@ -20253,454 +20701,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Rep_xstore rep_xstore(AsmHexCode encoded) => new Rep_xstore(encoded);
-
-        public struct Repe_cmpsb : ITypedInstruction<Repe_cmpsb>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repe_cmpsb(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPSB;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repe_cmpsb src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repe_cmpsb src) => AsmMnemonics.REPE_CMPSB;
-
-            public static implicit operator AsmHexCode(Repe_cmpsb src) => src.Encoded;
-
-            public static implicit operator Repe_cmpsb(AsmHexCode src) => new Repe_cmpsb(src);
-        }
-
-        public Repe_cmpsb repe_cmpsb() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_cmpsb repe_cmpsb(AsmHexCode encoded) => new Repe_cmpsb(encoded);
-
-        public struct Repe_cmpsd : ITypedInstruction<Repe_cmpsd>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repe_cmpsd(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPSD;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repe_cmpsd src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repe_cmpsd src) => AsmMnemonics.REPE_CMPSD;
-
-            public static implicit operator AsmHexCode(Repe_cmpsd src) => src.Encoded;
-
-            public static implicit operator Repe_cmpsd(AsmHexCode src) => new Repe_cmpsd(src);
-        }
-
-        public Repe_cmpsd repe_cmpsd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_cmpsd repe_cmpsd(AsmHexCode encoded) => new Repe_cmpsd(encoded);
-
-        public struct Repe_cmpsq : ITypedInstruction<Repe_cmpsq>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repe_cmpsq(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPSQ;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repe_cmpsq src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repe_cmpsq src) => AsmMnemonics.REPE_CMPSQ;
-
-            public static implicit operator AsmHexCode(Repe_cmpsq src) => src.Encoded;
-
-            public static implicit operator Repe_cmpsq(AsmHexCode src) => new Repe_cmpsq(src);
-        }
-
-        public Repe_cmpsq repe_cmpsq() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_cmpsq repe_cmpsq(AsmHexCode encoded) => new Repe_cmpsq(encoded);
-
-        public struct Repe_cmpsw : ITypedInstruction<Repe_cmpsw>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repe_cmpsw(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPSW;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repe_cmpsw src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repe_cmpsw src) => AsmMnemonics.REPE_CMPSW;
-
-            public static implicit operator AsmHexCode(Repe_cmpsw src) => src.Encoded;
-
-            public static implicit operator Repe_cmpsw(AsmHexCode src) => new Repe_cmpsw(src);
-        }
-
-        public Repe_cmpsw repe_cmpsw() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_cmpsw repe_cmpsw(AsmHexCode encoded) => new Repe_cmpsw(encoded);
-
-        public struct Repe_scasb : ITypedInstruction<Repe_scasb>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repe_scasb(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCASB;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repe_scasb src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repe_scasb src) => AsmMnemonics.REPE_SCASB;
-
-            public static implicit operator AsmHexCode(Repe_scasb src) => src.Encoded;
-
-            public static implicit operator Repe_scasb(AsmHexCode src) => new Repe_scasb(src);
-        }
-
-        public Repe_scasb repe_scasb() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_scasb repe_scasb(AsmHexCode encoded) => new Repe_scasb(encoded);
-
-        public struct Repe_scasd : ITypedInstruction<Repe_scasd>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repe_scasd(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCASD;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repe_scasd src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repe_scasd src) => AsmMnemonics.REPE_SCASD;
-
-            public static implicit operator AsmHexCode(Repe_scasd src) => src.Encoded;
-
-            public static implicit operator Repe_scasd(AsmHexCode src) => new Repe_scasd(src);
-        }
-
-        public Repe_scasd repe_scasd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_scasd repe_scasd(AsmHexCode encoded) => new Repe_scasd(encoded);
-
-        public struct Repe_scasq : ITypedInstruction<Repe_scasq>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repe_scasq(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCASQ;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repe_scasq src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repe_scasq src) => AsmMnemonics.REPE_SCASQ;
-
-            public static implicit operator AsmHexCode(Repe_scasq src) => src.Encoded;
-
-            public static implicit operator Repe_scasq(AsmHexCode src) => new Repe_scasq(src);
-        }
-
-        public Repe_scasq repe_scasq() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_scasq repe_scasq(AsmHexCode encoded) => new Repe_scasq(encoded);
-
-        public struct Repe_scasw : ITypedInstruction<Repe_scasw>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repe_scasw(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCASW;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repe_scasw src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repe_scasw src) => AsmMnemonics.REPE_SCASW;
-
-            public static implicit operator AsmHexCode(Repe_scasw src) => src.Encoded;
-
-            public static implicit operator Repe_scasw(AsmHexCode src) => new Repe_scasw(src);
-        }
-
-        public Repe_scasw repe_scasw() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_scasw repe_scasw(AsmHexCode encoded) => new Repe_scasw(encoded);
-
-        public struct Repne_cmpsb : ITypedInstruction<Repne_cmpsb>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repne_cmpsb(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPSB;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repne_cmpsb src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repne_cmpsb src) => AsmMnemonics.REPNE_CMPSB;
-
-            public static implicit operator AsmHexCode(Repne_cmpsb src) => src.Encoded;
-
-            public static implicit operator Repne_cmpsb(AsmHexCode src) => new Repne_cmpsb(src);
-        }
-
-        public Repne_cmpsb repne_cmpsb() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_cmpsb repne_cmpsb(AsmHexCode encoded) => new Repne_cmpsb(encoded);
-
-        public struct Repne_cmpsd : ITypedInstruction<Repne_cmpsd>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repne_cmpsd(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPSD;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repne_cmpsd src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repne_cmpsd src) => AsmMnemonics.REPNE_CMPSD;
-
-            public static implicit operator AsmHexCode(Repne_cmpsd src) => src.Encoded;
-
-            public static implicit operator Repne_cmpsd(AsmHexCode src) => new Repne_cmpsd(src);
-        }
-
-        public Repne_cmpsd repne_cmpsd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_cmpsd repne_cmpsd(AsmHexCode encoded) => new Repne_cmpsd(encoded);
-
-        public struct Repne_cmpsq : ITypedInstruction<Repne_cmpsq>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repne_cmpsq(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPSQ;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repne_cmpsq src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repne_cmpsq src) => AsmMnemonics.REPNE_CMPSQ;
-
-            public static implicit operator AsmHexCode(Repne_cmpsq src) => src.Encoded;
-
-            public static implicit operator Repne_cmpsq(AsmHexCode src) => new Repne_cmpsq(src);
-        }
-
-        public Repne_cmpsq repne_cmpsq() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_cmpsq repne_cmpsq(AsmHexCode encoded) => new Repne_cmpsq(encoded);
-
-        public struct Repne_cmpsw : ITypedInstruction<Repne_cmpsw>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repne_cmpsw(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPSW;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repne_cmpsw src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repne_cmpsw src) => AsmMnemonics.REPNE_CMPSW;
-
-            public static implicit operator AsmHexCode(Repne_cmpsw src) => src.Encoded;
-
-            public static implicit operator Repne_cmpsw(AsmHexCode src) => new Repne_cmpsw(src);
-        }
-
-        public Repne_cmpsw repne_cmpsw() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_cmpsw repne_cmpsw(AsmHexCode encoded) => new Repne_cmpsw(encoded);
-
-        public struct Repne_scasb : ITypedInstruction<Repne_scasb>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repne_scasb(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCASB;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repne_scasb src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repne_scasb src) => AsmMnemonics.REPNE_SCASB;
-
-            public static implicit operator AsmHexCode(Repne_scasb src) => src.Encoded;
-
-            public static implicit operator Repne_scasb(AsmHexCode src) => new Repne_scasb(src);
-        }
-
-        public Repne_scasb repne_scasb() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_scasb repne_scasb(AsmHexCode encoded) => new Repne_scasb(encoded);
-
-        public struct Repne_scasd : ITypedInstruction<Repne_scasd>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repne_scasd(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCASD;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repne_scasd src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repne_scasd src) => AsmMnemonics.REPNE_SCASD;
-
-            public static implicit operator AsmHexCode(Repne_scasd src) => src.Encoded;
-
-            public static implicit operator Repne_scasd(AsmHexCode src) => new Repne_scasd(src);
-        }
-
-        public Repne_scasd repne_scasd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_scasd repne_scasd(AsmHexCode encoded) => new Repne_scasd(encoded);
-
-        public struct Repne_scasq : ITypedInstruction<Repne_scasq>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repne_scasq(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCASQ;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repne_scasq src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repne_scasq src) => AsmMnemonics.REPNE_SCASQ;
-
-            public static implicit operator AsmHexCode(Repne_scasq src) => src.Encoded;
-
-            public static implicit operator Repne_scasq(AsmHexCode src) => new Repne_scasq(src);
-        }
-
-        public Repne_scasq repne_scasq() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_scasq repne_scasq(AsmHexCode encoded) => new Repne_scasq(encoded);
-
-        public struct Repne_scasw : ITypedInstruction<Repne_scasw>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Repne_scasw(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCASW;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Repne_scasw src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Repne_scasw src) => AsmMnemonics.REPNE_SCASW;
-
-            public static implicit operator AsmHexCode(Repne_scasw src) => src.Encoded;
-
-            public static implicit operator Repne_scasw(AsmHexCode src) => new Repne_scasw(src);
-        }
-
-        public Repne_scasw repne_scasw() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_scasw repne_scasw(AsmHexCode encoded) => new Repne_scasw(encoded);
 
         public struct Ret_far : ITypedInstruction<Ret_far>
         {
@@ -23166,34 +23166,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Sub sub(AsmHexCode encoded) => new Sub(encoded);
 
-        public struct Sub_lock : ITypedInstruction<Sub_lock>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Sub_lock(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SUB_LOCK;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Sub_lock src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Sub_lock src) => AsmMnemonics.SUB_LOCK;
-
-            public static implicit operator AsmHexCode(Sub_lock src) => src.Encoded;
-
-            public static implicit operator Sub_lock(AsmHexCode src) => new Sub_lock(src);
-        }
-
-        public Sub_lock sub_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Sub_lock sub_lock(AsmHexCode encoded) => new Sub_lock(encoded);
-
         public struct Subpd : ITypedInstruction<Subpd>
         {
             public AsmHexCode Content;
@@ -23305,6 +23277,34 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Subss subss(AsmHexCode encoded) => new Subss(encoded);
+
+        public struct Sub_lock : ITypedInstruction<Sub_lock>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Sub_lock(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SUB_LOCK;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Sub_lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Sub_lock src) => AsmMnemonics.SUB_LOCK;
+
+            public static implicit operator AsmHexCode(Sub_lock src) => src.Encoded;
+
+            public static implicit operator Sub_lock(AsmHexCode src) => new Sub_lock(src);
+        }
+
+        public Sub_lock sub_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Sub_lock sub_lock(AsmHexCode encoded) => new Sub_lock(encoded);
 
         public struct Swapgs : ITypedInstruction<Swapgs>
         {
@@ -23474,34 +23474,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Sysret sysret(AsmHexCode encoded) => new Sysret(encoded);
 
-        public struct Sysret_amd : ITypedInstruction<Sysret_amd>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Sysret_amd(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SYSRET_AMD;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Sysret_amd src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Sysret_amd src) => AsmMnemonics.SYSRET_AMD;
-
-            public static implicit operator AsmHexCode(Sysret_amd src) => src.Encoded;
-
-            public static implicit operator Sysret_amd(AsmHexCode src) => new Sysret_amd(src);
-        }
-
-        public Sysret_amd sysret_amd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Sysret_amd sysret_amd(AsmHexCode encoded) => new Sysret_amd(encoded);
-
         public struct Sysret64 : ITypedInstruction<Sysret64>
         {
             public AsmHexCode Content;
@@ -23529,6 +23501,34 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Sysret64 sysret64(AsmHexCode encoded) => new Sysret64(encoded);
+
+        public struct Sysret_amd : ITypedInstruction<Sysret_amd>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Sysret_amd(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SYSRET_AMD;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Sysret_amd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Sysret_amd src) => AsmMnemonics.SYSRET_AMD;
+
+            public static implicit operator AsmHexCode(Sysret_amd src) => src.Encoded;
+
+            public static implicit operator Sysret_amd(AsmHexCode src) => new Sysret_amd(src);
+        }
+
+        public Sysret_amd sysret_amd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Sysret_amd sysret_amd(AsmHexCode encoded) => new Sysret_amd(encoded);
 
         public struct T1mskc : ITypedInstruction<T1mskc>
         {
@@ -45314,34 +45314,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Xor xor(AsmHexCode encoded) => new Xor(encoded);
 
-        public struct Xor_lock : ITypedInstruction<Xor_lock>
-        {
-            public AsmHexCode Content;
-
-            [MethodImpl(Inline)]
-            public Xor_lock(AsmHexCode encoded)
-            {
-                Content = encoded;
-            }
-
-            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XOR_LOCK;
-
-            public AsmHexCode Encoded => Content;
-
-            public static implicit operator AsmMnemonicCode(Xor_lock src) => src.Mnemonic;
-
-            public static implicit operator AsmMnemonic(Xor_lock src) => AsmMnemonics.XOR_LOCK;
-
-            public static implicit operator AsmHexCode(Xor_lock src) => src.Encoded;
-
-            public static implicit operator Xor_lock(AsmHexCode src) => new Xor_lock(src);
-        }
-
-        public Xor_lock xor_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Xor_lock xor_lock(AsmHexCode encoded) => new Xor_lock(encoded);
-
         public struct Xorpd : ITypedInstruction<Xorpd>
         {
             public AsmHexCode Content;
@@ -45397,6 +45369,34 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Xorps xorps(AsmHexCode encoded) => new Xorps(encoded);
+
+        public struct Xor_lock : ITypedInstruction<Xor_lock>
+        {
+            public AsmHexCode Content;
+
+            [MethodImpl(Inline)]
+            public Xor_lock(AsmHexCode encoded)
+            {
+                Content = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XOR_LOCK;
+
+            public AsmHexCode Encoded => Content;
+
+            public static implicit operator AsmMnemonicCode(Xor_lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Xor_lock src) => AsmMnemonics.XOR_LOCK;
+
+            public static implicit operator AsmHexCode(Xor_lock src) => src.Encoded;
+
+            public static implicit operator Xor_lock(AsmHexCode src) => new Xor_lock(src);
+        }
+
+        public Xor_lock xor_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Xor_lock xor_lock(AsmHexCode encoded) => new Xor_lock(encoded);
 
         public struct Xresldtrk : ITypedInstruction<Xresldtrk>
         {

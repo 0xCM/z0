@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
 
     using static core;
+
     partial class AsmGen
     {
         public static string MonicFactoryName(string src)
@@ -21,7 +22,7 @@ namespace Z0.Asm
             };
         }
 
-        public static string MonicTypeName(string src)
+        public static string captitalize(string src)
         {
             var count = src.Length;
             Span<char> dst = stackalloc  char[count];
@@ -36,6 +37,5 @@ namespace Z0.Asm
             }
             return new string(dst);
         }
-
     }
 }

@@ -30,11 +30,13 @@ namespace Z0.Asm
 
         public ReadOnlySpan<string> MnemonicNames()
         {
-            var set = hashset<string>();
-            iter(IClasses().Storage, c => set.Add(c.Expr.Text));
-            var distinct = set.Array();
-            Array.Sort(distinct);
-            return distinct;
+            return IClasses().Storage.Select(x => x.Expr.Text);
+
+            // var set = hashset<string>();
+            // iter(IClasses().Storage, c => set.Add(c.Expr.Text));
+            // var distinct = set.Array();
+            // Array.Sort(distinct);
+            // return distinct;
         }
 
         public void EmitFormAspects()

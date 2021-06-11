@@ -61,7 +61,7 @@ namespace Z0
 
         }
 
-        public void AsciCodeSpan(uint indent, string data, Identifier name, ITextBuffer dst)
+        public void AsciCodeSpan(uint indent, Identifier name, string data, ITextBuffer dst)
         {
             var payload = text.buffer();
             var src = span(data);
@@ -74,12 +74,31 @@ namespace Z0
                 ref readonly var c = ref skip(src,i);
                 var j = (byte)c;
 
-
-                seek(target,i) = skip(symbols,(byte)c);
+                seek(target, i) = skip(symbols, j);
             }
 
             var spec = new ByteSpanSpec<AsciCode>(name, buffer, true, nameof(AsciCode));
             Render(indent, spec, dst, true);
+        }
+
+        public void AsciByteSpan(uint indent, Identifier name, string data, ITextBuffer dst)
+        {
+            var payload = text.buffer();
+            var src = span(data);
+            var count = src.Length;
+            var symbols = Symbols.index<AsciCode>().View;
+            var buffer = alloc<byte>(count);
+            ref var target = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(src,i);
+                var j = (byte)c;
+
+                seek(target, i) = (byte)c;
+            }
+
+            var spec = new ByteSpanSpec(name, buffer, true);
+            Render(indent, spec, dst);
         }
 
         public void RenderLiteral<T>(uint indent, in Sym<T> src, ITextBuffer dst)
@@ -100,7 +119,7 @@ namespace Z0
             dst.AppendLine();
         }
 
-        public void RenderLiteralList<T>(in ReadOnlySpan<Sym<T>> src, ITextBuffer dst)
+        public void RenderLiteralList<T>(ReadOnlySpan<Sym<T>> src, ITextBuffer dst)
             where T : unmanaged
         {
             var count = src.Length;
@@ -111,6 +130,19 @@ namespace Z0
                     dst.Append(string.Format("{0}, ", cell.Name));
                 else
                     dst.Append(cell.Name);
+            }
+        }
+
+        public void RenderList(ReadOnlySpan<byte> src, ITextBuffer dst)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var cell = ref skip(src,i);
+                if(i != count - 1)
+                    dst.Append(string.Format("{0}, ", cell));
+                else
+                    dst.Append(string.Format("{0}", cell));
             }
         }
 
@@ -130,12 +162,39 @@ namespace Z0
             }
         }
 
+        public void RenderPayload(uint indent, in ByteSpanSpec spec, ITextBuffer dst)
+        {
+            dst.Append(lbrace);
+            RenderList(spec.Data, dst);
+            dst.AppendFormat("{0}{1}", rbrace, semi);
+        }
+
         [Op]
         public void Render<T>(uint indent, ByteSpanSpec<T> spec, ITextBuffer dst, bool compact)
             where T : unmanaged, Enum
         {
             var payload = text.buffer();
             RenderPayload(indent, spec, payload, compact);
+            var left = text.buffer();
+            var modifiers = spec.IsStatic ? string.Format("{0} {1}", @public, @static) : @public;
+            left.Append(modifiers);
+            left.Append(Chars.Space);
+            left.Append(ReadOnlySpanTypeName.Format(spec.CellType));
+            left.Append(Chars.Space);
+            left.Append(spec.Name);
+
+            var right = text.buffer();
+            right.Append(string.Concat(string.Format("new {0}", spec.CellType), RP.bracket(spec.Data.Length), payload.Emit()));
+
+            var assignment = Assign.Format(left.Emit(), right.Emit());
+            dst.IndentLine(indent, assignment);
+        }
+
+        [Op]
+        public void Render(uint indent, ByteSpanSpec spec, ITextBuffer dst)
+        {
+            var payload = text.buffer();
+            RenderPayload(indent, spec, payload);
             var left = text.buffer();
             var modifiers = spec.IsStatic ? string.Format("{0} {1}", @public, @static) : @public;
             left.Append(modifiers);

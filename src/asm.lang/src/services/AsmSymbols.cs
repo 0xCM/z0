@@ -15,92 +15,118 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmSymbols
     {
-        readonly Symbols<AsmMnemonicCode> Mnemonics;
+        readonly Symbols<AsmMnemonicCode> _MnemonicCodes;
 
-        readonly Symbols<Gp8> Gp8Sym;
+        readonly Symbols<Gp8> _Gp8Regs;
 
-        readonly Symbols<Gp16> Gp16Sym;
+        readonly Symbols<Gp16> _Gp16Regs;
 
-        readonly Symbols<Gp32> Gp32Sym;
+        readonly Symbols<Gp32> _Gp32Regs;
 
-        readonly Symbols<Gp64> Gp64Sym;
+        readonly Symbols<Gp64> _Gp64Regs;
 
-        readonly Symbols<KReg> KRegSym;
+        readonly Symbols<KReg> _KRegs;
 
-        readonly Symbols<XmmReg> XmmSym;
+        readonly Symbols<XmmReg> _XmmRegs;
 
-        readonly Symbols<YmmReg> YmmSym;
+        readonly Symbols<YmmReg> _YmmRegs;
 
-        readonly Symbols<ZmmReg> ZmmSym;
+        readonly Symbols<ZmmReg> _ZmmRegs;
 
-        readonly Symbols<MmxReg> MmxSym;
+        readonly Symbols<MmxReg> _MmxRegs;
 
-        readonly Symbols<JccCode> JccSym;
+        readonly Symbols<ControlReg> _CrRegs;
 
-        readonly Symbols<ControlReg> CrSym;
+        readonly Symbols<SegReg> _SegRegs;
+
+        readonly Symbols<FpuReg> _FpuRegs;
+
+        readonly Symbols<DebugReg> _DebugRegs;
+
+        readonly Symbols<TableReg> _TableRegs;
+
+        readonly Symbols<BndReg> _BndRegs;
+
+        readonly Symbols<TestReg> _TestRegs;
+
+        readonly Symbols<JccCode> _JccCodes;
 
         public static AsmSymbols create()
             => new AsmSymbols();
 
+        static Symbols<K> symbols<K>()
+            where K : unmanaged, Enum
+                => Symbols.index<K>();
+
         AsmSymbols()
         {
-            Mnemonics = Symbols.index<AsmMnemonicCode>();
-            Gp8Sym = Symbols.index<Gp8>();
-            Gp16Sym = Symbols.index<Gp16>();
-            Gp32Sym = Symbols.index<Gp32>();
-            Gp64Sym = Symbols.index<Gp64>();
-            KRegSym = Symbols.index<KReg>();
-            XmmSym = Symbols.index<XmmReg>();
-            YmmSym = Symbols.index<YmmReg>();
-            ZmmSym = Symbols.index<ZmmReg>();
-            MmxSym = Symbols.index<MmxReg>();
-            JccSym = Symbols.index<JccCode>();
-            CrSym = Symbols.index<ControlReg>();
+            _MnemonicCodes = symbols<AsmMnemonicCode>();
+            _Gp8Regs = symbols<Gp8>();
+            _Gp16Regs = symbols<Gp16>();
+            _Gp32Regs = symbols<Gp32>();
+            _Gp64Regs = symbols<Gp64>();
+            _KRegs = symbols<KReg>();
+            _XmmRegs = symbols<XmmReg>();
+            _YmmRegs = symbols<YmmReg>();
+            _ZmmRegs = symbols<ZmmReg>();
+            _MmxRegs = symbols<MmxReg>();
+            _JccCodes = symbols<JccCode>();
+            _SegRegs  = symbols<SegReg>();
+            _CrRegs = symbols<ControlReg>();
+            _FpuRegs = symbols<FpuReg>();
+            _DebugRegs = symbols<DebugReg>();
+            _BndRegs = symbols<BndReg>();
+            _TestRegs = symbols<TestReg>();
+            _TableRegs = symbols<TableReg>();
         }
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<AsmMnemonicCode> Symbol(AsmMnemonicCode key)
-            => ref Mnemonics[key];
+            => ref _MnemonicCodes[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<Gp8> Symbol(Gp8 key)
-            => ref Gp8Sym[key];
+            => ref _Gp8Regs[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<Gp16> Symbol(Gp16 key)
-            => ref Gp16Sym[key];
+            => ref _Gp16Regs[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<Gp32> Symbol(Gp32 key)
-            => ref Gp32Sym[key];
+            => ref _Gp32Regs[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<Gp64> Symbol(Gp64 key)
-            => ref Gp64Sym[key];
+            => ref _Gp64Regs[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<KReg> Symbol(KReg key)
-            => ref KRegSym[key];
+            => ref _KRegs[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<XmmReg> Symbol(XmmReg key)
-            => ref XmmSym[key];
+            => ref _XmmRegs[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<YmmReg> Symbol(YmmReg key)
-            => ref YmmSym[key];
+            => ref _YmmRegs[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<ZmmReg> Symbol(ZmmReg key)
-            => ref ZmmSym[key];
+            => ref _ZmmRegs[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<JccCode> Symbol(JccCode key)
-            => ref JccSym[key];
+            => ref _JccCodes[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<ControlReg> Symbol(ControlReg key)
-            => ref CrSym[key];
+            => ref _CrRegs[key];
+
+        [MethodImpl(Inline), Op]
+        public ref readonly Sym<DebugReg> Symbol(DebugReg key)
+            => ref _DebugRegs[key];
 
         public ref readonly Sym<AsmMnemonicCode> this[AsmMnemonicCode key]
         {
@@ -159,52 +185,76 @@ namespace Z0.Asm
         public ref readonly Sym<MmxReg> this[MmxReg key]
         {
             [MethodImpl(Inline)]
-            get => ref MmxSym[key];
+            get => ref _MmxRegs[key];
         }
 
         [MethodImpl(Inline), Op]
         public Symbols<Gp8> Gp8Regs()
-            => Gp8Sym;
+            => _Gp8Regs;
 
         [MethodImpl(Inline), Op]
         public Symbols<Gp16> Gp16Regs()
-            => Gp16Sym;
+            => _Gp16Regs;
 
         [MethodImpl(Inline), Op]
         public Symbols<Gp32> Gp32Regs()
-            => Gp32Sym;
+            => _Gp32Regs;
 
         [MethodImpl(Inline), Op]
         public Symbols<Gp64> Gp64Regs()
-            => Gp64Sym;
+            => _Gp64Regs;
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<Sym<KReg>> KRegs()
-            => KRegSym.View;
+            => _KRegs.View;
 
         [MethodImpl(Inline), Op]
         public Symbols<XmmReg> XmmRegs()
-            => XmmSym;
+            => _XmmRegs;
 
         [MethodImpl(Inline), Op]
         public Symbols<YmmReg> YmmRegs()
-            => YmmSym;
+            => _YmmRegs;
 
         [MethodImpl(Inline), Op]
         public Symbols<ZmmReg> ZmmRegs()
-            => ZmmSym;
+            => _ZmmRegs;
 
         [MethodImpl(Inline), Op]
         public Symbols<MmxReg> MmxRegs()
-            => MmxSym;
+            => _MmxRegs;
 
         [MethodImpl(Inline), Op]
-        public Symbols<JccCode> JccCodes()
-            => JccSym;
+        public Symbols<BndReg> BndRegs()
+            => _BndRegs;
 
         [MethodImpl(Inline), Op]
         public Symbols<ControlReg> ControlRegs()
-            => CrSym;
+            => _CrRegs;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<SegReg> SegRegs()
+            => _SegRegs;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<FpuReg> FpuRegs()
+            => _FpuRegs;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<TestReg> TestRegs()
+            => _TestRegs;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<TableReg> TableRegs()
+            => _TableRegs;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<AsmMnemonicCode> MnemonicCodes()
+            => _MnemonicCodes;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<JccCode> JccCodes()
+            => _JccCodes;
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<Sym<K>> Regs<K>()
@@ -216,13 +266,13 @@ namespace Z0.Asm
             where K : unmanaged
         {
             if(typeof(K) == typeof(Gp8))
-                return recover<Sym<Gp8>,Sym<K>>(Gp8Sym.View);
+                return recover<Sym<Gp8>,Sym<K>>(_Gp8Regs.View);
             else if(typeof(K) == typeof(Gp16))
-                return recover<Sym<Gp16>,Sym<K>>(Gp16Sym.View);
+                return recover<Sym<Gp16>,Sym<K>>(_Gp16Regs.View);
             else if(typeof(K) == typeof(Gp32))
-                return recover<Sym<Gp32>,Sym<K>>(Gp32Sym.View);
+                return recover<Sym<Gp32>,Sym<K>>(_Gp32Regs.View);
             else if(typeof(K) == typeof(Gp64))
-                return recover<Sym<Gp64>,Sym<K>>(Gp64Sym.View);
+                return recover<Sym<Gp64>,Sym<K>>(_Gp64Regs.View);
             else
                 return RegsMM<K>();
         }
@@ -232,13 +282,13 @@ namespace Z0.Asm
             where K : unmanaged
         {
             if(typeof(K) == typeof(XmmReg))
-                return recover<Sym<XmmReg>,Sym<K>>(XmmSym.View);
+                return recover<Sym<XmmReg>,Sym<K>>(_XmmRegs.View);
             else if(typeof(K) == typeof(YmmReg))
-                return recover<Sym<YmmReg>,Sym<K>>(YmmSym.View);
+                return recover<Sym<YmmReg>,Sym<K>>(_YmmRegs.View);
             else if(typeof(K) == typeof(ZmmReg))
-                return recover<Sym<ZmmReg>,Sym<K>>(ZmmSym.View);
+                return recover<Sym<ZmmReg>,Sym<K>>(_ZmmRegs.View);
             else if(typeof(K) == typeof(MmxReg))
-                return recover<Sym<MmxReg>,Sym<K>>(MmxSym.View);
+                return recover<Sym<MmxReg>,Sym<K>>(_MmxRegs.View);
             else
                 return RegsCR<K>();
         }
@@ -248,10 +298,9 @@ namespace Z0.Asm
             where K : unmanaged
         {
             if(typeof(K) == typeof(ControlReg))
-                return recover<Sym<ControlReg>,Sym<K>>(CrSym.View);
+                return recover<Sym<ControlReg>,Sym<K>>(_CrRegs.View);
             else
                 throw no<K>();
         }
-
     }
 }

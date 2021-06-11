@@ -14,6 +14,10 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
+        const string MonicEnumType = "ushort";
+
+        const string EnumDeclPattern = "public enum {0} : {1}";
+
         void EmitMonicEnum(ReadOnlySpan<string> monics, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
@@ -34,15 +38,12 @@ namespace Z0.Asm
             buffer.IndentLine(margin, Open);
             margin += 4;
 
-            // buffer.IndentLine(margin, string.Format(ItemAssignPattern, ZeroEnumMemberName, "0"));
-            // buffer.AppendLine();
-
             var count = monics.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var monic = ref skip(monics,i);
                 buffer.IndentLine(margin, string.Format(MonicSymbolPattern, monic.ToLower()));
-                buffer.IndentLine(margin, string.Format(ItemAssignPattern, monic, i+1));
+                buffer.IndentLine(margin, string.Format(ItemAssignPattern, monic, i));
                 buffer.AppendLine();
             }
             margin -= 4;

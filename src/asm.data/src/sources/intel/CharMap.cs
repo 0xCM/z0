@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,10 +10,14 @@ namespace Z0.Asm
     using static core;
     using static Root;
 
-    public readonly partial struct IntelSdm
+    public ref struct CharMap
     {
-        [MethodImpl(Inline)]
-        public static TableNumber table(char major, byte minor)
-            => new TableNumber(major,minor);
+        public ReadOnlySpan<char> Output;
+
+        public ref readonly char this[char c]
+        {
+            [MethodImpl(Inline)]
+            get => ref skip(Output, (ushort)c);
+        }
     }
 }

@@ -16,22 +16,6 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct RegDigit
     {
-        public static RegDigit r0 => T.RegDigit.r0;
-
-        public static RegDigit r1 => T.RegDigit.r1;
-
-        public static RegDigit r2 => T.RegDigit.r2;
-
-        public static RegDigit r3 => T.RegDigit.r3;
-
-        public static RegDigit r4 => T.RegDigit.r4;
-
-        public static RegDigit r5 => T.RegDigit.r5;
-
-        public static RegDigit r6 => T.RegDigit.r6;
-
-        public static RegDigit r7 => T.RegDigit.r7;
-
         public uint3 Value {get;}
 
         [MethodImpl(Inline)]

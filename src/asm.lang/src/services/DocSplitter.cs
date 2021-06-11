@@ -4,40 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
 
     using static core;
-    using static Root;
-
-    public ref struct CharMap
-    {
-        public ReadOnlySpan<char> Output;
-
-        public ref readonly char this[char c]
-        {
-            [MethodImpl(Inline)]
-            get => ref skip(Output, (ushort)c);
-        }
-    }
-
-    public ref struct CharMapper
-    {
-        readonly CharMap Spec;
-
-        public CharMapper(CharMap spec)
-        {
-            Spec = spec;
-        }
-
-        public uint Map(ReadOnlySpan<char> src, Span<char> dst)
-        {
-            return 0;
-        }
-
-    }
 
     public class DocSplitter : Service<DocSplitter>
     {
@@ -56,7 +26,7 @@ namespace Z0
         protected override void Initialized()
         {
             Workspace = Context.AsmWorkspace();
-            var pipe = SplitSpecPipe.Service;
+            var pipe = SplitSpecs.Service;
             var outcome = pipe.Load(SpecPath, out Specs);
             if(outcome.Fail)
             {
@@ -94,11 +64,7 @@ namespace Z0
         }
 
         TextLine Line(uint number, string content)
-        {
-
-
-            return TextLines.line(number,content);
-        }
+            => TextLines.line(number,content);
 
         void Emit(in LineRange src, FS.FilePath dst)
         {
@@ -119,7 +85,7 @@ namespace Z0
                     return Specs;
                 else
                 {
-                    var pipe = SplitSpecPipe.Service;
+                    var pipe = SplitSpecs.Service;
                     var outcome = pipe.Load(SpecPath, out Specs);
                     if(outcome.Fail)
                         Error(outcome.Message);

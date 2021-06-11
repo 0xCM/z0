@@ -139,15 +139,6 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmHexCode code(RexPrefix a0, Hex8 a1, RegDigit rd)
-        {
-            var writer = write(buffer());
-            writer.Write8(a0);
-            writer.Write8(a1);
-            return load(writer);
-        }
-
-        [MethodImpl(Inline), Op]
         public static AsmHexCode code(RexPrefix a0, Hex8 a1, Imm64 a2)
         {
             var writer = write(buffer());

@@ -12,6 +12,9 @@ namespace Z0.Asm
     /// <summary>
     /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W16'/>
     /// </summary>
+    /// <remarks>
+    /// ax, cx, dx, bx, sp, bp, si, di, r8w, r9w, r10w, r11w, r12w, r13w, r14w, r15w
+    /// </remarks/>
     public enum Gp16Kind : uint
     {
         AX = r0 | (GP << ClassField) | (W16 << WidthField),

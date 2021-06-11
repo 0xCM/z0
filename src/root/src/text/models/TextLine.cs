@@ -50,9 +50,11 @@ namespace Z0
             get => Content;
         }
 
-        [MethodImpl(Inline)]
-        static string substring(string src, int startidx)
-            => src?.Substring(startidx) ?? EmptyString;
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Content?.Length ?? 0;
+        }
 
         [MethodImpl(Inline)]
         static string substring(string src, int startidx, int len)

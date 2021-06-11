@@ -9,12 +9,32 @@ namespace Z0
 
     using static Root;
     using static TextRules;
+    using static core;
 
     partial class text
     {
         [MethodImpl(Inline), Op]
         public static bool equals(char a, char b)
             => a == b;
+
+        [MethodImpl(Inline), Op]
+        public static bit equals(in SegRef<char> a, string b)
+        {
+            var count = a.Length;
+            if(count != b.Length)
+                return false;
+
+            var match = bit.On;
+            ref readonly var left = ref a.First;
+            ref readonly var right = ref first(span(b));
+            for(var i=0; i<count; i++)
+            {
+                match &= (skip(left,i) == skip(right,i));
+                if(!match)
+                    break;
+            }
+            return match;
+        }
 
         /// <summary>
         /// Performs a string comparison according to a specified comparison type

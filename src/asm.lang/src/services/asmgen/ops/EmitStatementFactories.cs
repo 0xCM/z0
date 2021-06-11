@@ -10,6 +10,10 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
+        const string StatementFactoryDefaultPattern = "public {0} {1}() => default;";
+
+        const string StatementFactoryArgPattern = "public {0} {1}(AsmHexCode encoded) => new {0}(encoded);";
+
         public void EmitStatementFactories(uint margin, ReadOnlySpan<string> src, ITextBuffer dst)
         {
             var count = src.Length;
@@ -19,10 +23,10 @@ namespace Z0.Asm
 
         public void EmitStatementFactories(uint margin, string mnemonic, ITextBuffer dst)
         {
-            dst.IndentLine(margin, string.Format(StatementFactoryDefaultPattern, MonicTypeName(mnemonic), MonicFactoryName(mnemonic)));
+            dst.IndentLine(margin, string.Format(StatementFactoryDefaultPattern, captitalize(mnemonic), MonicFactoryName(mnemonic)));
             dst.AppendLine();
             dst.IndentLine(margin, InlineOpAttributeSpec);
-            dst.IndentLine(margin, string.Format(StatementFactoryArgPattern, MonicTypeName(mnemonic), MonicFactoryName(mnemonic)));
+            dst.IndentLine(margin, string.Format(StatementFactoryArgPattern, captitalize(mnemonic), MonicFactoryName(mnemonic)));
             dst.AppendLine();
         }
     }

@@ -10,6 +10,8 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
+        const string ClassDeclPattern = "public class {0}";
+
         public void EmitStatementBuilder(ReadOnlySpan<string> src, FS.FilePath dst)
         {
             var buffer = text.buffer();

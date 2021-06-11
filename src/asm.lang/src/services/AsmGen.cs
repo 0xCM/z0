@@ -15,8 +15,6 @@ namespace Z0.Asm
 
         const string InlineAttributeSpec = "[MethodImpl(Inline)]";
 
-        const string ApiCompleteAttribute = "[ApiComplete]";
-
         const string InlineOpAttributeSpec = "[MethodImpl(Inline), Op]";
 
         [Op]
@@ -34,7 +32,7 @@ namespace Z0.Asm
         [Op]
         public void GenerateModelsInPlace()
         {
-            GenerateModelsInPlace(Wf.XedCatalog().MnemonicNames());
+            GenerateModelsInPlace(LoadMnemonicNames());
         }
 
         [Op]
@@ -52,7 +50,7 @@ namespace Z0.Asm
         [Op]
         public void GenerateModels(FS.FolderPath dst)
         {
-            GenerateModels(Wf.XedCatalog().MnemonicNames(), dst);
+            GenerateModels(LoadMnemonicNames(), dst);
         }
 
         const byte Indent = 4;
@@ -60,8 +58,6 @@ namespace Z0.Asm
         const string Open = "{";
 
         const string Close = "}";
-
-        const string EnumDeclPattern = "public enum {0} : {1}";
 
         const string ReadOnlyStructDeclPattern = "public readonly struct {0}";
 
@@ -73,17 +69,7 @@ namespace Z0.Asm
 
         const string TargetNamespaceName = "Z0.Asm";
 
-        const string MonicEnumType = "ushort";
-
-        const string ZeroEnumMemberName = "None";
-
-
-        const string StatementFactoryDefaultPattern = "public {0} {1}() => default;";
-
         const string ImplicitOperatorDeclPattern = "public static implicit operator {0}({1} src) => {2};";
-
-        const string StatementFactoryArgPattern = "public {0} {1}(AsmHexCode encoded) => new {0}(encoded);";
-
 
         const string UsingCompilerServices = "using System.Runtime.CompilerServices;";
 
@@ -91,7 +77,6 @@ namespace Z0.Asm
 
         const string UsingTypePattern = "using static {0};";
 
-        const string ClassDeclPattern = "public class {0}";
 
         const string QualifiedAccessPattern = "{0}.{1}";
 

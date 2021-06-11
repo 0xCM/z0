@@ -725,6 +725,40 @@ namespace Z0.Asm
         public static bool bullet(byte b0, byte b1)
             => b0 == 0x20 && b1 == 0x22;
 
+        // static int first(int offset, ReadOnlySpan<byte> src, byte match)
+        // {
+        //     for(var i=0; i<src.Length; i++)
+        //         if(skip(src,i) == match)
+        //             return i;
+        //     return NotFound;
+
+        // }
+        // static int first(int start, ReadOnlySpan<byte> src, ReadOnlySpan<byte> match)
+        // {
+        //     var result = NotFound;
+        //     var j=0;
+        //     for(var i=0; i<src.Length; i++)
+        //     {
+        //         ref readonly var b = ref skip(match,i);
+        //         j = first(j,src,b);
+
+        //     }
+
+
+        // }
+        void FindInstructionTables()
+        {
+            var ws = Wf.AsmWorkspace();
+            var src = ws.RefDoc("sdm-2", FS.Txt);
+            using var map = src.MemoryMap();
+            var data = map.View();
+            var size = data.Length;
+            var match = IntelSdm.InstructionTableHeader.HeaderMatch;
+            for(var i=0; i<size; i++)
+            {
+
+            }
+        }
 
         void ProcessManuals()
         {
@@ -967,8 +1001,17 @@ namespace Z0.Asm
             const string Input = "66F2F30F0F38VEXREXREX.WLZLIGWIGW0W1";
             var lookups = Wf.AsciLookups();
             var dst = text.buffer();
-            lookups.AsciCodeSpan(8, Input, "PrefixData", dst);
+            lookups.AsciCodeSpan(8, "PrefixData", Input,  dst);
             Wf.Row(dst.Emit());
+        }
+
+        void GenAsciSpan(Identifier name, string data)
+        {
+            var lookups = Wf.AsciLookups();
+            var dst = text.buffer();
+            lookups.AsciByteSpan(8, name, data, dst);
+            Wf.Row(dst.Emit());
+
         }
 
         void CheckAsciLookups()
@@ -985,19 +1028,12 @@ namespace Z0.Asm
             CheckAsciSpans();
         }
 
-        // public void GenerateInstructionModels()
-        // {
-        //     Wf.AsmCodeGenerator().GenerateModelsInPlace();
-        // }
-
-        // public void GenerateInstructionModelPreview()
-        // {
-        //     Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
-        // }
 
         public void Run()
         {
-            Wf.GlobalCommands().GenInstructionModels();
+            GenAsciSpan("HeaderData", IntelSdm.InstructionTableHeader.Lines);
+            //GenAsciSpan(IntelDocs.)
+            //Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));

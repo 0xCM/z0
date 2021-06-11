@@ -10,9 +10,9 @@ namespace Z0
     using static Root;
     using static SplitSpec;
 
-    public readonly struct SplitSpecPipe
+    public readonly struct SplitSpecs
     {
-        public static SplitSpecPipe Service => default;
+        public static SplitSpecs Service => default;
 
         public Outcome Load(FS.FilePath src, out RecordSet<SplitSpec> dst)
         {

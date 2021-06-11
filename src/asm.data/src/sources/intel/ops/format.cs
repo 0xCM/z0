@@ -10,10 +10,12 @@ namespace Z0.Asm
     using static core;
     using static Root;
 
-    public readonly partial struct IntelSdm
+    partial struct IntelSdm
     {
-        [MethodImpl(Inline)]
-        public static TableNumber table(char major, byte minor)
-            => new TableNumber(major,minor);
+        public static string format(ChapterPage src)
+            => string.Format(ChapterPage.RenderPattern, src.Chapter, src.Page);
+
+        public static string format(VolumePage src)
+            => string.Format("Vol. {0} {1}", src.VolName, format(src.Page));
     }
 }

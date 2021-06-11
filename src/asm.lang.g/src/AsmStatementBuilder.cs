@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Generated   :  2021-06-10.20.22.20.337
+// Generated   :  2021-06-10.20.36.31.635
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -11,6 +11,11 @@ namespace Z0.Asm
 
     public class AsmStatementBuilder
     {
+        public None none() => default;
+
+        [MethodImpl(Inline), Op]
+        public None none(AsmHexCode encoded) => new None(encoded);
+
         public Aaa aaa() => default;
 
         [MethodImpl(Inline), Op]
@@ -36,25 +41,20 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Adc adc(AsmHexCode encoded) => new Adc(encoded);
 
-        public Adc_lock adc_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Adc_lock adc_lock(AsmHexCode encoded) => new Adc_lock(encoded);
-
         public Adcx adcx() => default;
 
         [MethodImpl(Inline), Op]
         public Adcx adcx(AsmHexCode encoded) => new Adcx(encoded);
 
+        public Adc_lock adc_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Adc_lock adc_lock(AsmHexCode encoded) => new Adc_lock(encoded);
+
         public Add add() => default;
 
         [MethodImpl(Inline), Op]
         public Add add(AsmHexCode encoded) => new Add(encoded);
-
-        public Add_lock add_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Add_lock add_lock(AsmHexCode encoded) => new Add_lock(encoded);
 
         public Addpd addpd() => default;
 
@@ -85,6 +85,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Addsubps addsubps(AsmHexCode encoded) => new Addsubps(encoded);
+
+        public Add_lock add_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Add_lock add_lock(AsmHexCode encoded) => new Add_lock(encoded);
 
         public Adox adox() => default;
 
@@ -166,11 +171,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public And and(AsmHexCode encoded) => new And(encoded);
 
-        public And_lock and_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public And_lock and_lock(AsmHexCode encoded) => new And_lock(encoded);
-
         public Andn andn() => default;
 
         [MethodImpl(Inline), Op]
@@ -195,6 +195,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Andps andps(AsmHexCode encoded) => new Andps(encoded);
+
+        public And_lock and_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public And_lock and_lock(AsmHexCode encoded) => new And_lock(encoded);
 
         public Arpl arpl() => default;
 
@@ -601,11 +606,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Cmpxchg cmpxchg(AsmHexCode encoded) => new Cmpxchg(encoded);
 
-        public Cmpxchg_lock cmpxchg_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Cmpxchg_lock cmpxchg_lock(AsmHexCode encoded) => new Cmpxchg_lock(encoded);
-
         public Cmpxchg16b cmpxchg16b() => default;
 
         [MethodImpl(Inline), Op]
@@ -625,6 +625,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Cmpxchg8b_lock cmpxchg8b_lock(AsmHexCode encoded) => new Cmpxchg8b_lock(encoded);
+
+        public Cmpxchg_lock cmpxchg_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Cmpxchg_lock cmpxchg_lock(AsmHexCode encoded) => new Cmpxchg_lock(encoded);
 
         public Comisd comisd() => default;
 
@@ -1446,11 +1451,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Inc inc(AsmHexCode encoded) => new Inc(encoded);
 
-        public Inc_lock inc_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Inc_lock inc_lock(AsmHexCode encoded) => new Inc_lock(encoded);
-
         public Incsspd incsspd() => default;
 
         [MethodImpl(Inline), Op]
@@ -1460,6 +1460,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Incsspq incsspq(AsmHexCode encoded) => new Incsspq(encoded);
+
+        public Inc_lock inc_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Inc_lock inc_lock(AsmHexCode encoded) => new Inc_lock(encoded);
 
         public Insb insb() => default;
 
@@ -2146,16 +2151,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Mov mov(AsmHexCode encoded) => new Mov(encoded);
 
-        public Mov_cr mov_cr() => default;
-
-        [MethodImpl(Inline), Op]
-        public Mov_cr mov_cr(AsmHexCode encoded) => new Mov_cr(encoded);
-
-        public Mov_dr mov_dr() => default;
-
-        [MethodImpl(Inline), Op]
-        public Mov_dr mov_dr(AsmHexCode encoded) => new Mov_dr(encoded);
-
         public Movapd movapd() => default;
 
         [MethodImpl(Inline), Op]
@@ -2361,6 +2356,16 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Movzx movzx(AsmHexCode encoded) => new Movzx(encoded);
 
+        public Mov_cr mov_cr() => default;
+
+        [MethodImpl(Inline), Op]
+        public Mov_cr mov_cr(AsmHexCode encoded) => new Mov_cr(encoded);
+
+        public Mov_dr mov_dr() => default;
+
+        [MethodImpl(Inline), Op]
+        public Mov_dr mov_dr(AsmHexCode encoded) => new Mov_dr(encoded);
+
         public Mpsadbw mpsadbw() => default;
 
         [MethodImpl(Inline), Op]
@@ -2415,11 +2420,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Neg_lock neg_lock(AsmHexCode encoded) => new Neg_lock(encoded);
-
-        public None none() => default;
-
-        [MethodImpl(Inline), Op]
-        public None none(AsmHexCode encoded) => new None(encoded);
 
         public Nop nop() => default;
 
@@ -2481,11 +2481,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Or or(AsmHexCode encoded) => new Or(encoded);
 
-        public Or_lock or_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Or_lock or_lock(AsmHexCode encoded) => new Or_lock(encoded);
-
         public Orpd orpd() => default;
 
         [MethodImpl(Inline), Op]
@@ -2495,6 +2490,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Orps orps(AsmHexCode encoded) => new Orps(encoded);
+
+        public Or_lock or_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Or_lock or_lock(AsmHexCode encoded) => new Or_lock(encoded);
 
         public Out @out() => default;
 
@@ -3131,16 +3131,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Por por(AsmHexCode encoded) => new Por(encoded);
 
-        public Prefetch_exclusive prefetch_exclusive() => default;
-
-        [MethodImpl(Inline), Op]
-        public Prefetch_exclusive prefetch_exclusive(AsmHexCode encoded) => new Prefetch_exclusive(encoded);
-
-        public Prefetch_reserved prefetch_reserved() => default;
-
-        [MethodImpl(Inline), Op]
-        public Prefetch_reserved prefetch_reserved(AsmHexCode encoded) => new Prefetch_reserved(encoded);
-
         public Prefetchnta prefetchnta() => default;
 
         [MethodImpl(Inline), Op]
@@ -3170,6 +3160,16 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Prefetchwt1 prefetchwt1(AsmHexCode encoded) => new Prefetchwt1(encoded);
+
+        public Prefetch_exclusive prefetch_exclusive() => default;
+
+        [MethodImpl(Inline), Op]
+        public Prefetch_exclusive prefetch_exclusive(AsmHexCode encoded) => new Prefetch_exclusive(encoded);
+
+        public Prefetch_reserved prefetch_reserved() => default;
+
+        [MethodImpl(Inline), Op]
+        public Prefetch_reserved prefetch_reserved(AsmHexCode encoded) => new Prefetch_reserved(encoded);
 
         public Psadbw psadbw() => default;
 
@@ -3491,6 +3491,86 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Rdtscp rdtscp(AsmHexCode encoded) => new Rdtscp(encoded);
 
+        public Repe_cmpsb repe_cmpsb() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_cmpsb repe_cmpsb(AsmHexCode encoded) => new Repe_cmpsb(encoded);
+
+        public Repe_cmpsd repe_cmpsd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_cmpsd repe_cmpsd(AsmHexCode encoded) => new Repe_cmpsd(encoded);
+
+        public Repe_cmpsq repe_cmpsq() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_cmpsq repe_cmpsq(AsmHexCode encoded) => new Repe_cmpsq(encoded);
+
+        public Repe_cmpsw repe_cmpsw() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_cmpsw repe_cmpsw(AsmHexCode encoded) => new Repe_cmpsw(encoded);
+
+        public Repe_scasb repe_scasb() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_scasb repe_scasb(AsmHexCode encoded) => new Repe_scasb(encoded);
+
+        public Repe_scasd repe_scasd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_scasd repe_scasd(AsmHexCode encoded) => new Repe_scasd(encoded);
+
+        public Repe_scasq repe_scasq() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_scasq repe_scasq(AsmHexCode encoded) => new Repe_scasq(encoded);
+
+        public Repe_scasw repe_scasw() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repe_scasw repe_scasw(AsmHexCode encoded) => new Repe_scasw(encoded);
+
+        public Repne_cmpsb repne_cmpsb() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_cmpsb repne_cmpsb(AsmHexCode encoded) => new Repne_cmpsb(encoded);
+
+        public Repne_cmpsd repne_cmpsd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_cmpsd repne_cmpsd(AsmHexCode encoded) => new Repne_cmpsd(encoded);
+
+        public Repne_cmpsq repne_cmpsq() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_cmpsq repne_cmpsq(AsmHexCode encoded) => new Repne_cmpsq(encoded);
+
+        public Repne_cmpsw repne_cmpsw() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_cmpsw repne_cmpsw(AsmHexCode encoded) => new Repne_cmpsw(encoded);
+
+        public Repne_scasb repne_scasb() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_scasb repne_scasb(AsmHexCode encoded) => new Repne_scasb(encoded);
+
+        public Repne_scasd repne_scasd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_scasd repne_scasd(AsmHexCode encoded) => new Repne_scasd(encoded);
+
+        public Repne_scasq repne_scasq() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_scasq repne_scasq(AsmHexCode encoded) => new Repne_scasq(encoded);
+
+        public Repne_scasw repne_scasw() => default;
+
+        [MethodImpl(Inline), Op]
+        public Repne_scasw repne_scasw(AsmHexCode encoded) => new Repne_scasw(encoded);
+
         public Rep_insb rep_insb() => default;
 
         [MethodImpl(Inline), Op]
@@ -3625,86 +3705,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Rep_xstore rep_xstore(AsmHexCode encoded) => new Rep_xstore(encoded);
-
-        public Repe_cmpsb repe_cmpsb() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_cmpsb repe_cmpsb(AsmHexCode encoded) => new Repe_cmpsb(encoded);
-
-        public Repe_cmpsd repe_cmpsd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_cmpsd repe_cmpsd(AsmHexCode encoded) => new Repe_cmpsd(encoded);
-
-        public Repe_cmpsq repe_cmpsq() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_cmpsq repe_cmpsq(AsmHexCode encoded) => new Repe_cmpsq(encoded);
-
-        public Repe_cmpsw repe_cmpsw() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_cmpsw repe_cmpsw(AsmHexCode encoded) => new Repe_cmpsw(encoded);
-
-        public Repe_scasb repe_scasb() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_scasb repe_scasb(AsmHexCode encoded) => new Repe_scasb(encoded);
-
-        public Repe_scasd repe_scasd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_scasd repe_scasd(AsmHexCode encoded) => new Repe_scasd(encoded);
-
-        public Repe_scasq repe_scasq() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_scasq repe_scasq(AsmHexCode encoded) => new Repe_scasq(encoded);
-
-        public Repe_scasw repe_scasw() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repe_scasw repe_scasw(AsmHexCode encoded) => new Repe_scasw(encoded);
-
-        public Repne_cmpsb repne_cmpsb() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_cmpsb repne_cmpsb(AsmHexCode encoded) => new Repne_cmpsb(encoded);
-
-        public Repne_cmpsd repne_cmpsd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_cmpsd repne_cmpsd(AsmHexCode encoded) => new Repne_cmpsd(encoded);
-
-        public Repne_cmpsq repne_cmpsq() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_cmpsq repne_cmpsq(AsmHexCode encoded) => new Repne_cmpsq(encoded);
-
-        public Repne_cmpsw repne_cmpsw() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_cmpsw repne_cmpsw(AsmHexCode encoded) => new Repne_cmpsw(encoded);
-
-        public Repne_scasb repne_scasb() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_scasb repne_scasb(AsmHexCode encoded) => new Repne_scasb(encoded);
-
-        public Repne_scasd repne_scasd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_scasd repne_scasd(AsmHexCode encoded) => new Repne_scasd(encoded);
-
-        public Repne_scasq repne_scasq() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_scasq repne_scasq(AsmHexCode encoded) => new Repne_scasq(encoded);
-
-        public Repne_scasw repne_scasw() => default;
-
-        [MethodImpl(Inline), Op]
-        public Repne_scasw repne_scasw(AsmHexCode encoded) => new Repne_scasw(encoded);
 
         public Ret_far ret_far() => default;
 
@@ -4146,11 +4146,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Sub sub(AsmHexCode encoded) => new Sub(encoded);
 
-        public Sub_lock sub_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Sub_lock sub_lock(AsmHexCode encoded) => new Sub_lock(encoded);
-
         public Subpd subpd() => default;
 
         [MethodImpl(Inline), Op]
@@ -4170,6 +4165,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Subss subss(AsmHexCode encoded) => new Subss(encoded);
+
+        public Sub_lock sub_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Sub_lock sub_lock(AsmHexCode encoded) => new Sub_lock(encoded);
 
         public Swapgs swapgs() => default;
 
@@ -4201,15 +4201,15 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Sysret sysret(AsmHexCode encoded) => new Sysret(encoded);
 
-        public Sysret_amd sysret_amd() => default;
-
-        [MethodImpl(Inline), Op]
-        public Sysret_amd sysret_amd(AsmHexCode encoded) => new Sysret_amd(encoded);
-
         public Sysret64 sysret64() => default;
 
         [MethodImpl(Inline), Op]
         public Sysret64 sysret64(AsmHexCode encoded) => new Sysret64(encoded);
+
+        public Sysret_amd sysret_amd() => default;
+
+        [MethodImpl(Inline), Op]
+        public Sysret_amd sysret_amd(AsmHexCode encoded) => new Sysret_amd(encoded);
 
         public T1mskc t1mskc() => default;
 
@@ -8101,11 +8101,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Xor xor(AsmHexCode encoded) => new Xor(encoded);
 
-        public Xor_lock xor_lock() => default;
-
-        [MethodImpl(Inline), Op]
-        public Xor_lock xor_lock(AsmHexCode encoded) => new Xor_lock(encoded);
-
         public Xorpd xorpd() => default;
 
         [MethodImpl(Inline), Op]
@@ -8115,6 +8110,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public Xorps xorps(AsmHexCode encoded) => new Xorps(encoded);
+
+        public Xor_lock xor_lock() => default;
+
+        [MethodImpl(Inline), Op]
+        public Xor_lock xor_lock(AsmHexCode encoded) => new Xor_lock(encoded);
 
         public Xresldtrk xresldtrk() => default;
 
