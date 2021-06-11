@@ -155,7 +155,18 @@ namespace Z0.Asm
         }
 
         bool Match(SymExpr src, out IClass dst)
-            => IClasses.MatchKind(src, out dst);
+        {
+            if(IClasses.Lookup(src, out var sym))
+            {
+                dst = sym.Kind;
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
 
         void Complete(ref FormPartiton partition)
         {

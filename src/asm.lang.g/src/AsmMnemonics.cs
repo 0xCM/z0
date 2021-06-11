@@ -1,10 +1,11 @@
 ﻿//-----------------------------------------------------------------------------
-// Generated   :  2021-06-09.00.04.02.873
+// Generated   :  2021-06-10.20.22.20.286
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    [ApiComplete]
     public readonly struct AsmMnemonics
     {
         public static AsmMnemonic AAA => nameof(AAA);

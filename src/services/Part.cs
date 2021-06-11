@@ -17,6 +17,12 @@ namespace Z0.Parts
 namespace Z0
 {
 
+    public static partial class XTend
+    {
+
+
+    }
+
     partial struct Msg
     {
         public static MsgPattern<Count, DelimitedIndex<PartId>> RunningMachine => "Executing machine workflow for {0} parts: {1}";

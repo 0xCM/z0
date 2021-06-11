@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        public void EmitStatementBuilder(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
+        public void EmitStatementBuilder(ReadOnlySpan<string> src, FS.FilePath dst)
         {
             var buffer = text.buffer();
             var margin = 0u;

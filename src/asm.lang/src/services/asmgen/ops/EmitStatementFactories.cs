@@ -10,14 +10,14 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        public void EmitStatementFactories(uint margin, ReadOnlySpan<AsmMnemonic> src, ITextBuffer dst)
+        public void EmitStatementFactories(uint margin, ReadOnlySpan<string> src, ITextBuffer dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 EmitStatementFactories(margin, skip(src,i), dst);
         }
 
-        public void EmitStatementFactories(uint margin, AsmMnemonic mnemonic, ITextBuffer dst)
+        public void EmitStatementFactories(uint margin, string mnemonic, ITextBuffer dst)
         {
             dst.IndentLine(margin, string.Format(StatementFactoryDefaultPattern, MonicTypeName(mnemonic), MonicFactoryName(mnemonic)));
             dst.AppendLine();

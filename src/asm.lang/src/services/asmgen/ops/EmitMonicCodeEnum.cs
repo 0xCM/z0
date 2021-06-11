@@ -14,18 +14,18 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        void EmitMonicEnum(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
+        void EmitMonicEnum(ReadOnlySpan<string> monics, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
             var buffer = text.buffer();
-            EmitMonicEnums(src,0,buffer);
+            EmitMonicEnumLiterals(monics,0,buffer);
             using var writer = dst.Writer();
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
-            Wf.EmittedFile(flow, src.Length);
+            Wf.EmittedFile(flow, monics.Length);
         }
 
-        public static void EmitMonicEnums(ReadOnlySpan<AsmMnemonic> src, uint margin, ITextBuffer buffer)
+        public static void EmitMonicEnumLiterals(ReadOnlySpan<string> monics, uint margin, ITextBuffer buffer)
         {
             buffer.AppendLine(AsmNamespaceDecl);
             buffer.AppendLine(Open);
@@ -34,15 +34,15 @@ namespace Z0.Asm
             buffer.IndentLine(margin, Open);
             margin += 4;
 
-            buffer.IndentLine(margin, string.Format(ItemAssignPattern, ZeroEnumMemberName, "0"));
-            buffer.AppendLine();
+            // buffer.IndentLine(margin, string.Format(ItemAssignPattern, ZeroEnumMemberName, "0"));
+            // buffer.AppendLine();
 
-            var count = src.Length;
+            var count = monics.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format(MonicSymbolPattern, monic.Name.ToLower()));
-                buffer.IndentLine(margin, string.Format(ItemAssignPattern, monic.Name, i+1));
+                ref readonly var monic = ref skip(monics,i);
+                buffer.IndentLine(margin, string.Format(MonicSymbolPattern, monic.ToLower()));
+                buffer.IndentLine(margin, string.Format(ItemAssignPattern, monic, i+1));
                 buffer.AppendLine();
             }
             margin -= 4;

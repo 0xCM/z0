@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Svc = Z0;
 
-    public abstract class WorkflowRunner<T> : AppService<T>
-        where T : WorkflowRunner<T>, new()
+    [ApiHost]
+    public static partial class XSvc
     {
 
+        [Op]
+        public static GlobalCommands GlobalCommands(this IWfRuntime wf)
+            => Svc.GlobalCommands.create(wf);
     }
+
 }

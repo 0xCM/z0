@@ -10,6 +10,7 @@
       <ProjectReference Include="$(BitMasks)" />
       <ProjectReference Include="$(AsmData)" />
       <ProjectReference Include="$(Commands)" />
+      <ProjectReference Include="$(Events)" />
   </ItemGroup>
 
    <ItemGroup>

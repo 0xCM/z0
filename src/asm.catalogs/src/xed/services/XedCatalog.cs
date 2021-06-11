@@ -28,13 +28,13 @@ namespace Z0.Asm
             EmitFormAspects();
         }
 
-        public ReadOnlySpan<AsmMnemonic> Mnemonics()
+        public ReadOnlySpan<string> MnemonicNames()
         {
             var set = hashset<string>();
             iter(IClasses().Storage, c => set.Add(c.Expr.Text));
             var distinct = set.Array();
             Array.Sort(distinct);
-            return distinct.Select(x => new AsmMnemonic(x));
+            return distinct;
         }
 
         public void EmitFormAspects()

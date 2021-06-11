@@ -10,8 +10,10 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
+        const string InstructionContainerName = "AsmInstructions";
+
         [Op]
-        void EmitInstructionTypes(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
+        void EmitInstructionTypes(ReadOnlySpan<string> monics, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
             var buffer = text.buffer();
@@ -27,11 +29,11 @@ namespace Z0.Asm
             buffer.IndentLine(margin, Open);
             margin += Indent;
             var model = InstructionModel.Empty;
-            var count = src.Length;
+            var count = monics.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var monic = ref skip(src,i);
-                model = monic;
+                ref readonly var monic = ref skip(monics,i);
+                model = new AsmMnemonic(monic);
                 model.RenderType(margin, buffer);
             }
 
@@ -45,7 +47,7 @@ namespace Z0.Asm
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
 
-            Wf.EmittedFile(flow, src.Length);
+            Wf.EmittedFile(flow, monics.Length);
         }
     }
 }

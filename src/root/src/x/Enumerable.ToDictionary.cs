@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="K">The key type</typeparam>
         /// <typeparam name="V">The value type</typeparam>
         public static Dictionary<K,V> ToDictionary<K,V>(this IEnumerable<(K key, V value)> src)
-            => new Dictionary<K,V>(src.Select(x => new KeyValuePair<K,V>(x.key,x.value)));
+            => new Dictionary<K,V>(src.Select(x => new KeyValuePair<K,V>(x.key, x.value)));
 
         public static Dictionary<string,V> ToDictionary<V>(this IEnumerable<NamedValue<V>> src)
             => src.Select(x => (x.Name, x.Value)).ToDictionary();

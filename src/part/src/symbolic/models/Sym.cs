@@ -40,7 +40,7 @@ namespace Z0
             Hidden = true;
         }
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public Sym(SymIdentity id, SymKey index, Identifier type, ulong kind, Identifier name, SymExpr symbol, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
@@ -65,10 +65,24 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Name.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Name.IsNonEmpty;
+        }
+
         public static Sym Empty
         {
             [MethodImpl(Inline)]
             get => new Sym();
         }
+
+
     }
 }

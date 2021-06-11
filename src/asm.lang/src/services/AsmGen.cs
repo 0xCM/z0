@@ -15,10 +15,12 @@ namespace Z0.Asm
 
         const string InlineAttributeSpec = "[MethodImpl(Inline)]";
 
+        const string ApiCompleteAttribute = "[ApiComplete]";
+
         const string InlineOpAttributeSpec = "[MethodImpl(Inline), Op]";
 
         [Op]
-        public void GenerateModelsInPlace(ReadOnlySpan<AsmMnemonic> src)
+        public void GenerateModelsInPlace(ReadOnlySpan<string> src)
         {
             var flow = Wf.Running();
             EmitInstructionContracts(GetTargetPath(T.InstructionContracts));
@@ -32,11 +34,11 @@ namespace Z0.Asm
         [Op]
         public void GenerateModelsInPlace()
         {
-            GenerateModelsInPlace(Wf.XedCatalog().Mnemonics());
+            GenerateModelsInPlace(Wf.XedCatalog().MnemonicNames());
         }
 
         [Op]
-        public void GenerateModels(ReadOnlySpan<AsmMnemonic> src, FS.FolderPath dst)
+        public void GenerateModels(ReadOnlySpan<string> src, FS.FolderPath dst)
         {
             var flow = Wf.Running();
             EmitInstructionContracts(GetTargetPath(T.InstructionContracts, dst));
@@ -45,13 +47,12 @@ namespace Z0.Asm
             EmitInstructionTypes(src, GetTargetPath(T.InstructionTypes, dst));
             EmitStatementBuilder(src, GetTargetPath(T.StatementBuilder, dst));
             Wf.Ran(flow);
-
         }
 
         [Op]
         public void GenerateModels(FS.FolderPath dst)
         {
-            GenerateModels(Wf.XedCatalog().Mnemonics(), dst);
+            GenerateModels(Wf.XedCatalog().MnemonicNames(), dst);
         }
 
         const byte Indent = 4;
@@ -74,11 +75,8 @@ namespace Z0.Asm
 
         const string MonicEnumType = "ushort";
 
-        const string MonicContainerName = "AsmMnemonics";
-
         const string ZeroEnumMemberName = "None";
 
-        const string InstructionContainerName = "AsmInstructions";
 
         const string StatementFactoryDefaultPattern = "public {0} {1}() => default;";
 
@@ -86,7 +84,6 @@ namespace Z0.Asm
 
         const string StatementFactoryArgPattern = "public {0} {1}(AsmHexCode encoded) => new {0}(encoded);";
 
-        const string MonicPropertyPattern = "public static AsmMnemonic {0} => nameof({0});";
 
         const string UsingCompilerServices = "using System.Runtime.CompilerServices;";
 

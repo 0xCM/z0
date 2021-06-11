@@ -9,14 +9,18 @@ namespace Z0.Asm
 
     using static Root;
 
-    [ApiHost]
-    public class AsmSigs : Service<AsmSigs>
+    public readonly struct AsmToken
     {
-        const NumericKind Closure = UnsignedInts;
+        public Sym Symbol {get;}
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static AsmSigOp operand<K>(Sym<K> sym)
-            where K : unmanaged
-                => new AsmSigOp(sym);
+        [MethodImpl(Inline)]
+        public AsmToken(Sym symbol)
+        {
+            Symbol = symbol;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmToken(Sym src)
+            => new AsmToken(src);
     }
 }

@@ -10,31 +10,36 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        void EmitMonicExpressions(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
+        const string MonicPropertyPattern = "public static AsmMnemonic {0} => nameof({0});";
+
+        const string MonicContainerName = "AsmMnemonics";
+
+        void EmitMonicExpressions(ReadOnlySpan<string> monics, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
             var buffer = text.buffer();
-            EmitMonicExpressions(src,0,buffer);
+            EmitMonicExpressions(monics,0,buffer);
             using var writer = dst.Writer();
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
-            Wf.EmittedFile(flow, src.Length);
+            Wf.EmittedFile(flow, monics.Length);
         }
 
-        public static void EmitMonicExpressions(ReadOnlySpan<AsmMnemonic> src, uint margin, ITextBuffer buffer)
+        public static void EmitMonicExpressions(ReadOnlySpan<string> monics, uint margin, ITextBuffer buffer)
         {
             buffer.AppendLine(AsmNamespaceDecl);
             buffer.AppendLine(Open);
             margin += 4;
+            buffer.IndentLine(margin, ApiCompleteAttribute);
             buffer.IndentLine(margin, string.Format(ReadOnlyStructDeclPattern, MonicContainerName));
             buffer.IndentLine(margin, Open);
             margin += 4;
 
-            var count = src.Length;
+            var count = monics.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format(MonicPropertyPattern, monic.Name));
+                ref readonly var monic = ref skip(monics,i);
+                buffer.IndentLine(margin, string.Format(MonicPropertyPattern, monic));
                 buffer.AppendLine();
             }
             margin -= 4;

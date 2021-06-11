@@ -4,11 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
+    using static core;
     partial class AsmGen
     {
-        public static string MonicFactoryName(AsmMnemonic src)
+        public static string MonicFactoryName(string src)
         {
-            var identifier = src.Format(MnemonicCase.Lowercase);
+            var identifier = src.ToLowerInvariant();
             return identifier switch{
                 "in" => "@in",
                 "out" => "@out",
@@ -18,7 +21,21 @@ namespace Z0.Asm
             };
         }
 
-        public static string MonicTypeName(AsmMnemonic src)
-            => src.Format(MnemonicCase.Captialized);
+        public static string MonicTypeName(string src)
+        {
+            var count = src.Length;
+            Span<char> dst = stackalloc  char[count];
+            var input = span(src.ToLowerInvariant());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(input,i);
+                if(i==0)
+                    seek(dst,i) = c.ToUpper();
+                else
+                    seek(dst,i) = c;
+            }
+            return new string(dst);
+        }
+
     }
 }

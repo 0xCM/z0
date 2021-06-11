@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
 
-    public abstract class WorkflowRunner<T> : AppService<T>
-        where T : WorkflowRunner<T>, new()
+
+    [AttributeUsage(AttributeTargets.Method)]
+    public class CmdOpAttribute : Attribute
     {
 
     }

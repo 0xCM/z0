@@ -14,33 +14,42 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSigOp
     {
-        public Identifier Name {get;}
-
-        public SymExpr Symbol {get;}
+        readonly Sym Symbol;
 
         [MethodImpl(Inline)]
-        public AsmSigOp(Identifier name, SymExpr symbol)
+        public AsmSigOp(Sym s)
         {
-            Name  = name;
-            Symbol = symbol;
+            Symbol = s;
+        }
+
+        public Identifier Name
+        {
+            [MethodImpl(Inline)]
+            get => Symbol.Name;
+        }
+
+        public SymExpr Expr
+        {
+            [MethodImpl(Inline)]
+            get => Symbol.Expr;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsEmpty;
+            get => Symbol.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsNonEmpty;
+            get => Symbol.IsNonEmpty;
         }
 
         public static AsmSigOp Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSigOp(Identifier.Empty, SymExpr.Empty);
+            get => new AsmSigOp(Sym.Empty);
         }
     }
 }

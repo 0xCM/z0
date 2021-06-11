@@ -11,6 +11,8 @@ namespace Z0
     using static Root;
     using static core;
 
+    using api = Symbols;
+
     public class Symbols<K>
         where K : unmanaged
     {
@@ -18,21 +20,25 @@ namespace Z0
 
         readonly Index<K> _Kinds;
 
-        readonly HashSet<K> _Set;
+        readonly Dictionary<string,Sym<K>> _SymbolMap;
+
+        readonly Index<Sym> _Untyped;
 
         Symbols()
         {
             Data = array<Sym<K>>();
             _Kinds = array<K>();
-            _Set = new();
+            _SymbolMap = new();
+            _Untyped = new();
         }
 
         [MethodImpl(Inline)]
-        internal Symbols(Index<Sym<K>> src)
+        internal Symbols(Index<Sym<K>> src, Dictionary<string,Sym<K>> lookup)
         {
             Data = src;
             _Kinds = src.Select(x => x.Kind);
-            _Set = hashset(_Kinds.Storage);
+            _SymbolMap = lookup;
+            _Untyped = src.Select(x => api.untyped(x));
         }
 
         public ref readonly Sym<K> this[uint index]
@@ -47,45 +53,19 @@ namespace Z0
             get => ref Data[bw16(index)];
         }
 
-        public bool Match(SymExpr src, out Sym<K> dst)
-        {
-            var count = Count;
-            var view = View;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var sym = ref skip(view,i);
-                if(sym.Expr.Equals(src))
-                {
-                    dst = sym;
-                    return true;
-                }
-            }
-            dst = Sym<K>.Empty;
-            return false;
-        }
-
-        public bool MatchKind(SymExpr src, out K dst)
-        {
-            if(Match(src, out var matched))
-            {
-                dst = matched.Kind;
-                return true;
-            }
-            else
-            {
-                dst = default;
-                return false;
-            }
-        }
-
-        [MethodImpl(Inline)]
-        public bool Contains(K kind)
-            => _Set.Contains(kind);
+        public bool Lookup(SymExpr src, out Sym<K> dst)
+            => _SymbolMap.TryGetValue(src.Text, out dst);
 
         public ReadOnlySpan<K> Kinds
         {
             [MethodImpl(Inline)]
             get => _Kinds;
+        }
+
+        public ReadOnlySpan<Sym> Untyped
+        {
+            [MethodImpl(Inline)]
+            get => _Untyped.View;
         }
 
         public Sym<K>[] Storage

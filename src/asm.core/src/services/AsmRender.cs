@@ -46,7 +46,7 @@ namespace Z0.Asm
             dst.AppendFormat("{0} ", monic.Format(MnemonicCase.Lowercase));
             for(var i=0; i<count; i++)
             {
-                dst.Append(core.skip(operands,i).Symbol.Format());
+                dst.Append(core.skip(operands,i).Expr.Format());
                 if(i != count - 1)
                     dst.Append(Chars.Comma);
             }

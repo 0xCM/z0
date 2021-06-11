@@ -137,7 +137,6 @@ namespace Z0.Asm
 
             [Symbol("m256", "A 256-bit operand in memory. This nomenclature is used only with AVX instructions")]
             m256,
-
         }
 
         [SymbolSource("Classifies mmx-related instruction signature components")]
@@ -188,6 +187,7 @@ namespace Z0.Asm
             xmm64,
         }
 
+        [SymbolSource]
         public enum VectorRegs : byte
         {
             [Symbol("mV", "A vector memory operand; the operand size is dependent on the instruction")]
@@ -316,7 +316,6 @@ namespace Z0.Asm
 
             [Symbol("m16&64")]
             m16x64,
-
         }
 
         [SymbolSource]

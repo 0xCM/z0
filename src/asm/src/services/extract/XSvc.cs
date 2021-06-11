@@ -19,5 +19,8 @@ namespace Z0
 
         public static AsmAnalyzer AsmAnalyzer(this IWfRuntime wf)
             => Svc.AsmAnalyzer.create(wf);
+
+        public static ApiExtractWorkflow ApiExtractWorkflow(this IWfRuntime wf)
+            => Svc.ApiExtractWorkflow.create(wf);
     }
 }

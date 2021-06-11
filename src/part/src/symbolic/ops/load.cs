@@ -5,12 +5,40 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
+    using System.Collections.Generic;
+
 
     using static Root;
     using static core;
 
     partial struct Symbols
     {
+        [Op]
+        static SymIdentity identity(FieldInfo field, ushort index, SymExpr expr)
+            => string.Format("{0:D3}:{1}:{2}::{3}.{4}({5})",
+                    index,
+                    RP.bracket((CliToken)field),
+                    field.DeclaringType.Assembly.GetSimpleName(),
+                    field.DeclaringType.FullName,
+                    field.Name,
+                    expr);
+
+        static Dictionary<string,Sym<K>> lookup<K>(Index<Sym<K>> src)
+            where K : unmanaged
+        {
+            var count = src.Length;
+            var view = src.View;
+            var dst = dict<string,Sym<K>>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var symbol = ref skip(view,i);
+                dst.TryAdd(symbol.Expr.Text, symbol);
+            }
+
+            return dst;
+        }
+
         /// <summary>
         /// Symbol cache loader
         /// </summary>
@@ -23,7 +51,7 @@ namespace Z0
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = new Sym<E>(i, skip(src,i));
-            return new Symbols<E>(buffer);
+            return new Symbols<E>(buffer, lookup<E>(buffer));
         }
 
         static Span<SymLiteral<E>> discover<E>()

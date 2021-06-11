@@ -85,8 +85,8 @@ namespace Z0.Asm
             Wf.XedCatalog().EmitCatalog();
         }
 
-        public ReadOnlySpan<AsmMnemonic> LoadMnemonics()
-            => Wf.XedCatalog().Mnemonics();
+        public ReadOnlySpan<string> LoadMnemonics()
+            => Wf.XedCatalog().MnemonicNames();
 
         void EmitRuntimeMembers()
         {
@@ -565,10 +565,10 @@ namespace Z0.Asm
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
-        void RunExtractWorkflow()
-        {
-           ApiExtractWorkflow.run(Wf);
-        }
+        // void RunExtractWorkflow()
+        // {
+        //    ApiExtractWorkflow.run(Wf);
+        // }
 
 
         [Record(TableId)]
@@ -588,15 +588,6 @@ namespace Z0.Asm
             return Wf.ResPackEmitter().Emit(blocks.View,dst);
         }
 
-        public void GenerateInstructionModels()
-        {
-            Wf.AsmCodeGenerator().GenerateModelsInPlace();
-        }
-
-        public void GenerateInstructionModelPreview()
-        {
-            Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
-        }
 
         void ShowRegOps()
         {
@@ -994,10 +985,21 @@ namespace Z0.Asm
             CheckAsciSpans();
         }
 
+        // public void GenerateInstructionModels()
+        // {
+        //     Wf.AsmCodeGenerator().GenerateModelsInPlace();
+        // }
+
+        // public void GenerateInstructionModelPreview()
+        // {
+        //     Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
+        // }
+
         public void Run()
         {
+            Wf.GlobalCommands().GenInstructionModels();
             //EmitXedCatalog();
-            CheckAsciLookups();
+            //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));
             // Wf.Row(xpr);
             //GenerateInstructionModels();
@@ -1009,7 +1011,6 @@ namespace Z0.Asm
             //ParseDisassembly();
             //CheckCodeFactory();
             //EmitSymbolicliterals();
-            //GenerateInstructionModels();
             //EmitPartSelection();
             //ListPdbMethods();
             //CompareBitstrings();

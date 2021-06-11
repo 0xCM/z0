@@ -53,6 +53,20 @@ namespace Z0
 
         }
 
+        public ApiCollection Run()
+        {
+            var pdb = false;
+            var packs = Wf.ApiPacks();
+            var ts = now();
+            var settings = ApiPackSettings.init(Db.CapturePackRoot(), ts);
+            var pack = packs.Create(settings);
+            var collection = Run(pack);
+            packs.CreateLink(ts);
+            if(pdb)
+                IndexPdbSymbols(collection.ResolvedParts, pack.Root + FS.file("symbols", FS.Log));
+            return collection;
+        }
+
         public static void run(IWfRuntime wf)
         {
             var extract = ApiExtractWorkflow.create(wf);

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// Generated   :  2021-06-09.00.04.02.878
+// Generated   :  2021-06-10.20.22.20.291
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -7,8 +7,6 @@ namespace Z0.Asm
 {
     public enum AsmMnemonicCode : ushort
     {
-        None = 0,
-
         [Symbol("aaa")]
         AAA = 1,
 
@@ -1452,6 +1450,8 @@ namespace Z0.Asm
         [Symbol("neg_lock")]
         NEG_LOCK = 481,
 
+        [Symbol("none")]
+        None = 482,
 
         [Symbol("nop")]
         NOP = 483,
