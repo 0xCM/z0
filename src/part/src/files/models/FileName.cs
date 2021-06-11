@@ -80,7 +80,7 @@ namespace Z0
             /// </summary>
             /// <param name="host">The owner to test</param>
             public bool IsHost(ApiHostUri host)
-                => Name.Text.StartsWith(string.Concat(host.Part.Format(), Chars.Dot, host.Name.ToLower(), Chars.Dot));
+                => Name.Text.StartsWith(string.Concat(host.Part.Format(), Chars.Dot, host.HostName.ToLower(), Chars.Dot));
 
             public FileName ChangeExtension(FileExt ext)
                 => FS.file(Path.GetFileNameWithoutExtension(Name), ext);

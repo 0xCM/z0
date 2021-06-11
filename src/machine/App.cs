@@ -15,7 +15,7 @@ namespace Z0
             => new App(wf);
 
         static IWfRuntime shell(string[] args)
-            => WfRuntime.create(ApiQuery.parts(root.controller(), args), args).WithSource(Rng.@default());
+            => WfRuntime.create(ApiParts.load(core.controller(), args), args).WithSource(Rng.@default());
 
         IWfRuntime Wf;
 

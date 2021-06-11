@@ -19,7 +19,7 @@ namespace Z0
         public static OpIdentity constructed(MethodInfo src)
         {
             if(!src.IsConstructedGenericMethod)
-                root.@throw(AppErrors.NonGenericMethod(src));
+                Throw.e(AppErrors.NonGenericMethod(src));
 
             var id = EmptyString;
             id += name(src);

@@ -28,7 +28,7 @@ namespace Z0
             var spec = shimspec(name,tool,dst);
             var emission = create(spec);
             if(!emission.Success)
-                root.@throw(emission.Diagnostics.Map(x => x.ToString()).Array().Concat(Chars.Eol));
+                Throw.sourced(emission.Diagnostics.Map(x => x.ToString()).Array().Concat(Chars.Eol));
             return spec;
         }
 
@@ -70,7 +70,7 @@ namespace Z0
 
         public static CSharpCompilation compilation(ToolShimSpec config)
         {
-            root.require(config.ToolPath.Exists, () => $"The file {config.ToolPath}, it must exist");
+            root.invariant(config.ToolPath.Exists, () => $"The file {config.ToolPath}, it must exist");
             var refs = CsTools.pe(typeof(object), typeof(Enumerable), typeof(ProcessStartInfo));
             var code = new ToolShimCode(config.TargetPath);
             return CsTools.compilation(config.Name, refs, CsTools.parse(code.Generate()));

@@ -12,43 +12,79 @@ namespace Z0
     {
         Dictionary<string,MethodInfo> CommandLookup;
 
+        Dictionary<string,MethodInfo> Methods;
+
         object[] DefaultParameters;
 
         public GlobalCommands()
         {
-            CommandLookup = GetType().PublicInstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
+            Methods = GetType().PublicInstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
             DefaultParameters = core.array<object>();
+            CommandLookup = new();
         }
 
-        [CmdOp]
-        public Outcome GenInstructionModels()
+        protected override void Initialized()
+        {
+            foreach(var (name,method) in Methods)
+            {
+                var cmd = method.Tag<CmdOpAttribute>().MapValueOrDefault(m => m.CommandName, method.Name);
+                if(!CommandLookup.TryAdd(cmd,method))
+                    Wf.Warn(string.Format("The operation {0}:{1} has a duplicate identifier", cmd, method.Name));
+            }
+        }
+
+        [CmdOp("docsplit")]
+        public Outcome SplitDocs(params object[] args)
+        {
+            Wf.DocSplitter().Run();
+            return true;
+        }
+
+        [CmdOp("asm-gen-models")]
+        public Outcome GenInstructionModels(params object[] args)
         {
             Wf.AsmCodeGenerator().GenerateModelsInPlace();
             return true;
         }
 
-        [CmdOp]
-        public Outcome GenInstructionModelPreview()
+        [CmdOp("asm-gen-models-preview")]
+        public Outcome GenInstructionModelPreview(params object[] args)
         {
             Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
             return true;
         }
 
-        [CmdOp]
-        public Outcome RunExtractWorkflow()
+        [CmdOp("capture-xtract")]
+        public Outcome RunExtractWorkflow(params object[] args)
         {
            var svc = Wf.ApiExtractWorkflow();
            svc.Run();
            return true;
         }
 
-        public Outcome Exec(string command)
+        [CmdOp("capture-process")]
+        public Outcome RunMachine(params object[] args)
+        {
+            using var machine = MachineRunner.create(Wf);
+            machine.Run(WorkflowOptions.@default());
+            return true;
+        }
+
+        [CmdOp("capture")]
+        public Outcome RunCapture(params object[] args)
+        {
+            var result = Capture.run();
+            return true;
+        }
+
+
+        public Outcome Dispatch(string command, params object[] args)
         {
             try
             {
                 if(CommandLookup.TryGetValue(command, out var method))
                 {
-                    return (Outcome)method.Invoke(this, DefaultParameters);
+                    return (Outcome)method.Invoke(this, args);
                 }
                 else
                 {

@@ -14,7 +14,7 @@ namespace Z0
     public class ApiCaptureRunner : AppService<ApiCaptureRunner>
     {
         [Op]
-        public Index<AsmHostRoutines> Capture(Index<PartId> parts, FS.FolderPath dst)
+        public ReadOnlySpan<AsmHostRoutines> Capture(Index<PartId> parts, FS.FolderPath dst)
         {
             var jit = Wf.ApiJit();
             var hex = Wf.ApiHex();
@@ -23,10 +23,10 @@ namespace Z0
             var partcount = parts.Length;
             var hosts = Wf.ApiCatalog.PartHosts(parts).View;
             var hostcount = hosts.Length;
-            var routines = root.list<AsmHostRoutines>();
+            var routines = list<AsmHostRoutines>();
             for(var i=0; i<hostcount; i++)
                 routines.Add(capture.CaptureHost(skip(hosts,i), dst));
-            return routines.ToArray();
+            return routines.ViewDeposited();
         }
 
         public void EmitImm(Index<PartId> parts, FS.FolderPath root)

@@ -25,7 +25,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfRuntime.create(ApiQuery.parts(root.controller(), args), args);
+                using var wf = WfRuntime.create(ApiParts.load(root.controller(), args), args);
                 Generator.create(wf).Generate(args);
             }
             catch(Exception e)

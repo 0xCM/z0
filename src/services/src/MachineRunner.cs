@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static Msg;
+    using static core;
 
     public class MachineRunner : AppService<MachineRunner>
     {
@@ -21,11 +22,18 @@ namespace Z0
             try
             {
                 var blocks = hex.ReadBlocks().Storage;
-                var partitioned = blocks.ToHostBlocks();
+                var partitioned = CodeBlocks.hosted(@readonly(blocks));
                 var sorted = blocks.ToSortedSpan();
+
 
                 if(options.EmitHexIndex)
                     Emitted(hex.EmitIndex(blocks));
+
+                if(options.DryRun)
+                {
+                    Wf.Ran(flow);
+                    return;
+                }
 
                 if(options.EmitHexPack)
                     Emitted(Wf.ApiHexPacks().Emit(sorted));
@@ -35,10 +43,9 @@ namespace Z0
 
                 if(options.EmitCallData)
                 {
-                    var routines = decoder.Decode(blocks);
-
+                    var routines = decoder.Decode(core.@readonly(blocks));
                     if(options.EmitCallData)
-                        Emitted(Wf.AsmCallPipe().EmitRows(routines.View));
+                        Emitted(Wf.AsmCallPipe().EmitRows(routines));
                 }
 
                 if(options.EmitResBytes)

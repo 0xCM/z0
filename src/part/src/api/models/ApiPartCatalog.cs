@@ -5,17 +5,41 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a catalog over a <see cref='IPart'/>
     /// </summary>
     public class ApiPartCatalog : IApiPartCatalog
     {
+        /// <summary>
+        /// Defines a <see cref='ApiPartCatalog'/> for a specified part
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static ApiPartCatalog create(IPart src)
+            => create(src.Owner);
+
+        /// <summary>
+        /// Defines a <see cref='ApiPartCatalog'/> over a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static ApiPartCatalog create(Assembly src)
+            => new ApiPartCatalog(src.Id(), src, ApiRuntimeType.complete(src), ApiHost.hosts(src), svchosts(src));
+
+        /// <summary>
+        /// Searches an assembly for types tagged with the <see cref="FunctionalServiceAttribute"/>
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        [Op]
+        static Type[] svchosts(Assembly src)
+            => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
+
         /// <summary>
         /// The identity of the assembly that defines and owns the catalog
         /// </summary>

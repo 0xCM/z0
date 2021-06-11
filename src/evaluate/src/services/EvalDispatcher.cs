@@ -159,7 +159,7 @@ namespace Z0
                 var y = result[i].Right;
 
                 if(!fp)
-                    root.require(gmath.eq(x,y), () => $"{x} != {y}");
+                    root.invariant(gmath.eq(x,y), () => $"{x} != {y}");
             }
         }
 
@@ -184,7 +184,7 @@ namespace Z0
                 var x = result[i].Left;
                 var y = result[i].Right;
                 if(!fp)
-                    root.require(gmath.eq(x,y), () => $"{x} != {y}");
+                    root.invariant(gmath.eq(x,y), () => $"{x} != {y}");
             }
         }
 

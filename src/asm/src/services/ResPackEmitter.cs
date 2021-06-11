@@ -49,9 +49,7 @@ namespace Z0.Asm
             => Emit(blocks, SourceDir);
 
         public Index<ApiHostRes> Emit(ReadOnlySpan<ApiCodeBlock> blocks, FS.FolderPath dst)
-        {
-            return Emit(blocks.ToHostBlocks(), dst);
-        }
+            => Emit(CodeBlocks.hosted(blocks), dst);
 
         Index<ApiHostRes> Emit(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath dst)
         {
@@ -77,7 +75,7 @@ namespace Z0.Asm
 
         Index<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst)
         {
-            var emissions = root.list<ApiHostRes>();
+            var emissions = list<ApiHostRes>();
             var flow = Wf.Running();
             dst.Clear();
             foreach(var host in index.NonemptyHosts)
@@ -100,14 +98,14 @@ namespace Z0.Asm
 
         ApiHostRes Emit(in ApiHostBlocks src, FS.FilePath target)
         {
-            if(text.empty(src.Host.Name))
+            if(text.empty(src.Host.HostName))
             {
                 Wf.Warn(string.Format("Cannot emit {0} because host name is undefined", target.ToUri()));
                 return ApiHostRes.Empty;
             }
 
             var resources = ResProvider.Hosted(src);
-            var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
+            var hostname = src.Host.HostName.ReplaceAny(array('.'), '_');
             var typename = text.concat(src.Host.Part.Format(), Chars.Underscore, hostname);
             var members = root.hashset<string>();
             using var writer = target.Writer();

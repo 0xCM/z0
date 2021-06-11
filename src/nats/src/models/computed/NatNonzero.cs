@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatNonzero(K n)
-            => root.require(n.NatValue != 0, () => Description);
+            => root.invariant(n.NatValue != 0, () => Description);
 
         public override string ToString()
             => Description;

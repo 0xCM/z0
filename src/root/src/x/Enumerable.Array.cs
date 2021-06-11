@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T[] Array<T>(this IEnumerable<T> src)
-            => src.ToArray();
+            => src == null ? System.Array.Empty<T>() : src.ToArray();
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<T> Span<T>(this IEnumerable<T> src)

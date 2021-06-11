@@ -9,8 +9,8 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class ApiCaptureEmitter : AppService<ApiCaptureEmitter>
     {
@@ -40,7 +40,7 @@ namespace Z0
             try
             {
                 var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
-                EmitExtracts(host, src, Wf.Db().RawExtractPath(host));
+                EmitExtracts(host, src, Db.RawExtractPath(host));
                 var parsed = ParseExtracts(host, src);
                 if(parsed.Length != 0)
                 {

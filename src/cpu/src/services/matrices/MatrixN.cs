@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
-            root.require(src.Length >= Cells, () => $"{src.Length} != {Cells}");
+            root.invariant(src.Length >= Cells, () => $"{src.Length} != {Cells}");
             data = src;
         }
 

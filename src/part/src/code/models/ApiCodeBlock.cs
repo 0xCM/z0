@@ -145,6 +145,9 @@ namespace Z0
         public bool Equals(ApiCodeBlock src)
             => Encoded.Equals(src.Encoded);
 
+        public override int GetHashCode()
+            => OpUri.GetHashCode();
+
         public string Format(int uripad)
             => text.concat(BaseAddress.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
 
@@ -165,7 +168,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CodeBlock(ApiCodeBlock src)
             => src.Code;
-
 
         /// <summary>
         /// No code, no identity, no life

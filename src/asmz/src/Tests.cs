@@ -509,7 +509,7 @@ namespace Z0.Asm
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
-            using var wf = WfRuntime.create(ApiQuery.parts(root.controller(), args), args).WithSource(Rng.@default());
+            using var wf = WfRuntime.create(ApiParts.load(core.controller(), args), args).WithSource(Rng.@default());
             var process = ToolCmd.run(cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
@@ -837,7 +837,7 @@ namespace Z0.Asm
         {
             var part = PartId.Math;
             Wf.ApiCatalog.FindComponent(part, out var component);
-            var catalog = ApiQuery.partcat(component);
+            var catalog = ApiPartCatalog.create(component);
 
             void accept(in ApiCodeBlock block)
             {

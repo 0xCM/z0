@@ -15,6 +15,14 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHostMethods : IIndex<MethodInfo>
     {
+        [MethodImpl(Inline), Op]
+        public static ApiHostMethods load(IApiHost host, MethodInfo[] methods)
+            => new ApiHostMethods(host, methods);
+
+        [MethodImpl(Inline), Op]
+        public static ApiHostMethods load(IApiHost src)
+            => load(src, src.Methods);
+
         public IApiHost Host {get;}
 
         public MethodInfo[] Storage {get;}

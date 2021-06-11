@@ -24,9 +24,9 @@ namespace Z0
         public static PdbReader reader(IWfRuntime wf, FS.FilePath pe, FS.FilePath pdb)
         {
             if(!pe.Exists)
-                root.@throw(FS.Msg.DoesNotExist.Format(pe));
+                Throw.sourced(FS.Msg.DoesNotExist.Format(pe));
             if(!pdb.Exists)
-                root.@throw(FS.Msg.DoesNotExist.Format(pdb));
+                Throw.sourced(FS.Msg.DoesNotExist.Format(pdb));
             return reader(wf, source(pe, pdb));
         }
 

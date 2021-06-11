@@ -39,7 +39,7 @@ namespace Z0
             var segsize = size<S>();
             var cellsize = size<T>();
             if(cellsize > segsize)
-                root.@throw("segsize:cellsize ratio invariant fails");
+                Throw.sourced("segsize:cellsize ratio invariant fails");
             var entries = alloc<uint>(segcount);
             var segs = alloc<T>(segsize*cellsize);
             return new Heap<T>(segs, entries);

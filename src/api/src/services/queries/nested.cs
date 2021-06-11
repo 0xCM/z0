@@ -13,7 +13,7 @@ namespace Z0
         [Op]
         public static Index<ApiHostUri> nested(Type src)
         {
-            var dst = root.list<ApiHostUri>();
+            var dst = core.list<ApiHostUri>();
             var nested = @readonly(src.GetNestedTypes());
             var count = nested.Length;
             for(var i=0; i<count; i++)

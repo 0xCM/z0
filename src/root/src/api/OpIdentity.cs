@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         [MethodImpl(Inline)]
         public static OpIdentity define(string src)
-            => new OpIdentity(src);
+            => new OpIdentity(src ?? EmptyString);
 
         /// <summary>
         /// The operation identifier
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline)]
         OpIdentity(string data)
         {
-            IdentityText = Safe(data);
+            IdentityText = data;
             Name = EmptyString;
             Suffix = EmptyString;
             IsGeneric = false;
@@ -115,6 +115,7 @@ namespace Z0
         static string Safe(string src)
             => src.Replace(Chars.Lt, IDI.TypeArgsOpen).Replace(Chars.Gt, IDI.TypeArgsClose);
 
-        public static OpIdentity Empty => new OpIdentity(EmptyString);
+        public static OpIdentity Empty
+            => new OpIdentity(EmptyString);
     }
 }

@@ -51,13 +51,13 @@ namespace Z0
             var address = Trampolines[slot];
             ref var payload = ref Payloads[slot];
             var mov = AsmEncoderPrototype.mov(rcx, target).Content.Bytes;
-            var jmp = AsmEncoderPrototype.jmp(rcx).Content.Bytes;
+            //var jmp = AsmEncoderPrototype.jmp(rcx).Content.Bytes;
             var dst = payload.Bytes;
             var j=0;
             for(var i=0; i< mov.Length; i++)
                 seek(dst,j++) = skip(mov,i);
-            for(var i=0; i< jmp.Length; i++)
-                seek(dst,j++) = skip(jmp,i);
+            // for(var i=0; i< jmp.Length; i++)
+            //     seek(dst,j++) = skip(jmp,i);
             return ref payload;
         }
 

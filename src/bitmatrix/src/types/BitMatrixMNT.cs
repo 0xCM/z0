@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> Load(Span<T> src)
         {
-            root.require(src.Length == BitMatrix.cellcount<M,N,T>(), () => "");
+            root.invariant(src.Length == BitMatrix.cellcount<M,N,T>(), () => "");
             return new BitMatrix<M,N,T>(src);
         }
 

@@ -76,7 +76,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            root.require(src.Length >= (int)nat64u<N>(), () => $"The source length {src.Length} >= N := {nat64u<N>()}");
+            root.invariant(src.Length >= (int)nat64u<N>(), () => $"The source length {src.Length} >= N := {nat64u<N>()}");
             return new NatSpan<N,T>(src);
         }
 
@@ -86,7 +86,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var len = src.Length;
-            root.require(len >= nat32i<N>(), () => $"The source length {len} >= N := {nat64u<N>()}");
+            root.invariant(len >= nat32i<N>(), () => $"The source length {len} >= N := {nat64u<N>()}");
             return new NatSpan<N,T>(src);
         }
 

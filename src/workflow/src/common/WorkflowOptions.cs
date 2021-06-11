@@ -60,6 +60,8 @@ namespace Z0
 
         public Setting<bool> EmitAssemblyRefs;
 
+        public Setting<bool> DryRun;
+
         public static WorkflowOptions @default()
         {
             var dst = new WorkflowOptions();
@@ -90,6 +92,7 @@ namespace Z0
             dst.ProcessCultFiles = false;
             dst.EmitAssemblyRefs = true;
             dst.EmitApiClasses = true;
+            dst.DryRun = false;
             return dst;
         }
 

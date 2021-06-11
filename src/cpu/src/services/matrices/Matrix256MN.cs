@@ -46,7 +46,7 @@ namespace Z0
         public Matrix256(in SpanBlock256<T> src)
         {
             var count = src.CellCount;
-            root.require(Capacity >= src.CellCount, () => $"{nameof(Capacity)}:={Capacity} < {nameof(src.CellCount)}:={count}");
+            root.invariant(Capacity >= src.CellCount, () => $"{nameof(Capacity)}:={Capacity} < {nameof(src.CellCount)}:={count}");
             data = src;
         }
 

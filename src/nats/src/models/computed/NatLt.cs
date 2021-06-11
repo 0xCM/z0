@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatLt(K1 n1, K2 n2)
-            => root.require(n1.NatValue < n2.NatValue, () => Description);
+            => root.invariant(n1.NatValue < n2.NatValue, () => Description);
 
         public override string ToString()
             => Description;

@@ -12,7 +12,7 @@ namespace Z0
         public static FS.FilePath EnsureParentExists(this FS.FilePath src)
         {
             if(src.IsEmpty)
-                root.@throw("The source path is unspecified");
+                Throw.sourced("The source path is unspecified");
 
             var dir = Path.GetDirectoryName(src.Name.Format());
             if(!Directory.Exists(dir))

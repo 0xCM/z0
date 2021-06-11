@@ -46,10 +46,9 @@ namespace Z0
             {
                 ref readonly var path = ref skip(src,i);
                 var inner = Wf.Running(Msg.IndexingCodeBlocks.Format(path));
-                var result = hex.ReadRows(path);
-                if(result.Count != 0)
+                var blocks = hex.ReadRows(path);
+                if(blocks.Length != 0)
                 {
-                    var blocks = result.View;
                     Include(blocks);
                     Wf.Ran(inner, Msg.AbsorbedCodeBlocks.Format(blocks.Length, path));
                 }

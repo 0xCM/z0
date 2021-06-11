@@ -18,7 +18,7 @@ namespace Z0
         public static OpIdentity nongeneric(MethodInfo src)
         {
             if(src.IsGenericMethod || src.IsConstructedGenericMethod || src.IsGenericMethodDefinition)
-                root.@throw(AppErrors.GenericMethod(src));
+                Throw.e(AppErrors.GenericMethod(src));
 
             var id = EmptyString;
             id += name(src);

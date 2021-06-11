@@ -11,6 +11,10 @@ namespace Z0
 
     public readonly struct CodeBlockPair
     {
+        [MethodImpl(Inline), Op]
+        public static CodeBlockPair create(MemoryAddress @base, byte[] raw, byte[] parsed)
+            => new CodeBlockPair(@base, new CodeBlock(@base, raw), new CodeBlock(@base,parsed));
+
         public MemoryAddress Base {get;}
 
         public CodeBlock Raw {get;}
@@ -18,7 +22,7 @@ namespace Z0
         public CodeBlock Parsed {get;}
 
         [MethodImpl(Inline)]
-        internal CodeBlockPair(MemoryAddress @base, CodeBlock raw, CodeBlock parsed)
+        public CodeBlockPair(MemoryAddress @base, CodeBlock raw, CodeBlock parsed)
         {
             Base = @base;
             Raw = raw;

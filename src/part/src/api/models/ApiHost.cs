@@ -16,6 +16,55 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHost : IApiHost, IComparable<ApiHost>
     {
+        [Op]
+        public static Index<IApiHost> hosts(Assembly src)
+        {
+            var id = src.Id();
+            return types(src).Select(h => host(id, h));
+        }
+
+        /// <summary>
+        /// Describes an api host
+        /// </summary>
+        /// <param name="part">The defining part</param>
+        /// <param name="type">The reifying type</param>
+        [Op]
+        public static IApiHost host(Type type)
+            => host(type.Assembly.Id(), type);
+
+        /// <summary>
+        /// Describes an api host
+        /// </summary>
+        /// <param name="part">The defining part</param>
+        /// <param name="t">The reifying type</param>
+        [Op]
+        static IApiHost host(PartId part, Type type)
+        {
+            var uri = ApiHostUri.from(type);
+            var declared = type.DeclaredMethods();
+            return new ApiHost(type, uri.HostName, part, uri, declared, index(declared));
+        }
+
+        /// <summary>
+        /// Searches an assembly for types tagged with the <see cref="ApiHostAttribute"/>
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        [Op]
+        static Index<Type> types(Assembly src)
+            => src.GetTypes().Where(IsApiHost);
+
+        [Op]
+        static bool IsApiHost(Type src)
+            => src.Tagged<ApiHostAttribute>();
+
+        [Op]
+        static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)
+        {
+            var index = new Dictionary<string, MethodInfo>();
+            core.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).IdentityText, m));
+            return index;
+        }
+
         public PartId PartId {get;}
 
         public Type HostType {get;}

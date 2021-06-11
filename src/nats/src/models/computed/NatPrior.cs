@@ -29,7 +29,7 @@ namespace Z0
         public NatPrior(K1 n1, K2 n2)
         {
             valid = true;
-            root.require(n1.NatValue - 1 == n2.NatValue, () => Description);
+            root.invariant(n1.NatValue - 1 == n2.NatValue, () => Description);
         }
 
         public bool valid {get;}

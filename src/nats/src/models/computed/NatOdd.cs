@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatOdd(K k)
-            => root.require(NatCalc.odd(k), () => Description);
+            => root.invariant(NatCalc.odd(k), () => Description);
 
         public ulong NatValue
             => k.NatValue;

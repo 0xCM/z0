@@ -29,7 +29,7 @@ namespace Z0
         {
             OpUri = uri;
             ApiClass = method.KindId();
-            Method = root.require(method != null, method, () => "Unfortunately, the method is null");
+            Method = Require.notnull(method);
             Msil = ClrDynamic.msil(address, uri, method);
             Metadata = method.Artifact();
         }

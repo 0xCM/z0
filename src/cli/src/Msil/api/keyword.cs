@@ -9,6 +9,8 @@ namespace Z0
     using static Part;
     using static System.Reflection.Metadata.ILOpCode;
 
+    using K = System.Reflection.Metadata.ILOpCode;
+
     partial struct MsilApi
     {
         [Op]
@@ -135,7 +137,7 @@ namespace Z0
                 case Isinst: return "isinst";
                 case Conv_r_un: return "conv.r.un";
                 case Unbox: return "unbox";
-                case Throw: return "throw";
+                case K.Throw: return "throw";
                 case Ldfld: return "ldfld";
                 case Ldflda: return "ldflda";
                 case Stfld: return "stfld";

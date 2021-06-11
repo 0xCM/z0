@@ -193,7 +193,7 @@ namespace Z0
 
         CasePaths GetCasePaths()
         {
-            root.require(Db != null, () => $"Db for {GetType().Name} is null");
+            root.invariant(Db != null, () => $"Db for {GetType().Name} is null");
             return new CasePaths(Db.TestLogRoot(), TestApp, GetType());
         }
 

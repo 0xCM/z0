@@ -5,13 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static Root;
-    using static CodeSymbolModels;
-    using static core;
 
     sealed class ToolShell : AppService<ToolShell>
     {
@@ -34,7 +27,7 @@ namespace Z0
             => new App(wf);
 
         static IWfRuntime shell(string[] args)
-            => WfRuntime.create(ApiQuery.parts(root.controller(), args), args).WithSource(Rng.@default());
+            => WfRuntime.create(ApiParts.load(core.controller(), args), args).WithSource(Rng.@default());
 
         IWfRuntime Wf;
 

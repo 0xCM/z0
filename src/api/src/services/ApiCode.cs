@@ -81,7 +81,7 @@ namespace Z0
             {
                 ref readonly var file = ref skip(files,i);
                 var inner = wf.Running(file, "apihex");
-                var rows = hex.ReadRows(file).View;
+                var rows = hex.ReadRows(file);
                 var blocks = rows.Length;
                 if(blocks == 0)
                     wf.Warn($"No content found in {file.ToUri()}");
@@ -104,7 +104,7 @@ namespace Z0
         public static ref ApiCodeDescriptor store(in ApiHexRow src, ref ApiCodeDescriptor dst)
         {
             dst.Part = src.Uri.Part;
-            dst.Host = src.Uri.Host.Name;
+            dst.Host = src.Uri.Host.HostName;
             dst.Base = src.Address;
             dst.Size = src.Data.Length;
             dst.Uri = src.Uri;

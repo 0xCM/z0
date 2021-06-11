@@ -17,11 +17,11 @@ namespace Z0
 
         [Op]
         public static FileName file(ApiHostUri host, FileExt ext)
-            => file(string.Format("{0}.{1}", host.Part.Format(), host.Name), ext);
+            => file(string.Format("{0}.{1}", host.Part.Format(), host.HostName), ext);
 
         [Op]
         public static FS.FileName file(ApiHostUri host, string subject, FS.FileExt ext)
-            => FS.file(string.Format("{0}.{1}.{2}", host.Part.Format(), host.Name, subject), ext);
+            => FS.file(string.Format("{0}.{1}.{2}", host.Part.Format(), host.HostName, subject), ext);
 
         [Op]
         public static FileName file(PartId part, FileExt x1, FileExt x2)

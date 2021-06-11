@@ -11,9 +11,19 @@ namespace Z0
 
     public readonly struct ApiHostUri : IApiUri<ApiHostUri>, INullary<ApiHostUri>
     {
+        public static string hostname(Type t)
+        {
+            var tag = t.Tag<ApiHostAttribute>();
+            var name = tag.Exists && !string.IsNullOrWhiteSpace(tag.Value.HostName) ? tag.Value.HostName :  t.Name;
+            return name.ToLowerInvariant();
+        }
+
+        public static ApiHostUri from(Type t)
+            => new ApiHostUri(t.Assembly.Id(), hostname(t));
+
         public PartId Part {get;}
 
-        public string Name {get;}
+        public string HostName {get;}
 
         public string UriText {get;}
 
@@ -21,32 +31,31 @@ namespace Z0
         public ApiHostUri(PartId owner, string name)
         {
             Part = owner;
-            //Name = core.require(name != null, name, () => "Null names are bad");
-            Name = name ?? "__empty__";
-            UriText = owner != 0 ? string.Format("{0}{1}{2}", Part.Format(), ApiUriDelimiters.UriPathSep, Name) : Name;
+            HostName = name ?? "__empty__";
+            UriText = owner != 0 ? string.Format("{0}{1}{2}", Part.Format(), ApiUriDelimiters.UriPathSep, HostName) : HostName;
         }
 
         public Name Id
-            => IsEmpty ? "__empty__" : string.Format("{0}.{1}", Part.Format(), Name);
+            => IsEmpty ? "__empty__" : string.Format("{0}.{1}", Part.Format(), HostName);
 
         [MethodImpl(Inline)]
         ApiHostUri(string name)
         {
             Part = PartId.None;
-            Name = EmptyString;
+            HostName = EmptyString;
             UriText = EmptyString;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => minicore.empty(Name);
+            get => minicore.empty(HostName);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => minicore.nonempty(Name);
+            get => minicore.nonempty(HostName);
         }
 
         ApiHostUri INullary<ApiHostUri>.Zero

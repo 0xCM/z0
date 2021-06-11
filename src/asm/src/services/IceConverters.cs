@@ -56,7 +56,7 @@ namespace Z0.Asm
         public static IceInstruction extract(Iced.Instruction src, string formatted, BinaryCode decoded)
         {
             var info = src.GetInfo();
-            root.require(src.ByteLength == decoded.Length, () => $"The instruction byte length {src.ByteLength} does not match the encoded length {decoded.Length}");
+            root.invariant(src.ByteLength == decoded.Length, () => $"The instruction byte length {src.ByteLength} does not match the encoded length {decoded.Length}");
             return new IceInstruction
             {
                 Decoded = decoded,

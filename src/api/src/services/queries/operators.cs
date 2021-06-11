@@ -12,7 +12,7 @@ namespace Z0
         /// <param name="g">The generic partition</param>
         [Op]
         public static ApiHostMethods operators(IApiHost host, N1 arity, GenericState g = default)
-            => hosted(host,hosted(host).Storage.MemberOf(g).UnaryOperators());
+            => ApiHostMethods.load(host, ApiHostMethods.load(host).Storage.MemberOf(g).UnaryOperators());
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specified generic partition
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="g">The generic partition</param>
         [Op]
         public static ApiHostMethods operators(IApiHost host, N2 arity, GenericState g = default)
-            => hosted(host, hosted(host).Storage.MemberOf(g).BinaryOperators());
+            => ApiHostMethods.load(host, ApiHostMethods.load(host).Storage.MemberOf(g).BinaryOperators());
 
         /// <summary>
         /// Queries the host for binary operators belonging to a specified generic partition
@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="g">The generic partition</param>
         [Op]
         public ApiHostMethods operators(IApiHost host, N3 arity, GenericState g = default)
-            => hosted(host,hosted(host).Storage.MemberOf(g).TernaryOperators());
+            => ApiHostMethods.load(host, ApiHostMethods.load(host).Storage.MemberOf(g).TernaryOperators());
     }
 }

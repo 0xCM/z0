@@ -4,16 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static core;
     partial class WfRuntime
     {
+        public static IWfRuntime create(IApiParts parts)
+            => create(parts, array<string>());
+
         [Op]
         public static IWfRuntime create(IApiParts parts, string[] args, bool verbose = true)
         {
             var status = new WfInitStatus();
             status.Args = args;
-            status.StartTS = root.now();
+            status.StartTS = now();
 
-            var control = root.controller();
+            var control = controller();
             var controlId = control.Id();
             status.Controller = controlId;
 

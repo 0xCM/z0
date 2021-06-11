@@ -11,6 +11,7 @@ namespace Z0
 
     using static Root;
     using static Msg;
+    using static core;
 
     [ApiHost]
     public readonly struct Capture
@@ -18,9 +19,9 @@ namespace Z0
         [Op]
         public static Index<AsmHostRoutines> run(string[] args)
         {
-            var control = root.controller();
+            var control = controller();
             var dir = FS.path(control.Location).FolderPath;
-            var parts = ApiQuery.parts(control, args);
+            var parts = ApiParts.load(control, args);
             var identities = parts.RuntimeCatalog.PartIdentities;
             using var wf = WfRuntime.create(parts, args);
             var runner = wf.CaptureRunner();
@@ -31,6 +32,9 @@ namespace Z0
             wf.Ran(running, CapturedRoutines.Format(total,routines.Length));
             return routines;
         }
+
+        public static Index<AsmHostRoutines> run()
+            => run(array<string>());
 
         [Op]
         public static Index<AsmHostRoutines> run(IWfRuntime wf, Index<PartId> parts, CaptureWorkflowOptions options)

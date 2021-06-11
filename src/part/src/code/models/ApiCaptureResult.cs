@@ -10,6 +10,10 @@ namespace Z0
 
     public readonly struct ApiCaptureResult
     {
+        [MethodImpl(Inline), Op]
+        public static ApiCaptureResult create(OpIdentity id, ExtractTermCode term, MemoryRange range, CodeBlockPair pair)
+            => new ApiCaptureResult(term, range, pair);
+
         /// <summary>
         /// The capture termination code indicating why the capture process reached end-state
         /// </summary>
@@ -20,7 +24,7 @@ namespace Z0
         public MemoryRange CaptureRange {get;}
 
         [MethodImpl(Inline)]
-        internal ApiCaptureResult(ExtractTermCode term,  MemoryRange range, CodeBlockPair pair)
+        public ApiCaptureResult(ExtractTermCode term,  MemoryRange range, CodeBlockPair pair)
         {
             TermCode = term;
             Pair = pair;

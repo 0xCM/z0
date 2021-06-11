@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatEven(K k)
-            => root.require(NatCalc.even(k), () => Description);
+            => root.invariant(NatCalc.even(k), () => Description);
 
         public ulong NatValue
             => k.NatValue;

@@ -87,7 +87,7 @@ namespace Z0
         static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)
         {
             var index = new Dictionary<string, MethodInfo>();
-            root.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).IdentityText, m));
+            core.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).IdentityText, m));
             return index;
         }
     }

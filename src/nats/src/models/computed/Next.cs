@@ -78,7 +78,7 @@ namespace Z0
 
         public NatNext(K1 n1, K2 n2)
         {
-            root.require(n1.NatValue + 1 == n2.NatValue, () => Description);
+            root.invariant(n1.NatValue + 1 == n2.NatValue, () => Description);
             valid = true;
         }
 

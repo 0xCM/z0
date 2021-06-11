@@ -10,15 +10,23 @@ namespace Z0
 
     using static Root;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     /// <summary>
     /// Specifies application message origination details
     /// </summary>
+    [ApiHost]
     public readonly struct AppMsgSource : ITextual
     {
-        /// <summary>
-        /// Specifies the emitting executable part
-        /// </summary>
-        public PartId Part {get;}
+        [MethodImpl(Inline), Op]
+        public static AppMsgSource capture([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new AppMsgSource(caller, file, line);
+
+        [MethodImpl(Inline), Op]
+        public static AppMsgSource define(string caller, string file, int? line)
+            => new AppMsgSource(caller, file, line);
 
         /// <summary>
         /// The name of the member that originated the message
@@ -35,32 +43,23 @@ namespace Z0
         /// </summary>
         public uint Line {get;}
 
-
         [MethodImpl(Inline)]
-        public AppMsgSource(PartId part, string caller, string file, int? line)
+        public AppMsgSource(string caller, string file, int? line)
         {
-            Part = part;
             Caller = caller;
-            File =file ?? EmptyString;
+            File = file ?? EmptyString;
             Line = (uint)(line ?? 0);
         }
 
         public string Format()
-        {
-            if(Part != 0)
-                return string.Format(KnownPartPattern, Part.Format(), Path.GetFileName(File), Caller, Line, File);
-            else
-                return string.Format(UnknownPartPattern, Path.GetFileName(File), Caller, Line, File);
-        }
+            => string.Format(RenderPattern, Path.GetFileName(File), Caller, Line, File);
 
         public override string ToString()
             => Format();
 
         public static AppMsgSource Empty
-            => new AppMsgSource(0, EmptyString, EmptyString, 0);
+            => new AppMsgSource(EmptyString, EmptyString, 0);
 
-        const string KnownPartPattern = "{0}/{1}/{2}?line = {3} | {4}";
-
-        const string UnknownPartPattern = "{0}/{1}?line = {2} | {3}";
+        const string RenderPattern = "{0}/{1}?line = {2} | {3}";
     }
 }

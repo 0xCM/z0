@@ -186,7 +186,19 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out BinaryCode dst)
-            => CodeBlocks.parse(src, out dst);
+        {
+            var result = HexByteParser.ParseData(src, out var data);
+            if(result)
+            {
+                dst = data.Storage;
+                return result;
+            }
+            else
+            {
+                dst = BinaryCode.Empty;
+                return result;
+            }
+        }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out OpUri dst)

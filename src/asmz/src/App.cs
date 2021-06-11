@@ -305,7 +305,7 @@ namespace Z0.Asm
         static Address32 rel32dx(BinaryCode src)
         {
             var opcode = src.First;
-            root.require(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
+            root.invariant(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
             var bytes = slice(src.View, 1);
             return core.u32(bytes);
         }
@@ -989,9 +989,9 @@ namespace Z0.Asm
         }
 
 
-        public void CheckSplitter()
+        public void RunDocProcessor()
         {
-            var splitter = Wf.Splitter();
+            var splitter = Wf.DocSplitter();
             splitter.Run();
 
         }
@@ -1031,9 +1031,9 @@ namespace Z0.Asm
 
         public void Run()
         {
-            GenAsciSpan("HeaderData", IntelSdm.InstructionTableHeader.Lines);
+
             //GenAsciSpan(IntelDocs.)
-            //Wf.GlobalCommands().RunExtractWorkflow();
+            Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));
@@ -1082,7 +1082,7 @@ namespace Z0.Asm
         {
             try
             {
-                using var wf = WfRuntime.create(ApiQuery.parts(Index<PartId>.Empty), args).WithSource(Rng.@default());
+                using var wf = WfRuntime.create(ApiParts.load(Index<PartId>.Empty), args).WithSource(Rng.@default());
                 var app = App.create(wf);
                 app.Run();
 

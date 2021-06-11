@@ -45,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AppMsgSource source(string caller, string file, int? line)
-            => new AppMsgSource(PartId.None, caller, file, line);
+            => new AppMsgSource(caller, file, line);
 
         [MethodImpl(Inline), Op]
         public static AppMsg define(object content, LogLevel kind)
@@ -69,7 +69,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         AppMsg(object content, LogLevel kind, FlairKind color, string caller, string file, int? line)
-            => Data = new AppMsgData(content,"{0}", kind, color, source(caller, file, line));
+            => Data = new AppMsgData(content,"{0}", kind, color, AppMsgSource.define(caller, file, line));
 
         [MethodImpl(Inline)]
         AppMsg(AppMsgData data)

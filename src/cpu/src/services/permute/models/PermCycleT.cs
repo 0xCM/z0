@@ -20,7 +20,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len > 1)
-                root.require(gmath.eq(src[0].Source, src[len - 1].Target), () => "no");
+                root.invariant(gmath.eq(src[0].Source, src[len - 1].Target), () => "no");
 
             Terms = src;
         }

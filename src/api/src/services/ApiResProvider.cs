@@ -22,7 +22,7 @@ namespace Z0
             var path = ResPackPath();
             var flow = Wf.Running(Msg.LoadingRespackAccessors.Format(path));
             if(!path.Exists)
-                root.@throw(FS.Msg.DoesNotExist.Format(path));
+                Throw.sourced(FS.Msg.DoesNotExist.Format(path));
             var assembly = Assembly.LoadFrom(path.Name);
             var loaded = Resources.accessors(assembly);
             Wf.Ran(flow, Msg.LoadedRespackAccessors.Format(loaded.Count, path));

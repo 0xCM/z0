@@ -15,7 +15,7 @@ namespace Z0
         {
             try
             {
-                var parts = ApiQuery.parts(Index<PartId>.Empty);
+                var parts = ApiParts.load(Index<PartId>.Empty);
                 term.inform(AppMsg.status(text.prop("PartCount", parts.Components.Length)));
                 var rng = Rng.@default();
                 using var wf = WfRuntime.create(parts, args).WithSource(rng);

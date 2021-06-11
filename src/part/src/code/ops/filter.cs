@@ -14,7 +14,7 @@ namespace Z0
         public static ReadOnlySpan<ApiMemberCode> filter(ReadOnlySpan<ApiMemberCode> src, ApiClassKind kind)
         {
             var count = src.Length;
-            var dst = root.list<ApiMemberCode>();
+            var dst = list<ApiMemberCode>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var code = ref skip(src,i);

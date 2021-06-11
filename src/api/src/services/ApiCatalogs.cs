@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="wf">The workflow context</param>
         /// <param name="src">The host type</param>
         public ApiHostCatalog HostCatalog(Type src)
-            => HostCatalog(ApiQuery.apihost(src));
+            => HostCatalog(ApiHost.host(src));
 
         /// <summary>
         /// Returns a <see cref='ApiHostCatalog'/> for a specified host
@@ -124,7 +124,7 @@ namespace Z0
                 record.MemberOffset = member.BaseAddress - @base;
                 record.MemberRebase = (uint)(member.BaseAddress - rebase);
                 record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
-                record.HostName = member.Host.Name;
+                record.HostName = member.Host.HostName;
                 record.PartName = member.Host.Part.Format();
                 record.OpUri = member.OpUri;
             }
@@ -160,7 +160,7 @@ namespace Z0
                     if(hexpath.Exists)
                     {
                         var blocks = hex.ReadBlocks(hexpath);
-                        root.require(Wf.ApiCatalog.FindHost(srcHost.HostUri, out var host));
+                        Require.invariant(Wf.ApiCatalog.FindHost(srcHost.HostUri, out var host));
                         var catalog = HostCatalog(host);
                         Correlate(catalog, blocks, dst, records);
                     }

@@ -106,7 +106,7 @@ namespace Z0
 
     partial class XTend
     {
-        public static DocSplitter Splitter(this IServiceContext context)
-            => DocSplitter.create(context);
+        public static DocSplitter DocSplitter(this IServiceContext context)
+            => Z0.DocSplitter.create(context);
     }
 }

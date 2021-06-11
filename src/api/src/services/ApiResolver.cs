@@ -236,7 +236,7 @@ namespace Z0
             counter = 0u;
 
             var location = FS.path(src.Owner.Location);
-            var catalog = ApiQuery.partcat(src);
+            var catalog = ApiPartCatalog.create(src);
             var flow = Wf.Running(string.Format("Resolving part {0}", src.Id));
             var hosts = root.list<ResolvedHost>();
 

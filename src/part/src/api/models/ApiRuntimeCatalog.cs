@@ -14,6 +14,20 @@ namespace Z0
 
     public class ApiRuntimeCatalog : IApiCatalog
     {
+        [Op]
+        public static IApiCatalog create(params IPart[] parts)
+        {
+            var catalogs = parts.Select(x => ApiPartCatalog.create(x)).Where(c => c.IsIdentified);
+            var dst = new ApiRuntimeCatalog(parts,
+                parts.Select(p => p.Owner),
+                catalogs,
+                catalogs.SelectMany(c => c.ApiHosts.Storage),
+                parts.Select(p => p.Id),
+                catalogs.SelectMany(x => x.Methods)
+                );
+            return dst;
+        }
+
         /// <summary>
         /// The parts included in the datset
         /// </summary>
@@ -59,7 +73,7 @@ namespace Z0
 
         public Index<IApiHost> FindHosts(ReadOnlySpan<ApiHostUri> src)
         {
-            var dst = root.list<IApiHost>();
+            var dst = list<IApiHost>();
             var search = _ApiHosts.View;
             var kSrc = src.Length;
             var kSearch = search.Length;
@@ -67,7 +81,7 @@ namespace Z0
             {
                 var match = skip(src,i);
                 if(match.IsEmpty)
-                    root.@throw("I can't deal with empty uri's");
+                    Throw.sourced("I can't deal with empty uri's");
 
                 for(var j=0; j<kSearch; j++)
                 {

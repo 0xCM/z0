@@ -36,17 +36,22 @@ namespace Z0
         public ApiCodeBlocks ReadBlocks(FS.FolderPath root)
             => ReadBlocks(Db.ParsedExtractPaths(root));
 
-        [MethodImpl(Inline), Op]
-        public static ApiCodeBlock block(ApiHexRow src)
-            => new ApiCodeBlock(src.Address, src.Uri, src.Data);
+        [Op]
+        ApiCodeBlock LoadBlock(ApiHexRow src)
+        {
+            if(src.Uri.IsEmpty)
+                Wf.Warn(string.Format("The operation uri for method based at {0} is empty", src.Address));
 
-        public Index<ApiHostBlocks> ReadHostBlocks(ReadOnlySpan<ApiHostUri> src)
+            return new ApiCodeBlock(src.Address, src.Uri, src.Data);
+        }
+
+        public ReadOnlySpan<ApiHostBlocks> ReadHostBlocks(ReadOnlySpan<ApiHostUri> src)
         {
             var count = src.Length;
-            var dst = root.list<ApiHostBlocks>();
+            var dst = list<ApiHostBlocks>();
             for(var i=0; i<count; i++)
                 dst.Add(ReadBlocks(skip(src,i)));
-            return dst.ToArray();
+            return dst.ViewDeposited();
         }
 
         public Index<ApiHostBlocks> ReadHostBlocks(FS.FolderPath root, ReadOnlySpan<ApiHostUri> src)
@@ -58,28 +63,12 @@ namespace Z0
             return dst.ToArray();
         }
 
-        static Outcome InferHost(FS.FileName src, out ApiHostUri host)
-        {
-            var components = @readonly(src.Name.Text.Remove(".p.csv").SplitClean(Chars.Dot));
-            var count = components.Length;
-            if(count >= 2)
-            {
-                if(ApiPartIdParser.parse(first(components), out var part))
-                {
-                    host =  new ApiHostUri(part, slice(components,1).Join(Chars.Dot));
-                    return true;
-                }
-            }
-            host = ApiHostUri.Empty;
-            return false;
-        }
-
         public ReadOnlySpan<ApiHostBlocks> ReadHostBlocks()
             => ReadHostBlocks(HexRoot());
 
         public ReadOnlySpan<ApiHostBlocks> ReadHostBlocks(FS.FolderPath root)
         {
-            var flow = Wf.Running("Loading collected host blocks");
+            var flow = Wf.Running(string.Format("Loading host blocks from {0}", root));
             var files = Files(root).View;
             var count = files.Length;
             var dst = core.list<ApiHostBlocks>();
@@ -114,15 +103,17 @@ namespace Z0
         [Op]
         public Index<ApiCodeBlock> ReadBlocks(FS.FilePath src)
         {
+            var flow = Wf.Flow(string.Format("Reading blocks from {0}", src.ToUri()));
             var loaded = ReadRows(src);
             var rowcount = loaded.Length;
-            var blocks = root.list<ApiCodeBlock>(128);
+            var blocks = list<ApiCodeBlock>(256);
             if(rowcount != 0)
             {
-                var rows = loaded.View;
+                var rows = loaded;
                 for(var j=0; j<rowcount; j++)
-                    blocks.Add(block(skip(rows, j)));
+                    blocks.Add(LoadBlock(skip(rows, j)));
             }
+            Wf.Ran(flow, string.Format("Read {0} blocks from {1}", blocks.Count, src));
             return blocks.ToArray();
         }
 
@@ -132,7 +123,7 @@ namespace Z0
             var rows = new DataList<ApiHexRow>(1600);
             var count = ReadRows(src, rows);
             for(var i=0; i<count; i++)
-                dst.Add(block(rows[i]));
+                dst.Add(LoadBlock(rows[i]));
             return count;
         }
 
@@ -145,7 +136,7 @@ namespace Z0
 
             var flow = Wf.Running(Msg.LoadingHexFileBlocks.Format(count));
             var view = src.View;
-            var blocks = root.list<ApiCodeBlock>(32000);
+            var blocks = list<ApiCodeBlock>(32000);
             var counter = 0;
             for(var i=0; i<count; i++)
             {
@@ -154,9 +145,9 @@ namespace Z0
                 var rowcount = loaded.Length;
                 if(rowcount != 0)
                 {
-                    var rows = loaded.View;
+                    var rows = loaded;
                     for(var j=0; j<rowcount; j++)
-                        blocks.Add(block(skip(rows, j)));
+                        blocks.Add(LoadBlock(skip(rows, j)));
                 }
 
                 counter += rowcount;
@@ -202,20 +193,23 @@ namespace Z0
         }
 
         [Op]
-        public Index<ApiHexRow> ReadRows(FS.FilePath src)
+        public ReadOnlySpan<ApiHexRow> ReadRows(FS.FilePath src)
         {
             var data = @readonly(src.ReadLines().Storage.Skip(1));
             var count = data.Length;
-            var buffer = root.list<ApiHexRow>(count);
+            var dst = list<ApiHexRow>(count);
+            var flow = Wf.Running(string.Format("Reading hex rows from {0}", src.ToUri()));
             for(var i=0; i<count; i++)
             {
                 var input = skip(data,i);
-                if(ParseRow(input, out var dst))
-                    buffer.Add(dst);
+                if(ParseRow(input, out var row))
+                    dst.Add(row);
                 else
                     Wf.Error(string.Format("Unable to parse {0}", input));
             }
-            return buffer.ToArray();
+            var result = dst.ViewDeposited();
+            Wf.Ran(flow,string.Format("Read {0} hex rows from {1}", result.Length, src.ToUri()));
+            return result;
         }
 
         [Op]
@@ -300,7 +294,7 @@ namespace Z0
                 record.Seqence = i;
                 record.Address = block.BaseAddress;
                 record.Component = block.OpUri.Part.Format();
-                record.HostName = block.OpUri.Host.Name;
+                record.HostName = block.OpUri.Host.HostName;
                 record.MethodName = block.OpId.Name;
                 record.Uri = block.OpUri;
                 emitter.Emit(record);
@@ -350,5 +344,21 @@ namespace Z0
         [Op]
         static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
             => src.Length != 0 ? Tables.emit(src, dst) : 0;
+
+        static Outcome InferHost(FS.FileName src, out ApiHostUri host)
+        {
+            var components = @readonly(src.Name.Text.Remove(".p.csv").SplitClean(Chars.Dot));
+            var count = components.Length;
+            if(count >= 2)
+            {
+                if(ApiPartIdParser.parse(first(components), out var part))
+                {
+                    host =  new ApiHostUri(part, slice(components,1).Join(Chars.Dot));
+                    return true;
+                }
+            }
+            host = ApiHostUri.Empty;
+            return false;
+        }
     }
 }

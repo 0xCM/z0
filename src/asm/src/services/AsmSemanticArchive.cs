@@ -35,7 +35,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         static FS.FileName LegalFileNameRule(ApiHostUri host, FS.FileExt ext)
-            => FS.file(string.Concat(host.Part.Format(), Chars.Dot, host.Name), ext);
+            => FS.file(string.Concat(host.Part.Format(), Chars.Dot, host.HostName), ext);
 
         [MethodImpl(Inline), Op]
         static FS.FileName SemanticFileNameRule(ApiHostUri host, FS.FileExt ext)

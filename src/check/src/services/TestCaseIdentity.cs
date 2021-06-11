@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string from(OpUri uri)
-            => $"{uri.Part.Format()}{UriPathSep}{uri.Host.Name}{UriPathSep}{uri.OpId}";
+            => $"{uri.Part.Format()}{UriPathSep}{uri.Host.HostName}{UriPathSep}{uri.OpId}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string from(ApiHostUri host, OpIdentity id)
-            => $"{host.Part.Format()}{UriPathSep}{host.Name}{UriPathSep}{id}";
+            => $"{host.Part.Format()}{UriPathSep}{host.HostName}{UriPathSep}{id}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name

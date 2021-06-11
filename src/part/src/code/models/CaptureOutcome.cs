@@ -14,6 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct CaptureOutcome
     {
+        [Op, MethodImpl(Inline)]
+        public static CaptureOutcome create(ExtractTermCode tc, long start, long end, int delta)
+            => new CaptureOutcome(((ulong)start, (ulong)(end + delta)), tc);
+
         /// <summary>
         /// The origin of the captured data
         /// </summary>

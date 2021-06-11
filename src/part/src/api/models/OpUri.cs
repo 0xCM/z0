@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public class OpUri : IApiUri<OpUri>
     {
@@ -26,11 +26,17 @@ namespace Z0
         /// </summary>
         public OpIdentity OpId {get;}
 
+        OpUri()
+        {
+            UriText = EmptyString;
+            Host = ApiHostUri.Empty;
+            OpId = OpIdentity.Empty;
+        }
         internal OpUri(in ApiHostUri host, in OpIdentity opid, string uritext)
         {
             Host = host;
             OpId = opid;
-            UriText = uritext;
+            UriText = Require.notnull(uritext);
         }
 
         /// <summary>
@@ -55,13 +61,11 @@ namespace Z0
         public string Format()
             => UriText;
 
-        [MethodImpl(Inline)]
         public int CompareTo(OpUri src)
-            => text.denullify(UriText).CompareTo(src.UriText);
+            => (UriText).CompareTo(src.UriText);
 
-        [MethodImpl(Inline)]
         public bool Equals(OpUri src)
-            => text.denullify(UriText).Equals(src.UriText, NoCase);
+            => (UriText).Equals(src.UriText, NoCase);
 
         public override int GetHashCode()
             => UriText?.GetHashCode() ?? 0;
@@ -84,6 +88,6 @@ namespace Z0
         /// Emptiness of nothing
         /// </summary>
         public static OpUri Empty
-            => new OpUri(ApiHostUri.Empty, OpIdentity.Empty, EmptyString);
+            => new OpUri();
     }
 }

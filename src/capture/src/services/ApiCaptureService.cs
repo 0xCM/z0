@@ -69,14 +69,14 @@ namespace Z0
             return routines;
         }
 
-        public Index<AsmHostRoutines> CaptureMembers(ApiMembers src, FS.FolderPath dst)
+        public ReadOnlySpan<AsmHostRoutines> CaptureMembers(ApiMembers src, FS.FolderPath dst)
         {
             var hosted = src.HostGroups().View;
             var count = hosted.Length;
-            var collected = root.list<AsmHostRoutines>();
+            var collected = list<AsmHostRoutines>();
             for(var i=0; i<count; i++)
                 CaptureMembers(skip(hosted,i), dst, collected);
-            return collected.ToArray();
+            return collected.ViewDeposited();
         }
 
         public void CaptureMembers(ApiHostMembers src, FS.FolderPath path, List<AsmHostRoutines> dst)
@@ -95,7 +95,7 @@ namespace Z0
             Wf.Ran(flow, src.Host);
         }
 
-        public Index<AsmHostRoutines> CaptureCatalog(IApiCatalog catalog)
+        public ReadOnlySpan<AsmHostRoutines> CaptureCatalog(IApiCatalog catalog)
         {
             var dst = list<AsmHostRoutines>();
             using var flow = Wf.Running();
@@ -104,7 +104,7 @@ namespace Z0
             for(var i=0; i<count; i++)
                 dst.AddRange(CaptureCatalog(skip(catalogs,i)));
             Wf.Ran(flow, count);
-            return dst.ToArray();
+            return dst.ViewDeposited();
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0
         {
             src = require(src);
             var routines = AsmHostRoutines.Empty;
-            var flow = Wf.Running(src.HostName);
+            var flow = Wf.Running(string.Format("Capturing {0} routines", src.HostName));
             try
             {
                 routines = Emitter.Emit(src.HostUri, ExtractHostOps(src));
@@ -179,7 +179,7 @@ namespace Z0
             {
                 Wf.Error(e);
             }
-            Wf.Ran(flow, src.HostName);
+            Wf.Ran(flow, string.Format("Captured {0} {1} routines",routines.Count, src.HostName));
             return routines;
         }
 
@@ -187,7 +187,7 @@ namespace Z0
         {
             src = require(src);
             var routines = AsmHostRoutines.Empty;
-            var flow = Wf.Running(src.HostName);
+            var flow = Wf.Running(string.Format("Capturing {0} routines", src.HostName));
             try
             {
                 routines = Emitter.Emit(src.HostUri, ExtractHostOps(src), dst);
@@ -196,7 +196,7 @@ namespace Z0
             {
                 Wf.Error(e);
             }
-            Wf.Ran(flow, src.HostName);
+            Wf.Ran(flow, string.Format("Captured {0} {1} routines",routines.Count, src.HostName));
             return routines;
         }
 

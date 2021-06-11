@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static FS.FolderName folder(ApiHostUri host)
-            => FS.folder(host.Name);
+            => FS.folder(host.HostName);
 
         [MethodImpl(Inline), Op]
         public static FS.FolderName folder(PartId part)

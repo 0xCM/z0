@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static memory;
+    using static core;
 
     [ApiHost]
     public readonly struct ApiDeployment
@@ -50,7 +50,7 @@ namespace Z0
 
         public static IPart[] parts(PartContext context)
             => from component in context.Assemblies.Array().Where(x => x.Id() != 0)
-                let part = ApiQuery.part(component)
+                let part = ApiParts.load(component)
                 where part.IsSome()
                 select part.Value;
 
@@ -58,7 +58,7 @@ namespace Z0
         {
             var query = from p in identities
                         let @base = "z0." + p.Format()
-                        from f in root.array(FS.file(@base, FS.Dll), FS.file(@base,FS.Exe))
+                        from f in core.array(FS.file(@base, FS.Dll), FS.file(@base,FS.Exe))
                         let path = dir + f
                         where path.Exists
                         let part = part(path)
@@ -69,11 +69,11 @@ namespace Z0
 
         [Op]
         public static IApiCatalog catalog(PartContext context)
-            => ApiQuery.catalog(parts(context));
+            => ApiRuntimeCatalog.create(parts(context));
 
         [Op]
         public static IApiCatalog catalog(Index<IPart> parts)
-            => ApiQuery.catalog(parts);
+            => ApiRuntimeCatalog.create(parts);
 
         [Op]
         public static IApiCatalog rooted(FS.FolderPath location)
@@ -83,20 +83,20 @@ namespace Z0
             var parts = root.list<IPart>();
             for(var i=0; i<count; i++)
             {
-                if(ApiQuery.part(skip(candidates,i), out var part))
+                if(ApiParts.load(skip(candidates,i), out var part))
                     parts.Add(part);
             }
 
-            return ApiQuery.catalog(parts.Array());
+            return ApiRuntimeCatalog.create(parts.Array());
         }
 
         [Op]
         public static IApiCatalog catalog(FS.FolderPath location, params PartId[] identities)
-            => ApiQuery.catalog(parts(location, identities));
+            => ApiRuntimeCatalog.create(parts(location, identities));
 
         [Op]
         public static IApiCatalog catalog(FS.Files paths)
-            => ApiQuery.catalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
+            => ApiRuntimeCatalog.create(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         public static Index<Assembly> assemblies(FS.FolderPath dir, PartId[] parts)
         {

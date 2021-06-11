@@ -114,7 +114,7 @@ namespace Z0
         {
             var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
             var buffer = root.list<ApiMember>();
-            var catalog = ApiQuery.partcat(src);
+            var catalog = ApiPartCatalog.create(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 

@@ -146,20 +146,10 @@ namespace Z0.Asm
             Wf.Ran(flow, Msg.DecodedMachine.Format(src.Length, parts.Length));
         }
 
-        public Index<ApiPartRoutines> Decode(Index<ApiCodeBlock> src)
-        {
-            var hosts = src.ToHostBlocks();
-            var parts = hosts.ToPartBlocks().View;
-            var partCount = parts.Length;
-            var dst = alloc<ApiPartRoutines>(partCount);
-            Decode(parts, dst);
-            return dst;
-        }
-
         public ReadOnlySpan<ApiPartRoutines> Decode(ReadOnlySpan<ApiCodeBlock> src)
         {
-            var hosts = src.ToHostBlocks();
-            var parts = hosts.ToPartBlocks();
+            var hosts = CodeBlocks.hosted(src);
+            var parts = CodeBlocks.parts(hosts);
             var count = parts.Length;
             var dst = alloc<ApiPartRoutines>(count);
             Decode(parts, dst);

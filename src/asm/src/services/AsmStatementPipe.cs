@@ -54,7 +54,7 @@ namespace Z0.Asm
 
         public ReadOnlySpan<AsmApiStatement> EmitHostStatements(FS.FolderPath root)
         {
-            var blocks = ApiHex.ReadBlocks().ToHostBlocks();
+            var blocks = CodeBlocks.hosted(ApiHex.ReadBlocks().View);
             return EmitHostStatements(blocks, root);
         }
 

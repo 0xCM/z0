@@ -5,12 +5,36 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     public class ApiCaptureSet
     {
+        [MethodImpl(Inline), Op]
+        public static ApiCaptureSet create(OpUri id, MsilSourceBlock msil,  CodeBlock hex, AsmSourceBlock asm, MethodDisplaySig sig)
+            => new ApiCaptureSet(id, msil, hex, asm,sig);
+
+        [MethodImpl(Inline), Op]
+        public static ApiCaptureSet create(in ApiCaptureBlock src, in AsmSourceBlock asm)
+            => new ApiCaptureSet(src.OpUri, msil(src.Msil), src.CodeBlock, asm, src.Method.DisplaySig());
+
+        [Op]
+        public static ApiCaptureSet create(OpIdentity id, MethodInfo method, CodeBlock hex, AsmSourceBlock asm)
+        {
+            var uri = ApiUri.hex(method.DeclaringType.HostUri(), method.Name, id);
+            return new ApiCaptureSet(uri, msil(ClrDynamic.msil(hex.BaseAddress, uri, method)), hex, asm, method.DisplaySig());
+        }
+
+        [MethodImpl(Inline), Op]
+        public static MsilSourceBlock msil(CliToken id, CliSig sig, BinaryCode encoded, MethodImplAttributes attributes = default)
+            => new MsilSourceBlock(id, sig, encoded);
+
+        [MethodImpl(Inline), Op]
+        public static MsilSourceBlock msil(in ApiMsil src, MethodImplAttributes attributes = default)
+            => msil(src.Token, src.CliSig, src.Code, attributes);
+
         public OpUri Id {get;}
 
         public MsilSourceBlock Msil {get;}

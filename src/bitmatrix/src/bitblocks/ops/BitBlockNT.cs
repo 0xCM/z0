@@ -25,7 +25,7 @@ namespace Z0
         internal BitBlock(Span<T> src)
         {
             var allocated = CellWidth * (uint)src.Length;
-            root.require(allocated >= BitCount, () => Format(allocated, BitCount));
+            root.invariant(allocated >= BitCount, () => Format(allocated, BitCount));
             data = src;
         }
 

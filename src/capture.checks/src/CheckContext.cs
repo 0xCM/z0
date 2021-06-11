@@ -27,7 +27,7 @@ namespace Z0
             Random = random;
             Settings = settings;
             MessageQueue = queue;
-            ApiParts = ApiQuery.parts();
+            ApiParts = Z0.ApiParts.load();
         }
     }
 }

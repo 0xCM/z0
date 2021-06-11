@@ -17,7 +17,7 @@ namespace Z0
         bool FindMethod(OpUri uri, out MethodInfo method);
 
         Identifier HostName
-            => HostUri.Name;
+            => HostUri.HostName;
 
         ApiHostUri HostUri
             => HostType.HostUri();

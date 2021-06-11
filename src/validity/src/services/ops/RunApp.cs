@@ -11,20 +11,20 @@ namespace Z0
         public static void Run(params string[] args)
         {
             var app = new A();
-            app.InjectShell(WfRuntime.create(ApiQuery.parts(root.controller(), args), args));
+            app.InjectShell(WfRuntime.create(ApiParts.load(core.controller(), args), args));
             app.SetMode(InDiagnosticMode);
             app.RunTests();
         }
 
         public static void Run(PartId part, params string[] units)
         {
-            Run(root.array(part), units);
+            Run(core.array(part), units);
         }
 
         public static void Run(Index<PartId> parts, params string[] units)
         {
             var app = new A();
-            var shell = WfRuntime.create(ApiQuery.parts(parts), sys.empty<string>());
+            var shell = WfRuntime.create(ApiParts.load(parts), sys.empty<string>());
             app.InjectShell(shell);
             app.SetMode(InDiagnosticMode);
             app.RunTests(units);
@@ -32,7 +32,7 @@ namespace Z0
 
         public static void Run(Index<PartId> parts, Action<IWfRuntime> runner)
         {
-            using var shell = WfRuntime.create(ApiQuery.parts(parts), sys.empty<string>());
+            using var shell = WfRuntime.create(ApiParts.load(parts), sys.empty<string>());
             runner(shell);
         }
     }

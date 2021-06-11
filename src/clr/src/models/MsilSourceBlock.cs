@@ -12,6 +12,8 @@ namespace Z0
 
     public readonly struct MsilSourceBlock : ISourceCode<MsilSourceBlock,byte>
     {
+
+
         /// <summary>
         /// The source method token
         /// </summary>

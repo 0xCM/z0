@@ -28,7 +28,7 @@ namespace Z0
                 var processor = Processor(line);
                 var result = processor.Process(line, out var _processed);
                 if(!result)
-                    root.@throw(result.Message);
+                    Throw.sourced(result.Message);
                 Processed(line, _processed, ref dst);
             }
             return default;

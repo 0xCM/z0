@@ -126,7 +126,7 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         FS.FileName TableFile<T>(ApiHostUri host, FS.FileExt? ext = null)
             where T : struct, IRecord<T>
-                => FS.file(string.Format("{0}.{1}.{2}", TableId<T>(), host.Part.Format(), host.Name), ext ?? DefaultTableExt);
+                => FS.file(string.Format("{0}.{1}.{2}", TableId<T>(), host.Part.Format(), host.HostName), ext ?? DefaultTableExt);
 
         /// <summary>
         /// Creates a <see cref='FS.FileName'/> of the form {TableId}.{part}.{ext}

@@ -113,7 +113,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            root.require<N>(variables.Length);
+            Require.equal<N>(variables.Length);
             return new VariedExpr<N,T>(baseExpr, variables);
         }
 

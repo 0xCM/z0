@@ -7,10 +7,16 @@
     <!-- <BaseAddress>0x11110000</BaseAddress> -->
   </PropertyGroup>
 
+  <!-- <ItemGroup>
+    <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Tools)" />
+    <ProjectReference Include="$(Term)" />
+  </ItemGroup> -->
+
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Term)" />
+    <ProjectReference Include="$(Service)" />
   </ItemGroup>
-
 </Project>

@@ -60,7 +60,7 @@ namespace Z0
         {
             Dim = dim;
             Count = Math.DivRem(src.Length, dim, out int remainder);
-            root.require(remainder == 0, () => "The invariant k := (remainder == 0) failed");
+            root.invariant(remainder == 0, () => "The invariant k := (remainder == 0) failed");
             Data = src;
         }
 
@@ -69,7 +69,7 @@ namespace Z0
         {
             Dim = dim;
             Count = Math.DivRem(src.Length, dim, out int remainder);
-            root.require(remainder == 0, () => "The invariant k := (remainder == 0) failed");
+            root.invariant(remainder == 0, () => "The invariant k := (remainder == 0) failed");
             Data = src;
         }
 

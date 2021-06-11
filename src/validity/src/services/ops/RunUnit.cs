@@ -48,7 +48,7 @@ namespace Z0
 
         public void RunUnit(Type host)
         {
-            root.require(Wf != null, () => "Wf must not be null");
+            root.invariant(Wf != null, () => "Wf must not be null");
             using var unit = host.Instantiate<IUnitTest>();
             if(unit.Enabled)
             {

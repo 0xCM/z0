@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BinaryEvalContext(in EvalContext context, in BinaryEvaluations<T> dst)
         {
-            root.require(dst.Source.PointCount == dst.Target.PointCount, () => "no");
+            root.invariant(dst.Source.PointCount == dst.Target.PointCount, () => "no");
             Context = context;
             Target = dst;
         }

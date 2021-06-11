@@ -8,7 +8,7 @@ namespace Z0
 
     readonly struct WorkflowCommandDispatcher
     {
-        public static void dispatch(string[] args)
+        public static void dispatch(object[] args)
         {
 
         }
