@@ -164,7 +164,7 @@ namespace Z0.Asm
         }
 
         static void copy(ReadOnlySpan<char> src,ref uint i, Span<char> dst)
-            => TextTools.copy(src, ref i, dst);
+            => SymbolicTools.copy(src, ref i, dst);
 
         [Op]
         public static byte format(in ApiCodeBlockHeader src, Span<string> dst)

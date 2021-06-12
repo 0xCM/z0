@@ -8,7 +8,7 @@ namespace Z0
 
     using M = Microsoft.Extensions.DependencyModel;
 
-    using static memory;
+    using static core;
     using static JsonDepsModel;
     using api = JsonDepsLoader;
 

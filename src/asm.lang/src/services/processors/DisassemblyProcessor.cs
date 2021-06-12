@@ -15,17 +15,16 @@ namespace Z0.Asm
     [ApiHost]
     public class DisassemblyProcessor : AsciTextProcessor<DisassemblyProcessor,AsmDisassembly>
     {
-
         protected override Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
         {
             var outcome = Outcome.Success;
             dst = default;
             var data = src.Content;
-            var space1 = TextTools.next(data, 0, AsciCode.Space);
+            var space1 = SymbolicQuery.next(data, 0, AsciCode.Space);
             if(space1 == NotFound)
                 return false;
             Hex.parse(slice(data,0, space1), out var offset);
-            var space2 = TextTools.next(data, (uint)space1 + 1, AsciCode.Space);
+            var space2 = SymbolicQuery.next(data, (uint)space1 + 1, AsciCode.Space);
             if(space2 == NotFound)
                 return false;
 
@@ -38,7 +37,7 @@ namespace Z0.Asm
             var i=0u;
             var statement = slice(src.Content,space1 + 16);
             var sbuffer = span<char>(statement.Length);
-            var len = TextTools.render(slice(src.Content,space1 + 16),ref i, sbuffer);
+            var len = SymbolicRender.render(slice(src.Content,space1 + 16),ref i, sbuffer);
 
             dst = new AsmDisassembly(offset, new string(slice(sbuffer,0,len)), AsmBytes.hexcode(slice(buffer,0,result.Data)));
             return outcome;
@@ -50,8 +49,8 @@ namespace Z0.Asm
             using var map = MemoryFiles.map(src);
             var size = map.Size;
             var data = map.View();
-            var lines = TextLines.count(data);
-            var max = TextLines.maxlength(data);
+            var lines = Lines.count(data);
+            var max = Lines.maxlength(data);
             var dst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Asm);
             using var writer = dst.Writer(Encoding.ASCII);
             Span<char> buffer = alloc<char>(max);
@@ -64,10 +63,10 @@ namespace Z0.Asm
             {
                 ref readonly var a0 = ref skip(data, pos);
                 ref readonly var a1 = ref skip(data, pos + 1);
-                if(TextLines.eol(a0,a1))
+                if(Lines.eol(a0,a1))
                 {
-                    var _line = TextLines.asci(data, number, counter, length + 1);
-                    var outcome = ProcessLine(ref _line, out var encoding);
+                    var line = Lines.asci(data, number, counter, length + 1);
+                    var outcome = ProcessLine(ref line, out var encoding);
                     if(outcome.Fail)
                     {
                         Error(outcome.Message);
@@ -78,7 +77,7 @@ namespace Z0.Asm
                         Babble(string.Format("{0} {1} {2}", encoding.Offset, encoding.Code, encoding.Statement));
                     }
                     buffer.Clear();
-                    writer.Write(_line.Format(buffer));
+                    writer.Write(line.Format(buffer));
                     pos++;
                     length = 0;
                     counter = pos;

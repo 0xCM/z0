@@ -83,7 +83,7 @@ namespace Z0.Asm
             var collected = stdout.ViewDeposited();
             var count = collected.Length;
             var buffer = alloc<TextLine>(count);
-            TextLines.lines(collected,buffer);
+            Lines.lines(collected,buffer);
 
             iter(buffer, line => Wf.Row(line));
 

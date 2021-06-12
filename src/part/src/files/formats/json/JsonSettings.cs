@@ -12,9 +12,9 @@ namespace Z0
     using System.Reflection;
     using System.Text.Json;
 
-    using static Part;
+    using static Root;
     using static Chars;
-    using static memory;
+    using static core;
 
     /// <summary>
     /// Defines the canonical <see cref='IJsonSettings'/> reification

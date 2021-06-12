@@ -27,7 +27,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string delimit<T>(ReadOnlySpan<T> src, char delimiter, int pad, bool space)
         {
-            var dst = TextTools.buffer();
+            var dst = buffer();
             var count = src.Length;
             var slot = RP.pad(pad);
             var last = count - 1;
@@ -47,7 +47,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string delimit<T>(ReadOnlySpan<T> src, char delimiter)
         {
-            var dst = TextTools.buffer();
+            var dst = buffer();
             var count = src.Length;
             var last = count - 1;
             for(var i=0; i<count; i++)

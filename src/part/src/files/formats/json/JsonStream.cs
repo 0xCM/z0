@@ -10,8 +10,8 @@ namespace Z0
     using System.Text;
     using System.Text.Json;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using J = System.Text.Json.JsonTokenType;
 

@@ -159,6 +159,9 @@ public enum PartId : ulong
     [Symbol("agents")]
     Agents = 51,
 
+    [Symbol("relations")]
+    Relations = 52,
+
     [Symbol("clr")]
     Clr = 60,
 

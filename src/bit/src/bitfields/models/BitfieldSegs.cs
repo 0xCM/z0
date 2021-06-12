@@ -70,10 +70,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public uint Render(ref uint offset, Span<char> dst, SegRenderStyle style = default)
-            => api.render(this, ref offset, dst, style);
-
-        [MethodImpl(Inline)]
         public static implicit operator BitfieldSegs(BitfieldSeg[] src)
             => new BitfieldSegs(src);
 

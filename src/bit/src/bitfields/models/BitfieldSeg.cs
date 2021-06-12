@@ -47,12 +47,8 @@ namespace Z0
             get => api.width(this);
         }
 
-        [MethodImpl(Inline)]
-        public uint Render(ref uint offset, Span<char> dst, SegRenderStyle style = default)
-            => api.render(this, ref offset, dst, style);
-
         public string Format()
-            => api.format(this);
+            => string.Format("{0}:[{1},{2}]", Name, Min, Max);
 
         public override string ToString()
             => Format();

@@ -10,21 +10,22 @@ namespace Z0
 
     public class DocSplitter : Service<DocSplitter>
     {
-        AsmWorkspace Workspace;
-
         RecordSet<DocSplitSpec> Specs;
 
         object SpecsLocker;
+
+        DocProcessArchive Docs;
 
         public DocSplitter()
         {
             Specs = RecordSet<DocSplitSpec>.Empty;
             SpecsLocker = new object();
+
         }
 
         protected override void Initialized()
         {
-            Workspace = Context.AsmWorkspace();
+            Docs = new DocProcessArchive(Context.AsmWorkspace().DocRoot());
             var pipe = DocSplitSpecs.Service;
             var outcome = pipe.Load(SpecPath, out Specs);
             if(outcome.Fail)
@@ -44,7 +45,7 @@ namespace Z0
             using var reader = src.Reader();
             var counter = 1u;
             var count = spec.LastLine - spec.FirstLine + 1;
-            var range = TextLines.range(spec.FirstLine, spec.LastLine, alloc<TextLine>(count));
+            var range = Lines.range(spec.FirstLine, spec.LastLine, alloc<TextLine>(count));
             var lines = range.Edit;
             var i=0;
             var line = reader.ReadLine();
@@ -52,7 +53,7 @@ namespace Z0
             {
                 line = reader.ReadLine();
                 if(counter >= spec.FirstLine)
-                    seek(lines, i++) = TextLines.line(counter, line);
+                    seek(lines, i++) = Lines.line(counter, line);
             }
 
             Emit(range, ExtractPath(spec.DocId, spec.Unit));
@@ -89,13 +90,13 @@ namespace Z0
         }
 
         FS.FilePath RefDocPath(string id)
-            => Workspace.RefDoc(id, FS.Txt);
+            => Docs.RefDoc(id, FS.Txt);
 
         FS.FilePath ExtractPath(string id, string unit)
-            => Workspace.DocExtract(id, unit, FS.Txt);
+            => Docs.DocExtract(id, unit, FS.Txt);
 
         FS.FilePath SpecPath
-            => Workspace.DocRoot() + FS.file("splits", FS.Csv);
+            => Docs.Root + FS.file("splits", FS.Csv);
     }
 
     partial class XTend

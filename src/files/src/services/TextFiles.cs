@@ -18,7 +18,7 @@ namespace Z0
         public static LineCount linecount(FS.FilePath src)
         {
             var file = MemoryFiles.map(src);
-            var counted = TextLines.count(file.View());
+            var counted = Lines.count(file.View());
             file.Dispose();
             return (src, counted);
         }
@@ -30,6 +30,5 @@ namespace Z0
             iter(src, path => dst.Add(linecount(path)), true);
             return dst.ToArray().Sort();
         }
-
     }
 }

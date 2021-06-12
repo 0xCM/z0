@@ -28,7 +28,7 @@ namespace Z0
         [Op]
         public static string concat(ReadOnlySpan<string> src, char? delimiter)
         {
-            var dst = TextTools.buffer();
+            var dst = buffer();
             for(var i=0; i<src.Length; i++)
             {
                 if(i != 0 && delimiter != null)
@@ -42,7 +42,7 @@ namespace Z0
         [Op]
         public static string concat(ReadOnlySpan<string> src, string sep)
         {
-            var dst = TextTools.buffer();
+            var dst = buffer();
             var count = src.Length;
             for(var i=0; i<count; i++)
             {

@@ -623,7 +623,7 @@ namespace Z0.Asm
                 seek(buffer, k++) = Chars.Space;
 
                 var bits = modrm.Encoded.FormatBits();
-                TextTools.copy(bits, ref k, buffer);
+                SymbolicTools.copy(bits, ref k, buffer);
                 var content = text.format(slice(buffer,0,k));
                 Wf.Row(content);
             }
@@ -859,7 +859,7 @@ namespace Z0.Asm
             var modrm = AsmBitfields.modrm();
             var dst = span<char>(128);
             var offset = 0u;
-            modrm.Render(ref offset, dst, SegRenderStyle.Intel);
+            SymbolicRender.render(modrm, ref offset, dst, SegRenderStyle.Intel);
             Wf.Row(slice(dst,0,offset));
         }
 
@@ -996,6 +996,46 @@ namespace Z0.Asm
 
         }
 
+        public void EmitLinedFile(FS.FilePath src, FS.FilePath dst)
+        {
+            var flow = Wf.Running(string.Format("{0} => {1}", src.ToUri(), dst.ToUri()));
+            using var reader = src.LineReader();
+            using var writer = dst.Writer();
+            var counter = 1u;
+            while(reader.Next(out var line))
+            {
+                if(counter != line.LineNumber)
+                {
+                    Wf.Error(string.Format("{0} != {1}:{2}", counter, line.LineNumber, line.Content));
+                    break;
+                }
+                writer.WriteLine(line);
+                counter++;
+            }
+            Wf.Ran(flow,  string.Format("Emitted {0} lines", counter - 1));
+        }
+
+        public void CheckLineReader()
+        {
+            var workspace = Wf.AsmWorkspace();
+            var archive = new DocProcessArchive(workspace.DocRoot());
+            var src = archive.RefDoc("sdm",FS.Txt);
+            var dst = archive.DocExtracts() + FS.file("sdm-lined", FS.Txt);
+            EmitLinedFile(src, dst);
+            using var reader = dst.LineReader();
+            var counter = 1u;
+            while(reader.Next(out var line))
+            {
+                if(counter != line.LineNumber)
+                {
+                    Wf.Error(string.Format("{0} != {1}:{2}", counter, line.LineNumber, line.Content));
+                    break;
+                }
+                counter++;
+            }
+
+        }
+
         void CheckAsciSpans()
         {
             const string Input = "66F2F30F0F38VEXREXREX.WLZLIGWIGW0W1";
@@ -1032,9 +1072,9 @@ namespace Z0.Asm
         public void Run()
         {
 
-            //RunDocProcessor();
+            CheckLineReader();
             //GenAsciSpan(IntelDocs.)
-            Wf.GlobalCommands().RunExtractWorkflow();
+            //Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));

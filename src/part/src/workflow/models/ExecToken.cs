@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     public struct ExecToken
     {
@@ -23,7 +24,7 @@ namespace Z0
         public ExecToken(ulong seq)
         {
             StartSeq = seq;
-            Started = root.timestamp();
+            Started = now();
             Finished = null;
             EndSeq = 0;
         }
@@ -32,7 +33,7 @@ namespace Z0
         public ExecToken Complete(ulong seq)
         {
             EndSeq = seq;
-            Finished = root.timestamp();
+            Finished = now();
             return this;
         }
 

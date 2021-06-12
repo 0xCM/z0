@@ -99,6 +99,7 @@
     <Refs>$(Src)refs/z0.refs.csproj</Refs>
     <Res>$(Src)res/z0.res.csproj</Res>
     <Resources>$(Src)resources/z0.resources.csproj</Resources>
+    <Relations>$(Src)relations/z0.relations.csproj</Relations>
 
     <Root>$(Src)root/z0.root.csproj</Root>
     <Rules>$(Src)rules/z0.rules.csproj</Rules>

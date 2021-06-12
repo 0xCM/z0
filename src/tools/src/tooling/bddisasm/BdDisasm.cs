@@ -10,7 +10,7 @@ namespace Z0.Tools
 
     using static core;
     using static Root;
-    using static TextTools;
+    using static SymbolicTools;
     using static EnvFolders;
 
     [ApiHost]
@@ -108,14 +108,6 @@ namespace Z0.Tools
                 seek(dst,i++) = Specifier;
                 copy(Exi, ref i, dst);
             }
-
-            // if(src.Redirect)
-            // {
-            //     seek(dst,i++) = Chars.Space;
-            //     seek(dst,i++) = Redirect;
-            //     seek(dst,i++) = Chars.Space;
-            //     copy(src.OutputFile.Format(PathSeparator.BS), ref i, dst);
-            // }
 
             return i - i0;
         }

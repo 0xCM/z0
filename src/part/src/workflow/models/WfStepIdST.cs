@@ -21,7 +21,7 @@ namespace Z0
         public string HostName
         {
             [MethodImpl(Inline)]
-            get => text.format(RenderPattern, typeof(S).AssemblyQualifiedName, typeof(T).AssemblyQualifiedName);
+            get => string.Format(RenderPattern, typeof(S).AssemblyQualifiedName, typeof(T).AssemblyQualifiedName);
         }
 
         [MethodImpl(Inline)]

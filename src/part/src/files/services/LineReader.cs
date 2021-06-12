@@ -55,26 +55,29 @@ namespace Z0
 
         public bool Next(out TextLine dst)
         {
-            var next = Source.ReadLine();
-            var data = span(next);
+            var line = Source.ReadLine();
+            var data = span(line);
             var result = true;
             dst = TextLine.Empty;
 
-            if(next == null)
+            if(line == null)
                 return false;
 
-            if(next != null)
+            if(line != null)
             {
                 Consumed++;
 
-                var length = next.Length;
+                var length = line.Length;
                 if(length == 0)
+                {
+                    dst = new TextLine(Consumed, EmptyString);
                     return true;
+                }
 
                 if(LineNumber(data, out var number))
-                    dst = new TextLine(number, next.Substring(NumberWidth + 1));
+                    dst = new TextLine(number, line.Substring(NumberWidth + 1));
                 else
-                    dst = new TextLine(Consumed, next);
+                    dst = new TextLine(Consumed, line);
             }
 
             return result;

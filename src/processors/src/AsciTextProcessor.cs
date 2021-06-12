@@ -6,12 +6,10 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
     using System.Text;
 
     using static Root;
     using static core;
-
 
     public abstract class AsciTextProcessor<H,T> : TextProcessor<H,T>
         where H : AsciTextProcessor<H,T>, new()
@@ -21,14 +19,14 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         protected uint Decode(ReadOnlySpan<byte> src, Span<char> dst)
-            => TextTools.asci(src, dst);
+            => SymbolicTools.asci(src, dst);
 
         [MethodImpl(Inline)]
         public uint LineCount(ReadOnlySpan<byte> src)
-            => TextLines.count(src);
+            => Lines.count(src);
 
         public uint MaxLineLength(ReadOnlySpan<byte> src)
-            => TextLines.maxlength(src);
+            => Lines.maxlength(src);
 
         public string FileHeader {get; protected set;}
 
@@ -59,9 +57,9 @@ namespace Z0.Asm
             {
                 ref readonly var a0 = ref skip(src, pos);
                 ref readonly var a1 = ref skip(src, pos + 1);
-                if(TextLines.eol(a0,a1))
+                if(Lines.eol(a0,a1))
                 {
-                    var _line = TextLines.asci(src, number++, counter, length + 1);
+                    var _line = Lines.asci(src, number++, counter, length + 1);
                     var outcome = ProcessLine(ref _line, out var content);
                     if(outcome.Fail)
                     {
@@ -96,10 +94,10 @@ namespace Z0.Asm
             {
                 ref readonly var a0 = ref skip(data, pos);
                 ref readonly var a1 = ref skip(data, pos + 1);
-                if(TextLines.eol(a0,a1))
+                if(Lines.eol(a0,a1))
                 {
                     var line = slice(data, eol, pos - eol);
-                    var decoded = TextTools.asci(line, buffer);
+                    var decoded = SymbolicTools.asci(line, buffer);
                     var chars = slice(buffer, 0, decoded);
                     if(lines == 0)
                         FileHeader = text.format(chars);
