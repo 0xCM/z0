@@ -13,10 +13,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Markdown
     {
-        // [MethodImpl(Inline), Op]
-        // public static RelativeLink relative(string label, string target)
-        //     => new RelativeLink(label,target);
-
         [MethodImpl(Inline), Op]
         public static RelativeLink link(string label, FS.RelativeFilePath src)
             => new RelativeLink(label, src.Format());
@@ -36,7 +32,6 @@ namespace Z0
         public static ListItem item<T>(byte level, T src, ListStyle style)
             where T : ITextual
                 => List.item(level,src.Format(),style);
-
 
         public List list(string[] items, ListStyle style)
         {

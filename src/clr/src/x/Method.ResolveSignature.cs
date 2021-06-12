@@ -7,14 +7,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    partial class XApi
+    partial class XTend
     {
         public static CliSig ResolveSignature(this MethodInfo src)
         {
             try
             {
-                var token = src.MetadataToken;
-                return src.Module.ResolveSignature(token);
+                return src.Module.ResolveSignature(src.MetadataToken);
             }
             catch
             {

@@ -12,12 +12,6 @@ namespace Z0
 
     partial struct CodeBlocks
     {
-        [MethodImpl(Inline), Op]
-        public static MsilSourceBlock msil(CliToken id, CliSig sig, BinaryCode encoded, MethodImplAttributes attributes = default)
-            => new MsilSourceBlock(id, sig, encoded);
 
-        [MethodImpl(Inline), Op]
-        public static MsilSourceBlock msil(in ApiMsil src, MethodImplAttributes attributes = default)
-            => msil(src.Token, src.CliSig, src.Code, attributes);
     }
 }

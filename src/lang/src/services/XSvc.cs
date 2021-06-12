@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static core;
 
-    [ApiHost]
-    public readonly struct CellOpKinds
+    using Svc = Z0;
+
+    public static partial class XSvc
     {
-
+       public static AsciByteSpans AsciByteSpans(this IServiceContext context)
+            => Svc.AsciByteSpans.create(context);
     }
 }

@@ -32,7 +32,8 @@ namespace Z0
             Host = ApiHostUri.Empty;
             OpId = OpIdentity.Empty;
         }
-        internal OpUri(in ApiHostUri host, in OpIdentity opid, string uritext)
+
+        public OpUri(in ApiHostUri host, in OpIdentity opid, string uritext)
         {
             Host = host;
             OpId = opid;

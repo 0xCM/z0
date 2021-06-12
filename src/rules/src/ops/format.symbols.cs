@@ -23,7 +23,6 @@ namespace Z0
         public static string format(VarContextKind vck, VarSymbol src)
             => string.Format(VarContextKinds.FormatPattern(vck), src.Name);
 
-
         [Op]
         public static VarSymbol combine(VarContextKind vck, VarSymbol a, VarSymbol b)
             => new VarSymbol(string.Format("{0}{1}", format(vck,a), format(vck, b)));

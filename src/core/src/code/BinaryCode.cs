@@ -115,7 +115,7 @@ namespace Z0
             => equals(this, src);
 
         public string Format()
-            => Data.FormatHex();
+            => Data?.FormatHex() ?? EmptyString;
 
         public string Format(HexFormatOptions config)
             => Data.FormatHex(config);

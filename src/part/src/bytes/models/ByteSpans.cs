@@ -15,21 +15,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        // public static void asci(string data, Identifier name, ITextBuffer dst)
-        // {
-        //     var payload = text.buffer();
-        //     var src = span(data);
-
-        //     var count = src.Length;
-        //     var buffer = alloc<AsciCode>(count);
-        //     ref var target = ref first(buffer);
-        //     for(var i=0; i<count; i++)
-        //         seek(target,i) = (AsciCode)skip(src,i);
-
-        //     var spec = new ByteSpanSpec<AsciCode>(name, buffer, true, nameof(AsciCode));
-        //     render(spec, dst);
-        // }
-
         public static uint cilbytes(Type[] types, FS.FilePath dst)
         {
             var counter = 0u;
@@ -118,7 +103,6 @@ namespace Z0
             var payload = HexFormatter.array<byte>(src.Data);
             render(src, payload, dst);
         }
-
 
         [Op]
         public static void render(ByteSpanSpec src, string payload, ITextBuffer dst)

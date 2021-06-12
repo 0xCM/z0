@@ -1045,34 +1045,31 @@ namespace Z0.Asm
             Wf.Row(dst.Emit());
         }
 
-        void GenAsciSpan(Identifier name, string data)
+        string RenderAsciByteSpan(Identifier name, string data)
         {
-            var lookups = Wf.AsciLookups();
+            var bytespans = Wf.AsciByteSpans();
             var dst = text.buffer();
-            lookups.AsciByteSpan(8, name, data, dst);
-            Wf.Row(dst.Emit());
-
+            bytespans.Render(8, name, data, dst);
+            return dst.Emit();
         }
 
-        void CheckAsciLookups()
+        void CheckAsciByteSpans()
         {
-            var lookups = Wf.AsciLookups();
-            var buffer = text.buffer();
-            lookups.Emit<XedModels.IFormType>(buffer);
-            var dst = Db.AppLog("Lookups", FS.Cs);
+            var dst = Db.AppLog("AsciBytes", FS.Cs);
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            writer.Write(buffer.Emit());
+            var content = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var bytespan = RenderAsciByteSpan("Uppercase", content);
+            Wf.Row(bytespan);
+            writer.WriteLine(bytespan);
             Wf.EmittedFile(flow,0);
-
-            CheckAsciSpans();
         }
 
 
         public void Run()
         {
 
-            CheckLineReader();
+            CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
             //Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();

@@ -12,7 +12,9 @@ namespace Z0
 
     public readonly struct MsilSourceBlock : ISourceCode<MsilSourceBlock,byte>
     {
-
+        [MethodImpl(Inline), Op]
+        public static MsilSourceBlock create(CliToken id, CliSig sig, BinaryCode encoded, MethodImplAttributes attributes = default)
+            => new MsilSourceBlock(id, sig, encoded);
 
         /// <summary>
         /// The source method token

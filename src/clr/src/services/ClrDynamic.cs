@@ -26,7 +26,7 @@ namespace Z0
         {
             var flags = src.GetMethodImplementationFlags();
             MemoryAddress address = _pointer(src);
-            var msil = CodeBlocks.msil(default, src.ResolveSignature(), msildata(src), flags);
+            var msil = MsilSourceBlock.create(default, src.ResolveSignature(), msildata(src), flags);
             return new MsilCompilation(msil, address);
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         public static MsilCompilation compilation(MemoryAddress @base, MethodInfo src)
         {
             var flags = src.GetMethodImplementationFlags();
-            var msil = CodeBlocks.msil(default, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), flags);
+            var msil = MsilSourceBlock.create(default, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), flags);
             return new MsilCompilation(msil, @base);
         }
 
@@ -92,8 +92,8 @@ namespace Z0
         {
             var methods = @readonly(src.DeclaredMethods());
             var count = methods.Length;
-            var buffer = memory.alloc<MethodSlot>(count);
-            ref var dst = ref memory.first(buffer);
+            var buffer = alloc<MethodSlot>(count);
+            ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
                 var method = skip(methods,i);
