@@ -114,7 +114,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var file = ref skip(paths,i);
-                var doc = TextDocs.parse(file);
+                var doc = TextGrids.parse(file);
                 if(doc)
                 {
                     var rows = doc.Value.Rows;

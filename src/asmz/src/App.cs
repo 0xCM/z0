@@ -786,7 +786,7 @@ namespace Z0.Asm
                 {
                     ref readonly var b0 = ref skip(data, j);
                     ref readonly var b1 = ref skip(data, j+1);
-                    if(TextQuery.bullet(b0,b1))
+                    if(SymbolicQuery.bullet(b0,b1))
                     {
                         positions.Add(j);
                     }
@@ -1032,6 +1032,7 @@ namespace Z0.Asm
         public void Run()
         {
 
+            //RunDocProcessor();
             //GenAsciSpan(IntelDocs.)
             Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static TextQuery;
 
     partial struct ParseComposer
     {
@@ -49,7 +48,7 @@ namespace Z0
                     for(var i=0; i<count; i++)
                     {
                         ref readonly var c = ref skip(input,i);
-                        if(SkipWs && whitespace(c))
+                        if(SkipWs && SymbolicQuery.whitespace(c))
                             continue;
 
                         if(c == Delimiter)

@@ -33,6 +33,13 @@ namespace Z0
             }
         }
 
+        public void UpdateToolHelpIndex()
+        {
+            var catalog = ToolCatalog.create(Wf);
+            var index = catalog.UpdateHelpIndex();
+            core.iter(index, entry => Wf.Row(entry.HelpPath));
+        }
+
         [CmdOp("docsplit")]
         public Outcome SplitDocs(params object[] args)
         {

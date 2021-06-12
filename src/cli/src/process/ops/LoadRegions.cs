@@ -32,7 +32,7 @@ namespace Z0
             var flow = Wf.Running(string.Format("Reading {0} records from {1}", tid, src.ToUri()));
             if(!src.Exists)
                 return (false, FS.Msg.DoesNotExist.Format(src));
-            var lines = src.ReadTextLines().View;
+            var lines = src.ReadTextLines();
             var count = lines.Length;
             if(count == 0)
             {

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using CC = AsciCode;
+    using C = AsciCode;
 
     using static AsciCode;
 
@@ -19,11 +19,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool eol(byte a0, byte a1)
-            => (CC)a0 == CR || (CC)a1 == LF;
+            => (C)a0 == CR || (C)a1 == LF;
 
         [MethodImpl(Inline), Op]
         public static bool eol(char a0, char a1)
-            => (CC)a0 == CR || (CC)a1 == LF;
+            => (C)a0 == CR || (C)a1 == LF;
 
         [MethodImpl(Inline), Op]
         public static LineRange range(uint min, uint max, TextLine[] data)
@@ -54,18 +54,18 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AsciLine asci(ReadOnlySpan<byte> src, uint number, uint offset, uint chars)
-            => new AsciLine(number, offset, core.recover<AsciCode>(core.slice(src, offset, chars)));
+            => new AsciLine(number, offset, recover<AsciCode>(slice(src, offset, chars)));
 
         [MethodImpl(Inline), Op]
         public static AsciLine asci(ReadOnlySpan<AsciCode> src, uint number, uint start, uint chars)
-            => new AsciLine(number, start, core.slice(src, start, chars));
+            => new AsciLine(number, start, slice(src, start, chars));
 
         [MethodImpl(Inline), Op]
         public static Utf16Line utf16(ReadOnlySpan<char> src, uint number, uint offset, uint chars)
-            => new Utf16Line(number, offset, core.slice(src, offset, chars));
+            => new Utf16Line(number, offset, slice(src, offset, chars));
 
         public static Utf16Line utf16(ReadOnlySpan<byte> src, uint number, uint offset, uint chars)
-            => new Utf16Line(number, 0, core.slice(recover<char>(src), offset, chars));
+            => new Utf16Line(number, 0, slice(recover<char>(src), offset, chars));
 
         [MethodImpl(Inline), Op]
         public static uint count(ReadOnlySpan<byte> src)

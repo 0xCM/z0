@@ -9,16 +9,16 @@ namespace Z0
 
     using static Root;
 
-    using K = AsciCode;
+    using C = AsciCode;
 
     [ApiHost]
     public readonly struct AsciCodes
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<K> whitespace()
+        public static ReadOnlySpan<C> whitespace()
             => Whitespace;
 
-        static ReadOnlySpan<K> Whitespace
-            => new K[]{K.CR, K.FF, K.LF, K.Space, K.Tab, K.VTab};
+        static ReadOnlySpan<C> Whitespace
+            => new C[]{C.CR, C.FF, C.LF, C.Space, C.Tab, C.VTab};
     }
 }

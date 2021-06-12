@@ -56,7 +56,6 @@ namespace Z0.Asm
         public static bit HasRex(in AsmOpCodeExpr src)
             => src.Data.Contains("REX", StringComparison.InvariantCultureIgnoreCase);
 
-
         public void Deposit(in AsmIndex src)
         {
             var opcode = src.OpCode;

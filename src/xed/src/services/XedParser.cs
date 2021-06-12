@@ -115,7 +115,7 @@ namespace Z0
         public static XedParser Service => default;
 
         public XedDocRows LoadSource(FS.FilePath src)
-            => TextDocs.parse(src,TextDocFormat.Unstructured())
+            => TextGrids.parse(src,TextDocFormat.Unstructured())
                     .MapValueOrDefault(c => new XedDocRows(src, c.RowData), XedDocRows.Empty);
 
         public int ParseOperands(ReadOnlySpan<char> src, out Span<string> dst)

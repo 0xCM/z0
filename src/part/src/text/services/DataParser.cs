@@ -245,7 +245,7 @@ namespace Z0
             {
                 var name = EmptyString;
                 var input = src;
-                if(TextQuery.contains(src, delimiter))
+                if(SymbolicQuery.contains(src, delimiter))
                 {
                     name = src.LeftOfFirst(delimiter);
                     input = src.RightOfFirst(delimiter);

@@ -23,27 +23,65 @@ namespace Z0.Asm
 
         }
 
-        public Index<AsmFormExpr> LoadFormExpressions()
+        public ReadOnlySpan<AsmFormExpr> LoadFormExpressions()
         {
             var catalog = Wf.StanfordCatalog();
             catalog.Emit(catalog.KnownFormExpressions());
 
-            var pipe = AsmFormPipe.create(Wf);
             var src = Db.AsmCatalogTable<AsmFormRecord>();
-            var records = pipe.Load(src).View;
-
+            var records = Load(src);
             var count = records.Length;
-            var expressions = alloc<AsmFormExpr>(count);
-            ref var block = ref first(expressions);
+            var buffer = alloc<AsmFormExpr>(count);
+            ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(records,i);
-                seek(block, i) = record.FormExpr;
-            }
-            return expressions;
+                seek(dst, i) = skip(records,i).FormExpr;
+            return buffer;
         }
 
-        Index<AsmFormHash> HashPerfect(Span<AsmFormExpr> src)
+        public ReadOnlySpan<AsmFormHash> EmitFormHashes()
+        {
+            var pipe = Wf.AsmFormPipe();
+            var expressions = pipe.LoadFormExpressions();
+            var count = expressions.Length;
+            var unique = dict<string,AsmFormExpr>();
+            var duplicates = dict<string,AsmFormExpr>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var e = ref skip(expressions, i);
+                if(e.IsEmpty)
+                    continue;
+
+                var format = e.Format();
+                if(!unique.TryAdd(format,e))
+                    duplicates[format] = e;
+
+            }
+
+            iter(duplicates.Keys, k => Wf.Warn(string.Format("Duplicate Form: {0}", k)));
+            return HashPerfect(unique.Values.Array());
+        }
+
+        public void Emit(ReadOnlySpan<AsmFormExpr> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            if(count == 0)
+            {
+                Wf.Warn("No work to do");
+                return;
+            }
+
+            var flow = Wf.EmittingTable<AsmFormRecord>(dst);
+            using var writer = dst.Writer();
+            writer.WriteLine(FormatHeader());
+            for(ushort i=0; i<count; i++)
+            {
+                var data = NewRecord();
+                writer.WriteLine(Format(Fill(i, skip(src,i), ref data)));
+            }
+            Wf.EmittedTable(flow, count);
+        }
+
+        ReadOnlySpan<AsmFormHash> HashPerfect(ReadOnlySpan<AsmFormExpr> src)
         {
             Wf.Status($"Attempting to find perfect hashes for {src.Length} form expressions");
             var perfect = HashFunctions.perfect(src, x => x.Format(), HashFunctions.strings()).Codes;
@@ -68,46 +106,6 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public Index<AsmFormHash> EmitFormHashes()
-        {
-            var pipe = Wf.AsmFormPipe();
-            var expressions = pipe.LoadFormExpressions();
-            var unique = root.dict<string,AsmFormExpr>();
-            var duplicates = root.dict<string,AsmFormExpr>();
-            foreach(var e in expressions)
-            {
-                if(e.IsEmpty)
-                    continue;
-
-                var format = e.Format();
-                if(!unique.TryAdd(format,e))
-                    duplicates[format] = e;
-            }
-
-            root.iter(duplicates.Keys, k => Wf.Warn(string.Format("Duplicate Form: {0}", k)));
-            return HashPerfect(unique.Values.Array());
-        }
-
-        public void Emit(ReadOnlySpan<AsmFormExpr> src, FS.FilePath dst)
-        {
-            var count = src.Length;
-            if(count == 0)
-            {
-                Wf.Warn("No work to do");
-                return;
-            }
-
-            var flow = Wf.EmittingTable<AsmFormRecord>(dst);
-            using var writer = dst.Writer();
-            writer.WriteLine(FormatHeader());
-            for(ushort i=0; i<count; i++)
-            {
-                var data = NewRecord();
-                writer.WriteLine(Format(Fill(i, skip(src,i), ref data)));
-            }
-            Wf.EmittedTable(flow, count);
-        }
-
         [MethodImpl(Inline)]
         ref AsmFormRecord Fill(ushort seq, AsmFormExpr src, ref AsmFormRecord dst)
         {
@@ -118,7 +116,7 @@ namespace Z0.Asm
             return ref dst;
         }
 
-        public Index<AsmFormRecord> Load(in TextDoc src)
+        public ReadOnlySpan<AsmFormRecord> Load(in TextGrid src)
         {
             var rows = src.Rows;
             var count = rows.Length;
@@ -133,24 +131,34 @@ namespace Z0.Asm
                 if(row.CellCount != FieldCount)
                 {
                     Wf.Error(FieldCountMismatch.Format(TableId, row.CellCount, FieldCount));
-                    return sys.empty<AsmFormRecord>();
+                    return array<AsmFormRecord>();
                 }
                 Parse(row, ref seek(dst,i));
             }
             return buffer;
         }
 
-        public Index<AsmFormRecord> Load(FS.FilePath src)
+        public ref AsmFormRecord Parse(in TextRow src, ref AsmFormRecord dst)
         {
-            var dst = root.list<AsmFormRecord>();
+            var i = 0;
+            DataParser.parse(src[i++], out dst.Seq);
+            AsmParser.opcode(src[i++], out dst.OpCode);
+            AsmParser.sig(src[i++], out dst.Sig);
+            AsmParser.form(src[i++], out dst.FormExpr);
+            return ref dst;
+        }
+
+        public ReadOnlySpan<AsmFormRecord> Load(FS.FilePath src)
+        {
+            var dst = list<AsmFormRecord>();
             if(src.Exists)
             {
                 var flow = Wf.Running($"Loading form records from {src.ToUri()}");
-                var doc = TextDocs.parse(src);
+                var doc = TextGrids.parse(src);
                 if(doc.Failed)
                 {
                     Wf.Error(doc.Reason);
-                    return sys.empty<AsmFormRecord>();
+                    return array<AsmFormRecord>();
                 }
 
                 var forms = Load(doc.Value);
@@ -160,7 +168,7 @@ namespace Z0.Asm
             else
             {
                 Wf.Error($"The file <{src.ToUri()}> does not exist");
-                return sys.empty<AsmFormRecord>();
+                return array<AsmFormRecord>();
             }
         }
 
@@ -182,16 +190,6 @@ namespace Z0.Asm
                 dst = default;
                 return (false, FieldCountMismatch.Format(TableId, count, FieldCount));
             }
-        }
-
-        public ref AsmFormRecord Parse(TextRow src, ref AsmFormRecord dst)
-        {
-            var i = 0;
-            DataParser.parse(src[i++], out dst.Seq);
-            AsmParser.opcode(src[i++], out dst.OpCode);
-            AsmParser.sig(src[i++], out dst.Sig);
-            AsmParser.form(src[i++], out dst.FormExpr);
-            return ref dst;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Z0.Asm
         public Index<StokeAsmExportRow> ExportImport()
         {
             var src = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
-            var doc = TextDocs.parse(src).Require();
+            var doc = TextGrids.parse(src).Require();
             var data = doc.Rows;
             var count = data.Length;
             var buffer = alloc<StokeAsmExportRow>(count);
@@ -243,7 +243,7 @@ namespace Z0.Asm
 
         bool parse(ushort seq, in TextLine src, ref StokeAsmImportRow dst)
         {
-            if(TextDocs.row(src, SourceFormat, out var row))
+            if(TextGrids.row(src, SourceFormat, out var row))
             {
                 if(row.CellCount == 15)
                 {

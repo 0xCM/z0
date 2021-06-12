@@ -27,7 +27,7 @@ namespace Z0
         public bool Parametric
         {
             [MethodImpl(Inline)]
-            get => TextQuery.fenced(Data, Chars.Lt, Chars.Gt);
+            get => SymbolicQuery.fenced(Data, Chars.Lt, Chars.Gt);
         }
 
         public bool IsEmpty

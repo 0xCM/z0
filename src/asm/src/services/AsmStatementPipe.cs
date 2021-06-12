@@ -267,7 +267,7 @@ namespace Z0.Asm
             var files = dir.EnumerateFiles(FS.Csv, true).Array();
             var flow = Wf.Running(ParsingStatements.Format(files.Length,dir));
             var dst = bag<AsmApiStatement>();
-            var docs = TextDocs.load(files);
+            var docs = TextGrids.load(files);
             var counter = 0u;
             foreach(var doc in docs)
             {
@@ -306,7 +306,7 @@ namespace Z0.Asm
 
         const byte StatementFieldCount = AsmApiStatement.FieldCount;
 
-        static Outcome<uint> ParseStatementData(TextDoc doc, ConcurrentBag<AsmApiStatement> dst)
+        static Outcome<uint> ParseStatementData(TextGrid doc, ConcurrentBag<AsmApiStatement> dst)
         {
             var counter = 0u;
             if(doc.Header.Labels.Length != StatementFieldCount)

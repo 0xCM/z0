@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public readonly struct text<N> : IDataTypeComparable<text<N>>
         where N : unmanaged, ITypeNat
@@ -22,12 +23,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public text(string src)
-            => Data = text.empty(src) ? EmptyString : text.slice(src, 0, root.min(n, src.Length));
+            => Data = empty(src) ? EmptyString : text.slice(src, 0, min(n, src.Length));
 
         public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => memory.cover(Data);
+            get => cover(Data);
         }
 
         public string Text

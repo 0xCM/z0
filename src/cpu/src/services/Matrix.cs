@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static Typed;
 
     /// <summary>
     /// Defines the matrix api surface
@@ -272,7 +272,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var doc = TextDocs.parse(src).Require();
+            var doc = TextGrids.parse(src).Require();
             var m = (int)nat64u<M>();
             var n = (int)nat64u<N>();
 

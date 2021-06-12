@@ -8,6 +8,6 @@ namespace Z0
     {
         [TextUtility]
         public static string Between(this string src, char left, char right)
-            => TextQuery.between(src, left, right);
+            => SymbolicQuery.between(src, left, right);
     }
 }

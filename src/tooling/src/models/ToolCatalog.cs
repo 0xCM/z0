@@ -19,7 +19,7 @@ namespace Z0
             Root = Wf.Db().ToolCatalogRoot();
         }
 
-        public Index<ToolHelpEntry> UpdateHelpIndex()
+        public ReadOnlySpan<ToolHelpEntry> UpdateHelpIndex()
         {
             var path = Root + FS.file("help", FS.Csv);
             var files = HelpFiles();
@@ -56,7 +56,7 @@ namespace Z0
         public bool HasHelp(ToolId tool)
             => HelpFile(tool).Exists;
 
-        public Index<TextLine> HelpText(ToolId tool)
+        public ReadOnlySpan<TextLine> HelpText(ToolId tool)
             => HelpFile(tool).ReadTextLines();
 
         public void Emit(CmdScript script)

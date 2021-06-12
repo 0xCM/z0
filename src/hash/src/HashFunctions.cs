@@ -23,12 +23,7 @@ namespace Z0
             var count = src.Count;
             var view = src.View;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var input = ref skip(view,i);
-                var computed = hash.Compute(input);
-                accumulator.Add(computed);
-            }
-
+                accumulator.Add(hash.Compute(skip(view, i)));
             return count - (uint)accumulator.Count;
         }
 
@@ -51,10 +46,7 @@ namespace Z0
             return new HashedIndex<T>(buffer, t => hasher.Compute(f(t)));
         }
 
-        public static HashedIndex<T> perfect<T>(Span<T> src, Func<T,string> f,  StringHash hasher)
-            => perfect(src.ReadOnly(), f, hasher);
-
-        public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src, Func<T,string> rep)
+        public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src, Func<T,string> format)
         {
             var count = src.Length;
             var buffer = alloc<HashCode<T>>(count);
@@ -64,14 +56,14 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var input = ref skip(src,i);
-                var computed = algorithm.Compute(rep(input));
-                seek(dst,i) = (input,computed);
+                var computed = algorithm.Compute(format(input));
+                seek(dst,i) = (input, computed);
                 accumulator.Add(computed);
             }
             var collisions = count - (uint)accumulator.Count;
             if(collisions != 0)
                 @throw("Imperfect");
-            return new HashedIndex<T>(buffer, t => algorithm.Compute(rep(t)));
+            return new HashedIndex<T>(buffer, t => algorithm.Compute(format(t)));
         }
     }
 }

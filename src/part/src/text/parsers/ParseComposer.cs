@@ -19,7 +19,6 @@ namespace Z0
         public static ParseFunctions Collect(params IParseFunction[] src)
             => new ParseFunctions(src);
 
-
         public static MsgPattern<Fence<char>,string> FenceNotFound => "No content fenced with {0} exists int the input text '{1}'";
 
         public static string EmptyInput => "The input was empty";

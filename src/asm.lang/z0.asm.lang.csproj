@@ -16,6 +16,7 @@
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Resources)" />
+    <ProjectReference Include="$(SymCore)" />
   </ItemGroup>
 
    <ItemGroup>

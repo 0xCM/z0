@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Z0.Asm;
 
     using static core;
@@ -13,25 +12,23 @@ namespace Z0
     {
         AsmWorkspace Workspace;
 
-        RecordSet<SplitSpec> Specs;
+        RecordSet<DocSplitSpec> Specs;
 
         object SpecsLocker;
 
         public DocSplitter()
         {
-            Specs = RecordSet<SplitSpec>.Empty;
+            Specs = RecordSet<DocSplitSpec>.Empty;
             SpecsLocker = new object();
         }
 
         protected override void Initialized()
         {
             Workspace = Context.AsmWorkspace();
-            var pipe = SplitSpecs.Service;
+            var pipe = DocSplitSpecs.Service;
             var outcome = pipe.Load(SpecPath, out Specs);
             if(outcome.Fail)
-            {
                 Error(outcome.Message);
-            }
         }
 
         public void Run()
@@ -41,7 +38,7 @@ namespace Z0
             iter(specs.View, spec => Split(spec, buffer));
         }
 
-        void Split(in SplitSpec spec, IReceiver<LineRange> dst)
+        void Split(in DocSplitSpec spec, IReceiver<LineRange> dst)
         {
             var src = RefDocPath(spec.DocId);
             using var reader = src.Reader();
@@ -55,16 +52,13 @@ namespace Z0
             {
                 line = reader.ReadLine();
                 if(counter >= spec.FirstLine)
-                    seek(lines,i++) = Line(counter,line);
+                    seek(lines, i++) = TextLines.line(counter, line);
             }
 
-            var target = ExtractPath(spec.DocId, spec.Unit);
-            Emit(range, target);
+            Emit(range, ExtractPath(spec.DocId, spec.Unit));
             dst.Deposit(range);
         }
 
-        TextLine Line(uint number, string content)
-            => TextLines.line(number,content);
 
         void Emit(in LineRange src, FS.FilePath dst)
         {
@@ -77,7 +71,7 @@ namespace Z0
             Emitted(emitting, count);
         }
 
-        RecordSet<SplitSpec> GetSpecs()
+        RecordSet<DocSplitSpec> GetSpecs()
         {
             lock(SpecsLocker)
             {
@@ -85,7 +79,7 @@ namespace Z0
                     return Specs;
                 else
                 {
-                    var pipe = SplitSpecs.Service;
+                    var pipe = DocSplitSpecs.Service;
                     var outcome = pipe.Load(SpecPath, out Specs);
                     if(outcome.Fail)
                         Error(outcome.Message);

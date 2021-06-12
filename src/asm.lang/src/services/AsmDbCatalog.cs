@@ -17,8 +17,8 @@ namespace Z0.Asm
         public AsmDbSourceDocs SourceDocs()
         {
             var assets = AsmData.Assets;
-            if(TextDocs.resource(assets.AsmDbInstructions(), TextDocFormat.Structured(), out var instructions)
-            && (TextDocs.resource(assets.AsmDbOperands(), TextDocFormat.Structured(), out var operands)))
+            if(TextGrids.resource(assets.AsmDbInstructions(), TextDocFormat.Structured(), out var instructions)
+            && (TextGrids.resource(assets.AsmDbOperands(), TextDocFormat.Structured(), out var operands)))
                 return new AsmDbSourceDocs(instructions,operands);
             else
                 return AsmDbSourceDocs.Empty;
@@ -237,11 +237,11 @@ namespace Z0.Asm
             RwxWidth
         }
 
-        public TextDoc Instructions {get;}
+        public TextGrid Instructions {get;}
 
-        public TextDoc Operands {get;}
+        public TextGrid Operands {get;}
 
-        public AsmDbSourceDocs(TextDoc instructions, TextDoc operands)
+        public AsmDbSourceDocs(TextGrid instructions, TextGrid operands)
         {
             Instructions = instructions;
             Operands = operands;
@@ -261,7 +261,7 @@ namespace Z0.Asm
 
         public static AsmDbSourceDocs Empty
         {
-            get => new AsmDbSourceDocs(TextDoc.Empty, TextDoc.Empty);
+            get => new AsmDbSourceDocs(TextGrid.Empty, TextGrid.Empty);
         }
     }
 }

@@ -10,8 +10,8 @@ namespace Z0
     using System.Linq;
     using System.IO;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static XedSourceMarkers;
 
     [ApiHost]
@@ -65,7 +65,7 @@ namespace Z0
         public Index<XedSummaryRow> LoadSummaries(FS.FilePath src)
         {
             var flow  = Wf.Running(string.Format("Loading summary records from {0}", src.ToUri()));
-            var doc = TextDocs.parse(src).Require();
+            var doc = TextGrids.parse(src).Require();
             var count = doc.RowCount;
             var buffer = sys.alloc<XedSummaryRow>(count);
             if(count != 0)

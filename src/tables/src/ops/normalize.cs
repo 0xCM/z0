@@ -14,7 +14,7 @@ namespace Z0
         public static Outcome<Count> normalize(Asset src, string delimiter, ReadOnlySpan<byte> widths, FS.FilePath dst)
         {
             var data = text.utf8(src.Bytes());
-            var parseResult = TextDocs.parse(data, out var doc);
+            var parseResult = TextGrids.parse(data, out var doc);
             if(parseResult.Fail)
                 return parseResult;
 
@@ -23,7 +23,7 @@ namespace Z0
 
         public static Outcome<Count> normalize(string data, string delimiter, ReadOnlySpan<byte> widths, FS.FilePath dst)
         {
-            var result = TextDocs.parse(data, out var doc);
+            var result = TextGrids.parse(data, out var doc);
             var fieldCount = widths.Length;
             var header = doc.Header.ToRowHeader(delimiter, widths);
             if(header.CellCount != fieldCount)

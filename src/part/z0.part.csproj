@@ -20,6 +20,7 @@
     <ProjectReference Include="$(Cells)" />
     <ProjectReference Include="$(Commands)" />
     <ProjectReference Include="$(Containers)" />
+    <ProjectReference Include="$(SymCore)" />
   </ItemGroup>
 
 </Project>

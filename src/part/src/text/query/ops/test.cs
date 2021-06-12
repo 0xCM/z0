@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool test(char src, OneOf<char> match)
-            => contains(match.Elements, src);
+            => SymbolicQuery.contains(match.Elements, src);
 
         [Op]
         public static bool test(string src, OneOf<string> match, out int index)

@@ -13,6 +13,7 @@
     <ProjectReference Include="$(AsmCases)" />
     <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(Processors)" />
+    <ProjectReference Include="$(SymCore)" />
   </ItemGroup>
 
 </Project>

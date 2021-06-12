@@ -9,7 +9,7 @@ namespace Z0
 
     public class ToolHelpTransformer : TextDocTransformer<ToolHelpTransformer,ToolHelp>
     {
-        public override ToolHelp Processing(in TextDoc src)
+        public override ToolHelp Processing(in TextGrid src)
             => new ToolHelp((uint)src.RowCount);
 
         protected override void Processed(in TextLine src, dynamic output, ref ToolHelp dst)

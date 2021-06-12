@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         [Op]
-        public static Index<TextLine> ReadTextLines(this FS.FilePath src)
+        public static ReadOnlySpan<TextLine> ReadTextLines(this FS.FilePath src)
             => FS.lines(src);
     }
 }

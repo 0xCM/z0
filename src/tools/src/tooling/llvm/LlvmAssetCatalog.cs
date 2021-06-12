@@ -29,7 +29,7 @@ namespace Z0.Tools
         public ReadOnlySpan<LlvmValueType> ValueTypes()
         {
             const byte FieldCount = LlvmValueType.FieldCount;
-            var outcome = TextDocs.resource(_Assets.LlvmValueTypes(), out var doc);
+            var outcome = TextGrids.resource(_Assets.LlvmValueTypes(), out var doc);
             if(outcome.Fail)
             {
                 Wf.Error(outcome.Message);
