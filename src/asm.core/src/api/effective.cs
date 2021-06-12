@@ -10,10 +10,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    using K = RexPrefixKind;
-
-    [ApiHost]
-    public readonly partial struct AsmCodes
+    partial struct asm
     {
         /// <summary>
         /// Effective address computation with vsib addressing

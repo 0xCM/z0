@@ -8,11 +8,10 @@ namespace Z0.Asm
 
     partial class StanfordAsmCatalog
     {
-
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
-        public struct StokeAsmImportRow : IRecord<StokeAsmImportRow>
+        public struct StokeAsmAssetRow : IRecord<StokeAsmAssetRow>
         {
-            public const string TableId = "stoke.import";
+            public const string TableId = "stoke.asset";
 
             public ushort Sequence;
 

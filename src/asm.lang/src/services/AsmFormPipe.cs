@@ -26,7 +26,7 @@ namespace Z0.Asm
         public ReadOnlySpan<AsmFormExpr> LoadFormExpressions()
         {
             var catalog = Wf.StanfordCatalog();
-            catalog.Emit(catalog.KnownFormExpressions());
+            catalog.EmitForms(catalog.DeriveForms());
 
             var src = Db.AsmCatalogTable<AsmFormRecord>();
             var records = Load(src);

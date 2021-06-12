@@ -69,8 +69,8 @@ namespace Z0
                 if(options.EmitAsmCatalogs)
                 {
                     var etl = Wf.StanfordCatalog();
-                    Emitted(etl.ImportSource());
-                    Emitted(etl.ExportImport());
+                    Emitted(etl.ExportAsset());
+                    Emitted(etl.ImportExported());
                     Wf.XedCatalog().EmitCatalog();
                 }
 

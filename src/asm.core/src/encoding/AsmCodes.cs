@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmMnemonicCode;
-    using static AsmRegCodes;
-
-    partial struct AsmX
+    [ApiHost]
+    public readonly partial struct AsmCodes
     {
-        [Op, AsmSig(AsmOcPrototype.mov_r64_imm64)]
-        public AsmExpr mov(Gp64 a0, Imm64 a1)
-            => Produce(S[MOV], S[a0], a1);
+
     }
 }

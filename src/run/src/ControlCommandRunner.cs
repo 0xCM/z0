@@ -37,13 +37,10 @@ namespace Z0
                     if(script.Exists)
                     {
                         var runner = ScriptRunner.create(paths);
-                        var outcome = runner.RunControlScript(name);
-                        if(outcome)
-                        {
-                            var processor = Tooling.processor(paths, script, handlers);
-                            term.inform("Response");
-                            root.iter(outcome.Data, x => processor.Process(x));
-                        }
+                        var output = runner.RunControlScript(name);
+                        var processor = Tooling.processor(paths, script, handlers);
+                        term.inform("Response");
+                        root.iter(output, x => processor.Process(x));
                     }
                     else
                     {

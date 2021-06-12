@@ -11,7 +11,7 @@ namespace Z0.Asm
     partial struct IceConverters
     {
         [Op]
-        public static AsmImmInfo imminfo(in IceInstruction src, byte index)
+        public static ImmInfo imminfo(in IceInstruction src, byte index)
         {
 			switch (opkind(src,index))
             {

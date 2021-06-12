@@ -70,7 +70,7 @@ namespace Z0
             var m1 = Cells.cell64(BitMasks.Literals.Lsb63x3x1);
             var storage = Cells.join(m0,m1);
             var bytes = storage.Bytes;
-            var bits = BitRender.render(bytes);
+            var bits = BitRender.render8x8(bytes);
             Wf.Row(text.format(bits));
 
             var nibbles = BitNumbers.nibbles(bytes);

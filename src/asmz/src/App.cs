@@ -412,28 +412,6 @@ namespace Z0.Asm
                 Wf.EmittedFile(emitting, result.Data);
         }
 
-        void EmitMethodDefs(CliPipe pipe)
-        {
-            pipe.EmitMethodDefs(Wf.ApiCatalog.Components, Db.IndexTable<MethodDefInfo>());
-        }
-
-        void EmitFieldDefs(CliPipe pipe)
-        {
-            pipe.EmitFieldDefs(Wf.ApiCatalog.Components, Db.IndexTable<FieldDefInfo>());
-        }
-
-        void EmitRowStats(CliPipe pipe)
-        {
-            pipe.EmitRowStats(Wf.ApiCatalog.Components, Db.IndexTable<CliRowStats>());
-        }
-
-        void EmitCliMetadata()
-        {
-            var pipe = Wf.CliPipe();
-            EmitRowStats(pipe);
-            EmitMethodDefs(pipe);
-            EmitFieldDefs(pipe);
-        }
 
         void ShowMemory()
         {
@@ -441,32 +419,6 @@ namespace Z0.Asm
             var formatter = info.Formatter();
             Wf.Row(formatter.Format(info,RecordFormatKind.KeyValuePairs));
         }
-
-        public void EmitCpuIntrinsics()
-        {
-            Wf.IntrinsicsCatalog().Emit();
-        }
-
-        public void EmitSymbolicliterals()
-        {
-            var service = Wf.Symbolism();
-            var dst = Db.AppTablePath<SymLiteral>();
-            service.EmitLiterals(dst);
-        }
-
-        public ReadOnlySpan<CilOpCode> EmitCilOpCodes(FS.FilePath dst)
-        {
-            var codes = Cil.opcodes();
-            TableEmit(codes,dst);
-            return codes;
-        }
-
-        public ReadOnlySpan<CilOpCode> EmitCilOpCodes()
-        {
-            var dst = Db.IndexTable<CilOpCode>();
-            return EmitCilOpCodes(dst);
-        }
-
 
         public ApiCodeBlocks LoadApiBlocks()
         {
@@ -564,11 +516,6 @@ namespace Z0.Asm
             var productions = receiver.Productions;
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
-
-        // void RunExtractWorkflow()
-        // {
-        //    ApiExtractWorkflow.run(Wf);
-        // }
 
 
         [Record(TableId)]
@@ -725,27 +672,6 @@ namespace Z0.Asm
         public static bool bullet(byte b0, byte b1)
             => b0 == 0x20 && b1 == 0x22;
 
-        // static int first(int offset, ReadOnlySpan<byte> src, byte match)
-        // {
-        //     for(var i=0; i<src.Length; i++)
-        //         if(skip(src,i) == match)
-        //             return i;
-        //     return NotFound;
-
-        // }
-        // static int first(int start, ReadOnlySpan<byte> src, ReadOnlySpan<byte> match)
-        // {
-        //     var result = NotFound;
-        //     var j=0;
-        //     for(var i=0; i<src.Length; i++)
-        //     {
-        //         ref readonly var b = ref skip(match,i);
-        //         j = first(j,src,b);
-
-        //     }
-
-
-        // }
         void FindInstructionTables()
         {
             var ws = Wf.AsmWorkspace();
@@ -970,7 +896,6 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, lines);
         }
 
-
         public void CheckTools()
         {
             var workspace = Wf.AsmWorkspace();
@@ -1065,11 +990,31 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,0);
         }
 
+        public void LoadForms()
+        {
+            var catalog = Wf.StanfordCatalog();
+            var rows = catalog.LoadAsset();
+            var count = rows.Length;
+            var dst = list<string>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                AsmParser.sig(row.Instruction, out var sig);
+                var form = asm.form(asm.opcode(row.OpCode), sig);
+                var spec = string.Format("{0,-32} | {1,-42} | {2,-42}", form.Sig.Mnemonic, form.OpCode, form.Sig);
+                dst.Add(spec);
+            }
+
+            dst.Sort();
+            iter(dst.ViewDeposited(), x => Wf.Row(x));
+
+        }
 
         public void Run()
         {
 
-            CheckAsciByteSpans();
+            LoadForms();
+            //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
             //Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();

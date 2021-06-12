@@ -12,20 +12,16 @@ namespace Z0.Tools
 
     partial class Nasm
     {
-        public Index<NasmListEntry> RunCaseScript(Identifier name)
+        public ReadOnlySpan<NasmListEntry> RunCaseScript(Identifier name)
         {
             var @case = name.Format();
             using var log = ShowLog(Id.Format() + "." + @case, FS.Log);
             var runner = ScriptRunner.create(Db);
-            var ran = runner.RunToolCmd(Id, @case);
-            if(ran)
-                root.iter(ran.Data, x => log.Show(x));
-            else
-                Wf.Error(string.Format("{0}/{1} execution failed", Id, @case));
-
+            var output = runner.RunToolCmd(Id, @case);
+            iter(output, x => log.Show(x));
             var listpath = Listings().Where(l => l.Name.Contains(@case)).Single();
             var listing = ReadListing(listpath);
-            var entries = root.list<NasmListEntry>();
+            var entries = list<NasmListEntry>();
             var lines = listing.Lines.View;
             log.Title(listpath.ToUri());
             var count = lines.Length;
@@ -43,7 +39,7 @@ namespace Z0.Tools
                     entries.Add(entry);
                 }
             }
-            return entries.ToArray();
+            return entries.ViewDeposited();
         }
     }
 }

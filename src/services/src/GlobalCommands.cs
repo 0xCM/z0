@@ -33,11 +33,54 @@ namespace Z0
             }
         }
 
-        public void UpdateToolHelpIndex()
+        [CmdOp("emit-cli-metadata")]
+        public Outcome EmitCliMetadata()
+        {
+            var pipe = Wf.CliPipe();
+            pipe.EmitRowStats(Wf.ApiCatalog.Components, Db.IndexTable<CliRowStats>());
+            pipe.EmitFieldDefs(Wf.ApiCatalog.Components, Db.IndexTable<FieldDefInfo>());
+            pipe.EmitMethodDefs(Wf.ApiCatalog.Components, Db.IndexTable<MethodDefInfo>());
+            return true;
+        }
+
+        [CmdOp("emit-cil-opcodes")]
+        public Outcome EmitCilOpCodes()
+        {
+            var dst = Db.IndexTable<CilOpCode>();
+            TableEmit(Cil.opcodes(), dst);
+            return true;
+        }
+
+        [CmdOp("emit-sym-literals")]
+        public Outcome EmitSymLiterals()
+        {
+            var service = Wf.Symbolism();
+            var dst = Db.AppTablePath<SymLiteral>();
+            service.EmitLiterals(dst);
+            return true;
+        }
+
+        [CmdOp("update-tool-help")]
+        public Outcome UpdateToolHelpIndex()
         {
             var catalog = ToolCatalog.create(Wf);
             var index = catalog.UpdateHelpIndex();
             core.iter(index, entry => Wf.Row(entry.HelpPath));
+            return true;
+        }
+
+        [CmdOp("emit-intrinsics-catalog")]
+        public Outcome EmitIntrinsicsCatalog()
+        {
+            Wf.IntrinsicsCatalog().Emit();
+            return true;
+        }
+
+        [CmdOp("emit-respack")]
+        public Outcome EmitResPack()
+        {
+            Wf.ResPackEmitter().Emit();
+            return true;
         }
 
         [CmdOp("docsplit")]
@@ -83,7 +126,6 @@ namespace Z0
             var result = Capture.run();
             return true;
         }
-
 
         public Outcome Dispatch(string command, params object[] args)
         {

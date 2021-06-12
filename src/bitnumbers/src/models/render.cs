@@ -28,7 +28,15 @@ namespace Z0
             => BitRender.render(n2, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
+        public static uint render(uint2 src, ref uint i, Span<char> dst)
+            => BitRender.render(n2, src, ref i, dst);
+
+        [MethodImpl(Inline), Op]
         public static uint render(uint3 src, ref uint i, Span<C> dst)
+            => BitRender.render(n3, src, ref i, dst);
+
+        [MethodImpl(Inline), Op]
+        public static uint render(uint3 src, ref uint i, Span<char> dst)
             => BitRender.render(n3, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
@@ -36,11 +44,31 @@ namespace Z0
             => BitRender.render(n4, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
+        public static uint render(uint4 src, ref uint i, Span<char> dst)
+            => BitRender.render(n4, src, ref i, dst);
+
+        [MethodImpl(Inline), Op]
         public static uint render(uint5 src, ref uint i, Span<C> dst)
+            => BitRender.render(n5, src, ref i, dst);
+
+        [MethodImpl(Inline), Op]
+        public static uint render(uint5 src, ref uint i, Span<char> dst)
             => BitRender.render(n5, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint6 src, ref uint i, Span<C> dst)
             => BitRender.render(n6, src, ref i, dst);
+
+        [MethodImpl(Inline), Op]
+        public static uint render(uint6 src, ref uint i, Span<char> dst)
+            => BitRender.render(n6, src, ref i, dst);
+
+        [MethodImpl(Inline), Op]
+        public static uint render(uint7 src, ref uint i, Span<C> dst)
+            => BitRender.render(n7, src, ref i, dst);
+
+        [MethodImpl(Inline), Op]
+        public static uint render(uint7 src, ref uint i, Span<char> dst)
+            => BitRender.render(n7, src, ref i, dst);
     }
 }

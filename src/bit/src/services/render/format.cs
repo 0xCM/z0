@@ -27,7 +27,7 @@ namespace Z0
             var dst = span<char>(count);
             dst.Fill(Chars.D0);
 
-            BitRender.render(src, config.MaxBitCount, dst);
+            BitRender.render8x8(src, config.MaxBitCount, dst);
 
             dst.Reverse();
 

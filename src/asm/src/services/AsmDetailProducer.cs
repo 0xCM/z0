@@ -142,7 +142,7 @@ namespace Z0.Asm
 
         }
 
-        void SpecifyOperand(in ApiCodeBlock block, in AsmImmInfo src, ref AsmInstructionDetail dst)
+        void SpecifyOperand(in ApiCodeBlock block, in ImmInfo src, ref AsmInstructionDetail dst)
         {
 
         }

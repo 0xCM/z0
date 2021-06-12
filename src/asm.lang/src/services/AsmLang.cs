@@ -43,21 +43,11 @@ namespace Z0.Asm
         }
 
 
-        [StructLayout(LayoutKind.Sequential, Size = 2)]
-        internal readonly struct RegSpec
-        {
-
-        }
-
         [StructLayout(LayoutKind.Sequential, Size = 1)]
         internal readonly struct OpInfo
         {
 
         }
-
-        [MethodImpl(Inline), Op]
-        internal static RegSpec join(RegWidth width, RegClass @class, RegIndex index)
-            => to(math.or(math.sll((ushort)width,3), math.sll((ushort)@class,5) , math.sll((ushort)index, 10)), out RegSpec _);
 
         [MethodImpl(Inline), Op]
         internal static OpInfo join(OpIndex index, ScaleFactor scale)
@@ -71,7 +61,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         internal static ref AsmMnemonicCode mnemonic(ref Statement src)
             => ref mnemonic(src.Bytes);
-
 
         [MethodImpl(Inline), Op]
         internal static ref AsmMnemonicCode mnemonic(Span<byte> src)

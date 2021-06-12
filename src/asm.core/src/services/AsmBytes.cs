@@ -58,41 +58,9 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static byte size(in AsmHexCode src)
-            => BitNumbers.cell8(src.Data, AsmHexCode.SizeIndex);
-
-        [MethodImpl(Inline), Op]
-        public static int compare(in AsmHexCode a, in AsmHexCode b)
-        {
-            var left = recover<ulong>(raw(a));
-            var right = recover<ulong>(raw(b));
-            var x = first(left).CompareTo(first(right));
-            if(x != 0)
-                return x;
-            else
-                return skip(left,1).CompareTo(skip(right,1));
-        }
-
-        [MethodImpl(Inline), Op]
-        public static bool eq(in AsmHexCode a, in AsmHexCode b)
-            => a.Data.Equals(b.Data);
-
-        [MethodImpl(Inline), Op]
-        public static int hash(in AsmHexCode src)
-            => (int)alg.hash.calc(data(src));
-
-        [MethodImpl(Inline), Op]
-        public static Span<byte> data(in AsmHexCode src)
-            => slice(bytes(src.Data), 0, src.Size);
-
-        [MethodImpl(Inline), Op]
-        static Span<byte> raw(in AsmHexCode src)
-            => bytes(src.Data);
-
-        [MethodImpl(Inline), Op]
         public static T convert<T>(in AsmHexCode src)
             where T : unmanaged
-                => first(recover<T>(data(src)));
+                => first(recover<T>(AsmHexCode.data(src)));
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode code()

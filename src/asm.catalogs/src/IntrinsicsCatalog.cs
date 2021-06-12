@@ -17,7 +17,7 @@ namespace Z0.Asm
     {
         const string DocName = "intrinsics";
 
-        public Index<Intrinsic> Emit()
+        public ReadOnlySpan<Intrinsic> Emit()
             => Emit(Db.CatalogDir("asm") + FS.folder("intrinsics"));
 
         static FS.FolderName AlgFolder
@@ -26,7 +26,7 @@ namespace Z0.Asm
         FS.FolderPath AlgDir(FS.FolderPath root)
             => root + AlgFolder;
 
-        public Index<Intrinsic> Emit(FS.FolderPath dst)
+        public ReadOnlySpan<Intrinsic> Emit(FS.FolderPath dst)
         {
             var refpath = dst + FS.file(DocName, FS.Xml);
             var src = doc();
@@ -167,23 +167,6 @@ namespace Z0.Asm
             return dst;
         }
 
-        // public static void render(Operation src, ITextBuffer dst)
-        // {
-        //     if(src.Content != null)
-        //         root.iter(src.Content, x => dst.AppendLine("  " + x.Content));
-        // }
-
-        // public static string sig(Intrinsic src)
-        //     => string.Format("{0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray()));
-
-        // public static void body(Intrinsic src, ITextBuffer dst)
-        // {
-        //     dst.AppendLine("{");
-        //     render(src.operation, dst);
-        //     dst.AppendLine("}");
-        // }
-
-
         public Index<Intrinsic> Parse(XmlDoc src)
         {
             const ushort max = 7500;
@@ -248,7 +231,8 @@ namespace Z0.Asm
         static void read(XmlReader reader, ref Operation dst)
         {
             var content = reader.ReadInnerXml().Replace(XmlEntities.gt, ">").Replace(XmlEntities.lt, "<");
-            dst.Content.AddRange(text.lines(content));
+            foreach(var line in Lines.read(content))
+                dst.Content.Add(line);
         }
 
         static void read(XmlReader reader, ref CpuId dst)

@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     partial class StanfordAsmCatalog
     {
-
         [Record(TableId), StructLayout(LayoutKind.Sequential)]
         public struct StokeAsmExportRow : IRecord<StokeAsmExportRow>
         {

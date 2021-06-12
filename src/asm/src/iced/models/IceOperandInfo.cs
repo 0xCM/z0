@@ -23,7 +23,7 @@ namespace Z0.Asm
         /// <summary>
         /// Operand immediate info, if applicable
         /// </summary>
-        public AsmImmInfo ImmInfo;
+        public ImmInfo ImmInfo;
 
         /// <summary>
         /// Operand memory info, if applicable

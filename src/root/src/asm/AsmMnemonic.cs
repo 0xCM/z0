@@ -19,6 +19,12 @@ namespace Z0.Asm
             Name = src;
         }
 
+        public ReadOnlySpan<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => Name;
+        }
+
         public int Length
         {
             [MethodImpl(Inline)]
@@ -44,7 +50,6 @@ namespace Z0.Asm
         public string Format()
             => Name;
 
-        [MethodImpl(Inline)]
         public string Format(MnemonicCase @case)
         {
             if(IsEmpty)

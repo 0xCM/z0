@@ -47,6 +47,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint render(N8 n, N4 w, byte src, uint offset, Span<AsciCode> dst)
+        {
+            var i=offset;
+            seek(dst, i++) = code(src, 7);
+            seek(dst, i++) = code(src, 6);
+            seek(dst, i++) = code(src, 5);
+            seek(dst, i++) = code(src, 4);
+            i += separate(i, dst);
+            seek(dst, i++) = code(src, 3);
+            seek(dst, i++) = code(src, 2);
+            seek(dst, i++) = code(src, 1);
+            seek(dst, i++) = code(src, 0);
+            i += separate(i, dst);
+            return n + 2u;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint render(N8 n, N4 w, byte src, uint offset, Span<BitChar> dst)
         {
             var i=offset;

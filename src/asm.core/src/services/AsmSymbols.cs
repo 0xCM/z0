@@ -11,6 +11,8 @@ namespace Z0.Asm
     using static core;
     using static AsmRegCodes;
     using static AsmCodes;
+    using static AsmOpCodeTokens;
+    using static AsmSigTokens;
 
     [ApiHost]
     public class AsmSymbols
@@ -51,6 +53,8 @@ namespace Z0.Asm
 
         readonly Symbols<JccCode> _JccCodes;
 
+        readonly Symbols<Offset> _Offsets;
+
         public static AsmSymbols create()
             => new AsmSymbols();
 
@@ -78,6 +82,7 @@ namespace Z0.Asm
             _BndRegs = symbols<BndReg>();
             _TestRegs = symbols<TestReg>();
             _TableRegs = symbols<TableReg>();
+            _Offsets = symbols<Offset>();
         }
 
         [MethodImpl(Inline), Op]
@@ -255,6 +260,10 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public Symbols<JccCode> JccCodes()
             => _JccCodes;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<Offset> Offsets()
+            => _Offsets;
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<Sym<K>> Regs<K>()

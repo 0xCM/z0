@@ -10,8 +10,8 @@ namespace Z0.Asm
     using System.IO;
     using System.Text;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static AsmSemanticDefaults;
     using static IceOpKind;
 
@@ -45,13 +45,6 @@ namespace Z0.Asm
         public void Render(in ApiPartRoutines src)
         {
             var flow = Wf.Running(string.Format("Render semantic for <{0}> running", src.Part));
-            Execute(src);
-            Wf.Ran(flow, string.Format("Render semantic for <{0}> completed", src.Part));
-        }
-
-        [Op]
-        void Execute(in ApiPartRoutines src)
-        {
             var part = src.Part;
             var dst = AsmSemanticArchive.create(Wf);
             var dir = dst.SemanticDir(part).Clear();
@@ -62,10 +55,11 @@ namespace Z0.Asm
                 Buffer.Clear();
                 ref readonly var routines = ref skip(view,i);
                 var path = dst.SemanticPath(routines.Uri);
-                var flow = Wf.EmittingFile(path);
+                var emitting = Wf.EmittingFile(path);
                 Emit(routines, path);
-                Wf.EmittedFile(flow, routines.RoutineCount);
+                Wf.EmittedFile(emitting, routines.RoutineCount);
             }
+            Wf.Ran(flow, string.Format("Render semantic for <{0}> completed", src.Part));
         }
 
         void Emit(in ApiHostRoutines src, FS.FilePath dst)
@@ -115,7 +109,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        string Format(MemoryAddress @base, IceInstruction src, byte i)
+        static string format(MemoryAddress @base, IceInstruction src, byte i)
         {
             var kind = IceConverters.opkind(src, i);
             var desc = EmptyString;
@@ -154,33 +148,33 @@ namespace Z0.Asm
                 var kind = IceConverters.opkind(fx, i);
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(SubColPad);
                 var kindLabel = Render(kind).PadRight(OpKindPad);
-                var col02 = text.concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
-                summaries.Add(col02 + Format(@base, fx, i));
+                var col02 = string.Concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
+                summaries.Add(col02 + format(@base, fx, i));
             }
 
             foreach(var s in summaries)
-                Buffer.Add(text.concat(location, ColSep, $"{s}"));
+                Buffer.Add(string.Concat(location, ColSep, $"{s}"));
 
 
              var fc = footer(src);
-             if(text.nonempty(fc))
-                Buffer.Add(text.concat(location, ColSep, fc));
+             if(nonempty(fc))
+                Buffer.Add(string.Concat(location, ColSep, fc));
 
-            Buffer.Add(text.concat(location, ColSep, InstructionSep));
+            Buffer.Add(string.Concat(location, ColSep, InstructionSep));
         }
 
         [Op]
         string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  AsmOffsetSeq seq)
         {
             var left = LineLocation(src.Instruction, address, offset, seq);
-            var right = text.concat(src.Statment, SpecifierSep, src.AsmForm.Format(), EncodingSep, Format(src.Encoded));
-            return text.concat(left, ColSep, right);
+            var right = string.Concat(src.Statment, SpecifierSep, src.AsmForm.Format(), EncodingSep, Format(src.Encoded));
+            return string.Concat(left, ColSep, right);
         }
 
         [Op]
         static string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSeq seq)
             => string.Concat(FormatAddress(src, AddressPad),
-                text.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
+                string.Concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
 
         [Op]

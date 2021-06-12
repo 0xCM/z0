@@ -21,13 +21,10 @@ namespace Z0.Asm
             ResProvider = Wf.ApiResProvider();
         }
 
-        public Index<ApiHostRes> Emit()
-        {
-            var blocks = Wf.ApiIndexBuilder().IndexApiBlocks();
-            return Emit(blocks);
-        }
+        public ReadOnlySpan<ApiHostRes> Emit()
+            => Emit(Wf.ApiIndexBuilder().IndexApiBlocks());
 
-        public Index<ApiHostRes> Emit(ApiBlockIndex src)
+        public ReadOnlySpan<ApiHostRes> Emit(ApiBlockIndex src)
         {
             var apires = Emit(src, SourceDir);
             RunScripts();
@@ -37,21 +34,19 @@ namespace Z0.Asm
         void RunScripts()
         {
             var runner = ScriptRunner.create(Db);
-
-            var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
-            root.iter(build, line => Wf.Row(line));
-
-            var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
-            root.iter(pack, line => Wf.Row(line));
+            var build = runner.RunControlScript(ControlScriptNames.BuildRespack);
+            iter(build, line => Wf.Row(line));
+            var pack = runner.RunControlScript(ControlScriptNames.PackRespack);
+            iter(pack, line => Wf.Row(line));
         }
 
-        public Index<ApiHostRes> Emit(ReadOnlySpan<ApiCodeBlock> blocks)
+        public ReadOnlySpan<ApiHostRes> Emit(ReadOnlySpan<ApiCodeBlock> blocks)
             => Emit(blocks, SourceDir);
 
-        public Index<ApiHostRes> Emit(ReadOnlySpan<ApiCodeBlock> blocks, FS.FolderPath dst)
+        public ReadOnlySpan<ApiHostRes> Emit(ReadOnlySpan<ApiCodeBlock> blocks, FS.FolderPath dst)
             => Emit(CodeBlocks.hosted(blocks), dst);
 
-        Index<ApiHostRes> Emit(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath dst)
+        ReadOnlySpan<ApiHostRes> Emit(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath dst)
         {
             var flow = Wf.Running();
             var count = src.Length;
@@ -73,7 +68,7 @@ namespace Z0.Asm
             return buffer;
         }
 
-        Index<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst)
+        ReadOnlySpan<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst)
         {
             var emissions = list<ApiHostRes>();
             var flow = Wf.Running();
@@ -84,7 +79,7 @@ namespace Z0.Asm
                 emissions.Add(emitted);
             }
             Wf.Ran(flow);
-            return emissions.ToArray();
+            return emissions.ViewDeposited();
         }
 
         ApiHostRes Emit(in ApiHostBlocks src, FS.FolderPath dst)

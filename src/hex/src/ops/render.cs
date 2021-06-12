@@ -14,8 +14,17 @@ namespace Z0
 
     partial struct Hex
     {
+        [MethodImpl(Inline), Op]
+        public static uint render(LowerCased @case, Hex8 src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            seek(dst, i++) = hexchar(@case, src.Hi);
+            seek(dst, i++) = hexchar(@case, src.Lo);
+            return i - i0;
+        }
+
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void render<T>(in T src, Span<char> dst)
+        public static void render<T>(LowerCased @case, in T src, Span<char> dst)
             where T : struct
         {
             var count = size<T>();
@@ -24,18 +33,14 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = (char)code(n4, LowerCase, d);
-                seek(dst, j--) = (char)code(n4, LowerCase, Bytes.srl(d, 4));
+                seek(dst, j--) = (char)code(n4, @case, d);
+                seek(dst, j--) = (char)code(n4, @case, Bytes.srl(d, 4));
             }
         }
 
         public static string format<T>(UpperCased @case, T value)
             where T : unmanaged
                 => new string(render<T>(@case, value));
-
-        // public string format<T>(LowerCased @case, T value)
-        //     where T : unmanaged
-        //         => new string(render<T>(@case, value));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> render<T>(UpperCased @case, T value)

@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(AsmCore)" />
+      <ProjectReference Include="$(Core)" />
+      <ProjectReference Include="$(BitNumbers)" />
+      <ProjectReference Include="$(BitMasks)" />
   </ItemGroup>
 
 </Project>

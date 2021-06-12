@@ -23,19 +23,49 @@ namespace Z0.Asm
 
         const string To = " => ";
 
-        static uint render(Hex8 src, ref uint i, Span<char> dst)
-        {
-            var i0 = i;
-            seek(dst, i++) = Hex.hexchar(LowerCase, src.Hi);
-            seek(dst, i++) = Hex.hexchar(LowerCase, src.Lo);
-            return i - i0;
-        }
-
         public static string format(in AsmSig src)
         {
             var dst = text.buffer();
             render(src, dst);
             return dst.Emit();
+        }
+
+        public static uint render(in AsmMnemonic src, MnemonicCase @case, ref uint i, Span<char> dst)
+        {
+            if(src.IsEmpty)
+                return 0;
+            var i0 = i;
+            var data = src.Data;
+            switch(@case)
+            {
+                case MnemonicCase.Lowercase:
+                    SymbolicTools.lowercase(ref i, data, dst);
+                break;
+                case MnemonicCase.Uppercase:
+                    SymbolicTools.uppercase(ref i, data, dst);
+                break;
+                case MnemonicCase.Captialized:
+                    SymbolicTools.lowercase(ref i, data, dst);
+                    seek(dst, i0) = skip(data,0).ToUpper();
+                break;
+
+            }
+
+            return i - i0;
+        }
+
+        [Op]
+        public static string format(in AsmMnemonic src, MnemonicCase @case)
+        {
+            var data = src.Data;
+            var count = data.Length;
+            if(count == 0)
+                return EmptyString;
+
+            Span<char> dst = stackalloc char[count];
+            var i=0u;
+            render(src, @case, ref i, dst);
+            return text.format(dst);
         }
 
         public static void render(in AsmSig src, ITextBuffer dst)
@@ -46,13 +76,14 @@ namespace Z0.Asm
             dst.AppendFormat("{0} ", monic.Format(MnemonicCase.Lowercase));
             for(var i=0; i<count; i++)
             {
-                dst.Append(core.skip(operands,i).Expr.Format());
+                dst.Append(skip(operands,i).Expr.Format());
                 if(i != count - 1)
                     dst.Append(Chars.Comma);
             }
         }
 
-        public static uint render(AsmHexCode src, ref uint i, Span<char> dst)
+        [Op]
+        public static uint render(in AsmHexCode src, ref uint i, Span<char> dst)
         {
             var i0 = i;
             var count = src.Size;
@@ -60,7 +91,7 @@ namespace Z0.Asm
             for(var j=0; j<count; j++)
             {
                 ref readonly var b = ref skip(bytes, j);
-                render((Hex8)b, ref i, dst);
+                Hex.render(LowerCase, (Hex8)b, ref i, dst);
                 if(j != count - 1)
                     seek(dst, i++) = Chars.Space;
             }
@@ -68,14 +99,8 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(in AsmHexCode src)
-            => src.Data.FormatHexData(src.Size);
-
-        [Op]
         public static string bits(RexPrefix src)
             => text.format(BitRender.render(n8, n4, src.Code));
-
-        const string RexFieldPattern = "[W:{0} | R:{1} | X:{2} | B:{3}]";
 
         [Op]
         public static string bitfield(RexPrefix src)
@@ -84,23 +109,18 @@ namespace Z0.Asm
         public static string describe(RexPrefix src)
             => $"{src.Code.FormatAsmHex()} | [{bits(src)}] => {bitfield(src)}";
 
-        public static string bitfield(Vsib src)
+        [Op]
+        public static uint bits(Vsib src, Span<char> dst)
         {
-            var dst = text.buffer();
-            dst.Append(Open);
-
-            dst.Append(src.SS.ToString());
-
-            dst.Append(Sep);
-
-            dst.Append(src.Index.ToString());
-
-            dst.Append(Sep);
-
-            dst.Append(src.Base.ToString());
-
-            dst.Append(Close);
-            return dst.Emit();
+            var i=0u;
+            seek(dst,i++) = Open;
+            BitNumbers.render(src.SS, ref i, dst);
+            seek(dst,i++) = Chars.Space;
+            BitNumbers.render(src.Index, ref i, dst);
+            seek(dst,i++) = Chars.Space;
+            BitNumbers.render(src.Base, ref i, dst);
+            seek(dst,i++) = Close;
+            return i;
         }
 
         public static void bitfield(ModRm src, ITextBuffer dst)
@@ -212,16 +232,12 @@ namespace Z0.Asm
             else
                 dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatPadded()));
 
-            dst.Append(asm.comment(AsmRender.format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
+            dst.Append(asm.comment(format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
         }
 
         [Op]
         public static string format(in AsmThumbprint src)
             => string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatPadded(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
-
-        [Op]
-        public static string comment(in AsmThumbprint src)
-            => string.Format("; ({0})<{1}>[{2}] => {3}",  src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
 
         [Op]
         public static string format(AsmFormExpr src, byte[] encoded, string sep)
@@ -232,9 +248,7 @@ namespace Z0.Asm
         {
             var common = format(src);
             if(bitstring)
-            {
                 return string.Format("{0} => {1}", common, AsmBitstrings.format(src.Encoded));
-            }
             else
                 return common;
         }
@@ -281,7 +295,7 @@ namespace Z0.Asm
                 for(var i=0; i<To.Length; i++)
                     seek(dst,counter++) = skip(_to,i);
 
-                counter += AsmBitstrings.render(src.Encoded, counter, dst);
+                counter += AsmBitstrings.render(n8, n4, src.Encoded, counter, dst);
             }
 
             return counter;
@@ -294,7 +308,6 @@ namespace Z0.Asm
             var statement = string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatPadded(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
             return string.Format("{0} => {1}", statement, AsmBitstrings.format(src.Encoded));
         }
-
 
         [Op]
         public static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
@@ -330,11 +343,11 @@ namespace Z0.Asm
 
         [Op]
         public static string format(in AsmBranchInfo src)
-            => text.concat(src.Source, " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
+            => string.Concat(src.Source, " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
 
         [Op]
-        public static string format(in AsmImmInfo src)
-            => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
+        public static string format(in ImmInfo src)
+            => string.Concat(src.Value.FormatHex(zpad:false, prespec:false));
 
         [Op]
         public static string format(in AsmDx src)
@@ -384,5 +397,7 @@ namespace Z0.Asm
         [Op]
         public static string format(in CallRel32 src)
             => string.Format("{0}:{1} -> {2}", src.ClientAddress, src.TargetDx, src.TargetAddress);
+
+        const string RexFieldPattern = "[W:{0} | R:{1} | X:{2} | B:{3}]";
     }
 }

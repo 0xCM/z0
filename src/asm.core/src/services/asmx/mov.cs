@@ -4,15 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static AsmMnemonicCode;
+    using static AsmRegCodes;
 
-    using static Root;
-
-    partial struct asm
+    partial struct AsmX
     {
-        [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpr opcode(string src)
-            => new AsmOpCodeExpr(src);
+        [Op]
+        public AsmExpr mov(Gp64 a0, Imm64 a1)
+            => Produce(S[MOV], S[a0], a1);
     }
 }

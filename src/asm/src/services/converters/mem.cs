@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static IceMemDirect memDirect(in IceInstruction src)
-            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dispacement(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
+            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
 
         [Op]
         public static IceMemoryInfo meminfo(in IceInstruction src, byte index)

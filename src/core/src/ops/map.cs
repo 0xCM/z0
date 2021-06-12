@@ -102,7 +102,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<R> map<S,T,R>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Func<S,T,R> f, Span<R> dst)
         {
-            var count = Math.Min(a.Length, b.Length);
+            var count = min(a.Length, b.Length);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = f(skip(a,i), skip(b,i));
             return dst;
@@ -118,10 +118,18 @@ namespace Z0
         /// <typeparam name="T">The cell type of the second operand</typeparam>
         public static Span<R> map<S,T,R>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Func<S,T,R> f)
         {
-            var count = Math.Min(a.Length, b.Length);
+            var count = min(a.Length, b.Length);
             var dst = sys.alloc<R>(count);
             map(a,b,f,dst);
             return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static void mapi<S,T>(ReadOnlySpan<S> rows, Func<int,S,T> f)
+        {
+            var count = rows.Length;
+            for(var i=0; i<count; i++)
+                f(i, skip(rows,i));
         }
     }
 }

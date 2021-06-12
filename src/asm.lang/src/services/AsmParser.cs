@@ -119,7 +119,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Outcome parse(AsmMnemonic src, out AsmMnemonicCode dst)
+        public static Outcome parse(in AsmMnemonic src, out AsmMnemonicCode dst)
         {
             if(Enums.parse(src.Format(), out dst))
                 return true;
@@ -131,7 +131,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Outcome parse(TextRow src, out AsmApiStatement dst)
+        public static Outcome parse(in TextRow src, out AsmApiStatement dst)
         {
             var result = Outcome.Success;
             var count = src.CellCount;

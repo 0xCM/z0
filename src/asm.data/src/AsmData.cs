@@ -39,7 +39,6 @@ namespace Z0.Asm
             public Asset XedChipData() => Asset("xed-cdata.txt");
 
             public Asset XedTables() => Asset("xed-tables.txt");
-
         }
     }
 }

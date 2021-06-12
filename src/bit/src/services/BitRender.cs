@@ -15,11 +15,17 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-
         [MethodImpl(Inline), Op]
         static uint separate(uint offset, Span<char> dst)
         {
             seek(dst,offset) = Chars.Space;
+            return 1;
+        }
+
+        [MethodImpl(Inline), Op]
+        static uint separate(uint offset, Span<AsciCode> dst)
+        {
+            seek(dst,offset) = AsciCode.Space;
             return 1;
         }
     }

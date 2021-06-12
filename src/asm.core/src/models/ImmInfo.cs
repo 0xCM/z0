@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
-    public struct AsmImmInfo
+    public struct ImmInfo
     {
         public NumericWidth Width;
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
         public Sx SignExtension;
 
         [MethodImpl(Inline)]
-        public AsmImmInfo(NumericWidth size, ulong value, bool direct, Sx sek)
+        public ImmInfo(NumericWidth size, ulong value, bool direct, Sx sek)
         {
             Width = size;
             Value = value;
@@ -35,7 +35,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmImmInfo(NumericWidth size, ulong value, bool direct)
+        public ImmInfo(NumericWidth size, ulong value, bool direct)
         {
             Width = size;
             Value = value;
@@ -45,7 +45,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmImmInfo(NumericWidth size, long value, bool direct)
+        public ImmInfo(NumericWidth size, long value, bool direct)
         {
             Width = size;
             Value = (ulong)value;
@@ -55,7 +55,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmImmInfo(NumericWidth size, long value, bool direct, Sx sek)
+        public ImmInfo(NumericWidth size, long value, bool direct, Sx sek)
         {
             Width = size;
             Value = (ulong)value;

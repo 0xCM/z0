@@ -58,6 +58,5 @@ namespace Z0.Asm
 
         public static AsmFormExpr Empty
             => new AsmFormExpr(AsmOpCodeExpr.Empty, AsmSigExpr.Empty);
-
     }
 }

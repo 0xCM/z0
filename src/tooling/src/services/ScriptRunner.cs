@@ -27,61 +27,59 @@ namespace Z0
         void OnStatusEvent(in string src)
             => term.inform(src);
 
-        public Outcome<Index<TextLine>> RunControlScript(FS.FileName name)
+        public ReadOnlySpan<TextLine> RunControlScript(FS.FileName name)
             => RunScript(Paths.ControlScript(name), new ScriptId(name.Name));
 
-        public Outcome<Index<TextLine>> RunToolCmd(ToolId tool, ScriptId script)
+        public ReadOnlySpan<TextLine> RunToolCmd(ToolId tool, ScriptId script)
             => RunToolScript(tool, script, ToolScriptKind.Cmd);
 
         public FS.FilePath ToolCmdPath(ToolId tool, ScriptId script)
             => ScriptFile(tool,script,ToolScriptKind.Cmd);
 
-        public Outcome<Index<TextLine>> RunToolPs(ToolId tool, ScriptId script)
+        public ReadOnlySpan<TextLine> RunToolPs(ToolId tool, ScriptId script)
             => RunToolScript(tool, script, ToolScriptKind.Ps);
 
-        public Outcome<Index<TextLine>> RunToolScript(ToolId tool, ScriptId script, ToolScriptKind kind)
+        public ReadOnlySpan<TextLine> RunToolScript(ToolId tool, ScriptId script, ToolScriptKind kind)
             => Run(CmdLine(ScriptFile(tool, script, kind), kind), script);
 
-        public Outcome<Index<TextLine>> RunScript(FS.FilePath src)
+        public ReadOnlySpan<TextLine> RunScript(FS.FilePath src)
         {
             using var writer = Paths.CmdLog(src.FileName.Format()).Writer();
             try
             {
                 var cmd = WinCmd.script(src);
                 var process = ToolCmd.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
-                var lines =  text.lines(process.Output);
-                root.iter(lines, line => writer.WriteLine(line));
+                var lines =  Lines.read(process.Output);
+                core.iter(lines, line => writer.WriteLine(line));
                 return lines;
             }
             catch(Exception e)
             {
                 term.error(e);
                 writer.WriteLine(e.ToString());
-                return e;
+                return default;
             }
         }
 
-        Outcome<Index<TextLine>> Run(CmdLine cmd, ScriptId script)
+        ReadOnlySpan<TextLine> Run(CmdLine cmd, ScriptId script)
         {
             using var writer = Paths.CmdLog(script).Writer();
-
             try
             {
                 var process = ToolCmd.run(cmd).Wait();
-                var lines =  text.lines(process.Output);
+                var lines =  Lines.read(process.Output);
                 root.iter(lines, line => writer.WriteLine(line));
-
                 return lines;
             }
             catch(Exception e)
             {
                 term.error(e);
                 writer.WriteLine(e.ToString());
-                return e;
+                return default;
             }
         }
 
-        Outcome<Index<TextLine>> RunScript(FS.FilePath src, ScriptId script)
+        ReadOnlySpan<TextLine> RunScript(FS.FilePath src, ScriptId script)
             => Run(new CmdLine(src.Format(PathSeparator.BS)), script);
 
         FS.FilePath ScriptFile(ToolId tool, ScriptId script, ToolScriptKind kind)
