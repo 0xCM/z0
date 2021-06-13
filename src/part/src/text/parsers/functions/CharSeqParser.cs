@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct ParseComposer
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CharSeqParser CreateCharSeqParser(char delimiter, bool skipWs = true)
-            => new CharSeqParser(delimiter ,skipWs);
-
-        [Op, Closures(Closure)]
-        public static Outcome parse(string input, CharSeqParser parser, out Index<char[]> dst)
-            => parser.Parse(input, out dst);
-
         public readonly struct CharSeqParser : IParseFunction<Index<char[]>>
         {
             readonly char Delimiter;

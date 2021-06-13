@@ -24,5 +24,13 @@ namespace Z0.Asm
             Statement = expr;
             Code = code;
         }
+
+        [MethodImpl(Inline)]
+        public AsmDisassembly(Hex64 offset, AsmExpr expr)
+        {
+            Offset = offset;
+            Statement = expr;
+            Code = AsmHexCode.Empty;
+        }
     }
 }

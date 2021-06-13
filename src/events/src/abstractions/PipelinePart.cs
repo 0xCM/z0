@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public abstract class PipelinePart<H> : IPipelinePart
         where H : PipelinePart<H>, new()

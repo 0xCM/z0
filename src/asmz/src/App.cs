@@ -823,19 +823,27 @@ namespace Z0.Asm
 
         }
 
-        public void ParseDisassembly()
+        void ParseBdDisassembly()
         {
             var src = FS.path(@"C:\Dev\awb\.build\dis\and.bd.asm");
             var dir = Db.AppLogDir();
-            var parser = Wf.DisassemblyParser();
+            var parser = Wf.DbDiasmProcessor();
             parser.ParseDisassembly(src,dir);
+
+        }
+        public void ParseDisassembly()
+        {
+            var src = FS.path(@"C:\Data\zdb\tools\dumpbin\output\xxhsum.exe.disasm.asm");
+            var dir = Db.AppLogDir();
+            var parser = Wf.DumpBinProcesor();
+            var dst = dir + FS.file("xxhsum", FS.Asm);
+            parser.TransformFile(src,dst);
         }
 
         public void RunAsmCases()
         {
             var opcode = AsmCases.PINSRB.OpCodeSig();
         }
-
 
         Index<AsciCode> IndexIdentifiers()
         {
@@ -1028,11 +1036,11 @@ namespace Z0.Asm
 
         public void Run()
         {
-
+            ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
-            Wf.GlobalCommands().RunExtractWorkflow();
+            //Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));

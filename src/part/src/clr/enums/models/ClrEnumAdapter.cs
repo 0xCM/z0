@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
+    using static Root;
 
     public readonly struct ClrEnumAdapter
     {
@@ -61,20 +61,6 @@ namespace Z0
                 indices.Add(new EnumLiteralDetail<E>(field, type, i, field.Name, value));
             }
             return indices.ToArray();
-        }
-
-        /// <summary>
-        /// Gets the literals defined by an enumeration
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        public static E[] Literals<E>()
-            where E : unmanaged, Enum
-        {
-            var i = Data<E>();
-            var dst = new E[i.Length];
-            for(var j = 0; j<dst.Length; j++)
-                dst[j] = i[j].LiteralValue;
-            return dst;
         }
 
         [MethodImpl(Inline)]

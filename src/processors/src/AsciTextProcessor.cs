@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Root;
     using static core;
@@ -41,41 +40,6 @@ namespace Z0.Asm
             throw new NotImplementedException();
         }
 
-        protected void ProcessData(ReadOnlySpan<byte> src, FS.FilePath dst)
-        {
-            var lines = LineCount(src);
-            var size = (ByteSize)src.Length;
-            var max = MaxLineLength(src);
-            using var writer = dst.Writer(Encoding.ASCII);
-            Span<char> buffer = alloc<char>(max);
-            var pos = 0u;
-            Emitting(dst);
-            var length = 0u;
-            var counter = 0u;
-            var number = 0u;
-            while(pos++ < size -1)
-            {
-                ref readonly var a0 = ref skip(src, pos);
-                ref readonly var a1 = ref skip(src, pos + 1);
-                if(Lines.eol(a0,a1))
-                {
-                    var _line = Lines.asci(src, number++, counter, length + 1);
-                    var outcome = ProcessLine(ref _line, out var content);
-                    if(outcome.Fail)
-                    {
-                        Error(outcome.Message);
-                        break;
-                    }
-                    buffer.Clear();
-                    writer.Write(_line.Format(buffer));
-                    pos++;
-                    length = 0;
-                    counter = pos;
-                }
-                else
-                    length++;
-            }
-        }
 
         protected void ProcessFile(MemoryFile src, TextProcessorSettings settings, Span<char> buffer)
         {
@@ -121,6 +85,21 @@ namespace Z0.Asm
             }
 
             Status(ProcessedLines.Format(lines, src.Path));
+        }
+
+        protected virtual Outcome TransformData(ReadOnlySpan<byte> src, FS.FilePath dst)
+        {
+            return false;
+        }
+
+        public void TransformFile(FS.FilePath src, FS.FilePath dst)
+        {
+            using var map = MemoryFiles.map(src);
+            var flow = Processing(src);
+            var emitting = Emitting(dst);
+            var outcome = TransformData(map.View<byte>(), dst);
+            Emitted(emitting, 0);
+            Processed(flow);
         }
 
         protected void ProcessFile(MemoryFile src)

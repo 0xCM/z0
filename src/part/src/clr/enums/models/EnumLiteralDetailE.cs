@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines an enumeration literal as the triple (index,identifier,value)

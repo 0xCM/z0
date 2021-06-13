@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct ParseComposer
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SeqParser<T> CreateSeqParser<T>(string delimiter, ParseFunction<T> fx, bool clean = true)
-            => new SeqParser<T>(delimiter, fx, clean);
-
-        [Op, Closures(Closure)]
-        public static Outcome parse<T>(string input, SeqParser<T> parser, out T[] dst)
-            => parser.Parse(input, out dst);
-
         public readonly struct SeqParser<T> : IParseFunction<T[]>
         {
             readonly ParseFunction<T> TermParser;
@@ -39,7 +31,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public Outcome Parse(string src, out T[] dst)
             {
-                dst = sys.empty<T>();
+                dst = array<T>();
                 var components = text.split(src, Delimiter, SplitClean).View;
                 var count = components.Length;
                 var result = Outcome.Success;

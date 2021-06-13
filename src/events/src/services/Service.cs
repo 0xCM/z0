@@ -93,19 +93,9 @@ namespace Z0
             return Signal.EmittingFile(src);
         }
 
-        protected EmittedFileEvent Emitted(FS.FilePath src)
-        {
-            return Signal.EmittedFile(src);
-        }
-
         protected EmittedFileEvent Emitted(EmittingFileEvent e, Count metric)
         {
             return Signal.EmittedFile(metric, e.Target);
-        }
-
-        protected EmittedFileEvent Emitted(Count metric, FS.FilePath src)
-        {
-            return Signal.EmittedFile(metric, src);
         }
     }
 }

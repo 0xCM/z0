@@ -16,7 +16,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="match">The match text</param>
         [Op]
-        public static bool head(string src, string match)
+        public static bit head(string src, string match)
         {
             if(nonempty(src) && nonempty(match))
                 return src.StartsWith(match, Invariant);
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="match">The match text</param>
         [Op]
-        public static bool head(string src, char match)
+        public static bit head(string src, char match)
         {
             if(nonempty(src))
                 return src[0] == match;

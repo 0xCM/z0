@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum AsmDisplacementSize : byte
+    public enum AsmScale : byte
     {
-        None,
-
         y1 = 1,
 
         y2 = 2,

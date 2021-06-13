@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static AsmRegCodes;
     using static AsmCodes;
     using static AsmOpCodeTokens;
-    using static AsmSigTokens;
 
     [ApiHost]
     public class AsmSymbols

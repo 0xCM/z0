@@ -33,5 +33,11 @@ namespace Z0
 
         public string Format(Span<char> buffer)
             => SymbolicRender.format(this, buffer);
+
+        public string Format()
+        {
+            Span<char> dst = stackalloc char[Content.Length];
+            return SymbolicRender.format(this, dst);
+        }
     }
 }

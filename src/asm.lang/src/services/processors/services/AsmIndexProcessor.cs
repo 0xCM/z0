@@ -8,9 +8,9 @@ namespace Z0.Asm
 
     public sealed class AsmIndexProcessor : AsciTextProcessor<AsmIndexProcessor,AsmIndex>
     {
-        protected override Outcome<AsmIndex> Process(uint number, ReadOnlySpan<char> chars)
+        protected override Outcome<AsmIndex> Process(uint number, ReadOnlySpan<char> data)
         {
-            var outcome = AsmParser.parse(number, chars, out AsmIndex record);
+            var outcome = AsmParser.parse(number, data, out AsmIndex record);
             return outcome ? record : outcome;
         }
     }

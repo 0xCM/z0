@@ -17,11 +17,11 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static bool eol(byte a0, byte a1)
+        public static bit eol(byte a0, byte a1)
             => (C)a0 == CR || (C)a1 == LF;
 
         [MethodImpl(Inline), Op]
-        public static bool eol(char a, char b)
+        public static bit eol(char a, char b)
             => cr(a) && lf(b);
     }
 }

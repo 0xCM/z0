@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct ParseComposer
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static PairSeqParser<T> CreatePairSeqParser<T>(PairParser<T> pFx, SeqParser<string> sFx)
-            => new PairSeqParser<T>(pFx,sFx);
-
-        [Op, Closures(Closure)]
-        public static Outcome parse<T>(string input, PairSeqParser<T> parser, out Pair<T>[] dst)
-            => parser.Parse(input, out dst);
-
         public readonly struct PairSeqParser<T> : IParseFunction<Pair<T>[]>
         {
             readonly PairParser<T> PairFx;
@@ -36,7 +28,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public Outcome Parse(string src, out Pair<T>[] dst)
             {
-                dst = sys.empty<Pair<T>>();
+                dst = array<Pair<T>>();
                 var result = SeqFx.Parse(src, out var terms);
                 if(result)
                 {

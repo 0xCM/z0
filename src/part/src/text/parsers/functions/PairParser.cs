@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct ParseComposer
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static PairParser<T> CreatePairParser<T>(string delimiter, ParseFunction<T> fx, bool clean = true)
-            => new PairParser<T>(delimiter, fx, clean);
-
-        [Op, Closures(Closure)]
-        public static Outcome parse<T>(string input, PairParser<T> parser, out Pair<T> dst)
-            => parser.Parse(input, out dst);
-
         public readonly struct PairParser<T> : IParseFunction<Pair<T>>
         {
             readonly ParseFunction<T> ItemParser;

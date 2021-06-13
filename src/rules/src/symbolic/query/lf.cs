@@ -18,7 +18,15 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool lf(char c)
+        public static bit lf(char c)
             => C.LF == (C)c;
+
+        /// <summary>
+        /// Tests whether a character code represents <see cref='AsciChar.LF'/>
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit lf(C c)
+            => C.LF == c;
     }
 }

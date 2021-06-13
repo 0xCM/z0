@@ -17,7 +17,6 @@ namespace Z0
 
         public static ResultCode run<S,T>(Computation<S,T> comp, ReadOnlySpan<S> src, Span<T> dst)
             => comp.Compute(src, dst);
-
     }
 
     [ApiHost]
@@ -77,7 +76,6 @@ namespace Z0
                 for(var i=0; i<count; i++)
                 {
                     result = Compute(skip(src,i), out seek(dst,i));
-
                     if(result)
                         continue;
                     else

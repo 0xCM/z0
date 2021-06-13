@@ -27,7 +27,7 @@ namespace Z0
         [Op]
         public static string format(in ClrMethodArtifact src)
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             dst.Append(format(src.ReturnType));
             dst.Append(Chars.Space);
             dst.Append(src.MethodName);

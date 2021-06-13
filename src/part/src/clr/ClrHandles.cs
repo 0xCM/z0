@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    [ApiHost(ApiNames.ClrHandles, true)]
+    [ApiHost]
     public readonly struct ClrHandles
     {
         [Op]

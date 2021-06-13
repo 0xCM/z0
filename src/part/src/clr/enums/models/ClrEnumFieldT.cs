@@ -105,6 +105,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrEnumField(ClrEnumField<T> src)
-            => new ClrEnumField(src.Index, src.Definition, memory.bw64(src.Value));
+            => new ClrEnumField(src.Index, src.Definition, core.bw64(src.Value));
     }
 }

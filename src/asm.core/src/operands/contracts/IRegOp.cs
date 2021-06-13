@@ -50,8 +50,5 @@ namespace Z0.Asm
 
         BitWidth ISized.Width
             => width<T>();
-
-        // string ITextual.Format()
-        //     => ToString();
     }
 }

@@ -11,12 +11,12 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ClrParameter : IClrRuntimeObject<ClrParameter,R.ParameterInfo>
+    public readonly struct ClrParameterAdapter : IClrRuntimeObject<ClrParameterAdapter,R.ParameterInfo>
     {
         public R.ParameterInfo Definition {get;}
 
         [MethodImpl(Inline)]
-        public ClrParameter(R.ParameterInfo src)
+        public ClrParameterAdapter(R.ParameterInfo src)
             => Definition = src;
 
         public CliToken Token
@@ -33,6 +33,7 @@ namespace Z0
 
         public ClrTypeAdapter DataType
         {
+            [MethodImpl(Inline)]
             get => Definition.ParameterType;
         }
 
@@ -55,11 +56,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrParameter(R.ParameterInfo src)
-            => new ClrParameter(src);
+        public static implicit operator ClrParameterAdapter(R.ParameterInfo src)
+            => new ClrParameterAdapter(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator R.ParameterInfo(ClrParameter src)
+        public static implicit operator R.ParameterInfo(ClrParameterAdapter src)
             => src.Definition;
     }
 }

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public enum EnumDatasetField : uint
     {
         Token = 0 | 16u << 16,

@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool digit(Base10 @base, C src)
+        public static bit digit(Base10 @base, C src)
             => contains(C.d0, C.d9, src);
 
         /// <summary>
@@ -28,11 +28,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool digit(Base10 @base, char src)
+        public static bit digit(Base10 @base, char src)
             => digit(base10, (C)src);
 
         [MethodImpl(Inline), Op]
-        public static bool @decimal(char c)
+        public static bit @decimal(char c)
             => (F)c >= F.First && (F)c <= F.Last;
     }
 }

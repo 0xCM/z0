@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="left">The left boundary</param>
         /// <param name="right">The right boundary</param>
         [Op]
-        public static bool fenced(string src, char left, char right)
+        public static bit fenced(string src, char left, char right)
         {
             if(nonempty(src))
             {
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="right">The right marker</param>
         /// <param name="compare">Th comparison type</param>
         [Op]
-        public static bool fenced(string src, string left, string right)
+        public static bit fenced(string src, string left, string right)
             => src.StartsWith(left, Invariant) && src.EndsWith(right, Invariant);
 
     }

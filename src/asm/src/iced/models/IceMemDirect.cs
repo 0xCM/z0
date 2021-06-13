@@ -11,7 +11,6 @@ namespace Z0
 
     using Z0.Asm;
 
-
     public readonly struct IceMemDirect
     {
         public readonly IceRegister Base;

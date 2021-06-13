@@ -9,9 +9,6 @@ namespace Z0.Asm
 
     using static Root;
 
-    /// <summary>
-    /// Vol I, 4-6: In 64-bit mode, a near pointer is 64 bits and equates to an effective address
-    /// </summary>
     public readonly struct NearPtr
     {
         public MemoryAddress Address {get;}
@@ -32,8 +29,5 @@ namespace Z0.Asm
         public static implicit operator NearPtr(MemoryAddress src)
             => new NearPtr(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator EffectiveAddress(NearPtr src)
-            => new NearPtr(src.Address);
     }
 }

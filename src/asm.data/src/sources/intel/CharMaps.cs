@@ -151,7 +151,7 @@ namespace Z0
                 ref readonly var c = ref c16(skip(src,i));
                 if(c != 0)
                 {
-                    if(SymbolicQuery.whitespace2(c))
+                    if(SymbolicQuery.whitespace(c))
                         writer.WriteLine(string.Format("{0}:({1})", (Hex16)i, ((AsciCode)c)));
                     else
                     {

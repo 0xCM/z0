@@ -35,6 +35,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint render(LowerCased @case, Hex32 src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            render(@case, src.Hi, ref i, dst);
+            render(@case, src.Lo, ref i, dst);
+            return i - i0;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(LowerCased @case, Hex64 src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            render(@case, src.Hi, ref i, dst);
+            render(@case, src.Lo, ref i, dst);
+            return i - i0;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint render(LowerCased @case, Hex8 src, ref uint i, Span<char> dst, HexSpecKind spec)
         {
             var i0 = i;

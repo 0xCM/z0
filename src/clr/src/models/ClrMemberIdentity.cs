@@ -82,7 +82,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format("{0}:{1}", OwnerId, MemberId);
+            => string.Format("{0}:{1}", OwnerId, MemberId);
 
         [MethodImpl(Inline)]
         public bool Equals(ClrMemberIdentity src)

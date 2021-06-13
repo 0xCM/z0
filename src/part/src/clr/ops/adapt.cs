@@ -38,11 +38,11 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Defines a <see cref='ClrParameter'/> over the source
+        /// Defines a <see cref='ClrParameterAdapter'/> over the source
         /// </summary>
         /// <param name="src">The source module</param>
         [MethodImpl(Inline), Op]
-        public static ClrParameter adapt(ParameterInfo src)
+        public static ClrParameterAdapter adapt(ParameterInfo src)
             => src;
 
         /// <summary>

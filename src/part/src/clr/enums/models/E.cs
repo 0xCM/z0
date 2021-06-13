@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// A <see cref='byte'/> refinement that is both vacuous and canonical
     /// </summary>

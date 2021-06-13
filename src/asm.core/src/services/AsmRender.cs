@@ -30,6 +30,23 @@ namespace Z0.Asm
             return dst.Emit();
         }
 
+        [Op]
+        public static uint render(in AsmDisassembly src, Span<char> dst)
+        {
+            var i=0u;
+            Hex.render(LowerCase,src.Offset, ref i, dst);
+            seek(dst,i++) = Chars.Space;
+            SymbolicTools.copy(src.Statement.Data, ref i, dst);
+            return i;
+        }
+
+        public static string format(in AsmDisassembly src, Span<char> buffer)
+        {
+            var count = render(src,buffer);
+            return text.format(slice(buffer,0,count));
+        }
+
+
         public static uint render(in AsmMnemonic src, MnemonicCase @case, ref uint i, Span<char> dst)
         {
             if(src.IsEmpty)
@@ -352,9 +369,9 @@ namespace Z0.Asm
         [Op]
         public static string format(in AsmDx src)
             => (src.Size switch{
-                AsmDisplacementSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
-                AsmDisplacementSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
-                AsmDisplacementSize.y4 => ((uint)src.Value).FormatHex(HexSpec),
+                AsmScale.y1 => ((byte)src.Value).FormatHex(HexSpec),
+                AsmScale.y2 => ((ushort)src.Value).FormatHex(HexSpec),
+                AsmScale.y4 => ((uint)src.Value).FormatHex(HexSpec),
                 _ => (src.Value).FormatHex(HexSpec),
             }) + "dx";
 

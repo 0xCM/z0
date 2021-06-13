@@ -9,17 +9,10 @@ namespace Z0
 
     using static Root;
     using static Rules;
+    using static core;
 
     partial struct ParseComposer
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static FenceParser CreateFenceParser(Fence<char> fence)
-            => new FenceParser(fence);
-
-        [Op, Closures(Closure)]
-        public static Outcome parse(string input, FenceParser parser, out string dst)
-            => parser.Parse(input, out dst);
-
         public readonly struct FenceParser : IParseFunction<string>
         {
             readonly Fence<char> Fence;
@@ -34,7 +27,7 @@ namespace Z0
             {
                 var result = Outcome.Success;
                 dst = EmptyString;
-                if(text.nonempty(src))
+                if(nonempty(src))
                     result = text.unfence(src,Fence, out dst);
                 else
                     result = (false, EmptyInput);

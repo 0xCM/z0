@@ -14,7 +14,7 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static bool lowerhex(char src)
+        public static bit lowerhex(char src)
             => ((XF)src >= XF.FirstNumber && (XF)src <= XF.LastNumber)
             || ((XF)src >= XF.FirstLetterLo && (XF)src <= XF.LastLetterLo);
 

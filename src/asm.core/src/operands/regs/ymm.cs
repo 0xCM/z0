@@ -29,7 +29,6 @@ namespace Z0.Asm
             public override string ToString()
                 => ((K)Index).ToString();
 
-
             public RegWidth Width
             {
                 [MethodImpl(Inline)]

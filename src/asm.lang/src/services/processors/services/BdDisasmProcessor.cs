@@ -12,19 +12,21 @@ namespace Z0.Asm
     using static core;
     using static Typed;
 
+    using SQ = SymbolicQuery;
+
     [ApiHost]
-    public class DisassemblyProcessor : AsciTextProcessor<DisassemblyProcessor,AsmDisassembly>
+    public class BdDisasmProcessor : AsciTextProcessor<BdDisasmProcessor,AsmDisassembly>
     {
         protected override Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
         {
             var outcome = Outcome.Success;
             dst = default;
             var data = src.Content;
-            var space1 = SymbolicQuery.next(data, 0, AsciCode.Space);
+            var space1 = SQ.next(data, 0, AsciCode.Space);
             if(space1 == NotFound)
                 return false;
             Hex.parse(slice(data,0, space1), out var offset);
-            var space2 = SymbolicQuery.next(data, (uint)space1 + 1, AsciCode.Space);
+            var space2 = SQ.next(data, (uint)space1 + 1, AsciCode.Space);
             if(space2 == NotFound)
                 return false;
 
@@ -39,7 +41,7 @@ namespace Z0.Asm
             var sbuffer = span<char>(statement.Length);
             var len = SymbolicRender.render(slice(src.Content,space1 + 16),ref i, sbuffer);
 
-            dst = new AsmDisassembly(offset, new string(slice(sbuffer,0,len)), AsmBytes.hexcode(slice(buffer,0,result.Data)));
+            dst = asm.disassembly(offset, new string(slice(sbuffer,0,len)), AsmBytes.hexcode(slice(buffer,0,result.Data)));
             return outcome;
         }
 

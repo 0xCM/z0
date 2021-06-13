@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public class DataProcessorAttribute : Attribute
+    public abstract class Pipeline : IPipeline
     {
-        public DataProcessorAttribute(string id)
-        {
-            Identifier = id;
-        }
+        public EventSignal Signal {get;}
 
-        public string Identifier {get;}
+        public abstract void Run();
+
+        protected Pipeline(EventSignal signal)
+        {
+            Signal = signal;
+        }
     }
 }

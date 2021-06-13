@@ -9,19 +9,22 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmOps;
+    using static math;
 
     using R = AsmOps;
 
     [ApiHost]
     public readonly struct AsmOp
     {
+        const byte RegWidthWidth = 3;
+
+        const byte RegClassWidth = 5;
+
+        const byte RegIndexWidth = 5;
+
         [MethodImpl(Inline), Op]
         public static RegOp reg(RegWidth width, RegClass @class, RegIndex index)
-            => new RegOp(math.or(
-                (byte)encode(width),
-                math.sll((ushort)@class,5),
-                math.sll((ushort)index, 10)
-                ));
+            => new RegOp(or((byte)encode(width), sll((ushort)@class,5), sll((ushort)index, 10)));
 
         [MethodImpl(Inline), Op]
         public static RegWidthIndex encode(RegWidth width)
@@ -37,7 +40,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static RegIndex index(RegOp src)
-            =>(RegIndex)Bits.bitseg(src.Bitfield,10,15);
+            =>(RegIndex)Bits.bitseg(src.Bitfield, 10, 15);
 
         [MethodImpl(Inline), Op]
         public static RegClass regclass(RegOp src)

@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// The size of the displacement in bytes
         /// </summary>
-        public AsmDisplacementSize Size {get;}
+        public AsmScale Size {get;}
 
         /// <summary>
         /// The displacement value
@@ -22,7 +22,7 @@ namespace Z0.Asm
         public ulong Value {get;}
 
         [MethodImpl(Inline)]
-        public AsmDx(ulong value, AsmDisplacementSize size)
+        public AsmDx(ulong value, AsmScale size)
         {
             Value = value;
             Size = size;

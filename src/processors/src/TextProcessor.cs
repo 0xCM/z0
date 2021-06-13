@@ -9,9 +9,9 @@ namespace Z0
     public abstract class TextProcessor<H,T> : ProcessService<H,T>, ITextProcessor<T>
         where H : TextProcessor<H,T>, new()
     {
-        public Outcome<T> ProcessLine(uint number, ReadOnlySpan<char> chars)
+        public Outcome<T> ProcessLine(uint number, ReadOnlySpan<char> data)
         {
-            var result = Process(number, chars);
+            var result = Process(number, data);
             if(result.Ok)
                 Receiver(result.Data);
             return result;
@@ -19,9 +19,9 @@ namespace Z0
 
         public abstract void ProcessFile(FS.FilePath src);
 
-
         protected abstract Outcome<T> Process(uint number, ReadOnlySpan<char> chars);
 
-        protected static MsgPattern<Count,FS.FileUri> ProcessedLines => "Processed {0} lines from {1}";
+        protected static MsgPattern<Count,FS.FileUri> ProcessedLines
+            => "Processed {0} lines from {1}";
     }
 }

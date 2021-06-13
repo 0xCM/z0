@@ -27,7 +27,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(FullName);
+            get => FullName.Hash;
         }
 
         public Name ShortName

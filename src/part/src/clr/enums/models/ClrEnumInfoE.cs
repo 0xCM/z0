@@ -36,37 +36,37 @@ namespace Z0
         ref EnumLiteralDetail<E> FirstDetailCell
         {
             [MethodImpl(Inline)]
-            get => ref memory.@ref<Index<EnumLiteralDetail<E>>>(DetailAddress).First;
+            get => ref @ref<Index<EnumLiteralDetail<E>>>(DetailAddress).First;
         }
 
         ref ClrEnumField<E> FirstFieldCell
         {
             [MethodImpl(Inline)]
-            get => ref memory.@ref<Index<ClrEnumField<E>>>(DetailAddress).First;
+            get => ref @ref<Index<ClrEnumField<E>>>(DetailAddress).First;
         }
 
         ref E FirstLiteralCell
         {
             [MethodImpl(Inline)]
-            get => ref memory.@ref<Index<E>>(DetailAddress).First;
+            get => ref @ref<Index<E>>(DetailAddress).First;
         }
 
         public ReadOnlySpan<EnumLiteralDetail<E>> LiteralDetails
         {
             [MethodImpl(Inline)]
-            get => memory.cover<EnumLiteralDetail<E>>(address(FirstDetailCell), FieldCount);
+            get => cover<EnumLiteralDetail<E>>(address(FirstDetailCell), FieldCount);
         }
 
         public ReadOnlySpan<ClrEnumField<E>> EnumFields
         {
             [MethodImpl(Inline)]
-            get => memory.cover<ClrEnumField<E>>(address(FirstFieldCell), FieldCount);
+            get => cover<ClrEnumField<E>>(address(FirstFieldCell), FieldCount);
         }
 
         public ReadOnlySpan<E> LiteralValues
         {
             [MethodImpl(Inline)]
-            get => memory.cover<E>(address(FirstLiteralCell), FieldCount);
+            get => cover<E>(address(FirstLiteralCell), FieldCount);
         }
     }
 }

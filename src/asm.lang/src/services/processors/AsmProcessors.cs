@@ -2,23 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
+    using System.Text;
     using System.Runtime.CompilerServices;
-
-    using static Root;
 
     using C = AsciCode;
 
-    partial struct SymbolicQuery
+    public readonly partial struct AsmProcessors
     {
-        [MethodImpl(Inline), Op]
-        public static bit tab(char c)
-            => C.Tab == (C)c;
-
-        [MethodImpl(Inline), Op]
-        public static bit tab(C c)
-            => C.Tab == c;
+       public static MsgPattern<C> MarkerCodeNotFound => "Markier '{0}' not found";
     }
 }

@@ -12,6 +12,7 @@ namespace Z0.Asm
     using I = RegIndex;
     using G = AsmOps.xmm;
     using K = AsmRegCodes.XmmReg;
+
     using api = AsmRegs;
 
     partial struct AsmOps
@@ -196,5 +197,43 @@ namespace Z0.Asm
                 => (K)src.Index;
         }
 
+        public readonly struct xmm10 : IRegOp128<xmm10>
+        {
+            public I Index => I.r10;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm10 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm10 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm11 : IRegOp128<xmm11>
+        {
+            public I Index => I.r11;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm11 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm11 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm12 : IRegOp128<xmm12>
+        {
+            public I Index => I.r12;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm12 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm12 src)
+                => (K)src.Index;
+        }
     }
 }

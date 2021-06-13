@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct ClrMember : IClrRuntimeMember<ClrMember, MemberInfo>
     {
@@ -80,17 +80,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ClrMember(MemberInfo src)
             => new ClrMember(src);
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator ClrMember(FieldInfo src)
-        //     => new ClrMember(src);
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator ClrMember(MethodInfo src)
-        //     => new ClrMember(src);
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator ClrMember(PropertyInfo src)
-        //     => new ClrMember(src);
     }
 }

@@ -27,6 +27,12 @@ namespace Z0.Asm
         public string Format()
             => Content.Format();
 
+        public ReadOnlySpan<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => Content.View;
+        }
+
         public string FormatPadded(sbyte padding = DefaultPadding)
             => string.Format(RP.pad(padding), Content);
 

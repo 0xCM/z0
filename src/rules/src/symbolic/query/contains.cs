@@ -21,11 +21,11 @@ namespace Z0
         /// <param name="max">The inclusive maximum code value</param>
         /// <param name="match">The test value</param>
         [MethodImpl(Inline), Op]
-        public static bool contains(C min, C max, C match)
+        public static bit contains(C min, C max, C match)
             => match >= min && match <= max;
 
         [MethodImpl(Inline), Op]
-        public static bool contains(SymbolRange<char> range, char src)
+        public static bit contains(SymbolRange<char> range, char src)
             => src >= range.Min && src <= range.Max;
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The test value</param>
         [MethodImpl(Inline), Op]
-        public static bool contains(ReadOnlySpan<C> src, C match)
+        public static bit contains(ReadOnlySpan<C> src, C match)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         /// <param name="match">The character to match</param>
         [MethodImpl(Inline), Op]
-        public static bool contains(string src, char match)
+        public static bit contains(string src, char match)
         {
             if(nonempty(src))
                 return(contains(span(src), match));
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         /// <param name="match">The character to match</param>
         [MethodImpl(Inline), Op]
-        public static bool contains(ReadOnlySpan<char> src, char match)
+        public static bit contains(ReadOnlySpan<char> src, char match)
         {
             var len = src.Length;
             for(var i=0; i<len; i++)

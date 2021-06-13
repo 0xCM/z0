@@ -8,6 +8,8 @@ namespace Z0
 
     using Svc = Z0.Asm;
 
+    using P = Z0.Asm.AsmProcessors;
+
     [ApiHost]
     public static class XSvc
     {
@@ -48,8 +50,12 @@ namespace Z0
             => Svc.AsmJumps.create(wf);
 
         [Op]
-        public static DisassemblyProcessor DisassemblyParser(this IWfRuntime wf)
-            => Svc.DisassemblyProcessor.create(wf);
+        public static BdDisasmProcessor DbDiasmProcessor(this IWfRuntime wf)
+            => Svc.BdDisasmProcessor.create(wf);
+
+        [Op]
+        public static P.DumpBinProcessor DumpBinProcesor(this IWfRuntime wf)
+            => P.DumpBinProcessor.create(wf);
 
         [Op]
         public static AsmToolchain AsmToolchain(this IWfRuntime context)

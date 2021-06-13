@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a version schema that supports 2, 3 or 4 32-bit segments
@@ -57,7 +57,7 @@ namespace Z0
             => src is VersionInfo other && Equals(other);
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(A,B,C,D);
+            => (int)FastHash.combine(FastHash.combine(A,B),FastHash.combine(C,D));
 
         public int CompareTo(VersionInfo src)
         {
@@ -96,22 +96,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator >=(VersionInfo lhs, VersionInfo rhs)
             => rhs <= lhs;
-
-        [MethodImpl(Inline)]
-        public static implicit operator VersionInfo(ConstPair<uint> src)
-            => new VersionInfo(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator VersionInfo(Pair<uint> src)
-            => new VersionInfo(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator VersionInfo(ConstTriple<uint> src)
-            => new VersionInfo(src.First, src.Second, src.Third);
-
-        [MethodImpl(Inline)]
-        public static implicit operator VersionInfo(ConstQuad<uint> src)
-            => new VersionInfo(src.First, src.Second, src.Third, src.Fourth);
 
         [MethodImpl(Inline)]
         public static implicit operator VersionInfo(Version src)

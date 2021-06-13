@@ -14,14 +14,14 @@ namespace Z0
 
     partial struct SymbolicQuery
     {
-       /// <summary>
+        /// <summary>
         /// Determines whether a span segment consists only of decimal digits
         /// </summary>
         /// <param name="src"></param>
         /// <param name="offset"></param>
         /// <param name="count"></param>
         [MethodImpl(Inline), Op]
-        public static bool digits(Base10 @base, ReadOnlySpan<char> src, uint offset, uint count)
+        public static bit digits(Base10 @base, ReadOnlySpan<char> src, uint offset, uint count)
         {
             for(var i=offset; i<count+offset; i++)
             {
