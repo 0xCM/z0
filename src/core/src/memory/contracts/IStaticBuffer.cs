@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The buffer's address which should remain unchanged throughout its lifetime
         /// </summary>
-        MemoryAddress BufferAddress {get;}
+        MemoryAddress Address {get;}
 
         /// <summary>
         /// The number of cells held in the buffer

@@ -14,4 +14,15 @@ namespace Z0
         ByteSize Size
             => Width.Bytes;
     }
+
+    [Free]
+    public interface ISized<T> : ISized
+        where T : unmanaged
+    {
+        ByteSize ISized.Size
+            => core.size<T>();
+
+        BitWidth ISized.Width
+            => core.width<T>();
+    }
 }

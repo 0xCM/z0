@@ -19,10 +19,21 @@ namespace Z0
     }
 
     [Free]
-    public interface IBufferToken
+    public interface IBufferToken : IAddressable
     {
         IntPtr Handle {get;}
 
         int Size {get;}
+
+        MemoryAddress IAddressable.Address
+            => Handle;
+    }
+
+
+    [Free]
+    public interface IBufferToken<F> : IBufferToken
+        where F : unmanaged, IDataCell
+    {
+
     }
 }

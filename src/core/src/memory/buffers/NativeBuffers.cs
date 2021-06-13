@@ -14,37 +14,32 @@ namespace Z0
     /// </summary>
     public unsafe class NativeBuffers : IDisposable
     {
-        /// <summary>
-        /// Creates a buffer sequence that owns the underlying memory allocation and releases it upon disposal
-        /// </summary>
-        /// <param name="size">The size of each buffer</param>
-        /// <param name="count">The number of buffers to allocate</param>
-        [MethodImpl(Inline), Op]
-        public static NativeBuffers alloc(uint size, byte count = 5, bool owns = true)
-            => new NativeBuffers(size, count, owns);
-
-
-
         internal readonly NativeBuffer Allocation;
 
         readonly Index<BufferToken> Tokens;
 
-        readonly byte BufferCount;
+        readonly ByteSize SegSize;
 
-        readonly uint BufferSize;
+        readonly byte SegCount;
 
         readonly uint TotalSize;
 
-        readonly bool OwnsBuffer;
-
-        internal NativeBuffers(uint size, byte count, bool owns = true)
+        internal NativeBuffers(ByteSize segsize, byte segcount)
         {
-            OwnsBuffer = owns;
-            BufferCount = count;
-            BufferSize = size;
-            TotalSize = BufferCount*BufferSize;
+            SegCount = segcount;
+            SegSize = segsize;
+            TotalSize = SegCount*SegSize;
             Allocation = Buffers.native(TotalSize);
-            Tokens = Buffers.tokenize(Allocation.Handle, BufferSize, BufferCount);
+            Tokens = Buffers.tokenize(Allocation.Handle, SegSize, SegCount);
+        }
+
+        internal NativeBuffers(ByteSize segsize, byte segcount, NativeBuffer allocation, Index<BufferToken> tokens)
+        {
+            SegCount = segcount;
+            SegSize = segsize;
+            TotalSize = SegCount*SegSize;
+            Allocation = allocation;
+            Tokens = tokens;
         }
 
         [MethodImpl(Inline)]
@@ -90,12 +85,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BufferTokens Tokenize()
-            => Tokens.ToArray();
+            => Tokens.Storage;
 
         public void Dispose()
         {
-            if(OwnsBuffer)
-                Allocation.Dispose();
+            Allocation.Dispose();
         }
     }
 }

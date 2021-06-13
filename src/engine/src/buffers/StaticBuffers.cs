@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> covered<T>(in StaticBuffer<T> src)
-            => first(cover<Index<T>>(src.BufferAddress, 1)).Storage;
+            => first(cover<Index<T>>(src.Address, 1)).Storage;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref StaticBuffer<T> deposit<T>(T[] src, ref StaticBuffer<T> dst)

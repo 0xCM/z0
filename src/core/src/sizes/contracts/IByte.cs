@@ -14,6 +14,9 @@ namespace Z0
         BitWidth ISized.Width
             => 8;
 
+        ByteSize ISized.Size
+            => 1;
+
         uint IHashed.Hash
             => Value;
     }

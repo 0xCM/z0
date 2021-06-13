@@ -7,23 +7,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
+
+    using api = Buffers;
+
 
     /// <summary>
     /// Represents a native buffer allocation
     /// </summary>
-    public readonly struct NativeBuffer : IDisposable
+    public readonly struct NativeBuffer : IBufferAllocation
     {
-        /// <summary>
-        /// Allocates a native buffer
-        /// </summary>
-        /// <param name="size">The buffer length in bytes</param>
-        [MethodImpl(Inline), Op]
-        public static NativeBuffer alloc(uint size)
-            => new NativeBuffer((Buffers.liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
-
         public IntPtr Handle {get;}
 
         public ByteSize Size {get;}
@@ -35,27 +29,33 @@ namespace Z0
             Size = (uint)token.Size;
         }
 
-        public BufferToken Token
+        public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => new BufferToken(Handle, Size);
+            get => Handle;
+        }
+
+        public BitWidth Width
+        {
+            [MethodImpl(Inline)]
+            get => Size.Bits;
         }
 
         /// <summary>
         /// Presents the allocation via a span
         /// </summary>
-        public unsafe Span<byte> Data
+        public unsafe Span<byte> Allocated
         {
             [MethodImpl(Inline)]
-            get => new Span<byte>(Handle.ToPointer(), (int)Size);
+            get => api.allocated(this);
         }
 
         [MethodImpl(Inline)]
         public void Dispose()
-            => Marshal.FreeHGlobal(Handle);
+            => api.release(this);
 
         [MethodImpl(Inline)]
         public static implicit operator BufferToken(NativeBuffer src)
-            => src.Token;
+            => api.token(src.Address, src.Size);
     }
 }

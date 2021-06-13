@@ -32,5 +32,8 @@ namespace Z0
     {
         BitWidth ISized.Width
             => default(W).BitWidth;
+
+        ByteSize ISized.Size
+            => default(W).BitWidth/8;
     }
 }

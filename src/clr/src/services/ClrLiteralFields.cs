@@ -16,6 +16,22 @@ namespace Z0
     [ApiHost]
     public readonly struct ClrLiteralFields
     {
+        [Op]
+        public static void strings(Type host, FieldInfo[] src, Span<string> dst)
+        {
+            var @base = core.address(host);
+            var count = src.Length;
+            var offset = MemoryAddress.Zero;
+
+            for(var j=0u; j<count; j++)
+            {
+                ref readonly var f = ref src[j];
+                var content = @string(f) ?? EmptyString;
+                seek(dst,j) = content;
+                if(!blank(content))
+                    offset += ClrFields.primal(@base, offset, f).DataSize;
+            }
+        }
         [MethodImpl(Inline), Op]
         public static string @string(FieldInfo f)
             => sys.constant<string>(f);

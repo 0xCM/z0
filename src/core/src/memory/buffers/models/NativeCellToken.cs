@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Describes a fixed-width allocated buffer
     /// </summary>
-    public readonly struct NativeCellToken<F> : ICellBufferToken<F>
+    public readonly struct NativeCellToken<F> : IBufferToken<F>
         where F : unmanaged, IDataCell
     {
-        public readonly MemoryAddress Address;
+        public MemoryAddress Address {get;}
 
-        public readonly uint BufferSize;
+        public uint BufferSize {get;}
 
         [MethodImpl(Inline)]
         internal NativeCellToken(MemoryAddress address, uint size)

@@ -30,6 +30,9 @@ namespace Z0.Asm
         BitWidth ISized.Width
             => 8;
 
+        ByteSize ISized.Size
+            => 1;
+
         SizeKeyword IMemOp.Qualifier
             => SizeKeyword.@byte;
     }
@@ -40,12 +43,19 @@ namespace Z0.Asm
 
         BitWidth ISized.Width
             => 8;
+
+        ByteSize ISized.Size
+            => 1;
+
     }
 
     public interface IMemOp16 : IMemOp
     {
         BitWidth ISized.Width
             => 16;
+
+        ByteSize ISized.Size
+            => 2;
 
         SizeKeyword IMemOp.Qualifier
             => SizeKeyword.word;
@@ -54,15 +64,21 @@ namespace Z0.Asm
     public interface IMemOp16<T> : IMemOp16, IMemOp<T>
         where T : unmanaged, IMemOp16<T>
     {
-
         BitWidth ISized.Width
             => 16;
+
+        ByteSize ISized.Size
+            => 2;
+
     }
 
     public interface IMemOp32 : IMemOp
     {
         BitWidth ISized.Width
             => 32;
+
+        ByteSize ISized.Size
+            => 4;
 
         SizeKeyword IMemOp.Qualifier
             => SizeKeyword.dword;
@@ -73,12 +89,18 @@ namespace Z0.Asm
     {
         BitWidth ISized.Width
             => 32;
+
+        ByteSize ISized.Size
+            => 4;
     }
 
     public interface IMemOp64 : IMemOp
     {
         BitWidth ISized.Width
             => 64;
+
+        ByteSize ISized.Size
+            => 8;
 
         SizeKeyword IMemOp.Qualifier
             => SizeKeyword.qword;    }
@@ -88,12 +110,18 @@ namespace Z0.Asm
     {
         BitWidth ISized.Width
             => 64;
+
+        ByteSize ISized.Size
+            => 8;
     }
 
     public interface IMemOp128 : IMemOp
     {
         BitWidth ISized.Width
             => 128;
+
+        ByteSize ISized.Size
+            => 16;
 
         SizeKeyword IMemOp.Qualifier
             => SizeKeyword.xmmword;
@@ -104,12 +132,18 @@ namespace Z0.Asm
     {
         BitWidth ISized.Width
             => 128;
+
+        ByteSize ISized.Size
+            => 16;
     }
 
     public interface IMemOp256 : IMemOp
     {
         BitWidth ISized.Width
             => 256;
+
+        ByteSize ISized.Size
+            => 32;
 
         SizeKeyword IMemOp.Qualifier
             => SizeKeyword.ymmword;
@@ -120,12 +154,18 @@ namespace Z0.Asm
     {
         BitWidth ISized.Width
             => 256;
+
+        ByteSize ISized.Size
+            => 32;
     }
 
     public interface IMemOp512 : IMemOp
     {
         BitWidth ISized.Width
             => 512;
+
+        ByteSize ISized.Size
+            => 64;
 
         SizeKeyword IMemOp.Qualifier
             => SizeKeyword.zmmword;
@@ -136,6 +176,9 @@ namespace Z0.Asm
     {
         BitWidth ISized.Width
             => 512;
+
+        ByteSize ISized.Size
+            => 64;
     }
 
     [Free]
@@ -148,5 +191,8 @@ namespace Z0.Asm
 
         BitWidth ISized.Width
             => Width.BitWidth;
+
+        ByteSize ISized.Size
+            => Width.BitWidth/8;
     }
 }

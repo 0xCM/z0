@@ -28,6 +28,9 @@ namespace Z0.Asm
         BitWidth ISized.Width
             => (uint)Width;
 
+        ByteSize ISized.Size
+            => ((uint)Width)/8;
+
         /// <summary>
         /// The width of the represented register operand
         /// </summary>
@@ -42,7 +45,7 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="T">The represented storage type</typeparam>
     [Free]
-    public interface IRegOp<T> : IRegOp
+    public interface IRegOp<T> : IRegOp, ISized<T>
         where T : unmanaged
     {
         AsmOpClass IAsmOp.OpClass
@@ -50,5 +53,8 @@ namespace Z0.Asm
 
         BitWidth ISized.Width
             => width<T>();
+
+        ByteSize ISized.Size
+            => size<T>();
     }
 }

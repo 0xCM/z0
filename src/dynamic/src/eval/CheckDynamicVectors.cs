@@ -35,7 +35,7 @@ namespace Z0
             => Dynops.Dynexus;
 
         uint PointCount<T>()
-            => memory.size<T>()/Buffer.BufferSize;
+            => core.size<T>()/Buffer.BufferSize;
 
         public TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, ApiCodeBlock bits)
             where T : unmanaged

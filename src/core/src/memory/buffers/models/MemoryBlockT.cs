@@ -15,7 +15,6 @@ namespace Z0
     /// </summary>
     public readonly struct MemoryBlock<T> : IComparable<MemoryBlock<T>>
         where T : IEquatable<T>
-
     {
         readonly MemoryBlock Source;
 
@@ -27,6 +26,7 @@ namespace Z0
             Source = data;
             Key = key;
         }
+
         public MemoryRange Origin
         {
             [MethodImpl(Inline)]

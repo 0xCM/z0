@@ -12,10 +12,9 @@ namespace Z0.Asm
         AsmOpClass OpClass => default;
     }
 
-    public interface IAsmOp<T> : IAsmOp
-        where T : struct
+    public interface IAsmOp<T> : IAsmOp, ISized<T>
+        where T : unmanaged
     {
-        BitWidth ISized.Width
-            => core.width<T>();
+
     }
 }

@@ -37,7 +37,6 @@ namespace Z0
         public static ReadOnlySpan<ClrFieldAdapter> fields(Type src)
             => adapt(src.GetFields(BF));
 
-
         /// <summary>
         /// Returns a <see cref='ClrFieldAdapter'/> readonly span of the declared instance fields defined by the source
         /// </summary>
@@ -55,7 +54,7 @@ namespace Z0
             => fields(src);
 
         [Op]
-        public unsafe static FieldRef fieldref(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
+        public unsafe static FieldRef primal(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
         {
             var data = sys.constant(src);
             var type = src.FieldType;
@@ -89,20 +88,20 @@ namespace Z0
         }
 
         [Op]
-        public static FieldRef[] fieldrefs(Index<Type> src)
+        public static FieldRef[] literals(ReadOnlySpan<Type> src)
         {
             var dst = list<FieldRef>();
             var count = src.Length;
             for(var i=0u; i<count; i++)
             {
-                var type = src[i];
+                var type = skip(src,i);
                 var fields = ClrLiterals.search(type);
                 var @base = address(type);
                 var offset = MemoryAddress.Zero;
                 for(var j=0u; j<fields.Length; j++)
                 {
                     var fi = fields[j];
-                    var segment = fieldref(@base, offset, fi);
+                    var segment = primal(@base, offset, fi);
                     if(segment.IsNonEmpty)
                     {
                         dst.Add(segment);
@@ -111,23 +110,6 @@ namespace Z0
                 }
             }
             return dst.Array();
-        }
-
-        [Op]
-        public static void strings(Type host, FieldInfo[] src, Span<string> dst)
-        {
-            var @base = core.address(host);
-            var count = src.Length;
-            var offset = MemoryAddress.Zero;
-
-            for(var j=0u; j<count; j++)
-            {
-                ref readonly var f = ref src[j];
-                var content = ClrLiteralFields.@string(f) ?? EmptyString;
-                seek(dst,j) = content;
-                if(!blank(content))
-                    offset += fieldref(@base, offset, f).DataSize;
-            }
         }
     }
 }

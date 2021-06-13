@@ -13,16 +13,16 @@ namespace Z0
         FS.FolderPath FieldLiteralTarget
             => Wf.Db().TableRoot() + FS.folder(MemberFieldName.TableId);
 
-        Index<Paired<FieldRef,string>> EmitFieldLiterals(ApiPartTypes src)
+        ReadOnlySpan<Paired<FieldRef,string>> EmitFieldLiterals(ApiPartTypes src)
         {
-            var fields = ClrFields.fieldrefs(src.Types);
+            var fields = ClrFields.literals(src.Types);
             if(fields.Length != 0)
                 return Emit(fields, FieldLiteralTarget + FS.file(src.Part.Format(), FS.Csv));
             else
                 return Index<Paired<FieldRef,string>>.Empty;
         }
 
-        public void EmitFieldLiterals()
+        public void EmitReflectedLiterals()
         {
             FieldLiteralTarget.Clear();
             var parts = span(Wf.ApiCatalog.Parts.Map(part => ApiPartTypes.from(part)));
@@ -39,7 +39,7 @@ namespace Z0
             }
         }
 
-        Index<Paired<FieldRef,string>> Emit(FieldRef[] src, FS.FilePath dst)
+        ReadOnlySpan<Paired<FieldRef,string>> Emit(FieldRef[] src, FS.FilePath dst)
         {
             const string Sep = "| ";
 
@@ -52,12 +52,12 @@ namespace Z0
                 var width = src.Width.Content.ToString().PadRight(16);
                 var type = src.Field.DeclaringType.Name.PadRight(36);
                 var field = src.Field.Name.PadRight(36);
-                var line = text.concat(address, Sep, width, Sep,type, Sep, field, Sep, content, Sep);
+                var line = string.Concat(address, Sep, width, Sep,type, Sep, field, Sep, content, Sep);
                 return line;
             }
 
             static string FormatHeader()
-                => text.concat(
+                => string.Concat(
                     "FieldAddress".PadRight(16), Sep,
                     "FieldWidth".PadRight(16), Sep,
                     "DeclaringType".PadRight(36), Sep,

@@ -22,7 +22,7 @@ namespace Z0.Asm
 
         public IAsmContext Context {get;}
 
-        readonly NativeBuffer BufferAlloc;
+        readonly NativeBuffers _Buffers;
 
         public BufferTokens Tokens {get;}
 
@@ -30,7 +30,9 @@ namespace Z0.Asm
         public CaptureChecks(IWfRuntime wf)
         {
             Context = new AsmContext(context(wf), wf);
-            Tokens = Buffers.alloc(Pow2.T16, 5, out BufferAlloc).Tokenize();
+            _Buffers = Buffers.native(Pow2.T16, 5);
+            Tokens = _Buffers.Tokenize();
+            //Tokens = Buffers.native(Pow2.T16, 5, out BufferAlloc).Tokenize();
         }
 
         public ref readonly BufferToken this[BufferSeqId id]
@@ -41,7 +43,8 @@ namespace Z0.Asm
 
         public void Dispose()
         {
-            BufferAlloc.Dispose();
+            _Buffers.Dispose();
+            //BufferAlloc.Dispose();
         }
     }
 }

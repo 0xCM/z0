@@ -11,9 +11,8 @@ namespace Z0
     using static Root;
     using static core;
 
-
     /// <summary>
-    /// Deefines a reference to a <see cref='FieldInfo'/>
+    /// Defines a reference to a <see cref='FieldInfo'/>
     /// </summary>
     public readonly struct FieldRef : INullity
     {
@@ -23,13 +22,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public FieldRef(FieldInfo field, MemorySeg seg)
-        {
-            Segment = seg;
-            Field = field;
-        }
-
-        [MethodImpl(Inline)]
-        public FieldRef(MemorySeg seg, FieldInfo field)
         {
             Segment = seg;
             Field = field;
@@ -57,12 +49,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => MemorySegs.segref<char>(NameAddress, FieldName.Length);
-        }
-
-        public object ReflectedValue
-        {
-            [MethodImpl(Inline)]
-            get => Field.GetRawConstantValue();
         }
 
         public Type DeclaringType
@@ -245,6 +231,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator FieldRef((FieldInfo field, MemorySeg location) src)
-            => new FieldRef(src.location, src.field);
+            => new FieldRef(src.field, src.location );
     }
 }

@@ -36,7 +36,7 @@ namespace Z0
                     var count = Instance.CellCount;
                     Buffer = alloc<T>(Instance.CellCount);
                     Instance.Fill(Buffer.Storage);
-                    Instance.BufferAddress = address(Buffer);
+                    Instance.Address = address(Buffer);
                 }
                 return Instance;
             }

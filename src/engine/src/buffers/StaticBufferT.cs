@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// Specifies the address of the buffer, not its content
         /// </summary>
-        public MemoryAddress BufferAddress {get; protected set;}
+        public MemoryAddress Address {get; protected set;}
 
         public Span<T> Content
         {

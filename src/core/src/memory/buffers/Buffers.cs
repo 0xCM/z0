@@ -30,22 +30,45 @@ namespace Z0
         /// </summary>
         /// <param name="handle">The allocation handle</param>
         [MethodImpl(Inline), Op]
-        public static void release(IntPtr handle)
-            => Marshal.FreeHGlobal(handle);
+        internal static void release(in NativeBuffer src)
+            => Marshal.FreeHGlobal(src.Handle);
+
+        [MethodImpl(Inline), Op]
+        public static Span<byte> allocated(in NativeBuffer src)
+            => new Span<byte>(src.Handle.ToPointer(), (int)src.Size);
 
         /// <summary>
-        /// Creates a caller-owed buffer sequence
+        /// Allocates a native buffer
         /// </summary>
-        /// <param name="size">The size of each buffer</param>
-        /// <param name="length">The sequence length</param>
-        /// <param name="buffer">The allocation handle that defines ownership</param>
+        /// <param name="size">The buffer length in bytes</param>
         [MethodImpl(Inline), Op]
-        public static NativeBuffers alloc(uint size, byte length, out NativeBuffer buffer)
+        public static NativeBuffer native(ByteSize size)
+            => new NativeBuffer((liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
+
+        /// <summary>
+        /// Creates a buffer sequence that owns the underlying memory allocation and releases it upon disposal
+        /// </summary>
+        /// <param name="segsize">The size of each buffer</param>
+        /// <param name="segcount">The number of buffers to allocate</param>
+        [Op]
+        public static NativeBuffers native(ByteSize segsize, byte segcount)
         {
-            var buffers = NativeBuffers.alloc(size,length,false);
-            buffer = buffers.Allocation;
-            return buffers;
+            var allocation = native(segsize*segcount);
+            return new NativeBuffers(segsize, segcount, allocation, tokenize(allocation.Handle, segsize, segcount));
         }
+
+        [MethodImpl(Inline), Op]
+        public static BufferToken token(MemoryAddress @base, ByteSize size)
+            => new BufferToken(@base,size);
+
+        // [MethodImpl(Inline), Op]
+        // public static NativeBuffers nativesegs(ByteSize segsize, byte segcount)
+        // {
+        //     var totalsize = segsize*segcount;
+        //     var allocation = native(totalsize);
+        //     var tokens = tokenize(allocation.Handle, segsize, segcount);
+        //     return new NativeBuffers(segsize,segcount, allocation, tokens);
+        // }
 
         [Op]
         public static Allocation gcpin(byte[] buffer)
@@ -80,14 +103,6 @@ namespace Z0
             => new MemoryStream((encoding ?? Encoding.UTF8).GetBytes(src ?? string.Empty));
 
         /// <summary>
-        /// Allocates a native buffer
-        /// </summary>
-        /// <param name="size">The buffer length in bytes</param>
-        [MethodImpl(Inline), Op]
-        public static NativeBuffer native(uint size)
-            => new NativeBuffer((liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
-
-        /// <summary>
         /// Allocates a buffer sequence over segments of fixed type
         /// </summary>
         /// <param name="count">The number of buffers in the sequence</param>
@@ -98,7 +113,7 @@ namespace Z0
         {
             var bufferSize = (uint)default(F).Size;
             var totalSize = count*(bufferSize);
-            var allocated = NativeBuffer.alloc(totalSize);
+            var allocated = native(totalSize);
             return new NativeCells<F>(allocated, count, bufferSize, totalSize);
         }
 

@@ -43,7 +43,6 @@ namespace Z0
             var data = src.Field.GetRawConstantValue();
             if(src.Field.FieldType.IsEnum)
                 return data.ToString();
-
             return format(data, src.KindId);
         }
     }

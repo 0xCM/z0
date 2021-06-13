@@ -11,18 +11,21 @@ namespace Z0
 
     public readonly struct DynamicEvalBuffer : IDisposable
     {
-        public static DynamicEvalBuffer create(uint length, byte count)
+        public static DynamicEvalBuffer create(ByteSize length, byte count)
             => new DynamicEvalBuffer(length,count);
 
-        readonly NativeBuffer BufferAlloc;
+        readonly NativeBuffers _Buffers;
 
-        public readonly BufferTokens Tokens {get;}
+        public BufferTokens Tokens {get;}
 
-        public DynamicEvalBuffer(uint length, byte count)
-            => Tokens = Buffers.alloc(length, count, out BufferAlloc).Tokenize();
+        public DynamicEvalBuffer(ByteSize size, byte count)
+        {
+            _Buffers = Buffers.native(size,count);
+            Tokens = _Buffers.Tokenize();
+        }
 
         public void Dispose()
-            => BufferAlloc.Dispose();
+            => _Buffers.Dispose();
 
         public ref readonly BufferToken this[BufferSeqId id]
         {
