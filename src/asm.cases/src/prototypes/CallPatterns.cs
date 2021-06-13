@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct CallPatterns
@@ -22,7 +22,7 @@ namespace Z0
         public static FPtr<Mul> testFptr()
         {
             Mul f = mul;
-            return memory.fptr(f);
+            return Pointers.fptr(f);
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

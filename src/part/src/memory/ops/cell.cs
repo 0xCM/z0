@@ -19,24 +19,6 @@ namespace Z0
         public static ref readonly T cell<T>(ReadOnlySpan<T> src, ulong offset)
             => ref skip(src, offset);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T cell<T>(ReadOnlySpan<MemorySeg> src, MemorySlot n, long offset)
-             where T : struct
-                => ref cell<T>(load<T>(segment(src,n)), offset);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T cell<T>(ReadOnlySpan<MemorySeg> src, MemorySlot n, ulong offset)
-             where T : struct
-                => ref cell<T>(load<T>(segment(src,n)), offset);
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly byte cell(ReadOnlySpan<MemorySeg> src, MemorySlot n, long i)
-            => ref skip(segment(src,n).Load(), (uint)i);
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly byte cell(ReadOnlySpan<MemorySeg> src, MemorySlot n, ulong i)
-            => ref skip(segment(src,n).Load(), (uint)i);
-
         /// <summary>
         /// Reads a generic value from the head of a source span
         /// </summary>

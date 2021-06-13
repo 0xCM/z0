@@ -39,14 +39,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public CliReader(PEMemoryBlock src)
         {
-            Segment = memory.segment(src.Pointer, src.Length);
+            Segment = MemorySegs.define(src.Pointer, src.Length);
             MD = new MetadataReader(Segment.BaseAddress.Pointer<byte>(), Segment.Size);
         }
 
         [MethodImpl(Inline)]
         public CliReader(MetadataReader src)
         {
-            Segment = memory.segment(src.MetadataPointer, src.MetadataLength);
+            Segment = MemorySegs.define(src.MetadataPointer, src.MetadataLength);
             MD = src;
         }
 
@@ -59,7 +59,7 @@ namespace Z0
         public ReadOnlySpan<byte> MetaBytes
         {
             [MethodImpl(Inline)]
-            get => core.view<byte>(Segment);
+            get => MemorySegs.view<byte>(Segment);
         }
 
         public unsafe SRM.MemoryBlock MemoryBlock()

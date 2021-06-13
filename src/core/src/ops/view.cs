@@ -88,15 +88,6 @@ namespace Z0
                 => cover<T>(src.Ref<T>(), count);
 
         /// <summary>
-        /// Covers a memory reference with a readonly span
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> view<T>(MemorySeg src)
-            => cover(src.BaseAddress.Ref<T>(), count<T>(src));
-
-        /// <summary>
         /// Covers a memory segment with a span
         /// </summary>
         /// <param name="src">The base address</param>
@@ -104,15 +95,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<byte> view(MemoryAddress src, ByteSize size)
             => cover<byte>(src, size);
-
-        /// <summary>
-        /// Covers a <see cref='MemoryRange'/> with a readonly span
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> view<T>(MemoryRange src)
-            => cover(src.Min.Ref<T>(), cells<T>(src));
 
         /// <summary>
         /// Creates memory view of specified size beginning at a specified base + offset

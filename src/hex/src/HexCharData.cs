@@ -22,7 +22,7 @@ namespace Z0
     public readonly struct HexCharData
     {
         public static MemorySeg[] Segments
-            => sys.array(memseg(UpperSymData), memseg(LowerSymData), memseg(UpperCodes), memseg(LowerCodes));
+            => sys.array(MemorySegs.define(UpperSymData), MemorySegs.define(LowerSymData), MemorySegs.define(UpperCodes), MemorySegs.define(LowerCodes));
 
         /// <summary>
         /// Defines a 16-byte sequence with terms that correspond to the ASCI codes the hex digits {0..9,A..F}

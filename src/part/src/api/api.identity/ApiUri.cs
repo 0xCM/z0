@@ -93,17 +93,25 @@ namespace Z0
         [Op]
         public static OpIdentity opid(string src)
         {
-            if(text.empty(src))
-                return OpIdentity.Empty;
+            try
+            {
+                if(text.empty(src))
+                    return OpIdentity.Empty;
 
-            var name = src.TakeBefore(IDI.PartSep);
-            var suffixed = src.Contains(IDI.SuffixSep);
-            var suffix = suffixed ? src.TakeAfter(IDI.SuffixSep) : EmptyString;
-            var generic = src.TakeAfter(IDI.PartSep)[0] == IDI.Generic;
-            var imm = suffix.Contains(IDI.Imm);
-            var components = src.SplitClean(IDI.PartSep);
-            var id = new OpIdentity(src, name, suffix, generic, imm, components);
-            return id;
+                var name = src.TakeBefore(IDI.PartSep);
+                var suffixed = src.Contains(IDI.SuffixSep);
+                var suffix = suffixed ? src.TakeAfter(IDI.SuffixSep) : EmptyString;
+                var _generic = src.TakeAfter(IDI.PartSep);
+                var generic =  core.nonempty(_generic) ? _generic[0] == IDI.Generic : false;
+                var imm = suffix.Contains(IDI.Imm);
+                var components = src.SplitClean(IDI.PartSep);
+                var id = new OpIdentity(src, name, suffix, generic, imm, components);
+                return id;
+            }
+            catch(Exception)
+            {
+                throw new Exception(string.Format("Unable to created identity for {0}", src));
+            }
         }
 
         public static ParseResult<OpUri> parse(string src)

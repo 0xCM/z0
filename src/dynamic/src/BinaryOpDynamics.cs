@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct BinaryOpDynamics
@@ -19,7 +19,7 @@ namespace Z0
 
         public static unsafe DynamicOp<BinaryOp<T>> dynop<T>(Identifier name, ReadOnlySpan<byte> f)
         {
-            var emitted = emit<T>(name, (MemoryAddress)memory.liberate(f), out var method);
+            var emitted = emit<T>(name, (MemoryAddress)Buffers.liberate(f), out var method);
             return (method,emitted);
         }
 
@@ -59,18 +59,18 @@ namespace Z0
 
         [Op, Closures(UInt64k)]
         public static unsafe BinaryOp<T> create<T>(OpIdentity id, ReadOnlySpan<byte> code)
-            => emit<T>(id.Format(), memory.liberate(code), out var _);
+            => emit<T>(id.Format(), Buffers.liberate(code), out var _);
 
         [Op, Closures(UInt64k)]
         public static unsafe BinaryOp<T> create<T>(Identifier name, ReadOnlySpan<byte> f)
         {
-            var emitted = emit<T>(name, (MemoryAddress)memory.liberate(f), out var method);
+            var emitted = emit<T>(name, (MemoryAddress)Buffers.liberate(f), out var method);
             return emitted;
         }
 
         public static unsafe BinaryOp<T> create<K,T>(K kind, ReadOnlySpan<byte> code, bool generic)
             where K : unmanaged, IApiClass
-                => emit<T>(ApiIdentity.define<K,T>(kind, generic).Format(), (MemoryAddress)memory.liberate(code), out var _);
+                => emit<T>(ApiIdentity.define<K,T>(kind, generic).Format(), (MemoryAddress)Buffers.liberate(code), out var _);
 
         static unsafe BinaryOp<T> emit<T>(Identifier name, MemoryAddress f, out DynamicMethod method)
         {

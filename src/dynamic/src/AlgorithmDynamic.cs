@@ -9,17 +9,16 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
     using static Iteratees;
     using static SFx;
 
-    [ApiHost(ApiNames.Algorithms, true)]
+    [ApiHost]
     public readonly partial struct AlgorithmDynamic
     {
         [MethodImpl(Inline), Op]
         public static unsafe DynamicAction action(string id, ReadOnlySpan<byte> f)
-            => action(id, memory.liberate(f));
+            => action(id, Buffers.liberate(f));
 
         [MethodImpl(Inline), Op]
         public static unsafe DynamicAction action(string id, MemoryAddress f)

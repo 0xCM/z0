@@ -1036,11 +1036,11 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ParseDisassembly();
+            //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
-            //Wf.GlobalCommands().RunExtractWorkflow();
+            Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));

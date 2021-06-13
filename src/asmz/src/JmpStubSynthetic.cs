@@ -23,7 +23,7 @@ namespace Z0
             Jump(default);
             var @base = ApiJit.jit(GetType().Method(nameof(Jump)));
             var size = 16ul;
-            var liberated = memory.liberate(@base,size);
+            var liberated = Buffers.liberate(@base,size);
             if(liberated.IsNonZero)
                 Location = (@base, @base + size);
             return Location;

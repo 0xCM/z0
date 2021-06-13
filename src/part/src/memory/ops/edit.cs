@@ -60,19 +60,6 @@ namespace Z0
             => cover(edit(first(src)), src.Length);
 
         /// <summary>
-        /// Covers a <see cref='MemoryRange'/> with a <see cref='Span{T}'
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> edit<T>(MemoryRange src)
-            => cover(src.Min.Ref<T>(), cells<T>(src));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> edit<T>(SegRef src)
-            => src.As<T>();
-
-        /// <summary>
         /// Covers a memory segment with a span
         /// </summary>
         /// <param name="src">The base address</param>

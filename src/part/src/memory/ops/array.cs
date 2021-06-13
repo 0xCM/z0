@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct memory
     {
+
         [MethodImpl(Inline)]
         public static T[] array<T>(IEnumerable<T> src)
             => root.array(src);

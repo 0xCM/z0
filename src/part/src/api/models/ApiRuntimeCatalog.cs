@@ -21,7 +21,7 @@ namespace Z0
             var dst = new ApiRuntimeCatalog(parts,
                 parts.Select(p => p.Owner),
                 catalogs,
-                catalogs.SelectMany(c => c.ApiHosts.Storage),
+                catalogs.SelectMany(c => c.ApiHosts.Storage).Where(h => nonempty(h.HostUri.HostName)),
                 parts.Select(p => p.Id),
                 catalogs.SelectMany(x => x.Methods)
                 );

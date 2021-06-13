@@ -65,7 +65,7 @@ namespace Z0
             var flow = Wf.EmittingTable<AddressHash>(dst);
             var count = (uint)addresses.Length;
             var buffer = alloc<AddressHash>(count);
-            memory.hash(addresses,buffer);
+            MemorySymbols.hash(addresses,buffer);
             Tables.emit(@readonly(buffer), dst);
             Wf.EmittedTable(flow, count);
             return buffer;

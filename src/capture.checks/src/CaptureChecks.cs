@@ -30,7 +30,7 @@ namespace Z0.Asm
         public CaptureChecks(IWfRuntime wf)
         {
             Context = new AsmContext(context(wf), wf);
-            Tokens = memory.alloc(Pow2.T16, 5, out BufferAlloc).Tokenize();
+            Tokens = Buffers.alloc(Pow2.T16, 5, out BufferAlloc).Tokenize();
         }
 
         public ref readonly BufferToken this[BufferSeqId id]

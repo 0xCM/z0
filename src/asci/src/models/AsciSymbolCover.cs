@@ -36,7 +36,7 @@ namespace Z0
         public SegRef<AsciSymbol> Ref
         {
             [MethodImpl(Inline), Op]
-            get => memory.segref(first(Data), Data.Length);
+            get => MemorySegs.segref(first(Data), Data.Length);
         }
 
         public ref AsciSymbol First
