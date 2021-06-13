@@ -151,7 +151,7 @@ namespace Z0
             dst.EntryAddress = src.EntryPointAddress;
             dst.ImagePath = FS.path(src.FileName);
             dst.MemorySize = src.ModuleMemorySize;
-            dst.Version = root.pair((uint)src.FileVersionInfo.FileMajorPart, (uint)src.FileVersionInfo.FileMinorPart);
+            dst.Version = ((uint)src.FileVersionInfo.FileMajorPart, (uint)src.FileVersionInfo.FileMinorPart);
             return ref dst;
         }
 
@@ -169,7 +169,7 @@ namespace Z0
             dst.UserRuntime = src.UserProcessorTime;
             dst.ImagePath = FS.path(src.MainModule.FileName);
             dst.MemorySize = src.MainModule.ModuleMemorySize;
-            dst.ImageVersion = root.pair((uint)src.MainModule.FileVersionInfo.FileMajorPart, (uint)src.MainModule.FileVersionInfo.FileMinorPart);
+            dst.ImageVersion = ((uint)src.MainModule.FileVersionInfo.FileMajorPart, (uint)src.MainModule.FileVersionInfo.FileMinorPart);
             dst.EntryAddress = src.MainModule.EntryPointAddress;
             dst.VirtualSize = src.VirtualMemorySize64;
             dst.MaxVirtualSize = src.PeakVirtualMemorySize64;

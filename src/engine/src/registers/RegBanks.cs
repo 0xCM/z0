@@ -75,7 +75,6 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => Data;
             }
-
         }
 
         public readonly ref struct XmmBank

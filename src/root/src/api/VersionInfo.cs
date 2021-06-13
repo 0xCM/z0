@@ -98,6 +98,10 @@ namespace Z0
             => rhs <= lhs;
 
         [MethodImpl(Inline)]
+        public static implicit operator VersionInfo((uint a, uint b) src)
+            => new VersionInfo(src.a, src.b);
+
+        [MethodImpl(Inline)]
         public static implicit operator VersionInfo(Version src)
             => new VersionInfo((uint)src.Major, (uint)src.Minor, (uint)src.MajorRevision, (uint)src.MinorRevision);
     }

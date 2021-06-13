@@ -28,17 +28,17 @@ namespace Z0
         [Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IDomainSource src)
             where T : unmanaged
-                => DataStreams.create(forever<T>(src));
+                => create(forever<T>(src));
 
         [Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IDomainSource src, T min, T max)
             where T : unmanaged
-                => DataStreams.create(forever(src,min,max));
+                => create(forever(src,min,max));
 
         [Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => DataStreams.create(forever(src, domain, filter));
+                => create(forever(src, domain, filter));
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -50,7 +50,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => DataStreams.create(forever(src, domain, filter));
+                => create(forever(src, domain, filter));
 
         [Op, Closures(Closure)]
         static IEnumerable<T> forever<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter)
@@ -123,6 +123,5 @@ namespace Z0
                 }
             }
         }
-
     }
 }

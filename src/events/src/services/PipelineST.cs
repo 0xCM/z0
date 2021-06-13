@@ -6,13 +6,13 @@ namespace Z0
 {
     public sealed class Pipeline<S,T> : Pipeline, IPipeline<Pipeline<S,T>,S,T>
     {
-        public IEmitter<S> Emitter {get; internal set;}
+        public IEmitter<S> Emitter {get; set;}
 
-        public IProjector<S,T> Projector {get; internal set;}
+        public IProjector<S,T> Projector {get; set;}
 
-        public IReceiver<T> Receiver {get; internal set;}
+        public IReceiver<T> Receiver {get; set;}
 
-        public bool Connected {get; internal set;}
+        public bool Connected {get; set;}
 
         uint Counter;
 
