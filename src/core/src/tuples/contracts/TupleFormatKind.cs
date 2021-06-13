@@ -28,5 +28,10 @@ namespace Z0
         /// Indicates a tuple text representation of the form "{x1,...xn}"
         /// </summary>
         Record,
+
+        /// <summary>
+        /// Indicates a tuple text representation of the form "(x1:x2:...:x3)"
+        /// </summary>
+        Attribute,
     }
 }

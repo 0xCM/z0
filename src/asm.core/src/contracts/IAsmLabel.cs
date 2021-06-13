@@ -7,7 +7,6 @@ namespace Z0.Asm
     public interface IAsmLabel : ITextual, INullity
     {
         Identifier Name {get;}
-
     }
 
     public interface IAsmOffsetLabel : IAsmLabel

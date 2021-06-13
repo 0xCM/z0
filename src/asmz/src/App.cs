@@ -664,14 +664,6 @@ namespace Z0.Asm
         }
 
 
-        /// <summary>
-        /// Tests whether a 2-byte sequence represents the character '•'
-        /// </summary>
-        /// <param name="b0">The first byte</param>
-        /// <param name="b1">The second byte</param>
-        public static bool bullet(byte b0, byte b1)
-            => b0 == 0x20 && b1 == 0x22;
-
         void FindInstructionTables()
         {
             var ws = Wf.AsmWorkspace();
@@ -679,7 +671,7 @@ namespace Z0.Asm
             using var map = src.MemoryMap();
             var data = map.View();
             var size = data.Length;
-            var match = IntelSdm.InstructionTableHeader.HeaderMatch;
+            var match = IntelSdm.InstructionTable.HeaderMatch;
             for(var i=0; i<size; i++)
             {
 
@@ -940,7 +932,8 @@ namespace Z0.Asm
             Wf.Ran(flow,  string.Format("Emitted {0} lines", counter - 1));
         }
 
-        public void CheckLineReader()
+
+        void CreateLinedDocs()
         {
             var workspace = Wf.AsmWorkspace();
             var archive = new DocProcessArchive(workspace.DocRoot());
@@ -958,7 +951,30 @@ namespace Z0.Asm
                 }
                 counter++;
             }
+        }
 
+
+
+        public void CheckDocProcessor()
+        {
+            var charmap = CharMaps.editor(TextEncodings.Utf16).Seal();
+            var unmapped = hashset<char>();
+            var workspace = Wf.AsmWorkspace();
+            var archive = new DocProcessArchive(workspace.DocRoot());
+            var src = archive.RefDoc("sdm",FS.Txt);
+            using var reader = src.LineReader();
+            while(reader.Next(out var line))
+            {
+                CharMaps.unmapped(charmap, line.Data, unmapped);
+            }
+            var pairs = unmapped.Map(x => paired((Hex16)x,x)).OrderBy(x => x.Left).Select(CharMaps.format);
+            var description = string.Format("Unmapped:{0}", text.embrace(pairs.Delimit(Chars.Comma)));
+            Wf.Row(description);
+
+            var output = archive.DocPath("charmap", FS.Config);
+            var emitting = Wf.EmittingFile(output);
+            var mapcount = CharMaps.emit(charmap, output);
+            Wf.EmittedFile(emitting,mapcount);
         }
 
         void CheckAsciSpans()
@@ -1013,10 +1029,10 @@ namespace Z0.Asm
         public void Run()
         {
 
-            LoadForms();
+            //CheckDocProcessor();
             //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
-            //Wf.GlobalCommands().RunExtractWorkflow();
+            Wf.GlobalCommands().RunExtractWorkflow();
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));

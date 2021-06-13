@@ -7,17 +7,40 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static core;
     using static Root;
+    using static core;
 
-    public ref struct CharMap
+    public readonly ref struct CharMap<T>
+        where T : unmanaged
     {
-        public ReadOnlySpan<char> Output;
+        readonly ReadOnlySpan<T> Data;
 
-        public ref readonly char this[char c]
+        [MethodImpl(Inline)]
+        public CharMap(ReadOnlySpan<T> data)
+        {
+            Data = data;
+        }
+
+        public ref readonly T this[char c]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Output, (ushort)c);
+            get => ref skip(Data, (ushort)c);
+        }
+
+        [MethodImpl(Inline)]
+        public bool IsMapped(char c)
+            => u16(this[c]) != 0;
+
+        internal ReadOnlySpan<T> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public ushort Capacity
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Data.Length;
         }
     }
 }

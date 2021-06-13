@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-       /// <summary>
+        /// <summary>
         /// Parses content of the form 'Table {major}-{minor}
         /// </summary>
         /// <param name="src"></param>
@@ -52,9 +52,9 @@ namespace Z0.Asm
                 return outcome;
             }
             var left = src.LeftOfIndex(i);
-            outcome += DataParser.parse(left, out dst.Chapter);
+            //outcome += DataParser.parse(left, out dst.Chapter);
             var right = src.RightOfIndex(i);
-            outcome += DataParser.parse(left, out dst.Page);
+            //outcome += DataParser.parse(left, out dst.Page);
             return outcome;
         }
 

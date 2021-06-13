@@ -82,7 +82,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new Sym();
         }
-
-
     }
 }

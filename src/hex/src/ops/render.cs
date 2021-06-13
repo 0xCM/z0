@@ -23,6 +23,30 @@ namespace Z0
             return i - i0;
         }
 
+        [MethodImpl(Inline), Op]
+        public static uint render(LowerCased @case, Hex16 src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            seek(dst, i++) = hexchar(@case, src.Hi.Hi);
+            seek(dst, i++) = hexchar(@case, src.Hi.Lo);
+            seek(dst, i++) = hexchar(@case, src.Lo.Hi);
+            seek(dst, i++) = hexchar(@case, src.Lo.Lo);
+            return i - i0;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(LowerCased @case, Hex8 src, ref uint i, Span<char> dst, HexSpecKind spec)
+        {
+            var i0 = i;
+            if(spec == HexSpecKind.PreSpec)
+                prespec(ref i, dst);
+            seek(dst, i++) = hexchar(@case, src.Hi);
+            seek(dst, i++) = hexchar(@case, src.Lo);
+            if(spec == HexSpecKind.PostSpec)
+                postspec(ref i, dst);
+            return i - i0;
+        }
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void render<T>(LowerCased @case, in T src, Span<char> dst)
             where T : struct
@@ -36,84 +60,6 @@ namespace Z0
                 seek(dst, j--) = (char)code(n4, @case, d);
                 seek(dst, j--) = (char)code(n4, @case, Bytes.srl(d, 4));
             }
-        }
-
-        public static string format<T>(UpperCased @case, T value)
-            where T : unmanaged
-                => new string(render<T>(@case, value));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<char> render<T>(UpperCased @case, T value)
-            where T : unmanaged
-                => chars_u(@case, value);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void render<T>(UpperCased @case, T value, uint offset, Span<char> dst)
-            where T : unmanaged
-                => chars_u(@case, value, offset, dst);
-
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<char> chars_u<T>(UpperCased @case, T value)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return render(@case, uint8(value));
-            else if(typeof(T) == typeof(ushort))
-                return render(@case, int16(value));
-            else if(typeof(T) == typeof(uint))
-                return render(@case, uint32(value));
-            else if(typeof(T) == typeof(ulong))
-                return render(@case, uint64(value));
-            else
-                return chars_i(@case, value);
-        }
-
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<char> chars_i<T>(UpperCased @case, T value)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return render(@case, int8(value));
-            else if(typeof(T) == typeof(short))
-                return render(@case, int16(value));
-            else if(typeof(T) == typeof(int))
-                return render(@case, int32(value));
-            else if(typeof(T) == typeof(long))
-                return render(@case, int64(value));
-            else
-                throw no<T>();
-        }
-
-        [MethodImpl(Inline)]
-        static void chars_u<T>(UpperCased @case, T value, uint offset, Span<char> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                render(@case, uint8(value), offset, dst);
-            else if(typeof(T) == typeof(ushort))
-                render(@case, uint16(value), offset, dst);
-            else if(typeof(T) == typeof(uint))
-                render(@case, uint32(value), offset, dst);
-            else if(typeof(T) == typeof(ulong))
-                render(@case, uint64(value), offset, dst);
-            else
-                chars_i(@case, value, offset, dst);
-        }
-
-        [MethodImpl(Inline)]
-        static void chars_i<T>(UpperCased @case, T value, uint offset, Span<char> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                render(@case, int8(value), offset, dst);
-            else if(typeof(T) == typeof(short))
-                render(@case, int16(value), offset, dst);
-            else if(typeof(T) == typeof(int))
-                render(@case, int32(value), offset, dst);
-            else if(typeof(T) == typeof(long))
-                render(@case, int64(value), offset, dst);
-            else
-                throw no<T>();
         }
 
         [MethodImpl(Inline), Op]

@@ -65,7 +65,12 @@ namespace Z0
             => Left.Equals(rhs.Left) && Right.Equals(rhs.Right);
 
         public string Format(TupleFormatKind style)
-            => style == TupleFormatKind.Coordinate ? $"({Left},{Right})" : $"{Left}x{Right}";
+            => style switch
+            {
+                TupleFormatKind.Dimension => $"{Left}x{Right}",
+                TupleFormatKind.Attribute => $"({Left}:{Right})",
+                _ => $"({Left},{Right})"
+            };
 
         public string Format()
             => Format(TupleFormatKind.Coordinate);

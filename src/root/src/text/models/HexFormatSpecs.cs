@@ -149,6 +149,15 @@ namespace Z0
         /// </summary>
         public const string PostSpec = "h";
 
+        /// <summary>
+        /// Standard hex specifier that trails the numeric content
+        /// </summary>
+        public const char PostSpecChar = Chars.h;
+
+        public const char PreSpec0 = Chars.D0;
+
+        public const char PreSpec1 = Chars.x;
+
         public const string SmallHexSpec = "x4";
 
         /// <summary>

@@ -4,22 +4,37 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using static Root;
+
     partial struct IntelSdm
     {
         /// <summary>
         /// Represents content of the form Vol. {VolName} {Chapter}-{Page}
         /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack =1)]
         public struct VolumePage
         {
-            public string VolName;
+            public const string RenderPattern = "Vol. {0} {1}";
+
+            public Volume Volume;
 
             public ChapterPage Page;
 
-            public VolumePage(string vol, ChapterPage page)
+            [MethodImpl(Inline)]
+            public VolumePage(Volume vol, ChapterPage page)
             {
-                VolName = vol;
+                Volume = vol;
                 Page = page;
             }
+
+            public string Format()
+                => string.Format(RenderPattern, Volume, Page);
+
+            public override string ToString()
+                => Format();
         }
     }
 }

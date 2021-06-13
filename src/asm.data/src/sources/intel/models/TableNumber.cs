@@ -4,14 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static core;
     using static Root;
 
     partial struct IntelSdm
     {
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
         public readonly struct TableNumber
         {
             internal const string Marker = "Table ";
@@ -38,9 +39,9 @@ namespace Z0.Asm
             public override string ToString()
                 => string.Format(RenderPattern, Major, Minor);
 
-
             public static TableNumber Empty
             {
+                [MethodImpl(Inline)]
                 get => new TableNumber('\0',0);
             }
         }

@@ -32,8 +32,10 @@ namespace Z0
         public FS.FolderPath DocExtractDir(string docid)
             => DocExtracts() + FS.folder(docid);
 
+        public FS.FilePath DocPath(string docid, FS.FileExt ext)
+            => Root + FS.file(docid, ext);
+
         public FS.FilePath DocExtract(string docid, string part, FS.FileExt ext)
             => DocExtractDir(docid) + FS.file(string.Format("{0}.{1}",docid, part), ext);
-
     }
 }

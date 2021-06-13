@@ -24,7 +24,7 @@ namespace Z0
         public void Save(int segwidth, int kMinSegs, int mkMaxSgs, FS.FilePath path)
         {
             using var dst = path.Writer();
-            dst.WriteLine(Grids.header());
+            dst.WriteLine(GridStats.header());
             var points = (
                 from row in gAlg.stream(kMinSegs, mkMaxSgs)
                 from col in gAlg.stream(kMinSegs, mkMaxSgs)
@@ -36,7 +36,7 @@ namespace Z0
             {
                 var gs = CellCalcs.metrics((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats();
                 if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
-                    dst.WriteLine(Grids.format(gs));
+                    dst.WriteLine(GridStats.format(gs));
             }
 
             dst.Flush();

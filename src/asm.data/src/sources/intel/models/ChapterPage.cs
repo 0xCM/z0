@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+
     using static Root;
 
     partial struct IntelSdm
@@ -12,23 +14,24 @@ namespace Z0.Asm
         /// <summary>
         /// Represents content of the form '{Chapter}-{Page}'
         /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct ChapterPage
         {
             public const string RenderPattern = "{0}-{1}";
 
-            public byte Chapter;
+            public Chapter Chapter;
 
-            public ushort Page;
+            public Page Page;
 
             [MethodImpl(Inline)]
-            public ChapterPage(byte chapter, ushort page)
+            public ChapterPage(Chapter chapter, Page page)
             {
                 Chapter = chapter;
                 Page = page;
             }
 
             public string Format()
-                => format(this);
+                => string.Format(RenderPattern, Chapter, Page);
 
             public override string ToString()
                 => Format();
