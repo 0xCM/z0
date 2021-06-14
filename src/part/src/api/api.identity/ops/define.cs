@@ -18,6 +18,6 @@ namespace Z0
         /// <typeparam name="T">The parameter type</typeparam>
         public static OpIdentity define<K,T>(K k, bool generic)
             where K : unmanaged, IApiClass
-                => ApiIdentityBuilder.build(k.ClassId, Numeric.kind<T>(), generic);
+                => ApiIdentityBuilder.build(k.ClassId, NumericKinds.kind<T>(), generic);
     }
 }

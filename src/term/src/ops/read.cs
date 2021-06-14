@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// Reads a line of text from the terminal after printing a supplied message
         /// </summary>
-        public static string read(string content = null)
-            => T.ReadLine(content != null ? AppMsg.called(content, LogLevel.Status) : null);
+        public static string prompt(object msg)
+            => T.Prompt(msg);
     }
 }

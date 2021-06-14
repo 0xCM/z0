@@ -1089,7 +1089,7 @@ namespace Z0.Asm
         {
             try
             {
-                using var wf = WfRuntime.create(ApiParts.load(Index<PartId>.Empty), args).WithSource(Rng.@default());
+                using var wf = WfRuntime.create(ApiRuntimeLoader.parts(Index<PartId>.Empty), args).WithSource(Rng.@default());
                 var app = App.create(wf);
                 app.Run();
 

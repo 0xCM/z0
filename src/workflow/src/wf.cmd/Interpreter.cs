@@ -49,7 +49,7 @@ namespace Z0
 
         bool Initialized;
 
-        IWorkerLog WorkerLog;
+        //IWorkerLog WorkerLog;
 
         Process Worker;
 
@@ -86,7 +86,7 @@ namespace Z0
 
         protected abstract FS.FilePath ExePath {get;}
 
-        public void Run()
+        public Task Run()
         {
             if(!Initialized)
                 throw new Exception("Not initialized!");
@@ -95,7 +95,8 @@ namespace Z0
             Worker.BeginOutputReadLine();
             Worker.BeginErrorReadLine();
             Running = true;
-            SpinTask = root.task(() => Spin());
+            SpinTask = core.run(() => Spin());
+            return SpinTask;
         }
 
         public void Init(IWfRuntime wf)
@@ -103,7 +104,7 @@ namespace Z0
             try
             {
                 Wf = wf;
-                WorkerLog = Loggers.worker(Loggers.configure(wf.Controller.Id, wf.Db().Root, "processes"));
+                //WorkerLog = Loggers.worker(Loggers.configure(wf.Controller.Id, wf.Db().Root, "processes"));
                 Worker = new Process();
 
                 var start = new ProcessStartInfo(ExePath.Name, StartupArgs)
@@ -130,7 +131,10 @@ namespace Z0
             }
         }
 
-        public abstract void SubmitStop();
+        public virtual void SubmitStop()
+        {
+            exit();
+        }
 
         void Exited(object sender, EventArgs e)
         {
@@ -141,8 +145,8 @@ namespace Z0
         {
             if(e != null && e.Data != null)
             {
-                WorkerLog?.LogStatus(e.Data);
-                TermLog.Deposit(EventFactory.status(GetType(), e.Data));
+                Wf.Status(e.Data);
+                //TermLog.Deposit(EventFactory.status(GetType(), e.Data));
             }
         }
 
@@ -150,8 +154,8 @@ namespace Z0
         {
             if(e != null && e.Data != null)
             {
-                WorkerLog?.LogError(e.Data);
-                TermLog.Deposit(EventFactory.error(GetType(), e.Data, EventFactory.originate("InterpreterError")));
+                Wf.Error(e.Data);
+                //TermLog.Deposit(EventFactory.error(GetType(), e.Data, EventFactory.originate("InterpreterError")));
             }
         }
 
@@ -160,8 +164,8 @@ namespace Z0
             if(Worker != null)
                 Worker.Close();
 
-            if(WorkerLog != null)
-                WorkerLog.Dispose();
+            // if(WorkerLog != null)
+            //     WorkerLog.Dispose();
         }
 
         void Dispatch()
@@ -193,5 +197,8 @@ namespace Z0
             Worker.WaitForExit();
             return Token;
         }
+
+        public void exit()
+            => Submit("exit");
     }
 }

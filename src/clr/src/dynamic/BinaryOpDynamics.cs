@@ -34,27 +34,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static T eval<K,T>(K k, ReadOnlySpan<byte> f, T x, T y)
-            where K : unmanaged, IApiClass
-            where T : unmanaged
-        {
-            var name = ApiIdentity.define<K,T>(k, false).Format();
-            var binop = BinaryOpDynamics.create<T>(name, f);
-            return binop(x,y);
-        }
-
-        [MethodImpl(Inline)]
         public static T eval<T>(Identifier name, ReadOnlySpan<byte> f, T x, T y)
             where T : unmanaged
         {
-            var binop = BinaryOpDynamics.create<T>(name, f);
+            var binop = create<T>(name, f);
             return binop(x,y);
         }
-
-        public static unsafe DynamicOp<BinaryOp<T>> dynop<T>(Identifier name, byte* pCode)
+        public static unsafe BinaryOp<T> binop<T>(Identifier name, byte* pCode)
         {
             var emitted = emit<T>(name, (MemoryAddress)pCode, out var method);
-            return (method,emitted);
+            return emitted;
         }
 
         [Op, Closures(UInt64k)]
@@ -63,14 +52,7 @@ namespace Z0
 
         [Op, Closures(UInt64k)]
         public static unsafe BinaryOp<T> create<T>(Identifier name, ReadOnlySpan<byte> f)
-        {
-            var emitted = emit<T>(name, (MemoryAddress)Buffers.liberate(f), out var method);
-            return emitted;
-        }
-
-        public static unsafe BinaryOp<T> create<K,T>(K kind, ReadOnlySpan<byte> code, bool generic)
-            where K : unmanaged, IApiClass
-                => emit<T>(ApiIdentity.define<K,T>(kind, generic).Format(), (MemoryAddress)Buffers.liberate(code), out var _);
+            => emit<T>(name, (MemoryAddress)Buffers.liberate(f), out var method);
 
         static unsafe BinaryOp<T> emit<T>(Identifier name, MemoryAddress f, out DynamicMethod method)
         {
@@ -84,7 +66,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, f);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, tOperand, args);
             g.Emit(OpCodes.Ret);
-            return (BinaryOp<T>)CellDelegates.define(name, f, method, method.CreateDelegate(tFunc));
+            return (BinaryOp<T>)CellDelegate.define(name, f, method, method.CreateDelegate(tFunc));
         }
     }
 }

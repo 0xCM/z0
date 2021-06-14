@@ -14,20 +14,6 @@ namespace Z0
 
     public class ApiRuntimeCatalog : IApiCatalog
     {
-        [Op]
-        public static IApiCatalog create(params IPart[] parts)
-        {
-            var catalogs = parts.Select(x => ApiPartCatalog.create(x)).Where(c => c.IsIdentified);
-            var dst = new ApiRuntimeCatalog(parts,
-                parts.Select(p => p.Owner),
-                catalogs,
-                catalogs.SelectMany(c => c.ApiHosts.Storage).Where(h => nonempty(h.HostUri.HostName)),
-                parts.Select(p => p.Id),
-                catalogs.SelectMany(x => x.Methods)
-                );
-            return dst;
-        }
-
         /// <summary>
         /// The parts included in the datset
         /// </summary>

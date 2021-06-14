@@ -236,13 +236,13 @@ namespace Z0
             counter = 0u;
 
             var location = FS.path(src.Owner.Location);
-            var catalog = ApiPartCatalog.create(src);
+            var catalog = ApiRuntimeLoader.catalog(src);
             var flow = Wf.Running(string.Format("Resolving part {0}", src.Id));
-            var hosts = root.list<ResolvedHost>();
+            var hosts = core.list<ResolvedHost>();
 
             foreach(var host in catalog.ApiTypes)
             {
-                var methods = root.list<ResolvedMethod>();
+                var methods = core.list<ResolvedMethod>();
                 var count = ResolveType(host, methods);
                 if(count != 0)
                 {
@@ -255,7 +255,7 @@ namespace Z0
 
             foreach(var host in catalog.ApiHosts)
             {
-                var methods = root.list<ResolvedMethod>();
+                var methods = core.list<ResolvedMethod>();
                 var count = ResolveHost(host, methods);
                 if(count != 0)
                 {

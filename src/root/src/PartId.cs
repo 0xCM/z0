@@ -162,6 +162,9 @@ public enum PartId : ulong
     [Symbol("relations")]
     Relations = 52,
 
+    [Symbol("asm.shell")]
+    AsmShell = 53 | Shell,
+
     [Symbol("clr")]
     Clr = 60,
 

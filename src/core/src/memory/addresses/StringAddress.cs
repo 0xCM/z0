@@ -13,6 +13,10 @@ namespace Z0
 
     public readonly struct StringAddress : IAddressable
     {
+        [MethodImpl(Inline), Op]
+        public static StringAddress resource(string src)
+            => new StringAddress(core.address(src));
+
         internal const string EmptyMarker = "<empty>";
 
         public MemoryAddress Address {get;}

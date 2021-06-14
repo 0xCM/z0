@@ -9,8 +9,8 @@ namespace Z0
 
     using static CalculatorCode;
     using static ApiClasses;
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using I = CalcDemo.OpIndex;
     using K = ApiClasses;
@@ -63,7 +63,7 @@ namespace Z0
             /// <param name="x">The left operand</param>
             /// <param name="y">The right operand</param>
             public static byte eval(Mul f, byte x, byte y)
-                => BinaryOpDynamics.eval(f, mul_ᐤ8uㆍ8uᐤ, x,y);
+                => BinaryOpDynamics.eval("mul", mul_ᐤ8uㆍ8uᐤ, x,y);
 
             /// <summary>
             /// Executes the code defined by <see cref="sub_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>
@@ -72,7 +72,7 @@ namespace Z0
             /// <param name="x">The left operand</param>
             /// <param name="y">The right operand</param>
             public static byte eval(Sub f, byte x, byte y)
-                => BinaryOpDynamics.eval(f,sub_ᐤ8uㆍ8uᐤ, x, y );
+                => BinaryOpDynamics.eval("sub", sub_ᐤ8uㆍ8uᐤ, x, y );
 
             /// <summary>
             /// Executes the code defined by <see cref="and_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>
@@ -81,7 +81,7 @@ namespace Z0
             /// <param name="x">The left operand</param>
             /// <param name="y">The right operand</param>
             public static byte eval(And f, byte x, byte y)
-                => BinaryOpDynamics.eval(f, and_ᐤ8uㆍ8uᐤ, x, y);
+                => BinaryOpDynamics.eval("and", and_ᐤ8uㆍ8uᐤ, x, y);
         }
 
         [ApiHost("calc.managed")]
@@ -181,7 +181,7 @@ namespace Z0
 
         public static byte compute()
         {
-            var ops = BinaryOpsDemo.arithmetic();
+            var ops = DynamicDemos.arithmetic();
             byte a = 1;
             byte b = 2;
             byte c = 0;
@@ -199,7 +199,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline),Op]
-        public static byte compute(BinaryOpsDemo<byte> ops, byte a, byte b)
+        public static byte compute(BinaryOperators<byte> ops, byte a, byte b)
         {
             var c = ops[I.Add](a,b);
             var d = ops[I.Mul](a,c);
@@ -268,6 +268,5 @@ namespace Z0
             var z2 = Slots.div(x,y);
             dst.AppendLine(describe(K.div(), x,y, z2));
         }
-
     }
 }

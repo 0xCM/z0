@@ -21,7 +21,7 @@ namespace Z0
         {
             var control = controller();
             var dir = FS.path(control.Location).FolderPath;
-            var parts = ApiParts.load(control, args);
+            var parts = ApiRuntimeLoader.parts(control, args);
             var identities = parts.RuntimeCatalog.PartIdentities;
             using var wf = WfRuntime.create(parts, args);
             var runner = wf.CaptureRunner();

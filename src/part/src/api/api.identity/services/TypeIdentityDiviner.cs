@@ -21,7 +21,7 @@ namespace Z0
             else if(arg.IsTypeNat())
                 return NatId(arg);
             else if(arg.IsSystemDefined())
-                return ApiUri.primal(arg).AsTypeIdentity().ToOption();
+                return PrimalIdentity.from(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
                 return Option.some(EnumIdentity.define(arg).AsTypeIdentity());
             else if(arg.IsSegmented())
@@ -33,7 +33,7 @@ namespace Z0
             else if(ApiIdentity.IsNatSpan(arg))
                 return NatSpanId(arg);
             else
-                return root.none<TypeIdentity>();
+                return Option.none<TypeIdentity>();
         }
 
         /// <summary>

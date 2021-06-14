@@ -12,25 +12,25 @@ namespace Z0
     public readonly struct LogicSig
     {
         public static string sig(ULK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(bit));
+            => string.Concat(format(kind), Chars.Colon, nameof(bit));
 
         public static string sig(BLK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(bit));
+            => string.Concat(format(kind), Chars.Colon, nameof(bit));
 
         public static string sig(TLK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(bit));
+            => string.Concat(format(kind), Chars.Colon, nameof(bit));
 
         public static string sig<T>(ULK kind)
              where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
+                => string.Concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
         public static string sig<T>(BLK kind)
             where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
+                => string.Concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
         public static string sig<T>(TLK kind)
             where T : unmanaged
-                => text.concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
+                => string.Concat(format(kind), Chars.Colon, NumericKinds.keyword<T>());
 
         public static string sig<T>(ApiBitShiftClass kind)
             where T : unmanaged

@@ -11,6 +11,14 @@ namespace Z0
 
     public class PartContext : AssemblyLoadContext, IDisposable
     {
+        [Op]
+        public static PartContext create(FS.FilePath src, bool collectible = true)
+            => new PartContext(src, collectible);
+
+        [Op]
+        public static PartContext create(PartId part, bool collectible = true)
+            => new PartContext(part, collectible);
+
         IEnvPaths Paths;
 
         public FS.FolderPath LibDir {get;}

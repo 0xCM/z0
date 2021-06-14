@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Rules;
 
     readonly partial struct SymbolicCalcs
     {
@@ -41,6 +40,5 @@ namespace Z0
             }
             return found != -1 ? sys.substring(src, 0, found) : src;
         }
-
     }
 }

@@ -11,7 +11,10 @@ namespace Windows
     partial struct Kernel32
     {
         [DllImport(LibName), Free]
-        internal static extern bool ProcessIdToSessionId(uint dwProcessId, out uint pSessionId);
+        public static extern bool ProcessIdToSessionId(uint dwProcessId, out uint pSessionId);
+
+        [DllImport(LibName), Free]
+        public static extern uint GetCurrentProcessorNumber();
 
         [DllImport(LibName), Free]
         public static extern int GetProcessId(IntPtr nativeHandle);
@@ -24,18 +27,6 @@ namespace Windows
 
         [DllImport(LibName, SetLastError = true), Free]
         public static extern IntPtr GetProcessHeap();
-
-        /// <summary>
-        /// Get the OS ID of the current thread
-        /// </summary>
-        [DllImport(LibName), Free]
-        public static extern uint GetCurrentThreadId();
-
-        /// <summary>
-        /// Gets the handle of the current thread
-        /// </summary>
-        [DllImport(LibName), Free]
-        public static extern IntPtr GetCurrentThread();
 
         [DllImport(LibName, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]

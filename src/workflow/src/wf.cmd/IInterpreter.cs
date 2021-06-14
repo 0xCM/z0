@@ -6,10 +6,12 @@ namespace Z0
 {
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using System.Threading.Tasks;
+
     [Free]
     public interface IInterpreter
     {
-        void Run();
+        Task Run();
 
         void Submit(string command);
     }

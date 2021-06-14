@@ -10,8 +10,9 @@ namespace Z0.Asm
     using System.IO;
     using Z0.Tools;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     public class Tests : AppService<Tests>
     {
@@ -509,7 +510,7 @@ namespace Z0.Asm
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
-            using var wf = WfRuntime.create(ApiParts.load(core.controller(), args), args).WithSource(Rng.@default());
+            using var wf = WfRuntime.create(ApiRuntimeLoader.parts(core.controller(), args), args).WithSource(Rng.@default());
             var process = ToolCmd.run(cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
@@ -837,7 +838,7 @@ namespace Z0.Asm
         {
             var part = PartId.Math;
             Wf.ApiCatalog.FindComponent(part, out var component);
-            var catalog = ApiPartCatalog.create(component);
+            var catalog = ApiRuntimeLoader.catalog(component);
 
             void accept(in ApiCodeBlock block)
             {

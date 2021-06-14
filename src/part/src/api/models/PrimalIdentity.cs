@@ -7,10 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct PrimalIdentity : IIdentifiedType<PrimalIdentity>
     {
+        /// <summary>
+        /// Defines a primal identity if the source type represents a recognized primitive; otherwise,
+        /// returns <see cref='PrimalIdentity.Empty'/>
+        /// </summary>
+        /// <param name="src">The source type</param>
+        [Op]
+        public static PrimalIdentity from(Type src)
+            => src.IsSystemDefined() ?
+               (NumericKinds.test(src)
+               ? new PrimalIdentity(src.NumericKind(), CsKeywords.keyword(src))
+               : new PrimalIdentity(CsKeywords.keyword(src))
+               ) : PrimalIdentity.Empty;
+
         public string IdentityText {get;}
 
         public string Keyword {get;}

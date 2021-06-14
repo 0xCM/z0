@@ -16,6 +16,10 @@ namespace Z0
             where T : unmanaged
                 => (T*)src.ToPointer();
 
+        [MethodImpl(Inline), Op]
+        public unsafe static MemoryAddress ToAddress(this IntPtr src)
+            => src.ToPointer();
+
         /// <summary>
         /// Gets the void* for the identified field
         /// </summary>

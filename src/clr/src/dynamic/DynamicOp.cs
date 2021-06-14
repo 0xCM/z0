@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct DynamicOp
     {
@@ -18,7 +18,6 @@ namespace Z0
         public DynamicMethod Definition {get;}
 
         public Delegate Delegate {get;}
-
 
         [MethodImpl(Inline)]
         public DynamicOp(DynamicMethod src, Delegate del, Type type)
@@ -29,26 +28,4 @@ namespace Z0
         }
     }
 
-    public readonly struct DynamicOp<D>
-        where D : Delegate
-    {
-        public DynamicMethod Definition {get;}
-
-        public D Delegate {get;}
-
-        [MethodImpl(Inline)]
-        public DynamicOp(DynamicMethod src, D @delegate)
-        {
-            Definition = src;
-            Delegate = @delegate;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator DynamicOp(DynamicOp<D> src)
-            => new DynamicOp(src.Definition, src.Delegate, typeof(D));
-
-        [MethodImpl(Inline)]
-        public static implicit operator DynamicOp<D>((DynamicMethod def, D @delegate) src)
-            => new DynamicOp<D>(src.def, src.@delegate);
-    }
 }

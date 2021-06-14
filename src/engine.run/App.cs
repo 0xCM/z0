@@ -192,6 +192,6 @@ namespace Z0
             => App.create(wf);
 
         static IWfRuntime shell(string[] args)
-            => WfRuntime.create(ApiParts.load(core.controller(), args), args).WithSource(Rng.@default());
+            => WfRuntime.create(ApiRuntimeLoader.parts(core.controller(), args), args).WithSource(Rng.@default());
     }
 }

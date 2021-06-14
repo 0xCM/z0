@@ -10,6 +10,12 @@ namespace Z0
         public static IWfRuntime create(IApiParts parts)
             => create(parts, array<string>());
 
+        public static IWfRuntime create(string[] args)
+            => create(ApiRuntimeLoader.parts(core.controller()), args);
+
+        public static IWfRuntime create()
+            => create(ApiRuntimeLoader.parts(core.controller()), array<string>());
+
         [Op]
         public static IWfRuntime create(IApiParts parts, string[] args, bool verbose = true)
         {

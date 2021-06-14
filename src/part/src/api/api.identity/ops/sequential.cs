@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         [Op]
         public static string sequential(char open, char close, char sep, IEnumerable<string> src)
-            => text.concat(open, string.Join(sep,src), close);
+            => string.Concat(open, string.Join(sep,src), close);
     }
 }

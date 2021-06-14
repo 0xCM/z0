@@ -9,23 +9,11 @@ namespace Z0
 
     using static ApiUriDelimiters;
     using static Root;
+    using static minicore;
 
     [ApiHost]
     public readonly struct ApiUri
     {
-        /// <summary>
-        /// Defines a primal identity if the source type represents a recognized primitive; otherwise,
-        /// returns <see cref='PrimalIdentity.Empty'/>
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [Op]
-        public static PrimalIdentity primal(Type src)
-            => src.IsSystemDefined() ?
-               (NumericKinds.test(src)
-               ? new PrimalIdentity(src.NumericKind(), CsKeywords.keyword(src))
-               : new PrimalIdentity(CsKeywords.keyword(src))
-               ) : PrimalIdentity.Empty;
-
         /// <summary>
         /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none
         /// </summary>
@@ -71,7 +59,7 @@ namespace Z0
         public static ParseResult<ApiHostUri> host(string src)
         {
             var failure = ParseResult.unparsed<ApiHostUri>(src);
-            if(minicore.blank(src))
+            if(blank(src))
                 return failure;
 
             var parts = src.SplitClean(ApiUriDelimiters.UriPathSep);
@@ -84,7 +72,7 @@ namespace Z0
                 return failure.WithReason("Invalid part");
 
             var host = parts[1];
-            if(minicore.blank(host))
+            if(blank(host))
                 return failure.WithReason("Host unspecified");
 
             return ParseResult.parsed(src, new ApiHostUri(owner, host));
@@ -95,18 +83,17 @@ namespace Z0
         {
             try
             {
-                if(text.empty(src))
+                if(empty(src))
                     return OpIdentity.Empty;
 
                 var name = src.TakeBefore(IDI.PartSep);
                 var suffixed = src.Contains(IDI.SuffixSep);
                 var suffix = suffixed ? src.TakeAfter(IDI.SuffixSep) : EmptyString;
                 var _generic = src.TakeAfter(IDI.PartSep);
-                var generic =  core.nonempty(_generic) ? _generic[0] == IDI.Generic : false;
+                var generic =  nonempty(_generic) ? _generic[0] == IDI.Generic : false;
                 var imm = suffix.Contains(IDI.Imm);
                 var components = src.SplitClean(IDI.PartSep);
-                var id = new OpIdentity(src, name, suffix, generic, imm, components);
-                return id;
+                return new OpIdentity(src, name, suffix, generic, imm, components);
             }
             catch(Exception)
             {
@@ -119,19 +106,19 @@ namespace Z0
             var parts = src.SplitClean(UriEndOfScheme);
             var msg = string.Empty;
             if(parts.Length != 2)
-                return root.unparsed<OpUri>(src, $"Splitting on {UriEndOfScheme} produced {parts.Length} pieces");
+                return ParseResult.unparsed<OpUri>(src, $"Splitting on {UriEndOfScheme} produced {parts.Length} pieces");
 
             var uriScheme = scheme(parts[0]);
             var rest = parts[1];
             var pathText = rest.TakeBefore(UriQuery);
             var path = host(pathText);
             if(path.Failed)
-                return root.unparsed<OpUri>(src, $"{path.Message}");
+                return ParseResult.unparsed<OpUri>(src, $"{path.Message}");
 
-            var id = ApiUri.opid(rest.TakeAfter(UriFragment));
+            var id = opid(rest.TakeAfter(UriFragment));
             var group = rest.Between(UriQuery,UriFragment);
-            var uri = ApiUri.define(uriScheme, path.Value, group, id);
-            return root.parsed(src, uri);
+            var uri = define(uriScheme, path.Value, group, id);
+            return ParseResult.parsed(src, uri);
         }
 
         [Op]

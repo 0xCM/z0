@@ -146,6 +146,12 @@ namespace Z0
              return Console.ReadLine();
         }
 
+        public string Prompt(object msg)
+        {
+            Write(msg, ConsoleColor.Cyan);
+            return Console.ReadLine();
+        }
+
         public char ReadKey(IAppMsg msg = null)
         {
              if(msg != null)

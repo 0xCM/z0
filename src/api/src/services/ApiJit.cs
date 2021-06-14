@@ -101,7 +101,7 @@ namespace Z0
 
         public ApiMembers Jit(Index<ApiRuntimeType> src)
         {
-            var dst = root.list<ApiMember>();
+            var dst = core.list<ApiMember>();
             var count = src.Count;
             var exclusions = CommonExclusions;
             ref var lead = ref src.First;
@@ -113,8 +113,8 @@ namespace Z0
         public ApiMembers JitPart(IPart src)
         {
             var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
-            var buffer = root.list<ApiMember>();
-            var catalog = ApiPartCatalog.create(src);
+            var buffer = core.list<ApiMember>();
+            var catalog = ApiRuntimeLoader.catalog(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 
