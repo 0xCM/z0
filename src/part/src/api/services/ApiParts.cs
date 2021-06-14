@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static core;
-
     public class ApiParts : IApiParts
     {
         /// <summary>
@@ -19,23 +17,23 @@ namespace Z0
 
         public FS.Files ManagedSources {get;}
 
-        public Index<Assembly> Components
-            => RuntimeCatalog.Components;
+        public IApiCatalog Catalog {get;}
 
-        public IApiCatalog RuntimeCatalog {get;}
+        public Index<Assembly> Components
+            => Catalog.Components;
 
         internal ApiParts(Assembly control, PartId[] parts)
         {
             Source = ApiRuntimeLoader.path(control).FolderPath;
             ManagedSources = ApiRuntimeLoader.managed(Source);
-            RuntimeCatalog = ApiRuntimeLoader.catalog(Source, parts);
+            Catalog = ApiRuntimeLoader.catalog(Source, parts);
         }
 
         internal ApiParts(Assembly control, FS.FolderPath source)
         {
             Source = source;
             ManagedSources = ApiRuntimeLoader.managed(Source);
-            RuntimeCatalog = ApiRuntimeLoader.catalog(ManagedSources);
+            Catalog = ApiRuntimeLoader.catalog(ManagedSources);
         }
     }
 }

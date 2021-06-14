@@ -22,8 +22,8 @@ namespace Z0
             var control = controller();
             var dir = FS.path(control.Location).FolderPath;
             var parts = ApiRuntimeLoader.parts(control, args);
-            var identities = parts.RuntimeCatalog.PartIdentities;
-            using var wf = WfRuntime.create(parts, args);
+            var identities = parts.Catalog.PartIdentities;
+            using var wf = WfAppLoader.load(parts, args);
             var runner = wf.CaptureRunner();
             var running = wf.Running(CapturingRoutines.Format(dir));
             var routines = args.Length != 0 ? runner.Capture(identities, CaptureWorkflowOptions.EmitImm) : runner.Capture(identities);

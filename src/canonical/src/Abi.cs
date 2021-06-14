@@ -13,13 +13,15 @@ namespace Z0
     partial struct Canonical
     {
 
+        [ApiHost("pointer.abi")]
         public unsafe readonly struct PointerAbi
         {
-            public static void f1(byte* pSrc, byte* pDst)
+            public static uint f1(byte* pSrc, byte* pDst)
             {
                 var a = pSrc[0];
                 var b = pSrc[1];
-                var c = pDst[0];
+                pDst[0] = (byte)(a*b);
+                return 1;
             }
         }
 

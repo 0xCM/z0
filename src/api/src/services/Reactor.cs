@@ -18,7 +18,7 @@ namespace Z0
                 var parts = ApiRuntimeLoader.parts(Index<PartId>.Empty);
                 term.inform(AppMsg.status(text.prop("PartCount", parts.Components.Length)));
                 var rng = Rng.@default();
-                using var wf = WfRuntime.create(parts, args).WithSource(rng);
+                using var wf = WfAppLoader.load(parts, args).WithSource(rng);
                 if(args.Length == 0)
                 {
                     wf.Status("usage: run <command> [options]");

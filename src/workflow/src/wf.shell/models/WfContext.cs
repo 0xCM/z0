@@ -10,7 +10,11 @@ namespace Z0
 
         public IApiParts ApiParts {get; internal set;}
 
+        public Index<PartId> PartIdentities {get; set;}
+
         public IJsonSettings Settings {get; internal set;}
+
+        public PartId ControlId {get; internal set;}
 
         public string[] Args {get; internal set;}
 

@@ -74,7 +74,7 @@ namespace Z0
                 => jit(src.Untyped);
 
         public ApiMembers JitCatalog()
-            => JitCatalog(Wf.ApiParts.RuntimeCatalog);
+            => JitCatalog(Wf.ApiParts.Catalog);
 
         public ApiMembers JitCatalog(IApiCatalog catalog)
         {

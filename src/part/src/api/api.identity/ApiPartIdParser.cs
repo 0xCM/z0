@@ -34,6 +34,38 @@ namespace Z0
             return dst;
         }
 
+        [Op]
+        public static ReadOnlySpan<PartId> parse2(ReadOnlySpan<string> parts)
+        {
+            var count = parts.Length;
+            if(count == 0)
+                return default;
+
+            var symbols = Symbols.index<PartId>();
+            var dst = span<PartId>(count);
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var name = ref skip(parts,i);
+                if(symbols.Lookup(name, out var sym))
+                    seek(dst, counter++) = sym.Kind;
+            }
+            return slice(dst, 0, counter);
+        }
+
+        public static Outcome parse2(string src, out PartId dst)
+        {
+            var symbols = Symbols.index<PartId>();
+            if(symbols.Lookup(src, out var sym))
+            {
+                dst = sym.Kind;
+                return true;
+            }
+            dst = PartId.None;
+            return false;
+        }
+
+
         /// <summary>
         /// Parses each supplied identifier; if an identifier does not parse, the return slot
         /// is None-populated

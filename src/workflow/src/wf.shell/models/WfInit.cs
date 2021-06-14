@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Captures workflow configuration data
@@ -53,7 +53,7 @@ namespace Z0
             Context = ctx;
             ApiParts = ctx.ApiParts;
             Control = ctx.Controller;
-            ApiGlobal = ctx.ApiParts.RuntimeCatalog;
+            ApiGlobal = ctx.ApiParts.Catalog;
             ControlId = ctx.Controller.Id;
             LogConfig = logConfig;
             PartIdentities = parts;

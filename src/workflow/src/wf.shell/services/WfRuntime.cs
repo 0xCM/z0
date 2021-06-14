@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public partial class WfRuntime : IWfRuntime
@@ -67,7 +67,7 @@ namespace Z0
             Args = config.Shell.Args;
             Settings = config.Shell.Settings;
             ApiParts = config.ApiParts;
-            ApiCatalog = config.ApiParts.RuntimeCatalog;
+            ApiCatalog = config.ApiParts.Catalog;
             Controller = config.Control;
             AppName = config.Shell.AppName;
             Router = new WfCmdRouter(this);
