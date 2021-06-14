@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = Symbols;
-
     public class Sym16<T> : ISym<W16,T>
         where T : unmanaged
     {
@@ -74,7 +72,7 @@ namespace Z0
             => typeof(T).Name;
 
         public string Format()
-            => api.format(this);
+            => string.Format(Sym.RenderPattern, Index, Type, Name, Expr, Kind, Description);
 
         public override string ToString()
             => Format();

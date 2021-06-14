@@ -9,10 +9,10 @@ namespace Z0
 
     using static Root;
 
-    using api = Symbols;
-
     public class Sym : ISym
     {
+        public const string RenderPattern = "{0,-8} | {1,-32} | {2,-32} | {3,-32} | {4,-8:d} | {5}";
+
         public SymIdentity Identity {get;}
 
         public SymKey Index {get;}
@@ -60,7 +60,7 @@ namespace Z0
         }
 
         public string Format()
-            => api.format(this);
+            => string.Format(Sym.RenderPattern, Index, Type, Name, Expr, Kind, Description);
 
         public override string ToString()
             => Format();

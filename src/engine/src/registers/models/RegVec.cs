@@ -28,9 +28,7 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => (byte)_Kinds.Length;
         }
-
     }
-
 
     public struct RegVec<R0>
         where R0 : unmanaged, IReg
@@ -50,7 +48,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator RegVec<R0>(R0 src)
             => new RegVec<R0>(src);
-
     }
 
     [StructLayout(LayoutKind.Sequential)]

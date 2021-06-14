@@ -15,36 +15,44 @@ namespace Z0.Asm
     public readonly struct RegBanks
     {
         [Op]
-        public static ZmmBank create(W512 w, byte count)
+        public static ZmmBank zmm(byte count = 32)
             => new ZmmBank(new Cell512[count]);
 
         [Op]
-        public static YmmBank create(W256 w, byte count)
+        public static YmmBank ymm(byte count)
             => new YmmBank(new Cell256[count]);
 
         [Op]
-        public static XmmBank create(W128 w, byte count)
+        public static XmmBank xmm(byte count)
             => new XmmBank(new Cell128[count]);
 
         [Op]
-        public static Gp64Bank create(W64 w, byte count)
+        public static Gp64Bank gp64(byte count = 16)
             => new Gp64Bank(new Cell64[count]);
 
+        [Op]
+        public static ControlBank control(byte count = 5)
+            => new ControlBank(new Cell64[count]);
+
         [MethodImpl(Inline), Op]
-        public static Gp64Bank create(Span<Cell64> src)
+        public static Gp64Bank gp64(Span<Cell64> src)
             => new Gp64Bank(src);
 
         [MethodImpl(Inline), Op]
-        public static XmmBank create(Span<Cell128> src)
+        public static XmmBank xmm(Span<Cell128> src)
             => new XmmBank(src);
 
         [MethodImpl(Inline), Op]
-        public static YmmBank create(Span<Cell256> src)
+        public static YmmBank ymm(Span<Cell256> src)
             => new YmmBank(src);
 
         [MethodImpl(Inline), Op]
-        public static ZmmBank create(Span<Cell512> src)
+        public static ZmmBank zmm(Span<Cell512> src)
             => new ZmmBank(src);
+
+        [MethodImpl(Inline), Op]
+        public static ControlBank control(Span<Cell64> src)
+            => new ControlBank(src);
 
         public readonly ref struct Gp64Bank
         {
@@ -94,7 +102,6 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => Data;
             }
-
         }
 
         public readonly ref struct YmmBank
@@ -146,6 +153,19 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => Data;
             }
+        }
+
+        public readonly ref struct ControlBank
+        {
+            readonly Span<Cell64> Data;
+
+            [MethodImpl(Inline)]
+            internal ControlBank(Span<Cell64> src)
+                => Data = src;
+
+            public ref Cell64 reg(RegIndex i)
+                => ref seek(Data, (byte)i);
+
         }
     }
 }

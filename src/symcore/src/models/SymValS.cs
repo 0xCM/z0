@@ -49,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator char(SymVal<S> src)
-            => memory.@as<S,char>(src);
+            => core.@as<S,char>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(SymVal<S> src)

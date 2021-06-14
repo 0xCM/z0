@@ -17,7 +17,7 @@ namespace Z0.Asm
     {
         [Op]
         public static AsmMachine create()
-            => new AsmMachine(new RegBank(RegBanks.create(w512,32), RegBanks.create(w64, 16)));
+            => new AsmMachine(new RegBank(RegBanks.zmm(), RegBanks.gp64()));
 
         readonly RegBank Regs;
 

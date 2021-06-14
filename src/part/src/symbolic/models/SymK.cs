@@ -74,7 +74,7 @@ namespace Z0
             => typeof(K).Name;
 
         public string Format()
-            => api.format(this);
+            => string.Format(Sym.RenderPattern, Index, Type, Name, Expr, Kind, Description);
 
         public override string ToString()
             => Format();

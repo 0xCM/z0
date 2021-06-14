@@ -48,7 +48,7 @@ namespace Z0
         /// <summary>
         /// The encoded literal, possibly an invariant address to a string resource
         /// </summary>
-        public Hex64 ScalarValue;
+        public ulong ScalarValue;
 
         /// <summary>
         /// Indicates whether the literal is occluded

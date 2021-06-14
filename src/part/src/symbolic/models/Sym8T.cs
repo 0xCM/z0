@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = Symbols;
-
     public class Sym8<T> : ISym<W8,T>
         where T : unmanaged
     {
@@ -61,7 +59,7 @@ namespace Z0
             get => bw8(Kind);
         }
         public string Format()
-            => api.format(this);
+            => string.Format(Sym.RenderPattern, Index, Type, Name, Expr, Kind, Description);
 
         public override string ToString()
             => Format();

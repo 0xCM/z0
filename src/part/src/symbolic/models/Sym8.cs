@@ -60,13 +60,13 @@ namespace Z0
         }
 
         public string Format()
-            => api.format(this);
+            => string.Format(Sym.RenderPattern, Index, Type, Name, Expr, Kind, Description);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<byte>(Sym8 src)
-            => api.symbol(src.Identity, src.Index, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
+            => new Sym<byte>(src.Identity, src.Index, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }
