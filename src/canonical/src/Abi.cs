@@ -7,11 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct Canonical
     {
+
+        public unsafe readonly struct PointerAbi
+        {
+            public static void f1(byte* pSrc, byte* pDst)
+            {
+                var a = pSrc[0];
+                var b = pSrc[1];
+                var c = pDst[0];
+            }
+        }
+
         [ApiHost("canonical.abi")]
         public struct Abi
         {
