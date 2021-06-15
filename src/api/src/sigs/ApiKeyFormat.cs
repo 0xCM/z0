@@ -39,7 +39,7 @@ namespace Z0
         [Op]
         public static string list(ApiKey src)
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             var data = span16u(src.Data);
             var j = 0;
             var k = 0;
@@ -97,7 +97,7 @@ namespace Z0
 
             seek(dst,j++) = Chars.RBracket;
 
-            return text.format(slice(buffer,0,j));
+            return new string(slice(buffer,0,j));
         }
     }
 }

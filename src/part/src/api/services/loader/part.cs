@@ -43,5 +43,29 @@ namespace Z0
         [Op]
         static Option<IPart> resolve(PropertyInfo src)
             => Option.Try(src, x => (IPart)x.GetValue(null));
+
+        static bool TryLoadPart(Assembly src, out IPart dst)
+        {
+            var attempt = src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).ToArray();
+            if(attempt.Length != 0)
+            {
+                dst = attempt.First();
+                return true;
+            }
+            else
+            {
+                 dst = default;
+                 return false;
+            }
+        }
+
+        [Op]
+        static Option<IPart> TryLoadPart(Assembly src)
+        {
+            if(TryLoadPart(src, out var dst))
+                return Option.some(dst);
+            else
+                return Option.none<IPart>();
+        }
     }
 }

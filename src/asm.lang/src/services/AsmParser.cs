@@ -99,9 +99,13 @@ namespace Z0.Asm
             var trimmed = src.Trim();
             var i = text.index(trimmed, Chars.Space);
             if(i == NotFound)
-                dst = new AsmSigExpr(asm.mnemonic(src));
+                dst = asm.sig(asm.mnemonic(src), src);
             else
-                dst = new AsmSigExpr(asm.mnemonic(text.slice(trimmed,0,i)), text.slice(trimmed, i + 1));
+            {
+                var mnemonic = asm.mnemonic(text.slice(trimmed,0,i));
+                var operands = text.slice(trimmed, i + 1);
+                dst = asm.sig(mnemonic, trimmed);
+            }
             return true;
         }
 

@@ -45,6 +45,8 @@ namespace Z0.Asm
 
         public const string calc64 = nameof(calc64);
 
+        public const string pointers = nameof(pointers);
+
         [ApiHost(prototypes + branches)]
         public readonly partial struct Branches
         {

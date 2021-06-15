@@ -8,10 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmSigExpr sig(AsmMnemonic mnemonic, string formatted)
-            => new AsmSigExpr(mnemonic,formatted);
+        public static AsmSigExpr sig(AsmMnemonic mnemonic, string content)
+            => new AsmSigExpr(mnemonic, content);
     }
 }

@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="wf">The workflow context</param>
         /// <param name="src">The host type</param>
         public ApiHostCatalog HostCatalog(Type src)
-            => HostCatalog(ApiHost.host(src));
+            => HostCatalog(ApiRuntimeLoader.apihost(src));
 
         /// <summary>
         /// Returns a <see cref='ApiHostCatalog'/> for a specified host

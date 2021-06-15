@@ -11,6 +11,7 @@ namespace Z0.Asm
     using static core;
     using static AsmSigTokens;
 
+    [ApiHost]
     public class AsmSigSymbols
     {
         readonly Symbols<Regs> _Regs;
@@ -23,6 +24,8 @@ namespace Z0.Asm
 
         readonly Symbols<Rm> _Rm;
 
+       readonly Symbols<VMem> _VMem;
+
         static Symbols<K> symbols<K>()
             where K : unmanaged, Enum
                 => Symbols.index<K>();
@@ -34,6 +37,27 @@ namespace Z0.Asm
             _Imm = symbols<Imm>();
             _Mem = symbols<Mem>();
             _Rm = symbols<Rm>();
+            _VMem = symbols<VMem>();
         }
+
+        [MethodImpl(Inline), Op]
+        public Symbols<Regs> Regs()
+            =>_Regs;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<Imm> Imm()
+            =>_Imm;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<Mem> Mem()
+            =>_Mem;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<Rm> Rm()
+            =>_Rm;
+
+        [MethodImpl(Inline), Op]
+        public Symbols<VMem> VMem()
+            =>_VMem;
     }
 }

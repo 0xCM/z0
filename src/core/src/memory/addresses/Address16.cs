@@ -97,11 +97,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator Address16(MemoryAddress src)
-            => new A((ushort)src.Location);
+            => new A((T)src.Location);
 
         [MethodImpl(Inline)]
         public static explicit operator Address16(Address64 src)
-            => new A((ushort)src.Location);
+            => new A((T)src.Location);
 
         [MethodImpl(Inline)]
         public static implicit operator int(A src)
@@ -111,9 +111,25 @@ namespace Z0
         public static explicit operator ulong(A src)
             => src.Location;
 
+        // [MethodImpl(Inline)]
+        // public static A operator+(A x, T y)
+        //     => new A((T)(x.Location + y));
+
         [MethodImpl(Inline)]
-        public static A operator+(A x, T y)
-            => new A((T)(x.Location + y));
+        public static A operator-(A a, A b)
+            => new A((T)(a.Location - b.Location));
+
+        [MethodImpl(Inline)]
+        public static A operator+(A a, A b)
+            => new A((T)(a.Location + b.Location));
+
+        [MethodImpl(Inline)]
+        public static A operator++(A a)
+            => new A((T)(a.Location + 1));
+
+        [MethodImpl(Inline)]
+        public static A operator--(A a)
+            => new A((T)(a.Location - 1));
 
         [MethodImpl(Inline)]
         public static bool operator==(A x, A y)

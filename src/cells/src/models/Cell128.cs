@@ -135,10 +135,6 @@ namespace Z0
         public ushort Cell(W16 w, byte index)
             => V16u.GetElement(index);
 
-        // [MethodImpl(Inline)]
-        // public ushort Cell(W16 w, byte index, ushort value)
-        //     => V16u.PutElement(index,value);
-
         [MethodImpl(Inline)]
         public uint Cell(W32 w, byte index)
             => V32u.GetElement(index);

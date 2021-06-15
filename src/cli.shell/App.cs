@@ -34,11 +34,6 @@ namespace Z0
             Wf.Row(string.Format("Align({0}) = {1}", a, b));
         }
 
-        public void Test5()
-        {
-            ApiKeyChecks.create(Wf).Run();
-        }
-
         public void CollectSystemStrings(PartId part)
         {
             Reader(part, out var reader);

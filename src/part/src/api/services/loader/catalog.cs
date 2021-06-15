@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source assembly</param>
         [Op]
         public static ApiPartCatalog catalog(Assembly src)
-            => new ApiPartCatalog(src.Id(), src, ApiRuntimeType.complete(src), ApiHost.hosts(src), svchosts(src));
+            => new ApiPartCatalog(src.Id(), src, ApiRuntimeType.complete(src), apihosts(src), SvcHostTypes(src));
 
         public static IApiCatalog catalog(FS.FolderPath dir)
         {
@@ -69,5 +69,13 @@ namespace Z0
                 );
             return dst;
         }
+
+        /// <summary>
+        /// Searches an assembly for types tagged with the <see cref="FunctionalServiceAttribute"/>
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        [Op]
+        static Type[] SvcHostTypes(Assembly src)
+            => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
     }
 }

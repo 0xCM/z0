@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    using static memory;
+    using static core;
 
     [ApiHost]
     public sealed class ApiJit : AppService<ApiJit>
@@ -82,7 +82,7 @@ namespace Z0
             var parts = catalog.Parts;
             var kParts = parts.Length;
             var flow = Wf.Running(Msg.JittingParts.Format(kParts));
-            var all = root.list<ApiMembers>();
+            var all = list<ApiMembers>();
             var total = 0u;
             foreach(var part in parts)
                 all.Add(JitPart(part));
@@ -113,7 +113,7 @@ namespace Z0
         public ApiMembers JitPart(IPart src)
         {
             var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
-            var buffer = core.list<ApiMember>();
+            var buffer = list<ApiMember>();
             var catalog = ApiRuntimeLoader.catalog(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;

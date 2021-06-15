@@ -128,6 +128,7 @@ namespace Z0.Asm
             Wf.CaptureRunner().Capture(Assembly.GetExecutingAssembly().Id());
         }
 
+
         void CaptureParts(params PartId[] parts)
         {
             var dst = Db.AppLogDir() + FS.folder("capture");
@@ -1040,7 +1041,8 @@ namespace Z0.Asm
             //CheckDocProcessor();
             //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
-            Wf.GlobalCommands().RunExtractWorkflow();
+            //Wf.GlobalCommands().RunExtractWorkflow();
+            CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));

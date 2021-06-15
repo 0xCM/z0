@@ -143,7 +143,6 @@ namespace Z0.Asm
         public enum Mmx
         {
             [Symbol("mm", "An MMX register", "MM0|MM1|MM2|MM3|MM4|MM5|MM6|MM7")]
-
             mm,
 
             [Symbol("mm/m32", "The low-order bits of an mmx register or a 32-bit memory operand; The contents of memory are found at the address provided by the effective address computation")]
@@ -171,15 +170,6 @@ namespace Z0.Asm
             [Symbol("r/m64", "A quadword general-purpose register or memory operand used for instructions whose operand-size attribute is 64 bits when using REX.W. Quadword general-purpose registers are: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15; these are available only in 64-bit mode. The contents of memory are found at the address provided by the effective address computation")]
             rm64,
 
-            [Symbol("reg/m8")]
-            regM8,
-
-            [Symbol("reg/m16")]
-            regM16,
-
-            [Symbol("reg/m32")]
-            regM32,
-
             [Symbol("xmm32", "An XMM register or a 32-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation")]
             xmm32,
 
@@ -188,7 +178,7 @@ namespace Z0.Asm
         }
 
         [SymbolSource]
-        public enum VectorRegs : byte
+        public enum VMem : byte
         {
             [Symbol("mV", "A vector memory operand; the operand size is dependent on the instruction")]
             mV,
@@ -310,7 +300,6 @@ namespace Z0.Asm
             [Symbol("m16&32")]
             m16x32,
 
-
             [Symbol("m32&32")]
             m32x32,
 
@@ -326,6 +315,16 @@ namespace Z0.Asm
 
             [Symbol("ptr16:32", "A far pointer typically to a code segment different from that of the instruction and similar to ptr16:16 notation; in this case the ptr16:32 symbol is used when the operand-size attribute is 32 bits A memory operand using SIB addressing form, where the index register is not used in address calculation, Scale is ignored. Only the base and displacement are used in effective address calculation E.G, CALL ptr16:32 (Call far, absolute, address given in operand)")]
             ptr16x32,
+        }
+
+        [SymbolSource]
+        public enum ZmmBCast : byte
+        {
+            [Symbol("zmm/m512/m32bcst", "An operand that can be a ZMM register, a 512-bit memory location or a 512-bit vector loaded from a 32-bit memory location.")]
+            Zmm512x32bcst,
+
+            [Symbol("zmm/m512/m64bcst", "An operand that can be a ZMM register, a 512-bit memory location or a 512-bit vector loaded from a 64-bit memory location.")]
+            Zmm512x64bcst,
         }
     }
 }

@@ -15,15 +15,6 @@ namespace Z0
 
     public readonly struct ApiIdentityBuilder
     {
-        [MethodImpl(Inline), Op]
-        public static ApiClassKind klass(MethodInfo src)
-        {
-            if(src.Tag<OpKindAttribute>(out var dst))
-                return dst.ClassId;
-            else
-                return 0;
-        }
-
         /// <summary>
         /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
         /// </summary>

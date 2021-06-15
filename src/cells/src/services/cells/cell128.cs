@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
+    using static core;
 
     partial class Cells
     {
@@ -23,10 +24,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Cell128 cell128(uint a00, uint a01, uint a10, uint a11)
             => new Cell128(a00,a01,a10,a11);
-
-        // [MethodImpl(Inline), Op]
-        // public static Cell128 cell128(in ConstPair<ulong> x)
-        //     => new Cell128(x.Left, x.Right);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Cell128 cell128<T>(Vector128<T> src)

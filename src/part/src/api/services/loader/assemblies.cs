@@ -56,5 +56,22 @@ namespace Z0
 
             return dst.ToArray();
         }
+
+        /// <summary>
+        /// Loads an assembly from a potential part path
+        /// </summary>
+        [Op]
+        static Option<Assembly> assembly(FS.FilePath src)
+        {
+            try
+            {
+                return Assembly.LoadFrom(src.Name);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return default;
+            }
+        }
     }
 }

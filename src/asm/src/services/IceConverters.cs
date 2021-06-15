@@ -36,7 +36,7 @@ namespace Z0.Asm
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             return asm.form(
                 AsmOpCodes.conform(iceOpCode.ToOpCodeString()),
-                asm.sig(src.Mnemonic.ToString().ToUpper(), iceOpCode.ToInstructionString()));
+                asm.sig(src.Mnemonic.ToString(), iceOpCode.ToInstructionString()));
         }
 
         [MethodImpl(Inline), Op]

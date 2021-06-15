@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
+    using static Root;
 
     partial struct Prototypes
     {

@@ -8,11 +8,8 @@ namespace Z0.Asm
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Part;
-
     partial struct Prototypes
     {
-
         [Free]
         public interface ICalc<T>
             where T : unmanaged

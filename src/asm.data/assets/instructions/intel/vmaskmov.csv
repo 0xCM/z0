@@ -12,6 +12,12 @@
 | VEX.128.66.0F38.W0 2F /r | VMASKMOVPD m128, xmm1, xmm2 | MVR   | V/V            | AVX                | Conditionally store packed double-precision values from xmm2 using mask in xmm1 .                  |
 | VEX.256.66.0F38.W0 2F /r | VMASKMOVPD m256, ymm1, ymm2 | MVR   | V/V            | AVX                | Conditionally store packed double-precision values from ymm2 using mask in ymm1 .                  |
 
+## Encoding
+----------------------------------------------------------------------------------------------------------------------------
+| Op/En | Operand 1     | Operand 2    | Operand 3     | Operand 4 |
+| RVM   | ModRM:reg (w) | VEX.vvvv (r) | ModRM:r/m (r) | NA        |
+| MVR   | ModRM:r/m (w) | VEX.vvvv (r) | ModRM:reg (r) | NA        |
+
 ## Description
 ----------------------------------------------------------------------------------------------------------------------------
 Conditionally moves packed data elements from the second source operand into the corresponding data element of the

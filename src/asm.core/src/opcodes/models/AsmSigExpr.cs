@@ -14,24 +14,23 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSigExpr : ITextExpr<AsmSigExpr>, IComparable<AsmSigExpr>
     {
-        public TextBlock Operands {get;}
+        //public TextBlock Operands {get;}
 
         public AsmMnemonic Mnemonic {get;}
 
         public TextBlock Content {get;}
 
-        public AsmSigExpr(AsmMnemonic mnemonic, TextBlock operands)
+        public AsmSigExpr(AsmMnemonic mnemonic, TextBlock content)
         {
             Mnemonic = mnemonic;
-            Operands = operands;
-            Content = string.Format("{0} {1}", Mnemonic.Format(MnemonicCase.Lowercase), Operands);
+            Content = content;
         }
 
-        public AsmSigExpr(AsmMnemonic mnemonic)
-        {
-            Mnemonic = mnemonic;
-            Operands = EmptyString;
-        }
+        // public AsmSigExpr(AsmMnemonic mnemonic)
+        // {
+        //     Mnemonic = mnemonic;
+        //     Operands = EmptyString;
+        // }
 
         public int Length
         {

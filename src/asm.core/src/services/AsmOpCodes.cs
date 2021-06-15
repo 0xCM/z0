@@ -16,7 +16,7 @@ namespace Z0.Asm
             => asm.opcode(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
 
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(byte b0, AsmOpCodeTokens.ImmSize imm)
+        public static AsmOpCode opcode(byte b0, ImmSize imm)
             => new AsmOpCode(math.or(normalize(b0), math.sll(normalize(TokenKind.ImmSize),4)) << 24 | normalize(b0));
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0.Asm
         /// <param name="imm"></param>
         /// <returns></returns>
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(byte b0, RegDigit r, AsmOpCodeTokens.ImmSize imm)
+        public static AsmOpCode opcode(byte b0, RegDigit r, ImmSize imm)
             => new AsmOpCode(math.or(normalize(b0), math.sll(normalize(TokenKind.ImmSize | TokenKind.OpCodeExt),4)) << 24 | normalize(b0));
 
         [MethodImpl(Inline)]

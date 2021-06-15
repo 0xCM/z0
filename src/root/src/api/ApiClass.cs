@@ -6,17 +6,31 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
 
     public readonly struct ApiClass : ITextual
     {
-        readonly ApiClassKind Kind;
+        [MethodImpl(Inline), Op]
+        public static ApiClass from(MethodInfo src)
+        {
+            if(src.Tag<OpKindAttribute>(out var dst))
+                return new ApiClass(dst.ClassId);
+            else
+                return ApiClass.Empty;
+        }
+
+        public ApiClassKind Kind {get;}
 
         [MethodImpl(Inline)]
         public ApiClass(ApiClassKind kind)
             => Kind = kind;
-
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Kind == 0;
+        }
         public string Format()
             => Kind.Format();
 
@@ -34,5 +48,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(ApiClass src)
             => (ushort)src.Kind;
+
+        public static ApiClass Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ApiClass(0);
+        }
     }
 }

@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using static Part;
-
     partial struct Prototypes
     {
-
         [ApiHost(prototypes + "vcopy")]
         public ref struct VCopy
         {

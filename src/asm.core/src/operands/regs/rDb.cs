@@ -57,5 +57,44 @@ namespace Z0.Asm
             public static implicit operator G(Sym<K> src)
                 => new G((I)src.Kind);
         }
+
+        public readonly struct db0 : IRegOp64<db0>
+        {
+            public I Index => I.r0;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(db0 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(db0 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct db1 : IRegOp64<db1>
+        {
+            public I Index => I.r1;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(db1 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(db1 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct db2 : IRegOp64<db2>
+        {
+            public I Index => I.r2;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(db2 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(db2 src)
+                => (K)src.Index;
+        }
     }
 }
