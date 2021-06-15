@@ -147,7 +147,7 @@ namespace Z0.Asm
                 result += DataParser.parse(skip(cells, i++), out dst.IP);
                 result += DataParser.parse(skip(cells, i++), out dst.BlockOffset);
                 dst.Expression = asm.statement(skip(cells, i++));
-                dst.Encoded = AsmBytes.parse(skip(cells, i++));
+                dst.Encoded = AsmHexCode.parse(skip(cells, i++));
                 result += sig(skip(cells, i++), out dst.Sig);
                 dst.OpCode = asm.opcode(skip(cells, i++));
                 dst.Bitstring = dst.Encoded;
@@ -191,7 +191,7 @@ namespace Z0.Asm
 
                     if(text.unfence(A, OpCodeFence, out var opcode))
                     {
-                        if(AsmBytes.parse(B, out var encoded))
+                        if(AsmHexCode.parse(B, out var encoded))
                         {
                             thumbprint = new AsmThumbprint(statement, sig, asm.opcode(opcode), encoded);
                             return true;
@@ -252,7 +252,7 @@ namespace Z0.Asm
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.Expression), src.LineNumber));
 
-            outcome += AsmBytes.parse(skip(parts,i++), out dst.Encoded);
+            outcome += AsmHexCode.parse(skip(parts,i++), out dst.Encoded);
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.Encoded), src.LineNumber));
 

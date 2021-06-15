@@ -149,7 +149,7 @@ namespace Z0
             => OpUri.GetHashCode();
 
         public string Format(int uripad)
-            => text.concat(BaseAddress.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
+            => string.Concat(BaseAddress.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
 
         public string Format()
             => Format(60);

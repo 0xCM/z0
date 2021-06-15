@@ -12,6 +12,24 @@ namespace Z0
 
     partial struct Symbols
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        static SymLiteral untype<E>(in SymLiteral<E> src)
+            where E : unmanaged
+        {
+            var dst = new SymLiteral();
+            dst.Component = src.Component.SimpleName;
+            dst.Type = src.Type;
+            dst.Position = src.Position;
+            dst.Name = src.Name;
+            dst.Symbol = src.Symbol;
+            dst.DataType = src.DataType;
+            dst.ScalarValue = src.ScalarValue;
+            dst.Description = src.Description;
+            dst.Hidden = src.Hidden;
+            dst.Identity = src.Identity;
+            return dst;
+        }
+
         public static ReadOnlySpan<SymLiteral> records<E>()
             where E : unmanaged, Enum
         {

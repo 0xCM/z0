@@ -14,12 +14,19 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSigOp
     {
-        readonly Sym Symbol;
+        readonly ISym Symbol;
+
 
         [MethodImpl(Inline)]
-        public AsmSigOp(Sym s)
+        internal AsmSigOp(ISym s)
         {
             Symbol = s;
+        }
+
+        public SymIdentity Identity
+        {
+            [MethodImpl(Inline)]
+            get => Symbol.Identity;
         }
 
         public Identifier Name
@@ -32,24 +39,6 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => Symbol.Expr;
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Symbol.IsEmpty;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Symbol.IsNonEmpty;
-        }
-
-        public static AsmSigOp Empty
-        {
-            [MethodImpl(Inline)]
-            get => new AsmSigOp(Sym.Empty);
         }
     }
 }

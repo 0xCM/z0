@@ -9,13 +9,11 @@ namespace Z0
 
     using static Root;
 
-    using api = Symbols;
-
     public class Sym16 : ISym<W16,ushort>
     {
-        public SymIdentity Identity {get;}
+        public SymKey Key {get;}
 
-        public SymKey<ushort> Index {get;}
+        public SymIdentity Identity {get;}
 
         public Identifier Type {get;}
 
@@ -32,7 +30,7 @@ namespace Z0
         Sym16()
         {
             Identity = SymIdentity.Empty;
-            Index = default;
+            Key = default;
             Name = Identifier.Empty;
             Kind = default;
             Expr = SymExpr.Empty;
@@ -41,10 +39,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier type, Identifier name, ushort kind, SymExpr expr, TextBlock? description = null, bool hidden = false)
+        public Sym16(SymIdentity id, SymKey index, Identifier type, Identifier name, ushort kind, SymExpr expr, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
-            Index = index;
+            Key = index;
             Type = type;
             Name = name;
             Kind = kind;
@@ -60,13 +58,13 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format(Sym.RenderPattern, Index, Type, Name, Expr, Kind, Description);
+            => string.Format(Sym.RenderPattern, Key, Type, Name, Expr, Kind, Description);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<ushort>(Sym16 src)
-            => new Sym<ushort>(src.Identity, src.Index, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
+            => new Sym<ushort>(src.Identity, src.Key, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }

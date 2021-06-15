@@ -5,11 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
     using System.Text;
-    using System.Collections.Concurrent;
 
     using static Root;
     using static core;
@@ -66,7 +62,7 @@ namespace Z0.Asm
                     statement.OpUri = code.OpUri;
                     statement.Expression = instruction.FormattedInstruction;
                     AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
-                    statement.Encoded = AsmBytes.hexcode(slice(bytes, blockOffset, size));
+                    statement.Encoded = AsmHexCode.load(slice(bytes, blockOffset, size));
                     statement.OpCode = opcode;
                     statement.Bitstring = statement.Encoded;
                     dst.Add(statement);

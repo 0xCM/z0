@@ -41,7 +41,7 @@ namespace Z0.Asm
             var sbuffer = span<char>(statement.Length);
             var len = SymbolicRender.render(slice(src.Content,space1 + 16),ref i, sbuffer);
 
-            dst = asm.disassembly(offset, new string(slice(sbuffer,0,len)), AsmBytes.hexcode(slice(buffer,0,result.Data)));
+            dst = asm.disassembly(offset, new string(slice(sbuffer,0,len)), AsmHexCode.load(slice(buffer,0,result.Data)));
             return outcome;
         }
 

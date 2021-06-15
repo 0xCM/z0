@@ -31,7 +31,7 @@ namespace Z0.Asm
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data(this);
+            get => encoded(this);
         }
 
         [MethodImpl(Inline)]
@@ -87,15 +87,15 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmHexCode(BinaryCode src)
-            => hexcode(src.View);
+            => load(src.View);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmHexCode(ReadOnlySpan<byte> src)
-            => hexcode(src);
+            => load(src);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmHexCode(byte[] src)
-            => hexcode(src);
+            => load(src);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmHexCode(string src)
@@ -132,7 +132,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmHexCode hexcode(ReadOnlySpan<byte> src)
+        public static AsmHexCode load(ReadOnlySpan<byte> src)
         {
             var cell = Cells.alloc(w128);
             var count = (byte)min(src.Length, 15);
@@ -144,11 +144,22 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
+        public static AsmHexCode load(ulong src)
+        {
+            var size = Bits.effsize(src);
+            var data = slice(bytes(src), 0, size);
+            var storage = 0ul;
+            var buffer = bytes(storage);
+            core.reverse(data, buffer);
+            return new AsmHexCode(Cells.cell128(u64(first(buffer)), (ulong)size << 56));
+        }
+
+        [MethodImpl(Inline), Op]
         public static byte size(in AsmHexCode src)
             => BitNumbers.cell8(src.Data, AsmHexCode.SizeIndex);
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> data(in AsmHexCode src)
+        public static Span<byte> encoded(in AsmHexCode src)
             => slice(bytes(src.Data), 0, src.Size);
 
         [Op]
@@ -175,7 +186,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static int hash(in AsmHexCode src)
-            => (int)alg.hash.calc(data(src));
+            => (int)alg.hash.calc(encoded(src));
 
         [Op]
         public static AsmHexCode parse(string src)

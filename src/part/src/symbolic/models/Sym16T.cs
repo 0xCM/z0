@@ -13,9 +13,9 @@ namespace Z0
     public class Sym16<T> : ISym<W16,T>
         where T : unmanaged
     {
-        public SymIdentity Identity {get;}
+        public SymKey Key {get;}
 
-        public SymKey<ushort> Index {get;}
+        public SymIdentity Identity {get;}
 
         public Identifier Name {get;}
 
@@ -30,7 +30,7 @@ namespace Z0
         Sym16()
         {
             Identity = SymIdentity.Empty;
-            Index = default;
+            Key = default;
             Name = Identifier.Empty;
             Kind = default;
             Expr = SymExpr.Empty;
@@ -39,22 +39,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Sym16(SymKey<ushort> index, Identifier name, T kind, SymExpr expr, TextBlock? description = null, bool hidden = false)
-        {
-            Identity = default;
-            Index = index;
-            Name = name;
-            Kind = kind;
-            Expr = expr;
-            Description = description ?? TextBlock.Empty;
-            Hidden = hidden;
-        }
-
-        [MethodImpl(Inline)]
-        public Sym16(SymIdentity id, SymKey<ushort> index, Identifier name, T kind, SymExpr expr, TextBlock? description = null, bool hidden = false)
+        public Sym16(SymIdentity id, SymKey index, Identifier name, T kind, SymExpr expr, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
-            Index = index;
+            Key = index;
             Name = name;
             Kind = kind;
             Expr = expr;
@@ -72,17 +60,17 @@ namespace Z0
             => typeof(T).Name;
 
         public string Format()
-            => string.Format(Sym.RenderPattern, Index, Type, Name, Expr, Kind, Description);
+            => string.Format(Sym.RenderPattern, Key, Type, Name, Expr, Kind, Description);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Sym16(Sym16<T> src)
-            => new Sym16(src.Identity, src.Index, src.Type, src.Name, bw16(src.Kind), src.Expr, src.Description, src.Hidden);
+            => new Sym16(src.Identity, src.Key, src.Type, src.Name, bw16(src.Kind), src.Expr, src.Description, src.Hidden);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym16<T> src)
-            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
+            => new Sym<T>(src.Identity, src.Key.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }

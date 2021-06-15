@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-
     using System.Reflection;
     using System.Collections.Generic;
 
@@ -13,7 +12,6 @@ namespace Z0
 
     using static Root;
     using static core;
-
 
     using K = AsmShellCmdKind;
 
@@ -57,7 +55,6 @@ namespace Z0
                 dst.Name = StringAddress.resource(EmptyString);
                 dst.Description = StringAddress.resource(EmptyString);
             }
-
         }
 
         public AsmShell()

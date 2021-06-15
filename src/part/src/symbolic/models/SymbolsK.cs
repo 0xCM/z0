@@ -47,6 +47,10 @@ namespace Z0
             get => ref Data[index];
         }
 
+        [MethodImpl(Inline)]
+        public ref readonly Sym Untyped(Sym<K> src)
+            => ref _Untyped[src.Key];
+
         public ref readonly Sym<K> this[K index]
         {
             [MethodImpl(Inline)]
@@ -62,11 +66,11 @@ namespace Z0
             get => _Kinds;
         }
 
-        public ReadOnlySpan<Sym> Untyped
-        {
-            [MethodImpl(Inline)]
-            get => _Untyped.View;
-        }
+        // public ReadOnlySpan<Sym> Untyped
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => _Untyped.View;
+        // }
 
         public Sym<K>[] Storage
         {

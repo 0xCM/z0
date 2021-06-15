@@ -28,7 +28,7 @@ namespace Z0
         public CodeBlock(MemoryAddress src, byte[] data)
         {
             BaseAddress = src;
-            Code = new BinaryCode(data ?? sys.empty<byte>());
+            Code = new BinaryCode(data ?? core.array<byte>());
         }
 
         [MethodImpl(Inline)]

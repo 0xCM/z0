@@ -13,9 +13,9 @@ namespace Z0
     public class Sym8<T> : ISym<W8,T>
         where T : unmanaged
     {
-        public SymIdentity Identity {get;}
+        public SymKey Key {get;}
 
-        public SymKey<byte> Index {get;}
+        public SymIdentity Identity {get;}
 
         public Identifier Name {get;}
 
@@ -30,7 +30,7 @@ namespace Z0
         Sym8()
         {
             Identity = SymIdentity.Empty;
-            Index = default;
+            Key = default;
             Name = Identifier.Empty;
             Kind = default;
             Expr = SymExpr.Empty;
@@ -39,10 +39,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Sym8(SymIdentity id, SymKey<byte> key, Identifier name, T value, SymExpr expr, TextBlock? description = null, bool hidden = false)
+        public Sym8(SymIdentity id, SymKey key, Identifier name, T value, SymExpr expr, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
-            Index = key;
+            Key = key;
             Name = name;
             Kind = value;
             Expr = expr;
@@ -59,17 +59,17 @@ namespace Z0
             get => bw8(Kind);
         }
         public string Format()
-            => string.Format(Sym.RenderPattern, Index, Type, Name, Expr, Kind, Description);
+            => string.Format(Sym.RenderPattern, Key, Type, Name, Expr, Kind, Description);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Sym8(Sym8<T> src)
-            => new Sym8(src.Identity, src.Index, src.Type, src.Name, bw8(src.Kind), src.Expr, src.Description, src.Hidden);
+            => new Sym8(src.Identity, src.Key, src.Type, src.Name, bw8(src.Kind), src.Expr, src.Description, src.Hidden);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym8<T> src)
-            => new Sym<T>(src.Identity, src.Index.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
+            => new Sym<T>(src.Identity, src.Key.Value, src.Name, src.Kind, src.Expr, src.Description, src.Hidden);
     }
 }

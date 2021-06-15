@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines and index over <see cref='ApiMember'/> values

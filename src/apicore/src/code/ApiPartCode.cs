@@ -28,7 +28,6 @@ namespace Z0
             HostCode = src;
         }
 
-
         public Span<ApiHostBlocks> Edit
         {
             [MethodImpl(Inline)]

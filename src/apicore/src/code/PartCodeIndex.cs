@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Part;
+    using static Root;
 
     using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostBlocks>;
 
@@ -67,12 +67,12 @@ namespace Z0
         public static PartCodeIndex Empty
         {
             [MethodImpl(Inline)]
-            get => new PartCodeIndex(sys.empty<PartId>(), ApiHostCodeLookup.Empty);
+            get => new PartCodeIndex(core.array<PartId>(), ApiHostCodeLookup.Empty);
         }
 
         static PartCodeIndexEntry[] entries(in PartCodeIndex src)
         {
-            var buffer = root.list<PartCodeIndexEntry>(src.Data.Count);
+            var buffer = core.list<PartCodeIndexEntry>(src.Data.Count);
             foreach(var item in src.Data)
                 buffer.Add(new PartCodeIndexEntry(item.Key, item.Value));
             return buffer.ToArray();

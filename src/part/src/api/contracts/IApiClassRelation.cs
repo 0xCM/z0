@@ -20,7 +20,6 @@ namespace Z0
             => text.join(" | ", Members.Map(x => x.Format()).ReadOnly());
     }
 
-
     [Free]
     public interface IUnaryApiClassRelation : IApiClassRelation
     {

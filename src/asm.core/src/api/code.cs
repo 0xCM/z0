@@ -13,10 +13,10 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static AsmHexCode code(ulong src)
-            => AsmBytes.code(src);
+            => AsmHexCode.load(src);
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode code(string src)
-            => AsmBytes.parse(src);
+            => AsmHexCode.parse(src);
     }
 }

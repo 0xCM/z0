@@ -8,7 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-
     using static Root;
     using static core;
 
@@ -38,6 +37,11 @@ namespace Z0
 
             return dst;
         }
+
+        [Op, Closures(Closure)]
+        internal static Sym untyped<T>(Sym<T> src)
+            where T : unmanaged
+                => new Sym(src.Identity, src.Key, src.Type, bw64(src.Kind), src.Name, src.Expr, src.Description, src.Hidden);
 
         /// <summary>
         /// Symbol cache loader

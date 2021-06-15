@@ -37,7 +37,7 @@ namespace Z0.Asm
                     info.Method = method.Identify();
                     info.StubAddress = entry;
                     info.TargetAddress = target;
-                    info.StubCode =  AsmBytes.hexcode(slice(encoded,0,5));
+                    info.StubCode =  AsmHexCode.load(slice(encoded,0,5));
                     info.Displacement = JmpRel32.dx(encoded);
                     info.Offset = JmpRel32.offset(entry,entry,encoded);
                 }

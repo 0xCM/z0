@@ -29,7 +29,7 @@ namespace Z0
             dst.ScalarValue = src.Value;
             dst.Identity = src.Identity;
             dst.Name = src.Name;
-            dst.Position = (ushort)src.Index.Value;
+            dst.Position = (ushort)src.Key.Value;
             dst.Symbol = src.Expr.Format();
             dst.Type = src.Type;
             dst.Hidden = src.Hidden;

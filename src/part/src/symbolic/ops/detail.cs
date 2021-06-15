@@ -12,7 +12,7 @@ namespace Z0
         {
             dst.TypeName = src.Type.Name;
             dst.SymCount = count;
-            dst.Index = src.Index;
+            dst.Index = src.Key;
             dst.Name = src.Name;
             dst.Expr = src.Expr;
             dst.NameData = text.utf16(src.Name).ToArray();

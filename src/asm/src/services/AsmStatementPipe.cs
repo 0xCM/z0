@@ -240,7 +240,7 @@ namespace Z0.Asm
                 statement.OpUri = src.Uri;
                 statement.Expression = instruction.FormattedInstruction;
                 AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
-                statement.Encoded = AsmBytes.hexcode(bytes.Slice(offset, size));
+                statement.Encoded = AsmHexCode.load(bytes.Slice(offset, size));
                 statement.OpCode = opcode;
                 statement.Bitstring = statement.Encoded;
                 dst.Add(statement);

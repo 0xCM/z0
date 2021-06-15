@@ -9,7 +9,6 @@ namespace Z0.Asm
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static core;
 
     [ApiHost, StructLayout(LayoutKind.Sequential)]
     public readonly struct CpuPorts

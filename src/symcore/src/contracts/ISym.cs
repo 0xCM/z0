@@ -6,6 +6,10 @@ namespace Z0
 {
     public interface ISym : ITextual
     {
+        SymKey Key {get;}
+
+        SymIdentity Identity {get;}
+
         Identifier Type {get;}
 
         Identifier Name {get;}

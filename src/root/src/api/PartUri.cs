@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Uri for .net clr assembly
@@ -27,7 +27,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Id == PartId.None || text.empty(UriText);
+            get => Id == PartId.None || string.IsNullOrWhiteSpace(UriText);
         }
 
         [MethodImpl(Inline)]

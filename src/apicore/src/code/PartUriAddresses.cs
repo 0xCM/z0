@@ -7,33 +7,33 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    using KVP = KeyValuePairs<MemoryAddress,ApiCodeBlock>;
+    using LU = System.Collections.Generic.Dictionary<MemoryAddress,OpUri>;
 
-    public readonly struct PartCodeAddresses
+    public readonly struct PartUriAddresses
     {
-        public Index<PartId> Parts {get;}
+        public readonly PartId[] Parts;
 
-        readonly KVP Data;
+        readonly LU Data;
 
         [MethodImpl(Inline)]
-        public PartCodeAddresses(PartId[] parts, KVP src)
+        public PartUriAddresses(PartId[] parts, LU src)
         {
-            Data = src;
             Parts = parts;
+            Data = src;
         }
 
-        public Index<ApiCodeBlock> Code
+        public Index<OpUri> Identities
         {
             [MethodImpl(Inline)]
-            get => Data.Values;
+            get => Data.Values.Array();
         }
 
         public Index<MemoryAddress> Addresses
         {
             [MethodImpl(Inline)]
-            get => Data.Keys;
+            get => Data.Keys.Array();
         }
 
         public uint Count
@@ -42,16 +42,10 @@ namespace Z0
             get => (uint)Data.Count;
         }
 
-        public ApiCodeBlock this[MemoryAddress src]
+        public static PartUriAddresses Empty
         {
             [MethodImpl(Inline)]
-            get => Data[src];
-        }
-
-        public static PartCodeAddresses Empty
-        {
-            [MethodImpl(Inline)]
-            get => new PartCodeAddresses(sys.empty<PartId>(), KVP.Empty);
+            get => new PartUriAddresses(core.array<PartId>(), new LU());
         }
     }
 }

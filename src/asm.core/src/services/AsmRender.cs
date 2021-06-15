@@ -46,7 +46,6 @@ namespace Z0.Asm
             return text.format(slice(buffer,0,count));
         }
 
-
         public static uint render(in AsmMnemonic src, MnemonicCase @case, ref uint i, Span<char> dst)
         {
             if(src.IsEmpty)
@@ -327,7 +326,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
+        public static string format(AsmMnemonic monic, ReadOnlySpan<AsmSigOperandExpr> operands)
         {
             var dst = text.buffer();
             render(monic, operands, dst);
@@ -335,14 +334,14 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static void render(AsmMnemonic monic, Index<AsmSigOperandExpr> operands, ITextBuffer dst)
+        public static void render(AsmMnemonic monic, ReadOnlySpan<AsmSigOperandExpr> operands, ITextBuffer dst)
         {
             dst.Append(monic.Format(MnemonicCase.Uppercase));
             var opcount = operands.Length;
             if(opcount != 0)
             {
                 dst.Append(Chars.Space);
-                dst.Append(text.join(Chars.Comma, operands));
+                dst.Append(operands.Delimit(Chars.Comma).Format());
             }
         }
 

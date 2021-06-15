@@ -24,7 +24,7 @@ namespace Z0
 
         public ByteSize ByteCount;
         public string Format()
-            => text.format("{0}", new {PartCount, HostCount, AddressCount, BlockCount, IdentityCount, ByteCount});
+            => string.Format("{0}", new {PartCount, HostCount, AddressCount, BlockCount, IdentityCount, ByteCount});
 
         public override string ToString()
             => Format();
