@@ -142,6 +142,7 @@ namespace Z0
             SEG_MOV,
 
             FINAL_DSEG,
+
             FINAL_DSEG_NOT64,
 
             FINAL_DSEG_MODE64,
@@ -171,20 +172,35 @@ namespace Z0
             XMM_R_32,
 
             XMM_R_64,
+
             XMM_B,
+
             XMM_B_32,
+
             XMM_B_64,
+
             BND_R,
+
             BND_B,
+
             A_GPR_R,
+
             A_GPR_B,
+
             XMM_SE,
+
             XMM_SE64,
+
             XMM_SE32,
+
             YMM_SE,
+
             YMM_SE64,
+
             YMM_SE32,
+
             XMM_N,
+
             XMM_N_32,
 
             XMM_N_64,

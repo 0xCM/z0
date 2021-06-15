@@ -5,11 +5,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
+
     partial struct XedModels
     {
         /// <summary>
         /// Defines the content of an Xed operand; adapted from 'xed-operand-storage.h'
         /// </summary>
+
+        [StructLayout(LayoutKind.Sequential)]
         public struct Operand
         {
             public byte agen;

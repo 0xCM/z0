@@ -44,65 +44,52 @@ destination memory location is encoded in rm_field.
 
 ## Operation
 ----------------------------------------------------------------------------------------------------------------------------
-
-### VMASKMOVPS -128-bit load
------------------------------------------------------------------
-DEST[31:0]←IF (SRC1[31]) Load_32(mem) ELSE 0
-DEST[63:32]←IF (SRC1[63]) Load_32(mem + 4) ELSE 0
-DEST[95:64]←IF (SRC1[95]) Load_32(mem + 8) ELSE 0
-DEST[127:97]←IF (SRC1[127]) Load_32(mem + 12) ELSE 0
-DEST[MAXVL-1:128] ← 0
-
-### VMASKMOVPS - 256-bit load
------------------------------------------------------------------
-DEST[31:0]←IF (SRC1[31]) Load_32(mem) ELSE 0
-DEST[63:32]←IF (SRC1[63]) Load_32(mem + 4) ELSE 0
-DEST[95:64]←IF (SRC1[95]) Load_32(mem + 8) ELSE 0
-DEST[127:96]←IF (SRC1[127]) Load_32(mem + 12) ELSE 0
-DEST[159:128]←IF (SRC1[159]) Load_32(mem + 16) ELSE 0
-DEST[191:160]←IF (SRC1[191]) Load_32(mem + 20) ELSE 0
-DEST[223:192]←IF (SRC1[223]) Load_32(mem + 24) ELSE 0
-DEST[255:224]←IF (SRC1[255]) Load_32(mem + 28) ELSE 0
-
-### VMASKMOVPD - 128-bit load
------------------------------------------------------------------
-DEST[63:0]←IF (SRC1[63]) Load_64(mem) ELSE 0
-DEST[127:64]←IF (SRC1[127]) Load_64(mem + 16) ELSE 0
-DEST[MAXVL-1:128] ← 0
-
-### VMASKMOVPD - 256-bit load
------------------------------------------------------------------
-DEST[63:0]←IF (SRC1[63]) Load_64(mem) ELSE 0
-DEST[127:64]←IF (SRC1[127]) Load_64(mem + 8) ELSE 0
-DEST[195:128]←IF (SRC1[191]) Load_64(mem + 16) ELSE 0
-DEST[255:196]←IF (SRC1[255]) Load_64(mem + 24) ELSE 0
-
-### VMASKMOVPS - 128-bit store
------------------------------------------------------------------
-IF (SRC1[31]) DEST[31:0]←SRC2[31:0]
-IF (SRC1[63]) DEST[63:32]←SRC2[63:32]
-IF (SRC1[95]) DEST[95:64]←SRC2[95:64]
-IF (SRC1[127]) DEST[127:96]←SRC2[127:96]
-
-### VMASKMOVPS - 256-bit store
------------------------------------------------------------------
-IF (SRC1[31]) DEST[31:0]←SRC2[31:0]
-IF (SRC1[63]) DEST[63:32]←SRC2[63:32]
-IF (SRC1[95]) DEST[95:64]←SRC2[95:64]
-IF (SRC1[127]) DEST[127:96]←SRC2[127:96]
-IF (SRC1[159]) DEST[159:128]←SRC2[159:128]
-IF (SRC1[191]) DEST[191:160]←SRC2[191:160]
-IF (SRC1[223]) DEST[223:192]←SRC2[223:192]
-IF (SRC1[255]) DEST[255:224]←SRC2[255:224]
-
-### VMASKMOVPD - 128-bit store
------------------------------------------------------------------
-IF (SRC1[63]) DEST[63:0]←SRC2[63:0]
-IF (SRC1[127]) DEST[127:64]←SRC2[127:64]
-
-### VMASKMOVPD - 256-bit store
------------------------------------------------------------------
-IF (SRC1[63]) DEST[63:0]←SRC2[63:0]
-IF (SRC1[127]) DEST[127:64]←SRC2[127:64]
-IF (SRC1[191]) DEST[191:128]←SRC2[191:128]
-IF (SRC1[255]) DEST[255:192]←SRC2[255:192]
+00145061:VMASKMOVPS -128-bit load
+00145062:DEST[31:0] := IF (SRC1[31]) Load_32(mem) ELSE 0
+00145063:DEST[63:32] := IF (SRC1[63]) Load_32(mem + 4) ELSE 0
+00145064:DEST[95:64] := IF (SRC1[95]) Load_32(mem + 8) ELSE 0
+00145065:DEST[127:97] := IF (SRC1[127]) Load_32(mem + 12) ELSE 0
+00145066:DEST[MAXVL-1:128] := 0
+00145067:VMASKMOVPS - 256-bit load
+00145068:DEST[31:0] := IF (SRC1[31]) Load_32(mem) ELSE 0
+00145069:DEST[63:32] := IF (SRC1[63]) Load_32(mem + 4) ELSE 0
+00145070:DEST[95:64] := IF (SRC1[95]) Load_32(mem + 8) ELSE 0
+00145071:DEST[127:96] := IF (SRC1[127]) Load_32(mem + 12) ELSE 0
+00145072:DEST[159:128] := IF (SRC1[159]) Load_32(mem + 16) ELSE 0
+00145073:DEST[191:160] := IF (SRC1[191]) Load_32(mem + 20) ELSE 0
+00145074:DEST[223:192] := IF (SRC1[223]) Load_32(mem + 24) ELSE 0
+00145075:DEST[255:224] := IF (SRC1[255]) Load_32(mem + 28) ELSE 0
+00145076:VMASKMOVPD - 128-bit load
+00145077:DEST[63:0] := IF (SRC1[63]) Load_64(mem) ELSE 0
+00145078:DEST[127:64] := IF (SRC1[127]) Load_64(mem + 16) ELSE 0
+00145079:DEST[MAXVL-1:128] := 0
+00145080:VMASKMOVPD - 256-bit load
+00145081:DEST[63:0] := IF (SRC1[63]) Load_64(mem) ELSE 0
+00145082:DEST[127:64] := IF (SRC1[127]) Load_64(mem + 8) ELSE 0
+00145083:DEST[195:128] := IF (SRC1[191]) Load_64(mem + 16) ELSE 0
+00145084:DEST[255:196] := IF (SRC1[255]) Load_64(mem + 24) ELSE 0
+00145085:VMASKMOVPS - 128-bit store
+00145086:IF (SRC1[31]) DEST[31:0] := SRC2[31:0]
+00145087:IF (SRC1[63]) DEST[63:32] := SRC2[63:32]
+00145088:IF (SRC1[95]) DEST[95:64] := SRC2[95:64]
+00145089:IF (SRC1[127]) DEST[127:96] := SRC2[127:96]
+00145090:VMASKMOVPS - 256-bit store
+00145091:IF (SRC1[31]) DEST[31:0] := SRC2[31:0]
+00145092:IF (SRC1[63]) DEST[63:32] := SRC2[63:32]
+00145093:IF (SRC1[95]) DEST[95:64] := SRC2[95:64]
+00145094:IF (SRC1[127]) DEST[127:96] := SRC2[127:96]
+00145095:IF (SRC1[159]) DEST[159:128] :=SRC2[159:128]
+00145096:IF (SRC1[191]) DEST[191:160] := SRC2[191:160]
+00145097:IF (SRC1[223]) DEST[223:192] := SRC2[223:192]
+00145098:IF (SRC1[255]) DEST[255:224] := SRC2[255:224]
+00145099:VMASKMOV—Conditional SIMD Packed Loads and Stores
+00145100:INSTRUCTION SET REFERENCE, V-Z
+00145101:5-298 Vol. 2C
+00145102:VMASKMOVPD - 128-bit store
+00145103:IF (SRC1[63]) DEST[63:0] := SRC2[63:0]
+00145104:IF (SRC1[127]) DEST[127:64] := SRC2[127:64]
+00145105:VMASKMOVPD - 256-bit store
+00145106:IF (SRC1[63]) DEST[63:0] := SRC2[63:0]
+00145107:IF (SRC1[127]) DEST[127:64] := SRC2[127:64]
+00145108:IF (SRC1[191]) DEST[191:128] := SRC2[191:128]
+00145109:IF (SRC1[255]) DEST[255:192] := SRC2[255:192]

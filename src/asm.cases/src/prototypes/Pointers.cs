@@ -16,82 +16,89 @@ namespace Z0.Asm
         public unsafe readonly struct Pointers
         {
             [Op]
-            public static void f_32u_p8u_p8u_p8u_void(uint count, byte* pA, byte* pB, byte* pDst)
+            public static void f_32u_p8u_p8u_p8u_void(byte* pA, byte* pB, byte* pDst)
             {
                 var i=0u;
-                pDst[i++] = math.and(pA[0], pB[0]);
-                pDst[i++] = math.or(pA[1], pB[1]);
-                pDst[i++] = math.xor(pA[2], pB[2]);
-                pDst[i++] = math.mul(pA[3], pB[3]);
-                pDst[i++] = math.div(pA[3], pB[3]);
-                pDst[i++] = math.mod(pA[3], pB[3]);
+                pDst[i++] = math.and(pA[i], pB[i]);
+                pDst[i++] = math.or(pA[i], pB[i]);
+                pDst[i++] = math.xor(pA[i], pB[i]);
+                pDst[i++] = math.mul(pA[i], pB[i]);
+                pDst[i++] = math.div(pA[i], pB[i]);
+                pDst[i++] = math.mod(pA[i], pB[i]);
             }
 
             [Op]
-            public static void f_32u_p8i_p8i_p8i_void(uint count, sbyte* pA, sbyte* pB, sbyte* pDst)
+            public static void f_32u_p8i_p8i_p8i_void(sbyte* pA, sbyte* pB, sbyte* pDst)
             {
                 var i=0u;
-                pDst[i++] = math.and(pA[0], pB[0]);
-                pDst[i++] = math.or(pA[1], pB[1]);
-                pDst[i++] = math.xor(pA[2], pB[2]);
-                pDst[i++] = math.mul(pA[3], pB[3]);
-                pDst[i++] = math.div(pA[3], pB[3]);
-                pDst[i++] = math.mod(pA[3], pB[3]);
+                pDst[i++] = math.and(pA[i], pB[i]);
+                pDst[i++] = math.or(pA[i], pB[i]);
+                pDst[i++] = math.xor(pA[i], pB[i]);
+                pDst[i++] = math.mul(pA[i], pB[i]);
+                pDst[i++] = math.div(pA[i], pB[i]);
+                pDst[i++] = math.mod(pA[i], pB[i]);
             }
 
             [Op]
             public static void f_32u_p16u_p16u_p16u_void(uint count, ushort* pA, ushort* pB, ushort* pDst)
             {
                 for(var i=0u; i<count; i++)
+                {
+                    pDst[i] = math.and(pA[i], pB[i]);
+                    pDst[i] = math.or(pA[i], pB[i]);
+                    pDst[i] = math.xor(pA[i], pB[i]);
                     pDst[i] = math.mul(pA[i], pB[i]);
+                    pDst[i] = math.div(pA[i], pB[i]);
+                    pDst[i] = math.mod(pA[i], pB[i]);
+                }
             }
 
             [Op]
-            public static void f_32u_p16i_p16i_p16i_void(uint count, short* pA, short* pB, short* pDst)
+            public static void f_32u_p16i_p16i_p16i_void(short* pA, short* pB, short* pDst)
             {
                 var i=0u;
-                pDst[i++] = math.and(pA[0], pB[0]);
-                pDst[i++] = math.or(pA[1], pB[1]);
-                pDst[i++] = math.xor(pA[2], pB[2]);
-                pDst[i++] = math.mul(pA[3], pB[3]);
-                pDst[i++] = math.div(pA[3], pB[3]);
-                pDst[i++] = math.mod(pA[3], pB[3]);
+                pDst[i++] = math.and(pA[i], pB[i]);
+                pDst[i++] = math.or(pA[i], pB[i]);
+                pDst[i++] = math.xor(pA[i], pB[i]);
+                pDst[i++] = math.mul(pA[i], pB[i]);
+                pDst[i++] = math.div(pA[i], pB[i]);
+                pDst[i++] = math.mod(pA[i], pB[i]);
             }
 
             [Op]
-            public static void f_32u_p32i_p32i_p32i_void(uint count, int* pA, int* pB, int* pDst)
+            public static void f_32u_p32i_p32i_p32i_void(int* pA, int* pB, int* pDst)
             {
                 var i=0u;
-                pDst[i++] = math.and(pA[0], pB[0]);
-                pDst[i++] = math.or(pA[1], pB[1]);
-                pDst[i++] = math.xor(pA[2], pB[2]);
-                pDst[i++] = math.mul(pA[3], pB[3]);
-                pDst[i++] = math.div(pA[3], pB[3]);
-                pDst[i++] = math.mod(pA[3], pB[3]);
+                pDst[i++] = math.and(pA[i], pB[i]);
+                pDst[i++] = math.or(pA[i], pB[i]);
+                pDst[i++] = math.xor(pA[i], pB[i]);
+                pDst[i++] = math.mul(pA[i], pB[i]);
+                pDst[i++] = math.div(pA[i], pB[i]);
+                pDst[i++] = math.mod(pA[i], pB[i]);
             }
 
             [Op]
-            public static void f_32u_p32u_p32u_p32u_void(uint count, uint* pA, uint* pB, uint* pDst)
+            public static void f_32u_p32u_p32u_p32u_void(uint* pA, uint* pB, uint* pDst)
             {
                 var i=0u;
-                pDst[i++] = math.and(pA[0], pB[0]);
-                pDst[i++] = math.or(pA[1], pB[1]);
-                pDst[i++] = math.xor(pA[2], pB[2]);
-                pDst[i++] = math.mul(pA[3], pB[3]);
-                pDst[i++] = math.div(pA[3], pB[3]);
-                pDst[i++] = math.mod(pA[3], pB[3]);
+                pDst[i++] = math.and(pA[i], pB[i]);
+                pDst[i++] = math.or(pA[i], pB[i]);
+                pDst[i++] = math.xor(pA[i], pB[i]);
+                pDst[i++] = math.mul(pA[i], pB[i]);
+                pDst[i++] = math.div(pA[i], pB[i]);
+                pDst[i++] = math.mod(pA[i], pB[i]);
             }
 
             [Op]
-            public static void f_32u_p64u_p64u_p64u_void(uint count, ulong* pA, ulong* pB, ulong* pDst)
+            public static void f_32u_p64u_p64u_p64u_void(ulong* pA, ulong* pB, ulong* pDst)
             {
                 var i=0u;
-                pDst[i++] = math.and(pA[0], pB[0]);
-                pDst[i++] = math.or(pA[1], pB[1]);
-                pDst[i++] = math.xor(pA[2], pB[2]);
-                pDst[i++] = math.mul(pA[3], pB[3]);
-                pDst[i++] = math.div(pA[3], pB[3]);
-                pDst[i++] = math.mod(pA[3], pB[3]);
+                pDst[i++] = math.and(pA[i], pB[i]);
+                pDst[i++] = math.or(pA[i], pB[i]);
+                pDst[i++] = math.xor(pA[i], pB[i]);
+                pDst[i++] = math.mul(pA[i], pB[i]);
+                pDst[i++] = math.div(pA[i], pB[i]);
+                pDst[i++] = math.mod(pA[i], pB[i]);
             }
 
             [Op]
@@ -143,6 +150,42 @@ namespace Z0.Asm
                 // 00adh add rsp,58h
                 // 00b1h ret
             }
+
+            [Op]
+            public static void f_pc256u_pc256u_pc256u_void(Cell256* pA, Cell256* pB, Cell256* pDst)
+            {
+                // 0000h vzeroupper                                    ; VZEROUPPER                       | VEX.128.0F.WIG 77                | 3   | c5 f8 77
+                // 0003h xchg ax,ax                                    ; NOP                              | 90                               | 2   | 66 90
+                var i=0u;
+                // 0005h vmovupd ymm0,[rcx+20h]                        ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 5   | c5 fd 10 41 20
+                // 000ah vmovupd ymm1,[rdx+20h]                        ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 5   | c5 fd 10 4a 20
+                // 000fh vpand ymm0,ymm0,ymm1                          ; VPAND ymm1, ymm2, ymm3/m256      | VEX.256.66.0F.WIG DB /r          | 4   | c5 fd db c1
+                // 0013h vmovupd [r8],ymm0                             ; VMOVUPD ymm2/m256, ymm1          | VEX.256.66.0F.WIG 11 /r          | 5   | c4 c1 7d 11 00
+                pDst[i++] = gcpu.vand<byte>(pA[i], pB[i]);
+                // 0018h vmovupd ymm0,[rcx+40h]                        ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 5   | c5 fd 10 41 40
+                // 001dh vmovupd ymm1,[rdx+40h]                        ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 5   | c5 fd 10 4a 40
+                // 0022h vpor ymm0,ymm0,ymm1                           ; VPOR ymm1, ymm2, ymm3/m256       | VEX.256.66.0F.WIG EB /r          | 4   | c5 fd eb c1
+                // 0026h vmovupd [r8+20h],ymm0                         ; VMOVUPD ymm2/m256, ymm1          | VEX.256.66.0F.WIG 11 /r          | 6   | c4 c1 7d 11 40 20
+                pDst[i++] = gcpu.vor<byte>(pA[i], pB[i]);
+                // 002ch vmovupd ymm0,[rcx+60h]                        ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 5   | c5 fd 10 41 60
+                // 0031h vmovupd ymm1,[rdx+60h]                        ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 5   | c5 fd 10 4a 60
+                // 0036h vpxor ymm0,ymm0,ymm1                          ; VPXOR ymm1, ymm2, ymm3/m256      | VEX.256.66.0F.WIG EF /r          | 4   | c5 fd ef c1
+                // 003ah vmovupd [r8+40h],ymm0                         ; VMOVUPD ymm2/m256, ymm1          | VEX.256.66.0F.WIG 11 /r          | 6   | c4 c1 7d 11 40 40
+                pDst[i++] = gcpu.vxor<byte>(pA[i], pB[i]);
+                // 0040h vmovupd ymm0,[rcx+80h]                        ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 8   | c5 fd 10 81 80 00 00 00
+                // 0048h vmovupd ymm1,[rdx+80h]                        ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 8   | c5 fd 10 8a 80 00 00 00
+                // 0050h vpsubb ymm0,ymm0,ymm1                         ; VPSUBB ymm1, ymm2, ymm3/m256     | VEX.256.66.0F.WIG F8 /r          | 4   | c5 fd f8 c1
+                // 0054h vmovupd [r8+60h],ymm0                         ; VMOVUPD ymm2/m256, ymm1          | VEX.256.66.0F.WIG 11 /r          | 6   | c4 c1 7d 11 40 60
+                pDst[i++] = gcpu.vsub<byte>(pA[i], pB[i]);
+                // 005ah vmovupd ymm0,[rcx+0a0h]                       ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 8   | c5 fd 10 81 a0 00 00 00
+                // 0062h vmovupd ymm1,[rdx+0a0h]                       ; VMOVUPD ymm1, ymm2/m256          | VEX.256.66.0F.WIG 10 /r          | 8   | c5 fd 10 8a a0 00 00 00
+                // 006ah vpaddb ymm0,ymm0,ymm1                         ; VPADDB ymm1, ymm2, ymm3/m256     | VEX.256.66.0F.WIG FC /r          | 4   | c5 fd fc c1
+                // 006eh vmovupd [r8+80h],ymm0                         ; VMOVUPD ymm2/m256, ymm1          | VEX.256.66.0F.WIG 11 /r          | 9   | c4 c1 7d 11 80 80 00 00 00
+                pDst[i++] = gcpu.vadd<byte>(pA[i], pB[i]);
+                // 0077h vzeroupper                                    ; VZEROUPPER                       | VEX.128.0F.WIG 77                | 3   | c5 f8 77
+                // 007ah ret                                           ; RET                              | C3                               | 1   | c3
+            }
+
         }
     }
 }

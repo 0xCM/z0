@@ -5,8 +5,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static XedModels.OperandKind;
+
     partial struct XedModels
     {
+        [MethodImpl(Inline), Op]
+        public static bool is_memory_addressing_register(OperandKind kind)
+            => kind == BASE0 ||
+              kind == INDEX ||
+              kind == SEG0  ||
+              kind == BASE1 ||
+              kind == SEG1;
+
+        [MethodImpl(Inline), Op]
+        public static bool is_register(OperandKind kind)
+            => kind >= REG0 && kind <= REG9;
+
         [SymbolSource(xed)]
         public enum OperandKind : byte
         {

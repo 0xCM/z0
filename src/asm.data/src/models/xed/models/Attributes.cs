@@ -8,12 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static XedModels.OperandKind;
 
-    [ApiHost]
-    public readonly partial struct XedModels
+    partial struct XedModels
     {
-        const string xed = nameof(xed);
+        public readonly struct Attributes
+        {
+            public ulong Lo {get;}
+
+            public ulong Hi {get;}
+
+            [MethodImpl(Inline)]
+            public Attributes(ulong lo, ulong hi)
+            {
+                Lo = lo;
+                Hi = hi;
+            }
+        }
 
     }
 }

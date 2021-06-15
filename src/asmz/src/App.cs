@@ -1041,8 +1041,8 @@ namespace Z0.Asm
             //CheckDocProcessor();
             //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
-            Wf.GlobalCommands().RunExtractWorkflow();
-            //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
+            //Wf.GlobalCommands().RunExtractWorkflow();
+            CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));
