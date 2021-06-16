@@ -46,7 +46,6 @@ namespace Z0.Asm
 
         ByteSize ISized.Size
             => 1;
-
     }
 
     public interface IMemOp16 : IMemOp

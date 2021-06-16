@@ -21,8 +21,6 @@ namespace Z0.Asm
 
         }
 
-
-
         [MethodImpl(Inline), Op]
         public static RegSpec reg(RegWidth width, RegClass @class, RegIndex index)
             => to(math.or(math.sll((ushort)width,3), math.sll((ushort)@class,5) , math.sll((ushort)index, 10)), out RegSpec _);

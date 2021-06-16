@@ -974,21 +974,25 @@ namespace Z0.Asm
             var lookup = AsmOperatorTable.create().Lookup;
             iter(lookup.View, entry => Wf.Row(entry));
 
+        }
+
+        public void RunIntelSdmProcessor()
+        {
+            var processor = Wf.IntelSdmProcessor();
+            processor.Run();
 
         }
 
         public void Run()
         {
-            // var processor = Wf.IntelSdmProcessor();
-            // processor.Run();
 
-            ShowOps();
+            //ShowOps();
 
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
-            //Wf.GlobalCommands().RunExtractWorkflow();
+            Wf.GlobalCommands().RunExtractWorkflow();
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();

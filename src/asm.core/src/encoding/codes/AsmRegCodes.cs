@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static RegIndex;
 
-    public readonly partial struct AsmRegCodes
+    public readonly struct AsmRegCodes
     {
         [SymbolSource]
         public enum Gp8 : byte
@@ -564,7 +564,7 @@ namespace Z0.Asm
             [Symbol("CR0")]
             CR0 = r0,
 
-            [Symbol("CR0")]
+            [Symbol("CR1")]
             CR1 = r1,
 
             [Symbol("CR2")]

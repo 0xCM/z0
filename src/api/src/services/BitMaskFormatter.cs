@@ -26,7 +26,7 @@ namespace Z0
         public string Format(in R src)
         {
             Buffer.Clear();
-            Buffer.AppendDelimited(Formatter.FormatSpec.Header.Delimiter,
+            Buffer.Delimit(Formatter.FormatSpec.Header.Delimiter,
                 string.Format("{0,-30}", src.Name),
                 string.Format("{0,-10}", src.Base),
                 string.Format("{0,-80}", format(base2, src)),

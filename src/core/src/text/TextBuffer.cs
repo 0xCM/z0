@@ -9,6 +9,7 @@ namespace Z0
     using System.Text;
 
     using static Root;
+    using static core;
 
     class TextBuffer : ITextBuffer<TextBuffer>
     {
@@ -75,6 +76,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public void Append(char[] src)
+            => Target.Append(src);
+
+        [MethodImpl(Inline)]
         public void AppendItem<T>(T src)
             => Append(src?.ToString() ?? "!<null>!");
 
@@ -84,39 +89,44 @@ namespace Z0
 
         public void AppendPadded<T,W>(T value, W width, string delimiter = EmptyString)
         {
-            if(sys.nonempty(delimiter))
+            if(nonempty(delimiter))
                 Append(delimiter);
-
-            Append(string.Format(RP.pad(-core.i16(width)), value));
+            Append(string.Format(RP.pad(-i16(width)), value));
         }
 
-        public void AppendDelimited<F,T>(F field, T value, char c = FieldDelimiter)
-            where F : unmanaged
-        {
-            var shift = core.width<F>()/2;
-            var width = core.uint32(field) >> shift;
-            Append(RP.rspace(c));
-            Append($"{value}".PadRight((int)width));
-        }
-
-        public void AppendDelimited(string delimiter, params object[] src)
+        public void Delimit(string delimiter, params object[] src)
         {
             var count = src.Length;
-            var terms = core.@readonly(src);
+            var terms = @readonly(src);
             var sep = string.Format("{0} ", delimiter);
             for(var i=0; i<src.Length; i++)
-                Append(string.Format("{0}{1}", sep, core.skip(terms,i)));
+                Append(string.Format("{0}{1}", sep, skip(terms,i)));
         }
 
-        [MethodImpl(Inline)]
-        public void Append(char[] src)
-            => Target.Append(src);
+        public void Delimit<T>(T content, char delimiter, int pad)
+        {
+            Target.Append(RP.rspace(delimiter));
+            Target.Append($"{content}".PadRight((int)pad));
+        }
+
+        public void Delimit<F,T>(F label, T content, int pad = 0, char delimiter = FieldDelimiter)
+        {
+            Target.Append(RP.rspace(delimiter));
+            Target.AppendFormat(RP.pad(pad), label);
+            Target.Append(content);
+        }
+
+        public void Delimit<F>(F label, object content, int pad = 0, char delimiter = FieldDelimiter)
+        {
+            Target.Append(RP.rspace(delimiter));
+            Target.AppendFormat(RP.pad(pad), label);
+            Target.Append(content);
+        }
 
         public override string ToString()
             => Target.ToString();
 
         public void IndentLineFormat(uint margin, string pattern, params object[] args)
-            => IndentLine(margin,string.Format(pattern, args));
-
+            => IndentLine(margin, string.Format(pattern, args));
     }
 }

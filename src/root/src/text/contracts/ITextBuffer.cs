@@ -35,12 +35,15 @@ namespace Z0
 
         void AppendItem<T>(T src);
 
-        void AppendDelimited(string delimiter, params object[] src);
+        void Delimit(string delimiter, params object[] src);
 
         void AppendPadded<T,W>(T value, W width, string delimiter = EmptyString);
 
-        void AppendDelimited<F,T>(F field, T value, char c = FieldDelimiter)
-            where F : unmanaged;
+        void Delimit<T>(T content, char delimiter, int pad);
+
+        void Delimit<F,T>(F label, T content, int pad = 0, char delimiter = FieldDelimiter);
+
+        void Delimit<F>(F label, object content, int pad = 0, char delimiter = FieldDelimiter);
 
         void AppendSpace()
             => Append(Space);

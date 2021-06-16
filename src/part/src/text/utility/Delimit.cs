@@ -10,9 +10,18 @@ namespace Z0
     using System.Text;
 
     using static Root;
+    using static core;
 
     partial class XText
     {
+         [MethodImpl(Inline)]
+        static int width<E>(E field)
+            where E : unmanaged
+        {
+            var w = @as<E,uint>(field) >> 16;
+            return (int)w;
+        }
+
         [MethodImpl(Inline)]
         public static DelimitedIndex<T> Delimit<T>(this T[] src, char delimiter = FieldDelimiter, int pad = 0)
             => new DelimitedIndex<T>(src, delimiter, pad);
@@ -35,37 +44,30 @@ namespace Z0
 
         public static void Delimit<T>(this StringBuilder sb, string content, char delimiter, int pad)
         {
-            sb.Append(text.rspace(delimiter));
+            sb.Append(RP.rspace(delimiter));
             sb.Append($"{content}".PadRight((int)pad));
         }
 
         public static void Delimit<T>(this StringBuilder sb, T content, char delimiter, int pad)
             where T : ITextual
         {
-            sb.Append(text.rspace(delimiter));
+            sb.Append(RP.rspace(delimiter));
             sb.Append($"{content.Format()}".PadRight((int)pad));
         }
 
-        [MethodImpl(Inline)]
-        static int width<E>(E field)
-            where E : unmanaged, Enum
-        {
-            var w = core.@as<E,uint>(field) >> 16;
-            return (int)w;
-        }
 
         public static void Delimit<F,T>(this StringBuilder sb, F field, T content, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
             where T : ITextual
         {
-            sb.Append(text.rspace(delimiter));
+            sb.Append(RP.rspace(delimiter));
             sb.Append($"{content.Format()}".PadRight(width(field)));
         }
 
         public static void Delimit<F>(this StringBuilder sb, F field, object content, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
         {
-            sb.Append(text.rspace(delimiter));
+            sb.Append(RP.rspace(delimiter));
             sb.Append($"{content}".PadRight(width(field)));
         }
     }
