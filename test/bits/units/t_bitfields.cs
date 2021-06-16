@@ -52,7 +52,7 @@ namespace Z0
             Claim.eq((byte)2, spec[2].Width);
             Claim.eq((byte)2, spec[3].Width);
 
-            var bf = BitFields.create<byte>(spec);
+            var bf = Bitfields.create<byte>(spec);
             for(var rep=0; rep<RepCount; rep++)
             {
                 var input = Random.Next<byte>();
@@ -101,7 +101,7 @@ namespace Z0
             writer.WriteLine(spec);
 
             var dst = memory.alloc<ushort>(spec.FieldCount);
-            var bf = BitFields.create<ushort>(spec);
+            var bf = Bitfields.create<ushort>(spec);
 
             Claim.eq((byte)4,spec.FieldCount);
 
@@ -112,7 +112,7 @@ namespace Z0
                 bf = bf.State(input);
                 writer.WriteLine(bf.Format());
 
-                BitFields.store(bf.Spec, input, dst);
+                Bitfields.store(bf.Spec, input, dst);
 
                 var output =  gmath.or(
                     gmath.sll(dst[0], (byte)spec[0].FirstIndex),
@@ -150,7 +150,7 @@ namespace Z0
         public void bitfield_c()
         {
             var spec = BitfieldSpecs.specify<BFC_I,BFC_W>();
-            var bf = BitFields.create<byte>(spec);
+            var bf = Bitfields.create<byte>(spec);
             var dst = alloc<byte>(spec.FieldCount);
             using var writer = CaseWriter(LogExt);
             writer.WriteLine(spec);
@@ -164,7 +164,7 @@ namespace Z0
                 writer.WriteLine(bf.Format());
                 dst.Clear();
 
-                BitFields.store(bf.Spec, input, dst);
+                Bitfields.store(bf.Spec, input, dst);
 
                 var result1 =  gmath.or(
                     gmath.sll(dst[0], (byte)spec[0].FirstIndex),
@@ -174,10 +174,10 @@ namespace Z0
                     );
 
                 var result2 = gmath.or(
-                    BitFields.offset(spec[0], input),
-                    BitFields.offset(spec[1], input),
-                    BitFields.offset(spec[2], input),
-                    BitFields.offset(spec[3], input)
+                    Bitfields.offset(spec[0], input),
+                    Bitfields.offset(spec[1], input),
+                    Bitfields.offset(spec[2], input),
+                    Bitfields.offset(spec[3], input)
                     );
 
                 Claim.eq(input,result1);
@@ -240,7 +240,7 @@ namespace Z0
         public void bitfield_d()
         {
             var spec = BitfieldSpecs.specify<BFD_I,BFD_W>();
-            var bf = BitFields.create<ulong>(spec);
+            var bf = Bitfields.create<ulong>(spec);
             var dst = span(alloc<ulong>(spec.FieldCount));
             var tmp = span(alloc<ulong>(spec.FieldCount));
             var positions = spec.Segments.Map(s => (byte)s.FirstIndex);
@@ -258,7 +258,7 @@ namespace Z0
 
                 var expect = gbits.bitslice(input,0, (byte)spec.TotalWidth);
 
-                BitFields.store(bf.Spec, input, dst);
+                Bitfields.store(bf.Spec, input, dst);
 
                 Calcs.sllv(dst, positions, tmp);
                 var result1 = or(tmp.ReadOnly());
@@ -284,12 +284,12 @@ namespace Z0
         public void bitfield_IxW()
         {
             var spec = BitfieldSpecs.specify<BFD_I,BFD_W>();
-            var bf = BitFields.create<ulong>(spec);
+            var bf = Bitfields.create<ulong>(spec);
         }
 
         public void fixed_bits()
         {
-            var bf = BitFields.blocked<BFD_I,byte,BFD_W>(64);
+            var bf = Bitfields.blocked<BFD_I,byte,BFD_W>(64);
             bf[3] = byte.MaxValue;
 
         }

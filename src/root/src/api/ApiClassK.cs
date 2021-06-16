@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ApiClass(ApiClass<K> src)
-            => new ApiClass(memory.@as<K,ApiClassKind>(src.Kind));
+            => new ApiClass(Root.@as<K,ApiClassKind>(src.Kind));
 
         public string Format()
             => Kind.Format();

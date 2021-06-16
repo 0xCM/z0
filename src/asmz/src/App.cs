@@ -914,78 +914,6 @@ namespace Z0.Asm
             return string.Format("{0} {1},{2}", monic.Format(MnemonicCase.Lowercase), r.Format(), imm);
         }
 
-
-        public void RunDocProcessor()
-        {
-            var splitter = Wf.DocSplitter();
-            splitter.Run();
-
-        }
-
-        public void EmitLinedFile(FS.FilePath src, FS.FilePath dst)
-        {
-            var flow = Wf.Running(string.Format("{0} => {1}", src.ToUri(), dst.ToUri()));
-            using var reader = src.LineReader();
-            using var writer = dst.Writer();
-            var counter = 1u;
-            while(reader.Next(out var line))
-            {
-                if(counter != line.LineNumber)
-                {
-                    Wf.Error(string.Format("{0} != {1}:{2}", counter, line.LineNumber, line.Content));
-                    break;
-                }
-                writer.WriteLine(line);
-                counter++;
-            }
-            Wf.Ran(flow,  string.Format("Emitted {0} lines", counter - 1));
-        }
-
-
-        void CreateLinedDocs()
-        {
-            var workspace = Wf.AsmWorkspace();
-            var archive = new DocProcessArchive(workspace.DocRoot());
-            var src = archive.RefDoc("sdm",FS.Txt);
-            var dst = archive.DocExtracts() + FS.file("sdm-lined", FS.Txt);
-            EmitLinedFile(src, dst);
-            using var reader = dst.LineReader();
-            var counter = 1u;
-            while(reader.Next(out var line))
-            {
-                if(counter != line.LineNumber)
-                {
-                    Wf.Error(string.Format("{0} != {1}:{2}", counter, line.LineNumber, line.Content));
-                    break;
-                }
-                counter++;
-            }
-        }
-
-
-
-        public void CheckDocProcessor()
-        {
-            var charmap = CharMaps.editor(TextEncodings.Utf16).Seal();
-            var unmapped = hashset<char>();
-            var workspace = Wf.AsmWorkspace();
-            var archive = new DocProcessArchive(workspace.DocRoot());
-            var src = archive.RefDoc("sdm",FS.Txt);
-            using var reader = src.LineReader();
-            while(reader.Next(out var line))
-            {
-                CharMaps.unmapped(charmap, line.Data, unmapped);
-            }
-            var pairs = unmapped.Map(x => paired((Hex16)x,x)).OrderBy(x => x.Left).Select(CharMaps.format);
-            var description = string.Format("Unmapped:{0}", text.embrace(pairs.Delimit(Chars.Comma)));
-            Wf.Row(description);
-
-            var output = archive.DocPath("charmap", FS.Config);
-            var emitting = Wf.EmittingFile(output);
-            var mapcount = CharMaps.emit(charmap, output);
-            Wf.EmittedFile(emitting,mapcount);
-        }
-
         void CheckAsciSpans()
         {
             const string Input = "66F2F30F0F38VEXREXREX.WLZLIGWIGW0W1";
@@ -1037,12 +965,14 @@ namespace Z0.Asm
 
         public void Run()
         {
+            var processor = Wf.IntelSdmProcessor();
+            processor.Run();
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
             //Wf.GlobalCommands().RunExtractWorkflow();
-            CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
+            //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();
             // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));

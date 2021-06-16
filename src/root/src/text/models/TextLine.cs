@@ -32,7 +32,7 @@ namespace Z0
         /// <summary>
         /// The line number of the data source from which the line was extracted
         /// </summary>
-        public uint LineNumber {get;}
+        public LineNumber LineNumber {get;}
 
         /// <summary>
         /// The line content
@@ -122,7 +122,9 @@ namespace Z0
         }
 
         public string Format()
-            => $"{LineNumber.ToString().PadLeft(8, '0')}:{Content}";
+            => string.Format("{0}:{1}", LineNumber,Content);
+
+            // $"{LineNumber.ToString().PadLeft(8, '0')}:{Content}";
 
         public override string ToString()
             => Format();

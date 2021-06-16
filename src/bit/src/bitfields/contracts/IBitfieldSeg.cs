@@ -8,22 +8,28 @@ namespace Z0
 
     public interface IBitfieldSeg : ITextual
     {
-        StringAddress Name {get;}
+        StringAddress SegName {get;}
 
         byte Min {get;}
 
         byte Max {get;}
     }
 
-    public interface IBitfieldSeg<T> : IBitfieldSeg
+    public interface IBitfieldSeg<K,T> : IBitfieldSeg
         where T : unmanaged
+        where K : unmanaged
     {
+        K SegId {get;}
+
         new T Min {get;}
+
+        new T Max {get;}
+
+        StringAddress IBitfieldSeg.SegName
+            => SegId.ToString();
 
         byte IBitfieldSeg.Min
             => u8(Min);
-
-        new T Max {get;}
 
         byte IBitfieldSeg.Max
             => u8(Max);

@@ -119,7 +119,7 @@ namespace Z0
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
             {
-                var formatted = formatter.Format(memory.skip(src,i));
+                var formatted = formatter.Format(core.skip(src,i));
                 writer.WriteLine(formatted);
                 Wf.Row(formatted);
             }
@@ -142,7 +142,6 @@ namespace Z0
             if( count != 0)
             {
                 using var log = ShowLog(file);
-
                 if(text.nonempty(title))
                     log.Show(title);
 

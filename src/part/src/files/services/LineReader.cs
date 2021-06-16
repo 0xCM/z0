@@ -37,19 +37,14 @@ namespace Z0
         static Outcome LineNumber(ReadOnlySpan<char> src, out uint dst)
         {
             dst = uint.MaxValue;
-            var length = src.Length;
-            if(length > NumberWidth)
+            var count = src.Length;
+            if(count >= 9)
             {
-                ref readonly var c = ref skip(src, NumberWidth + 1);
-                if(c == Delimiter && SymbolicQuery.digits(base10, src,0, NumberWidth))
-                {
-                    if(uint.TryParse(src, out var number))
-                    {
-                        dst = number;
-                        return true;
-                    }
-                }
+                ref readonly var c = ref skip(src,8);
+                if(c == Chars.Colon)
+                    return uint.TryParse(slice(src,0,8), out dst);
             }
+
             return false;
         }
 

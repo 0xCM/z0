@@ -10,34 +10,42 @@ namespace Z0
 
     using static Root;
 
+    using api = Bitfields;
+
     [StructLayout(LayoutKind.Sequential)]
-    public struct BitfieldSeg<T>
+    public struct Bitfield<T>
         where T : unmanaged
     {
-        public ushort FirstIndex {get;}
-
-        public ushort LastIndex {get;}
+        readonly BitfieldSegs _Segs;
 
         public T State;
 
         [MethodImpl(Inline)]
-        public BitfieldSeg(BitfieldSeg spec, T state)
+        public Bitfield(BitfieldSegs segs, T state)
         {
             State = state;
-            FirstIndex = spec.Min;
-            LastIndex = spec.Max;
+            _Segs = segs;
+        }
+
+        public ReadOnlySpan<BitfieldSeg> SegSpecs
+        {
+            [MethodImpl(Inline)]
+            get => _Segs.View;
         }
 
         [MethodImpl(Inline)]
-        public BitfieldSeg(ushort i0, ushort i1, T state)
+        public T Read(byte index)
+            => api.read(this, index);
+
+        [MethodImpl(Inline)]
+        public Bitfield<T> Store(byte index, T src)
         {
-            FirstIndex = i0;
-            LastIndex = i1;
-            State = state;
+            api.store(src, index, ref this);
+            return this;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator BitfieldSeg<T>(BitfieldSeg part)
-            => new BitfieldSeg<T>(part, default);
+        internal void Overwrite(T src)
+            => State = src;
     }
 }

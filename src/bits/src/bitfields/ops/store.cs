@@ -72,5 +72,24 @@ namespace Z0
             dst.Overwrite(or(dst.State, sll(u64(src), u8(i1 - i0 + 1))));
             return ref dst;
         }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref Bitfield<T> store<T>(T src, byte i, ref Bitfield<T> dst)
+            where T : unmanaged
+        {
+            ref readonly var spec = ref skip(dst.SegSpecs,i);
+            dst.Overwrite(gmath.or(dst.State, gmath.sll(dst.State, u8(spec.Max - spec.Min + 1))));
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref Bitfield<T,K> store<T,K>(T src, byte i, ref Bitfield<T,K> dst)
+            where T : unmanaged
+            where K : unmanaged
+        {
+            ref readonly var spec = ref skip(dst.SegSpecs,i);
+            dst.Overwrite(gmath.or(dst.State, gmath.sll(dst.State, u8(spec.Max - spec.Min + 1))));
+            return ref dst;
+        }
    }
 }

@@ -39,11 +39,9 @@ namespace Z0
             get => ref first(Data);
         }
 
-        public uint Count
-        {
-            [MethodImpl(Inline)]
-            get => CharCount;
-        }
+        public uint Count => CharCount;
+
+        public int Length => CharCount;
 
         [MethodImpl(Inline)]
         public string Format()

@@ -11,18 +11,19 @@ namespace Z0
     using static core;
 
     public readonly ref struct SortedSpan<T>
-        where T : IComparable<T>
     {
         readonly Span<T> Data;
 
-        public SortedSpan(T[] src)
+        internal SortedSpan(T[] src)
         {
-            Data = src.Sort();
+            Data = src;
+            //Data = src.Sort();
         }
 
-        public SortedSpan(Span<T> src)
+        internal SortedSpan(Span<T> src)
         {
-            Data = src.Sort();
+            Data = src;
+            //Data = src.Sort();
         }
 
         public ReadOnlySpan<T> View

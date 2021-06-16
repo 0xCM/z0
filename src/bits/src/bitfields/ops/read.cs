@@ -47,5 +47,22 @@ namespace Z0
         public static T read<T>(Bitfield64<T> src, byte i0, byte i1)
             where T : unmanaged
                 => @as<T>(Bits.bitseg(src.State, i0, i1));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T read<T>(in Bitfield<T> src, byte i)
+            where T : unmanaged
+        {
+            ref readonly var spec = ref skip(src.SegSpecs,i);
+            return gbits.bitseg(src.State, spec.Min, spec.Max);
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T read<T,K>(in Bitfield<T,K> src, byte i)
+            where T : unmanaged
+            where K : unmanaged
+        {
+            ref readonly var spec = ref skip(src.SegSpecs,i);
+            return gbits.bitseg(src.State, spec.Min, spec.Max);
+        }
     }
 }

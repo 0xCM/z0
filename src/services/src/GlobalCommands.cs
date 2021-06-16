@@ -83,12 +83,6 @@ namespace Z0
             return true;
         }
 
-        [CmdOp("docsplit")]
-        public Outcome SplitDocs(params object[] args)
-        {
-            Wf.DocSplitter().Run();
-            return true;
-        }
 
         [CmdOp("asm-gen-models")]
         public Outcome GenInstructionModels(params object[] args)

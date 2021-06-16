@@ -57,7 +57,7 @@ namespace Z0
         public Index<ApiHostBlocks> ReadHostBlocks(FS.FolderPath root, ReadOnlySpan<ApiHostUri> src)
         {
             var count = src.Length;
-            var dst = core.list<ApiHostBlocks>();
+            var dst = list<ApiHostBlocks>();
             for(var i=0; i<count; i++)
                 dst.Add(ReadBlocks(root, skip(src,i)));
             return dst.ToArray();
@@ -71,7 +71,7 @@ namespace Z0
             var flow = Wf.Running(string.Format("Loading host blocks from {0}", root));
             var files = Files(root).View;
             var count = files.Length;
-            var dst = core.list<ApiHostBlocks>();
+            var dst = list<ApiHostBlocks>();
             var counter = 0u;
             for(var i=0; i<count; i++)
             {
@@ -239,7 +239,7 @@ namespace Z0
             dst = new ApiHexRow();
             try
             {
-                if(text.empty(src))
+                if(empty(src))
                 {
                     Wf.Error("No text!");
                     return false;

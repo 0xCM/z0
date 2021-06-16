@@ -126,6 +126,13 @@ namespace Z0
             return dst.Array();
         }
 
+        /// <summary>
+        /// Queries the source for unmapped characters and emits the result to a caller-supplied target
+        /// </summary>
+        /// <param name="map">The context map</param>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The data target</param>
+        /// <typeparam name="T">The map cell type</typeparam>
         [Op, Closures(UInt8x16k)]
         public static void unmapped<T>(in CharMap<T> map, ReadOnlySpan<char> src, HashSet<char> dst)
             where T : unmanaged
@@ -139,6 +146,12 @@ namespace Z0
             }
         }
 
+        /// <summary>
+        /// Writes a specified character map to a file and returns the number of entries emitted
+        /// </summary>
+        /// <param name="map">The source map</param>
+        /// <param name="dst">The target file</param>
+        /// <typeparam name="T">The map cell type</typeparam>
         public static ushort emit<T>(in CharMap<T> map, FS.FilePath dst)
             where T : unmanaged
         {
@@ -151,12 +164,11 @@ namespace Z0
                 ref readonly var c = ref c16(skip(src,i));
                 if(c != 0)
                 {
+                    // Symbolize whitespace characters via their identifiers
                     if(SymbolicQuery.whitespace(c))
                         writer.WriteLine(string.Format("{0}:({1})", (Hex16)i, ((AsciCode)c)));
                     else
-                    {
                         writer.WriteLine(format(entry((Hex16)i,c)));
-                    }
                     counter++;
                 }
             }

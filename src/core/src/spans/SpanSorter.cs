@@ -24,15 +24,15 @@ namespace Z0
 
         public static SortedSpan<T> ToSortedSpan<T>(this T[] src)
             where T : IComparable<T>
-                => new SortedSpan<T>(src);
+                => new SortedSpan<T>(src.Sort());
 
         public static SortedSpan<T> ToSortedSpan<T>(this Index<T> src)
             where T : IComparable<T>
-                => new SortedSpan<T>(src);
+                => new SortedSpan<T>(src.Sort());
 
         public static SortedSpan<T> ToSorted<T>(this Span<T> src)
             where T : IComparable<T>
-                => new SortedSpan<T>(src);
+                => new SortedSpan<T>(src.Sort());
 
     }
 

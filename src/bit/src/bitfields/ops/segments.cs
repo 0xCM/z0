@@ -12,12 +12,8 @@ namespace Z0
     partial struct BitfieldSpecs
     {
         [MethodImpl(Inline), Op]
-        public static BitfieldSeg segment(StringAddress name, byte min, byte max)
-            => new BitfieldSeg(name, min, max);
-
-        [MethodImpl(Inline), Op]
-        public static BitfieldSeg<K> segment<K>(K segid, byte min, byte max)
+        public static BitfieldSegs<K> segments<K>(params BitfieldSeg<K>[] src)
             where K : unmanaged
-                => new BitfieldSeg<K>(segid, min, max);
+                => src;
     }
 }

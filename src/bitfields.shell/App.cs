@@ -20,6 +20,7 @@ namespace Z0
         {
             var flow = Wf.Running();
             CheckFormatting();
+            BitfieldChecks.create(Wf).Run();
             //CheckCredits.create(Wf).Run();
             //var buffer = text.buffer();
             //BitMaskChecker.create(Wf).Run(Rng.@default());

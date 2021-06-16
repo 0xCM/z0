@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct LineSegment
     {
-        public uint LineNumber {get;}
+        public LineNumber LineNumber {get;}
 
         public ushort MinCol {get;}
 

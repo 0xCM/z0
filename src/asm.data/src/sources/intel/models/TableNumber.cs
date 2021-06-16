@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
@@ -15,35 +16,44 @@ namespace Z0.Asm
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public readonly struct TableNumber
         {
-            internal const string Marker = "Table ";
+            public const string Marker = "Table ";
 
-            internal const char Sep = Chars.Dash;
-
-            internal const byte MarkerLength = 6;
-
-            internal const string RenderPattern = Marker + "{0}-{1}";
-
-            internal const char Delimiter = Chars.Dash;
-
-            public char Major {get;}
-
-            public ushort Minor {get;}
+            readonly CharBlock8 _Data;
 
             [MethodImpl(Inline)]
-            public TableNumber(char major, ushort minor)
+            public TableNumber(CharBlock8 data)
             {
-                Major = major;
-                Minor = minor;
+                _Data = data;
             }
 
-            public override string ToString()
-                => string.Format(RenderPattern, Major, Minor);
+            public ReadOnlySpan<char> Data
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
 
             public static TableNumber Empty
             {
                 [MethodImpl(Inline)]
-                get => new TableNumber('\0',0);
+                get => new TableNumber(CharBlock8.Null);
             }
+
+            [MethodImpl(Inline)]
+            public static int MarkerIndex(ReadOnlySpan<char> src)
+            {
+                var index = src.IndexOf(Marker);
+                if(index > Marker.Length)
+                    return NotFound;
+                else
+                    return index;
+            }
+
+            public string Format()
+                => string.Format("{0}{1}", Marker, _Data.Format());
+
+            public override string ToString()
+                => Format();
+
         }
     }
 }

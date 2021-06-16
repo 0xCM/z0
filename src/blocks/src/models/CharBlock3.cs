@@ -42,6 +42,10 @@ namespace Z0
             get => ref first(Data);
         }
 
+        public uint Count => CharCount;
+
+        public int Length => CharCount;
+
         public string Format()
             => api.format(this);
 
@@ -51,12 +55,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator B(string src)
             => api.init(src, out B dst);
-
-        public uint Count
-        {
-            [MethodImpl(Inline)]
-            get => CharCount;
-        }
 
         /// <summary>
         /// The block capacity

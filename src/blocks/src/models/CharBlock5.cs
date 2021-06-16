@@ -47,6 +47,8 @@ namespace Z0
             get => CharCount;
         }
 
+        public int Length => CharCount;
+
         public string Format()
             => api.format(this);
 

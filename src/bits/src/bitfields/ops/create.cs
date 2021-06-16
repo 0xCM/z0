@@ -46,5 +46,16 @@ namespace Z0
         public static Bitfield64<T> create<T>(W64 w, T state)
             where T : unmanaged
                 => new Bitfield64<T>(state);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Bitfield<T> create<T>(BitfieldSegs segs, T state)
+            where T : unmanaged
+                => new Bitfield<T>(segs,state);
+
+        [MethodImpl(Inline)]
+        public static Bitfield<T,K> create<T,K>(BitfieldSegs<K> segs, T state)
+            where T : unmanaged
+            where K : unmanaged
+                => new Bitfield<T,K>(segs,state);
     }
 }

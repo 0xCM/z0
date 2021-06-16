@@ -12,16 +12,11 @@ namespace Z0
 
     using api = BitfieldSpecs;
 
-    /// <summary>
-    /// Defines an identified, contiguous bitsequence, represented symbolically as {Identifier}:[Min,Max]
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 10, Pack =1)]
-    public readonly struct BitfieldSeg : IBitfieldSeg
+    [StructLayout(LayoutKind.Sequential)]
+    public readonly struct BitfieldSeg<K> : IBitfieldSeg<K,byte>
+        where K : unmanaged
     {
-        /// <summary>
-        /// The segment name
-        /// </summary>
-        public StringAddress SegName {get;}
+        public K SegId {get;}
 
         /// <summary>
         /// The index, relative to the containing section, of the first bit in the segment
@@ -34,12 +29,13 @@ namespace Z0
         public byte Max {get;}
 
         [MethodImpl(Inline)]
-        public BitfieldSeg(StringAddress name, byte min, byte max)
+        public BitfieldSeg(K id, byte min, byte max)
         {
-            SegName = name;
+            SegId = id;
             Min = min;
             Max = max;
         }
+
 
         public byte Width
         {
@@ -48,7 +44,8 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format("{0}:[{1},{2}]", SegName, Min, Max);
+            => string.Format("{0}[{1},{2}]", SegId, Min, Max);
+
 
         public override string ToString()
             => Format();

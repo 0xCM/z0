@@ -11,14 +11,8 @@ namespace Z0
     using static core;
 
     public readonly ref struct SortedReadOnlySpan<T>
-        where T : IComparable<T>
     {
         readonly ReadOnlySpan<T> Data;
-
-        public SortedReadOnlySpan(T[] src)
-        {
-            Data = src.Sort();
-        }
 
         public SortedReadOnlySpan(SortedSpan<T> src)
         {

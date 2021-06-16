@@ -28,5 +28,15 @@ namespace Z0
                 target[i] = f(source[i]);
             return buffer;
         }
+
+        public static Span<T> Select<S,T>(this ReadOnlySpan<S> src, Func<S,T> f)
+        {
+            var count = src.Length;
+            var buffer = new T[count];
+            Span<T> target = buffer;
+            for(var i=0; i<count; i++)
+                target[i] = f(src[i]);
+            return target;
+        }
     }
 }

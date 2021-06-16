@@ -29,5 +29,14 @@ namespace Z0
         [Op]
         public static AsmCatalogs AsmCatalogs(this IWfRuntime wf)
             => Svc.AsmCatalogs.create(wf);
+
+        [Op]
+        public static IntelSdmProcessor IntelSdmProcessor(this IWfRuntime wf)
+            => Svc.IntelSdmProcessor.create(wf);
+
+        [Op]
+        public static DocServices DocServices(this IWfRuntime context)
+            => Z0.DocServices.create(context);
+
     }
 }

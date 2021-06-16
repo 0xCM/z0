@@ -60,6 +60,12 @@ namespace Z0.Asm
                 C = c;
                 D = d;
             }
+
+            public byte Count
+            {
+                [MethodImpl(Inline)]
+                get => (byte)(core.u8(A !=0) + core.u8(B != 0) + core.u8(C != 0) + core.u8(D != 0));
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
         public static uint cilbytes(Type[] types, FS.FilePath dst)
         {
             var counter = 0u;
-            var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
+            var header = string.Concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
             using var writer = dst.Writer();
             writer.WriteLine(header);
             var props = types.StaticProperties().Where(p => p.GetGetMethod() != null && p.PropertyType == typeof(ReadOnlySpan<byte>));
@@ -55,7 +55,7 @@ namespace Z0
         [Op]
         public static string format(ByteSpanSpec src)
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             render(src,dst);
             return dst.Emit();
         }
@@ -64,7 +64,7 @@ namespace Z0
         public static string format<T>(ByteSpanSpec<T> src)
             where T : unmanaged, Enum
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             render(src,dst);
             return dst.Emit();
         }
@@ -73,7 +73,7 @@ namespace Z0
         public static void render<T>(ByteSpanSpec<T> spec, ITextBuffer dst)
             where T : unmanaged, Enum
         {
-            var payload = text.buffer();
+            var payload = TextTools.buffer();
             var src = spec.Data;
             var count = src.Length;
             for(var i=0; i<count; i++)

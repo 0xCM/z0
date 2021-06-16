@@ -36,7 +36,7 @@ namespace Z0
         public static uint render(in BitfieldSeg src, ref uint i, Span<char> dst, SegRenderStyle style = default)
         {
             var i0 = i;
-            copy(src.Name.Format(), ref i, dst);
+            copy(src.SegName.Format(), ref i, dst);
             seek(dst, i++) = Chars.Colon;
             render(src.Min, src.Max, style, ref i, dst);
             return i - i0;

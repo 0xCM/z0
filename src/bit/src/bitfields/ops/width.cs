@@ -19,7 +19,12 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static byte width(in BitfieldSeg src)
-            => (byte)(src.Min - src.Max + 1);
+            => (byte)(src.Max - src.Min + 1);
+
+        [MethodImpl(Inline), Op]
+        public static byte width<K>(in BitfieldSeg<K> src)
+            where K : unmanaged
+                => (byte)(src.Max - src.Min + 1);
 
         /// <summary>
         /// Computes the aggregate width of the segments that comprise the bitfield
@@ -38,6 +43,17 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint width(ReadOnlySpan<BitfieldSeg> src)
+        {
+            var count = src.Length;
+            var w = 0u;
+            for(var i=0; i<count; i++)
+                w += width(skip(src,i));
+            return w;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint width<K>(ReadOnlySpan<BitfieldSeg<K>> src)
+            where K : unmanaged
         {
             var count = src.Length;
             var w = 0u;

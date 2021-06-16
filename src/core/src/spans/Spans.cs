@@ -19,9 +19,13 @@ namespace Z0
         public static SpanWriter writer(Span<byte> dst)
             => new SpanWriter(dst);
 
+        /// <summary>
+        /// Declares a span to be sorted
+        /// </summary>
+        /// <param name="src"></param>
+        /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SortedReadOnlySpan<T> sorted<T>(ReadOnlySpan<T> src)
-            where T : IComparable<T>
-                => new SortedReadOnlySpan<T>(src);
+            => new SortedReadOnlySpan<T>(src);
     }
 }
