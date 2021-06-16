@@ -40,6 +40,8 @@ namespace Z0
 
             public const string InlineOpAttribute = "[MethodImpl(Inline), Op]";
 
+            public const string ReadOnlyStruct = Readonly + Space + Struct;
+
             public const string Open = "{";
 
             public const string Close = "}";
@@ -91,7 +93,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string ReadonlyStruct()
-            => L.Readonly + Space + Struct();
+            => L.ReadOnlyStruct;
 
         [MethodImpl(Inline)]
         public static string ReadonlyStruct(string name)
@@ -109,13 +111,10 @@ namespace Z0
         public static string InlineOpAttribute()
             => L.InlineOpAttribute;
 
-        [MethodImpl(Inline)]
         public static string PublicOneLineFunc(string ret, string name, string ops, string body)
             => string.Format(L.PublicOneLineFunc, ret, name, ops, body);
 
-        [MethodImpl(Inline)]
         public static string PublicStaticOneLineFunc(string ret, string name, string ops, string body)
             => string.Format(L.PublicStaticOneLineFunc, ret, name, ops, body);
-
     }
 }

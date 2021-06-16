@@ -14,7 +14,7 @@ namespace Z0
 
             public CliRowKey Parent;
 
-            public BlobIndex NativeType;
+            public CliBlobIndex NativeType;
         }
     }
 }

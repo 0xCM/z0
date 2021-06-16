@@ -16,7 +16,7 @@ namespace Z0
 
             public StringIndex Name;
 
-            public BlobIndex Type;
+            public CliBlobIndex Type;
         }
     }
 }

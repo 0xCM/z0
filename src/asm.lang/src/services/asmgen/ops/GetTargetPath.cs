@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmGen
+    partial class AsmModelGen
     {
         FS.FilePath GetTargetPath(AsmGenTarget kind)
             => Db.PartSrcFile(PartId.AsmLangG, FS.file(TargetIdentifier(kind).Format(), FS.Cs));

@@ -14,7 +14,7 @@ namespace Z0
         {
             public CliRowKey Method;
 
-            public BlobIndex Instantiation;
+            public CliBlobIndex Instantiation;
         }
     }
 }

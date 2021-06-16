@@ -6,59 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
 
     using static Root;
 
-    using NK = NumericKind;
-    using BK = ClrEnumKind;
-
     public readonly struct ClrEnumAdapter
     {
-        /// <summary>
-        /// Determines the integral type refined by a parametrically-identified enum type
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        public static ClrEnumKind @base<E>()
-            where E : unmanaged, Enum
-             => @base(typeof(E).GetEnumUnderlyingType().NumericKind());
-
-        /// <summary>
-        /// Determines the integral type refined by a value-identified enum type
-        /// </summary>
-        /// <param name="value">The enum value</typeparam>
-        [Op]
-        public static ClrEnumKind @base(Enum value)
-            => @base(value.GetType().GetEnumUnderlyingType().NumericKind());
-
-        /// <summary>
-        /// Determines the integral type refined by a specified enum type
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        [Op]
-        public static ClrEnumKind @base(Type et)
-            => @base(et.NumericKind());
-
-        [Op]
-        public static ClrEnumKind @base(NumericKind src)
-             => src switch{
-                NK.U8 => BK.U8,
-                NK.I8 => BK.I8,
-                NK.U16 => BK.U16,
-                NK.I16 => BK.I16,
-                NK.U32 => BK.U32,
-                NK.I32 => BK.I32,
-                NK.I64 => BK.I64,
-                NK.U64 => BK.U64,
-                _ => ClrEnumKind.None,
-            };
+        [MethodImpl(Inline)]
+        public static ClrEnumAdapter adapt(Type src)
+            => new ClrEnumAdapter(src);
 
         [MethodImpl(Inline)]
-        public static ClrEnumFieldAdapter<E> field<E>(uint index, FieldInfo src, E value)
+        public static ClrEnumAdapter<E> adapt<E>()
             where E : unmanaged, Enum
-                => new ClrEnumFieldAdapter<E>(index,src,value);
+                => default;
 
         public Type Definition {get;}
 

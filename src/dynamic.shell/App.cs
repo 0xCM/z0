@@ -81,7 +81,7 @@ namespace Z0
         {
             if(Wf.ApiCatalog.FindComponent(part, out var component))
             {
-                dst = Cli.reader(component);
+                dst = CliReader.read(component);
                 return true;
             }
             else

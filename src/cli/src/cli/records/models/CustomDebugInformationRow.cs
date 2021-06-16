@@ -16,7 +16,7 @@ namespace Z0
 
             public GuidIndex Kind;
 
-            public BlobIndex Value;
+            public CliBlobIndex Value;
         }
     }
 }

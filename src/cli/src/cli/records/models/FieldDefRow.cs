@@ -16,11 +16,11 @@ namespace Z0
 
             public StringIndex Name;
 
-            public BlobIndex Signature;
+            public CliBlobIndex Signature;
 
             public uint Offset;
 
-            public BlobIndex Marshal;
+            public CliBlobIndex Marshal;
         }
     }
 }

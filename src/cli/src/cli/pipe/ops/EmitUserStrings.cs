@@ -28,7 +28,7 @@ namespace Z0
 
         public ReadOnlySpan<CliUserString> EmitUserStrings(Assembly src)
         {
-            var reader = Cli.reader(src);
+            var reader = CliReader.read(src);
             var records = reader.ReadUserStringInfo();
             Db.EmitTable<CliUserString>(records, src.GetSimpleName());
             return records;

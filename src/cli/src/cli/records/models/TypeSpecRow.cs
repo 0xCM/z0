@@ -12,7 +12,7 @@ namespace Z0
         [CliRecord(CliTableKind.TypeSpec), StructLayout(LayoutKind.Sequential)]
         public struct TypeSpecRow : ICliRecord<TypeSpecRow>
         {
-            public BlobIndex Signature;
+            public CliBlobIndex Signature;
         }
     }
 }

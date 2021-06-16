@@ -12,11 +12,11 @@ namespace Z0
         [CliRecord(CliTableKind.Document), StructLayout(LayoutKind.Sequential)]
         public struct DocumentRow : ICliRecord<DocumentRow>
         {
-            public BlobIndex Name;
+            public CliBlobIndex Name;
 
             public GuidIndex HashAlgorithm;
 
-            public BlobIndex Hash;
+            public CliBlobIndex Hash;
 
             public GuidIndex Language;
         }

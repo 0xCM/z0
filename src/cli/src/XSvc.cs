@@ -27,7 +27,7 @@ namespace Z0
 
         [Op]
         public static PdbSymbolStore PdbSymbolStore(this IWfRuntime wf)
-            => Cli.symbols(wf);
+            => Svc.PdbSymbolStore.create(wf);
 
         [Op]
         public static PdbReader PdbReader(this IWfRuntime wf, in PdbSymbolSource src)

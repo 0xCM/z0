@@ -16,6 +16,22 @@ namespace Z0
     [ApiHost]
     public unsafe partial class CliReader
     {
+        [Op]
+        public static CliReader read(Assembly src)
+            => new CliReader(src);
+
+        [Op]
+        public static CliReader read(MetadataReader src)
+            => new CliReader(src);
+
+        [Op]
+        public static CliReader read(MemorySeg src)
+            => new CliReader(src);
+
+        [Op]
+        public static CliReader read(PEMemoryBlock src)
+            => new CliReader(src);
+
         const byte TableCount = (byte)TableIndex.CustomDebugInformation + 1;
 
         readonly MetadataReader MD;

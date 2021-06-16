@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using T = AsmGenTarget;
 
-    partial class AsmGen
+    partial class AsmModelGen
     {
         const string MonicEnumType = "ushort";
 

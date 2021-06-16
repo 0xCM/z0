@@ -15,11 +15,11 @@ namespace Z0
     {
         public static Index<CliSig> sigs(MethodInfo[] src)
         {
-            var count = root.count(src);
+            var count = src.Length;
             if(count==0)
                 return default;
 
-            var dst = sys.alloc<CliSig>(count);
+            var dst = alloc<CliSig>(count);
             sigs(src, dst);
             return dst;
         }
@@ -27,7 +27,7 @@ namespace Z0
         [Op]
         public static void sigs(MethodInfo[] src, Span<CliSig> dst)
         {
-            var k = root.min(root.count(src), root.count(dst));
+            var k = min(src.Length, dst.Length);
             if(k != 0)
             {
                 ref readonly var input = ref first(src);
@@ -36,6 +36,5 @@ namespace Z0
                     seek(output,i) = sig(skip(input,i));
             }
         }
-
     }
 }

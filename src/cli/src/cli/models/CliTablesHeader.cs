@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static SRM;
-    using static Part;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct CliTablesHeader

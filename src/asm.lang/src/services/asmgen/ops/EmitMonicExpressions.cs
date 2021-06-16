@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using static core;
 
-    partial class AsmGen
+    partial class AsmModelGen
     {
         const string MonicPropertyPattern = "public static AsmMnemonic {0} => nameof({0});";
 

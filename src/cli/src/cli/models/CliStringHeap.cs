@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct CliStringHeap : ICliHeap<CliStringHeap>
     {
@@ -28,7 +28,7 @@ namespace Z0
         public unsafe ReadOnlySpan<byte> Data
         {
             [MethodImpl(Inline)]
-            get => memory.cover<byte>(BaseAddress, Size);
+            get => core.cover<byte>(BaseAddress, Size);
         }
 
         public uint EntryCount
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format(memory.range(BaseAddress, Size).Format());
+            => string.Format(MemoryRange.define(BaseAddress, Size).Format());
 
         public override string ToString()
             => Format();

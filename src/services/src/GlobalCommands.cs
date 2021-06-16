@@ -33,8 +33,16 @@ namespace Z0
             }
         }
 
+        [CmdOp("process-intel-sdm")]
+        public void ProcessIntelSdm(params object[] args)
+        {
+            var processor = Wf.IntelSdmProcessor();
+            processor.Run();
+
+        }
+
         [CmdOp("emit-cli-metadata")]
-        public Outcome EmitCliMetadata()
+        public Outcome EmitCliMetadata(params object[] args)
         {
             var pipe = Wf.CliPipe();
             pipe.EmitRowStats(Wf.ApiCatalog.Components, Db.IndexTable<CliRowStats>());
@@ -44,7 +52,7 @@ namespace Z0
         }
 
         [CmdOp("emit-cil-opcodes")]
-        public Outcome EmitCilOpCodes()
+        public Outcome EmitCilOpCodes(params object[] args)
         {
             var dst = Db.IndexTable<CilOpCode>();
             TableEmit(Cil.opcodes(), dst);
@@ -52,7 +60,7 @@ namespace Z0
         }
 
         [CmdOp("emit-sym-literals")]
-        public Outcome EmitSymLiterals()
+        public Outcome EmitSymLiterals(params object[] args)
         {
             var service = Wf.Symbolism();
             var dst = Db.AppTablePath<SymLiteral>();
@@ -61,7 +69,7 @@ namespace Z0
         }
 
         [CmdOp("update-tool-help")]
-        public Outcome UpdateToolHelpIndex()
+        public Outcome UpdateToolHelpIndex(params object[] args)
         {
             var catalog = ToolCatalog.create(Wf);
             var index = catalog.UpdateHelpIndex();
@@ -70,36 +78,35 @@ namespace Z0
         }
 
         [CmdOp("emit-intrinsics-catalog")]
-        public Outcome EmitIntrinsicsCatalog()
+        public Outcome EmitIntrinsicsCatalog(params object[] args)
         {
             Wf.IntrinsicsCatalog().Emit();
             return true;
         }
 
         [CmdOp("emit-respack")]
-        public Outcome EmitResPack()
+        public Outcome EmitResPack(params object[] args)
         {
             Wf.ResPackEmitter().Emit();
             return true;
         }
 
-
         [CmdOp("asm-gen-models")]
         public Outcome GenInstructionModels(params object[] args)
         {
-            Wf.AsmCodeGenerator().GenerateModelsInPlace();
+            Wf.AsmModelGen().GenerateModelsInPlace();
             return true;
         }
 
         [CmdOp("asm-gen-models-preview")]
         public Outcome GenInstructionModelPreview(params object[] args)
         {
-            Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
+            Wf.AsmModelGen().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
             return true;
         }
 
-        [CmdOp("capture-xtract")]
-        public Outcome RunExtractWorkflow(params object[] args)
+        [CmdOp("capture-v2")]
+        public Outcome CaptureV2(params object[] args)
         {
            var svc = Wf.ApiExtractWorkflow();
            svc.Run();
@@ -115,7 +122,7 @@ namespace Z0
         }
 
         [CmdOp("capture")]
-        public Outcome RunCapture(params object[] args)
+        public Outcome CaptureV1(params object[] args)
         {
             var result = Capture.run();
             return true;

@@ -15,7 +15,7 @@ namespace Z0
 
             public CliRowKey Constructor;
 
-            public BlobIndex Value;
+            public CliBlobIndex Value;
 
             public Address32 ValueOffset;
         }

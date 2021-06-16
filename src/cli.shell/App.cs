@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
-    using static CliRows;
+    using static core;
 
     class App : WfApp<App>
     {
@@ -47,7 +45,7 @@ namespace Z0
         }
 
         CliReader Reader(Assembly src)
-            => Cli.reader(src);
+            => CliReader.read(src);
 
         bool Reader(PartId part, out CliReader dst)
         {

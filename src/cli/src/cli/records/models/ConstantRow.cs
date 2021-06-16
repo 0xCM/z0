@@ -19,7 +19,7 @@ namespace Z0
 
             public CliRowKey Parent;
 
-            public BlobIndex Value;
+            public CliBlobIndex Value;
         }
     }
 }

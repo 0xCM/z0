@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static Root;
 
-    partial class AsmGen
+    partial class AsmModelGen
     {
         static Identifier TargetIdentifier(AsmGenTarget kind)
             => kind switch {

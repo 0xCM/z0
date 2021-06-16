@@ -12,7 +12,7 @@ namespace Z0
         [CliRecord(CliTableKind.StandAloneSig), StructLayout(LayoutKind.Sequential)]
         public struct StandaloneSigRow  : ICliRecord<StandaloneSigRow>
         {
-            public BlobIndex Signature;
+            public CliBlobIndex Signature;
         }
     }
 }

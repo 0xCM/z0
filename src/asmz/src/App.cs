@@ -976,10 +976,12 @@ namespace Z0.Asm
 
         }
 
-        public void RunIntelSdmProcessor()
+        void GenAsmModels()
         {
-            var processor = Wf.IntelSdmProcessor();
-            processor.Run();
+            var svc = Wf.AsmModelGen();
+            var dst = text.buffer();
+            svc.GenRegNameProvider(4, dst);
+            Wf.Row(dst.Emit());
 
         }
 
@@ -992,7 +994,7 @@ namespace Z0.Asm
             //CheckDocProcessor();
             //CheckAsciByteSpans();
             //GenAsciSpan(IntelDocs.)
-            Wf.GlobalCommands().RunExtractWorkflow();
+            //Wf.GlobalCommands().CaptureV2();
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();

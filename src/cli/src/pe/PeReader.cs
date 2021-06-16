@@ -59,7 +59,7 @@ namespace Z0
         }
 
         CliReader CliReader()
-            => Cli.reader(MetadataBlock);
+            => Z0.CliReader.read(MetadataBlock);
 
         public PeReader(FS.FilePath src)
         {

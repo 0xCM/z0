@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using static core;
 
-    partial class AsmGen
+    partial class AsmModelGen
     {
         public static string MonicFactoryName(string src)
         {

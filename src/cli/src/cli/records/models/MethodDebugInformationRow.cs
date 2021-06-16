@@ -13,7 +13,7 @@ namespace Z0
         {
             public int Document;
 
-            public BlobIndex SequencePoints;
+            public CliBlobIndex SequencePoints;
         }
     }
 }

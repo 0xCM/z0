@@ -14,6 +14,14 @@ namespace Z0
 
     public readonly struct ClrFieldAdapter : IClrRuntimeMember<ClrFieldAdapter,FieldInfo>
     {
+        [MethodImpl(Inline)]
+        public static ClrFieldAdapter adapt(FieldInfo src)
+            => new ClrFieldAdapter(src);
+
+        [MethodImpl(Inline)]
+        public static ClrFieldAdapter<T> adapt<T>(FieldInfo src)
+            => new ClrFieldAdapter<T>(src);
+
         public FieldInfo Definition {get;}
 
         [MethodImpl(Inline)]

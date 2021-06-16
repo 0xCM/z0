@@ -12,8 +12,8 @@ namespace Z0
 
     public static class ClrDataLinks
     {
-        public static ClrArrow define<S,T>(Expression<Func<S,object>> s, Expression<Func<T,object>> t)
-            => new ClrArrow(s.GetDataMember(), t.GetDataMember());
+        public static MemberArrow define<S,T>(Expression<Func<S,object>> s, Expression<Func<T,object>> t)
+            => new MemberArrow(s.GetDataMember(), t.GetDataMember());
 
         public static ClrDataLinkBuilder<S,T> build<S,T>()
             => new ClrDataLinkBuilder<S,T>();
@@ -21,8 +21,8 @@ namespace Z0
 
     public class ClrDataLinkBuilder<S,T>
     {
-        HashSet<ClrArrow> Arrows {get;}
-            = new HashSet<ClrArrow>();
+        HashSet<MemberArrow> Arrows {get;}
+            = new HashSet<MemberArrow>();
 
         public ClrDataLinkBuilder<S,T> Include(Expression<Func<S, object>> s, Expression<Func<T,object>> t)
         {
@@ -37,10 +37,10 @@ namespace Z0
             return this;
         }
 
-        public ClrArrows<S,T> Complete()
-            => new ClrArrows<S,T>(Arrows);
+        public MemberArrows<S,T> Complete()
+            => new MemberArrows<S,T>(Arrows);
 
-        public static implicit operator ClrArrows<S,T>(ClrDataLinkBuilder<S,T> builder)
+        public static implicit operator MemberArrows<S,T>(ClrDataLinkBuilder<S,T> builder)
             => builder.Complete();
     }
 }

@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using T = AsmGenTarget;
 
-    partial class AsmGen
+    partial class AsmModelGen
     {
         const string ClassDeclPattern = "public class {0}";
 

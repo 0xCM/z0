@@ -17,13 +17,13 @@ namespace Z0
 
             public AssemblyFlags Flags;
 
-            public BlobIndex Token;
+            public CliBlobIndex Token;
 
             public StringIndex Name;
 
             public StringIndex Culture;
 
-            public BlobIndex Hash;
+            public CliBlobIndex Hash;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
 
             public CliRowKey Parent;
 
-            public BlobIndex PermissionSet;
+            public CliBlobIndex PermissionSet;
         }
     }
 }

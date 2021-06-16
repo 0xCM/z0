@@ -9,11 +9,7 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Part;
-    using static core;
     using static SRM;
-
-    using static CliRows;
 
     public sealed class MetadataReaderState
     {

@@ -26,7 +26,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var component = ref skip(src,i);
-                var reader = Cli.reader(component);
+                var reader = CliReader.read(component);
                 seek(dst,i) = reader.BlobHeap();
             }
             return buffer;
@@ -40,7 +40,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var component = ref skip(src,i);
-                var reader = Cli.reader(component);
+                var reader = CliReader.read(component);
                 seek(dst,i) = reader.GuidHeap();
             }
             return buffer;
@@ -55,7 +55,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var component = ref skip(src,i);
-                var reader = Cli.reader(component);
+                var reader = CliReader.read(component);
                 seek(dst,j++) = reader.StringHeap(CliStringKind.System);
                 seek(dst,j++) = reader.StringHeap(CliStringKind.User);
             }

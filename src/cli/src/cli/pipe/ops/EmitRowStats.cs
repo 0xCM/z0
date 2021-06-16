@@ -36,7 +36,7 @@ namespace Z0
         public ReadOnlySpan<CliRowStats> CollectRowStats(Assembly a, ref uint seq)
         {
             var entries = list<CliRowStats>();
-            var reader = Cli.reader(a);
+            var reader = CliReader.read(a);
             var counts = reader.GetRowCounts();
             var sizes = reader.GetRowSizes();
             for(byte j=0; j<counts.Count; j++)

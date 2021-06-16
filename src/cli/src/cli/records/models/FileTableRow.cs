@@ -15,7 +15,7 @@ namespace Z0
 
             public StringIndex FileName;
 
-            public BlobIndex HashValue;
+            public CliBlobIndex HashValue;
         }
     }
 }

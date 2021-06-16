@@ -34,8 +34,8 @@ namespace Z0
             => Svc.AsmFormPipe.create(wf);
 
         [Op]
-        public static AsmGen AsmCodeGenerator(this IWfRuntime wf)
-            => AsmGen.create(wf);
+        public static Svc.AsmModelGen AsmModelGen(this IWfRuntime wf)
+            => Svc.AsmModelGen.create(wf);
 
         [Op]
         public static AsmEncoderPrototype AsmEncoder(this IWfRuntime wf)

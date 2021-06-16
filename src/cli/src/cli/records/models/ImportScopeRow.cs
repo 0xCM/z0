@@ -11,7 +11,7 @@ namespace Z0
         [CliRecord(CliTableKind.ImportScope), StructLayout(LayoutKind.Sequential)]
         public struct ImportScopeRow : ICliRecord<ImportScopeRow>
         {
-            public BlobIndex Imports;
+            public CliBlobIndex Imports;
         }
     }
 }

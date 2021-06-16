@@ -19,7 +19,7 @@ namespace Z0
 
             public AssemblyFlags Flags;
 
-            public BlobIndex PublicKey;
+            public CliBlobIndex PublicKey;
 
             public StringIndex Name;
 

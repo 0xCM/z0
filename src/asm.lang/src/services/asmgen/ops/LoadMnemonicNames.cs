@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using static core;
 
-    partial class AsmGen
+    partial class AsmModelGen
     {
         ReadOnlySpan<string> LoadMnemonicNames()
             => Wf.XedCatalog().MnemonicNames();
