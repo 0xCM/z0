@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmOps
+    partial struct AsmOpTypes
     {
         public readonly struct imm<T> : IImmOp<T>
             where T : unmanaged

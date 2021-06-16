@@ -23,6 +23,44 @@ namespace Z0.Asm
 
         const string To = " => ";
 
+        public static string format<T>(in RegExpr<T> src)
+            where T : unmanaged, IRegOp
+        {
+            var dst = CharBlock32.Null.Data;
+            var i=0u;
+            var count = render(src, ref i, dst);
+            return TextTools.format(dst, count);
+        }
+
+        public static uint render<T>(in RegExpr<T> src, ref uint i, Span<char> dst)
+            where T : unmanaged, IRegOp
+        {
+            var i0 = i;
+            var @base = src.Base.Format();
+            var index = src.Index.Format();
+            copy(@base, ref i, dst);
+            var scale = src.Scale.Format();
+            if(src.Scale.NonZero)
+            {
+                seek(dst,i++) = Chars.Plus;
+                copy(index, ref i, dst);
+                if(src.Scale.NonUnital)
+                {
+                    seek(dst,i++) = Chars.Star;
+                    copy(scale,ref i, dst);
+                }
+            }
+
+            if(src.Dx != 0)
+            {
+                seek(dst,i++) = Chars.Plus;
+                copy(src.Dx.ToString("x") + "h", ref i, dst);
+            }
+
+
+            return i - i0;
+        }
+
         public static string format(in AsmSig src)
         {
             var dst = text.buffer();

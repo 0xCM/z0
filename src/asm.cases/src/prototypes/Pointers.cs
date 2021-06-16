@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -15,6 +16,42 @@ namespace Z0.Asm
         [ApiHost(prototypes + pointers)]
         public unsafe readonly struct Pointers
         {
+            public static ReadOnlySpan<byte> and_ᐤ8uㆍ8uᐤ => new byte[17]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x23,0xc2,0x0f,0xb6,0xc0,0xc3};
+
+            public static ReadOnlySpan<byte> or_ᐤ8uㆍ8uᐤ => new byte[17]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x0b,0xc2,0x0f,0xb6,0xc0,0xc3};
+
+            public static ReadOnlySpan<byte> xor_ᐤ8uㆍ8uᐤ => new byte[17]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x33,0xc2,0x0f,0xb6,0xc0,0xc3};
+
+            public static ReadOnlySpan<byte> div_ᐤ8uㆍ8uᐤ => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xca,0x99,0xf7,0xf9,0x0f,0xb6,0xc0,0xc3};
+
+            public static ReadOnlySpan<byte> mul_ᐤ8uㆍ8uᐤ => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xd2,0x0f,0xaf,0xc2,0x0f,0xb6,0xc0,0xc3};
+
+            public static ReadOnlySpan<byte> mod_ᐤ8uㆍ8uᐤ => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x0f,0xb6,0xc1,0x0f,0xb6,0xca,0x99,0xf7,0xf9,0x0f,0xb6,0xc2,0xc3};
+
+            [Op, MethodImpl(NotInline)]
+            public static byte and(byte a, byte b)
+                => math.and(a,b);
+
+            [Op, MethodImpl(NotInline)]
+            public static byte or(byte a, byte b)
+                => math.or(a,b);
+
+            [Op, MethodImpl(NotInline)]
+            public static byte xor(byte a, byte b)
+                => math.xor(a,b);
+
+            [Op, MethodImpl(NotInline)]
+            public static byte div(byte a, byte b)
+                => math.div(a,b);
+
+            [Op, MethodImpl(NotInline)]
+            public static byte mul(byte a, byte b)
+                => math.mul(a,b);
+
+            [Op, MethodImpl(NotInline)]
+            public static byte mod(byte a, byte b)
+                => math.mod(a,b);
+
             [Op]
             public static void f_32u_p8u_p8u_p8u_void(byte* pA, byte* pB, byte* pDst)
             {
@@ -25,6 +62,18 @@ namespace Z0.Asm
                 pDst[i++] = math.mul(pA[i], pB[i]);
                 pDst[i++] = math.div(pA[i], pB[i]);
                 pDst[i++] = math.mod(pA[i], pB[i]);
+            }
+
+            [Op]
+            public static void f_32u_p8u_p8u_p8u_void_calls(byte* pA, byte* pB, byte* pDst)
+            {
+                var i=0u;
+                pDst[i++] = and(pA[i], pB[i]);
+                pDst[i++] = or(pA[i], pB[i]);
+                pDst[i++] = xor(pA[i], pB[i]);
+                pDst[i++] = mul(pA[i], pB[i]);
+                pDst[i++] = div(pA[i], pB[i]);
+                pDst[i++] = mod(pA[i], pB[i]);
             }
 
             [Op]

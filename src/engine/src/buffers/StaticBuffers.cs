@@ -24,7 +24,6 @@ namespace Z0
         public static StaticBuffer256<T> fetch<T>(W256 w)
             => StaticBuffer256<T>.fetch();
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> covered<T>(in StaticBuffer<T> src)
             => first(cover<Index<T>>(src.Address, 1)).Storage;

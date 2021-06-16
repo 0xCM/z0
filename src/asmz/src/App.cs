@@ -539,8 +539,14 @@ namespace Z0.Asm
 
         void ShowRegOps()
         {
-            var reg = AsmOp.reg(RegWidth.W32, RegClass.GP, RegIndex.r2);
+            var reg = asm.reg(RegWidth.W32, RegClass.GP, RegIndex.r2);
             Wf.Row(string.Format("{0}{1}/{2}", reg.Width, reg.Index, reg.RegClass));
+        }
+
+        void ShowRegExpr()
+        {
+            Wf.Row(RegExprCases.expr1());
+
         }
 
         public void ShowRexTable()
@@ -963,10 +969,21 @@ namespace Z0.Asm
 
         }
 
+        unsafe void ShowOps()
+        {
+            var lookup = AsmOperatorTable.create().Lookup;
+            iter(lookup.View, entry => Wf.Row(entry));
+
+
+        }
+
         public void Run()
         {
-            var processor = Wf.IntelSdmProcessor();
-            processor.Run();
+            // var processor = Wf.IntelSdmProcessor();
+            // processor.Run();
+
+            ShowOps();
+
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();

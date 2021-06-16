@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmOps
+    partial struct AsmOpTypes
     {
         /// <summary>
         /// Defines a 128-bit memory operand

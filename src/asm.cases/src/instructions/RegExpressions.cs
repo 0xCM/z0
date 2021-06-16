@@ -2,22 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
+    using T = AsmOpTypes;
+    using static AsmRegOps;
 
-    partial struct TextTools
+    public readonly struct RegExprCases
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe string format(StringAddress src)
-            => new string(gptr(firstchar(src)));
 
-        [Op]
-        public static string format(ReadOnlySpan<char> src, uint length)
-            => new string(core.slice(src,0, length));
+        [MethodImpl(Inline), Op]
+        public static RegExpr<T.r8> expr1()
+            => asm.regxpr(al, cl, ScaleFactor.S2, 0x8);
+
     }
 }

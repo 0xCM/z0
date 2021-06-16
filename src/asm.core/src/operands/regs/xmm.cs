@@ -10,12 +10,12 @@ namespace Z0.Asm
     using static Root;
 
     using I = RegIndex;
-    using G = AsmOps.xmm;
+    using G = AsmOpTypes.xmm;
     using K = AsmRegCodes.XmmReg;
 
     using api = AsmRegs;
 
-    partial struct AsmOps
+    partial struct AsmOpTypes
     {
         public readonly struct xmm : IRegOp128<xmm>
         {
@@ -27,8 +27,11 @@ namespace Z0.Asm
                 Index = index;
             }
 
-            public override string ToString()
+            public string Format()
                 => ((K)Index).ToString();
+
+            public override string ToString()
+                => Format();
 
             public RegWidth Width
             {
@@ -44,7 +47,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => AsmOp.reg(src.Width, src.RegClass, src.Index);
+                => asm.reg(src.Width, src.RegClass, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)
@@ -249,5 +252,30 @@ namespace Z0.Asm
                 => (K)src.Index;
         }
 
+        public readonly struct xmm14 : IRegOp128<xmm14>
+        {
+            public I Index => I.r14;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm14 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm14 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm15 : IRegOp128<xmm15>
+        {
+            public I Index => I.r15;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm15 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm15 src)
+                => (K)src.Index;
+        }
     }
 }

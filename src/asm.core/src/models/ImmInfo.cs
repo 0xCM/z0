@@ -9,11 +9,41 @@ namespace Z0.Asm
 
     using static Root;
 
+    using W = NumericWidth;
+
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
     public struct ImmInfo
     {
+        [MethodImpl(Inline), Op]
+        public static ImmInfo imm(byte value, bool direct)
+            => new ImmInfo(W.W8, value, direct);
+
+        [MethodImpl(Inline), Op]
+        public static ImmInfo imm(short value, bool direct, Sx sek)
+            => new ImmInfo(W.W16, value, direct, sek);
+
+        [MethodImpl(Inline), Op]
+        public static ImmInfo imm(ushort value, bool direct)
+            => new ImmInfo(W.W16, value, direct);
+
+        [MethodImpl(Inline), Op]
+        public static ImmInfo imm(int value, bool direct, Sx sek)
+            => new ImmInfo(W.W32, value, direct, sek);
+
+        [MethodImpl(Inline), Op]
+        public static ImmInfo imm(uint value, bool direct)
+            => new ImmInfo(W.W32, value, direct);
+
+        [MethodImpl(Inline), Op]
+        public static ImmInfo imm(long value, bool direct, Sx sek)
+            => new ImmInfo(W.W64, value, direct, sek);
+
+        [MethodImpl(Inline), Op]
+        public static ImmInfo imm(ulong value, bool direct)
+            => new ImmInfo(W.W64, value, direct);
+
         public NumericWidth Width;
 
         public ulong Value;

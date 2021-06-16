@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
 
-    partial struct AsmOps
+    partial struct AsmOpTypes
     {
         /// <summary>
         /// Defines an 8-bit memory operand

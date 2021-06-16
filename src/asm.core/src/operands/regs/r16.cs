@@ -10,11 +10,11 @@ namespace Z0.Asm
     using static Root;
 
     using I = RegIndex;
-    using G = AsmOps.r16;
+    using G = AsmOpTypes.r16;
     using K = AsmRegCodes.Gp16;
     using api = AsmRegs;
 
-    partial struct AsmOps
+    partial struct AsmOpTypes
     {
         public readonly struct r16 : IRegOp16<r16>
         {
@@ -26,9 +26,11 @@ namespace Z0.Asm
                 Index = index;
             }
 
-            public override string ToString()
+            public string Format()
                 => ((K)Index).ToString();
 
+            public override string ToString()
+                => Format();
 
             public RegWidth Width
             {
@@ -44,7 +46,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => AsmOp.reg(src.Width, src.RegClass, src.Index);
+                => asm.reg(src.Width, src.RegClass, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)
@@ -86,7 +88,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator K(ax src)
                 => (K)src.Index;
-
         }
 
         public struct cx : IRegOp16<cx>

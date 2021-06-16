@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmInstructions;
-    using static AsmOps;
+    using static AsmOpTypes;
 
     partial class AsmEncoderPrototype
     {

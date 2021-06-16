@@ -13,19 +13,31 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static imm8 imm8(byte value)
-            => new imm8(value);
+        public m8 m8()
+            => default;
 
         [MethodImpl(Inline), Op]
-        public static imm16 imm16(ushort value)
-            => new imm16(value);
+        public m16 m16()
+            => default;
 
         [MethodImpl(Inline), Op]
-        public static imm32 imm32(uint value)
-            => new imm32(value);
+        public m32 m32()
+            => default;
 
         [MethodImpl(Inline), Op]
-        public static imm64 imm64(ulong value)
-            => new imm64(value);
+        public m64 m64()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public m128 m128()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public m256 m256()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public m512 m512()
+            => default;
     }
 }

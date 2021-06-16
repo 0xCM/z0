@@ -102,10 +102,6 @@ namespace Z0
         public static implicit operator Imm<uint>(I src)
             => new Imm<uint>(src);
 
-        // [MethodImpl(Inline)]
-        // public static implicit operator Cell32(I src)
-        //     => new Cell32(src.Content);
-
         [MethodImpl(Inline)]
         public static implicit operator I(uint src)
             => new I(src);

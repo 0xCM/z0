@@ -12,7 +12,7 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Z0.Asm.AsmOp;
+    using static Z0.Asm.AsmRegOps;
 
     public class JmpStubSynthetics : AppService<JmpStubSynthetics>
     {

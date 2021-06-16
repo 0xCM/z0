@@ -4,14 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmOpTypes
-    {
-        /// <summary>
-        /// Defines a 16-bit memory operand
-        /// </summary>
-        public struct m16 : IMemOp16<m16>
-        {
+    using System;
+    using System.Runtime.CompilerServices;
 
-        }
+    using static Root;
+
+    [ApiHost]
+    public readonly partial struct AsmOpTypes
+    {
+
     }
 }

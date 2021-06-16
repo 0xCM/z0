@@ -10,11 +10,11 @@ namespace Z0.Asm
     using static Root;
 
     using I = RegIndex;
-    using G = AsmOps.r64;
+    using G = AsmOpTypes.r64;
     using K = AsmRegCodes.Gp64;
     using api = AsmRegs;
 
-    partial struct AsmOps
+    partial struct AsmOpTypes
     {
         public readonly struct r64 : IRegOp64<r64>
         {
@@ -26,8 +26,11 @@ namespace Z0.Asm
                 Index = index;
             }
 
-            public override string ToString()
+            public string Format()
                 => ((K)Index).ToString();
+
+            public override string ToString()
+                => Format();
 
             public RegWidth Width
             {
@@ -43,7 +46,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => AsmOp.reg(src.Width, src.RegClass, src.Index);
+                => asm.reg(src.Width, src.RegClass, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)

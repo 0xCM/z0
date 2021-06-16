@@ -4,101 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using R = AsmOpTypes;
 
-    using static Root;
-    using static AsmOps;
-    using static math;
-
-    using R = AsmOps;
-
-    [ApiHost]
-    public readonly struct AsmOp
+    public readonly struct AsmRegOps
     {
-        const byte RegWidthWidth = 3;
-
-        const byte RegClassWidth = 5;
-
-        const byte RegIndexWidth = 5;
-
-        [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidth width, RegClass @class, RegIndex index)
-            => new RegOp(or((byte)encode(width), sll((ushort)@class,5), sll((ushort)index, 10)));
-
-        [MethodImpl(Inline), Op]
-        public static RegWidthIndex encode(RegWidth width)
-            => (RegWidthIndex)Pow2.log((ushort)width);
-
-        [MethodImpl(Inline), Op]
-        public static RegWidth decode(RegWidthIndex width)
-            => (RegWidth)Pow2.pow((byte)width);
-
-        [MethodImpl(Inline), Op]
-        public static RegWidth width(RegOp src)
-            => decode((RegWidthIndex)(src.Bitfield & 0b111));
-
-        [MethodImpl(Inline), Op]
-        public static RegIndex index(RegOp src)
-            =>(RegIndex)Bits.bitseg(src.Bitfield, 10, 15);
-
-        [MethodImpl(Inline), Op]
-        public static RegClass regclass(RegOp src)
-            => (RegClass)Bits.bitseg(src.Bitfield, 5, 9);
-
-        [MethodImpl(Inline), Op]
-        public m8 m8()
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public m16 m16()
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public m32 m32()
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public m64 m64()
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public m128 m128()
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public m256 m256()
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public m512 m512()
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static imm8 imm8(byte value)
-            => new imm8(value);
-
-        [MethodImpl(Inline), Op]
-        public static imm16 imm16(ushort value)
-            => new imm16(value);
-
-        [MethodImpl(Inline), Op]
-        public static imm32 imm32(uint value)
-            => new imm32(value);
-
-        [MethodImpl(Inline), Op]
-        public static imm64 imm64(ulong value)
-            => new imm64(value);
-
-        [MethodImpl(Inline)]
-        public static RegOp<T> reg<T>(T src)
-            where T : unmanaged, IRegOp
-                => new RegOp<T>(src);
-
-        public static RegMem<T> mem<T>(T @base, T index, MemoryScale scale, Hex32 dx)
-            where T : unmanaged, IRegOp
-                => new RegMem<T>(@base, index, scale, dx);
-
         public static R.al al => default;
 
         public static R.cl cl => default;
@@ -227,4 +136,5 @@ namespace Z0.Asm
 
         public static R.r15q r15 => default;
     }
+
 }

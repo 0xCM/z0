@@ -8,9 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static math;
 
-    [ApiHost]
-    public readonly partial struct AsmOps
+    public readonly struct AsmOps
     {
 
     }
