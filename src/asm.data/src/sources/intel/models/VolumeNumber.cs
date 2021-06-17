@@ -11,18 +11,14 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        [StructLayout(LayoutKind.Sequential, Pack =1)]
-        public struct Volume
+        public struct VolumeNumber
         {
-            public byte Letter;
-
-            public byte Number;
+            public byte Value;
 
             [MethodImpl(Inline)]
-            public Volume(char letter, byte number)
+            public VolumeNumber(byte value)
             {
-                Letter = (byte)letter;
-                Number = number;
+                Value = value;
             }
         }
     }

@@ -13,7 +13,6 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        [StructLayout(LayoutKind.Sequential, Pack=1)]
         public readonly struct TableNumber
         {
             public const string Marker = "Table ";
@@ -26,34 +25,14 @@ namespace Z0.Asm
                 _Data = data;
             }
 
-            public ReadOnlySpan<char> Data
-            {
-                [MethodImpl(Inline)]
-                get => Data;
-            }
+            public string Format()
+                => string.Format("{0}{1}", Marker, _Data.Format());
 
             public static TableNumber Empty
             {
                 [MethodImpl(Inline)]
-                get => new TableNumber(CharBlock8.Null);
+                get => new TableNumber(EmptyString);
             }
-
-            [MethodImpl(Inline)]
-            public static int MarkerIndex(ReadOnlySpan<char> src)
-            {
-                var index = src.IndexOf(Marker);
-                if(index > Marker.Length)
-                    return NotFound;
-                else
-                    return index;
-            }
-
-            public string Format()
-                => string.Format("{0}{1}", Marker, _Data.Format());
-
-            public override string ToString()
-                => Format();
-
         }
     }
 }

@@ -17,5 +17,7 @@ namespace Z0.Asm
         InstructionContracts,
 
         StatementBuilder,
+
+        RegNameFactories
     }
 }

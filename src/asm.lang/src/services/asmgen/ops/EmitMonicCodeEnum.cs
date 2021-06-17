@@ -9,15 +9,12 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static CsPatterns;
 
     using T = AsmGenTarget;
 
     partial class AsmModelGen
     {
-        const string MonicEnumType = "ushort";
-
-        const string EnumDeclPattern = "public enum {0} : {1}";
-
         void EmitMonicEnum(ReadOnlySpan<string> monics, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
@@ -31,10 +28,10 @@ namespace Z0.Asm
 
         public static void EmitMonicEnumLiterals(ReadOnlySpan<string> monics, uint margin, ITextBuffer buffer)
         {
-            buffer.AppendLine(AsmNamespaceDecl);
+            buffer.AppendLine(AsmNamespaceDecl());
             buffer.AppendLine(Open);
             margin += 4;
-            buffer.IndentLine(margin, string.Format(EnumDeclPattern, TargetIdentifier(T.MonicCodeEnum), MonicEnumType));
+            buffer.IndentLine(margin, EnumDecl(TargetIdentifier(T.MonicCodeEnum), UShort()));
             buffer.IndentLine(margin, Open);
             margin += 4;
 

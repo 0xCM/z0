@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
+    using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     partial class XApi
     {
@@ -23,6 +23,17 @@ namespace Z0
             }
             else
                 return ApiHostUri.Empty;
+        }
+
+        public static ApiHostUri[] ApiHosts(this Assembly src)
+        {
+            var dst = new List<ApiHostUri>();
+            var types = src.Types().Tagged<ApiHostAttribute>();
+            foreach(var t in types)
+            {
+                dst.Add(t.HostUri());
+            }
+            return dst.ToArray();
         }
     }
 }

@@ -19,12 +19,12 @@ namespace Z0.Asm
         {
             public const string RenderPattern = "{0}-{1}";
 
-            public Chapter Chapter;
+            public ChapterNumber Chapter;
 
             public Page Page;
 
             [MethodImpl(Inline)]
-            public ChapterPage(Chapter chapter, Page page)
+            public ChapterPage(ChapterNumber chapter, Page page)
             {
                 Chapter = chapter;
                 Page = page;

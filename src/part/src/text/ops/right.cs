@@ -27,5 +27,15 @@ namespace Z0
             else
                 return EmptyString;
         }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> right(ReadOnlySpan<char> src, int index)
+        {
+            var offset = index + 1;
+            if(src.Length < offset)
+                return default;
+            else
+                return core.slice(src, offset);
+        }
     }
 }

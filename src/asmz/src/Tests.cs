@@ -46,10 +46,6 @@ namespace Z0.Asm
         }
 
 
-
-        public ReadOnlySpan<SymLiteral> EmitApiClasses()
-            => Wf.ApiCatalogs().EmitApiClasses();
-
         public ListFilesCmd EmitFileListCmdSample()
         {
             var cmd = new ListFilesCmd();
@@ -109,8 +105,6 @@ namespace Z0.Asm
             labels(buffer);
             return buffer;
         }
-
-
 
         void CollectMemStats()
         {
@@ -323,12 +317,11 @@ namespace Z0.Asm
         public void CheckClrKeys()
         {
             var types = Wf.ApiCatalog.Components.Storage.Types();
-            var unique = root.hashset<Type>();
+            var unique = hashset<Type>();
             var count = unique.Include(types).Where(x => x).Count();
             Wf.Row($"{types.Length} ?=? {count}");
             var fields = Wf.ApiCatalog.Components.Storage.DeclaredStaticFields();
-            root.iter(fields, f => Wf.Row(f.Name + ": " + f.FieldType.Name));
-
+            iter(fields, f => Wf.Row(f.Name + ": " + f.FieldType.Name));
         }
 
         public bool parse32u(ReadOnlySpan<char> input, out uint dst)
@@ -352,21 +345,11 @@ namespace Z0.Asm
             for(var k=0; k<j; k++)
                 dst |= ((uint)skip(output, k) << k*4);
             return true;
-
-            // value = ((uint)skip(output,0) << 0);
-            // value |= ((uint)skip(output,1) << 4);
-            // value |= ((uint)skip(output,2) << 8);
-            // value |= ((uint)skip(output,3) << 12);
-            // value |= ((uint)skip(output,4) << 16);
-            // value |= ((uint)skip(output,5) << 20);
-
-            //Wf.Row(value.ToString("x"));
         }
-
 
         static Index<ApiHostUri> NestedHosts(Type src)
         {
-            var dst = root.list<ApiHostUri>();
+            var dst = list<ApiHostUri>();
             var nested = @readonly(src.GetNestedTypes());
             var count = nested.Length;
             for(var i=0; i<count; i++)

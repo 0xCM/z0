@@ -17,14 +17,14 @@ namespace Z0.Asm
         [StructLayout(LayoutKind.Sequential, Pack =1)]
         public struct Location
         {
-            public Volume Volume;
+            public VolumePart Volume;
 
-            public Chapter Chapter;
+            public ChapterNumber Chapter;
 
             public Page Page;
 
             [MethodImpl(Inline)]
-            public Location(Volume v, Chapter c, Page p)
+            public Location(VolumePart v, ChapterNumber c, Page p)
             {
                 Volume = v;
                 Chapter = c;

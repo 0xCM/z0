@@ -7,13 +7,14 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static core;
     using static Root;
+    using static AsmOpTypes;
 
-    using TN = IntelSdm.TableNumber;
-
-    partial struct IntelSdm
+    partial struct asm
     {
-
+        public static AsmExpr expr<R,I>(AsmMnemonic monic, R r, I imm)
+            where R : IRegOp
+            where I : IImmOp
+                => string.Format("{0} {1},{2}", monic.Format(MnemonicCase.Lowercase), r.Format(), imm);
     }
 }

@@ -33,6 +33,10 @@ namespace Z0
             }
         }
 
+        [CmdOp("emit-api-classes")]
+        public void EmitApiClasses(params object[] args)
+            => Wf.ApiCatalogs().EmitApiClasses();
+
         [CmdOp("process-intel-sdm")]
         public void ProcessIntelSdm(params object[] args)
         {
@@ -94,14 +98,14 @@ namespace Z0
         [CmdOp("asm-gen-models")]
         public Outcome GenInstructionModels(params object[] args)
         {
-            Wf.AsmModelGen().GenerateModelsInPlace();
+            Wf.AsmModelGen().GenModelsInPlace();
             return true;
         }
 
         [CmdOp("asm-gen-models-preview")]
         public Outcome GenInstructionModelPreview(params object[] args)
         {
-            Wf.AsmModelGen().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
+            Wf.AsmModelGen().GenModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
             return true;
         }
 

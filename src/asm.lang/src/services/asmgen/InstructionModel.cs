@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static CsPatterns;
 
     partial class AsmModelGen
     {
@@ -52,7 +53,7 @@ namespace Z0.Asm
                 margin += Indent;
                 dst.IndentLine(margin, string.Format(FieldDeclPattern, "AsmHexCode", "Content"));
                 dst.AppendLine();
-                dst.IndentLine(margin, InlineAttributeSpec);
+                dst.IndentLine(margin, InlineAttrib());
                 dst.IndentLine(margin, string.Format("public {0}(AsmHexCode encoded)", TypeName));
                 dst.IndentLine(margin, Open);
                 margin += Indent;

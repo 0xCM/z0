@@ -19,10 +19,21 @@ namespace Z0
         [Op]
         public static string left(string src, int index)
         {
-            if(empty(src) || index < 0 || index > src.Length - 1)
+            var length = src?.Length ?? 0;
+            if(length == 0 || index < 0 || index > length - 1)
                 return EmptyString;
+            else
+                return slice(src, 0, index);
+        }
 
-            return slice(src, 0, index);
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> left(ReadOnlySpan<char> src, int index)
+        {
+            var length = src.Length;
+            if(length == 0 || index < 0 || index > length - 1)
+                return default;
+            else
+                return core.slice(src,0,index);
         }
     }
 }

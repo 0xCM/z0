@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
 
     using static core;
+    using static CsPatterns;
 
     partial class AsmModelGen
     {
@@ -25,7 +26,7 @@ namespace Z0.Asm
             buffer.IndentLine(margin, UsingRoot);
             buffer.AppendLine();
 
-            buffer.IndentLine(margin, string.Format(ReadOnlyStructDeclPattern, InstructionContainerName));
+            buffer.IndentLine(margin, PublicReadonlyStruct(InstructionContainerName));
             buffer.IndentLine(margin, Open);
             margin += Indent;
             var model = InstructionModel.Empty;

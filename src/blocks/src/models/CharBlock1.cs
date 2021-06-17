@@ -39,9 +39,14 @@ namespace Z0
             get => ref first(Data);
         }
 
-        public uint Count => CharCount;
+        public uint Capacity
+            => CharCount;
 
-        public int Length => CharCount;
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => api.length(this);
+        }
 
         [MethodImpl(Inline)]
         public string Format()

@@ -11,22 +11,20 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        [StructLayout(LayoutKind.Sequential, Pack =1)]
         public struct TocEntry
         {
-            public string Title;
+            public CharBlock128 Content;
 
-            public Location Target;
-
-            public Placeholder Placeholder;
+            public ChapterPage Page;
 
             [MethodImpl(Inline)]
-            public TocEntry(string title, Location dst, Placeholder ph)
+            public TocEntry(in CharBlock128 content, ChapterPage page)
             {
-                Title = title;
-                Target = dst;
-                Placeholder = ph;
+                Content = content;
+                Page = page;
             }
+
+            public static TocEntry Empty => default;
         }
     }
 }

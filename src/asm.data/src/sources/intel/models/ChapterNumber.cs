@@ -11,27 +11,29 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        public struct Chapter
+        public struct ChapterNumber
         {
-            public byte Number;
+            public byte Value;
 
             [MethodImpl(Inline)]
-            public Chapter(byte number)
+            public ChapterNumber(byte number)
             {
-                Number = number;
+                Value = number;
             }
 
             public string Format()
-                => Number.ToString();
+                => Value.ToString();
 
             public override string ToString()
                 => Format();
 
-            public static implicit operator Chapter(byte src)
-                => new Chapter(src);
+            public static implicit operator ChapterNumber(byte src)
+                => new ChapterNumber(src);
 
-            public static implicit operator Chapter(int src)
-                => new Chapter((byte)src);
+            public static implicit operator ChapterNumber(int src)
+                => new ChapterNumber((byte)src);
+
+            public static ChapterNumber Empty => default;
         }
     }
 }

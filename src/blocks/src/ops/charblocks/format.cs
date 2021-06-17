@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static core;
+    using static Root;
 
     readonly partial struct CharBlocks
     {

@@ -13,16 +13,14 @@ namespace Z0
     {
         Span<char> Data {get;}
 
-        string ITextual.Format()
-            => Data.ToString();
+        int Length {get;}
+
+        uint Capacity {get;}
+
+        // string ITextual.Format()
+        //     => Data.ToString();
 
         ref char First
             => ref first(Data);
-
-        int Length
-            => Data.Length;
-
-        uint Count
-            => (uint)Data.Length;
     }
 }

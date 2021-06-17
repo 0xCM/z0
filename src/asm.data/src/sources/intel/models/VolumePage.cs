@@ -19,12 +19,12 @@ namespace Z0.Asm
         {
             public const string RenderPattern = "Vol. {0} {1}";
 
-            public Volume Volume;
+            public VolumePart Volume;
 
             public ChapterPage Page;
 
             [MethodImpl(Inline)]
-            public VolumePage(Volume vol, ChapterPage page)
+            public VolumePage(VolumePart vol, ChapterPage page)
             {
                 Volume = vol;
                 Page = page;

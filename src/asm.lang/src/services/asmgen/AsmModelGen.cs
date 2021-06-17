@@ -16,12 +16,10 @@ namespace Z0.Asm
     {
         const string InstructionContractName = nameof(ITypedInstruction);
 
-        const string InlineAttributeSpec = "[MethodImpl(Inline)]";
-
         const string InlineOpAttributeSpec = "[MethodImpl(Inline), Op]";
 
         [Op]
-        public void GenerateModelsInPlace(ReadOnlySpan<string> src)
+        public void GenModelsInPlace(ReadOnlySpan<string> src)
         {
             var flow = Wf.Running();
             EmitInstructionContracts(GetTargetPath(T.InstructionContracts));
@@ -32,49 +30,15 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-        public uint GenRegNameProvider(uint margin, ITextBuffer dst)
-        {
-            const string ProviderName = "AsmRegNames";
-            dst.IndentLine(margin, PublicReadonlyStruct(ProviderName));
-            dst.IndentLine(margin, Open());
-            margin +=4;
-            var counter = 0u;
-            var types = typeof(AsmRegCodes).GetNestedTypes().Enums().ToReadOnlySpan();
-            for(var i=0; i<types.Length; i++)
-            {
-                ref readonly var type = ref skip(types,i);
-                //ClrEnumAdapter.
-                var fields = type.LiteralFields().ToReadOnlySpan();
-                for(var j=0; j<fields.Length; j++)
-                {
-                    ref readonly var field = ref skip(fields,i);
-                    var name = field.Name;
-                    var tag = field.Tag<SymbolAttribute>();
-                    var symbol = text.ifempty(tag.MapValueOrDefault(t => t.Symbol, name),name);
-                    var func = PublicOneLineFunc(String(), symbol, Empty(), RP.enquote(symbol));
-                    dst.IndentLine(margin, func);
-                    dst.AppendLine();
-                    counter++;
-                }
-            }
-            margin -=4;
-            dst.IndentLine(margin, Close());
-            return counter;
-        }
 
-        public void GenNameProvider(uint margin, ClrEnumAdapter src, ITextBuffer dst)
+        [Op]
+        public void GenModelsInPlace()
         {
-
+            GenModelsInPlace(LoadMnemonicNames());
         }
 
         [Op]
-        public void GenerateModelsInPlace()
-        {
-            GenerateModelsInPlace(LoadMnemonicNames());
-        }
-
-        [Op]
-        public void GenerateModels(ReadOnlySpan<string> src, FS.FolderPath dst)
+        public void GenModels(ReadOnlySpan<string> src, FS.FolderPath dst)
         {
             var flow = Wf.Running();
             EmitInstructionContracts(GetTargetPath(T.InstructionContracts, dst));
@@ -86,9 +50,9 @@ namespace Z0.Asm
         }
 
         [Op]
-        public void GenerateModels(FS.FolderPath dst)
+        public void GenModels(FS.FolderPath dst)
         {
-            GenerateModels(LoadMnemonicNames(), dst);
+            GenModels(LoadMnemonicNames(), dst);
         }
 
         const byte Indent = 4;
@@ -97,11 +61,7 @@ namespace Z0.Asm
 
         const string Close = "}";
 
-        const string ReadOnlyStructDeclPattern = "public readonly struct {0}";
-
         const string MonicSymbolPattern = "[Symbol(\"{0}\")]";
-
-        const string NamespaceUsingPattern = "using {0}";
 
         const string NamespaceDeclPattern = "namespace {0}";
 
@@ -115,10 +75,9 @@ namespace Z0.Asm
 
         const string UsingTypePattern = "using static {0};";
 
-
         const string QualifiedAccessPattern = "{0}.{1}";
 
-        const string AsmNamespaceDecl = "namespace Z0.Asm";
+        static string AsmNamespaceDecl() => NamespaceDecl(TargetNamespaceName);
 
         const string ItemAssignPattern = "{0} = {1},";
 

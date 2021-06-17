@@ -15,6 +15,7 @@ namespace Z0.Asm
                 AsmGenTarget.MonicExpression => "AsmMnemonics",
                 AsmGenTarget.InstructionContracts=> "ITypedInstruction",
                 AsmGenTarget.StatementBuilder => "AsmStatementBuilder",
+                AsmGenTarget.RegNameFactories => "AsmRegNames",
                 _ => EmptyString
             };
     }

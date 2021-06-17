@@ -52,6 +52,12 @@ namespace Z0
         public bool Equals(ClrEnumAdapter src)
             => Definition.Equals(src.Definition);
 
+        public ReadOnlySpan<ClrFieldAdapter> Members
+        {
+            [MethodImpl(Inline)]
+            get => Clr.adapt(Definition.LiteralFields());
+        }
+
         public override string ToString()
             => Format();
 

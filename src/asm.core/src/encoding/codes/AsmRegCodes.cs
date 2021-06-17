@@ -12,223 +12,223 @@ namespace Z0.Asm
         public enum Gp8 : byte
         {
             [Symbol("al")]
-            AL = r0,
+            al = r0,
 
             [Symbol("cl")]
-            CL = r1,
+            cl = r1,
 
             [Symbol("dl")]
-            DL = r2,
+            dl = r2,
 
             [Symbol("bl")]
-            BL = r3,
+            bl = r3,
 
             [Symbol("spl")]
-            SPL = r4,
+            spl = r4,
 
             [Symbol("bpl")]
-            BPL = r5,
+            bpl = r5,
 
             [Symbol("sil")]
-            SIL = r6,
+            sil = r6,
 
             [Symbol("dil")]
-            DIL = r7,
+            dil = r7,
 
             [Symbol("r8b")]
-            R8B = r8,
+            r8b = r8,
 
             [Symbol("r9b")]
-            R9B = r9,
+            r9b = r9,
 
             [Symbol("r10b")]
-            R10B = r10,
+            r10b = r10,
 
             [Symbol("r11b")]
-            R11B = r11,
+            r11b = r11,
 
             [Symbol("r12b")]
-            R12B = r12,
+            r12b = r12,
 
             [Symbol("r13b")]
-            R13B = r13,
+            r13b = r13,
 
             [Symbol("r14b")]
-            R14B = r14,
+            r14b = r14,
 
             [Symbol("r15b")]
-            R15B = r15,
+            r15b = r15,
         }
 
         [SymbolSource]
         public enum Gp8Hi : byte
         {
             [Symbol("ah")]
-            AH = r0  | r16,
+            ah = r0  | r16,
 
             [Symbol("ch")]
-            CH = r1  | r16,
+            ch = r1  | r16,
 
             [Symbol("dh")]
-            DH = r2  | r16,
+            dh = r2  | r16,
 
             [Symbol("bh")]
-            BH = r3  | r16,
+            bh = r3  | r16,
         }
 
         [SymbolSource]
         public enum Gp16 : byte
         {
             [Symbol("ax")]
-            AX = r0,
+            ax = r0,
 
             [Symbol("cx")]
-            CX = r1,
+            cx = r1,
 
             [Symbol("dx")]
-            DX = r2,
+            dx = r2,
 
             [Symbol("bx")]
-            BX = r3,
+            bx = r3,
 
             [Symbol("sp")]
-            SP = r4,
+            sp = r4,
 
             [Symbol("bp")]
-            BP = r5,
+            bp = r5,
 
             [Symbol("si")]
-            SI = r6,
+            si = r6,
 
             [Symbol("di")]
-            DI = r7,
+            di = r7,
 
             [Symbol("r8w")]
-            R8W = r8,
+            r8w = r8,
 
             [Symbol("r9w")]
-            R9W = r9,
+            r9w = r9,
 
             [Symbol("r10w")]
-            R10W = r10,
+            r10w = r10,
 
             [Symbol("r11w")]
-            R11W = r11,
+            r11w = r11,
 
             [Symbol("r12w")]
-            R12W = r12,
+            r12w = r12,
 
             [Symbol("r13w")]
-            R13W = r13,
+            r13w = r13,
 
             [Symbol("r14w")]
-            R14W = r14,
+            r14w = r14,
 
             [Symbol("r15w")]
-            R15W = r15,
+            r15w = r15,
         }
 
         [SymbolSource]
         public enum Gp32 : byte
         {
             [Symbol("eax")]
-            EAX = r0,
+            eax = r0,
 
             [Symbol("ecx")]
-            ECX = r1,
+            ecx = r1,
 
             [Symbol("edx")]
-            EDX = r2,
+            edx = r2,
 
             [Symbol("ebx")]
-            EBX = r3,
+            ebx = r3,
 
             [Symbol("esp")]
-            ESP = r4,
+            esp = r4,
 
             [Symbol("ebp")]
-            EBP = r5,
+            ebp = r5,
 
             [Symbol("esi")]
-            ESI = r6,
+            esi = r6,
 
             [Symbol("edi")]
-            EDI = r7,
+            edi = r7,
 
             [Symbol("r8d")]
-            R8D = r8,
+            r8d = r8,
 
             [Symbol("r9d")]
-            R9D = r9,
+            r9d = r9,
 
             [Symbol("r10d")]
-            R10D = r10,
+            r10d = r10,
 
             [Symbol("r11d")]
-            R11D = r11,
+            r11d = r11,
 
             [Symbol("r12d")]
-            R12D = r12,
+            r12d = r12,
 
             [Symbol("r13d")]
-            R13D = r13,
+            r13d = r13,
 
             [Symbol("r14d")]
-            R14D = r14,
+            r14d = r14,
 
             [Symbol("r15d")]
-            R15D = r15,
+            r15d = r15,
         }
 
         public enum Gp64 : byte
         {
             [Symbol("rax")]
-            RAX = r0,
+            rax = r0,
 
             [Symbol("rcx")]
-            RCX = r1,
+            rcx = r1,
 
             [Symbol("rdx")]
-            RDX = r2,
+            rdx = r2,
 
             [Symbol("rbx")]
-            RBX = r3,
+            rbx = r3,
 
             [Symbol("rsp")]
-            RSP = r4,
+            rsp = r4,
 
             [Symbol("rbp")]
-            RBP = r5,
+            rbp = r5,
 
             [Symbol("rsi")]
-            RSI = r6,
+            rsi = r6,
 
             [Symbol("rdi")]
-            RDI = r7,
+            rdi = r7,
 
             [Symbol("r8")]
-            R8Q = r8,
+            r8q = r8,
 
             [Symbol("r9")]
-            R9Q = r9,
+            r9q = r9,
 
             [Symbol("r10")]
-            R10Q = r10,
+            r10q = r10,
 
             [Symbol("r11")]
-            R11Q = r11,
+            r11q = r11,
 
             [Symbol("r12")]
-            R12Q = r12,
+            r12q = r12,
 
             [Symbol("r13")]
-            R13Q = r13,
+            r13q = r13,
 
             [Symbol("r14")]
-            R14Q = r14,
+            r14q = r14,
 
             [Symbol("r15")]
-            R15Q = r15,
+            r15q = r15,
         }
 
         /// <summary>
@@ -238,100 +238,100 @@ namespace Z0.Asm
         public enum XmmReg : byte
         {
             [Symbol("xmm0")]
-            XMM0 = r0,
+            xmm0 = r0,
 
             [Symbol("xmm1")]
             XMM1 = r1,
 
             [Symbol("xmm2")]
-            XMM2 = r2,
+            xmm2 = r2,
 
             [Symbol("xmm3")]
-            XMM3 = r3,
+            xmm3 = r3,
 
             [Symbol("xmm4")]
-            XMM4 = r4,
+            xmm4 = r4,
 
             [Symbol("xmm5")]
-            XMM5 = r5,
+            xmm5 = r5,
 
             [Symbol("xmm6")]
-            XMM6 = r6,
+            xmm6 = r6,
 
             [Symbol("xmm7")]
-            XMM7 = r7,
+            xmm7 = r7,
 
             [Symbol("xmm8")]
-            XMM8 = r8,
+            xmm8 = r8,
 
             [Symbol("xmm9")]
-            XMM9 = r9,
+            xmm9 = r9,
 
             [Symbol("xmm10")]
-            XMM10 = r10,
+            xmm10 = r10,
 
             [Symbol("xmm11")]
-            XMM11 = r11,
+            xmm11 = r11,
 
             [Symbol("xmm12")]
-            XMM12 = r12,
+            xmm12 = r12,
 
             [Symbol("xmm13")]
-            XMM13 = r13,
+            xmm13 = r13,
 
             [Symbol("xmm14")]
-            XMM14 = r14,
+            xmm14 = r14,
 
             [Symbol("xmm15")]
-            XMM15 = r15,
+            xmm15 = r15,
 
             [Symbol("xmm16")]
-            XMM16 = r16,
+            xmm16 = r16,
 
             [Symbol("xmm17")]
-            XMM17 = r17,
+            xmm17 = r17,
 
             [Symbol("xmm18")]
-            XMM18 = r18,
+            xmm18 = r18,
 
             [Symbol("xmm19")]
-            XMM19 = r19,
+            xmm19 = r19,
 
             [Symbol("xmm20")]
-            XMM20 = r20,
+            xmm20 = r20,
 
             [Symbol("xmm21")]
-            XMM21 = r21,
+            xmm21 = r21,
 
             [Symbol("xmm22")]
-            XMM22 = r22,
+            xmm22 = r22,
 
             [Symbol("xmm23")]
-            XMM23 = r23,
+            xmm23 = r23,
 
             [Symbol("xmm24")]
-            XMM24 = r24,
+            xmm24 = r24,
 
             [Symbol("xmm25")]
-            XMM25 = r25,
+            xmm25 = r25,
 
             [Symbol("xmm26")]
-            XMM26 = r26,
+            xmm26 = r26,
 
             [Symbol("xmm27")]
-            XMM27 = r27,
+            xmm27 = r27,
 
             [Symbol("xmm28")]
-            XMM28 = r28,
+            xmm28 = r28,
 
             [Symbol("xmm29")]
-            XMM29 = r29,
+            xmm29 = r29,
 
             [Symbol("xmm30")]
-            XMM30 = r30,
+            xmm30 = r30,
 
             [Symbol("xmm31")]
-            XMM31 = r31,
+            xmm31 = r31,
         }
 
         /// <summary>
@@ -341,100 +341,100 @@ namespace Z0.Asm
         public enum YmmReg : byte
         {
             [Symbol("ymm0")]
-            YMM0 = r0,
+            ymm0 = r0,
 
             [Symbol("ymm1")]
-            YMM1 = r1,
+            ymm1 = r1,
 
             [Symbol("ymm2")]
-            YMM2 = r2,
+            ymm2 = r2,
 
             [Symbol("ymm3")]
-            YMM3 = r3,
+            ymm3 = r3,
 
             [Symbol("ymm4")]
-            YMM4 = r4,
+            ymm4 = r4,
 
             [Symbol("ymm5")]
-            YMM5 = r5,
+            ymm5 = r5,
 
             [Symbol("ymm6")]
-            YMM6 = r6,
+            ymm6 = r6,
 
             [Symbol("ymm7")]
-            YMM7 = r7,
+            ymm7 = r7,
 
             [Symbol("ymm8")]
-            YMM8 = r8,
+            ymm8 = r8,
 
             [Symbol("ymm9")]
-            YMM9 = r9,
+            ymm9 = r9,
 
             [Symbol("ymm10")]
-            YMM10 = r10,
+            ymm10 = r10,
 
             [Symbol("ymm11")]
-            YMM11 = r11,
+            ymm11 = r11,
 
             [Symbol("ymm12")]
-            YMM12 = r12,
+            ymm12 = r12,
 
             [Symbol("ymm13")]
-            YMM13 = r13,
+            ymm13 = r13,
 
             [Symbol("ymm14")]
-            YMM14 = r14,
+            ymm14 = r14,
 
             [Symbol("ymm15")]
-            YMM15 = r15,
+            ymm15 = r15,
 
             [Symbol("ymm16")]
-            YMM16 = r16,
+            ymm16 = r16,
 
             [Symbol("ymm17")]
-            YMM17 = r17,
+            ymm17 = r17,
 
             [Symbol("ymm18")]
-            YMM18 = r18,
+            ymm18 = r18,
 
             [Symbol("ymm19")]
-            YMM19 = r19,
+            ymm19 = r19,
 
             [Symbol("ymm20")]
-            YMM20 = r20,
+            ymm20 = r20,
 
             [Symbol("ymm21")]
-            YMM21 = r21,
+            ymm21 = r21,
 
             [Symbol("ymm22")]
-            YMM22 = r22,
+            ymm22 = r22,
 
             [Symbol("ymm23")]
-            YMM23 = r23,
+            ymm23 = r23,
 
             [Symbol("ymm24")]
-            YMM24 = r24,
+            ymm24 = r24,
 
             [Symbol("ymm25")]
-            YMM25 = r25,
+            ymm25 = r25,
 
             [Symbol("ymm26")]
-            YMM26 = r26,
+            ymm26 = r26,
 
             [Symbol("ymm27")]
-            YMM27 = r27,
+            ymm27 = r27,
 
             [Symbol("ymm28")]
-            YMM28 = r28,
+            ymm28 = r28,
 
             [Symbol("ymm29")]
-            YMM29 = r29,
+            ymm29 = r29,
 
             [Symbol("ymm30")]
-            YMM30 = r30,
+            ymm30 = r30,
 
             [Symbol("ymm31")]
-            YMM31 = r31,
+            ymm31 = r31,
         }
 
          /// <summary>
@@ -444,115 +444,115 @@ namespace Z0.Asm
         public enum ZmmReg : byte
         {
             [Symbol("zmm0")]
-            ZMM0 = r0,
+            zmm0 = r0,
 
             [Symbol("zmm1")]
-            ZMM1 = r1,
+            zmm1 = r1,
 
             [Symbol("zmm2")]
-            ZMM2 = r2,
+            zmm2 = r2,
 
             [Symbol("zmm3")]
-            ZMM3 = r3,
+            zmm3 = r3,
 
             [Symbol("zmm4")]
-            ZMM4 = r4,
+            zmm4 = r4,
 
             [Symbol("zmm5")]
-            ZMM5 = r5,
+            zmm5 = r5,
 
             [Symbol("zmm6")]
-            ZMM6 = r6,
+            zmm6 = r6,
 
             [Symbol("zmm7")]
-            ZMM7 = r7,
+            zmm7 = r7,
 
             [Symbol("zmm8")]
-            ZMM8 = r8,
+            zmm8 = r8,
 
             [Symbol("zmm9")]
-            ZMM9 = r9,
+            zmm9 = r9,
 
             [Symbol("zmm10")]
-            ZMM10 = r10,
+            zmm10 = r10,
 
             [Symbol("zmm11")]
-            ZMM11 = r11,
+            zmm11 = r11,
 
             [Symbol("zmm12")]
-            ZMM12 = r12,
+            zmm12 = r12,
 
             [Symbol("zmm13")]
-            ZMM13 = r13,
+            zmm13 = r13,
 
             [Symbol("zmm14")]
-            ZMM14 = r14,
+            zmm14 = r14,
 
             [Symbol("zmm15")]
-            ZMM15 = r15,
+            zmm15 = r15,
 
             [Symbol("zmm16")]
-            ZMM16 = r16,
+            zmm16 = r16,
 
             [Symbol("zmm17")]
-            ZMM17 = r17,
+            zmm17 = r17,
 
             [Symbol("zmm18")]
-            ZMM18 = r18,
+            zmm18 = r18,
 
             [Symbol("zmm19")]
-            ZMM19 = r19,
+            zmm19 = r19,
 
             [Symbol("zmm20")]
-            ZMM20 = r20,
+            zmm20 = r20,
 
             [Symbol("zmm21")]
-            ZMM21 = r21,
+            zmm21 = r21,
 
             [Symbol("zmm22")]
-            ZMM22 = r22,
+            zmm22 = r22,
 
             [Symbol("zmm23")]
-            ZMM23 = r23,
+            zmm23 = r23,
 
             [Symbol("zmm24")]
-            ZMM24 = r24,
+            zmm24 = r24,
 
             [Symbol("zmm25")]
-            ZMM25 = r25,
+            zmm25 = r25,
 
             [Symbol("zmm26")]
-            ZMM26 = r26,
+            zmm26 = r26,
 
             [Symbol("zmm27")]
-            ZMM27 = r27,
+            zmm27 = r27,
 
             [Symbol("zmm28")]
-            ZMM28 = r28,
+            zmm28 = r28,
 
             [Symbol("zmm29")]
-            ZMM29 = r29,
+            zmm29 = r29,
 
             [Symbol("zmm30")]
-            ZMM30 = r30,
+            zmm30 = r30,
 
             [Symbol("zmm31")]
-            ZMM31 = r31,
+            zmm31 = r31,
         }
 
         public enum BndReg : byte
         {
             [Symbol("bnd0")]
-            BND0 = r0,
+            bnd0 = r0,
 
             [Symbol("bnd1")]
-            BND1 = r1,
+            bnd1 = r1,
 
             [Symbol("bnd2")]
-            BND2 = r2,
+            bnd2 = r2,
 
             [Symbol("bnd3")]
-            BND3 = r3,
+            bnd3 = r3,
         }
 
         /// <summary>
@@ -562,28 +562,28 @@ namespace Z0.Asm
         public enum ControlReg : byte
         {
             [Symbol("CR0")]
-            CR0 = r0,
+            cr0 = r0,
 
             [Symbol("CR1")]
-            CR1 = r1,
+            cr1 = r1,
 
             [Symbol("CR2")]
-            CR2 = r2,
+            cr2 = r2,
 
             [Symbol("CR3")]
-            CR3 = r3,
+            cr3 = r3,
 
             [Symbol("CR4")]
-            CR4 = r4,
+            cr4 = r4,
 
             [Symbol("CR5")]
-            CR5 = r5,
+            cr5 = r5,
 
             [Symbol("CR6")]
-            CR6 = r6,
+            cr6 = r6,
 
             [Symbol("CR7")]
-            CR7 = r7,
+            cr7 = r7,
         }
 
         /// <summary>
@@ -593,28 +593,28 @@ namespace Z0.Asm
         public enum DebugReg : uint
         {
             [Symbol("DR0")]
-            DR0 = r0,
+            dr0 = r0,
 
             [Symbol("DR1")]
-            DR1 = r1,
+            dr1 = r1,
 
             [Symbol("DR2")]
-            DR2 = r2,
+            dr2 = r2,
 
             [Symbol("DR3")]
-            DR3 = r3,
+            dr3 = r3,
 
             [Symbol("DR4")]
-            DR4 = r4,
+            dr4 = r4,
 
             [Symbol("DR5")]
-            DR5 = r5,
+            dr5 = r5,
 
             [Symbol("DR6")]
-            DR6 = r6,
+            dr6 = r6,
 
             [Symbol("DR7")]
-            DR7 = r7,
+            dr7 = r7,
         }
 
         /// <summary>
@@ -624,84 +624,84 @@ namespace Z0.Asm
         public enum KReg : byte
         {
             [Symbol("k0")]
-            K0 = r0,
+            k0 = r0,
 
             [Symbol("k1")]
-            K1 = r1,
+            k1 = r1,
 
             [Symbol("k2")]
-            K2 = r2,
+            k2 = r2,
 
             [Symbol("k3")]
-            K3 = r3,
+            k3 = r3,
 
             [Symbol("k4")]
-            K4 = r4,
+            k4 = r4,
 
             [Symbol("k5")]
-            K5 = r5,
+            k5 = r5,
 
             [Symbol("k6")]
-            K6 = r6,
+            k6 = r6,
 
             [Symbol("k7")]
-            K7 = r7
+            k7 = r7
         }
 
         [SymbolSource]
         public enum TestReg : byte
         {
             [Symbol("TR0")]
-            TR0 = r0,
+            tr0 = r0,
 
             [Symbol("TR1")]
-            TR1 = r1,
+            tr1 = r1,
 
             [Symbol("TR2")]
-            TR2 = r2,
+            tr2 = r2,
 
             [Symbol("TR3")]
-            TR3 = r3,
+            tr3 = r3,
 
             [Symbol("TR4")]
-            TR4 = r4,
+            tr4 = r4,
 
             [Symbol("TR5")]
-            TR5 = r5,
+            tr5 = r5,
 
             [Symbol("TR6")]
-            TR6 = r6,
+            tr6 = r6,
 
             [Symbol("TR7")]
-            TR7 = r7
+            tr7 = r7
         }
 
         [SymbolSource]
         public enum FpuReg : byte
         {
             [Symbol("ST(0)")]
-            ST0 = r0,
+            st0 = r0,
 
             [Symbol("ST(1)")]
-            ST1 = r1,
+            st1 = r1,
 
             [Symbol("ST(2)")]
-            ST2 = r2,
+            st2 = r2,
 
             [Symbol("ST(3)")]
-            ST3 = r3,
+            st3 = r3,
 
             [Symbol("ST(4)")]
-            ST4 = r4,
+            st4 = r4,
 
             [Symbol("ST(5)")]
-            ST5 = r5,
+            st5 = r5,
 
             [Symbol("ST(6)")]
-            ST6 = r6,
+            st6 = r6,
 
             [Symbol("ST(7)")]
-            ST7 = r7,
+            st7 = r7,
         }
 
         [SymbolSource]
@@ -711,50 +711,50 @@ namespace Z0.Asm
             /// Code segment register
             /// </summary>
             [Symbol("cs", "Code segment register")]
-            CS = r0,
+            cs = r0,
 
             /// <summary>
             /// Data segment register
             /// </summary>
             [Symbol("ds", "Data segment register")]
-            DS = r1,
+            ds = r1,
 
             /// <summary>
             /// Stack segment register
             /// </summary>
             [Symbol("ss", "Stack segment register")]
-            SS = r2,
+            ss = r2,
 
             /// <summary>
             /// Extra segment (1)
             /// </summary>
             [Symbol("es", "Extra segment (1)")]
-            ES = r3,
+            es = r3,
 
             /// <summary>
             /// Extra segment (2)
             /// </summary>
             [Symbol("fs","Extra segment (2)")]
-            FS = r4,
+            fs = r4,
 
             /// <summary>
             /// Extra segment (3)
             /// </summary>
             [Symbol("gs","Extra segment (3)")]
-            GS = r5,
+            gs = r5,
         }
 
         [SymbolSource]
         public enum TableReg : byte
         {
             [Symbol("GDTR","The global descriptor table register")]
-            GDTR = r0,
+            gdtr = r0,
 
             [Symbol("LDTR","The localal descriptor table register")]
-            LDTR = r1,
+            ldtr = r1,
 
             [Symbol("IDTR","The interrupt descriptor table register")]
-            IDTR = r2,
+            idtr = r2,
         }
 
         /// <summary>
@@ -764,28 +764,28 @@ namespace Z0.Asm
         public enum MmxReg : byte
         {
             [Symbol("mmx0")]
-            MM0 = r0,
+            mm0 = r0,
 
             [Symbol("mmx1")]
-            MM1 = r1,
+            mm1 = r1,
 
             [Symbol("mmx2")]
-            MM2 = r2,
+            mm2 = r2,
 
             [Symbol("mmx3")]
-            MM3 = r3,
+            mm3 = r3,
 
             [Symbol("mmx4")]
-            MM4 = r4,
+            mm4 = r4,
 
             [Symbol("mmx5")]
-            MM5 = r5,
+            mm5 = r5,
 
             [Symbol("mmx6")]
-            MM6 = r6,
+            mm6 = r6,
 
             [Symbol("mmx7")]
-            MM7 = r7,
+            mm7 = r7,
         }
     }
 }

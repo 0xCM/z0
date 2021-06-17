@@ -16,7 +16,7 @@ namespace Z0.Asm
         {
             var buffer = text.buffer();
             var margin = 0u;
-            buffer.AppendLine(AsmNamespaceDecl);
+            buffer.AppendLine(AsmNamespaceDecl());
             buffer.AppendLine(Open);
             margin += Indent;
             buffer.IndentLine(margin, UsingCompilerServices);

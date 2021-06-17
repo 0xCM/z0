@@ -7,14 +7,13 @@ namespace Z0.Asm
     using System;
 
     using static core;
+    using static CsPatterns;
 
     partial class AsmModelGen
     {
         const string MonicPropertyPattern = "public static AsmMnemonic {0} => nameof({0});";
 
         const string MonicContainerName = "AsmMnemonics";
-
-        const string ApiCompleteAttribute = "[ApiComplete]";
 
         void EmitMonicExpressions(ReadOnlySpan<string> monics, FS.FilePath dst)
         {
@@ -29,11 +28,11 @@ namespace Z0.Asm
 
         public static void EmitMonicExpressions(ReadOnlySpan<string> monics, uint margin, ITextBuffer buffer)
         {
-            buffer.AppendLine(AsmNamespaceDecl);
+            buffer.AppendLine(AsmNamespaceDecl());
             buffer.AppendLine(Open);
             margin += 4;
-            buffer.IndentLine(margin, ApiCompleteAttribute);
-            buffer.IndentLine(margin, string.Format(ReadOnlyStructDeclPattern, MonicContainerName));
+            buffer.IndentLine(margin, ApiCompleteAttrib());
+            buffer.IndentLine(margin, PublicReadonlyStruct(MonicContainerName));
             buffer.IndentLine(margin, Open);
             margin += 4;
 

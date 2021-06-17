@@ -836,8 +836,8 @@ namespace Z0.Asm
             var dir = Db.AppLogDir();
             var parser = Wf.DbDiasmProcessor();
             parser.ParseDisassembly(src,dir);
-
         }
+
         public void ParseDisassembly()
         {
             var src = FS.path(@"C:\Data\zdb\tools\dumpbin\output\xxhsum.exe.disasm.asm");
@@ -912,14 +912,6 @@ namespace Z0.Asm
             toolchain.Run(spec);
         }
 
-        public static AsmExpr expression<R,I>(AsmMnemonic monic, R r, I imm)
-            where R : IRegOp
-            where I : IImmOp
-        {
-
-            return string.Format("{0} {1},{2}", monic.Format(MnemonicCase.Lowercase), r.Format(), imm);
-        }
-
         void CheckAsciSpans()
         {
             const string Input = "66F2F30F0F38VEXREXREX.WLZLIGWIGW0W1";
@@ -976,24 +968,15 @@ namespace Z0.Asm
 
         }
 
-        void GenAsmModels()
-        {
-            var svc = Wf.AsmModelGen();
-            var dst = text.buffer();
-            svc.GenRegNameProvider(4, dst);
-            Wf.Row(dst.Emit());
-
-        }
 
         public void Run()
         {
 
+            Wf.GlobalCommands().ProcessIntelSdm();
             //ShowOps();
-
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
-            //GenAsciSpan(IntelDocs.)
             //Wf.GlobalCommands().CaptureV2();
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();

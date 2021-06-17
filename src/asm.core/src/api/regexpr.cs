@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmOpTypes;
-    using static math;
-    using static core;
 
     partial struct asm
     {

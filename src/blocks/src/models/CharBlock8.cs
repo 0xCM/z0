@@ -38,9 +38,15 @@ namespace Z0
             get => ref first(Data);
         }
 
-        public uint Count => CharCount;
+        public uint Capacity
+            => CharCount;
 
-        public int Length => CharCount;
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => api.length(this);
+        }
+
         public string Format()
             => api.format(this);
 
@@ -50,6 +56,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CharBlock8(string src)
             => api.init(src, out CharBlock8 dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator CharBlock8(ReadOnlySpan<char> src)
+        {
+            var dst = Empty;
+            var count = min(src.Length, CharCount);
+            var data = dst.Data;
+            for(var i=0; i<count; i++)
+                seek(data,i) = skip(src,i);
+            return dst;
+        }
 
         public static CharBlock8 Empty => RP.Spaced8;
 

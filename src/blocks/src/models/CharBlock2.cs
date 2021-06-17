@@ -42,9 +42,14 @@ namespace Z0
             get => ref first(Data);
         }
 
-        public uint Count => CharCount;
+        public uint Capacity
+            => CharCount;
 
-        public int Length => CharCount;
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => api.length(this);
+        }
 
         public string Format()
             => api.format(this);

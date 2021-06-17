@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class text
     {
@@ -22,6 +22,10 @@ namespace Z0
                     return i;
             return NotFound;
         }
+
+        [Op]
+        public static int index(ReadOnlySpan<char> src, ReadOnlySpan<char> match)
+            => src.IndexOf(match);
 
         [Op]
         public static int index(string src, char match)

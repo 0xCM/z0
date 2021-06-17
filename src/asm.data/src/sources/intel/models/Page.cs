@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        [StructLayout(LayoutKind.Sequential, Pack =1)]
+        [StructLayout(LayoutKind.Sequential)]
         public struct Page
         {
             public ushort Number;
@@ -35,6 +35,8 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator Page(int src)
                 => new Page((ushort)src);
+
+            public static Page Empty => default;
         }
     }
 }
