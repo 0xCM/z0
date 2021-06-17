@@ -784,23 +784,6 @@ namespace Z0.Asm
             }
         }
 
-        void ShowPartComponents()
-        {
-            var src = Clr.adapt(Wf.ApiCatalog.Components);
-            for(var i=0; i<src.Length; i++)
-            {
-                ref readonly var item = ref skip(src,i);
-                var info = new {
-                    Name = item.SimpleName,
-                    Location = ClrAssemblies.location(item),
-                    PdbPath = ClrAssemblies.pdbpath(item, out var _),
-                    XmlDocPath = ClrAssemblies.xmlpath(item, out var _),
-                    MetadataSize = ((ByteSize)item.RawMetadata.Length).Kb
-                };
-                Wf.Row(info.ToString());
-            }
-        }
-
         void ListDescriptors()
         {
             var descriptors = ApiCode.descriptors(Wf);

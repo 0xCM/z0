@@ -3,9 +3,6 @@ namespace Windows
     using System;
     using System.Runtime.InteropServices;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-
     [StructLayout(LayoutKind.Sequential, Size=2, Pack=0)]
     public struct WORD
     {
@@ -293,7 +290,6 @@ namespace Windows
         public DWORD64 LastExceptionFromRip;
     }
 
-
     public enum ContextFlags : uint
     {
         CONTEXT_AMD64 = 0x00100000,
@@ -313,6 +309,5 @@ namespace Windows
         CONTEXT_ALL = CONTEXT_CONTROL | CONTEXT_INTEGER |CONTEXT_SEGMENTS | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS,
 
         CONTEXT_XSTATE = CONTEXT_AMD64 | 0x00000040,
-
     }
 }
