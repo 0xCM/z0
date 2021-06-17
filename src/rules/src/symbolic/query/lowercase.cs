@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bool lowercase(char src)
-            => lowercase((C)src);
+            => contains((char)F.MinLowerCode, (char)F.MaxLowerCode, src);
     }
 }

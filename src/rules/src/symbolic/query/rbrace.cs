@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bool rbrace(char src)
-            => rbrace((C)src);
+            => src == (char)C.RBrace;
     }
 }

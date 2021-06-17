@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bool uppercase(char src)
-            => uppercase((C)src);
+            => contains((char)F.MinUpperCode, (char)F.MaxUpperCode, src);
     }
 }

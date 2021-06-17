@@ -78,6 +78,7 @@
     <Hex>$(Src)hex/z0.hex.csproj</Hex>
 
     <Interop>$(Src)interop/z0.interop.csproj</Interop>
+    <Intel>$(Src)intel/z0.intel.csproj</Intel>
 
     <Lang>$(Src)lang/z0.lang.csproj</Lang>
     <Logix>$(Src)logix/z0.logix.csproj</Logix>

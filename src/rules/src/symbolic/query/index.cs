@@ -27,10 +27,8 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-            {
                 if(skip(src,i) == match)
                     return i;
-            }
             return NotFound;
         }
     }

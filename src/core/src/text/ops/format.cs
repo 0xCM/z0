@@ -19,5 +19,9 @@ namespace Z0
         [Op]
         public static string format(ReadOnlySpan<char> src, uint length)
             => new string(core.slice(src,0, length));
+
+        [Op]
+        public static string format(ReadOnlySpan<char> src)
+            => new string(src);
     }
 }

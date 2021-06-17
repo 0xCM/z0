@@ -8,6 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
+    using static core;
     public class GlobalCommands : WorkflowRunner<GlobalCommands>
     {
         Dictionary<string,MethodInfo> CommandLookup;
@@ -19,7 +20,7 @@ namespace Z0
         public GlobalCommands()
         {
             Methods = GetType().PublicInstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
-            DefaultParameters = core.array<object>();
+            DefaultParameters = array<object>();
             CommandLookup = new();
         }
 
@@ -33,16 +34,48 @@ namespace Z0
             }
         }
 
+        [CmdOp("emit-metadata-sets")]
+        public Outcome EmitMetadataSets(params object[] args)
+        {
+            var options = WorkflowOptions.@default();
+            Wf.CliPipe().EmitMetadaSets(options);
+            return true;
+        }
+
+        [CmdOp("emit-api-comments")]
+        public Outcome EmitApiComments(params object[] args)
+        {
+            Wf.ApiComments().Collect();
+            return true;
+        }
+
         [CmdOp("emit-api-classes")]
-        public void EmitApiClasses(params object[] args)
-            => Wf.ApiCatalogs().EmitApiClasses();
+        public Outcome EmitApiClasses(params object[] args)
+        {
+            Wf.ApiCatalogs().EmitApiClasses();
+            return true;
+        }
 
         [CmdOp("process-intel-sdm")]
-        public void ProcessIntelSdm(params object[] args)
+        public Outcome ProcessIntelSdm(params object[] args)
         {
-            var processor = Wf.IntelSdmProcessor();
-            processor.Run();
+            Wf.IntelSdmProcessor().Run();
+            return true;
+        }
 
+        [CmdOp("emit-call-table")]
+        public Outcome EmitCallTable(params object[] args)
+        {
+            Wf.AsmCallPipe().EmitRows(Wf.AsmDecoder().Decode(Blocks()));
+            return true;
+        }
+
+        [CmdOp("emit-hex-pack")]
+        public Outcome EmitHexPack(params object[] args)
+        {
+            var sorted = SortedBlocks();
+            Wf.ApiHexPacks().Emit(sorted);
+            return true;
         }
 
         [CmdOp("emit-cli-metadata")]
@@ -75,9 +108,8 @@ namespace Z0
         [CmdOp("update-tool-help")]
         public Outcome UpdateToolHelpIndex(params object[] args)
         {
-            var catalog = ToolCatalog.create(Wf);
-            var index = catalog.UpdateHelpIndex();
-            core.iter(index, entry => Wf.Row(entry.HelpPath));
+            var index = Wf.ToolCatalog().UpdateHelpIndex();
+            iter(index, entry => Wf.Row(entry.HelpPath));
             return true;
         }
 
@@ -91,7 +123,7 @@ namespace Z0
         [CmdOp("emit-respack")]
         public Outcome EmitResPack(params object[] args)
         {
-            Wf.ResPackEmitter().Emit();
+            Wf.ResPackEmitter().Emit(Blocks());
             return true;
         }
 
@@ -112,8 +144,7 @@ namespace Z0
         [CmdOp("capture-v2")]
         public Outcome CaptureV2(params object[] args)
         {
-           var svc = Wf.ApiExtractWorkflow();
-           svc.Run();
+           Wf.ApiExtractWorkflow().Run();
            return true;
         }
 
@@ -150,5 +181,11 @@ namespace Z0
                 return e;
             }
         }
+
+        ReadOnlySpan<ApiCodeBlock> Blocks()
+            => Wf.ApiHex().ReadBlocks().Storage;
+
+        SortedSpan<ApiCodeBlock> SortedBlocks()
+            => Wf.ApiHex().ReadBlocks().Storage.ToSortedSpan();
     }
 }

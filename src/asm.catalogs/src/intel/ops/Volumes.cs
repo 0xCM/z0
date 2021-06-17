@@ -17,5 +17,7 @@ namespace Z0.Asm
                 dst.Add(VolumeMarker(i));
             return dst;
         }
+
+        //static Outcome parse(Strings markers,)
     }
 }

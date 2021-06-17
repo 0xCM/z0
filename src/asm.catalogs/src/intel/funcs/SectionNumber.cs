@@ -25,34 +25,45 @@ namespace Z0.Asm
             switch(count)
             {
                 case 1:
-                    ushort.TryParse(skip(digits, 0), out dst.A);
+                    if(ushort.TryParse(skip(digits, 0), out dst.A))
+                        return true;
                     break;
 
                 case 2:
-                    ushort.TryParse(skip(digits, 0), out dst.A);
-                    ushort.TryParse(skip(digits, 1), out dst.B);
+                    if(
+                        ushort.TryParse(skip(digits, 0), out dst.A) &&
+                        ushort.TryParse(skip(digits, 1), out dst.B)
+                        )
+                    return true;
                 break;
 
                 case 3:
-                    ushort.TryParse(skip(digits, 0), out dst.A);
-                    ushort.TryParse(skip(digits, 1), out dst.B);
-                    ushort.TryParse(skip(digits, 2), out dst.C);
+                    if(
+                        ushort.TryParse(skip(digits, 0), out dst.A) &&
+                        ushort.TryParse(skip(digits, 1), out dst.B) &&
+                        ushort.TryParse(skip(digits, 2), out dst.C)
+                        )
+                    return true;
                 break;
 
                 case 4:
-                    ushort.TryParse(skip(digits, 0), out dst.A);
-                    ushort.TryParse(skip(digits, 1), out dst.B);
-                    ushort.TryParse(skip(digits, 2), out dst.C);
-                    ushort.TryParse(skip(digits, 3), out dst.D);
+                    if(
+                        ushort.TryParse(skip(digits, 0), out dst.A) &&
+                        ushort.TryParse(skip(digits, 1), out dst.B) &&
+                        ushort.TryParse(skip(digits, 2), out dst.C)&&
+                        ushort.TryParse(skip(digits, 3), out dst.D)
+                        )
+                    return true;
                 break;
 
                 default:
                     return false;
 
             }
-            return true;
+            return false;
         }
 
+        [Op]
         static bool IsSectionNumber(ReadOnlySpan<char> src)
         {
             var count = src.Length;
@@ -62,7 +73,6 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var c = ref skip(src,i);
-
                 if(SymbolicQuery.digit(base10,c))
                     continue;
 

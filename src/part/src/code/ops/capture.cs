@@ -17,7 +17,7 @@ namespace Z0
             dst.Parsed = parsed;
             dst.Method = method;
             Require.invariant(raw.BaseAddress == parsed.BaseAddress, () => Msg.CaptureAddressMismatch);
-            dst.OpUri = ApiUri.hex(method.DeclaringType.HostUri(), method.Name, id);
+            dst.OpUri = ApiUri.hex(method.DeclaringType.ApiHostUri(), method.Name, id);
             dst.TermCode = term;
             dst.Msil = ClrDynamic.msil(parsed.BaseAddress, dst.OpUri, method);
             dst.CliSig = Clr.sig(method);

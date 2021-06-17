@@ -20,7 +20,7 @@ namespace Z0
                   .Select(p => p.GetGetMethod(true))
                   .Where(m  => m != null)
                   .Concrete()
-                  .Select(x => new ApiResAccessor(src.HostUri(), x, ApiAccessorKind(x.ReturnType)));
+                  .Select(x => new ApiResAccessor(src.ApiHostUri(), x, ApiAccessorKind(x.ReturnType)));
 
         /// <summary>
         /// Queries the source type for ByteSpan property getters
@@ -34,6 +34,6 @@ namespace Z0
                   .Select(p => p.GetGetMethod(true))
                   .Where(m  => m != null)
                   .Concrete()
-                  .Select(x => new ApiResAccessor(src.HostUri(), x, ApiAccessorKind(x.ReturnType)));
+                  .Select(x => new ApiResAccessor(src.ApiHostUri(), x, ApiAccessorKind(x.ReturnType)));
     }
 }

@@ -32,7 +32,7 @@ namespace Z0.Asm
         public static void render(LineNumber line, in TableNumber src, ITextBuffer dst)
         {
             dst.AppendFormat(string.Format("{0}:", line));
-            dst.Append(src.Format());
+            dst.AppendFormat("{0}{1}", Markers.TableNumber, text.format(src.String));
         }
     }
 }

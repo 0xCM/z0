@@ -14,11 +14,11 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static bool lparen(char c)
-            => C.LParen == (C)c;
-
-        [MethodImpl(Inline), Op]
         public static bool lparen(C c)
             => C.LParen == c;
+
+        [MethodImpl(Inline), Op]
+        public static bool lparen(char c)
+            => (char)C.LParen == c;
     }
 }

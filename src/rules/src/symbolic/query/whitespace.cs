@@ -31,11 +31,27 @@ namespace Z0
             => space(c) || tab(c) || cr(c) || lf(c) || vtab(c);
 
         /// <summary>
-        /// Returns true if only whitspace chacters are present
+        /// Returns true if only asci whitspace chacter codes are present
         /// </summary>
-        /// <param name="src"></param>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static bit whitespace(ReadOnlySpan<C> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                if(!whitespace(skip(src,i)))
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Returns true if only whitspace chacters are present
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static bit whitespace(ReadOnlySpan<char> src)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)

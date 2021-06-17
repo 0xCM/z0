@@ -97,6 +97,6 @@ namespace Z0
             => text.concat("0b", Formatter.Format(value));
 
         string Literal(string Name, string Value)
-            => text.assign(Name, Value);
+            => RP.assign(Name, Value);
     }
 }

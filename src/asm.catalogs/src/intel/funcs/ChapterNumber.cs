@@ -11,6 +11,7 @@ namespace Z0.Asm
     using static IntelSdm;
 
     using Markers = IntelSdmMarkers;
+    using Patterns = IntelSdmPatterns;
 
     partial class IntelSdmProcessor
     {
@@ -31,7 +32,7 @@ namespace Z0.Asm
         public static void render(LineNumber line, in ChapterNumber src, ITextBuffer dst)
         {
             dst.AppendFormat(string.Format("{0}:", line));
-            dst.AppendFormat(Markers.ChapterNumberFormat, src.Value);
+            dst.AppendFormat(Patterns.ChapterNumber, src.Value);
         }
     }
 }

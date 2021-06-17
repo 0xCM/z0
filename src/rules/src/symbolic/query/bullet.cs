@@ -17,7 +17,15 @@ namespace Z0
         /// <param name="b0">The first byte</param>
         /// <param name="b1">The second byte</param>
         [MethodImpl(Inline), Op]
-        public static bool bullet(byte b0, byte b1)
+        public static bit bullet(byte b0, byte b1)
             => ((uint)b0 | (uint)b1 << 8) == CharValues.Bullet;
+
+        /// <summary>
+        /// Tests whether a specified character is the '•' character
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit bullet(char c)
+            => c == CharValues.Bullet;
     }
 }

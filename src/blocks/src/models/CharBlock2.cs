@@ -20,6 +20,8 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Pack=2)]
     public struct CharBlock2 : ICharBlock<B>
     {
+        public static N2 N => default;
+
         CharBlock1 Lo;
 
         CharBlock1 Hi;
@@ -31,6 +33,16 @@ namespace Z0
         {
             [MethodImpl(Inline)]
            get => cover<B,char>(this, CharCount);
+        }
+
+        /// <summary>
+        /// If the block contains no null-terminators, returns a readonly view of the data source; otherwise
+        /// returns the content preceding the first null-terminator
+        /// </summary>
+        public ReadOnlySpan<char> String
+        {
+            [MethodImpl(Inline)]
+            get => TextTools.@string(Data);
         }
 
         /// <summary>
@@ -59,6 +71,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator B(string src)
+            => api.init(src, out B dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator B(ReadOnlySpan<char> src)
             => api.init(src, out B dst);
 
         public static B Empty => RP.Spaced2;

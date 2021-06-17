@@ -14,11 +14,11 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit vtab(char c)
-            => C.VTab == (C)c;
-
-        [MethodImpl(Inline), Op]
         public static bit vtab(C c)
             => C.VTab == c;
+
+        [MethodImpl(Inline), Op]
+        public static bit vtab(char c)
+            => (char)C.VTab == c;
     }
 }

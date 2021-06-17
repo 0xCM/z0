@@ -21,7 +21,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public bit Test(char c)
-                => SymbolicQuery.hex(c);
+                => SymbolicQuery.digit(base16,c);
         }
     }
 }

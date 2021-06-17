@@ -13,16 +13,16 @@ namespace Z0
 
     partial struct SymbolicQuery
     {
+        [MethodImpl(Inline), Op]
+        public static bit cr(C src)
+            => C.CR == src;
+
         /// <summary>
         /// Tests whether a source character is a <see cref='AsciChar.CR'/>
         /// </summary>
         /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bit cr(char src)
-            => C.CR == (C)src;
-
-        [MethodImpl(Inline), Op]
-        public static bit cr(C src)
-            => C.CR == src;
+            => (char)C.CR == src;
     }
 }

@@ -12,13 +12,16 @@ namespace Z0
     using static core;
 
     using api = CharBlocks;
+    using B = CharBlock15;
 
     /// <summary>
     /// Defines a character block b with capacity(b) = 15x16u
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack=2)]
-    public struct CharBlock15 : ICharBlock<CharBlock15>
+    public struct CharBlock15 : ICharBlock<B>
     {
+        public static N15 N => default;
+
         CharBlock10 Lo;
 
         CharBlock5 Hi;
@@ -29,7 +32,17 @@ namespace Z0
         public Span<char> Data
         {
             [MethodImpl(Inline)]
-            get => cover<CharBlock15,char>(this, CharCount);
+            get => cover<B,char>(this, CharCount);
+        }
+
+        /// <summary>
+        /// If the block contains no null-terminators, returns a readonly view of the data source; otherwise
+        /// returns the content preceding the first null-terminator
+        /// </summary>
+        public ReadOnlySpan<char> String
+        {
+            [MethodImpl(Inline)]
+            get => TextTools.@string(Data);
         }
 
         /// <summary>
@@ -57,10 +70,14 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CharBlock15(string src)
-            => api.init(src, out CharBlock15 dst);
+        public static implicit operator B(string src)
+            => api.init(src, out B dst);
 
-        public static CharBlock15 Empty => RP.Spaced15;
+        [MethodImpl(Inline)]
+        public static implicit operator B(ReadOnlySpan<char> src)
+            => api.init(src, out B dst);
+
+        public static B Empty => RP.Spaced15;
 
         public const ushort CharCount = 15;
 

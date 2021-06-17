@@ -678,7 +678,7 @@ namespace Z0.Asm
             using var map = src.MemoryMap();
             var data = map.View();
             var size = data.Length;
-            var match = IntelSdm.InstructionTable.HeaderMatch;
+            //var match = IntelSdm.InstructionTable.HeaderMatch;
             for(var i=0; i<size; i++)
             {
 
@@ -972,12 +972,12 @@ namespace Z0.Asm
         public void Run()
         {
 
-            Wf.GlobalCommands().ProcessIntelSdm();
+            //Wf.GlobalCommands().ProcessIntelSdm();
             //ShowOps();
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
-            //Wf.GlobalCommands().CaptureV2();
+            Wf.GlobalCommands().CaptureV2();
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();

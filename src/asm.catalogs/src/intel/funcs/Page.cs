@@ -14,6 +14,11 @@ namespace Z0.Asm
 
     partial class IntelSdmProcessor
     {
+        /// <summary>
+        /// Attempts to parse a <see cref='Page'/>
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target, if successful; otherwise empty</param>
         public static Outcome parse(ReadOnlySpan<char> src, out Page dst)
         {
             dst = Page.Empty;

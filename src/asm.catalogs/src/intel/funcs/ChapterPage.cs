@@ -11,6 +11,7 @@ namespace Z0.Asm
     using static IntelSdm;
 
     using Markers = IntelSdmMarkers;
+    using Patterns = IntelSdmPatterns;
 
     partial class IntelSdmProcessor
     {
@@ -30,7 +31,7 @@ namespace Z0.Asm
         //     return false;
         // }
 
-        public static Outcome parse2(ReadOnlySpan<char> src, out ChapterPage dst)
+        public static Outcome parse(ReadOnlySpan<char> src, out ChapterPage dst)
         {
             dst = ChapterPage.Empty;
             var i = text.index(src, Chars.Dash);
@@ -44,7 +45,7 @@ namespace Z0.Asm
 
         public static void render(in ChapterPage src, ITextBuffer dst)
         {
-            dst.AppendFormat(Markers.ChapterPageRenderPattern, src.Chapter, src.Page);
+            dst.AppendFormat(Patterns.ChapterPage, src.Chapter, src.Page);
         }
     }
 }

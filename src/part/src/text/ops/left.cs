@@ -18,22 +18,10 @@ namespace Z0
         /// <param name="index"></param>
         [Op]
         public static string left(string src, int index)
-        {
-            var length = src?.Length ?? 0;
-            if(length == 0 || index < 0 || index > length - 1)
-                return EmptyString;
-            else
-                return slice(src, 0, index);
-        }
+            => TextTools.left(src, index);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> left(ReadOnlySpan<char> src, int index)
-        {
-            var length = src.Length;
-            if(length == 0 || index < 0 || index > length - 1)
-                return default;
-            else
-                return core.slice(src,0,index);
-        }
+            => TextTools.left(src, index);
     }
 }

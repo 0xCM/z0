@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static string enclose<S,T>(S content, Fence<T> fence)
-            => adjacent(fence.Left, content, fence.Right);
+            => RP.adjacent(fence.Left, content, fence.Right);
 
         /// <summary>
         /// Encloses text within (possibly distinct) left and right boundaries

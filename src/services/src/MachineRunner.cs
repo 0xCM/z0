@@ -25,7 +25,6 @@ namespace Z0
                 var partitioned = CodeBlocks.hosted(@readonly(blocks));
                 var sorted = blocks.ToSortedSpan();
 
-
                 if(options.EmitHexIndex)
                     Emitted(hex.EmitIndex(blocks));
 

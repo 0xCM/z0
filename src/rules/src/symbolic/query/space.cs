@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bit space(char src)
-            => space((C)src);
+            => src == (char)C.Space;
     }
 }

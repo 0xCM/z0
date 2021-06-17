@@ -355,7 +355,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 var candidate = skip(nested,i);
-                var uri = candidate.HostUri();
+                var uri = candidate.ApiHostUri();
                 if(uri.IsNonEmpty)
                     dst.Add(uri);
             }

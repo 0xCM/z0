@@ -19,33 +19,37 @@ namespace Z0.Asm
         public static bool IsTocEntry(ReadOnlySpan<char> src)
             => src.Contains(Markers.TocTitle, NoCase);
 
-        public static Outcome parse(ReadOnlySpan<char> src, out TocEntry dst)
+        public static Outcome parse(ReadOnlySpan<char> src, out TocTitle dst)
         {
-            const string Match = " .";
             var page = ChapterPage.Empty;
-
             if(!IsTocEntry(src))
             {
-                dst = TocEntry.Empty;
+                dst = TocTitle.Empty;
                 return false;
             }
 
             var i = placeholder(src);
-            var title = text.left(src,i);
-            var remainder = text.right(src,i);
+            var title = TextTools.left(src,i);
+            var remainder = TextTools.right(src,i);
             var d = IndexOfFirstDigit(remainder);
             var input = slice(remainder,d);
 
-            parse2(input, out page);
-
-            dst = toc(title, page);
-            return true;
+            if(parse(input, out page))
+            {
+                dst = IntelSdm.title(title, page);
+                return true;
+            }
+            else
+            {
+                dst = TocTitle.Empty;
+                return false;
+            }
         }
 
-        public static void render(LineNumber line, in TocEntry src, ITextBuffer dst)
+        public static void render(LineNumber line, in TocTitle src, ITextBuffer dst)
         {
             dst.AppendFormat(string.Format("{0}:", line));
-            dst.Append(src.Content.Format());
+            dst.Append(src.Content.String);
             dst.Append(" -> Page ");
             render(src.Page, dst);
         }

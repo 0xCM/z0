@@ -114,7 +114,7 @@ namespace Z0.Asm
             record.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
             record.Statement = src.FormattedInstruction;
             record.Instruction = src.Specifier.Sig.Format();
-            record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
+            record.CpuId = RP.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
             record.OpCodeId = src.Code.ToString();
             if(Index.TryGetValue(src.AsmMnemonic, out var builder))
                 builder.Include(record);

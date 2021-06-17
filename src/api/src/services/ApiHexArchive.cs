@@ -26,10 +26,10 @@ namespace Z0
             => Root.Files(Ext);
 
         public FS.FilePath HostFile<T>()
-            => HostFile(typeof(T).HostUri());
+            => HostFile(typeof(T).ApiHostUri());
 
         public FS.FilePath HostFile(Type host)
-            => HostFile(host.HostUri());
+            => HostFile(host.ApiHostUri());
 
         /// <summary>
         /// Enumerates the archived files owned by a specified part
@@ -90,7 +90,7 @@ namespace Z0
         /// Enumerates the content of archived files owned by a specified part
         /// </summary>
         public IEnumerable<ApiCodeBlock> HostBlocks<T>()
-            => HostBlocks(typeof(T).HostUri());
+            => HostBlocks(typeof(T).ApiHostUri());
 
         public void CodeBlocks(PartId owner, Receiver<ApiCodeBlock> dst)
         {

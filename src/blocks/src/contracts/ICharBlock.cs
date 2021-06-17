@@ -13,12 +13,11 @@ namespace Z0
     {
         Span<char> Data {get;}
 
+        ReadOnlySpan<char> String {get;}
+
         int Length {get;}
 
         uint Capacity {get;}
-
-        // string ITextual.Format()
-        //     => Data.ToString();
 
         ref char First
             => ref first(Data);

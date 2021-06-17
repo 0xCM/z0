@@ -15,7 +15,7 @@ namespace Z0.Asm
         unsafe ReadOnlySpan<JmpStub> JmpStubs()
         {
             var source = typeof(Prototypes.Calc64);
-            var host = source.HostUri();
+            var host = source.ApiHostUri();
             var methods = source.DeclaredMethods();
             var count = methods.Length;
             var entries = alloc<MemoryAddress>(count);

@@ -12,14 +12,17 @@ namespace Z0
     using static core;
 
     using api = CharBlocks;
+    using B = CharBlock1;
 
     /// <summary>
     /// Defines a character block b with capacity(b) = 1x16u
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack=2)]
-    public struct CharBlock1 : ICharBlock<CharBlock1>
+    public struct CharBlock1 : ICharBlock<B>
     {
         char C;
+
+        public static N1 N => default;
 
         /// <summary>
         /// Presents block content as an editable buffer
@@ -27,7 +30,17 @@ namespace Z0
         public Span<char> Data
         {
             [MethodImpl(Inline)]
-           get => cover<CharBlock1,char>(this, CharCount);
+           get => cover<B,char>(this, CharCount);
+        }
+
+        /// <summary>
+        /// If the block contains no null-terminators, returns a readonly view of the data source; otherwise
+        /// returns the content preceding the first null-terminator
+        /// </summary>
+        public ReadOnlySpan<char> String
+        {
+            [MethodImpl(Inline)]
+            get => TextTools.@string(Data);
         }
 
         /// <summary>
@@ -56,16 +69,20 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CharBlock1(string src)
-            => api.init(src, out CharBlock1 dst);
+        public static implicit operator B(string src)
+            => api.init(src, out B dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator CharBlock1(char src)
+        public static implicit operator B(char src)
         {
-            var dst = default(CharBlock1);
+            var dst = default(B);
             dst.C = src;
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator B(ReadOnlySpan<char> src)
+            => api.init(src, out B dst);
 
         /// <summary>
         /// The block capacity

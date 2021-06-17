@@ -14,21 +14,6 @@ namespace Z0
 
     partial struct SymbolicQuery
     {
-        [MethodImpl(Inline), Op]
-        public static uint length(ReadOnlySpan<C> src)
-        {
-            var counter = 0u;
-            var max = (uint)src.Length;
-            if(max == 0)
-                return 0;
-            for(var i=0u; i<max; i++)
-            {
-                if(skip(src,i) == 0)
-                    return i;
-            }
-            return max;
-        }
-
         /// <summary>
         /// Determines whether a specified code is one of <see cref='AsciLetterCode'/>
         /// </summary>

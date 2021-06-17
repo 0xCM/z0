@@ -13,10 +13,6 @@ namespace Z0
     partial struct TextTools
     {
         [MethodImpl(Inline), Op]
-        internal static unsafe ref char firstchar(StringAddress src)
-            => ref @ref(src.Address.Pointer<char>());
-
-        [MethodImpl(Inline), Op]
         public static uint length(StringAddress src)
         {
             ref var c = ref firstchar(src);

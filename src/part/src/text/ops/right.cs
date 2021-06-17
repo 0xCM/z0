@@ -18,24 +18,10 @@ namespace Z0
         /// <param name="index"></param>
         [MethodImpl(Inline), Op]
         public static string right(string src, int index)
-        {
-            var length = src.Length;
-            var last = length - 1;
-            var offset = index + 1;
-            if(offset < last && offset >= 0)
-                return slice(src,offset);
-            else
-                return EmptyString;
-        }
+            => TextTools.right(src, index);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> right(ReadOnlySpan<char> src, int index)
-        {
-            var offset = index + 1;
-            if(src.Length < offset)
-                return default;
-            else
-                return core.slice(src, offset);
-        }
+            => TextTools.right(src, index);
     }
 }

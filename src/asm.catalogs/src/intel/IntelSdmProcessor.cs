@@ -52,7 +52,7 @@ namespace Z0.Asm
             var unmapped = FindUnmappedChars(src);
             var pairs = unmapped.View.Map(CharMaps.format);
             var delimited = pairs.Delimit(Chars.Comma).Format();
-            var description = string.Format("Unmapped:{0}", text.embrace(delimited));
+            var description = string.Format("Unmapped:{0}", RP.embrace(delimited));
             Wf.Row(description);
         }
 

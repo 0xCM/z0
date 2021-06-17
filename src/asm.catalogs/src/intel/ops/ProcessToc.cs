@@ -9,18 +9,19 @@ namespace Z0.Asm
 
     partial class IntelSdmProcessor
     {
+
         void ProcessToc()
         {
             var vols = VolumeMarkers(1,4);
             var src = CombinedTocPath();
             using var reader = src.LineReader();
-            var buffer = TextTools.buffer();
+            var buffer = text.buffer();
             var dst = ProcessLog("toc.combined");
             using var writer = dst.Writer();
             var section = SectionNumber.Empty;
             var chapter = ChapterNumber.Empty;
             var table = TableNumber.Empty;
-            var toc = TocEntry.Empty;
+            var entry = TocTitle.Empty;
             while(reader.Next(out var line))
             {
                 if(vols.CoversAny(line.Content))
@@ -42,9 +43,9 @@ namespace Z0.Asm
                     continue;
                 }
 
-                if(parse(line.Content, out toc))
+                if(parse(line.Content, out entry))
                 {
-                    render(line.LineNumber, toc, buffer);
+                    render(line.LineNumber, entry, buffer);
                     writer.WriteLine(buffer.Emit());
                     continue;
                 }

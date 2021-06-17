@@ -68,7 +68,7 @@ namespace Z0
         public static ApiHostInfo hostinfo(Type t)
         {
             var methods = t.DeclaredMethods();
-            return new ApiHostInfo(t, t.HostUri(), t.Assembly.Id(), methods, index(methods));
+            return new ApiHostInfo(t, t.ApiHostUri(), t.Assembly.Id(), methods, index(methods));
         }
 
         [Op]

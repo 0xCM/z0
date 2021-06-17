@@ -20,6 +20,8 @@ namespace Z0
 
         public Setting<bool> EmitCliBlobs;
 
+        public Setting<bool> EmitAssemblyRefs;
+
         public Setting<bool> EmitCliConstants;
 
         public Setting<bool> EmitApiMetadata;
@@ -57,8 +59,6 @@ namespace Z0
         public Setting<bool> EmitHexPack;
 
         public Setting<bool> ProcessCultFiles;
-
-        public Setting<bool> EmitAssemblyRefs;
 
         public Setting<bool> DryRun;
 

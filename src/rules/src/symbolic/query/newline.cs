@@ -16,6 +16,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool newline(char c)
-            => C.LF == (C)c || C.CR == (C)c;
+            => (char)C.LF == c || (char)C.CR == c;
     }
 }

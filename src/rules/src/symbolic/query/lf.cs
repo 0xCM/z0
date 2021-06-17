@@ -14,19 +14,19 @@ namespace Z0
     partial struct SymbolicQuery
     {
         /// <summary>
-        /// Tests whether a source character is a <see cref='AsciChar.LF'/>
-        /// </summary>
-        /// <param name="c">The character to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit lf(char c)
-            => C.LF == (C)c;
-
-        /// <summary>
         /// Tests whether a character code represents <see cref='AsciChar.LF'/>
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bit lf(C c)
             => C.LF == c;
+
+        /// <summary>
+        /// Tests whether a source character is a <see cref='AsciChar.LF'/>
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit lf(char c)
+            => (char)C.LF == c;
     }
 }

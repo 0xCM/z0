@@ -20,7 +20,7 @@ namespace Z0
             => HostUri.HostName;
 
         ApiHostUri HostUri
-            => HostType.HostUri();
+            => HostType.ApiHostUri();
 
         PartId PartId
             => HostType.Assembly.Id();

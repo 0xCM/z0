@@ -21,7 +21,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public bit Test(char c)
-                => SymbolicQuery.@decimal(c);
+                => SymbolicQuery.digit(base10,c);
         }
 
         public readonly struct IsWhitespace : ISymbolQuery<IsWhitespace,char>

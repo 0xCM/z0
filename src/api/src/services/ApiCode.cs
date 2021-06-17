@@ -9,8 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct ApiCode
@@ -25,7 +25,7 @@ namespace Z0
             {
                 ref readonly var method = ref skip(methods,i);
                 var address = ApiJit.jit(method);
-                var uri = ApiUri.located(method.DeclaringType.HostUri(), method.Name, method.Identify());
+                var uri = ApiUri.located(method.DeclaringType.ApiHostUri(), method.Name, method.Identify());
                 var located = new ResolvedMethod(uri, method, address);
                 var body = method.GetMethodBody();
                 var sig = method.ResolveSignature();

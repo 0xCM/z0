@@ -43,6 +43,5 @@ namespace Z0
         [Op]
         public static bit fenced(string src, string left, string right)
             => src.StartsWith(left, Invariant) && src.EndsWith(right, Invariant);
-
     }
 }

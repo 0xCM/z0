@@ -12,13 +12,16 @@ namespace Z0
     using static core;
 
     using api = CharBlocks;
+    using B = CharBlock128;
 
     /// <summary>
     /// Defines a character block b with capacity(b) = 128x16u
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack=2)]
-    public struct CharBlock128 : ICharBlock<CharBlock128>
+    public struct CharBlock128 : ICharBlock<B>
     {
+        public static N128 N => default;
+
         CharBlock64 Lo;
 
         CharBlock64 Hi;
@@ -26,7 +29,17 @@ namespace Z0
         public Span<char> Data
         {
             [MethodImpl(Inline)]
-            get => cover<CharBlock128,char>(this, CharCount);
+            get => cover<B,char>(this, CharCount);
+        }
+
+        /// <summary>
+        /// If the block contains no null-terminators, returns a readonly view of the data source; otherwise
+        /// returns the content preceding the first null-terminator
+        /// </summary>
+        public ReadOnlySpan<char> String
+        {
+            [MethodImpl(Inline)]
+            get => TextTools.@string(Data);
         }
 
         /// <summary>
@@ -54,23 +67,16 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CharBlock128(string src)
-            => api.init(src, out CharBlock128 dst);
+        public static implicit operator B(string src)
+            => api.init(src, out B dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator CharBlock128(ReadOnlySpan<char> src)
-        {
-            var dst = Empty;
-            var count = min(src.Length, CharCount);
-            var data = dst.Data;
-            for(var i=0; i<count; i++)
-                seek(data,i) = skip(src,i);
-            return dst;
-        }
+        public static implicit operator B(ReadOnlySpan<char> src)
+            => api.init(src, out B dst);
 
-        public static CharBlock128 Empty => RP.Spaced128;
+        public static B Empty => RP.Spaced128;
 
-        public static CharBlock128 Null => default;
+        public static B Null => default;
 
         public const ushort CharCount = 128;
 
