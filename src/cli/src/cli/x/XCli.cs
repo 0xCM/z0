@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static CliHandleData Data(this Handle src)
-            => Cli.data(src);
+            => CliHandleData.from(src);
 
         [MethodImpl(Inline)]
         public static bool IsValid(this CliTableKind src)

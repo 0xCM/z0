@@ -70,11 +70,11 @@ namespace Z0
                     var etl = Wf.StanfordCatalog();
                     Emitted(etl.ExportAsset());
                     Emitted(etl.ImportExported());
-                    Wf.XedCatalog().EmitCatalog();
+                    Wf.IntelXed().EmitCatalog();
                 }
 
                 if(options.EmitIntrinsicsInfo)
-                    Emitted(Wf.IntrinsicsCatalog().Emit());
+                    Emitted(Wf.IntelIntrinsics().Emit());
 
                 if(options.EmitSymbolicLiterals)
                     Emitted(Wf.Symbolism().EmitLiterals());
@@ -96,7 +96,7 @@ namespace Z0
                 if(options.ProcessCultFiles)
                     Wf.CultProcessor().Run();
 
-                Wf.CliPipe().EmitMetadaSets(options);
+                Wf.CliEmitter().EmitMetadaSets(options);
 
             }
             catch(Exception e)

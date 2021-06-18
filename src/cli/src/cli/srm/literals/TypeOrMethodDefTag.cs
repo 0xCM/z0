@@ -39,7 +39,7 @@ namespace Z0
                     //Throw.InvalidCodedIndex();
                 }
 
-                return Cli.handle(tokenType | rowId);
+                return Clr.handle(tokenType | rowId);
             }
 
             // internal static uint ConvertTypeDefRowIdToTag(TypeDefinitionHandle typeDef)

@@ -71,22 +71,22 @@ namespace Z0.Asm
 
         void EmitImageHeaders()
         {
-            var svc = CliPipe.create(Wf);
+            var svc = CliEmitter.create(Wf);
             svc.EmitSectionHeaders(WfRuntime.RuntimeArchive(Wf));
         }
 
         public void EmitApiImageContent()
         {
-            Wf.CliPipe().EmitImageContent();
+            Wf.CliEmitter().EmitImageContent();
         }
 
         public void EmitXedCatalog()
         {
-            Wf.XedCatalog().EmitCatalog();
+            Wf.IntelXed().EmitCatalog();
         }
 
         public ReadOnlySpan<string> LoadMnemonics()
-            => Wf.XedCatalog().MnemonicNames();
+            => Wf.IntelXed().MnemonicNames();
 
         void EmitRuntimeMembers()
         {
@@ -127,7 +127,6 @@ namespace Z0.Asm
         {
             Wf.CaptureRunner().Capture(Assembly.GetExecutingAssembly().Id());
         }
-
 
         void CaptureParts(params PartId[] parts)
         {
@@ -213,7 +212,7 @@ namespace Z0.Asm
 
         void EmitMetadataBlocks()
         {
-            Wf.CliPipe().EmitMetaBlocks();
+            Wf.CliEmitter().EmitMetaBlocks();
         }
 
         ReadOnlySpan<FileType> ListFileTypes()
@@ -428,7 +427,7 @@ namespace Z0.Asm
 
         void EmitDependencyGraph()
         {
-            var svc = Wf.CliPipe();
+            var svc = Wf.CliEmitter();
             var refs = svc.ReadAssemblyRefs();
             var dst = Db.AppLog("dependencies", FS.Dot);
             var flow = Wf.EmittingFile(dst);
@@ -625,11 +624,7 @@ namespace Z0.Asm
         void ProcessStatementIndex()
         {
             var counter = 0u;
-
-            // var totalSize = ByteSize.Zero;
             var dst = Db.AppLog("statements.rex", FS.Csv);
-            // using var worker = new AsmIndexWorker(dst);
-            // var processor = AsmIndexProcessor.create(Wf, worker.Deposit);
             var packs = Wf.ApiPacks();
             var pipe = Wf.AsmIndexPipe();
             var current = packs.Current();
@@ -652,8 +647,6 @@ namespace Z0.Asm
 
             var sorted = @readonly(collection.ToArray().OrderBy(x => x.Encoded));
             TableEmit(sorted, AsmIndex.RenderWidths, dst);
-
-            //processor.ProcessFile(path);
         }
 
         public void ShowVendorManuals(string vendor, FS.FileExt ext)
@@ -912,12 +905,11 @@ namespace Z0.Asm
             toolchain.Run(spec);
         }
 
-        void CheckAsciSpans()
+        void EmitAsciByteSpan(string content)
         {
-            const string Input = "66F2F30F0F38VEXREXREX.WLZLIGWIGW0W1";
             var lookups = Wf.AsciLookups();
-            var dst = text.buffer();
-            lookups.AsciCodeSpan(8, "PrefixData", Input,  dst);
+            var dst = TextTools.buffer();
+            lookups.AsciByteSpan(8, "Uppercase", content,  dst);
             Wf.Row(dst.Emit());
         }
 
@@ -968,16 +960,16 @@ namespace Z0.Asm
 
         }
 
-
         public void Run()
         {
-
+            EmitAsciByteSpan("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            //var worker = AsmIndexWorker.create()
             //Wf.GlobalCommands().ProcessIntelSdm();
             //ShowOps();
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
-            Wf.GlobalCommands().CaptureV2();
+            //Wf.GlobalCommands().CaptureV2();
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();

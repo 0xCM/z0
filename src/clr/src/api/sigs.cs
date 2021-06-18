@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Reflection.Metadata;
 
     using static Root;
     using static core;
 
     partial struct Clr
     {
-        public static Index<CliSig> sigs(MethodInfo[] src)
+        public static ReadOnlySpan<CliSig> sigs(MethodInfo[] src)
         {
             var count = src.Length;
             if(count==0)

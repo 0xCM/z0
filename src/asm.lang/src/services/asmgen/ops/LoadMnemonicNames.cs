@@ -9,6 +9,6 @@ namespace Z0.Asm
     partial class AsmModelGen
     {
         ReadOnlySpan<string> LoadMnemonicNames()
-            => Wf.XedCatalog().MnemonicNames();
+            => Wf.IntelXed().MnemonicNames();
     }
 }

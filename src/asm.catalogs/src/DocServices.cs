@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+    using static Root;
     using static core;
 
     public class DocServices : AppService<DocServices>
@@ -16,9 +17,10 @@ namespace Z0
         {
         }
 
-        protected override void Initialized()
+        internal DocServices WithArchive(DocProcessArchive docs)
         {
-            Docs = new DocProcessArchive(Wf.AsmWorkspace().DocRoot());
+            Docs = docs;
+            return this;
         }
 
         public void Split(FS.FilePath specpath)
@@ -125,7 +127,6 @@ namespace Z0
             dst.Deposit(range);
         }
 
-
         void Emit(in LineRange src, FS.FilePath dst)
         {
             var emitting = Wf.EmittingFile(dst);
@@ -137,12 +138,10 @@ namespace Z0
             Wf.EmittedFile(emitting, count);
         }
 
-
         FS.FilePath RefDocPath(string id)
             => Docs.RefDoc(id, FS.Txt);
 
         FS.FilePath ExtractPath(string id, string unit)
             => Docs.DocExtract(id, unit, FS.Txt);
-
     }
 }

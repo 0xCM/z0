@@ -11,6 +11,8 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
 
+    using static TextEncodings;
+
     partial struct term
     {
         /// <summary>

@@ -39,7 +39,7 @@ namespace Z0
                 if ((rowId & ~TokenTypeIds.RIDMask) != 0)
                     return default;
 
-                return Cli.handle(tokenType | rowId);
+                return Clr.handle(tokenType | rowId);
             }
         }
     }

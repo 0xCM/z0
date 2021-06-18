@@ -8,7 +8,6 @@ namespace Z0
 
     using static Z0.Lang.CSharpModels.KewordLiterals;
 
-
     public class AsciByteSpans : Service<AsciByteSpans>
     {
         const char semi = Chars.Semicolon;

@@ -62,26 +62,4 @@ namespace Z0
 
 
     }
-
-    public interface IDataProvider<T>
-        where T : struct, IRecord<T>
-    {
-
-    }
-
-    public abstract class TableProvider<S,T> : IDataProvider<T>
-        where S : ITableSource<T>
-        where T : struct, IRecord<T>
-    {
-
-        public abstract ReadOnlySpan<T> Load(S src);
-    }
-
-    public abstract class CliTableProvider<P,T> : TableProvider<CliTableSource<T>,T>
-        where T : struct, IRecord<T>
-        where P : CliTableProvider<P,T>, new()
-    {
-
-        public static P create() => new P();
-    }
 }

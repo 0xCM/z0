@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static core;
     using static EnvFolders;
 
     public readonly struct DocProcessArchive : IFileArchive

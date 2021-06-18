@@ -17,12 +17,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static CliTableKind table(Handle handle)
-            => data(handle).Table;
+            => CliHandleData.from(handle).Table;
 
         [MethodImpl(Inline), Op]
         public static CliTableKind table(Type src)
             => (CliTableKind)(u32(src.MetadataToken) >> 24);
-
 
         [MethodImpl(Inline), Op]
         public static CliTableKind table(MethodInfo src)

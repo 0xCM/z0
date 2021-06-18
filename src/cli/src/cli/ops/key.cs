@@ -16,14 +16,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static CliRowKey key(Handle src)
         {
-            var dat = data(src);
-            return new CliRowKey(dat.Table, dat.RowId);
+            var data = CliHandleData.from(src);
+            return new CliRowKey(data.Table, data.RowId);
         }
 
         [MethodImpl(Inline), Op]
         public static CliRowKey key(EntityHandle src)
         {
-            var dat = data(src);
+            var dat = CliHandleData.from(src);
             return new CliRowKey(dat.Table, dat.RowId);
         }
 

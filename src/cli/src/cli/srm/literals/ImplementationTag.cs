@@ -35,7 +35,7 @@ namespace Z0
                 if (tokenType == 0 || (rowId & ~TokenTypeIds.RIDMask) != 0)
                     return default;
 
-                return Cli.handle(tokenType | rowId);
+                return Clr.handle(tokenType | rowId);
             }
         }
     }

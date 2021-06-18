@@ -10,8 +10,8 @@ namespace Z0
     public static partial class XSvc
     {
         [Op]
-        public static CliPipe CliPipe(this IWfRuntime wf)
-            => Svc.CliPipe.create(wf);
+        public static CliEmitter CliEmitter(this IWfRuntime wf)
+            => Svc.CliEmitter.create(wf);
 
         [Op]
         public static MsilPipe MsilPipe(this IWfRuntime wf)

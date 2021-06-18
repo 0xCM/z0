@@ -10,6 +10,7 @@
       <ProjectReference Include="$(Blocks)" />
       <ProjectReference Include="$(Rules)" />
       <ProjectReference Include="$(Bit)" />
+      <ProjectReference Include="$(Hash)" />
   </ItemGroup>
 
   <ItemGroup>

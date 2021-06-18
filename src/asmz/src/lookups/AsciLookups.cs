@@ -58,7 +58,6 @@ namespace Z0
             dst.IndentLine(n, rbrace);
             n-=4;
             dst.IndentLine(n, rbrace);
-
         }
 
         public void AsciCodeSpan(uint indent, Identifier name, string data, ITextBuffer dst)
@@ -83,10 +82,8 @@ namespace Z0
 
         public void AsciByteSpan(uint indent, Identifier name, string data, ITextBuffer dst)
         {
-            var payload = text.buffer();
             var src = span(data);
             var count = src.Length;
-            var symbols = Symbols.index<AsciCode>().View;
             var buffer = alloc<byte>(count);
             ref var target = ref first(buffer);
             for(var i=0; i<count; i++)
@@ -106,7 +103,7 @@ namespace Z0
         {
             var data = spec.Data;
             var size = spec.DataSize;
-            var left = text.buffer();
+            var left = TextTools.buffer();
             var modifiers = spec.IsStatic ? string.Format("{0} {1}", @public, @static) : @public;
             left.Append(modifiers);
             left.Append(Chars.Space);
@@ -114,7 +111,7 @@ namespace Z0
             left.Append(Chars.Space);
             left.Append(spec.Name);
 
-            var content = text.buffer();
+            var content = TextTools.buffer();
             content.Append(lbrace);
 
             for(var i=0; i<size; i++)
@@ -128,12 +125,11 @@ namespace Z0
 
             content.AppendFormat("{0}{1}", rbrace, semi);
 
-            var right = text.buffer();
+            var right = TextTools.buffer();
             right.Append(string.Concat(string.Format("new {0}", spec.CellType), RP.bracket(spec.Data.Length), content.Emit()));
 
             dst.IndentLine(indent, Assign.Format(left.Emit(), right.Emit()));
         }
-
 
         public void RenderLiteral<T>(uint indent, in Sym<T> src, ITextBuffer dst)
             where T : unmanaged
@@ -300,6 +296,5 @@ namespace Z0
     {
         public static AsciLookups AsciLookups(this IServiceContext context)
             => Z0.AsciLookups.create(context);
-
     }
 }

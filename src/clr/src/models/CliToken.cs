@@ -19,6 +19,17 @@ namespace Z0
     [ApiHost]
     public readonly struct CliToken : ITextual, IEquatable<CliToken>, INullity, IComparable<CliToken>
     {
+        [MethodImpl(Inline), Op]
+        public static CliToken from(Handle src)
+        {
+            var data = CliHandleData.from(src);
+            return new CliToken(data.Table, data.RowId);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static CliToken from(EntityHandle src)
+            => core.@as<EntityHandle,CliToken>(src);
+
         readonly uint Data;
 
         [MethodImpl(Inline)]

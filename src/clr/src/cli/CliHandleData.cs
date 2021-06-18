@@ -16,11 +16,11 @@ namespace Z0
     public readonly struct CliHandleData : ITextual, IComparable<CliHandleData>, IEquatable<CliHandleData>
     {
         [MethodImpl(Inline), Op]
-        public static CliHandleData data(Handle src)
+        public static CliHandleData from(Handle src)
             => @as<Handle,CliHandleData>(src);
 
         [MethodImpl(Inline), Op]
-        public static CliHandleData data(EntityHandle src)
+        public static CliHandleData from(EntityHandle src)
         {
             var row = uint32(src) & 0xFFFFFF;
             var kind = (CliTableKind)(uint32(src) >> 24);
@@ -71,6 +71,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CliHandleData(Handle src)
-            => data(src);
+            => from(src);
     }
 }

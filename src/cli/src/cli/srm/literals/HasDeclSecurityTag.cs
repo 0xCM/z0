@@ -10,8 +10,6 @@ namespace Z0
 
     public unsafe partial class SRM
     {
-
-
         internal static class HasDeclSecurityTag
         {
             internal const int NumberOfBits = 2;
@@ -37,7 +35,7 @@ namespace Z0
                     //Throw.InvalidCodedIndex();
                 }
 
-                return Cli.handle(tokenType | rowId);
+                return Clr.handle(tokenType | rowId);
             }
 
             // internal static uint ConvertToTag(EntityHandle handle)

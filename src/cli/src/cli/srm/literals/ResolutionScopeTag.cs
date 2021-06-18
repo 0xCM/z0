@@ -10,7 +10,6 @@ namespace Z0
 
     public unsafe partial class SRM
     {
-
         internal static class ResolutionScopeTag
         {
             internal const int NumberOfBits = 2;
@@ -38,7 +37,7 @@ namespace Z0
                     return default;
                 }
 
-                return Cli.handle(tokenType | rowId);
+                return Clr.handle(tokenType | rowId);
             }
         }
     }

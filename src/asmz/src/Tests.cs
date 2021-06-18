@@ -751,7 +751,7 @@ namespace Z0.Asm
 
         void ShowXedInstructions()
         {
-            var pipe = Wf.XedCatalog();
+            var pipe = Wf.IntelXed();
             var records = pipe.LoadFormSummaries().View;
             var count = records.Length;
             if(count !=0 )
@@ -790,7 +790,7 @@ namespace Z0.Asm
             var parser = XedSummaryParser.create(Wf.EventSink);
             var parsed = parser.ParseSummaries();
             Wf.Status($"Parsed {parsed.Length} summaries");
-            Wf.XedCatalog().EmitFormSummaries(parsed);
+            Wf.IntelXed().EmitFormSummaries(parsed);
         }
 
         void FilterApiBlocks()

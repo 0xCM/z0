@@ -38,7 +38,7 @@ namespace Z0
         public Outcome EmitMetadataSets(params object[] args)
         {
             var options = WorkflowOptions.@default();
-            Wf.CliPipe().EmitMetadaSets(options);
+            Wf.CliEmitter().EmitMetadaSets(options);
             return true;
         }
 
@@ -81,7 +81,7 @@ namespace Z0
         [CmdOp("emit-cli-metadata")]
         public Outcome EmitCliMetadata(params object[] args)
         {
-            var pipe = Wf.CliPipe();
+            var pipe = Wf.CliEmitter();
             pipe.EmitRowStats(Wf.ApiCatalog.Components, Db.IndexTable<CliRowStats>());
             pipe.EmitFieldDefs(Wf.ApiCatalog.Components, Db.IndexTable<FieldDefInfo>());
             pipe.EmitMethodDefs(Wf.ApiCatalog.Components, Db.IndexTable<MethodDefInfo>());
@@ -116,7 +116,7 @@ namespace Z0
         [CmdOp("emit-intrinsics-catalog")]
         public Outcome EmitIntrinsicsCatalog(params object[] args)
         {
-            Wf.IntrinsicsCatalog().Emit();
+            Wf.IntelIntrinsics().Emit();
             return true;
         }
 

@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static IntelSdm;
 
     [ApiHost]
     public partial class IntelSdmProcessor : AppService<IntelSdmProcessor>
@@ -21,9 +20,10 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            DocServices = Wf.DocServices();
             Workspace = Wf.AsmWorkspace();
-            Archive = new DocProcessArchive(Workspace.DocRoot());
+            var root = Workspace.DocRoot();
+            DocServices = Wf.DocServices(new DocProcessArchive(root));
+            Archive = new DocProcessArchive(root);
         }
 
         public void SplitSdm()
@@ -61,7 +61,8 @@ namespace Z0.Asm
             var charmap = CharMaps.editor(Utf16Encoding).Seal();
             var dst = Archive.DocPath("charmap", FS.Config);
             var emitting = Wf.EmittingFile(dst);
-            var mapcount = CharMaps.emit(charmap, dst);
+            using var writer = dst.Writer();
+            var mapcount = CharMaps.emit(charmap, writer);
             Wf.EmittedFile(emitting, mapcount);
         }
 
@@ -71,10 +72,36 @@ namespace Z0.Asm
             return DocServices.LoadSplitSpecs(src);
         }
 
-
         public void Run()
         {
             ProcessToc();
         }
+
+       FS.FilePath SdmSplitSpecs()
+            => Archive.Root + FS.file("splits", FS.Csv);
+
+        FS.FilePath SdmRefPath()
+            => RefDocPath("sdm");
+
+        FS.FolderPath ProcessLogs()
+            => Archive.Root + FS.folder("logs");
+
+        FS.FilePath ProcessLog(string name)
+            => ProcessLogs() + FS.file(name,FS.Log);
+
+        FS.FilePath LinedSdmPath()
+            => DocExtractPath("sdm-lined", FS.Txt);
+
+        FS.FilePath RefDocPath(string id)
+            => Archive.RefDoc(id, FS.Txt);
+
+        FS.FolderPath SdmExtractRoot()
+            => Archive.DocExtractDir("sdm");
+
+        FS.FilePath DocExtractPath(string id, FS.FileExt ext)
+            => SdmExtractRoot() + FS.file(string.Format("sdm.{0}", id), ext);
+
+        FS.FilePath CombinedTocPath()
+            => DocExtractPath("TOC",FS.Txt);
     }
 }

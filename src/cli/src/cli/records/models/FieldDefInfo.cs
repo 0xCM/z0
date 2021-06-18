@@ -11,7 +11,7 @@ namespace Z0
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct FieldDefInfo : IRecord<FieldDefInfo>
     {
-        public const string TableId = "image.fields";
+        public const string TableId = "image.field-defs";
 
         public const byte FieldCount = 5;
 

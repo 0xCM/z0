@@ -36,7 +36,7 @@ namespace Z0
         public ref MethodDefRow Read(MethodDefinitionHandle handle, ref MethodDefRow dst)
         {
             var src = MD.GetMethodDefinition(handle);
-            dst.Key = Cli.token(handle);
+            dst.Key = CliToken.from(handle);
             dst.Attributes = src.Attributes;
             dst.ImplAttributes  = src.ImplAttributes;
             dst.Rva = src.RelativeVirtualAddress;

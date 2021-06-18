@@ -668,7 +668,7 @@ namespace Z0
                 if (value == InvalidCompressedInteger || tokenType == 0)
                     return default(EntityHandle);
 
-                return Cli.handle(tokenType | (value >> 2));
+                return Clr.handle(tokenType | (value >> 2));
             }
 
             private static readonly uint[] s_corEncodeTokenArray = new uint[] { TokenTypeIds.TypeDef, TokenTypeIds.TypeRef, TokenTypeIds.TypeSpec, 0 };
