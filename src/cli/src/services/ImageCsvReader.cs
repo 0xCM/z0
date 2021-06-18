@@ -9,6 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Root;
+    using static core;
 
     public class ImageCsvReader : AppService<ImageCsvReader>
     {
@@ -27,7 +28,7 @@ namespace Z0
 
         public ReadOnlySpan<ImageContentRecord> Load(FS.FilePath src)
         {
-            var buffer = root.list<ImageContentRecord>();
+            var buffer = list<ImageContentRecord>();
 
             void Receive(in ImageContentRecord src)
             {
@@ -43,7 +44,7 @@ namespace Z0
             CurrentIndex = 0;
 
             if(!src.Exists)
-                @throw(new FileNotFoundException(src.ToUri().Format()));
+                Root.@throw(new FileNotFoundException(src.ToUri().Format()));
 
             using var reader = src.Reader();
             var size = src.Size;
@@ -67,12 +68,12 @@ namespace Z0
 
             CurrentIndex++;
 
-            var parts = text.split(line, FieldDelimiter);
+            var parts = TextTools.split(line, FieldDelimiter);
             if(parts.Length != 2)
                 return false;
 
-            DataParser.parse(parts[0], out data.Address);
-            DataParser.parse(parts[1], out data.Data);
+            DataParser.parse(skip(parts,0), out data.Address);
+            DataParser.parse(skip(parts,1), out data.Data);
 
             return true;
         }

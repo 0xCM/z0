@@ -56,7 +56,7 @@ namespace Z0.Asm
             dst = AsmFormExpr.Empty;
             var result = Outcome.Success;
 
-            result = text.unfence(src, SigFence, out var sigexpr);
+            result = FenceParser.unfence(src, SigFence, out var sigexpr);
             if(result.Fail)
                 return (false, ParseComposer.FenceNotFound.Format(SigFence,src));
 
@@ -64,7 +64,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false, Msg.CouldNotParseSigExpr.Format(sigexpr));
 
-            result = text.unfence(src, OpCodeFence, out var opcode);
+            result = FenceParser.unfence(src, OpCodeFence, out var opcode);
             if(result.Fail)
                 return (false, ParseComposer.FenceNotFound.Format(OpCodeFence, src));
 
@@ -181,7 +181,7 @@ namespace Z0.Asm
 
             // For thumbprints that include a bitstring such as 0001 0000 0000 1111
             var C = parts.Length > 2 ? skip(parts,2) : EmptyString;
-            if(text.unfence(A, SigFence, out var sigexpr))
+            if(FenceParser.unfence(A, SigFence, out var sigexpr))
             {
                 result = AsmParser.sig(sigexpr, out var sig);
                 if(result.Fail)
@@ -189,7 +189,7 @@ namespace Z0.Asm
 
                     AsmParser.code(sig.Mnemonic, out var monic);
 
-                    if(text.unfence(A, OpCodeFence, out var opcode))
+                    if(FenceParser.unfence(A, OpCodeFence, out var opcode))
                     {
                         if(AsmHexCode.parse(B, out var encoded))
                         {

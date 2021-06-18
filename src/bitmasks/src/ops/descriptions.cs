@@ -40,10 +40,10 @@ namespace Z0
                 var input = src.Text;
                 var fence = Rules.fence(Chars.LBracket, Chars.RBracket);
                 var content = input;
-                var fenced = TextQuery.fenced(input, fence);
+                var fenced = SymbolicQuery.fenced(input, fence);
                 if(fenced)
                 {
-                    if(!text.unfence(input, fence, out content))
+                    if(!FenceParser.unfence(input, fence, out content))
                         return sys.empty<BitMaskInfo>();
                 }
 

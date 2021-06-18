@@ -64,7 +64,7 @@ namespace Z0
         }
 
         public string Format()
-            => api.format(this);
+            => TextTools.format(String);
 
         public override string ToString()
             => Format();
@@ -72,6 +72,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CharBlock5(string src)
             => api.init(src, out CharBlock5 dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(B src)
+            => src.Format();
 
         [MethodImpl(Inline)]
         public static implicit operator B(ReadOnlySpan<char> src)

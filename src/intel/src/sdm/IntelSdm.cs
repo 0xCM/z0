@@ -13,7 +13,6 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct IntelSdm
     {
-
         [MethodImpl(Inline), Op]
         public static TableNumber table(ReadOnlySpan<char> src)
             => new TableNumber(src);
@@ -23,28 +22,8 @@ namespace Z0.Asm
             => new ChapterNumber(number);
 
         [MethodImpl(Inline), Op]
-        public static SectionNumber section(ushort a)
-            => new SectionNumber(a);
-
-        [MethodImpl(Inline), Op]
-        public static SectionNumber section(ushort a, ushort b)
-            => new SectionNumber(a, b);
-
-        [MethodImpl(Inline), Op]
-        public static SectionNumber section(ushort a, ushort b, ushort c)
-            => new SectionNumber(a, b, c);
-
-        [MethodImpl(Inline), Op]
-        public static SectionNumber section(ushort a, ushort b, ushort c, ushort d)
-            => new SectionNumber(a, b, c, d);
-
-        [MethodImpl(Inline), Op]
-        public static Page page(ushort number)
-            => new Page(number);
-
-        [MethodImpl(Inline), Op]
-        public static TocVolRef vol(ReadOnlySpan<char> src)
-            => new TocVolRef(src);
+        public static VolNumber vol(byte major, char minor)
+            => new VolNumber(major, (AsciCode)minor);
 
         [MethodImpl(Inline), Op]
         public static ChapterPage page(in ChapterNumber chapter, in Page page)
@@ -55,7 +34,7 @@ namespace Z0.Asm
             => new SectionPage(section, page);
 
         [MethodImpl(Inline), Op]
-        public static Location location(in VolumePart v, in ChapterNumber c, in Page p)
+        public static Location location(in VolPart v, in ChapterNumber c, in Page p)
             => new Location(v, c, p);
 
         [MethodImpl(Inline), Op]
@@ -67,12 +46,8 @@ namespace Z0.Asm
             => new TocTitle(title, page);
 
         [MethodImpl(Inline), Op]
-        public static TocEntry toc(in SectionToc section, in TocTitle title)
-            => new TocEntry(section,title);
-
-        [MethodImpl(Inline), Op]
-        public static SectionToc toc(in SectionNumber section, in CharBlock128 name, in ChapterPage page)
-            => new SectionToc(section, title(name, page));
+        public static TocEntry toc(in SectionNumber sn, in TocTitle title)
+            => new TocEntry(sn, title);
 
         [MethodImpl(Inline), Op]
         public static Toc toc(TocEntry[] src)

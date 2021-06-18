@@ -61,13 +61,21 @@ namespace Z0
         }
 
         public string Format()
-            => api.format(this);
+            => TextTools.format(String);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator B(string src)
+            => api.init(src, out B dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(B src)
+            => src.Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator B(ReadOnlySpan<char> src)
             => api.init(src, out B dst);
 
         public static B Empty => RP.Spaced7;

@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Text;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
@@ -69,6 +70,25 @@ namespace Z0
             T.WriteError(msg);
         }
 
+        /// <summary>
+        /// Sets the terminal input and output encoding
+        /// </summary>
+        /// <param name="e">The selected encoding</param>
+        public static void encoding(Encoding e)
+        {
+            T.SetInputEncoding(e);
+            T.SetOutputEncoding(e);
+        }
+
+        /// <summary>
+        /// Sets the terminal input and output encoding to UTF8
+        /// </summary>
+        /// <param name="kind">The encoding selector</param>
+        public static void encoding(Utf8Encoding kind)
+        {
+            var e = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+            encoding(e);
+        }
 
         /// <summary>
         /// Emits a message to the error output stream

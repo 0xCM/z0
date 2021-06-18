@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Defines identity for a pair NxT or MxNxT where M and N are natural types and T is numeric
@@ -48,13 +49,12 @@ namespace Z0
         public static NatKind Parse(string src)
         {
             var numeric = NumericParser.create<ulong>();
-            var parts = text.split(src, IDI.SegSep);
+            var parts = TextTools.split(src, IDI.SegSep);
             if(parts.Length == 3)
             {
-
-                numeric.Parse(parts[0], out var m);
-                numeric.Parse(parts[1], out var n);
-                var kind = parts[2];
+                numeric.Parse(skip(parts,0), out var m);
+                numeric.Parse(skip(parts,1), out var n);
+                var kind = skip(parts,2);
                 if(kind.Length > 0)
                 {
                     var nk = ParseNumericKind(kind);
@@ -63,8 +63,8 @@ namespace Z0
             }
             else if(parts.Length == 2)
             {
-                numeric.Parse(parts[0], out var n);
-                var kind = parts[1];
+                numeric.Parse(skip(parts,0), out var n);
+                var kind = skip(parts,1);
                 if(kind.Length > 0)
                 {
                     var nk = ParseNumericKind(kind);

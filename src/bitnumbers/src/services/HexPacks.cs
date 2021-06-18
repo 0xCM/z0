@@ -227,22 +227,22 @@ namespace Z0
             if(result.Fail)
                 return (false, $"{result.Message} | Could not parse address from '{src}'");
 
-            if(!text.unfence(src, SegFence, out var seg))
+            if(!FenceParser.unfence(src, SegFence, out var seg))
                 return (false, $"Line {src} does not contain segment fence");
 
-            if(!text.unfence(src, DataFence, out var data))
+            if(!FenceParser.unfence(src, DataFence, out var data))
                 return (false, $"Line {src} does not contain data fence");
 
-            var segparts = text.split(seg, SegSep);
+            var segparts = TextTools.split(seg, SegSep);
             if(segparts.Length != 2)
                 return (false, $"Line {src} segement specifier does not have the required 2 components");
 
-            var segLeft = segparts[0];
+            var segLeft = skip(segparts,0);
             DataParser.parse(segLeft, out ushort segidx);
             if(segidx != index)
                 return (false, $"Line {line} number does not correspond to the segement index {segidx}");
 
-            var segRight = segparts[1];
+            var segRight = skip(segparts,1);
             result = DataParser.parse(segRight, out ByteSize segsize);
             if(result.Fail)
                 return (false, $"{result.Message} | Could not parse segment size from {segRight}");
@@ -267,7 +267,7 @@ namespace Z0
         public static Outcome parse(string src, out BinaryCode dst)
         {
             var result = Outcome.Success;
-            var count = text.length(src);
+            var count = TextTools.length(src);
             if(count % 2 != 0)
                 return (false, $"An even number of nibbles was not provided in the source text {src}");
             var size = count/2;

@@ -38,7 +38,7 @@ namespace Z0.Asm
 
         public static SortedReadOnlySpan<Paired<Hex16,char>> FindUnmappedChars(FS.FilePath src)
         {
-            var charmap = CharMaps.editor(TextEncodings.Utf16).Seal();
+            var charmap = CharMaps.editor(Utf16Encoding).Seal();
             var unmapped = hashset<char>();
             using var reader = src.LineReader();
             while(reader.Next(out var line))
@@ -58,7 +58,7 @@ namespace Z0.Asm
 
         public void EmitDefaultCharMap()
         {
-            var charmap = CharMaps.editor(TextEncodings.Utf16).Seal();
+            var charmap = CharMaps.editor(Utf16Encoding).Seal();
             var dst = Archive.DocPath("charmap", FS.Config);
             var emitting = Wf.EmittingFile(dst);
             var mapcount = CharMaps.emit(charmap, dst);

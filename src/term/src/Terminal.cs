@@ -171,6 +171,16 @@ namespace Z0
             }
         }
 
+        public void SetInputEncoding(Encoding e)
+        {
+            Console.InputEncoding = e;
+        }
+
+        public void SetOutputEncoding(Encoding e)
+        {
+            Console.OutputEncoding = e;
+        }
+
         void WriteWarning(object src)
         {
             lock(TermLock)

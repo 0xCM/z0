@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct CmdParser
@@ -17,15 +17,15 @@ namespace Z0
         [Op]
         public static ParseResult<ToolExecSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
         {
-            var fail = root.unparsed<ToolExecSpec>(src);
-            var parts = text.split(src, delimiter).View;
+            var fail = ParseResult.unparsed<ToolExecSpec>(src);
+            var parts = TextTools.split(src, delimiter);
             var count = parts.Length;
             ushort pos = 0;
             if(count != 0)
             {
                 ref readonly var part = ref first(parts);
                 var id = CmdId.from(part);
-                var options = root.list<ToolCmdArg>();
+                var options = list<ToolCmdArg>();
                 for(var i=1; i<count; i++)
                 {
                     ref readonly var next = ref skip(parts,i);
@@ -38,7 +38,7 @@ namespace Z0
                             return fail.WithReason(InvalidOption);
                     }
                 }
-                return root.parsed(src, new ToolExecSpec(id, options.ToArray()));
+                return ParseResult.parsed(src, new ToolExecSpec(id, options.ToArray()));
             }
 
             return fail;
@@ -49,7 +49,7 @@ namespace Z0
         {
             var parts = src.Parts;
             var count = parts.Length;
-            var args = root.list<ToolCmdArg>();
+            var args = list<ToolCmdArg>();
             for(ushort i=0; i<count; i++)
             {
                 ref readonly var part = ref skip(parts,i);

@@ -22,11 +22,4 @@ namespace Z0
         string ITextual.Format()
             => CmdRender.format(this);
     }
-
-    [Free]
-    public interface ICmdSpec<C,R> : ICmd<C>
-        where C : struct, ICmdSpec<C,R>
-    {
-
-    }
 }

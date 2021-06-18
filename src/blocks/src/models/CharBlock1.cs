@@ -61,9 +61,8 @@ namespace Z0
             get => api.length(this);
         }
 
-        [MethodImpl(Inline)]
         public string Format()
-            => Data.ToString();
+            => TextTools.format(String);
 
         public override string ToString()
             => Format();

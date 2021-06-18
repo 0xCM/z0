@@ -96,7 +96,7 @@ namespace Z0
                 var k = kind(components[0][0]);
                 var name = components[1];
                 var fence = Rules.fence("<summary>", "</summary>");
-                var summary = text.unfence(value, fence).RemoveAny((char)AsciControl.CR, (char)AsciControl.LF).Trim();
+                var summary = FenceParser.unfence(value, fence).RemoveAny((char)AsciControl.CR, (char)AsciControl.LF).Trim();
                 return ParseResult.win(key, new ApiComment(k, name, summary));
             }
             else

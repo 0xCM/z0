@@ -11,31 +11,18 @@ namespace Z0.Asm
         {
             None = 0,
 
-            [Symbol("Index", "Designates a document index")]
-            Index = 1,
+            VolNumber,
 
-            [Symbol("TOC", "Designates a document TOC")]
-            TOC = 2,
+            ChapterNumber,
 
-            [Symbol("Vol", "Designates a document volume")]
-            Vol,
+            TableNumber,
 
-            [Symbol("Vol", "Designates a document chaptre")]
-            Chapter,
+            SectionNumber,
 
-            [Symbol("Vol", "Designates a chapter part")]
-            Section,
+            FigureNumber,
 
-            [Symbol("Table", "Designates a docment table")]
-            Table,
-
-            [Symbol("Table", "Designates a docment figure")]
-            Figure,
-
-            [Symbol("TocEntry", "Designates an entry in a TOC")]
             TocEntry,
 
-            [Symbol("TocEntry", "Designates an entry in an index")]
             IndexEntry,
         }
     }

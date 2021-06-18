@@ -22,7 +22,7 @@ namespace Z0
             {
                 try
                 {
-                    var parts = text.split(src, delimiter, false).View;
+                    var parts = TextTools.split(src, delimiter, false);
                     var count = parts.Length;
                     var cells = alloc<HeaderCell>(count);
                     ref var cell = ref first(cells);

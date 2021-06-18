@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public readonly struct IntelSdmMarkers
     {
-        public const string ChapterNumber = "Chapter ";
+        public const string ChapterNumber = "CHAPTER ";
 
         public const string TableNumber = "Table ";
 

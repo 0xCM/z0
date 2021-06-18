@@ -32,15 +32,6 @@ namespace Z0
         public TextEncodingKind Kind => K.Utf32;
     }
 
-    public readonly struct TextEncodings
-    {
-        public static AsciEncoding Asci => default;
-
-        public static Utf8Encoding Utf8 => default;
-
-        public static Utf16Encoding Utf16 => default;
-    }
-
     public static partial class XText
     {
         [MethodImpl(Inline), Op]

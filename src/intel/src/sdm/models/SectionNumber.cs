@@ -17,8 +17,6 @@ namespace Z0.Asm
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct SectionNumber
         {
-            public static SectionNumber Empty => default;
-
             public ushort A;
 
             public ushort B;
@@ -66,6 +64,14 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => (byte)(core.u8(A !=0) + core.u8(B != 0) + core.u8(C != 0) + core.u8(D != 0));
             }
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Count == 0;
+            }
+
+            public static SectionNumber Empty => default;
         }
     }
 }

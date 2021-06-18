@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
@@ -12,20 +11,21 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        [StructLayout(LayoutKind.Sequential, Pack =1)]
         public struct TocEntry
         {
-            public SectionToc Section;
+            public SectionNumber Section;
 
             public TocTitle Title;
 
             [MethodImpl(Inline)]
-            public TocEntry(in SectionToc section, in TocTitle title)
+            public TocEntry(in SectionNumber section, in TocTitle toc)
             {
                 Section = section;
-                Title = title;
+                Title = toc;
             }
-        }
 
+            public static TocEntry Empty => default;
+        }
     }
 }
