@@ -13,10 +13,6 @@ namespace Z0
 
     public static partial class XTend
     {
-        [MethodImpl(Inline), Op]
-        public static bool IsPart(this Assembly src)
-            => Attribute.IsDefined(src, typeof(PartIdAttribute));
-
         /// Determines whether the unsigned facet of a block classification is enabled
         /// </summary>
         /// <param name="k">The vector classifier</param>

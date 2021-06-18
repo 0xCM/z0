@@ -15,31 +15,19 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static uint cilbytes(Type[] types, FS.FilePath dst)
-        {
-            var counter = 0u;
-            var header = string.Concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
-            using var writer = dst.Writer();
-            writer.WriteLine(header);
-            var props = types.StaticProperties().Where(p => p.GetGetMethod() != null && p.PropertyType == typeof(ReadOnlySpan<byte>));
-
-            foreach(var p in props)
-            {
-                var m = p.GetGetMethod();
-                var body = m.GetMethodBody();
-                var cil = body.GetILAsByteArray();
-                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHex());
-                writer.WriteLine(line);
-                counter++;
-            }
-            return counter;
-        }
+        public static ReadOnlySpan<ReflectedByteSpan> reflected(Type[] src)
+            => Clr.bytespans(src);
 
         [MethodImpl(Inline), Op]
         public static ByteSpanSpec specify(Identifier name, BinaryCode data, bool @static = true)
             => new ByteSpanSpec(name, data, @static);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
+        public static ByteSpanSpec<E> specify<E>(Identifier name)
+            where E : unmanaged, Enum
+                => specify<E>(name, Symbols.index<E>().View);
+
+        [MethodImpl(Inline)]
         public static ByteSpanSpec<E> specify<E>(Identifier name, ReadOnlySpan<Sym<E>> literals, bool @static = true)
             where E : unmanaged, Enum
                 => new ByteSpanSpec<E>(name, literals, @static);
@@ -56,35 +44,41 @@ namespace Z0
         public static string format(ByteSpanSpec src)
         {
             var dst = TextTools.buffer();
-            render(src,dst);
+            render(src, dst);
             return dst.Emit();
         }
 
         [Op]
+        public static void render(ByteSpanSpec src, ITextBuffer dst)
+            => render(src, HexFormatter.array<byte>(src.Data), dst);
+
         public static string format<T>(ByteSpanSpec<T> src)
-            where T : unmanaged, Enum
+            where T : unmanaged
         {
             var dst = TextTools.buffer();
             render(src,dst);
             return dst.Emit();
         }
 
-        [Op]
-        public static void render<T>(ByteSpanSpec<T> spec, ITextBuffer dst)
-            where T : unmanaged, Enum
+        public static string format<T>(ReadOnlySpan<Sym<T>> src)
+            where T : unmanaged
         {
-            var payload = TextTools.buffer();
-            var src = spec.Data;
+            var dst = TextTools.buffer();
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var cell = ref skip(src,i);
                 if(i != count - 1)
-                    payload.Append(string.Format("{0}, ", cell));
+                    dst.Append(string.Format("{0}, ", cell));
                 else
-                    payload.Append(cell.ToString());
+                    dst.Append(cell.ToString());
             }
+            return dst.Emit();
+        }
 
+        public static void render<T>(ByteSpanSpec<T> spec, ITextBuffer dst)
+            where T : unmanaged
+        {
             dst.Append("public");
             dst.Append(Chars.Space);
             dst.Append(spec.IsStatic ? RP.rspace("static") : EmptyString);
@@ -92,16 +86,8 @@ namespace Z0
             dst.Append(Chars.Space);
             dst.Append(spec.Name);
             dst.Append(" => ");
-            dst.Append(string.Concat(string.Format("new {0}", spec.CellType), RP.bracket(spec.Data.Length), RP.embrace(payload.Emit())));
+            dst.Append(string.Concat(string.Format("new {0}", spec.CellType), RP.bracket(spec.Data.Length), RP.embrace(format(spec.Data))));
             dst.Append(Chars.Semicolon);
-        }
-
-
-        [Op]
-        public static void render(ByteSpanSpec src, ITextBuffer dst)
-        {
-            var payload = HexFormatter.array<byte>(src.Data);
-            render(src, payload, dst);
         }
 
         [Op]
@@ -136,5 +122,15 @@ namespace Z0
             }
             return specify(name, buffer, props.First.IsStatic);
         }
+    }
+
+    partial class XTend
+    {
+        public static string Format(this ByteSpanSpec src)
+            => ByteSpans.format(src);
+
+       public static string Format<T>(this ByteSpanSpec<T> src)
+            where T : unmanaged
+                => ByteSpans.format(src);
     }
 }

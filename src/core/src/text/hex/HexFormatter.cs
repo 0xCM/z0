@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="dst">The rendered data receiver</param>
         /// <typeparam name="T">The primal numeric type</typeparam>
         [Op, Closures(Closure)]
-        public static void format<T>(ReadOnlySpan<T> src, in HexFormatOptions config, StringBuilder dst)
+        public static void format<T>(ReadOnlySpan<T> src, in HexFormatOptions config, ITextBuffer dst)
             where T : unmanaged
         {
             var count = src.Length;
@@ -69,9 +69,7 @@ namespace Z0
             var last = count - 1;
             for(var i=0u; i<count; i++)
             {
-                ref readonly var current = ref skip(cell,i);
-                dst.Append(HexFormatter.format(current, config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec));
-
+                dst.Append(format(skip(cell,i), config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec));
                 if(i != last)
                     dst.Append(config.SegDelimiter);
             }

@@ -12,5 +12,8 @@ namespace Z0
     {
        public static AsciByteSpans AsciByteSpans(this IServiceContext context)
             => Svc.AsciByteSpans.create(context);
+
+       public static IndexRender IndexRender(this IServiceContext context)
+            => Svc.IndexRender.create(context);
     }
 }

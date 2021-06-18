@@ -33,7 +33,6 @@ namespace Z0
 
         public ClrArtifactKind Kind
             => ClrArtifactKind.Method;
-
         public string Format()
             => DisplaySig.Format();
 

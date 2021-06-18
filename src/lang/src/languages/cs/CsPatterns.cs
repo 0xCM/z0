@@ -16,25 +16,43 @@ namespace Z0
     {
         const string Space = " ";
 
-        public const string Public = "public";
+        public const string @struct = "struct";
+
+        public const string @public = "public";
+
+        public const string @static = "static";
+
+        public const string @readonly = "readonly";
+
+        public const string @using = "using";
+
+        public const string @namespace = "namespace";
+
+        public const string @class = "class";
+
+        public const string @enum = "enum";
+
+        public const string @short = "short";
+
+        public const string @byte = "byte";
 
         public readonly struct Literals
         {
             public const string Space = " ";
 
-            public const string Public = "public";
+            public const string Public = @public;
 
-            public const string Readonly = "readonly";
+            public const string Readonly = @readonly;
 
-            public const string Class = "class";
+            public const string Class = @class;
 
             public const string Struct = "struct";
 
-            public const string Static = "static";
+            public const string Static = @static;
 
             public const string String = "string";
 
-            public const string Using = "using";
+            public const string Using = @using;
 
             public const string Open = "{";
 
@@ -42,19 +60,17 @@ namespace Z0
 
             public const string UShort = "ushort";
 
-            public const string Short = "short";
+            public const string Namespace = @namespace;
 
-            public const string Byte = "byte";
-
-            public const string Namespace = "namespace";
+            public const string Term = ";";
 
             public const string NamespaceDeclPattern = Namespace + Space + "{0}";
 
             public const string UsingStatic = Using + Space + Static;
 
-            public const string UsingNamespace = Using + Space + "{0};";
+            public const string UsingNamespace = Using + Space + "{0}" + Term;
 
-            public const string UsingType = UsingStatic + Space + "{0};";
+            public const string UsingType = UsingStatic + Space + "{0}" + Term;
 
             public const string InlineAttribute = "[MethodImpl(Inline)]";
 
@@ -68,7 +84,7 @@ namespace Z0
 
             public const string UsingCompilerServices = "using System.Runtime.CompilerServices;";
 
-            internal const string OneLineFunc = "{0} {1}({2}) => {3};";
+            internal const string OneLineFunc = "{0} {1}({2}) => {3}" + Term;
 
             internal const string StaticOneLineFunc = Static + Space + OneLineFunc;
 
@@ -78,6 +94,10 @@ namespace Z0
 
             public const string EnumDeclPattern = "public enum {0} : {1}";
         }
+
+        [MethodImpl(Inline)]
+        public static string Term()
+            => L.Term;
 
         [MethodImpl(Inline)]
         public static string Empty()
@@ -168,5 +188,11 @@ namespace Z0
 
         public static string PublicStaticOneLineFunc(string ret, string name, string ops, string body)
             => string.Format(L.PublicStaticOneLineFunc, ret, name, ops, body);
+
+
+        public static RenderPattern<string> ReadOnlySpanTypePattern => "ReadOnlySpan<{0}>";
+
+        public static RenderPattern<string,string> ExpressionBody => "{0} => {1}";
+
     }
 }

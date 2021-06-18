@@ -2,10 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public sealed class AsmGen : AppService<AsmGen>
-    {
+    using System;
 
+    partial class XTend
+    {
+        [Op]
+        public static string DottedName(this Type src)
+            => src.FullName.Replace(Chars.Plus, Chars.Dot);
     }
 }

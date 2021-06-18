@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static minicore;
 
@@ -36,7 +35,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        public static ApiHostUri[] ApiHostUris(this Assembly[] src)
+        public static ApiHostUri[] ApiHostUri(this Assembly[] src)
             => src.SelectMany(x => x.ApiHostUri());
     }
 }

@@ -908,9 +908,23 @@ namespace Z0.Asm
         void EmitAsciByteSpan(string content)
         {
             var lookups = Wf.AsciLookups();
+            var bytes = Wf.AsciBytes();
             var dst = TextTools.buffer();
-            lookups.AsciByteSpan(8, "Uppercase", content,  dst);
-            Wf.Row(dst.Emit());
+            var spec = bytes.DefineAsciBytes("Uppercase", content);
+            var data = spec.Format();
+            Wf.Row(data);
+
+            //lookups.EmitAsciBytes(8, "Uppercase", content,  dst);
+            //Wf.Row(dst.Emit());
+        }
+
+        void EmitSymbolIndex<E>(Identifier container)
+            where E : unmanaged, Enum
+        {
+            var render = Wf.IndexRender();
+            var buffer = TextTools.buffer();
+            render.RenderIndex<E>(container, buffer);
+            Wf.Row(buffer.Emit());
         }
 
         string RenderAsciByteSpan(Identifier name, string data)
@@ -962,14 +976,16 @@ namespace Z0.Asm
 
         public void Run()
         {
-            EmitAsciByteSpan("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            //EmitAsciByteSpan("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs");
+
             //var worker = AsmIndexWorker.create()
             //Wf.GlobalCommands().ProcessIntelSdm();
             //ShowOps();
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
-            //Wf.GlobalCommands().CaptureV2();
+            Wf.GlobalCommands().CaptureV2();
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();

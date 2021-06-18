@@ -52,6 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Segment(ByteSize offset, ByteSize size)
             => slice(Data.View, offset, size);
+
         public string Format()
             => api.format(this);
 
