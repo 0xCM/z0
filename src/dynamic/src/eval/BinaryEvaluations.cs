@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BinaryEvaluations(in Pairs<T> src, PairEvalResults<T> dst)
         {
-            root.invariant(src.PointCount == dst.PointCount, () => "no");
+            Require.invariant(src.PointCount == dst.PointCount, () => "no");
             Source = src;
             Target = dst;
         }

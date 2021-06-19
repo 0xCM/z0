@@ -25,7 +25,7 @@ namespace Z0
         {
             var src = Enums.details<E,T>();
             var count = src.Length;
-            var token = CliTokens.token<E>();
+            var token = Clr.token<E>();
             var datatype = Enums.@base<E>();
             var description = string.Empty;
             var indices = alloc<uint>(count);

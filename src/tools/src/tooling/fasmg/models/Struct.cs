@@ -27,8 +27,8 @@ namespace Z0.Tools
         [Op]
         public static ref Struct define(string name, string type, string comment, out Struct dst)
         {
-            ByteBlocks.asci(n16,name, out dst.Name);
-            ByteBlocks.asci(n8,type, out dst.Type);
+            ByteBlocks.asci(n16, name, out dst.Name);
+            ByteBlocks.asci(n8, type, out dst.Type);
             ByteBlocks.asci(n64, comment, out dst.Comment);
             return ref dst;
         }

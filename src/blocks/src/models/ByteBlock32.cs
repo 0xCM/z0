@@ -29,6 +29,18 @@ namespace Z0
             get => bytes(this);
         }
 
+        public ByteBlock16 Lo
+        {
+            [MethodImpl(Inline)]
+            get => A;
+        }
+
+        public ByteBlock16 Hi
+        {
+            [MethodImpl(Inline)]
+            get => B;
+        }
+
         public ref byte First
         {
             [MethodImpl(Inline)]

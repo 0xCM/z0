@@ -74,7 +74,7 @@ namespace Z0
                 while(Reader.MoveToNextAttribute())
                     dst.Add(attribute(Reader.Name, Reader.Value));
 
-                root.invariant(dst.Count == count, () => $"{dst.Count} != {count}");
+                Require.invariant(dst.Count == count, () => $"{dst.Count} != {count}");
                 Reader.MoveToElement();
                 return dst;
             }

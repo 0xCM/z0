@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     [ApiHost, RecordGroup]
     public readonly partial struct CliRows
@@ -33,6 +31,5 @@ namespace Z0
 
         public static Type[] types()
             => typeof(CliRows).GetNestedTypes();
-
     }
 }

@@ -273,6 +273,14 @@ namespace Z0.Asm
         }
 
         [Op]
+        public static string format(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config)
+        {
+            var dst = TextTools.buffer();
+            render(@base, src, config, dst);
+            return dst.ToString();
+        }
+
+        [Op]
         public static void render(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config, ITextBuffer dst)
         {
             const string AbsolutePattern = "{0} {1} {2}";

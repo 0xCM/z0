@@ -27,7 +27,7 @@ namespace Z0
             {
                 var x = context.DataSource.Cell(w);
                 var y = context.DataSource.Cell(w);
-                root.invariant(f(x,y) == g(x,y), () => $"{x} != {y}");
+                Require.invariant(f(x,y) == g(x,y), () => $"{x} != {y}");
             }
         }
 

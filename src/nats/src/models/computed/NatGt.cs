@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatGt(K1 k1, K2 k2)
-            => root.invariant(NatCalc.gt(k1,k2), () => Description);
+            => Require.invariant(NatCalc.gt(k1,k2), () => Description);
 
         public override string ToString()
             => Description;

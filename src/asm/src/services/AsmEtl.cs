@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -16,6 +15,55 @@ namespace Z0.Asm
     {
         AsmDecoder Decoder;
 
+        [Op]
+        public static uint filter(ReadOnlySpan<AsmMemberRoutine> src, Predicate<AsmMemberRoutine> predicate, Span<AsmMemberRoutine> dst)
+        {
+            var j=0u;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var candidate = ref skip(src,i);
+                if(predicate(candidate))
+                    seek(dst,j++) = candidate;
+            }
+            return j;
+        }
+
+        /// <summary>
+        /// Describes the instructions that comprise a function
+        /// </summary>
+        /// <param name="src">The source function</param>
+        [Op]
+        public static ReadOnlySpan<AsmInstructionInfo> summarize(AsmRoutine src)
+        {
+            var count = src.InstructionCount;
+            var buffer = new AsmInstructionInfo[count];
+            var offset = 0u;
+            var @base = src.BaseAddress;
+            var view = src.Instructions.View;
+            var dst = span(buffer);
+            var counter = 0u;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(view,i);
+                var size = instruction.InstructionSize;
+
+                if(src.Code.Size < offset + size)
+                {
+                    term.error($"Instruction size mismatch {instruction.IP} {offset} {src.Code.Size} {size}");
+                    continue;
+                }
+
+                var invalid = instruction.Mnemonic == IceMnemonic.INVALID;
+                if(invalid)
+                    break;
+
+                seek(dst, i) = AsmEtl.summarize(@base, instruction.Instruction, src.Code, instruction.Statment, offset);
+                offset += size;
+                counter++;
+            }
+            return slice(dst,0,counter);
+        }
 
         public static SortedSpan<ApiCodeBlock> blocks(ReadOnlySpan<AsmRoutine> src)
         {
@@ -39,7 +87,6 @@ namespace Z0.Asm
             return size;
         }
 
-
         [Op]
         public static AsmInstructionInfo summarize(MemoryAddress @base, IceInstruction src, CodeBlock encoded, AsmExpr statement, uint offset)
             => new AsmInstructionInfo(@base, offset,  statement,  src.Specifier, code(encoded, offset, src.InstructionSize));
@@ -55,7 +102,7 @@ namespace Z0.Asm
         public SortedSpan<AsmEncodingInfo> CollectDistinctEncodings(ReadOnlySpan<AsmIndex> src)
         {
             var collecting = Wf.Running(Msg.CollectingBitstrings.Format(src.Length));
-            var collected = root.hashset<AsmEncodingInfo>();
+            var collected = hashset<AsmEncodingInfo>();
             var count = src.Length;
             var counter = 0u;
             for(var i=0; i<count; i++)
@@ -86,53 +133,53 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
         }
 
-        ReadOnlySpan<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
-        {
-            var count = src.Length;
-            var dst = core.list<AsmApiStatement>();
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(src,i);
-                var outcome = Decoder.Decode(block.Code, out var instructions);
-                if(outcome.Fail)
-                {
-                    Wf.Error(outcome.Message);
-                    continue;
-                }
+        // ReadOnlySpan<AsmApiStatement> BuildStatements(ReadOnlySpan<ApiCodeBlock> src)
+        // {
+        //     var count = src.Length;
+        //     var dst = core.list<AsmApiStatement>();
+        //     var counter = 0u;
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var block = ref skip(src,i);
+        //         var outcome = Decoder.Decode(block.Code, out var instructions);
+        //         if(outcome.Fail)
+        //         {
+        //             Wf.Error(outcome.Message);
+        //             continue;
+        //         }
 
-                counter += BuildStatements(block.OpUri, instructions, dst);
-            }
-            return dst.ViewDeposited();
-        }
+        //         counter += BuildStatements(block.OpUri, instructions, dst);
+        //     }
+        //     return dst.ViewDeposited();
+        // }
 
-        uint BuildStatements(in OpUri uri, IceInstructions src, List<AsmApiStatement> dst)
-        {
-            var count = (uint)src.Count;
-            if(count == 0)
-                return  count;
+        // uint BuildStatements(in OpUri uri, IceInstructions src, List<AsmApiStatement> dst)
+        // {
+        //     var count = (uint)src.Count;
+        //     if(count == 0)
+        //         return  count;
 
-            var offseq = AsmOffsetSeq.Zero;
-            var view = src.View;
-            var code = src.Encoded.View;
-            ref readonly var i0 = ref first(view);
-            var @base = i0.MemoryAddress64;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var instruction = ref skip(view,i);
-                var statement = new AsmApiStatement();
-                var size = (uint)instruction.ByteLength;
-                var recoded = new ApiCodeBlock(instruction.IP, uri, slice(code, offseq.Offset, size).ToArray());
-                var apifx = new ApiInstruction(@base, instruction, recoded);
-                offseq = offseq.AccrueOffset(size);
+        //     var offseq = AsmOffsetSeq.Zero;
+        //     var view = src.View;
+        //     var code = src.Encoded.View;
+        //     ref readonly var i0 = ref first(view);
+        //     var @base = i0.MemoryAddress64;
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var instruction = ref skip(view,i);
+        //         var statement = new AsmApiStatement();
+        //         var size = (uint)instruction.ByteLength;
+        //         var recoded = new ApiCodeBlock(instruction.IP, uri, slice(code, offseq.Offset, size).ToArray());
+        //         var apifx = new ApiInstruction(@base, instruction, recoded);
+        //         offseq = offseq.AccrueOffset(size);
 
-                statement.BlockAddress = @base;
-                statement.OpUri = uri;
-                statement.IP = instruction.IP;
-                dst.Add(statement);
-            }
-            return (uint)count;
-        }
+        //         statement.BlockAddress = @base;
+        //         statement.OpUri = uri;
+        //         statement.IP = instruction.IP;
+        //         dst.Add(statement);
+        //     }
+        //     return (uint)count;
+        // }
 
         public static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)
         {
@@ -161,7 +208,7 @@ namespace Z0.Asm
 
         public static ReadOnlySpan<ApiInstruction> filter(ReadOnlySpan<ApiInstruction> src, byte opcode)
         {
-            var dst = core.list<ApiInstruction>();
+            var dst = list<ApiInstruction>();
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
@@ -183,33 +230,33 @@ namespace Z0.Asm
             return buffer;
         }
 
-        [Op]
-        public static ReadOnlySpan<ApiInstruction> instructions(ReadOnlySpan<ApiPartRoutines> src)
-        {
-            var dst = root.list<ApiInstruction>();
-            for(var i=0; i<src.Length; i++)
-            {
-                ref readonly var part = ref skip(src,i);
-                var hosts = part.View;
-                for(var j=0; j<hosts.Length; j++)
-                {
-                    ref readonly var host = ref skip(hosts, j);
-                    var members = host.Members.View;
-                    for(var k=0; k<members.Length; k++)
-                    {
-                        ref readonly var routine = ref skip(members,k);
-                        var instructions = routine.Instructions.View;
-                        for(var m=0; m<instructions.Length; m++)
-                        {
-                            ref readonly var instruction = ref skip(instructions,m);
-                            dst.Add(instruction);
-                        }
-                    }
-                }
-            }
-            dst.Sort();
-            return dst.ViewDeposited();
-        }
+        // [Op]
+        // public static ReadOnlySpan<ApiInstruction> instructions(ReadOnlySpan<ApiPartRoutines> src)
+        // {
+        //     var dst = root.list<ApiInstruction>();
+        //     for(var i=0; i<src.Length; i++)
+        //     {
+        //         ref readonly var part = ref skip(src,i);
+        //         var hosts = part.View;
+        //         for(var j=0; j<hosts.Length; j++)
+        //         {
+        //             ref readonly var host = ref skip(hosts, j);
+        //             var members = host.Members.View;
+        //             for(var k=0; k<members.Length; k++)
+        //             {
+        //                 ref readonly var routine = ref skip(members,k);
+        //                 var instructions = routine.Instructions.View;
+        //                 for(var m=0; m<instructions.Length; m++)
+        //                 {
+        //                     ref readonly var instruction = ref skip(instructions,m);
+        //                     dst.Add(instruction);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     dst.Sort();
+        //     return dst.ViewDeposited();
+        // }
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static AsmRowSet<T> rowset<T>(T key, AsmDetailRow[] src)
@@ -219,17 +266,17 @@ namespace Z0.Asm
         public static HexVector16 offsets(W16 w, ReadOnlySpan<AsmDetailRow> src)
         {
             var count = src.Length;
-            var buffer = memory.alloc<Hex16>(count);
+            var buffer = alloc<Hex16>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(src,i).LocalOffset;
             return buffer;
         }
 
-        public uint Emit(in AsmRowSet<AsmMnemonic> src)
-        {
-            return Emit(src, DetailPath(src));
-        }
+        // public uint Emit(in AsmRowSet<AsmMnemonic> src)
+        // {
+        //     return Emit(src, DetailPath(src));
+        // }
 
         public uint Emit(in AsmRowSet<AsmMnemonic> src, FS.FolderPath dir)
         {
@@ -281,8 +328,8 @@ namespace Z0.Asm
             return buffer;
         }
 
-        FS.FilePath DetailPath(in AsmRowSet<AsmMnemonic> src)
-            => Db.Table(AsmDetailRow.TableId, src.Key.ToString());
+        // FS.FilePath DetailPath(in AsmRowSet<AsmMnemonic> src)
+        //     => Db.Table(AsmDetailRow.TableId, src.Key.ToString());
 
         FS.FilePath DetailPath(FS.FolderPath dir, in AsmRowSet<AsmMnemonic> src)
             => Db.Table(dir, string.Format("{0}.{1}", Tables.identify<AsmDetailRow>(), src.Key));

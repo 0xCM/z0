@@ -8,19 +8,17 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static memory;
-    using static Part;
+    using static core;
+    using static Root;
 
     public sealed class ApiResCapture : AsmWfService<ApiResCapture>
     {
         AsmDecoder Decoder;
 
-       IAsmRoutineFormatter Formatter;
 
         protected override void OnContextCreated()
         {
             Decoder = Wf.AsmDecoder();
-            Formatter = Wf.AsmFormatter();
         }
 
         // public Index<CapturedApiRes> CaptureApiRes(FS.FilePath src, FS.FilePath dst)

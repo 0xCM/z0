@@ -6,12 +6,29 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Threading;
 
     using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
     partial struct core
     {
+        /// <summary>
+        /// Atomically add a source value to a target
+        /// </summary>
+        /// <param name="src">The value to increment in-place</param>
+        [MethodImpl(Inline), Op]
+        public static long add(ref long dst, long src)
+            => Interlocked.Add(ref dst, src);
+
+        /// <summary>
+        /// Atomically add a source value to a target
+        /// </summary>
+        /// <param name="src">The value to increment in-place</param>
+        [MethodImpl(Inline), Op]
+        public static long add(ref int dst, int src)
+            => Interlocked.Add(ref dst, src);
+
         /// <summary>
         /// Adds an offset to a reference
         /// </summary>

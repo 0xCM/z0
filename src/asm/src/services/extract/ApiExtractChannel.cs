@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using static core;
+
     internal class ApiExtractChannel
     {
         event EventHandler<HostResolvedEvent> HostResolved;
@@ -19,19 +21,19 @@ namespace Z0
         event EventHandler<ExtractErrorEvent> ExtractError;
 
         public void Raise(HostResolvedEvent e)
-            => root.run(() => HostResolved.Invoke(this, e));
+            => run(() => HostResolved.Invoke(this, e));
 
         public void Raise(PartResolvedEvent e)
-            => root.run(() => PartResolved.Invoke(this, e));
+            => run(() => PartResolved.Invoke(this, e));
 
         public void Raise(MemberParsedEvent e)
-            => root.run(() => MemberParsed.Invoke(this, e));
+            => run(() => MemberParsed.Invoke(this, e));
 
         public void Raise(MemberDecodedEvent e)
-            => root.run(() => MemberDecoded.Invoke(this, e));
+            => run(() => MemberDecoded.Invoke(this, e));
 
         public void Raise(ExtractErrorEvent e)
-            => root.run(() => ExtractError.Invoke(this, e));
+            => run(() => ExtractError.Invoke(this, e));
 
         public void Enlist(ApiExtractWorkflow receiver)
         {

@@ -22,7 +22,7 @@ namespace Z0
 
         uint ExtractParts(ResolvedPart[] src, bool pll)
         {
-            var flow = Wf.Running(ExtractingResolved.Format(src.Length));
+            var flow = Wf.Running(Msg.ExtractingResolved.Format(src.Length));
             var counter = 0u;
             if(pll)
             {
@@ -34,7 +34,7 @@ namespace Z0
             {
                 counter = ExtractParts(src);
             }
-            Wf.Ran(flow, string.Format(ExtractedResolved.Format(counter)));
+            Wf.Ran(flow, string.Format(Msg.ExtractedResolved.Format(counter)));
 
             return counter;
         }

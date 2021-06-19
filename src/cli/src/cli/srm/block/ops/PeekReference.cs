@@ -17,22 +17,8 @@ namespace Z0
         {
             // When reference has at most 24 bits.
             [MethodImpl(Inline), Op]
-            public int PeekReference(int offset, bool smallRefSize)
-            {
-                if (smallRefSize)
-                {
-                    return PeekUInt16(offset);
-                }
-
-                var value = PeekUInt32(offset);
-
-                // if (!TokenTypeIds.IsValidRowId(value))
-                // {
-                //     Throw.ReferenceOverflow();
-                // }
-
-                return (int)value;
-            }
+            public uint PeekReference(int offset, bool smallRefSize)
+                => smallRefSize ? PeekUInt16(offset) : PeekUInt32(offset);
 
             // Use when searching for a tagged or non-tagged reference.
             // The result may be an invalid reference and shall only be used to compare with a valid reference.

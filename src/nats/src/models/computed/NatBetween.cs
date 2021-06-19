@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatBetween(K k, K1 k1, K2 k2)
-            => root.invariant(NatCalc.between(k, k1, k2), () => Description);
+            => Require.invariant(NatCalc.between(k, k1, k2), () => Description);
 
         public override string ToString()
             => Description;

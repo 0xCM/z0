@@ -79,7 +79,6 @@ namespace Z0
         public static bool IsVirtual(this StringHandle src)
             => (src.Raw() & TokenTypeIds.VirtualBit) != 0;
 
-
         [MethodImpl(Inline), Op]
         public static ushort VirtualValue(this BlobHandle src)
             => unchecked((ushort)(src.Raw() >> 8));

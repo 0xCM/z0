@@ -70,7 +70,7 @@ namespace Z0
 
         public static CSharpCompilation compilation(ToolShimSpec config)
         {
-            root.invariant(config.ToolPath.Exists, () => $"The file {config.ToolPath}, it must exist");
+            Require.invariant(config.ToolPath.Exists, () => $"The file {config.ToolPath}, it must exist");
             var refs = CsTools.pe(typeof(object), typeof(Enumerable), typeof(ProcessStartInfo));
             var code = new ToolShimCode(config.TargetPath);
             return CsTools.compilation(config.Name, refs, CsTools.parse(code.Generate()));

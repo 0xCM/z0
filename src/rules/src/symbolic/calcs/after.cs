@@ -15,14 +15,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> after(ReadOnlySpan<char> src, char match)
         {
-            var i =  SymbolicQuery.index(src,match);
+            var i =  src.IndexOf(match);
             return i != NotFound ? slice(src,i + 1) : default;
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> after(ReadOnlySpan<char> src, ReadOnlySpan<char> match)
         {
-            var i =  SymbolicQuery.index(src, match);
+            var i = src.IndexOf(match);
             return i != NotFound ? slice(src, i + match.Length) : default;
         }
 
@@ -35,7 +35,7 @@ namespace Z0
         [Op]
         public static string after(string src, char match)
         {
-            var i = SymbolicQuery.index(src, match);
+            var i = src.IndexOf(match);
             return i != NotFound ? sys.substring(src, i + 1) : EmptyString;
         }
 
@@ -43,14 +43,14 @@ namespace Z0
         [Op]
         public static string after(string src, string match)
         {
-            var i = SymbolicQuery.index(src, match);
+            var i = src.IndexOf(match);
             return i != -1 ? sys.substring(src, i + match.Length) : EmptyString;
         }
 
         [Op]
         public static bool after(string src, string match, out string result)
         {
-            var i = SymbolicQuery.index(src, match);
+            var i = src.IndexOf(match);
             result = i == NotFound ? EmptyString : sys.substring(src, i + match.Length);
             return i != NotFound;
         }

@@ -15,7 +15,7 @@ namespace Z0
         {
             try
             {
-                var parts = ApiRuntimeLoader.parts(Index<PartId>.Empty);
+                var parts = ApiRuntimeLoader.parts(array<PartId>());
                 term.inform(AppMsg.status(text.prop("PartCount", parts.Components.Length)));
                 var rng = Rng.@default();
                 using var wf = WfAppLoader.load(parts, args).WithSource(rng);

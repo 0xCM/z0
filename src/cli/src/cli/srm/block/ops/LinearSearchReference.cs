@@ -8,26 +8,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     partial class SRM
     {
         unsafe partial struct MemoryBlock
         {
-
             // Always RowNumber....
+            [MethodImpl(Inline), Op]
             public int LinearSearchReference(int rowSize, int referenceOffset, uint referenceValue, bool isReferenceSmall)
             {
                 int currOffset = referenceOffset;
-                int totalSize = this.Length;
+                int totalSize = Length;
                 while (currOffset < totalSize)
                 {
-                    uint currReference = PeekReferenceUnchecked(currOffset, isReferenceSmall);
+                    var currReference = PeekReferenceUnchecked(currOffset, isReferenceSmall);
                     if (currReference == referenceValue)
-                    {
                         return currOffset / rowSize;
-                    }
 
                     currOffset += rowSize;
                 }

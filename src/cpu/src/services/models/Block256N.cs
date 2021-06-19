@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Block256(SpanBlock256<T> src)
         {
-            root.invariant(src.CellCount >= Length, () => "no");
+            Require.invariant(src.CellCount >= Length, () => "no");
             Data = src;
         }
 

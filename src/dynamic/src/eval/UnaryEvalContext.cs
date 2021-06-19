@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public UnaryEvalContext(in EvalContext context, in UnaryEvaluations<T> dst)
         {
-            root.invariant(dst.Source.Length == dst.Target.PointCount, () => "no");
+            Require.invariant(dst.Source.Length == dst.Target.PointCount, () => "no");
             Context = context;
             Target = dst;
         }

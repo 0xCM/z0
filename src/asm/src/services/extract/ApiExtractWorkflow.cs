@@ -18,34 +18,39 @@ namespace Z0
 
         int HostResolvedCount;
 
+        int PartResolvedCount;
+
         ApiExtractChannel EventChannel;
 
         public ApiExtractWorkflow()
         {
             MemberDecodedCount = 0;
             MemberParsedCount = 0;
+            HostResolvedCount = 0;
+            PartResolvedCount = 0;
             EventChannel = new();
             EventChannel.Enlist(this);
         }
 
         internal void Deposit(PartResolvedEvent e)
         {
-
+            inc(ref PartResolvedCount);
         }
 
         internal void Deposit(HostResolvedEvent e)
         {
-            root.atomic(ref HostResolvedCount);
+
+            inc(ref HostResolvedCount);
         }
 
         internal void Deposit(MemberParsedEvent e)
         {
-            root.atomic(ref MemberParsedCount);
+            inc(ref MemberParsedCount);
         }
 
         internal void Deposit(MemberDecodedEvent e)
         {
-            root.atomic(ref MemberDecodedCount);
+            inc(ref MemberDecodedCount);
         }
 
         internal void Deposit(ExtractErrorEvent e)
@@ -100,7 +105,7 @@ namespace Z0
             var reader = Wf.PdbReader(symbols);
             var flow = Wf.Running(string.Format("Indexing symbols for {0} from {1}", symbols.PePath, symbols.PdbPath));
             var counter = 0u;
-            var buffer = core.list<PdbModel.Method>();
+            var buffer = list<PdbModel.Method>();
             for(var i=0; i<hosts.Length; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
@@ -154,7 +159,7 @@ namespace Z0
             var files = pack.Files(FS.Csv).Yield();
             var counting = Wf.Running(string.Format("Counting lines in {0} files from {1}", files.Length, pack.Root));
             var counts = TextFiles.linecount(files);
-            root.iter(counts, c => Wf.Row(c.Format()));
+            iter(counts, c => Wf.Row(c.Format()));
             Wf.Ran(counting, string.Format("Counted lines in {0} files", files.Length));
             return counts;
         }

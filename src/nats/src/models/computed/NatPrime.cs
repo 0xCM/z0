@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatPrime(K n)
-            => root.invariant(NatPrime.test(n.NatValue), () => Description);
+            => Require.invariant(NatPrime.test(n.NatValue), () => Description);
 
         public ulong NatValue
             => k.NatValue;

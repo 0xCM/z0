@@ -9,6 +9,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using static Root;
+    using static core;
+
     partial class SRM
     {
         unsafe partial struct MemoryBlock
@@ -17,7 +20,7 @@ namespace Z0
             public static byte[] ReadBytes(byte* pSrc, int byteCount)
             {
                 if (byteCount == 0)
-                    return sys.empty<byte>();
+                    return array<byte>();
 
                 var dst = new byte[byteCount];
                 Marshal.Copy((IntPtr)pSrc, dst, 0, byteCount);

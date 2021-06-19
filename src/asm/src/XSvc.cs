@@ -11,10 +11,6 @@ namespace Z0
     public static partial class XSvc
     {
         [Op]
-        public static AsmFormatter AsmFormatter(this IWfRuntime wf)
-            => Services.AsmFormatter.create(wf);
-
-        [Op]
         public static AsmEtl AsmEtl(this IWfRuntime wf)
             => Services.AsmEtl.create(wf);
 
@@ -43,12 +39,12 @@ namespace Z0
             => Services.AsmJmpPipe.create(wf);
 
         [Op]
-        public static AsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host, AsmFormatter formatter)
-            => new AsmImmWriter(wf, host, formatter);
+        public static AsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host)
+            => new AsmImmWriter(wf, host);
 
         [Op]
-        public static AsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host, AsmFormatter formatter, FS.FolderPath root)
-            => new AsmImmWriter(wf, host, formatter, root);
+        public static AsmImmWriter ImmWriter(this IWfRuntime wf, in ApiHostUri host, FS.FolderPath root)
+            => new AsmImmWriter(wf, host, root);
 
         [Op]
         public static AsmDecoder AsmDecoder(this IWfRuntime wf)
@@ -66,9 +62,8 @@ namespace Z0
         public static AsmCallPipe AsmCallPipe(this IWfRuntime wf)
             => Services.AsmCallPipe.create(wf);
 
-       [Op]
+        [Op]
         public static AsmIndexPipe AsmIndexPipe(this IWfRuntime wf)
             => Services.AsmIndexPipe.create(wf);
-
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     partial struct PdbServices
     {
         [Op]
-        internal static ReadOnlySpan<Document> documents(ISymUnmanagedMethod src)
+        internal static Document[] documents(ISymUnmanagedMethod src)
             => src.GetDocumentsForMethod().Select(adapt);
     }
 }

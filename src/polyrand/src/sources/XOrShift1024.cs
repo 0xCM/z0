@@ -19,13 +19,13 @@ namespace Z0
 
         public XOrShift1024(ulong[] seed)
         {
-            root.invariant(seed.Length >= 16, () => $"Not enough seed! 1024 bits = 128 bytes = 16 longs are required");
+            Require.invariant(seed.Length >= 16, () => $"Not enough seed! 1024 bits = 128 bytes = 16 longs are required");
             State = seed;
         }
 
         public XOrShift1024(Span<byte> seed)
         {
-            root.invariant(seed.Length >= 128, () => $"Not enough seed! 1024 bits = 128 bytes are required");
+            Require.invariant(seed.Length >= 128, () => $"Not enough seed! 1024 bits = 128 bytes are required");
             State = memory.recover<ulong>(seed).ToArray();
         }
 

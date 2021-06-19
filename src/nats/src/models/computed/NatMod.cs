@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatMod(K1 k1, K2 k2, K3 k3)
-            => root.invariant(k1.NatValue % k2.NatValue == k3.NatValue, () => Description);
+            => Require.invariant(k1.NatValue % k2.NatValue == k3.NatValue, () => Description);
 
         public string format()
             => Description;

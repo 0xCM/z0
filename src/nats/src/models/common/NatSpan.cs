@@ -133,7 +133,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public ref S Cell<S>(ulong index)
-            => ref Unsafe.Add(ref memory.@as<T,S>(First), (int)index);
+            => ref Unsafe.Add(ref core.@as<T,S>(First), (int)index);
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

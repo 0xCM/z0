@@ -50,7 +50,7 @@ namespace Z0
                 (byte)'>'
             };
 
-            internal const int InvalidCompressedInteger = int.MaxValue;
+            public const int InvalidCompressedInteger = int.MaxValue;
 
             readonly MemoryBlock _block;
 
@@ -84,24 +84,16 @@ namespace Z0
             public string GetDebuggerDisplay()
             {
                 if (_block.Pointer == null)
-                {
                     return "<null>";
-                }
 
                 int displayedBytes;
-                string display = _block.GetDebuggerDisplay(out displayedBytes);
-                if (this.Offset < displayedBytes)
-                {
-                    display = display.Insert(this.Offset * 3, "*");
-                }
+                var display = _block.GetDebuggerDisplay(out displayedBytes);
+                if (Offset < displayedBytes)
+                    display = display.Insert(Offset * 3, "*");
                 else if (displayedBytes == _block.Length)
-                {
                     display += "*";
-                }
                 else
-                {
                     display += "*...";
-                }
 
                 return display;
             }
@@ -188,11 +180,8 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            internal MemoryBlock GetMemoryBlockAt(int offset, int length)
-            {
-                //CheckBounds(offset, length);
-                return new MemoryBlock(_currentPointer + offset, length);
-            }
+            public MemoryBlock GetMemoryBlockAt(int offset, int length)
+                => new MemoryBlock(_currentPointer + offset, length);
 
             [MethodImpl(Inline)]
             bool CheckBounds(int offset, int byteCount)
@@ -218,12 +207,6 @@ namespace Z0
             byte* GetCurrentPointerAndAdvance(int length)
             {
                 byte* p = _currentPointer;
-
-                if (unchecked((uint)length) > (uint)(_endPointer - p))
-                {
-                    //Throw.OutOfBounds();
-                }
-
                 _currentPointer = p + length;
                 return p;
             }
@@ -232,12 +215,6 @@ namespace Z0
             byte* GetCurrentPointerAndAdvance1()
             {
                 byte* p = _currentPointer;
-
-                if (p == _endPointer)
-                {
-                    //Throw.OutOfBounds();
-                }
-
                 _currentPointer = p + 1;
                 return p;
             }
@@ -296,27 +273,6 @@ namespace Z0
                 }
             }
 
-            [MethodImpl(Inline)]
-            internal bool TryAlign(byte alignment)
-            {
-                int remainder = Offset & (alignment - 1);
-
-                Debug.Assert((alignment & (alignment - 1)) == 0, "Alignment must be a power of two.");
-                Debug.Assert(remainder >= 0 && remainder < alignment);
-
-                if (remainder != 0)
-                {
-                    int bytesToSkip = alignment - remainder;
-                    if (bytesToSkip > RemainingBytes)
-                    {
-                        return false;
-                    }
-
-                    _currentPointer += bytesToSkip;
-                }
-
-                return true;
-            }
 
             [MethodImpl(Inline)]
             public int ReadInt32()
@@ -404,7 +360,7 @@ namespace Z0
             {
                 byte* ptr = GetCurrentPointerAndAdvance(13);
 
-                byte scale = (byte)(*ptr & 0x7f);
+                var scale = (byte)(*ptr & 0x7f);
                 if (scale > 28)
                     return default;
 
@@ -467,7 +423,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public string ReadUTF16(int byteCount)
             {
-                string s = _block.PeekUtf16(this.Offset, byteCount);
+                var s = _block.PeekUtf16(Offset, byteCount);
                 _currentPointer += byteCount;
                 return s;
             }
@@ -480,7 +436,7 @@ namespace Z0
             /// <exception cref="BadImageFormatException"><paramref name="byteCount"/> bytes not available.</exception>
             public byte[] ReadBytes(int byteCount)
             {
-                var bytes = _block.PeekBytes(this.Offset, byteCount);
+                var bytes = _block.PeekBytes(Offset, byteCount);
                 _currentPointer += byteCount;
                 return bytes;
             }
@@ -498,13 +454,13 @@ namespace Z0
             public string ReadUtf8NullTerminated()
             {
                 int bytesRead;
-                string value = _block.PeekUtf8NullTerminated(this.Offset, null, MetadataStringDecoder.DefaultUTF8, out bytesRead, '\0');
+                var value = _block.PeekUtf8NullTerminated(Offset, null, MetadataStringDecoder.DefaultUTF8, out bytesRead, '\0');
                 _currentPointer += bytesRead;
                 return value;
             }
 
             [MethodImpl(Inline)]
-            int ReadCompressedIntegerOrInvalid()
+            public int ReadCompressedIntegerOrInvalid()
             {
                 int bytesRead;
                 int value = _block.PeekCompressedInteger(Offset, out bytesRead);
@@ -548,15 +504,13 @@ namespace Z0
             /// </summary>
             /// <param name="value">The value of the compressed integer that was read.</param>
             /// <returns>true if the value was read successfully. false if the data at the current position was not a valid compressed integer.</returns>
+            [MethodImpl(Inline)]
             public bool TryReadCompressedSignedInteger(out int value)
             {
-                int bytesRead;
-                value = _block.PeekCompressedInteger(this.Offset, out bytesRead);
+                value = _block.PeekCompressedInteger(Offset, out var bytesRead);
 
                 if (value == InvalidCompressedInteger)
-                {
                     return false;
-                }
 
                 bool signExtend = (value & 0x1) != 0;
                 value >>= 1;
@@ -593,9 +547,7 @@ namespace Z0
             {
                 int value;
                 if (!TryReadCompressedSignedInteger(out value))
-                {
-                    //Throw.InvalidCompressedInteger();
-                }
+                    return int.MaxValue;
                 return value;
             }
 
@@ -608,10 +560,7 @@ namespace Z0
             {
                 int value = ReadCompressedIntegerOrInvalid();
                 if (value > byte.MaxValue)
-                {
                     return SerializationTypeCode.Invalid;
-                }
-
                 return unchecked((SerializationTypeCode)value);
             }
 
@@ -619,6 +568,7 @@ namespace Z0
             /// Reads type code encoded in a signature.
             /// </summary>
             /// <returns><see cref="SignatureTypeCode.Invalid"/> if the encoding is invalid.</returns>
+            [MethodImpl(Inline)]
             public SignatureTypeCode ReadSignatureTypeCode()
             {
                 var value = ReadCompressedIntegerOrInvalid();
@@ -631,7 +581,6 @@ namespace Z0
                     else
                         return unchecked((SignatureTypeCode)value);
                 }
-
             }
 
             /// <summary>
@@ -671,7 +620,6 @@ namespace Z0
                 return Clr.handle(tokenType | (value >> 2));
             }
 
-            private static readonly uint[] s_corEncodeTokenArray = new uint[] { TokenTypeIds.TypeDef, TokenTypeIds.TypeRef, TokenTypeIds.TypeSpec, 0 };
 
             /// <summary>
             /// Reads a #Blob heap handle encoded as a compressed integer.
@@ -758,6 +706,30 @@ namespace Z0
                 }
             }
 
+            [MethodImpl(Inline)]
+            internal bool TryAlign(byte alignment)
+            {
+                int remainder = Offset & (alignment - 1);
+
+                Debug.Assert((alignment & (alignment - 1)) == 0, "Alignment must be a power of two.");
+                Debug.Assert(remainder >= 0 && remainder < alignment);
+
+                if (remainder != 0)
+                {
+                    int bytesToSkip = alignment - remainder;
+                    if (bytesToSkip > RemainingBytes)
+                    {
+                        return false;
+                    }
+
+                    _currentPointer += bytesToSkip;
+                }
+
+                return true;
+            }
+
+            static readonly uint[] s_corEncodeTokenArray = new uint[] { TokenTypeIds.TypeDef, TokenTypeIds.TypeRef, TokenTypeIds.TypeSpec, 0 };
+
             /// <summary>
             /// Pointer to the byte at the start of the underlying memory block.
             /// </summary>
@@ -774,6 +746,15 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => _currentPointer;
+            }
+
+            /// <summary>
+            /// Pointer to the last byte of the underlying memory block.
+            /// </summary>
+            public byte* EndPointer
+            {
+                [MethodImpl(Inline)]
+                get => _endPointer;
             }
         }
     }

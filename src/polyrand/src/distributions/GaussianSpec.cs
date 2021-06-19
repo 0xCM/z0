@@ -51,7 +51,7 @@ namespace Z0
             get
             {
                 var sig = Numeric.force<T,double>(StdDev);
-                root.invariant(sig != 0, () =>$"The invariant k := (sigma == 0) failed");
+                Require.invariant(sig != 0, () =>$"The invariant k := (sigma == 0) failed");
                 return Numeric.force<T>(sig*sig);
             }
         }
@@ -62,7 +62,7 @@ namespace Z0
             get
             {
                 var sig = Numeric.force<T,double>(StdDev);
-                root.invariant(sig != 0, () => $"The invariant k := (sigma == 0) failed");
+                Require.invariant(sig != 0, () => $"The invariant k := (sigma == 0) failed");
                 return Numeric.force<T>(RngMath.recip(sig*sig));
             }
         }

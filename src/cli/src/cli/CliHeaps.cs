@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
     using static core;
 
     [ApiHost]
@@ -62,7 +62,6 @@ namespace Z0
             return buffer;
         }
 
-
         [MethodImpl(Inline), Op]
         public static unsafe uint count(CliStringHeap src)
         {
@@ -87,7 +86,7 @@ namespace Z0
             while(pCurrent < pLast)
             {
                 if(*pCurrent++ == Chars.Null)
-                    seek(dst, counter++) = pos;
+                    seek(dst, counter++) = pos*2;
                 pos++;
             }
             return counter;

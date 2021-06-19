@@ -24,7 +24,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len > 1)
-                root.invariant(src[0].Source == src[len - 1].Target, () => "Not equal");
+                Require.invariant(src[0].Source == src[len - 1].Target, () => "Not equal");
 
             Terms = src;
         }

@@ -10,7 +10,6 @@ namespace Z0
 
     partial class NatRequire
     {
-
        /// <summary>
         /// If possible, constructs evidence that n:K => n prime; otherwise,
         /// raises an error

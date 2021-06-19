@@ -15,7 +15,6 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
-
             [MethodImpl(Inline), Op]
             public bool PeekUInt32(int offset, out uint dst)
             {

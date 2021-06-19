@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatEq(K1 k1, K2 k2)
-            => root.invariant(NatCalc.eq(k1,k2), () => Description);
+            => Require.invariant(NatCalc.eq(k1,k2), () => Description);
 
         public override string ToString()
             => Description;
@@ -49,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public NatNEq(K1 n1, K2 n2)
-            => root.invariant(n1.NatValue != n2.NatValue, () => Description);
+            => Require.invariant(n1.NatValue != n2.NatValue, () => Description);
 
         public override string ToString()
             => Description;

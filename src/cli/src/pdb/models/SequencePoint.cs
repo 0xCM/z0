@@ -58,7 +58,7 @@ namespace Z0
             }
 
             public string Format()
-                => string.Format("{0:x4}:[{1}, .. ,{2}]", Offset, UpperLeft, LowerRight);
+                =>  string.Format("[{0:D3}, ({1:D3},{2:D3}), ({3:D3},{4:D3})]", Offset, StartLine, StartColumn, EndLine, EndColumn);
 
             public override string ToString()
                 => Format();

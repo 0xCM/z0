@@ -113,5 +113,57 @@ namespace Z0.Asm
                 => (K)src.Index;
         }
 
+        public readonly struct cr4 : IRegOp64<cr4>
+        {
+            public I Index => I.r4;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(cr4 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(cr4 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct cr5 : IRegOp64<cr5>
+        {
+            public I Index => I.r5;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(cr5 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(cr5 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct cr6 : IRegOp64<cr6>
+        {
+            public I Index => I.r6;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(cr6 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(cr6 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct cr7 : IRegOp64<cr7>
+        {
+            public I Index => I.r7;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(cr7 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(cr7 src)
+                => (K)src.Index;
+        }
+
     }
 }

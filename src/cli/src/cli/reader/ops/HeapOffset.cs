@@ -29,27 +29,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public Address32 HeapOffset(GuidHandle handle)
             => (Address32)MD.GetHeapOffset(handle);
-
-        public ReadOnlySpan<Address32> HeapOffsets(CliHeapKind kind)
-        {
-            switch(kind)
-            {
-                case CliHeapKind.UserString:
-                break;
-
-                case CliHeapKind.Blob:
-                break;
-
-                case CliHeapKind.Guid:
-                break;
-
-                case CliHeapKind.String:
-                break;
-
-            }
-
-            return default;
-        }
-
     }
 }

@@ -35,7 +35,7 @@ namespace Z0.Asm
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             return asm.form(
-                AsmOpCodes.conform(iceOpCode.ToOpCodeString()),
+                ocConform(iceOpCode.ToOpCodeString()),
                 asm.sig(src.Mnemonic.ToString(), iceOpCode.ToInstructionString()));
         }
 
@@ -56,7 +56,7 @@ namespace Z0.Asm
         public static IceInstruction extract(Iced.Instruction src, string formatted, BinaryCode decoded)
         {
             var info = src.GetInfo();
-            root.invariant(src.ByteLength == decoded.Length, () => $"The instruction byte length {src.ByteLength} does not match the encoded length {decoded.Length}");
+            Require.invariant(src.ByteLength == decoded.Length, () => $"The instruction byte length {src.ByteLength} does not match the encoded length {decoded.Length}");
             return new IceInstruction
             {
                 Decoded = decoded,
@@ -242,7 +242,7 @@ namespace Z0.Asm
                 OpCode = src.OpCode,
                 OperandSize = src.OperandSize,
                 OpCount = src.OpCount,
-                OpCodeString = AsmOpCodes.conform(src.ToOpCodeString()).Format(),
+                OpCodeString = ocConform(src.ToOpCodeString()).Format(),
                 InstructionString = src.ToInstructionString(),
                 Op0Kind = Thaw(src.Op0Kind),
                 Op1Kind = Thaw(src.Op1Kind),
@@ -415,5 +415,8 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         static IceTupleType Thaw(Iced.TupleType src)
             => (IceTupleType)src;
+
+        static AsmOpCodeExpr ocConform(string src)
+            => asm.opcode(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
     }
 }

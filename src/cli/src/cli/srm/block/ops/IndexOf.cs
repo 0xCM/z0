@@ -17,10 +17,7 @@ namespace Z0
         {
             [MethodImpl(Inline), Op]
             public int IndexOf(byte b, int start)
-            {
-                //Available(start, 0);
-                return IndexOfUnchecked(b, start);
-            }
+                => IndexOfUnchecked(b, start);
 
             [MethodImpl(Inline), Op]
             public int IndexOfUnchecked(byte b, int start)

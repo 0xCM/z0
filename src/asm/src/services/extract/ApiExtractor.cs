@@ -14,6 +14,7 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static Msg;
 
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>
@@ -23,8 +24,6 @@ namespace Z0
         ApiResolver Resolver;
 
         AsmDecoder Decoder;
-
-        AsmFormatter Formatter;
 
         ApiHexPacks HexPacks;
 
@@ -46,6 +45,8 @@ namespace Z0
 
         Index<AsmRoutine> Routines;
 
+        AsmFormatConfig FormatConfig;
+
         public ApiExtractor()
         {
             Identity = MultiDiviner.Service;
@@ -53,6 +54,7 @@ namespace Z0
             Exclusions = hashset("ToString","GetHashCode", "Equals", "ToString");
             Routines = array<AsmRoutine>();
             ResolvedParts = array<ResolvedPart>();
+            FormatConfig = AsmFormatConfig.@default(out var _);
         }
 
         protected override void OnInit()
@@ -60,7 +62,6 @@ namespace Z0
             Parser = ApiExtracts.parser();
             Resolver = Wf.ApiResolver();
             Decoder = Wf.AsmDecoder();
-            Formatter = Wf.AsmFormatter();
             HexPacks = Wf.ApiHexPacks();
             Receivers = new ApiExtractChannel();
             DatasetReceiver = new();
@@ -194,7 +195,6 @@ namespace Z0
             var collection = new ApiCollection();
             collection._ResolvedParts = ResolvedParts;
             return collection;
-
         }
 
         internal ApiCollection Run(ApiExtractChannel receivers, IApiPack pack)
@@ -205,13 +205,5 @@ namespace Z0
             RunWorkflow(pack);
             return CollectAll();
         }
-
-        public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";
-
-        public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
-
-        public static MsgPattern<Count> ExtractingResolved => "Extracting data for {0} resolved parts";
-
-        public static MsgPattern<Count> ExtractedResolved => "Extracted data for {0} members";
     }
 }

@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector(T[] src)
         {
-            root.invariant(src.Length >= Dim, () => $"{src.Length} < {Dim}");
+            Require.invariant(src.Length >= Dim, () => $"{src.Length} < {Dim}");
             Data = src;
         }
 

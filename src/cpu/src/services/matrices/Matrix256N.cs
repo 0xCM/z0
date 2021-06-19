@@ -37,7 +37,7 @@ namespace Z0
         public Matrix256(SpanBlock256<T> src)
         {
             var count = src.CellCount;
-            root.invariant(src.CellCount >= CellCount, () => $"{count} != {CellCount}");
+            Require.invariant(src.CellCount >= CellCount, () => $"{count} != {CellCount}");
             data = src;
         }
 

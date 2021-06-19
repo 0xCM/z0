@@ -58,6 +58,43 @@ namespace Z0
                 return new ApiParts(control, FS.path(control.Location).FolderPath);
         }
 
+        static ReadOnlySpan<Paired<PartId,FS.FilePath>> PartPaths(FS.FolderPath dir)
+        {
+            var dst = list<Paired<PartId,FS.FilePath>>();
+            var symbols = Symbols.index<PartId>().View;
+            var count = symbols.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var symbol = ref skip(symbols,i);
+                var id = symbol.Kind;
+                var name = "z0." + symbol.Expr.Format();
+                var dllpath = dir + FS.file(name, FS.Dll);
+                if(dllpath.Exists)
+                    dst.Add((id,dllpath));
+
+                var exepath = dir + FS.file(name, FS.Exe);
+                if(exepath.Exists)
+                    dst.Add((id,exepath));
+            }
+            return dst.ViewDeposited();
+        }
+
+        static IPart[] LoadParts2(FS.FolderPath dir, ReadOnlySpan<PartId> parts)
+        {
+            var count = parts.Length;
+            var dst = list<IPart>();
+            var set = hashset<PartId>();
+            iter(parts, p => set.Add(p));
+            var candidates = PartPaths(dir);
+            foreach(var (id,path) in candidates)
+            {
+                if(set.Contains(id))
+                    part(path).OnSome(part => dst.Add(part));
+            }
+            return dst.ToArray();
+        }
+
+
         static IPart[] LoadParts(FS.FolderPath dir, params PartId[] identities)
         {
             var query = from p in identities

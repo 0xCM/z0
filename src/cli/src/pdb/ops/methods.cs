@@ -14,14 +14,13 @@ namespace Z0
     {
         internal static DocumentMethods methods(ISymUnmanagedReader5 src)
         {
-            var documents = @readonly(src.GetDocuments());
+            var documents = src.GetDocuments().ToReadOnlySpan();
             var count = documents.Length;
             var dst = new DocumentMethods();
             for(var i=0; i<count; i++)
             {
                 ref readonly var doc = ref skip(documents,i);
-                var methods = src.GetMethodsInDocument(doc);
-                dst[doc] = methods;
+                dst[doc] = src.GetMethodsInDocument(doc);
             }
             return dst;
         }

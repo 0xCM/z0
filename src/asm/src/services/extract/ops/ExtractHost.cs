@@ -22,7 +22,7 @@ namespace Z0
             }
             else
             {
-                Wf.Warn(string.Format("Terminal for {0} not found", src.Uri));
+                Wf.Warn(Msg.TerminalNotFound.Format(src.Uri));
                 return new ApiExtractBlock(src.EntryPoint, src.Uri.Format(), buffer.ToArray());
             }
         }

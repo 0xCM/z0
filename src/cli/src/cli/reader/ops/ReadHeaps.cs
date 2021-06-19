@@ -42,7 +42,7 @@ namespace Z0
             };
 
         [Op]
-        CliStringHeap UserStringHeap()
+        public CliStringHeap UserStringHeap()
         {
             var offset = HeapOffset(MetadataTokens.UserStringHandle(0));
             var @base = Segment.BaseAddress + offset;
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [Op]
-        CliStringHeap SystemStringHeap()
+        public CliStringHeap SystemStringHeap()
         {
             var offset = HeapOffset(MetadataTokens.StringHandle(0));
             var @base = Segment.BaseAddress + offset;

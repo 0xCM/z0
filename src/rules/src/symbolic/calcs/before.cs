@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> before(ReadOnlySpan<char> src, char match)
         {
-            var i = SymbolicQuery.index(src,match);
+            var i = src.IndexOf(match);
             return i == NotFound ? default : slice(src,0,i);
         }
 

@@ -8,19 +8,13 @@ namespace Z0
     using System;
     using System.Text;
 
-    using static Part;
-    using static memory;
-
     partial class SRM
     {
         unsafe partial struct MemoryBlock
         {
             [Op]
             public string PeekUtf8(int offset, int byteCount)
-            {
-                //Available(offset, byteCount);
-                return Encoding.UTF8.GetString(Pointer + offset, byteCount);
-            }
+                => Encoding.UTF8.GetString(Pointer + offset, byteCount);
         }
     }
 }

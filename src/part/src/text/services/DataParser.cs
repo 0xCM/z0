@@ -220,7 +220,7 @@ namespace Z0
                 if(!outcome)
                     return outcome;
 
-                dst = CliTokens.token((TableIndex)table, row);
+                dst = Clr.token((TableIndex)table, row);
                 return true;
             }
             else

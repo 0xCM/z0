@@ -6,12 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
     using static core;
 
     partial struct Clr
     {
+        [MethodImpl(Inline), Op]
+        public static Type type(Module src, CliToken token)
+            => src.ResolveType((int)token);
+
         [MethodImpl(Inline), Op]
         public static bool type(in ClrTypeLookup src, string name, out Type dst)
         {

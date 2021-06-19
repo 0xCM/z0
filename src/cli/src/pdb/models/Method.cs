@@ -59,6 +59,7 @@ namespace Z0
                 var dst = new PdbMethodInfo();
                 dst.Token = Token;
                 dst.SequencePoints = api.points(Source);
+                dst.Documents = api.documents(Source);
                 return dst;
             }
 

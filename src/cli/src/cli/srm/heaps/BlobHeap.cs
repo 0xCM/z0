@@ -12,7 +12,7 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
     using System.Reflection.Internal;
 
-    using static Part;
+    using static Root;
     using static core;
 
     partial class SRM

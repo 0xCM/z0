@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static NatSpan<N16,byte> bytes<T>(Span<T> src, N16 n)
             where T : unmanaged
-                => NatSpans.load(memory.bytes(src), n);
+                => NatSpans.load(core.bytes(src), n);
 
         /// <summary>
         /// Loads a bytespan of natural length from a generic source span
@@ -69,14 +69,14 @@ namespace Z0
         public static NatSpan<N,byte> bytes<N,T>(Span<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => NatSpans.load(memory.bytes(src),n);
+                => NatSpans.load(core.bytes(src),n);
 
         [MethodImpl(Inline)]
         public static NatSpan<N,T> load<N,T>(T[] src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            root.invariant(src.Length >= (int)nat64u<N>(), () => $"The source length {src.Length} >= N := {nat64u<N>()}");
+            Require.invariant(src.Length >= (int)nat64u<N>(), () => $"The source length {src.Length} >= N := {nat64u<N>()}");
             return new NatSpan<N,T>(src);
         }
 
@@ -86,7 +86,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var len = src.Length;
-            root.invariant(len >= nat32i<N>(), () => $"The source length {len} >= N := {nat64u<N>()}");
+            Require.invariant(len >= nat32i<N>(), () => $"The source length {len} >= N := {nat64u<N>()}");
             return new NatSpan<N,T>(src);
         }
 
@@ -145,7 +145,7 @@ namespace Z0
 
         [Op]
         public static string format(NatSpanSig src)
-            => text.concat(IDI.Nat, src.Length.ToString(), IDI.SegSep, src.CellWidth.ToString(), src.Indicator);
+            => string.Concat(IDI.Nat, src.Length.ToString(), IDI.SegSep, src.CellWidth.ToString(), src.Indicator);
 
         [MethodImpl(Inline), Op]
         public static NatSpanSig sig(uint length, ushort cellwidth, AsciChar indicator)
@@ -155,7 +155,7 @@ namespace Z0
         public static ParseResult<NatSpanSig> sig(string src)
         {
             var parts = src.Split(IDI.SegSep);
-            var fail = root.unparsed<NatSpanSig>(src);
+            var fail = ParseResult.unparsed<NatSpanSig>(src);
             if(parts.Length == 2)
             {
                 var part1 = parts[0];
@@ -185,7 +185,7 @@ namespace Z0
                 }
 
                 if(n != 0 && w != 0 && indicator != AsciChar.Null)
-                    return root.parsed(src, sig(n, w, indicator));
+                    return ParseResult.parsed(src, sig(n, w, indicator));
                 else
                     return fail;
             }

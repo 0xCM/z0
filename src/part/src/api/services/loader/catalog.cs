@@ -14,8 +14,8 @@ namespace Z0
 
     partial struct ApiRuntimeLoader
     {
-        public static IApiCatalog catalog(FS.FolderPath location, PartId[] identities)
-            => catalog(LoadParts(location, identities));
+        public static IApiCatalog catalog(FS.FolderPath location, PartId[] parts)
+            => catalog(LoadParts2(location, parts));
 
         public static IApiCatalog catalog(FS.Files paths)
             => catalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));

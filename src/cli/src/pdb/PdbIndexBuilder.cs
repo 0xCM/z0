@@ -25,7 +25,6 @@ namespace Z0
                 var reader = PdbServices.reader(Wf, asmpath, pdbpath);
                 var methods = @readonly(src.Methods());
                 var count = methods.Length;
-
                 stats.DocCount += index.Include(reader.Documents);
                 for(var i=0; i<count; i++)
                 {
@@ -66,9 +65,7 @@ namespace Z0
             var flow = Wf.Running(Msg.IndexingPdbFiles.Format(count));
             var counter = 0u;
             for(var i=0; i<count; i++)
-            {
                 counter += IndexComponent(skip(components,i));
-            }
 
             var index = Wf.PdbIndex();
             var docspath = Db.Doc("pdbdocs", FS.Md);

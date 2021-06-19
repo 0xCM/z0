@@ -19,8 +19,6 @@ namespace Z0.Asm
 
         ImmSpecializer Specializer;
 
-        AsmFormatter Formatter;
-
         Index<byte> Buffer;
 
         public ApiImmEmitter()
@@ -31,7 +29,6 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             Specializer = Wf.ImmSpecializer();
-            Formatter = Wf.AsmFormatter();
         }
 
         bool Append = true;
@@ -184,10 +181,10 @@ namespace Z0.Asm
             => Wf.ApiCatalog.PartHosts(parts);
 
         IAsmImmWriter Archive(in ApiHostUri host)
-            => Wf.ImmWriter(host, Formatter);
+            => Wf.ImmWriter(host);
 
         IAsmImmWriter Archive(in ApiHostUri host, FS.FolderPath root)
-            => Wf.ImmWriter(host, Formatter, root);
+            => Wf.ImmWriter(host, root);
 
         ReadOnlySpan<AsmRoutine> EmitUnrefined(in CaptureExchange exchange, Index<Imm8R> imm8, Index<PartId> parts)
         {

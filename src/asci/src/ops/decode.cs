@@ -33,6 +33,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static ref string decode(ReadOnlySpan<byte> src, out string dst)
+        {
+            var buffer = alloc<char>(src.Length);
+            decode(src,buffer);
+            dst = TextTools.format(buffer);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint decode(ReadOnlySpan<AsciCode> src, Span<char> dst)
         {
             var count = (uint)src.Length;
@@ -60,23 +69,23 @@ namespace Z0
             seek(dst, 1) = (char)(byte)(src.Storage >> 8);
             seek(dst, 2) = (char)(byte)(src.Storage >> 16);
             seek(dst, 3) = (char)(byte)(src.Storage >> 24);
-            return memory.cover(dst, asci4.Size);
+            return core.cover(dst, asci4.Size);
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)
-            => recover<char>(memory.bytes(vlo(vinflate256x16u(vbytes(w128, src.Storage)))));
+            => recover<char>(core.bytes(vlo(vinflate256x16u(vbytes(w128, src.Storage)))));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => recover<char>(memory.bytes(vinflate256x16u(src.Storage)));
+            => recover<char>(core.bytes(vinflate256x16u(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
         {
             var lo = vinflatelo256x16u(src.Storage);
             var hi = vinflatehi256x16u(src.Storage);
-            return recover<char>(memory.bytes(new Seg512(lo,hi)));
+            return recover<char>(core.bytes(new V256x2(lo,hi)));
         }
 
         [MethodImpl(Inline), Op]
@@ -87,7 +96,7 @@ namespace Z0
             var x1 = vinflatehi256x16u(x.Lo);
             var x2 = vinflatelo256x16u(x.Hi);
             var x3 = vinflatehi256x16u(x.Hi);
-            return recover<char>(memory.bytes(new Seg1024(x0,x1,x2,x3)));
+            return recover<char>(core.bytes(new V256x4(x0, x1, x2, x3)));
         }
 
         [MethodImpl(Inline), Op]
@@ -116,40 +125,6 @@ namespace Z0
         {
             decode(src.Lo, ref dst);
             decode(src.Hi, ref seek(dst, 32));
-        }
-
-        readonly struct Seg512
-        {
-            readonly Vector256<ushort> Lo;
-
-            readonly Vector256<ushort> Hi;
-
-            [MethodImpl(Inline), Op]
-            public Seg512(Vector256<ushort> lo, Vector256<ushort> hi)
-            {
-                this.Lo = lo;
-                this.Hi = hi;
-            }
-        }
-
-        readonly struct Seg1024
-        {
-            readonly Vector256<ushort> X0;
-
-            readonly Vector256<ushort> X1;
-
-            readonly Vector256<ushort> X2;
-
-            readonly Vector256<ushort> X3;
-
-            [MethodImpl(Inline), Op]
-            public Seg1024(Vector256<ushort> x0, Vector256<ushort> x1,Vector256<ushort> x2,Vector256<ushort> x3)
-            {
-                X0 = x0;
-                X1 = x1;
-                X2 = x2;
-                X3 = x3;
-            }
         }
     }
 }

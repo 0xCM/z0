@@ -21,20 +21,11 @@ public enum PartId : ulong
     [Symbol("part")]
     Part = 3,
 
-    [Symbol("part.test")]
-    PartTest = Part | Test,
-
     [Symbol("math")]
     Math = 4,
 
-    [Symbol("math.test")]
-    MathTest = Math | Test,
-
     [Symbol("core")]
     Core = 5,
-
-    [Symbol("core.test")]
-    CoreTest = Core | Test,
 
     [Symbol("rules")]
     Rules = 6,
@@ -72,9 +63,6 @@ public enum PartId : ulong
     [Symbol("polyrand")]
     Polyrand = 17,
 
-    [Symbol("polyrand.test")]
-    PolyrandTest = Polyrand | Test,
-
     [Symbol("digital")]
     Digital = 18,
 
@@ -111,9 +99,6 @@ public enum PartId : ulong
     [Symbol("calc")]
     Calc = 37,
 
-    [Symbol("calc.shell")]
-    CalcShell = Calc | Shell,
-
     [Symbol("time")]
     Time = 38,
 
@@ -125,9 +110,6 @@ public enum PartId : ulong
 
     [Symbol("tools")]
     Tools = 41,
-
-    [Symbol("tools.shell")]
-    ToolShell = Tools | Shell,
 
     [Symbol("tooling")]
     Tooling = 42,
@@ -145,7 +127,7 @@ public enum PartId : ulong
     Cpu = 46,
 
     [Symbol("cpu.shell")]
-    CpuShell = Cpu | Shell,
+    CpuShell = 47,
 
     [Symbol("gen")]
     Gen = 48,
@@ -163,10 +145,16 @@ public enum PartId : ulong
     Relations = 52,
 
     [Symbol("asm.shell")]
-    AsmShell = 53 | Shell,
+    AsmShell = 53,
 
     [Symbol("intel")]
     Intel = 54,
+
+    [Symbol("tools.shell")]
+    ToolShell = 55,
+
+    [Symbol("calc.shell")]
+    CalcShell = 56,
 
     [Symbol("clr")]
     Clr = 60,
@@ -174,23 +162,17 @@ public enum PartId : ulong
     [Symbol("cli")]
     Cli = 61,
 
-    [Symbol("cli.shell")]
-    CliShell = Cli | Shell,
-
     [Symbol("canonical")]
     Canonical = 62,
 
     [Symbol("symbolic")]
     Symbolic = 63,
 
-    [Symbol("symbolic.test")]
-    SymbolicTest = Symbolic | Test,
-
     [Symbol("tables")]
     Tables = 65,
 
     [Symbol("gather")]
-    Gather = 66 | Shell,
+    Gather = 66,
 
     [Symbol("spanblocks")]
     SpanBlocks = 67,
@@ -210,11 +192,11 @@ public enum PartId : ulong
     [Symbol("symcore")]
     SymCore = 72,
 
-    [Symbol("engine.run")]
-    EngineRun = Engine | Shell,
+    [Symbol("cli.shell")]
+    CliShell = 73,
 
-    [Symbol("bits.test")]
-    BitsTest = Bits | Test,
+    [Symbol("engine.run")]
+    EngineRun = 74,
 
     [Symbol("bitvectors")]
     BitVectors = 100,
@@ -235,7 +217,7 @@ public enum PartId : ulong
     BitFields = 107,
 
     [Symbol("bitfields.shell")]
-    BitFieldsShell = BitFields | Shell,
+    BitFieldsShell = 108,
 
     [Symbol("bitmatrix")]
     BitMatrix = 110,
@@ -245,9 +227,6 @@ public enum PartId : ulong
 
     [Symbol("libm")]
     LibM = 113,
-
-    [Symbol("libm.test")]
-    LibMTest = LibM | Test,
 
     [Symbol("machines")]
     Machines = 115,
@@ -264,14 +243,8 @@ public enum PartId : ulong
     [Symbol("dynamic")]
     Dynamic = 122,
 
-    [Symbol("dynamic.shell")]
-    DynamicShell = Dynamic | Shell,
-
     [Symbol("asm")]
     Asm = 123,
-
-    [Symbol("asm.test")]
-    AsmTest = Asm | Test,
 
     [Symbol("asm.g")]
     AsmLang = 124,
@@ -291,9 +264,6 @@ public enum PartId : ulong
     [Symbol("capture")]
     Capture = 131,
 
-    [Symbol("capture.checks")]
-    CaptureChecks = Capture | Checkers,
-
     [Symbol("evaluate")]
     Evaluate = 132,
 
@@ -304,7 +274,7 @@ public enum PartId : ulong
     BitNumbers = 135,
 
     [Symbol("bitnumbers.shell")]
-    BitNumbersShell = BitNumbers | Shell,
+    BitNumbersShell = 136,
 
     [Symbol("circuits")]
     Circuits = 144,
@@ -314,6 +284,12 @@ public enum PartId : ulong
 
     [Symbol("apps")]
     Apps = 150,
+
+    [Symbol("capture.checks")]
+    CaptureChecks = 151,
+
+    [Symbol("dynamic.shell")]
+    DynamicShell = 152,
 
     [Symbol("validity")]
     Validity = 156,
@@ -350,6 +326,30 @@ public enum PartId : ulong
 
     // ~ Test
     // ~ -------------------------------------------------------------------------------
+
+    [Symbol("core.test")]
+    CoreTest = Core | Test,
+
+    [Symbol("part.test")]
+    PartTest = Part | Test,
+
+    [Symbol("math.test")]
+    MathTest = Math | Test,
+
+    [Symbol("asm.test")]
+    AsmTest = Asm | Test,
+
+    [Symbol("bits.test")]
+    BitsTest = Bits | Test,
+
+    [Symbol("polyrand.test")]
+    PolyrandTest = Polyrand | Test,
+
+    [Symbol("symbolic.test")]
+    SymbolicTest = Symbolic | Test,
+
+    [Symbol("libm.test")]
+    LibMTest = LibM | Test,
 
     [Symbol("logix.test")]
     LogixTest = Logix | Test,

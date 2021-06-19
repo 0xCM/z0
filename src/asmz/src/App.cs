@@ -305,7 +305,7 @@ namespace Z0.Asm
         static Address32 rel32dx(BinaryCode src)
         {
             var opcode = src.First;
-            root.invariant(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
+            Require.invariant(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
             var bytes = slice(src.View, 1);
             return core.u32(bytes);
         }
@@ -730,27 +730,35 @@ namespace Z0.Asm
             processor.ProcessFile(path);
         }
 
-        void ListPdbMethods()
+        void EmitPdbMethodInfo(PartId part, FS.FilePath dst)
         {
             var modules = Wf.AppModules();
-            var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Cpu).Single();
+            var catalog = Wf.ApiCatalog.PartCatalogs(part).Single();
+            var assembly = catalog.Component;
+            var module = assembly.ManifestModule;
             using var source = modules.SymbolSource(catalog.ComponentPath);
             Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
-            var reader = Wf.PdbReader(source);
-            var methods = catalog.Methods;
-            var log = Db.AppLog(string.Format("{0}.tokens", catalog.PartId.Format()), FS.Csv);
-            var emitting = Wf.EmittingFile(log);
+            var pdbReader = Wf.PdbReader(source);
+            var clrMethods = catalog.Methods.View;
+            var pdbMethods = pdbReader.Methods;
+            var emitting = Wf.EmittingFile(dst);
             var counter = 0u;
-            using var writer = log.Writer();
-            foreach(var info in methods)
+            using var writer = dst.Writer();
+            var count = pdbMethods.Length;
+            for(var i=0; i<count; i++)
             {
-                var method = reader.Method(info.MetadataToken);
-                if(method)
-                {
-                    writer.WriteLine(method.Payload.Token.Format());
-                    counter++;
-                }
+                ref readonly var pdbMethod = ref skip(pdbMethods,i);
+                var info = pdbMethod.Describe();
+                var docs = info.Documents.View;
+                var doc = docs.Length >=1 ? first(docs).Path : FS.FilePath.Empty;
+                var token = info.Token;
+                var methodBase = Clr.method(module,token);
+                var name = methodBase.Name;
+                var sig = methodBase is MethodInfo method ? method.DisplaySig().Format() : EmptyString;
+                writer.WriteLine(string.Format("{0,-12} | {1,-24} | {2,-68} | {3}", token, name, doc.ToUri(), sig));
+                counter++;
             }
+
             Wf.EmittedFile(emitting, counter);
         }
 
@@ -977,7 +985,11 @@ namespace Z0.Asm
         public void Run()
         {
             //EmitAsciByteSpan("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs");
+            //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs")
+
+            // var part = PartId.Math;
+            // var log = Db.AppLog(string.Format("{0}.pdbinfo", part.Format()), FS.Csv);
+            // EmitPdbMethodInfo(part,log);
 
             //var worker = AsmIndexWorker.create()
             //Wf.GlobalCommands().ProcessIntelSdm();
@@ -1001,7 +1013,6 @@ namespace Z0.Asm
             //CheckCodeFactory();
             //EmitSymbolicliterals();
             //EmitPartSelection();
-            //ListPdbMethods();
             //CompareBitstrings();
             //EmitCliMetadata();
             //CaptureParts(PartId.AsmCore);

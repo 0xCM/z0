@@ -63,7 +63,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = field(module, CliTokens.token(skip(src,i)));
+                seek(dst,i) = field(module, Clr.token(skip(src,i)));
         }
 
 
@@ -72,7 +72,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = type(module, CliTokens.token(skip(src,i)));
+                seek(dst,i) = type(module, Clr.token(skip(src,i)));
         }
 
         [Op]
@@ -80,20 +80,20 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = method(module, CliTokens.token(skip(src,i)));
+                seek(dst,i) = method(module, Clr.token(skip(src,i)));
         }
 
         [MethodImpl(Inline), Op]
         public static ClrHandle<RuntimeMethodHandle> method(Module src, CliToken token)
-            => new ClrHandle<RuntimeMethodHandle>(ClrArtifactKind.Method, token, src.ModuleHandle.GetRuntimeMethodHandleFromMetadataToken((int)token));
+            => new ClrHandle<RuntimeMethodHandle>(ClrArtifactKind.Method, token, Clr.methodhandle(src,token));
 
         [MethodImpl(Inline), Op]
         public static ClrHandle<RuntimeTypeHandle> type(Module src, CliToken token)
-            => new ClrHandle<RuntimeTypeHandle>(ClrArtifactKind.Type, token, src.ModuleHandle.GetRuntimeTypeHandleFromMetadataToken((int)token));
+            => new ClrHandle<RuntimeTypeHandle>(ClrArtifactKind.Type, token, Clr.typehandle(src,token));
 
         [MethodImpl(Inline), Op]
         public static ClrHandle<RuntimeFieldHandle> field(Module src, CliToken token)
-            => new ClrHandle<RuntimeFieldHandle>(ClrArtifactKind.Field, token, src.ModuleHandle.GetRuntimeFieldHandleFromMetadataToken((int)token));
+            => new ClrHandle<RuntimeFieldHandle>(ClrArtifactKind.Field, token, Clr.fieldhandle(src,token));
 
         [MethodImpl(Inline), Op]
         public static ClrHandle untype(in ClrHandle<RuntimeMethodHandle> src)

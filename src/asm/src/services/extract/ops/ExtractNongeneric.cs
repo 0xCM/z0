@@ -14,7 +14,7 @@ namespace Z0
         uint ExtractNongeneric(IApiHost src, List<ApiMemberExtract> dst)
         {
             var counter = 0u;
-            var methods = @readonly(ApiQuery.nongeneric(src));
+            var methods = ApiQuery.nongeneric(src).ToReadOnlySpan();
             var count = methods.Length;
 
             for(var i=0; i<count; i++)

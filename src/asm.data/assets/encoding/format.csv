@@ -1,0 +1,191 @@
+# OpCode Fields
+# The primary opcode for an instruction is encoded in one to three bytes of the instruction. Within the primary
+# opcode, smaller encoding fields may be defined. These fields vary according to the class of operation being
+# performed.
+# Almost all instructions that refer to a register and/or memory operand have a register and/or address mode byte
+# following the opcode. This byte, the ModR/M byte, consists of the mod field (2 bits), the reg field (3 bits; this field
+# is sometimes an opcode extension), and the R/M field (3 bits). Certain encodings of the ModR/M byte indicate that
+# a second address mode byte, the SIB byte, must be used.
+# If the addressing mode specifies a displacement, the displacement value is placed immediately following the
+# ModR/M byte or SIB byte. Possible sizes are 8, 16, or 32 bits. If the instruction specifies an immediate value, the
+# immediate value follows any displacement bytes. The immediate, if specified, is always the last field of the instruction.
+
+# ModR/M Fields
+----------------------
+| Symbol | Width |
+| mod    | 2     |
+| reg    | 3     |
+| r/m    | 3     |
+
+# Table B-1. Special Fields Within Instruction Encodings
+# Table B-1 lists bit fields that appear in certain instructions, sometimes within the opcode bytes. All of these fields
+# (except the d bit) occur in the general-purpose instruction formats in Table B-13.
+---------------------------------------------------------------------------------------------------------------------------------------
+| FieldName | Description                                                                                 | Width |
+| reg       | General-register specifier (see Table B-4 or B-5).                                          | 3     |
+| w         | Specifies if data is byte or full-sized, where full-sized is 16 or 32 bits (see Table B-6). | 1     |
+| s         | Specifies sign extension of an immediate field (see Table B-7).                             | 1     |
+| sreg2     | Segment register specifier for CS, SS, DS, ES (see Table B-8).                              | 2     |
+| sreg3     | Segment register specifier for CS, SS, DS, ES, FS, GS (see Table B-8).                      | 3     |
+| eee       | Specifies a special-purpose (control or debug) register (see Table B-9).                    | 3     |
+| tttn      | For conditional instructions, specifies a condition asserted or negated (see Table B-12).   | 4     |
+| d         | Specifies direction of data operation (see Table B-11).                                     | 1     |
+
+# Table B-4. Encoding of reg Field When w Field is Not Present in Instruction
+# Reg Field (reg) for 64-Bit Mode
+# Just like in non-64-bit modes, the reg field in the ModR/M byte specifies a general-purpose register operand. The
+# group of registers specified is modified by the presence of and state of the w bit in an encoding (refer to Section
+# B.1.4.3). Table B-4 shows the encoding of the reg field when the w bit is not present in an encoding; Table B-5
+# shows the encoding of the reg field when the w bit is present.
+---------------------------------------------------------------------------------------------------------------------------------------
+| reg Field | Register Selected during 16-Bit Data Operations | Register Selected during 32-Bit Data Operations | Register Selected during 64-Bit Data Operations |
+| 000       | AX                                              | EAX                                             | RAX                                             |
+| 001       | CX                                              | ECX                                             | RCX                                             |
+| 010       | DX                                              | EDX                                             | RDX                                             |
+| 011       | BX                                              | EBX                                             | RBX                                             |
+| 100       | SP                                              | ESP                                             | RSP                                             |
+| 101       | BP                                              | EBP                                             | RBP                                             |
+| 110       | SI                                              | ESI                                             | RSI                                             |
+| 111       | DI                                              | EDI                                             | RDI                                             |
+
+# Table B-5. Encoding of reg Field When w Field is Present in Instruction
+# Register Specified by reg Field During 16-Bit Data Operations
+# and Register Specified by reg Field During 32-Bit Data Operations
+# * AH, CH, DH, BH can not be encoded when REX prefix is used. Such an expression defaults to the low byte
+--------------------------------------------------------------------------------
+| reg | DataOpSize | w = 0 | w = 1 |
+| 000 | 16         | AL    | AX    |
+| 001 | 16         | CL    | CX    |
+| 010 | 16         | DL    | DX    |
+| 011 | 16         | BL    | BX    |
+| 100 | 16         | AH*   | SP    |
+| 101 | 16         | CH*   | BP    |
+| 110 | 16         | DH*   | SI    |
+| 111 | 16         | BH*   | DI    |
+| 000 | 32         | AL    | EAX   |
+| 001 | 32         | CL    | ECX   |
+| 010 | 32         | DL    | EDX   |
+| 011 | 32         | BL    | EBX   |
+| 100 | 32         | AH*   | ESP   |
+| 101 | 32         | CH*   | EBP   |
+| 110 | 32         | DH*   | ESI   |
+| 111 | 32         | BH*   | EDI   |
+
+# Table B-6. Encoding of Operand Size (w) Bit
+# The current operand-size attribute determines whether the processor is performing 16-bit, 32-bit or 64-bit operations.
+# Within the constraints of the current operand-size attribute, the operand-size bit (w) can be used to indicate
+# operations on 8-bit operands or the full operand size specified with the operand-size attribute. Table B-6 shows the
+# encoding of the w bit depending on the current operand-size attribute.
+--------------------------------------------------------------------------------
+| wBit | Operand Size When Operand-Size Attribute is 16 Bits | Operand Size When Operand-Size Attribute is 3 |
+| 0    | 8                                                   | 8                                             |
+| 1    | 16                                                  | 32                                            |
+
+# Table B-7. Encoding of Sign-Extend (s) Bit
+# The sign-extend (s) bit occurs in instructions with immediate data fields that are being
+# extended from 8 bits to 16 or 32 bits. See Table B-7.
+--------------------------------------------------------------------------------
+| s | Effect on 8-Bit Immediate Data                   | Effect on 16- or 32-Bit Immediate Data |
+| 0 | None                                             | None                                   |
+| 1 | Sign-extend to fill 16-bit or 32-bit destination | None                                   |
+
+# Table B-8. Encoding of the Segment Register (sreg) Field
+# When an instruction operates on a segment register, the reg field in the ModR/M byte is called the sreg field and is
+# used to specify the segment register. Table B-8 shows the encoding of the sreg field. This field is sometimes a 2-bit
+# field (sreg2) and other times a 3-bit field (sreg3).
+--------------------------------------------------------------------------------
+| 2-Bit sreg2 Field | Segment Register Selected |
+| 00                | ES                        |
+| 01                | CS                        |
+| 10                | SS                        |
+| 11                | DS                        |
+
+--------------------------------------------------------------------------------
+| 3-Bit sreg3 Field | Segment Register Selected |
+| 000               | ES                        |
+| 001               | CS                        |
+| 010               | SS                        |
+| 011               | DS                        |
+| 100               | FS                        |
+| 101               | GS                        |
+| 110               | Reserved                  |
+| 111               | Reserved                  |
+
+# Table B-10. Encoding of Conditional Test (tttn) Field
+# For conditional instructions (such as conditional jumps and set on condition), the condition test field (tttn) is
+# encoded for the condition being tested. The ttt part of the field gives the condition to test and the n part indicates
+# whether to use the condition (n = 0) or its negation (n = 1).
+# For 1-byte primary opcodes, the tttn field is located in bits 3, 2, 1, and 0 of the opcode byte.
+# For 2-byte primary opcodes, the tttn field is located in bits 3, 2, 1, and 0 of the second opcode byte.
+| Mnemonic | tttn | Description               | Group | StatusFlag            |
+| O        | 0000 | Overflow                  | 0     | OF=1                  |
+| NO       | 0001 | No overflow               | 0     | OF=0                  |
+| B        | 0010 | Below                     | 0     | CF=1                  |
+| NAE      | 0010 | Neither above nor equal   | 1     | CF=1                  |
+| NB       | 0011 | Not Below                 | 0     | CF=0                  |
+| AE       | 0011 | Above or equal            | 1     | CF=0                  |
+| E        | 0100 | Equal                     | 0     | ZF=1                  |
+| Z        | 0100 | Zero                      | 1     | ZF=1                  |
+| NE       | 0101 | Not Equal                 | 0     | ZF=0                  |
+| NZ       | 0101 | Not Zero                  | 1     | ZF=0                  |
+| BE       | 0110 | Below or Equal            | 0     | (CF OR ZF)=1          |
+| NA       | 0110 | Not above                 | 1     | (CF OR ZF)=1          |
+| NBE      | 0111 | Neither Below nor Equal   | 0     | (CF OR ZF)=0          |
+| A        | 0111 | Above                     | 1     | (CF OR ZF)=0          |
+| S        | 1000 | Sign                      | 0     | SF=1                  |
+| NS       | 1001 | No Sign                   | 0     | SF=0                  |
+| P        | 1010 | Parity                    | 0     | PF=1                  |
+| PE       | 1010 | Parity even               | 1     | PF=1                  |
+| NP       | 1011 | No Parity                 | 0     | PF=0                  |
+| PO       | 1011 | Parity odd                | 1     | PF=0                  |
+| L        | 1100 | Less                      | 0     | (SF XOR OF)=1         |
+| NGE      | 1100 | Neither greater nor equal | 1     | (SF XOR OF)=1         |
+| NL       | 1101 | Not Less                  | 0     | (SF XOR OF)=0         |
+| GE       | 1101 | Greater or equal          | 1     | (SF XOR OF)=0         |
+| LE       | 1110 | Less or Equal             | 0     | ((SF XOR OF) OR ZF)=1 |
+| NG       | 1110 | Not greater               | 1     | ((SF XOR OF) OR ZF)=1 |
+| NLE      | 1111 | Neither less nor equal    | 0     | ((SF XOR OF) OR ZF)=0 |
+| G        | 1111 | Greater                   | 1     | ((SF XOR OF) OR ZF)=0 |
+
+# Table B-11. Encoding of Operation Direction (d) Bit
+# In many two-operand instructions, a direction bit (d) indicates which operand is considered the source and which
+# is the destination. See Table B-11.
+# * When used for integer instructions, the d bit is located at bit 1 of a 1-byte primary opcode. Note that this
+#   bit does not appear as the symbol “d” in Table B-13; the actual encoding of the bit as 1 or 0 is given.
+# * When used for floating-point instructions (in Table B-16), the d bit is shown as bit 2 of the first byte of the
+#   primary opcode.
+------------------------------------------------------------------------------------
+| d | Source             | Destination        |
+| 0 | reg Field          | ModR/M or SIB Byte |
+| 1 | ModR/M or SIB Byte | reg Field          |
+
+# Table B-12. Notes on Instruction Encoding
+------------------------------------------------------------------------------------
+| Symbol | Meaning                                                                 |
+| A      | A value of 11B in bits 7 and 6 of the ModR/M byte is reserved.          |
+| B      | A value of 01B (or 10B) in bits 7 and 6 of the ModR/M byte is reserved. |
+
+# Table B-14. Special Symbols
+------------------------------------------------------------------------------------
+| Symbol | Meaning                                                       |
+| s      | If the value of REX.W is 1, it overrides the presence of 66H. |
+| w      | The value of bit W in REX is has no effect.                   |
+
+# AND - Logical AND Formats
+| register1 to register2           | 0100 0R0B 0010 000w : 11 reg1 reg2                |
+| qwordregister1 to qwordregister2 | 0100 1R0B 0010 0001 : 11 qwordreg1 qwordreg2      |
+| register2 to register1           | 0100 0R0B 0010 001w : 11 reg1 reg2                |
+| register1 to register2           | 0100 1R0B 0010 0011 : 11 qwordreg1 qwordreg2      |
+| memory to register               | 0100 0RXB 0010 001w : mod reg r/m                 |
+| memory64 to qwordregister        | 0100 1RXB : 0010 0011 : mod qwordreg r/m          |
+| register to memory               | 0100 0RXB : 0010 000w : mod reg r/m               |
+| qwordregister to memory64        | 0100 1RXB : 0010 0001 : mod qwordreg r/m          |
+| immediate to register            | 0100 000B : 1000 00sw : 11 100 reg : immediate    |
+| immediate32 to qwordregister     | 0100 100B 1000 0001 : 11 100 qwordreg : imm32     |
+| immediate to AL                  | 0010 010w : immediate                             |
+| immediate to AX                  | 0010 010w : immediate                             |
+| immediate to EAX                 | 0010 010w : immediate                             |
+| immediate32 to RAX               | 0100 1000 0010 1001 : imm32                       |
+| immediate to memory              | 0100 00XB : 1000 00sw : mod 100 r/m : immediate   |
+| immediate32 to memory64          | 0100 10XB : 1000 0001 : mod 100 r/m : immediate32 |
+| immediate8 to memory64           | 0100 10XB : 1000 0011 : mod 100 r/m : imm8        |

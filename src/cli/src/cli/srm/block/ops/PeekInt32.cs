@@ -16,15 +16,7 @@ namespace Z0
         {
             [MethodImpl(Inline), Op]
             public int PeekInt32(int offset)
-            {
-                uint result = PeekUInt32(offset);
-                if (unchecked((int)result != result))
-                {
-                    //Throw.ValueOverflow();
-                }
-
-                return (int)result;
-            }
+                => (int)PeekUInt32(offset);
         }
     }
 }

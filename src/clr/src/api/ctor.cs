@@ -10,10 +10,10 @@ namespace Z0
 
     using static Root;
     using static ReflectionFlags;
+    using static core;
 
     partial struct Clr
     {
-
         /// <summary>
         /// Searches a type for an instance constructor that matches a specified signature
         /// </summary>
@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="args">The method parameter types in ordinal position</param>
         [MethodImpl(Inline), Op]
         public static Option<ConstructorInfo> ctor(Type declaring, params Type[] args)
-            => declaring.GetConstructor(BF_Instance, null, args, sys.empty<ParameterModifier>());
+            => declaring.GetConstructor(BF_Instance, null, args, array<ParameterModifier>());
 
         /// <summary>
         /// Searches a type for an instance constructor that matches a specified signature

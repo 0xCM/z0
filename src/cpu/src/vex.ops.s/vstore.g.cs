@@ -74,7 +74,7 @@ namespace Z0
         public static void vstore<T>(Vector128<T> src, Span<T> dst)
             where T : unmanaged
         {
-            vstore(src, ref memory.first(dst));
+            vstore(src, ref first(dst));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         public static void vstore<T>(Vector256<T> src, Span<T> dst)
             where T : unmanaged
         {
-            vstore(src, ref memory.first(dst));
+            vstore(src, ref first(dst));
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector128<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vstore(src, ref memory.first(dst), offset);
+                => vstore(src, ref first(dst), offset);
 
         /// <summary>
         /// Stores vector content to a span

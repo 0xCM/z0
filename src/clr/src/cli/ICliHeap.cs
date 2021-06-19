@@ -15,7 +15,6 @@ namespace Z0
         CliHeapKind HeapKind {get;}
 
         ReadOnlySpan<byte> Data {get;}
-
     }
 
     public interface ICliHeap<T> : ICliHeap

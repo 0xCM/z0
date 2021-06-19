@@ -8,8 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     partial class SRM
     {
@@ -17,10 +16,7 @@ namespace Z0
         {
             [Op]
             public byte[] PeekBytes(int offset, int byteCount)
-            {
-                Available(offset, byteCount);
-                return ReadBytes(Pointer + offset, byteCount);
-            }
+                => ReadBytes(Pointer + offset, byteCount);
         }
     }
 }

@@ -25,6 +25,6 @@ namespace Z0
             => PdbServices.source(module);
 
         public ModuleArchive Archive()
-            => ModuleArchive.create(FS.path(root.controller().Location).FolderPath);
+            => ModuleArchive.create(FS.path(core.controller().Location).FolderPath);
     }
 }

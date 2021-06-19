@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
-    using static core;
 
     partial struct Clr
     {
@@ -57,5 +56,9 @@ namespace Z0
                 return false;
             }
         }
+
+        [MethodImpl(Inline), Op]
+        public static BinaryCode sig(Module src, CliToken token)
+            => src.ResolveSignature((int)token);
     }
 }

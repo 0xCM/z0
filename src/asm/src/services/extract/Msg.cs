@@ -31,5 +31,13 @@ namespace Z0
         public static MsgPattern<ApiHostUri> ExtractingHost => "Extracting {0} members";
 
         public static MsgPattern<Count,ApiHostUri> ExtractedHost => "Extracted {0} members from {1}";
+
+        public static MsgPattern<Count> ExtractingResolved => "Extracting data for {0} resolved parts";
+
+        public static MsgPattern<Count> ExtractedResolved => "Extracted data for {0} members";
+
+        public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
+
+        public static MsgPattern<OpUri> TerminalNotFound => "Terminal for {0} not found";
     }
 }

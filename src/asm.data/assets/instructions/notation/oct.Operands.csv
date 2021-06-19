@@ -19,3 +19,6 @@
 | x      | dq or qq based on the operand-size attribute.                                                                                                    |
 | y      | Doubleword or quadword (in 64-bit mode), depending on operand-size attribute.                                                                    |
 | z      | Word for 16-bit operand-size or doubleword for 32 or 64-bit operand-size.                                                                        |
+| Ev     | The ModR/M byte follows the opcode to specify a word or doubleword operand                                                                       |
+| Gv     | The reg field of the ModR/M byte selects a general-purpose register                                                                              |
+| Ib     | Immediate data is encoded in the subsequent byte of the instruction.                                                                             |

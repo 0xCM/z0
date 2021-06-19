@@ -23,13 +23,13 @@ namespace Z0
         public static NatKind kind<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatKind(null,nat64u<N>(), Numeric.kind<T>());
+                => new NatKind(null,nat64u<N>(), NumericKinds.kind<T>());
 
         [MethodImpl(Inline)]
         public static NatKind kind<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatKind(nat64u<M>(),nat64u<N>(), Numeric.kind<T>());
+                => new NatKind(nat64u<M>(),nat64u<N>(), NumericKinds.kind<T>());
     }
 }

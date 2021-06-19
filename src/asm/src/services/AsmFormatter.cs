@@ -10,32 +10,8 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public class AsmFormatter : AppService<AsmFormatter>,  IAsmRoutineFormatter
+    public readonly struct AsmFormatter
     {
-        AsmFormatConfig _Config;
-
-        Index<string> HeaderBuffer;
-
-        public AsmFormatter()
-        {
-            AsmFormatConfig.@default(out _Config);
-            HeaderBuffer = alloc<string>(16);
-        }
-
-        /// <summary>
-        /// Formats the assembly function detail
-        /// </summary>
-        /// <param name="src">The source function</param>
-        /// <param name="fmt">The format configuration</param>
-        public AsmRoutineFormat Format(AsmRoutine src)
-            => format(src, _Config);
-
-        public AsmFormatConfig Config
-        {
-            [MethodImpl(Inline)]
-            get => _Config;
-        }
-
         public static void render(ReadOnlySpan<byte> block, ReadOnlySpan<IceInstruction> instructions, ITextBuffer dst)
         {
             Address16 offset = z16;
@@ -54,17 +30,9 @@ namespace Z0.Asm
         [Op]
         public static AsmRoutineFormat format(AsmRoutine src, in AsmFormatConfig config)
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             render(src, config, dst);
             return new AsmRoutineFormat(dst.Emit());
-        }
-
-        [Op]
-        public static string format(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config)
-        {
-            var dst = text.buffer();
-            AsmRender.render(@base, src, config, dst);
-            return dst.ToString();
         }
 
         [Op]
@@ -86,13 +54,13 @@ namespace Z0.Asm
         [Op]
         public static ReadOnlySpan<string> instructions(AsmRoutine src, in AsmFormatConfig config)
         {
-            var summaries = AsmRoutines.summarize(src);
+            var summaries = AsmEtl.summarize(src);
             var count = summaries.Length;
             if(count == 0)
                 return default;
             var dst = span<string>(count);
             for(var i=0u; i< count; i++)
-                seek(dst,i)= format(src.BaseAddress, skip(summaries,i), config);
+                seek(dst,i) = AsmRender.format(src.BaseAddress, skip(summaries,i), config);
             return dst;
         }
     }

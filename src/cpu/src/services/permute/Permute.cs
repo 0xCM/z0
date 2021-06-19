@@ -348,7 +348,7 @@ namespace Z0
         /// <param name="start">The domain point at which evaluation will begin</param>
         public PermCycle Cycle(int start)
         {
-            root.invariant(start >= 0 && start < Length, () => $"{start} doesn't work");
+            Require.invariant(start >= 0 && start < Length, () => $"{start} doesn't work");
             Span<PermTerm> cterms = stackalloc PermTerm[Length];
             var traversed = new HashSet<int>(Length);
             var index = start;

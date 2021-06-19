@@ -16,7 +16,7 @@ namespace Z0
             => create(ApiRuntimeLoader.parts(core.controller(), args), args);
 
         public static IWfRuntime load(PartId[] parts, string[] args)
-            => create(ApiRuntimeLoader.parts((Index<PartId>)parts), args);
+            => create(ApiRuntimeLoader.parts(parts), args);
 
         public static IWfRuntime load(IApiParts parts, string[] args)
             => create(parts, args);

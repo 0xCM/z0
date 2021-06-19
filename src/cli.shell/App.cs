@@ -12,14 +12,50 @@ namespace Z0
     class App : WfApp<App>
     {
         public static void Main(params string[] args)
-            => run(args, PartId.CliShell, PartId.Cli, PartId.Part, PartId.Cpu);
-
+            => run(args, PartId.CliShell, PartId.Cli, PartId.Part, PartId.Cpu, PartId.AsmCore);
 
         public App()
         {
 
         }
 
+        unsafe void ReadHeap(PartId part)
+        {
+            var component = Reader(part, out var reader);
+            var heap = reader.SystemStringHeap();
+            var data = heap.Data;
+            var size = heap.Size;
+            var count = CliHeaps.count(heap);
+            var terminators = alloc<uint>(count);
+            var found = CliHeaps.terminators(heap, terminators);
+            var @base = heap.BaseAddress;
+
+            Wf.Row(string.Format("Source:{0}", FS.path(component.Location).ToUri()));
+            Wf.Row(string.Format("HeapKind:{0}", "SytemString"));
+            Wf.Row(string.Format("BaseAddress:{0}", @base));
+            Wf.Row(string.Format("HeapSize:{0}", size));
+            Wf.Row(string.Format("EntryCount:{0}",count));
+            Wf.Row(string.Format("TermCount:{0}",found));
+            // var pos = 0u;
+            // var address = @base;
+            // for(var i=0; i<found; i++)
+            // {
+            //     ref readonly var end = ref skip(terminators, i);
+            //     var length = end - pos;
+            //     var current = slice(data, pos, length);
+            //     var s = TextTools.format(recover<char>(current));
+            //     pos += length;
+            //     Wf.Row(string.Format("{0}:{1}", address, s));
+            //     address += end;
+            // }
+
+        }
+
+        void ReadHeaps()
+        {
+            var parts = Wf.ApiCatalog.PartIdentities;
+            iter(parts,ReadHeap);
+        }
 
         void Test4()
         {
@@ -47,18 +83,15 @@ namespace Z0
         CliReader Reader(Assembly src)
             => CliReader.read(src);
 
-        bool Reader(PartId part, out CliReader dst)
+        Assembly Reader(PartId part, out CliReader dst)
         {
             if(Wf.ApiCatalog.FindComponent(part, out var component))
             {
                 dst = Reader(component);
-                return true;
+                return component;
             }
             else
-            {
-                dst = default;
-                return false;
-            }
+                throw new Exception(string.Format("Component for {0} not found", part.Format()));
         }
 
         ReadOnlySpan<Assembly> ApiComponents
@@ -126,7 +159,8 @@ namespace Z0
         protected override void Run()
         {
             var flow = Wf.Running();
-            ReadState(Parts.Math.Assembly);
+            ReadHeaps();
+            //ReadState(Parts.Math.Assembly);
             //ReadMethodDefs();
             Wf.Ran(flow);
         }

@@ -121,7 +121,7 @@ namespace Z0.Logix
         [Op]
         public static bit satisfied(ComparisonExpr expr, bit a, bit b)
         {
-            root.invariant(expr.SetVars(a,b), () => "Unable to set variables");
+            Require.invariant(expr.SetVars(a,b), () => "Unable to set variables");
             return LogicEngine.eval(expr);
         }
 
@@ -136,7 +136,7 @@ namespace Z0.Logix
         public static bit satisfied<T>(ComparisonExpr<T> expr, T a, T b)
             where T :unmanaged
         {
-            root.invariant(expr.VarCount >= 2, () => $"The source expression has {expr.VarCount} and the operation requires 2");
+            Require.invariant(expr.VarCount >= 2, () => $"The source expression has {expr.VarCount} and the operation requires 2");
             expr.SetVars(a,b);
             return gmath.eq(LogicEngine.eval(expr).Value, Numeric.maxval<T>());
         }

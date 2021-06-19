@@ -20,26 +20,26 @@ namespace Z0.Asm
 
         readonly IWfDb Db;
 
-        readonly IAsmRoutineFormatter Formatter;
+        readonly AsmFormatConfig Config;
 
         [MethodImpl(Inline)]
-        public AsmImmWriter(IWfRuntime wf, in ApiHostUri host, IAsmRoutineFormatter formatter)
+        public AsmImmWriter(IWfRuntime wf, in ApiHostUri host)
         {
             Wf = wf;
             Uri = host;
             Db = Wf.Db();
             ImmRoot = Db.ImmCaptureRoot();
-            Formatter = formatter;
+            Config = AsmFormatConfig.@default(out var _);
         }
 
         [MethodImpl(Inline)]
-        public AsmImmWriter(IWfRuntime wf, in ApiHostUri host, IAsmRoutineFormatter formatter, FS.FolderPath root)
+        public AsmImmWriter(IWfRuntime wf, in ApiHostUri host, FS.FolderPath root)
         {
             Wf = wf;
             Uri = host;
             Db = Wf.Db(root);
             ImmRoot = Db.ImmCaptureRoot();
-            Formatter = formatter;
+            Config = AsmFormatConfig.@default(out var _);
         }
 
         public Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
@@ -50,7 +50,7 @@ namespace Z0.Asm
             {
                 ref readonly var f = ref src[i];
                 if(f.IsNonEmpty)
-                    writer.Write(Formatter.Format(f));
+                    writer.Write(AsmFormatter.format(f,Config));
             }
             return dst;
         }
