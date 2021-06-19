@@ -67,15 +67,15 @@ namespace Z0
             var buffer = ByteBlocks.alloc(n32);
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
 
-            var storage = ByteBlocks.alloc(n128);
-            ref var target = ref ByteBlocks.first<uint>(ref storage);
+            var block = ByteBlocks.alloc(n128);
+            ref var target = ref ByteBlocks.first<uint>(ref block);
 
             unpack1x8x32(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
             vinflate8x256x32u(tmp, 1, ref target);
             vinflate8x256x32u(tmp, 2, ref target);
             vinflate8x256x32u(tmp, 3, ref target);
-            return ByteBlocks.span<uint>(ref storage);
+            return block.Storage<uint>();
         }
 
         /// <summary>

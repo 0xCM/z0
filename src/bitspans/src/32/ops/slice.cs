@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     partial class BitSpans32
     {
@@ -66,9 +67,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte slice(in BitSpan32 src, W8 w, int offset, int count)
         {
-            var buffer = ByteBlocks.alloc(n8);
-            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
+            var block = ByteBlocks.alloc(n8);
+            var unpacked = ByteBlocks.span<Bit32>(ref block);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref block);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<byte>(unpacked);
         }
@@ -83,9 +84,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort slice(in BitSpan32 src, W16 w, int offset, int count)
         {
-            var buffer = ByteBlocks.alloc(n16);
-            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref ByteBlocks.first<Bit32>(ref buffer);
+            var block = ByteBlocks.alloc(n16);
+            var unpacked = ByteBlocks.span<Bit32>(ref block);
+            ref var dst = ref ByteBlocks.first<Bit32>(ref block);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<ushort>(unpacked);
         }
@@ -100,8 +101,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint slice(in BitSpan32 src, W32 w, int offset, int count)
         {
-            var buffer = ByteBlocks.alloc(n32);
-            var unpacked = ByteBlocks.span<Bit32>(ref buffer);
+            var block = ByteBlocks.alloc(n32);
+            var unpacked = ByteBlocks.span<Bit32>(ref block);
             var take = math.min(src.Edit.Length -offset, count);
             src.Edit.Slice(offset,take).CopyTo(unpacked);
             return BitPack32.pack<uint>(unpacked);

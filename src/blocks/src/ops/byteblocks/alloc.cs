@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static ByteBlock6 block(N6 n)
+        public static ByteBlock6 alloc(N6 n)
             => default;
 
         /// <summary>
@@ -157,11 +157,35 @@ namespace Z0
             => default;
 
         /// <summary>
+        /// Allocates 19 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
+        [MethodImpl(Inline), Op]
+        public static ByteBlock19 alloc(N19 n)
+            => default;
+
+        /// <summary>
+        /// Allocates 20 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
+        [MethodImpl(Inline), Op]
+        public static ByteBlock20 alloc(N20 n)
+            => default;
+
+        /// <summary>
         /// Allocates 24 bytes of storage
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static ByteBlock24 alloc(N24 n)
+            => default;
+
+        /// <summary>
+        /// Allocates 30 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
+        [MethodImpl(Inline), Op]
+        public static ByteBlock30 alloc(N30 n)
             => default;
 
         /// <summary>
@@ -181,6 +205,14 @@ namespace Z0
             => default;
 
         /// <summary>
+        /// Allocates 64 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
+        [MethodImpl(Inline), Op]
+        public static ByteBlock80 alloc(N80 n)
+            => default;
+
+        /// <summary>
         /// Allocates 128 bytes of storage
         /// </summary>
         /// <param name="n">The size selector</param>
@@ -188,96 +220,12 @@ namespace Z0
         public static ByteBlock128 alloc(N128 n)
             => default;
 
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out ByteBlock1 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out ByteBlock2 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out ByteBlock4 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out ByteBlock8 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out ByteBlock16 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out ByteBlock32 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out ByteBlock64 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out ByteBlock128 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
         /// <summary>
-        /// Allocates 2 16-byte blocks
+        /// Allocates 128 bytes of storage
         /// </summary>
-        /// <param name="n">The byte-count selector</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static void alloc(out ByteBlock16 a, out ByteBlock16 b)
-        {
-            a = default;
-            b = default;
-        }
-
-        /// <summary>
-        /// Allocates 3 64-byte blocks
-        /// </summary>
-        /// <param name="n">The byte-count selector</param>
-        [MethodImpl(Inline), Op]
-        public static void alloc(out ByteBlock64 a, out ByteBlock64 b, out ByteBlock64 c)
-        {
-            a = default;
-            b = default;
-            c = default;
-        }
-
-        /// <summary>
-        /// Allocates 4 128-byte blocks
-        /// </summary>
-        /// <param name="n">The byte-count selector</param>
-        [MethodImpl(Inline), Op]
-        public static void alloc(out ByteBlock128 a, out ByteBlock128 b, out ByteBlock128 c, out ByteBlock128 d)
-        {
-            a = default;
-            b = default;
-            c = default;
-            d = default;
-        }
+        public static ByteBlock256 alloc(N256 n)
+            => default;
     }
 }

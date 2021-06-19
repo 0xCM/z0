@@ -36,12 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Span<T> Edit<T>()
-            where T : unmanaged
-                => recover<T>(Bytes);
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<T> View<T>()
+        public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
 
