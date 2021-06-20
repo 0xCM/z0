@@ -10,32 +10,43 @@ namespace Z0
     using static Root;
     using static core;
 
-    using W = W8;
+    using W = W32;
 
     /// <summary>
-    /// Defines a refined 8-bit immediate value
+    /// Defines a refined 32-bit immediate value
     /// </summary>
-    [Datatype("imm8r")]
-    public readonly struct Imm8<E> : IImm<Imm8<E>,E>
-        where E : unmanaged
+    [DataType(TypeKind.Imm32K, "imm32k")]
+    public readonly struct Imm32<K> : IImm<Imm32<K>, K>
+        where K : unmanaged
     {
-        public E Content {get;}
+        public K Content {get;}
+
+        public static W W => default;
+
+        public ImmWidth Width => ImmWidth.W32;
+
+        public ImmKind Kind => ImmKind.Imm32;
 
         [MethodImpl(Inline)]
-        public Imm8(E src)
+        public static implicit operator K(Imm32<K> src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Imm32<K>(K src)
+            => new Imm32<K>(src);
+
+        [MethodImpl(Inline)]
+        public Imm32(K src)
             => Content = src;
 
-        public ImmWidth Width => ImmWidth.W8;
+        [MethodImpl(Inline)]
+        public uint AsPrimitive()
+            => bw32(this);
 
-        public ImmKind Kind => ImmKind.Imm8;
 
         [MethodImpl(Inline)]
         public string Format()
             => HexFormat.format(Content, W);
-
-        [MethodImpl(Inline)]
-        public byte AsPrimitive()
-            => bw8(this);
 
         public override string ToString()
             => Format();
@@ -48,19 +59,5 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
-
-        [MethodImpl(Inline)]
-        public static implicit operator E(Imm8<E> src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(Imm8<E> src)
-            => src.AsPrimitive();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Imm8<E>(E src)
-            => new Imm8<E>(src);
-
-        public static W W => default;
     }
 }

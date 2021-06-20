@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines a 32-bit immediate value
     /// </summary>
-    [Datatype("imm32")]
+    [DataType(TypeKind.Imm32, "imm32")]
     public readonly struct Imm32 : IImm<I,uint>
     {
         [MethodImpl(Inline)]

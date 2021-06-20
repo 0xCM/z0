@@ -162,7 +162,7 @@ namespace Z0.Asm
             dst.@return = Return.Empty;
             dst.parameters = new Parameters();
             dst.description = EmptyString;
-            dst.operation = new Operation(root.list<TextLine>());
+            dst.operation = new Operation(list<TextLine>());
             dst.instructions = new Instructions();
             dst.header = EmptyString;
             return dst;

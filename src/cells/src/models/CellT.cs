@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    [Datatype("m")]
+    [DataType("m")]
     public struct Cell<T> : IDataCell<Cell<T>>
         where T : struct
     {

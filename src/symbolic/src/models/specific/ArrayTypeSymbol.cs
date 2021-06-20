@@ -14,6 +14,7 @@ namespace Z0
     using static Root;
 
     using api = CodeSymbols;
+    using CA = Microsoft.CodeAnalysis;
 
     partial struct CodeSymbolModels
     {
@@ -58,7 +59,7 @@ namespace Z0
             public ReadOnlySpan<CustomModifier> CustomModifiers
                 => Source.CustomModifiers.AsSpan();
 
-            public TypeKind TypeKind => Source.TypeKind;
+            public CA.TypeKind TypeKind => Source.TypeKind;
 
             public INamedTypeSymbol BaseType => Source.BaseType;
 

@@ -13,6 +13,8 @@ namespace Z0
 
     using static Root;
 
+    using CA = Microsoft.CodeAnalysis;
+
     partial struct CodeSymbolModels
     {
         public readonly struct PointerTypeSymbol : ICodeSymbol<PointerTypeSymbol,IPointerTypeSymbol>
@@ -41,7 +43,7 @@ namespace Z0
 
             public ImmutableArray<CustomModifier> CustomModifiers => Source.CustomModifiers;
 
-            public TypeKind TypeKind => Source.TypeKind;
+            public CA.TypeKind TypeKind => Source.TypeKind;
 
             public INamedTypeSymbol BaseType => Source.BaseType;
 

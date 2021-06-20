@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    [Datatype]
+    [DataType]
     public readonly struct Meaning<M,T> : IMeaning<Meaning<M,T>,M,T>
     {
         public M Content {get;}

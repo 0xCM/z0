@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines the name of a type
     /// </summary>
-    [Datatype]
+    [DataType]
     public readonly struct TypeName : IName<string>, IDataTypeComparable<TypeName>
     {
         readonly string Data;

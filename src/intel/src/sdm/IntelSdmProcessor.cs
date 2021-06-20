@@ -74,7 +74,7 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ProcessToc();
+            FindInstructions();
         }
 
        FS.FilePath SdmSplitSpecs()
@@ -90,7 +90,7 @@ namespace Z0.Asm
             => ProcessLogs() + FS.file(name,FS.Log);
 
         FS.FilePath LinedSdmPath()
-            => DocExtractPath("sdm-lined", FS.Txt);
+            => DocExtractPath("lined", FS.Txt);
 
         FS.FilePath RefDocPath(string id)
             => Archive.RefDoc(id, FS.Txt);

@@ -15,6 +15,7 @@ namespace Z0
     using static Root;
 
     using api = CodeSymbols;
+    using CA = Microsoft.CodeAnalysis;
 
     partial struct CodeSymbolModels
     {
@@ -43,7 +44,7 @@ namespace Z0
             public DocumentationComment Docs
                 => api.docs(Source);
 
-            public TypeKind TypeKind
+            public CA.TypeKind TypeKind
                 => Source.TypeKind;
 
             public INamedTypeSymbol BaseType

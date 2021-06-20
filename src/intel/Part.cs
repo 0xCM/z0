@@ -13,6 +13,9 @@ namespace Z0.Parts
 
 namespace Z0
 {
+    using Svc = Z0.Asm;
+    using Z0.Asm;
+
     [ApiHost]
     public static partial class XTend
     {

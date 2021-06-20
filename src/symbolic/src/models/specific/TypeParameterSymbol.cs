@@ -14,6 +14,7 @@ namespace Z0
     using static Root;
 
     using api = CodeSymbols;
+    using CA = Microsoft.CodeAnalysis;
 
     partial struct CodeSymbolModels
     {
@@ -69,7 +70,7 @@ namespace Z0
 
             public ITypeParameterSymbol ReducedFrom => Source.ReducedFrom;
 
-            public TypeKind TypeKind => Source.TypeKind;
+            public CA.TypeKind TypeKind => Source.TypeKind;
 
             public INamedTypeSymbol BaseType => Source.BaseType;
 

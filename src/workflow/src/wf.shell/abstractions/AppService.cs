@@ -12,6 +12,7 @@ namespace Z0
     using static Root;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
     [WfService]
     public abstract class AppService<H> : IAppService<H>
         where H : AppService<H>, new()

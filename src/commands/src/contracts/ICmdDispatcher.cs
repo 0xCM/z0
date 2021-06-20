@@ -6,9 +6,10 @@ namespace Z0
 {
     using System;
 
-    public abstract class WorkflowRunner<T> : AppService<T>
-        where T : WorkflowRunner<T>, new()
+    public interface ICmdDispatcher
     {
+        Outcome Dispatch(string command, params object[] args);
 
+        ReadOnlySpan<string> Supported {get;}
     }
 }

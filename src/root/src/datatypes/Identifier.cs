@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a legal identifier within a given context
     /// </summary>
-    [Datatype]
+    [DataType]
     public readonly struct Identifier : IIdentifier<Identifier>
     {
         public Name Content {get;}

@@ -10,9 +10,6 @@ namespace Z0.Asm
     using static core;
     using static Root;
 
-    using Markers = IntelSdmMarkers;
-    using Patterns = IntelSdmPatterns;
-
     partial struct IntelSdm
     {
         public static Outcome parse(ReadOnlySpan<char> src, out SectionNumber dst)

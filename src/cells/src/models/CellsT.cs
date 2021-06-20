@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines an indexed sequence of <typeparamref name='T'/> cells
     /// </summary>
-    [Datatype("m(n)")]
+    [DataType("m(n)")]
     public readonly struct Cells<T> : IIndex<T>
         where T : struct, IDataCell<T>
     {

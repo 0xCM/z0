@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    [ApiHost, Datatype]
+    [ApiHost, DataType]
     public readonly partial struct bit : ITextual, IEquatable<bit>
     {
         internal readonly bool State;

@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines grid dimensions based on specification without parametrization
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), Datatype]
+    [StructLayout(LayoutKind.Sequential), DataType]
     public readonly struct GridDim : IDataTypeEquatable<GridDim>
     {
         /// <summary>

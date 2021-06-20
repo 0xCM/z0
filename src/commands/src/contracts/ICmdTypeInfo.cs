@@ -9,7 +9,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     [Free]
     public interface ICmdTypeInfo : IDataType
     {

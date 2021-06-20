@@ -11,6 +11,16 @@
       <ProjectReference Include="$(Rules)" />
       <ProjectReference Include="$(Bit)" />
       <ProjectReference Include="$(Hash)" />
+      <ProjectReference Include="$(Events)"/>
+      <ProjectReference Include="$(Workflow)"/>
+      <ProjectReference Include="$(Part)"/>
+      <ProjectReference Include="$(AsmCore)"/>
+      <ProjectReference Include="$(AsmData)"/>
+      <ProjectReference Include="$(Resources)"/>
+      <ProjectReference Include="$(Commands)"/>
+      <ProjectReference Include="$(Tables)"/>
+      <ProjectReference Include="$(Clr)"/>
+
   </ItemGroup>
 
   <ItemGroup>

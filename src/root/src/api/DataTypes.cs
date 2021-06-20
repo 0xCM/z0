@@ -9,19 +9,16 @@ namespace Z0
 
     using static Root;
 
-    [DataType]
-    public readonly struct VersionExpr
+    [ApiHost]
+    public readonly struct DataTypes
     {
-        public string Value {get;}
+        [MethodImpl(Inline), Op]
+        public static DataType empty()
+            => new DataType(new EmptyDataType());
 
         [MethodImpl(Inline)]
-        public VersionExpr(string src)
-        {
-            Value = src;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator VersionExpr(string src)
-            => new VersionExpr(src);
+        public static DataType metadata<T>(T src, uint width = 0)
+            where T : IDataType
+                => new DataType(src, width);
     }
 }

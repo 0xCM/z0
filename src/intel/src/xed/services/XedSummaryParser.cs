@@ -35,7 +35,7 @@ namespace Z0.Asm
             var counter = 0u;
             var j = 0;
             var line = TextLine.Empty;
-            var header = memory.alloc<string>(XedFormInfo.FieldCount);
+            var header = alloc<string>(XedFormInfo.FieldCount);
             ref var dst = ref SummaryTarget.First;
             while(reader.ReadLine(++counter, out line))
             {

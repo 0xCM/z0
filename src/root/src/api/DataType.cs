@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using api = DataTypes;
 
@@ -62,7 +62,7 @@ namespace Z0
 
         public Type ContainerType => typeof(void);
 
-        public BitWidth Width => 0;
+        public ushort Width => 0;
 
         public string Format()
             => "<empty>";

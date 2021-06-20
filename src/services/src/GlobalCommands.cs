@@ -7,31 +7,32 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     using static core;
-    public class GlobalCommands : WorkflowRunner<GlobalCommands>
+    using static Root;
+
+    [CmdDispatcher]
+    public class GlobalCommands : AppService<GlobalCommands>, ICmdDispatcher
     {
-        Dictionary<string,MethodInfo> CommandLookup;
+        CmdRunnerLookup Lookup;
 
-        Dictionary<string,MethodInfo> Methods;
-
-        object[] DefaultParameters;
 
         public GlobalCommands()
         {
-            Methods = GetType().PublicInstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
-            DefaultParameters = array<object>();
-            CommandLookup = new();
+            Lookup = CmdRunnerLookup.create();
         }
 
         protected override void Initialized()
         {
-            foreach(var (name,method) in Methods)
-            {
-                var cmd = method.Tag<CmdOpAttribute>().MapValueOrDefault(m => m.CommandName, method.Name);
-                if(!CommandLookup.TryAdd(cmd,method))
-                    Wf.Warn(string.Format("The operation {0}:{1} has a duplicate identifier", cmd, method.Name));
-            }
+            Lookup = Cmd.lookup(GetType());
+            // var methods = GetType().PublicInstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
+            // foreach(var (name,method) in methods)
+            // {
+            //     var cmd = method.Tag<CmdOpAttribute>().MapValueOrDefault(m => m.CommandName, method.Name);
+            //     if(!Lookup.Add(cmd,method))
+            //         Wf.Warn(string.Format("The operation {0}:{1} has a duplicate identifier", cmd, method.Name));
+            // }
         }
 
         [CmdOp("emit-metadata-sets")]
@@ -167,7 +168,7 @@ namespace Z0
         {
             try
             {
-                if(CommandLookup.TryGetValue(command, out var method))
+                if(Lookup.Find(command, out var method))
                 {
                     return (Outcome)method.Invoke(this, args);
                 }
@@ -180,6 +181,12 @@ namespace Z0
             {
                 return e;
             }
+        }
+
+        public ReadOnlySpan<string> Supported
+        {
+            [MethodImpl(Inline)]
+            get => Lookup.Specs;
         }
 
         ReadOnlySpan<ApiCodeBlock> Blocks()

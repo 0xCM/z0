@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines the usage syntax of a command or tool
     /// </summary>
-    [Datatype]
+    [DataType]
     public readonly struct ToolUsage : ITextual, IContented<string>
     {
         public string Content {get;}

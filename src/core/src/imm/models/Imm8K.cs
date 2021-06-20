@@ -10,31 +10,32 @@ namespace Z0
     using static Root;
     using static core;
 
-    using W = W16;
+    using W = W8;
 
     /// <summary>
-    /// Defines a refined 16-bit immediate value
+    /// Defines a refined 8-bit immediate value
     /// </summary>
-    [Datatype("imm16r")]
-    public readonly struct Imm16<E> : IImm<Imm16<E>, E>
-        where E : unmanaged
+    [DataType(TypeKind.Imm8K,"imm8r")]
+    public readonly struct Imm8<K> : IImm<Imm8<K>,K>
+        where K : unmanaged
     {
-        public E Content {get;}
-
-        public static W W => default;
+        public K Content {get;}
 
         [MethodImpl(Inline)]
-        public Imm16(E value)
-            => Content = value;
+        public Imm8(K src)
+            => Content = src;
 
-        public ImmWidth Width => ImmWidth.W16;
+        public ImmWidth Width => ImmWidth.W8;
 
-
-        public ImmKind Kind => ImmKind.Imm16;
+        public ImmKind Kind => ImmKind.Imm8;
 
         [MethodImpl(Inline)]
         public string Format()
             => HexFormat.format(Content, W);
+
+        [MethodImpl(Inline)]
+        public byte AsPrimitive()
+            => bw8(this);
 
         public override string ToString()
             => Format();
@@ -49,20 +50,17 @@ namespace Z0
             => (int)Hash;
 
         [MethodImpl(Inline)]
-        public ushort AsPrimitive()
-            => bw16(this);
-
-        [MethodImpl(Inline)]
-        public static implicit operator E(Imm16<E> src)
+        public static implicit operator K(Imm8<K> src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm16<E>(E src)
-            => new Imm16<E>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(Imm16<E> src)
+        public static implicit operator byte(Imm8<K> src)
             => src.AsPrimitive();
 
+        [MethodImpl(Inline)]
+        public static implicit operator Imm8<K>(K src)
+            => new Imm8<K>(src);
+
+        public static W W => default;
     }
 }

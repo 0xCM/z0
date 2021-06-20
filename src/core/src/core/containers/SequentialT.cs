@@ -11,7 +11,7 @@ namespace Z0
     using static core;
 
     using api = Sequential;
-    [Datatype]
+    [DataType]
     public struct Sequential<T> : IDataType<T>
         where T : unmanaged
     {

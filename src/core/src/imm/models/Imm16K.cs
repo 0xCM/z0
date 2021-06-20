@@ -10,39 +10,27 @@ namespace Z0
     using static Root;
     using static core;
 
-    using W = W32;
+    using W = W16;
 
     /// <summary>
-    /// Defines a refined 32-bit immediate value
+    /// Defines a refined 16-bit immediate value
     /// </summary>
-    [Datatype("imm32r")]
-    public readonly struct Imm32<E> : IImm<Imm32<E>, E>
-        where E : unmanaged
+    [DataType(TypeKind.Imm16K,"imm16k")]
+    public readonly struct Imm16<K> : IImm<Imm16<K>, K>
+        where K : unmanaged
     {
-        public E Content {get;}
+        public K Content {get;}
 
         public static W W => default;
 
-        public ImmWidth Width => ImmWidth.W32;
-
-        public ImmKind Kind => ImmKind.Imm32;
-
         [MethodImpl(Inline)]
-        public static implicit operator E(Imm32<E> src)
-            => src.Content;
+        public Imm16(K value)
+            => Content = value;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Imm32<E>(E src)
-            => new Imm32<E>(src);
+        public ImmWidth Width => ImmWidth.W16;
 
-        [MethodImpl(Inline)]
-        public Imm32(E src)
-            => Content = src;
 
-        [MethodImpl(Inline)]
-        public uint AsPrimitive()
-            => bw32(this);
-
+        public ImmKind Kind => ImmKind.Imm16;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -59,5 +47,22 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
+
+        [MethodImpl(Inline)]
+        public ushort AsPrimitive()
+            => bw16(this);
+
+        [MethodImpl(Inline)]
+        public static implicit operator K(Imm16<K> src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Imm16<K>(K src)
+            => new Imm16<K>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(Imm16<K> src)
+            => src.AsPrimitive();
+
     }
 }

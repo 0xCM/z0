@@ -8,25 +8,39 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    using W = W8;
-    using I = Imm8;
+    using W = W64;
+    using I = Imm64;
 
     /// <summary>
-    /// Defines an 8-bit immediate value
+    /// Defines a 64-bit immediate value
     /// </summary>
-    [Datatype("imm8")]
-    public readonly struct Imm8 : IImm<I,byte>
+    [DataType(TypeKind.Imm64, "imm64")]
+    public readonly struct Imm64 : IImm<Imm64,ulong>
     {
-        public byte Content {get;}
+        [MethodImpl(Inline)]
+        public static Imm64 from(ReadOnlySpan<byte> src)
+        {
+            var storage = z64;
+            ref var dst = ref @as<byte>(storage);
+            var count = min(W,src.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+            return storage;
+        }
+
+        public ulong Content {get;}
+
+        public static W W => default;
 
         [MethodImpl(Inline)]
-        public Imm8(byte src)
+        public Imm64(ulong src)
             => Content = src;
 
-        public ImmWidth Width => ImmWidth.W8;
+        public ImmWidth Width => ImmWidth.W64;
 
-        public ImmKind Kind => ImmKind.Imm8;
+        public ImmKind Kind => ImmKind.Imm64;
 
         public uint Hash
         {
@@ -34,14 +48,15 @@ namespace Z0
             get => FastHash.calc(Content);
         }
 
-        public string Format()
-            => HexFormat.format(W, Content);
-
-        public override string ToString()
-            => Format();
 
         public override int GetHashCode()
             => (int)Hash;
+
+        public string Format()
+            => HexFormatter.format(W, Content);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public int CompareTo(I src)
@@ -55,7 +70,7 @@ namespace Z0
             => src is I x && Equals(x);
 
         [MethodImpl(Inline)]
-        public Address8 ToAddress()
+        public Address64 ToAddress()
             => Content;
 
         [MethodImpl(Inline)]
@@ -83,21 +98,27 @@ namespace Z0
             => a.Content != b.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(I src)
+        public static implicit operator ulong(I src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<byte>(I src)
-            => new Imm<byte>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator I(byte src)
-            => new I(src);
+        public static implicit operator Imm<ulong>(I src)
+            => new Imm<ulong>(src);
 
         // [MethodImpl(Inline)]
-        // public static implicit operator Cell8(I src)
-        //     => new Cell8(src.Content);
+        // public static implicit operator Cell64(I src)
+        //     => new Cell64(src.Content);
 
-        public static W W => default;
+        [MethodImpl(Inline)]
+        public static implicit operator I(ulong src)
+            => new I(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(I src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator I(MemoryAddress src)
+            => new I(src);
     }
 }

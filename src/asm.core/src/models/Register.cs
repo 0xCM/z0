@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static RegFacets;
 
-    [Datatype]
+    [DataType]
     public readonly struct Register : IDataTypeEquatable<Register>
     {
         /// <summary>

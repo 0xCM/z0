@@ -12,6 +12,7 @@ namespace Z0
     using static core;
     using static Typed;
 
+    [DataType(TypeKind.ImmT, "immT")]
     public readonly struct Imm<T> : IImm<Imm<T>,T>
         where T : unmanaged
     {

@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines the name of an operation
     /// </summary>
-    [Datatype]
+    [DataType]
     public readonly struct OperationName : IName<string>, IDataTypeComparable<OperationName>
     {
         readonly string Data;

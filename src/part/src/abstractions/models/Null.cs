@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    [Datatype]
+    [DataType]
     public readonly struct Null : ITextual, INullity, INullary<Null>
     {
         public const string Identifier = "∅";

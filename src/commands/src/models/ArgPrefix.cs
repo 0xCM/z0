@@ -12,7 +12,7 @@ namespace Z0
 
     using ACC = AsciCode;
 
-    [Datatype]
+    [DataType]
     public readonly struct ArgPrefix : IDataTypeEquatable<ArgPrefix>
     {
         /// <summary>
