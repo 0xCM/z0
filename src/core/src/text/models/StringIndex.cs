@@ -69,5 +69,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator string[](StringIndex src)
             => src.Data.Storage;
+
+        public static StringIndex Empty
+        {
+            [MethodImpl(Inline)]
+            get => new StringIndex(array<string>());
+        }
     }
 }

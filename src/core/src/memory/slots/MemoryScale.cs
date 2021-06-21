@@ -37,13 +37,13 @@ namespace Z0
             get => Factor != 0;
         }
 
-        public bool NonUnital
+        public bool IsNonUnital
         {
              [MethodImpl(Inline)]
              get => Factor != ScaleFactor.S1;
         }
 
-        public bool NonZero
+        public bool IsNonZero
         {
             [MethodImpl(Inline)]
             get =>  Factor != 0;
@@ -56,7 +56,7 @@ namespace Z0
         }
 
        public string Format()
-            => IsNonEmpty ? ((byte)Factor).ToString() : EmptyString;
+            => IsNonZero ? ((byte)Factor).ToString() : EmptyString;
 
        public override string ToString()
             => Format();
@@ -75,6 +75,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator MemoryScale(int src)
             => from((byte)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(MemoryScale src)
+            => src.Value;
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryScale(ScaleFactor src)

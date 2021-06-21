@@ -21,6 +21,33 @@ namespace Z0
             return new string(slice(buffer,0,count));
         }
 
+        [Op]
+        public static string format(N3 n, byte src)
+        {
+            var buffer = CharBlock3.Null.Data;
+            var i=0u;
+            var count = render(n, src, ref i, buffer);
+            return new string(slice(buffer,0,count));
+        }
+
+        [Op]
+        public static string format(N4 n, byte src)
+        {
+            var buffer = CharBlock4.Null.Data;
+            var i=0u;
+            var count = render(n, src, ref i, buffer);
+            return new string(slice(buffer,0,count));
+        }
+
+        [Op]
+        public static string format(N5 n, byte src)
+        {
+            var buffer = CharBlock5.Null.Data;
+            var i=0u;
+            var count = render(n, src, ref i, buffer);
+            return new string(slice(buffer,0,count));
+        }
+
         public static string format(ReadOnlySpan<byte> src, in BitFormat config)
         {
             var count = src.Length*8;

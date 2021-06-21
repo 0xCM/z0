@@ -16,7 +16,7 @@ namespace Z0.Asm
     using K = RexPrefixKind;
 
     [ApiHost]
-    public readonly partial struct AsmEncoder
+    public readonly struct AsmEncoder
     {
         [MethodImpl(Inline), Op]
         public static Hex8 rex()

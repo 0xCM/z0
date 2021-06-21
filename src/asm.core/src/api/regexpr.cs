@@ -27,6 +27,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static RegExpr<r64> regxpr(r64 @base, r64 index, MemoryScale scale, uint dx)
             => new RegExpr<r64>(@base, index, scale, dx);
-
     }
 }

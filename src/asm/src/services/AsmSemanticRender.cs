@@ -225,7 +225,7 @@ namespace Z0.Asm
             else
                 dst.Append("UNK");
 
-            if(src.Scale.NonUnital && src.Scale.NonZero)
+            if(src.Scale.IsNonUnital && src.Scale.IsNonZero)
             {
                 var scale = src.Scale.Format();
                 dst.Append(text.concat(Chars.Star, scale));

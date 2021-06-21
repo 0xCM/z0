@@ -80,6 +80,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator B(ReadOnlySpan<char> src)
             => api.init(src, out B dst);
+
+        public static B Null => default;
+
         public static B Empty => RP.Spaced4;
 
         /// <summary>

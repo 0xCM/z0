@@ -102,6 +102,21 @@ namespace Z0
             }
         }
 
+        [CmdImpl(K.ToolChain)]
+        void ToolChain(object[] args)
+        {
+            if(args.Length ==0)
+            {
+                Push("No arguments were supplied");
+                return;
+            }
+            var name = (string)first(args);
+            var workspace = Wf.AsmWorkspace();
+            var toolchain = Wf.AsmToolchain();
+            var spec = workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, name);
+            toolchain.Run(spec);
+        }
+
         static OpenHandle OpenThread(uint threadId)
             => Kernel32.OpenThread(ThreadAccess.THREAD_ALL_ACCESS,true, threadId);
     }

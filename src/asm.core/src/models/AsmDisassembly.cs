@@ -43,7 +43,7 @@ namespace Z0.Asm
         }
 
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{12,32,24,32};
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{12,64,32,32};
 
     }
 }

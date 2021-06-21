@@ -71,8 +71,10 @@ namespace Z0
             term.cyan(string.Format(">>   {0}", content));
         }
 
-        void Dispatch(K id)
+
+        void Dispatch(CmdSpec<K> spec)
         {
+            var id = spec.Id;
             ref readonly var cmd = ref LookupCmd(id);
             if(id == K.Help)
             {
@@ -83,7 +85,8 @@ namespace Z0
                 var method = LookupMethod(id);
                 try
                 {
-                    method.Invoke(ShellOps, new object[]{new object[]{}});
+                    var args = spec.Args.Storage.Cast<object>();
+                    method.Invoke(ShellOps, new object[]{args});
                 }
                 catch(Exception e)
                 {
@@ -92,26 +95,37 @@ namespace Z0
             }
         }
 
-        K Pull()
+        CmdSpec<K> Pull()
         {
             var input = term.prompt("cmd> ");
-            if(CommandMap.TryGetValue(input, out K kind))
+            var i = input.IndexOf(Chars.Space);
+            var args = StringIndex.Empty;
+            var name = input;
+            if(i != NotFound)
             {
-                return kind;
+                name = TextTools.left(input,i);
+                var right = TextTools.right(input,i);
+                if(nonempty(right))
+                    args = right.Split(Chars.Space);
+            }
+
+            if(CommandMap.TryGetValue(name, out K kind))
+            {
+                return Cmd.spec(kind, args);
             }
             else
             {
-                Push(string.Format("The command {0} is not recognized", input));
-                return default;
+                Push(string.Format("The command '{0}' is not recognized", name));
+                return CmdSpec<K>.Empty;
             }
         }
 
         protected override void Run()
         {
             var input = Pull();
-            while(input != K.Exit)
+            while(input.Id != K.Exit)
             {
-                if(input != 0)
+                if(input.Id != 0)
                     Dispatch(input);
 
                 input = Pull();

@@ -1,5 +1,20 @@
-# Table 3.4 - Effective Operand and Address Size attributes in 64-bit mode
-| Prefix                    | A  | B  | C  | D  | E  | F  | G  | H  |
+# Vol1 Table 3.4 - Effective Operand and Address Size attributes in 64-bit mode
+# In 64-bit mode, the default address size is 64 bits and the default operand size is 32 bits. Defaults can be
+# overridden using prefixes. Address-size and operand-size prefixes allow mixing of 32/64-bit data and 32/64-bit
+# addresses on an instruction-by-instruction basis. Table 3-4 shows valid combinations of the 66H instruction prefix
+# and the REX.W prefix that may be used to specify operand-size overrides in 64-bit mode. Note that 16-bit
+# addresses are not supported in 64-bit mode.
+# REX prefixes consist of 4-bit fields that form 16 different values. The W-bit field in the REX prefixes is referred to as
+# REX.W. If the REX.W field is properly set, the prefix specifies an operand size override to 64 bits. Note that software
+# can still use the operand-size 66H prefix to toggle to a 16-bit operand size. However, setting REX.W takes prece-
+# dence over the operand-size prefix (66H) when both are used.
+# In the case of SSE/SSE2/SSE3/SSSE3 SIMD instructions: the 66H, F2H, and F3H prefixes are mandatory for
+# opcode extensions. In such a case, there is no interaction between a valid REX.W prefix and a 66H opcode extension prefix.
+# See Chapter 2, “Instruction Format,” in the Intel® 64 and IA-32 Architectures Software Developer’s Manual,
+# Volume 2A.
+# Y - The instruction prefix is present
+# N - The instruction prefix is not present
+| L Flag in CS Descriptor   | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  |
 | Rex.W                     | 0  | 0  | 0  | 0  | 1  | 1  | 1  | 1  |
 | Operand Size Prefix (66h) | N  | N  | Y  | Y  | N  | N  | Y  | Y  |
 | Address Size prefix (67h) | N  | Y  | N  | Y  | N  | Y  | N  | Y  |

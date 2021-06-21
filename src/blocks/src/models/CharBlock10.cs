@@ -82,6 +82,7 @@ namespace Z0
 
         public static B Null => default;
 
+
         /// <summary>
         /// The block capacity
         /// </summary>

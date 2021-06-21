@@ -91,5 +91,8 @@ namespace Z0
         /// The size of the block, in bytes
         /// </summary>
         public const uint Size = CharCount * 2;
+
+        public static B Null => default;
+
     }
 }

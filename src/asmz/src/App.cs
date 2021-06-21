@@ -992,14 +992,14 @@ namespace Z0.Asm
             //var worker = AsmIndexWorker.create()
             //Wf.GlobalCommands().ProcessIntelSdm();
 
-            RunAsmToolChain("and");
+            //RunAsmToolChain("and");
             //ParseBdDisassembly();
             //Wf.GlobalCommands().ShowCommands();
             //ShowOps();
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
-            //Wf.GlobalCommands().CaptureV2();
+            Wf.GlobalCommands().CaptureV2();
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();

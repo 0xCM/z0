@@ -25,13 +25,14 @@ namespace Z0.Asm
             var space1 = SQ.next(data, 0, AsciCode.Space);
             if(space1 == NotFound)
                 return false;
-            Hex.parse(slice(data,0, space1), out var offset);
+
+            Hex.parse(slice(data, 0, space1), out var offset);
             var space2 = SQ.next(data, (uint)space1 + 1, AsciCode.Space);
             if(space2 == NotFound)
                 return false;
 
             var buffer = Cells.alloc(n128).Bytes;
-            var chars = slice(data,(uint)space1, 16);
+            var chars = slice(data, (uint)space1, 16);
             var result  = Hex.parse(chars, buffer);
             if(result.Fail)
                 return (false,result.Message);
@@ -39,25 +40,26 @@ namespace Z0.Asm
             var hexcode = AsmHexCode.load(slice(buffer,0,result.Data));
 
             var i=0u;
-            var statement = slice(src.Content,space1 + 16);
-            var sbuffer = span<char>(statement.Length);
+            var body = slice(src.Content, space1 + 16);
+            var sbuffer = span<char>(body.Length);
             var len = SymbolicRender.render(slice(src.Content,space1 + 16), ref i, sbuffer);
             return row(offset, hexcode, slice(sbuffer,0,len).Trim(), out dst);
         }
 
-        static Outcome row(ulong offset, AsmHexCode hexcode, ReadOnlySpan<char> xyz, out AsmDisassembly dst)
+        static Outcome row(ulong offset, AsmHexCode hexcode, ReadOnlySpan<char> src, out AsmDisassembly dst)
         {
-            var space = TextTools.index(xyz,Chars.Space);
+            var space = TextTools.index(src, Chars.Space);
             dst = default;
             if(space == NotFound)
                 return (false,"Mnemonic delimiter not found");
-            var monic = asm.mnemonic(TextTools.left(xyz,space));
-            var operands = TextTools.right(xyz,space).Trim();
+            var monic = asm.mnemonic(TextTools.left(src, space));
+            var operands = TextTools.right(src,space).Trim();
             var stmt = asm.statement(monic, operands);
             dst = asm.disassembly(offset, stmt, hexcode);
             return true;
 
         }
+
         public ReadOnlySpan<AsmDisassembly> ParseDisassembly(FS.FilePath src, FS.FolderPath dir)
         {
             var flow = Running(string.Format("Parsing {0}", src.ToUri()));
@@ -99,7 +101,6 @@ namespace Z0.Asm
                         {
                             rows.Add(row);
                             var fmt = formatter.Format(row);
-                            //Row(fmt);
                             csvWriter.WriteLine(fmt);
                             asmWriter.WriteLine(AsmRender.format(row));
                         }

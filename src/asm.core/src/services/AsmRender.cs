@@ -25,8 +25,8 @@ namespace Z0.Asm
 
         public static string format(in AsmDisassembly src)
         {
-            var left = string.Format("{0,-12} {1,-32}", src.Offset, src.Statement);
-            var right = asm.comment(string.Format("{0,-24} {1}", src.Code, src.Bitstring));
+            var left = string.Format("{0,-12} {1,-64}", src.Offset, src.Statement);
+            var right = asm.comment(string.Format("{0,-32} {1}", src.Code, src.Bitstring));
             return string.Format("{0}{1}", left, right);
         }
 
@@ -47,11 +47,11 @@ namespace Z0.Asm
             var index = src.Index.Format();
             copy(@base, ref i, dst);
             var scale = src.Scale.Format();
-            if(src.Scale.NonZero)
+            if(src.Scale.IsNonZero)
             {
                 seek(dst,i++) = Chars.Plus;
                 copy(index, ref i, dst);
-                if(src.Scale.NonUnital)
+                if(src.Scale.IsNonUnital)
                 {
                     seek(dst,i++) = Chars.Star;
                     copy(scale,ref i, dst);
@@ -63,7 +63,6 @@ namespace Z0.Asm
                 seek(dst,i++) = Chars.Plus;
                 copy(src.Dx.ToString("x") + "h", ref i, dst);
             }
-
 
             return i - i0;
         }

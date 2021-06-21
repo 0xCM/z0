@@ -31,5 +31,8 @@ namespace Z0
 
         [CmdSpec(".sdm","Processes the intel sdm")]
         ProcessSdm,
+
+        [CmdSpec(".toolchain","Executes an asm toolchain")]
+        ToolChain,
     }
 }

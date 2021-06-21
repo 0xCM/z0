@@ -21,6 +21,12 @@ namespace Z0.Asm
             Value = value;
         }
 
+        public DataWidth Width
+        {
+            [MethodImpl(Inline)]
+            get => core.width<T>();
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator Disp<T>(byte src)
             => new Disp<T>(@as<byte,T>(src));

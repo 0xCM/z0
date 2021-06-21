@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct Cmd
     {
+        [Op]
         public static CmdRunnerLookup lookup(Type host)
         {
             var methods = host.PublicInstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();

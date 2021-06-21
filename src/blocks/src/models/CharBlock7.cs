@@ -78,9 +78,9 @@ namespace Z0
         public static implicit operator B(ReadOnlySpan<char> src)
             => api.init(src, out B dst);
 
-        public static B Empty => RP.Spaced7;
-
         public static B Null => default;
+
+        public static B Empty => RP.Spaced7;
 
         /// <summary>
         /// The block capacity
