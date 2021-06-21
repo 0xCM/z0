@@ -20,29 +20,25 @@ namespace Z0.Asm
             void OnStatus(in string data)
             {
                 if(nonempty(data))
-                {
                     stdout.Add(data);
-                }
             }
 
             void OnError(in string data)
             {
                 if(nonempty(data))
-                {
                     errout.Add(data);
-                }
             }
-
 
             var tool = Wf.Nasm();
             var target = tool.OutFile(spec.BinPath);
-            var cmd = tool.CmdLine(spec.AsmPath, target);
-            var process = ToolCmd.run(cmd, OnStatus, OnError);
+            var cmdline = tool.CmdLine(spec.AsmPath, target);
+            var running = Wf.Running(cmdline);
+            var process = ToolCmd.run(cmdline, OnStatus, OnError);
             process.Wait();
 
+            //iter(stdout, line => Wf.Row(line));
 
-            iter(stdout, line => Wf.Row(line));
-
+            Wf.Ran(running);
 
             return errout.Count == 0;
         }
@@ -57,22 +53,19 @@ namespace Z0.Asm
             void OnStatus(in string data)
             {
                 if(nonempty(data))
-                {
                     stdout.Add(data);
-                }
             }
 
             void OnError(in string data)
             {
                 if(nonempty(data))
-                {
                     errout.Add(data);
-                }
             }
 
             var tool = Wf.BdDisasm();
             var cmd = tool.Cmd(spec);
             var cmdline = tool.CmdLine(cmd);
+            var running = Wf.Running(cmdline);
 
             using var writer = cmd.OutputFile.Writer();
             var process = ToolCmd.run(cmdline, writer, OnStatus, OnError);
@@ -83,12 +76,20 @@ namespace Z0.Asm
             var collected = stdout.ViewDeposited();
             var count = collected.Length;
             var buffer = alloc<TextLine>(count);
-            Lines.lines(collected,buffer);
+            Lines.lines(collected, buffer);
 
-            iter(buffer, line => Wf.Row(line));
+            //iter(buffer, line => Wf.Row(line));
 
+            Wf.Ran(running);
             return errout.Count == 0;
 
+        }
+
+        public Outcome ProcessDisassembly(in AsmToolchainSpec spec)
+        {
+            var parser = Wf.DbDiasmProcessor();
+            parser.ParseDisassembly(spec.DisasmPath, spec.Analysis);
+            return true;
         }
 
         public Outcome Run(in AsmToolchainSpec spec)
@@ -100,17 +101,13 @@ namespace Z0.Asm
             void OnStatus(in string data)
             {
                 if(nonempty(data))
-                {
                     stdout.Add(data);
-                }
             }
 
             void OnError(in string data)
             {
                 if(nonempty(data))
-                {
                     Wf.Error(data);
-                }
             }
 
             outcome = Assemble(spec);
@@ -122,7 +119,13 @@ namespace Z0.Asm
 
             outcome = Disassemble(spec);
 
-            return outcome;
+            if(outcome.Fail)
+            {
+                Wf.Error(outcome.Message);
+                return outcome;
+            }
+
+            return ProcessDisassembly(spec);
         }
     }
 }

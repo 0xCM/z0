@@ -23,6 +23,13 @@ namespace Z0.Asm
 
         const string To = " => ";
 
+        public static string format(in AsmDisassembly src)
+        {
+            var left = string.Format("{0,-12} {1,-32}", src.Offset, src.Statement);
+            var right = asm.comment(string.Format("{0,-24} {1}", src.Code, src.Bitstring));
+            return string.Format("{0}{1}", left, right);
+        }
+
         public static string format<T>(in RegExpr<T> src)
             where T : unmanaged, IRegOp
         {

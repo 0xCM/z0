@@ -23,7 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public text(string src)
-            => Data = empty(src) ? EmptyString : text.slice(src, 0, min(n, src.Length));
+            => Data = empty(src) ? EmptyString : TextTools.slice(src, 0, min(n, src.Length));
 
         public ReadOnlySpan<char> View
         {

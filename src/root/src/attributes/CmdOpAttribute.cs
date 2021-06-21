@@ -11,12 +11,6 @@ namespace Z0
     {
         public string CommandName {get;}
 
-        public CmdOpAttribute()
-        {
-            CommandName = String.Empty;
-
-        }
-
         public CmdOpAttribute(string name)
         {
             if(string.IsNullOrWhiteSpace(name))

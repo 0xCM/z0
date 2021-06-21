@@ -9,20 +9,28 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmDisassembly
+    [Record(TableId)]
+    public struct AsmDisassembly : IRecord<AsmDisassembly>
     {
-        public Hex64 Offset {get;}
+        public const string TableId = "asm.disassembly";
 
-        public AsmExpr Statement {get;}
+        public const byte FieldCount = 4;
 
-        public AsmHexCode Code {get;}
+        public Hex64 Offset;
+
+        public AsmExpr Statement;
+
+        public AsmHexCode Code;
+
+        public AsmBitstring Bitstring;
 
         [MethodImpl(Inline)]
-        public AsmDisassembly(Hex64 offset, AsmExpr expr, AsmHexCode code)
+        public AsmDisassembly(Hex64 offset, AsmExpr expr, AsmHexCode code, AsmBitstring bs)
         {
             Offset = offset;
             Statement = expr;
             Code = code;
+            Bitstring = bs;
         }
 
         [MethodImpl(Inline)]
@@ -31,6 +39,11 @@ namespace Z0.Asm
             Offset = offset;
             Statement = expr;
             Code = AsmHexCode.Empty;
+            Bitstring = AsmBitstring.Empty;
         }
+
+
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{12,32,24,32};
+
     }
 }

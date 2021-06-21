@@ -42,5 +42,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator AsmBitstring(AsmHexCode src)
             => new AsmBitstring(api.format(src));
+
+        public static AsmBitstring Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmBitstring(TextBlock.Empty);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Represents a line of text in the context of a line-oriented text data source
     /// </summary>
-    public readonly struct TextLine
+    public readonly struct TextLine : IComparable<TextLine>
     {
         /// <summary>
         /// The number of characters consumed by the line number
@@ -124,13 +124,15 @@ namespace Z0
         public string Format()
             => string.Format("{0}:{1}", LineNumber,Content);
 
-            // $"{LineNumber.ToString().PadLeft(8, '0')}:{Content}";
 
         public override string ToString()
             => Format();
 
         public string this[int startpos, int endpos]
             => Content.Substring(startpos, endpos - startpos + 1);
+
+        public int CompareTo(TextLine src)
+            => LineNumber.CompareTo(src.LineNumber);
 
         [MethodImpl(Inline)]
         public static implicit operator TextLine((int index, string text) src)

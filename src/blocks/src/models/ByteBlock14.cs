@@ -19,6 +19,8 @@ namespace Z0
     {
         public const ushort Size = 14;
 
+        public static N14 N => default;
+
         ByteBlock7 A;
 
         ByteBlock7 B;

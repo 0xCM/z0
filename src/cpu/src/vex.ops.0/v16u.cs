@@ -45,7 +45,7 @@ namespace Z0
 
     partial struct cpu
     {
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static Vector128<ushort> v16u<T>(Vector128<T> x)
             where T : unmanaged
                 => gcpu.v16u(x);

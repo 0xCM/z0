@@ -16,9 +16,9 @@ namespace Z0
 
             public CliRowKey TypeDefId;
 
-            public StringIndex TypeName;
+            public CliStringIndex TypeName;
 
-            public StringIndex TypeNamespace;
+            public CliStringIndex TypeNamespace;
 
             public CliRowKey Implementation;
         }

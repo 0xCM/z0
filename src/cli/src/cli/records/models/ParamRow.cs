@@ -17,7 +17,7 @@ namespace Z0
 
             public ushort Sequence;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
         }
     }
 }

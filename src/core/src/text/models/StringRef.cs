@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.Vector128;
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// A reference to a (hopefully) interned or resource string
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
         static unsafe Span<byte> edit(in StringRef src)
-            => memory.cover<byte>(src.BaseAddress.Pointer<byte>(), src.Size);
+            => cover<byte>(src.BaseAddress.Pointer<byte>(), src.Size);
 
         [MethodImpl(Inline)]
         StringRef(MemoryAddress address, ByteSize size)
@@ -87,7 +87,7 @@ namespace Z0
         public unsafe string Text
         {
             [MethodImpl(Inline)]
-            get => text.format(recover<char>(View));
+            get => TextTools.format(recover<char>(View));
         }
 
         public MemoryAddress BaseAddress
@@ -99,13 +99,13 @@ namespace Z0
         public ref readonly byte this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref memory.skip(View, index);
+            get => ref skip(View, index);
         }
 
         public ref readonly byte this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref memory.skip(View, index);
+            get => ref skip(View, index);
         }
 
         /// <summary>

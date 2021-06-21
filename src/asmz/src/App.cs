@@ -833,7 +833,7 @@ namespace Z0.Asm
 
         void ParseBdDisassembly()
         {
-            var src = FS.path(@"C:\Dev\awb\.build\dis\and.bd.asm");
+            var src = FS.path(@"C:\Dev\awb\.output\dis\and.bd.asm");
             var dir = Db.AppLogDir();
             var parser = Wf.DbDiasmProcessor();
             parser.ParseDisassembly(src,dir);
@@ -904,12 +904,11 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, lines);
         }
 
-        public void CheckTools()
+        public void RunAsmToolChain(string name)
         {
             var workspace = Wf.AsmWorkspace();
             var toolchain = Wf.AsmToolchain();
-            var src = "and";
-            var spec = workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, src);
+            var spec = workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, name);
             toolchain.Run(spec);
         }
 
@@ -986,18 +985,21 @@ namespace Z0.Asm
         {
             //EmitAsciByteSpan("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
             //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs")
-
             // var part = PartId.Math;
             // var log = Db.AppLog(string.Format("{0}.pdbinfo", part.Format()), FS.Csv);
             // EmitPdbMethodInfo(part,log);
 
             //var worker = AsmIndexWorker.create()
             //Wf.GlobalCommands().ProcessIntelSdm();
+
+            RunAsmToolChain("and");
+            //ParseBdDisassembly();
+            //Wf.GlobalCommands().ShowCommands();
             //ShowOps();
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
-            Wf.GlobalCommands().CaptureV2();
+            //Wf.GlobalCommands().CaptureV2();
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();

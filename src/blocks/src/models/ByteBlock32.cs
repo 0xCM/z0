@@ -19,6 +19,8 @@ namespace Z0
     {
         public const ushort Size = Pow2.T05;
 
+        public static N32 N => default;
+
         ByteBlock16 A;
 
         ByteBlock16 B;

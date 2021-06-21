@@ -16,6 +16,8 @@ namespace Z0
     {
         public const ushort Size = Pow2.T02;
 
+        public static N4 N => default;
+
         ByteBlock2 A;
 
         ByteBlock2 B;
@@ -44,5 +46,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator uint(ByteBlock4 src)
             => @as<ByteBlock4,uint>(src);
+
+        public static ByteBlock4 Empty => default;
+
     }
 }

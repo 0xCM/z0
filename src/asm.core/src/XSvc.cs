@@ -6,16 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+    using Z0.Asm;
 
     using static Root;
-    using static core;
-    using static Typed;
 
-    [ApiHost]
-    public readonly struct Utf8Data
+    using Svc = Z0.Asm;
+
+    public static class XSvc
     {
-        const NumericKind Closure = UInt8x16x32k;
-
+       public static AsmWorkspace AsmWorkspace(this IEnvProvider provider)
+            => Svc.AsmWorkspace.create(provider.Env.AsmWorkspace);
     }
 }

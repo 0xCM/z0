@@ -11,20 +11,20 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly struct StringIndex : ICliHeapKey<StringIndex>
+    public readonly struct CliStringIndex : ICliHeapKey<CliStringIndex>
     {
         public CliHeapKind HeapKind => CliHeapKind.String;
 
         public uint Value {get;}
 
         [MethodImpl(Inline)]
-        public StringIndex(uint value)
+        public CliStringIndex(uint value)
         {
             Value = value;
         }
 
         [MethodImpl(Inline)]
-        public StringIndex(StringHandle value)
+        public CliStringIndex(StringHandle value)
             => Value = u32(value);
 
         public string Format()
@@ -34,15 +34,15 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CliHeapKey(StringIndex src)
+        public static implicit operator CliHeapKey(CliStringIndex src)
             => new CliHeapKey(src.HeapKind, src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator StringIndex(StringHandle src)
-            => new StringIndex(src);
+        public static implicit operator CliStringIndex(StringHandle src)
+            => new CliStringIndex(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator StringHandle(StringIndex src)
-            => @as<StringIndex,StringHandle>(src);
+        public static implicit operator StringHandle(CliStringIndex src)
+            => @as<CliStringIndex,StringHandle>(src);
     }
 }

@@ -50,7 +50,7 @@ namespace Z0
                 var buffer = Buffer();
                 var i = 0u;
                 var length = Render(src, ref i, buffer);
-                var content = text.format(slice(buffer,0, length));
+                var content = TextTools.format(slice(buffer,0, length));
                 return new CmdLine(content);
             }
         }

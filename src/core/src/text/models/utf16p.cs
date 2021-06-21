@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Utf16;
 
@@ -36,13 +37,13 @@ namespace Z0
         public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => memory.cover(pData, Size);
+            get => cover(pData, Size);
         }
 
         public Span<char> Edit
         {
             [MethodImpl(Inline)]
-            get => memory.cover(pData, Size);
+            get => cover(pData, Size);
         }
 
         public bool IsEmpty
@@ -68,7 +69,7 @@ namespace Z0
             => (int)Hash;
 
         public string Format()
-            => text.@string(View);
+            => TextTools.format(View);
 
         public override string ToString()
             => Format();

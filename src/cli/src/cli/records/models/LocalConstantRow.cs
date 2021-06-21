@@ -12,7 +12,7 @@ namespace Z0
         [CliRecord(CliTableKind.LocalConstant), StructLayout(LayoutKind.Sequential)]
         public struct LocalConstantRow : ICliRecord<LocalConstantRow>
         {
-            public StringIndex Name;
+            public CliStringIndex Name;
 
             public CliBlobIndex Signature;
         }

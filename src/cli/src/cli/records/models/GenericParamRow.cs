@@ -17,7 +17,7 @@ namespace Z0
 
             public CliRowKey Owner;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
         }
     }
 }

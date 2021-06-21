@@ -15,7 +15,7 @@ namespace Z0
 
             public ushort Index;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
         }
     }
 }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static core;
@@ -18,9 +17,15 @@ namespace Z0
             => StringGrid.create(rows,cols);
 
         [MethodImpl(Inline), Op]
-        public ref string entry(StringGrid src, ushort row, ushort col)
+        public static ref string entry(StringGrid src, ushort row, ushort col)
+            => ref src.Data[row,col];
+
+        [MethodImpl(Inline), Op]
+        public static void row(StringGrid src, ushort row, ReadOnlySpan<string> cols)
         {
-            return ref src.Data[row,col];
+            var count = min(src.ColCount, cols.Length);
+            for(ushort i=0; i<count; i++)
+                entry(src, row, i) = skip(cols, i);
         }
     }
 }

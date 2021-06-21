@@ -9,8 +9,7 @@ namespace Z0
 
     using static Root;
 
-
-    public readonly struct LineNumber
+    public readonly struct LineNumber : IDataTypeComparable<LineNumber>
     {
         public uint Value {get;}
 
@@ -38,6 +37,19 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        public int CompareTo(LineNumber src)
+            => Value.CompareTo(src);
+
+        [MethodImpl(Inline)]
+        public bool Equals(LineNumber src)
+            => Value == src.Value;
+
+        public override bool Equals(object obj)
+            => obj is LineNumber x && Equals(x);
+
+        public override int GetHashCode()
+            => (int)Value;
         public static LineNumber Empty => default;
 
         [MethodImpl(Inline)]
@@ -47,6 +59,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator uint(LineNumber src)
             => src.Value;
-
     }
 }

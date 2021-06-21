@@ -15,9 +15,9 @@ namespace Z0
         {
             public TypeAttributes Attributes;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
-            public StringIndex Namespace;
+            public CliStringIndex Namespace;
 
             public TypeLayout Layout;
 

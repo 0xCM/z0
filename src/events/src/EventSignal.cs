@@ -242,16 +242,28 @@ namespace Z0
 
         public void Error(Exception e, EventOrigin source)
         {
-            Raise(error(Source, e, source));
+            var ev = error(Source, e, source);
+            Raise(ev);
         }
 
-        public void Error<T>(T body, EventOrigin source)
+        public ErrorEvent<T> Error<T>(T body, EventOrigin source)
             => Error(Source, body, source);
 
-        public void Warn<T>(WfStepId step, T content)
-            => Raise(warn(step, content));
+        public WarnEvent<T> Warn<T>(WfStepId step, T content)
+        {
+            var e = warn(step, content);
+            Raise(e);
+            return e;
+        }
 
-        public void Warn<T>(T content)
+        public WarnEvent<T> Warn<T>(T content)
             => Warn(Source, content);
+
+        public RowEvent<T> Row<T>(T data)
+        {
+            var e = row(data);
+            Raise(e);
+            return e;
+        }
     }
 }

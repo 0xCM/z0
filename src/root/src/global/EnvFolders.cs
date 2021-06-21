@@ -7,6 +7,8 @@ namespace Z0
     [LiteralProvider]
     public readonly struct EnvFolders
     {
+        public const string dot = ".";
+
         public const string asm = nameof(asm);
 
         public const string bin = nameof(bin);
@@ -17,9 +19,7 @@ namespace Z0
 
         public const string cil = nameof(cil);
 
-        public const string cildata = nameof(cil) + delimiter + data;
-
-        public const string dot = ".";
+        public const string cildata = nameof(cil) + dot + data;
 
         public const string dotbuild = dot + build;
 
@@ -69,11 +69,11 @@ namespace Z0
 
         public const string output = nameof(output);
 
+        public const string dotoutput = dot + output;
+
         public const string input = nameof(input);
 
-        public const string delimiter = ".";
-
-        public const string qualified = "{0}" + delimiter + "{1}";
+        public const string qualified = "{0}" + dot + "{1}";
 
         public const string notebooks = nameof(notebooks);
 
@@ -126,6 +126,5 @@ namespace Z0
         public const string current = nameof(current);
 
         public const string codegen = nameof(codegen);
-
     }
 }

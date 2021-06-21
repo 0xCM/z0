@@ -13,7 +13,7 @@ namespace Z0
         {
             public uint Flags;
 
-            public StringIndex FileName;
+            public CliStringIndex FileName;
 
             public CliBlobIndex HashValue;
         }

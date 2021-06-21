@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static SortedSpan<string> apply(Ordered<string> rule, Span<string> src)
-            => src.ToSorted();
+            => src.ToSortedSpan();
 
         [Op]
         public static ReadOnlySpan<string> apply(SeqSplit<char> rule, string src)
@@ -117,6 +117,5 @@ namespace Z0
         [Op]
         public static Pair<string> apply(Fork<char> rule, string src)
             => pair(before(src, rule.Criterion), after(src, rule.Criterion));
-
     }
 }

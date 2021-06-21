@@ -133,19 +133,9 @@ namespace Z0.Asm
                     Wf.Error(FieldCountMismatch.Format(TableId, row.CellCount, FieldCount));
                     return array<AsmFormRecord>();
                 }
-                Parse(row, ref seek(dst,i));
+                AsmParser.parse(row, ref seek(dst,i));
             }
             return buffer;
-        }
-
-        public ref AsmFormRecord Parse(in TextRow src, ref AsmFormRecord dst)
-        {
-            var i = 0;
-            DataParser.parse(src[i++], out dst.Seq);
-            AsmParser.opcode(src[i++], out dst.OpCode);
-            AsmParser.sig(src[i++], out dst.Sig);
-            AsmParser.form(src[i++], out dst.FormExpr);
-            return ref dst;
         }
 
         public ReadOnlySpan<AsmFormRecord> Load(FS.FilePath src)

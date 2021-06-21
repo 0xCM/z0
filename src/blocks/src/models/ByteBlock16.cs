@@ -19,6 +19,8 @@ namespace Z0
     {
         public const ushort Size = Pow2.T04;
 
+        public static N16 N => default;
+
         public ulong A;
 
         public ulong B;

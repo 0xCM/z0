@@ -12,7 +12,6 @@ namespace Z0
     using static Root;
 
     public class CmdImplMap<T>
-        where T : unmanaged
     {
         Dictionary<T,MethodInfo> Data;
 
@@ -21,13 +20,11 @@ namespace Z0
             Data = new();
         }
 
-        public CmdImplMap(Dictionary<T,MethodInfo> src)
-        {
-            Data = src;
-        }
+        public ReadOnlySpan<T> Keys
+            => Data.Keys.ToReadOnlySpan();
 
         [MethodImpl(Inline)]
-        public bool Lookup(T cmd, out MethodInfo method)
+        public bool Find(T cmd, out MethodInfo method)
             => Data.TryGetValue(cmd, out method);
 
         [MethodImpl(Inline)]

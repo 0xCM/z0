@@ -517,13 +517,9 @@ namespace Z0.Asm
             }
         }
 
-        [Op]
-        public static CmdTypeInfo[] cmdtypes(IWfRuntime wf)
-            => wf.Components.Types().Tagged<CmdAttribute>().Select(Cmd.cmdtype).ToArray();
-
         public void ShowCommands()
         {
-            var models = @readonly(cmdtypes(Wf));
+            var models = Cmd.cmdtypes(Wf.Components).View;
             var count = models.Length;
             for(var i=0; i<count; i++)
             {

@@ -20,19 +20,24 @@ namespace Z0
 
         public GlobalCommands()
         {
-            Lookup = CmdRunnerLookup.create();
         }
 
         protected override void Initialized()
         {
             Lookup = Cmd.lookup(GetType());
-            // var methods = GetType().PublicInstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
-            // foreach(var (name,method) in methods)
-            // {
-            //     var cmd = method.Tag<CmdOpAttribute>().MapValueOrDefault(m => m.CommandName, method.Name);
-            //     if(!Lookup.Add(cmd,method))
-            //         Wf.Warn(string.Format("The operation {0}:{1} has a duplicate identifier", cmd, method.Name));
-            // }
+        }
+
+        [CmdOp("show-commands")]
+        public Outcome ShowCommands(params object[] args)
+        {
+            var ops = Cmd.cmdops(Wf.Components).View;
+            var count = ops.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var op = ref skip(ops,i);
+                Wf.Row(op);
+            }
+            return true;
         }
 
         [CmdOp("emit-metadata-sets")]

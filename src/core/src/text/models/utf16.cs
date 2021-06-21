@@ -8,6 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
+
+    using api = Utf16;
 
     [DataType]
     public readonly struct utf16 : IDataTypeComparable<utf16>
@@ -39,7 +42,7 @@ namespace Z0
         public Span<char> Edit
         {
             [MethodImpl(Inline)]
-            get => memory.edit(View);
+            get => edit(View);
         }
 
         public bool IsEmpty
@@ -57,7 +60,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)Content.GetHashCode();
+            get => api.hash(this);
         }
 
         [MethodImpl(Inline)]

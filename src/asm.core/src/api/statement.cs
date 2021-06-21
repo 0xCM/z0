@@ -15,5 +15,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmExpr statement(string src)
             => new AsmExpr(src.Trim());
+
+        [Op]
+        public static AsmExpr statement(AsmMnemonic monic, ReadOnlySpan<char> operands)
+            => new AsmExpr(string.Format("{0} {1}", monic.Format(MnemonicCase.Lowercase), TextTools.format(operands)));
     }
 }

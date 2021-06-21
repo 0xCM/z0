@@ -12,7 +12,7 @@ namespace Z0
         [CliRecord(CliTableKind.ModuleRef), StructLayout(LayoutKind.Sequential)]
         public struct ModuleRefRow : ICliRecord<ModuleRefRow>
         {
-            public StringIndex Name;
+            public CliStringIndex Name;
         }
     }
 }

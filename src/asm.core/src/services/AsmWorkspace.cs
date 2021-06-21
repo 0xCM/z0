@@ -24,17 +24,26 @@ namespace Z0.Asm
             Root = root;
         }
 
-        public FS.FolderPath Builds()
-            => Root + FS.folder(dotbuild);
+        public FS.FolderPath Output()
+            => Root + FS.folder(".output");
 
         public FS.FolderPath Source()
             => Root + FS.folder("asm");
 
-        public FS.FolderPath Bin()
-            => Builds() + FS.folder(bin);
-
         public FS.FolderPath DocRoot()
             => Root + FS.folder(docs);
+
+        public FS.FolderPath DumpBinOutDir()
+            => Output() + FS.folder("dumpbin") + FS.folder(output);
+
+        public FS.FolderPath Bin()
+            => Output() + FS.folder(bin);
+
+        public FS.FolderPath Scripts()
+            => Root + FS.folder("scripts");
+
+        public FS.FilePath Script(string id)
+            => Scripts() + FS.file(id,FS.Cmd);
 
         public FS.FolderPath RefDocs()
             => DocRoot() + FS.folder(refs);
@@ -52,10 +61,16 @@ namespace Z0.Asm
             => DocExtractDir(docid) + FS.file(string.Format("{0}.{1}",docid, part), ext);
 
         public FS.FolderPath Disassembly()
-            => Builds() + FS.folder("dis");
+            => Output() + FS.folder("dis");
+
+        public FS.FolderPath Analysis()
+            => Output() + FS.folder("analysis");
+
+        public FS.FolderPath Logs()
+            => Output() + FS.folder("log");
 
         public FS.FolderPath Control()
-            => Builds() + FS.folder(".cmd");
+            => Output() + FS.folder(".cmd");
 
         public FS.FolderPath External()
             => Root + FS.folder(external);
@@ -77,17 +92,8 @@ namespace Z0.Asm
             spec.AsmPath = SourcePath(id);
             spec.BinPath = BinPath(id);
             spec.DisasmPath = DisasmPath(id, disassembler);
+            spec.Analysis = Analysis();
             return spec;
         }
-    }
-}
-
-namespace Z0
-{
-    using Z0.Asm;
-    partial class XTend
-    {
-        public static AsmWorkspace AsmWorkspace(this IEnvProvider provider)
-            => Asm.AsmWorkspace.create(provider.Env.AsmWorkspace);
     }
 }

@@ -56,6 +56,10 @@ namespace Z0
         public static void iter<T>(Span<T> src, Action<T> action)
             => iter(src.ReadOnly(), action);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void iter<T>(SortedSpan<T> src, Action<T> action)
+            => iter(src.View, action);
+
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each
         /// </summary>

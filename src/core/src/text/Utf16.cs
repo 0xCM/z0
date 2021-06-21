@@ -15,12 +15,28 @@ namespace Z0
     public readonly unsafe struct Utf16
     {
         [MethodImpl(Inline), Op]
+        public static uint hash(utf16p src)
+            => alg.hash.marvin(src.View);
+
+        [MethodImpl(Inline), Op]
+        public static uint hash(utf16 src)
+            => alg.hash.marvin(src.View);
+
+        [MethodImpl(Inline), Op]
         public static TextEncoding encoding()
             => new TextEncoding(Encoding.Unicode);
 
         [MethodImpl(Inline), Op]
         public static int length(ReadOnlySpan<byte> src)
             => encoding().GetCharCount(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> encode(string src)
+            => bytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> encode(char[] src)
+            => recover<byte>(src);
 
         [MethodImpl(Inline), Op]
         public static ref string decode(ReadOnlySpan<byte> src, out string dst)
@@ -47,6 +63,7 @@ namespace Z0
             return size;
         }
 
+
         [MethodImpl(Inline), Op]
         public static byte[] bytes(string src)
             => encoding().GetBytes(src);
@@ -58,9 +75,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool nonempty(utf16p src)
             => address(src.pData) != 0 && (*src.pData != 0);
-
-        [MethodImpl(Inline), Op]
-        public static uint hash(utf16p src)
-            => alg.hash.marvin(src.View);
     }
 }

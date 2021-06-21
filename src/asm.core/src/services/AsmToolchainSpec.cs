@@ -15,5 +15,7 @@ namespace Z0
         public FS.FilePath BinPath;
 
         public FS.FilePath DisasmPath;
+
+        public FS.FolderPath Analysis;
     }
 }

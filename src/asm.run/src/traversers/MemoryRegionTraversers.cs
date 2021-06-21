@@ -9,9 +9,8 @@ namespace Z0
 
     using Windows;
 
-    using static Part;
-    using static memory;
-    using static ProcessMemory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct MemoryRegionTraversers

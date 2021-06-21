@@ -14,5 +14,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmMnemonic mnemonic(string src)
             => new AsmMnemonic(src);
+
+        [Op]
+        public static AsmMnemonic mnemonic(ReadOnlySpan<char> src)
+            => new AsmMnemonic(TextTools.format(src));
     }
 }

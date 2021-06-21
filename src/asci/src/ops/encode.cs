@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="dst">The receiving buffer</param>
         [MethodImpl(Inline), Op]
         public static void encode(in char src, uint offset, N16 count, ref AsciCode dst)
-            => cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, memory.skip(src, offset))), ref @byte(dst));
+            => cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, skip(src, offset))), ref @byte(dst));
 
         /// <summary>
         /// Encodes a sequence of source characters and stores a result in a caller-supplied
@@ -62,16 +62,16 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int encode<T>(ReadOnlySpan<char> src, Span<T> dst)
         {
-            var count = Math.Min(src.Length, dst.Length);
+            var count = min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = memory.cast<T>((byte)skip(src,i));
+                seek(dst,i) = @as<T>((byte)skip(src,i));
             return count;
         }
 
         [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, Span<byte> dst)
         {
-            var count = root.min(src.Length, dst.Length);
+            var count = min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = (byte)skip(src,i);
             return count;
@@ -95,7 +95,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, ref byte dst)
-            => encode(memory.first(src), src.Length, ref dst);
+            => encode(first(src), src.Length, ref dst);
 
         /// <summary>
         /// Encodes each source string and packs the result into the target
@@ -153,8 +153,8 @@ namespace Z0
         public static ref readonly asci4 encode(in char src, Hex2Seq count, out asci4 dst)
         {
             dst = asci4.Null;
-            ref var codes = ref Unsafe.As<asci4,AsciCode>(ref dst);
-            Asci.codes(src, (byte)count, ref codes);
+            ref var storage = ref Unsafe.As<asci4,AsciCode>(ref dst);
+            codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -168,8 +168,8 @@ namespace Z0
         public static ref readonly asci8 encode(in char src, Hex3Seq count, out asci8 dst)
         {
             dst = asci8.Null;
-            ref var codes = ref Unsafe.As<asci8,AsciCode>(ref dst);
-            Asci.codes(src, (byte)count, ref codes);
+            ref var storage = ref @as<asci8,AsciCode>(dst);
+            Asci.codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -183,8 +183,8 @@ namespace Z0
         public static ref readonly asci16 encode(in char src, Hex4Seq count, out asci16 dst)
         {
             dst = asci16.Null;
-            ref var codes = ref Unsafe.As<asci16,AsciCode>(ref dst);
-            Asci.codes(src, (byte)count, ref codes);
+            ref var storage = ref @as<asci16,AsciCode>(dst);
+            codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -198,8 +198,8 @@ namespace Z0
         public static ref readonly asci32 encode(in char src, Hex5Seq count, out asci32 dst)
         {
             dst = asci32.Null;
-            ref var codes = ref Unsafe.As<asci32,AsciCode>(ref dst);
-            Asci.codes(src, (byte)count, ref codes);
+            ref var storage = ref @as<asci32,AsciCode>(dst);
+            codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -213,8 +213,8 @@ namespace Z0
         public static ref readonly asci64 encode(in char src, Hex6Seq count, out asci64 dst)
         {
             dst = asci64.Null;
-            ref var codes = ref Unsafe.As<asci64,AsciCode>(ref dst);
-            Asci.codes(src, (byte)count, ref codes);
+            ref var storage = ref @as<asci64,AsciCode>(dst);
+            codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -226,7 +226,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, Span<AsciCode> dst)
         {
-            var count = Math.Min(src.Length, dst.Length);
+            var count = min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = (AsciCode)skip(src,i);
             return count;
@@ -243,7 +243,7 @@ namespace Z0
         public static uint encode(ReadOnlySpan<char> src, uint offset, uint count, Span<AsciCode> dst)
         {
             ref readonly var input = ref skip(src, offset);
-            ref var target = ref memory.first(dst);
+            ref var target = ref first(dst);
             for(var i=0u; i<count; i++)
                 seek(target, i) = (AsciCode)skip(input,i);
             return count;

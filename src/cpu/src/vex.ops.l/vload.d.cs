@@ -14,6 +14,7 @@ namespace Z0
     using static core;
     using static Typed;
 
+
     partial struct cpu
     {
         /// <summary>

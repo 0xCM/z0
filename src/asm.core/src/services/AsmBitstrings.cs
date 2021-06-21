@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         [Op]
         public static AsmBitstring bitstring(AsmHexCode src)
-            => new AsmBitstring(format(src));
+            => new AsmBitstring(AsmBitstrings.format(src));
 
         [Op]
         public static string format(AsmHexCode src, Span<char> buffer)

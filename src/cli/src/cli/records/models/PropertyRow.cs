@@ -14,7 +14,7 @@ namespace Z0
         {
             public ushort PropFlags;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
             public CliBlobIndex Type;
         }

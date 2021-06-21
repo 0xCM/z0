@@ -14,7 +14,7 @@ namespace Z0
         {
             public ushort EventFlags;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
             public CliRowKey EventType;
         }

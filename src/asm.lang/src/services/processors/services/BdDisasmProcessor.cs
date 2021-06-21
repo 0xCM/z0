@@ -36,16 +36,29 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false,result.Message);
 
+            var hexcode = AsmHexCode.load(slice(buffer,0,result.Data));
+
             var i=0u;
             var statement = slice(src.Content,space1 + 16);
             var sbuffer = span<char>(statement.Length);
-            var len = SymbolicRender.render(slice(src.Content,space1 + 16),ref i, sbuffer);
-
-            dst = asm.disassembly(offset, new string(slice(sbuffer,0,len)), AsmHexCode.load(slice(buffer,0,result.Data)));
-            return outcome;
+            var len = SymbolicRender.render(slice(src.Content,space1 + 16), ref i, sbuffer);
+            return row(offset, hexcode, slice(sbuffer,0,len).Trim(), out dst);
         }
 
-        public void ParseDisassembly(FS.FilePath src, FS.FolderPath dir)
+        static Outcome row(ulong offset, AsmHexCode hexcode, ReadOnlySpan<char> xyz, out AsmDisassembly dst)
+        {
+            var space = TextTools.index(xyz,Chars.Space);
+            dst = default;
+            if(space == NotFound)
+                return (false,"Mnemonic delimiter not found");
+            var monic = asm.mnemonic(TextTools.left(xyz,space));
+            var operands = TextTools.right(xyz,space).Trim();
+            var stmt = asm.statement(monic, operands);
+            dst = asm.disassembly(offset, stmt, hexcode);
+            return true;
+
+        }
+        public ReadOnlySpan<AsmDisassembly> ParseDisassembly(FS.FilePath src, FS.FolderPath dir)
         {
             var flow = Running(string.Format("Parsing {0}", src.ToUri()));
             using var map = MemoryFiles.map(src);
@@ -53,33 +66,44 @@ namespace Z0.Asm
             var data = map.View();
             var lines = Lines.count(data);
             var max = Lines.maxlength(data);
-            var dst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Asm);
-            using var writer = dst.Writer(Encoding.ASCII);
-            Span<char> buffer = alloc<char>(max);
+            var asmDst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Asm);
+            var csvDst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Csv);
+            using var asmWriter = asmDst.Writer(Encoding.ASCII);
+
+            var formatter = Tables.formatter<AsmDisassembly>(AsmDisassembly.RenderWidths);
+            using var csvWriter = csvDst.Writer(Encoding.ASCII);
+            csvWriter.WriteLine(formatter.FormatHeader());
+
             var pos = 0u;
-            var emitting = Emitting(dst);
+            var emitting = Emitting(asmDst);
             var length = 0u;
             var counter = 0u;
-            var number = 0u;
+            var number = 1u;
+            var rows = list<AsmDisassembly>();
             while(pos++ < size -1)
             {
                 ref readonly var a0 = ref skip(data, pos);
                 ref readonly var a1 = ref skip(data, pos + 1);
                 if(Lines.eol(a0,a1))
                 {
-                    var line = Lines.asci(data, number, counter, length + 1);
-                    var outcome = ProcessLine(ref line, out var encoding);
-                    if(outcome.Fail)
+                    var line = Lines.asci(data, number++, counter, length + 1);
+                    if(line.Content.Length > 2)
                     {
-                        Error(outcome.Message);
-                        break;
+                        var outcome = ProcessLine(ref line, out var row);
+                        if(outcome.Fail)
+                        {
+                            Error(outcome.Message);
+                            break;
+                        }
+                        else
+                        {
+                            rows.Add(row);
+                            var fmt = formatter.Format(row);
+                            //Row(fmt);
+                            csvWriter.WriteLine(fmt);
+                            asmWriter.WriteLine(AsmRender.format(row));
+                        }
                     }
-                    else
-                    {
-                        Babble(string.Format("{0} {1} {2}", encoding.Offset, encoding.Code, encoding.Statement));
-                    }
-                    buffer.Clear();
-                    writer.Write(line.Format(buffer));
                     pos++;
                     length = 0;
                     counter = pos;
@@ -90,6 +114,7 @@ namespace Z0.Asm
 
             Emitted(emitting, number);
             Ran(flow, string.Format("Parsed {0} lines from {1}", number, src.ToUri()));
+            return rows.ViewDeposited();
         }
     }
 }

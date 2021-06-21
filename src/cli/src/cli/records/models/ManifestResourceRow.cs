@@ -16,7 +16,7 @@ namespace Z0
 
             public ManifestResourceFlags Flags;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
             public CliRowKey Implementation;
         }

@@ -15,7 +15,7 @@ namespace Z0
 
             public CliRowKey MemberForwarded;
 
-            public StringIndex ImportName;
+            public CliStringIndex ImportName;
 
             public CliRowKey ImportScope;
         }

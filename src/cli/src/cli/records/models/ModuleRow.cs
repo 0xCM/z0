@@ -14,7 +14,7 @@ namespace Z0
         {
             public ushort Generation;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
             public GuidIndex ModuleVersionId;
 

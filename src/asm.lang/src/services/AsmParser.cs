@@ -214,6 +214,17 @@ namespace Z0.Asm
 
         static MsgPattern<Count,Count,TextLine> FieldCountMismatch => "Expected {0} fields but found {1} in '{2}'";
 
+
+        public static ref AsmFormRecord parse(in TextRow src, ref AsmFormRecord dst)
+        {
+            var i = 0;
+            DataParser.parse(src[i++], out dst.Seq);
+            AsmParser.opcode(src[i++], out dst.OpCode);
+            AsmParser.sig(src[i++], out dst.Sig);
+            AsmParser.form(src[i++], out dst.FormExpr);
+            return ref dst;
+        }
+
         public static Outcome parse(TextLine src, out AsmIndex dst)
         {
             const string ErrorPattern = "Error parsing {0} on line {1}";

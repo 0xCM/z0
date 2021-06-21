@@ -14,7 +14,7 @@ namespace Z0
         {
             public FieldAttributes Attributes;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
             public CliBlobIndex Signature;
 

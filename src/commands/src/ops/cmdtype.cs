@@ -5,6 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
+
+    using static Root;
+    using static core;
 
     partial struct Cmd
     {
@@ -15,5 +20,9 @@ namespace Z0
         public static CmdTypeInfo<T> cmdtype<T>()
             where T : struct, ICmd<T>
                 => default;
+
+        [Op]
+        public static Index<CmdTypeInfo> cmdtypes(Assembly[] src)
+            => src.Types().Tagged<CmdAttribute>().Select(cmdtype);
     }
 }

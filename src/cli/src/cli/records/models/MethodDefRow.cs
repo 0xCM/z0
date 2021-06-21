@@ -21,7 +21,7 @@ namespace Z0
 
             public MethodAttributes Attributes;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
             public CliBlobIndex Signature;
 

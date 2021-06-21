@@ -17,13 +17,11 @@ namespace Z0
         internal SortedSpan(T[] src)
         {
             Data = src;
-            //Data = src.Sort();
         }
 
         internal SortedSpan(Span<T> src)
         {
             Data = src;
-            //Data = src.Sort();
         }
 
         public ReadOnlySpan<T> View

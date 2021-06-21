@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Utf8;
 
@@ -116,7 +117,7 @@ namespace Z0
         public static utf8 Empty
         {
             [MethodImpl(Inline)]
-            get => new utf8(Array.Empty<byte>());
+            get => new utf8(array<byte>());
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Z0
 
         CmdRunnerLookup()
         {
+            Data = new();
             Pairs = KeyValuePairs<string,MethodInfo>.Empty;
         }
 

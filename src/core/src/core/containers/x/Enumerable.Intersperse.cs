@@ -39,7 +39,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static T[] Intersperse<T>(this T[] src, T x)
         {
-            var buffer = sys.alloc<T>(src.Length*2);
+            var buffer = alloc<T>(src.Length*2);
             @readonly(src).Intersperse(x, span(buffer));
             return buffer;
         }

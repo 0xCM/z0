@@ -21,9 +21,9 @@ namespace Z0
 
             public CliBlobIndex PublicKey;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
-            public StringIndex Culture;
+            public CliStringIndex Culture;
         }
     }
 }

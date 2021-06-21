@@ -48,6 +48,12 @@ namespace Z0
         protected virtual void Initialized() {}
 
 
+        protected RowEvent<T> Row<T>(T src)
+        {
+            return Signal.Row(src);
+        }
+
+
         protected BabbleEvent<T> Babble<T>(T src)
         {
             return Signal.Babble(src);
@@ -56,6 +62,11 @@ namespace Z0
         protected StatusEvent<T> Status<T>(T src)
         {
             return Signal.Status(src);
+        }
+
+        protected WarnEvent<T> Warn<T>(T src)
+        {
+            return Signal.Warn(src);
         }
 
         protected ErrorEvent<T> Error<T>(T src)

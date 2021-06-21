@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Utf8;
 
@@ -36,13 +37,13 @@ namespace Z0
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => memory.cover(pData, Size);
+            get => cover(pData, Size);
         }
 
         public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => memory.cover(pData, Size);
+            get => cover(pData, Size);
         }
 
         public bool IsEmpty

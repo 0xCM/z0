@@ -19,9 +19,9 @@ namespace Z0
 
             public CliBlobIndex Token;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
-            public StringIndex Culture;
+            public CliStringIndex Culture;
 
             public CliBlobIndex Hash;
         }

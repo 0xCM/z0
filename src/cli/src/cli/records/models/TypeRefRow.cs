@@ -14,9 +14,9 @@ namespace Z0
         {
             public CliRowKey ResolutionScope;
 
-            public StringIndex Name;
+            public CliStringIndex Name;
 
-            public StringIndex Namespace;
+            public CliStringIndex Namespace;
         }
     }
 }
