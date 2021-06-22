@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static Typed;
+    using static core;
 
     partial class BitGrid
     {

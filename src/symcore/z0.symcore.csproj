@@ -7,6 +7,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Bit)" />
+    <ProjectReference Include="$(Containers)" />
+    <ProjectReference Include="$(Clr)" />
   </ItemGroup>
 
 </Project>

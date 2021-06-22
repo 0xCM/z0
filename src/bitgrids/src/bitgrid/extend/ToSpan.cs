@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial class XTend
     {
@@ -19,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid16<T> src)
             where T : unmanaged
-                => memory.bytes(src.Data).Recover<T>();
+                => bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -29,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid32<T> src)
             where T : unmanaged
-                => memory.bytes(src.Data).Recover<T>();
+                => bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -39,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid64<T> src)
             where T : unmanaged
-                => memory.bytes(src.Data).Recover<T>();
+                => bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -53,7 +54,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => memory.bytes(src.Data).Recover<T>();
+                => bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -67,7 +68,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => memory.bytes(src.Data).Recover<T>();
+                => bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -109,7 +110,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => memory.bytes(src.Data).Recover<T>();
+                => bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -123,7 +124,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => memory.bytes(src.Data).Recover<T>();
+                => bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -137,7 +138,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => memory.bytes(src.Data).Recover<T>();
+                => bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span

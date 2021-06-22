@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     partial class BitGridX
     {
         public static string Format<T>(this BitGrid<T> src, bool showrow = false, int? maxbits = null)

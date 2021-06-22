@@ -13,13 +13,8 @@ namespace Z0
     public readonly partial struct Asci
     {
         static AsciSymbols AsciStrings => default;
-
-        [MethodImpl(Inline)]
-        static bool IndexFound(int i)
-            => i != NotFound;
-
         [MethodImpl(Inline)]
         static int IndexLength(int i, int max)
-            => IndexFound(i) ? i : max;
+            => found(i) ? i : max;
     }
 }

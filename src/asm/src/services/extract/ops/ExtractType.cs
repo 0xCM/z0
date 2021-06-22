@@ -12,7 +12,7 @@ namespace Z0
     partial class ApiExtractor
     {
         [Op]
-        public uint ExtractType(ApiRuntimeType src, List<ApiMemberExtract> dst)
+        public uint ExtractType(ApiCompleteType src, List<ApiMemberExtract> dst)
         {
             var flow = Wf.Running(string.Format("Extracting type {0}", src.HostUri));
             var counter = 0u;

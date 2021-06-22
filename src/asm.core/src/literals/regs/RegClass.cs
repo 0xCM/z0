@@ -34,13 +34,13 @@ namespace Z0.Asm
         /// Class identifier control registers
         /// </summary>
         [Symbol("cr")]
-        Control = 4,
+        CR = 4,
 
         /// <summary>
         /// Class identifier for debug registers
         /// </summary>
-        [Symbol("dr")]
-        Debug = 5,
+        [Symbol("db")]
+        DB = 5,
 
         /// <summary>
         /// Classifies an instruction-pointer register of width <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
@@ -76,7 +76,7 @@ namespace Z0.Asm
         /// Classifies a 64-bit mask register
         /// </summary>
         [Symbol("k")]
-        Mask = 11,
+        MASK = 11,
 
         /// <summary>
         /// Classifies a 128-bit bounds register

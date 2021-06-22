@@ -13,7 +13,6 @@ namespace Z0
     using static Root;
     using static core;
 
-
     partial class XApi
     {
         [Op]
@@ -304,7 +303,7 @@ namespace Z0
             return counter;
         }
 
-        public uint ResolveType(ApiRuntimeType src, List<ResolvedMethod> dst)
+        public uint ResolveType(ApiCompleteType src, List<ResolvedMethod> dst)
         {
             var flow = Wf.Running(string.Format("Resolving type {0}", src.HostUri));
             var counter = 0u;

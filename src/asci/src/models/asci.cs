@@ -25,13 +25,11 @@ namespace Z0
             if(len != 0)
             {
                 var buffer = alloc<byte>(len);
-                Asci.encode(src, buffer);
+                AsciSymbols.encode(src, buffer);
                 Data = buffer;
             }
             else
-            {
                 Data = BinaryCode.Empty;
-            }
         }
 
         public Span<AsciSymbol> Symbols

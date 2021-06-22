@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Typed;
     using static BitMasks.Literals;
 
     partial class SubGrid

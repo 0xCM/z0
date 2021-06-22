@@ -45,7 +45,7 @@ namespace Z0
         [Op]
         public static string format(ReadOnlySpan<AsciCode> src, Span<char> buffer)
         {
-            var count = decode(src, buffer);
+            var count = AsciSymbols.decode(src, buffer);
             return new string(slice(buffer,0, count));
         }
 
@@ -53,7 +53,7 @@ namespace Z0
         public static string format(ReadOnlySpan<byte> src)
         {
             var dst = span<char>(src.Length);
-            decode(src, dst);
+            AsciSymbols.decode(src, dst);
             return new string(dst);
         }
     }

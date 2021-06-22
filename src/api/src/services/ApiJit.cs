@@ -99,9 +99,9 @@ namespace Z0
             return ApiMembers.create(direct.Concat(generic).Array());
         }
 
-        public ApiMembers Jit(Index<ApiRuntimeType> src)
+        public ApiMembers Jit(Index<ApiCompleteType> src)
         {
-            var dst = core.list<ApiMember>();
+            var dst = list<ApiMember>();
             var count = src.Count;
             var exclusions = CommonExclusions;
             ref var lead = ref src.First;
@@ -130,11 +130,11 @@ namespace Z0
             return members;
         }
 
-        public Index<ApiMember> Jit(ApiRuntimeType src)
+        public Index<ApiMember> Jit(ApiCompleteType src)
             => Jit(src, CommonExclusions);
 
         [Op]
-        ApiMember[] Jit(ApiRuntimeType src, HashSet<string> exclusions)
+        ApiMember[] Jit(ApiCompleteType src, HashSet<string> exclusions)
             => Members(ApiQuery.methods(src,exclusions).Select(m => new JittedMethod(src.HostUri, m, address(Jit(m)))));
 
         [Op]

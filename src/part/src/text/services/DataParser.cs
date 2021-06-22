@@ -15,6 +15,30 @@ namespace Z0
     [ApiHost]
     public readonly struct DataParser
     {
+        public static Outcome parse(TextLine src, out SymLiteral dst)
+        {
+            var outcome = Outcome.Success;
+            var j=0;
+            var cells = src.Split(Chars.Pipe);
+            if(cells.Length != SymLiteral.FieldCount)
+            {
+                dst = default;
+                return (false, AppMsg.FieldCountMismatch.Format(SymLiteral.FieldCount, cells.Length));
+            }
+
+            outcome += parse(skip(cells,j), out dst.Component);
+            outcome += parse(skip(cells,j), out dst.Type);
+            outcome += parse(skip(cells,j), out dst.Position);
+            outcome += parse(skip(cells,j), out dst.Name);
+            outcome += parse(skip(cells,j), out dst.Symbol);
+            outcome += eparse(skip(cells,j), out dst.DataType);
+            outcome += parse(skip(cells,j), out dst.ScalarValue);
+            outcome += parse(skip(cells,j), out dst.Hidden);
+            outcome += parse(skip(cells,j), out dst.Description);
+            outcome += parse(skip(cells,j), out dst.Identity);
+            return outcome;
+        }
+
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out byte dst)
             => NumericParser.parse(src, out dst);

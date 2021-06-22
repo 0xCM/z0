@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     /// <summary>
     /// Defines a square bitmatrix of natural order over a primal type
@@ -150,7 +151,7 @@ namespace Z0
             if(value)
                 Content.Fill(Numeric.maxval<T>());
             else
-                Content.Fill(zero<T>());
+                Content.Fill(NumericLiterals.zero<T>());
         }
 
         [MethodImpl(Inline)]

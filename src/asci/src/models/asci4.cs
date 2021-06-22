@@ -21,7 +21,7 @@ namespace Z0
     {
         public const uint Size = 4;
 
-        internal readonly S Storage;
+        public readonly S Storage;
 
         [MethodImpl(Inline)]
         public asci4(S src)

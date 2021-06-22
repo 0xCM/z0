@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static Typed;
+    using static core;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = W := 64

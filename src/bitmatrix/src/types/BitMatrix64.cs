@@ -6,8 +6,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     /// <summary>
     /// Defines a 64x64 matrix of bits

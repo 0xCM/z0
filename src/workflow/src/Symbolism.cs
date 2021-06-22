@@ -8,7 +8,6 @@ namespace Z0
     using System.Reflection;
 
     using static core;
-    using static Root;
 
     public sealed class Symbolism : AppService<Symbolism>
     {
@@ -85,7 +84,7 @@ namespace Z0
 
         public Index<SymLiteral> LoadLiterals(FS.FilePath src)
         {
-            using var reader = src.TableReader<SymLiteral>(Symbols.parse);
+            using var reader = src.TableReader<SymLiteral>(DataParser.parse);
             var header = reader.Header.Split(Chars.Tab);
             if(header.Length != SymLiteral.FieldCount)
             {

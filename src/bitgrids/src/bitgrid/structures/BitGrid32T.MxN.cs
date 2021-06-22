@@ -33,14 +33,13 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 4;
 
-
         [MethodImpl(Inline)]
         internal BitGrid32(uint src)
-            => this.Data = src;
+            => Data = src;
 
         [MethodImpl(Inline)]
         internal BitGrid32(SpanBlock32<T> src)
-            => this.Data = src.As<uint>().First;
+            => Data = src.As<uint>().First;
 
         /// <summary>
         /// The exposed grid state

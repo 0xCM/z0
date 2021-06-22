@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="count"></param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> bytes(byte offset, byte count)
-            => memory.slice(CharBytes, offset, count);
+            => slice(CharBytes, offset, count);
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci2 src)
-            => memory.cover(@as<byte>(src.Storage), src.Length);
+            => core.cover(@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci4 src)
-            => memory.cover(@as<byte>(src.Storage), src.Length);
+            => core.cover(@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci8 src)
-            => memory.cover(@as<byte>(src.Storage), src.Length);
+            => core.cover(@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan

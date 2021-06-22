@@ -200,7 +200,7 @@ namespace Z0
             return routines;
         }
 
-        public AsmHostRoutines CaptureTypes(Index<ApiRuntimeType> src)
+        public AsmHostRoutines CaptureTypes(Index<ApiCompleteType> src)
         {
             var dst = list<AsmMemberRoutine>();
             var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
@@ -213,7 +213,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        Index<ApiMemberExtract> ExtractTypes(Index<ApiRuntimeType> types)
+        Index<ApiMemberExtract> ExtractTypes(Index<ApiCompleteType> types)
         {
             try
             {

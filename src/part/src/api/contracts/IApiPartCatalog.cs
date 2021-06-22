@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// Api types
         /// </summary>
-        Index<ApiRuntimeType> ApiTypes {get;}
+        Index<ApiCompleteType> ApiTypes {get;}
 
         /// <summary>
         /// The known types that reify contracted operation services, potentially generic

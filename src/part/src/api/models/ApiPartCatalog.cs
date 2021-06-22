@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public Index<ApiRuntimeType> ApiTypes {get;}
+        public Index<ApiCompleteType> ApiTypes {get;}
 
         /// <summary>
         /// The data types defined by the assembly
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         public Index<MethodInfo> Methods {get;}
 
-        public ApiPartCatalog(PartId part, Assembly component, Index<ApiRuntimeType> apitypes, IApiHost[] apihosts, Type[] svchosts)
+        public ApiPartCatalog(PartId part, Assembly component, Index<ApiCompleteType> apitypes, IApiHost[] apihosts, Type[] svchosts)
         {
             PartId = part;
             Component = component;

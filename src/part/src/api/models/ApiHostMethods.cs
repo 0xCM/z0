@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a catalog over <see cref='ApiMember'/> values for a specified <see cref='IApiHost'/>
@@ -61,13 +62,13 @@ namespace Z0
         public ReadOnlySpan<ClrMethodAdapter> View
         {
             [MethodImpl(Inline)]
-            get => memory.recover<MethodInfo,ClrMethodAdapter>(memory.@readonly(Storage));
+            get => recover<MethodInfo,ClrMethodAdapter>(@readonly(Storage));
         }
 
         public static ApiHostMethods Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiHostMethods(ApiHost.Empty, Array.Empty<MethodInfo>());
+            get => new ApiHostMethods(ApiHost.Empty, array<MethodInfo>());
         }
 
         [MethodImpl(Inline)]

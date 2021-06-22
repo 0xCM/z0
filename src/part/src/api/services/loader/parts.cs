@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Linq;
 
     using static Root;
     using static core;
@@ -15,10 +14,10 @@ namespace Z0
     partial struct ApiRuntimeLoader
     {
         public static IApiParts parts()
-            => parts(core.controller(), Environment.GetCommandLineArgs());
+            => parts(controller(), Environment.GetCommandLineArgs());
 
         public static IApiParts parts(string[] args)
-            => parts(core.controller(), args);
+            => parts(controller(), args);
 
         public static IApiParts parts(Assembly control)
             => new ApiParts(control, array(control.Id()));
@@ -27,9 +26,11 @@ namespace Z0
         {
             if(args.Length != 0)
             {
-                var identifiers = ApiPartIdParser.parse2(args);
+                var identifiers = ApiPartIdParser.parse(args);
                 if(identifiers.Length != 0)
                     return new ApiParts(control, identifiers.ToArray());
+                else
+                    return new ApiParts(control, array<PartId>());
             }
 
             return new ApiParts(control, dir(control));
@@ -42,7 +43,7 @@ namespace Z0
         /// <param name="control">The controlling assembly</param>
         /// <param name="identifiers">The desired parts to include, or empty to include all known parts</param>
         public static IApiParts parts(PartId[] identifiers)
-            => parts(core.controller(), identifiers);
+            => parts(controller(), identifiers);
 
         /// <summary>
         /// Creates a <see cref='ApiParts'/> predicated an optionally-specified <see cref='PartId'/> sequence
@@ -79,7 +80,7 @@ namespace Z0
             return dst.ViewDeposited();
         }
 
-        static IPart[] LoadParts2(FS.FolderPath dir, ReadOnlySpan<PartId> parts)
+        static IPart[] LoadParts(FS.FolderPath dir, ReadOnlySpan<PartId> parts)
         {
             var count = parts.Length;
             var dst = list<IPart>();
@@ -92,20 +93,6 @@ namespace Z0
                     part(path).OnSome(part => dst.Add(part));
             }
             return dst.ToArray();
-        }
-
-
-        static IPart[] LoadParts(FS.FolderPath dir, params PartId[] identities)
-        {
-            var query = from p in identities
-                        let @base = "z0." + p.Format()
-                        from f in array(FS.file(@base, FS.Dll), FS.file(@base,FS.Exe))
-                        let path = dir + f
-                        where path.Exists
-                        let selected = part(path)
-                        where selected.IsSome()
-                        select selected.Value;
-            return query.ToArray();
         }
 
         static IPart[] FindParts(PartContext context)

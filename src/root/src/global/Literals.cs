@@ -16,6 +16,14 @@ namespace Z0
         /// </summary>
         public const int NotFound = -1;
 
+        [MethodImpl(Inline)]
+        public static bool found(int i)
+            => i != NotFound;
+
+        [MethodImpl(Inline)]
+        public static int foundnot(int i, int alt)
+            => found(i) ? i : alt;
+
         /// <summary>
         /// Indicates that emitted content should overwrite whatever file content may exist
         /// </summary>

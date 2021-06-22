@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="b">The second asci character</param>
         [MethodImpl(Inline), Op]
         public static asci2 encode(char a, char b)
-            => new asci2(pack((AsciCode)a, (AsciCode)b));
+            => new asci2(AsciSymbols.pack((AsciCode)a, (AsciCode)b));
 
         /// <summary>
         /// Encodes a 3-character asci sequence
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="c">The third asci character</param>
         [MethodImpl(Inline), Op]
         public static asci4 encode(char a, char b, char c)
-            => new asci4(pack((AsciCode)a, (AsciCode)b, (AsciCode)c, out var _ ));
+            => new asci4(AsciSymbols.pack((AsciCode)a, (AsciCode)b, (AsciCode)c, out var _ ));
 
         /// <summary>
         /// Encodes a 4-character asci sequence
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="b">The second asci character</param>
         [MethodImpl(Inline), Op]
         public static asci4 encode(char a, char b, char c, char d)
-            => new asci4(pack((AsciCode)a, (AsciCode)b, (AsciCode)c, (AsciCode)d, out var _ ));
+            => new asci4(AsciSymbols.pack((AsciCode)a, (AsciCode)b, (AsciCode)c, (AsciCode)d, out var _ ));
 
         /// <summary>
         /// Converts 16 source characters to 16 asci codes
@@ -53,82 +53,6 @@ namespace Z0
             => cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, skip(src, offset))), ref @byte(dst));
 
         /// <summary>
-        /// Encodes a sequence of source characters and stores a result in a caller-supplied
-        /// T-parametric target with cells assumed to be at least 16 bits wide
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="dst">The target</param>
-        /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline), Op]
-        public static int encode<T>(ReadOnlySpan<char> src, Span<T> dst)
-        {
-            var count = min(src.Length, dst.Length);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = @as<T>((byte)skip(src,i));
-            return count;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static int encode(ReadOnlySpan<char> src, Span<byte> dst)
-        {
-            var count = min(src.Length, dst.Length);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = (byte)skip(src,i);
-            return count;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static int encode(in char src, int count, ref byte dst)
-        {
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = (byte)skip(src,i);
-            return count;
-        }
-
-        /// <summary>
-        /// Encodes a single character
-        /// </summary>
-        /// <param name="src">The character to encode</param>
-        [MethodImpl(Inline), Op]
-        public static AsciCode encode(char src)
-            => (AsciCode)src;
-
-        [MethodImpl(Inline), Op]
-        public static int encode(ReadOnlySpan<char> src, ref byte dst)
-            => encode(first(src), src.Length, ref dst);
-
-        /// <summary>
-        /// Encodes each source string and packs the result into the target
-        /// </summary>
-        /// <param name="src">The encoding source</param>
-        /// <param name="dst">The encoding target</param>
-        [MethodImpl(Inline), Op]
-        public static int encode(ReadOnlySpan<string> src, Span<byte> dst)
-        {
-            var j = 0;
-            for(var i=0u; i<src.Length; i++)
-                j += encode(skip(src, i), dst.Slice(j));
-            return j + 1;
-        }
-
-        /// <summary>
-        /// Encodes each source string and packs the result into the target, interspersed by a supplied delimiter
-        /// </summary>
-        /// <param name="src">The encoding source</param>
-        /// <param name="dst">The encoding target</param>
-        [MethodImpl(Inline), Op]
-        public static uint encode(ReadOnlySpan<string> src, Span<byte> dst, byte delimiter)
-        {
-            var j=0u;
-            for(var i=0u; i<src.Length; i++)
-            {
-                j += (uint)(encode(skip(src, i), slice(dst,j)));
-                seek(dst, ++j) = delimiter;
-            }
-            return j + 1;
-        }
-
-        /// <summary>
         /// Populates an asci target with a specified number of source characters
         /// </summary>
         /// <param name="src">The data source</param>
@@ -139,7 +63,7 @@ namespace Z0
         {
             dst = asci2.Null;
             ref var codes = ref Unsafe.As<asci2,AsciCode>(ref dst);
-            Asci.codes(src, (byte)count, ref codes);
+            AsciSymbols.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -154,7 +78,7 @@ namespace Z0
         {
             dst = asci4.Null;
             ref var storage = ref Unsafe.As<asci4,AsciCode>(ref dst);
-            codes(src, (byte)count, ref storage);
+            AsciSymbols.codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -169,7 +93,7 @@ namespace Z0
         {
             dst = asci8.Null;
             ref var storage = ref @as<asci8,AsciCode>(dst);
-            Asci.codes(src, (byte)count, ref storage);
+            AsciSymbols.codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -184,7 +108,7 @@ namespace Z0
         {
             dst = asci16.Null;
             ref var storage = ref @as<asci16,AsciCode>(dst);
-            codes(src, (byte)count, ref storage);
+            AsciSymbols.codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -199,7 +123,7 @@ namespace Z0
         {
             dst = asci32.Null;
             ref var storage = ref @as<asci32,AsciCode>(dst);
-            codes(src, (byte)count, ref storage);
+            AsciSymbols.codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -214,45 +138,7 @@ namespace Z0
         {
             dst = asci64.Null;
             ref var storage = ref @as<asci64,AsciCode>(dst);
-            codes(src, (byte)count, ref storage);
-            return ref dst;
-        }
-
-        /// <summary>
-        /// Fills a caller-supplied target span with asci codes corresponding to characters in a source span
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="dst">The data target</param>
-        [MethodImpl(Inline), Op]
-        public static int encode(ReadOnlySpan<char> src, Span<AsciCode> dst)
-        {
-            var count = min(src.Length, dst.Length);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = (AsciCode)skip(src,i);
-            return count;
-        }
-
-        /// <summary>
-        /// Encodes a specified number of source characters
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="offset"></param>
-        /// <param name="count"></param>
-        /// <param name="dst">The data target</param>
-        [MethodImpl(Inline), Op]
-        public static uint encode(ReadOnlySpan<char> src, uint offset, uint count, Span<AsciCode> dst)
-        {
-            ref readonly var input = ref skip(src, offset);
-            ref var target = ref first(dst);
-            for(var i=0u; i<count; i++)
-                seek(target, i) = (AsciCode)skip(input,i);
-            return count;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly AsciSequence encode(string src, in AsciSequence dst)
-        {
-            encode(src, dst.Storage);
+            AsciSymbols.codes(src, (byte)count, ref storage);
             return ref dst;
         }
 
@@ -265,7 +151,7 @@ namespace Z0
         public static ref readonly asci2 encode(ReadOnlySpan<char> src, out asci2 dst)
         {
             dst = default;
-            codes(src, span<asci2,AsciCode>(ref dst));
+            AsciSymbols.codes(src, span<asci2,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -278,7 +164,7 @@ namespace Z0
         public static ref readonly asci4 encode(ReadOnlySpan<char> src, out asci4 dst)
         {
             dst = default;
-            codes(src, span<asci4,AsciCode>(ref dst));
+            AsciSymbols.codes(src, span<asci4,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -291,7 +177,7 @@ namespace Z0
         public static ref readonly asci8 encode(ReadOnlySpan<char> src, out asci8 dst)
         {
             dst = default;
-            codes(src, span<asci8,AsciCode>(ref dst));
+            AsciSymbols.codes(src, span<asci8,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -304,7 +190,7 @@ namespace Z0
         public static ref readonly asci16 encode(ReadOnlySpan<char> src, out asci16 dst)
         {
             dst = asci16.Spaced;
-            codes(src, span<asci16,AsciCode>(ref dst));
+            AsciSymbols.codes(src, span<asci16,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -317,7 +203,7 @@ namespace Z0
         public static ref readonly asci32 encode(ReadOnlySpan<char> src, out asci32 dst)
         {
             dst = asci32.Spaced;
-            codes(src, span<asci32,AsciCode>(ref dst));
+            AsciSymbols.codes(src, span<asci32,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -330,7 +216,7 @@ namespace Z0
         public static ref readonly asci64 encode(ReadOnlySpan<char> src, out asci64 dst)
         {
             dst = asci64.Spaced;
-            codes(src, span<asci64,AsciCode>(ref dst));
+            AsciSymbols.codes(src, span<asci64,AsciCode>(ref dst));
             return ref dst;
         }
 
@@ -349,6 +235,17 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static asci4 encode(N4 n, ReadOnlySpan<char> src)
             => encode(src, out asci4 dst);
+
+        /// <summary>
+        /// Populates a 4-code asci block from the leading cells of a character span
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static ref ByteBlock4 encode(ReadOnlySpan<char> src, ref ByteBlock4 dst)
+        {
+            AsciSymbols.encode(src, dst.Bytes);
+            return ref dst;
+        }
 
         /// <summary>
         /// Populates an 8-code asci block from the leading cells of a character span
