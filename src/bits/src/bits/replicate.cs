@@ -22,7 +22,7 @@ namespace Z0
         public static byte replicate(byte src, byte from, byte to, byte count)
         {
             var width = to - from;
-            var pattern = bitslice(src, from, to);
+            var pattern = slice(src, from, to);
             byte dst = 0;
             for(var i=0; i<count; i++)
                 dst |= (byte)(pattern << i*width);
@@ -40,7 +40,7 @@ namespace Z0
         public static ushort replicate(ushort src, byte from, byte to, byte count)
         {
             var width = to - from;
-            var pattern = bitslice(src, from, to);
+            var pattern = slice(src, from, to);
             ushort dst = 0;
             for(var i=0; i<count; i++)
                 dst |= (ushort)(pattern << i*width);
@@ -58,7 +58,7 @@ namespace Z0
         public static uint replicate(uint src, byte from, byte to, byte count)
         {
             var width = to - from;
-            var pattern = bitslice(src, from, to);
+            var pattern = slice(src, from, to);
             var dst = 0u;
             for(var i=0; i<count; i++)
                 dst |= (pattern << i*width);
@@ -76,7 +76,7 @@ namespace Z0
         public static ulong replicate(ulong src, byte from, byte to, byte count)
         {
             var width = (byte)(to - from + 1);
-            var pattern = bitslice(src, from, width);
+            var pattern = slice(src, from, width);
             var dst = pattern;
             for(var i=1; i<count; i++)
                 dst |= (pattern << i*width);

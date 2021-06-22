@@ -8,45 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static RegFacets;
+    using api = AsmRegs;
 
     [DataType]
     public readonly struct Register : IDataTypeEquatable<Register>
     {
-        /// <summary>
-        /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegKind'/>
-        /// </summary>
-        /// <param name="i">The register index</param>
-        /// <param name="k">The register class</param>
-        /// <param name="w">The register width</param>
-        [MethodImpl(Inline), Op]
-        public static RegKind kind(RegIndex i, RegClass k, RegWidth w)
-            => (RegKind)((uint)i  << IndexField | (uint)k << ClassField | (uint)w << WidthField);
-
-        /// <summary>
-        /// Determines the register code from the kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static RegIndex index(RegKind src)
-            => (RegIndex)Bits.bitslice((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.C);
-
-        /// <summary>
-        /// Determines the register class from the kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static RegClass @class(RegKind src)
-            => (RegClass)Bits.bitslice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
-
-        /// <summary>
-        /// Determines the register width from the kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static RegWidth width(RegKind src)
-            => (RegWidth)Bits.bitslice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
-
         public RegKind Kind {get;}
 
         [MethodImpl(Inline)]
@@ -55,16 +21,16 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public Register(RegIndex c, RegClass k, RegWidth w)
-            => Kind = kind(c, k, w);
+            => Kind = api.kind(c, k, w);
 
         public RegIndex Code
-            => index(Kind);
+            => api.index(Kind);
 
         public RegClass Class
-            => @class(Kind);
+            => api.@class(Kind);
 
         public RegWidth Width
-            => width(Kind);
+            => api.width(Kind);
 
         public Identifier Name
             => Kind.ToString();

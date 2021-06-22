@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Bits
+    partial struct bit
     {
         [MethodImpl(Inline), Mux]
         public static bit mux(bit i0, bit i1, bit c0)

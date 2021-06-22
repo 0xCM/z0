@@ -18,14 +18,6 @@ namespace Z0
         public static void unpack(byte src, Span<bit> dst)
             => unpack(src, ref first(dst));
 
-        public static bit[] unpack<T>(T src)
-            where T : struct
-        {
-            var buffer = sys.alloc<bit>(width<T>());
-            unpack(src, buffer);
-            return buffer;
-        }
-
         /// <summary>
         /// Populates a caller-supplied target with unpacked source bits
         /// </summary>

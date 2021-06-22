@@ -10,26 +10,26 @@ namespace Z0.Asm
     using static Root;
 
     // SIB[Scale[6,7] | Index[3,5] | Base[0,2]]
-    public readonly struct Sib
+    public struct Sib
     {
         readonly byte Data;
 
         public uint3 Base
         {
             [MethodImpl(Inline)]
-            get => Bits.bitseg(Data, 0, 2);
+            get => Bits.segment(Data, 0, 2);
         }
 
         public uint3 Index
         {
             [MethodImpl(Inline)]
-            get => Bits.bitseg(Data, 3, 5);
+            get => Bits.segment(Data, 3, 5);
         }
 
         public uint2 Scale
         {
             [MethodImpl(Inline)]
-            get => Bits.bitseg(Data, 6, 7);
+            get => Bits.segment(Data, 6, 7);
         }
 
         public MemoryScale ScaleFactor

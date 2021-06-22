@@ -53,6 +53,10 @@ namespace Z0
         public static T generic<T>(byte src)
             => As<byte,T>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref T generic<T>(ref byte src)
+            => ref As<byte,T>(ref src);
+
         /// <summary>
         /// Transforms a <see cref='short'/> value into a <see cref='T'/> value
         /// </summary>

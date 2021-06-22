@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public readonly struct TestCaseId
     {
@@ -22,11 +22,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Segment(byte offset, byte length)
-            => Bits.bitseg(Data, offset, length);
+            => Bits.segment(Data, offset, length);
 
         [MethodImpl(Inline)]
         public T Segment<T>(byte offset, byte length)
-            => @as<ulong,T>(Bits.bitseg(Data, offset, length));
+            => @as<ulong,T>(Bits.segment(Data, offset, length));
 
         public ulong this[byte offset, byte length]
         {
@@ -64,5 +64,4 @@ namespace Z0
         public static implicit operator TestCaseId(ulong src)
             => new TestCaseId(src);
     }
-
 }

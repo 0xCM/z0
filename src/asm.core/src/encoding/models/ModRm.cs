@@ -26,7 +26,7 @@ namespace Z0.Asm
         public uint3 Rm
         {
             [MethodImpl(Inline)]
-            get => Bits.bitseg(Data, 0, 2);
+            get => Bits.segment(Data, 0, 2);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0.Asm
         public uint3 Reg
         {
             [MethodImpl(Inline)]
-            get => Bits.bitseg(Data, 3, 5);
+            get => Bits.segment(Data, 3, 5);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0.Asm
         public uint2 Mod
         {
             [MethodImpl(Inline)]
-            get => Bits.bitseg(Data, 6, 7);
+            get => Bits.segment(Data, 6, 7);
         }
 
         /// <summary>

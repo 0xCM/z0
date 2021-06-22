@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position  within the source where extraction should begin</param>
         /// <param name="length">The number of bits that should be extracted</param>
-        [MethodImpl(Inline), BitSlice, Closures(Integers)]
-        public static T bitslice<T>(T src, byte start, byte length)
+        [MethodImpl(Inline), Slice, Closures(Integers)]
+        public static T slice<T>(T src, byte start, byte length)
             where T : unmanaged
                 => bitslice_u(src,start, length);
 
@@ -28,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.bitslice(uint8(lhs), start, length));
+                return generic<T>(Bits.slice(uint8(lhs), start, length));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.bitslice(uint16(lhs), start, length));
+                return generic<T>(Bits.slice(uint16(lhs), start, length));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.bitslice(uint32(lhs), start, length));
+                return generic<T>(Bits.slice(uint32(lhs), start, length));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bitslice(uint64(lhs), start, length));
+                return generic<T>(Bits.slice(uint64(lhs), start, length));
             else
                 return bitslice_i(lhs,start,length);
         }
@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(Bits.bitslice(int8(lhs), start, length));
+                return generic<T>(Bits.slice(int8(lhs), start, length));
             else if(typeof(T) == typeof(short))
-                return generic<T>(Bits.bitslice(int16(lhs), start, length));
+                return generic<T>(Bits.slice(int16(lhs), start, length));
             else if(typeof(T) == typeof(int))
-                return generic<T>(Bits.bitslice(int32(lhs), start, length));
+                return generic<T>(Bits.slice(int32(lhs), start, length));
             else if(typeof(T) == typeof(long))
-                return generic<T>(Bits.bitslice(int64(lhs), start, length));
+                return generic<T>(Bits.slice(int64(lhs), start, length));
             else
                 throw no<T>();
         }

@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmOpTypes;
     using static math;
 
     partial struct asm
@@ -36,10 +35,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static RegIndex regidx(RegOp src)
-            =>(RegIndex)Bits.bitseg(src.Bitfield, 10, 15);
+            =>(RegIndex)Bits.segment(src.Bitfield, 10, 15);
 
         [MethodImpl(Inline), Op]
         public static RegClass regclass(RegOp src)
-            => (RegClass)Bits.bitseg(src.Bitfield, 5, 9);
+            => (RegClass)Bits.segment(src.Bitfield, 5, 9);
     }
 }

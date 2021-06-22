@@ -8,7 +8,8 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static Typed;
 
     [ApiHost]
     public readonly struct TruthTables
@@ -101,8 +102,8 @@ namespace Z0
         {
             var f = bitlogix.Lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
-            table[0] = BitBlocks.single<N2,byte>(bit.condense(f(off), off));
-            table[1] = BitBlocks.single<N2,byte>(bit.condense(f(on), on));
+            table[0] = BitBlocks.single<N2,byte>(bit.pack(f(off), off));
+            table[1] = BitBlocks.single<N2,byte>(bit.pack(f(on), on));
             return table;
         }
 
@@ -112,10 +113,10 @@ namespace Z0
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = bitlogix.Lookup(kind);
-            tt[0] = BitBlocks.single<N3,byte>(bit.condense(f(off, off), off, off));
-            tt[1] = BitBlocks.single<N3,byte>(bit.condense(f(on, off), off, on));
-            tt[2] = BitBlocks.single<N3,byte>(bit.condense(f(off, on), on, off));
-            tt[3] = BitBlocks.single<N3,byte>(bit.condense(f(on, on),  on, on));
+            tt[0] = BitBlocks.single<N3,byte>(bit.pack(f(off, off), off, off));
+            tt[1] = BitBlocks.single<N3,byte>(bit.pack(f(on, off), off, on));
+            tt[2] = BitBlocks.single<N3,byte>(bit.pack(f(off, on), on, off));
+            tt[3] = BitBlocks.single<N3,byte>(bit.pack(f(on, on),  on, on));
             return tt;
         }
 
@@ -124,14 +125,14 @@ namespace Z0
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = bitlogix.Lookup(kind);
-            tt[0] = BitBlocks.single<N4,byte>(bit.condense(f(off, off, off), off, off, off));
-            tt[1] = BitBlocks.single<N4,byte>(bit.condense(f(off, off, on), off, off, on));
-            tt[2] = BitBlocks.single<N4,byte>(bit.condense(f(off, on, off), off, on, off));
-            tt[3] = BitBlocks.single<N4,byte>(bit.condense(f(off, on, on), off, on, on));
-            tt[4] = BitBlocks.single<N4,byte>(bit.condense(f(on, off, off), on, off, off));
-            tt[5] = BitBlocks.single<N4,byte>(bit.condense(f(on, off, on), on, off, on));
-            tt[6] = BitBlocks.single<N4,byte>(bit.condense(f(on, on, off), off, on, on));
-            tt[7] = BitBlocks.single<N4,byte>(bit.condense(f(on, on, on), on, on, on));
+            tt[0] = BitBlocks.single<N4,byte>(bit.pack(f(off, off, off), off, off, off));
+            tt[1] = BitBlocks.single<N4,byte>(bit.pack(f(off, off, on), off, off, on));
+            tt[2] = BitBlocks.single<N4,byte>(bit.pack(f(off, on, off), off, on, off));
+            tt[3] = BitBlocks.single<N4,byte>(bit.pack(f(off, on, on), off, on, on));
+            tt[4] = BitBlocks.single<N4,byte>(bit.pack(f(on, off, off), on, off, off));
+            tt[5] = BitBlocks.single<N4,byte>(bit.pack(f(on, off, on), on, off, on));
+            tt[6] = BitBlocks.single<N4,byte>(bit.pack(f(on, on, off), off, on, on));
+            tt[7] = BitBlocks.single<N4,byte>(bit.pack(f(on, on, on), on, on, on));
             return tt;
         }
 
@@ -200,8 +201,8 @@ namespace Z0
             {
                 BitVector4 result = (byte)i;
                 var table = BitMatrix.alloc<N2,N2,byte>();
-                table[0] = BitBlocks.single<N2,byte>(bit.condense(result[0], off));
-                table[1] = BitBlocks.single<N2,byte>(bit.condense(result[1], on));
+                table[0] = BitBlocks.single<N2,byte>(bit.pack(result[0], off));
+                table[1] = BitBlocks.single<N2,byte>(bit.pack(result[1], on));
                 dst.Write(table);
             }
         }
@@ -214,10 +215,10 @@ namespace Z0
                 var bbResult = bitblock(result);
 
                 var table = BitMatrix.alloc<N4,N3,byte>();
-                table[0] = BitBlocks.single<N3,byte>(bit.condense(result[0], off, off));
-                table[1] = BitBlocks.single<N3,byte>(bit.condense(result[1], off, on));
-                table[2] = BitBlocks.single<N3,byte>(bit.condense(result[2], on, off));
-                table[3] = BitBlocks.single<N3,byte>(bit.condense(result[3], on, on));
+                table[0] = BitBlocks.single<N3,byte>(bit.pack(result[0], off, off));
+                table[1] = BitBlocks.single<N3,byte>(bit.pack(result[1], off, on));
+                table[2] = BitBlocks.single<N3,byte>(bit.pack(result[2], on, off));
+                table[3] = BitBlocks.single<N3,byte>(bit.pack(result[3], on, on));
                 dst.Write(table);
             }
         }
@@ -230,14 +231,14 @@ namespace Z0
                 var bbResult = bitblock(result);
 
                 var table = BitMatrix.alloc<N8,N4,byte>();
-                table[0] = BitBlocks.single<N4,byte>(bit.condense(result[0], off, off, off));
-                table[1] = BitBlocks.single<N4,byte>(bit.condense(result[1], off, off, on));
-                table[2] = BitBlocks.single<N4,byte>(bit.condense(result[2], off, on, off));
-                table[3] = BitBlocks.single<N4,byte>(bit.condense(result[3], off, on, on));
-                table[4] = BitBlocks.single<N4,byte>(bit.condense(result[4], on, off, off));
-                table[5] = BitBlocks.single<N4,byte>(bit.condense(result[5], on, off, on));
-                table[6] = BitBlocks.single<N4,byte>(bit.condense(result[6], on, on, off));
-                table[7] = BitBlocks.single<N4,byte>(bit.condense(result[7], on, on, on));
+                table[0] = BitBlocks.single<N4,byte>(bit.pack(result[0], off, off, off));
+                table[1] = BitBlocks.single<N4,byte>(bit.pack(result[1], off, off, on));
+                table[2] = BitBlocks.single<N4,byte>(bit.pack(result[2], off, on, off));
+                table[3] = BitBlocks.single<N4,byte>(bit.pack(result[3], off, on, on));
+                table[4] = BitBlocks.single<N4,byte>(bit.pack(result[4], on, off, off));
+                table[5] = BitBlocks.single<N4,byte>(bit.pack(result[5], on, off, on));
+                table[6] = BitBlocks.single<N4,byte>(bit.pack(result[6], on, on, off));
+                table[7] = BitBlocks.single<N4,byte>(bit.pack(result[7], on, on, on));
                 dst.Write(table);
             }
         }

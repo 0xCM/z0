@@ -41,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Slice(byte start, byte length)
-            => gbits.bitslice(Data[(int)(start/CellWidth)], (byte)(start % CellWidth), length);
+            => gbits.slice(Data[(int)(start/CellWidth)], (byte)(start % CellWidth), length);
 
         public bit this[ByteSize offset, byte pos]
         {

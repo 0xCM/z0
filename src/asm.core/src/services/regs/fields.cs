@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
     using static RegFacets;
 
     partial struct AsmRegs
@@ -19,7 +18,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegWidth width(RegKind src)
-            => (RegWidth)Bits.bitslice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
+            => (RegWidth)Bits.slice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
 
         /// <summary>
         /// Determines the register code from the kind
@@ -27,7 +26,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegIndex index(RegKind src)
-            => (RegIndex)Bits.bitslice((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.C);
+            => (RegIndex)Bits.slice((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.C);
 
         /// <summary>
         /// Determines the register class from the kind
@@ -35,7 +34,17 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegClass @class(RegKind src)
-            => (RegClass)Bits.bitslice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
+            => (RegClass)Bits.slice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
+
+        /// <summary>
+        /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegKind'/>
+        /// </summary>
+        /// <param name="i">The register index</param>
+        /// <param name="k">The register class</param>
+        /// <param name="w">The register width</param>
+        [MethodImpl(Inline), Op]
+        public static RegKind kind(RegIndex i, RegClass k, RegWidth w)
+            => (RegKind)((uint)i  << IndexField | (uint)k << ClassField | (uint)w << WidthField);
 
         [MethodImpl(Inline), Op]
         public static void split(RegKind src, out RegIndex c, out RegClass k, out RegWidth w)

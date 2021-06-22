@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class BitGrid
     {
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Slice, Closures(UInt8x16x32k)]
         public static BitVector<T> slice<T>(BitGrid32<T> g, byte index, byte length)
             where T : unmanaged
-                => generic<T>(gbits.bitslice(g.Data, ScalarCast.uint8(index*length), length));
+                => generic<T>(gbits.slice(g.Data, ScalarCast.uint8(index*length), length));
 
         /// <summary>
         /// Extracts a sequence of bits
@@ -34,6 +34,6 @@ namespace Z0
         [MethodImpl(Inline), Slice, Closures(UnsignedInts)]
         public static BitVector<T> slice<T>(BitGrid64<T> g, byte index, byte length)
             where T : unmanaged
-                => generic<T>(gbits.bitslice(g.Data, ScalarCast.uint8(index*length), length));
+                => generic<T>(gbits.slice(g.Data, ScalarCast.uint8(index*length), length));
     }
 }

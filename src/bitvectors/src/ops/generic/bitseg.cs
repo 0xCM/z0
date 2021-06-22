@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), BitSeg, Closures(Closure)]
         public static BitVector<T> bitseg<T>(BitVector<T> x, byte first, byte last)
             where T : unmanaged
-                => gbits.bitseg(x.Data, first, last);
+                => gbits.segment(x.Data, first, last);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -30,6 +30,6 @@ namespace Z0
         public static BitVector<N,T> bitseg<N,T>(BitVector<N,T> x, byte first, byte last)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.bitseg(x.Data, first, last);
+                => gbits.segment(x.Data, first, last);
     }
 }

@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct bit
     {
-
         /// <summary>
         /// Enables a specified source bit
         /// </summary>

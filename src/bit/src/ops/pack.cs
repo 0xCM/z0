@@ -15,7 +15,7 @@ namespace Z0
         /// Packs 2 source bits into the least 2 bits of a byte
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static byte condense(bit b0, bit b1)
+        public static byte pack(bit b0, bit b1)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -26,7 +26,7 @@ namespace Z0
         /// Packs 3 source bits into the least 2 bits of a byte
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static byte condense(bit b0, bit b1, bit b2)
+        public static byte pack(bit b0, bit b1, bit b2)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -38,7 +38,7 @@ namespace Z0
         /// Packs 4 source bits into the least 4 bits of a byte
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static byte condense(bit b0, bit b1, bit b2, bit b3)
+        public static byte pack(bit b0, bit b1, bit b2, bit b3)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -51,7 +51,7 @@ namespace Z0
         /// Packs 8 source bits into a byte
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static byte condense(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
+        public static byte pack(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -68,7 +68,7 @@ namespace Z0
         /// Packs 5 source bits into the least 5 bits of a byte
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static byte condense(bit b0, bit b1, bit b2, bit b3, bit b4)
+        public static byte pack(bit b0, bit b1, bit b2, bit b3, bit b4)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -82,7 +82,7 @@ namespace Z0
         /// Packs 6 source bits into the least 6 bits of a byte
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static byte condense(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5)
+        public static byte pack(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -97,7 +97,7 @@ namespace Z0
         /// Packs 7 source bits into the least 7 bits of a byte
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static byte condense(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6)
+        public static byte pack(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);

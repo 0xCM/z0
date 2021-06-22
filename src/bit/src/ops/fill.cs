@@ -16,14 +16,14 @@ namespace Z0
             where T : struct
         {
             var size = size<T>();
-            var count = Math.Min(size, dst.Length);
+            var count = min(size, dst.Length);
             if(count == 0)
                 return;
 
             ref var input = ref @as<T,byte>(src);
             ref var output = ref @as<bit,ulong>(first(dst));
             for(var i=0u; i<size; i++)
-                seek(output, i) = bit.unpack(skip(input,i));
+                seek(output, i) = unpack(skip(input,i));
         }
     }
 }

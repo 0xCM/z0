@@ -266,10 +266,10 @@ namespace Z0
         public static void digits(Perm4L src, Span<byte> dst)
         {
             var scalar = (byte)src;
-            seek(dst,0) = Bits.bitseg(scalar, 0, 1);
-            seek(dst,1) = Bits.bitseg(scalar, 2, 3);
-            seek(dst,2) = Bits.bitseg(scalar, 4, 5);
-            seek(dst,3) = Bits.bitseg(scalar, 6, 7);
+            seek(dst,0) = Bits.segment(scalar, 0, 1);
+            seek(dst,1) = Bits.segment(scalar, 2, 3);
+            seek(dst,2) = Bits.segment(scalar, 4, 5);
+            seek(dst,3) = Bits.segment(scalar, 6, 7);
         }
 
         /// <summary>
@@ -280,10 +280,10 @@ namespace Z0
         public static ref readonly NatSpan<N4,byte> digits(Perm4L src, in NatSpan<N4,byte> dst)
         {
             var scalar = (byte)src;
-            dst[0] = Bits.bitseg(scalar, 0, 1);
-            dst[1] = Bits.bitseg(scalar, 2, 3);
-            dst[2] = Bits.bitseg(scalar, 4, 5);
-            dst[3] = Bits.bitseg(scalar, 6, 7);
+            dst[0] = Bits.segment(scalar, 0, 1);
+            dst[1] = Bits.segment(scalar, 2, 3);
+            dst[2] = Bits.segment(scalar, 4, 5);
+            dst[3] = Bits.segment(scalar, 6, 7);
             return ref dst;
         }
 
@@ -318,14 +318,14 @@ namespace Z0
         public static uint digits(uint src, Span<OctalDigit> dst)
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
-            seek(dst,0) = (OctalDigit)Bits.bitseg(src, 0, 2);
-            seek(dst,1) = (OctalDigit)Bits.bitseg(src, 3, 5);
-            seek(dst,2) = (OctalDigit)Bits.bitseg(src, 6, 8);
-            seek(dst,3) = (OctalDigit)Bits.bitseg(src, 9, 11);
-            seek(dst,4) = (OctalDigit)Bits.bitseg(src, 12, 14);
-            seek(dst,5) = (OctalDigit)Bits.bitseg(src, 15, 17);
-            seek(dst,6) = (OctalDigit)Bits.bitseg(src, 18, 20);
-            seek(dst,7) = (OctalDigit)Bits.bitseg(src, 21, 23);
+            seek(dst,0) = (OctalDigit)Bits.segment(src, 0, 2);
+            seek(dst,1) = (OctalDigit)Bits.segment(src, 3, 5);
+            seek(dst,2) = (OctalDigit)Bits.segment(src, 6, 8);
+            seek(dst,3) = (OctalDigit)Bits.segment(src, 9, 11);
+            seek(dst,4) = (OctalDigit)Bits.segment(src, 12, 14);
+            seek(dst,5) = (OctalDigit)Bits.segment(src, 15, 17);
+            seek(dst,6) = (OctalDigit)Bits.segment(src, 18, 20);
+            seek(dst,7) = (OctalDigit)Bits.segment(src, 21, 23);
             return 8;
         }
 
@@ -348,22 +348,22 @@ namespace Z0
         public static uint digits(Perm16L src, Span<HexDigit> dst)
         {
             var scalar = (ulong)src;
-            seek(dst,0) = (X)Bits.bitseg(scalar, 0, 3);
-            seek(dst,1) = (X)Bits.bitseg(scalar, 4, 7);
-            seek(dst,2) = (X)Bits.bitseg(scalar, 8, 11);
-            seek(dst,3) = (X)Bits.bitseg(scalar, 12, 15);
-            seek(dst,4) = (X)Bits.bitseg(scalar, 16, 19);
-            seek(dst,5) = (X)Bits.bitseg(scalar, 20, 23);
-            seek(dst,6) = (X)Bits.bitseg(scalar, 24, 27);
-            seek(dst,7) = (X)Bits.bitseg(scalar, 28, 31);
-            seek(dst,8) = (X)Bits.bitseg(scalar, 32, 35);
-            seek(dst,9) = (X)Bits.bitseg(scalar, 36, 39);
-            seek(dst,10) = (X)Bits.bitseg(scalar, 40, 43);
-            seek(dst,11) = (X)Bits.bitseg(scalar, 44, 47);
-            seek(dst,12) = (X)Bits.bitseg(scalar, 48, 53);
-            seek(dst,13) = (X)Bits.bitseg(scalar, 52, 55);
-            seek(dst,14) = (X)Bits.bitseg(scalar, 56, 59);
-            seek(dst,15) = (X)Bits.bitseg(scalar, 60, 63);
+            seek(dst,0) = (X)Bits.segment(scalar, 0, 3);
+            seek(dst,1) = (X)Bits.segment(scalar, 4, 7);
+            seek(dst,2) = (X)Bits.segment(scalar, 8, 11);
+            seek(dst,3) = (X)Bits.segment(scalar, 12, 15);
+            seek(dst,4) = (X)Bits.segment(scalar, 16, 19);
+            seek(dst,5) = (X)Bits.segment(scalar, 20, 23);
+            seek(dst,6) = (X)Bits.segment(scalar, 24, 27);
+            seek(dst,7) = (X)Bits.segment(scalar, 28, 31);
+            seek(dst,8) = (X)Bits.segment(scalar, 32, 35);
+            seek(dst,9) = (X)Bits.segment(scalar, 36, 39);
+            seek(dst,10) = (X)Bits.segment(scalar, 40, 43);
+            seek(dst,11) = (X)Bits.segment(scalar, 44, 47);
+            seek(dst,12) = (X)Bits.segment(scalar, 48, 53);
+            seek(dst,13) = (X)Bits.segment(scalar, 52, 55);
+            seek(dst,14) = (X)Bits.segment(scalar, 56, 59);
+            seek(dst,15) = (X)Bits.segment(scalar, 60, 63);
             return 16;
         }
 

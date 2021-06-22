@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="dst">The right bit position</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), BitSeg, Closures(AllNumeric)]
-        public static T bitseg<T>(T src, byte i0, byte i1)
+        public static T segment<T>(T src, byte i0, byte i1)
             where T : unmanaged
-                => bitseg_u(src, i0, i1);
+                => segment_u(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits from a source and deposits the result to a caller-supplied target
@@ -34,12 +34,12 @@ namespace Z0
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The primal bit source type</typeparam>
         [MethodImpl(Inline), BitSeg, Closures(Closure)]
-        public static void bitseg<T>(T a, byte i0, byte i1, Span<byte> dst, int offset)
+        public static void segment<T>(T a, byte i0, byte i1, Span<byte> dst, int offset)
             where T : unmanaged
         {
-            var seg = bitseg(a, i0, i1);
+            var seg = segment(a, i0, i1);
             var kBytes = bit.minbytes(i1 - i0 + 1);
-            var src = slice(bytes<T>(seg), 0, kBytes);
+            var src = core.slice(bytes(seg), 0, kBytes);
             copy(src,offset,dst);
         }
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="i1">The sequence-relative position of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), BitSeg, Closures(Closure)]
-        public static T bitseg<T>(Span<T> src, BitPos<T> i0, BitPos<T> i1)
+        public static T segment<T>(Span<T> src, BitPos<T> i0, BitPos<T> i1)
             where T : unmanaged
         {
             var bitcount = (uint)(i1 - i0);
@@ -69,14 +69,14 @@ namespace Z0
 
             var sameSeg = i0.CellIndex == i1.CellIndex;
             var firstCount = ScalarCast.uint8(sameSeg ? bitcount : (uint)(width<T>() - i0.BitOffset));
-            var part1 = bitslice(bitcell(src, i0), (byte)i0.BitOffset, firstCount);
+            var part1 = slice(bitcell(src, i0), (byte)i0.BitOffset, firstCount);
 
             if(sameSeg)
                 return part1;
             else
             {
                 var lastCount = ScalarCast.uint8(bitcount - firstCount);
-                return gmath.or(part1, gmath.sal(bitslice(bitcell(src,i1), 0, lastCount), firstCount));
+                return gmath.or(part1, gmath.sal(slice(bitcell(src,i1), 0, lastCount), firstCount));
             }
         }
 
@@ -88,50 +88,50 @@ namespace Z0
         /// <param name="i1">The sequence-relative index of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), BitSeg, Closures(Closure)]
-        public static T bitseg<T>(Span<T> src, byte i0, byte i1)
+        public static T segment<T>(Span<T> src, byte i0, byte i1)
             where T : unmanaged
-                => bitseg(src, bitpos<T>(i0), bitpos<T>(i1));
+                => segment(src, bitpos<T>(i0), bitpos<T>(i1));
 
         [MethodImpl(Inline)]
-        static T bitseg_i<T>(T src, byte i0, byte i1)
+        static T segment_i<T>(T src, byte i0, byte i1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(Bits.bitseg(int8(src), i0, i1));
+                 return generic<T>(Bits.segment(int8(src), i0, i1));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(Bits.bitseg(int16(src), i0, i1));
+                 return generic<T>(Bits.segment(int16(src), i0, i1));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(Bits.bitseg(int32(src), i0, i1));
+                 return generic<T>(Bits.segment(int32(src), i0, i1));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(Bits.bitseg(int64(src), i0, i1));
+                 return generic<T>(Bits.segment(int64(src), i0, i1));
             else
-                return bitseg_f(src,i0,i1);
+                return segment_f(src,i0,i1);
         }
 
         [MethodImpl(Inline)]
-        static T bitseg_u<T>(T src, byte i0, byte i1)
+        static T segment_u<T>(T src, byte i0, byte i1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(Bits.bitseg(uint8(src), i0, i1));
+                 return generic<T>(Bits.segment(uint8(src), i0, i1));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(Bits.bitseg(uint16(src), i0, i1));
+                 return generic<T>(Bits.segment(uint16(src), i0, i1));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(Bits.bitseg(uint32(src), i0, i1));
+                 return generic<T>(Bits.segment(uint32(src), i0, i1));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(Bits.bitseg(uint64(src), i0, i1));
+                 return generic<T>(Bits.segment(uint64(src), i0, i1));
             else
-                return bitseg_i(src,i0,i1);
+                return segment_i(src,i0,i1);
         }
 
         [MethodImpl(Inline)]
-        static T bitseg_f<T>(T src, byte i0, byte i1)
+        static T segment_f<T>(T src, byte i0, byte i1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return generic<T>(Bits.bitseg(float32(src), i0, i1));
+                 return generic<T>(Bits.segment(float32(src), i0, i1));
             else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.bitseg(float64(src),  i0, i1));
+                 return generic<T>(Bits.segment(float64(src),  i0, i1));
             else
                 throw no<T>();
         }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct Permute
     {
@@ -24,7 +24,7 @@ namespace Z0
             const byte SegWidth = 2;
             var first = (byte)(index * SegWidth);
             var last = (byte)(first + SegWidth - 1);
-            dst = (Perm4L)Bits.bitseg((byte)src, first, last);
+            dst = (Perm4L)Bits.segment((byte)src, first, last);
             return test(dst);
         }
 
@@ -41,7 +41,7 @@ namespace Z0
             const byte Segwidth = 3;
             var first = (byte)(index * Segwidth);
             var last = (byte)(first + Segwidth - 1);
-            dst = (Perm8L)Bits.bitseg((uint)src, first, last);
+            dst = (Perm8L)Bits.segment((uint)src, first, last);
             return test(dst);
         }
 
@@ -58,7 +58,7 @@ namespace Z0
             const byte Segwidth = 4;
             var first = (byte)(index * Segwidth);
             var last = (byte)(first + Segwidth - 1);
-            dst = (Perm16L)Bits.bitseg((ulong)src, first, last);
+            dst = (Perm16L)Bits.segment((ulong)src, first, last);
             return test(dst);
         }
     }

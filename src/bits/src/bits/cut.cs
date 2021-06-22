@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), MsbOff]
-        public static byte msboff(byte src, byte index)
+        public static byte cut(byte src, byte index)
             => (byte)ZeroHighBits((uint)src, index);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), MsbOff]
-        public static ushort msboff(ushort src, byte index)
+        public static ushort cut(ushort src, byte index)
             => (ushort)ZeroHighBits((uint)src, index);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), MsbOff]
-        public static uint msboff(uint src, byte index)
+        public static uint cut(uint src, byte index)
             => ZeroHighBits(src, index);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="index">The index at which to begin disabling bits</param>
         [MethodImpl(Inline), MsbOff]
-        public static ulong msboff(ulong src, byte index)
+        public static ulong cut(ulong src, byte index)
             => ZeroHighBits(src, index);
     }
 }
