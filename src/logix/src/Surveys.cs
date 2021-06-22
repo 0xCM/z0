@@ -161,7 +161,7 @@ namespace Z0
         public static string format<T>(in Survey<T> src)
             where T : unmanaged
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             dst.AppendLine(src.Name);
             dst.AppendLine(RP.PageBreak80);
             for(var i=0; i<src.Questions.Length; i++)
@@ -172,7 +172,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string format<T>(in QuestionChoice<T> src)
             where T : unmanaged
-                => text.parenthetical(src.Title);
+                => RP.parenthetical(src.Title);
 
         [Op, Closures(Closure)]
         public static string title<T>(T id, string label)

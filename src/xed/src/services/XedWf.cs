@@ -257,7 +257,7 @@ namespace Z0
                     {
                         var left = line.LeftOfFirst(IMPLIES);
                         var opcount = SourceParser.ParseOperands(left, out var _operands);
-                        var lhs = text.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
+                        var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
                         var rhs = line.RightOfFirst(IMPLIES);
                         writer.WriteLine(string.Format("{0} -> {1}", lhs, rhs));
                     }
@@ -265,7 +265,7 @@ namespace Z0
                     {
                         var left = line.LeftOfFirst(Bar);
                         var opcount = SourceParser.ParseOperands(left, out var _operands);
-                        var lhs = text.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
+                        var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
                         var rhs = line.RightOfFirst(Bar);
                         writer.WriteLine(string.Format("{0} | {1}", lhs, rhs));
                     }

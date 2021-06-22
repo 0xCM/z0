@@ -11,9 +11,6 @@ namespace Z0
 
     public static partial class XSvc
     {
-        public static FilePipe FilePipe(this IWfRuntime wf)
-            => Svc.FilePipe.create(wf);
-
         public static ToolCatalog ToolCatalog(this IWfRuntime wf)
             => Svc.ToolCatalog.create(wf);
     }

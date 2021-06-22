@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial class text
+    partial struct TextTools
     {
         /// <summary>
         /// Creates a new string by weaving a specified character between each character in the source

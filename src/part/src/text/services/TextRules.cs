@@ -16,6 +16,14 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static Fence<char> fence(char left, char right)
+            => Rules.fence(left,right);
+
+        [MethodImpl(Inline), Op]
+        public static Fence<string> fence(string left, string right)
+            => Rules.fence(left,right);
+
         public const StringComparison InvariantCulture = StringComparison.InvariantCulture;
 
         public static bool eval(string src, Adjacent<char, OneOf<char>> rule, out Adjacent<char> dst)
@@ -23,7 +31,7 @@ namespace Z0
             var match = rule.A;
             var candidates = rule.B.Elements.View;
             var count = candidates.Length;
-            var ix = text.index(candidates, rule.A);
+            var ix = TextTools.index(candidates, rule.A);
             if(ix != NotFound)
             {
                 dst = adjacent<char>(match, skip(candidates,ix));

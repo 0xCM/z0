@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a row of text parttioned into a sequence of cells
@@ -47,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref readonly TextBlock Cell<T>(T index)
             where T : unmanaged
-                =>  ref Data[core.bw32(index)];
+                =>  ref Data[bw32(index)];
 
         static string ColSep(char? delimiter)
             => string.Concat(Chars.Space, delimiter ?? Chars.Pipe, Chars.Space);
@@ -65,7 +66,7 @@ namespace Z0
         public static TextRow Empty
         {
             [MethodImpl(Inline)]
-            get => new TextRow(sys.empty<TextBlock>());
+            get => new TextRow(array<TextBlock>());
         }
 
         [MethodImpl(Inline)]

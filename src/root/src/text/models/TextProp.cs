@@ -11,6 +11,10 @@ namespace Z0
 
     public readonly struct TextProp : ITextual
     {
+        [MethodImpl(Inline), Op]
+        public static TextProp define<T>(Name name, T value)
+            => new TextProp(name, string.Format("{0}", value));
+
         public Name Name {get;}
 
         public TextBlock Value {get;}

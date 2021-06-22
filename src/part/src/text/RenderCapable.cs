@@ -10,7 +10,7 @@ namespace Z0
         [Op]
         public static string format(IRenderCapable src)
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             src.Render(dst);
             return dst.Emit();
         }
@@ -18,7 +18,7 @@ namespace Z0
         public static string format<T>(T src)
             where T : IRenderCapable<T>
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             src.Render(dst);
             return dst.Emit();
         }

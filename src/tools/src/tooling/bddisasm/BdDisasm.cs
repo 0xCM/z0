@@ -40,8 +40,7 @@ namespace Z0.Tools
             dst.EmitBitfields = bitfields;
             dst.EmitDetails = details;
             dst.Mode = mode;
-            dst.Redirect = spec.DisasmPath.IsNonEmpty;
-            dst.OutputFile = spec.DisasmPath;
+            dst.DisasmPath = spec.DisasmPath;
             return dst;
         }
 
@@ -80,7 +79,6 @@ namespace Z0.Tools
             const char Specifier = Chars.Dash;
             const string Bits = "bits";
             const string Exi = "exi";
-            const char Redirect = '>';
 
             var tool = src.ToolPath.Format(PathSeparator.BS);
             copy(tool, ref i, dst);

@@ -47,8 +47,8 @@ namespace Z0
             var ctx = context(control, parts, args);
             if(verbose)
             {
-                var enclosed = Rules.fenced(text.join(RP.CommaJoin, ctx.PartIdentities), text.fence(Chars.LBrace, Chars.RBrace));
-                var prop = text.prop("Parts", Rules.format(enclosed));
+                var enclosed = Rules.fenced(text.join(RP.CommaJoin, ctx.PartIdentities), TextRules.fence(Chars.LBrace, Chars.RBrace));
+                var prop = TextProp.define("Parts", Rules.format(enclosed));
                 term.inform(AppMsg.status(prop));
             }
 

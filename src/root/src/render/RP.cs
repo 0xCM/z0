@@ -15,6 +15,11 @@ namespace Z0
         public static string pad(int pad)
             => "{0," + pad.ToString() + "}";
 
+        /// <summary>
+        /// The end-of-line escape sequence
+        /// </summary>
+        public const string Eol = Chars.Eol;
+
         public const char PropertySep = Chars.Colon;
 
         public const sbyte PropertyPad = -16;

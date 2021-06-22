@@ -4,12 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial class text
+    partial struct RP
     {
         /// <summary>
         /// Creates a string of the form "name: content"
@@ -18,6 +17,6 @@ namespace Z0
         /// <param name="content">The labeled content</param>
         [Op]
         public static string label(object name, object content)
-            => concat(name, Chars.Colon, Space, content);
+            => string.Concat(name, Chars.Colon, Space, content);
     }
 }

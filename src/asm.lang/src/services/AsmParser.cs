@@ -80,7 +80,7 @@ namespace Z0.Asm
                 return false;
 
             var trimmed = sig.Trim();
-            var i = text.index(trimmed, Chars.Space);
+            var i = TextTools.index(trimmed, Chars.Space);
             if(i == NotFound)
                 return false;
             else
@@ -97,13 +97,13 @@ namespace Z0.Asm
                 return true;
 
             var trimmed = src.Trim();
-            var i = text.index(trimmed, Chars.Space);
+            var i = TextTools.index(trimmed, Chars.Space);
             if(i == NotFound)
                 dst = asm.sig(asm.mnemonic(src), src);
             else
             {
-                var mnemonic = asm.mnemonic(text.slice(trimmed,0,i));
-                var operands = text.slice(trimmed, i + 1);
+                var mnemonic = asm.mnemonic(TextTools.slice(trimmed,0,i));
+                var operands = TextTools.slice(trimmed, i + 1);
                 dst = asm.sig(mnemonic, trimmed);
             }
             return true;

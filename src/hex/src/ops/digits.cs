@@ -30,12 +30,11 @@ namespace Z0
             var count = size<T>();
             ref readonly var bytes = ref @as<T,byte>(src);
             var j = count*2 - 1;
-
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = Hex.code(n4, LowerCase, d);
-                seek(dst, j--) = Hex.code(n4, LowerCase, Bytes.srl(d, 4));
+                seek(dst, j--) = code(n4, LowerCase, d);
+                seek(dst, j--) = code(n4, LowerCase, Bytes.srl(d, 4));
             }
         }
 

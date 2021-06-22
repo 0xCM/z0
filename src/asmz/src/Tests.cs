@@ -135,12 +135,6 @@ namespace Z0.Asm
             }
 
             var indices = slice(buffer,0,j);
-
-
-            // Span<byte> dst = stackalloc byte[count];
-            // for(byte i=0; i<count; i++)
-            //     seek(dst,i) = bit.test(indices,i) ? i : z8;
-
             Wf.Row(indices.FormatList());
         }
 
@@ -771,7 +765,7 @@ namespace Z0.Asm
 
         void TestTextProps()
         {
-            var a0 = text.prop("name0", "value0");
+            var a0 = TextProp.define("name0", "value0");
             Wf.Row(a0);
         }
 

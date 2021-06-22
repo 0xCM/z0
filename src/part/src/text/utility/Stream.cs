@@ -9,13 +9,11 @@ namespace Z0
     using System.Text;
     using System.IO;
 
-    using static Part;
-
     partial class XText
     {
         [TextUtility]
         public static StringReader Reader(this string src)
-            => text.reader(src);
+            => new StringReader(src);
 
         [TextUtility]
         public static MemoryStream Stream(this string src, Encoding encoding = null)

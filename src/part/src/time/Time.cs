@@ -32,7 +32,7 @@ namespace Z0
         {
             var outcome = Outcome.Empty;
             dst = Timestamp.Zero;
-            var dash = text.index(src, Chars.Dash);
+            var dash = TextTools.index(src, Chars.Dash);
             if(dash == NotFound)
                 return (false, "Date separator not found");
 
@@ -40,7 +40,7 @@ namespace Z0
             if(date < 0)
                 return (false, $"The date index {date} is negative");
 
-            var dot = text.index(src,Chars.Dot);
+            var dot = TextTools.index(src,Chars.Dot);
             if(dot == NotFound)
                 return (false, "Time separator not found");
 
@@ -48,11 +48,11 @@ namespace Z0
             if(time <= date)
                 return (false, $"The time separator index {time} is invalid");
 
-            var seg0 = text.slice(src, date, 10).Split(Chars.Dash);
+            var seg0 = TextTools.slice(src, date, 10).Split(Chars.Dash);
             if(seg0.Length != 3)
                 return (false, $"The date segment has {seg0.Length} segments and should have 3");
 
-            var seg1 = text.slice(src, time + 1).Split(Chars.Dot);
+            var seg1 = TextTools.slice(src, time + 1).Split(Chars.Dot);
 
             if(seg1.Length != 4)
                 return (false, $"The time segment has {seg1.Length} segments and should have 4");

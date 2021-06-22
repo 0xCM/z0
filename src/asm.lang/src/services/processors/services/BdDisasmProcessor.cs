@@ -13,6 +13,7 @@ namespace Z0.Asm
     using static Typed;
 
     using SQ = SymbolicQuery;
+    using SR = SymbolicRender;
 
     [ApiHost]
     public class BdDisasmProcessor : AsciTextProcessor<BdDisasmProcessor,AsmDisassembly>
@@ -42,7 +43,7 @@ namespace Z0.Asm
             var i=0u;
             var body = slice(src.Content, space1 + 16);
             var sbuffer = span<char>(body.Length);
-            var len = SymbolicRender.render(slice(src.Content,space1 + 16), ref i, sbuffer);
+            var len = SR.render(slice(src.Content,space1 + 16), ref i, sbuffer);
             return row(offset, hexcode, slice(sbuffer,0,len).Trim(), out dst);
         }
 
@@ -57,23 +58,21 @@ namespace Z0.Asm
             var stmt = asm.statement(monic, operands);
             dst = asm.disassembly(offset, stmt, hexcode);
             return true;
-
         }
 
         public ReadOnlySpan<AsmDisassembly> ParseDisassembly(FS.FilePath src, FS.FolderPath dir)
         {
             var flow = Running(string.Format("Parsing {0}", src.ToUri()));
-            using var map = MemoryFiles.map(src);
-            var size = map.Size;
-            var data = map.View();
+            var data = src.ReadBytes().ToReadOnlySpan();
+            var size = data.Length;
             var lines = Lines.count(data);
             var max = Lines.maxlength(data);
             var asmDst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Asm);
             var csvDst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Csv);
-            using var asmWriter = asmDst.Writer(Encoding.ASCII);
+            using var asmWriter = asmDst.AsciWriter();
 
             var formatter = Tables.formatter<AsmDisassembly>(AsmDisassembly.RenderWidths);
-            using var csvWriter = csvDst.Writer(Encoding.ASCII);
+            using var csvWriter = csvDst.AsciWriter();
             csvWriter.WriteLine(formatter.FormatHeader());
 
             var pos = 0u;

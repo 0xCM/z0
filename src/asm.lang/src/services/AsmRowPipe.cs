@@ -13,7 +13,6 @@ namespace Z0.Asm
 
     public class AsmRowPipe : AppService<AsmRowPipe>
     {
-
         public AsmRowPipe()
         {
         }

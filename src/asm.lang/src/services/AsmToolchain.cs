@@ -44,6 +44,44 @@ namespace Z0.Asm
                 return (false, errout.Delimit(Chars.NL).Format());
         }
 
+        public ByteSize EmitHexText(ReadOnlySpan<byte> src, ushort rowsize, FS.FilePath dst)
+        {
+            const char Delimiter = Chars.Pipe;
+            var @base = MemoryAddress.Zero;
+            var size = src.Length;
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.AsciWriter();
+            var formatter = HexDataFormatter.create(@base, rowsize, false);
+            var buffer = alloc<byte>(rowsize);
+            var parts = size/rowsize;
+            var offset = @base;
+            var data = default(ReadOnlySpan<byte>);
+            for(var i=0; i<parts; i++)
+            {
+                data = slice(src,offset,rowsize);
+                writer.WriteLine(formatter.FormatLine(data, offset, Delimiter));
+                offset += rowsize;
+            }
+
+            var remainder = size % rowsize;
+            if(remainder != 0)
+            {
+                data = slice(src, offset, remainder);
+                writer.WriteLine(formatter.FormatLine(data, offset, Delimiter));
+            }
+            Wf.EmittedFile(flow,size);
+            return size;
+        }
+
+        public Outcome ProcessAssembly(in AsmToolchainSpec src)
+        {
+            var outpath = src.BinPath;
+            var data = outpath.ReadBytes();
+            var dst = src.Analysis + (outpath.FileName + FS.Hex);
+            EmitHexText(data,40,dst);
+            return true;
+        }
+
         public Outcome Disassemble(in AsmToolchainSpec spec)
         {
             var stdout = list<string>();
@@ -51,10 +89,19 @@ namespace Z0.Asm
             var counter = 0u;
             var outcome = Outcome.Success;
 
+            var tool = Wf.BdDisasm();
+            var cmd = tool.Cmd(spec);
+            var cmdline = tool.CmdLine(cmd);
+            var running = Wf.Running(cmdline);
+            using var writer = cmd.DisasmPath.AsciWriter();
+
             void OnStatus(in string data)
             {
                 if(nonempty(data))
+                {
+                    //writer.WriteLine(data);
                     stdout.Add(data);
+                }
             }
 
             void OnError(in string data)
@@ -63,25 +110,11 @@ namespace Z0.Asm
                     errout.Add(data);
             }
 
-            var tool = Wf.BdDisasm();
-            var cmd = tool.Cmd(spec);
-            var cmdline = tool.CmdLine(cmd);
-            var running = Wf.Running(cmdline);
-
-            using var writer = cmd.OutputFile.Writer();
             var process = ToolCmd.run(cmdline, writer, OnStatus, OnError);
-
             process.Wait();
             stdout.Sort();
-
-            var collected = stdout.ViewDeposited();
-            var count = collected.Length;
-            var buffer = alloc<TextLine>(count);
-            Lines.lines(collected, buffer);
-
             Wf.Ran(running);
             return errout.Count == 0;
-
         }
 
         public Outcome ProcessDisassembly(in AsmToolchainSpec spec)
@@ -116,8 +149,14 @@ namespace Z0.Asm
                 return outcome;
             }
 
-            outcome = Disassemble(spec);
+            outcome = ProcessAssembly(spec);
+            if(outcome.Fail)
+            {
+                Wf.Error(outcome.Message);
+                return outcome;
+            }
 
+            outcome = Disassemble(spec);
             if(outcome.Fail)
             {
                 Wf.Error(outcome.Message);

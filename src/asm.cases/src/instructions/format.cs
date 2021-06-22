@@ -9,14 +9,14 @@ namespace Z0.Asm
         [Op]
         public static string format(in CallRel32Case src)
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             dst.AppendLine(src.AsmSource);
-            dst.AppendLine(text.prop(nameof(src.Caller), AsmRender.format(src.Caller)));
-            dst.AppendLine(text.prop(nameof(src.Ip), src.Ip.Format()));
-            dst.AppendLine(text.prop(nameof(src.NextIp), src.NextIp.Format()));
-            dst.AppendLine(text.prop(nameof(src.Target), src.Target.Format()));
-            dst.AppendLine(text.prop(nameof(src.RelTarget), src.RelTarget.Format()));
-            dst.AppendLine(text.prop(nameof(src.Encoding), src.Encoding.Format()));
+            dst.AppendLine(TextProp.define(nameof(src.Caller), AsmRender.format(src.Caller)));
+            dst.AppendLine(TextProp.define(nameof(src.Ip), src.Ip.Format()));
+            dst.AppendLine(TextProp.define(nameof(src.NextIp), src.NextIp.Format()));
+            dst.AppendLine(TextProp.define(nameof(src.Target), src.Target.Format()));
+            dst.AppendLine(TextProp.define(nameof(src.RelTarget), src.RelTarget.Format()));
+            dst.AppendLine(TextProp.define(nameof(src.Encoding), src.Encoding.Format()));
             return dst.Emit();
         }
     }

@@ -9,10 +9,18 @@ namespace Z0
 
     using static Root;
 
-    partial class text
+    partial struct core
     {
         [MethodImpl(Inline), Op]
-        public static TextProp prop<T>(Name name, T value)
-            => new TextProp(name, string.Format("{0}", value));
+        public static Timestamp timestamp()
+            => now();
+
+        [MethodImpl(Inline), Op]
+        public static Timestamp timestamp(ulong ticks)
+            => new Timestamp(ticks);
+
+        [MethodImpl(Inline), Op]
+        public static Timestamp timestamp(long ticks)
+            => new Timestamp((ulong)ticks);
     }
 }

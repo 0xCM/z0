@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
-    partial class text
-    {
+    using static Root;
 
+    partial struct RP
+    {
         /// <summary>
         /// Encloses content between '(' and ')' characters
         /// </summary>

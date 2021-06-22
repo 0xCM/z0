@@ -15,7 +15,7 @@ namespace Z0
     {
         [Op]
         public static string name(IFunc f)
-            => text.ifempty(f.GetType().Tag<OpKindAttribute>()
+            => TextTools.ifempty(f.GetType().Tag<OpKindAttribute>()
                    .MapValueOrDefault(a => f.GetType().DisplayName(), f.GetType().DisplayName()),  f.GetType().DisplayName());
 
         [MethodImpl(Inline), Op]
@@ -24,7 +24,7 @@ namespace Z0
 
         [Op]
         public static string name(IFunc f, IFunc g)
-            => text.format("{0} <-> {1}", name(f), name(g));
+            => string.Format("{0} <-> {1}", name(f), name(g));
 
         public static string name<W,T>(Type host, IFunc f)
             where W : unmanaged, ITypeWidth

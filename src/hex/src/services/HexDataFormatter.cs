@@ -35,14 +35,12 @@ namespace Z0
 
         public string FormatLine(ReadOnlySpan<byte> data, ulong offset, char delimiter = Chars.Space)
         {
-            var line = string.Empty.Build();
+            var line = TextTools.buffer();
             var count = data.Length;
-            var _offset = BaseAddress + offset;
-
             if(LineConfig.LineLabels)
             {
-                line.Append(_offset.ToString("x") + HexFormatSpecs.PostSpec);
-
+                var pos = BaseAddress + offset;
+                line.AppendFormat("{0,-12}", pos.ToString("x") + HexFormatSpecs.PostSpec);
                 if(delimiter != Space)
                     line.Append(Space);
                 line.Append(delimiter);
@@ -52,15 +50,14 @@ namespace Z0
 
             line.Append(data.FormatHex());
 
-            return line.ToString();
+            return line.Emit();
         }
 
         public void FormatLines(ReadOnlySpan<byte> data, Action<string> receiver)
         {
-            var line = string.Empty.Build();
+            var line = TextTools.buffer();
             var count = data.Length;
             var offset = MemoryAddress.Zero;
-
             for(var i=0u; i<count; i++)
             {
                 if(i % LineConfig.BytesPerLine == 0)
@@ -93,9 +90,8 @@ namespace Z0
         public ReadOnlySpan<string> FormatLines(ReadOnlySpan<byte> src)
         {
             const char delimiter = Chars.Space;
-
             var dst = core.list<string>();
-            var line = text.buffer();
+            var line = TextTools.buffer();
             var count = src.Length;
 
             for(var i=0; i<count; i++)

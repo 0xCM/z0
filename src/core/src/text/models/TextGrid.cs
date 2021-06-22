@@ -43,7 +43,7 @@ namespace Z0
         public string Content
         {
             [MethodImpl(Inline)]
-            get => RowData.Map(r => r.Format()).Join(Eol);
+            get => RowData.Map(r => r.Format()).Join(RP.Eol);
         }
 
         public ref readonly TextRow this[int index]

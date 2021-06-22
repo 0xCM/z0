@@ -30,7 +30,7 @@ namespace Z0
             {
                 ref readonly var type = ref skip(types,i);
                 var attrib = type.Tag<ApiCompleteAttribute>();
-                var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
+                var name =  TextTools.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
                 var uri = new ApiHostUri(part, name);
                 var declared = type.DeclaredMethods();
                 seek(dst, i) = new ApiRuntimeType(type, name, part, uri, declared, index(declared));

@@ -46,7 +46,7 @@ namespace Z0
                 return (false, $"No such file {src}");
 
             using var reader = src.Reader();
-            var attempt =  TextGrids.parse(reader);
+            var attempt =  parse(reader);
             if(attempt)
             {
                 dst = attempt.Value;
@@ -99,7 +99,7 @@ namespace Z0
         public static ReadOnlySpan<TextGrid> load(ReadOnlySpan<FS.FilePath> src)
         {
             var dst = bag<TextGrid>();
-            root.iter(src, path => {
+            iter(src, path => {
                 using var reader = path.Reader();
                 var attempt = parse(reader);
                 if(attempt)
@@ -124,7 +124,7 @@ namespace Z0
                 for(var i=0; i<count; i++)
                 {
                     var part = skip(parts,i).Trim();
-                    if(text.nonempty(part))
+                    if(nonempty(part))
                         buffer.Add(part);
                 }
             }
@@ -142,9 +142,9 @@ namespace Z0
         public static ReadOnlySpan<string> header(string src, char delimiter)
         {
             var dst = Span<string>.Empty;
-            if(text.nonempty(src))
+            if(nonempty(src))
             {
-                var parts = @readonly(src.SplitClean(delimiter));
+                var parts = src.SplitClean(delimiter).ToReadOnlySpan();
                 var count = (uint)parts.Length;
                 dst = span<string>(count);
                 for(var i=0; i<count; i++)
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="observer">An optional observer to witness intersting events</param>
         public static ParseResult<TextGrid> parse(StreamReader reader, TextDocFormat? format = null)
         {
-            var rows = root.list<TextRow>();
+            var rows = list<TextRow>();
             var counter = 1u;
             var fmt = format ?? TextDocFormat.Structured();
             var comment = fmt.CommentPrefix;
@@ -247,7 +247,7 @@ namespace Z0
                 {
                     var parts = src.Split(spec);
                     var count = parts.Length;
-                    var buffer = memory.alloc<TextBlock>(count);
+                    var buffer = alloc<TextBlock>(count);
                     ref var target= ref first(buffer);
                     for(var i=0u; i<count; i++)
                         seek(target, i) = new TextBlock(skip(parts,i).Trim());

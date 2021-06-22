@@ -221,7 +221,6 @@ namespace Z0
                 }
             }
 
-
             try
             {
                 Process.Start();
@@ -366,14 +365,14 @@ namespace Z0
         {
             // We use taskkill because it is built into windows, and knows
             // how to kill all subchildren of a process, which important.
-            Debug.WriteLine("Killing process tree " + ProcessId + " Cmd: " + _commandLine);
+            term.babble("Killing process tree " + ProcessId + " Cmd: " + _commandLine);
             try
             {
                 ToolCmd.run("taskkill /f /t /pid " + Process.Id).Wait();
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.Message);
+                term.error(e);
             }
 
             int ticks = 0;
@@ -383,8 +382,8 @@ namespace Z0
                 ticks++;
                 if (ticks > 100)
                 {
-                    Debug.WriteLine("ERROR: process is not dead 1 sec after killing " + Process.Id);
-                    Debug.WriteLine("Cmd: " + _commandLine);
+                    term.warn("ERROR: process is not dead 1 sec after killing " + Process.Id);
+                    term.warn("Cmd: " + _commandLine);
                 }
             } while (!Process.HasExited);
 

@@ -11,7 +11,7 @@ namespace Z0
         {
             var name = src.FileName.WithoutExtension;
             var ext = src.Ext;
-            var stamped = file(Z0.text.format("{0}.{1}.{2}", name, root.timestamp(), ext));
+            var stamped = file(string.Format("{0}.{1}.{2}", name, core.timestamp(), ext));
             return src.FolderPath + stamped;
         }
     }

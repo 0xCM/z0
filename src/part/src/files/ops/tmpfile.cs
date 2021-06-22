@@ -7,11 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
+    using Windows;
 
-    partial class text
+    using static Root;
+    using static core;
+
+    partial struct FS
     {
-        [Op]
-        public static StringReader reader(string src)
-            => new StringReader(src);
+        public static FS.FilePath tmpfile()
+            => FS.dir(Path.GetTempPath()) + FS.file(string.Format("{0}.{1}", controller().PartName(), timestamp()));
     }
 }

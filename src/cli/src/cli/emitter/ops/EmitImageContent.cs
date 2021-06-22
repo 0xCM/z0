@@ -18,7 +18,7 @@ namespace Z0
         {
             var dir = Db.TableDir<ImageContentRecord>();
             var flow = Wf.Running($"Clearing content from <{dir}>");
-            var dst = root.list<FS.FilePath>();
+            var dst = list<FS.FilePath>();
             dir.Clear(dst);
             Wf.Ran(flow, $"Cleared <{dst.Count}> files from <{dir}>");
         }
@@ -28,7 +28,7 @@ namespace Z0
             var flow = Wf.Running();
             var pipe = Wf.ProcessContextPipe();
             ClearImageContent();
-            root.iter(Wf.ApiCatalog.Components, c => EmitImageContent(c));
+            iter(Wf.ApiCatalog.Components, c => EmitImageContent(c));
             Wf.Ran(flow);
         }
 
@@ -36,6 +36,7 @@ namespace Z0
         {
             Wf.ImageCsvReader().Load(src);
         }
+
 
         [Op]
         public MemoryRange EmitImageContent(Assembly src)
@@ -49,7 +50,7 @@ namespace Z0
             using var stream = path.Reader();
             using var reader = stream.BinaryReader();
             using var writer = dst.Writer();
-            writer.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
+            writer.WriteLine(string.Concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
             var buffer = alloc<byte>(rowsize);
             var k = Read(reader, buffer);
             var offset = MemoryAddress.Zero;

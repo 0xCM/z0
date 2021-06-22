@@ -23,7 +23,7 @@ namespace Z0
             var count = rows.Length;
             for(var i=0u; i<count; i++)
             {
-                var line = text.line(i, skip(rows,i));
+                var line = TextTools.line(i, skip(rows,i));
                 var processor = Processor(line);
                 var result = processor.Process(line, out var _processed);
                 if(!result)
