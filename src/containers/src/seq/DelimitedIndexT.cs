@@ -16,7 +16,6 @@ namespace Z0
             => new DelimitedIndex<T>(src, delimiter);
     }
 
-
     public readonly struct DelimitedIndex<T> : IIndex<T>, ITextual
     {
         public Index<T> Data {get;}
@@ -37,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DelimitedIndex(T[] src, char delimiter =  FieldDelimiter, int pad = 0)
+        public DelimitedIndex(T[] src, char delimiter = FieldDelimiter, int pad = 0)
         {
             Data = src;
             Delimiter = delimiter;

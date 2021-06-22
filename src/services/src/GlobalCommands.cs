@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static core;
@@ -15,8 +13,7 @@ namespace Z0
     [CmdDispatcher]
     public class GlobalCommands : AppService<GlobalCommands>, ICmdDispatcher
     {
-        CmdRunnerLookup Lookup;
-
+        CmdDispatcher Dispatcher;
 
         public GlobalCommands()
         {
@@ -24,11 +21,11 @@ namespace Z0
 
         protected override void Initialized()
         {
-            Lookup = Cmd.lookup(GetType());
+            Dispatcher = Cmd.dispatcher(this);
         }
 
         [CmdOp("show-commands")]
-        public Outcome ShowCommands(params object[] args)
+        public Outcome ShowCommands(CmdArgs args)
         {
             var ops = Cmd.cmdops(Wf.Components).View;
             var count = ops.Length;
@@ -41,7 +38,7 @@ namespace Z0
         }
 
         [CmdOp("emit-metadata-sets")]
-        public Outcome EmitMetadataSets(params object[] args)
+        public Outcome EmitMetadataSets(CmdArgs args)
         {
             var options = WorkflowOptions.@default();
             Wf.CliEmitter().EmitMetadaSets(options);
@@ -49,35 +46,35 @@ namespace Z0
         }
 
         [CmdOp("emit-api-comments")]
-        public Outcome EmitApiComments(params object[] args)
+        public Outcome EmitApiComments(CmdArgs args)
         {
             Wf.ApiComments().Collect();
             return true;
         }
 
         [CmdOp("emit-api-classes")]
-        public Outcome EmitApiClasses(params object[] args)
+        public Outcome EmitApiClasses(CmdArgs args)
         {
             Wf.ApiCatalogs().EmitApiClasses();
             return true;
         }
 
         [CmdOp("process-intel-sdm")]
-        public Outcome ProcessIntelSdm(params object[] args)
+        public Outcome ProcessIntelSdm(CmdArgs args)
         {
             Wf.IntelSdmProcessor().Run();
             return true;
         }
 
         [CmdOp("emit-call-table")]
-        public Outcome EmitCallTable(params object[] args)
+        public Outcome EmitCallTable(CmdArgs args)
         {
             Wf.AsmCallPipe().EmitRows(Wf.AsmDecoder().Decode(Blocks()));
             return true;
         }
 
         [CmdOp("emit-hex-pack")]
-        public Outcome EmitHexPack(params object[] args)
+        public Outcome EmitHexPack(CmdArgs args)
         {
             var sorted = SortedBlocks();
             Wf.ApiHexPacks().Emit(sorted);
@@ -85,7 +82,7 @@ namespace Z0
         }
 
         [CmdOp("emit-cli-metadata")]
-        public Outcome EmitCliMetadata(params object[] args)
+        public Outcome EmitCliMetadata(CmdArgs args)
         {
             var pipe = Wf.CliEmitter();
             pipe.EmitRowStats(Wf.ApiCatalog.Components, Db.IndexTable<CliRowStats>());
@@ -95,7 +92,7 @@ namespace Z0
         }
 
         [CmdOp("emit-cil-opcodes")]
-        public Outcome EmitCilOpCodes(params object[] args)
+        public Outcome EmitCilOpCodes(CmdArgs args)
         {
             var dst = Db.IndexTable<CilOpCode>();
             TableEmit(Cil.opcodes(), dst);
@@ -103,7 +100,7 @@ namespace Z0
         }
 
         [CmdOp("emit-sym-literals")]
-        public Outcome EmitSymLiterals(params object[] args)
+        public Outcome EmitSymLiterals(CmdArgs args)
         {
             var service = Wf.Symbolism();
             var dst = Db.AppTablePath<SymLiteral>();
@@ -112,7 +109,7 @@ namespace Z0
         }
 
         [CmdOp("update-tool-help")]
-        public Outcome UpdateToolHelpIndex(params object[] args)
+        public Outcome UpdateToolHelpIndex(CmdArgs args)
         {
             var index = Wf.ToolCatalog().UpdateHelpIndex();
             iter(index, entry => Wf.Row(entry.HelpPath));
@@ -120,42 +117,49 @@ namespace Z0
         }
 
         [CmdOp("emit-intrinsics-catalog")]
-        public Outcome EmitIntrinsicsCatalog(params object[] args)
+        public Outcome EmitIntrinsicsCatalog(CmdArgs args)
         {
             Wf.IntelIntrinsics().Emit();
             return true;
         }
 
         [CmdOp("emit-respack")]
-        public Outcome EmitResPack(params object[] args)
+        public Outcome EmitResPack(CmdArgs args)
         {
             Wf.ResPackEmitter().Emit(Blocks());
             return true;
         }
 
         [CmdOp("asm-gen-models")]
-        public Outcome GenInstructionModels(params object[] args)
+        public Outcome GenInstructionModels(CmdArgs args)
         {
             Wf.AsmModelGen().GenModelsInPlace();
             return true;
         }
 
         [CmdOp("asm-gen-models-preview")]
-        public Outcome GenInstructionModelPreview(params object[] args)
+        public Outcome GenInstructionModelPreview(CmdArgs args)
         {
             Wf.AsmModelGen().GenModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
             return true;
         }
 
         [CmdOp("capture-v2")]
-        public Outcome CaptureV2(params object[] args)
+        public Outcome CaptureV2(CmdArgs args)
         {
            Wf.ApiExtractWorkflow().Run();
            return true;
         }
 
+        [CmdOp("emit-xed-cat")]
+        public Outcome EmitXedCat(CmdArgs args)
+        {
+           Wf.IntelXed().EmitCatalog();
+           return true;
+        }
+
         [CmdOp("capture-process")]
-        public Outcome RunMachine(params object[] args)
+        public Outcome RunMachine(CmdArgs args)
         {
             using var machine = MachineRunner.create(Wf);
             machine.Run(WorkflowOptions.@default());
@@ -163,35 +167,22 @@ namespace Z0
         }
 
         [CmdOp("capture")]
-        public Outcome CaptureV1(params object[] args)
+        public Outcome CaptureV1(CmdArgs args)
         {
             var result = Capture.run();
             return true;
         }
 
-        public Outcome Dispatch(string command, params object[] args)
-        {
-            try
-            {
-                if(Lookup.Find(command, out var method))
-                {
-                    return (Outcome)method.Invoke(this, args);
-                }
-                else
-                {
-                    return (false, string.Format("Command '{0}' unrecognized", command));
-                }
-            }
-            catch(Exception e)
-            {
-                return e;
-            }
-        }
+        public Outcome Dispatch(string command, CmdArgs args)
+            => Dispatcher.Dispatch(command,args);
+
+        public Outcome Dispatch(string command)
+            => Dispatcher.Dispatch(command);
 
         public ReadOnlySpan<string> Supported
         {
             [MethodImpl(Inline)]
-            get => Lookup.Specs;
+            get => Dispatcher.Supported;
         }
 
         ReadOnlySpan<ApiCodeBlock> Blocks()

@@ -6,7 +6,7 @@ namespace Z0
 {
     using static core;
 
-    using static Z0.Lang.CSharpModels.KewordLiterals;
+    using static CsPatterns;
 
     public class AsciByteSpans : Service<AsciByteSpans>
     {
@@ -39,7 +39,7 @@ namespace Z0
         {
             var data = spec.Data.View;
             var size = spec.DataSize;
-            var left = text.buffer();
+            var left = TextTools.buffer();
             var modifiers = spec.IsStatic ? string.Format("{0} {1}", @public, @static) : @public;
             left.Append(modifiers);
             left.Append(Chars.Space);
@@ -47,7 +47,7 @@ namespace Z0
             left.Append(Chars.Space);
             left.Append(spec.Name);
 
-            var content = text.buffer();
+            var content = TextTools.buffer();
             content.Append(lbrace);
 
             for(var i=0; i<size; i++)
@@ -61,7 +61,7 @@ namespace Z0
 
             content.AppendFormat("{0}{1}", rbrace, semi);
 
-            var right = text.buffer();
+            var right = TextTools.buffer();
             right.Append(string.Concat(string.Format("new {0}", spec.CellType), RP.bracket(size), content.Emit()));
 
             dst.IndentLine(indent, Assign.Format(left.Emit(), right.Emit()));

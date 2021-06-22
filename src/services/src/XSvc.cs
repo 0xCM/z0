@@ -9,10 +9,8 @@ namespace Z0
     [ApiHost]
     public static partial class XSvc
     {
-
         [Op]
         public static GlobalCommands GlobalCommands(this IWfRuntime wf)
             => Svc.GlobalCommands.create(wf);
     }
-
 }

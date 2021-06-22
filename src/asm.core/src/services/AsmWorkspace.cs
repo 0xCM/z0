@@ -81,18 +81,26 @@ namespace Z0.Asm
         public FS.FilePath BinPath(string id)
             =>  Bin() + FS.file(id, FS.Bin);
 
+        public FS.FolderPath Lists()
+            => Output() + FS.folder("list");
+
+        public FS.FilePath ListPath(string id)
+            => Lists() + FS.file(id, FS.ext("list.asm"));
+
         public FS.FilePath DisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
             => Disassembly() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
 
-        public AsmToolchainSpec ToolchainSpec(ToolId assembler, ToolId disassembler, string id)
+        public AsmToolchainSpec ToolchainSpec(ToolId assembler, ToolId disassembler, string id, AsmBinKind bk = AsmBinKind.bin)
         {
             var spec = new AsmToolchainSpec();
             spec.Assembler = assembler;
             spec.Disassembler = disassembler;
             spec.AsmPath = SourcePath(id);
             spec.BinPath = BinPath(id);
+            spec.BinKind = bk;
             spec.DisasmPath = DisasmPath(id, disassembler);
             spec.Analysis = Analysis();
+            spec.ListPath = ListPath(id);
             return spec;
         }
     }

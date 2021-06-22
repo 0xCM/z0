@@ -189,7 +189,6 @@ namespace Z0
         public static string PublicStaticOneLineFunc(string ret, string name, string ops, string body)
             => string.Format(L.PublicStaticOneLineFunc, ret, name, ops, body);
 
-
         public static RenderPattern<string> ReadOnlySpanTypePattern => "ReadOnlySpan<{0}>";
 
         public static RenderPattern<string,string> ExpressionBody => "{0} => {1}";

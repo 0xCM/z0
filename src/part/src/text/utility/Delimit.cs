@@ -14,7 +14,7 @@ namespace Z0
 
     partial class XText
     {
-         [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         static int width<E>(E field)
             where E : unmanaged
         {

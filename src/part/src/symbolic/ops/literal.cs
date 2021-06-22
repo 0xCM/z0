@@ -25,12 +25,11 @@ namespace Z0
             dst.Component = typeof(E).Assembly;
             dst.DataType = ClrPrimitives.kind(type);
             dst.Description = src.Description;
-            dst.DirectValue = src.Kind;
             dst.ScalarValue = src.Value;
             dst.Identity = src.Identity;
             dst.Name = src.Name;
             dst.Position = (ushort)src.Key.Value;
-            dst.Symbol = src.Expr.Format();
+            dst.Symbol = (src.Kind, src.Expr.Format());
             dst.Type = src.Type;
             dst.Hidden = src.Hidden;
             return ref dst;

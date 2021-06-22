@@ -34,12 +34,12 @@ namespace Z0
             =>(uint2)a | ((uint2)b << 1);
 
         /// <summary>
-        /// Produces a <see cref='T.uint8T'/> value by contcatenating the operand-suppled bits
+        /// Produces a <see cref='T.eight'/> value by contcatenating the operand-suppled bits
         /// </summary>
         /// <param name="a">Source bit 0</param>
         /// <param name="b">Source bits 1-7</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint1 a, uint7 b)
+        public static eight join(uint1 a, uint7 b)
             => movzx(a, w8) | (movzx(b, w8) << 1);
 
         /// <summary>
@@ -70,44 +70,44 @@ namespace Z0
         /// <param name="c">Source bits 4-5</param>
         /// <param name="d">Source bits 6-7</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint2 a, uint2 b, uint2 c, uint2 d)
+        public static eight join(uint2 a, uint2 b, uint2 c, uint2 d)
             => movzx(a, w8) | (movzx(b, w8) << 2) | (movzx(c, w8) << 4) | (movzx(d, w8) << 6);
 
         /// <summary>
-        /// Produces a <see cref='uint8T'/> value by contcatenating the operand-suppled bits
+        /// Produces a <see cref='eight'/> value by contcatenating the operand-suppled bits
         /// </summary>
         /// <param name="a">The lo bits</param>
         /// <param name="b">The hi bits</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint2 a, uint6 b)
+        public static eight join(uint2 a, uint6 b)
             => movzx(a, w8) | (movxz(b, w8) << 2);
 
         /// <summary>
-        /// Produces a <see cref='uint8T'/> value by contcatenating the operand-suppled bits
+        /// Produces a <see cref='eight'/> value by contcatenating the operand-suppled bits
         /// </summary>
         /// <param name="a">The lo bits</param>
         /// <param name="b">The hi bits</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint3 a, uint6 b)
+        public static eight join(uint3 a, uint6 b)
             => movzx(a, w8) | (movxz(b, w8) << 3);
 
         /// <summary>
-        /// Produces a <see cref='uint8T'/> value by contcatenating the operand-suppled bits
+        /// Produces a <see cref='eight'/> value by contcatenating the operand-suppled bits
         /// </summary>
         /// <param name="a">Source bits 0-2</param>
         /// <param name="b">Source bits 3-5</param>
         /// <param name="c">Source bits 6-7</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint3 a, uint3 b, uint2 c)
+        public static eight join(uint3 a, uint3 b, uint2 c)
             => movzx(a, w8) | (movzx(b, w8) << 3) | (movzx(c, w8) << 6);
 
         /// <summary>
-        /// Produces a <see cref='uint8T'/> value by contcatenating the operand-suppled bits
+        /// Produces a <see cref='eight'/> value by contcatenating the operand-suppled bits
         /// </summary>
         /// <param name="lo">The lo bits</param>
         /// <param name="hi">The hi bits</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint4 lo, uint4 hi)
+        public static eight join(uint4 lo, uint4 hi)
             => movzx(lo, w8) | (movzx(hi, w8) << 4);
 
         /// <summary>
@@ -145,30 +145,30 @@ namespace Z0
                  ));
 
         /// <summary>
-        /// Produces a <see cref='uint8T'/> value by contcatenating the operand-suppled bits
+        /// Produces a <see cref='eight'/> value by contcatenating the operand-suppled bits
         /// </summary>
         /// <param name="lo">The lo bits</param>
         /// <param name="hi">The hi bits</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint5 lo, uint3 hi)
+        public static eight join(uint5 lo, uint3 hi)
             => movzx(lo, w8) | (movzx(hi, w8) << 5);
 
         /// <summary>
-        /// Produces a <see cref='uint8T'/> value by contcatenating the operand-suppled bits
+        /// Produces a <see cref='eight'/> value by contcatenating the operand-suppled bits
         /// </summary>
         /// <param name="lo">The lo bits</param>
         /// <param name="hi">The hi bits</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint6 lo, uint2 hi)
+        public static eight join(uint6 lo, uint2 hi)
             => movxz(lo, w8) | (movzx(hi, w8) << 6);
 
         /// <summary>
-        /// Produces a <see cref='uint8T'/> value by contcatenating the operand-suppled bits
+        /// Produces a <see cref='eight'/> value by contcatenating the operand-suppled bits
         /// </summary>
         /// <param name="lo">The lo bits</param>
         /// <param name="hi">The hi bits</param>
         [MethodImpl(Inline), Op]
-        public static uint8T join(uint7 lo, uint1 hi)
+        public static eight join(uint7 lo, uint1 hi)
             => movzx(lo, w8) | (movzx(hi,w8) << 7);
     }
 }

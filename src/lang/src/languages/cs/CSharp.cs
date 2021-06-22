@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using static CSharpModels;
+    using static CsModels;
 
-    public readonly partial struct CSharpModels
-    {
-
-    }
     [ApiHost]
     public readonly partial struct CSharp : ILanguage<CSharp>
     {
@@ -20,7 +16,7 @@ namespace Z0.Lang
         public static string build<T>(Identifier f, SwitchCases<T> src)
             where T : unmanaged
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             dst.AppendLineFormat("public void {0}");
             dst.AppendLine("{");
             for(var i=0u; i<src.Count; i++)

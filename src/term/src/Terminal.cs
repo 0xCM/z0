@@ -234,7 +234,7 @@ namespace Z0
                     }
 
                     lock(ErrLock)
-                        File.AppendText(rendered + "\r\n");
+                        File.AppendAllText(ErrorLogPath, rendered + "\r\n");
                 }
             }
         }

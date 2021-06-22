@@ -19,7 +19,7 @@ namespace Z0.Asm
         public AsmCatalogArchive Archive(FS.FolderPath root)
             => new AsmCatalogArchive(root);
 
-        public void EmitAssets(FS.FolderPath root)
+        public void EmitAssetIndex(FS.FolderPath root)
         {
             var assets = AsmData.Assets;
             var host = assets.DataSource;
@@ -40,6 +40,6 @@ namespace Z0.Asm
         }
 
         public void EmitAssets()
-            => EmitAssets(Db.Root);
+            => EmitAssetIndex(Db.Root);
     }
 }

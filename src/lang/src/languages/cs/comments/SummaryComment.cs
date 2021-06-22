@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Root;
 
-    partial struct CSharpModels
+    partial struct CsModels
     {
         /// <summary>
         /// Represents me
@@ -39,13 +39,13 @@ namespace Z0.Lang
             public void Render(uint indent, ITextBuffer dst)
             {
                 dst.IndentLine(indent,"/// <summary>");
-                dst.IndentLineFormat(indent,"/// {0}", text.ifempty(Content, "Undocumented"));
+                dst.IndentLineFormat(indent,"/// {0}", TextTools.ifempty(Content, "Undocumented"));
                 dst.IndentLine(indent,"/// </summary>");
             }
 
             public string Format(uint indent)
             {
-                var dst = text.buffer();
+                var dst = TextTools.buffer();
                 Render(indent,dst);
                 return dst.Emit();
             }
@@ -63,10 +63,5 @@ namespace Z0.Lang
             public static SummaryComment Empty
                 => new SummaryComment(EmptyString);
         }
-    }
-
-    partial struct CSharp
-    {
-
     }
 }

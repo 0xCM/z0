@@ -13,11 +13,11 @@ namespace Z0
     partial struct BitNumbers
     {
         [MethodImpl(Inline), Op]
-        public static uint8T movlo(uint4 src, uint8T dst)
+        public static eight movlo(uint4 src, eight dst)
             => movzx(dst.Hi, w8) | movzx(src, w8);
 
         [MethodImpl(Inline), Op]
-        public static uint8T movhi(uint4 src, uint8T dst)
+        public static eight movhi(uint4 src, eight dst)
             => movzx(dst.Lo, w8) | movzx(src, w8);
     }
 }

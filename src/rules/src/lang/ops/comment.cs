@@ -11,11 +11,6 @@ namespace Z0.Lang
 
     partial struct lang
     {
-        /// <summary>
-        /// Defines a <see cref='Comment'/>
-        /// </summary>
-        /// <param name="kind">The sort of comment to define</param>
-        /// <param name="content">The comment body</param>
         [MethodImpl(Inline), Op]
         public static Comment comment(CommentKind kind, Text content)
             => new Comment(kind, content);

@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0.Asm
 {
     using System;
 
     using static Pow2x32;
 
     [Flags]
-    public enum NasmOutFileKind : uint
+    public enum AsmBinKind : uint
     {
         None = 0,
 
@@ -62,7 +62,7 @@ namespace Z0.Tools
         dbg = P2ᐞ15,
     }
 
-    public enum NasmOutFileIndex : byte
+    public enum AsmBinIndex : byte
     {
         bin = 0,
 

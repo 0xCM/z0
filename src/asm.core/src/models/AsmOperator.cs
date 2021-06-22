@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Root;
 
-    using K = AsmOperatorKind;
-
     public readonly struct AsmOperator
     {
         public AsmOperatorKind Kind {get;}
@@ -37,12 +35,11 @@ namespace Z0.Asm
     {
         static AsmOperatorTable()
         {
-            Entries = core.alloc<string>(3);
+            init(3);
             var i=0;
-            Entries[i++] = nameof(K.None);
-            Entries[i++] = nameof(K.Add);
-            Entries[i++] = nameof(K.Sub);
+            Entries[i++] = "";
+            Entries[i++] = "+";
+            Entries[i++] = "-";
         }
-
     }
 }

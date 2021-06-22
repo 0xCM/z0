@@ -26,7 +26,7 @@ namespace Z0
         internal readonly T data;
 
         [MethodImpl(Inline)]
-        internal uint4(uint8T src)
+        internal uint4(eight src)
             => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
@@ -119,15 +119,15 @@ namespace Z0
             => (int)Hash;
 
         [MethodImpl(Inline)]
-        public static implicit operator uint8T(U src)
-            => new uint8T(src.data);
+        public static implicit operator eight(U src)
+            => new eight(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator uint5(U src)
             => new uint5(src.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator U(uint8T src)
+        public static implicit operator U(eight src)
             => new U(src);
 
         [MethodImpl(Inline)]

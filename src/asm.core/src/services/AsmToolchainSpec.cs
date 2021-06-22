@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     public struct AsmToolchainSpec
     {
@@ -14,8 +14,12 @@ namespace Z0
 
         public FS.FilePath BinPath;
 
+        public AsmBinKind BinKind;
+
         public FS.FilePath DisasmPath;
 
         public FS.FolderPath Analysis;
+
+        public FS.FilePath ListPath;
     }
 }

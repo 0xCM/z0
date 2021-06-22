@@ -4,14 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-
     using static Root;
+
     partial struct lang
     {
         [Op, Closures(Closure)]
-        public static Enumeration<T> enumeration<T>(string ns, string name, ConstantKind dt, string desc, params EnumLiteral<T>[] literals)
+        public static EnumType<T> enumtype<T>(string ns, string name, ConstantKind dt, string desc, params EnumLiteral<T>[] literals)
         {
-            var dst = new Enumeration<T>();
+            var dst = new EnumType<T>();
             dst.Namespace = ns;
             dst.Name = name;
             dst.DataType = dt;
@@ -21,7 +21,7 @@ namespace Z0.Lang
         }
 
         [Op]
-        public static Enumeration<byte> enumeration(string ns, string name, Index<EnumLiteral<byte>> literals, string desc = null)
-            => enumeration<byte>(ns,name, ConstantKind.Int8u, desc ?? EmptyString, literals);
+        public static EnumType<byte> enumtpe(string ns, string name, Index<EnumLiteral<byte>> literals, string desc = null)
+            => enumtype<byte>(ns,name, ConstantKind.Int8u, desc ?? EmptyString, literals);
     }
 }

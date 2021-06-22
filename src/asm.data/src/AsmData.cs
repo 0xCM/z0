@@ -36,7 +36,9 @@ namespace Z0.Asm
 
             public Asset XedInstructionSummary() => Asset("xed-idata.txt");
 
-            public Asset XedChipData() => Asset("xed-cdata.txt");
+            public const string XedChipDataName = "xed-cdata.txt";
+
+            public Asset XedChipData() => Asset(XedChipDataName);
 
             public Asset XedTables() => Asset("xed-tables.txt");
         }

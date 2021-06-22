@@ -43,8 +43,8 @@ namespace Z0
             => recover<byte,uint7>(W7);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<uint8T> bits(N8 n)
-             => recover<byte,uint8T>(W8);
+        public static ReadOnlySpan<eight> bits(N8 n)
+             => recover<byte,eight>(W8);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<SymVal<BitSeq1>> symvals(N1 n)

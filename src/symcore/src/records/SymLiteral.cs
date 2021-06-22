@@ -13,7 +13,6 @@ namespace Z0
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct SymLiteral : IRecord<SymLiteral>
     {
-
         public const string TableId = "symbolic.literals";
 
         public const byte FieldCount = 10;

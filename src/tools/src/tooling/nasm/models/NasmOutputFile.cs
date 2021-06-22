@@ -7,6 +7,8 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Root;
 
     /// <summary>
@@ -16,9 +18,10 @@ namespace Z0.Tools
     {
         public FS.FilePath Path {get;}
 
-        public NasmOutFileKind Kind {get;}
+        public AsmBinKind Kind {get;}
 
-        public NasmOutputFile(FS.FilePath target, NasmOutFileKind kind)
+        [MethodImpl(Inline)]
+        public NasmOutputFile(FS.FilePath target, AsmBinKind kind)
         {
             Path = target;
             Kind = kind;

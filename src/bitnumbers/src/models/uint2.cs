@@ -26,7 +26,7 @@ namespace Z0
         internal readonly T data;
 
         [MethodImpl(Inline)]
-        internal uint2(uint8T src)
+        internal uint2(eight src)
             => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
@@ -173,7 +173,7 @@ namespace Z0
             => uint2(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator U(uint8T src)
+        public static implicit operator U(eight src)
             => new U(src);
 
         [MethodImpl(Inline)]
@@ -197,8 +197,8 @@ namespace Z0
             => new uint7(src.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator uint8T(U src)
-            => new uint8T(src.data);
+        public static implicit operator eight(U src)
+            => new eight(src.data);
 
         [MethodImpl(Inline)]
         public static explicit operator bit(U src)

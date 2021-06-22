@@ -7,14 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Lang;
-
     using static Root;
     using static core;
 
     using C = Chars;
 
-    using static Z0.Lang.CSharpModels.KewordLiterals;
+    using static CsPatterns;
 
     public class AsciLookups : Service<AsciLookups>
     {
@@ -27,7 +25,6 @@ namespace Z0
         public static RenderPattern<string> ReadOnlySpanTypeName => "ReadOnlySpan<{0}>";
 
         public static RenderPattern<string,string> Assign => "{0} => {1}";
-
 
         AsciBytes AsciBytes;
 

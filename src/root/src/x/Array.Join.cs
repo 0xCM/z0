@@ -11,6 +11,16 @@ namespace Z0
 
     partial class XArray
     {
+        public static bool AnyTest<T>(this T[] src, Func<T,bool> predicate)
+        {
+            foreach(var item in src)
+            {
+                if(predicate(item))
+                    return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Defines an array-specific join operator
         /// </summary>

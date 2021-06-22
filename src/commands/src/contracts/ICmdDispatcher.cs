@@ -8,7 +8,9 @@ namespace Z0
 
     public interface ICmdDispatcher
     {
-        Outcome Dispatch(string command, params object[] args);
+        Outcome Dispatch(string command, CmdArgs args);
+
+        Outcome Dispatch(string command);
 
         ReadOnlySpan<string> Supported {get;}
     }

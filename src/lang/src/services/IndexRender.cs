@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static core;
-
     using Z0.Lang;
 
+    using static Root;
+    using static core;
     using static CsPatterns;
+
     using CsP = CsPatterns;
 
     public class IndexRender : Service<IndexRender>
@@ -45,7 +45,7 @@ namespace Z0
 
         [Op]
         public void RenderIndex<T>(uint indent, ByteSpanSpec<T> spec, ITextBuffer dst, bool compact)
-            where T : unmanaged, Enum
+            where T : unmanaged
         {
             var payload = TextTools.buffer();
             RenderPayload(indent, spec, payload, compact);
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         public void RenderPayload<T>(uint indent, in ByteSpanSpec<T> spec, ITextBuffer dst, bool compact)
-            where T : unmanaged, Enum
+            where T : unmanaged
         {
             dst.Append(Open());
             if(compact)

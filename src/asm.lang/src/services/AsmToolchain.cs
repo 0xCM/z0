@@ -30,17 +30,18 @@ namespace Z0.Asm
             }
 
             var tool = Wf.Nasm();
-            var target = tool.OutFile(spec.BinPath);
-            var cmdline = tool.CmdLine(spec.AsmPath, target);
+            var target = tool.OutFile(spec.BinPath, spec.BinKind);
+            var cmdline = tool.cmd(spec.AsmPath, target, spec.ListPath);
             var running = Wf.Running(cmdline);
             var process = ToolCmd.run(cmdline, OnStatus, OnError);
             process.Wait();
 
-            //iter(stdout, line => Wf.Row(line));
-
             Wf.Ran(running);
 
-            return errout.Count == 0;
+            if(errout.Count == 0)
+                return true;
+            else
+                return (false, errout.Delimit(Chars.NL).Format());
         }
 
         public Outcome Disassemble(in AsmToolchainSpec spec)
@@ -77,8 +78,6 @@ namespace Z0.Asm
             var count = collected.Length;
             var buffer = alloc<TextLine>(count);
             Lines.lines(collected, buffer);
-
-            //iter(buffer, line => Wf.Row(line));
 
             Wf.Ran(running);
             return errout.Count == 0;

@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="idx">The index</param>
         [TextUtility]
         public static string LeftOfIndex(this string src, int idx)
-            => (idx >= src.Length - 1) ? EmptyString : src.Substring(0, idx);
+            => src.Substring(0, idx);
     }
 }

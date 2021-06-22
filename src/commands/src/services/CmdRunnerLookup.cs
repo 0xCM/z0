@@ -40,10 +40,9 @@ namespace Z0
         public bool Find(string spec, out MethodInfo runner)
         {
             runner = default;
-            if(Sealed)
+            if(!Sealed)
                 return false;
-            else
-                return Data.TryGetValue(spec, out runner);
+            return Data.TryGetValue(spec, out runner);
         }
 
         public CmdRunnerLookup Seal()

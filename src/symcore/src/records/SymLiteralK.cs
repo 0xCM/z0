@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct SymLiteral<E> : IComparableRecord<SymLiteral<E>>
+    public struct SymLiteral<K> : IComparableRecord<SymLiteral<K>>
     {
         public const string TableId = "symbolic.literals.typed";
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <summary>
         /// The symbol, if so attributed, otherwise, the identifier
         /// </summary>
-        public SymExpr Symbol;
+        public SymExpr<K> Symbol;
 
         /// <summary>
         /// The literal's primitive classifier
@@ -61,17 +61,12 @@ namespace Z0
         public TextBlock Description;
 
         /// <summary>
-        /// The typed value
-        /// </summary>
-        public E DirectValue;
-
-        /// <summary>
         /// A unique identifier
         /// </summary>
         public SymIdentity Identity;
 
         [MethodImpl(Inline)]
-        public int CompareTo(SymLiteral<E> src)
+        public int CompareTo(SymLiteral<K> src)
             => Identity.CompareTo(src.Identity);
     }
 }

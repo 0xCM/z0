@@ -251,8 +251,8 @@ namespace Z0
                 return cast<S>(Q.uint6.MaxLiteral);
             else if(typeof(S) == typeof(uint7))
                 return cast<S>(Q.uint7.MaxLiteral);
-            else if(typeof(S) == typeof(uint8T))
-                return cast<S>(Q.uint8T.MaxLiteral);
+            else if(typeof(S) == typeof(eight))
+                return cast<S>(Q.eight.MaxLiteral);
             else
                 return maxval<S>(w16);
         }

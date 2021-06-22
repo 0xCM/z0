@@ -82,10 +82,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public uint8T View(W8 w, ByteSize offset)
+        public eight View(W8 w, ByteSize offset)
         {
             math.divmod(offset, CellWidth, out var d, out var r);
-            return (uint8T)Bits.bitseg(skip(Data,d), (byte)r, 8);
+            return (eight)Bits.bitseg(skip(Data,d), (byte)r, 8);
         }
 
         /// <summary>

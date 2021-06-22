@@ -4,24 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-
-    /// <summary>
-    /// Defines a c/c++/c# style enumeration
-    /// </summary>
-    public struct Enumeration
-    {
-        public string Namespace;
-
-        public string Name;
-
-        public ConstantKind DataType;
-
-        public string Description;
-
-        public Index<EnumLiteral> Literals;
-    }
-
-    public struct Enumeration<T>
+    public struct EnumType<T>
     {
         public string Namespace;
 
@@ -33,9 +16,9 @@ namespace Z0.Lang
 
         public Index<EnumLiteral<T>> Literals;
 
-        public Enumeration Untype()
+        public EnumType Untype()
         {
-            var dst = new Enumeration();
+            var dst = new EnumType();
             dst.Namespace = Namespace;
             dst.Name = Name;
             dst.DataType = DataType;
@@ -44,7 +27,7 @@ namespace Z0.Lang
             return dst;
         }
 
-        public static implicit operator Enumeration(Enumeration<T> src)
+        public static implicit operator EnumType(EnumType<T> src)
             => src.Untype();
     }
 }

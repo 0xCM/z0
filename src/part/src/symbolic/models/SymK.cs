@@ -43,7 +43,7 @@ namespace Z0
         {
             Identity = src.Identity;
             Key = index;
-            Kind = src.DirectValue;
+            Kind = src.Symbol.Kind;
             Name = src.Name;
             Expr = src.Symbol;
             Description = src.Description;

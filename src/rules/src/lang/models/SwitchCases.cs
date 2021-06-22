@@ -21,7 +21,7 @@ namespace Z0.Lang
         {
             Branches = branches;
             Targets = targets;
-            //root.require(Branches.Length == Targets.Length, () => "Branch/Target lenths must match");
+            Require.invariant(Branches.Length == Targets.Length, () => "Branch/Target lenths must match");
         }
 
         public uint Count

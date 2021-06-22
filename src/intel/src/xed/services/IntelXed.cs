@@ -14,9 +14,12 @@ namespace Z0.Asm
     {
         AsmCatalogArchive Archive;
 
+        XedChipIsaParser ChipIsaParser;
+
         protected override void OnInit()
         {
             Archive = new AsmCatalogArchive(Db.AsmCatalogRoot());
+            ChipIsaParser = XedChipIsaParser.create(Wf);
         }
 
         public void EmitCatalog()
@@ -25,17 +28,21 @@ namespace Z0.Asm
             EmitFormSummaries();
             EmitFormDetails();
             EmitSymCatalog();
-            EmitFormAspects();
+            var aspects = EmitFormAspects();
+            Partition(aspects);
         }
 
         public ReadOnlySpan<string> MnemonicNames()
             => IClasses().Storage.Select(x => x.Expr.Text);
 
-        public void EmitFormAspects()
+        public Outcome ParseChipMap(FS.FilePath src, out ChipMap dst)
         {
-            var pipe = Wf.XedFormPipe();
-            var aspects = pipe.EmitFormAspects();
-            var aix = aspects.Select(x => (x.Value, x.Index)).ToDictionary();
+            return ChipIsaParser.Parse(src, out dst);
+        }
+
+        public ReadOnlySpan<FormPartiton> Partition(Index<XedFormAspect> src)
+        {
+            var aix = src.Select(x => (x.Value, x.Index)).ToDictionary();
             var parts = ComputePartitions();
             var count = parts.Length;
             for(var i=0; i<count; i++)
@@ -50,6 +57,66 @@ namespace Z0.Asm
                         Wf.Error(string.Format("Index for {0} not found", a));
                 }
             }
+            return parts;
+        }
+
+        public Index<XedFormAspect> EmitFormAspects()
+        {
+            var duplicates = dict<Hash32,uint>();
+            var aspects = ComputeFormAspects();
+            var count = (uint)aspects.Length;
+            var buffer = alloc<XedFormAspect>(count);
+            var paths = new AsmCatalogArchive(Db.AsmCatalogRoot());
+            var path = paths.XedFormAspectPath();
+            var formatter = Tables.formatter<XedFormAspect>();
+            var emitting = Wf.EmittingTable<XedFormAspect>(path);
+            using var writer = path.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0u; i<count; i++)
+            {
+                ref var record = ref seek(buffer,i);
+                ref readonly var aspect = ref skip(aspects,i);
+                record.Index = i;
+                record.Value = aspect.Value;
+                record.Hash = aspect.GetHashCode();
+                if(duplicates.TryGetValue(record.Hash, out var c))
+                    duplicates[record.Hash] = ++c;
+                else
+                    duplicates.Add(record.Hash, 0);
+                writer.WriteLine(formatter.Format(record));
+            }
+
+            var perfect = !duplicates.Values.Array().AnyTest(x => x > 0);
+            if(perfect)
+                Wf.Status($"Hash Perfect");
+            else
+                Wf.Warn("Hash Imperfect");
+
+            Wf.EmittedTable(emitting, count);
+            return buffer;
+        }
+
+        public FS.FilePath EmitChipIsaAsset()
+        {
+            var asset = AsmData.Assets.XedChipData();
+            var path = Db.ExternalDataPath(FS.file(AsmData.AssetData.XedChipDataName));
+            EmitChipIsaAsset(path);
+            return path;
+        }
+
+        public void EmitChipIsaAsset(FS.FilePath dst)
+        {
+            var asset = AsmData.Assets.XedChipData();
+            EmitAsset(asset,dst);
+        }
+
+        void EmitAsset(Asset src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingFile(dst);
+            Utf8.decode(src.ResBytes, out var content);
+            using var writer = dst.AsciWriter();
+            writer.Write(content);
+            Wf.EmittedFile(flow, content.Length);
         }
 
         public ReadOnlySpan<FormAspect> ComputeFormAspects()
@@ -473,7 +540,7 @@ namespace Z0.Asm
                 ref var parts = ref partition.Aspects[1];
                 for(var i=0; i<count; i++)
                 {
-
+                    ref readonly var part = ref skip(parts,i);
                 }
                 partition.Complete = true;
             }

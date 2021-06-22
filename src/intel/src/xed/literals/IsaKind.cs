@@ -7,7 +7,6 @@ namespace Z0
 {
     partial struct XedModels
     {
-
         [SymbolSource(xed)]
         public enum IsaKind : byte
         {

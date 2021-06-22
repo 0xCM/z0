@@ -377,17 +377,13 @@ namespace Z0.Asm
         void CheckCpuid()
         {
             var descriptor = Parts.AsmCases.Assets.CpuIdRows();
-            var content = text.utf8(descriptor.ResBytes);
+            Utf8.decode(descriptor.ResBytes, out var content);
             var pipe = Wf.AsmRowPipe();
             using var reader = content.Reader();
             var rows = pipe.LoadCpuIdRows(reader);
             var formatter = rows.RecordFormatter(CpuIdRow.RenderWidths);
             Wf.Row(formatter.FormatHeader());
             core.iter(rows, row => Wf.Row(formatter.Format(row)));
-
-            // var buffer = text.buffer();
-            // FormatBits(rows, buffer);
-
         }
 
         void EmitAsmAsssetCatalog()
@@ -663,21 +659,6 @@ namespace Z0.Asm
             }
         }
 
-
-        void FindInstructionTables()
-        {
-            var ws = Wf.AsmWorkspace();
-            var src = ws.RefDoc("sdm-2", FS.Txt);
-            using var map = src.MemoryMap();
-            var data = map.View();
-            var size = data.Length;
-            //var match = IntelSdm.InstructionTable.HeaderMatch;
-            for(var i=0; i<size; i++)
-            {
-
-            }
-        }
-
         void ProcessManuals()
         {
             const char c = '•';
@@ -937,23 +918,26 @@ namespace Z0.Asm
         string RenderAsciByteSpan(Identifier name, string data)
         {
             var bytespans = Wf.AsciByteSpans();
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             bytespans.Render(8, name, data, dst);
             return dst.Emit();
         }
 
-        void CheckAsciByteSpans()
+        void EmitAsciBytes(Identifier name, string content, FS.FilePath dst)
         {
-            var dst = Db.AppLog("AsciBytes", FS.Cs);
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            var content = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            var bytespan = RenderAsciByteSpan("Uppercase", content);
+            var bytespan = RenderAsciByteSpan(name, content);
             Wf.Row(bytespan);
             writer.WriteLine(bytespan);
-            Wf.EmittedFile(flow,0);
+            Wf.EmittedFile(flow,content.Length);
         }
 
+        public void EmitAsciBytes()
+        {
+            var name = "Uppercase";
+            EmitAsciBytes(name, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", Db.AppLog(name, FS.Cs));
+        }
         public void LoadForms()
         {
             var catalog = Wf.StanfordCatalog();
@@ -974,16 +958,51 @@ namespace Z0.Asm
 
         }
 
-        unsafe void ShowOps()
+        unsafe void ShowAsmOperators()
         {
             var lookup = AsmOperatorTable.create().Lookup;
             iter(lookup.View, entry => Wf.Row(entry));
-
         }
 
+        void MapChips()
+        {
+            var xed = Wf.IntelXed();
+            var path = xed.EmitChipIsaAsset();
+            var outcome = xed.ParseChipMap(path, out var map);
+            if(outcome.Fail)
+                Wf.Error(outcome.Message);
+            else
+            {
+                var kinds = map.Kinds;
+                var chips = map.Chips;
+                foreach(var c in chips)
+                {
+                    var mapped = map[c];
+                    var delimited = mapped.Delimit(Chars.Comma).Format();
+                    Wf.Row(string.Format("{0}:{1}", c, delimited));
+                }
+            }
+        }
+
+        void Dispatch(string cmd)
+        {
+            var commands = Wf.GlobalCommands();
+            var result = commands.Dispatch(cmd);
+            if(result.Fail)
+                Wf.Error(result.Message);
+        }
+
+        void Dispatch()
+        {
+            var args = Wf.Args;
+            iter(args, arg => Dispatch(arg));
+
+
+        }
         public void Run()
         {
-            //EmitAsciByteSpan("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            Dispatch();
+
             //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs")
             // var part = PartId.Math;
             // var log = Db.AppLog(string.Format("{0}.pdbinfo", part.Format()), FS.Csv);
@@ -999,7 +1018,7 @@ namespace Z0.Asm
             //ParseDisassembly();
             //CheckDocProcessor();
             //CheckAsciByteSpans();
-            Wf.GlobalCommands().CaptureV2();
+            //Wf.GlobalCommands().CaptureV2(CmdArgs.Empty);
             //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
             //EmitXedCatalog();
             //CheckAsciLookups();

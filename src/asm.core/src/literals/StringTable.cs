@@ -9,24 +9,6 @@ namespace Z0
 
     using static Root;
 
-    public abstract class StringTable<T>
-        where T : StringTable<T>, new()
-    {
-        public static T create() => new T();
-
-        protected static Index<string> Entries;
-
-        protected static MemoryAddress Location
-            => core.address(Entries);
-
-        public StringTable Lookup
-        {
-            [MethodImpl(Inline)]
-            get => new StringTable(Entries);
-        }
-
-    }
-
     public readonly struct StringTable
     {
         readonly Index<string> Entries;
@@ -36,7 +18,6 @@ namespace Z0
         {
             Entries = entries;
         }
-
 
         public ReadOnlySpan<string> View
         {

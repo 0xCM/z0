@@ -63,7 +63,7 @@ namespace Z0
         {
             var src = typeof(E);
             ClrAssemblyName component = src.Assembly;
-            var fields = @readonly(src.LiteralFields());
+            var fields = src.LiteralFields().ToReadOnlySpan();
             var count = fields.Length;
             var dst = span<SymLiteral<E>>(count);
             var kind = ClrPrimitives.kind(src);
@@ -74,14 +74,14 @@ namespace Z0
                 var tag = f.Tag<SymbolAttribute>();
                 ref var row = ref seek(dst,i);
                 var expr = tag ? tag.Value.Symbol : f.Name;
+                var litval = (E)f.GetRawConstantValue();
                 row.Component = component;
                 row.Type = src.Name;
                 row.DataType = kind;
                 row.Position = i;
                 row.Name = f.Name;
-                row.Symbol = expr;
-                row.DirectValue = (E)f.GetRawConstantValue();
-                row.ScalarValue = Enums.@ulong(kind, row.DirectValue);
+                row.Symbol = (litval,expr);
+                row.ScalarValue = Enums.@ulong(kind, litval);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
                 row.Identity = identity(f, i, expr);
                 row.Hidden = f.Ignored();
