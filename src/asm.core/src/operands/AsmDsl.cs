@@ -4,9 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    [ApiHost]
-    public readonly struct AsmHexCodes
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static math;
+
+    public readonly partial struct AsmDsl
     {
-        public static RexPrefixKind RexW => RexPrefixKind.W;
+
     }
 }

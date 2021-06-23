@@ -16,25 +16,8 @@ namespace Z0
         public static IApiParts parts()
             => parts(controller(), Environment.GetCommandLineArgs());
 
-        public static IApiParts parts(string[] args)
-            => parts(controller(), args);
-
         public static IApiParts parts(Assembly control)
             => new ApiParts(control, array(control.Id()));
-
-        public static IApiParts parts(Assembly control, string[] args)
-        {
-            if(args.Length != 0)
-            {
-                var identifiers = ApiPartIdParser.parse(args);
-                if(identifiers.Length != 0)
-                    return new ApiParts(control, identifiers.ToArray());
-                else
-                    return new ApiParts(control, array<PartId>());
-            }
-
-            return new ApiParts(control, dir(control));
-        }
 
         /// <summary>
         /// Creates a <see cref='ApiParts'/> predicated an optionally-specified <see cref='PartId'/> sequence
@@ -44,6 +27,20 @@ namespace Z0
         /// <param name="identifiers">The desired parts to include, or empty to include all known parts</param>
         public static IApiParts parts(PartId[] identifiers)
             => parts(controller(), identifiers);
+
+        public static IApiParts parts(Assembly control, string[] args)
+        {
+            if(args.Length != 0)
+            {
+                var identifiers = ApiPartIdParser.parse(args);
+                if(identifiers.Length != 0)
+                    return new ApiParts(control, identifiers.ToArray());
+                else
+                    return new ApiParts(control, array<PartId>(control.Id()));
+            }
+
+            return new ApiParts(control, dir(control));
+        }
 
         /// <summary>
         /// Creates a <see cref='ApiParts'/> predicated an optionally-specified <see cref='PartId'/> sequence

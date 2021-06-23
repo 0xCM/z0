@@ -8,16 +8,14 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
     using static core;
-    using static AsmCodes;
 
     [ApiHost]
     public readonly struct AsmSizes
     {
         [MethodImpl(Inline), Op]
-        public static SizeOverrides overrides(bit opsz, bit adsz)
-            => SizeOverrides.define(opsz,adsz);
+        public static AsmSizeOverrides overrides(bit opsz, bit adsz)
+            => AsmSizeOverrides.define(opsz,adsz);
 
         [MethodImpl(Inline), Op]
         public static AsmOperandSize operand(bit w, bit opsz, bit adsz)
@@ -27,7 +25,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmOperandSize operand(bit w, SizeOverrides sizes)
+        public static AsmOperandSize operand(bit w, AsmSizeOverrides sizes)
             => operand(w, sizes.OperandOverride, sizes.AddressOverride);
 
         [MethodImpl(Inline), Op]
@@ -38,7 +36,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmAddressSize address(bit w, SizeOverrides sizes)
+        public static AsmAddressSize address(bit w, AsmSizeOverrides sizes)
             => address(w,sizes.OperandOverride,sizes.AddressOverride);
 
         static ReadOnlySpan<byte> OperandSizeLookup => new byte[8]{1,1,0,0,2,2,2,2};

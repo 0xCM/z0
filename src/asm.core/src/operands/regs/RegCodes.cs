@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static RegIndex;
 
-    public readonly struct AsmRegCodes
+    public readonly struct RegCodes
     {
         [SymbolSource]
         public enum Gp8 : byte
@@ -745,7 +745,7 @@ namespace Z0.Asm
         }
 
         [SymbolSource]
-        public enum TableReg : byte
+        public enum SPtrReg : byte
         {
             [Symbol("GDTR","The global descriptor table register")]
             gdtr = r0,

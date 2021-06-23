@@ -4,8 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static core;
+    using System;
     using System.Reflection;
+
+
+    using static core;
 
     public readonly struct WfAppLoader
     {
@@ -20,6 +23,9 @@ namespace Z0
 
         public static IWfRuntime load(IApiParts parts, string[] args)
             => create(parts, args);
+
+        public static IWfRuntime load(IApiParts parts)
+            => create(parts, System.Environment.GetCommandLineArgs());
 
         static WfContext context(Assembly control, IApiParts parts, string[] args)
         {

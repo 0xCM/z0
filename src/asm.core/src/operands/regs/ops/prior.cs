@@ -93,5 +93,13 @@ namespace Z0.Asm
                 return RegIndex.r31;
         }
 
+        [MethodImpl(Inline), Op]
+        public static rDb prior(rDb src)
+        {
+            if(math.gt((byte)src.Index, (byte)RegIndex.r0))
+                return emath.dec(src.Index);
+            else
+                return RegIndex.r31;
+        }
     }
 }

@@ -24,13 +24,22 @@ namespace Z0.Asm
             => Kind = api.kind(c, k, w);
 
         public RegIndex Code
-            => api.index(Kind);
+        {
+            [MethodImpl(Inline)]
+            get => api.index(Kind);
+        }
 
         public RegClass Class
-            => api.@class(Kind);
+        {
+            [MethodImpl(Inline)]
+            get => api.@class(Kind);
+        }
 
         public RegWidth Width
-            => api.width(Kind);
+        {
+            [MethodImpl(Inline)]
+            get => api.width(Kind);
+        }
 
         public Identifier Name
             => Kind.ToString();

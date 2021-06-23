@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOpTypes.rDb;
-    using K = AsmRegCodes.DebugReg;
+    using K = RegCodes.DebugReg;
     using api = AsmRegs;
 
     partial struct AsmOpTypes
@@ -46,7 +46,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => asm.reg(src.Width, src.RegClass, src.Index);
+                => api.reg(src.Width, src.RegClass, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)
@@ -57,8 +57,24 @@ namespace Z0.Asm
                 => new G((I)src);
 
             [MethodImpl(Inline)]
+            public static implicit operator G(I src)
+                => new G(src);
+
+            [MethodImpl(Inline)]
+            public static explicit operator byte(G src)
+                => (byte)src.Index;
+
+            [MethodImpl(Inline)]
             public static implicit operator G(Sym<K> src)
                 => new G((I)src.Kind);
+
+            [MethodImpl(Inline)]
+            public static G operator ++(G src)
+                => api.next(src);
+
+            [MethodImpl(Inline)]
+            public static G operator --(G src)
+                => api.prior(src);
         }
 
         public readonly struct db0 : IRegOp64<db0>

@@ -996,9 +996,13 @@ namespace Z0.Asm
         {
             var args = Wf.Args;
             iter(args, arg => Dispatch(arg));
+        }
 
+        void ShowRegNames()
+        {
 
         }
+
         public void Run()
         {
             Dispatch();
@@ -1062,12 +1066,12 @@ namespace Z0.Asm
             // EmitAsmRows(dir);
         }
 
-
         public static void Main(params string[] args)
         {
             try
             {
-                using var wf = WfAppLoader.load(args);
+                var parts = ApiRuntimeLoader.parts(controller(), array<string>());
+                using var wf = WfAppLoader.load(parts);
                 var app = App.create(wf.WithSource(Rng.@default()));
                 app.Run();
 

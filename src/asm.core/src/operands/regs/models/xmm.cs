@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOpTypes.xmm;
-    using K = AsmRegCodes.XmmReg;
+    using K = RegCodes.XmmReg;
 
     using api = AsmRegs;
 
@@ -47,7 +47,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => asm.reg(src.Width, src.RegClass, src.Index);
+                => api.reg(src.Width, src.RegClass, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)

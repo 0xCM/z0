@@ -22,16 +22,16 @@ namespace Z0
         /// <param name="b">Source bit 2</param>
         [MethodImpl(Inline), Op]
         public static uint3 join(uint1 a, uint1 b, uint1 c)
-            => (uint3)a | ((uint3)b << 1) | ((uint3)c << 2);
+            => wrap3((uint)a | ((uint)b << 1)  | ((uint)c << 2));
 
         /// <summary>
-        /// Produces a <see cref='T.uint3'/> value by concatentating operand-supplied bits
+        /// Produces a <see cref='T.uint2'/> value by concatentating operand-supplied bits
         /// </summary>
         /// <param name="a">Source bit 0</param>
         /// <param name="b">Source bit 1</param>
         [MethodImpl(Inline), Op]
         public static uint2 join(uint1 a, uint1 b)
-            =>(uint2)a | ((uint2)b << 1);
+            => wrap2((uint)a | ((uint)b << 1));
 
         /// <summary>
         /// Produces a <see cref='T.eight'/> value by contcatenating the operand-suppled bits

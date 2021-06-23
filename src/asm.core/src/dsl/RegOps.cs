@@ -6,34 +6,8 @@ namespace Z0.Asm
 {
     using R = AsmOpTypes;
 
-    using static RegClasses;
-
-    public readonly struct AsmRegOps
+    partial struct AsmDsl
     {
-        public static GpClass GP => default;
-
-        public static SegClass SEG => default;
-
-        public static FlagClass FLAG => default;
-
-        public static ControlClass CR => default;
-
-        public static DebugClass DB => default;
-
-        public static IPtrClass IPTR => default;
-
-        public static SPtrClass SPTR => default;
-
-        public static XmmClass XMM => default;
-
-        public static YmmClass YMM => default;
-
-        public static ZmmClass ZMM => default;
-
-        public static MaskClass MASK => default;
-
-        public static BndClass BND => default;
-
         public static R.al al => default;
 
         public static R.cl cl => default;
@@ -193,6 +167,8 @@ namespace Z0.Asm
        public static R.xmm6 xmm6 => default;
 
        public static R.xmm7 xmm7 => default;
+
+
     }
 
 }

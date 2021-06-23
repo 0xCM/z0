@@ -399,6 +399,10 @@ namespace Z0
             => (byte)(x % U.Mod);
 
         [MethodImpl(Inline)]
+        internal static U wrap2(uint src)
+            => new U((byte)src, false);
+
+        [MethodImpl(Inline)]
         internal static U wrap2(int src)
             => new U((byte)src, false);
     }

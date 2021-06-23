@@ -9,16 +9,17 @@ namespace Z0.Asm
 
     using static Root;
 
-    using api = AsmRegs;
-
     public readonly struct RegName
     {
-        readonly uint Data;
+        readonly ulong Data;
 
         [MethodImpl(Inline)]
-        internal RegName(uint data)
+        internal RegName(ulong data)
         {
             Data = data;
         }
+
+        public string Format()
+            => AsmRegNames.format(this);
     }
 }

@@ -11,7 +11,8 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOpTypes.r32;
-    using K = AsmRegCodes.Gp32;
+    using K = RegCodes.Gp32;
+    using api = AsmRegs;
 
     partial struct AsmOpTypes
     {
@@ -45,7 +46,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => asm.reg(src.Width, src.RegClass, src.Index);
+                => api.reg(src.Width, src.RegClass, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)
@@ -69,11 +70,11 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static G operator ++(G src)
-                => AsmRegs.next(src);
+                => api.next(src);
 
             [MethodImpl(Inline)]
             public static G operator --(G src)
-                => AsmRegs.prior(src);
+                => api.prior(src);
         }
 
         public readonly struct eax : IRegOp32<eax>

@@ -9,6 +9,8 @@ namespace Z0.Asm
 
     using static Root;
 
+    using api = AsmRegs;
+
     /// <summary>
     /// [0000 0000 00000 000]
     /// </summary>
@@ -29,32 +31,38 @@ namespace Z0.Asm
         }
 
         public AsmOpClass OpClass
-            => AsmOpClass.R;
+        {
+            [MethodImpl(Inline)]
+            get => AsmOpClass.R;
+        }
 
         public RegWidth Width
         {
             [MethodImpl(Inline)]
-            get => asm.regwidth(this);
+            get => api.width(this);
         }
 
         public RegClass RegClass
         {
             [MethodImpl(Inline)]
-            get => asm.regclass(this);
+            get => api.regclass(this);
         }
 
         public RegIndex Index
         {
             [MethodImpl(Inline)]
-            get => asm.regidx(this);
+            get => api.regidx(this);
         }
 
+        public RegName Name
+        {
+            get => AsmRegNames.name(this);
+        }
         public string Format()
-            => string.Format("{0}/{1}/{2}", Index, RegClass, Width);
+            => AsmRegNames.format(Name);
 
 
         public override string ToString()
             =>  Format();
     }
-
 }

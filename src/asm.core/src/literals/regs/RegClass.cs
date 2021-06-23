@@ -12,6 +12,8 @@ namespace Z0.Asm
     [SymbolSource]
     public enum RegClass : byte
     {
+        None = 0,
+
         /// <summary>
         /// A general-purpose register of width <see cref='W8'/>, <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
         /// </summary>

@@ -4,14 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static math;
-
-    public readonly struct AsmOps
+    partial struct AsmDsl
     {
-
+        public static RexPrefixKind RexW => RexPrefixKind.W;
     }
 }

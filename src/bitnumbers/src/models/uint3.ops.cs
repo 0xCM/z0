@@ -258,6 +258,10 @@ namespace Z0
             => new U(src, false);
 
         [MethodImpl(Inline)]
+        internal static U wrap3(uint src)
+            => new U(src, false);
+
+        [MethodImpl(Inline)]
         internal static U wrap3(int src)
             => new U((byte)src,false);
 

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmRegCodes;
+    using static RegCodes;
     using static AsmCodes;
     using static AsmOpCodeTokens;
 
@@ -19,6 +19,8 @@ namespace Z0.Asm
         readonly Symbols<AsmMnemonicCode> _MnemonicCodes;
 
         readonly Symbols<Gp8> _Gp8Regs;
+
+        readonly Symbols<Gp8Hi> _Gp8HiRegs;
 
         readonly Symbols<Gp16> _Gp16Regs;
 
@@ -44,7 +46,7 @@ namespace Z0.Asm
 
         readonly Symbols<DebugReg> _DebugRegs;
 
-        readonly Symbols<TableReg> _TableRegs;
+        readonly Symbols<SPtrReg> _SysPtrRegs;
 
         readonly Symbols<BndReg> _BndRegs;
 
@@ -80,7 +82,7 @@ namespace Z0.Asm
             _DebugRegs = symbols<DebugReg>();
             _BndRegs = symbols<BndReg>();
             _TestRegs = symbols<TestReg>();
-            _TableRegs = symbols<TableReg>();
+            _SysPtrRegs = symbols<SPtrReg>();
             _Offsets = symbols<Offset>();
         }
 
@@ -197,6 +199,10 @@ namespace Z0.Asm
             => _Gp8Regs;
 
         [MethodImpl(Inline), Op]
+        public Symbols<Gp8Hi> Gp8HiRegs()
+            => _Gp8HiRegs;
+
+        [MethodImpl(Inline), Op]
         public Symbols<Gp16> Gp16Regs()
             => _Gp16Regs;
 
@@ -249,8 +255,8 @@ namespace Z0.Asm
             => _TestRegs;
 
         [MethodImpl(Inline), Op]
-        public Symbols<TableReg> TableRegs()
-            => _TableRegs;
+        public Symbols<SPtrReg> SysPtrRegs()
+            => _SysPtrRegs;
 
         [MethodImpl(Inline), Op]
         public Symbols<AsmMnemonicCode> MnemonicCodes()

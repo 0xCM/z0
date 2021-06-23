@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using T = AsmOpTypes;
-    using static AsmRegOps;
+    using static AsmDsl;
 
     public readonly struct RegExprCases
     {

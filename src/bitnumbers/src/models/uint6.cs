@@ -62,10 +62,6 @@ namespace Z0
             => data = (byte)((uint)src & MaxLiteral);
 
         [MethodImpl(Inline)]
-        internal uint6(uint src, bool safe)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
         internal uint6(K src)
             => data = (byte)src;
 
