@@ -42,10 +42,6 @@ namespace Z0.Asm
         public static bit HasRexPrefix(AsmHexCode src)
             => IsRexPrefix(skip(src.Bytes,0));
 
-        // [MethodImpl(Inline), Op]
-        // public static bit HasRexPrefix(AsmOpCodeExpr src)
-        //     => src.Content.StartsWith("REX");
-
         [MethodImpl(Inline), Op]
         public static bit HasRepeatPrefix(AsmOpCode src)
             => emath.oneof(src.Lead, REP.REPE, REP.REPNE);

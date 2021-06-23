@@ -540,11 +540,26 @@ namespace Z0.Asm
             return new RegName(data);
         }
 
+        static byte length(ReadOnlySpan<char> src)
+        {
+            var count = src.Length;
+            byte i=0;
+            for(i=0; i<count; i++)
+            {
+                if(skip(src,i) == Chars.Space)
+                {
+                    i++;
+                    break;
+                }
+            }
+            return i;
+        }
+
         [MethodImpl(Inline), Op]
         public static string format(RegName src)
         {
             var chars = recover<char>(bytes(src));
-            return new string(chars);
+            return new string(slice(chars,0,length(chars)));
         }
 
         [MethodImpl(Inline), Op]

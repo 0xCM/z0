@@ -39,7 +39,6 @@ namespace Z0.Asm
                 return RegIndex.r0;
         }
 
-
         [MethodImpl(Inline), Op]
         public static r64 next(r64 src)
         {
@@ -57,7 +56,6 @@ namespace Z0.Asm
             else
                 return RegIndex.r0;
         }
-
 
         [MethodImpl(Inline), Op]
         public static ymm next(ymm src)
@@ -103,6 +101,5 @@ namespace Z0.Asm
             else
                 return RegIndex.r0;
         }
-
     }
 }

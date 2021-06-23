@@ -45,17 +45,18 @@ namespace Z0.Asm
         public RegClass RegClass
         {
             [MethodImpl(Inline)]
-            get => api.regclass(this);
+            get => api.@class(this);
         }
 
         public RegIndex Index
         {
             [MethodImpl(Inline)]
-            get => api.regidx(this);
+            get => api.index(this);
         }
 
         public RegName Name
         {
+            [MethodImpl(Inline)]
             get => AsmRegNames.name(this);
         }
         public string Format()

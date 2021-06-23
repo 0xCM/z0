@@ -52,7 +52,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static ref CpuId clear(ref CpuId target)
         {
-            memory.@as<CpuId,ByteBlock24>(target) = ByteBlocks.alloc(n24);
+            core.@as<CpuId,ByteBlock24>(target) = ByteBlocks.alloc(n24);
             return ref target;
         }
 

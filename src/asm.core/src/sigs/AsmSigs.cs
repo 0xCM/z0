@@ -14,9 +14,5 @@ namespace Z0.Asm
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static AsmSigOp operand<K>(Sym<K> sym)
-            where K : unmanaged
-                => new AsmSigOp(sym);
     }
 }

@@ -64,6 +64,5 @@ namespace Z0
             dst.FieldIndex = src.FieldIndex;
             return dst;
         }
-
     }
 }

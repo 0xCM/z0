@@ -13,6 +13,17 @@ namespace Z0.Asm
     [DataType]
     public readonly struct Register : IDataTypeEquatable<Register>
     {
+        [Op]
+        public static string describe(Register src)
+        {
+            const string Sep = " | ";
+            const string Pattern = "[{0,-12} | {1,-8} | {2}]";
+            var index = Bitfields.format<RegIndex,byte>(src.Code, src.Name, 5);
+            var @class = Bitfields.format<RegClass,byte>(src.Class, src.Class.ToString(), 4);
+            var width = Enums.field<RegWidth,ushort>(src.Width, base10, "Width");
+            return string.Format(Pattern, index, @class, width);
+        }
+
         public RegKind Kind {get;}
 
         [MethodImpl(Inline)]

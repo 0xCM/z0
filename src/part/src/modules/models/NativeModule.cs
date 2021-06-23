@@ -41,6 +41,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.PSx2, Address, Name);
+            => string.Format(RP.PSx2, Address, Name);
     }
 }

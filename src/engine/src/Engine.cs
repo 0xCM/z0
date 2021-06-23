@@ -138,24 +138,6 @@ namespace Z0.Asm
             return text.format(FormatPattern, src.Fx, src.SubFx, src.Eax, src.Ebx, src.Ecx, src.Edx);
         }
 
-        void ShowRegBits()
-        {
-            const string FormatPattern = "{0,-8} | {1,-10} | {2,-5} | {3,-10} | {4}";
-
-            var query = AsmRegs.query();
-            var classes = AsmRegs.classes();
-
-            using var log = ShowLog("regbits", FS.Log);
-
-            foreach(var k in classes)
-            {
-                var registers = query.Where(k);
-                foreach(var r in registers)
-                    log.Show(r);
-            }
-        }
-
-
         public static MsgPattern<Count> AllocatingCores => "Allocating {0} cores";
     }
 }

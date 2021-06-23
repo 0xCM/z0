@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static uint filter(RegClass @class, ReadOnlySpan<Register> src, Span<Register> dst)
+        public static uint filter(RegClass @class, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
         {
             var k=0u;
             var j = min(src.Length, dst.Length);
@@ -21,17 +21,17 @@ namespace Z0.Asm
             {
                 ref readonly var candidate = ref skip(src,i);
 
-                if(invalid(candidate.Code))
+                if(invalid(candidate.Index))
                     continue;
 
-                if(candidate.Class == @class)
+                if(candidate.RegClass == @class)
                     seek(dst,k++) = candidate;
             }
             return k;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint filter(RegWidth width, ReadOnlySpan<Register> src, Span<Register> dst)
+        public static uint filter(RegWidth width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
         {
             var k=0u;
             var j = min(src.Length, dst.Length);
@@ -39,7 +39,7 @@ namespace Z0.Asm
             {
                 ref readonly var candidate = ref skip(src,i);
 
-                if(invalid(candidate.Code))
+                if(invalid(candidate.Index))
                     continue;
 
                 if(candidate.Width == width)
@@ -49,7 +49,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint filter(RegClass @class, RegWidth width, ReadOnlySpan<Register> src, Span<Register> dst)
+        public static uint filter(RegClass @class, RegWidth width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
         {
             var k=0u;
             var j = min(src.Length, dst.Length);
@@ -57,10 +57,10 @@ namespace Z0.Asm
             {
                 ref readonly var candidate = ref skip(src,i);
 
-                if(invalid(candidate.Code))
+                if(invalid(candidate.Index))
                     continue;
 
-                if(candidate.Width == width && candidate.Class == @class)
+                if(candidate.Width == width && candidate.RegClass == @class)
                     seek(dst,k++) = candidate;
             }
             return k;

@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Root;
 
+    /// <summary>
+    /// Bindes an expression with its encoding
+    /// </summary>
     public readonly struct AsmExprEncoding : IEquatable<AsmExprEncoding>, IComparable<AsmExprEncoding>
     {
         public AsmExpr Asm {get;}

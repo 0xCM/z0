@@ -31,7 +31,7 @@ namespace Z0
         [Op]
         public static TableFields discover(Type src, bool recurse)
         {
-            var collected = root.list<TableField>();
+            var collected = list<TableField>();
             ushort j = 0;
             if(src.IsStruct() && !src.IsPrimitive)
             {

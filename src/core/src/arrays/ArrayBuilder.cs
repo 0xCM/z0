@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct ArrayBuilder
@@ -27,9 +28,9 @@ namespace Z0
         public static void copy<T>(List<T> src, Span<T> dst)
         {
             var count = src.Count;
-            ref var target = ref core.first(dst);
+            ref var target = ref first(dst);
             for(var i=0; i<count; i++)
-                core.seek(target,i) = src[i];
+                seek(target,i) = src[i];
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -51,9 +52,9 @@ namespace Z0
         {
             var deposited = src.ViewDeposited();
             var count = deposited.Length;
-            ref var target = ref core.seek(dst, offset);
+            ref var target = ref seek(dst, offset);
             for(var i=offset; i<count; i++)
-                core.seek(target,i) = core.skip(deposited, i);
+                seek(target,i) = skip(deposited, i);
         }
     }
 }

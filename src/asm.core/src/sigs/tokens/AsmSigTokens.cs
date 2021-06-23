@@ -10,6 +10,33 @@ namespace Z0.Asm
 
     public readonly partial struct AsmSigTokens
     {
+        public enum SigTokenKind : byte
+        {
+            None = 0,
+
+            Reg,
+
+            Fpu,
+
+            Imm,
+
+            Mem,
+
+            Rm,
+
+            Moffs,
+
+            Rel,
+
+            AddressingMode,
+
+            Src,
+
+            Ptr,
+
+            ZmmBCast,
+        }
+
         [SymbolSource]
         public enum RegKind : byte
         {
@@ -51,11 +78,25 @@ namespace Z0.Asm
 
             [Symbol("Sreg", "A segment register. The segment register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5")]
             Sreg,
-        }
 
-        [SymbolSource("Defines FPU-related symbols")]
-        public enum FpuKind
-        {
+            [Symbol("mm", "An MMX register", "MM0|MM1|MM2|MM3|MM4|MM5|MM6|MM7")]
+            mm,
+
+            [Symbol("mm/m32", "The low-order bits of an mmx register or a 32-bit memory operand; The contents of memory are found at the address provided by the effective address computation")]
+            mmm32,
+
+            [Symbol("mm/m64", "An mmx register or a 64-bit memory operand; The contents of memory are found at the address provided by the effective address computation")]
+            mmm64,
+
+            [Symbol("{k1}{z}", "A mask register used as instruction writemask")]
+            k1zMask,
+
+            [Symbol("{k1}", "A mask register used as instruction writemask for instructions that do not allow zeroing-masking but support merging-masking")]
+            k1Mask,
+
+            [Symbol("k1", "A mask register used as a regular operand (either destination or source)")]
+            k1,
+
             [Symbol("ST(0)", "The top element of the FPU register stack")]
             ST0,
 
@@ -80,6 +121,37 @@ namespace Z0.Asm
             [Symbol("ST(7)")]
             ST7,
 
+            [Symbol("xmm", "An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode.The contents of memory are found at the address provided by the effective address computation")]
+            xmm,
+
+            [Symbol("xmm1", "A first xmm register operand")]
+            xmm1,
+
+            [Symbol("xmm2", "A second xmm register operand")]
+            xmm2,
+
+            [Symbol("xmm3", "A third xmm register operand")]
+            xmm3,
+
+            [Symbol("ymm", "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode")]
+            ymm,
+
+            [Symbol("ymm1", "A first ymm register operand")]
+            ymm1,
+
+            [Symbol("ymm2", "A second ymm register operand")]
+            ymm2,
+
+            [Symbol("ymm3", "A third ymm register operand")]
+            ymm3,
+
+            [Symbol("zmm", "A zmm register")]
+            zmm,
+        }
+
+        [SymbolSource("Defines FPU-related symbols")]
+        public enum FpuKind
+        {
             [Symbol("m16int", "Indicates a 16-bit integer memory operand in the context of an FPU integer instruction")]
             m16int,
 
@@ -141,19 +213,18 @@ namespace Z0.Asm
 
             [Symbol("m256", "A 256-bit operand in memory. This nomenclature is used only with AVX instructions")]
             m256,
-        }
 
-        [SymbolSource("Classifies mmx-related instruction signature components")]
-        public enum MmxKind
-        {
-            [Symbol("mm", "An MMX register", "MM0|MM1|MM2|MM3|MM4|MM5|MM6|MM7")]
-            mm,
+            [Symbol("m16&16")]
+            m16x16,
 
-            [Symbol("mm/m32", "The low-order bits of an mmx register or a 32-bit memory operand; The contents of memory are found at the address provided by the effective address computation")]
-            mmm32,
+            [Symbol("m16&32")]
+            m16x32,
 
-            [Symbol("mm/m64", "An mmx register or a 64-bit memory operand; The contents of memory are found at the address provided by the effective address computation")]
-            mmm64
+            [Symbol("m32&32")]
+            m32x32,
+
+            [Symbol("m16&64")]
+            m16x64,
         }
 
         [SymbolSource]
@@ -179,11 +250,7 @@ namespace Z0.Asm
 
             [Symbol("xmm64", "An XMM register or a 64-bit memory operand. The 128-bit SIMD floating-point registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation")]
             xmm64,
-        }
 
-        [SymbolSource]
-        public enum VMemKind : byte
-        {
             [Symbol("mV", "A vector memory operand; the operand size is dependent on the instruction")]
             mV,
 
@@ -195,33 +262,6 @@ namespace Z0.Asm
 
             [Symbol("vm64{x,y,z}", "A vector array of memory operands specified using VSIB memory addressing. The array of memory addresses are specified using a common base register, a constant scale factor, and a vector index register with individual elements of 64-bit index value in an XMM register (vm64x), a YMM register (vm64y) or a ZMM register (vm64z)")]
             vm64,
-
-            [Symbol("xmm", "An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode.The contents of memory are found at the address provided by the effective address computation")]
-            xmm,
-
-            [Symbol("xmm1", "A first xmm register operand")]
-            xmm1,
-
-            [Symbol("xmm2", "A second xmm register operand")]
-            xmm2,
-
-            [Symbol("xmm3", "A third xmm register operand")]
-            xmm3,
-
-            [Symbol("ymm", "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode")]
-            ymm,
-
-            [Symbol("ymm1", "A first ymm register operand")]
-            ymm1,
-
-            [Symbol("ymm2", "A second ymm register operand")]
-            ymm2,
-
-            [Symbol("ymm3", "A third ymm register operand")]
-            ymm3,
-
-            [Symbol("zmm", "A zmm register")]
-            zmm,
         }
 
         [SymbolSource("Identifies a variable that represents a memory offset, used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction ")]
@@ -266,19 +306,6 @@ namespace Z0.Asm
             Mode64,
         }
 
-        [SymbolSource("Defines signature components related to mask registers")]
-        public enum MaskRegKind : byte
-        {
-            [Symbol("{k1}{z}", "A mask register used as instruction writemask")]
-            k1zMask,
-
-            [Symbol("{k1}", "A mask register used as instruction writemask for instructions that do not allow zeroing-masking but support merging-masking")]
-            k1Mask,
-
-            [Symbol("k1", "A mask register used as a regular operand (either destination or source)")]
-            k1,
-        }
-
         [SymbolSource("Defines instruction signature symbols that represent source operands")]
         public enum SourceKind : byte
         {
@@ -293,22 +320,6 @@ namespace Z0.Asm
 
             [Symbol("SRC3", "Denotes the third source operand in the instruction syntax of an instruction encoded with the VEX/EVEX prefix and having three source operands")]
             SRC3,
-        }
-
-        [SymbolSource("Classifies memory operands consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand. All memory addressing modes are allowed. The m16&16 and m32&32 operands are used by the BOUND instruction to provide an operand containing an upper and lower bounds for array indices. The m16&32 operand is used by LIDT and LGDT to provide a word with which to load the limit field, and a doubleword with which to load the base field of the corresponding GDTR and IDTR registers. The m16&64 operand is used by LIDT and LGDT in 64-bit mode to provide a word with which to load the limit field, and a quadword with which to load the base field of the corresponding GDTR and IDTR registers.")]
-        public enum MemPairKind : byte
-        {
-            [Symbol("m16&16")]
-            m16x16,
-
-            [Symbol("m16&32")]
-            m16x32,
-
-            [Symbol("m32&32")]
-            m32x32,
-
-            [Symbol("m16&64")]
-            m16x64,
         }
 
         [SymbolSource]

@@ -12,6 +12,14 @@ namespace Z0.Asm
 
     partial struct AsmRegs
     {
+        [MethodImpl(Inline), Op]
+        public static RegWidth width(RegWidthIndex wi)
+            => (RegWidth)Pow2.pow((byte)wi);
+
+        [MethodImpl(Inline), Op]
+        public static RegWidth width(RegOp src)
+            => width((RegWidthIndex)(src.Bitfield & 0b111));
+
         /// <summary>
         /// Determines the register width from the kind
         /// </summary>
@@ -35,6 +43,14 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static RegClass @class(RegKind src)
             => (RegClass)Bits.slice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
+
+        /// <summary>
+        /// Determines the register class from the operand
+        /// </summary>
+        /// <param name="src">The register operand</param>
+        [MethodImpl(Inline), Op]
+        public static RegClass @class(RegOp src)
+            => (RegClass)Bits.segment(src.Bitfield, 5, 9);
 
         /// <summary>
         /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegKind'/>

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public readonly struct RowKey<K> : IRowKey<RowKey<K>,K>
         where K : unmanaged
@@ -19,15 +20,15 @@ namespace Z0
             => Value = value;
 
         public override int GetHashCode()
-            => (int)FastHash.calc(memory.bw64(Value));
+            => (int)FastHash.calc(bw64(Value));
 
         [MethodImpl(Inline)]
         public int CompareTo(RowKey<K> src)
-            => memory.bw64(Value).CompareTo(src.Value);
+            => bw64(Value).CompareTo(src.Value);
 
         [MethodImpl(Inline)]
         public bool Equals(RowKey<K> src)
-            => memory.bw64(Value).Equals(src.Value);
+            => bw64(Value).Equals(src.Value);
 
         public override bool Equals(object src)
             => src is RowKey<K> k && Equals(src);

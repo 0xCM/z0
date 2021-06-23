@@ -12,15 +12,15 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static bool gp(Register r)
-            => @class(r) == RegClass.GP;
+        public static bool gp(RegOp r)
+            => r.RegClass == RegClass.GP;
 
         [MethodImpl(Inline), Op]
         public static bool gp(RegClass c)
             => c == RegClass.GP;
 
         [MethodImpl(Inline), Op]
-        public static bool gp(Register r, RegWidth w)
+        public static bool gp(RegOp r, RegWidth w)
             => w == r.Width && gp(r);
     }
 }

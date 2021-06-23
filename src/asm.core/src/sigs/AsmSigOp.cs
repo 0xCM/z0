@@ -14,30 +14,18 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSigOp
     {
-        readonly ISym Symbol;
+        readonly byte Data;
 
         [MethodImpl(Inline)]
-        internal AsmSigOp(ISym s)
+        internal AsmSigOp(byte data)
         {
-            Symbol = s;
-        }
-
-        public SymIdentity Identity
-        {
-            [MethodImpl(Inline)]
-            get => Symbol.Identity;
-        }
-
-        public Identifier Name
-        {
-            [MethodImpl(Inline)]
-            get => Symbol.Name;
+            Data = data;
         }
 
         public SymExpr Expr
         {
             [MethodImpl(Inline)]
-            get => Symbol.Expr;
+            get => SymExpr.Empty;
         }
     }
 }

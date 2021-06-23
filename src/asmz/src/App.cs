@@ -1000,6 +1000,14 @@ namespace Z0.Asm
 
         void ShowRegNames()
         {
+            var regs = AsmRegs.list(AsmDsl.GP);
+            iter(regs, reg => Wf.Row(reg));
+            var bytespan = ByteSpans.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
+            Wf.Row(bytespan.Format());
+        }
+
+        void movzx(RegOp dst, RegOp src, Span<char> buffer)
+        {
 
         }
 
@@ -1011,9 +1019,6 @@ namespace Z0.Asm
             // var part = PartId.Math;
             // var log = Db.AppLog(string.Format("{0}.pdbinfo", part.Format()), FS.Csv);
             // EmitPdbMethodInfo(part,log);
-
-            //var worker = AsmIndexWorker.create()
-            //Wf.GlobalCommands().ProcessIntelSdm();
 
             //RunAsmToolChain("and");
             //ParseBdDisassembly();

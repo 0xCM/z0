@@ -13,51 +13,45 @@ namespace Z0.Asm
     using api = AsmRegs;
 
     [ApiHost]
-    public readonly struct AsmRegQuery
+    public ref struct AsmRegQuery
     {
-        readonly Symbols<RegKind> Symbols;
+        readonly ReadOnlySpan<RegOp> Regs;
 
-        readonly Index<Register> Cache;
+        readonly Span<RegOp> Cache;
 
         public uint RegCount
         {
             [MethodImpl(Inline)]
-            get => Symbols.Count;
+            get => (uint)Regs.Length;
         }
 
-        internal AsmRegQuery(Symbols<RegKind> src)
+        internal AsmRegQuery(ReadOnlySpan<RegOp> src)
         {
-            Symbols = src;
-            Cache = alloc<Register>(src.Count);
-        }
-
-        public ReadOnlySpan<Register> Source
-        {
-            [MethodImpl(Inline)]
-            get => recover<RegKind,Register>(Symbols.Kinds);
+            Regs = src;
+            Cache = alloc<RegOp>(src.Length);
         }
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<Register> Where(RegClass @class)
+        public ReadOnlySpan<RegOp> Where(RegClass @class)
         {
-            var target = Cache.Edit;
-            var count = api.filter(@class, Source, target);
+            var target = Cache;
+            var count = api.filter(@class, Regs, target);
             return slice(target, 0, count);
         }
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<Register> Where(RegWidth width)
+        public ReadOnlySpan<RegOp> Where(RegWidth width)
         {
-            var target = Cache.Edit;
-            var count = api.filter(width, Source, target);
+            var target = Cache;
+            var count = api.filter(width, Regs, target);
             return slice(target, 0, count);
         }
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<Register> Where(RegClass @class, RegWidth width)
+        public ReadOnlySpan<RegOp> Where(RegClass @class, RegWidth width)
         {
-            var target = Cache.Edit;
-            var count = api.filter(@class, width, Source, target);
+            var target = Cache;
+            var count = api.filter(@class, width, Regs, target);
             return slice(target, 0, count);
         }
     }

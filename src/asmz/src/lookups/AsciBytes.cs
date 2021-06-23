@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Lang;
-
     using static Root;
     using static core;
 
@@ -24,7 +22,6 @@ namespace Z0
                 seek(dst, i) = (byte)skip(src,i);
             return new ByteSpanSpec(name, buffer, true);
         }
-
     }
 
     partial class XTend

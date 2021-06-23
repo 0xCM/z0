@@ -13,7 +13,7 @@ namespace Z0
     {
         public TableId Id {get;}
 
-        public Index<RecordFieldSpec> Fields{get;}
+        public RecordFieldSpec[] Fields{get;}
 
         [MethodImpl(Inline)]
         public RecordSchema(TableId id, RecordFieldSpec[] fields)
