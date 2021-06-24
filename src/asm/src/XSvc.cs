@@ -8,6 +8,7 @@ namespace Z0
 
     using Services = Z0.Asm;
 
+    [ApiHost]
     public static partial class XSvc
     {
         [Op]

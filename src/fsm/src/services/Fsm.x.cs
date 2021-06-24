@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static ObserverTrace;
+    using static Root;
+
+    using T = ObserverTrace;
 
     public static class FsmX
     {
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="trace">The trace specification</param>
         [MethodImpl(Inline)]
         public static bool TraceTransitions(this ObserverTrace trace)
-            => (trace & Transitions) == Transitions;
+            => (trace & T.Transitions) == T.Transitions;
 
         /// <summary>
         /// Specifies whether an observer should be notified when a machine receives an event
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="trace">The trace specification</param>
         [MethodImpl(Inline)]
         public static bool TraceEvents(this ObserverTrace trace)
-            => (trace & Events) == Events;
+            => (trace & T.Events) == T.Events;
 
         /// <summary>
         /// Specifies whether an observer should be notified when a machine attains the completion state
@@ -47,13 +47,13 @@ namespace Z0
         /// <param name="trace">The trace specification</param>
         [MethodImpl(Inline)]
         public static bool TraceCompletions(this ObserverTrace trace)
-            => (trace & Completions) == Completions;
+            => (trace & T.Completions) == T.Completions;
 
         /// <summary>
         /// Specifies whether an observer should be notified when an error condition is detected
         /// </summary>
         /// <param name="trace">The trace specification</param>
         public static bool TraceErrors(this ObserverTrace trace)
-            => (trace & Errors) == Errors;
+            => (trace & T.Errors) == T.Errors;
     }
 }

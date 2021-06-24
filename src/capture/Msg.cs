@@ -42,5 +42,9 @@ namespace Z0
         public static MsgPattern<FS.FolderPath> CapturingRoutines => "Capturing routines from {0}";
 
         public static MsgPattern<Count,Count> CapturedRoutines => "Captured {0} routines from {1} hosts";
+
+        public static MsgPattern<Count, DelimitedIndex<PartId>> RunningMachine => "Executing machine workflow for {0} parts: {1}";
+
+        public static MsgPattern<Count, DelimitedIndex<PartId>> RanMachine => "Executed machine workflow for {0} parts: {1}";
     }
 }

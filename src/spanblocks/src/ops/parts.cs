@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length))
-                AppErrors.ThrowBadSize(w, src.Length);
+                Errors.ThrowBadSize(w, src.Length);
 
             return new SpanBlock16<T>(src);
         }
@@ -39,7 +39,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length))
-                AppErrors.ThrowBadSize(w, src.Length);
+                Errors.ThrowBadSize(w, src.Length);
 
             return new SpanBlock16<T>(src);
         }
@@ -55,7 +55,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length))
-                AppErrors.ThrowBadSize(w, src.Length);
+                Errors.ThrowBadSize(w, src.Length);
 
             return new SpanBlock32<T>(src);
         }
@@ -71,7 +71,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length))
-                AppErrors.ThrowBadSize(w, src.Length);
+                Errors.ThrowBadSize(w, src.Length);
 
             return new SpanBlock64<T>(src);
         }
@@ -87,7 +87,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length))
-                AppErrors.ThrowBadSize(w, src.Length);
+                Errors.ThrowBadSize(w, src.Length);
 
             return new SpanBlock128<T>(src);
         }
@@ -103,7 +103,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length))
-                AppErrors.ThrowBadSize(w, src.Length);
+                Errors.ThrowBadSize(w, src.Length);
 
             return new SpanBlock256<T>(src);
         }
@@ -119,7 +119,7 @@ namespace Z0
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length))
-                AppErrors.ThrowBadSize(w, src.Length);
+                Errors.ThrowBadSize(w, src.Length);
 
             return new SpanBlock512<T>(src);
         }

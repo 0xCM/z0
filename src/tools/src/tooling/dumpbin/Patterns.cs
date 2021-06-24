@@ -40,7 +40,7 @@ namespace Z0.Tools
         }
 
         public static CmdScript script(DumpBin tool, string name, CmdId id, FileModule[] src, FS.FolderPath outdir)
-            => ToolCmd.script(name, src.Map(file => tool.Command(id, file.Path, outdir)));
+            => Cmd.script(name, src.Map(file => tool.Command(id, file.Path, outdir)));
 
         public CmdScript Script(string name, CmdId id, FileModule[] src, FS.FolderPath outdir)
             => script(this, name, id, src, outdir);

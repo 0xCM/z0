@@ -18,6 +18,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static RegOp reg(RegWidth width, RegClass @class, RegIndex r)
-            => AsmRegs.reg(width,@class,r);
+            => AsmOps.reg(width,@class,r);
     }
 }

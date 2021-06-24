@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
     using K = RegClass;
 
     public readonly struct RegClasses
@@ -82,6 +77,5 @@ namespace Z0.Asm
         {
             public K Kind => K.MMX;
         }
-
     }
 }

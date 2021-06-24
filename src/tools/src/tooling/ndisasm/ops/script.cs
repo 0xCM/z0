@@ -17,7 +17,7 @@ namespace Z0.Tools
         {
             const string Pattern = "{0} -b 64 -p intel {1} > {2}";
             var body = ScriptExpr.define(string.Format(Pattern, Toolsets.ndisasm, src.Format(PathSeparator.BS), dst.Format(PathSeparator.BS)));
-            return ToolCmd.script(id, body);
+            return Cmd.script(id, body);
         }
 
         public static ReadOnlySpan<CmdScript> scripts(ReadOnlySpan<FS.FilePath> src, FS.FolderPath dst)

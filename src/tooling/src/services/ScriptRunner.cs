@@ -48,7 +48,7 @@ namespace Z0
             try
             {
                 var cmd = WinCmd.script(src);
-                var process = ToolCmd.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
+                var process = ScriptProcess.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
                 var lines =  Lines.read(process.Output);
                 core.iter(lines, line => writer.WriteLine(line));
                 return lines;
@@ -66,7 +66,7 @@ namespace Z0
             using var writer = Paths.CmdLog(script).Writer();
             try
             {
-                var process = ToolCmd.run(cmd).Wait();
+                var process = ScriptProcess.run(cmd).Wait();
                 var lines =  Lines.read(process.Output);
                 root.iter(lines, line => writer.WriteLine(line));
                 return lines;

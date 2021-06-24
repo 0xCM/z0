@@ -25,6 +25,39 @@ namespace Z0
     /// </summary>
     public sealed class ScriptProcess : IScriptProcess
     {
+        /// <summary>
+        /// Creates a command process
+        /// </summary>
+        /// <param variable="commandLine">The command line to run as a subprocess</param>
+        /// <param variable="options">Options for the process</param>
+        [MethodImpl(Inline), Op]
+        public static ScriptProcess run(CmdLine command, ScriptProcessOptions config)
+            => new ScriptProcess(command, config);
+
+        [MethodImpl(Inline), Op]
+        public static ScriptProcess run(CmdLine command)
+            => new ScriptProcess(command);
+
+        [Op]
+        public static ScriptProcess run(CmdLine command, Receiver<string> status, Receiver<string> error)
+        {
+            var options = new ScriptProcessOptions();
+            options.WithReceivers(status, error);
+            return new ScriptProcess(command,options);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ScriptProcess run(CmdLine command, TextWriter dst)
+            => new ScriptProcess(command, new ScriptProcessOptions(dst));
+
+        [MethodImpl(Inline), Op]
+        public static ScriptProcess run(CmdLine command, TextWriter dst, Receiver<string> status, Receiver<string> error)
+        {
+            var options = new ScriptProcessOptions(dst);
+            options.WithReceivers(status, error);
+            return new ScriptProcess(command, options);
+        }
+
         readonly CmdLine _commandLine;
 
         readonly StringBuilder _output;
@@ -368,7 +401,7 @@ namespace Z0
             term.babble("Killing process tree " + ProcessId + " Cmd: " + _commandLine);
             try
             {
-                ToolCmd.run("taskkill /f /t /pid " + Process.Id).Wait();
+                ScriptProcess.run("taskkill /f /t /pid " + Process.Id).Wait();
             }
             catch (Exception e)
             {

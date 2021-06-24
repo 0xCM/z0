@@ -26,7 +26,7 @@ namespace Z0
         {
             var dst = new ToolInfo();
             var tag = src.Tag<ToolAttribute>();
-            dst.ToolId = toolid(src);
+            dst.ToolId = Cmd.toolid(src);
             if(!tag)
             {
                 dst.ToolName = src.Name;
@@ -41,10 +41,9 @@ namespace Z0
 
             var fields = @readonly(src.InstanceFields().Tagged<SlotAttribute>());
             var kFields = fields.Length;
-            var buffer = alloc<ToolOptionSpec>(kFields);
+            var buffer = alloc<CmdOptionSpec>(kFields);
 
             dst.Options = buffer;
-
             var options = span(buffer);
             for(ushort i=0; i<kFields; i++)
                 derive(skip(fields,i), out seek(options,i));
@@ -53,11 +52,11 @@ namespace Z0
         }
 
         [Op]
-        static ref ToolOptionSpec derive(MemberInfo src, out ToolOptionSpec dst)
+        static ref CmdOptionSpec derive(MemberInfo src, out CmdOptionSpec dst)
         {
             var tag = src.RequiredTag<SlotAttribute>();
             var purpose = src.Tag<MeaningAttribute>().MapValueOrElse(t => (string)t.Content, () => EmptyString);
-            dst = ToolCmd.option(text.ifempty(tag.Name, src.Name), purpose);
+            dst = Cmd.option(TextTools.ifempty(tag.Name, src.Name), purpose);
             return ref dst;
         }
     }

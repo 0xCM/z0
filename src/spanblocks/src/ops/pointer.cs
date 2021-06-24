@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct SpanBlocks
     {
@@ -19,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(Closure)]
         public static unsafe T* ptr<T>(in SpanBlock128<T> src)
             where T : unmanaged
-                => memory.gptr(src.First);
+                => gptr(src.First);
 
         /// <summary>
         /// Returns a generic pointer to the leading cell of the first block of a 256-bit blocked container
@@ -29,6 +30,6 @@ namespace Z0
         [MethodImpl(Inline),Op, Closures(Closure)]
         public static unsafe T* ptr<T>(in SpanBlock256<T> src)
             where T : unmanaged
-                => memory.gptr(src.First);
+                => gptr(src.First);
     }
 }

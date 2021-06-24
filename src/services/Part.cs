@@ -25,8 +25,6 @@ namespace Z0
 
     partial struct Msg
     {
-        public static MsgPattern<Count, DelimitedIndex<PartId>> RunningMachine => "Executing machine workflow for {0} parts: {1}";
 
-        public static MsgPattern<Count, DelimitedIndex<PartId>> RanMachine => "Executed machine workflow for {0} parts: {1}";
     }
 }

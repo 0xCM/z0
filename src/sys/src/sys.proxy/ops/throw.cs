@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static ApiOpaqueClass;
-
     using K = ApiOpaqueClass;
 
     partial struct proxy

@@ -22,7 +22,7 @@ namespace Z0
             const byte Size = 2;
             var div = src.Length / Size;
             if(div > 0)
-                return new SpanBlock16<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock16<byte>(cover(first(src), Size * div));
             else
                 return default;
         }
@@ -33,7 +33,7 @@ namespace Z0
             const byte Size = 4;
             var div = src.Length / Size;
             if(div > 0)
-                return new SpanBlock32<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock32<byte>(cover(first(src), Size * div));
             else
                 return default;
         }
@@ -44,7 +44,7 @@ namespace Z0
             const byte Size = 8;
             var div = src.Length / Size;
             if(div > 0)
-                return new SpanBlock64<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock64<byte>(cover(first(src), Size * div));
             else
                 return default;
         }
@@ -55,7 +55,7 @@ namespace Z0
             const byte Size = 16;
             var div = src.Length / Size;
             if(div > 0)
-                return new SpanBlock128<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock128<byte>(cover(first(src), Size * div));
             else
                 return default;
         }
@@ -66,7 +66,7 @@ namespace Z0
             const byte Size = 32;
             var div = src.Length / Size;
             if(div > 0)
-                return new SpanBlock256<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock256<byte>(cover(first(src), Size * div));
             else
                 return default;
         }
@@ -81,7 +81,7 @@ namespace Z0
             if(div > 0)
             {
                 unused = mod != 0 ? slice(src, div, mod) : default;
-                return new SpanBlock16<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock16<byte>(cover(first(src), Size * div));
             }
             else
             {
@@ -100,7 +100,7 @@ namespace Z0
             if(div > 0)
             {
                 unused = mod != 0 ? slice(src, div, mod) : default;
-                return new SpanBlock32<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock32<byte>(cover(first(src), Size * div));
             }
             else
             {
@@ -119,7 +119,7 @@ namespace Z0
             if(div > 0)
             {
                 unused = mod != 0 ? slice(src, div, mod) : default;
-                return new SpanBlock64<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock64<byte>(cover(first(src), Size * div));
             }
             else
             {
@@ -138,7 +138,7 @@ namespace Z0
             if(div > 0)
             {
                 unused = mod != 0 ? slice(src, div, mod) : default;
-                return new SpanBlock128<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock128<byte>(cover(first(src), Size * div));
             }
             else
             {
@@ -157,7 +157,7 @@ namespace Z0
             if(div > 0)
             {
                 unused = mod != 0 ? slice(src, div, mod) : default;
-                return new SpanBlock256<byte>(memory.cover(first(src), Size * div));
+                return new SpanBlock256<byte>(cover(first(src), Size * div));
             }
             else
             {

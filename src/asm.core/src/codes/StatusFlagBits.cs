@@ -11,7 +11,7 @@ namespace Z0.Asm
     partial struct AsmCodes
     {
         [Flags]
-        public enum StatusFlagBits : uint
+        public enum StatusFlagBits : ulong
         {
             CF = RF.CF,
 

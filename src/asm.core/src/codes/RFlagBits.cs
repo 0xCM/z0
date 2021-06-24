@@ -11,13 +11,13 @@ namespace Z0.Asm
     partial struct AsmCodes
     {
         /// <summary>
-        /// Defines literals corresponding the bits in the EFLAGS register
+        /// Defines literals corresponding the bits in the RFLAGS register
         /// </summary>
         /// <remarks>
         /// 3-16 Vol 1 of Intel Manual
         /// </remarks>
         [Flags]
-        public enum RFlagBits : uint
+        public enum RFlagBits : ulong
         {
             /// <summary>
             /// Carry Flag (Status Flag): Set if an arithmetic operation generates a carry or a borrow
@@ -116,6 +116,5 @@ namespace Z0.Asm
             [Symbol("id", "CPUID-capability")]
             ID = P2ᐞ21,
         }
-
     }
 }

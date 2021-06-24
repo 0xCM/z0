@@ -123,5 +123,20 @@ namespace Z0
             src ^= (c ^ src) & (1ul << pos);
             return src;
         }
+
+        /// <summary>
+        /// Aligns an index-identified source bit with with a suplied state
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="index">The source bit index</param>
+        /// <param name="value">The state with which to align a source bit</param>
+        [MethodImpl(Inline), SetBit]
+        public static ref ulong set(ref ulong src, byte pos, bit state)
+        {
+            var c = ~u64(state) + 1ul;
+            src ^= (c ^ src) & (1ul << pos);
+            return ref src;
+        }
+
     }
 }

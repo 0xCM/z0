@@ -482,13 +482,12 @@ namespace Z0.Asm
             Wf.Status(AsmRender.format(call));
         }
 
-
         static void TestCmdLine(params string[] args)
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
             using var wf = WfAppLoader.load(args).WithSource(Rng.@default());
-            var process = ToolCmd.run(cmd2).Wait();
+            var process = ScriptProcess.run(cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
         }

@@ -33,7 +33,7 @@ namespace Z0.Asm
             var target = tool.OutFile(spec.BinPath, spec.BinKind);
             var cmdline = tool.cmd(spec.AsmPath, target, spec.ListPath);
             var running = Wf.Running(cmdline);
-            var process = ToolCmd.run(cmdline, OnStatus, OnError);
+            var process = ScriptProcess.run(cmdline, OnStatus, OnError);
             process.Wait();
 
             Wf.Ran(running);
@@ -84,37 +84,10 @@ namespace Z0.Asm
 
         public Outcome Disassemble(in AsmToolchainSpec spec)
         {
-            var stdout = list<string>();
-            var errout = list<string>();
-            var counter = 0u;
-            var outcome = Outcome.Success;
-
             var tool = Wf.BdDisasm();
             var cmd = tool.Cmd(spec);
             var cmdline = tool.CmdLine(cmd);
-            var running = Wf.Running(cmdline);
-            using var writer = cmd.DisasmPath.AsciWriter();
-
-            void OnStatus(in string data)
-            {
-                if(nonempty(data))
-                {
-                    //writer.WriteLine(data);
-                    stdout.Add(data);
-                }
-            }
-
-            void OnError(in string data)
-            {
-                if(nonempty(data))
-                    errout.Add(data);
-            }
-
-            var process = ToolCmd.run(cmdline, writer, OnStatus, OnError);
-            process.Wait();
-            stdout.Sort();
-            Wf.Ran(running);
-            return errout.Count == 0;
+            return Run(cmdline, cmd.DisasmPath);
         }
 
         public Outcome ProcessDisassembly(in AsmToolchainSpec spec)
@@ -163,7 +136,39 @@ namespace Z0.Asm
                 return outcome;
             }
 
-            return ProcessDisassembly(spec);
+            outcome = ProcessDisassembly(spec);
+
+            return outcome;
         }
+
+        Outcome Run(CmdLine cmdline, FS.FilePath dst)
+        {
+            var stdout = list<string>();
+            var errout = list<string>();
+            var running = Wf.Running(cmdline);
+
+            void OnStatus(in string data)
+            {
+                if(nonempty(data))
+                    stdout.Add(data);
+            }
+
+            void OnError(in string data)
+            {
+                if(nonempty(data))
+                    errout.Add(data);
+            }
+
+            using var writer = dst.AsciWriter();
+            var process = ScriptProcess.run(cmdline, writer, OnStatus, OnError);
+            process.Wait();
+            stdout.Sort();
+            Wf.Ran(running);
+
+             if(errout.Count == 0)
+                return true;
+            else
+                return (false, errout.Delimit(Chars.NL).Format());
+       }
     }
 }
