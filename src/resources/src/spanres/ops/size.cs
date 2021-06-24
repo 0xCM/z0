@@ -13,18 +13,16 @@ namespace Z0
     using static core;
     using static Typed;
 
-    partial struct Resources
+    partial struct SpanRes
     {
-        [Op]
-        internal static MemoryAddress fptr(MethodInfo src)
-            => src.MethodHandle.GetFunctionPointer();
-
-        [Op]
-        internal static MemoryAddress jit(MethodInfo src)
+        [MethodImpl(Inline), Op]
+        public static ByteSize size(ReadOnlySpan<ByteSpanSpec> src)
         {
-            sys.prepare(src.MethodHandle);
-            return fptr(src);
+            var size = ByteSize.Zero;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                size += skip(src,i).DataSize;
+            return size;
         }
-
     }
 }

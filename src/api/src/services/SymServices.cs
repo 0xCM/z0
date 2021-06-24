@@ -20,7 +20,7 @@ namespace Z0
         {
             var dst = Db.Table<SymbolDetail>(typeof(E).Name);
             var flow = Wf.EmittingTable<SymbolDetail>(dst);
-            var symbols  = Symbols<E>().View;
+            var symbols  = Symbols.index<E>().View;
             var count = symbols.Length;
             var buffer = alloc<SymbolDetail>(count);
             ref var target = ref first(buffer);
@@ -47,9 +47,9 @@ namespace Z0
             {
                 ref readonly var block = ref skip(blocks,i);
                 var b = @bytes(block.Data);
-                seek(dst,i) = ByteSpans.specify(string.Format("Block{0:X2}", i), b.ToArray());
+                seek(dst,i) = SpanRes.specify(string.Format("Block{0:X2}", i), b.ToArray());
             }
-            var merge = ByteSpans.merge("CharBytes", buffer);
+            var merge = SpanRes.merge("CharBytes", buffer);
             var s0 = recover<char>(merge.Segment(16,16));
             Wf.Row(s0.ToString());
         }
@@ -72,28 +72,5 @@ namespace Z0
 
             return buffer;
         }
-
-        public Symbols<K> Symbols<K>()
-            where K : unmanaged, Enum
-                => Z0.Symbols.index<K>();
-
-        public Index<ByteSpanSpec> NameProps<K>(Symbols<K> src)
-            where K : unmanaged
-        {
-            var view = src.View;
-            var count = view.Length;
-            var buffer = alloc<ByteSpanSpec>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var sym = ref skip(view,i);
-                seek(dst,i) = NameProp(sym);
-            }
-            return buffer;
-        }
-
-        public ByteSpanSpec NameProp<K>(Sym<K> src)
-            where K : unmanaged
-                => ByteSpans.specify(src.Name, text.utf16(src.Name).ToArray());
     }
 }

@@ -9,30 +9,50 @@ namespace Z0
 
     using static Root;
 
-    public readonly ref struct ByteSpanSpec<T>
+    using api = SpanRes;
+
+    public readonly struct ByteSpanSpec<T> : ISpanResSpec
         where T : unmanaged
     {
         public Identifier Name {get;}
 
-        public ReadOnlySpan<Sym<T>> Data {get;}
+        public Index<T> Data {get;}
 
         public bool IsStatic {get;}
 
         public string CellType {get;}
 
         [MethodImpl(Inline)]
-        public ByteSpanSpec(string name, ReadOnlySpan<Sym<T>> data, bool isStatic = true, string type = null)
+        public ByteSpanSpec(string name, T[] data, bool isStatic = true)
         {
             Name = name;
             Data = data;
             IsStatic = isStatic;
-            CellType = type ?? typeof(T).Name;
+            CellType = "byte";
+        }
+
+        public ref T FirstCell
+        {
+            [MethodImpl(Inline)]
+            get => ref Data.First;
         }
 
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => Data.Count;
         }
+
+        public ByteSize DataSize
+        {
+            [MethodImpl(Inline)]
+            get => Data.Size;
+        }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
     }
 }

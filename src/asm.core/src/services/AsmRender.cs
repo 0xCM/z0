@@ -247,14 +247,18 @@ namespace Z0.Asm
             => SymbolicTools.copy(src, ref i, dst);
 
         [Op]
+        public static string rescomment(OpUri uri, BinaryCode src)
+            => string.Format("; {0}", SpanRes.format(SpanRes.specify(uri, src)));
+
+        [Op]
         public static byte format(in ApiCodeBlockHeader src, Span<string> dst)
         {
             var i = z8;
             seek(dst, i++) = src.Separator;
             seek(dst, i++) = asm.comment($"{src.DisplaySig}::{src.Uri}");
-            seek(dst, i++) = ByteSpans.asmcomment(src.Uri, src.CodeBlock);
-            seek(dst, i++) = asm.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
-            seek(dst, i++) = asm.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
+            seek(dst, i++) = rescomment(src.Uri, src.CodeBlock);
+            seek(dst, i++) = asm.comment(string.Concat(nameof(src.CodeBlock.BaseAddress), RP.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
+            seek(dst, i++) = asm.comment(string.Concat(nameof(src.TermCode), RP.spaced(Chars.Eq), src.TermCode.ToString()));
             seek(dst, i++) = src.Separator;
             return i;
         }

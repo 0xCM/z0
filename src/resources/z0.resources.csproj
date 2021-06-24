@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(Blocks)" />
+    <ProjectReference Include="$(SymCore)" />
   </ItemGroup>
 
 </Project>

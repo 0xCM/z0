@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
@@ -29,14 +28,20 @@ namespace Z0
             dst.MsilCode = msil.Code;
             return dst;
         }
-
     }
+
     [ApiHost]
     public class ApiResolver : AppService<ApiResolver>
     {
         HashSet<string> Exclusions;
 
         IMultiDiviner Identity {get;}
+
+        public ApiResolver()
+        {
+            Identity = MultiDiviner.Service;
+            Exclusions = hashset("ToString","GetHashCode", "Equals", "ToString", "Format", "CompareTo");
+        }
 
         [Op]
         public static uint MethodCount(ReadOnlySpan<ResolvedPart> src)
@@ -86,7 +91,7 @@ namespace Z0
 
         public static ReadOnlySpan<ResolvedMethod> methods(ReadOnlySpan<ResolvedPart> src)
         {
-            var dst = root.list<ResolvedMethod>();
+            var dst = list<ResolvedMethod>();
             for(var i=0; i<src.Length; i++)
             {
                 var hosts = skip(src,i).Hosts.View;
@@ -97,12 +102,6 @@ namespace Z0
                 }
             }
             return dst.ViewDeposited();
-        }
-
-        public ApiResolver()
-        {
-            Identity = MultiDiviner.Service;
-            Exclusions = root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
         }
 
         public ReadOnlySpan<ApiMemberInfo> Describe(in ResolvedPart src)
@@ -181,7 +180,7 @@ namespace Z0
 
         public ResolvedHost ResolveHost(IApiHost src)
         {
-            var dst = root.list<ResolvedMethod>();
+            var dst = list<ResolvedMethod>();
             ResolveHost(src, dst);
             if(dst.Count != 0)
             {
@@ -198,12 +197,12 @@ namespace Z0
 
         public ReadOnlySpan<ResolvedPart> ResolveCatalog(IApiCatalog src)
         {
-            var dst = root.datalist<ResolvedPart>();
+            var dst = list<ResolvedPart>();
             var parts = @readonly(src.Parts);
             var count = parts.Length;
             for(var i=0; i<count; i++)
                 dst.Add(ResolvePart(skip(parts,i)));
-            return dst.Close();
+            return dst.ViewDeposited();
         }
 
         public ReadOnlySpan<ApiMemberInfo> LogResolutions(ReadOnlySpan<ResolvedPart> src, FS.FolderPath dir)
@@ -237,12 +236,12 @@ namespace Z0
             var location = FS.path(src.Owner.Location);
             var catalog = ApiRuntimeLoader.catalog(src);
             var flow = Wf.Running(string.Format("Resolving part {0}", src.Id));
-            var hosts = core.list<ResolvedHost>();
+            var hosts = list<ResolvedHost>();
 
             foreach(var host in catalog.ApiTypes)
             {
-                var methods = core.list<ResolvedMethod>();
-                var count = ResolveType(host, methods);
+                var methods = list<ResolvedMethod>();
+                var count = ResolveComplete(host, methods);
                 if(count != 0)
                 {
                     var resolved = methods.ToArray().Sort();
@@ -254,7 +253,7 @@ namespace Z0
 
             foreach(var host in catalog.ApiHosts)
             {
-                var methods = core.list<ResolvedMethod>();
+                var methods = list<ResolvedMethod>();
                 var count = ResolveHost(host, methods);
                 if(count != 0)
                 {
@@ -275,7 +274,6 @@ namespace Z0
             var counter = 0u;
 
             var flow = Wf.Running(string.Format("Resolving {0} members", src.HostUri));
-
             foreach(var method in ApiQuery.nongeneric(src))
             {
                 dst.Add(new ResolvedMethod(method, MemberUri(src.HostUri, method), ApiJit.jit(method)));
@@ -303,7 +301,7 @@ namespace Z0
             return counter;
         }
 
-        public uint ResolveType(ApiCompleteType src, List<ResolvedMethod> dst)
+        public uint ResolveComplete(ApiCompleteType src, List<ResolvedMethod> dst)
         {
             var flow = Wf.Running(string.Format("Resolving type {0}", src.HostUri));
             var counter = 0u;

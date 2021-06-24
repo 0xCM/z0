@@ -11,13 +11,13 @@ namespace Z0
 
     public readonly struct ApiPack : IApiPack
     {
-        public ApiPackSettings Settings {get;}
+        public ApiExtractSettings Settings {get;}
 
         FS.FolderPath Root
             => Settings.ExtractRoot;
 
         [MethodImpl(Inline)]
-        public ApiPack(ApiPackSettings settings)
+        public ApiPack(ApiExtractSettings settings)
         {
             Settings = settings;
         }

@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
 
-    partial class text
+    partial struct RP
     {
         /// <summary>
         /// Formats the content with a space on either side
@@ -22,7 +21,7 @@ namespace Z0
 
         [Op]
         public static string spaced(char c)
-            => concat(Space, c, Space);
+            => string.Concat(Space, c, Space);
 
         /// <summary>
         /// Separates each item with a space

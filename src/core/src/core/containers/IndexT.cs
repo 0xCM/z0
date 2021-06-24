@@ -93,6 +93,12 @@ namespace Z0
             get => ref Index.last(Data);
         }
 
+        public ByteSize Size
+        {
+            [MethodImpl(Inline)]
+            get => size<T>()*Count;
+        }
+
         public Index<T> Sort()
         {
             if(Length != 0)

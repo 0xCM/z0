@@ -25,8 +25,7 @@ namespace Z0.Asm
             var decoder = Wf.AsmDecoder();
             var buffer = text.buffer();
             var sequence = 0u;
-            var segments = root.datalist<MemorySeg>(30000);
-
+            var segments = list<MemorySeg>(30000);
             var asmFlow = Wf.EmittingFile(asmpath);
             var hexFlow = Wf.EmittingFile(hexpath);
             using var asmwriter = asmpath.Writer();
@@ -35,7 +34,7 @@ namespace Z0.Asm
             {
                 var seqlabel = sequence.ToString("d6") + ": ";
                 ref readonly var accessor = ref skip(accessors,i);
-                var raw = Resources.definition(accessor).ToArray();
+                var raw = SpanRes.definition(accessor).ToArray();
                 var bytes = @readonly(raw);
                 var decoded = decoder.Decode(raw, MemoryAddress.Zero).View;
                 var name = accessor.DeclaringType.Name + "/" + accessor.Member.Name;
@@ -75,7 +74,7 @@ namespace Z0.Asm
             Wf.EmittedFile(asmFlow, sequence);
             Wf.EmittedFile(hexFlow, sequence);
 
-            EmitProps(segments.View(), dst + FS.file("respack.data", FS.XPack));
+            EmitProps(segments.ViewDeposited(), dst + FS.file("respack.data", FS.XPack));
         }
 
         void EmitProps(ReadOnlySpan<MemorySeg> src, FS.FilePath dst)

@@ -5,7 +5,9 @@
 namespace Z0.Asm
 {
     using System;
+    using System.IO;
     using System.Reflection;
+    using System.Diagnostics.Tracing;
 
     using static Part;
     using static core;
@@ -902,24 +904,20 @@ namespace Z0.Asm
             var data = spec.Format();
             Wf.Row(data);
 
-            //lookups.EmitAsciBytes(8, "Uppercase", content,  dst);
-            //Wf.Row(dst.Emit());
         }
 
         void EmitSymbolIndex<E>(Identifier container)
             where E : unmanaged, Enum
         {
-            var render = Wf.IndexRender();
             var buffer = TextTools.buffer();
-            render.RenderIndex<E>(container, buffer);
+            SpanRes.symrender<E>(container, buffer);
             Wf.Row(buffer.Emit());
         }
 
         string RenderAsciByteSpan(Identifier name, string data)
         {
-            var bytespans = Wf.AsciByteSpans();
             var dst = TextTools.buffer();
-            bytespans.Render(8, name, data, dst);
+            SpanRes.ascirender(8, name, data, dst);
             return dst.Emit();
         }
 
@@ -938,6 +936,7 @@ namespace Z0.Asm
             var name = "Uppercase";
             EmitAsciBytes(name, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", Db.AppLog(name, FS.Cs));
         }
+
         public void LoadForms()
         {
             var catalog = Wf.StanfordCatalog();
@@ -956,12 +955,6 @@ namespace Z0.Asm
             dst.Sort();
             iter(dst.ViewDeposited(), x => Wf.Row(x));
 
-        }
-
-        unsafe void ShowAsmOperators()
-        {
-            var lookup = AsmOperatorTable.create().Lookup;
-            iter(lookup.View, entry => Wf.Row(entry));
         }
 
         void MapChips()
@@ -1002,8 +995,44 @@ namespace Z0.Asm
         {
             var regs = AsmRegs.list(AsmDsl.GP);
             iter(regs, reg => Wf.Row(reg));
-            var bytespan = ByteSpans.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
+            var bytespan = SpanRes.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
             Wf.Row(bytespan.Format());
+        }
+
+        static void render(EventWrittenEventArgs src, ITextBuffer dst)
+        {
+            dst.AppendLine(src.EventName);
+            dst.AppendLine(RP.PageBreak80);
+            var count = src.Payload.Count;
+            for (int i = 0; i<count; i++)
+            {
+                var name = string.Format("{0,-32}:",src.PayloadNames[i]);
+                var payload = string.Format("{0}",src.Payload[i]);
+                var message = string.Concat(name,payload);
+                dst.AppendLine(message);
+            }
+
+        }
+
+        static async void emit(EventWrittenEventArgs src, StreamWriter dst)
+        {
+            var buffer = TextTools.buffer();
+            render(src,buffer);
+            await dst.WriteLineAsync(buffer.Emit());
+        }
+
+        void Capture()
+        {
+            using var dst = Db.AppLog("clr-events", FS.Log).Writer();
+            void receive(in EventWrittenEventArgs src)
+            {
+                emit(src,dst);
+            }
+
+            using var listener = ClrEventListener.create(receive);
+
+            var settings = ApiExtractSettings.init(Db.CapturePackRoot());
+            Wf.ApiExtractWorkflow().Run(settings);
         }
 
         void movzx(RegOp dst, RegOp src, Span<char> buffer)
@@ -1011,10 +1040,44 @@ namespace Z0.Asm
 
         }
 
+        void GetMethodInfo()
+        {
+            var path = Parts.Math.Assembly.Location;
+            var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Math).Single();
+            var methods = catalog.Methods;
+            SOS.SymbolReader.InitializeSymbolReader("");
+            foreach(var method in methods)
+            {
+                if(SOS.SymbolReader.GetInfoForMethod(path, method.MetadataToken, out var info))
+                {
+                    var size = info.size;
+                    Wf.Row($"{method.Name} | {size}");
+                }
+            }
+        }
+
+        void CheckStringTables()
+        {
+            var input = @readonly(new string[]{"one","two","three", "four", "five", "six", "seven", "eight", "nine","ten"});
+            var table = StringTables.create<byte>("Counts",input);
+            var count = Require.equal(input.Length, (int)table.EntryCount);
+            for(var i=0; i<count; i++)
+            {
+                var data = table[i];
+                ref readonly var s0 = ref skip(input,i);
+                var s1 = new string(data);
+                Require.equal(s0,s1);
+            }
+
+            Wf.Row(table.Format());
+        }
+
+
+
         public void Run()
         {
             Dispatch();
-
+            //CheckStringTables();
             //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs")
             // var part = PartId.Math;
             // var log = Db.AppLog(string.Format("{0}.pdbinfo", part.Format()), FS.Csv);

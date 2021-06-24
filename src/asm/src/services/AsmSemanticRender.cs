@@ -174,7 +174,7 @@ namespace Z0.Asm
         [Op]
         static string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSeq seq)
             => string.Concat(FormatAddress(src, AddressPad),
-                string.Concat(text.spaced(offset)).PadRight(OffsetAddrPad),
+                string.Concat(RP.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
 
         [Op]

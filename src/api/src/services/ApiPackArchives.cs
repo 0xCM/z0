@@ -37,7 +37,7 @@ namespace Z0
             => Root.SubDirs(false).Select(x => (IApiPack)(pack(x)));
 
         static IApiPack pack(FS.FolderPath root)
-            => new ApiPack(ApiPackSettings.init(root));
+            => new ApiPack(ApiExtractSettings.init(root));
 
         public Outcome<Arrow<FS.FolderPath,FS.FolderPath>> Link(Timestamp ts)
         {

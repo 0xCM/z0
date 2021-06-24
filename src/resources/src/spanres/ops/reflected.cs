@@ -5,12 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    partial class ApiExtractor
+    using static Root;
+    using static core;
+
+    partial struct SpanRes
     {
-        // [Op]
-        // OpUri MemberUri(ApiHostUri host, MethodInfo method)
-        //     => ApiUri.define(ApiUriScheme.Located, host, method.Name, Identity.Identify(method));
+        public static ReadOnlySpan<ReflectedByteSpan> reflected(Type[] src)
+            => Clr.bytespans(src);
     }
 }

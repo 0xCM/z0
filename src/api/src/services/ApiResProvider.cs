@@ -17,14 +17,14 @@ namespace Z0
         public MemoryFile MapResPack()
             => MemoryFiles.map(ResPackPath());
 
-        public Index<ApiResAccessor> ResPackAccessors()
+        public Index<SpanResAccessor> ResPackAccessors()
         {
             var path = ResPackPath();
             var flow = Wf.Running(Msg.LoadingRespackAccessors.Format(path));
             if(!path.Exists)
                 Throw.sourced(FS.Msg.DoesNotExist.Format(path));
             var assembly = Assembly.LoadFrom(path.Name);
-            var loaded = Resources.accessors(assembly);
+            var loaded = SpanRes.accessors(assembly);
             Wf.Ran(flow, Msg.LoadedRespackAccessors.Format(loaded.Count, path));
             return loaded;
         }

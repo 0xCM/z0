@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum ApiResKind : byte
+    public interface ISpanResSpec
     {
-        None = 0,
+        Identifier Name {get;}
 
-        ByteSpan,
+        bool IsStatic {get;}
 
-        CharSpan
+        string CellType {get;}
+
+        uint CellCount {get;}
     }
 }

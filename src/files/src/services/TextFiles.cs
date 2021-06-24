@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Root;
     using static core;
@@ -24,7 +22,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<LineCount> linecount(ReadOnlySpan<FS.FilePath> src)
+        public static Index<LineCount> linecounts(ReadOnlySpan<FS.FilePath> src)
         {
             var dst = bag<LineCount>();
             iter(src, path => dst.Add(linecount(path)), true);

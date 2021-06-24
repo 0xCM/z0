@@ -12,7 +12,7 @@ namespace Z0
     {
         Timestamp Timestamp {get;}
 
-        ApiPackSettings Settings {get;}
+        ApiExtractSettings Settings {get;}
 
         FS.FolderPath IFileArchive.Root
             => Settings.ExtractRoot;

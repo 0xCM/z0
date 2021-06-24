@@ -10,16 +10,16 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ApiResAccessor : ITextual
+    public readonly struct SpanResAccessor : ITextual
     {
         public ApiHostUri Host {get;}
 
         public MethodInfo Member {get;}
 
-        public ApiResKind Kind {get;}
+        public SpanResKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public ApiResAccessor(ApiHostUri host, MethodInfo member, ApiResKind format)
+        public SpanResAccessor(ApiHostUri host, MethodInfo member, SpanResKind format)
         {
             Host = host;
             Member = member;

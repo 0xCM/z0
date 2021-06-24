@@ -112,5 +112,20 @@ namespace Z0
                 return 0;
             }
         }
+
+        [MethodImpl(Inline)]
+        public static T equal<T>(T a, T b)
+            where T : IEquatable<T>
+        {
+            if(a.Equals(b))
+            {
+                return a;
+            }
+            else
+            {
+                Throw.message(string.Format("{0} != {1}", a, b));
+                return default;
+            }
+        }
     }
 }

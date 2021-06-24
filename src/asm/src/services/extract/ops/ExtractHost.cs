@@ -62,19 +62,19 @@ namespace Z0
             return new ApiHostExtracts(src.Host, dst.ToArray());
         }
 
-        public uint ExtractHost(ResolvedHost src, List<ApiMemberExtract> dst)
-        {
-            var flow = Wf.Running(Msg.ExtractingHost.Format(src.Host));
-            var methods = src.Methods.View;
-            var count = methods.Length;
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                dst.Add(ApiExtracts.extract(skip(methods,i), Buffer));
-                counter++;
-            }
-            Wf.Ran(flow, Msg.ExtractedHost.Format(counter, src.Host));
-            return counter;
-        }
+        // public uint ExtractHost(ResolvedHost src, List<ApiMemberExtract> dst)
+        // {
+        //     var flow = Wf.Running(Msg.ExtractingHost.Format(src.Host));
+        //     var methods = src.Methods.View;
+        //     var count = methods.Length;
+        //     var counter = 0u;
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         dst.Add(ApiExtracts.extract(skip(methods,i), Buffer));
+        //         counter++;
+        //     }
+        //     Wf.Ran(flow, Msg.ExtractedHost.Format(counter, src.Host));
+        //     return counter;
+        // }
     }
 }

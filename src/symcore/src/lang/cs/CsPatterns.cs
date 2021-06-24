@@ -131,6 +131,10 @@ namespace Z0
         public static string Using()
             => L.Using;
 
+        [MethodImpl(Inline)]
+        public static string Readonly()
+            => L.Readonly;
+
         public static string UsingNs(string name)
             => string.Format(L.UsingNamespace, name);
 
@@ -192,6 +196,5 @@ namespace Z0
         public static RenderPattern<string> ReadOnlySpanTypePattern => "ReadOnlySpan<{0}>";
 
         public static RenderPattern<string,string> ExpressionBody => "{0} => {1}";
-
     }
 }

@@ -9,20 +9,20 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ApiResAccessors
+    public readonly struct SpanResAccessors
     {
         public Type DeclaringType {get;}
 
-        readonly Index<ApiResAccessor> Accessors;
+        readonly Index<SpanResAccessor> Accessors;
 
         [MethodImpl(Inline)]
-        public ApiResAccessors(Type declaring, ApiResAccessor[] accessors)
+        public SpanResAccessors(Type declaring, SpanResAccessor[] accessors)
         {
             DeclaringType = declaring;
             Accessors = accessors;
         }
 
-        public ReadOnlySpan<ApiResAccessor> View
+        public ReadOnlySpan<SpanResAccessor> View
         {
             [MethodImpl(Inline)]
             get => Accessors;

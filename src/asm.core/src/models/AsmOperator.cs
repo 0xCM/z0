@@ -31,15 +31,4 @@ namespace Z0.Asm
         Sub
     }
 
-    public sealed class AsmOperatorTable : StringTable<AsmOperatorTable>
-    {
-        static AsmOperatorTable()
-        {
-            init(3);
-            var i=0;
-            Entries[i++] = "";
-            Entries[i++] = "+";
-            Entries[i++] = "-";
-        }
-    }
 }

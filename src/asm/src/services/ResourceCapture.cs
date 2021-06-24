@@ -20,9 +20,9 @@ namespace Z0.Asm
         /// 001ch ret                            ; RET                 | C3              | 1   | c3
         /// </remarks>
         [Op]
-        public static MemorySeg capture(ApiResAccessor accessor)
+        public static MemorySeg capture(SpanResAccessor accessor)
         {
-            var def = Resources.definition(accessor);
+            var def = SpanRes.definition(accessor);
             var address = MemoryAddress.Zero;
             var size = ByteSize.Zero;
             for(var i=0; i<MemberSegCount; i++)

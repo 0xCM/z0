@@ -23,6 +23,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes the combined length of the source entries
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static uint length(ReadOnlySpan<string> src)
+        {
+            var total = 0u;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                total += (uint)skip(src,i).Length;
+            return total;
+        }
+
+        /// <summary>
         /// Determines the length of a specified <see cref='string'/>
         /// </summary>
         /// <param name="src">The source text</param>

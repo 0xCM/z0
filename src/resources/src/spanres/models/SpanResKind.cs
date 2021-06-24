@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IByteSpanSpec
+    public enum SpanResKind : byte
     {
-        Identifier Name {get;}
+        None = 0,
 
-        bool IsStatic {get;}
+        ByteSpan,
 
-        string CellType {get;}
-
-        uint CellCount {get;}
+        CharSpan
     }
 }

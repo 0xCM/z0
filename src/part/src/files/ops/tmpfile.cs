@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
-    using Windows;
 
     using static Root;
     using static core;
@@ -15,6 +14,6 @@ namespace Z0
     partial struct FS
     {
         public static FS.FilePath tmpfile()
-            => FS.dir(Path.GetTempPath()) + FS.file(string.Format("{0}.{1}", controller().PartName(), timestamp()));
+            => FS.dir(Path.GetTempPath()) + FS.file(string.Format("{0}.{1}", controller().PartName(), core.timestamp()));
     }
 }

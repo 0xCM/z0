@@ -8,9 +8,9 @@ namespace Z0
     public sealed class ApiPacks : AppService<ApiPacks>
     {
         public IApiPack Create(Timestamp ts)
-            => new ApiPack(ApiPackSettings.init(Db.CapturePackRoot(), ts));
+            => new ApiPack(ApiExtractSettings.init(Db.CapturePackRoot(), ts));
 
-        public IApiPack Create(ApiPackSettings settings)
+        public IApiPack Create(ApiExtractSettings settings)
             => new ApiPack(settings);
 
         public IApiPack Create()
@@ -20,7 +20,7 @@ namespace Z0
             => Db.CapturePackRoot();
 
         public IApiPack Create(FS.FolderPath root)
-            => new ApiPack(ApiPackSettings.init(root));
+            => new ApiPack(ApiExtractSettings.init(root));
 
         public IApiPack Current()
             => Archives.Current();

@@ -14,7 +14,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Msg;
 
     [ApiHost]
     public partial class ApiExtractor : AppService<ApiExtractor>
@@ -37,8 +36,6 @@ namespace Z0
 
         byte[] Buffer;
 
-        HashSet<string> Exclusions;
-
         IMultiDiviner Identity {get;}
 
         Index<ResolvedPart> ResolvedParts;
@@ -51,7 +48,6 @@ namespace Z0
         {
             Identity = MultiDiviner.Service;
             Buffer = ApiExtracts.buffer();
-            Exclusions = hashset("ToString","GetHashCode", "Equals", "ToString");
             Routines = array<AsmRoutine>();
             ResolvedParts = array<ResolvedPart>();
             FormatConfig = AsmFormatConfig.@default(out var _);
@@ -113,11 +109,6 @@ namespace Z0
             }
         }
 
-        void Analyze()
-        {
-            Wf.AsmAnalyzer().Analyze(Routines, Paths);
-        }
-
         void EmitCaptureIndex()
         {
             var dst = Paths.RootDir() + FS.file(Tables.identify<CaptureIndexEntry>().Format(), FS.Csv);
@@ -137,24 +128,59 @@ namespace Z0
             TableEmit(@readonly(buffer), CaptureIndexEntry.RenderWidths, dst);
         }
 
-        void RunWorkflow(IApiPack pack)
+        void ClearTargets()
         {
             Paths.ExtractRoot().Clear();
             Paths.AsmSourceRoot().Clear(true);
-            var parts = Wf.ApiCatalog.Parts;
+        }
 
-            ResolvedParts = parts.Map(Resolver.ResolvePart);
+        public void ResolveParts()
+        {
+            var parts = Wf.ApiCatalog.Parts.ToReadOnlySpan();
+            var count = parts.Length;
+            ResolvedParts = alloc<ResolvedPart>(count);
+            ref var dst = ref ResolvedParts.First;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(parts,i);
+                var resolution = Resolver.ResolvePart(part);
+                seek(dst,i) = resolution;
+                Receivers.Raise(new PartResolvedEvent(resolution));
+            }
+        }
+
+        public void ExtractParts()
+        {
             ExtractParts(ResolvedParts, false);
+        }
 
+        void CollectRoutines()
+        {
             CollectedDatasets = DatasetReceiver.Array();
             Routines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
             Routines.Sort();
+        }
 
+        void EmitContext(IApiPack pack)
+        {
             if(pack.Settings.EmitContext)
                 EmitProcessContext(pack);
+        }
 
+        void EmitAnalyses(IApiPack pack)
+        {
             if(pack.Settings.Analyze)
-                Analyze();
+                Wf.AsmAnalyzer().Analyze(Routines, Paths);
+        }
+
+        void RunWorkflow(IApiPack pack)
+        {
+            ClearTargets();
+            ResolveParts();
+            ExtractParts();
+            CollectRoutines();
+            EmitContext(pack);
+            EmitAnalyses(pack);
         }
 
         FS.FolderPath SegDir

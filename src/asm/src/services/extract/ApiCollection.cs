@@ -20,7 +20,6 @@ namespace Z0
 
         public ReadOnlySpan<ResolvedPart> ResolvedParts
         {
-
             [MethodImpl(Inline)]
             get => _ResolvedParts.View;
         }

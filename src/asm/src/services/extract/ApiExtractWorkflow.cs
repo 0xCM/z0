@@ -58,32 +58,21 @@ namespace Z0
 
         }
 
-        public ApiCollection Run()
+        public ApiCollection Run(in ApiExtractSettings settings)
         {
             var pdb = false;
             var packs = Wf.ApiPacks();
-            var ts = now();
-            var settings = ApiPackSettings.init(Db.CapturePackRoot(), ts);
             var pack = packs.Create(settings);
             var collection = Run(pack);
-            packs.CreateLink(ts);
+            packs.CreateLink(settings.Timestamp);
             if(pdb)
                 IndexPdbSymbols(collection.ResolvedParts, pack.Root + FS.file("symbols", FS.Log));
             return collection;
         }
 
-        public static void run(IWfRuntime wf)
+        public ApiCollection Run()
         {
-            var extract = ApiExtractWorkflow.create(wf);
-            var pdb = false;
-            var packs = wf.ApiPacks();
-            var ts = now();
-            var settings = ApiPackSettings.init(wf.Db().CapturePackRoot(), ts);
-            var pack = packs.Create(settings);
-            var collection = extract.Run(pack);
-            packs.CreateLink(ts);
-            if(pdb)
-                extract.IndexPdbSymbols(collection.ResolvedParts, pack.Root + FS.file("symbols", FS.Log));
+            return Run(ApiExtractSettings.init(Db.CapturePackRoot(), now()));
         }
 
         void IndexPdbSymbols(ReadOnlySpan<ResolvedPart> parts, FS.FilePath dst)
@@ -135,30 +124,13 @@ namespace Z0
             return collected;
         }
 
-        public static Outcome<Timestamp> timestamp(FS.FolderPath src)
-        {
-            if(src.IsEmpty)
-                return Timestamp.Zero;
-
-            var fmt = src.Format(PathSeparator.FS);
-            var idx = fmt.LastIndexOf(Chars.FSlash);
-            if(idx == NotFound)
-                return Timestamp.Zero;
-
-            var outcome = Time.parse(fmt.RightOfIndex(idx), out var ts);
-            if(outcome)
-                return ts;
-            else
-                return(false,outcome.Message);
-        }
-
         public Index<LineCount> CountLines()
         {
             var service = Wf.ApiPacks();
             var pack = service.Current();
             var files = pack.Files(FS.Csv).Yield();
             var counting = Wf.Running(string.Format("Counting lines in {0} files from {1}", files.Length, pack.Root));
-            var counts = TextFiles.linecount(files);
+            var counts = TextFiles.linecounts(files);
             iter(counts, c => Wf.Row(c.Format()));
             Wf.Ran(counting, string.Format("Counted lines in {0} files", files.Length));
             return counts;

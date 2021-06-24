@@ -8,33 +8,71 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    public readonly struct StringTable
+    using api = StringTables;
+
+    public readonly struct StringTable<T>
+        where T : unmanaged
     {
-        readonly Index<string> Entries;
+        public Identifier Name {get;}
+
+        public readonly string Content;
+
+        readonly Index<T> _Offsets;
 
         [MethodImpl(Inline)]
-        public StringTable(Index<string> entries)
+        public StringTable(Identifier name, string src, Index<T> offsets)
         {
-            Entries = entries;
+            Name = name;
+            Content = src;
+            _Offsets = offsets;
         }
 
-        public ReadOnlySpan<string> View
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<char> Entry(T index)
+            => api.entry(this, index);
+
+        public ReadOnlySpan<char> this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => Entries.View;
+            get => api.entry(this, index);
+        }
+
+        public ReadOnlySpan<char> this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => api.entry(this, (ulong)index);
         }
 
         public uint EntryCount
         {
             [MethodImpl(Inline)]
-            get => Entries.Count;
+            get => _Offsets.Count;
         }
 
-        public ref readonly string this[uint index]
+        public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
-            get => ref Entries[index];
+            get => Content;
         }
+
+        public ReadOnlySpan<T> Offsets
+        {
+            [MethodImpl(Inline)]
+            get => _Offsets.View;
+        }
+
+        public T[] OffsetStorage
+        {
+            [MethodImpl(Inline)]
+            get => _Offsets.Storage;
+        }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
     }
 }

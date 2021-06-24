@@ -10,16 +10,16 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly struct ApiRes
+    public readonly struct SpanResInfo
     {
-        public ApiResAccessor Accessor {get;}
+        public SpanResAccessor Accessor {get;}
 
         public MemoryAddress Address {get;}
 
         public readonly uint Size {get;}
 
         [MethodImpl(Inline)]
-        public ApiRes(ApiResAccessor accessor, MemoryAddress address, uint size)
+        public SpanResInfo(SpanResAccessor accessor, MemoryAddress address, uint size)
         {
             Accessor = accessor;
             Address = address;

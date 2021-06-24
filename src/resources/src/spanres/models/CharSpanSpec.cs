@@ -10,48 +10,49 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = ByteSpans;
+    using api = SpanRes;
 
-    public readonly struct ByteSpanSpec : IByteSpanSpec
+    public readonly struct CharSpanSpec : ISpanResSpec
     {
         public Identifier Name {get;}
 
-        public BinaryCode Data {get;}
+        public string _Data {get;}
 
         public bool IsStatic {get;}
 
         public string CellType {get;}
 
         [MethodImpl(Inline)]
-        public ByteSpanSpec(string name, byte[] data, bool isStatic = true)
+        public CharSpanSpec(string name, string data, bool isStatic = true)
         {
             Name = name;
-            Data = data;
+            _Data = data;
             IsStatic = isStatic;
-            CellType = "byte";
+            CellType = "char";
         }
 
-        public ref byte FirstByte
+        public ReadOnlySpan<char> Data
+        {
+            get => _Data;
+        }
+
+        public ref readonly char FirstCell
         {
             [MethodImpl(Inline)]
-            get => ref Data.First;
+            get => ref first(Data);
         }
 
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => (uint)Data.Length;
         }
 
         public ByteSize DataSize
         {
             [MethodImpl(Inline)]
-            get => Data.Size;
+            get => CellCount*2;
         }
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> Segment(ByteSize offset, ByteSize size)
-            => slice(Data.View, offset, size);
 
         public string Format()
             => api.format(this);

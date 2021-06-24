@@ -11,7 +11,6 @@ namespace Z0
     using static Root;
     using static core;
 
-
     [StructLayout(LayoutKind.Sequential)]
     public ref struct ApiCallData
     {
