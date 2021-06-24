@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static BufferSeqId;
 
-    public interface ICaptureChecks : IContextual<IAsmContext>, IBufferedChecker, ITestDynamic, ICheckDynamicVectors
+    public interface ICaptureChecks : IContextual<IAsmContextDepr>, IBufferedChecker, ITestDynamic, ICheckDynamicVectors
     {
         IPolyrand IPolyrandProvider.Random
             => Context.Random;

@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using RFI = AsmCodes.RexFieldIndex;
 
@@ -23,58 +24,49 @@ namespace Z0.Asm
         public RexPrefix(byte src)
             => Data = src;
 
+        [MethodImpl(Inline)]
+        public readonly bit W()
+            => bit.test(Data, (byte)RFI.W);
+
         /// <summary>
         /// When enabled, indicates a 64-bit operand size; if not, operand size determined by CS.D
         /// </summary>
-        public bit W
-        {
-            [MethodImpl(Inline)]
-            get => bit.test(Data, (byte)RFI.W);
-            [MethodImpl(Inline)]
-            set => Data = bit.set(Data, (byte)RFI.W, value);
-        }
+        [MethodImpl(Inline)]
+        public void W(bit w)
+            => Data = bit.set(Data, (byte)RFI.W, w);
 
-        /// <summary>
-        /// Indicates an extension of the ModR/M reg field
-        /// </summary>
-        public bit R
-        {
-            [MethodImpl(Inline)]
-            get => bit.test(Data, (byte)RFI.R);
-            [MethodImpl(Inline)]
-            set => Data = bit.set(Data, (byte)RFI.R, value);
-        }
+        [MethodImpl(Inline)]
+        public readonly bit R()
+            => bit.test(Data, (byte)RFI.R);
+
+        [MethodImpl(Inline)]
+        public void R(bit r)
+            => Data = bit.set(Data, (byte)RFI.R, r);
+
+        [MethodImpl(Inline)]
+        public readonly bit X()
+            => bit.test(Data, (byte)RFI.X);
 
         /// <summary>
         /// Indicates an extension of the SIB index field
         /// </summary>
-        public bit X
-        {
-            [MethodImpl(Inline)]
-            get => bit.test(Data, (byte)RFI.X);
-            [MethodImpl(Inline)]
-            set => Data = bit.set(Data, (byte)RFI.X, value);
-        }
+        [MethodImpl(Inline)]
+        public void X(bit x)
+            => Data = bit.set(Data, (byte)RFI.X, x);
+
+        [MethodImpl(Inline)]
+        public readonly bit B()
+            => bit.test(Data, (byte)RFI.B);
 
         /// <summary>
         /// Indicates an extension of the ModR/M r/m field, SIB base field, or Opcode reg field
         /// </summary>
-        public bit B
-        {
-            [MethodImpl(Inline)]
-            get => bit.test(Data,(byte)RFI.B);
-            [MethodImpl(Inline)]
-            set => Data = bit.set(Data, (byte)RFI.B, value);
-        }
+        [MethodImpl(Inline)]
+        public void B(bit b)
+            => Data = bit.set(Data, (byte)RFI.B, b);
 
-        public byte Code
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-
-            [MethodImpl(Inline)]
-            set => Data = value;
-        }
+        public readonly byte Encoded()
+            => Data;
 
         public bool IsEmpty
         {
@@ -106,7 +98,20 @@ namespace Z0.Asm
         public static implicit operator byte(RexPrefix src)
             => src.Data;
 
+        [MethodImpl(Inline)]
+        public static implicit operator RexPrefix(byte src)
+            => new RexPrefix(src);
+
         public static RexPrefix Empty
             => new RexPrefix(0);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<RexPrefix> Range()
+            => recover<RexPrefix>(RexPrefix._Range);
+
+        static ReadOnlySpan<byte> _Range
+            => new byte[16]{0x40,0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x4A,0x4B,0x4C,0x4D,0x4E,0x4F};
+
+        const string RexFieldPattern = "[W:{0} | R:{1} | X:{2} | B:{3}]";
     }
 }

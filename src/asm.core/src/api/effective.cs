@@ -23,6 +23,6 @@ namespace Z0.Asm
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static MemoryAddress effective(Vsib vsib, Vector256<uint> src, uint dx)
-            => vsib.Scale()*src.GetElement(vsib.Index)+ (ulong)vsib.Base + (ulong)dx;
+            => vsib.Scale()*src.GetElement(vsib.Index())+ (ulong)vsib.Base() + (ulong)dx;
     }
 }

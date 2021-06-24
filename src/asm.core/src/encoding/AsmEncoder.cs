@@ -40,14 +40,6 @@ namespace Z0.Asm
             => ref @as<byte,ModRm>(skip(src.Bytes, offset));
 
         [MethodImpl(Inline), Op]
-        public static byte rex(bit b, bit x, bit r, bit w)
-        {
-            var bx = math.slor((byte)b, 0, (byte)x, 1);
-            var rw = math.slor((byte)r, 2, (byte)w, 3);
-            return math.or(bx, rw, rex());
-        }
-
-        [MethodImpl(Inline), Op]
         public static bit test(K src, K match)
             => (src & match) == match;
 

@@ -43,9 +43,6 @@ namespace Z0
             where T : unmanaged
                 => new Sym(src.Identity, src.Key, src.Type, bw64(src.Kind), src.Name, src.Expr, src.Description, src.Hidden);
 
-        /// <summary>
-        /// Symbol cache loader
-        /// </summary>
         internal static Symbols<E> load<E>()
             where E : unmanaged, Enum
         {

@@ -23,29 +23,20 @@ namespace Z0.Asm
         /// <summary>
         /// Defines bits [2:0] of the modrm byte
         /// </summary>
-        public uint3 Rm
-        {
-            [MethodImpl(Inline)]
-            get => Bits.segment(Data, 0, 2);
-        }
+        public uint3 Rm()
+            => Bits.segment(Data, 0, 2);
 
         /// <summary>
         /// Defines bits [5:3] of the modrm byte
         /// </summary>
-        public uint3 Reg
-        {
-            [MethodImpl(Inline)]
-            get => Bits.segment(Data, 3, 5);
-        }
+        public uint3 Reg()
+            => Bits.segment(Data, 3, 5);
 
         /// <summary>
         /// Defines bits [7:6] of the modrm byte
         /// </summary>
-        public uint2 Mod
-        {
-            [MethodImpl(Inline)]
-            get => Bits.segment(Data, 6, 7);
-        }
+        public uint2 Mod()
+            => Bits.segment(Data, 6, 7);
 
         /// <summary>
         /// The encoded bitfield value
@@ -67,7 +58,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => (byte)Data == 0;
         }
-
 
         [MethodImpl(Inline)]
         public static ModRm operator ^(ModRm a, ModRm b)

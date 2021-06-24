@@ -39,7 +39,7 @@ namespace Z0.Asm
             GS = SegOverride.GS,
 
             [Symbol("x66", "Mandatory prefix, x66")]
-            x66 = MandatoryPrefix.x66,
+            x66 = MandatoryPrefixCode.x66,
 
             [Symbol("ADSZ", "Address size override,  x67")]
             ADSZ = SizeOverride.ADSZ,
@@ -48,22 +48,16 @@ namespace Z0.Asm
             SS = SegOverride.SS,
 
             [Symbol("LOCK", "Lock prefix, xF0")]
-            LOCK = LockPrefix.LOCK,
+            LOCK = LockPrefixCode.LOCK,
 
             [Symbol("F2", "Mandatory prefix, xF2")]
-            F2 = MandatoryPrefix.F2,
+            F2 = MandatoryPrefixCode.F2,
 
             [Symbol("F3", "Mandatory prefix, xF3")]
-            F3 = MandatoryPrefix.F3,
+            F3 = MandatoryPrefixCode.F3,
 
             [Symbol("REPNZ", "Repeat prefix, xF2")]
             REPNZ = RepeatPrefix.REPNZ,
-
-            [Symbol("REPNE", "Repeat prefix, xF2")]
-            REPNE = RepeatPrefix.REPNE,
-
-            [Symbol("REPE", "Repeat prefix, xF3")]
-            REPE = RepeatPrefix.REPE,
 
             [Symbol("REPZ", "Repeat prefix, xF3")]
             REPZ = RepeatPrefix.REPZ,

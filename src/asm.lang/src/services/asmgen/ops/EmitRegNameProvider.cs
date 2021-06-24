@@ -17,7 +17,7 @@ namespace Z0.Asm
         public void EmitRegNameProvider(FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
-            var buffer = text.buffer();
+            var buffer = TextTools.buffer();
             var margin = 0u;
             buffer.IndentLine(margin, AsmNamespaceDecl());
             buffer.IndentLine(margin, Open());
@@ -35,7 +35,7 @@ namespace Z0.Asm
             dst.IndentLine(margin, Open());
             margin +=4;
             var counter = 0u;
-            var types = typeof(RegCodes).GetNestedTypes().Enums().ToReadOnlySpan();
+            var types = AsmCodes.RegCodeTypes().ToReadOnlySpan();
             for(var i=0; i<types.Length; i++)
             {
                 ref readonly var type = ref skip(types,i);

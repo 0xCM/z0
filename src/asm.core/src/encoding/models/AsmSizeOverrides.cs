@@ -13,10 +13,6 @@ namespace Z0.Asm
 
     public readonly struct AsmSizeOverrides
     {
-        [MethodImpl(Inline)]
-        public static AsmSizeOverrides define(bit opsz, bit adsz)
-            => new AsmSizeOverrides(opsz,adsz);
-
         readonly byte Code;
 
         [MethodImpl(Inline)]

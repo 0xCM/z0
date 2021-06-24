@@ -33,11 +33,8 @@ namespace Z0.Asm
         /// to specify the general-purpose register (base GPR) that contains the base address base
         /// to be used in the computation of each of the effective addresses
         /// </remarks>
-        public uint3 Base
-        {
-            [MethodImpl(Inline)]
-            get => (uint3)(Data >> (byte)F.Base);
-        }
+        public uint3 Base()
+            => (uint3)(Data >> (byte)F.Base);
 
         /// <summary>
         /// VSIB.index, Bits [5:3]
@@ -47,11 +44,8 @@ namespace Z0.Asm
         /// register that contains the packed array of index values index[i] to be used in the computation of
         /// the array of effective addresses effective address[i].
         /// </remarks>
-        public uint3 Index
-        {
-            [MethodImpl(Inline)]
-            get => (uint3)(Data >> (byte)F.Index);
-        }
+        public uint3 Index()
+            => (uint3)(Data >> (byte)F.Index);
 
         /// <summary>
         /// VSIB.SS, Bits [7:6]
@@ -64,14 +58,11 @@ namespace Z0.Asm
         /// SS = 10b => scale = 4
         /// SS = 11b => scale = 8
         /// </remarks>
-        public uint2 SS
-        {
-            [MethodImpl(Inline)]
-            get => (uint2)(Data >> (byte)F.SS);
-        }
+        public uint2 SS()
+            => (uint2)(Data >> (byte)F.SS);
 
         [MethodImpl(Inline)]
         public byte Scale()
-            => (byte)Pow2.pow(SS);
+            => (byte)Pow2.pow(SS());
     }
 }

@@ -34,5 +34,8 @@ namespace Z0
 
         [CmdSpec(".toolchain","Executes an asm toolchain")]
         ToolChain,
+
+        [CmdSpec(".rexbits","Shows a REX bitfield table")]
+        ShowRex,
     }
 }

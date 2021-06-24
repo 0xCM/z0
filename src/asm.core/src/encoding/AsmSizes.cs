@@ -14,10 +14,6 @@ namespace Z0.Asm
     public readonly struct AsmSizes
     {
         [MethodImpl(Inline), Op]
-        public static AsmSizeOverrides overrides(bit opsz, bit adsz)
-            => AsmSizeOverrides.define(opsz,adsz);
-
-        [MethodImpl(Inline), Op]
         public static AsmOperandSize operand(bit w, bit opsz, bit adsz)
         {
             var index = BitNumbers.join(w, opsz, adsz);

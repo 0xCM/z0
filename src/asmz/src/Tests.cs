@@ -792,14 +792,5 @@ namespace Z0.Asm
             var archive = Wf.ApiHexArchive();
             archive.CodeBlocks(part, accept);
         }
-
-
-        public void ListEnvVars()
-        {
-            var src = Resources.strings<uint>(typeof(EnvVarNames)).View;
-            for(var i=0; i<src.Length; i++)
-                Wf.Status(skip(src,i).Format());
-        }
-
     }
 }

@@ -60,5 +60,10 @@ namespace Z0
         [Op]
         public static AsmToolchain AsmToolchain(this IWfRuntime context)
             => Svc.AsmToolchain.create(context);
+
+        [Op]
+        public static AsmCmdService AsmCmd(this IWfRuntime context)
+            => Svc.AsmCmdService.create(context);
+
     }
 }

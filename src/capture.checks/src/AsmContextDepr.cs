@@ -8,9 +8,9 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    public class AsmContext : IAsmContext
+    class AsmContextDepr : IAsmContextDepr
     {
         public IWfRuntime Wf {get;}
 
@@ -21,7 +21,7 @@ namespace Z0.Asm
         public IPolyrand Random {get;}
 
         [MethodImpl(Inline)]
-        public AsmContext(ICheckContext app, IWfRuntime wf)
+        public AsmContextDepr(ICheckContext app, IWfRuntime wf)
         {
             Wf = wf;
             MessageQueue = app.MessageQueue;

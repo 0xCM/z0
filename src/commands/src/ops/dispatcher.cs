@@ -12,6 +12,6 @@ namespace Z0
     {
         [Op]
         public static CmdDispatcher dispatcher(object host)
-            => new CmdDispatcher(host,lookup(host.GetType()));
+            => new CmdDispatcher(host, lookup(host));
     }
 }

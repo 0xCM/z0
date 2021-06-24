@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
+
     using api = AsciSymbols;
 
     /// <summary>
@@ -63,14 +64,7 @@ namespace Z0
         }
 
         public string Format()
-        {
-            var len = Length;
-            var dst = span(alloc<char>(len));
-            var src = Data.View;
-            for(var i=0u; i<len; i++)
-                seek(dst, i) = (char)skip(src,i);
-            return sys.@string(dst);
-        }
+            => AsciSymbols.format(this);
 
         public override string ToString()
             => Format();

@@ -11,10 +11,11 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
-        public static CmdRunnerLookup lookup(Type host)
+        public static CmdMethodLookup lookup(object host)
         {
-            var methods = host.PublicInstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
-            var lookup = CmdRunnerLookup.create();
+            var type = host.GetType();
+            var methods = type.InstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
+            var lookup = CmdMethodLookup.create();
             foreach(var (name,method) in methods)
             {
                 var cmd = method.Tag<CmdOpAttribute>().MapValueOrDefault(m => m.CommandName, method.Name);

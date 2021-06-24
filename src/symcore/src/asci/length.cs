@@ -2,23 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct EscapePrefix
+    partial struct AsciSymbols
     {
-        public Hex8 Code {get;}
-
-        [MethodImpl(Inline)]
-        public EscapePrefix(Hex8 code)
-            => Code = code;
-
-        [MethodImpl(Inline)]
-        public static implicit operator EscapePrefix(Hex8 src)
-            => new EscapePrefix(src);
+        [MethodImpl(Inline), Op]
+        public static int length(ReadOnlySpan<byte> src)
+            => foundnot(search(src, AsciNone), src.Length);
     }
 }

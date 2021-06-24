@@ -12,10 +12,19 @@ namespace Z0
     using static core;
     using static Root;
 
-    public class CmdRunnerLookup
+    public class CmdMethodLookup
     {
-        public static CmdRunnerLookup create()
-            => new CmdRunnerLookup();
+        public static CmdMethodLookup join(params CmdMethodLookup[] src)
+        {
+            var dst = create();
+            foreach(var lookup in src)
+                foreach(var (k,v) in lookup.Pairs)
+                    dst.Add(k,v);
+            return dst.Seal();
+        }
+
+        public static CmdMethodLookup create()
+            => new CmdMethodLookup();
 
         readonly Dictionary<string,MethodInfo> Data;
 
@@ -23,7 +32,7 @@ namespace Z0
 
         bool Sealed;
 
-        CmdRunnerLookup()
+        CmdMethodLookup()
         {
             Data = new();
             Pairs = KeyValuePairs<string,MethodInfo>.Empty;
@@ -45,7 +54,7 @@ namespace Z0
             return Data.TryGetValue(spec, out runner);
         }
 
-        public CmdRunnerLookup Seal()
+        public CmdMethodLookup Seal()
         {
             Pairs = Data.ToKVPairs();
             Sealed = true;
@@ -58,7 +67,7 @@ namespace Z0
             get => Pairs.Keys;
         }
 
-        public ReadOnlySpan<MethodInfo> Runners
+        public ReadOnlySpan<MethodInfo> Methods
         {
             [MethodImpl(Inline)]
             get => Pairs.Values;

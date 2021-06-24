@@ -14,10 +14,6 @@ namespace Z0
     public readonly partial struct AsciSymbols
     {
         [MethodImpl(Inline), Op]
-        public static int length(ReadOnlySpan<byte> src)
-            => foundnot(search(src, AsciNone), src.Length);
-
-        [MethodImpl(Inline), Op]
         public static string @string(sbyte offset, sbyte count)
             => TextTools.slice(AsciCharString, offset, count);
 

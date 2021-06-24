@@ -8,16 +8,15 @@ namespace Z0.Asm
 
     partial struct AsmCodes
     {
+        [SymbolSource]
         public enum RepeatPrefix : byte
         {
             None = 0,
 
-            REPNE = xf2,
-
+            [Symbol("f2")]
             REPNZ = xf2,
 
-            REPE = xf3,
-
+            [Symbol("f3")]
             REPZ = xf3,
         }
     }

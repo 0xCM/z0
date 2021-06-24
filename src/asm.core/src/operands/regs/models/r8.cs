@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOpTypes.r8;
-    using K = RegCodes.Gp8;
+    using K = AsmCodes.Gp8;
     using api = AsmRegs;
 
     partial struct AsmOpTypes

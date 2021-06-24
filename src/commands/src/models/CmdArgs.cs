@@ -25,12 +25,29 @@ namespace Z0
             get => (ushort)Data.Count;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
+
         public int Length
         {
             [MethodImpl(Inline)]
             get => Data.Length;
         }
 
+        public ref CmdArg First
+        {
+            [MethodImpl(Inline)]
+            get => ref Data.First;
+        }
         public Span<CmdArg> Edit
         {
             [MethodImpl(Inline)]

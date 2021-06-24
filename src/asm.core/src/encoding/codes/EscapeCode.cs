@@ -4,23 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Hex8Seq;
-
     partial struct AsmCodes
     {
-        public enum BranchHintCode : byte
+        [SymbolSource]
+        public enum EscapeCode : ushort
         {
             None = 0,
 
-            /// <summary>
-            /// Branch taken
-            /// </summary>
-            BT = x2e,
+            [Symbol("0f")]
+            x0F = 0x0F,
 
-            /// <summary>
-            /// Branch not taken
-            /// </summary>
-            BNT = x3e,
+            [Symbol("0f 38")]
+            x0F38 = 0x0F38,
+
+            [Symbol("0f 3a")]
+            x0F3A = 0x0F3A,
         }
     }
 }

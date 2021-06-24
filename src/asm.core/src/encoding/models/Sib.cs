@@ -12,30 +12,21 @@ namespace Z0.Asm
     // SIB[Scale[6,7] | Index[3,5] | Base[0,2]]
     public struct Sib
     {
-        readonly byte Data;
+        byte Data;
 
-        public uint3 Base
-        {
-            [MethodImpl(Inline)]
-            get => Bits.segment(Data, 0, 2);
-        }
+        public uint3 Base()
+            => Bits.segment(Data, 0, 2);
 
-        public uint3 Index
-        {
-            [MethodImpl(Inline)]
-            get => Bits.segment(Data, 3, 5);
-        }
+        public uint3 Index()
+            => Bits.segment(Data, 3, 5);
 
-        public uint2 Scale
-        {
-            [MethodImpl(Inline)]
-            get => Bits.segment(Data, 6, 7);
-        }
+        public uint2 Scale()
+            => Bits.segment(Data, 6, 7);
 
         public MemoryScale ScaleFactor
         {
             [MethodImpl(Inline)]
-            get => Pow2.pow8u(Scale);
+            get => Pow2.pow8u(Scale());
         }
 
         public bool IsEmpty

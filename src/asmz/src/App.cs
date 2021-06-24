@@ -300,7 +300,6 @@ namespace Z0.Asm
         {
             var dst = Db.AppTablePath<ApiCorrelationEntry>();
             Wf.ApiCatalogs().Correlate(dst);
-
         }
 
         [Op]
@@ -545,71 +544,6 @@ namespace Z0.Asm
             Wf.Row(RegExprCases.expr1());
 
         }
-
-        public void ShowRexTable()
-        {
-            var bits = AsmEncoderPrototype.RexPrefixBits();
-            using var log = OpenShowLog("rexbits");
-            var count = bits.Length;
-            for(var i=0; i<count; i++)
-                Show(AsmRender.describe(skip(bits,i)), log);
-        }
-
-        public void ShowModRmTable()
-        {
-            var f0 = BitSeq.bits(n3);
-            var f1 = BitSeq.bits(n3);
-            var f2 = BitSeq.bits(n2);
-            var i=0;
-            var buffer = span<char>(256);
-            for(var c=0u; c<f2.Length; c++)
-            for(var b=0u; b<f1.Length; b++)
-            for(var a=0u; a<f0.Length; a++,i++)
-            {
-                buffer.Clear();
-                var modrm = asm.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
-                var k = AsmRender.bitfield(modrm, buffer);
-                seek(buffer, k++) = Chars.Space;
-                seek(buffer, k++) = Chars.Eq;
-                seek(buffer, k++) = Chars.Space;
-
-                var bits = modrm.Encoded.FormatBits();
-                SymbolicTools.copy(bits, ref k, buffer);
-                var content = text.format(slice(buffer,0,k));
-                Wf.Row(content);
-            }
-        }
-
-        /// <summary>
-        /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
-        /// </summary>
-        public void CheckModRmBits()
-        {
-            void emit(ShowLog dst)
-            {
-                var f0 = BitSeq.bits(n3);
-                var f1 = BitSeq.bits(n3);
-                var f2 = BitSeq.bits(n2);
-                var i=0;
-
-                for(var c=0u; c<f2.Length; c++)
-                for(var b=0u; b<f1.Length; b++)
-                for(var a=0u; a<f0.Length; a++,i++)
-                {
-                    var m1 = asm.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
-                    var m2 = asm.modrm((byte)i);
-                    AsmRender.bitfield(m1, dst.Buffer);
-                    dst.Buffer.Append(" ^ ");
-                    AsmRender.bitfield(m2, dst.Buffer);
-                    dst.Buffer.Append(" = ");
-                    dst.Buffer.Append((m1^m2).Encoded.FormatBits());
-                    dst.ShowBuffer();
-                }
-           }
-
-            Show("modrm", FS.Log, emit);
-        }
-
 
         void CompareBitstrings()
         {
@@ -1035,11 +969,6 @@ namespace Z0.Asm
             Wf.ApiExtractWorkflow().Run(settings);
         }
 
-        void movzx(RegOp dst, RegOp src, Span<char> buffer)
-        {
-
-        }
-
         void GetMethodInfo()
         {
             var path = Parts.Math.Assembly.Location;
@@ -1072,9 +1001,31 @@ namespace Z0.Asm
             Wf.Row(table.Format());
         }
 
+        Outcome DispatchAsmCmd(string name, CmdArgs args = default)
+        {
+            var cmd = Wf.AsmCmd();
+            return cmd.Dispatch(name,args);
+        }
+
+        Outcome ShowSymbols(CmdArgs args)
+        {
+            var symbols = AsmCodes.Gp8Symbols();
+            var grid = AsmRegGrids.asci(w8,symbols);
+            var count = grid.RowCount;
+            for(byte i=0; i<count; i++)
+            {
+                var row = grid.Row(i);
+                Wf.Row(AsciSymbols.format(row));
+            }
+            //Wf.Row(grid);
+            return true;
+        }
+
         public void Run()
         {
             Dispatch();
+            //ShowRexTable();
+
 
             //CheckStringTables();
             //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs")

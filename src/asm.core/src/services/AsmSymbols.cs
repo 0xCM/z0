@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static RegCodes;
+    //using static RegCodes;
     using static AsmCodes;
     using static AsmOpCodeTokens;
 

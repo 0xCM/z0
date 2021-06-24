@@ -4,8 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    [ApiHost]
-    public readonly partial struct AsmCodes
+    using System;
+
+    [AttributeUsage(AttributeTargets.Enum)]
+    public class RegCodeAttribute : Attribute
     {
 
     }

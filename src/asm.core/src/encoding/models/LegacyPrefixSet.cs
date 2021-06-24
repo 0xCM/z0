@@ -8,7 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes.LockPrefix;
+    using static core;
+    using static AsmCodes.LockPrefixCode;
     using static AsmCodes;
 
     public struct LegacyPrefixSet
@@ -21,7 +22,7 @@ namespace Z0.Asm
 
         public SizeOverride Address;
 
-        public AsmCodes.LockPrefix Lock
+        public AsmCodes.LockPrefixCode Lock
         {
             [MethodImpl(Inline)]
             get => LockOrRepeat == (byte)LOCK ? LOCK : 0;
@@ -40,7 +41,7 @@ namespace Z0.Asm
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => memory.@as<LegacyPrefixSet,uint>(this) == 0;
+            get => @as<LegacyPrefixSet,uint>(this) == 0;
         }
 
         public bool IsNonEmpty

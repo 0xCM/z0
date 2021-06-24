@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static core;
 
     using REP = AsmCodes.RepeatPrefix;
-    using L = AsmCodes.LockPrefix;
+    using L = AsmCodes.LockPrefixCode;
     using SZ = AsmCodes.SizeOverride;
     using SG = AsmCodes.SegOverride;
 
@@ -44,7 +44,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit HasRepeatPrefix(AsmOpCode src)
-            => emath.oneof(src.Lead, REP.REPE, REP.REPNE);
+            => emath.oneof(src.Lead, REP.REPNZ, REP.REPZ);
 
         [MethodImpl(Inline), Op]
         public static bit HasLockPrefix(AsmOpCode src)

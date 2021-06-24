@@ -72,6 +72,12 @@ namespace Z0
         }
 
 
+        Outcome DispatchAsmCmd(string name, CmdArgs args)
+        {
+            var cmd = Wf.AsmCmd();
+            return cmd.Dispatch(name,args);
+        }
+
         void Dispatch(CmdSpec<K> spec)
         {
             var id = spec.Id;

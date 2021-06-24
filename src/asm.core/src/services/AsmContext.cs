@@ -9,10 +9,14 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct asm
+    public unsafe struct AsmContext
     {
-        [MethodImpl(Inline), Op]
-        public static Vsib vsib(byte src)
-            => new Vsib(src);
+        byte* PState;
+
+        [MethodImpl(Inline)]
+        internal AsmContext(byte* pState)
+        {
+            PState = pState;
+        }
     }
 }

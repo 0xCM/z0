@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndex;
     using G = AsmOpTypes.xmm;
-    using K = RegCodes.XmmReg;
+    using K = AsmCodes.XmmReg;
 
     using api = AsmRegs;
 

@@ -11,8 +11,12 @@ namespace Z0.Asm
         /// <summary>
         /// Defines the lock prefix code
         /// </summary>
-        public enum LockPrefix : byte
+        [SymbolSource]
+        public enum LockPrefixCode : byte
         {
+            None = 0,
+
+            [Symbol("f0", "Lock Prefix")]
             LOCK = xf0,
         }
     }

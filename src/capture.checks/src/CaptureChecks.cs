@@ -20,7 +20,7 @@ namespace Z0.Asm
         public static ICheckContext context(IWfRuntime wf)
             => new CheckContext(wf.AppPaths, Rng.@default(), json(wf.AppPaths.AppConfigPath), MsgExchange.Create());
 
-        public IAsmContext Context {get;}
+        public IAsmContextDepr Context {get;}
 
         readonly NativeBuffers _Buffers;
 
@@ -29,7 +29,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public CaptureChecks(IWfRuntime wf)
         {
-            Context = new AsmContext(context(wf), wf);
+            Context = new AsmContextDepr(context(wf), wf);
             _Buffers = Buffers.native(Pow2.T16, 5);
             Tokens = _Buffers.Tokenize();
             //Tokens = Buffers.native(Pow2.T16, 5, out BufferAlloc).Tokenize();

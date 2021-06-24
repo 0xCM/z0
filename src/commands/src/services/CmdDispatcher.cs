@@ -8,11 +8,11 @@ namespace Z0
 
     public class CmdDispatcher : ICmdDispatcher
     {
-        CmdRunnerLookup Lookup;
+        CmdMethodLookup Lookup;
 
         object Host;
 
-        internal CmdDispatcher(object host, CmdRunnerLookup lookup)
+        internal CmdDispatcher(object host, CmdMethodLookup lookup)
         {
             Host = host;
             Lookup = lookup;
