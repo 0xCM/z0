@@ -1072,11 +1072,10 @@ namespace Z0.Asm
             Wf.Row(table.Format());
         }
 
-
-
         public void Run()
         {
             Dispatch();
+
             //CheckStringTables();
             //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs")
             // var part = PartId.Math;
