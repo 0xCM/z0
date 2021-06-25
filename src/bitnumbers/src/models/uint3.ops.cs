@@ -274,6 +274,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => BitRender.format(src.data, FormatConfig3);
+            => BitRender.gformat(src.data, FormatConfig3);
     }
 }

@@ -16,7 +16,7 @@ namespace Z0.Asm
     /// REX = [ 0100 | REX.W:4 | R:3 | X:2 | B:1 ]
     /// </summary>
     [ApiComplete]
-    public struct RexPrefix
+    public struct RexPrefix : IAsmPrefix<RexPrefix>
     {
         byte Data;
 
@@ -65,8 +65,11 @@ namespace Z0.Asm
         public void B(bit b)
             => Data = bit.set(Data, (byte)RFI.B, b);
 
-        public readonly byte Encoded()
-            => Data;
+        public readonly byte Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public bool IsEmpty
         {
@@ -91,7 +94,7 @@ namespace Z0.Asm
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator RexPrefix(RexPrefixKind src)
+        public static implicit operator RexPrefix(RexPrefixCode src)
             => new RexPrefix((byte)src);
 
         [MethodImpl(Inline)]

@@ -123,7 +123,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(N2 b)
-            => BitRender.format(data,Width);
+            => BitRender.gformat(data,Width);
 
         [MethodImpl(Inline)]
         public string Format(N16 b)

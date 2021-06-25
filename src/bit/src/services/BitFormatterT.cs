@@ -26,6 +26,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(T src)
-            => BitRender.format(src, Config);
+            => BitRender.gformat(src, Config);
     }
 }

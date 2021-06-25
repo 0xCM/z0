@@ -8,6 +8,8 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
+    using Z0.Asm;
+
     using static Root;
     using static core;
 
@@ -17,130 +19,47 @@ namespace Z0
     [Free]
     public unsafe sealed class AsmShell : WfApp<AsmShell>
     {
-        CmdIndex<AsmCmdKind> Commands;
-
-        Dictionary<string,AsmCmdKind> CommandMap;
-
-        CmdImplMap<AsmCmdKind> ImplMap;
-
-        AsmShellOps ShellOps;
-
-        void MapCommands()
-        {
-            Commands = Cmd.index<AsmCmdKind>();
-            for(var i=0; i<Commands.Count; i++)
-            {
-                var id = (AsmCmdKind)i;
-                ref readonly var cmd = ref Commands[id];
-                CommandMap[cmd.Name] = id;
-            }
-        }
+        AsmCmdService AsmCmd;
 
         protected override void Initialized()
         {
-            MapCommands();
-            ShellOps = MapOps();
-            ImplMap = MapImpl();
+            AsmCmd = Wf.AsmCmd();
         }
 
-        AsmShellOps MapOps()
-            => new AsmShellOps(Wf, Push);
+        Outcome Dispatch(CmdSpec cmd)
+            => AsmCmd.Dispatch(cmd);
 
-        CmdImplMap<AsmCmdKind> MapImpl()
-            => Cmd.implmap<AsmCmdKind>(typeof(AsmShellOps));
-
-        public AsmShell()
-        {
-            ImplMap = new();
-            CommandMap = new();
-        }
-
-        ref readonly CmdInfo<AsmCmdKind> LookupCmd(K id)
-            => ref Commands[id];
-
-        MethodInfo LookupMethod(K id)
-            => ImplMap[id];
-
-        void Help(in CmdInfo<AsmCmdKind> cmd)
-        {
-            iter(Commands.View, c => term.cyan(string.Format("{0,-14} - {1}", c.Name, c.Description)));
-        }
-
-        void Push(object content)
-        {
-            term.cyan(string.Format(">>   {0}", content));
-        }
-
-
-        Outcome DispatchAsmCmd(string name, CmdArgs args)
-        {
-            var cmd = Wf.AsmCmd();
-            return cmd.Dispatch(name,args);
-        }
-
-        void Dispatch(CmdSpec<K> spec)
-        {
-            var id = spec.Id;
-            ref readonly var cmd = ref LookupCmd(id);
-            if(id == K.Help)
-            {
-                Help(cmd);
-            }
-            else
-            {
-                var method = LookupMethod(id);
-                try
-                {
-                    var args = spec.Args.Storage.Cast<object>();
-                    method.Invoke(ShellOps, new object[]{args});
-                }
-                catch(Exception e)
-                {
-                    term.error(e);
-                }
-            }
-        }
-
-        CmdSpec<K> Pull()
+        CmdSpec Next()
         {
             var input = term.prompt("cmd> ");
             var i = input.IndexOf(Chars.Space);
-            var args = StringIndex.Empty;
+            var args = CmdArgs.Empty;
             var name = input;
             if(i != NotFound)
             {
                 name = TextTools.left(input,i);
                 var right = TextTools.right(input,i);
                 if(nonempty(right))
-                    args = right.Split(Chars.Space);
+                    args = Cmd.args(right.Split(Chars.Space));
             }
-
-            if(CommandMap.TryGetValue(name, out K kind))
-            {
-                return Cmd.spec(kind, args);
-            }
-            else
-            {
-                Push(string.Format("The command '{0}' is not recognized", name));
-                return CmdSpec<K>.Empty;
-            }
+            return Cmd.spec(name,args);
         }
 
         protected override void Run()
         {
-            var input = Pull();
-            while(input.Id != K.Exit)
+            var input = Next();
+            while(input.Name != ".exit")
             {
-                if(input.Id != 0)
+                if(input.IsNonEmpty)
                     Dispatch(input);
 
-                input = Pull();
+                input = Next();
             }
         }
 
         protected override void Disposing()
         {
-            ShellOps.Dispose();
+            AsmCmd.Dispose();
         }
 
         public static void Main(params string[] args)

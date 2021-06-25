@@ -9,6 +9,8 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Diagnostics.Tracing;
 
+    using Z0.Tools;
+
     using static Part;
     using static core;
     using static Toolsets;
@@ -66,25 +68,23 @@ namespace Z0.Asm
             return Wf.Router.Dispatch(spec);
         }
 
+        ToolScript<XedCase> CreateXedCase(string opcode)
+        {
+            var tool = Wf.XedTool();
+            var dir = Db.CaseDir("asm.assembled", opcode);
+            var dst = dir + FS.file(string.Format("{0}.{1}", opcode, tool.Id), FS.Cmd);
+            var @case = tool.DefineCase(opcode.ToString(), dir);
+            return tool.CreateScript(@case, dst);
+        }
+
         void RunFunctionWorkflows()
         {
             FunctionWorkflows.run(Wf);
         }
 
-        void EmitImageHeaders()
-        {
-            var svc = CliEmitter.create(Wf);
-            svc.EmitSectionHeaders(WfRuntime.RuntimeArchive(Wf));
-        }
-
         public void EmitApiImageContent()
         {
             Wf.CliEmitter().EmitImageContent();
-        }
-
-        public void EmitXedCatalog()
-        {
-            Wf.IntelXed().EmitCatalog();
         }
 
         public ReadOnlySpan<string> LoadMnemonics()
@@ -1007,23 +1007,67 @@ namespace Z0.Asm
             return cmd.Dispatch(name,args);
         }
 
-        Outcome ShowSymbols(CmdArgs args)
+        uint EmitGrid<T>(AsmRegGrid<T> src, StreamWriter writer)
+            where T: unmanaged
         {
-            var symbols = AsmCodes.Gp8Symbols();
-            var grid = AsmRegGrids.asci(w8,symbols);
-            var count = grid.RowCount;
+            var count = src.RowCount;
             for(byte i=0; i<count; i++)
-            {
-                var row = grid.Row(i);
-                Wf.Row(AsciSymbols.format(row));
-            }
-            //Wf.Row(grid);
+                writer.WriteLine(AsciSymbols.format(src.Row(i)));
+            return (uint)count;
+        }
+
+        Outcome EmitRegGrids()
+        {
+            var ws = Wf.AsmWorkspace();
+            var dst = ws.Table("regs",FS.Csv);
+            var counter = 0u;
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.AsciWriter();
+            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w8),writer);
+            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w8,true),writer);
+            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w16),writer);
+            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w32),writer);
+            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w64),writer);
+            Wf.EmittedFile(flow,counter);
             return true;
         }
 
+        void CalcTables()
+        {
+            const string Pattern = "{0,-3} | {1,-3} | {2,-3} | {3}";
+            var header = string.Format(Pattern, "mod", "reg", "r/m", "hex");
+            var workspace = Wf.AsmWorkspace();
+            var dst = workspace.Table("modrm", FS.Csv);
+            var flow = Wf.EmittingFile(dst);
+            var counter = 0u;
+            using var writer = dst.AsciWriter();
+            writer.WriteLine(header);
+            for(byte mod=0; mod <4; mod++)
+            {
+                for(byte reg=0; reg<8; reg++)
+                {
+                    for(byte rm=0; rm<8; rm++)
+                    {
+                        var code = math.or(math.sll(mod,6), math.sll(reg,3), rm);
+                        var row = string.Format(Pattern,
+                            BitRender.format(n2, mod),
+                            BitRender.format(n3, reg),
+                            BitRender.format(n3, rm),
+                            code.FormatHex(specifier:false)
+                            );
+
+                        writer.WriteLine(row);
+                        counter++;
+                    }
+                }
+            }
+            Wf.EmittedFile(flow,counter);
+        }
         public void Run()
         {
-            Dispatch();
+            //Dispatch();
+            CalcTables();
+            EmitRegGrids();
             //ShowRexTable();
 
 

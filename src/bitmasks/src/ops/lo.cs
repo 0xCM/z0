@@ -108,6 +108,6 @@ namespace Z0
         public static T lo<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Numeric.force<ulong,T>(lo(n));
+                => NumericCast.force<ulong,T>(lo(n));
     }
 }

@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(sbyte src, Base2 b, int? digits = null)
-            => BitRender.format(src, digits);
+            => BitRender.gformat(src, digits);
 
         [MethodImpl(Inline), Op]
         public static string format(sbyte src, Base8 b, int? digits = null)
@@ -51,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string Format(byte src, Base2 @base, int? digits = null)
-            => BitRender.format(src, digits);
+            => BitRender.gformat(src, digits);
 
         [MethodImpl(Inline), Op]
         public static string Format(byte src, Base8 @base, int? digits = null)
@@ -67,7 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string Format(short src, Base2 @base, int? digits = null)
-            => BitRender.format(src, digits);
+            => BitRender.gformat(src, digits);
 
         [MethodImpl(Inline), Op]
         public static string Format(short src, Base8 @base, int? digits = null)
@@ -83,7 +83,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string Format(ushort src, Base2 @base, int? digits = null)
-            => BitRender.format(src,digits);
+            => BitRender.gformat(src,digits);
 
         [MethodImpl(Inline), Op]
         public static string Format(ushort src, Base8 @base, int? digits = null)
@@ -99,7 +99,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string Format(int src, Base2 @base, int? digits = null)
-            => BitRender.format(src,digits);
+            => BitRender.gformat(src,digits);
 
         [MethodImpl(Inline), Op]
         public static string Format(int src, Base8 @base, int? digits = null)
@@ -115,7 +115,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string Format(uint src, Base2 @base, int? digits = null)
-            => BitRender.format(src,digits);
+            => BitRender.gformat(src,digits);
 
         [MethodImpl(Inline), Op]
         public static string Format(uint src, Base8 @base, int? digits = null)
@@ -131,7 +131,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string Format(long src, Base2 @base, int? digits = null)
-            => BitRender.format(src,digits);
+            => BitRender.gformat(src,digits);
 
         [MethodImpl(Inline), Op]
         public static string Format(long src, Base8 @base, int? digits = null)
@@ -147,7 +147,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string Format(ulong src, Base2 @base, int? digits = null)
-            => BitRender.format(src, digits);
+            => BitRender.gformat(src, digits);
 
         [MethodImpl(Inline), Op]
         public static string Format(ulong src, Base8 @base, int? digits = null)

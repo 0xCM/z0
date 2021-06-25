@@ -50,7 +50,7 @@ namespace Z0
                 var state = field.Read(i);
                 var j=0u;
 
-                var bitstring = BitRender.format(state, seg.Width);
+                var bitstring = BitRender.gformat(state, seg.Width);
                 buffer.Append(string.Format("{0}={1}",seg.Format(), bitstring));
                 if(i !=count -1)
                     buffer.Append(" | ");

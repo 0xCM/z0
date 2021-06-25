@@ -54,7 +54,7 @@ namespace Z0
             => new ToolFlagSpec(Index,name);
 
         public string Format()
-            => CmdRender.format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();

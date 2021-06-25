@@ -28,6 +28,5 @@ namespace Windows
 
         [DllImport(LibName), Free]
         public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
-
     }
 }

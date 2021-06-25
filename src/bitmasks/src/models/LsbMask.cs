@@ -39,7 +39,7 @@ namespace Z0
                 => default;
 
         public string Format()
-            => text.format(RenderPattern, nat64u<F>(), nat64u<D>(), typeof(T).NumericKind().Format());
+            => string.Format(RenderPattern, nat64u<F>(), nat64u<D>(), typeof(T).NumericKind().Format());
 
         public override string ToString()
             => Format();

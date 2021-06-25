@@ -13,32 +13,32 @@ namespace Z0.Asm
     /// <summary>
     /// Represents a register digit 0..7 that occurs within an op code expression
     /// </summary>
-    public readonly struct RegExtension
+    public readonly struct RegDigit
     {
         public uint3 Value {get;}
 
         [MethodImpl(Inline)]
-        public RegExtension(uint3 value)
+        public RegDigit(uint3 value)
             => Value = value;
 
         [MethodImpl(Inline)]
-        public RegExtension(byte value)
+        public RegDigit(byte value)
             => Value = value;
 
         [MethodImpl(Inline)]
-        public static implicit operator RegExtension(uint3 src)
-            => new RegExtension(src);
+        public static implicit operator RegDigit(uint3 src)
+            => new RegDigit(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator RegExtension(byte src)
-            => new RegExtension(src);
+        public static implicit operator RegDigit(byte src)
+            => new RegDigit(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator RegExtension(RegExtKind src)
-            => new RegExtension((byte)src);
+        public static implicit operator RegDigit(RegExtKind src)
+            => new RegDigit((byte)src);
 
         [MethodImpl(Inline)]
-        public static explicit operator byte(RegExtension src)
+        public static explicit operator byte(RegDigit src)
             => src.Value;
     }
 }

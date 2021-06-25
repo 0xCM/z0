@@ -13,5 +13,8 @@ namespace Z0
         Outcome Dispatch(string command);
 
         ReadOnlySpan<string> Supported {get;}
+
+        Outcome Dispatch(CmdSpec cmd)
+            => Dispatch(cmd.Name, cmd.Args);
     }
 }

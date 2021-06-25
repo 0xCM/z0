@@ -53,14 +53,14 @@ namespace Z0
             => new CmdScript(src);
 
         public string Format()
-            => CmdRender.format(this);
+            => Cmd.format(this);
 
         public override string ToString()
             => Format();
 
         public static CmdScript Empty
         {
-            get => new CmdScript(sys.empty<ScriptExpr>());
+            get => new CmdScript(core.array<ScriptExpr>());
         }
     }
 }

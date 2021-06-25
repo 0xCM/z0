@@ -13,12 +13,14 @@ namespace Z0
 
     partial struct BitRender
     {
-        [Op]
-        public static string format(N32 n, N8 w, uint src)
+        [MethodImpl(Inline), Op]
+        public static string format(N2 n, byte src)
         {
-            var buffer = CharBlock64.Null.Data;
-            var count = render(n, w, src, 0, buffer);
-            return new string(slice(buffer,0,count));
+            var i=0u;
+            var buffer = CharBlock2.Null;
+            var dst = buffer.Data;
+            render(n, src, ref i, dst);
+            return new string(dst);
         }
 
         [Op]
@@ -45,6 +47,41 @@ namespace Z0
             var buffer = CharBlock5.Null.Data;
             var i=0u;
             var count = render(n, src, ref i, buffer);
+            return new string(slice(buffer,0,count));
+        }
+
+        [Op]
+        public static string format(N6 n, byte src)
+        {
+            var buffer = CharBlock6.Null.Data;
+            var i=0u;
+            var count = render(n, src, ref i, buffer);
+            return new string(slice(buffer,0,count));
+        }
+
+        [Op]
+        public static string format(N7 n, byte src)
+        {
+            var buffer = CharBlock7.Null.Data;
+            var i=0u;
+            var count = render(n, src, ref i, buffer);
+            return new string(slice(buffer,0,count));
+        }
+
+        [Op]
+        public static string format(N8 n, byte src)
+        {
+            var buffer = CharBlock8.Null.Data;
+            var i=0u;
+            var count = render(n, src, ref i, buffer);
+            return new string(slice(buffer,0,count));
+        }
+
+        [Op]
+        public static string format(N32 n, N8 w, uint src)
+        {
+            var buffer = CharBlock64.Null.Data;
+            var count = render(n, w, src, 0, buffer);
             return new string(slice(buffer,0,count));
         }
 
@@ -98,33 +135,6 @@ namespace Z0
                 return new string(buffer);
         }
 
-        [Op, Closures(Closure)]
-        public static string format<T>(T src)
-            where T : struct
-                => format(src, BitFormat.configure());
-
-        [Op, Closures(Closure)]
-        public static string format<T>(T src, in BitFormat config)
-            where T : struct
-                => format(bytes(src), config);
-
-        [Op, Closures(Closure)]
-        public static string format<T>(ReadOnlySpan<T> src, BitFormat? config = null)
-            where T : unmanaged
-        {
-            var dst = new StringBuilder();
-            var cells = src.Length;
-            var cfg = config ?? BitFormat.configure();
-            for(var i=0; i<cells; i++)
-                dst.Append(format<T>(skip(src,i), cfg));
-            return dst.ToString();
-        }
-
-        [Op, Closures(Closure)]
-        public static string format<T>(T src, int? digits = null)
-            where T : unmanaged
-                => format(src, digits != null ? BitFormat.limited((uint)digits.Value, digits.Value) : BitFormat.configure());
-
         [Op]
         public static string format(object src, TypeCode type)
         {
@@ -138,19 +148,6 @@ namespace Z0
                 return format64(src);
             else
                 return EmptyString;
-        }
-
-        /// <summary>
-        /// Formats a named bitfield segment
-        /// </summary>
-        /// <param name="value">The field value</param>
-        /// <typeparam name="T">The field value type</typeparam>
-        [Op, Closures(Closure)]
-        public static string format<T>(T src, string name, int? zpad = null)
-            where T : unmanaged
-        {
-            var config = BitFormat.limited((uint)Widths.effective(src), zpad);
-            return string.Concat(name, Chars.Colon, formatter<T>(config).Format(src));
         }
 
         [Op]

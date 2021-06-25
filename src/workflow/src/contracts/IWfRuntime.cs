@@ -34,8 +34,6 @@ namespace Z0
 
         IWfContext Context {get;}
 
-        //IEventSink EventSink {get;}
-
         IEventBroker EventBroker {get;}
 
         ICmdRouter Router {get;}
@@ -50,8 +48,6 @@ namespace Z0
 
         IWfRuntime WithSource(IPolySource source);
 
-        //EnvData Env {get;}
-
         ExecToken Ran(WfExecFlow src);
 
         ExecToken Ran<T>(WfExecFlow<T> src);
@@ -62,8 +58,15 @@ namespace Z0
 
         void RedirectEmissions(IWfEmissionLog dst);
 
+        IAppService AppService(Type host)
+            => WfRuntime.service(host, this);
+
+        H AppService<H>()
+            where H : AppService<H>, new()
+                => WfRuntime.service<H>(this);
+
         IRuntimeArchive RuntimeArchive()
-            => WfRuntime.RuntimeArchive(this);
+            => Z0.RuntimeArchive.create(Controller.ImageDir);
 
         Assembly[] Components
             => Context.ApiParts.Components;

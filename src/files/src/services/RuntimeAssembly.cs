@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RuntimeAssembly(Assembly src, FS.FilePath path)
         {
-            Component = root.require(src);
+            Component = Require.notnull(src);
             Path = path;
         }
 

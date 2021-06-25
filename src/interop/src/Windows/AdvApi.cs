@@ -7,6 +7,9 @@ namespace Windows
     using System.Runtime.InteropServices;
     using System.Diagnostics;
 
+    using Z0;
+
+    [NativeModule(LibName)]
     public readonly partial struct AdvApi
     {
         const string LibName = "advapi32.dll";

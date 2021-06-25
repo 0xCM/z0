@@ -8,6 +8,12 @@ namespace Z0.Asm
 
     partial struct AsmCodes
     {
+        /// <summary>
+        /// Specifies the GP 8-bit (lo) registers
+        /// </summary>
+        /// <remarks>
+        /// al, cl, dl, bl, spl, bpl, sil, dil, r8b, r9b, r10b, r11b, r12b, r13b, r14b, r15b
+        /// </remarks/>
         [SymbolSource, RegCode]
         public enum Gp8 : byte
         {
@@ -60,22 +66,34 @@ namespace Z0.Asm
             r15b = r15,
         }
 
+        /// <summary>
+        /// Specifies the GP 8-bit hi regsisters
+        /// </summary>
+        /// <remarks>
+        /// ah, ch, dh, bh
+        /// </remarks/>
         [SymbolSource, RegCode]
         public enum Gp8Hi : byte
         {
             [Symbol("ah")]
-            ah = r0 | r16,
+            ah = r0,
 
             [Symbol("ch")]
-            ch = r1  | r16,
+            ch = r1,
 
             [Symbol("dh")]
-            dh = r2  | r16,
+            dh = r2,
 
             [Symbol("bh")]
-            bh = r3  | r16,
+            bh = r3,
         }
 
+        /// <summary>
+        /// Specifies the GP 16-bit registers
+        /// </summary>
+        /// <remarks>
+        /// ax, cx, dx, bx, sp, bp, si, di, r8w, r9w, r10w, r11w, r12w, r13w, r14w, r15w
+        /// </remarks/>
         [SymbolSource, RegCode]
         public enum Gp16 : byte
         {
@@ -128,6 +146,12 @@ namespace Z0.Asm
             r15w = r15,
         }
 
+        /// <summary>
+        /// Specifies the GP 32-bit registers
+        /// </summary>
+        /// <remarks>
+        /// eax, ecx, edx, ebx, esp, ebp, esi, edi, r8d, r9d, r10d, r11d, r12d, r13d, r14d, r15d
+        /// </remarks/>
         [SymbolSource, RegCode]
         public enum Gp32 : byte
         {
@@ -180,6 +204,12 @@ namespace Z0.Asm
             r15d = r15,
         }
 
+        /// <summary>
+        /// Specifies the GP 64-bit registers
+        /// </summary>
+        /// <remarks>
+        /// rax, rcx, rdx, rbx, rsp, rbp, rsi, rdi, r8, r9, r10, r11, r12, r13, r14, r15
+        /// </remarks/>
         public enum Gp64 : byte
         {
             [Symbol("rax")]
@@ -234,6 +264,9 @@ namespace Z0.Asm
         /// <summary>
         /// Specifies the XMM registers
         /// </summary>
+        /// <remarks>
+        /// xmm0, xmm1, xmm2, xmm3, xmm4, xmm5, xmm6, xmm7, xmm8, xmm9, xmm10,
+        /// </remarks/>
         [SymbolSource, RegCode]
         public enum XmmReg : byte
         {

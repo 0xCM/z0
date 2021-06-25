@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(U src)
-            => BitRender.format(src.data, BitFormat.limited(U.Width, U.Width));
+            => BitRender.gformat(src.data, BitFormat.limited(U.Width, U.Width));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref S edit<S>(in U src)

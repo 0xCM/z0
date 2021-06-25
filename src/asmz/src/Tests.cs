@@ -299,14 +299,6 @@ namespace Z0.Asm
             Wf.Status(string.Format("Found: {0}", found));
         }
 
-        ToolScript<XedCase> CreateXedCase(AsmOcPrototype id)
-        {
-            var tool = Wf.XedTool();
-            var dir = Db.CaseDir("asm.assembled", id);
-            var dst = dir + FS.file(string.Format("{0}.{1}", id, tool.Id), FS.Cmd);
-            var @case = tool.DefineCase(id.ToString(), dir);
-            return tool.CreateScript(@case, dst);
-        }
 
         public void CheckClrKeys()
         {
@@ -395,7 +387,7 @@ namespace Z0.Asm
         void ShowOptions()
         {
             const string @case = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
-            var result = CmdParser.parse(@case);
+            var result = Cmd.parse(@case);
             if(result.Succeeded)
             {
                 var value = result.Value;
@@ -674,8 +666,6 @@ namespace Z0.Asm
 
         }
 
-
-
         void CheckEntryPoints()
         {
             const ulong Target = 0x7ffa77aa1460;
@@ -754,18 +744,10 @@ namespace Z0.Asm
             Wf.Row(a0);
         }
 
-       void EmitPartSymbols()
+        void EmitPartSymbols()
         {
             var svc = Wf.Symbolism();
             svc.EmitLiterals<PartId>();
-        }
-
-        public void ParseXedForms()
-        {
-            var parser = XedSummaryParser.create(Wf.EventSink);
-            var parsed = parser.ParseSummaries();
-            Wf.Status($"Parsed {parsed.Length} summaries");
-            Wf.IntelXed().EmitFormSummaries(parsed);
         }
 
         void FilterApiBlocks()

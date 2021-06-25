@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static core;
     using static AsmCodes;
 
-    public readonly struct BndPrefix
+    public readonly struct BndPrefix : IAsmPrefix<BndPrefix>
     {
         public BndPrefixCode Code {get;}
 

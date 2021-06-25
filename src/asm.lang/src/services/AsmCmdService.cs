@@ -10,7 +10,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Typed;
 
     public sealed class AsmCmdService : AppCmdService<AsmCmdService>
     {
@@ -27,7 +26,6 @@ namespace Z0.Asm
         {
             Dispatcher = Cmd.dispatcher(this);
         }
-
 
         [CmdOp(".env")]
         Outcome ShowEnv(CmdArgs args)
@@ -140,5 +138,34 @@ namespace Z0.Asm
             return true;
         }
 
+        [CmdOp(".emit-cli-headers")]
+        Outcome EmitCliHeaders()
+        {
+            var svc = Wf.CliEmitter();
+            svc.EmitSectionHeaders(Wf.RuntimeArchive());
+            return true;
+        }
+
+        [CmdOp(".emit-xed-cat")]
+        Outcome EmitXedCatalog()
+        {
+            Wf.IntelXed().EmitCatalog();
+            return true;
+        }
+
+        [CmdOp(".emit-xed-forms")]
+        Outcome EmitXedForms()
+        {
+            var parser = XedSummaryParser.create(Wf.EventSink);
+            var parsed = parser.ParseSummaries();
+            Wf.Status($"Parsed {parsed.Length} summaries");
+            Wf.IntelXed().EmitFormSummaries(parsed);
+            return true;
+        }
+
+        protected override void Disposing()
+        {
+            CodeBuffer.Dispose();
+        }
     }
 }

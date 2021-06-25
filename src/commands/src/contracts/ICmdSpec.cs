@@ -20,6 +20,6 @@ namespace Z0
             => CmdId.from<T>();
 
         string ITextual.Format()
-            => CmdRender.format(this);
+            => Cmd.format(this);
     }
 }

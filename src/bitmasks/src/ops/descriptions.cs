@@ -17,7 +17,7 @@ namespace Z0
         public static Index<BitMaskInfo> descriptions(Type src)
         {
             var fields = span(src.LiteralFields());
-            var dst = root.list<BitMaskInfo>();
+            var dst = list<BitMaskInfo>();
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);

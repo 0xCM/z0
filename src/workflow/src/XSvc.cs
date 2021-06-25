@@ -10,5 +10,10 @@ namespace Z0
         [Op]
         public static AppServiceCache Services(this IWfRuntime src)
             => Z0.AppServiceCache.create(src);
+
+        // [Op]
+        // public static IRuntimeArchive RuntimeArchive(this IWfRuntime wf)
+        //     => Z0.RuntimeArchive.create(wf.Controller.ImageDir);
+
     }
 }

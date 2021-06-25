@@ -10,7 +10,7 @@ namespace Z0
     public abstract class BitSetGenerator : CodeGenerator
     {
         protected string TypeDigits(byte m, byte n)
-            => BitRender.format(n, BitFormat.limited(m,m));
+            => BitRender.gformat(n, BitFormat.limited(m,m));
 
         protected string TypeName(byte m, byte n)
             => text.concat(AsciLetterUp.B, TypeDigits(m,n));

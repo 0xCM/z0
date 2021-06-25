@@ -51,7 +51,6 @@ namespace Z0
         static ReadOnlySpan<byte> min64u_64u_64u
             => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x48,0x3b,0xca,0x72,0x04,0x48,0x8b,0xc2,0xc3,0x48,0x8b,0xc1,0xc3};
 
-        [CmdImpl(K.Exec)]
         void Exec(object[] args)
         {
             LoadBuffer(0,min64u_64u_64u);
@@ -64,7 +63,6 @@ namespace Z0
             Push(string.Format("{0}({1},{2})={3}", name, a, b, c));
         }
 
-        [CmdImpl(K.Demos)]
         void Demos(object[] args)
         {
             DynamicDemos.runA(result => Push(result));
@@ -72,19 +70,6 @@ namespace Z0
             DynamicDemos.runC(result => Push(result));
         }
 
-        [CmdImpl(K.Processor)]
-        void Processor(object[] args)
-        {
-            Push(string.Format("{0}() => {1}", K.Processor, Kernel32.GetCurrentProcessorNumber()));
-        }
-
-        [CmdImpl(K.ProcessSdm)]
-        void ProcessSdm(object[] args)
-        {
-            Wf.IntelSdmProcessor().Run();
-        }
-
-        [CmdImpl(K.Registers)]
         unsafe void Registers(object[] args)
         {
             var id = Kernel32.GetCurrentThreadId();

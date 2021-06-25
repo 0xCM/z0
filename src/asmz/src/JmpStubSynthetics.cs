@@ -48,7 +48,7 @@ namespace Z0.Asm
         {
             var address = Trampolines[slot];
             ref var payload = ref Payloads[slot];
-            var mov = AsmEncoderPrototype.mov(rcx, target).Content.Bytes;
+            var mov = asm.mov(rcx, target).Content.Bytes;
             //var jmp = AsmEncoderPrototype.jmp(rcx).Content.Bytes;
             var dst = payload.Bytes;
             var j=0;

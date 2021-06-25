@@ -8,10 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
     using static AsmCodes;
 
-    public readonly struct BranchHint
+    public readonly struct BranchHint : IAsmPrefix<BranchHint>
     {
         public BranchHintCode Code {get;}
 

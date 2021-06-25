@@ -42,6 +42,12 @@ namespace Z0.Asm
         public FS.FolderPath Scripts()
             => Root + FS.folder("scripts");
 
+        public FS.FolderPath Tables()
+            => Root + FS.folder("tables");
+
+        public FS.FilePath Table(string id, FS.FileExt ext)
+            => Tables() + FS.file(id,ext);
+
         public FS.FilePath Script(string id)
             => Scripts() + FS.file(id,FS.Cmd);
 

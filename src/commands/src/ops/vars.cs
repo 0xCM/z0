@@ -6,14 +6,14 @@ namespace Z0
 {
     partial struct Cmd
     {
-        internal const byte MaxVarCount = 16;
+        internal const byte MaxVarCount = 32;
 
         [Op]
-        public static Index<CmdVar> vars(byte count)
+        public static CmdVars vars(byte count)
             => new CmdVar[count];
 
         [Op]
-        public static Index<CmdVar> vars()
+        public static CmdVars vars()
             => new CmdVar[MaxVarCount];
 
         [Op, Closures(Closure)]

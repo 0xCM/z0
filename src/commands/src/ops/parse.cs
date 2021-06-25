@@ -9,8 +9,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    [ApiHost]
-    public readonly struct CmdParser
+    partial struct Cmd
     {
         const string InvalidOption = "Option text invalid";
 

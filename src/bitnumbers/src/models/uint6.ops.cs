@@ -261,7 +261,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string format(U src)
-            => BitRender.format(src.data, BitFormat.limited(U.Width,U.Width));
+            => BitRender.gformat(src.data, BitFormat.limited(U.Width,U.Width));
 
         [MethodImpl(Inline), Op]
         public static Span<bit> bits(uint6 src)

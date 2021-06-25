@@ -25,7 +25,7 @@ namespace Z0
             => M;
 
         public string Format()
-            => text.format(RenderPattern, nat64u<N>(), NumericKinds.kind<T>().Format());
+            => string.Format(RenderPattern, nat64u<N>(), NumericKinds.kind<T>().Format());
 
         public override string ToString()
             => Format();

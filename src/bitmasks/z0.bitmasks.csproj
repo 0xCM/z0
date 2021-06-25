@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Bit)" />
+    <ProjectReference Include="$(Rules)" />
+    <ProjectReference Include="$(Clr)" />
   </ItemGroup>
 
 </Project>

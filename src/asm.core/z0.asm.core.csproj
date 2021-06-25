@@ -11,7 +11,9 @@
       <ProjectReference Include="$(AsmData)" />
       <ProjectReference Include="$(Commands)" />
       <ProjectReference Include="$(Events)" />
+      <ProjectReference Include="$(Rules)" />
       <ProjectReference Include="$(AsmLangG)" />
+
   </ItemGroup>
 
    <ItemGroup>

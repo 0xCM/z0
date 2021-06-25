@@ -6,11 +6,15 @@ namespace Z0
 {
     using System;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-    [Free]
-    public interface INativeModule : IDisposable, IAddressable
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
+    public class NativeModuleAttribute : Attribute
     {
-        string Name {get;}
+        public NativeModuleAttribute(string name)
+        {
+            Name = name;
+        }
+
+        public string Name {get;}
     }
+
 }

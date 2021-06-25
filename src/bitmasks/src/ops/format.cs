@@ -21,7 +21,7 @@ namespace Z0
             where T : unmanaged
         {
             Span<char> dst = stackalloc char[len];
-            var bs =  BitRender.format(spec);
+            var bs =  BitRender.gformat(spec);
             for(var i=0; i<len; i++)
                 seek(dst,i) = blendsymbol(bs[i]);
             return new string(dst);

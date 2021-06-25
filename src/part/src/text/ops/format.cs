@@ -10,12 +10,13 @@ namespace Z0
 
     using static Root;
     using static RP;
+    using static core;
 
     partial class text
     {
         [Op]
         public static string @string(ReadOnlySpan<char> src)
-            => format(core.bytes(src));
+            => new string(src);
 
         /// <summary>
         /// Creates a string from a span, via UTF8 encoding
@@ -45,25 +46,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Creates a string from a span, via Unicode encoding
+        /// Creates a string from a UTF-16 span
         /// </summary>
         /// <param name="src">The data source</param>
-        [Op, Doc("https://github.com/microsoft/ClangSharp/blob/6355b742f73915a21d18f74227f5c504b75bd976/sources/ClangSharp/Internals/SpanExtensions.cs")]
         public static unsafe string format(ReadOnlySpan<ushort> src)
-        {
-            if(src.IsEmpty)
-                return EmptyString;
+            => new string(recover<char>(src));
 
-            fixed(ushort* pSrc = src)
-                return Encoding.Unicode.GetString((byte*)pSrc, src.Length * 2);
-        }
-
-        [MethodImpl(Inline)]
-        static string msgarg<T>(T src)
-            => string.Format("<{0}>", src);
-
-        public static string msg<T>(string pattern, T a)
-            => string.Format(pattern, msgarg(a));
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<char> src)

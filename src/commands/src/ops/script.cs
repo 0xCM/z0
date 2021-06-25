@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="length">The script length</param>
         [MethodImpl(Inline), Op]
         public static CmdScript script(string id, int length)
-            => new CmdScript(id, sys.alloc<ScriptExpr>(length));
+            => new CmdScript(id, core.alloc<ScriptExpr>(length));
 
         /// <summary>
         /// Creates an anonymous <see cref='CmdScript'/> from a <see cref='ScriptExpr'/> sequence

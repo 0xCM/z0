@@ -16,7 +16,7 @@ namespace Z0
 
         public void EmitSectionHeaders()
         {
-            EmitSectionHeaders(WfRuntime.RuntimeArchive(Wf));
+            EmitSectionHeaders(Wf.RuntimeArchive());
         }
 
         public void EmitSectionHeaders(IRuntimeArchive src)

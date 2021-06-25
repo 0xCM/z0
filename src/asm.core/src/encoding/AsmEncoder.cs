@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static core;
     using static Typed;
 
-    using K = RexPrefixKind;
+    using K = RexPrefixCode;
 
     [ApiHost]
     public readonly struct AsmEncoder

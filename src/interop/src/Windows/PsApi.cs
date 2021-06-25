@@ -7,8 +7,11 @@ namespace Windows
     using System.Runtime.InteropServices;
     using System.Text;
 
+    using Z0;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [NativeModule(LibName)]
     public unsafe readonly partial struct PsApi
     {
         const string LibName = "psapi.dll";

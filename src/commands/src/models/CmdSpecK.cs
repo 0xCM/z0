@@ -42,37 +42,4 @@ namespace Z0
             get => new CmdSpec<K>(default, StringIndex.Empty);
         }
     }
-
-    public readonly struct CmdSpec
-    {
-        public ulong Id {get;}
-
-        public StringIndex Args {get;}
-
-        [MethodImpl(Inline)]
-        public CmdSpec(ulong id, StringIndex args)
-        {
-            Id = id;
-            Args = args;
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Id == 0;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Id != 0;
-        }
-
-        public static CmdSpec Empty
-        {
-            [MethodImpl(Inline)]
-            get => new CmdSpec(default, StringIndex.Empty);
-        }
-
-    }
 }

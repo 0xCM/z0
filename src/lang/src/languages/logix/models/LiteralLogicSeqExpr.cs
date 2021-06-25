@@ -42,7 +42,7 @@ namespace Z0
         }
 
         public string Format()
-            => BitRender.format(Terms);
+            => BitRender.gformat(Terms);
 
         public override string ToString()
             => Format();

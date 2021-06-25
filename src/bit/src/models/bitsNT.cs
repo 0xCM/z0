@@ -36,7 +36,7 @@ namespace Z0
         }
 
         public string Format()
-            => BitRender.format(Storage, Width);
+            => BitRender.gformat(Storage, Width);
 
         public override string ToString()
             => Format();

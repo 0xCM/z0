@@ -6,6 +6,9 @@ namespace Windows
     using System;
     using System.Runtime.InteropServices;
 
+    using Z0;
+
+    [NativeModule(LibName)]
     public readonly partial struct Msvcrt
     {
         const string LibName = "msvcrt.dll";

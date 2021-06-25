@@ -8,11 +8,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    [ApiHost]
-    public partial class AsmEncoderPrototype : AppService<AsmEncoderPrototype>
+    public readonly struct AsmOpCodeSpec
     {
+        readonly uint Data;
 
-   }
+        [MethodImpl(Inline)]
+        internal AsmOpCodeSpec(uint data)
+        {
+            Data = data;
+        }
+    }
 }

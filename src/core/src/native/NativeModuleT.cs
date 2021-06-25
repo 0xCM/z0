@@ -10,15 +10,12 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct NativeModule : INativeModule
+    public readonly struct NativeModule<T> : INativeModule
+        where T : unmanaged
     {
         public string Name {get;}
 
-        readonly IntPtr Handle;
-
-        [MethodImpl(Inline)]
-        public static implicit operator IntPtr(NativeModule src)
-            => src.Handle;
+        public IntPtr Handle {get;}
 
         [MethodImpl(Inline)]
         public NativeModule(string name, IntPtr handle)
@@ -42,5 +39,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => string.Format(RP.PSx2, Address, Name);
+
+        [MethodImpl(Inline)]
+        public static implicit operator IntPtr(NativeModule<T> src)
+            => src.Handle;
+
+        [MethodImpl(Inline)]
+        public static implicit operator NativeModule(NativeModule<T> src)
+            => new NativeModule(src.Name, src.Handle);
+
     }
 }

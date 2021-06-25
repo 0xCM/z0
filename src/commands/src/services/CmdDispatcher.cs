@@ -21,6 +21,9 @@ namespace Z0
         public ReadOnlySpan<string> Supported
             => Lookup.Specs;
 
+        public Outcome Dispatch(CmdSpec cmd)
+            => Dispatch(cmd.Name, cmd.Args);
+
         public Outcome Dispatch(string command, CmdArgs args)
         {
             try

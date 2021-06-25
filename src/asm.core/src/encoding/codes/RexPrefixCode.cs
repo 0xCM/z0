@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// [0100 0001] | W:0 | R:0 | X:0 | B:1
     /// </summary>
     [Flags]
-    public enum RexPrefixKind : byte
+    public enum RexPrefixCode : byte
     {
         /// <summary>
         /// [0100 0000] => [W:0 | R:0 | X:0 | B:0]

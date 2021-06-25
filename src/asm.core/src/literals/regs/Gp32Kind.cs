@@ -12,9 +12,6 @@ namespace Z0.Asm
     /// <summary>
     /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W32'/>
     /// </summary>
-    /// <remarks>
-    /// eax, ecx, edx, ebx, esp, ebp, esi, edi, r8d, r9d, r10d, r11d, r12d, r13d, r14d, r15d
-    /// </remarks/>
     public enum Gp32Kind : uint
     {
         EAX = r0 | (GP << ClassField) | (W32 << WidthField),

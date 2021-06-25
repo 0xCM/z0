@@ -6,11 +6,16 @@ namespace Windows
     using System;
     using System.Runtime.InteropServices;
 
+    using Z0;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [NativeModule(LibName)]
     public readonly partial struct Kernel32
     {
         public const string LibName = "kernel32.dll";
+
+        public string Name => LibName;
 
         [DllImport(LibName, SetLastError = true), Free]
         public static extern void GetSystemInfo(ref SYSTEM_INFO lpSystemInfo);

@@ -2,10 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial struct AsmDsl
+    public abstract class Repl<R> : WfApp<R>
+        where R : Repl<R>, new()
     {
-        public static RexPrefixKind RexW => RexPrefixKind.W;
+
     }
 }

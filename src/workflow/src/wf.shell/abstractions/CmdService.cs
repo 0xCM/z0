@@ -26,6 +26,9 @@ namespace Z0
         public Outcome Dispatch(string command)
             => Dispatcher.Dispatch(command);
 
+        public Outcome Dispatch(CmdSpec cmd)
+            => Dispatcher.Dispatch(cmd.Name, cmd.Args);
+
         public ReadOnlySpan<string> Supported
         {
             [MethodImpl(Inline)]

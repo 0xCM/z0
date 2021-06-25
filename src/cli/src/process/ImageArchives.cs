@@ -13,7 +13,7 @@ namespace Z0
         public static void EmitBuildArchiveList(IWfRuntime wf, string label)
         {
             var builder = wf.CmdBuilder();
-            var archive = WfRuntime.RuntimeArchive(wf);
+            var archive = wf.RuntimeArchive();
             var types = array(FS.Dll, FS.Exe, FS.Pdb, FS.Lib, FS.Xml, FS.Json);
             var cmd = builder.ListFiles(label + ".build-artifacts", archive.Root, types);
             wf.Router.Dispatch(cmd);

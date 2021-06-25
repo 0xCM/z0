@@ -16,5 +16,9 @@ namespace Z0
         public static CmdSpec<K> spec<K>(K id, StringIndex args)
             where K : unmanaged
                 => new CmdSpec<K>(id,args);
+
+        [Op, MethodImpl(Inline)]
+        public static CmdSpec spec(string name, CmdArgs args)
+            => new CmdSpec(name,args);
     }
 }

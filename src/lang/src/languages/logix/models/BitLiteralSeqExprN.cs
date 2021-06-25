@@ -37,7 +37,7 @@ namespace Z0
             => LogicExprKind.Literal;
 
         public string Format()
-            => BitRender.format(Terms);
+            => BitRender.gformat(Terms);
 
         public override string ToString()
             => Format();

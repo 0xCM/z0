@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    [ApiHost]
-    public readonly struct ServiceFactory
+    partial class WfRuntime
     {
         [Op]
-        public static IAppService appsvc(Type host, IWfRuntime wf)
+        internal static IAppService service(Type host, IWfRuntime wf)
         {
             var t = typeof(AppService<>).MakeGenericType(host);
             var m = t.GetMethod("create");
@@ -22,7 +20,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static H appsvc<H>(IWfRuntime wf)
+        internal static H service<H>(IWfRuntime wf)
             where H : AppService<H>, new()
                 => AppService<H>.create(wf);
     }

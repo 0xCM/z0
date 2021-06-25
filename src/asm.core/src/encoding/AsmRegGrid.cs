@@ -10,7 +10,8 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static Typed;
-
+    using static RegClasses;
+    using static AsmCodes;
 
     public readonly struct AsmRegGrids
     {
@@ -38,15 +39,38 @@ namespace Z0.Asm
             return seq;
         }
 
-        public static ReadOnlySpan<byte> row<T>(in AsmRegGrid<T> src, byte index)
+        public static ReadOnlySpan<byte> row<T>(in AsmRegGrid<T> src, ushort index)
             where T : unmanaged
         {
             var offset = index*(RowWidth + 2);
             return slice(src.Rows,offset, RowWidth);
         }
 
+        public static AsmRegGrid<Gp8> grid(GpClass gp, W8 w)
+            => asci(AsmCodes.Gp8Regs());
 
-        public static AsmRegGrid<T> asci<T>(W8 w, Symbols<T> src)
+        public static AsmRegGrid<Gp8Hi> grid(GpClass gp, W8 w, bit hi)
+            => asci(AsmCodes.Gp8Regs(hi));
+
+        public static AsmRegGrid<Gp16> grid(GpClass gp, W16 w)
+            => asci(AsmCodes.Gp16Regs());
+
+        public static AsmRegGrid<Gp32> grid(GpClass gp, W32 w)
+            => asci(AsmCodes.Gp32Regs());
+
+        public static AsmRegGrid<Gp64> grid(GpClass gp, W64 w)
+            => asci(AsmCodes.Gp64Regs());
+
+        public static AsmRegGrid<XmmReg> grid(XmmClass xmm)
+            => asci(AsmCodes.XmmRegs());
+
+        public static AsmRegGrid<YmmReg> grid(YmmClass xmm)
+            => asci(AsmCodes.YmmRegs());
+
+        public static AsmRegGrid<ZmmReg> grid(ZmmClass xmm)
+            => asci(AsmCodes.ZmmRegs());
+
+        public static AsmRegGrid<T> asci<T>(Symbols<T> src)
             where T : unmanaged
         {
             var symbols = src.View;
@@ -57,9 +81,9 @@ namespace Z0.Asm
             for(var i=0; i<rows; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
-                offset += AsciSymbols.encode(w, n5, symbol,offset, dst);
-                seek(dst,offset++) = (byte)AsciControl.CR;
-                seek(dst,offset++) = (byte)AsciControl.LF;
+                offset += AsciSymbols.encode(w8, n5, symbol, offset, dst);
+                seek(dst, offset++) = (byte)AsciControl.CR;
+                seek(dst, offset++) = (byte)AsciControl.LF;
             }
             return new AsmRegGrid<T>(AsciSymbols.seq(dst), (byte)rows);
         }
@@ -70,10 +94,10 @@ namespace Z0.Asm
     {
         readonly AsciSequence _Data;
 
-        public byte RowCount {get;}
+        public ushort RowCount {get;}
 
         [MethodImpl(Inline)]
-        public AsmRegGrid(AsciSequence src, byte rows)
+        public AsmRegGrid(AsciSequence src, ushort rows)
         {
             _Data = src;
             RowCount = rows;
@@ -86,7 +110,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> Row(byte index)
+        public ReadOnlySpan<byte> Row(ushort index)
             => AsmRegGrids.row(this,index);
 
         public string Format()

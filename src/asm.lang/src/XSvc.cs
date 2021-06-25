@@ -38,18 +38,6 @@ namespace Z0
             => Svc.AsmModelGen.create(wf);
 
         [Op]
-        public static AsmEncoderPrototype AsmEncoder(this IWfRuntime wf)
-            => Svc.AsmEncoderPrototype.create(wf);
-
-        [Op]
-        public static AsmParser AsmParser(this IWfRuntime wf)
-            => Svc.AsmParser.create(wf);
-
-        [Op]
-        public static AsmJumps AsmJumps(this IWfRuntime wf)
-            => Svc.AsmJumps.create(wf);
-
-        [Op]
         public static BdDisasmProcessor DbDiasmProcessor(this IWfRuntime wf)
             => Svc.BdDisasmProcessor.create(wf);
 

@@ -12,10 +12,6 @@ namespace Z0.Asm
     /// <summary>
     /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W8'/>
     /// </summary>
-    /// <remarks>
-    /// al, cl, dl, bl, spl, bpl, sil, dil, r8b, r9b, r10b, r11b, r12b, r13b, r14b, r15b
-    /// ah, ch, dh, bh
-    /// </remarks/>
     public enum Gp8Kind : uint
     {
         AL = r0 | (GP << ClassField) | (W8 << WidthField),

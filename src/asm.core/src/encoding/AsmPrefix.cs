@@ -19,6 +19,10 @@ namespace Z0.Asm
             => new ModRm(src);
 
         [MethodImpl(Inline), Op]
+        public static MandatoryPrefix mandatory(MandatoryPrefixCode code)
+            => new MandatoryPrefix(code);
+
+        [MethodImpl(Inline), Op]
         public static ModRm modrm(uint3 rm, uint3 reg, uint2 mod)
             => new ModRm(Bits.join((rm, 0), (reg, 3), (mod, 6)));
 
@@ -36,11 +40,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static RexPrefix rex(uint4 wrxb)
-            => math.or((byte)RexPrefixKind.Base, (byte)wrxb);
+            => math.or((byte)RexPrefixCode.Base, (byte)wrxb);
 
         [MethodImpl(Inline), Op]
         public static RexPrefix rex()
-            => (byte)RexPrefixKind.Base;
+            => (byte)RexPrefixCode.Base;
 
         [MethodImpl(Inline), Op]
         public static RexPrefix rex(bit w, bit r, bit x, bit b)
