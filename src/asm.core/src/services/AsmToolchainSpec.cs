@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         public AsmBinKind BinKind;
 
-        public FS.FilePath DisasmPath;
+        public FS.FilePath RawDisasmPath;
 
         public FS.FolderPath Analysis;
 

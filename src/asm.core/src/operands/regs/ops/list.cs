@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static RegClasses;
-    using static AsmDsl;
 
     partial struct AsmRegs
     {
@@ -35,7 +34,7 @@ namespace Z0.Asm
             {
                 for(var w=3; w>=0; w--)
                 {
-                    seek(r,counter++) = AsmOps.reg((RegWidthIndex)w, RegClass.GP, (RegIndex)i);
+                    seek(r,counter++) = AsmRegs.reg((RegWidthIndex)w, RegClass.GP, (RegIndex)i);
                 }
             }
             return counter;

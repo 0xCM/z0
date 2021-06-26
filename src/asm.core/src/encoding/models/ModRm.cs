@@ -9,43 +9,6 @@ namespace Z0.Asm
 
     using static Root;
 
-    /*
-        Mod | Reg | Rm  | Effective
-        00  | 000 | 000 | [bx + si]
-        00  | 000 | 001 | [bx + di]
-        00  | 000 | 010 | [bp + si]
-        00  | 000 | 011 | [bp + di]
-        00  | 000 | 100 | [si]
-        00  | 000 | 101 | [di]
-        00  | 000 | 110 | disp16
-        00  | 000 | 111 | [bx]
-        01  | 000 | 000 | [bx + si] + disp8
-        01  | 000 | 001 | [bx + di] + disp8
-        01  | 000 | 010 | [bp + si] + disp8
-        01  | 000 | 011 | [bp + di] + disp8
-        01  | 000 | 100 | [si] + disp8
-        01  | 000 | 101 | [di] + disp8
-        01  | 000 | 110 | [bp] + disp8
-        01  | 000 | 111 | [bx] + disp8
-        10  | 000 | 000 | [bx + si] + disp16
-        10  | 000 | 001 | [bx + di] + disp16
-        10  | 000 | 010 | [bp + si] + disp16
-        10  | 000 | 011 | [bp + di] + disp16
-        10  | 000 | 100 | [si] + disp16
-        10  | 000 | 101 | [di] + disp16
-        10  | 000 | 110 | [bp] + disp16
-        10  | 000 | 111 | [bx] + disp16
-        11  | 000 | 000 | eax/ax/al/mm0/xmm0
-        11  | 000 | 001 | ecx/cx/cl/mm1/xmm1
-        11  | 000 | 010 | edx/dx/dl/mm2/xmm2
-        11  | 000 | 011 | ebx/bx/bl/mm3/xmm3
-        11  | 000 | 100 | esp/sp/ah/mm4/xmm4
-        11  | 000 | 101 | ebp/bp/ch/mm5/xmm5
-        11  | 000 | 110 | esi/si/dh/mm6/xmm6
-        11  | 000 | 111 | edi/di/bh/mm7/xmm7
-
-    */
-
     /// <summary>
     /// ModRM[mod[7:6] | reg[5:3] | r/m[2:0]]
     /// </summary>
@@ -119,6 +82,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static ModRm operator |(ModRm a, ModRm b)
             => new ModRm(math.or(a.Data, b.Data));
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(ModRm src)
+            => src.Encoded;
 
         public static ModRm Empty => default;
     }

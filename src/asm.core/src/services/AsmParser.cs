@@ -12,11 +12,41 @@ namespace Z0.Asm
     using static Rules;
     using static Chars;
 
+    using SQ = SymbolicQuery;
+    using SP = SymbolicParse;
+    using SR = SymbolicRender;
     [ApiHost]
     public readonly struct AsmParser
     {
         const string Implication = " => ";
 
+        public static Outcome parse(ReadOnlySpan<AsciCode> src, out AsmExpr dst)
+        {
+            dst = AsmExpr.Empty;
+            var outcome = Outcome.Success;
+            var i = SP.EatWhitespace(src);
+            if(i == NotFound)
+                return (false,"Input was empty");
+
+            var remainder = slice(src,i);
+            i = SQ.index(remainder,AsciCode.Space);
+            if(i == NotFound)
+            {
+                var monic = asm.mnemonic(SR.format(remainder).Trim());
+                var operands = Span<char>.Empty;
+                dst = asm.expr(monic,operands);
+            }
+            else
+            {
+                var monic = asm.mnemonic(SR.format(slice(remainder,0, i)).Trim());
+                var operands = SR.format(slice(remainder,i)).Trim();
+                dst = asm.expr(monic, operands);
+            }
+
+
+            return outcome;
+
+        }
         [Op]
         public static Outcome opcode(string src, out AsmOpCodeExpr dst)
         {
@@ -146,7 +176,7 @@ namespace Z0.Asm
                 result += DataParser.parse(skip(cells, i++), out dst.BlockAddress);
                 result += DataParser.parse(skip(cells, i++), out dst.IP);
                 result += DataParser.parse(skip(cells, i++), out dst.BlockOffset);
-                dst.Expression = asm.statement(skip(cells, i++));
+                dst.Expression = asm.expr(skip(cells, i++));
                 dst.Encoded = AsmHexCode.parse(skip(cells, i++));
                 result += sig(skip(cells, i++), out dst.Sig);
                 dst.OpCode = asm.opcode(skip(cells, i++));

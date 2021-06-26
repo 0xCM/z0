@@ -87,13 +87,13 @@ namespace Z0.Asm
             var tool = Wf.BdDisasm();
             var cmd = tool.Cmd(spec);
             var cmdline = tool.CmdLine(cmd);
-            return Run(cmdline, cmd.DisasmPath);
+            return Run(cmdline, cmd.OutputPath);
         }
 
         public Outcome ProcessDisassembly(in AsmToolchainSpec spec)
         {
             var parser = Wf.DbDiasmProcessor();
-            parser.ParseDisassembly(spec.DisasmPath, spec.Analysis);
+            parser.ParseDisassembly(spec.RawDisasmPath, spec.Analysis);
             return true;
         }
 

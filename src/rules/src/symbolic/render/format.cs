@@ -20,6 +20,10 @@ namespace Z0
         public static string format(in Utf16Line src, Span<char> buffer)
             => format(src.Content, buffer);
 
+        [Op]
+        public static string format(ReadOnlySpan<AsciCode> src)
+            => format(src,span<char>(src.Length));
+
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<AsciCode> src, Span<char> buffer)
         {

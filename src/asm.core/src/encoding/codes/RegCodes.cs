@@ -262,6 +262,29 @@ namespace Z0.Asm
         }
 
         /// <summary>
+        /// Clasifies the gp reg codes
+        /// </summary>
+        [SymbolSource]
+        public enum GpRegKind : byte
+        {
+            [Symbol("r8")]
+            Gp8 = 0,
+
+            [Symbol("r16")]
+            Gp16 = 1,
+
+            [Symbol("r32")]
+            Gp32 = 2,
+
+            [Symbol("r64")]
+            Gp64 = 3,
+
+            [Symbol("r8i")]
+            Gp8Hi = 4,
+        }
+
+
+        /// <summary>
         /// Specifies the XMM registers
         /// </summary>
         /// <remarks>

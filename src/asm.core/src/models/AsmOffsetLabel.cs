@@ -19,34 +19,10 @@ namespace Z0.Asm
 
         public DataWidth Width {get;}
 
-        internal AsmOffsetLabel(byte offset)
-        {
-            Offset = offset;
-            Width = DataWidth.W8;
-            OffsetText = AsmRender.offset(Offset, Width);
-            Name = string.Format("_{0}", OffsetText);
-        }
-
         internal AsmOffsetLabel(ushort offset)
         {
             Offset = offset;
             Width = DataWidth.W16;
-            OffsetText = AsmRender.offset(Offset, Width);
-            Name = string.Format("_{0}", OffsetText);
-        }
-
-        internal AsmOffsetLabel(uint offset)
-        {
-            Offset = offset;
-            Width = DataWidth.W32;
-            OffsetText = AsmRender.offset(Offset, Width);
-            Name = string.Format("_{0}", OffsetText);
-        }
-
-        internal AsmOffsetLabel(ulong offset)
-        {
-            Offset = offset;
-            Width = DataWidth.W64;
             OffsetText = AsmRender.offset(Offset, Width);
             Name = string.Format("_{0}", OffsetText);
         }

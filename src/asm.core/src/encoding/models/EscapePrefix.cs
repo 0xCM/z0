@@ -10,19 +10,27 @@ namespace Z0.Asm
     using static Root;
     using static AsmCodes;
 
-    public readonly struct EscapePrefix : IAsmPrefix<EscapePrefix>
+    public struct EscapePrefix : IAsmPrefix<EscapeCode>
     {
-        public EscapeCode Code {get;}
+        EscapeCode _Code;
 
         [MethodImpl(Inline)]
         public EscapePrefix(EscapeCode code)
-            => Code = code;
+            => _Code = code;
 
         public byte Encoded
         {
             [MethodImpl(Inline)]
-            get => (byte)Code;
+            get => (byte)_Code;
         }
+
+        [MethodImpl(Inline)]
+        public EscapeCode Code()
+            => _Code;
+
+        [MethodImpl(Inline)]
+        public void Code(EscapeCode src)
+            => _Code = src;
 
         [MethodImpl(Inline)]
         public static implicit operator EscapePrefix(EscapeCode src)
@@ -30,10 +38,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator EscapeCode(EscapePrefix src)
-            => src.Code;
+            => src._Code;
 
         [MethodImpl(Inline)]
         public static implicit operator byte(EscapePrefix src)
-            => (byte)src.Code;
+            => (byte)src._Code;
     }
 }

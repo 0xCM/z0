@@ -12,7 +12,7 @@ namespace Z0.Asm
     using api = AsmRegs;
 
     /// <summary>
-    /// [0000 0000 00000 000]
+    /// Specifies a register operand
     /// </summary>
     public readonly struct RegOp : IRegOp
     {

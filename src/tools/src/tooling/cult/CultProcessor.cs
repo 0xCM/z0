@@ -149,7 +149,7 @@ namespace Z0.Tools
             {
                 ref readonly var record = ref skip(src,i);
                 if(record.RecordKind == CultRecordKind.Statement)
-                    AsmLines.Add(new AsmSourceLine(record.LineNumber, asm.statement(record.Statement), asm.comment(record.Comment)));
+                    AsmLines.Add(new AsmSourceLine(record.LineNumber, asm.expr(record.Statement), asm.comment(record.Comment)));
                 else if(record.RecordKind == CultRecordKind.Label)
                     AsmLines.Add(new AsmSourceLine(record.LineNumber, asm.label(record.Label.Format()), asm.comment(record.Comment)));
                 else if(record.RecordKind == CultRecordKind.Summary)

@@ -47,7 +47,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => AsmOps.reg(src.Width, src.RegClass, src.Index);
+                => api.reg(src.Width, src.RegClass, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)
@@ -317,5 +317,17 @@ namespace Z0.Asm
                 => (K)src.Index;
         }
 
+        public readonly struct xmm19 : IRegOp128<xmm19>
+        {
+            public I Index => I.r19;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm19 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm19 src)
+                => (K)src.Index;
+        }
     }
 }

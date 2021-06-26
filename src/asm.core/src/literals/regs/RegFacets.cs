@@ -15,53 +15,48 @@ namespace Z0.Asm
         /// <summary>
         /// K: The RegisterClass segment position
         /// </summary>
-        public const byte ClassField = 8;
+        public const byte ClassField = 5;
 
         /// <summary>
         /// W: The RegisterWidth segment position
         /// </summary>
-        public const byte WidthField = 16;
-
-        /// <summary>
-        /// The maximum number of register classes
-        /// </summary>
-        public const byte MaxClass = 30;
+        public const byte WidthField = 10;
 
         /// <summary>
         /// When present, designates the upper half of a given register
         /// </summary>
-        public const uint Hi = MaxClass << 1;
+        public const ushort Hi = 1 << 15;
 
         public enum FieldIndex : byte
         {
             /// <summary>
-            /// RegisterCode: [0..7]
+            /// RegisterCode: [0..5]
             /// </summary>
-            C = 0,
+            C = IndexField,
 
             /// <summary>
-            /// RegisterClass:[8..15]
+            /// RegisterClass:[6..9]
             /// </summary>
-            K = 8,
+            K = ClassField,
 
             /// <summary>
-            /// Register width: [16..30]
+            /// Register width: [10..13]
             /// </summary>
-            W = 16,
+            W = WidthField,
 
             /// <summary>
-            /// Upper register selection: [31]
+            /// Upper register selection: [15]
             /// </summary>
-            H = 31,
+            H = 15,
         }
 
         public enum FieldWidth : byte
         {
-            C = FieldIndex.K - FieldIndex.C,
+            RegCode = 5,
 
-            K = FieldIndex.W - FieldIndex.K,
+            RegClass = 4,
 
-            W = MaxClass - FieldIndex.W,
+            RegWidth = 3,
         }
     }
 }

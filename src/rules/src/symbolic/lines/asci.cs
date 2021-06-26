@@ -2,21 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial struct asm
+    partial struct Lines
     {
         [MethodImpl(Inline), Op]
-        public static AsmExpr statement(string src)
-            => new AsmExpr(src.Trim());
+        public static AsciLine asci(ReadOnlySpan<byte> src, uint number, uint offset, uint length)
+            => new AsciLine(number, offset, recover<AsciCode>(slice(src, offset, length)));
 
-        [Op]
-        public static AsmExpr statement(AsmMnemonic monic, ReadOnlySpan<char> operands)
-            => new AsmExpr(string.Format("{0} {1}", monic.Format(MnemonicCase.Lowercase), TextTools.format(operands)));
     }
 }

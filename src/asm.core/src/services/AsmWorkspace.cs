@@ -66,8 +66,14 @@ namespace Z0.Asm
         public FS.FilePath DocExtract(string docid, string part, FS.FileExt ext)
             => DocExtractDir(docid) + FS.file(string.Format("{0}.{1}",docid, part), ext);
 
-        public FS.FolderPath Disassembly()
+        public FS.FolderPath Disasm()
             => Output() + FS.folder("dis");
+
+        public FS.FolderPath RawDisasm()
+            => Disasm() + FS.folder("raw");
+
+        public FS.FolderPath ImportedDisasm()
+            => Disasm() + FS.folder("imported");
 
         public FS.FolderPath Analysis()
             => Output() + FS.folder("analysis");
@@ -93,8 +99,11 @@ namespace Z0.Asm
         public FS.FilePath ListPath(string id)
             => Lists() + FS.file(id, FS.ext("list.asm"));
 
-        public FS.FilePath DisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
-            => Disassembly() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
+        public FS.FilePath RawDisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
+            => RawDisasm() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
+
+        public FS.FilePath ImportedDisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
+            => RawDisasm() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
 
         public AsmToolchainSpec ToolchainSpec(ToolId assembler, ToolId disassembler, string id, AsmBinKind bk = AsmBinKind.bin)
         {
@@ -104,7 +113,7 @@ namespace Z0.Asm
             spec.AsmPath = SourcePath(id);
             spec.BinPath = BinPath(id);
             spec.BinKind = bk;
-            spec.DisasmPath = DisasmPath(id, disassembler);
+            spec.RawDisasmPath = RawDisasmPath(id, disassembler);
             spec.Analysis = Analysis();
             spec.ListPath = ListPath(id);
             return spec;

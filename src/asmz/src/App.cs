@@ -1065,9 +1065,9 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            //Dispatch();
-            CalcTables();
-            EmitRegGrids();
+            Dispatch();
+            //CalcTables();
+            //EmitRegGrids();
             //ShowRexTable();
 
 

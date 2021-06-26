@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
-
     using static AsciCode;
 
     using C = AsciCode;
@@ -18,10 +16,14 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bit eol(byte a0, byte a1)
-            => (C)a0 == CR || (C)a1 == LF;
+            => (C)a0 == CR && (C)a1 == LF;
 
         [MethodImpl(Inline), Op]
         public static bit eol(char a, char b)
             => cr(a) && lf(b);
+
+        [MethodImpl(Inline), Op]
+        public static bool eol(C a0, C a1)
+            => a0 == CR && a1 == LF;
     }
 }

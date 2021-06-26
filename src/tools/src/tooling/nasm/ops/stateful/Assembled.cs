@@ -16,7 +16,7 @@ namespace Z0.Tools
         {
             dst.Bitstring = FormatBitstring(src.Encoded);
             dst.Encoding = src.Encoded;
-            dst.Statement = asm.statement(src.SourceText);
+            dst.Statement = asm.expr(src.SourceText);
             dst.SourceLine = src.LineNumber;
             dst.Offset = src.Offset;
             return ref dst;

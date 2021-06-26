@@ -12,6 +12,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static Typed;
+    using static AsmCodes;
 
     using K = RexPrefixCode;
 
@@ -19,137 +20,84 @@ namespace Z0.Asm
     public readonly struct AsmEncoder
     {
         [MethodImpl(Inline), Op]
-        public static Hex8 rex()
-            => (byte)K.Base;
+        public static ModRm modrm(byte src)
+            => new ModRm(src);
 
         [MethodImpl(Inline), Op]
-        public static AsmHexCode rex(uint4 wrxb, uint4 index)
+        public static MandatoryPrefix mandatory(MandatoryPrefixCode code)
+            => new MandatoryPrefix(code);
+
+        [MethodImpl(Inline), Op]
+        public static Vsib vsib(byte src)
+            => new Vsib(src);
+
+        [MethodImpl(Inline), Op]
+        public static RexPrefix rex()
+            => (byte)RexPrefixCode.Base;
+
+        [MethodImpl(Inline), Op]
+        public static BndPrefix bnd()
+            => BndPrefixCode.BND;
+
+        [MethodImpl(Inline), Op]
+        public static AsmPrefix prefix()
+            => new AsmPrefix(0);
+
+        [MethodImpl(Inline), Op]
+        public static ref AsmPrefix modrm(uint3 rm, uint3 reg, uint2 mod, ref AsmPrefix dst)
         {
-            var dst = AsmHexCode.Empty;
-            dst.Cell(index) = rex(wrxb);
-            dst.Cell(15) = 1;
-            return dst;
+            dst.Content(modrm(rm,reg,mod));
+            return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static Hex8 rex(uint4 wrxb)
-            => math.or((byte)K.Base, (byte)wrxb);
+        public static ModRm modrm(uint3 r1, uint3 r2)
+            => modrm(r1, r2, uint2.Max);
 
         [MethodImpl(Inline), Op]
-        public static ref ModRm modrm(in AsmHexCode src, uint4 offset)
-            => ref @as<byte,ModRm>(skip(src.Bytes, offset));
+        public static RexPrefix rex(uint4 wrxb)
+            => math.or((byte)RexPrefixCode.Base, (byte)wrxb);
+
+        [MethodImpl(Inline), Op]
+        public static ModRm modrm(uint3 rm, uint3 reg, uint2 mod)
+            => new ModRm(Bits.join((rm, 0), (reg, 3), (mod, 6)));
+
+        [MethodImpl(Inline), Op]
+        public static ref AsmHexCode rex(uint4 wrxb, uint4 index, ref AsmHexCode dst)
+        {
+            dst.Cell(index) = rex(wrxb);
+            dst.Cell(15) = 1;
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static BranchHint hint(bit bt)
+            => bt ? BranchHintCode.BT : BranchHintCode.BNT;
+
+        [MethodImpl(Inline), Op]
+        public static RexPrefix rex(bit w, bit r, bit x, bit b)
+        {
+            var bx = math.slor((byte)b, 0, (byte)x, 1);
+            var rw = math.slor((byte)r, 2, (byte)w, 3);
+            return math.or(bx, rw, rex());
+        }
+
+        [MethodImpl(Inline), Op]
+        public static AsmSizeOverrides sizes(bit opsz, bit adsz)
+            => new AsmSizeOverrides(opsz,adsz);
 
         [MethodImpl(Inline), Op]
         public static bit test(K src, K match)
             => (src & match) == match;
 
-        [MethodImpl(Inline), Op]
-        public static Hex8 rex(K kind)
-        {
-            var dst = rex();
-
-            if(test(kind, K.W))
-                dst |= (byte)K.W;
-
-            if(test(kind, K.R))
-                dst |= (byte)K.R;
-
-            if(test(kind, K.X))
-                dst |= (byte)K.X;
-
-            if(test(kind, K.W))
-                dst |= (byte)K.W;
-
-            return dst;
-        }
 
         [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(RexPrefix a0)
+        public static ref AsmHexCode encode(RexPrefix a0, ref AsmHexCode dst)
         {
-            var dst = buffer();
-            var writer = write(dst);
+            var writer = write(dst.Bytes);
             writer.Write8(a0);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(RexPrefix a0, Hex8 a1)
-        {
-            var dst = buffer();
-            var writer = write(dst);
-            writer.Write8(a0);
-            writer.Write8(a1);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(Hex8 a0)
-        {
-            var dst = buffer();
-            var writer = write(dst);
-            writer.Write8(a0);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(Hex8 a0, Hex8 a1)
-        {
-            var writer = write(buffer());
-            writer.Write8(a0);
-            writer.Write8(a1);
-            return load(writer);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(Hex16 a0)
-        {
-            var dst = buffer();
-            var writer = write(dst);
-            writer.Write16(a0);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(Hex8 a0, Hex8 a1, Hex8 a2)
-        {
-            var dst = buffer();
-            var writer = write(dst);
-            writer.Write8(a0);
-            writer.Write8(a1);
-            writer.Write8(a2);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(Hex8 a0, Hex8 a1, Hex8 a2, Hex8 a3)
-        {
-            var dst = buffer();
-            var writer = write(dst);
-            writer.Write8(a0);
-            writer.Write8(a1);
-            writer.Write8(a2);
-            writer.Write8(a3);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(Hex8 a0, Hex8 a1, Hex16 a2)
-        {
-            var dst = buffer();
-            var writer = write(dst);
-            writer.Write8(a0);
-            writer.Write8(a1);
-            writer.Write16(a2);
-            return close(writer, dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(Hex8 a0, Hex32 a1)
-        {
-            var writer = write(buffer());
-            writer.Write8(a0);
-            writer.Write32(a1);
-            return load(writer);
+            dst = close(writer, dst.Bytes);
+            return ref dst;
         }
 
         [MethodImpl(Inline), Op]

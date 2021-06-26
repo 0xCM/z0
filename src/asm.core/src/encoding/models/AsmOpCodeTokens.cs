@@ -5,8 +5,11 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public readonly partial struct AsmOpCodeTokens
+    using static Root;
+
+    public readonly struct AsmOpCodeTokens
     {
         [Flags]
         public enum TokenKind : byte
@@ -114,7 +117,7 @@ namespace Z0.Asm
         }
 
         [SymbolSource("Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode.")]
-        public enum RegExtKind : byte
+        public enum RegDigitCode : byte
         {
             [Symbol("/0", "Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode")]
             r0,
@@ -182,13 +185,73 @@ namespace Z0.Asm
         public static ReadOnlySpan<RegOpCodeMod> RegOpCodeMods
             => new RegOpCodeMod[]{RegOpCodeMod.rb, RegOpCodeMod.rw, RegOpCodeMod.rd,  RegOpCodeMod.ro};
 
-        public static ReadOnlySpan<RegExtKind> RegExtensions
-            => new RegExtKind[]{RegExtKind.r0, RegExtKind.r1,RegExtKind.r2,RegExtKind.r3,RegExtKind.r4,RegExtKind.r5,RegExtKind.r6,RegExtKind.r7};
+        public static ReadOnlySpan<RegDigitCode> RegExtensions
+            => new RegDigitCode[]{RegDigitCode.r0, RegDigitCode.r1,RegDigitCode.r2,RegDigitCode.r3,RegDigitCode.r4,RegDigitCode.r5,RegDigitCode.r6,RegDigitCode.r7};
 
         public static ReadOnlySpan<Offset> Offsets
             => new Offset[]{Offset.cb, Offset.cw, Offset.cd, Offset.cp, Offset.co, Offset.ct};
 
         public static ReadOnlySpan<ImmSizeKind> ImmSizes
             => new ImmSizeKind[]{ImmSizeKind.ib, ImmSizeKind.iw, ImmSizeKind.id, ImmSizeKind.io};
+
+
+        public readonly struct ImmSize
+        {
+            public ImmSizeKind Token {get;}
+
+            [MethodImpl(Inline)]
+            public ImmSize(ImmSizeKind src)
+            {
+                Token = src;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator ImmSize(ImmSizeKind src)
+                => new ImmSize(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator ImmSizeKind(ImmSize src)
+                => src.Token;
+
+            [MethodImpl(Inline)]
+            public static explicit operator byte(ImmSize src)
+                => (byte)src.Token;
+        }
+
+        /// <summary>
+        /// Represents a register digit 0..7 that occurs within an op code expression
+        /// </summary>
+        public struct RegDigit
+        {
+            public RegDigitCode _Code;
+
+            [MethodImpl(Inline)]
+            public RegDigit(RegDigitCode code)
+                => _Code = code;
+
+            public byte Encoded
+            {
+                [MethodImpl(Inline)]
+                get => (byte)_Code;
+            }
+
+            public RegDigitCode Code()
+                => _Code;
+
+            public void Code(RegDigitCode code)
+                => _Code = code;
+
+            [MethodImpl(Inline)]
+            public static implicit operator RegDigit(byte src)
+                => new RegDigit((RegDigitCode)src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator RegDigit(RegDigitCode src)
+                => new RegDigit(src);
+
+            [MethodImpl(Inline)]
+            public static explicit operator byte(RegDigit src)
+                => src.Encoded;
+        }
     }
 }

@@ -11,10 +11,20 @@ namespace Z0
 
     public ref struct AsciLine
     {
+        /// <summary>
+        /// The 1-based document-relative line number
+        /// </summary>
+        /// <value></value>
         public uint LineNumber {get;}
 
+        /// <summary>
+        /// The document-relative index of the first character in the represented line
+        /// </summary>
         public uint StartPos {get;}
 
+        /// <summary>
+        /// The line content
+        /// </summary>
         public ReadOnlySpan<AsciCode> Content {get;}
 
         [MethodImpl(Inline)]

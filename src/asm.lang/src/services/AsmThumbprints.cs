@@ -24,7 +24,7 @@ namespace Z0.Asm
             while(!reader.EndOfStream)
             {
                 var data = reader.ReadLine();
-                var statement = asm.statement(data.LeftOfFirst(Chars.Semicolon));
+                var statement = asm.expr(data.LeftOfFirst(Chars.Semicolon));
                 var tpResult = AsmParser.thumbprint(data, out var thumbprint);
                 if(tpResult)
                     dst.Add(thumbprint);

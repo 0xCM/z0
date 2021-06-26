@@ -16,6 +16,6 @@ namespace Z0.Tools
 
         public bool EmitDetails;
 
-        public FS.FilePath DisasmPath;
+        public FS.FilePath OutputPath;
     }
 }

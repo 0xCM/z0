@@ -205,7 +205,7 @@ namespace Z0.Asm
             for(var b=0u; b<f1.Length; b++)
             for(var a=0u; a<f0.Length; a++)
             {
-                var modrm = AsmPrefix.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
+                var modrm = AsmEncoder.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
                 bitfield(modrm, ref k, dst);
                 seek(dst, k++) = Chars.Space;
                 seek(dst, k++) = Chars.Eq;

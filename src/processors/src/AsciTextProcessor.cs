@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using SQ = SymbolicQuery;
 
     public abstract class AsciTextProcessor<H,T> : TextProcessor<H,T>
         where H : AsciTextProcessor<H,T>, new()
@@ -40,7 +41,6 @@ namespace Z0.Asm
             throw new NotImplementedException();
         }
 
-
         protected void ProcessFile(MemoryFile src, TextProcessorSettings settings, Span<char> buffer)
         {
             var data = src.View();
@@ -58,13 +58,13 @@ namespace Z0.Asm
             {
                 ref readonly var a0 = ref skip(data, pos);
                 ref readonly var a1 = ref skip(data, pos + 1);
-                if(Lines.eol(a0,a1))
+                if(SQ.eol(a0,a1))
                 {
                     var line = slice(data, eol, pos - eol);
                     var decoded = SymbolicTools.asci(line, buffer);
                     var chars = slice(buffer, 0, decoded);
                     if(lines == 0)
-                        FileHeader = text.format(chars);
+                        FileHeader = TextTools.format(chars);
                     else
                         outcome = ProcessLine(pos, chars);
 

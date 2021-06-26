@@ -10,32 +10,40 @@ namespace Z0.Asm
     using static Root;
     using static AsmCodes;
 
-    public readonly struct BranchHint : IAsmPrefix<BranchHint>
+    public struct BranchHint : IAsmPrefix<BranchHintCode>
     {
-        public BranchHintCode Code {get;}
+        BranchHintCode _Code;
 
         [MethodImpl(Inline)]
         public BranchHint(BranchHintCode src)
         {
-            Code = src;
+            _Code = src;
         }
 
         public byte Encoded
         {
             [MethodImpl(Inline)]
-            get => (byte)Code;
+            get => (byte)_Code;
         }
+
+        [MethodImpl(Inline)]
+        public BranchHintCode Code()
+            => _Code;
+
+        [MethodImpl(Inline)]
+        public void Code(BranchHintCode src)
+            => _Code = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Code == 0;
+            get => _Code == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Code != 0;
+            get => _Code != 0;
         }
 
         public override string ToString()
@@ -47,5 +55,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator BranchHint(BranchHintCode src)
             => new BranchHint(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BranchHintCode(BranchHint src)
+            => src.Code();
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(BranchHint src)
+            => (byte)src._Code;
     }
 }

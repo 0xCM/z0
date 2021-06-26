@@ -26,7 +26,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegWidth width(RegKind src)
-            => (RegWidth)Bits.slice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
+            => (RegWidth)Bits.slice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.RegWidth);
 
         /// <summary>
         /// Determines the register code from the kind
@@ -34,7 +34,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegIndex index(RegKind src)
-            => (RegIndex)Bits.slice((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.C);
+            => (RegIndex)Bits.slice((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.RegCode);
 
         /// <summary>
         /// Determines the register class from the kind
@@ -42,7 +42,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegClass @class(RegKind src)
-            => (RegClass)Bits.slice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
+            => (RegClass)Bits.slice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.RegClass);
 
         /// <summary>
         /// Determines the register class from the operand

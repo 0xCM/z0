@@ -65,7 +65,7 @@ namespace Z0.Asm
                 {
                     ref readonly var a0 = ref skip(src, pos);
                     ref readonly var a1 = ref skip(src, pos + 1);
-                    if(Lines.eol(a0,a1))
+                    if(SQ.eol(a0,a1))
                     {
                         var line = Lines.asci(src, number++, counter, length + 1);
 

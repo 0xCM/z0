@@ -11,71 +11,11 @@ namespace Z0
     using static Root;
     using static core;
 
-    using C = AsciCode;
-
-    using static AsciCode;
+    using SQ = SymbolicQuery;
 
     [ApiHost]
-    public readonly struct Lines
+    public readonly partial struct Lines
     {
-        [Op]
-        public static ReadOnlySpan<TextLine> read(string src, bool keepblank = false)
-        {
-            var lines = list<TextLine>();
-            var lineNumber = 0u;
-            using(var reader = new StringReader(src))
-            {
-                var next = reader.ReadLine();
-                while(next != null)
-                {
-                    if(SymbolicQuery.blank(next))
-                    {
-                        if(keepblank)
-                            lines.Add(new TextLine(++lineNumber, next));
-                    }
-                    else
-                        lines.Add(new TextLine(++lineNumber, next));
-
-                    next = reader.ReadLine();
-                }
-            }
-            return lines.ViewDeposited();
-        }
-
-        [Op]
-        public static Count traverse(string src, Action<TextLine> receiver, bool keepblank = false)
-        {
-            var lineNumber = 0u;
-            using(var reader = new StringReader(src))
-            {
-                var next = reader.ReadLine();
-                while(next != null)
-                {
-                    if(SymbolicQuery.blank(next))
-                    {
-                        if(keepblank)
-                            receiver(new TextLine(++lineNumber, next));
-                    }
-                    else
-                        receiver(new TextLine(++lineNumber, next));
-                    next = reader.ReadLine();
-                }
-            }
-            return lineNumber;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static bool eol(byte a0, byte a1)
-            => (C)a0 == CR || (C)a1 == LF;
-
-        [MethodImpl(Inline), Op]
-        public static bool eol(char a0, char a1)
-            => (C)a0 == CR || (C)a1 == LF;
-
-        [MethodImpl(Inline), Op]
-        public static LineRange range(uint min, uint max, TextLine[] data)
-            => new LineRange(min, max, data);
-
         [MethodImpl(Inline), Op]
         public static TextLine line(uint number, string content)
             => new TextLine(number, content);
@@ -97,97 +37,6 @@ namespace Z0
             for(var i=0; i<count; i++)
                 seek(buffer, i) = (char)skip(src.Content,i);
             dst = new Utf16Line(src.LineNumber, src.StartPos, buffer);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static AsciLine asci(ReadOnlySpan<byte> src, uint number, uint offset, uint chars)
-            => new AsciLine(number, offset, recover<AsciCode>(slice(src, offset, chars)));
-
-        [MethodImpl(Inline), Op]
-        public static AsciLine asci(ReadOnlySpan<AsciCode> src, uint number, uint start, uint chars)
-            => new AsciLine(number, start, slice(src, start, chars));
-
-        [MethodImpl(Inline), Op]
-        public static Utf16Line utf16(ReadOnlySpan<char> src, uint number, uint offset, uint chars)
-            => new Utf16Line(number, offset, slice(src, offset, chars));
-
-        public static Utf16Line utf16(ReadOnlySpan<byte> src, uint number, uint offset, uint chars)
-            => new Utf16Line(number, 0, slice(recover<char>(src), offset, chars));
-
-        [MethodImpl(Inline), Op]
-        public static uint count(ReadOnlySpan<byte> src)
-        {
-            var size = src.Length;
-            var counter = 0u;
-            for(var pos=0u; pos<size- 1; pos++)
-            {
-                ref readonly var a0 = ref skip(src, pos);
-                ref readonly var a1 = ref skip(src, pos + 1);
-                if(eol(a0,a1))
-                    counter++;
-            }
-            return counter;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint count(ReadOnlySpan<char> src)
-        {
-            var size = src.Length;
-            var counter = 0u;
-            for(var pos=0u; pos<size- 1; pos++)
-            {
-                ref readonly var a0 = ref skip(src, pos);
-                ref readonly var a1 = ref skip(src, pos + 1);
-                if(eol(a0,a1))
-                    counter++;
-            }
-            return counter;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint maxlength(ReadOnlySpan<byte> src)
-        {
-            var size = src.Length;
-            var max = 0u;
-            var current = 0u;
-            for(var pos=0u; pos<size; pos++)
-            {
-                ref readonly var a0 = ref skip(src, pos);
-                ref readonly var a1 = ref skip(src, pos + 1);
-                if(!eol(a0,a1))
-                    current++;
-                else
-                {
-                    if(current > max)
-                        max = current;
-                    current = 0;
-                    pos++;
-                }
-            }
-            return max;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint maxlength(ReadOnlySpan<char> src)
-        {
-            var size = src.Length;
-            var max = 0u;
-            var current = 0u;
-            for(var pos=0u; pos<size; pos++)
-            {
-                ref readonly var a0 = ref skip(src, pos);
-                ref readonly var a1 = ref skip(src, pos + 1);
-                if(!eol(a0,a1))
-                    current++;
-                else
-                {
-                    if(current > max)
-                        max = current;
-                    current = 0;
-                    pos++;
-                }
-            }
-            return max;
         }
     }
 }

@@ -46,6 +46,37 @@ namespace Z0.Asm
             return slice(src.Rows,offset, RowWidth);
         }
 
+        public static GpRegGrid grid(GpClass gp)
+        {
+            const byte Count = 4*16 + 4;
+            const ushort size = Count*2;
+            var buffer = alloc<RegOp>(Count);
+            ref var dst = ref first(buffer);
+            var @class = RegClass.GP;
+
+            var w = RegWidth.W8;
+            for(var i=0; i<16; i++)
+                seek(dst,i) = AsmRegs.reg(w, @class, (RegIndex)i);
+
+            w = RegWidth.W16;
+            for(var i=0; i<16; i++)
+                seek(dst,i) = AsmRegs.reg(w, @class, (RegIndex)i);
+
+            w = RegWidth.W32;
+            for(var i=0; i<16; i++)
+                seek(dst,i) = AsmRegs.reg(w, @class, (RegIndex)i);
+
+            w = RegWidth.W64;
+            for(var i=0; i<16; i++)
+                seek(dst,i) = AsmRegs.reg(w, @class, (RegIndex)i);
+
+            w = RegWidth.W8;
+            for(var i=0; i<4; i++)
+                seek(dst,i) = AsmRegs.reg(w, @class, (RegIndex)i);
+
+            return default;
+        }
+
         public static AsmRegGrid<Gp8> grid(GpClass gp, W8 w)
             => asci(AsmCodes.Gp8Regs());
 
@@ -87,36 +118,5 @@ namespace Z0.Asm
             }
             return new AsmRegGrid<T>(AsciSymbols.seq(dst), (byte)rows);
         }
-    }
-
-    public readonly struct AsmRegGrid<K>
-        where K : unmanaged
-    {
-        readonly AsciSequence _Data;
-
-        public ushort RowCount {get;}
-
-        [MethodImpl(Inline)]
-        public AsmRegGrid(AsciSequence src, ushort rows)
-        {
-            _Data = src;
-            RowCount = rows;
-        }
-
-        public ReadOnlySpan<byte> Rows
-        {
-            [MethodImpl(Inline)]
-            get => _Data.View;
-        }
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> Row(ushort index)
-            => AsmRegGrids.row(this,index);
-
-        public string Format()
-            => _Data.Format();
-
-        public override string ToString()
-            => Format();
     }
 }

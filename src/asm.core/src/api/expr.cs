@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmOpTypes;
 
     partial struct asm
     {
@@ -16,5 +15,13 @@ namespace Z0.Asm
             where R : IRegOp
             where I : IImmOp
                 => string.Format("{0} {1},{2}", monic.Format(MnemonicCase.Lowercase), r.Format(), imm);
+
+        [MethodImpl(Inline), Op]
+        public static AsmExpr expr(string src)
+            => new AsmExpr(src.Trim());
+
+        [Op]
+        public static AsmExpr expr(AsmMnemonic monic, ReadOnlySpan<char> operands)
+            => new AsmExpr(string.Format("{0} {1}", monic.Format(MnemonicCase.Lowercase), TextTools.format(operands)));
     }
 }

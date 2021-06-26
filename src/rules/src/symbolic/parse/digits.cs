@@ -12,9 +12,25 @@ namespace Z0
     using static core;
 
     using C = AsciCode;
+    using SQ = SymbolicQuery;
 
     partial struct SymbolicParse
     {
+        [Op]
+        public static int EatWhitespace(ReadOnlySpan<AsciCode> src)
+        {
+            var count = src.Length;
+            var i=0;
+            while(i < count)
+            {
+                if(!SQ.whitespace(skip(src,i)))
+                    return i;
+                else
+                    i++;
+            }
+            return NotFound;
+        }
+
         [Op]
         public static uint digits(ReadOnlySpan<char> src, uint offset, Span<byte> dst)
         {

@@ -14,7 +14,7 @@ namespace Z0.Asm
     }
 
     public interface IAsmPrefix<P> : IAsmPrefix
-        where P : unmanaged, IAsmPrefix<P>
+        where P : unmanaged
     {
 
     }

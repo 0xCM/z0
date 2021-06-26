@@ -97,55 +97,26 @@ namespace Z0
         public static byte combine(HexDigit lo, HexDigit hi)
             => (byte)((byte)hi << 4 | (byte)lo);
 
+        [Op]
         public static Outcome parse(ReadOnlySpan<AsciCode> src, out ulong dst)
         {
-            dst = 0;
-            var counter = 0u;
-            var count = src.Length;
-            var target = bytes(dst);
-            var hi = byte.MaxValue;
-            var lo = byte.MaxValue;
-            for(var i=count-1; i>=0; i--)
-            {
-                ref readonly var c = ref skip(src,i);
-                if(whitespace(c) || specifier(c))
-                    continue;
-
-                if(parse(c, out HexDigit d))
-                {
-                    if(lo == byte.MaxValue)
-                        lo = (byte)d;
-                    else
-                    {
-                        hi = (byte)d;
-                        seek(target, counter++) = Bytes.or(Bytes.sll(hi,4), lo);
-                        hi = byte.MaxValue;
-                        lo = byte.MaxValue;
-                    }
-                }
-                else
-                    return false;
-            }
-            return true;
-        }
-
-        public static Outcome parse(ReadOnlySpan<char> src, out ulong dst)
-        {
-            dst = 0;
-            return parse(src, bytes(dst));
+            var lead = recover<AsciCode,byte>(src);
+            var _offset = System.Text.Encoding.ASCII.GetString(lead);
+            return ulong.TryParse(_offset, System.Globalization.NumberStyles.HexNumber, null, out dst);
         }
 
         [Op]
-        public static Outcome<uint> parse(ReadOnlySpan<AsciCode> src, Span<byte> dst)
+        public static Outcome<uint> parse(ReadOnlySpan<AsciCode> src, ref uint i, Span<byte> dst)
         {
+            var i0 = i;
             var counter = 0u;
             var count = src.Length;
             ref var target = ref first(dst);
             var hi = byte.MaxValue;
             var lo = byte.MaxValue;
-            for(var i=0; i<count; i++)
+            for(var j=0; j<count; j++,i++)
             {
-                ref readonly var c = ref skip(src,i);
+                ref readonly var c = ref skip(src,j);
                 if(whitespace(c) || specifier(c))
                     continue;
 

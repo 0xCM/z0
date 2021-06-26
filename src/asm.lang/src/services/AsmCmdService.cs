@@ -80,7 +80,7 @@ namespace Z0.Asm
             return true;
         }
 
-        [CmdOp(".toolchain")]
+        [CmdOp(".asm")]
         Outcome ToolChain(CmdArgs args)
         {
             if(args.Length ==0)

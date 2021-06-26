@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmDsl;
+    using static math;
 
     [ApiHost]
     public readonly partial struct AsmRegs
@@ -24,5 +25,8 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static bool invalid(RegIndex src)
             => (uint)src >= 32;
+
+
+
     }
 }

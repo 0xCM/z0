@@ -16,45 +16,60 @@ namespace Z0.Asm
     [ApiHost]
     public class BdDisasmProcessor : AsciTextProcessor<BdDisasmProcessor,AsmDisassembly>
     {
+        bool Verbose
+            => false;
+
         protected override Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
         {
             var outcome = Outcome.Success;
             dst = default;
-            var data = src.Content;
-            var space1 = SQ.next(data, 0, AsciCode.Space);
-            if(space1 == NotFound)
-                return false;
+            if(src.Length < 2)
+                return outcome;
 
-            Hex.parse(slice(data, 0, space1), out var offset);
-            var space2 = SQ.next(data, (uint)space1 + 1, AsciCode.Space);
-            if(space2 == NotFound)
-                return false;
+            var wscount = SQ.TrailingWhitespaceCount(src.Content);
+            var content = slice(src.Content, 0, src.Length - wscount);
+            if(Verbose)
+                term.babble(SR.format(content));
+
+            outcome = Hex.parse(slice(content, 0, 17), out ulong offset);
+            if(outcome.Fail)
+                return (false, "Unable to parse offset");
+
+            var remainder = slice(content, 18);
+            var i = SQ.index(remainder, AsciCode.Space);
+            if(i == NotFound)
+                return (false,"Hexcode not found");
+
+            var hexchars = slice(remainder,0,i);
+            remainder = slice(remainder, i);
 
             var buffer = Cells.alloc(n128).Bytes;
-            var chars = slice(data, (uint)space1, 16);
-            var result  = Hex.parse(chars, buffer);
+            var j=(uint)i;
+            var result = Hex.parse(hexchars, ref j, buffer);
             if(result.Fail)
                 return (false,result.Message);
 
-            var hexcode = AsmHexCode.load(slice(buffer,0,result.Data));
+            var size = result.Data;
+            if(size == 0)
+                return (false, "Hexcode was empty");
 
-            var i=0u;
-            var body = slice(src.Content, space1 + 16);
-            var sbuffer = span<char>(body.Length);
-            var len = SR.render(slice(src.Content,space1 + 16), ref i, sbuffer);
-            return row(offset, hexcode, slice(sbuffer,0,len).Trim(), out dst);
-        }
+            if(size > 15)
+                return (false, "Hexcode too big");
 
-        static Outcome row(ulong offset, AsmHexCode hexcode, ReadOnlySpan<char> src, out AsmDisassembly dst)
-        {
-            var space = TextTools.index(src, Chars.Space);
-            dst = default;
-            if(space == NotFound)
-                return (false,"Mnemonic delimiter not found");
-            var monic = asm.mnemonic(TextTools.left(src, space));
-            var operands = TextTools.right(src,space).Trim();
-            var stmt = asm.statement(monic, operands);
-            dst = asm.disassembly(offset, stmt, hexcode);
+            var hexcode = AsmHexCode.load(slice(buffer,0,size));
+            if(Verbose)
+                term.babble(string.Format("AsmHex:{0}", hexcode.Format()));
+
+            var _expr = slice(content,49);
+            if(Verbose)
+                term.babble(string.Format("Expr:{0}", SR.format(_expr)));
+
+
+            outcome = AsmParser.parse(_expr, out AsmExpr expr);
+            if(outcome.Fail)
+                return outcome;
+
+            dst = asm.disassembly(offset, expr, hexcode);
             return true;
         }
 
@@ -68,7 +83,6 @@ namespace Z0.Asm
             var asmDst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Asm);
             var csvDst = dir + FS.file(src.FileName.WithoutExtension.Format(), FS.Csv);
             using var asmWriter = asmDst.AsciWriter();
-
             var formatter = Tables.formatter<AsmDisassembly>(AsmDisassembly.RenderWidths);
             using var csvWriter = csvDst.AsciWriter();
             csvWriter.WriteLine(formatter.FormatHeader());
@@ -76,16 +90,16 @@ namespace Z0.Asm
             var pos = 0u;
             var emitting = Emitting(asmDst);
             var length = 0u;
-            var counter = 0u;
+            var linepos = 0u;
             var number = 1u;
             var rows = list<AsmDisassembly>();
             while(pos++ < size -1)
             {
                 ref readonly var a0 = ref skip(data, pos);
                 ref readonly var a1 = ref skip(data, pos + 1);
-                if(Lines.eol(a0,a1))
+                if(SQ.eol(a0,a1))
                 {
-                    var line = Lines.asci(data, number++, counter, length + 1);
+                    var line = Lines.asci(data, number++, linepos, length + 1);
                     if(line.Content.Length > 2)
                     {
                         var outcome = ProcessLine(ref line, out var row);
@@ -104,7 +118,7 @@ namespace Z0.Asm
                     }
                     pos++;
                     length = 0;
-                    counter = pos;
+                    linepos = pos;
                 }
                 else
                     length++;
