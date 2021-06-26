@@ -100,6 +100,5 @@ namespace Z0
             seek(dst, i++) = Chars.RBracket;
             return i - i0;
         }
-
     }
 }

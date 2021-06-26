@@ -14,7 +14,7 @@ namespace Z0.Tools
     {
         public uint ParseListing(NasmListing src, Span<NasmListEntry> dst)
         {
-            var flow = Wf.Running(Msg.ParsingNasmListEntries.Format(src.LineCount));
+            var flow = Wf.Running(ParsingNasmListEntries.Format(src.LineCount));
             var j = 0u;
             var lines = src.Lines.View;
             var count = lines.Length;
@@ -28,7 +28,7 @@ namespace Z0.Tools
                     Wf.Warn(outcome.Message);
             }
 
-            Wf.Ran(flow, Msg.ParsedNasmListEntries.Format(j));
+            Wf.Ran(flow, ParsedNasmListEntries.Format(j));
             return j;
         }
     }

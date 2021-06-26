@@ -11,12 +11,27 @@ namespace Z0.Asm
 
     public readonly struct Disp16
     {
+        /// <summary>
+        /// The base displacement magnitude
+        /// </summary>
         public ushort Value {get;}
 
+        /// <summary>
+        /// The scale applied to the displacement
+        /// </summary>
+        public AsmScale Scale {get;}
+
         [MethodImpl(Inline)]
-        public Disp16(ushort value)
+        public Disp16(ushort value, AsmScale scale = AsmScale.y1)
         {
             Value = value;
+            Scale = scale;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Value == 0;
         }
 
         [MethodImpl(Inline)]

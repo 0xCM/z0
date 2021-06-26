@@ -7,7 +7,19 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmSigTokens;
+
+    [SymbolSource]
+    public enum AddressingModeKind : byte
+    {
+        [Symbol("m16b", "Specifies 16-bit addressing")]
+        Mode16,
+
+        [Symbol("m32b", "Specifies 32-bit addressing")]
+        Mode32,
+
+        [Symbol("m64b", "Specifies 64-bit addressing")]
+        Mode64,
+    }
 
     public readonly struct AddressingMode
     {

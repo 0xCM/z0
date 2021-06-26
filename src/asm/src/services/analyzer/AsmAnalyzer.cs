@@ -70,7 +70,6 @@ namespace Z0
             var target = dst.AsmDetailDir();
             target.Clear();
             var rows = AsmRows.EmitAsmDetailRows(src, target);
-            Emitted(rows, target);
         }
 
         ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, ApiPackArchive dst)
@@ -97,18 +96,10 @@ namespace Z0
         }
 
         void EmitCalls(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
-        {
-            var target = dst.AsmCallsPath();
-            var calls = Calls.EmitRows(src, target);
-            Emitted(calls, target);
-        }
+            => Calls.EmitRows(src, dst.AsmCallsPath());
 
         void EmitJumps(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
-        {
-            var target = dst.JmpTarget();
-            var rows = Jumps.EmitRows(src, target);
-            Emitted(rows, target);
-        }
+            => Jumps.EmitRows(src, dst.JmpTarget());
 
         uint CountStatements(ReadOnlySpan<AsmRoutine> src)
         {
@@ -126,13 +117,13 @@ namespace Z0
         {
             var pipe = Wf.AsmStatementPipe();
             var total = CountStatements(src);
-            var running = Wf.Running(CreatingStatements.Format(total));
+            var running = Wf.Running(Msg.CreatingStatements.Format(total));
             var buffer = span<AsmApiStatement>(total);
             var count = src.Length;
             var offset = 0u;
             for(var i=0; i<count; i++)
                 offset += pipe.CreateStatementData(skip(src,i), slice(buffer, offset));
-            Wf.Ran(running, CreatedStatements.Format(total));
+            Wf.Ran(running, Msg.CreatedStatements.Format(total));
 
             pipe.EmitHostStatements(buffer, dst.RootDir());
         }
@@ -140,81 +131,16 @@ namespace Z0
         SortedSpan<ApiCodeBlock> CollectBlocks(ReadOnlySpan<AsmRoutine> src)
         {
             var count = src.Length;
-            var flow = Wf.Running(CollectingBlocks.Format(count));
+            var flow = Wf.Running(Msg.CollectingBlocks.Format(count));
             var blocks = AsmEtl.blocks(src);
-            // var dst = alloc<ApiCodeBlock>(count);
-            // var size = AsmEtl.blocks(src, dst);
-            Wf.Ran(flow, CollectedBlocks.Format(count));
+            Wf.Ran(flow, Msg.CollectedBlocks.Format(count));
             return blocks;
         }
 
         SortedSpan<ApiCodeBlock> CollectBlocks(FS.FolderPath root)
-        {
-            var blocks = ApiHex.ReadBlocks(root);
-
-            return blocks.Storage.ToSortedSpan();
-        }
-
-        FS.FilePath StatementIndexPath(FS.FolderPath dir)
-            => dir + FS.file("asm.statements", FS.Csv);
+            => ApiHex.ReadBlocks(root).Storage.ToSortedSpan();
 
         FS.FilePath ThumbprintPath(FS.FolderPath dst)
             => dst + FS.file("asm.thumbprints", FS.Asm);
-
-        FS.FolderPath TableDir(FS.FolderPath root)
-            => root + FS.folder("tables");
-
-        FS.FilePath CallTarget(FS.FolderPath root)
-            => TableDir(root) + FS.file(AsmCallRow.TableId, FS.Csv);
-
-        FS.FilePath JmpTarget(FS.FolderPath root)
-            => TableDir(root) + FS.file(AsmJmpRow.TableId, FS.Csv);
-
-        FS.FolderPath AsmDetailTarget(FS.FolderPath root)
-            => TableDir(root) + FS.folder(AsmDetailRow.TableId);
-
-        void Emitted(ReadOnlySpan<AsmDetailRow> rows, FS.FolderPath dst)
-        {
-
-        }
-
-        void Emitted(ReadOnlySpan<AsmApiStatement> rows, FS.FilePath dst)
-        {
-
-        }
-
-        void Emitted(ReadOnlySpan<AsmEncodingInfo> rows, FS.FilePath dst)
-        {
-
-        }
-
-        void Emitted(ReadOnlySpan<AsmCallRow> rows, FS.FilePath dst)
-        {
-
-        }
-
-        void Emitted(ReadOnlySpan<AsmJmpRow> rows, FS.FilePath dst)
-        {
-
-        }
-
-        void Loaded(ReadOnlySpan<ApiPartRoutines> src)
-        {
-
-        }
-
-        void Loaded(ReadOnlySpan<ApiCodeBlock> src)
-        {
-
-        }
-
-
-        static MsgPattern<Count> CollectingBlocks => "Collecting code blocks from {0} routines";
-
-        static MsgPattern<ByteSize> CollectedBlocks => "Collecting {0} code blocks";
-
-        public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";
-
-        public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
     }
 }

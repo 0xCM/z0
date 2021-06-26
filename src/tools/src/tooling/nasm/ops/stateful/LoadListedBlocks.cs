@@ -24,8 +24,8 @@ namespace Z0.Tools
             var buffer = alloc<NasmListEntry>(listing.LineCount);
             var count = ParseListing(listing, buffer);
             var output = slice(span(buffer), 0, count);
-            var blocks = root.list<CodeBlockCollector>();
-            var collector = new CodeBlockCollector(NasmLabel.Empty, new());
+            var blocks = list<LabeledBlocks>();
+            var collector = new LabeledBlocks(NasmLabel.Empty, new());
             for(var i=0; i<count; i++)
             {
                 ref readonly var entry = ref skip(output,i);
@@ -35,7 +35,7 @@ namespace Z0.Tools
                     var label = new NasmLabel(entry.LineNumber, entry.Label);
                     if(collector.IsNonEmpty)
                         blocks.Add(collector);
-                    collector = new CodeBlockCollector(label, new());
+                    collector = new LabeledBlocks(label, new());
 
                 }
                 else if(kind == NasmListLineKind.Encoding)

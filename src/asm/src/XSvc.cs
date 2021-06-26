@@ -16,10 +16,6 @@ namespace Z0
             => Services.AsmEtl.create(wf);
 
         [Op]
-        public static AsmSemanticRender AsmSemanticRender(this IWfRuntime wf)
-            => Services.AsmSemanticRender.create(wf);
-
-        [Op]
         public static AsmRowBuilder AsmRowBuilder(this IWfRuntime wf)
             => Services.AsmRowBuilder.create(wf);
 

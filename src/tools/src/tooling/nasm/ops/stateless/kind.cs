@@ -6,6 +6,7 @@ namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Z0.Asm;
 
     using static Root;
 

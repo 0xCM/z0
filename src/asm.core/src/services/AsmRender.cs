@@ -317,13 +317,12 @@ namespace Z0.Asm
             const string AbsolutePattern = "{0} {1} {2}";
             const string RelativePattern = "{0} {1}";
 
-            var label = asm.label(w16, src.Offset);
+            var label = AsmRender.offset(src.Offset, w16);
             var address = @base + src.Offset;
-
             if(config.AbsoluteLabels)
-                dst.Append(string.Format(AbsolutePattern, address.Format(), label.Format(), src.Statement.FormatPadded()));
+                dst.Append(string.Format(AbsolutePattern, address.Format(), label, src.Statement.FormatPadded()));
             else
-                dst.Append(string.Format(RelativePattern, label.Format(), src.Statement.FormatPadded()));
+                dst.Append(string.Format(RelativePattern, label, src.Statement.FormatPadded()));
 
             dst.Append(asm.comment(format(src.AsmForm, src.Encoded, config.FieldDelimiter)));
         }
@@ -441,16 +440,6 @@ namespace Z0.Asm
         [Op]
         public static string format(in ImmInfo src)
             => string.Concat(src.Value.FormatHex(zpad:false, prespec:false));
-
-        [Op]
-        public static string format(in AsmDx src)
-            => (src.Size switch{
-                AsmScale.y1 => ((byte)src.Value).FormatHex(HexSpec),
-                AsmScale.y2 => ((ushort)src.Value).FormatHex(HexSpec),
-                AsmScale.y4 => ((uint)src.Value).FormatHex(HexSpec),
-                _ => (src.Value).FormatHex(HexSpec),
-            }) + "dx";
-
 
         static HexFormatOptions HexSpec
         {

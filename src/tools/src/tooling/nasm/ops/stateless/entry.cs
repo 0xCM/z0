@@ -32,7 +32,7 @@ namespace Z0.Tools
 
             var output = text.format(slice(content, 0, DataWidth));
             var input = text.format(slice(content, DataWidth)).Trim();
-            if(text.empty(output))
+            if(empty(output))
                 return false;
 
             dst.SourceText = input;
@@ -45,7 +45,7 @@ namespace Z0.Tools
             {
                 if(outcount == 1)
                 {
-                    if(text.nonempty(input) && input.Contains(Chars.Colon))
+                    if(nonempty(input) && input.Contains(Chars.Colon))
                         dst.Label = input.RemoveAny(Chars.Colon);
                 }
                 else if(outcount == 3)
@@ -64,9 +64,7 @@ namespace Z0.Tools
                     dst.SourceText = input;
                 }
                 else
-                {
                     return (false, "Unexpected line number count");
-                }
             }
 
             return true;

@@ -329,5 +329,18 @@ namespace Z0.Asm
             public static implicit operator K(xmm19 src)
                 => (K)src.Index;
         }
+
+        public readonly struct xmm20 : IRegOp128<xmm20>
+        {
+            public I Index => I.r20;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm20 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm20 src)
+                => (K)src.Index;
+        }
     }
 }

@@ -175,31 +175,6 @@ namespace Z0.Asm
             return MemoryFiles.map(path);
         }
 
-        FS.FilePath DefineDisassemblyJob()
-        {
-            var tool = Wf.NDisasm();
-            var srcDir = Db.TableDir("image.bin");
-            var outDir = Db.TableDir("image.bin.asm").Create();
-            var src = srcDir.Files(FS.Bin);
-            var scripts = tool.Scripts(src,outDir);
-            var count = scripts.Length;
-            var jobDir = Db.JobRoot() + FS.folder(tool.Id.Format());
-            jobDir.Clear();
-
-            var paths = span<FS.FilePath>(count);
-            var runner = jobDir + FS.file("run", FS.Cmd);
-            using var writer = runner.Writer();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var script = ref skip(scripts,i);
-                ref var path = ref seek(paths,i);
-                path = jobDir + FS.file(script.Id.Format(), FS.Cmd);
-                path.Overwrite(script.Format());
-                writer.WriteLine(string.Format("call {0}", path.Format(PathSeparator.BS)));
-            }
-            return runner;
-        }
-
         void ResolveApi(params PartId[] parts)
         {
             var resolver = Wf.ApiResolver();
@@ -216,19 +191,6 @@ namespace Z0.Asm
         {
             Wf.CliEmitter().EmitMetaBlocks();
         }
-
-        ReadOnlySpan<FileType> ListFileTypes()
-        {
-            var src = FileTypes.supported().View;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var type = ref skip(src,i);
-                Wf.Row(type);
-            }
-            return src;
-        }
-
 
         void ListFiles()
         {
@@ -539,12 +501,6 @@ namespace Z0.Asm
             Wf.Row(string.Format("{0}{1}/{2}", reg.Width, reg.Index, reg.RegClass));
         }
 
-        void ShowRegExpr()
-        {
-            Wf.Row(RegExprCases.expr1());
-
-        }
-
         void CompareBitstrings()
         {
             var buffer = Cells.alloc(n128).Bytes;
@@ -630,23 +586,6 @@ namespace Z0.Asm
             }
         }
 
-        void CheckRowFormat()
-        {
-            var counter = 0u;
-
-            void Receive(in AsmIndex src)
-            {
-                counter++;
-            }
-
-            var packs = Wf.ApiPacks();
-            var current = packs.Current();
-            var archive = ApiPackArchive.create(current.Root);
-            var processor = AsmIndexProcessor.create(Wf, Receive);
-            var path = archive.StatementIndexPath();
-            processor.ProcessFile(path);
-        }
-
         void EmitPdbMethodInfo(PartId part, FS.FilePath dst)
         {
             var modules = Wf.AppModules();
@@ -697,15 +636,6 @@ namespace Z0.Asm
             }
         }
 
-        public void ShowAsmBitfields()
-        {
-            var modrm = AsmBitfields.modrm();
-            var dst = span<char>(128);
-            var offset = 0u;
-            SymbolicRender.render(modrm, ref offset, dst, SegRenderStyle.Intel);
-            Wf.Row(slice(dst,0,offset));
-        }
-
         public static Outcome require(string a, string b)
         {
             var success = a.Equals(b);
@@ -748,21 +678,13 @@ namespace Z0.Asm
 
         }
 
-        void ParseBdDisassembly()
-        {
-            var src = FS.path(@"C:\Dev\awb\.output\dis\and.bd.asm");
-            var dir = Db.AppLogDir();
-            var parser = Wf.DbDiasmProcessor();
-            parser.ParseDisassembly(src,dir);
-        }
-
         public void ParseDisassembly()
         {
             var src = FS.path(@"C:\Data\zdb\tools\dumpbin\output\xxhsum.exe.disasm.asm");
             var dir = Db.AppLogDir();
             var parser = Wf.DumpBinProcesor();
             var dst = dir + FS.file("xxhsum", FS.Asm);
-            parser.TransformFile(src,dst);
+            parser.ParseDisassembly(src,dst);
         }
 
         public void RunAsmCases()
@@ -819,14 +741,6 @@ namespace Z0.Asm
                     writer.Write((char)c);
             }
             Wf.EmittedFile(emitting, lines);
-        }
-
-        public void RunAsmToolChain(string name)
-        {
-            var workspace = Wf.AsmWorkspace();
-            var toolchain = Wf.AsmToolchain();
-            var spec = workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, name);
-            toolchain.Run(spec);
         }
 
         void EmitAsciByteSpan(string content)

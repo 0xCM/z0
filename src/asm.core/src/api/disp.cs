@@ -8,21 +8,19 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmDsl;
 
-    [ApiHost]
-    public readonly partial struct AsmRegs
+    partial struct asm
     {
-        [Op]
-        public static AsmRegQuery query()
-            => new AsmRegQuery(list(GP));
+        [MethodImpl(Inline), Op]
+        public static Disp8 disp(byte value, AsmScale size = AsmScale.y1)
+            => new Disp8(value);
 
         [MethodImpl(Inline), Op]
-        public static bool valid(RegIndex src)
-            => (uint)src <= 31;
+        public static Disp16 disp(ushort value, AsmScale size = AsmScale.y1)
+            => new Disp16(value);
 
         [MethodImpl(Inline), Op]
-        public static bool invalid(RegIndex src)
-            => (uint)src >= 32;
+        public static Disp32 disp(uint value, AsmScale size = AsmScale.y1)
+            => new Disp32(value);
     }
 }

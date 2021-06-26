@@ -9,30 +9,19 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmOffsetLabel : IAsmOffsetLabel
+    /// <summary>
+    /// Defines an offset label in an assembly listing
+    /// </summary>
+    public readonly struct AsmOffsetLabel
     {
-        public Identifier Name {get;}
-
-        public TextBlock OffsetText {get;}
-
         public ulong Offset {get;}
 
         public DataWidth Width {get;}
 
-        internal AsmOffsetLabel(ushort offset)
-        {
-            Offset = offset;
-            Width = DataWidth.W16;
-            OffsetText = AsmRender.offset(Offset, Width);
-            Name = string.Format("_{0}", OffsetText);
-        }
-
-        AsmOffsetLabel(ulong offset, DataWidth width)
+        public AsmOffsetLabel(DataWidth width, ulong offset)
         {
             Offset = offset;
             Width = width;
-            OffsetText = AsmRender.offset(Offset, Width);
-            Name = string.Format("_{0}", OffsetText);
         }
 
         public bool IsEmpty
@@ -48,7 +37,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => OffsetText;
+            => AsmRender.offset(Offset, Width);
 
         public override string ToString()
             => Format();
@@ -56,11 +45,11 @@ namespace Z0.Asm
         public static AsmOffsetLabel Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmOffsetLabel(0, DataWidth.None);
+            get => new AsmOffsetLabel(0, 0);
         }
 
         [MethodImpl(Inline)]
         public static implicit operator AsmLabel(AsmOffsetLabel src)
-            => new AsmLabel(src.Name);
+            => new AsmLabel(src.Format());
     }
 }

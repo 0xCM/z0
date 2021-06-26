@@ -22,18 +22,27 @@ namespace Z0.Tools
         public NasmOutputFile OutFile(FS.FilePath path, AsmBinKind kind = AsmBinKind.bin)
             => new NasmOutputFile(path, kind);
 
-        public CmdLine cmd(FS.FilePath src, NasmOutputFile dst)
+        public CmdLine Command(FS.FilePath src, NasmOutputFile dst)
         {
             const string Pattern = "{0} -f {1} {2} -o {3}";
             return new CmdLine(string.Format(Pattern, Id, dst.Kind,
                 src.Format(Sep), dst.Path.Format(Sep)));
         }
 
-        public CmdLine cmd(FS.FilePath src, NasmOutputFile dst, NasmListFile list)
+        public CmdLine Command(FS.FilePath src, NasmOutputFile dst, NasmListFile list)
         {
             const string Pattern = "{0} -f {1} {2} -o {3} -l {4}";
             return new CmdLine(string.Format(Pattern, Id, dst.Kind,
                 src.Format(Sep), dst.Path.Format(Sep), list.Path.Format(Sep)));
         }
+
+
+        public static MsgPattern<Count> ParsingNasmListEntries => "Parsing list entries from {0} lines";
+
+        public static MsgPattern<Count> ParsedNasmListEntries => "Parsing {0} list entries";
+
+        public static MsgPattern<FS.FileUri> ReadingNasmListing => "Reading nasm listing from {0}";
+
+        public static MsgPattern<Count,FS.FileUri> ReadNasmListing => "Read {0} nasm list lines from {1}";
    }
 }

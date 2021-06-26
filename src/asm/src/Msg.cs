@@ -11,6 +11,14 @@ namespace Z0
     [ApiComplete]
     partial struct Msg
     {
+        public static MsgPattern<Count> CollectingBlocks => "Collecting code blocks from {0} routines";
+
+        public static MsgPattern<ByteSize> CollectedBlocks => "Collecting {0} code blocks";
+
+        public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";
+
+        //public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
+
         public static MsgPattern<FS.FolderPath> ObliteratingDirectory => "Obliterating the directory {0}";
 
         public static MsgPattern<FS.FolderPath> ObliteratedDirectory => "Consigned the directory {0} to oblivion";
@@ -65,7 +73,7 @@ namespace Z0
         public static MsgPattern<Count,FS.FileUri> ProcessedStatements
             => "Processed {0} statements from {1}";
 
-        public static MsgPattern<Count> CreatingStatements => "Creating statements for {0} routines";
+        //public static MsgPattern<Count> CreatingStatements => "Creating statements for {0} routines";
 
         public static MsgPattern<Count,ApiHostUri> CreatingHostStatements => "Creating {0} {1} routine productions";
 
@@ -85,6 +93,36 @@ namespace Z0
 
         public static MsgPattern<Count,Count> CollectedThumbprints => "Collected {0} distinct thumbprints from {1} statements";
 
+        public static MsgPattern<MemoryAddress> TraversingSegments => "Traversing memory segments above the process base address {0}";
 
+        public static MsgPattern<ByteSize,Count> TraversedSegments => "Traversed {0} bytes from {1} accessible regions";
+
+        public static MsgPattern<ProcessMemoryRegion> TraversingRegion => "Traversing {0}";
+
+        public static MsgPattern<MemoryRange> TraversingRange => "Traversing {0}";
+
+        public static MsgPattern<MemoryRange> TraversedRange => "Traversed {0}";
+
+        public static MsgPattern<ByteSize,ProcessMemoryRegion> TraversedRegion => "Traversed {0} bytes from {0}";
+
+        public static MsgPattern<Count> ExtractingParts => "Extracting {0} parts";
+
+        public static MsgPattern<Count,Count> ExtractedParts => "Extracted {0} methods from {1} parts";
+
+        public static MsgPattern<DelimitedIndex<IPart>> RunningExtractWorkflow => "Running extract workflow for {0}";
+
+        public static MsgPattern<Count,Count> RanExtractWorkflow = "Extracted {0} host routines from {1} parts" ;
+
+        public static MsgPattern<ApiHostUri> ExtractingHost => "Extracting {0} members";
+
+        public static MsgPattern<Count,ApiHostUri> ExtractedHost => "Extracted {0} members from {1}";
+
+        public static MsgPattern<Count> ExtractingResolved => "Extracting data for {0} resolved parts";
+
+        public static MsgPattern<Count> ExtractedResolved => "Extracted data for {0} members";
+
+        public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
+
+        public static MsgPattern<OpUri> TerminalNotFound => "Terminal for {0} not found";
     }
 }

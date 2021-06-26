@@ -9,7 +9,7 @@ namespace Z0.Asm
         None = 0,
 
         // 0005h
-        LineLabel,
+        OffsetLabel,
 
         // mov rax,[rcx]
         Statement,

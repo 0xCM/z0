@@ -37,5 +37,4 @@ namespace Z0.Tools
         [Symbol("+", "Enable all listing options except -Lw")]
         plus = P2ᐞ08,
     }
-
 }

@@ -83,8 +83,8 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmSizeOverrides sizes(bit opsz, bit adsz)
-            => new AsmSizeOverrides(opsz,adsz);
+        public static SizeOverrides sizes(bit opsz, bit adsz)
+            => new SizeOverrides(opsz,adsz);
 
         [MethodImpl(Inline), Op]
         public static bit test(K src, K match)

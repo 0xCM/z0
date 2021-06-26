@@ -21,7 +21,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmOperandSize operand(bit w, AsmSizeOverrides sizes)
+        public static AsmOperandSize operand(bit w, SizeOverrides sizes)
             => operand(w, sizes.OperandOverride, sizes.AddressOverride);
 
         [MethodImpl(Inline), Op]
@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmAddressSize address(bit w, AsmSizeOverrides sizes)
+        public static AsmAddressSize address(bit w, SizeOverrides sizes)
             => address(w,sizes.OperandOverride,sizes.AddressOverride);
 
         static ReadOnlySpan<byte> OperandSizeLookup => new byte[8]{1,1,0,0,2,2,2,2};
