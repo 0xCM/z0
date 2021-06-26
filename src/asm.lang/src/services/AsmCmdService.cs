@@ -39,7 +39,7 @@ namespace Z0.Asm
         [CmdOp(".regnames")]
         Outcome ShowRegs(CmdArgs args)
         {
-            var regs = AsmRegs.list(AsmDsl.GP);
+            var regs = AsmRegs.list(AsmCodes.GP);
             iter(regs, reg => Wf.Row(reg));
             return true;
         }
@@ -56,7 +56,7 @@ namespace Z0.Asm
         {
             var dst = Db.AppLog("regnames", FS.Cs);
             using var writer = dst.AsciWriter();
-            var regs = AsmRegs.list(AsmDsl.GP);
+            var regs = AsmRegs.list(AsmCodes.GP);
             var bytespan = SpanRes.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
             writer.WriteLine(bytespan.Format());
             return true;

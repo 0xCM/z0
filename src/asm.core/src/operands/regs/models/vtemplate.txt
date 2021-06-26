@@ -1,76 +1,74 @@
-//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
-//-----------------------------------------------------------------------------
-namespace Z0.Asm
-{
-    using System;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
+        public static R.ymm0 ymm0 => default;
 
-    using I = RegIndex;
-    using G = AsmOpTypes.ymm;
-    using K = AsmCodes.YmmReg;
-    using api = AsmRegs;
+        public static R.ymm1 ymm1 => default;
 
-    partial struct AsmOpTypes
-    {
-        public readonly struct ymm : IRegOp256<ymm>
-        {
-            public RegIndex Index {get;}
+        public static R.ymm2 ymm2 => default;
 
-            [MethodImpl(Inline)]
-            public ymm(RegIndex index)
-            {
-                Index = index;
-            }
+        public static R.ymm3 ymm3 => default;
 
-            public string Format()
-                => ((K)Index).ToString();
+        public static R.ymm4 ymm4 => default;
 
-            public override string ToString()
-                => Format();
-            public RegWidth Width
-            {
-                [MethodImpl(Inline)]
-                get => RegWidth.W256;
-            }
+        public static R.ymm5 ymm5 => default;
 
-            public RegClass RegClass
-            {
-                [MethodImpl(Inline)]
-                get => RegClass.YMM;
-            }
+        public static R.ymm6 ymm6 => default;
 
-            [MethodImpl(Inline)]
-            public static implicit operator RegOp(G src)
-                => api.reg(src.Width, src.RegClass, src.Index);
+        public static R.ymm7 ymm7 => default;
 
-            [MethodImpl(Inline)]
-            public static implicit operator K(G src)
-                => (K)src.Index;
+        public static R.ymm8 ymm8 => default;
 
-            [MethodImpl(Inline)]
-            public static implicit operator G(K src)
-                => new G((I)src);
+        public static R.ymm9 ymm9 => default;
 
-            [MethodImpl(Inline)]
-            public static implicit operator G(I src)
-                => new G(src);
+        public static R.ymm10 ymm10 => default;
 
-            [MethodImpl(Inline)]
-            public static G operator ++(G src)
-                => api.next(src);
+        public static R.ymm11 ymm11 => default;
 
-            [MethodImpl(Inline)]
-            public static G operator --(G src)
-                => api.prior(src);
-        }
+        public static R.ymm12 ymm12 => default;
+
+        public static R.ymm13 ymm13 => default;
+
+        public static R.ymm14 ymm14 => default;
+
+        public static R.ymm15 ymm15 => default;
+
+        public static R.ymm16 ymm16 => default;
+
+        public static R.ymm17 ymm17 => default;
+
+        public static R.ymm18 ymm18 => default;
+
+        public static R.ymm19 ymm19 => default;
+
+        public static R.ymm20 ymm20 => default;
+
+        public static R.ymm21 ymm21 => default;
+
+        public static R.ymm22 ymm22 => default;
+
+        public static R.ymm23 ymm23 => default;
+
+        public static R.ymm24 ymm24 => default;
+
+        public static R.ymm25 ymm25 => default;
+
+        public static R.ymm26 ymm26 => default;
+
+        public static R.ymm27 ymm27 => default;
+
+        public static R.ymm28 ymm28 => default;
+
+        public static R.ymm29 ymm29 => default;
+
+        public static R.ymm30 ymm30 => default;
+
+        public static R.ymm31 ymm31 => default;
+
 
         public readonly struct ymm0 : IRegOp128<ymm0>
         {
             public I Index => I.r0;
+
+            public YmmClass Class => default;
 
             [MethodImpl(Inline)]
             public static implicit operator G(ymm0 src)
@@ -85,6 +83,8 @@ namespace Z0.Asm
         {
             public I Index => I.r1;
 
+            public YmmClass Class => default;
+
             [MethodImpl(Inline)]
             public static implicit operator G(ymm1 src)
                 => new G(src.Index);
@@ -97,6 +97,8 @@ namespace Z0.Asm
         public readonly struct ymm2 : IRegOp128<ymm2>
         {
             public I Index => I.r2;
+
+            public YmmClass Class => default;
 
             [MethodImpl(Inline)]
             public static implicit operator G(ymm2 src)
@@ -111,6 +113,8 @@ namespace Z0.Asm
         {
             public I Index => I.r3;
 
+            public YmmClass Class => default;
+
             [MethodImpl(Inline)]
             public static implicit operator G(ymm3 src)
                 => new G(src.Index);
@@ -123,6 +127,8 @@ namespace Z0.Asm
         public readonly struct ymm4 : IRegOp128<ymm4>
         {
             public I Index => I.r4;
+
+            public YmmClass Class => default;
 
             [MethodImpl(Inline)]
             public static implicit operator G(ymm4 src)
@@ -483,6 +489,3 @@ namespace Z0.Asm
             public static implicit operator K(ymm31 src)
                 => (K)src.Index;
         }
-
-    }
-}

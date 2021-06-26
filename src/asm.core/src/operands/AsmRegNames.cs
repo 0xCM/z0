@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static RegClasses;
-    using static AsmDsl;
+    using static AsmCodes;
 
     [ApiHost]
     public readonly struct AsmRegNames

@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmOpTypes;
+    using static AsmOperandTypes;
 
     partial struct asm
     {

@@ -211,11 +211,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static AsmOpCodeSpec spec(byte b0)
-            => spec(b0, 0, 0, TokenKind.None);
+            => spec(b0, 0, 0, OpCodeTokenKind.None);
 
         [MethodImpl(Inline), Op]
         public static AsmOpCodeSpec spec(byte a, byte b)
-            => spec(a, b, 0, TokenKind.None);
+            => spec(a, b, 0, OpCodeTokenKind.None);
 
         /// <summary>
         /// Example: XOR r/m32, imm8 | 83 /6 ib
@@ -226,14 +226,14 @@ namespace Z0.Asm
         /// <param name="iz">The imm size</param>
         [MethodImpl(Inline), Op]
         public static AsmOpCodeSpec spec(byte b0, RegDigit ext, ImmSize iz)
-            => spec(b0, (byte)ext, (byte)iz, TokenKind.RegExtension | TokenKind.ImmSize);
+            => spec(b0, (byte)ext, (byte)iz, OpCodeTokenKind.RexBExtension | OpCodeTokenKind.ImmSize);
 
         [MethodImpl(Inline), Op]
         public static AsmOpCodeSpec spec(byte b0, ImmSize iz)
-            => spec(b0,(byte)iz, 0, TokenKind.ImmSize);
+            => spec(b0,(byte)iz, 0, OpCodeTokenKind.ImmSize);
 
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeSpec spec(byte b0, byte b1, byte b2, TokenKind b3)
+        public static AsmOpCodeSpec spec(byte b0, byte b1, byte b2, OpCodeTokenKind b3)
             => new AsmOpCodeSpec(
                 bw32(b0) |
                 (bw32(b1) << 8) |

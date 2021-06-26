@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using static AsmMnemonicCode;
-    using static AsmOpTypes;
+    using static AsmOperandTypes;
 
     partial struct AsmX
     {

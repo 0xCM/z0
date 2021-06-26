@@ -7,12 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static math;
-    using static core;
-    using static RegClasses;
-    using static AsmDsl;
-
     partial struct AsmRegs
     {
         [Op]

@@ -8,11 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmCodes;
+    using static RegClasses;
 
     using I = RegIndex;
     using G = AsmOpTypes.xmm;
     using K = AsmCodes.XmmReg;
-
     using api = AsmRegs;
 
     partial struct AsmOpTypes
@@ -73,6 +74,7 @@ namespace Z0.Asm
         public readonly struct xmm0 : IRegOp128<xmm0>
         {
             public I Index => I.r0;
+
 
             [MethodImpl(Inline)]
             public static implicit operator G(xmm0 src)
@@ -340,6 +342,149 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator K(xmm20 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm21 : IRegOp128<xmm21>
+        {
+            public I Index => I.r21;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm21 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm21 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm22 : IRegOp128<xmm22>
+        {
+            public I Index => I.r22;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm22 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm22 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm23 : IRegOp128<xmm23>
+        {
+            public I Index => I.r23;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm23 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm23 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm24 : IRegOp128<xmm24>
+        {
+            public I Index => I.r24;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm24 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm24 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm25 : IRegOp128<xmm25>
+        {
+            public I Index => I.r25;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm25 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm25 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm26 : IRegOp128<xmm26>
+        {
+            public I Index => I.r26;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm26 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm26 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm27 : IRegOp128<xmm27>
+        {
+            public I Index => I.r27;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm27 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm27 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm28 : IRegOp128<xmm28>
+        {
+            public I Index => I.r28;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm28 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm28 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm29 : IRegOp128<xmm29>
+        {
+            public I Index => I.r29;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm29 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm29 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm30 : IRegOp128<xmm30>
+        {
+            public I Index => I.r30;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm30 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm30 src)
+                => (K)src.Index;
+        }
+
+        public readonly struct xmm31 : IRegOp128<xmm31>
+        {
+            public I Index => I.r31;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(xmm31 src)
+                => new G(src.Index);
+
+            [MethodImpl(Inline)]
+            public static implicit operator K(xmm31 src)
                 => (K)src.Index;
         }
     }

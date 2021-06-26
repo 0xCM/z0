@@ -8,6 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmCodes;
+    using static RegClasses;
 
     using I = RegIndex;
     using G = AsmOpTypes.r64;

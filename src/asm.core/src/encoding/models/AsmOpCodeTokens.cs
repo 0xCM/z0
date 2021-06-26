@@ -8,29 +8,42 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmOpCodeTokens;
+
+    [Flags]
+    public enum OpCodeTokenKind : byte
+    {
+        None = 0,
+
+        [SymbolClassifier(typeof(PrefixToken))]
+        Prefix = 1,
+
+        [SymbolClassifier(typeof(RexBToken))]
+        RexBExtension = 2,
+
+        [SymbolClassifier(typeof(ModRmToken))]
+        RegOpCodeMod = 4,
+
+        [SymbolClassifier(typeof(SegOverrideToken))]
+        SegOverride = 8,
+
+        [SymbolClassifier(typeof(OffsetToken))]
+        Offset = 16,
+
+        [SymbolClassifier(typeof(ImmSize))]
+        ImmSize = 32,
+
+        [SymbolClassifier(typeof(ExclusionToken))]
+        Exclusion = 64,
+
+        [SymbolClassifier(typeof(PrefixToken))]
+        FpuDigit,
+    }
 
     public readonly struct AsmOpCodeTokens
     {
-        [Flags]
-        public enum TokenKind : byte
-        {
-            None = 0,
-
-            Prefix = 1,
-
-            RegExtension = 2,
-
-            RegOpCodeMod = 4,
-
-            SegOverride = 8,
-
-            Offset = 16,
-
-            ImmSize = 32,
-        }
-
         [SymbolSource]
-        public enum Prefix : byte
+        public enum PrefixToken : byte
         {
             [Symbol("66")]
             x66 = 0,
@@ -73,7 +86,7 @@ namespace Z0.Asm
         }
 
         [SymbolSource]
-        public enum Offset : byte
+        public enum OffsetToken : byte
         {
             [Symbol("cb", "Indicates a 1-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
             cb,
@@ -95,7 +108,7 @@ namespace Z0.Asm
         }
 
         [SymbolSource]
-        public enum SegOverride : byte
+        public enum SegOverrideToken : byte
         {
             [Symbol("cs", "CS segment override")]
             CS,
@@ -116,9 +129,15 @@ namespace Z0.Asm
             GS,
         }
 
-        [SymbolSource("Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode.")]
-        public enum RegDigitCode : byte
+        /// <summary>
+        /// "Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode."
+        /// </summary>
+        [SymbolSource]
+        public enum ModRmToken : byte
         {
+            [Symbol("/r", "Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand")]
+            r,
+
             [Symbol("/0", "Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode")]
             r0,
 
@@ -144,9 +163,12 @@ namespace Z0.Asm
             r7,
         }
 
-        [SymbolSource("Defines symbols that modify the op code value")]
-        public enum RegOpCodeMod
+        [SymbolSource("Indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
+        public enum RexBToken
         {
+            [Symbol("None", "Indicates that REX.B in not applicable")]
+            None = 0,
+
             [Symbol("+rb", "For an 8-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
             rb,
 
@@ -158,10 +180,17 @@ namespace Z0.Asm
 
             [Symbol("+ro", "For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
             ro,
+
+            [Symbol("N.A.", "Indicates that REX.B is not applicable")]
+            NA,
+
+
+            [Symbol("N.E.", "Indicates that REX.B is not encodable")]
+            NE,
         }
 
         [SymbolSource("Specifies the size of an immediate operand in the context of an opcode specification")]
-        public enum ImmSizeKind : byte
+        public enum ImmSizeToken : byte
         {
             [Symbol("ib", "Indicates a 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.")]
             ib,
@@ -176,41 +205,60 @@ namespace Z0.Asm
             io,
         }
 
-        public static ReadOnlySpan<Prefix> Prefixes
-            => new Prefix[]{Prefix.x66,Prefix.F2,Prefix.F3,Prefix.x0F,Prefix.x0F38, Prefix.Rex, Prefix.RexW, Prefix.VEX, Prefix.LZ,Prefix.LIG, Prefix.WIG, Prefix.W0, Prefix.W1};
+        [SymbolSource]
+        public enum FpuToken : byte
+        {
+            [Symbol("+0")]
+            i0,
 
-        public static ReadOnlySpan<SegOverride> SegOverrides
-            => new SegOverride[]{SegOverride.CS, SegOverride.SS, SegOverride.DS, SegOverride.ES, SegOverride.FS, SegOverride.GS};
+            [Symbol("+1")]
+            i1,
 
-        public static ReadOnlySpan<RegOpCodeMod> RegOpCodeMods
-            => new RegOpCodeMod[]{RegOpCodeMod.rb, RegOpCodeMod.rw, RegOpCodeMod.rd,  RegOpCodeMod.ro};
+            [Symbol("+2")]
+            i2,
 
-        public static ReadOnlySpan<RegDigitCode> RegExtensions
-            => new RegDigitCode[]{RegDigitCode.r0, RegDigitCode.r1,RegDigitCode.r2,RegDigitCode.r3,RegDigitCode.r4,RegDigitCode.r5,RegDigitCode.r6,RegDigitCode.r7};
+            [Symbol("+3")]
+            i3,
 
-        public static ReadOnlySpan<Offset> Offsets
-            => new Offset[]{Offset.cb, Offset.cw, Offset.cd, Offset.cp, Offset.co, Offset.ct};
+            [Symbol("+4")]
+            i4,
 
-        public static ReadOnlySpan<ImmSizeKind> ImmSizes
-            => new ImmSizeKind[]{ImmSizeKind.ib, ImmSizeKind.iw, ImmSizeKind.id, ImmSizeKind.io};
+            [Symbol("+5")]
+            i5,
 
+            [Symbol("+6")]
+            i6,
+
+            [Symbol("+7")]
+            i7,
+        }
+
+        [SymbolSource]
+        public enum ExclusionToken
+        {
+            [Symbol("NP", " Indicates the use of 66/F2/F3 prefixes are not allowed with the instruction")]
+            NP = 0,
+
+            [Symbol("NFx", "Indicates the use of F2/F3 prefixes are not allowed with the instruction")]
+            NFx = 1,
+        }
 
         public readonly struct ImmSize
         {
-            public ImmSizeKind Token {get;}
+            public ImmSizeToken Token {get;}
 
             [MethodImpl(Inline)]
-            public ImmSize(ImmSizeKind src)
+            public ImmSize(ImmSizeToken src)
             {
                 Token = src;
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator ImmSize(ImmSizeKind src)
+            public static implicit operator ImmSize(ImmSizeToken src)
                 => new ImmSize(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator ImmSizeKind(ImmSize src)
+            public static implicit operator ImmSizeToken(ImmSize src)
                 => src.Token;
 
             [MethodImpl(Inline)]
@@ -223,10 +271,10 @@ namespace Z0.Asm
         /// </summary>
         public struct RegDigit
         {
-            public RegDigitCode _Code;
+            public ModRmToken _Code;
 
             [MethodImpl(Inline)]
-            public RegDigit(RegDigitCode code)
+            public RegDigit(ModRmToken code)
                 => _Code = code;
 
             public byte Encoded
@@ -235,18 +283,18 @@ namespace Z0.Asm
                 get => (byte)_Code;
             }
 
-            public RegDigitCode Code()
+            public ModRmToken Code()
                 => _Code;
 
-            public void Code(RegDigitCode code)
+            public void Code(ModRmToken code)
                 => _Code = code;
 
             [MethodImpl(Inline)]
             public static implicit operator RegDigit(byte src)
-                => new RegDigit((RegDigitCode)src);
+                => new RegDigit((ModRmToken)src);
 
             [MethodImpl(Inline)]
-            public static implicit operator RegDigit(RegDigitCode src)
+            public static implicit operator RegDigit(ModRmToken src)
                 => new RegDigit(src);
 
             [MethodImpl(Inline)]

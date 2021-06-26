@@ -8,13 +8,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmCodes;
+    using static RegClasses;
 
     using I = RegIndex;
-    using G = AsmOpTypes.rK;
+    using G = AsmOperandTypes.rK;
     using K = AsmCodes.KReg;
     using api = AsmRegs;
 
-    partial struct AsmOpTypes
+    partial struct AsmOperandTypes
     {
         public readonly struct rK : IRegOp64<rK>
         {

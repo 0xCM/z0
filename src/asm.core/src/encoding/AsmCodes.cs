@@ -9,13 +9,43 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static RegClasses;
 
     [ApiHost]
     public readonly partial struct AsmCodes
     {
+        public static RexPrefixCode RexW => RexPrefixCode.W;
+
+        public static RexPrefixCode RexB => RexPrefixCode.B;
+
+        public static GpClass GP => default;
+
+        public static SegClass SEG => default;
+
+        public static FlagClass FLAG => default;
+
+        public static ControlClass CR => default;
+
+        public static DebugClass DB => default;
+
+        public static IPtrClass IPTR => default;
+
+        public static SPtrClass SPTR => default;
+
+        public static XmmClass XMM => default;
+
+        public static YmmClass YMM => default;
+
+        public static ZmmClass ZMM => default;
+
+        public static MaskClass MASK => default;
+
+        public static BndClass BND => default;
+
         static Symbols<Gp8> _Gp8;
 
         static Symbols<Gp8Hi> _Gp8Hi;
+
         static Symbols<Gp16> _Gp16;
 
         static Symbols<Gp32> _Gp32;

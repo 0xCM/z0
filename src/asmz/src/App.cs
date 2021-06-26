@@ -14,6 +14,7 @@ namespace Z0.Asm
     using static Part;
     using static core;
     using static Toolsets;
+    using static AsmCodes;
 
     partial class App : AppService<App>
     {
@@ -841,7 +842,7 @@ namespace Z0.Asm
 
         void ShowRegNames()
         {
-            var regs = AsmRegs.list(AsmDsl.GP);
+            var regs = AsmRegs.list(AsmCodes.GP);
             iter(regs, reg => Wf.Row(reg));
             var bytespan = SpanRes.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
             Wf.Row(bytespan.Format());
@@ -937,11 +938,11 @@ namespace Z0.Asm
             var counter = 0u;
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.AsciWriter();
-            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w8),writer);
-            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w8,true),writer);
-            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w16),writer);
-            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w32),writer);
-            counter += EmitGrid(AsmRegGrids.grid(AsmDsl.GP, w64),writer);
+            counter += EmitGrid(AsmRegGrids.grid(GP, w8),writer);
+            counter += EmitGrid(AsmRegGrids.grid(GP, w8,true),writer);
+            counter += EmitGrid(AsmRegGrids.grid(GP, w16),writer);
+            counter += EmitGrid(AsmRegGrids.grid(GP, w32),writer);
+            counter += EmitGrid(AsmRegGrids.grid(GP, w64),writer);
             Wf.EmittedFile(flow,counter);
             return true;
         }

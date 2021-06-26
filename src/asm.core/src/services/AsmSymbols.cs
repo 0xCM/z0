@@ -53,7 +53,7 @@ namespace Z0.Asm
 
         readonly Symbols<JccCode> _JccCodes;
 
-        readonly Symbols<Offset> _Offsets;
+        readonly Symbols<OffsetToken> _Offsets;
 
         public static AsmSymbols create()
             => new AsmSymbols();
@@ -82,7 +82,7 @@ namespace Z0.Asm
             _BndRegs = symbols<BndReg>();
             _TestRegs = symbols<TestReg>();
             _SysPtrRegs = symbols<SPtrReg>();
-            _Offsets = symbols<Offset>();
+            _Offsets = symbols<OffsetToken>();
         }
 
         [MethodImpl(Inline), Op]
@@ -266,7 +266,7 @@ namespace Z0.Asm
             => _JccCodes;
 
         [MethodImpl(Inline), Op]
-        public Symbols<Offset> Offsets()
+        public Symbols<OffsetToken> Offsets()
             => _Offsets;
 
         [MethodImpl(Inline)]
