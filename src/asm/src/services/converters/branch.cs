@@ -10,8 +10,8 @@ namespace Z0.Asm
     using static Root;
     using static Asm.IceOpKind;
 
-    using BTK = AsmBranchTargetKind;
-    using BTW = AsmBranchTargetWidth;
+    using BTK = BranchTargetKind;
+    using BTW = BranchTargetWidth;
 
     partial struct IceConverters
     {

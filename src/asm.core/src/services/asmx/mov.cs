@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static AsmMnemonicCode;
     using static AsmCodes;
 
-    partial struct AsmX
+    partial struct AsmExpresions
     {
         [Op]
         public AsmExpr mov(Gp64 a0, Imm64 a1)

@@ -18,11 +18,11 @@ namespace Z0.Asm
                 => new RegOp<T>(src);
 
         [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidth width, RegClass @class, RegIndex r)
+        public static RegOp reg(RegWidth width, RegClass @class, RegIndexCode r)
             => AsmRegs.reg(width, @class, r);
 
         [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidthIndex width, RegClass @class, RegIndex r)
+        public static RegOp reg(RegWidthIndex width, RegClass @class, RegIndexCode r)
             => AsmRegs.reg(width, @class, r);
     }
 }

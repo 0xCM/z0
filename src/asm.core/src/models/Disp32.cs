@@ -16,10 +16,10 @@ namespace Z0.Asm
         /// <summary>
         /// The scale applied to the displacement
         /// </summary>
-        public AsmScale Scale {get;}
+        public MemoryScale Scale {get;}
 
         [MethodImpl(Inline)]
-        public Disp32(uint value, AsmScale scale = AsmScale.y1)
+        public Disp32(uint value, ScaleFactor scale = ScaleFactor.S1)
         {
             Value = value;
             Scale = scale;

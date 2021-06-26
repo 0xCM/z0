@@ -13,7 +13,7 @@ namespace Z0.Asm
     public interface IRegBank<T>
         where T : unmanaged
     {
-        ref T this[RegIndex r] {get;}
+        ref T this[RegIndexCode r] {get;}
 
         RegWidth RegWidth
             => (RegWidth)(ushort)width<T>();
@@ -52,25 +52,25 @@ namespace Z0.Asm
                 get => RegWidth.W512;
             }
 
-            public ref Cell512 this[RegIndex r]
+            public ref Cell512 this[RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref Data[(byte)r];
             }
 
-            public ref Cell512 this[W512 w, RegIndex r]
+            public ref Cell512 this[W512 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref this[r];
             }
 
-            public ref Cell256 this[W256 w, RegIndex r]
+            public ref Cell256 this[W256 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref @as<Cell512,Cell256>(this[r]);
             }
 
-            public ref Cell128 this[W128 w, RegIndex r]
+            public ref Cell128 this[W128 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref @as<Cell512,Cell128>(this[r]);
@@ -109,19 +109,19 @@ namespace Z0.Asm
                 get => RegWidth.W256;
             }
 
-            public ref Cell256 this[RegIndex r]
+            public ref Cell256 this[RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref Data[(byte)r];
             }
 
-            public ref Cell256 this[W256 w, RegIndex r]
+            public ref Cell256 this[W256 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref this[r];
             }
 
-            public ref Cell128 this[W128 w, RegIndex r]
+            public ref Cell128 this[W128 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref @as<Cell256,Cell128>(this[r]);
@@ -160,13 +160,13 @@ namespace Z0.Asm
                 get => RegWidth.W128;
             }
 
-            public ref Cell128 this[RegIndex r]
+            public ref Cell128 this[RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref Data[(byte)r];
             }
 
-            public ref Cell128 this[W128 w, RegIndex r]
+            public ref Cell128 this[W128 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref this[r];
@@ -200,31 +200,31 @@ namespace Z0.Asm
                 Data = src;
             }
 
-            public ref Cell64 this[RegIndex r]
+            public ref Cell64 this[RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref Data[(byte)r];
             }
 
-            public ref Cell64 this[W64 w, RegIndex r]
+            public ref Cell64 this[W64 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref Data[(byte)r];
             }
 
-            public ref Cell32 this[W32 w, RegIndex r]
+            public ref Cell32 this[W32 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref @as<Cell64,Cell32>(Data[(byte)r]);
             }
 
-            public ref Cell16 this[W16 w, RegIndex r]
+            public ref Cell16 this[W16 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref @as<Cell64,Cell16>(Data[(byte)r]);
             }
 
-            public ref Cell8 this[W8 w, RegIndex r]
+            public ref Cell8 this[W8 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref @as<Cell64,Cell8>(Data[(byte)r]);
@@ -258,13 +258,13 @@ namespace Z0.Asm
                 Data = src;
             }
 
-            public ref Cell64 this[RegIndex r]
+            public ref Cell64 this[RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref Data[(byte)r];
             }
 
-            public ref Cell64 this[W64 w, RegIndex r]
+            public ref Cell64 this[W64 w, RegIndexCode r]
             {
                 [MethodImpl(Inline)]
                 get => ref Data[(byte)r];

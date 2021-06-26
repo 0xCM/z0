@@ -63,19 +63,19 @@ namespace Z0.Asm
                 => Data = src;
 
             [MethodImpl(Inline)]
-            public ref Cell8 r8(RegIndex i)
+            public ref Cell8 r8(RegIndexCode i)
                 => ref lo8(r64(i));
 
             [MethodImpl(Inline)]
-            public ref Cell16 r16(RegIndex i)
+            public ref Cell16 r16(RegIndexCode i)
                 => ref lo16(r64(i));
 
             [MethodImpl(Inline)]
-            public ref Cell32 r32(RegIndex i)
+            public ref Cell32 r32(RegIndexCode i)
                 => ref lo32(r64(i));
 
             [MethodImpl(Inline)]
-            public ref Cell64 r64(RegIndex i)
+            public ref Cell64 r64(RegIndexCode i)
                 => ref seek(Data,(byte)i);
 
             internal Span<Cell64> Cells
@@ -94,7 +94,7 @@ namespace Z0.Asm
                 => Data = src;
 
             [MethodImpl(Inline)]
-            public ref Cell128 r128(RegIndex i)
+            public ref Cell128 r128(RegIndexCode i)
                 => ref seek(Data, (byte)i);
 
             internal Span<Cell128> Cells
@@ -113,11 +113,11 @@ namespace Z0.Asm
                 => Data = src;
 
             [MethodImpl(Inline)]
-            public ref Cell128 r128(RegIndex i)
+            public ref Cell128 r128(RegIndexCode i)
                 => ref lo128(r256(i));
 
             [MethodImpl(Inline)]
-            public ref Cell256 r256(RegIndex i)
+            public ref Cell256 r256(RegIndexCode i)
                 => ref seek(Data,(byte)i);
 
             internal Span<Cell256> Cells
@@ -137,15 +137,15 @@ namespace Z0.Asm
                 => Data = src;
 
             [MethodImpl(Inline)]
-            public ref Cell128 r128(RegIndex i)
+            public ref Cell128 r128(RegIndexCode i)
                 => ref lo128(r512(i));
 
             [MethodImpl(Inline)]
-            public ref Cell256 r256(RegIndex i)
+            public ref Cell256 r256(RegIndexCode i)
                 => ref lo256(r512(i));
 
             [MethodImpl(Inline)]
-            public ref Cell512 r512(RegIndex i)
+            public ref Cell512 r512(RegIndexCode i)
                 => ref seek(Data, (byte)i);
 
             internal Span<Cell512> Cells
@@ -163,7 +163,7 @@ namespace Z0.Asm
             internal ControlBank(Span<Cell64> src)
                 => Data = src;
 
-            public ref Cell64 reg(RegIndex i)
+            public ref Cell64 reg(RegIndexCode i)
                 => ref seek(Data, (byte)i);
 
         }

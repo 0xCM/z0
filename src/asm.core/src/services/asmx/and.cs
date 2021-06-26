@@ -5,9 +5,9 @@
 namespace Z0.Asm
 {
     using static AsmMnemonicCode;
-    using static AsmOperandTypes;
+    using static AsmOpTypes;
 
-    partial struct AsmX
+    partial struct AsmExpresions
     {
         // 22 /r            | AND r8, r/m8     | RM    | Valid       | Valid           | r8 AND r/m8.                              |
         [Op]

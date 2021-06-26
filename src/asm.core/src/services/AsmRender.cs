@@ -402,7 +402,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(AsmMnemonic monic, ReadOnlySpan<AsmSigOperandExpr> operands)
+        public static string format(AsmMnemonic monic, ReadOnlySpan<AsmSigOpExpr> operands)
         {
             var dst = text.buffer();
             render(monic, operands, dst);
@@ -410,7 +410,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static void render(AsmMnemonic monic, ReadOnlySpan<AsmSigOperandExpr> operands, ITextBuffer dst)
+        public static void render(AsmMnemonic monic, ReadOnlySpan<AsmSigOpExpr> operands, ITextBuffer dst)
         {
             dst.Append(monic.Format(MnemonicCase.Uppercase));
             var opcount = operands.Length;

@@ -76,9 +76,9 @@ namespace Z0.Asm
             var flow = Wf.Running(Msg.DecodingHostRoutines.Format(host));
             var view = src.Blocks.View;
             var count = view.Length;
-            var instructions = list<ApiHostRoutine>();
+            var instructions = core.list<ApiHostRoutine>();
             var ip = MemoryAddress.Zero;
-            var target = list<IceInstruction>();
+            var target = core.list<IceInstruction>();
             for(var i=0; i<count; i++)
             {
                 target.Clear();
@@ -102,7 +102,7 @@ namespace Z0.Asm
 
         public void Decode(ReadOnlySpan<ApiPartBlocks> src, Span<ApiPartRoutines> dst)
         {
-            var hostFx = list<ApiHostRoutines>();
+            var hostFx = root.list<ApiHostRoutines>();
             var stats = ApiDecoderStats.init();
             var partCount = src.Length;
             var parts = src;
@@ -180,7 +180,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 Wf.Error($"{uri}: {e}");
-                return array<AsmMemberRoutine>();
+                return sys.empty<AsmMemberRoutine>();
             }
         }
 
@@ -266,10 +266,6 @@ namespace Z0.Asm
                 {
                     ref var iced = ref decoded.AllocUninitializedElement();
                     decoder.Decode(out iced);
-                    var invalid = iced.Mnemonic == Iced.Mnemonic.INVALID;
-                    if(invalid)
-                        break;
-
                     var size = (uint)iced.ByteLength;
                     var encoded = slice(src.View, position, size).ToArray();
                     var instruction = extract(iced, IceFormatter.FormatInstruction(iced, @base), encoded);
@@ -319,7 +315,6 @@ namespace Z0.Asm
                 var instruction = skip(instructions,i);
                 if(check)
                     CheckInstructionSize(instruction, offset, src);
-
                 seek(dst, i) = AsmEtl.summarize(@base, instruction, src.Encoded.Code, instruction.FormattedInstruction, offset);
                 offset += (uint)instruction.ByteLength;
             }

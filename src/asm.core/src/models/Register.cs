@@ -18,7 +18,7 @@ namespace Z0.Asm
         {
             const string Sep = " | ";
             const string Pattern = "[{0,-12} | {1,-8} | {2}]";
-            var index = Bitfields.format<RegIndex,byte>(src.Code, src.Name, 5);
+            var index = Bitfields.format<RegIndexCode,byte>(src.Code, src.Name, 5);
             var @class = Bitfields.format<RegClass,byte>(src.Class, src.Class.ToString(), 4);
             var width = Enums.field<RegWidth,ushort>(src.Width, base10, "Width");
             return string.Format(Pattern, index, @class, width);
@@ -31,10 +31,10 @@ namespace Z0.Asm
             => Kind = kind;
 
         [MethodImpl(Inline)]
-        public Register(RegIndex c, RegClass k, RegWidth w)
+        public Register(RegIndexCode c, RegClass k, RegWidth w)
             => Kind = api.kind(c, k, w);
 
-        public RegIndex Code
+        public RegIndexCode Code
         {
             [MethodImpl(Inline)]
             get => api.index(Kind);

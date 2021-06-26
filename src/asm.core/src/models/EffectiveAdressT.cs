@@ -11,9 +11,9 @@ namespace Z0.Asm
    public struct EffectiveAddress<T>
         where T : unmanaged
     {
-        public RegIndex Base;
+        public RegIndexCode Base;
 
-        public RegIndex Index;
+        public RegIndexCode Index;
 
         public MemoryScale Scale;
 

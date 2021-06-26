@@ -10,9 +10,9 @@ namespace Z0.Asm
 
     public struct EffectiveAddress
     {
-        public RegIndex Base;
+        public RegIndexCode Base;
 
-        public RegIndex Index;
+        public RegIndexCode Index;
 
         public MemoryScale Scale;
 

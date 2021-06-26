@@ -27,7 +27,7 @@ namespace Z0.Asm
                 RegKind = kind;
             }
 
-            public RegIndex Index
+            public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
                 get => AsmRegs.index(RegKind);

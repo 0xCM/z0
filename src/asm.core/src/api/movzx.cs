@@ -70,7 +70,7 @@ namespace Z0.Asm
         /// <param name="dst">The target register</param>
         /// <param name="src">The memory source</param>
         /// <typeparam name="T">The target register type</typeparam>
-        public static Movzx movzx(r16 dst, m8 src)
+        public static Movzx movzx(r16 dst, mem<r8> src)
             => default;
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0.Asm
         /// <param name="dst">The target register</param>
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
-        public static Movzx movzx(r32 dst, m8 src)
+        public static Movzx movzx(r32 dst, mem<r8> src)
             => default;
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0.Asm
         /// <param name="dst">The target register</param>
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
-        public static Movzx movzx(r64 dst, m8 src)
+        public static Movzx movzx(r64 dst, mem<r8> src)
             => default;
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Z0.Asm
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static Movzx movzx(r32 dst, m16 src)
+        public static Movzx movzx(r32 dst, mem<r16> src)
             => default;
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Z0.Asm
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static Movzx movzx(r64 dst, m16 src)
+        public static Movzx movzx(r64 dst, mem<r16> src)
             => default;
     }
 }

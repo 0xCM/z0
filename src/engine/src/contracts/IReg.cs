@@ -16,8 +16,8 @@ namespace Z0.Asm
         /// </summary>
         RegKind RegKind {get;}
 
-        RegIndex Index
-            => (RegIndex)((byte)RegKind);
+        RegIndexCode Index
+            => (RegIndexCode)((byte)RegKind);
     }
 
     public interface IReg<T> : IReg, IContented<T>
@@ -74,7 +74,7 @@ namespace Z0.Asm
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {
-        RegIndex IReg.Index
-            => (RegIndex)TypeNats.nat8u<N>();
+        RegIndexCode IReg.Index
+            => (RegIndexCode)TypeNats.nat8u<N>();
     }
 }

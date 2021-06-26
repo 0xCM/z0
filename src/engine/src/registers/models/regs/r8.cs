@@ -36,7 +36,7 @@ namespace Z0.Asm
                 get => default(R).RegKind;
             }
 
-            public RegIndex Index
+            public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
                 get => AsmRegs.index(RegKind);
@@ -63,7 +63,7 @@ namespace Z0.Asm
                 RegKind = kind;
             }
 
-            public RegIndex Index
+            public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
                 get => AsmRegs.index(RegKind);

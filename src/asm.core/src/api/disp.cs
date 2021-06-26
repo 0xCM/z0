@@ -12,15 +12,15 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static Disp8 disp(byte value, AsmScale size = AsmScale.y1)
+        public static Disp8 disp(byte value, ScaleFactor scale = ScaleFactor.S1)
             => new Disp8(value);
 
         [MethodImpl(Inline), Op]
-        public static Disp16 disp(ushort value, AsmScale size = AsmScale.y1)
+        public static Disp16 disp(ushort value, ScaleFactor scale = ScaleFactor.S1)
             => new Disp16(value);
 
         [MethodImpl(Inline), Op]
-        public static Disp32 disp(uint value, AsmScale size = AsmScale.y1)
+        public static Disp32 disp(uint value, ScaleFactor scale = ScaleFactor.S1)
             => new Disp32(value);
     }
 }
