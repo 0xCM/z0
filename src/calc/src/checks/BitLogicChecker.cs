@@ -226,7 +226,7 @@ namespace Z0
             var mSvc = Calcs.bitlogic<T>();
             var vSvc = Calcs.vbitlogic<T>(w);
             var buffer = Cells.alloc(w);
-            ref var dst = ref Cells.first<T>(buffer);
+            ref var dst = ref Cells.to<T>(buffer);
             var cells = gcpu.vcount<T>(w);
             for(byte i=0; i<cells; i++)
                 seek(dst, i) = mSvc.eval(vcell(a,i), vcell(b,i), f);
@@ -244,7 +244,7 @@ namespace Z0
             var mSvc = Calcs.bitlogic<T>();
             var vSvc = Calcs.vbitlogic<T>(w);
             var buffer = Cells.alloc(w);
-            ref var dst = ref Cells.first<T>(buffer);
+            ref var dst = ref Cells.to<T>(buffer);
             var cells = gcpu.vcount<T>(w);
             for(byte i=0; i<cells; i++)
                 seek(dst, i) = mSvc.eval(vcell(a,i), vcell(b,i), f);

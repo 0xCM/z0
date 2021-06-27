@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial class Cells
     {
@@ -17,7 +18,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=8</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static ref T first<T>(in Cell8 src)
+        public static ref T to<T>(in Cell8 src)
             where T : unmanaged
                 => ref first(src, default(T));
 
@@ -27,7 +28,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=16</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static ref T first<T>(in Cell16 src)
+        public static ref T to<T>(in Cell16 src)
             where T : unmanaged
                 => ref first(src, default(T));
 
@@ -37,7 +38,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=32</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
-        public static ref T first<T>(in Cell32 src)
+        public static ref T to<T>(in Cell32 src)
             where T : unmanaged
                 => ref first(src, default(T));
 
@@ -47,7 +48,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=64</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T first<T>(in Cell64 src)
+        public static ref T to<T>(in Cell64 src)
             where T : unmanaged
                 => ref first(src, default(T));
 
@@ -57,7 +58,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=128</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T first<T>(in Cell128 src)
+        public static ref T to<T>(in Cell128 src)
             where T : unmanaged
                 => ref first(src, default(T));
 
@@ -67,7 +68,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=256</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T first<T>(in Cell256 src)
+        public static ref T to<T>(in Cell256 src)
             where T : unmanaged
                 => ref first(src, default(T));
 
@@ -77,7 +78,7 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=512</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T first<T>(in Cell512 src)
+        public static ref T to<T>(in Cell512 src)
             where T : unmanaged
                 => ref first(src, default(T));
 
@@ -85,6 +86,6 @@ namespace Z0
         static ref T first<F,T>(in F src, T t)
             where F : unmanaged, IDataCell
             where T : unmanaged
-                => ref Unsafe.As<F,T>(ref core.edit(src));
+                => ref Unsafe.As<F,T>(ref edit(src));
     }
 }

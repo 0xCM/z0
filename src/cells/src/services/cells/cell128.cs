@@ -14,20 +14,17 @@ namespace Z0
     partial class Cells
     {
         [MethodImpl(Inline), Op]
-        public static Cell128 cell128((ulong x0, ulong x1) x)
-            => new Cell128(x.x0, x.x1);
-
-        [MethodImpl(Inline), Op]
         public static Cell128 cell128(ulong lo, ulong hi)
             => new Cell128(lo, hi);
 
-        [MethodImpl(Inline), Op]
-        public static Cell128 cell128(uint a00, uint a01, uint a10, uint a11)
-            => new Cell128(a00,a01,a10,a11);
-
+        /// <summary>
+        /// Presents a 128-bit vector as a 128-bit cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Cell128 cell128<T>(Vector128<T> src)
             where T : unmanaged
-                => new Cell128(src.AsUInt64());
+                => @as<Vector128<T>,Cell128>(src);
     }
 }

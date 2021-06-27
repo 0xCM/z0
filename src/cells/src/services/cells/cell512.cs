@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Root;
     using static core;
@@ -13,12 +14,13 @@ namespace Z0
     partial class Cells
     {
         /// <summary>
-        /// Creates a <see cref='Cell32'/> from a specified <typeparamref name='T'/> value
+        /// Presents a 512-bit vector as a 512-bit cell
         /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Cell32 cell32<T>(T src)
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Cell512 cell512<T>(in Vector512<T> src)
             where T : unmanaged
-                => new Cell32(@as<T,uint>(src));
+                => @as<Vector512<T>,Cell512>(src);
     }
 }

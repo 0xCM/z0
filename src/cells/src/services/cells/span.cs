@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct gcells
+    partial class Cells
     {
         /// <summary>
         /// Presents an 8-bit value as a single-celled T-parametric span

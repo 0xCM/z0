@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static Typed;
 
-    partial struct gcells
+    partial class Cells
     {
         [MethodImpl(Inline)]
         public static ref T segment<C,T,W>(in C src, W w, out T dst)

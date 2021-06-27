@@ -8,15 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial class Cells
     {
         /// <summary>
-        /// Creates a <see cref='Cell8'/> from a specified <see cref='sbyte'/> value
+        /// Creates a <see cref='Cell8'/> from a specified <typeparamref name='T'/> value
         /// </summary>
         /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op]
-        public static Cell8 cell8(sbyte src)
-            => src;
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static Cell8 cell8<T>(T src)
+            where T : unmanaged
+                => new Cell8(@as<T,byte>(src));
     }
 }

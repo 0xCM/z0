@@ -129,12 +129,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector128<T> src, ref Cell128 dst)
             where T : unmanaged
-                => vstore(src, ref Cells.first<T>(dst));
+                => vstore(src, ref Cells.to<T>(dst));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector256<T> src, ref Cell256 dst)
             where T : unmanaged
-                => vstore(src, ref Cells.first<T>(dst));
+                => vstore(src, ref Cells.to<T>(dst));
 
         /// <summary>
         /// Stores the source vector to the head of a blocked container
