@@ -21,13 +21,28 @@ namespace Z0
         }
 
         public Outcome Dispatch(string command, CmdArgs args)
-            => Dispatcher.Dispatch(command,args);
+        {
+            var outcome = Dispatcher.Dispatch(command,args);
+            if(outcome.Fail)
+                Wf.Error(outcome.Message);
+            return outcome;
+        }
 
         public Outcome Dispatch(string command)
-            => Dispatcher.Dispatch(command);
+        {
+            var outcome = Dispatcher.Dispatch(command);
+            if(outcome.Fail)
+                Wf.Error(outcome.Message);
+            return outcome;
+        }
 
         public Outcome Dispatch(CmdSpec cmd)
-            => Dispatcher.Dispatch(cmd.Name, cmd.Args);
+        {
+            var outcome = Dispatcher.Dispatch(cmd.Name, cmd.Args);
+            if(outcome.Fail)
+                Wf.Error(outcome.Message);
+            return outcome;
+        }
 
         public ReadOnlySpan<string> Supported
         {

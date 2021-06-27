@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using Microsoft.DiaSymReader;
 
-    public interface ISymMetadataProvider : ISymReaderMetadataProvider, IDisposable
+    public interface ISymMetadataProvider : ISymReaderMetadataProvider, ISymWriterMetadataProvider, IDisposable
     {
 
     }

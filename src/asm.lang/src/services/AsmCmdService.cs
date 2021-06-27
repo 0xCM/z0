@@ -13,26 +13,77 @@ namespace Z0.Asm
 
     public sealed class AsmCmdService : AppCmdService<AsmCmdService>
     {
-        CmdDispatcher Dispatcher;
-
         NativeBuffer CodeBuffer;
+
+        NativeBuffer ContextBuffer;
+
+        AsmCmdArbiter Arbiter;
 
         public AsmCmdService()
         {
             CodeBuffer = Buffers.native(Pow2.T10);
+            ContextBuffer = Buffers.native(size<Amd64Context>());
+            Arbiter = AsmCmdArbiter.start(ContextBuffer);
         }
 
-        protected override void Initialized()
+        protected override void Disposing()
         {
-            Dispatcher = Cmd.dispatcher(this);
+            Arbiter.Dispose();
+            CodeBuffer.Dispose();
+            ContextBuffer.Dispose();
         }
 
         [CmdOp(".env")]
         Outcome ShowEnv(CmdArgs args)
         {
-            var src = Resources.strings<uint>(typeof(EnvVarNames)).View;
-            for(var i=0; i<src.Length; i++)
-                Wf.Row(skip(src,i).Format());
+            var vars = SystemEnv.vars();
+            iter(vars, v => Wf.Row(v));
+            return true;
+        }
+
+        [CmdOp(".thread")]
+        Outcome ShowThread(CmdArgs args)
+        {
+            var id = Kernel32.GetCurrentThreadId();
+            Wf.Row(string.Format("ThreadId:{0}", id));
+            return true;
+        }
+
+        void OnJobComplete()
+        {
+            ref readonly var context = ref first(recover<Amd64Context>(ContextBuffer.Allocated));
+            Wf.Row(EmptyString);
+            Wf.Row(string.Format("RIP:{0:x}", context.Rip));
+            Wf.Row(string.Format("LastBranchFromRip:{0:x}", context.LastBranchFromRip));
+            Wf.Row(string.Format("RAX:{0:x}", context.Rax));
+            Wf.Row(string.Format("RCX:{0:x}", context.Rcx));
+            Wf.Row(string.Format("RDX:{0:x}", context.Rdx));
+            Wf.Row(string.Format("RBX:{0:x}", context.Rbx));
+            Wf.Row(string.Format("EFlags:{0:x}", context.EFlags.FormatBits()));
+        }
+
+        void SubmitJob(Action job)
+        {
+            Arbiter.Enque(job, OnJobComplete);
+        }
+
+        static uint CountA;
+
+        static uint CountB;
+
+        [CmdOp(".regs")]
+        unsafe Outcome ShowRegVals(CmdArgs args)
+        {
+            static void calc()
+            {
+                var ts = (ulong)Timestamp.now();
+                if(ts % 2 == 0)
+                    CountB++;
+                else
+                    CountA++;
+            }
+
+            SubmitJob(calc);
             return true;
         }
 
@@ -131,10 +182,10 @@ namespace Z0.Asm
             return true;
         }
 
-        [CmdOp(".processor")]
-        Outcome Processor(CmdArgs args)
+        [CmdOp(".core")]
+        Outcome Cpu(CmdArgs args)
         {
-            string.Format("{0} => {1}", "proccessor()", Kernel32.GetCurrentProcessorNumber());
+            Wf.Row(string.Format("Cpu:{0}",Kernel32.GetCurrentProcessorNumber()));
             return true;
         }
 
@@ -161,11 +212,6 @@ namespace Z0.Asm
             Wf.Status($"Parsed {parsed.Length} summaries");
             Wf.IntelXed().EmitFormSummaries(parsed);
             return true;
-        }
-
-        protected override void Disposing()
-        {
-            CodeBuffer.Dispose();
         }
     }
 }

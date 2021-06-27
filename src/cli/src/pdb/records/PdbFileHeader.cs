@@ -4,26 +4,57 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+
+    using static Root;
 
     partial struct PdbRecords
     {
-        [Record(TableId), StructLayout(LayoutKind.Sequential)]
+        [Record(TableId), StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct PdbFileHeader : IRecord<PdbFileHeader>
         {
             public const string TableId = "pdb.header";
 
+            /// <summary>
+            /// [0,31]
+            /// </summary>
             public Cell256 Magic;
 
-            public Cell32 PageSize;
+            /// <summary>
+            /// [32,35]
+            /// </summary>
+            public uint PageSize;
 
-            public Cell32 FreePageMap;
+            /// <summary>
+            /// [36,39]
+            /// </summary>
+            public uint FreePageMap;
 
-            public Cell32 PagesUsed;
+            /// <summary>
+            /// [40,43]
+            /// </summary>
+            public uint PagesUsed;
 
-            public Cell32 DirectorySize;
+            /// <summary>
+            /// [44,47]
+            /// </summary>
+            public uint DirectorySize;
 
-            public Cell32 Reserved;
+            /// <summary>
+            /// [48,51]
+            public uint Reserved;
+
+            /// <summary>
+            /// Computes the number of pages consumed by the directory
+            /// </summary>
+            /// <remarks>
+            /// Calculation from https://github.com/dotnet/symreader-converter/src/Microsoft.DiaSymReader.Converter.Xml/Token2SourceLineExporter.cs
+            /// </remarks>
+            [MethodImpl(Inline)]
+            public uint DirPageCount()
+                => ((((DirectorySize + PageSize - 1) / PageSize) * 4) + PageSize - 1) / PageSize;
+
         }
     }
     /*

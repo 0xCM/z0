@@ -22,6 +22,9 @@ namespace Z0
         uint CellSize
             => 1;
 
+        ByteSize SegSize
+            => Length;
+
         ref byte Cell(int index);
 
         ref byte this[int index]

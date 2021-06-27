@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
     using static Widths;
@@ -213,5 +214,12 @@ namespace Z0
         public static double read64f(ReadOnlySpan<byte> src)
             => @as<double>(read64u(src));
 
+        [MethodImpl(Inline), Op]
+        public unsafe static void read(byte* pSrc, ByteSize size, out Span<byte> dst)
+        {
+            var buffer = alloc<byte>(size);
+            Marshal.Copy((IntPtr)pSrc, buffer, 0, size);
+            dst = buffer;
+        }
     }
 }

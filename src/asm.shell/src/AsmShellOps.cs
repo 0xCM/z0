@@ -5,15 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
 
-    using Windows;
-
-    using static Root;
     using static core;
-
-    using K = AsmCmdKind;
 
     unsafe class AsmShellOps : IDisposable
     {
@@ -63,46 +56,12 @@ namespace Z0
             Push(string.Format("{0}({1},{2})={3}", name, a, b, c));
         }
 
+
         void Demos(object[] args)
         {
             DynamicDemos.runA(result => Push(result));
             DynamicDemos.runB(result => Push(result));
             DynamicDemos.runC(result => Push(result));
         }
-
-        unsafe void Registers(object[] args)
-        {
-            var id = Kernel32.GetCurrentThreadId();
-            using var thread = OpenThread(id);
-            Push(string.Format("Thread: {0}", thread.Handle.ToAddress()));
-            var context = new ThreadContext();
-            context.ContextFlags = ContextFlags.CONTEXT_INTEGER;
-            if(Kernel32.GetThreadContext(thread, &context))
-            {
-                Push(string.Format("{0}: {1}", "RAX", context.Rax));
-            }
-            else
-            {
-                Push("Command failed");
-            }
-        }
-
-        [CmdImpl(K.ToolChain)]
-        void ToolChain(object[] args)
-        {
-            if(args.Length ==0)
-            {
-                Push("No arguments were supplied");
-                return;
-            }
-            var name = (string)first(args);
-            var workspace = Wf.AsmWorkspace();
-            var toolchain = Wf.AsmToolchain();
-            var spec = workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, name);
-            toolchain.Run(spec);
-        }
-
-        static OpenHandle OpenThread(uint threadId)
-            => Kernel32.OpenThread(ThreadAccess.THREAD_ALL_ACCESS,true, threadId);
     }
 }

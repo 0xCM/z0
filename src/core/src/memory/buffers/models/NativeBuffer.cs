@@ -41,6 +41,10 @@ namespace Z0
             get => Size.Bits;
         }
 
+        [MethodImpl(Inline)]
+        public void Clear()
+            => Allocated.Clear();
+
         /// <summary>
         /// Presents the allocation via a span
         /// </summary>
@@ -57,5 +61,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BufferToken(NativeBuffer src)
             => api.token(src.Address, src.Size);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Span<byte>(NativeBuffer src)
+            => src.Allocated;
+
+        [MethodImpl(Inline)]
+        public static implicit operator IntPtr(NativeBuffer src)
+            => src.Handle;
+
+        [MethodImpl(Inline)]
+        public static unsafe implicit operator byte*(NativeBuffer src)
+            => src.Address.Pointer<byte>();
     }
 }

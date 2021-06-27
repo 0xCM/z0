@@ -12,7 +12,7 @@ namespace Z0
     using static PdbServices;
     using static PdbModel;
 
-    public class PdbReader
+    public ref struct PdbReader
     {
         Index<Document> _Documents;
 
@@ -32,6 +32,11 @@ namespace Z0
             _DocumentMethods = methods(provider);
             _Documents = _DocumentMethods.Keys.Array().Select(adapt);
             _Methods = Index<Method>.Empty;
+        }
+
+        public void Dispose()
+        {
+            Source.Dispose();
         }
 
         public HResult<Method> Method(CliToken token)

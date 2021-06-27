@@ -5,8 +5,11 @@ namespace Windows
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
+    using System.ComponentModel;
 
     using Z0;
+    using static Z0.Root;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -23,5 +26,8 @@ namespace Windows
         [DllImport(LibName, CharSet = CharSet.Auto, SetLastError = true), Free]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool CloseHandle(IntPtr handle);
+
+        public static string GetLastError()
+            => new Win32Exception(Marshal.GetLastWin32Error()).Message;
     }
 }

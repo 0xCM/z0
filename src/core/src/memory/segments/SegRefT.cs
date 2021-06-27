@@ -58,6 +58,12 @@ namespace Z0
             get => Length/CellSize;
         }
 
+        public ByteSize SegSize
+        {
+            [MethodImpl(Inline)]
+            get => Segment.Length;
+        }
+
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]

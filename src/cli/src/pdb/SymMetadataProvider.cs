@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
+// Copyright   :  Microsoft
+// License     :  Apache 2.0
+// Origin      : https://github.com/dotnet/symreader-converter/src/Microsoft.DiaSymReader.Converter/Utilities/SymMetadataProvider.cs
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -13,21 +14,25 @@ namespace Z0
 
     partial struct PdbServices
     {
-        public sealed class SymMetadataProvider : ISymMetadataProvider
+        public unsafe sealed class SymMetadataProvider : ISymMetadataProvider
         {
-            readonly PEReader _peReader;
+            readonly PEReader PeReader;
 
-            readonly MetadataReader MetadataReader;
+            readonly MetadataReader MdReader;
 
             public SymMetadataProvider(PdbSymbolSource source)
             {
-                _peReader = new PEReader(source.PeStream);
-                MetadataReader = _peReader.GetMetadataReader();
+                //PeReader = new PEReader(source.PeStream);
+                if(!source.Streams)
+                    PeReader = new PEReader(source.PeSrc.Pointer(), source.PeSrc.Size, source.RuntimeLoaded);
+                else
+                    PeReader = new PEReader(source.PeStream);
+                MdReader = PeReader.GetMetadataReader();
             }
 
             public void Dispose()
             {
-                _peReader.Dispose();
+                PeReader.Dispose();
             }
 
             public unsafe bool TryGetStandaloneSignature(int standaloneSignatureToken, out byte* signature, out int length)
@@ -40,8 +45,8 @@ namespace Z0
                     return false;
                 }
 
-                var sig = MetadataReader.GetStandaloneSignature(sigHandle);
-                var blobReader = MetadataReader.GetBlobReader(sig.Signature);
+                var sig = MdReader.GetStandaloneSignature(sigHandle);
+                var blobReader = MdReader.GetBlobReader(sig.Signature);
 
                 signature = blobReader.StartPointer;
                 length = blobReader.Length;
@@ -59,9 +64,9 @@ namespace Z0
                     return false;
                 }
 
-                var typeDefinition = MetadataReader.GetTypeDefinition(handle);
-                namespaceName = MetadataReader.GetString(typeDefinition.Namespace);
-                typeName = MetadataReader.GetString(typeDefinition.Name);
+                var typeDefinition = MdReader.GetTypeDefinition(handle);
+                namespaceName = MdReader.GetString(typeDefinition.Namespace);
+                typeName = MdReader.GetString(typeDefinition.Name);
                 attributes = typeDefinition.Attributes;
                 return true;
             }
@@ -76,20 +81,53 @@ namespace Z0
                     return false;
                 }
 
-                var typeReference = MetadataReader.GetTypeReference(handle);
-                namespaceName = MetadataReader.GetString(typeReference.Namespace);
-                typeName = MetadataReader.GetString(typeReference.Name);
+                var typeReference = MdReader.GetTypeReference(handle);
+                namespaceName = MdReader.GetString(typeReference.Namespace);
+                typeName = MdReader.GetString(typeReference.Name);
                 return true;
             }
 
             public unsafe int GetSigFromToken(int tkSignature, out byte* ppvSig, out int pcbSig)
             {
                 var signatureHandle = (StandaloneSignatureHandle)MetadataTokens.Handle(tkSignature);
-                var bytes = MetadataReader.GetBlobBytes(MetadataReader.GetStandaloneSignature(signatureHandle).Signature);
+                var bytes = MdReader.GetBlobBytes(MdReader.GetStandaloneSignature(signatureHandle).Signature);
                 var pinned = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                 ppvSig = (byte*)pinned.AddrOfPinnedObject();
                 pcbSig = bytes.Length;
                 return 0;
+            }
+
+            public bool TryGetEnclosingType(int nestedTypeToken, out int enclosingTypeToken)
+            {
+                var nestedTypeDef = MdReader.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(nestedTypeToken));
+                var declaringTypeHandle = nestedTypeDef.GetDeclaringType();
+
+                if (declaringTypeHandle.IsNil)
+                {
+                    enclosingTypeToken = 0;
+                    return false;
+                }
+                else
+                {
+                    enclosingTypeToken = MetadataTokens.GetToken(declaringTypeHandle);
+                    return true;
+                }
+            }
+
+            public bool TryGetMethodInfo(int methodDefinitionToken, out string? methodName, out int declaringTypeToken)
+            {
+                var handle = (MethodDefinitionHandle)MetadataTokens.Handle(methodDefinitionToken);
+                if (handle.IsNil)
+                {
+                    methodName = null;
+                    declaringTypeToken = 0;
+                    return false;
+                }
+
+                var methodDefinition = MdReader.GetMethodDefinition(handle);
+                methodName = MdReader.GetString(methodDefinition.Name);
+                declaringTypeToken = MetadataTokens.GetToken(methodDefinition.GetDeclaringType());
+                return true;
             }
         }
     }

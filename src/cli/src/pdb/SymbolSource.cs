@@ -9,15 +9,22 @@ namespace Z0
     using System.IO;
 
     using static Root;
+    using static core;
     using static PdbServices;
 
-    public class PdbSymbolSource : IDisposable
+    public ref struct PdbSymbolSource
     {
         public bool IsPortable {get;}
 
         public FS.FilePath PePath {get;}
 
-        public BinaryCode PeData {get;}
+        readonly ReadOnlySpan<byte> PeData;
+
+        readonly ReadOnlySpan<byte> PdbData;
+
+        readonly PinnedPtr<byte> PePin;
+
+        readonly PinnedPtr<byte> PdbPin;
 
         public MemoryStream PeStream {get;}
 
@@ -29,11 +36,9 @@ namespace Z0
 
         public FS.FilePath PdbPath {get;}
 
-        public BinaryCode PdbData {get;}
-
         public MemoryStream PdbStream {get;}
 
-        public PdbKind PdbKind{get;}
+        public PdbKind PdbKind {get;}
 
         public ByteSize PdbSize
         {
@@ -41,26 +46,46 @@ namespace Z0
             get => PdbData.Length;
         }
 
-        internal PdbSymbolSource(byte[] pe, byte[] pdb)
+        /// <summary>
+        /// Specifies whether the pe image has been loaded by the runtime
+        /// </summary>
+        public bool RuntimeLoaded {get;}
+
+        /// <summary>
+        /// Specifies whether the pe and pdb streams are defined
+        /// </summary>
+        public bool Streams {get;}
+
+        internal PdbSymbolSource(ReadOnlySpan<byte> pe, ReadOnlySpan<byte> pdb)
         {
+            RuntimeLoaded = true;
+            Streams = false;
             PePath = FS.FilePath.Empty;
             PdbPath = FS.FilePath.Empty;
             PeData = pe;
             PdbData = pdb;
-            PeStream = new MemoryStream(PeData);
-            PdbStream = new MemoryStream(PdbData);
+            PeStream = default;
+            PdbStream = default;
+            PePin = PinnedPtr<byte>.Empty;
+            PdbPin = PinnedPtr<byte>.Empty;
             IsPortable = portable(PdbData);
             PdbKind = pdbkind(PdbData);
         }
 
         internal PdbSymbolSource(FS.FilePath pe, FS.FilePath pdb)
         {
+            RuntimeLoaded = false;
+            Streams = true;
             PePath = pe;
             PdbPath = pdb;
-            PeData = File.ReadAllBytes(PePath.Name);
-            PdbData = File.ReadAllBytes(PdbPath.Name);
-            PeStream = new MemoryStream(PeData);
-            PdbStream = new MemoryStream(PdbData);
+            var peData = File.ReadAllBytes(PePath.Name);
+            var pdbData = File.ReadAllBytes(PdbPath.Name);
+            PePin = Pointers.pin<byte>(peData);
+            PdbPin = Pointers.pin<byte>(pdbData);
+            PeData = peData;
+            PdbData = pdbData;
+            PeStream = new MemoryStream(peData);
+            PdbStream = new MemoryStream(pdbData);
             IsPortable = portable(PdbData);
             PdbKind = pdbkind(PdbData);
         }
@@ -69,12 +94,26 @@ namespace Z0
         {
             PeStream?.Dispose();
             PdbStream?.Dispose();
+            PePin.Dispose();
+            PdbPin.Dispose();
+        }
+
+        public unsafe SegRef PeSrc
+        {
+            [MethodImpl(Inline)]
+            get => new SegRef(address(PeData), PeData.Length);
+        }
+
+        public unsafe SegRef PdbSrc
+        {
+            [MethodImpl(Inline)]
+            get => new SegRef(address(PdbData), PdbData.Length);
         }
 
         public static PdbSymbolSource Empty
         {
             [MethodImpl(Inline)]
-            get => new PdbSymbolSource(sys.empty<byte>(), sys.empty<byte>());
+            get => new PdbSymbolSource(sys.empty<byte>().ToReadOnlySpan(), sys.empty<byte>().ToReadOnlySpan());
         }
     }
 }

@@ -6,8 +6,23 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Collections;
+
+    using static Root;
 
     using N = EnvVarNames;
+
+    public readonly struct SystemEnv
+    {
+        public static ReadOnlySpan<EnvVar> vars()
+        {
+            var dst = core.list<EnvVar>();
+            foreach(DictionaryEntry kv in Environment.GetEnvironmentVariables())
+                 dst.Add(new EnvVar(kv.Key?.ToString() ?? EmptyString, kv.Value?.ToString() ?? EmptyString));
+            return dst.ViewDeposited();
+        }
+
+    }
 
     public class Env
     {

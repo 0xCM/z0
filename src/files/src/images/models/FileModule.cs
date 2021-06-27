@@ -9,6 +9,9 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Represents a managed or native image
+    /// </summary>
     public readonly struct FileModule : IFileModule<FileModule>
     {
         public FS.FilePath Path {get;}

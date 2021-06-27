@@ -19,7 +19,10 @@ namespace Windows
         public static extern IntPtr OpenThread(ThreadAccess access, bool bInheritHandle, uint dwThreadId);
 
         [DllImport(LibName, SetLastError = true), Free]
-        public static unsafe extern bool GetThreadContext(IntPtr hThread, ThreadContext* pContext);
+        public static unsafe extern bool GetThreadContext(IntPtr hThread, IntPtr pContext);
+
+        [DllImport(LibName, SetLastError = true), Free]
+        public static unsafe extern bool GetThreadContext(IntPtr hThread, Amd64Context* pContext);
 
         /// <summary>
         /// Get the OS ID of the current thread
@@ -32,5 +35,20 @@ namespace Windows
         /// </summary>
         [DllImport(LibName), Free]
         public static extern IntPtr GetCurrentThread();
+
+        /// <summary>
+        /// Suspends a handle-identified thread
+        /// </summary>
+        /// <param name="hThread">The handle of the thread to suspend</param>
+        [DllImport(LibName, SetLastError = true)]
+        public static extern int SuspendThread(IntPtr hThread);
+
+        /// <summary>
+        /// Resumes a handle-identified thread
+        /// </summary>
+        /// <param name="hThread">The handle of the thread to resume</param>
+        [DllImport(LibName, SetLastError = true)]
+        public static extern int ResumeThread(IntPtr hThread);
+
     }
 }

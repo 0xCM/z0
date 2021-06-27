@@ -72,5 +72,7 @@ namespace Z0
             => src.Code;
 
         public static HResult Ok => default;
+
+        public static HResult False => new HResult(1);
     }
 }

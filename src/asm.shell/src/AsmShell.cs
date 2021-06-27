@@ -4,16 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Reflection;
-    using System.Collections.Generic;
-
     using Z0.Asm;
 
     using static Root;
     using static core;
 
-    using K = AsmCmdKind;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]

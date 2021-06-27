@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a nonparametric environment variable
@@ -37,13 +38,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsEmpty || sys.empty(Value);
+            get => Name.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsNonEmpty && sys.nonempty(Value);
+            get => Name.IsNonEmpty;
         }
 
         public EnvVar<T> Transform<T>(Func<string,T> f)
@@ -51,7 +52,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => $"{Name}={Value}";
+            =>  nonempty(Value) ? string.Format("{0}:{1}", Name, Value) : Name;
+
 
         public override string ToString()
             => Format();

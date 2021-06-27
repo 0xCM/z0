@@ -9,6 +9,9 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Represents a managed or native image
+    /// </summary>
     public readonly struct FileModule<T> : IFileModule<FileModule<T>,T>
         where T : struct, IFileModule<T>
     {
@@ -38,6 +41,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ImagePath(FileModule<T> src)
             => src.Path;
-
     }
 }

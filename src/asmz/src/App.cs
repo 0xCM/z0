@@ -587,34 +587,44 @@ namespace Z0.Asm
             }
         }
 
-        void EmitPdbMethodInfo(PartId part, FS.FilePath dst)
+        void EmitPdbDocInfo(PartId part)
         {
+            var dst =Db.AppLog(string.Format("{0}.pdbinfo", part.Format()), FS.Csv);
             var modules = Wf.AppModules();
             var catalog = Wf.ApiCatalog.PartCatalogs(part).Single();
             var assembly = catalog.Component;
             var module = assembly.ManifestModule;
             using var source = modules.SymbolSource(catalog.ComponentPath);
             Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
+
             var pdbReader = Wf.PdbReader(source);
-            var clrMethods = catalog.Methods.View;
-            var pdbMethods = pdbReader.Methods;
+            //var clrMethods = catalog.Methods.View;
+            //var pdbMethods = pdbReader.Methods;
             var emitting = Wf.EmittingFile(dst);
             var counter = 0u;
             using var writer = dst.Writer();
-            var count = pdbMethods.Length;
+            var docs = pdbReader.Documents;
+            var count = docs.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var pdbMethod = ref skip(pdbMethods,i);
-                var info = pdbMethod.Describe();
-                var docs = info.Documents.View;
-                var doc = docs.Length >=1 ? first(docs).Path : FS.FilePath.Empty;
-                var token = info.Token;
-                var methodBase = Clr.method(module,token);
-                var name = methodBase.Name;
-                var sig = methodBase is MethodInfo method ? method.DisplaySig().Format() : EmptyString;
-                writer.WriteLine(string.Format("{0,-12} | {1,-24} | {2,-68} | {3}", token, name, doc.ToUri(), sig));
-                counter++;
+                ref readonly var doc = ref skip(docs,i);
+                var row = string.Format("{0}", doc.Path.ToUri());
+                writer.WriteLine(row);
             }
+            //var count = pdbMethods.Length;
+            // for(var i=0; i<count; i++)
+            // {
+            //     ref readonly var pdbMethod = ref skip(pdbMethods,i);
+            //     var info = pdbMethod.Describe();
+            //     var docs = info.Documents.View;
+            //     var doc = docs.Length >=1 ? first(docs).Path : FS.FilePath.Empty;
+            //     var token = info.Token;
+            //     var methodBase = Clr.method(module,token);
+            //     var name = methodBase.Name;
+            //     var sig = methodBase is MethodInfo method ? method.DisplaySig().Format() : EmptyString;
+            //     writer.WriteLine(string.Format("{0,-12} | {1,-24} | {2,-68} | {3}", token, name, doc.ToUri(), sig));
+            //     counter++;
+            // }
 
             Wf.EmittedFile(emitting, counter);
         }
@@ -884,6 +894,12 @@ namespace Z0.Asm
             Wf.ApiExtractWorkflow().Run(settings);
         }
 
+        void ReadSymbols()
+        {
+            var reader = SOS.SymbolReader.create();
+            reader.ShowSymbolStore(data => Wf.Row(data));
+        }
+
         void GetMethodInfo()
         {
             var path = Parts.Math.Assembly.Location;
@@ -980,12 +996,11 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            Dispatch();
+            EmitPdbDocInfo(PartId.Math);
+            //Dispatch();
             //CalcTables();
             //EmitRegGrids();
             //ShowRexTable();
-
-
             //CheckStringTables();
             //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs")
             // var part = PartId.Math;

@@ -25,6 +25,15 @@ namespace SOS
 
     public class SymbolReader
     {
+        public static SymbolReader create()
+        {
+            var result = InitializeSymbolReader("");
+            if(result != 0)
+                throw new Exception("Symbol reader initialization failed");
+
+            return new SymbolReader();
+        }
+
         sealed class OpenedReader : IDisposable
         {
             public readonly MetadataReaderProvider Provider;
@@ -147,12 +156,12 @@ namespace SOS
         /// <param name="symbolFileName">symbol file name and path</param>
         public delegate void SymbolFileCallback(IntPtr parameter, [MarshalAs(UnmanagedType.LPStr)] string moduleFileName, [MarshalAs(UnmanagedType.LPStr)] string symbolFileName);
 
-        public static SOSNetCoreCallbacks SymbolCallbacks = SOSNetCoreCallbacks.create();
+        static SOSNetCoreCallbacks SymbolCallbacks = SOSNetCoreCallbacks.create();
 
         /// <summary>
         /// Temporary directory for dac/symbols
         /// </summary>
-        public static string TempDirectory { get; private set; }
+        static string TempDirectory {get; set;}
 
         static readonly ITracer s_tracer = new Tracer();
 
@@ -180,7 +189,7 @@ namespace SOS
         /// <param name="symbolDirectoryPath">symbol directory path to search (optional)</param>
         /// <param name="windowsSymbolPath">windows symbol path (optional)</param>
         /// <returns>if false, failure</returns>
-        public static bool InitializeSymbolStore(bool logging, bool msdl, bool symweb, string tempDirectory, string symbolServerPath,
+        internal static bool InitializeSymbolStore(bool logging, bool msdl, bool symweb, string tempDirectory, string symbolServerPath,
             string authToken, int timeoutInMinutes, string symbolCachePath, string symbolDirectoryPath, string windowsSymbolPath)
         {
             if (logging)
@@ -219,6 +228,9 @@ namespace SOS
             s_symbolStore = store;
             return true;
         }
+
+        public void ShowSymbolStore(WriteLine dst)
+            => DisplaySymbolStore(dst);
 
         /// <summary>
         /// Displays the symbol server and cache configuration

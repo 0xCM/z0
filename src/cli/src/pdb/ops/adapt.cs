@@ -28,6 +28,5 @@ namespace Z0
         [Op]
         internal static Document adapt(ISymUnmanagedDocument src)
             => new Document(src.GetName(),src.GetDocumentType());
-
     }
 }

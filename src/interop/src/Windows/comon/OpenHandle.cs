@@ -20,7 +20,20 @@ namespace Windows
 
         public void Dispose()
         {
-            Kernel32.CloseHandle(Handle);
+            if(IsNonEmpty)
+                Kernel32.CloseHandle(Handle);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (ulong)Handle == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (ulong)Handle != 0;
         }
 
         [MethodImpl(Inline)]

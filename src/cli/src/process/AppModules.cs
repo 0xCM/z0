@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using static core;
 
     public class AppModules : AppService<AppModules>
     {
@@ -25,6 +26,6 @@ namespace Z0
             => PdbServices.source(module);
 
         public ModuleArchive Archive()
-            => ModuleArchive.create(FS.path(core.controller().Location).FolderPath);
+            => ModuleArchive.create(FS.path(controller().Location).FolderPath);
     }
 }

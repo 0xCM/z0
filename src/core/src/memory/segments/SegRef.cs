@@ -74,6 +74,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public unsafe byte* Pointer()
+            => BaseAddress.Pointer<byte>();
+
+        [MethodImpl(Inline)]
         public bool Equals(SegRef src)
             => src.Address == Address && src.Size == Size;
 
