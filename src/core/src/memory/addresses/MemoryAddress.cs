@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public unsafe readonly struct MemoryAddress : IAddress<ulong>, IComparable<MemoryAddress>, IEquatable<MemoryAddress>
     {
@@ -114,6 +115,13 @@ namespace Z0
         public unsafe T* Pointer<T>()
             where T : unmanaged
                 => (T*)Location;
+
+        [MethodImpl(Inline)]
+        public ref T As<T>()
+        {
+            var pSrc = Pointer();
+            return ref @as<T>(pSrc);
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(void* pSrc)

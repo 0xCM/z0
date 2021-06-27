@@ -246,7 +246,7 @@ public enum PartId : ulong
     [Symbol("asm")]
     Asm = 123,
 
-    [Symbol("asm.g")]
+    [Symbol("asm.lang")]
     AsmLang = 124,
 
     [Symbol("asm.lang.g")]

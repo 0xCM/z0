@@ -10,12 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    /// <summary>
-    /// Defines an indexed sequence of <typeparamref name='T'/> cells
-    /// </summary>
-    [DataType("m(n)")]
-    public readonly struct Cells<T> : IIndex<T>
-        where T : struct, IDataCell<T>
+    public readonly struct Cells<T>
     {
         readonly Index<T> Data;
 

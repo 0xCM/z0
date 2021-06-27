@@ -16,6 +16,36 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CellIO<T> io<T>(in Cells<T> src, in Cells<T> dst)
+            where T : unmanaged
+                => new CellIO<T>(src,dst);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe uint copy<T>(N16 n, T* pSrc, T* pDst)
+            where T : unmanaged
+        {
+            var i = 0u;
+            var j = 0u;
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            pDst[i++] = pSrc[j++];
+            return j;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T copy<T>(in T src, uint count, ref T dst, ref uint index)
         {
             for(var j=0u; j<count; j++)

@@ -52,6 +52,29 @@ namespace Z0.Asm
             public static byte mod(byte a, byte b)
                 => math.mod(a,b);
 
+            [MethodImpl(Inline), Op]
+            public static unsafe void copy16x64(ulong* pSrc, ulong* pDst)
+            {
+                byte i=0,j=0;
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+
+            }
+
             [Op]
             public static void f_32u_p8u_p8u_p8u_void(byte* pA, byte* pB, byte* pDst)
             {
