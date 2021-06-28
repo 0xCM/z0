@@ -9,6 +9,14 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Struct)]
     public class NatSpanAttribute : Attribute
     {
+        /// <summary>
+        /// Determines whether a type is a natural span
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [Op]
+        public static bool test(Type t)
+            => t.Tagged<NatSpanAttribute>();
+
         public NatSpanAttribute()
         {
 

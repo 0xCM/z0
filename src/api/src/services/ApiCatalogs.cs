@@ -19,10 +19,13 @@ namespace Z0
 
         ApiQuery Query;
 
+        ApiRuntime Runtime;
+
         protected override void OnInit()
         {
             ApiJit = Wf.ApiJit();
             Query = Wf.ApiQuery();
+            Runtime = Wf.ApiRuntime();
         }
 
         public ReadOnlySpan<SymLiteral> EmitApiClasses()
@@ -37,7 +40,7 @@ namespace Z0
             return literals;
         }
 
-        public Index<ApiCatalogEntry> RebaseMembers(ApiMembers src, FS.FilePath dst)
+        public ReadOnlySpan<ApiCatalogEntry> EmitApiCatalog(ApiMembers src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<ApiCatalogEntry>(dst);
             var records = rebase(src.BaseAddress, src.View);
@@ -46,60 +49,45 @@ namespace Z0
             return records;
         }
 
-        public Index<ApiCatalogEntry> LoadCatalog()
+        public ReadOnlySpan<ApiCatalogEntry> LoadApiCatalog(FS.FilePath src)
         {
-            var dir = Db.CaptureContextRoot();
-            var files = dir.Files(FS.Csv).Where(f => f.FileName.StartsWith(ApiCatalogEntry.TableId)).OrderBy(f => f.Name);
-            var rows = root.list<ApiCatalogEntry>();
-            if(files.Length != 0)
+            var rows = list<ApiCatalogEntry>();
+            using var reader = src.Reader();
+            reader.ReadLine();
+            var line = reader.ReadLine();
+            while(line != null)
             {
-                var src = files[files.Length - 1];
-                var flow = Wf.Running(Msg.LoadingApiCatalog.Format(src));
-
-                using var reader = src.Reader();
-                reader.ReadLine();
-                var line = reader.ReadLine();
-                while(line != null)
+                var outcome = parse(line, out var row);
+                if(outcome)
+                    rows.Add(row);
+                else
                 {
-                    var outcome = parse(line, out var row);
-                    if(outcome)
-                        rows.Add(row);
-                    else
-                    {
-                        Wf.Error(outcome.Message);
-                        return sys.empty<ApiCatalogEntry>();
-                    }
-                    line = reader.ReadLine();
+                    Wf.Error(outcome.Message);
+                    return array<ApiCatalogEntry>();
                 }
+                line = reader.ReadLine();
+            }
+            return rows.ViewDeposited();
+        }
 
-                Wf.Ran(flow, Msg.LoadedApiCatalog.Format(rows.Count, src));
+        public ReadOnlySpan<ApiCatalogEntry> LoadApiCatalog(FS.FolderPath dir)
+        {
+            var files = dir.Files(FS.Csv).Where(f => f.FileName.StartsWith(ApiCatalogEntry.TableId)).OrderBy(f => f.Name).ToReadOnlySpan();
+            var count = files.Length;
+            var rows = default(ReadOnlySpan<ApiCatalogEntry>);
+            if(count != 0)
+            {
+                ref readonly var current = ref skip(files,count - 1);
+                var flow = Wf.Running(Msg.LoadingApiCatalog.Format(current));
+                rows = LoadApiCatalog(current);
+                Wf.Ran(flow, Msg.LoadedApiCatalog.Format(rows.Length, current));
             }
 
-            return rows.ToArray();
+            return rows;
         }
 
-        /// <summary>
-        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="src">The host type</param>
-        public ApiHostCatalog HostCatalog(Type src)
-            => HostCatalog(ApiRuntimeLoader.apihost(src));
-
-        /// <summary>
-        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="src">The host type</param>
-        [Op]
-        public ApiHostCatalog HostCatalog(IApiHost src)
-        {
-            var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.HostUri));
-            var members = ApiJit.JitHost(src);
-            var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members);
-            Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.HostUri, members.Count));
-            return result;
-        }
+        public ReadOnlySpan<ApiCatalogEntry> LoadApiCatalog()
+            => LoadApiCatalog(Db.CaptureContextRoot());
 
         [Op]
         public static Index<ApiCatalogEntry> rebase(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
@@ -145,8 +133,8 @@ namespace Z0
             var flow = Wf.Running(Msg.CorrelatingParts.Format(src.Length));
             var hex = Wf.ApiHex();
             var count = src.Length;
-            var dst = root.list<ApiMemberCode>();
-            var records = root.list<ApiCorrelationEntry>();
+            var dst = list<ApiMemberCode>();
+            var records = list<ApiCorrelationEntry>();
             for(var i=0; i<count; i++)
             {
                 var part = skip(src,i);
@@ -161,7 +149,7 @@ namespace Z0
                     {
                         var blocks = hex.ReadBlocks(hexpath);
                         Require.invariant(Wf.ApiCatalog.FindHost(srcHost.HostUri, out var host));
-                        var catalog = HostCatalog(host);
+                        var catalog = Runtime.HostCatalog(host);
                         Correlate(catalog, blocks, dst, records);
                     }
                 }

@@ -74,56 +74,10 @@ namespace Z0
             var procparts = pipe.EmitPartitions(process, ts, dir);
             var regions = pipe.EmitRegions(process, ts, dir);
             pipe.EmitDump(process, pack.DumpPath(process, ts));
+            var dst = Paths.ApiCatalogPath(ts);
             var members = ApiMembers.create(CollectedDatasets.SelectMany(x => x.Members));
-            var rebasing = Wf.Running();
-            var catalogs = Wf.ApiCatalogs();
-            var entries = catalogs.RebaseMembers(members, Paths.ApiRebasePath(ts));
-            Wf.Ran(rebasing);
+            var entries = Wf.ApiCatalogs().EmitApiCatalog(members,dst);
             Wf.Ran(flow);
-        }
-
-        void CheckExtracts(ReadOnlySpan<ResolvedPart> src)
-        {
-            var count = src.Length;
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(src,i);
-                var hosts = part.Hosts.View;
-                for(var j=0; j<hosts.Length; j++)
-                {
-                    ref readonly var host = ref skip(hosts,j);
-                    var methods = host.Methods.View;
-                    var flow = Wf.Running(string.Format("Extracting {0}", host.Host));
-                    for(var k=0; k<methods.Length; k++)
-                    {
-                        ref readonly var method = ref skip(methods,k);
-                        Buffer.Clear();
-                        var block = Extract(method, Buffer);
-                        counter++;
-                    }
-                    Wf.Ran(flow, methods.Length);
-                }
-            }
-        }
-
-        void EmitCaptureIndex()
-        {
-            var dst = Paths.RootDir() + FS.file(Tables.identify<CaptureIndexEntry>().Format(), FS.Csv);
-            var src = Routines.View;
-            var count = src.Length;
-            var buffer = span<CaptureIndexEntry>(count);
-            for(var i=0u; i<count; i++)
-            {
-                ref var entry = ref seek(buffer,i);
-                ref readonly var routine = ref skip(src,i);
-                entry.Sequence = i;
-                entry.BaseAddress = routine.BaseAddress;
-                entry.Host = routine.Uri.Host;
-                entry.DisplaySig = routine.DisplaySig.Format();
-                entry.Uri = routine.Uri;
-            }
-            TableEmit(@readonly(buffer), CaptureIndexEntry.RenderWidths, dst);
         }
 
         void ClearTargets()
@@ -186,21 +140,6 @@ namespace Z0
 
         FS.FolderPath BinDir
             => Db.TableDir("image.bin");
-
-        unsafe ByteSize Emit(in ProcessSegment src)
-        {
-            var total = 0u;
-            var pages = src.PageCount;
-            var buffer = default(PageBlock);
-            var pSrc = src.Range.Min.Pointer<byte>();
-            for(var i=0; i<pages; i++)
-            {
-                MemoryPages.Read(pSrc, ref buffer);
-                pSrc += PageSize;
-                total += PageSize;
-            }
-            return total;
-        }
 
         void RunExtractor(ReadOnlySpan<PartId> src)
         {

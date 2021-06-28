@@ -27,7 +27,7 @@ namespace Z0.Asm
             Trampolines = alloc<MemoryRange>(SlotCount);
             Payloads = alloc<Cell128>(SlotCount);
             Receivers = alloc<MemoryAddress>(SlotCount);
-            Receivers[0] = ApiJit.jit(GetType().Method(nameof(Receive64u)));
+            Receivers[0] = ClrJit.jit(GetType().Method(nameof(Receive64u)));
         }
 
         public bool Create<T>(byte slot)

@@ -71,5 +71,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(ResolvedMethod src)
             => EntryPoint.CompareTo(src.EntryPoint);
+
+        [Op]
+        public ApiMemberInfo Describe()
+        {
+            var dst = new ApiMemberInfo();
+            var src = this;
+            var msil = ClrDynamic.msil(src.EntryPoint, src.Uri, src.Method);
+            dst.EntryPoint = src.EntryPoint;
+            dst.ApiKind = src.Method.KindId();
+            dst.CliSig = msil.CliSig;
+            dst.DisplaySig = src.Method.DisplaySig().Format();
+            dst.Token = msil.Token;
+            dst.Uri = src.Uri.Format();
+            dst.MsilCode = msil.Code;
+            return dst;
+        }
     }
 }

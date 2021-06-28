@@ -24,7 +24,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var method = ref skip(methods,i);
-                var address = ApiJit.jit(method);
+                var address = ClrJit.jit(method);
                 var uri = ApiUri.located(method.DeclaringType.ApiHostUri(), method.Name, method.Identify());
                 var located = new ResolvedMethod(uri, method, address);
                 var body = method.GetMethodBody();

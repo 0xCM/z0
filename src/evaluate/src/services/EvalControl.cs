@@ -34,12 +34,12 @@ namespace Z0
             if(!src.Exists)
                 return;
 
-            var catalogs = Wf.ApiCatalogs();
             var flow = Wf.Running($"Running {uri.Format()} evaluaton workflow");
             if(!Wf.ApiCatalog.FindHost(uri, out var host))
                 return;
 
-            var catalog = catalogs.HostCatalog(host);
+
+            var catalog = Wf.ApiRuntime().HostCatalog(host);
             if(catalog.IsEmpty)
                 return;
 

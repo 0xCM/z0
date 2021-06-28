@@ -24,7 +24,7 @@ namespace Z0
             Root = root;
         }
 
-        public IApiPack Current()
+        public IApiPack Last()
             => Packs().Last;
 
         public ApiPackArchive Archive(string name)

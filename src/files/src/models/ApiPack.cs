@@ -33,16 +33,7 @@ namespace Z0
             if(Root.IsEmpty)
                 return default;
 
-            var fmt = Root.Format(PathSeparator.FS);
-            var idx = fmt.LastIndexOf(Chars.FSlash);
-            if(idx == NotFound)
-                return (false, "Path separator not found");
-
-            var outcome = Time.parse(fmt.RightOfIndex(idx), out var ts);
-            if(outcome)
-                return ts;
-            else
-                return(false, outcome.Message);
+            return ApiExtractSettings.timestamp(Root, out _);
         }
 
         public string Format()

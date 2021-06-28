@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static ApiUriDelimiters;
+    using static core;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
@@ -59,12 +60,12 @@ namespace Z0
         public static OpIdentity kind<K,T>(K kind, T t = default)
             where K : unmanaged
             where T : unmanaged
-                => build(kind.ToString().ToLower(), (TypeWidth)memory.width<T>(), NumericKinds.kind<T>(), true);
+                => build(kind.ToString().ToLower(), (TypeWidth)width<T>(), NumericKinds.kind<T>(), true);
 
         public static OpIdentity klass<K,T>(K @class, T t = default)
             where K : unmanaged, IApiClass
             where T : unmanaged
-                => build(@class.Format(), (TypeWidth)memory.width<T>(), NumericKinds.kind<T>(), true);
+                => build(@class.Format(), (TypeWidth)width<T>(), NumericKinds.kind<T>(), true);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]

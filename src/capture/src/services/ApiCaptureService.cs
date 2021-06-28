@@ -69,9 +69,22 @@ namespace Z0
             return routines;
         }
 
+        public ReadOnlySpan<ApiHostMembers> HostGroups(in ApiMembers src)
+        {
+            var dst = list<ApiHostMembers>();
+            var groups = src.Storage.GroupBy(x => x.Host);
+            foreach(var g in groups)
+            {
+                var host = g.Key;
+                var members = g.ToArray();
+                dst.Add(new ApiHostMembers(host, ApiMembers.create(members)));
+            }
+            return dst.ViewDeposited();
+        }
+
         public ReadOnlySpan<AsmHostRoutines> CaptureMembers(ApiMembers src, FS.FolderPath dst)
         {
-            var hosted = src.HostGroups().View;
+            var hosted = HostGroups(src);
             var count = hosted.Length;
             var collected = list<AsmHostRoutines>();
             for(var i=0; i<count; i++)

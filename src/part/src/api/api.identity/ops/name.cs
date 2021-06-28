@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using static core;
+
     partial struct ApiIdentity
     {
         /// <summary>
@@ -23,7 +25,7 @@ namespace Z0
             else
             {
                 var name = attrib.Value.GroupName;
-                if(text.empty(name))
+                if(empty(name))
                     return m.Name;
                 else
                     return name;

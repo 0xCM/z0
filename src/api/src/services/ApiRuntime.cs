@@ -7,15 +7,46 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class ApiRuntime : AppService<ApiRuntime>
     {
         const string RenderPattern = "{0,-16} | {1,-112} | {2, -82} | {3}";
 
+        ApiJit ApiJit;
+
+
+        protected override void OnInit()
+        {
+            ApiJit = Wf.ApiJit();
+        }
+
         public static string format(in ApiRuntimeMember src)
             => string.Format(RenderPattern, src.Address, src.Uri, src.DisplaySig, src.Msil.Code.Format());
+
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        public ApiHostCatalog HostCatalog(Type src)
+            => HostCatalog(ApiRuntimeLoader.apihost(src));
+
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        [Op]
+        public ApiHostCatalog HostCatalog(IApiHost src)
+        {
+            var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.HostUri));
+            var members = ApiJit.JitHost(src);
+            var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members);
+            Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.HostUri, members.Count));
+            return result;
+        }
 
         public Index<ApiRuntimeMember> EmitRuntimeIndex()
         {
@@ -45,15 +76,14 @@ namespace Z0
         {
             var hosts = @readonly(Wf.ApiCatalog.ApiHosts);
             var kHost = (uint)hosts.Length;
-            var buffer = root.list<ApiRuntimeMember>();
+            var buffer = list<ApiRuntimeMember>();
             var flow = Wf.Running(Msg.IndexingHosts.Format(kHost));
-            var catalogs = Wf.ApiCatalogs();
 
             var counter = 0u;
             for(var i=0; i<kHost; i++)
             {
                 var host = skip(hosts,i);
-                var hostcat = catalogs.HostCatalog(host);
+                var hostcat = HostCatalog(host);
                 var component = host.HostType.Assembly;
                 var members = @readonly(hostcat.Members.Storage);
                 var apicount = (uint)members.Length;

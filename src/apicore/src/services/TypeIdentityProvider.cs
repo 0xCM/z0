@@ -14,7 +14,7 @@ namespace Z0
         readonly Func<Type,TypeIdentity> Fx;
 
         [MethodImpl(Inline)]
-        public TypeIdentityProvider(Func<Type, TypeIdentity> f)
+        public TypeIdentityProvider(Func<Type,TypeIdentity> f)
             => Fx = f;
 
         [MethodImpl(Inline)]

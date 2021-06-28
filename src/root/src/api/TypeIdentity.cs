@@ -16,21 +16,6 @@ namespace Z0
         public string IdentityText {get;}
 
         /// <summary>
-        /// Defines an <see cref='Enum'/> identifier
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static EnumIdentity @enum(Type src)
-            => EnumIdentity.define(src);
-
-        /// <summary>
-        /// Defines a scalar type identity
-        /// </summary>
-        /// <param name="width">The scalar bit-width</param>
-        [MethodImpl(Inline)]
-        public static NumericIdentity numeric(NumericKind nk)
-            => NumericIdentity.define(nk);
-
-        /// <summary>
         /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
         /// </summary>
         /// <param name="t">A primal type representative</param>
@@ -107,7 +92,7 @@ namespace Z0
         }
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(IdentityText);
+            => IdentityText?.GetHashCode() ?? 0;
 
         public override bool Equals(object obj)
             => Identified.Same(obj);
@@ -117,7 +102,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Option<TypeIdentity> ToOption()
-            => IsEmpty ? root.none<TypeIdentity>() : root.some(this);
+            => IsEmpty ? Option.none<TypeIdentity>() : Option.some(this);
 
         [MethodImpl(Inline)]
         public static TypeIdentity operator +(TypeIdentity lhs, string rhs)

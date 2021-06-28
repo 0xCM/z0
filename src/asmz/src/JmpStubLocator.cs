@@ -20,7 +20,7 @@ namespace Z0.Asm
             var count = methods.Length;
             var entries = alloc<MemoryAddress>(count);
             var located = span<JmpStub>(count);
-            ApiJit.jit(methods, entries);
+            ClrJit.jit(methods, entries);
             var j=0;
             for(var i=0; i< count; i++)
             {

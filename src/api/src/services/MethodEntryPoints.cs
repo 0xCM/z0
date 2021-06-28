@@ -15,7 +15,7 @@ namespace Z0
     {
         [Op]
         public static MethodEntryPoint entry(MethodInfo src)
-            => new MethodEntryPoint(src.MetadataToken, ApiJit.jit(src));
+            => new MethodEntryPoint(src.MetadataToken, ClrJit.jit(src));
 
         [Op]
         public static MethodEntryPoint entry(ApiMember src)
@@ -24,8 +24,7 @@ namespace Z0
         [Op, Closures(UInt16k)]
         public static MethodEntryPoint<K> entry<K>(MethodInfo src, K kind)
             where K : unmanaged
-                => new MethodEntryPoint<K>(src.MetadataToken, ApiJit.jit(src), kind);
-
+                => new MethodEntryPoint<K>(src.MetadataToken, ClrJit.jit(src), kind);
         [Op]
         public static Index<MethodEntryPoint> create(Identifier name, ReadOnlySpan<MethodInfo> src)
         {

@@ -14,11 +14,9 @@ namespace Z0.Asm
         FS.FolderPath SourceDir
             => Db.PartSrcDir("respack") + FS.folder("content") + FS.folder("bytes");
 
-        ApiResProvider ResProvider;
 
         protected override void OnInit()
         {
-            ResProvider = Wf.ApiResProvider();
         }
 
         public ReadOnlySpan<ApiHostRes> Emit()
@@ -99,7 +97,7 @@ namespace Z0.Asm
                 return ApiHostRes.Empty;
             }
 
-            var resources = ResProvider.Hosted(src);
+            var resources = SpanRes.calculate(src);
             var hostname = src.Host.HostName.ReplaceAny(array('.'), '_');
             var typename = string.Concat(src.Host.Part.Format(), Chars.Underscore, hostname);
             var members = hashset<string>();

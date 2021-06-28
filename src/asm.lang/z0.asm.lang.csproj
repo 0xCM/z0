@@ -17,6 +17,8 @@
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Resources)" />
     <ProjectReference Include="$(SymCore)" />
+    <ProjectReference Include="$(Services)" />
+    <ProjectReference Include="$(Api)" />
   </ItemGroup>
 
    <ItemGroup>

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
     {
@@ -30,7 +30,7 @@ namespace Z0
                 return ArrayId(arg);
             else if(SpanTypes.IsSystemSpan(arg))
                 return SystemSpanId(arg);
-            else if(ApiIdentity.IsNatSpan(arg))
+            else if(NatSpanAttribute.test(arg))
                 return NatSpanId(arg);
             else
                 return Option.none<TypeIdentity>();
@@ -48,7 +48,7 @@ namespace Z0
             => default(TypeIdentityDiviner).DivineIdentity(arg);
 
         static TypeIdentity PointerId(Type arg)
-            => TypeIdentity.define(text.concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));
+            => TypeIdentity.define(string.Concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));
 
         static Option<TypeIdentity> SegmentedId(Type t)
             =>  from i in ApiIdentity.SegIndicator(t)
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         static Option<TypeIdentity> NatSpanId(Type src)
         {
-            if(ApiIdentity.IsNatSpan(src))
+            if(NatSpanAttribute.test(src))
             {
                 var typeargs = src.SuppliedTypeArgs();
                 var text = IDI.NatSpan;

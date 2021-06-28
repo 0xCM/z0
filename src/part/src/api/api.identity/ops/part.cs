@@ -24,7 +24,6 @@ namespace Z0
             return def == typeof(Vector128<>) || def == typeof(Vector256<>) || def.Tagged<VectorAttribute>();
         }
 
-
         [Op]
         public static Option<TypeIndicator> SegIndicator(Type t)
         {
@@ -33,7 +32,7 @@ namespace Z0
             else if(t.IsVector())
                 return TypeIndicator.Define(IDI.Vector);
             else
-                return root.none<TypeIndicator>();
+                return Option.none<TypeIndicator>();
         }
     }
 }

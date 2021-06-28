@@ -60,7 +60,7 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = ApiJit.jit(src).Address;
+                var pSrc = ClrJit.jit(src).Address;
                 var summary = capture(exchange, id, pSrc);
                 return CodeBlocks.capture(id, src.Source, summary.Pair.Raw, summary.Pair.Parsed, summary.TermCode);
             }

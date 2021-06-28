@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Root;
 
@@ -71,19 +70,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
-        }
-
-        public Index<ApiHostMembers> HostGroups()
-        {
-            var dst = root.list<ApiHostMembers>();
-            var groups = Storage.GroupBy(x => x.Host);
-            foreach(var g in groups)
-            {
-                var host = g.Key;
-                var members = g.ToArray();
-                dst.Add(new ApiHostMembers(host, create(members)));
-            }
-            return dst.ToArray();
         }
 
         [MethodImpl(Inline)]

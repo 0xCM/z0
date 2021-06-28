@@ -23,7 +23,7 @@ namespace Z0.Asm
             var accessors = provider.ResPackAccessors();
             var count = accessors.Length;
             var decoder = Wf.AsmDecoder();
-            var buffer = text.buffer();
+            var buffer = TextTools.buffer();
             var sequence = 0u;
             var segments = list<MemorySeg>(30000);
             var asmFlow = Wf.EmittingFile(asmpath);

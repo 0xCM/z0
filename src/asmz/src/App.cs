@@ -97,11 +97,6 @@ namespace Z0.Asm
             var members = service.EmitRuntimeIndex();
         }
 
-        void LoadCurrentCatalog()
-        {
-            var entries = Wf.ApiCatalogs().LoadCatalog().View;
-        }
-
         public void ProccessCultFiles()
         {
             Wf.CultProcessor().Run();
@@ -197,7 +192,6 @@ namespace Z0.Asm
         {
             var catalog = Db.AsmCaptureRoot().Catalog();
             catalog.Enumerate(path => Wf.Row(path.ToUri()));
-
         }
 
         void CheckHeap()
@@ -335,7 +329,6 @@ namespace Z0.Asm
                 dst.AppendFormat("edx: {0} [{1}]", row.Edx, row.Edx.FormatBitstring(w));
                 Wf.Row(dst.Emit());
             }
-
         }
 
         void CheckCpuid()
@@ -477,17 +470,6 @@ namespace Z0.Asm
             Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
-
-        [Record(TableId)]
-        public struct PartSelection : IRecord<PartSelection>
-        {
-            public const string TableId = "selected-parts";
-
-            public string Part;
-
-            public bool Selected;
-        }
-
         ReadOnlySpan<ApiHostRes> EmitResPack()
         {
             var blocks = LoadApiBlocks();
@@ -515,9 +497,8 @@ namespace Z0.Asm
             var counter = 0u;
             var dst = Db.AppLog("statements.rex", FS.Csv);
             var packs = Wf.ApiPacks();
+            var archive = packs.Archive();
             var pipe = Wf.AsmIndexPipe();
-            var current = packs.Current();
-            var archive = ApiPackArchive.create(current.Root);
             var path = archive.StatementIndexPath();
             var flow = Wf.Running(string.Format("Loading statement index from {0}", path.ToUri()));
             var index = pipe.LoadIndex(path);
@@ -890,7 +871,7 @@ namespace Z0.Asm
 
             using var listener = ClrEventListener.create(receive);
 
-            var settings = ApiExtractSettings.init(Db.CapturePackRoot());
+            var settings = ApiExtractSettings.init(Db.CapturePackRoot(), now());
             Wf.ApiExtractWorkflow().Run(settings);
         }
 

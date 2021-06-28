@@ -15,64 +15,6 @@ namespace Z0
     public sealed class ApiJit : AppService<ApiJit>
     {
         [Op]
-        static MemoryAddress fptr(MethodInfo src)
-            => src.MethodHandle.GetFunctionPointer();
-
-        [Op]
-        public static MemoryAddress jit(ApiMember src)
-        {
-            sys.prepare(src.Method.MethodHandle);
-            return fptr(src.Method);
-        }
-
-        [Op]
-        public static MemoryAddress jit(MethodInfo src)
-        {
-            sys.prepare(src.MethodHandle);
-            return fptr(src);
-        }
-
-        [Op]
-        public static void jit(ReadOnlySpan<MethodInfo> src, Span<MemoryAddress> dst)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                seek(dst,i) = jit(skip(src,i));
-        }
-
-        [Op]
-        public static Index<MemberAddress> jit(Index<MethodInfo> src)
-        {
-            var methods = src.View;
-            var count = methods.Length;
-            var buffer = alloc<MemberAddress>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                var method = skip(methods, i);
-                seek(dst,i) = Clr.address(method, jit(method));
-            }
-            return buffer;
-        }
-
-        [Op]
-        public static MemoryAddress jit(Delegate src)
-        {
-            sys.prepare(src);
-            return fptr(src.Method);
-        }
-
-        [Op]
-        public static DynamicPointer jit(DynamicDelegate src)
-        {
-            sys.prepare(src.Operation);
-            return ClrDynamic.pointer(src);
-        }
-
-        public static DynamicPointer jit<D>(DynamicDelegate<D> src)
-            where D : Delegate
-                => jit(src.Untyped);
-
         public ApiMembers JitCatalog()
             => JitCatalog(Wf.ApiParts.Catalog);
 
@@ -135,7 +77,7 @@ namespace Z0
 
         [Op]
         ApiMember[] Jit(ApiCompleteType src, HashSet<string> exclusions)
-            => Members(ApiQuery.methods(src,exclusions).Select(m => new JittedMethod(src.HostUri, m, address(Jit(m)))));
+            => Members(ApiQuery.methods(src,exclusions).Select(m => new JittedMethod(src.HostUri, m, ClrJit.jit(m))));
 
         [Op]
         ApiMember[] Members(JittedMethod[] located)
@@ -158,13 +100,6 @@ namespace Z0
             => MultiDiviner.Service;
 
         [Op]
-        IntPtr Jit(MethodInfo src)
-        {
-            sys.prepare(src.MethodHandle);
-            return src.MethodHandle.GetFunctionPointer();
-        }
-
-        [Op]
         ApiMember[] JitDirect(IApiHost src)
         {
             var methods = ApiQuery.nongeneric(src).Select(m => new JittedMethod(src.HostUri, m));
@@ -176,7 +111,7 @@ namespace Z0
                 var m = methods[i];
                 var id = Diviner.Identify(m.Method);
                 var uri = ApiUri.define(ApiUriScheme.Located, src.HostUri, m.Method.Name, id);
-                seek(dst,i) = new ApiMember(uri, m.Method, address(Jit(m.Method)));
+                seek(dst,i) = new ApiMember(uri, m.Method, ClrJit.jit(m.Method));
 
             }
             return buffer;
@@ -185,9 +120,9 @@ namespace Z0
         [Op]
         ApiMember[] JitGeneric(IApiHost src)
         {
-            var generic = @readonly(ApiQuery.generic(src).Select(m => new JittedMethod(src.HostUri, m)));
+            var generic = ApiQuery.generic(src).Select(m => new JittedMethod(src.HostUri, m)).ToReadOnlySpan();
             var gCount = generic.Length;
-            var buffer = root.list<ApiMember>();
+            var buffer = list<ApiMember>();
             for(var i=0; i<gCount; i++)
                 buffer.AddRange(JitGeneric(skip(generic,i)));
             return buffer.ToArray();
@@ -207,7 +142,7 @@ namespace Z0
                 {
                     ref readonly var t = ref skip(types, i);
                     var constructed = src.Method.MakeGenericMethod(t);
-                    var address = memory.address(Jit(constructed));
+                    var address = ClrJit.jit(constructed);
                     var id = Diviner.Identify(constructed);
                     var uri = ApiUri.define(ApiUriScheme.Located, src.Host, method.Name, id);
                     seek(dst,i) = new ApiMember(uri, constructed, address);

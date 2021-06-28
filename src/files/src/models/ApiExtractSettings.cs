@@ -6,9 +6,21 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
+    using static Root;
+
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiExtractSettings :  ISettingsSet<ApiExtractSettings>
     {
+        public static Outcome timestamp(FS.FolderPath src, out Timestamp dst)
+        {
+            dst = default;
+            var fmt = src.Format(PathSeparator.FS);
+            var idx = fmt.LastIndexOf(Chars.FSlash);
+            if(idx == NotFound)
+                return (false, "Path separator not found");
+            return Time.parse(fmt.RightOfIndex(idx), out dst);
+        }
+
         public Setting<FS.FolderPath> ExtractRoot;
 
         public Setting<bool> EmitContext;
@@ -33,11 +45,11 @@ namespace Z0
         public static ApiExtractSettings init(FS.FolderPath root)
         {
             var dst = new ApiExtractSettings();
-            dst.Timestamp = core.now();
+            timestamp(root, out dst.Timestamp);
             dst.Analyze = true;
             dst.EmitContext = true;
             dst.EmitStatements = true;
-            dst.ExtractRoot =  root + FS.folder(dst.Timestamp.Format());
+            dst.ExtractRoot =  root;
             return dst;
         }
     }

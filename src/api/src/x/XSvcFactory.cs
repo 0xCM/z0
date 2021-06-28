@@ -17,6 +17,10 @@ namespace Z0
         public static ApiHexArchive ApiHexArchive(this IWfRuntime wf)
             => Svc.ApiHexArchive.create(wf);
 
+        [Op]
+        public static ApiRuntime ApiRuntime(this IWfRuntime wf)
+            => Svc.ApiRuntime.create(wf);
+
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>

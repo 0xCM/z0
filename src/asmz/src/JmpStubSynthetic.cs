@@ -21,7 +21,7 @@ namespace Z0
         public MemoryRange Init()
         {
             Jump(default);
-            var @base = ApiJit.jit(GetType().Method(nameof(Jump)));
+            var @base = ClrJit.jit(GetType().Method(nameof(Jump)));
             var size = 16ul;
             var liberated = Buffers.liberate(@base,size);
             if(liberated.IsNonZero)

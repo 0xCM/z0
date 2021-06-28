@@ -124,7 +124,7 @@ namespace Z0
         {
             var rebasing = Wf.Running();
             var dst = Db.ContextTable<ApiCatalogEntry>(ts);
-            var entries = Wf.ApiCatalogs().RebaseMembers(members, dst);
+            var entries = Wf.ApiCatalogs().EmitApiCatalog(members, dst);
             Wf.Ran(rebasing);
         }
 

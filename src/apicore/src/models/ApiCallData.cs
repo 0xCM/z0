@@ -14,7 +14,6 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public ref struct ApiCallData
     {
-
         [MethodImpl(Inline)]
         public static ApiCallData serialize<T>(in T call)
             where T : unmanaged, IApiCall<T>

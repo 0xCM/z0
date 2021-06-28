@@ -12,24 +12,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial class XApi
-    {
-        [Op]
-        public static ApiMemberInfo Describe(this ResolvedMethod src)
-        {
-            var dst = new ApiMemberInfo();
-            var msil = ClrDynamic.msil(src.EntryPoint, src.Uri, src.Method);
-            dst.EntryPoint = src.EntryPoint;
-            dst.ApiKind = src.Method.KindId();
-            dst.CliSig = msil.CliSig;
-            dst.DisplaySig = src.Method.DisplaySig().Format();
-            dst.Token = msil.Token;
-            dst.Uri = src.Uri.Format();
-            dst.MsilCode = msil.Code;
-            return dst;
-        }
-    }
-
     [ApiHost]
     public class ApiResolver : AppService<ApiResolver>
     {
@@ -98,7 +80,7 @@ namespace Z0
                 for(var j=0; j<hosts.Length; j++)
                 {
                     var methods = skip(hosts,j).Methods.View;
-                    root.iter(methods, m => dst.Add(m));
+                    iter(methods, m => dst.Add(m));
                 }
             }
             return dst.ViewDeposited();
@@ -114,12 +96,12 @@ namespace Z0
         public ReadOnlySpan<ApiMemberInfo> ResolveParts(params PartId[] parts)
         {
             var count = parts.Length;
-            var buffer = root.list<ResolvedPart>();
+            var buffer = list<ResolvedPart>();
             for(var i=0; i<count; i++)
                 buffer.Add(ResolvePart(skip(parts,i)));
 
             var kMethods = 0u;
-            root.iter(buffer, p => kMethods += (uint)p.MethodCount);
+            iter(buffer, p => kMethods += (uint)p.MethodCount);
             var methods = alloc<ApiMemberInfo>(kMethods);
             Describe(buffer.ViewDeposited(), methods);
             return methods;
@@ -276,7 +258,7 @@ namespace Z0
             var flow = Wf.Running(string.Format("Resolving {0} members", src.HostUri));
             foreach(var method in ApiQuery.nongeneric(src))
             {
-                dst.Add(new ResolvedMethod(method, MemberUri(src.HostUri, method), ApiJit.jit(method)));
+                dst.Add(new ResolvedMethod(method, MemberUri(src.HostUri, method), ClrJit.jit(method)));
                 counter++;
             }
 
@@ -287,7 +269,7 @@ namespace Z0
                     try
                     {
                         var constructed = method.MakeGenericMethod(arg);
-                        dst.Add(new ResolvedMethod(constructed, MemberUri(src.HostUri, constructed), ApiJit.jit(constructed)));
+                        dst.Add(new ResolvedMethod(constructed, MemberUri(src.HostUri, constructed), ClrJit.jit(constructed)));
                         counter++;
                     }
                     catch(Exception e)
@@ -307,7 +289,7 @@ namespace Z0
             var counter = 0u;
             foreach(var method in ApiQuery.methods(src, Exclusions))
             {
-                dst.Add(new ResolvedMethod(method, MemberUri(src.HostUri, method), ApiJit.jit(method)));
+                dst.Add(new ResolvedMethod(method, MemberUri(src.HostUri, method), ClrJit.jit(method)));
                 counter++;
             }
 
@@ -317,19 +299,5 @@ namespace Z0
 
         OpUri MemberUri(ApiHostUri host, MethodInfo method)
             => ApiUri.define(ApiUriScheme.Located, host, method.Name, Identity.Identify(method));
-
-        [Op]
-        static ref ApiMemberInfo describe(in ResolvedMethod src, ref ApiMemberInfo dst)
-        {
-            var msil = ClrDynamic.msil(src.EntryPoint, src.Uri, src.Method);
-            dst.EntryPoint = src.EntryPoint;
-            dst.ApiKind = src.Method.KindId();
-            dst.CliSig = msil.CliSig;
-            dst.DisplaySig = src.Method.DisplaySig().Format();
-            dst.Token = msil.Token;
-            dst.Uri = src.Uri.Format();
-            dst.MsilCode = msil.Code;
-            return ref dst;
-        }
     }
 }

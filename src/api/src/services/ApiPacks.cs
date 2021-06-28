@@ -22,8 +22,14 @@ namespace Z0
         public IApiPack Create(FS.FolderPath root)
             => new ApiPack(ApiExtractSettings.init(root));
 
-        public IApiPack Current()
-            => Archives.Current();
+        public IApiPack Last()
+            => Archives.Last();
+
+        public ApiPackArchive Archive()
+            => ApiPackArchive.create(Archives.Last().Root);
+
+        public ApiPackArchive Archive(FS.FolderPath root)
+            => ApiPackArchive.create(root);
 
         public ApiPackArchives Archives
             => ApiPackArchives.create(PackRoot);
