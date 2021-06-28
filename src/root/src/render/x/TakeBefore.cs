@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static Part;
+    using static Root;
 
-    partial struct CodeBlocks
+    partial class XText
     {
-        [Op]
-        public static ReadOnlySpan<ApiPartBlocks> parts(ReadOnlySpan<ApiHostBlocks> src)
-            => src.ToArray().GroupBy(x => x.Part).Select(x => new ApiPartBlocks(x.Key, x.ToArray())).Array();
+        [MethodImpl(Inline), TextUtility]
+        public static string TakeBefore(this string src, char match)
+            => RP.before(src, match);
     }
 }

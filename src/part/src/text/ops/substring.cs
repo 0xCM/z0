@@ -13,10 +13,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string substring(string src, int start)
-            => sys.substring(src, start);
+            => RP.substring(src, start);
 
         [MethodImpl(Inline), Op]
         public static string substring(string src, int start, int len)
-            => sys.substring(src, start, len);
+            => RP.substring(src, start, len);
     }
 }

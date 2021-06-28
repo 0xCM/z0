@@ -94,7 +94,7 @@ namespace Z0
             => Encoded.Equals(src.Encoded);
 
         public string Format(int uripad)
-            => text.concat(BaseAddress.Format(), Space, Uri.Format().PadRight(uripad), Space, Encoded.Format());
+            => string.Concat(BaseAddress.Format(), Space, Uri.Format().PadRight(uripad), Space, Encoded.Format());
 
         public string Format()
             => Format(60);

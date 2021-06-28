@@ -33,7 +33,7 @@ namespace Z0
         public static ResolvedPart Empty
         {
             [MethodImpl(Inline)]
-            get => new ResolvedPart(0, FS.FilePath.Empty, sys.empty<ResolvedHost>());
+            get => new ResolvedPart(0, FS.FilePath.Empty, core.array<ResolvedHost>());
         }
     }
 }

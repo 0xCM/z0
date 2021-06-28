@@ -4,14 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Part;
-
-    partial struct CodeBlocks
+    [ApiHost]
+    public readonly partial struct CodeBlocks
     {
 
+        public const string CaptureAddressMismatch = "The parsed address does not match the extration address";
     }
 }

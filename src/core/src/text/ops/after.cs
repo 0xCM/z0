@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
-
-    using C = AsciCode;
 
     partial struct TextTools
     {
@@ -28,32 +25,11 @@ namespace Z0
             return i != NotFound ? core.slice(src, i + match.Length) : default;
         }
 
-        /// <summary>
-        /// Selects the substring after the first ocurrence of a specified character it is found in the string; otherwise,
-        /// returns the <see cref='EmptyString'/>
-        /// </summary>
-        /// <param name="src">The string to search</param>
-        /// <param name="match">The marking character</param>
-        [Op]
-        public static string after(string src, char match)
-        {
-            var i = src.IndexOf(match);
-            return i != NotFound ? sys.substring(src, i + 1) : EmptyString;
-        }
-
-
-        [Op]
-        public static string after(string src, string match)
-        {
-            var i = src.IndexOf(match);
-            return i != -1 ? sys.substring(src, i + match.Length) : EmptyString;
-        }
-
         [Op]
         public static bool after(string src, string match, out string result)
         {
             var i = src.IndexOf(match);
-            result = i == NotFound ? EmptyString : sys.substring(src, i + match.Length);
+            result = i == NotFound ? EmptyString : RP.substring(src, i + match.Length);
             return i != NotFound;
         }
     }

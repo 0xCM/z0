@@ -8,26 +8,32 @@ namespace Z0
     using System.Reflection;
 
     using static core;
+    using static Msg;
 
     public sealed class ApiResProvider : AppService<ApiResProvider>
     {
         public FS.FilePath ResPackPath()
-            => Db.Package("respack") + FS.file("z0.respack", FS.Dll);
+            => Db.ApiPackages().ResPackLib();
 
         public MemoryFile MapResPack()
             => MemoryFiles.map(ResPackPath());
 
-        public Index<SpanResAccessor> ResPackAccessors()
+        public ReadOnlySpan<SpanResAccessor> SpanAccessors(FS.FilePath src)
         {
-            var path = ResPackPath();
-            var flow = Wf.Running(Msg.LoadingRespackAccessors.Format(path));
-            if(!path.Exists)
-                Throw.sourced(FS.Msg.DoesNotExist.Format(path));
-            var assembly = Assembly.LoadFrom(path.Name);
+            var flow = Wf.Running(LoadingSpanAccessors.Format(src));
+            if(!src.Exists)
+                Throw.sourced(FS.Msg.DoesNotExist.Format(src));
+            var assembly = Assembly.LoadFrom(src.Name);
             var loaded = SpanRes.accessors(assembly);
-            Wf.Ran(flow, Msg.LoadedRespackAccessors.Format(loaded.Count, path));
+            Wf.Ran(flow, LoadedSpanAccessors.Format(loaded.Count, src));
             return loaded;
         }
+
+        public ReadOnlySpan<SpanResAccessor> ResPackAccessors()
+            => SpanAccessors(ResPackPath());
+
+        public ReadOnlySpan<SpanResAccessor> ResPackAccessors(FS.FilePath src)
+            => SpanAccessors(src);
 
         public static ApiHostRes hosted(ApiHostBlocks src)
         {

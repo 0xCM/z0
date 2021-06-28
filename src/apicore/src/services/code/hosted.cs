@@ -14,11 +14,10 @@ namespace Z0
     partial struct CodeBlocks
     {
         [Op]
-        static Index<ApiHostBlocks> hosted(Index<ApiCodeBlock> src)
+        static ReadOnlySpan<ApiHostBlocks> hosted(Index<ApiCodeBlock> src)
         {
             if(src.IsEmpty)
                 return array<ApiHostBlocks>();
-
             else
             {
                 var keyed = src.Storage.Where(x => x.HostUri.IsNonEmpty).Select(x => (x.HostUri, x)).ToReadOnlySpan();
@@ -28,9 +27,7 @@ namespace Z0
                 {
                     ref readonly var code = ref skip(keyed,i);
                     if(dst.TryGetValue(code.HostUri, out var blocks))
-                    {
                         blocks.Add(code.x);
-                    }
                     else
                     {
                         var target = list<ApiCodeBlock>();
@@ -45,6 +42,5 @@ namespace Z0
         [Op]
         public static ReadOnlySpan<ApiHostBlocks> hosted(ReadOnlySpan<ApiCodeBlock> src)
             => hosted(src.ToArray());
-
     }
 }

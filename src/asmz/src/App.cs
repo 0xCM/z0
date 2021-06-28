@@ -996,8 +996,8 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            EmitPdbDocInfo(PartId.Math);
-            //Dispatch();
+            //EmitPdbDocInfo(PartId.Math);
+            Dispatch();
             //CalcTables();
             //EmitRegGrids();
             //ShowRexTable();

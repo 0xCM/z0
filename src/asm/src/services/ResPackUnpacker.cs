@@ -20,7 +20,7 @@ namespace Z0.Asm
             var provider = Wf.ApiResProvider();
             var path = provider.ResPackPath();
             var assembly = Assembly.LoadFrom(path.Name);
-            var accessors = provider.ResPackAccessors().View;
+            var accessors = provider.ResPackAccessors();
             var count = accessors.Length;
             var decoder = Wf.AsmDecoder();
             var buffer = text.buffer();

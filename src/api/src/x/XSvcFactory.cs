@@ -14,10 +14,6 @@ namespace Z0
             => Svc.ApiComments.create(wf);
 
         [Op]
-        public static ApiResProvider ApiResProvider(this IWfRuntime wf)
-            => Svc.ApiResProvider.create(wf);
-
-        [Op]
         public static ApiHexArchive ApiHexArchive(this IWfRuntime wf)
             => Svc.ApiHexArchive.create(wf);
 

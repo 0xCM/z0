@@ -93,7 +93,7 @@ namespace Z0.Asm
 
         ApiHostRes Emit(in ApiHostBlocks src, FS.FilePath target)
         {
-            if(text.empty(src.Host.HostName))
+            if(empty(src.Host.HostName))
             {
                 Wf.Warn(string.Format("Cannot emit {0} because host name is undefined", target.ToUri()));
                 return ApiHostRes.Empty;
@@ -101,8 +101,8 @@ namespace Z0.Asm
 
             var resources = ResProvider.Hosted(src);
             var hostname = src.Host.HostName.ReplaceAny(array('.'), '_');
-            var typename = text.concat(src.Host.Part.Format(), Chars.Underscore, hostname);
-            var members = root.hashset<string>();
+            var typename = string.Concat(src.Host.Part.Format(), Chars.Underscore, hostname);
+            var members = hashset<string>();
             using var writer = target.Writer();
             EmitFileHeader(writer);
             OpenFileNamespace(writer, "Z0.ByteCode");

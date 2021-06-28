@@ -10,5 +10,10 @@ namespace Z0
         [Op]
         public static FileCatalog Catalog(this FS.FolderPath root)
             => new FileCatalog(root);
+
+
+        [Op]
+        public static ApiPackages ApiPackages(this IEnvPaths src)
+            => src.PackageRoot();
     }
 }

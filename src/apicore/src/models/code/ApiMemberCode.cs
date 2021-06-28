@@ -133,7 +133,7 @@ namespace Z0
             => src is ApiMemberCode m && Equals(m);
 
         public string Format(int uripad)
-            => text.concat(Member.OpUri.Format().PadRight(uripad), Encoded.Format());
+            => string.Concat(Member.OpUri.Format().PadRight(uripad), Encoded.Format());
 
         public string Format()
             => Format(80);

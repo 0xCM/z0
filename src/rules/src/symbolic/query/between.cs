@@ -32,19 +32,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool between(char src, char min, char max)
             => between((C)src, (C)min, (C)max);
-
-        [Op]
-        public static string between(string src, char left, char right)
-        {
-            var result = string.Empty;
-            var i1 = src.IndexOf(left);
-            if(i1 != -1)
-            {
-                var i2 = src.IndexOf(right, i1 + 1);
-                if(i2 != -1)
-                    result = sys.substring(src,i1 + 1, i2 - i1 - 1);
-            }
-            return result;
-        }
     }
 }
