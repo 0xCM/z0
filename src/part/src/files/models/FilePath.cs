@@ -59,7 +59,7 @@ namespace Z0
             public FolderName FolderName
             {
                 [MethodImpl(Inline)]
-                get => folder(Directory.GetParent(FolderPath.Name).Name);
+                get => FolderPath.FolderName;
             }
 
             public FileInfo Info

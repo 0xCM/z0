@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(Bits)" />
+    <ProjectReference Include="$(Cells)" />
   </ItemGroup>
 
 </Project>

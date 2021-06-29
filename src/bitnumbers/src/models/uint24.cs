@@ -102,7 +102,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static U @bool(bool x)
-            => @as<uint,U>(memory.u32(x));
+            => @as<uint,U>(core.u32(x));
 
         /// <summary>
         /// Queries the state of an index-identified bit
@@ -258,7 +258,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator U(byte src)
-            => memory.@as<T,U>(Mask & (T)src);
+            => @as<T,U>(Mask & (T)src);
 
         [MethodImpl(Inline)]
         public static implicit operator T(U src)

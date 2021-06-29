@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     /// <summary>
     /// A basic statistical accumulator that accrues information over an arbitrary number of input sequences
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static StatCollector Create<T>(T seed = default)
             where T : unmanaged
-                => new StatCollector(Numeric.force<T,double>(seed));
+                => new StatCollector(NumericCast.force<T,double>(seed));
 
         int count;
 

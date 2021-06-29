@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
     using System.IO;
@@ -15,10 +14,10 @@ namespace Z0
     using static XedSourceMarkers;
 
     [ApiHost]
-    public ref struct XedWf
+    public class XedWf
     {
         public static XedWf create(IWfRuntime wf)
-            => new XedWf(wf,new XedWfConfig(wf));
+            => new XedWf(wf);
 
         readonly XedWfConfig Config;
 
@@ -26,22 +25,19 @@ namespace Z0
 
         readonly XedDataSource Source;
 
-        readonly ITableArchive Target;
-
         const string Subject = "xed";
 
         readonly FS.FolderPath Root;
 
         readonly XedParser SourceParser;
 
-        public XedWf(IWfRuntime wf, XedWfConfig config)
+        public XedWf(IWfRuntime wf)
         {
             Wf = wf;
-            Config = config;
+            Config = new XedWfConfig(wf);
             Source = new XedDataSource(Config.Source);
             var db = Wf.Db();
-            Target = new DbTables<string>(db, Subject);
-            Root = Target.Root;
+            Root = db.TableDir(Subject);
             SourceParser = XedParser.Service;
         }
 
@@ -122,7 +118,8 @@ namespace Z0
             return dst;
         }
 
-        FS.FilePath SummaryPath => Root + FS.file("summary", FS.Csv);
+        FS.FilePath SummaryPath
+            => Root + FS.file("summary", FS.Csv);
 
         XedSummaryRow[] EmitSummaries(XedPattern[] src)
         {
@@ -134,7 +131,7 @@ namespace Z0
 
         Index<XedPattern> EmitInstructionPatterns()
         {
-            var patterns = root.list<XedPattern>();
+            var patterns = list<XedPattern>();
             var parser = XedParser.Service;
             var files = Source.InstructionFiles.View;
             var count = files.Length;
@@ -146,7 +143,7 @@ namespace Z0
 
         Index<XedPattern> EmitInstructionPatterns(FS.FilePath dst)
         {
-            var patterns = root.list<XedPattern>();
+            var patterns = list<XedPattern>();
             var parser = XedParser.Service;
             var flow = Wf.EmittingFile(dst);
             var parsed = span(parser.ParseInstructions(dst));
@@ -296,7 +293,7 @@ namespace Z0
         void EmitMnemonics(XedSummaryRow[] src)
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
-            var dst = Target.TablePath(FS.file("mnemonics", FS.Csv));
+            var dst = Root + FS.file("mnemonics", FS.Csv);
             dst.Overwrite(upper);
         }
     }

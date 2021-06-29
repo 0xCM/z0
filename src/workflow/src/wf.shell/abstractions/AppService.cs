@@ -13,6 +13,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
+
     [WfService]
     public abstract class AppService<H> : IAppService<H>
         where H : AppService<H>, new()
@@ -40,6 +41,8 @@ namespace Z0
 
         public IWfDb Db {get; private set;}
 
+        ITextBuffer _TextBuffer;
+
         public EnvData Env => Wf.Env;
 
         public virtual Type ContractType
@@ -64,6 +67,7 @@ namespace Z0
         protected AppService()
         {
             HostName = GetType().Name;
+            _TextBuffer = TextTools.buffer();
         }
 
         protected string Worker([Caller] string name = null)
@@ -74,6 +78,12 @@ namespace Z0
         {
             Host = new WfSelfHost(HostName);
             Wf = wf;
+        }
+
+        protected ITextBuffer TextBuffer()
+        {
+            _TextBuffer.Clear();
+            return _TextBuffer;
         }
 
         protected void RedirectEmissions(string name, FS.FolderPath dst)

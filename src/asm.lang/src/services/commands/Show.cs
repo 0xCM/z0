@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
     using Windows;
 
     using static Root;
     using static core;
-    using static Typed;
 
     partial class AsmCmdService
     {
@@ -79,6 +76,5 @@ namespace Z0.Asm
             iter(vars, v => Wf.Row(v));
             return true;
         }
-
     }
 }

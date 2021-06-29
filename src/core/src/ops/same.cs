@@ -8,14 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
 
-    [ApiHost]
-    public readonly struct FixedCells
+    partial struct core
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static FixedCells<T> define<T>(MemoryAddress address, uint count)
-            where T : struct
-                => new FixedCells<T>(address,count);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bool same<T>(in T a, in T b)
+            => Unsafe.AreSame(ref edit(a), ref edit(b));
     }
 }

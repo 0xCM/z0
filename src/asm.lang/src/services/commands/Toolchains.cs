@@ -4,14 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using Windows;
-
-    using static Root;
-    using static core;
-    using static Typed;
-
     partial class AsmCmdService
     {
         [CmdOp(".asm")]
@@ -22,9 +14,8 @@ namespace Z0.Asm
                 return (false, "No arguments were supplied");
             }
             var name = (string)args.First.Value;
-            var workspace = Wf.AsmWorkspace();
             var toolchain = Wf.AsmToolchain();
-            var spec = workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, name);
+            var spec = Workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, name);
             return toolchain.Run(spec);
         }
 

@@ -21,7 +21,7 @@ namespace Z0
 
         public string Format()
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             dst.Append(LowerInclusive ? $"[{LowerBound}" : $"({LowerBound}");
             dst.Append(UpperInclusive ? $", {UpperBound}]" : $", {UpperBound})");
             dst.Append($" step({Step})");

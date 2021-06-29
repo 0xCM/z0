@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct gAlg
     {
@@ -17,9 +17,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(mspan.avg(memory.float32(src), @checked));
+                return generic<T>(mspan.avg(core.float32(src), @checked));
             else if(typeof(T) == typeof(double))
-                return generic<T>(mspan.avg(memory.float64(src), @checked));
+                return generic<T>(mspan.avg(core.float64(src), @checked));
             else
                 throw no<T>();
         }

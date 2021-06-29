@@ -59,7 +59,7 @@ namespace Z0
             public FS.FolderName FolderName
             {
                 [MethodImpl(Inline)]
-                get => FS.folder(Path.GetDirectoryName(Name));
+                get => FS.folder(Info.Name);
             }
 
             [MethodImpl(Inline)]
@@ -150,13 +150,6 @@ namespace Z0
 
             public Deferred<FilePath> EnumerateFiles(string pattern, bool recurse)
                 => Seq.defer(EnumerateFiles(this, pattern, recurse));
-
-
-            /// <summary>
-            /// Just the one
-            /// </summary>
-            FolderPath[] One
-                => new FolderPath[]{this};
 
             /// <summary>
             /// Creates the represented directory in the file system if it doesn't exist

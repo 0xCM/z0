@@ -30,6 +30,6 @@ namespace Z0
         }
 
         public string Format()
-            => text.format(RP.PSx3, Address, Source, Name);
+            => string.Format(RP.PSx3, Address, Source, Name);
     }
 }

@@ -312,36 +312,6 @@ namespace Z0.Asm
         }
 
 
-        void FormatBits(ReadOnlySpan<CpuIdRow> src, ITextBuffer dst)
-        {
-            var count = src.Length;
-            var j = 0u;
-            var w = n8;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(src,i);
-                dst.AppendFormat("eax: {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
-                var ebx = row.Ebx.FormatBitstring(w);
-                dst.AppendFormat("ebx: {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
-                var ecx = row.Ecx.FormatBitstring(w);
-                dst.AppendFormat("ebx: {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
-                var edx = row.Edx.FormatBitstring(w);
-                dst.AppendFormat("edx: {0} [{1}]", row.Edx, row.Edx.FormatBitstring(w));
-                Wf.Row(dst.Emit());
-            }
-        }
-
-        void CheckCpuid()
-        {
-            var descriptor = Parts.AsmCases.Assets.CpuIdRows();
-            Utf8.decode(descriptor.ResBytes, out var content);
-            var pipe = Wf.AsmRowPipe();
-            using var reader = content.Reader();
-            var rows = pipe.LoadCpuIdRows(reader);
-            var formatter = rows.RecordFormatter(CpuIdRow.RenderWidths);
-            Wf.Row(formatter.FormatHeader());
-            core.iter(rows, row => Wf.Row(formatter.Format(row)));
-        }
 
         void EmitAsmAsssetCatalog()
         {

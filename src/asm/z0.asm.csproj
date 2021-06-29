@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Cli)" />
-    <ProjectReference Include="$(Xed)" />
     <ProjectReference Include="$(Gen)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Check)" />

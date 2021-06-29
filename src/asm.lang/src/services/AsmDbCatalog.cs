@@ -55,13 +55,6 @@ namespace Z0.Asm
                     var modr = row.Cell(IF.ModR);
                     var modrm = row.Cell(IF.ModRM);
 
-                    //DataParser.parse(index, out entry.Index);
-                    //entry.Mnemonic = asm.mnemonic(monic);
-                    //entry.X64 = SupportsX64(arch);
-                    //if(DataParser.parse(ocb, out byte _ocb))
-                    //    entry.OpCodeByte = _ocb;
-                    //AsmParser.sig(sig, out entry.Sig);
-
                     var summary = string.Format(pattern, index, monic, ocb, arch, sig, opcode, encrule, prefix);
                     log.Show(summary);
                 }

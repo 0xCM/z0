@@ -136,7 +136,6 @@ namespace Z0.Asm
                     dst.Add(instruction);
             }
             return dst.ViewDeposited();
-
         }
 
         public static HexVector16 offsets(ReadOnlySpan<ApiInstruction> src)

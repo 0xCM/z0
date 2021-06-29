@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public readonly struct XedWfConfig
     {
         public XedWfConfig(IWfRuntime wf)
@@ -14,9 +12,6 @@ namespace Z0
             Source = db.ExternalDataDir("xed");
             Target = db.TableDir("xed");
         }
-
-        public FS.FileName SummaryFile
-            => FS.file(text.format("{0}.{1}", "xed", "summary"), DataFileExt);
 
         public FS.FolderPath Source {get;}
 

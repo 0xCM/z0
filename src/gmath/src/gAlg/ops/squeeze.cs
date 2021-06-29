@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     partial struct gAlg
     {
@@ -52,8 +52,8 @@ namespace Z0
         public static Span<T> squeeze<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> max)
             where T : unmanaged
         {
-            var count = (uint)root.length(src,max);
-            var dst = memory.span<T>(count);
+            var count = (uint)src.Length;
+            var dst = span<T>(count);
             squeeze<T>(first(src), first(max), ref first(dst), count);
             return dst;
         }

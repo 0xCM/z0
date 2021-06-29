@@ -89,12 +89,6 @@ namespace Z0.Asm
             return (true,kRows);
         }
 
-        public ReadOnlySpan<CpuIdRow> LoadCpuIdRows(FS.FilePath src)
-        {
-            using var reader = src.Reader();
-            return LoadCpuIdRows(reader);
-        }
-
         public ReadOnlySpan<CpuIdRow> LoadCpuIdRows(TextReader reader)
         {
             const byte FieldCount = CpuIdRow.FieldCount;
@@ -119,7 +113,7 @@ namespace Z0.Asm
                     return default;
                 }
 
-                var result = LoadRow(data, out CpuIdRow row);
+                var result = AsmDataPipes.load(data, out CpuIdRow row);
                 if(result.Fail)
                 {
                     Wf.Error(result.Message);
@@ -131,20 +125,6 @@ namespace Z0.Asm
                 current = reader.ReadLine();
             }
             return dst.ViewDeposited();
-        }
-
-        Outcome LoadRow(TextRow src, out CpuIdRow dst)
-        {
-            var input = src.Cells;
-            var i = 0;
-            var outcome = Outcome.Success;
-            outcome += DataParser.parse(skip(input,i++), out dst.Leaf);
-            outcome += DataParser.parse(skip(input,i++), out dst.Subleaf);
-            outcome += DataParser.parse(skip(input,i++), out dst.Eax);
-            outcome += DataParser.parse(skip(input,i++), out dst.Ebx);
-            outcome += DataParser.parse(skip(input,i++), out dst.Ecx);
-            outcome += DataParser.parse(skip(input,i++), out dst.Edx);
-            return outcome;
         }
 
         Outcome LoadRow(TextRow src, out AsmDetailRow dst)

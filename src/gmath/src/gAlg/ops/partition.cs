@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Root;
+    using static core;
 
     partial struct gAlg
     {
@@ -22,7 +20,7 @@ namespace Z0
         public static Index<T> partition<T>(Interval<T> src, T width, int? precision = null)
             where T : unmanaged
         {
-            var dst = root.list<T>();
+            var dst = list<T>();
             var scale = precision ?? 4;
             if(src.LeftClosed)
                 dst.Add(src.Left);

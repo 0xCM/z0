@@ -74,10 +74,10 @@ namespace Z0.Asm
 
         public void Run()
         {
-            FindInstructions();
+            ProcessToc();
         }
 
-       FS.FilePath SdmSplitSpecs()
+        FS.FilePath SdmSplitSpecs()
             => Archive.Root + FS.file("splits", FS.Csv);
 
         FS.FilePath SdmRefPath()

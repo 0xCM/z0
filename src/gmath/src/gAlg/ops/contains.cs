@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static gmath;
+    using static Typed;
 
     partial struct gAlg
     {
@@ -69,7 +70,7 @@ namespace Z0
             while (length > 0)
             {
                 length -= 1;
-                if (eq(match, memory.add(src, index)))
+                if (eq(match, add(src, index)))
                     return true;
                 index += 1;
             }

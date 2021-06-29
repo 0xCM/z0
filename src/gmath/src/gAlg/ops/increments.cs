@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static gmath;
     using static core;
-    using static Numeric;
+    using static NumericCast;
 
     partial struct gAlg
     {

@@ -53,5 +53,9 @@ namespace Z0
         public static AsmCmdService AsmCmd(this IWfRuntime context)
             => Svc.AsmCmdService.create(context);
 
+        [Op]
+        public static AsmDataPipes AsmDataPipes(this IWfRuntime context)
+            => Svc.AsmDataPipes.create(context);
+
     }
 }

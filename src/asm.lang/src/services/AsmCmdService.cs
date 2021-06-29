@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
     using Windows;
 
     using static Root;
     using static core;
-    using static Typed;
 
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
@@ -20,14 +17,18 @@ namespace Z0.Asm
 
         AsmCmdArbiter Arbiter;
 
-        ITextBuffer _RenderBuffer;
+        AsmWorkspace Workspace;
 
         public AsmCmdService()
         {
             CodeBuffer = Buffers.native(Pow2.T10);
             ContextBuffer = Buffers.native(size<Amd64Context>());
             Arbiter = AsmCmdArbiter.start(ContextBuffer);
-            _RenderBuffer = TextTools.buffer();
+        }
+
+        protected override void Initialized()
+        {
+            Workspace = Wf.AsmWorkspace();
         }
 
         protected override void Disposing()
@@ -36,12 +37,5 @@ namespace Z0.Asm
             CodeBuffer.Dispose();
             ContextBuffer.Dispose();
         }
-
-        ITextBuffer RenderBuffer()
-        {
-            _RenderBuffer.Clear();
-            return _RenderBuffer;
-        }
-
     }
 }

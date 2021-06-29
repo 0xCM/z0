@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct gAlg
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T grain<T>(in ClosedInterval<T> src, ulong width = 100ul)
             where T : unmanaged, IComparable<T>
-                => generic<T>(src.Width/root.min(src.Width, width));
+                => generic<T>(src.Width/core.min(src.Width, width));
     }
 }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct gAlg
     {
@@ -16,7 +16,7 @@ namespace Z0
         public static ref Bin<T> next<T>(ref Bin<T> bin)
             where T : unmanaged, IComparable<T>
         {
-            root.atomic(ref edit(bin.Counter));
+            inc(ref edit(bin.Counter));
             return ref bin;
         }
     }

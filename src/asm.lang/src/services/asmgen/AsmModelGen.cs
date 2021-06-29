@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     using T = AsmGenTarget;
 
-    using static core;
     using static CsPatterns;
 
     [ApiHost]

@@ -15,10 +15,6 @@ namespace Z0
     public partial class FileTypes
     {
         [MethodImpl(Inline), Op]
-        public static unsafe FixedCells<FileType> supported()
-            => FixedCells.define<FileType>(memory.@address(_Types), FileTypeCount);
-
-        [MethodImpl(Inline), Op]
         public static IReadOnlyCollection<string> keys()
             => Lookup.Keys;
 

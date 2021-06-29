@@ -238,8 +238,11 @@ namespace Z0
         /// </summary>
         public const string sql = nameof(sql);
 
-        public const string errlog = error + sep + log;
-
         public const string ildata = il + sep + csv;
+
+        /// <summary>
+        /// Defines the 'def' literal
+        /// </summary>
+        public const string def = nameof(def);
     }
 }

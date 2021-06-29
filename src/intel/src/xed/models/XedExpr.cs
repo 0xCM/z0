@@ -9,19 +9,20 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MemoryStore<T>
-        where T : struct
+    public readonly struct XedExpr : ITextual
     {
-        public UIntPtr StoreLocation {get;}
+        public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
-        public MemoryStore(UIntPtr location)
-            => StoreLocation = location;
+        public XedExpr(string src)
+            => Content = src;
 
-        public unsafe ref T Deposited
-        {
-            [MethodImpl(Inline)]
-            get => ref Unsafe.AsRef<T>(StoreLocation.ToPointer());
-        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Content;
+
+        public override string ToString()
+            => Content;
     }
 }

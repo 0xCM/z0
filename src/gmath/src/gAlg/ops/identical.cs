@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
+    using static core;
 
     partial struct gAlg
     {
@@ -49,7 +49,7 @@ namespace Z0
         public static bit identical<T>(in T first, in T second, uint count)
             where T : unmanaged
         {
-            if (memory.same(first, second))
+            if (same(first, second))
                 return true;
 
             var offset = 0;
@@ -59,36 +59,36 @@ namespace Z0
             {
                 count -= 8;
 
-                x = memory.add<T>(first, offset + 0);
-                y = memory.add<T>(second, offset + 0);
+                x = add<T>(first, offset + 0);
+                y = add<T>(second, offset + 0);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 1);
-                y = memory.add<T>(second, offset + 1);
+                x = add<T>(first, offset + 1);
+                y = add<T>(second, offset + 1);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 2);
-                y = memory.add<T>(second, offset + 2);
+                x = add<T>(first, offset + 2);
+                y = add<T>(second, offset + 2);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 3);
-                y = memory.add<T>(second, offset + 3);
+                x = add<T>(first, offset + 3);
+                y = add<T>(second, offset + 3);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 4);
-                y = memory.add<T>(second, offset + 4);
+                x = add<T>(first, offset + 4);
+                y = add<T>(second, offset + 4);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 5);
-                y = memory.add<T>(second, offset + 5);
+                x = add<T>(first, offset + 5);
+                y = add<T>(second, offset + 5);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 6);
-                y = memory.add<T>(second, offset + 6);
+                x = add<T>(first, offset + 6);
+                y = add<T>(second, offset + 6);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 7);
-                y = memory.add<T>(second, offset + 7);
+                x = add<T>(first, offset + 7);
+                y = add<T>(second, offset + 7);
                 if(gmath.neq(x, y))
                     return false;
 
@@ -99,20 +99,20 @@ namespace Z0
             {
                 count -= 4;
 
-                x = memory.add<T>(first, offset);
-                y = memory.add<T>(second, offset);
+                x = add<T>(first, offset);
+                y = add<T>(second, offset);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 1);
-                y = memory.add<T>(second, offset + 1);
+                x = add<T>(first, offset + 1);
+                y = add<T>(second, offset + 1);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 2);
-                y = memory.add<T>(second, offset + 2);
+                x = add<T>(first, offset + 2);
+                y = add<T>(second, offset + 2);
                 if(gmath.neq(x, y))
                     return false;
-                x = memory.add<T>(first, offset + 3);
-                y = memory.add<T>(second, offset + 3);
+                x = add<T>(first, offset + 3);
+                y = add<T>(second, offset + 3);
                 if(gmath.neq(x, y))
                     return false;
 
@@ -121,8 +121,8 @@ namespace Z0
 
             while (count > 0)
             {
-                x = memory.add<T>(first, offset);
-                y = memory.add<T>(second, offset);
+                x = add<T>(first, offset);
+                y = add<T>(second, offset);
                 if(gmath.neq(x, y))
                     return false;
                 offset += 1;
